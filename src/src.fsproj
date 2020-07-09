@@ -1,11 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NpmDependencies>
+      <NpmPackage Name="react" Version="&gt;= 16.13.1 &lt; 17.0.0" ResolutionStrategy="Max" />
+      <NpmPackage Name="react-dom" Version="&gt;= 16.13.1 &lt; 17.0.0" ResolutionStrategy="Max" />
+    </NpmDependencies>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="*.fsproj; *.fs; *.js;" PackagePath="fable\" />
     <Compile Include="Library.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fable.Core" Version="3.1.5" />
   </ItemGroup>
 
 </Project>
