@@ -5,11 +5,10 @@ open Elmish.React
 open Fable.React
 open Fable.React.Props
 open Fable.Core.JsInterop
-open Browser
 
 open src.Arithmetic
-open src.POJO
-
+open src.test
+open src.Color
 
 type Model =
     { Count: int; InputA: int; InputB: int; Result: int }
@@ -44,16 +43,41 @@ let update (msg: Msg) (model: Model): Model =
 
 let render (model: Model) (dispatch: Msg -> unit) =
 
-    console.log (createPersonPOJO ())
-  
-    div []
+    let redText =
+        fss
+            [
+                src.test.Color (rgb 255 0 0)
+                src.test.BackgroundColor (rgb 33 33 33)
+            ]
+
+    let greenText =
+        fss
+            [
+                src.test.Color (hex "00ff00")
+                src.test.BackgroundColor (hex "ffffff")
+            ]
+
+    let blueText =
+        fss
+            [
+                src.test.Color blue
+                src.test.BackgroundColor aliceblue
+                src.test.Hover
+                    [
+                        src.test.BackgroundColor blue
+                        src.test.Color red
+                    ]
+
+            ]
+
+    div [ ClassName redText ]
         [
             button [ OnClick (fun _ -> dispatch Increment);  ] [ str "+" ]
             button [ OnClick (fun _ -> dispatch Decrement)] [ str "-" ]
             str (string model.Count)
 
 
-            div [ ]
+            div [ ClassName greenText ]
                 [
                     input [Type "Number"; Value model.InputA; OnChange (fun e -> dispatch <| AddInputA e.target?value)]
                     input [Type "Number"; Value model.InputB; OnChange (fun e -> dispatch <| AddInputB e.target?value)]
@@ -64,6 +88,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
                     button [OnClick (fun _ -> dispatch <| SetResult (divide model.InputA model.InputB))]  [ str "Divide"]
                     str (string (sprintf "Result: %A" model.Result))
                 ]
+
+            h1 [ ClassName blueText ] [ str "BLUEEEE" ]
         ]
 
 Program.mkSimple init update render

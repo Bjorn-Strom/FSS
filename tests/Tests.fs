@@ -1,23 +1,90 @@
 ﻿module Tests
 
 open Fable.Mocha
+open Fable.Core.JsInterop
 
-open src.Arithmetic
 
-let arithmeticTests =
-    testList "Arithmetic tests" [
 
-        testCase "plus works" <| fun () ->
-            Expect.equal (add 1 1) 2 "plus"
+let glamorHowToTests =
+    testList "Glamor CSS howto list" [
 
-        testCase "subctract works" <| fun () ->
-            Expect.equal (subtract 1 1) 0 "subtract"
-        
-        testCase "multiplication works" <| fun () ->
-            Expect.equal (multiply 10 2) 20 "multiply"
+        testCase "Apply a style to an element" <| fun () ->
+            let result = createObj []
+            let expected = 
+                createObj 
+                    [
+                        "color" ==> "red"
+                    ]
+            Expect.equal result expected "Applying style to an element"
 
-        testCase "divide works" <| fun () ->
-            Expect.equal (divide 10 2) 5 "divide"
+        testCase "psuedo classes" <| fun () ->
+            let result = createObj []
+            let expected =
+                createObj
+                    [
+                        ":hover" ==>
+                        createObj
+                            [
+                                "color" ==> "blue"
+                            ]
+                    ]
+            Expect.equal result expected "Applying psuedoclass"
+
+        testCase "child selectors" <| fun () ->
+            let result = createObj []
+            let expected = 
+                createObj
+                    [
+                        "display" ==> "block"
+                        "& .bold" ==> createObj [ "fontWeight" ==> "bold" ]
+                        "& .one" ==> createObj [ "color" ==> "blue" ]
+                        ":hover .two" ==> createObj [ "color" ==> "red" ]
+                    ]
+            Expect.equal result expected "Applying child selectors"
+
+        testCase "siblings" <| fun () ->
+            let result = createObj []
+            let expected =
+                createObj
+                    [
+                        "& li:first-of-type + li" ==> createObj [ "color" ==> "red" ]
+                    ]
+            Expect.equal result expected "Sibling selectors"
+
+        testCase "media queries" <| fun () ->
+            let result = createObj []
+            let expected =
+                createObj
+                    [
+                        "position" ==> "relative"
+                        "width" ==> "100%"
+                        "maxWidth" ==> 960
+                        "margin" ==> "0 auto"
+                        "padding" ==> "0 20px"
+                        "boxSizing" ==> "border-box"
+
+                        ":after" ==> 
+                            createObj
+                                [
+                                    "content" ==> "\"\""
+                                    "display" ==> "table"
+                                    "clear" ==> "both"
+                                ]
+
+                        "@media(min-width: 400px)" ==>
+                            createObj
+                                [
+                                    "width" ==> "85%"
+                                    "padding" ==> 0
+                                ]
+                    ]
+            Expect.equal result expected "Media queries"
+
+        testCase "Animation keyframes" <| fun () ->
+            let result = createObj []
+            let expected = createObj []
+            Expect.equal result expected "animation keyframes"
+
     ]
 
-Mocha.runTests arithmeticTests |> ignore
+Mocha.runTests glamorHowToTests |> ignore
