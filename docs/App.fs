@@ -48,18 +48,19 @@ let render (model: Model) (dispatch: Msg -> unit) =
             [
                 src.test.Color (rgb 255 0 0)
                 src.test.BackgroundColor (rgb 33 33 33)
-            ]
+            ] 
 
     let greenText =
         fss
             [
                 src.test.Color (hex "00ff00")
                 src.test.BackgroundColor (hex "ffffff")
-            ]
+            ] 
 
     let blueText =
         fss
             [
+                src.test.Label "Foo"
                 src.test.Color blue
                 src.test.BackgroundColor aliceblue
                 src.test.Hover
@@ -67,8 +68,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
                         src.test.BackgroundColor blue
                         src.test.Color red
                     ]
-
             ]
+
 
     div [ ClassName redText ]
         [

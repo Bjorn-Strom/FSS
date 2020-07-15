@@ -2,6 +2,7 @@
 
 open Fable.Core
 open Fable.Core.JsInterop
+open Browser
 
 module Arithmetic =
     let add x y = x + y
@@ -170,23 +171,27 @@ module Color =
     let rebeccapurple = hex "663399"
 
 module test =
-    [<Import("css", from="glamor")>]
-    let private glamorCss(x) = jsNative
-    let private glamorCss' x = glamorCss(x) 
+    [<Import("css", from="emotion")>]
+    let private css(x) = jsNative
+    let private css' x = css(x) 
 
     open Color
 
     type CSSAttribute =
+        | Label of string
         | Color of Color
         | BackgroundColor of Color
         | Hover of CSSAttribute list
 
-    let rec fss (attributeList: CSSAttribute list) = 
+    let rec createPOJO (attributeList: CSSAttribute list) = 
         attributeList
         |> List.map (
             function
+            | Label l -> "label" ==> l
             | Color c -> "color" ==> value c
             | BackgroundColor bc -> "background-color" ==> value bc
-            | Hover h -> ":hover" ==> fss h)
+            | Hover h -> ":hover" ==> createPOJO h)
         |> createObj
-        |> glamorCss'
+
+    let fss (attributeList: CSSAttribute list) = 
+        attributeList |> createPOJO |> css'
