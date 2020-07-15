@@ -6,9 +6,8 @@ open Fable.React
 open Fable.React.Props
 open Fable.Core.JsInterop
 
-open src.Arithmetic
-open src.test
-open src.Color
+open Fss.Main
+open Fss.Color
 
 type Model =
     { Count: int; InputA: int; InputB: int; Result: int }
@@ -25,48 +24,38 @@ let init() =
 
 let update (msg: Msg) (model: Model): Model =
     match msg with
-    | Increment ->
-        { model with Count = model.Count + 1 }
-
-    | Decrement ->
-        { model with Count = model.Count - 1 }
-
-    | AddInputA number ->
-        { model with InputA = number }
-
-    | AddInputB number ->
-        { model with InputB = number }
-
-    | SetResult number ->
-        { model with Result = number }
-
+    | Increment -> { model with Count = model.Count + 1 }
+    | Decrement -> { model with Count = model.Count - 1 }
+    | AddInputA number -> { model with InputA = number }
+    | AddInputB number -> { model with InputB = number }
+    | SetResult number -> { model with Result = number }
 
 let render (model: Model) (dispatch: Msg -> unit) =
 
     let redText =
         fss
             [
-                src.test.Color (rgb 255 0 0)
-                src.test.BackgroundColor (rgb 33 33 33)
+                Color (rgb 255 0 0)
+                BackgroundColor (rgb 33 33 33)
             ] 
 
     let greenText =
         fss
             [
-                src.test.Color (hex "00ff00")
-                src.test.BackgroundColor (hex "ffffff")
+                Color (hex "00ff00")
+                BackgroundColor (hex "ffffff")
             ] 
 
     let blueText =
         fss
             [
-                src.test.Label "Foo"
-                src.test.Color blue
-                src.test.BackgroundColor aliceblue
-                src.test.Hover
+                Label "Foo"
+                Color blue
+                BackgroundColor aliceblue
+                Hover
                     [
-                        src.test.BackgroundColor blue
-                        src.test.Color red
+                        BackgroundColor blue
+                        Color red
                     ]
             ]
 
@@ -83,10 +72,10 @@ let render (model: Model) (dispatch: Msg -> unit) =
                     input [Type "Number"; Value model.InputA; OnChange (fun e -> dispatch <| AddInputA e.target?value)]
                     input [Type "Number"; Value model.InputB; OnChange (fun e -> dispatch <| AddInputB e.target?value)]
 
-                    button [OnClick (fun _ -> dispatch <| SetResult (add model.InputA model.InputB))] [ str "Add"]
-                    button [OnClick (fun _ -> dispatch <| SetResult (multiply model.InputA model.InputB))]  [ str "Multiply"]
-                    button [OnClick (fun _ -> dispatch <| SetResult (subtract model.InputA model.InputB))]  [ str "Subtract"]
-                    button [OnClick (fun _ -> dispatch <| SetResult (divide model.InputA model.InputB))]  [ str "Divide"]
+                    button [OnClick (fun _ -> dispatch <| SetResult (model.InputA + model.InputB))] [ str "Add"]
+                    button [OnClick (fun _ -> dispatch <| SetResult (model.InputA * model.InputB))]  [ str "Multiply"]
+                    button [OnClick (fun _ -> dispatch <| SetResult (model.InputA - model.InputB))]  [ str "Subtract"]
+                    button [OnClick (fun _ -> dispatch <| SetResult (model.InputA / model.InputB))]  [ str "Divide"]
                     str (string (sprintf "Result: %A" model.Result))
                 ]
 
