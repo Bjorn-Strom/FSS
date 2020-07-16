@@ -10,11 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\src.fsproj" />
+    <ProjectReference Include="..\fss\Fss.fsproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Fable.Mocha" Version="2.9.1" />
+    <PackageReference Include="Fable.ReactTestingLibrary" Version="0.24.0" />
   </ItemGroup>
 
 </Project>

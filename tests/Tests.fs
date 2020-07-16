@@ -1,90 +1,71 @@
 ﻿module Tests
 
+open Fable.Core
 open Fable.Mocha
-open Fable.Core.JsInterop
+open Fable.React
+open Fable.React.Props
+open Fable.ReactTestingLibrary
 
+open Fss.Main
+open Fss.Color
 
+let testCase' name case = 
+    testCase name <| fun _ -> 
+        use dispose = { new System.IDisposable with member this.Dispose() = RTL.cleanup() }
+        case()
+
+[<Emit("window.getComputedStyle(document.getElementById('$0'));")>]
+let getComputedCssById (id : string) : obj  = jsNative
+
+[<Emit("$0[$1];")>]
+let getValue (object: obj) (key: string) : string = jsNative
 
 let glamorHowToTests =
-    testList "Glamor CSS howto list" [
-
-        testCase "Apply a style to an element" <| fun () ->
-            let result = createObj []
-            let expected = 
-                createObj 
+    testList "Css tests" [
+        testCase' "Style color with color" <| fun _ ->
+            let color =
+                fss 
                     [
-                        "color" ==> "red"
+                        Color red
                     ]
-            Expect.equal result expected "Applying style to an element"
+            RTL.render(
+                div 
+                    [ Id "color";  ClassName color ]
+                    []
+            ) |> ignore
+            
+            let computedCss = getComputedCssById("color")
+            Expect.equal (getValue computedCss "color") "rgb(255, 0, 0)" "color color style applied"
 
-        testCase "psuedo classes" <| fun () ->
-            let result = createObj []
-            let expected =
-                createObj
+        testCase' "Style color with RGB" <| fun _ ->
+            let color =
+                fss 
                     [
-                        ":hover" ==>
-                        createObj
-                            [
-                                "color" ==> "blue"
-                            ]
+                        Color (rgb 255 0 0)
                     ]
-            Expect.equal result expected "Applying psuedoclass"
+            RTL.render(
+                div 
+                    [ Id "color";  ClassName color ]
+                    []
+            ) |> ignore
+            
+            let computedCss = getComputedCssById("color")
+            Expect.equal (getValue computedCss "color") "rgb(255, 0, 0)" "color rgb style applied"
 
-        testCase "child selectors" <| fun () ->
-            let result = createObj []
-            let expected = 
-                createObj
+        testCase' "Style color with HEX" <| fun _ ->
+            let color =
+                fss 
                     [
-                        "display" ==> "block"
-                        "& .bold" ==> createObj [ "fontWeight" ==> "bold" ]
-                        "& .one" ==> createObj [ "color" ==> "blue" ]
-                        ":hover .two" ==> createObj [ "color" ==> "red" ]
+                        Color (hex "ff0000")
                     ]
-            Expect.equal result expected "Applying child selectors"
-
-        testCase "siblings" <| fun () ->
-            let result = createObj []
-            let expected =
-                createObj
-                    [
-                        "& li:first-of-type + li" ==> createObj [ "color" ==> "red" ]
-                    ]
-            Expect.equal result expected "Sibling selectors"
-
-        testCase "media queries" <| fun () ->
-            let result = createObj []
-            let expected =
-                createObj
-                    [
-                        "position" ==> "relative"
-                        "width" ==> "100%"
-                        "maxWidth" ==> 960
-                        "margin" ==> "0 auto"
-                        "padding" ==> "0 20px"
-                        "boxSizing" ==> "border-box"
-
-                        ":after" ==> 
-                            createObj
-                                [
-                                    "content" ==> "\"\""
-                                    "display" ==> "table"
-                                    "clear" ==> "both"
-                                ]
-
-                        "@media(min-width: 400px)" ==>
-                            createObj
-                                [
-                                    "width" ==> "85%"
-                                    "padding" ==> 0
-                                ]
-                    ]
-            Expect.equal result expected "Media queries"
-
-        testCase "Animation keyframes" <| fun () ->
-            let result = createObj []
-            let expected = createObj []
-            Expect.equal result expected "animation keyframes"
-
+            RTL.render(
+                div 
+                    [ Id "color";  ClassName color ]
+                    []
+            ) |> ignore
+            
+            let computedCss = getComputedCssById("color")
+            Expect.equal (getValue computedCss "color") "rgb(255, 0, 0)" "color hex style applied"
     ]
 
 Mocha.runTests glamorHowToTests |> ignore
