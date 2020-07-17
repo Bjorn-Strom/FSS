@@ -10,76 +10,36 @@ open Fss.Main
 open Fss.Color
 
 type Model =
-    { Count: int; InputA: int; InputB: int; Result: int }
+    { Message : string}
 
 type Msg =
-    | Increment
-    | Decrement
-    | AddInputA of int
-    | AddInputB of int
-    | SetResult of int
+    | None
 
 let init() =
-    { Count = 0; InputA = 0; InputB = 0; Result = 0; }
+    { Message = "Hello" }
 
 let update (msg: Msg) (model: Model): Model =
     match msg with
-    | Increment -> { model with Count = model.Count + 1 }
-    | Decrement -> { model with Count = model.Count - 1 }
-    | AddInputA number -> { model with InputA = number }
-    | AddInputB number -> { model with InputB = number }
-    | SetResult number -> { model with Result = number }
+    | None -> model
+
+let Color =
+    fragment []
+        [
+            h1 [] [ str "Color"]
+            p [] [ str "Tons of different ways to style color" ]
+            p [ ClassName (fss [Color deeppink]) ] [ str "Named colors like deeppink"]
+            p [ ClassName (fss [Color (rgb 255 0 0)])] [ str "Or you can style it using an RGB function!"]
+            p [ ClassName (fss [Color (rgba 0 0 0 0.5)])] [ str "We also support RGBA"]
+            p [ ClassName (fss [Color (hex "00ff00")])] [ str "or you can use HEX"]
+            p [ ClassName (fss [Color (hex "0000ff80")])] [ str "HEX can also be transparent"]
+            p [ ClassName (fss [Color (hsl 120 0.5 0.5)])] [ str "Or just use HSL"]
+            p [ ClassName (fss [Color (hsla 120 0.5 0.5 0.5)])] [ str "HSL can also be transparent"]
+        ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
-
-    let redText =
-        fss
-            [
-                Color (rgb 255 0 0)
-                BackgroundColor (rgb 33 33 33)
-            ] 
-
-    let greenText =
-        fss
-            [
-                Color (hex "00ff00")
-                BackgroundColor (hex "ffffff")
-            ] 
-
-    let blueText =
-        fss
-            [
-                Label "Foo"
-                Color blue
-                BackgroundColor aliceblue
-                Hover
-                    [
-                        BackgroundColor blue
-                        Color red
-                    ]
-            ]
-
-
-    div [ ClassName redText ]
+    div []
         [
-            button [ OnClick (fun _ -> dispatch Increment);  ] [ str "+" ]
-            button [ OnClick (fun _ -> dispatch Decrement)] [ str "-" ]
-            str (string model.Count)
-
-
-            div [ ClassName greenText ]
-                [
-                    input [Type "Number"; Value model.InputA; OnChange (fun e -> dispatch <| AddInputA e.target?value)]
-                    input [Type "Number"; Value model.InputB; OnChange (fun e -> dispatch <| AddInputB e.target?value)]
-
-                    button [OnClick (fun _ -> dispatch <| SetResult (model.InputA + model.InputB))] [ str "Add"]
-                    button [OnClick (fun _ -> dispatch <| SetResult (model.InputA * model.InputB))]  [ str "Multiply"]
-                    button [OnClick (fun _ -> dispatch <| SetResult (model.InputA - model.InputB))]  [ str "Subtract"]
-                    button [OnClick (fun _ -> dispatch <| SetResult (model.InputA / model.InputB))]  [ str "Divide"]
-                    str (string (sprintf "Result: %A" model.Result))
-                ]
-
-            h1 [ ClassName blueText ] [ str "BLUEEEE" ]
+            Color
         ]
 
 Program.mkSimple init update render

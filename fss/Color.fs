@@ -3,9 +3,13 @@ namespace Fss
 module Color =
     type CssColor = CssColor of string
 
-    let rgb r g b = Helper.rgb r g b |> CssColor
+    let rgb (r: int) (g: int) (b: int): CssColor = Helper.rgb r g b |> CssColor
+    let rgba (r: int) (g: int) (b: int) (a: float): CssColor = Helper.rgba r g b a |> CssColor
 
-    let hex value = Helper.hex value |> CssColor
+    let hex (value: string): CssColor = Helper.hex value |> CssColor
+
+    let hsl (h: int) (s: float) (l: float): CssColor = Helper.hsl h s l |> CssColor
+    let hsla (h: int) (s: float) (l: float) (a: float):CssColor = Helper.hsla h s l a |> CssColor
 
     let value (CssColor c) = c
 

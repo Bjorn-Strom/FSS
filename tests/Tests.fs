@@ -23,19 +23,23 @@ let getValue (object: obj) (key: string) : string = jsNative
 let glamorHowToTests =
     testList "Css tests" [
         testCase' "Style color with RGB" <| fun _ ->
-            let color =
-                fss 
-                    [
-                        Color (rgb 255 0 0)
-                    ]
             RTL.render(
-                div 
-                    [ Id "color";  ClassName color ]
-                    []
+                fragment []
+                    [
+                        div 
+                            [ Id "color"; ClassName (fss [ Color (rgb 255 0 0)]) ]
+                            []
+
+                        div 
+                            [ Id "colorAlpha"; ClassName (fss [ Color (rgba 255 255 255 0.5)]) ]
+                            []
+                    ]
             ) |> ignore
             
-            let computedCss = getComputedCssById("color")
-            Expect.equal (getValue computedCss "color") "rgb(255, 0, 0)" "color rgb style applied"
+            let color = getComputedCssById("color")
+            let colorAlpha = getComputedCssById("colorAlpha")
+            Expect.equal (getValue color "color") "rgb(255, 0, 0)" "color rgb style applied"
+            Expect.equal (getValue colorAlpha "color") "rgba(255, 255, 255, 0.5)" "color rgba style applied"
 
         testCase' "Style color with HEX" <| fun _ ->
             
