@@ -22,6 +22,25 @@ let getValue (object: obj) (key: string) : string = jsNative
 
 let glamorHowToTests =
     testList "Css tests" [
+        testCase' "Style color with named color" <| fun _ ->
+            RTL.render(
+                fragment []
+                    [
+                        div 
+                            [ Id "color"; ClassName (fss [ Color aliceblue]) ]
+                            []
+
+                        div 
+                            [ Id "colorPink"; ClassName (fss [ BackgroundColor deeppink]) ]
+                            []
+                    ]
+            ) |> ignore
+            
+            let color = getComputedCssById("color")
+            let colorAlpha = getComputedCssById("colorPink")
+            Expect.equal (getValue color "color") "rgb(240, 248, 255)" "named color"
+            Expect.equal (getValue colorAlpha "background-color") "rgb(255, 20, 147)" "named background color"
+
         testCase' "Style color with RGB" <| fun _ ->
             RTL.render(
                 fragment []
@@ -42,7 +61,6 @@ let glamorHowToTests =
             Expect.equal (getValue colorAlpha "color") "rgba(255, 255, 255, 0.5)" "color rgba style applied"
 
         testCase' "Style color with HEX" <| fun _ ->
-            
             RTL.render(
                 fragment []
                     [
@@ -67,6 +85,24 @@ let glamorHowToTests =
             Expect.equal (getValue colorAlpha "color") "rgba(255, 0, 0, 0.5)" "color hex style applied with alpha"
             Expect.equal (getValue colorHash "color") "rgb(0, 255, 0)" "color hex style applied with hash"
 
+        testCase' "Style color with hsl" <| fun _ ->
+            RTL.render(
+                fragment []
+                    [
+                        div 
+                            [ Id "color"; ClassName (fss [ Color (hsl 10 0.2 0.3)]) ]
+                            []
+
+                        div 
+                            [ Id "colorAlpha"; ClassName (fss [ Color (hsla 15 0.4 0.5 0.5)]) ]
+                            []
+                    ]
+            ) |> ignore
+            
+            let color = getComputedCssById("color")
+            let colorAlpha = getComputedCssById("colorAlpha")
+            Expect.equal (getValue color "color") "rgb(92, 66, 61)" "color hsl style applied"
+            Expect.equal (getValue colorAlpha "color") "rgba(179, 102, 77, 0.5)" "color hsla style applied"
     ]
 
 Mocha.runTests glamorHowToTests |> ignore
