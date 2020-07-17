@@ -1,5 +1,8 @@
 namespace Fss.Utilities
 
+module Types =
+    type ICss = interface end
+
 module Converters =
     let floatToPercent (f: float): string = sprintf "%d%%" (int <| f * 100.0)
 

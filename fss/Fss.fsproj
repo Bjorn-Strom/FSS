@@ -15,6 +15,7 @@
     <Content Include="*.fsproj; *.fs; *.js;" PackagePath="fable\" />
     <Compile Include="Utilities.fs" />
     <Compile Include="Units.fs" />
+    <Compile Include="Fonts.fs" />
     <Compile Include="Color.fs" />
     <Compile Include="Fss.fs" />
   </ItemGroup>
