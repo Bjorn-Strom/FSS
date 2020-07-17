@@ -8,6 +8,7 @@ open Fable.Core.JsInterop
 
 open Fss.Main
 open Fss.Color
+open Fss.Units
 
 type Model =
     { Message : string}
@@ -40,6 +41,9 @@ let render (model: Model) (dispatch: Msg -> unit) =
     div []
         [
             Color
+            div 
+                [ ClassName (fss [Foo (inc 1.5)])]
+                [str "unit testing"]        
         ]
 
 Program.mkSimple init update render

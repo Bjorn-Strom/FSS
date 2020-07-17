@@ -90,19 +90,19 @@ let glamorHowToTests =
                 fragment []
                     [
                         div 
-                            [ Id "color"; ClassName (fss [ Color (hsl 10 0.2 0.3)]) ]
+                            [ Id "color"; ClassName (fss [ Color (hsl 120 1.0 0.5)]) ]
                             []
 
                         div 
-                            [ Id "colorAlpha"; ClassName (fss [ Color (hsla 15 0.4 0.5 0.5)]) ]
+                            [ Id "colorAlpha"; ClassName (fss [ Color (hsla 120 1.0 0.5 0.5)]) ]
                             []
                     ]
             ) |> ignore
             
             let color = getComputedCssById("color")
             let colorAlpha = getComputedCssById("colorAlpha")
-            Expect.equal (getValue color "color") "rgb(92, 66, 61)" "color hsl style applied"
-            Expect.equal (getValue colorAlpha "color") "rgba(179, 102, 77, 0.5)" "color hsla style applied"
+            Expect.equal (getValue color "color") "rgb(0, 255, 0)" "color hsl style applied"
+            Expect.equal (getValue colorAlpha "color") "rgba(0, 255, 0, 0.5)" "color hsla style applied"
     ]
 
 Mocha.runTests glamorHowToTests |> ignore

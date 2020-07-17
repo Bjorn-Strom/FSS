@@ -13,7 +13,8 @@
 
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" PackagePath="fable\" />
-    <Compile Include="Helper.fs" />
+    <Compile Include="Utilities.fs" />
+    <Compile Include="Units.fs" />
     <Compile Include="Color.fs" />
     <Compile Include="Fss.fs" />
   </ItemGroup>
