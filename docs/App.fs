@@ -64,8 +64,6 @@ let Fonts =
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
-
-
     div []
         [
             Color
