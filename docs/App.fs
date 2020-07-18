@@ -97,6 +97,7 @@ let Border =
                         BorderWidth [(px 3); (px 4); (px 5); (px 6)]
                         BorderStyle [Solid]
                     ])] [ str "I have a mixed width border" ]
+            p [ ClassName (fss [Border [Thick; Double; green]])] [ str "Border shorthand also works" ]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
