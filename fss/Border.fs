@@ -1,6 +1,9 @@
-namespace Fss.Border
+namespace Fss
 
 open Fss
+
+module Border =
+    let border = "border"
 
 module BorderStyle =
     type BorderStyle =
@@ -29,6 +32,8 @@ module BorderStyle =
             | Outset -> "outset"
             | None -> "none"
 
+    let borderStyle = "border-style"
+
 module BorderWidth =
     type BorderWidth =
         | Thin
@@ -41,3 +46,9 @@ module BorderWidth =
             | Thin -> "thin"
             | Medium -> "medium"
             | Thick -> "thick"
+
+    let borderWidth = "border-width"
+    let borderTopWidth = "border-top-width"
+    let borderRightWidth = "border-right-width"
+    let borderBottomWidth = "border-bottom-width"
+    let borderLeftWidth = "border-left-width"

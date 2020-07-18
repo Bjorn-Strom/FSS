@@ -10,6 +10,8 @@ open Fss.Main
 open Fss.Fonts
 open Fss.Color
 open Fss.Units
+open Fss.BorderStyle
+open Fss.BorderWidth
 
 let testCase' name case = 
     testCase name <| fun _ -> 
@@ -137,6 +139,29 @@ let CssTests =
             Expect.equal (getValue large "font-size") "18px" "font size set to large"
             Expect.equal (getValue px "font-size") "100px" "font size set with pixels"
             Expect.equal (getValue pct "font-size") "32px" "font size set with percent"
+
+        testCase' "Borders" <| fun _ ->
+            RTL.render(
+                fragment []
+                    [
+                        div 
+                            [ Id "short"; ClassName (fss [ Border [Thick; Dotted; aliceblue ]]) ]
+                            []
+
+                        div 
+                            [ Id "style"; ClassName (fss [ BorderStyle [Dashed; Groove; None; Dotted] ]) ]
+                            []
+                    ]
+            ) |> ignore
+            
+            let shortHand = getComputedCssById("short")
+            let style = getComputedCssById("style")
+            Expect.equal (getValue shortHand "border-left-style") "dotted" "border shorthand"
+            Expect.equal (getValue shortHand "border-left-color") "rgb(240, 248, 255)" "border shorthand"
+            Expect.equal (getValue style "border-top-style") "dashed" "mixed border style"
+            Expect.equal (getValue style "border-right-style") "groove" "mixed border style"
+            Expect.equal (getValue style "border-bottom-style") "none" "mixed border style"
+            Expect.equal (getValue style "border-left-style") "dotted" "mixed border style"
     ]
 
 Mocha.runTests CssTests |> ignore

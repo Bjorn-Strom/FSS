@@ -30,3 +30,5 @@ module Fonts =
             // Relative
             | Smaller -> "smaller"
             | Larger -> "larger"
+    
+    let fontSize = "font-size"

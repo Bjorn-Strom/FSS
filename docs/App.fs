@@ -10,8 +10,8 @@ open Fss.Main
 open Fss.Color
 open Fss.Units
 open Fss.Fonts
-open Fss.Border.BorderStyle
-open Fss.Border.BorderWidth
+open Fss.BorderStyle
+open Fss.BorderWidth
 
 type Model =
     { Message : string}
@@ -98,6 +98,26 @@ let Border =
                         BorderStyle [Solid]
                     ])] [ str "I have a mixed width border" ]
             p [ ClassName (fss [Border [Thick; Double; green]])] [ str "Border shorthand also works" ]
+            p [ ClassName (fss 
+                    [
+                        BorderStyle [Solid]
+                        BorderTopWidth (px 10)
+                    ])] [ str "top width" ]
+            p [ ClassName (fss 
+                    [
+                        BorderStyle [Solid]
+                        BorderRightWidth (px 10)
+                    ])] [ str "right width" ]
+            p [ ClassName (fss 
+                    [
+                        BorderStyle [Solid]
+                        BorderBottomWidth (px 10)
+                    ])] [ str "bottom width" ]
+            p [ ClassName (fss 
+                    [
+                        BorderStyle [Solid]
+                        BorderLeftWidth (px 10)
+                    ])] [ str "left width" ]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
