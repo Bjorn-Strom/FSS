@@ -9,6 +9,7 @@ open Fss.Fonts
 open Fss.Border
 open Fss.BorderStyle
 open Fss.BorderWidth
+open Fss.BorderRadius
 open Fss.Utilities.Types
 
 module Main =
@@ -31,6 +32,7 @@ module Main =
         | BackgroundColor of CssColor
         | Hover of CSSAttribute list
         | FontSize of ICss
+
         | Border of ICss list
         | BorderStyle of BorderStyle list
         | BorderWidth of ICss list
@@ -38,6 +40,12 @@ module Main =
         | BorderRightWidth of ICss
         | BorderBottomWidth of ICss
         | BorderLeftWidth of ICss
+
+        | BorderRadius of ICss list
+        | BorderTopLeftRadius of ICss list
+        | BorderTopRightRadius of ICss list
+        | BorderBottomRightRadius of ICss list
+        | BorderBottomLeftRadius of ICss list
 
     let label = "label"
     let hover = ":hover"
@@ -51,13 +59,21 @@ module Main =
                 | BackgroundColor bc -> backgroundColor ==> Color.value bc
                 | Hover h -> hover ==> createPOJO h
                 | FontSize f -> fontSize ==> value f
+
                 | Border b -> border ==> evalCssListToString b value
                 | BorderStyle bss -> borderStyle ==> evalCssListToString bss BorderStyle.value
+
                 | BorderWidth bws -> borderWidth ==> evalCssListToString bws value
                 | BorderTopWidth bw -> borderTopWidth ==> value bw
                 | BorderRightWidth bw -> borderRightWidth ==> value bw
                 | BorderBottomWidth bw -> borderBottomWidth ==> value bw
-                | BorderLeftWidth bw -> borderLeftWidth ==> value bw)
+                | BorderLeftWidth bw -> borderLeftWidth ==> value bw
+               
+                | BorderRadius br -> borderRadius ==> evalCssListToString br value
+                | BorderTopLeftRadius br -> borderTopLeftRadius ==> evalCssListToString br value
+                | BorderTopRightRadius br -> borderTopRightRadius ==> evalCssListToString br value
+                | BorderBottomRightRadius br -> borderBottomRightRadius ==> evalCssListToString br value
+                | BorderBottomLeftRadius br -> borderBottomLeftRadius ==> evalCssListToString br value)
         |> createObj
 
     let fss (attributeList: CSSAttribute list) = 

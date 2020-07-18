@@ -26,7 +26,7 @@ let update (msg: Msg) (model: Model): Model =
     match msg with
     | NoMessage -> model
 
-let Color =
+let ColorExamples =
     fragment []
         [
             h1 [] [ str "Color" ]
@@ -118,12 +118,24 @@ let Border =
                         BorderStyle [Solid]
                         BorderLeftWidth (px 10)
                     ])] [ str "left width" ]
+            p [ ClassName (fss
+                    [
+                        Color white
+                        BackgroundColor purple
+                        BorderRadius [(px 10); (px (100 / 120)) ]
+                    ])] [ str "Border radius!"]
+            p [ ClassName (fss
+                    [
+                        Color yellowgreen
+                        BackgroundColor purple
+                        BorderTopLeftRadius [(px 10)]
+                    ])] [ str "Top left Border radius!"]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div []
         [
-            Color
+            ColorExamples
             Fonts
             Border
         ]

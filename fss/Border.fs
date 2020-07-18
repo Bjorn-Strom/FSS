@@ -52,3 +52,10 @@ module BorderWidth =
     let borderRightWidth = "border-right-width"
     let borderBottomWidth = "border-bottom-width"
     let borderLeftWidth = "border-left-width"
+
+module BorderRadius =
+    let borderRadius = "border-radius"
+    let borderTopLeftRadius = "border-top-left-radius"
+    let borderTopRightRadius = "border-top-right-radius"
+    let borderBottomRightRadius = "border-bottom-right-radius"
+    let borderBottomLeftRadius = "border-bottom-left-radius"

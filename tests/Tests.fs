@@ -151,17 +151,22 @@ let CssTests =
                         div 
                             [ Id "style"; ClassName (fss [ BorderStyle [Dashed; Groove; None; Dotted] ]) ]
                             []
+                        div
+                            [ Id "radius"; ClassName (fss [ BorderRadius [(px 10)]])] []
                     ]
             ) |> ignore
             
             let shortHand = getComputedCssById("short")
             let style = getComputedCssById("style")
+            let radius = getComputedCssById("radius")
+
             Expect.equal (getValue shortHand "border-left-style") "dotted" "border shorthand"
             Expect.equal (getValue shortHand "border-left-color") "rgb(240, 248, 255)" "border shorthand"
             Expect.equal (getValue style "border-top-style") "dashed" "mixed border style"
             Expect.equal (getValue style "border-right-style") "groove" "mixed border style"
             Expect.equal (getValue style "border-bottom-style") "none" "mixed border style"
             Expect.equal (getValue style "border-left-style") "dotted" "mixed border style"
+            Expect.equal (getValue radius "border-top-left-radius") "10px" "border radius"
     ]
 
 Mocha.runTests CssTests |> ignore
