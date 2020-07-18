@@ -10,10 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\fss\Fss.fsproj" />
-    <ProjectReference Include="../fss/Fss.fsproj">
-      <Name>Fss.fsproj</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Fss\Fss.fsproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,10 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fss\Fss.fsproj" />
-    <ProjectReference Include="../fss/Fss.fsproj">
-      <Name>Fss.fsproj</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Fss\Fss.fsproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.fs" />
