@@ -10,19 +10,21 @@ open Fss.Main
 open Fss.Color
 open Fss.Units
 open Fss.Fonts
+open Fss.Border.BorderStyle
+open Fss.Border.BorderWidth
 
 type Model =
     { Message : string}
 
 type Msg =
-    | None
+    | NoMessage
 
 let init() =
     { Message = "Hello" }
 
 let update (msg: Msg) (model: Model): Model =
     match msg with
-    | None -> model
+    | NoMessage -> model
 
 let Color =
     fragment []
@@ -63,11 +65,46 @@ let Fonts =
             p [] [ str "and more!"]
         ]
 
+let Border =
+    fragment []
+        [
+            h1 [] [ str "borders"]
+            h2 [] [ str "Set unique borders"]
+            p [ ClassName (fss [BorderStyle [Solid]])] [ str "I have a solid border" ]
+            p [ ClassName (fss [BorderStyle [Double]])] [ str "I have a double border"]
+            p [ ClassName (fss [BorderStyle [Groove]])] [ str "I have a groove border"]
+            p [ ClassName (fss [BorderStyle [Inset]])] [ str "I have an inset border"]
+            p [ ClassName (fss [BorderStyle [Ridge]])] [ str "I have a ridge border"]
+            p [ ClassName (fss [BorderStyle [Dashed]])] [ str "I have a dashed border"]
+            p [ ClassName (fss [BorderStyle [Dotted]])] [ str "I have a dotted border"]
+            p [ ClassName (fss [BorderStyle [Outset]])] [ str "I have an outset border"]
+            p [ ClassName (fss [BorderStyle [Hidden]])] [ str "I have a hidden border"]
+            p [ ClassName (fss [BorderStyle [None]])] [ str "I don't have a border"]
+            p [ ClassName (fss [BorderStyle [Groove; Dotted; Solid; Dashed]])] [ str "I have a mixed border"]
+            p [] [ str "We can also apply only border width" ]
+            p [ ClassName (fss 
+                    [
+                        BorderWidth [Thin]
+                        BorderStyle [Solid]
+                    ])] [ str "I have a thin border" ]
+            p [ ClassName (fss 
+                    [
+                        BorderWidth [(px 3)]
+                        BorderStyle [Solid]
+                    ])] [ str "I have a 3px border" ]
+            p [ ClassName (fss 
+                    [
+                        BorderWidth [(px 3); (px 4); (px 5); (px 6)]
+                        BorderStyle [Solid]
+                    ])] [ str "I have a mixed width border" ]
+        ]
+
 let render (model: Model) (dispatch: Msg -> unit) =
     div []
         [
             Color
             Fonts
+            Border
         ]
 
 Program.mkSimple init update render

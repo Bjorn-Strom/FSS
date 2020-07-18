@@ -17,6 +17,7 @@
     <Compile Include="Units.fs" />
     <Compile Include="Fonts.fs" />
     <Compile Include="Color.fs" />
+    <Compile Include="Border.fs" />
     <Compile Include="Fss.fs" />
   </ItemGroup>
 
