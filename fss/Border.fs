@@ -59,3 +59,11 @@ module BorderRadius =
     let borderTopRightRadius = "border-top-right-radius"
     let borderBottomRightRadius = "border-bottom-right-radius"
     let borderBottomLeftRadius = "border-bottom-left-radius"
+
+
+module BorderColor =
+    let borderColor = "border-color"
+    let borderTopColor = "border-top-color"
+    let borderRightColor = "border-right-color"
+    let borderBottomColor = "border-bottom-color"
+    let borderLeftColor = "border-left-color"

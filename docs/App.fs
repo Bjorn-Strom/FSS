@@ -12,6 +12,7 @@ open Fss.Units
 open Fss.Fonts
 open Fss.BorderStyle
 open Fss.BorderWidth
+open Fss.BorderColor
 
 type Model =
     { Message : string}
@@ -130,6 +131,27 @@ let Border =
                         BackgroundColor purple
                         BorderTopLeftRadius [(px 10)]
                     ])] [ str "Top left Border radius!"]
+            p [ ClassName (fss
+                    [
+                        BorderStyle [Solid]
+                        BorderWidth [(px 15)]
+                        BorderColor [red; (rgba 170 50 220 0.6); green]                        
+                    ]
+            )] [ str "Now in color!"]
+            
+            p [ ClassName (fss
+                    [
+                        Border [Dashed; (px 15)]
+                        BorderTopWidth (px 20)
+                        BorderTopColor deeppink
+                        BorderBottomWidth (px 1)
+                        BorderLeftWidth (px 10)
+                        BorderRightWidth (px 10)
+                        BorderLeftColor gold
+                        BorderRightColor rosybrown
+                    ]
+            )] [ str "Now in color!"]
+
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =

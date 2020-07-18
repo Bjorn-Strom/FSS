@@ -10,6 +10,7 @@ open Fss.Border
 open Fss.BorderStyle
 open Fss.BorderWidth
 open Fss.BorderRadius
+open Fss.BorderColor
 open Fss.Utilities.Types
 
 module Main =
@@ -47,6 +48,12 @@ module Main =
         | BorderBottomRightRadius of ICss list
         | BorderBottomLeftRadius of ICss list
 
+        | BorderColor of CssColor list
+        | BorderTopColor of CssColor
+        | BorderRightColor of CssColor
+        | BorderBottomColor of CssColor
+        | BorderLeftColor of CssColor
+
     let label = "label"
     let hover = ":hover"
 
@@ -73,8 +80,14 @@ module Main =
                 | BorderTopLeftRadius br -> borderTopLeftRadius ==> evalCssListToString br value
                 | BorderTopRightRadius br -> borderTopRightRadius ==> evalCssListToString br value
                 | BorderBottomRightRadius br -> borderBottomRightRadius ==> evalCssListToString br value
-                | BorderBottomLeftRadius br -> borderBottomLeftRadius ==> evalCssListToString br value)
-        |> createObj
+                | BorderBottomLeftRadius br -> borderBottomLeftRadius ==> evalCssListToString br value
+
+                | BorderColor bc -> borderColor ==> evalCssListToString bc Color.value
+                | BorderTopColor bc -> borderTopColor ==> Color.value bc
+                | BorderRightColor bc -> borderRightColor ==> Color.value bc
+                | BorderBottomColor bc -> borderBottomColor ==> Color.value bc
+                | BorderLeftColor bc -> borderLeftColor ==> Color.value bc
+        )  |> createObj
 
     let fss (attributeList: CSSAttribute list) = 
         attributeList |> createPOJO |> css'
