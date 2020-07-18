@@ -7,7 +7,9 @@ open Fable.React.Props
 open Fable.ReactTestingLibrary
 
 open Fss.Main
+open Fss.Fonts
 open Fss.Color
+open Fss.Units
 
 let testCase' name case = 
     testCase name <| fun _ -> 
@@ -20,7 +22,7 @@ let getComputedCssById (id : string) : obj  = jsNative
 [<Emit("$0[$1];")>]
 let getValue (object: obj) (key: string) : string = jsNative
 
-let glamorHowToTests =
+let CssTests =
     testList "Css tests" [
         testCase' "Style color with named color" <| fun _ ->
             RTL.render(
@@ -103,6 +105,38 @@ let glamorHowToTests =
             let colorAlpha = getComputedCssById("colorAlpha")
             Expect.equal (getValue color "color") "rgb(0, 255, 0)" "color hsl style applied"
             Expect.equal (getValue colorAlpha "color") "rgba(0, 255, 0, 0.5)" "color hsla style applied"
+
+        testCase' "Font-size" <| fun _ ->
+            RTL.render(
+                fragment []
+                    [
+                        div 
+                            [ Id "small"; ClassName (fss [ FontSize Small ]) ]
+                            []
+
+                        div 
+                            [ Id "large"; ClassName (fss [ FontSize Large ]) ]
+                            []
+
+
+                        div 
+                            [ Id "px"; ClassName (fss [ FontSize (px 100) ]) ]
+                            []
+
+                        div 
+                            [ Id "pct"; ClassName (fss [ FontSize (pct 200) ]) ]
+                            []
+                    ]
+            ) |> ignore
+            
+            let small = getComputedCssById("small")
+            let large = getComputedCssById("large")
+            let px = getComputedCssById("px")
+            let pct = getComputedCssById("pct")
+            Expect.equal (getValue small "font-size") "13px" "font size set to small"
+            Expect.equal (getValue large "font-size") "18px" "font size set to large"
+            Expect.equal (getValue px "font-size") "100px" "font size set with pixels"
+            Expect.equal (getValue pct "font-size") "32px" "font size set with percent"
     ]
 
-Mocha.runTests glamorHowToTests |> ignore
+Mocha.runTests CssTests |> ignore
