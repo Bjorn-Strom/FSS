@@ -4,10 +4,9 @@ open Elmish
 open Elmish.React
 open Fable.React
 open Fable.React.Props
-open Fable.Core.JsInterop
 
 open Fss
-open Main
+open Fss
 open Color
 open Units
 open Fonts

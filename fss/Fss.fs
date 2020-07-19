@@ -14,7 +14,7 @@ open BorderColor
 open Utilities.Types
 open Animation
 
-module Main =
+module Fss =
     [<Import("css", from="emotion")>]
     let private css(x) = jsNative
     let private css' x = css(x) 
