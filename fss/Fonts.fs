@@ -15,7 +15,7 @@ module Fonts =
         // Relative
         | Smaller
         | Larger
-        interface Utilities.Types.ICss
+        interface Utilities.Types.ICSSProperty
 
     let value v =
         match v with
@@ -31,4 +31,4 @@ module Fonts =
             | Smaller -> "smaller"
             | Larger -> "larger"
     
-    let fontSize = "font-size"
+    let fontSize = "fontSize"

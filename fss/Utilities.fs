@@ -1,7 +1,8 @@
 namespace Fss.Utilities
 
 module Types =
-    type ICss = interface end
+    type IAnimation = interface end
+    type ICSSProperty = interface end
 
     let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
         list

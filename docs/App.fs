@@ -4,6 +4,8 @@ open Elmish
 open Elmish.React
 open Fable.React
 open Fable.React.Props
+open Fable.Core.JsInterop
+open Browser
 
 open Fss
 open Fss
@@ -14,6 +16,7 @@ open BorderStyle
 open BorderWidth
 open BorderColor
 open Animation
+open Keyframes
 
 type Model =
     { Message : string}
@@ -156,16 +159,36 @@ let Border =
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
+    let FOOBAR =
+        createObj
+            [
+                "0%" ==> createObj
+                    [
+                        "background-color" ==> "red"
+                        "color" ==> "blue"
+                    ]
+                "100%" ==> createObj
+                    [
+                        "background-color" ==> "blue"
+                        "color" ==> "red"
+                    ]
+            ]
+
+    let foobar = kframes' FOOBAR
+
+    console.log(FOOBAR)
+    console.log(foobar)
+
     let animation =
         fss
             [
-                Animation [(sec 3.0); Ease; (sec 1.0); Infinite; Reverse; Both; Running]
+                Animation [ ]
             ]
 
     let secondAnimation =
         fss
             [
-                AnimationName "Foobar"
+                AnimationName "animation-2ysnvp"
                 AnimationDuration (sec 3.0)
                 AnimationTimingFunction Ease
                 AnimationDelay (mSec 1.0)

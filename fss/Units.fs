@@ -18,7 +18,7 @@ module Units =
         | Vh of string
         | VMax of string
         | Vmin of string
-        interface Utilities.Types.ICss
+        interface Utilities.Types.ICSSProperty
 
     let value (u: Unit) = 
         match u with 

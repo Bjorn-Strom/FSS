@@ -1,9 +1,9 @@
 namespace Fss
 
+open Utilities.Types
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
 module Animation =
-    type IAnimation = interface end
-
     // Animation duration
     type Time =
         | Sec of string

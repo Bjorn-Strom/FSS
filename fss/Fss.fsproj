@@ -16,8 +16,9 @@
     <Compile Include="Fonts.fs" />
     <Compile Include="Color.fs" />
     <Compile Include="Border.fs" />
-    <Compile Include="Keyframes.fs" />
     <Compile Include="Animation.fs" />
+    <Compile Include="Css.fs" />
+    <Compile Include="Keyframes.fs" />
     <Compile Include="Fss.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

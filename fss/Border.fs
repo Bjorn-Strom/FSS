@@ -17,7 +17,7 @@ module BorderStyle =
         | Inset
         | Outset
         | None
-        interface Utilities.Types.ICss
+        interface Utilities.Types.ICSSProperty
 
     let value v =
         match v with
@@ -39,7 +39,7 @@ module BorderWidth =
         | Thin
         | Medium
         | Thick
-        interface Utilities.Types.ICss
+        interface Utilities.Types.ICSSProperty
 
     let value v =
         match v with
