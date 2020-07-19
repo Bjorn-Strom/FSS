@@ -55,6 +55,24 @@ module Main =
         | BorderBottomColor of CssColor
         | BorderLeftColor of CssColor
 
+        | Animation of IAnimation list
+        | AnimationName of string
+        | AnimationDuration of Time
+        | AnimationDurations of Time list
+        | AnimationTimingFunction of Timing
+        | AnimationTimingFunctions of Timing list
+        | AnimationDelay of Time
+        | AnimationDelays of Time list
+        | AnimationIterationCount of IterationCount
+        | AnimationIterationCounts of IterationCount list
+        | AnimationDirection of Direction
+        | AnimationDirections of Direction list
+        | AnimationFillMode of FillMode
+        | AnimationFillModes of FillMode list
+        | AnimationPlayState of PlayState
+        | AnimationPlayStates of PlayState list
+
+
     let label = "label"
     let hover = ":hover"
 
@@ -88,6 +106,24 @@ module Main =
                 | BorderRightColor bc -> borderRightColor ==> Color.value bc
                 | BorderBottomColor bc -> borderBottomColor ==> Color.value bc
                 | BorderLeftColor bc -> borderLeftColor ==> Color.value bc
+
+                | Animation av -> animation ==> evalCssListToString av Animation.value
+                | AnimationName n -> animatioName ==> n
+                | AnimationDuration d -> animationDuration ==> Animation.value
+                | AnimationDurations ds -> animationDuration ==> evalCssListToString ds Animation.value
+                | AnimationTimingFunction t ->  animationTimingFunction ==> Animation.value Timing
+                | AnimationTimingFunctions ts -> animationTimingFunction ==> evalCssListToString ts Animation.value
+                | AnimationDelay d -> animationDelay ==> Animation.value d
+                | AnimationDelays ds -> animationDelay ==> evalCssListToString ds Animation.value
+                | AnimationIterationCount i -> animationiterationCount ==> Animation.value i
+                | AnimationIterationCounts of IterationCount list
+                | AnimationDirection of Direction
+                | AnimationDirections of Direction list
+                | AnimationFillMode of FillMode
+                | AnimationFillModes of FillMode list
+                | AnimationPlayState of PlayState
+                | AnimationPlayStates of PlayState list
+
         )  |> createObj
 
     let fss (attributeList: CSSAttribute list) = 

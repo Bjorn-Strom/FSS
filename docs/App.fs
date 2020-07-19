@@ -6,6 +6,7 @@ open Fable.React
 open Fable.React.Props
 open Fable.Core.JsInterop
 
+open Fss
 open Fss.Main
 open Fss.Color
 open Fss.Units
@@ -13,6 +14,7 @@ open Fss.Fonts
 open Fss.BorderStyle
 open Fss.BorderWidth
 open Fss.BorderColor
+open Fss.Animation
 
 type Model =
     { Message : string}
@@ -80,7 +82,7 @@ let Border =
             p [ ClassName (fss [BorderStyle [Dotted]])] [ str "I have a dotted border"]
             p [ ClassName (fss [BorderStyle [Outset]])] [ str "I have an outset border"]
             p [ ClassName (fss [BorderStyle [Hidden]])] [ str "I have a hidden border"]
-            p [ ClassName (fss [BorderStyle [None]])] [ str "I don't have a border"]
+            p [ ClassName (fss [BorderStyle [BorderStyle.None]])] [ str "I don't have a border"]
             p [ ClassName (fss [BorderStyle [Groove; Dotted; Solid; Dashed]])] [ str "I have a mixed border"]
             p [] [ str "We can also apply only border width" ]
             p [ ClassName (fss 
@@ -155,11 +157,25 @@ let Border =
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
+    // animation: 3s ease-in 1s infinite reverse both running slidein;
+
+    let animation =
+        fss
+            [
+                Animation [(sec 3.0); Ease; (sec 1.0); Infinite; Reverse; Both; Running]
+            ]
+
     div []
         [
             ColorExamples
             Fonts
             Border
+
+            span [ ClassName animation]
+                [
+                    str "farts"
+                ]
+
         ]
 
 Program.mkSimple init update render
