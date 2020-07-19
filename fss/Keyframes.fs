@@ -2,11 +2,12 @@
 
 open Fable.Core
 open Fable.Core.JsInterop
-open Browser
+
 
 open Css
 open Utilities.Types
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
 module Keyframes =
     [<Import("keyframes", from="emotion")>]
     let private kframes(x) = jsNative

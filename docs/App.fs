@@ -4,20 +4,19 @@ open Elmish
 open Elmish.React
 open Fable.React
 open Fable.React.Props
-open Fable.Core.JsInterop
-open Browser
 
 open Fss
 open Fss
 open Css
 open Color
-open Units
+open Units.Size
 open Fonts
 open BorderStyle
 open BorderWidth
 open BorderColor
 open Animation
 open Keyframes
+open Transform
 
 type Model =
     { Message : string}
@@ -167,17 +166,31 @@ let render (model: Model) (dispatch: Msg -> unit) =
     let bar = 
         keyframes
             [
-                frames [0; 20; 50; 80 ] [BackgroundColor green]
-                frame 50 [BackgroundColor red]
+                frames [0; 20; 53; 80; 100 ]
+                    [
+                        Transform (Translate3D((px 0), (px 0), (px 0)))
+                    ]
+                frames [40; 43]
+                    [
+                        Transform (Translate3D((px 0), (px -30), (px 0)))
+                    ]
+                frame 70
+                    [
+                        Transform (Translate3D((px 0), (px -15), (px 0)))
+                    ]
+                frame 90
+                    [
+                        Transform (Translate3D((px 0), (px -4), (px 0)))
+                    ]
             ] 
 
     let foo = 
         fss 
             [
                 AnimationName bar
-                AnimationDuration (sec 3.0)
+                AnimationDuration (sec 1.0)
+                AnimationTimingFunction Ease
                 AnimationIterationCount Infinite
-                AnimationPlayState Running
             ]
 
     div [] 

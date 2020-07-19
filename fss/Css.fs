@@ -6,7 +6,8 @@ open Fable.Core.JsInterop
 open Browser
 
 open Color
-open Units
+open Units.Size
+open Units.Angle
 open Fonts
 open Border
 open BorderStyle
@@ -15,6 +16,7 @@ open BorderRadius
 open BorderColor
 open Utilities.Types
 open Animation
+open Transform
 
 module Css = 
     [<Import("css", from="emotion")>]
@@ -24,7 +26,8 @@ module Css =
     let value (v: ICSSProperty): string =
         match v with
             | :? CssColor as c -> Color.value c
-            | :? Unit as c -> Units.value c
+            | :? Size as c -> Units.Size.value c
+            | :? Angle as a -> Units.Angle.value a
             | :? FontSize as f -> Fonts.value f
             | :? BorderStyle as b -> BorderStyle.value b
             | :? BorderWidth as b -> BorderWidth.value b
@@ -74,6 +77,9 @@ module Css =
         | AnimationFillModes of FillMode list
         | AnimationPlayState of PlayState
         | AnimationPlayStates of PlayState list
+
+        | Transform of Transform
+        | Transforms of Transform list
 
     let label = "label"
     let hover = ":hover"
@@ -130,6 +136,9 @@ module Css =
                 | AnimationFillModes fs       -> animationFillMode       ==> combineComma fs Animation.value
                 | AnimationPlayState p        -> animationPlayState      ==> Animation.value p
                 | AnimationPlayStates ps      -> animationPlayState      ==> combineComma ps Animation.value
+
+                | Transform t   -> transform  ==> Transform.value t
+                | Transforms ts -> transform ==> combineWs ts Transform.value
 
         )  |> createObj
 

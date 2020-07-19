@@ -17,6 +17,7 @@
     <Compile Include="Color.fs" />
     <Compile Include="Border.fs" />
     <Compile Include="Animation.fs" />
+    <Compile Include="Transform.fs" />
     <Compile Include="Css.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="Fss.fs" />
