@@ -3,15 +3,16 @@
 open Fable.Core
 open Fable.Core.JsInterop
 
-open Fss.Color
-open Fss.Units
-open Fss.Fonts
-open Fss.Border
-open Fss.BorderStyle
-open Fss.BorderWidth
-open Fss.BorderRadius
-open Fss.BorderColor
-open Fss.Utilities.Types
+open Color
+open Units
+open Fonts
+open Border
+open BorderStyle
+open BorderWidth
+open BorderRadius
+open BorderColor
+open Utilities.Types
+open Animation
 
 module Main =
     [<Import("css", from="emotion")>]

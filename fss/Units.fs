@@ -39,7 +39,7 @@ module Units =
             | Vmin v -> v
 
     // Absolute
-    let px (v: int): Unit = sprintf "%dpx"v |> Px
+    let px (v: int): Unit = sprintf "%dpx" v |> Px
     let inc (v: float): Unit = sprintf "%.1fin" v |> In
     let cm (v: float): Unit = sprintf "%.1fcm" v |> Cm
     let mm (v: float): Unit = sprintf "%.1fmm" v |> Mm
