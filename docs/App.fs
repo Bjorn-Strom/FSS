@@ -7,14 +7,14 @@ open Fable.React.Props
 open Fable.Core.JsInterop
 
 open Fss
-open Fss.Main
-open Fss.Color
-open Fss.Units
-open Fss.Fonts
-open Fss.BorderStyle
-open Fss.BorderWidth
-open Fss.BorderColor
-open Fss.Animation
+open Main
+open Color
+open Units
+open Fonts
+open BorderStyle
+open BorderWidth
+open BorderColor
+open Animation
 
 type Model =
     { Message : string}
@@ -165,15 +165,51 @@ let render (model: Model) (dispatch: Msg -> unit) =
                 Animation [(sec 3.0); Ease; (sec 1.0); Infinite; Reverse; Both; Running]
             ]
 
+    let secondAnimation =
+        fss
+            [
+                AnimationName "Foobar"
+                AnimationDuration (sec 3.0)
+                AnimationTimingFunction Ease
+                AnimationDelay (mSec 1.0)
+                AnimationIterationCount Infinite
+                AnimationDirection Reverse
+                AnimationFillMode Both
+                AnimationPlayState Running
+            ]
+
+    let thirdAnimation =
+        fss
+            [
+                AnimationNames [ "Foo"; "Bar"; "FooBar" ] 
+                AnimationDurations [(sec 1.0); (sec 2.0); (sec 3.0)]
+                AnimationTimingFunctions [Ease; EaseIn; EaseOut]
+                AnimationDelays [(sec 1.0); (mSec 2.0); (sec 3.0)]
+                AnimationIterationCounts [(count 1.0); (count 2.0); Infinite]
+                AnimationDirections [Normal; Reverse; Alternate]
+                AnimationFillModes [Forwards; Backwards; Both]
+                AnimationPlayStates [Running; Paused; Running]
+            ]
+
     div []
         [
             ColorExamples
             Fonts
             Border
 
-            span [ ClassName animation]
+            div [ ClassName animation]
                 [
                     str "farts"
+                ]
+
+            div [ ClassName secondAnimation ]
+                [
+                    str "farts2"
+                ]
+
+            div [ ClassName thirdAnimation ]
+                [
+                    str "farts3"
                 ]
 
         ]

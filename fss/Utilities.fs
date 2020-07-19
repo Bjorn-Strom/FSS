@@ -3,10 +3,11 @@ namespace Fss.Utilities
 module Types =
     type ICss = interface end
 
-    let evalCssListToString (list: 'a list) (value: 'a -> string) =
+    let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
         list
         |> List.map value
-        |> String.concat " "
+        |> String.concat seperator
+
 
 module Converters =
     let floatToPercent (f: float): string = sprintf "%d%%" (int <| f * 100.0)

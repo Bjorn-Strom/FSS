@@ -59,8 +59,10 @@ module Animation =
     // Animation count
     type IterationCount =
         | Infinite
-        | Value of float
+        | Value of string
         interface IAnimation
+
+    let count v = string v |> Value
 
     let iterationCountValue =
         function
@@ -117,6 +119,7 @@ module Animation =
             | :? Direction as d -> directionValue d
             | :? FillMode as f -> fillModeValue f
             | :? PlayState as p -> playStateValue p
+            | _ -> "Unknown animation attribute"
 
     let animation = "animation"
     let animationName = "animation-name"

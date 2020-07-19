@@ -57,6 +57,7 @@ module Main =
 
         | Animation of IAnimation list
         | AnimationName of string
+        | AnimationNames of string list
         | AnimationDuration of Time
         | AnimationDurations of Time list
         | AnimationTimingFunction of Timing
@@ -76,53 +77,58 @@ module Main =
     let label = "label"
     let hover = ":hover"
 
+    let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
+    let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
+
+
     let rec createPOJO (attributeList: CSSAttribute list) = 
         attributeList
         |> List.map (
             function
-                | Label l -> label ==> l
-                | Color c -> color ==> Color.value c
+                | Label l            -> label           ==> l
+                | Color c            -> color           ==> Color.value c
                 | BackgroundColor bc -> backgroundColor ==> Color.value bc
-                | Hover h -> hover ==> createPOJO h
-                | FontSize f -> fontSize ==> value f
+                | Hover h            -> hover           ==> createPOJO h
+                | FontSize f         -> fontSize        ==> value f
 
-                | Border b -> border ==> evalCssListToString b value
-                | BorderStyle bss -> borderStyle ==> evalCssListToString bss BorderStyle.value
+                | Border b        -> border      ==> combineWs b value
+                | BorderStyle bss -> borderStyle ==> combineWs bss BorderStyle.value
 
-                | BorderWidth bws -> borderWidth ==> evalCssListToString bws value
-                | BorderTopWidth bw -> borderTopWidth ==> value bw
-                | BorderRightWidth bw -> borderRightWidth ==> value bw
+                | BorderWidth bws      -> borderWidth       ==> combineWs bws value
+                | BorderTopWidth bw    -> borderTopWidth    ==> value bw
+                | BorderRightWidth bw  -> borderRightWidth  ==> value bw
                 | BorderBottomWidth bw -> borderBottomWidth ==> value bw
-                | BorderLeftWidth bw -> borderLeftWidth ==> value bw
+                | BorderLeftWidth bw   -> borderLeftWidth   ==> value bw
                
-                | BorderRadius br -> borderRadius ==> evalCssListToString br value
-                | BorderTopLeftRadius br -> borderTopLeftRadius ==> evalCssListToString br value
-                | BorderTopRightRadius br -> borderTopRightRadius ==> evalCssListToString br value
-                | BorderBottomRightRadius br -> borderBottomRightRadius ==> evalCssListToString br value
-                | BorderBottomLeftRadius br -> borderBottomLeftRadius ==> evalCssListToString br value
+                | BorderRadius br            -> borderRadius            ==> combineWs br value
+                | BorderTopLeftRadius br     -> borderTopLeftRadius     ==> combineWs br value
+                | BorderTopRightRadius br    -> borderTopRightRadius    ==> combineWs br value
+                | BorderBottomRightRadius br -> borderBottomRightRadius ==> combineWs br value
+                | BorderBottomLeftRadius br  -> borderBottomLeftRadius  ==> combineWs br value
 
-                | BorderColor bc -> borderColor ==> evalCssListToString bc Color.value
-                | BorderTopColor bc -> borderTopColor ==> Color.value bc
-                | BorderRightColor bc -> borderRightColor ==> Color.value bc
+                | BorderColor bc       -> borderColor       ==> combineWs bc Color.value
+                | BorderTopColor bc    -> borderTopColor    ==> Color.value bc
+                | BorderRightColor bc  -> borderRightColor  ==> Color.value bc
                 | BorderBottomColor bc -> borderBottomColor ==> Color.value bc
-                | BorderLeftColor bc -> borderLeftColor ==> Color.value bc
+                | BorderLeftColor bc   -> borderLeftColor   ==> Color.value bc
 
-                | Animation av -> animation ==> evalCssListToString av Animation.value
-                | AnimationName n -> animatioName ==> n
-                | AnimationDuration d -> animationDuration ==> Animation.value
-                | AnimationDurations ds -> animationDuration ==> evalCssListToString ds Animation.value
-                | AnimationTimingFunction t ->  animationTimingFunction ==> Animation.value Timing
-                | AnimationTimingFunctions ts -> animationTimingFunction ==> evalCssListToString ts Animation.value
-                | AnimationDelay d -> animationDelay ==> Animation.value d
-                | AnimationDelays ds -> animationDelay ==> evalCssListToString ds Animation.value
-                | AnimationIterationCount i -> animationiterationCount ==> Animation.value i
-                | AnimationIterationCounts of IterationCount list
-                | AnimationDirection of Direction
-                | AnimationDirections of Direction list
-                | AnimationFillMode of FillMode
-                | AnimationFillModes of FillMode list
-                | AnimationPlayState of PlayState
-                | AnimationPlayStates of PlayState list
+                | Animation av                -> animation               ==> combineWs av Animation.value
+                | AnimationName n             -> animationName           ==> n
+                | AnimationNames ns           -> animationName           ==> String.concat ", " ns
+                | AnimationDuration d         -> animationDuration       ==> Animation.value d
+                | AnimationDurations ds       -> animationDuration       ==> combineComma ds Animation.value
+                | AnimationTimingFunction t   -> animationTimingFunction ==> Animation.value t
+                | AnimationTimingFunctions ts -> animationTimingFunction ==> combineComma ts Animation.value
+                | AnimationDelay d            -> animationDelay          ==> Animation.value d
+                | AnimationDelays ds          -> animationDelay          ==> combineComma ds Animation.value
+                | AnimationIterationCount i   -> animationIterationCount ==> Animation.value i
+                | AnimationIterationCounts is -> animationIterationCount ==> combineComma is Animation.value
+                | AnimationDirection d        -> animationDirection      ==> Animation.value d
+                | AnimationDirections ds      -> animationDirection      ==> combineComma ds Animation.value
+                | AnimationFillMode f         -> animationFillMode       ==> Animation.value f
+                | AnimationFillModes fs       -> animationFillMode       ==> combineComma fs Animation.value
+                | AnimationPlayState p        -> animationPlayState      ==> Animation.value p
+                | AnimationPlayStates ps      -> animationPlayState      ==> combineComma ps Animation.value
 
         )  |> createObj
 
