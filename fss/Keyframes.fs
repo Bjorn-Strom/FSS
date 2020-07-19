@@ -2,72 +2,31 @@
 
 open Fable.Core
 open Fable.Core.JsInterop
+open Browser
 
+open Css
 open Utilities.Types
-
-
-open Color
-
 
 module Keyframes =
     [<Import("keyframes", from="emotion")>]
     let private kframes(x) = jsNative
-    let kframes' x = kframes(x)
-
+    let private kframes' x = kframes(x)
 
     type KeyframeAttribute =
-        | Frame of int * ICSSProperty list
-        | Frames of int list * ICSSProperty list
+        | Frame of int * CSSProperty list
+        | Frames of int list * CSSProperty list
 
-    let rec private createPOJO (attributeList: KeyframeAttribute list) =
+    let frameValue f = sprintf "%d%%" f
+    let frameValues fs = combineList fs frameValue ", "
+
+    let rec createPOJO (attributeList: KeyframeAttribute list) =
         attributeList
         |> List.map (
             function 
-                | Frame (f, ps) -> sprintf "%d%%" f ==> "foo"
-        )
+                | Frame (f, ps) -> frameValue f ==> createCSSObject ps
+                | Frames (fs, ps) -> frameValues fs ==> createCSSObject ps
+        ) |> createObj
 
-        (*
-
-            keyframes
-                [
-                    frame 0, [ BackgroundColor red; Color blue ]
-                ]
-
-        *)
-
-
-        (*
-                [
-                    "background-color" ==> "red"
-                    "color" ==> "blue"
-                ]
-            "100%" ==> createObj
-                [
-                    "background-color" ==> "blue"
-                    "color" ==> "red"
-                ]
-        ]
-        *)
-
-    (*
-    type Frame = int
-
-    let frame (n: Frame) (props: ICSSProperty list) = 0 
-    
-        {
-            "0%": { "background-color: red", "color: blue" }
-            "100%": { "background-color: blue", "color: red"}
-        }
-
-    type KeyFrame = 
-        | KeyFrame of obj
-        interface IAnimation
-
-    let keyframes = 0
-
-        keyframes
-            [
-                frame 0, [] 
-                frames [ [0; 100] , []]
-            ]
-    *)
+    let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame
+    let frames (f: int list) (properties: CSSProperty list) = (f, properties) |> Frames
+    let keyframes (attributeList: KeyframeAttribute list) = attributeList |> createPOJO |> kframes'

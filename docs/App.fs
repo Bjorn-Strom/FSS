@@ -9,6 +9,7 @@ open Browser
 
 open Fss
 open Fss
+open Css
 open Color
 open Units
 open Fonts
@@ -30,6 +31,8 @@ let init() =
 let update (msg: Msg) (model: Model): Model =
     match msg with
     | NoMessage -> model
+
+   (*
 
 let ColorExamples =
     fragment []
@@ -156,9 +159,40 @@ let Border =
                     ]
             )] [ str "Now in color!"]
 
-        ]
+        ]*)
+
+open Keyframes
 
 let render (model: Model) (dispatch: Msg -> unit) =
+    let bar = 
+        keyframes
+            [
+                frames [0; 20; 50; 80 ] [BackgroundColor green]
+                frame 50 [BackgroundColor red]
+            ] 
+
+    let foo = 
+        fss 
+            [
+                AnimationName bar
+                AnimationDuration (sec 3.0)
+                AnimationIterationCount Infinite
+                AnimationPlayState Running
+            ]
+
+    div [] 
+        [
+            str "foo" 
+            div [ClassName foo]
+                [
+                    str "ANIMATE PLZ"
+                ]
+        ]
+    
+
+
+
+    (*
     let FOOBAR =
         createObj
             [
@@ -233,6 +267,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
                 ]
 
         ]
+*)
+
 
 Program.mkSimple init update render
 |> Program.withReactSynchronous "elmish-app"

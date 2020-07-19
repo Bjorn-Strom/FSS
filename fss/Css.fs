@@ -3,6 +3,8 @@
 open Fable.Core
 open Fable.Core.JsInterop
 
+open Browser
+
 open Color
 open Units
 open Fonts
@@ -17,7 +19,7 @@ open Animation
 module Css = 
     [<Import("css", from="emotion")>]
     let private css(x) = jsNative
-    let private css' x = css(x) 
+    let css' x = css(x) 
 
     let value (v: ICSSProperty): string =
         match v with
@@ -80,6 +82,7 @@ module Css =
     let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
 
     let rec createCSSObject (attributeList: CSSProperty list) = 
+        console.log(attributeList)
         attributeList
         |> List.map (
             function
