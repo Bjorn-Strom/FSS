@@ -157,8 +157,6 @@ let Border =
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
-    // animation: 3s ease-in 1s infinite reverse both running slidein;
-
     let animation =
         fss
             [
