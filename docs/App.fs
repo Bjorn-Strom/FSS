@@ -31,8 +31,6 @@ let update (msg: Msg) (model: Model): Model =
     match msg with
     | NoMessage -> model
 
-   (*
-
 let ColorExamples =
     fragment []
         [
@@ -47,7 +45,7 @@ let ColorExamples =
             p [ ClassName (fss [Color (hsla 120 0.5 0.5 0.5)])] [ str "HSL can also be transparent"]
         ]
 
-let Fonts =
+let FontExamples =
     fragment []
         [
             h1 [] [ str "fonts" ]
@@ -72,7 +70,7 @@ let Fonts =
             p [] [ str "and more!"]
         ]
 
-let Border =
+let BorderExamples =
     fragment []
         [
             h1 [] [ str "borders"]
@@ -96,12 +94,12 @@ let Border =
                     ])] [ str "I have a thin border" ]
             p [ ClassName (fss 
                     [
-                        BorderWidth [(px 3)]
+                        BorderWidth [px 3]
                         BorderStyle [Solid]
                     ])] [ str "I have a 3px border" ]
             p [ ClassName (fss 
                     [
-                        BorderWidth [(px 3); (px 4); (px 5); (px 6)]
+                        BorderWidth [px 3; px 4; px 5; px 6]
                         BorderStyle [Solid]
                     ])] [ str "I have a mixed width border" ]
             p [ ClassName (fss [Border [Thick; Double; green]])] [ str "Border shorthand also works" ]
@@ -129,25 +127,25 @@ let Border =
                     [
                         Color white
                         BackgroundColor purple
-                        BorderRadius [(px 10); (px (100 / 120)) ]
+                        BorderRadius [px 10; px (100 / 120) ]
                     ])] [ str "Border radius!"]
             p [ ClassName (fss
                     [
                         Color yellowgreen
                         BackgroundColor purple
-                        BorderTopLeftRadius [(px 10)]
+                        BorderTopLeftRadius [px 10]
                     ])] [ str "Top left Border radius!"]
             p [ ClassName (fss
                     [
                         BorderStyle [Solid]
-                        BorderWidth [(px 15)]
-                        BorderColor [red; (rgba 170 50 220 0.6); green]                        
+                        BorderWidth [px 15]
+                        BorderColor [red; rgba 170 50 220 0.6; green]                        
                     ]
             )] [ str "Now in color!"]
             
             p [ ClassName (fss
                     [
-                        Border [Dashed; (px 15)]
+                        Border [Dashed; px 15]
                         BorderTopWidth (px 20)
                         BorderTopColor deeppink
                         BorderBottomWidth (px 1)
@@ -158,129 +156,59 @@ let Border =
                     ]
             )] [ str "Now in color!"]
 
-        ]*)
+        ]
 
-open Keyframes
-
-let render (model: Model) (dispatch: Msg -> unit) =
-    let bar = 
+let AnimationExamples =
+    let bounceKeyFrames = 
         keyframes
             [
                 frames [0; 20; 53; 80; 100 ]
                     [
-                        Transform (Translate3D((px 0), (px 0), (px 0)))
+                        Transform (Translate3D(px 0, px 0, px 0))
+                        BackgroundColor red
                     ]
                 frames [40; 43]
                     [
-                        Transform (Translate3D((px 0), (px -30), (px 0)))
+                        Transform <| Translate3D(px 0, px -30, px 0)
+                        BackgroundColor blue
                     ]
                 frame 70
                     [
-                        Transform (Translate3D((px 0), (px -15), (px 0)))
+                        Transform <| Translate3D(px 0, px -15, px 0)
+                        BackgroundColor green
                     ]
                 frame 90
                     [
-                        Transform (Translate3D((px 0), (px -4), (px 0)))
+                        Transform <| Translate3D(px 0, px -4, px 0)
+                        BackgroundColor orange
                     ]
             ] 
 
-    let foo = 
-        fss 
-            [
+    let bounceAnimation = fss [ Animation [bounceKeyFrames; sec 1.0; Ease; Infinite] ]
+    div []
+        [
+            p [ClassName bounceAnimation] [str "Bouncing text"]
+        ]
+                (*
                 AnimationName bar
                 AnimationDuration (sec 1.0)
                 AnimationTimingFunction Ease
                 AnimationIterationCount Infinite
-            ]
+                *)
+
+let render (model: Model) (dispatch: Msg -> unit) =
 
     div [] 
         [
-            str "foo" 
-            div [ClassName foo]
-                [
-                    str "ANIMATE PLZ"
-                ]
+            ColorExamples
+            FontExamples
+            BorderExamples
+            AnimationExamples
         ]
     
 
 
 
-    (*
-    let FOOBAR =
-        createObj
-            [
-                "0%" ==> createObj
-                    [
-                        "background-color" ==> "red"
-                        "color" ==> "blue"
-                    ]
-                "100%" ==> createObj
-                    [
-                        "background-color" ==> "blue"
-                        "color" ==> "red"
-                    ]
-            ]
-
-    let foobar = kframes' FOOBAR
-
-    console.log(FOOBAR)
-    console.log(foobar)
-
-    let animation =
-        fss
-            [
-                Animation [ ]
-            ]
-
-    let secondAnimation =
-        fss
-            [
-                AnimationName "animation-2ysnvp"
-                AnimationDuration (sec 3.0)
-                AnimationTimingFunction Ease
-                AnimationDelay (mSec 1.0)
-                AnimationIterationCount Infinite
-                AnimationDirection Reverse
-                AnimationFillMode Both
-                AnimationPlayState Running
-            ]
-
-    let thirdAnimation =
-        fss
-            [
-                AnimationNames [ "Foo"; "Bar"; "FooBar" ] 
-                AnimationDurations [(sec 1.0); (sec 2.0); (sec 3.0)]
-                AnimationTimingFunctions [Ease; EaseIn; EaseOut]
-                AnimationDelays [(sec 1.0); (mSec 2.0); (sec 3.0)]
-                AnimationIterationCounts [(count 1.0); (count 2.0); Infinite]
-                AnimationDirections [Normal; Reverse; Alternate]
-                AnimationFillModes [Forwards; Backwards; Both]
-                AnimationPlayStates [Running; Paused; Running]
-            ]
-
-    div []
-        [
-            ColorExamples
-            Fonts
-            Border
-
-            div [ ClassName animation]
-                [
-                    str "farts"
-                ]
-
-            div [ ClassName secondAnimation ]
-                [
-                    str "farts2"
-                ]
-
-            div [ ClassName thirdAnimation ]
-                [
-                    str "farts3"
-                ]
-
-        ]
-*)
 
 
 Program.mkSimple init update render

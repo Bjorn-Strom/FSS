@@ -119,7 +119,7 @@ module Animation =
             | :? Direction as d -> directionValue d
             | :? FillMode as f -> fillModeValue f
             | :? PlayState as p -> playStateValue p
-            | _ -> "Unknown animation attribute"
+            | _ as s -> string s
 
     let animation = "animation"
     let animationName = "animation-name"

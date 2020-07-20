@@ -88,7 +88,6 @@ module Css =
     let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
 
     let rec createCSSObject (attributeList: CSSProperty list) = 
-        console.log(attributeList)
         attributeList
         |> List.map (
             function
@@ -137,7 +136,7 @@ module Css =
                 | AnimationPlayState p        -> animationPlayState      ==> Animation.value p
                 | AnimationPlayStates ps      -> animationPlayState      ==> combineComma ps Animation.value
 
-                | Transform t   -> transform  ==> Transform.value t
+                | Transform t   -> transform ==> Transform.value t
                 | Transforms ts -> transform ==> combineWs ts Transform.value
 
         )  |> createObj
