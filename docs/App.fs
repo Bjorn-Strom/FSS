@@ -159,42 +159,57 @@ let BorderExamples =
         ]
 
 let AnimationExamples =
-    let bounceKeyFrames = 
-        keyframes
-            [
-                frames [0; 20; 53; 80; 100 ]
-                    [
-                        Transform (Translate3D(px 0, px 0, px 0))
-                        BackgroundColor red
-                    ]
-                frames [40; 43]
-                    [
-                        Transform <| Translate3D(px 0, px -30, px 0)
-                        BackgroundColor blue
-                    ]
-                frame 70
-                    [
-                        Transform <| Translate3D(px 0, px -15, px 0)
-                        BackgroundColor green
-                    ]
-                frame 90
-                    [
-                        Transform <| Translate3D(px 0, px -4, px 0)
-                        BackgroundColor orange
-                    ]
-            ] 
+    let bounceAnimation =
+        let bounceFrames = 
+            keyframes
+                [
+                    frames [0; 20; 53; 80; 100 ]
+                        [
+                            Transform (Translate3D(px 0, px 0, px 0))
+                            BackgroundColor red
+                        ]
+                    frames [40; 43]
+                        [
+                            Transform <| Translate3D(px 0, px -30, px 0)
+                            BackgroundColor blue
+                        ]
+                    frame 70
+                        [
+                            Transform <| Translate3D(px 0, px -15, px 0)
+                            BackgroundColor green
+                        ]
+                    frame 90
+                        [
+                            Transform <| Translate3D(px 0, px -4, px 0)
+                            BackgroundColor orange
+                        ]
+                ] 
 
-    let bounceAnimation = fss [ Animation [bounceKeyFrames; sec 1.0; Ease; Infinite] ]
-    div []
-        [
-            p [ClassName bounceAnimation] [str "Bouncing text"]
-        ]
-                (*
-                AnimationName bar
-                AnimationDuration (sec 1.0)
-                AnimationTimingFunction Ease
+        fss [ Animation [bounceFrames; sec 1.0; Ease; Infinite] ]
+
+    let sizeAnimation =
+        let sizeFrames =
+            keyframes
+                [
+                    frame 0 [ FontSize (pct 50) ]
+                    frame 50 [ FontSize (pct 150)]
+                    frame 100 [ FontSize (pct 50)]
+                ]
+
+        fss 
+            [
+                AnimationName sizeFrames
+                AnimationDuration (sec 3.0)
+                AnimationTimingFunction EaseInOut
                 AnimationIterationCount Infinite
-                *)
+            ]
+
+    fragment []
+        [
+            p [] [ str "Things can animate now!" ]
+            p [ClassName bounceAnimation] [str "Bouncing text"]
+            p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
+        ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
 
@@ -205,11 +220,6 @@ let render (model: Model) (dispatch: Msg -> unit) =
             BorderExamples
             AnimationExamples
         ]
-    
-
-
-
-
 
 Program.mkSimple init update render
 |> Program.withReactSynchronous "elmish-app"
