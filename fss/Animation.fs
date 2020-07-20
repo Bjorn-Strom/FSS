@@ -59,10 +59,10 @@ module Animation =
     // Animation count
     type IterationCount =
         | Infinite
-        | Value of string
+        | Value of int
         interface IAnimation
 
-    let count v = string v |> Value
+    let count v = v |> Value
 
     let iterationCountValue =
         function

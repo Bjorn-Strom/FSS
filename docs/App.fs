@@ -201,7 +201,7 @@ let AnimationExamples =
                 AnimationName sizeFrames
                 AnimationDuration (sec 3.0)
                 AnimationTimingFunction EaseInOut
-                AnimationIterationCount Infinite
+                AnimationIterationCount (IterationCount.Value 3)
             ]
 
     fragment []

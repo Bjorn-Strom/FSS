@@ -5,13 +5,20 @@ open Fable.Mocha
 open Fable.React
 open Fable.React.Props
 open Fable.ReactTestingLibrary
+open Browser
 
-open Fss.Main
-open Fss.Fonts
-open Fss.Color
-open Fss.Units
-open Fss.BorderStyle
-open Fss.BorderWidth
+open Fss
+open Fss
+open Css
+open Color
+open Units.Size
+open Fonts
+open BorderStyle
+open BorderWidth
+open BorderColor
+open Animation
+open Keyframes
+open Transform
 
 let testCase' name case = 
     testCase name <| fun _ -> 
@@ -149,7 +156,7 @@ let CssTests =
                             []
 
                         div 
-                            [ Id "style"; ClassName (fss [ BorderStyle [Dashed; Groove; None; Dotted] ]) ]
+                            [ Id "style"; ClassName (fss [ BorderStyle [Dashed; Groove; BorderStyle.None; Dotted] ]) ]
                             []
                         div
                             [ Id "radius"; ClassName (fss [ BorderRadius [(px 10)]])] []
@@ -167,6 +174,55 @@ let CssTests =
             Expect.equal (getValue style "border-bottom-style") "none" "mixed border style"
             Expect.equal (getValue style "border-left-style") "dotted" "mixed border style"
             Expect.equal (getValue radius "border-top-left-radius") "10px" "border radius"
+
+        testCase' "Animations" <| fun _ ->
+
+            let testFrames = keyframes [ frame 0 [ BackgroundColor red]; frame 100 [ BackgroundColor blue] ]
+            let shortHand = fss [ Animation [testFrames; sec 10.0; Ease; sec 200.0; Infinite; Both; AlternateReverse; Running] ]
+            let longNotation = 
+                fss 
+                    [
+                        AnimationName (string testFrames)
+                        AnimationDuration (sec 10.0)
+                        AnimationTimingFunction Ease
+                        AnimationDelay (sec 200.0)
+                        AnimationIterationCount Infinite
+                        AnimationFillMode Both
+                        AnimationDirection AlternateReverse
+                        AnimationPlayState Running
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div [ Id "anim"; ClassName shortHand ] []    
+                        div [ Id "anim2"; ClassName longNotation ] []    
+                    ]
+            ) |> ignore
+            
+            let anim = getComputedCssById("anim")
+            let anim2 = getComputedCssById("anim2")
+
+            Expect.equal (getValue anim "animation-name") (string testFrames) "Sets animation name from shorthand"
+            Expect.equal (getValue anim "animation-duration") "10s" "Sets animation duration from shorthand"
+            Expect.equal (getValue anim "animation-timing-function") "ease" "Sets animation timing function from shorthand"
+            Expect.equal (getValue anim "animation-delay") "200s" "Sets animation delay from shorthand"
+            Expect.equal (getValue anim "animation-iteration-count") "infinite" "Sets animation iteration count from shorthand"
+            Expect.equal (getValue anim "animation-fill-mode") "both" "Sets animation fillmode from shorthand"
+            Expect.equal (getValue anim "animation-direction") "alternate-reverse" "Sets animation direction count from shorthand"
+            Expect.equal (getValue anim "animation-play-state") "running" "Sets animation playstate from shorthand"
+
+            Expect.equal (getValue anim2 "animation-name") (string testFrames) "Sets animation name"
+            Expect.equal (getValue anim2 "animation-duration") "10s" "Sets animation duration"
+            Expect.equal (getValue anim2 "animation-timing-function") "ease" "Sets animation timing function "
+            Expect.equal (getValue anim2 "animation-delay") "200s" "Sets animation delay"
+            Expect.equal (getValue anim2 "animation-iteration-count") "infinite" "Sets animation iteration count"
+            Expect.equal (getValue anim2 "animation-fill-mode") "both" "Sets animation fillmode"
+            Expect.equal (getValue anim2 "animation-direction") "alternate-reverse" "Sets animation direction count"
+            Expect.equal (getValue anim2 "animation-play-state") "running" "Sets animation playstate"
+
+
+
     ]
 
 Mocha.runTests CssTests |> ignore
