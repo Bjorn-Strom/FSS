@@ -81,6 +81,13 @@ module Css =
         | Transform of Transform
         | Transforms of Transform list
 
+        | Transition of string
+        | Transitions of ICSSProperty list
+        | TransitionDelay of Time
+        | TransitionDuration of Time
+        | TransitionProperty of ICSSProperty
+        | TransitionTimingFunction of Animation.Timing
+
     let label = "label"
     let hover = ":hover"
 
@@ -138,6 +145,13 @@ module Css =
 
                 | Transform t   -> transform ==> Transform.value t
                 | Transforms ts -> transform ==> combineWs ts Transform.value
+
+                | Transition t               -> "transition"                 ==> t//value t
+                | Transitions ts             -> "transition"                 ==> combineComma ts value
+                | TransitionDelay t          -> "transition-delay"           ==> Animation.value t
+                | TransitionDuration t       -> "transition-duration"        ==> Animation.value t
+                | TransitionProperty t       -> "transition-property"        ==> value t
+                | TransitionTimingFunction t -> "transition-timing-function" ==> Animation.value t
 
         )  |> createObj
 

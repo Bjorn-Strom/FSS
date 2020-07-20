@@ -18,14 +18,9 @@ open Animation
 open Keyframes
 open Transform
 
-type Model =
-    { Message : string}
-
-type Msg =
-    | NoMessage
-
-let init() =
-    { Message = "Hello" }
+type Model = { Message : string}
+type Msg = | NoMessage
+let init() = { Message = "Hello" }
 
 let update (msg: Msg) (model: Model): Model =
     match msg with
@@ -209,6 +204,16 @@ let AnimationExamples =
             p [] [ str "Things can animate now!" ]
             p [ClassName bounceAnimation] [str "Bouncing text"]
             p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
+            p [ClassName (fss [
+                BackgroundColor red
+                Transition "background-color"
+                TransitionDuration (sec 3.0)
+                Hover 
+                    [
+                        BackgroundColor green
+                    ]
+                    
+            ])] [ str "I have a transition! Hover me!" ]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
