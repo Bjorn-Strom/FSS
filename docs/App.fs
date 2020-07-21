@@ -17,6 +17,7 @@ open BorderColor
 open Animation
 open Keyframes
 open Transform
+open Transition
 
 type Model = { Message : string}
 type Msg = | NoMessage
@@ -154,43 +155,42 @@ let BorderExamples =
         ]
 
 let AnimationExamples =
-    let bounceAnimation =
-        let bounceFrames = 
-            keyframes
-                [
-                    frames [0; 20; 53; 80; 100 ]
-                        [
-                            Transform (Translate3D(px 0, px 0, px 0))
-                            BackgroundColor red
-                        ]
-                    frames [40; 43]
-                        [
-                            Transform <| Translate3D(px 0, px -30, px 0)
-                            BackgroundColor blue
-                        ]
-                    frame 70
-                        [
-                            Transform <| Translate3D(px 0, px -15, px 0)
-                            BackgroundColor green
-                        ]
-                    frame 90
-                        [
-                            Transform <| Translate3D(px 0, px -4, px 0)
-                            BackgroundColor orange
-                        ]
-                ] 
+    let bounceFrames = 
+        keyframes
+            [
+                frames [0; 20; 53; 80; 100 ]
+                    [
+                        Transform (Translate3D(px 0, px 0, px 0))
+                        BackgroundColor red
+                    ]
+                frames [40; 43]
+                    [
+                        Transform <| Translate3D(px 0, px -30, px 0)
+                        BackgroundColor blue
+                    ]
+                frame 70
+                    [
+                        Transform <| Translate3D(px 0, px -15, px 0)
+                        BackgroundColor green
+                    ]
+                frame 90
+                    [
+                        Transform <| Translate3D(px 0, px -4, px 0)
+                        BackgroundColor orange
+                    ]
+            ] 
 
-        fss [ Animation [bounceFrames; sec 1.0; Ease; Infinite] ]
+    let sizeFrames =
+        keyframes
+            [
+                frame 0 [ FontSize (pct 50) ]
+                frame 50 [ FontSize (pct 150) ]
+                frame 100 [ FontSize (pct 50) ]
+            ]
+
+    let bounceAnimation = fss [ Animation [bounceFrames; sec 1.0; Ease; Infinite] ]
 
     let sizeAnimation =
-        let sizeFrames =
-            keyframes
-                [
-                    frame 0 [ FontSize (pct 50) ]
-                    frame 50 [ FontSize (pct 150)]
-                    frame 100 [ FontSize (pct 50)]
-                ]
-
         fss 
             [
                 AnimationName sizeFrames
@@ -199,14 +199,26 @@ let AnimationExamples =
                 AnimationIterationCount (IterationCount.Value 3)
             ]
 
+    let combinedAnimations =
+        fss
+            [
+                Animations 
+                    [
+                        [ bounceFrames; sec 1.0; Ease; Infinite]
+                        [ sizeFrames; sec 3.0; EaseInOut; IterationCount.Value 3 ]
+                    ]
+            ]
+
     fragment []
         [
             p [] [ str "Things can animate now!" ]
             p [ClassName bounceAnimation] [str "Bouncing text"]
             p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
+            p [ClassName combinedAnimations] [str "COMBINED"]
             p [ClassName (fss [
                 BackgroundColor red
-                Transition "background-color"
+                //Transition BackgroundColorFOO
+                // Transition all (ms 200) ease-in-out
                 TransitionDuration (sec 3.0)
                 Hover 
                     [

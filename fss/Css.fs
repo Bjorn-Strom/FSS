@@ -2,7 +2,6 @@
 
 open Fable.Core
 open Fable.Core.JsInterop
-
 open Browser
 
 open Color
@@ -17,6 +16,7 @@ open BorderColor
 open Utilities.Types
 open Animation
 open Transform
+open Transition
 
 module Css = 
     [<Import("css", from="emotion")>]
@@ -60,9 +60,10 @@ module Css =
         | BorderBottomColor of CssColor
         | BorderLeftColor of CssColor
 
-        | Animation of IAnimation list
-        | AnimationName of string
-        | AnimationNames of string list
+        | Animation of IAnimation list  
+        | Animations of IAnimation list list
+        | AnimationName of IAnimation
+        | AnimationNames of IAnimation list
         | AnimationDuration of Time
         | AnimationDurations of Time list
         | AnimationTimingFunction of Timing
@@ -81,7 +82,7 @@ module Css =
         | Transform of Transform
         | Transforms of Transform list
 
-        | Transition of string
+        | Transition of string //Transition
         | Transitions of ICSSProperty list
         | TransitionDelay of Time
         | TransitionDuration of Time
@@ -93,6 +94,14 @@ module Css =
 
     let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
     let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
+    let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
+    let combineAnimations (list: IAnimation list list): string =
+        combineComma list (fun a -> combineWs a Animation.value)
+        (*
+            list
+        |> List.map (fun a -> combineWs a Animation.value)
+        |> String.concat ", "
+        *)
 
     let rec createCSSObject (attributeList: CSSProperty list) = 
         attributeList
@@ -125,9 +134,10 @@ module Css =
                 | BorderBottomColor bc -> borderBottomColor ==> Color.value bc
                 | BorderLeftColor bc   -> borderLeftColor   ==> Color.value bc
 
-                | Animation av                -> animation               ==> combineWs av Animation.value
-                | AnimationName n             -> animationName           ==> n
-                | AnimationNames ns           -> animationName           ==> String.concat ", " ns
+                | Animation a                 -> animation               ==> combineWs a Animation.value
+                | Animations ans              -> animation               ==> combineAnimations ans
+                | AnimationName n             -> animationName           ==> string n
+                | AnimationNames ns           -> animationName           ==> combineAnimationNames ns
                 | AnimationDuration d         -> animationDuration       ==> Animation.value d
                 | AnimationDurations ds       -> animationDuration       ==> combineComma ds Animation.value
                 | AnimationTimingFunction t   -> animationTimingFunction ==> Animation.value t
@@ -146,7 +156,7 @@ module Css =
                 | Transform t   -> transform ==> Transform.value t
                 | Transforms ts -> transform ==> combineWs ts Transform.value
 
-                | Transition t               -> "transition"                 ==> t//value t
+                //| Transition t               -> "transition"                 ==> Transition.value t
                 | Transitions ts             -> "transition"                 ==> combineComma ts value
                 | TransitionDelay t          -> "transition-delay"           ==> Animation.value t
                 | TransitionDuration t       -> "transition-duration"        ==> Animation.value t
