@@ -17,6 +17,7 @@ open BorderColor
 open Animation
 open Keyframes
 open Transform
+open Transition
 
 type Model = { Message : string}
 type Msg = | NoMessage
@@ -202,12 +203,85 @@ let AnimationExamples =
     fragment []
         [
             p [] [ str "Things can animate now!" ]
-            p [ClassName bounceAnimation] [str "Bouncing text"]
-            p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
+            //p [ClassName bounceAnimation] [str "Bouncing text"]
+            //p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
             p [ClassName (fss [
                 BackgroundColor red
-                Transition "background-color"
-                TransitionDuration (sec 3.0)
+
+                // Transition (backgroundColorCurried (sec 2.5) Ease)
+                // Transition (backgroundColorCurried (Some (sec 2.5)) Option.None)
+
+                // Transition <| backgroundColorTupled(Some (sec 2.5), Some Ease)
+                // Transition (backgroundColorTupled(Some (sec 2.5), Option.None))
+    
+                // CSSProperty.Transition (backgroundColor2 (sec 2.5) Ease)
+                Transition (backgroundColor3 (sec 2.5) Ease (sec 2.5))
+
+                (*
+                    Så noe som viser seg å være en liten utfordring med CSS er ting som Transition.
+                    En transition tar inn hva som skal endres, f.eks background-color, hvor lang tid endringen skal skje, om det er noen timing functions på den og evt delay.
+
+                    I CSS vil det se noe sånn ut
+
+                    .foo {
+                        background-color: red
+                        transition: background-color 2.5s ease 2.5s
+                    }
+
+                    .foo:hover {
+                        background-color: green
+                    }
+
+                    Som over 2.5 sec wil gjøre bakgrunnsfargen grønn på hover.
+
+                    Problemet jeg får er kombinasjonen transition vil ha inn, 1 attribute, 2 time og 1 timing function. 
+                    Alle disse er egne typer i mitt system og det å kombinere dem viser seg å være tricky.
+                    Opprinnelig ville jeg gjøre noe slik
+                    Transition [backgroundColor; sec 2.5; Ease; sec 2.5]
+                    Det går ikke, selv med all type-triksingen jeg kan :D 
+
+                    Så jeg har 4 alternative løsninger, og jeg trenger litt hjelp til å finne den "beste"
+
+                    Løsning 1:
+                    Curried funksjon som returnerer en transition og tar in Optional typer som definerer tid og timing
+                        ```
+                        Transition (backgroundColor (Some (sec 2.5)) (Some Ease) (Some (sec 2.5)))
+                        Transition (backgroundColor (Some (sec 2.5)) Option.None Option.None)
+                        ```
+                    Problemer med dette, er at man alltid må gi typer, samt føre Some eller None, som er annoying. I tillegg kolliderer None med en CSS type
+
+                    Løsning 2:
+                    Tupled funksjon som gjør det samme som løsning 1
+                        ```
+                        Transition <| backgroundColor(Some (sec 2.5), Some Ease, Some (Sec 2.5))
+                        Transition (backgroundColor(Some (sec 2.5), Option.None, Option.None))
+                        ```
+                    Samme issues egentlig.
+
+                    Løsning 3:
+                    Denne løsningen er inspirert fra den jeg så Feldman lage til ElmCss.
+                    Som er å ha 1 funksjon for hvert alternativ, såååå
+                    
+                    ```
+                    Transition (backgroundColor1 (sec 2.5))
+                    Transition (backgroundColor2 (sec 2.5) Ease)
+                    Transition (backgroundColor3 (sec 2.5) Ease (sec 2.5))
+                    ```
+                    
+                    Dette gjør det veldig tydelig hva man skal sende inn, men man trenger plutselig mange funksjoner.
+                    Men gjør det kanskje vanskelig å finne ut hvordan dette brukes.
+                    Hva om man kun ønsker Transition delay og absolutt ikke vil bruke "transition-delay" attributten? :D 
+
+                    Løsning 4:
+                    Kun én funksjon så må man sende inn tomme verdier
+                    ```
+                    Transition (backgroundColor (sec 2.5) NoTiming (sec 0.0))
+                    ```
+                    
+                    En enkel funksjon så må man bare fylle den med alle verdier, selv om man ikke trenger alle
+                *)
+                
+
                 Hover 
                     [
                         BackgroundColor green
@@ -220,9 +294,9 @@ let render (model: Model) (dispatch: Msg -> unit) =
 
     div [] 
         [
-            ColorExamples
-            FontExamples
-            BorderExamples
+            //ColorExamples
+            //FontExamples
+            //BorderExamples
             AnimationExamples
         ]
 

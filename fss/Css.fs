@@ -17,6 +17,7 @@ open BorderColor
 open Utilities.Types
 open Animation
 open Transform
+open Transition
 
 module Css = 
     [<Import("css", from="emotion")>]
@@ -81,7 +82,7 @@ module Css =
         | Transform of Transform
         | Transforms of Transform list
 
-        | Transition of string
+        | Transition of Transition
         | Transitions of ICSSProperty list
         | TransitionDelay of Time
         | TransitionDuration of Time
@@ -146,7 +147,7 @@ module Css =
                 | Transform t   -> transform ==> Transform.value t
                 | Transforms ts -> transform ==> combineWs ts Transform.value
 
-                | Transition t               -> "transition"                 ==> t//value t
+                | Transition t               -> "transition"                 ==> Transition.value t
                 | Transitions ts             -> "transition"                 ==> combineComma ts value
                 | TransitionDelay t          -> "transition-delay"           ==> Animation.value t
                 | TransitionDuration t       -> "transition-duration"        ==> Animation.value t
