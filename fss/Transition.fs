@@ -3,8 +3,6 @@
 open Utilities.Types
 open Animation
 
-open Browser
-
 module Transition =
     type Transition = 
         | TransitionType of string * Time option * Timing option * Time option
