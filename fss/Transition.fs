@@ -1,132 +1,29 @@
-namespace Fss
+﻿namespace Fss
 
-module Transition = 0
-    (*
-    type Transition =
-        | BackgroundColorFOO
+open Utilities.Types
+open Animation
 
-        | background
-        | backgroundColor
-        | backgroundPosition
-        | backgroundSize
-        | border
-        | borderBottom
-        | borderBottomColor
-        | borderBottomLeftRadius
-        | borderBottomRightRadius
-        | borderBottomWidth
-        | borderColor
-        | borderLeft
-        | borderLeftColor
-        | borderLeftWidth
-        | borderRadius
-        | borderRight
-        | borderRightColor
-        | borderRightWidth
-        | borderTop
-        | borderTopColor
-        | borderTopLeftRadius
-        | borderTopRightRadius
-        | borderTopWidth
-        | borderWidth
-        | bottom
-        | boxShadow
-        | caretColor
-        | clip
-        | clipPath
-        | color
-        | columnCount
-        | columnGap
-        | columnRule
-        | columnRuleColor
-        | columnRuleWidth
-        | columnWidth
-        | columns
-        | filter
-        | flex
-        | flexBasis
-        | flexGrow
-        | flexShrink
-        | font
-        | fontSize
-        | fontSizeAdjust
-        | fontStretch
-        | fontVariationSettings
-        | fontWeight
-        | gridColumnGap
-        | gridGap
-        | gridRowGap
-        | height
-        | left
-        | letterSpacing
-        | lineHeight
-        | margin
-        | marginBottom
-        | marginLeft
-        | marginRight
-        | marginTop
-        | mask
-        | maskPosition
-        | maskSize
-        | maxHeight
-        | maxWidth
-        | minHeight
-        | minWidth
-        | objectPosition
-        | offset
-        | offsetAnchor
-        | offsetDistance
-        | offsetPath
-        | offsetRotate
-        | opacity
-        | order
-        | outline
-        | outlineColor
-        | outlineOffset
-        | outlineWidth
-        | padding
-        | paddingBottom
-        | paddingLeft
-        | paddingRight
-        | paddingTop
-        | right
-        | tabSize
-        | textIndent
-        | textShadow
-        | top
-        | transform
-        | transformOrigin
-        | verticalAlign
-        | visibility
-        | width
-        | wordSpacing
-        | zIndex
+open Browser
 
+module Transition =
+    type Transition = 
+        | TransitionType of string * Time option * Timing option * Time option
+        interface ICSSProperty
+
+    let private unwrap = function | TransitionType(a,b,c,d)->(a,b,c,d)
 
     let value (t: Transition): string =
-        match t with
-            | BackgroundColorFOO -> "background-color"
-*)
-(*
-.myStyle {
-    background-color: red;
-    transition: background-color;
-    transition-duration: 3s;
-}
+        let (css, time, timing, delay) = unwrap t
+        match (time, timing, delay) with
+            | Some time, Some timing, Some delay -> sprintf "%s %s %s %s" css (Animation.value time) (Animation.value timing) (Animation.value delay)
+            | Some time, Some timing, _          -> sprintf "%s %s %s" css (Animation.value time) (Animation.value timing)
+            | Some time, _, _                    -> sprintf "%s %s" css (Animation.value time)
+            | _, _, _                            -> css
+                
+    let backgroundColorCurried (time: Time option) (timing: Timing option) (delay: Time option): Transition = ("background-color", time, timing, delay) |> TransitionType
+    
+    let backgroundColorTupled (time: Time option, timing: Timing option) (delay: Time option): Transition = ("background-color", time, timing, delay) |> TransitionType
 
-.myStyle:hover {
-    background-color: green
-}
-
-let myStyle =
-    fss
-        [
-            BackgroundColor red
-            Transition ???
-            TransitionDuration (sec 3.0)
-            Hover 
-                [
-                    BackgroundColor green
-                ]
-        ]
-*)
+    let backgroundColor1 (time: Time) = ("background-color", Some time, Option.None, Option.None) |> TransitionType
+    let backgroundColor2 (time: Time) (timing: Timing) = ("background-color", Some time, Some timing, Option.None) |> TransitionType
+    let backgroundColor3 (time: Time) (timing: Timing) (delay: Time) = ("background-color", Some time, Some timing, Some delay) |> TransitionType
