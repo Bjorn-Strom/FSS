@@ -1,17 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup>
-    <NpmDependencies>
-      <NpmPackage Name="react" Version="&gt;= 16.13.1 &lt; 17.0.0" ResolutionStrategy="Max" />
-      <NpmPackage Name="react-dom" Version="&gt;= 16.13.1 &lt; 17.0.0" ResolutionStrategy="Max" />
-    </NpmDependencies>
-  </PropertyGroup>
   <ItemGroup>
-    <Content Include="*.fsproj; *.fs; *.js;" PackagePath="fable\" />
+    <Content Include="*.fsproj; *.fs; *.js;" />
     <Compile Include="Utilities.fs" />
+    <Compile Include="Property.fs" />
     <Compile Include="Units.fs" />
     <Compile Include="Fonts.fs" />
     <Compile Include="Color.fs" />

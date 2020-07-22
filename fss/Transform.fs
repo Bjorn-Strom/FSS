@@ -57,7 +57,3 @@ module Transform =
             | Skew (a1, a2) -> sprintf "skew(%s, %s)" (Units.Angle.value a1) (Units.Angle.value a2)
             | SkewX a -> sprintf "skewX(%s)" <| Units.Angle.value a
             | SkewY a -> sprintf "skewY(%s)" <| Units.Angle.value a
-
-
-    let transform = "transform"
-

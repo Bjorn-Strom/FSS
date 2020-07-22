@@ -6,6 +6,7 @@ open Fable.React
 open Fable.React.Props
 
 open Fss
+open Property
 open Fss
 open Css
 open Color
@@ -13,7 +14,6 @@ open Units.Size
 open Fonts
 open BorderStyle
 open BorderWidth
-open BorderColor
 open Animation
 open Keyframes
 open Transform
@@ -218,7 +218,8 @@ let AnimationExamples =
             p [ClassName combinedAnimations] [str "COMBINED"]
             p [ClassName (fss [
                 BackgroundColor red
-                Transition (backgroundColor3 (sec 2.5) Ease (sec 2.5))
+                //Transition (backgroundColor3 (sec 2.5) Ease (sec 2.5))
+                Transition3 (backgroundColor, (sec 2.5), Ease, (sec 0.0))
                 Hover 
                     [
                         BackgroundColor green

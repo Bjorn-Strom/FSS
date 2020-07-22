@@ -63,8 +63,6 @@ module Animation =
         | Value of int
         interface IAnimation
 
-    let count v = v |> Value
-
     let iterationCountValue =
         function
             | Infinite -> "infinite"
@@ -100,7 +98,6 @@ module Animation =
             | Both -> "both"
             | None -> "none"
 
-
     // Animation play state
     type PlayState =
         | Running
@@ -121,13 +118,3 @@ module Animation =
             | :? FillMode as f -> fillModeValue f
             | :? PlayState as p -> playStateValue p
             | _ as s -> string s
-
-    let animation = "animation"
-    let animationName = "animation-name"
-    let animationDuration = "animation-duration"
-    let animationTimingFunction = "animation-timing-function"
-    let animationDelay = "animation-delay"
-    let animationIterationCount = "animation-iteration-count"
-    let animationDirection = "animation-direction"
-    let animationFillMode = "animation-fill-mode"
-    let animationPlayState = "animation-play-state"

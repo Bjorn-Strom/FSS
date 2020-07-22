@@ -15,7 +15,6 @@ open Units.Size
 open Fonts
 open BorderStyle
 open BorderWidth
-open BorderColor
 open Animation
 open Keyframes
 open Transform
@@ -182,7 +181,7 @@ let CssTests =
             let longNotation = 
                 fss 
                     [
-                        AnimationName (string testFrames)
+                        AnimationName testFrames
                         AnimationDuration (sec 10.0)
                         AnimationTimingFunction Ease
                         AnimationDelay (sec 200.0)

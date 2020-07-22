@@ -15,9 +15,6 @@ module Color =
 
     let value (CssColor c) = c
 
-    let color = "color"
-    let backgroundColor = "background-color"
-
     let black = hex "000000"
     let silver = hex "c0c0c0"
     let gray = hex "808080"
