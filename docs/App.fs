@@ -19,6 +19,9 @@ open Animation
 open Keyframes
 open Transform
 open Transition
+open Display
+open JustifyContent
+open AlignItems
 
 type Model = { Message : string}
 type Msg = | NoMessage
@@ -227,6 +230,37 @@ let AnimationExamples =
                 Animation [ spinnyFrames; sec 5.0; Infinite; Linear ]
             ]
 
+    let loader =
+        keyframes
+            [
+                frame 0 [ Transforms [ RotateX(deg 0.0); RotateY(deg 0.0) ] ]
+                frame 50 [ Transforms [ RotateX(deg 0.0); RotateY(deg 180.0) ] ]
+                frame 100 [ Transforms [ RotateX(deg 180.0); RotateY(deg 180.0) ] ]
+            ]
+
+    let loaderParent =
+        fss
+            [
+                Height (px 200)
+                Width (px 200)
+                Display Flex
+                JustifyContent JustifyContent.Center
+                AlignItems Center
+                BackgroundColor (hex "272727")
+                Css.Perspective (px 200)
+            ]
+
+    let loaderContainer =
+        fss
+            [
+                Width (px 100)
+                Height (px 100)
+                BorderRadius [px 12]
+                BackgroundColor (hex "00dbde")
+                Animation [loader; sec 2.0; Linear; Infinite]
+            ]
+
+
     fragment []
         [
             p [] [ str "Things can animate now!" ]
@@ -243,6 +277,10 @@ let AnimationExamples =
                     ]                 
             ])] [ str "I have a transition! Hover me!" ]
             div [ ClassName spinnyMation ] []
+            div [ ClassName loaderParent]
+                [
+                    div [ ClassName loaderContainer ] []
+                ]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =

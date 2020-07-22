@@ -14,6 +14,10 @@ open BorderWidth
 open Animation
 open Transform
 open Transition
+open Display
+open FlexDirection
+open JustifyContent
+open AlignItems
 
 
 module Css = 
@@ -62,6 +66,15 @@ module Css =
 
         | Width of Size
         | Height of Size
+        | Perspective of Size
+
+        | Display of Display
+        | FlexDirection of FlexDirection
+        | FlexWrap
+        | FlexFlow
+        | JustifyContent of JustifyContent
+        | AlignItems of AlignItems
+        | AlignContent
 
         | Animation of IAnimation list  
         | Animations of IAnimation list list
@@ -92,6 +105,7 @@ module Css =
         | TransitionDuration of Time
         | TransitionProperty of ICSSProperty
         | TransitionTimingFunction of Animation.Timing
+
 
     let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
     let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
@@ -130,8 +144,17 @@ module Css =
                 | BorderBottomColor bc -> Property.value borderBottomColor ==> Color.value bc
                 | BorderLeftColor bc   -> Property.value borderLeftColor   ==> Color.value bc
 
-                | Width w  -> Property.value width ==> Units.Size.value w
-                | Height h -> Property.value height ==> Units.Size.value h
+                | Width w       -> Property.value width       ==> Units.Size.value w
+                | Height h      -> Property.value height      ==> Units.Size.value h
+                | Perspective p -> Property.value perspective ==> Units.Size.value p
+
+                | Display d       -> Property.value display       ==> Display.value d
+                | FlexDirection f -> Property.value flexDirection ==> FlexDirection.value f
+                //| FlexWrap
+                //| FlexFlow
+                | JustifyContent j -> Property.value justifyContent ==> JustifyContent.value j
+                | AlignItems a     -> Property.value alignItems     ==> AlignItems.value a
+                //| AlignContent
 
                 | Animation a                 -> Property.value animation               ==> combineWs a Animation.value
                 | Animations ans              -> Property.value animation               ==> combineAnimations ans
@@ -155,6 +178,8 @@ module Css =
                 | Transform t   -> Property.value transform ==> Transform.value t
                 | Transforms ts -> Property.value transform ==> combineWs ts Transform.value
 
+
+                // WIP
                 | Transition t               -> "transition"                 ==> Transition.value t
                 | Transition3 (a,b,c,d)      -> "transition"                 ==> sprintf "%s %s %s %s" (value a) (Animation.value b) (Animation.value c) (Animation.value d)
                 | Transitions ts             -> "transition"                 ==> combineComma ts value

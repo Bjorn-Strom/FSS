@@ -13,6 +13,7 @@
     <Compile Include="Animation.fs" />
     <Compile Include="Transform.fs" />
     <Compile Include="Transition.fs" />
+    <Compile Include="Display.fs" />
     <Compile Include="Css.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="Fss.fs" />
