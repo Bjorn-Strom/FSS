@@ -190,6 +190,13 @@ let AnimationExamples =
                 frame 100 [ FontSize (pct 50) ]
             ]
 
+    let spinnyFrames =
+        keyframes
+            [
+                frame 0 [ Transform <| Rotate(deg 0.0)]
+                frame 100 [ Transform <| Rotate(deg 360.0)]
+            ]
+
     let bounceAnimation = fss [ Animation [bounceFrames; sec 1.0; Ease; Infinite] ]
 
     let sizeAnimation =
@@ -211,6 +218,15 @@ let AnimationExamples =
                     ]
             ]
 
+    let spinnyMation =
+        fss 
+            [
+                Width (px 200)
+                Height (px 200)
+                BackgroundColor orangered
+                Animation [ spinnyFrames; sec 5.0; Infinite; Linear ]
+            ]
+
     fragment []
         [
             p [] [ str "Things can animate now!" ]
@@ -219,14 +235,14 @@ let AnimationExamples =
             p [ClassName combinedAnimations] [str "COMBINED"]
             p [ClassName (fss [
                 BackgroundColor red
-                //Transition (backgroundColor3 (sec 2.5) Ease (sec 2.5))
-                Transition3 (backgroundColor, (sec 2.5), Ease, (sec 0.0))
+                Transition (backgroundColor3 (sec 2.5) Ease (sec 2.5))
+                //Transition3 (backgroundColor, (sec 2.5), Ease, (sec 0.0))
                 Hover 
                     [
                         BackgroundColor green
-                    ]
-                    
+                    ]                 
             ])] [ str "I have a transition! Hover me!" ]
+            div [ ClassName spinnyMation ] []
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =

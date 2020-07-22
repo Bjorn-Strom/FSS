@@ -60,6 +60,9 @@ module Css =
         | BorderBottomColor of CssColor
         | BorderLeftColor of CssColor
 
+        | Width of Size
+        | Height of Size
+
         | Animation of IAnimation list  
         | Animations of IAnimation list list
         | AnimationName of IAnimation
@@ -126,6 +129,9 @@ module Css =
                 | BorderRightColor bc  -> Property.value borderRightColor  ==> Color.value bc
                 | BorderBottomColor bc -> Property.value borderBottomColor ==> Color.value bc
                 | BorderLeftColor bc   -> Property.value borderLeftColor   ==> Color.value bc
+
+                | Width w  -> Property.value width ==> Units.Size.value w
+                | Height h -> Property.value height ==> Units.Size.value h
 
                 | Animation a                 -> Property.value animation               ==> combineWs a Animation.value
                 | Animations ans              -> Property.value animation               ==> combineAnimations ans

@@ -240,6 +240,20 @@ let CssTests =
             Expect.equal (getValue anim3 "animation-fill-mode") "both, both" "Sets animation fillmodes"
             Expect.equal (getValue anim3 "animation-direction") "alternate, reverse" "Sets animation direction counts"
             Expect.equal (getValue anim3 "animation-play-state") "running, paused" "Sets animation playstates"
+
+        testCase' "Style width and height" <| fun _ ->
+            RTL.render(
+                fragment []
+                    [
+                        div 
+                            [ Id "size"; ClassName (fss [ Width (px 100); Height (px 50) ]) ]
+                            []
+                    ]
+            ) |> ignore
+                
+            let color = getComputedCssById("size")
+            Expect.equal (getValue color "width") "100px" "width gets set"
+            Expect.equal (getValue color "height") "50px" "height gets set"
     ]
 
 Mocha.runTests CssTests |> ignore
