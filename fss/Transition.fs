@@ -26,3 +26,5 @@ module Transition =
     let backgroundColor1 (time: Time) = (BackgroundColor, Some time, Option.None, Option.None) |> TransitionType
     let backgroundColor2 (time: Time) (timing: Timing) = (BackgroundColor, Some time, Some timing, Option.None) |> TransitionType
     let backgroundColor3 (time: Time) (timing: Timing) (delay: Time) = (BackgroundColor, Some time, Some timing, Some delay) |> TransitionType
+
+    let transitionez (time: Time) (timing: Timing) (delay: Time) = (Transition, Some time, Some timing, Some delay) |> TransitionType

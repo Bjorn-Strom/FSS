@@ -16,7 +16,7 @@ module Animation =
             | Msec ms -> ms
 
     let sec (v: float): Time = sprintf "%.2fs" v |> Sec
-    let mSec (v: float): Time = sprintf "%.2fms" v |> Sec
+    let mSec (v: float): Time = sprintf "%.2fms" v |> Msec
 
     // Animation timing
     let cubicBezier (a: float, b: float, c: float, d: float) = 

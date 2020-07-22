@@ -42,6 +42,8 @@ module Property =
 
         | Transform
 
+        | Transition
+
         interface ICSSProperty
 
     let value = 
@@ -86,6 +88,8 @@ module Property =
 
         | Transform -> "transform"
 
+        | Transition -> "transition"
+
     let label = Label
 
     let hover = Hover
@@ -125,3 +129,5 @@ module Property =
     let animationPlayState = AnimationPlayState
 
     let transform = Transform
+
+    let transition = Transition

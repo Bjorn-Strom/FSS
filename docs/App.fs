@@ -11,6 +11,7 @@ open Fss
 open Css
 open Color
 open Units.Size
+open Units.Angle
 open Fonts
 open BorderStyle
 open BorderWidth

@@ -177,6 +177,7 @@ let CssTests =
         testCase' "Animations" <| fun _ ->
 
             let testFrames = keyframes [ frame 0 [ BackgroundColor red]; frame 100 [ BackgroundColor blue] ]
+            let testFrames2 = keyframes [ frame 0 [ BackgroundColor green]; frame 100 [ BackgroundColor orangered] ]
             let shortHand = fss [ Animation [testFrames; sec 10.0; Ease; sec 200.0; Infinite; Both; AlternateReverse; Running] ]
             let longNotation = 
                 fss 
@@ -190,17 +191,28 @@ let CssTests =
                         AnimationDirection AlternateReverse
                         AnimationPlayState Running
                     ]
+            let combinedAnimations = 
+                fss 
+                    [ 
+                        Animations 
+                            [ 
+                                [testFrames; sec 10.0; Ease; mSec 0.5; Infinite; Both; Alternate; Running]
+                                [testFrames2; sec 1.0; Linear; sec 10.0; IterationCount.Value 3; Both; Reverse; Paused] 
+                            ] 
+                    ]
 
             RTL.render(
                 fragment []
                     [
                         div [ Id "anim"; ClassName shortHand ] []    
                         div [ Id "anim2"; ClassName longNotation ] []    
+                        div [ Id "anim3"; ClassName combinedAnimations ] []    
                     ]
             ) |> ignore
             
             let anim = getComputedCssById("anim")
             let anim2 = getComputedCssById("anim2")
+            let anim3 = getComputedCssById("anim3")
 
             Expect.equal (getValue anim "animation-name") (string testFrames) "Sets animation name from shorthand"
             Expect.equal (getValue anim "animation-duration") "10s" "Sets animation duration from shorthand"
@@ -220,8 +232,14 @@ let CssTests =
             Expect.equal (getValue anim2 "animation-direction") "alternate-reverse" "Sets animation direction count"
             Expect.equal (getValue anim2 "animation-play-state") "running" "Sets animation playstate"
 
-
-
+            Expect.equal (getValue anim3 "animation-name") (sprintf "%A, %A" testFrames testFrames2) "Sets animation names"
+            Expect.equal (getValue anim3 "animation-duration") "10s, 1s" "Sets animation durations"
+            Expect.equal (getValue anim3 "animation-timing-function") "ease, linear" "Sets animation timing functions"
+            Expect.equal (getValue anim3 "animation-delay") "0.0005s, 10s" "Sets animation delays"
+            Expect.equal (getValue anim3 "animation-iteration-count") "infinite, 3" "Sets animation iteration counts"
+            Expect.equal (getValue anim3 "animation-fill-mode") "both, both" "Sets animation fillmodes"
+            Expect.equal (getValue anim3 "animation-direction") "alternate, reverse" "Sets animation direction counts"
+            Expect.equal (getValue anim3 "animation-play-state") "running, paused" "Sets animation playstates"
     ]
 
 Mocha.runTests CssTests |> ignore
