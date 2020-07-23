@@ -18,13 +18,21 @@ open Display
 open FlexDirection
 open JustifyContent
 open AlignItems
-
+open FlexWrap
+open FlexFlow
+open FlexTypes
+open AlignContent
+open AlignSelf
+open Order
+open FlexGrow
+open FlexShrink
+open FlexBasis
+open Flex
 
 module Css = 
     [<Import("css", from="emotion")>]
     let private css(x) = jsNative
     let css' x = css(x) 
-
 
     let value (v: ICSSProperty): string =
         match v with
@@ -70,11 +78,17 @@ module Css =
 
         | Display of Display
         | FlexDirection of FlexDirection
-        | FlexWrap
-        | FlexFlow
+        | FlexWrap of FlexWrap
+        | FlexFlow of IFlexFlow
         | JustifyContent of JustifyContent
         | AlignItems of AlignItems
-        | AlignContent
+        | AlignContent of AlignContent
+        | Order of Order
+        | FlexGrow of FlexGrow
+        | FlexShrink of FlexShrink
+        | FlexBasis of FlexBasis
+        | AlignSelf of AlignSelf
+        | Flex of Flex
 
         | Animation of IAnimation list  
         | Animations of IAnimation list list
@@ -105,7 +119,6 @@ module Css =
         | TransitionDuration of Time
         | TransitionProperty of ICSSProperty
         | TransitionTimingFunction of Animation.Timing
-
 
     let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
     let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
@@ -148,13 +161,17 @@ module Css =
                 | Height h      -> Property.value height      ==> Units.Size.value h
                 | Perspective p -> Property.value perspective ==> Units.Size.value p
 
-                | Display d       -> Property.value display       ==> Display.value d
-                | FlexDirection f -> Property.value flexDirection ==> FlexDirection.value f
-                //| FlexWrap
-                //| FlexFlow
+                | Display d        -> Property.value display        ==> Display.value d
+                | FlexDirection f  -> Property.value flexDirection  ==> FlexDirection.value f
+                | FlexWrap f       -> Property.value flexWrap       ==> FlexWrap.value f
+                | FlexFlow f       -> Property.value flexFlow       ==> FlexFlow.value f
                 | JustifyContent j -> Property.value justifyContent ==> JustifyContent.value j
                 | AlignItems a     -> Property.value alignItems     ==> AlignItems.value a
-                //| AlignContent
+                | AlignContent a   -> Property.value alignContent   ==> AlignContent.value a
+                | Order o          -> Property.value order          ==> Order.value o
+                | FlexGrow f       -> Property.value flexGrow       ==> FlexGrow.value f
+                | FlexShrink f     -> Property.value flexShrink     ==> FlexShrink.value f
+                | AlignSelf a      -> Property.value alignSelf      ==> AlignSelf.value a
 
                 | Animation a                 -> Property.value animation               ==> combineWs a Animation.value
                 | Animations ans              -> Property.value animation               ==> combineAnimations ans

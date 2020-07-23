@@ -8,20 +8,20 @@ module Property =
         | AlignItems
         | AlignSelf
         | All
-        | Animation                     // Done
-        | AnimationDelay                // Done
-        | AnimationDirection            // Done
-        | AnimationDuration             // Done
-        | AnimationFillMode             // Done
-        | AnimationIterationCount       // Done
-        | AnimationName                 // Done
-        | AnimationPlayState            // Done
-        | AnimationTimingFunction       // Done
+        | Animation                     
+        | AnimationDelay                
+        | AnimationDirection            
+        | AnimationDuration             
+        | AnimationFillMode             
+        | AnimationIterationCount       
+        | AnimationName                 
+        | AnimationPlayState            
+        | AnimationTimingFunction       
         | BackfaceVisibility
         | BackgroundAttachment
         | BackgroundBlendMode
         | BackgroundClip
-        | BackgroundColor               // Done
+        | BackgroundColor               
         | BackgroundImage
         | BackgroundOrigin
         | BackgroundPosition
@@ -29,39 +29,39 @@ module Property =
         | BackgroundSize
         | Background
         | Bleed
-        | BorderBottomColor             // Done
-        | BorderBottomLeftRadius        // Done
-        | BorderBottomRightRadius       // Done
+        | BorderBottomColor             
+        | BorderBottomLeftRadius        
+        | BorderBottomRightRadius       
         | BorderBottomStyle
-        | BorderBottomWidth             // Done
+        | BorderBottomWidth             
         | BorderBottom
         | BorderCollapse
-        | BorderColor                   // Done
+        | BorderColor                   
         | BorderImage
         | BorderImageOutset
         | BorderImageRepeat
         | BorderImageSource
         | BorderImageSlice
         | BorderImageWidth
-        | BorderLeftColor               // Done
+        | BorderLeftColor               
         | BorderLeftStyle
-        | BorderLeftWidth               // Done
+        | BorderLeftWidth               
         | BorderLeft
-        | BorderRadius                  // Done
-        | BorderRightColor              // Done
+        | BorderRadius                  
+        | BorderRightColor              
         | BorderRightStyle
-        | BorderRightWidth              // Done
+        | BorderRightWidth              
         | BorderRight
         | BorderSpacing
-        | BorderStyle                    // Done
-        | BorderTopColor                 // Done
-        | BorderTopLeftRadius            // Done
-        | BorderTopRightRadius           // Done
+        | BorderStyle                    
+        | BorderTopColor                 
+        | BorderTopLeftRadius            
+        | BorderTopRightRadius           
         | BorderTopStyle
-        | BorderTopWidth                 // Done
+        | BorderTopWidth                 
         | BorderTop
-        | BorderWidth                    // Done
-        | Border                         // Done
+        | BorderWidth                    
+        | Border                         
         | Bottom
         | BoxDecorationBreak
         | BoxShadow
@@ -73,7 +73,7 @@ module Property =
         | CaretColor
         | Clear
         | Clip
-        | Color                             // Done
+        | Color                             
         | Columns
         | ColumnCount
         | ColumnFill
@@ -109,7 +109,7 @@ module Property =
         | FontKerning
         | FontLanguageOverride
         | FontSizeAdjust
-        | FontSize                   // Done
+        | FontSize                   
         | FontStretch
         | FontStyle
         | FontSynthesis
@@ -234,10 +234,10 @@ module Property =
         | TextTransform
         | TextUnderlinePosition
         | Top
-        | Transform                      // Done
+        | Transform                      
         | TransformOrigin
         | TransformStyle
-        | Transition                     // Done
+        | Transition                     
         | TransitionDelay
         | TransitionDuration
         | TransitionProperty
