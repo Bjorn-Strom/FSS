@@ -34,14 +34,24 @@ open FlexGrow
 open FlexShrink
 open FlexBasis
 open Flex
+open Margin
 
-type Model = { Message : string}
-type Msg = | NoMessage
-let init() = { Message = "Hello" }
+type Model = { 
+    FlowDirection: FlexDirection
+    FlowWrap: FlexWrap }
+type Msg = 
+    | SetFlowDirection of FlexDirection
+    | SetFlowWrap of FlexWrap
+
+
+let init() = { 
+    FlowDirection = Row
+    FlowWrap = NoWrap }
 
 let update (msg: Msg) (model: Model): Model =
     match msg with
-    | NoMessage -> model
+    | SetFlowDirection direction -> { model with FlowDirection = direction}
+    | SetFlowWrap wrap -> { model with FlowWrap = wrap}
 
 let ColorExamples =
     fragment []
@@ -295,6 +305,327 @@ let AnimationExamples =
                 ]
         ]
 
+let MarginExamples =
+    fragment []
+        [
+            div [
+                    ClassName
+                        (fss
+                            [
+                                Width (px 100)
+                                Height (px 100)
+                                Color orangered
+                                BackgroundColor rebeccapurple
+                                MarginRight (px 50)
+                                MarginLeft (px 50)
+                                MarginTop (px 50)
+                                MarginBottom (px 50)
+                            ])
+                ]
+                [ str "I have margin everywhere!" ]
+
+            div [
+                    ClassName
+                        (fss
+                            [
+                                Width (px 100)
+                                Height (px 100)
+                                Color orangered
+                                BackgroundColor rebeccapurple
+                                CSSProperty.Margin [px 100; px 50; px 200; px 150]
+                            ])
+                ]
+                [ str "Me tooo!" ]
+        ]
+
+let FlexBoxExamples model dispatch =
+    // Test alignment
+    let parent = 
+        fss
+            [
+                Display Display.Flex
+                Height (px 300)
+                BackgroundColor grey
+            ]
+
+    let child =
+        fss
+            [
+                Width (px 100)
+                Height (px 100)
+                CSSProperty.Margin [Auto]
+                BackgroundColor lightcoral
+            ]
+
+    let alignment = 
+        div [ ClassName parent]
+             [
+                div [ ClassName child] []
+             ]
+
+    // Test Flex flow property
+    let parent = 
+        fss
+            [
+                Display Display.Flex
+                FlexFlow [Row; Wrap]
+                JustifyContent JustifyContent.SpaceAround
+            ]
+
+    let child =
+        fss
+            [
+                BackgroundColor tomato
+                Width (px 200)
+                Height (px 150)
+                MarginTop (px 10)
+            ]
+
+    let flow =
+        div [ ClassName parent]
+             [
+                 div [ ClassName child] []
+                 div [ ClassName child] []
+                 div [ ClassName child] []
+                 div [ ClassName child] []
+                 div [ ClassName child] []
+                 div [ ClassName child] []
+             ]
+
+    // Flex Direction row 
+    let parent = 
+        fss
+            [
+                Display Display.Flex
+                FlexDirection Row
+            ]
+
+    let child =
+        fss
+            [
+                BackgroundColor tomato
+                Width (px 50)
+                Height (px 50)
+                MarginLeft (px 10)
+            ]
+
+            
+    let rows =
+        div [ ClassName parent]
+                [
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                ]
+
+    // Flex Direction column
+    let parent = 
+        fss
+            [
+                Display Display.Flex
+                FlexDirection Column
+            ]
+
+    let child =
+        fss
+            [
+                BackgroundColor tomato
+                Width (px 50)
+                Height (px 50)
+                MarginTop (px 10)
+            ]
+                        
+    let columns =
+        div [ ClassName parent]
+                [
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                    div [ ClassName child] []
+                ]
+
+    // Flex no wrap 
+    let parent = 
+        fss
+            [
+                Display Display.Flex
+                Width (em 40.0)
+                FlexWrap NoWrap
+            ]
+
+    let child =
+        fss
+            [
+                BackgroundColor (hex "#cee")
+                Width (em 15.0)
+                CSSProperty.Margin [px 10]
+            ]
+                                    
+    let noWrap =
+        div [ ClassName parent]
+                [
+                    div [ ClassName child] [ str "1" ]
+                    div [ ClassName child] [ str "2" ]
+                    div [ ClassName child] [ str "3" ]
+                    div [ ClassName child] [ str "4" ]
+                ]
+
+    // Flex no wrap 
+    let parent = 
+        fss
+            [
+                Display Display.Flex
+                Width (em 40.0)
+                FlexWrap Wrap
+            ]
+
+    let child =
+        fss
+            [
+                BackgroundColor (hex "#cee")
+                Width (em 15.0)
+                CSSProperty.Margin [px 10]
+            ]
+                                                
+    let wrap =
+        div [ ClassName parent]
+                [
+                    div [ ClassName child] [ str "1" ]
+                    div [ ClassName child] [ str "2" ]
+                    div [ ClassName child] [ str "3" ]
+                    div [ ClassName child] [ str "4" ]
+                ]
+
+    // Flex no wrap 
+    let parent = 
+        fss
+            [
+                Display Display.Flex
+                Width (em 40.0)
+                FlexWrap WrapReverse
+            ]
+
+    let child =
+        fss
+            [
+                BackgroundColor (hex "#cee")
+                Width (em 15.0)
+                CSSProperty.Margin [px 10]
+            ]
+                                                            
+    let wrapReverse =
+        div [ ClassName parent]
+                [
+                    div [ ClassName child] [ str "1" ]
+                    div [ ClassName child] [ str "2" ]
+                    div [ ClassName child] [ str "3" ]
+                    div [ ClassName child] [ str "4" ]
+                ]
+
+    // Flex flow
+    let parent = 
+        fss
+            [
+                BackgroundColor pink
+                CSSProperty.Margin [px 48; Auto; px 0]
+                Width (px 600)
+                Display Display.Flex
+                FlexFlow [model.FlowDirection; model.FlowWrap]
+            ]
+
+    let child =
+        fss
+            [
+                BackgroundColor black
+                Color white
+                CSSProperty.Margin [px 6]
+                Width (px 120)
+            ]
+                                                            
+    let flexFlow =
+        div [ ClassName parent]
+                [
+                    div [ ClassName child] [ str "1" ]
+                    div [ ClassName child] [ str "2" ]
+                    div [ ClassName child] [ str "3" ]
+                    div [ ClassName child] [ str "4" ]
+                    div [ ClassName child] [ str "5" ]
+                    div [ ClassName child] [ str "6" ]
+                    div [ ClassName child] [ str "7" ]
+                ]
+
+    fragment []
+        [
+            p [] [ str "I am aligend with flexbox" ]
+            alignment
+            p [] [ str "We are evenly distributed! Just try resizing" ]
+            flow
+            p [] [ str "Flex direction is row!" ]
+            rows
+            p [] [ str "Flex direction is columns!" ]
+            columns
+            p [] [ str "Flex wrap is no wrap!" ]
+            noWrap
+            p [] [ str "Flex wrap is wrap!" ]
+            wrap
+            p [] [ str "Flex wrap is wrapreverse!" ]
+            wrapReverse
+            p [] [ str "Flex flow" ]
+            form [ ]
+                [
+                    h3 [] [str "Flex direction" ]
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowDirection Row)) ]
+                            str "row" 
+                        ]
+
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowDirection RowReverse)) ]
+                            str "row-reverse" 
+                        ]
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowDirection Column)) ]
+                            str "column" 
+                        ]
+
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowDirection ColumnReverse)) ]
+                            str "column-reverse" 
+                        ]
+                ]
+            form [ ]
+                [
+                    h3 [] [str "Flex wrap" ]
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowWrap NoWrap)) ]
+                            str "nowrap" 
+                        ]
+
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowWrap Wrap)) ]
+                            str "wrap" 
+                        ]
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowWrap WrapReverse)) ]
+                            str "wrap-reverse" 
+                        ]
+                ]
+            flexFlow
+        ]
+
+
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [
@@ -302,54 +633,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //FontExamples
             //BorderExamples
             //AnimationExamples
-            div [
-                    ClassName
-                        (fss
-                            [
-                                
-                                Color Inherit
-                                BackgroundColor Initial
-                                FontSize Unset
-                                Border [Revert]
-                                BorderStyle [Inherit]
-                                BorderWidth [Inherit]
-                                BorderTopWidth Inherit
-                                BorderRadius [Inherit]
-                                BorderTopLeftRadius [Inherit]
-                                BorderTopRightRadius [Inherit]
-                                BorderBottomRightRadius [Inherit]
-                                BorderBottomLeftRadius [Inherit]
-
-                                BorderColor [Inherit]
-                                BorderTopColor Inherit
-                                BorderRightColor Inherit
-                                BorderBottomColor Inherit
-                                BorderLeftColor Inherit
-                               
-                                Width Inherit
-                                Height Inherit
-                                CSSProperty.Perspective Inherit
-
-                                Display Inherit
-                                FlexDirection Inherit
-                                FlexWrap Inherit
-                                FlexFlow Inherit
-                                JustifyContent Inherit
-                                AlignItems Inherit
-                                AlignContent Inherit
-                                CSSProperty.Order Inherit
-                                CSSProperty.FlexGrow Inherit
-                                CSSProperty.FlexShrink Inherit
-                                CSSProperty.FlexBasis Inherit
-                                AlignSelf Inherit
-                                CSSProperty.Flex [Inherit]
-                                
-                                Transform Inherit
-                                Transforms [Inherit]
-                                
-                            ])
-                ]
-                [ str "Hei" ]
+            //MarginExamples
+            FlexBoxExamples model dispatch
         ]
 
 Program.mkSimple init update render

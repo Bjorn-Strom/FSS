@@ -29,6 +29,7 @@ open FlexGrow
 open FlexShrink
 open FlexBasis
 open Flex
+open Margin
 
 module Css = 
     [<Import("css", from="emotion")>]
@@ -37,15 +38,28 @@ module Css =
 
     let value (v: ICSSProperty): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
-            | :? Property as n -> Property.value n
-            | :? CssColor as c -> Color.value c
-            | :? Size as c -> Units.Size.value c
-            | :? Angle as a -> Units.Angle.value a
-            | :? FontSize as f -> Fonts.value f
-            | :? BorderStyle as b -> BorderStyle.value b
-            | :? BorderWidth as b -> BorderWidth.value b
-            | :? Transform as t -> Transform.value t
+            | :? Display as d        -> Display.value d
+            | :? Global as g         -> Utilities.Global.value g
+            | :? Property as n       -> Property.value n
+            | :? CssColor as c       -> Color.value c
+            | :? Size as c           -> Units.Size.value c
+            | :? Angle as a          -> Units.Angle.value a
+            | :? FontSize as f       -> Fonts.value f
+            | :? BorderStyle as b    -> BorderStyle.value b
+            | :? BorderWidth as b    -> BorderWidth.value b
+            | :? Transform as t      -> Transform.value t
+            | :? Margin as m         -> Margin.value m
+            | :? JustifyContent as j -> JustifyContent.value j
+            | :? FlexDirection as f  -> FlexDirection.value f
+            | :? FlexWrap as f       -> FlexWrap.value f
+            | :? FlexGrow as f       -> FlexGrow.value f
+            | :? FlexShrink as f     -> FlexShrink.value f
+            | :? FlexBasis as f      -> FlexBasis.value f
+            | :? AlignItems as a     -> AlignItems.value a
+            | :? AlignContent as a   -> AlignContent.value a
+            | :? AlignSelf as a      -> AlignSelf.value a
+            | :? Order as o          -> Order.value o
+
             | _ -> "Unknown CSS"
 
     type CSSProperty =
@@ -82,7 +96,7 @@ module Css =
         | Display of ICSSProperty
         | FlexDirection of ICSSProperty
         | FlexWrap of ICSSProperty
-        | FlexFlow of ICSSProperty
+        | FlexFlow of ICSSProperty list
         | JustifyContent of ICSSProperty
         | AlignItems of ICSSProperty
         | AlignContent of ICSSProperty
@@ -92,6 +106,12 @@ module Css =
         | FlexBasis of ICSSProperty
         | AlignSelf of ICSSProperty
         | Flex of ICSSProperty list
+
+        | MarginTop of ICSSProperty
+        | MarginRight of ICSSProperty
+        | MarginBottom of ICSSProperty
+        | MarginLeft of ICSSProperty
+        | Margin of ICSSProperty list
 
         | Animation of IAnimation list  
         | Animations of IAnimation list list
@@ -167,7 +187,7 @@ module Css =
                 | Display d        -> Property.value display        ==> value d
                 | FlexDirection f  -> Property.value flexDirection  ==> value f
                 | FlexWrap f       -> Property.value flexWrap       ==> value f
-                | FlexFlow f       -> Property.value flexFlow       ==> value f
+                | FlexFlow f       -> Property.value flexFlow       ==> combineWs f value
                 | FlexBasis f      -> Property.value flexBasis      ==> value f
                 | JustifyContent j -> Property.value justifyContent ==> value j
                 | AlignItems a     -> Property.value alignItems     ==> value a
@@ -177,6 +197,12 @@ module Css =
                 | FlexShrink f     -> Property.value flexShrink     ==> value f
                 | AlignSelf a      -> Property.value alignSelf      ==> value a
                 | Flex f           -> Property.value flex           ==> combineWs f Flex.value
+
+                | MarginTop m    -> Property.value marginTop    ==> value m
+                | MarginRight m  -> Property.value marginRight  ==> value m
+                | MarginBottom m -> Property.value marginBottom ==> value m
+                | MarginLeft m   -> Property.value marginLeft   ==> value m
+                | Margin ms      -> Property.value margin       ==> combineWs ms value
 
                 | Animation a                 -> Property.value animation               ==> combineWs a Animation.value
                 | Animations ans              -> Property.value animation               ==> combineAnimations ans

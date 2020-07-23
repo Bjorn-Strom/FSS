@@ -14,6 +14,7 @@
     <Compile Include="Transform.fs" />
     <Compile Include="Transition.fs" />
     <Compile Include="Display.fs" />
+    <Compile Include="Margin.fs" />
     <Compile Include="Css.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="Fss.fs" />

@@ -56,34 +56,39 @@ module FlexTypes =
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction      
 module FlexDirection =
     open FlexTypes
+    open Utilities.Types
+
     type FlexDirection =
         | Row
         | RowReverse
         | Column
         | ColumnReverse
         interface IFlexFlow
+        interface ICSSProperty
 
     let value (v: FlexDirection): string =
         match v with
         | Row -> "row"
-        | RowReverse -> "rowReverse"
+        | RowReverse -> "row-reverse"
         | Column -> "column"
-        | ColumnReverse -> "columnReverse"
+        | ColumnReverse -> "column-reverse"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
 module FlexWrap =
+    open Utilities.Types
     open FlexTypes
     type FlexWrap =
         | NoWrap
         | Wrap
         | WrapReverse
         interface IFlexFlow
+        interface ICSSProperty
 
     let value (v: FlexWrap): string =
         match v with 
-            | NoWrap -> "noWrap"
+            | NoWrap -> "nowrap"
             | Wrap -> "wrap"
-            | WrapReverse -> "wrapReverse"  
+            | WrapReverse -> "wrap-reverse"  
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow
 module FlexFlow =
@@ -111,12 +116,12 @@ module JustifyContent =
 
     let value (v: JustifyContent): string =
         match v with 
-            | FlexStart -> "flexStart"
-            | FlexEnd -> "flexEnd"
+            | FlexStart -> "flex-start"
+            | FlexEnd -> "flex-end"
             | Center -> "center"
-            | SpaceBetween -> "spaceBetween"
-            | SpaceAround -> "spaceAround"
-            | SpaceEvenly -> "spaceEvenly"
+            | SpaceBetween -> "space-between"
+            | SpaceAround -> "space-around"
+            | SpaceEvenly -> "space-evenly"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
 module AlignItems =
@@ -131,14 +136,16 @@ module AlignItems =
 
     let value (v: AlignItems): string =
         match v with 
-            | FlexStart -> "flexStart"
-            | FlexEnd -> "flexEnd"
+            | FlexStart -> "flex-start"
+            | FlexEnd -> "flex-end"
             | Center -> "center"
             | Baseline -> "baseline"
             | Stretch -> "stretch"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
 module AlignContent =
+    open Utilities.Types
+
     type AlignContent =
         | FlexStart
         | FlexEnd
@@ -146,22 +153,26 @@ module AlignContent =
         | SpaceBetween
         | SpaceAround
         | Stretch
+        interface ICSSProperty
 
     let value (v: AlignContent): string =
         match v with 
-            | FlexStart -> "flexStart"
-            | FlexEnd -> "flexEnd"
+            | FlexStart -> "flex-start"
+            | FlexEnd -> "flex-end"
             | Center -> "center"
-            | SpaceBetween -> "spaceBetween"
-            | SpaceAround -> "spaceAround"
+            | SpaceBetween -> "space-between"
+            | SpaceAround -> "space-around"
             | Stretch -> "stretch"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/order
 module Order =
+    open Utilities.Types
+
     type Order = 
         | Order of int
+        interface ICSSProperty
 
-    let value (Order o) = o
+    let value (Order o): string = string  o
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
 module FlexGrow =
@@ -221,6 +232,8 @@ module Flex =
             | _ -> "Unknown flex type"
 
 module AlignSelf =
+    open Utilities.Types
+
     type AlignSelf = 
         | Auto
         | FlexStart 
@@ -228,6 +241,7 @@ module AlignSelf =
         | Center 
         | Baseline 
         | Stretch
+        interface ICSSProperty
 
     let value (v: AlignSelf): string =
         match v with
