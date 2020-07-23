@@ -1,5 +1,6 @@
 ﻿namespace Fss
 
+open Utilities.Types
 open Units.Size
 open Units.Angle
 
@@ -30,6 +31,7 @@ module Transform =
         | Skew2 of Angle * Angle
         | SkewX of Angle
         | SkewY of Angle
+        interface ICSSProperty
 
     let value (v: Transform): string =
         match v with

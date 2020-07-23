@@ -2,6 +2,8 @@ namespace Fss
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/display
 module Display =
+    open Utilities.Types
+
     type Display =
         | Inline
         | InlineBlock
@@ -22,6 +24,7 @@ module Display =
         | TableCaption
 
         | None
+        interface ICSSProperty
 
 
     let value (v: Display): string =
@@ -95,7 +98,8 @@ module FlexFlow =
             | _ -> "Unknown flex flow value"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
-module JustifyContent = 
+module JustifyContent =
+    open Utilities.Types
     type JustifyContent =
         | FlexStart
         | FlexEnd
@@ -103,6 +107,7 @@ module JustifyContent =
         | SpaceBetween
         | SpaceAround
         | SpaceEvenly
+        interface ICSSProperty
 
     let value (v: JustifyContent): string =
         match v with 
@@ -115,12 +120,14 @@ module JustifyContent =
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
 module AlignItems =
+    open Utilities.Types
     type AlignItems =
         | FlexStart
         | FlexEnd
         | Center
         | Baseline
         | Stretch
+        interface ICSSProperty
 
     let value (v: AlignItems): string =
         match v with 
@@ -151,7 +158,6 @@ module AlignContent =
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/order
 module Order =
-    open FlexTypes
     type Order = 
         | Order of int
 
@@ -160,9 +166,11 @@ module Order =
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
 module FlexGrow =
     open FlexTypes
+    open Utilities.Types
 
     type FlexGrow = 
         | FlexGrow of int
+        interface ICSSProperty
         interface IFlex
 
     let value (FlexGrow f) = string f
@@ -170,8 +178,11 @@ module FlexGrow =
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
 module FlexShrink =
     open FlexTypes
+    open Utilities.Types
+
     type FlexShrink =
         | FlexShrink of int
+        interface ICSSProperty
         interface IFlex
 
     let value (FlexShrink f) = string f
@@ -180,23 +191,30 @@ module FlexShrink =
 module FlexBasis =
     open Fss.Units.Size
     open FlexTypes
+    open Utilities.Types
 
     type FlexBasis = 
         | FlexBasis of Size
         interface IFlex
+        interface ICSSProperty
 
     let value (FlexBasis v) = Units.Size.value v
 
 module Flex =
+    open Utilities.Types
+    open Utilities.Global
     open FlexTypes
     open FlexGrow
     open FlexShrink
     open FlexBasis
 
-    type Flex = Flex of IFlex list
+    type Flex = 
+        | Flex of IFlex list
+        interface ICSSProperty
 
-    let value (v: IFlex): string =
+    let value (v: ICSSProperty): string =
         match v with
+            | :? Global as g -> Utilities.Global.value g
             | :? FlexGrow as f -> FlexGrow.value f
             | :? FlexShrink as f -> FlexShrink.value f
             | :? FlexBasis as f -> FlexBasis.value f
@@ -211,7 +229,7 @@ module AlignSelf =
         | Baseline 
         | Stretch
 
-    let value (v: AlignSelf) =
+    let value (v: AlignSelf): string =
         match v with
             | Auto -> "auto"
             | FlexStart -> "flexStart"

@@ -36,7 +36,7 @@ module BorderWidth =
         | Thick
         interface Utilities.Types.ICSSProperty
 
-    let value v =
+    let value (v: BorderWidth): string =
         match v with
             | Thin -> "thin"
             | Medium -> "medium"

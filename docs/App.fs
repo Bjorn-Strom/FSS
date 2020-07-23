@@ -6,6 +6,7 @@ open Fable.React
 open Fable.React.Props
 
 open Fss
+open Fss.Utilities.Global
 open Property
 open Fss
 open Css
@@ -22,6 +23,17 @@ open Transition
 open Display
 open JustifyContent
 open AlignItems
+open FlexDirection
+open FlexWrap
+open FlexFlow
+open JustifyContent
+open AlignItems
+open AlignContent
+open Order
+open FlexGrow
+open FlexShrink
+open FlexBasis
+open Flex
 
 type Model = { Message : string}
 type Msg = | NoMessage
@@ -170,17 +182,17 @@ let AnimationExamples =
                     ]
                 frames [40; 43]
                     [
-                        Transform <| Translate3D(px 0, px -30, px 0)
+                        Transform (Translate3D(px 0, px -30, px 0))
                         BackgroundColor blue
                     ]
                 frame 70
                     [
-                        Transform <| Translate3D(px 0, px -15, px 0)
+                        Transform (Translate3D(px 0, px -15, px 0))
                         BackgroundColor green
                     ]
                 frame 90
                     [
-                        Transform <| Translate3D(px 0, px -4, px 0)
+                        Transform (Translate3D(px 0, px -4, px 0))
                         BackgroundColor orange
                     ]
             ] 
@@ -196,8 +208,8 @@ let AnimationExamples =
     let spinnyFrames =
         keyframes
             [
-                frame 0 [ Transform <| Rotate(deg 0.0)]
-                frame 100 [ Transform <| Rotate(deg 360.0)]
+                frame 0 [ Transform (Rotate(deg 0.0))]
+                frame 100 [ Transform (Rotate(deg 360.0))]
             ]
 
     let bounceAnimation = fss [ Animation [bounceFrames; sec 1.0; Ease; Infinite] ]
@@ -243,9 +255,9 @@ let AnimationExamples =
             [
                 Height (px 200)
                 Width (px 200)
-                Display Flex
+                Display Display.Flex
                 JustifyContent JustifyContent.Center
-                AlignItems Center
+                AlignItems AlignItems.Center
                 BackgroundColor (hex "272727")
                 Css.Perspective (px 200)
             ]
@@ -289,7 +301,53 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //ColorExamples
             //FontExamples
             //BorderExamples
-            AnimationExamples
+            //AnimationExamples
+            div [
+                    ClassName
+                        (fss
+                            [
+                                Color Inherit
+                                BackgroundColor Initial
+                                FontSize Unset
+                                Border [Revert]
+                                BorderStyle [Inherit]
+                                BorderWidth [Inherit]
+                                BorderTopWidth Inherit
+                                BorderRadius [Inherit]
+                                BorderTopLeftRadius [Inherit]
+                                BorderTopRightRadius [Inherit]
+                                BorderBottomRightRadius [Inherit]
+                                BorderBottomLeftRadius [Inherit]
+
+                                BorderColor [Inherit]
+                                BorderTopColor Inherit
+                                BorderRightColor Inherit
+                                BorderBottomColor Inherit
+                                BorderLeftColor Inherit
+
+                                Width Inherit
+                                Height Inherit
+                                CSSProperty.Perspective Inherit
+
+                                Display Inherit
+                                FlexDirection Inherit
+                                FlexWrap Inherit
+                                FlexFlow Inherit
+                                JustifyContent Inherit
+                                AlignItems Inherit
+                                AlignContent Inherit
+                                CSSProperty.Order Inherit
+                                CSSProperty.FlexGrow Inherit
+                                CSSProperty.FlexShrink Inherit
+                                CSSProperty.FlexBasis Inherit
+                                AlignSelf Inherit
+                                CSSProperty.Flex [Inherit]
+
+                                Transform Inherit
+                                Transforms [Inherit]
+                            ])
+                ]
+                [ str "Hei" ]
         ]
 
 Program.mkSimple init update render

@@ -9,6 +9,22 @@ module Types =
         |> List.map value
         |> String.concat seperator
 
+module Global =
+    open Types
+
+    type Global =
+        | Initial
+        | Inherit
+        | Unset
+        | Revert
+        interface ICSSProperty
+
+    let value (v: Global): string =
+        match v with
+            | Initial -> "initial"
+            | Inherit -> "inherit"
+            | Unset -> "unset"
+            | Revert -> "revert"
 
 module Converters =
     let floatToPercent (f: float): string = sprintf "%d%%" (int <| f * 100.0)
