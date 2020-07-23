@@ -1,5 +1,7 @@
 namespace Fss
 
+open Browser
+
 open Css
 
 module Fss =

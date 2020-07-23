@@ -18,6 +18,7 @@ open BorderWidth
 open Animation
 open Keyframes
 open Transform
+open Utilities.Global
 
 let testCase' name case = 
     testCase name <| fun _ -> 
@@ -241,7 +242,7 @@ let CssTests =
             Expect.equal (getValue anim3 "animation-direction") "alternate, reverse" "Sets animation direction counts"
             Expect.equal (getValue anim3 "animation-play-state") "running, paused" "Sets animation playstates"
 
-        testCase' "Style width and height" <| fun _ ->
+        testCase' "Style width and height" <| fun _ ->         
             RTL.render(
                 fragment []
                     [
@@ -254,6 +255,28 @@ let CssTests =
             let color = getComputedCssById("size")
             Expect.equal (getValue color "width") "100px" "width gets set"
             Expect.equal (getValue color "height") "50px" "height gets set"
+
+        testCase' "Set global values" <| fun _ ->
+            let style = 
+                fss
+                    [
+                        Color Inherit
+                        BackgroundColor Initial
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div 
+                            [ Id "globals"; ClassName style ]
+                            []
+                    ]
+            ) |> ignore
+                
+            let globals = getComputedCssById("globals")
+            Expect.equal (getValue globals "color") "rgb(0, 0, 0)" "Inherit set"
+            Expect.equal (getValue globals "background-color") "rgba(0, 0, 0, 0)" "Initial set"
+
     ]
 
 Mocha.runTests CssTests |> ignore

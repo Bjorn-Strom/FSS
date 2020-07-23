@@ -168,6 +168,7 @@ module Css =
                 | FlexDirection f  -> Property.value flexDirection  ==> value f
                 | FlexWrap f       -> Property.value flexWrap       ==> value f
                 | FlexFlow f       -> Property.value flexFlow       ==> value f
+                | FlexBasis f      -> Property.value flexBasis      ==> value f
                 | JustifyContent j -> Property.value justifyContent ==> value j
                 | AlignItems a     -> Property.value alignItems     ==> value a
                 | AlignContent a   -> Property.value alignContent   ==> value a

@@ -306,6 +306,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
                     ClassName
                         (fss
                             [
+                                
                                 Color Inherit
                                 BackgroundColor Initial
                                 FontSize Unset
@@ -324,7 +325,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
                                 BorderRightColor Inherit
                                 BorderBottomColor Inherit
                                 BorderLeftColor Inherit
-
+                               
                                 Width Inherit
                                 Height Inherit
                                 CSSProperty.Perspective Inherit
@@ -342,9 +343,10 @@ let render (model: Model) (dispatch: Msg -> unit) =
                                 CSSProperty.FlexBasis Inherit
                                 AlignSelf Inherit
                                 CSSProperty.Flex [Inherit]
-
+                                
                                 Transform Inherit
                                 Transforms [Inherit]
+                                
                             ])
                 ]
                 [ str "Hei" ]
