@@ -330,34 +330,6 @@ let MarginExamples =
                 [ str "Me tooo!" ]
         ]
 
-(*
-
-.trigger {
-  width: 200px;
-  height: 200px;
-  border: 20px solid #999;
-  background: #ddd;
-}
-
-.box {
-  display: inline-block;
-  background: pink;
-  width: 200px;
-  height: 200px;
-  -webkit-transition: -webkit-transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97);
-  transition: -webkit-transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97);
-  transition: transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97);
-  transition: transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97), -webkit-transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97);
-}
-
-.trigger:hover .box {
-  -webkit-transform: translate(200px, 150px) rotate(20deg);
-          transform: translate(200px, 150px) rotate(20deg);
-}
-
-
-*)
-
 let TransitionExamples =   
     let box =
         fss
@@ -702,28 +674,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //BorderExamples
             //AnimationExamples
             //MarginExamples
-            TransitionExamples
+            //TransitionExamples
             //FlexBoxExamples model dispatch
-
-            let child = 
-                fss
-                    [
-                        FontSize (px 10)
-                    ]
-
-            let parent =
-                fss
-                    [
-                        FontSize (px 500)
-                        FontSize (Ease)
-                        Selector ((Descendant child), [ BackgroundColor red ])
-                    ]
-
-            div [ ClassName parent ]
-                [
-                    div [ClassName child] [ str "foobar"]
-                ]
-
         ]
 
 Program.mkSimple init update render

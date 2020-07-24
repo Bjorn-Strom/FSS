@@ -277,6 +277,56 @@ let CssTests =
             Expect.equal (getValue globals "color") "rgb(0, 0, 0)" "Inherit set"
             Expect.equal (getValue globals "background-color") "rgba(0, 0, 0, 0)" "Initial set"
 
+        testCase' "Set margin" <| fun _ ->
+            let shortShortHand = 
+                fss
+                    [
+                        Margin (px 10)
+                    ]
+
+            let shortHand =
+                fss
+                    [
+                        Margins [px 10; px 20; px 30; px 40]
+                    ]
+
+            let margin =
+                fss
+                    [
+                        MarginTop (px 30)
+                        MarginRight (px 20)
+                        MarginBottom (px 40)
+                        MarginLeft (px 10)
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div [ Id "shortShortHand"; ClassName shortShortHand ] []
+                        div [ Id "shortHand"; ClassName shortHand ] []
+                        div [ Id "margins"; ClassName margin ] []
+                    ]
+            ) |> ignore
+                
+            let shortShortHand = getComputedCssById("shortShortHand")
+            Expect.equal (getValue shortShortHand "margin-top") "10px" "Margin top gets set"
+            Expect.equal (getValue shortShortHand "margin-right") "10px" "Margin top gets set"
+            Expect.equal (getValue shortShortHand "margin-bottom") "10px" "Margin top gets set"
+            Expect.equal (getValue shortShortHand "margin-left") "10px" "Margin top gets set"
+
+            let shortHand = getComputedCssById("shortHand")
+            Expect.equal (getValue shortHand "margin-top") "10px" "Margin top gets set shorthand"
+            Expect.equal (getValue shortHand "margin-right") "20px" "Margin top gets set shorthand"
+            Expect.equal (getValue shortHand "margin-bottom") "30px" "Margin top gets set shorthand"
+            Expect.equal (getValue shortHand "margin-left") "40px" "Margin top gets set shorthand"
+
+            let margin = getComputedCssById("margins")
+            Expect.equal (getValue margin "margin-top") "30px" "Margin top gets set margins"
+            Expect.equal (getValue margin "margin-right") "20px" "Margin top gets set margins"
+            Expect.equal (getValue margin "margin-bottom") "40px" "Margin top gets set margins"
+            Expect.equal (getValue margin "margin-left") "10px" "Margin top gets set margins"
+
+
     ]
 
 Mocha.runTests CssTests |> ignore

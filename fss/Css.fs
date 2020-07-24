@@ -114,7 +114,8 @@ module Css =
         | MarginRight of ICSSProperty
         | MarginBottom of ICSSProperty
         | MarginLeft of ICSSProperty
-        | Margin of ICSSProperty list
+        | Margin of ICSSProperty 
+        | Margins of ICSSProperty list
 
         | Animation of IAnimation list  
         | Animations of IAnimation list list
@@ -206,7 +207,8 @@ module Css =
                 | MarginRight m  -> Property.value marginRight  ==> value m
                 | MarginBottom m -> Property.value marginBottom ==> value m
                 | MarginLeft m   -> Property.value marginLeft   ==> value m
-                | Margin ms      -> Property.value margin       ==> combineWs ms value
+                | Margin m       -> Property.value margin       ==> value m
+                | Margins ms     -> Property.value margin       ==> combineWs ms value
 
                 | Animation a                 -> Property.value animation               ==> combineWs a Animation.value
                 | Animations ans              -> Property.value animation               ==> combineAnimations ans
@@ -230,14 +232,12 @@ module Css =
                 | Transform t   -> Property.value transform ==> value t
                 | Transforms ts -> Property.value transform ==> combineWs ts value
 
-
-                // WIP
-                | Transition t               -> "transition"                 ==> value t
-                | Transitions ts             -> "transition"                 ==> combineComma ts value
-                | TransitionDelay t          -> "transition-delay"           ==> value t
-                | TransitionDuration t       -> "transition-duration"        ==> value t
-                | TransitionProperty t       -> "transition-property"        ==> value t
-                | TransitionTimingFunction t -> "transition-timing-function" ==> value t
+                | Transition t               -> Property.value transition               ==> value t
+                | Transitions ts             -> Property.value transition               ==> combineComma ts value
+                | TransitionDelay t          -> Property.value transitionDelay          ==> value t
+                | TransitionDuration t       -> Property.value transitionDuration       ==> value t
+                | TransitionProperty t       -> Property.value transitionProperty       ==> value t
+                | TransitionTimingFunction t -> Property.value transitionTimingFunction ==> value t
 
         )  |> createObj
 
