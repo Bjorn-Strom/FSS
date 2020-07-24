@@ -30,6 +30,7 @@ open FlexShrink
 open FlexBasis
 open Flex
 open Margin
+open Selector
 
 module Css = 
     [<Import("css", from="emotion")>]
@@ -60,10 +61,11 @@ module Css =
             | :? AlignSelf as a      -> AlignSelf.value a
             | :? Order as o          -> Order.value o
             | :? Transition as t     -> Transition.value t
-
             | _ -> "Unknown CSS"
 
     type CSSProperty =
+        | Selector of Selector * CSSProperty list
+
         | Label of string
         | Color of ICSSProperty
         | BackgroundColor of ICSSProperty
@@ -136,7 +138,6 @@ module Css =
         | Transform of ICSSProperty
         | Transforms of ICSSProperty list
 
-        //| Transition of Transition
         | Transition of ICSSProperty
         | Transitions of ICSSProperty list
         | TransitionDelay of ICSSProperty
@@ -154,6 +155,8 @@ module Css =
         attributeList
         |> List.map (
             function
+                | Selector (s, ss)   -> Selector.value s               ==> createCSSObject ss
+
                 | Label l            -> Property.value label           ==> l
                 | Color c            -> Property.value color           ==> value c
                 | BackgroundColor bc -> Property.value backgroundColor ==> value bc

@@ -35,6 +35,7 @@ open FlexShrink
 open FlexBasis
 open Flex
 open Margin
+open Selector
 
 type Model = { 
     FlowDirection: FlexDirection
@@ -376,11 +377,14 @@ let TransitionExamples =
                 Border [px 20; Solid; hex "ddd" ]
                 Hover 
                     [
-                        Transforms
+                        Selector ((Descendant box), 
                             [
-                                Translate2((px 200), (px 150))
-                                Rotate(deg 20.0)
-                            ]
+                                Transforms
+                                   [
+                                       Translate2((px 200), (px 150))
+                                       Rotate(deg 20.0)
+                                   ]
+                            ])
                     ]
             ]
 
@@ -400,6 +404,7 @@ let TransitionExamples =
                     ]                 
             ])] [ str "I have a transition! Hover me!" ]
         ]
+        
 
 let FlexBoxExamples model dispatch =
     // Test alignment
@@ -699,6 +704,26 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //MarginExamples
             TransitionExamples
             //FlexBoxExamples model dispatch
+
+            let child = 
+                fss
+                    [
+                        FontSize (px 10)
+                    ]
+
+            let parent =
+                fss
+                    [
+                        FontSize (px 500)
+                        FontSize (Ease)
+                        Selector ((Descendant child), [ BackgroundColor red ])
+                    ]
+
+            div [ ClassName parent ]
+                [
+                    div [ClassName child] [ str "foobar"]
+                ]
+
         ]
 
 Program.mkSimple init update render
