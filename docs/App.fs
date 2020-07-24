@@ -289,15 +289,6 @@ let AnimationExamples =
             p [ClassName bounceAnimation] [str "Bouncing text"]
             p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
             p [ClassName combinedAnimations] [str "COMBINED"]
-            p [ClassName (fss [
-                BackgroundColor red
-                Transition (backgroundColor3 (sec 2.5) Ease (sec 2.5))
-                //Transition3 (backgroundColor, (sec 2.5), Ease, (sec 0.0))
-                Hover 
-                    [
-                        BackgroundColor green
-                    ]                 
-            ])] [ str "I have a transition! Hover me!" ]
             div [ ClassName spinnyMation ] []
             div [ ClassName loaderParent]
                 [
@@ -336,6 +327,78 @@ let MarginExamples =
                             ])
                 ]
                 [ str "Me tooo!" ]
+        ]
+
+(*
+
+.trigger {
+  width: 200px;
+  height: 200px;
+  border: 20px solid #999;
+  background: #ddd;
+}
+
+.box {
+  display: inline-block;
+  background: pink;
+  width: 200px;
+  height: 200px;
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97);
+  transition: -webkit-transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97);
+  transition: transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97);
+  transition: transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97), -webkit-transform 300ms cubic-bezier(0, 0.47, 0.32, 1.97);
+}
+
+.trigger:hover .box {
+  -webkit-transform: translate(200px, 150px) rotate(20deg);
+          transform: translate(200px, 150px) rotate(20deg);
+}
+
+
+*)
+
+let TransitionExamples =   
+    let box =
+        fss
+            [
+                Display Display.InlineBlock
+                BackgroundColor pink
+                Width (px 200)
+                Height (px 200)
+                Transition (Transition2(transform, (mSec 300.0), CubicBezier(0.0, 0.47, 0.32, 1.97)))
+            ]
+
+    let trigger =
+        fss
+            [
+                Width (px 200)
+                Height (px 200)
+                Border [px 20; Solid; hex "ddd" ]
+                Hover 
+                    [
+                        Transforms
+                            [
+                                Translate2((px 200), (px 150))
+                                Rotate(deg 20.0)
+                            ]
+                    ]
+            ]
+
+    fragment []
+        [
+            div [ ClassName trigger ]
+                [
+                    div [ ClassName box ] []
+                ]
+
+            p [ClassName (fss [
+                BackgroundColor red
+                Transition (Transition3(backgroundColor, (sec 2.5), Ease, (sec 2.5)))
+                Hover 
+                    [
+                        BackgroundColor green
+                    ]                 
+            ])] [ str "I have a transition! Hover me!" ]
         ]
 
 let FlexBoxExamples model dispatch =
@@ -634,7 +697,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //BorderExamples
             //AnimationExamples
             //MarginExamples
-            FlexBoxExamples model dispatch
+            TransitionExamples
+            //FlexBoxExamples model dispatch
         ]
 
 Program.mkSimple init update render

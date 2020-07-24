@@ -1,6 +1,7 @@
 namespace Fss
 
 open Utilities.Types
+open System
 
 module Property =
     type Property =
@@ -528,6 +529,15 @@ module Property =
         | ZIndex -> "zIndex"
 
         | Hover -> ":hover"
+
+    let pascalToKebabCase (property: Property): string =
+        property
+        |> value
+        |> Seq.fold (fun acc element ->
+        if Char.IsUpper(char element) then 
+            sprintf "%s-%s" acc (string <| Char.ToLower(element))
+        else 
+            acc + (string element)) ""
 
     let alignContent = AlignContent
     let alignItems = AlignItems

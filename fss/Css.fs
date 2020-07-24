@@ -59,6 +59,7 @@ module Css =
             | :? AlignContent as a   -> AlignContent.value a
             | :? AlignSelf as a      -> AlignSelf.value a
             | :? Order as o          -> Order.value o
+            | :? Transition as t     -> Transition.value t
 
             | _ -> "Unknown CSS"
 
@@ -135,13 +136,13 @@ module Css =
         | Transform of ICSSProperty
         | Transforms of ICSSProperty list
 
-        | Transition of Transition
-        | Transition3 of Property * Time * Timing * Time
+        //| Transition of Transition
+        | Transition of ICSSProperty
         | Transitions of ICSSProperty list
-        | TransitionDelay of Time
-        | TransitionDuration of Time
+        | TransitionDelay of ICSSProperty
+        | TransitionDuration of ICSSProperty
         | TransitionProperty of ICSSProperty
-        | TransitionTimingFunction of Animation.Timing
+        | TransitionTimingFunction of ICSSProperty
 
     let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
     let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
@@ -228,13 +229,12 @@ module Css =
 
 
                 // WIP
-                | Transition t               -> "transition"                 ==> Transition.value t
-                | Transition3 (a,b,c,d)      -> "transition"                 ==> sprintf "%s %s %s %s" (value a) (Animation.value b) (Animation.value c) (Animation.value d)
+                | Transition t               -> "transition"                 ==> value t
                 | Transitions ts             -> "transition"                 ==> combineComma ts value
-                | TransitionDelay t          -> "transition-delay"           ==> Animation.value t
-                | TransitionDuration t       -> "transition-duration"        ==> Animation.value t
+                | TransitionDelay t          -> "transition-delay"           ==> value t
+                | TransitionDuration t       -> "transition-duration"        ==> value t
                 | TransitionProperty t       -> "transition-property"        ==> value t
-                | TransitionTimingFunction t -> "transition-timing-function" ==> Animation.value t
+                | TransitionTimingFunction t -> "transition-timing-function" ==> value t
 
         )  |> createObj
 
