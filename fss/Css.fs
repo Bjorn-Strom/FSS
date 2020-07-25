@@ -20,14 +20,12 @@ open FlexDirection
 open JustifyContent
 open AlignItems
 open FlexWrap
-open FlexTypes
 open AlignContent
 open AlignSelf
 open Order
 open FlexGrow
 open FlexShrink
 open FlexBasis
-open Flex
 open Margin
 open Selector
 
@@ -106,7 +104,6 @@ module Css =
         | FlexShrink of ICSSProperty
         | FlexBasis of ICSSProperty
         | AlignSelf of ICSSProperty
-        | Flex of ICSSProperty list
 
         | MarginTop of ICSSProperty
         | MarginRight of ICSSProperty
@@ -198,7 +195,6 @@ module Css =
                 | FlexGrow f       -> Property.value flexGrow       ==> value f
                 | FlexShrink f     -> Property.value flexShrink     ==> value f
                 | AlignSelf a      -> Property.value alignSelf      ==> value a
-                | Flex f           -> Property.value flex           ==> combineWs f Flex.value
 
                 | MarginTop m    -> Property.value marginTop    ==> value m
                 | MarginRight m  -> Property.value marginRight  ==> value m

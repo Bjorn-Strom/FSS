@@ -32,7 +32,6 @@ open Order
 open FlexGrow
 open FlexShrink
 open FlexBasis
-open Flex
 open Margin
 open Selector
 
@@ -636,6 +635,47 @@ let FlexBoxExamples model dispatch =
                     div [ ClassName child] [ str "7" ]
                 ]
 
+    // Flex-basis & flex grow
+    let parent = 
+        fss 
+            [
+                BackgroundColor (hex "ccc")
+                Height (px 100)
+                Display Display.Flex
+                FlexDirection Row
+                AlignItems Center
+            ]
+
+    let child =
+        fss
+            [
+                CSSProperty.Margins [px 0; px 10]
+                BackgroundColor white
+                CSSProperty.FlexBasis (px 120)
+                CSSProperty.FlexGrow (FlexGrow 1)
+                Height (px 75)
+                
+            ]
+
+    let child3 =
+        fss
+            [
+                CSSProperty.Margins [px 0; px 10]
+                BackgroundColor white
+                CSSProperty.FlexBasis (px 120)
+                CSSProperty.FlexGrow (FlexGrow 2)
+                Height (px 75)
+            ]
+
+    let flexBasisGrow =
+        div [ ClassName parent]
+            [
+                div [ ClassName child ] []
+                div [ ClassName child ] []
+                div [ ClassName child3 ] []
+            ]
+
+
     let formStyle =
         fss
             [
@@ -747,6 +787,8 @@ let FlexBoxExamples model dispatch =
                         ]
                 ]
             alignContent
+            p [] [str "Flex basis & grow" ]
+            flexBasisGrow
 
         ]
 

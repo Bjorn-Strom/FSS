@@ -49,9 +49,6 @@ module Display =
 
             | None -> "none"
 
-module FlexTypes =
-    type IFlex = interface end
-
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction      
 module FlexDirection =
     open Utilities.Types
@@ -159,60 +156,34 @@ module Order =
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
 module FlexGrow =
-    open FlexTypes
     open Utilities.Types
 
     type FlexGrow = 
         | FlexGrow of int
         interface ICSSProperty
-        interface IFlex
 
     let value (FlexGrow f) = string f
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
 module FlexShrink =
-    open FlexTypes
     open Utilities.Types
 
     type FlexShrink =
         | FlexShrink of int
         interface ICSSProperty
-        interface IFlex
 
     let value (FlexShrink f) = string f
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
 module FlexBasis =
     open Fss.Units.Size
-    open FlexTypes
     open Utilities.Types
 
     type FlexBasis = 
         | FlexBasis of Size
-        interface IFlex
         interface ICSSProperty
 
     let value (FlexBasis v) = Units.Size.value v
-
-module Flex =
-    open Utilities.Types
-    open Utilities.Global
-    open FlexTypes
-    open FlexGrow
-    open FlexShrink
-    open FlexBasis
-
-    type Flex = 
-        | Flex of IFlex list
-        interface ICSSProperty
-
-    let value (v: ICSSProperty): string =
-        match v with
-            | :? Global as g -> Utilities.Global.value g
-            | :? FlexGrow as f -> FlexGrow.value f
-            | :? FlexShrink as f -> FlexShrink.value f
-            | :? FlexBasis as f -> FlexBasis.value f
-            | _ -> "Unknown flex type"
 
 module AlignSelf =
     open Utilities.Types
