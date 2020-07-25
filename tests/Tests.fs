@@ -330,3 +330,56 @@ let CssTests =
     ]
 
 Mocha.runTests CssTests |> ignore
+
+type IBigBossType1 = interface end
+type IBigBossType2 = interface end
+
+type BigBossType =
+    | BigBoss of string
+    interface IBigBossType1
+    interface IBigBossType2
+
+let bossValue v =
+    match v with
+    | BigBoss s -> s
+
+type Type1 =
+    | Type1 of string
+    interface IBigBossType1
+
+let type1Value v =
+    match v with
+    | Type1 s -> s
+
+type Type2 =
+    | Type2 of string
+    interface IBigBossType2
+
+let type2Value v =
+    match v with
+    | Type2 s -> s
+
+let usingType1AndBigBossType (x: IBigBossType1) = x
+let usingType2AndBigBossType (x: IBigBossType2) = x
+
+let IBIGBOSS1VALUE (x: IBigBossType1):string =
+    match x with
+        | :? BigBossType as b -> bossValue b
+        | :? Type1 as t -> type1Value t
+
+let IBIGBOSS2VALUE (x: IBigBossType2):string =
+    match x with
+        | :? BigBossType as b -> bossValue b
+        | :? Type2 as t -> type2Value t
+
+usingType1AndBigBossType (Type1 "type1") |> printfn "%A"
+usingType1AndBigBossType (BigBoss "bigBoss") |> printfn "%A"
+
+usingType2AndBigBossType (Type2 "type2") |> printfn "%A"
+usingType2AndBigBossType (BigBoss "bigboss") |> printfn "%A"
+
+
+
+
+
+
