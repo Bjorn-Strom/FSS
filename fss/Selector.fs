@@ -12,4 +12,4 @@ module Selector =
 
     let value (s: Selector): string = 
         match s with
-            | Descendant d -> sprintf " .%s" d
+            | Descendant d -> sprintf " %s" d

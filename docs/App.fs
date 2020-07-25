@@ -9,7 +9,7 @@ open Fss
 open Fss.Utilities.Global
 open Property
 open Fss
-open Css
+open Value
 open Color
 open Units.Size
 open Units.Angle
@@ -26,7 +26,7 @@ open AlignItems
 open FlexDirection
 open FlexWrap
 open JustifyContent
-open AlignItems
+open AlignSelf
 open AlignContent
 open Order
 open FlexGrow
@@ -55,7 +55,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetFlexDirection direction -> { model with FlexDirection = direction}
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
-
+    (*
 let ColorExamples =
     fragment []
         [
@@ -94,7 +94,7 @@ let FontExamples =
             p [ClassName (fss [FontSize (mm 33.3)])] [ str "Fonts can be set with mm" ]
             p [] [ str "and more!"]
         ]
-
+        
 let BorderExamples =
     fragment []
         [
@@ -182,7 +182,7 @@ let BorderExamples =
             )] [ str "Now in color!"]
 
         ]
-
+*)
 let AnimationExamples =
 
     let bounceFrames = 
@@ -208,8 +208,11 @@ let AnimationExamples =
                         Transform (Translate3D(px 0, px -4, px 0))
                         BackgroundColor orange
                     ]
-            ] 
+            ]
 
+    let bounceAnimation = fss [ Animation [bounceFrames; sec 1.0; Ease; Infinite] ]
+
+(*
     let sizeFrames =
         keyframes
             [
@@ -272,7 +275,7 @@ let AnimationExamples =
                 JustifyContent JustifyContent.Center
                 AlignItems AlignItems.Center
                 BackgroundColor (hex "272727")
-                Css.Perspective (px 200)
+                Value.Perspective (px 200)
             ]
 
     let loaderContainer =
@@ -284,21 +287,21 @@ let AnimationExamples =
                 BackgroundColor (hex "00dbde")
                 Animation [loader; sec 2.0; Linear; Infinite]
             ]
-
+            *)
 
     fragment []
         [
             p [] [ str "Things can animate now!" ]
             p [ClassName bounceAnimation] [str "Bouncing text"]
-            p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
-            p [ClassName combinedAnimations] [str "COMBINED"]
-            div [ ClassName spinnyMation ] []
-            div [ ClassName loaderParent]
-                [
-                    div [ ClassName loaderContainer ] []
-                ]
+            //p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
+            //p [ClassName combinedAnimations] [str "COMBINED"]
+            //div [ ClassName spinnyMation ] []
+            //div [ ClassName loaderParent]
+            //    [
+            //        div [ ClassName loaderContainer ] []
+            //    ]
         ]
-
+(*
 let MarginExamples =
     fragment []
         [
@@ -652,7 +655,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (FlexGrow 1)
+                CSSProperty.FlexGrow (Grow 1)
                 Height (px 75)
                 
             ]
@@ -663,11 +666,51 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (FlexGrow 2)
+                CSSProperty.FlexGrow (Grow 2)
                 Height (px 75)
             ]
 
     let flexBasisGrow =
+        div [ ClassName parent]
+            [
+                div [ ClassName child ] []
+                div [ ClassName child ] []
+                div [ ClassName child3 ] []
+            ]
+
+    // Flex-basis & flex shrink
+    let parent = 
+        fss 
+            [
+                BackgroundColor (hex "ccc")
+                Height (px 100)
+                Display Display.Flex
+                FlexDirection Row
+                AlignItems Center
+            ]
+
+    let child =
+        fss
+            [
+                CSSProperty.Margins [px 0; px 10]
+                BackgroundColor white
+                CSSProperty.FlexBasis (px 120)
+                CSSProperty.FlexGrow (Grow 1)
+                Height (px 75)
+                        
+            ]
+
+    let child3 =
+        fss
+            [
+                CSSProperty.Margins [px 0; px 10]
+                BackgroundColor white
+                CSSProperty.FlexBasis (px 120)
+                CSSProperty.FlexShrink (Shrink 2)
+                Height (px 75)
+            ]
+
+    let flexBasisShrink =
         div [ ClassName parent]
             [
                 div [ ClassName child ] []
@@ -789,9 +832,10 @@ let FlexBoxExamples model dispatch =
             alignContent
             p [] [str "Flex basis & grow" ]
             flexBasisGrow
-
+            p [] [str "Flex basis & shrink" ]
+            flexBasisShrink
         ]
-
+*)
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
@@ -799,10 +843,10 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //ColorExamples
             //FontExamples
             //BorderExamples
-            //AnimationExamples
+            AnimationExamples
             //MarginExamples
             //TransitionExamples
-            FlexBoxExamples model dispatch
+            //FlexBoxExamples model dispatch
         ]
 
 Program.mkSimple init update render

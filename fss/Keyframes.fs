@@ -3,8 +3,7 @@
 open Fable.Core
 open Fable.Core.JsInterop
 
-
-open Css
+open Value
 open Utilities.Types
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes

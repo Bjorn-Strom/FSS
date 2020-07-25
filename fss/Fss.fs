@@ -1,6 +1,6 @@
 namespace Fss
 
-open Css
+open Value
 
 module Fss =
     let fss (attributeList: CSSProperty list) = 

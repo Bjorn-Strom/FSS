@@ -5,20 +5,36 @@ open Fable.Mocha
 open Fable.React
 open Fable.React.Props
 open Fable.ReactTestingLibrary
-open Browser
 
 open Fss
+open Fss.Utilities.Global
+open Property
 open Fss
-open Css
+open Value
 open Color
 open Units.Size
+open Units.Angle
 open Fonts
 open BorderStyle
 open BorderWidth
 open Animation
 open Keyframes
 open Transform
-open Utilities.Global
+open Transition
+open Display
+open JustifyContent
+open AlignItems
+open FlexDirection
+open FlexWrap
+open JustifyContent
+open AlignSelf
+open AlignContent
+open Order
+open FlexGrow
+open FlexShrink
+open FlexBasis
+open Margin
+open Selector
 
 let testCase' name case = 
     testCase name <| fun _ -> 
@@ -281,7 +297,7 @@ let CssTests =
             let shortShortHand = 
                 fss
                     [
-                        Margin (px 10)
+                        CSSProperty.Margin (px 10)
                     ]
 
             let shortHand =
@@ -325,6 +341,58 @@ let CssTests =
             Expect.equal (getValue margin "margin-right") "20px" "Margin top gets set margins"
             Expect.equal (getValue margin "margin-bottom") "40px" "Margin top gets set margins"
             Expect.equal (getValue margin "margin-left") "10px" "Margin top gets set margins"
+
+        testCase' "Flexbox tests" <| fun _ ->
+            let flex =
+                fss
+                    [
+                        Display Display.Flex
+                        FlexDirection Column
+                        FlexWrap FlexWrap.Wrap
+                        FlexGrow (Grow 1)
+                        FlexShrink (Shrink 1)
+                        CSSProperty.FlexBasis (px 120)
+                        JustifyContent JustifyContent.SpaceAround
+                        AlignContent AlignContent.Center
+                        AlignItems AlignItems.Center
+
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div [ Id "flex"; ClassName flex ] []
+                    ]
+            ) |> ignore
+                    
+            let flex = getComputedCssById("flex")
+            Expect.equal (getValue flex "display") "flex" "Display gets set"
+            Expect.equal (getValue flex "flex-direction") "column" "flex direction gets set"
+            Expect.equal (getValue flex "flex-wrap") "wrap" "flex wrap gets set"
+            Expect.equal (getValue flex "flex-grow") "1" "flex grow gets set"
+            Expect.equal (getValue flex "flex-shrink") "1" "flex shrink gets set"
+            Expect.equal (getValue flex "flex-basis") "120px" "flex basis gets set"
+            Expect.equal (getValue flex "justify-content") "space-around" "justify content gets set"
+            Expect.equal (getValue flex "align-content") "center" "align content gets set"
+            Expect.equal (getValue flex "align-items") "center" "align items gets set"
+
+        testCase "Style descendant" <| fun _ ->
+            let style =
+                fss
+                    [
+                       Selector ((Descendant "div"), [ BackgroundColor red ])
+                    ]
+            
+            RTL.render(
+                div [ ClassName style ]
+                    [
+                        div 
+                            [ Id "foo" ] [ str "foo" ]
+                    ]
+            ) |> ignore
+                    
+            let style = getComputedCssById("foo")
+            Expect.equal (getValue style "background-color") "rgba(255, 0, 0)" "Descendant gets background color"
 
 
     ]

@@ -1,8 +1,15 @@
 namespace Fss.Utilities
 
+open Browser
+
 module Types =
     type IAnimation = interface end
     type ICSSProperty = interface end
+    type CSSObject = CSSObject of obj
+
+    let value (CSSObject o): obj = 
+        console.log("Value: ", o)
+        o
 
     let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
         list

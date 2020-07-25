@@ -144,6 +144,27 @@ module AlignContent =
             | SpaceAround -> "space-around"
             | Stretch -> "stretch"
 
+module AlignSelf =
+    open Utilities.Types
+            
+    type AlignSelf = 
+        | Auto
+        | FlexStart 
+        | FlexEnd 
+        | Center 
+        | Baseline 
+        | Stretch
+        interface ICSSProperty
+            
+    let value (v: AlignSelf): string =
+        match v with
+            | Auto -> "auto"
+            | FlexStart -> "flex-start"
+            | FlexEnd -> "flex-end"
+            | Center -> "center"
+            | Baseline -> "baseline"
+            | Stretch -> "stretch"
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/order
 module Order =
     open Utilities.Types
@@ -159,20 +180,20 @@ module FlexGrow =
     open Utilities.Types
 
     type FlexGrow = 
-        | FlexGrow of int
+        | Grow of int
         interface ICSSProperty
 
-    let value (FlexGrow f) = string f
+    let value (Grow f) = string f
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
 module FlexShrink =
     open Utilities.Types
 
     type FlexShrink =
-        | FlexShrink of int
+        | Shrink of int
         interface ICSSProperty
 
-    let value (FlexShrink f) = string f
+    let value (Shrink f) = string f
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
 module FlexBasis =
@@ -184,24 +205,3 @@ module FlexBasis =
         interface ICSSProperty
 
     let value (FlexBasis v) = Units.Size.value v
-
-module AlignSelf =
-    open Utilities.Types
-
-    type AlignSelf = 
-        | Auto
-        | FlexStart 
-        | FlexEnd 
-        | Center 
-        | Baseline 
-        | Stretch
-        interface ICSSProperty
-
-    let value (v: AlignSelf): string =
-        match v with
-            | Auto -> "auto"
-            | FlexStart -> "flexStart"
-            | FlexEnd -> "flexEnd"
-            | Center -> "center"
-            | Baseline -> "baseline"
-            | Stretch -> "stretch"
