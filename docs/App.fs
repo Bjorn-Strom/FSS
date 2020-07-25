@@ -25,7 +25,6 @@ open JustifyContent
 open AlignItems
 open FlexDirection
 open FlexWrap
-open FlexFlow
 open JustifyContent
 open AlignItems
 open AlignContent
@@ -38,21 +37,25 @@ open Margin
 open Selector
 
 type Model = { 
-    FlowDirection: FlexDirection
-    FlowWrap: FlexWrap }
+    FlexDirection: FlexDirection
+    FlexWrap: FlexWrap
+    AlignContent: AlignContent }
 type Msg = 
-    | SetFlowDirection of FlexDirection
-    | SetFlowWrap of FlexWrap
+    | SetFlexDirection of FlexDirection
+    | SetFlexWrap of FlexWrap
+    | SetAlignContent of AlignContent
 
 
 let init() = { 
-    FlowDirection = Row
-    FlowWrap = NoWrap }
+    FlexDirection = Row
+    FlexWrap = NoWrap
+    AlignContent = Stretch}
 
 let update (msg: Msg) (model: Model): Model =
     match msg with
-    | SetFlowDirection direction -> { model with FlowDirection = direction}
-    | SetFlowWrap wrap -> { model with FlowWrap = wrap}
+    | SetFlexDirection direction -> { model with FlexDirection = direction}
+    | SetFlexWrap wrap -> { model with FlexWrap = wrap}
+    | SetAlignContent content -> { model with AlignContent = content}
 
 let ColorExamples =
     fragment []
@@ -324,7 +327,7 @@ let MarginExamples =
                                 Height (px 100)
                                 Color orangered
                                 BackgroundColor rebeccapurple
-                                CSSProperty.Margin [px 100; px 50; px 200; px 150]
+                                CSSProperty.Margins [px 100; px 50; px 200; px 150]
                             ])
                 ]
                 [ str "Me tooo!" ]
@@ -393,7 +396,7 @@ let FlexBoxExamples model dispatch =
             [
                 Width (px 100)
                 Height (px 100)
-                CSSProperty.Margin [Auto]
+                CSSProperty.Margin Auto
                 BackgroundColor lightcoral
             ]
 
@@ -408,7 +411,8 @@ let FlexBoxExamples model dispatch =
         fss
             [
                 Display Display.Flex
-                FlexFlow [Row; Wrap]
+                FlexDirection Row
+                FlexWrap Wrap
                 JustifyContent JustifyContent.SpaceAround
             ]
 
@@ -503,7 +507,7 @@ let FlexBoxExamples model dispatch =
             [
                 BackgroundColor (hex "#cee")
                 Width (em 15.0)
-                CSSProperty.Margin [px 10]
+                CSSProperty.Margin (px 10)
             ]
                                     
     let noWrap =
@@ -529,7 +533,7 @@ let FlexBoxExamples model dispatch =
             [
                 BackgroundColor (hex "#cee")
                 Width (em 15.0)
-                CSSProperty.Margin [px 10]
+                CSSProperty.Margin (px 10)
             ]
                                                 
     let wrap =
@@ -555,7 +559,7 @@ let FlexBoxExamples model dispatch =
             [
                 BackgroundColor (hex "#cee")
                 Width (em 15.0)
-                CSSProperty.Margin [px 10]
+                CSSProperty.Margin (px 10)
             ]
                                                             
     let wrapReverse =
@@ -572,10 +576,11 @@ let FlexBoxExamples model dispatch =
         fss
             [
                 BackgroundColor pink
-                CSSProperty.Margin [px 48; Auto; px 0]
+                CSSProperty.Margins [px 48; Auto; px 0]
                 Width (px 600)
                 Display Display.Flex
-                FlexFlow [model.FlowDirection; model.FlowWrap]
+                FlexDirection model.FlexDirection
+                FlexWrap model.FlexWrap
             ]
 
     let child =
@@ -583,7 +588,7 @@ let FlexBoxExamples model dispatch =
             [
                 BackgroundColor black
                 Color white
-                CSSProperty.Margin [px 6]
+                CSSProperty.Margin (px 6)
                 Width (px 120)
             ]
                                                             
@@ -598,6 +603,45 @@ let FlexBoxExamples model dispatch =
                     div [ ClassName child] [ str "6" ]
                     div [ ClassName child] [ str "7" ]
                 ]
+
+    // AlignContent
+    let parent = 
+        fss
+            [
+                BackgroundColor (hex "ccc")
+                Display Display.Flex
+                FlexWrap Wrap
+                Width (pct 100)
+                Height (em 20.0)
+                AlignContent model.AlignContent
+            ]
+
+    let child =
+        fss
+            [
+                BackgroundColor (hex "cee")
+                CSSProperty.Margin (px 2)
+                Width (pct 18)
+            ]
+
+    let alignContent =
+        div [ ClassName parent]
+                [
+                    div [ ClassName child] [ str "1" ]
+                    div [ ClassName child] [ str "2" ]
+                    div [ ClassName child] [ str "3" ]
+                    div [ ClassName child] [ str "4" ]
+                    div [ ClassName child] [ str "5" ]
+                    div [ ClassName child] [ str "6" ]
+                    div [ ClassName child] [ str "7" ]
+                ]
+
+    let formStyle =
+        fss
+            [
+                Border [Solid; (px 1); orangered]
+                CSSProperty.Margin (px 20)
+            ]
 
     fragment []
         [
@@ -616,53 +660,94 @@ let FlexBoxExamples model dispatch =
             p [] [ str "Flex wrap is wrapreverse!" ]
             wrapReverse
             p [] [ str "Flex flow" ]
-            form [ ]
+            div [ ClassName (fss [ Display Display.Flex ]) ]
                 [
-                    h3 [] [str "Flex direction" ]
-                    div [] 
+                    form [ ClassName formStyle ]
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowDirection Row)) ]
-                            str "row" 
-                        ]
+                            h3 [] [str "Flex direction" ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Row)) ]
+                                    str "row" 
+                                ]
 
-                    div [] 
-                        [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowDirection RowReverse)) ]
-                            str "row-reverse" 
-                        ]
-                    div [] 
-                        [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowDirection Column)) ]
-                            str "column" 
-                        ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection RowReverse)) ]
+                                    str "row-reverse" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Column)) ]
+                                    str "column" 
+                                ]
 
-                    div [] 
-                        [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowDirection ColumnReverse)) ]
-                            str "column-reverse" 
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection ColumnReverse)) ]
+                                    str "column-reverse" 
+                                ]
                         ]
-                ]
-            form [ ]
-                [
-                    h3 [] [str "Flex wrap" ]
-                    div [] 
+                    form [ ClassName formStyle ]
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowWrap NoWrap)) ]
-                            str "nowrap" 
-                        ]
+                            h3 [] [str "Flex wrap" ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap NoWrap)) ]
+                                    str "nowrap" 
+                                ]
 
-                    div [] 
-                        [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowWrap Wrap)) ]
-                            str "wrap" 
-                        ]
-                    div [] 
-                        [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlowWrap WrapReverse)) ]
-                            str "wrap-reverse" 
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap Wrap)) ]
+                                    str "wrap" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap WrapReverse)) ]
+                                    str "wrap-reverse" 
+                                ]
                         ]
                 ]
             flexFlow
+            p [] [ str "Align content" ]
+            form [ ClassName formStyle ]
+                [
+                    h3 [] [str "Align content" ]
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent FlexStart)) ]
+                            str "FlexStart" 
+                        ]
+
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent FlexEnd)) ]
+                            str "FlexEnd" 
+                        ]
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Center)) ]
+                            str "Center" 
+                        ]
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Stretch)) ]
+                            str "Stretch(default)" 
+                        ]
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent SpaceBetween)) ]
+                            str "SpaceBetween" 
+                        ]
+                    div [] 
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent SpaceAround)) ]
+                            str "SpaceAround" 
+                        ]
+                ]
+            alignContent
+
         ]
 
 
@@ -675,7 +760,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //AnimationExamples
             //MarginExamples
             //TransitionExamples
-            //FlexBoxExamples model dispatch
+            FlexBoxExamples model dispatch
         ]
 
 Program.mkSimple init update render

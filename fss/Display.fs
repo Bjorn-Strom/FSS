@@ -50,12 +50,10 @@ module Display =
             | None -> "none"
 
 module FlexTypes =
-    type IFlexFlow = interface end
     type IFlex = interface end
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction      
 module FlexDirection =
-    open FlexTypes
     open Utilities.Types
 
     type FlexDirection =
@@ -63,7 +61,6 @@ module FlexDirection =
         | RowReverse
         | Column
         | ColumnReverse
-        interface IFlexFlow
         interface ICSSProperty
 
     let value (v: FlexDirection): string =
@@ -76,12 +73,10 @@ module FlexDirection =
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
 module FlexWrap =
     open Utilities.Types
-    open FlexTypes
     type FlexWrap =
         | NoWrap
         | Wrap
         | WrapReverse
-        interface IFlexFlow
         interface ICSSProperty
 
     let value (v: FlexWrap): string =
@@ -89,18 +84,6 @@ module FlexWrap =
             | NoWrap -> "nowrap"
             | Wrap -> "wrap"
             | WrapReverse -> "wrap-reverse"  
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow
-module FlexFlow =
-    open FlexTypes
-    open FlexDirection
-    open FlexWrap
-
-    let value (v: IFlexFlow): string =
-        match v with
-            | :? FlexDirection as fd -> FlexDirection.value fd
-            | :? FlexWrap as fw -> FlexWrap.value fw
-            | _ -> "Unknown flex flow value"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
 module JustifyContent =

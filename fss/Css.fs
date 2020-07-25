@@ -20,7 +20,6 @@ open FlexDirection
 open JustifyContent
 open AlignItems
 open FlexWrap
-open FlexFlow
 open FlexTypes
 open AlignContent
 open AlignSelf
@@ -99,7 +98,6 @@ module Css =
         | Display of ICSSProperty
         | FlexDirection of ICSSProperty
         | FlexWrap of ICSSProperty
-        | FlexFlow of ICSSProperty list
         | JustifyContent of ICSSProperty
         | AlignItems of ICSSProperty
         | AlignContent of ICSSProperty
@@ -192,7 +190,6 @@ module Css =
                 | Display d        -> Property.value display        ==> value d
                 | FlexDirection f  -> Property.value flexDirection  ==> value f
                 | FlexWrap f       -> Property.value flexWrap       ==> value f
-                | FlexFlow f       -> Property.value flexFlow       ==> combineWs f value
                 | FlexBasis f      -> Property.value flexBasis      ==> value f
                 | JustifyContent j -> Property.value justifyContent ==> value j
                 | AlignItems a     -> Property.value alignItems     ==> value a
