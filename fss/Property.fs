@@ -1,6 +1,5 @@
 namespace Fss
 
-open Utilities.Types
 open System
 
 module Property =
@@ -265,7 +264,6 @@ module Property =
         | ZIndex
 
         | Hover
-        interface ICSSProperty
 
     let value = 
         function 

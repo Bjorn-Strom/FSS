@@ -390,7 +390,6 @@ let TransformExamples =
             ] []
         ]
 
-        (*
 let TransitionExamples =   
     let box =
         fss
@@ -407,7 +406,9 @@ let TransitionExamples =
             [
                 Width (px 200)
                 Height (px 200)
-                Border [px 20; Solid; hex "ddd" ]
+                BorderWidth (px 20)
+                BorderStyle Solid
+                BorderColor (hex "ddd")
                 Hover 
                     [
                         Selector (Descendant Div, 
@@ -437,7 +438,6 @@ let TransitionExamples =
                     ]                 
             ])] [ str "I have a transition! Hover me!" ]
         ]
-  *)     
 
 let FlexBoxExamples model dispatch =
     // Test alignment
@@ -903,7 +903,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             AnimationExamples
             MarginExamples
             TransformExamples
-            //TransitionExamples
+            TransitionExamples
             FlexBoxExamples model dispatch
         ]
 

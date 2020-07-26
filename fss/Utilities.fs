@@ -22,10 +22,7 @@ module Types =
     type IFlexShrink     = interface end
     type IFlexBasis      = interface end
     type ITransform      = interface end
-
-
-
-    type ICSSProperty = interface end
+    type ITransition     = interface end
 
     let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
         list
@@ -58,6 +55,7 @@ module Global =
         interface IFlexShrink
         interface IFlexBasis
         interface ITransform
+        interface ITransition
 
     let value (v: Global): string =
         match v with

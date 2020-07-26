@@ -433,7 +433,6 @@ let CssTests =
                 Expect.equal (getValue style1 "transform") "matrix(1, 0.36397, 0.57735, 1, 0, 0)" "Transform gets set by skew"
                 Expect.equal (getValue style2 "transform") "matrix(1, 2, 3, 4, 5, 6)" "Transform gets set by matrix"
 
-            (*
         testCase' "Transitions" <| fun _ ->
             let oneTransition =
                 fss
@@ -470,7 +469,6 @@ let CssTests =
             Expect.equal (getValue two "transition-duration") "10s, 20s, 30s" "transition duration for multiple transitions set"
             Expect.equal (getValue two "transition-timing-function") "ease, ease-in-out, ease-out" "transition timing function set"
             Expect.equal (getValue two "transition-delay") "0s, 0s, 20s" "transition delay set"
-            *)
     ]
 
 Mocha.runTests CssTests |> ignore

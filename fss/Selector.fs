@@ -9,7 +9,6 @@ module Selector =
         | GeneralSibling of Html
         | Child of Html
         | Descendant of Html
-        interface ICSSProperty
 
     let value (s: Selector): string = 
         match s with

@@ -42,8 +42,6 @@ module Animation =
         | CubicBezier of (float * float * float * float)
         | Steps of Steps
         interface IAnimation
-        interface ICSSProperty
-
 
     let timingValue =
         function 

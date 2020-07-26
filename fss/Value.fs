@@ -29,18 +29,11 @@ open FlexBasis
 open Margin
 open Selector
 
-open Browser
 
 module Value = 
     [<Import("css", from="emotion")>]
     let private css(x) = jsNative
     let css' x = css(x) 
-
-    let value (v: ICSSProperty): string =
-        match v with
-            | :? Property as n       -> Property.value n
-            | :? Transition as t     -> Transition.value t
-            | _ -> "Unknown CSS"
 
     type CSSProperty =
         | Selector of Selector * CSSProperty list
@@ -127,12 +120,12 @@ module Value =
         | Transform  of ITransform
         | Transforms of ITransform list
 
-        | Transition of ICSSProperty
-        | Transitions of ICSSProperty list
-        | TransitionDelay of ICSSProperty
-        | TransitionDuration of ICSSProperty
-        | TransitionProperty of ICSSProperty
-        | TransitionTimingFunction of ICSSProperty
+        | Transition               of ITransition
+        | Transitions              of ITransition list
+        | TransitionDelay          of Time
+        | TransitionDuration       of Time
+        | TransitionProperty       of Property
+        | TransitionTimingFunction of Timing
 
     let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
     let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
@@ -228,11 +221,11 @@ module Value =
                 | Transform  t  -> Property.value transform ==> Transform.value t
                 | Transforms ts -> Property.value transform ==> combineWs ts Transform.value
 
-                | Transition               t  -> Property.value transition               ==> value t
-                | Transitions              ts -> Property.value transition               ==> combineComma ts value
-                | TransitionDelay          t  -> Property.value transitionDelay          ==> value t
-                | TransitionDuration       t  -> Property.value transitionDuration       ==> value t
-                | TransitionProperty       t  -> Property.value transitionProperty       ==> value t
-                | TransitionTimingFunction t  -> Property.value transitionTimingFunction ==> value t
+                | Transition               t  -> Property.value transition               ==> Transition.value t
+                | Transitions              ts -> Property.value transition               ==> combineComma ts Transition.value
+                | TransitionDelay          t  -> Property.value transitionDelay          ==> Animation.value t
+                | TransitionDuration       t  -> Property.value transitionDuration       ==> Animation.value t
+                | TransitionProperty       t  -> Property.value transitionProperty       ==> Property.value t
+                | TransitionTimingFunction t  -> Property.value transitionTimingFunction ==> Animation.value t
         )
         |> createObj
