@@ -351,6 +351,45 @@ let MarginExamples =
                 ]
                 [ str "Me tooo!" ]
         ]
+
+let TransformExamples =
+    fragment []
+        [
+            h3 [] [ str "Transforms" ]
+            div [
+                ClassName
+                    (fss
+                        [
+                            Width (px 50)
+                            Height (px 50)
+                            BackgroundColor red
+                            Transform (Skew2(deg 30.0, deg 20.0))
+                        ])
+            ] []
+
+            div [
+                ClassName
+                    (fss
+                        [
+                            Width (px 50)
+                            Height (px 50)
+                            BackgroundColor orange
+                            Transform (Matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0))
+                        ])
+            ] []
+
+            div [
+                ClassName
+                    (fss
+                        [
+                            Width (px 50)
+                            Height (px 50)
+                            BackgroundColor blue
+                            Transform Inherit
+                        ])
+            ] []
+        ]
+
         (*
 let TransitionExamples =   
     let box =
@@ -398,7 +437,7 @@ let TransitionExamples =
                     ]                 
             ])] [ str "I have a transition! Hover me!" ]
         ]
-        
+  *)     
 
 let FlexBoxExamples model dispatch =
     // Test alignment
@@ -663,7 +702,7 @@ let FlexBoxExamples model dispatch =
                 Height (px 100)
                 Display Display.Flex
                 FlexDirection Row
-                AlignItems Center
+                AlignItems AlignItems.Center
             ]
 
     let child =
@@ -703,7 +742,7 @@ let FlexBoxExamples model dispatch =
                 Height (px 100)
                 Display Display.Flex
                 FlexDirection Row
-                AlignItems Center
+                AlignItems AlignItems.Center
             ]
 
     let child =
@@ -739,7 +778,9 @@ let FlexBoxExamples model dispatch =
     let formStyle =
         fss
             [
-                Border [Solid; (px 1); orangered]
+                BorderStyle Solid
+                BorderWidth (px 1)
+                BorderColor orangered
                 CSSProperty.Margin (px 20)
             ]
 
@@ -852,7 +893,6 @@ let FlexBoxExamples model dispatch =
             p [] [str "Flex basis & shrink" ]
             flexBasisShrink
         ]
-*)
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
@@ -862,8 +902,9 @@ let render (model: Model) (dispatch: Msg -> unit) =
             BorderExamples
             AnimationExamples
             MarginExamples
+            TransformExamples
             //TransitionExamples
-            //FlexBoxExamples model dispatch
+            FlexBoxExamples model dispatch
         ]
 
 Program.mkSimple init update render

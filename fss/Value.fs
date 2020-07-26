@@ -38,20 +38,7 @@ module Value =
 
     let value (v: ICSSProperty): string =
         match v with
-            | :? Display as d        -> Display.value d
             | :? Property as n       -> Property.value n
-            | :? Angle as a          -> Units.Angle.value a
-            | :? Transform as t      -> Transform.value t
-            | :? JustifyContent as j -> JustifyContent.value j
-            | :? FlexDirection as f  -> FlexDirection.value f
-            | :? FlexWrap as f       -> FlexWrap.value f
-            | :? FlexGrow as f       -> FlexGrow.value f
-            | :? FlexShrink as f     -> FlexShrink.value f
-            | :? FlexBasis as f      -> FlexBasis.value f
-            | :? AlignItems as a     -> AlignItems.value a
-            | :? AlignContent as a   -> AlignContent.value a
-            | :? AlignSelf as a      -> AlignSelf.value a
-            | :? Order as o          -> Order.value o
             | :? Transition as t     -> Transition.value t
             | _ -> "Unknown CSS"
 
@@ -99,18 +86,17 @@ module Value =
         | Height      of Size
         | Perspective of Size
 
-        | Display of ICSSProperty
-        | FlexDirection of ICSSProperty
-        | FlexWrap of ICSSProperty
-        | JustifyContent of ICSSProperty
-        | AlignItems of ICSSProperty
-        | AlignContent of ICSSProperty
-        | Order of ICSSProperty
-        | FlexGrow of ICSSProperty
-        | FlexShrink of ICSSProperty
-        | FlexBasis of ICSSProperty
-        | AlignSelf of ICSSProperty
-        | Flex of ICSSProperty list
+        | Display        of IDisplay
+        | FlexDirection  of IFlexDirection
+        | FlexWrap       of IFlexWrap
+        | JustifyContent of IJustifyContent
+        | AlignItems     of IAlignItems
+        | AlignContent   of IAlignContent
+        | Order          of IOrder
+        | FlexGrow       of IFlexGrow
+        | FlexShrink     of IFlexShrink
+        | FlexBasis      of IFlexBasis
+        | AlignSelf      of IAlignSelf
 
         | MarginTop    of IMargin
         | MarginRight  of IMargin
@@ -138,8 +124,8 @@ module Value =
         | AnimationPlayState       of PlayState
         | AnimationPlayStates      of PlayState list
 
-        | Transform of ICSSProperty
-        | Transforms of ICSSProperty list
+        | Transform  of ITransform
+        | Transforms of ITransform list
 
         | Transition of ICSSProperty
         | Transitions of ICSSProperty list
@@ -201,17 +187,17 @@ module Value =
                 | Height      h -> Property.value height      ==> Units.Size.value h
                 | Perspective p -> Property.value perspective ==> Units.Size.value p
 
-                | Display        d -> Property.value display        ==> value d
-                | FlexDirection  f -> Property.value flexDirection  ==> value f
-                | FlexWrap       f -> Property.value flexWrap       ==> value f
-                | FlexBasis      f -> Property.value flexBasis      ==> value f
-                | JustifyContent j -> Property.value justifyContent ==> value j
-                | AlignItems     a -> Property.value alignItems     ==> value a
-                | AlignContent   a -> Property.value alignContent   ==> value a
-                | Order          o -> Property.value order          ==> value o
-                | FlexGrow       f -> Property.value flexGrow       ==> value f
-                | FlexShrink     f -> Property.value flexShrink     ==> value f
-                | AlignSelf      a -> Property.value alignSelf      ==> value a
+                | Display        d -> Property.value display        ==> Display.value d
+                | FlexDirection  f -> Property.value flexDirection  ==> FlexDirection.value f
+                | FlexWrap       f -> Property.value flexWrap       ==> FlexWrap.value f
+                | FlexBasis      f -> Property.value flexBasis      ==> FlexBasis.value f
+                | JustifyContent j -> Property.value justifyContent ==> JustifyContent.value j
+                | AlignItems     a -> Property.value alignItems     ==> AlignItems.value a
+                | AlignContent   a -> Property.value alignContent   ==> AlignContent.value a
+                | Order          o -> Property.value order          ==> Order.value o
+                | FlexGrow       f -> Property.value flexGrow       ==> FlexGrow.value f
+                | FlexShrink     f -> Property.value flexShrink     ==> FlexShrink.value f
+                | AlignSelf      a -> Property.value alignSelf      ==> AlignSelf.value a
 
                 | MarginTop    m  -> Property.value marginTop    ==> Margin.value m
                 | MarginRight  m  -> Property.value marginRight  ==> Margin.value m
@@ -239,8 +225,8 @@ module Value =
                 | AnimationPlayState       p   -> Property.value animationPlayState      ==> Animation.value p
                 | AnimationPlayStates      ps  -> Property.value animationPlayState      ==> combineComma ps Animation.value
 
-                | Transform  t  -> Property.value transform ==> value t
-                | Transforms ts -> Property.value transform ==> combineWs ts value
+                | Transform  t  -> Property.value transform ==> Transform.value t
+                | Transforms ts -> Property.value transform ==> combineWs ts Transform.value
 
                 | Transition               t  -> Property.value transition               ==> value t
                 | Transitions              ts -> Property.value transition               ==> combineComma ts value

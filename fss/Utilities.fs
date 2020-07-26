@@ -3,13 +3,26 @@ namespace Fss.Utilities
 open Browser
 
 module Types =
-    type IAnimation   = interface end
-    type IGlobal      = interface end
-    type IFontSize    = interface end
-    type IColor       = interface end
-    type IBorderStyle = interface end
-    type IBorderWidth = interface end
-    type IMargin      = interface end
+    type IAnimation      = interface end
+    type IGlobal         = interface end
+    type IFontSize       = interface end
+    type IColor          = interface end
+    type IBorderStyle    = interface end
+    type IBorderWidth    = interface end
+    type IMargin         = interface end
+    type IDisplay        = interface end
+    type IFlexDirection  = interface end
+    type IFlexWrap       = interface end
+    type IJustifyContent = interface end
+    type IAlignItems     = interface end
+    type IAlignContent   = interface end
+    type IAlignSelf      = interface end
+    type IOrder          = interface end
+    type IFlexGrow       = interface end
+    type IFlexShrink     = interface end
+    type IFlexBasis      = interface end
+    type ITransform      = interface end
+
 
 
     type ICSSProperty = interface end
@@ -33,6 +46,18 @@ module Global =
         interface IBorderStyle
         interface IBorderWidth
         interface IMargin
+        interface IDisplay
+        interface IFlexDirection
+        interface IFlexWrap
+        interface IJustifyContent
+        interface IAlignItems
+        interface IAlignContent
+        interface IAlignSelf
+        interface IOrder
+        interface IFlexGrow
+        interface IFlexShrink
+        interface IFlexBasis
+        interface ITransform
 
     let value (v: Global): string =
         match v with

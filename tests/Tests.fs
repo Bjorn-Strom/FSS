@@ -348,17 +348,18 @@ let CssTests =
             Expect.equal (getValue margin "margin-right") "20px" "Margin top gets set margins"
             Expect.equal (getValue margin "margin-bottom") "40px" "Margin top gets set margins"
             Expect.equal (getValue margin "margin-left") "10px" "Margin top gets set margins"
-            (*
+            
+
         testCase' "Flexbox tests" <| fun _ ->
             let flex =
                 fss
                     [
                         Display Display.Flex
+                        CSSProperty.FlexBasis (px 120)
                         FlexDirection Column
                         FlexWrap FlexWrap.Wrap
                         FlexGrow (Grow 1)
                         FlexShrink (Shrink 1)
-                        CSSProperty.FlexBasis (px 120)
                         JustifyContent JustifyContent.SpaceAround
                         AlignContent AlignContent.Center
                         AlignItems AlignItems.Center
@@ -382,7 +383,7 @@ let CssTests =
             Expect.equal (getValue flex "justify-content") "space-around" "justify content gets set"
             Expect.equal (getValue flex "align-content") "center" "align content gets set"
             Expect.equal (getValue flex "align-items") "center" "align items gets set"
-
+            
         testCase' "Style descendant" <| fun _ ->
             let style =
                 fss
@@ -400,6 +401,39 @@ let CssTests =
             let style = getComputedCssById("foo")
             Expect.equal (getValue style "background-color") "rgb(255, 0, 0)" "Descendant gets background color"
 
+        testCase' "Transforms" <| fun _ ->
+                let style1 =
+                    fss
+                        [
+                            Width (px 50)
+                            Height (px 50)
+                            BackgroundColor red
+                            Transform (Skew2(deg 30.0, deg 20.0))
+                        ]
+
+                let style2 =
+                    fss
+                        [
+                            Width (px 50)
+                            Height (px 50)
+                            BackgroundColor red
+                            Transform (Matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0))
+                        ]
+                 
+                RTL.render(
+                    fragment [ ]
+                        [
+                            div [ Id "one"; ClassName style1 ] []
+                            div [ Id "two"; ClassName style2 ] []
+                        ]
+                ) |> ignore
+                         
+                let style1 = getComputedCssById("one")
+                let style2 = getComputedCssById("two")
+                Expect.equal (getValue style1 "transform") "matrix(1, 0.36397, 0.57735, 1, 0, 0)" "Transform gets set by skew"
+                Expect.equal (getValue style2 "transform") "matrix(1, 2, 3, 4, 5, 6)" "Transform gets set by matrix"
+
+            (*
         testCase' "Transitions" <| fun _ ->
             let oneTransition =
                 fss

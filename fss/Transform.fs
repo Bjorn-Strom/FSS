@@ -1,6 +1,7 @@
 ﻿namespace Fss
 
 open Utilities.Types
+open Utilities.Global
 open Units.Size
 open Units.Angle
 
@@ -31,9 +32,9 @@ module Transform =
         | Skew2 of Angle * Angle
         | SkewX of Angle
         | SkewY of Angle
-        interface ICSSProperty
+        interface ITransform
 
-    let value (v: Transform): string =
+    let private transformValue (v: Transform): string =
         match v with
             | Matrix (a, b, c, d, e, f) -> 
                 sprintf "matrix(%.1f, %.1f,     %.1f, %.1f, %.1f, %.1f)" a b c d e f
@@ -65,3 +66,11 @@ module Transform =
             | Skew2 (ax, ay) -> sprintf "skew(%s, %s)" (Units.Angle.value ax) (Units.Angle.value ay)
             | SkewX a -> sprintf "skewX(%s)" <| Units.Angle.value a
             | SkewY a -> sprintf "skewY(%s)" <| Units.Angle.value a
+
+    let value (v: ITransform): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? Transform as m -> transformValue m
+            | :? Angle as a -> Units.Angle.value a
+            | _ -> "Unknown margin size"
+ 

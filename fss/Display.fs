@@ -1,5 +1,7 @@
 namespace Fss
 
+open Utilities.Global
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/display
 module Display =
     open Utilities.Types
@@ -24,30 +26,37 @@ module Display =
         | TableCaption
 
         | None
-        interface ICSSProperty
+        interface IDisplay
+        interface IGlobal
 
 
-    let value (v: Display): string =
+    let private displayValue (v: Display): string =
         match v with
             | Inline -> "inline"
-            | InlineBlock -> "inlineBlock"
+            | InlineBlock -> "inline-block"
             | Block -> "block"
-            | RunIn -> "runIn"
+            | RunIn -> "run-in"
             | Flex -> "flex"
             | Grid -> "grid"
-            | FlowRoot -> "flowRoot"
+            | FlowRoot -> "flow-root"
 
             | Table -> "table"
-            | TableCell -> "tableCell"
-            | TableColumn -> "tableColumn"
-            | TableColGroup -> "tableColGroup"
-            | TableHeaderGroup -> "tableHeaderGroup"
-            | TableRowGroup -> "tableRowGroup"
-            | TableFooterGroup -> "tableFooterGroup"
-            | TableRow -> "tableRow"
-            | TableCaption -> "tableCaption"
+            | TableCell -> "table-cell"
+            | TableColumn -> "table-column"
+            | TableColGroup -> "table-col-group"
+            | TableHeaderGroup -> "table-header-group"
+            | TableRowGroup -> "table-row-group"
+            | TableFooterGroup -> "table-footer-group"
+            | TableRow -> "table-row"
+            | TableCaption -> "table-caption"
 
             | None -> "none"
+
+    let value (v: IDisplay): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? Display as d -> displayValue d
+            | _ -> "Unknown display"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction      
 module FlexDirection =
@@ -58,14 +67,21 @@ module FlexDirection =
         | RowReverse
         | Column
         | ColumnReverse
-        interface ICSSProperty
+        interface IFlexDirection
+        interface IGlobal
 
-    let value (v: FlexDirection): string =
+    let private flexDirectionValue (v: FlexDirection): string =
         match v with
         | Row -> "row"
         | RowReverse -> "row-reverse"
         | Column -> "column"
         | ColumnReverse -> "column-reverse"
+
+    let value (v: IFlexDirection): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? FlexDirection as f -> flexDirectionValue f
+            | _ -> "Unknown flex direction"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
 module FlexWrap =
@@ -74,13 +90,20 @@ module FlexWrap =
         | NoWrap
         | Wrap
         | WrapReverse
-        interface ICSSProperty
+        interface IFlexWrap
+        interface IGlobal
 
-    let value (v: FlexWrap): string =
+    let private flexWrapValue (v: FlexWrap): string =
         match v with 
             | NoWrap -> "nowrap"
             | Wrap -> "wrap"
-            | WrapReverse -> "wrap-reverse"  
+            | WrapReverse -> "wrap-reverse"
+
+    let value (v: IFlexWrap): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? FlexWrap as f -> flexWrapValue f
+            | _ -> "Unknown flex wrap"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
 module JustifyContent =
@@ -92,9 +115,10 @@ module JustifyContent =
         | SpaceBetween
         | SpaceAround
         | SpaceEvenly
-        interface ICSSProperty
+        interface IJustifyContent
+        interface IGlobal
 
-    let value (v: JustifyContent): string =
+    let private justifyContentValue (v: JustifyContent): string =
         match v with 
             | FlexStart -> "flex-start"
             | FlexEnd -> "flex-end"
@@ -102,6 +126,12 @@ module JustifyContent =
             | SpaceBetween -> "space-between"
             | SpaceAround -> "space-around"
             | SpaceEvenly -> "space-evenly"
+
+    let value (v: IJustifyContent): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? JustifyContent as j -> justifyContentValue j
+            | _ -> "Unknown justify content"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
 module AlignItems =
@@ -112,15 +142,22 @@ module AlignItems =
         | Center
         | Baseline
         | Stretch
-        interface ICSSProperty
+        interface IAlignItems
+        interface IGlobal
 
-    let value (v: AlignItems): string =
+    let private alignItemsValue (v: AlignItems): string =
         match v with 
             | FlexStart -> "flex-start"
             | FlexEnd -> "flex-end"
             | Center -> "center"
             | Baseline -> "baseline"
             | Stretch -> "stretch"
+
+    let value (v: IAlignItems): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? AlignItems as a -> alignItemsValue a
+            | _ -> "Unknown align items"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
 module AlignContent =
@@ -133,9 +170,10 @@ module AlignContent =
         | SpaceBetween
         | SpaceAround
         | Stretch
-        interface ICSSProperty
+        interface IAlignContent
+        interface IGlobal
 
-    let value (v: AlignContent): string =
+    let private alignContentValue (v: AlignContent): string =
         match v with 
             | FlexStart -> "flex-start"
             | FlexEnd -> "flex-end"
@@ -144,6 +182,13 @@ module AlignContent =
             | SpaceAround -> "space-around"
             | Stretch -> "stretch"
 
+    let value (v: IAlignContent): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? AlignContent as a -> alignContentValue a
+            | _ -> "Unknown align content"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
 module AlignSelf =
     open Utilities.Types
             
@@ -154,9 +199,10 @@ module AlignSelf =
         | Center 
         | Baseline 
         | Stretch
-        interface ICSSProperty
+        interface IAlignSelf
+        interface IGlobal
             
-    let value (v: AlignSelf): string =
+    let private alignSelfValue (v: AlignSelf): string =
         match v with
             | Auto -> "auto"
             | FlexStart -> "flex-start"
@@ -165,15 +211,28 @@ module AlignSelf =
             | Baseline -> "baseline"
             | Stretch -> "stretch"
 
+    let value (v: IAlignSelf): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? AlignSelf as a -> alignSelfValue a
+            | _ -> "Unknown align self"
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/order
 module Order =
     open Utilities.Types
 
     type Order = 
         | Order of int
-        interface ICSSProperty
+        interface IOrder
+        interface IGlobal
 
-    let value (Order o): string = string  o
+    let private orderValue (Order o): string = string  o
+
+    let value (v: IOrder): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? Order as o -> orderValue o
+            | _ -> "Unknown order"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
 module FlexGrow =
@@ -181,9 +240,16 @@ module FlexGrow =
 
     type FlexGrow = 
         | Grow of int
-        interface ICSSProperty
+        interface IFlexGrow
+        interface IGlobal
 
-    let value (Grow f) = string f
+    let private flexGrowValue (Grow f) = string f
+
+    let value (v: IFlexGrow): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? FlexGrow as s -> flexGrowValue s
+            | _ -> "Unknown flex grow"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
 module FlexShrink =
@@ -191,9 +257,16 @@ module FlexShrink =
 
     type FlexShrink =
         | Shrink of int
-        interface ICSSProperty
+        interface IFlexShrink
+        interface IGlobal
 
-    let value (Shrink f) = string f
+    let private flexShrinkValue (Shrink f) = string f
+
+    let value (v: IFlexShrink): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? FlexShrink as s -> flexShrinkValue s
+            | _ -> "Unknown flex shrink"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
 module FlexBasis =
@@ -202,6 +275,12 @@ module FlexBasis =
 
     type FlexBasis = 
         | FlexBasis of Size
-        interface ICSSProperty
+        interface IFlexBasis
+        interface IGlobal
 
-    let value (FlexBasis v) = Units.Size.value v
+    let value (v: IFlexBasis): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? Size as s -> Units.Size.value s
+            | _ -> "Unknown flex basis"
+

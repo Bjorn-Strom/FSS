@@ -24,6 +24,7 @@ module Size =
         interface IFontSize
         interface IBorderWidth
         interface IMargin
+        interface IFlexBasis
 
     let value (u: Size) = 
         match u with 
@@ -69,7 +70,7 @@ module Angle =
         | Grad of string
         | Rad of string
         | Turn of string
-        interface Utilities.Types.ICSSProperty
+        interface Utilities.Types.ITransform
 
     let value (u: Angle) = 
         match u with 
