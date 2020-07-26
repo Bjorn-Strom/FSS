@@ -37,6 +37,7 @@ open Margin
 open Selector
 open Fonts
 open BackgroundImage
+open Gradient
 
 
 type Model = { 
@@ -922,7 +923,7 @@ let BackgroundExamples =
                             [
                                 Width (px 200)
                                 Height (px 200)
-                                BackgroundImage (LinearGradient [ LinearGradient.ToRight; red; blue ] )
+                                BackgroundImage (LinearGradient [Right; red; blue ] )
                             ])
                     ] []
 
@@ -956,7 +957,73 @@ let BackgroundExamples =
                                 BackgroundImage (RepeatingRadialGradient [ hex "#e66465"; hex "9198e5"; pct 20 ] )
                             ])
                     ] []
-                        
+
+                    div [
+                           ClassName (fss
+                               [
+                                   Width (px 200)
+                                   Height (px 200)
+                                   BackgroundImage (LinearGradient [Bottom; red; hex "f06d06" ] )
+                               ])
+                       ] []
+
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (LinearGradient [deg 72.0; red; hex "f06d06" ] )
+                                ])
+                        ] []
+
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (LinearGradient [Right; red; hex "f06d06"; rgb 255 255 0; green ] )
+                                ])
+                        ] []
+                ]
+
+            div [ ClassName (fss [Display Flex]) ]
+                [
+
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (LinearGradient [ Right; red; yellow; pct 10 ] )
+                            ])
+                    ] []
+
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (LinearGradient [Right; hex "fffdc2"; hex "fffdc2"; pct 15; hex "d7f0a2"; pct 15; hex "d7f0a2"; pct 85; hex "fffdc2"; pct 85 ] )
+                                ])
+                        ] []
+
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (RadialGradient [ Circle; TopRight; yellow; hex "f06d06"] )
+                                ])
+                        ] []
+
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (LinearGradient [Right; red; hex "f06d06"; rgb 255 255 0; green ] )
+                                ])
+                        ] []
                 ]
 
             ]

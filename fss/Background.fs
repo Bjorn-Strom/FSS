@@ -6,62 +6,79 @@ open Units.Angle
 open Units.Size
 open Color
 
-module LinearGradient = 
-    type LinearGradient =
-        | ToTop
-        | ToBottom
-        | ToLeft
-        | ToLeftTop
-        | ToLeftBottom
-        | ToRight
-        | ToRightTop
-        | ToRightBottom
-        interface ILinearGradient
+// Trekk disse ut. Én til radial én til linear
 
-    let private gradientValue (v: LinearGradient): string =
+module Gradient =
+    type Position =
+        | Top
+        | TopRight
+        | TopLeft
+        | Bottom
+        | BottomLeft
+        | BottomRight
+        | Left
+        | Right
+        interface ILinearGradient
+        interface IRadialGradient
+
+    let positionValue (v: Position): string =
         match v with
-            | ToTop -> "to top"
-            | ToBottom -> "to bottom"
-            | ToLeft -> "to left"
-            | ToLeftTop -> "to left top"
-            | ToLeftBottom -> "to left bottom"
-            | ToRight -> "to right"
-            | ToRightTop -> "to right top"
-            | ToRightBottom -> "to right bottom"
+            | Top -> "to top"
+            | TopRight -> "to right top"
+            | TopLeft -> "to left top"
+            | Bottom -> "to bottom"
+            | BottomLeft -> "to left bottom"
+            | BottomRight -> "to right bottom"
+            | Left -> "to left"
+            | Right -> "to right"
+
+    type Side =
+        | ClosestCorner
+        | ClosestSide
+        | FarthestCorner
+        | FarthestSide
+        interface IRadialGradient
+
+    let sideValue (v: Side): string =
+        match v with
+            | ClosestCorner -> "closest-corner"
+            | ClosestSide -> "cosest-side"
+            | FarthestCorner -> "farthest-corner"
+            | FarthestSide -> "farthest-side"
+
+    type Shape =
+        | Circle
+        | Ellipse 
+        interface IRadialGradient
+
+    let shapeValue (v: Shape): string =
+        match v with
+            | Circle -> "circle"
+            | Ellipse -> "ellipse"
+
+module LinearGradient = 
+    open Gradient
 
     let value (v: ILinearGradient): string =
         match v with
             | :? Angle as a -> Units.Angle.value a
             | :? Size as s -> Units.Size.value s
             | :? CssColor as c -> Color.value c
-            | :? LinearGradient as g -> gradientValue g
-            | _ -> "Unknown gradient value"
+            | :? Position as p -> positionValue p
+            | _ -> "Unknown linear gradient value"
 
 module RadialGradient =
-    open Units.Angle
-
-    type RadialGradient =
-        | None
-        interface IRadialGradient
-
-    let private gradientValue (v: RadialGradient): string =
-        match v with
-            | ToTop -> "top top"
-            | ToBottom -> "to bottom"
-            | ToLeft -> "to left"
-            | ToLeftTop -> "to left top"
-            | ToLeftBottom -> "to left bottom"
-            | ToRight -> "to right"
-            | ToRightTop -> "to right top"
-            | ToRightBottom -> "to right bottom"
+    open Gradient
 
     let value (v: IRadialGradient): string =
         match v with
             | :? Angle as a -> Units.Angle.value a
             | :? Size as s -> Units.Size.value s
             | :? CssColor as c -> Color.value c
-            | :? RadialGradient as g -> gradientValue g
-            | _ -> "Unknown gradient value"
+            | :? Position as p -> positionValue p
+            | :? Side as s -> sideValue s
+            | :? Shape as s -> shapeValue s
+            | _ -> "Unknown radial gradient value"
 
 
 module BackgroundImage =
@@ -71,13 +88,9 @@ module BackgroundImage =
     type BackgroundImage =
         | Url of string
         | LinearGradient of ILinearGradient list
-        | RadialGradient of ILinearGradient list
-        | RepeatingLinearGradient of IRadialGradient list
+        | RadialGradient of IRadialGradient list
+        | RepeatingLinearGradient of ILinearGradient list
         | RepeatingRadialGradient of IRadialGradient list
-
-    type Foo =
-        inherit ILinearGradient
-        inherit IRadialGradient
 
     let private combineGradient (list: ILinearGradient list) (value: ILinearGradient -> string): string =
         list
@@ -103,6 +116,6 @@ module BackgroundImage =
         match v with
             | Url u -> sprintf "url(%s)" u
             | LinearGradient g -> sprintf "linear-gradient(%s)" <| combineGradient g LinearGradient.value
-            | RadialGradient g -> sprintf "radial-gradient(%s)" <| combineGradient g LinearGradient.value
-            | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" <| combineGradient2 g RadialGradient.value
+            | RadialGradient g -> sprintf "radial-gradient(%s)" <| combineGradient2 g RadialGradient.value
+            | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" <| combineGradient g LinearGradient.value
             | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" <| combineGradient2 g RadialGradient.value
