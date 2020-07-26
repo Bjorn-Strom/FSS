@@ -23,6 +23,7 @@ module Size =
         | Vmin of string
         interface IFontSize
         interface IBorderWidth
+        interface IMargin
 
     let value (u: Size) = 
         match u with 

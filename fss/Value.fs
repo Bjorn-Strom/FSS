@@ -42,7 +42,6 @@ module Value =
             | :? Property as n       -> Property.value n
             | :? Angle as a          -> Units.Angle.value a
             | :? Transform as t      -> Transform.value t
-            | :? Margin as m         -> Margin.value m
             | :? JustifyContent as j -> JustifyContent.value j
             | :? FlexDirection as f  -> FlexDirection.value f
             | :? FlexWrap as f       -> FlexWrap.value f
@@ -96,9 +95,9 @@ module Value =
         | BorderBottomColor of IColor
         | BorderLeftColor   of IColor
 
-        | Width of ICSSProperty
-        | Height of ICSSProperty
-        | Perspective of ICSSProperty
+        | Width       of Size
+        | Height      of Size
+        | Perspective of Size
 
         | Display of ICSSProperty
         | FlexDirection of ICSSProperty
@@ -113,12 +112,12 @@ module Value =
         | AlignSelf of ICSSProperty
         | Flex of ICSSProperty list
 
-        | MarginTop of ICSSProperty
-        | MarginRight of ICSSProperty
-        | MarginBottom of ICSSProperty
-        | MarginLeft of ICSSProperty
-        | Margin of ICSSProperty 
-        | Margins of ICSSProperty list
+        | MarginTop    of IMargin
+        | MarginRight  of IMargin
+        | MarginBottom of IMargin
+        | MarginLeft   of IMargin
+        | Margin       of IMargin 
+        | Margins      of IMargin list
 
         | Animation                of IAnimation list  
         | Animations               of IAnimation list list
@@ -198,9 +197,9 @@ module Value =
                 | BorderBottomColor bc  -> Property.value borderBottomColor ==> Color.value bc
                 | BorderLeftColor   bc  -> Property.value borderLeftColor   ==> Color.value bc
 
-                | Width       w -> Property.value width       ==> value w
-                | Height      h -> Property.value height      ==> value h
-                | Perspective p -> Property.value perspective ==> value p
+                | Width       w -> Property.value width       ==> Units.Size.value w
+                | Height      h -> Property.value height      ==> Units.Size.value h
+                | Perspective p -> Property.value perspective ==> Units.Size.value p
 
                 | Display        d -> Property.value display        ==> value d
                 | FlexDirection  f -> Property.value flexDirection  ==> value f
@@ -214,12 +213,12 @@ module Value =
                 | FlexShrink     f -> Property.value flexShrink     ==> value f
                 | AlignSelf      a -> Property.value alignSelf      ==> value a
 
-                | MarginTop    m  -> Property.value marginTop    ==> value m
-                | MarginRight  m  -> Property.value marginRight  ==> value m
-                | MarginBottom m  -> Property.value marginBottom ==> value m
-                | MarginLeft   m  -> Property.value marginLeft   ==> value m
-                | Margin       m  -> Property.value margin       ==> value m
-                | Margins      ms -> Property.value margin       ==> combineWs ms value
+                | MarginTop    m  -> Property.value marginTop    ==> Margin.value m
+                | MarginRight  m  -> Property.value marginRight  ==> Margin.value m
+                | MarginBottom m  -> Property.value marginBottom ==> Margin.value m
+                | MarginLeft   m  -> Property.value marginLeft   ==> Margin.value m
+                | Margin       m  -> Property.value margin       ==> Margin.value m
+                | Margins      ms -> Property.value margin       ==> combineWs ms Margin.value
 
                 | Animation                a   -> Property.value animation               ==> combineWs a Animation.value
                 | Animations               ans -> Property.value animation               ==> combineAnimations ans
@@ -249,6 +248,5 @@ module Value =
                 | TransitionDuration       t  -> Property.value transitionDuration       ==> value t
                 | TransitionProperty       t  -> Property.value transitionProperty       ==> value t
                 | TransitionTimingFunction t  -> Property.value transitionTimingFunction ==> value t
-
         )
         |> createObj

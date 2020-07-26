@@ -197,7 +197,7 @@ let CssTests =
             Expect.equal (getValue style "border-bottom-style") "none" "mixed border style"
             Expect.equal (getValue style "border-left-style") "dotted" "mixed border style"
             Expect.equal (getValue radius "border-top-left-radius") "10px" "border radius"
-            (*
+            
         testCase' "Animations" <| fun _ ->
 
             let testFrames = keyframes [ frame 0 [ BackgroundColor red]; frame 100 [ BackgroundColor blue] ]
@@ -348,7 +348,7 @@ let CssTests =
             Expect.equal (getValue margin "margin-right") "20px" "Margin top gets set margins"
             Expect.equal (getValue margin "margin-bottom") "40px" "Margin top gets set margins"
             Expect.equal (getValue margin "margin-left") "10px" "Margin top gets set margins"
-
+            (*
         testCase' "Flexbox tests" <| fun _ ->
             let flex =
                 fss

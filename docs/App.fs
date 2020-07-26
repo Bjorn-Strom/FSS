@@ -48,7 +48,6 @@ type Msg =
     | SetFlexWrap of FlexWrap
     | SetAlignContent of AlignContent
 
-
 let init() = { 
     FlexDirection = Row
     FlexWrap = NoWrap
@@ -141,7 +140,8 @@ let BorderExamples =
                         BorderStyle Solid
                     ])] [ str "I have a mixed width border" ]
             p [ ClassName (fss [
-                    BorderStyles [Thick; Double]
+                    BorderStyle Double
+                    BorderWidth Thick
                     BorderColor green
                 ])] [ str "BorderStyles" ]
             p [ ClassName (fss 
@@ -199,7 +199,7 @@ let BorderExamples =
             )] [ str "Now in color!"]
 
         ]
-(*
+
 let AnimationExamples =
 
     let bounceFrames = 
@@ -300,7 +300,7 @@ let AnimationExamples =
             [
                 Width (px 100)
                 Height (px 100)
-                BorderRadius [px 12]
+                BorderRadius (px 12)
                 BackgroundColor (hex "00dbde")
                 Animation [loader; sec 2.0; Linear; Infinite]
             ]
@@ -318,7 +318,7 @@ let AnimationExamples =
                     div [ ClassName loaderContainer ] []
                 ]
         ]
-
+        
 let MarginExamples =
     fragment []
         [
@@ -351,7 +351,7 @@ let MarginExamples =
                 ]
                 [ str "Me tooo!" ]
         ]
-
+        (*
 let TransitionExamples =   
     let box =
         fss
@@ -860,8 +860,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
             ColorExamples
             FontExamples
             BorderExamples
-            //AnimationExamples
-            //MarginExamples
+            AnimationExamples
+            MarginExamples
             //TransitionExamples
             //FlexBoxExamples model dispatch
         ]
