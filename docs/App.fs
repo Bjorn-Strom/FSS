@@ -35,8 +35,8 @@ open FlexShrink
 open FlexBasis
 open Margin
 open Selector
-
 open Fonts
+open BackgroundImage
 
 
 type Model = { 
@@ -305,6 +305,13 @@ let AnimationExamples =
                 Animation [loader; sec 2.0; Linear; Infinite]
             ]
             
+    let frameAnimation =
+        keyframes
+            [
+                //frame 0 [ BackgroundPosition; px 0; px 0]
+                //frame 100 [ BackgroundPosition; px -500; px 0]
+            ]
+
 
     fragment []
         [
@@ -894,9 +901,72 @@ let FlexBoxExamples model dispatch =
             flexBasisShrink
         ]
 
+let BackgroundExamples =
+    fragment []
+        [
+            h3 [] [ str "And gradients!" ]
+    
+            div [ ClassName (fss [Display Flex]) ]
+                [
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (LinearGradient [ red; blue ] )
+                            ])
+                    ] []
+                    
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (LinearGradient [ LinearGradient.ToRight; red; blue ] )
+                            ])
+                    ] []
+
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (RadialGradient [ red; blue ] )
+                            ])
+                    ] []
+
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (RepeatingRadialGradient [ red; red; px 10; blue; px 10; blue; px 20 ] )
+                            ])
+                    ] []
+                ]
+
+            div [ ClassName (fss [Display Flex]) ]
+                [
+
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (RepeatingRadialGradient [ hex "#e66465"; hex "9198e5"; pct 20 ] )
+                            ])
+                    ] []
+                        
+                ]
+
+            ]
+
+
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [
+            
+            (*
             ColorExamples
             FontExamples
             BorderExamples
@@ -905,6 +975,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
             TransformExamples
             TransitionExamples
             FlexBoxExamples model dispatch
+            *)
+            BackgroundExamples
         ]
 
 Program.mkSimple init update render

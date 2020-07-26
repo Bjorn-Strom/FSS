@@ -25,12 +25,9 @@ module Types =
     type IFlexBasis      = interface end
     type ITransform      = interface end
     type ITransition     = interface end
-
-    let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
-        list
-        |> List.map value
-        |> String.concat seperator
-
+    type ILinearGradient = interface end
+    type IRadialGradient = interface end
+    
     let inline duToString (x:'a) = 
         match FSharpValue.GetUnionFields(x, typeof<'a>) with
         | case, _ -> case.Name

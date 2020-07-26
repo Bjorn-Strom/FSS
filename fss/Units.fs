@@ -25,6 +25,8 @@ module Size =
         interface IBorderWidth
         interface IMargin
         interface IFlexBasis
+        interface ILinearGradient
+        interface IRadialGradient
 
     let value (u: Size) = 
         match u with 
@@ -70,7 +72,9 @@ module Angle =
         | Grad of string
         | Rad of string
         | Turn of string
-        interface Utilities.Types.ITransform
+        interface ITransform
+        interface ILinearGradient
+        interface IRadialGradient
 
     let value (u: Angle) = 
         match u with 

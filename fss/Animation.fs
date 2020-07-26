@@ -31,6 +31,15 @@ module Animation =
         | End
         interface IAnimation
 
+    let stepValue (v: Steps) =
+        match v with
+            | JumpStart -> "jump-start"
+            | JumpEnd -> "jump-end"
+            | JumpNone -> "jump-none"
+            | JumpBoth -> "jump-both"
+            | Start -> "start"
+            | End -> "end"
+
     type Timing =
         | Ease
         | EaseIn
@@ -40,7 +49,8 @@ module Animation =
         | StepStart
         | StepEnd
         | CubicBezier of (float * float * float * float)
-        | Steps of Steps
+        | Steps of int
+        | Steps2 of int * Steps
         interface IAnimation
 
     let timingValue =
@@ -53,6 +63,8 @@ module Animation =
             | StepStart -> "step-start"
             | StepEnd -> "step-end"
             | CubicBezier (a, b, c, d) -> cubicBezier(a, b, c, d)
+            | Steps n -> sprintf "steps(%d)" n
+            | Steps2 (n, direction) -> sprintf "steps(%d, %s)" n (stepValue direction)
             | _ -> "Unknown timing"
 
     // Animation count

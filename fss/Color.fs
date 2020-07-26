@@ -8,6 +8,8 @@ module Color =
         | CssColor of string
         interface IColor
         interface IGlobal
+        interface ILinearGradient
+        interface IRadialGradient
 
     let rgb (r: int) (g: int) (b: int): CssColor = Utilities.Color.rgb r g b |> CssColor
     let rgba (r: int) (g: int) (b: int) (a: float): CssColor = Utilities.Color.rgba r g b a |> CssColor

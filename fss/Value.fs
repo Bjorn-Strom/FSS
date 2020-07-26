@@ -8,7 +8,7 @@ open Property
 open Units.Size
 open Animation
 open Selector
-
+open BackgroundImage
 
 module Value = 
     [<Import("css", from="emotion")>]
@@ -23,6 +23,7 @@ module Value =
         | Color of IColor
 
         | BackgroundColor of IColor
+        | BackgroundImage of BackgroundImage
 
         | Hover of CSSProperty list
 
@@ -107,9 +108,13 @@ module Value =
         | TransitionProperty       of Property
         | TransitionTimingFunction of Timing
 
+    let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
+        list
+        |> List.map value
+        |> String.concat seperator
+    let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
     let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
     let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
-    let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
     let combineAnimations (list: IAnimation list list): string = combineComma list (fun a -> combineWs a Animation.value)
 
     let rec createCSSObject (attributeList: CSSProperty list) = 
@@ -123,6 +128,7 @@ module Value =
                 | Color c            -> Property.value color           ==> Color.value c
                 
                 | BackgroundColor bc -> Property.value backgroundColor ==> Color.value bc
+                | BackgroundImage bi -> Property.value backgroundImage ==> BackgroundImage.value bi
                 
                 | Hover h            -> Property.value hover           ==> createCSSObject h
                 

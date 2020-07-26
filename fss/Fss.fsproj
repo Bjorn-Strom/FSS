@@ -17,6 +17,7 @@
     <Compile Include="Display.fs" />
     <Compile Include="Margin.fs" />
     <Compile Include="Selector.fs" />
+    <Compile Include="Background.fs" />
     <Compile Include="Value.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="Fss.fs" />
