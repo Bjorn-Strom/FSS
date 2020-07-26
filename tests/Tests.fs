@@ -430,8 +430,6 @@ let CssTests =
             Expect.equal (getValue two "transition-duration") "10s, 20s, 30s" "transition duration for multiple transitions set"
             Expect.equal (getValue two "transition-timing-function") "ease, ease-in-out, ease-out" "transition timing function set"
             Expect.equal (getValue two "transition-delay") "0s, 0s, 20s" "transition delay set"
-
-
     ]
 
 Mocha.runTests CssTests |> ignore

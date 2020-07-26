@@ -39,12 +39,9 @@ module Value =
     let value (v: ICSSProperty): string =
         match v with
             | :? Display as d        -> Display.value d
-            | :? Global as g         -> Utilities.Global.value g
             | :? Property as n       -> Property.value n
             | :? CssColor as c       -> Color.value c
-            | :? Size as c           -> Units.Size.value c
             | :? Angle as a          -> Units.Angle.value a
-            | :? FontSize as f       -> Fonts.value f
             | :? BorderStyle as b    -> BorderStyle.value b
             | :? BorderWidth as b    -> BorderWidth.value b
             | :? Transform as t      -> Transform.value t
@@ -69,7 +66,7 @@ module Value =
         | Color of ICSSProperty
         | BackgroundColor of ICSSProperty
         | Hover of CSSProperty list
-        | FontSize of ICSSProperty
+        | FontSize of IFontSize
 
         | Border of ICSSProperty list
         | BorderStyle of ICSSProperty list
@@ -159,7 +156,7 @@ module Value =
                 | Color c            -> Property.value color           ==> value c
                 | BackgroundColor bc -> Property.value backgroundColor ==> value bc
                 | Hover h            -> Property.value hover           ==> createCSSObject h
-                | FontSize f         -> Property.value fontSize        ==> value f
+                | FontSize f         -> Property.value fontSize        ==> Fonts.value f
 
                 | Border b        -> Property.value border      ==> combineWs b value
                 | BorderStyle bss -> Property.value borderStyle ==> combineWs bss value

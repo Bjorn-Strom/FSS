@@ -6,15 +6,15 @@ open Fable.React
 open Fable.React.Props
 
 open Fss
+open Fss
+
 open Html
 open Fss.Utilities.Global
 open Property
-open Fss
 open Value
 open Color
 open Units.Size
 open Units.Angle
-open Fonts
 open BorderStyle
 open BorderWidth
 open Animation
@@ -35,6 +35,9 @@ open FlexShrink
 open FlexBasis
 open Margin
 open Selector
+
+open Fonts
+
 
 type Model = { 
     FlexDirection: FlexDirection
@@ -93,9 +96,13 @@ let FontExamples =
             p [ClassName (fss [FontSize (rem 3.0)])] [ str "Fonts can be set with rems" ]
             p [ClassName (fss [FontSize (cm 3.3)])] [ str "Fonts can be set with cm" ]
             p [ClassName (fss [FontSize (mm 33.3)])] [ str "Fonts can be set with mm" ]
+            p [ClassName (fss [FontSize Inherit])] [ str "Fonts can inherited" ]
+            p [ClassName (fss [FontSize Initial])] [ str "Fonts can initial" ]
+            p [ClassName (fss [FontSize Revert])] [ str "Fonts can reverted" ]
+            p [ClassName (fss [FontSize Unset])] [ str "Fonts can unset" ]
             p [] [ str "and more!"]
         ]
-        
+(*        
 let BorderExamples =
     fragment []
         [
@@ -836,18 +843,18 @@ let FlexBoxExamples model dispatch =
             p [] [str "Flex basis & shrink" ]
             flexBasisShrink
         ]
-
+*)
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [
-            ColorExamples
+            //ColorExamples
             FontExamples
-            BorderExamples
-            AnimationExamples
-            MarginExamples
-            TransitionExamples
-            FlexBoxExamples model dispatch
+            //BorderExamples
+            //AnimationExamples
+            //MarginExamples
+            //TransitionExamples
+            //FlexBoxExamples model dispatch
         ]
 
 Program.mkSimple init update render

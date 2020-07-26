@@ -1,6 +1,7 @@
 namespace Fss.Units
 
 open Fss
+open Utilities.Types
 
 // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
 module Size =
@@ -20,7 +21,7 @@ module Size =
         | Vh of string
         | VMax of string
         | Vmin of string
-        interface Utilities.Types.ICSSProperty
+        interface IFontSize
 
     let value (u: Size) = 
         match u with 

@@ -1,7 +1,12 @@
 namespace Fss
 
+open Units.Size
+open Utilities.Global
+open Utilities.Types
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
 module Fonts =
+
     type FontSize =
         // Absolute
         | XxSmall
@@ -15,9 +20,10 @@ module Fonts =
         // Relative
         | Smaller
         | Larger
-        interface Utilities.Types.ICSSProperty
+        interface IFontSize
+        interface Utilities.Types.IGlobal
 
-    let value v =
+    let private fontValue (v: FontSize): string =
         match v with
             | XxSmall -> "xx-small"
             | XSmall -> "x-small"
@@ -30,3 +36,10 @@ module Fonts =
             // Relative
             | Smaller -> "smaller"
             | Larger -> "larger"
+
+    let value (v: IFontSize): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? Size as s -> Units.Size.value s
+            | :? FontSize as s -> fontValue s
+            | _ -> "Unknown font size"

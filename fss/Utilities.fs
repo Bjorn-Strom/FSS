@@ -4,12 +4,12 @@ open Browser
 
 module Types =
     type IAnimation = interface end
-    type ICSSProperty = interface end
-    type CSSObject = CSSObject of obj
+    type IGlobal = interface end
+    type IFontSize = interface end
 
-    let value (CSSObject o): obj = 
-        console.log("Value: ", o)
-        o
+
+
+    type ICSSProperty = interface end
 
     let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
         list
@@ -24,7 +24,8 @@ module Global =
         | Inherit
         | Unset
         | Revert
-        interface ICSSProperty
+        interface IGlobal
+        interface IFontSize
 
     let value (v: Global): string =
         match v with
