@@ -25,7 +25,6 @@ module Color =
             | :? CssColor as c -> colorValue c
             | _ -> "Unknown font size"
 
-
     let black = hex "000000"
     let silver = hex "c0c0c0"
     let gray = hex "808080"

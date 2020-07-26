@@ -1,6 +1,8 @@
 namespace Fss.Utilities
 
 open Browser
+open Microsoft.FSharp.Reflection
+open System
 
 module Types =
     type IAnimation      = interface end
@@ -28,6 +30,18 @@ module Types =
         list
         |> List.map value
         |> String.concat seperator
+
+    let inline duToString (x:'a) = 
+        match FSharpValue.GetUnionFields(x, typeof<'a>) with
+        | case, _ -> case.Name
+
+    let pascalToKebabCase (value: string): string =
+        value
+        |> Seq.fold (fun acc element ->
+        if Char.IsUpper(char element) then 
+            sprintf "%s-%s" acc (string <| Char.ToLower(element))
+        else 
+            acc + (string element)) ""
 
 module Global =
     open Types

@@ -1,6 +1,6 @@
 namespace Fss
 
-open System
+open Utilities.Types
 
 module Property =
     type Property =
@@ -528,14 +528,10 @@ module Property =
 
         | Hover -> ":hover"
 
-    let pascalToKebabCase (property: Property): string =
+    let propertyToKebabCase (property: Property): string =
         property
         |> value
-        |> Seq.fold (fun acc element ->
-        if Char.IsUpper(char element) then 
-            sprintf "%s-%s" acc (string <| Char.ToLower(element))
-        else 
-            acc + (string element)) ""
+        |> pascalToKebabCase
 
     let alignContent = AlignContent
     let alignItems = AlignItems

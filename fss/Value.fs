@@ -4,29 +4,9 @@ open Fable.Core
 open Fable.Core.JsInterop
 
 open Utilities.Types
-open Utilities.Global
 open Property
-open Color
 open Units.Size
-open Units.Angle
-open Fonts
-open BorderStyle
-open BorderWidth
 open Animation
-open Transform
-open Transition
-open Display
-open FlexDirection
-open JustifyContent
-open AlignItems
-open FlexWrap
-open AlignContent
-open AlignSelf
-open Order
-open FlexGrow
-open FlexShrink
-open FlexBasis
-open Margin
 open Selector
 
 

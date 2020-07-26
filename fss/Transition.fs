@@ -14,9 +14,9 @@ module Transition =
 
     let private transitionValue (v: Transition): string =
         match v with
-            | Transition1 (property, time)                -> sprintf "%s %s" (Property.pascalToKebabCase property) (Animation.value time)
-            | Transition2 (property, time, timing)        -> sprintf "%s %s %s" (Property.pascalToKebabCase property) (Animation.value time) (Animation.value timing)
-            | Transition3 (property, time, timing, delay) -> sprintf "%s %s %s %s" (Property.pascalToKebabCase property) (Animation.value time) (Animation.value timing) (Animation.value delay)
+            | Transition1 (property, time)                -> sprintf "%s %s" (Property.propertyToKebabCase property) (Animation.value time)
+            | Transition2 (property, time, timing)        -> sprintf "%s %s %s" (Property.propertyToKebabCase property) (Animation.value time) (Animation.value timing)
+            | Transition3 (property, time, timing, delay) -> sprintf "%s %s %s %s" (Property.propertyToKebabCase property) (Animation.value time) (Animation.value timing) (Animation.value delay)
 
     let value (v: ITransition): string =
         match v with

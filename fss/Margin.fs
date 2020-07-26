@@ -22,5 +22,3 @@ module Margin =
             | :? Size as s -> Units.Size.value s
             | :? Margin as m -> marginValue m
             | _ -> "Unknown margin size"
- 
-
