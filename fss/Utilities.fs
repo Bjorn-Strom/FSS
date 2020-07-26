@@ -6,6 +6,7 @@ module Types =
     type IAnimation = interface end
     type IGlobal = interface end
     type IFontSize = interface end
+    type IColor = interface end
 
 
 
@@ -26,6 +27,7 @@ module Global =
         | Revert
         interface IGlobal
         interface IFontSize
+        interface IColor
 
     let value (v: Global): string =
         match v with

@@ -1,9 +1,13 @@
 namespace Fss
 
+open Utilities.Global
+open Utilities.Types
+
 module Color =
     type CssColor = 
         | CssColor of string
-        interface Utilities.Types.ICSSProperty
+        interface IColor
+        interface IGlobal
 
     let rgb (r: int) (g: int) (b: int): CssColor = Utilities.Color.rgb r g b |> CssColor
     let rgba (r: int) (g: int) (b: int) (a: float): CssColor = Utilities.Color.rgba r g b a |> CssColor
@@ -13,7 +17,14 @@ module Color =
     let hsl (h: int) (s: float) (l: float): CssColor = Utilities.Color.hsl h s l |> CssColor
     let hsla (h: int) (s: float) (l: float) (a: float):CssColor = Utilities.Color.hsla h s l a |> CssColor
 
-    let value (CssColor c) = c
+    let private colorValue (CssColor c) = c
+
+    let value (v: IColor): string =
+        match v with
+            | :? Global as g -> Utilities.Global.value g
+            | :? CssColor as c -> colorValue c
+            | _ -> "Unknown font size"
+
 
     let black = hex "000000"
     let silver = hex "c0c0c0"

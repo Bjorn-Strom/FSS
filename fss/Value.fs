@@ -40,7 +40,7 @@ module Value =
         match v with
             | :? Display as d        -> Display.value d
             | :? Property as n       -> Property.value n
-            | :? CssColor as c       -> Color.value c
+            //| :? CssColor as c       -> Color.value c
             | :? Angle as a          -> Units.Angle.value a
             | :? BorderStyle as b    -> BorderStyle.value b
             | :? BorderWidth as b    -> BorderWidth.value b
@@ -63,8 +63,8 @@ module Value =
         | Selector of Selector * CSSProperty list
 
         | Label of string
-        | Color of ICSSProperty
-        | BackgroundColor of ICSSProperty
+        | Color of IColor
+        | BackgroundColor of IColor
         | Hover of CSSProperty list
         | FontSize of IFontSize
 
@@ -153,8 +153,8 @@ module Value =
                 | Selector (s, ss)   -> Selector.value s               ==> createCSSObject ss
 
                 | Label l            -> Property.value label           ==> l
-                | Color c            -> Property.value color           ==> value c
-                | BackgroundColor bc -> Property.value backgroundColor ==> value bc
+                | Color c            -> Property.value color           ==> Color.value c
+                | BackgroundColor bc -> Property.value backgroundColor ==> Color.value bc
                 | Hover h            -> Property.value hover           ==> createCSSObject h
                 | FontSize f         -> Property.value fontSize        ==> Fonts.value f
 

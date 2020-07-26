@@ -21,7 +21,7 @@ module Fonts =
         | Smaller
         | Larger
         interface IFontSize
-        interface Utilities.Types.IGlobal
+        interface IGlobal
 
     let private fontValue (v: FontSize): string =
         match v with

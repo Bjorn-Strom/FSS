@@ -71,7 +71,12 @@ let ColorExamples =
             p [ ClassName (fss [Color (hex "00ff00")])] [ str "or you can use HEX"]
             p [ ClassName (fss [Color (hex "0000ff80")])] [ str "HEX can also be transparent"]
             p [ ClassName (fss [Color (hsl 120 0.5 0.5)])] [ str "Or just use HSL"]
-            p [ ClassName (fss [Color (hsla 120 0.5 0.5 0.5)])] [ str "HSL can also be transparent"]
+            p [ ClassName (fss [Color (hsla 120 0.5 0.5 0.5)])] [ str "HSL can also be transparent"
+            ]
+            p [ ClassName (fss [Color Inherit]) ] [ str "Colors can be inherited"]
+            p [ ClassName (fss [Color Initial]) ] [ str "Colors can be initialed"]
+            p [ ClassName (fss [Color Revert]) ] [ str "Colors can be reverted"]
+            p [ ClassName (fss [Color Unset]) ] [ str "Colors can be unset"]
         ]
 
 let FontExamples =
@@ -848,7 +853,7 @@ let FlexBoxExamples model dispatch =
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [
-            //ColorExamples
+            ColorExamples
             FontExamples
             //BorderExamples
             //AnimationExamples
