@@ -164,20 +164,25 @@ let CssTests =
             Expect.equal (getValue px "font-size") "100px" "font size set with pixels"
             Expect.equal (getValue pct "font-size") "32px" "font size set with percent"
 
-        (*
+        
         testCase' "Borders" <| fun _ ->
             RTL.render(
                 fragment []
                     [
                         div 
-                            [ Id "short"; ClassName (fss [ Border [Thick; Dotted; aliceblue ]]) ]
+                            [ Id "short"; ClassName (fss 
+                                [
+                                    BorderWidth Thick
+                                    BorderStyle Dotted
+                                    BorderColor aliceblue
+                                ])]
                             []
 
                         div 
-                            [ Id "style"; ClassName (fss [ BorderStyle [Dashed; Groove; BorderStyle.None; Dotted] ]) ]
+                            [ Id "style"; ClassName (fss [ BorderStyles [Dashed; Groove; BorderStyle.None; Dotted] ]) ]
                             []
                         div
-                            [ Id "radius"; ClassName (fss [ BorderRadius [(px 10)]])] []
+                            [ Id "radius"; ClassName (fss [ BorderRadius (px 10)])] []
                     ]
             ) |> ignore
             
@@ -185,14 +190,14 @@ let CssTests =
             let style = getComputedCssById("style")
             let radius = getComputedCssById("radius")
 
-            Expect.equal (getValue shortHand "border-left-style") "dotted" "border shorthand"
-            Expect.equal (getValue shortHand "border-left-color") "rgb(240, 248, 255)" "border shorthand"
+            Expect.equal (getValue shortHand "border-left-style") "dotted" "border style set"
+            Expect.equal (getValue shortHand "border-left-color") "rgb(240, 248, 255)" "border color set"
             Expect.equal (getValue style "border-top-style") "dashed" "mixed border style"
             Expect.equal (getValue style "border-right-style") "groove" "mixed border style"
             Expect.equal (getValue style "border-bottom-style") "none" "mixed border style"
             Expect.equal (getValue style "border-left-style") "dotted" "mixed border style"
             Expect.equal (getValue radius "border-top-left-radius") "10px" "border radius"
-
+            (*
         testCase' "Animations" <| fun _ ->
 
             let testFrames = keyframes [ frame 0 [ BackgroundColor red]; frame 100 [ BackgroundColor blue] ]

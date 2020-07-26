@@ -7,7 +7,8 @@ module Types =
     type IGlobal = interface end
     type IFontSize = interface end
     type IColor = interface end
-
+    type IBorderStyle = interface end
+    type IBorderWidth = interface end
 
 
     type ICSSProperty = interface end
@@ -28,6 +29,8 @@ module Global =
         interface IGlobal
         interface IFontSize
         interface IColor
+        interface IBorderStyle
+        interface IBorderWidth
 
     let value (v: Global): string =
         match v with
