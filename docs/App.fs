@@ -6,6 +6,7 @@ open Fable.React
 open Fable.React.Props
 
 open Fss
+open Html
 open Fss.Utilities.Global
 open Property
 open Fss
@@ -55,7 +56,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetFlexDirection direction -> { model with FlexDirection = direction}
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
-    (*
+    
 let ColorExamples =
     fragment []
         [
@@ -182,7 +183,7 @@ let BorderExamples =
             )] [ str "Now in color!"]
 
         ]
-*)
+
 let AnimationExamples =
 
     let bounceFrames = 
@@ -212,7 +213,7 @@ let AnimationExamples =
 
     let bounceAnimation = fss [ Animation [bounceFrames; sec 1.0; Ease; Infinite] ]
 
-(*
+
     let sizeFrames =
         keyframes
             [
@@ -287,21 +288,21 @@ let AnimationExamples =
                 BackgroundColor (hex "00dbde")
                 Animation [loader; sec 2.0; Linear; Infinite]
             ]
-            *)
+            
 
     fragment []
         [
             p [] [ str "Things can animate now!" ]
             p [ClassName bounceAnimation] [str "Bouncing text"]
-            //p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
-            //p [ClassName combinedAnimations] [str "COMBINED"]
-            //div [ ClassName spinnyMation ] []
-            //div [ ClassName loaderParent]
-            //    [
-            //        div [ ClassName loaderContainer ] []
-            //    ]
+            p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
+            p [ClassName combinedAnimations] [str "COMBINED"]
+            div [ ClassName spinnyMation ] []
+            div [ ClassName loaderParent]
+                [
+                    div [ ClassName loaderContainer ] []
+                ]
         ]
-(*
+
 let MarginExamples =
     fragment []
         [
@@ -354,7 +355,7 @@ let TransitionExamples =
                 Border [px 20; Solid; hex "ddd" ]
                 Hover 
                     [
-                        Selector ((Descendant box), 
+                        Selector (Descendant Div, 
                             [
                                 Transforms
                                    [
@@ -835,18 +836,18 @@ let FlexBoxExamples model dispatch =
             p [] [str "Flex basis & shrink" ]
             flexBasisShrink
         ]
-*)
+
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [
-            //ColorExamples
-            //FontExamples
-            //BorderExamples
+            ColorExamples
+            FontExamples
+            BorderExamples
             AnimationExamples
-            //MarginExamples
-            //TransitionExamples
-            //FlexBoxExamples model dispatch
+            MarginExamples
+            TransitionExamples
+            FlexBoxExamples model dispatch
         ]
 
 Program.mkSimple init update render

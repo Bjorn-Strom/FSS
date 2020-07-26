@@ -7,6 +7,7 @@ open Fable.React.Props
 open Fable.ReactTestingLibrary
 
 open Fss
+open Html
 open Fss.Utilities.Global
 open Property
 open Fss
@@ -376,23 +377,59 @@ let CssTests =
             Expect.equal (getValue flex "align-content") "center" "align content gets set"
             Expect.equal (getValue flex "align-items") "center" "align items gets set"
 
-        testCase "Style descendant" <| fun _ ->
+        testCase' "Style descendant" <| fun _ ->
             let style =
                 fss
                     [
-                       Selector ((Descendant "div"), [ BackgroundColor red ])
+                       Selector ((Descendant Div), [ BackgroundColor red ])
                     ]
             
             RTL.render(
                 div [ ClassName style ]
                     [
-                        div 
-                            [ Id "foo" ] [ str "foo" ]
+                        div [ Id "foo" ] [ str "foo" ]
                     ]
             ) |> ignore
                     
             let style = getComputedCssById("foo")
-            Expect.equal (getValue style "background-color") "rgba(255, 0, 0)" "Descendant gets background color"
+            Expect.equal (getValue style "background-color") "rgb(255, 0, 0)" "Descendant gets background color"
+
+        testCase' "Transitions" <| fun _ ->
+            let oneTransition =
+                fss
+                    [
+                       Transition (Transition1(backgroundColor, (sec 10.0)))
+                    ]
+
+            let manyTransitions =
+                fss
+                    [
+                       Transitions 
+                        [
+                            Transition1(backgroundColor, (sec 10.0))
+                            Transition2(color, (sec 20.0), EaseInOut)
+                            Transition3(width, (sec 30.0), EaseOut, (sec 20.0))
+                        ]
+                    ]
+            
+            RTL.render(
+                fragment []
+                    [
+                        div [ Id "one"; ClassName oneTransition ] []
+                        div [ Id "two"; ClassName manyTransitions ] []
+                    ]
+            ) |> ignore
+                    
+            let one = getComputedCssById("one")
+            let two = getComputedCssById("two")
+
+            Expect.equal (getValue one "transition-property") "background-color" "Background color is the transition property"
+            Expect.equal (getValue one "transition-duration") "10s" "transition duration is 10 sec"
+
+            Expect.equal (getValue two "transition-property") "background-color, color, width" "transition properties for multiple transitions set"
+            Expect.equal (getValue two "transition-duration") "10s, 20s, 30s" "transition duration for multiple transitions set"
+            Expect.equal (getValue two "transition-timing-function") "ease, ease-in-out, ease-out" "transition timing function set"
+            Expect.equal (getValue two "transition-delay") "0s, 0s, 20s" "transition delay set"
 
 
     ]

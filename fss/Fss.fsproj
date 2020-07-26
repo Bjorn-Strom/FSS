@@ -5,7 +5,7 @@
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" />
     <Compile Include="Utilities.fs" />
-    <Compile Include="Tags.fs" />
+    <Compile Include="Html.fs" />
     <Compile Include="Property.fs" />
     <Compile Include="Units.fs" />
     <Compile Include="Fonts.fs" />
