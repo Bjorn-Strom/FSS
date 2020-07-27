@@ -27,6 +27,8 @@ module Types =
     type IBackgroundOrigin     = interface end
     type IBackgroundClip       = interface end
     type IBackgroundRepeat     = interface end
+    type IBackgroundSize       = interface end
+    type IBackgroundAttachment = interface end
 
 module Global =
     open Types
@@ -59,6 +61,8 @@ module Global =
         interface IBackgroundOrigin
         interface IBackgroundClip
         interface IBackgroundRepeat
+        interface IBackgroundSize
+        interface IBackgroundAttachment
 
     let value (v: Global): string =
         match v with

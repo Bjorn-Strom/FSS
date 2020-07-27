@@ -4,7 +4,6 @@ open Units.Size
 open Types
 open Global
 
-
 module Margin =
     type Margin =
         | Margin of Size

@@ -23,14 +23,18 @@ module Value =
 
         | Color of IColor
 
-        | BackgroundColor     of IColor
-        | BackgroundImage     of BackgroundImage
-        | BackgroundPosition  of IBackgroundPosition
-        | BackgroundPositions of IBackgroundPosition list
-        | BackgroundOrigin    of IBackgroundOrigin
-        | BackgroundClip      of IBackgroundClip
-        | BackgroundRepeat    of IBackgroundRepeat
-        | BackgroundRepeats   of IBackgroundRepeat list
+        | BackgroundColor       of IColor
+        | BackgroundImage       of BackgroundImage
+        | BackgroundPosition    of IBackgroundPosition
+        | BackgroundPositions   of IBackgroundPosition list
+        | BackgroundOrigin      of IBackgroundOrigin
+        | BackgroundClip        of IBackgroundClip
+        | BackgroundRepeat      of IBackgroundRepeat
+        | BackgroundRepeats     of IBackgroundRepeat list
+        | BackgroundSize        of IBackgroundSize
+        | BackgroundSizes       of IBackgroundSize list
+        | BackgroundAttachment  of IBackgroundAttachment
+        | BackgroundAttachments of IBackgroundAttachment list
 
         | Hover of CSSProperty list
 
@@ -128,14 +132,18 @@ module Value =
                 
                 | Color c            -> Property.value color           ==> Color.value c
                 
-                | BackgroundColor     bc -> Property.value backgroundColor    ==> Color.value bc
-                | BackgroundImage     bi -> Property.value backgroundImage    ==> BackgroundImage.value bi
-                | BackgroundPosition  b  -> Property.value backgroundPosition ==> BackgroundPosition.value b
-                | BackgroundPositions bs -> Property.value backgroundPosition ==> combineWs bs BackgroundPosition.value
-                | BackgroundOrigin    b  -> Property.value backgroundOrigin   ==> BackgroundOrigin.value b
-                | BackgroundClip      b  -> Property.value backgroundClip     ==> BackgroundClip.value b
-                | BackgroundRepeat    b  -> Property.value backgroundRepeat   ==> BackgroundRepeat.value b
-                | BackgroundRepeats   bs -> Property.value backgroundRepeat   ==> combineWs bs BackgroundRepeat.value
+                | BackgroundColor       bc -> Property.value backgroundColor      ==> Color.value bc
+                | BackgroundImage       bi -> Property.value backgroundImage      ==> BackgroundImage.value bi
+                | BackgroundPosition    b  -> Property.value backgroundPosition   ==> BackgroundPosition.value b
+                | BackgroundPositions   bs -> Property.value backgroundPosition   ==> combineWs bs BackgroundPosition.value
+                | BackgroundOrigin      b  -> Property.value backgroundOrigin     ==> BackgroundOrigin.value b
+                | BackgroundClip        b  -> Property.value backgroundClip       ==> BackgroundClip.value b
+                | BackgroundRepeat      b  -> Property.value backgroundRepeat     ==> BackgroundRepeat.value b
+                | BackgroundRepeats     bs -> Property.value backgroundRepeat     ==> combineWs bs BackgroundRepeat.value
+                | BackgroundSize        b  -> Property.value backgroundSize       ==> BackgroundSize.value b
+                | BackgroundSizes       bs -> Property.value backgroundSize       ==> combineWs bs BackgroundSize.value
+                | BackgroundAttachment  b  -> Property.value backgroundAttachment ==> BackgroundAttachment.value b
+                | BackgroundAttachments bs -> Property.value backgroundAttachment ==> combineWs bs BackgroundAttachment.value
                 
                 | Hover h            -> Property.value hover           ==> createCSSObject h
                 

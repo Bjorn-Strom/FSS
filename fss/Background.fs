@@ -183,3 +183,46 @@ module BackgroundRepeat =
             | :? Global as g -> Global.value g
             | :? BackgroundRepeat as b -> backgroundRepeatValue b
             | _ -> "Unknown background origin" 
+
+module BackgroundSize =
+    open Global
+    open Units.Size
+
+    type BackgroundSize =
+        | Cover
+        | Contain
+        interface IBackgroundSize
+
+    let private backgroundSizeValue (v: BackgroundSize): string =
+        match v with
+            | Cover -> "cover"
+            | Contain -> "contain"
+
+    let value (v: IBackgroundSize): string =
+        match v with
+            | :? Global as g -> Global.value g
+            | :? Size as s -> Units.Size.value s
+            | :? BackgroundSize as b -> backgroundSizeValue b
+            | _ -> "Unknown background origin" 
+
+
+module BackgroundAttachment =
+    open Global
+
+    type BackgroundAttachment =
+        | Scroll
+        | Fixed
+        | Local
+        interface IBackgroundAttachment
+
+    let private backgroundAttachmentValue (v: BackgroundAttachment): string =
+        match v with
+            | Scroll -> "scroll"
+            | Fixed -> "fixed"
+            | Local -> "local"
+
+    let value (v: IBackgroundAttachment): string =
+        match v with
+            | :? Global as g -> Global.value g
+            | :? BackgroundAttachment as b -> backgroundAttachmentValue b
+            | _ -> "Unknown background origin" 

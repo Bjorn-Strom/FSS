@@ -28,6 +28,7 @@ module Size =
         interface ILinearGradient
         interface IRadialGradient
         interface IBackgroundPosition
+        interface IBackgroundSize
 
     let value (u: Size) = 
         match u with 
