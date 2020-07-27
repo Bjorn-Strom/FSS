@@ -971,7 +971,7 @@ let BackgroundExamples model dispatch =
                                    Height (px 200)
                                    BackgroundImage (LinearGradient [Bottom; red; hex "f06d06" ] )
                                ])
-                       ] []
+                       ] [ ]
 
                     div [
                             ClassName (fss
@@ -1110,12 +1110,12 @@ let BackgroundExamples model dispatch =
                         ]
                     ]
             div [ ClassName (fss 
-                [
-                    Width (px 1025)
-                    Height (px 1025)
-                    BackgroundImage <| Url "https://interactive-examples.mdn.mozilla.net/media/examples/moon.jpg"
-                    BackgroundRepeat model.BackgroundRepeat
-                ])] []
+                    [
+                        Width (px 1025)
+                        Height (px 1025)
+                        BackgroundImage <| Url "https://interactive-examples.mdn.mozilla.net/media/examples/moon.jpg"
+                        BackgroundRepeat model.BackgroundRepeat
+                    ])] []
 
                 ]
 

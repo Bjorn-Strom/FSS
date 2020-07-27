@@ -8,7 +8,7 @@ open Fable.ReactTestingLibrary
 
 open Fss
 open Html
-open Fss.Utilities.Global
+open Global
 open Property
 open Fss
 open Value
@@ -36,6 +36,14 @@ open FlexShrink
 open FlexBasis
 open Margin
 open Selector
+open BackgroundImage
+open LinearGradient
+open RadialGradient
+open BackgroundPosition
+open BackgroundRepeat
+open BackgroundOrigin
+open BackgroundClip
+open BackgroundAttachment
 
 let testCase' name case = 
     testCase name <| fun _ -> 
@@ -469,6 +477,69 @@ let CssTests =
             Expect.equal (getValue two "transition-duration") "10s, 20s, 30s" "transition duration for multiple transitions set"
             Expect.equal (getValue two "transition-timing-function") "ease, ease-in-out, ease-out" "transition timing function set"
             Expect.equal (getValue two "transition-delay") "0s, 0s, 20s" "transition delay set"
+
+        testCase' "Background" <| fun _ ->
+            let linear1 = fss [ BackgroundImage (LinearGradient [ red; blue ] ) ]
+            let linear2 = fss [ BackgroundImage (LinearGradient [ Right; red; blue ] ) ]
+            let linear3 = fss [ BackgroundImage (LinearGradient [ Bottom; red; blue ] ) ]
+            let linear4 = fss [ BackgroundImage (LinearGradient [ deg 72.0; red; blue ] ) ]
+            let radial1 = fss [ BackgroundImage (RadialGradient [ CircleAt [pct 100]; hex "333"; hex "333"; pct 50; hex "eee"; pct 75; hex "333"; pct 75] ) ]
+            let backgroundPosition = fss [ BackgroundPosition (px 10)]
+            let backgroundPositions = fss [ BackgroundPositions [px 10; Bottom]]
+            let backgroundRepeat = fss [ BackgroundRepeat RepeatX ]
+            let backgroundRepeats = fss [ BackgroundRepeats [Repeat; Space] ]
+            let backgroundOrigin = fss [ BackgroundOrigin BorderBox]
+            let backgroundClip = fss [ BackgroundClip BorderBox]
+            let backgroundAttachment = fss [ BackgroundAttachment Scroll]
+
+            RTL.render(
+                div [ ]
+                    [
+                        div [ Id "1"; ClassName linear1 ] [ ]
+                        div [ Id "2"; ClassName linear2 ] [ ]
+                        div [ Id "3"; ClassName linear3 ] [ ]
+                        div [ Id "4"; ClassName linear4 ] [ ]
+                        div [ Id "5"; ClassName radial1 ] [ ]
+                        div [ Id "6"; ClassName backgroundPosition ] [ ]
+                        div [ Id "7"; ClassName backgroundPositions ] [ ]
+                        div [ Id "8"; ClassName backgroundRepeat ] [ ]
+                        div [ Id "9"; ClassName backgroundRepeats ] [ ]
+                        div [ Id "10"; ClassName backgroundOrigin ] [ ]
+                        div [ Id "11"; ClassName backgroundClip ] [ ]
+                        div [ Id "12"; ClassName backgroundAttachment ] [ ]
+                    ]
+            ) |> ignore
+                    
+            let one = getComputedCssById("1")
+            let two = getComputedCssById("2")
+            let three = getComputedCssById("3")
+            let four = getComputedCssById("4")
+            let five = getComputedCssById("5")
+            let six = getComputedCssById("6")
+            let seven = getComputedCssById("7")
+            let eight = getComputedCssById("8")
+            let nine = getComputedCssById("9")
+            let ten = getComputedCssById("10")
+            let eleven = getComputedCssById("11")
+            let twelve = getComputedCssById("12")
+
+            Expect.equal (getValue one "background-image") "linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two colors"
+            Expect.equal (getValue two "background-image") "linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two colors with direction"
+            Expect.equal (getValue three "background-image") "linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two rgb"
+            Expect.equal (getValue four "background-image") "linear-gradient(72deg, rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with degrees"
+            Expect.equal (getValue five "background-image") "radial-gradient(circle at 100% 50%, rgb(51, 51, 51), rgb(51, 51, 51) 50%, rgb(238, 238, 238) 75%, rgb(51, 51, 51) 75%)" "Radial gradient with shape and side"
+
+            Expect.equal (getValue six "background-position") "10px 50%" "Set one background position"
+            Expect.equal (getValue seven "background-position") "10px 100%" "Set several background positions"
+
+            Expect.equal (getValue eight "background-repeat") "repeat-x" "Set one background repeat"
+            Expect.equal (getValue nine "background-repeat") "repeat space" "Set several background repeats"
+
+            Expect.equal (getValue ten "background-origin") "border-box" "Set background origin"
+
+            Expect.equal (getValue eleven "background-clip") "border-box" "Set background clip"
+
+            Expect.equal (getValue twelve "background-attachment") "scroll" "Set background attachment"
     ]
 
 Mocha.runTests CssTests |> ignore

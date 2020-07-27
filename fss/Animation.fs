@@ -65,7 +65,6 @@ module Animation =
             | CubicBezier (a, b, c, d) -> cubicBezier(a, b, c, d)
             | Steps n -> sprintf "steps(%d)" n
             | Steps2 (n, direction) -> sprintf "steps(%d, %s)" n (stepValue direction)
-            | _ -> "Unknown timing"
 
     // Animation count
     type IterationCount =

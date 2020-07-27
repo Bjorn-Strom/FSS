@@ -155,7 +155,7 @@ module BackgroundClip =
             | :? Global as g -> Global.value g
             | :? BackgroundOrigin as b -> BackgroundOrigin.value b
             | :? BackgroundClip as b -> backgroundClipValue b
-            | _ -> "Unknown background origin" 
+            | _ -> "Unknown background clip" 
 
 module BackgroundRepeat =
     open Global
@@ -182,7 +182,7 @@ module BackgroundRepeat =
         match v with
             | :? Global as g -> Global.value g
             | :? BackgroundRepeat as b -> backgroundRepeatValue b
-            | _ -> "Unknown background origin" 
+            | _ -> "Unknown background repeat" 
 
 module BackgroundSize =
     open Global
@@ -203,7 +203,7 @@ module BackgroundSize =
             | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
             | :? BackgroundSize as b -> backgroundSizeValue b
-            | _ -> "Unknown background origin" 
+            | _ -> "Unknown background size" 
 
 
 module BackgroundAttachment =
@@ -225,4 +225,4 @@ module BackgroundAttachment =
         match v with
             | :? Global as g -> Global.value g
             | :? BackgroundAttachment as b -> backgroundAttachmentValue b
-            | _ -> "Unknown background origin" 
+            | _ -> "Unknown background attachment" 
