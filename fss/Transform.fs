@@ -1,7 +1,7 @@
 ﻿namespace Fss
 
-open Utilities.Types
-open Utilities.Global
+open Types
+open Global
 open Units.Size
 open Units.Angle
 
@@ -69,7 +69,7 @@ module Transform =
 
     let value (v: ITransform): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? Transform as m -> transformValue m
             | :? Angle as a -> Units.Angle.value a
             | _ -> "Unknown margin size"

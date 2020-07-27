@@ -1,7 +1,7 @@
 ﻿namespace Fss
 
-open Utilities.Types
-open Utilities.Global
+open Types
+open Global
 open Property
 open Animation
 
@@ -20,7 +20,7 @@ module Transition =
 
     let value (v: ITransition): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? Transition as t -> transitionValue t
             | _ -> "Unknown transition"
  

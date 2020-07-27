@@ -1,36 +1,61 @@
 namespace Fss
 
-open Utilities.Types
-
+open Types
 open Units.Angle
 open Units.Size
+open Utilities.Helpers
 open Color
 
-// Trekk disse ut. Én til radial én til linear
-
-module Gradient =
-    type Position =
+module BackgroundPosition =
+    type BackgroundPosition =
         | Top
-        | TopRight
-        | TopLeft
         | Bottom
-        | BottomLeft
-        | BottomRight
         | Left
         | Right
+        | Center
+        interface IBackgroundPosition
         interface ILinearGradient
         interface IRadialGradient
 
-    let positionValue (v: Position): string =
+    let private backgroundPositionValue (value: BackgroundPosition): string =
+        match value with
+            | Top -> "top"
+            | Bottom -> "bottom"
+            | Left -> "left"
+            | Right -> "right"
+            | Center -> "center"
+
+    let value (v: IBackgroundPosition): string =
         match v with
-            | Top -> "to top"
-            | TopRight -> "to right top"
-            | TopLeft -> "to left top"
-            | Bottom -> "to bottom"
-            | BottomLeft -> "to left bottom"
-            | BottomRight -> "to right bottom"
-            | Left -> "to left"
-            | Right -> "to right"
+            | :? Size as s -> Units.Size.value s
+            | :? BackgroundPosition as position -> backgroundPositionValue position
+            | _ -> "Unknown background position"
+ 
+module LinearGradient = 
+    open BackgroundPosition
+
+    let value (v: ILinearGradient): string =
+        match v with
+            | :? Angle as a -> Units.Angle.value a
+            | :? Size as s -> Units.Size.value s
+            | :? CssColor as c -> Color.value c
+            | :? BackgroundPosition as p -> sprintf "to %s" <| BackgroundPosition.value p
+            | _ -> "Unknown linear gradient value"
+
+module RadialGradient =
+    type Shape =
+        | Circle
+        | Ellipse
+        | CircleAt of IBackgroundPosition list
+        | EllipseAt of IBackgroundPosition list
+        interface IRadialGradient
+
+    let shapeValue (v: Shape): string =
+        match v with
+            | Circle -> "circle"
+            | Ellipse -> "ellipse"
+            | CircleAt positions -> sprintf "circle at %s" <| combineWs positions BackgroundPosition.value
+            | EllipseAt positions -> sprintf "ellipse at %s" <| combineWs positions BackgroundPosition.value
 
     type Side =
         | ClosestCorner
@@ -46,44 +71,18 @@ module Gradient =
             | FarthestCorner -> "farthest-corner"
             | FarthestSide -> "farthest-side"
 
-    type Shape =
-        | Circle
-        | Ellipse 
-        interface IRadialGradient
-
-    let shapeValue (v: Shape): string =
-        match v with
-            | Circle -> "circle"
-            | Ellipse -> "ellipse"
-
-module LinearGradient = 
-    open Gradient
-
-    let value (v: ILinearGradient): string =
-        match v with
-            | :? Angle as a -> Units.Angle.value a
-            | :? Size as s -> Units.Size.value s
-            | :? CssColor as c -> Color.value c
-            | :? Position as p -> positionValue p
-            | _ -> "Unknown linear gradient value"
-
-module RadialGradient =
-    open Gradient
-
     let value (v: IRadialGradient): string =
         match v with
             | :? Angle as a -> Units.Angle.value a
             | :? Size as s -> Units.Size.value s
             | :? CssColor as c -> Color.value c
-            | :? Position as p -> positionValue p
             | :? Side as s -> sideValue s
             | :? Shape as s -> shapeValue s
             | _ -> "Unknown radial gradient value"
 
-
 module BackgroundImage =
     open Units.Size
-    open Utilities.Types
+    open Types
 
     type BackgroundImage =
         | Url of string

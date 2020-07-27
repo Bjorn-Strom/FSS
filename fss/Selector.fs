@@ -1,7 +1,6 @@
 namespace Fss
 
 module Selector =
-    open Utilities.Types
     open Html
 
     type Selector =

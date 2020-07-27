@@ -1,6 +1,6 @@
 namespace Fss
 
-open Utilities.Types
+open Utilities.Helpers
 
 module Property =
     type Property =

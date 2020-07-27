@@ -4,7 +4,7 @@ open Fable.Core
 open Fable.Core.JsInterop
 
 open Value
-open Utilities.Types
+open Utilities.Helpers
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
 module Keyframes =

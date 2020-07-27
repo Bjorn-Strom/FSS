@@ -1,17 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" />
+    <Compile Include="Types.fs" />
     <Compile Include="Utilities.fs" />
     <Compile Include="Html.fs" />
     <Compile Include="Property.fs" />
+    <Compile Include="Animation.fs" />
     <Compile Include="Units.fs" />
     <Compile Include="Fonts.fs" />
     <Compile Include="Color.fs" />
     <Compile Include="Border.fs" />
-    <Compile Include="Animation.fs" />
     <Compile Include="Transform.fs" />
     <Compile Include="Transition.fs" />
     <Compile Include="Display.fs" />

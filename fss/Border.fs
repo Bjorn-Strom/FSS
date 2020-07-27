@@ -1,8 +1,8 @@
 namespace Fss
 
 open Fss
-open Utilities.Types
-open Utilities.Global  
+open Types
+open Global  
 
 module BorderWidth =
     open Units.Size
@@ -22,7 +22,7 @@ module BorderWidth =
 
     let value (v: IBorderWidth): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? BorderWidth as b -> borderWidthValue b
             | :? Size as s -> Units.Size.value s
             | _ -> "Unknown border width"
@@ -59,6 +59,6 @@ module BorderStyle =
             
     let value (v: IBorderStyle): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? BorderStyle as b -> borderStyleValue b
             | _ -> "Unknown border style"  

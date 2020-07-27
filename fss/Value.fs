@@ -3,7 +3,8 @@
 open Fable.Core
 open Fable.Core.JsInterop
 
-open Utilities.Types
+open Types
+open Utilities.Helpers
 open Property
 open Units.Size
 open Animation
@@ -108,15 +109,9 @@ module Value =
         | TransitionProperty       of Property
         | TransitionTimingFunction of Timing
 
-    let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
-        list
-        |> List.map value
-        |> String.concat seperator
     let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
-    let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
-    let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
     let combineAnimations (list: IAnimation list list): string = combineComma list (fun a -> combineWs a Animation.value)
-
+ 
     let rec createCSSObject (attributeList: CSSProperty list) = 
         attributeList
         |> List.map (

@@ -1,10 +1,10 @@
 namespace Fss
 
-open Utilities.Global
+open Global
+open Types
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/display
 module Display =
-    open Utilities.Types
 
     type Display =
         | Inline
@@ -54,14 +54,12 @@ module Display =
 
     let value (v: IDisplay): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? Display as d -> displayValue d
             | _ -> "Unknown display"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction      
 module FlexDirection =
-    open Utilities.Types
-
     type FlexDirection =
         | Row
         | RowReverse
@@ -79,13 +77,12 @@ module FlexDirection =
 
     let value (v: IFlexDirection): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? FlexDirection as f -> flexDirectionValue f
             | _ -> "Unknown flex direction"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
 module FlexWrap =
-    open Utilities.Types
     type FlexWrap =
         | NoWrap
         | Wrap
@@ -101,13 +98,12 @@ module FlexWrap =
 
     let value (v: IFlexWrap): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? FlexWrap as f -> flexWrapValue f
             | _ -> "Unknown flex wrap"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
 module JustifyContent =
-    open Utilities.Types
     type JustifyContent =
         | FlexStart
         | FlexEnd
@@ -129,13 +125,12 @@ module JustifyContent =
 
     let value (v: IJustifyContent): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? JustifyContent as j -> justifyContentValue j
             | _ -> "Unknown justify content"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
 module AlignItems =
-    open Utilities.Types
     type AlignItems =
         | FlexStart
         | FlexEnd
@@ -155,13 +150,12 @@ module AlignItems =
 
     let value (v: IAlignItems): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? AlignItems as a -> alignItemsValue a
             | _ -> "Unknown align items"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
 module AlignContent =
-    open Utilities.Types
 
     type AlignContent =
         | FlexStart
@@ -184,13 +178,12 @@ module AlignContent =
 
     let value (v: IAlignContent): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? AlignContent as a -> alignContentValue a
             | _ -> "Unknown align content"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
 module AlignSelf =
-    open Utilities.Types
             
     type AlignSelf = 
         | Auto
@@ -213,13 +206,12 @@ module AlignSelf =
 
     let value (v: IAlignSelf): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? AlignSelf as a -> alignSelfValue a
             | _ -> "Unknown align self"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/order
 module Order =
-    open Utilities.Types
 
     type Order = 
         | Order of int
@@ -230,13 +222,12 @@ module Order =
 
     let value (v: IOrder): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? Order as o -> orderValue o
             | _ -> "Unknown order"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
 module FlexGrow =
-    open Utilities.Types
 
     type FlexGrow = 
         | Grow of int
@@ -247,14 +238,12 @@ module FlexGrow =
 
     let value (v: IFlexGrow): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? FlexGrow as s -> flexGrowValue s
             | _ -> "Unknown flex grow"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
 module FlexShrink =
-    open Utilities.Types
-
     type FlexShrink =
         | Shrink of int
         interface IFlexShrink
@@ -264,14 +253,13 @@ module FlexShrink =
 
     let value (v: IFlexShrink): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? FlexShrink as s -> flexShrinkValue s
             | _ -> "Unknown flex shrink"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
 module FlexBasis =
     open Fss.Units.Size
-    open Utilities.Types
 
     type FlexBasis = 
         | FlexBasis of Size
@@ -280,7 +268,7 @@ module FlexBasis =
 
     let value (v: IFlexBasis): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
             | _ -> "Unknown flex basis"
 

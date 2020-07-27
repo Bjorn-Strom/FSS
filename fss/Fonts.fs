@@ -1,8 +1,8 @@
 namespace Fss
 
 open Units.Size
-open Utilities.Global
-open Utilities.Types
+open Global
+open Types
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
 module Fonts =
@@ -39,7 +39,7 @@ module Fonts =
 
     let value (v: IFontSize): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
             | :? FontSize as s -> fontValue s
             | _ -> "Unknown font size"

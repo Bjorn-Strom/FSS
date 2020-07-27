@@ -9,7 +9,7 @@ open Fss
 open Fss
 
 open Html
-open Fss.Utilities.Global
+open Global
 open Property
 open Value
 open Color
@@ -37,8 +37,9 @@ open Margin
 open Selector
 open Fonts
 open BackgroundImage
-open Gradient
-
+open LinearGradient
+open RadialGradient
+open BackgroundPosition
 
 type Model = { 
     FlexDirection: FlexDirection
@@ -876,7 +877,7 @@ let FlexBoxExamples model dispatch =
                         ]
                     div [] 
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Center)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent AlignContent.Center)) ]
                             str "Center" 
                         ]
                     div [] 
@@ -1012,7 +1013,7 @@ let BackgroundExamples =
                                 [
                                     Width (px 200)
                                     Height (px 200)
-                                    BackgroundImage (RadialGradient [ Circle; TopRight; yellow; hex "f06d06"] )
+                                    BackgroundImage (RadialGradient [ CircleAt [Top; Right]; yellow; hex "f06d06"] )
                                 ])
                         ] []
 
@@ -1021,13 +1022,22 @@ let BackgroundExamples =
                                 [
                                     Width (px 200)
                                     Height (px 200)
-                                    BackgroundImage (LinearGradient [Right; red; hex "f06d06"; rgb 255 255 0; green ] )
+                                    BackgroundImage (RadialGradient [ CircleAt [pct 100]; hex "333"; hex "333"; pct 50; hex "eee"; pct 75; hex "333"; pct 75] )
                                 ])
                         ] []
                 ]
 
-            ]
+            h3 [] [ str "And images!" ]
+            div [
+                ClassName (fss
+                    [
+                        Width (px 200)
+                        Height (px 200)
+                        BackgroundImage (Url "https://unsplash.it/200/200")
+                    ])
+            ] []
 
+            ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 

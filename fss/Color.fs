@@ -1,7 +1,7 @@
 namespace Fss
 
-open Utilities.Global
-open Utilities.Types
+open Global
+open Types
 
 module Color =
     type CssColor = 
@@ -23,7 +23,7 @@ module Color =
 
     let value (v: IColor): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? CssColor as c -> colorValue c
             | _ -> "Unknown font size"
 

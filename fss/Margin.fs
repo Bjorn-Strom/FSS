@@ -1,8 +1,8 @@
 namespace Fss
 
 open Units.Size
-open Utilities.Types
-open Utilities.Global
+open Types
+open Global
 
 
 module Margin =
@@ -18,7 +18,7 @@ module Margin =
 
     let value (v: IMargin): string =
         match v with
-            | :? Global as g -> Utilities.Global.value g
+            | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
             | :? Margin as m -> marginValue m
             | _ -> "Unknown margin size"

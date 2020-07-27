@@ -1,7 +1,7 @@
 namespace Fss.Units
 
 open Fss
-open Utilities.Types
+open Types
 
 // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
 module Size =
@@ -27,6 +27,7 @@ module Size =
         interface IFlexBasis
         interface ILinearGradient
         interface IRadialGradient
+        interface IBackgroundPosition
 
     let value (u: Size) = 
         match u with 
