@@ -40,26 +40,31 @@ open BackgroundImage
 open LinearGradient
 open RadialGradient
 open BackgroundPosition
+open BackgroundRepeat
 
 type Model = { 
     FlexDirection: FlexDirection
     FlexWrap: FlexWrap
-    AlignContent: AlignContent }
+    AlignContent: AlignContent
+    BackgroundRepeat: BackgroundRepeat }
 type Msg = 
     | SetFlexDirection of FlexDirection
     | SetFlexWrap of FlexWrap
     | SetAlignContent of AlignContent
+    | SetBackgroundRepeat of BackgroundRepeat
 
 let init() = { 
     FlexDirection = Row
     FlexWrap = NoWrap
-    AlignContent = Stretch}
+    AlignContent = Stretch
+    BackgroundRepeat = NoRepeat}
 
 let update (msg: Msg) (model: Model): Model =
     match msg with
     | SetFlexDirection direction -> { model with FlexDirection = direction}
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
+    | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
     
 let ColorExamples =
     fragment []
@@ -903,7 +908,7 @@ let FlexBoxExamples model dispatch =
             flexBasisShrink
         ]
 
-let BackgroundExamples =
+let BackgroundExamples model dispatch =
     fragment []
         [
             h3 [] [ str "And gradients!" ]
@@ -1056,7 +1061,63 @@ let BackgroundExamples =
             h3 [] [ str "Background images can be... fun?" ]
             div [ ClassName frame ] []
 
-            ]
+            let formStyle =
+                fss
+                    [
+                        BorderStyle Solid
+                        BorderWidth (px 1)
+                        BorderColor orangered
+                        CSSProperty.Margin (px 20)
+                    ]
+
+            div [ ClassName (fss [ Display Flex])]
+                [
+
+                    form [ ClassName formStyle ]
+                        [
+                            h3 [] [str "Background repeat" ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat RepeatX)) ]
+                                    str "Repeat-X" 
+                                ]
+
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat RepeatY)) ]
+                                    str "Repeat-Y" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Repeat)) ]
+                                    str "Repeat" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Space)) ]
+                                    str "Space" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Round)) ]
+                                    str "Round" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat NoRepeat)) ]
+                                    str "NoRepeat" 
+                                ]
+                        ]
+                    ]
+            div [ ClassName (fss 
+                [
+                    Width (px 1025)
+                    Height (px 1025)
+                    BackgroundImage <| Url "https://interactive-examples.mdn.mozilla.net/media/examples/moon.jpg"
+                    BackgroundRepeat model.BackgroundRepeat
+                ])] []
+
+                ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
@@ -1072,7 +1133,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             TransitionExamples
             FlexBoxExamples model dispatch
             *)
-            BackgroundExamples
+            BackgroundExamples model dispatch
         ]
 
 Program.mkSimple init update render

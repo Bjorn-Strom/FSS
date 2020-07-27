@@ -81,9 +81,6 @@ module RadialGradient =
             | _ -> "Unknown radial gradient value"
 
 module BackgroundImage =
-    open Units.Size
-    open Types
-
     type BackgroundImage =
         | Url of string
         | LinearGradient of ILinearGradient list
@@ -118,3 +115,71 @@ module BackgroundImage =
             | RadialGradient g -> sprintf "radial-gradient(%s)" <| combineGradient2 g RadialGradient.value
             | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" <| combineGradient g LinearGradient.value
             | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" <| combineGradient2 g RadialGradient.value
+
+module BackgroundOrigin =
+    open Global
+
+    type BackgroundOrigin =
+        | BorderBox
+        | PaddingBox
+        | ContentBox
+        interface IBackgroundOrigin
+        interface IBackgroundClip
+
+    let private backgroundOriginValue (v: BackgroundOrigin): string =
+        match v with
+            | BorderBox -> "border-box"
+            | PaddingBox -> "padding-box"
+            | ContentBox -> "content-box"
+
+    let value (v: IBackgroundOrigin): string =
+        match v with
+            | :? Global as g -> Global.value g
+            | :? BackgroundOrigin as b -> backgroundOriginValue b
+            | _ -> "Unknown background origin" 
+
+module BackgroundClip =
+    open Global
+    open BackgroundOrigin
+
+    type BackgroundClip =
+        | Text
+        interface IBackgroundClip
+
+    let private backgroundClipValue (v: BackgroundClip): string =
+        match v with
+            | Text -> "text"
+
+    let value (v: IBackgroundClip): string =
+        match v with
+            | :? Global as g -> Global.value g
+            | :? BackgroundOrigin as b -> BackgroundOrigin.value b
+            | :? BackgroundClip as b -> backgroundClipValue b
+            | _ -> "Unknown background origin" 
+
+module BackgroundRepeat =
+    open Global
+
+    type BackgroundRepeat =
+        | RepeatX
+        | RepeatY
+        | Repeat
+        | Space
+        | Round
+        | NoRepeat
+        interface IBackgroundRepeat
+
+    let private backgroundRepeatValue (v: BackgroundRepeat): string =
+        match v with
+            | RepeatX -> "repeat-x"
+            | RepeatY -> "repeat-y"
+            | Repeat -> "repeat"
+            | Space -> "space"
+            | Round -> "round"
+            | NoRepeat -> "no-repeat"
+
+    let value (v: IBackgroundRepeat): string =
+        match v with
+            | :? Global as g -> Global.value g
+            | :? BackgroundRepeat as b -> backgroundRepeatValue b
+            | _ -> "Unknown background origin" 
