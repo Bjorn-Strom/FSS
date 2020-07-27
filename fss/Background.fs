@@ -6,6 +6,7 @@ open Units.Size
 open Utilities.Helpers
 open Color
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
 module BackgroundPosition =
     type BackgroundPosition =
         | Top
@@ -31,6 +32,7 @@ module BackgroundPosition =
             | :? BackgroundPosition as position -> backgroundPositionValue position
             | _ -> "Unknown background position"
  
+// https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient
 module LinearGradient = 
     open BackgroundPosition
 
@@ -42,6 +44,7 @@ module LinearGradient =
             | :? BackgroundPosition as p -> sprintf "to %s" <| BackgroundPosition.value p
             | _ -> "Unknown linear gradient value"
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient
 module RadialGradient =
     type Shape =
         | Circle
@@ -80,6 +83,7 @@ module RadialGradient =
             | :? Shape as s -> shapeValue s
             | _ -> "Unknown radial gradient value"
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
 module BackgroundImage =
     type BackgroundImage =
         | Url of string
@@ -116,6 +120,7 @@ module BackgroundImage =
             | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" <| combineGradient g LinearGradient.value
             | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" <| combineGradient2 g RadialGradient.value
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
 module BackgroundOrigin =
     open Global
 
@@ -138,6 +143,7 @@ module BackgroundOrigin =
             | :? BackgroundOrigin as b -> backgroundOriginValue b
             | _ -> "Unknown background origin" 
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
 module BackgroundClip =
     open Global
     open BackgroundOrigin
@@ -157,6 +163,7 @@ module BackgroundClip =
             | :? BackgroundClip as b -> backgroundClipValue b
             | _ -> "Unknown background clip" 
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
 module BackgroundRepeat =
     open Global
 
@@ -184,6 +191,8 @@ module BackgroundRepeat =
             | :? BackgroundRepeat as b -> backgroundRepeatValue b
             | _ -> "Unknown background repeat" 
 
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
 module BackgroundSize =
     open Global
     open Units.Size
@@ -205,7 +214,7 @@ module BackgroundSize =
             | :? BackgroundSize as b -> backgroundSizeValue b
             | _ -> "Unknown background size" 
 
-
+// https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
 module BackgroundAttachment =
     open Global
 

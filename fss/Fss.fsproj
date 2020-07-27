@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
@@ -17,6 +17,7 @@
     <Compile Include="Transition.fs" />
     <Compile Include="Display.fs" />
     <Compile Include="Margin.fs" />
+    <Compile Include="Padding.fs" />
     <Compile Include="Selector.fs" />
     <Compile Include="Background.fs" />
     <Compile Include="Value.fs" />

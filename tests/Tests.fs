@@ -357,6 +357,55 @@ let CssTests =
             Expect.equal (getValue margin "margin-bottom") "40px" "Margin top gets set margins"
             Expect.equal (getValue margin "margin-left") "10px" "Margin top gets set margins"
             
+        testCase' "Set padding" <| fun _ ->
+            let shortShortHand = 
+                fss
+                    [
+                        CSSProperty.Padding (px 10)
+                    ]
+
+            let shortHand =
+                fss
+                    [
+                        Paddings [px 10; px 20; px 30; px 40]
+                    ]
+
+            let padding =
+                fss
+                    [
+                        PaddingTop (px 30)
+                        PaddingRight (px 20)
+                        PaddingBottom (px 40)
+                        PaddingLeft (px 10)
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div [ Id "shortShortHand"; ClassName shortShortHand ] []
+                        div [ Id "shortHand"; ClassName shortHand ] []
+                        div [ Id "paddings"; ClassName padding ] []
+                    ]
+            ) |> ignore
+                    
+            let shortShortHand = getComputedCssById("shortShortHand")
+            Expect.equal (getValue shortShortHand "padding-top") "10px" "Padding top gets set"
+            Expect.equal (getValue shortShortHand "padding-right") "10px" "Padding top gets set"
+            Expect.equal (getValue shortShortHand "padding-bottom") "10px" "Padding top gets set"
+            Expect.equal (getValue shortShortHand "padding-left") "10px" "Padding top gets set"
+
+            let shortHand = getComputedCssById("shortHand")
+            Expect.equal (getValue shortHand "padding-top") "10px" "Padding top gets set shorthand"
+            Expect.equal (getValue shortHand "padding-right") "20px" "Padding top gets set shorthand"
+            Expect.equal (getValue shortHand "padding-bottom") "30px" "Padding top gets set shorthand"
+            Expect.equal (getValue shortHand "padding-left") "40px" "Padding top gets set shorthand"
+
+            let padding = getComputedCssById("paddings")
+            Expect.equal (getValue padding "padding-top") "30px" "Padding top gets set paddings"
+            Expect.equal (getValue padding "padding-right") "20px" "Padding top gets set paddings"
+            Expect.equal (getValue padding "padding-bottom") "40px" "Padding top gets set paddings"
+            Expect.equal (getValue padding "padding-left") "10px" "Padding top gets set paddings"
+
 
         testCase' "Flexbox tests" <| fun _ ->
             let flex =

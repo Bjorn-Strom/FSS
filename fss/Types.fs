@@ -8,6 +8,7 @@ module Types =
     type IBorderStyle          = interface end
     type IBorderWidth          = interface end
     type IMargin               = interface end
+    type IPadding              = interface end
     type IDisplay              = interface end
     type IFlexDirection        = interface end
     type IFlexWrap             = interface end
@@ -44,6 +45,7 @@ module Global =
         interface IBorderStyle
         interface IBorderWidth
         interface IMargin
+        interface IPadding
         interface IDisplay
         interface IFlexDirection
         interface IFlexWrap

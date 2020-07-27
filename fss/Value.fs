@@ -10,6 +10,7 @@ open Units.Size
 open Animation
 open Selector
 open BackgroundImage
+open Padding
 
 module Value = 
     [<Import("css", from="emotion")>]
@@ -89,6 +90,13 @@ module Value =
         | MarginLeft   of IMargin
         | Margin       of IMargin 
         | Margins      of IMargin list
+
+        | PaddingTop    of IPadding
+        | PaddingRight  of IPadding
+        | PaddingBottom of IPadding
+        | PaddingLeft   of IPadding
+        | Padding       of IPadding 
+        | Paddings      of IPadding list
 
         | Animation                of IAnimation list  
         | Animations               of IAnimation list list
@@ -199,6 +207,13 @@ module Value =
                 | MarginLeft   m  -> Property.value marginLeft   ==> Margin.value m
                 | Margin       m  -> Property.value margin       ==> Margin.value m
                 | Margins      ms -> Property.value margin       ==> combineWs ms Margin.value
+
+                | PaddingTop    m  -> Property.value paddingTop    ==> Padding.value m
+                | PaddingRight  m  -> Property.value paddingRight  ==> Padding.value m
+                | PaddingBottom m  -> Property.value paddingBottom ==> Padding.value m
+                | PaddingLeft   m  -> Property.value paddingLeft   ==> Padding.value m
+                | Padding       m  -> Property.value padding       ==> Padding.value m
+                | Paddings      ms -> Property.value padding       ==> combineWs ms Padding.value
 
                 | Animation                a   -> Property.value animation               ==> combineWs a Animation.value
                 | Animations               ans -> Property.value animation               ==> combineAnimations ans

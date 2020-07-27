@@ -366,6 +366,39 @@ let MarginExamples =
                 [ str "Me tooo!" ]
         ]
 
+let PaddingExamples =
+    fragment []
+        [
+            div [
+                    ClassName
+                        (fss
+                            [
+                                Width (px 100)
+                                Height (px 100)
+                                Color orangered
+                                BackgroundColor rebeccapurple
+                                PaddingRight (px 50)
+                                PaddingLeft (px 50)
+                                PaddingTop (px 50)
+                                PaddingBottom (px 50)
+                            ])
+                ]
+                [ str "I have padding everywhere!" ]
+        
+            div [
+                    ClassName
+                        (fss
+                            [
+                                Width (px 100)
+                                Height (px 100)
+                                Color orangered
+                                BackgroundColor rebeccapurple
+                                Paddings [px 100; px 50; px 200; px 150]
+                            ])
+                ]
+                [ str "Me tooo!" ]
+        ]
+
 let TransformExamples =
     fragment []
         [
@@ -1123,16 +1156,16 @@ let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [
             
-            (*
+            
             ColorExamples
             FontExamples
             BorderExamples
             AnimationExamples
             MarginExamples
+            PaddingExamples
             TransformExamples
             TransitionExamples
             FlexBoxExamples model dispatch
-            *)
             BackgroundExamples model dispatch
         ]
 

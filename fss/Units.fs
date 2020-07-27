@@ -24,6 +24,7 @@ module Size =
         interface IFontSize
         interface IBorderWidth
         interface IMargin
+        interface IPadding
         interface IFlexBasis
         interface ILinearGradient
         interface IRadialGradient
