@@ -1037,6 +1037,25 @@ let BackgroundExamples =
                     ])
             ] []
 
+            let frameAnimation =
+                keyframes
+                    [
+                        frame 0   [ BackgroundPositions [px 0; px 0] ]
+                        frame 100 [ BackgroundPositions [px -500; px 0]]
+                    ]
+
+            let frame =
+                fss
+                    [
+                        Width (px 50)
+                        Height (px 72)
+                        BackgroundImage (Url "https://s.cdpn.io/79/sprite-steps.png")
+                        Animation [ frameAnimation; sec 1.0; Steps(10); Infinite ]
+                    ]
+
+            h3 [] [ str "Background images can be... fun?" ]
+            div [ ClassName frame ] []
+
             ]
 
 let render (model: Model) (dispatch: Msg -> unit) =

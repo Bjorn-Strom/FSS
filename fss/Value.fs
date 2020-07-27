@@ -23,8 +23,11 @@ module Value =
 
         | Color of IColor
 
-        | BackgroundColor of IColor
-        | BackgroundImage of BackgroundImage
+        | BackgroundColor     of IColor
+        | BackgroundImage     of BackgroundImage
+        | BackgroundPosition  of IBackgroundPosition
+        | BackgroundPositions of IBackgroundPosition list
+        
 
         | Hover of CSSProperty list
 
@@ -122,8 +125,10 @@ module Value =
                 
                 | Color c            -> Property.value color           ==> Color.value c
                 
-                | BackgroundColor bc -> Property.value backgroundColor ==> Color.value bc
-                | BackgroundImage bi -> Property.value backgroundImage ==> BackgroundImage.value bi
+                | BackgroundColor bc     -> Property.value backgroundColor    ==> Color.value bc
+                | BackgroundImage bi     -> Property.value backgroundImage    ==> BackgroundImage.value bi
+                | BackgroundPosition b   -> Property.value backgroundPosition ==> BackgroundPosition.value b
+                | BackgroundPositions bs -> Property.value backgroundPosition ==> combineWs bs BackgroundPosition.value
                 
                 | Hover h            -> Property.value hover           ==> createCSSObject h
                 
