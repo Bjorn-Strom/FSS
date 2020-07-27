@@ -30,6 +30,7 @@ module Types =
     type IBackgroundRepeat     = interface end
     type IBackgroundSize       = interface end
     type IBackgroundAttachment = interface end
+    type IContentSize          = interface end
 
 module Global =
     open Types
@@ -65,6 +66,7 @@ module Global =
         interface IBackgroundRepeat
         interface IBackgroundSize
         interface IBackgroundAttachment
+        interface IContentSize
 
     let value (v: Global): string =
         match v with

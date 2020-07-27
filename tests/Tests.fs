@@ -44,6 +44,7 @@ open BackgroundRepeat
 open BackgroundOrigin
 open BackgroundClip
 open BackgroundAttachment
+open ContentSize
 
 let testCase' name case = 
     testCase name <| fun _ -> 
@@ -275,17 +276,33 @@ let CssTests =
 
         testCase' "Style width and height" <| fun _ ->         
             RTL.render(
-                fragment []
+                div [ ClassName (fss [ Width (px 200); Height (px 200)] ) ]
                     [
                         div 
-                            [ Id "size"; ClassName (fss [ Width (px 100); Height (px 50) ]) ]
+                            [ Id "size"; ClassName (fss [ Width (px 1000); Height (px 500); MinHeight (px 20); MaxHeight (px 50); MinWidth (px 50); MaxWidth (px 100) ]) ]
+                            []
+
+                        div 
+                            [ Id "content"; ClassName (fss [Width MaxContent; Height MinContent; MinHeight (FitContent (px 20))]) ]
                             []
                     ]
             ) |> ignore
                 
-            let color = getComputedCssById("size")
-            Expect.equal (getValue color "width") "100px" "width gets set"
-            Expect.equal (getValue color "height") "50px" "height gets set"
+            let contentSize = getComputedCssById("size")
+            Expect.equal (getValue contentSize "width") "100px" "width gets set"
+            Expect.equal (getValue contentSize "height") "50px" "height gets set"
+
+            Expect.equal (getValue contentSize "min-width") "50px" "min-width gets set"
+            Expect.equal (getValue contentSize "min-height") "20px" "min-height gets set"
+
+            Expect.equal (getValue contentSize "max-width") "100px" "max-width gets set"
+            Expect.equal (getValue contentSize "max-height") "50px" "max-height gets set"
+
+            let contentTest = getComputedCssById("content")
+            Expect.equal (getValue contentTest "width") "0px" "width gets set to max content"
+            Expect.equal (getValue contentTest "height") "0px" "height gets set to min content"
+            Expect.equal (getValue contentTest "min-height") "0px" "min-height gets set to fit content"
+
 
         testCase' "Set global values" <| fun _ ->
             let style = 

@@ -18,6 +18,7 @@
     <Compile Include="Display.fs" />
     <Compile Include="Margin.fs" />
     <Compile Include="Padding.fs" />
+    <Compile Include="ContentSize.fs" />
     <Compile Include="Selector.fs" />
     <Compile Include="Background.fs" />
     <Compile Include="Value.fs" />

@@ -68,8 +68,13 @@ module Value =
         | BorderBottomColor of IColor
         | BorderLeftColor   of IColor
 
-        | Width       of Size
-        | Height      of Size
+        | Width       of IContentSize
+        | MinWidth    of IContentSize
+        | MaxWidth    of IContentSize
+        | Height      of IContentSize
+        | MinHeight   of IContentSize
+        | MaxHeight   of IContentSize
+
         | Perspective of Size
 
         | Display        of IDisplay
@@ -185,8 +190,13 @@ module Value =
                 | BorderBottomColor bc  -> Property.value borderBottomColor ==> Color.value bc
                 | BorderLeftColor   bc  -> Property.value borderLeftColor   ==> Color.value bc
 
-                | Width       w -> Property.value width       ==> Units.Size.value w
-                | Height      h -> Property.value height      ==> Units.Size.value h
+                | Width     w -> Property.value width     ==> ContentSize.value w
+                | MinWidth  w -> Property.value minWidth  ==> ContentSize.value w
+                | MaxWidth  w -> Property.value maxWidth  ==> ContentSize.value w
+                | Height    h -> Property.value height    ==> ContentSize.value h
+                | MinHeight h -> Property.value minHeight ==> ContentSize.value h
+                | MaxHeight h -> Property.value maxHeight ==> ContentSize.value h
+
                 | Perspective p -> Property.value perspective ==> Units.Size.value p
 
                 | Display        d -> Property.value display        ==> Display.value d
