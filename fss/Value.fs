@@ -11,6 +11,7 @@ open Animation
 open Selector
 open BackgroundImage
 open Padding
+open Media
 
 module Value = 
     [<Import("css", from="emotion")>]
@@ -19,6 +20,9 @@ module Value =
 
     type CSSProperty =
         | Selector of Selector * CSSProperty list
+
+        | Media of Feature list * CSSProperty list
+        | MediaFor of Device * Feature list * CSSProperty list
 
         | Label of string
 
@@ -134,12 +138,16 @@ module Value =
 
     let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
     let combineAnimations (list: IAnimation list list): string = combineComma list (fun a -> combineWs a Animation.value)
- 
+    
+
     let rec createCSSObject (attributeList: CSSProperty list) = 
         attributeList
         |> List.map (
             function
                 | Selector (s, ss)   -> Selector.value s               ==> createCSSObject ss
+
+                | Media    (fs, p)    -> sprintf "@media %s" <| Media.featureLabel fs ==> createCSSObject p
+                | MediaFor (d, f, p) -> "foo"                  ==> "foo"
 
                 | Label l            -> Property.value label           ==> l
                 
@@ -256,8 +264,14 @@ module Value =
         )
         |> createObj
 
+    let Media (r: Feature list) (p: CSSProperty list) = Media(r, p)
+    let MediaFor (d: Device) (r: Feature list) (p: CSSProperty list) = MediaFor(d, r, p)
 
 
+            
+
+        (*
+        
     type IPropertyThing = interface end
 
     type Raboof =
@@ -287,27 +301,34 @@ module Value =
     let media (r: IPropertyThing list) (p: CSSProperty list) = Media(r,p)
     let mediaFor (d: Device) (r: IPropertyThing list) (p: CSSProperty list) = MediaFor(d, r, p)
 
-    media [ MaxWidth (px 1000) ] 
+    media [ And [MaxWidth (px 1000)] ] 
         [
             BackgroundColor Color.red
         ] |> ignore
+    (* @media (max-width: 100px) { background-color: red } *)
+    
 
-    media [ MaxWidth (px 1000); Or [ MinWidth (em 3.5) ] ] 
+    media [ And [MaxWidth (px 1000)]; Or [ MinWidth (em 3.5) ] ] 
         [
             BackgroundColor Color.red
         ] |> ignore
+    (* @media (max-width: 100px) or (min-width: 3.5em) { background-color: red } *)
 
-    mediaFor Screen [ MaxWidth (px 1000) ] 
+    mediaFor Screen [ And [MaxWidth (px 1000)] ] 
         [
             BackgroundColor Color.red
         ] |> ignore
+    (* @media screen and (max-width: 100px) { background-color: red } *)
 
-    mediaFor Print [ MaxWidth (px 1000); Or [ MinWidth (em 3.5) ]  ] 
+    mediaFor Print [ And [ MaxWidth (px 1000)]; Or [ MinWidth (em 3.5) ]  ] 
         [
             BackgroundColor Color.red
         ] |> ignore
+    (* @media print and  (max-width: 100px) or (min-width: 3.5em) { background-color: red } *)
 
+    *)
 
+        
     (*
 media and' [] or' []
     [

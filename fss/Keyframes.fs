@@ -10,7 +10,7 @@ open Utilities.Helpers
 module Keyframes =
     [<Import("keyframes", from="emotion")>]
     let private kframes(x) = jsNative
-    let private kframes' x = kframes(x)
+    let kframes' x = kframes(x)
 
     type KeyframeAttribute =
         | Frame of int * CSSProperty list
@@ -19,7 +19,7 @@ module Keyframes =
     let frameValue f = sprintf "%d%%" f
     let frameValues fs = combineList fs frameValue ", "
 
-    let rec createPOJO (attributeList: KeyframeAttribute list) =
+    let rec createAnimationObject (attributeList: KeyframeAttribute list) =
         attributeList
         |> List.map (
             function 
@@ -29,4 +29,3 @@ module Keyframes =
 
     let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame
     let frames (f: int list) (properties: CSSProperty list) = (f, properties) |> Frames
-    let keyframes (attributeList: KeyframeAttribute list) = attributeList |> createPOJO |> kframes'

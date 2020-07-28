@@ -7,6 +7,7 @@ open Fable.React.Props
 
 open Fss
 open Fss
+open Media
 
 open Html
 open Global
@@ -1154,19 +1155,31 @@ let BackgroundExamples model dispatch =
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
-        [
-            
-            
-            ColorExamples
-            FontExamples
-            BorderExamples
-            AnimationExamples
-            MarginExamples
-            PaddingExamples
-            TransformExamples
-            TransitionExamples
-            FlexBoxExamples model dispatch
-            BackgroundExamples model dispatch
+        [         
+           // ColorExamples
+           // FontExamples
+           // BorderExamples
+           // AnimationExamples
+           // MarginExamples
+           // PaddingExamples
+           // TransformExamples
+           // TransitionExamples
+           // FlexBoxExamples model dispatch
+           // BackgroundExamples model dispatch
+
+           let style =
+                fss
+                    [
+                        Width (px 200)
+                        Height (px 200)
+                        BackgroundColor blue
+                        Media 
+                            [
+                                And [ MediaFeature.MaxWidth (px 500); MediaFeature.MinWidth (px 200) ]
+                            ]
+                            [ BackgroundColor Color.red ]
+                    ]
+           div [ ClassName style] []
         ]
 
 Program.mkSimple init update render

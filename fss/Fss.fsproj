@@ -21,9 +21,9 @@
     <Compile Include="ContentSize.fs" />
     <Compile Include="Selector.fs" />
     <Compile Include="Background.fs" />
+    <Compile Include="Media.fs" />
     <Compile Include="Value.fs" />
     <Compile Include="Keyframes.fs" />
-    <Compile Include="Media.fs" />
     <Compile Include="Fss.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

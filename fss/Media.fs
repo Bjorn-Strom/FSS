@@ -1,6 +1,9 @@
 namespace Fss
-open Fss.Units.Size
-open Fss.Units.Resolution
+
+open Fable.Core.JsInterop
+
+open Units.Size
+open Units.Resolution
 
 module Media =
     type Device =
@@ -70,7 +73,7 @@ module Media =
         | Slow
         | Fast
 
-    type MediaFeatures =
+    type MediaFeature =
         | AnyHover of bool
         | AnyPointer of Pointer
         | AspectRatio of int
@@ -108,3 +111,24 @@ module Media =
         | Scan of Scan
         | Scripting of Scripting
         | Update of Update
+
+    let private mediaFeatureValue (v: MediaFeature): string =
+        match v with
+            | MaxWidth s -> sprintf "(max-width: %s)" (Units.Size.value s)
+            | MinWidth s -> sprintf "(min-width: %s)" (Units.Size.value s)
+        
+    type Feature =
+        | And of MediaFeature list
+        | Or of MediaFeature list
+        | Not of MediaFeature list
+
+    let private combineAndFeatures (list: MediaFeature list): string = list |> List.map mediaFeatureValue |> String.concat " and "
+
+    let featureLabel (v: Feature list): string =
+        Browser.Dom.console.log("V: ", v)
+        v
+        |> List.map (fun f -> 
+            match f with
+                | And fs -> combineAndFeatures fs
+                | _ -> "Unknown media feature")
+        |> String.concat ""
