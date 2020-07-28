@@ -255,3 +255,69 @@ module Value =
                 | TransitionTimingFunction t  -> Property.value transitionTimingFunction ==> Animation.value t
         )
         |> createObj
+
+
+
+    type IPropertyThing = interface end
+
+    type Raboof =
+        | One
+        | Two
+        | Three
+        | Four
+        | MaxWidth of Size
+        | MinWidth of Size
+        interface IPropertyThing
+
+    type Device =
+        | Screen
+        | Speech
+        | Print
+        | All
+
+    type PropertyThing =
+        | And of Raboof list
+        | Or of Raboof list
+        interface IPropertyThing
+
+    type Media =
+        | Media of IPropertyThing list * CSSProperty list
+        | MediaFor of Device * IPropertyThing list * CSSProperty list
+
+    let media (r: IPropertyThing list) (p: CSSProperty list) = Media(r,p)
+    let mediaFor (d: Device) (r: IPropertyThing list) (p: CSSProperty list) = MediaFor(d, r, p)
+
+    media [ MaxWidth (px 1000) ] 
+        [
+            BackgroundColor Color.red
+        ] |> ignore
+
+    media [ MaxWidth (px 1000); Or [ MinWidth (em 3.5) ] ] 
+        [
+            BackgroundColor Color.red
+        ] |> ignore
+
+    mediaFor Screen [ MaxWidth (px 1000) ] 
+        [
+            BackgroundColor Color.red
+        ] |> ignore
+
+    mediaFor Print [ MaxWidth (px 1000); Or [ MinWidth (em 3.5) ]  ] 
+        [
+            BackgroundColor Color.red
+        ] |> ignore
+
+
+    (*
+media and' [] or' []
+    [
+
+    ]
+*)
+
+(*
+mediaFor screen and' [] or' []
+    [
+
+    ]
+*)

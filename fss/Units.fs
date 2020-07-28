@@ -91,3 +91,11 @@ module Angle =
     let grad (v: float): Angle = sprintf "%.2fgrad" v |> Grad
     let rad (v: float): Angle = sprintf "%.4frad" v |> Rad
     let turn (v: float): Angle = sprintf "%.2fturn" v |> Turn
+
+module Resolution =
+    type Resolution =
+        | Dpi of string
+    
+    let value (r: Resolution) =
+        match r with
+            | Dpi d -> sprintf "%sdpi" d
