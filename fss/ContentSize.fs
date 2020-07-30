@@ -28,3 +28,4 @@ module ContentSize =
             | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
             | :? ContentSize as c -> contentSizeValue c
+            | _ -> "Unknown size"

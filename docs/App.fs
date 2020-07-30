@@ -1174,10 +1174,17 @@ let render (model: Model) (dispatch: Msg -> unit) =
                         Height (px 200)
                         BackgroundColor blue
                         Media 
-                            [
-                                And [ MediaFeature.MaxWidth (px 500); MediaFeature.MinWidth (px 200) ]
-                            ]
+                            [ MediaFeature.MaxWidth (px 500); MediaFeature.MinWidth (px 200) ]
                             [ BackgroundColor Color.red ]
+                        Media
+                            [ MediaFeature.MinHeight (px 700)]
+                            [ BackgroundColor pink]
+                        MediaFor Print
+                            []
+                            [ 
+                                Transform (Rotate(deg 45.0))
+                                BackgroundColor black
+                            ]
                     ]
            div [ ClassName style] []
         ]

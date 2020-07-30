@@ -21,8 +21,8 @@ module Value =
     type CSSProperty =
         | Selector of Selector * CSSProperty list
 
-        | Media of Feature list * CSSProperty list
-        | MediaFor of Device * Feature list * CSSProperty list
+        | Media of MediaFeature list * CSSProperty list
+        | MediaFor of Device * MediaFeature list * CSSProperty list
 
         | Label of string
 
@@ -139,6 +139,7 @@ module Value =
     let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
     let combineAnimations (list: IAnimation list list): string = combineComma list (fun a -> combineWs a Animation.value)
     
+    open Browser
 
     let rec createCSSObject (attributeList: CSSProperty list) = 
         attributeList
@@ -146,8 +147,8 @@ module Value =
             function
                 | Selector (s, ss)   -> Selector.value s               ==> createCSSObject ss
 
-                | Media    (fs, p)    -> sprintf "@media %s" <| Media.featureLabel fs ==> createCSSObject p
-                | MediaFor (d, f, p) -> "foo"                  ==> "foo"
+                | Media    (f, p)     -> sprintf "@media %s" <| Media.featureLabel f                         ==> createCSSObject p
+                | MediaFor (d, f, p)  -> sprintf "@media %s %s" (Media.deviceLabel d) (Media.featureLabel f) ==> createCSSObject p
 
                 | Label l            -> Property.value label           ==> l
                 
@@ -264,13 +265,12 @@ module Value =
         )
         |> createObj
 
-    let Media (r: Feature list) (p: CSSProperty list) = Media(r, p)
-    let MediaFor (d: Device) (r: Feature list) (p: CSSProperty list) = MediaFor(d, r, p)
+    let Media (r: MediaFeature list) (p: CSSProperty list) = Media(r, p)
+    let MediaFor (d: Device) (r: MediaFeature list) (p: CSSProperty list) = MediaFor(d, r, p)
 
 
-            
+           (** 
 
-        (*
         
     type IPropertyThing = interface end
 
@@ -326,8 +326,7 @@ module Value =
         ] |> ignore
     (* @media print and  (max-width: 100px) or (min-width: 3.5em) { background-color: red } *)
 
-    *)
-
+*)
         
     (*
 media and' [] or' []

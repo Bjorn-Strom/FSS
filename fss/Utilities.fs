@@ -11,7 +11,9 @@ module Helpers =
     let pascalToKebabCase (value: string): string =
         value
         |> Seq.fold (fun acc element ->
-        if Char.IsUpper(char element) then 
+        if Char.IsUpper(char element) && acc.Length = 0 then
+            acc + (string <| Char.ToLower(element))
+        else if Char.IsUpper(char element) && acc.Length <> 0 then 
             sprintf "%s-%s" acc (string <| Char.ToLower(element))
         else 
             acc + (string element)) ""
