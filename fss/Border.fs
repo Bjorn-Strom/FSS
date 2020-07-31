@@ -3,6 +3,7 @@ namespace Fss
 open Fss
 open Types
 open Global  
+open Utilities.Helpers
 
 module BorderWidth =
     open Units.Size
@@ -14,11 +15,7 @@ module BorderWidth =
         interface IBorderWidth
         interface IGlobal
 
-    let private borderWidthValue (v: BorderWidth): string =
-        match v with
-            | Thin -> "thin"
-            | Medium -> "medium"
-            | Thick -> "thick"
+    let private borderWidthValue (v: BorderWidth): string = duToLowercase v
 
     let value (v: IBorderWidth): string =
         match v with
@@ -44,18 +41,7 @@ module BorderStyle =
         interface IBorderStyle
         interface IGlobal
                     
-    let private borderStyleValue (v: BorderStyle): string =
-        match v with
-            | Hidden -> "hidden"
-            | Dotted -> "dotted"
-            | Dashed -> "dashed"
-            | Solid -> "solid"
-            | Double -> "double"
-            | Groove -> "groove"
-            | Ridge -> "ridge"
-            | Inset -> "inset"
-            | Outset -> "outset"
-            | None -> "none"
+    let private borderStyleValue (v: BorderStyle): string = duToLowercase v
             
     let value (v: IBorderStyle): string =
         match v with

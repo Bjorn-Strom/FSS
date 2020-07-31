@@ -167,7 +167,7 @@ module Value =
                 | BackgroundAttachment  b  -> Property.value backgroundAttachment ==> BackgroundAttachment.value b
                 | BackgroundAttachments bs -> Property.value backgroundAttachment ==> combineWs bs BackgroundAttachment.value
                 
-                | Hover h            -> Property.value hover           ==> createCSSObject h
+                | Hover h            -> hover |> Property.value |> toPsuedo ==> createCSSObject h
                 
                 | FontSize f         -> Property.value fontSize        ==> Fonts.value f
 
@@ -267,77 +267,3 @@ module Value =
 
     let Media (r: MediaFeature list) (p: CSSProperty list) = Media(r, p)
     let MediaFor (d: Device) (r: MediaFeature list) (p: CSSProperty list) = MediaFor(d, r, p)
-
-
-           (** 
-
-        
-    type IPropertyThing = interface end
-
-    type Raboof =
-        | One
-        | Two
-        | Three
-        | Four
-        | MaxWidth of Size
-        | MinWidth of Size
-        interface IPropertyThing
-
-    type Device =
-        | Screen
-        | Speech
-        | Print
-        | All
-
-    type PropertyThing =
-        | And of Raboof list
-        | Or of Raboof list
-        interface IPropertyThing
-
-    type Media =
-        | Media of IPropertyThing list * CSSProperty list
-        | MediaFor of Device * IPropertyThing list * CSSProperty list
-
-    let media (r: IPropertyThing list) (p: CSSProperty list) = Media(r,p)
-    let mediaFor (d: Device) (r: IPropertyThing list) (p: CSSProperty list) = MediaFor(d, r, p)
-
-    media [ And [MaxWidth (px 1000)] ] 
-        [
-            BackgroundColor Color.red
-        ] |> ignore
-    (* @media (max-width: 100px) { background-color: red } *)
-    
-
-    media [ And [MaxWidth (px 1000)]; Or [ MinWidth (em 3.5) ] ] 
-        [
-            BackgroundColor Color.red
-        ] |> ignore
-    (* @media (max-width: 100px) or (min-width: 3.5em) { background-color: red } *)
-
-    mediaFor Screen [ And [MaxWidth (px 1000)] ] 
-        [
-            BackgroundColor Color.red
-        ] |> ignore
-    (* @media screen and (max-width: 100px) { background-color: red } *)
-
-    mediaFor Print [ And [ MaxWidth (px 1000)]; Or [ MinWidth (em 3.5) ]  ] 
-        [
-            BackgroundColor Color.red
-        ] |> ignore
-    (* @media print and  (max-width: 100px) or (min-width: 3.5em) { background-color: red } *)
-
-*)
-        
-    (*
-media and' [] or' []
-    [
-
-    ]
-*)
-
-(*
-mediaFor screen and' [] or' []
-    [
-
-    ]
-*)

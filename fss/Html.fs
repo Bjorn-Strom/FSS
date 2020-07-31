@@ -112,8 +112,4 @@ module Html =
         | Video
         | Wbr
 
-    let value (v: Html): string =
-        let v =
-            v
-            |> duToString
-        v.ToLower()
+    let value (v: Html): string = duToLowercase v

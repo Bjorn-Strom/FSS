@@ -18,13 +18,7 @@ module BackgroundPosition =
         interface ILinearGradient
         interface IRadialGradient
 
-    let private backgroundPositionValue (value: BackgroundPosition): string =
-        match value with
-            | Top -> "top"
-            | Bottom -> "bottom"
-            | Left -> "left"
-            | Right -> "right"
-            | Center -> "center"
+    let private backgroundPositionValue (v: BackgroundPosition): string = duToLowercase v
 
     let value (v: IBackgroundPosition): string =
         match v with
@@ -67,12 +61,7 @@ module RadialGradient =
         | FarthestSide
         interface IRadialGradient
 
-    let sideValue (v: Side): string =
-        match v with
-            | ClosestCorner -> "closest-corner"
-            | ClosestSide -> "cosest-side"
-            | FarthestCorner -> "farthest-corner"
-            | FarthestSide -> "farthest-side"
+    let sideValue (v: Side): string = duToKebab v
 
     let value (v: IRadialGradient): string =
         match v with
@@ -131,11 +120,7 @@ module BackgroundOrigin =
         interface IBackgroundOrigin
         interface IBackgroundClip
 
-    let private backgroundOriginValue (v: BackgroundOrigin): string =
-        match v with
-            | BorderBox -> "border-box"
-            | PaddingBox -> "padding-box"
-            | ContentBox -> "content-box"
+    let private backgroundOriginValue (v: BackgroundOrigin): string = duToKebab v
 
     let value (v: IBackgroundOrigin): string =
         match v with
@@ -176,14 +161,7 @@ module BackgroundRepeat =
         | NoRepeat
         interface IBackgroundRepeat
 
-    let private backgroundRepeatValue (v: BackgroundRepeat): string =
-        match v with
-            | RepeatX -> "repeat-x"
-            | RepeatY -> "repeat-y"
-            | Repeat -> "repeat"
-            | Space -> "space"
-            | Round -> "round"
-            | NoRepeat -> "no-repeat"
+    let private backgroundRepeatValue (v: BackgroundRepeat): string = duToKebab v
 
     let value (v: IBackgroundRepeat): string =
         match v with
@@ -202,10 +180,7 @@ module BackgroundSize =
         | Contain
         interface IBackgroundSize
 
-    let private backgroundSizeValue (v: BackgroundSize): string =
-        match v with
-            | Cover -> "cover"
-            | Contain -> "contain"
+    let private backgroundSizeValue (v: BackgroundSize): string = duToLowercase v
 
     let value (v: IBackgroundSize): string =
         match v with
@@ -224,11 +199,7 @@ module BackgroundAttachment =
         | Local
         interface IBackgroundAttachment
 
-    let private backgroundAttachmentValue (v: BackgroundAttachment): string =
-        match v with
-            | Scroll -> "scroll"
-            | Fixed -> "fixed"
-            | Local -> "local"
+    let private backgroundAttachmentValue (v: BackgroundAttachment): string = duToLowercase v
 
     let value (v: IBackgroundAttachment): string =
         match v with

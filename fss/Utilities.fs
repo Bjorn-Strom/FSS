@@ -4,10 +4,6 @@ open Microsoft.FSharp.Reflection
 open System
 
 module Helpers =
-    let inline duToString (x:'a) = 
-        match FSharpValue.GetUnionFields(x, typeof<'a>) with
-        | case, _ -> case.Name
-
     let pascalToKebabCase (value: string): string =
         value
         |> Seq.fold (fun acc element ->
@@ -17,6 +13,26 @@ module Helpers =
             sprintf "%s-%s" acc (string <| Char.ToLower(element))
         else 
             acc + (string element)) ""
+
+    let pascalToCamelCase (value: string): string = sprintf "%c%s" (Char.ToLower(value.[0])) value.[1..]
+
+    let inline duToString (x:'a) = 
+        match FSharpValue.GetUnionFields(x, typeof<'a>) with
+        | case, _ -> case.Name
+
+    let inline duToLowercase (x: 'a) = (duToString x).ToLower()
+    
+    let inline duToKebab (x: 'a) = 
+        x
+        |> duToString
+        |> pascalToKebabCase
+
+    let inline duToCamel (x: 'a) =
+        x
+        |> duToString
+        |> pascalToCamelCase
+
+    let toPsuedo (value: string): string = sprintf ":%s" value
 
     let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
         list

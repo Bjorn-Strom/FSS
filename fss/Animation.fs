@@ -1,6 +1,7 @@
 namespace Fss
 
 open Types
+open Fss.Utilities.Helpers
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
 module Animation =
@@ -31,14 +32,7 @@ module Animation =
         | End
         interface IAnimation
 
-    let stepValue (v: Steps) =
-        match v with
-            | JumpStart -> "jump-start"
-            | JumpEnd -> "jump-end"
-            | JumpNone -> "jump-none"
-            | JumpBoth -> "jump-both"
-            | Start -> "start"
-            | End -> "end"
+    let stepValue (v: Steps) = duToKebab v
 
     type Timing =
         | Ease
@@ -85,12 +79,7 @@ module Animation =
         | AlternateReverse
         interface IAnimation
 
-    let directionValue =
-        function
-            | Normal -> "normal"
-            | Reverse -> "reverse"
-            | Alternate -> "alternate"
-            | AlternateReverse -> "alternate-reverse"
+    let directionValue (v: Direction): string = duToKebab v
 
     // Animation fill mode
     type FillMode =
@@ -100,12 +89,7 @@ module Animation =
         | None
         interface IAnimation
 
-    let fillModeValue =
-        function
-            | Forwards -> "forwards"
-            | Backwards -> "backwards"
-            | Both -> "both"
-            | None -> "none"
+    let fillModeValue (v: FillMode): string = duToString v
 
     // Animation play state
     type PlayState =
@@ -113,10 +97,7 @@ module Animation =
         | Paused
         interface IAnimation
 
-    let playStateValue =
-        function
-            | Running -> "running"
-            | Paused -> "paused"
+    let playStateValue (v: PlayState): string = duToString v
 
     let value (v: IAnimation): string =
         match v with

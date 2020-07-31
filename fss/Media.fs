@@ -1,7 +1,5 @@
 namespace Fss
 
-open Fable.Core.JsInterop
-
 open Units.Size
 open Units.Resolution
 open Utilities.Helpers
@@ -13,21 +11,21 @@ module Media =
         | Print
         | All
 
-    let deviceLabel (d: Device): string = (duToString d).ToLower()
+    let deviceLabel (d: Device): string = duToLowercase d
 
     type Pointer =
         | Course
         | Fine
         | None
 
-    let pointerValue (p: Pointer): string = (duToString p).ToLower()
+    let pointerValue (p: Pointer): string = duToLowercase p
 
     type ColorGamut =
         | SRGB
         | P3
         | REC2020
 
-    let colorGamutValue (c: ColorGamut): string = (duToString c).ToLower()
+    let colorGamutValue (c: ColorGamut): string = duToLowercase c
 
     type DisplayMode =
         | Fullscreen
@@ -35,20 +33,20 @@ module Media =
         | MinimalUi
         | Browser
     
-    let displayModeValue (dm: DisplayMode): string = (duToString dm) |> pascalToKebabCase 
+    let displayModeValue (dm: DisplayMode): string = duToKebab dm
 
     type LightLevel =
         | Dim
         | Normal
         | Washed
 
-    let lightLevelValue (ll: LightLevel): string = (duToString ll).ToLower()
+    let lightLevelValue (ll: LightLevel): string = duToLowercase ll
 
     type Orientation =
         | Landscape
         | Portrait
 
-    let orientationValue (o: Orientation): string = (duToString o).ToLower()
+    let orientationValue (o: Orientation): string = duToLowercase o
 
     type OverflowBlock =
         | None
@@ -56,40 +54,40 @@ module Media =
         | OptionalPaged
         | Paged
 
-    let overflowBlockValue (ob: OverflowBlock): string = (duToString ob) |> pascalToKebabCase 
+    let overflowBlockValue (ob: OverflowBlock): string = duToKebab ob
 
     type ColorScheme =
         | Light
         | Dark
 
-    let colorSchemeValue (cs: ColorScheme): string = (duToString cs).ToLower()
+    let colorSchemeValue (cs: ColorScheme): string = duToLowercase cs
 
     type Contrast =
         | NoPreference
         | High
         | Low
 
-    let contrastValue (c: Contrast): string = (duToString c) |> pascalToKebabCase 
+    let contrastValue (c: Contrast): string = duToKebab c
 
     type Scan =
         | Interlace
         | Progressive
     
-    let scanValue (s: Scan): string = (duToString s).ToLower()
+    let scanValue (s: Scan): string = duToLowercase s
 
     type Scripting =
         | None
         | InitialOnly
         | Enabled
 
-    let scriptingValue (s: Contrast): string = (duToString s) |> pascalToKebabCase 
+    let scriptingValue (s: Scripting): string = duToKebab s
 
     type Update =
         | None
         | Slow
         | Fast
 
-    let updateValue (u: Update): string = (duToString u).ToLower()
+    let updateValue (u: Update): string = duToLowercase u
 
     type MediaFeature =
         | AnyHover of bool

@@ -1156,16 +1156,16 @@ let BackgroundExamples model dispatch =
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [         
-           // ColorExamples
-           // FontExamples
-           // BorderExamples
-           // AnimationExamples
-           // MarginExamples
-           // PaddingExamples
-           // TransformExamples
-           // TransitionExamples
-           // FlexBoxExamples model dispatch
-           // BackgroundExamples model dispatch
+           ColorExamples
+           FontExamples
+           BorderExamples
+           AnimationExamples
+           MarginExamples
+           PaddingExamples
+           TransformExamples
+           TransitionExamples
+           FlexBoxExamples model dispatch
+           BackgroundExamples model dispatch
 
            let style =
                 fss

@@ -9,4 +9,3 @@ module Fss =
 
     let keyframes (attributeList: KeyframeAttribute list) = 
         attributeList |> createAnimationObject |> kframes'
-

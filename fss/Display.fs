@@ -2,6 +2,7 @@ namespace Fss
 
 open Global
 open Types
+open Fss.Utilities.Helpers
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/display
 module Display =
@@ -30,27 +31,7 @@ module Display =
         interface IGlobal
 
 
-    let private displayValue (v: Display): string =
-        match v with
-            | Inline -> "inline"
-            | InlineBlock -> "inline-block"
-            | Block -> "block"
-            | RunIn -> "run-in"
-            | Flex -> "flex"
-            | Grid -> "grid"
-            | FlowRoot -> "flow-root"
-
-            | Table -> "table"
-            | TableCell -> "table-cell"
-            | TableColumn -> "table-column"
-            | TableColGroup -> "table-col-group"
-            | TableHeaderGroup -> "table-header-group"
-            | TableRowGroup -> "table-row-group"
-            | TableFooterGroup -> "table-footer-group"
-            | TableRow -> "table-row"
-            | TableCaption -> "table-caption"
-
-            | None -> "none"
+    let private displayValue (v: Display): string = duToKebab v
 
     let value (v: IDisplay): string =
         match v with
@@ -68,12 +49,7 @@ module FlexDirection =
         interface IFlexDirection
         interface IGlobal
 
-    let private flexDirectionValue (v: FlexDirection): string =
-        match v with
-        | Row -> "row"
-        | RowReverse -> "row-reverse"
-        | Column -> "column"
-        | ColumnReverse -> "column-reverse"
+    let private flexDirectionValue (v: FlexDirection): string = duToKebab v
 
     let value (v: IFlexDirection): string =
         match v with
@@ -90,11 +66,7 @@ module FlexWrap =
         interface IFlexWrap
         interface IGlobal
 
-    let private flexWrapValue (v: FlexWrap): string =
-        match v with 
-            | NoWrap -> "nowrap"
-            | Wrap -> "wrap"
-            | WrapReverse -> "wrap-reverse"
+    let private flexWrapValue (v: FlexWrap): string = duToKebab v
 
     let value (v: IFlexWrap): string =
         match v with
@@ -114,14 +86,7 @@ module JustifyContent =
         interface IJustifyContent
         interface IGlobal
 
-    let private justifyContentValue (v: JustifyContent): string =
-        match v with 
-            | FlexStart -> "flex-start"
-            | FlexEnd -> "flex-end"
-            | Center -> "center"
-            | SpaceBetween -> "space-between"
-            | SpaceAround -> "space-around"
-            | SpaceEvenly -> "space-evenly"
+    let private justifyContentValue (v: JustifyContent): string = duToKebab v
 
     let value (v: IJustifyContent): string =
         match v with
@@ -140,14 +105,8 @@ module AlignItems =
         interface IAlignItems
         interface IGlobal
 
-    let private alignItemsValue (v: AlignItems): string =
-        match v with 
-            | FlexStart -> "flex-start"
-            | FlexEnd -> "flex-end"
-            | Center -> "center"
-            | Baseline -> "baseline"
-            | Stretch -> "stretch"
-
+    let private alignItemsValue (v: AlignItems): string = duToKebab v
+    
     let value (v: IAlignItems): string =
         match v with
             | :? Global as g -> Global.value g
@@ -167,14 +126,7 @@ module AlignContent =
         interface IAlignContent
         interface IGlobal
 
-    let private alignContentValue (v: AlignContent): string =
-        match v with 
-            | FlexStart -> "flex-start"
-            | FlexEnd -> "flex-end"
-            | Center -> "center"
-            | SpaceBetween -> "space-between"
-            | SpaceAround -> "space-around"
-            | Stretch -> "stretch"
+    let private alignContentValue (v: AlignContent): string = duToKebab v
 
     let value (v: IAlignContent): string =
         match v with
@@ -195,14 +147,7 @@ module AlignSelf =
         interface IAlignSelf
         interface IGlobal
             
-    let private alignSelfValue (v: AlignSelf): string =
-        match v with
-            | Auto -> "auto"
-            | FlexStart -> "flex-start"
-            | FlexEnd -> "flex-end"
-            | Center -> "center"
-            | Baseline -> "baseline"
-            | Stretch -> "stretch"
+    let private alignSelfValue (v: AlignSelf): string = duToKebab v
 
     let value (v: IAlignSelf): string =
         match v with
