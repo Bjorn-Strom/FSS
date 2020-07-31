@@ -46,48 +46,159 @@ open BackgroundClip
 open BackgroundAttachment
 open ContentSize
 
-let testCase' name case = 
-    testCase name <| fun _ -> 
-        use dispose = { new System.IDisposable with member this.Dispose() = RTL.cleanup() }
-        case()
-
 [<Emit("window.getComputedStyle(document.getElementById('$0'));")>]
 let getComputedCssById (id : string) : obj  = jsNative
 
 [<Emit("$0[$1];")>]
 let getValue (object: obj) (key: string) : string = jsNative
 
-let test (testName: string) (style: string) (propertyToTest: string list) (result: string) =
-    testCase' testName <| fun _ ->
-        RTL.render(
-            fragment []
-                [
-                    div [ Id "id"; ClassName style] []
-                ]) |> ignore
+let test (testName: string) (stylePropertiesAndResults: (string * string * string) list) =
+    testCase testName <| fun _ ->
+        
+        List.iter (fun (style, property, result) ->         
+            RTL.render(
+                fragment []
+                    [
+                        div [ Id "id"; ClassName style] []
+                    ]) |> ignore
 
-        let computed = getComputedCssById("id")
-        Expect.equal (getValue computed propertyToTest) result testName
+            let computed = getComputedCssById("id")
+            Expect.equal (getValue computed property) result testName
+            RTL.cleanup()
+        ) stylePropertiesAndResults
+
 
 let CssTests =
     testList "Css tests" [
         
-        test "Set named background color" (fss [ BackgroundColor red]) "background-color" "rgb(255, 0, 0)"
-        test "Set named color" (fss [ Color aliceblue]) "color" "rgb(240, 248, 255)"
-        test "Set color with rgb" (fss [ Color (rgb 255 0 0)]) "color" "rgb(255, 0, 0)"
-        test "Set color with rgba" (fss [ Color (rgba 255 0 0  0.5)]) "color" "rgba(255, 0, 0, 0.5)"
-        test "Set color with hex" (fss [ Color (hex "ff0000")]) "color" "rgb(255, 0, 0)"
-        test "Set color with hex with hash" (fss [ Color (hex "#ff0000")]) "color" "rgb(255, 0, 0)"
-        test "Set color with hex alpha" (fss [ Color (hex "ff000080")]) "color" "rgba(255, 0, 0, 0.5)"
-        test "Set color with HSL" (fss [ Color (hsl 120 1.0 0.5)]) "color"  "rgb(0, 255, 0)"
-        test "Set color with HSLA" (fss [ Color (hsla 120 1.0 0.5 0.5)]) "color" "rgba(0, 255, 0, 0.5)"
+        test "Background" [ (fss [ BackgroundColor red; Color blue]), "background-color", "rgb(255, 0, 0)"] 
+        test "Color" 
+            [ 
+                (fss [ Color aliceblue ] ), "color", "rgb(240, 248, 255)"
+                (fss [ Color (rgb 255 0 0) ]), "color", "rgb(255, 0, 0)"
+                (fss [ Color (rgba 255 0 0  0.5) ]), "color", "rgba(255, 0, 0, 0.5)"
+                (fss [ Color (hex "ff0000") ]), "color", "rgb(255, 0, 0)"
+                (fss [ Color (hex "#ff0000") ]), "color", "rgb(255, 0, 0)"
+                (fss [ Color (hex "ff000080") ]), "color", "rgba(255, 0, 0, 0.5)"
+                (fss [ Color (hsl 120 1.0 0.5) ]), "color", "rgb(0, 255, 0)"
+                (fss [ Color (hsla 120 1.0 0.5 0.5) ]), "color", "rgba(0, 255, 0, 0.5)"
+            ]
+                
+        test "Font" 
+            [
+                (fss [ FontSize XSmall ]), "font-size", "10px"
+                (fss [ FontSize Large ]), "font-size", "18px"
+                (fss [ FontSize (px 100) ]), "font-size", "100px" 
+                (fss [ FontSize (px 100) ]), "font-size", "100px"
+                (fss [ FontSize (pct 200) ]), "font-size", "32px"
 
-        test "Set font to small" (fss [ FontSize XSmall ]) "font-size" "10px"
-        test "Set font to large" (fss [ FontSize Large ]) "font-size" "18px"
-        test "Set font to pixels" (fss [ FontSize (px 100) ]) "font-size" "100px"
-        test "Set font to percent" (fss [ FontSize (pct 200) ]) "font-size" "32px"
+            ]
 
-        test "Set border radius" (fss [ BorderRadius (px 10)]) "border-top-left-radius" "10px"
+        test "Border" 
+            [
+                (fss [ BorderStyle Hidden ]), "border-bottom-style", "hidden"
+                (fss [ BorderStyle Hidden ]), "border-left-style", "hidden"
+                (fss [ BorderStyle Hidden ]), "border-right-style", "hidden"
+                (fss [ BorderStyle Hidden ]), "border-top-style", "hidden"
 
+                (fss [ BorderStyle Dotted ]), "border-bottom-style", "dotted"
+                (fss [ BorderStyle Dotted ]), "border-left-style", "dotted"
+                (fss [ BorderStyle Dotted ]), "border-right-style", "dotted"
+                (fss [ BorderStyle Dotted ]), "border-top-style", "dotted"
+
+                (fss [ BorderStyle Dashed ]), "border-bottom-style", "dashed"
+                (fss [ BorderStyle Dashed ]), "border-left-style", "dashed"
+                (fss [ BorderStyle Dashed ]), "border-right-style", "dashed"
+                (fss [ BorderStyle Dashed ]), "border-top-style", "dashed"
+
+                (fss [ BorderStyle Solid ]), "border-bottom-style", "solid"
+                (fss [ BorderStyle Solid ]), "border-left-style", "solid"
+                (fss [ BorderStyle Solid ]), "border-right-style", "solid"
+                (fss [ BorderStyle Solid ]), "border-top-style", "solid"
+
+                (fss [ BorderStyle Double ]), "border-bottom-style", "double"
+                (fss [ BorderStyle Double ]), "border-left-style", "double"
+                (fss [ BorderStyle Double ]), "border-right-style", "double"
+                (fss [ BorderStyle Double ]), "border-top-style", "double"
+
+                (fss [ BorderStyle Groove ]), "border-bottom-style", "groove"
+                (fss [ BorderStyle Groove ]), "border-left-style", "groove"
+                (fss [ BorderStyle Groove ]), "border-right-style", "groove"
+                (fss [ BorderStyle Groove ]), "border-top-style", "groove"
+
+                (fss [ BorderStyle Ridge ]), "border-bottom-style", "ridge"
+                (fss [ BorderStyle Ridge ]), "border-left-style", "ridge"
+                (fss [ BorderStyle Ridge ]), "border-right-style", "ridge"
+                (fss [ BorderStyle Ridge ]), "border-top-style", "ridge"
+
+                (fss [ BorderStyle Inset ]), "border-bottom-style", "inset"
+                (fss [ BorderStyle Inset ]), "border-left-style", "inset"
+                (fss [ BorderStyle Inset ]), "border-right-style", "inset"
+                (fss [ BorderStyle Inset ]), "border-top-style", "inset"
+
+                (fss [ BorderStyle Outset ]), "border-bottom-style", "outset"
+                (fss [ BorderStyle Outset ]), "border-left-style", "outset"
+                (fss [ BorderStyle Outset ]), "border-right-style", "outset"
+                (fss [ BorderStyle Outset ]), "border-top-style", "outset"
+
+                (fss [ BorderStyles [Inset; Outset; Ridge; Groove] ]), "border-bottom-style", "ridge"
+                (fss [ BorderStyles [Inset; Outset; Ridge; Groove] ]), "border-left-style", "groove"
+                (fss [ BorderStyles [Inset; Outset; Ridge; Groove] ]), "border-right-style", "outset"
+                (fss [ BorderStyles [Inset; Outset; Ridge; Groove] ]), "border-top-style", "inset"
+
+                (fss [ BorderStyle BorderStyle.None ]), "border-bottom-style", "none"
+                (fss [ BorderStyle BorderStyle.None ]), "border-left-style", "none"
+                (fss [ BorderStyle BorderStyle.None ]), "border-right-style", "none"
+                (fss [ BorderStyle BorderStyle.None ]), "border-top-style", "none"
+
+                (fss [ BorderRadius (px 10)]), "border-top-left-radius", "10px"
+                (fss [ BorderRadius (px 10)]), "border-top-right-radius", "10px"
+                (fss [ BorderRadius (px 10)]), "border-bottom-left-radius", "10px"
+                (fss [ BorderRadius (px 10)]), "border-bottom-right-radius", "10px"
+
+                (fss [ BorderTopLeftRadius (px 10)]), "border-top-left-radius", "10px"
+                (fss [ BorderTopRightRadius (px 10)]), "border-top-right-radius", "10px"
+                (fss [ BorderBottomLeftRadius (px 10)]), "border-bottom-left-radius", "10px"
+                (fss [ BorderBottomRightRadius (px 10)]), "border-bottom-right-radius", "10px"
+
+                (fss [ BorderRadiuses [px 10; px 20; px 30; px 40] ]), "border-bottom-left-radius", "40px"
+                (fss [ BorderRadiuses [px 10; px 20; px 30; px 40] ]), "border-bottom-right-radius", "30px"
+                (fss [ BorderRadiuses [px 10; px 20; px 30; px 40] ]), "border-top-left-radius", "10px"
+                (fss [ BorderRadiuses [px 10; px 20; px 30; px 40] ]), "border-top-right-radius", "20px"
+
+                (fss [ BorderStyle Solid; BorderWidth (px 40) ]), "border-top-width", "40px"
+                (fss [ BorderStyle Solid; BorderWidth (px 40) ]), "border-right-width", "40px"
+                (fss [ BorderStyle Solid; BorderWidth (px 40) ]), "border-bottom-width", "40px"
+                (fss [ BorderStyle Solid; BorderWidth (px 40) ]), "border-left-width", "40px"
+
+                (fss [ BorderStyle Solid; BorderWidths [px 10; px 20; px 30; px 40 ]]), "border-top-width", "10px"
+                (fss [ BorderStyle Solid; BorderWidths [px 10; px 20; px 30; px 40 ]]), "border-right-width", "20px"
+                (fss [ BorderStyle Solid; BorderWidths [px 10; px 20; px 30; px 40 ]]), "border-bottom-width", "30px"
+                (fss [ BorderStyle Solid; BorderWidths [px 10; px 20; px 30; px 40 ]]), "border-left-width", "40px"
+
+                (fss [ BorderStyle Solid; BorderTopWidth Thin ]), "border-top-width", "1px"
+                (fss [ BorderStyle Solid; BorderRightWidth Thick ]), "border-right-width", "5px"
+                (fss [ BorderStyle Solid; BorderBottomWidth Medium ]), "border-bottom-width", "3px"
+                (fss [ BorderStyle Solid; BorderLeftWidth (px 40) ]), "border-left-width", "40px"
+
+                (fss [ BorderStyle Solid; BorderColor red ]), "border-top-color", "rgb(255, 0, 0)"
+                (fss [ BorderStyle Solid; BorderColor red ]), "border-right-color", "rgb(255, 0, 0)"
+                (fss [ BorderStyle Solid; BorderColor red ]), "border-bottom-color", "rgb(255, 0, 0)"
+                (fss [ BorderStyle Solid; BorderColor red ]), "border-left-color", "rgb(255, 0, 0)"
+
+                (fss [ BorderStyle Solid; BorderColors [red; green; blue; white] ]), "border-top-color", "rgb(255, 0, 0)"
+                (fss [ BorderStyle Solid; BorderColors [red; green; blue; white] ]), "border-right-color", "rgb(0, 128, 0)"
+                (fss [ BorderStyle Solid; BorderColors [red; green; blue; white] ]), "border-bottom-color", "rgb(0, 0, 255)"
+                (fss [ BorderStyle Solid; BorderColors [red; green; blue; white] ]), "border-left-color", "rgb(255, 255, 255)"
+
+                (fss [ BorderStyle Solid; BorderTopColor red ]), "border-top-color", "rgb(255, 0, 0)"
+                (fss [ BorderStyle Solid; BorderRightColor green ]), "border-right-color", "rgb(0, 128, 0)"
+                (fss [ BorderStyle Solid; BorderBottomColor blue ]), "border-bottom-color", "rgb(0, 0, 255)"
+                (fss [ BorderStyle Solid; BorderLeftColor white ]), "border-left-color", "rgb(255, 255, 255)"
+
+
+            ]
+        
 (*
         testCase' "Borders" <| fun _ ->
             RTL.render(
