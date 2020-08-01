@@ -47,8 +47,6 @@ module LinearGradient =
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient
 module RadialGradient =
-    open BackgroundPosition
-
     type Side =
         | ClosestCorner
         | ClosestSide
@@ -194,7 +192,6 @@ module BackgroundRepeat =
 // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
 module BackgroundSize =
     open Global
-    open Units.Size
 
     type BackgroundSize =
         | Cover

@@ -69,73 +69,6 @@ let test (testName: string) (stylePropertiesAndResults: (string * (string * stri
             RTL.cleanup()
         ) stylePropertiesAndResults
 
-        (*
-        
-                testCase' "Background" <| fun _ ->
-                    let linear1 = fss [ BackgroundImage (LinearGradient [ red; blue ] ) ]
-                    let linear2 = fss [ BackgroundImage (LinearGradient [ Right; red; blue ] ) ]
-                    let linear3 = fss [ BackgroundImage (LinearGradient [ Bottom; red; blue ] ) ]
-                    let linear4 = fss [ BackgroundImage (LinearGradient [ deg 72.0; red; blue ] ) ]
-                    let radial1 = fss [ BackgroundImage (RadialGradient [ CircleAt [pct 100]; hex "333"; hex "333"; pct 50; hex "eee"; pct 75; hex "333"; pct 75] ) ]
-                    let backgroundPosition = fss [ BackgroundPosition (px 10)]
-                    let backgroundPositions = fss [ BackgroundPositions [px 10; Bottom]]
-                    let backgroundRepeat = fss [ BackgroundRepeat RepeatX ]
-                    let backgroundRepeats = fss [ BackgroundRepeats [Repeat; Space] ]
-                    let backgroundOrigin = fss [ BackgroundOrigin BorderBox]
-                    let backgroundClip = fss [ BackgroundClip BorderBox]
-                    let backgroundAttachment = fss [ BackgroundAttachment Scroll]
-        
-                    RTL.render(
-                        div [ ]
-                            [
-                                div [ Id "1"; ClassName linear1 ] [ ]
-                                div [ Id "2"; ClassName linear2 ] [ ]
-                                div [ Id "3"; ClassName linear3 ] [ ]
-                                div [ Id "4"; ClassName linear4 ] [ ]
-                                div [ Id "5"; ClassName radial1 ] [ ]
-                                div [ Id "6"; ClassName backgroundPosition ] [ ]
-                                div [ Id "7"; ClassName backgroundPositions ] [ ]
-                                div [ Id "8"; ClassName backgroundRepeat ] [ ]
-                                div [ Id "9"; ClassName backgroundRepeats ] [ ]
-                                div [ Id "10"; ClassName backgroundOrigin ] [ ]
-                                div [ Id "11"; ClassName backgroundClip ] [ ]
-                                div [ Id "12"; ClassName backgroundAttachment ] [ ]
-                            ]
-                    ) |> ignore
-                            
-                    let one = getComputedCssById("1")
-                    let two = getComputedCssById("2")
-                    let three = getComputedCssById("3")
-                    let four = getComputedCssById("4")
-                    let five = getComputedCssById("5")
-                    let six = getComputedCssById("6")
-                    let seven = getComputedCssById("7")
-                    let eight = getComputedCssById("8")
-                    let nine = getComputedCssById("9")
-                    let ten = getComputedCssById("10")
-                    let eleven = getComputedCssById("11")
-                    let twelve = getComputedCssById("12")
-        
-                    Expect.equal (getValue one "background-image") "linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two colors"
-                    Expect.equal (getValue two "background-image") "linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two colors with direction"
-                    Expect.equal (getValue three "background-image") "linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two rgb"
-                    Expect.equal (getValue four "background-image") "linear-gradient(72deg, rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with degrees"
-                    Expect.equal (getValue five "background-image") "radial-gradient(circle at 100% 50%, rgb(51, 51, 51), rgb(51, 51, 51) 50%, rgb(238, 238, 238) 75%, rgb(51, 51, 51) 75%)" "Radial gradient with shape and side"
-        
-                    Expect.equal (getValue six "background-position") "10px 50%" "Set one background position"
-                    Expect.equal (getValue seven "background-position") "10px 100%" "Set several background positions"
-        
-                    Expect.equal (getValue eight "background-repeat") "repeat-x" "Set one background repeat"
-                    Expect.equal (getValue nine "background-repeat") "repeat space" "Set several background repeats"
-        
-                    Expect.equal (getValue ten "background-origin") "border-box" "Set background origin"
-        
-                    Expect.equal (getValue eleven "background-clip") "border-box" "Set background clip"
-        
-                    Expect.equal (getValue twelve "background-attachment") "scroll" "Set background attachment"
-                    *)
-
-
 let CssTests =
     testList "Css tests" [
         
@@ -189,6 +122,38 @@ let CssTests =
                 (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center; Left] ] ) ]), ["background-image", "radial-gradient(at 0% 50%, rgb(255, 255, 0), rgb(240, 109, 6))"]
                 (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center; Bottom] ] ) ]), ["background-image", "radial-gradient(at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
 
+                (fss [ BackgroundPosition Top]), ["background-position", "50% 0%"]
+                (fss [ BackgroundPosition Bottom]), ["background-position", "50% 100%"]
+                (fss [ BackgroundPosition Left]), ["background-position", "0% 50%"]
+                (fss [ BackgroundPosition Right]), ["background-position", "100% 50%"]
+                (fss [ BackgroundPosition Center]), ["background-position", "50% 50%"]
+                (fss [ BackgroundPosition (px 50)]), ["background-position", "50px 50%"]
+
+                (fss [ BackgroundOrigin BorderBox]), ["background-origin", "border-box"]
+                (fss [ BackgroundOrigin PaddingBox]), ["background-origin", "padding-box"]
+                (fss [ BackgroundOrigin ContentBox]), ["background-origin", "content-box"]
+
+                (fss [ BackgroundClip BorderBox]), ["background-clip", "border-box"]
+                (fss [ BackgroundClip PaddingBox]), ["background-clip", "padding-box"]
+                (fss [ BackgroundClip ContentBox]), ["background-clip", "content-box" ]
+                (fss [ BackgroundClip Text]), ["background-clip", "text" ]
+
+                (fss [ BackgroundRepeat RepeatX]), ["background-repeat", "repeat-x" ]
+                (fss [ BackgroundRepeat RepeatY]), ["background-repeat", "repeat-y" ]
+                (fss [ BackgroundRepeat Repeat]), ["background-repeat", "repeat" ]
+                (fss [ BackgroundRepeat Space]), ["background-repeat", "space" ]
+                (fss [ BackgroundRepeat Round]), ["background-repeat", "round" ]
+                (fss [ BackgroundRepeat NoRepeat]), ["background-repeat", "no-repeat" ]
+
+                (fss [ BackgroundRepeats [ Repeat; Space ]]), ["background-repeat", "repeat space" ]
+
+                (fss [ BackgroundSize BackgroundSize.Cover]), ["background-size", "cover" ]
+                (fss [ BackgroundSize BackgroundSize.Contain]), ["background-size", "contain" ]
+                (fss [ BackgroundSize (px 10)]), ["background-size", "10px" ]
+
+                (fss [ BackgroundAttachment Scroll]), ["background-attachment", "scroll" ]
+                (fss [ BackgroundAttachment Fixed]), ["background-attachment", "fixed" ]
+                (fss [ BackgroundAttachment Local]), ["background-attachment", "local" ]
             ]
 
         test "Color" 
