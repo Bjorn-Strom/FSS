@@ -195,44 +195,85 @@ let CssTests =
                 (fss [ BorderStyle Solid; BorderRightColor green ]), "border-right-color", "rgb(0, 128, 0)"
                 (fss [ BorderStyle Solid; BorderBottomColor blue ]), "border-bottom-color", "rgb(0, 0, 255)"
                 (fss [ BorderStyle Solid; BorderLeftColor white ]), "border-left-color", "rgb(255, 255, 255)"
+            ]
 
+        test "Width" 
+            [
+                (fss [ Width (px 100) ]), "width", "100px"
+                (fss [ Width MaxContent ]), "width", "0px"
+                (fss [ Width MinContent ]), "width", "0px"
+                (fss [ Width (FitContent(px 100)) ]), "width", "1063px"
+                (fss [ MinWidth (px 50) ]), "min-width", "50px"
+                (fss [ MaxWidth (px 75) ]), "max-width", "75px"
+
+                (fss [ Height (px 100) ]), "height", "100px"
+                (fss [ Height MaxContent ]), "height", "0px"
+                (fss [ Height MinContent ]), "height", "0px"
+                (fss [ MinHeight (px 50) ]), "min-height", "50px"
+                (fss [ MaxHeight (px 75) ]), "max-height", "75px"
+            ]
+
+        test "Perspective" 
+            [
+                (fss [ CSSProperty.Perspective (px 100) ]), "perspective", "100px"
+                //(fss [ CSSProperty.Perspective Inherit]), "perspective", "inherit"
+                //(fss [ CSSProperty.Perspective Initial]), "perspective", "initial"
+                //(fss [ CSSProperty.Perspective Unset]), "perspective", "unset"
+            ]
+
+        test "Flexbox"
+            [
+                (fss [ Display Flex]), "display", "flex"
+
+                (fss [ FlexDirection Row]), "flex-direction", "row"
+                (fss [ FlexDirection Column]), "flex-direction", "column"
+
+                (fss [ FlexWrap NoWrap]), "flex-wrap", "nowrap"
+                (fss [ FlexWrap Wrap]), "flex-wrap", "wrap"
+                (fss [ FlexWrap WrapReverse]), "flex-wrap", "wrap-reverse"
+
+                (fss [ CSSProperty.FlexBasis (px 120)]), "flex-basis", "120px"
+
+                (fss [ JustifyContent JustifyContent.FlexStart]), "justify-content", "flex-start"
+                (fss [ JustifyContent JustifyContent.FlexEnd]), "justify-content", "flex-end"
+                (fss [ JustifyContent JustifyContent.Center]), "justify-content", "center"
+                (fss [ JustifyContent JustifyContent.SpaceBetween]), "justify-content", "space-between"
+                (fss [ JustifyContent JustifyContent.SpaceAround]), "justify-content", "space-around"
+                (fss [ JustifyContent JustifyContent.SpaceEvenly]), "justify-content", "space-evenly"
+
+                (fss [ AlignSelf AlignSelf.Auto]), "align-self", "auto"
+                (fss [ AlignSelf AlignSelf.FlexStart]), "align-self", "flex-start"
+                (fss [ AlignSelf AlignSelf.FlexEnd]), "align-self", "flex-end"
+                (fss [ AlignSelf AlignSelf.Center]), "align-self", "center"
+                (fss [ AlignSelf AlignSelf.Baseline]), "align-self", "baseline"
+                (fss [ AlignSelf AlignSelf.Stretch]), "align-self", "stretch"
+
+                (fss [ AlignItems AlignItems.FlexStart]), "align-items", "flex-start"
+                (fss [ AlignItems AlignItems.FlexEnd]), "align-items", "flex-end"
+                (fss [ AlignItems AlignItems.Center]), "align-items", "center"
+                (fss [ AlignItems AlignItems.Baseline]), "align-items", "baseline"
+                (fss [ AlignItems AlignItems.Stretch]), "align-items", "stretch"
+                
+                (fss [ AlignContent FlexStart]), "align-content", "flex-start"
+                (fss [ AlignContent FlexEnd]), "align-content", "flex-end"
+                (fss [ AlignContent AlignContent.Center]), "align-content", "center"
+                (fss [ AlignContent SpaceBetween]), "align-content", "space-between"
+                (fss [ AlignContent SpaceAround]), "align-content", "space-around"
+                (fss [ AlignContent Stretch]), "align-content", "stretch"
+
+                (fss [ CSSProperty.Order (Order 1) ]), "order", "1"
+
+                (fss [ FlexGrow (Grow 1) ]), "flex-grow", "1"
+
+                (fss [ FlexShrink (Shrink 1) ]), "flex-shrink", "1"
 
             ]
+
+   
+
         
 (*
-        testCase' "Borders" <| fun _ ->
-            RTL.render(
-                fragment []
-                    [
-                        div 
-                            [ Id "short"; ClassName (fss 
-                                [
-                                    BorderWidth Thick
-                                    BorderStyle Dotted
-                                    BorderColor aliceblue
-                                ])]
-                            []
-
-                        div 
-                            [ Id "style"; ClassName (fss [ BorderStyles [Dashed; Groove; BorderStyle.None; Dotted] ]) ]
-                            []
-                        div
-                            [ Id "radius"; ClassName (fss [ BorderRadius (px 10)])] []
-                    ]
-            ) |> ignore
-            
-            let shortHand = getComputedCssById("short")
-            let style = getComputedCssById("style")
-            let radius = getComputedCssById("radius")
-
-            Expect.equal (getValue shortHand "border-left-style") "dotted" "border style set"
-            Expect.equal (getValue shortHand "border-left-color") "rgb(240, 248, 255)" "border color set"
-            Expect.equal (getValue style "border-top-style") "dashed" "mixed border style"
-            Expect.equal (getValue style "border-right-style") "groove" "mixed border style"
-            Expect.equal (getValue style "border-bottom-style") "none" "mixed border style"
-            Expect.equal (getValue style "border-left-style") "dotted" "mixed border style"
-            Expect.equal (getValue radius "border-top-left-radius") "10px" "border radius"
-            
+        
         testCase' "Animations" <| fun _ ->
 
             let testFrames = keyframes [ frame 0 [ BackgroundColor red]; frame 100 [ BackgroundColor blue] ]
@@ -299,36 +340,6 @@ let CssTests =
             Expect.equal (getValue anim3 "animation-fill-mode") "both, both" "Sets animation fillmodes"
             Expect.equal (getValue anim3 "animation-direction") "alternate, reverse" "Sets animation direction counts"
             Expect.equal (getValue anim3 "animation-play-state") "running, paused" "Sets animation playstates"
-
-        testCase' "Style width and height" <| fun _ ->         
-            RTL.render(
-                div [ ClassName (fss [ Width (px 200); Height (px 200)] ) ]
-                    [
-                        div 
-                            [ Id "size"; ClassName (fss [ Width (px 1000); Height (px 500); MinHeight (px 20); MaxHeight (px 50); MinWidth (px 50); MaxWidth (px 100) ]) ]
-                            []
-
-                        div 
-                            [ Id "content"; ClassName (fss [Width MaxContent; Height MinContent; MinHeight (FitContent (px 20))]) ]
-                            []
-                    ]
-            ) |> ignore
-                
-            let contentSize = getComputedCssById("size")
-            Expect.equal (getValue contentSize "width") "100px" "width gets set"
-            Expect.equal (getValue contentSize "height") "50px" "height gets set"
-
-            Expect.equal (getValue contentSize "min-width") "50px" "min-width gets set"
-            Expect.equal (getValue contentSize "min-height") "20px" "min-height gets set"
-
-            Expect.equal (getValue contentSize "max-width") "100px" "max-width gets set"
-            Expect.equal (getValue contentSize "max-height") "50px" "max-height gets set"
-
-            let contentTest = getComputedCssById("content")
-            Expect.equal (getValue contentTest "width") "0px" "width gets set to max content"
-            Expect.equal (getValue contentTest "height") "0px" "height gets set to min content"
-            Expect.equal (getValue contentTest "min-height") "0px" "min-height gets set to fit content"
-
 
         testCase' "Set global values" <| fun _ ->
             let style = 
