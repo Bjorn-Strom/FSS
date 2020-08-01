@@ -32,7 +32,7 @@ module LinearGradient =
     let compare (v: ILinearGradient): int =
         match v with
             | :? Angle -> 0
-            | :? Size -> 2
+            | :? Size -> 1
             | :? CssColor -> 1
             | :? BackgroundPosition -> 0
             | _ -> 1
@@ -77,7 +77,7 @@ module RadialGradient =
     let compare (v: IRadialGradient): int =
         match v with 
             | :? Angle -> 0
-            | :? Size -> 2
+            | :? Size -> 1
             | :? CssColor -> 1
             | :? Side -> 0
             | :? Shape -> 0
