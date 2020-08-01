@@ -1089,7 +1089,7 @@ let BackgroundExamples model dispatch =
                         Width (px 50)
                         Height (px 72)
                         BackgroundImage (Url "https://s.cdpn.io/79/sprite-steps.png")
-                        Animation [ frameAnimation; sec 1.0; Steps(10); Infinite ]
+                        Animation [ frameAnimation; sec 1.0; Step(10); Infinite ]
                     ]
 
             h3 [] [ str "Background images can be... fun?" ]
@@ -1187,6 +1187,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
                             ]
                     ]
            div [ ClassName style] []
+
+           div [ ClassName (fss [ BackgroundColor red; Width (px 200); Height (px 200); Transforms [Scale3D(2.5, 2.5, 2.5); RotateY(deg 45.0)] ])] []
         ]
 
 Program.mkSimple init update render

@@ -37,7 +37,7 @@ module Transform =
     let private transformValue (v: Transform): string =
         match v with
             | Matrix (a, b, c, d, e, f) -> 
-                sprintf "matrix(%.1f, %.1f,     %.1f, %.1f, %.1f, %.1f)" a b c d e f
+                sprintf "matrix(%.1f, %.1f, %.1f, %.1f, %.1f, %.1f)" a b c d e f
             | Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
                 sprintf "matrix3d(
                         %d, %d, %d, %d, 
@@ -58,7 +58,7 @@ module Transform =
             | TranslateZ size -> sprintf "translateZ(%s)" <| Units.Size.value size
             | Scale n -> sprintf "scale(%.2f)" n
             | Scale2 (sx, sy) -> sprintf "scale(%.2f, %.2f)" sx sy
-            | Scale3D (n1, n2, n3) -> sprintf "scale(%.2f, %.2f, %.2f)" n1 n2 n3
+            | Scale3D (n1, n2, n3) -> sprintf "scale3d(%.2f, %.2f, %.2f)" n1 n2 n3
             | ScaleX n -> sprintf "scaleX(%.2f)" n
             | ScaleY n -> sprintf "scaleY(%.2f)" n
             | ScaleZ n -> sprintf "scaleZ(%.2f)" n

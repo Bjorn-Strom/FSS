@@ -43,8 +43,8 @@ module Animation =
         | StepStart
         | StepEnd
         | CubicBezier of (float * float * float * float)
-        | Steps of int
-        | Steps2 of int * Steps
+        | Step of int
+        | Steps of int * Steps
         interface IAnimation
 
     let timingValue =
@@ -57,8 +57,8 @@ module Animation =
             | StepStart -> "step-start"
             | StepEnd -> "step-end"
             | CubicBezier (a, b, c, d) -> cubicBezier(a, b, c, d)
-            | Steps n -> sprintf "steps(%d)" n
-            | Steps2 (n, direction) -> sprintf "steps(%d, %s)" n (stepValue direction)
+            | Step n -> sprintf "steps(%d)" n
+            | Steps (n, direction) -> sprintf "steps(%d, %s)" n (stepValue direction)
 
     // Animation count
     type IterationCount =
