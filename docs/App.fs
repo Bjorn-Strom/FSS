@@ -1156,16 +1156,16 @@ let BackgroundExamples model dispatch =
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [         
-           ColorExamples
-           FontExamples
-           BorderExamples
-           AnimationExamples
-           MarginExamples
-           PaddingExamples
-           TransformExamples
-           TransitionExamples
-           FlexBoxExamples model dispatch
-           BackgroundExamples model dispatch
+           //ColorExamples
+           //FontExamples
+           //BorderExamples
+           //AnimationExamples
+           //MarginExamples
+           //PaddingExamples
+           //TransformExamples
+           //TransitionExamples
+           //FlexBoxExamples model dispatch
+           //BackgroundExamples model dispatch
 
            let style =
                 fss
@@ -1185,10 +1185,13 @@ let render (model: Model) (dispatch: Msg -> unit) =
                                 Transform (Rotate(deg 45.0))
                                 BackgroundColor black
                             ]
+                        Media
+                            [ Orientation Landscape]
+                            [ Color green; FontSize (px 28)]
+                        
                     ]
-           div [ ClassName style] []
+           div [ ClassName style] [ str "foosball"]
 
-           div [ ClassName (fss [Width (px 200); Height (px 200); BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top; Center; px 10] ] ) ])] []
         ]
 
 Program.mkSimple init update render

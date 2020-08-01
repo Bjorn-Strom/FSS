@@ -139,7 +139,6 @@ module Value =
     let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
     let combineAnimations (list: IAnimation list list): string = combineComma list (fun a -> combineWs a Animation.value)
     
-    open Browser
 
     let rec createCSSObject (attributeList: CSSProperty list) = 
         attributeList
