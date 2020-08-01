@@ -16,7 +16,6 @@ module BackgroundPosition =
         | Center
         interface IBackgroundPosition
         interface ILinearGradient
-        interface IRadialGradient
 
     let private backgroundPositionValue (v: BackgroundPosition): string = duToLowercase v
 
@@ -30,6 +29,14 @@ module BackgroundPosition =
 module LinearGradient = 
     open BackgroundPosition
 
+    let compare (v: ILinearGradient): int =
+        match v with
+            | :? Angle -> 0
+            | :? Size -> 2
+            | :? CssColor -> 1
+            | :? BackgroundPosition -> 0
+            | _ -> 1
+
     let value (v: ILinearGradient): string =
         match v with
             | :? Angle as a -> Units.Angle.value a
@@ -40,19 +47,7 @@ module LinearGradient =
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient
 module RadialGradient =
-    type Shape =
-        | Circle
-        | Ellipse
-        | CircleAt of IBackgroundPosition list
-        | EllipseAt of IBackgroundPosition list
-        interface IRadialGradient
-
-    let shapeValue (v: Shape): string =
-        match v with
-            | Circle -> "circle"
-            | Ellipse -> "ellipse"
-            | CircleAt positions -> sprintf "circle at %s" <| combineWs positions BackgroundPosition.value
-            | EllipseAt positions -> sprintf "ellipse at %s" <| combineWs positions BackgroundPosition.value
+    open BackgroundPosition
 
     type Side =
         | ClosestCorner
@@ -61,7 +56,33 @@ module RadialGradient =
         | FarthestSide
         interface IRadialGradient
 
-    let sideValue (v: Side): string = duToKebab v
+    let private sideValue (v: Side): string = duToKebab v
+
+    type Shape =
+        | Circle
+        | Ellipse
+        | CircleSide of Side
+        | EllipseSide of Side
+        | CircleAt of IBackgroundPosition list
+        | EllipseAt of IBackgroundPosition list
+        interface IRadialGradient
+
+    let shapeValue (v: Shape): string =
+        match v with
+            | Circle -> "circle"
+            | Ellipse -> "ellipse"
+            | CircleSide side -> sprintf "circle %s" <| sideValue side
+            | EllipseSide side -> sprintf "ellipse %s" <| sideValue side
+            | CircleAt positions -> sprintf "circle at %s" <| combineWs positions BackgroundPosition.value
+            | EllipseAt positions -> sprintf "ellipse at %s" <| combineWs positions BackgroundPosition.value
+
+    let compare (v: IRadialGradient): int =
+        match v with 
+            | :? Angle -> 0
+            | :? Size -> 2
+            | :? CssColor -> 1
+            | :? Side -> 0
+            | :? Shape -> 0
 
     let value (v: IRadialGradient): string =
         match v with
@@ -81,7 +102,7 @@ module BackgroundImage =
         | RepeatingLinearGradient of ILinearGradient list
         | RepeatingRadialGradient of IRadialGradient list
 
-    let private combineGradient (list: ILinearGradient list) (value: ILinearGradient -> string): string =
+    let private combineGradient (value: ILinearGradient -> string) (list: ILinearGradient list): string =
         list
         |> List.fold (fun acc elem ->
             if Seq.isEmpty acc then
@@ -91,7 +112,7 @@ module BackgroundImage =
             else
                 sprintf "%s, %s" acc (value elem)) ""
 
-    let private combineGradient2 (list: IRadialGradient list) (value: IRadialGradient -> string): string =
+    let private combineGradient2 (value: IRadialGradient -> string) (list: IRadialGradient list): string =
         list
         |> List.fold (fun acc elem ->
             if Seq.isEmpty acc then
@@ -104,10 +125,10 @@ module BackgroundImage =
     let value (v: BackgroundImage): string =
         match v with
             | Url u -> sprintf "url(%s)" u
-            | LinearGradient g -> sprintf "linear-gradient(%s)" <| combineGradient g LinearGradient.value
-            | RadialGradient g -> sprintf "radial-gradient(%s)" <| combineGradient2 g RadialGradient.value
-            | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" <| combineGradient g LinearGradient.value
-            | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" <| combineGradient2 g RadialGradient.value
+            | LinearGradient g -> sprintf "linear-gradient(%s)"  (g |> List.sortBy LinearGradient.compare |> combineGradient LinearGradient.value)
+            | RadialGradient g -> sprintf "radial-gradient(%s)" (g |> List.sortBy RadialGradient.compare |> combineGradient2 RadialGradient.value)
+            | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" (g |> List.sortBy LinearGradient.compare |> combineGradient LinearGradient.value)
+            | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" (g |> List.sortBy RadialGradient.compare |> combineGradient2 RadialGradient.value)
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
 module BackgroundOrigin =

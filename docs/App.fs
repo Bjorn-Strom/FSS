@@ -1188,9 +1188,10 @@ let render (model: Model) (dispatch: Msg -> unit) =
                     ]
            div [ ClassName style] []
 
-           div [ ClassName (fss [ BackgroundColor red; Width (px 200); Height (px 200); Transforms [Scale3D(2.5, 2.5, 2.5); RotateY(deg 45.0)] ])] []
+           div [ ClassName (fss [Width (px 200); Height (px 200); BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top; Center; px 10] ] ) ])] []
         ]
 
 Program.mkSimple init update render
 |> Program.withReactSynchronous "elmish-app"
 |> Program.run
+

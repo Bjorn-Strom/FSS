@@ -69,11 +69,128 @@ let test (testName: string) (stylePropertiesAndResults: (string * (string * stri
             RTL.cleanup()
         ) stylePropertiesAndResults
 
+        (*
+        
+                testCase' "Background" <| fun _ ->
+                    let linear1 = fss [ BackgroundImage (LinearGradient [ red; blue ] ) ]
+                    let linear2 = fss [ BackgroundImage (LinearGradient [ Right; red; blue ] ) ]
+                    let linear3 = fss [ BackgroundImage (LinearGradient [ Bottom; red; blue ] ) ]
+                    let linear4 = fss [ BackgroundImage (LinearGradient [ deg 72.0; red; blue ] ) ]
+                    let radial1 = fss [ BackgroundImage (RadialGradient [ CircleAt [pct 100]; hex "333"; hex "333"; pct 50; hex "eee"; pct 75; hex "333"; pct 75] ) ]
+                    let backgroundPosition = fss [ BackgroundPosition (px 10)]
+                    let backgroundPositions = fss [ BackgroundPositions [px 10; Bottom]]
+                    let backgroundRepeat = fss [ BackgroundRepeat RepeatX ]
+                    let backgroundRepeats = fss [ BackgroundRepeats [Repeat; Space] ]
+                    let backgroundOrigin = fss [ BackgroundOrigin BorderBox]
+                    let backgroundClip = fss [ BackgroundClip BorderBox]
+                    let backgroundAttachment = fss [ BackgroundAttachment Scroll]
+        
+                    RTL.render(
+                        div [ ]
+                            [
+                                div [ Id "1"; ClassName linear1 ] [ ]
+                                div [ Id "2"; ClassName linear2 ] [ ]
+                                div [ Id "3"; ClassName linear3 ] [ ]
+                                div [ Id "4"; ClassName linear4 ] [ ]
+                                div [ Id "5"; ClassName radial1 ] [ ]
+                                div [ Id "6"; ClassName backgroundPosition ] [ ]
+                                div [ Id "7"; ClassName backgroundPositions ] [ ]
+                                div [ Id "8"; ClassName backgroundRepeat ] [ ]
+                                div [ Id "9"; ClassName backgroundRepeats ] [ ]
+                                div [ Id "10"; ClassName backgroundOrigin ] [ ]
+                                div [ Id "11"; ClassName backgroundClip ] [ ]
+                                div [ Id "12"; ClassName backgroundAttachment ] [ ]
+                            ]
+                    ) |> ignore
+                            
+                    let one = getComputedCssById("1")
+                    let two = getComputedCssById("2")
+                    let three = getComputedCssById("3")
+                    let four = getComputedCssById("4")
+                    let five = getComputedCssById("5")
+                    let six = getComputedCssById("6")
+                    let seven = getComputedCssById("7")
+                    let eight = getComputedCssById("8")
+                    let nine = getComputedCssById("9")
+                    let ten = getComputedCssById("10")
+                    let eleven = getComputedCssById("11")
+                    let twelve = getComputedCssById("12")
+        
+                    Expect.equal (getValue one "background-image") "linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two colors"
+                    Expect.equal (getValue two "background-image") "linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two colors with direction"
+                    Expect.equal (getValue three "background-image") "linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two rgb"
+                    Expect.equal (getValue four "background-image") "linear-gradient(72deg, rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with degrees"
+                    Expect.equal (getValue five "background-image") "radial-gradient(circle at 100% 50%, rgb(51, 51, 51), rgb(51, 51, 51) 50%, rgb(238, 238, 238) 75%, rgb(51, 51, 51) 75%)" "Radial gradient with shape and side"
+        
+                    Expect.equal (getValue six "background-position") "10px 50%" "Set one background position"
+                    Expect.equal (getValue seven "background-position") "10px 100%" "Set several background positions"
+        
+                    Expect.equal (getValue eight "background-repeat") "repeat-x" "Set one background repeat"
+                    Expect.equal (getValue nine "background-repeat") "repeat space" "Set several background repeats"
+        
+                    Expect.equal (getValue ten "background-origin") "border-box" "Set background origin"
+        
+                    Expect.equal (getValue eleven "background-clip") "border-box" "Set background clip"
+        
+                    Expect.equal (getValue twelve "background-attachment") "scroll" "Set background attachment"
+                    *)
+
 
 let CssTests =
     testList "Css tests" [
         
-        test "Background" [ (fss [ BackgroundColor red; Color blue]), ["background-color", "rgb(255, 0, 0)"] ] 
+        test "Background" 
+            [ 
+                (fss [ BackgroundColor red; Color blue]), ["background-color", "rgb(255, 0, 0)"]
+            
+                (fss [ BackgroundImage (Url "image.png") ]), ["background-image", "url(\"http://localhost:8085/image.png\")"]
+                (fss [ BackgroundImage (LinearGradient [ red; blue; deg 45.0; px 10 ] ) ]), ["background-image", "linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 0, 255) 10px)"]
+
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; Circle ] ) ]), ["background-image", "radial-gradient(circle, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; Ellipse ] ) ]), ["background-image", "radial-gradient(rgb(255, 255, 0), rgb(240, 109, 6))"]
+
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleSide ClosestCorner ] ) ]), ["background-image", "radial-gradient(circle closest-corner, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleSide ClosestSide ] ) ]), ["background-image", "radial-gradient(circle closest-side, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleSide FarthestCorner ] ) ]), ["background-image", "radial-gradient(circle, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleSide FarthestSide ] ) ]), ["background-image", "radial-gradient(circle farthest-side, rgb(255, 255, 0), rgb(240, 109, 6))"]
+
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseSide ClosestCorner ] ) ]), ["background-image", "radial-gradient(closest-corner, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseSide ClosestSide ] ) ]), ["background-image", "radial-gradient(closest-side, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseSide FarthestCorner ] ) ]), ["background-image", "radial-gradient(rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseSide FarthestSide ] ) ]), ["background-image", "radial-gradient(farthest-side, rgb(255, 255, 0), rgb(240, 109, 6))"]
+
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top] ] ) ]), ["background-image", "radial-gradient(circle at 50% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top; Right] ] ) ]), ["background-image", "radial-gradient(circle at 100% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top; Left] ] ) ]), ["background-image", "radial-gradient(circle at 0% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top; Center] ] ) ]), ["background-image", "radial-gradient(circle at 50% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Bottom] ] ) ]), ["background-image", "radial-gradient(circle at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Bottom; Right] ] ) ]), ["background-image", "radial-gradient(circle at 100% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Bottom; Left] ] ) ]), ["background-image", "radial-gradient(circle at 0% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Bottom; Center] ] ) ]), ["background-image", "radial-gradient(circle at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Center] ] ) ]), ["background-image", "radial-gradient(circle, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Center; Right] ] ) ]), ["background-image", "radial-gradient(circle at 100% 50%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Center; Left] ] ) ]), ["background-image", "radial-gradient(circle at 0% 50%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Center; Bottom] ] ) ]), ["background-image", "radial-gradient(circle at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Top] ] ) ]), ["background-image", "radial-gradient(at 50% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Top; Right] ] ) ]), ["background-image", "radial-gradient(at 100% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Top; Left] ] ) ]), ["background-image", "radial-gradient(at 0% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Top; Center] ] ) ]), ["background-image", "radial-gradient(at 50% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Bottom] ] ) ]), ["background-image", "radial-gradient(at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Bottom; Right] ] ) ]), ["background-image", "radial-gradient(at 100% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Bottom; Left] ] ) ]), ["background-image", "radial-gradient(at 0% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Bottom; Center] ] ) ]), ["background-image", "radial-gradient(at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center] ] ) ]), ["background-image", "radial-gradient(rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center; Right] ] ) ]), ["background-image", "radial-gradient(at 100% 50%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center; Left] ] ) ]), ["background-image", "radial-gradient(at 0% 50%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center; Bottom] ] ) ]), ["background-image", "radial-gradient(at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
+
+            ]
+
         test "Color" 
             [ 
                 (fss [ Color aliceblue ] ), ["color", "rgb(240, 248, 255)"]
@@ -475,109 +592,53 @@ let CssTests =
                 (fss [Transform (SkewY (deg 3.5)) ]), ["transform", "matrix(1, 0.0611626, 0, 1, 0, 0)"]
             ]
 
-        
-(*
-
-        testCase' "Transitions" <| fun _ ->
-            let oneTransition =
-                fss
+        test "Transition"
+            [
+                (fss [ Transition (Transition1(backgroundColor, (sec 10.0))) ]), 
                     [
-                       Transition (Transition1(backgroundColor, (sec 10.0)))
+                        "transition-property", "background-color"
+                        "transition-duration", "10s"
                     ]
 
-            let manyTransitions =
-                fss
+                (fss [ Transition (Transition2(backgroundColor, (sec 10.0), Ease)) ]), 
                     [
-                       Transitions 
-                        [
-                            Transition1(backgroundColor, (sec 10.0))
-                            Transition2(color, (sec 20.0), EaseInOut)
-                            Transition3(width, (sec 30.0), EaseOut, (sec 20.0))
-                        ]
+                        "transition-property", "background-color"
+                        "transition-duration", "10s"
+                        "transition-timing-function", "ease"
                     ]
-            
-            RTL.render(
-                fragment []
+
+                (fss [ Transition (Transition3(backgroundColor, (sec 10.0), Ease, sec 2.0)) ]), 
                     [
-                        div [ Id "one"; ClassName oneTransition ] []
-                        div [ Id "two"; ClassName manyTransitions ] []
+                        "transition-property", "background-color"
+                        "transition-duration", "10s"
+                        "transition-timing-function", "ease"
+                        "transition-delay", "2s"
                     ]
-            ) |> ignore
-                    
-            let one = getComputedCssById("one")
-            let two = getComputedCssById("two")
 
-            Expect.equal (getValue one "transition-property") "background-color" "Background color is the transition property"
-            Expect.equal (getValue one "transition-duration") "10s" "transition duration is 10 sec"
-
-            Expect.equal (getValue two "transition-property") "background-color, color, width" "transition properties for multiple transitions set"
-            Expect.equal (getValue two "transition-duration") "10s, 20s, 30s" "transition duration for multiple transitions set"
-            Expect.equal (getValue two "transition-timing-function") "ease, ease-in-out, ease-out" "transition timing function set"
-            Expect.equal (getValue two "transition-delay") "0s, 0s, 20s" "transition delay set"
-
-        testCase' "Background" <| fun _ ->
-            let linear1 = fss [ BackgroundImage (LinearGradient [ red; blue ] ) ]
-            let linear2 = fss [ BackgroundImage (LinearGradient [ Right; red; blue ] ) ]
-            let linear3 = fss [ BackgroundImage (LinearGradient [ Bottom; red; blue ] ) ]
-            let linear4 = fss [ BackgroundImage (LinearGradient [ deg 72.0; red; blue ] ) ]
-            let radial1 = fss [ BackgroundImage (RadialGradient [ CircleAt [pct 100]; hex "333"; hex "333"; pct 50; hex "eee"; pct 75; hex "333"; pct 75] ) ]
-            let backgroundPosition = fss [ BackgroundPosition (px 10)]
-            let backgroundPositions = fss [ BackgroundPositions [px 10; Bottom]]
-            let backgroundRepeat = fss [ BackgroundRepeat RepeatX ]
-            let backgroundRepeats = fss [ BackgroundRepeats [Repeat; Space] ]
-            let backgroundOrigin = fss [ BackgroundOrigin BorderBox]
-            let backgroundClip = fss [ BackgroundClip BorderBox]
-            let backgroundAttachment = fss [ BackgroundAttachment Scroll]
-
-            RTL.render(
-                div [ ]
+                (fss
                     [
-                        div [ Id "1"; ClassName linear1 ] [ ]
-                        div [ Id "2"; ClassName linear2 ] [ ]
-                        div [ Id "3"; ClassName linear3 ] [ ]
-                        div [ Id "4"; ClassName linear4 ] [ ]
-                        div [ Id "5"; ClassName radial1 ] [ ]
-                        div [ Id "6"; ClassName backgroundPosition ] [ ]
-                        div [ Id "7"; ClassName backgroundPositions ] [ ]
-                        div [ Id "8"; ClassName backgroundRepeat ] [ ]
-                        div [ Id "9"; ClassName backgroundRepeats ] [ ]
-                        div [ Id "10"; ClassName backgroundOrigin ] [ ]
-                        div [ Id "11"; ClassName backgroundClip ] [ ]
-                        div [ Id "12"; ClassName backgroundAttachment ] [ ]
+                        Transitions 
+                            [
+                                Transition1(backgroundColor, (sec 10.0))
+                                Transition2(color, (sec 20.0), EaseInOut)
+                                Transition3(width, (sec 30.0), EaseOut, (sec 20.0))
+                            ]
+                    ]),
+                    [
+                        "transition-property", "background-color, color, width"
+                        "transition-duration", "10s, 20s, 30s"
+                        "transition-timing-function", "ease, ease-in-out, ease-out"
+                        "transition-delay", "0s, 0s, 20s"
                     ]
-            ) |> ignore
-                    
-            let one = getComputedCssById("1")
-            let two = getComputedCssById("2")
-            let three = getComputedCssById("3")
-            let four = getComputedCssById("4")
-            let five = getComputedCssById("5")
-            let six = getComputedCssById("6")
-            let seven = getComputedCssById("7")
-            let eight = getComputedCssById("8")
-            let nine = getComputedCssById("9")
-            let ten = getComputedCssById("10")
-            let eleven = getComputedCssById("11")
-            let twelve = getComputedCssById("12")
 
-            Expect.equal (getValue one "background-image") "linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two colors"
-            Expect.equal (getValue two "background-image") "linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two colors with direction"
-            Expect.equal (getValue three "background-image") "linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with two rgb"
-            Expect.equal (getValue four "background-image") "linear-gradient(72deg, rgb(255, 0, 0), rgb(0, 0, 255))" "Linear gradient set with degrees"
-            Expect.equal (getValue five "background-image") "radial-gradient(circle at 100% 50%, rgb(51, 51, 51), rgb(51, 51, 51) 50%, rgb(238, 238, 238) 75%, rgb(51, 51, 51) 75%)" "Radial gradient with shape and side"
+                (fss [ TransitionDelay (sec 5.0)]), ["transition-delay", "5s"]
 
-            Expect.equal (getValue six "background-position") "10px 50%" "Set one background position"
-            Expect.equal (getValue seven "background-position") "10px 100%" "Set several background positions"
+                (fss [ TransitionDuration (sec 5.0)]), ["transition-duration", "5s"]
 
-            Expect.equal (getValue eight "background-repeat") "repeat-x" "Set one background repeat"
-            Expect.equal (getValue nine "background-repeat") "repeat space" "Set several background repeats"
+                (fss [ TransitionProperty Property.Width]), ["transition-property", "width"]
 
-            Expect.equal (getValue ten "background-origin") "border-box" "Set background origin"
-
-            Expect.equal (getValue eleven "background-clip") "border-box" "Set background clip"
-
-            Expect.equal (getValue twelve "background-attachment") "scroll" "Set background attachment"
-            *)
+                (fss [ TransitionTimingFunction EaseInOut]), ["transition-timing-function", "ease-in-out"]
+            ]
     ]
 
 Mocha.runTests CssTests |> ignore
