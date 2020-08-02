@@ -57,7 +57,7 @@ let test (testName: string) (stylePropertiesAndResults: (string * (string * stri
         
         List.iter (fun (style, propertyResultList) ->         
             RTL.render(
-                fragment []
+                div [ ClassName (fss [ Width (px 400) ]) ]
                     [
                         div [ Id "id"; ClassName style] []
                     ]) |> ignore
@@ -337,7 +337,7 @@ let CssTests =
                 (fss [ Width (px 100) ]), ["width", "100px"]
                 (fss [ Width MaxContent ]), ["width", "0px"]
                 (fss [ Width MinContent ]), ["width", "0px"]
-                (fss [ Width (FitContent(px 100)) ]), ["width", "1063px"]
+                (fss [ Width (FitContent(px 100)) ]), ["width", "400px"]
                 (fss [ MinWidth (px 50) ]), ["min-width", "50px"]
                 (fss [ MaxWidth (px 75) ]), ["max-width", "75px"]
 

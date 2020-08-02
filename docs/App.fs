@@ -42,6 +42,7 @@ open RadialGradient
 open BackgroundPosition
 open BackgroundRepeat
 open Selector
+open Functions
 
 type Model = { 
     FlexDirection: FlexDirection
@@ -66,7 +67,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
     | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
-   (* 
+   
 let ColorExamples =
     fragment []
         [
@@ -1178,7 +1179,7 @@ let MediaQueryExamples =
                 
             ]
    div [ ClassName style] [ str "foosball"]
-*)
+
 
 let SelectorExamples =
     fragment []
@@ -1231,6 +1232,7 @@ let SelectorExamples =
                 p [] [ str "Banana"]
                 p [] [ str "Cherry"]
             ]
+
             let generalSibling =
                 fss
                     [
@@ -1285,17 +1287,17 @@ let SelectorExamples =
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [         
-           //ColorExamples
-           //FontExamples
-           //BorderExamples
-           //AnimationExamples
-           //MarginExamples
-           //PaddingExamples
-           //TransformExamples
-           //TransitionExamples
-           //FlexBoxExamples model dispatch
-           //BackgroundExamples model dispatch
-           //MediaQueryExamples
+           ColorExamples
+           FontExamples
+           BorderExamples
+           AnimationExamples
+           MarginExamples
+           PaddingExamples
+           TransformExamples
+           TransitionExamples
+           FlexBoxExamples model dispatch
+           BackgroundExamples model dispatch
+           MediaQueryExamples
            SelectorExamples           
         ]
 
