@@ -263,6 +263,3 @@ module Value =
                 | TransitionTimingFunction t  -> Property.value transitionTimingFunction ==> Animation.value t
         )
         |> createObj
-
-    let Media (r: MediaFeature list) (p: CSSProperty list) = Media(r, p)
-    let MediaFor (d: Device) (r: MediaFeature list) (p: CSSProperty list) = MediaFor(d, r, p)

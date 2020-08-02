@@ -24,6 +24,7 @@
     <Compile Include="Background.fs" />
     <Compile Include="Media.fs" />
     <Compile Include="Value.fs" />
+    <Compile Include="Functions.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="Fss.fs" />
   </ItemGroup>

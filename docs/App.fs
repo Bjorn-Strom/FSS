@@ -1179,6 +1179,75 @@ let MediaQueryExamples =
             ]
    div [ ClassName style] [ str "foosball"]
 *)
+
+let SelectorExamples =
+    fragment []
+        [
+            h2 [] [ str "Selectors" ]
+            let descendant =
+                fss
+                    [
+                        ! P
+                            [
+                                BackgroundColor red
+                            ]
+                    ]
+            h3 [] [ str "Descendant" ] 
+            div [ ClassName descendant] [
+                p [] [ str "Apple"]
+                div [] [ p [] [str "An apple a day keeps the doctor away"]]
+                p [] [ str "Banana"]
+                p [] [ str "Cherry"]
+            ]
+
+            let child =
+                fss
+                    [
+                        !> P
+                            [
+                                BackgroundColor green
+                            ]
+                    ]
+            h3 [] [ str "Child" ] 
+            div [ ClassName child] [
+                p [] [ str "Apple"]
+                div [] [ p [] [str "An apple a day keeps the doctor away"]]
+                p [] [ str "Banana"]
+                p [] [ str "Cherry"]
+            ]
+           
+            let adjacentSibling =
+                fss
+                    [
+                        !+ P  
+                            [
+                                BackgroundColor yellow
+                            ]
+                    ]
+            h3 [] [ str "Adjacent Sibling" ]
+            div [] [
+                p [] [ str "Apple"]
+                div [ ClassName adjacentSibling ] [ p [] [str "An apple a day keeps the doctor away"]]
+                p [] [ str "Banana"]
+                p [] [ str "Cherry"]
+            ]
+            let generalSibling =
+                fss
+                    [
+                        !~ P
+                            [
+                                BackgroundColor orangered
+                            ]
+                    ]
+            h3 [] [ str "General Sibling" ] 
+            div [] [
+                p [] [ str "Apple"]
+                div [ ClassName generalSibling ] [ p [] [str "An apple a day keeps the doctor away"]]
+                p [] [ str "Banana"]
+                p [] [ str "Cherry"]
+            ]
+        ]
+
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [         
@@ -1193,87 +1262,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
            //FlexBoxExamples model dispatch
            //BackgroundExamples model dispatch
            //MediaQueryExamples
-
-            let descendant =
-                fss
-                    [
-                        Selector (Descendant P,
-                            [
-                                BackgroundColor red
-                            ])
-                    ]
-            p [] [ str "Descendant" ] 
-            div [ ClassName descendant] [
-                p [] [ str "Apple"]
-                div [] [ p [] [str "An apple a day keeps the doctor away"]]
-                p [] [ str "Banana"]
-                p [] [ str "Cherry"]
-            ]
-
-            let child =
-                fss
-                    [
-                        Selector (Child P,
-                            [
-                                BackgroundColor green
-                            ])
-                    ]
-            p [] [ str "Child" ] 
-            div [ ClassName child] [
-                p [] [ str "Apple"]
-                div [] [ p [] [str "An apple a day keeps the doctor away"]]
-                p [] [ str "Banana"]
-                p [] [ str "Cherry"]
-            ]
-            
-            let adjacentSibling =
-                fss
-                    [
-                        Selector (AdjacentSibling P,
-                            [
-                                Color red
-                            ])
-                    ]
-            p [] [ str "Adjacent Sibling" ]
-            div []
-                [
-                    div [ ClassName adjacentSibling] [
-                        ul [] 
-                            [
-                                li [] [ str "item1"]
-                                li [] [ str "item2"]
-                                li [] [ str "item3"]
-                                li [] [ str "item4"]
-                            ]
-                        p [] [ str "Red"]
-                        p [] [ str "Black"]
-                        p [] [ str "Black"]
-                    ]
-                ]
-            let generalSibling =
-                fss
-                    [
-                        Selector (GeneralSibling P,
-                            [
-                                Color red
-                            ])
-                    ]
-            p [] [ str "General Sibling" ] 
-            div []
-                [
-                    div [ ClassName generalSibling] [
-                        ul [] 
-                            [
-                                li [] [ str "item1"]
-                                li [] [ str "item2"]
-                                li [] [ str "item3"]
-                                li [] [ str "item4"]
-                            ]
-                        p [] [ str "Red"]
-                        p [] [ str "Black"]
-                        p [] [ str "Black"]
-                    ]
-                ]
+           SelectorExamples           
         ]
 
 Program.mkSimple init update render
