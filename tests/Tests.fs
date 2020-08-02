@@ -604,6 +604,163 @@ let CssTests =
 
                 (fss [ TransitionTimingFunction EaseInOut]), ["transition-timing-function", "ease-in-out"]
             ]
+
+        testCase "Descendants" <| fun _ ->
+
+            let style =
+                fss
+                    [
+                        ! P
+                            [
+                                BackgroundColor red
+                            ]
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div [ ClassName style] [
+                            p [ Id "p1" ] [ str "Apple"]
+                            div [] [ p [ Id "p2" ] [str "An apple a day keeps the doctor away"]]
+                            p [ Id "p3" ] [ str "Banana"]
+                            p [ Id "p4" ] [ str "Cherry"]
+                        ]
+                    ]) |> ignore
+
+            let p1 = getComputedCssById("p1")
+            let p2 = getComputedCssById("p2")
+            let p3 = getComputedCssById("p3")
+            let p4 = getComputedCssById("p4")
+            Expect.equal (getValue p1 "background-color") "rgb(255, 0, 0)" "Descendant selector"
+            Expect.equal (getValue p2 "background-color") "rgb(255, 0, 0)" "Descendant selector"
+            Expect.equal (getValue p3 "background-color") "rgb(255, 0, 0)" "Descendant selector"
+            Expect.equal (getValue p4 "background-color") "rgb(255, 0, 0)" "Descendant selector"
+            RTL.cleanup()
+
+        testCase "Child" <| fun _ ->
+
+            let style =
+                fss
+                    [
+                        !> P
+                            [
+                                BackgroundColor green
+                            ]
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div [ ClassName style] [
+                            p [ Id "p1" ] [ str "Apple"]
+                            div [] [ p [] [str "An apple a day keeps the doctor away"]]
+                            p [ Id "p2" ] [ str "Banana"]
+                            p [ Id "p3" ] [ str "Cherry"]
+                        ]
+                    ]) |> ignore
+
+            let p1 = getComputedCssById("p1")
+            let p2 = getComputedCssById("p2")
+            let p3 = getComputedCssById("p3")
+            Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "Child selector"
+            Expect.equal (getValue p2 "background-color") "rgb(0, 128, 0)" "Child selector"
+            Expect.equal (getValue p3 "background-color") "rgb(0, 128, 0)" "Child selector"
+            RTL.cleanup()
+
+        testCase "Adjacent sibling" <| fun _ ->
+
+            let style =
+                fss
+                    [
+                        !> P
+                            [
+                                BackgroundColor green
+                            ]
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div [ ClassName style] [
+                            p [ ] [ str "Apple"]
+                            div [] [ p [] [str "An apple a day keeps the doctor away"]]
+                            p [ Id "p1" ] [ str "Banana"]
+                            p [ ] [ str "Cherry"]
+                        ]
+                    ]) |> ignore
+
+            let p1 = getComputedCssById("p1")
+            Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "Adjacent sibling selector"
+            RTL.cleanup()
+
+        testCase "General sibling" <| fun _ ->
+            let style =
+                fss
+                    [
+                        !~ P
+                            [
+                                BackgroundColor green
+                            ]
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div [] [
+                            p [] [ str "Apple"]
+                            div [ ClassName style ] [ p [] [str "An apple a day keeps the doctor away"]]
+                            p [ Id "p1" ] [ str "Banana"]
+                            p [ Id "p2" ] [ str "Cherry"]
+                        ]
+                    ]) |> ignore
+
+            let p1 = getComputedCssById("p1")
+            let p2 = getComputedCssById("p2")
+            Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "General sibling selector"
+            Expect.equal (getValue p2 "background-color") "rgb(0, 128, 0)" "General sibling selector"
+            RTL.cleanup()
+
+        testCase "Composed selector" <| fun _ ->
+            let style =
+                fss
+                    [
+                        ! Div
+                            [
+                                !> Div 
+                                    [
+                                        !> P
+                                            [
+                                                !+ P
+                                                    [
+                                                        Color purple
+                                                        FontSize (px 25)
+                                                    ]
+                                            ]
+                                    ]
+                
+                            ]
+                    ]
+
+            RTL.render(
+                fragment []
+                    [
+                        div [ ClassName style ]
+                             [
+                                 div []
+                                     [
+                                         div []
+                                             [
+                                                 p [] [ str "Hi" ]
+                                                 p [ Id "p1"] [ str "Hi" ]
+                                             ]
+                                     ]
+                             ]
+                    ]) |> ignore
+
+            let p1 = getComputedCssById("p1")
+            Expect.equal (getValue p1 "color") "rgb(128, 0, 128)" "Composed selectors"
+            Expect.equal (getValue p1 "font-size") "25px" "Composed selectors"
+            RTL.cleanup()
     ]
 
 Mocha.runTests CssTests |> ignore

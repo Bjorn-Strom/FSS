@@ -19,9 +19,9 @@ module Value =
     let css' x = css(x) 
 
     type CSSProperty =
-        | Selector of Selector * CSSProperty list
+        | Selector  of Selector * CSSProperty list
 
-        | Media of MediaFeature list * CSSProperty list
+        | Media    of MediaFeature list * CSSProperty list
         | MediaFor of Device * MediaFeature list * CSSProperty list
 
         | Label of string
@@ -144,7 +144,7 @@ module Value =
         attributeList
         |> List.map (
             function
-                | Selector (s, ss)   -> Selector.value s               ==> createCSSObject ss
+                | Selector (s, ss)    -> Selector.value s            ==> createCSSObject ss
 
                 | Media    (f, p)     -> sprintf "@media %s" <| Media.featureLabel f                         ==> createCSSObject p
                 | MediaFor (d, f, p)  -> sprintf "@media %s %s" (Media.deviceLabel d) (Media.featureLabel f) ==> createCSSObject p

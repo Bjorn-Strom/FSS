@@ -35,13 +35,13 @@ open FlexGrow
 open FlexShrink
 open FlexBasis
 open Margin
-open Selector
 open Fonts
 open BackgroundImage
 open LinearGradient
 open RadialGradient
 open BackgroundPosition
 open BackgroundRepeat
+open Selector
 
 type Model = { 
     FlexDirection: FlexDirection
@@ -1246,6 +1246,40 @@ let SelectorExamples =
                 p [] [ str "Banana"]
                 p [] [ str "Cherry"]
             ]
+
+            let composed =
+                fss
+                    [
+                        ! Div
+                            [
+                                !> Div 
+                                    [
+                                        !> P
+                                            [
+                                                !+ P
+                                                    [
+                                                        Color purple
+                                                        FontSize (px 25)
+                                                    ]
+                                            ]
+                                    ]
+                                
+                            ]
+                    ]
+
+            h3 [] [ str "Composed" ]
+            div [ ClassName composed ]
+                [
+                    div []
+                        [
+                            div []
+                                [
+                                    p [] [ str "Hi" ]
+                                    // Skal bli lilla og 25 px
+                                    p [] [ str "Hi" ]
+                                ]
+                        ]
+                ]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
