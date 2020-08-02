@@ -11,4 +11,7 @@ module Selector =
 
     let value (s: Selector): string = 
         match s with
-            | Descendant d -> sprintf " %s" (Html.value d)
+            | AdjacentSibling s -> sprintf " + %s" (Html.value s)
+            | GeneralSibling  s -> sprintf " ~ %s" (Html.value s)
+            | Child           c -> sprintf " > %s" (Html.value c)
+            | Descendant      d -> sprintf " %s" (Html.value d)

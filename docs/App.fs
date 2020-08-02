@@ -66,7 +66,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
     | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
-    
+   (* 
 let ColorExamples =
     fragment []
         [
@@ -1153,6 +1153,32 @@ let BackgroundExamples model dispatch =
 
                 ]
 
+let MediaQueryExamples =
+   let style =
+        fss
+            [
+                Width (px 200)
+                Height (px 200)
+                BackgroundColor blue
+                Media 
+                    [ MediaFeature.MaxWidth (px 500); MediaFeature.MinWidth (px 200) ]
+                    [ BackgroundColor Color.red ]
+                Media
+                    [ MediaFeature.MinHeight (px 700)]
+                    [ BackgroundColor pink]
+                MediaFor Print
+                    []
+                    [ 
+                        Transform (Rotate(deg 45.0))
+                        BackgroundColor black
+                    ]
+                Media
+                    [ Orientation Landscape]
+                    [ Color green; FontSize (px 28)]
+                
+            ]
+   div [ ClassName style] [ str "foosball"]
+*)
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [         
@@ -1166,35 +1192,90 @@ let render (model: Model) (dispatch: Msg -> unit) =
            //TransitionExamples
            //FlexBoxExamples model dispatch
            //BackgroundExamples model dispatch
+           //MediaQueryExamples
 
-           let style =
+            let descendant =
                 fss
                     [
-                        Width (px 200)
-                        Height (px 200)
-                        BackgroundColor blue
-                        Media 
-                            [ MediaFeature.MaxWidth (px 500); MediaFeature.MinWidth (px 200) ]
-                            [ BackgroundColor Color.red ]
-                        Media
-                            [ MediaFeature.MinHeight (px 700)]
-                            [ BackgroundColor pink]
-                        MediaFor Print
-                            []
-                            [ 
-                                Transform (Rotate(deg 45.0))
-                                BackgroundColor black
-                            ]
-                        Media
-                            [ Orientation Landscape]
-                            [ Color green; FontSize (px 28)]
-                        
+                        Selector (Descendant P,
+                            [
+                                BackgroundColor red
+                            ])
                     ]
-           div [ ClassName style] [ str "foosball"]
+            p [] [ str "Descendant" ] 
+            div [ ClassName descendant] [
+                p [] [ str "Apple"]
+                div [] [ p [] [str "An apple a day keeps the doctor away"]]
+                p [] [ str "Banana"]
+                p [] [ str "Cherry"]
+            ]
 
+            let child =
+                fss
+                    [
+                        Selector (Child P,
+                            [
+                                BackgroundColor green
+                            ])
+                    ]
+            p [] [ str "Child" ] 
+            div [ ClassName child] [
+                p [] [ str "Apple"]
+                div [] [ p [] [str "An apple a day keeps the doctor away"]]
+                p [] [ str "Banana"]
+                p [] [ str "Cherry"]
+            ]
+            
+            let adjacentSibling =
+                fss
+                    [
+                        Selector (AdjacentSibling P,
+                            [
+                                Color red
+                            ])
+                    ]
+            p [] [ str "Adjacent Sibling" ]
+            div []
+                [
+                    div [ ClassName adjacentSibling] [
+                        ul [] 
+                            [
+                                li [] [ str "item1"]
+                                li [] [ str "item2"]
+                                li [] [ str "item3"]
+                                li [] [ str "item4"]
+                            ]
+                        p [] [ str "Red"]
+                        p [] [ str "Black"]
+                        p [] [ str "Black"]
+                    ]
+                ]
+            let generalSibling =
+                fss
+                    [
+                        Selector (GeneralSibling P,
+                            [
+                                Color red
+                            ])
+                    ]
+            p [] [ str "General Sibling" ] 
+            div []
+                [
+                    div [ ClassName generalSibling] [
+                        ul [] 
+                            [
+                                li [] [ str "item1"]
+                                li [] [ str "item2"]
+                                li [] [ str "item3"]
+                                li [] [ str "item4"]
+                            ]
+                        p [] [ str "Red"]
+                        p [] [ str "Black"]
+                        p [] [ str "Black"]
+                    ]
+                ]
         ]
 
 Program.mkSimple init update render
 |> Program.withReactSynchronous "elmish-app"
 |> Program.run
-
