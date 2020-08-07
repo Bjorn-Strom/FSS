@@ -4,6 +4,7 @@ module Types =
     type IAnimation            = interface end
     type IGlobal               = interface end
     type IFontSize             = interface end
+    type IFontStretch          = interface end
     type IFontFamily           = interface end
     type IColor                = interface end
     type IBorderStyle          = interface end

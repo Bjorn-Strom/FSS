@@ -1,6 +1,7 @@
 namespace Fss
 
 open Units.Size
+open Units.Percent
 open Types
 open Global
 
@@ -27,5 +28,6 @@ module ContentSize =
         match v with
             | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
             | :? ContentSize as c -> contentSizeValue c
             | _ -> "Unknown size"

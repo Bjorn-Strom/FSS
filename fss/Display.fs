@@ -204,7 +204,8 @@ module FlexShrink =
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
 module FlexBasis =
-    open Fss.Units.Size
+    open Units.Size
+    open Units.Percent
 
     type FlexBasis = 
         | FlexBasis of Size
@@ -215,5 +216,6 @@ module FlexBasis =
         match v with
             | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
             | _ -> "Unknown flex basis"
 

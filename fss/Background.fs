@@ -3,6 +3,7 @@ namespace Fss
 open Types
 open Units.Angle
 open Units.Size
+open Units.Percent
 open Utilities.Helpers
 open Color
 
@@ -22,6 +23,7 @@ module BackgroundPosition =
     let value (v: IBackgroundPosition): string =
         match v with
             | :? Size as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
             | :? BackgroundPosition as position -> backgroundPositionValue position
             | _ -> "Unknown background position"
  
@@ -33,6 +35,7 @@ module LinearGradient =
         match v with
             | :? Angle -> 0
             | :? Size -> 1
+            | :? Percent -> 1
             | :? CssColor -> 1
             | :? BackgroundPosition -> 0
             | _ -> 1
@@ -41,6 +44,7 @@ module LinearGradient =
         match v with
             | :? Angle as a -> Units.Angle.value a
             | :? Size as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
             | :? CssColor as c -> Color.value c
             | :? BackgroundPosition as p -> sprintf "to %s" <| BackgroundPosition.value p
             | _ -> "Unknown linear gradient value"
@@ -78,14 +82,17 @@ module RadialGradient =
         match v with 
             | :? Angle -> 0
             | :? Size -> 1
+            | :? Percent -> 1
             | :? CssColor -> 1
             | :? Side -> 0
             | :? Shape -> 0
+            | _ -> 0
 
     let value (v: IRadialGradient): string =
         match v with
             | :? Angle as a -> Units.Angle.value a
             | :? Size as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
             | :? CssColor as c -> Color.value c
             | :? Side as s -> sideValue s
             | :? Shape as s -> shapeValue s
@@ -105,7 +112,7 @@ module BackgroundImage =
         |> List.fold (fun acc elem ->
             if Seq.isEmpty acc then
                 value elem
-            else if elem :? Size then 
+            else if elem :? Size || elem :? Percent  then 
                 sprintf "%s %s" acc (value elem)
             else
                 sprintf "%s, %s" acc (value elem)) ""
@@ -115,7 +122,7 @@ module BackgroundImage =
         |> List.fold (fun acc elem ->
             if Seq.isEmpty acc then
                 value elem
-            else if elem :? Size then 
+            else if elem :? Size || elem :? Percent then 
                 sprintf "%s %s" acc (value elem)
             else
                 sprintf "%s, %s" acc (value elem)) ""
@@ -204,6 +211,7 @@ module BackgroundSize =
         match v with
             | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
             | :? BackgroundSize as b -> backgroundSizeValue b
             | _ -> "Unknown background size" 
 

@@ -1,6 +1,7 @@
 namespace Fss
 
 open Units.Size
+open Units.Percent
 open Types
 open Global
 
@@ -19,5 +20,6 @@ module Margin =
         match v with
             | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
             | :? Margin as m -> marginValue m
             | _ -> "Unknown margin size"

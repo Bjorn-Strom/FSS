@@ -7,6 +7,7 @@ open Utilities.Helpers
 
 module BorderWidth =
     open Units.Size
+    open Units.Percent
 
     type BorderWidth =
         | Thin
@@ -22,6 +23,7 @@ module BorderWidth =
             | :? Global as g -> Global.value g
             | :? BorderWidth as b -> borderWidthValue b
             | :? Size as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
             | _ -> "Unknown border width"
 
 module BorderStyle =

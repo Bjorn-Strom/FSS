@@ -12,6 +12,7 @@ module Global =
         | Revert
         interface IGlobal
         interface IFontSize
+        interface IFontStretch
         interface IFontFamily
         interface IColor
         interface IBorderStyle

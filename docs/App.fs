@@ -14,6 +14,7 @@ open Global
 open Property
 open Value
 open Color
+open Units.Percent
 open Units.Size
 open Units.Angle
 open BorderStyle
@@ -120,9 +121,9 @@ let FontExamples =
             p [ ClassName (fss [FontFamily Monospace]) ] [ str "This font is monospace!"]
             p [ ClassName (fss [FontFamily Cursive]) ] [ str "This font is cursive!"]
             p [ ClassName (fss 
-                [
-                    FontFamilies [ SansSerif; "FOo" ]
-                ]) ] [ str "This should be gill-sans serif"]
+                    [
+                        FontFamilies [ SansSerif; Custom "Helvetica" ]
+                    ]) ] [ str "This should be helvetica sans-serif"]
         ]
         
 let BorderExamples =

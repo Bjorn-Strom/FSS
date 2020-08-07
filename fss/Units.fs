@@ -3,6 +3,25 @@ namespace Fss.Units
 open Fss
 open Types
 
+module Percent =
+    type Percent = 
+        | Percent of string
+        interface IFontSize
+        interface IFontStretch
+        interface IBorderWidth
+        interface IMargin
+        interface IPadding
+        interface IFlexBasis
+        interface ILinearGradient
+        interface IRadialGradient
+        interface IBackgroundPosition
+        interface IBackgroundSize
+        interface IContentSize
+
+    let value (Percent p): string = p
+
+    let pct (v: int): Percent = sprintf "%d%%" v |> Percent
+
 // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
 module Size =
     type Size =
@@ -12,7 +31,6 @@ module Size =
         | Mm of string
         | Pt of string
         | Pc of string
-        | Pct of string
         | Em of string
         | Rem of string
         | Ex of string
@@ -40,7 +58,6 @@ module Size =
             | Mm m -> m
             | Pt p -> p
             | Pc p -> p
-            | Pct p -> p
             | Em e -> e
             | Rem r -> r
             | Ex e -> e
@@ -59,7 +76,6 @@ module Size =
     let pc (v: float): Size = sprintf "%.1fpc" v |> Pc
 
     // Relative
-    let pct (v: int): Size = sprintf "%d%%" v |> Pct
     let em (v: float): Size = sprintf "%.1fem" v |> Em
     let rem (v: float): Size = sprintf "%.1frem" v |> Rem
     let ex (v: float): Size = sprintf "%.1fex" v |> Ex

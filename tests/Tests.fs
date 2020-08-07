@@ -14,8 +14,10 @@ open Fss
 open Value
 open Color
 open Units.Size
+open Units.Percent
 open Units.Angle
-open Fonts
+open FontSize
+open FontStretch
 open BorderStyle
 open BorderWidth
 open Animation
@@ -176,6 +178,18 @@ let CssTests =
                 (fss [ FontSize (px 100) ]), ["font-size", "100px"]
                 (fss [ FontSize (pct 200) ]), ["font-size", "32px"]
 
+                (fss [ FontStretch FontStretch.Normal]), ["font-stretch", "100%"]
+                (fss [ FontStretch UltraCondensed]), ["font-stretch", "50%"]
+                (fss [ FontStretch ExtraCondensed]), ["font-stretch", "62.5%"]
+                (fss [ FontStretch Condensed]), ["font-stretch", "75%"]
+                (fss [ FontStretch SemiCondensed]), ["font-stretch", "87.5%"]
+                (fss [ FontStretch SemiExpanded]), ["font-stretch", "112.5%"]
+                (fss [ FontStretch Expanded]), ["font-stretch", "125%"]
+                (fss [ FontStretch ExtraExpanded]), ["font-stretch", "150%"]
+                (fss [ FontStretch UltraExpanded]), ["font-stretch", "200%"]
+
+                (fss [ FontStretch (pct 50)]), ["font-stretch", "50%"]
+                (fss [ FontStretch (pct 50)]), ["font-stretch", "50%"]
             ]
 
         test "Border" 
