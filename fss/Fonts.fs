@@ -80,6 +80,10 @@ module FontStretch =
             | :? Global as g -> Global.value g
             | _ -> "unknown font stretch value"
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
+module FontVariant =
+    type FontVariant =
+    
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
 module FontFamily =
 
