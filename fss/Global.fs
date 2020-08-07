@@ -13,6 +13,7 @@ module Global =
         interface IGlobal
         interface IFontSize
         interface IFontStretch
+        interface IFontStyle
         interface IFontFamily
         interface IColor
         interface IBorderStyle

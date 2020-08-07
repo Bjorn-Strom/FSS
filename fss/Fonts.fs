@@ -6,9 +6,9 @@ open Global
 open Types
 open Fss.Utilities.Helpers
 
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
 module FontSize =
-
     type FontSize =
         // Absolute
         | XxSmall
@@ -34,6 +34,27 @@ module FontSize =
             | :? Percent as p -> Units.Percent.value p
             | :? FontSize as s -> fontValue s
             | _ -> "Unknown font size"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
+module FontStyle =
+    open Units.Angle
+
+    type FontStyle =
+        | Normal
+        | Italic
+        | Oblique of Angle
+        interface IFontStyle
+
+    let private fontStyleValue (v: FontStyle): string =
+        match v with
+            | Oblique a -> sprintf "oblique %s" <| Units.Angle.value a
+            | _ -> duToLowercase v
+
+    let value (v: IFontStyle): string =
+        match v with
+            | :? FontStyle as f -> fontStyleValue f
+            | :? Global as g -> Global.value g
+            | _ -> "Unknown font style"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
 module FontStretch =

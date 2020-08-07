@@ -37,6 +37,7 @@ open FlexShrink
 open FlexBasis
 open Margin
 open FontSize
+open FontStyle
 open FontFamily
 open BackgroundImage
 open RadialGradient
@@ -124,6 +125,24 @@ let FontExamples =
                     [
                         FontFamilies [ SansSerif; Custom "Helvetica" ]
                     ]) ] [ str "This should be helvetica sans-serif"]
+
+
+            p [ ClassName (fss [FontStyle Italic])]
+                [
+                    str "Italic"
+                ]
+            p [ ClassName (fss [FontStyle Normal])]
+                [
+                    str "Normal"
+                ]
+            p [ ClassName (fss [FontStyle (Oblique (deg 90.0)) ])]
+                [
+                    str "Oblique 90"
+                ]
+            p [ ClassName (fss [FontStyle (Oblique (deg -90.0)) ])]
+                [
+                    str "Oblique -90"
+                ]
         ]
         
 let BorderExamples =

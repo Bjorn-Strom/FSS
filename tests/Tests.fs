@@ -190,6 +190,11 @@ let CssTests =
 
                 (fss [ FontStretch (pct 50)]), ["font-stretch", "50%"]
                 (fss [ FontStretch (pct 50)]), ["font-stretch", "50%"]
+
+                (fss [ FontStyle FontStyle.Normal]), ["font-style", "normal"]
+                (fss [ FontStyle FontStyle.Italic]), ["font-style", "italic"]
+                (fss [ FontStyle (FontStyle.Oblique (deg 90.0))]), ["font-style", "oblique 90deg"]
+                (fss [ FontStyle (FontStyle.Oblique (deg -90.0))]), ["font-style", "oblique -90deg"]
             ]
 
         test "Border" 

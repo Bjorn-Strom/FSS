@@ -44,6 +44,7 @@ module Value =
         | Hover of CSSProperty list
 
         | FontSize     of IFontSize
+        | FontStyle    of IFontStyle
         | FontStretch  of IFontStretch
         | FontFamily   of IFontFamily
         | FontFamilies of IFontFamily list
@@ -172,6 +173,7 @@ module Value =
                 | Hover h            -> hover |> Property.value |> toPsuedo ==> createCSSObject h
                 
                 | FontSize     f     -> Property.value fontSize        ==> FontSize.value f
+                | FontStyle    f     -> Property.value fontStyle       ==> FontStyle.value f
                 | FontStretch  f     -> Property.value fontStretch     ==> FontStretch.value f
                 | FontFamily   f     -> Property.value fontFamily      ==> FontFamily.value f
                 | FontFamilies fs    -> Property.value fontFamily      ==> combineComma fs FontFamily.value

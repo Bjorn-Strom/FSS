@@ -95,6 +95,7 @@ module Angle =
         interface ITransform
         interface ILinearGradient
         interface IRadialGradient
+        interface IFontStyle
 
     let value (u: Angle) = 
         match u with 
