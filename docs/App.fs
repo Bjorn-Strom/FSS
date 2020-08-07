@@ -35,12 +35,13 @@ open FlexGrow
 open FlexShrink
 open FlexBasis
 open Margin
-open Fonts
+open FontSize
+open FontFamily
 open BackgroundImage
-open LinearGradient
 open RadialGradient
 open BackgroundPosition
 open BackgroundRepeat
+open LinearGradient
 open Selector
 open Functions
 
@@ -113,7 +114,15 @@ let FontExamples =
             p [ClassName (fss [FontSize Initial])] [ str "Fonts can initial" ]
             p [ClassName (fss [FontSize Revert])] [ str "Fonts can reverted" ]
             p [ClassName (fss [FontSize Unset])] [ str "Fonts can unset" ]
-            p [] [ str "and more!"]
+
+            p [ ClassName (fss [FontFamily Serif]) ] [ str "This font is serif!"]
+            p [ ClassName (fss [FontFamily SansSerif]) ] [ str "This font is sans-serif!"]
+            p [ ClassName (fss [FontFamily Monospace]) ] [ str "This font is monospace!"]
+            p [ ClassName (fss [FontFamily Cursive]) ] [ str "This font is cursive!"]
+            p [ ClassName (fss 
+                [
+                    FontFamilies [ SansSerif; "FOo" ]
+                ]) ] [ str "This should be gill-sans serif"]
         ]
         
 let BorderExamples =

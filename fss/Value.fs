@@ -43,7 +43,9 @@ module Value =
 
         | Hover of CSSProperty list
 
-        | FontSize of IFontSize
+        | FontFamily   of IFontFamily
+        | FontFamilies of IFontFamily list
+        | FontSize     of IFontSize
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -168,7 +170,9 @@ module Value =
                 
                 | Hover h            -> hover |> Property.value |> toPsuedo ==> createCSSObject h
                 
-                | FontSize f         -> Property.value fontSize        ==> Fonts.value f
+                | FontFamily f       -> Property.value fontFamily      ==> FontFamily.value f
+                | FontFamilies fs    -> Property.value fontFamily      ==> combineComma fs FontFamily.value
+                | FontSize f         -> Property.value fontSize        ==> FontSize.value f
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs bss BorderStyle.value

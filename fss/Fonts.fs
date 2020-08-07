@@ -5,8 +5,27 @@ open Global
 open Types
 open Fss.Utilities.Helpers
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
+module FontFamily =
+
+    type FontFamily =
+        | Serif
+        | SansSerif
+        | Monospace
+        | Cursive
+        interface IFontFamily
+        interface IGlobal
+
+    let private fontFamilyValue (v: FontFamily): string = duToKebab v
+
+    let value (v: IFontFamily): string =
+        match v with
+            | :? Global as g -> Global.value g
+            | :? FontFamily as f -> fontFamilyValue f
+            | _ -> "Unknown font family"
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
-module Fonts =
+module FontSize =
 
     type FontSize =
         // Absolute
