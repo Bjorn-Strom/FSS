@@ -143,6 +143,16 @@ let FontExamples =
                 [
                     str "Oblique -90"
                 ]
+
+            p [ ClassName (fss [FontWeight FontWeight.Bold ])]
+                [
+                    str "BOLD"
+                ]
+
+            p [ ClassName (fss [FontWeight (FontWeight.Number 700) ])]
+                [
+                    str "BOLD"
+                ]
         ]
         
 let BorderExamples =

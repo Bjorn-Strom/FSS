@@ -195,6 +195,19 @@ let CssTests =
                 (fss [ FontStyle FontStyle.Italic]), ["font-style", "italic"]
                 (fss [ FontStyle (FontStyle.Oblique (deg 90.0))]), ["font-style", "oblique 90deg"]
                 (fss [ FontStyle (FontStyle.Oblique (deg -90.0))]), ["font-style", "oblique -90deg"]
+
+                (fss [ FontWeight FontWeight.Bold ]), ["font-weight", "700"]
+                (fss [ FontWeight FontWeight.Normal ]), ["font-weight", "400"]
+
+                (fss [ FontWeight (FontWeight.Number 100) ]), ["font-weight", "100"]
+                (fss [ FontWeight (FontWeight.Number 200) ]), ["font-weight", "200"]
+                (fss [ FontWeight (FontWeight.Number 300) ]), ["font-weight", "300"]
+                (fss [ FontWeight (FontWeight.Number 400) ]), ["font-weight", "400"]
+                (fss [ FontWeight (FontWeight.Number 500) ]), ["font-weight", "500"]
+                (fss [ FontWeight (FontWeight.Number 600) ]), ["font-weight", "600"]
+                (fss [ FontWeight (FontWeight.Number 700) ]), ["font-weight", "700"]
+                (fss [ FontWeight (FontWeight.Number 800) ]), ["font-weight", "800"]
+                (fss [ FontWeight (FontWeight.Number 900) ]), ["font-weight", "900"]
             ]
 
         test "Border" 

@@ -80,10 +80,27 @@ module FontStretch =
             | :? Global as g -> Global.value g
             | _ -> "unknown font stretch value"
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
-module FontVariant =
-    type FontVariant =
-    
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+module FontWeight =
+    type FontWeight =
+        | Normal
+        | Bold
+        | Lighter
+        | Bolder
+        | Number of int
+        interface IFontWeight
+
+    let private fontFamilyValue (v: FontWeight): string = 
+        match v with
+            | Number n -> string n
+            | _ -> duToLowercase v
+
+    let value (v: IFontWeight): string =
+        match v with
+            | :? Global as g -> Global.value g
+            | :? FontWeight as f -> fontFamilyValue f
+            | _ -> "Unknown font family"
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
 module FontFamily =
 
@@ -95,7 +112,6 @@ module FontFamily =
         | Font of string
         | Custom of string
         interface IFontFamily
-        interface IGlobal
 
     let private fontFamilyValue (v: FontFamily): string = 
         match v with
