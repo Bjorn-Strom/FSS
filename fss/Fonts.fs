@@ -101,6 +101,28 @@ module FontWeight =
             | :? FontWeight as f -> fontFamilyValue f
             | _ -> "Unknown font family"
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+module LineHeight =
+    type LineHeight =
+        | Normal
+        | Value of float
+        | Percent of Percent
+        | Size of Size
+        interface ILineHeight
+
+    let private lineHeightValue (v: LineHeight): string = 
+        match v with
+            | Value v -> string v
+            | _ -> duToLowercase v
+
+    let value (v: ILineHeight): string =
+        match v with
+            | :? LineHeight as f -> lineHeightValue f
+            | :? Percent as p -> Units.Percent.value p
+            | :? Size as s -> Units.Size.value s
+            | :? Global as g -> Global.value g
+            | _ -> "unknown font stretch value"
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
 module FontFamily =
 

@@ -153,6 +153,66 @@ let FontExamples =
                 [
                     str "BOLD"
                 ]
+
+            p [ ClassName (fss 
+                [
+                    Width (px 150)
+                    LineHeight LineHeight.Normal
+                ])]
+                [
+                    str """
+                    Far out in the uncharted
+                    backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+                    """
+                ]
+
+            p [ ClassName (fss 
+                [
+                    Width (px 150)
+                    LineHeight (LineHeight.Value 2.5)
+                ])]
+                [
+                    str """
+                    Far out in the uncharted
+                    backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+                    """
+                ]
+
+            p [ ClassName (fss 
+                [
+                    Width (px 150)
+                    LineHeight (em 3.0)
+                ])]
+                [
+                    str """
+                    Far out in the uncharted
+                    backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+                    """
+                ]
+
+            p [ ClassName (fss 
+                [
+                    Width (px 150)
+                    LineHeight (pct 150)
+                ])]
+                [
+                    str """
+                    Far out in the uncharted
+                    backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+                    """
+                ]
+
+            p [ ClassName (fss 
+                [
+                    Width (px 150)
+                    LineHeight (px 32)
+                ])]
+                [
+                    str """
+                    Far out in the uncharted
+                    backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+                    """
+                ]
         ]
         
 let BorderExamples =

@@ -17,6 +17,7 @@ module Percent =
         interface IBackgroundPosition
         interface IBackgroundSize
         interface IContentSize
+        interface ILineHeight
 
     let value (Percent p): string = p
 
@@ -49,6 +50,7 @@ module Size =
         interface IBackgroundPosition
         interface IBackgroundSize
         interface IContentSize
+        interface ILineHeight
 
     let value (u: Size) = 
         match u with 

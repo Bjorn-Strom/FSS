@@ -208,6 +208,12 @@ let CssTests =
                 (fss [ FontWeight (FontWeight.Number 700) ]), ["font-weight", "700"]
                 (fss [ FontWeight (FontWeight.Number 800) ]), ["font-weight", "800"]
                 (fss [ FontWeight (FontWeight.Number 900) ]), ["font-weight", "900"]
+
+                (fss [ LineHeight LineHeight.Normal]), ["line-height", "normal"]
+                (fss [ LineHeight (LineHeight.Value 2.5)]), ["line-height", "40px"]
+                (fss [ LineHeight (em 3.0)]), ["line-height", "48px"]
+                (fss [ LineHeight (pct 150)]), ["line-height", "24px"]
+                (fss [ LineHeight (px 32)]), ["line-height", "32px"]
             ]
 
         test "Border" 

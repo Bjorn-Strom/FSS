@@ -47,7 +47,7 @@ module Value =
         | FontStyle    of IFontStyle
         | FontWeight   of IFontWeight
         | FontStretch  of IFontStretch
-
+        | LineHeight   of ILineHeight
         | FontFamily   of IFontFamily
         | FontFamilies of IFontFamily list
 
@@ -178,6 +178,7 @@ module Value =
                 | FontStyle    f     -> Property.value fontStyle       ==> FontStyle.value f
                 | FontStretch  f     -> Property.value fontStretch     ==> FontStretch.value f
                 | FontWeight   f     -> Property.value fontWeight      ==> FontWeight.value f
+                | LineHeight   l     -> Property.value lineHeight      ==> LineHeight.value l
                 | FontFamily   f     -> Property.value fontFamily      ==> FontFamily.value f
                 | FontFamilies fs    -> Property.value fontFamily      ==> combineComma fs FontFamily.value
 
