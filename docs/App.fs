@@ -38,6 +38,7 @@ open FlexBasis
 open Margin
 open FontSize
 open FontStyle
+open FontFace
 open FontFamily
 open BackgroundImage
 open RadialGradient
@@ -46,6 +47,7 @@ open BackgroundRepeat
 open LinearGradient
 open Selector
 open Functions
+open Fss.Types
 
 type Model = { 
     FlexDirection: FlexDirection
@@ -70,7 +72,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
     | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
-   
+   (*
 let ColorExamples =
     fragment []
         [
@@ -155,22 +157,10 @@ let FontExamples =
                 ]
 
             p [ ClassName (fss 
-                [
-                    Width (px 150)
-                    LineHeight LineHeight.Normal
-                ])]
-                [
-                    str """
-                    Far out in the uncharted
-                    backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
-                    """
-                ]
-
-            p [ ClassName (fss 
-                [
-                    Width (px 150)
-                    LineHeight (LineHeight.Value 2.5)
-                ])]
+                    [
+                        Width (px 150)
+                        LineHeight LineHeight.Normal
+                    ])]
                 [
                     str """
                     Far out in the uncharted
@@ -179,22 +169,10 @@ let FontExamples =
                 ]
 
             p [ ClassName (fss 
-                [
-                    Width (px 150)
-                    LineHeight (em 3.0)
-                ])]
-                [
-                    str """
-                    Far out in the uncharted
-                    backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
-                    """
-                ]
-
-            p [ ClassName (fss 
-                [
-                    Width (px 150)
-                    LineHeight (pct 150)
-                ])]
+                    [
+                        Width (px 150)
+                        LineHeight (LineHeight.Value 2.5)
+                    ])]
                 [
                     str """
                     Far out in the uncharted
@@ -203,10 +181,34 @@ let FontExamples =
                 ]
 
             p [ ClassName (fss 
+                    [
+                        Width (px 150)
+                        LineHeight (em 3.0)
+                    ])]
                 [
-                    Width (px 150)
-                    LineHeight (px 32)
-                ])]
+                    str """
+                    Far out in the uncharted
+                    backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+                    """
+                ]
+
+            p [ ClassName (fss 
+                    [
+                        Width (px 150)
+                        LineHeight (pct 150)
+                    ])]
+                [
+                    str """
+                    Far out in the uncharted
+                    backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+                    """
+                ]
+
+            p [ ClassName (fss 
+                    [
+                        Width (px 150)
+                        LineHeight (px 32)
+                    ])]
                 [
                     str """
                     Far out in the uncharted
@@ -1382,10 +1384,26 @@ let SelectorExamples =
                         ]
                 ]
         ]
+        *)
+
 
 let render (model: Model) (dispatch: Msg -> unit) =
+    let style =
+        fss
+            [
+                FontFace
+                    [
+                        Family "DroidSerif"
+                        Fss.FontFace.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", TrueType)
+                        FontWeight FontWeight.Normal
+                        FontStyle FontStyle.Normal
+                    ]
+                FontFamily (Font "DroidSerif")
+            ]
+
     div [] 
-        [         
+        [  
+            (*
            ColorExamples
            FontExamples
            BorderExamples
@@ -1397,7 +1415,13 @@ let render (model: Model) (dispatch: Msg -> unit) =
            FlexBoxExamples model dispatch
            BackgroundExamples model dispatch
            MediaQueryExamples
-           SelectorExamples           
+           SelectorExamples
+           *)
+
+           p [ ClassName style ]
+            [
+                str "Hello thar"
+            ]
         ]
 
 Program.mkSimple init update render

@@ -12,6 +12,7 @@ open Selector
 open BackgroundImage
 open Padding
 open Media
+open FontFace
 
 module Value = 
     [<Import("css", from="emotion")>]
@@ -48,6 +49,7 @@ module Value =
         | FontWeight   of IFontWeight
         | FontStretch  of IFontStretch
         | LineHeight   of ILineHeight
+        | FontFace     of IFontFace list
         | FontFamily   of IFontFamily
         | FontFamilies of IFontFamily list
 
@@ -141,10 +143,10 @@ module Value =
         | TransitionDuration       of Time
         | TransitionProperty       of Property
         | TransitionTimingFunction of Timing
+        interface IFontFace
 
     let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
     let combineAnimations (list: IAnimation list list): string = combineComma list (fun a -> combineWs a Animation.value)
-    
 
     let rec createCSSObject (attributeList: CSSProperty list) = 
         attributeList
@@ -179,8 +181,9 @@ module Value =
                 | FontStretch  f     -> Property.value fontStretch     ==> FontStretch.value f
                 | FontWeight   f     -> Property.value fontWeight      ==> FontWeight.value f
                 | LineHeight   l     -> Property.value lineHeight      ==> LineHeight.value l
+                | FontFace     f     -> "@font-face"                   ==> createFontFaceObject f
                 | FontFamily   f     -> Property.value fontFamily      ==> FontFamily.value f
-                | FontFamilies fs    -> Property.value fontFamily      ==> combineComma fs FontFamily.value
+                | FontFamilies fs    -> Property.value fontFamily      ==> FontFamily.value
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs bss BorderStyle.value

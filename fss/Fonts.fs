@@ -1,11 +1,12 @@
 namespace Fss
 
+open Fable.Core.JsInterop
+
 open Units.Size
 open Units.Percent
 open Global
 open Types
 open Fss.Utilities.Helpers
-
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
 module FontSize =
@@ -44,6 +45,7 @@ module FontStyle =
         | Italic
         | Oblique of Angle
         interface IFontStyle
+        interface IFontFace
 
     let private fontStyleValue (v: FontStyle): string =
         match v with
@@ -70,6 +72,7 @@ module FontStretch =
         | UltraExpanded
         | Pct of Percent
         interface IFontStretch
+        interface IFontFace
 
     let private fontStretchValue (v: FontStretch): string = duToKebab v
 
@@ -89,6 +92,7 @@ module FontWeight =
         | Bolder
         | Number of int
         interface IFontWeight
+        interface IFontFace
 
     let private fontFamilyValue (v: FontWeight): string = 
         match v with
@@ -123,8 +127,76 @@ module LineHeight =
             | :? Global as g -> Global.value g
             | _ -> "unknown font stretch value"
 
+
+//    FontFace [Family "Open Sans"; Sources ["url1"; "url2"]; Formats [Woff2; Woff] ]
+//    FontFace [Family "Open Sans"; Source "url1"; Format Woff2 ]
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
+module FontDisplay =
+    type FontDisplay =
+        | Auto
+        | Block
+        | Swap
+        | Fallback
+        | Optional
+        interface IFontDisplay
+        interface IFontFace
+
+    let private fontDisplayValue (v: FontDisplay): string = duToLowercase v
+
+    let value (v: IFontDisplay): string =
+        match v with
+            | :? FontDisplay as f -> fontDisplayValue f
+            | _ -> "Unknown font display"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
+module FontFace =
+    open FontDisplay
+    open FontStretch
+    open FontStyle
+    open FontWeight
+
+    type Format =
+        | TrueType
+        | OpenType
+        | EmpbeddedOpentype
+        | Woff
+        | Woff2
+        | Svg
+
+    let private formatValue (v: Format): string = duToKebab v
+
+    type FontFace =
+        | Family of string
+        | Url of string * Format
+        interface IFontFace
+        interface IFontFamily
+
+    let private fontFaceValue (v: FontFace): string =
+        match v with
+            | Family f -> sprintf "font-family: %s" f
+            | Url (s, f) -> sprintf "url('%s') format('%s')" s (formatValue f)
+
+    let private value (v: IFontFace): string =
+        match v with
+        | :? FontDisplay as d -> FontDisplay.value d
+        | :? FontStretch as s -> FontStretch.value s
+        | :? FontStyle as s -> FontStyle.value s
+        | :? FontWeight as w -> FontWeight.value w
+        | :? FontFace as f -> fontFaceValue f
+        | _ -> "Unknown font face"
+
+    let createFontFaceObject (fontFace: IFontFace list) =
+        [
+            "fontFamily" ==> "DroidSerif"
+            "src" ==> "url('https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf') format('truetype')"
+            "fontWeight" ==> "normal"
+            "fontStyle" ==> "normal"
+        ] |> createObj
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
 module FontFamily =
+    open FontFace
 
     type FontFamily =
         | Serif
@@ -137,10 +209,11 @@ module FontFamily =
 
     let private fontFamilyValue (v: FontFamily): string = 
         match v with
+            | Font f -> f
             | Custom c -> c
             | _ -> duToKebab v
 
-    let value (v: IFontFamily): string =
+    let value (v: IFontFamily) = //: string =
         match v with
             | :? Global as g -> Global.value g
             | :? FontFamily as f -> fontFamilyValue f
