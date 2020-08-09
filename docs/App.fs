@@ -38,7 +38,6 @@ open FlexBasis
 open Margin
 open FontSize
 open FontStyle
-open FontFace
 open FontFamily
 open BackgroundImage
 open RadialGradient
@@ -47,7 +46,6 @@ open BackgroundRepeat
 open LinearGradient
 open Selector
 open Functions
-open Fss.Types
 
 type Model = { 
     FlexDirection: FlexDirection
@@ -72,7 +70,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
     | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
-   (*
+   
 let ColorExamples =
     fragment []
         [
@@ -1384,26 +1382,57 @@ let SelectorExamples =
                         ]
                 ]
         ]
-        *)
+
+open FontFace
 
 
-let render (model: Model) (dispatch: Msg -> unit) =
-    let style =
-        fss
+let FontFaceExamples =
+    fontFace "DroidSerif"
+        [
+            Fss.FontFace.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Truetype)
+            FontWeight FontWeight.Bold
+            FontStyle FontStyle.Normal
+        ]
+
+    fontFace "DroidSerif"
+        [
+            Fss.FontFace.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Truetype)
+            FontWeight FontWeight.Normal
+            FontStyle FontStyle.Normal
+        ]
+
+    let p1 = 
+        fss 
             [
-                FontFace
-                    [
-                        Family "DroidSerif"
-                        Fss.FontFace.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", TrueType)
-                        FontWeight FontWeight.Normal
-                        FontStyle FontStyle.Normal
-                    ]
                 FontFamily (Font "DroidSerif")
             ]
 
+    let p2 = 
+        fss 
+            [
+                FontFamily (Font "DroidSerif")
+                CSSProperty.FontWeight FontWeight.Bold
+            ]
+
+    fragment []
+        [
+            h2 [] [ str "Font face examples" ]
+
+            p [ ClassName p1 ]
+                [
+                    str "Why..."
+                ]
+
+            p [ ClassName p2 ]
+                [
+                    str "Hello there"
+                ]
+        ]
+
+
+let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
-            (*
            ColorExamples
            FontExamples
            BorderExamples
@@ -1416,12 +1445,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
            BackgroundExamples model dispatch
            MediaQueryExamples
            SelectorExamples
-           *)
-
-           p [ ClassName style ]
-            [
-                str "Hello thar"
-            ]
+           FontFaceExamples
         ]
 
 Program.mkSimple init update render
