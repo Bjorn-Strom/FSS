@@ -214,6 +214,12 @@ let CssTests =
                 (fss [ LineHeight (em 3.0)]), ["line-height", "48px"]
                 (fss [ LineHeight (pct 150)]), ["line-height", "24px"]
                 (fss [ LineHeight (px 32)]), ["line-height", "32px"]
+
+                (fss [ FontFamily FontFamily.Serif]), ["font-family", "serif"]
+                (fss [ FontFamily FontFamily.SansSerif]), ["font-family", "sans-serif"]
+                (fss [ FontFamily FontFamily.Monospace]), ["font-family", "monospace"]
+                (fss [ FontFamily FontFamily.Cursive]), ["font-family", "cursive"]
+                (fss [ FontFamily (FontFamily.Custom "arial")]), ["font-family", "arial"]
             ]
 
         test "Border" 

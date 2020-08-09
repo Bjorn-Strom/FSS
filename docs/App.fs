@@ -1384,33 +1384,55 @@ let SelectorExamples =
         ]
 
 open FontFace
-
+open FontWeight
 
 let FontFaceExamples =
-    fontFace "DroidSerif"
-        [
-            Fss.FontFace.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Truetype)
-            FontWeight FontWeight.Bold
-            FontStyle FontStyle.Normal
-        ]
+    let droidSerif =
+        fontFace "DroidSerif"
+            [
+                Source (Url ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Truetype))
+                FontWeight Bold
+                FontStyle FontStyle.Normal
+            ] |> ignore
 
-    fontFace "DroidSerif"
-        [
-            Fss.FontFace.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Truetype)
-            FontWeight FontWeight.Normal
-            FontStyle FontStyle.Normal
-        ]
+        fontFace "DroidSerif"
+            [
+                Source (Url ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Truetype))
+                FontWeight Normal
+                FontStyle FontStyle.Normal
+            ]
+
+    let moderna =
+        fontFace "moderna"
+            [
+                Sources 
+                    [
+                         Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", Woff2)
+                         Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", Woff)
+                         Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", Truetype)
+                         Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", Svg)
+                    ]
+                FontWeight Normal
+                FontStyle FontStyle.Normal
+            ]
 
     let p1 = 
         fss 
             [
-                FontFamily (Font "DroidSerif")
+                FontFamily (Font droidSerif)
             ]
 
     let p2 = 
         fss 
             [
-                FontFamily (Font "DroidSerif")
+                FontFamily (Font droidSerif)
+                CSSProperty.FontWeight FontWeight.Bold
+            ]
+
+    let p3 = 
+        fss 
+            [
+                FontFamily (Font moderna)
                 CSSProperty.FontWeight FontWeight.Bold
             ]
 
@@ -1424,6 +1446,11 @@ let FontFaceExamples =
                 ]
 
             p [ ClassName p2 ]
+                [
+                    str "Hello there"
+                ]
+
+            p [ ClassName p3 ]
                 [
                     str "Hello there"
                 ]

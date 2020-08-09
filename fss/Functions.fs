@@ -16,5 +16,3 @@ module Functions =
     let (!~) (html: Html) (propertyList: CSSProperty list) = Selector (GeneralSibling html, propertyList)
     let (!>) (html: Html) (propertyList: CSSProperty list) = Selector (Child html, propertyList)
     let (! ) (html: Html) (propertyList: CSSProperty list) = Selector (Descendant html, propertyList)
-
-    //let FontFace (name: string) (properties: IFontFace list): FontFaceFoo = { FontFamily = name; Properties = properties}

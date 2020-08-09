@@ -159,23 +159,38 @@ module FontFace =
 
     let private formatValue (v: Format): string = duToKebab v
 
-    type FontFace =
+    type Source =
         | Url of string * Format
+        | Local of string
+
+    let private sourceValue (v: Source): string =
+        match v with
+            | Url (s, f) -> sprintf "url('%s') format('%s')" s (formatValue f)
+            | Local l -> sprintf "local('%s')" l
+
+    type FontFace =
+        | Source of Source
+        | Sources of Source list
         | FontStyle of FontStyle
         | FontDisplay of FontDisplay
         | FontStretch of FontStretch
         | FontWeight of FontWeight
         interface IFontFamily
 
+    type FontName = FontName of string
+
+    let fontName (FontName n) = n
+
     let createFontFaceObject (fontName: string) (attributeList: FontFace list) =
         let innerStyle =
             attributeList |> List.map (
                 function
-                    | Url         (s, f) -> "src"                      ==> (sprintf "url('%s') format('%s')" s (formatValue f))
-                    | FontStyle   f      -> Property.value fontStyle   ==> FontStyle.value f
-                    | FontDisplay f      -> Property.value fontDisplay ==> FontDisplay.value f
-                    | FontStretch f      -> Property.value fontStretch ==> FontStretch.value f
-                    | FontWeight  f      -> Property.value fontWeight  ==> FontWeight.value f)
+                    | Source      s -> "src"                      ==> sourceValue s
+                    | Sources     s -> "src"                      ==> combineComma s sourceValue
+                    | FontStyle   f -> Property.value fontStyle   ==> FontStyle.value f
+                    | FontDisplay f -> Property.value fontDisplay ==> FontDisplay.value f
+                    | FontStretch f -> Property.value fontStretch ==> FontStretch.value f
+                    | FontWeight  f -> Property.value fontWeight  ==> FontWeight.value f)
 
         createObj
             [
@@ -195,13 +210,13 @@ module FontFamily =
         | SansSerif
         | Monospace
         | Cursive
-        | Font of string
+        | Font of FontName
         | Custom of string
         interface IFontFamily
 
     let private fontFamilyValue (v: FontFamily): string = 
         match v with
-            | Font f -> f
+            | Font f -> fontName f
             | Custom c -> c
             | _ -> duToKebab v
 
