@@ -9,7 +9,6 @@ module Types =
     type IFontWeight           = interface end
     type ILineHeight           = interface end
     type IFontDisplay          = interface end
-    type IFontFace             = interface end
     type IFontFamily           = interface end
     type IColor                = interface end
     type IBorderStyle          = interface end

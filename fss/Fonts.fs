@@ -165,7 +165,6 @@ module FontFace =
         | FontDisplay of FontDisplay
         | FontStretch of FontStretch
         | FontWeight of FontWeight
-        interface IFontFace
         interface IFontFamily
 
     let createFontFaceObject (fontName: string) (attributeList: FontFace list) =
