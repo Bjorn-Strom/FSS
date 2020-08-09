@@ -112,6 +112,7 @@ module Property =
         | FontSize                   
         | FontStretch
         | FontStyle
+        | FontDisplay
         | FontSynthesis
         | FontVariant
         | FontVariantAlternates
@@ -380,6 +381,7 @@ module Property =
     let fontSize = FontSize                  
     let fontStretch = FontStretch
     let fontStyle = FontStyle
+    let fontDisplay = FontDisplay
     let fontSynthesis = FontSynthesis
     let fontVariant = FontVariant
     let fontVariantAlternates = FontVariantAlternates
