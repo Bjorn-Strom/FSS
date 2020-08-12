@@ -1473,6 +1473,19 @@ let render (model: Model) (dispatch: Msg -> unit) =
            MediaQueryExamples
            SelectorExamples
            FontFaceExamples
+
+           let style =
+                fss
+                    [
+                        Width (px 200)
+                        Height (px 100)
+                        TextAlign TextAlign.Right
+                    ]
+
+           div [ ClassName style ]
+                [
+                    str "I am to the right"
+                ]
         ]
 
 Program.mkSimple init update render

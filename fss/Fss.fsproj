@@ -13,6 +13,7 @@
     <Compile Include="Units.fs" />
     <Compile Include="Color.fs" />
     <Compile Include="Fonts.fs" />
+    <Compile Include="Text.fs" />
     <Compile Include="Border.fs" />
     <Compile Include="Transform.fs" />
     <Compile Include="Transition.fs" />

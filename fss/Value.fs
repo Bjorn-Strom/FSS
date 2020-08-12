@@ -12,7 +12,6 @@ open Selector
 open BackgroundImage
 open Padding
 open Media
-open FontFace
 
 module Value = 
     [<Import("css", from="emotion")>]
@@ -51,6 +50,8 @@ module Value =
         | LineHeight   of ILineHeight
         | FontFamily   of IFontFamily
         | FontFamilies of IFontFamily list
+
+        | TextAlign of ITextAlign
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -180,7 +181,9 @@ module Value =
                 | FontWeight   f     -> Property.value fontWeight      ==> FontWeight.value f
                 | LineHeight   l     -> Property.value lineHeight      ==> LineHeight.value l
                 | FontFamily   f     -> Property.value fontFamily      ==> FontFamily.value f
-                | FontFamilies fs    -> Property.value fontFamily      ==> combineWs fs FontFamily.value 
+                | FontFamilies fs    -> Property.value fontFamily      ==> combineWs fs FontFamily.value
+
+                | TextAlign t -> Property.value textAlign ==> TextAlign.value t
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs bss BorderStyle.value
