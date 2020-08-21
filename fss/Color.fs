@@ -7,7 +7,6 @@ module Color =
     type CssColor = 
         | CssColor of string
         interface IColor
-        interface IGlobal
         interface ILinearGradient
         interface IRadialGradient
 

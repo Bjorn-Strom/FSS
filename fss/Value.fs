@@ -54,6 +54,7 @@ module Value =
         | TextAlign           of ITextAlign
         | TextDecorationLine  of ITextDecorationLine
         | TextDecorationLines of ITextDecorationLine list
+        | TextDecorationColor of IColor
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -185,9 +186,10 @@ module Value =
                 | FontFamily   f     -> Property.value fontFamily      ==> FontFamily.value f
                 | FontFamilies fs    -> Property.value fontFamily      ==> combineWs fs FontFamily.value
 
-                | TextAlign t            -> Property.value textAlign ==> TextAlign.value t
-                | TextDecorationLine t   -> Property.value textDecorationLine ==> TextDecorationLine.value t
-                | TextDecorationLines ts -> Property.value textDecorationLine ==> combineWs ts TextDecorationLine.value
+                | TextAlign t            -> Property.value textAlign           ==> TextAlign.value t
+                | TextDecorationLine t   -> Property.value textDecorationLine  ==> TextDecorationLine.value t
+                | TextDecorationLines ts -> Property.value textDecorationLine  ==> combineWs ts TextDecorationLine.value
+                | TextDecorationColor t  -> Property.value textDecorationColor ==> Color.value t
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs bss BorderStyle.value

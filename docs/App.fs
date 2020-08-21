@@ -1478,6 +1478,13 @@ let TextExamples =
             div [ ClassName (fss [ TextDecorationLine Overline])] [str "Overline" ]
             div [ ClassName (fss [ TextDecorationLine LineThrough])] [str "Line-Through" ]
             div [ ClassName (fss [ TextDecorationLines [Underline; Overline; LineThrough] ])] [str "This one has all three" ]
+            
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLines [Underline; Overline; LineThrough]
+                        TextDecorationColor orangered
+                    ] 
+                )] [str "This one has all three and are red" ]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
