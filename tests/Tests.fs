@@ -805,6 +805,19 @@ let CssTests =
             Expect.equal (getValue p1 "color") "rgb(128, 0, 128)" "Composed selectors"
             Expect.equal (getValue p1 "font-size") "25px" "Composed selectors"
             RTL.cleanup()
+
+        test "Text" 
+            [
+                (fss [ TextAlign TextAlign.Left ]), ["text-align", "left"]
+                (fss [ TextAlign TextAlign.Right ]), ["text-align", "right"]
+                (fss [ TextAlign TextAlign.Center ]), ["text-align", "center"]
+                (fss [ TextAlign TextAlign.Justify ]), ["text-align", "justify"]
+                (fss [ TextAlign TextAlign.JustifyAll ]), ["text-align", "start"]
+                (fss [ TextAlign TextAlign.Start ]), ["text-align", "start"]
+                (fss [ TextAlign TextAlign.End ]), ["text-align", "end"]
+                (fss [ TextAlign TextAlign.MatchParent ]), ["text-align", "left"]
+            ]
+
     ]
 
 Mocha.runTests CssTests |> ignore
