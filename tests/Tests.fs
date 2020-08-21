@@ -47,6 +47,7 @@ open BackgroundOrigin
 open BackgroundClip
 open BackgroundAttachment
 open ContentSize
+open TextDecorationLine
 
 [<Emit("window.getComputedStyle(document.getElementById('$0'));")>]
 let getComputedCssById (id : string) : obj  = jsNative
@@ -806,7 +807,7 @@ let CssTests =
             Expect.equal (getValue p1 "font-size") "25px" "Composed selectors"
             RTL.cleanup()
 
-        test "Text" 
+        test "Text"
             [
                 (fss [ TextAlign TextAlign.Left ]), ["text-align", "left"]
                 (fss [ TextAlign TextAlign.Right ]), ["text-align", "right"]
@@ -816,13 +817,14 @@ let CssTests =
                 (fss [ TextAlign TextAlign.Start ]), ["text-align", "start"]
                 (fss [ TextAlign TextAlign.End ]), ["text-align", "end"]
                 (fss [ TextAlign TextAlign.MatchParent ]), ["text-align", "left"]
+
+                (fss [ TextDecorationLine Underline ]), ["text-decoration", "underline rgb(0, 0, 0)"]
+                (fss [ TextDecorationLine Overline ]), ["text-decoration", "overline rgb(0, 0, 0)"]
+                (fss [ TextDecorationLine LineThrough ]), ["text-decoration", "line-through rgb(0, 0, 0)"]
+                (fss [ TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(0, 0, 0)"]
             ]
 
     ]
 
 Mocha.runTests CssTests |> ignore
-
-
-
-
 

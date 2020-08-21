@@ -1456,25 +1456,12 @@ let FontFaceExamples =
                 ]
         ]
 
+open TextDecorationLine
 
-let render (model: Model) (dispatch: Msg -> unit) =
-    div [] 
-        [  
-           ColorExamples
-           FontExamples
-           BorderExamples
-           AnimationExamples
-           MarginExamples
-           PaddingExamples
-           TransformExamples
-           TransitionExamples
-           FlexBoxExamples model dispatch
-           BackgroundExamples model dispatch
-           MediaQueryExamples
-           SelectorExamples
-           FontFaceExamples
-
-           let style =
+let TextExamples =
+    fragment []
+        [
+            let style =
                 fss
                     [
                         Width (px 200)
@@ -1482,10 +1469,34 @@ let render (model: Model) (dispatch: Msg -> unit) =
                         TextAlign TextAlign.Right
                     ]
 
-           div [ ClassName style ]
+            div [ ClassName style ]
                 [
                     str "I am to the right"
                 ]
+
+            div [ ClassName (fss [ TextDecorationLine Underline])] [str "Underline" ]
+            div [ ClassName (fss [ TextDecorationLine Overline])] [str "Overline" ]
+            div [ ClassName (fss [ TextDecorationLine LineThrough])] [str "Line-Through" ]
+            div [ ClassName (fss [ TextDecorationLines [Underline; Overline; LineThrough] ])] [str "This one has all three" ]
+        ]
+
+let render (model: Model) (dispatch: Msg -> unit) =
+    div [] 
+        [  
+           // ColorExamples
+           // FontExamples
+           // BorderExamples
+           // AnimationExamples
+           // MarginExamples
+           // PaddingExamples
+           // TransformExamples
+           // TransitionExamples
+           // FlexBoxExamples model dispatch
+           // BackgroundExamples model dispatch
+           // MediaQueryExamples
+           // SelectorExamples
+           // FontFaceExamples
+            TextExamples
         ]
 
 Program.mkSimple init update render
