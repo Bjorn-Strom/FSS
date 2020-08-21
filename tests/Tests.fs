@@ -48,6 +48,7 @@ open BackgroundClip
 open BackgroundAttachment
 open ContentSize
 open TextDecorationLine
+open TextDecorationThickness
 
 [<Emit("window.getComputedStyle(document.getElementById('$0'));")>]
 let getComputedCssById (id : string) : obj  = jsNative
@@ -824,6 +825,11 @@ let CssTests =
                 (fss [ TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(0, 0, 0)"]
 
                 (fss [ TextDecorationColor orangered; TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(255, 69, 0)"]
+                
+                (fss [ TextDecorationThickness Auto  ]), ["text-decoration-thickness", "auto"]
+                (fss [ TextDecorationThickness FromFont  ]), ["text-decoration-thickness", "from-font"]
+                (fss [ TextDecorationThickness (pct 30)  ]), ["text-decoration-thickness", "30%"]
+                (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
             ]
 
     ]

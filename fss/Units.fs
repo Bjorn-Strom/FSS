@@ -18,6 +18,7 @@ module Percent =
         interface IBackgroundSize
         interface IContentSize
         interface ILineHeight
+        interface ITextDecorationThickness
 
     let value (Percent p): string = p
 
@@ -51,6 +52,7 @@ module Size =
         interface IBackgroundSize
         interface IContentSize
         interface ILineHeight
+        interface ITextDecorationThickness
 
     let value (u: Size) = 
         match u with 

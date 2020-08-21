@@ -2,7 +2,9 @@ namespace Fss
 
 open Types
 open Global
-open Fss.Utilities.Helpers
+open Units.Percent
+open Units.Size
+open Utilities.Helpers
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
 module TextAlign =
@@ -42,3 +44,18 @@ module TextDecorationLine =
             | :? Global             as g -> Global.value g 
             | :? TextDecorationLine as t -> textDecorationLineValue t
             | _                          -> "unknown text decoration line"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
+module TextDecorationThickness =
+    type TextDecorationThickness =
+        | Auto
+        | FromFont
+        interface ITextDecorationThickness
+
+    let value (v: ITextDecorationThickness): string = 
+        match v with
+            | :? Global                  as g -> Global.value g
+            | :? Percent                 as p -> Units.Percent.value p
+            | :? Size                    as s -> Units.Size.value s
+            | :? TextDecorationThickness as t -> duToKebab t
+            | _                               -> "unkown text decoration thickness"

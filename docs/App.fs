@@ -1457,6 +1457,7 @@ let FontFaceExamples =
         ]
 
 open TextDecorationLine
+open TextDecorationThickness
 
 let TextExamples =
     fragment []
@@ -1485,6 +1486,35 @@ let TextExamples =
                         TextDecorationColor orangered
                     ] 
                 )] [str "This one has all three and are red" ]
+
+
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLine Underline
+                        TextDecorationColor red
+                        TextDecorationThickness FromFont
+                    ])] [str "Thickness from font" ]
+
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLine Underline
+                        TextDecorationColor red
+                        TextDecorationThickness Auto
+                    ])] [str "Thickness from auto" ]
+
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLine Underline
+                        TextDecorationColor red
+                        TextDecorationThickness (pct 100)
+                    ])] [str "Thickness from percent" ]
+
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLine Underline
+                        TextDecorationColor red
+                        TextDecorationThickness (px 32)
+                    ])] [str "Thickness from pixels" ]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
