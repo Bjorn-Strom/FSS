@@ -59,3 +59,33 @@ module TextDecorationThickness =
             | :? Size                    as s -> Units.Size.value s
             | :? TextDecorationThickness as t -> duToKebab t
             | _                               -> "unkown text decoration thickness"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
+module TextDecorationStyle =
+    type TextDecorationStyle =
+        | Solid
+        | Double
+        | Dotted
+        | Dashed
+        | Wavy
+        interface ITextDecorationStyle
+
+    let value (v: ITextDecorationStyle): string =
+        match v with
+            | :? Global              as g -> Global.value g
+            | :? TextDecorationStyle as t -> duToLowercase t 
+            | _                           -> "unknown text decoration style"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
+module TextDecorationSkipInk =
+    type TextDecorationSkipInk =
+        | None
+        | Auto
+        | All
+        interface ITextDecorationSkipInk
+
+    let value (v: ITextDecorationSkipInk): string =
+        match v with
+            | :? Global                as g -> Global.value g
+            | :? TextDecorationSkipInk as t -> duToLowercase t 
+            | _                             -> "unknown text decoration skip ink"

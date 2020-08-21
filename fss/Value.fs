@@ -56,6 +56,8 @@ module Value =
         | TextDecorationLines     of ITextDecorationLine list
         | TextDecorationColor     of IColor
         | TextDecorationThickness of ITextDecorationThickness
+        | TextDecorationStyle     of ITextDecorationStyle
+        | TextDecorationSkipInk   of ITextDecorationSkipInk
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -179,19 +181,21 @@ module Value =
                 
                 | Hover h            -> hover |> Property.value |> toPsuedo ==> createCSSObject h
                 
-                | FontSize     f     -> Property.value fontSize        ==> FontSize.value f
-                | FontStyle    f     -> Property.value fontStyle       ==> FontStyle.value f
-                | FontStretch  f     -> Property.value fontStretch     ==> FontStretch.value f
-                | FontWeight   f     -> Property.value fontWeight      ==> FontWeight.value f
-                | LineHeight   l     -> Property.value lineHeight      ==> LineHeight.value l
-                | FontFamily   f     -> Property.value fontFamily      ==> FontFamily.value f
-                | FontFamilies fs    -> Property.value fontFamily      ==> combineWs fs FontFamily.value
+                | FontSize     f  -> Property.value fontSize    ==> FontSize.value f
+                | FontStyle    f  -> Property.value fontStyle   ==> FontStyle.value f
+                | FontStretch  f  -> Property.value fontStretch ==> FontStretch.value f
+                | FontWeight   f  -> Property.value fontWeight  ==> FontWeight.value f
+                | LineHeight   l  -> Property.value lineHeight  ==> LineHeight.value l
+                | FontFamily   f  -> Property.value fontFamily  ==> FontFamily.value f
+                | FontFamilies fs -> Property.value fontFamily  ==> combineWs fs FontFamily.value
 
-                | TextAlign t               -> Property.value textAlign               ==> TextAlign.value t
-                | TextDecorationLine t      -> Property.value textDecorationLine      ==> TextDecorationLine.value t
-                | TextDecorationLines ts    -> Property.value textDecorationLine      ==> combineWs ts TextDecorationLine.value
-                | TextDecorationColor t     -> Property.value textDecorationColor     ==> Color.value t
-                | TextDecorationThickness t -> Property.value textDecorationThickness ==> TextDecorationThickness.value t
+                | TextAlign               t  -> Property.value textAlign               ==> TextAlign.value t
+                | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextDecorationLine.value t
+                | TextDecorationLines     ts -> Property.value textDecorationLine      ==> combineWs ts TextDecorationLine.value
+                | TextDecorationColor     t  -> Property.value textDecorationColor     ==> Color.value t
+                | TextDecorationThickness t  -> Property.value textDecorationThickness ==> TextDecorationThickness.value t
+                | TextDecorationStyle     t  -> Property.value textDecorationStyle     ==> TextDecorationStyle.value t 
+                | TextDecorationSkipInk   t  -> Property.value textDecorationSkipInk   ==> TextDecorationSkipInk.value t 
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs bss BorderStyle.value

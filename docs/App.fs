@@ -1458,6 +1458,7 @@ let FontFaceExamples =
 
 open TextDecorationLine
 open TextDecorationThickness
+open TextDecorationStyle
 
 let TextExamples =
     fragment []
@@ -1513,8 +1514,14 @@ let TextExamples =
                     [ 
                         TextDecorationLine Underline
                         TextDecorationColor red
-                        TextDecorationThickness (px 32)
+                        TextDecorationThickness (px 1)
                     ])] [str "Thickness from pixels" ]
+
+            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Solid])] [str "Solid" ]
+            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Double])] [str "Double" ]
+            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Dotted])] [str "Dotted" ]
+            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Dashed])] [str "Dashed" ]
+            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Wavy])] [str "Wavy" ]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =

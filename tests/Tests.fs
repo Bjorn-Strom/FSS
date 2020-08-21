@@ -830,6 +830,18 @@ let CssTests =
                 (fss [ TextDecorationThickness FromFont  ]), ["text-decoration-thickness", "from-font"]
                 (fss [ TextDecorationThickness (pct 30)  ]), ["text-decoration-thickness", "30%"]
                 (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
+                
+                (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
+
+                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Solid]), ["text-decoration-style", "solid"]
+                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Double]), ["text-decoration-style", "double"]
+                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Dotted]), ["text-decoration-style", "dotted"]
+                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Dashed]), ["text-decoration-style", "dashed"]
+                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Wavy]), ["text-decoration-style", "wavy"]
+
+                (fss [ TextDecorationSkipInk TextDecorationSkipInk.All ]), ["text-decoration-skip-ink", "all"]
+                (fss [ TextDecorationSkipInk TextDecorationSkipInk.Auto ]), ["text-decoration-skip-ink", "auto"]
+                (fss [ TextDecorationSkipInk TextDecorationSkipInk.None ]), ["text-decoration-skip-ink", "none"]
             ]
 
     ]

@@ -228,7 +228,7 @@ module Property =
         | TextDecorationColor
         | TextDecorationLine
         | TextDecorationThickness
-        | TextDecorationSkip
+        | TextDecorationSkipInk
         | TextDecorationStyle
         | TextIndent
         | TextOverflow
@@ -498,7 +498,7 @@ module Property =
     let textDecorationColor = TextDecorationColor
     let textDecorationThickness = TextDecorationThickness
     let textDecorationLine = TextDecorationLine
-    let textDecorationSkip = TextDecorationSkip
+    let textDecorationSkipInk = TextDecorationSkipInk
     let textDecorationStyle = TextDecorationStyle
     let textIndent = TextIndent
     let textOverflow = TextOverflow
