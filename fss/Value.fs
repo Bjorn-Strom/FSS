@@ -58,6 +58,7 @@ module Value =
         | TextDecorationThickness of ITextDecorationThickness
         | TextDecorationStyle     of ITextDecorationStyle
         | TextDecorationSkipInk   of ITextDecorationSkipInk
+        | TextTransform           of ITextTransform
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -196,6 +197,7 @@ module Value =
                 | TextDecorationThickness t  -> Property.value textDecorationThickness ==> TextDecorationThickness.value t
                 | TextDecorationStyle     t  -> Property.value textDecorationStyle     ==> TextDecorationStyle.value t 
                 | TextDecorationSkipInk   t  -> Property.value textDecorationSkipInk   ==> TextDecorationSkipInk.value t 
+                | TextTransform           t  -> Property.value textTransform           ==> TextTransform.value t
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs bss BorderStyle.value

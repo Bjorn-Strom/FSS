@@ -46,6 +46,7 @@ open BackgroundRepeat
 open LinearGradient
 open Selector
 open Functions
+open TextTransform
 
 type Model = { 
     FlexDirection: FlexDirection
@@ -1522,6 +1523,13 @@ let TextExamples =
             div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Dotted])] [str "Dotted" ]
             div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Dashed])] [str "Dashed" ]
             div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Wavy])] [str "Wavy" ]
+
+            div [ ClassName (fss [ TextTransform Capitalize ])] [str "capitalize" ]
+            div [ ClassName (fss [ TextTransform Uppercase ])] [str "uppercase" ]
+            div [ ClassName (fss [ TextTransform Lowercase ])] [str "LOWERCASE" ]
+            div [ ClassName (fss [ TextTransform TextTransform.None ])] [str "NoNE" ]
+            div [ ClassName (fss [ TextTransform FullWidth ])] [str "FullWidth" ]
+            div [ ClassName (fss [ TextTransform FullSizeKana ])] [str "FullSizeKana" ]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =

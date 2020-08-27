@@ -49,6 +49,7 @@ open BackgroundAttachment
 open ContentSize
 open TextDecorationLine
 open TextDecorationThickness
+open TextTransform
 
 [<Emit("window.getComputedStyle(document.getElementById('$0'));")>]
 let getComputedCssById (id : string) : obj  = jsNative
@@ -842,6 +843,13 @@ let CssTests =
                 (fss [ TextDecorationSkipInk TextDecorationSkipInk.All ]), ["text-decoration-skip-ink", "all"]
                 (fss [ TextDecorationSkipInk TextDecorationSkipInk.Auto ]), ["text-decoration-skip-ink", "auto"]
                 (fss [ TextDecorationSkipInk TextDecorationSkipInk.None ]), ["text-decoration-skip-ink", "none"]
+
+                (fss [ TextTransform Capitalize ]), ["text-transform", "capitalize"]
+                (fss [ TextTransform Uppercase ]), ["text-transform", "uppercase"]
+                (fss [ TextTransform Lowercase ]), ["text-transform", "lowercase"]
+                (fss [ TextTransform TextTransform.None ]), ["text-transform", "none"]
+                (fss [ TextTransform FullWidth ]), ["text-transform", "none"]
+                (fss [ TextTransform FullSizeKana ]), ["text-transform", "none"]
             ]
 
     ]

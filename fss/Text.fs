@@ -89,3 +89,20 @@ module TextDecorationSkipInk =
             | :? Global                as g -> Global.value g
             | :? TextDecorationSkipInk as t -> duToLowercase t 
             | _                             -> "unknown text decoration skip ink"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
+module TextTransform =
+    type TextTransform =
+        | None
+        | Capitalize
+        | Uppercase
+        | Lowercase
+        | FullWidth
+        | FullSizeKana
+        interface ITextTransform
+
+    let value (v: ITextTransform): string =
+        match v with
+            | :? Global        as g -> Global.value g
+            | :? TextTransform as t -> duToLowercase t 
+            | _                     -> "unknown text transform"
