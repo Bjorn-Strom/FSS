@@ -1530,6 +1530,12 @@ let TextExamples =
             div [ ClassName (fss [ TextTransform TextTransform.None ])] [str "NoNE" ]
             div [ ClassName (fss [ TextTransform FullWidth ])] [str "FullWidth" ]
             div [ ClassName (fss [ TextTransform FullSizeKana ])] [str "FullSizeKana" ]
+
+            div [ ClassName (fss [ Width (px 200); TextIndent (px 10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
+            div [ ClassName (fss [ Width (px 200); TextIndent (pct 10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
+            div [ ClassName (fss [ Width (px 200); TextIndent (pct -10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
+            div [ ClassName (fss [ Width (px 200); TextIndents [pct 10; TextIndent.EachLine]])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
+            div [ ClassName (fss [ Width (px 200); TextIndents [pct 10; TextIndent.Hanging]])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =

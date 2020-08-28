@@ -106,3 +106,19 @@ module TextTransform =
             | :? Global        as g -> Global.value g
             | :? TextTransform as t -> duToLowercase t 
             | _                     -> "unknown text transform"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
+module TextIndent =
+    type TextIndent =
+        | Hanging
+        | EachLine
+        interface ITextIndent
+
+    let value (v: ITextIndent): string =
+        match v with 
+            | :? Global     as g -> Global.value g
+            | :? Percent    as p -> Units.Percent.value p
+            | :? Size       as s -> Units.Size.value s
+            | :? TextIndent as t -> duToKebab t 
+            | _                     -> "unknown text transform"
+    

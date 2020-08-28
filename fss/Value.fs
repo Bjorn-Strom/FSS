@@ -59,6 +59,8 @@ module Value =
         | TextDecorationStyle     of ITextDecorationStyle
         | TextDecorationSkipInk   of ITextDecorationSkipInk
         | TextTransform           of ITextTransform
+        | TextIndent              of ITextIndent
+        | TextIndents             of ITextIndent list
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -69,16 +71,16 @@ module Value =
         | BorderBottomWidth of IBorderWidth
         | BorderLeftWidth   of IBorderWidth
 
-        | BorderRadius              of Size
-        | BorderRadiuses            of Size list
-        | BorderTopLeftRadius       of Size
-        | BorderTopLeftRadiuses     of Size list
-        | BorderTopRightRadius      of Size
-        | BorderTopRightRadiuses    of Size list
-        | BorderBottomRightRadius   of Size
-        | BorderBottomRightRadiuses of Size list
-        | BorderBottomLeftRadius    of Size
-        | BorderBottomLeftRadiuses  of Size list
+        | BorderRadius              of ISize
+        | BorderRadiuses            of ISize list
+        | BorderTopLeftRadius       of ISize
+        | BorderTopLeftRadiuses     of ISize list
+        | BorderTopRightRadius      of ISize
+        | BorderTopRightRadiuses    of ISize list
+        | BorderBottomRightRadius   of ISize
+        | BorderBottomRightRadiuses of ISize list
+        | BorderBottomLeftRadius    of ISize
+        | BorderBottomLeftRadiuses  of ISize list
 
         | BorderColor       of IColor 
         | BorderColors      of IColor list
@@ -94,7 +96,7 @@ module Value =
         | MinHeight   of IContentSize
         | MaxHeight   of IContentSize
 
-        | Perspective of Size
+        | Perspective of ISize
 
         | Display        of IDisplay
         | FlexDirection  of IFlexDirection
@@ -180,7 +182,7 @@ module Value =
                 | BackgroundAttachment  b  -> Property.value backgroundAttachment ==> BackgroundAttachment.value b
                 | BackgroundAttachments bs -> Property.value backgroundAttachment ==> combineWs bs BackgroundAttachment.value
                 
-                | Hover h            -> hover |> Property.value |> toPsuedo ==> createCSSObject h
+                | Hover h -> hover |> Property.value |> toPsuedo ==> createCSSObject h
                 
                 | FontSize     f  -> Property.value fontSize    ==> FontSize.value f
                 | FontStyle    f  -> Property.value fontStyle   ==> FontStyle.value f
@@ -198,6 +200,8 @@ module Value =
                 | TextDecorationStyle     t  -> Property.value textDecorationStyle     ==> TextDecorationStyle.value t 
                 | TextDecorationSkipInk   t  -> Property.value textDecorationSkipInk   ==> TextDecorationSkipInk.value t 
                 | TextTransform           t  -> Property.value textTransform           ==> TextTransform.value t
+                | TextIndent              t  -> Property.value textIndent              ==> TextIndent.value t
+                | TextIndents             ts -> Property.value textIndent              ==> combineWs ts TextIndent.value
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs bss BorderStyle.value

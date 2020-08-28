@@ -19,6 +19,8 @@ module Percent =
         interface IContentSize
         interface ILineHeight
         interface ITextDecorationThickness
+        interface ITextIndent
+        interface ISize
 
     let value (Percent p): string = p
 
@@ -26,6 +28,7 @@ module Percent =
 
 // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
 module Size =
+    open Percent
     type Size =
         | Px of string
         | In of string
@@ -41,6 +44,7 @@ module Size =
         | Vh of string
         | VMax of string
         | Vmin of string
+        interface ISize
         interface IFontSize
         interface IBorderWidth
         interface IMargin
@@ -53,8 +57,9 @@ module Size =
         interface IContentSize
         interface ILineHeight
         interface ITextDecorationThickness
+        interface ITextIndent
 
-    let value (u: Size) = 
+    let private sizeValue (u: Size) = 
         match u with 
             | Px p -> p
             | In i -> i
@@ -70,6 +75,12 @@ module Size =
             | Vh v -> v
             | VMax v -> v
             | Vmin v -> v
+
+    let value (v: ISize): string =
+        match v with 
+            | :? Percent as p -> Percent.value p
+            | :? Size    as s -> sizeValue s
+            | _               -> "Unkown size"
 
     // Absolute
     let px (v: int): Size = sprintf "%dpx" v |> Px

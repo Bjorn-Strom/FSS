@@ -323,6 +323,14 @@ let CssTests =
                          "border-bottom-right-radius", "10px"
                      ]
 
+                (fss [ BorderRadius (pct 50)]), 
+                     [
+                         "border-top-left-radius", "50%"
+                         "border-top-right-radius", "50%"
+                         "border-bottom-left-radius", "50%"
+                         "border-bottom-right-radius", "50%"
+                     ]
+
                 (fss [ BorderTopLeftRadius (px 10)]), ["border-top-left-radius", "10px"]
                 (fss [ BorderTopRightRadius (px 10)]), ["border-top-right-radius", "10px"]
                 (fss [ BorderBottomLeftRadius (px 10)]), ["border-bottom-left-radius", "10px"]
@@ -850,6 +858,12 @@ let CssTests =
                 (fss [ TextTransform TextTransform.None ]), ["text-transform", "none"]
                 (fss [ TextTransform FullWidth ]), ["text-transform", "none"]
                 (fss [ TextTransform FullSizeKana ]), ["text-transform", "none"]
+
+                (fss [ TextIndent (px 10) ]), ["text-indent", "10px"]
+                (fss [ TextIndent (pct 100) ]), ["text-indent", "100%"]
+                // These are not supported?
+                // (fss [ TextIndents [px 10; (TextIndent.EachLine)] ]), ["text-indent", "each-line"]
+                // (fss [ TextIndents [px 10; (TextIndent.Hanging)] ]), ["text-indent", "hanging"]
             ]
 
     ]

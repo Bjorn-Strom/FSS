@@ -3,10 +3,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fss\Fss.fsproj" />
+    <Compile Include="App.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.fs" />
+    <ProjectReference Include="..\fss\Fss.fsproj" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
