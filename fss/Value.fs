@@ -6,7 +6,6 @@ open Fable.Core.JsInterop
 open Types
 open Utilities.Helpers
 open Property
-open Units.Size
 open Animation
 open Selector
 open BackgroundImage
