@@ -871,6 +871,10 @@ let CssTests =
                         px  -4, px 3, px 0, hex "#3a50d9"
                         px -14, px 7, px 0, hex "#0a0e27"
                     ]]), ["text-shadow", "rgb(58, 80, 217) -4px 3px 0px, rgb(10, 14, 39) -14px 7px 0px"]
+
+                (fss [ TextOverflow TextOverflow.Clip ]), ["text-overflow", "clip"]
+                (fss [ TextOverflow TextOverflow.Ellipsis ]), ["text-overflow", "ellipsis"]
+                (fss [ TextOverflow (TextOverflow.Custom "-") ]), ["text-overflow", "\"-\""]
             ]
 
     ]

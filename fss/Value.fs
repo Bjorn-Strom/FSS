@@ -11,6 +11,7 @@ open Selector
 open BackgroundImage
 open Padding
 open Media
+open TextOverflow
 
 module Value = 
     [<Import("css", from="emotion")>]
@@ -62,6 +63,7 @@ module Value =
         | TextIndents             of ITextIndent list
         | TextShadow              of ITextShadow
         | TextShadows             of ITextShadow list
+        | TextOverflow            of TextOverflow
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -205,6 +207,7 @@ module Value =
                 | TextIndents             ts -> Property.value textIndent              ==> combineWs ts TextIndent.value
                 | TextShadow              t  -> Property.value textShadow              ==> TextShadow.value t
                 | TextShadows             ts -> Property.value textShadow              ==> combineComma ts TextShadow.value
+                | TextOverflow            t  -> Property.value textOverflow            ==> TextOverflow.value t
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs bss BorderStyle.value

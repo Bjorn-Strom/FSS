@@ -120,7 +120,7 @@ module TextIndent =
             | :? Percent    as p -> Units.Percent.value p
             | :? Size       as s -> Units.Size.value s
             | :? TextIndent as t -> duToKebab t 
-            | _                     -> "unknown text transform"
+            | _                  -> "unknown text transform"
     
 // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
 // https://css-tricks.com/almanac/properties/t/text-shadow/
@@ -138,4 +138,16 @@ module TextShadow =
         | :? TextShadowType as t -> 
             let (s1, s2, s3, c) = getValue t
             sprintf "%s %s %s %s" (Units.Size.value s1) (Units.Size.value s2) (Units.Size.value s3) (Color.value c)
-        | _                  -> "Unknown text shadow"
+        | _                      -> "Unknown text shadow"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
+module TextOverflow =
+    type TextOverflow =
+        | Clip
+        | Ellipsis
+        | Custom of string
+
+    let value (v: TextOverflow): string =
+        match v with
+            | Custom s -> sprintf "\"%s\"" s
+            | _        -> duToLowercase v
