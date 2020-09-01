@@ -864,6 +864,13 @@ let CssTests =
                 // These are not supported?
                 // (fss [ TextIndents [px 10; (TextIndent.EachLine)] ]), ["text-indent", "each-line"]
                 // (fss [ TextIndents [px 10; (TextIndent.Hanging)] ]), ["text-indent", "hanging"]
+
+                (fss [ Functions.TextShadow (px 10) (px 5) (px 15) red ]), ["text-shadow", "rgb(255, 0, 0) 10px 5px 15px"]
+                (fss [ Functions.TextShadows 
+                    [
+                        px  -4, px 3, px 0, hex "#3a50d9"
+                        px -14, px 7, px 0, hex "#0a0e27"
+                    ]]), ["text-shadow", "rgb(58, 80, 217) -4px 3px 0px, rgb(10, 14, 39) -14px 7px 0px"]
             ]
 
     ]

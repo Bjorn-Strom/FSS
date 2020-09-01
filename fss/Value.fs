@@ -60,6 +60,8 @@ module Value =
         | TextTransform           of ITextTransform
         | TextIndent              of ITextIndent
         | TextIndents             of ITextIndent list
+        | TextShadow              of ITextShadow
+        | TextShadows             of ITextShadow list
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -201,6 +203,8 @@ module Value =
                 | TextTransform           t  -> Property.value textTransform           ==> TextTransform.value t
                 | TextIndent              t  -> Property.value textIndent              ==> TextIndent.value t
                 | TextIndents             ts -> Property.value textIndent              ==> combineWs ts TextIndent.value
+                | TextShadow              t  -> Property.value textShadow              ==> TextShadow.value t
+                | TextShadows             ts -> Property.value textShadow              ==> combineComma ts TextShadow.value
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs bss BorderStyle.value

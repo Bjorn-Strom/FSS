@@ -24,6 +24,7 @@ module Global =
         interface ITextDecorationSkipInk
         interface ITextTransform
         interface ITextIndent
+        interface ITextShadow
         interface IColor
         interface IBorderStyle
         interface IBorderWidth
