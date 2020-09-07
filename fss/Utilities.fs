@@ -16,7 +16,7 @@ module Helpers =
 
     let pascalToCamelCase (value: string): string = sprintf "%c%s" (Char.ToLower(value.[0])) value.[1..]
 
-    let inline duToString (x:'a) = 
+    let inline duToString (x:'a): string= 
         match FSharpValue.GetUnionFields(x, typeof<'a>) with
         | case, _ -> case.Name
 

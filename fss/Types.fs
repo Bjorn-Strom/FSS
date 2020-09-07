@@ -10,6 +10,7 @@ module Types =
     type ILineHeight              = interface end
     type IFontDisplay             = interface end
     type IFontFamily              = interface end
+    type IFontFeatureSetting      = interface end
     type ITextAlign               = interface end
     type ITextDecorationLine      = interface end
     type ITextDecorationThickness = interface end

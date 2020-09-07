@@ -17,6 +17,7 @@ module Global =
         interface IFontWeight
         interface ILineHeight
         interface IFontFamily
+        interface IFontFeatureSetting
         interface ITextAlign
         interface ITextDecorationLine
         interface ITextDecorationThickness

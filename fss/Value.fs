@@ -43,13 +43,15 @@ module Value =
 
         | Hover of CSSProperty list
 
-        | FontSize     of IFontSize
-        | FontStyle    of IFontStyle
-        | FontWeight   of IFontWeight
-        | FontStretch  of IFontStretch
-        | LineHeight   of ILineHeight
-        | FontFamily   of IFontFamily
-        | FontFamilies of IFontFamily list
+        | FontSize            of IFontSize
+        | FontStyle           of IFontStyle
+        | FontWeight          of IFontWeight
+        | FontStretch         of IFontStretch
+        | LineHeight          of ILineHeight
+        | FontFamily          of IFontFamily
+        | FontFamilies        of IFontFamily list
+        | FontFeatureSetting  of IFontFeatureSetting
+        | FontFeatureSettings of IFontFeatureSetting list
 
         | TextAlign               of ITextAlign
         | TextDecorationLine      of ITextDecorationLine
@@ -163,14 +165,14 @@ module Value =
         attributeList
         |> List.map (
             function
-                | Selector (s, ss)    -> Selector.value s            ==> createCSSObject ss
+                | Selector (s, ss)    -> Selector.value s ==> createCSSObject ss
 
                 | Media    (f, p)     -> sprintf "@media %s" <| Media.featureLabel f                         ==> createCSSObject p
                 | MediaFor (d, f, p)  -> sprintf "@media %s %s" (Media.deviceLabel d) (Media.featureLabel f) ==> createCSSObject p
 
-                | Label l            -> Property.value label           ==> l
+                | Label l            -> Property.value label ==> l
                 
-                | Color c            -> Property.value color           ==> Color.value c
+                | Color c            -> Property.value color ==> Color.value c
                 
                 | BackgroundColor       bc -> Property.value backgroundColor      ==> Color.value bc
                 | BackgroundImage       bi -> Property.value backgroundImage      ==> BackgroundImage.value bi
@@ -187,13 +189,15 @@ module Value =
                 
                 | Hover h -> hover |> Property.value |> toPsuedo ==> createCSSObject h
                 
-                | FontSize     f  -> Property.value fontSize    ==> FontSize.value f
-                | FontStyle    f  -> Property.value fontStyle   ==> FontStyle.value f
-                | FontStretch  f  -> Property.value fontStretch ==> FontStretch.value f
-                | FontWeight   f  -> Property.value fontWeight  ==> FontWeight.value f
-                | LineHeight   l  -> Property.value lineHeight  ==> LineHeight.value l
-                | FontFamily   f  -> Property.value fontFamily  ==> FontFamily.value f
-                | FontFamilies fs -> Property.value fontFamily  ==> combineWs fs FontFamily.value
+                | FontSize            f  -> Property.value fontSize            ==> FontSize.value f
+                | FontStyle           f  -> Property.value fontStyle           ==> FontStyle.value f
+                | FontStretch         f  -> Property.value fontStretch         ==> FontStretch.value f
+                | FontWeight          f  -> Property.value fontWeight          ==> FontWeight.value f
+                | LineHeight          l  -> Property.value lineHeight          ==> LineHeight.value l
+                | FontFamily          f  -> Property.value fontFamily          ==> FontFamily.value f
+                | FontFamilies        fs -> Property.value fontFamily          ==> combineWs fs FontFamily.value
+                | FontFeatureSetting  f  -> Property.value fontFeatureSettings ==> FontFeatureSetting.value f
+                | FontFeatureSettings fs -> Property.value fontFeatureSettings ==> combineComma fs FontFeatureSetting.value
 
                 | TextAlign               t  -> Property.value textAlign               ==> TextAlign.value t
                 | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextDecorationLine.value t

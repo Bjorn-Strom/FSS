@@ -1674,6 +1674,7 @@ let TextExamples =
 
         ]
 
+open FontFeatureSetting
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
@@ -1690,7 +1691,10 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // MediaQueryExamples
            // SelectorExamples
            // FontFaceExamples
-            TextExamples
+           // iTextExamples
+
+           div [ ClassName ( fss [ FontFeatureSetting (Liga On) ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ FontFeatureSetting (Liga Off) ] ) ] [ str "Foo" ]
         ]
 
 Program.mkSimple init update render
