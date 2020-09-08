@@ -277,6 +277,16 @@ let CssTests =
                 (fss [ FontFeatureSetting (FontFeatureSetting.Mkmk FontFeatureSetting.On) ]), ["font-feature-settings", "\"mkmk\""]
                 (fss [ FontFeatureSetting (FontFeatureSetting.Mkmk FontFeatureSetting.Off) ]), ["font-feature-settings", "\"mkmk\" 0"]
 
+                (fss [ FontFeatureSettings [
+                    FontFeatureSetting.Smcp FontFeatureSetting.On
+                    FontFeatureSetting.Onum FontFeatureSetting.On
+                ] ]), ["font-feature-settings", "\"smcp\", \"onum\""]
+
+                (fss [ FontFeatureSettings [
+                    FontFeatureSetting.Smcp FontFeatureSetting.Off
+                    FontFeatureSetting.Onum FontFeatureSetting.Off
+                ] ]), ["font-feature-settings", "\"smcp\" 0, \"onum\" 0"]
+
             ]
 
         test "Border" 

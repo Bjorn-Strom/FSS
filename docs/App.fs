@@ -1695,6 +1695,15 @@ let render (model: Model) (dispatch: Msg -> unit) =
 
            div [ ClassName ( fss [ FontFeatureSetting (Liga On) ] ) ] [ str "Foo" ]
            div [ ClassName ( fss [ FontFeatureSetting (Liga Off) ] ) ] [ str "Foo" ]
+
+           div [ ClassName ( fss
+           [
+                FontFeatureSettings
+                    [
+                        FontFeatureSetting.Smcp FontFeatureSetting.On
+                        FontFeatureSetting.Onum FontFeatureSetting.On
+                    ]
+           ])] [ str "Foo foo"]
         ]
 
 Program.mkSimple init update render
