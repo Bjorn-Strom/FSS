@@ -298,3 +298,23 @@ module FontFeatureSetting =
             | :? Global as g             -> Global.value g
             | :? FontFeatureSetting as f -> sprintf "%s" (fontFeatureSettingValue f)
             | _ -> "Unknown font feature setting"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
+module FontVariantNumeric =
+    type FontVariantNumeric =
+        | Normal
+        | Ordinal
+        | SlashedZero
+        | LiningNums
+        | OldstyleNums
+        | ProportionalNums
+        | TabularNums
+        | DiagonalFractions
+        | StackedFractions
+        interface IFontVariantNumeric
+
+    let value (v: IFontVariantNumeric): string =
+        match v with
+        | :? Global as g             -> Global.value g
+        | :? FontVariantNumeric as f -> duToKebab f
+        | _ -> "Unknown font variant numeric"

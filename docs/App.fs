@@ -1675,6 +1675,7 @@ let TextExamples =
         ]
 
 open FontFeatureSetting
+open FontVariantNumeric
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
@@ -1693,17 +1694,9 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // FontFaceExamples
            // iTextExamples
 
-           div [ ClassName ( fss [ FontFeatureSetting (Liga On) ] ) ] [ str "Foo" ]
-           div [ ClassName ( fss [ FontFeatureSetting (Liga Off) ] ) ] [ str "Foo" ]
-
-           div [ ClassName ( fss
-           [
-                FontFeatureSettings
-                    [
-                        FontFeatureSetting.Smcp FontFeatureSetting.On
-                        FontFeatureSetting.Onum FontFeatureSetting.On
-                    ]
-           ])] [ str "Foo foo"]
+           div [ ClassName ( fss [ FontVariantNumeric Ordinal ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ FontVariantNumeric Normal ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ FontVariantNumeric SlashedZero ] ) ] [ str "Foo" ]
         ]
 
 Program.mkSimple init update render

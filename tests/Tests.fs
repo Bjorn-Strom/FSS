@@ -287,6 +287,20 @@ let CssTests =
                     FontFeatureSetting.Onum FontFeatureSetting.Off
                 ] ]), ["font-feature-settings", "\"smcp\" 0, \"onum\" 0"]
 
+
+                (fss [ FontVariantNumeric FontVariantNumeric.Normal] ), ["font-variant-numeric", "normal"]
+                (fss [ FontVariantNumeric FontVariantNumeric.Ordinal] ), ["font-variant-numeric", "ordinal"]
+                (fss [ FontVariantNumeric FontVariantNumeric.SlashedZero] ), ["font-variant-numeric", "slashed-zero"]
+                (fss [ FontVariantNumeric FontVariantNumeric.LiningNums] ), ["font-variant-numeric", "lining-nums"]
+                (fss [ FontVariantNumeric FontVariantNumeric.OldstyleNums] ), ["font-variant-numeric", "oldstyle-nums"]
+                (fss [ FontVariantNumeric FontVariantNumeric.TabularNums] ), ["font-variant-numeric", "tabular-nums"]
+                (fss [ FontVariantNumeric FontVariantNumeric.DiagonalFractions] ), ["font-variant-numeric", "diagonal-fractions"]
+                (fss [ FontVariantNumeric FontVariantNumeric.StackedFractions] ), ["font-variant-numeric", "stacked-fractions"]
+                (fss [ FontVariantNumerics 
+                    [
+                        FontVariantNumeric.OldstyleNums
+                        FontVariantNumeric.StackedFractions
+                    ]] ), ["font-variant-numeric", "oldstyle-nums stacked-fractions"]
             ]
 
         test "Border" 

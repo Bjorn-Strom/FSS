@@ -11,6 +11,7 @@ module Types =
     type IFontDisplay             = interface end
     type IFontFamily              = interface end
     type IFontFeatureSetting      = interface end
+    type IFontVariantNumeric      = interface end
     type ITextAlign               = interface end
     type ITextDecorationLine      = interface end
     type ITextDecorationThickness = interface end
