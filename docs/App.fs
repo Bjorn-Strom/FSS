@@ -1674,8 +1674,8 @@ let TextExamples =
 
         ]
 
-open FontFeatureSetting
 open FontVariantNumeric
+open FontFeatureSetting
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
@@ -1694,7 +1694,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // FontFaceExamples
            // iTextExamples
 
-           div [ ClassName ( fss [ FontVariantNumeric Ordinal ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ FontFeatureSetting (Ss(20, On)) ] ) ] [ str "Foo" ]
            div [ ClassName ( fss [ FontVariantNumeric Normal ] ) ] [ str "Foo" ]
            div [ ClassName ( fss [ FontVariantNumeric SlashedZero ] ) ] [ str "Foo" ]
         ]

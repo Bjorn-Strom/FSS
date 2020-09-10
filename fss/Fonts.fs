@@ -249,7 +249,7 @@ module FontFeatureSetting =
         | Calt of SettingSwitch
         | Swsh of SettingSwitch
         | Hist of SettingSwitch
-        | Ssss of SettingSwitch
+        | Ss   of int * SettingSwitch
         | Kern of SettingSwitch
         | Locl of SettingSwitch
         | Rlig of SettingSwitch
@@ -277,12 +277,12 @@ module FontFeatureSetting =
         | Subs switch -> stringify "subs" switch 
         | Smcp switch -> stringify "smcp" switch 
         | C2sc switch -> stringify "c2sc" switch 
-        | Case switch -> stringify "case" switch 
+        | Case switch -> stringify "case" switch
         | Hlig switch -> stringify "hlig" switch 
         | Calt switch -> stringify "calt" switch 
         | Swsh switch -> stringify "swsh" switch 
         | Hist switch -> stringify "hist" switch 
-        | Ssss switch -> stringify "ss**" switch 
+        | Ss   (variant, switch) -> stringify (sprintf "ss%02i" variant) switch
         | Kern switch -> stringify "kern" switch 
         | Locl switch -> stringify "locl" switch 
         | Rlig switch -> stringify "rlig" switch 
