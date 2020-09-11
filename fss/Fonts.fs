@@ -336,3 +336,24 @@ module FontVariantCaps =
         | :? Global          as g -> Global.value g
         | :? FontVariantCaps as f -> duToKebab f
         | _ -> "Unknown font variant caps"
+
+
+module FontVariantEastAsian  =
+    type FontVariantEastAsian =
+        | Normal
+        | Ruby
+        | Jis78
+        | Jis83
+        | Jis90
+        | Jis04
+        | Simplified
+        | Traditional
+        | FullWidth
+        | ProportionalWidth
+        interface IFontVariantEastAsian
+
+    let value (v: IFontVariantEastAsian): string =
+        match v with
+        | :? Global               as g -> Global.value g
+        | :? FontVariantEastAsian as f -> duToKebab f
+        | _ -> "Unknown font variant east asian"

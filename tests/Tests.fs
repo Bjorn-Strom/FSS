@@ -309,6 +309,23 @@ let CssTests =
                 (fss [ FontVariantCaps FontVariantCaps.AllPetiteCaps] ), ["font-variant-caps", "all-petite-caps"]
                 (fss [ FontVariantCaps FontVariantCaps.Unicase] ), ["font-variant-caps", "unicase"]
                 (fss [ FontVariantCaps FontVariantCaps.TitlingCaps] ), ["font-variant-caps", "titling-caps"]
+
+                (fss [ FontVariantEastAsian FontVariantEastAsian.Normal]), ["font-variant-east-asian", "normal"]
+                (fss [ FontVariantEastAsian FontVariantEastAsian.Ruby]), ["font-variant-east-asian", "ruby"]
+                (fss [ FontVariantEastAsian FontVariantEastAsian.Jis78]), ["font-variant-east-asian", "jis78"]
+                (fss [ FontVariantEastAsian FontVariantEastAsian.Jis83]), ["font-variant-east-asian", "jis83"]
+                (fss [ FontVariantEastAsian FontVariantEastAsian.Jis90]), ["font-variant-east-asian", "jis90"]
+                (fss [ FontVariantEastAsian FontVariantEastAsian.Jis04]), ["font-variant-east-asian", "jis04"]
+                (fss [ FontVariantEastAsian FontVariantEastAsian.Simplified]), ["font-variant-east-asian", "simplified"]
+                (fss [ FontVariantEastAsian FontVariantEastAsian.Traditional]), ["font-variant-east-asian", "traditional"]
+                (fss [ FontVariantEastAsian FontVariantEastAsian.FullWidth]), ["font-variant-east-asian", "full-width"]
+                (fss [ FontVariantEastAsian FontVariantEastAsian.ProportionalWidth]), ["font-variant-east-asian", "proportional-width"]
+                (fss [ FontVariantEastAsians 
+		            [ 
+                        FontVariantEastAsian.Ruby
+                        FontVariantEastAsian.FullWidth
+                        FontVariantEastAsian.Jis83
+                    ]]), ["font-variant-east-asian", "jis83 full-width ruby"]
             ]
 
         test "Border" 
