@@ -54,6 +54,7 @@ module Value =
         | FontFeatureSettings of IFontFeatureSetting list
         | FontVariantNumeric  of IFontVariantNumeric
         | FontVariantNumerics of IFontVariantNumeric list
+        | FontVariantCaps     of IFontVariantCaps
 
         | TextAlign               of ITextAlign
         | TextDecorationLine      of ITextDecorationLine
@@ -202,6 +203,7 @@ module Value =
                 | FontFeatureSettings fs -> Property.value fontFeatureSettings ==> combineComma fs FontFeatureSetting.value
                 | FontVariantNumeric  f  -> Property.value fontVariantNumeric  ==> FontVariantNumeric.value f
                 | FontVariantNumerics fs -> Property.value fontVariantNumeric  ==> combineWs fs FontVariantNumeric.value
+                | FontVariantCaps     f  -> Property.value fontVariantCaps     ==> FontVariantCaps.value f
 
                 | TextAlign               t  -> Property.value textAlign               ==> TextAlign.value t
                 | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextDecorationLine.value t

@@ -322,15 +322,17 @@ module FontVariantNumeric =
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
 module FontVariantCaps =
     type FontVariantCaps =
-    | Normal
-    | SmallCaps
-    | AllSmallCaps;
-    font-variant-caps: petite-caps;
-    font-variant-caps: all-petite-caps;
-    font-variant-caps: unicase;
-    font-variant-caps: titling-caps;
-    
-    /* Global values */
-    font-variant-caps: inherit;
-    font-variant-caps: initial;
-    font-variant-caps: unset;
+        | Normal
+        | SmallCaps
+        | AllSmallCaps
+        | PetiteCaps
+        | AllPetiteCaps
+        | Unicase
+        | TitlingCaps
+        interface IFontVariantCaps
+
+    let value (v: IFontVariantCaps): string =
+        match v with
+        | :? Global          as g -> Global.value g
+        | :? FontVariantCaps as f -> duToKebab f
+        | _ -> "Unknown font variant caps"

@@ -301,6 +301,14 @@ let CssTests =
                         FontVariantNumeric.OldstyleNums
                         FontVariantNumeric.StackedFractions
                     ]] ), ["font-variant-numeric", "oldstyle-nums stacked-fractions"]
+
+                (fss [ FontVariantCaps FontVariantCaps.Normal] ), ["font-variant-caps", "normal"]
+                (fss [ FontVariantCaps FontVariantCaps.SmallCaps] ), ["font-variant-caps", "small-caps"]
+                (fss [ FontVariantCaps FontVariantCaps.AllSmallCaps] ), ["font-variant-caps", "all-small-caps"]
+                (fss [ FontVariantCaps FontVariantCaps.PetiteCaps] ), ["font-variant-caps", "petite-caps"]
+                (fss [ FontVariantCaps FontVariantCaps.AllPetiteCaps] ), ["font-variant-caps", "all-petite-caps"]
+                (fss [ FontVariantCaps FontVariantCaps.Unicase] ), ["font-variant-caps", "unicase"]
+                (fss [ FontVariantCaps FontVariantCaps.TitlingCaps] ), ["font-variant-caps", "titling-caps"]
             ]
 
         test "Border" 
