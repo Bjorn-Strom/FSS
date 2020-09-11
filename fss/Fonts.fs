@@ -318,3 +318,19 @@ module FontVariantNumeric =
         | :? Global as g             -> Global.value g
         | :? FontVariantNumeric as f -> duToKebab f
         | _ -> "Unknown font variant numeric"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
+module FontVariantCaps =
+    type FontVariantCaps =
+    | Normal
+    | SmallCaps
+    | AllSmallCaps;
+    font-variant-caps: petite-caps;
+    font-variant-caps: all-petite-caps;
+    font-variant-caps: unicase;
+    font-variant-caps: titling-caps;
+    
+    /* Global values */
+    font-variant-caps: inherit;
+    font-variant-caps: initial;
+    font-variant-caps: unset;
