@@ -571,6 +571,17 @@ let CssTests =
 
                 (fss [ FlexShrink (Shrink 1) ]), ["flex-shrink", "1"]
 
+                (fss [ VerticalAlign (VerticalAlign.Baseline)]), ["vertical-align", "baseline"]
+                (fss [ VerticalAlign (VerticalAlign.Sub)]), ["vertical-align", "sub"]
+                (fss [ VerticalAlign (VerticalAlign.Super)]), ["vertical-align", "super"]
+                (fss [ VerticalAlign (VerticalAlign.TextTop)]), ["vertical-align", "text-top"]
+                (fss [ VerticalAlign (VerticalAlign.TextBottom)]), ["vertical-align", "text-bottom"]
+                (fss [ VerticalAlign (VerticalAlign.Middle)]), ["vertical-align", "middle"]
+                (fss [ VerticalAlign (VerticalAlign.Top)]), ["vertical-align", "top"]
+                (fss [ VerticalAlign (VerticalAlign.Bottom)]), ["vertical-align", "bottom"]
+                (fss [ VerticalAlign (px 10)]), ["vertical-align", "10px"]
+                (fss [ VerticalAlign (pct 100)]), ["vertical-align", "100%"]
+
             ]
 
         test "Margin"

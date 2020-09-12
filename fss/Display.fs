@@ -219,3 +219,26 @@ module FlexBasis =
             | :? Percent as p -> Units.Percent.value p
             | _ -> "Unknown flex basis"
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
+module VerticalAlign =
+    open Fss.Units.Percent
+    open Fss.Units.Size
+
+    type VerticalAlign =
+        | Baseline
+        | Sub
+        | Super
+        | TextTop
+        | TextBottom
+        | Middle
+        | Top
+        | Bottom
+        interface IVerticalAlign
+
+    let value (v: IVerticalAlign): string =
+        match v with
+            | :? Global        as g -> Global.value g
+            | :? Percent       as p -> Units.Percent.value p
+            | :? Size          as s -> Units.Size.value s
+            | :? VerticalAlign as v -> duToKebab v
+            | _ -> "Unknown margin size"

@@ -39,6 +39,7 @@ module Types =
     type IFlexGrow                = interface end
     type IFlexShrink              = interface end
     type IFlexBasis               = interface end
+    type IVerticalAlign           = interface end
     type ITransform               = interface end
     type ITransformOrigin         = interface end
     type ITransition              = interface end

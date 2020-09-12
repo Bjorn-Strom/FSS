@@ -46,6 +46,7 @@ module Global =
         interface IFlexGrow
         interface IFlexShrink
         interface IFlexBasis
+        interface IVerticalAlign
         interface ITransform
         interface ITransformOrigin
         interface ITransition

@@ -12,6 +12,7 @@ module Percent =
         interface IMargin
         interface IPadding
         interface IFlexBasis
+        interface IVerticalAlign
         interface ILinearGradient
         interface IRadialGradient
         interface IBackgroundPosition
@@ -51,6 +52,7 @@ module Size =
         interface IMargin
         interface IPadding
         interface IFlexBasis
+        interface IVerticalAlign
         interface ILinearGradient
         interface IRadialGradient
         interface IBackgroundPosition
