@@ -13,6 +13,7 @@ open Padding
 open Media
 open TextOverflow
 open Opacity
+open Position
 
 module Value = 
     [<Import("css", from="emotion")>]
@@ -124,6 +125,7 @@ module Value =
         | VerticalAlign  of IVerticalAlign
         | Visibility     of IVisibility
         | Opacity        of Opacity
+        | Position       of Position
 
         | MarginTop    of IMargin
         | MarginRight  of IMargin
@@ -281,6 +283,7 @@ module Value =
                 | VerticalAlign  v -> Property.value verticalAlign  ==> VerticalAlign.value v
                 | Visibility     v -> Property.value visibility     ==> Visibility.value v
                 | Opacity        o -> Property.value opacity        ==> Opacity.value o
+                | Position       p -> Property.value position       ==> Position.value p
 
                 | MarginTop    m  -> Property.value marginTop    ==> Margin.value m
                 | MarginRight  m  -> Property.value marginRight  ==> Margin.value m

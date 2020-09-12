@@ -248,3 +248,13 @@ module Opacity =
         |> clamp 0.0 1.0
         |> string
         
+// https://developer.mozilla.org/en-US/docs/Web/CSS/position
+module Position =
+    type Position =
+        | Static
+        | Relative
+        | Absolute
+        | Sticky
+        | Fixed
+
+    let value (v: Position) = duToString v

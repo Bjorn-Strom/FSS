@@ -609,6 +609,12 @@ let CssTests =
                 (fss [ Opacity (Opacity.Opacity 10.0)]), ["opacity", "1"]
                 (fss [ Opacity (Opacity.Opacity 1.5)]), ["opacity", "1"]
 
+                (fss [ Position Position.Static]), ["position", "static"]
+                (fss [ Position Position.Relative]), ["position", "relative"]
+                (fss [ Position Position.Absolute]), ["position", "absolute"]
+                (fss [ Position Position.Sticky]), ["position", "sticky"]
+                (fss [ Position Position.Fixed]), ["position", "fixed"]
+
             ]
 
         test "Margin"
