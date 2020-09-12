@@ -321,11 +321,22 @@ let CssTests =
                 (fss [ FontVariantEastAsian FontVariantEastAsian.FullWidth]), ["font-variant-east-asian", "full-width"]
                 (fss [ FontVariantEastAsian FontVariantEastAsian.ProportionalWidth]), ["font-variant-east-asian", "proportional-width"]
                 (fss [ FontVariantEastAsians 
-		            [ 
+                    [ 
                         FontVariantEastAsian.Ruby
                         FontVariantEastAsian.FullWidth
                         FontVariantEastAsian.Jis83
                     ]]), ["font-variant-east-asian", "jis83 full-width ruby"]
+
+                (fss [ FontVariantLigatures FontVariantLigatures.Normal]), ["font-variant-ligatures", "normal"]
+                (fss [ FontVariantLigatures FontVariantLigatures.None]), ["font-variant-ligatures", "none"]
+                (fss [ FontVariantLigatures FontVariantLigatures.CommonLigatures]), ["font-variant-ligatures", "common-ligatures"]
+                (fss [ FontVariantLigatures FontVariantLigatures.NoCommonLigatures]), ["font-variant-ligatures", "no-common-ligatures"]
+                (fss [ FontVariantLigatures FontVariantLigatures.DiscretionaryLigatures]), ["font-variant-ligatures", "discretionary-ligatures"]
+                (fss [ FontVariantLigatures FontVariantLigatures.NoDiscretionaryLigatures]), ["font-variant-ligatures", "no-discretionary-ligatures"]
+                (fss [ FontVariantLigatures FontVariantLigatures.HistoricalLigatures]), ["font-variant-ligatures", "historical-ligatures"]
+                (fss [ FontVariantLigatures FontVariantLigatures.NoHistoricalLigatures]), ["font-variant-ligatures", "no-historical-ligatures"]
+                (fss [ FontVariantLigatures FontVariantLigatures.Contextual]), ["font-variant-ligatures", "contextual"]
+                (fss [ FontVariantLigatures FontVariantLigatures.NoContextual]), ["font-variant-ligatures", "no-contextual"]
             ]
 
         test "Border" 

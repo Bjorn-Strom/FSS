@@ -14,6 +14,7 @@ module Types =
     type IFontVariantNumeric      = interface end
     type IFontVariantCaps         = interface end
     type IFontVariantEastAsian    = interface end
+    type IFontVariantLigatures    = interface end
     type ITextAlign               = interface end
     type ITextDecorationLine      = interface end
     type ITextDecorationThickness = interface end

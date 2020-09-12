@@ -57,6 +57,7 @@ module Value =
         | FontVariantCaps       of IFontVariantCaps
         | FontVariantEastAsian  of IFontVariantEastAsian
         | FontVariantEastAsians of IFontVariantEastAsian list
+        | FontVariantLigatures  of IFontVariantLigatures
 
         | TextAlign               of ITextAlign
         | TextDecorationLine      of ITextDecorationLine
@@ -208,6 +209,7 @@ module Value =
                 | FontVariantCaps       f  -> Property.value fontVariantCaps      ==> FontVariantCaps.value f
                 | FontVariantEastAsian  f  -> Property.value fontVariantEastAsian ==> FontVariantEastAsian.value f
                 | FontVariantEastAsians fs -> Property.value fontVariantEastAsian ==> combineWs fs FontVariantEastAsian.value
+                | FontVariantLigatures  f  -> Property.value fontVariantLigatures ==> FontVariantLigatures.value f
 
                 | TextAlign               t  -> Property.value textAlign               ==> TextAlign.value t
                 | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextDecorationLine.value t

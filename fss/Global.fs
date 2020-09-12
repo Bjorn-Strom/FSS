@@ -21,6 +21,7 @@ module Global =
         interface IFontVariantNumeric
         interface IFontVariantCaps
         interface IFontVariantEastAsian
+        interface IFontVariantLigatures
         interface ITextAlign
         interface ITextDecorationLine
         interface ITextDecorationThickness

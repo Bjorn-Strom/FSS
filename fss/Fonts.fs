@@ -337,7 +337,7 @@ module FontVariantCaps =
         | :? FontVariantCaps as f -> duToKebab f
         | _ -> "Unknown font variant caps"
 
-
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
 module FontVariantEastAsian  =
     type FontVariantEastAsian =
         | Normal
@@ -357,3 +357,24 @@ module FontVariantEastAsian  =
         | :? Global               as g -> Global.value g
         | :? FontVariantEastAsian as f -> duToKebab f
         | _ -> "Unknown font variant east asian"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
+module FontVariantLigatures =
+    type FontVariantLigatures = 
+        | Normal
+        | None
+        | CommonLigatures
+        | NoCommonLigatures
+        | DiscretionaryLigatures
+        | NoDiscretionaryLigatures
+        | HistoricalLigatures
+        | NoHistoricalLigatures
+        | Contextual
+        | NoContextual
+        interface IFontVariantLigatures
+
+    let value (v: IFontVariantLigatures): string =
+        match v with
+        | :? Global               as g -> Global.value g
+        | :? FontVariantLigatures as f -> duToKebab f
+        | _ -> "Unknown font variant ligatures"
