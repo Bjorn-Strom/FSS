@@ -47,6 +47,7 @@ module Global =
         interface IFlexShrink
         interface IFlexBasis
         interface ITransform
+        interface ITransformOrigin
         interface ITransition
         interface IBackgroundPosition
         interface IBackgroundOrigin

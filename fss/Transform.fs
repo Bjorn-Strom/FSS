@@ -74,3 +74,23 @@ module Transform =
             | :? Angle as a -> Units.Angle.value a
             | _ -> "Unknown margin size"
  
+ // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
+ module TransformOrigin =
+    open Fss.Units.Percent
+    open Fss.Utilities.Helpers
+
+    type TransformOrigin =
+        | Top
+        | Left
+        | Right
+        | Bottom
+        | Center
+        interface ITransformOrigin
+
+    let value (v: ITransformOrigin): string =
+        match v with
+            | :? Global          as g -> Global.value g
+            | :? Percent         as p -> Units.Percent.value p
+            | :? Size            as s -> Units.Size.value s
+            | :? TransformOrigin as t -> duToString t
+            | _ -> "Unknown margin size"

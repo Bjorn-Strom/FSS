@@ -40,6 +40,7 @@ module Types =
     type IFlexShrink              = interface end
     type IFlexBasis               = interface end
     type ITransform               = interface end
+    type ITransformOrigin         = interface end
     type ITransition              = interface end
     type ILinearGradient          = interface end
     type IRadialGradient          = interface end

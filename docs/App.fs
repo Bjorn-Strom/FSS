@@ -537,6 +537,38 @@ let TransformExamples =
                             Transform Inherit
                         ])
             ] []
+
+            let spinningAnimation =
+                keyframes 
+                    [
+                        frame 0 [ Transform(Rotate (deg 360.0)) ]
+                        frame 100 [ Transform(Rotate (deg 0.0)) ]
+                    ]
+
+            let spinningCube =
+                fss
+                    [
+                        Width (px 100)
+                        Height (px 100)
+                        BackgroundColor orangered
+                        AnimationName spinningAnimation
+                        AnimationDuration (sec 2.0)
+                        AnimationIterationCount Infinite
+                        AnimationTimingFunction Linear
+                        
+                    ]
+
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Top; TransformOrigin.Center ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Top; TransformOrigin.Right ] ]) )] []
+
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Center; TransformOrigin.Left ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Center; TransformOrigin.Center ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Center; TransformOrigin.Right ] ]) )] []
+
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Bottom; TransformOrigin.Left ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Bottom; TransformOrigin.Center ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Bottom; TransformOrigin.Right ] ]) )] []
         ]
 
 let TransitionExamples =   

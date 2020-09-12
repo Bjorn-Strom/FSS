@@ -21,6 +21,7 @@ module Percent =
         interface ITextDecorationThickness
         interface ITextIndent
         interface ISize
+        interface ITransformOrigin
 
     let value (Percent p): string = p
 
@@ -58,6 +59,7 @@ module Size =
         interface ILineHeight
         interface ITextDecorationThickness
         interface ITextIndent
+        interface ITransformOrigin
 
     let private sizeValue (u: Size) = 
         match u with 
