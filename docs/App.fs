@@ -1726,9 +1726,12 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // FontFaceExamples
            // iTextExamples
 
-           div [ ClassName ( fss [ FontFeatureSetting (Ss(20, On)) ] ) ] [ str "Foo" ]
-           div [ ClassName ( fss [ FontVariantNumeric Normal ] ) ] [ str "Foo" ]
-           div [ ClassName ( fss [ FontVariantNumeric SlashedZero ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ Opacity (Opacity.Opacity 1.0); BackgroundColor red; FontFeatureSetting (Ss(20, On)) ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ Opacity (Opacity.Opacity 0.0); BackgroundColor red; FontVariantNumeric Normal ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ Opacity (Opacity.Opacity 0.5); BackgroundColor red; FontVariantNumeric SlashedZero ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ Opacity (Opacity.Opacity 10.0); BackgroundColor red; FontFeatureSetting (Ss(20, On)) ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ Opacity (Opacity.Opacity -10.0); BackgroundColor red; FontVariantNumeric Normal ] ) ] [ str "Foo" ]
+           div [ ClassName ( fss [ Opacity (Opacity.Opacity 100.5); BackgroundColor red; FontVariantNumeric SlashedZero ] ) ] [ str "Foo" ]
         ]
 
 Program.mkSimple init update render

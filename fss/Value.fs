@@ -12,6 +12,7 @@ open BackgroundImage
 open Padding
 open Media
 open TextOverflow
+open Opacity
 
 module Value = 
     [<Import("css", from="emotion")>]
@@ -122,6 +123,7 @@ module Value =
         | AlignSelf      of IAlignSelf
         | VerticalAlign  of IVerticalAlign
         | Visibility     of IVisibility
+        | Opacity        of Opacity
 
         | MarginTop    of IMargin
         | MarginRight  of IMargin
@@ -278,6 +280,7 @@ module Value =
                 | AlignSelf      a -> Property.value alignSelf      ==> AlignSelf.value a
                 | VerticalAlign  v -> Property.value verticalAlign  ==> VerticalAlign.value v
                 | Visibility     v -> Property.value visibility     ==> Visibility.value v
+                | Opacity        o -> Property.value opacity        ==> Opacity.value o
 
                 | MarginTop    m  -> Property.value marginTop    ==> Margin.value m
                 | MarginRight  m  -> Property.value marginRight  ==> Margin.value m

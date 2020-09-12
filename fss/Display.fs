@@ -239,3 +239,12 @@ module Visibility =
             | :? Global     as g -> Global.value g
             | :? Visibility as v -> duToString v
             | _ -> "Unknown margin size"
+
+module Opacity =
+    type Opacity = Opacity of float
+
+    let value (Opacity v): string =
+        v
+        |> clamp 0.0 1.0
+        |> string
+        

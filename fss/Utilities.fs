@@ -41,6 +41,13 @@ module Helpers =
     let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
     let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
 
+    let clamp min max value = 
+        if value > max then 
+            max
+        else if value < min then
+            min
+        else
+            value
 
 module Converters =
     let floatToPercent (f: float): string = sprintf "%d%%" (int <| f * 100.0)

@@ -602,6 +602,13 @@ let CssTests =
                 (fss [ Visibility Visibility.Collapse]), ["visibility", "collapse"]
                 (fss [ Visibility Visibility.Visible]), ["visibility", "visible"]
 
+                (fss [ Opacity (Opacity.Opacity 1.0)]), ["opacity", "1"]
+                (fss [ Opacity (Opacity.Opacity 0.0)]), ["opacity", "0"]
+                (fss [ Opacity (Opacity.Opacity 0.5)]), ["opacity", "0.5"]
+                (fss [ Opacity (Opacity.Opacity -10.0)]), ["opacity", "0"]
+                (fss [ Opacity (Opacity.Opacity 10.0)]), ["opacity", "1"]
+                (fss [ Opacity (Opacity.Opacity 1.5)]), ["opacity", "1"]
+
             ]
 
         test "Margin"
