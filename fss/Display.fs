@@ -19,7 +19,7 @@ module Display =
         | Table
         | TableCell
         | TableColumn
-        | TableColGroup
+        | TableColumnGroup
         | TableHeaderGroup
         | TableRowGroup
         | TableFooterGroup
@@ -30,13 +30,10 @@ module Display =
         interface IDisplay
         interface IGlobal
 
-
-    let private displayValue (v: Display): string = duToKebab v
-
     let value (v: IDisplay): string =
         match v with
-            | :? Global as g -> Global.value g
-            | :? Display as d -> displayValue d
+            | :? Global  as g -> Global.value g
+            | :? Display as d -> duToKebab d
             | _ -> "Unknown display"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction      
@@ -49,12 +46,10 @@ module FlexDirection =
         interface IFlexDirection
         interface IGlobal
 
-    let private flexDirectionValue (v: FlexDirection): string = duToKebab v
-
     let value (v: IFlexDirection): string =
         match v with
-            | :? Global as g -> Global.value g
-            | :? FlexDirection as f -> flexDirectionValue f
+            | :? Global        as g -> Global.value g
+            | :? FlexDirection as f -> duToKebab f
             | _ -> "Unknown flex direction"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
@@ -66,12 +61,10 @@ module FlexWrap =
         interface IFlexWrap
         interface IGlobal
 
-    let private flexWrapValue (v: FlexWrap): string = duToKebab v
-
     let value (v: IFlexWrap): string =
         match v with
-            | :? Global as g -> Global.value g
-            | :? FlexWrap as f -> flexWrapValue f
+            | :? Global   as g -> Global.value g
+            | :? FlexWrap as f -> duToKebab f
             | _ -> "Unknown flex wrap"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
@@ -86,12 +79,10 @@ module JustifyContent =
         interface IJustifyContent
         interface IGlobal
 
-    let private justifyContentValue (v: JustifyContent): string = duToKebab v
-
     let value (v: IJustifyContent): string =
         match v with
-            | :? Global as g -> Global.value g
-            | :? JustifyContent as j -> justifyContentValue j
+            | :? Global         as g -> Global.value g
+            | :? JustifyContent as j -> duToKebab j
             | _ -> "Unknown justify content"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
@@ -105,12 +96,10 @@ module AlignItems =
         interface IAlignItems
         interface IGlobal
 
-    let private alignItemsValue (v: AlignItems): string = duToKebab v
-    
     let value (v: IAlignItems): string =
         match v with
-            | :? Global as g -> Global.value g
-            | :? AlignItems as a -> alignItemsValue a
+            | :? Global     as g -> Global.value g
+            | :? AlignItems as a -> duToKebab a
             | _ -> "Unknown align items"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
@@ -126,12 +115,10 @@ module AlignContent =
         interface IAlignContent
         interface IGlobal
 
-    let private alignContentValue (v: AlignContent): string = duToKebab v
-
     let value (v: IAlignContent): string =
         match v with
-            | :? Global as g -> Global.value g
-            | :? AlignContent as a -> alignContentValue a
+            | :? Global       as g -> Global.value g
+            | :? AlignContent as a -> duToKebab a
             | _ -> "Unknown align content"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
@@ -147,12 +134,10 @@ module AlignSelf =
         interface IAlignSelf
         interface IGlobal
             
-    let private alignSelfValue (v: AlignSelf): string = duToKebab v
-
     let value (v: IAlignSelf): string =
         match v with
-            | :? Global as g -> Global.value g
-            | :? AlignSelf as a -> alignSelfValue a
+            | :? Global    as g -> Global.value g
+            | :? AlignSelf as a -> duToKebab a
             | _ -> "Unknown align self"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/order
@@ -168,7 +153,7 @@ module Order =
     let value (v: IOrder): string =
         match v with
             | :? Global as g -> Global.value g
-            | :? Order as o -> orderValue o
+            | :? Order  as o -> orderValue o
             | _ -> "Unknown order"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
@@ -183,7 +168,7 @@ module FlexGrow =
 
     let value (v: IFlexGrow): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global   as g -> Global.value g
             | :? FlexGrow as s -> flexGrowValue s
             | _ -> "Unknown flex grow"
 
@@ -194,12 +179,10 @@ module FlexShrink =
         interface IFlexShrink
         interface IGlobal
 
-    let private flexShrinkValue (Shrink f) = string f
-
     let value (v: IFlexShrink): string =
         match v with
-            | :? Global as g -> Global.value g
-            | :? FlexShrink as s -> flexShrinkValue s
+            | :? Global     as g -> Global.value g
+            | :? FlexShrink as s -> string s
             | _ -> "Unknown flex shrink"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
@@ -214,8 +197,8 @@ module FlexBasis =
 
     let value (v: IFlexBasis): string =
         match v with
-            | :? Global as g -> Global.value g
-            | :? Size as s -> Units.Size.value s
+            | :? Global  as g -> Global.value g
+            | :? Size    as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | _ -> "Unknown flex basis"
 
@@ -241,4 +224,18 @@ module VerticalAlign =
             | :? Percent       as p -> Units.Percent.value p
             | :? Size          as s -> Units.Size.value s
             | :? VerticalAlign as v -> duToKebab v
+            | _ -> "Unknown margin size"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
+module Visibility =
+    type Visibility =
+        | Visible
+        | Hidden
+        | Collapse
+        interface IVisibility
+
+    let value (v: IVisibility): string =
+        match v with
+            | :? Global     as g -> Global.value g
+            | :? Visibility as v -> duToString v
             | _ -> "Unknown margin size"

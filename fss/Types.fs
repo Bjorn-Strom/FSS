@@ -53,3 +53,4 @@ module Types =
     type IBackgroundAttachment    = interface end
     type IContentSize             = interface end
     type ISize                    = interface end
+    type IVisibility              = interface end

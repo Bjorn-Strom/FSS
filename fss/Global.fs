@@ -57,5 +57,6 @@ module Global =
         interface IBackgroundSize
         interface IBackgroundAttachment
         interface IContentSize
+        interface IVisibility
 
     let value (v: Global): string = duToLowercase v

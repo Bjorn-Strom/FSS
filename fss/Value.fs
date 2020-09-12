@@ -121,6 +121,7 @@ module Value =
         | FlexBasis      of IFlexBasis
         | AlignSelf      of IAlignSelf
         | VerticalAlign  of IVerticalAlign
+        | Visibility     of IVisibility
 
         | MarginTop    of IMargin
         | MarginRight  of IMargin
@@ -276,6 +277,7 @@ module Value =
                 | FlexShrink     f -> Property.value flexShrink     ==> FlexShrink.value f
                 | AlignSelf      a -> Property.value alignSelf      ==> AlignSelf.value a
                 | VerticalAlign  v -> Property.value verticalAlign  ==> VerticalAlign.value v
+                | Visibility     v -> Property.value visibility     ==> Visibility.value v
 
                 | MarginTop    m  -> Property.value marginTop    ==> Margin.value m
                 | MarginRight  m  -> Property.value marginRight  ==> Margin.value m

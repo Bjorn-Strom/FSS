@@ -527,7 +527,23 @@ let CssTests =
 
         test "Flexbox"
             [
+                (fss [ Display Inline]), ["display", "inline"]
+                (fss [ Display InlineBlock]), ["display", "inline-block"]
+                (fss [ Display Block]), ["display", "block"]
+                (fss [ Display RunIn]), ["display", "block"]
                 (fss [ Display Flex]), ["display", "flex"]
+                (fss [ Display Grid]), ["display", "grid"]
+                (fss [ Display FlowRoot]), ["display", "flow-root"]
+                (fss [ Display Table]), ["display", "table"]
+                (fss [ Display TableCell]), ["display", "table-cell"]
+                (fss [ Display TableColumn]), ["display", "table-column"]
+                (fss [ Display TableColumnGroup]), ["display", "table-column-group"]
+                (fss [ Display TableHeaderGroup]), ["display", "table-header-group"]
+                (fss [ Display TableRowGroup]), ["display", "table-row-group"]
+                (fss [ Display TableFooterGroup]), ["display", "table-footer-group"]
+                (fss [ Display TableRow]), ["display", "table-row"]
+                (fss [ Display TableCaption]), ["display", "table-caption"]
+                (fss [ Display Display.None]), ["display", "none"]
 
                 (fss [ FlexDirection Row]), ["flex-direction", "row"]
                 (fss [ FlexDirection Column]), ["flex-direction", "column"]
@@ -581,6 +597,10 @@ let CssTests =
                 (fss [ VerticalAlign (VerticalAlign.Bottom)]), ["vertical-align", "bottom"]
                 (fss [ VerticalAlign (px 10)]), ["vertical-align", "10px"]
                 (fss [ VerticalAlign (pct 100)]), ["vertical-align", "100%"]
+
+                (fss [ Visibility Visibility.Hidden]), ["visibility", "hidden"]
+                (fss [ Visibility Visibility.Collapse]), ["visibility", "collapse"]
+                (fss [ Visibility Visibility.Visible]), ["visibility", "visible"]
 
             ]
 
