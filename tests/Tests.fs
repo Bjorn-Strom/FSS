@@ -724,6 +724,18 @@ let CssTests =
                 (fss [Transform (Skew2 (deg 45.0, deg 20.0)) ]), ["transform", "matrix(1, 0.36397, 1, 1, 0, 0)"]
                 (fss [Transform (SkewX (deg 22.5)) ]), ["transform", "matrix(1, 0, 0.414214, 1, 0, 0)"]
                 (fss [Transform (SkewY (deg 3.5)) ]), ["transform", "matrix(1, 0.0611626, 0, 1, 0, 0)"]
+
+                (fss [TransformOrigin [ TransformOrigin.Left ]]), ["transform-origin", "0px 0px"]
+                (fss [TransformOrigin [ TransformOrigin.Center ]]), ["transform-origin", "200px 0px"]
+                (fss [TransformOrigin [ TransformOrigin.Right ]]), ["transform-origin", "400px 0px"]
+                (fss [TransformOrigin [ TransformOrigin.Top ]]), ["transform-origin", "200px 0px"]
+                (fss [TransformOrigin [ TransformOrigin.Bottom ]]), ["transform-origin", "200px 0px"]
+
+                (fss [TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left ]]), ["transform-origin", "0px 0px"]
+                (fss [TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left; px 100 ]]), ["transform-origin", "0px 0px 100px"]
+
+                (fss [TransformOrigin [ px 100 ]]), ["transform-origin", "100px 0px"]
+                (fss [TransformOrigin [ pct 50 ]]), ["transform-origin", "200px 0px"]
             ]
 
         test "Transition"
