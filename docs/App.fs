@@ -6,47 +6,14 @@ open Fable.React
 open Fable.React.Props
 
 open Fss
-open Fss
-open Media
 
-open Html
-open Global
-open Property
-open Value
-open Color
-open Units.Percent
-open Units.Size
-open Units.Angle
-open BorderStyle
-open BorderWidth
-open Animation
-open Keyframes
-open Transform
-open Transition
-open Display
-open JustifyContent
-open AlignItems
-open FlexDirection
-open FlexWrap
-open JustifyContent
-open AlignSelf
-open AlignContent
-open Order
-open FlexGrow
-open FlexShrink
-open FlexBasis
-open Margin
-open FontSize
-open FontStyle
-open FontFamily
-open BackgroundImage
-open RadialGradient
-open BackgroundPosition
-open BackgroundRepeat
-open LinearGradient
-open Selector
-open Functions
-open TextTransform
+type Model = { Foo: string}
+type Msg = | Foo
+let init () = { Foo = "Foo"}
+let update (msg: Msg) (model: Model): Model =
+    model
+
+(*
 
 type Model = { 
     FlexDirection: FlexDirection
@@ -1705,9 +1672,7 @@ let TextExamples =
             h1 [ ClassName vamp ] [ str "Vampire Diaries" ]
 
         ]
-
-open FontVariantNumeric
-open FontFeatureSetting
+*)
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
@@ -1726,12 +1691,21 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // FontFaceExamples
            // iTextExamples
 
-           div [ ClassName ( fss [ Opacity (Opacity.Opacity 1.0); BackgroundColor red; FontFeatureSetting (Ss(20, On)) ] ) ] [ str "Foo" ]
-           div [ ClassName ( fss [ Opacity (Opacity.Opacity 0.0); BackgroundColor red; FontVariantNumeric Normal ] ) ] [ str "Foo" ]
-           div [ ClassName ( fss [ Opacity (Opacity.Opacity 0.5); BackgroundColor red; FontVariantNumeric SlashedZero ] ) ] [ str "Foo" ]
-           div [ ClassName ( fss [ Opacity (Opacity.Opacity 10.0); BackgroundColor red; FontFeatureSetting (Ss(20, On)) ] ) ] [ str "Foo" ]
-           div [ ClassName ( fss [ Opacity (Opacity.Opacity -10.0); BackgroundColor red; FontVariantNumeric Normal ] ) ] [ str "Foo" ]
-           div [ ClassName ( fss [ Opacity (Opacity.Opacity 100.5); BackgroundColor red; FontVariantNumeric SlashedZero ] ) ] [ str "Foo" ]
+            let testo x =
+               div 
+                    [
+                        ClassName ( fss 
+                            [
+                                // Width (px 100)
+                                // Height (px 100)
+                                // BackgroundColor blue
+                                Cursor x
+                            ])
+                    ]
+                []
+
+            testo Crosshair
+
         ]
 
 Program.mkSimple init update render

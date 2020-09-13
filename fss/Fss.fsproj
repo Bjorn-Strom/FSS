@@ -3,7 +3,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="*.fsproj; *.fs; *.js;" />
     <Compile Include="Types.fs" />
     <Compile Include="Utilities.fs" />
     <Compile Include="Global.fs" />
@@ -23,11 +22,11 @@
     <Compile Include="ContentSize.fs" />
     <Compile Include="Selector.fs" />
     <Compile Include="Background.fs" />
+    <Compile Include="Cursor.fs" />
     <Compile Include="Media.fs" />
     <Compile Include="Value.fs" />
-    <Compile Include="Functions.fs" />
     <Compile Include="Keyframes.fs" />
-    <Compile Include="Fss.fs" />
+    <Compile Include="Functions.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

@@ -14,6 +14,7 @@ open Media
 open TextOverflow
 open Opacity
 open Position
+open Cursor
 
 module Value = 
     [<Import("css", from="emotion")>]
@@ -170,6 +171,8 @@ module Value =
         | TransitionDuration       of Time
         | TransitionProperty       of Property
         | TransitionTimingFunction of Timing
+
+        | Cursor of Cursor
 
     let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
     let combineAnimations (list: IAnimation list list): string = combineComma list (fun a -> combineWs a Animation.value)
@@ -328,5 +331,7 @@ module Value =
                 | TransitionDuration       t  -> Property.value transitionDuration       ==> Animation.value t
                 | TransitionProperty       t  -> Property.value transitionProperty       ==> Property.value t
                 | TransitionTimingFunction t  -> Property.value transitionTimingFunction ==> Animation.value t
+
+                | Cursor c -> Property.value cursor ==> Cursor.value c
         )
         |> createObj
