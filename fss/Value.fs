@@ -16,6 +16,7 @@ open Opacity
 open Position
 open Cursor
 
+[<AutoOpen>]
 module Value = 
     [<Import("css", from="emotion")>]
     let private css(x) = jsNative

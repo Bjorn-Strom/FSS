@@ -7,30 +7,22 @@ open Fable.React.Props
 
 open Fss
 
-type Model = { Foo: string}
-type Msg = | Foo
-let init () = { Foo = "Foo"}
-let update (msg: Msg) (model: Model): Model =
-    model
-
-(*
-
 type Model = { 
-    FlexDirection: FlexDirection
-    FlexWrap: FlexWrap
-    AlignContent: AlignContent
-    BackgroundRepeat: BackgroundRepeat }
+    FlexDirection: FlexDirection.FlexDirection
+    FlexWrap: FlexWrap.FlexWrap
+    AlignContent: AlignContent.AlignContent
+    BackgroundRepeat: BackgroundRepeat.BackgroundRepeat }
 type Msg = 
-    | SetFlexDirection of FlexDirection
-    | SetFlexWrap of FlexWrap
-    | SetAlignContent of AlignContent
-    | SetBackgroundRepeat of BackgroundRepeat
+    | SetFlexDirection of FlexDirection.FlexDirection
+    | SetFlexWrap of FlexWrap.FlexWrap
+    | SetAlignContent of AlignContent.AlignContent
+    | SetBackgroundRepeat of BackgroundRepeat.BackgroundRepeat
 
 let init() = { 
-    FlexDirection = Row
-    FlexWrap = NoWrap
-    AlignContent = Stretch
-    BackgroundRepeat = NoRepeat}
+    FlexDirection = FlexDirection.Row
+    FlexWrap = FlexWrap.Wrap
+    AlignContent = AlignContent.Center
+    BackgroundRepeat = BackgroundRepeat.NoRepeat}
 
 let update (msg: Msg) (model: Model): Model =
     match msg with
@@ -44,7 +36,7 @@ let ColorExamples =
         [
             h1 [] [ str "Color" ]
             p [] [ str "Tons of different ways to style color" ]
-            p [ ClassName (fss [Color deeppink]) ] [ str "Named colors like deeppink"]
+            p [ ClassName (fss [Color deepPink]) ] [ str "Named colors like deeppink"]
             p [ ClassName (fss [Color (rgb 255 0 0)])] [ str "Or you can style it using an RGB function!"]
             p [ ClassName (fss [Color (rgba 0 0 0 0.5)])] [ str "We also support RGBA"]
             p [ ClassName (fss [Color (hex "00ff00")])] [ str "or you can use HEX"]
@@ -1672,7 +1664,6 @@ let TextExamples =
             h1 [ ClassName vamp ] [ str "Vampire Diaries" ]
 
         ]
-*)
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
@@ -1696,15 +1687,13 @@ let render (model: Model) (dispatch: Msg -> unit) =
                     [
                         ClassName ( fss 
                             [
-                                // Width (px 100)
-                                // Height (px 100)
-                                // BackgroundColor blue
-                                Cursor x
+                                Width (px 100)
+                                Height (px 100)
+                                BackgroundColor blue
+                                Cursor Crosshair
                             ])
                     ]
                 []
-
-            testo Crosshair
 
         ]
 

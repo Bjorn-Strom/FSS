@@ -26,14 +26,12 @@ module FontSize =
         interface IFontSize
         interface IGlobal
 
-    let private fontValue (v: FontSize): string = duToKebab v
-
     let value (v: IFontSize): string =
         match v with
             | :? Global as g   -> Global.value g
             | :? Size as s     -> Units.Size.value s
             | :? Percent as p  -> Units.Percent.value p
-            | :? FontSize as s -> fontValue s
+            | :? FontSize as s -> duToKebab v
             | _                -> "Unknown font size"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style

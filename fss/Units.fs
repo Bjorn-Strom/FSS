@@ -86,23 +86,7 @@ module Size =
             | :? Size    as s -> sizeValue s
             | _               -> "Unkown size"
 
-    // Absolute
-    let px (v: int): Size = sprintf "%dpx" v |> Px
-    let inc (v: float): Size = sprintf "%.1fin" v |> In
-    let cm (v: float): Size = sprintf "%.1fcm" v |> Cm
-    let mm (v: float): Size = sprintf "%.1fmm" v |> Mm
-    let pt (v: float): Size = sprintf "%.1fpt" v |> Pt
-    let pc (v: float): Size = sprintf "%.1fpc" v |> Pc
 
-    // Relative
-    let em (v: float): Size = sprintf "%.1fem" v |> Em
-    let rem (v: float): Size = sprintf "%.1frem" v |> Rem
-    let ex (v: float): Size = sprintf "%.1fex" v |> Ex
-    let ch (v: float): Size = sprintf "%.1fch" v |> Ch
-    let vw (v: float): Size = sprintf "%.1fvw" v |> Vw
-    let vh (v: float): Size = sprintf "%.1fvh" v |> Vh
-    let vmax (v: float): Size = sprintf "%.1fvmax" v |> VMax
-    let vmin (v: float): Size = sprintf "%.1fvmin" v |> Vmin
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
 module Angle =
@@ -122,11 +106,6 @@ module Angle =
             | Grad g -> g
             | Rad r -> r
             | Turn t -> t
-
-    let deg (v: float): Angle = sprintf "%.2fdeg" v |> Deg
-    let grad (v: float): Angle = sprintf "%.2fgrad" v |> Grad
-    let rad (v: float): Angle = sprintf "%.4frad" v |> Rad
-    let turn (v: float): Angle = sprintf "%.2fturn" v |> Turn
 
 module Resolution =
     type Resolution =
