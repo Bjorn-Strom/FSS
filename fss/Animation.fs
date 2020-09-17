@@ -3,24 +3,21 @@ namespace Fss
 open Types
 open Fss.Utilities.Helpers
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
-module Animation =
-    // Animation duration
+module Time =
     type Time =
         | Sec of string
-        | Msec of string
+        | Ms of string
         interface IAnimation
-    
-    let timeValue (v: Time) =
+
+    let value (v: Time) =
         match v with 
             | Sec s -> s
-            | Msec ms -> ms
+            | Ms ms -> ms
 
-    let sec (v: float): Time = sprintf "%.2fs" v |> Sec
-    let mSec (v: float): Time = sprintf "%.2fms" v |> Msec
-
+// https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
+module Animation =
     // Animation timing
-    let cubicBezier (a: float, b: float, c: float, d: float) = 
+    let private cubicBezier (a: float, b: float, c: float, d: float) = 
         sprintf "cubic-bezier(%.1f, %.1f, %.1f, %.1f)" a b c d
 
     type Steps =
@@ -32,7 +29,7 @@ module Animation =
         | End
         interface IAnimation
 
-    let stepValue (v: Steps) = duToKebab v
+    let private stepValue (v: Steps) = duToKebab v
 
     type Timing =
         | Ease
@@ -47,7 +44,7 @@ module Animation =
         | Steps of int * Steps
         interface IAnimation
 
-    let timingValue =
+    let private timingValue =
         function 
             | Ease -> "ease"
             | EaseIn -> "ease-in"
@@ -66,7 +63,7 @@ module Animation =
         | Value of int
         interface IAnimation
 
-    let iterationCountValue =
+    let private iterationCountValue =
         function
             | Infinite -> "infinite"
             | Value v -> string v
@@ -79,7 +76,7 @@ module Animation =
         | AlternateReverse
         interface IAnimation
 
-    let directionValue (v: Direction): string = duToKebab v
+    let private directionValue (v: Direction): string = duToKebab v
 
     // Animation fill mode
     type FillMode =
@@ -89,7 +86,7 @@ module Animation =
         | None
         interface IAnimation
 
-    let fillModeValue (v: FillMode): string = duToString v
+    let private fillModeValue (v: FillMode): string = duToString v
 
     // Animation play state
     type PlayState =
@@ -97,11 +94,11 @@ module Animation =
         | Paused
         interface IAnimation
 
-    let playStateValue (v: PlayState): string = duToString v
+    let private playStateValue (v: PlayState): string = duToString v
 
     let value (v: IAnimation): string =
         match v with
-            | :? Time as t -> timeValue t
+            | :? Time.Time as t -> Time.value t
             | :? Timing as t -> timingValue t
             | :? IterationCount as i -> iterationCountValue i
             | :? Direction as d -> directionValue d

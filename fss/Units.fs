@@ -26,8 +26,6 @@ module Percent =
 
     let value (Percent p): string = p
 
-    let pct (v: int): Percent = sprintf "%d%%" v |> Percent
-
 // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
 module Size =
     open Percent
@@ -85,8 +83,6 @@ module Size =
             | :? Percent as p -> Percent.value p
             | :? Size    as s -> sizeValue s
             | _               -> "Unkown size"
-
-
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
 module Angle =

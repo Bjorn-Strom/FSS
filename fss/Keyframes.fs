@@ -26,6 +26,3 @@ module Keyframes =
                 | Frame (f, ps) -> frameValue f ==> createCSSObject ps
                 | Frames (fs, ps) -> frameValues fs ==> createCSSObject ps
         ) |> createObj
-
-    let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame
-    let frames (f: int list) (properties: CSSProperty list) = (f, properties) |> Frames

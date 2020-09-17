@@ -163,7 +163,7 @@ let CssTests =
 
         test "Color" 
             [ 
-                (fss [ Color aliceblue ] ), ["color", "rgb(240, 248, 255)"]
+                (fss [ Color aliceBlue ] ), ["color", "rgb(240, 248, 255)"]
                 (fss [ Color (rgb 255 0 0) ]), ["color", "rgb(255, 0, 0)"]
                 (fss [ Color (rgba 255 0 0  0.5) ]), ["color", "rgba(255, 0, 0, 0.5)"]
                 (fss [ Color (hex "ff0000") ]), ["color", "rgb(255, 0, 0)"]
@@ -690,7 +690,7 @@ let CssTests =
                 (fss [ AnimationTimingFunction <| Steps(5, End) ]), ["animation-timing-function", "steps(5)"]
 
                 (fss [ AnimationDelay (sec 10.0) ]), ["animation-delay", "10s"]
-                (fss [ AnimationDelays [sec 10.0; mSec 500.0] ]), ["animation-delay", "10s, 0.5s"]
+                (fss [ AnimationDelays [sec 10.0; ms 500.0] ]), ["animation-delay", "10s, 0.5s"]
 
                 (fss [ AnimationIterationCount Infinite ]), ["animation-iteration-count", "infinite"]
                 (fss [ AnimationIterationCount (Value 5) ]), ["animation-iteration-count", "5"]
@@ -713,7 +713,7 @@ let CssTests =
                 (fss [ 
                     Animations 
                         [
-                            [animationSample; sec 10.0; Ease; mSec 0.5; Infinite; Both; Alternate; Running]
+                            [animationSample; sec 10.0; Ease; ms 0.5; Infinite; Both; Alternate; Running]
                             [animationSample; sec 1.0; Linear; sec 10.0; IterationCount.Value 3; Both; Reverse; Paused] 
                         ]
                 ]), 
@@ -1003,7 +1003,7 @@ let CssTests =
                 (fss [ TextDecorationLine LineThrough ]), ["text-decoration", "line-through rgb(0, 0, 0)"]
                 (fss [ TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(0, 0, 0)"]
 
-                (fss [ TextDecorationColor orangered; TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(255, 69, 0)"]
+                (fss [ TextDecorationColor orangeRed; TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(255, 69, 0)"]
                 
                 (fss [ TextDecorationThickness Auto  ]), ["text-decoration-thickness", "auto"]
                 (fss [ TextDecorationThickness FromFont  ]), ["text-decoration-thickness", "from-font"]

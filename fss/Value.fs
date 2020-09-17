@@ -15,6 +15,7 @@ open TextOverflow
 open Opacity
 open Position
 open Cursor
+open Time
 
 [<AutoOpen>]
 module Value = 
