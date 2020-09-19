@@ -11,6 +11,7 @@ module Global =
         | Unset
         | Revert
         | Normal
+        | None
         interface IGlobal
         interface IFontSize
         interface IFontStretch

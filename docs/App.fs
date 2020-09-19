@@ -734,6 +734,252 @@ let TransitionExamples =
             ])] [ str "I have a transition! Hover me!" ]
         ]
 
+let TextExamples =
+    fragment []
+        [
+            let style =
+                fss
+                    [
+                        Width (px 200)
+                        Height (px 100)
+                        TextAlign Text.Right
+                    ]
+        
+            div [ ClassName style ]
+                [
+                    str "I am to the right"
+                ]
+        
+            div [ ClassName (fss [ TextDecorationLine Text.Underline])] [str "Underline" ]
+            div [ ClassName (fss [ TextDecorationLine Text.Overline])] [str "Overline" ]
+            div [ ClassName (fss [ TextDecorationLine Text.LineThrough])] [str "Line-Through" ]
+            div [ ClassName (fss [ TextDecorationLines [ Text.Underline; Text.Overline; Text.LineThrough] ])] [str "This one has all three" ]
+                    
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLines [ Text.Underline; Text.Overline; Text.LineThrough]
+                        TextDecorationColor Color.orangeRed
+                    ] 
+                )] [str "This one has all three and are red" ]
+        
+        
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLine Text.Underline
+                        TextDecorationColor Color.red
+                        TextDecorationThickness Text.FromFont
+                    ])] [str "Thickness from font" ]
+        
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLine Text.Underline
+                        TextDecorationColor Color.red
+                        TextDecorationThickness Text.Auto
+                    ])] [str "Thickness from auto" ]
+        
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLine Text.Underline
+                        TextDecorationColor Color.red
+                        TextDecorationThickness (pct 100)
+                    ])] [str "Thickness from percent" ]
+        
+            div [ ClassName (fss 
+                    [ 
+                        TextDecorationLine Text.Underline
+                        TextDecorationColor Color.red
+                        TextDecorationThickness (px 1)
+                    ])] [str "Thickness from pixels" ]
+        
+            div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Solid])] [str "Solid" ]
+            div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Double])] [str "Double" ]
+            div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Dotted])] [str "Dotted" ]
+            div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Dashed])] [str "Dashed" ]
+            div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Wavy])] [str "Wavy" ]
+        
+            div [ ClassName (fss [ TextTransform Text.Capitalize ])] [str "capitalize" ]
+            div [ ClassName (fss [ TextTransform Text.Uppercase ])] [str "uppercase" ]
+            div [ ClassName (fss [ TextTransform Text.Lowercase ])] [str "LOWERCASE" ]
+            div [ ClassName (fss [ TextTransform None ])] [str "NoNE" ]
+            div [ ClassName (fss [ TextTransform Text.FullWidth ])] [str "FullWidth" ]
+            div [ ClassName (fss [ TextTransform Text.FullSizeKana ])] [str "FullSizeKana" ]
+        
+            div [ ClassName (fss [ Width (px 200); TextIndent (px 10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
+            div [ ClassName (fss [ Width (px 200); TextIndent (pct 10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
+            div [ ClassName (fss [ Width (px 200); TextIndent (pct -10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
+            div [ ClassName (fss [ Width (px 200); TextIndents [pct 10; Text.EachLine]])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
+            div [ ClassName (fss [ Width (px 200); TextIndents [pct 10; Text.Hanging]])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
+        
+            let simple =
+                fss 
+                    [
+                        TextAlign Text.Center
+                        CSSProperty.FontWeight Font.Bold
+                        FontSize (px 80)
+                        FontFamily Font.SansSerif
+                        BackgroundColor (hex "91877b")
+                        TextShadow (px 0) (px 1) (px 0) (rgba 255 255  255 0.4)
+                    ]
+        
+            h1 [ ClassName simple ] [ str "Monster Mash" ]
+        
+            let otto =
+                fss 
+                    [
+                        TextAlign Text.Center
+                        CSSProperty.FontWeight Font.Bold
+                        FontSize (px 80)
+                        FontFamily Font.SansSerif
+                        BackgroundColor (hex "0e8dbc")
+                        Color Color.white
+                        Height (px 100)
+                        TextShadows 
+                            [
+                                px 0, px  1, px  0, hex "ccc"
+                                px 0, px  2, px  0, hex "#c9c9c9"
+                                px 0, px  3, px  0, hex "#bbb"
+                                px 0, px  4, px  0, hex "#b9b9b9"
+                                px 0, px  5, px  0, hex "#aaa"
+                                px 0, px  6, px  1, rgba 0 0 0 0.1
+                                px 0, px  0, px  5, rgba 0 0 0 0.1
+                                px 0, px  1, px  3, rgba 0 0 0 0.3
+                                px 0, px  3, px  5, rgba 0 0 0 0.2
+                                px 0, px  5, px 10, rgba 0 0 0 0.25
+                                px 0, px 10, px 10, rgba 0 0 0 0.2
+                                px 0, px 20, px 20, rgba 0 0 0 0.15
+                            ]
+                    ]
+        
+            h1 [ ClassName otto ] [ str "Slippery Slime" ]
+        
+            let close =
+                fss 
+                    [
+                        TextAlign Text.Center
+                        CSSProperty.FontWeight Font.Bold
+                        FontSize (px 80)
+                        FontFamily Font.SansSerif
+                        BackgroundColor (hex "3a50d9")
+                        Color (hex "e0eff2")
+                        Height (px 100)
+                        TextShadows 
+                            [
+                                px  -4, px 3, px 0, hex "#3a50d9"
+                                px -14, px 7, px 0, hex "#0a0e27"
+                            ]
+                    ]
+        
+            h1 [ ClassName close ] [ str "Mummy mummy" ]
+        
+            let printers =
+                fss 
+                    [
+                        TextAlign Text.Center
+                        CSSProperty.FontWeight Font.Bold
+                        FontSize (px 80)
+                        FontFamily Font.SansSerif
+                        BackgroundColor (hex "edde9c")
+                        Color (hex "bc2e1e")
+                        Height (px 100)
+                        TextShadows 
+                            [
+                                px 0, px 1, px 0, hex "#378ab4"
+                                px 1, px 0, px 0, hex "#5dabcd"
+                                px 1, px 2, px 1, hex "#378ab4"
+                                px 2, px 1, px 1, hex "#5dabcd"
+                                px 2, px 3, px 2, hex "#378ab4"
+                                px 3, px 2, px 2, hex "#5dabcd"
+                                px 3, px 4, px 2, hex "#378ab4"
+                                px 4, px 3, px 3, hex "#5dabcd"
+                                px 4, px 5, px 3, hex "#378ab4"
+                                px 5, px 4, px 2, hex "#5dabcd"
+                                px 5, px 6, px 2, hex "#378ab4"
+                                px 6, px 5, px 2, hex "#5dabcd"
+                                px 6, px 7, px 1, hex "#378ab4"
+                                px 7, px 6, px 1, hex "#5dabcd"
+                                px 7, px 8, px 0, hex "#378ab4"
+                                px 8, px 7, px 0, hex "#5dabcd"
+                            ]
+                    ]
+        
+            h1 [ ClassName printers ] [ str "Skeleton crew" ]
+        
+            let vamp =
+                fss 
+                    [
+                        TextAlign Text.Center
+                        CSSProperty.FontWeight Font.Bold
+                        FontSize (px 80)
+                        FontFamily Font.SansSerif
+                        BackgroundColor Color.red
+                        Color (hex "92a5de")
+                        Height (px 100)
+                        TextShadows 
+                            [
+                                px  0, px  0, px  0, rgb 137 156 213
+                                px  1, px  1, px  0, rgb 129 148 205
+                                px  2, px  2, px  0, rgb 120 139 196
+                                px  3, px  3, px  0, rgb 111 130 187
+                                px  4, px  4, px  0, rgb 103 122 179
+                                px  5, px  5, px  0, rgb 94  113 170
+                                px  6, px  6, px  0, rgb 85  104 161
+                                px  7, px  7, px  0, rgb 76   95 152
+                                px  8, px  8, px  0, rgb 68   87 144
+                                px  9, px  9, px  0, rgb 59   78 135
+                                px 10, px 10, px  0, rgb 50   69 126
+                                px 11, px 11, px  0, rgb 42   61 118
+                                px 12, px 12, px  0, rgb 33   52 109
+                                px 13, px 13, px  0, rgb 24   43 100
+                                px 14, px 14, px  0, rgb 15   34  91
+                                px 15, px 15, px  0, rgb 7    26  83
+                                px 16, px 16, px  0, rgb -2   17  74
+                                px 17, px 17, px  0, rgb -11   8  65
+                                px 18, px 18, px  0, rgb -19   0  57
+                                px 19, px 19, px  0, rgb -28  -9  48
+                                px 20, px 20, px  0, rgb -37 -18  39
+                                px 21, px 21, px 20, rgba 0    0   0 1.0
+                                px 21, px 21, px  1, rgba 0    0   0 0.5
+                                px  0, px  0, px 20, rgba 0    0   0 0.2
+                            ]
+                    ]
+        
+            h1 [ ClassName vamp ] [ str "Vampire Diaries" ]
+        ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1477,222 +1723,6 @@ let SelectorExamples =
                 ]
         ]
 
-open TextDecorationLine
-open TextDecorationThickness
-open TextDecorationStyle
-
-let TextExamples =
-    fragment []
-        [
-            let style =
-                fss
-                    [
-                        Width (px 200)
-                        Height (px 100)
-                        TextAlign TextAlign.Right
-                    ]
-
-            div [ ClassName style ]
-                [
-                    str "I am to the right"
-                ]
-
-            div [ ClassName (fss [ TextDecorationLine Underline])] [str "Underline" ]
-            div [ ClassName (fss [ TextDecorationLine Overline])] [str "Overline" ]
-            div [ ClassName (fss [ TextDecorationLine LineThrough])] [str "Line-Through" ]
-            div [ ClassName (fss [ TextDecorationLines [Underline; Overline; LineThrough] ])] [str "This one has all three" ]
-            
-            div [ ClassName (fss 
-                    [ 
-                        TextDecorationLines [Underline; Overline; LineThrough]
-                        TextDecorationColor Color.orangeRed
-                    ] 
-                )] [str "This one has all three and are red" ]
-
-
-            div [ ClassName (fss 
-                    [ 
-                        TextDecorationLine Underline
-                        TextDecorationColor Color.red
-                        TextDecorationThickness FromFont
-                    ])] [str "Thickness from font" ]
-
-            div [ ClassName (fss 
-                    [ 
-                        TextDecorationLine Underline
-                        TextDecorationColor Color.red
-                        TextDecorationThickness Auto
-                    ])] [str "Thickness from auto" ]
-
-            div [ ClassName (fss 
-                    [ 
-                        TextDecorationLine Underline
-                        TextDecorationColor Color.red
-                        TextDecorationThickness (pct 100)
-                    ])] [str "Thickness from percent" ]
-
-            div [ ClassName (fss 
-                    [ 
-                        TextDecorationLine Underline
-                        TextDecorationColor Color.red
-                        TextDecorationThickness (px 1)
-                    ])] [str "Thickness from pixels" ]
-
-            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Solid])] [str "Solid" ]
-            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Double])] [str "Double" ]
-            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Dotted])] [str "Dotted" ]
-            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Dashed])] [str "Dashed" ]
-            div [ ClassName (fss [ TextDecorationLine Underline; TextDecorationStyle Wavy])] [str "Wavy" ]
-
-            //div [ ClassName (fss [ TextTransform Capitalize ])] [str "capitalize" ]
-            //div [ ClassName (fss [ TextTransform Uppercase ])] [str "uppercase" ]
-            //div [ ClassName (fss [ TextTransform Lowercase ])] [str "LOWERCASE" ]
-            div [ ClassName (fss [ TextTransform TextTransform.None ])] [str "NoNE" ]
-            //div [ ClassName (fss [ TextTransform FullWidth ])] [str "FullWidth" ]
-            //div [ ClassName (fss [ TextTransform FullSizeKana ])] [str "FullSizeKana" ]
-
-            div [ ClassName (fss [ Width (px 200); TextIndent (px 10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
-            div [ ClassName (fss [ Width (px 200); TextIndent (pct 10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
-            div [ ClassName (fss [ Width (px 200); TextIndent (pct -10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
-            div [ ClassName (fss [ Width (px 200); TextIndents [pct 10; TextIndent.EachLine]])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
-            div [ ClassName (fss [ Width (px 200); TextIndents [pct 10; TextIndent.Hanging]])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
-
-            let simple =
-                fss 
-                    [
-                        TextAlign TextAlign.Center
-                        CSSProperty.FontWeight Font.Bold
-                        FontSize (px 80)
-                        //FontFamily SansSerif
-                        BackgroundColor (hex "91877b")
-                        //TextShadow (px 0) (px 1) (px 0) (rgba 255 255  255 0.4)
-                    ]
-
-            h1 [ ClassName simple ] [ str "Monster Mash" ]
-
-            let otto =
-                fss 
-                    [
-                        TextAlign TextAlign.Center
-                        CSSProperty.FontWeight Font.Bold
-                        FontSize (px 80)
-                        //FontFamily SansSerif
-                        BackgroundColor (hex "0e8dbc")
-                        //Color white
-                        Height (px 100)
-                        (*TextShadows 
-                            [
-                                px 0, px  1, px  0, hex "ccc"
-                                px 0, px  2, px  0, hex "#c9c9c9"
-                                px 0, px  3, px  0, hex "#bbb"
-                                px 0, px  4, px  0, hex "#b9b9b9"
-                                px 0, px  5, px  0, hex "#aaa"
-                                px 0, px  6, px  1, rgba 0 0 0 0.1
-                                px 0, px  0, px  5, rgba 0 0 0 0.1
-                                px 0, px  1, px  3, rgba 0 0 0 0.3
-                                px 0, px  3, px  5, rgba 0 0 0 0.2
-                                px 0, px  5, px 10, rgba 0 0 0 0.25
-                                px 0, px 10, px 10, rgba 0 0 0 0.2
-                                px 0, px 20, px 20, rgba 0 0 0 0.15
-                            ]*)
-                    ]
-
-            h1 [ ClassName otto ] [ str "Slippery Slime" ]
-
-            let close =
-                fss 
-                    [
-                        TextAlign TextAlign.Center
-                        CSSProperty.FontWeight Font.Bold
-                        FontSize (px 80)
-                        //FontFamily SansSerif
-                        BackgroundColor (hex "3a50d9")
-                        Color (hex "e0eff2")
-                        Height (px 100)
-                        (*TextShadows 
-                            [
-                                px  -4, px 3, px 0, hex "#3a50d9"
-                                px -14, px 7, px 0, hex "#0a0e27"
-                            ]*)
-                    ]
-
-            h1 [ ClassName close ] [ str "Mummy mummy" ]
-
-            let printers =
-                fss 
-                    [
-                        TextAlign TextAlign.Center
-                        CSSProperty.FontWeight Font.Bold
-                        FontSize (px 80)
-                        //FontFamily SansSerif
-                        BackgroundColor (hex "edde9c")
-                        Color (hex "bc2e1e")
-                        Height (px 100)
-                        (*TextShadows 
-                            [
-                                px 0, px 1, px 0, hex "#378ab4"
-                                px 1, px 0, px 0, hex "#5dabcd"
-                                px 1, px 2, px 1, hex "#378ab4"
-                                px 2, px 1, px 1, hex "#5dabcd"
-                                px 2, px 3, px 2, hex "#378ab4"
-                                px 3, px 2, px 2, hex "#5dabcd"
-                                px 3, px 4, px 2, hex "#378ab4"
-                                px 4, px 3, px 3, hex "#5dabcd"
-                                px 4, px 5, px 3, hex "#378ab4"
-                                px 5, px 4, px 2, hex "#5dabcd"
-                                px 5, px 6, px 2, hex "#378ab4"
-                                px 6, px 5, px 2, hex "#5dabcd"
-                                px 6, px 7, px 1, hex "#378ab4"
-                                px 7, px 6, px 1, hex "#5dabcd"
-                                px 7, px 8, px 0, hex "#378ab4"
-                                px 8, px 7, px 0, hex "#5dabcd"
-                            ]*)
-                    ]
-
-            h1 [ ClassName printers ] [ str "Skeleton crew" ]
-
-            let vamp =
-                fss 
-                    [
-                        TextAlign TextAlign.Center
-                        CSSProperty.FontWeight Font.Bold
-                        FontSize (px 80)
-                        //FontFamily SansSerif
-                        //BackgroundColor red
-                        Color (hex "92a5de")
-                        Height (px 100)
-                        (*TextShadows 
-                            [
-                                px  0, px  0, px  0, rgb 137 156 213
-                                px  1, px  1, px  0, rgb 129 148 205
-                                px  2, px  2, px  0, rgb 120 139 196
-                                px  3, px  3, px  0, rgb 111 130 187
-                                px  4, px  4, px  0, rgb 103 122 179
-                                px  5, px  5, px  0, rgb 94  113 170
-                                px  6, px  6, px  0, rgb 85  104 161
-                                px  7, px  7, px  0, rgb 76   95 152
-                                px  8, px  8, px  0, rgb 68   87 144
-                                px  9, px  9, px  0, rgb 59   78 135
-                                px 10, px 10, px  0, rgb 50   69 126
-                                px 11, px 11, px  0, rgb 42   61 118
-                                px 12, px 12, px  0, rgb 33   52 109
-                                px 13, px 13, px  0, rgb 24   43 100
-                                px 14, px 14, px  0, rgb 15   34  91
-                                px 15, px 15, px  0, rgb 7    26  83
-                                px 16, px 16, px  0, rgb -2   17  74
-                                px 17, px 17, px  0, rgb -11   8  65
-                                px 18, px 18, px  0, rgb -19   0  57
-                                px 19, px 19, px  0, rgb -28  -9  48
-                                px 20, px 20, px  0, rgb -37 -18  39
-                                px 21, px 21, px 20, rgba 0    0   0 1.0
-                                px 21, px 21, px  1, rgba 0    0   0 0.5
-                                px  0, px  0, px 20, rgba 0    0   0 0.2
-                            ]*)
-                    ]
-
-            h1 [ ClassName vamp ] [ str "Vampire Diaries" ]
-
-        ]
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
@@ -1704,14 +1734,14 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // MarginExamples
            // PaddingExamples
            // TransformExamples
+           // TransitionExamples
            
-           
-           TransitionExamples
-           
+           TextExamples
+
            // FlexBoxExamples model dispatch
            // MediaQueryExamples
            // SelectorExamples
-           // iTextExamples
+           
            // AnimationExamples
 
            (*

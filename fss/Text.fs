@@ -6,8 +6,9 @@ open Units.Percent
 open Units.Size
 open Utilities.Helpers
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
-module TextAlign =
+module Text = 
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
     type TextAlign =
         | Left
         | Right
@@ -19,17 +20,7 @@ module TextAlign =
         | MatchParent
         interface ITextAlign
         
-    let private textAlignValue (v: TextAlign): string = duToKebab v
-
-    let value (v: ITextAlign): string =
-        match v with
-            | :? Global    as g -> Global.value g
-            | :? TextAlign as t -> textAlignValue t
-            | _                 -> "Unknown text align"
-
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
-module TextDecorationLine =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
     type TextDecorationLine =
         | None
         | Underline
@@ -37,31 +28,13 @@ module TextDecorationLine =
         | LineThrough
         interface ITextDecorationLine
 
-    let private textDecorationLineValue (v: TextDecorationLine): string = duToKebab v
-
-    let value (v: ITextDecorationLine): string =
-        match v with
-            | :? Global             as g -> Global.value g 
-            | :? TextDecorationLine as t -> textDecorationLineValue t
-            | _                          -> "unknown text decoration line"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
-module TextDecorationThickness =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
     type TextDecorationThickness =
         | Auto
         | FromFont
         interface ITextDecorationThickness
 
-    let value (v: ITextDecorationThickness): string = 
-        match v with
-            | :? Global                  as g -> Global.value g
-            | :? Percent                 as p -> Units.Percent.value p
-            | :? Size                    as s -> Units.Size.value s
-            | :? TextDecorationThickness as t -> duToKebab t
-            | _                               -> "unkown text decoration thickness"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
-module TextDecorationStyle =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
     type TextDecorationStyle =
         | Solid
         | Double
@@ -70,28 +43,14 @@ module TextDecorationStyle =
         | Wavy
         interface ITextDecorationStyle
 
-    let value (v: ITextDecorationStyle): string =
-        match v with
-            | :? Global              as g -> Global.value g
-            | :? TextDecorationStyle as t -> duToLowercase t 
-            | _                           -> "unknown text decoration style"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
-module TextDecorationSkipInk =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
     type TextDecorationSkipInk =
         | None
         | Auto
         | All
         interface ITextDecorationSkipInk
 
-    let value (v: ITextDecorationSkipInk): string =
-        match v with
-            | :? Global                as g -> Global.value g
-            | :? TextDecorationSkipInk as t -> duToLowercase t 
-            | _                             -> "unknown text decoration skip ink"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
-module TextTransform =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
     type TextTransform =
         | None
         | Capitalize
@@ -101,53 +60,84 @@ module TextTransform =
         | FullSizeKana
         interface ITextTransform
 
-    let value (v: ITextTransform): string =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
+    type TextIndent =
+        | Hanging
+        | EachLine
+        interface ITextIndent
+    
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
+    // https://css-tricks.com/almanac/properties/t/text-shadow/
+    open Color
+    type TextShadowType = 
+        | TextShadow of Size * Size * Size * CssColor
+        interface ITextShadow
+    
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
+    type TextOverflow =
+        | Clip
+        | Ellipsis
+        | Custom of string
+
+module TextValue =
+    open Text
+
+    let textAlignValue (v: ITextAlign): string =
+        match v with
+            | :? Global    as g -> Global.value g
+            | :? TextAlign as t -> duToKebab t
+            | _                 -> "Unknown text align"
+
+    let textDecorationLineValue (v: ITextDecorationLine): string =
+        match v with
+            | :? Global             as g -> Global.value g 
+            | :? TextDecorationLine as t -> duToKebab t
+            | _                          -> "unknown text decoration line"
+
+    let textDecorationThicknessValue (v: ITextDecorationThickness): string = 
+        match v with
+            | :? Global                  as g -> Global.value g
+            | :? Percent                 as p -> Units.Percent.value p
+            | :? Size                    as s -> Units.Size.value s
+            | :? TextDecorationThickness as t -> duToKebab t
+            | _                               -> "unkown text decoration thickness"
+
+    let textDecorationStyleValue (v: ITextDecorationStyle): string =
+        match v with
+            | :? Global              as g -> Global.value g
+            | :? TextDecorationStyle as t -> duToLowercase t 
+            | _                           -> "unknown text decoration style"
+
+    let textDecorationSkipInkValue (v: ITextDecorationSkipInk): string =
+        match v with
+            | :? Global                as g -> Global.value g
+            | :? TextDecorationSkipInk as t -> duToLowercase t 
+            | _                             -> "unknown text decoration skip ink"
+
+    let textTransformValue (v: ITextTransform): string =
         match v with
             | :? Global        as g -> Global.value g
             | :? TextTransform as t -> duToLowercase t 
             | _                     -> "unknown text transform"
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
-module TextIndent =
-    type TextIndent =
-        | Hanging
-        | EachLine
-        interface ITextIndent
-
-    let value (v: ITextIndent): string =
+    let textIndentValue (v: ITextIndent): string =
         match v with 
             | :? Global     as g -> Global.value g
             | :? Percent    as p -> Units.Percent.value p
             | :? Size       as s -> Units.Size.value s
             | :? TextIndent as t -> duToKebab t 
             | _                  -> "unknown text transform"
-    
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
-// https://css-tricks.com/almanac/properties/t/text-shadow/
-module TextShadow =
-    open Color
-    type TextShadowType = 
-        | TextShadow of Size * Size * Size * CssColor
-        interface ITextShadow
-    
-    let getValue (TextShadow(s1, s2, s3, c)) = s1, s2, s3, c
 
-    let value (v: ITextShadow) : string = 
+    let textShadowValue (v: ITextShadow) : string = 
+        let getValue (TextShadow(s1, s2, s3, c)) = s1, s2, s3, c
         match v with
-        | :? Global         as g -> Global.value g
-        | :? TextShadowType as t -> 
-            let (s1, s2, s3, c) = getValue t
-            sprintf "%s %s %s %s" (Units.Size.value s1) (Units.Size.value s2) (Units.Size.value s3) (Color.value c)
-        | _                      -> "Unknown text shadow"
+            | :? Global         as g -> Global.value g
+            | :? TextShadowType as t -> 
+                let (s1, s2, s3, c) = getValue t
+                sprintf "%s %s %s %s" (Units.Size.value s1) (Units.Size.value s2) (Units.Size.value s3) (Color.value c)
+            | _                      -> "Unknown text shadow"
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
-module TextOverflow =
-    type TextOverflow =
-        | Clip
-        | Ellipsis
-        | Custom of string
-
-    let value (v: TextOverflow): string =
+    let textOverflowValue (v: TextOverflow): string =
         match v with
             | Custom s -> sprintf "\"%s\"" s
-            | _        -> duToLowercase v
+            | _        -> duToLowercase v    

@@ -38,12 +38,12 @@ module Functions =
     let TextShadows (textShadows: (Size * Size * Size * CssColor) list): CSSProperty =
         textShadows
         |> List.map (
-            (fun (x, y, b, c) -> TextShadow.TextShadow(x, y, b, c)) >>
+            (fun (x, y, b, c) -> Text.TextShadow(x, y, b, c)) >>
             (fun x -> x :> Types.ITextShadow))
-        |> TextShadows
+        |> TextShadowProperties
 
     let TextShadow (x: Size) (y: Size) (blur: Size) (color: CssColor): CSSProperty = 
-        TextShadow (TextShadow.TextShadow(x, y, blur, color))
+        TextShadowProperty (Text.TextShadow(x, y, blur, color))
 
     // Selectors
     let (!+) (html: Html) (propertyList: CSSProperty list) = Selector (AdjacentSibling html, propertyList)
@@ -57,6 +57,7 @@ module Functions =
     let Unset = Global.Unset 
     let Revert = Global.Revert
     let Normal = Global.Normal
+    let None = Global.None
 
     // Color
     let rgb (r: int) (g: int) (b: int): CssColor = Utilities.Color.rgb r g b |> CssColor

@@ -8,9 +8,7 @@ open Utilities.Helpers
 open Property
 open Animation
 open Selector
-open Padding
 open Media
-open TextOverflow
 open Opacity
 open Position
 open Cursor
@@ -74,9 +72,9 @@ module Value =
         | TextTransform           of ITextTransform
         | TextIndent              of ITextIndent
         | TextIndents             of ITextIndent list
-        | TextShadow              of ITextShadow
-        | TextShadows             of ITextShadow list
-        | TextOverflow            of TextOverflow
+        | TextShadowProperty      of ITextShadow
+        | TextShadowProperties    of ITextShadow list
+        | TextOverflow            of Text.TextOverflow
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -223,19 +221,19 @@ module Value =
                 | FontVariantEastAsians fs -> Property.value fontVariantEastAsian ==> combineWs FontValues.fontVariantEastAsianValue fs 
                 | FontVariantLigatures  f  -> Property.value fontVariantLigatures ==> FontValues.fontVariantLigatureValue f
 
-                | TextAlign               t  -> Property.value textAlign               ==> TextAlign.value t
-                | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextDecorationLine.value t
-                | TextDecorationLines     ts -> Property.value textDecorationLine      ==> combineWs TextDecorationLine.value ts 
+                | TextAlign               t  -> Property.value textAlign               ==> TextValue.textAlignValue t
+                | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextValue.textDecorationLineValue t
+                | TextDecorationLines     ts -> Property.value textDecorationLine      ==> combineWs TextValue.textDecorationLineValue ts 
                 | TextDecorationColor     t  -> Property.value textDecorationColor     ==> Color.value t
-                | TextDecorationThickness t  -> Property.value textDecorationThickness ==> TextDecorationThickness.value t
-                | TextDecorationStyle     t  -> Property.value textDecorationStyle     ==> TextDecorationStyle.value t 
-                | TextDecorationSkipInk   t  -> Property.value textDecorationSkipInk   ==> TextDecorationSkipInk.value t 
-                | TextTransform           t  -> Property.value textTransform           ==> TextTransform.value t
-                | TextIndent              t  -> Property.value textIndent              ==> TextIndent.value t
-                | TextIndents             ts -> Property.value textIndent              ==> combineWs TextIndent.value ts 
-                | TextShadow              t  -> Property.value textShadow              ==> TextShadow.value t
-                | TextShadows             ts -> Property.value textShadow              ==> combineComma TextShadow.value ts 
-                | TextOverflow            t  -> Property.value textOverflow            ==> TextOverflow.value t
+                | TextDecorationThickness t  -> Property.value textDecorationThickness ==> TextValue.textDecorationThicknessValue t
+                | TextDecorationStyle     t  -> Property.value textDecorationStyle     ==> TextValue.textDecorationStyleValue t 
+                | TextDecorationSkipInk   t  -> Property.value textDecorationSkipInk   ==> TextValue.textDecorationSkipInkValue t 
+                | TextTransform           t  -> Property.value textTransform           ==> TextValue.textTransformValue t
+                | TextIndent              t  -> Property.value textIndent              ==> TextValue.textIndentValue t
+                | TextIndents             ts -> Property.value textIndent              ==> combineWs TextValue.textIndentValue ts 
+                | TextShadowProperty      t  -> Property.value textShadow              ==> TextValue.textShadowValue t
+                | TextShadowProperties    ts -> Property.value textShadow              ==> combineComma TextValue.textShadowValue ts 
+                | TextOverflow            t  -> Property.value textOverflow            ==> TextValue.textOverflowValue t
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderValue.borderStyleValue bs
                 | BorderStyles bss -> Property.value borderStyle ==> combineWs BorderValue.borderStyleValue bss 
