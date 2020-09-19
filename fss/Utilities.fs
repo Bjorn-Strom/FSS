@@ -38,8 +38,8 @@ module Helpers =
         list
         |> List.map value
         |> String.concat seperator
-    let combineWs (list: 'a list) (value: 'a -> string) = combineList list value " "
-    let combineComma (list: 'a list) (value: 'a -> string) = combineList list value ", " 
+    let combineWs (value: 'a -> string) (list: 'a list) = combineList list value " "
+    let combineComma (value: 'a -> string) (list: 'a list) = combineList list value ", " 
 
     let clamp min max value = 
         if value > max then 

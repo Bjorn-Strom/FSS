@@ -184,7 +184,7 @@ module FontFace =
             attributeList |> List.map (
                 function
                     | Source      s -> "src"                      ==> sourceValue s
-                    | Sources     s -> "src"                      ==> combineComma s sourceValue
+                    | Sources     s -> "src"                      ==> combineComma sourceValue s
                     | FontStyle   f -> Property.value fontStyle   ==> FontStyle.value f
                     | FontDisplay f -> Property.value fontDisplay ==> FontDisplay.value f
                     | FontStretch f -> Property.value fontStretch ==> FontStretch.value f

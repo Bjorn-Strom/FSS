@@ -4,6 +4,7 @@ open Types
 open Global
 open Property
 open Animation
+open Time
 
 module Transition =
     type Transition = 

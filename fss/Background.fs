@@ -18,14 +18,84 @@ module Background =
         | Center
         interface IBackgroundPosition
         interface ILinearGradient
+        interface IBackground
 
-    let private backgroundPositionValue (v: IBackgroundPosition): string =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient
+    type Side =
+        | ClosestCorner
+        | ClosestSide
+        | FarthestCorner
+        | FarthestSide
+        interface IRadialGradient
+
+    type Shape =
+        | Circle
+        | Ellipse
+        | CircleSide of Side
+        | EllipseSide of Side
+        | CircleAt of IBackgroundPosition list
+        | EllipseAt of IBackgroundPosition list
+        interface IRadialGradient
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
+    type BackgroundImage =
+        | Url of string
+        | LinearGradient of ILinearGradient list
+        | RadialGradient of IRadialGradient list
+        | RepeatingLinearGradient of ILinearGradient list
+        | RepeatingRadialGradient of IRadialGradient list
+        interface IBackground
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
+    type BackgroundOrigin =
+        | BorderBox
+        | PaddingBox
+        | ContentBox
+        interface IBackgroundOrigin
+        interface IBackgroundClip
+        interface IBackground
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
+    type BackgroundClip =
+        | Text
+        interface IBackgroundClip
+        interface IBackground
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
+    type BackgroundRepeat =
+        | RepeatX
+        | RepeatY
+        | Repeat
+        | Space
+        | Round
+        | NoRepeat
+        interface IBackgroundRepeat
+        interface IBackground
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+    type BackgroundSize =
+        | Cover
+        | Contain
+        interface IBackgroundSize
+        interface IBackground
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
+    type BackgroundAttachment =
+        | Scroll
+        | Fixed
+        | Local
+        interface IBackgroundAttachment
+        interface IBackground
+
+module BackgroundValues =
+    open Background
+
+    let backgroundPositionValue (v: IBackgroundPosition): string =
         match v with
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? BackgroundPosition as position -> duToLowercase position
             | _ -> "Unknown background position"
-     
  
     // https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient
     let private compareLinearGradient (v: ILinearGradient): int =
@@ -46,33 +116,14 @@ module Background =
             | :? BackgroundPosition as p -> sprintf "to %s" <| backgroundPositionValue p
             | _ -> "Unknown linear gradient value"
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient
-    type Side =
-        | ClosestCorner
-        | ClosestSide
-        | FarthestCorner
-        | FarthestSide
-        interface IRadialGradient
-
-    let private sideValue (v: Side): string = duToKebab v
-
-    type Shape =
-        | Circle
-        | Ellipse
-        | CircleSide of Side
-        | EllipseSide of Side
-        | CircleAt of IBackgroundPosition list
-        | EllipseAt of IBackgroundPosition list
-        interface IRadialGradient
-
     let private shapeValue (v: Shape): string =
         match v with
             | Circle -> "circle"
             | Ellipse -> "ellipse"
-            | CircleSide side -> sprintf "circle %s" <| sideValue side
-            | EllipseSide side -> sprintf "ellipse %s" <| sideValue side
-            | CircleAt positions -> sprintf "circle at %s" <| combineWs positions backgroundPositionValue
-            | EllipseAt positions -> sprintf "ellipse at %s" <| combineWs positions backgroundPositionValue
+            | CircleSide side -> sprintf "circle %s" <| duToKebab side
+            | EllipseSide side -> sprintf "ellipse %s" <| duToKebab side
+            | CircleAt positions -> sprintf "circle at %s" <| combineWs backgroundPositionValue positions
+            | EllipseAt positions -> sprintf "ellipse at %s" <| combineWs backgroundPositionValue positions
 
     let private compareRadialGradient (v: IRadialGradient): int =
         match v with 
@@ -90,17 +141,9 @@ module Background =
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? CssColor as c -> Color.value c
-            | :? Side as s -> sideValue s
+            | :? Side as s -> duToKebab s
             | :? Shape as s -> shapeValue s
             | _ -> "Unknown radial gradient value"
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
-    type BackgroundImage =
-        | Url of string
-        | LinearGradient of ILinearGradient list
-        | RadialGradient of IRadialGradient list
-        | RepeatingLinearGradient of ILinearGradient list
-        | RepeatingRadialGradient of IRadialGradient list
 
     let private combineGradient (value: ILinearGradient -> string) (list: ILinearGradient list): string =
         list
@@ -122,7 +165,7 @@ module Background =
             else
                 sprintf "%s, %s" acc (value elem)) ""
 
-    let value (v: BackgroundImage): string =
+    let backgroundImageValue (v: BackgroundImage): string =
         match v with
             | Url u -> sprintf "url(%s)" u
             | LinearGradient g -> sprintf "linear-gradient(%s)"  (g |> List.sortBy compareLinearGradient |> combineGradient linearGradientValue)
@@ -130,56 +173,26 @@ module Background =
             | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" (g |> List.sortBy compareLinearGradient |> combineGradient linearGradientValue)
             | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" (g |> List.sortBy compareRadialGradient |> combineGradient2 radialGradientValue)
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
-    type BackgroundOrigin =
-        | BorderBox
-        | PaddingBox
-        | ContentBox
-        interface IBackgroundOrigin
-        interface IBackgroundClip
-
-    let private backgroundOriginValue (v: IBackgroundOrigin): string =
+    let backgroundOriginValue (v: IBackgroundOrigin): string =
         match v with
             | :? Global as g -> Global.value g
             | :? BackgroundOrigin as b -> duToKebab b
             | _ -> "Unknown background origin" 
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
-    type BackgroundClip =
-        | Text
-        interface IBackgroundClip
-
-    let private backgroundClipValue (v: IBackgroundClip): string =
+    let backgroundClipValue (v: IBackgroundClip): string =
         match v with
             | :? Global as g -> Global.value g
             | :? BackgroundOrigin as b -> duToString b
             | :? BackgroundClip as b -> duToString b
             | _ -> "Unknown background clip" 
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
-    type BackgroundRepeat =
-        | RepeatX
-        | RepeatY
-        | Repeat
-        | Space
-        | Round
-        | NoRepeat
-        interface IBackgroundRepeat
-
-    let private backgroundRepeatValue (v: IBackgroundRepeat): string =
+    let backgroundRepeatValue (v: IBackgroundRepeat): string =
         match v with
             | :? Global as g -> Global.value g
             | :? BackgroundRepeat as b -> duToKebab b
             | _ -> "Unknown background repeat" 
 
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
-    type BackgroundSize =
-        | Cover
-        | Contain
-        interface IBackgroundSize
-
-    let private backgroundSizeValue (v: IBackgroundSize): string =
+    let backgroundSizeValue (v: IBackgroundSize): string =
         match v with
             | :? Global as g -> Global.value g
             | :? Size as s -> Units.Size.value s
@@ -187,14 +200,7 @@ module Background =
             | :? BackgroundSize as b -> duToLowercase b
             | _ -> "Unknown background size" 
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
-    type BackgroundAttachment =
-        | Scroll
-        | Fixed
-        | Local
-        interface IBackgroundAttachment
-
-    let private backgroundAttachmentValue (v: IBackgroundAttachment): string =
+    let backgroundAttachmentValue (v: IBackgroundAttachment): string =
         match v with
             | :? Global as g -> Global.value g
             | :? BackgroundAttachment as b -> duToLowercase b
