@@ -323,9 +323,9 @@ module Value =
                 | AnimationPlayState       p   -> Property.value animationPlayState      ==> Animation.value p
                 | AnimationPlayStates      ps  -> Property.value animationPlayState      ==> combineComma Animation.value ps
 
-                | Transform       t  -> Property.value transform       ==> Transform.value t
-                | Transforms      ts -> Property.value transform       ==> combineWs Transform.value ts
-                | TransformOrigin ts -> Property.value transformOrigin ==> combineWs TransformOrigin.value ts
+                | Transform       t  -> Property.value transform       ==> TransformValue.transformValue t
+                | Transforms      ts -> Property.value transform       ==> combineWs TransformValue.transformValue ts
+                | TransformOrigin ts -> Property.value transformOrigin ==> combineWs TransformValue.transformOriginValue ts
 
                 | Transition               t  -> Property.value transition               ==> Transition.value t
                 | Transitions              ts -> Property.value transition               ==> combineComma Transition.value ts

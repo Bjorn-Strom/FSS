@@ -615,7 +615,75 @@ let PaddingExamples =
                 [ str "Me tooo!" ]
         ]
 
+let TransformExamples =
+    fragment []
+        [
+            h3 [] [ str "Transforms" ]
+            div [
+                ClassName
+                    (fss
+                        [
+                            Width (px 50)
+                            Height (px 50)
+                            BackgroundColor Color.red
+                            Transform (Transform.Skew2(deg 30.0, deg 20.0))
+                        ])
+            ] []
 
+            div [
+                ClassName
+                    (fss
+                        [
+                            Width (px 50)
+                            Height (px 50)
+                            BackgroundColor Color.orange
+                            Transform (Transform.Matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0))
+                        ])
+            ] []
+
+            div [
+                ClassName
+                    (fss
+                        [
+                            Width (px 50)
+                            Height (px 50)
+                            BackgroundColor Color.blue
+                            Transform Inherit
+                        ])
+            ] []
+
+            let spinningAnimation =
+                keyframes 
+                    [
+                        frame 0 [ Transform(Transform.Rotate (deg 360.0)) ]
+                        frame 100 [ Transform(Transform.Rotate (deg 0.0)) ]
+                    ]
+
+            let spinningCube =
+                fss
+                    [
+                        Width (px 100)
+                        Height (px 100)
+                        BackgroundColor Color.orangeRed
+                        AnimationName spinningAnimation
+                        AnimationDuration (sec 2.0)
+                        AnimationIterationCount Animation.Infinite
+                        AnimationTimingFunction Animation.Linear
+                        
+                    ]
+
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Top; Transform.Left ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Top; Transform.Center ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Top; Transform.Right ] ]) )] []
+
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Center; Transform.Left ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Center; Transform.Center ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Center; Transform.Right ] ]) )] []
+
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Bottom; Transform.Left ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Bottom; Transform.Center ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Bottom; Transform.Right ] ]) )] []
+        ]
 
 
 
@@ -768,77 +836,7 @@ let AnimationExamples =
                     div [ ClassName loaderContainer ] []
                 ]
         ]
-        
-let TransformExamples =
-    fragment []
-        [
-            h3 [] [ str "Transforms" ]
-            div [
-                ClassName
-                    (fss
-                        [
-                            Width (px 50)
-                            Height (px 50)
-                            BackgroundColor Color.red
-                            Transform (Transform.Skew2(deg 30.0, deg 20.0))
-                        ])
-            ] []
-
-            div [
-                ClassName
-                    (fss
-                        [
-                            Width (px 50)
-                            Height (px 50)
-                            BackgroundColor Color.orange
-                            Transform (Transform.Matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0))
-                        ])
-            ] []
-
-            div [
-                ClassName
-                    (fss
-                        [
-                            Width (px 50)
-                            Height (px 50)
-                            BackgroundColor Color.blue
-                            Transform Inherit
-                        ])
-            ] []
-
-            let spinningAnimation =
-                keyframes 
-                    [
-                        frame 0 [ Transform(Transform.Rotate (deg 360.0)) ]
-                        frame 100 [ Transform(Transform.Rotate (deg 0.0)) ]
-                    ]
-
-            let spinningCube =
-                fss
-                    [
-                        Width (px 100)
-                        Height (px 100)
-                        BackgroundColor Color.orangeRed
-                        AnimationName spinningAnimation
-                        AnimationDuration (sec 2.0)
-                        AnimationIterationCount Animation.Infinite
-                        AnimationTimingFunction Animation.Linear
-                        
-                    ]
-
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Top; TransformOrigin.Center ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Top; TransformOrigin.Right ] ]) )] []
-
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Center; TransformOrigin.Left ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Center; TransformOrigin.Center ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Center; TransformOrigin.Right ] ]) )] []
-
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Bottom; TransformOrigin.Left ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Bottom; TransformOrigin.Center ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ TransformOrigin.Bottom; TransformOrigin.Right ] ]) )] []
-        ]
-
+      
 let TransitionExamples =   
     let box =
         fss
@@ -1699,11 +1697,11 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // FontExamples
            // FontFaceExamples
            // BorderExamples
-           MarginExamples
-           PaddingExamples
+           // MarginExamples
+           // PaddingExamples
+           TransformExamples
            
            
-           // TransformExamples
            // TransitionExamples
            // FlexBoxExamples model dispatch
            // MediaQueryExamples
