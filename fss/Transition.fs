@@ -13,6 +13,9 @@ module Transition =
         | Transition3 of Property * Time * Timing * Time 
         interface ITransition
 
+module TransitionValue =
+    open Transition
+
     let private transitionValue (v: Transition): string =
         match v with
             | Transition1 (property, time)                -> sprintf "%s %s" (Property.propertyToKebabCase property) (Animation.value time)

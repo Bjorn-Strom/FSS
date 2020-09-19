@@ -685,6 +685,59 @@ let TransformExamples =
             div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Bottom; Transform.Right ] ]) )] []
         ]
 
+let TransitionExamples =   
+    let box =
+        fss
+            [
+                Display Display.InlineBlock
+                BackgroundColor Color.pink
+                Width (px 200)
+                Height (px 200)
+                Transition (Transition.Transition2(Property.Transform, (ms 300.0), Animation.CubicBezier(0.0, 0.47, 0.32, 1.97)))
+            ]
+        
+    let trigger =
+        fss
+            [
+                Width (px 200)
+                Height (px 200)
+                BorderWidth (px 20)
+                BorderStyle Border.Solid
+                BorderColor (hex "ddd")
+                Hover 
+                    [
+                        ! Html.Div
+                            [
+                                Transforms
+                                    [
+                                        Transform.Translate2((px 200), (px 150))
+                                        Transform.Rotate(deg 20.0)
+                                    ]
+                            ]
+                    ]
+            ]
+        
+    fragment []
+        [
+            div [ ClassName trigger ]
+                [
+                    div [ ClassName box ] []
+                ]
+        
+            p [ClassName (fss [
+                BackgroundColor Color.red
+                Transition (Transition.Transition3(Property.backgroundColor, (sec 2.5), Animation.Ease, (sec 2.5)))
+                Hover 
+                    [
+                        BackgroundColor Color.green
+                    ]                 
+            ])] [ str "I have a transition! Hover me!" ]
+        ]
+
+
+
+
+
 
 
 
@@ -837,55 +890,6 @@ let AnimationExamples =
                 ]
         ]
       
-let TransitionExamples =   
-    let box =
-        fss
-            [
-                Display Display.InlineBlock
-                BackgroundColor Color.pink
-                Width (px 200)
-                Height (px 200)
-                Transition (Transition.Transition2(Property.Transform, (ms 300.0), Animation.CubicBezier(0.0, 0.47, 0.32, 1.97)))
-            ]
-
-    let trigger =
-        fss
-            [
-                Width (px 200)
-                Height (px 200)
-                BorderWidth (px 20)
-                BorderStyle Border.Solid
-                BorderColor (hex "ddd")
-                Hover 
-                    [
-                        ! Html.Div
-                            [
-                                Transforms
-                                   [
-                                       Transform.Translate2((px 200), (px 150))
-                                       Transform.Rotate(deg 20.0)
-                                   ]
-                            ]
-                    ]
-            ]
-
-    fragment []
-        [
-            div [ ClassName trigger ]
-                [
-                    div [ ClassName box ] []
-                ]
-
-            p [ClassName (fss [
-                BackgroundColor Color.red
-                Transition (Transition.Transition3(Property.backgroundColor, (sec 2.5), Animation.Ease, (sec 2.5)))
-                Hover 
-                    [
-                        BackgroundColor Color.green
-                    ]                 
-            ])] [ str "I have a transition! Hover me!" ]
-        ]
-
 let FlexBoxExamples model dispatch =
     // Test alignment
     let parent = 
@@ -1699,10 +1703,11 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // BorderExamples
            // MarginExamples
            // PaddingExamples
-           TransformExamples
+           // TransformExamples
            
            
-           // TransitionExamples
+           TransitionExamples
+           
            // FlexBoxExamples model dispatch
            // MediaQueryExamples
            // SelectorExamples

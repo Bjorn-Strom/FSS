@@ -327,8 +327,8 @@ module Value =
                 | Transforms      ts -> Property.value transform       ==> combineWs TransformValue.transformValue ts
                 | TransformOrigin ts -> Property.value transformOrigin ==> combineWs TransformValue.transformOriginValue ts
 
-                | Transition               t  -> Property.value transition               ==> Transition.value t
-                | Transitions              ts -> Property.value transition               ==> combineComma Transition.value ts
+                | Transition               t  -> Property.value transition               ==> TransitionValue.value t
+                | Transitions              ts -> Property.value transition               ==> combineComma TransitionValue.value ts
                 | TransitionDelay          t  -> Property.value transitionDelay          ==> Animation.value t
                 | TransitionDuration       t  -> Property.value transitionDuration       ==> Animation.value t
                 | TransitionProperty       t  -> Property.value transitionProperty       ==> Property.value t
