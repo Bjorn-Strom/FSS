@@ -207,21 +207,21 @@ module Value =
                 
                 | Hover h -> hover |> Property.value |> toPsuedo ==> createCSSObject h
                 
-                | FontSize              f  -> Property.value fontSize             ==> FontSize.value f
-                | FontStyle             f  -> Property.value fontStyle            ==> FontStyle.value f
-                | FontStretch           f  -> Property.value fontStretch          ==> FontStretch.value f
-                | FontWeight            f  -> Property.value fontWeight           ==> FontWeight.value f
-                | LineHeight            l  -> Property.value lineHeight           ==> LineHeight.value l
-                | FontFamily            f  -> Property.value fontFamily           ==> FontFamily.value f
-                | FontFamilies          fs -> Property.value fontFamily           ==> combineWs FontFamily.value fs
-                | FontFeatureSetting    f  -> Property.value fontFeatureSettings  ==> FontFeatureSetting.value f
-                | FontFeatureSettings   fs -> Property.value fontFeatureSettings  ==> combineComma FontFeatureSetting.value fs 
-                | FontVariantNumeric    f  -> Property.value fontVariantNumeric   ==> FontVariantNumeric.value f
-                | FontVariantNumerics   fs -> Property.value fontVariantNumeric   ==> combineWs FontVariantNumeric.value fs 
-                | FontVariantCaps       f  -> Property.value fontVariantCaps      ==> FontVariantCaps.value f
-                | FontVariantEastAsian  f  -> Property.value fontVariantEastAsian ==> FontVariantEastAsian.value f
-                | FontVariantEastAsians fs -> Property.value fontVariantEastAsian ==> combineWs FontVariantEastAsian.value fs 
-                | FontVariantLigatures  f  -> Property.value fontVariantLigatures ==> FontVariantLigatures.value f
+                | FontSize              f  -> Property.value fontSize             ==> FontValues.fontSizeValue f
+                | FontStyle             f  -> Property.value fontStyle            ==> FontValues.fontStyleValue f
+                | FontStretch           f  -> Property.value fontStretch          ==> FontValues.fontStretchValue f
+                | FontWeight            f  -> Property.value fontWeight           ==> FontValues.fontWeightValue f
+                | LineHeight            l  -> Property.value lineHeight           ==> FontValues.lineHeightValue l
+                | FontFamily            f  -> Property.value fontFamily           ==> FontValues.fontFamilyValue f
+                | FontFamilies          fs -> Property.value fontFamily           ==> combineWs FontValues.fontFamilyValue fs
+                | FontFeatureSetting    f  -> Property.value fontFeatureSettings  ==> FontValues.fontFeatureSettingValue f
+                | FontFeatureSettings   fs -> Property.value fontFeatureSettings  ==> combineComma FontValues.fontFeatureSettingValue fs 
+                | FontVariantNumeric    f  -> Property.value fontVariantNumeric   ==> FontValues.fontVariantNumericValue f
+                | FontVariantNumerics   fs -> Property.value fontVariantNumeric   ==> combineWs FontValues.fontVariantNumericValue fs 
+                | FontVariantCaps       f  -> Property.value fontVariantCaps      ==> FontValues.fontVariantCapValue f
+                | FontVariantEastAsian  f  -> Property.value fontVariantEastAsian ==> FontValues.fontVariantEastAsianValue f
+                | FontVariantEastAsians fs -> Property.value fontVariantEastAsian ==> combineWs FontValues.fontVariantEastAsianValue fs 
+                | FontVariantLigatures  f  -> Property.value fontVariantLigatures ==> FontValues.fontVariantLigatureValue f
 
                 | TextAlign               t  -> Property.value textAlign               ==> TextAlign.value t
                 | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextDecorationLine.value t

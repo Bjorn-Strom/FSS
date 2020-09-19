@@ -6,7 +6,7 @@ open Media
 open Html
 open Units.Size
 open Color
-open FontFace
+open FontValues
 open Keyframes
 
 [<AutoOpen>]
@@ -18,9 +18,13 @@ module Functions =
     let keyframes (attributeList: KeyframeAttribute list) = 
         attributeList |> createAnimationObject |> kframes'
 
-    let fontFace (fontFamily: string) (attributeList: FontFace list) =
+    let fontFace (fontFamily: string) (attributeList: Font.FontFace list) =
         attributeList |> createFontFaceObject fontFamily |> css'
-        FontName fontFamily
+        Font.FontName fontFamily
+
+    let fontFaces (fontFamily: string) (attributeLists: Font.FontFace list list) =
+        attributeLists |> List.map (createFontFaceObject fontFamily) |> css'
+        Font.FontName fontFamily
     
     // Keyframes
     let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame
@@ -52,6 +56,7 @@ module Functions =
     let Inherit = Global.Inherit
     let Unset = Global.Unset 
     let Revert = Global.Revert
+    let Normal = Global.Normal
 
     // Color
     let rgb (r: int) (g: int) (b: int): CssColor = Utilities.Color.rgb r g b |> CssColor

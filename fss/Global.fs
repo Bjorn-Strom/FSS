@@ -10,6 +10,7 @@ module Global =
         | Inherit
         | Unset
         | Revert
+        | Normal
         interface IGlobal
         interface IFontSize
         interface IFontStretch

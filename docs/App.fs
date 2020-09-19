@@ -49,22 +49,233 @@ let ColorExamples =
             p [ ClassName (fss [Color Revert]) ] [ str "Colors can be reverted"]
             p [ ClassName (fss [Color Unset]) ] [ str "Colors can be unset"]
         ]
-(*
+
+let BackgroundExamples model dispatch =
+    fragment []
+        [
+            h3 [] [ str "And gradients!" ]
+            
+            div [ ClassName (fss [Display Display.Flex]) ]
+                [
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (Background.LinearGradient [ Color.red; Color.blue ] )
+                            ])
+                    ] []
+                            
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; Color.blue ] )
+                            ])
+                    ] []
+        
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (Background.RadialGradient [ Color.red; Color.blue ] )
+                            ])
+                    ] []
+        
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (Background.RepeatingRadialGradient [ Color.red; Color.red; px 10; Color.blue; px 10; Color.blue; px 20 ] )
+                            ])
+                    ] []
+                ]
+        
+            div [ ClassName (fss [Display Display.Flex]) ]
+                [
+        
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (Background.RepeatingRadialGradient [ hex "#e66465"; hex "9198e5"; pct 20 ] )
+                            ])
+                    ] []
+        
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (Background.LinearGradient [ Background.Bottom; Color.red; hex "f06d06" ] )
+                                ])
+                        ] [ ]
+        
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (Background.LinearGradient [deg 72.0; Color.red; hex "f06d06" ] )
+                                ])
+                        ] []
+        
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; hex "f06d06"; rgb 255 255 0; Color.green ] )
+                                ])
+                        ] []
+                ]
+        
+            div [ ClassName (fss [Display Display.Flex]) ]
+                [
+        
+                    div [
+                        ClassName (fss
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                                BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; Color.yellow; pct 10 ] )
+                            ])
+                    ] []
+        
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (Background.LinearGradient [ Background.Right; hex "fffdc2"; hex "fffdc2"; pct 15; hex "d7f0a2"; pct 15; hex "d7f0a2"; pct 85; hex "fffdc2"; pct 85 ] )
+                                ])
+                        ] []
+        
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (Background.RadialGradient [ Background.CircleAt [ Background.Top; Background.Right]; Color.yellow; hex "f06d06"] )
+                                ])
+                        ] []
+        
+                    div [
+                            ClassName (fss
+                                [
+                                    Width (px 200)
+                                    Height (px 200)
+                                    BackgroundImage (Background.RadialGradient [ Background.CircleAt [pct 100]; hex "333"; hex "333"; pct 50; hex "eee"; pct 75; hex "333"; pct 75] )
+                                ])
+                        ] []
+                ]
+        
+            h3 [] [ str "And images!" ]
+            div [
+                ClassName (fss
+                    [
+                        Width (px 200)
+                        Height (px 200)
+                        BackgroundImage (Background.Url "https://unsplash.it/200/200")
+                    ])
+            ] []
+        
+            let frameAnimation =
+                keyframes
+                    [
+                        frame 0   [ BackgroundPositions [px 0; px 0] ]
+                        frame 100 [ BackgroundPositions [px -500; px 0]]
+                    ]
+        
+            let frame =
+                fss
+                    [
+                        Width (px 50)
+                        Height (px 72)
+                        BackgroundImage (Background.Url "https://s.cdpn.io/79/sprite-steps.png")
+                        Animation [ frameAnimation; sec 1.0; Animation.Step(10); Animation.Infinite ]
+                    ]
+        
+            h3 [] [ str "Background images can be... fun?" ]
+            div [ ClassName frame ] []
+        
+            let formStyle =
+                fss
+                    [
+                        //BorderStyle Border.Solid
+                        BorderWidth (px 1)
+                        BorderColor Color.orangeRed
+                        CSSProperty.Margin (px 20)
+                    ]
+        
+            div [ ClassName (fss [ Display Display.Flex])]
+                [
+        
+                    form [ ClassName formStyle ]
+                        [
+                            h3 [] [str "Background repeat" ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.RepeatX)) ]
+                                    str "Repeat-X" 
+                                ]
+        
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.RepeatY)) ]
+                                    str "Repeat-Y" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.Repeat)) ]
+                                    str "Repeat" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.Space)) ]
+                                    str "Space" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.Round)) ]
+                                    str "Round" 
+                                ]
+                            div [] 
+                                [
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.NoRepeat)) ]
+                                    str "NoRepeat" 
+                                ]
+                        ]
+                    ]
+            div [ ClassName (fss 
+                    [
+                        Width (px 1025)
+                        Height (px 1025)
+                        BackgroundImage (Background.Url "https://interactive-examples.mdn.mozilla.net/media/examples/moon.jpg")
+                        BackgroundRepeat model.BackgroundRepeat
+                    ])] []
+        
+                ]
+
 let FontExamples =
     fragment []
         [
             h1 [] [ str "fonts" ]
             h2 [] [ str "font-size"]
-            p [ClassName (fss [FontSize FontSize.XxSmall])] [ str "Fonts can be xx-Small" ]
-            p [ClassName (fss [FontSize FontSize.XSmall])] [ str "Fonts can be x-Small" ]
-            p [ClassName (fss [FontSize FontSize.Small])] [ str "Fonts can be small" ]
-            p [ClassName (fss [FontSize FontSize.Medium])] [ str "Fonts can be medium" ]
-            p [ClassName (fss [FontSize FontSize.Large])] [ str "Fonts can be large" ]
-            p [ClassName (fss [FontSize FontSize.XLarge])] [ str "Fonts can be x-large" ]
-            p [ClassName (fss [FontSize FontSize.XxLarge])] [ str "Fonts can be xx-large" ]
-            p [ClassName (fss [FontSize FontSize.XxxLarge])] [ str "Fonts can be xxx-large" ]
-            p [ClassName (fss [FontSize FontSize.Smaller])] [ str "Fonts can be smaller" ]
-            p [ClassName (fss [FontSize FontSize.Larger])] [ str "Fonts can be larger" ]
+            p [ClassName (fss [FontSize Font.XxSmall])] [ str "Fonts can be xx-Small" ]
+            p [ClassName (fss [FontSize Font.XSmall])] [ str "Fonts can be x-Small" ]
+            p [ClassName (fss [FontSize Font.Small])] [ str "Fonts can be small" ]
+            p [ClassName (fss [FontSize Font.Medium])] [ str "Fonts can be medium" ]
+            p [ClassName (fss [FontSize Font.Large])] [ str "Fonts can be large" ]
+            p [ClassName (fss [FontSize Font.XLarge])] [ str "Fonts can be x-large" ]
+            p [ClassName (fss [FontSize Font.XxLarge])] [ str "Fonts can be xx-large" ]
+            p [ClassName (fss [FontSize Font.XxxLarge])] [ str "Fonts can be xxx-large" ]
+            p [ClassName (fss [FontSize Font.Smaller])] [ str "Fonts can be smaller" ]
+            p [ClassName (fss [FontSize Font.Larger])] [ str "Fonts can be larger" ]
 
             p [ClassName (fss [FontSize (px 28)])] [ str "Fonts can be set with pixels" ]
             p [ClassName (fss [FontSize (pct 300)])] [ str "Fonts can be set with percent" ]
@@ -77,39 +288,39 @@ let FontExamples =
             p [ClassName (fss [FontSize Revert])] [ str "Fonts can reverted" ]
             p [ClassName (fss [FontSize Unset])] [ str "Fonts can unset" ]
 
-            p [ ClassName (fss [FontFamily FontFamily.Serif]) ] [ str "This font is serif!"]
-            p [ ClassName (fss [FontFamily FontFamily.SansSerif]) ] [ str "This font is sans-serif!"]
-            p [ ClassName (fss [FontFamily FontFamily.Monospace]) ] [ str "This font is monospace!"]
-            p [ ClassName (fss [FontFamily FontFamily.Cursive]) ] [ str "This font is cursive!"]
+            p [ ClassName (fss [FontFamily Font.Serif]) ] [ str "This font is serif!"]
+            p [ ClassName (fss [FontFamily Font.SansSerif]) ] [ str "This font is sans-serif!"]
+            p [ ClassName (fss [FontFamily Font.Monospace]) ] [ str "This font is monospace!"]
+            p [ ClassName (fss [FontFamily Font.Cursive]) ] [ str "This font is cursive!"]
             p [ ClassName (fss 
                     [
-                        FontFamilies [ FontFamily.SansSerif; FontFamily.Custom "Helvetica" ]
+                        FontFamilies [ Font.SansSerif; Font.Custom "Helvetica" ]
                     ]) ] [ str "This should be helvetica sans-serif"]
 
 
-            p [ ClassName (fss [FontStyle FontStyle.Italic])]
+            p [ ClassName (fss [FontStyle Font.Italic])]
                 [
                     str "Italic"
                 ]
-            p [ ClassName (fss [FontStyle FontStyle.Normal])]
+            p [ ClassName (fss [FontStyle Font.Normal])]
                 [
                     str "Normal"
                 ]
-            p [ ClassName (fss [FontStyle (FontStyle.Oblique <| deg 90.0) ])]
+            p [ ClassName (fss [FontStyle (Font.Oblique <| deg 90.0) ])]
                 [
                     str "Oblique 90"
                 ]
-            p [ ClassName (fss [FontStyle (FontStyle.Oblique <| deg -90.0) ])]
+            p [ ClassName (fss [FontStyle (Font.Oblique <| deg -90.0) ])]
                 [
                     str "Oblique -90"
                 ]
 
-            p [ ClassName (fss [FontWeight FontWeight.Bold ])]
+            p [ ClassName (fss [FontWeight Font.Bold ])]
                 [
                     str "BOLD"
                 ]
 
-            p [ ClassName (fss [FontWeight (FontWeight.Number 700) ])]
+            p [ ClassName (fss [FontWeight (Font.Number 700) ])]
                 [
                     str "BOLD"
                 ]
@@ -117,7 +328,7 @@ let FontExamples =
             p [ ClassName (fss 
                     [
                         Width (px 150)
-                        LineHeight LineHeight.Normal
+                        LineHeight Font.LineHeight.Normal
                     ])]
                 [
                     str """
@@ -129,7 +340,7 @@ let FontExamples =
             p [ ClassName (fss 
                     [
                         Width (px 150)
-                        LineHeight (LineHeight.Value 2.5)
+                        LineHeight (Font.Value 2.5)
                     ])]
                 [
                     str """
@@ -174,7 +385,109 @@ let FontExamples =
                     """
                 ]
         ]
- *)       
+     
+let FontFaceExamples =
+    let droidSerif =
+        fontFaces "DroidSerif"
+            [
+                [
+                    Font.Source (Font.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Font.Truetype))
+                    Font.FontWeight Font.Bold
+                    Font.FontStyle Normal
+                ]
+                [
+                    Font.Source (Font.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Font.Truetype))
+                    Font.FontWeight Normal
+                    Font.FontStyle Normal
+                ]
+            ]
+     
+    let moderna =
+        fontFace "moderna"
+            [
+                Font.Sources 
+                    [
+                        Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", Font.Woff2)
+                        Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", Font.Woff)
+                        Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", Font.Truetype)
+                        Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", Font.Svg)
+                    ]
+                Font.FontWeight Normal
+                Font.FontStyle Normal
+            ]
+     
+    let p1 = 
+        fss 
+            [
+                FontFamily (Font.Font droidSerif)
+            ]
+     
+    let p2 = 
+        fss 
+            [
+                FontFamily (Font.Font droidSerif)
+                CSSProperty.FontWeight Font.Bold
+            ]
+     
+    let p3 = 
+        fss 
+            [
+                FontFamily (Font.Font moderna)
+                CSSProperty.FontWeight Font.Bold
+            ]
+     
+    fragment []
+        [
+            h2 [] [ str "Font face examples" ]
+     
+            p [ ClassName p1 ]
+                [
+                    str "Why..."
+                ]
+     
+            p [ ClassName p2 ]
+                [
+                    str "Hello there"
+                ]
+     
+            p [ ClassName p3 ]
+                [
+                    str "Hello there"
+                ]
+        ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let BorderExamples =
     fragment []
         [
@@ -1033,217 +1346,6 @@ let FlexBoxExamples model dispatch =
             p [] [str "Flex basis & shrink" ]
             flexBasisShrink
         ]
-// Todo: Refactor
-let BackgroundExamples model dispatch =
-    fragment []
-        [
-            h3 [] [ str "And gradients!" ]
-    
-            div [ ClassName (fss [Display Display.Flex]) ]
-                [
-                    div [
-                        ClassName (fss
-                            [
-                                Width (px 200)
-                                Height (px 200)
-                                BackgroundImage (Background.LinearGradient [ Color.red; Color.blue ] )
-                            ])
-                    ] []
-                    
-                    div [
-                        ClassName (fss
-                            [
-                                Width (px 200)
-                                Height (px 200)
-                                BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; Color.blue ] )
-                            ])
-                    ] []
-
-                    div [
-                        ClassName (fss
-                            [
-                                Width (px 200)
-                                Height (px 200)
-                                BackgroundImage (Background.RadialGradient [ Color.red; Color.blue ] )
-                            ])
-                    ] []
-
-                    div [
-                        ClassName (fss
-                            [
-                                Width (px 200)
-                                Height (px 200)
-                                BackgroundImage (Background.RepeatingRadialGradient [ Color.red; Color.red; px 10; Color.blue; px 10; Color.blue; px 20 ] )
-                            ])
-                    ] []
-                ]
-
-            div [ ClassName (fss [Display Display.Flex]) ]
-                [
-
-                    div [
-                        ClassName (fss
-                            [
-                                Width (px 200)
-                                Height (px 200)
-                                BackgroundImage (Background.RepeatingRadialGradient [ hex "#e66465"; hex "9198e5"; pct 20 ] )
-                            ])
-                    ] []
-
-                    div [
-                           ClassName (fss
-                               [
-                                   Width (px 200)
-                                   Height (px 200)
-                                   BackgroundImage (Background.LinearGradient [ Background.Bottom; Color.red; hex "f06d06" ] )
-                               ])
-                       ] [ ]
-
-                    div [
-                            ClassName (fss
-                                [
-                                    Width (px 200)
-                                    Height (px 200)
-                                    BackgroundImage (Background.LinearGradient [deg 72.0; Color.red; hex "f06d06" ] )
-                                ])
-                        ] []
-
-                    div [
-                            ClassName (fss
-                                [
-                                    Width (px 200)
-                                    Height (px 200)
-                                    BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; hex "f06d06"; rgb 255 255 0; Color.green ] )
-                                ])
-                        ] []
-                ]
-
-            div [ ClassName (fss [Display Display.Flex]) ]
-                [
-
-                    div [
-                        ClassName (fss
-                            [
-                                Width (px 200)
-                                Height (px 200)
-                                BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; Color.yellow; pct 10 ] )
-                            ])
-                    ] []
-
-                    div [
-                            ClassName (fss
-                                [
-                                    Width (px 200)
-                                    Height (px 200)
-                                    BackgroundImage (Background.LinearGradient [ Background.Right; hex "fffdc2"; hex "fffdc2"; pct 15; hex "d7f0a2"; pct 15; hex "d7f0a2"; pct 85; hex "fffdc2"; pct 85 ] )
-                                ])
-                        ] []
-
-                    div [
-                            ClassName (fss
-                                [
-                                    Width (px 200)
-                                    Height (px 200)
-                                    BackgroundImage (Background.RadialGradient [ Background.CircleAt [ Background.Top; Background.Right]; Color.yellow; hex "f06d06"] )
-                                ])
-                        ] []
-
-                    div [
-                            ClassName (fss
-                                [
-                                    Width (px 200)
-                                    Height (px 200)
-                                    BackgroundImage (Background.RadialGradient [ Background.CircleAt [pct 100]; hex "333"; hex "333"; pct 50; hex "eee"; pct 75; hex "333"; pct 75] )
-                                ])
-                        ] []
-                ]
-
-            h3 [] [ str "And images!" ]
-            div [
-                ClassName (fss
-                    [
-                        Width (px 200)
-                        Height (px 200)
-                        BackgroundImage (Background.Url "https://unsplash.it/200/200")
-                    ])
-            ] []
-
-            let frameAnimation =
-                keyframes
-                    [
-                        frame 0   [ BackgroundPositions [px 0; px 0] ]
-                        frame 100 [ BackgroundPositions [px -500; px 0]]
-                    ]
-
-            let frame =
-                fss
-                    [
-                        Width (px 50)
-                        Height (px 72)
-                        BackgroundImage (Background.Url "https://s.cdpn.io/79/sprite-steps.png")
-                        Animation [ frameAnimation; sec 1.0; Animation.Step(10); Animation.Infinite ]
-                    ]
-
-            h3 [] [ str "Background images can be... fun?" ]
-            div [ ClassName frame ] []
-
-            let formStyle =
-                fss
-                    [
-                        //BorderStyle Border.Solid
-                        BorderWidth (px 1)
-                        BorderColor Color.orangeRed
-                        CSSProperty.Margin (px 20)
-                    ]
-
-            div [ ClassName (fss [ Display Display.Flex])]
-                [
-
-                    form [ ClassName formStyle ]
-                        [
-                            h3 [] [str "Background repeat" ]
-                            div [] 
-                                [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.RepeatX)) ]
-                                    str "Repeat-X" 
-                                ]
-
-                            div [] 
-                                [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.RepeatY)) ]
-                                    str "Repeat-Y" 
-                                ]
-                            div [] 
-                                [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.Repeat)) ]
-                                    str "Repeat" 
-                                ]
-                            div [] 
-                                [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.Space)) ]
-                                    str "Space" 
-                                ]
-                            div [] 
-                                [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.Round)) ]
-                                    str "Round" 
-                                ]
-                            div [] 
-                                [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.NoRepeat)) ]
-                                    str "NoRepeat" 
-                                ]
-                        ]
-                    ]
-            div [ ClassName (fss 
-                    [
-                        Width (px 1025)
-                        Height (px 1025)
-                        BackgroundImage (Background.Url "https://interactive-examples.mdn.mozilla.net/media/examples/moon.jpg")
-                        BackgroundRepeat model.BackgroundRepeat
-                    ])] []
-
-                ]
 
 let MediaQueryExamples =
    let style =
@@ -1377,79 +1479,6 @@ let SelectorExamples =
                 ]
         ]
 
-open FontFace
-open FontWeight
-
-let FontFaceExamples =
-    let droidSerif =
-        fontFace "DroidSerif"
-            [
-                Source (Url ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Truetype))
-                FontWeight Bold
-                FontStyle FontStyle.Normal
-            ] |> ignore
-
-        fontFace "DroidSerif"
-            [
-                Source (Url ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Truetype))
-                FontWeight Normal
-                FontStyle FontStyle.Normal
-            ]
-
-    let moderna =
-        fontFace "moderna"
-            [
-                Sources 
-                    [
-                         Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", Woff2)
-                         Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", Woff)
-                         Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", Truetype)
-                         Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", Svg)
-                    ]
-                FontWeight Normal
-                FontStyle FontStyle.Normal
-            ]
-
-    let p1 = 
-        fss 
-            [
-                //FontFamily (Font droidSerif)
-            ]
-
-    let p2 = 
-        fss 
-            [
-                //FontFamily (Font droidSerif)
-                CSSProperty.FontWeight FontWeight.Bold
-            ]
-
-    let p3 = 
-        fss 
-            [
-                //FontFamily (Font moderna)
-                CSSProperty.FontWeight FontWeight.Bold
-            ]
-
-    fragment []
-        [
-            h2 [] [ str "Font face examples" ]
-
-            p [ ClassName p1 ]
-                [
-                    str "Why..."
-                ]
-
-            p [ ClassName p2 ]
-                [
-                    str "Hello there"
-                ]
-
-            p [ ClassName p3 ]
-                [
-                    str "Hello there"
-                ]
-        ]
-
 open TextDecorationLine
 open TextDecorationThickness
 open TextDecorationStyle
@@ -1534,7 +1563,7 @@ let TextExamples =
                 fss 
                     [
                         TextAlign TextAlign.Center
-                        CSSProperty.FontWeight FontWeight.Bold
+                        CSSProperty.FontWeight Font.Bold
                         FontSize (px 80)
                         //FontFamily SansSerif
                         BackgroundColor (hex "91877b")
@@ -1547,7 +1576,7 @@ let TextExamples =
                 fss 
                     [
                         TextAlign TextAlign.Center
-                        CSSProperty.FontWeight FontWeight.Bold
+                        CSSProperty.FontWeight Font.Bold
                         FontSize (px 80)
                         //FontFamily SansSerif
                         BackgroundColor (hex "0e8dbc")
@@ -1576,7 +1605,7 @@ let TextExamples =
                 fss 
                     [
                         TextAlign TextAlign.Center
-                        CSSProperty.FontWeight FontWeight.Bold
+                        CSSProperty.FontWeight Font.Bold
                         FontSize (px 80)
                         //FontFamily SansSerif
                         BackgroundColor (hex "3a50d9")
@@ -1595,7 +1624,7 @@ let TextExamples =
                 fss 
                     [
                         TextAlign TextAlign.Center
-                        CSSProperty.FontWeight FontWeight.Bold
+                        CSSProperty.FontWeight Font.Bold
                         FontSize (px 80)
                         //FontFamily SansSerif
                         BackgroundColor (hex "edde9c")
@@ -1628,7 +1657,7 @@ let TextExamples =
                 fss 
                     [
                         TextAlign TextAlign.Center
-                        CSSProperty.FontWeight FontWeight.Bold
+                        CSSProperty.FontWeight Font.Bold
                         FontSize (px 80)
                         //FontFamily SansSerif
                         //BackgroundColor red
@@ -1669,8 +1698,13 @@ let TextExamples =
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
-           //ColorExamples
+           // ColorExamples
+           // BackgroundExamples model dispatch
            // FontExamples
+            FontFaceExamples
+
+           
+           
            // BorderExamples
            // AnimationExamples
            // MarginExamples
@@ -1678,10 +1712,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // TransformExamples
            // TransitionExamples
            // FlexBoxExamples model dispatch
-           BackgroundExamples model dispatch
            // MediaQueryExamples
            // SelectorExamples
-           // FontFaceExamples
            // iTextExamples
            (*
             let testo x =

@@ -7,9 +7,12 @@ open Units.Percent
 open Global
 open Types
 open Fss.Utilities.Helpers
+open Units.Angle
+open Property
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
-module FontSize =
+
+module Font =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     type FontSize =
         // Absolute
         | XxSmall
@@ -26,37 +29,14 @@ module FontSize =
         interface IFontSize
         interface IGlobal
 
-    let value (v: IFontSize): string =
-        match v with
-            | :? Global as g   -> Global.value g
-            | :? Size as s     -> Units.Size.value s
-            | :? Percent as p  -> Units.Percent.value p
-            | :? FontSize as s -> duToKebab v
-            | _                -> "Unknown font size"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
-module FontStyle =
-    open Units.Angle
-
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
     type FontStyle =
         | Normal
         | Italic
         | Oblique of Angle
         interface IFontStyle
 
-    let private fontStyleValue (v: FontStyle): string =
-        match v with
-            | Oblique a -> sprintf "oblique %s" <| Units.Angle.value a
-            | _         -> duToLowercase v
-
-    let value (v: IFontStyle): string =
-        match v with
-            | :? FontStyle as f -> fontStyleValue f
-            | :? Global as g    -> Global.value g
-            | _                 -> "Unknown font style"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
-module FontStretch =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
     type FontStretch =
         | Normal
         | SemiCondensed
@@ -70,17 +50,7 @@ module FontStretch =
         | Pct of Percent
         interface IFontStretch
 
-    let private fontStretchValue (v: FontStretch): string = duToKebab v
-
-    let value (v: IFontStretch): string =
-        match v with
-            | :? FontStretch as f -> fontStretchValue f
-            | :? Percent as p     -> Units.Percent.value p
-            | :? Global as g      -> Global.value g
-            | _                   -> "unknown font stretch value"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
-module FontWeight =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
     type FontWeight =
         | Normal
         | Bold
@@ -89,19 +59,7 @@ module FontWeight =
         | Number of int
         interface IFontWeight
 
-    let private fontFamilyValue (v: FontWeight): string = 
-        match v with
-            | Number n -> string n
-            | _        -> duToLowercase v
-
-    let value (v: IFontWeight): string =
-        match v with
-            | :? Global as g     -> Global.value g
-            | :? FontWeight as f -> fontFamilyValue f
-            | _                  -> "Unknown font family"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
-module LineHeight =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
     type LineHeight =
         | Normal
         | Value of float
@@ -109,21 +67,7 @@ module LineHeight =
         | Size of Size
         interface ILineHeight
 
-    let private lineHeightValue (v: LineHeight): string = 
-        match v with
-            | Value v -> string v
-            | _       -> duToLowercase v
-
-    let value (v: ILineHeight): string =
-        match v with
-            | :? LineHeight as f -> lineHeightValue f
-            | :? Percent as p    -> Units.Percent.value p
-            | :? Size as s       -> Units.Size.value s
-            | :? Global as g     -> Global.value g
-            | _                  -> "unknown font stretch value"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
-module FontDisplay =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
     type FontDisplay =
         | Auto
         | Block
@@ -132,21 +76,7 @@ module FontDisplay =
         | Optional
         interface IFontDisplay
 
-    let private fontDisplayValue (v: FontDisplay): string = duToLowercase v
-
-    let value (v: IFontDisplay): string =
-        match v with
-            | :? FontDisplay as f -> fontDisplayValue f
-            | _                   -> "Unknown font display"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
-module FontFace =
-    open FontDisplay
-    open FontStretch
-    open FontStyle
-    open FontWeight
-    open Property
-
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
     type Format =
         | Truetype
         | Opentype
@@ -155,54 +85,22 @@ module FontFace =
         | Woff2
         | Svg
 
-    let private formatValue (v: Format): string = duToKebab v
-
     type Source =
         | Url of string * Format
         | Local of string
 
-    let private sourceValue (v: Source): string =
-        match v with
-            | Url (s, f) -> sprintf "url('%s') format('%s')" s (formatValue f)
-            | Local l    -> sprintf "local('%s')" l
-
     type FontFace =
         | Source of Source
         | Sources of Source list
-        | FontStyle of FontStyle
-        | FontDisplay of FontDisplay
-        | FontStretch of FontStretch
-        | FontWeight of FontWeight
+        | FontStyle of IFontStyle
+        | FontDisplay of IFontDisplay
+        | FontStretch of IFontStretch
+        | FontWeight of IFontWeight
         interface IFontFamily
 
     type FontName = FontName of string
 
-    let fontName (FontName n) = n
-
-    let createFontFaceObject (fontName: string) (attributeList: FontFace list) =
-        let innerStyle =
-            attributeList |> List.map (
-                function
-                    | Source      s -> "src"                      ==> sourceValue s
-                    | Sources     s -> "src"                      ==> combineComma sourceValue s
-                    | FontStyle   f -> Property.value fontStyle   ==> FontStyle.value f
-                    | FontDisplay f -> Property.value fontDisplay ==> FontDisplay.value f
-                    | FontStretch f -> Property.value fontStretch ==> FontStretch.value f
-                    | FontWeight  f -> Property.value fontWeight  ==> FontWeight.value f)
-
-        createObj
-            [
-                "@font-face" ==> 
-                    createObj
-                        ([
-                            "fontFamily" ==> fontName
-                        ] @ innerStyle) 
-            ]
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
-module FontFamily =
-    open FontFace
-
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
     type FontFamily =
         | Serif
         | SansSerif
@@ -212,20 +110,7 @@ module FontFamily =
         | Custom of string
         interface IFontFamily
 
-    let private fontFamilyValue (v: FontFamily): string = 
-        match v with
-            | Font f   -> fontName f
-            | Custom c -> c
-            | _ -> duToKebab v
-
-    let value (v: IFontFamily) : string =
-        match v with
-            | :? Global as g     -> Global.value g
-            | :? FontFamily as f -> fontFamilyValue f
-            | _ -> "Unknown font family"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
-module FontFeatureSetting =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
     type SettingSwitch =
         | On
         | Off
@@ -259,46 +144,7 @@ module FontFeatureSetting =
         | Mkmk of SettingSwitch
         interface IFontFeatureSetting
 
-    let fontFeatureSettingValue (v: FontFeatureSetting): string =
-        let stringify (fontFeature: string) (setting: SettingSwitch) =
-            sprintf "\"%s\" %s" fontFeature (duToString setting)
-
-        match v with
-        | Liga switch -> stringify "liga" switch
-        | Dlig switch -> stringify "dlig" switch
-        | Onum switch -> stringify "onum" switch
-        | Lnum switch -> stringify "lnum" switch 
-        | Tnum switch -> stringify "tnum" switch
-        | Zero switch -> stringify "zero" switch 
-        | Frac switch -> stringify "frac" switch 
-        | Sups switch -> stringify "sups" switch 
-        | Subs switch -> stringify "subs" switch 
-        | Smcp switch -> stringify "smcp" switch 
-        | C2sc switch -> stringify "c2sc" switch 
-        | Case switch -> stringify "case" switch
-        | Hlig switch -> stringify "hlig" switch 
-        | Calt switch -> stringify "calt" switch 
-        | Swsh switch -> stringify "swsh" switch 
-        | Hist switch -> stringify "hist" switch 
-        | Ss   (variant, switch) -> stringify (sprintf "ss%02i" variant) switch
-        | Kern switch -> stringify "kern" switch 
-        | Locl switch -> stringify "locl" switch 
-        | Rlig switch -> stringify "rlig" switch 
-        | Medi switch -> stringify "medi" switch 
-        | Init switch -> stringify "init" switch 
-        | Isol switch -> stringify "isol" switch 
-        | Fina switch -> stringify "fina" switch 
-        | Mark switch -> stringify "mark" switch 
-        | Mkmk switch -> stringify "mkmk" switch 
-
-    let value (v: IFontFeatureSetting): string =
-        match v with
-            | :? Global as g             -> Global.value g
-            | :? FontFeatureSetting as f -> sprintf "%s" (fontFeatureSettingValue f)
-            | _ -> "Unknown font feature setting"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
-module FontVariantNumeric =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
     type FontVariantNumeric =
         | Normal
         | Ordinal
@@ -311,14 +157,7 @@ module FontVariantNumeric =
         | StackedFractions
         interface IFontVariantNumeric
 
-    let value (v: IFontVariantNumeric): string =
-        match v with
-        | :? Global as g             -> Global.value g
-        | :? FontVariantNumeric as f -> duToKebab f
-        | _ -> "Unknown font variant numeric"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
-module FontVariantCaps =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
     type FontVariantCaps =
         | Normal
         | SmallCaps
@@ -329,14 +168,7 @@ module FontVariantCaps =
         | TitlingCaps
         interface IFontVariantCaps
 
-    let value (v: IFontVariantCaps): string =
-        match v with
-        | :? Global          as g -> Global.value g
-        | :? FontVariantCaps as f -> duToKebab f
-        | _ -> "Unknown font variant caps"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-module FontVariantEastAsian  =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
     type FontVariantEastAsian =
         | Normal
         | Ruby
@@ -350,14 +182,7 @@ module FontVariantEastAsian  =
         | ProportionalWidth
         interface IFontVariantEastAsian
 
-    let value (v: IFontVariantEastAsian): string =
-        match v with
-        | :? Global               as g -> Global.value g
-        | :? FontVariantEastAsian as f -> duToKebab f
-        | _ -> "Unknown font variant east asian"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-module FontVariantLigatures =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
     type FontVariantLigatures = 
         | Normal
         | None
@@ -371,8 +196,162 @@ module FontVariantLigatures =
         | NoContextual
         interface IFontVariantLigatures
 
-    let value (v: IFontVariantLigatures): string =
+module FontValues =
+    open Font
+
+    let fontSizeValue (v: IFontSize): string =
+        match v with
+            | :? Global as g   -> Global.value g
+            | :? Size as s     -> Units.Size.value s
+            | :? Percent as p  -> Units.Percent.value p
+            | :? FontSize as s -> duToKebab s
+            | _                -> "Unknown font size"
+
+    let fontStyleValue (v: IFontStyle): string =
+        let stringifyStyleValue (v: FontStyle): string =
+            match v with
+                | Oblique a -> sprintf "oblique %s" <| Units.Angle.value a
+                | _         -> duToLowercase v
+
+        match v with
+            | :? FontStyle as f -> stringifyStyleValue f
+            | :? Global as g    -> Global.value g
+            | _                 -> "Unknown font style"
+
+    let fontStretchValue (v: IFontStretch): string =
+        match v with
+            | :? FontStretch as f -> duToKebab f
+            | :? Percent as p     -> Units.Percent.value p
+            | :? Global as g      -> Global.value g
+            | _                   -> "unknown font stretch value"
+
+    let fontWeightValue (v: IFontWeight): string =
+        let stringifyFamilyValue (v: FontWeight): string = 
+            match v with
+                | Number n -> string n
+                | _        -> duToLowercase v
+
+        match v with
+            | :? Global as g     -> Global.value g
+            | :? FontWeight as f -> stringifyFamilyValue f
+            | _                  -> "Unknown font family"
+
+    let lineHeightValue (v: ILineHeight): string =
+        let stringifyLineHeight (v: LineHeight): string = 
+            match v with
+                | Value v -> string v
+                | _       -> duToLowercase v
+
+        match v with
+            | :? LineHeight as f -> stringifyLineHeight f
+            | :? Percent as p    -> Units.Percent.value p
+            | :? Size as s       -> Units.Size.value s
+            | :? Global as g     -> Global.value g
+            | _                  -> "unknown font stretch value"
+
+    let fontDisplayValue (v: IFontDisplay): string =
+        match v with
+            | :? FontDisplay as f -> duToLowercase f
+            | _                   -> "Unknown font display"
+
+    let private sourceValue (v: Source): string =
+        match v with
+            | Url (s, f) -> sprintf "url('%s') format('%s')" s (duToKebab f)
+            | Local l    -> sprintf "local('%s')" l
+
+    let createFontFaceObject (fontName: string) (attributeList: FontFace list) =
+        let innerStyle =
+            attributeList |> List.map (
+                function
+                    | Source      s -> "src"                      ==> sourceValue s
+                    | Sources     s -> "src"                      ==> combineComma sourceValue s
+                    | FontStyle   f -> Property.value fontStyle   ==> fontStyleValue f
+                    | FontDisplay f -> Property.value fontDisplay ==> fontDisplayValue f
+                    | FontStretch f -> Property.value fontStretch ==> fontStretchValue f
+                    | FontWeight  f -> Property.value fontWeight  ==> fontWeightValue f)
+
+        createObj
+            [
+                "@font-face" ==> 
+                    createObj
+                        ([
+                            "fontFamily" ==> fontName
+                        ] @ innerStyle) 
+            ]
+
+    let fontName (FontName n) = n
+
+    let fontFamilyValue (v: IFontFamily) : string =
+        let parseFamilyValue (v: FontFamily): string = 
+            match v with
+                | Font f   -> fontName f
+                | Custom c -> c
+                | _ -> duToKebab v
+
+        match v with
+            | :? Global as g     -> Global.value g
+            | :? FontFamily as f -> parseFamilyValue f
+            | _ -> "Unknown font family"
+
+
+    let fontFeatureSettingValue (v: IFontFeatureSetting): string =
+        let parseFontFeatureSetting (v: FontFeatureSetting): string =
+            let stringify (fontFeature: string) (setting: SettingSwitch) =
+                sprintf "\"%s\" %s" fontFeature (duToString setting)
+
+            match v with
+            | Liga switch -> stringify "liga" switch
+            | Dlig switch -> stringify "dlig" switch
+            | Onum switch -> stringify "onum" switch
+            | Lnum switch -> stringify "lnum" switch 
+            | Tnum switch -> stringify "tnum" switch
+            | Zero switch -> stringify "zero" switch 
+            | Frac switch -> stringify "frac" switch 
+            | Sups switch -> stringify "sups" switch 
+            | Subs switch -> stringify "subs" switch 
+            | Smcp switch -> stringify "smcp" switch 
+            | C2sc switch -> stringify "c2sc" switch 
+            | Case switch -> stringify "case" switch
+            | Hlig switch -> stringify "hlig" switch 
+            | Calt switch -> stringify "calt" switch 
+            | Swsh switch -> stringify "swsh" switch 
+            | Hist switch -> stringify "hist" switch 
+            | Ss   (variant, switch) -> stringify (sprintf "ss%02i" variant) switch
+            | Kern switch -> stringify "kern" switch 
+            | Locl switch -> stringify "locl" switch 
+            | Rlig switch -> stringify "rlig" switch 
+            | Medi switch -> stringify "medi" switch 
+            | Init switch -> stringify "init" switch 
+            | Isol switch -> stringify "isol" switch 
+            | Fina switch -> stringify "fina" switch 
+            | Mark switch -> stringify "mark" switch 
+            | Mkmk switch -> stringify "mkmk" switch 
+
+        match v with
+            | :? Global as g             -> Global.value g
+            | :? FontFeatureSetting as f -> sprintf "%s" (parseFontFeatureSetting f)
+            | _ -> "Unknown font feature setting"
+
+    let fontVariantNumericValue (v: IFontVariantNumeric): string =
+        match v with
+        | :? Global as g             -> Global.value g
+        | :? FontVariantNumeric as f -> duToKebab f
+        | _ -> "Unknown font variant numeric"
+
+    let fontVariantCapValue (v: IFontVariantCaps): string =
+        match v with
+        | :? Global          as g -> Global.value g
+        | :? FontVariantCaps as f -> duToKebab f
+        | _ -> "Unknown font variant caps"
+
+    let fontVariantEastAsianValue (v: IFontVariantEastAsian): string =
+        match v with
+        | :? Global               as g -> Global.value g
+        | :? FontVariantEastAsian as f -> duToKebab f
+        | _ -> "Unknown font variant east asian"
+
+    let fontVariantLigatureValue (v: IFontVariantLigatures): string =
         match v with
         | :? Global               as g -> Global.value g
         | :? FontVariantLigatures as f -> duToKebab f
-        | _ -> "Unknown font variant ligatures"
+        | _ -> "Unknown font variant ligatures"    
