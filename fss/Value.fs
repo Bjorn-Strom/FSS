@@ -237,15 +237,15 @@ module Value =
                 | TextShadows             ts -> Property.value textShadow              ==> combineComma TextShadow.value ts 
                 | TextOverflow            t  -> Property.value textOverflow            ==> TextOverflow.value t
 
-                | BorderStyle  bs  -> Property.value borderStyle ==> BorderStyle.value bs
-                | BorderStyles bss -> Property.value borderStyle ==> combineWs BorderStyle.value bss 
+                | BorderStyle  bs  -> Property.value borderStyle ==> BorderValue.borderStyleValue bs
+                | BorderStyles bss -> Property.value borderStyle ==> combineWs BorderValue.borderStyleValue bss 
 
-                | BorderWidth       bw  -> Property.value borderWidth       ==> BorderWidth.value bw
-                | BorderWidths      bws -> Property.value borderWidth       ==> combineWs BorderWidth.value bws 
-                | BorderTopWidth    bw  -> Property.value borderTopWidth    ==> BorderWidth.value bw
-                | BorderRightWidth  bw  -> Property.value borderRightWidth  ==> BorderWidth.value bw
-                | BorderBottomWidth bw  -> Property.value borderBottomWidth ==> BorderWidth.value bw
-                | BorderLeftWidth   bw  -> Property.value borderLeftWidth   ==> BorderWidth.value bw
+                | BorderWidth       bw  -> Property.value borderWidth       ==> BorderValue.borderWidthValue bw
+                | BorderWidths      bws -> Property.value borderWidth       ==> combineWs BorderValue.borderWidthValue bws 
+                | BorderTopWidth    bw  -> Property.value borderTopWidth    ==> BorderValue.borderWidthValue bw
+                | BorderRightWidth  bw  -> Property.value borderRightWidth  ==> BorderValue.borderWidthValue bw
+                | BorderBottomWidth bw  -> Property.value borderBottomWidth ==> BorderValue.borderWidthValue bw
+                | BorderLeftWidth   bw  -> Property.value borderLeftWidth   ==> BorderValue.borderWidthValue bw
                
                 | BorderRadius              br -> Property.value borderRadius            ==> Units.Size.value br
                 | BorderRadiuses            br -> Property.value borderRadius            ==> combineWs Units.Size.value br 

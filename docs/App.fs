@@ -456,93 +456,61 @@ let FontFaceExamples =
                 ]
         ]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let BorderExamples =
     fragment []
         [
             h1 [] [ str "borders"]
             h2 [] [ str "Set unique borders"]
-            p [ ClassName (fss [BorderStyle BorderStyle.Solid ])] [ str "I have a solid border" ]
-            p [ ClassName (fss [BorderStyle BorderStyle.Double ])] [ str "I have a double border"]
-            p [ ClassName (fss [BorderStyle BorderStyle.Groove])] [ str "I have a groove border"]
-            p [ ClassName (fss [BorderStyle BorderStyle.Inset])] [ str "I have an inset border"]
-            p [ ClassName (fss [BorderStyle BorderStyle.Ridge])] [ str "I have a ridge border"]
-            p [ ClassName (fss [BorderStyle BorderStyle.Dashed])] [ str "I have a dashed border"]
-            p [ ClassName (fss [BorderStyle BorderStyle.Dotted])] [ str "I have a dotted border"]
-            p [ ClassName (fss [BorderStyle BorderStyle.Outset])] [ str "I have an outset border"]
-            p [ ClassName (fss [BorderStyle BorderStyle.Hidden])] [ str "I have a hidden border"]
-            p [ ClassName (fss [BorderStyle BorderStyle.None])] [ str "I don't have a border"]
-            p [ ClassName (fss [BorderStyles [BorderStyle.Groove; BorderStyle.Dotted; BorderStyle.Solid; BorderStyle.Dashed]])] [ str "I have a mixed border"]
+            p [ ClassName (fss [BorderStyle Border.Solid ])] [ str "I have a solid border" ]
+            p [ ClassName (fss [BorderStyle Border.Double ])] [ str "I have a double border"]
+            p [ ClassName (fss [BorderStyle Border.Groove])] [ str "I have a groove border"]
+            p [ ClassName (fss [BorderStyle Border.Inset])] [ str "I have an inset border"]
+            p [ ClassName (fss [BorderStyle Border.Ridge])] [ str "I have a ridge border"]
+            p [ ClassName (fss [BorderStyle Border.Dashed])] [ str "I have a dashed border"]
+            p [ ClassName (fss [BorderStyle Border.Dotted])] [ str "I have a dotted border"]
+            p [ ClassName (fss [BorderStyle Border.Outset])] [ str "I have an outset border"]
+            p [ ClassName (fss [BorderStyle Border.Hidden])] [ str "I have a hidden border"]
+            p [ ClassName (fss [BorderStyle Border.None])] [ str "I don't have a border"]
+            p [ ClassName (fss [BorderStyles [Border.Groove; Border.Dotted; Border.Solid; Border.Dashed]])] [ str "I have a mixed border"]
             p [] [ str "We can also apply only border width" ]
             p [ ClassName (fss 
                     [
-                        BorderWidth BorderWidth.Thin
-                        BorderStyle BorderStyle.Solid
+                        BorderWidth Border.Thin
+                        BorderStyle Border.Solid
                     ])] [ str "I have a thin border" ]
             p [ ClassName (fss 
                     [
                         BorderWidth (px 3)
-                        BorderStyle BorderStyle.Solid
+                        BorderStyle Border.Solid
                     ])] [ str "I have a 3px border" ]
             p [ ClassName (fss 
                     [
                         BorderWidths [px 3; px 4; px 5; px 6]
-                        BorderStyle BorderStyle.Solid
+                        BorderStyle Border.Solid
                     ])] [ str "I have a mixed width border" ]
             p [ ClassName (fss [
-                    BorderStyle BorderStyle.Double
-                    BorderWidth BorderWidth.Thick
+                    BorderStyle Border.Double
+                    BorderWidth Border.Thick
                     BorderColor Color.green
                 ])] [ str "BorderStyles" ]
             p [ ClassName (fss 
                     [
-                        BorderStyle BorderStyle.Solid
+                        BorderStyle Border.Solid
                         BorderTopWidth (px 10)
                     ])] [ str "top width" ]
             p [ ClassName (fss 
                     [
-                        BorderStyle BorderStyle.Solid
+                        BorderStyle Border.Solid
                         BorderRightWidth (px 10)
                     ])] [ str "right width" ]
             p [ ClassName (fss 
                     [
-                        BorderStyle BorderStyle.Solid
+                        BorderStyle Border.Solid
                         BorderBottomWidth (px 10)
                     ])] [ str "bottom width" ]
             p [ ClassName (fss 
                     [
-                        BorderStyle BorderStyle.Solid
+                        BorderStyle Border.Solid
                         BorderLeftWidth (px 10)
                     ])] [ str "left width" ]
             p [ ClassName (fss
@@ -559,7 +527,7 @@ let BorderExamples =
                     ])] [ str "Top left Border radius!"]
             p [ ClassName (fss
                     [
-                        BorderStyle BorderStyle.Solid
+                        BorderStyle Border.Solid
                         BorderWidth (px 15)
                         BorderColors [Color.red; rgba 170 50 220 0.6; Color.green]   
                     ]
@@ -567,7 +535,7 @@ let BorderExamples =
             
             p [ ClassName (fss
                     [
-                        BorderStyle BorderStyle.Dashed
+                        BorderStyle Border.Dashed
                         BorderWidth (px 15)
                         BorderTopWidth (px 20)
                         BorderTopColor Color.deepPink
@@ -580,6 +548,38 @@ let BorderExamples =
             )] [ str "Now in color!"]
 
         ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let AnimationExamples =
 
@@ -860,7 +860,7 @@ let TransitionExamples =
                 Width (px 200)
                 Height (px 200)
                 BorderWidth (px 20)
-                BorderStyle BorderStyle.Solid
+                BorderStyle Border.Solid
                 BorderColor (hex "ddd")
                 Hover 
                     [
@@ -1231,7 +1231,7 @@ let FlexBoxExamples model dispatch =
     let formStyle =
         fss
             [
-                BorderStyle BorderStyle.Solid
+                BorderStyle Border.Solid
                 BorderWidth (px 1)
                 BorderColor Color.orangeRed
                 CSSProperty.Margin (px 20)
@@ -1701,11 +1701,11 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // ColorExamples
            // BackgroundExamples model dispatch
            // FontExamples
-            FontFaceExamples
+           // FontFaceExamples
+            BorderExamples
 
            
            
-           // BorderExamples
            // AnimationExamples
            // MarginExamples
            // PaddingExamples

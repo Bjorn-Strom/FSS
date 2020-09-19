@@ -5,30 +5,15 @@ open Types
 open Global  
 open Utilities.Helpers
 
-module BorderWidth =
-    open Units.Size
-    open Units.Percent
-
+module Border =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
     type BorderWidth =
         | Thin
         | Medium
         | Thick
         interface IBorderWidth
-        interface IGlobal
 
-    let private borderWidthValue (v: BorderWidth): string = duToLowercase v
-
-    let value (v: IBorderWidth): string =
-        match v with
-            | :? Global as g -> Global.value g
-            | :? BorderWidth as b -> borderWidthValue b
-            | :? Size as s -> Units.Size.value s
-            | :? Percent as p -> Units.Percent.value p
-            | _ -> "Unknown border width"
-
-module BorderStyle =
-    open BorderWidth
-
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
     type BorderStyle =
         | Hidden
         | Dotted
@@ -41,12 +26,22 @@ module BorderStyle =
         | Outset
         | None
         interface IBorderStyle
-        interface IGlobal
-                    
-    let private borderStyleValue (v: BorderStyle): string = duToLowercase v
-            
-    let value (v: IBorderStyle): string =
+
+module BorderValue =
+    open Border
+    open Units.Size
+    open Units.Percent
+
+    let borderWidthValue (v: IBorderWidth): string =
         match v with
             | :? Global as g -> Global.value g
-            | :? BorderStyle as b -> borderStyleValue b
-            | _ -> "Unknown border style"  
+            | :? BorderWidth as b -> duToLowercase b
+            | :? Size as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
+            | _ -> "Unknown border width"
+
+    let borderStyleValue (v: IBorderStyle): string =
+        match v with
+            | :? Global as g -> Global.value g
+            | :? BorderStyle as b -> duToLowercase b
+            | _ -> "Unknown border style"
