@@ -5,11 +5,15 @@ open Units.Percent
 open Types
 open Global
 
+// https://developer.mozilla.org/en-US/docs/Web/CSS/margin
 module Margin =
     type Margin =
         | Margin of Size
         | Auto
         interface IMargin
+
+module MarginValue =
+    open Margin
 
     let private marginValue (v: Margin): string =
         match v with

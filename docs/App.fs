@@ -549,9 +549,71 @@ let BorderExamples =
 
         ]
 
+let MarginExamples =
+    fragment []
+        [
+            div [
+                    ClassName
+                        (fss
+                            [
+                                Width (px 100)
+                                Height (px 100)
+                                Color Color.orangeRed
+                                BackgroundColor Color.rebeccaPurple
+                                MarginRight (px 50)
+                                MarginLeft (px 50)
+                                MarginTop (px 50)
+                                MarginBottom (px 50)
+                            ])
+                ]
+                [ str "I have margin everywhere!" ]
 
+            div [
+                    ClassName
+                        (fss
+                            [
+                                Width (px 100)
+                                Height (px 100)
+                                Color Color.orangeRed
+                                BackgroundColor Color.rebeccaPurple
+                                CSSProperty.Margins [px 100; px 50; px 200; px 150]
+                            ])
+                ]
+                [ str "Me tooo!" ]
+        ]
 
-
+let PaddingExamples =
+    fragment []
+        [
+            div [
+                    ClassName
+                        (fss
+                            [
+                                Width (px 100)
+                                Height (px 100)
+                                Color Color.darkOrange
+                                BackgroundColor Color.rebeccaPurple
+                                PaddingRight (px 50)
+                                PaddingLeft (px 50)
+                                PaddingTop (px 50)
+                                PaddingBottom (px 50)
+                            ])
+                ]
+                [ str "I have padding everywhere!" ]
+        
+            div [
+                    ClassName
+                        (fss
+                            [
+                                Width (px 100)
+                                Height (px 100)
+                                Color Color.orangeRed
+                                BackgroundColor Color.rebeccaPurple
+                                Paddings [px 100; px 50; px 200; px 150]
+                            ])
+                ]
+                [ str "Me tooo!" ]
+        ]
 
 
 
@@ -707,72 +769,6 @@ let AnimationExamples =
                 ]
         ]
         
-let MarginExamples =
-    fragment []
-        [
-            div [
-                    ClassName
-                        (fss
-                            [
-                                Width (px 100)
-                                Height (px 100)
-                                Color Color.orangeRed
-                                BackgroundColor Color.rebeccaPurple
-                                MarginRight (px 50)
-                                MarginLeft (px 50)
-                                MarginTop (px 50)
-                                MarginBottom (px 50)
-                            ])
-                ]
-                [ str "I have margin everywhere!" ]
-
-            div [
-                    ClassName
-                        (fss
-                            [
-                                Width (px 100)
-                                Height (px 100)
-                                Color Color.orangeRed
-                                BackgroundColor Color.rebeccaPurple
-                                CSSProperty.Margins [px 100; px 50; px 200; px 150]
-                            ])
-                ]
-                [ str "Me tooo!" ]
-        ]
-
-let PaddingExamples =
-    fragment []
-        [
-            div [
-                    ClassName
-                        (fss
-                            [
-                                Width (px 100)
-                                Height (px 100)
-                                Color Color.darkOrange
-                                BackgroundColor Color.rebeccaPurple
-                                PaddingRight (px 50)
-                                PaddingLeft (px 50)
-                                PaddingTop (px 50)
-                                PaddingBottom (px 50)
-                            ])
-                ]
-                [ str "I have padding everywhere!" ]
-        
-            div [
-                    ClassName
-                        (fss
-                            [
-                                Width (px 100)
-                                Height (px 100)
-                                Color Color.orangeRed
-                                BackgroundColor Color.rebeccaPurple
-                                Paddings [px 100; px 50; px 200; px 150]
-                            ])
-                ]
-                [ str "Me tooo!" ]
-        ]
-
 let TransformExamples =
     fragment []
         [
@@ -1702,19 +1698,19 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // BackgroundExamples model dispatch
            // FontExamples
            // FontFaceExamples
-            BorderExamples
-
+           // BorderExamples
+           MarginExamples
+           PaddingExamples
            
            
-           // AnimationExamples
-           // MarginExamples
-           // PaddingExamples
            // TransformExamples
            // TransitionExamples
            // FlexBoxExamples model dispatch
            // MediaQueryExamples
            // SelectorExamples
            // iTextExamples
+           // AnimationExamples
+
            (*
             let testo x =
                div 

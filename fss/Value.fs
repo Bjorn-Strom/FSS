@@ -245,7 +245,7 @@ module Value =
                 | BorderTopWidth    bw  -> Property.value borderTopWidth    ==> BorderValue.borderWidthValue bw
                 | BorderRightWidth  bw  -> Property.value borderRightWidth  ==> BorderValue.borderWidthValue bw
                 | BorderBottomWidth bw  -> Property.value borderBottomWidth ==> BorderValue.borderWidthValue bw
-                | BorderLeftWidth   bw  -> Property.value borderLeftWidth   ==> BorderValue.borderWidthValue bw
+                | BorderLeftWidth   bw  -> Property.value borderLeftWidth   ==> BorderValue.borderWidthValue  bw
                
                 | BorderRadius              br -> Property.value borderRadius            ==> Units.Size.value br
                 | BorderRadiuses            br -> Property.value borderRadius            ==> combineWs Units.Size.value br 
@@ -290,19 +290,19 @@ module Value =
                 | Opacity        o -> Property.value opacity        ==> Opacity.value o
                 | Position       p -> Property.value position       ==> Position.value p
 
-                | MarginTop    m  -> Property.value marginTop    ==> Margin.value m
-                | MarginRight  m  -> Property.value marginRight  ==> Margin.value m
-                | MarginBottom m  -> Property.value marginBottom ==> Margin.value m
-                | MarginLeft   m  -> Property.value marginLeft   ==> Margin.value m
-                | Margin       m  -> Property.value margin       ==> Margin.value m
-                | Margins      ms -> Property.value margin       ==> combineWs Margin.value ms
+                | MarginTop    m  -> Property.value marginTop    ==> MarginValue.value m
+                | MarginRight  m  -> Property.value marginRight  ==> MarginValue.value m
+                | MarginBottom m  -> Property.value marginBottom ==> MarginValue.value m
+                | MarginLeft   m  -> Property.value marginLeft   ==> MarginValue.value m
+                | Margin       m  -> Property.value margin       ==> MarginValue.value m
+                | Margins      ms -> Property.value margin       ==> combineWs MarginValue.value ms
 
-                | PaddingTop    m  -> Property.value paddingTop    ==> Padding.value m
-                | PaddingRight  m  -> Property.value paddingRight  ==> Padding.value m
-                | PaddingBottom m  -> Property.value paddingBottom ==> Padding.value m
-                | PaddingLeft   m  -> Property.value paddingLeft   ==> Padding.value m
-                | Padding       m  -> Property.value padding       ==> Padding.value m
-                | Paddings      ms -> Property.value padding       ==> combineWs Padding.value ms
+                | PaddingTop    m  -> Property.value paddingTop    ==> PaddingValue.value m
+                | PaddingRight  m  -> Property.value paddingRight  ==> PaddingValue.value m
+                | PaddingBottom m  -> Property.value paddingBottom ==> PaddingValue.value m
+                | PaddingLeft   m  -> Property.value paddingLeft   ==> PaddingValue.value m
+                | Padding       m  -> Property.value padding       ==> PaddingValue.value m
+                | Paddings      ms -> Property.value padding       ==> combineWs PaddingValue.value ms
 
                 | Animation                a   -> Property.value animation               ==> combineWs Animation.value a
                 | Animations               ans -> Property.value animation               ==> combineAnimations ans
