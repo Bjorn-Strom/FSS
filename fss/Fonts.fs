@@ -199,7 +199,7 @@ module Font =
 module FontValues =
     open Font
 
-    let fontSizeValue (v: IFontSize): string =
+    let fontSize (v: IFontSize): string =
         match v with
             | :? Global as g   -> GlobalValue.globalValue g
             | :? Size as s     -> Units.Size.value s
@@ -207,7 +207,7 @@ module FontValues =
             | :? FontSize as s -> duToKebab s
             | _                -> "Unknown font size"
 
-    let fontStyleValue (v: IFontStyle): string =
+    let fontStyle (v: IFontStyle): string =
         let stringifyStyleValue (v: FontStyle): string =
             match v with
                 | Oblique a -> sprintf "oblique %s" <| Units.Angle.value a
@@ -218,14 +218,14 @@ module FontValues =
             | :? Global as g    -> GlobalValue.globalValue g
             | _                 -> "Unknown font style"
 
-    let fontStretchValue (v: IFontStretch): string =
+    let fontStretch (v: IFontStretch): string =
         match v with
             | :? FontStretch as f -> duToKebab f
             | :? Percent as p     -> Units.Percent.value p
             | :? Global as g      -> GlobalValue.globalValue g
             | _                   -> "unknown font stretch value"
 
-    let fontWeightValue (v: IFontWeight): string =
+    let fontWeight (v: IFontWeight): string =
         let stringifyFamilyValue (v: FontWeight): string = 
             match v with
                 | Number n -> string n
@@ -236,7 +236,7 @@ module FontValues =
             | :? FontWeight as f -> stringifyFamilyValue f
             | _                  -> "Unknown font family"
 
-    let lineHeightValue (v: ILineHeight): string =
+    let lineHeight (v: ILineHeight): string =
         let stringifyLineHeight (v: LineHeight): string = 
             match v with
                 | Value v -> string v
@@ -249,12 +249,12 @@ module FontValues =
             | :? Global as g     -> GlobalValue.globalValue g
             | _                  -> "unknown font stretch value"
 
-    let fontDisplayValue (v: IFontDisplay): string =
+    let fontDisplay (v: IFontDisplay): string =
         match v with
             | :? FontDisplay as f -> duToLowercase f
             | _                   -> "Unknown font display"
 
-    let private sourceValue (v: Source): string =
+    let private source (v: Source): string =
         match v with
             | Url (s, f) -> sprintf "url('%s') format('%s')" s (duToKebab f)
             | Local l    -> sprintf "local('%s')" l
@@ -263,12 +263,12 @@ module FontValues =
         let innerStyle =
             attributeList |> List.map (
                 function
-                    | Source      s -> "src"                      ==> sourceValue s
-                    | Sources     s -> "src"                      ==> combineComma sourceValue s
-                    | FontStyle   f -> Property.value fontStyle   ==> fontStyleValue f
-                    | FontDisplay f -> Property.value fontDisplay ==> fontDisplayValue f
-                    | FontStretch f -> Property.value fontStretch ==> fontStretchValue f
-                    | FontWeight  f -> Property.value fontWeight  ==> fontWeightValue f)
+                    | Source      s -> "src"                      ==> source s
+                    | Sources     s -> "src"                      ==> combineComma source s
+                    | FontStyle   f -> Property.value Property.fontStyle   ==> fontStyle f
+                    | FontDisplay f -> Property.value Property.fontDisplay ==> fontDisplay f
+                    | FontStretch f -> Property.value Property.fontStretch ==> fontStretch f
+                    | FontWeight  f -> Property.value Property.fontWeight  ==> fontWeight f)
 
         createObj
             [
@@ -281,7 +281,7 @@ module FontValues =
 
     let fontName (FontName n) = n
 
-    let fontFamilyValue (v: IFontFamily) : string =
+    let fontFamily (v: IFontFamily) : string =
         let parseFamilyValue (v: FontFamily): string = 
             match v with
                 | Font f   -> fontName f
@@ -294,7 +294,7 @@ module FontValues =
             | _ -> "Unknown font family"
 
 
-    let fontFeatureSettingValue (v: IFontFeatureSetting): string =
+    let fontFeatureSetting (v: IFontFeatureSetting): string =
         let parseFontFeatureSetting (v: FontFeatureSetting): string =
             let stringify (fontFeature: string) (setting: SettingSwitch) =
                 sprintf "\"%s\" %s" fontFeature (duToString setting)
@@ -332,25 +332,25 @@ module FontValues =
             | :? FontFeatureSetting as f -> sprintf "%s" (parseFontFeatureSetting f)
             | _ -> "Unknown font feature setting"
 
-    let fontVariantNumericValue (v: IFontVariantNumeric): string =
+    let fontVariantNumeric (v: IFontVariantNumeric): string =
         match v with
         | :? Global as g             -> GlobalValue.globalValue g
         | :? FontVariantNumeric as f -> duToKebab f
         | _ -> "Unknown font variant numeric"
 
-    let fontVariantCapValue (v: IFontVariantCaps): string =
+    let fontVariantCap (v: IFontVariantCaps): string =
         match v with
         | :? Global          as g -> GlobalValue.globalValue g
         | :? FontVariantCaps as f -> duToKebab f
         | _ -> "Unknown font variant caps"
 
-    let fontVariantEastAsianValue (v: IFontVariantEastAsian): string =
+    let fontVariantEastAsian (v: IFontVariantEastAsian): string =
         match v with
         | :? Global               as g -> GlobalValue.globalValue g
         | :? FontVariantEastAsian as f -> duToKebab f
         | _ -> "Unknown font variant east asian"
 
-    let fontVariantLigatureValue (v: IFontVariantLigatures): string =
+    let fontVariantLigature (v: IFontVariantLigatures): string =
         match v with
         | :? Global               as g -> GlobalValue.globalValue g
         | :? FontVariantLigatures as f -> duToKebab f

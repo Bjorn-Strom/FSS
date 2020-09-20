@@ -20,7 +20,7 @@ module MarginValue =
             | Margin s -> Units.Size.value s
             | Auto -> "auto"
 
-    let value (v: IMargin): string =
+    let margin (v: IMargin): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? Size as s -> Units.Size.value s

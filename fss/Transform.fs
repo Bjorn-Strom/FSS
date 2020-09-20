@@ -48,7 +48,7 @@ module Transform =
 module TransformValue =
     open Transform
     
-    let transformValue (v: ITransform): string =
+    let transform (v: ITransform): string =
         let stringifyTransform (v: Transform): string =
                match v with
                    | Matrix (a, b, c, d, e, f) -> 
@@ -88,7 +88,7 @@ module TransformValue =
             | :? Angle as a -> Units.Angle.value a
             | _ -> "Unknown margin size"
 
-    let transformOriginValue (v: ITransformOrigin): string =
+    let transformOrigin (v: ITransformOrigin): string =
         match v with
             | :? Global          as g -> GlobalValue.globalValue g
             | :? Percent         as p -> Units.Percent.value p

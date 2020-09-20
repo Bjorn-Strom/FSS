@@ -191,59 +191,59 @@ module Value =
                 | Color c            -> Property.value color ==> Color.value c
                 
                 | BackgroundColor       bc -> Property.value backgroundColor      ==> Color.value bc
-                | BackgroundImage       bi -> Property.value backgroundImage      ==> BackgroundValues.backgroundImageValue bi
-                | BackgroundPosition    b  -> Property.value backgroundPosition   ==> BackgroundValues.backgroundPositionValue b
-                | BackgroundPositions   bs -> Property.value backgroundPosition   ==> combineWs BackgroundValues.backgroundPositionValue bs
-                | BackgroundOrigin      b  -> Property.value backgroundOrigin     ==> BackgroundValues.backgroundOriginValue b
-                | BackgroundClip        b  -> Property.value backgroundClip       ==> BackgroundValues.backgroundClipValue b
-                | BackgroundRepeat      b  -> Property.value backgroundRepeat     ==> BackgroundValues.backgroundRepeatValue b
-                | BackgroundRepeats     bs -> Property.value backgroundRepeat     ==> combineWs BackgroundValues.backgroundRepeatValue bs
-                | BackgroundSize        b  -> Property.value backgroundSize       ==> BackgroundValues.backgroundSizeValue b
-                | BackgroundSizes       bs -> Property.value backgroundSize       ==> combineWs BackgroundValues.backgroundSizeValue bs
-                | BackgroundAttachment  b  -> Property.value backgroundAttachment ==> BackgroundValues.backgroundAttachmentValue b
-                | BackgroundAttachments bs -> Property.value backgroundAttachment ==> combineWs BackgroundValues.backgroundAttachmentValue bs
+                | BackgroundImage       bi -> Property.value backgroundImage      ==> BackgroundValues.backgroundImage bi
+                | BackgroundPosition    b  -> Property.value backgroundPosition   ==> BackgroundValues.backgroundPosition b
+                | BackgroundPositions   bs -> Property.value backgroundPosition   ==> combineWs BackgroundValues.backgroundPosition bs
+                | BackgroundOrigin      b  -> Property.value backgroundOrigin     ==> BackgroundValues.backgroundOrigin b
+                | BackgroundClip        b  -> Property.value backgroundClip       ==> BackgroundValues.backgroundClip b
+                | BackgroundRepeat      b  -> Property.value backgroundRepeat     ==> BackgroundValues.backgroundRepeat b
+                | BackgroundRepeats     bs -> Property.value backgroundRepeat     ==> combineWs BackgroundValues.backgroundRepeat bs
+                | BackgroundSize        b  -> Property.value backgroundSize       ==> BackgroundValues.backgroundSize b
+                | BackgroundSizes       bs -> Property.value backgroundSize       ==> combineWs BackgroundValues.backgroundSize bs
+                | BackgroundAttachment  b  -> Property.value backgroundAttachment ==> BackgroundValues.backgroundAttachment b
+                | BackgroundAttachments bs -> Property.value backgroundAttachment ==> combineWs BackgroundValues.backgroundAttachment bs
                 
                 | Hover h -> hover |> Property.value |> toPsuedo ==> createCSSObject h
                 
-                | FontSize              f  -> Property.value fontSize             ==> FontValues.fontSizeValue f
-                | FontStyle             f  -> Property.value fontStyle            ==> FontValues.fontStyleValue f
-                | FontStretch           f  -> Property.value fontStretch          ==> FontValues.fontStretchValue f
-                | FontWeight            f  -> Property.value fontWeight           ==> FontValues.fontWeightValue f
-                | LineHeight            l  -> Property.value lineHeight           ==> FontValues.lineHeightValue l
-                | FontFamily            f  -> Property.value fontFamily           ==> FontValues.fontFamilyValue f
-                | FontFamilies          fs -> Property.value fontFamily           ==> combineWs FontValues.fontFamilyValue fs
-                | FontFeatureSetting    f  -> Property.value fontFeatureSettings  ==> FontValues.fontFeatureSettingValue f
-                | FontFeatureSettings   fs -> Property.value fontFeatureSettings  ==> combineComma FontValues.fontFeatureSettingValue fs 
-                | FontVariantNumeric    f  -> Property.value fontVariantNumeric   ==> FontValues.fontVariantNumericValue f
-                | FontVariantNumerics   fs -> Property.value fontVariantNumeric   ==> combineWs FontValues.fontVariantNumericValue fs 
-                | FontVariantCaps       f  -> Property.value fontVariantCaps      ==> FontValues.fontVariantCapValue f
-                | FontVariantEastAsian  f  -> Property.value fontVariantEastAsian ==> FontValues.fontVariantEastAsianValue f
-                | FontVariantEastAsians fs -> Property.value fontVariantEastAsian ==> combineWs FontValues.fontVariantEastAsianValue fs 
-                | FontVariantLigatures  f  -> Property.value fontVariantLigatures ==> FontValues.fontVariantLigatureValue f
+                | FontSize              f  -> Property.value fontSize             ==> FontValues.fontSize f
+                | FontStyle             f  -> Property.value fontStyle            ==> FontValues.fontStyle f
+                | FontStretch           f  -> Property.value fontStretch          ==> FontValues.fontStretch f
+                | FontWeight            f  -> Property.value fontWeight           ==> FontValues.fontWeight f
+                | LineHeight            l  -> Property.value lineHeight           ==> FontValues.lineHeight l
+                | FontFamily            f  -> Property.value fontFamily           ==> FontValues.fontFamily f
+                | FontFamilies          fs -> Property.value fontFamily           ==> combineWs FontValues.fontFamily fs
+                | FontFeatureSetting    f  -> Property.value fontFeatureSettings  ==> FontValues.fontFeatureSetting f
+                | FontFeatureSettings   fs -> Property.value fontFeatureSettings  ==> combineComma FontValues.fontFeatureSetting fs 
+                | FontVariantNumeric    f  -> Property.value fontVariantNumeric   ==> FontValues.fontVariantNumeric f
+                | FontVariantNumerics   fs -> Property.value fontVariantNumeric   ==> combineWs FontValues.fontVariantNumeric fs 
+                | FontVariantCaps       f  -> Property.value fontVariantCaps      ==> FontValues.fontVariantCap f
+                | FontVariantEastAsian  f  -> Property.value fontVariantEastAsian ==> FontValues.fontVariantEastAsian f
+                | FontVariantEastAsians fs -> Property.value fontVariantEastAsian ==> combineWs FontValues.fontVariantEastAsian fs 
+                | FontVariantLigatures  f  -> Property.value fontVariantLigatures ==> FontValues.fontVariantLigature f
 
-                | TextAlign               t  -> Property.value textAlign               ==> TextValue.textAlignValue t
-                | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextValue.textDecorationLineValue t
-                | TextDecorationLines     ts -> Property.value textDecorationLine      ==> combineWs TextValue.textDecorationLineValue ts 
+                | TextAlign               t  -> Property.value textAlign               ==> TextValue.textAlign t
+                | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextValue.textDecorationLine t
+                | TextDecorationLines     ts -> Property.value textDecorationLine      ==> combineWs TextValue.textDecorationLine ts 
                 | TextDecorationColor     t  -> Property.value textDecorationColor     ==> Color.value t
-                | TextDecorationThickness t  -> Property.value textDecorationThickness ==> TextValue.textDecorationThicknessValue t
-                | TextDecorationStyle     t  -> Property.value textDecorationStyle     ==> TextValue.textDecorationStyleValue t 
-                | TextDecorationSkipInk   t  -> Property.value textDecorationSkipInk   ==> TextValue.textDecorationSkipInkValue t 
-                | TextTransform           t  -> Property.value textTransform           ==> TextValue.textTransformValue t
-                | TextIndent              t  -> Property.value textIndent              ==> TextValue.textIndentValue t
-                | TextIndents             ts -> Property.value textIndent              ==> combineWs TextValue.textIndentValue ts 
-                | TextShadowProperty      t  -> Property.value textShadow              ==> TextValue.textShadowValue t
-                | TextShadowProperties    ts -> Property.value textShadow              ==> combineComma TextValue.textShadowValue ts 
-                | TextOverflow            t  -> Property.value textOverflow            ==> TextValue.textOverflowValue t
+                | TextDecorationThickness t  -> Property.value textDecorationThickness ==> TextValue.textDecorationThickness t
+                | TextDecorationStyle     t  -> Property.value textDecorationStyle     ==> TextValue.textDecorationStyle t 
+                | TextDecorationSkipInk   t  -> Property.value textDecorationSkipInk   ==> TextValue.textDecorationSkipInk t 
+                | TextTransform           t  -> Property.value textTransform           ==> TextValue.textTransform t
+                | TextIndent              t  -> Property.value textIndent              ==> TextValue.textIndent t
+                | TextIndents             ts -> Property.value textIndent              ==> combineWs TextValue.textIndent ts 
+                | TextShadowProperty      t  -> Property.value textShadow              ==> TextValue.textShadow t
+                | TextShadowProperties    ts -> Property.value textShadow              ==> combineComma TextValue.textShadow ts 
+                | TextOverflow            t  -> Property.value textOverflow            ==> TextValue.textOverflow t
 
-                | BorderStyle  bs  -> Property.value borderStyle ==> BorderValue.borderStyleValue bs
-                | BorderStyles bss -> Property.value borderStyle ==> combineWs BorderValue.borderStyleValue bss 
+                | BorderStyle  bs  -> Property.value borderStyle ==> BorderValue.borderStyle bs
+                | BorderStyles bss -> Property.value borderStyle ==> combineWs BorderValue.borderStyle bss 
 
-                | BorderWidth       bw  -> Property.value borderWidth       ==> BorderValue.borderWidthValue bw
-                | BorderWidths      bws -> Property.value borderWidth       ==> combineWs BorderValue.borderWidthValue bws 
-                | BorderTopWidth    bw  -> Property.value borderTopWidth    ==> BorderValue.borderWidthValue bw
-                | BorderRightWidth  bw  -> Property.value borderRightWidth  ==> BorderValue.borderWidthValue bw
-                | BorderBottomWidth bw  -> Property.value borderBottomWidth ==> BorderValue.borderWidthValue bw
-                | BorderLeftWidth   bw  -> Property.value borderLeftWidth   ==> BorderValue.borderWidthValue  bw
+                | BorderWidth       bw  -> Property.value borderWidth       ==> BorderValue.borderWidth bw
+                | BorderWidths      bws -> Property.value borderWidth       ==> combineWs BorderValue.borderWidth bws 
+                | BorderTopWidth    bw  -> Property.value borderTopWidth    ==> BorderValue.borderWidth bw
+                | BorderRightWidth  bw  -> Property.value borderRightWidth  ==> BorderValue.borderWidth bw
+                | BorderBottomWidth bw  -> Property.value borderBottomWidth ==> BorderValue.borderWidth bw
+                | BorderLeftWidth   bw  -> Property.value borderLeftWidth   ==> BorderValue.borderWidth  bw
                
                 | BorderRadius              br -> Property.value borderRadius            ==> Units.Size.value br
                 | BorderRadiuses            br -> Property.value borderRadius            ==> combineWs Units.Size.value br 
@@ -288,19 +288,19 @@ module Value =
                 | Opacity        o -> Property.value opacity        ==> Opacity.value o
                 | Position       p -> Property.value position       ==> Position.value p
 
-                | MarginTop    m  -> Property.value marginTop    ==> MarginValue.value m
-                | MarginRight  m  -> Property.value marginRight  ==> MarginValue.value m
-                | MarginBottom m  -> Property.value marginBottom ==> MarginValue.value m
-                | MarginLeft   m  -> Property.value marginLeft   ==> MarginValue.value m
-                | Margin       m  -> Property.value margin       ==> MarginValue.value m
-                | Margins      ms -> Property.value margin       ==> combineWs MarginValue.value ms
+                | MarginTop    m  -> Property.value marginTop    ==> MarginValue.margin m
+                | MarginRight  m  -> Property.value marginRight  ==> MarginValue.margin m
+                | MarginBottom m  -> Property.value marginBottom ==> MarginValue.margin m
+                | MarginLeft   m  -> Property.value marginLeft   ==> MarginValue.margin m
+                | Margin       m  -> Property.value margin       ==> MarginValue.margin m
+                | Margins      ms -> Property.value margin       ==> combineWs MarginValue.margin ms
 
-                | PaddingTop    m  -> Property.value paddingTop    ==> PaddingValue.value m
-                | PaddingRight  m  -> Property.value paddingRight  ==> PaddingValue.value m
-                | PaddingBottom m  -> Property.value paddingBottom ==> PaddingValue.value m
-                | PaddingLeft   m  -> Property.value paddingLeft   ==> PaddingValue.value m
-                | Padding       m  -> Property.value padding       ==> PaddingValue.value m
-                | Paddings      ms -> Property.value padding       ==> combineWs PaddingValue.value ms
+                | PaddingTop    m  -> Property.value paddingTop    ==> PaddingValue.padding m
+                | PaddingRight  m  -> Property.value paddingRight  ==> PaddingValue.padding m
+                | PaddingBottom m  -> Property.value paddingBottom ==> PaddingValue.padding m
+                | PaddingLeft   m  -> Property.value paddingLeft   ==> PaddingValue.padding m
+                | Padding       m  -> Property.value padding       ==> PaddingValue.padding m
+                | Paddings      ms -> Property.value padding       ==> combineWs PaddingValue.padding ms
 
                 | Animation                a   -> Property.value animation               ==> combineWs AnimationValue.animation a
                 | Animations               ans -> Property.value animation               ==> combineAnimations ans
@@ -321,9 +321,9 @@ module Value =
                 | AnimationPlayState       p   -> Property.value animationPlayState      ==> AnimationValue.playState p
                 | AnimationPlayStates      ps  -> Property.value animationPlayState      ==> combineComma AnimationValue.playState ps
 
-                | Transform       t  -> Property.value transform       ==> TransformValue.transformValue t
-                | Transforms      ts -> Property.value transform       ==> combineWs TransformValue.transformValue ts
-                | TransformOrigin ts -> Property.value transformOrigin ==> combineWs TransformValue.transformOriginValue ts
+                | Transform       t  -> Property.value transform       ==> TransformValue.transform t
+                | Transforms      ts -> Property.value transform       ==> combineWs TransformValue.transform ts
+                | TransformOrigin ts -> Property.value transformOrigin ==> combineWs TransformValue.transformOrigin ts
 
                 | Transition               t  -> Property.value transition               ==> TransitionValue.value t
                 | Transitions              ts -> Property.value transition               ==> combineComma TransitionValue.value ts

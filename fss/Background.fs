@@ -83,7 +83,7 @@ module Background =
 module BackgroundValues =
     open Background
 
-    let backgroundPositionValue (v: IBackgroundPosition): string =
+    let backgroundPosition (v: IBackgroundPosition): string =
         match v with
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
@@ -100,23 +100,23 @@ module BackgroundValues =
             | :? BackgroundPosition -> 0
             | _ -> 1
 
-    let private linearGradientValue (v: ILinearGradient): string =
+    let private linearGradient (v: ILinearGradient): string =
         match v with
             | :? Angle as a -> Units.Angle.value a
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? CssColor as c -> Color.value c
-            | :? BackgroundPosition as p -> sprintf "to %s" <| backgroundPositionValue p
+            | :? BackgroundPosition as p -> sprintf "to %s" <| backgroundPosition p
             | _ -> "Unknown linear gradient value"
 
-    let private shapeValue (v: Shape): string =
+    let private shape (v: Shape): string =
         match v with
             | Circle -> "circle"
             | Ellipse -> "ellipse"
             | CircleSide side -> sprintf "circle %s" <| duToKebab side
             | EllipseSide side -> sprintf "ellipse %s" <| duToKebab side
-            | CircleAt positions -> sprintf "circle at %s" <| combineWs backgroundPositionValue positions
-            | EllipseAt positions -> sprintf "ellipse at %s" <| combineWs backgroundPositionValue positions
+            | CircleAt positions -> sprintf "circle at %s" <| combineWs backgroundPosition positions
+            | EllipseAt positions -> sprintf "ellipse at %s" <| combineWs backgroundPosition positions
 
     let private compareRadialGradient (v: IRadialGradient): int =
         match v with 
@@ -128,14 +128,14 @@ module BackgroundValues =
             | :? Shape -> 0
             | _ -> 0
 
-    let private radialGradientValue (v: IRadialGradient): string =
+    let private radialGradient (v: IRadialGradient): string =
         match v with
             | :? Angle as a -> Units.Angle.value a
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? CssColor as c -> Color.value c
             | :? Side as s -> duToKebab s
-            | :? Shape as s -> shapeValue s
+            | :? Shape as s -> shape s
             | _ -> "Unknown radial gradient value"
 
     let private combineGradient (value: ILinearGradient -> string) (list: ILinearGradient list): string =
@@ -158,34 +158,34 @@ module BackgroundValues =
             else
                 sprintf "%s, %s" acc (value elem)) ""
 
-    let backgroundImageValue (v: BackgroundImage): string =
+    let backgroundImage (v: BackgroundImage): string =
         match v with
             | Url u -> sprintf "url(%s)" u
-            | LinearGradient g -> sprintf "linear-gradient(%s)"  (g |> List.sortBy compareLinearGradient |> combineGradient linearGradientValue)
-            | RadialGradient g -> sprintf "radial-gradient(%s)" (g |> List.sortBy compareRadialGradient |> combineGradient2 radialGradientValue)
-            | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" (g |> List.sortBy compareLinearGradient |> combineGradient linearGradientValue)
-            | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" (g |> List.sortBy compareRadialGradient |> combineGradient2 radialGradientValue)
+            | LinearGradient g -> sprintf "linear-gradient(%s)"  (g |> List.sortBy compareLinearGradient |> combineGradient linearGradient)
+            | RadialGradient g -> sprintf "radial-gradient(%s)" (g |> List.sortBy compareRadialGradient |> combineGradient2 radialGradient)
+            | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" (g |> List.sortBy compareLinearGradient |> combineGradient linearGradient)
+            | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" (g |> List.sortBy compareRadialGradient |> combineGradient2 radialGradient)
 
-    let backgroundOriginValue (v: IBackgroundOrigin): string =
+    let backgroundOrigin (v: IBackgroundOrigin): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundOrigin as b -> duToKebab b
             | _ -> "Unknown background origin" 
 
-    let backgroundClipValue (v: IBackgroundClip): string =
+    let backgroundClip (v: IBackgroundClip): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundOrigin as b -> duToString b
             | :? BackgroundClip as b -> duToString b
             | _ -> "Unknown background clip" 
 
-    let backgroundRepeatValue (v: IBackgroundRepeat): string =
+    let backgroundRepeat (v: IBackgroundRepeat): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundRepeat as b -> duToKebab b
             | _ -> "Unknown background repeat" 
 
-    let backgroundSizeValue (v: IBackgroundSize): string =
+    let backgroundSize (v: IBackgroundSize): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? Size as s -> Units.Size.value s
@@ -193,7 +193,7 @@ module BackgroundValues =
             | :? BackgroundSize as b -> duToLowercase b
             | _ -> "Unknown background size" 
 
-    let backgroundAttachmentValue (v: IBackgroundAttachment): string =
+    let backgroundAttachment (v: IBackgroundAttachment): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundAttachment as b -> duToLowercase b

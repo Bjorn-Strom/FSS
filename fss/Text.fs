@@ -82,19 +82,19 @@ module Text =
 module TextValue =
     open Text
 
-    let textAlignValue (v: ITextAlign): string =
+    let textAlign (v: ITextAlign): string =
         match v with
             | :? Global    as g -> GlobalValue.globalValue g
             | :? TextAlign as t -> duToKebab t
             | _                 -> "Unknown text align"
 
-    let textDecorationLineValue (v: ITextDecorationLine): string =
+    let textDecorationLine (v: ITextDecorationLine): string =
         match v with
             | :? Global             as g -> GlobalValue.globalValue g 
             | :? TextDecorationLine as t -> duToKebab t
             | _                          -> "unknown text decoration line"
 
-    let textDecorationThicknessValue (v: ITextDecorationThickness): string = 
+    let textDecorationThickness (v: ITextDecorationThickness): string = 
         match v with
             | :? Global                  as g -> GlobalValue.globalValue g
             | :? Percent                 as p -> Units.Percent.value p
@@ -102,25 +102,25 @@ module TextValue =
             | :? TextDecorationThickness as t -> duToKebab t
             | _                               -> "unkown text decoration thickness"
 
-    let textDecorationStyleValue (v: ITextDecorationStyle): string =
+    let textDecorationStyle (v: ITextDecorationStyle): string =
         match v with
             | :? Global              as g -> GlobalValue.globalValue g
             | :? TextDecorationStyle as t -> duToLowercase t 
             | _                           -> "unknown text decoration style"
 
-    let textDecorationSkipInkValue (v: ITextDecorationSkipInk): string =
+    let textDecorationSkipInk (v: ITextDecorationSkipInk): string =
         match v with
             | :? Global                as g -> GlobalValue.globalValue g
             | :? TextDecorationSkipInk as t -> duToLowercase t 
             | _                             -> "unknown text decoration skip ink"
 
-    let textTransformValue (v: ITextTransform): string =
+    let textTransform (v: ITextTransform): string =
         match v with
             | :? Global        as g -> GlobalValue.globalValue g
             | :? TextTransform as t -> duToLowercase t 
             | _                     -> "unknown text transform"
 
-    let textIndentValue (v: ITextIndent): string =
+    let textIndent (v: ITextIndent): string =
         match v with 
             | :? Global     as g -> GlobalValue.globalValue g
             | :? Percent    as p -> Units.Percent.value p
@@ -128,7 +128,7 @@ module TextValue =
             | :? TextIndent as t -> duToKebab t 
             | _                  -> "unknown text transform"
 
-    let textShadowValue (v: ITextShadow) : string = 
+    let textShadow (v: ITextShadow) : string = 
         let getValue (TextShadow(s1, s2, s3, c)) = s1, s2, s3, c
         match v with
             | :? Global         as g -> GlobalValue.globalValue g
@@ -137,7 +137,7 @@ module TextValue =
                 sprintf "%s %s %s %s" (Units.Size.value s1) (Units.Size.value s2) (Units.Size.value s3) (Color.value c)
             | _                      -> "Unknown text shadow"
 
-    let textOverflowValue (v: TextOverflow): string =
+    let textOverflow (v: TextOverflow): string =
         match v with
             | Custom s -> sprintf "\"%s\"" s
             | _        -> duToLowercase v    

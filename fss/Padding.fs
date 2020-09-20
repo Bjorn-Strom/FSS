@@ -20,7 +20,7 @@ module PaddingValue =
         match v with
             | Padding s -> Units.Size.value s
     
-    let value (v: IPadding): string =
+    let padding (v: IPadding): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? Size as s -> Units.Size.value s
