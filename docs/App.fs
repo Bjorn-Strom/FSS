@@ -946,70 +946,6 @@ let TextExamples =
             h1 [ ClassName vamp ] [ str "Vampire Diaries" ]
         ]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let AnimationExamples =
 
     let bounceFrames = 
@@ -1036,9 +972,6 @@ let AnimationExamples =
                         BackgroundColor Color.orange
                     ]
             ]
-
-    let bounceAnimation = fss [ Animation [bounceFrames; sec 1.0; Animation.Ease; Animation.Infinite] ]
-
 
     let sizeFrames =
         keyframes
@@ -1115,14 +1048,6 @@ let AnimationExamples =
                 Animation [loader; sec 2.0; Animation.Linear; Animation.Infinite]
             ]
             
-    let frameAnimation =
-        keyframes
-            [
-                //frame 0 [ BackgroundPosition; px 0; px 0]
-                //frame 100 [ BackgroundPosition; px -500; px 0]
-            ]
-
-
     fragment []
         [
             p [] [ str "Things can animate now!" ]
@@ -1136,6 +1061,95 @@ let AnimationExamples =
                 ]
         ]
       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let FlexBoxExamples model dispatch =
     // Test alignment
     let parent = 
@@ -1735,14 +1749,13 @@ let render (model: Model) (dispatch: Msg -> unit) =
            // PaddingExamples
            // TransformExamples
            // TransitionExamples
-           
-           TextExamples
+           // TextExamples
+            AnimationExamples
 
            // FlexBoxExamples model dispatch
            // MediaQueryExamples
            // SelectorExamples
            
-           // AnimationExamples
 
            (*
             let testo x =

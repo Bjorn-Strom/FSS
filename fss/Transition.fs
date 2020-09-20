@@ -4,7 +4,7 @@ open Types
 open Global
 open Property
 open Animation
-open Time
+open Units.Time
 
 module Transition =
     type Transition = 
@@ -18,9 +18,9 @@ module TransitionValue =
 
     let private transitionValue (v: Transition): string =
         match v with
-            | Transition1 (property, time)                -> sprintf "%s %s" (Property.propertyToKebabCase property) (Animation.value time)
-            | Transition2 (property, time, timing)        -> sprintf "%s %s %s" (Property.propertyToKebabCase property) (Animation.value time) (Animation.value timing)
-            | Transition3 (property, time, timing, delay) -> sprintf "%s %s %s %s" (Property.propertyToKebabCase property) (Animation.value time) (Animation.value timing) (Animation.value delay)
+            | Transition1 (property, time)                -> sprintf "%s %s" (Property.propertyToKebabCase property) (Units.Time.value time)
+            | Transition2 (property, time, timing)        -> sprintf "%s %s %s" (Property.propertyToKebabCase property) (Units.Time.value time) (AnimationValue.timing timing)
+            | Transition3 (property, time, timing, delay) -> sprintf "%s %s %s %s" (Property.propertyToKebabCase property) (Units.Time.value time) (AnimationValue.timing timing) (Units.Time.value delay)
 
     let value (v: ITransition): string =
         match v with

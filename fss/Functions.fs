@@ -97,5 +97,5 @@ module Functions =
     let pct (v: int): Units.Percent.Percent = sprintf "%d%%" v |> Units.Percent.Percent
 
     // Time
-    let sec (v: float): Time.Time = sprintf "%.2fs" v |> Time.Sec
-    let ms (v: float): Time.Time = sprintf "%.2fms" v |> Time.Ms
+    let sec (v: float): Units.Time.Time = sprintf "%.2fs" v |> Units.Time.Sec
+    let ms (v: float): Units.Time.Time = sprintf "%.2fms" v |> Units.Time.Ms

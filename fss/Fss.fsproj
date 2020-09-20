@@ -6,10 +6,10 @@
     <Compile Include="Types.fs" />
     <Compile Include="Utilities.fs" />
     <Compile Include="Global.fs" />
+    <Compile Include="Units.fs" />
     <Compile Include="Html.fs" />
     <Compile Include="Property.fs" />
     <Compile Include="Animation.fs" />
-    <Compile Include="Units.fs" />
     <Compile Include="Color.fs" />
     <Compile Include="Fonts.fs" />
     <Compile Include="Text.fs" />

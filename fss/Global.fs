@@ -60,5 +60,7 @@ module Global =
         interface IBackgroundAttachment
         interface IContentSize
         interface IVisibility
+        interface IAnimationDirection
+        interface IAnimationPlayState
 
     let value (v: Global): string = duToLowercase v

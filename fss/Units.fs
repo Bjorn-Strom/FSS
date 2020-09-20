@@ -110,3 +110,14 @@ module Resolution =
     let value (r: Resolution) =
         match r with
             | Dpi d -> sprintf "%sdpi" d
+
+module Time =
+    type Time =
+        | Sec of string
+        | Ms of string
+        interface IAnimation
+
+    let value (v: Time) =
+        match v with 
+            | Sec s -> s
+            | Ms ms -> ms
