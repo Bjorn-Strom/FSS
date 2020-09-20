@@ -84,19 +84,19 @@ module TextValue =
 
     let textAlignValue (v: ITextAlign): string =
         match v with
-            | :? Global    as g -> Global.value g
+            | :? Global    as g -> GlobalValue.globalValue g
             | :? TextAlign as t -> duToKebab t
             | _                 -> "Unknown text align"
 
     let textDecorationLineValue (v: ITextDecorationLine): string =
         match v with
-            | :? Global             as g -> Global.value g 
+            | :? Global             as g -> GlobalValue.globalValue g 
             | :? TextDecorationLine as t -> duToKebab t
             | _                          -> "unknown text decoration line"
 
     let textDecorationThicknessValue (v: ITextDecorationThickness): string = 
         match v with
-            | :? Global                  as g -> Global.value g
+            | :? Global                  as g -> GlobalValue.globalValue g
             | :? Percent                 as p -> Units.Percent.value p
             | :? Size                    as s -> Units.Size.value s
             | :? TextDecorationThickness as t -> duToKebab t
@@ -104,25 +104,25 @@ module TextValue =
 
     let textDecorationStyleValue (v: ITextDecorationStyle): string =
         match v with
-            | :? Global              as g -> Global.value g
+            | :? Global              as g -> GlobalValue.globalValue g
             | :? TextDecorationStyle as t -> duToLowercase t 
             | _                           -> "unknown text decoration style"
 
     let textDecorationSkipInkValue (v: ITextDecorationSkipInk): string =
         match v with
-            | :? Global                as g -> Global.value g
+            | :? Global                as g -> GlobalValue.globalValue g
             | :? TextDecorationSkipInk as t -> duToLowercase t 
             | _                             -> "unknown text decoration skip ink"
 
     let textTransformValue (v: ITextTransform): string =
         match v with
-            | :? Global        as g -> Global.value g
+            | :? Global        as g -> GlobalValue.globalValue g
             | :? TextTransform as t -> duToLowercase t 
             | _                     -> "unknown text transform"
 
     let textIndentValue (v: ITextIndent): string =
         match v with 
-            | :? Global     as g -> Global.value g
+            | :? Global     as g -> GlobalValue.globalValue g
             | :? Percent    as p -> Units.Percent.value p
             | :? Size       as s -> Units.Size.value s
             | :? TextIndent as t -> duToKebab t 
@@ -131,7 +131,7 @@ module TextValue =
     let textShadowValue (v: ITextShadow) : string = 
         let getValue (TextShadow(s1, s2, s3, c)) = s1, s2, s3, c
         match v with
-            | :? Global         as g -> Global.value g
+            | :? Global         as g -> GlobalValue.globalValue g
             | :? TextShadowType as t -> 
                 let (s1, s2, s3, c) = getValue t
                 sprintf "%s %s %s %s" (Units.Size.value s1) (Units.Size.value s2) (Units.Size.value s3) (Color.value c)

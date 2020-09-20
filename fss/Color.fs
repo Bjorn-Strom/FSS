@@ -23,7 +23,7 @@ module Color =
 
     let value (v: IColor): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? CssColor as c -> colorValue c
             | _ -> "Unknown font size"
 

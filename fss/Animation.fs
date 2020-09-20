@@ -87,7 +87,7 @@ module AnimationValue =
             
     let direction (v: IAnimationDirection): string = 
         match v with
-            | :? Global    as g -> Global.value g
+            | :? Global    as g -> GlobalValue.globalValue g
             | :? Direction as d -> duToKebab d
             | _              -> "Unknown animation direction"
             
@@ -95,7 +95,7 @@ module AnimationValue =
             
     let playState (v: IAnimationPlayState): string = 
         match v with
-            | :? Global as g    -> Global.value g
+            | :? Global as g    -> GlobalValue.globalValue g
             | :? PlayState as p -> duToString p
 
     let animation (v: IAnimation): string =

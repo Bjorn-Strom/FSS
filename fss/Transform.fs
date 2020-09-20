@@ -83,14 +83,14 @@ module TransformValue =
                    | SkewY a -> sprintf "skewY(%s)" <| Units.Angle.value a
 
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? Transform as m -> stringifyTransform m
             | :? Angle as a -> Units.Angle.value a
             | _ -> "Unknown margin size"
 
     let transformOriginValue (v: ITransformOrigin): string =
         match v with
-            | :? Global          as g -> Global.value g
+            | :? Global          as g -> GlobalValue.globalValue g
             | :? Percent         as p -> Units.Percent.value p
             | :? Size            as s -> Units.Size.value s
             | :? TransformOrigin as t -> duToString t

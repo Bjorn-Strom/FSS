@@ -18,7 +18,6 @@ module Background =
         | Center
         interface IBackgroundPosition
         interface ILinearGradient
-        interface IBackground
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient
     type Side =
@@ -44,7 +43,6 @@ module Background =
         | RadialGradient of IRadialGradient list
         | RepeatingLinearGradient of ILinearGradient list
         | RepeatingRadialGradient of IRadialGradient list
-        interface IBackground
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
     type BackgroundOrigin =
@@ -53,13 +51,11 @@ module Background =
         | ContentBox
         interface IBackgroundOrigin
         interface IBackgroundClip
-        interface IBackground
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
     type BackgroundClip =
         | Text
         interface IBackgroundClip
-        interface IBackground
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
     type BackgroundRepeat =
@@ -70,14 +66,12 @@ module Background =
         | Round
         | NoRepeat
         interface IBackgroundRepeat
-        interface IBackground
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
     type BackgroundSize =
         | Cover
         | Contain
         interface IBackgroundSize
-        interface IBackground
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
     type BackgroundAttachment =
@@ -85,7 +79,6 @@ module Background =
         | Fixed
         | Local
         interface IBackgroundAttachment
-        interface IBackground
 
 module BackgroundValues =
     open Background
@@ -175,26 +168,26 @@ module BackgroundValues =
 
     let backgroundOriginValue (v: IBackgroundOrigin): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundOrigin as b -> duToKebab b
             | _ -> "Unknown background origin" 
 
     let backgroundClipValue (v: IBackgroundClip): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundOrigin as b -> duToString b
             | :? BackgroundClip as b -> duToString b
             | _ -> "Unknown background clip" 
 
     let backgroundRepeatValue (v: IBackgroundRepeat): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundRepeat as b -> duToKebab b
             | _ -> "Unknown background repeat" 
 
     let backgroundSizeValue (v: IBackgroundSize): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? BackgroundSize as b -> duToLowercase b
@@ -202,6 +195,6 @@ module BackgroundValues =
 
     let backgroundAttachmentValue (v: IBackgroundAttachment): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundAttachment as b -> duToLowercase b
             | _ -> "Unknown background attachment" 

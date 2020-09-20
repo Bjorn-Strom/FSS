@@ -24,7 +24,7 @@ module TransitionValue =
 
     let value (v: ITransition): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? Transition as t -> transitionValue t
             | _ -> "Unknown transition"
  

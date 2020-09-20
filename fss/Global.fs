@@ -5,13 +5,20 @@ open Fss.Utilities.Helpers
 module Global =
     open Types
 
+    type Normal =
+        | Normal
+        interface IFontStyle
+        interface IFontWeight
+
+    type None =
+        | None
+        interface ITextTransform
+
     type Global =
         | Initial
         | Inherit
         | Unset
         | Revert
-        | Normal
-        | None
         interface IGlobal
         interface IFontSize
         interface IFontStretch
@@ -63,4 +70,9 @@ module Global =
         interface IAnimationDirection
         interface IAnimationPlayState
 
-    let value (v: Global): string = duToLowercase v
+module GlobalValue =
+    open Global
+
+    let globalValue (v: Global): string = duToLowercase v
+    let none (v: None): string = duToLowercase v
+    let normal (v: Normal): string = duToLowercase v

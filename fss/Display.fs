@@ -32,7 +32,7 @@ module Display =
 
     let value (v: IDisplay): string =
         match v with
-            | :? Global  as g -> Global.value g
+            | :? Global  as g -> GlobalValue.globalValue g
             | :? Display as d -> duToKebab d
             | _ -> "Unknown display"
 
@@ -48,7 +48,7 @@ module FlexDirection =
 
     let value (v: IFlexDirection): string =
         match v with
-            | :? Global        as g -> Global.value g
+            | :? Global        as g -> GlobalValue.globalValue g
             | :? FlexDirection as f -> duToKebab f
             | _ -> "Unknown flex direction"
 
@@ -63,7 +63,7 @@ module FlexWrap =
 
     let value (v: IFlexWrap): string =
         match v with
-            | :? Global   as g -> Global.value g
+            | :? Global   as g -> GlobalValue.globalValue g
             | :? FlexWrap as f -> duToKebab f
             | _ -> "Unknown flex wrap"
 
@@ -81,7 +81,7 @@ module JustifyContent =
 
     let value (v: IJustifyContent): string =
         match v with
-            | :? Global         as g -> Global.value g
+            | :? Global         as g -> GlobalValue.globalValue g
             | :? JustifyContent as j -> duToKebab j
             | _ -> "Unknown justify content"
 
@@ -98,7 +98,7 @@ module AlignItems =
 
     let value (v: IAlignItems): string =
         match v with
-            | :? Global     as g -> Global.value g
+            | :? Global     as g -> GlobalValue.globalValue g
             | :? AlignItems as a -> duToKebab a
             | _ -> "Unknown align items"
 
@@ -117,7 +117,7 @@ module AlignContent =
 
     let value (v: IAlignContent): string =
         match v with
-            | :? Global       as g -> Global.value g
+            | :? Global       as g -> GlobalValue.globalValue g
             | :? AlignContent as a -> duToKebab a
             | _ -> "Unknown align content"
 
@@ -136,7 +136,7 @@ module AlignSelf =
             
     let value (v: IAlignSelf): string =
         match v with
-            | :? Global    as g -> Global.value g
+            | :? Global    as g -> GlobalValue.globalValue g
             | :? AlignSelf as a -> duToKebab a
             | _ -> "Unknown align self"
 
@@ -152,7 +152,7 @@ module Order =
 
     let value (v: IOrder): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? Order  as o -> orderValue o
             | _ -> "Unknown order"
 
@@ -168,7 +168,7 @@ module FlexGrow =
 
     let value (v: IFlexGrow): string =
         match v with
-            | :? Global   as g -> Global.value g
+            | :? Global   as g -> GlobalValue.globalValue g
             | :? FlexGrow as s -> flexGrowValue s
             | _ -> "Unknown flex grow"
 
@@ -181,7 +181,7 @@ module FlexShrink =
 
     let value (v: IFlexShrink): string =
         match v with
-            | :? Global     as g -> Global.value g
+            | :? Global     as g -> GlobalValue.globalValue g
             | :? FlexShrink as s -> string s
             | _ -> "Unknown flex shrink"
 
@@ -197,7 +197,7 @@ module FlexBasis =
 
     let value (v: IFlexBasis): string =
         match v with
-            | :? Global  as g -> Global.value g
+            | :? Global  as g -> GlobalValue.globalValue g
             | :? Size    as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | _ -> "Unknown flex basis"
@@ -220,7 +220,7 @@ module VerticalAlign =
 
     let value (v: IVerticalAlign): string =
         match v with
-            | :? Global        as g -> Global.value g
+            | :? Global        as g -> GlobalValue.globalValue g
             | :? Percent       as p -> Units.Percent.value p
             | :? Size          as s -> Units.Size.value s
             | :? VerticalAlign as v -> duToKebab v
@@ -236,7 +236,7 @@ module Visibility =
 
     let value (v: IVisibility): string =
         match v with
-            | :? Global     as g -> Global.value g
+            | :? Global     as g -> GlobalValue.globalValue g
             | :? Visibility as v -> duToString v
             | _ -> "Unknown margin size"
 

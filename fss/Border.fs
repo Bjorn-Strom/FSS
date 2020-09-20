@@ -34,7 +34,7 @@ module BorderValue =
 
     let borderWidthValue (v: IBorderWidth): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? BorderWidth as b -> duToLowercase b
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
@@ -42,6 +42,6 @@ module BorderValue =
 
     let borderStyleValue (v: IBorderStyle): string =
         match v with
-            | :? Global as g -> Global.value g
+            | :? Global as g -> GlobalValue.globalValue g
             | :? BorderStyle as b -> duToLowercase b
             | _ -> "Unknown border style"
