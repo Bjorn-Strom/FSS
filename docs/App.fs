@@ -1655,19 +1655,19 @@ let SelectorExamples =
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
-            //ColorExamples
-            //BackgroundExamples model dispatch
-            //FontExamples
-            //FontFaceExamples
-            //BorderExamples
-            //MarginExamples
-            //PaddingExamples
-            //TransformExamples
-            //TransitionExamples
-            //TextExamples
-            //AnimationExamples
-            //FlexBoxExamples model dispatch
-            //MediaQueryExamples
+            ColorExamples
+            BackgroundExamples model dispatch
+            FontExamples
+            FontFaceExamples
+            BorderExamples
+            MarginExamples
+            PaddingExamples
+            TransformExamples
+            TransitionExamples
+            TextExamples
+            AnimationExamples
+            FlexBoxExamples model dispatch
+            MediaQueryExamples
             SelectorExamples
            
 

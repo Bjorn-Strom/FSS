@@ -7,49 +7,6 @@ open Fable.React.Props
 open Fable.ReactTestingLibrary
 
 open Fss
-open Html
-open Global
-open Property
-open Fss
-open Value
-open Color
-open Units.Size
-open Units.Percent
-open Units.Angle
-open FontSize
-open FontStretch
-open BorderStyle
-open BorderWidth
-open Animation
-open Keyframes
-open Transform
-open Transition
-open Display
-open JustifyContent
-open AlignItems
-open FlexDirection
-open FlexWrap
-open JustifyContent
-open AlignSelf
-open AlignContent
-open Order
-open FlexGrow
-open FlexShrink
-open FlexBasis
-open Margin
-open Selector
-open BackgroundImage
-open LinearGradient
-open RadialGradient
-open BackgroundPosition
-open BackgroundRepeat
-open BackgroundOrigin
-open BackgroundClip
-open BackgroundAttachment
-open ContentSize
-open TextDecorationLine
-open TextDecorationThickness
-open TextTransform
 
 [<Emit("window.getComputedStyle(document.getElementById('$0'));")>]
 let getComputedCssById (id : string) : obj  = jsNative
@@ -74,6 +31,18 @@ let test (testName: string) (stylePropertiesAndResults: (string * (string * stri
             RTL.cleanup()
         ) stylePropertiesAndResults
 
+let teso (testName: string) (attributeList: CSSProperty list) =
+    let actual = attributeList |> createCSSRecord
+    let correct = {|backgroundColor = "#ff0000"|} :> obj
+    Browser.Dom.console.log("Actual: ", actual)
+    Browser.Dom.console.log("Correct: ", correct)
+    let result = actual = correct
+    Browser.Dom.console.log("Result: ", result)
+    Browser.Dom.console.log("Experiment: ", correct)
+
+teso "foo" [ BackgroundColor Color.red]
+
+(*
 let CssTests =
     testList "Css tests" [
         
@@ -1051,3 +1020,4 @@ let CssTests =
 
 Mocha.runTests CssTests |> ignore
 
+*)

@@ -216,6 +216,7 @@ module FontValues =
         match v with
             | :? FontStyle as f -> stringifyStyleValue f
             | :? Global as g    -> GlobalValue.globalValue g
+            | :? Normal as n    -> GlobalValue.normal n
             | _                 -> "Unknown font style"
 
     let fontStretch (v: IFontStretch): string =
@@ -233,6 +234,7 @@ module FontValues =
 
         match v with
             | :? Global as g     -> GlobalValue.globalValue g
+            | :? Normal as n     -> GlobalValue.normal n
             | :? FontWeight as f -> stringifyFamilyValue f
             | _                  -> "Unknown font family"
 

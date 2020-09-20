@@ -54,11 +54,11 @@ module Functions =
     // Globals
     let Initial = Global.Initial
     let Inherit = Global.Inherit
-    let Unset = Global.Unset 
-    let Revert = Global.Revert
-    let Normal = Global.Normal
-    let None = Global.None
-    let Center = Global.Center
+    let Unset   = Global.Unset 
+    let Revert  = Global.Revert
+    let Normal  = Global.Normal
+    let None    = Global.None
+    let Center  = Global.Center
 
     // Color
     let rgb (r: int) (g: int) (b: int): CssColor = Utilities.Color.rgb r g b |> CssColor

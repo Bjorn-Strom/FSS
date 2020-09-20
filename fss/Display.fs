@@ -32,6 +32,7 @@ module DisplayValue =
     let display (v: IDisplay): string =
         match v with
             | :? Global  as g -> GlobalValue.globalValue g
+            | :? None    as n -> GlobalValue.none n
             | :? Display as d -> duToKebab d
             | _ -> "Unknown display"
 
@@ -132,24 +133,28 @@ module FlexValue =
     let justifyContent (v: IJustifyContent): string =
         match v with
             | :? Global         as g -> GlobalValue.globalValue g
+            | :? Center         as c -> GlobalValue.center c
             | :? JustifyContent as j -> duToKebab j
             | _ -> "Unknown justify content"
 
     let alignItems (v: IAlignItems): string =
         match v with
             | :? Global     as g -> GlobalValue.globalValue g
+            | :? Center     as c -> GlobalValue.center c
             | :? AlignItems as a -> duToKebab a
             | _ -> "Unknown align items"
 
     let alignContent (v: IAlignContent): string =
         match v with
             | :? Global       as g -> GlobalValue.globalValue g
+            | :? Center       as c -> GlobalValue.center c
             | :? AlignContent as a -> duToKebab a
             | _ -> "Unknown align content"
 
     let alignSelf (v: IAlignSelf): string =
         match v with
             | :? Global    as g -> GlobalValue.globalValue g
+            | :? Center    as c -> GlobalValue.center c
             | :? AlignSelf as a -> duToKebab a
             | _ -> "Unknown align self"
 

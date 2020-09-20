@@ -177,14 +177,14 @@ module Value =
     let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
     let combineAnimations (list: IAnimation list list): string = combineComma (fun a -> combineWs AnimationValue.animation a) list
 
-    let rec createCSSObject (attributeList: CSSProperty list) = 
+    let rec private createCSS (attributeList: CSSProperty list) callback = 
         attributeList
         |> List.map (
             function
-                | Selector (s, ss)    -> SelectorValue.selector s ==> createCSSObject ss
+                | Selector (s, ss)    -> SelectorValue.selector s ==> createCSS ss callback
 
-                | MediaProperty    (f, p)     -> sprintf "@media %s" <| MediaValue.mediaFeature f                              ==> createCSSObject p
-                | MediaForProperty (d, f, p)  -> sprintf "@media %s %s" (MediaValue.deviceLabel d) (MediaValue.mediaFeature f) ==> createCSSObject p
+                | MediaProperty    (f, p)     -> sprintf "@media %s" <| MediaValue.mediaFeature f                              ==> createCSS p callback
+                | MediaForProperty (d, f, p)  -> sprintf "@media %s %s" (MediaValue.deviceLabel d) (MediaValue.mediaFeature f) ==> createCSS p callback
 
                 | Label l            -> Property.value label ==> l
                 
@@ -203,7 +203,7 @@ module Value =
                 | BackgroundAttachment  b  -> Property.value backgroundAttachment ==> BackgroundValues.backgroundAttachment b
                 | BackgroundAttachments bs -> Property.value backgroundAttachment ==> combineWs BackgroundValues.backgroundAttachment bs
                 
-                | Hover h -> hover |> Property.value |> toPsuedo ==> createCSSObject h
+                | Hover h -> hover |> Property.value |> toPsuedo ==> createCSS h callback
                 
                 | FontSize              f  -> Property.value fontSize             ==> FontValues.fontSize f
                 | FontStyle             f  -> Property.value fontStyle            ==> FontValues.fontStyle f
@@ -335,3 +335,6 @@ module Value =
                 | Cursor c -> Property.value cursor ==> Cursor.value c
         )
         |> createObj
+
+    let createCSSRecord (attributeList: CSSProperty list) = createCSS attributeList (fun x -> x)
+    let createCSSObject (attributeList: CSSProperty list) = createCSS attributeList createObj

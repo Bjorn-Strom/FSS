@@ -117,6 +117,7 @@ module TextValue =
     let textTransform (v: ITextTransform): string =
         match v with
             | :? Global        as g -> GlobalValue.globalValue g
+            | :? None          as n -> GlobalValue.none n
             | :? TextTransform as t -> duToLowercase t 
             | _                     -> "unknown text transform"
 
