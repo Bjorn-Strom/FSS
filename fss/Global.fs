@@ -5,6 +5,13 @@ open Fss.Utilities.Helpers
 module Global =
     open Types
 
+    type Center =
+        | Center
+        interface IAlignSelf
+        interface IAlignItems
+        interface IAlignContent
+        interface IJustifyContent
+
     type Normal =
         | Normal
         interface IFontStyle
@@ -13,6 +20,7 @@ module Global =
     type None =
         | None
         interface ITextTransform
+        interface IDisplay
 
     type Global =
         | Initial
@@ -76,3 +84,4 @@ module GlobalValue =
     let globalValue (v: Global): string = duToLowercase v
     let none (v: None): string = duToLowercase v
     let normal (v: Normal): string = duToLowercase v
+    let center (v: Center): string = duToLowercase v

@@ -21,6 +21,8 @@
     <Compile Include="Padding.fs" />
     <Compile Include="ContentSize.fs" />
     <Compile Include="Selector.fs" />
+    <Compile Include="Visibility.fs" />
+    <Compile Include="Position.fs" />
     <Compile Include="Background.fs" />
     <Compile Include="Cursor.fs" />
     <Compile Include="Media.fs" />

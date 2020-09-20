@@ -8,20 +8,20 @@ open Fable.React.Props
 open Fss
 
 type Model = { 
-    FlexDirection: FlexDirection.FlexDirection
-    FlexWrap: FlexWrap.FlexWrap
-    AlignContent: AlignContent.AlignContent
+    FlexDirection: Flex.FlexDirection
+    FlexWrap: Flex.FlexWrap
+    AlignContent: Flex.AlignContent
     BackgroundRepeat: Background.BackgroundRepeat }
 type Msg = 
-    | SetFlexDirection of FlexDirection.FlexDirection
-    | SetFlexWrap of FlexWrap.FlexWrap
-    | SetAlignContent of AlignContent.AlignContent
+    | SetFlexDirection of Flex.FlexDirection
+    | SetFlexWrap of Flex.FlexWrap
+    | SetAlignContent of Flex.AlignContent
     | SetBackgroundRepeat of Background.BackgroundRepeat
 
 let init() = { 
-    FlexDirection = FlexDirection.Row
-    FlexWrap = FlexWrap.Wrap
-    AlignContent = AlignContent.Center
+    FlexDirection = Flex.Row
+    FlexWrap = Flex.Wrap
+    AlignContent = Flex.AlignContent.Center
     BackgroundRepeat = Background.NoRepeat}
 
 let update (msg: Msg) (model: Model): Model =
@@ -1032,8 +1032,8 @@ let AnimationExamples =
                 Height (px 200)
                 Width (px 200)
                 Display Display.Flex
-                JustifyContent JustifyContent.Center
-                AlignItems AlignItems.Center
+                JustifyContent Center
+                AlignItems Center
                 BackgroundColor (hex "272727")
                 Value.Perspective (px 200)
             ]
@@ -1151,6 +1151,13 @@ let AnimationExamples =
 
 
 let FlexBoxExamples model dispatch =
+    // Set display to None
+    let foo =
+        fss
+            [
+                Display None
+            ]
+
     // Test alignment
     let parent = 
         fss
@@ -1180,9 +1187,9 @@ let FlexBoxExamples model dispatch =
         fss
             [
                 Display Display.Flex
-                FlexDirection FlexDirection.Row
-                FlexWrap FlexWrap.Wrap
-                JustifyContent JustifyContent.SpaceAround
+                FlexDirection Flex.Row
+                FlexWrap Flex.Wrap
+                JustifyContent Flex.SpaceAround
             ]
 
     let child =
@@ -1210,7 +1217,7 @@ let FlexBoxExamples model dispatch =
         fss
             [
                 Display Display.Flex
-                FlexDirection FlexDirection.Row
+                FlexDirection Flex.Row
             ]
 
     let child =
@@ -1239,7 +1246,7 @@ let FlexBoxExamples model dispatch =
         fss
             [
                 Display Display.Flex
-                FlexDirection FlexDirection.Column
+                FlexDirection Flex.Column
             ]
 
     let child =
@@ -1268,7 +1275,7 @@ let FlexBoxExamples model dispatch =
             [
                 Display Display.Flex
                 Width (em 40.0)
-                FlexWrap FlexWrap.NoWrap
+                FlexWrap Flex.NoWrap
             ]
 
     let child =
@@ -1294,7 +1301,7 @@ let FlexBoxExamples model dispatch =
             [
                 Display Display.Flex
                 Width (em 40.0)
-                FlexWrap FlexWrap.Wrap
+                FlexWrap Flex.Wrap
             ]
 
     let child =
@@ -1320,7 +1327,7 @@ let FlexBoxExamples model dispatch =
             [
                 Display Display.Flex
                 Width (em 40.0)
-                FlexWrap FlexWrap.WrapReverse
+                FlexWrap Flex.WrapReverse
             ]
 
     let child =
@@ -1379,7 +1386,7 @@ let FlexBoxExamples model dispatch =
             [
                 BackgroundColor (hex "ccc")
                 Display Display.Flex
-                FlexWrap FlexWrap.Wrap
+                FlexWrap Flex.Wrap
                 Width (pct 100)
                 Height (em 20.0)
                 AlignContent model.AlignContent
@@ -1412,8 +1419,8 @@ let FlexBoxExamples model dispatch =
                 BackgroundColor (hex "ccc")
                 Height (px 100)
                 Display Display.Flex
-                FlexDirection FlexDirection.Row
-                AlignItems AlignItems.Center
+                FlexDirection Flex.Row
+                AlignItems Center
             ]
 
     let child =
@@ -1422,7 +1429,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor Color.white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (FlexGrow.Grow 1)
+                CSSProperty.FlexGrow (Flex.Grow 1)
                 Height (px 75)
                 
             ]
@@ -1433,7 +1440,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor Color.white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (FlexGrow.Grow 2)
+                CSSProperty.FlexGrow (Flex.Grow 2)
                 Height (px 75)
             ]
 
@@ -1452,8 +1459,8 @@ let FlexBoxExamples model dispatch =
                 BackgroundColor (hex "ccc")
                 Height (px 100)
                 Display Display.Flex
-                FlexDirection FlexDirection.Row
-                AlignItems AlignItems.Center
+                FlexDirection Flex.Row
+                AlignItems Center
             ]
 
     let child =
@@ -1462,7 +1469,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor Color.white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (FlexGrow.Grow 1)
+                CSSProperty.FlexGrow (Flex.Grow 1)
                 Height (px 75)
                         
             ]
@@ -1473,7 +1480,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor Color.white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexShrink (FlexShrink.Shrink 2)
+                CSSProperty.FlexShrink (Flex.Shrink 2)
                 Height (px 75)
             ]
 
@@ -1519,24 +1526,24 @@ let FlexBoxExamples model dispatch =
                             h3 [] [str "Flex direction" ]
                             div [] 
                                 [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection FlexDirection.Row)) ]
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Flex.Row)) ]
                                     str "row" 
                                 ]
 
                             div [] 
                                 [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection FlexDirection.RowReverse)) ]
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Flex.RowReverse)) ]
                                     str "row-reverse" 
                                 ]
                             div [] 
                                 [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection FlexDirection.Column)) ]
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Flex.Column)) ]
                                     str "column" 
                                 ]
 
                             div [] 
                                 [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection FlexDirection.ColumnReverse)) ]
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Flex.ColumnReverse)) ]
                                     str "column-reverse" 
                                 ]
                         ]
@@ -1545,18 +1552,18 @@ let FlexBoxExamples model dispatch =
                             h3 [] [str "Flex wrap" ]
                             div [] 
                                 [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap FlexWrap.NoWrap)) ]
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap Flex.NoWrap)) ]
                                     str "nowrap" 
                                 ]
 
                             div [] 
                                 [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap FlexWrap.Wrap)) ]
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap Flex.Wrap)) ]
                                     str "wrap" 
                                 ]
                             div [] 
                                 [
-                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap FlexWrap.WrapReverse)) ]
+                                    input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap Flex.WrapReverse)) ]
                                     str "wrap-reverse" 
                                 ]
                         ]
@@ -1568,33 +1575,33 @@ let FlexBoxExamples model dispatch =
                     h3 [] [str "Align content" ]
                     div [] 
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent AlignContent.FlexStart)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.FlexStart)) ]
                             str "FlexStart" 
                         ]
 
                     div [] 
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent AlignContent.FlexEnd)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.FlexEnd)) ]
                             str "FlexEnd" 
                         ]
                     div [] 
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent AlignContent.Center)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.Center)) ]
                             str "Center" 
                         ]
                     div [] 
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent AlignContent.Stretch)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.Stretch)) ]
                             str "Stretch(default)" 
                         ]
                     div [] 
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent AlignContent.SpaceBetween)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.SpaceBetween)) ]
                             str "SpaceBetween" 
                         ]
                     div [] 
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent AlignContent.SpaceAround)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.SpaceAround)) ]
                             str "SpaceAround" 
                         ]
                 ]
@@ -1740,19 +1747,20 @@ let SelectorExamples =
 let render (model: Model) (dispatch: Msg -> unit) =
     div [] 
         [  
-            ColorExamples
-            BackgroundExamples model dispatch
-            FontExamples
-            FontFaceExamples
-            BorderExamples
-            MarginExamples
-            PaddingExamples
-            TransformExamples
-            TransitionExamples
-            TextExamples
-            AnimationExamples
+            //ColorExamples
+            //BackgroundExamples model dispatch
+            //FontExamples
+            //FontFaceExamples
+            //BorderExamples
+            //MarginExamples
+            //PaddingExamples
+            //TransformExamples
+            //TransitionExamples
+            //TextExamples
+            //AnimationExamples
+            FlexBoxExamples model dispatch
 
-           // FlexBoxExamples model dispatch
+
            // MediaQueryExamples
            // SelectorExamples
            

@@ -272,21 +272,21 @@ module Value =
 
                 | Perspective p -> Property.value perspective ==> Units.Size.value p
 
-                | Display        d -> Property.value display        ==> Display.value d
-                | FlexDirection  f -> Property.value flexDirection  ==> FlexDirection.value f
-                | FlexWrap       f -> Property.value flexWrap       ==> FlexWrap.value f
-                | FlexBasis      f -> Property.value flexBasis      ==> FlexBasis.value f
-                | JustifyContent j -> Property.value justifyContent ==> JustifyContent.value j
-                | AlignItems     a -> Property.value alignItems     ==> AlignItems.value a
-                | AlignContent   a -> Property.value alignContent   ==> AlignContent.value a
-                | Order          o -> Property.value order          ==> Order.value o
-                | FlexGrow       f -> Property.value flexGrow       ==> FlexGrow.value f
-                | FlexShrink     f -> Property.value flexShrink     ==> FlexShrink.value f
-                | AlignSelf      a -> Property.value alignSelf      ==> AlignSelf.value a
-                | VerticalAlign  v -> Property.value verticalAlign  ==> VerticalAlign.value v
-                | Visibility     v -> Property.value visibility     ==> Visibility.value v
-                | Opacity        o -> Property.value opacity        ==> Opacity.value o
-                | Position       p -> Property.value position       ==> Position.value p
+                | Display        d -> Property.value display        ==> DisplayValue.display d
+                | FlexDirection  f -> Property.value flexDirection  ==> FlexValue.flexDirection f
+                | FlexWrap       f -> Property.value flexWrap       ==> FlexValue.flexWrap f
+                | FlexBasis      f -> Property.value flexBasis      ==> FlexValue.flexBasis f
+                | JustifyContent j -> Property.value justifyContent ==> FlexValue.justifyContent j
+                | AlignItems     a -> Property.value alignItems     ==> FlexValue.alignItems a
+                | AlignContent   a -> Property.value alignContent   ==> FlexValue.alignContent a
+                | Order          o -> Property.value order          ==> FlexValue.order o
+                | FlexGrow       f -> Property.value flexGrow       ==> FlexValue.flexGrow f
+                | FlexShrink     f -> Property.value flexShrink     ==> FlexValue.flexShrink f
+                | AlignSelf      a -> Property.value alignSelf      ==> FlexValue.alignSelf a
+                | VerticalAlign  v -> Property.value verticalAlign  ==> VerticalAlignValue.verticalAlign v
+                | Visibility     v -> Property.value visibility     ==> VisibilityValue.visibility v
+                | Opacity        o -> Property.value opacity        ==> OpacityValue.opacity o
+                | Position       p -> Property.value position       ==> PositionValue.position p
 
                 | MarginTop    m  -> Property.value marginTop    ==> MarginValue.margin m
                 | MarginRight  m  -> Property.value marginRight  ==> MarginValue.margin m
