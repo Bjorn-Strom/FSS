@@ -181,7 +181,7 @@ module Value =
         attributeList
         |> List.map (
             function
-                | Selector (s, ss)    -> Selector.value s ==> createCSSObject ss
+                | Selector (s, ss)    -> SelectorValue.selector s ==> createCSSObject ss
 
                 | MediaProperty    (f, p)     -> sprintf "@media %s" <| MediaValue.mediaFeature f                              ==> createCSSObject p
                 | MediaForProperty (d, f, p)  -> sprintf "@media %s %s" (MediaValue.deviceLabel d) (MediaValue.mediaFeature f) ==> createCSSObject p

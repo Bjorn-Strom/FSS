@@ -1549,43 +1549,6 @@ let MediaQueryExamples =
             ]
    div [ ClassName style] [ str "foosball"]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let SelectorExamples =
     fragment []
         [
@@ -1705,9 +1668,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //AnimationExamples
             //FlexBoxExamples model dispatch
             //MediaQueryExamples
-           
-           
-           // SelectorExamples
+            SelectorExamples
            
 
            (*
