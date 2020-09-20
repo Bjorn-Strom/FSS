@@ -24,8 +24,8 @@ module Value =
     type CSSProperty =
         | Selector  of Selector * CSSProperty list
 
-        | Media    of MediaFeature list * CSSProperty list
-        | MediaFor of Device * MediaFeature list * CSSProperty list
+        | MediaProperty    of MediaFeature list * CSSProperty list
+        | MediaForProperty of Device * MediaFeature list * CSSProperty list
 
         | Label of string
 
@@ -183,8 +183,8 @@ module Value =
             function
                 | Selector (s, ss)    -> Selector.value s ==> createCSSObject ss
 
-                | Media    (f, p)     -> sprintf "@media %s" <| Media.featureLabel f                         ==> createCSSObject p
-                | MediaFor (d, f, p)  -> sprintf "@media %s %s" (Media.deviceLabel d) (Media.featureLabel f) ==> createCSSObject p
+                | MediaProperty    (f, p)     -> sprintf "@media %s" <| MediaValue.mediaFeature f                              ==> createCSSObject p
+                | MediaForProperty (d, f, p)  -> sprintf "@media %s %s" (MediaValue.deviceLabel d) (MediaValue.mediaFeature f) ==> createCSSObject p
 
                 | Label l            -> Property.value label ==> l
                 

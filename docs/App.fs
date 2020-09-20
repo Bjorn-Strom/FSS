@@ -1061,95 +1061,6 @@ let AnimationExamples =
                 ]
         ]
       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let FlexBoxExamples model dispatch =
     // Set display to None
     let foo =
@@ -1619,26 +1530,60 @@ let MediaQueryExamples =
                 Width (px 200)
                 Height (px 200)
                 BackgroundColor Color.blue
-                (*
-                Media 
-                    [ MediaFeature.MaxWidth (px 500); MediaFeature.MinWidth (px 200) ]
+                MediaQuery
+                    [ Media.MaxWidth (px 500); Media.MinWidth (px 200) ]
                     [ BackgroundColor Color.red ]
-                Media
-                    [ MediaFeature.MinHeight (px 700)]
-                    [ BackgroundColor pink]
-                MediaFor Print
+                MediaQuery
+                    [ Media.MinHeight (px 700)]
+                    [ BackgroundColor Color.pink]
+                MediaQueryFor Media.Print
                     []
                     [ 
-                        Transform (Rotate(deg 45.0))
-                        BackgroundColor black
+                        MarginTop (px 200)
+                        Transform (Transform.Rotate(deg 45.0))
+                        BackgroundColor Color.red
                     ]
-                Media
-                    [ Orientation Landscape]
-                    [ Color green; FontSize (px 28)]
-                *)
-                
+                MediaQuery
+                    [ Media.Orientation Media.Landscape]
+                    [ Color Color.green; FontSize (px 28)]
             ]
    div [ ClassName style] [ str "foosball"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 let SelectorExamples =
@@ -1758,10 +1703,10 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //TransitionExamples
             //TextExamples
             //AnimationExamples
-            FlexBoxExamples model dispatch
-
-
-           // MediaQueryExamples
+            //FlexBoxExamples model dispatch
+            //MediaQueryExamples
+           
+           
            // SelectorExamples
            
 

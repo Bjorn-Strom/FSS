@@ -31,8 +31,8 @@ module Functions =
     let frames (f: int list) (properties: CSSProperty list) = (f, properties) |> Frames
 
     // Media
-    let Media (r: MediaFeature list) (p: CSSProperty list) = Media(r, p)
-    let MediaFor (d: Device) (r: MediaFeature list) (p: CSSProperty list) = MediaFor(d, r, p)
+    let MediaQuery (r: MediaFeature list) (p: CSSProperty list): CSSProperty = MediaProperty(r, p)
+    let MediaQueryFor (d: Device) (r: MediaFeature list) (p: CSSProperty list): CSSProperty = MediaForProperty(d, r, p)
 
     // Text shadow
     let TextShadows (textShadows: (Size * Size * Size * CssColor) list): CSSProperty =
