@@ -16,10 +16,10 @@ open Units.Time
 open Background
 
 [<AutoOpen>]
-module Value = 
+module Value =
     [<Import("css", from="emotion")>]
     let private css(x) = jsNative
-    let css' x = css(x) 
+    let css' x = css(x)
 
     type CSSProperty =
         | Selector  of Selector * CSSProperty list
@@ -96,10 +96,10 @@ module Value =
         | BorderBottomLeftRadius    of ISize
         | BorderBottomLeftRadiuses  of ISize list
 
-        | BorderColor       of IColor 
+        | BorderColor       of IColor
         | BorderColors      of IColor list
         | BorderTopColor    of IColor
-        | BorderRightColor  of IColor 
+        | BorderRightColor  of IColor
         | BorderBottomColor of IColor
         | BorderLeftColor   of IColor
 
@@ -132,17 +132,17 @@ module Value =
         | MarginRight  of IMargin
         | MarginBottom of IMargin
         | MarginLeft   of IMargin
-        | Margin       of IMargin 
+        | Margin       of IMargin
         | Margins      of IMargin list
 
         | PaddingTop    of IPadding
         | PaddingRight  of IPadding
         | PaddingBottom of IPadding
         | PaddingLeft   of IPadding
-        | Padding       of IPadding 
+        | Padding       of IPadding
         | Paddings      of IPadding list
 
-        | Animation                of IAnimation list  
+        | Animation                of IAnimation list
         | Animations               of IAnimation list list
         | AnimationName            of IAnimation
         | AnimationNames           of IAnimation list
@@ -177,7 +177,7 @@ module Value =
     let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
     let combineAnimations (list: IAnimation list list): string = combineComma (fun a -> combineWs AnimationValue.animation a) list
 
-    let rec private createCSS (attributeList: CSSProperty list) callback = 
+    let rec private createCSS (attributeList: CSSProperty list) callback =
         attributeList
         |> List.map (
             function
@@ -187,9 +187,9 @@ module Value =
                 | MediaForProperty (d, f, p)  -> sprintf "@media %s %s" (MediaValue.deviceLabel d) (MediaValue.mediaFeature f) ==> createCSS p callback
 
                 | Label l            -> Property.value label ==> l
-                
+
                 | Color c            -> Property.value color ==> Color.value c
-                
+
                 | BackgroundColor       bc -> Property.value backgroundColor      ==> Color.value bc
                 | BackgroundImage       bi -> Property.value backgroundImage      ==> BackgroundValues.backgroundImage bi
                 | BackgroundPosition    b  -> Property.value backgroundPosition   ==> BackgroundValues.backgroundPosition b
@@ -202,9 +202,9 @@ module Value =
                 | BackgroundSizes       bs -> Property.value backgroundSize       ==> combineWs BackgroundValues.backgroundSize bs
                 | BackgroundAttachment  b  -> Property.value backgroundAttachment ==> BackgroundValues.backgroundAttachment b
                 | BackgroundAttachments bs -> Property.value backgroundAttachment ==> combineWs BackgroundValues.backgroundAttachment bs
-                
+
                 | Hover h -> hover |> Property.value |> toPsuedo ==> createCSS h callback
-                
+
                 | FontSize              f  -> Property.value fontSize             ==> FontValues.fontSize f
                 | FontStyle             f  -> Property.value fontStyle            ==> FontValues.fontStyle f
                 | FontStretch           f  -> Property.value fontStretch          ==> FontValues.fontStretch f
@@ -213,44 +213,44 @@ module Value =
                 | FontFamily            f  -> Property.value fontFamily           ==> FontValues.fontFamily f
                 | FontFamilies          fs -> Property.value fontFamily           ==> combineWs FontValues.fontFamily fs
                 | FontFeatureSetting    f  -> Property.value fontFeatureSettings  ==> FontValues.fontFeatureSetting f
-                | FontFeatureSettings   fs -> Property.value fontFeatureSettings  ==> combineComma FontValues.fontFeatureSetting fs 
+                | FontFeatureSettings   fs -> Property.value fontFeatureSettings  ==> combineComma FontValues.fontFeatureSetting fs
                 | FontVariantNumeric    f  -> Property.value fontVariantNumeric   ==> FontValues.fontVariantNumeric f
-                | FontVariantNumerics   fs -> Property.value fontVariantNumeric   ==> combineWs FontValues.fontVariantNumeric fs 
+                | FontVariantNumerics   fs -> Property.value fontVariantNumeric   ==> combineWs FontValues.fontVariantNumeric fs
                 | FontVariantCaps       f  -> Property.value fontVariantCaps      ==> FontValues.fontVariantCap f
                 | FontVariantEastAsian  f  -> Property.value fontVariantEastAsian ==> FontValues.fontVariantEastAsian f
-                | FontVariantEastAsians fs -> Property.value fontVariantEastAsian ==> combineWs FontValues.fontVariantEastAsian fs 
+                | FontVariantEastAsians fs -> Property.value fontVariantEastAsian ==> combineWs FontValues.fontVariantEastAsian fs
                 | FontVariantLigatures  f  -> Property.value fontVariantLigatures ==> FontValues.fontVariantLigature f
 
                 | TextAlign               t  -> Property.value textAlign               ==> TextValue.textAlign t
                 | TextDecorationLine      t  -> Property.value textDecorationLine      ==> TextValue.textDecorationLine t
-                | TextDecorationLines     ts -> Property.value textDecorationLine      ==> combineWs TextValue.textDecorationLine ts 
+                | TextDecorationLines     ts -> Property.value textDecorationLine      ==> combineWs TextValue.textDecorationLine ts
                 | TextDecorationColor     t  -> Property.value textDecorationColor     ==> Color.value t
                 | TextDecorationThickness t  -> Property.value textDecorationThickness ==> TextValue.textDecorationThickness t
-                | TextDecorationStyle     t  -> Property.value textDecorationStyle     ==> TextValue.textDecorationStyle t 
-                | TextDecorationSkipInk   t  -> Property.value textDecorationSkipInk   ==> TextValue.textDecorationSkipInk t 
+                | TextDecorationStyle     t  -> Property.value textDecorationStyle     ==> TextValue.textDecorationStyle t
+                | TextDecorationSkipInk   t  -> Property.value textDecorationSkipInk   ==> TextValue.textDecorationSkipInk t
                 | TextTransform           t  -> Property.value textTransform           ==> TextValue.textTransform t
                 | TextIndent              t  -> Property.value textIndent              ==> TextValue.textIndent t
-                | TextIndents             ts -> Property.value textIndent              ==> combineWs TextValue.textIndent ts 
+                | TextIndents             ts -> Property.value textIndent              ==> combineWs TextValue.textIndent ts
                 | TextShadowProperty      t  -> Property.value textShadow              ==> TextValue.textShadow t
-                | TextShadowProperties    ts -> Property.value textShadow              ==> combineComma TextValue.textShadow ts 
+                | TextShadowProperties    ts -> Property.value textShadow              ==> combineComma TextValue.textShadow ts
                 | TextOverflow            t  -> Property.value textOverflow            ==> TextValue.textOverflow t
 
                 | BorderStyle  bs  -> Property.value borderStyle ==> BorderValue.borderStyle bs
-                | BorderStyles bss -> Property.value borderStyle ==> combineWs BorderValue.borderStyle bss 
+                | BorderStyles bss -> Property.value borderStyle ==> combineWs BorderValue.borderStyle bss
 
                 | BorderWidth       bw  -> Property.value borderWidth       ==> BorderValue.borderWidth bw
-                | BorderWidths      bws -> Property.value borderWidth       ==> combineWs BorderValue.borderWidth bws 
+                | BorderWidths      bws -> Property.value borderWidth       ==> combineWs BorderValue.borderWidth bws
                 | BorderTopWidth    bw  -> Property.value borderTopWidth    ==> BorderValue.borderWidth bw
                 | BorderRightWidth  bw  -> Property.value borderRightWidth  ==> BorderValue.borderWidth bw
                 | BorderBottomWidth bw  -> Property.value borderBottomWidth ==> BorderValue.borderWidth bw
                 | BorderLeftWidth   bw  -> Property.value borderLeftWidth   ==> BorderValue.borderWidth  bw
-               
+
                 | BorderRadius              br -> Property.value borderRadius            ==> Units.Size.value br
-                | BorderRadiuses            br -> Property.value borderRadius            ==> combineWs Units.Size.value br 
+                | BorderRadiuses            br -> Property.value borderRadius            ==> combineWs Units.Size.value br
                 | BorderTopLeftRadius       br -> Property.value borderTopLeftRadius     ==> Units.Size.value br
                 | BorderTopLeftRadiuses     br -> Property.value borderTopLeftRadius     ==> combineWs Units.Size.value br
                 | BorderTopRightRadius      br -> Property.value borderTopRightRadius    ==> Units.Size.value br
-                | BorderTopRightRadiuses    br -> Property.value borderTopRightRadius    ==> combineWs Units.Size.value br 
+                | BorderTopRightRadiuses    br -> Property.value borderTopRightRadius    ==> combineWs Units.Size.value br
                 | BorderBottomRightRadius   br -> Property.value borderBottomRightRadius ==> Units.Size.value br
                 | BorderBottomRightRadiuses br -> Property.value borderBottomRightRadius ==> combineWs Units.Size.value br
                 | BorderBottomLeftRadius    br -> Property.value borderBottomLeftRadius  ==> Units.Size.value br
@@ -334,7 +334,7 @@ module Value =
 
                 | Cursor c -> Property.value cursor ==> Cursor.value c
         )
-        |> createObj
+        |> callback
 
-    let createCSSRecord (attributeList: CSSProperty list) = createCSS attributeList (fun x -> x)
+    let createCSSRecord (attributeList: CSSProperty list) = createCSS attributeList id
     let createCSSObject (attributeList: CSSProperty list) = createCSS attributeList createObj

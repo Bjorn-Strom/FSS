@@ -183,7 +183,7 @@ module Font =
         interface IFontVariantEastAsian
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-    type FontVariantLigatures = 
+    type FontVariantLigatures =
         | Normal
         | None
         | CommonLigatures
@@ -227,7 +227,7 @@ module FontValues =
             | _                   -> "unknown font stretch value"
 
     let fontWeight (v: IFontWeight): string =
-        let stringifyFamilyValue (v: FontWeight): string = 
+        let stringifyFamilyValue (v: FontWeight): string =
             match v with
                 | Number n -> string n
                 | _        -> duToLowercase v
@@ -239,7 +239,7 @@ module FontValues =
             | _                  -> "Unknown font family"
 
     let lineHeight (v: ILineHeight): string =
-        let stringifyLineHeight (v: LineHeight): string = 
+        let stringifyLineHeight (v: LineHeight): string =
             match v with
                 | Value v -> string v
                 | _       -> duToLowercase v
@@ -274,17 +274,17 @@ module FontValues =
 
         createObj
             [
-                "@font-face" ==> 
+                "@font-face" ==>
                     createObj
                         ([
                             "fontFamily" ==> fontName
-                        ] @ innerStyle) 
+                        ] @ innerStyle)
             ]
 
     let fontName (FontName n) = n
 
     let fontFamily (v: IFontFamily) : string =
-        let parseFamilyValue (v: FontFamily): string = 
+        let parseFamilyValue (v: FontFamily): string =
             match v with
                 | Font f   -> fontName f
                 | Custom c -> c
@@ -305,29 +305,29 @@ module FontValues =
             | Liga switch -> stringify "liga" switch
             | Dlig switch -> stringify "dlig" switch
             | Onum switch -> stringify "onum" switch
-            | Lnum switch -> stringify "lnum" switch 
+            | Lnum switch -> stringify "lnum" switch
             | Tnum switch -> stringify "tnum" switch
-            | Zero switch -> stringify "zero" switch 
-            | Frac switch -> stringify "frac" switch 
-            | Sups switch -> stringify "sups" switch 
-            | Subs switch -> stringify "subs" switch 
-            | Smcp switch -> stringify "smcp" switch 
-            | C2sc switch -> stringify "c2sc" switch 
+            | Zero switch -> stringify "zero" switch
+            | Frac switch -> stringify "frac" switch
+            | Sups switch -> stringify "sups" switch
+            | Subs switch -> stringify "subs" switch
+            | Smcp switch -> stringify "smcp" switch
+            | C2sc switch -> stringify "c2sc" switch
             | Case switch -> stringify "case" switch
-            | Hlig switch -> stringify "hlig" switch 
-            | Calt switch -> stringify "calt" switch 
-            | Swsh switch -> stringify "swsh" switch 
-            | Hist switch -> stringify "hist" switch 
+            | Hlig switch -> stringify "hlig" switch
+            | Calt switch -> stringify "calt" switch
+            | Swsh switch -> stringify "swsh" switch
+            | Hist switch -> stringify "hist" switch
             | Ss   (variant, switch) -> stringify (sprintf "ss%02i" variant) switch
-            | Kern switch -> stringify "kern" switch 
-            | Locl switch -> stringify "locl" switch 
-            | Rlig switch -> stringify "rlig" switch 
-            | Medi switch -> stringify "medi" switch 
-            | Init switch -> stringify "init" switch 
-            | Isol switch -> stringify "isol" switch 
-            | Fina switch -> stringify "fina" switch 
-            | Mark switch -> stringify "mark" switch 
-            | Mkmk switch -> stringify "mkmk" switch 
+            | Kern switch -> stringify "kern" switch
+            | Locl switch -> stringify "locl" switch
+            | Rlig switch -> stringify "rlig" switch
+            | Medi switch -> stringify "medi" switch
+            | Init switch -> stringify "init" switch
+            | Isol switch -> stringify "isol" switch
+            | Fina switch -> stringify "fina" switch
+            | Mark switch -> stringify "mark" switch
+            | Mkmk switch -> stringify "mkmk" switch
 
         match v with
             | :? Global as g             -> GlobalValue.globalValue g
@@ -356,4 +356,4 @@ module FontValues =
         match v with
         | :? Global               as g -> GlobalValue.globalValue g
         | :? FontVariantLigatures as f -> duToKebab f
-        | _ -> "Unknown font variant ligatures"    
+        | _ -> "Unknown font variant ligatures"

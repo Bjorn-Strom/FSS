@@ -4,6 +4,7 @@ open Fable.Core
 open Fable.Mocha
 open Fable.React
 open Fable.React.Props
+open Fable.Core.JsInterop
 open Fable.ReactTestingLibrary
 
 open Fss
@@ -16,8 +17,8 @@ let getValue (object: obj) (key: string) : string = jsNative
 
 let test (testName: string) (stylePropertiesAndResults: (string * (string * string) list) list) =
     testCase testName <| fun _ ->
-        
-        List.iter (fun (style, propertyResultList) ->         
+
+        List.iter (fun (style, propertyResultList) ->
             RTL.render(
                 div [ ClassName (fss [ Width (px 400) ]) ]
                     [
@@ -25,7 +26,7 @@ let test (testName: string) (stylePropertiesAndResults: (string * (string * stri
                     ]) |> ignore
 
             let computed = getComputedCssById("id")
-            List.iter(fun (property, result) -> 
+            List.iter(fun (property, result) ->
                 Expect.equal (getValue computed property) result testName
             ) propertyResultList
             RTL.cleanup()
@@ -33,7 +34,7 @@ let test (testName: string) (stylePropertiesAndResults: (string * (string * stri
 
 let teso (testName: string) (attributeList: CSSProperty list) =
     let actual = attributeList |> createCSSRecord
-    let correct = {|backgroundColor = "#ff0000"|} :> obj
+    let correct = [ "backgroundColor" ==> "#ff0000" ]
     Browser.Dom.console.log("Actual: ", actual)
     Browser.Dom.console.log("Correct: ", correct)
     let result = actual = correct
@@ -45,11 +46,11 @@ teso "foo" [ BackgroundColor Color.red]
 (*
 let CssTests =
     testList "Css tests" [
-        
-        test "Background" 
-            [ 
+
+        test "Background"
+            [
                 (fss [ BackgroundColor red; Color blue]), ["background-color", "rgb(255, 0, 0)"]
-            
+
                 (fss [ BackgroundImage (Url "image.png") ]), ["background-image", "url(\"http://localhost:8085/image.png\")"]
                 (fss [ BackgroundImage (LinearGradient [ red; blue; deg 45.0; px 10 ] ) ]), ["background-image", "linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 0, 255) 10px)"]
 
@@ -130,8 +131,8 @@ let CssTests =
                 (fss [ BackgroundAttachment Local]), ["background-attachment", "local" ]
             ]
 
-        test "Color" 
-            [ 
+        test "Color"
+            [
                 (fss [ Color aliceBlue ] ), ["color", "rgb(240, 248, 255)"]
                 (fss [ Color (rgb 255 0 0) ]), ["color", "rgb(255, 0, 0)"]
                 (fss [ Color (rgba 255 0 0  0.5) ]), ["color", "rgba(255, 0, 0, 0.5)"]
@@ -141,8 +142,8 @@ let CssTests =
                 (fss [ Color (hsl 120 1.0 0.5) ]), ["color", "rgb(0, 255, 0)"]
                 (fss [ Color (hsla 120 1.0 0.5 0.5) ]), ["color", "rgba(0, 255, 0, 0.5)"]
             ]
-                
-        test "Font" 
+
+        test "Font"
             [
                 (fss [ FontSize XSmall ]), ["font-size", "10px"]
                 (fss [ FontSize Large ]), ["font-size", "18px"]
@@ -265,7 +266,7 @@ let CssTests =
                 (fss [ FontVariantNumeric FontVariantNumeric.TabularNums] ), ["font-variant-numeric", "tabular-nums"]
                 (fss [ FontVariantNumeric FontVariantNumeric.DiagonalFractions] ), ["font-variant-numeric", "diagonal-fractions"]
                 (fss [ FontVariantNumeric FontVariantNumeric.StackedFractions] ), ["font-variant-numeric", "stacked-fractions"]
-                (fss [ FontVariantNumerics 
+                (fss [ FontVariantNumerics
                     [
                         FontVariantNumeric.OldstyleNums
                         FontVariantNumeric.StackedFractions
@@ -289,8 +290,8 @@ let CssTests =
                 (fss [ FontVariantEastAsian FontVariantEastAsian.Traditional]), ["font-variant-east-asian", "traditional"]
                 (fss [ FontVariantEastAsian FontVariantEastAsian.FullWidth]), ["font-variant-east-asian", "full-width"]
                 (fss [ FontVariantEastAsian FontVariantEastAsian.ProportionalWidth]), ["font-variant-east-asian", "proportional-width"]
-                (fss [ FontVariantEastAsians 
-                    [ 
+                (fss [ FontVariantEastAsians
+                    [
                         FontVariantEastAsian.Ruby
                         FontVariantEastAsian.FullWidth
                         FontVariantEastAsian.Jis83
@@ -308,9 +309,9 @@ let CssTests =
                 (fss [ FontVariantLigatures FontVariantLigatures.NoContextual]), ["font-variant-ligatures", "no-contextual"]
             ]
 
-        test "Border" 
+        test "Border"
             [
-                (fss [ BorderStyle Hidden ]), 
+                (fss [ BorderStyle Hidden ]),
                     [
                         "border-bottom-style", "hidden"
                         "border-left-style", "hidden"
@@ -326,15 +327,15 @@ let CssTests =
                         "border-top-style", "dotted"
                     ]
 
-                (fss [ BorderStyle Dashed ]), 
-                    [ 
+                (fss [ BorderStyle Dashed ]),
+                    [
                         "border-bottom-style", "dashed"
                         "border-left-style", "dashed"
                         "border-right-style", "dashed"
                         "border-top-style", "dashed"
                     ]
 
-                (fss [ BorderStyle Solid ]), 
+                (fss [ BorderStyle Solid ]),
                     [
                         "border-bottom-style", "solid"
                         "border-left-style", "solid"
@@ -350,7 +351,7 @@ let CssTests =
                         "border-top-style", "double"
                     ]
 
-                (fss [ BorderStyle Groove ]), 
+                (fss [ BorderStyle Groove ]),
                     [
                         "border-bottom-style", "groove"
                         "border-left-style", "groove"
@@ -358,7 +359,7 @@ let CssTests =
                         "border-top-style", "groove"
                     ]
 
-                (fss [ BorderStyle Ridge ]), 
+                (fss [ BorderStyle Ridge ]),
                     [
                         "border-bottom-style", "ridge"
                         "border-left-style", "ridge"
@@ -366,7 +367,7 @@ let CssTests =
                         "border-top-style", "ridge"
                     ]
 
-                (fss [ BorderStyle Inset ]), 
+                (fss [ BorderStyle Inset ]),
                     [
                         "border-bottom-style", "inset"
                         "border-left-style", "inset"
@@ -382,7 +383,7 @@ let CssTests =
                         "border-top-style", "outset"
                     ]
 
-                (fss [ BorderStyles [Inset; Outset; Ridge; Groove] ]), 
+                (fss [ BorderStyles [Inset; Outset; Ridge; Groove] ]),
                     [
                         "border-bottom-style", "ridge"
                         "border-left-style", "groove"
@@ -390,7 +391,7 @@ let CssTests =
                         "border-top-style", "inset"
                     ]
 
-                (fss [ BorderStyle BorderStyle.None ]), 
+                (fss [ BorderStyle BorderStyle.None ]),
                     [
                         "border-bottom-style", "none"
                         "border-left-style", "none"
@@ -398,7 +399,7 @@ let CssTests =
                         "border-top-style", "none"
                     ]
 
-                (fss [ BorderRadius (px 10)]), 
+                (fss [ BorderRadius (px 10)]),
                      [
                          "border-top-left-radius", "10px"
                          "border-top-right-radius", "10px"
@@ -406,7 +407,7 @@ let CssTests =
                          "border-bottom-right-radius", "10px"
                      ]
 
-                (fss [ BorderRadius (pct 50)]), 
+                (fss [ BorderRadius (pct 50)]),
                      [
                          "border-top-left-radius", "50%"
                          "border-top-right-radius", "50%"
@@ -419,7 +420,7 @@ let CssTests =
                 (fss [ BorderBottomLeftRadius (px 10)]), ["border-bottom-left-radius", "10px"]
                 (fss [ BorderBottomRightRadius (px 10)]), ["border-bottom-right-radius", "10px"]
 
-                (fss [ BorderRadiuses [px 10; px 20; px 30; px 40] ]), 
+                (fss [ BorderRadiuses [px 10; px 20; px 30; px 40] ]),
                     [
                         "border-bottom-left-radius", "40px"
                         "border-bottom-right-radius", "30px"
@@ -427,7 +428,7 @@ let CssTests =
                         "border-top-right-radius", "20px"
                     ]
 
-                (fss [ BorderStyle Solid; BorderWidth (px 40) ]), 
+                (fss [ BorderStyle Solid; BorderWidth (px 40) ]),
                     [
                         "border-top-width", "40px"
                         "border-right-width", "40px"
@@ -435,7 +436,7 @@ let CssTests =
                         "border-left-width", "40px"
                     ]
 
-                (fss [ BorderStyle Solid; BorderWidths [px 10; px 20; px 30; px 40 ]]), 
+                (fss [ BorderStyle Solid; BorderWidths [px 10; px 20; px 30; px 40 ]]),
                     [
                         "border-top-width", "10px"
                         "border-right-width", "20px"
@@ -456,7 +457,7 @@ let CssTests =
                         "border-left-color", "rgb(255, 0, 0)"
                     ]
 
-                (fss [ BorderStyle Solid; BorderColors [red; green; blue; white] ]), 
+                (fss [ BorderStyle Solid; BorderColors [red; green; blue; white] ]),
                     [
                         "border-top-color", "rgb(255, 0, 0)"
                         "border-right-color", "rgb(0, 128, 0)"
@@ -470,7 +471,7 @@ let CssTests =
                 (fss [ BorderStyle Solid; BorderLeftColor white ]), ["border-left-color", "rgb(255, 255, 255)"]
             ]
 
-        test "Width" 
+        test "Width"
             [
                 (fss [ Width (px 100) ]), ["width", "100px"]
                 (fss [ Width MaxContent ]), ["width", "0px"]
@@ -486,7 +487,7 @@ let CssTests =
                 (fss [ MaxHeight (px 75) ]), ["max-height", "75px"]
             ]
 
-        test "Perspective" 
+        test "Perspective"
             [
                 (fss [ CSSProperty.Perspective (px 100) ]), ["perspective", "100px"]
                 //(fss [ CSSProperty.Perspective Inherit]), "perspective", "inherit"
@@ -542,7 +543,7 @@ let CssTests =
                 (fss [ AlignItems AlignItems.Center]), ["align-items", "center"]
                 (fss [ AlignItems AlignItems.Baseline]), ["align-items", "baseline"]
                 (fss [ AlignItems AlignItems.Stretch]), ["align-items", "stretch"]
-                
+
                 (fss [ AlignContent FlexStart]), ["align-content", "flex-start"]
                 (fss [ AlignContent FlexEnd]), ["align-content", "flex-end"]
                 (fss [ AlignContent AlignContent.Center]), ["align-content", "center"]
@@ -593,7 +594,7 @@ let CssTests =
                 (fss [ MarginBottom (px 10)]), ["margin-bottom", "10px"]
                 (fss [ MarginLeft (px 10)]), ["margin-left", "10px"]
 
-                (fss [ CSSProperty.Margin (px 10)]), 
+                (fss [ CSSProperty.Margin (px 10)]),
                     [
                         "margin-top", "10px"
                         "margin-right", "10px"
@@ -601,7 +602,7 @@ let CssTests =
                         "margin-left", "10px"
                     ]
 
-                (fss [ CSSProperty.Margins [ px 10; px 20; px 30; px 40 ] ]), 
+                (fss [ CSSProperty.Margins [ px 10; px 20; px 30; px 40 ] ]),
                     [
                         "margin-top", "10px"
                         "margin-right", "20px"
@@ -617,7 +618,7 @@ let CssTests =
                 (fss [ PaddingBottom (px 10)]), ["padding-bottom", "10px"]
                 (fss [ PaddingLeft (px 10)]), ["padding-left", "10px"]
 
-                (fss [ Padding (px 10)]), 
+                (fss [ Padding (px 10)]),
                     [
                         "padding-top", "10px"
                         "padding-right", "10px"
@@ -625,7 +626,7 @@ let CssTests =
                         "padding-left", "10px"
                     ]
 
-                (fss [ Paddings [ px 10; px 20; px 30; px 40 ] ]), 
+                (fss [ Paddings [ px 10; px 20; px 30; px 40 ] ]),
                     [
                         "padding-top", "10px"
                         "padding-right", "20px"
@@ -679,13 +680,13 @@ let CssTests =
                 (fss [ AnimationPlayState Paused ]), ["animation-play-state", "paused"]
                 (fss [ AnimationPlayStates [ Running; Paused] ]), ["animation-play-state", "running, paused"]
 
-                (fss [ 
-                    Animations 
+                (fss [
+                    Animations
                         [
                             [animationSample; sec 10.0; Ease; ms 0.5; Infinite; Both; Alternate; Running]
-                            [animationSample; sec 1.0; Linear; sec 10.0; IterationCount.Value 3; Both; Reverse; Paused] 
+                            [animationSample; sec 1.0; Linear; sec 10.0; IterationCount.Value 3; Both; Reverse; Paused]
                         ]
-                ]), 
+                ]),
                     [
                         "animation-name", (sprintf "%A, %A" animationSample animationSample)
                         "animation-duration", "10s, 1s"
@@ -700,7 +701,7 @@ let CssTests =
 
             ]
 
-        test "Transform" 
+        test "Transform"
             [
                 (fss [Transform (Matrix(0.1, 0.2, 0.3,0.4, 0.5, 0.6)) ]), ["transform", "matrix(0.1, 0.2, 0.3, 0.4, 0.5, 0.6)"]
 
@@ -753,20 +754,20 @@ let CssTests =
 
         test "Transition"
             [
-                (fss [ Transition (Transition1(backgroundColor, (sec 10.0))) ]), 
+                (fss [ Transition (Transition1(backgroundColor, (sec 10.0))) ]),
                     [
                         "transition-property", "background-color"
                         "transition-duration", "10s"
                     ]
 
-                (fss [ Transition (Transition2(backgroundColor, (sec 10.0), Ease)) ]), 
+                (fss [ Transition (Transition2(backgroundColor, (sec 10.0), Ease)) ]),
                     [
                         "transition-property", "background-color"
                         "transition-duration", "10s"
                         "transition-timing-function", "ease"
                     ]
 
-                (fss [ Transition (Transition3(backgroundColor, (sec 10.0), Ease, sec 2.0)) ]), 
+                (fss [ Transition (Transition3(backgroundColor, (sec 10.0), Ease, sec 2.0)) ]),
                     [
                         "transition-property", "background-color"
                         "transition-duration", "10s"
@@ -776,7 +777,7 @@ let CssTests =
 
                 (fss
                     [
-                        Transitions 
+                        Transitions
                             [
                                 Transition1(backgroundColor, (sec 10.0))
                                 Transition2(color, (sec 20.0), EaseInOut)
@@ -920,7 +921,7 @@ let CssTests =
                     [
                         ! Div
                             [
-                                !> Div 
+                                !> Div
                                     [
                                         !> P
                                             [
@@ -931,7 +932,7 @@ let CssTests =
                                                     ]
                                             ]
                                     ]
-                
+
                             ]
                     ]
 
@@ -973,12 +974,12 @@ let CssTests =
                 (fss [ TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(0, 0, 0)"]
 
                 (fss [ TextDecorationColor orangeRed; TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(255, 69, 0)"]
-                
+
                 (fss [ TextDecorationThickness Auto  ]), ["text-decoration-thickness", "auto"]
                 (fss [ TextDecorationThickness FromFont  ]), ["text-decoration-thickness", "from-font"]
                 (fss [ TextDecorationThickness (pct 30)  ]), ["text-decoration-thickness", "30%"]
                 (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
-                
+
                 (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
 
                 (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Solid]), ["text-decoration-style", "solid"]
@@ -1005,7 +1006,7 @@ let CssTests =
                 // (fss [ TextIndents [px 10; (TextIndent.Hanging)] ]), ["text-indent", "hanging"]
 
                 (fss [ Functions.TextShadow (px 10) (px 5) (px 15) red ]), ["text-shadow", "rgb(255, 0, 0) 10px 5px 15px"]
-                (fss [ Functions.TextShadows 
+                (fss [ Functions.TextShadows
                     [
                         px  -4, px 3, px 0, hex "#3a50d9"
                         px -14, px 7, px 0, hex "#0a0e27"

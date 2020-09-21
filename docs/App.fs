@@ -7,18 +7,18 @@ open Fable.React.Props
 
 open Fss
 
-type Model = { 
+type Model = {
     FlexDirection: Flex.FlexDirection
     FlexWrap: Flex.FlexWrap
     AlignContent: Flex.AlignContent
     BackgroundRepeat: Background.BackgroundRepeat }
-type Msg = 
+type Msg =
     | SetFlexDirection of Flex.FlexDirection
     | SetFlexWrap of Flex.FlexWrap
     | SetAlignContent of Flex.AlignContent
     | SetBackgroundRepeat of Background.BackgroundRepeat
 
-let init() = { 
+let init() = {
     FlexDirection = Flex.Row
     FlexWrap = Flex.Wrap
     AlignContent = Flex.AlignContent.Center
@@ -30,7 +30,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
     | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
-   
+
 let ColorExamples =
     fragment []
         [
@@ -54,7 +54,7 @@ let BackgroundExamples model dispatch =
     fragment []
         [
             h3 [] [ str "And gradients!" ]
-            
+
             div [ ClassName (fss [Display Display.Flex]) ]
                 [
                     div [
@@ -65,7 +65,7 @@ let BackgroundExamples model dispatch =
                                 BackgroundImage (Background.LinearGradient [ Color.red; Color.blue ] )
                             ])
                     ] []
-                            
+
                     div [
                         ClassName (fss
                             [
@@ -74,7 +74,7 @@ let BackgroundExamples model dispatch =
                                 BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; Color.blue ] )
                             ])
                     ] []
-        
+
                     div [
                         ClassName (fss
                             [
@@ -83,7 +83,7 @@ let BackgroundExamples model dispatch =
                                 BackgroundImage (Background.RadialGradient [ Color.red; Color.blue ] )
                             ])
                     ] []
-        
+
                     div [
                         ClassName (fss
                             [
@@ -93,10 +93,10 @@ let BackgroundExamples model dispatch =
                             ])
                     ] []
                 ]
-        
+
             div [ ClassName (fss [Display Display.Flex]) ]
                 [
-        
+
                     div [
                         ClassName (fss
                             [
@@ -105,7 +105,7 @@ let BackgroundExamples model dispatch =
                                 BackgroundImage (Background.RepeatingRadialGradient [ hex "#e66465"; hex "9198e5"; pct 20 ] )
                             ])
                     ] []
-        
+
                     div [
                             ClassName (fss
                                 [
@@ -114,7 +114,7 @@ let BackgroundExamples model dispatch =
                                     BackgroundImage (Background.LinearGradient [ Background.Bottom; Color.red; hex "f06d06" ] )
                                 ])
                         ] [ ]
-        
+
                     div [
                             ClassName (fss
                                 [
@@ -123,7 +123,7 @@ let BackgroundExamples model dispatch =
                                     BackgroundImage (Background.LinearGradient [deg 72.0; Color.red; hex "f06d06" ] )
                                 ])
                         ] []
-        
+
                     div [
                             ClassName (fss
                                 [
@@ -133,10 +133,10 @@ let BackgroundExamples model dispatch =
                                 ])
                         ] []
                 ]
-        
+
             div [ ClassName (fss [Display Display.Flex]) ]
                 [
-        
+
                     div [
                         ClassName (fss
                             [
@@ -145,7 +145,7 @@ let BackgroundExamples model dispatch =
                                 BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; Color.yellow; pct 10 ] )
                             ])
                     ] []
-        
+
                     div [
                             ClassName (fss
                                 [
@@ -154,7 +154,7 @@ let BackgroundExamples model dispatch =
                                     BackgroundImage (Background.LinearGradient [ Background.Right; hex "fffdc2"; hex "fffdc2"; pct 15; hex "d7f0a2"; pct 15; hex "d7f0a2"; pct 85; hex "fffdc2"; pct 85 ] )
                                 ])
                         ] []
-        
+
                     div [
                             ClassName (fss
                                 [
@@ -163,7 +163,7 @@ let BackgroundExamples model dispatch =
                                     BackgroundImage (Background.RadialGradient [ Background.CircleAt [ Background.Top; Background.Right]; Color.yellow; hex "f06d06"] )
                                 ])
                         ] []
-        
+
                     div [
                             ClassName (fss
                                 [
@@ -173,7 +173,7 @@ let BackgroundExamples model dispatch =
                                 ])
                         ] []
                 ]
-        
+
             h3 [] [ str "And images!" ]
             div [
                 ClassName (fss
@@ -183,14 +183,14 @@ let BackgroundExamples model dispatch =
                         BackgroundImage (Background.Url "https://unsplash.it/200/200")
                     ])
             ] []
-        
+
             let frameAnimation =
                 keyframes
                     [
                         frame 0   [ BackgroundPositions [px 0; px 0] ]
                         frame 100 [ BackgroundPositions [px -500; px 0]]
                     ]
-        
+
             let frame =
                 fss
                     [
@@ -199,10 +199,10 @@ let BackgroundExamples model dispatch =
                         BackgroundImage (Background.Url "https://s.cdpn.io/79/sprite-steps.png")
                         Animation [ frameAnimation; sec 1.0; Animation.Step(10); Animation.Infinite ]
                     ]
-        
+
             h3 [] [ str "Background images can be... fun?" ]
             div [ ClassName frame ] []
-        
+
             let formStyle =
                 fss
                     [
@@ -211,54 +211,54 @@ let BackgroundExamples model dispatch =
                         BorderColor Color.orangeRed
                         CSSProperty.Margin (px 20)
                     ]
-        
+
             div [ ClassName (fss [ Display Display.Flex])]
                 [
-        
+
                     form [ ClassName formStyle ]
                         [
                             h3 [] [str "Background repeat" ]
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.RepeatX)) ]
-                                    str "Repeat-X" 
+                                    str "Repeat-X"
                                 ]
-        
-                            div [] 
+
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.RepeatY)) ]
-                                    str "Repeat-Y" 
+                                    str "Repeat-Y"
                                 ]
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.Repeat)) ]
-                                    str "Repeat" 
+                                    str "Repeat"
                                 ]
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.Space)) ]
-                                    str "Space" 
+                                    str "Space"
                                 ]
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.Round)) ]
-                                    str "Round" 
+                                    str "Round"
                                 ]
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBackgroundRepeat Background.NoRepeat)) ]
-                                    str "NoRepeat" 
+                                    str "NoRepeat"
                                 ]
                         ]
                     ]
-            div [ ClassName (fss 
+            div [ ClassName (fss
                     [
                         Width (px 1025)
                         Height (px 1025)
                         BackgroundImage (Background.Url "https://interactive-examples.mdn.mozilla.net/media/examples/moon.jpg")
                         BackgroundRepeat model.BackgroundRepeat
                     ])] []
-        
+
                 ]
 
 let FontExamples =
@@ -292,7 +292,7 @@ let FontExamples =
             p [ ClassName (fss [FontFamily Font.SansSerif]) ] [ str "This font is sans-serif!"]
             p [ ClassName (fss [FontFamily Font.Monospace]) ] [ str "This font is monospace!"]
             p [ ClassName (fss [FontFamily Font.Cursive]) ] [ str "This font is cursive!"]
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         FontFamilies [ Font.SansSerif; Font.Custom "Helvetica" ]
                     ]) ] [ str "This should be helvetica sans-serif"]
@@ -325,7 +325,7 @@ let FontExamples =
                     str "BOLD"
                 ]
 
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         Width (px 150)
                         LineHeight Font.LineHeight.Normal
@@ -337,7 +337,7 @@ let FontExamples =
                     """
                 ]
 
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         Width (px 150)
                         LineHeight (Font.Value 2.5)
@@ -349,7 +349,7 @@ let FontExamples =
                     """
                 ]
 
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         Width (px 150)
                         LineHeight (em 3.0)
@@ -361,7 +361,7 @@ let FontExamples =
                     """
                 ]
 
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         Width (px 150)
                         LineHeight (pct 150)
@@ -373,7 +373,7 @@ let FontExamples =
                     """
                 ]
 
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         Width (px 150)
                         LineHeight (px 32)
@@ -385,7 +385,7 @@ let FontExamples =
                     """
                 ]
         ]
-     
+
 let FontFaceExamples =
     let droidSerif =
         fontFaces "DroidSerif"
@@ -401,11 +401,11 @@ let FontFaceExamples =
                     Font.FontStyle Normal
                 ]
             ]
-     
+
     let moderna =
         fontFace "moderna"
             [
-                Font.Sources 
+                Font.Sources
                     [
                         Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", Font.Woff2)
                         Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", Font.Woff)
@@ -415,41 +415,41 @@ let FontFaceExamples =
                 Font.FontWeight Normal
                 Font.FontStyle Normal
             ]
-     
-    let p1 = 
-        fss 
+
+    let p1 =
+        fss
             [
                 FontFamily (Font.Font droidSerif)
             ]
-     
-    let p2 = 
-        fss 
+
+    let p2 =
+        fss
             [
                 FontFamily (Font.Font droidSerif)
                 CSSProperty.FontWeight Font.Bold
             ]
-     
-    let p3 = 
-        fss 
+
+    let p3 =
+        fss
             [
                 FontFamily (Font.Font moderna)
                 CSSProperty.FontWeight Font.Bold
             ]
-     
+
     fragment []
         [
             h2 [] [ str "Font face examples" ]
-     
+
             p [ ClassName p1 ]
                 [
                     str "Why..."
                 ]
-     
+
             p [ ClassName p2 ]
                 [
                     str "Hello there"
                 ]
-     
+
             p [ ClassName p3 ]
                 [
                     str "Hello there"
@@ -473,17 +473,17 @@ let BorderExamples =
             p [ ClassName (fss [BorderStyle Border.None])] [ str "I don't have a border"]
             p [ ClassName (fss [BorderStyles [Border.Groove; Border.Dotted; Border.Solid; Border.Dashed]])] [ str "I have a mixed border"]
             p [] [ str "We can also apply only border width" ]
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         BorderWidth Border.Thin
                         BorderStyle Border.Solid
                     ])] [ str "I have a thin border" ]
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         BorderWidth (px 3)
                         BorderStyle Border.Solid
                     ])] [ str "I have a 3px border" ]
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         BorderWidths [px 3; px 4; px 5; px 6]
                         BorderStyle Border.Solid
@@ -493,22 +493,22 @@ let BorderExamples =
                     BorderWidth Border.Thick
                     BorderColor Color.green
                 ])] [ str "BorderStyles" ]
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         BorderStyle Border.Solid
                         BorderTopWidth (px 10)
                     ])] [ str "top width" ]
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         BorderStyle Border.Solid
                         BorderRightWidth (px 10)
                     ])] [ str "right width" ]
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         BorderStyle Border.Solid
                         BorderBottomWidth (px 10)
                     ])] [ str "bottom width" ]
-            p [ ClassName (fss 
+            p [ ClassName (fss
                     [
                         BorderStyle Border.Solid
                         BorderLeftWidth (px 10)
@@ -529,10 +529,10 @@ let BorderExamples =
                     [
                         BorderStyle Border.Solid
                         BorderWidth (px 15)
-                        BorderColors [Color.red; rgba 170 50 220 0.6; Color.green]   
+                        BorderColors [Color.red; rgba 170 50 220 0.6; Color.green]
                     ]
             )] [ str "Now in color!"]
-            
+
             p [ ClassName (fss
                     [
                         BorderStyle Border.Dashed
@@ -600,7 +600,7 @@ let PaddingExamples =
                             ])
                 ]
                 [ str "I have padding everywhere!" ]
-        
+
             div [
                     ClassName
                         (fss
@@ -653,7 +653,7 @@ let TransformExamples =
             ] []
 
             let spinningAnimation =
-                keyframes 
+                keyframes
                     [
                         frame 0 [ Transform(Transform.Rotate (deg 360.0)) ]
                         frame 100 [ Transform(Transform.Rotate (deg 0.0)) ]
@@ -669,7 +669,7 @@ let TransformExamples =
                         AnimationDuration (sec 2.0)
                         AnimationIterationCount Animation.Infinite
                         AnimationTimingFunction Animation.Linear
-                        
+
                     ]
 
             div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Top; Transform.Left ] ]) )] []
@@ -685,7 +685,7 @@ let TransformExamples =
             div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Bottom; Transform.Right ] ]) )] []
         ]
 
-let TransitionExamples =   
+let TransitionExamples =
     let box =
         fss
             [
@@ -695,7 +695,7 @@ let TransitionExamples =
                 Height (px 200)
                 Transition (Transition.Transition2(Property.Transform, (ms 300.0), Animation.CubicBezier(0.0, 0.47, 0.32, 1.97)))
             ]
-        
+
     let trigger =
         fss
             [
@@ -704,7 +704,7 @@ let TransitionExamples =
                 BorderWidth (px 20)
                 BorderStyle Border.Solid
                 BorderColor (hex "ddd")
-                Hover 
+                Hover
                     [
                         ! Html.Div
                             [
@@ -716,21 +716,21 @@ let TransitionExamples =
                             ]
                     ]
             ]
-        
+
     fragment []
         [
             div [ ClassName trigger ]
                 [
                     div [ ClassName box ] []
                 ]
-        
+
             p [ClassName (fss [
                 BackgroundColor Color.red
                 Transition (Transition.Transition3(Property.backgroundColor, (sec 2.5), Animation.Ease, (sec 2.5)))
-                Hover 
+                Hover
                     [
                         BackgroundColor Color.green
-                    ]                 
+                    ]
             ])] [ str "I have a transition! Hover me!" ]
         ]
 
@@ -744,74 +744,74 @@ let TextExamples =
                         Height (px 100)
                         TextAlign Text.Right
                     ]
-        
+
             div [ ClassName style ]
                 [
                     str "I am to the right"
                 ]
-        
+
             div [ ClassName (fss [ TextDecorationLine Text.Underline])] [str "Underline" ]
             div [ ClassName (fss [ TextDecorationLine Text.Overline])] [str "Overline" ]
             div [ ClassName (fss [ TextDecorationLine Text.LineThrough])] [str "Line-Through" ]
             div [ ClassName (fss [ TextDecorationLines [ Text.Underline; Text.Overline; Text.LineThrough] ])] [str "This one has all three" ]
-                    
-            div [ ClassName (fss 
-                    [ 
+
+            div [ ClassName (fss
+                    [
                         TextDecorationLines [ Text.Underline; Text.Overline; Text.LineThrough]
                         TextDecorationColor Color.orangeRed
-                    ] 
+                    ]
                 )] [str "This one has all three and are red" ]
-        
-        
-            div [ ClassName (fss 
-                    [ 
+
+
+            div [ ClassName (fss
+                    [
                         TextDecorationLine Text.Underline
                         TextDecorationColor Color.red
                         TextDecorationThickness Text.FromFont
                     ])] [str "Thickness from font" ]
-        
-            div [ ClassName (fss 
-                    [ 
+
+            div [ ClassName (fss
+                    [
                         TextDecorationLine Text.Underline
                         TextDecorationColor Color.red
                         TextDecorationThickness Text.Auto
                     ])] [str "Thickness from auto" ]
-        
-            div [ ClassName (fss 
-                    [ 
+
+            div [ ClassName (fss
+                    [
                         TextDecorationLine Text.Underline
                         TextDecorationColor Color.red
                         TextDecorationThickness (pct 100)
                     ])] [str "Thickness from percent" ]
-        
-            div [ ClassName (fss 
-                    [ 
+
+            div [ ClassName (fss
+                    [
                         TextDecorationLine Text.Underline
                         TextDecorationColor Color.red
                         TextDecorationThickness (px 1)
                     ])] [str "Thickness from pixels" ]
-        
+
             div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Solid])] [str "Solid" ]
             div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Double])] [str "Double" ]
             div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Dotted])] [str "Dotted" ]
             div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Dashed])] [str "Dashed" ]
             div [ ClassName (fss [ TextDecorationLine Text.Underline; TextDecorationStyle Text.Wavy])] [str "Wavy" ]
-        
+
             div [ ClassName (fss [ TextTransform Text.Capitalize ])] [str "capitalize" ]
             div [ ClassName (fss [ TextTransform Text.Uppercase ])] [str "uppercase" ]
             div [ ClassName (fss [ TextTransform Text.Lowercase ])] [str "LOWERCASE" ]
             div [ ClassName (fss [ TextTransform None ])] [str "NoNE" ]
             div [ ClassName (fss [ TextTransform Text.FullWidth ])] [str "FullWidth" ]
             div [ ClassName (fss [ TextTransform Text.FullSizeKana ])] [str "FullSizeKana" ]
-        
+
             div [ ClassName (fss [ Width (px 200); TextIndent (px 10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
             div [ ClassName (fss [ Width (px 200); TextIndent (pct 10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
             div [ ClassName (fss [ Width (px 200); TextIndent (pct -10)])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
             div [ ClassName (fss [ Width (px 200); TextIndents [pct 10; Text.EachLine]])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
             div [ ClassName (fss [ Width (px 200); TextIndents [pct 10; Text.Hanging]])] [str "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt."]
-        
+
             let simple =
-                fss 
+                fss
                     [
                         TextAlign Text.Center
                         CSSProperty.FontWeight Font.Bold
@@ -820,11 +820,11 @@ let TextExamples =
                         BackgroundColor (hex "91877b")
                         TextShadow (px 0) (px 1) (px 0) (rgba 255 255  255 0.4)
                     ]
-        
+
             h1 [ ClassName simple ] [ str "Monster Mash" ]
-        
+
             let otto =
-                fss 
+                fss
                     [
                         TextAlign Text.Center
                         CSSProperty.FontWeight Font.Bold
@@ -833,7 +833,7 @@ let TextExamples =
                         BackgroundColor (hex "0e8dbc")
                         Color Color.white
                         Height (px 100)
-                        TextShadows 
+                        TextShadows
                             [
                                 px 0, px  1, px  0, hex "ccc"
                                 px 0, px  2, px  0, hex "#c9c9c9"
@@ -849,11 +849,11 @@ let TextExamples =
                                 px 0, px 20, px 20, rgba 0 0 0 0.15
                             ]
                     ]
-        
+
             h1 [ ClassName otto ] [ str "Slippery Slime" ]
-        
+
             let close =
-                fss 
+                fss
                     [
                         TextAlign Text.Center
                         CSSProperty.FontWeight Font.Bold
@@ -862,17 +862,17 @@ let TextExamples =
                         BackgroundColor (hex "3a50d9")
                         Color (hex "e0eff2")
                         Height (px 100)
-                        TextShadows 
+                        TextShadows
                             [
                                 px  -4, px 3, px 0, hex "#3a50d9"
                                 px -14, px 7, px 0, hex "#0a0e27"
                             ]
                     ]
-        
+
             h1 [ ClassName close ] [ str "Mummy mummy" ]
-        
+
             let printers =
-                fss 
+                fss
                     [
                         TextAlign Text.Center
                         CSSProperty.FontWeight Font.Bold
@@ -881,7 +881,7 @@ let TextExamples =
                         BackgroundColor (hex "edde9c")
                         Color (hex "bc2e1e")
                         Height (px 100)
-                        TextShadows 
+                        TextShadows
                             [
                                 px 0, px 1, px 0, hex "#378ab4"
                                 px 1, px 0, px 0, hex "#5dabcd"
@@ -901,11 +901,11 @@ let TextExamples =
                                 px 8, px 7, px 0, hex "#5dabcd"
                             ]
                     ]
-        
+
             h1 [ ClassName printers ] [ str "Skeleton crew" ]
-        
+
             let vamp =
-                fss 
+                fss
                     [
                         TextAlign Text.Center
                         CSSProperty.FontWeight Font.Bold
@@ -914,7 +914,7 @@ let TextExamples =
                         BackgroundColor Color.red
                         Color (hex "92a5de")
                         Height (px 100)
-                        TextShadows 
+                        TextShadows
                             [
                                 px  0, px  0, px  0, rgb 137 156 213
                                 px  1, px  1, px  0, rgb 129 148 205
@@ -942,13 +942,13 @@ let TextExamples =
                                 px  0, px  0, px 20, rgba 0    0   0 0.2
                             ]
                     ]
-        
+
             h1 [ ClassName vamp ] [ str "Vampire Diaries" ]
         ]
 
 let AnimationExamples =
 
-    let bounceFrames = 
+    let bounceFrames =
         keyframes
             [
                 frames [ 0; 20; 53; 80; 100 ]
@@ -991,7 +991,7 @@ let AnimationExamples =
     let bounceAnimation = fss [ Animation [bounceFrames; sec 1.0; Animation.Ease; Animation.Infinite] ]
 
     let sizeAnimation =
-        fss 
+        fss
             [
                 AnimationName sizeFrames
                 AnimationDuration (sec 3.0)
@@ -1002,7 +1002,7 @@ let AnimationExamples =
     let combinedAnimations =
         fss
             [
-                Animations 
+                Animations
                     [
                         [ bounceFrames; sec 1.0; Animation.Ease; Animation.Infinite]
                         [ sizeFrames; sec 3.0; Animation.EaseInOut; Animation.IterationCount.Value 3 ]
@@ -1010,7 +1010,7 @@ let AnimationExamples =
             ]
 
     let spinnyMation =
-        fss 
+        fss
             [
                 Width (px 200)
                 Height (px 200)
@@ -1047,7 +1047,7 @@ let AnimationExamples =
                 BackgroundColor (hex "00dbde")
                 Animation [loader; sec 2.0; Animation.Linear; Animation.Infinite]
             ]
-            
+
     fragment []
         [
             p [] [ str "Things can animate now!" ]
@@ -1060,7 +1060,7 @@ let AnimationExamples =
                     div [ ClassName loaderContainer ] []
                 ]
         ]
-      
+
 let FlexBoxExamples model dispatch =
     // Set display to None
     let foo =
@@ -1070,7 +1070,7 @@ let FlexBoxExamples model dispatch =
             ]
 
     // Test alignment
-    let parent = 
+    let parent =
         fss
             [
                 Display Display.Flex
@@ -1087,14 +1087,14 @@ let FlexBoxExamples model dispatch =
                 BackgroundColor Color.lightCoral
             ]
 
-    let alignment = 
+    let alignment =
         div [ ClassName parent]
              [
                 div [ ClassName child] []
              ]
 
     // Test Flex flow property
-    let parent = 
+    let parent =
         fss
             [
                 Display Display.Flex
@@ -1123,8 +1123,8 @@ let FlexBoxExamples model dispatch =
                  div [ ClassName child] []
              ]
 
-    // Flex Direction row 
-    let parent = 
+    // Flex Direction row
+    let parent =
         fss
             [
                 Display Display.Flex
@@ -1140,7 +1140,7 @@ let FlexBoxExamples model dispatch =
                 MarginLeft (px 10)
             ]
 
-            
+
     let rows =
         div [ ClassName parent]
                 [
@@ -1153,7 +1153,7 @@ let FlexBoxExamples model dispatch =
                 ]
 
     // Flex Direction column
-    let parent = 
+    let parent =
         fss
             [
                 Display Display.Flex
@@ -1168,7 +1168,7 @@ let FlexBoxExamples model dispatch =
                 Height (px 50)
                 MarginTop (px 10)
             ]
-                        
+
     let columns =
         div [ ClassName parent]
                 [
@@ -1180,8 +1180,8 @@ let FlexBoxExamples model dispatch =
                     div [ ClassName child] []
                 ]
 
-    // Flex no wrap 
-    let parent = 
+    // Flex no wrap
+    let parent =
         fss
             [
                 Display Display.Flex
@@ -1196,7 +1196,7 @@ let FlexBoxExamples model dispatch =
                 Width (em 15.0)
                 CSSProperty.Margin (px 10)
             ]
-                                    
+
     let noWrap =
         div [ ClassName parent]
                 [
@@ -1206,8 +1206,8 @@ let FlexBoxExamples model dispatch =
                     div [ ClassName child] [ str "4" ]
                 ]
 
-    // Flex no wrap 
-    let parent = 
+    // Flex no wrap
+    let parent =
         fss
             [
                 Display Display.Flex
@@ -1222,7 +1222,7 @@ let FlexBoxExamples model dispatch =
                 Width (em 15.0)
                 CSSProperty.Margin (px 10)
             ]
-                                                
+
     let wrap =
         div [ ClassName parent]
                 [
@@ -1232,8 +1232,8 @@ let FlexBoxExamples model dispatch =
                     div [ ClassName child] [ str "4" ]
                 ]
 
-    // Flex no wrap 
-    let parent = 
+    // Flex no wrap
+    let parent =
         fss
             [
                 Display Display.Flex
@@ -1248,7 +1248,7 @@ let FlexBoxExamples model dispatch =
                 Width (em 15.0)
                 CSSProperty.Margin (px 10)
             ]
-                                                            
+
     let wrapReverse =
         div [ ClassName parent]
                 [
@@ -1259,7 +1259,7 @@ let FlexBoxExamples model dispatch =
                 ]
 
     // Flex flow
-    let parent = 
+    let parent =
         fss
             [
                 BackgroundColor Color.pink
@@ -1278,7 +1278,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margin (px 6)
                 Width (px 120)
             ]
-                                                            
+
     let flexFlow =
         div [ ClassName parent]
                 [
@@ -1292,7 +1292,7 @@ let FlexBoxExamples model dispatch =
                 ]
 
     // AlignContent
-    let parent = 
+    let parent =
         fss
             [
                 BackgroundColor (hex "ccc")
@@ -1324,8 +1324,8 @@ let FlexBoxExamples model dispatch =
                 ]
 
     // Flex-basis & flex grow
-    let parent = 
-        fss 
+    let parent =
+        fss
             [
                 BackgroundColor (hex "ccc")
                 Height (px 100)
@@ -1342,7 +1342,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.FlexBasis (px 120)
                 CSSProperty.FlexGrow (Flex.Grow 1)
                 Height (px 75)
-                
+
             ]
 
     let child3 =
@@ -1364,8 +1364,8 @@ let FlexBoxExamples model dispatch =
             ]
 
     // Flex-basis & flex shrink
-    let parent = 
-        fss 
+    let parent =
+        fss
             [
                 BackgroundColor (hex "ccc")
                 Height (px 100)
@@ -1382,7 +1382,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.FlexBasis (px 120)
                 CSSProperty.FlexGrow (Flex.Grow 1)
                 Height (px 75)
-                        
+
             ]
 
     let child3 =
@@ -1435,47 +1435,47 @@ let FlexBoxExamples model dispatch =
                     form [ ClassName formStyle ]
                         [
                             h3 [] [str "Flex direction" ]
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Flex.Row)) ]
-                                    str "row" 
+                                    str "row"
                                 ]
 
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Flex.RowReverse)) ]
-                                    str "row-reverse" 
+                                    str "row-reverse"
                                 ]
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Flex.Column)) ]
-                                    str "column" 
+                                    str "column"
                                 ]
 
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexDirection Flex.ColumnReverse)) ]
-                                    str "column-reverse" 
+                                    str "column-reverse"
                                 ]
                         ]
                     form [ ClassName formStyle ]
                         [
                             h3 [] [str "Flex wrap" ]
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap Flex.NoWrap)) ]
-                                    str "nowrap" 
+                                    str "nowrap"
                                 ]
 
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap Flex.Wrap)) ]
-                                    str "wrap" 
+                                    str "wrap"
                                 ]
-                            div [] 
+                            div []
                                 [
                                     input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetFlexWrap Flex.WrapReverse)) ]
-                                    str "wrap-reverse" 
+                                    str "wrap-reverse"
                                 ]
                         ]
                 ]
@@ -1484,36 +1484,36 @@ let FlexBoxExamples model dispatch =
             form [ ClassName formStyle ]
                 [
                     h3 [] [str "Align content" ]
-                    div [] 
+                    div []
                         [
                             input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.FlexStart)) ]
-                            str "FlexStart" 
+                            str "FlexStart"
                         ]
 
-                    div [] 
+                    div []
                         [
                             input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.FlexEnd)) ]
-                            str "FlexEnd" 
+                            str "FlexEnd"
                         ]
-                    div [] 
+                    div []
                         [
                             input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.Center)) ]
-                            str "Center" 
+                            str "Center"
                         ]
-                    div [] 
+                    div []
                         [
                             input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.Stretch)) ]
-                            str "Stretch(default)" 
+                            str "Stretch(default)"
                         ]
-                    div [] 
+                    div []
                         [
                             input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.SpaceBetween)) ]
-                            str "SpaceBetween" 
+                            str "SpaceBetween"
                         ]
-                    div [] 
+                    div []
                         [
                             input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.SpaceAround)) ]
-                            str "SpaceAround" 
+                            str "SpaceAround"
                         ]
                 ]
             alignContent
@@ -1538,7 +1538,7 @@ let MediaQueryExamples =
                     [ BackgroundColor Color.pink]
                 MediaQueryFor Media.Print
                     []
-                    [ 
+                    [
                         MarginTop (px 200)
                         Transform (Transform.Rotate(deg 45.0))
                         BackgroundColor Color.red
@@ -1561,7 +1561,7 @@ let SelectorExamples =
                                 BackgroundColor Color.red
                             ]
                     ]
-            h3 [] [ str "Descendant" ] 
+            h3 [] [ str "Descendant" ]
             div [ ClassName descendant] [
                 p [] [ str "Apple"]
                 div [] [ p [] [str "An apple a day keeps the doctor away"]]
@@ -1577,18 +1577,18 @@ let SelectorExamples =
                                 BackgroundColor Color.green
                             ]
                     ]
-            h3 [] [ str "Child" ] 
+            h3 [] [ str "Child" ]
             div [ ClassName child] [
                 p [] [ str "Apple"]
                 div [] [ p [] [str "An apple a day keeps the doctor away"]]
                 p [] [ str "Banana"]
                 p [] [ str "Cherry"]
             ]
-           
+
             let adjacentSibling =
                 fss
                     [
-                        !+ Html.P  
+                        !+ Html.P
                             [
                                 BackgroundColor Color.yellow
                             ]
@@ -1609,7 +1609,7 @@ let SelectorExamples =
                                 BackgroundColor Color.orangeRed
                             ]
                     ]
-            h3 [] [ str "General Sibling" ] 
+            h3 [] [ str "General Sibling" ]
             div [] [
                 p [] [ str "Apple"]
                 div [ ClassName generalSibling ] [ p [] [str "An apple a day keeps the doctor away"]]
@@ -1622,7 +1622,7 @@ let SelectorExamples =
                     [
                         ! Html.Div
                             [
-                                !> Html.Div 
+                                !> Html.Div
                                     [
                                         !> Html.P
                                             [
@@ -1633,7 +1633,7 @@ let SelectorExamples =
                                                     ]
                                             ]
                                     ]
-                                
+
                             ]
                     ]
 
@@ -1653,8 +1653,8 @@ let SelectorExamples =
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
-    div [] 
-        [  
+    div []
+        [
             ColorExamples
             BackgroundExamples model dispatch
             FontExamples
@@ -1669,13 +1669,13 @@ let render (model: Model) (dispatch: Msg -> unit) =
             FlexBoxExamples model dispatch
             MediaQueryExamples
             SelectorExamples
-           
+
 
            (*
             let testo x =
-               div 
+               div
                     [
-                        ClassName ( fss 
+                        ClassName ( fss
                             [
                                 Width (px 100)
                                 Height (px 100)
