@@ -85,11 +85,12 @@ module BackgroundValues =
 
     let backgroundPosition (v: IBackgroundPosition): string =
         match v with
+            | :? Global as g -> GlobalValue.globalValue g
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? BackgroundPosition as position -> duToLowercase position
             | _ -> "Unknown background position"
- 
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient
     let private compareLinearGradient (v: ILinearGradient): int =
         match v with
@@ -119,7 +120,7 @@ module BackgroundValues =
             | EllipseAt positions -> sprintf "ellipse at %s" <| combineWs backgroundPosition positions
 
     let private compareRadialGradient (v: IRadialGradient): int =
-        match v with 
+        match v with
             | :? Angle -> 0
             | :? Size -> 1
             | :? Percent -> 1
@@ -143,7 +144,7 @@ module BackgroundValues =
         |> List.fold (fun acc elem ->
             if Seq.isEmpty acc then
                 value elem
-            else if elem :? Size || elem :? Percent  then 
+            else if elem :? Size || elem :? Percent  then
                 sprintf "%s %s" acc (value elem)
             else
                 sprintf "%s, %s" acc (value elem)) ""
@@ -153,7 +154,7 @@ module BackgroundValues =
         |> List.fold (fun acc elem ->
             if Seq.isEmpty acc then
                 value elem
-            else if elem :? Size || elem :? Percent then 
+            else if elem :? Size || elem :? Percent then
                 sprintf "%s %s" acc (value elem)
             else
                 sprintf "%s, %s" acc (value elem)) ""
@@ -170,20 +171,20 @@ module BackgroundValues =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundOrigin as b -> duToKebab b
-            | _ -> "Unknown background origin" 
+            | _ -> "Unknown background origin"
 
     let backgroundClip (v: IBackgroundClip): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundOrigin as b -> duToString b
             | :? BackgroundClip as b -> duToString b
-            | _ -> "Unknown background clip" 
+            | _ -> "Unknown background clip"
 
     let backgroundRepeat (v: IBackgroundRepeat): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundRepeat as b -> duToKebab b
-            | _ -> "Unknown background repeat" 
+            | _ -> "Unknown background repeat"
 
     let backgroundSize (v: IBackgroundSize): string =
         match v with
@@ -191,10 +192,10 @@ module BackgroundValues =
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? BackgroundSize as b -> duToLowercase b
-            | _ -> "Unknown background size" 
+            | _ -> "Unknown background size"
 
     let backgroundAttachment (v: IBackgroundAttachment): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? BackgroundAttachment as b -> duToLowercase b
-            | _ -> "Unknown background attachment" 
+            | _ -> "Unknown background attachment"

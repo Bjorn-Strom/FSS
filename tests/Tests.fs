@@ -9,39 +9,313 @@ open Fable.ReactTestingLibrary
 
 open Fss
 
-[<Emit("window.getComputedStyle(document.getElementById('$0'));")>]
-let getComputedCssById (id : string) : obj  = jsNative
-
-[<Emit("$0[$1];")>]
-let getValue (object: obj) (key: string) : string = jsNative
-
-let test (testName: string) (stylePropertiesAndResults: (string * (string * string) list) list) =
+let test (testName: string) (attributeList: CSSProperty list) (correct: (string * obj) list) =
     testCase testName <| fun _ ->
+        let actual = attributeList |> createCSSRecord
+        Expect.equal actual correct testName
 
-        List.iter (fun (style, propertyResultList) ->
-            RTL.render(
-                div [ ClassName (fss [ Width (px 400) ]) ]
-                    [
-                        div [ Id "id"; ClassName style] []
-                    ]) |> ignore
+let tests =
+        testList "FSS Tests" [
+            test
+                "Can set background color"
+                [ BackgroundColor Color.red ]
+                [ "backgroundColor" ==> "#ff0000"]
 
-            let computed = getComputedCssById("id")
-            List.iter(fun (property, result) ->
-                Expect.equal (getValue computed property) result testName
-            ) propertyResultList
-            RTL.cleanup()
-        ) stylePropertiesAndResults
+            test
+                "Can set background image"
+                [ BackgroundImage (Background.Url "image.png") ]
+                [ "backgroundImage" ==> "url(image.png)" ]
 
-let teso (testName: string) (attributeList: CSSProperty list) =
-    let actual = attributeList |> createCSSRecord
-    let correct = [ "backgroundColor" ==> "#ff0000" ]
-    Browser.Dom.console.log("Actual: ", actual)
-    Browser.Dom.console.log("Correct: ", correct)
-    let result = actual = correct
-    Browser.Dom.console.log("Result: ", result)
-    Browser.Dom.console.log("Experiment: ", correct)
+            test
+                "Set background as linear gradient"
+                [ BackgroundImage (Background.LinearGradient [ Color.red; Color.blue; deg 45.0; px 10 ] ) ]
+                ["backgroundImage" ==> "linear-gradient(45.00deg, #ff0000, #0000ff 10px)"]
 
-teso "foo" [ BackgroundColor Color.red]
+            test
+                "Set background as circular radial gradient"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06"; Background.Circle ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle, #ffff00, #f06d06)"]
+
+            test
+                "Set background as ellipse radial gradient"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06"; Background.Ellipse ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circleside closest corner"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleSide Background.ClosestCorner ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle closest-corner, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circleside closest side"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleSide Background.ClosestSide ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle closest-side, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circleside farthest corner"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleSide Background.FarthestCorner ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle farthest-corner, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circleside farthest side"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleSide Background.FarthestSide ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle farthest-side, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse-side closest corner"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseSide Background.ClosestCorner ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse closest-corner, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse-side closest side"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseSide Background.ClosestSide ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse closest-side, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse-side farthest corner"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseSide Background.FarthestCorner ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse farthest-corner, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse-side farthest side"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseSide Background.FarthestSide ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse farthest-side, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at top"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Top ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at top, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at top right"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Top; Background.Right ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at top right, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at top left"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Top; Background.Left ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at top left, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at top center"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Top; Background.Center ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at top center, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at bottom"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Bottom ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at bottom, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at bottom right"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Bottom; Background.Right ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at bottom right, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at bottom left"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Bottom; Background.Left ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at bottom left, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at bottom center"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Bottom; Background.Center ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at bottom center, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at center"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Center ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at center, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at center right"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Center; Background.Right ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at center right, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at center left"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Center; Background.Left ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at center left, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient circle at center bottom"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Center; Background.Bottom ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(circle at center bottom, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at top"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Top ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at top, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at top right"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Top; Background.Right ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at top right, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at top left"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Top; Background.Left ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at top left, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at top center"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Top; Background.Center ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at top center, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at bottom"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Bottom ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at bottom, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at bottom right"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Bottom; Background.Right ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at bottom right, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at bottom left"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Bottom; Background.Left ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at bottom left, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at bottom center"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Bottom; Background.Center ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at bottom center, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at center"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Center ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at center, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at center right"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Center; Background.Right ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at center right, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at center left"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Center; Background.Left ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at center left, #ffff00, #f06d06)"]
+
+            test
+                "Set background as radial gradient ellipse at center bottom"
+                [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Center; Background.Bottom ] ] ) ]
+                [ "backgroundImage" ==> "radial-gradient(ellipse at center bottom, #ffff00, #f06d06)"]
+
+            test
+                "Set background position to top"
+                [ BackgroundPosition Background.Top ]
+                [ "backgroundPosition" ==> "top"]
+
+            test
+                "Set background position to bottom"
+                [ BackgroundPosition Background.Bottom]
+                [ "backgroundPosition" ==> "bottom" ]
+
+            test
+                "Set background position to left"
+                [ BackgroundPosition Background.Left]
+                [ "backgroundPosition" ==> "left" ]
+
+            test
+                "Set background position to right"
+                [ BackgroundPosition Background.Right]
+                [ "backgroundPosition" ==> "right" ]
+
+            test
+                "Set background position to center"
+                [ BackgroundPosition Background.Center]
+                [ "backgroundPosition" ==> "center" ]
+
+            test
+                "Set background position with pixels"
+                [ BackgroundPosition (px 50)]
+                [ "backgroundPosition" ==> "50px" ]
+
+            test
+                "Set background position with percent"
+                [ BackgroundPosition (pct 100)]
+                [ "backgroundPosition" ==> "100%" ]
+
+            test
+                "Set background position to initial"
+                [ BackgroundPosition Initial]
+                [ "backgroundPosition" ==> "initial" ]
+
+            test
+                "Set background position to inherit"
+                [ BackgroundPosition Inherit]
+                [ "backgroundPosition" ==> "inherit" ]
+
+            test
+                "Set background position to unset"
+                [ BackgroundPosition Unset]
+                [ "backgroundPosition" ==> "unset" ]
+
+            test
+                "Set background positions"
+                [ BackgroundPositions [ Background.Bottom; px 10; Background.Right; px 20 ] ]
+                [ "backgroundPosition" ==> "bottom 10px right 20px" ]
+
+            test
+                "Set background origin to border-box"
+                [ BackgroundOrigin Background.BorderBox]
+                [ "backgroundOrigin" ==> "border-box" ]
+
+            test
+                "Set background origin to padding-box"
+                [ BackgroundOrigin Background.PaddingBox]
+                [ "backgroundOrigin" ==> "padding-box" ]
+
+            test
+                "Set background origin to content-box"
+                [ BackgroundOrigin Background.ContentBox]
+                ["backgroundOrigin" ==> "content-box"]
+
+            test
+                "Set background origin to inherit"
+                [ BackgroundOrigin Inherit ]
+                ["backgroundOrigin" ==> "inherit"]
+
+            test
+                "Set background origin to initial"
+                [ BackgroundOrigin Initial ]
+                ["backgroundOrigin" ==> "initial"]
+
+            test
+                "Set background origin to unset"
+                [ BackgroundOrigin Unset ]
+                ["backgroundOrigin" ==> "unset"]
+
+
+
+
+
+
+                
+                (*
+
+
+            test [ BackgroundClip Text] ["background-clip", "text" ]
+
+            test [ BackgroundRepeat RepeatX, ["background-repeat", "repeat-x" ]
+            test [ BackgroundRepeat RepeatY, ["background-repeat", "repeat-y" ]
+            test [ BackgroundRepeat Repeat] ["background-repeat", "repeat" ]
+            test [ BackgroundRepeat Space] ["background-repeat", "space" ]
+            test [ BackgroundRepeat Round] ["background-repeat", "round" ]
+            test [ BackgroundRepeat NoRepeat] ["background-repeat", "no-repeat" ]
+
+            test [ BackgroundRepeats [ Repeat; Space ]] ["background-repeat", "repeat space" ]
+
+            test [ BackgroundSize BackgroundSize.Cover] ["background-size", "cover" ]
+            test [ BackgroundSize BackgroundSize.Contain] ["background-size", "contain" ]
+            test [ BackgroundSize (px 10)] ["background-size", "10px" ]
+
+            test [ BackgroundAttachment Scroll] ["background-attachment", "scroll" ]
+            test [ BackgroundAttachment Fixed] ["background-attachment", "fixed" ]
+            test [ BackgroundAttachment Local] ["background-attachment", "local" ]
+*)
+        ]
+
 
 (*
 let CssTests =
@@ -49,54 +323,6 @@ let CssTests =
 
         test "Background"
             [
-                (fss [ BackgroundColor red; Color blue]), ["background-color", "rgb(255, 0, 0)"]
-
-                (fss [ BackgroundImage (Url "image.png") ]), ["background-image", "url(\"http://localhost:8085/image.png\")"]
-                (fss [ BackgroundImage (LinearGradient [ red; blue; deg 45.0; px 10 ] ) ]), ["background-image", "linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 0, 255) 10px)"]
-
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; Circle ] ) ]), ["background-image", "radial-gradient(circle, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; Ellipse ] ) ]), ["background-image", "radial-gradient(rgb(255, 255, 0), rgb(240, 109, 6))"]
-
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleSide ClosestCorner ] ) ]), ["background-image", "radial-gradient(circle closest-corner, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleSide ClosestSide ] ) ]), ["background-image", "radial-gradient(circle closest-side, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleSide FarthestCorner ] ) ]), ["background-image", "radial-gradient(circle, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleSide FarthestSide ] ) ]), ["background-image", "radial-gradient(circle farthest-side, rgb(255, 255, 0), rgb(240, 109, 6))"]
-
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseSide ClosestCorner ] ) ]), ["background-image", "radial-gradient(closest-corner, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseSide ClosestSide ] ) ]), ["background-image", "radial-gradient(closest-side, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseSide FarthestCorner ] ) ]), ["background-image", "radial-gradient(rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseSide FarthestSide ] ) ]), ["background-image", "radial-gradient(farthest-side, rgb(255, 255, 0), rgb(240, 109, 6))"]
-
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top] ] ) ]), ["background-image", "radial-gradient(circle at 50% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top; Right] ] ) ]), ["background-image", "radial-gradient(circle at 100% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top; Left] ] ) ]), ["background-image", "radial-gradient(circle at 0% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Top; Center] ] ) ]), ["background-image", "radial-gradient(circle at 50% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Bottom] ] ) ]), ["background-image", "radial-gradient(circle at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Bottom; Right] ] ) ]), ["background-image", "radial-gradient(circle at 100% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Bottom; Left] ] ) ]), ["background-image", "radial-gradient(circle at 0% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Bottom; Center] ] ) ]), ["background-image", "radial-gradient(circle at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Center] ] ) ]), ["background-image", "radial-gradient(circle, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Center; Right] ] ) ]), ["background-image", "radial-gradient(circle at 100% 50%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Center; Left] ] ) ]), ["background-image", "radial-gradient(circle at 0% 50%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; CircleAt [Center; Bottom] ] ) ]), ["background-image", "radial-gradient(circle at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Top] ] ) ]), ["background-image", "radial-gradient(at 50% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Top; Right] ] ) ]), ["background-image", "radial-gradient(at 100% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Top; Left] ] ) ]), ["background-image", "radial-gradient(at 0% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Top; Center] ] ) ]), ["background-image", "radial-gradient(at 50% 0%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Bottom] ] ) ]), ["background-image", "radial-gradient(at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Bottom; Right] ] ) ]), ["background-image", "radial-gradient(at 100% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Bottom; Left] ] ) ]), ["background-image", "radial-gradient(at 0% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Bottom; Center] ] ) ]), ["background-image", "radial-gradient(at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center] ] ) ]), ["background-image", "radial-gradient(rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center; Right] ] ) ]), ["background-image", "radial-gradient(at 100% 50%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center; Left] ] ) ]), ["background-image", "radial-gradient(at 0% 50%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-                (fss [ BackgroundImage (RadialGradient [ yellow; hex "f06d06"; EllipseAt [Center; Bottom] ] ) ]), ["background-image", "radial-gradient(at 50% 100%, rgb(255, 255, 0), rgb(240, 109, 6))"]
-
                 (fss [ BackgroundPosition Top]), ["background-position", "50% 0%"]
                 (fss [ BackgroundPosition Bottom]), ["background-position", "50% 100%"]
                 (fss [ BackgroundPosition Left]), ["background-position", "0% 50%"]
@@ -1022,3 +1248,4 @@ let CssTests =
 Mocha.runTests CssTests |> ignore
 
 *)
+Mocha.runTests tests |> ignore
