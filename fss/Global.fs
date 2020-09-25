@@ -5,6 +5,10 @@ open Fss.Utilities.Helpers
 module Global =
     open Types
 
+    type Auto =
+        | Auto
+        interface IBackgroundSize
+
     type Center =
         | Center
         interface IAlignSelf
@@ -85,3 +89,4 @@ module GlobalValue =
     let none (v: None): string = duToLowercase v
     let normal (v: Normal): string = duToLowercase v
     let center (v: Center): string = duToLowercase v
+    let auto (v: Auto): string = duToLowercase v

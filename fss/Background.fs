@@ -50,10 +50,12 @@ module Background =
         | PaddingBox
         | ContentBox
         interface IBackgroundOrigin
-        interface IBackgroundClip
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
     type BackgroundClip =
+        | BorderBox
+        | PaddingBox
+        | ContentBox
         | Text
         interface IBackgroundClip
 
@@ -176,8 +178,7 @@ module BackgroundValues =
     let backgroundClip (v: IBackgroundClip): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
-            | :? BackgroundOrigin as b -> duToString b
-            | :? BackgroundClip as b -> duToString b
+            | :? BackgroundClip as b -> duToKebab b
             | _ -> "Unknown background clip"
 
     let backgroundRepeat (v: IBackgroundRepeat): string =
@@ -189,6 +190,7 @@ module BackgroundValues =
     let backgroundSize (v: IBackgroundSize): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
+            | :? Auto as a -> GlobalValue.auto a
             | :? Size as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? BackgroundSize as b -> duToLowercase b

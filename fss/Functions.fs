@@ -12,10 +12,10 @@ open Keyframes
 [<AutoOpen>]
 module Functions =
     // Constructors
-    let fss (attributeList: CSSProperty list) = 
+    let fss (attributeList: CSSProperty list) =
         attributeList |> createCSSObject |> css'
 
-    let keyframes (attributeList: KeyframeAttribute list) = 
+    let keyframes (attributeList: KeyframeAttribute list) =
         attributeList |> createAnimationObject |> kframes'
 
     let fontFace (fontFamily: string) (attributeList: Font.FontFace list) =
@@ -25,7 +25,7 @@ module Functions =
     let fontFaces (fontFamily: string) (attributeLists: Font.FontFace list list) =
         attributeLists |> List.map (createFontFaceObject fontFamily) |> css'
         Font.FontName fontFamily
-    
+
     // Keyframes
     let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame
     let frames (f: int list) (properties: CSSProperty list) = (f, properties) |> Frames
@@ -42,7 +42,7 @@ module Functions =
             (fun x -> x :> Types.ITextShadow))
         |> TextShadowProperties
 
-    let TextShadow (x: Size) (y: Size) (blur: Size) (color: CssColor): CSSProperty = 
+    let TextShadow (x: Size) (y: Size) (blur: Size) (color: CssColor): CSSProperty =
         TextShadowProperty (Text.TextShadow(x, y, blur, color))
 
     // Selectors
@@ -54,11 +54,12 @@ module Functions =
     // Globals
     let Initial = Global.Initial
     let Inherit = Global.Inherit
-    let Unset   = Global.Unset 
+    let Unset   = Global.Unset
     let Revert  = Global.Revert
     let Normal  = Global.Normal
     let None    = Global.None
     let Center  = Global.Center
+    let Auto    = Global.Auto
 
     // Color
     let rgb (r: int) (g: int) (b: int): CssColor = Utilities.Color.rgb r g b |> CssColor
