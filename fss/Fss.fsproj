@@ -28,6 +28,7 @@
     <Compile Include="Media.fs" />
     <Compile Include="Value.fs" />
     <Compile Include="Keyframes.fs" />
+    <Compile Include="FontFace.fs" />
     <Compile Include="Functions.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

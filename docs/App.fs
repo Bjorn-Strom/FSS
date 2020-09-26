@@ -320,7 +320,7 @@ let FontExamples =
                     str "BOLD"
                 ]
 
-            p [ ClassName (fss [FontWeight (Font.Number 700) ])]
+            p [ ClassName (fss [FontWeight (Font.Value 700) ])]
                 [
                     str "BOLD"
                 ]
@@ -340,7 +340,7 @@ let FontExamples =
             p [ ClassName (fss
                     [
                         Width (px 150)
-                        LineHeight (Font.Value 2.5)
+                        LineHeight (Font.LineHeight.Value 2.5)
                     ])]
                 [
                     str """
@@ -391,29 +391,29 @@ let FontFaceExamples =
         fontFaces "DroidSerif"
             [
                 [
-                    Font.Source (Font.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Font.Truetype))
-                    Font.FontWeight Font.Bold
-                    Font.FontStyle Normal
+                    FontFace.Source (FontFace.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", FontFace.Truetype))
+                    FontFace.FontWeight Font.Bold
+                    FontFace.FontStyle Normal
                 ]
                 [
-                    Font.Source (Font.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Font.Truetype))
-                    Font.FontWeight Normal
-                    Font.FontStyle Normal
+                    FontFace.Source (FontFace.Url ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", FontFace.Truetype))
+                    FontFace.FontWeight Normal
+                    FontFace.FontStyle Normal
                 ]
             ]
 
     let moderna =
         fontFace "moderna"
             [
-                Font.Sources
+                FontFace.Sources
                     [
-                        Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", Font.Woff2)
-                        Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", Font.Woff)
-                        Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", Font.Truetype)
-                        Font.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", Font.Svg)
+                        FontFace.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", FontFace.Woff2)
+                        FontFace.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", FontFace.Woff)
+                        FontFace.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", FontFace.Truetype)
+                        FontFace.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", FontFace.Svg)
                     ]
-                Font.FontWeight Normal
-                Font.FontStyle Normal
+                FontFace.FontWeight Normal
+                FontFace.FontStyle Normal
             ]
 
     let p1 =

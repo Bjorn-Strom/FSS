@@ -97,6 +97,7 @@ module AnimationValue =
         match v with
             | :? Global as g    -> GlobalValue.globalValue g
             | :? PlayState as p -> duToString p
+            | _ -> "Unknown play state"
 
     let animation (v: IAnimation): string =
         match v with

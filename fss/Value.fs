@@ -211,7 +211,7 @@ module Value =
                 | FontWeight            f  -> Property.value fontWeight           ==> FontValues.fontWeight f
                 | LineHeight            l  -> Property.value lineHeight           ==> FontValues.lineHeight l
                 | FontFamily            f  -> Property.value fontFamily           ==> FontValues.fontFamily f
-                | FontFamilies          fs -> Property.value fontFamily           ==> combineWs FontValues.fontFamily fs
+                | FontFamilies          fs -> Property.value fontFamily           ==> combineComma FontValues.fontFamily fs
                 | FontFeatureSetting    f  -> Property.value fontFeatureSettings  ==> FontValues.fontFeatureSetting f
                 | FontFeatureSettings   fs -> Property.value fontFeatureSettings  ==> combineComma FontValues.fontFeatureSetting fs
                 | FontVariantNumeric    f  -> Property.value fontVariantNumeric   ==> FontValues.fontVariantNumeric f

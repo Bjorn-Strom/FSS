@@ -10,8 +10,9 @@ let test (testName: string) (attributeList: CSSProperty list) (correct: (string 
         let actual = attributeList |> createCSSRecord
         Expect.equal actual correct testName
 
-let tests =
-        testList "Fss Tests" [
+let backgroundTests =
+    testList "Background"
+        [
             test
                 "background color"
                 [ BackgroundColor Color.red ]
@@ -441,179 +442,658 @@ let tests =
                 "background attachment unset"
                 [ BackgroundAttachment Unset ]
                 [ "backgroundAttachment" ==> "unset" ]
-
-            test
-                "Color named color"
-                [ Color Color.aliceBlue ]
-                [ "color" ==> "#f0f8ff"]
-
-            test
-                "Color RGB"
-                [ Color (rgb 255 0 0) ]
-                ["color" ==> "rgb(255, 0, 0)"]
-
-            test
-                "Color RBGA"
-                [ Color (rgba 255 0 0  0.5) ]
-                ["color" ==> "rgba(255, 0, 0, 0.500000)"]
-
-            test
-                "Color HEX no #"
-                [ Color (hex "ff0000") ]
-                ["color" ==> "#ff0000"]
-
-            test
-                "Color HEX with alpha"
-                [ Color (hex "#ff000080") ]
-                ["color" ==> "#ff000080"]
-
-            test
-                "Color HSL"
-                [ Color (hsl 120 1.0 0.5) ]
-                ["color" ==> "hsl(120, 100%, 50%)"]
-
-            test
-                "Color HSLA"
-                [ Color (hsla 120 1.0 0.5 0.5) ]
-                ["color" ==> "hsla(120, 100%, 50%, 50%)"]
-
-            test
-                "Color Inherit"
-                [ Color Inherit ]
-                ["color" ==> "inherit"]
-
-            test
-                "Color Initial"
-                [ Color Initial ]
-                ["color" ==> "initial"]
-
-            test
-                "Color Unset"
-                [ Color Unset ]
-                ["color" ==> "unset"]
-
         ]
+let colorTests =
+    testList "Colors"
+            [
+                test
+                    "Color named color"
+                    [ Color Color.aliceBlue ]
+                    [ "color" ==> "#f0f8ff"]
+
+                test
+                    "Color RGB"
+                    [ Color (rgb 255 0 0) ]
+                    ["color" ==> "rgb(255, 0, 0)"]
+
+                test
+                    "Color RBGA"
+                    [ Color (rgba 255 0 0  0.5) ]
+                    ["color" ==> "rgba(255, 0, 0, 0.500000)"]
+
+                test
+                    "Color HEX no #"
+                    [ Color (hex "ff0000") ]
+                    ["color" ==> "#ff0000"]
+
+                test
+                    "Color HEX with alpha"
+                    [ Color (hex "#ff000080") ]
+                    ["color" ==> "#ff000080"]
+
+                test
+                    "Color HSL"
+                    [ Color (hsl 120 1.0 0.5) ]
+                    ["color" ==> "hsl(120, 100%, 50%)"]
+
+                test
+                    "Color HSLA"
+                    [ Color (hsla 120 1.0 0.5 0.5) ]
+                    ["color" ==> "hsla(120, 100%, 50%, 50%)"]
+
+                test
+                    "Color Inherit"
+                    [ Color Inherit ]
+                    ["color" ==> "inherit"]
+
+                test
+                    "Color Initial"
+                    [ Color Initial ]
+                    ["color" ==> "initial"]
+
+                test
+                    "Color Unset"
+                    [ Color Unset ]
+                    ["color" ==> "unset"]
+            ]
+
+let fontTests =
+    testList "Fonts"
+        [
+            test
+                "Font size XX-Small"
+                [ FontSize Font.XxSmall ]
+                [ "fontSize" ==> "xx-small" ]
+
+            test
+                "Font size X-Small"
+                [ FontSize Font.XSmall ]
+                [ "fontSize" ==> "x-small" ]
+
+            test
+                "Font size small"
+                [ FontSize Font.Small ]
+                [ "fontSize" ==> "small" ]
+
+            test
+                "Font size medium"
+                [ FontSize Font.Medium ]
+                [ "fontSize" ==> "medium" ]
+
+            test
+                "Font size large"
+                [ FontSize Font.Large ]
+                [ "fontSize" ==> "large" ]
+
+            test
+                "Font size x-large"
+                [ FontSize Font.XLarge ]
+                [ "fontSize" ==> "x-large" ]
+
+            test
+                "Font size xx-large"
+                [ FontSize Font.XxLarge ]
+                [ "fontSize" ==> "xx-large" ]
+
+            test
+                "Font size xxx-large"
+                [ FontSize Font.XxxLarge ]
+                [ "fontSize" ==> "xxx-large" ]
+
+            test
+                "Font size smaller"
+                [ FontSize Font.Smaller ]
+                [ "fontSize" ==> "smaller" ]
+
+            test
+                "Font size larger"
+                [ FontSize Font.Larger ]
+                [ "fontSize" ==> "larger" ]
+
+            test
+                "Font size pixels"
+                [ FontSize (px 18) ]
+                [ "fontSize" ==> "18px" ]
+
+            test
+                "Font size em"
+                [ FontSize (em 0.8) ]
+                [ "fontSize" ==> "0.8em" ]
+
+            test
+                "Font size percentage"
+                [ FontSize (pct 80) ]
+                [ "fontSize" ==> "80%" ]
+
+            test
+                "Font size inherit"
+                [ FontSize Inherit ]
+                [ "fontSize" ==> "inherit" ]
+
+            test
+                "Font size initial"
+                [ FontSize Initial ]
+                [ "fontSize" ==> "initial" ]
+
+            test
+                "Font size unset"
+                [ FontSize Unset ]
+                [ "fontSize" ==> "unset" ]
+            
+            test
+                "Font stretch normal"
+                [ FontStretch Font.FontStretch.Normal ]
+                [ "fontStretch" ==> "normal" ]
+                
+            test
+                "Font stretch ultra-condensed"
+                [ FontStretch Font.FontStretch.UltraCondensed ]
+                [ "fontStretch" ==> "ultra-condensed" ]
+                
+            test
+                 "Font stretch extra-condensed"
+                [ FontStretch Font.FontStretch.ExtraCondensed ]
+                [ "fontStretch" ==> "extra-condensed" ]
+
+            test "Font stretch extra-condensed"
+                [ FontStretch Font.FontStretch.ExtraCondensed ]
+                [ "fontStretch" ==> "extra-condensed" ]
+
+            test "Font stretch condensed"
+                [ FontStretch Font.FontStretch.Condensed ]
+                [ "fontStretch" ==> "condensed" ]
+
+            test "Font stretch semi-condensed"
+                [ FontStretch Font.FontStretch.SemiCondensed ]
+                [ "fontStretch" ==> "semi-condensed" ]
+
+            test "Font stretch expanded"
+                [ FontStretch Font.FontStretch.Expanded]
+                [ "fontStretch" ==> "expanded" ]
+
+            test "Font stretch extra-expanded"
+                [ FontStretch Font.FontStretch.ExtraExpanded]
+                [ "fontStretch" ==> "extra-expanded" ]
+
+            test "Font stretch ultra-expanded"
+                [ FontStretch Font.FontStretch.UltraExpanded]
+                [ "fontStretch" ==> "ultra-expanded" ]
+
+            test "Font stretch percent"
+                [ FontStretch (pct 200) ]
+                [ "fontStretch" ==> "200%" ]
+
+            test "Font stretch inherit"
+                [ FontStretch Inherit ]
+                [ "fontStretch" ==> "inherit" ]
+
+            test "Font stretch initial"
+                [ FontStretch Initial ]
+                [ "fontStretch" ==> "initial" ]
+
+            test "Font stretch unset"
+                [ FontStretch Unset ]
+                [ "fontStretch" ==> "unset" ]
+
+            test
+                "Font style normal" 
+                [ FontStyle Font.Normal]
+                [ "fontStyle" ==> "normal"]
+
+            test
+                "Font style italic" 
+                [ FontStyle Font.Italic]
+                [ "fontStyle" ==> "italic"]
+
+            test
+                "Font style oblicque 90" 
+                [ FontStyle (Font.Oblique (deg 90.0))]
+                [ "fontStyle" ==> "oblique 90.00deg"]
+
+            test
+                "Font style oblique -90" 
+                [ FontStyle (Font.Oblique (deg -90.0))]
+                [ "fontStyle" ==> "oblique -90.00deg"]
+
+            test
+                "Font style inherit"
+                [ FontStyle Inherit ]
+                [ "fontStyle" ==> "inherit" ]
+
+            test
+                "Font style initial"
+                [ FontStyle Initial ]
+                [ "fontStyle" ==> "initial" ]
+
+            test
+                "Font style unset"
+                [ FontStyle Unset ]
+                [ "fontStyle" ==> "unset" ]
+
+            test
+                "Font weight normal"
+                [ FontWeight Font.FontWeight.Normal ]
+                [ "fontWeight" ==> "normal"]
+
+            test
+                "Font weight bold"
+                [ FontWeight Font.FontWeight.Bold ]
+                [ "fontWeight" ==> "bold"]
+
+            test
+                "Font weight lighter"
+                [ FontWeight Font.FontWeight.Lighter ]
+                [ "fontWeight" ==> "lighter"]
+
+            test
+                "Font weight bolder"
+                [ FontWeight Font.FontWeight.Bolder ]
+                [ "fontWeight" ==> "bolder"]
+
+            test 
+                "Font weight value"
+                [ FontWeight (Font.FontWeight.Value 500) ]
+                [ "fontWeight" ==> "500"]
+
+            test 
+                "Font weight inherit"
+                [ FontWeight Inherit ]
+                [ "fontWeight" ==> "inherit"]
+
+            test 
+                "Font weight initial"
+                [ FontWeight Initial ]
+                [ "fontWeight" ==> "initial"]
+
+            test 
+                "Font weight unset"
+                [ FontWeight Unset ]
+                [ "fontWeight" ==> "unset"]
+                
+            test
+                "Line height normal"
+                [ LineHeight Font.LineHeight.Normal ]
+                [ "lineHeight" ==> "normal" ]
+                
+            test
+                "Line height value"
+                [ LineHeight (Font.LineHeight.Value 2.5) ]
+                [ "lineHeight" ==> "2.5" ]
+            
+            test
+                "Line height em"
+                [ LineHeight (em 3.0) ]
+                [ "lineHeight" ==> "3.0em" ]
+                
+            test
+                "Line height pixel"
+                [ LineHeight (px 3) ]
+                [ "lineHeight" ==> "3px" ]
+                
+            test
+                "Line height percent"
+                [ LineHeight (pct 34) ]
+                [ "lineHeight" ==> "34%" ]
+                
+            test
+                "Line height initial"
+                [ LineHeight Initial ]
+                [ "lineHeight" ==> "initial" ]
+                
+            test
+                "Line height inherit"
+                [ LineHeight Inherit ]
+                [ "lineHeight" ==> "inherit" ]
+                
+            test
+                "Line height unset"
+                [ LineHeight Unset ]
+                [ "lineHeight" ==> "unset" ]
+                
+            test
+                 "Font family serif"
+                 [ FontFamily Font.Serif ]
+                 [ "fontFamily" ==> "serif" ]
+             
+            test
+                 "Font family sans-serif"
+                 [ FontFamily Font.SansSerif ]
+                 [ "fontFamily" ==> "sans-serif" ]
+             
+            test
+                 "Font family monospace"
+                 [ FontFamily Font.Monospace ]
+                 [ "fontFamily" ==> "monospace" ]
+             
+            test
+                 "Font family cursive"
+                 [ FontFamily Font.Cursive ]
+                 [ "fontFamily" ==> "cursive" ]
+             
+            test
+                 "Font family arial"
+                 [ FontFamily (Font.Custom "arial") ]
+                 [ "fontFamily" ==> "arial" ]
+                 
+            test
+                 "Font family initial"
+                 [ FontFamily Initial ]
+                 [ "fontFamily" ==> "initial" ]
+             
+            test
+                 "Font family inherit"
+                 [ FontFamily Inherit ]
+                 [ "fontFamily" ==> "inherit" ]
+             
+            test
+                 "Font family unset"
+                 [ FontFamily Unset ]
+                 [ "fontFamily" ==> "unset" ]
+                 
+            test
+                "Font families"
+                [ FontFamilies [ Font.Serif; Font.Monospace ] ]
+                [ "fontFamily" ==> "serif, monospace" ]
+            
+            test
+                ""
+                [ FontFeatureSetting (Font.Liga Font.On) ]
+                [ "fontFeatureSettings" ==> "\"liga\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Liga Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"liga\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Dlig Font.On) ]
+                [ "fontFeatureSettings" ==> "\"dlig\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Dlig Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"dlig\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Onum Font.On) ]
+                [ "fontFeatureSettings" ==> "\"onum\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Onum Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"onum\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Lnum Font.On) ]
+                [ "fontFeatureSettings" ==> "\"lnum\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Lnum Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"lnum\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Tnum Font.On) ]
+                [ "fontFeatureSettings" ==> "\"tnum\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Tnum Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"tnum\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Zero Font.On) ]
+                [ "fontFeatureSettings" ==> "\"zero\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Zero Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"zero\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Frac Font.On) ]
+                [ "fontFeatureSettings" ==> "\"frac\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Frac Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"frac\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Sups Font.On) ]
+                [ "fontFeatureSettings" ==> "\"sups\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Sups Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"sups\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Subs Font.On) ]
+                [ "fontFeatureSettings" ==> "\"subs\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Subs Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"subs\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Smcp Font.On) ]
+                [ "fontFeatureSettings" ==> "\"smcp\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Smcp Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"smcp\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.C2sc Font.On) ]
+                [ "fontFeatureSettings" ==> "\"c2sc\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.C2sc Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"c2sc\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Case Font.On) ]
+                [ "fontFeatureSettings" ==> "\"case\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Case Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"case\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Hlig Font.On) ]
+                [ "fontFeatureSettings" ==> "\"hlig\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Hlig Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"hlig\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Calt Font.On) ]
+                [ "fontFeatureSettings" ==> "\"calt\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Calt Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"calt\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Swsh Font.On) ]
+                [ "fontFeatureSettings" ==> "\"swsh\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Swsh Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"swsh\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Hist Font.On) ]
+                [ "fontFeatureSettings" ==> "\"hist\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Hist Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"hist\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Ss (1, Font.On)) ]
+                [ "fontFeatureSettings" ==> "\"ss01\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Ss (20, Font.Off)) ]
+                [ "fontFeatureSettings" ==> "\"ss20\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Kern Font.On) ]
+                [ "fontFeatureSettings" ==> "\"kern\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Kern Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"kern\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Locl Font.On) ]
+                [ "fontFeatureSettings" ==> "\"locl\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Locl Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"locl\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Rlig Font.On) ]
+                [ "fontFeatureSettings" ==> "\"rlig\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Rlig Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"rlig\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Medi Font.On) ]
+                [ "fontFeatureSettings" ==> "\"medi\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Medi Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"medi\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Init Font.On) ]
+                [ "fontFeatureSettings" ==> "\"init\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Init Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"init\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Isol Font.On) ]
+                [ "fontFeatureSettings" ==> "\"isol\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Isol Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"isol\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Fina Font.On) ]
+                [ "fontFeatureSettings" ==> "\"fina\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Fina Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"fina\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Mark Font.On) ]
+                [ "fontFeatureSettings" ==> "\"mark\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Mark Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"mark\" Off" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Mkmk Font.On) ]
+                [ "fontFeatureSettings" ==> "\"mkmk\" On" ]
+                
+            test
+                ""
+                [ FontFeatureSetting (Font.Mkmk Font.Off) ]
+                [ "fontFeatureSettings" ==> "\"mkmk\" Off" ]
+                    
+
+            test
+                ""
+                [
+                    FontFeatureSettings
+                        [
+                            Font.Smcp Font.On
+                            Font.Onum Font.On
+                        ]
+                ]
+                [ "fontFeatureSettings" ==> "\"smcp\" On, \"onum\" On" ]
+
+            test
+                ""
+                [
+                    FontFeatureSettings
+                        [
+                            Font.Smcp Font.Off
+                            Font.Onum Font.Off
+                        ]
+                    ]
+                [ "fontFeatureSettings" ==> "\"smcp\" Off, \"onum\" Off" ]
+                
+                
+             
+        ]
+
+let tests =
+        testList "Fss Tests" [
+            fontTests 
+            colorTests 
+            backgroundTests
+        ]
+        
+Mocha.runTests tests |> ignore
+
 
 
 (*
-let CssTests =
-    testList "Css tests" [
-
-        test "Font"
-            [
-                (fss [ FontSize XSmall ]), ["font-size", "10px"]
-                (fss [ FontSize Large ]), ["font-size", "18px"]
-                (fss [ FontSize (px 100) ]), ["font-size", "100px"]
-                (fss [ FontSize (px 100) ]), ["font-size", "100px"]
-                (fss [ FontSize (pct 200) ]), ["font-size", "32px"]
-
-                (fss [ FontStretch FontStretch.Normal]), ["font-stretch", "100%"]
-                (fss [ FontStretch UltraCondensed]), ["font-stretch", "50%"]
-                (fss [ FontStretch ExtraCondensed]), ["font-stretch", "62.5%"]
-                (fss [ FontStretch Condensed]), ["font-stretch", "75%"]
-                (fss [ FontStretch SemiCondensed]), ["font-stretch", "87.5%"]
-                (fss [ FontStretch SemiExpanded]), ["font-stretch", "112.5%"]
-                (fss [ FontStretch Expanded]), ["font-stretch", "125%"]
-                (fss [ FontStretch ExtraExpanded]), ["font-stretch", "150%"]
-                (fss [ FontStretch UltraExpanded]), ["font-stretch", "200%"]
-
-                (fss [ FontStretch (pct 50)]), ["font-stretch", "50%"]
-                (fss [ FontStretch (pct 50)]), ["font-stretch", "50%"]
-
-                (fss [ FontStyle FontStyle.Normal]), ["font-style", "normal"]
-                (fss [ FontStyle FontStyle.Italic]), ["font-style", "italic"]
-                (fss [ FontStyle (FontStyle.Oblique (deg 90.0))]), ["font-style", "oblique 90deg"]
-                (fss [ FontStyle (FontStyle.Oblique (deg -90.0))]), ["font-style", "oblique -90deg"]
-
-                (fss [ FontWeight FontWeight.Bold ]), ["font-weight", "700"]
-                (fss [ FontWeight FontWeight.Normal ]), ["font-weight", "400"]
-
-                (fss [ FontWeight (FontWeight.Number 100) ]), ["font-weight", "100"]
-                (fss [ FontWeight (FontWeight.Number 200) ]), ["font-weight", "200"]
-                (fss [ FontWeight (FontWeight.Number 300) ]), ["font-weight", "300"]
-                (fss [ FontWeight (FontWeight.Number 400) ]), ["font-weight", "400"]
-                (fss [ FontWeight (FontWeight.Number 500) ]), ["font-weight", "500"]
-                (fss [ FontWeight (FontWeight.Number 600) ]), ["font-weight", "600"]
-                (fss [ FontWeight (FontWeight.Number 700) ]), ["font-weight", "700"]
-                (fss [ FontWeight (FontWeight.Number 800) ]), ["font-weight", "800"]
-                (fss [ FontWeight (FontWeight.Number 900) ]), ["font-weight", "900"]
-
-                (fss [ LineHeight LineHeight.Normal]), ["line-height", "normal"]
-                (fss [ LineHeight (LineHeight.Value 2.5)]), ["line-height", "40px"]
-                (fss [ LineHeight (em 3.0)]), ["line-height", "48px"]
-                (fss [ LineHeight (pct 150)]), ["line-height", "24px"]
-                (fss [ LineHeight (px 32)]), ["line-height", "32px"]
-
-                (fss [ FontFamily FontFamily.Serif]), ["font-family", "serif"]
-                (fss [ FontFamily FontFamily.SansSerif]), ["font-family", "sans-serif"]
-                (fss [ FontFamily FontFamily.Monospace]), ["font-family", "monospace"]
-                (fss [ FontFamily FontFamily.Cursive]), ["font-family", "cursive"]
-                (fss [ FontFamily (FontFamily.Custom "arial")]), ["font-family", "arial"]
-
-                (fss [ FontFeatureSetting (FontFeatureSetting.Liga FontFeatureSetting.On) ]), ["font-feature-settings", "\"liga\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Liga FontFeatureSetting.Off) ]), ["font-feature-settings", "\"liga\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Dlig FontFeatureSetting.On) ]), ["font-feature-settings", "\"dlig\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Dlig FontFeatureSetting.Off) ]), ["font-feature-settings", "\"dlig\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Onum FontFeatureSetting.On) ]), ["font-feature-settings", "\"onum\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Onum FontFeatureSetting.Off) ]), ["font-feature-settings", "\"onum\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Lnum FontFeatureSetting.On) ]), ["font-feature-settings", "\"lnum\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Lnum FontFeatureSetting.Off) ]), ["font-feature-settings", "\"lnum\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Tnum FontFeatureSetting.On) ]), ["font-feature-settings", "\"tnum\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Tnum FontFeatureSetting.Off) ]), ["font-feature-settings", "\"tnum\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Zero FontFeatureSetting.On) ]), ["font-feature-settings", "\"zero\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Zero FontFeatureSetting.Off) ]), ["font-feature-settings", "\"zero\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Frac FontFeatureSetting.On) ]), ["font-feature-settings", "\"frac\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Frac FontFeatureSetting.Off) ]), ["font-feature-settings", "\"frac\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Sups FontFeatureSetting.On) ]), ["font-feature-settings", "\"sups\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Sups FontFeatureSetting.Off) ]), ["font-feature-settings", "\"sups\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Subs FontFeatureSetting.On) ]), ["font-feature-settings", "\"subs\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Subs FontFeatureSetting.Off) ]), ["font-feature-settings", "\"subs\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Smcp FontFeatureSetting.On) ]), ["font-feature-settings", "\"smcp\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Smcp FontFeatureSetting.Off) ]), ["font-feature-settings", "\"smcp\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.C2sc FontFeatureSetting.On) ]), ["font-feature-settings", "\"c2sc\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.C2sc FontFeatureSetting.Off) ]), ["font-feature-settings", "\"c2sc\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Case FontFeatureSetting.On) ]), ["font-feature-settings", "\"case\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Case FontFeatureSetting.Off) ]), ["font-feature-settings", "\"case\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Hlig FontFeatureSetting.On) ]), ["font-feature-settings", "\"hlig\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Hlig FontFeatureSetting.Off) ]), ["font-feature-settings", "\"hlig\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Calt FontFeatureSetting.On) ]), ["font-feature-settings", "\"calt\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Calt FontFeatureSetting.Off) ]), ["font-feature-settings", "\"calt\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Swsh FontFeatureSetting.On) ]), ["font-feature-settings", "\"swsh\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Swsh FontFeatureSetting.Off) ]), ["font-feature-settings", "\"swsh\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Hist FontFeatureSetting.On) ]), ["font-feature-settings", "\"hist\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Hist FontFeatureSetting.Off) ]), ["font-feature-settings", "\"hist\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Ss (1, FontFeatureSetting.On)) ]), ["font-feature-settings", "\"ss01\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Ss (20, FontFeatureSetting.Off)) ]), ["font-feature-settings", "\"ss20\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Kern FontFeatureSetting.On) ]), ["font-feature-settings", "\"kern\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Kern FontFeatureSetting.Off) ]), ["font-feature-settings", "\"kern\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Locl FontFeatureSetting.On) ]), ["font-feature-settings", "\"locl\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Locl FontFeatureSetting.Off) ]), ["font-feature-settings", "\"locl\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Rlig FontFeatureSetting.On) ]), ["font-feature-settings", "\"rlig\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Rlig FontFeatureSetting.Off) ]), ["font-feature-settings", "\"rlig\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Medi FontFeatureSetting.On) ]), ["font-feature-settings", "\"medi\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Medi FontFeatureSetting.Off) ]), ["font-feature-settings", "\"medi\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Init FontFeatureSetting.On) ]), ["font-feature-settings", "\"init\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Init FontFeatureSetting.Off) ]), ["font-feature-settings", "\"init\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Isol FontFeatureSetting.On) ]), ["font-feature-settings", "\"isol\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Isol FontFeatureSetting.Off) ]), ["font-feature-settings", "\"isol\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Fina FontFeatureSetting.On) ]), ["font-feature-settings", "\"fina\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Fina FontFeatureSetting.Off) ]), ["font-feature-settings", "\"fina\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Mark FontFeatureSetting.On) ]), ["font-feature-settings", "\"mark\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Mark FontFeatureSetting.Off) ]), ["font-feature-settings", "\"mark\" 0"]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Mkmk FontFeatureSetting.On) ]), ["font-feature-settings", "\"mkmk\""]
-                (fss [ FontFeatureSetting (FontFeatureSetting.Mkmk FontFeatureSetting.Off) ]), ["font-feature-settings", "\"mkmk\" 0"]
-
-                (fss [ FontFeatureSettings [
-                    FontFeatureSetting.Smcp FontFeatureSetting.On
-                    FontFeatureSetting.Onum FontFeatureSetting.On
-                ] ]), ["font-feature-settings", "\"smcp\", \"onum\""]
-
-                (fss [ FontFeatureSettings [
-                    FontFeatureSetting.Smcp FontFeatureSetting.Off
-                    FontFeatureSetting.Onum FontFeatureSetting.Off
-                ] ]), ["font-feature-settings", "\"smcp\" 0, \"onum\" 0"]
-
-
                 (fss [ FontVariantNumeric FontVariantNumeric.Normal] ), ["font-variant-numeric", "normal"]
                 (fss [ FontVariantNumeric FontVariantNumeric.Ordinal] ), ["font-variant-numeric", "ordinal"]
                 (fss [ FontVariantNumeric FontVariantNumeric.SlashedZero] ), ["font-variant-numeric", "slashed-zero"]
@@ -1377,5 +1857,5 @@ let CssTests =
 
 Mocha.runTests CssTests |> ignore
 
-*)
 Mocha.runTests tests |> ignore
+*)

@@ -43,7 +43,7 @@ module Size =
         | Vw of string
         | Vh of string
         | VMax of string
-        | Vmin of string
+        | VMin of string
         interface ISize
         interface IFontSize
         interface IBorderWidth
@@ -76,7 +76,7 @@ module Size =
             | Vw v -> v
             | Vh v -> v
             | VMax v -> v
-            | Vmin v -> v
+            | VMin v -> v
 
     let value (v: ISize): string =
         match v with 

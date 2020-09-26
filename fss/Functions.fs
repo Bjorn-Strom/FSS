@@ -6,7 +6,7 @@ open Media
 open Html
 open Units.Size
 open Color
-open FontValues
+open FontFaceValue
 open Keyframes
 
 [<AutoOpen>]
@@ -18,11 +18,11 @@ module Functions =
     let keyframes (attributeList: KeyframeAttribute list) =
         attributeList |> createAnimationObject |> kframes'
 
-    let fontFace (fontFamily: string) (attributeList: Font.FontFace list) =
+    let fontFace (fontFamily: string) (attributeList: FontFace.FontFace list) =
         attributeList |> createFontFaceObject fontFamily |> css'
         Font.FontName fontFamily
 
-    let fontFaces (fontFamily: string) (attributeLists: Font.FontFace list list) =
+    let fontFaces (fontFamily: string) (attributeLists: FontFace.FontFace list list) =
         attributeLists |> List.map (createFontFaceObject fontFamily) |> css'
         Font.FontName fontFamily
 
@@ -87,7 +87,7 @@ module Functions =
     let vw (v: float): Size = sprintf "%.1fvw" v |> Vw
     let vh (v: float): Size = sprintf "%.1fvh" v |> Vh
     let vmax (v: float): Size = sprintf "%.1fvmax" v |> VMax
-    let vmin (v: float): Size = sprintf "%.1fvmin" v |> Vmin
+    let vmin (v: float): Size = sprintf "%.1fvmin" v |> VMin
 
     // Angles
     let deg (v: float): Units.Angle.Angle = sprintf "%.2fdeg" v |> Units.Angle.Deg

@@ -1,15 +1,11 @@
 namespace Fss
 
-open Fable.Core.JsInterop
-
 open Units.Size
 open Units.Percent
 open Global
 open Types
 open Fss.Utilities.Helpers
 open Units.Angle
-open Property
-
 
 module Font =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
@@ -47,7 +43,6 @@ module Font =
         | Expanded
         | ExtraExpanded
         | UltraExpanded
-        | Pct of Percent
         interface IFontStretch
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
@@ -56,7 +51,7 @@ module Font =
         | Bold
         | Lighter
         | Bolder
-        | Number of int
+        | Value of int
         interface IFontWeight
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
@@ -75,28 +70,6 @@ module Font =
         | Fallback
         | Optional
         interface IFontDisplay
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
-    type Format =
-        | Truetype
-        | Opentype
-        | EmpbeddedOpentype
-        | Woff
-        | Woff2
-        | Svg
-
-    type Source =
-        | Url of string * Format
-        | Local of string
-
-    type FontFace =
-        | Source of Source
-        | Sources of Source list
-        | FontStyle of IFontStyle
-        | FontDisplay of IFontDisplay
-        | FontStretch of IFontStretch
-        | FontWeight of IFontWeight
-        interface IFontFamily
 
     type FontName = FontName of string
 
@@ -229,8 +202,8 @@ module FontValues =
     let fontWeight (v: IFontWeight): string =
         let stringifyFamilyValue (v: FontWeight): string =
             match v with
-                | Number n -> string n
-                | _        -> duToLowercase v
+                | FontWeight.Value n -> string n
+                | _                  -> duToLowercase v
 
         match v with
             | :? Global as g     -> GlobalValue.globalValue g
@@ -256,42 +229,17 @@ module FontValues =
             | :? FontDisplay as f -> duToLowercase f
             | _                   -> "Unknown font display"
 
-    let private source (v: Source): string =
-        match v with
-            | Url (s, f) -> sprintf "url('%s') format('%s')" s (duToKebab f)
-            | Local l    -> sprintf "local('%s')" l
-
-    let createFontFaceObject (fontName: string) (attributeList: FontFace list) =
-        let innerStyle =
-            attributeList |> List.map (
-                function
-                    | Source      s -> "src"                      ==> source s
-                    | Sources     s -> "src"                      ==> combineComma source s
-                    | FontStyle   f -> Property.value Property.fontStyle   ==> fontStyle f
-                    | FontDisplay f -> Property.value Property.fontDisplay ==> fontDisplay f
-                    | FontStretch f -> Property.value Property.fontStretch ==> fontStretch f
-                    | FontWeight  f -> Property.value Property.fontWeight  ==> fontWeight f)
-
-        createObj
-            [
-                "@font-face" ==>
-                    createObj
-                        ([
-                            "fontFamily" ==> fontName
-                        ] @ innerStyle)
-            ]
-
     let fontName (FontName n) = n
 
     let fontFamily (v: IFontFamily) : string =
         let parseFamilyValue (v: FontFamily): string =
             match v with
-                | Font f   -> fontName f
+                | Font   f -> fontName f
                 | Custom c -> c
                 | _ -> duToKebab v
 
         match v with
-            | :? Global as g     -> GlobalValue.globalValue g
+            | :? Global     as g -> GlobalValue.globalValue g
             | :? FontFamily as f -> parseFamilyValue f
             | _ -> "Unknown font family"
 
