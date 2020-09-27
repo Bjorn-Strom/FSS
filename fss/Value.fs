@@ -85,23 +85,23 @@ module Value =
         | BorderBottomWidth of IBorderWidth
         | BorderLeftWidth   of IBorderWidth
 
-        | BorderRadius              of ISize
-        | BorderRadiuses            of ISize list
-        | BorderTopLeftRadius       of ISize
-        | BorderTopLeftRadiuses     of ISize list
-        | BorderTopRightRadius      of ISize
-        | BorderTopRightRadiuses    of ISize list
-        | BorderBottomRightRadius   of ISize
-        | BorderBottomRightRadiuses of ISize list
-        | BorderBottomLeftRadius    of ISize
-        | BorderBottomLeftRadiuses  of ISize list
+        | BorderRadius              of IBorderRadius
+        | BorderRadiuses            of IBorderRadius list
+        | BorderTopLeftRadius       of IBorderRadius
+        | BorderTopLeftRadiuses     of IBorderRadius list
+        | BorderTopRightRadius      of IBorderRadius
+        | BorderTopRightRadiuses    of IBorderRadius list
+        | BorderBottomRightRadius   of IBorderRadius
+        | BorderBottomRightRadiuses of IBorderRadius list
+        | BorderBottomLeftRadius    of IBorderRadius
+        | BorderBottomLeftRadiuses  of IBorderRadius list
 
-        | BorderColor       of IColor
-        | BorderColors      of IColor list
-        | BorderTopColor    of IColor
-        | BorderRightColor  of IColor
-        | BorderBottomColor of IColor
-        | BorderLeftColor   of IColor
+        | BorderColor       of IBorderColor
+        | BorderColors      of IBorderColor list
+        | BorderTopColor    of IBorderColor
+        | BorderRightColor  of IBorderColor
+        | BorderBottomColor of IBorderColor
+        | BorderLeftColor   of IBorderColor
 
         | Width       of IContentSize
         | MinWidth    of IContentSize
@@ -245,23 +245,23 @@ module Value =
                 | BorderBottomWidth bw  -> Property.value borderBottomWidth ==> BorderValue.borderWidth bw
                 | BorderLeftWidth   bw  -> Property.value borderLeftWidth   ==> BorderValue.borderWidth  bw
 
-                | BorderRadius              br -> Property.value borderRadius            ==> Units.Size.value br
-                | BorderRadiuses            br -> Property.value borderRadius            ==> combineWs Units.Size.value br
-                | BorderTopLeftRadius       br -> Property.value borderTopLeftRadius     ==> Units.Size.value br
-                | BorderTopLeftRadiuses     br -> Property.value borderTopLeftRadius     ==> combineWs Units.Size.value br
-                | BorderTopRightRadius      br -> Property.value borderTopRightRadius    ==> Units.Size.value br
-                | BorderTopRightRadiuses    br -> Property.value borderTopRightRadius    ==> combineWs Units.Size.value br
-                | BorderBottomRightRadius   br -> Property.value borderBottomRightRadius ==> Units.Size.value br
-                | BorderBottomRightRadiuses br -> Property.value borderBottomRightRadius ==> combineWs Units.Size.value br
-                | BorderBottomLeftRadius    br -> Property.value borderBottomLeftRadius  ==> Units.Size.value br
-                | BorderBottomLeftRadiuses  br -> Property.value borderBottomLeftRadius  ==> combineWs Units.Size.value br
+                | BorderRadius              br -> Property.value borderRadius            ==> BorderValue.borderRadius br
+                | BorderRadiuses            br -> Property.value borderRadius            ==> combineWs BorderValue.borderRadius br
+                | BorderTopLeftRadius       br -> Property.value borderTopLeftRadius     ==> BorderValue.borderRadius br
+                | BorderTopLeftRadiuses     br -> Property.value borderTopLeftRadius     ==> combineWs BorderValue.borderRadius br
+                | BorderTopRightRadius      br -> Property.value borderTopRightRadius    ==> BorderValue.borderRadius br
+                | BorderTopRightRadiuses    br -> Property.value borderTopRightRadius    ==> combineWs BorderValue.borderRadius br
+                | BorderBottomRightRadius   br -> Property.value borderBottomRightRadius ==> BorderValue.borderRadius br
+                | BorderBottomRightRadiuses br -> Property.value borderBottomRightRadius ==> combineWs BorderValue.borderRadius br
+                | BorderBottomLeftRadius    br -> Property.value borderBottomLeftRadius  ==> BorderValue.borderRadius br
+                | BorderBottomLeftRadiuses  br -> Property.value borderBottomLeftRadius  ==> combineWs BorderValue.borderRadius br
 
-                | BorderColor       bc  -> Property.value borderColor       ==> Color.value bc
-                | BorderColors      bcs -> Property.value borderColor       ==> combineWs Color.value bcs
-                | BorderTopColor    bc  -> Property.value borderTopColor    ==> Color.value bc
-                | BorderRightColor  bc  -> Property.value borderRightColor  ==> Color.value bc
-                | BorderBottomColor bc  -> Property.value borderBottomColor ==> Color.value bc
-                | BorderLeftColor   bc  -> Property.value borderLeftColor   ==> Color.value bc
+                | BorderColor       bc  -> Property.value borderColor       ==> BorderValue.borderColor bc
+                | BorderColors      bcs -> Property.value borderColor       ==> combineWs BorderValue.borderColor bcs
+                | BorderTopColor    bc  -> Property.value borderTopColor    ==> BorderValue.borderColor bc
+                | BorderRightColor  bc  -> Property.value borderRightColor  ==> BorderValue.borderColor bc
+                | BorderBottomColor bc  -> Property.value borderBottomColor ==> BorderValue.borderColor bc
+                | BorderLeftColor   bc  -> Property.value borderLeftColor   ==> BorderValue.borderColor bc
 
                 | Width     w -> Property.value width     ==> ContentSize.value w
                 | MinWidth  w -> Property.value minWidth  ==> ContentSize.value w

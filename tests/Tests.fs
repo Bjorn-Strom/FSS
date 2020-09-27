@@ -1020,11 +1020,365 @@ let fontTests =
                         ]
                 ]
                 ["fontVariantEastAsian" ==> "ruby full-width jis83"]
-        
+                
+            test
+                "Font variant ligatures normal"
+                [ FontVariantLigatures Font.FontVariantLigatures.Normal]
+                ["fontVariantLigatures" ==> "normal"]
+                
+            test
+                "Font variant ligatures none"
+                [ FontVariantLigatures Font.None]
+                ["fontVariantLigatures" ==> "none"]
+                
+            test
+                "Font variant ligatures common"
+                [ FontVariantLigatures Font.CommonLigatures]
+                ["fontVariantLigatures" ==> "common-ligatures"]
+                
+            test
+                "Font variant ligatures no common"
+                [ FontVariantLigatures Font.NoCommonLigatures]
+                ["fontVariantLigatures" ==> "no-common-ligatures"]
+                
+            test
+                "Font variant ligatures discretionary"
+                [ FontVariantLigatures Font.DiscretionaryLigatures]
+                ["fontVariantLigatures" ==> "discretionary-ligatures"]
+                
+            test
+                "Font variant ligatures no discretionary"
+                [ FontVariantLigatures Font.NoDiscretionaryLigatures]
+                ["fontVariantLigatures" ==> "no-discretionary-ligatures"]
+                
+            test
+                "Font variant ligatures historical"
+                [ FontVariantLigatures Font.HistoricalLigatures]
+                ["fontVariantLigatures" ==> "historical-ligatures"]
+                
+            test
+                "Font variant ligatures no historical"
+                [ FontVariantLigatures Font.NoHistoricalLigatures]
+                ["fontVariantLigatures" ==> "no-historical-ligatures"]
+                
+            test
+                "Font variant ligatures contextual"
+                [ FontVariantLigatures Font.Contextual]
+                ["fontVariantLigatures" ==> "contextual"]
+                
+            test
+                "Font variant ligatures no contextual"
+                [ FontVariantLigatures Font.NoContextual]
+                ["fontVariantLigatures" ==> "no-contextual"]
+                
+            test
+                "Font variant ligatures no initial"
+                [ FontVariantLigatures Initial ]
+                ["fontVariantLigatures" ==> "initial"]
+                
+            test
+                "Font variant ligatures inherit"
+                [ FontVariantLigatures Inherit]
+                ["fontVariantLigatures" ==> "inherit"]
+                
+            test
+                "Font variant ligatures no unset"
+                [ FontVariantLigatures Unset]
+                ["fontVariantLigatures" ==> "unset"]        
     ]
+        
+let borderTests =
+    testList "Border"
+        [
+            test
+                "Borderstyle hidden"
+                [ BorderStyle Border.Hidden ]
+                [
+                    "borderStyle" ==> "hidden"
+                ]
+
+            test
+                "Borderstyle dotted"
+                [ BorderStyle Border.Dotted ]
+                [
+                    "borderStyle" ==> "dotted"
+                ]
+
+            test
+                "Borderstyle dashed"
+                [ BorderStyle Border.Dashed ]
+                [
+                    "borderStyle" ==> "dashed"
+                ]
+
+            test
+                "Borderstyle solid"
+                [ BorderStyle Border.Solid ]
+                [
+                    "borderStyle" ==> "solid"
+                ]
+
+            test
+                "Borderstyle double"
+                [ BorderStyle Border.Double ]
+                [
+                    "borderStyle" ==> "double"
+                ]
+
+            test
+                "Borderstyle groove"
+                [ BorderStyle Border.Groove ]
+                [
+                    "borderStyle" ==> "groove"
+                ]
+
+            test
+                "Borderstyle ridge"
+                [ BorderStyle Border.Ridge ]
+                [
+                    "borderStyle" ==> "ridge"
+                ]
+
+            test
+                "Borderstyle inset"
+                [ BorderStyle Border.Inset ]
+                [
+                    "borderStyle" ==> "inset"
+                ]
+
+            test
+                "Borderstyle outset"
+                [ BorderStyle Border.Outset ]
+                [
+                    "borderStyle" ==> "outset"
+                ]
+
+            test
+                "Borderstyle multiple"
+                [ BorderStyles [Border.Inset; Border.Outset; Border.Ridge; Border.Groove] ]
+                [
+                    "borderStyle" ==> "inset outset ridge groove"
+                ]
+
+            test
+                "Borderstyle none"
+                [ BorderStyle Border.None ]
+                [
+                    "borderStyle" ==> "none"
+                ]
+                
+            test
+                "Borderstyle initial"
+                [ BorderStyle Initial ]
+                [
+                    "borderStyle" ==> "initial"
+                ]
+                
+            test
+                "Borderstyle inherit"
+                [ BorderStyle Inherit ]
+                [
+                    "borderStyle" ==> "inherit"
+                ]
+                
+            test
+                "Borderstyle unset"
+                [ BorderStyle Unset ]
+                [
+                    "borderStyle" ==> "unset"
+                ]
+                
+            test
+                "Border radius px"
+                [ BorderRadius (px 10)]
+                     [
+                         "borderRadius" ==> "10px"
+                     ]
+
+            test
+                "Border radius percent"
+                [ BorderRadius (pct 50)]
+                     [
+                         "borderRadius" ==> "50%"
+                     ]
+
+            test
+                "Border top left radius px"
+                [ BorderTopLeftRadius (px 10)]
+                ["borderTopLeftRadius" ==> "10px"]
+            
+            test
+                "Border top right radius px"
+                [ BorderTopRightRadius (px 10)]
+                ["borderTopRightRadius" ==> "10px"]
+                
+            test
+                "Border bottom left radius"
+                [ BorderBottomLeftRadius (px 10)]
+                ["borderBottomLeftRadius" ==> "10px"]
+            
+            test
+                "Border bottom right radius px"
+                [ BorderBottomRightRadius (px 10)]
+                ["borderBottomRightRadius" ==> "10px"]
+
+            test
+                "Border radius multiple px"
+                [ BorderRadiuses [px 10; px 20; px 30; px 40] ]
+                    [
+                        "borderRadius" ==> "10px 20px 30px 40px"
+                    ]
+                    
+            test
+                "Border radius top left initial"
+                [ BorderTopLeftRadius Initial ]
+                ["borderTopLeftRadius" ==> "initial"]
+                
+            test
+                "Border radius top right inherit"
+                [ BorderTopRightRadius Inherit ]
+                ["borderTopRightRadius" ==> "inherit"]
+                
+            test
+                "Border bottom left radius unset"
+                [ BorderBottomLeftRadius Unset ]
+                ["borderBottomLeftRadius" ==> "unset"]
+                    
+            test
+                "Border bottom right radius initial"
+                [ BorderBottomRightRadius Initial ]
+                ["borderBottomRightRadius" ==> "initial"]
+                
+            test
+                "Border radius inherit"
+                [ BorderRadius Inherit ]
+                ["borderRadius" ==> "inherit"]
+                
+            test
+                "Border radius inherit"
+                [ BorderRadius Inherit ]
+                ["borderRadius" ==> "inherit"]
+                
+            test
+                "Border radius unset"
+                [ BorderRadius Unset ]
+                ["borderRadius" ==> "unset"]
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            test
+                "Border width px"
+                [ BorderWidth (px 40) ]
+                [ "borderWidth" ==> "40px" ]
+                
+            test
+                "Border width thin"
+                [ BorderWidth Border.Thin ]
+                [ "borderWidth" ==> "thin" ]
+                
+            test
+                "Border width medium"
+                [ BorderWidth Border.Medium ]
+                [ "borderWidth" ==> "medium" ]
+            
+            test
+                "Border width thick"
+                [ BorderWidth Border.Thick ]
+                [ "borderWidth" ==> "thick" ]
+                
+            test
+                "Border width initial"
+                [ BorderWidth Initial ]
+                [ "borderWidth" ==> "initial" ]
+                
+            test
+                "Border width inherit"
+                [ BorderWidth Inherit ]
+                [ "borderWidth" ==> "inherit" ]
+
+            test
+                "Border width unset"
+                [ BorderWidth Unset ]
+                [ "borderWidth" ==> "unset" ]
+
+            test
+                "Border widths combination"
+                [ BorderWidths [Border.Thin; px 20; em 3.0; rem 4.5 ]]
+                [ "borderWidth" ==> "thin 20px 3.0em 4.5rem" ]
+
+            test
+                "Border left width px"
+                [ BorderLeftWidth (px 40) ]
+                ["borderLeftWidth" ==> "40px"]
+
+            test
+                "Border right width cm"
+                [ BorderRightWidth (cm 40.0) ]
+                ["borderRightWidth" ==> "40.0cm"] 
+                
+            test
+                "Border color red"
+                [ BorderColor Color.red ]
+                [ "borderColor" ==> "#ff0000" ]
+
+            test
+                "Border color initial"
+                [ BorderColor Initial ]
+                [ "borderColor" ==> "initial" ]
+                
+            test
+                "Border color inherit"
+                [ BorderColor Inherit ]
+                [ "borderColor" ==> "inherit" ]
+
+            test
+                "Border color unset"
+                [ BorderColor Unset ]
+                [ "borderColor" ==> "unset" ]
+            
+            test
+                "Border colors multiple"
+                [ BorderColors [ Color.red; Color.green; Color.blue; Color.white] ]
+                [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
+
+            test
+                "Border top color rgb"
+                [ BorderTopColor (rgb 255 0 0) ]
+                ["borderTopColor" ==> "rgb(255, 0, 0)"]
+                
+            test
+                "Border right color green"
+                [ BorderRightColor Color.green ]
+                ["borderRightColor" ==> "#008000"]
+            
+            test
+                "Border bottom color"
+                [ BorderBottomColor Color.blue ]
+                ["borderBottomColor" ==> "#0000ff"]
+            
+            test
+                "Border left color"
+                [ BorderLeftColor Color.white ]
+                ["borderLeftColor" ==> "#ffffff"]
+
+        ]
 
 let tests =
         testList "Fss Tests" [
+            borderTests
             fontTests 
             colorTests 
             backgroundTests
@@ -1032,182 +1386,7 @@ let tests =
         
 Mocha.runTests tests |> ignore
 
-
-
 (*
-                (fss [ FontVariantLigatures FontVariantLigatures.Normal]), ["font-variant-ligatures", "normal"]
-                (fss [ FontVariantLigatures FontVariantLigatures.None]), ["font-variant-ligatures", "none"]
-                (fss [ FontVariantLigatures FontVariantLigatures.CommonLigatures]), ["font-variant-ligatures", "common-ligatures"]
-                (fss [ FontVariantLigatures FontVariantLigatures.NoCommonLigatures]), ["font-variant-ligatures", "no-common-ligatures"]
-                (fss [ FontVariantLigatures FontVariantLigatures.DiscretionaryLigatures]), ["font-variant-ligatures", "discretionary-ligatures"]
-                (fss [ FontVariantLigatures FontVariantLigatures.NoDiscretionaryLigatures]), ["font-variant-ligatures", "no-discretionary-ligatures"]
-                (fss [ FontVariantLigatures FontVariantLigatures.HistoricalLigatures]), ["font-variant-ligatures", "historical-ligatures"]
-                (fss [ FontVariantLigatures FontVariantLigatures.NoHistoricalLigatures]), ["font-variant-ligatures", "no-historical-ligatures"]
-                (fss [ FontVariantLigatures FontVariantLigatures.Contextual]), ["font-variant-ligatures", "contextual"]
-                (fss [ FontVariantLigatures FontVariantLigatures.NoContextual]), ["font-variant-ligatures", "no-contextual"]
-            ]
-
-        test "Border"
-            [
-                (fss [ BorderStyle Hidden ]),
-                    [
-                        "border-bottom-style", "hidden"
-                        "border-left-style", "hidden"
-                        "border-right-style", "hidden"
-                        "border-top-style", "hidden"
-                    ]
-
-                (fss [ BorderStyle Dotted ]),
-                    [
-                        "border-bottom-style", "dotted"
-                        "border-left-style", "dotted"
-                        "border-right-style", "dotted"
-                        "border-top-style", "dotted"
-                    ]
-
-                (fss [ BorderStyle Dashed ]),
-                    [
-                        "border-bottom-style", "dashed"
-                        "border-left-style", "dashed"
-                        "border-right-style", "dashed"
-                        "border-top-style", "dashed"
-                    ]
-
-                (fss [ BorderStyle Solid ]),
-                    [
-                        "border-bottom-style", "solid"
-                        "border-left-style", "solid"
-                        "border-right-style", "solid"
-                        "border-top-style", "solid"
-                    ]
-
-                (fss [ BorderStyle Double ]),
-                    [
-                        "border-bottom-style", "double"
-                        "border-left-style", "double"
-                        "border-right-style", "double"
-                        "border-top-style", "double"
-                    ]
-
-                (fss [ BorderStyle Groove ]),
-                    [
-                        "border-bottom-style", "groove"
-                        "border-left-style", "groove"
-                        "border-right-style", "groove"
-                        "border-top-style", "groove"
-                    ]
-
-                (fss [ BorderStyle Ridge ]),
-                    [
-                        "border-bottom-style", "ridge"
-                        "border-left-style", "ridge"
-                        "border-right-style", "ridge"
-                        "border-top-style", "ridge"
-                    ]
-
-                (fss [ BorderStyle Inset ]),
-                    [
-                        "border-bottom-style", "inset"
-                        "border-left-style", "inset"
-                        "border-right-style", "inset"
-                        "border-top-style", "inset"
-                    ]
-
-                (fss [ BorderStyle Outset ]),
-                    [
-                        "border-bottom-style", "outset"
-                        "border-left-style", "outset"
-                        "border-right-style", "outset"
-                        "border-top-style", "outset"
-                    ]
-
-                (fss [ BorderStyles [Inset; Outset; Ridge; Groove] ]),
-                    [
-                        "border-bottom-style", "ridge"
-                        "border-left-style", "groove"
-                        "border-right-style", "outset"
-                        "border-top-style", "inset"
-                    ]
-
-                (fss [ BorderStyle BorderStyle.None ]),
-                    [
-                        "border-bottom-style", "none"
-                        "border-left-style", "none"
-                        "border-right-style", "none"
-                        "border-top-style", "none"
-                    ]
-
-                (fss [ BorderRadius (px 10)]),
-                     [
-                         "border-top-left-radius", "10px"
-                         "border-top-right-radius", "10px"
-                         "border-bottom-left-radius", "10px"
-                         "border-bottom-right-radius", "10px"
-                     ]
-
-                (fss [ BorderRadius (pct 50)]),
-                     [
-                         "border-top-left-radius", "50%"
-                         "border-top-right-radius", "50%"
-                         "border-bottom-left-radius", "50%"
-                         "border-bottom-right-radius", "50%"
-                     ]
-
-                (fss [ BorderTopLeftRadius (px 10)]), ["border-top-left-radius", "10px"]
-                (fss [ BorderTopRightRadius (px 10)]), ["border-top-right-radius", "10px"]
-                (fss [ BorderBottomLeftRadius (px 10)]), ["border-bottom-left-radius", "10px"]
-                (fss [ BorderBottomRightRadius (px 10)]), ["border-bottom-right-radius", "10px"]
-
-                (fss [ BorderRadiuses [px 10; px 20; px 30; px 40] ]),
-                    [
-                        "border-bottom-left-radius", "40px"
-                        "border-bottom-right-radius", "30px"
-                        "border-top-left-radius", "10px"
-                        "border-top-right-radius", "20px"
-                    ]
-
-                (fss [ BorderStyle Solid; BorderWidth (px 40) ]),
-                    [
-                        "border-top-width", "40px"
-                        "border-right-width", "40px"
-                        "border-bottom-width", "40px"
-                        "border-left-width", "40px"
-                    ]
-
-                (fss [ BorderStyle Solid; BorderWidths [px 10; px 20; px 30; px 40 ]]),
-                    [
-                        "border-top-width", "10px"
-                        "border-right-width", "20px"
-                        "border-bottom-width", "30px"
-                        "border-left-width", "40px"
-                    ]
-
-                (fss [ BorderStyle Solid; BorderTopWidth Thin ]), ["border-top-width", "1px"]
-                (fss [ BorderStyle Solid; BorderRightWidth Thick ]), ["border-right-width", "5px"]
-                (fss [ BorderStyle Solid; BorderBottomWidth Medium ]), ["border-bottom-width", "3px"]
-                (fss [ BorderStyle Solid; BorderLeftWidth (px 40) ]), ["border-left-width", "40px"]
-
-                (fss [ BorderStyle Solid; BorderColor red ]),
-                    [
-                        "border-top-color", "rgb(255, 0, 0)"
-                        "border-right-color", "rgb(255, 0, 0)"
-                        "border-bottom-color", "rgb(255, 0, 0)"
-                        "border-left-color", "rgb(255, 0, 0)"
-                    ]
-
-                (fss [ BorderStyle Solid; BorderColors [red; green; blue; white] ]),
-                    [
-                        "border-top-color", "rgb(255, 0, 0)"
-                        "border-right-color", "rgb(0, 128, 0)"
-                        "border-bottom-color", "rgb(0, 0, 255)"
-                        "border-left-color", "rgb(255, 255, 255)"
-                    ]
-
-                (fss [ BorderStyle Solid; BorderTopColor red ]), ["border-top-color", "rgb(255, 0, 0)"]
-                (fss [ BorderStyle Solid; BorderRightColor green ]), ["border-right-color", "rgb(0, 128, 0)"]
-                (fss [ BorderStyle Solid; BorderBottomColor blue ]), ["border-bottom-color", "rgb(0, 0, 255)"]
-                (fss [ BorderStyle Solid; BorderLeftColor white ]), ["border-left-color", "rgb(255, 255, 255)"]
-            ]
 
         test "Width"
             [
@@ -1752,7 +1931,7 @@ Mocha.runTests tests |> ignore
 
                 (fss [ TextOverflow TextOverflow.Clip ]), ["text-overflow", "clip"]
                 (fss [ TextOverflow TextOverflow.Ellipsis ]), ["text-overflow", "ellipsis"]
-                (fss [ TextOverflow (TextOverflow.Custom "-") ]), ["text-overflow", "\"-\""]
+                (fss [ TextOverflow (TextOverflow.Custom "-") ]), ["text-overflow", "\"-\" "]
             ]
 
     ]

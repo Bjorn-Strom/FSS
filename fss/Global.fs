@@ -54,6 +54,8 @@ module Global =
         interface IColor
         interface IBorderStyle
         interface IBorderWidth
+        interface IBorderRadius
+        interface IBorderColor
         interface IMargin
         interface IPadding
         interface IDisplay

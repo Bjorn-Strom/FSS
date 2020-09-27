@@ -26,7 +26,7 @@ module Border =
         | Outset
         | None
         interface IBorderStyle
-
+        
 module BorderValue =
     open Border
     open Units.Size
@@ -45,3 +45,16 @@ module BorderValue =
             | :? Global as g -> GlobalValue.globalValue g
             | :? BorderStyle as b -> duToLowercase b
             | _ -> "Unknown border style"
+            
+    let borderRadius (v: IBorderRadius): string =
+        match v with
+            | :? Size    as s -> Units.Size.value s
+            | :? Percent as p -> Units.Percent.value p
+            | :? Global  as g -> GlobalValue.globalValue g
+            | _ -> "Unknown border radius"
+            
+    let borderColor (v: IBorderColor): string =
+        match v with
+            | :? Color.CssColor as c -> Color.value c
+            | :? Global         as g -> GlobalValue.globalValue g
+            | _ -> "Unknown border color"

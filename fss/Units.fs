@@ -9,6 +9,7 @@ module Percent =
         interface IFontSize
         interface IFontStretch
         interface IBorderWidth
+        interface IBorderRadius
         interface IMargin
         interface IPadding
         interface IFlexBasis
@@ -47,6 +48,7 @@ module Size =
         interface ISize
         interface IFontSize
         interface IBorderWidth
+        interface IBorderRadius
         interface IMargin
         interface IPadding
         interface IFlexBasis
