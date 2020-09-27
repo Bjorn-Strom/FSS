@@ -84,6 +84,7 @@ module Global =
         interface IVisibility
         interface IAnimationDirection
         interface IAnimationPlayState
+        interface IPerspective
 
 module GlobalValue =
     open Global

@@ -58,3 +58,4 @@ module Types =
     type IContentSize             = interface end
     type ISize                    = interface end
     type IVisibility              = interface end
+    type IPerspective             = interface end

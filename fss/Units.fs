@@ -62,6 +62,7 @@ module Size =
         interface ITextDecorationThickness
         interface ITextIndent
         interface ITransformOrigin
+        interface IPerspective
 
     let private sizeValue (u: Size) = 
         match u with 

@@ -110,7 +110,7 @@ module Value =
         | MinHeight   of IContentSize
         | MaxHeight   of IContentSize
 
-        | Perspective of ISize
+        | Perspective of IPerspective
 
         | Display        of IDisplay
         | FlexDirection  of IFlexDirection
@@ -270,7 +270,7 @@ module Value =
                 | MinHeight h -> Property.value minHeight ==> ContentSize.value h
                 | MaxHeight h -> Property.value maxHeight ==> ContentSize.value h
 
-                | Perspective p -> Property.value perspective ==> Units.Size.value p
+                | Perspective p -> Property.value perspective ==> PerspectiveValue.perspective p
 
                 | Display        d -> Property.value display        ==> DisplayValue.display d
                 | FlexDirection  f -> Property.value flexDirection  ==> FlexValue.flexDirection f
