@@ -9,6 +9,8 @@ module Global =
         | Auto
         interface IBackgroundSize
         interface IContentSize
+        interface IFlexBasis
+        interface IAlignSelf
 
     type Center =
         | Center

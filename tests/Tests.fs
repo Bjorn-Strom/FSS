@@ -1473,7 +1473,7 @@ let contentSizeTests =
         ]
         
 let perspectiveTests =
-    testList "perspective"
+    testList "Perspective"
         [
             test
                 "Perspective px" 
@@ -1504,11 +1504,308 @@ let perspectiveTests =
                 "Perspective unset" 
                 [ Perspective Unset]
                 ["perspective" ==> "unset"]
+        ]
+
+let displayTests =
+    testList "Display"
+        [
+                test
+                    "Display inline"
+                    [ Display Display.Inline]
+                    ["display" ==> "inline"]
+                
+                test
+                    "Display inline-block"
+                    [ Display Display.InlineBlock]
+                    ["display" ==> "inline-block"]
+                
+                test
+                    "Display block"
+                    [ Display Display.Block]
+                    ["display" ==> "block"]
+                
+                test
+                    "Display run-in"
+                    [ Display Display.RunIn]
+                    ["display" ==> "run-in"]
+                
+                test
+                    "Display flex"
+                    [ Display Display.Flex]
+                    ["display" ==> "flex"]
+                
+                test
+                    "Display grid"
+                    [ Display Display.Grid]
+                    ["display" ==> "grid"]
+                
+                test
+                    "Display flow-root"
+                    [ Display Display.FlowRoot]
+                    ["display" ==> "flow-root"]
+                
+                test
+                    "Display table"
+                    [ Display Display.Table]
+                    ["display" ==> "table"]
+                
+                test
+                    "Display table-cell"
+                    [ Display Display.TableCell]
+                    ["display" ==> "table-cell"]
+                
+                test
+                    "Display table-column"
+                    [ Display Display.TableColumn]
+                    ["display" ==> "table-column"]
+                
+                test
+                    "Display table-column-group"
+                    [ Display Display.TableColumnGroup]
+                    ["display" ==> "table-column-group"]
+                
+                test
+                    "Display table-header-group"
+                    [ Display Display.TableHeaderGroup]
+                    ["display" ==> "table-header-group"]
+                
+                test
+                    "Display table row group"
+                    [ Display Display.TableRowGroup]
+                    ["display" ==> "table-row-group"]
+                
+                test
+                    "table footer group"
+                    [ Display Display.TableFooterGroup]
+                    ["display" ==> "table-footer-group"]
+                
+                test
+                    "Display table row"
+                    [ Display Display.TableRow]
+                    ["display" ==> "table-row"]
+                
+                test
+                    "Display table-caption"
+                    [ Display Display.TableCaption]
+                    ["display" ==> "table-caption"]
+                
+                test
+                    "Display none"
+                    [ Display Display.None]
+                    ["display" ==> "none"]
+                
+        ]
+
+let flexTests =
+    testList "flex"
+        [
+            test
+                "Flex direction row"
+                [ FlexDirection Flex.Row]
+                ["flexDirection" ==> "row"]
+                
+            test
+                "Flex direction row-reverse"
+                [ FlexDirection Flex.RowReverse]
+                ["flexDirection" ==> "row-reverse"]
+                
+            test
+                "Flex direction column"
+                [ FlexDirection Flex.Column]
+                ["flexDirection" ==> "column"]
+                
+            test
+                "Flex direction column-reverse"
+                [ FlexDirection Flex.ColumnReverse]
+                ["flexDirection" ==> "column-reverse"]
+                
+            test
+                "Flex direction inherit"
+                [ FlexDirection Inherit]
+                ["flexDirection" ==> "inherit"]
+                
+            test
+                "Flex direction initial"
+                [ FlexDirection Initial]
+                ["flexDirection" ==> "initial"]
+                
+            test
+                "Flex direction unset"
+                [ FlexDirection Unset]
+                ["flexDirection" ==> "unset"]
+                
+                
+            test
+                "Flex wrap no-wrap"
+                [ FlexWrap Flex.NoWrap]
+                ["flexWrap" ==> "no-wrap"]
+                
+            test
+                "Flex wrap wrap"
+                [ FlexWrap Flex.Wrap]
+                ["flexWrap" ==> "wrap"]
+                
+            test
+                "Flex wrap wrap-reverse"
+                [ FlexWrap Flex.WrapReverse]
+                ["flexWrap" ==> "wrap-reverse"]
+                
+            test
+                "Flex wrap inherit"
+                [ FlexWrap Inherit]
+                ["flexWrap" ==> "inherit"]
+                
+            test
+                "Flex wrap initial"
+                [ FlexWrap Initial]
+                ["flexWrap" ==> "initial"]
+                
+            test
+                "Flex wrap unset"
+                [ FlexWrap Unset]
+                ["flexWrap" ==> "unset"]
             
+            test
+                "Flex basis em"
+                [ FlexBasis (em 10.0)]
+                ["flexBasis" ==> "10.0em"] 
+                
+            test
+                "Flex basis px"
+                [ FlexBasis (px 100)]
+                ["flexBasis" ==> "100px"]
+                
+            test
+                "Flex basis auto"
+                [ FlexBasis Auto]
+                ["flexBasis" ==> "auto"]
+                
+            test
+                "Flex basis fill"
+                [ FlexBasis Flex.Fill ]
+                ["flexBasis" ==> "fill"]     
+                
+            test
+                "Flex basis max-content"
+                [ FlexBasis Flex.MaxContent]
+                ["flexBasis" ==> "max-content"] 
+                
+            test
+                "Flex basis min-content"
+                [ FlexBasis Flex.MinContent]
+                ["flexBasis" ==> "min-content"]
+                
+            test
+                "Flex basis fit-content"
+                [ FlexBasis Flex.FitContent]
+                ["flexBasis" ==> "fit-content"]
+                
+            test
+                "Flex basis content"
+                [ FlexBasis Flex.Content]
+                ["flexBasis" ==> "content"]
+                
+                
+                
+                
+            test
+                "Justify content start"
+                [ JustifyContent Flex.Start]
+                ["justifyContent" ==> "start"]
+                
+            test
+                "Justify content end"
+                [ JustifyContent Flex.End]
+                ["justifyContent" ==> "end"]
+                
+            test
+                "Justify content flex start"
+                [ JustifyContent Flex.FlexStart]
+                ["justifyContent" ==> "flex-start"]
+                
+            test
+                "Justify content flex end"
+                [ JustifyContent Flex.FlexEnd]
+                ["justifyContent" ==> "flex-end"]
+                
+            test
+                "Justify content center"
+                [ JustifyContent Flex.Center]
+                ["justifyContent" ==> "center"]
+                
+            test
+                "Justify content left"
+                [ JustifyContent Flex.Left]
+                ["justifyContent" ==> "left"]
+                
+            test
+                "Justify content right"
+                [ JustifyContent Flex.Right]
+                ["justifyContent" ==> "right"]
+                
+            test
+                "Justify content normal"
+                [ JustifyContent Flex.Normal]
+                ["justifyContent" ==> "normal"]
+                
+            test
+                "Justify content baseline"
+                [ JustifyContent Flex.Baseline]
+                ["justifyContent" ==> "baseline"]
+                
+            test
+                "Justify content space between"
+                [ JustifyContent Flex.SpaceBetween]
+                ["justifyContent" ==> "space-between"]
+                
+            test
+                "Justify content space around"
+                [ JustifyContent Flex.SpaceAround]
+                ["justifyContent" ==> "space-around"]
+                
+            test
+                "Justify content space evenly"
+                [ JustifyContent Flex.SpaceEvenly]
+                ["justifyContent" ==> "space-evenly"]
+                
+            test
+                "Justify content right"
+                [ JustifyContent Flex.Right]
+                ["justifyContent" ==> "right"]
+                
+            test
+                "Justify content safe"
+                [ JustifyContent Flex.Safe]
+                ["justifyContent" ==> "safe"]
+                
+            test
+                "Justify content unsafe"
+                [ JustifyContent Flex.Unsafe]
+                ["justifyContent" ==> "unsafe"]
+                
+            test
+                "Justify content inherit"
+                [ JustifyContent Inherit]
+                ["justifyContent" ==> "inherit"]
+             
+            test
+                "Justify content initial"
+                [ JustifyContent Initial]
+                ["justifyContent" ==> "initial"]
+                
+            test
+                "Justify content unset"
+                [ JustifyContent Unset]
+                ["justifyContent" ==> "unset"]
+
+                
+                
         ]
 
 let tests =
         testList "Fss Tests" [
+            flexTests
+            displayTests
             perspectiveTests
             contentSizeTests
             borderTests
@@ -1520,53 +1817,10 @@ let tests =
 Mocha.runTests tests |> ignore
 
 (*
-
-        test "Width"
-            [
-
-            ]
-
-        test "Perspective"
-            [
-                
-            ]
-
         test "Flexbox"
             [
-                (fss [ Display Inline]), ["display", "inline"]
-                (fss [ Display InlineBlock]), ["display", "inline-block"]
-                (fss [ Display Block]), ["display", "block"]
-                (fss [ Display RunIn]), ["display", "block"]
-                (fss [ Display Flex]), ["display", "flex"]
-                (fss [ Display Grid]), ["display", "grid"]
-                (fss [ Display FlowRoot]), ["display", "flow-root"]
-                (fss [ Display Table]), ["display", "table"]
-                (fss [ Display TableCell]), ["display", "table-cell"]
-                (fss [ Display TableColumn]), ["display", "table-column"]
-                (fss [ Display TableColumnGroup]), ["display", "table-column-group"]
-                (fss [ Display TableHeaderGroup]), ["display", "table-header-group"]
-                (fss [ Display TableRowGroup]), ["display", "table-row-group"]
-                (fss [ Display TableFooterGroup]), ["display", "table-footer-group"]
-                (fss [ Display TableRow]), ["display", "table-row"]
-                (fss [ Display TableCaption]), ["display", "table-caption"]
-                (fss [ Display Display.None]), ["display", "none"]
 
-                (fss [ FlexDirection Row]), ["flex-direction", "row"]
-                (fss [ FlexDirection Column]), ["flex-direction", "column"]
-
-                (fss [ FlexWrap NoWrap]), ["flex-wrap", "nowrap"]
-                (fss [ FlexWrap Wrap]), ["flex-wrap", "wrap"]
-                (fss [ FlexWrap WrapReverse]), ["flex-wrap", "wrap-reverse"]
-
-                (fss [ CSSProperty.FlexBasis (px 120)]), ["flex-basis", "120px"]
-
-                (fss [ JustifyContent JustifyContent.FlexStart]), ["justify-content", "flex-start"]
-                (fss [ JustifyContent JustifyContent.FlexEnd]), ["justify-content", "flex-end"]
-                (fss [ JustifyContent JustifyContent.Center]), ["justify-content", "center"]
-                (fss [ JustifyContent JustifyContent.SpaceBetween]), ["justify-content", "space-between"]
-                (fss [ JustifyContent JustifyContent.SpaceAround]), ["justify-content", "space-around"]
-                (fss [ JustifyContent JustifyContent.SpaceEvenly]), ["justify-content", "space-evenly"]
-
+               
                 (fss [ AlignSelf AlignSelf.Auto]), ["align-self", "auto"]
                 (fss [ AlignSelf AlignSelf.FlexStart]), ["align-self", "flex-start"]
                 (fss [ AlignSelf AlignSelf.FlexEnd]), ["align-self", "flex-end"]

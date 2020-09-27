@@ -7,6 +7,7 @@ open Fss.Utilities.Helpers
 module Display =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/display
     type Display =
+        | None
         | Inline
         | InlineBlock
         | Block
@@ -56,12 +57,21 @@ module Flex =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
     type JustifyContent =
+        | Start
+        | End
         | FlexStart
         | FlexEnd
         | Center
+        | Left
+        | Right
+        | Normal
+        | Baseline
         | SpaceBetween
         | SpaceAround
         | SpaceEvenly
+        | Stretch
+        | Safe
+        | Unsafe
         interface IJustifyContent
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
@@ -84,13 +94,17 @@ module Flex =
         interface IAlignContent
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
-    type AlignSelf = 
-        | Auto
+    type AlignSelf =
+        | Normal
+        | SelfStart
+        | SelfEnd
         | FlexStart 
         | FlexEnd 
         | Center 
         | Baseline 
         | Stretch
+        | Safe
+        | Unsafe
         interface IAlignSelf
             
     // https://developer.mozilla.org/en-US/docs/Web/CSS/order
@@ -110,7 +124,11 @@ module Flex =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
     type FlexBasis = 
-        | FlexBasis of Size
+        | Fill
+        | MaxContent
+        | MinContent
+        | FitContent
+        | Content
         interface IFlexBasis
 
 module FlexValue =
@@ -154,6 +172,7 @@ module FlexValue =
     let alignSelf (v: IAlignSelf): string =
         match v with
             | :? Global    as g -> GlobalValue.globalValue g
+            | :? Auto      as a -> GlobalValue.auto a
             | :? Center    as c -> GlobalValue.center c
             | :? AlignSelf as a -> duToKebab a
             | _ -> "Unknown align self"
@@ -180,7 +199,9 @@ module FlexValue =
 
     let flexBasis (v: IFlexBasis): string =
         match v with
-            | :? Global  as g -> GlobalValue.globalValue g
-            | :? Size    as s -> Units.Size.value s
-            | :? Percent as p -> Units.Percent.value p
+            | :? Global    as g -> GlobalValue.globalValue g
+            | :? Auto      as a -> GlobalValue.auto a
+            | :? Size      as s -> Units.Size.value s
+            | :? Percent   as p -> Units.Percent.value p
+            | :? FlexBasis as b -> duToKebab b
             | _ -> "Unknown flex basis"    
