@@ -26,8 +26,9 @@ module ContentSize =
 
     let value (v: IContentSize): string =
         match v with
-            | :? Global as g -> GlobalValue.globalValue g
-            | :? Size as s -> Units.Size.value s
-            | :? Percent as p -> Units.Percent.value p
+            | :? Global      as g -> GlobalValue.globalValue g
+            | :? Auto        as a -> GlobalValue.auto a
+            | :? Size        as s -> Units.Size.value s
+            | :? Percent     as p -> Units.Percent.value p
             | :? ContentSize as c -> contentSizeValue c
             | _ -> "Unknown size"

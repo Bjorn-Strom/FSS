@@ -1375,9 +1375,106 @@ let borderTests =
                 ["borderLeftColor" ==> "#ffffff"]
 
         ]
+        
+let contentSizeTests =
+    testList "Content size"
+        [
+            test
+                "Width px"
+                [ Width (px 100) ]
+                ["width" ==> "100px"]
+                
+            test
+                "Width percent"
+                [ Width (pct 25) ]
+                ["width" ==> "25%"]
+                
+                
+            test
+                "Width max content"
+                [ Width ContentSize.MaxContent ]
+                ["width" ==> "max-content"]
+                
+            test
+                "Width min content"
+                [ Width ContentSize.MinContent ]
+                ["width" ==> "min-content"]
+                
+            test
+                "Width fit content"
+                [ Width (ContentSize.FitContent(px 100)) ]
+                ["width" ==> "fit-content(100px)"]
+                
+            test
+                "Width auto"
+                [ Width Auto ]
+                ["width" ==> "auto"]
+                
+            test
+                "Width initial"
+                [ Width Initial ]
+                ["width" ==> "initial"]
+                
+            test
+                "Width inherit"
+                [ Width Inherit ]
+                ["width" ==> "inherit"]
+                
+            test
+                "Width unset"
+                [ Width Unset ]
+                ["width" ==> "unset"]
+                
+            test
+                "Height px"
+                [ Height (px 100) ]
+                ["height" ==> "100px"]
+                
+            test
+                "Height percent"
+                [ Height (pct 25) ]
+                ["height" ==> "25%"]
+                
+                
+            test
+                "Height max content"
+                [ Height ContentSize.MaxContent ]
+                ["height" ==> "max-content"]
+                
+            test
+                "Height min content"
+                [ Height ContentSize.MinContent ]
+                ["height" ==> "min-content"]
+                
+            test
+                "Height fit content"
+                [ Height (ContentSize.FitContent(px 100)) ]
+                ["height" ==> "fit-content(100px)"]
+                
+            test
+                "Height auto"
+                [ Height Auto ]
+                ["height" ==> "auto"]
+                
+            test
+                "Height initial"
+                [ Height Initial ]
+                ["height" ==> "initial"]
+                
+            test
+                "Height inherit"
+                [ Height Inherit ]
+                ["height" ==> "inherit"]
+                
+            test
+                "Height unset"
+                [ Height Unset ]
+                ["height" ==> "unset"]
+        ]
 
 let tests =
         testList "Fss Tests" [
+            contentSizeTests
             borderTests
             fontTests 
             colorTests 
@@ -1390,18 +1487,7 @@ Mocha.runTests tests |> ignore
 
         test "Width"
             [
-                (fss [ Width (px 100) ]), ["width", "100px"]
-                (fss [ Width MaxContent ]), ["width", "0px"]
-                (fss [ Width MinContent ]), ["width", "0px"]
-                (fss [ Width (FitContent(px 100)) ]), ["width", "400px"]
-                (fss [ MinWidth (px 50) ]), ["min-width", "50px"]
-                (fss [ MaxWidth (px 75) ]), ["max-width", "75px"]
 
-                (fss [ Height (px 100) ]), ["height", "100px"]
-                (fss [ Height MaxContent ]), ["height", "0px"]
-                (fss [ Height MinContent ]), ["height", "0px"]
-                (fss [ MinHeight (px 50) ]), ["min-height", "50px"]
-                (fss [ MaxHeight (px 75) ]), ["max-height", "75px"]
             ]
 
         test "Perspective"

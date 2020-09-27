@@ -8,6 +8,7 @@ module Global =
     type Auto =
         | Auto
         interface IBackgroundSize
+        interface IContentSize
 
     type Center =
         | Center
