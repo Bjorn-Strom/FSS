@@ -796,268 +796,32 @@ let fontTests =
                 [ "fontFamily" ==> "serif, monospace" ]
             
             test
-                ""
+                "font feature setting On"
                 [ FontFeatureSetting (Font.Liga Font.On) ]
                 [ "fontFeatureSettings" ==> "\"liga\" On" ]
                 
             test
-                ""
+                "font feature setting Off"
                 [ FontFeatureSetting (Font.Liga Font.Off) ]
                 [ "fontFeatureSettings" ==> "\"liga\" Off" ]
                 
             test
-                ""
-                [ FontFeatureSetting (Font.Dlig Font.On) ]
-                [ "fontFeatureSettings" ==> "\"dlig\" On" ]
+                "font feature setting initial"
+                [ FontFeatureSetting Initial ]
+                [ "fontFeatureSettings" ==> "initial" ]
                 
             test
-                ""
-                [ FontFeatureSetting (Font.Dlig Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"dlig\" Off" ]
+                "font feature setting inherit"
+                [ FontFeatureSetting Inherit ]
+                [ "fontFeatureSettings" ==> "inherit" ]
                 
             test
-                ""
-                [ FontFeatureSetting (Font.Onum Font.On) ]
-                [ "fontFeatureSettings" ==> "\"onum\" On" ]
-                
+                "font feature setting unset"
+                [ FontFeatureSetting Unset ]
+                [ "fontFeatureSettings" ==> "unset" ]
+        
             test
-                ""
-                [ FontFeatureSetting (Font.Onum Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"onum\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Lnum Font.On) ]
-                [ "fontFeatureSettings" ==> "\"lnum\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Lnum Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"lnum\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Tnum Font.On) ]
-                [ "fontFeatureSettings" ==> "\"tnum\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Tnum Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"tnum\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Zero Font.On) ]
-                [ "fontFeatureSettings" ==> "\"zero\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Zero Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"zero\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Frac Font.On) ]
-                [ "fontFeatureSettings" ==> "\"frac\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Frac Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"frac\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Sups Font.On) ]
-                [ "fontFeatureSettings" ==> "\"sups\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Sups Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"sups\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Subs Font.On) ]
-                [ "fontFeatureSettings" ==> "\"subs\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Subs Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"subs\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Smcp Font.On) ]
-                [ "fontFeatureSettings" ==> "\"smcp\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Smcp Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"smcp\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.C2sc Font.On) ]
-                [ "fontFeatureSettings" ==> "\"c2sc\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.C2sc Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"c2sc\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Case Font.On) ]
-                [ "fontFeatureSettings" ==> "\"case\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Case Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"case\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Hlig Font.On) ]
-                [ "fontFeatureSettings" ==> "\"hlig\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Hlig Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"hlig\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Calt Font.On) ]
-                [ "fontFeatureSettings" ==> "\"calt\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Calt Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"calt\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Swsh Font.On) ]
-                [ "fontFeatureSettings" ==> "\"swsh\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Swsh Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"swsh\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Hist Font.On) ]
-                [ "fontFeatureSettings" ==> "\"hist\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Hist Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"hist\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Ss (1, Font.On)) ]
-                [ "fontFeatureSettings" ==> "\"ss01\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Ss (20, Font.Off)) ]
-                [ "fontFeatureSettings" ==> "\"ss20\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Kern Font.On) ]
-                [ "fontFeatureSettings" ==> "\"kern\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Kern Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"kern\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Locl Font.On) ]
-                [ "fontFeatureSettings" ==> "\"locl\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Locl Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"locl\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Rlig Font.On) ]
-                [ "fontFeatureSettings" ==> "\"rlig\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Rlig Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"rlig\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Medi Font.On) ]
-                [ "fontFeatureSettings" ==> "\"medi\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Medi Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"medi\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Init Font.On) ]
-                [ "fontFeatureSettings" ==> "\"init\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Init Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"init\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Isol Font.On) ]
-                [ "fontFeatureSettings" ==> "\"isol\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Isol Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"isol\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Fina Font.On) ]
-                [ "fontFeatureSettings" ==> "\"fina\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Fina Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"fina\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Mark Font.On) ]
-                [ "fontFeatureSettings" ==> "\"mark\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Mark Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"mark\" Off" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Mkmk Font.On) ]
-                [ "fontFeatureSettings" ==> "\"mkmk\" On" ]
-                
-            test
-                ""
-                [ FontFeatureSetting (Font.Mkmk Font.Off) ]
-                [ "fontFeatureSettings" ==> "\"mkmk\" Off" ]
-                    
-
-            test
-                ""
+                "font feature setting multiple on"
                 [
                     FontFeatureSettings
                         [
@@ -1068,7 +832,7 @@ let fontTests =
                 [ "fontFeatureSettings" ==> "\"smcp\" On, \"onum\" On" ]
 
             test
-                ""
+                "font feature setting multiple off"
                 [
                     FontFeatureSettings
                         [
@@ -1079,8 +843,185 @@ let fontTests =
                 [ "fontFeatureSettings" ==> "\"smcp\" Off, \"onum\" Off" ]
                 
                 
-             
-        ]
+            test 
+                "Font variant numeric normal"
+                [ FontVariantNumeric Font.FontVariantNumeric.Normal]
+                ["fontVariantNumeric" ==> "normal"]
+                
+            test 
+                "Font variant numeric ordinal"
+                [ FontVariantNumeric Font.FontVariantNumeric.Ordinal]
+                ["fontVariantNumeric" ==> "ordinal"]
+                
+            test 
+                "Font variant numeric slashed zero"
+                [ FontVariantNumeric Font.FontVariantNumeric.SlashedZero]
+                ["fontVariantNumeric" ==> "slashed-zero"]
+                
+            test 
+                "Font variant numeric lining nums"
+                [ FontVariantNumeric Font.FontVariantNumeric.LiningNums]
+                ["fontVariantNumeric" ==> "lining-nums"]
+                
+            test 
+                "Font variant numeric old style nums"
+                [ FontVariantNumeric Font.FontVariantNumeric.OldstyleNums]
+                ["fontVariantNumeric" ==> "oldstyle-nums"]
+                
+            test 
+                "Font variant numeric tabular nums"
+                [ FontVariantNumeric Font.FontVariantNumeric.TabularNums]
+                ["fontVariantNumeric" ==> "tabular-nums"]
+                
+            test 
+                "Font variant numeric diagonal fractions"
+                [ FontVariantNumeric Font.FontVariantNumeric.DiagonalFractions]
+                ["fontVariantNumeric" ==> "diagonal-fractions"]
+                
+            test 
+                "Font variant numeric stacked fractions"
+                [ FontVariantNumeric Font.FontVariantNumeric.StackedFractions]
+                ["fontVariantNumeric" ==> "stacked-fractions"]
+                
+            test 
+                "Font variant numerics multiple"
+                [
+                    FontVariantNumerics
+                        [
+                            Font.FontVariantNumeric.OldstyleNums
+                            Font.FontVariantNumeric.StackedFractions
+                        ]
+                ]
+                ["fontVariantNumeric" ==> "oldstyle-nums stacked-fractions"]
+                
+            test 
+                "Font variant numeric inherit"
+                [ FontVariantNumeric Inherit ]
+                [ "fontVariantNumeric" ==> "inherit" ]
+                
+            test 
+                "Font variant numeric initial"
+                [ FontVariantNumeric Initial]
+                [ "fontVariantNumeric" ==> "initial" ]
+                
+            test 
+                "Font variant numeric unset"
+                [ FontVariantNumeric Unset ]
+                [ "fontVariantNumeric" ==> "unset" ]
+                    
+            test
+                "Font variant caps normal"
+                [ FontVariantCaps Font.FontVariantCaps.Normal]
+                ["fontVariantCaps" ==> "normal"]
+                
+            test
+                "Font variant caps small caps"
+                [ FontVariantCaps Font.FontVariantCaps.SmallCaps]
+                ["fontVariantCaps" ==> "small-caps"]
+                
+            test
+                "Font variant caps  all small caps"
+                [ FontVariantCaps Font.FontVariantCaps.AllSmallCaps]
+                ["fontVariantCaps" ==> "all-small-caps"]
+                
+            test
+                "Font variant caps petite caps"
+                [ FontVariantCaps Font.FontVariantCaps.PetiteCaps]
+                ["fontVariantCaps" ==> "petite-caps"]
+                
+            test
+                "Font variant caps all petite caps"
+                [ FontVariantCaps Font.FontVariantCaps.AllPetiteCaps]
+                ["fontVariantCaps" ==> "all-petite-caps"]
+                
+            test
+                "Font variant caps unicase"
+                [ FontVariantCaps Font.FontVariantCaps.Unicase]
+                ["fontVariantCaps" ==> "unicase"]
+                
+            test
+                "Font variant caps titling caps"
+                [ FontVariantCaps Font.FontVariantCaps.TitlingCaps]
+                ["fontVariantCaps" ==> "titling-caps"]
+                
+            test
+                "Font variant caps initial"
+                [ FontVariantCaps Initial ]
+                [ "fontVariantCaps" ==> "initial"]
+
+            test
+                "Font variant caps inherit"
+                [ FontVariantCaps Inherit ]
+                ["fontVariantCaps" ==> "inherit"]
+
+            test
+                "Font variant caps unset"
+                [ FontVariantCaps Unset ]
+                ["fontVariantCaps" ==> "unset" ]
+                
+            test
+                "Font variant east asian normal"
+                [ FontVariantEastAsian Font.FontVariantEastAsian.Normal]
+                ["fontVariantEastAsian" ==> "normal"]
+                
+            test
+                "Font variant east asian ruby"
+                [ FontVariantEastAsian Font.Ruby]
+                ["fontVariantEastAsian" ==> "ruby"]
+                
+            test
+                "Font variant east asian  jis78"
+                [ FontVariantEastAsian Font.Jis78]
+                ["fontVariantEastAsian" ==> "jis78"]
+                
+            test
+                "Font variant east asian jis83"
+                [ FontVariantEastAsian Font.Jis83]
+                ["fontVariantEastAsian" ==> "jis83"]
+                
+            test
+                "Font variant east asian jis90"
+                [ FontVariantEastAsian Font.Jis90]
+                ["fontVariantEastAsian" ==> "jis90"]
+                
+            test
+                "Font variant east asian jis04"
+                [ FontVariantEastAsian Font.Jis04]
+                ["fontVariantEastAsian" ==> "jis04"]
+                
+            test
+                "Font variant east asian simplified"
+                [ FontVariantEastAsian Font.Simplified]
+                ["fontVariantEastAsian" ==> "simplified"]
+                
+            test
+                "Font variant east asian traditional"
+                [ FontVariantEastAsian Font.Traditional]
+                ["fontVariantEastAsian" ==> "traditional"]
+                
+            test
+                "Font variant east asian full width"
+                [ FontVariantEastAsian Font.FullWidth]
+                ["fontVariantEastAsian" ==> "full-width"]
+                
+            test
+                "Font variant east asian  proportional widt"
+                [ FontVariantEastAsian Font.ProportionalWidth]
+                ["fontVariantEastAsian" ==> "proportional-width"]
+                
+            test
+                "Font variant east asian multiple"
+                [
+                    FontVariantEastAsians
+                        [
+                            Font.Ruby
+                            Font.FullWidth
+                            Font.Jis83
+                        ]
+                ]
+                ["fontVariantEastAsian" ==> "ruby full-width jis83"]
+        
+    ]
 
 let tests =
         testList "Fss Tests" [
@@ -1094,45 +1035,6 @@ Mocha.runTests tests |> ignore
 
 
 (*
-                (fss [ FontVariantNumeric FontVariantNumeric.Normal] ), ["font-variant-numeric", "normal"]
-                (fss [ FontVariantNumeric FontVariantNumeric.Ordinal] ), ["font-variant-numeric", "ordinal"]
-                (fss [ FontVariantNumeric FontVariantNumeric.SlashedZero] ), ["font-variant-numeric", "slashed-zero"]
-                (fss [ FontVariantNumeric FontVariantNumeric.LiningNums] ), ["font-variant-numeric", "lining-nums"]
-                (fss [ FontVariantNumeric FontVariantNumeric.OldstyleNums] ), ["font-variant-numeric", "oldstyle-nums"]
-                (fss [ FontVariantNumeric FontVariantNumeric.TabularNums] ), ["font-variant-numeric", "tabular-nums"]
-                (fss [ FontVariantNumeric FontVariantNumeric.DiagonalFractions] ), ["font-variant-numeric", "diagonal-fractions"]
-                (fss [ FontVariantNumeric FontVariantNumeric.StackedFractions] ), ["font-variant-numeric", "stacked-fractions"]
-                (fss [ FontVariantNumerics
-                    [
-                        FontVariantNumeric.OldstyleNums
-                        FontVariantNumeric.StackedFractions
-                    ]] ), ["font-variant-numeric", "oldstyle-nums stacked-fractions"]
-
-                (fss [ FontVariantCaps FontVariantCaps.Normal] ), ["font-variant-caps", "normal"]
-                (fss [ FontVariantCaps FontVariantCaps.SmallCaps] ), ["font-variant-caps", "small-caps"]
-                (fss [ FontVariantCaps FontVariantCaps.AllSmallCaps] ), ["font-variant-caps", "all-small-caps"]
-                (fss [ FontVariantCaps FontVariantCaps.PetiteCaps] ), ["font-variant-caps", "petite-caps"]
-                (fss [ FontVariantCaps FontVariantCaps.AllPetiteCaps] ), ["font-variant-caps", "all-petite-caps"]
-                (fss [ FontVariantCaps FontVariantCaps.Unicase] ), ["font-variant-caps", "unicase"]
-                (fss [ FontVariantCaps FontVariantCaps.TitlingCaps] ), ["font-variant-caps", "titling-caps"]
-
-                (fss [ FontVariantEastAsian FontVariantEastAsian.Normal]), ["font-variant-east-asian", "normal"]
-                (fss [ FontVariantEastAsian FontVariantEastAsian.Ruby]), ["font-variant-east-asian", "ruby"]
-                (fss [ FontVariantEastAsian FontVariantEastAsian.Jis78]), ["font-variant-east-asian", "jis78"]
-                (fss [ FontVariantEastAsian FontVariantEastAsian.Jis83]), ["font-variant-east-asian", "jis83"]
-                (fss [ FontVariantEastAsian FontVariantEastAsian.Jis90]), ["font-variant-east-asian", "jis90"]
-                (fss [ FontVariantEastAsian FontVariantEastAsian.Jis04]), ["font-variant-east-asian", "jis04"]
-                (fss [ FontVariantEastAsian FontVariantEastAsian.Simplified]), ["font-variant-east-asian", "simplified"]
-                (fss [ FontVariantEastAsian FontVariantEastAsian.Traditional]), ["font-variant-east-asian", "traditional"]
-                (fss [ FontVariantEastAsian FontVariantEastAsian.FullWidth]), ["font-variant-east-asian", "full-width"]
-                (fss [ FontVariantEastAsian FontVariantEastAsian.ProportionalWidth]), ["font-variant-east-asian", "proportional-width"]
-                (fss [ FontVariantEastAsians
-                    [
-                        FontVariantEastAsian.Ruby
-                        FontVariantEastAsian.FullWidth
-                        FontVariantEastAsian.Jis83
-                    ]]), ["font-variant-east-asian", "jis83 full-width ruby"]
-
                 (fss [ FontVariantLigatures FontVariantLigatures.Normal]), ["font-variant-ligatures", "normal"]
                 (fss [ FontVariantLigatures FontVariantLigatures.None]), ["font-variant-ligatures", "none"]
                 (fss [ FontVariantLigatures FontVariantLigatures.CommonLigatures]), ["font-variant-ligatures", "common-ligatures"]
