@@ -40,7 +40,7 @@ module DisplayValue =
 module Flex =
     open Units.Size
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction      
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
     type FlexDirection =
         | Row
         | RowReverse
@@ -76,21 +76,40 @@ module Flex =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
     type AlignItems =
+        | Start
+        | End
         | FlexStart
         | FlexEnd
         | Center
+        | Left
+        | Right
+        | Normal
         | Baseline
+        | SpaceBetween
+        | SpaceAround
+        | SpaceEvenly
         | Stretch
+        | Safe
+        | Unsafe
         interface IAlignItems
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
     type AlignContent =
+        | Start
+        | End
         | FlexStart
         | FlexEnd
         | Center
+        | Left
+        | Right
+        | Normal
+        | Baseline
         | SpaceBetween
         | SpaceAround
+        | SpaceEvenly
         | Stretch
+        | Safe
+        | Unsafe
         interface IAlignContent
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
@@ -98,32 +117,32 @@ module Flex =
         | Normal
         | SelfStart
         | SelfEnd
-        | FlexStart 
-        | FlexEnd 
-        | Center 
-        | Baseline 
+        | FlexStart
+        | FlexEnd
+        | Center
+        | Baseline
         | Stretch
         | Safe
         | Unsafe
         interface IAlignSelf
-            
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/order
-    type Order = 
+    type Order =
         | Order of int
         interface IOrder
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
-    type FlexGrow = 
-        | Grow of int
+    type FlexGrow =
+        | Grow of float
         interface IFlexGrow
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
     type FlexShrink =
-        | Shrink of int
+        | Shrink of float
         interface IFlexShrink
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
-    type FlexBasis = 
+    type FlexBasis =
         | Fill
         | MaxContent
         | MinContent
@@ -192,9 +211,10 @@ module FlexValue =
             | _ -> "Unknown flex grow"
 
     let flexShrink (v: IFlexShrink): string =
+        let stringifyFlexShrink (Shrink f) = string f
         match v with
             | :? Global     as g -> GlobalValue.globalValue g
-            | :? FlexShrink as s -> string s
+            | :? FlexShrink as s -> stringifyFlexShrink s
             | _ -> "Unknown flex shrink"
 
     let flexBasis (v: IFlexBasis): string =
@@ -204,4 +224,4 @@ module FlexValue =
             | :? Size      as s -> Units.Size.value s
             | :? Percent   as p -> Units.Percent.value p
             | :? FlexBasis as b -> duToKebab b
-            | _ -> "Unknown flex basis"    
+            | _ -> "Unknown flex basis"

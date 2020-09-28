@@ -13,12 +13,12 @@ module PositionValue =
     open Position
     open Utilities.Helpers
 
-    let position (v: Position) = duToString v
+    let position (v: Position) = duToLowercase v
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
 module VerticalAlign =
     open Types
-    
+
     type VerticalAlign =
         | Baseline
         | Sub
@@ -29,7 +29,7 @@ module VerticalAlign =
         | Top
         | Bottom
         interface IVerticalAlign
-    
+
 module VerticalAlignValue =
     open VerticalAlign
     open Global

@@ -19,7 +19,7 @@ module VisibilityValue =
     let visibility (v: IVisibility): string =
         match v with
             | :? Global     as g -> GlobalValue.globalValue g
-            | :? Visibility as v -> duToString v
+            | :? Visibility as v -> duToLowercase v
             | _ -> "Unknown margin size"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
@@ -35,4 +35,4 @@ module OpacityValue =
         v
         |> clamp 0.0 1.0
         |> string
-        
+

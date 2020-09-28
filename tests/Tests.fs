@@ -579,17 +579,17 @@ let fontTests =
                 "Font size unset"
                 [ FontSize Unset ]
                 [ "fontSize" ==> "unset" ]
-            
+
             test
                 "Font stretch normal"
                 [ FontStretch Font.FontStretch.Normal ]
                 [ "fontStretch" ==> "normal" ]
-                
+
             test
                 "Font stretch ultra-condensed"
                 [ FontStretch Font.FontStretch.UltraCondensed ]
                 [ "fontStretch" ==> "ultra-condensed" ]
-                
+
             test
                  "Font stretch extra-condensed"
                 [ FontStretch Font.FontStretch.ExtraCondensed ]
@@ -636,22 +636,22 @@ let fontTests =
                 [ "fontStretch" ==> "unset" ]
 
             test
-                "Font style normal" 
+                "Font style normal"
                 [ FontStyle Font.Normal]
                 [ "fontStyle" ==> "normal"]
 
             test
-                "Font style italic" 
+                "Font style italic"
                 [ FontStyle Font.Italic]
                 [ "fontStyle" ==> "italic"]
 
             test
-                "Font style oblicque 90" 
+                "Font style oblicque 90"
                 [ FontStyle (Font.Oblique (deg 90.0))]
                 [ "fontStyle" ==> "oblique 90.00deg"]
 
             test
-                "Font style oblique -90" 
+                "Font style oblique -90"
                 [ FontStyle (Font.Oblique (deg -90.0))]
                 [ "fontStyle" ==> "oblique -90.00deg"]
 
@@ -690,136 +690,136 @@ let fontTests =
                 [ FontWeight Font.FontWeight.Bolder ]
                 [ "fontWeight" ==> "bolder"]
 
-            test 
+            test
                 "Font weight value"
                 [ FontWeight (Font.FontWeight.Value 500) ]
                 [ "fontWeight" ==> "500"]
 
-            test 
+            test
                 "Font weight inherit"
                 [ FontWeight Inherit ]
                 [ "fontWeight" ==> "inherit"]
 
-            test 
+            test
                 "Font weight initial"
                 [ FontWeight Initial ]
                 [ "fontWeight" ==> "initial"]
 
-            test 
+            test
                 "Font weight unset"
                 [ FontWeight Unset ]
                 [ "fontWeight" ==> "unset"]
-                
+
             test
                 "Line height normal"
                 [ LineHeight Font.LineHeight.Normal ]
                 [ "lineHeight" ==> "normal" ]
-                
+
             test
                 "Line height value"
                 [ LineHeight (Font.LineHeight.Value 2.5) ]
                 [ "lineHeight" ==> "2.5" ]
-            
+
             test
                 "Line height em"
                 [ LineHeight (em 3.0) ]
                 [ "lineHeight" ==> "3.0em" ]
-                
+
             test
                 "Line height pixel"
                 [ LineHeight (px 3) ]
                 [ "lineHeight" ==> "3px" ]
-                
+
             test
                 "Line height percent"
                 [ LineHeight (pct 34) ]
                 [ "lineHeight" ==> "34%" ]
-                
+
             test
                 "Line height initial"
                 [ LineHeight Initial ]
                 [ "lineHeight" ==> "initial" ]
-                
+
             test
                 "Line height inherit"
                 [ LineHeight Inherit ]
                 [ "lineHeight" ==> "inherit" ]
-                
+
             test
                 "Line height unset"
                 [ LineHeight Unset ]
                 [ "lineHeight" ==> "unset" ]
-                
+
             test
                  "Font family serif"
                  [ FontFamily Font.Serif ]
                  [ "fontFamily" ==> "serif" ]
-             
+
             test
                  "Font family sans-serif"
                  [ FontFamily Font.SansSerif ]
                  [ "fontFamily" ==> "sans-serif" ]
-             
+
             test
                  "Font family monospace"
                  [ FontFamily Font.Monospace ]
                  [ "fontFamily" ==> "monospace" ]
-             
+
             test
                  "Font family cursive"
                  [ FontFamily Font.Cursive ]
                  [ "fontFamily" ==> "cursive" ]
-             
+
             test
                  "Font family arial"
                  [ FontFamily (Font.Custom "arial") ]
                  [ "fontFamily" ==> "arial" ]
-                 
+
             test
                  "Font family initial"
                  [ FontFamily Initial ]
                  [ "fontFamily" ==> "initial" ]
-             
+
             test
                  "Font family inherit"
                  [ FontFamily Inherit ]
                  [ "fontFamily" ==> "inherit" ]
-             
+
             test
                  "Font family unset"
                  [ FontFamily Unset ]
                  [ "fontFamily" ==> "unset" ]
-                 
+
             test
                 "Font families"
                 [ FontFamilies [ Font.Serif; Font.Monospace ] ]
                 [ "fontFamily" ==> "serif, monospace" ]
-            
+
             test
                 "font feature setting On"
                 [ FontFeatureSetting (Font.Liga Font.On) ]
                 [ "fontFeatureSettings" ==> "\"liga\" On" ]
-                
+
             test
                 "font feature setting Off"
                 [ FontFeatureSetting (Font.Liga Font.Off) ]
                 [ "fontFeatureSettings" ==> "\"liga\" Off" ]
-                
+
             test
                 "font feature setting initial"
                 [ FontFeatureSetting Initial ]
                 [ "fontFeatureSettings" ==> "initial" ]
-                
+
             test
                 "font feature setting inherit"
                 [ FontFeatureSetting Inherit ]
                 [ "fontFeatureSettings" ==> "inherit" ]
-                
+
             test
                 "font feature setting unset"
                 [ FontFeatureSetting Unset ]
                 [ "fontFeatureSettings" ==> "unset" ]
-        
+
             test
                 "font feature setting multiple on"
                 [
@@ -841,49 +841,49 @@ let fontTests =
                         ]
                     ]
                 [ "fontFeatureSettings" ==> "\"smcp\" Off, \"onum\" Off" ]
-                
-                
-            test 
+
+
+            test
                 "Font variant numeric normal"
                 [ FontVariantNumeric Font.FontVariantNumeric.Normal]
                 ["fontVariantNumeric" ==> "normal"]
-                
-            test 
+
+            test
                 "Font variant numeric ordinal"
                 [ FontVariantNumeric Font.FontVariantNumeric.Ordinal]
                 ["fontVariantNumeric" ==> "ordinal"]
-                
-            test 
+
+            test
                 "Font variant numeric slashed zero"
                 [ FontVariantNumeric Font.FontVariantNumeric.SlashedZero]
                 ["fontVariantNumeric" ==> "slashed-zero"]
-                
-            test 
+
+            test
                 "Font variant numeric lining nums"
                 [ FontVariantNumeric Font.FontVariantNumeric.LiningNums]
                 ["fontVariantNumeric" ==> "lining-nums"]
-                
-            test 
+
+            test
                 "Font variant numeric old style nums"
                 [ FontVariantNumeric Font.FontVariantNumeric.OldstyleNums]
                 ["fontVariantNumeric" ==> "oldstyle-nums"]
-                
-            test 
+
+            test
                 "Font variant numeric tabular nums"
                 [ FontVariantNumeric Font.FontVariantNumeric.TabularNums]
                 ["fontVariantNumeric" ==> "tabular-nums"]
-                
-            test 
+
+            test
                 "Font variant numeric diagonal fractions"
                 [ FontVariantNumeric Font.FontVariantNumeric.DiagonalFractions]
                 ["fontVariantNumeric" ==> "diagonal-fractions"]
-                
-            test 
+
+            test
                 "Font variant numeric stacked fractions"
                 [ FontVariantNumeric Font.FontVariantNumeric.StackedFractions]
                 ["fontVariantNumeric" ==> "stacked-fractions"]
-                
-            test 
+
+            test
                 "Font variant numerics multiple"
                 [
                     FontVariantNumerics
@@ -893,57 +893,57 @@ let fontTests =
                         ]
                 ]
                 ["fontVariantNumeric" ==> "oldstyle-nums stacked-fractions"]
-                
-            test 
+
+            test
                 "Font variant numeric inherit"
                 [ FontVariantNumeric Inherit ]
                 [ "fontVariantNumeric" ==> "inherit" ]
-                
-            test 
+
+            test
                 "Font variant numeric initial"
                 [ FontVariantNumeric Initial]
                 [ "fontVariantNumeric" ==> "initial" ]
-                
-            test 
+
+            test
                 "Font variant numeric unset"
                 [ FontVariantNumeric Unset ]
                 [ "fontVariantNumeric" ==> "unset" ]
-                    
+
             test
                 "Font variant caps normal"
                 [ FontVariantCaps Font.FontVariantCaps.Normal]
                 ["fontVariantCaps" ==> "normal"]
-                
+
             test
                 "Font variant caps small caps"
                 [ FontVariantCaps Font.FontVariantCaps.SmallCaps]
                 ["fontVariantCaps" ==> "small-caps"]
-                
+
             test
                 "Font variant caps  all small caps"
                 [ FontVariantCaps Font.FontVariantCaps.AllSmallCaps]
                 ["fontVariantCaps" ==> "all-small-caps"]
-                
+
             test
                 "Font variant caps petite caps"
                 [ FontVariantCaps Font.FontVariantCaps.PetiteCaps]
                 ["fontVariantCaps" ==> "petite-caps"]
-                
+
             test
                 "Font variant caps all petite caps"
                 [ FontVariantCaps Font.FontVariantCaps.AllPetiteCaps]
                 ["fontVariantCaps" ==> "all-petite-caps"]
-                
+
             test
                 "Font variant caps unicase"
                 [ FontVariantCaps Font.FontVariantCaps.Unicase]
                 ["fontVariantCaps" ==> "unicase"]
-                
+
             test
                 "Font variant caps titling caps"
                 [ FontVariantCaps Font.FontVariantCaps.TitlingCaps]
                 ["fontVariantCaps" ==> "titling-caps"]
-                
+
             test
                 "Font variant caps initial"
                 [ FontVariantCaps Initial ]
@@ -958,57 +958,57 @@ let fontTests =
                 "Font variant caps unset"
                 [ FontVariantCaps Unset ]
                 ["fontVariantCaps" ==> "unset" ]
-                
+
             test
                 "Font variant east asian normal"
                 [ FontVariantEastAsian Font.FontVariantEastAsian.Normal]
                 ["fontVariantEastAsian" ==> "normal"]
-                
+
             test
                 "Font variant east asian ruby"
                 [ FontVariantEastAsian Font.Ruby]
                 ["fontVariantEastAsian" ==> "ruby"]
-                
+
             test
                 "Font variant east asian  jis78"
                 [ FontVariantEastAsian Font.Jis78]
                 ["fontVariantEastAsian" ==> "jis78"]
-                
+
             test
                 "Font variant east asian jis83"
                 [ FontVariantEastAsian Font.Jis83]
                 ["fontVariantEastAsian" ==> "jis83"]
-                
+
             test
                 "Font variant east asian jis90"
                 [ FontVariantEastAsian Font.Jis90]
                 ["fontVariantEastAsian" ==> "jis90"]
-                
+
             test
                 "Font variant east asian jis04"
                 [ FontVariantEastAsian Font.Jis04]
                 ["fontVariantEastAsian" ==> "jis04"]
-                
+
             test
                 "Font variant east asian simplified"
                 [ FontVariantEastAsian Font.Simplified]
                 ["fontVariantEastAsian" ==> "simplified"]
-                
+
             test
                 "Font variant east asian traditional"
                 [ FontVariantEastAsian Font.Traditional]
                 ["fontVariantEastAsian" ==> "traditional"]
-                
+
             test
                 "Font variant east asian full width"
                 [ FontVariantEastAsian Font.FullWidth]
                 ["fontVariantEastAsian" ==> "full-width"]
-                
+
             test
                 "Font variant east asian  proportional widt"
                 [ FontVariantEastAsian Font.ProportionalWidth]
                 ["fontVariantEastAsian" ==> "proportional-width"]
-                
+
             test
                 "Font variant east asian multiple"
                 [
@@ -1020,73 +1020,73 @@ let fontTests =
                         ]
                 ]
                 ["fontVariantEastAsian" ==> "ruby full-width jis83"]
-                
+
             test
                 "Font variant ligatures normal"
                 [ FontVariantLigatures Font.FontVariantLigatures.Normal]
                 ["fontVariantLigatures" ==> "normal"]
-                
+
             test
                 "Font variant ligatures none"
                 [ FontVariantLigatures Font.None]
                 ["fontVariantLigatures" ==> "none"]
-                
+
             test
                 "Font variant ligatures common"
                 [ FontVariantLigatures Font.CommonLigatures]
                 ["fontVariantLigatures" ==> "common-ligatures"]
-                
+
             test
                 "Font variant ligatures no common"
                 [ FontVariantLigatures Font.NoCommonLigatures]
                 ["fontVariantLigatures" ==> "no-common-ligatures"]
-                
+
             test
                 "Font variant ligatures discretionary"
                 [ FontVariantLigatures Font.DiscretionaryLigatures]
                 ["fontVariantLigatures" ==> "discretionary-ligatures"]
-                
+
             test
                 "Font variant ligatures no discretionary"
                 [ FontVariantLigatures Font.NoDiscretionaryLigatures]
                 ["fontVariantLigatures" ==> "no-discretionary-ligatures"]
-                
+
             test
                 "Font variant ligatures historical"
                 [ FontVariantLigatures Font.HistoricalLigatures]
                 ["fontVariantLigatures" ==> "historical-ligatures"]
-                
+
             test
                 "Font variant ligatures no historical"
                 [ FontVariantLigatures Font.NoHistoricalLigatures]
                 ["fontVariantLigatures" ==> "no-historical-ligatures"]
-                
+
             test
                 "Font variant ligatures contextual"
                 [ FontVariantLigatures Font.Contextual]
                 ["fontVariantLigatures" ==> "contextual"]
-                
+
             test
                 "Font variant ligatures no contextual"
                 [ FontVariantLigatures Font.NoContextual]
                 ["fontVariantLigatures" ==> "no-contextual"]
-                
+
             test
                 "Font variant ligatures no initial"
                 [ FontVariantLigatures Initial ]
                 ["fontVariantLigatures" ==> "initial"]
-                
+
             test
                 "Font variant ligatures inherit"
                 [ FontVariantLigatures Inherit]
                 ["fontVariantLigatures" ==> "inherit"]
-                
+
             test
                 "Font variant ligatures no unset"
                 [ FontVariantLigatures Unset]
-                ["fontVariantLigatures" ==> "unset"]        
+                ["fontVariantLigatures" ==> "unset"]
     ]
-        
+
 let borderTests =
     testList "Border"
         [
@@ -1166,28 +1166,28 @@ let borderTests =
                 [
                     "borderStyle" ==> "none"
                 ]
-                
+
             test
                 "Borderstyle initial"
                 [ BorderStyle Initial ]
                 [
                     "borderStyle" ==> "initial"
                 ]
-                
+
             test
                 "Borderstyle inherit"
                 [ BorderStyle Inherit ]
                 [
                     "borderStyle" ==> "inherit"
                 ]
-                
+
             test
                 "Borderstyle unset"
                 [ BorderStyle Unset ]
                 [
                     "borderStyle" ==> "unset"
                 ]
-                
+
             test
                 "Border radius px"
                 [ BorderRadius (px 10)]
@@ -1206,17 +1206,17 @@ let borderTests =
                 "Border top left radius px"
                 [ BorderTopLeftRadius (px 10)]
                 ["borderTopLeftRadius" ==> "10px"]
-            
+
             test
                 "Border top right radius px"
                 [ BorderTopRightRadius (px 10)]
                 ["borderTopRightRadius" ==> "10px"]
-                
+
             test
                 "Border bottom left radius"
                 [ BorderBottomLeftRadius (px 10)]
                 ["borderBottomLeftRadius" ==> "10px"]
-            
+
             test
                 "Border bottom right radius px"
                 [ BorderBottomRightRadius (px 10)]
@@ -1228,82 +1228,82 @@ let borderTests =
                     [
                         "borderRadius" ==> "10px 20px 30px 40px"
                     ]
-                    
+
             test
                 "Border radius top left initial"
                 [ BorderTopLeftRadius Initial ]
                 ["borderTopLeftRadius" ==> "initial"]
-                
+
             test
                 "Border radius top right inherit"
                 [ BorderTopRightRadius Inherit ]
                 ["borderTopRightRadius" ==> "inherit"]
-                
+
             test
                 "Border bottom left radius unset"
                 [ BorderBottomLeftRadius Unset ]
                 ["borderBottomLeftRadius" ==> "unset"]
-                    
+
             test
                 "Border bottom right radius initial"
                 [ BorderBottomRightRadius Initial ]
                 ["borderBottomRightRadius" ==> "initial"]
-                
+
             test
                 "Border radius inherit"
                 [ BorderRadius Inherit ]
                 ["borderRadius" ==> "inherit"]
-                
+
             test
                 "Border radius inherit"
                 [ BorderRadius Inherit ]
                 ["borderRadius" ==> "inherit"]
-                
+
             test
                 "Border radius unset"
                 [ BorderRadius Unset ]
                 ["borderRadius" ==> "unset"]
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             test
                 "Border width px"
                 [ BorderWidth (px 40) ]
                 [ "borderWidth" ==> "40px" ]
-                
+
             test
                 "Border width thin"
                 [ BorderWidth Border.Thin ]
                 [ "borderWidth" ==> "thin" ]
-                
+
             test
                 "Border width medium"
                 [ BorderWidth Border.Medium ]
                 [ "borderWidth" ==> "medium" ]
-            
+
             test
                 "Border width thick"
                 [ BorderWidth Border.Thick ]
                 [ "borderWidth" ==> "thick" ]
-                
+
             test
                 "Border width initial"
                 [ BorderWidth Initial ]
                 [ "borderWidth" ==> "initial" ]
-                
+
             test
                 "Border width inherit"
                 [ BorderWidth Inherit ]
@@ -1327,8 +1327,8 @@ let borderTests =
             test
                 "Border right width cm"
                 [ BorderRightWidth (cm 40.0) ]
-                ["borderRightWidth" ==> "40.0cm"] 
-                
+                ["borderRightWidth" ==> "40.0cm"]
+
             test
                 "Border color red"
                 [ BorderColor Color.red ]
@@ -1338,7 +1338,7 @@ let borderTests =
                 "Border color initial"
                 [ BorderColor Initial ]
                 [ "borderColor" ==> "initial" ]
-                
+
             test
                 "Border color inherit"
                 [ BorderColor Inherit ]
@@ -1348,7 +1348,7 @@ let borderTests =
                 "Border color unset"
                 [ BorderColor Unset ]
                 [ "borderColor" ==> "unset" ]
-            
+
             test
                 "Border colors multiple"
                 [ BorderColors [ Color.red; Color.green; Color.blue; Color.white] ]
@@ -1358,24 +1358,24 @@ let borderTests =
                 "Border top color rgb"
                 [ BorderTopColor (rgb 255 0 0) ]
                 ["borderTopColor" ==> "rgb(255, 0, 0)"]
-                
+
             test
                 "Border right color green"
                 [ BorderRightColor Color.green ]
                 ["borderRightColor" ==> "#008000"]
-            
+
             test
                 "Border bottom color"
                 [ BorderBottomColor Color.blue ]
                 ["borderBottomColor" ==> "#0000ff"]
-            
+
             test
                 "Border left color"
                 [ BorderLeftColor Color.white ]
                 ["borderLeftColor" ==> "#ffffff"]
 
         ]
-        
+
 let contentSizeTests =
     testList "Content size"
         [
@@ -1383,125 +1383,125 @@ let contentSizeTests =
                 "Width px"
                 [ Width (px 100) ]
                 ["width" ==> "100px"]
-                
+
             test
                 "Width percent"
                 [ Width (pct 25) ]
                 ["width" ==> "25%"]
-                
-                
+
+
             test
                 "Width max content"
                 [ Width ContentSize.MaxContent ]
                 ["width" ==> "max-content"]
-                
+
             test
                 "Width min content"
                 [ Width ContentSize.MinContent ]
                 ["width" ==> "min-content"]
-                
+
             test
                 "Width fit content"
                 [ Width (ContentSize.FitContent(px 100)) ]
                 ["width" ==> "fit-content(100px)"]
-                
+
             test
                 "Width auto"
                 [ Width Auto ]
                 ["width" ==> "auto"]
-                
+
             test
                 "Width initial"
                 [ Width Initial ]
                 ["width" ==> "initial"]
-                
+
             test
                 "Width inherit"
                 [ Width Inherit ]
                 ["width" ==> "inherit"]
-                
+
             test
                 "Width unset"
                 [ Width Unset ]
                 ["width" ==> "unset"]
-                
+
             test
                 "Height px"
                 [ Height (px 100) ]
                 ["height" ==> "100px"]
-                
+
             test
                 "Height percent"
                 [ Height (pct 25) ]
                 ["height" ==> "25%"]
-                
-                
+
+
             test
                 "Height max content"
                 [ Height ContentSize.MaxContent ]
                 ["height" ==> "max-content"]
-                
+
             test
                 "Height min content"
                 [ Height ContentSize.MinContent ]
                 ["height" ==> "min-content"]
-                
+
             test
                 "Height fit content"
                 [ Height (ContentSize.FitContent(px 100)) ]
                 ["height" ==> "fit-content(100px)"]
-                
+
             test
                 "Height auto"
                 [ Height Auto ]
                 ["height" ==> "auto"]
-                
+
             test
                 "Height initial"
                 [ Height Initial ]
                 ["height" ==> "initial"]
-                
+
             test
                 "Height inherit"
                 [ Height Inherit ]
                 ["height" ==> "inherit"]
-                
+
             test
                 "Height unset"
                 [ Height Unset ]
                 ["height" ==> "unset"]
         ]
-        
+
 let perspectiveTests =
     testList "Perspective"
         [
             test
-                "Perspective px" 
+                "Perspective px"
                 [ Perspective (px 100) ]
                 ["perspective" ==> "100px"]
-                
+
             test
-                "Perspective em" 
+                "Perspective em"
                 [ Perspective (em 3.5) ]
                 ["perspective" ==> "3.5em"]
-                
+
             test
-                "Perspective none" 
+                "Perspective none"
                 [ Perspective Perspective.None ]
                 ["perspective" ==> "none"]
-            
+
             test
                 "Perspective inherit"
                 [ Perspective Inherit]
                 [ "perspective" ==> "inherit" ]
-            
+
             test
-                "Perspective initial" 
+                "Perspective initial"
                 [ Perspective Initial]
                 ["perspective" ==> "initial" ]
-            
+
             test
-                "Perspective unset" 
+                "Perspective unset"
                 [ Perspective Unset]
                 ["perspective" ==> "unset"]
         ]
@@ -1513,367 +1513,763 @@ let displayTests =
                     "Display inline"
                     [ Display Display.Inline]
                     ["display" ==> "inline"]
-                
+
                 test
                     "Display inline-block"
                     [ Display Display.InlineBlock]
                     ["display" ==> "inline-block"]
-                
+
                 test
                     "Display block"
                     [ Display Display.Block]
                     ["display" ==> "block"]
-                
+
                 test
                     "Display run-in"
                     [ Display Display.RunIn]
                     ["display" ==> "run-in"]
-                
+
                 test
                     "Display flex"
                     [ Display Display.Flex]
                     ["display" ==> "flex"]
-                
+
                 test
                     "Display grid"
                     [ Display Display.Grid]
                     ["display" ==> "grid"]
-                
+
                 test
                     "Display flow-root"
                     [ Display Display.FlowRoot]
                     ["display" ==> "flow-root"]
-                
+
                 test
                     "Display table"
                     [ Display Display.Table]
                     ["display" ==> "table"]
-                
+
                 test
                     "Display table-cell"
                     [ Display Display.TableCell]
                     ["display" ==> "table-cell"]
-                
+
                 test
                     "Display table-column"
                     [ Display Display.TableColumn]
                     ["display" ==> "table-column"]
-                
+
                 test
                     "Display table-column-group"
                     [ Display Display.TableColumnGroup]
                     ["display" ==> "table-column-group"]
-                
+
                 test
                     "Display table-header-group"
                     [ Display Display.TableHeaderGroup]
                     ["display" ==> "table-header-group"]
-                
+
                 test
                     "Display table row group"
                     [ Display Display.TableRowGroup]
                     ["display" ==> "table-row-group"]
-                
+
                 test
                     "table footer group"
                     [ Display Display.TableFooterGroup]
                     ["display" ==> "table-footer-group"]
-                
+
                 test
                     "Display table row"
                     [ Display Display.TableRow]
                     ["display" ==> "table-row"]
-                
+
                 test
                     "Display table-caption"
                     [ Display Display.TableCaption]
                     ["display" ==> "table-caption"]
-                
+
                 test
                     "Display none"
                     [ Display Display.None]
                     ["display" ==> "none"]
-                
         ]
 
 let flexTests =
-    testList "flex"
+    testList "Flex"
         [
             test
                 "Flex direction row"
                 [ FlexDirection Flex.Row]
                 ["flexDirection" ==> "row"]
-                
+
             test
                 "Flex direction row-reverse"
                 [ FlexDirection Flex.RowReverse]
                 ["flexDirection" ==> "row-reverse"]
-                
+
             test
                 "Flex direction column"
                 [ FlexDirection Flex.Column]
                 ["flexDirection" ==> "column"]
-                
+
             test
                 "Flex direction column-reverse"
                 [ FlexDirection Flex.ColumnReverse]
                 ["flexDirection" ==> "column-reverse"]
-                
+
             test
                 "Flex direction inherit"
                 [ FlexDirection Inherit]
                 ["flexDirection" ==> "inherit"]
-                
+
             test
                 "Flex direction initial"
                 [ FlexDirection Initial]
                 ["flexDirection" ==> "initial"]
-                
+
             test
                 "Flex direction unset"
                 [ FlexDirection Unset]
                 ["flexDirection" ==> "unset"]
-                
-                
+
+
             test
                 "Flex wrap no-wrap"
                 [ FlexWrap Flex.NoWrap]
                 ["flexWrap" ==> "no-wrap"]
-                
+
             test
                 "Flex wrap wrap"
                 [ FlexWrap Flex.Wrap]
                 ["flexWrap" ==> "wrap"]
-                
+
             test
                 "Flex wrap wrap-reverse"
                 [ FlexWrap Flex.WrapReverse]
                 ["flexWrap" ==> "wrap-reverse"]
-                
+
             test
                 "Flex wrap inherit"
                 [ FlexWrap Inherit]
                 ["flexWrap" ==> "inherit"]
-                
+
             test
                 "Flex wrap initial"
                 [ FlexWrap Initial]
                 ["flexWrap" ==> "initial"]
-                
+
             test
                 "Flex wrap unset"
                 [ FlexWrap Unset]
                 ["flexWrap" ==> "unset"]
-            
+
             test
                 "Flex basis em"
                 [ FlexBasis (em 10.0)]
-                ["flexBasis" ==> "10.0em"] 
-                
+                ["flexBasis" ==> "10.0em"]
+
             test
                 "Flex basis px"
                 [ FlexBasis (px 100)]
                 ["flexBasis" ==> "100px"]
-                
+
             test
                 "Flex basis auto"
                 [ FlexBasis Auto]
                 ["flexBasis" ==> "auto"]
-                
+
             test
                 "Flex basis fill"
                 [ FlexBasis Flex.Fill ]
-                ["flexBasis" ==> "fill"]     
-                
+                ["flexBasis" ==> "fill"]
+
             test
                 "Flex basis max-content"
                 [ FlexBasis Flex.MaxContent]
-                ["flexBasis" ==> "max-content"] 
-                
+                ["flexBasis" ==> "max-content"]
+
             test
                 "Flex basis min-content"
                 [ FlexBasis Flex.MinContent]
                 ["flexBasis" ==> "min-content"]
-                
+
             test
                 "Flex basis fit-content"
                 [ FlexBasis Flex.FitContent]
                 ["flexBasis" ==> "fit-content"]
-                
+
             test
                 "Flex basis content"
                 [ FlexBasis Flex.Content]
                 ["flexBasis" ==> "content"]
-                
-                
-                
-                
+
             test
                 "Justify content start"
                 [ JustifyContent Flex.Start]
                 ["justifyContent" ==> "start"]
-                
+
             test
                 "Justify content end"
                 [ JustifyContent Flex.End]
                 ["justifyContent" ==> "end"]
-                
+
             test
                 "Justify content flex start"
                 [ JustifyContent Flex.FlexStart]
                 ["justifyContent" ==> "flex-start"]
-                
+
             test
                 "Justify content flex end"
                 [ JustifyContent Flex.FlexEnd]
                 ["justifyContent" ==> "flex-end"]
-                
+
             test
                 "Justify content center"
                 [ JustifyContent Flex.Center]
                 ["justifyContent" ==> "center"]
-                
+
             test
                 "Justify content left"
                 [ JustifyContent Flex.Left]
                 ["justifyContent" ==> "left"]
-                
+
             test
                 "Justify content right"
                 [ JustifyContent Flex.Right]
                 ["justifyContent" ==> "right"]
-                
+
             test
                 "Justify content normal"
                 [ JustifyContent Flex.Normal]
                 ["justifyContent" ==> "normal"]
-                
+
             test
                 "Justify content baseline"
                 [ JustifyContent Flex.Baseline]
                 ["justifyContent" ==> "baseline"]
-                
+
             test
                 "Justify content space between"
                 [ JustifyContent Flex.SpaceBetween]
                 ["justifyContent" ==> "space-between"]
-                
+
             test
                 "Justify content space around"
                 [ JustifyContent Flex.SpaceAround]
                 ["justifyContent" ==> "space-around"]
-                
+
             test
                 "Justify content space evenly"
                 [ JustifyContent Flex.SpaceEvenly]
                 ["justifyContent" ==> "space-evenly"]
-                
+
             test
                 "Justify content right"
                 [ JustifyContent Flex.Right]
                 ["justifyContent" ==> "right"]
-                
+
             test
                 "Justify content safe"
                 [ JustifyContent Flex.Safe]
                 ["justifyContent" ==> "safe"]
-                
+
             test
                 "Justify content unsafe"
                 [ JustifyContent Flex.Unsafe]
                 ["justifyContent" ==> "unsafe"]
-                
+
             test
                 "Justify content inherit"
                 [ JustifyContent Inherit]
                 ["justifyContent" ==> "inherit"]
-             
+
             test
                 "Justify content initial"
                 [ JustifyContent Initial]
                 ["justifyContent" ==> "initial"]
-                
+
             test
                 "Justify content unset"
                 [ JustifyContent Unset]
                 ["justifyContent" ==> "unset"]
 
-                
-                
+            test
+                "Align self normal"
+                [ AlignSelf Flex.AlignSelf.Normal]
+                ["alignSelf" ==> "normal"]
+
+            test
+                "Align self flex start"
+                [ AlignSelf Flex.AlignSelf.SelfStart]
+                ["alignSelf" ==> "self-start"]
+
+            test
+                "Align self flex end"
+                [ AlignSelf Flex.AlignSelf.SelfEnd]
+                ["alignSelf" ==> "self-end"]
+
+            test
+                "Align self flex start"
+                [ AlignSelf Flex.AlignSelf.FlexStart]
+                ["alignSelf" ==> "flex-start"]
+
+            test
+                "Align self flex end"
+                [ AlignSelf Flex.AlignSelf.FlexEnd]
+                ["alignSelf" ==> "flex-end"]
+
+            test
+                "Align self center"
+                [ AlignSelf Flex.AlignSelf.Center]
+                ["alignSelf" ==> "center"]
+
+            test
+                "Align self baseline"
+                [ AlignSelf Flex.AlignSelf.Baseline]
+                ["alignSelf" ==> "baseline"]
+
+            test
+                "Align self stretch"
+                [ AlignSelf Flex.AlignSelf.Stretch]
+                ["alignSelf" ==> "stretch"]
+
+            test
+                "Align self safe"
+                [ AlignSelf Flex.AlignSelf.Safe]
+                ["alignSelf" ==> "safe"]
+
+            test
+                "Align self unsafe"
+                [ AlignSelf Flex.AlignSelf.Unsafe]
+                ["alignSelf" ==> "unsafe"]
+
+            test
+                "Align self inherit"
+                [ AlignSelf Inherit]
+                ["alignSelf" ==> "inherit"]
+
+            test
+                "Align self initial"
+                [ AlignSelf Initial]
+                ["alignSelf" ==> "initial"]
+
+            test
+                "Align self unset"
+                [ AlignSelf Unset]
+                ["alignSelf" ==> "unset"]
+
+            test
+                "Align items start"
+                [ AlignItems Flex.AlignItems.Start]
+                ["alignItems" ==> "start"]
+
+            test
+                "Align items end"
+                [ AlignItems Flex.AlignItems.End]
+                ["alignItems" ==> "end"]
+
+            test
+                "Align items flex start"
+                [ AlignItems Flex.AlignItems.FlexStart]
+                ["alignItems" ==> "flex-start"]
+
+            test
+                "Align items flex end"
+                [ AlignItems Flex.AlignItems.FlexEnd]
+                ["alignItems" ==> "flex-end"]
+
+            test
+                "Align items center"
+                [ AlignItems Flex.AlignItems.Center]
+                ["alignItems" ==> "center"]
+
+            test
+                "Align items left"
+                [ AlignItems Flex.AlignItems.Left]
+                ["alignItems" ==> "left"]
+
+            test
+                "Align items right"
+                [ AlignItems Flex.AlignItems.Right]
+                ["alignItems" ==> "right"]
+
+            test
+                "Align items normal"
+                [ AlignItems Flex.AlignItems.Normal]
+                ["alignItems" ==> "normal"]
+
+            test
+                "Align items baseline"
+                [ AlignItems Flex.AlignItems.Baseline]
+                ["alignItems" ==> "baseline"]
+
+            test
+                "Align items space between"
+                [ AlignItems Flex.AlignItems.SpaceBetween]
+                ["alignItems" ==> "space-between"]
+
+            test
+                "Align items space around"
+                [ AlignItems Flex.AlignItems.SpaceAround]
+                ["alignItems" ==> "space-around"]
+
+            test
+                "Align items space evenly"
+                [ AlignItems Flex.AlignItems.SpaceEvenly]
+                ["alignItems" ==> "space-evenly"]
+
+            test
+                "Align items right"
+                [ AlignItems Flex.AlignItems.Right]
+                ["alignItems" ==> "right"]
+
+            test
+                "Align items safe"
+                [ AlignItems Flex.AlignItems.Safe]
+                ["alignItems" ==> "safe"]
+
+            test
+                "Align items unsafe"
+                [ AlignItems Flex.AlignItems.Unsafe]
+                ["alignItems" ==> "unsafe"]
+
+            test
+                "Align items inherit"
+                [ AlignItems Inherit]
+                ["alignItems" ==> "inherit"]
+
+            test
+                "Align items initial"
+                [ AlignItems Initial]
+                ["alignItems" ==> "initial"]
+
+            test
+                "Align items unset"
+                [ AlignItems Unset]
+                ["alignItems" ==> "unset"]
+
+
+
+
+            test
+                "Align content start"
+                [ AlignContent Flex.AlignContent.Start]
+                ["alignContent" ==> "start"]
+
+            test
+                "Align content end"
+                [ AlignContent Flex.AlignContent.End]
+                ["alignContent" ==> "end"]
+
+            test
+                "Align content flex start"
+                [ AlignContent Flex.AlignContent.FlexStart]
+                ["alignContent" ==> "flex-start"]
+
+            test
+                "Align content flex end"
+                [ AlignContent Flex.AlignContent.FlexEnd]
+                ["alignContent" ==> "flex-end"]
+
+            test
+                "Align content center"
+                [ AlignContent Flex.AlignContent.Center]
+                ["alignContent" ==> "center"]
+
+            test
+                "Align content left"
+                [ AlignContent Flex.AlignContent.Left]
+                ["alignContent" ==> "left"]
+
+            test
+                "Align content right"
+                [ AlignContent Flex.AlignContent.Right]
+                ["alignContent" ==> "right"]
+
+            test
+                "Align content normal"
+                [ AlignContent Flex.AlignContent.Normal]
+                ["alignContent" ==> "normal"]
+
+            test
+                "Align content baseline"
+                [ AlignContent Flex.AlignContent.Baseline]
+                ["alignContent" ==> "baseline"]
+
+            test
+                "Align content space between"
+                [ AlignContent Flex.AlignContent.SpaceBetween]
+                ["alignContent" ==> "space-between"]
+
+            test
+                "Align content space around"
+                [ AlignContent Flex.AlignContent.SpaceAround]
+                ["alignContent" ==> "space-around"]
+
+            test
+                "Align content space evenly"
+                [ AlignContent Flex.AlignContent.SpaceEvenly]
+                ["alignContent" ==> "space-evenly"]
+
+            test
+                "Align content right"
+                [ AlignContent Flex.AlignContent.Right]
+                ["alignContent" ==> "right"]
+
+            test
+                "Align content safe"
+                [ AlignContent Flex.AlignContent.Safe]
+                ["alignContent" ==> "safe"]
+
+            test
+                "Align content unsafe"
+                [ AlignContent Flex.AlignContent.Unsafe]
+                ["alignContent" ==> "unsafe"]
+
+            test
+                "Align content inherit"
+                [ AlignContent Inherit]
+                ["alignContent" ==> "inherit"]
+
+            test
+                "Align content initial"
+                [ AlignContent Initial]
+                ["alignContent" ==> "initial"]
+
+            test
+                "Align content unset"
+                [ AlignContent Unset]
+                ["alignContent" ==> "unset"]
+
+            test
+                "Order value"
+                [ Order (Flex.Order 1) ]
+                ["order" ==> "1"]
+
+            test
+                "Order inherit"
+                [ Order Inherit]
+                ["order" ==> "inherit"]
+
+            test
+                "Order initial"
+                [ Order Initial]
+                ["order" ==> "initial"]
+
+            test
+                "Order unset"
+                [ Order Unset]
+                ["order" ==> "unset"]
+
+            test
+                "Flex grow value"
+                [ FlexGrow (Flex.Grow 1.5) ]
+                ["flexGrow" ==> "1.5"]
+
+            test
+                "FlexGrow inherit"
+                [ FlexGrow Inherit]
+                ["flexGrow" ==> "inherit"]
+
+            test
+                "FlexGrow initial"
+                [ FlexGrow Initial]
+                ["flexGrow" ==> "initial"]
+
+            test
+                "FlexGrow unset"
+                [ FlexGrow Unset]
+                ["flexGrow" ==> "unset"]
+
+            test
+                "FlexShrink value"
+                [ FlexShrink (Flex.Shrink 1.5) ]
+                ["flexShrink" ==> "1.5"]
+
+            test
+                "FlexShrink inherit"
+                [ FlexShrink Inherit]
+                ["flexShrink" ==> "inherit"]
+
+            test
+                "FlexShrink initial"
+                [ FlexShrink Initial]
+                ["flexShrink" ==> "initial"]
+
+            test
+                "FlexShrink unset"
+                [ FlexShrink Unset]
+                ["flexShrink" ==> "unset"]
         ]
+
+let positionTests =
+    testList "Position"
+        [
+                test
+                    "Vertical align baseline"
+                    [ VerticalAlign (VerticalAlign.Baseline)]
+                    ["verticalAlign" ==> "baseline"]
+
+                test
+                    "Vertical align sub"
+                    [ VerticalAlign (VerticalAlign.Sub)]
+                    ["verticalAlign" ==> "sub"]
+
+                test
+                    "Vertical align super"
+                    [ VerticalAlign (VerticalAlign.Super)]
+                    ["verticalAlign" ==> "super"]
+
+                test
+                    "Vertical align text top"
+                    [ VerticalAlign (VerticalAlign.TextTop)]
+                    ["verticalAlign" ==> "text-top"]
+
+                test
+                    "Vertical align text bottom"
+                    [ VerticalAlign (VerticalAlign.TextBottom)]
+                    ["verticalAlign" ==> "text-bottom"]
+
+                test
+                    "Vertical align middle"
+                    [ VerticalAlign (VerticalAlign.Middle)]
+                    ["verticalAlign" ==> "middle"]
+
+                test
+                    "Vertical align top"
+                    [ VerticalAlign (VerticalAlign.Top)]
+                    ["verticalAlign" ==> "top"]
+
+                test
+                    "Vertical align bottom"
+                    [ VerticalAlign (VerticalAlign.Bottom)]
+                    ["verticalAlign" ==> "bottom"]
+
+                test
+                    "Vertical align px"
+                    [ VerticalAlign (px 10)]
+                    ["verticalAlign" ==> "10px"]
+
+                test
+                    "Vertical align percent"
+                    [ VerticalAlign (pct 100)]
+                    ["verticalAlign" ==> "100%"]
+
+                test
+                    "Vertical align  inherit"
+                    [ VerticalAlign Inherit ]
+                    ["verticalAlign" ==> "inherit"]
+
+                test
+                    "Vertical align initial"
+                    [ VerticalAlign Initial ]
+                    ["verticalAlign" ==> "initial"]
+
+                test
+                    "Vertical align unset"
+                    [ VerticalAlign Unset ]
+                    ["verticalAlign" ==> "unset"]
+
+                test
+                    "Position static"
+                    [ Position Position.Static]
+                    ["position" ==> "static"]
+
+                test
+                    "Position relative"
+                    [ Position Position.Relative]
+                    ["position" ==> "relative"]
+
+                test
+                    "Position absolute"
+                    [ Position Position.Absolute]
+                    ["position" ==> "absolute"]
+
+                test
+                    "Position sticky"
+                    [ Position Position.Sticky]
+                    ["position" ==> "sticky"]
+
+                test
+                    "Position fixed"
+                    [ Position Position.Fixed]
+                    ["position" ==> "fixed"]
+        ]
+
+let visibilityTests =
+    testList "Visibility" [
+            test
+                "Visibility hidden"
+                [ Visibility Visibility.Hidden]
+                ["visibility" ==> "hidden"]
+
+            test
+                "Visibility collapse"
+                [ Visibility Visibility.Collapse]
+                ["visibility" ==> "collapse"]
+
+            test
+                "Visibility visible"
+                [ Visibility Visibility.Visible]
+                ["visibility" ==> "visible"]
+
+            test
+                "Opacity 1"
+                [ Opacity (Opacity.Opacity 1.0) ]
+                ["opacity" ==> "1"]
+
+            test
+                "Opacity 0"
+                [ Opacity (Opacity.Opacity 0.0)]
+                ["opacity" ==> "0"]
+
+            test
+                "Opacity 50%"
+                [ Opacity (Opacity.Opacity 0.5)]
+                ["opacity" ==> "0.5"]
+
+            test
+                "Opacity -10 should be 0"
+                [ Opacity (Opacity.Opacity -10.0)]
+                ["opacity" ==> "0"]
+
+            test
+                "Opacity 10 should be 1"
+                [ Opacity (Opacity.Opacity 10.0)]
+                ["opacity" ==> "1"]
+
+            test
+                "Opacity 1.5 should be 1"
+                [ Opacity (Opacity.Opacity 1.5)]
+                ["opacity" ==> "1"]
+
+    ]
 
 let tests =
         testList "Fss Tests" [
+            visibilityTests
+            positionTests
             flexTests
             displayTests
             perspectiveTests
             contentSizeTests
             borderTests
-            fontTests 
-            colorTests 
+            fontTests
+            colorTests
             backgroundTests
         ]
-        
+
 Mocha.runTests tests |> ignore
 
 (*
         test "Flexbox"
             [
 
-               
-                (fss [ AlignSelf AlignSelf.Auto]), ["align-self", "auto"]
-                (fss [ AlignSelf AlignSelf.FlexStart]), ["align-self", "flex-start"]
-                (fss [ AlignSelf AlignSelf.FlexEnd]), ["align-self", "flex-end"]
-                (fss [ AlignSelf AlignSelf.Center]), ["align-self", "center"]
-                (fss [ AlignSelf AlignSelf.Baseline]), ["align-self", "baseline"]
-                (fss [ AlignSelf AlignSelf.Stretch]), ["align-self", "stretch"]
 
-                (fss [ AlignItems AlignItems.FlexStart]), ["align-items", "flex-start"]
-                (fss [ AlignItems AlignItems.FlexEnd]), ["align-items", "flex-end"]
-                (fss [ AlignItems AlignItems.Center]), ["align-items", "center"]
-                (fss [ AlignItems AlignItems.Baseline]), ["align-items", "baseline"]
-                (fss [ AlignItems AlignItems.Stretch]), ["align-items", "stretch"]
 
-                (fss [ AlignContent FlexStart]), ["align-content", "flex-start"]
-                (fss [ AlignContent FlexEnd]), ["align-content", "flex-end"]
-                (fss [ AlignContent AlignContent.Center]), ["align-content", "center"]
-                (fss [ AlignContent SpaceBetween]), ["align-content", "space-between"]
-                (fss [ AlignContent SpaceAround]), ["align-content", "space-around"]
-                (fss [ AlignContent Stretch]), ["align-content", "stretch"]
 
-                (fss [ CSSProperty.Order (Order 1) ]), ["order", "1"]
 
-                (fss [ FlexGrow (Grow 1) ]), ["flex-grow", "1"]
-
-                (fss [ FlexShrink (Shrink 1) ]), ["flex-shrink", "1"]
-
-                (fss [ VerticalAlign (VerticalAlign.Baseline)]), ["vertical-align", "baseline"]
-                (fss [ VerticalAlign (VerticalAlign.Sub)]), ["vertical-align", "sub"]
-                (fss [ VerticalAlign (VerticalAlign.Super)]), ["vertical-align", "super"]
-                (fss [ VerticalAlign (VerticalAlign.TextTop)]), ["vertical-align", "text-top"]
-                (fss [ VerticalAlign (VerticalAlign.TextBottom)]), ["vertical-align", "text-bottom"]
-                (fss [ VerticalAlign (VerticalAlign.Middle)]), ["vertical-align", "middle"]
-                (fss [ VerticalAlign (VerticalAlign.Top)]), ["vertical-align", "top"]
-                (fss [ VerticalAlign (VerticalAlign.Bottom)]), ["vertical-align", "bottom"]
-                (fss [ VerticalAlign (px 10)]), ["vertical-align", "10px"]
-                (fss [ VerticalAlign (pct 100)]), ["vertical-align", "100%"]
-
-                (fss [ Visibility Visibility.Hidden]), ["visibility", "hidden"]
-                (fss [ Visibility Visibility.Collapse]), ["visibility", "collapse"]
-                (fss [ Visibility Visibility.Visible]), ["visibility", "visible"]
-
-                (fss [ Opacity (Opacity.Opacity 1.0)]), ["opacity", "1"]
-                (fss [ Opacity (Opacity.Opacity 0.0)]), ["opacity", "0"]
-                (fss [ Opacity (Opacity.Opacity 0.5)]), ["opacity", "0.5"]
-                (fss [ Opacity (Opacity.Opacity -10.0)]), ["opacity", "0"]
-                (fss [ Opacity (Opacity.Opacity 10.0)]), ["opacity", "1"]
-                (fss [ Opacity (Opacity.Opacity 1.5)]), ["opacity", "1"]
-
-                (fss [ Position Position.Static]), ["position", "static"]
-                (fss [ Position Position.Relative]), ["position", "relative"]
-                (fss [ Position Position.Absolute]), ["position", "absolute"]
-                (fss [ Position Position.Sticky]), ["position", "sticky"]
-                (fss [ Position Position.Fixed]), ["position", "fixed"]
 
             ]
 

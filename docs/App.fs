@@ -1340,7 +1340,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor Color.white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (Flex.Grow 1)
+                CSSProperty.FlexGrow (Flex.Grow 1.)
                 Height (px 75)
 
             ]
@@ -1351,7 +1351,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor Color.white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (Flex.Grow 2)
+                CSSProperty.FlexGrow (Flex.Grow 2.)
                 Height (px 75)
             ]
 
@@ -1380,7 +1380,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor Color.white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (Flex.Grow 1)
+                CSSProperty.FlexGrow (Flex.Grow 1.)
                 Height (px 75)
 
             ]
@@ -1391,7 +1391,7 @@ let FlexBoxExamples model dispatch =
                 CSSProperty.Margins [px 0; px 10]
                 BackgroundColor Color.white
                 CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexShrink (Flex.Shrink 2)
+                CSSProperty.FlexShrink (Flex.Shrink 2.)
                 Height (px 75)
             ]
 
