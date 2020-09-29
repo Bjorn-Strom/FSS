@@ -146,8 +146,8 @@ module Value =
         | AnimationNames           of IAnimationName list
         | AnimationDuration        of Time
         | AnimationDurations       of Time list
-        | AnimationTimingFunction  of Timing
-        | AnimationTimingFunctions of Timing list
+        | AnimationTimingFunction  of IAnimationTimingFunction
+        | AnimationTimingFunctions of IAnimationTimingFunction list
         | AnimationDelay           of Time
         | AnimationDelays          of Time list
         | AnimationIterationCount  of IterationCount
@@ -303,8 +303,8 @@ module Value =
                 | AnimationNames           ns  -> Property.value animationName           ==> combineComma AnimationValue.name ns
                 | AnimationDuration        d   -> Property.value animationDuration       ==> Units.Time.value d
                 | AnimationDurations       ds  -> Property.value animationDuration       ==> combineComma Units.Time.value ds
-                | AnimationTimingFunction  t   -> Property.value animationTimingFunction ==> AnimationValue.timing t
-                | AnimationTimingFunctions ts  -> Property.value animationTimingFunction ==> combineComma AnimationValue.timing ts
+                | AnimationTimingFunction  t   -> Property.value animationTimingFunction ==> AnimationValue.timingFunction t
+                | AnimationTimingFunctions ts  -> Property.value animationTimingFunction ==> combineComma AnimationValue.timingFunction ts
                 | AnimationDelay           d   -> Property.value animationDelay          ==> Units.Time.value d
                 | AnimationDelays          ds  -> Property.value animationDelay          ==> combineComma Units.Time.value ds
                 | AnimationIterationCount  i   -> Property.value animationIterationCount ==> AnimationValue.iterationCount i
@@ -325,7 +325,7 @@ module Value =
                 | TransitionDelay          t  -> Property.value transitionDelay          ==> Units.Time.value t
                 | TransitionDuration       t  -> Property.value transitionDuration       ==> Units.Time.value t
                 | TransitionProperty       t  -> Property.value transitionProperty       ==> Property.value t
-                | TransitionTimingFunction t  -> Property.value transitionTimingFunction ==> AnimationValue.timing t
+                | TransitionTimingFunction t  -> Property.value transitionTimingFunction ==> AnimationValue.timingFunction t
 
                 | Cursor c -> Property.value cursor ==> Cursor.value c
         )

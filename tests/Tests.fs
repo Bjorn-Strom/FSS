@@ -2417,6 +2417,211 @@ let animationTests =
                 "Animation duration multiple"
                 [ AnimationDurations [ sec 10.0; ms 500.0 ] ]
                 [ "animationDuration" ==> "10.00s, 500.00ms" ]
+
+            test
+                "Animation timing function ease"
+                [ AnimationTimingFunction Animation.Ease ]
+                ["animationTimingFunction" ==> "ease"]
+
+            test
+                "Animation timing function ease in"
+                [ AnimationTimingFunction Animation.EaseIn ]
+                ["animationTimingFunction" ==> "ease-in"]
+
+            test
+                "Animation timing function ease out"
+                [ AnimationTimingFunction Animation.EaseOut ]
+                ["animationTimingFunction" ==> "ease-out"]
+
+            test
+                "Animation timing function ease in out"
+                [ AnimationTimingFunction Animation.EaseInOut ]
+                ["animationTimingFunction" ==> "ease-in-out"]
+
+            test
+                "Animation timing function linear"
+                [ AnimationTimingFunction Animation.Linear ]
+                ["animationTimingFunction" ==> "linear"]
+
+            test
+                "Animation timing function step start"
+                [ AnimationTimingFunction Animation.StepStart ]
+                ["animationTimingFunction" ==> "step-start"]
+
+            test
+                "Animation timing function step end"
+                [ AnimationTimingFunction Animation.StepEnd ]
+                ["animationTimingFunction" ==> "step-end"]
+
+            test
+                "Animation timing function cubic bezier"
+                [ AnimationTimingFunction (Animation.CubicBezier(0.0, 0.47, 0.32, 1.97)) ]
+                ["animationTimingFunction" ==> "cubic-bezier(0.00, 0.47, 0.32, 1.97)"]
+
+            test
+                "Animation timing function  step"
+                [ AnimationTimingFunction (Animation.Step 5) ]
+                ["animationTimingFunction" ==> "steps(5)"]
+
+            test
+                "Animation timing function  step jump start"
+                [ AnimationTimingFunction (Animation.Steps(5, Animation.JumpStart)) ]
+                ["animationTimingFunction" ==> "steps(5, jump-start)"]
+
+            test
+                "Animation timing function step jump end"
+                [ AnimationTimingFunction (Animation.Steps(5, Animation.JumpEnd)) ]
+                ["animationTimingFunction" ==> "steps(5, jump-end)"]
+
+            test
+                "Animation timing function step jump none"
+                [ AnimationTimingFunction (Animation.Steps(5, Animation.JumpNone)) ]
+                ["animationTimingFunction" ==> "steps(5, jump-none)"]
+
+            test
+                "Animation timing function step jump both"
+                [ AnimationTimingFunction (Animation.Steps(5, Animation.JumpBoth)) ]
+                ["animationTimingFunction" ==> "steps(5, jump-both)"]
+
+            test
+                "Animation timing function step start"
+                [ AnimationTimingFunction (Animation.Steps(5, Animation.Start)) ]
+                ["animationTimingFunction" ==> "steps(5, start)"]
+
+            test
+                "Animation timing function step end"
+                [ AnimationTimingFunction (Animation.Steps(5, Animation.End)) ]
+                ["animationTimingFunction" ==> "steps(5, end)"]
+
+            test
+                "Animation timing function inherit"
+                [ AnimationTimingFunction Inherit ]
+                ["animationTimingFunction" ==> "inherit"]
+
+            test
+                "Animation timing function initial"
+                [ AnimationTimingFunction Initial ]
+                ["animationTimingFunction" ==> "initial"]
+
+            test
+                "Animation timing function unset"
+                [ AnimationTimingFunction Unset ]
+                ["animationTimingFunction" ==> "unset"]
+
+            test
+                "Animation delay sec"
+                [ AnimationDelay (sec 10.0) ]
+                ["animationDelay" ==> "10.00s"]
+            test
+                "Animation delay multiple"
+                [ AnimationDelays [sec 10.0; ms 500.0] ]
+                ["animationDelay" ==> "10.00s, 500.00ms"]
+
+            test
+                "Animation iteration count infininte"
+                [ AnimationIterationCount Animation.Infinite ]
+                ["animationIterationCount" ==> "infinite"]
+
+            test
+                "Animation iteration count value"
+                [ AnimationIterationCount (Animation.Value 5) ]
+                ["animationIterationCount" ==> "5"]
+
+            test
+                "Animation iteration count multiple"
+                [ AnimationIterationCounts [Animation.Infinite; Animation.Value 5] ]
+                ["animationIterationCount" ==> "infinite, 5"]
+
+            test
+                "Animation direction normal"
+                [ AnimationDirection Animation.Normal ]
+                ["animationDirection" ==> "normal"]
+
+            test
+                "Animation direction reverse"
+                [ AnimationDirection Animation.Reverse ]
+                ["animationDirection" ==> "reverse"]
+
+            test
+                "Animation direction alternate"
+                [ AnimationDirection Animation.Alternate ]
+                ["animationDirection" ==> "alternate"]
+
+            test
+                "Animation direction alternate reverse"
+                [ AnimationDirection Animation.AlternateReverse ]
+                ["animationDirection" ==> "alternate-reverse"]
+
+            test
+                "Animation direction inherit"
+                [ AnimationDirection Inherit ]
+                ["animationDirection" ==> "inherit"]
+
+            test
+                "Animation direction initial"
+                [ AnimationDirection Initial ]
+                ["animationDirection" ==> "initial"]
+
+            test
+                "Animation direction unset"
+                [ AnimationDirection Unset ]
+                ["animationDirection" ==> "unset"]
+
+            test
+                "Animation fill mode forwards"
+                [ AnimationFillMode Animation.Forwards ]
+                ["animationFillMode" ==> "forwards"]
+
+            test
+                "Animation fill mode backwards"
+                [ AnimationFillMode Animation.Backwards ]
+                ["animationFillMode" ==> "backwards"]
+
+            test
+                "Animation fill mode both"
+                [ AnimationFillMode Animation.Both ]
+                ["animationFillMode" ==> "both"]
+
+            test
+                "Animation fill mode none"
+                [ AnimationFillMode Animation.None ]
+                ["animationFillMode" ==> "none"]
+
+            test
+                "Animation fill mode multiple"
+                [ AnimationFillModes [ Animation.Forwards; Animation.Backwards ]]
+                ["animationFillMode" ==> "forwards, backwards"]
+
+            test
+                "Animation play state running"
+                [ AnimationPlayState Animation.Running ]
+                ["animationPlayState" ==> "running"]
+
+            test
+                "Animation play state paused"
+                [ AnimationPlayState Animation.Paused ]
+                ["animationPlayState"  ==> "paused"]
+
+            test
+                "Animation play state"
+                [ AnimationPlayStates [ Animation.Running; Animation.Paused] ]
+                ["animationPlayState"==> "running, paused"]
+
+            test
+                "Animation play state inherit"
+                [ AnimationPlayState Inherit ]
+                ["animationPlayState" ==> "inherit"]
+
+            test
+                "Animation play state initial"
+                [ AnimationPlayState Initial ]
+                ["animationPlayState"  ==> "initial"]
+
+            test
+                "Animation play state unset"
+                [ AnimationPlayState Unset ]
+                ["animationPlayState" ==> "unset"]
+
         ]
 
 
@@ -2440,66 +2645,6 @@ let tests =
 Mocha.runTests tests |> ignore
 
 (*
-        test "Animation"
-            [
-                (fss [ AnimationTimingFunction Ease ]), ["animation-timing-function", "ease"]
-                (fss [ AnimationTimingFunction EaseIn ]), ["animation-timing-function", "ease-in"]
-                (fss [ AnimationTimingFunction EaseOut ]), ["animation-timing-function", "ease-out"]
-                (fss [ AnimationTimingFunction EaseInOut ]), ["animation-timing-function", "ease-in-out"]
-                (fss [ AnimationTimingFunction Linear ]), ["animation-timing-function", "linear"]
-                (fss [ AnimationTimingFunction StepStart ]), ["animation-timing-function", "steps(1, start)"]
-                (fss [ AnimationTimingFunction StepEnd ]), ["animation-timing-function", "steps(1)"]
-                (fss [ AnimationTimingFunction <| CubicBezier(0.0, 0.47, 0.32, 1.97) ]), ["animation-timing-function", "cubic-bezier(0, 0.5, 0.3, 2)"]
-                (fss [ AnimationTimingFunction (Step 5) ]), ["animation-timing-function", "steps(5)"]
-                (fss [ AnimationTimingFunction <| Steps(5, JumpStart) ]), ["animation-timing-function", "steps(5, jump-start)"]
-                (fss [ AnimationTimingFunction <| Steps(5, JumpEnd) ]), ["animation-timing-function", "steps(5)"]
-                (fss [ AnimationTimingFunction <| Steps(5, JumpNone) ]), ["animation-timing-function", "steps(5, jump-none)"]
-                (fss [ AnimationTimingFunction <| Steps(5, JumpBoth) ]), ["animation-timing-function", "steps(5, jump-both)"]
-                (fss [ AnimationTimingFunction <| Steps(5, Start) ]), ["animation-timing-function", "steps(5, start)"]
-                (fss [ AnimationTimingFunction <| Steps(5, End) ]), ["animation-timing-function", "steps(5)"]
-
-                (fss [ AnimationDelay (sec 10.0) ]), ["animation-delay", "10s"]
-                (fss [ AnimationDelays [sec 10.0; ms 500.0] ]), ["animation-delay", "10s, 0.5s"]
-
-                (fss [ AnimationIterationCount Infinite ]), ["animation-iteration-count", "infinite"]
-                (fss [ AnimationIterationCount (Value 5) ]), ["animation-iteration-count", "5"]
-                (fss [ AnimationIterationCounts [Infinite; Value 5] ]), ["animation-iteration-count", "infinite, 5"]
-
-                (fss [ AnimationDirection Normal ]), ["animation-direction", "normal"]
-                (fss [ AnimationDirection Reverse ]), ["animation-direction", "reverse"]
-                (fss [ AnimationDirection Alternate ]), ["animation-direction", "alternate"]
-                (fss [ AnimationDirection AlternateReverse ]), ["animation-direction", "alternate-reverse"]
-
-                (fss [ AnimationFillMode Forwards ]), ["animation-fill-mode", "forwards"]
-                (fss [ AnimationFillMode Backwards ]), ["animation-fill-mode", "backwards"]
-                (fss [ AnimationFillMode Both ]), ["animation-fill-mode", "both"]
-                (fss [ AnimationFillMode FillMode.None ]), ["animation-fill-mode", "none"]
-
-                (fss [ AnimationPlayState Running ]), ["animation-play-state", "running"]
-                (fss [ AnimationPlayState Paused ]), ["animation-play-state", "paused"]
-                (fss [ AnimationPlayStates [ Running; Paused] ]), ["animation-play-state", "running, paused"]
-
-                (fss [
-                    Animations
-                        [
-                            [animationSample; sec 10.0; Ease; ms 0.5; Infinite; Both; Alternate; Running]
-                            [animationSample; sec 1.0; Linear; sec 10.0; IterationCount.Value 3; Both; Reverse; Paused]
-                        ]
-                ]),
-                    [
-                        "animation-name", (sprintf "%A, %A" animationSample animationSample)
-                        "animation-duration", "10s, 1s"
-                        "animation-timing-function", "ease, linear"
-                        "animation-delay", "0.0005s, 10s"
-                        "animation-delay", "0.0005s, 10s"
-                        "animation-iteration-count", "infinite, 3"
-                        "animation-fill-mode", "both, both"
-                        "animation-direction", "alternate, reverse"
-                        "animation-play-state", "running, paused"
-                    ]
-
-            ]
-
         test "Transform"
             [
                 (fss [Transform (Matrix(0.1, 0.2, 0.3,0.4, 0.5, 0.6)) ]), ["transform", "matrix(0.1, 0.2, 0.3, 0.4, 0.5, 0.6)"]

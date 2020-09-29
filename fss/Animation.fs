@@ -14,7 +14,6 @@ module Animation =
         | JumpBoth
         | Start
         | End
-        interface IAnimation
 
     type Timing =
         | Ease
@@ -27,13 +26,12 @@ module Animation =
         | CubicBezier of (float * float * float * float)
         | Step of int
         | Steps of int * Steps
-        interface IAnimation
+        interface IAnimationTimingFunction
 
     // Animation count
     type IterationCount =
         | Infinite
         | Value of int
-        interface IAnimation
 
     // Animation Direction
     type Direction =
@@ -41,7 +39,6 @@ module Animation =
         | Reverse
         | Alternate
         | AlternateReverse
-        interface IAnimation
         interface IAnimationDirection
 
     // Animation fill mode
@@ -50,7 +47,6 @@ module Animation =
         | Backwards
         | Both
         | None
-        interface IAnimation
 
     let private fillModeValue (v: FillMode): string = duToString v
 
@@ -58,27 +54,26 @@ module Animation =
     type PlayState =
         | Running
         | Paused
-        interface IAnimation
         interface IAnimationPlayState
 
 module AnimationValue =
     open Animation
 
     let private cubicBezier (a: float, b: float, c: float, d: float) =
-        sprintf "cubic-bezier(%.1f, %.1f, %.1f, %.1f)" a b c d
+        sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" a b c d
 
-    let timing (v: Timing): string =
+    let timingFunction (v: IAnimationTimingFunction): string =
+        let stringifyTiming (timing: Timing): string =
+            match timing with
+                | CubicBezier (a, b, c, d) -> cubicBezier(a, b, c, d)
+                | Step n -> sprintf "steps(%d)" n
+                | Steps (n, direction) -> sprintf "steps(%d, %s)" n (duToKebab direction)
+                | _ -> duToKebab timing
+
         match v with
-            | Ease -> "ease"
-            | EaseIn -> "ease-in"
-            | EaseOut -> "ease-out"
-            | EaseInOut -> "ease-in-out"
-            | Linear -> "linear"
-            | StepStart -> "step-start"
-            | StepEnd -> "step-end"
-            | CubicBezier (a, b, c, d) -> cubicBezier(a, b, c, d)
-            | Step n -> sprintf "steps(%d)" n
-            | Steps (n, direction) -> sprintf "steps(%d, %s)" n (duToKebab direction)
+            | :? Global as g -> GlobalValue.globalValue g
+            | :? Timing as t -> stringifyTiming t
+            | _              -> "Unknown animation timing function"
 
     let iterationCount (v: IterationCount): string =
         match v with
@@ -91,12 +86,12 @@ module AnimationValue =
             | :? Direction as d -> duToKebab d
             | _              -> "Unknown animation direction"
 
-    let fillMode (v: FillMode): string = duToString v
+    let fillMode (v: FillMode): string = duToLowercase v
 
     let playState (v: IAnimationPlayState): string =
         match v with
-            | :? Global as g    -> GlobalValue.globalValue g
-            | :? PlayState as p -> duToString p
+            | :? Global    as g -> GlobalValue.globalValue g
+            | :? PlayState as p -> duToLowercase p
             | _ -> "Unknown play state"
 
     let name (v: IAnimationName): string =

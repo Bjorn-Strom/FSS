@@ -89,6 +89,7 @@ module Global =
         interface IAnimationDirection
         interface IAnimationPlayState
         interface IAnimationName
+        interface IAnimationTimingFunction
         interface IPerspective
 
 module GlobalValue =

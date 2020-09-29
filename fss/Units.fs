@@ -4,7 +4,7 @@ open Fss
 open Types
 
 module Percent =
-    type Percent = 
+    type Percent =
         | Percent of string
         interface IFontSize
         interface IFontStretch
@@ -64,8 +64,8 @@ module Size =
         interface ITransformOrigin
         interface IPerspective
 
-    let private sizeValue (u: Size) = 
-        match u with 
+    let private sizeValue (u: Size) =
+        match u with
             | Px p -> p
             | In i -> i
             | Cm c -> c
@@ -82,7 +82,7 @@ module Size =
             | VMin v -> v
 
     let value (v: ISize): string =
-        match v with 
+        match v with
             | :? Percent as p -> Percent.value p
             | :? Size    as s -> sizeValue s
             | _               -> "Unkown size"
@@ -99,8 +99,8 @@ module Angle =
         interface IRadialGradient
         interface IFontStyle
 
-    let value (u: Angle) = 
-        match u with 
+    let value (u: Angle) =
+        match u with
             | Deg d -> d
             | Grad g -> g
             | Rad r -> r
@@ -109,7 +109,7 @@ module Angle =
 module Resolution =
     type Resolution =
         | Dpi of string
-    
+
     let value (r: Resolution) =
         match r with
             | Dpi d -> sprintf "%sdpi" d
@@ -118,9 +118,8 @@ module Time =
     type Time =
         | Sec of string
         | Ms of string
-        interface IAnimation
 
     let value (v: Time) =
-        match v with 
+        match v with
             | Sec s -> s
             | Ms ms -> ms
