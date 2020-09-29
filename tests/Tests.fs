@@ -2624,9 +2624,154 @@ let animationTests =
 
         ]
 
+let transformTests =
+    testList "transform"
+        [
+            test
+                "Transform none"
+                [ Transform Transform.None ]
+                [ "transform" ==> "none" ]
+
+            test
+                "Transform matrix"
+                [ Transform (Transform.Matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)) ]
+                [ "transform" ==> "matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)" ]
+
+            test
+                "Transform matrix3d"
+                [ Transform (Transform.Matrix3D(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0., 0., 0., 1.)) ]
+                [ "transform" ==> "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0, 0.0, 0.0, 1.0)" ]
+
+            test
+                "Transform perspective"
+                [ Transform (Transform.Perspective(px 17)) ]
+                [ "transform" ==> "perspective(17px)" ]
+
+            test
+                "Transform rotate"
+                [ Transform (Transform.Rotate(turn 0.5)) ]
+                [ "transform" ==> "rotate(0.50turn)" ]
+
+            test
+                "Transform rotate3d"
+                [ Transform (Transform.Rotate3D(1.0, 2.0, 3.0, (deg 10.0))) ]
+                [ "transform" ==> "rotate3d(1.0, 2.0, 3.0, 10.00deg)" ]
+
+            test
+                "Transform rotate x"
+                [ Transform (Transform.RotateX(deg 10.0)) ]
+                [ "transform" ==> "rotateX(10.00deg)" ]
+
+            test
+                "Transform rotate y"
+                [ Transform (Transform.RotateY(grad 360.0)) ]
+                [ "transform" ==> "rotateY(360.00grad)" ]
+
+            test
+                "Transform rotate y"
+                [ Transform (Transform.RotateZ(rad 1.5)) ]
+                [ "transform" ==> "rotateZ(1.5000rad)" ]
+
+            test
+                "Transform translate"
+                [ Transform (Transform.Translate(px 12)) ]
+                [ "transform" ==> "translate(12px)" ]
+
+            test
+                "Transform translate2"
+                [ Transform (Transform.Translate2((px 12), (pct 50))) ]
+                [ "transform" ==> "translate(12px, 50%)" ]
+
+            test
+                "Transform translate3d"
+                [ Transform (Transform.Translate3D((px 12), (pct 50), (em 3.0))) ]
+                [ "transform" ==> "translate3d(12px, 50%, 3.0em)" ]
+
+            test
+                "Transform translate x"
+                [ Transform (Transform.TranslateX(px 10)) ]
+                [ "transform" ==> "translateX(10px)" ]
+
+            test
+                "Transform translate y"
+                [ Transform (Transform.TranslateY(em 3.0)) ]
+                [ "transform" ==> "translateY(3.0em)" ]
+
+            test
+                "Transform translate z"
+                [ Transform (Transform.TranslateZ(rem 3.0)) ]
+                [ "transform" ==> "translateZ(3.0rem)" ]
+
+            test
+                "Transform scale"
+                [ Transform (Transform.Scale(0.5)) ]
+                [ "transform" ==> "scale(0.50)" ]
+
+            test
+                "Transform scale2"
+                [ Transform (Transform.Scale2(0.5, 0.5)) ]
+                [ "transform" ==> "scale(0.50, 0.50)" ]
+
+            test
+                "Transform translate3d"
+                [ Transform (Transform.Scale3D(0.1, 0.2, 0.3)) ]
+                [ "transform" ==> "scale3d(0.10, 0.20, 0.30)" ]
+
+            test
+                "Transform scale x"
+                [ Transform (Transform.ScaleX(0.9)) ]
+                [ "transform" ==> "scaleX(0.90)" ]
+
+            test
+                "Transform scale y"
+                [ Transform (Transform.ScaleY(2.3)) ]
+                [ "transform" ==> "scaleY(2.30)" ]
+
+            test
+                "Transform scale z"
+                [ Transform (Transform.ScaleZ(3.4)) ]
+                [ "transform" ==> "scaleZ(3.40)" ]
+
+            test
+                "Transform skew"
+                [ Transform (Transform.Skew(deg 270.)) ]
+                [ "transform" ==> "skew(270.00deg)" ]
+
+            test
+                "Transform scale2"
+                [ Transform (Transform.Skew2((turn 0.5), (deg 10.0))) ]
+                [ "transform" ==> "skew(0.50turn, 10.00deg)" ]
+
+            test
+                "Transform skew x"
+                [ Transform (Transform.SkewX(rad 9.)) ]
+                [ "transform" ==> "skewX(9.0000rad)" ]
+
+            test
+                "Transform skew y"
+                [ Transform (Transform.SkewY(deg 50.0)) ]
+                [ "transform" ==> "skewY(50.00deg)" ]
+
+
+            test
+                "Transform inherit"
+                [ Transform Inherit ]
+                [ "transform" ==> "inherit" ]
+
+            test
+                "Transform initial"
+                [ Transform Initial ]
+                [ "transform" ==> "initial" ]
+
+            test
+                "Transform unset"
+                [ Transform Unset ]
+                [ "transform" ==> "unset" ]
+        ]
 
 let tests =
         testList "Fss Tests" [
+            transformTests
             animationTests
             paddingTests
             marginTests
@@ -2645,323 +2790,287 @@ let tests =
 Mocha.runTests tests |> ignore
 
 (*
-        test "Transform"
+test "Transform"
+    [
+        (fss [TransformOrigin [ TransformOrigin.Left ]]), ["transform-origin", "0px 0px"]
+        (fss [TransformOrigin [ TransformOrigin.Center ]]), ["transform-origin", "200px 0px"]
+        (fss [TransformOrigin [ TransformOrigin.Right ]]), ["transform-origin", "400px 0px"]
+        (fss [TransformOrigin [ TransformOrigin.Top ]]), ["transform-origin", "200px 0px"]
+        (fss [TransformOrigin [ TransformOrigin.Bottom ]]), ["transform-origin", "200px 0px"]
+
+        (fss [TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left ]]), ["transform-origin", "0px 0px"]
+        (fss [TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left; px 100 ]]), ["transform-origin", "0px 0px 100px"]
+
+        (fss [TransformOrigin [ px 100 ]]), ["transform-origin", "100px 0px"]
+        (fss [TransformOrigin [ pct 50 ]]), ["transform-origin", "200px 0px"]
+    ]
+
+test "Transition"
+    [
+        (fss [ Transition (Transition1(backgroundColor, (sec 10.0))) ]),
             [
-                (fss [Transform (Matrix(0.1, 0.2, 0.3,0.4, 0.5, 0.6)) ]), ["transform", "matrix(0.1, 0.2, 0.3, 0.4, 0.5, 0.6)"]
-
-                (fss [Transform (
-                        Matrix3D(1, 0, 0, 0,
-                                 0, 1, 0, 0,
-                                 0, 0, 1, 0,
-                                 -50.0, -100.0, 0.0, 1.1)
-                    ) ]), ["transform", "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -50, -100, 0, 1.1)"]
-
-                (fss [Transform (Perspective(px 300)) ]), ["transform", "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.00333333, 0, 0, 0, 1)"]
-
-                (fss [Transform (Rotate(deg 45.0)) ]), ["transform", "matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)"]
-                (fss [Transform (Rotate3D(0.5, 1.5, 2.5, deg 45.0)) ]), ["transform", "matrix3d(0.715475, 0.622719, -0.316727, 0, -0.572509, 0.782422, 0.245049, 0, 0.40041, 0.0060028, 0.916316, 0, 0, 0, 0, 1)"]
-                (fss [Transform (RotateX(deg 45.0)) ]), ["transform", "matrix3d(1, 0, 0, 0, 0, 0.707107, 0.707107, 0, 0, -0.707107, 0.707107, 0, 0, 0, 0, 1)"]
-                (fss [Transform (RotateY(deg 45.0)) ]), ["transform", "matrix3d(0.707107, 0, -0.707107, 0, 0, 1, 0, 0, 0.707107, 0, 0.707107, 0, 0, 0, 0, 1)"]
-                (fss [Transform (RotateZ(deg 45.0)) ]), ["transform", "matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)"]
-
-                (fss [Transform (Translate(px 45)) ]), ["transform", "matrix(1, 0, 0, 1, 45, 0)"]
-                (fss [Transform (Translate2(px 50, px 50)) ]), ["transform", "matrix(1, 0, 0, 1, 50, 50)"]
-                (fss [Transform (Translate3D(px 50, px 50, px 50)) ]), ["transform", "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 50, 50, 50, 1)"]
-                (fss [Transform (TranslateX(px 10)) ]), ["transform", "matrix(1, 0, 0, 1, 10, 0)"]
-                (fss [Transform (TranslateY(px 20)) ]), ["transform", "matrix(1, 0, 0, 1, 0, 20)"]
-                (fss [Transform (TranslateZ(px 20)) ]), ["transform", "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 20, 1)"]
-
-                (fss [Transform (Scale 2.5) ]), ["transform", "matrix(2.5, 0, 0, 2.5, 0, 0)"]
-                (fss [Transform (Scale2(2.5, 2.5)) ]), ["transform", "matrix(2.5, 0, 0, 2.5, 0, 0)"]
-                (fss [Transform (Scale3D(2.5, 2.5, 2.5)) ]), ["transform", "matrix3d(2.5, 0, 0, 0, 0, 2.5, 0, 0, 0, 0, 2.5, 0, 0, 0, 0, 1)"]
-                (fss [Transform (ScaleX(3.5)) ]), ["transform", "matrix(3.5, 0, 0, 1, 0, 0)"]
-                (fss [Transform (ScaleY(4.5)) ]), ["transform", "matrix(1, 0, 0, 4.5, 0, 0)"]
-                (fss [Transform (ScaleZ(5.5)) ]), ["transform", "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 5.5, 0, 0, 0, 0, 1)"]
-
-                (fss [Transform (Skew (deg 45.0)) ]), ["transform", "matrix(1, 0, 1, 1, 0, 0)"]
-                (fss [Transform (Skew2 (deg 45.0, deg 20.0)) ]), ["transform", "matrix(1, 0.36397, 1, 1, 0, 0)"]
-                (fss [Transform (SkewX (deg 22.5)) ]), ["transform", "matrix(1, 0, 0.414214, 1, 0, 0)"]
-                (fss [Transform (SkewY (deg 3.5)) ]), ["transform", "matrix(1, 0.0611626, 0, 1, 0, 0)"]
-
-                (fss [TransformOrigin [ TransformOrigin.Left ]]), ["transform-origin", "0px 0px"]
-                (fss [TransformOrigin [ TransformOrigin.Center ]]), ["transform-origin", "200px 0px"]
-                (fss [TransformOrigin [ TransformOrigin.Right ]]), ["transform-origin", "400px 0px"]
-                (fss [TransformOrigin [ TransformOrigin.Top ]]), ["transform-origin", "200px 0px"]
-                (fss [TransformOrigin [ TransformOrigin.Bottom ]]), ["transform-origin", "200px 0px"]
-
-                (fss [TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left ]]), ["transform-origin", "0px 0px"]
-                (fss [TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left; px 100 ]]), ["transform-origin", "0px 0px 100px"]
-
-                (fss [TransformOrigin [ px 100 ]]), ["transform-origin", "100px 0px"]
-                (fss [TransformOrigin [ pct 50 ]]), ["transform-origin", "200px 0px"]
+                "transition-property", "background-color"
+                "transition-duration", "10s"
             ]
 
-        test "Transition"
+        (fss [ Transition (Transition2(backgroundColor, (sec 10.0), Ease)) ]),
             [
-                (fss [ Transition (Transition1(backgroundColor, (sec 10.0))) ]),
-                    [
-                        "transition-property", "background-color"
-                        "transition-duration", "10s"
-                    ]
-
-                (fss [ Transition (Transition2(backgroundColor, (sec 10.0), Ease)) ]),
-                    [
-                        "transition-property", "background-color"
-                        "transition-duration", "10s"
-                        "transition-timing-function", "ease"
-                    ]
-
-                (fss [ Transition (Transition3(backgroundColor, (sec 10.0), Ease, sec 2.0)) ]),
-                    [
-                        "transition-property", "background-color"
-                        "transition-duration", "10s"
-                        "transition-timing-function", "ease"
-                        "transition-delay", "2s"
-                    ]
-
-                (fss
-                    [
-                        Transitions
-                            [
-                                Transition1(backgroundColor, (sec 10.0))
-                                Transition2(color, (sec 20.0), EaseInOut)
-                                Transition3(width, (sec 30.0), EaseOut, (sec 20.0))
-                            ]
-                    ]),
-                    [
-                        "transition-property", "background-color, color, width"
-                        "transition-duration", "10s, 20s, 30s"
-                        "transition-timing-function", "ease, ease-in-out, ease-out"
-                        "transition-delay", "0s, 0s, 20s"
-                    ]
-
-                (fss [ TransitionDelay (sec 5.0)]), ["transition-delay", "5s"]
-
-                (fss [ TransitionDuration (sec 5.0)]), ["transition-duration", "5s"]
-
-                (fss [ TransitionProperty Property.Width]), ["transition-property", "width"]
-
-                (fss [ TransitionTimingFunction EaseInOut]), ["transition-timing-function", "ease-in-out"]
+                "transition-property", "background-color"
+                "transition-duration", "10s"
+                "transition-timing-function", "ease"
             ]
 
-        testCase "Descendants" <| fun _ ->
+        (fss [ Transition (Transition3(backgroundColor, (sec 10.0), Ease, sec 2.0)) ]),
+            [
+                "transition-property", "background-color"
+                "transition-duration", "10s"
+                "transition-timing-function", "ease"
+                "transition-delay", "2s"
+            ]
 
-            let style =
-                fss
+        (fss
+            [
+                Transitions
                     [
-                        ! P
-                            [
-                                BackgroundColor red
-                            ]
+                        Transition1(backgroundColor, (sec 10.0))
+                        Transition2(color, (sec 20.0), EaseInOut)
+                        Transition3(width, (sec 30.0), EaseOut, (sec 20.0))
                     ]
+            ]),
+            [
+                "transition-property", "background-color, color, width"
+                "transition-duration", "10s, 20s, 30s"
+                "transition-timing-function", "ease, ease-in-out, ease-out"
+                "transition-delay", "0s, 0s, 20s"
+            ]
 
-            RTL.render(
-                fragment []
+        (fss [ TransitionDelay (sec 5.0)]), ["transition-delay", "5s"]
+
+        (fss [ TransitionDuration (sec 5.0)]), ["transition-duration", "5s"]
+
+        (fss [ TransitionProperty Property.Width]), ["transition-property", "width"]
+
+        (fss [ TransitionTimingFunction EaseInOut]), ["transition-timing-function", "ease-in-out"]
+    ]
+
+testCase "Descendants" <| fun _ ->
+
+    let style =
+        fss
+            [
+                ! P
                     [
-                        div [ ClassName style] [
-                            p [ Id "p1" ] [ str "Apple"]
-                            div [] [ p [ Id "p2" ] [str "An apple a day keeps the doctor away"]]
-                            p [ Id "p3" ] [ str "Banana"]
-                            p [ Id "p4" ] [ str "Cherry"]
-                        ]
-                    ]) |> ignore
-
-            let p1 = getComputedCssById("p1")
-            let p2 = getComputedCssById("p2")
-            let p3 = getComputedCssById("p3")
-            let p4 = getComputedCssById("p4")
-            Expect.equal (getValue p1 "background-color") "rgb(255, 0, 0)" "Descendant selector"
-            Expect.equal (getValue p2 "background-color") "rgb(255, 0, 0)" "Descendant selector"
-            Expect.equal (getValue p3 "background-color") "rgb(255, 0, 0)" "Descendant selector"
-            Expect.equal (getValue p4 "background-color") "rgb(255, 0, 0)" "Descendant selector"
-            RTL.cleanup()
-
-        testCase "Child" <| fun _ ->
-
-            let style =
-                fss
-                    [
-                        !> P
-                            [
-                                BackgroundColor green
-                            ]
+                        BackgroundColor red
                     ]
+            ]
 
-            RTL.render(
-                fragment []
+    RTL.render(
+        fragment []
+            [
+                div [ ClassName style] [
+                    p [ Id "p1" ] [ str "Apple"]
+                    div [] [ p [ Id "p2" ] [str "An apple a day keeps the doctor away"]]
+                    p [ Id "p3" ] [ str "Banana"]
+                    p [ Id "p4" ] [ str "Cherry"]
+                ]
+            ]) |> ignore
+
+    let p1 = getComputedCssById("p1")
+    let p2 = getComputedCssById("p2")
+    let p3 = getComputedCssById("p3")
+    let p4 = getComputedCssById("p4")
+    Expect.equal (getValue p1 "background-color") "rgb(255, 0, 0)" "Descendant selector"
+    Expect.equal (getValue p2 "background-color") "rgb(255, 0, 0)" "Descendant selector"
+    Expect.equal (getValue p3 "background-color") "rgb(255, 0, 0)" "Descendant selector"
+    Expect.equal (getValue p4 "background-color") "rgb(255, 0, 0)" "Descendant selector"
+    RTL.cleanup()
+
+testCase "Child" <| fun _ ->
+
+    let style =
+        fss
+            [
+                !> P
                     [
-                        div [ ClassName style] [
-                            p [ Id "p1" ] [ str "Apple"]
-                            div [] [ p [] [str "An apple a day keeps the doctor away"]]
-                            p [ Id "p2" ] [ str "Banana"]
-                            p [ Id "p3" ] [ str "Cherry"]
-                        ]
-                    ]) |> ignore
-
-            let p1 = getComputedCssById("p1")
-            let p2 = getComputedCssById("p2")
-            let p3 = getComputedCssById("p3")
-            Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "Child selector"
-            Expect.equal (getValue p2 "background-color") "rgb(0, 128, 0)" "Child selector"
-            Expect.equal (getValue p3 "background-color") "rgb(0, 128, 0)" "Child selector"
-            RTL.cleanup()
-
-        testCase "Adjacent sibling" <| fun _ ->
-
-            let style =
-                fss
-                    [
-                        !> P
-                            [
-                                BackgroundColor green
-                            ]
+                        BackgroundColor green
                     ]
+            ]
 
-            RTL.render(
-                fragment []
+    RTL.render(
+        fragment []
+            [
+                div [ ClassName style] [
+                    p [ Id "p1" ] [ str "Apple"]
+                    div [] [ p [] [str "An apple a day keeps the doctor away"]]
+                    p [ Id "p2" ] [ str "Banana"]
+                    p [ Id "p3" ] [ str "Cherry"]
+                ]
+            ]) |> ignore
+
+    let p1 = getComputedCssById("p1")
+    let p2 = getComputedCssById("p2")
+    let p3 = getComputedCssById("p3")
+    Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "Child selector"
+    Expect.equal (getValue p2 "background-color") "rgb(0, 128, 0)" "Child selector"
+    Expect.equal (getValue p3 "background-color") "rgb(0, 128, 0)" "Child selector"
+    RTL.cleanup()
+
+testCase "Adjacent sibling" <| fun _ ->
+
+    let style =
+        fss
+            [
+                !> P
                     [
-                        div [ ClassName style] [
-                            p [ ] [ str "Apple"]
-                            div [] [ p [] [str "An apple a day keeps the doctor away"]]
-                            p [ Id "p1" ] [ str "Banana"]
-                            p [ ] [ str "Cherry"]
-                        ]
-                    ]) |> ignore
-
-            let p1 = getComputedCssById("p1")
-            Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "Adjacent sibling selector"
-            RTL.cleanup()
-
-        testCase "General sibling" <| fun _ ->
-            let style =
-                fss
-                    [
-                        !~ P
-                            [
-                                BackgroundColor green
-                            ]
+                        BackgroundColor green
                     ]
+            ]
 
-            RTL.render(
-                fragment []
+    RTL.render(
+        fragment []
+            [
+                div [ ClassName style] [
+                    p [ ] [ str "Apple"]
+                    div [] [ p [] [str "An apple a day keeps the doctor away"]]
+                    p [ Id "p1" ] [ str "Banana"]
+                    p [ ] [ str "Cherry"]
+                ]
+            ]) |> ignore
+
+    let p1 = getComputedCssById("p1")
+    Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "Adjacent sibling selector"
+    RTL.cleanup()
+
+testCase "General sibling" <| fun _ ->
+    let style =
+        fss
+            [
+                !~ P
                     [
-                        div [] [
-                            p [] [ str "Apple"]
-                            div [ ClassName style ] [ p [] [str "An apple a day keeps the doctor away"]]
-                            p [ Id "p1" ] [ str "Banana"]
-                            p [ Id "p2" ] [ str "Cherry"]
-                        ]
-                    ]) |> ignore
+                        BackgroundColor green
+                    ]
+            ]
 
-            let p1 = getComputedCssById("p1")
-            let p2 = getComputedCssById("p2")
-            Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "General sibling selector"
-            Expect.equal (getValue p2 "background-color") "rgb(0, 128, 0)" "General sibling selector"
-            RTL.cleanup()
+    RTL.render(
+        fragment []
+            [
+                div [] [
+                    p [] [ str "Apple"]
+                    div [ ClassName style ] [ p [] [str "An apple a day keeps the doctor away"]]
+                    p [ Id "p1" ] [ str "Banana"]
+                    p [ Id "p2" ] [ str "Cherry"]
+                ]
+            ]) |> ignore
 
-        testCase "Composed selector" <| fun _ ->
-            let style =
-                fss
+    let p1 = getComputedCssById("p1")
+    let p2 = getComputedCssById("p2")
+    Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "General sibling selector"
+    Expect.equal (getValue p2 "background-color") "rgb(0, 128, 0)" "General sibling selector"
+    RTL.cleanup()
+
+testCase "Composed selector" <| fun _ ->
+    let style =
+        fss
+            [
+                ! Div
                     [
-                        ! Div
+                        !> Div
                             [
-                                !> Div
+                                !> P
                                     [
-                                        !> P
+                                        !+ P
                                             [
-                                                !+ P
-                                                    [
-                                                        Color purple
-                                                        FontSize (px 25)
-                                                    ]
+                                                Color purple
+                                                FontSize (px 25)
                                             ]
                                     ]
-
                             ]
-                    ]
 
-            RTL.render(
-                fragment []
-                    [
-                        div [ ClassName style ]
+                    ]
+            ]
+
+    RTL.render(
+        fragment []
+            [
+                div [ ClassName style ]
+                     [
+                         div []
                              [
                                  div []
                                      [
-                                         div []
-                                             [
-                                                 p [] [ str "Hi" ]
-                                                 p [ Id "p1"] [ str "Hi" ]
-                                             ]
+                                         p [] [ str "Hi" ]
+                                         p [ Id "p1"] [ str "Hi" ]
                                      ]
                              ]
-                    ]) |> ignore
+                     ]
+            ]) |> ignore
 
-            let p1 = getComputedCssById("p1")
-            Expect.equal (getValue p1 "color") "rgb(128, 0, 128)" "Composed selectors"
-            Expect.equal (getValue p1 "font-size") "25px" "Composed selectors"
-            RTL.cleanup()
+    let p1 = getComputedCssById("p1")
+    Expect.equal (getValue p1 "color") "rgb(128, 0, 128)" "Composed selectors"
+    Expect.equal (getValue p1 "font-size") "25px" "Composed selectors"
+    RTL.cleanup()
 
-        test "Text"
+test "Text"
+    [
+        (fss [ TextAlign TextAlign.Left ]), ["text-align", "left"]
+        (fss [ TextAlign TextAlign.Right ]), ["text-align", "right"]
+        (fss [ TextAlign TextAlign.Center ]), ["text-align", "center"]
+        (fss [ TextAlign TextAlign.Justify ]), ["text-align", "justify"]
+        (fss [ TextAlign TextAlign.JustifyAll ]), ["text-align", "start"]
+        (fss [ TextAlign TextAlign.Start ]), ["text-align", "start"]
+        (fss [ TextAlign TextAlign.End ]), ["text-align", "end"]
+        (fss [ TextAlign TextAlign.MatchParent ]), ["text-align", "left"]
+
+        (fss [ TextDecorationLine Underline ]), ["text-decoration", "underline rgb(0, 0, 0)"]
+        (fss [ TextDecorationLine Overline ]), ["text-decoration", "overline rgb(0, 0, 0)"]
+        (fss [ TextDecorationLine LineThrough ]), ["text-decoration", "line-through rgb(0, 0, 0)"]
+        (fss [ TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(0, 0, 0)"]
+
+        (fss [ TextDecorationColor orangeRed; TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(255, 69, 0)"]
+
+        (fss [ TextDecorationThickness Auto  ]), ["text-decoration-thickness", "auto"]
+        (fss [ TextDecorationThickness FromFont  ]), ["text-decoration-thickness", "from-font"]
+        (fss [ TextDecorationThickness (pct 30)  ]), ["text-decoration-thickness", "30%"]
+        (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
+
+        (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
+
+        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Solid]), ["text-decoration-style", "solid"]
+        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Double]), ["text-decoration-style", "double"]
+        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Dotted]), ["text-decoration-style", "dotted"]
+        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Dashed]), ["text-decoration-style", "dashed"]
+        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Wavy]), ["text-decoration-style", "wavy"]
+
+        (fss [ TextDecorationSkipInk TextDecorationSkipInk.All ]), ["text-decoration-skip-ink", "all"]
+        (fss [ TextDecorationSkipInk TextDecorationSkipInk.Auto ]), ["text-decoration-skip-ink", "auto"]
+        (fss [ TextDecorationSkipInk TextDecorationSkipInk.None ]), ["text-decoration-skip-ink", "none"]
+
+        (fss [ TextTransform Capitalize ]), ["text-transform", "capitalize"]
+        (fss [ TextTransform Uppercase ]), ["text-transform", "uppercase"]
+        (fss [ TextTransform Lowercase ]), ["text-transform", "lowercase"]
+        (fss [ TextTransform TextTransform.None ]), ["text-transform", "none"]
+        (fss [ TextTransform FullWidth ]), ["text-transform", "none"]
+        (fss [ TextTransform FullSizeKana ]), ["text-transform", "none"]
+
+        (fss [ TextIndent (px 10) ]), ["text-indent", "10px"]
+        (fss [ TextIndent (pct 100) ]), ["text-indent", "100%"]
+        // These are not supported?
+        // (fss [ TextIndents [px 10; (TextIndent.EachLine)] ]), ["text-indent", "each-line"]
+        // (fss [ TextIndents [px 10; (TextIndent.Hanging)] ]), ["text-indent", "hanging"]
+
+        (fss [ Functions.TextShadow (px 10) (px 5) (px 15) red ]), ["text-shadow", "rgb(255, 0, 0) 10px 5px 15px"]
+        (fss [ Functions.TextShadows
             [
-                (fss [ TextAlign TextAlign.Left ]), ["text-align", "left"]
-                (fss [ TextAlign TextAlign.Right ]), ["text-align", "right"]
-                (fss [ TextAlign TextAlign.Center ]), ["text-align", "center"]
-                (fss [ TextAlign TextAlign.Justify ]), ["text-align", "justify"]
-                (fss [ TextAlign TextAlign.JustifyAll ]), ["text-align", "start"]
-                (fss [ TextAlign TextAlign.Start ]), ["text-align", "start"]
-                (fss [ TextAlign TextAlign.End ]), ["text-align", "end"]
-                (fss [ TextAlign TextAlign.MatchParent ]), ["text-align", "left"]
+                px  -4, px 3, px 0, hex "#3a50d9"
+                px -14, px 7, px 0, hex "#0a0e27"
+            ]]), ["text-shadow", "rgb(58, 80, 217) -4px 3px 0px, rgb(10, 14, 39) -14px 7px 0px"]
 
-                (fss [ TextDecorationLine Underline ]), ["text-decoration", "underline rgb(0, 0, 0)"]
-                (fss [ TextDecorationLine Overline ]), ["text-decoration", "overline rgb(0, 0, 0)"]
-                (fss [ TextDecorationLine LineThrough ]), ["text-decoration", "line-through rgb(0, 0, 0)"]
-                (fss [ TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(0, 0, 0)"]
-
-                (fss [ TextDecorationColor orangeRed; TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(255, 69, 0)"]
-
-                (fss [ TextDecorationThickness Auto  ]), ["text-decoration-thickness", "auto"]
-                (fss [ TextDecorationThickness FromFont  ]), ["text-decoration-thickness", "from-font"]
-                (fss [ TextDecorationThickness (pct 30)  ]), ["text-decoration-thickness", "30%"]
-                (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
-
-                (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
-
-                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Solid]), ["text-decoration-style", "solid"]
-                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Double]), ["text-decoration-style", "double"]
-                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Dotted]), ["text-decoration-style", "dotted"]
-                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Dashed]), ["text-decoration-style", "dashed"]
-                (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Wavy]), ["text-decoration-style", "wavy"]
-
-                (fss [ TextDecorationSkipInk TextDecorationSkipInk.All ]), ["text-decoration-skip-ink", "all"]
-                (fss [ TextDecorationSkipInk TextDecorationSkipInk.Auto ]), ["text-decoration-skip-ink", "auto"]
-                (fss [ TextDecorationSkipInk TextDecorationSkipInk.None ]), ["text-decoration-skip-ink", "none"]
-
-                (fss [ TextTransform Capitalize ]), ["text-transform", "capitalize"]
-                (fss [ TextTransform Uppercase ]), ["text-transform", "uppercase"]
-                (fss [ TextTransform Lowercase ]), ["text-transform", "lowercase"]
-                (fss [ TextTransform TextTransform.None ]), ["text-transform", "none"]
-                (fss [ TextTransform FullWidth ]), ["text-transform", "none"]
-                (fss [ TextTransform FullSizeKana ]), ["text-transform", "none"]
-
-                (fss [ TextIndent (px 10) ]), ["text-indent", "10px"]
-                (fss [ TextIndent (pct 100) ]), ["text-indent", "100%"]
-                // These are not supported?
-                // (fss [ TextIndents [px 10; (TextIndent.EachLine)] ]), ["text-indent", "each-line"]
-                // (fss [ TextIndents [px 10; (TextIndent.Hanging)] ]), ["text-indent", "hanging"]
-
-                (fss [ Functions.TextShadow (px 10) (px 5) (px 15) red ]), ["text-shadow", "rgb(255, 0, 0) 10px 5px 15px"]
-                (fss [ Functions.TextShadows
-                    [
-                        px  -4, px 3, px 0, hex "#3a50d9"
-                        px -14, px 7, px 0, hex "#0a0e27"
-                    ]]), ["text-shadow", "rgb(58, 80, 217) -4px 3px 0px, rgb(10, 14, 39) -14px 7px 0px"]
-
-                (fss [ TextOverflow TextOverflow.Clip ]), ["text-overflow", "clip"]
-                (fss [ TextOverflow TextOverflow.Ellipsis ]), ["text-overflow", "ellipsis"]
-                (fss [ TextOverflow (TextOverflow.Custom "-") ]), ["text-overflow", "\"-\" "]
-            ]
-
+        (fss [ TextOverflow TextOverflow.Clip ]), ["text-overflow", "clip"]
+        (fss [ TextOverflow TextOverflow.Ellipsis ]), ["text-overflow", "ellipsis"]
+        (fss [ TextOverflow (TextOverflow.Custom "-") ]), ["text-overflow", "\"-\" "]
     ]
+
+]
 
 Mocha.runTests CssTests |> ignore
 

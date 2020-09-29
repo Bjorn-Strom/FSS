@@ -9,21 +9,22 @@ open Utilities.Helpers
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/transform
 module Transform =
-    type Transform = 
-        | Matrix of float * float * float * float * float * float 
+    type Transform =
+        | None
+        | Matrix of float * float * float * float * float * float
         | Matrix3D of int * int * int * int * int * int * int * int * int * int * int * int * float * float * float * float
-        | Perspective of Size
+        | Perspective of ISize
         | Rotate of Angle
         | Rotate3D of float * float * float * Angle
         | RotateX of Angle
         | RotateY of Angle
         | RotateZ of Angle
-        | Translate of Size
-        | Translate2 of Size * Size
-        | Translate3D of Size * Size * Size
-        | TranslateX of Size
-        | TranslateY of Size
-        | TranslateZ of Size
+        | Translate of ISize
+        | Translate2 of ISize * ISize
+        | Translate3D of ISize * ISize * ISize
+        | TranslateX of ISize
+        | TranslateY of ISize
+        | TranslateZ of ISize
         | Scale of float
         | Scale2 of float * float
         | Scale3D of float * float * float
@@ -35,7 +36,7 @@ module Transform =
         | SkewX of Angle
         | SkewY of Angle
         interface ITransform
- 
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
     type TransformOrigin =
         | Top
@@ -47,18 +48,15 @@ module Transform =
 
 module TransformValue =
     open Transform
-    
+
     let transform (v: ITransform): string =
         let stringifyTransform (v: Transform): string =
                match v with
-                   | Matrix (a, b, c, d, e, f) -> 
+                   | None -> "none"
+                   | Matrix (a, b, c, d, e, f) ->
                        sprintf "matrix(%.1f, %.1f, %.1f, %.1f, %.1f, %.1f)" a b c d e f
                    | Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
-                       sprintf "matrix3d(
-                               %d, %d, %d, %d, 
-                               %d, %d, %d, %d, 
-                               %d, %d, %d, %d, 
-                               %.1f, %.1f, %.1f, %.1f)" a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4
+                       sprintf "matrix3d(%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.1f)" a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4
                    | Perspective size -> sprintf "perspective(%s)" <| Units.Size.value size
                    | Rotate angle -> sprintf "rotate(%s)" <| Units.Angle.value angle
                    | Rotate3D (a, b, c, angle) -> sprintf "rotate3d(%.1f, %.1f, %.1f, %s)" a b c (Units.Angle.value angle)
