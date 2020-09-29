@@ -142,10 +142,8 @@ module Value =
         | Padding       of IPadding
         | Paddings      of IPadding list
 
-        | Animation                of IAnimation list
-        | Animations               of IAnimation list list
-        | AnimationName            of IAnimation
-        | AnimationNames           of IAnimation list
+        | AnimationName            of IAnimationName
+        | AnimationNames           of IAnimationName list
         | AnimationDuration        of Time
         | AnimationDurations       of Time list
         | AnimationTimingFunction  of Timing
@@ -174,8 +172,7 @@ module Value =
 
         | Cursor of Cursor
 
-    let combineAnimationNames (list: IAnimation list): string = list |> List.map string |> String.concat ", "
-    let combineAnimations (list: IAnimation list list): string = combineComma (fun a -> combineWs AnimationValue.animation a) list
+    let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
     let rec private createCSS (attributeList: CSSProperty list) callback =
         attributeList
@@ -302,16 +299,14 @@ module Value =
                 | Padding       m  -> Property.value padding       ==> PaddingValue.padding m
                 | Paddings      ms -> Property.value padding       ==> combineWs PaddingValue.padding ms
 
-                | Animation                a   -> Property.value animation               ==> combineWs AnimationValue.animation a
-                | Animations               ans -> Property.value animation               ==> combineAnimations ans
-                | AnimationName            n   -> Property.value animationName           ==> string n
-                | AnimationNames           ns  -> Property.value animationName           ==> combineAnimationNames ns
+                | AnimationName            n   -> Property.value animationName           ==> AnimationValue.name n
+                | AnimationNames           ns  -> Property.value animationName           ==> combineComma AnimationValue.name ns
                 | AnimationDuration        d   -> Property.value animationDuration       ==> Units.Time.value d
                 | AnimationDurations       ds  -> Property.value animationDuration       ==> combineComma Units.Time.value ds
-                | AnimationTimingFunction  t   -> Property.value animationTimingFunction ==> AnimationValue.timing
+                | AnimationTimingFunction  t   -> Property.value animationTimingFunction ==> AnimationValue.timing t
                 | AnimationTimingFunctions ts  -> Property.value animationTimingFunction ==> combineComma AnimationValue.timing ts
                 | AnimationDelay           d   -> Property.value animationDelay          ==> Units.Time.value d
-                | AnimationDelays          ds  -> Property.value animationDelay          ==> combineComma Units.Time.value
+                | AnimationDelays          ds  -> Property.value animationDelay          ==> combineComma Units.Time.value ds
                 | AnimationIterationCount  i   -> Property.value animationIterationCount ==> AnimationValue.iterationCount i
                 | AnimationIterationCounts is  -> Property.value animationIterationCount ==> combineComma AnimationValue.iterationCount is
                 | AnimationDirection       d   -> Property.value animationDirection      ==> AnimationValue.direction d

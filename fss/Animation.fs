@@ -64,11 +64,11 @@ module Animation =
 module AnimationValue =
     open Animation
 
-    let private cubicBezier (a: float, b: float, c: float, d: float) = 
+    let private cubicBezier (a: float, b: float, c: float, d: float) =
         sprintf "cubic-bezier(%.1f, %.1f, %.1f, %.1f)" a b c d
-            
+
     let timing (v: Timing): string =
-        match v with 
+        match v with
             | Ease -> "ease"
             | EaseIn -> "ease-in"
             | EaseOut -> "ease-out"
@@ -79,32 +79,27 @@ module AnimationValue =
             | CubicBezier (a, b, c, d) -> cubicBezier(a, b, c, d)
             | Step n -> sprintf "steps(%d)" n
             | Steps (n, direction) -> sprintf "steps(%d, %s)" n (duToKebab direction)
-            
+
     let iterationCount (v: IterationCount): string =
         match v with
             | Infinite -> "infinite"
             | Value v -> string v
-            
-    let direction (v: IAnimationDirection): string = 
+
+    let direction (v: IAnimationDirection): string =
         match v with
             | :? Global    as g -> GlobalValue.globalValue g
             | :? Direction as d -> duToKebab d
             | _              -> "Unknown animation direction"
-            
+
     let fillMode (v: FillMode): string = duToString v
-            
-    let playState (v: IAnimationPlayState): string = 
+
+    let playState (v: IAnimationPlayState): string =
         match v with
             | :? Global as g    -> GlobalValue.globalValue g
             | :? PlayState as p -> duToString p
             | _ -> "Unknown play state"
 
-    let animation (v: IAnimation): string =
+    let name (v: IAnimationName): string =
         match v with
-            | :? Units.Time.Time as t -> Units.Time.value t
-            | :? Timing as t          -> timing t
-            | :? IterationCount as i  -> iterationCount i
-            | :? Direction as d       -> direction d
-            | :? FillMode as f        -> fillMode f
-            | :? PlayState as p       -> playState p
-            | _ as s                  -> string s
+            | :? Global as g  -> GlobalValue.globalValue g
+            | _         as s -> string s

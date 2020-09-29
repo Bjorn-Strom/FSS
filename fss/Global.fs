@@ -11,6 +11,8 @@ module Global =
         interface IContentSize
         interface IFlexBasis
         interface IAlignSelf
+        interface IMargin
+        interface IPadding
 
     type Center =
         | Center
@@ -86,6 +88,7 @@ module Global =
         interface IVisibility
         interface IAnimationDirection
         interface IAnimationPlayState
+        interface IAnimationName
         interface IPerspective
 
 module GlobalValue =

@@ -2243,11 +2243,188 @@ let visibilityTests =
                 "Opacity 1.5 should be 1"
                 [ Opacity (Opacity.Opacity 1.5)]
                 ["opacity" ==> "1"]
-
     ]
+
+let marginTests =
+    testList "Margin"
+        [
+                test
+                    "Margin top px"
+                    [ MarginTop (px 10)]
+                    ["marginTop" ==> "10px"]
+
+                test
+                    "Margin right px"
+                    [ MarginRight (px 10)]
+                    ["marginRight" ==> "10px"]
+
+                test
+                    "Margin bottom px"
+                    [ MarginBottom (px 10)]
+                    ["marginBottom" ==> "10px"]
+
+                test
+                    "Margin left px"
+                    [ MarginLeft (px 10)]
+                    ["marginLeft" ==> "10px"]
+
+                test
+                    "Margin px"
+                    [ Margin (px 10)]
+                    [ "margin" ==> "10px" ]
+
+                test
+                    "Margin pct"
+                    [ Margin (pct 10)]
+                    [ "margin" ==> "10%" ]
+
+                test
+                    "Margin em"
+                    [ Margin (em 10.0)]
+                    [ "margin" ==> "10.0em" ]
+
+                test
+                    "Margin auto"
+                    [ Margin Auto]
+                    [ "margin" ==> "auto" ]
+
+                test
+                    "Margin inherit"
+                    [ Margin Inherit]
+                    [ "margin" ==> "inherit" ]
+
+                test
+                    "Margin initial"
+                    [ Margin Initial]
+                    [ "margin" ==> "initial" ]
+
+                test
+                    "Margin unset"
+                    [ Margin Unset ]
+                    [ "margin" ==> "unset" ]
+
+                test
+                    "Margins multiple"
+                    [ Margins [ px 10; px 20; px 30; px 40 ] ]
+                    [ "margin" ==> "10px 20px 30px 40px" ]
+        ]
+
+let paddingTests =
+    testList "Padding"
+        [
+                test
+                    "Padding top px"
+                    [ PaddingTop (px 10)]
+                    ["paddingTop" ==> "10px"]
+
+                test
+                    "Padding right px"
+                    [ PaddingRight (px 10)]
+                    ["paddingRight" ==> "10px"]
+
+                test
+                    "Padding bottom px"
+                    [ PaddingBottom (px 10)]
+                    ["paddingBottom" ==> "10px"]
+
+                test
+                    "Padding left px"
+                    [ PaddingLeft (px 10)]
+                    ["paddingLeft" ==> "10px"]
+
+                test
+                    "Padding px"
+                    [ Padding (px 10)]
+                    [ "padding" ==> "10px" ]
+
+                test
+                    "Padding pct"
+                    [ Padding (pct 10)]
+                    [ "padding" ==> "10%" ]
+
+                test
+                    "Padding em"
+                    [ Padding (em 10.0)]
+                    [ "padding" ==> "10.0em" ]
+
+                test
+                    "Padding auto"
+                    [ Padding Auto]
+                    [ "padding" ==> "auto" ]
+
+                test
+                    "Padding inherit"
+                    [ Padding Inherit]
+                    [ "padding" ==> "inherit" ]
+
+                test
+                    "Padding initial"
+                    [ Padding Initial]
+                    [ "padding" ==> "initial" ]
+
+                test
+                    "Padding unset"
+                    [ Padding Unset ]
+                    [ "padding" ==> "unset" ]
+
+                test
+                    "Paddings multiple"
+                    [ Paddings [ px 10; px 20; px 30; px 40 ] ]
+                    [ "padding" ==> "10px 20px 30px 40px" ]
+        ]
+
+let animationTests =
+    let animationSample = keyframes [ frame 0 [ BackgroundColor Color.red ]; frame 100 [ BackgroundColor Color.blue ] ]
+
+    testList "Animation"
+        [
+            test
+                "Animation name"
+                [ AnimationName animationSample ]
+                [ "animationName" ==> animationSample ]
+
+            test
+                "Animation name inherit"
+                [ AnimationName Inherit ]
+                [ "animationName" ==> "inherit" ]
+
+            test
+                "Animation name"
+                [ AnimationName Initial ]
+                [ "animationName" ==> "initial" ]
+
+            test
+                "Animation name"
+                [ AnimationName Unset ]
+                [ "animationName" ==> "unset" ]
+
+            test
+                "Animation duration"
+                [ AnimationDuration (sec 10.0) ]
+                [ "animationDuration" ==> "10.00s" ]
+
+            test
+                "Animation duration seconds"
+                [ AnimationDuration (sec 10.0) ]
+                [ "animationDuration" ==> "10.00s" ]
+
+            test
+                "Animation duration milliseconds"
+                [ AnimationDuration (ms 10.0) ]
+                [ "animationDuration" ==> "10.00ms" ]
+
+            test
+                "Animation duration multiple"
+                [ AnimationDurations [ sec 10.0; ms 500.0 ] ]
+                [ "animationDuration" ==> "10.00s, 500.00ms" ]
+        ]
+
 
 let tests =
         testList "Fss Tests" [
+            animationTests
+            paddingTests
+            marginTests
             visibilityTests
             positionTests
             flexTests
@@ -2263,72 +2440,8 @@ let tests =
 Mocha.runTests tests |> ignore
 
 (*
-        test "Flexbox"
-            [
-
-
-
-
-
-
-            ]
-
-        test "Margin"
-            [
-                (fss [ MarginTop (px 10)]), ["margin-top", "10px"]
-                (fss [ MarginRight (px 10)]), ["margin-right", "10px"]
-                (fss [ MarginBottom (px 10)]), ["margin-bottom", "10px"]
-                (fss [ MarginLeft (px 10)]), ["margin-left", "10px"]
-
-                (fss [ CSSProperty.Margin (px 10)]),
-                    [
-                        "margin-top", "10px"
-                        "margin-right", "10px"
-                        "margin-bottom", "10px"
-                        "margin-left", "10px"
-                    ]
-
-                (fss [ CSSProperty.Margins [ px 10; px 20; px 30; px 40 ] ]),
-                    [
-                        "margin-top", "10px"
-                        "margin-right", "20px"
-                        "margin-bottom", "30px"
-                        "margin-left", "40px"
-                    ]
-            ]
-
-        test "Padding"
-            [
-                (fss [ PaddingTop (px 10)]), ["padding-top", "10px"]
-                (fss [ PaddingRight (px 10)]), ["padding-right", "10px"]
-                (fss [ PaddingBottom (px 10)]), ["padding-bottom", "10px"]
-                (fss [ PaddingLeft (px 10)]), ["padding-left", "10px"]
-
-                (fss [ Padding (px 10)]),
-                    [
-                        "padding-top", "10px"
-                        "padding-right", "10px"
-                        "padding-bottom", "10px"
-                        "padding-left", "10px"
-                    ]
-
-                (fss [ Paddings [ px 10; px 20; px 30; px 40 ] ]),
-                    [
-                        "padding-top", "10px"
-                        "padding-right", "20px"
-                        "padding-bottom", "30px"
-                        "padding-left", "40px"
-                    ]
-            ]
-
         test "Animation"
             [
-                let animationSample = keyframes [ frame 0 [ BackgroundColor red]; frame 100 [ BackgroundColor blue] ]
-
-                (fss [ AnimationName animationSample ]), ["animation-name", animationSample |> string]
-
-                (fss [ AnimationDuration (sec 10.0) ]), ["animation-duration", "10s"]
-
                 (fss [ AnimationTimingFunction Ease ]), ["animation-timing-function", "ease"]
                 (fss [ AnimationTimingFunction EaseIn ]), ["animation-timing-function", "ease-in"]
                 (fss [ AnimationTimingFunction EaseOut ]), ["animation-timing-function", "ease-out"]

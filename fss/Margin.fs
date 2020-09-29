@@ -22,8 +22,9 @@ module MarginValue =
 
     let margin (v: IMargin): string =
         match v with
-            | :? Global as g -> GlobalValue.globalValue g
-            | :? Size as s -> Units.Size.value s
+            | :? Global  as g -> GlobalValue.globalValue g
+            | :? Auto    as a -> GlobalValue.auto a
+            | :? Size    as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
-            | :? Margin as m -> marginValue m
+            | :? Margin  as m -> marginValue m
             | _ -> "Unknown margin size"

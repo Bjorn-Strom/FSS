@@ -197,7 +197,10 @@ let BackgroundExamples model dispatch =
                         Width (px 50)
                         Height (px 72)
                         BackgroundImage (Background.Url "https://s.cdpn.io/79/sprite-steps.png")
-                        Animation [ frameAnimation; sec 1.0; Animation.Step(10); Animation.Infinite ]
+                        AnimationName frameAnimation
+                        AnimationDuration (sec 1.0)
+                        AnimationTimingFunction (Animation.Step 10)
+                        AnimationIterationCount Animation.Infinite
                     ]
 
             h3 [] [ str "Background images can be... fun?" ]
@@ -988,7 +991,14 @@ let AnimationExamples =
                 frame 100 [ Transform (Transform.Rotate(deg 360.0))]
             ]
 
-    let bounceAnimation = fss [ Animation [bounceFrames; sec 1.0; Animation.Ease; Animation.Infinite] ]
+    let bounceAnimation =
+        fss
+            [
+                AnimationName bounceFrames
+                AnimationDuration (sec 1.0)
+                AnimationTimingFunction Animation.Ease
+                AnimationIterationCount Animation.Infinite
+            ]
 
     let sizeAnimation =
         fss
@@ -1002,11 +1012,10 @@ let AnimationExamples =
     let combinedAnimations =
         fss
             [
-                Animations
-                    [
-                        [ bounceFrames; sec 1.0; Animation.Ease; Animation.Infinite]
-                        [ sizeFrames; sec 3.0; Animation.EaseInOut; Animation.IterationCount.Value 3 ]
-                    ]
+                AnimationNames [ bounceFrames; sizeFrames ]
+                AnimationDurations [ sec 1.0; sec 3.0 ]
+                AnimationTimingFunctions [ Animation.EaseInOut; Animation.Ease ]
+                AnimationIterationCounts [ Animation.Value 3; Animation.Infinite ]
             ]
 
     let spinnyMation =
@@ -1015,7 +1024,10 @@ let AnimationExamples =
                 Width (px 200)
                 Height (px 200)
                 BackgroundColor Color.orangeRed
-                Animation [ spinnyFrames; sec 5.0; Animation.Infinite; Animation.Linear ]
+                AnimationName spinnyFrames
+                AnimationDuration (sec 5.0)
+                AnimationIterationCount Animation.Infinite
+                AnimationTimingFunction Animation.Linear
             ]
 
     let loader =
@@ -1045,7 +1057,10 @@ let AnimationExamples =
                 Height (px 100)
                 BorderRadius (px 12)
                 BackgroundColor (hex "00dbde")
-                Animation [loader; sec 2.0; Animation.Linear; Animation.Infinite]
+                AnimationName loader
+                AnimationDuration (sec 2.0)
+                AnimationTimingFunction Animation.Linear
+                AnimationIterationCount Animation.Infinite
             ]
 
     fragment []

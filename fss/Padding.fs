@@ -4,11 +4,11 @@ namespace Fss
 module Padding =
     open Units.Size
     open Types
-    
+
     type Padding =
         | Padding of Size
         interface IPadding
-    
+
 module PaddingValue =
     open Padding
     open Types
@@ -19,11 +19,12 @@ module PaddingValue =
     let private paddingValue (v: Padding): string =
         match v with
             | Padding s -> Units.Size.value s
-    
+
     let padding (v: IPadding): string =
         match v with
-            | :? Global as g -> GlobalValue.globalValue g
-            | :? Size as s -> Units.Size.value s
+            | :? Global  as g -> GlobalValue.globalValue g
+            | :? Auto    as a -> GlobalValue.auto a
+            | :? Size    as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? Padding as p -> paddingValue p
             | _ -> "Unknown padding size"
