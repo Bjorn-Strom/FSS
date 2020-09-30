@@ -78,6 +78,7 @@ module Global =
         interface ITransform
         interface ITransformOrigin
         interface ITransition
+        interface ITransitionDuration
         interface IBackgroundPosition
         interface IBackgroundOrigin
         interface IBackgroundClip

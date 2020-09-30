@@ -48,6 +48,7 @@ module Types =
     type ITransform               = interface end
     type ITransformOrigin         = interface end
     type ITransition              = interface end
+    type ITransitionDuration      = interface end
     type ILinearGradient          = interface end
     type IRadialGradient          = interface end
     type IBackgroundPosition      = interface end

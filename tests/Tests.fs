@@ -2799,8 +2799,38 @@ let transformTests =
                 [ "transformOrigin" ==> "initial right 2.0cm 2px" ]
         ]
 
+let transitionTest =
+    testList "Transition"
+        [
+            test
+                ""
+                [TransitionDuration (sec 6.0)]
+                ["transitionDuration" ==> "6.0sec"]
+
+            test
+                ""
+                [ TransitionDuration (ms 120.0) ]
+                [ "transitionDuration" ==> "120.0ms" ]
+
+            test
+                ""
+                [TransitionDuration Inherit]
+                ["transitionDuration" ==> "inherit"]
+
+            test
+                ""
+                [ TransitionDuration Initial ]
+                ["transitionDuration" ==> "initial" ]
+
+            test
+                ""
+                [TransitionDuration Unset]
+                ["transitionDuration" ==> "unset"]
+        ]
+
 let tests =
         testList "Fss Tests" [
+            transitionTest
             transformTests
             animationTests
             paddingTests

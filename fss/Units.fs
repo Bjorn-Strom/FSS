@@ -118,6 +118,7 @@ module Time =
     type Time =
         | Sec of string
         | Ms of string
+        interface ITransitionDuration
 
     let value (v: Time) =
         match v with
