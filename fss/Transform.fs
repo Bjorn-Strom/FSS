@@ -91,5 +91,5 @@ module TransformValue =
             | :? Global          as g -> GlobalValue.globalValue g
             | :? Percent         as p -> Units.Percent.value p
             | :? Size            as s -> Units.Size.value s
-            | :? TransformOrigin as t -> duToString t
+            | :? TransformOrigin as t -> duToLowercase t
             | _ -> "Unknown margin size"

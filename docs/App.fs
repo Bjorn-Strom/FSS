@@ -675,17 +675,17 @@ let TransformExamples =
 
                     ]
 
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Top; Transform.Left ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Top; Transform.Center ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Top; Transform.Right ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Top; Transform.Left ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Top; Transform.Center ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Top; Transform.Right ] ]) )] []
 
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Center; Transform.Left ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Center; Transform.Center ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Center; Transform.Right ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Center; Transform.Left ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Center; Transform.Center ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Center; Transform.Right ] ]) )] []
 
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Bottom; Transform.Left ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Bottom; Transform.Center ] ]) )] []
-            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigin [ Transform.Bottom; Transform.Right ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Bottom; Transform.Left ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Bottom; Transform.Center ] ]) )] []
+            div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Bottom; Transform.Right ] ]) )] []
         ]
 
 let TransitionExamples =

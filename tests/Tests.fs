@@ -2767,6 +2767,36 @@ let transformTests =
                 "Transform unset"
                 [ Transform Unset ]
                 [ "transform" ==> "unset" ]
+
+            test
+                "Transform origin px"
+                [ TransformOrigin (px 2) ]
+                [ "transformOrigin" ==> "2px" ]
+
+            test
+                "Transform origin position"
+                [ TransformOrigin Transform.Bottom ]
+                [ "transformOrigin" ==> "bottom" ]
+
+            test
+                "Transform origin inherit"
+                [ TransformOrigin Inherit ]
+                [ "transformOrigin" ==> "inherit" ]
+
+            test
+                "Transform origin initial"
+                [ TransformOrigin Initial ]
+                [ "transformOrigin" ==> "initial" ]
+
+            test
+                "Transform origin unset"
+                [ TransformOrigin Unset ]
+                [ "transformOrigin" ==> "unset" ]
+
+            test
+                "Transform origin multiple"
+                [ TransformOrigins [Initial; Transform.Right; cm 2.0; px 2] ]
+                [ "transformOrigin" ==> "initial right 2.0cm 2px" ]
         ]
 
 let tests =
@@ -2790,21 +2820,6 @@ let tests =
 Mocha.runTests tests |> ignore
 
 (*
-test "Transform"
-    [
-        (fss [TransformOrigin [ TransformOrigin.Left ]]), ["transform-origin", "0px 0px"]
-        (fss [TransformOrigin [ TransformOrigin.Center ]]), ["transform-origin", "200px 0px"]
-        (fss [TransformOrigin [ TransformOrigin.Right ]]), ["transform-origin", "400px 0px"]
-        (fss [TransformOrigin [ TransformOrigin.Top ]]), ["transform-origin", "200px 0px"]
-        (fss [TransformOrigin [ TransformOrigin.Bottom ]]), ["transform-origin", "200px 0px"]
-
-        (fss [TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left ]]), ["transform-origin", "0px 0px"]
-        (fss [TransformOrigin [ TransformOrigin.Top; TransformOrigin.Left; px 100 ]]), ["transform-origin", "0px 0px 100px"]
-
-        (fss [TransformOrigin [ px 100 ]]), ["transform-origin", "100px 0px"]
-        (fss [TransformOrigin [ pct 50 ]]), ["transform-origin", "200px 0px"]
-    ]
-
 test "Transition"
     [
         (fss [ Transition (Transition1(backgroundColor, (sec 10.0))) ]),

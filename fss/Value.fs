@@ -159,9 +159,10 @@ module Value =
         | AnimationPlayState       of IAnimationPlayState
         | AnimationPlayStates      of IAnimationPlayState list
 
-        | Transform       of ITransform
-        | Transforms      of ITransform list
-        | TransformOrigin of ITransformOrigin list
+        | Transform        of ITransform
+        | Transforms       of ITransform list
+        | TransformOrigin  of ITransformOrigin
+        | TransformOrigins of ITransformOrigin list
 
         | Transition               of ITransition
         | Transitions              of ITransition list
@@ -316,9 +317,10 @@ module Value =
                 | AnimationPlayState       p   -> Property.value animationPlayState      ==> AnimationValue.playState p
                 | AnimationPlayStates      ps  -> Property.value animationPlayState      ==> combineComma AnimationValue.playState ps
 
-                | Transform       t  -> Property.value transform       ==> TransformValue.transform t
-                | Transforms      ts -> Property.value transform       ==> combineWs TransformValue.transform ts
-                | TransformOrigin ts -> Property.value transformOrigin ==> combineWs TransformValue.transformOrigin ts
+                | Transform       t   -> Property.value transform       ==> TransformValue.transform t
+                | Transforms      ts  -> Property.value transform       ==> combineWs TransformValue.transform ts
+                | TransformOrigin t   -> Property.value transformOrigin ==> TransformValue.transformOrigin t
+                | TransformOrigins ts -> Property.value transformOrigin ==> combineWs TransformValue.transformOrigin ts
 
                 | Transition               t  -> Property.value transition               ==> TransitionValue.value t
                 | Transitions              ts -> Property.value transition               ==> combineComma TransitionValue.value ts
