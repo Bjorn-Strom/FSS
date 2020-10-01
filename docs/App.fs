@@ -696,7 +696,9 @@ let TransitionExamples =
                 BackgroundColor Color.pink
                 Width (px 200)
                 Height (px 200)
-                Transition (Transition.Transition2(Property.Transform, (ms 300.0), Animation.CubicBezier(0.0, 0.47, 0.32, 1.97)))
+                TransitionProperty Property.Transform
+                TransitionDuration (ms 300.0)
+                TransitionTimingFunction (Animation.CubicBezier(0.0, 0.47, 0.32, 1.97))
             ]
 
     let trigger =
@@ -729,7 +731,10 @@ let TransitionExamples =
 
             p [ClassName (fss [
                 BackgroundColor Color.red
-                Transition (Transition.Transition3(Property.backgroundColor, (sec 2.5), Animation.Ease, (sec 2.5)))
+                TransitionProperty Property.BackgroundColor
+                TransitionDuration (sec 2.5)
+                TransitionDelay (sec 2.5)
+                TransitionTimingFunction Animation.Ease
                 Hover
                     [
                         BackgroundColor Color.green
@@ -1678,9 +1683,9 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //MarginExamples
             //PaddingExamples
             //TransformExamples
-            //TransitionExamples
+            TransitionExamples
             //TextExamples
-            AnimationExamples
+            //AnimationExamples
             //FlexBoxExamples model dispatch
             //MediaQueryExamples
             //SelectorExamples

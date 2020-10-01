@@ -27,6 +27,7 @@ module Animation =
         | Step of int
         | Steps of int * Steps
         interface IAnimationTimingFunction
+        interface ITransitionTimingFunction
 
     // Animation count
     type IterationCount =

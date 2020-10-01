@@ -77,7 +77,9 @@ module Global =
         interface IVerticalAlign
         interface ITransform
         interface ITransformOrigin
-        interface ITransitionDuration
+        interface ITransitionTime
+        interface ITransitionProperty
+        interface ITransitionTimingFunction
         interface IBackgroundPosition
         interface IBackgroundOrigin
         interface IBackgroundClip
