@@ -2803,27 +2803,27 @@ let transitionTest =
     testList "Transition"
         [
             test
-                ""
-                [TransitionDuration (sec 6.0)]
-                ["transitionDuration" ==> "6.0sec"]
+                "Transition duration sec"
+                [TransitionDuration (sec 6.0) ]
+                ["transitionDuration" ==> "6.00s"]
 
             test
-                ""
+                "Transition duration ms"
                 [ TransitionDuration (ms 120.0) ]
-                [ "transitionDuration" ==> "120.0ms" ]
+                [ "transitionDuration" ==> "120.00ms" ]
 
             test
-                ""
+                "Transition duration inherit"
                 [TransitionDuration Inherit]
                 ["transitionDuration" ==> "inherit"]
 
             test
-                ""
+                "Transition duration initial"
                 [ TransitionDuration Initial ]
                 ["transitionDuration" ==> "initial" ]
 
             test
-                ""
+                "Transition duration unset"
                 [TransitionDuration Unset]
                 ["transitionDuration" ==> "unset"]
         ]

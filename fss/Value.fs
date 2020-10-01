@@ -164,10 +164,8 @@ module Value =
         | TransformOrigin  of ITransformOrigin
         | TransformOrigins of ITransformOrigin list
 
-        | Transition               of ITransition
-        | Transitions              of ITransition list
-        | TransitionDelay          of Time
         | TransitionDuration       of ITransitionDuration
+        | TransitionDelay          of Time
         | TransitionProperty       of Property
         | TransitionTimingFunction of Timing
 
@@ -322,8 +320,6 @@ module Value =
                 | TransformOrigin t   -> Property.value transformOrigin ==> TransformValue.transformOrigin t
                 | TransformOrigins ts -> Property.value transformOrigin ==> combineWs TransformValue.transformOrigin ts
 
-                | Transition               t  -> Property.value transition               ==> TransitionValue.transition t
-                | Transitions              ts -> Property.value transition               ==> combineComma TransitionValue.transition ts
                 | TransitionDelay          t  -> Property.value transitionDelay          ==> Units.Time.value t
                 | TransitionDuration       t  -> Property.value transitionDuration       ==> TransitionValue.duration t
                 | TransitionProperty       t  -> Property.value transitionProperty       ==> Property.value t
