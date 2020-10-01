@@ -5,9 +5,14 @@ open Fable.Core.JsInterop
 
 open Fss
 
+open Fable.Core.JS
+
 let test (testName: string) (attributeList: CSSProperty list) (correct: (string * obj) list) =
     testCase testName <| fun _ ->
-        let actual = attributeList |> createCSSRecord
+        let actual =
+            attributeList
+            |> createCSSRecord
+
         Expect.equal actual correct testName
 
 let backgroundTests =
@@ -2889,9 +2894,6 @@ let transitionTest =
                 [TransitionProperties [Inherit; Unset; Property.BackgroundColor; Property.Color]]
                 ["transitionProperty" ==> "inherit, unset, background-color, color"]
                 
-                
-                
-                
             test
                 "Transition timing function ease"
                 [ TransitionTimingFunction Animation.Ease ]
@@ -2981,12 +2983,79 @@ let transitionTest =
                 "Transition timing function unset"
                 [ TransitionTimingFunction Unset ]
                 ["transitionTimingFunction" ==> "unset"]
-                
-                
         ]
+        
+open Fable.Core.JS
+
+let descendantTests =
+    let foo =
+        [ ! Html.P [ BackgroundColor Color.red ] ]
+        |> createCSSRecord
+        |> List.map (fun (x: string, y: obj) ->
+                let y: string list =
+                    y :?> string list list
+                    |> List.head
+                console.log("X: ", x)
+                console.log("Y: ", y)
+                x ==> String.concat "," y             
+            ) 
+        
+    let bar = [ " p" ==> "[backgroundColor,#ff0000]" ]
+    
+    console.log(foo)
+    console.log(bar)
+    
+    testList "Descendants"
+        [
+            test
+                "Descendant"
+                [ ! Html.P [ BackgroundColor Color.red ] ]
+                [ " p" ==> "[backgroundColor,#ff0000]" ]
+                
+            test
+                "Child"
+                [ !> Html.P [ BackgroundColor Color.red ] ]
+                [ " > p" ==> "[backgroundColor,#ff0000]" ]
+                
+            test
+                "Adjacent Sibling"
+                [ !+ Html.P [ BackgroundColor Color.red ] ]
+                [ " + p" ==> "[backgroundColor,#ff0000]" ]
+                
+            test
+                "General Sibling"
+                [ !~ Html.P [ BackgroundColor Color.red ] ]
+                [ " ~ p" ==> "[backgroundColor,#ff0000]" ]
+      
+            test
+                ""
+                [
+                    ! Html.Div
+                        [
+                            !> Html.Div
+                                [
+                                    !> Html.P
+                                        [
+                                            !+ Html.P
+                                                [
+                                                    Color Color.purple
+                                                    FontSize (px 25)
+                                                ]
+                                        ]
+                                ]
+
+                        ]
+                ]
+                [ "div" ==> "[ > div,[ > p,[ + p,[color,#800080; fontSize,25px]]]]"]
+      
+        ]
+
+      
+      
 
 let tests =
         testList "Fss Tests" [
+            descendantTests
             transitionTest
             transformTests
             animationTests
@@ -3007,56 +3076,7 @@ let tests =
 Mocha.runTests tests |> ignore
 
 (*
-test "Transition"
-    [
-        (fss [ Transition (Transition1(backgroundColor, (sec 10.0))) ]),
-            [
-                "transition-property", "background-color"
-                "transition-duration", "10s"
-            ]
-
-        (fss [ Transition (Transition2(backgroundColor, (sec 10.0), Ease)) ]),
-            [
-                "transition-property", "background-color"
-                "transition-duration", "10s"
-                "transition-timing-function", "ease"
-            ]
-
-        (fss [ Transition (Transition3(backgroundColor, (sec 10.0), Ease, sec 2.0)) ]),
-            [
-                "transition-property", "background-color"
-                "transition-duration", "10s"
-                "transition-timing-function", "ease"
-                "transition-delay", "2s"
-            ]
-
-        (fss
-            [
-                Transitions
-                    [
-                        Transition1(backgroundColor, (sec 10.0))
-                        Transition2(color, (sec 20.0), EaseInOut)
-                        Transition3(width, (sec 30.0), EaseOut, (sec 20.0))
-                    ]
-            ]),
-            [
-                "transition-property", "background-color, color, width"
-                "transition-duration", "10s, 20s, 30s"
-                "transition-timing-function", "ease, ease-in-out, ease-out"
-                "transition-delay", "0s, 0s, 20s"
-            ]
-
-        (fss [ TransitionDelay (sec 5.0)]), ["transition-delay", "5s"]
-
-        (fss [ TransitionDuration (sec 5.0)]), ["transition-duration", "5s"]
-
-        (fss [ TransitionProperty Property.Width]), ["transition-property", "width"]
-
-        (fss [ TransitionTimingFunction EaseInOut]), ["transition-timing-function", "ease-in-out"]
-    ]
-
 testCase "Descendants" <| fun _ ->
-
     let style =
         fss
             [
@@ -3270,11 +3290,4 @@ test "Text"
         (fss [ TextOverflow TextOverflow.Clip ]), ["text-overflow", "clip"]
         (fss [ TextOverflow TextOverflow.Ellipsis ]), ["text-overflow", "ellipsis"]
         (fss [ TextOverflow (TextOverflow.Custom "-") ]), ["text-overflow", "\"-\" "]
-    ]
-
-]
-
-Mocha.runTests CssTests |> ignore
-
-Mocha.runTests tests |> ignore
 *)

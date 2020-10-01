@@ -41,10 +41,10 @@ module FontFaceValue =
                 function
                     | Source      s -> "src"                               ==> source s
                     | Sources     s -> "src"                               ==> combineComma source s
-                    | FontStyle   f -> Property.value Property.fontStyle   ==> FontValues.fontStyle f
-                    | FontDisplay f -> Property.value Property.fontDisplay ==> FontValues.fontDisplay f
-                    | FontStretch f -> Property.value Property.fontStretch ==> FontValues.fontStretch f
-                    | FontWeight  f -> Property.value Property.fontWeight  ==> FontValues.fontWeight f)
+                    | FontStyle   f -> Property.value Property.FontStyle   ==> FontValues.fontStyle f
+                    | FontDisplay f -> Property.value Property.FontDisplay ==> FontValues.fontDisplay f
+                    | FontStretch f -> Property.value Property.FontStretch ==> FontValues.fontStretch f
+                    | FontWeight  f -> Property.value Property.FontWeight  ==> FontValues.fontWeight f)
 
         createObj
             [
