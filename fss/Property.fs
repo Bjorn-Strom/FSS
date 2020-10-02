@@ -9,20 +9,20 @@ module Property =
         | AlignItems
         | AlignSelf
         | All
-        | Animation                     
-        | AnimationDelay                
-        | AnimationDirection            
-        | AnimationDuration             
-        | AnimationFillMode             
-        | AnimationIterationCount       
-        | AnimationName                 
-        | AnimationPlayState            
-        | AnimationTimingFunction       
+        | Animation
+        | AnimationDelay
+        | AnimationDirection
+        | AnimationDuration
+        | AnimationFillMode
+        | AnimationIterationCount
+        | AnimationName
+        | AnimationPlayState
+        | AnimationTimingFunction
         | BackfaceVisibility
         | BackgroundAttachment
         | BackgroundBlendMode
         | BackgroundClip
-        | BackgroundColor               
+        | BackgroundColor
         | BackgroundImage
         | BackgroundOrigin
         | BackgroundPosition
@@ -30,39 +30,39 @@ module Property =
         | BackgroundSize
         | Background
         | Bleed
-        | BorderBottomColor             
-        | BorderBottomLeftRadius        
-        | BorderBottomRightRadius       
+        | BorderBottomColor
+        | BorderBottomLeftRadius
+        | BorderBottomRightRadius
         | BorderBottomStyle
-        | BorderBottomWidth             
+        | BorderBottomWidth
         | BorderBottom
         | BorderCollapse
-        | BorderColor                   
+        | BorderColor
         | BorderImage
         | BorderImageOutset
         | BorderImageRepeat
         | BorderImageSource
         | BorderImageSlice
         | BorderImageWidth
-        | BorderLeftColor               
+        | BorderLeftColor
         | BorderLeftStyle
-        | BorderLeftWidth               
+        | BorderLeftWidth
         | BorderLeft
-        | BorderRadius                  
-        | BorderRightColor              
+        | BorderRadius
+        | BorderRightColor
         | BorderRightStyle
-        | BorderRightWidth              
+        | BorderRightWidth
         | BorderRight
         | BorderSpacing
-        | BorderStyle                    
-        | BorderTopColor                 
-        | BorderTopLeftRadius            
-        | BorderTopRightRadius           
+        | BorderStyle
+        | BorderTopColor
+        | BorderTopLeftRadius
+        | BorderTopRightRadius
         | BorderTopStyle
-        | BorderTopWidth                 
+        | BorderTopWidth
         | BorderTop
-        | BorderWidth                    
-        | Border                         
+        | BorderWidth
+        | Border
         | Bottom
         | BoxDecorationBreak
         | BoxShadow
@@ -74,7 +74,7 @@ module Property =
         | CaretColor
         | Clear
         | Clip
-        | Color                             
+        | Color
         | Columns
         | ColumnCount
         | ColumnFill
@@ -110,7 +110,7 @@ module Property =
         | FontKerning
         | FontLanguageOverride
         | FontSizeAdjust
-        | FontSize                   
+        | FontSize
         | FontStretch
         | FontStyle
         | FontDisplay
@@ -229,6 +229,7 @@ module Property =
         | TextDecorationColor
         | TextDecorationLine
         | TextDecorationThickness
+        | TextDecorationSkip
         | TextDecorationSkipInk
         | TextDecorationStyle
         | TextIndent
@@ -237,10 +238,10 @@ module Property =
         | TextTransform
         | TextUnderlinePosition
         | Top
-        | Transform                      
+        | Transform
         | TransformOrigin
         | TransformStyle
-        | Transition                     
+        | Transition
         | TransitionDelay
         | TransitionDuration
         | TransitionProperty
@@ -269,7 +270,7 @@ module Property =
         | Hover
         interface ITransitionProperty
 
-    let value (v: Property): string = duToCamel v 
+    let value (v: Property): string = duToCamel v
 
     let propertyToKebabCase (property: Property): string =
         property

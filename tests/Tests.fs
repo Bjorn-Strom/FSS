@@ -15,6 +15,22 @@ let test (testName: string) (attributeList: CSSProperty list) (correct: (string 
 
         Expect.equal actual correct testName
 
+let testNested (testName: string) (attributeList: CSSProperty list) (correct: (string * obj) list) =
+    testCase testName <| fun _ ->
+        let actual =
+            attributeList
+            |> createCSSRecord
+            |> List.map (fun (x: string, y: obj) ->
+                let y: string list =
+                    y :?> string list list
+                    |> List.head
+                console.log("X: ", x)
+                console.log("Y: ", y)
+                x ==> (sprintf "[%s]" <| String.concat "," y)
+            )
+
+        Expect.equal actual correct testName
+
 let backgroundTests =
     testList "Background"
         [
@@ -2627,7 +2643,7 @@ let animationTests =
         ]
 
 let transformTests =
-    testList "transform"
+    testList "Transform"
         [
             test
                 "Transform none"
@@ -2754,7 +2770,6 @@ let transformTests =
                 [ Transform (Transform.SkewY(deg 50.0)) ]
                 [ "transform" ==> "skewY(50.00deg)" ]
 
-
             test
                 "Transform inherit"
                 [ Transform Inherit ]
@@ -2828,12 +2843,12 @@ let transitionTest =
                 "Transition duration unset"
                 [TransitionDuration Unset]
                 ["transitionDuration" ==> "unset"]
-                
+
             test
                 "Transition duration multiple"
                 [TransitionDurations [ sec 10.0; ms 100.0; Unset; Inherit] ]
                 ["transitionDuration" ==> "10.00s, 100.00ms, unset, inherit"]
-                
+
             test
                 "Transition delay sec"
                 [TransitionDelay (sec 6.0) ]
@@ -2858,22 +2873,22 @@ let transitionTest =
                 "Transition delay unset"
                 [ TransitionDelay Unset]
                 ["transitionDelay" ==> "unset"]
-            
+
             test
                 "Transition delay multiple"
                 [TransitionDelays [ sec 10.0; ms 100.0; Unset; Inherit] ]
                 ["transitionDelay" ==> "10.00s, 100.00ms, unset, inherit"]
-                
+
             test
                 "Transition property"
                 [TransitionProperty Property.BackgroundColor]
                 ["transitionProperty" ==> "background-color"]
-                
+
             test
                 "Transition property"
                 [TransitionProperty Property.All]
                 ["transitionProperty" ==> "all"]
-                
+
             test
                 "Transition property inherit"
                 [TransitionProperty Inherit]
@@ -2888,12 +2903,12 @@ let transitionTest =
                 "Transition property unset"
                 [ TransitionProperty Unset]
                 ["transitionProperty" ==> "unset"]
-                
+
             test
                 "Transition properties"
                 [TransitionProperties [Inherit; Unset; Property.BackgroundColor; Property.Color]]
                 ["transitionProperty" ==> "inherit, unset, background-color, color"]
-                
+
             test
                 "Transition timing function ease"
                 [ TransitionTimingFunction Animation.Ease ]
@@ -2984,51 +2999,32 @@ let transitionTest =
                 [ TransitionTimingFunction Unset ]
                 ["transitionTimingFunction" ==> "unset"]
         ]
-        
-open Fable.Core.JS
 
 let descendantTests =
-    let foo =
-        [ ! Html.P [ BackgroundColor Color.red ] ]
-        |> createCSSRecord
-        |> List.map (fun (x: string, y: obj) ->
-                let y: string list =
-                    y :?> string list list
-                    |> List.head
-                console.log("X: ", x)
-                console.log("Y: ", y)
-                x ==> String.concat "," y             
-            ) 
-        
-    let bar = [ " p" ==> "[backgroundColor,#ff0000]" ]
-    
-    console.log(foo)
-    console.log(bar)
-    
     testList "Descendants"
         [
-            test
+            testNested
                 "Descendant"
                 [ ! Html.P [ BackgroundColor Color.red ] ]
                 [ " p" ==> "[backgroundColor,#ff0000]" ]
-                
-            test
+
+            testNested
                 "Child"
                 [ !> Html.P [ BackgroundColor Color.red ] ]
                 [ " > p" ==> "[backgroundColor,#ff0000]" ]
-                
-            test
+
+            testNested
                 "Adjacent Sibling"
                 [ !+ Html.P [ BackgroundColor Color.red ] ]
                 [ " + p" ==> "[backgroundColor,#ff0000]" ]
-                
-            test
+
+            testNested
                 "General Sibling"
                 [ !~ Html.P [ BackgroundColor Color.red ] ]
                 [ " ~ p" ==> "[backgroundColor,#ff0000]" ]
-      
-            test
-                ""
+
+            testNested
+                "Composed descendants"
                 [
                     ! Html.Div
                         [
@@ -3046,15 +3042,318 @@ let descendantTests =
 
                         ]
                 ]
-                [ "div" ==> "[ > div,[ > p,[ + p,[color,#800080; fontSize,25px]]]]"]
-      
+                [ " div" ==> "[ > div,[ > p,[ + p,[color,#800080; fontSize,25px]]]]"]
+
         ]
 
-      
-      
+let textTests =
+    testList "Text"
+        [
+            test
+                "Text align left"
+                [ TextAlign Text.Left ]
+                ["textAlign" ==> "left"]
+
+            test
+                "Text align right"
+                [ TextAlign Text.Right ]
+                ["textAlign" ==> "right"]
+
+            test
+                "Text align center"
+                [ TextAlign Text.Center ]
+                ["textAlign" ==> "center"]
+
+            test
+                "Text align justify"
+                [ TextAlign Text.Justify ]
+                ["textAlign" ==> "justify"]
+
+            test
+                "Text align justify all"
+                [ TextAlign Text.JustifyAll ]
+                ["textAlign" ==> "justify-all"]
+
+            test
+                "Text align start"
+                [ TextAlign Text.Start ]
+                ["textAlign" ==> "start"]
+
+            test
+                "Text align end"
+                [ TextAlign Text.End ]
+                ["textAlign" ==> "end"]
+
+            test
+                "Text align match-parent"
+                [ TextAlign Text.MatchParent ]
+                ["textAlign" ==> "match-parent"]
+
+            test
+                "Text align inherit"
+                [ TextAlign Inherit ]
+                ["textAlign" ==> "inherit"]
+
+            test
+                "Text align initial"
+                [ TextAlign Initial ]
+                ["textAlign" ==> "initial"]
+
+            test
+                "Text align unset"
+                [ TextAlign Unset ]
+                ["textAlign" ==> "unset"]
+
+            test
+                "Text decoration line none"
+                [TextDecorationLine Text.None]
+                ["textDecorationLine" ==> "none"]
+
+            test
+                "Text decoration line underline"
+                [TextDecorationLine Text.Underline]
+                ["textDecorationLine" ==> "underline"]
+
+            test
+                "Text decoration line overline"
+                [TextDecorationLine Text.Overline]
+                ["textDecorationLine" ==> "overline"]
+
+            test
+                "Text decoration line line-through"
+                [TextDecorationLine Text.LineThrough]
+                ["textDecorationLine" ==> "line-through"]
+
+            test
+                "Text decoration line blink"
+                [TextDecorationLine Text.Blink]
+                ["textDecorationLine" ==> "blink"]
+
+            test
+                "Text decoration line inherit"
+                [ TextDecorationLine Inherit ]
+                ["textDecorationLine" ==> "inherit"]
+
+            test
+                "Text decoration line initial"
+                [ TextDecorationLine Initial ]
+                ["textDecorationLine" ==> "initial"]
+
+            test
+                "Text decoration line unset"
+                [ TextDecorationLine Unset ]
+                ["textDecorationLine" ==> "unset"]
+
+            test
+                "Text decorations multiple"
+                [TextDecorationLines [Text.None; Text.Underline; Inherit; Unset; Text.Blink]]
+                ["textDecorationLine" ==> "none underline inherit unset blink"]
+
+            test
+                "Text decoration color red"
+                [TextDecorationColor Color.red]
+                ["textDecorationColor" ==> "#ff0000"]
+
+            test
+                "Text decoration color hex"
+                [TextDecorationColor (hex "00ff00") ]
+                ["textDecorationColor" ==> "#00ff00" ]
+
+            test
+                "Text decoration color rgba"
+                [TextDecorationColor (rgba 255 128 128 0.5) ]
+                ["textDecorationColor" ==> "rgba(255, 128, 128, 0.500000)"]
+
+            test
+                "Text decoration color transparent"
+                [TextDecorationColor Color.transparent]
+                ["textDecorationColor" ==> "rgba(0, 0, 0, 0.000000)"]
+
+            test
+                "Text decoration color inherit"
+                [TextDecorationColor Inherit]
+                ["textDecorationColor" ==> "inherit"]
+
+            test
+                "Text decoration color initial"
+                [TextDecorationColor Initial]
+                ["textDecorationColor" ==> "initial"]
+
+            test
+                "Text decoration color unset"
+                [TextDecorationColor Unset]
+                ["textDecorationColor" ==> "unset"]
+
+            test
+                "Text decoration thickness auto"
+                [ TextDecorationThickness Auto ]
+                [ "textDecorationThickness" ==> "auto" ]
+
+            test
+                "Text decoration thickness from font"
+                [ TextDecorationThickness Text.FromFont ]
+                ["textDecorationThickness" ==> "from-font" ]
+
+            test
+                "Text decoration thickness em"
+                [ TextDecorationThickness (em 0.1) ]
+                ["textDecorationThickness" ==> "0.1em" ]
+
+            test
+                "Text decoration thickness px"
+                [ TextDecorationThickness (px 3) ]
+                ["textDecorationThickness" ==> "3px" ]
+
+            test
+                "Text decoration thickness percent"
+                [ TextDecorationThickness (pct 10) ]
+                ["textDecorationThickness" ==> "10%" ]
+
+            test
+                "Text decoration thickness inherit"
+                [ TextDecorationThickness Inherit ]
+                ["textDecorationThickness" ==> "inherit" ]
+
+            test
+                "Text decoration thickness initial"
+                [ TextDecorationThickness Initial ]
+                ["textDecorationThickness" ==> "initial" ]
+
+            test
+                "Text decoration thickness unset"
+                [ TextDecorationThickness Unset ]
+                ["textDecorationThickness" ==> "unset" ]
+
+            test
+                "Text decoration style solid"
+                [TextDecorationStyle Text.Solid]
+                ["textDecorationStyle" ==> "solid"]
+
+            test
+                "Text decoration style double"
+                [TextDecorationStyle Text.Double]
+                ["textDecorationStyle" ==> "double"]
+
+            test
+                "Text decoration style dotted"
+                [TextDecorationStyle Text.Dotted]
+                ["textDecorationStyle" ==> "dotted"]
+
+            test
+                "Text decoration style dashed"
+                [TextDecorationStyle Text.Dashed]
+                ["textDecorationStyle" ==> "dashed"]
+
+            test
+                "Text decoration style wavy"
+                [TextDecorationStyle Text.Wavy]
+                ["textDecorationStyle" ==> "wavy"]
+
+            test
+                "Text decoration style inherit"
+                [TextDecorationStyle Inherit]
+                ["textDecorationStyle" ==> "inherit"]
+
+            test
+                "Text decoration style initial"
+                [TextDecorationStyle Initial]
+                ["textDecorationStyle" ==> "initial"]
+
+            test
+                "Text decoration style unset"
+                [TextDecorationStyle Unset]
+                ["textDecorationStyle" ==> "unset"]
+
+            test
+                "Text decoration skip none"
+                [TextDecorationSkip Text.TextDecorationSkip.None]
+                ["textDecorationSkip" ==> "none"]
+
+            test
+                "Text decoration skip objects"
+                [TextDecorationSkip Text.Objects]
+                ["textDecorationSkip" ==> "objects"]
+
+            test
+                "Text decoration skip spaces"
+                [TextDecorationSkip Text.Spaces]
+                ["textDecorationSkip" ==> "spaces"]
+
+            test
+                "Text decoration skip edges"
+                [TextDecorationSkip Text.Edges]
+                ["textDecorationSkip" ==> "edges"]
+
+            test
+                "Text decoration skip box-decoration"
+                [TextDecorationSkip Text.BoxDecoration]
+                ["textDecorationSkip" ==> "box-decoration"]
+
+            test
+                "Text decoration skip multiple - objects and spaces"
+                [TextDecorationSkips [ Text.Objects; Text.Spaces] ]
+                ["textDecorationSkip" ==> "objects spaces"]
+
+            test
+                "Text decoration skip multiple - leading spaces and trailing spaces"
+                [TextDecorationSkips [Text.LeadingSpaces; Text.TrailingSpaces ]]
+                ["textDecorationSkip" ==> "leading-spaces trailing-spaces"]
+
+            test
+                "Text decoration skip multiple - objects edges box-decoration"
+                [TextDecorationSkips [Text.Objects; Text.Edges; Text.BoxDecoration ]]
+                ["textDecorationSkip" ==> "objects edges box-decoration"]
+
+            test
+                "Text decoration skip inherit"
+                [TextDecorationSkip Inherit]
+                ["textDecorationSkip" ==> "inherit"]
+
+            test
+                "Text decoration skip initial"
+                [TextDecorationSkip Initial]
+                ["textDecorationSkip" ==> "initial"]
+
+            test
+                "Text decoration skip unset"
+                [TextDecorationSkip Unset]
+                ["textDecorationSkip" ==> "unset"]
+
+            test
+                "Text decoration skip unset"
+                [TextDecorationSkipInk Auto]
+                ["textDecorationSkipInk" ==> "auto"]
+
+            test
+                "Text decoration skip All"
+                [TextDecorationSkipInk Text.All]
+                ["textDecorationSkipInk" ==> "all"]
+
+            test
+                "Text decoration skip none"
+                [TextDecorationSkipInk Text.TextDecorationSkipInk.None]
+                ["textDecorationSkipInk" ==> "none"]
+
+            test
+                "Text decoration skipink inherit"
+                [TextDecorationSkipInk Inherit]
+                ["textDecorationSkipInk" ==> "inherit"]
+
+            test
+                "Text decoration skipink unset"
+                [TextDecorationSkipInk Unset]
+                ["textDecorationSkipInk" ==> "unset"]
+
+            test
+                "Text decoration skipink initial"
+                [TextDecorationSkipInk Initial]
+                ["textDecorationSkipInk" ==> "initial"]
+
+        ]
 
 let tests =
         testList "Fss Tests" [
+            textTests
             descendantTests
             transitionTest
             transformTests
@@ -3076,216 +3375,15 @@ let tests =
 Mocha.runTests tests |> ignore
 
 (*
-testCase "Descendants" <| fun _ ->
-    let style =
-        fss
-            [
-                ! P
-                    [
-                        BackgroundColor red
-                    ]
-            ]
-
-    RTL.render(
-        fragment []
-            [
-                div [ ClassName style] [
-                    p [ Id "p1" ] [ str "Apple"]
-                    div [] [ p [ Id "p2" ] [str "An apple a day keeps the doctor away"]]
-                    p [ Id "p3" ] [ str "Banana"]
-                    p [ Id "p4" ] [ str "Cherry"]
-                ]
-            ]) |> ignore
-
-    let p1 = getComputedCssById("p1")
-    let p2 = getComputedCssById("p2")
-    let p3 = getComputedCssById("p3")
-    let p4 = getComputedCssById("p4")
-    Expect.equal (getValue p1 "background-color") "rgb(255, 0, 0)" "Descendant selector"
-    Expect.equal (getValue p2 "background-color") "rgb(255, 0, 0)" "Descendant selector"
-    Expect.equal (getValue p3 "background-color") "rgb(255, 0, 0)" "Descendant selector"
-    Expect.equal (getValue p4 "background-color") "rgb(255, 0, 0)" "Descendant selector"
-    RTL.cleanup()
-
-testCase "Child" <| fun _ ->
-
-    let style =
-        fss
-            [
-                !> P
-                    [
-                        BackgroundColor green
-                    ]
-            ]
-
-    RTL.render(
-        fragment []
-            [
-                div [ ClassName style] [
-                    p [ Id "p1" ] [ str "Apple"]
-                    div [] [ p [] [str "An apple a day keeps the doctor away"]]
-                    p [ Id "p2" ] [ str "Banana"]
-                    p [ Id "p3" ] [ str "Cherry"]
-                ]
-            ]) |> ignore
-
-    let p1 = getComputedCssById("p1")
-    let p2 = getComputedCssById("p2")
-    let p3 = getComputedCssById("p3")
-    Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "Child selector"
-    Expect.equal (getValue p2 "background-color") "rgb(0, 128, 0)" "Child selector"
-    Expect.equal (getValue p3 "background-color") "rgb(0, 128, 0)" "Child selector"
-    RTL.cleanup()
-
-testCase "Adjacent sibling" <| fun _ ->
-
-    let style =
-        fss
-            [
-                !> P
-                    [
-                        BackgroundColor green
-                    ]
-            ]
-
-    RTL.render(
-        fragment []
-            [
-                div [ ClassName style] [
-                    p [ ] [ str "Apple"]
-                    div [] [ p [] [str "An apple a day keeps the doctor away"]]
-                    p [ Id "p1" ] [ str "Banana"]
-                    p [ ] [ str "Cherry"]
-                ]
-            ]) |> ignore
-
-    let p1 = getComputedCssById("p1")
-    Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "Adjacent sibling selector"
-    RTL.cleanup()
-
-testCase "General sibling" <| fun _ ->
-    let style =
-        fss
-            [
-                !~ P
-                    [
-                        BackgroundColor green
-                    ]
-            ]
-
-    RTL.render(
-        fragment []
-            [
-                div [] [
-                    p [] [ str "Apple"]
-                    div [ ClassName style ] [ p [] [str "An apple a day keeps the doctor away"]]
-                    p [ Id "p1" ] [ str "Banana"]
-                    p [ Id "p2" ] [ str "Cherry"]
-                ]
-            ]) |> ignore
-
-    let p1 = getComputedCssById("p1")
-    let p2 = getComputedCssById("p2")
-    Expect.equal (getValue p1 "background-color") "rgb(0, 128, 0)" "General sibling selector"
-    Expect.equal (getValue p2 "background-color") "rgb(0, 128, 0)" "General sibling selector"
-    RTL.cleanup()
-
-testCase "Composed selector" <| fun _ ->
-    let style =
-        fss
-            [
-                ! Div
-                    [
-                        !> Div
-                            [
-                                !> P
-                                    [
-                                        !+ P
-                                            [
-                                                Color purple
-                                                FontSize (px 25)
-                                            ]
-                                    ]
-                            ]
-
-                    ]
-            ]
-
-    RTL.render(
-        fragment []
-            [
-                div [ ClassName style ]
-                     [
-                         div []
-                             [
-                                 div []
-                                     [
-                                         p [] [ str "Hi" ]
-                                         p [ Id "p1"] [ str "Hi" ]
-                                     ]
-                             ]
-                     ]
-            ]) |> ignore
-
-    let p1 = getComputedCssById("p1")
-    Expect.equal (getValue p1 "color") "rgb(128, 0, 128)" "Composed selectors"
-    Expect.equal (getValue p1 "font-size") "25px" "Composed selectors"
-    RTL.cleanup()
-
 test "Text"
     [
-        (fss [ TextAlign TextAlign.Left ]), ["text-align", "left"]
-        (fss [ TextAlign TextAlign.Right ]), ["text-align", "right"]
-        (fss [ TextAlign TextAlign.Center ]), ["text-align", "center"]
-        (fss [ TextAlign TextAlign.Justify ]), ["text-align", "justify"]
-        (fss [ TextAlign TextAlign.JustifyAll ]), ["text-align", "start"]
-        (fss [ TextAlign TextAlign.Start ]), ["text-align", "start"]
-        (fss [ TextAlign TextAlign.End ]), ["text-align", "end"]
-        (fss [ TextAlign TextAlign.MatchParent ]), ["text-align", "left"]
 
-        (fss [ TextDecorationLine Underline ]), ["text-decoration", "underline rgb(0, 0, 0)"]
-        (fss [ TextDecorationLine Overline ]), ["text-decoration", "overline rgb(0, 0, 0)"]
-        (fss [ TextDecorationLine LineThrough ]), ["text-decoration", "line-through rgb(0, 0, 0)"]
-        (fss [ TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(0, 0, 0)"]
-
-        (fss [ TextDecorationColor orangeRed; TextDecorationLines [Underline; Overline; LineThrough] ]), ["text-decoration", "underline overline line-through rgb(255, 69, 0)"]
-
-        (fss [ TextDecorationThickness Auto  ]), ["text-decoration-thickness", "auto"]
-        (fss [ TextDecorationThickness FromFont  ]), ["text-decoration-thickness", "from-font"]
-        (fss [ TextDecorationThickness (pct 30)  ]), ["text-decoration-thickness", "30%"]
-        (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
-
-        (fss [ TextDecorationThickness (px 150)  ]), ["text-decoration-thickness", "150px"]
-
-        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Solid]), ["text-decoration-style", "solid"]
-        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Double]), ["text-decoration-style", "double"]
-        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Dotted]), ["text-decoration-style", "dotted"]
-        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Dashed]), ["text-decoration-style", "dashed"]
-        (fss [ TextDecorationLine Underline; TextDecorationStyle TextDecorationStyle.Wavy]), ["text-decoration-style", "wavy"]
-
-        (fss [ TextDecorationSkipInk TextDecorationSkipInk.All ]), ["text-decoration-skip-ink", "all"]
-        (fss [ TextDecorationSkipInk TextDecorationSkipInk.Auto ]), ["text-decoration-skip-ink", "auto"]
-        (fss [ TextDecorationSkipInk TextDecorationSkipInk.None ]), ["text-decoration-skip-ink", "none"]
-
-        (fss [ TextTransform Capitalize ]), ["text-transform", "capitalize"]
-        (fss [ TextTransform Uppercase ]), ["text-transform", "uppercase"]
-        (fss [ TextTransform Lowercase ]), ["text-transform", "lowercase"]
-        (fss [ TextTransform TextTransform.None ]), ["text-transform", "none"]
-        (fss [ TextTransform FullWidth ]), ["text-transform", "none"]
-        (fss [ TextTransform FullSizeKana ]), ["text-transform", "none"]
 
         (fss [ TextIndent (px 10) ]), ["text-indent", "10px"]
         (fss [ TextIndent (pct 100) ]), ["text-indent", "100%"]
         // These are not supported?
         // (fss [ TextIndents [px 10; (TextIndent.EachLine)] ]), ["text-indent", "each-line"]
         // (fss [ TextIndents [px 10; (TextIndent.Hanging)] ]), ["text-indent", "hanging"]
-
-        (fss [ Functions.TextShadow (px 10) (px 5) (px 15) red ]), ["text-shadow", "rgb(255, 0, 0) 10px 5px 15px"]
-        (fss [ Functions.TextShadows
-            [
-                px  -4, px 3, px 0, hex "#3a50d9"
-                px -14, px 7, px 0, hex "#0a0e27"
-            ]]), ["text-shadow", "rgb(58, 80, 217) -4px 3px 0px, rgb(10, 14, 39) -14px 7px 0px"]
 
         (fss [ TextOverflow TextOverflow.Clip ]), ["text-overflow", "clip"]
         (fss [ TextOverflow TextOverflow.Ellipsis ]), ["text-overflow", "ellipsis"]

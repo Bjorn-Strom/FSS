@@ -68,6 +68,8 @@ module Value =
         | TextDecorationColor     of IColor
         | TextDecorationThickness of ITextDecorationThickness
         | TextDecorationStyle     of ITextDecorationStyle
+        | TextDecorationSkip      of ITextDecorationSkip
+        | TextDecorationSkips     of ITextDecorationSkip list
         | TextDecorationSkipInk   of ITextDecorationSkipInk
         | TextTransform           of ITextTransform
         | TextIndent              of ITextIndent
@@ -227,6 +229,8 @@ module Value =
                 | TextDecorationColor     t  -> Property.value Property.TextDecorationColor     ==> Color.value t
                 | TextDecorationThickness t  -> Property.value Property.TextDecorationThickness ==> TextValue.textDecorationThickness t
                 | TextDecorationStyle     t  -> Property.value Property.TextDecorationStyle     ==> TextValue.textDecorationStyle t
+                | TextDecorationSkip      t  -> Property.value Property.TextDecorationSkip      ==> TextValue.textDecorationSkip t
+                | TextDecorationSkips     ts -> Property.value Property.TextDecorationSkip      ==> combineWs TextValue.textDecorationSkip ts
                 | TextDecorationSkipInk   t  -> Property.value Property.TextDecorationSkipInk   ==> TextValue.textDecorationSkipInk t
                 | TextTransform           t  -> Property.value Property.TextTransform           ==> TextValue.textTransform t
                 | TextIndent              t  -> Property.value Property.TextIndent              ==> TextValue.textIndent t

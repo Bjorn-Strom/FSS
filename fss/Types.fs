@@ -22,6 +22,7 @@ module Types =
     type ITextDecorationLine      = interface end
     type ITextDecorationThickness = interface end
     type ITextDecorationStyle     = interface end
+    type ITextDecorationSkip      = interface end
     type ITextDecorationSkipInk   = interface end
     type ITextTransform           = interface end
     type ITextIndent              = interface end

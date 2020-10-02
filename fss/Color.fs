@@ -5,7 +5,7 @@ open Global
 open Types
 
 module Color =
-    type CssColor = 
+    type CssColor =
         | CssColor of string
         interface IColor
         interface ILinearGradient
@@ -171,3 +171,4 @@ module Color =
     let whiteSmoke = hex "f5f5f5"
     let yellowGreen = hex "9acd32"
     let rebeccaPurple = hex "663399"
+    let transparent = rgba 0 0 0 0.0

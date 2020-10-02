@@ -13,6 +13,8 @@ module Global =
         interface IAlignSelf
         interface IMargin
         interface IPadding
+        interface ITextDecorationThickness
+        interface ITextDecorationSkipInk
 
     type Center =
         | Center
@@ -52,6 +54,7 @@ module Global =
         interface ITextDecorationLine
         interface ITextDecorationThickness
         interface ITextDecorationStyle
+        interface ITextDecorationSkip
         interface ITextDecorationSkipInk
         interface ITextTransform
         interface ITextIndent
