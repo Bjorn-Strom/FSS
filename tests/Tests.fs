@@ -5,8 +5,6 @@ open Fable.Core.JsInterop
 
 open Fss
 
-open Fable.Core.JS
-
 let test (testName: string) (attributeList: CSSProperty list) (correct: (string * obj) list) =
     testCase testName <| fun _ ->
         let actual =
@@ -24,8 +22,6 @@ let testNested (testName: string) (attributeList: CSSProperty list) (correct: (s
                 let y: string list =
                     y :?> string list list
                     |> List.head
-                console.log("X: ", x)
-                console.log("Y: ", y)
                 x ==> (sprintf "[%s]" <| String.concat "," y)
             )
 
@@ -1049,7 +1045,7 @@ let fontTests =
 
             test
                 "Font variant ligatures none"
-                [ FontVariantLigatures Font.None]
+                [ FontVariantLigatures None]
                 ["fontVariantLigatures" ==> "none"]
 
             test
@@ -1183,7 +1179,7 @@ let borderTests =
 
             test
                 "Borderstyle none"
-                [ BorderStyle Border.None ]
+                [ BorderStyle None ]
                 [
                     "borderStyle" ==> "none"
                 ]
@@ -1508,7 +1504,7 @@ let perspectiveTests =
 
             test
                 "Perspective none"
-                [ Perspective Perspective.None ]
+                [ Perspective None ]
                 ["perspective" ==> "none"]
 
             test
@@ -1612,7 +1608,7 @@ let displayTests =
 
                 test
                     "Display none"
-                    [ Display Display.None]
+                    [ Display None]
                     ["display" ==> "none"]
         ]
 
@@ -2602,7 +2598,7 @@ let animationTests =
 
             test
                 "Animation fill mode none"
-                [ AnimationFillMode Animation.None ]
+                [ AnimationFillMode None ]
                 ["animationFillMode" ==> "none"]
 
             test
@@ -2647,7 +2643,7 @@ let transformTests =
         [
             test
                 "Transform none"
-                [ Transform Transform.None ]
+                [ Transform None ]
                 [ "transform" ==> "none" ]
 
             test
@@ -2920,7 +2916,7 @@ let transitionTest =
                 ["transitionTimingFunction" ==> "ease-in"]
 
             test
-                "Transition timing function ease out"
+                "Transition timinunction ease out"
                 [ TransitionTimingFunction Animation.EaseOut ]
                 ["transitionTimingFunction" ==> "ease-out"]
 
@@ -3103,10 +3099,46 @@ let textTests =
                 "Text align unset"
                 [ TextAlign Unset ]
                 ["textAlign" ==> "unset"]
+            
+            test
+                "Text decoration color red"
+                [TextDecorationColor Color.red]
+                ["textDecorationColor" ==> "#ff0000"]
+
+            test
+                "Text decoration color hex"
+                [TextDecorationColor (hex "00ff00") ]
+                ["textDecorationColor" ==> "#00ff00" ]
+
+            test
+                "Text decoration color rgba"
+                [TextDecorationColor (rgba 255 128 128 0.5) ]
+                ["textDecorationColor" ==> "rgba(255, 128, 128, 0.500000)"]
+
+            test
+                "Text decoration color transparent"
+                [TextDecorationColor Color.transparent]
+                ["textDecorationColor" ==> "rgba(0, 0, 0, 0.000000)"]
+
+            test
+                "Text decoration color inherit"
+                [TextDecorationColor Inherit]
+                ["textDecorationColor" ==> "inherit"]
+
+            test
+                "Text decoration color initial"
+                [TextDecorationColor Initial]
+                ["textDecorationColor" ==> "initial"]
+
+            test
+                "Text decoration color unset"
+                [TextDecorationColor Unset]
+                ["textDecorationColor" ==> "unset"]
+                
 
             test
                 "Text decoration line none"
-                [TextDecorationLine Text.None]
+                [TextDecorationLine None]
                 ["textDecorationLine" ==> "none"]
 
             test
@@ -3146,127 +3178,12 @@ let textTests =
 
             test
                 "Text decorations multiple"
-                [TextDecorationLines [Text.None; Text.Underline; Inherit; Unset; Text.Blink]]
+                [TextDecorationLines [None; Text.Underline; Inherit; Unset; Text.Blink]]
                 ["textDecorationLine" ==> "none underline inherit unset blink"]
 
             test
-                "Text decoration color red"
-                [TextDecorationColor Color.red]
-                ["textDecorationColor" ==> "#ff0000"]
-
-            test
-                "Text decoration color hex"
-                [TextDecorationColor (hex "00ff00") ]
-                ["textDecorationColor" ==> "#00ff00" ]
-
-            test
-                "Text decoration color rgba"
-                [TextDecorationColor (rgba 255 128 128 0.5) ]
-                ["textDecorationColor" ==> "rgba(255, 128, 128, 0.500000)"]
-
-            test
-                "Text decoration color transparent"
-                [TextDecorationColor Color.transparent]
-                ["textDecorationColor" ==> "rgba(0, 0, 0, 0.000000)"]
-
-            test
-                "Text decoration color inherit"
-                [TextDecorationColor Inherit]
-                ["textDecorationColor" ==> "inherit"]
-
-            test
-                "Text decoration color initial"
-                [TextDecorationColor Initial]
-                ["textDecorationColor" ==> "initial"]
-
-            test
-                "Text decoration color unset"
-                [TextDecorationColor Unset]
-                ["textDecorationColor" ==> "unset"]
-
-            test
-                "Text decoration thickness auto"
-                [ TextDecorationThickness Auto ]
-                [ "textDecorationThickness" ==> "auto" ]
-
-            test
-                "Text decoration thickness from font"
-                [ TextDecorationThickness Text.FromFont ]
-                ["textDecorationThickness" ==> "from-font" ]
-
-            test
-                "Text decoration thickness em"
-                [ TextDecorationThickness (em 0.1) ]
-                ["textDecorationThickness" ==> "0.1em" ]
-
-            test
-                "Text decoration thickness px"
-                [ TextDecorationThickness (px 3) ]
-                ["textDecorationThickness" ==> "3px" ]
-
-            test
-                "Text decoration thickness percent"
-                [ TextDecorationThickness (pct 10) ]
-                ["textDecorationThickness" ==> "10%" ]
-
-            test
-                "Text decoration thickness inherit"
-                [ TextDecorationThickness Inherit ]
-                ["textDecorationThickness" ==> "inherit" ]
-
-            test
-                "Text decoration thickness initial"
-                [ TextDecorationThickness Initial ]
-                ["textDecorationThickness" ==> "initial" ]
-
-            test
-                "Text decoration thickness unset"
-                [ TextDecorationThickness Unset ]
-                ["textDecorationThickness" ==> "unset" ]
-
-            test
-                "Text decoration style solid"
-                [TextDecorationStyle Text.Solid]
-                ["textDecorationStyle" ==> "solid"]
-
-            test
-                "Text decoration style double"
-                [TextDecorationStyle Text.Double]
-                ["textDecorationStyle" ==> "double"]
-
-            test
-                "Text decoration style dotted"
-                [TextDecorationStyle Text.Dotted]
-                ["textDecorationStyle" ==> "dotted"]
-
-            test
-                "Text decoration style dashed"
-                [TextDecorationStyle Text.Dashed]
-                ["textDecorationStyle" ==> "dashed"]
-
-            test
-                "Text decoration style wavy"
-                [TextDecorationStyle Text.Wavy]
-                ["textDecorationStyle" ==> "wavy"]
-
-            test
-                "Text decoration style inherit"
-                [TextDecorationStyle Inherit]
-                ["textDecorationStyle" ==> "inherit"]
-
-            test
-                "Text decoration style initial"
-                [TextDecorationStyle Initial]
-                ["textDecorationStyle" ==> "initial"]
-
-            test
-                "Text decoration style unset"
-                [TextDecorationStyle Unset]
-                ["textDecorationStyle" ==> "unset"]
-
-            test
                 "Text decoration skip none"
-                [TextDecorationSkip Text.TextDecorationSkip.None]
+                [TextDecorationSkip None]
                 ["textDecorationSkip" ==> "none"]
 
             test
@@ -3331,7 +3248,7 @@ let textTests =
 
             test
                 "Text decoration skip none"
-                [TextDecorationSkipInk Text.TextDecorationSkipInk.None]
+                [TextDecorationSkipInk None]
                 ["textDecorationSkipInk" ==> "none"]
 
             test
@@ -3347,8 +3264,146 @@ let textTests =
             test
                 "Text decoration skipink initial"
                 [TextDecorationSkipInk Initial]
-                ["textDecorationSkipInk" ==> "initial"]
+                ["textDecorationSkipInk" ==> "initial"]   
+            
+            test
+                "Text decoration style solid"
+                [TextDecorationStyle Text.Solid]
+                ["textDecorationStyle" ==> "solid"]
 
+            test
+                "Text decoration style double"
+                [TextDecorationStyle Text.Double]
+                ["textDecorationStyle" ==> "double"]
+
+            test
+                "Text decoration style dotted"
+                [TextDecorationStyle Text.Dotted]
+                ["textDecorationStyle" ==> "dotted"]
+
+            test
+                "Text decoration style dashed"
+                [TextDecorationStyle Text.Dashed]
+                ["textDecorationStyle" ==> "dashed"]
+
+            test
+                "Text decoration style wavy"
+                [TextDecorationStyle Text.Wavy]
+                ["textDecorationStyle" ==> "wavy"]
+
+            test
+                "Text decoration style inherit"
+                [TextDecorationStyle Inherit]
+                ["textDecorationStyle" ==> "inherit"]
+
+            test
+                "Text decoration style initial"
+                [TextDecorationStyle Initial]
+                ["textDecorationStyle" ==> "initial"]
+
+            test
+                "Text decoration style unset"
+                [TextDecorationStyle Unset]
+                ["textDecorationStyle" ==> "unset"]
+            
+            test
+                "Text decoration thickness auto"
+                [ TextDecorationThickness Auto ]
+                [ "textDecorationThickness" ==> "auto" ]
+
+            test
+                "Text decoration thickness from font"
+                [ TextDecorationThickness Text.FromFont ]
+                ["textDecorationThickness" ==> "from-font" ]
+
+            test
+                "Text decoration thickness em"
+                [ TextDecorationThickness (em 0.1) ]
+                ["textDecorationThickness" ==> "0.1em" ]
+
+            test
+                "Text decoration thickness px"
+                [ TextDecorationThickness (px 3) ]
+                ["textDecorationThickness" ==> "3px" ]
+
+            test
+                "Text decoration thickness percent"
+                [ TextDecorationThickness (pct 10) ]
+                ["textDecorationThickness" ==> "10%" ]
+
+            test
+                "Text decoration thickness inherit"
+                [ TextDecorationThickness Inherit ]
+                ["textDecorationThickness" ==> "inherit" ]
+
+            test
+                "Text decoration thickness initial"
+                [ TextDecorationThickness Initial ]
+                ["textDecorationThickness" ==> "initial" ]
+
+            test
+                "Text decoration thickness unset"
+                [ TextDecorationThickness Unset ]
+                ["textDecorationThickness" ==> "unset" ]
+            
+                        
+                        
+                        
+                        
+            test
+                "Text emphasis none"
+                [ TextEmphasis None ]
+                ["textEmphasis" ==> "none"]
+                
+            test
+                "Text emphasis string"
+                [ TextEmphasis (Text.TextEmphasis.String "X") ]
+                ["textEmphasis" ==> "X"]
+                
+            test
+                "Text emphasis keyword"
+                [ TextEmphasis (Text.TextEmphasis.KeywordValue Text.Keyword.Filled) ]
+                ["textEmphasis" ==> "filled"]
+        
+            test
+                "Text emphasis keyword"
+                [ TextEmphasis (Text.TextEmphasis.KeywordValue Text.Keyword.Open) ]
+                ["textEmphasis" ==> "open"]
+                
+            test
+                "Text emphasis keyword"
+                [ TextEmphasis (Text.TextEmphasis.KeywordValue Text.Keyword.FilledSesame) ]
+                ["textEmphasis" ==> "filled sesame"]
+                
+            test
+                "Text emphasis keyword"
+                [ TextEmphasis (Text.TextEmphasis.KeywordValue Text.Keyword.OpenSesame) ]
+                ["textEmphasis" ==> "open sesame"]
+                
+            test
+                "Text emphasis keyword with color"
+                [ TextEmphasis (Text.TextEmphasis.KeywordValueAndColor(Text.Keyword.OpenSesame, Color.orangeRed)) ]
+                ["textEmphasis" ==> "open sesame #ff4500"]
+                
+            test
+                "Text emphasis string with color"
+                [ TextEmphasis (Text.TextEmphasis.StringAndColor("x", (hex "ff0000"))) ]
+                ["textEmphasis" ==> "x #ff0000"]
+                
+            test
+                "Text emphasis inherit"
+                [ TextEmphasis Inherit ]
+                ["textEmphasis" ==> "inherit" ]
+
+            test
+                "Text emphasis initial"
+                [ TextEmphasis Initial ]
+                ["textEmphasis" ==> "initial" ]
+
+            test
+                "Text emphasis unset"
+                [ TextEmphasis Unset ]
+                ["textEmphasis" ==> "unset" ]
         ]
 
 let tests =

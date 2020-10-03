@@ -5,9 +5,22 @@ open Fss.Utilities.Helpers
 module Global =
     open Types
 
+    type None =
+        | None
+        interface IFontVariantLigatures
+        interface IBorderStyle
+        interface IPerspective
+        interface IDisplay
+        interface IAnimationFillMode
+        interface ITransform
+        interface ITextTransform
+        interface ITextDecorationLine
+        interface ITextDecorationSkip
+        interface ITextDecorationSkipInk
+        interface ITextEmphasis
+        
     type Auto =
         | Auto
-        interface IBackgroundSize
         interface IContentSize
         interface IFlexBasis
         interface IAlignSelf
@@ -15,6 +28,8 @@ module Global =
         interface IPadding
         interface ITextDecorationThickness
         interface ITextDecorationSkipInk
+        interface IBackgroundSize
+
 
     type Center =
         | Center
@@ -27,11 +42,6 @@ module Global =
         | Normal
         interface IFontStyle
         interface IFontWeight
-
-    type None =
-        | None
-        interface ITextTransform
-        interface IDisplay
 
     type Global =
         | Initial
@@ -57,6 +67,7 @@ module Global =
         interface ITextDecorationSkip
         interface ITextDecorationSkipInk
         interface ITextTransform
+        interface ITextEmphasis
         interface ITextIndent
         interface ITextShadow
         interface IColor

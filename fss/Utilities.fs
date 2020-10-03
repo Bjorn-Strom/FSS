@@ -4,33 +4,39 @@ open Microsoft.FSharp.Reflection
 open System
 
 module Helpers =
-    let pascalToKebabCase (value: string): string =
+    let toLowerAndCombine (separator: string) (value: string): string =
         value
         |> Seq.fold (fun acc element ->
         if Char.IsUpper(char element) && acc.Length = 0 then
             acc + (string <| Char.ToLower(element))
         else if Char.IsUpper(char element) && acc.Length <> 0 then 
-            sprintf "%s-%s" acc (string <| Char.ToLower(element))
+            sprintf "%s%s%s" acc separator (string <| Char.ToLower(element))
         else 
             acc + (string element)) ""
 
     let pascalToCamelCase (value: string): string = sprintf "%c%s" (Char.ToLower(value.[0])) value.[1..]
-
+    let pascalToKebabCase (value: string): string = toLowerAndCombine "-" value
+    
     let inline duToString (x:'a): string= 
         match FSharpValue.GetUnionFields(x, typeof<'a>) with
         | case, _ -> case.Name
 
     let inline duToLowercase (x: 'a) = (duToString x).ToLower()
-    
+
     let inline duToKebab (x: 'a) = 
         x
         |> duToString
-        |> pascalToKebabCase
+        |> toLowerAndCombine "-"
 
     let inline duToCamel (x: 'a) =
         x
         |> duToString
         |> pascalToCamelCase
+        
+    let inline duToSpaced (x: 'a) =
+        x
+        |> duToString
+        |> toLowerAndCombine " "
 
     let toPsuedo (value: string): string = sprintf ":%s" value
 

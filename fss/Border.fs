@@ -34,15 +34,16 @@ module BorderValue =
 
     let borderWidth (v: IBorderWidth): string =
         match v with
-            | :? Global as g -> GlobalValue.globalValue g
+            | :? Global      as g -> GlobalValue.globalValue g
             | :? BorderWidth as b -> duToLowercase b
-            | :? Size as s -> Units.Size.value s
-            | :? Percent as p -> Units.Percent.value p
+            | :? Size        as s -> Units.Size.value s
+            | :? Percent     as p -> Units.Percent.value p
             | _ -> "Unknown border width"
 
     let borderStyle (v: IBorderStyle): string =
         match v with
-            | :? Global as g -> GlobalValue.globalValue g
+            | :? Global      as g -> GlobalValue.globalValue g
+            | :? None        as n -> GlobalValue.none n
             | :? BorderStyle as b -> duToLowercase b
             | _ -> "Unknown border style"
             

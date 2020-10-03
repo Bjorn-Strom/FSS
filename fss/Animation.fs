@@ -48,8 +48,7 @@ module Animation =
         | Backwards
         | Both
         | None
-
-    let private fillModeValue (v: FillMode): string = duToString v
+        interface IAnimationFillMode
 
     // Animation play state
     type PlayState =
@@ -87,7 +86,11 @@ module AnimationValue =
             | :? Direction as d -> duToKebab d
             | _              -> "Unknown animation direction"
 
-    let fillMode (v: FillMode): string = duToLowercase v
+    let fillMode (v: IAnimationFillMode): string =
+        match v with
+            | :? None     as n -> GlobalValue.none n
+            | :? FillMode as f -> duToLowercase f
+            | _ -> "Unknown animation fill mode"
 
     let playState (v: IAnimationPlayState): string =
         match v with

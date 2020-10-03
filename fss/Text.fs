@@ -5,6 +5,7 @@ open Global
 open Units.Percent
 open Units.Size
 open Utilities.Helpers
+open Color
 
 module Text =
 
@@ -22,7 +23,6 @@ module Text =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
     type TextDecorationLine =
-        | None
         | Underline
         | Overline
         | LineThrough
@@ -31,7 +31,6 @@ module Text =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
     type TextDecorationThickness =
-        | Auto
         | FromFont
         interface ITextDecorationThickness
 
@@ -46,7 +45,6 @@ module Text =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
     type TextDecorationSkip =
-        | None
         | Objects
         | Spaces
         | LeadingSpaces
@@ -57,13 +55,11 @@ module Text =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
     type TextDecorationSkipInk =
-        | None
         | All
         interface ITextDecorationSkipInk
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
     type TextTransform =
-        | None
         | Capitalize
         | Uppercase
         | Lowercase
@@ -89,6 +85,20 @@ module Text =
         | Clip
         | Ellipsis
         | Custom of string
+        
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
+    type Keyword =
+        | Filled
+        | Open
+        | FilledSesame
+        | OpenSesame
+    
+    type TextEmphasis =
+        | KeywordValue of Keyword
+        | KeywordValueAndColor of Keyword * CssColor
+        | String of string
+        | StringAndColor of string * CssColor
+        interface ITextEmphasis
 
 module TextValue =
     open Text
@@ -102,6 +112,7 @@ module TextValue =
     let textDecorationLine (v: ITextDecorationLine): string =
         match v with
             | :? Global             as g -> GlobalValue.globalValue g
+            | :? None               as n -> GlobalValue.none n
             | :? TextDecorationLine as t -> duToKebab t
             | _                          -> "unknown text decoration line"
 
@@ -123,6 +134,7 @@ module TextValue =
     let textDecorationSkip (v: ITextDecorationSkip): string =
         match v with
             | :? Global             as g -> GlobalValue.globalValue g
+            | :? None               as n -> GlobalValue.none n
             | :? TextDecorationSkip as t -> duToKebab t
             | _                             -> "unknown text decoration skip ink"
 
@@ -130,6 +142,7 @@ module TextValue =
         match v with
             | :? Global                as g -> GlobalValue.globalValue g
             | :? Auto                  as a -> GlobalValue.auto a
+            | :? None                  as n -> GlobalValue.none n
             | :? TextDecorationSkipInk as t -> duToLowercase t
             | _                             -> "unknown text decoration skip ink"
 
@@ -148,7 +161,7 @@ module TextValue =
             | :? TextIndent as t -> duToKebab t
             | _                  -> "unknown text transform"
 
-    let textShadow (v: ITextShadow) : string =
+    let textShadow (v: ITextShadow): string =
         let getValue (TextShadow(s1, s2, s3, c)) = s1, s2, s3, c
         match v with
             | :? Global         as g -> GlobalValue.globalValue g
@@ -161,3 +174,17 @@ module TextValue =
         match v with
             | Custom s -> sprintf "\"%s\"" s
             | _        -> duToLowercase v
+            
+    let textEmphasis (v: ITextEmphasis): string =
+        let stringifyTextEmphasis (s: TextEmphasis): string =
+            match s with
+                | KeywordValue k -> duToSpaced k
+                | KeywordValueAndColor (k, c) -> sprintf "%s %s" (duToSpaced k) (Color.value c)
+                | String s -> s
+                | StringAndColor (s, c) -> sprintf "%s %s" s (Color.value c)
+        
+        match v with
+            | :? Global       as g -> GlobalValue.globalValue g
+            | :? None         as n -> GlobalValue.none n
+            | :? TextEmphasis as t -> stringifyTextEmphasis t
+            | _ -> "Unkown text emphasis"

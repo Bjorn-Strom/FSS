@@ -303,5 +303,6 @@ module FontValues =
     let fontVariantLigature (v: IFontVariantLigatures): string =
         match v with
         | :? Global               as g -> GlobalValue.globalValue g
+        | :? None                 as n -> GlobalValue.none n
         | :? FontVariantLigatures as f -> duToKebab f
         | _ -> "Unknown font variant ligatures"

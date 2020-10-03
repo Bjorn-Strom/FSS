@@ -3,6 +3,7 @@
 open Fable.Core
 open Fable.Core.JsInterop
 
+open Fss.Text
 open Types
 open Utilities.Helpers
 open Property
@@ -77,6 +78,7 @@ module Value =
         | TextShadowProperty      of ITextShadow
         | TextShadowProperties    of ITextShadow list
         | TextOverflow            of Text.TextOverflow
+        | TextEmphasis            of ITextEmphasis
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -156,8 +158,8 @@ module Value =
         | AnimationIterationCounts of IterationCount list
         | AnimationDirection       of IAnimationDirection
         | AnimationDirections      of IAnimationDirection list
-        | AnimationFillMode        of FillMode
-        | AnimationFillModes       of FillMode list
+        | AnimationFillMode        of IAnimationFillMode
+        | AnimationFillModes       of IAnimationFillMode list
         | AnimationPlayState       of IAnimationPlayState
         | AnimationPlayStates      of IAnimationPlayState list
 
@@ -238,6 +240,7 @@ module Value =
                 | TextShadowProperty      t  -> Property.value Property.TextShadow              ==> TextValue.textShadow t
                 | TextShadowProperties    ts -> Property.value Property.TextShadow              ==> combineComma TextValue.textShadow ts
                 | TextOverflow            t  -> Property.value Property.TextOverflow            ==> TextValue.textOverflow t
+                | TextEmphasis            t  -> Property.value Property.TextEmphasis            ==> TextValue.textEmphasis t
 
                 | BorderStyle  bs  -> Property.value Property.BorderStyle ==> BorderValue.borderStyle bs
                 | BorderStyles bss -> Property.value Property.BorderStyle ==> combineWs BorderValue.borderStyle bss
