@@ -237,8 +237,8 @@ module Property =
         | TextShadow
         | TextTransform
         | TextUnderlinePosition
-        | TextEmphasis
         | TextEmphasisColor
+        | TextEmphasisPosition
         | Top
         | Transform
         | TransformOrigin

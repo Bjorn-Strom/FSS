@@ -17,7 +17,6 @@ module Global =
         interface ITextDecorationLine
         interface ITextDecorationSkip
         interface ITextDecorationSkipInk
-        interface ITextEmphasis
         
     type Auto =
         | Auto
@@ -67,8 +66,8 @@ module Global =
         interface ITextDecorationSkip
         interface ITextDecorationSkipInk
         interface ITextTransform
-        interface ITextEmphasis
         interface ITextEmphasisColor
+        interface ITextEmphasisPosition
         interface ITextIndent
         interface ITextShadow
         interface IColor

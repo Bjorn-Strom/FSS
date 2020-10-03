@@ -3345,66 +3345,7 @@ let textTests =
                 "Text decoration thickness unset"
                 [ TextDecorationThickness Unset ]
                 ["textDecorationThickness" ==> "unset" ]
-            
-                        
-                        
-                        
-                        
-            test
-                "Text emphasis none"
-                [ TextEmphasis None ]
-                ["textEmphasis" ==> "none"]
-                
-            test
-                "Text emphasis string"
-                [ TextEmphasis (Text.TextEmphasis.String "X") ]
-                ["textEmphasis" ==> "X"]
-                
-            test
-                "Text emphasis keyword"
-                [ TextEmphasis (Text.TextEmphasis.KeywordValue Text.Keyword.Filled) ]
-                ["textEmphasis" ==> "filled"]
-        
-            test
-                "Text emphasis keyword"
-                [ TextEmphasis (Text.TextEmphasis.KeywordValue Text.Keyword.Open) ]
-                ["textEmphasis" ==> "open"]
-                
-            test
-                "Text emphasis keyword"
-                [ TextEmphasis (Text.TextEmphasis.KeywordValue Text.Keyword.FilledSesame) ]
-                ["textEmphasis" ==> "filled sesame"]
-                
-            test
-                "Text emphasis keyword"
-                [ TextEmphasis (Text.TextEmphasis.KeywordValue Text.Keyword.OpenSesame) ]
-                ["textEmphasis" ==> "open sesame"]
-                
-            test
-                "Text emphasis keyword with color"
-                [ TextEmphasis (Text.TextEmphasis.KeywordValueAndColor(Text.Keyword.OpenSesame, Color.orangeRed)) ]
-                ["textEmphasis" ==> "open sesame #ff4500"]
-                
-            test
-                "Text emphasis string with color"
-                [ TextEmphasis (Text.TextEmphasis.StringAndColor("x", (hex "ff0000"))) ]
-                ["textEmphasis" ==> "x #ff0000"]
-                
-            test
-                "Text emphasis inherit"
-                [ TextEmphasis Inherit ]
-                ["textEmphasis" ==> "inherit" ]
 
-            test
-                "Text emphasis initial"
-                [ TextEmphasis Initial ]
-                ["textEmphasis" ==> "initial" ]
-
-            test
-                "Text emphasis unset"
-                [ TextEmphasis Unset ]
-                ["textEmphasis" ==> "unset" ]
-                
             test
                 "Text emphasis color hex"
                 [ TextEmphasisColor (hex "#555") ]
@@ -3439,6 +3380,58 @@ let textTests =
                 "Text emphasis color unset"
                 [ TextEmphasisColor Unset ]
                 ["textEmphasisColor" ==> "unset"]
+                
+            test
+                "Text emphasis position over right"
+                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Over, Text.Position.Right)) ]
+                ["textEmphasisPosition" ==> "over right"]
+                
+            test
+                "Text emphasis position over left"
+                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Over, Text.Position.Left)) ]
+                ["textEmphasisPosition" ==> "over left"]
+                
+            test
+                "Text emphasis position under right"
+                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Under, Text.Position.Right)) ]
+                ["textEmphasisPosition" ==> "under right"]
+                
+            test
+                "Text emphasis position under left"
+                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Under, Text.Position.Left)) ]
+                ["textEmphasisPosition" ==> "under left"]
+                
+            test
+                "Text emphasis position left over"
+                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Left, Text.Position.Over)) ]
+                ["textEmphasisPosition" ==> "left over"]
+                
+            test
+                "Text emphasis position right under"
+                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Right, Text.Position.Under)) ]
+                ["textEmphasisPosition" ==> "right under"]
+                
+            test
+                "Text emphasis position left under"
+                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Left, Text.Position.Under)) ]
+                ["textEmphasisPosition" ==> "left under"]
+                
+            test
+                "Text emphasis position inherit"
+                [ TextEmphasisPosition Inherit ]
+                ["textEmphasisPosition" ==> "inherit"]
+                
+            test
+                "Text emphasis position Initial"
+                [ TextEmphasisPosition Initial ]
+                ["textEmphasisPosition" ==> "initial"]
+                
+            test
+                "Text emphasis position unset"
+                [ TextEmphasisPosition Unset ]
+                ["textEmphasisPosition" ==> "unset"]
+                
+            
         ]
 
 let tests =

@@ -1,5 +1,6 @@
 namespace Fss
 
+open Fss
 open Types
 open Global
 open Units.Percent
@@ -85,26 +86,23 @@ module Text =
         | Clip
         | Ellipsis
         | Custom of string
-        
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
-    type Keyword =
-        | Filled
-        | Open
-        | FilledSesame
-        | OpenSesame
-    
-    type TextEmphasis =
-        | KeywordValue of Keyword
-        | KeywordValueAndColor of Keyword * CssColor
-        | String of string
-        | StringAndColor of string * CssColor
-        interface ITextEmphasis
-        
+                
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
     type TextEmphasisColor =
         | TextEmphasisColor
         interface ITextEmphasisColor
-
+        
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
+    type Position =
+        | Over
+        | Under
+        | Right
+        | Left
+    
+    type TextEmphasisPosition =
+        | TextEmphasisPosition of Position * Position
+        interface ITextEmphasisPosition
+       
 module TextValue =
     open Text
     open Color
@@ -180,23 +178,17 @@ module TextValue =
         match v with
             | Custom s -> sprintf "\"%s\"" s
             | _        -> duToLowercase v
-            
-    let textEmphasis (v: ITextEmphasis): string =
-        let stringifyTextEmphasis (s: TextEmphasis): string =
-            match s with
-                | KeywordValue k -> duToSpaced k
-                | KeywordValueAndColor (k, c) -> sprintf "%s %s" (duToSpaced k) (Color.value c)
-                | String s -> s
-                | StringAndColor (s, c) -> sprintf "%s %s" s (Color.value c)
-        
-        match v with
-            | :? Global       as g -> GlobalValue.globalValue g
-            | :? None         as n -> GlobalValue.none n
-            | :? TextEmphasis as t -> stringifyTextEmphasis t
-            | _ -> "Unkown text emphasis"
-            
     let textEmphasisColor (v: ITextEmphasisColor): string =
         match v with
             | :? Global   as g -> GlobalValue.globalValue g
             | :? CssColor as c -> Color.value c
             | _ -> "Unkown text emphasis color"
+            
+    let textEmphasisPosition (v: ITextEmphasisPosition): string =
+        let stringifyTextEmphasisPosition (TextEmphasisPosition (p1, p2)): string =
+            sprintf "%s %s" (duToLowercase p1) (duToLowercase p2)
+        
+        match v with
+            | :? Global               as g -> GlobalValue.globalValue g
+            | :? TextEmphasisPosition as t -> stringifyTextEmphasisPosition t
+            | _                 -> "Unknown text emphasis position"
