@@ -79,6 +79,7 @@ module Value =
         | TextShadowProperties    of ITextShadow list
         | TextOverflow            of Text.TextOverflow
         | TextEmphasis            of ITextEmphasis
+        | TextEmphasisColor       of ITextEmphasisColor
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -241,6 +242,7 @@ module Value =
                 | TextShadowProperties    ts -> Property.value Property.TextShadow              ==> combineComma TextValue.textShadow ts
                 | TextOverflow            t  -> Property.value Property.TextOverflow            ==> TextValue.textOverflow t
                 | TextEmphasis            t  -> Property.value Property.TextEmphasis            ==> TextValue.textEmphasis t
+                | TextEmphasisColor       t  -> Property.value Property.TextEmphasisColor       ==> TextValue.textEmphasisColor t
 
                 | BorderStyle  bs  -> Property.value Property.BorderStyle ==> BorderValue.borderStyle bs
                 | BorderStyles bss -> Property.value Property.BorderStyle ==> combineWs BorderValue.borderStyle bss

@@ -68,6 +68,7 @@ module Global =
         interface ITextDecorationSkipInk
         interface ITextTransform
         interface ITextEmphasis
+        interface ITextEmphasisColor
         interface ITextIndent
         interface ITextShadow
         interface IColor

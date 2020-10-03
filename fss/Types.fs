@@ -26,6 +26,7 @@ module Types =
     type ITextDecorationSkip      = interface end
     type ITextDecorationSkipInk   = interface end
     type ITextEmphasis            = interface end
+    type ITextEmphasisColor       = interface end
     type ITextTransform           = interface end
     type ITextIndent              = interface end
     type ITextShadow              = interface end

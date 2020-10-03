@@ -99,9 +99,15 @@ module Text =
         | String of string
         | StringAndColor of string * CssColor
         interface ITextEmphasis
+        
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
+    type TextEmphasisColor =
+        | TextEmphasisColor
+        interface ITextEmphasisColor
 
 module TextValue =
     open Text
+    open Color
 
     let textAlign (v: ITextAlign): string =
         match v with
@@ -188,3 +194,9 @@ module TextValue =
             | :? None         as n -> GlobalValue.none n
             | :? TextEmphasis as t -> stringifyTextEmphasis t
             | _ -> "Unkown text emphasis"
+            
+    let textEmphasisColor (v: ITextEmphasisColor): string =
+        match v with
+            | :? Global   as g -> GlobalValue.globalValue g
+            | :? CssColor as c -> Color.value c
+            | _ -> "Unkown text emphasis color"

@@ -3404,6 +3404,41 @@ let textTests =
                 "Text emphasis unset"
                 [ TextEmphasis Unset ]
                 ["textEmphasis" ==> "unset" ]
+                
+            test
+                "Text emphasis color hex"
+                [ TextEmphasisColor (hex "#555") ]
+                ["textEmphasisColor" ==> "#555"]
+                
+            test
+                "Text emphasis color color name"
+                [ TextEmphasisColor Color.blue ]
+                ["textEmphasisColor" ==> "#0000ff"]
+                
+            test
+                "Text emphasis color rgba"
+                [ TextEmphasisColor (rgba 90 200 160 0.8) ]
+                ["textEmphasisColor" ==> "rgba(90, 200, 160, 0.800000)"]
+                
+            test
+                "Text emphasis color transparent"
+                [ TextEmphasisColor Color.transparent ]
+                ["textEmphasisColor" ==> "rgba(0, 0, 0, 0.000000)"]
+                
+            test
+                "Text emphasis color inherit"
+                [ TextEmphasisColor Inherit ]
+                ["textEmphasisColor" ==> "inherit"]
+                
+            test
+                "Text emphasis color Initial"
+                [ TextEmphasisColor Initial ]
+                ["textEmphasisColor" ==> "initial"]
+                
+            test
+                "Text emphasis color unset"
+                [ TextEmphasisColor Unset ]
+                ["textEmphasisColor" ==> "unset"]
         ]
 
 let tests =

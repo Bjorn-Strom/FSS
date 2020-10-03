@@ -11,6 +11,7 @@ module Color =
         interface ILinearGradient
         interface IRadialGradient
         interface IBorderColor
+        interface ITextEmphasisColor
 
     let rgb (r: int) (g: int) (b: int): CssColor = Utilities.Color.rgb r g b |> CssColor
     let rgba (r: int) (g: int) (b: int) (a: float): CssColor = Utilities.Color.rgba r g b a |> CssColor
