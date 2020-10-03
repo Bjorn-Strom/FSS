@@ -24,6 +24,7 @@ module Percent =
         interface ITextIndent
         interface ISize
         interface ITransformOrigin
+        interface ITextUnderlineOffset
 
     let value (Percent p): string = p
 
@@ -63,6 +64,7 @@ module Size =
         interface ITextIndent
         interface ITransformOrigin
         interface IPerspective
+        interface ITextUnderlineOffset
 
     let private sizeValue (u: Size) =
         match u with

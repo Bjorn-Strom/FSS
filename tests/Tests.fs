@@ -1281,21 +1281,6 @@ let borderTests =
                 [ BorderRadius Unset ]
                 ["borderRadius" ==> "unset"]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             test
                 "Border width px"
                 [ BorderWidth (px 40) ]
@@ -3243,7 +3228,7 @@ let textTests =
 
             test
                 "Text decoration skip All"
-                [TextDecorationSkipInk Text.All]
+                [TextDecorationSkipInk Text.DecorationSkipInk.All]
                 ["textDecorationSkipInk" ==> "all"]
 
             test
@@ -3383,37 +3368,37 @@ let textTests =
                 
             test
                 "Text emphasis position over right"
-                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Over, Text.Position.Right)) ]
+                [ TextEmphasisPosition (Text.EmphasisPosition(Text.Position.Over, Text.Position.Right)) ]
                 ["textEmphasisPosition" ==> "over right"]
                 
             test
                 "Text emphasis position over left"
-                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Over, Text.Position.Left)) ]
+                [ TextEmphasisPosition (Text.EmphasisPosition(Text.Position.Over, Text.Position.Left)) ]
                 ["textEmphasisPosition" ==> "over left"]
                 
             test
                 "Text emphasis position under right"
-                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Under, Text.Position.Right)) ]
+                [ TextEmphasisPosition (Text.EmphasisPosition(Text.Position.Under, Text.Position.Right)) ]
                 ["textEmphasisPosition" ==> "under right"]
                 
             test
                 "Text emphasis position under left"
-                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Under, Text.Position.Left)) ]
+                [ TextEmphasisPosition (Text.EmphasisPosition(Text.Position.Under, Text.Position.Left)) ]
                 ["textEmphasisPosition" ==> "under left"]
                 
             test
                 "Text emphasis position left over"
-                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Left, Text.Position.Over)) ]
+                [ TextEmphasisPosition (Text.EmphasisPosition(Text.Position.Left, Text.Position.Over)) ]
                 ["textEmphasisPosition" ==> "left over"]
                 
             test
                 "Text emphasis position right under"
-                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Right, Text.Position.Under)) ]
+                [ TextEmphasisPosition (Text.EmphasisPosition(Text.Position.Right, Text.Position.Under)) ]
                 ["textEmphasisPosition" ==> "right under"]
                 
             test
                 "Text emphasis position left under"
-                [ TextEmphasisPosition (Text.TextEmphasisPosition(Text.Position.Left, Text.Position.Under)) ]
+                [ TextEmphasisPosition (Text.EmphasisPosition(Text.Position.Left, Text.Position.Under)) ]
                 ["textEmphasisPosition" ==> "left under"]
                 
             test
@@ -3430,8 +3415,257 @@ let textTests =
                 "Text emphasis position unset"
                 [ TextEmphasisPosition Unset ]
                 ["textEmphasisPosition" ==> "unset"]
-                
             
+            test
+                "Text Emphasis Style x"
+                [TextEmphasisStyle (Text.StringValue "x")]
+                ["textEmphasisStyle" ==> "'x'"]
+                
+            test
+                "Text Emphasis Style *"
+                [TextEmphasisStyle (Text.StringValue "*")]
+                ["textEmphasisStyle" ==> "'*'"]
+                
+            test
+                "Text Emphasis Style filled"
+                [TextEmphasisStyle (Text.KeywordValue Text.Keyword.Filled)]
+                ["textEmphasisStyle" ==> "filled"]
+                
+            test
+                "Text Emphasis Style open"
+                [TextEmphasisStyle (Text.KeywordValue Text.Keyword.Open)]
+                ["textEmphasisStyle" ==> "open"]
+        
+            test
+                "Text Emphasis Style circle"
+                [TextEmphasisStyle (Text.KeywordValue Text.Keyword.Circle)]
+                ["textEmphasisStyle" ==> "circle"]
+                
+            test
+                "Text Emphasis Style double circle"
+                [TextEmphasisStyle (Text.KeywordValue Text.Keyword.DoubleCircle)]
+                ["textEmphasisStyle" ==> "double-circle"]
+        
+            test
+                "Text Emphasis Style triangle"
+                [TextEmphasisStyle (Text.KeywordValue Text.Keyword.Triangle)]
+                ["textEmphasisStyle" ==> "triangle"]
+        
+            test
+                "Text Emphasis Style filled sesame"
+                [TextEmphasisStyle (Text.KeywordValue Text.Keyword.FilledSesame)]
+                ["textEmphasisStyle" ==> "filled sesame"]
+                
+            test
+                "Text Emphasis Style open sesame"
+                [TextEmphasisStyle (Text.KeywordValue Text.Keyword.OpenSesame)]
+                ["textEmphasisStyle" ==> "open sesame"]
+            
+            test
+                "Text emphasis style inherit"
+                [ TextEmphasisStyle Inherit ]
+                ["textEmphasisStyle" ==> "inherit"]
+                
+            test
+                "Text emphasis style Initial"
+                [ TextEmphasisStyle Initial ]
+                ["textEmphasisStyle" ==> "initial"]
+                
+            test
+                "Text emphasis style unset"
+                [ TextEmphasisStyle Unset ]
+                ["textEmphasisStyle" ==> "unset"]
+
+            test
+                "Text shadow single"
+                [ TextShadow (Text.Shadow(px 1, px 1, px 2, Color.black)) ]
+                ["textShadow" ==> "1px 1px 2px #000000"]
+                
+            test
+                "Text shadow multiple"
+                [ TextShadows
+                      [
+                        Text.Shadow(px 1, px 1, px 2, Color.black)
+                        Text.Shadow(px 10, px -10, px 20, Color.red)
+                      ]
+                ]
+                ["textShadow" ==> "1px 1px 2px #000000, 10px -10px 20px #ff0000"]
+                
+            test
+                "Text shadow style inherit"
+                [ TextShadow Inherit ]
+                ["textShadow" ==> "inherit"]
+                
+            test
+                "Text shadow style Initial"
+                [ TextShadow Initial ]
+                ["textShadow" ==> "initial"]
+                
+            test
+                "Text shadow style unset"
+                [ TextShadow Unset ]
+                ["textShadow" ==> "unset"]
+                
+            test
+                "Text underline offset auto"
+                [ TextUnderlineOffset Auto ]
+                ["textUnderlineOffset" ==> "auto"]
+                
+            test
+                "Text underline offset em"
+                [ TextUnderlineOffset (em 3.0) ]
+                ["textUnderlineOffset" ==> "3.0em"]
+                
+            test
+                "Text underline offset px"
+                [ TextUnderlineOffset (px 10) ]
+                ["textUnderlineOffset" ==> "10px"]
+                
+            test
+                "Text underline offset percent"
+                [ TextUnderlineOffset (pct 10) ]
+                ["textUnderlineOffset" ==> "10%"]
+                
+            test
+                "Text underline offset inherit"
+                [ TextUnderlineOffset Inherit ]
+                ["textUnderlineOffset" ==> "inherit"]
+                
+            test
+                "Text underline offset Initial"
+                [ TextUnderlineOffset Initial ]
+                ["textUnderlineOffset" ==> "initial"]
+                
+            test
+                "Text underline offset unset"
+                [ TextUnderlineOffset Unset ]
+                ["textUnderlineOffset" ==> "unset"]
+                   
+            test
+                "Text underline position from-font"
+                [ TextUnderlinePosition Text.UnderlinePosition.FromFont ]
+                ["textUnderlinePosition" ==> "from-font"]
+                
+            test
+                "Text underline position Under"
+                [ TextUnderlinePosition Text.UnderlinePosition.Under ]
+                ["textUnderlinePosition" ==> "under"]
+                
+            test
+                "Text underline position left"
+                [ TextUnderlinePosition Text.UnderlinePosition.Left ]
+                ["textUnderlinePosition" ==> "left"]          
+                
+            test
+                "Text underline position right"
+                [ TextUnderlinePosition Text.UnderlinePosition.Right ]
+                ["textUnderlinePosition" ==> "right"]     
+                
+            test
+                "Text underline position auto-pos"
+                [ TextUnderlinePosition Text.AutoPos ]
+                ["textUnderlinePosition" ==> "auto-pos"]
+                
+            test
+                "Text underline position above"
+                [ TextUnderlinePosition Text.UnderlinePosition.Above ]
+                ["textUnderlinePosition" ==> "above"]
+                
+            test
+                "Text underline position below"
+                [ TextUnderlinePosition Text.UnderlinePosition.Below ]
+                ["textUnderlinePosition" ==> "below"]
+                
+            test
+                "Text underline positions under left"
+                [ TextUnderlinePositions (Text.UnderlinePosition.Under, Text.UnderlinePosition.Left) ]
+                ["textUnderlinePosition" ==> "under left"]
+                
+            test
+                "Text underline positions right under"
+                [ TextUnderlinePositions (Text.UnderlinePosition.Right, Text.UnderlinePosition.Under) ]
+                ["textUnderlinePosition" ==> "right under"]
+                
+            test
+                "Text underline position auto"
+                [ TextUnderlinePosition Auto ]
+                ["textUnderlinePosition" ==> "auto"]     
+                
+            test
+                "Text underline position inherit"
+                [ TextUnderlinePosition Inherit ]
+                ["textUnderlinePosition" ==> "inherit"]
+                
+            test
+                "Text underline position Initial"
+                [ TextUnderlinePosition Initial ]
+                ["textUnderlinePosition" ==> "initial"]
+                
+            test
+                "Text underline position unset"
+                [ TextUnderlinePosition Unset ]
+                ["textUnderlinePosition" ==> "unset"]
+                
+            test
+                "Text indent mm"
+                [ TextIndent (mm 3.0) ]
+                ["textIndent" ==> "3.0mm"]
+                
+            test
+                "Text indent px"
+                [ TextIndent (px 40) ]
+                ["textIndent" ==> "40px"]
+                
+            test
+                "Text indent percent"
+                [ TextIndent (pct 15) ]
+                ["textIndent" ==> "15%"]
+            
+            test
+                "Text indent hanging"
+                [ TextIndents [ em 5.0; Text.Hanging; ] ]
+                ["textIndent" ==> "5.0em hanging"]
+                
+            test
+                "Text indent each line"
+                [ TextIndents [ em 5.0; Text.EachLine; ] ]
+                ["textIndent" ==> "5.0em each-line"]
+                
+            test
+                "Text indent hanging each line"
+                [ TextIndents [ em 5.0; Text.Hanging; Text.EachLine ] ]
+                ["textIndent" ==> "5.0em hanging each-line"]
+                
+            test
+                "Text indent inherit"
+                [ TextIndent Inherit ]
+                ["textIndent" ==> "inherit"]
+                
+            test
+                "Text indent Initial"
+                [ TextIndent Initial ]
+                ["textIndent" ==> "initial"]
+                
+            test
+                "Text indent unset"
+                [ TextIndent Unset ]
+                ["textIndent" ==> "unset"]
+                
+                
+            test
+                "Text overflow clip"
+                [ TextOverflow Text.Clip ]
+                ["textOverflow" ==> "clip"]
+                
+            test
+                "Text overflow ellipsis"
+                [ TextOverflow Text.Ellipsis ]
+                ["textOverflow" ==> "ellipsis"]
+                
+            test
+                "Text overflow -"
+                [ TextOverflow (Text.String "-") ]
+                ["textOverflow" ==> "\"-\""]
         ]
 
 let tests =
@@ -3456,19 +3690,3 @@ let tests =
         ]
 
 Mocha.runTests tests |> ignore
-
-(*
-test "Text"
-    [
-
-
-        (fss [ TextIndent (px 10) ]), ["text-indent", "10px"]
-        (fss [ TextIndent (pct 100) ]), ["text-indent", "100%"]
-        // These are not supported?
-        // (fss [ TextIndents [px 10; (TextIndent.EachLine)] ]), ["text-indent", "each-line"]
-        // (fss [ TextIndents [px 10; (TextIndent.Hanging)] ]), ["text-indent", "hanging"]
-
-        (fss [ TextOverflow TextOverflow.Clip ]), ["text-overflow", "clip"]
-        (fss [ TextOverflow TextOverflow.Ellipsis ]), ["text-overflow", "ellipsis"]
-        (fss [ TextOverflow (TextOverflow.Custom "-") ]), ["text-overflow", "\"-\" "]
-*)

@@ -775,14 +775,14 @@ let TextExamples =
                     [
                         TextDecorationLine Text.Underline
                         TextDecorationColor Color.red
-                        TextDecorationThickness Text.FromFont
+                        TextDecorationThickness Text.DecorationThickness
                     ])] [str "Thickness from font" ]
 
             div [ ClassName (fss
                     [
                         TextDecorationLine Text.Underline
                         TextDecorationColor Color.red
-                        TextDecorationThickness Text.Auto
+                        TextDecorationThickness Auto
                     ])] [str "Thickness from auto" ]
 
             div [ ClassName (fss
@@ -826,7 +826,7 @@ let TextExamples =
                         FontSize (px 80)
                         FontFamily Font.SansSerif
                         BackgroundColor (hex "91877b")
-                        TextShadow (px 0) (px 1) (px 0) (rgba 255 255  255 0.4)
+                        TextShadow (Text.Shadow (px 0, px 1, px 0, rgba 255 255  255 0.4))
                     ]
 
             h1 [ ClassName simple ] [ str "Monster Mash" ]
@@ -843,18 +843,18 @@ let TextExamples =
                         Height (px 100)
                         TextShadows
                             [
-                                px 0, px  1, px  0, hex "ccc"
-                                px 0, px  2, px  0, hex "#c9c9c9"
-                                px 0, px  3, px  0, hex "#bbb"
-                                px 0, px  4, px  0, hex "#b9b9b9"
-                                px 0, px  5, px  0, hex "#aaa"
-                                px 0, px  6, px  1, rgba 0 0 0 0.1
-                                px 0, px  0, px  5, rgba 0 0 0 0.1
-                                px 0, px  1, px  3, rgba 0 0 0 0.3
-                                px 0, px  3, px  5, rgba 0 0 0 0.2
-                                px 0, px  5, px 10, rgba 0 0 0 0.25
-                                px 0, px 10, px 10, rgba 0 0 0 0.2
-                                px 0, px 20, px 20, rgba 0 0 0 0.15
+                                Text.Shadow (px 0, px  1, px  0, hex "ccc")
+                                Text.Shadow (px 0, px  2, px  0, hex "#c9c9c9")
+                                Text.Shadow (px 0, px  3, px  0, hex "#bbb")
+                                Text.Shadow (px 0, px  4, px  0, hex "#b9b9b9")
+                                Text.Shadow (px 0, px  5, px  0, hex "#aaa")
+                                Text.Shadow (px 0, px  6, px  1, rgba 0 0 0 0.1)
+                                Text.Shadow (px 0, px  0, px  5, rgba 0 0 0 0.1)
+                                Text.Shadow (px 0, px  1, px  3, rgba 0 0 0 0.3)
+                                Text.Shadow (px 0, px  3, px  5, rgba 0 0 0 0.2)
+                                Text.Shadow (px 0, px  5, px 10, rgba 0 0 0 0.25)
+                                Text.Shadow (px 0, px 10, px 10, rgba 0 0 0 0.2)
+                                Text.Shadow (px 0, px 20, px 20, rgba 0 0 0 0.15)
                             ]
                     ]
 
@@ -872,8 +872,8 @@ let TextExamples =
                         Height (px 100)
                         TextShadows
                             [
-                                px  -4, px 3, px 0, hex "#3a50d9"
-                                px -14, px 7, px 0, hex "#0a0e27"
+                                Text.Shadow (px  -4, px 3, px 0, hex "#3a50d9")
+                                Text.Shadow (px -14, px 7, px 0, hex "#0a0e27")
                             ]
                     ]
 
@@ -891,22 +891,22 @@ let TextExamples =
                         Height (px 100)
                         TextShadows
                             [
-                                px 0, px 1, px 0, hex "#378ab4"
-                                px 1, px 0, px 0, hex "#5dabcd"
-                                px 1, px 2, px 1, hex "#378ab4"
-                                px 2, px 1, px 1, hex "#5dabcd"
-                                px 2, px 3, px 2, hex "#378ab4"
-                                px 3, px 2, px 2, hex "#5dabcd"
-                                px 3, px 4, px 2, hex "#378ab4"
-                                px 4, px 3, px 3, hex "#5dabcd"
-                                px 4, px 5, px 3, hex "#378ab4"
-                                px 5, px 4, px 2, hex "#5dabcd"
-                                px 5, px 6, px 2, hex "#378ab4"
-                                px 6, px 5, px 2, hex "#5dabcd"
-                                px 6, px 7, px 1, hex "#378ab4"
-                                px 7, px 6, px 1, hex "#5dabcd"
-                                px 7, px 8, px 0, hex "#378ab4"
-                                px 8, px 7, px 0, hex "#5dabcd"
+                                Text.Shadow (px 0, px 1, px 0, hex "#378ab4")
+                                Text.Shadow (px 1, px 0, px 0, hex "#5dabcd")
+                                Text.Shadow (px 1, px 2, px 1, hex "#378ab4")
+                                Text.Shadow (px 2, px 1, px 1, hex "#5dabcd")
+                                Text.Shadow (px 2, px 3, px 2, hex "#378ab4")
+                                Text.Shadow (px 3, px 2, px 2, hex "#5dabcd")
+                                Text.Shadow (px 3, px 4, px 2, hex "#378ab4")
+                                Text.Shadow (px 4, px 3, px 3, hex "#5dabcd")
+                                Text.Shadow (px 4, px 5, px 3, hex "#378ab4")
+                                Text.Shadow (px 5, px 4, px 2, hex "#5dabcd")
+                                Text.Shadow (px 5, px 6, px 2, hex "#378ab4")
+                                Text.Shadow (px 6, px 5, px 2, hex "#5dabcd")
+                                Text.Shadow (px 6, px 7, px 1, hex "#378ab4")
+                                Text.Shadow (px 7, px 6, px 1, hex "#5dabcd")
+                                Text.Shadow (px 7, px 8, px 0, hex "#378ab4")
+                                Text.Shadow (px 8, px 7, px 0, hex "#5dabcd")
                             ]
                     ]
 
@@ -924,30 +924,30 @@ let TextExamples =
                         Height (px 100)
                         TextShadows
                             [
-                                px  0, px  0, px  0, rgb 137 156 213
-                                px  1, px  1, px  0, rgb 129 148 205
-                                px  2, px  2, px  0, rgb 120 139 196
-                                px  3, px  3, px  0, rgb 111 130 187
-                                px  4, px  4, px  0, rgb 103 122 179
-                                px  5, px  5, px  0, rgb 94  113 170
-                                px  6, px  6, px  0, rgb 85  104 161
-                                px  7, px  7, px  0, rgb 76   95 152
-                                px  8, px  8, px  0, rgb 68   87 144
-                                px  9, px  9, px  0, rgb 59   78 135
-                                px 10, px 10, px  0, rgb 50   69 126
-                                px 11, px 11, px  0, rgb 42   61 118
-                                px 12, px 12, px  0, rgb 33   52 109
-                                px 13, px 13, px  0, rgb 24   43 100
-                                px 14, px 14, px  0, rgb 15   34  91
-                                px 15, px 15, px  0, rgb 7    26  83
-                                px 16, px 16, px  0, rgb -2   17  74
-                                px 17, px 17, px  0, rgb -11   8  65
-                                px 18, px 18, px  0, rgb -19   0  57
-                                px 19, px 19, px  0, rgb -28  -9  48
-                                px 20, px 20, px  0, rgb -37 -18  39
-                                px 21, px 21, px 20, rgba 0    0   0 1.0
-                                px 21, px 21, px  1, rgba 0    0   0 0.5
-                                px  0, px  0, px 20, rgba 0    0   0 0.2
+                                Text.Shadow(px  0, px  0, px  0, rgb 137 156 213)
+                                Text.Shadow(px  1, px  1, px  0, rgb 129 148 205)
+                                Text.Shadow(px  2, px  2, px  0, rgb 120 139 196)
+                                Text.Shadow(px  3, px  3, px  0, rgb 111 130 187)
+                                Text.Shadow(px  4, px  4, px  0, rgb 103 122 179)
+                                Text.Shadow(px  5, px  5, px  0, rgb 94  113 170)
+                                Text.Shadow(px  6, px  6, px  0, rgb 85  104 161)
+                                Text.Shadow(px  7, px  7, px  0, rgb 76   95 152)
+                                Text.Shadow(px  8, px  8, px  0, rgb 68   87 144)
+                                Text.Shadow(px  9, px  9, px  0, rgb 59   78 135)
+                                Text.Shadow(px 10, px 10, px  0, rgb 50   69 126)
+                                Text.Shadow(px 11, px 11, px  0, rgb 42   61 118)
+                                Text.Shadow(px 12, px 12, px  0, rgb 33   52 109)
+                                Text.Shadow(px 13, px 13, px  0, rgb 24   43 100)
+                                Text.Shadow(px 14, px 14, px  0, rgb 15   34  91)
+                                Text.Shadow(px 15, px 15, px  0, rgb 7    26  83)
+                                Text.Shadow(px 16, px 16, px  0, rgb -2   17  74)
+                                Text.Shadow(px 17, px 17, px  0, rgb -11   8  65)
+                                Text.Shadow(px 18, px 18, px  0, rgb -19   0  57)
+                                Text.Shadow(px 19, px 19, px  0, rgb -28  -9  48)
+                                Text.Shadow(px 20, px 20, px  0, rgb -37 -18  39)
+                                Text.Shadow(px 21, px 21, px 20, rgba 0    0   0 1.0)
+                                Text.Shadow(px 21, px 21, px  1, rgba 0    0   0 0.5)
+                                Text.Shadow(px  0, px  0, px 20, rgba 0    0   0 0.2)
                             ]
                     ]
 

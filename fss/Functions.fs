@@ -34,17 +34,6 @@ module Functions =
     let MediaQuery (r: MediaFeature list) (p: CSSProperty list): CSSProperty = MediaProperty(r, p)
     let MediaQueryFor (d: Device) (r: MediaFeature list) (p: CSSProperty list): CSSProperty = MediaForProperty(d, r, p)
 
-    // Text shadow
-    let TextShadows (textShadows: (Size * Size * Size * CssColor) list): CSSProperty =
-        textShadows
-        |> List.map (
-            (fun (x, y, b, c) -> Text.TextShadow(x, y, b, c)) >>
-            (fun x -> x :> Types.ITextShadow))
-        |> TextShadowProperties
-
-    let TextShadow (x: Size) (y: Size) (blur: Size) (color: CssColor): CSSProperty =
-        TextShadowProperty (Text.TextShadow(x, y, blur, color))
-
     // Selectors
     let (!+) (html: Html) (propertyList: CSSProperty list) = Selector (AdjacentSibling html, propertyList)
     let (!~) (html: Html) (propertyList: CSSProperty list) = Selector (GeneralSibling html, propertyList)

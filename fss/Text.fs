@@ -11,7 +11,7 @@ open Color
 module Text =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
-    type TextAlign =
+    type Align =
         | Left
         | Right
         | Center
@@ -23,7 +23,7 @@ module Text =
         interface ITextAlign
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
-    type TextDecorationLine =
+    type DecorationLine =
         | Underline
         | Overline
         | LineThrough
@@ -31,12 +31,12 @@ module Text =
         interface ITextDecorationLine
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
-    type TextDecorationThickness =
+    type DecorationThickness =
         | FromFont
         interface ITextDecorationThickness
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
-    type TextDecorationStyle =
+    type DecorationStyle =
         | Solid
         | Double
         | Dotted
@@ -45,7 +45,7 @@ module Text =
         interface ITextDecorationStyle
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
-    type TextDecorationSkip =
+    type DecorationSkip =
         | Objects
         | Spaces
         | LeadingSpaces
@@ -55,12 +55,12 @@ module Text =
         interface ITextDecorationSkip
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
-    type TextDecorationSkipInk =
+    type DecorationSkipInk =
         | All
         interface ITextDecorationSkipInk
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
-    type TextTransform =
+    type Transform =
         | Capitalize
         | Uppercase
         | Lowercase
@@ -69,7 +69,7 @@ module Text =
         interface ITextTransform
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
-    type TextIndent =
+    type Indent =
         | Hanging
         | EachLine
         interface ITextIndent
@@ -77,21 +77,16 @@ module Text =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
     // https://css-tricks.com/almanac/properties/t/text-shadow/
     open Color
-    type TextShadowType =
-        | TextShadow of Size * Size * Size * CssColor
+    type Shadow =
+        | Shadow of Size * Size * Size * CssColor
         interface ITextShadow
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
-    type TextOverflow =
+    type Overflow =
         | Clip
         | Ellipsis
-        | Custom of string
+        | String of string
                 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
-    type TextEmphasisColor =
-        | TextEmphasisColor
-        interface ITextEmphasisColor
-        
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
     type Position =
         | Over
@@ -99,96 +94,154 @@ module Text =
         | Right
         | Left
     
-    type TextEmphasisPosition =
-        | TextEmphasisPosition of Position * Position
+    type EmphasisPosition =
+        | EmphasisPosition of Position * Position
         interface ITextEmphasisPosition
-       
+        
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
+    type Keyword =
+        | Filled
+        | Open
+        | Dot
+        | Circle
+        | DoubleCircle
+        | Triangle
+        | FilledSesame
+        | OpenSesame
+    type EmphasisStyle =
+        | StringValue of string
+        | KeywordValue of Keyword
+        interface ITextEmphasisStyle
+        
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
+    type UnderlinePosition =
+        | FromFont
+        | Under
+        | Left
+        | Right
+        | AutoPos
+        | Above
+        | Below
+        interface ITextUnderlinePosition
+                      
 module TextValue =
     open Text
-    open Color
 
-    let textAlign (v: ITextAlign): string =
+    let align (v: ITextAlign): string =
         match v with
             | :? Global    as g -> GlobalValue.globalValue g
-            | :? TextAlign as t -> duToKebab t
+            | :? Align as t -> duToKebab t
             | _                 -> "Unknown text align"
 
-    let textDecorationLine (v: ITextDecorationLine): string =
+    let decorationLine (v: ITextDecorationLine): string =
         match v with
             | :? Global             as g -> GlobalValue.globalValue g
             | :? None               as n -> GlobalValue.none n
-            | :? TextDecorationLine as t -> duToKebab t
+            | :? DecorationLine as t -> duToKebab t
             | _                          -> "unknown text decoration line"
 
-    let textDecorationThickness (v: ITextDecorationThickness): string =
+    let decorationThickness (v: ITextDecorationThickness): string =
         match v with
             | :? Global                  as g -> GlobalValue.globalValue g
             | :? Auto                    as a -> GlobalValue.auto a
             | :? Percent                 as p -> Units.Percent.value p
             | :? Size                    as s -> Units.Size.value s
-            | :? TextDecorationThickness as t -> duToKebab t
+            | :? DecorationThickness     as t -> duToKebab t
             | _                               -> "unkown text decoration thickness"
 
-    let textDecorationStyle (v: ITextDecorationStyle): string =
+    let decorationStyle (v: ITextDecorationStyle): string =
         match v with
             | :? Global              as g -> GlobalValue.globalValue g
-            | :? TextDecorationStyle as t -> duToLowercase t
+            | :? DecorationStyle as t -> duToLowercase t
             | _                           -> "unknown text decoration style"
 
-    let textDecorationSkip (v: ITextDecorationSkip): string =
+    let decorationSkip (v: ITextDecorationSkip): string =
         match v with
             | :? Global             as g -> GlobalValue.globalValue g
             | :? None               as n -> GlobalValue.none n
-            | :? TextDecorationSkip as t -> duToKebab t
+            | :? DecorationSkip as t -> duToKebab t
             | _                             -> "unknown text decoration skip ink"
 
-    let textDecorationSkipInk (v: ITextDecorationSkipInk): string =
+    let decorationSkipInk (v: ITextDecorationSkipInk): string =
         match v with
             | :? Global                as g -> GlobalValue.globalValue g
             | :? Auto                  as a -> GlobalValue.auto a
             | :? None                  as n -> GlobalValue.none n
-            | :? TextDecorationSkipInk as t -> duToLowercase t
+            | :? DecorationSkipInk     as t -> duToLowercase t
             | _                             -> "unknown text decoration skip ink"
 
-    let textTransform (v: ITextTransform): string =
+    let transform (v: ITextTransform): string =
         match v with
             | :? Global        as g -> GlobalValue.globalValue g
             | :? None          as n -> GlobalValue.none n
-            | :? TextTransform as t -> duToLowercase t
+            | :? Transform as t -> duToLowercase t
             | _                     -> "unknown text transform"
 
-    let textIndent (v: ITextIndent): string =
+    let indent (v: ITextIndent): string =
         match v with
             | :? Global     as g -> GlobalValue.globalValue g
             | :? Percent    as p -> Units.Percent.value p
             | :? Size       as s -> Units.Size.value s
-            | :? TextIndent as t -> duToKebab t
+            | :? Indent as t -> duToKebab t
             | _                  -> "unknown text transform"
 
-    let textShadow (v: ITextShadow): string =
-        let getValue (TextShadow(s1, s2, s3, c)) = s1, s2, s3, c
+    let shadow (v: ITextShadow): string =
+        let getValue (Shadow(s1, s2, s3, c)) = s1, s2, s3, c
         match v with
             | :? Global         as g -> GlobalValue.globalValue g
-            | :? TextShadowType as t ->
+            | :? Shadow as t ->
                 let (s1, s2, s3, c) = getValue t
                 sprintf "%s %s %s %s" (Units.Size.value s1) (Units.Size.value s2) (Units.Size.value s3) (Color.value c)
             | _                      -> "Unknown text shadow"
 
-    let textOverflow (v: TextOverflow): string =
+    let overflow (v: Overflow): string =
         match v with
-            | Custom s -> sprintf "\"%s\"" s
+            | String s -> sprintf "\"%s\"" s
             | _        -> duToLowercase v
-    let textEmphasisColor (v: ITextEmphasisColor): string =
+    let emphasisColor (v: ITextEmphasisColor): string =
         match v with
             | :? Global   as g -> GlobalValue.globalValue g
             | :? CssColor as c -> Color.value c
             | _ -> "Unkown text emphasis color"
             
-    let textEmphasisPosition (v: ITextEmphasisPosition): string =
-        let stringifyTextEmphasisPosition (TextEmphasisPosition (p1, p2)): string =
+    let emphasisPosition (v: ITextEmphasisPosition): string =
+        let stringifyTextEmphasisPosition (EmphasisPosition (p1, p2)): string =
             sprintf "%s %s" (duToLowercase p1) (duToLowercase p2)
         
         match v with
-            | :? Global               as g -> GlobalValue.globalValue g
-            | :? TextEmphasisPosition as t -> stringifyTextEmphasisPosition t
+            | :? Global           as g -> GlobalValue.globalValue g
+            | :? EmphasisPosition as t -> stringifyTextEmphasisPosition t
             | _                 -> "Unknown text emphasis position"
+            
+    let keyword (v: Keyword): string =
+        match v with
+            | FilledSesame -> duToSpaced v
+            | OpenSesame -> duToSpaced v
+            | _ -> duToKebab v
+            
+    let emphasisStyle (v: ITextEmphasisStyle): string =
+        let stringifyTextEmphasisStyle (s: EmphasisStyle): string =
+            match s with
+                | StringValue s -> sprintf "'%s'" s
+                | KeywordValue k -> keyword k
+        
+        match v with
+            | :? Global            as g -> GlobalValue.globalValue g
+            | :? None              as g -> GlobalValue.none g
+            | :? EmphasisStyle as t -> stringifyTextEmphasisStyle t
+            | _ -> "Unknown text emphasis style"
+            
+    let underlineOffset (v: ITextUnderlineOffset): string =
+        match v with
+            | :? Global  as g -> GlobalValue.globalValue g
+            | :? Auto    as a -> GlobalValue.auto a
+            | :? Percent as p -> Units.Percent.value p
+            | :? Size    as s -> Units.Size.value s
+            | _ -> "Unknown text underline offset"
+            
+    let underlinePosition (v: ITextUnderlinePosition): string =
+        match v with
+            | :? Global             as g -> GlobalValue.globalValue g
+            | :? Auto               as n -> GlobalValue.auto n
+            | :? UnderlinePosition  as p -> duToKebab p
+            | _                          -> "unknown text underline position"

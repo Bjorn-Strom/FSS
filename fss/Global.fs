@@ -17,6 +17,7 @@ module Global =
         interface ITextDecorationLine
         interface ITextDecorationSkip
         interface ITextDecorationSkipInk
+        interface ITextEmphasisStyle
         
     type Auto =
         | Auto
@@ -28,8 +29,9 @@ module Global =
         interface ITextDecorationThickness
         interface ITextDecorationSkipInk
         interface IBackgroundSize
-
-
+        interface ITextUnderlineOffset
+        interface ITextUnderlinePosition
+        
     type Center =
         | Center
         interface IAlignSelf
@@ -68,8 +70,11 @@ module Global =
         interface ITextTransform
         interface ITextEmphasisColor
         interface ITextEmphasisPosition
+        interface ITextEmphasisStyle
         interface ITextIndent
         interface ITextShadow
+        interface ITextUnderlineOffset
+        interface ITextUnderlinePosition
         interface IColor
         interface IBorderStyle
         interface IBorderWidth

@@ -75,11 +75,15 @@ module Value =
         | TextTransform           of ITextTransform
         | TextIndent              of ITextIndent
         | TextIndents             of ITextIndent list
-        | TextShadowProperty      of ITextShadow
-        | TextShadowProperties    of ITextShadow list
-        | TextOverflow            of Text.TextOverflow
+        | TextShadow              of ITextShadow
+        | TextShadows             of ITextShadow list
+        | TextOverflow            of Text.Overflow
         | TextEmphasisColor       of ITextEmphasisColor
         | TextEmphasisPosition    of ITextEmphasisPosition
+        | TextEmphasisStyle       of ITextEmphasisStyle
+        | TextUnderlineOffset     of ITextUnderlineOffset
+        | TextUnderlinePosition   of ITextUnderlinePosition
+        | TextUnderlinePositions  of ITextUnderlinePosition * ITextUnderlinePosition
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -226,23 +230,27 @@ module Value =
                 | FontVariantEastAsians fs -> Property.value Property.FontVariantEastAsian ==> combineWs FontValues.fontVariantEastAsian fs
                 | FontVariantLigatures  f  -> Property.value Property.FontVariantLigatures ==> FontValues.fontVariantLigature f
 
-                | TextAlign               t  -> Property.value Property.TextAlign               ==> TextValue.textAlign t
-                | TextDecorationLine      t  -> Property.value Property.TextDecorationLine      ==> TextValue.textDecorationLine t
-                | TextDecorationLines     ts -> Property.value Property.TextDecorationLine      ==> combineWs TextValue.textDecorationLine ts
-                | TextDecorationColor     t  -> Property.value Property.TextDecorationColor     ==> Color.value t
-                | TextDecorationThickness t  -> Property.value Property.TextDecorationThickness ==> TextValue.textDecorationThickness t
-                | TextDecorationStyle     t  -> Property.value Property.TextDecorationStyle     ==> TextValue.textDecorationStyle t
-                | TextDecorationSkip      t  -> Property.value Property.TextDecorationSkip      ==> TextValue.textDecorationSkip t
-                | TextDecorationSkips     ts -> Property.value Property.TextDecorationSkip      ==> combineWs TextValue.textDecorationSkip ts
-                | TextDecorationSkipInk   t  -> Property.value Property.TextDecorationSkipInk   ==> TextValue.textDecorationSkipInk t
-                | TextTransform           t  -> Property.value Property.TextTransform           ==> TextValue.textTransform t
-                | TextIndent              t  -> Property.value Property.TextIndent              ==> TextValue.textIndent t
-                | TextIndents             ts -> Property.value Property.TextIndent              ==> combineWs TextValue.textIndent ts
-                | TextShadowProperty      t  -> Property.value Property.TextShadow              ==> TextValue.textShadow t
-                | TextShadowProperties    ts -> Property.value Property.TextShadow              ==> combineComma TextValue.textShadow ts
-                | TextOverflow            t  -> Property.value Property.TextOverflow            ==> TextValue.textOverflow t
-                | TextEmphasisColor       t  -> Property.value Property.TextEmphasisColor       ==> TextValue.textEmphasisColor t
-                | TextEmphasisPosition    t  -> Property.value Property.TextEmphasisPosition    ==> TextValue.textEmphasisPosition t
+                | TextAlign               t      -> Property.value Property.TextAlign               ==> TextValue.align t
+                | TextDecorationLine      t      -> Property.value Property.TextDecorationLine      ==> TextValue.decorationLine t
+                | TextDecorationLines     ts     -> Property.value Property.TextDecorationLine      ==> combineWs TextValue.decorationLine ts
+                | TextDecorationColor     t      -> Property.value Property.TextDecorationColor     ==> Color.value t
+                | TextDecorationThickness t      -> Property.value Property.TextDecorationThickness ==> TextValue.decorationThickness t
+                | TextDecorationStyle     t      -> Property.value Property.TextDecorationStyle     ==> TextValue.decorationStyle t
+                | TextDecorationSkip      t      -> Property.value Property.TextDecorationSkip      ==> TextValue.decorationSkip t
+                | TextDecorationSkips     ts     -> Property.value Property.TextDecorationSkip      ==> combineWs TextValue.decorationSkip ts
+                | TextDecorationSkipInk   t      -> Property.value Property.TextDecorationSkipInk   ==> TextValue.decorationSkipInk t
+                | TextTransform           t      -> Property.value Property.TextTransform           ==> TextValue.transform t
+                | TextIndent              t      -> Property.value Property.TextIndent              ==> TextValue.indent t
+                | TextIndents             ts     -> Property.value Property.TextIndent              ==> combineWs TextValue.indent ts
+                | TextShadow              t      -> Property.value Property.TextShadow              ==> TextValue.shadow t
+                | TextShadows             ts     -> Property.value Property.TextShadow              ==> combineComma TextValue.shadow ts
+                | TextOverflow            t      -> Property.value Property.TextOverflow            ==> TextValue.overflow t
+                | TextEmphasisColor       t      -> Property.value Property.TextEmphasisColor       ==> TextValue.emphasisColor t
+                | TextEmphasisPosition    t      -> Property.value Property.TextEmphasisPosition    ==> TextValue.emphasisPosition t
+                | TextEmphasisStyle       t      -> Property.value Property.TextEmphasisStyle       ==> TextValue.emphasisStyle t
+                | TextUnderlineOffset     t      -> Property.value Property.TextUnderlineOffset     ==> TextValue.underlineOffset t
+                | TextUnderlinePosition   t      -> Property.value Property.TextUnderlinePosition   ==> TextValue.underlinePosition t
+                | TextUnderlinePositions (t1, t2)-> Property.value Property.TextUnderlinePosition   ==> sprintf "%s %s" (TextValue.underlinePosition t1) (TextValue.underlinePosition t2)
 
                 | BorderStyle  bs  -> Property.value Property.BorderStyle ==> BorderValue.borderStyle bs
                 | BorderStyles bss -> Property.value Property.BorderStyle ==> combineWs BorderValue.borderStyle bss
