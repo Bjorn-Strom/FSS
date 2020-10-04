@@ -24,6 +24,7 @@
     <Compile Include="Transform.fs" />
     <Compile Include="Transition.fs" />
     <Compile Include="Visibility.fs" />
+    <Compile Include="PsuedoClasses.fs" />
     <Compile Include="Tests.fs" />
   </ItemGroup>
 
