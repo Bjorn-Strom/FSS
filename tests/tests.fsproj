@@ -5,6 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Utils.fs" />
+    <Compile Include="Animation.fs" />
+    <Compile Include="Background.fs" />
+    <Compile Include="Border.fs" />
+    <Compile Include="Color.fs" />
+    <Compile Include="ContentSize.fs" />
+    <Compile Include="Cursor.fs" />
+    <Compile Include="Descendant.fs" />
+    <Compile Include="Display.fs" />
+    <Compile Include="Flex.fs" />
+    <Compile Include="Font.fs" />
+    <Compile Include="Margin.fs" />
+    <Compile Include="Padding.fs" />
+    <Compile Include="Perspective.fs" />
+    <Compile Include="Position.fs" />
+    <Compile Include="Text.fs" />
+    <Compile Include="Transform.fs" />
+    <Compile Include="Transition.fs" />
+    <Compile Include="Visibility.fs" />
     <Compile Include="Tests.fs" />
   </ItemGroup>
 
