@@ -38,8 +38,30 @@ module DisplayValue =
             | _ -> "Unknown display"
 
 module Flex =
-    open Units.Size
-
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
+    type Alignment =
+        | Start
+        | End
+        | FlexStart
+        | FlexEnd
+        | Center
+        | Left
+        | Right
+        | Normal
+        | Baseline
+        | SpaceBetween
+        | SpaceAround
+        | SpaceEvenly
+        | Stretch
+        | Safe
+        | Unsafe
+        interface IFlexAlignment
+        interface IJustifyContent
+        interface IAlignItems
+        interface IAlignContent
+    
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
     type Direction =
         | Row
@@ -54,63 +76,6 @@ module Flex =
         | Wrap
         | WrapReverse
         interface IFlexWrap
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
-    type JustifyContent =
-        | Start
-        | End
-        | FlexStart
-        | FlexEnd
-        | Center
-        | Left
-        | Right
-        | Normal
-        | Baseline
-        | SpaceBetween
-        | SpaceAround
-        | SpaceEvenly
-        | Stretch
-        | Safe
-        | Unsafe
-        interface IJustifyContent
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
-    type AlignItems =
-        | Start
-        | End
-        | FlexStart
-        | FlexEnd
-        | Center
-        | Left
-        | Right
-        | Normal
-        | Baseline
-        | SpaceBetween
-        | SpaceAround
-        | SpaceEvenly
-        | Stretch
-        | Safe
-        | Unsafe
-        interface IAlignItems
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
-    type AlignContent =
-        | Start
-        | End
-        | FlexStart
-        | FlexEnd
-        | Center
-        | Left
-        | Right
-        | Normal
-        | Baseline
-        | SpaceBetween
-        | SpaceAround
-        | SpaceEvenly
-        | Stretch
-        | Safe
-        | Unsafe
-        interface IAlignContent
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
     type AlignSelf =
@@ -169,23 +134,23 @@ module FlexValue =
 
     let justifyContent (v: IJustifyContent): string =
         match v with
-            | :? Global         as g -> GlobalValue.globalValue g
-            | :? Center         as c -> GlobalValue.center c
-            | :? JustifyContent as j -> duToKebab j
+            | :? Global    as g -> GlobalValue.globalValue g
+            | :? Center    as c -> GlobalValue.center c
+            | :? Alignment as a -> duToKebab a
             | _ -> "Unknown justify content"
 
     let alignItems (v: IAlignItems): string =
         match v with
-            | :? Global     as g -> GlobalValue.globalValue g
-            | :? Center     as c -> GlobalValue.center c
-            | :? AlignItems as a -> duToKebab a
+            | :? Global    as g -> GlobalValue.globalValue g
+            | :? Center    as c -> GlobalValue.center c
+            | :? Alignment as a -> duToKebab a
             | _ -> "Unknown align items"
 
     let alignContent (v: IAlignContent): string =
         match v with
-            | :? Global       as g -> GlobalValue.globalValue g
-            | :? Center       as c -> GlobalValue.center c
-            | :? AlignContent as a -> duToKebab a
+            | :? Global    as g -> GlobalValue.globalValue g
+            | :? Center    as c -> GlobalValue.center c
+            | :? Alignment as a -> duToKebab a
             | _ -> "Unknown align content"
 
     let alignSelf (v: IAlignSelf): string =

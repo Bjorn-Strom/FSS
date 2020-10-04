@@ -1863,77 +1863,77 @@ let flexTests =
 
             test
                 "Align items start"
-                [ AlignItems Flex.AlignItems.Start]
+                [ AlignItems Flex.Start]
                 ["alignItems" ==> "start"]
 
             test
                 "Align items end"
-                [ AlignItems Flex.AlignItems.End]
+                [ AlignItems Flex.End]
                 ["alignItems" ==> "end"]
 
             test
                 "Align items flex start"
-                [ AlignItems Flex.AlignItems.FlexStart]
+                [ AlignItems Flex.FlexStart]
                 ["alignItems" ==> "flex-start"]
 
             test
                 "Align items flex end"
-                [ AlignItems Flex.AlignItems.FlexEnd]
+                [ AlignItems Flex.FlexEnd]
                 ["alignItems" ==> "flex-end"]
 
             test
                 "Align items center"
-                [ AlignItems Flex.AlignItems.Center]
+                [ AlignItems Flex.Center]
                 ["alignItems" ==> "center"]
 
             test
                 "Align items left"
-                [ AlignItems Flex.AlignItems.Left]
+                [ AlignItems Flex.Left]
                 ["alignItems" ==> "left"]
 
             test
                 "Align items right"
-                [ AlignItems Flex.AlignItems.Right]
+                [ AlignItems Flex.Right]
                 ["alignItems" ==> "right"]
 
             test
                 "Align items normal"
-                [ AlignItems Flex.AlignItems.Normal]
+                [ AlignItems Flex.Normal]
                 ["alignItems" ==> "normal"]
 
             test
                 "Align items baseline"
-                [ AlignItems Flex.AlignItems.Baseline]
+                [ AlignItems Flex.Baseline]
                 ["alignItems" ==> "baseline"]
 
             test
                 "Align items space between"
-                [ AlignItems Flex.AlignItems.SpaceBetween]
+                [ AlignItems Flex.SpaceBetween]
                 ["alignItems" ==> "space-between"]
 
             test
                 "Align items space around"
-                [ AlignItems Flex.AlignItems.SpaceAround]
+                [ AlignItems Flex.SpaceAround]
                 ["alignItems" ==> "space-around"]
 
             test
                 "Align items space evenly"
-                [ AlignItems Flex.AlignItems.SpaceEvenly]
+                [ AlignItems Flex.SpaceEvenly]
                 ["alignItems" ==> "space-evenly"]
 
             test
                 "Align items right"
-                [ AlignItems Flex.AlignItems.Right]
+                [ AlignItems Flex.Right]
                 ["alignItems" ==> "right"]
 
             test
                 "Align items safe"
-                [ AlignItems Flex.AlignItems.Safe]
+                [ AlignItems Flex.Safe]
                 ["alignItems" ==> "safe"]
 
             test
                 "Align items unsafe"
-                [ AlignItems Flex.AlignItems.Unsafe]
+                [ AlignItems Flex.Unsafe]
                 ["alignItems" ==> "unsafe"]
 
             test
@@ -1953,77 +1953,77 @@ let flexTests =
 
             test
                 "Align content start"
-                [ AlignContent Flex.AlignContent.Start]
+                [ AlignContent Flex.Start]
                 ["alignContent" ==> "start"]
 
             test
                 "Align content end"
-                [ AlignContent Flex.AlignContent.End]
+                [ AlignContent Flex.End]
                 ["alignContent" ==> "end"]
 
             test
                 "Align content flex start"
-                [ AlignContent Flex.AlignContent.FlexStart]
+                [ AlignContent Flex.FlexStart]
                 ["alignContent" ==> "flex-start"]
 
             test
                 "Align content flex end"
-                [ AlignContent Flex.AlignContent.FlexEnd]
+                [ AlignContent Flex.FlexEnd]
                 ["alignContent" ==> "flex-end"]
 
             test
                 "Align content center"
-                [ AlignContent Flex.AlignContent.Center]
+                [ AlignContent Flex.Center]
                 ["alignContent" ==> "center"]
 
             test
                 "Align content left"
-                [ AlignContent Flex.AlignContent.Left]
+                [ AlignContent Flex.Left]
                 ["alignContent" ==> "left"]
 
             test
                 "Align content right"
-                [ AlignContent Flex.AlignContent.Right]
+                [ AlignContent Flex.Right]
                 ["alignContent" ==> "right"]
 
             test
                 "Align content normal"
-                [ AlignContent Flex.AlignContent.Normal]
+                [ AlignContent Flex.Normal]
                 ["alignContent" ==> "normal"]
 
             test
                 "Align content baseline"
-                [ AlignContent Flex.AlignContent.Baseline]
+                [ AlignContent Flex.Baseline]
                 ["alignContent" ==> "baseline"]
 
             test
                 "Align content space between"
-                [ AlignContent Flex.AlignContent.SpaceBetween]
+                [ AlignContent Flex.SpaceBetween]
                 ["alignContent" ==> "space-between"]
 
             test
                 "Align content space around"
-                [ AlignContent Flex.AlignContent.SpaceAround]
+                [ AlignContent Flex.SpaceAround]
                 ["alignContent" ==> "space-around"]
 
             test
                 "Align content space evenly"
-                [ AlignContent Flex.AlignContent.SpaceEvenly]
+                [ AlignContent Flex.SpaceEvenly]
                 ["alignContent" ==> "space-evenly"]
 
             test
                 "Align content right"
-                [ AlignContent Flex.AlignContent.Right]
+                [ AlignContent Flex.Right]
                 ["alignContent" ==> "right"]
 
             test
                 "Align content safe"
-                [ AlignContent Flex.AlignContent.Safe]
+                [ AlignContent Flex.Safe]
                 ["alignContent" ==> "safe"]
 
             test
                 "Align content unsafe"
-                [ AlignContent Flex.AlignContent.Unsafe]
+                [ AlignContent Flex.Unsafe]
                 ["alignContent" ==> "unsafe"]
 
             test
