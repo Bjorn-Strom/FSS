@@ -1716,7 +1716,6 @@ let render (model: Model) (dispatch: Msg -> unit) =
                 ]
                 [
                     testo (Cursor.Default)
-                    testo (Cursor.None)
                     testo (Cursor.ContextMenu)
                     testo (Cursor.Help)
                     testo (Cursor.Pointer)
