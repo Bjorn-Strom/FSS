@@ -70,3 +70,4 @@ module Types =
     type ISize                    = interface end
     type IVisibility              = interface end
     type IPerspective             = interface end
+    type ICursor                  = interface end

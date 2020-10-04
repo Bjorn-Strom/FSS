@@ -71,7 +71,7 @@ module Flex =
         interface IFlexDirection
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
-    type Wrap =
+    type Wraps =
         | NoWrap
         | Wrap
         | WrapReverse
@@ -122,14 +122,14 @@ module FlexValue =
 
     let flexDirection (v: IFlexDirection): string =
         match v with
-            | :? Global        as g -> GlobalValue.globalValue g
+            | :? Global    as g -> GlobalValue.globalValue g
             | :? Direction as f -> duToKebab f
             | _ -> "Unknown flex direction"
 
     let flexWrap (v: IFlexWrap): string =
         match v with
             | :? Global   as g -> GlobalValue.globalValue g
-            | :? Wrap as f -> duToKebab f
+            | :? Wraps     as f -> duToKebab f
             | _ -> "Unknown flex wrap"
 
     let justifyContent (v: IJustifyContent): string =

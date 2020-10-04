@@ -3,18 +3,13 @@
 open Fable.Core
 open Fable.Core.JsInterop
 
-open Fss.Text
 open Types
 open Utilities.Helpers
-open Property
 open Animation
 open Selector
 open Media
 open Opacity
-open Position
-open Cursor
 open Units.Time
-open Background
 
 [<AutoOpen>]
 module Value =
@@ -33,7 +28,7 @@ module Value =
         | Color of IColor
 
         | BackgroundColor       of IColor
-        | BackgroundImage       of BackgroundImage
+        | BackgroundImage       of Background.Image
         | BackgroundPosition    of IBackgroundPosition
         | BackgroundPositions   of IBackgroundPosition list
         | BackgroundOrigin      of IBackgroundOrigin
@@ -135,7 +130,7 @@ module Value =
         | VerticalAlign  of IVerticalAlign
         | Visibility     of IVisibility
         | Opacity        of Opacity
-        | Position       of Position
+        | Position       of Position.Position
 
         | MarginTop    of IMargin
         | MarginRight  of IMargin
@@ -182,7 +177,7 @@ module Value =
         | TransitionTimingFunction  of ITransitionTimingFunction
         | TransitionTimingFunctions of ITransitionTimingFunction List
 
-        | Cursor of Cursor
+        | Cursor of ICursor
 
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
@@ -201,8 +196,8 @@ module Value =
 
                 | BackgroundColor       bc -> Property.value Property.BackgroundColor      ==> Color.value bc
                 | BackgroundImage       bi -> Property.value Property.BackgroundImage      ==> BackgroundValues.backgroundImage bi
-                | BackgroundPosition    b  -> Property.value Property.BackgroundPosition   ==> BackgroundValues.backgroundPosition b
-                | BackgroundPositions   bs -> Property.value Property.BackgroundPosition   ==> combineWs BackgroundValues.backgroundPosition bs
+                | BackgroundPosition    b  -> Property.value Property.BackgroundPosition   ==> BackgroundValues.position b
+                | BackgroundPositions   bs -> Property.value Property.BackgroundPosition   ==> combineWs BackgroundValues.position bs
                 | BackgroundOrigin      b  -> Property.value Property.BackgroundOrigin     ==> BackgroundValues.backgroundOrigin b
                 | BackgroundClip        b  -> Property.value Property.BackgroundClip       ==> BackgroundValues.backgroundClip b
                 | BackgroundRepeat      b  -> Property.value Property.BackgroundRepeat     ==> BackgroundValues.backgroundRepeat b
@@ -350,7 +345,7 @@ module Value =
                 | TransitionTimingFunction  t  -> Property.value Property.TransitionTimingFunction ==> TransitionValue.timingFunction t
                 | TransitionTimingFunctions ts -> Property.value Property.TransitionTimingFunction ==> combineComma TransitionValue.timingFunction ts
 
-                | Cursor c -> Property.value Property.Cursor ==> Cursor.value c
+                | Cursor c -> Property.value Property.Cursor ==> CursorValue.cursor c
         )
         |> callback
 

@@ -18,6 +18,7 @@ module Global =
         interface ITextDecorationSkip
         interface ITextDecorationSkipInk
         interface ITextEmphasisStyle
+        interface ICursor
         
     type Auto =
         | Auto
@@ -31,6 +32,7 @@ module Global =
         interface IBackgroundSize
         interface ITextUnderlineOffset
         interface ITextUnderlinePosition
+        interface ICursor
         
     type Center =
         | Center
@@ -112,6 +114,7 @@ module Global =
         interface IAnimationName
         interface IAnimationTimingFunction
         interface IPerspective
+        interface ICursor
 
 module GlobalValue =
     open Global

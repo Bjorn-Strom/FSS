@@ -1,12 +1,11 @@
 ﻿namespace Fss
 
 open Utilities.Helpers
+open Types
 
 module Cursor =
     type CursorType =
-        | Auto
         | Default
-        | None
         | ContextMenu
         | Help
         | Pointer
@@ -36,14 +35,29 @@ module Cursor =
         | SwResize
         | NeswResize
         | NwseResize
+        interface ICursor
 
     type Cursor = 
         | Cursor of CursorType
         | CursorUrl of string * CursorType
         | CursorUrlPosition of string * int * int * CursorType
+        interface ICursor
 
-    let value (v: Cursor): string =
+module CursorValue =
+    open Cursor
+    open Global
+    
+    let cursor (v: ICursor): string =
+        let stringifyCursor (c: Cursor): string =
+            match c with
+                | Cursor cursor                         -> duToKebab cursor
+                | CursorUrl (url, cursor)               -> sprintf "url(%s) %s" url (duToKebab cursor)
+                | CursorUrlPosition (url, x, y, cursor) -> sprintf "url(%s) %d %d %s" url x y (duToKebab cursor)
+        
         match v with
-            | Cursor cursor                         -> duToKebab cursor
-            | CursorUrl (url, cursor)               -> sprintf "url(%s) %s" url (duToKebab cursor)
-            | CursorUrlPosition (url, x, y, cursor) -> sprintf "url(%s) %d %d %s" url x y (duToKebab cursor)
+            | :? Global     as g -> GlobalValue.globalValue g
+            | :? Auto       as a -> GlobalValue.auto a
+            | :? None       as n -> GlobalValue.none n
+            | :? Cursor     as c -> stringifyCursor c
+            | :? CursorType as c -> duToKebab c
+            | _ -> "Unknown cursor"

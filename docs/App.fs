@@ -9,19 +9,19 @@ open Fss
 
 type Model = {
     FlexDirection: Flex.Direction
-    FlexWrap: Flex.Wrap
-    AlignContent: Flex.AlignContent
-    BackgroundRepeat: Background.BackgroundRepeat }
+    FlexWrap: Flex.Wraps
+    AlignContent: Flex.Alignment
+    BackgroundRepeat: Background.Repeat }
 type Msg =
     | SetFlexDirection of Flex.Direction
-    | SetFlexWrap of Flex.Wrap
-    | SetAlignContent of Flex.AlignContent
-    | SetBackgroundRepeat of Background.BackgroundRepeat
+    | SetFlexWrap of Flex.Wraps
+    | SetAlignContent of Flex.Alignment
+    | SetBackgroundRepeat of Background.Repeat
 
 let init() = {
     FlexDirection = Flex.Row
     FlexWrap = Flex.Wrap
-    AlignContent = Flex.AlignContent.Center
+    AlignContent = Flex.Center
     BackgroundRepeat = Background.NoRepeat}
 
 let update (msg: Msg) (model: Model): Model =
@@ -142,7 +142,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width (px 200)
                                 Height (px 200)
-                                BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; Color.yellow; pct 10 ] )
+                                BackgroundImage (Background.LinearGradient [ Background.Position.Right; Color.red; Color.yellow; pct 10 ] )
                             ])
                     ] []
 
@@ -1506,33 +1506,33 @@ let FlexBoxExamples model dispatch =
                     h3 [] [str "Align content" ]
                     div []
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.FlexStart)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.FlexStart)) ]
                             str "FlexStart"
                         ]
 
                     div []
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.FlexEnd)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.FlexEnd)) ]
                             str "FlexEnd"
                         ]
                     div []
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.Center)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.Center)) ]
                             str "Center"
                         ]
                     div []
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.Stretch)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.Stretch)) ]
                             str "Stretch(default)"
                         ]
                     div []
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.SpaceBetween)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.SpaceBetween)) ]
                             str "SpaceBetween"
                         ]
                     div []
                         [
-                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.AlignContent.SpaceAround)) ]
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetAlignContent Flex.SpaceAround)) ]
                             str "SpaceAround"
                         ]
                 ]
@@ -1683,7 +1683,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //MarginExamples
             //PaddingExamples
             //TransformExamples
-            TransitionExamples
+            //TransitionExamples
             //TextExamples
             //AnimationExamples
             //FlexBoxExamples model dispatch
@@ -1691,7 +1691,6 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //SelectorExamples
 
 
-           (*
             let testo x =
                div
                     [
@@ -1699,14 +1698,57 @@ let render (model: Model) (dispatch: Msg -> unit) =
                             [
                                 Width (px 100)
                                 Height (px 100)
-                                //BackgroundColor blue
-                                Cursor x
+                                BackgroundColor Color.blue
+                                Cursor (Cursor.Cursor x)
+                                BorderStyle Border.Style.Solid
+                                BorderWidth (px 5)
                             ])
                     ]
                 []
 
-            str "foo"
-            *)
+            div [
+                ClassName ( fss
+                           [
+                                Display Display.Flex
+                                FlexDirection Flex.Direction.Row
+                                FlexWrap Flex.Wraps.Wrap
+                           ])
+                ]
+                [
+                    testo (Cursor.Default)
+                    testo (Cursor.None)
+                    testo (Cursor.ContextMenu)
+                    testo (Cursor.Help)
+                    testo (Cursor.Pointer)
+                    testo (Cursor.Progress)
+                    testo (Cursor.Wait)
+                    testo (Cursor.Cell)
+                    testo (Cursor.Crosshair)
+                    testo (Cursor.Text)
+                    testo (Cursor.VerticalText)
+                    testo (Cursor.Alias)
+                    testo (Cursor.Copy)
+                    testo (Cursor.Move)
+                    testo (Cursor.NoDrop)
+                    testo (Cursor.NotAllowed)
+                    testo (Cursor.AllScroll)
+                    testo (Cursor.ColResize)
+                    testo (Cursor.RowResize)
+                    testo (Cursor.NResize)
+                    testo (Cursor.EResize)
+                    testo (Cursor.SResize)
+                    testo (Cursor.WResize)
+                    testo (Cursor.NsResize)
+                    testo (Cursor.EwResize)
+                    testo (Cursor.NeResize)
+                    testo (Cursor.NwResize)
+                    testo (Cursor.SeResize)
+                    testo (Cursor.SwResize)
+                    testo (Cursor.NeswResize)
+                    testo (Cursor.NwseResize)
+                ]
+            
+
         ]
 
 Program.mkSimple init update render
