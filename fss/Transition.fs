@@ -9,16 +9,16 @@ open Units.Time
 
 module Transition =
     
-    type TransitionProperty =
+    type Property =
         | Property
         interface ITransitionProperty
     
-    type TransitionTime =
-        | TransitionTime
+    type Time =
+        | Time
         interface ITransitionTime
         
-    type TransitionTimingFunction =
-        | TransitionTimingFunction
+    type TimingFunction =
+        | TimingFunction
         interface ITransitionTimingFunction
         
 module TransitionValue =

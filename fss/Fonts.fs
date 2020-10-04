@@ -9,7 +9,7 @@ open Units.Angle
 
 module Font =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
-    type FontSize =
+    type Size =
         // Absolute
         | XxSmall
         | XSmall
@@ -26,14 +26,14 @@ module Font =
         interface IGlobal
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
-    type FontStyle =
+    type Style =
         | Normal
         | Italic
         | Oblique of Angle
         interface IFontStyle
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
-    type FontStretch =
+    type Stretch =
         | Normal
         | SemiCondensed
         | Condensed
@@ -46,7 +46,7 @@ module Font =
         interface IFontStretch
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
-    type FontWeight =
+    type Weight =
         | Normal
         | Bold
         | Lighter
@@ -63,7 +63,7 @@ module Font =
         interface ILineHeight
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
-    type FontDisplay =
+    type Display =
         | Auto
         | Block
         | Swap
@@ -88,7 +88,7 @@ module Font =
         | On
         | Off
 
-    type FontFeatureSetting =
+    type FeatureSetting =
         | Liga of SettingSwitch
         | Dlig of SettingSwitch
         | Onum of SettingSwitch
@@ -118,7 +118,7 @@ module Font =
         interface IFontFeatureSetting
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
-    type FontVariantNumeric =
+    type VariantNumeric =
         | Normal
         | Ordinal
         | SlashedZero
@@ -131,7 +131,7 @@ module Font =
         interface IFontVariantNumeric
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
-    type FontVariantCaps =
+    type VariantCaps =
         | Normal
         | SmallCaps
         | AllSmallCaps
@@ -142,7 +142,7 @@ module Font =
         interface IFontVariantCaps
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-    type FontVariantEastAsian =
+    type VariantEastAsian =
         | Normal
         | Ruby
         | Jis78
@@ -156,7 +156,7 @@ module Font =
         interface IFontVariantEastAsian
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-    type FontVariantLigatures =
+    type VariantLigatures =
         | Normal
         | None
         | CommonLigatures
@@ -174,41 +174,41 @@ module FontValues =
 
     let fontSize (v: IFontSize): string =
         match v with
-            | :? Global as g   -> GlobalValue.globalValue g
-            | :? Size as s     -> Units.Size.value s
-            | :? Percent as p  -> Units.Percent.value p
-            | :? FontSize as s -> duToKebab s
-            | _                -> "Unknown font size"
+            | :? Global          as g -> GlobalValue.globalValue g
+            | :? Units.Size.Size as s -> Units.Size.value s
+            | :? Percent         as p -> Units.Percent.value p
+            | :? Size            as s -> duToKebab s
+            | _                       -> "Unknown font size"
 
     let fontStyle (v: IFontStyle): string =
-        let stringifyStyleValue (v: FontStyle): string =
+        let stringifyStyleValue (v: Style): string =
             match v with
                 | Oblique a -> sprintf "oblique %s" <| Units.Angle.value a
                 | _         -> duToLowercase v
 
         match v with
-            | :? FontStyle as f -> stringifyStyleValue f
-            | :? Global as g    -> GlobalValue.globalValue g
-            | :? Normal as n    -> GlobalValue.normal n
-            | _                 -> "Unknown font style"
+            | :? Style  as f -> stringifyStyleValue f
+            | :? Global as g -> GlobalValue.globalValue g
+            | :? Normal as n -> GlobalValue.normal n
+            | _              -> "Unknown font style"
 
     let fontStretch (v: IFontStretch): string =
         match v with
-            | :? FontStretch as f -> duToKebab f
-            | :? Percent as p     -> Units.Percent.value p
-            | :? Global as g      -> GlobalValue.globalValue g
-            | _                   -> "unknown font stretch value"
+            | :? Stretch as f -> duToKebab f
+            | :? Percent as p -> Units.Percent.value p
+            | :? Global  as g -> GlobalValue.globalValue g
+            | _               -> "unknown font stretch value"
 
     let fontWeight (v: IFontWeight): string =
-        let stringifyFamilyValue (v: FontWeight): string =
+        let stringifyFamilyValue (v: Weight): string =
             match v with
-                | FontWeight.Value n -> string n
-                | _                  -> duToLowercase v
+                | Weight.Value n -> string n
+                | _              -> duToLowercase v
 
         match v with
             | :? Global as g     -> GlobalValue.globalValue g
             | :? Normal as n     -> GlobalValue.normal n
-            | :? FontWeight as f -> stringifyFamilyValue f
+            | :? Weight as f     -> stringifyFamilyValue f
             | _                  -> "Unknown font family"
 
     let lineHeight (v: ILineHeight): string =
@@ -218,15 +218,15 @@ module FontValues =
                 | _       -> duToLowercase v
 
         match v with
-            | :? LineHeight as f -> stringifyLineHeight f
-            | :? Percent as p    -> Units.Percent.value p
-            | :? Size as s       -> Units.Size.value s
-            | :? Global as g     -> GlobalValue.globalValue g
-            | _                  -> "unknown font stretch value"
+            | :? LineHeight      as f -> stringifyLineHeight f
+            | :? Percent         as p -> Units.Percent.value p
+            | :? Units.Size.Size as s -> Units.Size.value s
+            | :? Global          as g -> GlobalValue.globalValue g
+            | _                       -> "unknown font stretch value"
 
     let fontDisplay (v: IFontDisplay): string =
         match v with
-            | :? FontDisplay as f -> duToLowercase f
+            | :? Display as f -> duToLowercase f
             | _                   -> "Unknown font display"
 
     let fontName (FontName n) = n
@@ -245,7 +245,7 @@ module FontValues =
 
 
     let fontFeatureSetting (v: IFontFeatureSetting): string =
-        let parseFontFeatureSetting (v: FontFeatureSetting): string =
+        let parseFontFeatureSetting (v: FeatureSetting): string =
             let stringify (fontFeature: string) (setting: SettingSwitch) =
                 sprintf "\"%s\" %s" fontFeature (duToString setting)
 
@@ -278,31 +278,31 @@ module FontValues =
             | Mkmk switch -> stringify "mkmk" switch
 
         match v with
-            | :? Global as g             -> GlobalValue.globalValue g
-            | :? FontFeatureSetting as f -> sprintf "%s" (parseFontFeatureSetting f)
+            | :? Global         as g -> GlobalValue.globalValue g
+            | :? FeatureSetting as f -> sprintf "%s" (parseFontFeatureSetting f)
             | _ -> "Unknown font feature setting"
 
     let fontVariantNumeric (v: IFontVariantNumeric): string =
         match v with
-        | :? Global as g             -> GlobalValue.globalValue g
-        | :? FontVariantNumeric as f -> duToKebab f
+        | :? Global         as g -> GlobalValue.globalValue g
+        | :? VariantNumeric as f -> duToKebab f
         | _ -> "Unknown font variant numeric"
 
     let fontVariantCap (v: IFontVariantCaps): string =
         match v with
-        | :? Global          as g -> GlobalValue.globalValue g
-        | :? FontVariantCaps as f -> duToKebab f
+        | :? Global      as g -> GlobalValue.globalValue g
+        | :? VariantCaps as f -> duToKebab f
         | _ -> "Unknown font variant caps"
 
     let fontVariantEastAsian (v: IFontVariantEastAsian): string =
         match v with
-        | :? Global               as g -> GlobalValue.globalValue g
-        | :? FontVariantEastAsian as f -> duToKebab f
+        | :? Global           as g -> GlobalValue.globalValue g
+        | :? VariantEastAsian as f -> duToKebab f
         | _ -> "Unknown font variant east asian"
 
     let fontVariantLigature (v: IFontVariantLigatures): string =
         match v with
         | :? Global               as g -> GlobalValue.globalValue g
         | :? None                 as n -> GlobalValue.none n
-        | :? FontVariantLigatures as f -> duToKebab f
+        | :? VariantLigatures     as f -> duToKebab f
         | _ -> "Unknown font variant ligatures"

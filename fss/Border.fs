@@ -7,14 +7,14 @@ open Utilities.Helpers
 
 module Border =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
-    type BorderWidth =
+    type Width =
         | Thin
         | Medium
         | Thick
         interface IBorderWidth
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
-    type BorderStyle =
+    type Style =
         | Hidden
         | Dotted
         | Dashed
@@ -35,7 +35,7 @@ module BorderValue =
     let borderWidth (v: IBorderWidth): string =
         match v with
             | :? Global      as g -> GlobalValue.globalValue g
-            | :? BorderWidth as b -> duToLowercase b
+            | :? Width as b -> duToLowercase b
             | :? Size        as s -> Units.Size.value s
             | :? Percent     as p -> Units.Percent.value p
             | _ -> "Unknown border width"
@@ -44,7 +44,7 @@ module BorderValue =
         match v with
             | :? Global      as g -> GlobalValue.globalValue g
             | :? None        as n -> GlobalValue.none n
-            | :? BorderStyle as b -> duToLowercase b
+            | :? Style as b -> duToLowercase b
             | _ -> "Unknown border style"
             
     let borderRadius (v: IBorderRadius): string =

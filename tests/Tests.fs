@@ -599,41 +599,41 @@ let fontTests =
 
             test
                 "Font stretch normal"
-                [ FontStretch Font.FontStretch.Normal ]
+                [ FontStretch Font.Stretch.Normal ]
                 [ "fontStretch" ==> "normal" ]
 
             test
                 "Font stretch ultra-condensed"
-                [ FontStretch Font.FontStretch.UltraCondensed ]
+                [ FontStretch Font.Stretch.UltraCondensed ]
                 [ "fontStretch" ==> "ultra-condensed" ]
 
             test
                  "Font stretch extra-condensed"
-                [ FontStretch Font.FontStretch.ExtraCondensed ]
+                [ FontStretch Font.Stretch.ExtraCondensed ]
                 [ "fontStretch" ==> "extra-condensed" ]
 
             test "Font stretch extra-condensed"
-                [ FontStretch Font.FontStretch.ExtraCondensed ]
+                [ FontStretch Font.Stretch.ExtraCondensed ]
                 [ "fontStretch" ==> "extra-condensed" ]
 
             test "Font stretch condensed"
-                [ FontStretch Font.FontStretch.Condensed ]
+                [ FontStretch Font.Stretch.Condensed ]
                 [ "fontStretch" ==> "condensed" ]
 
             test "Font stretch semi-condensed"
-                [ FontStretch Font.FontStretch.SemiCondensed ]
+                [ FontStretch Font.Stretch.SemiCondensed ]
                 [ "fontStretch" ==> "semi-condensed" ]
 
             test "Font stretch expanded"
-                [ FontStretch Font.FontStretch.Expanded]
+                [ FontStretch Font.Stretch.Expanded]
                 [ "fontStretch" ==> "expanded" ]
 
             test "Font stretch extra-expanded"
-                [ FontStretch Font.FontStretch.ExtraExpanded]
+                [ FontStretch Font.Stretch.ExtraExpanded]
                 [ "fontStretch" ==> "extra-expanded" ]
 
             test "Font stretch ultra-expanded"
-                [ FontStretch Font.FontStretch.UltraExpanded]
+                [ FontStretch Font.Stretch.UltraExpanded]
                 [ "fontStretch" ==> "ultra-expanded" ]
 
             test "Font stretch percent"
@@ -689,27 +689,27 @@ let fontTests =
 
             test
                 "Font weight normal"
-                [ FontWeight Font.FontWeight.Normal ]
+                [ FontWeight Font.Weight.Normal ]
                 [ "fontWeight" ==> "normal"]
 
             test
                 "Font weight bold"
-                [ FontWeight Font.FontWeight.Bold ]
+                [ FontWeight Font.Weight.Bold ]
                 [ "fontWeight" ==> "bold"]
 
             test
                 "Font weight lighter"
-                [ FontWeight Font.FontWeight.Lighter ]
+                [ FontWeight Font.Weight.Lighter ]
                 [ "fontWeight" ==> "lighter"]
 
             test
                 "Font weight bolder"
-                [ FontWeight Font.FontWeight.Bolder ]
+                [ FontWeight Font.Weight.Bolder ]
                 [ "fontWeight" ==> "bolder"]
 
             test
                 "Font weight value"
-                [ FontWeight (Font.FontWeight.Value 500) ]
+                [ FontWeight (Font.Weight.Value 500) ]
                 [ "fontWeight" ==> "500"]
 
             test
@@ -862,42 +862,42 @@ let fontTests =
 
             test
                 "Font variant numeric normal"
-                [ FontVariantNumeric Font.FontVariantNumeric.Normal]
+                [ FontVariantNumeric Font.VariantNumeric.Normal]
                 ["fontVariantNumeric" ==> "normal"]
 
             test
                 "Font variant numeric ordinal"
-                [ FontVariantNumeric Font.FontVariantNumeric.Ordinal]
+                [ FontVariantNumeric Font.VariantNumeric.Ordinal]
                 ["fontVariantNumeric" ==> "ordinal"]
 
             test
                 "Font variant numeric slashed zero"
-                [ FontVariantNumeric Font.FontVariantNumeric.SlashedZero]
+                [ FontVariantNumeric Font.VariantNumeric.SlashedZero]
                 ["fontVariantNumeric" ==> "slashed-zero"]
 
             test
                 "Font variant numeric lining nums"
-                [ FontVariantNumeric Font.FontVariantNumeric.LiningNums]
+                [ FontVariantNumeric Font.VariantNumeric.LiningNums]
                 ["fontVariantNumeric" ==> "lining-nums"]
 
             test
                 "Font variant numeric old style nums"
-                [ FontVariantNumeric Font.FontVariantNumeric.OldstyleNums]
+                [ FontVariantNumeric Font.VariantNumeric.OldstyleNums]
                 ["fontVariantNumeric" ==> "oldstyle-nums"]
 
             test
                 "Font variant numeric tabular nums"
-                [ FontVariantNumeric Font.FontVariantNumeric.TabularNums]
+                [ FontVariantNumeric Font.VariantNumeric.TabularNums]
                 ["fontVariantNumeric" ==> "tabular-nums"]
 
             test
                 "Font variant numeric diagonal fractions"
-                [ FontVariantNumeric Font.FontVariantNumeric.DiagonalFractions]
+                [ FontVariantNumeric Font.VariantNumeric.DiagonalFractions]
                 ["fontVariantNumeric" ==> "diagonal-fractions"]
 
             test
                 "Font variant numeric stacked fractions"
-                [ FontVariantNumeric Font.FontVariantNumeric.StackedFractions]
+                [ FontVariantNumeric Font.VariantNumeric.StackedFractions]
                 ["fontVariantNumeric" ==> "stacked-fractions"]
 
             test
@@ -905,8 +905,8 @@ let fontTests =
                 [
                     FontVariantNumerics
                         [
-                            Font.FontVariantNumeric.OldstyleNums
-                            Font.FontVariantNumeric.StackedFractions
+                            Font.VariantNumeric.OldstyleNums
+                            Font.VariantNumeric.StackedFractions
                         ]
                 ]
                 ["fontVariantNumeric" ==> "oldstyle-nums stacked-fractions"]
@@ -928,37 +928,37 @@ let fontTests =
 
             test
                 "Font variant caps normal"
-                [ FontVariantCaps Font.FontVariantCaps.Normal]
+                [ FontVariantCaps Font.VariantCaps.Normal]
                 ["fontVariantCaps" ==> "normal"]
 
             test
                 "Font variant caps small caps"
-                [ FontVariantCaps Font.FontVariantCaps.SmallCaps]
+                [ FontVariantCaps Font.VariantCaps.SmallCaps]
                 ["fontVariantCaps" ==> "small-caps"]
 
             test
                 "Font variant caps  all small caps"
-                [ FontVariantCaps Font.FontVariantCaps.AllSmallCaps]
+                [ FontVariantCaps Font.VariantCaps.AllSmallCaps]
                 ["fontVariantCaps" ==> "all-small-caps"]
 
             test
                 "Font variant caps petite caps"
-                [ FontVariantCaps Font.FontVariantCaps.PetiteCaps]
+                [ FontVariantCaps Font.VariantCaps.PetiteCaps]
                 ["fontVariantCaps" ==> "petite-caps"]
 
             test
                 "Font variant caps all petite caps"
-                [ FontVariantCaps Font.FontVariantCaps.AllPetiteCaps]
+                [ FontVariantCaps Font.VariantCaps.AllPetiteCaps]
                 ["fontVariantCaps" ==> "all-petite-caps"]
 
             test
                 "Font variant caps unicase"
-                [ FontVariantCaps Font.FontVariantCaps.Unicase]
+                [ FontVariantCaps Font.VariantCaps.Unicase]
                 ["fontVariantCaps" ==> "unicase"]
 
             test
                 "Font variant caps titling caps"
-                [ FontVariantCaps Font.FontVariantCaps.TitlingCaps]
+                [ FontVariantCaps Font.VariantCaps.TitlingCaps]
                 ["fontVariantCaps" ==> "titling-caps"]
 
             test
@@ -978,7 +978,7 @@ let fontTests =
 
             test
                 "Font variant east asian normal"
-                [ FontVariantEastAsian Font.FontVariantEastAsian.Normal]
+                [ FontVariantEastAsian Font.VariantEastAsian.Normal]
                 ["fontVariantEastAsian" ==> "normal"]
 
             test
@@ -1040,7 +1040,7 @@ let fontTests =
 
             test
                 "Font variant ligatures normal"
-                [ FontVariantLigatures Font.FontVariantLigatures.Normal]
+                [ FontVariantLigatures Font.VariantLigatures.Normal]
                 ["fontVariantLigatures" ==> "normal"]
 
             test

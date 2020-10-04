@@ -41,7 +41,7 @@ module Flex =
     open Units.Size
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
-    type FlexDirection =
+    type Direction =
         | Row
         | RowReverse
         | Column
@@ -49,7 +49,7 @@ module Flex =
         interface IFlexDirection
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
-    type FlexWrap =
+    type Wrap =
         | NoWrap
         | Wrap
         | WrapReverse
@@ -132,17 +132,17 @@ module Flex =
         interface IOrder
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
-    type FlexGrow =
+    type Grow =
         | Grow of float
         interface IFlexGrow
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
-    type FlexShrink =
+    type Shrink =
         | Shrink of float
         interface IFlexShrink
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
-    type FlexBasis =
+    type Basis =
         | Fill
         | MaxContent
         | MinContent
@@ -158,13 +158,13 @@ module FlexValue =
     let flexDirection (v: IFlexDirection): string =
         match v with
             | :? Global        as g -> GlobalValue.globalValue g
-            | :? FlexDirection as f -> duToKebab f
+            | :? Direction as f -> duToKebab f
             | _ -> "Unknown flex direction"
 
     let flexWrap (v: IFlexWrap): string =
         match v with
             | :? Global   as g -> GlobalValue.globalValue g
-            | :? FlexWrap as f -> duToKebab f
+            | :? Wrap as f -> duToKebab f
             | _ -> "Unknown flex wrap"
 
     let justifyContent (v: IJustifyContent): string =
@@ -207,14 +207,14 @@ module FlexValue =
         let stringifyFlexGrow (Grow f) = string f
         match v with
             | :? Global   as g -> GlobalValue.globalValue g
-            | :? FlexGrow as s -> stringifyFlexGrow s
+            | :? Grow as s -> stringifyFlexGrow s
             | _ -> "Unknown flex grow"
 
     let flexShrink (v: IFlexShrink): string =
         let stringifyFlexShrink (Shrink f) = string f
         match v with
             | :? Global     as g -> GlobalValue.globalValue g
-            | :? FlexShrink as s -> stringifyFlexShrink s
+            | :? Shrink as s -> stringifyFlexShrink s
             | _ -> "Unknown flex shrink"
 
     let flexBasis (v: IFlexBasis): string =
@@ -223,5 +223,5 @@ module FlexValue =
             | :? Auto      as a -> GlobalValue.auto a
             | :? Size      as s -> Units.Size.value s
             | :? Percent   as p -> Units.Percent.value p
-            | :? FlexBasis as b -> duToKebab b
+            | :? Basis as b -> duToKebab b
             | _ -> "Unknown flex basis"

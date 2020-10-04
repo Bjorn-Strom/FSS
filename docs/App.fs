@@ -8,13 +8,13 @@ open Fable.React.Props
 open Fss
 
 type Model = {
-    FlexDirection: Flex.FlexDirection
-    FlexWrap: Flex.FlexWrap
+    FlexDirection: Flex.Direction
+    FlexWrap: Flex.Wrap
     AlignContent: Flex.AlignContent
     BackgroundRepeat: Background.BackgroundRepeat }
 type Msg =
-    | SetFlexDirection of Flex.FlexDirection
-    | SetFlexWrap of Flex.FlexWrap
+    | SetFlexDirection of Flex.Direction
+    | SetFlexWrap of Flex.Wrap
     | SetAlignContent of Flex.AlignContent
     | SetBackgroundRepeat of Background.BackgroundRepeat
 
@@ -212,7 +212,7 @@ let BackgroundExamples model dispatch =
                         //BorderStyle Border.Solid
                         BorderWidth (px 1)
                         BorderColor Color.orangeRed
-                        CSSProperty.Margin (px 20)
+                        Margin (px 20)
                     ]
 
             div [ ClassName (fss [ Display Display.Flex])]
@@ -429,14 +429,14 @@ let FontFaceExamples =
         fss
             [
                 FontFamily (Font.Font droidSerif)
-                CSSProperty.FontWeight Font.Bold
+                FontWeight Font.Bold
             ]
 
     let p3 =
         fss
             [
                 FontFamily (Font.Font moderna)
-                CSSProperty.FontWeight Font.Bold
+                FontWeight Font.Bold
             ]
 
     fragment []
@@ -579,7 +579,7 @@ let MarginExamples =
                                 Height (px 100)
                                 Color Color.orangeRed
                                 BackgroundColor Color.rebeccaPurple
-                                CSSProperty.Margins [px 100; px 50; px 200; px 150]
+                                Margins [px 100; px 50; px 200; px 150]
                             ])
                 ]
                 [ str "Me tooo!" ]
@@ -775,7 +775,7 @@ let TextExamples =
                     [
                         TextDecorationLine Text.Underline
                         TextDecorationColor Color.red
-                        TextDecorationThickness Text.DecorationThickness
+                        TextDecorationThickness Text.FromFont
                     ])] [str "Thickness from font" ]
 
             div [ ClassName (fss
@@ -822,7 +822,7 @@ let TextExamples =
                 fss
                     [
                         TextAlign Text.Center
-                        CSSProperty.FontWeight Font.Bold
+                        FontWeight Font.Bold
                         FontSize (px 80)
                         FontFamily Font.SansSerif
                         BackgroundColor (hex "91877b")
@@ -835,7 +835,7 @@ let TextExamples =
                 fss
                     [
                         TextAlign Text.Center
-                        CSSProperty.FontWeight Font.Bold
+                        FontWeight Font.Bold
                         FontSize (px 80)
                         FontFamily Font.SansSerif
                         BackgroundColor (hex "0e8dbc")
@@ -864,7 +864,7 @@ let TextExamples =
                 fss
                     [
                         TextAlign Text.Center
-                        CSSProperty.FontWeight Font.Bold
+                        FontWeight Font.Bold
                         FontSize (px 80)
                         FontFamily Font.SansSerif
                         BackgroundColor (hex "3a50d9")
@@ -883,7 +883,7 @@ let TextExamples =
                 fss
                     [
                         TextAlign Text.Center
-                        CSSProperty.FontWeight Font.Bold
+                        FontWeight Font.Bold
                         FontSize (px 80)
                         FontFamily Font.SansSerif
                         BackgroundColor (hex "edde9c")
@@ -916,7 +916,7 @@ let TextExamples =
                 fss
                     [
                         TextAlign Text.Center
-                        CSSProperty.FontWeight Font.Bold
+                        FontWeight Font.Bold
                         FontSize (px 80)
                         FontFamily Font.SansSerif
                         BackgroundColor Color.red
@@ -1103,7 +1103,7 @@ let FlexBoxExamples model dispatch =
             [
                 Width (px 100)
                 Height (px 100)
-                CSSProperty.Margin Margin.Auto
+                Margin Margin.Auto
                 BackgroundColor Color.lightCoral
             ]
 
@@ -1214,7 +1214,7 @@ let FlexBoxExamples model dispatch =
             [
                 BackgroundColor (hex "#cee")
                 Width (em 15.0)
-                CSSProperty.Margin (px 10)
+                Margin (px 10)
             ]
 
     let noWrap =
@@ -1240,7 +1240,7 @@ let FlexBoxExamples model dispatch =
             [
                 BackgroundColor (hex "#cee")
                 Width (em 15.0)
-                CSSProperty.Margin (px 10)
+                Margin (px 10)
             ]
 
     let wrap =
@@ -1266,7 +1266,7 @@ let FlexBoxExamples model dispatch =
             [
                 BackgroundColor (hex "#cee")
                 Width (em 15.0)
-                CSSProperty.Margin (px 10)
+                Margin (px 10)
             ]
 
     let wrapReverse =
@@ -1283,7 +1283,7 @@ let FlexBoxExamples model dispatch =
         fss
             [
                 BackgroundColor Color.pink
-                CSSProperty.Margins [px 48; Margin.Auto; px 0]
+                Margins [px 48; Margin.Auto; px 0]
                 Width (px 600)
                 Display Display.Flex
                 FlexDirection model.FlexDirection
@@ -1295,7 +1295,7 @@ let FlexBoxExamples model dispatch =
             [
                 BackgroundColor Color.black
                 Color Color.white
-                CSSProperty.Margin (px 6)
+                Margin (px 6)
                 Width (px 120)
             ]
 
@@ -1327,7 +1327,7 @@ let FlexBoxExamples model dispatch =
         fss
             [
                 BackgroundColor (hex "cee")
-                CSSProperty.Margin (px 2)
+                Margin (px 2)
                 Width (pct 18)
             ]
 
@@ -1357,10 +1357,10 @@ let FlexBoxExamples model dispatch =
     let child =
         fss
             [
-                CSSProperty.Margins [px 0; px 10]
+                Margins [px 0; px 10]
                 BackgroundColor Color.white
-                CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (Flex.Grow 1.)
+                FlexBasis (px 120)
+                FlexGrow (Flex.Grow 1.)
                 Height (px 75)
 
             ]
@@ -1368,10 +1368,10 @@ let FlexBoxExamples model dispatch =
     let child3 =
         fss
             [
-                CSSProperty.Margins [px 0; px 10]
+                Margins [px 0; px 10]
                 BackgroundColor Color.white
-                CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (Flex.Grow 2.)
+                FlexBasis (px 120)
+                FlexGrow (Flex.Grow 2.)
                 Height (px 75)
             ]
 
@@ -1397,10 +1397,10 @@ let FlexBoxExamples model dispatch =
     let child =
         fss
             [
-                CSSProperty.Margins [px 0; px 10]
+                Margins [px 0; px 10]
                 BackgroundColor Color.white
-                CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexGrow (Flex.Grow 1.)
+                FlexBasis (px 120)
+                FlexGrow (Flex.Grow 1.)
                 Height (px 75)
 
             ]
@@ -1408,10 +1408,10 @@ let FlexBoxExamples model dispatch =
     let child3 =
         fss
             [
-                CSSProperty.Margins [px 0; px 10]
+                Margins [px 0; px 10]
                 BackgroundColor Color.white
-                CSSProperty.FlexBasis (px 120)
-                CSSProperty.FlexShrink (Flex.Shrink 2.)
+                FlexBasis (px 120)
+                FlexShrink (Flex.Shrink 2.)
                 Height (px 75)
             ]
 
@@ -1430,7 +1430,7 @@ let FlexBoxExamples model dispatch =
                 BorderStyle Border.Solid
                 BorderWidth (px 1)
                 BorderColor Color.orangeRed
-                CSSProperty.Margin (px 20)
+                Margin (px 20)
             ]
 
     fragment []
