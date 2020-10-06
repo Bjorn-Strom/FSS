@@ -40,30 +40,27 @@ module Value =
         | BackgroundAttachment  of IBackgroundAttachment
         | BackgroundAttachments of IBackgroundAttachment list
 
-        | Active           of CSSProperty list 
+        | Active           of CSSProperty list
         | AnyLink          of CSSProperty list
         | Blank            of CSSProperty list
         | Checked          of CSSProperty list
-        | Current          of CSSProperty list 
-        | Default          of CSSProperty list 
-        | Defined          of CSSProperty list 
-        | Dir              of CSSProperty list     
-        | Disabled         of CSSProperty list    
-        | Drop             of CSSProperty list 
+        | Current          of CSSProperty list
+        | Disabled         of CSSProperty list
+        | Drop             of CSSProperty list
         | Empty            of CSSProperty list
         | Enabled          of CSSProperty list
         | First            of CSSProperty list
         | FirstChild       of CSSProperty list
         | FirstOfType      of CSSProperty list
-        | Fullscreen       of CSSProperty list 
-        | Future           of CSSProperty list 
+        | Fullscreen       of CSSProperty list
+        | Future           of CSSProperty list
         | Focus            of CSSProperty list
-        | FocusVisible     of CSSProperty list 
+        | FocusVisible     of CSSProperty list
         | FocusWithin      of CSSProperty list
         | Has              of CSSProperty list
         | Host             of CSSProperty list
         | HostElement      of CSSProperty list
-        | HostContext      of CSSProperty list 
+        | HostContext      of CSSProperty list
         | Hover            of CSSProperty list
         | Indeterminate    of CSSProperty list
         | InRange          of CSSProperty list
@@ -74,10 +71,10 @@ module Value =
         | LastOfType       of CSSProperty list
         | LeftPSUEDO       of CSSProperty list
         | Link             of CSSProperty list
-        | LocalLink        of CSSProperty list 
+        | LocalLink        of CSSProperty list
         | Not              of CSSProperty list
         | NthChild         of CSSProperty list
-        | NthCol           of CSSProperty list 
+        | NthCol           of CSSProperty list
         | NthLastChild     of CSSProperty list
         | NthLastCol       of CSSProperty list
         | NthLastOfType    of CSSProperty list
@@ -86,22 +83,22 @@ module Value =
         | OnlyOfType       of CSSProperty list
         | Optional         of CSSProperty list
         | OutOfRange       of CSSProperty list
-        | Past             of CSSProperty list 
-        | PlaceholderShown of CSSProperty list 
+        | Past             of CSSProperty list
+        | PlaceholderShown of CSSProperty list
         | ReadOnly         of CSSProperty list
         | ReadWrite        of CSSProperty list
         | Required         of CSSProperty list
         | RightPSUEDO      of CSSProperty list
         | Root             of CSSProperty list
         | Scope            of CSSProperty list
-        | State            of CSSProperty list 
+        | State            of CSSProperty list
         | Target           of CSSProperty list
-        | TargetWithin     of CSSProperty list 
-        | UserInvalid      of CSSProperty list 
+        | TargetWithin     of CSSProperty list
+        | UserInvalid      of CSSProperty list
         | Valid            of CSSProperty list
         | Visited          of CSSProperty list
-        | Where            of CSSProperty list  
-        
+        | Where            of CSSProperty list
+
         | FontSize              of IFontSize
         | FontStyle             of IFontStyle
         | FontWeight            of IFontWeight
@@ -228,14 +225,14 @@ module Value =
         | TransformOrigin  of ITransformOrigin
         | TransformOrigins of ITransformOrigin list
 
-        | TransitionDuration        of ITransitionTime
-        | TransitionDurations       of ITransitionTime list
-        | TransitionDelay           of ITransitionTime
-        | TransitionDelays          of ITransitionTime list
-        | TransitionProperty        of ITransitionProperty
-        | TransitionProperties      of ITransitionProperty list
-        | TransitionTimingFunction  of ITransitionTimingFunction
-        | TransitionTimingFunctions of ITransitionTimingFunction List
+        | TransitionDuration        of ITime
+        | TransitionDurations       of ITime list
+        | TransitionDelay           of ITime
+        | TransitionDelays          of ITime list
+        | TransitionProperty        of IProperty
+        | TransitionProperties      of IProperty list
+        | TransitionTimingFunction  of ITimingFunction
+        | TransitionTimingFunctions of ITimingFunction List
 
         | Cursor of ICursor
 
@@ -267,14 +264,22 @@ module Value =
                 | BackgroundAttachment  b  -> Property.value Property.BackgroundAttachment ==> BackgroundValues.backgroundAttachment b
                 | BackgroundAttachments bs -> Property.value Property.BackgroundAttachment ==> combineWs BackgroundValues.backgroundAttachment bs
 
-                | Active  a -> Property.Active  |> Property.value               |> toPsuedo ==> createCSS a callback
-                | AnyLink a -> Property.AnyLink |> Property.propertyToKebabCase |> toPsuedo ==> createCSS a callback
-                | Blank   b -> Property.Blank   |> Property.value               |> toPsuedo ==> createCSS b callback
-                | Checked c -> Property.Checked |> Property.value               |> toPsuedo ==> createCSS c callback
-                | Current  c -> Property.Checked |> Property.value              |> toPsuedo ==> createCSS c callback
-                
-                
+                | Active   a   -> Property.Active     |> Property.value               |> toPsuedo ==> createCSS a callback
+                | AnyLink  a   -> Property.AnyLink    |> Property.propertyToKebabCase |> toPsuedo ==> createCSS a callback
+                | Blank    b   -> Property.Blank      |> Property.value               |> toPsuedo ==> createCSS b callback
+                | Checked  c   -> Property.Checked    |> Property.value               |> toPsuedo ==> createCSS c callback
+                | Disabled d   -> Property.Disabled   |> Property.value               |> toPsuedo ==> createCSS d callback
+                | Empty e      -> Property.Empty      |> Property.value               |> toPsuedo ==> createCSS e callback
+                | Enabled e    -> Property.Enabled    |> Property.value               |> toPsuedo ==> createCSS e callback
+                | FirstChild f -> Property.FirstChild |> Property.value               |> toPsuedo ==> createCSS f callback
+
+
                 | Hover   h -> Property.Hover   |> Property.value               |> toPsuedo ==> createCSS h callback
+
+
+
+                (*   firstChild, firstOfType, fullscreen, focus, hover, visited, indeterminate, invalid, lang, lastChild, lastOfType, link, nthChild, nthLastChild, nthLastOfType, nthOfType, onlyChild, onlyOfType, optional, outOfRange, readWrite, required, root, scope, target, valid  *)
+
 
                 | FontSize              f  -> Property.value Property.FontSize             ==> FontValues.fontSize f
                 | FontStyle             f  -> Property.value Property.FontStyle            ==> FontValues.fontStyle f
@@ -414,6 +419,9 @@ module Value =
 
                 | Cursor c -> Property.value Property.Cursor ==> CursorValue.cursor c
         )
+        |> (fun x ->
+            Fable.Core.JS.console.log(x)
+            x)
         |> callback
 
     let createCSSRecord (attributeList: CSSProperty list) = createCSS attributeList id

@@ -1,5 +1,6 @@
 ﻿module App
 
+open Browser.Types
 open Elmish
 open Elmish.React
 open Fable.React
@@ -1672,6 +1673,104 @@ let SelectorExamples =
                 ]
         ]
 
+let CursorExamples =
+    let testo x =
+       div
+            [
+                ClassName ( fss
+                    [
+                        Width (px 100)
+                        Height (px 100)
+                        BackgroundColor Color.blue
+                        Cursor (Cursor.Cursor x)
+                        BorderStyle Border.Style.Solid
+                        BorderWidth (px 5)
+                    ])
+            ]
+        []
+
+    div [
+        ClassName ( fss
+                   [
+                        Display Display.Flex
+                        FlexDirection Flex.Direction.Row
+                        FlexWrap Flex.Wraps.Wrap
+                   ])
+        ]
+        [
+            h2 [] [ str "Cursors" ]
+            testo (Cursor.Default)
+            testo (Cursor.ContextMenu)
+            testo (Cursor.Help)
+            testo (Cursor.Pointer)
+            testo (Cursor.Progress)
+            testo (Cursor.Wait)
+            testo (Cursor.Cell)
+            testo (Cursor.Crosshair)
+            testo (Cursor.Text)
+            testo (Cursor.VerticalText)
+            testo (Cursor.Alias)
+            testo (Cursor.Copy)
+            testo (Cursor.Move)
+            testo (Cursor.NoDrop)
+            testo (Cursor.NotAllowed)
+            testo (Cursor.AllScroll)
+            testo (Cursor.ColResize)
+            testo (Cursor.RowResize)
+            testo (Cursor.NResize)
+            testo (Cursor.EResize)
+            testo (Cursor.SResize)
+            testo (Cursor.WResize)
+            testo (Cursor.NsResize)
+            testo (Cursor.EwResize)
+            testo (Cursor.NeResize)
+            testo (Cursor.NwResize)
+            testo (Cursor.SeResize)
+            testo (Cursor.SwResize)
+            testo (Cursor.NeswResize)
+            testo (Cursor.NwseResize)
+        ]
+
+let foobar =
+        let boxContainer =
+            fss
+                [
+                    Display Display.Flex
+                    FlexDirection Flex.Row
+                ]
+
+        let boxStyling =
+            fss
+                [
+                    Width (px 80)
+                    Height (px 80)
+                    BackgroundColor Color.orangeRed
+                    BorderStyle Border.Solid
+                    BorderWidth Border.Medium
+                    BorderColor Color.blanchedAlmond
+                    TransitionDuration (ms 200.0)
+                    TransitionProperty Property.All
+                    TransitionTimingFunction Animation.Timing.EaseInOut
+                    Hover
+                        [
+                            Height (px 60)
+                            BackgroundColor Color.peru
+                        ]
+
+                ]
+
+        fragment []
+            [
+                p [] [ str "Disse er mine fine booookser" ]
+
+                div [ ClassName boxContainer ]
+                    [
+                        div [ ClassName boxStyling ] []
+                        div [ ClassName boxStyling ] []
+                        div [ ClassName boxStyling ] []
+                    ]
+            ]
+
 let render (model: Model) (dispatch: Msg -> unit) =
     div []
         [
@@ -1689,66 +1788,129 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //FlexBoxExamples model dispatch
             //MediaQueryExamples
             //SelectorExamples
+            //CursorExamples
 
+            h2 [] [ str "Psuedo selectors" ]
 
-            let testo x =
-               div
+            let active =
+                fss
                     [
-                        ClassName ( fss
+                        Active
+                            [
+                                Width (px 200)
+                                Height (px 200)
+                            ]
+                    ]
+
+            div []
+                [
+                    str "Active"
+                    button [ ClassName active  ] [ str "Activate!" ]
+                ]
+
+            let anyLink =
+                fss
+                    [
+                        AnyLink
+                            [
+                                Color Color.orangeRed
+                            ]
+                    ]
+
+            div []
+                [
+                    str "Any link"
+                    br []
+                    a [ ClassName anyLink; Href "#" ] [ str "This is a link!" ]
+                ]
+
+            str "Empty"
+            let empty =
+                fss
+                    [
+                        Width (px 80)
+                        Height (px 80)
+                        BackgroundColor Color.pink
+                        Empty
+                            [
+                                BackgroundColor Color.lime
+                            ]
+                    ]
+
+            div [ ClassName empty ] [ str "Not empty" ]
+            div [ ClassName empty ] []
+            div [ ClassName empty ] [ str "Not empty" ]
+
+            let disabled =
+                fss
+                    [
+                        BackgroundColor Color.red
+                        Disabled
+                            [
+                                BackgroundColor Color.blue
+                            ]
+                    ]
+
+            str "Disabled is blue"
+            div []
+                [
+                    input [ ClassName disabled ]
+                    input [ ClassName disabled; HTMLAttr.Disabled true]
+                ]
+
+            let checkedStyle =
+                fss
+                    [
+                        Checked
                             [
                                 Width (px 100)
                                 Height (px 100)
-                                BackgroundColor Color.blue
-                                Cursor (Cursor.Cursor x)
-                                BorderStyle Border.Style.Solid
-                                BorderWidth (px 5)
-                            ])
+                            ]
                     ]
-                []
 
-            div [
-                ClassName ( fss
-                           [
-                                Display Display.Flex
-                                FlexDirection Flex.Direction.Row
-                                FlexWrap Flex.Wraps.Wrap
-                           ])
-                ]
+            str "Checked"
+            div []
                 [
-                    testo (Cursor.Default)
-                    testo (Cursor.ContextMenu)
-                    testo (Cursor.Help)
-                    testo (Cursor.Pointer)
-                    testo (Cursor.Progress)
-                    testo (Cursor.Wait)
-                    testo (Cursor.Cell)
-                    testo (Cursor.Crosshair)
-                    testo (Cursor.Text)
-                    testo (Cursor.VerticalText)
-                    testo (Cursor.Alias)
-                    testo (Cursor.Copy)
-                    testo (Cursor.Move)
-                    testo (Cursor.NoDrop)
-                    testo (Cursor.NotAllowed)
-                    testo (Cursor.AllScroll)
-                    testo (Cursor.ColResize)
-                    testo (Cursor.RowResize)
-                    testo (Cursor.NResize)
-                    testo (Cursor.EResize)
-                    testo (Cursor.SResize)
-                    testo (Cursor.WResize)
-                    testo (Cursor.NsResize)
-                    testo (Cursor.EwResize)
-                    testo (Cursor.NeResize)
-                    testo (Cursor.NwResize)
-                    testo (Cursor.SeResize)
-                    testo (Cursor.SwResize)
-                    testo (Cursor.NeswResize)
-                    testo (Cursor.NwseResize)
+                    input [ ClassName checkedStyle; Type "checkbox"; HTMLAttr.Checked true ]
+                    input [ ClassName checkedStyle; Type "checkbox" ]
                 ]
-            
+
+            let enabled =
+                fss
+                    [
+                        BackgroundColor Color.white
+                        Enabled
+                            [
+                                BackgroundColor Color.red
+                            ]
+                    ]
+
+            str "Enabled is blue"
+            div []
+                [
+                    input [ ClassName enabled ]
+                    input [ ClassName enabled; HTMLAttr.Disabled true ]
+                ]
+
+            let firstChild =
+                fss
+                    [
+                        FirstChild
+                            [
+                                Color Color.orange
+                            ]
+                    ]
+
+            str "First child"
+            ul [ ClassName firstChild ]
+                [
+                    li [] [ str "Orange" ]
+                    li [] [ str "Not orange" ]
+                    li [] [ str "Not orange" ]
+                ]
 
         ]
+            // foobar
 
 Program.mkSimple init update render
 |> Program.withReactSynchronous "elmish-app"

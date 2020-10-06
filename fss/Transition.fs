@@ -7,34 +7,20 @@ open Types
 open Global
 open Units.Time
 
-module Transition =
-    
-    type Property =
-        | Property
-        interface ITransitionProperty
-    
-    type Time =
-        | Time
-        interface ITransitionTime
-        
-    type TimingFunction =
-        | TimingFunction
-        interface ITransitionTimingFunction
-        
 module TransitionValue =
-    let time (v: ITransitionTime): string =
+    let time (v: ITime): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? Time   as t -> Units.Time.value t
             | _ -> "Unknown transition duration"
-            
-    let property (v: ITransitionProperty): string =
+
+    let property (v: IProperty): string =
         match v with
             | :? Global   as g -> GlobalValue.globalValue g
             | :? Property as p -> Property.propertyToKebabCase p
             | _ -> "Unknown transition property"
-            
-    let timingFunction (v: ITransitionTimingFunction): string =
+
+    let timingFunction (v: ITimingFunction): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? Timing as t -> AnimationValue.timingFunction t

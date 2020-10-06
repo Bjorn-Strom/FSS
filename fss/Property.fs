@@ -275,26 +275,20 @@ module Property =
         | AnyLink
         | Blank
         | Checked
-        | Current
-        | Default
-        | Defined
-        | Dir
         | Disabled
-        | Drop 
         | Empty
         | Enabled
-        | First
         | FirstChild
         | FirstOfType
-        | Fullscreen 
-        | Future 
+        | Fullscreen
+        | Future
         | Focus
-        | FocusVisible 
+        | FocusVisible
         | FocusWithin
         | Has
         | Host
         | HostElement
-        | HostContext 
+        | HostContext
         | Hover
         | Indeterminate
         | InRange
@@ -305,10 +299,10 @@ module Property =
         | LastOfType
         | LeftPSUEDO
         | Link
-        | LocalLink 
+        | LocalLink
         | Not
         | NthChild
-        | NthCol 
+        | NthCol
         | NthLastChild
         | NthLastCol
         | NthLastOfType
@@ -317,22 +311,22 @@ module Property =
         | OnlyOfType
         | Optional
         | OutOfRange
-        | Past 
-        | PlaceholderShown 
+        | Past
+        | PlaceholderShown
         | ReadOnly
         | ReadWrite
         | Required
         | RightPSUEDO
         | Root
         | Scope
-        | State 
+        | State
         | Target
-        | TargetWithin 
-        | UserInvalid 
+        | TargetWithin
+        | UserInvalid
         | Valid
         | Visited
-        | Where  
-        interface ITransitionProperty
+        | Where
+        interface IProperty
 
     let value (v: Property): string = duToCamel v
 

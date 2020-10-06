@@ -120,7 +120,7 @@ module Time =
     type Time =
         | Sec of string
         | Ms of string
-        interface ITransitionTime
+        interface ITime
 
     let value (v: Time) =
         match v with
