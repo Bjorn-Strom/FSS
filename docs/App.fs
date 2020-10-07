@@ -1771,25 +1771,9 @@ let foobar =
                     ]
             ]
 
-let render (model: Model) (dispatch: Msg -> unit) =
-    div []
+let PsuedoExamples =
+    fragment []
         [
-            //ColorExamples
-            //BackgroundExamples model dispatch
-            //FontExamples
-            //FontFaceExamples
-            //BorderExamples
-            //MarginExamples
-            //PaddingExamples
-            //TransformExamples
-            //TransitionExamples
-            //TextExamples
-            //AnimationExamples
-            //FlexBoxExamples model dispatch
-            //MediaQueryExamples
-            //SelectorExamples
-            //CursorExamples
-
             h2 [] [ str "Psuedo selectors" ]
 
             let active =
@@ -1892,6 +1876,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
                     input [ ClassName enabled; HTMLAttr.Disabled true ]
                 ]
 
+            (* Psuedo element?
             let firstChild =
                 fss
                     [
@@ -1902,15 +1887,186 @@ let render (model: Model) (dispatch: Msg -> unit) =
                     ]
 
             str "First child"
-            ul [ ClassName firstChild ]
+            div [ ClassName firstChild ]
                 [
-                    li [] [ str "Orange" ]
-                    li [] [ str "Not orange" ]
-                    li [] [ str "Not orange" ]
+                    p [] [ str "Orange" ]
+                    p [] [ str "Not orange" ]
+                    p [] [ str "Not orange" ]
                 ]
 
+            let firstOfType =
+                fss
+                    [
+                        FirstOfType
+                            [
+                                Color Color.orange
+                            ]
+                    ]
+
+            str "First of type"
+            div [ ClassName firstOfType ]
+                [
+                    p [] [ str "Orange" ]
+                    p [] [ str "Not orange" ]
+                    p [] [ str "Not orange" ]
+                ]
+
+            let fullscreen =
+                fss
+                    [
+                        Fullscreen
+                            [
+                                BackgroundColor Color.red
+                            ]
+                    ]
+
+            div [ ClassName fullscreen ]
+                [
+                    str "FOO"
+                ]
+            *)
+
+            let focus =
+                fss
+                    [
+                        Focus
+                            [
+                                BackgroundColor Color.red
+                            ]
+                    ]
+
+            str "Focus"
+            div [ ClassName (fss [Display Display.Flex; FlexDirection Flex.Column; Width (px 100)]) ]
+                [
+                    input [ ClassName focus ]
+                    input [ ClassName focus ]
+                    input [ ClassName focus ]
+                    input [ ClassName focus ]
+                    input [ ClassName focus ]
+                ]
+
+            let visited =
+                fss
+                    [
+                        Visited
+                            [
+                                Color Color.orangeRed
+                            ]
+                    ]
+
+            str "Focus"
+            div [ ClassName (fss [Display Display.Flex; FlexDirection Flex.Column; Width (px 100)]) ]
+                [
+                    a [ Href "#"; ClassName visited ] [ str "visited" ]
+                    a [ Href "foo"; ClassName visited ] [ str "not visited" ]
+                ]
+
+            let indeterminate =
+                fss
+                    [
+                        Indeterminate
+                            [
+                                BackgroundColor Color.lime
+                            ]
+                    ]
+
+            str "Indeterminate"
+            div [ ClassName (fss [Display Display.Flex; FlexDirection Flex.Column; Width (px 200)]) ]
+                [
+                    input [ ClassName indeterminate; Type "checkbox"; Id "checkbox" ]
+                    label [ ClassName indeterminate; HtmlFor "checkbox" ] [ str "This label starts out lime" ]
+                ]
+
+
         ]
-            // foobar
+
+let render (model: Model) (dispatch: Msg -> unit) =
+    div []
+        [
+            //ColorExamples
+            //BackgroundExamples model dispatch
+            //FontExamples
+            //FontFaceExamples
+            //BorderExamples
+            //MarginExamples
+            //PaddingExamples
+            //TransformExamples
+            //TransitionExamples
+            //TextExamples
+            //AnimationExamples
+            //FlexBoxExamples model dispatch
+            //MediaQueryExamples
+            //SelectorExamples
+            //CursorExamples
+            //PsuedoExamples
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ]
 
 Program.mkSimple init update render
 |> Program.withReactSynchronous "elmish-app"

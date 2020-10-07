@@ -48,4 +48,14 @@ module PsuedoClasses =
                     "Hover"
                     [ Hover [ Color Color.red ] ]
                     [":hover" ==> "[color,#ff0000]"]
+
+                testNested
+                    "Focus"
+                    [ Focus [ BackgroundColor Color.red ] ]
+                    [":focus" ==> "[backgroundColor,#ff0000]"]
+
+                testNested
+                    "Visited"
+                    [ Visited [ Color Color.orangeRed ] ]
+                    [":visited" ==> "[color,#ff4500]"]
             ]

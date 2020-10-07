@@ -50,7 +50,6 @@ module Value =
         | Empty            of CSSProperty list
         | Enabled          of CSSProperty list
         | First            of CSSProperty list
-        | FirstChild       of CSSProperty list
         | FirstOfType      of CSSProperty list
         | Fullscreen       of CSSProperty list
         | Future           of CSSProperty list
@@ -98,6 +97,8 @@ module Value =
         | Valid            of CSSProperty list
         | Visited          of CSSProperty list
         | Where            of CSSProperty list
+
+        | FirstChild       of CSSProperty list
 
         | FontSize              of IFontSize
         | FontStyle             of IFontStyle
@@ -264,22 +265,26 @@ module Value =
                 | BackgroundAttachment  b  -> Property.value Property.BackgroundAttachment ==> BackgroundValues.backgroundAttachment b
                 | BackgroundAttachments bs -> Property.value Property.BackgroundAttachment ==> combineWs BackgroundValues.backgroundAttachment bs
 
-                | Active   a   -> Property.Active     |> Property.value               |> toPsuedo ==> createCSS a callback
-                | AnyLink  a   -> Property.AnyLink    |> Property.propertyToKebabCase |> toPsuedo ==> createCSS a callback
-                | Blank    b   -> Property.Blank      |> Property.value               |> toPsuedo ==> createCSS b callback
-                | Checked  c   -> Property.Checked    |> Property.value               |> toPsuedo ==> createCSS c callback
-                | Disabled d   -> Property.Disabled   |> Property.value               |> toPsuedo ==> createCSS d callback
-                | Empty e      -> Property.Empty      |> Property.value               |> toPsuedo ==> createCSS e callback
-                | Enabled e    -> Property.Enabled    |> Property.value               |> toPsuedo ==> createCSS e callback
-                | FirstChild f -> Property.FirstChild |> Property.value               |> toPsuedo ==> createCSS f callback
+                | Active         a -> Property.Active   |> Property.value               |> toPsuedo ==> createCSS a callback
+                | AnyLink        a -> Property.AnyLink  |> Property.propertyToKebabCase |> toPsuedo ==> createCSS a callback
+                | Blank          b -> Property.Blank    |> Property.value               |> toPsuedo ==> createCSS b callback
+                | Checked        c -> Property.Checked  |> Property.value               |> toPsuedo ==> createCSS c callback
+                | Disabled       d -> Property.Disabled |> Property.value               |> toPsuedo ==> createCSS d callback
+                | Empty          e -> Property.Empty    |> Property.value               |> toPsuedo ==> createCSS e callback
+                | Enabled        e -> Property.Enabled  |> Property.value               |> toPsuedo ==> createCSS e callback
+                | Focus          f -> Property.Focus    |> Property.value               |> toPsuedo ==> createCSS f callback
+                | Hover          h -> Property.Hover    |> Property.value               |> toPsuedo ==> createCSS h callback
+                | Visited        v -> Property.Visited  |> Property.value               |> toPsuedo ==> createCSS v callback
+                | Indeterminate  v -> Property.Visited  |> Property.value               |> toPsuedo ==> createCSS v callback
 
 
-                | Hover   h -> Property.Hover   |> Property.value               |> toPsuedo ==> createCSS h callback
 
+                (*    indeterminate, invalid, lang, lastChild, lastOfType, link, nthChild, nthLastChild, nthLastOfType, nthOfType, onlyChild, onlyOfType, optional, outOfRange, readWrite, required, root, scope, target, valid  *)
 
-
-                (*   firstChild, firstOfType, fullscreen, focus, hover, visited, indeterminate, invalid, lang, lastChild, lastOfType, link, nthChild, nthLastChild, nthLastOfType, nthOfType, onlyChild, onlyOfType, optional, outOfRange, readWrite, required, root, scope, target, valid  *)
-
+                // Psuedo element?
+                // | FirstChild f -> Property.FirstChild |> Property.value               |> toPsuedo ==> createCSS f callback
+                // | FirstOfType f    -> Property.Enabled    |> Property.value               |> toPsuedo ==> createCSS f callback
+                // | Fullscreen f    -> Property.Enabled    |> Property.value               |> toPsuedo ==> createCSS f callback
 
                 | FontSize              f  -> Property.value Property.FontSize             ==> FontValues.fontSize f
                 | FontStyle             f  -> Property.value Property.FontStyle            ==> FontValues.fontStyle f
