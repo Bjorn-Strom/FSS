@@ -280,57 +280,33 @@ module Property =
         | Enabled
         | FirstChild
         | FirstOfType
-        | Fullscreen
-        | Future
         | Focus
-        | FocusVisible
-        | FocusWithin
-        | Has
-        | Host
-        | HostElement
-        | HostContext
         | Hover
         | Indeterminate
-        | InRange
         | Invalid
-        | Is
         | Lang
         | LastChild
         | LastOfType
-        | LeftPSUEDO
         | Link
-        | LocalLink
-        | Not
         | NthChild
-        | NthCol
         | NthLastChild
-        | NthLastCol
         | NthLastOfType
         | NthOfType
         | OnlyChild
         | OnlyOfType
         | Optional
         | OutOfRange
-        | Past
-        | PlaceholderShown
         | ReadOnly
         | ReadWrite
         | Required
-        | RightPSUEDO
-        | Root
-        | Scope
-        | State
         | Target
-        | TargetWithin
-        | UserInvalid
         | Valid
         | Visited
-        | Where
         interface IProperty
 
     let value (v: Property): string = duToCamel v
 
-    let propertyToKebabCase (property: Property): string =
+    let toKebabCase (property: Property): string =
         property
         |> value
         |> pascalToKebabCase

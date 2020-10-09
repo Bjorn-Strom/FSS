@@ -17,7 +17,7 @@ module TransitionValue =
     let property (v: IProperty): string =
         match v with
             | :? Global   as g -> GlobalValue.globalValue g
-            | :? Property as p -> Property.propertyToKebabCase p
+            | :? Property as p -> Property.toKebabCase p
             | _ -> "Unknown transition property"
 
     let timingFunction (v: ITimingFunction): string =

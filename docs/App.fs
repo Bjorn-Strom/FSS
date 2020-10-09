@@ -1,5 +1,6 @@
 ﻿module App
 
+open System.Net.Cache
 open Browser.Types
 open Elmish
 open Elmish.React
@@ -1731,46 +1732,6 @@ let CursorExamples =
             testo (Cursor.NwseResize)
         ]
 
-let foobar =
-        let boxContainer =
-            fss
-                [
-                    Display Display.Flex
-                    FlexDirection Flex.Row
-                ]
-
-        let boxStyling =
-            fss
-                [
-                    Width (px 80)
-                    Height (px 80)
-                    BackgroundColor Color.orangeRed
-                    BorderStyle Border.Solid
-                    BorderWidth Border.Medium
-                    BorderColor Color.blanchedAlmond
-                    TransitionDuration (ms 200.0)
-                    TransitionProperty Property.All
-                    TransitionTimingFunction Animation.Timing.EaseInOut
-                    Hover
-                        [
-                            Height (px 60)
-                            BackgroundColor Color.peru
-                        ]
-
-                ]
-
-        fragment []
-            [
-                p [] [ str "Disse er mine fine booookser" ]
-
-                div [ ClassName boxContainer ]
-                    [
-                        div [ ClassName boxStyling ] []
-                        div [ ClassName boxStyling ] []
-                        div [ ClassName boxStyling ] []
-                    ]
-            ]
-
 let PsuedoExamples =
     fragment []
         [
@@ -1876,22 +1837,21 @@ let PsuedoExamples =
                     input [ ClassName enabled; HTMLAttr.Disabled true ]
                 ]
 
-            (* Psuedo element?
             let firstChild =
                 fss
                     [
                         FirstChild
                             [
-                                Color Color.orange
+                                BackgroundColor Color.orange
                             ]
                     ]
 
             str "First child"
-            div [ ClassName firstChild ]
+            div []
                 [
-                    p [] [ str "Orange" ]
-                    p [] [ str "Not orange" ]
-                    p [] [ str "Not orange" ]
+                    p [ ClassName firstChild ] [ str "Orange" ]
+                    p [ ClassName firstChild ] [ str "Not orange" ]
+                    p [ ClassName firstChild ] [ str "Not orange" ]
                 ]
 
             let firstOfType =
@@ -1899,32 +1859,19 @@ let PsuedoExamples =
                     [
                         FirstOfType
                             [
-                                Color Color.orange
+                                BackgroundColor Color.orange
                             ]
                     ]
 
             str "First of type"
-            div [ ClassName firstOfType ]
+            div []
                 [
-                    p [] [ str "Orange" ]
-                    p [] [ str "Not orange" ]
-                    p [] [ str "Not orange" ]
+                    p [ ClassName firstOfType ] [ str "Orange" ]
+                    p [ ClassName firstOfType ] [ str "Not orange" ]
+                    p [ ClassName firstOfType ] [ str "Not orange" ]
+                    span [ ClassName firstOfType ] [ str "Orange" ]
+                    span [ ClassName firstOfType ] [ str "Not orange" ]
                 ]
-
-            let fullscreen =
-                fss
-                    [
-                        Fullscreen
-                            [
-                                BackgroundColor Color.red
-                            ]
-                    ]
-
-            div [ ClassName fullscreen ]
-                [
-                    str "FOO"
-                ]
-            *)
 
             let focus =
                 fss
@@ -1954,27 +1901,189 @@ let PsuedoExamples =
                             ]
                     ]
 
-            str "Focus"
+            str "Visited"
             div [ ClassName (fss [Display Display.Flex; FlexDirection Flex.Column; Width (px 100)]) ]
                 [
                     a [ Href "#"; ClassName visited ] [ str "visited" ]
                     a [ Href "foo"; ClassName visited ] [ str "not visited" ]
                 ]
 
-            let indeterminate =
+            str "Invalid"
+
+            let invalid =
                 fss
                     [
-                        Indeterminate
+                        Invalid
                             [
-                                BackgroundColor Color.lime
+                                BackgroundColor Color.red
                             ]
                     ]
 
-            str "Indeterminate"
-            div [ ClassName (fss [Display Display.Flex; FlexDirection Flex.Column; Width (px 200)]) ]
+
+            div [ ClassName (fss [Display Display.Flex; FlexDirection Flex.Column; Width (px 100)]) ]
                 [
-                    input [ ClassName indeterminate; Type "checkbox"; Id "checkbox" ]
-                    label [ ClassName indeterminate; HtmlFor "checkbox" ] [ str "This label starts out lime" ]
+                    input [ ClassName invalid ]
+                    input [ ClassName invalid; HTMLAttr.Required true ]
+                ]
+
+
+            str "Last child"
+
+            let LastChild =
+                fss
+                    [
+                        LastChild
+                            [
+                                BackgroundColor Color.orange
+                            ]
+                    ]
+
+            div []
+                [
+                    p [ ClassName LastChild ] [ str "Not orange" ]
+                    p [ ClassName LastChild ] [ str "Not orange" ]
+                    p [ ClassName LastChild ] [ str "Orange" ]
+                ]
+
+            let firstOfType =
+                fss
+                    [
+                        LastOfType
+                            [
+                                BackgroundColor Color.orange
+                            ]
+                    ]
+
+            str "First of type"
+            div []
+                [
+                    p [ ClassName firstOfType ] [ str "Not orange" ]
+                    p [ ClassName firstOfType ] [ str "Not orange" ]
+                    span [ ClassName firstOfType ] [ str "Not orange" ]
+                    span [ ClassName firstOfType ] [ str "Orange" ]
+                    p [ ClassName firstOfType ] [ str "Orange" ]
+                ]
+
+            let link =
+                fss
+                    [
+                        Link
+                            [
+                                Color Color.darkRed
+                            ]
+                    ]
+
+            div []
+                [
+                    str "Link"
+                    br []
+                    a [ ClassName link; Href "notVisited" ] [ str "This is a link!" ]
+                ]
+
+
+
+
+
+
+
+
+
+            let nthChild =
+                fss
+                    [
+                        NthChild("2",
+                            [
+                                BackgroundColor Color.orange
+                            ])
+                    ]
+
+            str "Nth child 2"
+            div []
+                [
+                    p [ ClassName nthChild ] [ str "Not orange" ]
+                    p [ ClassName nthChild ] [ str "Orange" ]
+                    span [ ClassName nthChild ] [ str "Not orange" ]
+                    span [ ClassName nthChild ] [ str "Not orange" ]
+                    p [ ClassName nthChild ] [ str "Not orange" ]
+                ]
+
+            let nthLastChild =
+                fss
+                    [
+                        NthLastChild("2",
+                            [
+                                BackgroundColor Color.orange
+                            ])
+                    ]
+
+            str "Nth last child 2"
+            div []
+                [
+                    p [ ClassName nthLastChild ] [ str "Not orange" ]
+                    p [ ClassName nthLastChild ] [ str "Not orange" ]
+                    span [ ClassName nthLastChild ] [ str "Not orange" ]
+                    span [ ClassName nthLastChild ] [ str "Orange" ]
+                    p [ ClassName nthLastChild ] [ str "Not orange" ]
+                ]
+
+            let onlyChild =
+                fss
+                    [
+                        OnlyChild
+                            [
+                                BackgroundColor Color.orange
+                            ]
+                    ]
+
+            str "Only child"
+            div []
+                [
+                    span [ ClassName onlyChild ] [ str "Orange" ]
+                ]
+            div []
+                [
+                    div [ ClassName onlyChild ] [ str "Not orange" ]
+                    div [ ClassName onlyChild ] [ str "Not orange" ]
+                ]
+
+
+            let onlyOfType =
+                fss
+                    [
+                        OnlyOfType
+                            [
+                                BackgroundColor Color.orange
+                            ]
+                    ]
+
+            str "Only of type"
+            div []
+                [
+                    span [ ClassName onlyOfType ] [ str "Orange" ]
+                    div [ ClassName onlyOfType ] [ str "Not orange" ]
+                    div [ ClassName onlyOfType ] [ str "Not orange" ]
+                ]
+            div []
+                [
+                    div [ ClassName onlyOfType ] [ str "Not orange" ]
+                    div [ ClassName onlyOfType ] [ str "Not orange" ]
+                ]
+
+
+            str "Target"
+            let target =
+                fss
+                    [
+                        Target [
+                            BackgroundColor Color.darkBlue
+                        ]
+                    ]
+
+            section [ Id "section2"; ClassName target ]
+                [
+                    h3 [] [ str "Foo" ]
+                    p [] [ str "Foofoffoo" ]
+                    a [ Href "#section2" ] [ str "Go to section 2" ]
                 ]
 
 
@@ -1998,74 +2107,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //MediaQueryExamples
             //SelectorExamples
             //CursorExamples
-            //PsuedoExamples
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            PsuedoExamples
         ]
 
 Program.mkSimple init update render

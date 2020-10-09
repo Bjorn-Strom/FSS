@@ -9,21 +9,21 @@ module Helpers =
         |> Seq.fold (fun acc element ->
         if Char.IsUpper(char element) && acc.Length = 0 then
             acc + (string <| Char.ToLower(element))
-        else if Char.IsUpper(char element) && acc.Length <> 0 then 
+        else if Char.IsUpper(char element) && acc.Length <> 0 then
             sprintf "%s%s%s" acc separator (string <| Char.ToLower(element))
-        else 
+        else
             acc + (string element)) ""
 
     let pascalToCamelCase (value: string): string = sprintf "%c%s" (Char.ToLower(value.[0])) value.[1..]
     let pascalToKebabCase (value: string): string = toLowerAndCombine "-" value
-    
-    let inline duToString (x:'a): string= 
+
+    let inline duToString (x:'a): string=
         match FSharpValue.GetUnionFields(x, typeof<'a>) with
         | case, _ -> case.Name
 
     let inline duToLowercase (x: 'a) = (duToString x).ToLower()
 
-    let inline duToKebab (x: 'a) = 
+    let inline duToKebab (x: 'a) =
         x
         |> duToString
         |> toLowerAndCombine "-"
@@ -32,7 +32,7 @@ module Helpers =
         x
         |> duToString
         |> pascalToCamelCase
-        
+
     let inline duToSpaced (x: 'a) =
         x
         |> duToString
@@ -45,10 +45,10 @@ module Helpers =
         |> List.map value
         |> String.concat seperator
     let combineWs (value: 'a -> string) (list: 'a list) = combineList list value " "
-    let combineComma (value: 'a -> string) (list: 'a list) = combineList list value ", " 
+    let combineComma (value: 'a -> string) (list: 'a list) = combineList list value ", "
 
-    let clamp min max value = 
-        if value > max then 
+    let clamp min max value =
+        if value > max then
             max
         else if value < min then
             min
@@ -68,14 +68,14 @@ module Color =
             value
         else
             sprintf "#%s"value
-    let hsl (h: int) (s: float) (l: float) = 
-        sprintf "hsl(%d, %s, %s)" 
-            h 
+    let hsl (h: int) (s: float) (l: float) =
+        sprintf "hsl(%d, %s, %s)"
+            h
             (floatToPercent s)
             (floatToPercent l)
-    let hsla (h: int) (s: float) (l: float) (a: float) = 
-        sprintf "hsla(%d, %s, %s, %s)" 
-            h 
-            (floatToPercent s) 
-            (floatToPercent l) 
+    let hsla (h: int) (s: float) (l: float) (a: float) =
+        sprintf "hsla(%d, %s, %s, %s)"
+            h
+            (floatToPercent s)
+            (floatToPercent l)
             (floatToPercent a)
