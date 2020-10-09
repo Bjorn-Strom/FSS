@@ -214,7 +214,6 @@ module Value =
 
 
     let rec private createCSS (attributeList: CSSProperty list) callback =
-
         let cssValue (property: Property.Property) value =
             property |> Property.value ==> value
 
