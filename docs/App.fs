@@ -1732,7 +1732,7 @@ let CursorExamples =
             testo (Cursor.NwseResize)
         ]
 
-let PsuedoExamples =
+let PsuedoClassExamples =
     fragment []
         [
             h2 [] [ str "Psuedo selectors" ]
@@ -1980,14 +1980,6 @@ let PsuedoExamples =
                     a [ ClassName link; Href "notVisited" ] [ str "This is a link!" ]
                 ]
 
-
-
-
-
-
-
-
-
             let nthChild =
                 fss
                     [
@@ -2085,9 +2077,146 @@ let PsuedoExamples =
                     p [] [ str "Foofoffoo" ]
                     a [ Href "#section2" ] [ str "Go to section 2" ]
                 ]
-
-
         ]
+        
+let listStyleExamples =
+    fragment []
+        [
+            let listStyleImage =
+                fss
+                    [
+                        ListStyleImage (ListStyle.Url "https://mdn.mozillademos.org/files/11981/starsolid.gif")
+                    ]
+            
+            ul [ ClassName listStyleImage ]
+                [
+                    li [] [ str "Item 1" ]
+                    li [] [ str "Item 2" ]
+                ]
+                
+            let inside =
+                fss
+                    [
+                        ListStylePosition ListStyle.Inside
+                        ListStyleType ListStyle.Square
+                    ]
+                    
+            let outside =
+                fss
+                    [
+                        ListStylePosition ListStyle.Outside
+                        ListStyleType ListStyle.Circle
+                    ]
+                    
+            let insideImage =
+                fss
+                    [
+                        ListStylePosition ListStyle.Inside
+                        ListStyleImage (ListStyle.Url "https://mdn.mozillademos.org/files/11979/starsolid.gif")
+                    ]
+                    
+            ul [ ClassName inside ]
+                [
+                    str "List 1"
+                    li [] [str "List Item 1-1" ]
+                    li [] [str "List Item 1-2" ]
+                    li [] [str "List Item 1-3" ]
+                    li [] [str "List Item 1-4" ]
+                ]
+            ul [ ClassName outside ]
+                [
+                    str "List 2"
+                    li [] [str "List Item 2-1" ]
+                    li [] [str "List Item 2-2" ]
+                    li [] [str "List Item 2-3" ]
+                    li [] [str "List Item 2-4" ]
+                ]
+            ul [ ClassName insideImage ]
+                [
+                    str "List 3"
+                    li [] [str "List Item 3-1" ]
+                    li [] [str "List Item 3-2" ]
+                    li [] [str "List Item 3-3" ]
+                    li [] [str "List Item 3-4" ]
+                ]
+        ]
+        
+let CounterStyleExamples =
+     fragment []
+                [
+                    let someCounter =
+                        counterStyle
+                            [
+                                System Cyclic
+                                Symbols (Symbols.Strings [ "o"; "p" ])
+                                Suffix (Suffix.String ". ")
+                            ]
+                        
+                    let style =
+                        fss
+                            [
+                                Label "FOOOOOO"
+                                ListStyleType (ListStyle.Custom someCounter)
+                            ]
+                            
+                    ul [ ClassName style ]
+                        [
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                        ]
+                                        
+                    let fixedCounter =
+                        counterStyle
+                            [
+                                System System.Fixed
+                                Symbols (Symbols.Strings ["Ⓐ"; "Ⓑ"; "Ⓒ"; "Ⓓ"; "Ⓔ"; "Ⓕ"; "Ⓖ"; "Ⓗ"; "Ⓘ"; "Ⓙ"; "Ⓚ"; "Ⓛ"; "Ⓜ"; "Ⓝ"; "Ⓞ"; "Ⓟ"; "Ⓠ"; "Ⓡ"; "Ⓢ"; "Ⓣ"; "Ⓤ"; "Ⓥ"; "Ⓦ"; "Ⓧ"; "Ⓨ"; "Ⓩ"])
+                                Suffix (Suffix.String " ")
+                            ]
+                            
+                    let items =
+                        fss
+                            [
+                                ListStyleType (ListStyle.Custom fixedCounter)
+                            ]
+                            
+                    ul [ ClassName items ]
+                        [
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                        ]
+                ]
+        
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div []
@@ -2107,7 +2236,22 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //MediaQueryExamples
             //SelectorExamples
             //CursorExamples
-            PsuedoExamples
+            //PsuedoClassExamples
+            //ListStyleExamples
+            CounterStyleExamples
+            
+            (*
+            fss
+                [
+                    AttributeSelector "asdasd"
+                        [
+                            
+                        ]
+                ]
+            *)
+            
+           
+
         ]
 
 Program.mkSimple init update render

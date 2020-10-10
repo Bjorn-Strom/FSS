@@ -38,7 +38,8 @@ module Helpers =
         |> duToString
         |> toLowerAndCombine " "
 
-    let toPsuedo (value: string): string = sprintf ":%s" value
+    let toPsuedoClass (value: string): string = sprintf ":%s" value
+    let toPsuedoElement (value: string): string = sprintf "::%s" value
 
     let combineList (list: 'a list) (value: 'a -> string) (seperator: string) =
         list
@@ -54,7 +55,7 @@ module Helpers =
             min
         else
             value
-
+            
 module Converters =
     let floatToPercent (f: float): string = sprintf "%d%%" (int <| f * 100.0)
 

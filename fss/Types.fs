@@ -1,6 +1,7 @@
 namespace Fss
 
 module Types =
+    // Interfaces
     type IAnimationDirection       = interface end
     type IAnimationPlayState       = interface end
     type IAnimationName            = interface end
@@ -71,3 +72,13 @@ module Types =
     type IVisibility               = interface end
     type IPerspective              = interface end
     type ICursor                   = interface end
+    type IContent                  = interface end
+    type IRange                    = interface end
+    type ISpeakAs                  = interface end
+    type IListStylePosition        = interface end
+    type IListStyleImage           = interface end
+    type IListStyleType            = interface end
+    
+    // Common
+    type CounterStyle = CounterStyle of string
+    let counterValue (CounterStyle c) = c

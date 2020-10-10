@@ -157,7 +157,6 @@ module Property =
         | ListStyleImage
         | ListStylePosition
         | ListStyleType
-        | ListStyle
         | MarginBottom
         | MarginLeft
         | MarginRight

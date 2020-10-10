@@ -8,6 +8,7 @@ open Units.Size
 open Color
 open FontFaceValue
 open Keyframes
+open Counter
 
 [<AutoOpen>]
 module Functions =
@@ -25,6 +26,17 @@ module Functions =
     let fontFaces (fontFamily: string) (attributeLists: FontFace.FontFace list list) =
         attributeLists |> List.map (createFontFaceObject fontFamily) |> css'
         Font.FontName fontFamily
+        
+    let counterStyle (attributeList: CounterProperty list) =
+        let counterName = sprintf "a%i" <| attributeList.GetHashCode() |> string 
+        
+        attributeList
+        |> List.map (fun _ -> createCounterStyleObject counterName attributeList)
+        |> css'
+        |> ignore
+        
+        counterName
+        |> Types.CounterStyle
 
     // Keyframes
     let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame

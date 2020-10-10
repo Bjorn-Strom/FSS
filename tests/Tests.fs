@@ -1,10 +1,12 @@
 ﻿namespace FSSTests
 
+open FSSTests
 open Fable.Mocha
 
 module Tests =
     let tests =
             testList "Fss Tests" [
+                ListStyle.tests
                 PsuedoClasses.tests
                 Cursor.tests
                 Text.tests

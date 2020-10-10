@@ -19,6 +19,10 @@ module Global =
         interface ITextDecorationSkipInk
         interface ITextEmphasisStyle
         interface ICursor
+        interface IContent
+        interface IListStyleImage
+        interface IListStyleType
+        interface IListStylePosition
         
     type Auto =
         | Auto
@@ -33,6 +37,8 @@ module Global =
         interface ITextUnderlineOffset
         interface ITextUnderlinePosition
         interface ICursor
+        interface IRange
+        interface ISpeakAs
         
     type Center =
         | Center
@@ -45,6 +51,7 @@ module Global =
         | Normal
         interface IFontStyle
         interface IFontWeight
+        interface IContent
 
     type Global =
         | Initial
@@ -115,6 +122,10 @@ module Global =
         interface IAnimationTimingFunction
         interface IPerspective
         interface ICursor
+        interface IContent
+        interface IListStyleImage
+        interface IListStylePosition
+        interface IListStyleType
 
 module GlobalValue =
     open Global
