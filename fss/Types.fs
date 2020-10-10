@@ -67,6 +67,7 @@ module Types =
     type IBackgroundRepeat         = interface end
     type IBackgroundSize           = interface end
     type IBackgroundAttachment     = interface end
+    type IBackgroundImage          = interface end
     type IContentSize              = interface end
     type ISize                     = interface end
     type IVisibility               = interface end

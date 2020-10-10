@@ -29,7 +29,7 @@ module Value =
         | Color of IColor
 
         | BackgroundColor       of IColor
-        | BackgroundImage       of Background.Image
+        | BackgroundImage       of IBackgroundImage
         | BackgroundPosition    of IBackgroundPosition
         | BackgroundPositions   of IBackgroundPosition list
         | BackgroundOrigin      of IBackgroundOrigin
@@ -218,6 +218,8 @@ module Value =
         | ListStyleImage    of IListStyleImage
         | ListStylePosition of IListStylePosition
         | ListStyleType     of IListStyleType
+        
+        | Content of IContent
     
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
@@ -252,17 +254,17 @@ module Value =
 
                 | BackgroundColor       bc -> cssValue Property.BackgroundColor <| Color.value bc
 
-                | BackgroundImage       bi -> cssValue Property.BackgroundImage      <| BackgroundValues.backgroundImage bi
+                | BackgroundImage       bi -> cssValue Property.BackgroundImage      <| BackgroundValues.image bi
                 | BackgroundPosition    b  -> cssValue Property.BackgroundPosition   <| BackgroundValues.position b
                 | BackgroundPositions   bs -> cssValue Property.BackgroundPosition   <| combineWs BackgroundValues.position bs
-                | BackgroundOrigin      b  -> cssValue Property.BackgroundOrigin     <| BackgroundValues.backgroundOrigin b
-                | BackgroundClip        b  -> cssValue Property.BackgroundClip       <| BackgroundValues.backgroundClip b
-                | BackgroundRepeat      b  -> cssValue Property.BackgroundRepeat     <| BackgroundValues.backgroundRepeat b
-                | BackgroundRepeats     bs -> cssValue Property.BackgroundRepeat     <| combineWs BackgroundValues.backgroundRepeat bs
-                | BackgroundSize        b  -> cssValue Property.BackgroundSize       <| BackgroundValues.backgroundSize b
-                | BackgroundSizes       bs -> cssValue Property.BackgroundSize       <| combineWs BackgroundValues.backgroundSize bs
-                | BackgroundAttachment  b  -> cssValue Property.BackgroundAttachment <| BackgroundValues.backgroundAttachment b
-                | BackgroundAttachments bs -> cssValue Property.BackgroundAttachment <| combineWs BackgroundValues.backgroundAttachment bs
+                | BackgroundOrigin      b  -> cssValue Property.BackgroundOrigin     <| BackgroundValues.origin b
+                | BackgroundClip        b  -> cssValue Property.BackgroundClip       <| BackgroundValues.clip b
+                | BackgroundRepeat      b  -> cssValue Property.BackgroundRepeat     <| BackgroundValues.repeat b
+                | BackgroundRepeats     bs -> cssValue Property.BackgroundRepeat     <| combineWs BackgroundValues.repeat bs
+                | BackgroundSize        b  -> cssValue Property.BackgroundSize       <| BackgroundValues.size b
+                | BackgroundSizes       bs -> cssValue Property.BackgroundSize       <| combineWs BackgroundValues.size bs
+                | BackgroundAttachment  b  -> cssValue Property.BackgroundAttachment <| BackgroundValues.attachment b
+                | BackgroundAttachments bs -> cssValue Property.BackgroundAttachment <| combineWs BackgroundValues.attachment bs
 
                 | Active         a      -> pseudoClass          Property.Active a
                 | AnyLink        a      -> pseudoClassKebab     Property.AnyLink a
@@ -441,6 +443,8 @@ module Value =
                 | ListStyleImage    l -> cssValue Property.ListStyleImage    <| ListStyleValue.image l
                 | ListStylePosition l -> cssValue Property.ListStylePosition <| ListStyleValue.position l
                 | ListStyleType     l -> cssValue Property.ListStyleType     <| ListStyleValue.styleType l
+                
+                | Content c -> cssValue Property.Content <| ContentValue.content c
                 
         )
         |> callback

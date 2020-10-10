@@ -43,6 +43,8 @@ module Background =
         | RadialGradient of IRadialGradient list
         | RepeatingLinearGradient of ILinearGradient list
         | RepeatingRadialGradient of IRadialGradient list
+        interface IBackgroundImage
+        interface IContent
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
     type Origin =
@@ -160,34 +162,41 @@ module BackgroundValues =
                 sprintf "%s %s" acc (value elem)
             else
                 sprintf "%s, %s" acc (value elem)) ""
+        
+    let linearGradientValue g = sprintf "linear-gradient(%s)"  (g |> List.sortBy compareLinearGradient |> combineGradient linearGradient)
 
-    let backgroundImage (v: Image): string =
-        match v with
+    let image (v: IBackgroundImage): string =
+        let stringifyBackgroundImage (b: Image) =
+            match b with
             | Url u -> sprintf "url(%s)" u
-            | LinearGradient g -> sprintf "linear-gradient(%s)"  (g |> List.sortBy compareLinearGradient |> combineGradient linearGradient)
+            | LinearGradient g -> linearGradientValue g
             | RadialGradient g -> sprintf "radial-gradient(%s)" (g |> List.sortBy compareRadialGradient |> combineGradient2 radialGradient)
             | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" (g |> List.sortBy compareLinearGradient |> combineGradient linearGradient)
             | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" (g |> List.sortBy compareRadialGradient |> combineGradient2 radialGradient)
-
-    let backgroundOrigin (v: IBackgroundOrigin): string =
+            
+        match v with
+            | :? Image as i -> stringifyBackgroundImage i
+            | _ -> "unknown background image"
+    
+    let origin (v: IBackgroundOrigin): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? Origin as b -> duToKebab b
             | _ -> "Unknown background origin"
 
-    let backgroundClip (v: IBackgroundClip): string =
+    let clip (v: IBackgroundClip): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? Clip as b -> duToKebab b
             | _ -> "Unknown background clip"
 
-    let backgroundRepeat (v: IBackgroundRepeat): string =
+    let repeat (v: IBackgroundRepeat): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? Repeat as b -> duToKebab b
             | _ -> "Unknown background repeat"
 
-    let backgroundSize (v: IBackgroundSize): string =
+    let size (v: IBackgroundSize): string =
         match v with
             | :? Global          as g -> GlobalValue.globalValue g
             | :? Auto            as a -> GlobalValue.auto a
@@ -196,7 +205,7 @@ module BackgroundValues =
             | :? Size            as b -> duToLowercase b
             | _ -> "Unknown background size"
 
-    let backgroundAttachment (v: IBackgroundAttachment): string =
+    let attachment (v: IBackgroundAttachment): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? Attachment as b -> duToLowercase b
