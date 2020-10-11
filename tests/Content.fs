@@ -21,9 +21,6 @@ module Content =
                     "Content none"
                     [ Content None ]
                     [ "content" ==> "none" ]
-                    
-
-
 
                 test
                     "Content image"
@@ -43,7 +40,7 @@ module Content =
                 test
                     "Content string value"
                     [ Content (Content.String "prefix")]
-                    [ "content" ==> "prefix" ]
+                    [ "content" ==> "\"prefix\"" ]
                     
                 test
                     "Content counter"
@@ -62,8 +59,8 @@ module Content =
                     
                 test
                     "Content attribute"
-                    [ Content (Content.Attribute "foobar")]
-                    [ "content" ==> "attr(foobar)" ]
+                    [ Content (Content.Attribute Attribute.Title)]
+                    [ "content" ==> "attr(title)" ]
                     
                 test
                     "Content open quote"

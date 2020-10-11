@@ -72,6 +72,12 @@ module Value =
         | Valid            of CSSProperty list
         | Visited          of CSSProperty list
         | FirstChild       of CSSProperty list
+        
+        | After       of CSSProperty list
+        | Before      of CSSProperty list
+        | FirstLetter of CSSProperty list
+        | FirstLine   of CSSProperty list
+        | Selection   of CSSProperty list
 
         | FontSize              of IFontSize
         | FontStyle             of IFontStyle
@@ -220,9 +226,13 @@ module Value =
         | ListStyleType     of IListStyleType
         
         | Content of IContent
+        
+        | Top    of IPlacement 
+        | Right  of IPlacement
+        | Bottom of IPlacement
+        | Left   of IPlacement
     
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
-
 
     let rec private createCSS (attributeList: CSSProperty list) callback =
         let cssValue (property: Property.Property) value =
@@ -239,6 +249,9 @@ module Value =
 
         let pseudoClassFuncKebab (property: Property.Property) content cssProperty =
             sprintf "%s(%s)" (Property.toKebabCase property) content |> toPsuedoClass ==> createCSS cssProperty callback
+            
+        let pseudoElement (property: Property.Property) cssProperty =
+            property |> Property.value |> toPsuedoElement ==> createCSS cssProperty callback
 
         attributeList
         |> List.map (
@@ -266,38 +279,44 @@ module Value =
                 | BackgroundAttachment  b  -> cssValue Property.BackgroundAttachment <| BackgroundValues.attachment b
                 | BackgroundAttachments bs -> cssValue Property.BackgroundAttachment <| combineWs BackgroundValues.attachment bs
 
-                | Active         a      -> pseudoClass          Property.Active a
-                | AnyLink        a      -> pseudoClassKebab     Property.AnyLink a
-                | Blank          b      -> pseudoClass          Property.Blank b
-                | Checked        c      -> pseudoClass          Property.Checked c
-                | Disabled       d      -> pseudoClass          Property.Disabled d
-                | Empty          e      -> pseudoClass          Property.Empty e
-                | Enabled        e      -> pseudoClass          Property.Enabled e
-                | FirstChild     f      -> pseudoClassKebab     Property.FirstChild f
-                | FirstOfType    f      -> pseudoClassKebab     Property.FirstOfType f
-                | Focus          f      -> pseudoClass          Property.Focus f
-                | Hover          h      -> pseudoClass          Property.Hover h
-                | Visited        v      -> pseudoClass          Property.Visited v
+                | Active         a      -> pseudoClass          Property.Active        a
+                | AnyLink        a      -> pseudoClassKebab     Property.AnyLink       a
+                | Blank          b      -> pseudoClass          Property.Blank         b
+                | Checked        c      -> pseudoClass          Property.Checked       c
+                | Disabled       d      -> pseudoClass          Property.Disabled      d
+                | Empty          e      -> pseudoClass          Property.Empty         e
+                | Enabled        e      -> pseudoClass          Property.Enabled       e
+                | FirstChild     f      -> pseudoClassKebab     Property.FirstChild    f
+                | FirstOfType    f      -> pseudoClassKebab     Property.FirstOfType   f
+                | Focus          f      -> pseudoClass          Property.Focus         f
+                | Hover          h      -> pseudoClass          Property.Hover         h
+                | Visited        v      -> pseudoClass          Property.Visited       v
                 | Indeterminate  v      -> pseudoClass          Property.Indeterminate v
-                | Invalid        v      -> pseudoClass          Property.Invalid v
-                | Lang          (ls, l) -> pseudoClassFunc      Property.Lang ls l
-                | LastChild      l      -> pseudoClassKebab     Property.LastChild l
-                | LastOfType     f      -> pseudoClassKebab     Property.LastOfType f
-                | Link           l      -> pseudoClass          Property.Link l
-                | NthChild      (ns, n) -> pseudoClassFuncKebab Property.NthChild ns n
-                | NthLastChild  (ns, n) -> pseudoClassFuncKebab Property.NthLastChild ns n
+                | Invalid        v      -> pseudoClass          Property.Invalid       v
+                | Lang          (ls, l) -> pseudoClassFunc      Property.Lang          ls l
+                | LastChild      l      -> pseudoClassKebab     Property.LastChild     l
+                | LastOfType     f      -> pseudoClassKebab     Property.LastOfType    f
+                | Link           l      -> pseudoClass          Property.Link          l
+                | NthChild      (ns, n) -> pseudoClassFuncKebab Property.NthChild      ns n
+                | NthLastChild  (ns, n) -> pseudoClassFuncKebab Property.NthLastChild  ns n
                 | NthLastOfType (ns, n) -> pseudoClassFuncKebab Property.NthLastOfType ns n
-                | NthOfType     (ns, n) -> pseudoClassFuncKebab Property.NthOfType ns n
-                | OnlyChild      a      -> pseudoClassKebab     Property.OnlyChild a
-                | OnlyOfType     a      -> pseudoClassKebab     Property.OnlyOfType a
-                | Optional       o      -> pseudoClass          Property.Optional o
-                | OutOfRange     o      -> pseudoClassKebab     Property.OutOfRange o
-                | ReadOnly       r      -> pseudoClassKebab     Property.ReadOnly r
-                | ReadWrite      r      -> pseudoClassKebab     Property.ReadWrite r
-                | Required       r      -> pseudoClassKebab     Property.Required r
-                | Target         t      -> pseudoClass          Property.Target t
-                | Valid          v      -> pseudoClass          Property.Valid v
-
+                | NthOfType     (ns, n) -> pseudoClassFuncKebab Property.NthOfType     ns n
+                | OnlyChild      a      -> pseudoClassKebab     Property.OnlyChild     a
+                | OnlyOfType     a      -> pseudoClassKebab     Property.OnlyOfType    a
+                | Optional       o      -> pseudoClass          Property.Optional      o
+                | OutOfRange     o      -> pseudoClassKebab     Property.OutOfRange    o
+                | ReadOnly       r      -> pseudoClassKebab     Property.ReadOnly      r
+                | ReadWrite      r      -> pseudoClassKebab     Property.ReadWrite     r
+                | Required       r      -> pseudoClassKebab     Property.Required      r
+                | Target         t      -> pseudoClass          Property.Target        t
+                | Valid          v      -> pseudoClass          Property.Valid         v
+                
+                | After       a -> pseudoElement Property.After       a
+                | Before      b -> pseudoElement Property.Before      b
+                | FirstLetter f -> pseudoElement Property.FirstLetter f
+                | FirstLine   f -> pseudoElement Property.FirstLine   f
+                | Selection   s -> pseudoElement Property.Selection   s
+                
                 | FontSize              f  -> cssValue Property.FontSize             <| FontValues.fontSize f
                 | FontStyle             f  -> cssValue Property.FontStyle            <| FontValues.fontStyle f
                 | FontStretch           f  -> cssValue Property.FontStretch          <| FontValues.fontStretch f
@@ -445,6 +464,11 @@ module Value =
                 | ListStyleType     l -> cssValue Property.ListStyleType     <| ListStyleValue.styleType l
                 
                 | Content c -> cssValue Property.Content <| ContentValue.content c
+                
+                | Top    t -> cssValue Property.Top   <| PlacementValue.placement t
+                | Right  r -> cssValue Property.Right  <| PlacementValue.placement r
+                | Bottom b -> cssValue Property.Bottom <| PlacementValue.placement b
+                | Left   l -> cssValue Property.Left   <| PlacementValue.placement l
                 
         )
         |> callback

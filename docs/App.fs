@@ -1,7 +1,5 @@
 ﻿module App
 
-open System.Net.Cache
-open Browser.Types
 open Elmish
 open Elmish.React
 open Fable.React
@@ -33,7 +31,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetAlignContent content -> { model with AlignContent = content}
     | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
 
-let ColorExamples =
+let ColorExamples () =
     fragment []
         [
             h1 [] [ str "Color" ]
@@ -211,7 +209,7 @@ let BackgroundExamples model dispatch =
             let formStyle =
                 fss
                     [
-                        //BorderStyle Border.Solid
+                        BorderStyle Border.Solid
                         BorderWidth (px 1)
                         BorderColor Color.orangeRed
                         Margin (px 20)
@@ -266,7 +264,7 @@ let BackgroundExamples model dispatch =
 
                 ]
 
-let FontExamples =
+let FontExamples () =
     fragment []
         [
             h1 [] [ str "fonts" ]
@@ -391,7 +389,7 @@ let FontExamples =
                 ]
         ]
 
-let FontFaceExamples =
+let FontFaceExamples () =
     let droidSerif =
         fontFaces "DroidSerif"
             [
@@ -461,7 +459,7 @@ let FontFaceExamples =
                 ]
         ]
 
-let BorderExamples =
+let BorderExamples ()=
     fragment []
         [
             h1 [] [ str "borders"]
@@ -554,7 +552,7 @@ let BorderExamples =
 
         ]
 
-let MarginExamples =
+let MarginExamples () =
     fragment []
         [
             div [
@@ -587,7 +585,7 @@ let MarginExamples =
                 [ str "Me tooo!" ]
         ]
 
-let PaddingExamples =
+let PaddingExamples () =
     fragment []
         [
             div [
@@ -620,7 +618,7 @@ let PaddingExamples =
                 [ str "Me tooo!" ]
         ]
 
-let TransformExamples =
+let TransformExamples () =
     fragment []
         [
             h3 [] [ str "Transforms" ]
@@ -690,7 +688,7 @@ let TransformExamples =
             div [ ClassName (sprintf "%s %s" spinningCube (fss [ TransformOrigins [ Transform.Bottom; Transform.Right ] ]) )] []
         ]
 
-let TransitionExamples =
+let TransitionExamples () =
     let box =
         fss
             [
@@ -744,7 +742,7 @@ let TransitionExamples =
             ])] [ str "I have a transition! Hover me!" ]
         ]
 
-let TextExamples =
+let TextExamples () =
     fragment []
         [
             let style =
@@ -956,7 +954,7 @@ let TextExamples =
             h1 [ ClassName vamp ] [ str "Vampire Diaries" ]
         ]
 
-let AnimationExamples =
+let AnimationExamples () =
 
     let bounceFrames =
         keyframes
@@ -1545,7 +1543,7 @@ let FlexBoxExamples model dispatch =
             flexBasisShrink
         ]
 
-let MediaQueryExamples =
+let MediaQueryExamples () =
    let style =
         fss
             [
@@ -1571,7 +1569,7 @@ let MediaQueryExamples =
             ]
    div [ ClassName style] [ str "foosball"]
 
-let SelectorExamples =
+let SelectorExamples () =
     fragment []
         [
             h2 [] [ str "Selectors" ]
@@ -1674,7 +1672,7 @@ let SelectorExamples =
                 ]
         ]
 
-let CursorExamples =
+let CursorExamples () =
     let testo x =
        div
             [
@@ -1732,7 +1730,7 @@ let CursorExamples =
             testo (Cursor.NwseResize)
         ]
 
-let PsuedoClassExamples =
+let PsuedoClassExamples () =
     fragment []
         [
             h2 [] [ str "Psuedo selectors" ]
@@ -2079,7 +2077,7 @@ let PsuedoClassExamples =
                 ]
         ]
         
-let listStyleExamples =
+let listStyleExamples () =
     fragment []
         [
             let listStyleImage =
@@ -2141,7 +2139,7 @@ let listStyleExamples =
                 ]
         ]
         
-let CounterStyleExamples =
+let CounterStyleExamples () =
      fragment []
                 [
                     let someCounter =
@@ -2216,29 +2214,111 @@ let CounterStyleExamples =
                             li [] [ str "five" ]
                         ]
                 ]
-        
+                
+let PseudoElementExamples () =
+    let required =
+        fss
+            [
+                FontSize (em 0.8)
+                
+                Before
+                    [
+                        Content (Content.String "")
+                        Display Display.Block
+                        Width (px 10)
+                        Height (px 10)
+                        BackgroundColor Color.red
+                    ]
+                    
+                After
+                    [
+                        Content (Content.String "")
+                        Display Display.Block
+                        Width (px 10)
+                        Height (px 10)
+                        BackgroundColor Color.blue
+                    ]
+                
+            ]
+    
+    let tooltip =
+        fss
+            [
+                FontSize (px 25)
+                Color (hex "0bd")
+                Display Display.Inline
+                Position Position.Relative
+                
+                Hover
+                    [
+                        Before
+                            [
+                                BorderStyle Border.Solid
+                                BorderWidths [px 12; px 6; px 0; px 6]
+                                BorderColor (hex "444 transparent")
+                                Content (Content.String "")
+                                Left (pct 45)
+                                Bottom (px 30)
+                                Position Position.Absolute
+                            ]
+                        
+                        After
+                            [
+                                Display Display.Flex
+                                JustifyContent Flex.Center
+                                BackgroundColor (hex "444")
+                                BorderRadius (px 8)
+                                Color (hex "fff")
+                                Content (Content.Attribute Attribute.Title)
+                                Margins [px -82; Auto; (px 0); (px 0)]
+                                FontSize (px 16)
+                                Padding (px 13)
+                                Width (px 220)
+                            ]
+                    ]
+                
+                
+            ]
+    
+    fragment []
+        [
+            p [] [str "It works"]
+            
+            div []
+                [
+                    label [ ClassName required ] [ str "Name" ]
+                    input [ Type "text"; HTMLAttr.Required true ]
+                    button [ HTMLAttr.Custom("data-tooltip", "Tooltip") ] [ str "Submit form" ]
+                ]
+                
+            p [] [ str "Tooltip time" ]
+            a [ Title "Hello from a tooltip!"; ClassName tooltip ] [ str "Tooltip here, hover!" ]
+            
+        ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div []
         [
-            //ColorExamples
+            //ColorExamples ()
             //BackgroundExamples model dispatch
-            //FontExamples
-            //FontFaceExamples
-            //BorderExamples
-            //MarginExamples
-            //PaddingExamples
-            //TransformExamples
-            //TransitionExamples
-            //TextExamples
-            //AnimationExamples
+            //FontExamples ()
+            //FontFaceExamples ()
+            //BorderExamples ()
+            //MarginExamples ()
+            //PaddingExamples ()
+            //TransformExamples ()
+            //TransitionExamples ()
+            //TextExamples ()
+            //AnimationExamples ()
             //FlexBoxExamples model dispatch
-            //MediaQueryExamples
-            //SelectorExamples
-            //CursorExamples
-            //PsuedoClassExamples
-            //ListStyleExamples
-            CounterStyleExamples
+            //MediaQueryExamples ()
+            //SelectorExamples ()
+            //CursorExamples ()
+            //PsuedoClassExamples ()
+            //ListStyleExamples ()
+            //CounterStyleExamples ()
+            PseudoElementExamples ()
+            
             
             (*
             fss

@@ -1,5 +1,20 @@
 namespace Fss
 
+open Fss.Types
+
+module PlacementValue =
+    open Units.Percent
+    open Units.Size
+    open Global
+    
+    let placement (v: IPlacement): string =
+        match v with
+            | :? Percent as p -> Units.Percent.value p
+            | :? Size    as s -> Units.Size.value s
+            | :? Global  as g -> GlobalValue.globalValue g
+            | :? Auto    as a -> GlobalValue.auto a
+            | _ -> "Unknown placement"
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/position
 module Position =
     type Position =

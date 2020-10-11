@@ -39,6 +39,7 @@ module Global =
         interface ICursor
         interface IRange
         interface ISpeakAs
+        interface IPlacement
         
     type Center =
         | Center
@@ -126,6 +127,7 @@ module Global =
         interface IListStyleImage
         interface IListStylePosition
         interface IListStyleType
+        interface IPlacement
 
 module GlobalValue =
     open Global

@@ -301,6 +301,13 @@ module Property =
         | Target
         | Valid
         | Visited
+        
+        | After
+        | Before
+        | FirstLetter
+        | FirstLine
+        | Selection
+        
         interface IProperty
 
     let value (v: Property): string = duToCamel v

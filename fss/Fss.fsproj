@@ -27,6 +27,7 @@
     <Compile Include="Perspective.fs" />
     <Compile Include="Cursor.fs" />
     <Compile Include="ListStyle.fs" />
+    <Compile Include="Attribute.fs" />
     <Compile Include="Content.fs" />
     <Compile Include="CounterStyle.fs" />
     <Compile Include="Media.fs" />
