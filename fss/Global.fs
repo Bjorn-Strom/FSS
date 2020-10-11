@@ -24,6 +24,7 @@ module Global =
         interface IListStyleType
         interface IListStylePosition
         interface IFloat
+        interface IQuote
         
     type Auto =
         | Auto
@@ -41,6 +42,7 @@ module Global =
         interface IRange
         interface ISpeakAs
         interface IPlacement
+        interface IQuote
         
     type Center =
         | Center
@@ -130,6 +132,7 @@ module Global =
         interface IListStyleType
         interface IPlacement
         interface IFloat
+        interface IQuote
 
 module GlobalValue =
     open Global

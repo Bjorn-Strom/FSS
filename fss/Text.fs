@@ -245,3 +245,24 @@ module TextValue =
             | :? Auto               as n -> GlobalValue.auto n
             | :? UnderlinePosition  as p -> duToKebab p
             | _                          -> "unknown text underline position"
+
+module Quotes =
+    type Quotes =
+        | String of string * string
+        interface IQuote
+        
+module QuotesValue =
+    open Quotes
+    
+    let quotes (v: IQuote) =
+        let stringifyQuote (q: Quotes): string =
+            match q with
+                | String (s1, s2) -> sprintf "\"%s\" \"%s\"" s1 s2
+        
+        match v with
+            | :? Global as g -> GlobalValue.globalValue g
+            | :? Auto   as n -> GlobalValue.auto n
+            | :? None   as n -> GlobalValue.none n
+            | :? Quotes as q -> stringifyQuote q
+            | _ -> "Unknown quote value"
+        

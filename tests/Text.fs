@@ -630,7 +630,6 @@ module Text =
                     [ TextIndent Unset ]
                     ["textIndent" ==> "unset"]
                     
-                    
                 test
                     "Text overflow clip"
                     [ TextOverflow Text.Clip ]
@@ -645,4 +644,55 @@ module Text =
                     "Text overflow -"
                     [ TextOverflow (Text.String "-") ]
                     ["textOverflow" ==> "\"-\""]
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                test
+                    "Quotes none"
+                    [ Quotes None ]
+                    ["quotes" ==> "none"]
+                    
+                test
+                    "Quotes Auto"
+                    [ Quotes Auto ]
+                    ["quotes" ==> "auto"]
+                    
+                test
+                    "Quotes strings"
+                    [ Quotes (Quotes.String("<<", ">>")) ]
+                    ["quotes" ==> "\"<<\" \">>\""]
+                    
+                test
+                    "Quotes inherit"
+                    [ Quotes Inherit ]
+                    ["quotes" ==> "inherit"]
+                    
+                test
+                    "Quotes Initial"
+                    [ Quotes Initial ]
+                    ["quotes" ==> "initial"]
+                    
+                test
+                    "Quotes unset"
+                    [ Quotes Unset ]
+                    ["quotes" ==> "unset"]
             ]

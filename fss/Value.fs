@@ -233,6 +233,8 @@ module Value =
         | Left   of IPlacement
         
         | Float of IFloat
+        
+        | Quotes of IQuote
     
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
@@ -475,7 +477,9 @@ module Value =
                 | Bottom b -> cssValue Property.Bottom <| PlacementValue.placement b
                 | Left   l -> cssValue Property.Left   <| PlacementValue.placement l
                 
-                | Float   f -> cssValue Property.Float <| FloatValue. float f
+                | Float   f -> cssValue Property.Float <| FloatValue.float f
+                
+                | Quotes q -> cssValue Property.Quotes <| QuotesValue.quotes q
                 
         )
         |> callback
