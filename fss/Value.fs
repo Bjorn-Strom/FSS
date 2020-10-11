@@ -235,12 +235,19 @@ module Value =
         | Float of IFloat
         
         | Quotes of IQuote
-    
+        
+        | OverflowX  of IOverflow
+        | OverflowY  of IOverflow
+        | OverflowXY of IOverflow * IOverflow
+        
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
     let rec private createCSS (attributeList: CSSProperty list) callback =
         let cssValue (property: Property.Property) value =
             property |> Property.value ==> value
+            
+        let cssValueKebab (property: Property.Property) value =
+            property |> Property.toKebabCase ==> value
 
         let pseudoClass (property: Property.Property) cssProperty =
             property |> Property.value |> toPsuedoClass ==> createCSS cssProperty callback
@@ -480,6 +487,10 @@ module Value =
                 | Float   f -> cssValue Property.Float <| FloatValue.float f
                 
                 | Quotes q -> cssValue Property.Quotes <| QuotesValue.quotes q
+                
+                | OverflowX  o      -> cssValueKebab Property.OverflowX <| OverflowValue.overflow o
+                | OverflowY  o      -> cssValueKebab Property.OverflowY <| OverflowValue.overflow o
+                | OverflowXY (x, y) -> cssValueKebab Property.Overflow  <| sprintf "%s %s" (OverflowValue.overflow x) (OverflowValue.overflow y) 
                 
         )
         |> callback

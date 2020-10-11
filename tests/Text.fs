@@ -645,27 +645,6 @@ module Text =
                     [ TextOverflow (Text.String "-") ]
                     ["textOverflow" ==> "\"-\""]
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                 test
                     "Quotes none"
                     [ Quotes None ]

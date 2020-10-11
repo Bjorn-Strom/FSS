@@ -43,6 +43,7 @@ module Global =
         interface ISpeakAs
         interface IPlacement
         interface IQuote
+        interface IOverflow
         
     type Center =
         | Center
@@ -133,6 +134,7 @@ module Global =
         interface IPlacement
         interface IFloat
         interface IQuote
+        interface IOverflow
 
 module GlobalValue =
     open Global

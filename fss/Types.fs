@@ -82,6 +82,7 @@ module Types =
     type IPlacement                = interface end
     type IFloat                    = interface end
     type IQuote                    = interface end
+    type IOverflow                 = interface end 
     
     // Common
     type CounterStyle = CounterStyle of string
