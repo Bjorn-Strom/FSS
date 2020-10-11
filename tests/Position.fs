@@ -238,4 +238,44 @@ module Position =
                         "Position fixed"
                         [ Position Position.Fixed]
                         ["position" ==> "fixed"]
+                        
+                    test
+                        "Float left"
+                        [ Float Float.Left]
+                        ["float" ==> "left"]
+                        
+                    test
+                        "Float right"
+                        [ Float Float.Right]
+                        ["float" ==> "right"]
+                        
+                    test
+                        "Float inline-start"
+                        [ Float Float.InlineStart]
+                        ["float" ==> "inline-start"]
+                        
+                    test
+                        "Float inline-end"
+                        [ Float Float.InlineEnd]
+                        ["float" ==> "inline-end"]
+                        
+                    test
+                        "Float none"
+                        [ Float None]
+                        ["float" ==> "none"]
+                        
+                    test
+                        "Float inherit"
+                        [ Float Inherit]
+                        ["float" ==> "inherit"]
+                        
+                    test
+                        "Float initial"
+                        [ Float Initial]
+                        ["float" ==> "initial"]
+                        
+                    test
+                        "Float unset"
+                        [ Float Unset]
+                        ["float" ==> "unset"]
             ]

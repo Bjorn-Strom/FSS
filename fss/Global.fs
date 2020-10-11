@@ -23,6 +23,7 @@ module Global =
         interface IListStyleImage
         interface IListStyleType
         interface IListStylePosition
+        interface IFloat
         
     type Auto =
         | Auto
@@ -128,6 +129,7 @@ module Global =
         interface IListStylePosition
         interface IListStyleType
         interface IPlacement
+        interface IFloat
 
 module GlobalValue =
     open Global

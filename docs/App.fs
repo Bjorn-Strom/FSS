@@ -2360,18 +2360,8 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //PsuedoClassExamples ()
             //ListStyleExamples ()
             //CounterStyleExamples ()
-            PseudoElementExamples ()
+            //PseudoElementExamples ()
             
-            
-            (*
-            fss
-                [
-                    AttributeSelector "asdasd"
-                        [
-                            
-                        ]
-                ]
-            *)
             
            
 

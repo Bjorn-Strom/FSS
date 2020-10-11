@@ -231,6 +231,8 @@ module Value =
         | Right  of IPlacement
         | Bottom of IPlacement
         | Left   of IPlacement
+        
+        | Float of IFloat
     
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
@@ -468,10 +470,12 @@ module Value =
                 
                 | Content c -> cssValue Property.Content <| ContentValue.content c
                 
-                | Top    t -> cssValue Property.Top   <| PlacementValue.placement t
+                | Top    t -> cssValue Property.Top    <| PlacementValue.placement t
                 | Right  r -> cssValue Property.Right  <| PlacementValue.placement r
                 | Bottom b -> cssValue Property.Bottom <| PlacementValue.placement b
                 | Left   l -> cssValue Property.Left   <| PlacementValue.placement l
+                
+                | Float   f -> cssValue Property.Float <| FloatValue. float f
                 
         )
         |> callback

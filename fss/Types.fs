@@ -80,6 +80,7 @@ module Types =
     type IListStyleImage           = interface end
     type IListStyleType            = interface end
     type IPlacement                = interface end
+    type IFloat                    = interface end
     
     // Common
     type CounterStyle = CounterStyle of string

@@ -60,3 +60,24 @@ module VerticalAlignValue =
             | :? Size          as s -> Units.Size.value s
             | :? VerticalAlign as v -> duToKebab v
             | _ -> "Unknown margin size"
+            
+// https://developer.mozilla.org/en-US/docs/Web/CSS/float
+module Float =
+    type Float =
+        | Left
+        | Right
+        | InlineStart
+        | InlineEnd
+        interface IFloat
+        
+module FloatValue =
+    open Float
+    open Global
+    open Utilities.Helpers
+    
+    let float (v: IFloat): string =
+        match v with
+            | :? Global as g -> GlobalValue.globalValue g
+            | :? None   as n -> GlobalValue.none n
+            | :? Float  as v -> duToKebab v
+            | _ -> "Unknown float value"
