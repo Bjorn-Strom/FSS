@@ -27,12 +27,19 @@ module Border =
         | None
         interface IBorderStyle
         
+        
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
+    type Collapse =
+        | Collapse
+        | Separate
+        interface IBorderCollapse
+        
 module BorderValue =
     open Border
     open Units.Size
     open Units.Percent
 
-    let borderWidth (v: IBorderWidth): string =
+    let width (v: IBorderWidth): string =
         match v with
             | :? Global      as g -> GlobalValue.globalValue g
             | :? Width as b -> duToLowercase b
@@ -40,22 +47,34 @@ module BorderValue =
             | :? Percent     as p -> Units.Percent.value p
             | _ -> "Unknown border width"
 
-    let borderStyle (v: IBorderStyle): string =
+    let style (v: IBorderStyle): string =
         match v with
             | :? Global      as g -> GlobalValue.globalValue g
             | :? None        as n -> GlobalValue.none n
             | :? Style as b -> duToLowercase b
             | _ -> "Unknown border style"
             
-    let borderRadius (v: IBorderRadius): string =
+    let radius (v: IBorderRadius): string =
         match v with
             | :? Size    as s -> Units.Size.value s
             | :? Percent as p -> Units.Percent.value p
             | :? Global  as g -> GlobalValue.globalValue g
             | _ -> "Unknown border radius"
             
-    let borderColor (v: IBorderColor): string =
+    let color (v: IBorderColor): string =
         match v with
             | :? Color.CssColor as c -> Color.value c
             | :? Global         as g -> GlobalValue.globalValue g
             | _ -> "Unknown border color"
+            
+    let collapse (v: IBorderCollapse): string =
+        match v with
+            | :? Global   as g -> GlobalValue.globalValue g
+            | :? Collapse as c -> duToLowercase c
+            | _ -> "Unknown border collapse"
+            
+    let spacing (v: IBorderSpacing): string =
+        match v with
+            | :? Global as g -> GlobalValue.globalValue g
+            | :? Size   as s -> Units.Size.value s
+            | _ -> "Unknown border spacing"

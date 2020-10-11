@@ -277,5 +277,56 @@ module Border =
                     "Border left color"
                     [ BorderLeftColor Color.white ]
                     ["borderLeftColor" ==> "#ffffff"]
+                    
+                    
+                test
+                    "Border collapse collapse"
+                    [ BorderCollapse Border.Collapse ]
+                    [ "borderCollapse" ==> "collapse" ]
+                    
+                test
+                    "Border collapse separate"
+                    [ BorderCollapse Border.Separate ]
+                    [ "borderCollapse" ==> "separate" ]
+                    
+                test
+                    "Border collapse initial"
+                    [ BorderCollapse Initial ]
+                    [ "borderCollapse" ==> "initial" ]
+
+                test
+                    "Border collapse inherit"
+                    [ BorderCollapse Inherit ]
+                    [ "borderCollapse" ==> "inherit" ]
+
+                test
+                    "Border collapse unset"
+                    [ BorderCollapse Unset ]
+                    [ "borderCollapse" ==> "unset" ]
+                    
+                test
+                    "Border spacing px"
+                    [ BorderSpacing (px 2) ]
+                    [ "borderSpacing" ==> "2px" ]
+                    
+                test
+                    "Border spacing px"
+                    [ BorderSpacing2 (px 2, px 2) ]
+                    [ "borderSpacing" ==> "2px 2px" ]    
+                    
+                test
+                    "Border spacing initial"
+                    [ BorderSpacing Initial ]
+                    [ "borderSpacing" ==> "initial" ]
+
+                test
+                    "Border spacing inherit"
+                    [ BorderSpacing Inherit ]
+                    [ "borderSpacing" ==> "inherit" ]
+
+                test
+                    "Border spacing unset"
+                    [ BorderSpacing Unset ]
+                    [ "borderSpacing" ==> "unset" ]
 
             ]

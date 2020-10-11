@@ -58,4 +58,5 @@ module OverflowValue =
             | :? Global   as g -> GlobalValue.globalValue g
             | :? Auto     as a -> GlobalValue.auto a
             | :? Overflow as o -> duToLowercase o
+            | _ -> "unknown overflow value"
         

@@ -148,6 +148,10 @@ module Value =
         | BorderRightColor  of IBorderColor
         | BorderBottomColor of IBorderColor
         | BorderLeftColor   of IBorderColor
+        
+        | BorderCollapse of IBorderCollapse
+        | BorderSpacing  of IBorderSpacing
+        | BorderSpacing2 of IBorderSpacing * IBorderSpacing
 
         | Width       of IContentSize
         | MinWidth    of IContentSize
@@ -369,37 +373,37 @@ module Value =
                 | TextUnderlinePosition   t       -> cssValue Property.TextUnderlinePosition   <| TextValue.underlinePosition t
                 | TextUnderlinePositions (t1, t2) -> cssValue Property.TextUnderlinePosition   <| sprintf "%s %s" (TextValue.underlinePosition t1) (TextValue.underlinePosition t2)
 
-                | BorderStyle       bs  -> cssValue Property.BorderStyle       <| BorderValue.borderStyle bs
-                | BorderStyles      bss -> cssValue Property.BorderStyle       <| combineWs BorderValue.borderStyle bss
-                | BorderTopStyle    bw  -> cssValue Property.BorderTopStyle    <| BorderValue.borderStyle bw
-                | BorderRightStyle  bw  -> cssValue Property.BorderRightStyle  <| BorderValue.borderStyle bw
-                | BorderBottomStyle bw  -> cssValue Property.BorderBottomStyle <| BorderValue.borderStyle bw
-                | BorderLeftStyle   bw  -> cssValue Property.BorderLeftStyle   <| BorderValue.borderStyle bw
+                | BorderStyle       bs  -> cssValue Property.BorderStyle       <| BorderValue.style bs
+                | BorderStyles      bss -> cssValue Property.BorderStyle       <| combineWs BorderValue.style bss
+                | BorderTopStyle    bw  -> cssValue Property.BorderTopStyle    <| BorderValue.style bw
+                | BorderRightStyle  bw  -> cssValue Property.BorderRightStyle  <| BorderValue.style bw
+                | BorderBottomStyle bw  -> cssValue Property.BorderBottomStyle <| BorderValue.style bw
+                | BorderLeftStyle   bw  -> cssValue Property.BorderLeftStyle   <| BorderValue.style bw
 
-                | BorderWidth       bw  -> cssValue Property.BorderWidth       <| BorderValue.borderWidth bw
-                | BorderWidths      bws -> cssValue Property.BorderWidth       <| combineWs BorderValue.borderWidth bws
-                | BorderTopWidth    bw  -> cssValue Property.BorderTopWidth    <| BorderValue.borderWidth bw
-                | BorderRightWidth  bw  -> cssValue Property.BorderRightWidth  <| BorderValue.borderWidth bw
-                | BorderBottomWidth bw  -> cssValue Property.BorderBottomWidth <| BorderValue.borderWidth bw
-                | BorderLeftWidth   bw  -> cssValue Property.BorderLeftWidth   <| BorderValue.borderWidth  bw
+                | BorderWidth       bw  -> cssValue Property.BorderWidth       <| BorderValue.width bw
+                | BorderWidths      bws -> cssValue Property.BorderWidth       <| combineWs BorderValue.width bws
+                | BorderTopWidth    bw  -> cssValue Property.BorderTopWidth    <| BorderValue.width bw
+                | BorderRightWidth  bw  -> cssValue Property.BorderRightWidth  <| BorderValue.width bw
+                | BorderBottomWidth bw  -> cssValue Property.BorderBottomWidth <| BorderValue.width bw
+                | BorderLeftWidth   bw  -> cssValue Property.BorderLeftWidth   <| BorderValue.width  bw
 
-                | BorderRadius              br -> cssValue Property.BorderRadius            <| BorderValue.borderRadius br
-                | BorderRadiuses            br -> cssValue Property.BorderRadius            <| combineWs BorderValue.borderRadius br
-                | BorderTopLeftRadius       br -> cssValue Property.BorderTopLeftRadius     <| BorderValue.borderRadius br
-                | BorderTopLeftRadiuses     br -> cssValue Property.BorderTopLeftRadius     <| combineWs BorderValue.borderRadius br
-                | BorderTopRightRadius      br -> cssValue Property.BorderTopRightRadius    <| BorderValue.borderRadius br
-                | BorderTopRightRadiuses    br -> cssValue Property.BorderTopRightRadius    <| combineWs BorderValue.borderRadius br
-                | BorderBottomRightRadius   br -> cssValue Property.BorderBottomRightRadius <| BorderValue.borderRadius br
-                | BorderBottomRightRadiuses br -> cssValue Property.BorderBottomRightRadius <| combineWs BorderValue.borderRadius br
-                | BorderBottomLeftRadius    br -> cssValue Property.BorderBottomLeftRadius  <| BorderValue.borderRadius br
-                | BorderBottomLeftRadiuses  br -> cssValue Property.BorderBottomLeftRadius  <| combineWs BorderValue.borderRadius br
+                | BorderRadius              br -> cssValue Property.BorderRadius            <| BorderValue.radius br
+                | BorderRadiuses            br -> cssValue Property.BorderRadius            <| combineWs BorderValue.radius br
+                | BorderTopLeftRadius       br -> cssValue Property.BorderTopLeftRadius     <| BorderValue.radius br
+                | BorderTopLeftRadiuses     br -> cssValue Property.BorderTopLeftRadius     <| combineWs BorderValue.radius br
+                | BorderTopRightRadius      br -> cssValue Property.BorderTopRightRadius    <| BorderValue.radius br
+                | BorderTopRightRadiuses    br -> cssValue Property.BorderTopRightRadius    <| combineWs BorderValue.radius br
+                | BorderBottomRightRadius   br -> cssValue Property.BorderBottomRightRadius <| BorderValue.radius br
+                | BorderBottomRightRadiuses br -> cssValue Property.BorderBottomRightRadius <| combineWs BorderValue.radius br
+                | BorderBottomLeftRadius    br -> cssValue Property.BorderBottomLeftRadius  <| BorderValue.radius br
+                | BorderBottomLeftRadiuses  br -> cssValue Property.BorderBottomLeftRadius  <| combineWs BorderValue.radius br
 
-                | BorderColor       bc  -> cssValue Property.BorderColor       <| BorderValue.borderColor bc
-                | BorderColors      bcs -> cssValue Property.BorderColor       <| combineWs BorderValue.borderColor bcs
-                | BorderTopColor    bc  -> cssValue Property.BorderTopColor    <| BorderValue.borderColor bc
-                | BorderRightColor  bc  -> cssValue Property.BorderRightColor  <| BorderValue.borderColor bc
-                | BorderBottomColor bc  -> cssValue Property.BorderBottomColor <| BorderValue.borderColor bc
-                | BorderLeftColor   bc  -> cssValue Property.BorderLeftColor   <| BorderValue.borderColor bc
+                | BorderColor       bc  -> cssValue Property.BorderColor       <| BorderValue.color bc
+                | BorderColors      bcs -> cssValue Property.BorderColor       <| combineWs BorderValue.color bcs
+                | BorderTopColor    bc  -> cssValue Property.BorderTopColor    <| BorderValue.color bc
+                | BorderRightColor  bc  -> cssValue Property.BorderRightColor  <| BorderValue.color bc
+                | BorderBottomColor bc  -> cssValue Property.BorderBottomColor <| BorderValue.color bc
+                | BorderLeftColor   bc  -> cssValue Property.BorderLeftColor   <| BorderValue.color bc
 
                 | Width     w -> cssValue Property.Width     <| ContentSize.value w
                 | MinWidth  w -> cssValue Property.MinWidth  <| ContentSize.value w
@@ -490,7 +494,11 @@ module Value =
                 
                 | OverflowX  o      -> cssValueKebab Property.OverflowX <| OverflowValue.overflow o
                 | OverflowY  o      -> cssValueKebab Property.OverflowY <| OverflowValue.overflow o
-                | OverflowXY (x, y) -> cssValueKebab Property.Overflow  <| sprintf "%s %s" (OverflowValue.overflow x) (OverflowValue.overflow y) 
+                | OverflowXY (x, y) -> cssValueKebab Property.Overflow  <| sprintf "%s %s" (OverflowValue.overflow x) (OverflowValue.overflow y)
+                
+                | BorderCollapse b      -> cssValue Property.BorderCollapse <| BorderValue.collapse b
+                | BorderSpacing  b      -> cssValue Property.BorderSpacing  <| BorderValue.spacing b
+                | BorderSpacing2 (x, y) -> cssValue Property.BorderSpacing  <| sprintf "%s %s" (BorderValue.spacing x) (BorderValue.spacing y)
                 
         )
         |> callback

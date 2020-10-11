@@ -549,7 +549,103 @@ let BorderExamples ()=
                         BorderRightColor Color.rosyBrown
                     ]
             )] [ str "Now in color!"]
-
+            
+            let tableStyle = 
+                fss
+                    [
+                        Margins [rem 2.; Auto]
+                        BorderStyle Border.Solid
+                        BorderWidth (px 1)
+                        BorderColor Color.red
+                        BorderCollapse Border.Separate
+                        BorderSpacing (rem 1.)
+                        BackgroundColor Color.khaki
+                    ]
+            
+            let theadStyle =
+                fss
+                    [
+                        FontWeight (Font.Weight.Value 500)
+                        BackgroundColor Color.white
+                    ]
+                    
+            let trStyle =
+                fss
+                    [
+                        BackgroundColor Color.aquaMarine
+                        
+                        ! Html.Th
+                            [
+                                BorderStyle Border.Solid
+                                BorderWidth (px 1)
+                                BorderColor Color.red
+                                BackgroundColor Color.goldenrod
+                            ]
+                    ]
+                    
+            let tbodyStyle =
+                fss
+                    [
+                        BackgroundColor Color.lime
+                        
+                        ! Html.Tr
+                            [
+                                BackgroundColor Color.aquaMarine
+                                
+                                NthChild ("odd",
+                                    [
+                                        BackgroundColor Color.gray
+                                    ])
+                            ]
+                            
+                        ! Html.Td
+                            [
+                                BorderStyle Border.Solid
+                                BorderWidth (px 1)
+                                BorderColor Color.red
+                                Padding (rem 1.0)
+                            ]
+                    ]
+                    
+            table [ ClassName tableStyle ]
+                [
+                    thead [ ClassName theadStyle ]
+                        [
+                            tr [ ClassName trStyle ]
+                                [
+                                    th [] [ str "Heading" ]
+                                    th [] [ str "Heading" ]
+                                    th [] [ str "Heading" ]
+                                ]
+                        ]
+                    tbody [ ClassName tbodyStyle ]
+                        [
+                            tr []
+                                [ 
+                                  td [] [str "data" ]
+                                  td [] [str "data" ]
+                                  td [] [str "data" ]
+                                ]
+                            tr []
+                                [ 
+                                  td [] [str "data" ]
+                                  td [] [str "data" ]
+                                  td [] [str "data" ]
+                                ]
+                            tr []
+                                [ 
+                                  td [] [str "data" ]
+                                  td [] [str "data" ]
+                                  td [] [str "data" ]
+                                ]
+                            tr []
+                                [ 
+                                  td [] [str "data" ]
+                                  td [] [str "data" ]
+                                  td [] [str "data" ]
+                                ]
+                        ]
+                    ]
         ]
 
 let MarginExamples () =
@@ -2346,7 +2442,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //BackgroundExamples model dispatch
             //FontExamples ()
             //FontFaceExamples ()
-            //BorderExamples ()
+            BorderExamples ()
             //MarginExamples ()
             //PaddingExamples ()
             //TransformExamples ()
