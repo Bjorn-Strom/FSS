@@ -27,6 +27,7 @@
     <Compile Include="PseudoClasses.fs" />
     <Compile Include="ListStyle.fs" />
     <Compile Include="Content.fs" />
+    <Compile Include="PseudoElements.fs" />
     <Compile Include="Tests.fs" />
   </ItemGroup>
 

@@ -252,6 +252,9 @@ module Value =
             
         let pseudoElement (property: Property.Property) cssProperty =
             property |> Property.value |> toPsuedoElement ==> createCSS cssProperty callback
+            
+        let pseudoElementKebab (property: Property.Property) cssProperty =
+            property |> Property.toKebabCase |> toPsuedoElement ==> createCSS cssProperty callback
 
         attributeList
         |> List.map (
@@ -311,11 +314,11 @@ module Value =
                 | Target         t      -> pseudoClass          Property.Target        t
                 | Valid          v      -> pseudoClass          Property.Valid         v
                 
-                | After       a -> pseudoElement Property.After       a
-                | Before      b -> pseudoElement Property.Before      b
-                | FirstLetter f -> pseudoElement Property.FirstLetter f
-                | FirstLine   f -> pseudoElement Property.FirstLine   f
-                | Selection   s -> pseudoElement Property.Selection   s
+                | After       a -> pseudoElement      Property.After       a
+                | Before      b -> pseudoElement      Property.Before      b
+                | FirstLetter f -> pseudoElementKebab Property.FirstLetter f
+                | FirstLine   f -> pseudoElementKebab Property.FirstLine   f
+                | Selection   s -> pseudoElement      Property.Selection   s
                 
                 | FontSize              f  -> cssValue Property.FontSize             <| FontValues.fontSize f
                 | FontStyle             f  -> cssValue Property.FontStyle            <| FontValues.fontStyle f

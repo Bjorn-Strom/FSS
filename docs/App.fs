@@ -2280,6 +2280,34 @@ let PseudoElementExamples () =
                 
             ]
     
+    let firstLetter =
+        fss
+            [
+                FirstLetter
+                    [
+                        FontSize (pct 130)
+                    ]
+            ]
+            
+    let firstLine =
+        fss
+            [
+                FirstLine
+                    [
+                        Color Color.red
+                    ]
+            ]
+            
+    let selection =
+        fss
+            [
+                Selection
+                    [
+                        BackgroundColor Color.orangeRed
+                    ]
+            ]
+    
+    
     fragment []
         [
             p [] [str "It works"]
@@ -2293,6 +2321,21 @@ let PseudoElementExamples () =
                 
             p [] [ str "Tooltip time" ]
             a [ Title "Hello from a tooltip!"; ClassName tooltip ] [ str "Tooltip here, hover!" ]
+            
+            p [] [ str "First letter" ]
+            p [ ClassName firstLetter ] [ str "FOOBAR" ]
+            
+            p [] [ str "First line" ]
+            p [ ClassName firstLine ]
+                [
+                    str "Styles will only be applied to the first line of this paragraph. After that, all text will be styled like normal. See what I mean?"
+                ]
+                
+            p [] [ str "Selection" ]
+            p [ ClassName selection ]
+                [
+                    str "Styles will only be applied to the first line of this paragraph. After that, all text will be styled like normal. See what I mean?"
+                ]
             
         ]
 
