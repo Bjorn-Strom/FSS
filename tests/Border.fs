@@ -10,6 +10,31 @@ module Border =
         testList "Border"
             [
                 test
+                    "Border shorthand width style and color"
+                    [ Border (Border.Create(Width = Border.Medium, Style = Border.Dashed, Color = Color.green)) ]
+                    ["border" ==> "medium dashed #008000"]
+
+                test
+                    "Border shorthand style and color"
+                    [ Border (Border.Create(Style = Border.Dashed, Color = Color.green)) ]
+                    ["border" ==> "dashed #008000"]
+
+                test
+                    "Border shorthand color"
+                    [ Border (Border.Create(Color = Color.green)) ]
+                    ["border" ==> "#008000"]
+
+                test
+                    "Border shorthand color and style"
+                    [ Border (Border.Create(Color = Color.green,Style = Border.Dashed)) ]
+                    ["border" ==> "dashed #008000"]
+
+                test
+                    "Border shorthand color, style and width"
+                    [ Border (Border.Create(Color = Color.green,Style = Border.Dashed, Width = Border.Medium)) ]
+                    ["border" ==> "medium dashed #008000"]
+
+                test
                     "Borderstyle hidden"
                     [ BorderStyle Border.Hidden ]
                     [
@@ -277,18 +302,18 @@ module Border =
                     "Border left color"
                     [ BorderLeftColor Color.white ]
                     ["borderLeftColor" ==> "#ffffff"]
-                    
-                    
+
+
                 test
                     "Border collapse collapse"
                     [ BorderCollapse Border.Collapse ]
                     [ "borderCollapse" ==> "collapse" ]
-                    
+
                 test
                     "Border collapse separate"
                     [ BorderCollapse Border.Separate ]
                     [ "borderCollapse" ==> "separate" ]
-                    
+
                 test
                     "Border collapse initial"
                     [ BorderCollapse Initial ]
@@ -303,17 +328,17 @@ module Border =
                     "Border collapse unset"
                     [ BorderCollapse Unset ]
                     [ "borderCollapse" ==> "unset" ]
-                    
+
                 test
                     "Border spacing px"
                     [ BorderSpacing (px 2) ]
                     [ "borderSpacing" ==> "2px" ]
-                    
+
                 test
                     "Border spacing px"
                     [ BorderSpacing2 (px 2, px 2) ]
-                    [ "borderSpacing" ==> "2px 2px" ]    
-                    
+                    [ "borderSpacing" ==> "2px 2px" ]
+
                 test
                     "Border spacing initial"
                     [ BorderSpacing Initial ]

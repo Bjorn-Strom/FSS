@@ -463,6 +463,29 @@ let BorderExamples ()=
     fragment []
         [
             h1 [] [ str "borders"]
+            h2 [] [ str "Border shorthand" ]
+            p [ ClassName (
+                  fss
+                    [
+                        Border <| Border.Create(Style = Border.Solid)
+                    ]
+              ) ] [ str "This one is solid" ]
+
+
+            p [ ClassName (
+                  fss
+                    [
+                        Border (Border.Create(Width = px 2, Style = Border.Solid))
+                    ]
+              ) ] [ str "So I am solid but 2 pixels" ]
+
+            p [ ClassName (
+                  fss
+                    [
+                        Border (Border.Create(Width = Border.Medium, Style = Border.Dashed, Color = Color.green))
+                    ]
+              ) ] [ str "Me medium and green" ]
+
             h2 [] [ str "Set unique borders"]
             p [ ClassName (fss [BorderStyle Border.Solid ])] [ str "I have a solid border" ]
             p [ ClassName (fss [BorderStyle Border.Double ])] [ str "I have a double border"]
@@ -549,8 +572,8 @@ let BorderExamples ()=
                         BorderRightColor Color.rosyBrown
                     ]
             )] [ str "Now in color!"]
-            
-            let tableStyle = 
+
+            let tableStyle =
                 fss
                     [
                         Margins [rem 2.; Auto]
@@ -561,19 +584,19 @@ let BorderExamples ()=
                         BorderSpacing (rem 1.)
                         BackgroundColor Color.khaki
                     ]
-            
+
             let theadStyle =
                 fss
                     [
                         FontWeight (Font.Weight.Value 500)
                         BackgroundColor Color.white
                     ]
-                    
+
             let trStyle =
                 fss
                     [
                         BackgroundColor Color.aquaMarine
-                        
+
                         ! Html.Th
                             [
                                 BorderStyle Border.Solid
@@ -582,22 +605,22 @@ let BorderExamples ()=
                                 BackgroundColor Color.goldenrod
                             ]
                     ]
-                    
+
             let tbodyStyle =
                 fss
                     [
                         BackgroundColor Color.lime
-                        
+
                         ! Html.Tr
                             [
                                 BackgroundColor Color.aquaMarine
-                                
+
                                 NthChild ("odd",
                                     [
                                         BackgroundColor Color.gray
                                     ])
                             ]
-                            
+
                         ! Html.Td
                             [
                                 BorderStyle Border.Solid
@@ -606,7 +629,7 @@ let BorderExamples ()=
                                 Padding (rem 1.0)
                             ]
                     ]
-                    
+
             table [ ClassName tableStyle ]
                 [
                     thead [ ClassName theadStyle ]
@@ -621,25 +644,25 @@ let BorderExamples ()=
                     tbody [ ClassName tbodyStyle ]
                         [
                             tr []
-                                [ 
+                                [
                                   td [] [str "data" ]
                                   td [] [str "data" ]
                                   td [] [str "data" ]
                                 ]
                             tr []
-                                [ 
+                                [
                                   td [] [str "data" ]
                                   td [] [str "data" ]
                                   td [] [str "data" ]
                                 ]
                             tr []
-                                [ 
+                                [
                                   td [] [str "data" ]
                                   td [] [str "data" ]
                                   td [] [str "data" ]
                                 ]
                             tr []
-                                [ 
+                                [
                                   td [] [str "data" ]
                                   td [] [str "data" ]
                                   td [] [str "data" ]
@@ -2172,7 +2195,7 @@ let PsuedoClassExamples () =
                     a [ Href "#section2" ] [ str "Go to section 2" ]
                 ]
         ]
-        
+
 let listStyleExamples () =
     fragment []
         [
@@ -2181,34 +2204,34 @@ let listStyleExamples () =
                     [
                         ListStyleImage (ListStyle.Url "https://mdn.mozillademos.org/files/11981/starsolid.gif")
                     ]
-            
+
             ul [ ClassName listStyleImage ]
                 [
                     li [] [ str "Item 1" ]
                     li [] [ str "Item 2" ]
                 ]
-                
+
             let inside =
                 fss
                     [
                         ListStylePosition ListStyle.Inside
                         ListStyleType ListStyle.Square
                     ]
-                    
+
             let outside =
                 fss
                     [
                         ListStylePosition ListStyle.Outside
                         ListStyleType ListStyle.Circle
                     ]
-                    
+
             let insideImage =
                 fss
                     [
                         ListStylePosition ListStyle.Inside
                         ListStyleImage (ListStyle.Url "https://mdn.mozillademos.org/files/11979/starsolid.gif")
                     ]
-                    
+
             ul [ ClassName inside ]
                 [
                     str "List 1"
@@ -2234,7 +2257,7 @@ let listStyleExamples () =
                     li [] [str "List Item 3-4" ]
                 ]
         ]
-        
+
 let CounterStyleExamples () =
      fragment []
                 [
@@ -2245,14 +2268,14 @@ let CounterStyleExamples () =
                                 Symbols (Symbols.Strings [ "o"; "p" ])
                                 Suffix (Suffix.String ". ")
                             ]
-                        
+
                     let style =
                         fss
                             [
                                 Label "FOOOOOO"
                                 ListStyleType (ListStyle.Custom someCounter)
                             ]
-                            
+
                     ul [ ClassName style ]
                         [
                             li [] [ str "one" ]
@@ -2261,7 +2284,7 @@ let CounterStyleExamples () =
                             li [] [ str "four" ]
                             li [] [ str "five" ]
                         ]
-                                        
+
                     let fixedCounter =
                         counterStyle
                             [
@@ -2269,13 +2292,13 @@ let CounterStyleExamples () =
                                 Symbols (Symbols.Strings ["Ⓐ"; "Ⓑ"; "Ⓒ"; "Ⓓ"; "Ⓔ"; "Ⓕ"; "Ⓖ"; "Ⓗ"; "Ⓘ"; "Ⓙ"; "Ⓚ"; "Ⓛ"; "Ⓜ"; "Ⓝ"; "Ⓞ"; "Ⓟ"; "Ⓠ"; "Ⓡ"; "Ⓢ"; "Ⓣ"; "Ⓤ"; "Ⓥ"; "Ⓦ"; "Ⓧ"; "Ⓨ"; "Ⓩ"])
                                 Suffix (Suffix.String " ")
                             ]
-                            
+
                     let items =
                         fss
                             [
                                 ListStyleType (ListStyle.Custom fixedCounter)
                             ]
-                            
+
                     ul [ ClassName items ]
                         [
                             li [] [ str "one" ]
@@ -2310,13 +2333,13 @@ let CounterStyleExamples () =
                             li [] [ str "five" ]
                         ]
                 ]
-                
+
 let PseudoElementExamples () =
     let required =
         fss
             [
                 FontSize (em 0.8)
-                
+
                 Before
                     [
                         Content (Content.String "")
@@ -2325,7 +2348,7 @@ let PseudoElementExamples () =
                         Height (px 10)
                         BackgroundColor Color.red
                     ]
-                    
+
                 After
                     [
                         Content (Content.String "")
@@ -2334,9 +2357,9 @@ let PseudoElementExamples () =
                         Height (px 10)
                         BackgroundColor Color.blue
                     ]
-                
+
             ]
-    
+
     let tooltip =
         fss
             [
@@ -2344,7 +2367,7 @@ let PseudoElementExamples () =
                 Color (hex "0bd")
                 Display Display.Inline
                 Position Position.Relative
-                
+
                 Hover
                     [
                         Before
@@ -2357,7 +2380,7 @@ let PseudoElementExamples () =
                                 Bottom (px 30)
                                 Position Position.Absolute
                             ]
-                        
+
                         After
                             [
                                 Display Display.Flex
@@ -2372,10 +2395,10 @@ let PseudoElementExamples () =
                                 Width (px 220)
                             ]
                     ]
-                
-                
+
+
             ]
-    
+
     let firstLetter =
         fss
             [
@@ -2384,7 +2407,7 @@ let PseudoElementExamples () =
                         FontSize (pct 130)
                     ]
             ]
-            
+
     let firstLine =
         fss
             [
@@ -2393,7 +2416,7 @@ let PseudoElementExamples () =
                         Color Color.red
                     ]
             ]
-            
+
     let selection =
         fss
             [
@@ -2402,37 +2425,37 @@ let PseudoElementExamples () =
                         BackgroundColor Color.orangeRed
                     ]
             ]
-    
-    
+
+
     fragment []
         [
             p [] [str "It works"]
-            
+
             div []
                 [
                     label [ ClassName required ] [ str "Name" ]
                     input [ Type "text"; HTMLAttr.Required true ]
                     button [ HTMLAttr.Custom("data-tooltip", "Tooltip") ] [ str "Submit form" ]
                 ]
-                
+
             p [] [ str "Tooltip time" ]
             a [ Title "Hello from a tooltip!"; ClassName tooltip ] [ str "Tooltip here, hover!" ]
-            
+
             p [] [ str "First letter" ]
             p [ ClassName firstLetter ] [ str "FOOBAR" ]
-            
+
             p [] [ str "First line" ]
             p [ ClassName firstLine ]
                 [
                     str "Styles will only be applied to the first line of this paragraph. After that, all text will be styled like normal. See what I mean?"
                 ]
-                
+
             p [] [ str "Selection" ]
             p [ ClassName selection ]
                 [
                     str "Styles will only be applied to the first line of this paragraph. After that, all text will be styled like normal. See what I mean?"
                 ]
-            
+
         ]
 
 let render (model: Model) (dispatch: Msg -> unit) =
@@ -2457,9 +2480,9 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //ListStyleExamples ()
             //CounterStyleExamples ()
             //PseudoElementExamples ()
-            
-            
-           
+
+
+
 
         ]
 

@@ -12,6 +12,7 @@ module Color =
         interface IRadialGradient
         interface IBorderColor
         interface ITextEmphasisColor
+        interface IBackgroundColor
 
     let private colorValue (CssColor c) = c
 

@@ -28,7 +28,8 @@ module Value =
 
         | Color of IColor
 
-        | BackgroundColor       of IColor
+        | Background            of IBackground
+        | BackgroundColor       of IBackgroundColor
         | BackgroundImage       of IBackgroundImage
         | BackgroundPosition    of IBackgroundPosition
         | BackgroundPositions   of IBackgroundPosition list
@@ -72,7 +73,7 @@ module Value =
         | Valid            of CSSProperty list
         | Visited          of CSSProperty list
         | FirstChild       of CSSProperty list
-        
+
         | After       of CSSProperty list
         | Before      of CSSProperty list
         | FirstLetter of CSSProperty list
@@ -117,13 +118,15 @@ module Value =
         | TextUnderlinePosition   of ITextUnderlinePosition
         | TextUnderlinePositions  of ITextUnderlinePosition * ITextUnderlinePosition
 
+        | Border            of IBorder
+
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
         | BorderTopStyle    of IBorderStyle
         | BorderRightStyle  of IBorderStyle
         | BorderBottomStyle of IBorderStyle
         | BorderLeftStyle   of IBorderStyle
-        
+
         | BorderWidth       of IBorderWidth
         | BorderWidths      of IBorderWidth list
         | BorderTopWidth    of IBorderWidth
@@ -148,7 +151,7 @@ module Value =
         | BorderRightColor  of IBorderColor
         | BorderBottomColor of IBorderColor
         | BorderLeftColor   of IBorderColor
-        
+
         | BorderCollapse of IBorderCollapse
         | BorderSpacing  of IBorderSpacing
         | BorderSpacing2 of IBorderSpacing * IBorderSpacing
@@ -228,28 +231,28 @@ module Value =
         | ListStyleImage    of IListStyleImage
         | ListStylePosition of IListStylePosition
         | ListStyleType     of IListStyleType
-        
+
         | Content of IContent
-        
-        | Top    of IPlacement 
+
+        | Top    of IPlacement
         | Right  of IPlacement
         | Bottom of IPlacement
         | Left   of IPlacement
-        
+
         | Float of IFloat
-        
+
         | Quotes of IQuote
-        
+
         | OverflowX  of IOverflow
         | OverflowY  of IOverflow
         | OverflowXY of IOverflow * IOverflow
-        
+
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
     let rec private createCSS (attributeList: CSSProperty list) callback =
         let cssValue (property: Property.Property) value =
             property |> Property.value ==> value
-            
+
         let cssValueKebab (property: Property.Property) value =
             property |> Property.toKebabCase ==> value
 
@@ -264,10 +267,10 @@ module Value =
 
         let pseudoClassFuncKebab (property: Property.Property) content cssProperty =
             sprintf "%s(%s)" (Property.toKebabCase property) content |> toPsuedoClass ==> createCSS cssProperty callback
-            
+
         let pseudoElement (property: Property.Property) cssProperty =
             property |> Property.value |> toPsuedoElement ==> createCSS cssProperty callback
-            
+
         let pseudoElementKebab (property: Property.Property) cssProperty =
             property |> Property.toKebabCase |> toPsuedoElement ==> createCSS cssProperty callback
 
@@ -283,8 +286,8 @@ module Value =
 
                 | Color c            -> Property.value Property.Color ==> Color.value c
 
-                | BackgroundColor       bc -> cssValue Property.BackgroundColor <| Color.value bc
-
+                | Background            b  -> cssValue Property.Background           <| BackgroundValues.background
+                | BackgroundColor       bc -> cssValue Property.BackgroundColor      <| BackgroundValues.color
                 | BackgroundImage       bi -> cssValue Property.BackgroundImage      <| BackgroundValues.image bi
                 | BackgroundPosition    b  -> cssValue Property.BackgroundPosition   <| BackgroundValues.position b
                 | BackgroundPositions   bs -> cssValue Property.BackgroundPosition   <| combineWs BackgroundValues.position bs
@@ -328,13 +331,13 @@ module Value =
                 | Required       r      -> pseudoClassKebab     Property.Required      r
                 | Target         t      -> pseudoClass          Property.Target        t
                 | Valid          v      -> pseudoClass          Property.Valid         v
-                
+
                 | After       a -> pseudoElement      Property.After       a
                 | Before      b -> pseudoElement      Property.Before      b
                 | FirstLetter f -> pseudoElementKebab Property.FirstLetter f
                 | FirstLine   f -> pseudoElementKebab Property.FirstLine   f
                 | Selection   s -> pseudoElement      Property.Selection   s
-                
+
                 | FontSize              f  -> cssValue Property.FontSize             <| FontValues.fontSize f
                 | FontStyle             f  -> cssValue Property.FontStyle            <| FontValues.fontStyle f
                 | FontStretch           f  -> cssValue Property.FontStretch          <| FontValues.fontStretch f
@@ -373,6 +376,8 @@ module Value =
                 | TextUnderlinePosition   t       -> cssValue Property.TextUnderlinePosition   <| TextValue.underlinePosition t
                 | TextUnderlinePositions (t1, t2) -> cssValue Property.TextUnderlinePosition   <| sprintf "%s %s" (TextValue.underlinePosition t1) (TextValue.underlinePosition t2)
 
+                | Border b -> cssValue Property.Border <| BorderValue.border b
+
                 | BorderStyle       bs  -> cssValue Property.BorderStyle       <| BorderValue.style bs
                 | BorderStyles      bss -> cssValue Property.BorderStyle       <| combineWs BorderValue.style bss
                 | BorderTopStyle    bw  -> cssValue Property.BorderTopStyle    <| BorderValue.style bw
@@ -404,6 +409,10 @@ module Value =
                 | BorderRightColor  bc  -> cssValue Property.BorderRightColor  <| BorderValue.color bc
                 | BorderBottomColor bc  -> cssValue Property.BorderBottomColor <| BorderValue.color bc
                 | BorderLeftColor   bc  -> cssValue Property.BorderLeftColor   <| BorderValue.color bc
+
+                | BorderCollapse b      -> cssValue Property.BorderCollapse <| BorderValue.collapse b
+                | BorderSpacing  b      -> cssValue Property.BorderSpacing  <| BorderValue.spacing b
+                | BorderSpacing2 (x, y) -> cssValue Property.BorderSpacing  <| sprintf "%s %s" (BorderValue.spacing x) (BorderValue.spacing y)
 
                 | Width     w -> cssValue Property.Width     <| ContentSize.value w
                 | MinWidth  w -> cssValue Property.MinWidth  <| ContentSize.value w
@@ -476,30 +485,27 @@ module Value =
                 | TransitionTimingFunctions ts -> cssValue Property.TransitionTimingFunction <| combineComma TransitionValue.timingFunction ts
 
                 | Cursor c -> cssValue Property.Cursor <| CursorValue.cursor c
-                
+
                 | ListStyleImage    l -> cssValue Property.ListStyleImage    <| ListStyleValue.image l
                 | ListStylePosition l -> cssValue Property.ListStylePosition <| ListStyleValue.position l
                 | ListStyleType     l -> cssValue Property.ListStyleType     <| ListStyleValue.styleType l
-                
+
                 | Content c -> cssValue Property.Content <| ContentValue.content c
-                
+
                 | Top    t -> cssValue Property.Top    <| PlacementValue.placement t
                 | Right  r -> cssValue Property.Right  <| PlacementValue.placement r
                 | Bottom b -> cssValue Property.Bottom <| PlacementValue.placement b
                 | Left   l -> cssValue Property.Left   <| PlacementValue.placement l
-                
+
                 | Float   f -> cssValue Property.Float <| FloatValue.float f
-                
+
                 | Quotes q -> cssValue Property.Quotes <| QuotesValue.quotes q
-                
+
                 | OverflowX  o      -> cssValueKebab Property.OverflowX <| OverflowValue.overflow o
                 | OverflowY  o      -> cssValueKebab Property.OverflowY <| OverflowValue.overflow o
                 | OverflowXY (x, y) -> cssValueKebab Property.Overflow  <| sprintf "%s %s" (OverflowValue.overflow x) (OverflowValue.overflow y)
-                
-                | BorderCollapse b      -> cssValue Property.BorderCollapse <| BorderValue.collapse b
-                | BorderSpacing  b      -> cssValue Property.BorderSpacing  <| BorderValue.spacing b
-                | BorderSpacing2 (x, y) -> cssValue Property.BorderSpacing  <| sprintf "%s %s" (BorderValue.spacing x) (BorderValue.spacing y)
-                
+
+
         )
         |> callback
 

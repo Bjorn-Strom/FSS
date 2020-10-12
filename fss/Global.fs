@@ -25,7 +25,7 @@ module Global =
         interface IListStylePosition
         interface IFloat
         interface IQuote
-        
+
     type Auto =
         | Auto
         interface IContentSize
@@ -44,7 +44,7 @@ module Global =
         interface IPlacement
         interface IQuote
         interface IOverflow
-        
+
     type Center =
         | Center
         interface IAlignSelf
@@ -90,6 +90,7 @@ module Global =
         interface ITextUnderlineOffset
         interface ITextUnderlinePosition
         interface IColor
+        interface IBorder
         interface IBorderStyle
         interface IBorderWidth
         interface IBorderRadius

@@ -35,6 +35,7 @@ module Types =
     type ITextUnderlineOffset      = interface end
     type ITextUnderlinePosition    = interface end
     type IColor                    = interface end
+    type IBorder                   = interface end
     type IBorderStyle              = interface end
     type IBorderWidth              = interface end
     type IBorderRadius             = interface end
@@ -63,6 +64,8 @@ module Types =
     type ITimingFunction           = interface end
     type ILinearGradient           = interface end
     type IRadialGradient           = interface end
+    type IBackground               = interface end
+    type IBackgroundColor          = interface end
     type IBackgroundPosition       = interface end
     type IBackgroundOrigin         = interface end
     type IBackgroundClip           = interface end
@@ -84,8 +87,8 @@ module Types =
     type IPlacement                = interface end
     type IFloat                    = interface end
     type IQuote                    = interface end
-    type IOverflow                 = interface end 
-    
+    type IOverflow                 = interface end
+
     // Common
     type CounterStyle = CounterStyle of string
     let counterValue (CounterStyle c) = c

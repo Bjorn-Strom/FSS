@@ -1,11 +1,10 @@
 namespace Fss
 
+open Fss.Utilities
 open Types
 open Units.Angle
-open Units.Size
 open Units.Percent
 open Utilities.Helpers
-open Color
 open Global
 
 module Background =
@@ -84,8 +83,31 @@ module Background =
         | Local
         interface IBackgroundAttachment
 
+type Background =
+    {
+        Image      : IBackgroundImage option
+        Position   : IBackgroundPosition option
+        Repeat     : IBackgroundRepeat option
+        Attachment : IBackgroundAttachment option
+        Origin     : IBackgroundOrigin option
+        Clip       : IBackgroundClip option
+        Color      : IBackgroundColor option
+    }
+    with
+        interface IBackground
+        static member Create(?Image, ?Position, ?Repeat, ?Attachment, ?Origin, ?Clip, ?Color) =
+            { Image = Image
+              Position = Position
+              Repeat = Repeat
+              Attachment = Attachment
+              Origin = Origin
+              Clip = Clip
+              Color = Color }
+
+
 module BackgroundValues =
     open Background
+    open Color
 
     let position (v: IBackgroundPosition): string =
         match v with
@@ -94,6 +116,12 @@ module BackgroundValues =
             | :? Percent         as p -> Units.Percent.value p
             | :? Position        as position -> duToLowercase position
             | _ -> "Unknown background position"
+
+    let color (v: IBackgroundColor): string =
+        match v with
+            | :? CssColor as c -> Color.value c
+            | _ -> "Unknown background color"
+
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient
     let private compareLinearGradient (v: ILinearGradient): int =
@@ -162,7 +190,7 @@ module BackgroundValues =
                 sprintf "%s %s" acc (value elem)
             else
                 sprintf "%s, %s" acc (value elem)) ""
-        
+
     let linearGradientValue g = sprintf "linear-gradient(%s)"  (g |> List.sortBy compareLinearGradient |> combineGradient linearGradient)
 
     let image (v: IBackgroundImage): string =
@@ -173,11 +201,11 @@ module BackgroundValues =
             | RadialGradient g -> sprintf "radial-gradient(%s)" (g |> List.sortBy compareRadialGradient |> combineGradient2 radialGradient)
             | RepeatingLinearGradient g -> sprintf "repeating-linear-gradient(%s)" (g |> List.sortBy compareLinearGradient |> combineGradient linearGradient)
             | RepeatingRadialGradient g -> sprintf "repeating-radial-gradient(%s)" (g |> List.sortBy compareRadialGradient |> combineGradient2 radialGradient)
-            
+
         match v with
             | :? Image as i -> stringifyBackgroundImage i
             | _ -> "unknown background image"
-    
+
     let origin (v: IBackgroundOrigin): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
@@ -210,3 +238,20 @@ module BackgroundValues =
             | :? Global as g -> GlobalValue.globalValue g
             | :? Attachment as b -> duToLowercase b
             | _ -> "Unknown background attachment"
+
+    let background (v: IBackground): string =
+        let stringifyBackground (b: Background): string =
+            [ Option.map image b.Image
+              Option.map position b.Position
+              Option.map repeat b.Repeat
+              Option.map attachment b.Attachment
+              Option.map origin b.Origin
+              Option.map clip b.Clip
+              Option.map color b.Color ]
+            |> List.filter(fun x -> x.IsSome)
+            |> List.map (fun x -> if x.IsSome then x.Value else "")
+            |> String.concat " "
+
+        match v with
+            | :? Background as b -> stringifyBackground b
+            | _ -> "Unknown background value"
