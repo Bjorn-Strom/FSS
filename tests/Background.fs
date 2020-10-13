@@ -10,6 +10,15 @@ module Background =
         testList "Background"
             [
                 test
+                    "Background shorthand"
+                    [Background <| Background.Create(
+                                          Image = Background.Url("image.png"),
+                                          Repeat = Background.NoRepeat,
+                                          Position = Background.Center
+                                      )]
+                    ["background" ==> "url(image.png) center no-repeat"]
+
+                test
                     "background color"
                     [ BackgroundColor Color.red ]
                     [ "backgroundColor" ==> "#ff0000"]

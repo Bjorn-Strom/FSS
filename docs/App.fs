@@ -53,6 +53,34 @@ let ColorExamples () =
 let BackgroundExamples model dispatch =
     fragment []
         [
+            div []
+                [
+                    h2 [] [ str "Bakground shorthand" ]
+
+                    div [ ClassName (fss [
+                        Background <| Background.Create(Color = Color.green)
+                        Height (px 20)
+                        Width (px 20)
+                    ]) ] []
+
+                    div [ ClassName (fss [
+                        Background <|
+                            Background.Create(
+                                                 Repeat = Background.NoRepeat,
+                                                 Image = Background.Url("https://interactive-examples.mdn.mozilla.net/media/examples/lizard.png")
+                                             )
+                        Height (px 200)
+                        Width (px 200)
+                    ]) ] []
+
+                    div [ ClassName (fss [
+                        Background <| Background.Create(Origin = Background.ContentBox, Image = Background.RadialGradient [Color.crimson; Color.skyBlue])
+                        Height (px 60)
+                        Width (px 60)
+                    ]) ] []
+
+                ]
+
             h3 [] [ str "And gradients!" ]
 
             div [ ClassName (fss [Display Display.Flex]) ]
@@ -62,7 +90,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width (px 200)
                                 Height (px 200)
-                                BackgroundImage (Background.LinearGradient [ Color.red; Color.blue ] )
+                                BackgroundImage (Background.LinearGradient [ Color.red; Color.blue ])
                             ])
                     ] []
 
@@ -2463,9 +2491,10 @@ let render (model: Model) (dispatch: Msg -> unit) =
         [
             //ColorExamples ()
             //BackgroundExamples model dispatch
+
             //FontExamples ()
             //FontFaceExamples ()
-            BorderExamples ()
+            //BorderExamples ()
             //MarginExamples ()
             //PaddingExamples ()
             //TransformExamples ()

@@ -286,8 +286,8 @@ module Value =
 
                 | Color c            -> Property.value Property.Color ==> Color.value c
 
-                | Background            b  -> cssValue Property.Background           <| BackgroundValues.background
-                | BackgroundColor       bc -> cssValue Property.BackgroundColor      <| BackgroundValues.color
+                | Background            b  -> cssValue Property.Background           <| BackgroundValues.background b
+                | BackgroundColor       bc -> cssValue Property.BackgroundColor      <| BackgroundValues.color bc
                 | BackgroundImage       bi -> cssValue Property.BackgroundImage      <| BackgroundValues.image bi
                 | BackgroundPosition    b  -> cssValue Property.BackgroundPosition   <| BackgroundValues.position b
                 | BackgroundPositions   bs -> cssValue Property.BackgroundPosition   <| combineWs BackgroundValues.position bs

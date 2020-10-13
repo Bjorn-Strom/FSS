@@ -53,8 +53,6 @@ module BorderValue =
     open Units.Size
     open Units.Percent
 
-    let FOOBAR (b: Border) = Border.Create(Width = Border.Medium, Style = Border.Dashed, Color = Color.green)
-
     let width (v: IBorderWidth): string =
         match v with
             | :? Global      as g -> GlobalValue.globalValue g

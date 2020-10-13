@@ -36,7 +36,7 @@ module Background =
         interface IRadialGradient
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
-    type Image =
+    type Image  =
         | Url of string
         | LinearGradient of ILinearGradient list
         | RadialGradient of IRadialGradient list
@@ -102,8 +102,7 @@ type Background =
               Attachment = Attachment
               Origin = Origin
               Clip = Clip
-              Color = Color }
-
+              Color = Color } :> IBackground
 
 module BackgroundValues =
     open Background
