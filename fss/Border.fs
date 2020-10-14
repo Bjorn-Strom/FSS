@@ -96,9 +96,7 @@ module BorderValue =
     let border (b: IBorder): string =
         let stringifyBorder (b: Border): string =
             [Option.map width b.Width; Option.map style b.Style; Option.map color b.Color]
-            |> List.filter(fun x -> x.IsSome)
-            |> List.map (fun x -> if x.IsSome then x.Value else "")
-            |> String.concat " "
+            |> stringifyShorthand
 
         match b with
             | :? Global as g -> GlobalValue.globalValue g

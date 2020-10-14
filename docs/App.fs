@@ -297,6 +297,18 @@ let FontExamples () =
         [
             h1 [] [ str "fonts" ]
             h2 [] [ str "font-size"]
+            p [ClassName (fss [
+                Font <| Font.Create(FontSize = em 1.2, FontFamily = Font.FontFamily.SansSerif)
+            ])] [ str "1.2em sans serif" ]
+
+
+            p [ClassName (fss [
+                Font <| Font.Create(FontStyle = Font.Italic, FontVariant = Font.SmallCaps, FontWeight = Font.Bold, FontSize = px 16, LineHeight = (px 2), FontFamily = Font.Cursive )
+            ])] [ str "italic small-caps bold 16px 2 line height cursive" ]
+
+
+
+            h2 [] [ str "font-size"]
             p [ClassName (fss [FontSize Font.XxSmall])] [ str "Fonts can be xx-Small" ]
             p [ClassName (fss [FontSize Font.XSmall])] [ str "Fonts can be x-Small" ]
             p [ClassName (fss [FontSize Font.Small])] [ str "Fonts can be small" ]
@@ -2491,8 +2503,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
         [
             //ColorExamples ()
             //BackgroundExamples model dispatch
-
-            //FontExamples ()
+            FontExamples ()
             //FontFaceExamples ()
             //BorderExamples ()
             //MarginExamples ()

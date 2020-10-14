@@ -80,6 +80,7 @@ module Value =
         | FirstLine   of CSSProperty list
         | Selection   of CSSProperty list
 
+        | Font                  of IFont
         | FontSize              of IFontSize
         | FontStyle             of IFontStyle
         | FontWeight            of IFontWeight
@@ -338,21 +339,22 @@ module Value =
                 | FirstLine   f -> pseudoElementKebab Property.FirstLine   f
                 | Selection   s -> pseudoElement      Property.Selection   s
 
-                | FontSize              f  -> cssValue Property.FontSize             <| FontValues.fontSize f
-                | FontStyle             f  -> cssValue Property.FontStyle            <| FontValues.fontStyle f
-                | FontStretch           f  -> cssValue Property.FontStretch          <| FontValues.fontStretch f
-                | FontWeight            f  -> cssValue Property.FontWeight           <| FontValues.fontWeight f
+                | Font                  f  -> cssValue Property.Font                 <| FontValues.font f
+                | FontSize              f  -> cssValue Property.FontSize             <| FontValues.size f
+                | FontStyle             f  -> cssValue Property.FontStyle            <| FontValues.style f
+                | FontStretch           f  -> cssValue Property.FontStretch          <| FontValues.stretch f
+                | FontWeight            f  -> cssValue Property.FontWeight           <| FontValues.weight f
                 | LineHeight            l  -> cssValue Property.LineHeight           <| FontValues.lineHeight l
-                | FontFamily            f  -> cssValue Property.FontFamily           <| FontValues.fontFamily f
-                | FontFamilies          fs -> cssValue Property.FontFamily           <| combineComma FontValues.fontFamily fs
-                | FontFeatureSetting    f  -> cssValue Property.FontFeatureSettings  <| FontValues.fontFeatureSetting f
-                | FontFeatureSettings   fs -> cssValue Property.FontFeatureSettings  <| combineComma FontValues.fontFeatureSetting fs
-                | FontVariantNumeric    f  -> cssValue Property.FontVariantNumeric   <| FontValues.fontVariantNumeric f
-                | FontVariantNumerics   fs -> cssValue Property.FontVariantNumeric   <| combineWs FontValues.fontVariantNumeric fs
-                | FontVariantCaps       f  -> cssValue Property.FontVariantCaps      <| FontValues.fontVariantCap f
-                | FontVariantEastAsian  f  -> cssValue Property.FontVariantEastAsian <| FontValues.fontVariantEastAsian f
-                | FontVariantEastAsians fs -> cssValue Property.FontVariantEastAsian <| combineWs FontValues.fontVariantEastAsian fs
-                | FontVariantLigatures  f  -> cssValue Property.FontVariantLigatures <| FontValues.fontVariantLigature f
+                | FontFamily            f  -> cssValue Property.FontFamily           <| FontValues.family f
+                | FontFamilies          fs -> cssValue Property.FontFamily           <| combineComma FontValues.family fs
+                | FontFeatureSetting    f  -> cssValue Property.FontFeatureSettings  <| FontValues.featureSetting f
+                | FontFeatureSettings   fs -> cssValue Property.FontFeatureSettings  <| combineComma FontValues.featureSetting fs
+                | FontVariantNumeric    f  -> cssValue Property.FontVariantNumeric   <| FontValues.variantNumeric f
+                | FontVariantNumerics   fs -> cssValue Property.FontVariantNumeric   <| combineWs FontValues.variantNumeric fs
+                | FontVariantCaps       f  -> cssValue Property.FontVariantCaps      <| FontValues.variantCap f
+                | FontVariantEastAsian  f  -> cssValue Property.FontVariantEastAsian <| FontValues.variantEastAsian f
+                | FontVariantEastAsians fs -> cssValue Property.FontVariantEastAsian <| combineWs FontValues.variantEastAsian fs
+                | FontVariantLigatures  f  -> cssValue Property.FontVariantLigatures <| FontValues.variantLigature f
 
                 | TextAlign               t       -> cssValue Property.TextAlign               <| TextValue.align t
                 | TextDecorationLine      t       -> cssValue Property.TextDecorationLine      <| TextValue.decorationLine t

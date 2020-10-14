@@ -55,7 +55,14 @@ module Helpers =
             min
         else
             value
-            
+
+
+    let inline stringifyShorthand (shortList: 'a option list): string =
+            shortList
+            |> List.filter(fun x -> x.IsSome)
+            |> List.map (fun x -> if x.IsSome then x.Value else "")
+            |> String.concat " "
+
 module Converters =
     let floatToPercent (f: float): string = sprintf "%d%%" (int <| f * 100.0)
 

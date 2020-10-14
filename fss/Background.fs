@@ -247,9 +247,7 @@ module BackgroundValues =
               Option.map origin b.Origin
               Option.map clip b.Clip
               Option.map color b.Color ]
-            |> List.filter(fun x -> x.IsSome)
-            |> List.map (fun x -> if x.IsSome then x.Value else "")
-            |> String.concat " "
+              |> stringifyShorthand
 
         match v with
             | :? Background as b -> stringifyBackground b
