@@ -11,7 +11,7 @@
     <Compile Include="Property.fs" />
     <Compile Include="Animation.fs" />
     <Compile Include="Color.fs" />
-    <Compile Include="Fonts.fs" />
+    <Compile Include="Font.fs" />
     <Compile Include="Text.fs" />
     <Compile Include="Border.fs" />
     <Compile Include="Transform.fs" />

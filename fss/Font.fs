@@ -172,28 +172,34 @@ module Font =
         interface IFontVariantLigatures
         interface IFontVariant
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font
-type Font =
-    {
-        FontSize    : IFontSize option
-        FontFamily  : IFontFamily option
-        FontStretch : IFontStretch option
-        FontStyle   : IFontStyle option
-        FontVariant : IFontVariant option
-        FontWeight  : IFontWeight option
-        LineHeight  : ILineHeight option
-    }
-
-    with
-        interface IFont
-        static member Create(?FontStyle, ?FontVariant, ?FontWeight, ?FontSize, ?FontStretch, ?LineHeight, ?FontFamily)
-            = { FontStyle   = FontStyle
-                FontVariant = FontVariant
-                FontWeight  = FontWeight
-                FontSize    = FontSize
-                FontStretch = FontStretch
-                LineHeight  = LineHeight
-                FontFamily  = FontFamily } :> IFont
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font
+    type Font =
+        {
+            Size    : IFontSize
+            Family  : IFontFamily
+            Stretch : IFontStretch
+            Style   : IFontStyle
+            Variant : IFontVariant
+            Weight  : IFontWeight
+            LineHeight  : ILineHeight
+        }
+        with
+            interface IFont
+            
+    let size (size: IFontSize) font =
+        { font with Size = size } 
+    let family (family: FontFamily) font =
+        { font with Family = family}   
+    let stretch (stretch: IFontStretch) font =
+        { font with Stretch = stretch }  
+    let style (style: IFontStyle) font =
+        { font with Style = style }    
+    let variant (variant: IFontVariant) font =
+        { font with Variant = variant }  
+    let weight (weight: IFontWeight) font =
+        { font with Weight = weight }   
+    let lineHeight (height: ILineHeight) font =
+        { font with LineHeight = height }   
 
 module FontValues =
     open Font
@@ -221,6 +227,7 @@ module FontValues =
     let stretch (v: IFontStretch): string =
         match v with
             | :? Stretch as f -> duToKebab f
+            | :? Normal  as n -> GlobalValue.normal n
             | :? Percent as p -> Units.Percent.value p
             | :? Global  as g -> GlobalValue.globalValue g
             | _               -> "unknown font stretch value"
@@ -248,6 +255,7 @@ module FontValues =
             | :? Percent         as p -> Units.Percent.value p
             | :? Units.Size.Size as s -> Units.Size.value s
             | :? Global          as g -> GlobalValue.globalValue g
+            | :? Normal          as n -> GlobalValue.normal n
             | _                       -> "unknown font stretch value"
 
     let display (v: IFontDisplay): string =
@@ -268,7 +276,6 @@ module FontValues =
             | :? Global     as g -> GlobalValue.globalValue g
             | :? FontFamily as f -> parseFamilyValue f
             | _ -> "Unknown font family"
-
 
     let featureSetting (v: IFontFeatureSetting): string =
         let parseFontFeatureSetting (v: FeatureSetting): string =
@@ -339,18 +346,18 @@ module FontValues =
             | :? VariantCaps      as f -> duToKebab f
             | :? VariantEastAsian as f -> duToKebab f
             | :? VariantLigatures as f -> duToKebab f
+            | :? Normal           as n -> GlobalValue.normal n
             | _ -> "Unknown font variant ligatures"
 
     let font (b: IFont): string =
         let stringifyFont (f: Font): string =
-            [ Option.map style f.FontStyle
-              Option.map variant f.FontVariant
-              Option.map weight f.FontWeight
-              Option.map size f.FontSize
-              Option.map stretch f.FontStretch
-              Option.map lineHeight f.LineHeight
-              Option.map family f.FontFamily ]
-            |> stringifyShorthand
+            sprintf "%s %s %s %s/%s %s"
+                (style f.Style)
+                (variant f.Variant)
+                (weight f.Weight)
+                (size f.Size)
+                (lineHeight f.LineHeight)
+                (family f.Family)
 
         match b with
             | :? Font as f -> stringifyFont f

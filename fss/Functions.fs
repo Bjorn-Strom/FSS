@@ -128,3 +128,17 @@ module Functions =
         
     let toBackground (background: Background.Background): CSSProperty =
         background :> Types.IBackground |> BackgroundShorthand
+        
+    let Fonts: Font.Font =
+        {
+            Size        = Font.Medium
+            Family      = Font.Serif
+            Stretch     = Normal
+            Style       = Normal
+            Variant     = Normal
+            Weight      = Normal
+            LineHeight  = Normal
+        }
+    
+    let toFont (font: Font.Font): CSSProperty =
+        font :> Types.IFont |> FontShorthand

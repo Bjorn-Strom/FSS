@@ -80,7 +80,7 @@ module Value =
         | FirstLine   of CSSProperty list
         | Selection   of CSSProperty list
 
-        | Font                  of IFont
+        | FontShorthand         of IFont
         | FontSize              of IFontSize
         | FontStyle             of IFontStyle
         | FontWeight            of IFontWeight
@@ -339,7 +339,7 @@ module Value =
                 | FirstLine   f -> pseudoElementKebab Property.FirstLine   f
                 | Selection   s -> pseudoElement      Property.Selection   s
 
-                | Font                  f  -> cssValue Property.Font                 <| FontValues.font f
+                | FontShorthand         f  -> cssValue Property.Font                 <| FontValues.font f
                 | FontSize              f  -> cssValue Property.FontSize             <| FontValues.size f
                 | FontStyle             f  -> cssValue Property.FontStyle            <| FontValues.style f
                 | FontStretch           f  -> cssValue Property.FontStretch          <| FontValues.stretch f

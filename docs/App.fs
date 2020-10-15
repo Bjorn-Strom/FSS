@@ -302,13 +302,25 @@ let FontExamples () =
         [
             h1 [] [ str "fonts" ]
             h2 [] [ str "font-size"]
-            p [ClassName (fss [
-                Font <| Font.Create(FontSize = em 1.2, FontFamily = Font.FontFamily.SansSerif)
-            ])] [ str "1.2em sans serif" ]
+            p [ClassName (fss
+                [
+                    Fonts
+                    |> Font.size (em 1.2)
+                    |> Font.family Font.FontFamily.SansSerif
+                    |> toFont
+                ])] [ str "1.2em sans serif" ]
 
 
-            p [ClassName (fss [
-                Font <| Font.Create(FontStyle = Font.Italic, FontVariant = Font.SmallCaps, FontWeight = Font.Bold, FontSize = px 16, LineHeight = (px 2), FontFamily = Font.Cursive )
+            p [ClassName (fss
+                [
+                    Fonts
+                        |> Font.style Font.Italic
+                        |> Font.variant Font.SmallCaps
+                        |> Font.weight Font.Bold
+                        |> Font.size (px 16)
+                        |> Font.lineHeight (px 2)
+                        |> Font.family Font.Cursive
+                        |> toFont
             ])] [ str "italic small-caps bold 16px 2 line height cursive" ]
 
 
@@ -2511,55 +2523,13 @@ let PseudoElementExamples () =
                 ]
 
         ]
-module Knapp =
-    type Knapp =
-        {
-            Msg : Msg
-            Innhold: string
-            Aktiv: Aktiv
-            KnappType: KnappType
-        }
-    and Aktiv =
-    | Aktivert
-    | Deaktivert
-    and KnappType =
-    | Normal
-    | Hover
-
-    let knapp msg innhold =
-        {
-            Msg = msg
-            Innhold = innhold
-            Aktiv = Aktivert
-            KnappType = Normal
-        }
-
-    let withEnabled enabled knapp =
-        { knapp with Aktiv = enabled }
-
-    let toHtml knapp =
-        let deaktivert =
-            match knapp.Aktiv with
-            | Aktivert -> false
-            | Deaktivert -> true
-
-        button [ HTMLAttr.Disabled deaktivert ] [ str knapp.Innhold ]
-
-Knapp.knapp Foo "Dette er en knapp"
-|> Knapp.withEnabled Knapp.Deaktivert
-|> Knapp.toHtml
-
-Knapp.knapp Foo "Dette er en knapp"
-|> Knapp.toHtml
-
-
 let render (model: Model) (dispatch: Msg -> unit) =
     div []
         [
 
             //ColorExamples ()
-            BackgroundExamples model dispatch
-            //FontExamples ()
+            //BackgroundExamples model dispatch
+            FontExamples ()
             //FontFaceExamples ()
             //BorderExamples ()
             //MarginExamples ()

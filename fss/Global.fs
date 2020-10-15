@@ -57,7 +57,11 @@ module Global =
         | Normal
         interface IFontStyle
         interface IFontWeight
+        interface IFontStretch
+        interface IFontVariant
+        interface ILineHeight
         interface IContent
+      
 
     type Global =
         | Initial
