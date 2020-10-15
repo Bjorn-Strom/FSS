@@ -11,27 +11,53 @@ module Border =
             [
                 test
                     "Border shorthand width style and color"
-                    [ Border (Border.Create(Width = Border.Medium, Style = Border.Dashed, Color = Color.green)) ]
+                    [
+                        BorderFoo
+                        |> Border.width Border.Medium
+                        |> Border.style Border.Dashed
+                        |> Border.color Color.green
+                        |> toBorder
+                    ]
                     ["border" ==> "medium dashed #008000"]
 
                 test
                     "Border shorthand style and color"
-                    [ Border (Border.Create(Style = Border.Dashed, Color = Color.green)) ]
-                    ["border" ==> "dashed #008000"]
+                    [
+                        BorderFoo
+                        |> Border.style Border.Dashed
+                        |> Border.color Color.green
+                        |> toBorder
+                    ]
+                    ["border" ==> "medium dashed #008000"]
 
                 test
                     "Border shorthand color"
-                    [ Border (Border.Create(Color = Color.green)) ]
-                    ["border" ==> "#008000"]
+                    [
+                        BorderFoo
+                        |> Border.color Color.green
+                        |> toBorder
+                    ]
+                    ["border" ==> "medium none #008000"]
 
                 test
                     "Border shorthand color and style"
-                    [ Border (Border.Create(Color = Color.green,Style = Border.Dashed)) ]
-                    ["border" ==> "dashed #008000"]
+                    [
+                        BorderFoo
+                        |> Border.color Color.green
+                        |> Border.style Border.Dashed
+                        |> toBorder
+                    ]
+                    ["border" ==> "medium dashed #008000"]
 
                 test
                     "Border shorthand color, style and width"
-                    [ Border (Border.Create(Color = Color.green,Style = Border.Dashed, Width = Border.Medium)) ]
+                    [
+                        BorderFoo
+                        |> Border.color Color.green
+                        |> Border.style Border.Dashed
+                        |> Border.width Border.Medium
+                        |> toBorder
+                    ]
                     ["border" ==> "medium dashed #008000"]
 
                 test

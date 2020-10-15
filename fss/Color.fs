@@ -166,3 +166,4 @@ module Color =
     let yellowGreen = Utilities.Color.hex "9acd32" |> CssColor
     let rebeccaPurple = Utilities.Color.hex "663399" |> CssColor
     let transparent = Utilities.Color.rgba 0 0 0 0.0 |> CssColor
+    let currentColor = "currentColor" |> CssColor

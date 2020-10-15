@@ -119,7 +119,7 @@ module Value =
         | TextUnderlinePosition   of ITextUnderlinePosition
         | TextUnderlinePositions  of ITextUnderlinePosition * ITextUnderlinePosition
 
-        | Border            of IBorder
+        | BorderShorthand    of IBorder
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -378,7 +378,7 @@ module Value =
                 | TextUnderlinePosition   t       -> cssValue Property.TextUnderlinePosition   <| TextValue.underlinePosition t
                 | TextUnderlinePositions (t1, t2) -> cssValue Property.TextUnderlinePosition   <| sprintf "%s %s" (TextValue.underlinePosition t1) (TextValue.underlinePosition t2)
 
-                | Border b -> cssValue Property.Border <| BorderValue.border b
+                | BorderShorthand b -> cssValue Property.Border <| BorderValue.border b
 
                 | BorderStyle       bs  -> cssValue Property.BorderStyle       <| BorderValue.style bs
                 | BorderStyles      bss -> cssValue Property.BorderStyle       <| combineWs BorderValue.style bss

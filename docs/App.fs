@@ -17,6 +17,7 @@ type Msg =
     | SetFlexWrap of Flex.Wraps
     | SetAlignContent of Flex.Alignment
     | SetBackgroundRepeat of Background.Repeat
+    | Foo
 
 let init() = {
     FlexDirection = Flex.Row
@@ -507,7 +508,9 @@ let BorderExamples ()=
             p [ ClassName (
                   fss
                     [
-                        Border <| Border.Create(Style = Border.Solid)
+                        Border
+                        |> Border.style Border.Solid
+                        |> toBorder
                     ]
               ) ] [ str "This one is solid" ]
 
@@ -515,14 +518,21 @@ let BorderExamples ()=
             p [ ClassName (
                   fss
                     [
-                        Border (Border.Create(Width = px 2, Style = Border.Solid))
+                        BorderFoo
+                        |> Border.width (px 2)
+                        |> Border.style Border.Solid
+                        |> toBorder
                     ]
               ) ] [ str "So I am solid but 2 pixels" ]
 
             p [ ClassName (
                   fss
                     [
-                        Border (Border.Create(Width = Border.Medium, Style = Border.Dashed, Color = Color.green))
+                        BorderFoo
+                         |> Border.width Border.Medium
+                         |> Border.style Border.Dashed
+                         |> Border.color Color.green
+                         |> toBorder
                     ]
               ) ] [ str "Me medium and green" ]
 
@@ -2497,15 +2507,57 @@ let PseudoElementExamples () =
                 ]
 
         ]
+module Knapp =
+    type Knapp =
+        {
+            Msg : Msg
+            Innhold: string
+            Aktiv: Aktiv
+            KnappType: KnappType
+        }
+    and Aktiv =
+    | Aktivert
+    | Deaktivert
+    and KnappType =
+    | Normal
+    | Hover
+
+    let knapp msg innhold =
+        {
+            Msg = msg
+            Innhold = innhold
+            Aktiv = Aktivert
+            KnappType = Normal
+        }
+
+    let withEnabled enabled knapp =
+        { knapp with Aktiv = enabled }
+
+    let toHtml knapp =
+        let deaktivert =
+            match knapp.Aktiv with
+            | Aktivert -> false
+            | Deaktivert -> true
+
+        button [ HTMLAttr.Disabled deaktivert ] [ str knapp.Innhold ]
+
+Knapp.knapp Foo "Dette er en knapp"
+|> Knapp.withEnabled Knapp.Deaktivert
+|> Knapp.toHtml
+
+Knapp.knapp Foo "Dette er en knapp"
+|> Knapp.toHtml
+
 
 let render (model: Model) (dispatch: Msg -> unit) =
     div []
         [
+
             //ColorExamples ()
             //BackgroundExamples model dispatch
-            FontExamples ()
+            //FontExamples ()
             //FontFaceExamples ()
-            //BorderExamples ()
+            BorderExamples ()
             //MarginExamples ()
             //PaddingExamples ()
             //TransformExamples ()
@@ -2520,10 +2572,6 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //ListStyleExamples ()
             //CounterStyleExamples ()
             //PseudoElementExamples ()
-
-
-
-
         ]
 
 Program.mkSimple init update render
