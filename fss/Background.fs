@@ -83,26 +83,36 @@ module Background =
         | Local
         interface IBackgroundAttachment
 
-type Background =
-    {
-        Image      : IBackgroundImage option
-        Position   : IBackgroundPosition option
-        Repeat     : IBackgroundRepeat option
-        Attachment : IBackgroundAttachment option
-        Origin     : IBackgroundOrigin option
-        Clip       : IBackgroundClip option
-        Color      : IBackgroundColor option
-    }
-    with
-        interface IBackground
-        static member Create(?Image, ?Position, ?Repeat, ?Attachment, ?Origin, ?Clip, ?Color) =
-            { Image = Image
-              Position = Position
-              Repeat = Repeat
-              Attachment = Attachment
-              Origin = Origin
-              Clip = Clip
-              Color = Color } :> IBackground
+    type Background =
+        {
+            Image      : IBackgroundImage
+            Position   : IBackgroundPosition
+            Size       : IBackgroundSize
+            Repeat     : IBackgroundRepeat
+            Attachment : IBackgroundAttachment
+            Origin     : IBackgroundOrigin
+            Clip       : IBackgroundClip
+            Color      : IBackgroundColor
+        }
+        with
+            interface IBackground
+
+    let image (image: IBackgroundImage) background =
+        { background with Image = image }
+    let position (position: IBackgroundPosition) background =
+        { background with Position = position }
+    let size (size: IBackgroundSize) background =
+        { background with Size = size }
+    let repeat (repeat: IBackgroundRepeat) background =
+        { background with Repeat = repeat }
+    let attachment (attachment: IBackgroundAttachment) background =
+        { background with Attachment = attachment }
+    let origin (origin: IBackgroundOrigin) background =
+        { background with Origin = origin }
+    let clip (clip: IBackgroundClip) background =
+        { background with Clip = clip }
+    let color (color: IBackgroundColor) background =
+        { background with Color = color }
 
 module BackgroundValues =
     open Background
@@ -203,6 +213,7 @@ module BackgroundValues =
 
         match v with
             | :? Image as i -> stringifyBackgroundImage i
+            | :? None  as n -> GlobalValue.none n
             | _ -> "unknown background image"
 
     let origin (v: IBackgroundOrigin): string =
@@ -240,14 +251,15 @@ module BackgroundValues =
 
     let background (v: IBackground): string =
         let stringifyBackground (b: Background): string =
-            [ Option.map image b.Image
-              Option.map position b.Position
-              Option.map repeat b.Repeat
-              Option.map attachment b.Attachment
-              Option.map origin b.Origin
-              Option.map clip b.Clip
-              Option.map color b.Color ]
-              |> stringifyShorthand
+            sprintf "%s %s/%s %s %s %s %s %s"
+                (image b.Image)
+                (position b.Position)
+                (size b.Size)
+                (repeat b.Repeat)
+                (attachment b.Attachment)
+                (origin b.Origin)
+                (clip b.Clip)
+                (color b.Color)
 
         match v with
             | :? Background as b -> stringifyBackground b

@@ -59,23 +59,27 @@ let BackgroundExamples model dispatch =
                     h2 [] [ str "Bakground shorthand" ]
 
                     div [ ClassName (fss [
-                        Background <| Background.Create(Color = Color.green)
+                        Backgrounds
+                            |> Background.color Color.green
+                            |> toBackground
                         Height (px 20)
                         Width (px 20)
                     ]) ] []
 
                     div [ ClassName (fss [
-                        Background <|
-                            Background.Create(
-                                                 Repeat = Background.NoRepeat,
-                                                 Image = Background.Url("https://interactive-examples.mdn.mozilla.net/media/examples/lizard.png")
-                                             )
+                        Backgrounds
+                            |> Background.repeat Background.NoRepeat
+                            |> Background.image (Background.Url "https://interactive-examples.mdn.mozilla.net/media/examples/lizard.png")
+                            |> toBackground
                         Height (px 200)
                         Width (px 200)
                     ]) ] []
 
                     div [ ClassName (fss [
-                        Background <| Background.Create(Origin = Background.ContentBox, Image = Background.RadialGradient [Color.crimson; Color.skyBlue])
+                        Backgrounds
+                            |> Background.origin Background.ContentBox
+                            |> Background.image (Background.RadialGradient [Color.crimson; Color.skyBlue])
+                            |> toBackground
                         Height (px 60)
                         Width (px 60)
                     ]) ] []
@@ -508,7 +512,7 @@ let BorderExamples ()=
             p [ ClassName (
                   fss
                     [
-                        Border
+                        Borders
                         |> Border.style Border.Solid
                         |> toBorder
                     ]
@@ -518,7 +522,7 @@ let BorderExamples ()=
             p [ ClassName (
                   fss
                     [
-                        BorderFoo
+                        Borders
                         |> Border.width (px 2)
                         |> Border.style Border.Solid
                         |> toBorder
@@ -528,7 +532,7 @@ let BorderExamples ()=
             p [ ClassName (
                   fss
                     [
-                        BorderFoo
+                        Borders
                          |> Border.width Border.Medium
                          |> Border.style Border.Dashed
                          |> Border.color Color.green
@@ -2554,10 +2558,10 @@ let render (model: Model) (dispatch: Msg -> unit) =
         [
 
             //ColorExamples ()
-            //BackgroundExamples model dispatch
+            BackgroundExamples model dispatch
             //FontExamples ()
             //FontFaceExamples ()
-            BorderExamples ()
+            //BorderExamples ()
             //MarginExamples ()
             //PaddingExamples ()
             //TransformExamples ()

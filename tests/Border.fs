@@ -12,7 +12,7 @@ module Border =
                 test
                     "Border shorthand width style and color"
                     [
-                        BorderFoo
+                        Borders
                         |> Border.width Border.Medium
                         |> Border.style Border.Dashed
                         |> Border.color Color.green
@@ -23,7 +23,7 @@ module Border =
                 test
                     "Border shorthand style and color"
                     [
-                        BorderFoo
+                        Borders
                         |> Border.style Border.Dashed
                         |> Border.color Color.green
                         |> toBorder
@@ -33,7 +33,7 @@ module Border =
                 test
                     "Border shorthand color"
                     [
-                        BorderFoo
+                        Borders
                         |> Border.color Color.green
                         |> toBorder
                     ]
@@ -42,7 +42,7 @@ module Border =
                 test
                     "Border shorthand color and style"
                     [
-                        BorderFoo
+                        Borders
                         |> Border.color Color.green
                         |> Border.style Border.Dashed
                         |> toBorder
@@ -52,7 +52,7 @@ module Border =
                 test
                     "Border shorthand color, style and width"
                     [
-                        BorderFoo
+                        Borders
                         |> Border.color Color.green
                         |> Border.style Border.Dashed
                         |> Border.width Border.Medium

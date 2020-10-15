@@ -11,12 +11,15 @@ module Background =
             [
                 test
                     "Background shorthand"
-                    [Background <| Background.Create(
-                                          Image = Background.Url("image.png"),
-                                          Repeat = Background.NoRepeat,
-                                          Position = Background.Center
-                                      )]
-                    ["background" ==> "url(image.png) center no-repeat"]
+                    [
+                        Backgrounds
+                        |> Background.image (Background.Url "image.png")
+                        |> Background.repeat Background.Repeat
+                        |> Background.position Background.Center
+                        |> toBackground
+                    ]
+                    
+                    ["background" ==> "url(image.png) center/auto repeat scroll padding-box border-box rgba(0, 0, 0, 0.000000)"]
 
                 test
                     "background color"

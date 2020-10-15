@@ -104,12 +104,27 @@ module Functions =
     let ms (v: float): Units.Time.Time = sprintf "%.2fms" v |> Units.Time.Ms
 
     // Shorthand
-    let BorderFoo: Border.Border =
+    let Borders: Border.Border =
         {
             Width = Border.Width.Medium
             Style = None
-            Color = Color.currentColor
+            Color = currentColor
         }
 
     let toBorder (border: Border.Border): CSSProperty =
         border :> Types.IBorder |> BorderShorthand
+        
+    let Backgrounds: Background.Background =
+        {
+            Image      = None
+            Position   = pct 0
+            Size       = Auto
+            Repeat     = Background.Repeat
+            Attachment = Background.Scroll
+            Origin     = Background.PaddingBox
+            Clip       = Background.Clip.BorderBox
+            Color      = transparent
+        }
+        
+    let toBackground (background: Background.Background): CSSProperty =
+        background :> Types.IBackground |> BackgroundShorthand

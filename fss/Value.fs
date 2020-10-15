@@ -28,7 +28,7 @@ module Value =
 
         | Color of IColor
 
-        | Background            of IBackground
+        | BackgroundShorthand            of IBackground
         | BackgroundColor       of IBackgroundColor
         | BackgroundImage       of IBackgroundImage
         | BackgroundPosition    of IBackgroundPosition
@@ -287,7 +287,7 @@ module Value =
 
                 | Color c            -> Property.value Property.Color ==> Color.value c
 
-                | Background            b  -> cssValue Property.Background           <| BackgroundValues.background b
+                | BackgroundShorthand   b  -> cssValue Property.Background           <| BackgroundValues.background b
                 | BackgroundColor       bc -> cssValue Property.BackgroundColor      <| BackgroundValues.color bc
                 | BackgroundImage       bi -> cssValue Property.BackgroundImage      <| BackgroundValues.image bi
                 | BackgroundPosition    b  -> cssValue Property.BackgroundPosition   <| BackgroundValues.position b

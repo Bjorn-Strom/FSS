@@ -25,6 +25,7 @@ module Global =
         interface IListStylePosition
         interface IFloat
         interface IQuote
+        interface IBackgroundImage
 
     type Auto =
         | Auto
