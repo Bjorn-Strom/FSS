@@ -37,7 +37,7 @@ module Transition =
                             |> Transition.property Property.MarginRight
                             |> Transition.duration (sec 4.)
                             |> Transition.delay (sec 1.)
-                            |> Transition.timing Animation.EaseInOut
+                            |> Transition.timing TimingFunction.EaseInOut
                             |> toTransition
                     ]
                     ["transition" ==> "margin-right 4.00s ease-in-out 1.00s"]
@@ -134,77 +134,77 @@ module Transition =
 
                 test
                     "Transition timing function ease"
-                    [ TransitionTimingFunction Animation.Ease ]
+                    [ TransitionTimingFunction TimingFunction.Ease ]
                     ["transitionTimingFunction" ==> "ease"]
 
                 test
                     "Transition timing function ease in"
-                    [ TransitionTimingFunction Animation.EaseIn ]
+                    [ TransitionTimingFunction TimingFunction.EaseIn ]
                     ["transitionTimingFunction" ==> "ease-in"]
 
                 test
                     "Transition timinunction ease out"
-                    [ TransitionTimingFunction Animation.EaseOut ]
+                    [ TransitionTimingFunction TimingFunction.EaseOut ]
                     ["transitionTimingFunction" ==> "ease-out"]
 
                 test
                     "Transition timing function ease in out"
-                    [ TransitionTimingFunction Animation.EaseInOut ]
+                    [ TransitionTimingFunction TimingFunction.EaseInOut ]
                     ["transitionTimingFunction" ==> "ease-in-out"]
 
                 test
                     "Transition timing function linear"
-                    [ TransitionTimingFunction Animation.Linear ]
+                    [ TransitionTimingFunction TimingFunction.Linear ]
                     ["transitionTimingFunction" ==> "linear"]
 
                 test
                     "Transition timing function step start"
-                    [ TransitionTimingFunction Animation.StepStart ]
+                    [ TransitionTimingFunction TimingFunction.StepStart ]
                     ["transitionTimingFunction" ==> "step-start"]
 
                 test
                     "Transition timing function step end"
-                    [ TransitionTimingFunction Animation.StepEnd ]
+                    [ TransitionTimingFunction TimingFunction.StepEnd ]
                     ["transitionTimingFunction" ==> "step-end"]
 
                 test
                     "Transition timing function cubic bezier"
-                    [ TransitionTimingFunction (Animation.CubicBezier(0.0, 0.47, 0.32, 1.97)) ]
+                    [ TransitionTimingFunction (TimingFunction.CubicBezier(0.0, 0.47, 0.32, 1.97)) ]
                     ["transitionTimingFunction" ==> "cubic-bezier(0.00, 0.47, 0.32, 1.97)"]
 
                 test
                     "Transition timing function  step"
-                    [ TransitionTimingFunction (Animation.Step 5) ]
+                    [ TransitionTimingFunction (TimingFunction.Step 5) ]
                     ["transitionTimingFunction" ==> "steps(5)"]
 
                 test
                     "Transition timing function  step jump start"
-                    [ TransitionTimingFunction (Animation.Steps(5, Animation.JumpStart)) ]
+                    [ TransitionTimingFunction (TimingFunction.Steps(5, TimingFunction.JumpStart)) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-start)"]
 
                 test
                     "Transition timing function step jump end"
-                    [ TransitionTimingFunction (Animation.Steps(5, Animation.JumpEnd)) ]
+                    [ TransitionTimingFunction (TimingFunction.Steps(5, TimingFunction.JumpEnd)) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-end)"]
 
                 test
                     "Transition timing function step jump none"
-                    [ TransitionTimingFunction (Animation.Steps(5, Animation.JumpNone)) ]
+                    [ TransitionTimingFunction (TimingFunction.Steps(5, TimingFunction.JumpNone)) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-none)"]
 
                 test
                     "Transition timing function step jump both"
-                    [ TransitionTimingFunction (Animation.Steps(5, Animation.JumpBoth)) ]
+                    [ TransitionTimingFunction (TimingFunction.Steps(5, TimingFunction.JumpBoth)) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-both)"]
 
                 test
                     "Transition timing function step start"
-                    [ TransitionTimingFunction (Animation.Steps(5, Animation.Start)) ]
+                    [ TransitionTimingFunction (TimingFunction.Steps(5, TimingFunction.Start)) ]
                     ["transitionTimingFunction" ==> "steps(5, start)"]
 
                 test
                     "Transition timing function step end"
-                    [ TransitionTimingFunction (Animation.Steps(5, Animation.End)) ]
+                    [ TransitionTimingFunction (TimingFunction.Steps(5, TimingFunction.End)) ]
                     ["transitionTimingFunction" ==> "steps(5, end)"]
 
                 test

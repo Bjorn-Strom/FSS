@@ -158,7 +158,7 @@ module Functions =
         {
             Property = Property.All
             Duration = sec 0.
-            Timing   = Animation.Ease
+            Timing   = TimingFunction.Ease
             Delay    = sec 0.
         }
 
@@ -169,7 +169,7 @@ module Functions =
         {
             Name = None
             Duration = sec 0.0
-            TimingFunction = Animation.Ease
+            TimingFunction = TimingFunction.Ease
             Delay = sec 0.0
             IterationCount = Animation.IterationCount.Value 1
             Direction = Normal

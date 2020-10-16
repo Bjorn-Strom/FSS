@@ -232,7 +232,7 @@ let BackgroundExamples model dispatch =
                         BackgroundImage (Background.Url "https://s.cdpn.io/79/sprite-steps.png")
                         AnimationName frameAnimation
                         AnimationDuration (sec 1.0)
-                        AnimationTimingFunction (Animation.Step 10)
+                        AnimationTimingFunction (TimingFunction.Step 10)
                         AnimationIterationCount Animation.Infinite
                     ]
 
@@ -856,7 +856,7 @@ let TransformExamples () =
                         AnimationName spinningAnimation
                         AnimationDuration (sec 2.0)
                         AnimationIterationCount Animation.Infinite
-                        AnimationTimingFunction Animation.Linear
+                        AnimationTimingFunction TimingFunction.Linear
 
                     ]
 
@@ -902,7 +902,7 @@ let TransitionExamples () =
                         Height (px 200)
                         TransitionProperty Property.Transform
                         TransitionDuration (ms 300.0)
-                        TransitionTimingFunction (Animation.CubicBezier(0.0, 0.47, 0.32, 1.97))
+                        TransitionTimingFunction (TimingFunction.CubicBezier(0.0, 0.47, 0.32, 1.97))
                     ]
             ]
 
@@ -916,7 +916,7 @@ let TransitionExamples () =
                         Margins [ px 0; Auto; px 40]
                         Position Position.Relative
                         _Transition
-                            |> Transition.timing Animation.EaseOut
+                            |> Transition.timing TimingFunction.EaseOut
                             |> Transition.duration (sec 0.5)
                             |> toTransition
                     ]
@@ -993,7 +993,7 @@ let TransitionExamples () =
                 TransitionProperty Property.BackgroundColor
                 TransitionDuration (sec 2.5)
                 TransitionDelay (sec 2.5)
-                TransitionTimingFunction Animation.Ease
+                TransitionTimingFunction TimingFunction.Ease
                 Hover
                     [
                         BackgroundColor Color.green
@@ -1260,7 +1260,7 @@ let AnimationExamples () =
             [
                 AnimationName bounceFrames
                 AnimationDuration (sec 1.0)
-                AnimationTimingFunction Animation.Ease
+                AnimationTimingFunction TimingFunction.Ease
                 AnimationIterationCount Animation.Infinite
             ]
 
@@ -1269,7 +1269,7 @@ let AnimationExamples () =
             [
                 AnimationName sizeFrames
                 AnimationDuration (sec 3.0)
-                AnimationTimingFunction Animation.EaseInOut
+                AnimationTimingFunction TimingFunction.EaseInOut
                 AnimationIterationCount (Animation.IterationCount.Value 3)
             ]
 
@@ -1278,7 +1278,7 @@ let AnimationExamples () =
             [
                 AnimationNames [ bounceFrames; sizeFrames ]
                 AnimationDurations [ sec 1.0; sec 3.0 ]
-                AnimationTimingFunctions [ Animation.EaseInOut; Animation.Ease ]
+                AnimationTimingFunctions [ TimingFunction.EaseInOut; TimingFunction.Ease ]
                 AnimationIterationCounts [ Animation.Value 3; Animation.Infinite ]
             ]
 
@@ -1291,7 +1291,7 @@ let AnimationExamples () =
                 AnimationName spinnyFrames
                 AnimationDuration (sec 5.0)
                 AnimationIterationCount Animation.Infinite
-                AnimationTimingFunction Animation.Linear
+                AnimationTimingFunction TimingFunction.Linear
             ]
 
     let loader =
@@ -1323,7 +1323,7 @@ let AnimationExamples () =
                 BackgroundColor (hex "00dbde")
                 AnimationName loader
                 AnimationDuration (sec 2.0)
-                AnimationTimingFunction Animation.Linear
+                AnimationTimingFunction TimingFunction.Linear
                 AnimationIterationCount Animation.Infinite
             ]
 
@@ -1336,7 +1336,7 @@ let AnimationExamples () =
                 BackgroundColor Color.red
                 _Animation
                 |> Animation.duration (sec 1.5)
-                |> Animation.timingFunction Animation.EaseOut
+                |> Animation.timingFunction TimingFunction.EaseOut
                 |> Animation.delay (sec 0.0)
                 |> Animation.direction Animation.Alternate
                 |> Animation.iterationCount Animation.Infinite

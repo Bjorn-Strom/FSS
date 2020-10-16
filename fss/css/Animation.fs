@@ -6,29 +6,6 @@ open Fss.Utilities.Helpers
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
 module Animation =
-    // Animation timing
-    type Steps =
-        | JumpStart
-        | JumpEnd
-        | JumpNone
-        | JumpBoth
-        | Start
-        | End
-
-    type Timing =
-        | Ease
-        | EaseIn
-        | EaseOut
-        | EaseInOut
-        | Linear
-        | StepStart
-        | StepEnd
-        | CubicBezier of (float * float * float * float)
-        | Step of int
-        | Steps of int * Steps
-        interface IAnimationTimingFunction
-        interface ITimingFunction
-
     // Animation count
     type IterationCount =
         | Infinite
@@ -58,7 +35,7 @@ module Animation =
     type Animation =
         {
             Duration       : ITime
-            TimingFunction : IAnimationTimingFunction
+            TimingFunction : ITimingFunction
             Delay          : ITime
             IterationCount : IterationCount
             Direction      : IAnimationDirection
@@ -71,7 +48,7 @@ module Animation =
     let duration (duration: ITime) animation =
         { animation with Duration = duration }
 
-    let timingFunction (timingFunction: IAnimationTimingFunction) animation =
+    let timingFunction (timingFunction: ITimingFunction) animation =
         { animation with TimingFunction = timingFunction }
 
     let delay (delay: ITime) animation =
@@ -94,22 +71,6 @@ module Animation =
 
 module AnimationValue =
     open Animation
-
-    let private cubicBezier (a: float, b: float, c: float, d: float) =
-        sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" a b c d
-
-    let timingFunction (v: IAnimationTimingFunction): string =
-        let stringifyTiming (timing: Timing): string =
-            match timing with
-                | CubicBezier (a, b, c, d) -> cubicBezier(a, b, c, d)
-                | Step n -> sprintf "steps(%d)" n
-                | Steps (n, direction) -> sprintf "steps(%d, %s)" n (duToKebab direction)
-                | _ -> duToKebab timing
-
-        match v with
-            | :? Global as g -> GlobalValue.globalValue g
-            | :? Timing as t -> stringifyTiming t
-            | _              -> "Unknown animation timing function"
 
     let iterationCount (v: IterationCount): string =
         match v with
@@ -145,7 +106,7 @@ module AnimationValue =
         let stringifyAnimation (a: Animation): string =
             sprintf "%s %s %s %s %s %s %s %s"
                 (Units.Time.value a.Duration)
-                (timingFunction a.TimingFunction)
+                (TimingFunctionValue.timingFunction a.TimingFunction)
                 (Units.Time.value a.Delay)
                 (iterationCount a.IterationCount)
                 (direction a.Direction)

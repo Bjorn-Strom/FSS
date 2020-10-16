@@ -202,8 +202,8 @@ module Value =
         | AnimationNames           of IAnimationName list
         | AnimationDuration        of Time
         | AnimationDurations       of Time list
-        | AnimationTimingFunction  of IAnimationTimingFunction
-        | AnimationTimingFunctions of IAnimationTimingFunction list
+        | AnimationTimingFunction  of ITimingFunction
+        | AnimationTimingFunctions of ITimingFunction list
         | AnimationDelay           of Time
         | AnimationDelays          of Time list
         | AnimationIterationCount  of IterationCount
@@ -464,8 +464,8 @@ module Value =
                 | AnimationNames           ns  -> cssValue Property.AnimationName           <| combineComma AnimationValue.name ns
                 | AnimationDuration        d   -> cssValue Property.AnimationDuration       <| Units.Time.value d
                 | AnimationDurations       ds  -> cssValue Property.AnimationDuration       <| combineComma Units.Time.value ds
-                | AnimationTimingFunction  t   -> cssValue Property.AnimationTimingFunction <| AnimationValue.timingFunction t
-                | AnimationTimingFunctions ts  -> cssValue Property.AnimationTimingFunction <| combineComma AnimationValue.timingFunction ts
+                | AnimationTimingFunction  t   -> cssValue Property.AnimationTimingFunction <| TimingFunctionValue.timingFunction t
+                | AnimationTimingFunctions ts  -> cssValue Property.AnimationTimingFunction <| combineComma TimingFunctionValue.timingFunction ts
                 | AnimationDelay           d   -> cssValue Property.AnimationDelay          <| Units.Time.value d
                 | AnimationDelays          ds  -> cssValue Property.AnimationDelay          <| combineComma Units.Time.value ds
                 | AnimationIterationCount  i   -> cssValue Property.AnimationIterationCount <| AnimationValue.iterationCount i

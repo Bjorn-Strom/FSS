@@ -6,7 +6,6 @@ module Types =
     type IAnimationDirection       = interface end
     type IAnimationPlayState       = interface end
     type IAnimationName            = interface end
-    type IAnimationTimingFunction  = interface end
     type IAnimationFillMode        = interface end
     type IGlobal                   = interface end
     type IFont                     = interface end

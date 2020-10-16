@@ -17,7 +17,7 @@ module Animation =
                     [
                         _Animation
                         |> Animation.duration (sec 1.5)
-                        |> Animation.timingFunction Animation.EaseOut
+                        |> Animation.timingFunction TimingFunction.EaseOut
                         |> Animation.delay (sec 0.0)
                         |> Animation.direction Animation.Alternate
                         |> Animation.iterationCount Animation.Infinite
@@ -69,77 +69,77 @@ module Animation =
 
                 test
                     "Animation timing function ease"
-                    [ AnimationTimingFunction Animation.Ease ]
+                    [ AnimationTimingFunction TimingFunction.Ease ]
                     ["animationTimingFunction" ==> "ease"]
 
                 test
                     "Animation timing function ease in"
-                    [ AnimationTimingFunction Animation.EaseIn ]
+                    [ AnimationTimingFunction TimingFunction.EaseIn ]
                     ["animationTimingFunction" ==> "ease-in"]
 
                 test
                     "Animation timing function ease out"
-                    [ AnimationTimingFunction Animation.EaseOut ]
+                    [ AnimationTimingFunction TimingFunction.EaseOut ]
                     ["animationTimingFunction" ==> "ease-out"]
 
                 test
                     "Animation timing function ease in out"
-                    [ AnimationTimingFunction Animation.EaseInOut ]
+                    [ AnimationTimingFunction TimingFunction.EaseInOut ]
                     ["animationTimingFunction" ==> "ease-in-out"]
 
                 test
                     "Animation timing function linear"
-                    [ AnimationTimingFunction Animation.Linear ]
+                    [ AnimationTimingFunction TimingFunction.Linear ]
                     ["animationTimingFunction" ==> "linear"]
 
                 test
                     "Animation timing function step start"
-                    [ AnimationTimingFunction Animation.StepStart ]
+                    [ AnimationTimingFunction TimingFunction.StepStart ]
                     ["animationTimingFunction" ==> "step-start"]
 
                 test
                     "Animation timing function step end"
-                    [ AnimationTimingFunction Animation.StepEnd ]
+                    [ AnimationTimingFunction TimingFunction.StepEnd ]
                     ["animationTimingFunction" ==> "step-end"]
 
                 test
                     "Animation timing function cubic bezier"
-                    [ AnimationTimingFunction (Animation.CubicBezier(0.0, 0.47, 0.32, 1.97)) ]
+                    [ AnimationTimingFunction (TimingFunction.CubicBezier(0.0, 0.47, 0.32, 1.97)) ]
                     ["animationTimingFunction" ==> "cubic-bezier(0.00, 0.47, 0.32, 1.97)"]
 
                 test
                     "Animation timing function  step"
-                    [ AnimationTimingFunction (Animation.Step 5) ]
+                    [ AnimationTimingFunction (TimingFunction.Step 5) ]
                     ["animationTimingFunction" ==> "steps(5)"]
 
                 test
                     "Animation timing function  step jump start"
-                    [ AnimationTimingFunction (Animation.Steps(5, Animation.JumpStart)) ]
+                    [ AnimationTimingFunction (TimingFunction.Steps(5, TimingFunction.JumpStart)) ]
                     ["animationTimingFunction" ==> "steps(5, jump-start)"]
 
                 test
                     "Animation timing function step jump end"
-                    [ AnimationTimingFunction (Animation.Steps(5, Animation.JumpEnd)) ]
+                    [ AnimationTimingFunction (TimingFunction.Steps(5, TimingFunction.JumpEnd)) ]
                     ["animationTimingFunction" ==> "steps(5, jump-end)"]
 
                 test
                     "Animation timing function step jump none"
-                    [ AnimationTimingFunction (Animation.Steps(5, Animation.JumpNone)) ]
+                    [ AnimationTimingFunction (TimingFunction.Steps(5, TimingFunction.JumpNone)) ]
                     ["animationTimingFunction" ==> "steps(5, jump-none)"]
 
                 test
                     "Animation timing function step jump both"
-                    [ AnimationTimingFunction (Animation.Steps(5, Animation.JumpBoth)) ]
+                    [ AnimationTimingFunction (TimingFunction.Steps(5, TimingFunction.JumpBoth)) ]
                     ["animationTimingFunction" ==> "steps(5, jump-both)"]
 
                 test
                     "Animation timing function step start"
-                    [ AnimationTimingFunction (Animation.Steps(5, Animation.Start)) ]
+                    [ AnimationTimingFunction (TimingFunction.Steps(5, TimingFunction.Start)) ]
                     ["animationTimingFunction" ==> "steps(5, start)"]
 
                 test
                     "Animation timing function step end"
-                    [ AnimationTimingFunction (Animation.Steps(5, Animation.End)) ]
+                    [ AnimationTimingFunction (TimingFunction.Steps(5, TimingFunction.End)) ]
                     ["animationTimingFunction" ==> "steps(5, end)"]
 
                 test

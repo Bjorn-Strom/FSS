@@ -29,6 +29,7 @@ module Transition =
 
 module TransitionValue =
     open Transition
+    open TimingFunction
 
     let property (v: IProperty): string =
         match v with
@@ -38,8 +39,8 @@ module TransitionValue =
 
     let timing (v: ITimingFunction): string =
         match v with
-            | :? Global as g -> GlobalValue.globalValue g
-            | :? Timing as t -> AnimationValue.timingFunction t
+            | :? Global         as g -> GlobalValue.globalValue g
+            | :? TimingFunction as t -> TimingFunctionValue.timingFunction t
             | _ -> "Unknown transition property"
 
     let transition (v: ITransition): string =

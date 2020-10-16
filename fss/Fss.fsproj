@@ -9,6 +9,7 @@
     <Compile Include="css\Units.fs" />
     <Compile Include="css\Html.fs" />
     <Compile Include="css\Property.fs" />
+    <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Font.fs" />
