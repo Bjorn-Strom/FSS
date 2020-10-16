@@ -12,6 +12,7 @@ module Global =
         interface IPerspective
         interface IDisplay
         interface IAnimationFillMode
+        interface IAnimationName
         interface ITransform
         interface ITextTransform
         interface ITextDecorationLine
@@ -62,6 +63,7 @@ module Global =
         interface IFontVariant
         interface ILineHeight
         interface IContent
+        interface IAnimationDirection
 
 
     type Global =

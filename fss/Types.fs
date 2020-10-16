@@ -2,6 +2,7 @@ namespace Fss
 
 module Types =
     // Interfaces
+    type IAnimation                = interface end
     type IAnimationDirection       = interface end
     type IAnimationPlayState       = interface end
     type IAnimationName            = interface end

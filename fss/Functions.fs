@@ -1,5 +1,6 @@
 namespace Fss
 
+open Fss.Global
 open Value
 open Selector
 open Media
@@ -163,3 +164,18 @@ module Functions =
 
     let toTransition (transition: Transition.Transition): CSSProperty =
         transition :> Types.ITransition |> TransitionShorthand
+
+    let _Animation: Animation.Animation =
+        {
+            Name = None
+            Duration = sec 0.0
+            TimingFunction = Animation.Ease
+            Delay = sec 0.0
+            IterationCount = Animation.IterationCount.Value 1
+            Direction = Normal
+            FillMode = None
+            PlayState = Animation.PlayState.Running
+        }
+
+    let toAnimation (animation: Animation.Animation): CSSProperty =
+        animation :> Types.IAnimation |> AnimationShorthand

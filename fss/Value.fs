@@ -197,6 +197,7 @@ module Value =
         | Padding       of IPadding
         | Paddings      of IPadding list
 
+        | AnimationShorthand       of IAnimation
         | AnimationName            of IAnimationName
         | AnimationNames           of IAnimationName list
         | AnimationDuration        of Time
@@ -458,6 +459,7 @@ module Value =
                 | Padding       m  -> cssValue Property.Padding       <| PaddingValue.padding m
                 | Paddings      ms -> cssValue Property.Padding       <| combineWs PaddingValue.padding ms
 
+                | AnimationShorthand       a   -> cssValue Property.Animation               <| AnimationValue.animation a
                 | AnimationName            n   -> cssValue Property.AnimationName           <| AnimationValue.name n
                 | AnimationNames           ns  -> cssValue Property.AnimationName           <| combineComma AnimationValue.name ns
                 | AnimationDuration        d   -> cssValue Property.AnimationDuration       <| Units.Time.value d
@@ -481,10 +483,10 @@ module Value =
                 | TransformOrigins ts -> cssValue Property.TransformOrigin <| combineWs TransformValue.transformOrigin ts
 
                 | TransitionShorthand       t  -> cssValue Property.Transition               <| TransitionValue.transition t
-                | TransitionDelay           t  -> cssValue Property.TransitionDelay          <| TransitionValue.time t
-                | TransitionDelays          ts -> cssValue Property.TransitionDelay          <| combineComma TransitionValue.time ts
-                | TransitionDuration        t  -> cssValue Property.TransitionDuration       <| TransitionValue.time t
-                | TransitionDurations       ts -> cssValue Property.TransitionDuration       <| combineComma TransitionValue.time ts
+                | TransitionDelay           t  -> cssValue Property.TransitionDelay          <| Units.Time.value t
+                | TransitionDelays          ts -> cssValue Property.TransitionDelay          <| combineComma Units.Time.value ts
+                | TransitionDuration        t  -> cssValue Property.TransitionDuration       <| Units.Time.value t
+                | TransitionDurations       ts -> cssValue Property.TransitionDuration       <| combineComma Units.Time.value ts
                 | TransitionProperty        t  -> cssValue Property.TransitionProperty       <| TransitionValue.property t
                 | TransitionProperties      ts -> cssValue Property.TransitionProperty       <| combineComma TransitionValue.property ts
                 | TransitionTimingFunction  t  -> cssValue Property.TransitionTimingFunction <| TransitionValue.timing t

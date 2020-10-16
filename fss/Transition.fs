@@ -1,11 +1,9 @@
 ﻿namespace Fss
 
-open System.Net.NetworkInformation
 open Fss.Animation
 open Fss.Property
 open Types
 open Global
-open Units.Time
 
 module Transition =
     type Transition =
@@ -20,23 +18,17 @@ module Transition =
     let property (property: IProperty) transition =
         { transition with Property = property }
 
-    let duration (duration: ITime) transition =
+    let duration (duration: ITime) transition: Transition =
         { transition with Duration = duration }
 
     let timing (timing: ITimingFunction) transition =
         { transition with Timing = timing }
 
-    let delay (delay: ITime) transition =
+    let delay (delay: ITime) transition: Transition =
         { transition with Delay = delay }
 
 module TransitionValue =
     open Transition
-
-    let time (v: ITime): string =
-        match v with
-            | :? Global as g -> GlobalValue.globalValue g
-            | :? Time   as t -> Units.Time.value t
-            | _ -> "Unknown transition duration"
 
     let property (v: IProperty): string =
         match v with
@@ -54,9 +46,9 @@ module TransitionValue =
         let stringifyTransition (t: Transition): string =
             sprintf "%s %s %s %s"
                 (property t.Property)
-                (time t.Duration)
+                (Units.Time.value t.Duration)
                 (timing t.Timing)
-                (time t.Delay)
+                (Units.Time.value t.Delay)
 
         match v with
             | :? Transition as t -> stringifyTransition t

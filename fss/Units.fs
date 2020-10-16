@@ -120,12 +120,20 @@ module Resolution =
             | Dpi d -> sprintf "%sdpi" d
 
 module Time =
+    open Global
+
     type Time =
         | Sec of string
         | Ms of string
         interface ITime
 
-    let value (v: Time) =
-        match v with
+    let value (v: ITime): string =
+        let stringifyTime (t: Time) =
+            match t with
             | Sec s -> s
             | Ms ms -> ms
+
+        match v with
+            | :? Global as g -> GlobalValue.globalValue g
+            | :? Time   as t -> stringifyTime t
+            | _ -> "Unknown transition duration"

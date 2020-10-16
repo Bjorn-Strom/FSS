@@ -11,6 +11,22 @@ module Animation =
 
         testList "Animation"
             [
+
+                test
+                    "ANimation short hand"
+                    [
+                        _Animation
+                        |> Animation.duration (sec 1.5)
+                        |> Animation.timingFunction Animation.EaseOut
+                        |> Animation.delay (sec 0.0)
+                        |> Animation.direction Animation.Alternate
+                        |> Animation.iterationCount Animation.Infinite
+                        |> Animation.fillMode None
+                        |> Animation.playState Animation.Running
+                        |> Animation.name animationSample
+                        |> toAnimation
+                ] [ "animation" ==> "1.50s ease-out 0.00s infinite alternate none running animation-1oejj34"]
+
                 test
                     "Animation name"
                     [ AnimationName animationSample ]
@@ -167,7 +183,7 @@ module Animation =
 
                 test
                     "Animation direction normal"
-                    [ AnimationDirection Animation.Normal ]
+                    [ AnimationDirection Normal ]
                     ["animationDirection" ==> "normal"]
 
                 test

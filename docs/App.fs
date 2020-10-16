@@ -1327,8 +1327,46 @@ let AnimationExamples () =
                 AnimationIterationCount Animation.Infinite
             ]
 
+    let stretch =
+        fss
+            [
+                Height (px 250)
+                Width (px 250)
+                Margins [px 0; Auto]
+                BackgroundColor Color.red
+                _Animation
+                |> Animation.duration (sec 1.5)
+                |> Animation.timingFunction Animation.EaseOut
+                |> Animation.delay (sec 0.0)
+                |> Animation.direction Animation.Alternate
+                |> Animation.iterationCount Animation.Infinite
+                |> Animation.fillMode None
+                |> Animation.playState Animation.Running
+                |> Animation.name (keyframes
+                                       [
+                                           frame 0
+                                               [
+                                                   Transform (Transform.Scale 0.3)
+                                                   BackgroundColor Color.red
+                                                   BorderRadius (pct 100)
+                                               ]
+                                           frame 50
+                                               [
+                                                   BackgroundColor Color.orange
+                                               ]
+                                           frame 100
+                                               [
+                                                    Transform (Transform.Scale 1.5)
+                                                    BackgroundColor Color.yellow
+                                               ]
+                                       ])
+                |> toAnimation
+            ]
+
     fragment []
         [
+            h2 [] [str "Animation short hand"]
+            div [ ClassName stretch ] []
             p [] [ str "Things can animate now!" ]
             p [ClassName bounceAnimation] [str "Bouncing text"]
             p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
@@ -2647,9 +2685,9 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //MarginExamples ()
             //PaddingExamples ()
             //TransformExamples ()
-            TransitionExamples ()
+            //TransitionExamples ()
             //TextExamples ()
-            //AnimationExamples ()
+            AnimationExamples ()
             //FlexBoxExamples model dispatch
             //MediaQueryExamples ()
             //SelectorExamples ()
