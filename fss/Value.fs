@@ -4,6 +4,7 @@ open Fable.Core
 open Fable.Core.JsInterop
 
 open Fable.React.Props
+open Fss.Property
 open Types
 open Utilities.Helpers
 open Animation
@@ -218,6 +219,7 @@ module Value =
         | TransformOrigin  of ITransformOrigin
         | TransformOrigins of ITransformOrigin list
 
+        | TransitionShorthand       of ITransition
         | TransitionDuration        of ITime
         | TransitionDurations       of ITime list
         | TransitionDelay           of ITime
@@ -478,14 +480,15 @@ module Value =
                 | TransformOrigin t   -> cssValue Property.TransformOrigin <| TransformValue.transformOrigin t
                 | TransformOrigins ts -> cssValue Property.TransformOrigin <| combineWs TransformValue.transformOrigin ts
 
+                | TransitionShorthand       t  -> cssValue Property.Transition               <| TransitionValue.transition t
                 | TransitionDelay           t  -> cssValue Property.TransitionDelay          <| TransitionValue.time t
                 | TransitionDelays          ts -> cssValue Property.TransitionDelay          <| combineComma TransitionValue.time ts
                 | TransitionDuration        t  -> cssValue Property.TransitionDuration       <| TransitionValue.time t
                 | TransitionDurations       ts -> cssValue Property.TransitionDuration       <| combineComma TransitionValue.time ts
                 | TransitionProperty        t  -> cssValue Property.TransitionProperty       <| TransitionValue.property t
                 | TransitionProperties      ts -> cssValue Property.TransitionProperty       <| combineComma TransitionValue.property ts
-                | TransitionTimingFunction  t  -> cssValue Property.TransitionTimingFunction <| TransitionValue.timingFunction t
-                | TransitionTimingFunctions ts -> cssValue Property.TransitionTimingFunction <| combineComma TransitionValue.timingFunction ts
+                | TransitionTimingFunction  t  -> cssValue Property.TransitionTimingFunction <| TransitionValue.timing t
+                | TransitionTimingFunctions ts -> cssValue Property.TransitionTimingFunction <| combineComma TransitionValue.timing ts
 
                 | Cursor c -> cssValue Property.Cursor <| CursorValue.cursor c
 

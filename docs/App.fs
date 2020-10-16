@@ -59,7 +59,7 @@ let BackgroundExamples model dispatch =
                     h2 [] [ str "Bakground shorthand" ]
 
                     div [ ClassName (fss [
-                        Backgrounds
+                        _Background
                             |> Background.color Color.green
                             |> toBackground
                         Height (px 20)
@@ -67,7 +67,7 @@ let BackgroundExamples model dispatch =
                     ]) ] []
 
                     div [ ClassName (fss [
-                        Backgrounds
+                        _Background
                             |> Background.repeat Background.NoRepeat
                             |> Background.image (Background.Url "https://interactive-examples.mdn.mozilla.net/media/examples/lizard.png")
                             |> toBackground
@@ -76,7 +76,7 @@ let BackgroundExamples model dispatch =
                     ]) ] []
 
                     div [ ClassName (fss [
-                        Backgrounds
+                        _Background
                             |> Background.origin Background.ContentBox
                             |> Background.image (Background.RadialGradient [Color.crimson; Color.skyBlue])
                             |> toBackground
@@ -304,7 +304,7 @@ let FontExamples () =
             h2 [] [ str "font-size"]
             p [ClassName (fss
                 [
-                    Fonts
+                    _Font
                     |> Font.size (em 1.2)
                     |> Font.family Font.FontFamily.SansSerif
                     |> toFont
@@ -313,7 +313,7 @@ let FontExamples () =
 
             p [ClassName (fss
                 [
-                    Fonts
+                    _Font
                         |> Font.style Font.Italic
                         |> Font.variant Font.SmallCaps
                         |> Font.weight Font.Bold
@@ -524,7 +524,7 @@ let BorderExamples ()=
             p [ ClassName (
                   fss
                     [
-                        Borders
+                        _Border
                         |> Border.style Border.Solid
                         |> toBorder
                     ]
@@ -534,7 +534,7 @@ let BorderExamples ()=
             p [ ClassName (
                   fss
                     [
-                        Borders
+                        _Border
                         |> Border.width (px 2)
                         |> Border.style Border.Solid
                         |> toBorder
@@ -544,7 +544,7 @@ let BorderExamples ()=
             p [ ClassName (
                   fss
                     [
-                        Borders
+                        _Border
                          |> Border.width Border.Medium
                          |> Border.style Border.Dashed
                          |> Border.color Color.green
@@ -874,18 +874,6 @@ let TransformExamples () =
         ]
 
 let TransitionExamples () =
-    let box =
-        fss
-            [
-                Display Display.InlineBlock
-                BackgroundColor Color.pink
-                Width (px 200)
-                Height (px 200)
-                TransitionProperty Property.Transform
-                TransitionDuration (ms 300.0)
-                TransitionTimingFunction (Animation.CubicBezier(0.0, 0.47, 0.32, 1.97))
-            ]
-
     let trigger =
         fss
             [
@@ -905,13 +893,99 @@ let TransitionExamples () =
                                     ]
                             ]
                     ]
+
+                ! Html.Div
+                    [
+                        Display Display.InlineBlock
+                        BackgroundColor Color.pink
+                        Width (px 200)
+                        Height (px 200)
+                        TransitionProperty Property.Transform
+                        TransitionDuration (ms 300.0)
+                        TransitionTimingFunction (Animation.CubicBezier(0.0, 0.47, 0.32, 1.97))
+                    ]
             ]
 
     fragment []
         [
+            h2 [] [str "Transition shorthand"]
+
+            let widthAndPosition =
+                    [
+                        Width (pct 50)
+                        Margins [ px 0; Auto; px 40]
+                        Position Position.Relative
+                        _Transition
+                            |> Transition.timing Animation.EaseOut
+                            |> Transition.duration (sec 0.5)
+                            |> toTransition
+                    ]
+
+            let shadow =
+                [
+                    Color (hex "E39F81")
+                    TextShadow (Text.Shadow(px 1, px 1, px 0, (hex "FFE3BD")))
+                    Hover
+                        [
+                            TextShadows
+                                [
+                                    Text.Shadow(px 1, px 1, px 0, hex "FFE3BD")
+                                    Text.Shadow(px 2, px 2, px 0, hex "FFE3BD")
+                                    Text.Shadow(px 3, px 3, px 0, hex "FFE3BD")
+                                    Text.Shadow(px 4, px 4, px 0, hex "FFE3BD")
+                                    Text.Shadow(px 5, px 5, px 0, hex "FFE3BD")
+                                ]
+                        ]
+                ] @ widthAndPosition
+                |> fss
+
+            let box =
+                widthAndPosition @
+                    [
+                        _Border
+                            |> Border.width (px 5)
+                            |> Border.style Border.Solid
+                            |> Border.color Color.transparent
+                            |> toBorder
+                        Width (px 200)
+                        Height (px 100)
+                        Margins [px 0; Auto]
+                        Padding (px 10)
+                    ]
+
+            let one =
+                box @
+                    [
+                        BackgroundColor (hex "B0CBC4")
+                        Hover
+                            [
+                                BackgroundColor (hex "F2EBD8")
+                                _Border
+                                    |> Border.width (px 5)
+                                    |> Border.style Border.Solid
+                                    |> Border.color (hex "B0CBC4")
+                                    |> toBorder
+                                BorderTopLeftRadiuses [pct 100; px 20]
+                                BorderBottomRightRadiuses [pct 100; px 20]
+                            ]
+                    ] |> fss
+
+            let box = box |> fss
+
+            div [ ClassName shadow ]
+                [
+                    h2 [] [ str "Text-shadow" ]
+                ]
+
+            div [ ClassName one ]
+                [
+                    str "border-color, border-radius, background-color"
+                ]
+
+            h3 [] [str "Other transitions"]
             div [ ClassName trigger ]
                 [
-                    div [ ClassName box ] []
+                    div [] []
                 ]
 
             p [ClassName (fss [
@@ -2268,7 +2342,7 @@ let ListStyleExamples () =
             let shortHand =
                 fss
                     [
-                        ListStyles
+                        _ListStyle
                         |> ListStyle._type ListStyle.Georgian
                         |> ListStyle.position ListStyle.Outside
                         |> ListStyle.image (ListStyle.Url "https://interactive-examples.mdn.mozilla.net/media/examples/rocket.svg")
@@ -2287,7 +2361,7 @@ let ListStyleExamples () =
             let shortHand =
                 fss
                     [
-                        ListStyles
+                        _ListStyle
                         |> ListStyle._type ListStyle.Georgian
                         |> ListStyle.position ListStyle.Inside
                         |> ListStyle.image (ListStyle.Url "https://interactive-examples.mdn.mozilla.net/non-existent.svg")
@@ -2573,7 +2647,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //MarginExamples ()
             //PaddingExamples ()
             //TransformExamples ()
-            //TransitionExamples ()
+            TransitionExamples ()
             //TextExamples ()
             //AnimationExamples ()
             //FlexBoxExamples model dispatch
@@ -2581,7 +2655,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //SelectorExamples ()
             //CursorExamples ()
             //PsuedoClassExamples ()
-            ListStyleExamples ()
+            //ListStyleExamples ()
             //CounterStyleExamples ()
             //PseudoElementExamples ()
         ]

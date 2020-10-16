@@ -104,7 +104,7 @@ module Functions =
     let ms (v: float): Units.Time.Time = sprintf "%.2fms" v |> Units.Time.Ms
 
     // Shorthand
-    let Borders: Border.Border =
+    let _Border: Border.Border =
         {
             Width = Border.Width.Medium
             Style = None
@@ -114,7 +114,7 @@ module Functions =
     let toBorder (border: Border.Border): CSSProperty =
         border :> Types.IBorder |> BorderShorthand
 
-    let Backgrounds: Background.Background =
+    let _Background: Background.Background =
         {
             Image      = None
             Position   = pct 0
@@ -129,7 +129,7 @@ module Functions =
     let toBackground (background: Background.Background): CSSProperty =
         background :> Types.IBackground |> BackgroundShorthand
 
-    let Fonts: Font.Font =
+    let _Font: Font.Font =
         {
             Size        = Font.Medium
             Family      = Font.Serif
@@ -143,7 +143,7 @@ module Functions =
     let toFont (font: Font.Font): CSSProperty =
         font :> Types.IFont |> FontShorthand
 
-    let ListStyles: ListStyle.ListStyle =
+    let _ListStyle: ListStyle.ListStyle =
         {
             Type    = ListStyle.Disc
             Position = ListStyle.Outside
@@ -152,3 +152,14 @@ module Functions =
 
     let toListStyle (listStyle: ListStyle.ListStyle): CSSProperty =
         listStyle :> Types.IListStyle |> ListStyleShorthand
+
+    let _Transition: Transition.Transition =
+        {
+            Property = Property.All
+            Duration = sec 0.
+            Timing   = Animation.Ease
+            Delay    = sec 0.
+        }
+
+    let toTransition (transition: Transition.Transition): CSSProperty =
+        transition :> Types.ITransition |> TransitionShorthand

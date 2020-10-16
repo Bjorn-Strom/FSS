@@ -12,7 +12,7 @@ module Background =
                 test
                     "Background shorthand"
                     [
-                        Backgrounds
+                        _Background
                         |> Background.image (Background.Url "image.png")
                         |> Background.repeat Background.Repeat
                         |> Background.position Background.Center

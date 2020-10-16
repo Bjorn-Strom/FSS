@@ -18,7 +18,7 @@ module ListStyle =
                 test
                     "List style shorthand"
                     [
-                        ListStyles
+                        _ListStyle
                         |> ListStyle._type ListStyle.Georgian
                         |> ListStyle.position ListStyle.Outside
                         |> ListStyle.image (ListStyle.Url "https://interactive-examples.mdn.mozilla.net/media/examples/rocket.svg")
