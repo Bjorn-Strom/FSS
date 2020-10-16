@@ -229,9 +229,10 @@ module Value =
 
         | Cursor of ICursor
 
-        | ListStyleImage    of IListStyleImage
-        | ListStylePosition of IListStylePosition
-        | ListStyleType     of IListStyleType
+        | ListStyleShorthand of IListStyle
+        | ListStyleImage     of IListStyleImage
+        | ListStylePosition  of IListStylePosition
+        | ListStyleType      of IListStyleType
 
         | Content of IContent
 
@@ -488,9 +489,10 @@ module Value =
 
                 | Cursor c -> cssValue Property.Cursor <| CursorValue.cursor c
 
-                | ListStyleImage    l -> cssValue Property.ListStyleImage    <| ListStyleValue.image l
-                | ListStylePosition l -> cssValue Property.ListStylePosition <| ListStyleValue.position l
-                | ListStyleType     l -> cssValue Property.ListStyleType     <| ListStyleValue.styleType l
+                | ListStyleShorthand l -> cssValue Property.ListStyle         <| ListStyleValue.listStyle l
+                | ListStyleImage     l -> cssValue Property.ListStyleImage    <| ListStyleValue.image l
+                | ListStylePosition  l -> cssValue Property.ListStylePosition <| ListStyleValue.position l
+                | ListStyleType      l -> cssValue Property.ListStyleType     <| ListStyleValue.styleType l
 
                 | Content c -> cssValue Property.Content <| ContentValue.content c
 

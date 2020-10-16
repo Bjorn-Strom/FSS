@@ -113,7 +113,7 @@ module Functions =
 
     let toBorder (border: Border.Border): CSSProperty =
         border :> Types.IBorder |> BorderShorthand
-        
+
     let Backgrounds: Background.Background =
         {
             Image      = None
@@ -125,10 +125,10 @@ module Functions =
             Clip       = Background.Clip.BorderBox
             Color      = transparent
         }
-        
+
     let toBackground (background: Background.Background): CSSProperty =
         background :> Types.IBackground |> BackgroundShorthand
-        
+
     let Fonts: Font.Font =
         {
             Size        = Font.Medium
@@ -139,6 +139,16 @@ module Functions =
             Weight      = Normal
             LineHeight  = Normal
         }
-    
+
     let toFont (font: Font.Font): CSSProperty =
         font :> Types.IFont |> FontShorthand
+
+    let ListStyles: ListStyle.ListStyle =
+        {
+            Type    = ListStyle.Disc
+            Position = ListStyle.Outside
+            Image    = None
+        }
+
+    let toListStyle (listStyle: ListStyle.ListStyle): CSSProperty =
+        listStyle :> Types.IListStyle |> ListStyleShorthand

@@ -20,6 +20,7 @@ module Global =
         interface ITextEmphasisStyle
         interface ICursor
         interface IContent
+        interface IListStyle
         interface IListStyleImage
         interface IListStyleType
         interface IListStylePosition
@@ -61,7 +62,7 @@ module Global =
         interface IFontVariant
         interface ILineHeight
         interface IContent
-      
+
 
     type Global =
         | Initial
@@ -95,7 +96,6 @@ module Global =
         interface ITextUnderlineOffset
         interface ITextUnderlinePosition
         interface IColor
-        interface IBorder
         interface IBorderStyle
         interface IBorderWidth
         interface IBorderRadius
@@ -136,6 +136,7 @@ module Global =
         interface IPerspective
         interface ICursor
         interface IContent
+        interface IListStyle
         interface IListStyleImage
         interface IListStylePosition
         interface IListStyleType

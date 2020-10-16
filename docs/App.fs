@@ -2262,9 +2262,47 @@ let PsuedoClassExamples () =
                 ]
         ]
 
-let listStyleExamples () =
+let ListStyleExamples () =
     fragment []
         [
+            let shortHand =
+                fss
+                    [
+                        ListStyles
+                        |> ListStyle._type ListStyle.Georgian
+                        |> ListStyle.position ListStyle.Outside
+                        |> ListStyle.image (ListStyle.Url "https://interactive-examples.mdn.mozilla.net/media/examples/rocket.svg")
+                        |> toListStyle
+                    ]
+
+            ul [ ClassName shortHand ]
+                [
+                    str "Shorthand"
+                    li [] [str "List Item 1-1" ]
+                    li [] [str "List Item 1-2" ]
+                    li [] [str "List Item 1-3" ]
+                    li [] [str "List Item 1-4" ]
+                ]
+
+            let shortHand =
+                fss
+                    [
+                        ListStyles
+                        |> ListStyle._type ListStyle.Georgian
+                        |> ListStyle.position ListStyle.Inside
+                        |> ListStyle.image (ListStyle.Url "https://interactive-examples.mdn.mozilla.net/non-existent.svg")
+                        |> toListStyle
+                    ]
+
+            ul [ ClassName shortHand ]
+                [
+                    str "Shorthand"
+                    li [] [str "List Item 1-1" ]
+                    li [] [str "List Item 1-2" ]
+                    li [] [str "List Item 1-3" ]
+                    li [] [str "List Item 1-4" ]
+                ]
+
             let listStyleImage =
                 fss
                     [
@@ -2529,7 +2567,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
 
             //ColorExamples ()
             //BackgroundExamples model dispatch
-            FontExamples ()
+            //FontExamples ()
             //FontFaceExamples ()
             //BorderExamples ()
             //MarginExamples ()
@@ -2543,7 +2581,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //SelectorExamples ()
             //CursorExamples ()
             //PsuedoClassExamples ()
-            //ListStyleExamples ()
+            ListStyleExamples ()
             //CounterStyleExamples ()
             //PseudoElementExamples ()
         ]

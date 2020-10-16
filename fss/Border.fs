@@ -102,6 +102,5 @@ module BorderValue =
             sprintf "%s %s %s" (width b.Width) (style b.Style) (color b.Color)
 
         match b with
-            | :? Global as g -> GlobalValue.globalValue g
             | :? Border as b -> stringifyBorder b
             | _ -> "unknown border value"

@@ -83,6 +83,7 @@ module Types =
     type IContent                  = interface end
     type IRange                    = interface end
     type ISpeakAs                  = interface end
+    type IListStyle                = interface end
     type IListStylePosition        = interface end
     type IListStyleImage           = interface end
     type IListStyleType            = interface end
