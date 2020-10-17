@@ -26,7 +26,7 @@ module Global =
         interface IListStylePosition
         interface IFloat
         interface IQuote
-        interface IBackgroundImage
+        interface IImage
 
     type Auto =
         | Auto
@@ -122,7 +122,7 @@ module Global =
         interface ITime
         interface IProperty
         interface ITimingFunction
-        interface IBackgroundPosition
+        interface IImagePosition
         interface IBackgroundOrigin
         interface IBackgroundClip
         interface IBackgroundRepeat
@@ -143,6 +143,7 @@ module Global =
         interface IFloat
         interface IQuote
         interface IOverflow
+        interface IImage
 
 module GlobalValue =
     open Global

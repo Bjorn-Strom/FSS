@@ -66,13 +66,11 @@ module Types =
     type IRadialGradient           = interface end
     type IBackground               = interface end
     type IBackgroundColor          = interface end
-    type IBackgroundPosition       = interface end
     type IBackgroundOrigin         = interface end
     type IBackgroundClip           = interface end
     type IBackgroundRepeat         = interface end
     type IBackgroundSize           = interface end
     type IBackgroundAttachment     = interface end
-    type IBackgroundImage          = interface end
     type IContentSize              = interface end
     type ISize                     = interface end
     type IVisibility               = interface end
@@ -88,6 +86,9 @@ module Types =
     type IFloat                    = interface end
     type IQuote                    = interface end
     type IOverflow                 = interface end
+    type IImage                    = interface end
+    type IImagePosition            = interface end
+
 
     // Common
     type CounterStyle = CounterStyle of string

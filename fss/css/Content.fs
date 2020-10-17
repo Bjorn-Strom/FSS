@@ -35,7 +35,7 @@ module ContentValue =
                 | UrlWithAlt (u, t) -> sprintf "url(%s) / \"%s\"" u t
                 | Attribute a       -> sprintf "attr(%s)" <| AttributeValues.attribute a
                 | String    s       -> sprintf "\"%s\"" s
-                | LinearGradient g  -> BackgroundValues.linearGradientValue g
+                | LinearGradient g  -> ImageValue.linearGradientValue g
                 | _                 -> duToKebab c
         
         match v with

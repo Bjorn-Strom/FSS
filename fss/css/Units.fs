@@ -16,7 +16,7 @@ module Percent =
         interface IVerticalAlign
         interface ILinearGradient
         interface IRadialGradient
-        interface IBackgroundPosition
+        interface IImagePosition
         interface IBackgroundSize
         interface IContentSize
         interface ILineHeight
@@ -58,7 +58,7 @@ module Size =
         interface IVerticalAlign
         interface ILinearGradient
         interface IRadialGradient
-        interface IBackgroundPosition
+        interface IImagePosition
         interface IBackgroundSize
         interface IContentSize
         interface ILineHeight

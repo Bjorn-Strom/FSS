@@ -27,7 +27,6 @@ module Property =
         | BackgroundPosition
         | BackgroundRepeat
         | BackgroundSize
-        | Background
         | Bleed
         | BorderBottomColor
         | BorderBottomLeftRadius

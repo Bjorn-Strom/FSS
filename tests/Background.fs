@@ -16,207 +16,207 @@ module Background =
 
                 test
                     "background image"
-                    [ BackgroundImage (Background.Url "image.png") ]
+                    [ BackgroundImage (Image.Url "image.png") ]
                     [ "backgroundImage" ==> "url(image.png)" ]
 
                 test
                     "background as linear gradient"
-                    [ BackgroundImage (Background.LinearGradient [ Color.red; Color.blue; deg 45.0; px 10 ] ) ]
+                    [ BackgroundImage (Image.LinearGradient [ Color.red; Color.blue; deg 45.0; px 10 ] ) ]
                     ["backgroundImage" ==> "linear-gradient(45.00deg, #ff0000, #0000ff 10px)"]
 
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06"; Background.Circle ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06"; Image.Circle ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle, #ffff00, #f06d06)"]
 
                 test
                     "background as ellipse radial gradient"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06"; Background.Ellipse ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06"; Image.Ellipse ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circleside closest corner"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleSide Background.ClosestCorner ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleSide Image.ClosestCorner ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-corner, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circleside closest side"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleSide Background.ClosestSide ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleSide Image.ClosestSide ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-side, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circleside farthest corner"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleSide Background.FarthestCorner ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleSide Image.FarthestCorner ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-corner, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circleside farthest side"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleSide Background.FarthestSide ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleSide Image.FarthestSide ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-side, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse-side closest corner"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseSide Background.ClosestCorner ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseSide Image.ClosestCorner ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-corner, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse-side closest side"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseSide Background.ClosestSide ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseSide Image.ClosestSide ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-side, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse-side farthest corner"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseSide Background.FarthestCorner ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseSide Image.FarthestCorner ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-corner, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse-side farthest side"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseSide Background.FarthestSide ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseSide Image.FarthestSide ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-side, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at top"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Top ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Top ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at top, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at top right"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Top; Background.Right ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Top; Image.Right ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at top right, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at top left"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Top; Background.Left ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Top; Image.Left ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at top left, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at top center"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Top; Background.Center ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Top; Image.Center ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at top center, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at bottom"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Bottom ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Bottom ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at bottom, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at bottom right"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Bottom; Background.Right ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Bottom; Image.Right ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at bottom right, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at bottom left"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Bottom; Background.Left ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Bottom; Image.Left ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at bottom left, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at bottom center"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Bottom; Background.Center ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Bottom; Image.Center ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at bottom center, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at center"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Center ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Center ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at center, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at center right"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Center; Background.Right ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Center; Image.Right ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at center right, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at center left"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Center; Background.Left ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Center; Image.Left ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at center left, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient circle at center bottom"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.CircleAt [ Background.Center; Background.Bottom ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.CircleAt [ Image.Center; Image.Bottom ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(circle at center bottom, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at top"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Top ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Top ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at top, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at top right"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Top; Background.Right ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Top; Image.Right ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at top right, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at top left"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Top; Background.Left ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Top; Image.Left ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at top left, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at top center"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Top; Background.Center ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Top; Image.Center ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at top center, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at bottom"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Bottom ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Bottom ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at bottom, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at bottom right"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Bottom; Background.Right ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Bottom; Image.Right ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at bottom right, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at bottom left"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Bottom; Background.Left ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Bottom; Image.Left ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at bottom left, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at bottom center"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Bottom; Background.Center ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Bottom; Image.Center ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at bottom center, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at center"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Center ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Center ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at center, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at center right"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Center; Background.Right ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Center; Image.Right ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at center right, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at center left"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Center; Background.Left ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Center; Image.Left ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at center left, #ffff00, #f06d06)"]
 
                 test
                     "background as radial gradient ellipse at center bottom"
-                    [ BackgroundImage ( Background.RadialGradient [ Color.yellow; hex "f06d06";  Background.EllipseAt [ Background.Center; Background.Bottom ] ] ) ]
+                    [ BackgroundImage ( Image.RadialGradient [ Color.yellow; hex "f06d06";  Image.EllipseAt [ Image.Center; Image.Bottom ] ] ) ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at center bottom, #ffff00, #f06d06)"]
 
                 test
                     "background position to top"
-                    [ BackgroundPosition Background.Top ]
+                    [ BackgroundPosition Image.Top ]
                     [ "backgroundPosition" ==> "top"]
 
                 test
                     "background position to bottom"
-                    [ BackgroundPosition Background.Bottom]
+                    [ BackgroundPosition Image.Bottom]
                     [ "backgroundPosition" ==> "bottom" ]
 
                 test
                     "background position to left"
-                    [ BackgroundPosition Background.Left]
+                    [ BackgroundPosition Image.Left]
                     [ "backgroundPosition" ==> "left" ]
 
                 test
                     "background position to right"
-                    [ BackgroundPosition Background.Right]
+                    [ BackgroundPosition Image.Right]
                     [ "backgroundPosition" ==> "right" ]
 
                 test
                     "background position to center"
-                    [ BackgroundPosition Background.Center]
+                    [ BackgroundPosition Image.Center]
                     [ "backgroundPosition" ==> "center" ]
 
                 test
@@ -246,7 +246,7 @@ module Background =
 
                 test
                     "background positions"
-                    [ BackgroundPositions [ Background.Bottom; px 10; Background.Right; px 20 ] ]
+                    [ BackgroundPositions [ Image.Bottom; px 10; Image.Right; px 20 ] ]
                     [ "backgroundPosition" ==> "bottom 10px right 20px" ]
 
                 test

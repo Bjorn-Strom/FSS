@@ -14,6 +14,8 @@
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Font.fs" />
     <Compile Include="css\Text.fs" />
+    <Compile Include="css\Image.fs" />
+    <Compile Include="css\Background.fs" />
     <Compile Include="css\Border.fs" />
     <Compile Include="css\Transform.fs" />
     <Compile Include="css\Transition.fs" />
@@ -24,7 +26,6 @@
     <Compile Include="css\Selector.fs" />
     <Compile Include="css\Visibility.fs" />
     <Compile Include="css\Position.fs" />
-    <Compile Include="css\Background.fs" />
     <Compile Include="css\Perspective.fs" />
     <Compile Include="css\Cursor.fs" />
     <Compile Include="css\ListStyle.fs" />

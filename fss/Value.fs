@@ -27,9 +27,9 @@ module Value =
         | Color of IColor
 
         | BackgroundColor       of IBackgroundColor
-        | BackgroundImage       of IBackgroundImage
-        | BackgroundPosition    of IBackgroundPosition
-        | BackgroundPositions   of IBackgroundPosition list
+        | BackgroundImage       of IImage
+        | BackgroundPosition    of IImagePosition
+        | BackgroundPositions   of IImagePosition list
         | BackgroundOrigin      of IBackgroundOrigin
         | BackgroundClip        of IBackgroundClip
         | BackgroundRepeat      of IBackgroundRepeat
@@ -150,6 +150,8 @@ module Value =
         | BorderCollapse of IBorderCollapse
         | BorderSpacing  of IBorderSpacing
         | BorderSpacing2 of IBorderSpacing * IBorderSpacing
+        
+        | BorderImageSource of IImage
 
         | Width       of IContentSize
         | MinWidth    of IContentSize
@@ -281,10 +283,10 @@ module Value =
 
                 | Color c            -> Property.value Property.Color ==> Color.value c
 
-                | BackgroundColor       bc -> cssValue Property.BackgroundColor      <| BackgroundValues.color bc
-                | BackgroundImage       bi -> cssValue Property.BackgroundImage      <| BackgroundValues.image bi
-                | BackgroundPosition    b  -> cssValue Property.BackgroundPosition   <| BackgroundValues.position b
-                | BackgroundPositions   bs -> cssValue Property.BackgroundPosition   <| combineWs BackgroundValues.position bs
+                | BackgroundColor       bc -> cssValue Property.BackgroundColor      <| ImageValue.color bc
+                | BackgroundImage       bi -> cssValue Property.BackgroundImage      <| ImageValue.image bi
+                | BackgroundPosition    b  -> cssValue Property.BackgroundPosition   <| ImageValue.position b
+                | BackgroundPositions   bs -> cssValue Property.BackgroundPosition   <| combineWs ImageValue.position bs
                 | BackgroundOrigin      b  -> cssValue Property.BackgroundOrigin     <| BackgroundValues.origin b
                 | BackgroundClip        b  -> cssValue Property.BackgroundClip       <| BackgroundValues.clip b
                 | BackgroundRepeat      b  -> cssValue Property.BackgroundRepeat     <| BackgroundValues.repeat b
@@ -405,6 +407,8 @@ module Value =
                 | BorderCollapse b      -> cssValue Property.BorderCollapse <| BorderValue.collapse b
                 | BorderSpacing  b      -> cssValue Property.BorderSpacing  <| BorderValue.spacing b
                 | BorderSpacing2 (x, y) -> cssValue Property.BorderSpacing  <| sprintf "%s %s" (BorderValue.spacing x) (BorderValue.spacing y)
+                
+                | BorderImageSource b -> cssValue Property.BorderImageSource <| ImageValue.image b
 
                 | Width     w -> cssValue Property.Width     <| ContentSize.value w
                 | MinWidth  w -> cssValue Property.MinWidth  <| ContentSize.value w

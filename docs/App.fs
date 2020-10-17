@@ -50,7 +50,7 @@ let ColorExamples () =
             p [ ClassName (fss [Color Unset]) ] [ str "Colors can be unset"]
         ]
 
-let BackgroundExamples model dispatch =
+let BackgroundExamples model dispatch =    
     fragment []
         [
             div []
@@ -65,14 +65,14 @@ let BackgroundExamples model dispatch =
 
                     div [ ClassName (fss [
                         BackgroundRepeat Background.NoRepeat
-                        BackgroundImage (Background.Url "https://interactive-examples.mdn.mozilla.net/media/examples/lizard.png")
+                        BackgroundImage (Image.Url "https://interactive-examples.mdn.mozilla.net/media/examples/lizard.png")
                         Height (px 200)
                         Width (px 200)
                     ]) ] []
 
                     div [ ClassName (fss [
                         BackgroundOrigin Background.ContentBox
-                        BackgroundImage (Background.RadialGradient [Color.crimson; Color.skyBlue])
+                        BackgroundImage (Image.RadialGradient [Color.crimson; Color.skyBlue])
                         Height (px 60)
                         Width (px 60)
                     ]) ] []
@@ -88,7 +88,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width (px 200)
                                 Height (px 200)
-                                BackgroundImage (Background.LinearGradient [ Color.red; Color.blue ])
+                                BackgroundImage (Image.LinearGradient [ Color.red; Color.blue ])
                             ])
                     ] []
 
@@ -97,7 +97,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width (px 200)
                                 Height (px 200)
-                                BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; Color.blue ] )
+                                BackgroundImage (Image.LinearGradient [ Image.Right; Color.red; Color.blue ] )
                             ])
                     ] []
 
@@ -106,7 +106,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width (px 200)
                                 Height (px 200)
-                                BackgroundImage (Background.RadialGradient [ Color.red; Color.blue ] )
+                                BackgroundImage (Image.RadialGradient [ Color.red; Color.blue ] )
                             ])
                     ] []
 
@@ -115,7 +115,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width (px 200)
                                 Height (px 200)
-                                BackgroundImage (Background.RepeatingRadialGradient [ Color.red; Color.red; px 10; Color.blue; px 10; Color.blue; px 20 ] )
+                                BackgroundImage (Image.RepeatingRadialGradient [ Color.red; Color.red; px 10; Color.blue; px 10; Color.blue; px 20 ] )
                             ])
                     ] []
                 ]
@@ -128,7 +128,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width (px 200)
                                 Height (px 200)
-                                BackgroundImage (Background.RepeatingRadialGradient [ hex "#e66465"; hex "9198e5"; pct 20 ] )
+                                BackgroundImage (Image.RepeatingRadialGradient [ hex "#e66465"; hex "9198e5"; pct 20 ] )
                             ])
                     ] []
 
@@ -137,7 +137,7 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width (px 200)
                                     Height (px 200)
-                                    BackgroundImage (Background.LinearGradient [ Background.Bottom; Color.red; hex "f06d06" ] )
+                                    BackgroundImage (Image.LinearGradient [ Image.Bottom; Color.red; hex "f06d06" ] )
                                 ])
                         ] [ ]
 
@@ -146,7 +146,7 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width (px 200)
                                     Height (px 200)
-                                    BackgroundImage (Background.LinearGradient [deg 72.0; Color.red; hex "f06d06" ] )
+                                    BackgroundImage (Image.LinearGradient [deg 72.0; Color.red; hex "f06d06" ] )
                                 ])
                         ] []
 
@@ -155,7 +155,7 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width (px 200)
                                     Height (px 200)
-                                    BackgroundImage (Background.LinearGradient [ Background.Right; Color.red; hex "f06d06"; rgb 255 255 0; Color.green ] )
+                                    BackgroundImage (Image.LinearGradient [ Image.Right; Color.red; hex "f06d06"; rgb 255 255 0; Color.green ] )
                                 ])
                         ] []
                 ]
@@ -168,7 +168,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width (px 200)
                                 Height (px 200)
-                                BackgroundImage (Background.LinearGradient [ Background.Position.Right; Color.red; Color.yellow; pct 10 ] )
+                                BackgroundImage (Image.LinearGradient [ Image.Position.Right; Color.red; Color.yellow; pct 10 ] )
                             ])
                     ] []
 
@@ -177,7 +177,7 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width (px 200)
                                     Height (px 200)
-                                    BackgroundImage (Background.LinearGradient [ Background.Right; hex "fffdc2"; hex "fffdc2"; pct 15; hex "d7f0a2"; pct 15; hex "d7f0a2"; pct 85; hex "fffdc2"; pct 85 ] )
+                                    BackgroundImage (Image.LinearGradient [ Image.Right; hex "fffdc2"; hex "fffdc2"; pct 15; hex "d7f0a2"; pct 15; hex "d7f0a2"; pct 85; hex "fffdc2"; pct 85 ] )
                                 ])
                         ] []
 
@@ -186,7 +186,7 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width (px 200)
                                     Height (px 200)
-                                    BackgroundImage (Background.RadialGradient [ Background.CircleAt [ Background.Top; Background.Right]; Color.yellow; hex "f06d06"] )
+                                    BackgroundImage (Image.RadialGradient [ Image.CircleAt [ Image.Top; Image.Right]; Color.yellow; hex "f06d06"] )
                                 ])
                         ] []
 
@@ -195,7 +195,7 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width (px 200)
                                     Height (px 200)
-                                    BackgroundImage (Background.RadialGradient [ Background.CircleAt [pct 100]; hex "333"; hex "333"; pct 50; hex "eee"; pct 75; hex "333"; pct 75] )
+                                    BackgroundImage (Image.RadialGradient [ Image.CircleAt [pct 100]; hex "333"; hex "333"; pct 50; hex "eee"; pct 75; hex "333"; pct 75] )
                                 ])
                         ] []
                 ]
@@ -206,7 +206,7 @@ let BackgroundExamples model dispatch =
                     [
                         Width (px 200)
                         Height (px 200)
-                        BackgroundImage (Background.Url "https://unsplash.it/200/200")
+                        BackgroundImage (Image.Url "https://unsplash.it/200/200")
                     ])
             ] []
 
@@ -222,7 +222,7 @@ let BackgroundExamples model dispatch =
                     [
                         Width (px 50)
                         Height (px 72)
-                        BackgroundImage (Background.Url "https://s.cdpn.io/79/sprite-steps.png")
+                        BackgroundImage (Image.Url "https://s.cdpn.io/79/sprite-steps.png")
                         AnimationName frameAnimation
                         AnimationDuration (sec 1.0)
                         AnimationTimingFunction (TimingFunction.Step 10)
@@ -284,7 +284,7 @@ let BackgroundExamples model dispatch =
                     [
                         Width (px 1025)
                         Height (px 1025)
-                        BackgroundImage (Background.Url "https://interactive-examples.mdn.mozilla.net/media/examples/moon.jpg")
+                        BackgroundImage (Image.Url "https://interactive-examples.mdn.mozilla.net/media/examples/moon.jpg")
                         BackgroundRepeat model.BackgroundRepeat
                     ])] []
 
@@ -692,7 +692,38 @@ let BorderExamples ()=
                                 ]
                         ]
                     ]
-        ]
+                
+            h2 [] [ str "Border image" ]
+            div  [
+                ClassName (fss [
+                    Width (px 100)
+                    Height (px 100)
+                    BorderWidth (px 30)
+                    BorderStyle Border.Solid
+                    BorderImageSource (Image.Url "https://interactive-examples.mdn.mozilla.net/media/examples/border-diamonds.png")
+                ])
+            ]
+                []
+                
+            let borderStuff =
+                [
+                    BorderWidth (px 7)
+                    BorderStyle Border.Solid
+                ]
+
+            let colorStuff =
+                [
+                    Color Color.orangeRed
+                    yield! borderStuff
+                    BackgroundColor Color.green
+                    Height (px 20)
+                    Width (px 200)
+                ]
+                
+            let borderAndColorStyle = fss colorStuff
+            
+            div [ ClassName borderAndColorStyle ] [ str "I AM COOL?" ]
+    ]
 
 let MarginExamples () =
     fragment []
@@ -2588,16 +2619,16 @@ let render (model: Model) (dispatch: Msg -> unit) =
         [
 
             //ColorExamples ()
-            //BackgroundExamples model dispatch
+            BackgroundExamples model dispatch
             //FontExamples ()
             //FontFaceExamples ()
-            //BorderExamples ()
+            BorderExamples ()
             //MarginExamples ()
             //PaddingExamples ()
             //TransformExamples ()
             //TransitionExamples ()
             //TextExamples ()
-            AnimationExamples ()
+            //AnimationExamples ()
             //FlexBoxExamples model dispatch
             //MediaQueryExamples ()
             //SelectorExamples ()
