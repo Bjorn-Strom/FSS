@@ -16,17 +16,6 @@ module ListStyle =
         testList "List style"
             [
                 test
-                    "List style shorthand"
-                    [
-                        _ListStyle
-                        |> ListStyle._type ListStyle.Georgian
-                        |> ListStyle.position ListStyle.Outside
-                        |> ListStyle.image (ListStyle.Url "https://interactive-examples.mdn.mozilla.net/media/examples/rocket.svg")
-                        |> toListStyle
-                    ]
-                    ["listStyle" ==> "georgian url('https://interactive-examples.mdn.mozilla.net/media/examples/rocket.svg') outside"]
-
-                test
                     "List style image url"
                     [ ListStyleImage (ListStyle.Url "foofoo.jpg") ]
                     [ "listStyleImage" ==> "url('foofoo.jpg')" ]

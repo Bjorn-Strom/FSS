@@ -2,7 +2,6 @@ namespace Fss
 
 module Types =
     // Interfaces
-    type IAnimation                = interface end
     type IAnimationDirection       = interface end
     type IAnimationPlayState       = interface end
     type IAnimationName            = interface end
@@ -37,7 +36,6 @@ module Types =
     type ITextUnderlineOffset      = interface end
     type ITextUnderlinePosition    = interface end
     type IColor                    = interface end
-    type IBorder                   = interface end
     type IBorderStyle              = interface end
     type IBorderWidth              = interface end
     type IBorderRadius             = interface end
@@ -83,7 +81,6 @@ module Types =
     type IContent                  = interface end
     type IRange                    = interface end
     type ISpeakAs                  = interface end
-    type IListStyle                = interface end
     type IListStylePosition        = interface end
     type IListStyleImage           = interface end
     type IListStyleType            = interface end
@@ -91,7 +88,6 @@ module Types =
     type IFloat                    = interface end
     type IQuote                    = interface end
     type IOverflow                 = interface end
-    type ITransition               = interface end
 
     // Common
     type CounterStyle = CounterStyle of string

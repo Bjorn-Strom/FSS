@@ -10,57 +10,6 @@ module Border =
         testList "Border"
             [
                 test
-                    "Border shorthand width style and color"
-                    [
-                        _Border
-                        |> Border.width Border.Medium
-                        |> Border.style Border.Dashed
-                        |> Border.color Color.green
-                        |> toBorder
-                    ]
-                    ["border" ==> "medium dashed #008000"]
-
-                test
-                    "Border shorthand style and color"
-                    [
-                        _Border
-                        |> Border.style Border.Dashed
-                        |> Border.color Color.green
-                        |> toBorder
-                    ]
-                    ["border" ==> "medium dashed #008000"]
-
-                test
-                    "Border shorthand color"
-                    [
-                        _Border
-                        |> Border.color Color.green
-                        |> toBorder
-                    ]
-                    ["border" ==> "medium none #008000"]
-
-                test
-                    "Border shorthand color and style"
-                    [
-                        _Border
-                        |> Border.color Color.green
-                        |> Border.style Border.Dashed
-                        |> toBorder
-                    ]
-                    ["border" ==> "medium dashed #008000"]
-
-                test
-                    "Border shorthand color, style and width"
-                    [
-                        _Border
-                        |> Border.color Color.green
-                        |> Border.style Border.Dashed
-                        |> Border.width Border.Medium
-                        |> toBorder
-                    ]
-                    ["border" ==> "medium dashed #008000"]
-
-                test
                     "Borderstyle hidden"
                     [ BorderStyle Border.Hidden ]
                     [

@@ -3,15 +3,12 @@
 open Fable.Core
 open Fable.Core.JsInterop
 
-open Fable.React.Props
-open Fss.Property
 open Types
 open Utilities.Helpers
 open Animation
 open Selector
 open Media
 open Opacity
-open Units.Time
 
 [<AutoOpen>]
 module Value =
@@ -29,7 +26,6 @@ module Value =
 
         | Color of IColor
 
-        | BackgroundShorthand            of IBackground
         | BackgroundColor       of IBackgroundColor
         | BackgroundImage       of IBackgroundImage
         | BackgroundPosition    of IBackgroundPosition
@@ -81,7 +77,6 @@ module Value =
         | FirstLine   of CSSProperty list
         | Selection   of CSSProperty list
 
-        | FontShorthand         of IFont
         | FontSize              of IFontSize
         | FontStyle             of IFontStyle
         | FontWeight            of IFontWeight
@@ -119,8 +114,6 @@ module Value =
         | TextUnderlineOffset     of ITextUnderlineOffset
         | TextUnderlinePosition   of ITextUnderlinePosition
         | TextUnderlinePositions  of ITextUnderlinePosition * ITextUnderlinePosition
-
-        | BorderShorthand    of IBorder
 
         | BorderStyle       of IBorderStyle
         | BorderStyles      of IBorderStyle list
@@ -197,15 +190,14 @@ module Value =
         | Padding       of IPadding
         | Paddings      of IPadding list
 
-        | AnimationShorthand       of IAnimation
         | AnimationName            of IAnimationName
         | AnimationNames           of IAnimationName list
-        | AnimationDuration        of Time
-        | AnimationDurations       of Time list
+        | AnimationDuration        of Units.Time.Time
+        | AnimationDurations       of Units.Time.Time list
         | AnimationTimingFunction  of ITimingFunction
         | AnimationTimingFunctions of ITimingFunction list
-        | AnimationDelay           of Time
-        | AnimationDelays          of Time list
+        | AnimationDelay           of Units.Time.Time
+        | AnimationDelays          of Units.Time.Time list
         | AnimationIterationCount  of IterationCount
         | AnimationIterationCounts of IterationCount list
         | AnimationDirection       of IAnimationDirection
@@ -220,7 +212,6 @@ module Value =
         | TransformOrigin  of ITransformOrigin
         | TransformOrigins of ITransformOrigin list
 
-        | TransitionShorthand       of ITransition
         | TransitionDuration        of ITime
         | TransitionDurations       of ITime list
         | TransitionDelay           of ITime
@@ -232,7 +223,6 @@ module Value =
 
         | Cursor of ICursor
 
-        | ListStyleShorthand of IListStyle
         | ListStyleImage     of IListStyleImage
         | ListStylePosition  of IListStylePosition
         | ListStyleType      of IListStyleType
@@ -291,7 +281,6 @@ module Value =
 
                 | Color c            -> Property.value Property.Color ==> Color.value c
 
-                | BackgroundShorthand   b  -> cssValue Property.Background           <| BackgroundValues.background b
                 | BackgroundColor       bc -> cssValue Property.BackgroundColor      <| BackgroundValues.color bc
                 | BackgroundImage       bi -> cssValue Property.BackgroundImage      <| BackgroundValues.image bi
                 | BackgroundPosition    b  -> cssValue Property.BackgroundPosition   <| BackgroundValues.position b
@@ -343,7 +332,6 @@ module Value =
                 | FirstLine   f -> pseudoElementKebab Property.FirstLine   f
                 | Selection   s -> pseudoElement      Property.Selection   s
 
-                | FontShorthand         f  -> cssValue Property.Font                 <| FontValues.font f
                 | FontSize              f  -> cssValue Property.FontSize             <| FontValues.size f
                 | FontStyle             f  -> cssValue Property.FontStyle            <| FontValues.style f
                 | FontStretch           f  -> cssValue Property.FontStretch          <| FontValues.stretch f
@@ -381,8 +369,6 @@ module Value =
                 | TextUnderlineOffset     t       -> cssValue Property.TextUnderlineOffset     <| TextValue.underlineOffset t
                 | TextUnderlinePosition   t       -> cssValue Property.TextUnderlinePosition   <| TextValue.underlinePosition t
                 | TextUnderlinePositions (t1, t2) -> cssValue Property.TextUnderlinePosition   <| sprintf "%s %s" (TextValue.underlinePosition t1) (TextValue.underlinePosition t2)
-
-                | BorderShorthand b -> cssValue Property.Border <| BorderValue.border b
 
                 | BorderStyle       bs  -> cssValue Property.BorderStyle       <| BorderValue.style bs
                 | BorderStyles      bss -> cssValue Property.BorderStyle       <| combineWs BorderValue.style bss
@@ -459,7 +445,6 @@ module Value =
                 | Padding       m  -> cssValue Property.Padding       <| PaddingValue.padding m
                 | Paddings      ms -> cssValue Property.Padding       <| combineWs PaddingValue.padding ms
 
-                | AnimationShorthand       a   -> cssValue Property.Animation               <| AnimationValue.animation a
                 | AnimationName            n   -> cssValue Property.AnimationName           <| AnimationValue.name n
                 | AnimationNames           ns  -> cssValue Property.AnimationName           <| combineComma AnimationValue.name ns
                 | AnimationDuration        d   -> cssValue Property.AnimationDuration       <| Units.Time.value d
@@ -482,7 +467,6 @@ module Value =
                 | TransformOrigin t   -> cssValue Property.TransformOrigin <| TransformValue.transformOrigin t
                 | TransformOrigins ts -> cssValue Property.TransformOrigin <| combineWs TransformValue.transformOrigin ts
 
-                | TransitionShorthand       t  -> cssValue Property.Transition               <| TransitionValue.transition t
                 | TransitionDelay           t  -> cssValue Property.TransitionDelay          <| Units.Time.value t
                 | TransitionDelays          ts -> cssValue Property.TransitionDelay          <| combineComma Units.Time.value ts
                 | TransitionDuration        t  -> cssValue Property.TransitionDuration       <| Units.Time.value t
@@ -494,7 +478,6 @@ module Value =
 
                 | Cursor c -> cssValue Property.Cursor <| CursorValue.cursor c
 
-                | ListStyleShorthand l -> cssValue Property.ListStyle         <| ListStyleValue.listStyle l
                 | ListStyleImage     l -> cssValue Property.ListStyleImage    <| ListStyleValue.image l
                 | ListStylePosition  l -> cssValue Property.ListStylePosition <| ListStyleValue.position l
                 | ListStyleType      l -> cssValue Property.ListStyleType     <| ListStyleValue.styleType l

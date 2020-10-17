@@ -10,18 +10,6 @@ module Background =
         testList "Background"
             [
                 test
-                    "Background shorthand"
-                    [
-                        _Background
-                        |> Background.image (Background.Url "image.png")
-                        |> Background.repeat Background.Repeat
-                        |> Background.position Background.Center
-                        |> toBackground
-                    ]
-                    
-                    ["background" ==> "url(image.png) center/auto repeat scroll padding-box border-box rgba(0, 0, 0, 0.000000)"]
-
-                test
                     "background color"
                     [ BackgroundColor Color.red ]
                     [ "backgroundColor" ==> "#ff0000"]

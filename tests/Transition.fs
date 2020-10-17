@@ -10,39 +10,6 @@ module Transition =
         testList "Transition"
             [
                 test
-                    "Transition shorthand"
-                    [
-                        _Transition
-                            |> Transition.property Property.MarginRight
-                            |> Transition.duration (sec 4.)
-                            |> toTransition
-                    ]
-                    [ "transition" ==> "margin-right 4.00s ease 0.00s"]
-
-                test
-                    "Transition shorthand"
-                    [
-                        _Transition
-                            |> Transition.property Property.MarginRight
-                            |> Transition.duration (sec 4.)
-                            |> Transition.delay (sec 1.)
-                            |> toTransition
-                    ]
-                    ["transition" ==> "margin-right 4.00s ease 1.00s"]
-
-                test
-                    "Transition shorthand"
-                    [
-                        _Transition
-                            |> Transition.property Property.MarginRight
-                            |> Transition.duration (sec 4.)
-                            |> Transition.delay (sec 1.)
-                            |> Transition.timing TimingFunction.EaseInOut
-                            |> toTransition
-                    ]
-                    ["transition" ==> "margin-right 4.00s ease-in-out 1.00s"]
-
-                test
                     "Transition duration sec"
                     [TransitionDuration (sec 6.0) ]
                     ["transitionDuration" ==> "6.00s"]

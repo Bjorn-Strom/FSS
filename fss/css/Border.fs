@@ -33,25 +33,6 @@ module Border =
         | Separate
         interface IBorderCollapse
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/border
-    type Border =
-        {
-            Width : IBorderWidth
-            Style : IBorderStyle
-            Color : IBorderColor
-        }
-        with
-            interface IBorder
-
-    let width (width: IBorderWidth) border =
-        { border with Width = width }
-
-    let style (style: IBorderStyle) border =
-        { border with Style = style }
-
-    let color (color: IBorderColor) border =
-        { border with Color = color }
-
 module BorderValue =
     open Border
     open Units.Size
@@ -96,11 +77,3 @@ module BorderValue =
             | :? Global as g -> GlobalValue.globalValue g
             | :? Size   as s -> Units.Size.value s
             | _ -> "Unknown border spacing"
-
-    let border (b: IBorder): string =
-        let stringifyBorder (b: Border): string =
-            sprintf "%s %s %s" (width b.Width) (style b.Style) (color b.Color)
-
-        match b with
-            | :? Border as b -> stringifyBorder b
-            | _ -> "unknown border value"

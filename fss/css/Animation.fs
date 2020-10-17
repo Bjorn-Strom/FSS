@@ -32,43 +32,6 @@ module Animation =
         | Paused
         interface IAnimationPlayState
 
-    type Animation =
-        {
-            Duration       : ITime
-            TimingFunction : ITimingFunction
-            Delay          : ITime
-            IterationCount : IterationCount
-            Direction      : IAnimationDirection
-            FillMode       : IAnimationFillMode
-            PlayState      : IAnimationPlayState
-            Name           : IAnimationName
-        }
-        with interface IAnimation
-
-    let duration (duration: ITime) animation =
-        { animation with Duration = duration }
-
-    let timingFunction (timingFunction: ITimingFunction) animation =
-        { animation with TimingFunction = timingFunction }
-
-    let delay (delay: ITime) animation =
-        { animation with Delay = delay }
-
-    let iterationCount (count: IterationCount) animation =
-        { animation with IterationCount = count }
-
-    let direction (direction: IAnimationDirection) animation =
-        { animation with Direction = direction }
-
-    let fillMode (fillMode: IAnimationFillMode) animation =
-        { animation with FillMode = fillMode }
-
-    let playState (playState: IAnimationPlayState) animation =
-        { animation with PlayState = playState }
-
-    let name (name: IAnimationName) animation =
-        { animation with Name = name }
-
 module AnimationValue =
     open Animation
 
@@ -101,19 +64,3 @@ module AnimationValue =
             | :? Global as g  -> GlobalValue.globalValue g
             | :? None   as n  -> GlobalValue.none n
             | _         as s -> string s
-
-    let animation (v: IAnimation): string =
-        let stringifyAnimation (a: Animation): string =
-            sprintf "%s %s %s %s %s %s %s %s"
-                (Units.Time.value a.Duration)
-                (TimingFunctionValue.timingFunction a.TimingFunction)
-                (Units.Time.value a.Delay)
-                (iterationCount a.IterationCount)
-                (direction a.Direction)
-                (fillMode a.FillMode)
-                (playState a.PlayState)
-                (name a.Name)
-
-        match v with
-            | :? Animation as a -> stringifyAnimation a
-            | _ -> "Unknown animation value"

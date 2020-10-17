@@ -21,7 +21,6 @@ module Global =
         interface ITextEmphasisStyle
         interface ICursor
         interface IContent
-        interface IListStyle
         interface IListStyleImage
         interface IListStyleType
         interface IListStylePosition
@@ -137,7 +136,6 @@ module Global =
         interface IPerspective
         interface ICursor
         interface IContent
-        interface IListStyle
         interface IListStyleImage
         interface IListStylePosition
         interface IListStyleType

@@ -9,7 +9,6 @@ module Property =
         | AlignItems
         | AlignSelf
         | All
-        | Animation
         | AnimationDelay
         | AnimationDirection
         | AnimationDuration
@@ -62,7 +61,6 @@ module Property =
         | BorderTopWidth
         | BorderTop
         | BorderWidth
-        | Border
         | Bottom
         | BoxDecorationBreak
         | BoxShadow
@@ -154,7 +152,6 @@ module Property =
         | LetterSpacing
         | LineBreak
         | LineHeight
-        | ListStyle
         | ListStyleImage
         | ListStylePosition
         | ListStyleType
@@ -245,7 +242,6 @@ module Property =
         | Transform
         | TransformOrigin
         | TransformStyle
-        | Transition
         | TransitionDelay
         | TransitionDuration
         | TransitionProperty

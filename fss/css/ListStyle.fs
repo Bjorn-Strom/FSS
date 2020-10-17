@@ -72,24 +72,6 @@ module ListStyle =
         | DisclosureClosed
         interface IListStyleType
 
-    type ListStyle =
-        {
-            Type : IListStyleType
-            Position : IListStylePosition
-            Image : IListStyleImage
-        }
-        with
-            interface IListStyle
-
-    let _type (_type: IListStyleType) border =
-        { border with Type = _type }
-
-    let position (position: IListStylePosition) border =
-        { border with Position = position }
-
-    let image (image: IListStyleImage) border =
-        { border with Image = image }
-
 module ListStyleValue =
     open Global
     open ListStyle
@@ -124,16 +106,3 @@ module ListStyleValue =
             | :? None          as n -> GlobalValue.none n
             | :? ListStyleType as l -> stringifyListStyleType l
             | _ -> "Unknown list style type"
-
-    let listStyle (v: IListStyle): string =
-        let stringifyListStyle (l: ListStyle) =
-            sprintf "%s %s %s"
-                (styleType l.Type)
-                (image l.Image)
-                (position l.Position)
-
-        match v with
-            | :? Global    as g -> GlobalValue.globalValue g
-            | :? None      as n -> GlobalValue.none n
-            | :? ListStyle as l -> stringifyListStyle l
-            | _ -> "Unknown list style"

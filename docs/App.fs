@@ -17,7 +17,6 @@ type Msg =
     | SetFlexWrap of Flex.Wraps
     | SetAlignContent of Flex.Alignment
     | SetBackgroundRepeat of Background.Repeat
-    | Foo
 
 let init() = {
     FlexDirection = Flex.Row
@@ -30,7 +29,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetFlexDirection direction -> { model with FlexDirection = direction}
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
-    | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
+    | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat} 
 
 let ColorExamples () =
     fragment []
@@ -56,30 +55,24 @@ let BackgroundExamples model dispatch =
         [
             div []
                 [
-                    h2 [] [ str "Bakground shorthand" ]
+                    h2 [] [ str "Bakground" ]
 
                     div [ ClassName (fss [
-                        _Background
-                            |> Background.color Color.green
-                            |> toBackground
+                        BackgroundColor Color.green
                         Height (px 20)
                         Width (px 20)
                     ]) ] []
 
                     div [ ClassName (fss [
-                        _Background
-                            |> Background.repeat Background.NoRepeat
-                            |> Background.image (Background.Url "https://interactive-examples.mdn.mozilla.net/media/examples/lizard.png")
-                            |> toBackground
+                        BackgroundRepeat Background.NoRepeat
+                        BackgroundImage (Background.Url "https://interactive-examples.mdn.mozilla.net/media/examples/lizard.png")
                         Height (px 200)
                         Width (px 200)
                     ]) ] []
 
                     div [ ClassName (fss [
-                        _Background
-                            |> Background.origin Background.ContentBox
-                            |> Background.image (Background.RadialGradient [Color.crimson; Color.skyBlue])
-                            |> toBackground
+                        BackgroundOrigin Background.ContentBox
+                        BackgroundImage (Background.RadialGradient [Color.crimson; Color.skyBlue])
                         Height (px 60)
                         Width (px 60)
                     ]) ] []
@@ -304,23 +297,19 @@ let FontExamples () =
             h2 [] [ str "font-size"]
             p [ClassName (fss
                 [
-                    _Font
-                    |> Font.size (em 1.2)
-                    |> Font.family Font.FontFamily.SansSerif
-                    |> toFont
+                    FontSize (em 1.2)
+                    FontFamily Font.FontFamily.SansSerif
                 ])] [ str "1.2em sans serif" ]
 
 
             p [ClassName (fss
                 [
-                    _Font
-                        |> Font.style Font.Italic
-                        |> Font.variant Font.SmallCaps
-                        |> Font.weight Font.Bold
-                        |> Font.size (px 16)
-                        |> Font.lineHeight (px 2)
-                        |> Font.family Font.Cursive
-                        |> toFont
+                    FontStyle Font.Italic
+                    FontVariantCaps Font.SmallCaps
+                    FontWeight Font.Bold
+                    FontSize (px 16)
+                    LineHeight (px 2)
+                    FontFamily Font.Cursive
             ])] [ str "italic small-caps bold 16px 2 line height cursive" ]
 
 
@@ -520,38 +509,6 @@ let BorderExamples ()=
     fragment []
         [
             h1 [] [ str "borders"]
-            h2 [] [ str "Border shorthand" ]
-            p [ ClassName (
-                  fss
-                    [
-                        _Border
-                        |> Border.style Border.Solid
-                        |> toBorder
-                    ]
-              ) ] [ str "This one is solid" ]
-
-
-            p [ ClassName (
-                  fss
-                    [
-                        _Border
-                        |> Border.width (px 2)
-                        |> Border.style Border.Solid
-                        |> toBorder
-                    ]
-              ) ] [ str "So I am solid but 2 pixels" ]
-
-            p [ ClassName (
-                  fss
-                    [
-                        _Border
-                         |> Border.width Border.Medium
-                         |> Border.style Border.Dashed
-                         |> Border.color Color.green
-                         |> toBorder
-                    ]
-              ) ] [ str "Me medium and green" ]
-
             h2 [] [ str "Set unique borders"]
             p [ ClassName (fss [BorderStyle Border.Solid ])] [ str "I have a solid border" ]
             p [ ClassName (fss [BorderStyle Border.Double ])] [ str "I have a double border"]
@@ -915,10 +872,8 @@ let TransitionExamples () =
                         Width (pct 50)
                         Margins [ px 0; Auto; px 40]
                         Position Position.Relative
-                        _Transition
-                            |> Transition.timing TimingFunction.EaseOut
-                            |> Transition.duration (sec 0.5)
-                            |> toTransition
+                        TransitionTimingFunction TimingFunction.EaseOut
+                        TransitionDuration (sec 0.5)
                     ]
 
             let shadow =
@@ -942,11 +897,9 @@ let TransitionExamples () =
             let box =
                 widthAndPosition @
                     [
-                        _Border
-                            |> Border.width (px 5)
-                            |> Border.style Border.Solid
-                            |> Border.color Color.transparent
-                            |> toBorder
+                        BorderWidth (px 5)
+                        BorderStyle Border.Solid
+                        BorderColor Color.transparent
                         Width (px 200)
                         Height (px 100)
                         Margins [px 0; Auto]
@@ -960,11 +913,9 @@ let TransitionExamples () =
                         Hover
                             [
                                 BackgroundColor (hex "F2EBD8")
-                                _Border
-                                    |> Border.width (px 5)
-                                    |> Border.style Border.Solid
-                                    |> Border.color (hex "B0CBC4")
-                                    |> toBorder
+                                BorderWidth (px 5)
+                                BorderStyle Border.Solid
+                                BorderColor (hex "B0CBC4")
                                 BorderTopLeftRadiuses [pct 100; px 20]
                                 BorderBottomRightRadiuses [pct 100; px 20]
                             ]
@@ -1334,15 +1285,14 @@ let AnimationExamples () =
                 Width (px 250)
                 Margins [px 0; Auto]
                 BackgroundColor Color.red
-                _Animation
-                |> Animation.duration (sec 1.5)
-                |> Animation.timingFunction TimingFunction.EaseOut
-                |> Animation.delay (sec 0.0)
-                |> Animation.direction Animation.Alternate
-                |> Animation.iterationCount Animation.Infinite
-                |> Animation.fillMode None
-                |> Animation.playState Animation.Running
-                |> Animation.name (keyframes
+                AnimationDuration (sec 1.5)
+                AnimationTimingFunction TimingFunction.EaseOut
+                AnimationDelay (sec 0.0)
+                AnimationDirection Animation.Alternate
+                AnimationIterationCount Animation.Infinite
+                AnimationFillMode None
+                AnimationPlayState Animation.Running
+                AnimationName (keyframes
                                        [
                                            frame 0
                                                [
@@ -1360,14 +1310,12 @@ let AnimationExamples () =
                                                     BackgroundColor Color.yellow
                                                ]
                                        ])
-                |> toAnimation
             ]
 
     fragment []
         [
-            h2 [] [str "Animation short hand"]
-            div [ ClassName stretch ] []
             p [] [ str "Things can animate now!" ]
+            div [ ClassName stretch ] []
             p [ClassName bounceAnimation] [str "Bouncing text"]
             p [ClassName sizeAnimation] [str "Weeeeeeeeee"]
             p [ClassName combinedAnimations] [str "COMBINED"]
@@ -2377,44 +2325,6 @@ let PsuedoClassExamples () =
 let ListStyleExamples () =
     fragment []
         [
-            let shortHand =
-                fss
-                    [
-                        _ListStyle
-                        |> ListStyle._type ListStyle.Georgian
-                        |> ListStyle.position ListStyle.Outside
-                        |> ListStyle.image (ListStyle.Url "https://interactive-examples.mdn.mozilla.net/media/examples/rocket.svg")
-                        |> toListStyle
-                    ]
-
-            ul [ ClassName shortHand ]
-                [
-                    str "Shorthand"
-                    li [] [str "List Item 1-1" ]
-                    li [] [str "List Item 1-2" ]
-                    li [] [str "List Item 1-3" ]
-                    li [] [str "List Item 1-4" ]
-                ]
-
-            let shortHand =
-                fss
-                    [
-                        _ListStyle
-                        |> ListStyle._type ListStyle.Georgian
-                        |> ListStyle.position ListStyle.Inside
-                        |> ListStyle.image (ListStyle.Url "https://interactive-examples.mdn.mozilla.net/non-existent.svg")
-                        |> toListStyle
-                    ]
-
-            ul [ ClassName shortHand ]
-                [
-                    str "Shorthand"
-                    li [] [str "List Item 1-1" ]
-                    li [] [str "List Item 1-2" ]
-                    li [] [str "List Item 1-3" ]
-                    li [] [str "List Item 1-4" ]
-                ]
-
             let listStyleImage =
                 fss
                     [
