@@ -328,5 +328,84 @@ module Border =
                     "Border spacing unset"
                     [ BorderSpacing Unset ]
                     [ "borderSpacing" ==> "unset" ]
-
+                    
+                test
+                    "Border image source none"
+                    [ BorderImageSource None ]
+                    [ "borderImageSource" ==> "none" ]
+                    
+                test
+                    "Border image source url"
+                    [ BorderImageSource (Image.Url "image.jpg") ]
+                    [ "borderImageSource" ==> "url(image.jpg)" ]
+                    
+                test
+                    "Border image source linear gradient"
+                    [ BorderImageSource (Image.LinearGradient [ Image.Top; Color.red; Color.yellow ]) ]
+                    [ "borderImageSource" ==> "linear-gradient(to top, #ff0000, #ffff00)" ]
+                    
+                test
+                    "Border image source inherit"
+                    [ BorderImageSource Inherit ]
+                    [ "borderImageSource" ==> "inherit" ]
+                    
+                test
+                    "Border image source initial"
+                    [ BorderImageSource Initial ]
+                    [ "borderImageSource" ==> "initial" ]
+                    
+                test
+                    "Border image source unset"
+                    [ BorderImageSource Unset ]
+                    [ "borderImageSource" ==> "unset" ]
+                    
+                test
+                    "Border image width auto"
+                    [ BorderImageWidth Auto ]
+                    [ "borderImageWidth" ==> "auto" ]
+                    
+                test
+                    "Border image width rem"
+                    [ BorderImageWidth (rem 1.) ]
+                    [ "borderImageWidth" ==> "1.0rem" ]
+                    
+                test
+                    "Border image width percent"
+                    [ BorderImageWidth (pct 25) ]
+                    [ "borderImageWidth" ==> "25%" ]
+                    
+                test
+                    "Border image width percent"
+                    [ BorderImageWidth (Border.Value 3) ]
+                    [ "borderImageWidth" ==> "3" ]
+                    
+                test
+                    "Border image width vertical horizontal"
+                    [ BorderImageWidths [em 2.; em 3.] ]
+                    [ "borderImageWidth" ==> "2.0em 3.0em" ]
+                    
+                test
+                    "Border image width top horizontal bottom"
+                    [ BorderImageWidths [pct 5; pct 15; pct 10] ]
+                    [ "borderImageWidth" ==> "5% 15% 10%" ]
+                    
+                test
+                    "Border image width top right bottom left"
+                    [ BorderImageWidths [pct 5; em 2.; pct 10; Auto] ]
+                    [ "borderImageWidth" ==> "5% 2.0em 10% auto" ]
+                    
+                test
+                    "Border image width inherit"
+                    [ BorderImageWidth Inherit ]
+                    [ "borderImageWidth" ==> "inherit" ]
+                    
+                test
+                    "Border image width initial"
+                    [ BorderImageWidth Initial ]
+                    [ "borderImageWidth" ==> "initial" ]
+                    
+                test
+                    "Border image width unset"
+                    [ BorderImageWidth Unset ]
+                    [ "borderImageWidth" ==> "unset" ]
             ]

@@ -152,7 +152,9 @@ module Value =
         | BorderSpacing2 of IBorderSpacing * IBorderSpacing
         
         | BorderImageSource of IImage
-
+        | BorderImageWidth  of IBorderImageWidth
+        | BorderImageWidths of IBorderImageWidth list
+        
         | Width       of IContentSize
         | MinWidth    of IContentSize
         | MaxWidth    of IContentSize
@@ -408,7 +410,9 @@ module Value =
                 | BorderSpacing  b      -> cssValue Property.BorderSpacing  <| BorderValue.spacing b
                 | BorderSpacing2 (x, y) -> cssValue Property.BorderSpacing  <| sprintf "%s %s" (BorderValue.spacing x) (BorderValue.spacing y)
                 
-                | BorderImageSource b -> cssValue Property.BorderImageSource <| ImageValue.image b
+                | BorderImageSource b   -> cssValue Property.BorderImageSource <| ImageValue.image b
+                | BorderImageWidth  bw  -> cssValue Property.BorderImageWidth  <| BorderValue.imageWidth bw
+                | BorderImageWidths bws -> cssValue Property.BorderImageWidth  <| combineWs BorderValue.imageWidth bws
 
                 | Width     w -> cssValue Property.Width     <| ContentSize.value w
                 | MinWidth  w -> cssValue Property.MinWidth  <| ContentSize.value w

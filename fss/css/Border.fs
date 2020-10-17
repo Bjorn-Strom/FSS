@@ -32,6 +32,11 @@ module Border =
         | Collapse
         | Separate
         interface IBorderCollapse
+        
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
+    type ImageWidth =
+        | Value of int
+        interface IBorderImageWidth
 
 module BorderValue =
     open Border
@@ -77,3 +82,15 @@ module BorderValue =
             | :? Global as g -> GlobalValue.globalValue g
             | :? Size   as s -> Units.Size.value s
             | _ -> "Unknown border spacing"
+            
+    let imageWidth (v: IBorderImageWidth): string =
+        let stringifyBorderImageWidth (Value i) = string i
+        
+        match v with
+            | :? Global     as g -> GlobalValue.globalValue g
+            | :? Auto       as a -> GlobalValue.auto a
+            | :? Size       as s -> Units.Size.value s
+            | :? Percent    as p -> Units.Percent.value p
+            | :? ImageWidth as i -> stringifyBorderImageWidth i
+            | _ -> "Unknown border spacing"
+            

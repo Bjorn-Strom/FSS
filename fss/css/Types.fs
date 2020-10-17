@@ -42,6 +42,7 @@ module Types =
     type IBorderColor              = interface end
     type IBorderCollapse           = interface end
     type IBorderSpacing            = interface end
+    type IBorderImageWidth         = interface end
     type IMargin                   = interface end
     type IPadding                  = interface end
     type IDisplay                  = interface end

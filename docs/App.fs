@@ -701,6 +701,7 @@ let BorderExamples ()=
                     BorderWidth (px 30)
                     BorderStyle Border.Solid
                     BorderImageSource (Image.Url "https://interactive-examples.mdn.mozilla.net/media/examples/border-diamonds.png")
+                    BorderImageWidth (Border.Value 30)
                 ])
             ]
                 []

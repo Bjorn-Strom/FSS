@@ -46,6 +46,7 @@ module Global =
         interface IPlacement
         interface IQuote
         interface IOverflow
+        interface IBorderImageWidth
 
     type Center =
         | Center
@@ -103,6 +104,7 @@ module Global =
         interface IBorderColor
         interface IBorderCollapse
         interface IBorderSpacing
+        interface IBorderImageWidth
         interface IMargin
         interface IPadding
         interface IDisplay
