@@ -151,9 +151,14 @@ module Value =
         | BorderSpacing  of IBorderSpacing
         | BorderSpacing2 of IBorderSpacing * IBorderSpacing
         
-        | BorderImageSource of IImage
-        | BorderImageWidth  of IBorderImageWidth
-        | BorderImageWidths of IBorderImageWidth list
+        | BorderImageSource  of IImage
+        | BorderImageWidth   of IBorderImageWidth
+        | BorderImageWidths  of IBorderImageWidth list
+        | BorderImageRepeat  of IBorderImageRepeat
+        | BorderImageRepeat2 of IBorderImageRepeat * IBorderImageRepeat
+        | BorderImageSlice   of IBorderImageSlice
+        | BorderImageSlices  of IBorderImageSlice list
+        
         
         | Width       of IContentSize
         | MinWidth    of IContentSize
@@ -410,10 +415,14 @@ module Value =
                 | BorderSpacing  b      -> cssValue Property.BorderSpacing  <| BorderValue.spacing b
                 | BorderSpacing2 (x, y) -> cssValue Property.BorderSpacing  <| sprintf "%s %s" (BorderValue.spacing x) (BorderValue.spacing y)
                 
-                | BorderImageSource b   -> cssValue Property.BorderImageSource <| ImageValue.image b
-                | BorderImageWidth  bw  -> cssValue Property.BorderImageWidth  <| BorderValue.imageWidth bw
-                | BorderImageWidths bws -> cssValue Property.BorderImageWidth  <| combineWs BorderValue.imageWidth bws
-
+                | BorderImageSource   b       -> cssValue Property.BorderImageSource <| ImageValue.image b
+                | BorderImageWidth    bw      -> cssValue Property.BorderImageWidth  <| BorderValue.imageWidth bw
+                | BorderImageWidths   bws     -> cssValue Property.BorderImageWidth  <| combineWs BorderValue.imageWidth bws
+                | BorderImageRepeat   b       -> cssValue Property.BorderImageRepeat <| BorderValue.imageRepeat b
+                | BorderImageRepeat2 (b1, b2) -> cssValue Property.BorderImageRepeat <| sprintf "%s %s" (BorderValue.imageRepeat b1) (BorderValue.imageRepeat b2)
+                | BorderImageSlice    b       -> cssValue Property.BorderImageSlice  <| BorderValue.imageSlice b
+                | BorderImageSlices   bs      -> cssValue Property.BorderImageSlice  <| combineWs BorderValue.imageSlice bs
+                
                 | Width     w -> cssValue Property.Width     <| ContentSize.value w
                 | MinWidth  w -> cssValue Property.MinWidth  <| ContentSize.value w
                 | MaxWidth  w -> cssValue Property.MaxWidth  <| ContentSize.value w

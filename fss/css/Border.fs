@@ -33,10 +33,23 @@ module Border =
         | Separate
         interface IBorderCollapse
         
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
-    type ImageWidth =
+    type Value =
         | Value of int
         interface IBorderImageWidth
+        interface IBorderImageSlice
+        
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
+    type ImageRepeat =
+        | Stretch
+        | Repeat
+        | Round
+        | Space
+        interface IBorderImageRepeat
+        
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
+    type ImageSlice =
+        | Fill
+        interface IBorderImageSlice
 
 module BorderValue =
     open Border
@@ -82,15 +95,33 @@ module BorderValue =
             | :? Global as g -> GlobalValue.globalValue g
             | :? Size   as s -> Units.Size.value s
             | _ -> "Unknown border spacing"
-            
+    
+    let value (Value v): string = string v
+    
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
     let imageWidth (v: IBorderImageWidth): string =
-        let stringifyBorderImageWidth (Value i) = string i
-        
         match v with
             | :? Global     as g -> GlobalValue.globalValue g
             | :? Auto       as a -> GlobalValue.auto a
             | :? Size       as s -> Units.Size.value s
             | :? Percent    as p -> Units.Percent.value p
-            | :? ImageWidth as i -> stringifyBorderImageWidth i
+            | :? Value      as v -> value v
             | _ -> "Unknown border spacing"
             
+    let imageRepeat (v: IBorderImageRepeat): string =
+        match v with
+            | :? Global      as g -> GlobalValue.globalValue g
+            | :? ImageRepeat as i -> duToLowercase i
+            | _ -> "Unknown border repeat"
+            
+    let imageSlice (v: IBorderImageSlice): string =
+        let stringifySlice (s: ImageSlice) =
+            match s with
+                | Fill    -> "fill"
+            
+        match v with
+            | :? Global     as g -> GlobalValue.globalValue g
+            | :? Percent    as p -> Units.Percent.value p
+            | :? ImageSlice as i -> stringifySlice i
+            | :? Value      as v -> value v
+            | _ -> "Unknown border slice"

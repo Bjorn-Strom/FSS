@@ -11,25 +11,29 @@ type Model = {
     FlexDirection: Flex.Direction
     FlexWrap: Flex.Wraps
     AlignContent: Flex.Alignment
-    BackgroundRepeat: Background.Repeat }
+    BackgroundRepeat: Background.Repeat
+    BRepeat: Border.ImageRepeat * Border.ImageRepeat option }
 type Msg =
     | SetFlexDirection of Flex.Direction
     | SetFlexWrap of Flex.Wraps
     | SetAlignContent of Flex.Alignment
     | SetBackgroundRepeat of Background.Repeat
+    | SetBorderImagerRepeat of Border.ImageRepeat * Border.ImageRepeat option
 
 let init() = {
     FlexDirection = Flex.Row
     FlexWrap = Flex.Wrap
     AlignContent = Flex.Center
-    BackgroundRepeat = Background.NoRepeat}
+    BackgroundRepeat = Background.NoRepeat
+    BRepeat = Border.Stretch, Option.None}
 
 let update (msg: Msg) (model: Model): Model =
     match msg with
     | SetFlexDirection direction -> { model with FlexDirection = direction}
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
-    | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat} 
+    | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
+    | SetBorderImagerRepeat (r, r2) -> { model with BRepeat = r, r2} 
 
 let ColorExamples () =
     fragment []
@@ -505,7 +509,7 @@ let FontFaceExamples () =
                 ]
         ]
 
-let BorderExamples ()=
+let BorderExamples (model: Model) dispatch =
     fragment []
         [
             h1 [] [ str "borders"]
@@ -706,6 +710,64 @@ let BorderExamples ()=
             ]
                 []
                 
+            div [
+                ClassName (fss [
+                    Width (rem 12.)
+                    Height (rem 12.)
+                    MarginBottom (rem 1.)
+                    Padding (rem 1.)
+                    BorderWidth (px 40)
+                    BorderStyle Border.Solid
+                    BorderImageSource (Image.Url "https://mdn.mozillademos.org/files/4127/border.png" )
+                    BorderImageSlice (Border.Value 27)
+
+                    let (first, optional) = model.BRepeat
+                    
+                    match optional with
+                        | Some b -> BorderImageRepeat2(first, b)
+                        | Option.None -> BorderImageRepeat first
+                ])
+            ]
+                [
+                    str "Pick something!"
+                ]
+            form [  ]
+                [
+                    div []
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBorderImagerRepeat (Border.Stretch, Option.None))) ]
+                            str "Stretch"
+                        ]
+
+                    div []
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBorderImagerRepeat (Border.Repeat, Option.None))) ]
+                            str "Repeat"
+                        ]
+                    div []
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBorderImagerRepeat (Border.Round, Option.None))) ]
+                            str "Round"
+                        ]
+                    div []
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBorderImagerRepeat (Border.Space, Option.None))) ]
+                            str "Space"
+                        ]
+                    div []
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBorderImagerRepeat (Border.Stretch, Some Border.Repeat))) ]
+                            str "Stretch repeat"
+                        ]
+                    div []
+                        [
+                            input [ Type "radio"; HTMLAttr.Name "row"; OnChange (fun _ -> dispatch (SetBorderImagerRepeat (Border.Space, Some Border.Round))) ]
+                            str "Space round"
+                        ]
+                ]
+                
+                
+            h2 [] [ str "Combining" ]
             let borderStuff =
                 [
                     BorderWidth (px 7)
@@ -2620,10 +2682,10 @@ let render (model: Model) (dispatch: Msg -> unit) =
         [
 
             //ColorExamples ()
-            BackgroundExamples model dispatch
+            //BackgroundExamples model dispatch
             //FontExamples ()
             //FontFaceExamples ()
-            BorderExamples ()
+            BorderExamples model dispatch
             //MarginExamples ()
             //PaddingExamples ()
             //TransformExamples ()

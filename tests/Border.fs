@@ -2,6 +2,7 @@
 
 open Fable.Mocha
 open Fable.Core.JsInterop
+open Fss.Font
 open Utils
 open Fss
 
@@ -408,4 +409,85 @@ module Border =
                     "Border image width unset"
                     [ BorderImageWidth Unset ]
                     [ "borderImageWidth" ==> "unset" ]
+                    
+                test
+                    "Border image repeat stretch"
+                    [ BorderImageRepeat Border.Stretch ]
+                    [ "borderImageRepeat" ==> "stretch" ]
+                    
+                test
+                    "Border image repeat repeat"
+                    [ BorderImageRepeat Border.Repeat ]
+                    [ "borderImageRepeat" ==> "repeat" ]
+                    
+                test
+                    "Border image repeat round"
+                    [ BorderImageRepeat Border.Round ]
+                    [ "borderImageRepeat" ==> "round" ]
+                                        
+                test
+                    "Border image repeat space"
+                    [ BorderImageRepeat Border.Space ]
+                    [ "borderImageRepeat" ==> "space" ]
+                    
+                test
+                    "Border image repeat space"
+                    [ BorderImageRepeat2 (Border.Stretch, Border.Repeat) ]
+                    [ "borderImageRepeat" ==> "stretch repeat" ]
+                    
+                test
+                    "Border image repeat inherit"
+                    [ BorderImageRepeat Inherit ]
+                    [ "borderImageRepeat" ==> "inherit" ]
+                    
+                test
+                    "Border image repeat initial"
+                    [ BorderImageRepeat Initial ]
+                    [ "borderImageRepeat" ==> "initial" ]
+                    
+                test
+                    "Border image repeat unset"
+                    [ BorderImageRepeat Unset ]
+                    [ "borderImageRepeat" ==> "unset" ]
+                    
+                test
+                    "Border image slice percent"
+                    [ BorderImageSlice (pct 30) ]
+                    [ "borderImageSlice" ==> "30%" ]
+                    
+                test
+                    "Border image slice multiple percent"
+                    [ BorderImageSlices [pct 10; pct 30] ]
+                    [ "borderImageSlice" ==> "10% 30%" ]  
+                    
+                test
+                    "Border image slice top horizontal bottom"
+                    [ BorderImageSlices [Border.Value 30; pct 30; Border.Value 45] ]
+                    [ "borderImageSlice" ==> "30 30% 45" ]
+                    
+                test
+                    "Border image slice top right bottom left"
+                    [ BorderImageSlices [Border.Value 7; Border.Value 12; Border.Value 14; Border.Value 5] ]
+                    [ "borderImageSlice" ==> "7 12 14 5" ]
+                    
+                test
+                    "Border image slice With fill"
+                    [ BorderImageSlices [ pct 10; Border.Fill; Border.Value 7; Border.Value 12 ] ]
+                    [ "borderImageSlice" ==> "10% fill 7 12" ]
+                    
+                test
+                    "Border image slice inherit"
+                    [ BorderImageSlice Inherit ]
+                    [ "borderImageSlice" ==> "inherit" ]
+                    
+                test
+                    "Border image slice initial"
+                    [ BorderImageSlice Initial ]
+                    [ "borderImageSlice" ==> "initial" ]
+                    
+                test
+                    "Border image slice unset"
+                    [ BorderImageSlice Unset ]
+                    [ "borderImageSlice" ==> "unset" ]
+                    
             ]

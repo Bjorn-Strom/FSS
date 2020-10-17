@@ -11,6 +11,7 @@ module Percent =
         interface IBorderWidth
         interface IBorderRadius
         interface IBorderImageWidth
+        interface IBorderImageSlice
         interface IMargin
         interface IPadding
         interface IFlexBasis
