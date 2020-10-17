@@ -34,9 +34,10 @@ module Border =
         interface IBorderCollapse
         
     type Value =
-        | Value of int
+        | Value of float
         interface IBorderImageWidth
         interface IBorderImageSlice
+        interface IBorderImageOutset
         
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
     type ImageRepeat =
@@ -125,3 +126,12 @@ module BorderValue =
             | :? ImageSlice as i -> stringifySlice i
             | :? Value      as v -> value v
             | _ -> "Unknown border slice"
+            
+    let imageOutset (v: IBorderImageOutset): string =
+        match v with
+            | :? Global     as g -> GlobalValue.globalValue g
+            | :? Value      as v -> value v
+            | :? Size       as s -> Units.Size.value s
+            | _ -> "Unknown border outset"
+            
+    

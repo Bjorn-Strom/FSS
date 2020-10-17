@@ -377,7 +377,7 @@ module Border =
                     
                 test
                     "Border image width percent"
-                    [ BorderImageWidth (Border.Value 3) ]
+                    [ BorderImageWidth (Border.Value 3.) ]
                     [ "borderImageWidth" ==> "3" ]
                     
                 test
@@ -462,17 +462,17 @@ module Border =
                     
                 test
                     "Border image slice top horizontal bottom"
-                    [ BorderImageSlices [Border.Value 30; pct 30; Border.Value 45] ]
+                    [ BorderImageSlices [Border.Value 30.; pct 30; Border.Value 45.] ]
                     [ "borderImageSlice" ==> "30 30% 45" ]
                     
                 test
                     "Border image slice top right bottom left"
-                    [ BorderImageSlices [Border.Value 7; Border.Value 12; Border.Value 14; Border.Value 5] ]
+                    [ BorderImageSlices [Border.Value 7.; Border.Value 12.; Border.Value 14.; Border.Value 5.] ]
                     [ "borderImageSlice" ==> "7 12 14 5" ]
                     
                 test
                     "Border image slice With fill"
-                    [ BorderImageSlices [ pct 10; Border.Fill; Border.Value 7; Border.Value 12 ] ]
+                    [ BorderImageSlices [ pct 10; Border.Fill; Border.Value 7.; Border.Value 12. ] ]
                     [ "borderImageSlice" ==> "10% fill 7 12" ]
                     
                 test
@@ -489,5 +489,45 @@ module Border =
                     "Border image slice unset"
                     [ BorderImageSlice Unset ]
                     [ "borderImageSlice" ==> "unset" ]
+                    
+                test
+                    "Border image outset rem"
+                    [ BorderImageOutset (rem 1.) ]
+                    [ "borderImageOutset" ==> "1.0rem" ]
+                    
+                test
+                    "Border image outset value"
+                    [ BorderImageOutset (Border.Value 1.5) ]
+                    [ "borderImageOutset" ==> "1.5" ]     
+                    
+                test
+                    "Border image outset vertical horizontal"
+                    [ BorderImageOutsets [Border.Value 1.; Border.Value 1.2] ]
+                    [ "borderImageOutset" ==> "1 1.2" ]
+                    
+                test
+                    "Border image outset top horizontal bottom"
+                    [ BorderImageOutsets [px 30; Border.Value 2.; px 45] ]
+                    [ "borderImageOutset" ==> "30px 2 45px" ]
+                    
+                test
+                    "Border image outset top right bottom left"
+                    [ BorderImageOutsets [px 7; px 12; px 14; px 5] ]
+                    [ "borderImageOutset" ==> "7px 12px 14px 5px" ]
+                    
+                test
+                    "Border image outset inherit"
+                    [ BorderImageOutset Inherit ]
+                    [ "borderImageOutset" ==> "inherit" ]
+                    
+                test
+                    "Border image outset initial"
+                    [ BorderImageOutset Initial ]
+                    [ "borderImageOutset" ==> "initial" ]
+                    
+                test
+                    "Border image outset unset"
+                    [ BorderImageOutset Unset ]
+                    [ "borderImageOutset" ==> "unset" ]
                     
             ]

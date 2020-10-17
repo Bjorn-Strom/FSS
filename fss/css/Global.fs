@@ -107,6 +107,7 @@ module Global =
         interface IBorderImageWidth
         interface IBorderImageRepeat
         interface IBorderImageSlice
+        interface IBorderImageOutset
         interface IMargin
         interface IPadding
         interface IDisplay

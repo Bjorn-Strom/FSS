@@ -45,6 +45,7 @@ module Types =
     type IBorderImageWidth         = interface end
     type IBorderImageRepeat        = interface end
     type IBorderImageSlice         = interface end
+    type IBorderImageOutset        = interface end
     type IMargin                   = interface end
     type IPadding                  = interface end
     type IDisplay                  = interface end

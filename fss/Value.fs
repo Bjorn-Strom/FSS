@@ -158,7 +158,8 @@ module Value =
         | BorderImageRepeat2 of IBorderImageRepeat * IBorderImageRepeat
         | BorderImageSlice   of IBorderImageSlice
         | BorderImageSlices  of IBorderImageSlice list
-        
+        | BorderImageOutset  of IBorderImageOutset
+        | BorderImageOutsets of IBorderImageOutset list
         
         | Width       of IContentSize
         | MinWidth    of IContentSize
@@ -422,6 +423,8 @@ module Value =
                 | BorderImageRepeat2 (b1, b2) -> cssValue Property.BorderImageRepeat <| sprintf "%s %s" (BorderValue.imageRepeat b1) (BorderValue.imageRepeat b2)
                 | BorderImageSlice    b       -> cssValue Property.BorderImageSlice  <| BorderValue.imageSlice b
                 | BorderImageSlices   bs      -> cssValue Property.BorderImageSlice  <| combineWs BorderValue.imageSlice bs
+                | BorderImageOutset    b      -> cssValue Property.BorderImageOutset <| BorderValue.imageOutset b
+                | BorderImageOutsets   bs     -> cssValue Property.BorderImageOutset <| combineWs BorderValue.imageOutset bs
                 
                 | Width     w -> cssValue Property.Width     <| ContentSize.value w
                 | MinWidth  w -> cssValue Property.MinWidth  <| ContentSize.value w
