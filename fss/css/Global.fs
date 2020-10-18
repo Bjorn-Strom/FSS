@@ -47,7 +47,9 @@ module Global =
         interface IQuote
         interface IOverflow
         interface IBorderImageWidth
-
+        interface IGridAutoColumns
+        interface IMinMax
+        
     type Center =
         | Center
         interface IAlignSelf
@@ -149,6 +151,7 @@ module Global =
         interface IQuote
         interface IOverflow
         interface IImage
+        interface IGridAutoColumns
 
 module GlobalValue =
     open Global

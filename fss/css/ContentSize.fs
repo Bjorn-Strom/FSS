@@ -11,13 +11,16 @@ open Global
 // https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
 // https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
 // https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
+[<AutoOpen>]
 module ContentSize =
     type ContentSize =
         | MaxContent
         | MinContent
         | FitContent of Size
         interface IContentSize
-
+        interface IGridAutoColumns
+        interface IMinMax
+    
     let private contentSizeValue (v: ContentSize): string =
         match v with
             | MaxContent -> "max-content"

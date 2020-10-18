@@ -251,6 +251,9 @@ module Value =
         | OverflowX  of IOverflow
         | OverflowY  of IOverflow
         | OverflowXY of IOverflow * IOverflow
+        
+        | GridAutoColumn  of IGridAutoColumns
+        | GridAutoColumns of IGridAutoColumns list
 
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
@@ -516,6 +519,9 @@ module Value =
                 | OverflowX  o      -> cssValueKebab Property.OverflowX <| OverflowValue.overflow o
                 | OverflowY  o      -> cssValueKebab Property.OverflowY <| OverflowValue.overflow o
                 | OverflowXY (x, y) -> cssValueKebab Property.Overflow  <| sprintf "%s %s" (OverflowValue.overflow x) (OverflowValue.overflow y)
+                
+                | GridAutoColumn  g  -> cssValueKebab Property.GridAutoColumns <| GridValue.autoColumns g
+                | GridAutoColumns gs -> cssValueKebab Property.GridAutoColumns <| combineWs GridValue.autoColumns gs
 
 
         )

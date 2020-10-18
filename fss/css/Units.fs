@@ -28,6 +28,8 @@ module Percent =
         interface ITransformOrigin
         interface ITextUnderlineOffset
         interface IPlacement
+        interface IGridAutoColumns
+        interface IMinMax
 
     let value (Percent p): string = p
 
@@ -72,6 +74,8 @@ module Size =
         interface IPerspective
         interface ITextUnderlineOffset
         interface IPlacement
+        interface IGridAutoColumns
+        interface IMinMax
 
     let private sizeValue (u: Size) =
         match u with
@@ -141,3 +145,12 @@ module Time =
             | :? Global as g -> GlobalValue.globalValue g
             | :? Time   as t -> stringifyTime t
             | _ -> "Unknown transition duration"
+            
+module Fraction =
+    type Fraction =
+        | Fr of string
+        interface IFraction
+        interface IMinMax
+        interface IGridAutoColumns
+        
+    let value (Fr f) = f

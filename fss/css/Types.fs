@@ -92,7 +92,9 @@ module Types =
     type IOverflow                 = interface end
     type IImage                    = interface end
     type IImagePosition            = interface end
-
+    type IGridAutoColumns          = interface end
+    type IMinMax                   = interface end
+    type IFraction                 = interface end
 
     // Common
     type CounterStyle = CounterStyle of string

@@ -705,7 +705,7 @@ let BorderExamples (model: Model) dispatch =
                     BorderWidth (px 30)
                     BorderStyle Border.Solid
                     BorderImageSource (Image.Url "https://interactive-examples.mdn.mozilla.net/media/examples/border-diamonds.png")
-                    BorderImageWidth (Border.Value 30)
+                    BorderImageWidth (Border.Value 30.)
                 ])
             ]
                 []
@@ -719,7 +719,7 @@ let BorderExamples (model: Model) dispatch =
                     BorderWidth (px 40)
                     BorderStyle Border.Solid
                     BorderImageSource (Image.Url "https://mdn.mozillademos.org/files/4127/border.png" )
-                    BorderImageSlice (Border.Value 27)
+                    BorderImageSlice (Border.Value 27.)
 
                     let (first, optional) = model.BRepeat
                     

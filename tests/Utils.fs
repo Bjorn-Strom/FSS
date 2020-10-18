@@ -26,4 +26,8 @@ module Utils =
                 )
 
             Expect.equal actual correct testName
+            
+    let testString (testName: string) (actual: string) (expected: string) =
+        testCase testName <| fun _ ->
+            Expect.equal actual expected testName
 
