@@ -27,6 +27,7 @@ module Global =
         interface IFloat
         interface IQuote
         interface IImage
+        interface IGridTemplateAreas
 
     type Auto =
         | Auto
@@ -48,6 +49,7 @@ module Global =
         interface IOverflow
         interface IBorderImageWidth
         interface IGridAutoColumns
+        interface IGridAutoRows
         interface IMinMax
         
     type Center =
@@ -66,7 +68,6 @@ module Global =
         interface ILineHeight
         interface IContent
         interface IAnimationDirection
-
 
     type Global =
         | Initial
@@ -152,7 +153,9 @@ module Global =
         interface IOverflow
         interface IImage
         interface IGridAutoColumns
+        interface IGridAutoRows
         interface IGridAutoFlow
+        interface IGridTemplateAreas
 
 module GlobalValue =
     open Global

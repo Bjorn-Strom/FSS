@@ -170,6 +170,96 @@ module Grid =
                     ["grid-auto-columns" ==> "unset"] 
                
                 test
+                    "Grid auto rows min content"
+                    [GridAutoRow MinContent]
+                    ["grid-auto-rows" ==> "min-content"]
+            
+                test
+                    "Grid auto rows max content"
+                    [GridAutoRow MaxContent]
+                    ["grid-auto-rows" ==> "max-content"]
+                    
+                test
+                    "Grid auto rows auto"
+                    [GridAutoRow Auto]
+                    ["grid-auto-rows" ==> "auto"]
+                    
+                test
+                    "Grid auto rows px"
+                    [GridAutoRow (px 100)]
+                    ["grid-auto-rows" ==> "100px"]
+            
+                test
+                    "Grid auto rows cm"
+                    [GridAutoRow (cm 20.)]
+                    ["grid-auto-rows" ==> "20.0cm"]
+                    
+                test
+                    "Grid auto rows vmax"
+                    [GridAutoRow (vmax 50.)]
+                    ["grid-auto-rows" ==> "50.0vmax"]
+                    
+                test
+                    "Grid auto rows percent"
+                    [GridAutoRow (pct 10)]
+                    ["grid-auto-rows" ==> "10%"]
+                    
+                test
+                    "Grid auto rows fr"
+                    [GridAutoRow (fr 0.5)]
+                    ["grid-auto-rows" ==> "0.50fr"]
+                
+                test
+                    "Grid auto rows fit content"
+                    [GridAutoRow (FitContent(px 400)) ]
+                    ["grid-auto-rows" ==> "fit-content(400px)"]
+
+                test
+                    "Grid auto rows multiple with min-content max-content and auto"
+                    [ GridAutoRows [MinContent; MaxContent; Auto] ]
+                    ["grid-auto-rows" ==> "min-content max-content auto"]
+                    
+                test
+                    "Grid auto rows multiple with pxs"
+                    [ GridAutoRows [px 100; px 150; px 390;] ]
+                    ["grid-auto-rows" ==> "100px 150px 390px"]
+                    
+                test
+                    "Grid auto rows multiple with percents"
+                    [ GridAutoRows [pct 10; pct 33] ]
+                    ["grid-auto-rows" ==> "10% 33%"]
+                    
+                test
+                    "Grid auto rows multiple with fractions"
+                    [ GridAutoRows [fr 0.5; fr 3.; fr 1.] ]
+                    ["grid-auto-rows" ==> "0.50fr 3.00fr 1.00fr"]
+                    
+                test
+                    "Grid auto rows multiple with minmaxs"
+                    [ GridAutoRows [ Grid.MinMax(px 100, Auto); Grid.MinMax(MaxContent, fr 2.); Grid.MinMax(pct 20, vmax 80.) ] ]
+                    ["grid-auto-rows" ==> "minmax(100px, auto) minmax(max-content, 2.00fr) minmax(20%, 80.0vmax)"]
+                    
+                test
+                    "Grid auto rows multiple with a combination"
+                    [ GridAutoRows [px 100; Grid.MinMax(px 100, Auto); pct 10; fr 0.5; FitContent(px 400)] ]
+                    ["grid-auto-rows" ==> "100px minmax(100px, auto) 10% 0.50fr fit-content(400px)"]
+                    
+                test
+                    "Grid auto rows inherit"
+                    [GridAutoRow Inherit]
+                    ["grid-auto-rows" ==> "inherit"]
+                    
+                test
+                    "Grid auto rows initial"
+                    [GridAutoRow Initial]
+                    ["grid-auto-rows" ==> "initial"]
+                    
+                test
+                    "Grid auto rows unset"
+                    [GridAutoRow Unset]
+                    ["grid-auto-rows" ==> "unset"] 
+                
+                test
                     "Grid auto flow row"
                     [GridAutoFlow Grid.Row]
                     ["grid-auto-flow" ==> "row"]
@@ -208,4 +298,38 @@ module Grid =
                     "Grid auto flow unset"
                     [GridAutoFlow Unset]
                     ["grid-auto-flow" ==> "unset"]
+                    
+                test
+                    "Grid template areas None"
+                    [GridTemplateAreas None]
+                    ["grid-template-areas" ==> "none"]
+                    
+                test
+                    "Grid template areas strings"
+                    [GridTemplateAreas (Grid.TemplateArea [[ "a"; "b"  ]]) ]
+                    ["grid-template-areas" ==> "\" a b \""]
+                    
+                test
+                    "Grid template areas multiple strings"
+                    [GridTemplateAreas (Grid.TemplateArea [
+                        ["header"; "header"; "header"; "header" ]
+                        ["main"; "main"; "."; "sidebar" ]
+                        ["footer"; "footer"; "footer"; "footer" ]
+                    ]) ]
+                    ["grid-template-areas" ==> "\" header header header header \" \" main main . sidebar \" \" footer footer footer footer \""]
+                    
+                test
+                    "Grid template areas inherit"
+                    [GridTemplateAreas Inherit ]
+                    ["grid-template-areas" ==> "inherit"]
+                    
+                test
+                    "Grid template areas initial"
+                    [GridTemplateAreas Initial]
+                    ["grid-template-areas" ==> "initial"]
+                    
+                test
+                    "Grid template areas multiple unset"
+                    [GridTemplateAreas Unset]
+                    ["grid-template-areas" ==> "unset"]
             ]

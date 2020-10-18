@@ -252,10 +252,13 @@ module Value =
         | OverflowY  of IOverflow
         | OverflowXY of IOverflow * IOverflow
         
-        | GridAutoColumn  of IGridAutoColumns
-        | GridAutoColumns of IGridAutoColumns list
-        | GridAutoFlow    of IGridAutoFlow
-        | GridAutoFlow2   of IGridAutoFlow * IGridAutoFlow
+        | GridAutoColumn    of IGridAutoColumns
+        | GridAutoColumns   of IGridAutoColumns list
+        | GridAutoFlow      of IGridAutoFlow
+        | GridAutoFlow2     of IGridAutoFlow * IGridAutoFlow
+        | GridAutoRow       of IGridAutoRows
+        | GridAutoRows      of IGridAutoRows list
+        | GridTemplateAreas of IGridTemplateAreas
 
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
@@ -522,12 +525,13 @@ module Value =
                 | OverflowY  o      -> cssValueKebab Property.OverflowY <| OverflowValue.overflow o
                 | OverflowXY (x, y) -> cssValueKebab Property.Overflow  <| sprintf "%s %s" (OverflowValue.overflow x) (OverflowValue.overflow y)
                 
-                | GridAutoColumn  g      -> cssValueKebab Property.GridAutoColumns <| GridValue.autoColumns g
-                | GridAutoColumns gs     -> cssValueKebab Property.GridAutoColumns <| combineWs GridValue.autoColumns gs
-                | GridAutoFlow  g        -> cssValueKebab Property.GridAutoFlow    <| GridValue.autoFlow g
-                | GridAutoFlow2 (g1, g2) -> cssValueKebab Property.GridAutoFlow    <| sprintf "%s %s" (GridValue.autoFlow g1) (GridValue.autoFlow g2) 
-
-
+                | GridAutoColumn    g       -> cssValueKebab Property.GridAutoColumns   <| GridValue.autoColumns g
+                | GridAutoColumns   gs      -> cssValueKebab Property.GridAutoColumns   <| combineWs GridValue.autoColumns gs
+                | GridAutoRow       g       -> cssValueKebab Property.GridAutoRows      <| GridValue.autoRows g
+                | GridAutoRows      gs      -> cssValueKebab Property.GridAutoRows      <| combineWs GridValue.autoRows gs
+                | GridAutoFlow      g       -> cssValueKebab Property.GridAutoFlow      <| GridValue.autoFlow g
+                | GridAutoFlow2    (g1, g2) -> cssValueKebab Property.GridAutoFlow      <| sprintf "%s %s" (GridValue.autoFlow g1) (GridValue.autoFlow g2)
+                | GridTemplateAreas g       -> cssValueKebab Property.GridTemplateAreas <| GridValue.templateAreas g
         )
         |> callback
 

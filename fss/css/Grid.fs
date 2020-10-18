@@ -7,13 +7,18 @@ module Grid =
         | MinMax of IMinMax * IMinMax
         interface IMinMax
         interface IGridAutoColumns
+        interface IGridAutoRows
     
     type AutoFlow =
         | Row
         | Column
         | Dense
         interface IGridAutoFlow
-    
+
+    type TemplateArea =
+        | TemplateArea of string list list
+        interface IGridTemplateAreas
+
 module GridValue =
     open ContentSize
     open Units.Percent
@@ -46,9 +51,32 @@ module GridValue =
         | :? Fraction      as f -> Units.Fraction.value f
         | :? MinMax        as m -> minMax m
         | _ -> "Unknown grid auto columns"
+                
+    let autoRows (v: IGridAutoRows) =
+        match v with
+        | :? ContentSize   as c -> ContentSize.value c
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Auto   as a -> GlobalValue.auto a
+        | :? Percent       as p -> Units.Percent.value p
+        | :? Size          as s -> Units.Size.value s
+        | :? Fraction      as f -> Units.Fraction.value f
+        | :? MinMax        as m -> minMax m
+        | _ -> "Unknown grid auto rows"
         
     let autoFlow (v: IGridAutoFlow) =
         match v with
         | :? Global.Global as g -> GlobalValue.globalValue g
         | :? AutoFlow      as m -> duToLowercase m
-        | _ -> "Unknown grid auto columns"
+        | _ -> "Unknown grid auto flow"
+        
+    let templateAreas (v: IGridTemplateAreas) =
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.None   as n -> GlobalValue.none n
+        | :? TemplateArea  as t ->
+            let (TemplateArea t) = t
+            t
+            |> List.map (fun x -> ["\""] @ x @ ["\""])
+            |> List.map (fun x -> String.concat " " x)
+            |> String.concat " "
+        | _ -> "Unknown grid template area"

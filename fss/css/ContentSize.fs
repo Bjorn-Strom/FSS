@@ -19,6 +19,7 @@ module ContentSize =
         | FitContent of Size
         interface IContentSize
         interface IGridAutoColumns
+        interface IGridAutoRows
         interface IMinMax
     
     let private contentSizeValue (v: ContentSize): string =

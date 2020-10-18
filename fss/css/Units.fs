@@ -29,6 +29,7 @@ module Percent =
         interface ITextUnderlineOffset
         interface IPlacement
         interface IGridAutoColumns
+        interface IGridAutoRows
         interface IMinMax
 
     let value (Percent p): string = p
@@ -75,6 +76,7 @@ module Size =
         interface ITextUnderlineOffset
         interface IPlacement
         interface IGridAutoColumns
+        interface IGridAutoRows
         interface IMinMax
 
     let private sizeValue (u: Size) =
@@ -152,5 +154,6 @@ module Fraction =
         interface IFraction
         interface IMinMax
         interface IGridAutoColumns
+        interface IGridAutoRows
         
     let value (Fr f) = f
