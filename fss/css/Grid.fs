@@ -8,12 +8,19 @@ module Grid =
         interface IMinMax
         interface IGridAutoColumns
     
+    type AutoFlow =
+        | Row
+        | Column
+        | Dense
+        interface IGridAutoFlow
+    
 module GridValue =
     open ContentSize
     open Units.Percent
     open Units.Size
     open Units.Fraction
     open Grid
+    open Utilities.Helpers
     
     let minMax (MinMax (m1, m2)) =
         let minMaxValue (m: IMinMax) =
@@ -38,4 +45,10 @@ module GridValue =
         | :? Size          as s -> Units.Size.value s
         | :? Fraction      as f -> Units.Fraction.value f
         | :? MinMax        as m -> minMax m
+        | _ -> "Unknown grid auto columns"
+        
+    let autoFlow (v: IGridAutoFlow) =
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? AutoFlow      as m -> duToLowercase m
         | _ -> "Unknown grid auto columns"

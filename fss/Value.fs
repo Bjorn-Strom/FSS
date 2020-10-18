@@ -254,6 +254,8 @@ module Value =
         
         | GridAutoColumn  of IGridAutoColumns
         | GridAutoColumns of IGridAutoColumns list
+        | GridAutoFlow    of IGridAutoFlow
+        | GridAutoFlow2   of IGridAutoFlow * IGridAutoFlow
 
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
@@ -520,8 +522,10 @@ module Value =
                 | OverflowY  o      -> cssValueKebab Property.OverflowY <| OverflowValue.overflow o
                 | OverflowXY (x, y) -> cssValueKebab Property.Overflow  <| sprintf "%s %s" (OverflowValue.overflow x) (OverflowValue.overflow y)
                 
-                | GridAutoColumn  g  -> cssValueKebab Property.GridAutoColumns <| GridValue.autoColumns g
-                | GridAutoColumns gs -> cssValueKebab Property.GridAutoColumns <| combineWs GridValue.autoColumns gs
+                | GridAutoColumn  g      -> cssValueKebab Property.GridAutoColumns <| GridValue.autoColumns g
+                | GridAutoColumns gs     -> cssValueKebab Property.GridAutoColumns <| combineWs GridValue.autoColumns gs
+                | GridAutoFlow  g        -> cssValueKebab Property.GridAutoFlow    <| GridValue.autoFlow g
+                | GridAutoFlow2 (g1, g2) -> cssValueKebab Property.GridAutoFlow    <| sprintf "%s %s" (GridValue.autoFlow g1) (GridValue.autoFlow g2) 
 
 
         )

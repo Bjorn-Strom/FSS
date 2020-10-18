@@ -93,6 +93,7 @@ module Types =
     type IImage                    = interface end
     type IImagePosition            = interface end
     type IGridAutoColumns          = interface end
+    type IGridAutoFlow             = interface end
     type IMinMax                   = interface end
     type IFraction                 = interface end
 

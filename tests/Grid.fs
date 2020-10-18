@@ -167,8 +167,45 @@ module Grid =
                 test
                     "Grid auto columns unset"
                     [GridAutoColumn Unset]
-                    ["grid-auto-columns" ==> "unset"]  
+                    ["grid-auto-columns" ==> "unset"] 
+               
+                test
+                    "Grid auto flow row"
+                    [GridAutoFlow Grid.Row]
+                    ["grid-auto-flow" ==> "row"]
                 
+                test
+                    "Grid auto flow column"
+                    [GridAutoFlow Grid.Column]
+                    ["grid-auto-flow" ==> "column"]
                 
-            
+                test
+                    "Grid auto flow dense"
+                    [GridAutoFlow Grid.Dense]
+                    ["grid-auto-flow" ==> "dense"]
+                
+                test
+                    "Grid auto flow row dense"
+                    [GridAutoFlow2(Grid.Row, Grid.Dense)]
+                    ["grid-auto-flow" ==> "row dense"]
+                
+                test
+                    "Grid auto flow column dense"
+                    [GridAutoFlow2(Grid.Column, Grid.Dense)]
+                    ["grid-auto-flow" ==> "column dense"]
+                
+                test
+                    "Grid auto flow inherit"
+                    [GridAutoFlow Inherit]
+                    ["grid-auto-flow" ==> "inherit"]
+                
+                test
+                    "Grid auto flow initial"
+                    [GridAutoFlow Initial]
+                    ["grid-auto-flow" ==> "initial"]
+                
+                test
+                    "Grid auto flow unset"
+                    [GridAutoFlow Unset]
+                    ["grid-auto-flow" ==> "unset"]
             ]

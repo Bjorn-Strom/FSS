@@ -152,6 +152,7 @@ module Global =
         interface IOverflow
         interface IImage
         interface IGridAutoColumns
+        interface IGridAutoFlow
 
 module GlobalValue =
     open Global
