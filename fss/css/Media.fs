@@ -10,6 +10,8 @@ module Media =
         | Speech
         | Print
         | All
+        | Not of Device
+        | Only of Device
 
     type Pointer =
         | Course
@@ -23,7 +25,7 @@ module Media =
 
     type DisplayMode =
         | Fullscreen
-        | Standalone 
+        | Standalone
         | MinimalUi
         | Browser
 
@@ -71,7 +73,7 @@ module Media =
         | AspectRatio of int
         | MinAspectRatio of int
         | MaxAspectRatio of int
-        | Color of int
+        | Color
         | MinColor of int
         | MaxColor of int
         | ColorGamut of ColorGamut
@@ -111,7 +113,11 @@ module Media =
 module MediaValue =
     open Media
 
-    let deviceLabel (d: Device): string = duToLowercase d
+    let deviceLabel (d: Device): string =
+        match d with
+            | Not  n -> sprintf "not %s" (duToLowercase n)
+            | Only o -> sprintf "only %s" (duToLowercase o)
+            | _     -> duToLowercase d
 
     let pointer (p: Pointer): string = duToLowercase p
 
@@ -143,7 +149,11 @@ module MediaValue =
                 | AspectRatio                r -> sprintf "(aspect-ratio: %d)" r
                 | MinAspectRatio             r -> sprintf "(min-aspect-ratio: %d)" r
                 | MaxAspectRatio             r -> sprintf "(max-aspect-ratio: %d)" r
-                | Color                      c -> sprintf "(color: %d)"  c
+                | Color                        ->
+                    if List.length features >= 2 then
+                        sprintf "and (color)"
+                    else
+                        sprintf "(color)"
                 | MinColor                   c -> sprintf "(min-color: %d)" c
                 | MaxColor                   c -> sprintf "(max-color: %d)" c
                 | ColorGamut                 c -> sprintf "(color-gamut: %s)" <| colorGamut c
@@ -153,7 +163,7 @@ module MediaValue =
                 | DisplayMode                d -> sprintf "(display-mode: %s)" <| displayMode d
                 | ForcedColors               f -> sprintf "(forced-colors: %s)" <| if f then "active" else "none"
                 | Grid                       g -> sprintf "(grid: %s)" <| if g then "1" else "0"
-                | Height                     h -> sprintf "(height: %s)" <| Units.Size.value h 
+                | Height                     h -> sprintf "(height: %s)" <| Units.Size.value h
                 | MinHeight                  s -> sprintf "(min-height: %s)" <| Units.Size.value s
                 | MaxHeight                  s -> sprintf "(max-height: %s)" <| Units.Size.value s
                 | Width                      s -> sprintf "(width: %s)" <| Units.Size.value s
@@ -162,9 +172,9 @@ module MediaValue =
                 | Hover                      h -> sprintf "(hover %s)" <| if h then "hover" else "none"
                 | InvertedColors             c -> sprintf "(inverted-colors: %s)" <| if c then "inverted" else "none"
                 | LightLevel                 l -> sprintf "(light-level: %s)" <| lightLevel l
-                | Monochrome                 m -> sprintf "(monochrome: %d)" m 
-                | MinMonochrome              m -> sprintf "(min-monochrome: %d)" m 
-                | MaxMonochrome              m -> sprintf "(max-monochrome: %d)" m 
+                | Monochrome                 m -> sprintf "(monochrome: %d)" m
+                | MinMonochrome              m -> sprintf "(min-monochrome: %d)" m
+                | MaxMonochrome              m -> sprintf "(max-monochrome: %d)" m
                 | Orientation                o -> sprintf "(orientation: %s)" <| orientation o
                 | OverflowBlock              o -> sprintf "(overflow-block: %s)" <| overflowBlock o
                 | OverflowInline             o -> sprintf "(overflow-inline: %s)" <| if o then "scroll" else "none"
@@ -172,9 +182,9 @@ module MediaValue =
                 | PrefersColorScheme         p -> sprintf "(prefers-color-scheme: %s)" <| colorScheme p
                 | PrefersContrast            c -> sprintf "(prefers-contrast: %s)" <| contrast c
                 | PrefersReducedMotion       p -> sprintf "(prefers-reduced-motion: %s)" <| if p then "reduce" else "no-preference"
-                | PrefersReducedTransparency p -> sprintf "(prefers-reduced-transparency: %s)" <| if p then "reduce" else "no-preference" 
+                | PrefersReducedTransparency p -> sprintf "(prefers-reduced-transparency: %s)" <| if p then "reduce" else "no-preference"
                 | Resolution                 r -> sprintf "(resolution: %s)" <| Units.Resolution.value r
-                | MinResolution              r -> sprintf "(min-resolution: %s)" <| Units.Resolution.value r 
+                | MinResolution              r -> sprintf "(min-resolution: %s)" <| Units.Resolution.value r
                 | MaxResolution              r -> sprintf "(max-resolution: %s)" <| Units.Resolution.value r
                 | Scan                       s -> sprintf "(scan: %s)" <| scan s
                 | Scripting                  s -> sprintf "(scripting: %s)" <| scripting s
@@ -183,4 +193,3 @@ module MediaValue =
         features
         |> List.map stringifyMedia
         |> String.concat " and "
-    

@@ -33,7 +33,7 @@ let update (msg: Msg) (model: Model): Model =
     | SetFlexWrap wrap -> { model with FlexWrap = wrap}
     | SetAlignContent content -> { model with AlignContent = content}
     | SetBackgroundRepeat repeat -> { model with BackgroundRepeat = repeat}
-    | SetBorderImagerRepeat (r, r2) -> { model with BRepeat = r, r2} 
+    | SetBorderImagerRepeat (r, r2) -> { model with BRepeat = r, r2}
 
 let ColorExamples () =
     fragment []
@@ -54,7 +54,7 @@ let ColorExamples () =
             p [ ClassName (fss [Color Unset]) ] [ str "Colors can be unset"]
         ]
 
-let BackgroundExamples model dispatch =    
+let BackgroundExamples model dispatch =
     fragment []
         [
             div []
@@ -696,7 +696,7 @@ let BorderExamples (model: Model) dispatch =
                                 ]
                         ]
                     ]
-                
+
             h2 [] [ str "Border image" ]
             div  [
                 ClassName (fss [
@@ -709,7 +709,7 @@ let BorderExamples (model: Model) dispatch =
                 ])
             ]
                 []
-                
+
             div [
                 ClassName (fss [
                     Width (rem 12.)
@@ -722,7 +722,7 @@ let BorderExamples (model: Model) dispatch =
                     BorderImageSlice (Border.Value 27.)
 
                     let (first, optional) = model.BRepeat
-                    
+
                     match optional with
                         | Some b -> BorderImageRepeat2(first, b)
                         | Option.None -> BorderImageRepeat first
@@ -765,8 +765,8 @@ let BorderExamples (model: Model) dispatch =
                             str "Space round"
                         ]
                 ]
-                
-                
+
+
             h2 [] [ str "Combining" ]
             let borderStuff =
                 [
@@ -782,9 +782,9 @@ let BorderExamples (model: Model) dispatch =
                     Height (px 20)
                     Width (px 200)
                 ]
-                
+
             let borderAndColorStyle = fss colorStuff
-            
+
             div [ ClassName borderAndColorStyle ] [ str "I AM COOL?" ]
     ]
 
@@ -1892,9 +1892,11 @@ let MediaQueryExamples () =
                 MediaQuery
                     [ Media.MaxWidth (px 500); Media.MinWidth (px 200) ]
                     [ BackgroundColor Color.red ]
+
                 MediaQuery
                     [ Media.MinHeight (px 700)]
                     [ BackgroundColor Color.pink]
+
                 MediaQueryFor Media.Print
                     []
                     [
@@ -1902,6 +1904,7 @@ let MediaQueryExamples () =
                         Transform (Transform.Rotate(deg 45.0))
                         BackgroundColor Color.red
                     ]
+
                 MediaQuery
                     [ Media.Orientation Media.Landscape]
                     [ Color Color.green; FontSize (px 28)]
@@ -2685,7 +2688,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //BackgroundExamples model dispatch
             //FontExamples ()
             //FontFaceExamples ()
-            BorderExamples model dispatch
+            //BorderExamples model dispatch
             //MarginExamples ()
             //PaddingExamples ()
             //TransformExamples ()
@@ -2693,7 +2696,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //TextExamples ()
             //AnimationExamples ()
             //FlexBoxExamples model dispatch
-            //MediaQueryExamples ()
+            MediaQueryExamples ()
             //SelectorExamples ()
             //CursorExamples ()
             //PsuedoClassExamples ()
