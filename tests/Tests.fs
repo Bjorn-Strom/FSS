@@ -7,6 +7,7 @@ module Tests =
     let tests =
             testList "Fss Tests" [
                 Grid.tests
+                Keyframes.tests
                 Media.tests
                 PseudoElements.tests
                 Content.tests

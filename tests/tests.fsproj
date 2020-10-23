@@ -30,6 +30,7 @@
     <Compile Include="PseudoElements.fs" />
     <Compile Include="Grid.fs" />
     <Compile Include="Media.fs" />
+    <Compile Include="KeyFrames.fs" />
     <Compile Include="Tests.fs" />
   </ItemGroup>
 
