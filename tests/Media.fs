@@ -25,10 +25,10 @@ module Media =
                             [ Media.MinHeight (px 700) ]
                             [ BackgroundColor Color.pink ]
                     ]
-                    ["@media (min-height: 700px)" ==> "[backgroundColor, #ffc0cb]"]
+                    ["@media (min-height: 700px)" ==> "[backgroundColor,#ffc0cb]"]
 
-                test
-                    ""
+                testNested
+                    "Media query for print"
                     [
                         MediaQueryFor Media.Print
                             []
@@ -38,36 +38,21 @@ module Media =
                                 BackgroundColor Color.indianRed
                             ]
                     ]
-                    ["" ==> ""]
+                    ["@media print " ==> "[marginTop,200px,transform,rotate(45.00deg),backgroundColor,#cd5c5c]"]
 
-                test
-                    ""
-                    [
-                        MediaQueryFor Media.Print
-                            []
-                            [
-                                MarginTop (px 200)
-                                Transform (Transform.Rotate (deg 45.0))
-                                BackgroundColor Color.indianRed
-                            ]
-                    ]
-                    ["" ==> ""]
-
-                test
-                    ""
+                testNested
+                    "Media not all"
                     [
                         MediaQueryFor (Media.Not Media.All)
                             [ Media.Color ]
                             [
                                 MarginTop (px 200)
-                                Transform (Transform.Rotate (deg 45.0))
-                                BackgroundColor Color.indianRed
                             ]
                     ]
-                    ["" ==> ""]
+                    ["@media not all and (color)" ==> "[marginTop,200px]"]
 
-                test
-                    ""
+                testNested
+                    "Media query only screen"
                     [
                         MediaQueryFor (Media.Only Media.Screen)
                             [
@@ -82,6 +67,9 @@ module Media =
                                 BackgroundColor Color.indianRed
                             ]
                     ]
-                    ["" ==> ""]
-
+                    [
+                        "@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: 1)"
+                        ==>
+                        "[marginTop,200px,transform,rotate(45.00deg),backgroundColor,#cd5c5c]"
+                    ]
             ]

@@ -21,12 +21,12 @@ module Utils =
                 |> List.map (fun (x: string, y: obj) ->
                     let y: string list =
                         y :?> string list list
-                        |> List.head
+                        |> List.collect id
                     x ==> (sprintf "[%s]" <| String.concat "," y)
                 )
 
             Expect.equal actual correct testName
-            
+
     let testString (testName: string) (actual: string) (expected: string) =
         testCase testName <| fun _ ->
             Expect.equal actual expected testName

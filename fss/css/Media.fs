@@ -150,7 +150,7 @@ module MediaValue =
                 | MinAspectRatio             r -> sprintf "(min-aspect-ratio: %d)" r
                 | MaxAspectRatio             r -> sprintf "(max-aspect-ratio: %d)" r
                 | Color                        ->
-                    if List.length features >= 2 then
+                    if List.length features >= 1 then
                         sprintf "and (color)"
                     else
                         sprintf "(color)"
@@ -193,3 +193,4 @@ module MediaValue =
         features
         |> List.map stringifyMedia
         |> String.concat " and "
+
