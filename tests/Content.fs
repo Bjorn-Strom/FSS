@@ -45,17 +45,17 @@ module Content =
                 test
                     "Content counter"
                     [ Content (Content.Counter sampleCounter)]
-                    [ "content" ==> "counter(a0)" ]
+                    [ "content" ==> "counter(_0)" ]
                     
                 test
                     "Content counter2"
                     [ Content (Content.Counter2(sampleCounter, ListStyle.UpperLatin))]
-                    [ "content" ==> "counter(a0, upper-latin)" ]
+                    [ "content" ==> "counter(_0, upper-latin)" ]
                     
                 test
                     "Content counter2"
                     [ Content (Content.Counter2(sampleCounter, ListStyle.ListStyleType.String ". "))]
-                    [ "content" ==> "counter(a0, '. ')" ]
+                    [ "content" ==> "counter(_0, '. ')" ]
                     
                 test
                     "Content attribute"

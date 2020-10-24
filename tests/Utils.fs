@@ -2,14 +2,11 @@
 
 open Fable.Mocha
 open Fable.Core.JsInterop
+open Fable.Core.JS
 open Fss
 open Fss.Keyframes
 
 module Utils =
-    open Fable.Core
-    [<Emit("Object.values($0)")>]
-    let objectValues (x: 'a) = jsNative
-
     let test (testName: string) (attributeList: CSSProperty list) (correct: (string * obj) list) =
         testCase testName <| fun _ ->
             let actual =
@@ -35,21 +32,21 @@ module Utils =
     let testString (testName: string) (actual: string) (expected: string) =
         testCase testName <| fun _ ->
             Expect.equal actual expected testName
+            
+    type foo = string * string
 
-
-
-    let testKeyframes (testName: string) (keyframes: KeyframeAttribute list) (correct: (string * obj) list) =
-        let correct =
-            keyframes
-            |> createAnimationObject
-            |>  (fun x ->
-                         Fable.Core.JS.console.log("x: ", x)
-                         x)
-
-        Fable.Core.JS.console.log(Fable.Core.JS.Object.keys(correct))
-        Fable.Core.JS.console.log(objectValues(correct))
-
-
+    let testKeyframes (testName: string) (actual: KeyframeAttribute list) (expected: string list) =       
+        let actual =
+            actual
+            |> createAnimationRecord
+            |> List.map (fun (key, value) ->
+                      sprintf "%s %A" key (JSON.stringify(value)
+                              .Replace("\\", "")
+                              .Replace("\"","")
+                              .Replace("{", "")
+                              .Replace("}", "")
+                              .Replace(":", ", ")))
+                
         testCase testName <| fun _ ->
-            Expect.equal keyframes [] testName
+            Expect.equal actual expected testName
 

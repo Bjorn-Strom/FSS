@@ -19,10 +19,16 @@ module Keyframes =
     let frameValue f = sprintf "%d%%" f
     let frameValues fs = combineList fs frameValue ", "
 
-    let rec createAnimationObject (attributeList: KeyframeAttribute list) =
-        attributeList
-        |> List.map (
-            function 
-                | Frame (f, ps) -> frameValue f ==> createCSSObject ps
-                | Frames (fs, ps) -> frameValues fs ==> createCSSObject ps
-        ) |> createObj
+    let private createAnimation (attributeList: KeyframeAttribute list) callback =
+        let rec createAnimation (attributeList: KeyframeAttribute list) callback =
+            attributeList
+            |> List.map (
+                function 
+                    | Frame (f, ps) -> frameValue f ==> createCSSObject ps
+                    | Frames (fs, ps) -> frameValues fs ==> createCSSObject ps
+            )
+            |> callback
+        createAnimation attributeList callback
+        
+    let createAnimationRecord (attributeList: KeyframeAttribute list) = createAnimation attributeList id
+    let createAnimationObject (attributeList: KeyframeAttribute list) = createAnimation attributeList createObj

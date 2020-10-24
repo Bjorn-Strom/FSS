@@ -29,7 +29,7 @@ module Functions =
         Font.FontName fontFamily
 
     let counterStyle (attributeList: CounterProperty list) =
-        let counterName = sprintf "a%i" <| attributeList.GetHashCode() |> string
+        let counterName = sprintf "_%i" <| attributeList.GetHashCode() |> string
 
         attributeList
         |> List.map (fun _ -> createCounterStyleObject counterName attributeList)
