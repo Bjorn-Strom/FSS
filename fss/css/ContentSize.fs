@@ -20,6 +20,8 @@ module ContentSize =
         interface IContentSize
         interface IGridAutoColumns
         interface IGridAutoRows
+        interface IGridTemplateColumns
+        interface IGridTemplateRows
         interface IMinMax
         interface IRepeat
     

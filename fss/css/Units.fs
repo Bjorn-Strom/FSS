@@ -30,6 +30,8 @@ module Percent =
         interface IPlacement
         interface IGridAutoColumns
         interface IGridAutoRows
+        interface IGridTemplateColumns
+        interface IGridTemplateRows
         interface IMinMax
         interface IRepeat
 
@@ -78,6 +80,8 @@ module Size =
         interface IPlacement
         interface IGridAutoColumns
         interface IGridAutoRows
+        interface IGridTemplateColumns
+        interface IGridTemplateRows
         interface IMinMax
         interface IRepeat
 
@@ -156,7 +160,9 @@ module Fraction =
         interface IFraction
         interface IMinMax
         interface IGridAutoColumns
+        interface IGridTemplateRows
         interface IGridAutoRows
+        interface IGridTemplateColumns
         interface IRepeat
         
     let value (Fr f) = f

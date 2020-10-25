@@ -8,6 +8,8 @@ module Grid =
         interface IMinMax
         interface IGridAutoColumns
         interface IGridAutoRows
+        interface IGridTemplateColumns
+        interface IGridTemplateRows
         interface IRepeat
 
     type RepeatTypes =
@@ -23,6 +25,8 @@ module Grid =
         | Repeat     of RepeatTypes * IRepeat
         | RepeatMany of RepeatTypes * IRepeat list
         interface IRepeat
+        interface IGridTemplateColumns
+        interface IGridTemplateRows
     
     type AutoFlow =
         | Row
@@ -33,7 +37,12 @@ module Grid =
     type TemplateArea =
         | TemplateArea of string list list
         interface IGridTemplateAreas
-
+        
+    type Subgrid =
+        | Subgrid
+        interface IGridTemplateColumns
+        interface IGridTemplateRows
+        
 module GridValue =
     open ContentSize
     open Units.Percent
@@ -115,3 +124,31 @@ module GridValue =
             |> List.map (fun x -> String.concat " " x)
             |> String.concat " "
         | _ -> "Unknown grid template area"
+        
+    let templateColumns (v: IGridTemplateColumns) =
+        match v with
+        | :? ContentSize   as c -> ContentSize.value c
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.None   as n -> GlobalValue.none n
+        | :? Global.Auto   as a -> GlobalValue.auto a
+        | :? Percent       as p -> Units.Percent.value p
+        | :? Size          as s -> Units.Size.value s
+        | :? Fraction      as f -> Units.Fraction.value f
+        | :? MinMax        as m -> minMax m
+        | :? Repeat        as r -> repeat r
+        | :? Subgrid       as s -> duToLowercase s
+        | _ -> "Unknown grid template column"
+        
+    let templateRows (v: IGridTemplateRows) =
+        match v with
+        | :? ContentSize   as c -> ContentSize.value c
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.None   as n -> GlobalValue.none n
+        | :? Global.Auto   as a -> GlobalValue.auto a
+        | :? Percent       as p -> Units.Percent.value p
+        | :? Size          as s -> Units.Size.value s
+        | :? Fraction      as f -> Units.Fraction.value f
+        | :? MinMax        as m -> minMax m
+        | :? Repeat        as r -> repeat r
+        | :? Subgrid       as s -> duToLowercase s
+        | _ -> "Unknown grid template row"

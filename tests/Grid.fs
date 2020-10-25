@@ -9,6 +9,126 @@ module Grid =
     let tests =
         testList "Grid"
             [
+                test
+                    "Grid template row px"
+                    [GridTemplateRow (px 100)]
+                    ["grid-template-rows" ==> "100px"]
+                    
+                test
+                    "Grid template row minmax"
+                    [GridTemplateRow (Grid.MinMax(px 100, fr 1.))]
+                    ["grid-template-rows" ==> "minmax(100px, 1.00fr)"]
+                    
+                test
+                    "Grid template row fit-content"
+                    [GridTemplateRow (FitContent(px 100))]
+                    ["grid-template-rows" ==> "fit-content(100px)"]
+                
+                test
+                    "Grid template row repeat"
+                    [GridTemplateRow (Grid.Repeat(Grid.Value 3, px 200))]
+                    ["grid-template-rows" ==> "repeat(3, 200px)"]
+                    
+                test
+                    "Grid template row subgrid"
+                    [GridTemplateRow (Grid.Subgrid)]
+                    ["grid-template-rows" ==> "subgrid"]
+                
+                test
+                    "Grid template row none"
+                    [GridTemplateRow None]
+                    ["grid-template-rows" ==> "none"]
+                    
+                test
+                    "Grid template row px repeat px"
+                    [GridTemplateRows [px 200; Grid.Repeat(Grid.AutoFill, px 100); px 300]]
+                    ["grid-template-rows" ==> "200px repeat(auto-fill, 100px) 300px"]
+                    
+                test
+                    "Grid template row minmax repeat percent"
+                    [GridTemplateRows [Grid.MinMax(px 100, MaxContent); Grid.Repeat(Grid.AutoFill, px 200); pct 20]]
+                    ["grid-template-rows" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
+                    
+                test
+                    "Grid template row auto"
+                    [GridTemplateRow Auto]
+                    ["grid-template-rows" ==> "auto"]
+                    
+                test
+                    "Grid template row inherit"
+                    [GridTemplateRow Inherit]
+                    ["grid-template-rows" ==> "inherit"]
+                    
+                test
+                    "Grid template row initial"
+                    [GridTemplateRow Initial]
+                    ["grid-template-rows" ==> "initial"]
+                    
+                test
+                    "Grid template row unset"
+                    [GridTemplateRow Unset]
+                    ["grid-template-rows" ==> "unset"]
+                
+                test
+                    "Grid template column px"
+                    [GridTemplateColumn (px 100)]
+                    ["grid-template-columns" ==> "100px"]
+                    
+                test
+                    "Grid template column minmax"
+                    [GridTemplateColumn (Grid.MinMax(px 100, fr 1.))]
+                    ["grid-template-columns" ==> "minmax(100px, 1.00fr)"]
+                    
+                test
+                    "Grid template column fit-content"
+                    [GridTemplateColumn (FitContent(px 100))]
+                    ["grid-template-columns" ==> "fit-content(100px)"]
+                
+                test
+                    "Grid template column repeat"
+                    [GridTemplateColumn (Grid.Repeat(Grid.Value 3, px 200))]
+                    ["grid-template-columns" ==> "repeat(3, 200px)"]
+                    
+                test
+                    "Grid template column subgrid"
+                    [GridTemplateColumn (Grid.Subgrid)]
+                    ["grid-template-columns" ==> "subgrid"]
+                
+                test
+                    "Grid template column none"
+                    [GridTemplateColumn None]
+                    ["grid-template-columns" ==> "none"]
+                    
+                test
+                    "Grid template column px repeat px"
+                    [GridTemplateColumns [px 200; Grid.Repeat(Grid.AutoFill, px 100); px 300]]
+                    ["grid-template-columns" ==> "200px repeat(auto-fill, 100px) 300px"]
+                    
+                test
+                    "Grid template column minmax repeat percent"
+                    [GridTemplateColumns [Grid.MinMax(px 100, MaxContent); Grid.Repeat(Grid.AutoFill, px 200); pct 20]]
+                    ["grid-template-columns" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
+                    
+                test
+                    "Grid template column auto"
+                    [GridTemplateColumn Auto]
+                    ["grid-template-columns" ==> "auto"]
+                    
+                test
+                    "Grid template column inherit"
+                    [GridTemplateColumn Inherit]
+                    ["grid-template-columns" ==> "inherit"]
+                    
+                test
+                    "Grid template column initial"
+                    [GridTemplateColumn Initial]
+                    ["grid-template-columns" ==> "initial"]
+                    
+                test
+                    "Grid template column unset"
+                    [GridTemplateColumn Unset]
+                    ["grid-template-columns" ==> "unset"]
+                
                 testString
                     "Repat value and fr"
                     (GridValue.repeat <| Grid.Repeat(Grid.Value 4, fr 1.))

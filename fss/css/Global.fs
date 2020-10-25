@@ -28,6 +28,8 @@ module Global =
         interface IQuote
         interface IImage
         interface IGridTemplateAreas
+        interface IGridTemplateColumns
+        interface IGridTemplateRows
 
     type Auto =
         | Auto
@@ -50,6 +52,8 @@ module Global =
         interface IBorderImageWidth
         interface IGridAutoColumns
         interface IGridAutoRows
+        interface IGridTemplateColumns
+        interface IGridTemplateRows
         interface IMinMax
         interface IRepeat
         
@@ -157,6 +161,8 @@ module Global =
         interface IGridAutoRows
         interface IGridAutoFlow
         interface IGridTemplateAreas
+        interface IGridTemplateColumns
+        interface IGridTemplateRows
 
 module GlobalValue =
     open Global
