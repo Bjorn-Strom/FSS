@@ -51,6 +51,7 @@ module Global =
         interface IGridAutoColumns
         interface IGridAutoRows
         interface IMinMax
+        interface IRepeat
         
     type Center =
         | Center

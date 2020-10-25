@@ -21,6 +21,7 @@ module ContentSize =
         interface IGridAutoColumns
         interface IGridAutoRows
         interface IMinMax
+        interface IRepeat
     
     let private contentSizeValue (v: ContentSize): string =
         match v with

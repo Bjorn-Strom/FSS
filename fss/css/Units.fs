@@ -31,6 +31,7 @@ module Percent =
         interface IGridAutoColumns
         interface IGridAutoRows
         interface IMinMax
+        interface IRepeat
 
     let value (Percent p): string = p
 
@@ -78,6 +79,7 @@ module Size =
         interface IGridAutoColumns
         interface IGridAutoRows
         interface IMinMax
+        interface IRepeat
 
     let private sizeValue (u: Size) =
         match u with
@@ -155,5 +157,6 @@ module Fraction =
         interface IMinMax
         interface IGridAutoColumns
         interface IGridAutoRows
+        interface IRepeat
         
     let value (Fr f) = f

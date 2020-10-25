@@ -97,6 +97,7 @@ module Types =
     type IGridAutoRows             = interface end
     type IGridTemplateAreas        = interface end
     type IMinMax                   = interface end
+    type IRepeat                   = interface end
     type IFraction                 = interface end
 
     // Common

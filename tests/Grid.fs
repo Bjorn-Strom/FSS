@@ -10,6 +10,71 @@ module Grid =
         testList "Grid"
             [
                 testString
+                    "Repat value and fr"
+                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, fr 1.))
+                    "repeat(4, 1.00fr)"
+                    
+                testString
+                    "Repat value and percent"
+                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, pct 60))
+                    "repeat(4, 60%)"
+                    
+                testString
+                    "Repat value and pixels"
+                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, px 250))
+                    "repeat(4, 250px)"
+                            
+                testString
+                    "Repat value and min-content"
+                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, MinContent))
+                    "repeat(4, min-content)"
+                
+                testString
+                    "Repat value and max-content"
+                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, MaxContent))
+                    "repeat(4, max-content)"
+                    
+                testString
+                    "Repat value and auto"
+                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, Auto))
+                    "repeat(4, auto)"     
+                
+                testString
+                    "Repat value and minmax"
+                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, Grid.MinMax(px 100, fr 1.)))
+                    "repeat(4, minmax(100px, 1.00fr))"
+                    
+                testString
+                    "Repat value and fit content"
+                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, FitContent(px 100)))
+                    "repeat(4, fit-content(100px))" 
+
+                testString
+                    "Repat value and px pct and auto"
+                    (GridValue.repeat <| Grid.RepeatMany(Grid.Value 4, [px 10; pct 30; Auto]))
+                    "repeat(4, 10px 30% auto)"
+                                    
+                testString
+                    "Repat value and min-content max-content"
+                    (GridValue.repeat <| Grid.RepeatMany(Grid.Value 4, [MinContent; MaxContent]))
+                    "repeat(4, min-content max-content)"
+                    
+                testString
+                    "Repat auto-fill and px"
+                    (GridValue.repeat <| Grid.Repeat(Grid.AutoFill, px 30))
+                    "repeat(auto-fill, 30px)"
+
+                testString
+                    "Repat auto-fit and px"
+                    (GridValue.repeat <| Grid.Repeat(Grid.AutoFit, px 30))
+                    "repeat(auto-fit, 30px)"
+                                    
+                testString
+                    "Repat value and auto-fit"
+                    (GridValue.repeat <| Grid.RepeatMany(Grid.Value 4, [MinContent; MaxContent]))
+                    "repeat(4, min-content max-content)" 
+                 
+                testString
                     "MinMax px and fraction"
                     (GridValue.minMax <| Grid.MinMax(px 200, fr 1.5))
                     "minmax(200px, 1.50fr)"

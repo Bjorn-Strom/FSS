@@ -108,7 +108,7 @@ module ListStyle =
                 test
                     "List style type custom"
                     [ ListStyleType (ListStyle.Custom sampleCounterStyle) ]
-                    [ "listStyleType" ==> "a1013904226" ]
+                    [ "listStyleType" ==> "_1013904226" ]
 
                 test
                     "List style type Initial"

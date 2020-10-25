@@ -8,6 +8,21 @@ module Grid =
         interface IMinMax
         interface IGridAutoColumns
         interface IGridAutoRows
+        interface IRepeat
+
+    type RepeatTypes =
+        | AutoFill
+        | AutoFit
+        | Value of int
+
+    type RepeatContent =
+        | Name of string
+        interface IRepeat
+        
+    type Repeat =
+        | Repeat     of RepeatTypes * IRepeat
+        | RepeatMany of RepeatTypes * IRepeat list
+        interface IRepeat
     
     type AutoFlow =
         | Row
@@ -40,7 +55,27 @@ module GridValue =
         sprintf "minmax(%s, %s)"
             (minMaxValue m1)
             (minMaxValue m2)
-    
+
+    let private repeatTypes (v: RepeatTypes) =
+        match v with
+        | Value v -> string v
+        | _ -> duToKebab v 
+                
+    let repeat (v: Repeat) =
+        let stringifyIRepeat (r: IRepeat) =
+            match r with
+            | :? Global.Auto   as a -> GlobalValue.auto a
+            | :? ContentSize   as c -> ContentSize.value c
+            | :? Percent       as p -> Units.Percent.value p
+            | :? Size          as s -> Units.Size.value s
+            | :? Fraction      as f -> Units.Fraction.value f
+            | :? MinMax        as m -> minMax m
+            | _ -> "Unknown repeat value"
+        
+        match v with
+            | Repeat     (types, r)  -> sprintf "repeat(%s, %s)" (repeatTypes types) (stringifyIRepeat r)
+            | RepeatMany (types, rs) -> sprintf "repeat(%s, %s)" (repeatTypes types) (combineWs stringifyIRepeat rs)
+
     let autoColumns (v: IGridAutoColumns) =
         match v with
         | :? ContentSize   as c -> ContentSize.value c
