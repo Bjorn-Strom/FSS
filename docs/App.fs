@@ -2683,10 +2683,10 @@ let PseudoElementExamples () =
 let GridExamples () =
     fragment []
         [
-            h3 [] [str "Grid examples"]
+            h2 [] [str "Grid examples"]
             
-            h2 [] [str "Simple grid example"]
-            let container =
+            h3 [] [str "Simple grid example"]
+            let simpleContainer =
                 fss
                     [
                         BackgroundColor (hex "eee")
@@ -2698,31 +2698,31 @@ let GridExamples () =
                         GridGap (px 30)
                     ]
                     
-            let itemTemplate =
+            let simpleItemTemplate =
                 [
                     Padding (px 20)
                     FontSize (px 20)
                     FontFamily Font.SansSerif
                     Color (hex "fff")
-                ] |> fss
+                ]
                 
             let item1 =
-                itemTemplate @
+                (simpleItemTemplate @
                 [
                     BackgroundColor Color.orangeRed
                     GridRow (Grid.Row (Value 2, Value 3))
                     GridColumn (Grid.Column (Value 2, Value 3))
-                ] |> fss
+                ]) |> fss
                 
             let item2 =
-                itemTemplate @
+                simpleItemTemplate @
                 [
                     BackgroundColor Color.yellowGreen
                     GridRow (Grid.Row (Value 1, Value 2))
                 ] |> fss
                 
             let item3 =
-                itemTemplate @
+                simpleItemTemplate @
                 [
                     BackgroundColor Color.blueViolet
                     GridRow (Grid.Row (Value 2, Value 3))
@@ -2730,28 +2730,28 @@ let GridExamples () =
                 ] |> fss
                 
             let item4 =
-                itemTemplate @
+                simpleItemTemplate @
                 [
                     BackgroundColor Color.paleVioletred
                 ] |> fss
                 
             let item5 =
-                itemTemplate @
+                simpleItemTemplate @
                 [
                     BackgroundColor Color.royalBlue
-                    GridRow (Grid.Row (Value 2, Value 3))
-                    GridColumn (Grid.Column (Value 1, Value 2))
+                    GridRow (Grid.Row (Value 1, Value 2))
+                    GridColumn (Grid.Column (Value 3, Value 4))
                 ] |> fss
                 
             let item6 =
-                itemTemplate @
+                simpleItemTemplate @
                 [
                     BackgroundColor Color.goldenrod
                     GridRow (Grid.Row (Value 1, Value 2))
                     GridColumn (Grid.Column (Value 2, Value 3))
                 ] |> fss
                 
-            div [ ClassName container ]
+            div [ ClassName simpleContainer ]
                 [ 
                     div [ ClassName item1 ] [ str "1: Orange"]
                     div [ ClassName item2 ] [ str "2: Green"]
@@ -2760,9 +2760,99 @@ let GridExamples () =
                     div [ ClassName item5 ] [ str "5: Blue"]
                     div [ ClassName item6 ] [ str "6: Brown"]
                 ]
-            
                 
-            str "foo"
+                
+            let container =
+                fss
+                    [
+                        BackgroundColor (hex "eee")
+                        Width (px 1000)
+                        Margins [px 20; Auto]
+                        Display Display.Grid
+                        GridTemplateRows [px 100; fr 1.; fr 2.; px 100]
+                        GridTemplateColumns [Grid.Repeat(Value 3, fr 1.); pct 20]
+                        GridGap (px 20)
+                        Color (hex "fff")
+                        FontFamily Font.SansSerif
+                    ]
+                    
+            let headerStyle =
+                fss
+                    [
+                        BackgroundColor (hex "d62580")
+                        GridRow (Grid.Row(Value 1, Value 2))
+                        GridColumn (Grid.Column(Value 1, Value -1))
+                    ]
+                    
+            let smallBoxTemplate =
+                [
+                    BackgroundColor (hex "d62580")
+                    MinHeight (px 100)
+                ]
+                
+            let smallBoxOne =
+                smallBoxTemplate @
+                    [
+                        GridRow (Grid.Row(Value 2, Value 3))
+                        GridColumn (Grid.Column(Value 1, Value 2))
+                    ] |> fss
+                    
+            let smallBoxTwo =
+                smallBoxTemplate @
+                    [
+                        GridRow (Grid.Row(Value 2, Value 3))
+                        GridColumn (Grid.Column(Value 2, Value 3))
+                    ] |> fss
+                    
+            let smallBoxThree =
+                smallBoxTemplate @
+                    [
+                        GridRow (Grid.Row(Value 2, Value 3))
+                        GridColumn (Grid.Column(Value 3, Value 4))
+                    ] |> fss
+                    
+            let asideStyle =
+                fss
+                    [
+                        BackgroundColor (hex "d62580")
+                        GridRow (Grid.Row(Value 2, Grid.Span 2))
+                        GridColumn (Grid.Column(Value 4, Value 5))
+                    ]
+                    
+            let articleStyle =
+                fss
+                    [
+                        BackgroundColor (hex "d62580")
+                        GridRow (Grid.Row(Value 3, Value 4))
+                        GridColumn (Grid.Column(Value 1, Grid.Span 3))
+                        MinHeight (px 200)
+                    ]
+                    
+            let footerStyle =
+                fss
+                    [
+                        BackgroundColor (hex "d62580")
+                        GridRow (Grid.Row(Value 4, Value 5))
+                        GridColumn (Grid.Column(Value 1, Value -1))
+                    ]
+                    
+            h3 [] [ str "More complex grid" ] 
+            div [ ClassName container ]
+              [
+                header [ ClassName headerStyle ][ str "Header" ]
+                div [ ClassName smallBoxOne ]
+                    [ str "Small box 1" ]
+                div [ ClassName smallBoxTwo ]
+                    [ str "Small box 2" ]
+                div [ ClassName smallBoxThree ]
+                    [ str "Small box 3" ]
+                aside [ ClassName asideStyle ]
+                    [ str "Sidebar" ]
+                article [ ClassName articleStyle ]
+                    [ str "Main content" ]
+                footer [ ClassName footerStyle ]
+                    [str "Footer"]
+            ]
         ]
     
 let render (model: Model) (dispatch: Msg -> unit) =
