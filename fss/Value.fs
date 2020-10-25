@@ -263,6 +263,9 @@ module Value =
         | GridTemplateColumns of IGridTemplateColumns list
         | GridTemplateRow     of IGridTemplateRows
         | GridTemplateRows    of IGridTemplateRows list
+        | GridColumnGap       of IGridColumnGap
+        | GridRowGap          of IGridRowGap
+        | GridGap             of IGridGap
 
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
@@ -540,6 +543,9 @@ module Value =
                 | GridTemplateColumns cs      -> cssValueKebab Property.GridTemplateColumns <| combineWs GridValue.templateColumns cs
                 | GridTemplateRow     r       -> cssValueKebab Property.GridTemplateRows    <| GridValue.templateRows r
                 | GridTemplateRows    rs      -> cssValueKebab Property.GridTemplateRows    <| combineWs GridValue.templateRows rs
+                | GridColumnGap       g       -> cssValueKebab Property.GridColumnGap       <| GridValue.columnGap g
+                | GridRowGap          g       -> cssValueKebab Property.GridRowGap          <| GridValue.rowGap g
+                | GridGap             g       -> cssValueKebab Property.GridGap             <| GridValue.gap g
         )
         |> callback
 

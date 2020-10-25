@@ -10,6 +10,143 @@ module Grid =
         testList "Grid"
             [
                 test
+                    "Grid gap px"
+                    [GridGap (px 10)]
+                    ["grid-gap" ==> "10px"]
+                    
+                test
+                    "Grid gap em"
+                    [GridGap (em 1.)]
+                    ["grid-gap" ==> "1.0em"]
+                    
+                test
+                    "Grid gap percent"
+                    [GridGap (pct 16)]
+                    ["grid-gap" ==> "16%"]
+                
+                test
+                    "Grid gap px and px"
+                    [ GridGap (Grid.Gap(px 20, px 10)) ]
+                    ["grid-gap" ==> "20px 10px"]
+                    
+                test
+                    "Grid gap em and em"
+                    [GridGap (Grid.Gap(em 1., em 0.5)) ]
+                    ["grid-gap" ==> "1.0em 0.5em"]
+                    
+                test
+                    "Grid gap vmin and vmax"
+                    [GridGap (Grid.Gap(vmin 3., vmax 2.)) ]
+                    ["grid-gap" ==> "3.0vmin 2.0vmax"]
+                    
+                test
+                    "Grid gap cm and mm"
+                    [GridGap (Grid.Gap(cm 0.5, mm 2.)) ]
+                    ["grid-gap" ==> "0.5cm 2.0mm"]
+                    
+                test
+                    "Grid gap percent and percent"
+                    [GridGap (Grid.Gap(pct 16, pct 100)) ]
+                    ["grid-gap" ==> "16% 100%"]
+                    
+                test
+                    "Grid gap px and percent"
+                    [ GridGap (Grid.Gap(px 21, pct 82)) ]
+                    ["grid-gap" ==> "21px 82%"]
+
+                test
+                    "Grid gap inherit"
+                    [GridGap Inherit]
+                    ["grid-gap" ==> "inherit"]
+                    
+                test
+                    "Grid gap initial"
+                    [GridGap Initial]
+                    ["grid-gap" ==> "initial"]
+                    
+                test
+                    "Grid gap unset"
+                    [GridGap Unset]
+                    ["grid-gap" ==> "unset"]
+                
+                
+                
+                
+                
+                
+                
+                
+                test
+                    "Column gap normal"
+                    [GridColumnGap Normal]
+                    ["grid-column-gap" ==> "normal"]
+                    
+                test
+                    "Column gap px"
+                    [GridColumnGap (px 3)]
+                    ["grid-column-gap" ==> "3px"]
+                    
+                test
+                    "Column gap em"
+                    [GridColumnGap (em 2.5)]
+                    ["grid-column-gap" ==> "2.5em"]
+                    
+                test
+                    "Column gap percent"
+                    [GridColumnGap (pct 3)]
+                    ["grid-column-gap" ==> "3%"]
+                    
+                test
+                    "Column gap inherit"
+                    [GridColumnGap Inherit]
+                    ["grid-column-gap" ==> "inherit"]
+                    
+                test
+                    "Column gap initial"
+                    [GridColumnGap Initial]
+                    ["grid-column-gap" ==> "initial"]
+                    
+                test
+                    "Column gap unset"
+                    [GridColumnGap Unset]
+                    ["grid-column-gap" ==> "unset"]
+                
+                test
+                    "Row gap normal"
+                    [GridRowGap Normal]
+                    ["grid-row-gap" ==> "normal"]
+                    
+                test
+                    "Row gap px"
+                    [GridRowGap (px 3)]
+                    ["grid-row-gap" ==> "3px"]
+                    
+                test
+                    "Row gap em"
+                    [GridRowGap (em 2.5)]
+                    ["grid-row-gap" ==> "2.5em"]
+                    
+                test
+                    "Row gap percent"
+                    [GridRowGap (pct 3)]
+                    ["grid-row-gap" ==> "3%"]
+                    
+                test
+                    "Row gap inherit"
+                    [GridRowGap Inherit]
+                    ["grid-row-gap" ==> "inherit"]
+                    
+                test
+                    "Row gap initial"
+                    [GridRowGap Initial]
+                    ["grid-row-gap" ==> "initial"]
+                    
+                test
+                    "Row gap unset"
+                    [GridRowGap Unset]
+                    ["grid-row-gap" ==> "unset"]
+                
+                test
                     "Grid template row px"
                     [GridTemplateRow (px 100)]
                     ["grid-template-rows" ==> "100px"]

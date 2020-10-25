@@ -2678,8 +2678,92 @@ let PseudoElementExamples () =
                 [
                     str "Styles will only be applied to the first line of this paragraph. After that, all text will be styled like normal. See what I mean?"
                 ]
-
         ]
+    
+let GridExamples () =
+    fragment []
+        [
+            h3 [] [str "Grid examples"]
+            
+            h2 [] [str "Simple grid example"]
+            let container =
+                fss
+                    [
+                        BackgroundColor (hex "eee")
+                        Width (px 1000)
+                        Margins [px 20; Auto]
+                        Display Display.Grid
+                        GridTemplateRow (Grid.Repeat(Grid.Value 2, px 150))
+                        GridTemplateColumn (Grid.Repeat(Grid.Value 3, fr 1.))
+                        GridGap (px 30)
+                    ]
+                    
+            let itemTemplate =
+                [
+                    Padding (px 20)
+                    FontSize (px 20)
+                    FontFamily Font.SansSerif
+                    Color (hex "fff")
+                ] |> fss
+                
+            let item1 =
+                itemTemplate @
+                [
+                    BackgroundColor Color.orangeRed
+                    GridRow [ 2; 3 ]
+                    GridColumn [ 2; 3 ]
+                ] |> fss
+                
+            let item2 =
+                itemTemplate @
+                [
+                    BackgroundColor Color.yellowGreen
+                    GridRow [ 1; 2 ]
+                ] |> fss
+                
+            let item3 =
+                itemTemplate @
+                [
+                    BackgroundColor Color.blueViolet
+                    GridRow [ 2 ; 3 ]
+                    GridColumn [ 1 ; 2 ]
+                ] |> fss
+                
+            let item4 =
+                itemTemplate @
+                [
+                    BackgroundColor Color.paleVioletred
+                ] |> fss
+                
+            let item5 =
+                itemTemplate @
+                [
+                    BackgroundColor Color.royalBlue
+                    GridArea [ 1; 3; 2; 4 ]
+                ] |> fss
+                
+            let item6 =
+                itemTemplate @
+                [
+                    BackgroundColor Color.goldenrod
+                    GridRow [1; 2]
+                    GridColumn [2; 3]
+                ] |> fss
+                
+            div [ ClassName container ]
+                [ 
+                    div [ ClassName item1 ] [ str "1: Orange"]
+                    div [ ClassName item2 ] [ str "2: Green"]
+                    div [ ClassName item3 ] [ str "3: Violet"]
+                    div [ ClassName item4 ] [ str "4: Pink"]
+                    div [ ClassName item5 ] [ str "5: Blue"]
+                    div [ ClassName item6 ] [ str "6: Brown"]
+                ]
+            
+                
+            str "foo"
+        ]
+    
 let render (model: Model) (dispatch: Msg -> unit) =
     div []
         [
@@ -2696,13 +2780,14 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //TextExamples ()
             //AnimationExamples ()
             //FlexBoxExamples model dispatch
-            MediaQueryExamples ()
+            //MediaQueryExamples ()
             //SelectorExamples ()
             //CursorExamples ()
             //PsuedoClassExamples ()
             //ListStyleExamples ()
             //CounterStyleExamples ()
             //PseudoElementExamples ()
+            GridExamples ()
         ]
 
 Program.mkSimple init update render

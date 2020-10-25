@@ -32,6 +32,9 @@ module Percent =
         interface IGridAutoRows
         interface IGridTemplateColumns
         interface IGridTemplateRows
+        interface IGridColumnGap
+        interface IGridRowGap
+        interface IGridGap      
         interface IMinMax
         interface IRepeat
 
@@ -82,6 +85,9 @@ module Size =
         interface IGridAutoRows
         interface IGridTemplateColumns
         interface IGridTemplateRows
+        interface IGridColumnGap
+        interface IGridRowGap
+        interface IGridGap      
         interface IMinMax
         interface IRepeat
 

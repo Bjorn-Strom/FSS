@@ -73,6 +73,9 @@ module Global =
         interface ILineHeight
         interface IContent
         interface IAnimationDirection
+        interface IGridColumnGap
+        interface IGridRowGap
+        interface IGridGap        
 
     type Global =
         | Initial
@@ -163,6 +166,9 @@ module Global =
         interface IGridTemplateAreas
         interface IGridTemplateColumns
         interface IGridTemplateRows
+        interface IGridColumnGap
+        interface IGridRowGap
+        interface IGridGap      
 
 module GlobalValue =
     open Global

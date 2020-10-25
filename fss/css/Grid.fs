@@ -43,6 +43,10 @@ module Grid =
         interface IGridTemplateColumns
         interface IGridTemplateRows
         
+    type Gap =
+        | Gap of IGridRowGap * IGridColumnGap
+        interface IGridGap
+        
 module GridValue =
     open ContentSize
     open Units.Percent
@@ -152,3 +156,31 @@ module GridValue =
         | :? Repeat        as r -> repeat r
         | :? Subgrid       as s -> duToLowercase s
         | _ -> "Unknown grid template row"
+        
+    let columnGap (v: IGridColumnGap) =
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Normal as n -> GlobalValue.normal n
+        | :? Percent       as p -> Units.Percent.value p
+        | :? Size          as s -> Units.Size.value s
+        | _ -> "Unknown grid column gap"
+        
+    let rowGap (v: IGridRowGap) =
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Normal as n -> GlobalValue.normal n
+        | :? Percent       as p -> Units.Percent.value p
+        | :? Size          as s -> Units.Size.value s
+        | _ -> "Unknown grid row gap"
+        
+    let gap (v: IGridGap) =
+        let stringifyGridGap (Gap (r, c)) =
+            sprintf "%s %s" (rowGap r) (columnGap c)
+                    
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Normal as n -> GlobalValue.normal n
+        | :? Percent       as p -> Units.Percent.value p
+        | :? Size          as s -> Units.Size.value s
+        | :? Gap           as g -> stringifyGridGap g 
+        | _ -> "Unknown grid row gap"
