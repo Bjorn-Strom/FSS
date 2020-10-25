@@ -266,7 +266,18 @@ module Value =
         | GridColumnGap       of IGridColumnGap
         | GridRowGap          of IGridRowGap
         | GridGap             of IGridGap
-
+        | GridRowStart        of IGridRowStart
+        | GridRowStarts       of IGridRowStart list
+        | GridRowEnd          of IGridRowEnd
+        | GridRowEnds         of IGridRowEnd list
+        | GridRow             of IGridRow
+        | GridColumnStart     of IGridColumnStart
+        | GridColumnStarts    of IGridColumnStart list
+        | GridColumnEnd       of IGridColumnEnd
+        | GridColumnEnds      of IGridColumnEnd list
+        | GridColumn          of IGridColumn
+        | GridArea            of IGridArea
+ 
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
     let rec private createCSS (attributeList: CSSProperty list) callback =
@@ -546,6 +557,17 @@ module Value =
                 | GridColumnGap       g       -> cssValueKebab Property.GridColumnGap       <| GridValue.columnGap g
                 | GridRowGap          g       -> cssValueKebab Property.GridRowGap          <| GridValue.rowGap g
                 | GridGap             g       -> cssValueKebab Property.GridGap             <| GridValue.gap g
+                | GridRowStart        g       -> cssValueKebab Property.GridRowStart        <| GridValue.rowStart g
+                | GridRowStarts       gs      -> cssValueKebab Property.GridRowStart        <| combineWs GridValue.rowStart gs
+                | GridRowEnd          g       -> cssValueKebab Property.GridRowEnd          <| GridValue.rowEnd g
+                | GridRowEnds         gs      -> cssValueKebab Property.GridRowEnd          <| combineWs GridValue.rowEnd gs
+                | GridRow             g       -> cssValueKebab Property.GridRow             <| GridValue.row g
+                | GridColumnStart     g       -> cssValueKebab Property.GridColumnStart     <| GridValue.columnStart g
+                | GridColumnStarts    gs      -> cssValueKebab Property.GridColumnStart     <| combineWs GridValue.columnStart gs
+                | GridColumnEnd       g       -> cssValueKebab Property.GridColumnEnd       <| GridValue.columnEnd g
+                | GridColumnEnds      gs      -> cssValueKebab Property.GridColumnEnd       <| combineWs GridValue.columnEnd gs
+                | GridColumn          g       -> cssValueKebab Property.GridColumn          <| GridValue.column g
+                | GridArea            g       -> cssValueKebab Property.GridArea            <| GridValue.area g
         )
         |> callback
 

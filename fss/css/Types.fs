@@ -101,8 +101,16 @@ module Types =
     type IGridColumnGap            = interface end
     type IGridRowGap               = interface end
     type IGridGap                  = interface end
+    type IGridRowStart             = interface end
+    type IGridRowEnd               = interface end
+    type IGridRow                  = interface end
+    type IGridColumnStart          = interface end
+    type IGridColumnEnd            = interface end
+    type IGridColumn               = interface end
+    type IGridArea                 = interface end
     type IMinMax                   = interface end
     type IRepeat                   = interface end
+    type IRepeatTypes              = interface end
     type IFraction                 = interface end
 
     // Common

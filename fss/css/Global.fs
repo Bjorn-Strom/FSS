@@ -5,6 +5,22 @@ open Fss.Utilities.Helpers
 module Global =
     open Types
 
+    type Value =
+        | Value of int
+        interface IGridRowStart
+        interface IGridRowEnd
+        interface IGridColumnStart
+        interface IGridColumnEnd
+        interface IRepeatTypes
+    
+    type Ident =
+        | Ident of string
+        interface IGridRowStart
+        interface IGridRowEnd
+        interface IGridColumnStart
+        interface IGridColumnEnd
+        interface IGridArea
+        
     type None =
         | None
         interface IFontVariantLigatures
@@ -54,9 +70,15 @@ module Global =
         interface IGridAutoRows
         interface IGridTemplateColumns
         interface IGridTemplateRows
+        interface IGridRowStart
+        interface IGridRowEnd
+        interface IGridRow
+        interface IGridColumnStart
+        interface IGridColumnEnd
+        interface IGridColumn
         interface IMinMax
         interface IRepeat
-        
+
     type Center =
         | Center
         interface IAlignSelf
@@ -168,11 +190,19 @@ module Global =
         interface IGridTemplateRows
         interface IGridColumnGap
         interface IGridRowGap
-        interface IGridGap      
+        interface IGridGap
+        interface IGridRowStart
+        interface IGridRowEnd
+        interface IGridRow
+        interface IGridColumnStart
+        interface IGridColumnEnd
+        interface IGridColumn
 
 module GlobalValue =
     open Global
 
+    let value (Value v) = string v
+    let ident (Ident i) = i
     let globalValue (v: Global): string = duToLowercase v
     let none (v: None): string = duToLowercase v
     let normal (v: Normal): string = duToLowercase v

@@ -1,5 +1,6 @@
 ﻿namespace Fss
 
+open Fss.Global
 open Fss.Types
 
 module Grid =
@@ -15,27 +16,27 @@ module Grid =
     type RepeatTypes =
         | AutoFill
         | AutoFit
-        | Value of int
+        interface IRepeatTypes
 
     type RepeatContent =
         | Name of string
         interface IRepeat
         
     type Repeat =
-        | Repeat     of RepeatTypes * IRepeat
-        | RepeatMany of RepeatTypes * IRepeat list
+        | Repeat     of IRepeatTypes * IRepeat
+        | RepeatMany of IRepeatTypes * IRepeat list
         interface IRepeat
         interface IGridTemplateColumns
         interface IGridTemplateRows
     
     type AutoFlow =
-        | Row
-        | Column
+        | Rows
+        | Columns
         | Dense
         interface IGridAutoFlow
 
     type TemplateArea =
-        | TemplateArea of string list list
+        | TemplateArea of Ident list list
         interface IGridTemplateAreas
         
     type Subgrid =
@@ -46,6 +47,21 @@ module Grid =
     type Gap =
         | Gap of IGridRowGap * IGridColumnGap
         interface IGridGap
+        
+    type Span =
+        | Span of int
+        interface IGridRowStart
+        interface IGridRowEnd
+        interface IGridColumnStart
+        interface IGridColumnEnd
+     
+    type Row =
+        | Row of IGridRowStart * IGridRowEnd
+        interface IGridRow
+                
+    type Column =
+        | Column of IGridColumnStart * IGridColumnEnd
+        interface IGridColumn
         
 module GridValue =
     open ContentSize
@@ -69,10 +85,11 @@ module GridValue =
             (minMaxValue m1)
             (minMaxValue m2)
 
-    let private repeatTypes (v: RepeatTypes) =
+    let private repeatTypes (v: IRepeatTypes) =
         match v with
-        | Value v -> string v
-        | _ -> duToKebab v 
+        | :? Global.Value as v -> GlobalValue.value v
+        | :? RepeatTypes  as r -> duToKebab r
+        | _ -> "Unknown repeat types"
                 
     let repeat (v: Repeat) =
         let stringifyIRepeat (r: IRepeat) =
@@ -124,6 +141,7 @@ module GridValue =
         | :? TemplateArea  as t ->
             let (TemplateArea t) = t
             t
+            |> List.map (fun x -> x |> List.map GlobalValue.ident)
             |> List.map (fun x -> ["\""] @ x @ ["\""])
             |> List.map (fun x -> String.concat " " x)
             |> String.concat " "
@@ -184,3 +202,67 @@ module GridValue =
         | :? Size          as s -> Units.Size.value s
         | :? Gap           as g -> stringifyGridGap g 
         | _ -> "Unknown grid row gap"
+        
+    let private span (Span s) = sprintf "span %d" s
+    
+    let rowStart (v: IGridRowStart) =
+       
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Auto   as a -> GlobalValue.auto a
+        | :? Global.Value  as v -> GlobalValue.value v
+        | :? Global.Ident  as i -> GlobalValue.ident i
+        | :? Span          as s -> span s
+        | _ -> "Unknown grid row start"
+        
+    let rowEnd (v: IGridRowEnd) =     
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Auto   as a -> GlobalValue.auto a
+        | :? Global.Value  as v -> GlobalValue.value v
+        | :? Global.Ident  as i -> GlobalValue.ident i
+        | :? Span          as s -> span s
+        | _ -> "Unknown grid row end"
+        
+    let row (v: IGridRow) =
+        let stringifyRow (Row (s, e)) =
+            sprintf "%s / %s" (rowStart s) (rowEnd e)
+        
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Auto   as a -> GlobalValue.auto a
+        | :? Row           as r -> stringifyRow r 
+        | _ -> "Unknown grid row"
+        
+    let columnStart (v: IGridColumnStart) =       
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Auto   as a -> GlobalValue.auto a
+        | :? Global.Value  as v -> GlobalValue.value v
+        | :? Global.Ident  as i -> GlobalValue.ident i
+        | :? Span          as s -> span s
+        | _ -> "Unknown grid column start"
+        
+    let columnEnd (v: IGridColumnEnd) =       
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Auto   as a -> GlobalValue.auto a
+        | :? Global.Value  as v -> GlobalValue.value v
+        | :? Global.Ident  as i -> GlobalValue.ident i
+        | :? Span          as s -> span s
+        | _ -> "Unknown grid column end"
+        
+    let column (v: IGridColumn) =
+        let stringifyColumn (Column (s, e)) =
+            sprintf "%s / %s" (columnStart s) (columnEnd e)
+        
+        match v with
+        | :? Global.Global as g -> GlobalValue.globalValue g
+        | :? Global.Auto   as a -> GlobalValue.auto a
+        | :? Column        as r -> stringifyColumn r 
+        | _ -> "Unknown grid column"
+        
+    let area (v: IGridArea) =
+        match v with
+        | :? Global.Ident as i -> GlobalValue.ident i
+        | _ -> "Unknown grid area"

@@ -10,6 +10,245 @@ module Grid =
         testList "Grid"
             [
                 test
+                    "Grid area"
+                    [
+                        GridArea (Ident "foo")
+                    ]
+                    ["grid-area" ==> "foo"]
+                
+                test
+                    "Grid column ident and ident"
+                    [
+                        GridColumn
+                            (Grid.Column (Ident "someStart", Ident "someEnd"))
+                    ]
+                    ["grid-column" ==> "someStart / someEnd"]
+                    
+                test
+                    "Grid column ident and value"
+                    [
+                        GridColumn
+                            (Grid.Column (Ident "someStart", Value 2))
+                    ]
+                    ["grid-column" ==> "someStart / 2"]
+
+                test
+                    "Grid column auto"
+                    [GridColumn Auto]
+                    ["grid-column" ==> "auto"]
+                
+                test
+                    "Grid column inherit"
+                    [GridColumn Inherit]
+                    ["grid-column" ==> "inherit"]
+                    
+                test
+                    "Grid column initial"
+                    [GridColumn Initial]
+                    ["grid-column" ==> "initial"]
+                    
+                test
+                    "Grid column unset"
+                    [GridColumn Unset]
+                    ["grid-column" ==> "unset"]
+                
+                test
+                    "Grid column start auto"
+                    [GridColumnStart Auto]
+                    ["grid-column-start" ==> "auto"]
+                    
+                test
+                    "Grid column start value"
+                    [GridColumnStart (Value 1)]
+                    ["grid-column-start" ==> "1"]
+                    
+                test
+                    "Grid column start ident"
+                    [GridColumnStart (Ident "somegridarea")]
+                    ["grid-column-start" ==> "somegridarea"]
+                    
+                test
+                    "Grid column value ident and span"
+                    [GridColumnStarts [Value 1; Ident "area"; Grid.Span 1] ]
+                    ["grid-column-start" ==> "1 area span 1"]
+                    
+                test
+                    "Grid column start span"
+                    [GridColumnStart (Grid.Span 2)]
+                    ["grid-column-start" ==> "span 2"]
+                    
+                test
+                    "Grid column start inherit"
+                    [GridColumnStart Inherit]
+                    ["grid-column-start" ==> "inherit"]
+                    
+                test
+                    "Grid column start initial"
+                    [GridColumnStart Initial]
+                    ["grid-column-start" ==> "initial"]
+                    
+                test
+                    "Grid column start unset"
+                    [GridColumnStart Unset]
+                    ["grid-column-start" ==> "unset"]
+                
+                test
+                    "Grid column end auto"
+                    [GridColumnEnd Auto]
+                    ["grid-column-end" ==> "auto"]
+                    
+                test
+                    "Grid column end value"
+                    [GridColumnEnd (Value 1)]
+                    ["grid-column-end" ==> "1"]
+                    
+                test
+                    "Grid column end ident"
+                    [GridColumnEnd (Ident "somegridarea")]
+                    ["grid-column-end" ==> "somegridarea"]
+                    
+                test
+                    "Grid column value ident and span"
+                    [GridColumnEnds [Value 1; Ident "area"; Grid.Span 1] ]
+                    ["grid-column-end" ==> "1 area span 1"]
+                    
+                test
+                    "Grid column end span"
+                    [GridColumnEnd (Grid.Span 2)]
+                    ["grid-column-end" ==> "span 2"]
+                    
+                test
+                    "Grid column end inherit"
+                    [GridColumnEnd Inherit]
+                    ["grid-column-end" ==> "inherit"]
+                    
+                test
+                    "Grid column end initial"
+                    [GridColumnEnd Initial]
+                    ["grid-column-end" ==> "initial"]
+                    
+                test
+                    "Grid column end unset"
+                    [GridColumnEnd Unset]
+                    ["grid-column-end" ==> "unset"]
+                
+                test
+                    "Grid row ident and ident"
+                    [
+                        GridRow
+                            (Grid.Row (Ident "someStart", Ident "someEnd"))
+                    ]
+                    ["grid-row" ==> "someStart / someEnd"]
+                    
+                test
+                    "Grid row ident and value"
+                    [
+                        GridRow
+                            (Grid.Row (Ident "someStart", Value 2))
+                    ]
+                    ["grid-row" ==> "someStart / 2"]
+
+                test
+                    "Grid row auto"
+                    [GridRow Auto]
+                    ["grid-row" ==> "auto"]
+                
+                test
+                    "Grid row inherit"
+                    [GridRow Inherit]
+                    ["grid-row" ==> "inherit"]
+                    
+                test
+                    "Grid row initial"
+                    [GridRow Initial]
+                    ["grid-row" ==> "initial"]
+                    
+                test
+                    "Grid row unset"
+                    [GridRow Unset]
+                    ["grid-row" ==> "unset"]
+                
+                test
+                    "Grid row start auto"
+                    [GridRowStart Auto]
+                    ["grid-row-start" ==> "auto"]
+                    
+                test
+                    "Grid row start value"
+                    [GridRowStart (Value 1)]
+                    ["grid-row-start" ==> "1"]
+                    
+                test
+                    "Grid row start ident"
+                    [GridRowStart (Ident "somegridarea")]
+                    ["grid-row-start" ==> "somegridarea"]
+                    
+                test
+                    "Grid row value ident and span"
+                    [GridRowStarts [Value 1; Ident "area"; Grid.Span 1] ]
+                    ["grid-row-start" ==> "1 area span 1"]
+                    
+                test
+                    "Grid row start span"
+                    [GridRowStart (Grid.Span 2)]
+                    ["grid-row-start" ==> "span 2"]
+                    
+                test
+                    "Grid row start inherit"
+                    [GridRowStart Inherit]
+                    ["grid-row-start" ==> "inherit"]
+                    
+                test
+                    "Grid row start initial"
+                    [GridRowStart Initial]
+                    ["grid-row-start" ==> "initial"]
+                    
+                test
+                    "Grid row start unset"
+                    [GridRowStart Unset]
+                    ["grid-row-start" ==> "unset"]
+                
+                test
+                    "Grid row end auto"
+                    [GridRowEnd Auto]
+                    ["grid-row-end" ==> "auto"]
+                    
+                test
+                    "Grid row end value"
+                    [GridRowEnd (Value 1)]
+                    ["grid-row-end" ==> "1"]
+                    
+                test
+                    "Grid row end ident"
+                    [GridRowEnd (Ident "somegridarea")]
+                    ["grid-row-end" ==> "somegridarea"]
+                    
+                test
+                    "Grid row value ident and span"
+                    [GridRowEnds [Value 1; Ident "area"; Grid.Span 1] ]
+                    ["grid-row-end" ==> "1 area span 1"]
+                    
+                test
+                    "Grid row end span"
+                    [GridRowEnd (Grid.Span 2)]
+                    ["grid-row-end" ==> "span 2"]
+                    
+                test
+                    "Grid row end inherit"
+                    [GridRowEnd Inherit]
+                    ["grid-row-end" ==> "inherit"]
+                    
+                test
+                    "Grid row end initial"
+                    [GridRowEnd Initial]
+                    ["grid-row-end" ==> "initial"]
+                    
+                test
+                    "Grid row end unset"
+                    [GridRowEnd Unset]
+                    ["grid-row-end" ==> "unset"]
+                
+                test
                     "Grid gap px"
                     [GridGap (px 10)]
                     ["grid-gap" ==> "10px"]
@@ -68,13 +307,6 @@ module Grid =
                     "Grid gap unset"
                     [GridGap Unset]
                     ["grid-gap" ==> "unset"]
-                
-                
-                
-                
-                
-                
-                
                 
                 test
                     "Column gap normal"
@@ -163,7 +395,7 @@ module Grid =
                 
                 test
                     "Grid template row repeat"
-                    [GridTemplateRow (Grid.Repeat(Grid.Value 3, px 200))]
+                    [GridTemplateRow (Grid.Repeat(Value 3, px 200))]
                     ["grid-template-rows" ==> "repeat(3, 200px)"]
                     
                 test
@@ -223,7 +455,7 @@ module Grid =
                 
                 test
                     "Grid template column repeat"
-                    [GridTemplateColumn (Grid.Repeat(Grid.Value 3, px 200))]
+                    [GridTemplateColumn (Grid.Repeat(Value 3, px 200))]
                     ["grid-template-columns" ==> "repeat(3, 200px)"]
                     
                 test
@@ -268,52 +500,52 @@ module Grid =
                 
                 testString
                     "Repat value and fr"
-                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, fr 1.))
+                    (GridValue.repeat <| Grid.Repeat(Value 4, fr 1.))
                     "repeat(4, 1.00fr)"
                     
                 testString
                     "Repat value and percent"
-                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, pct 60))
+                    (GridValue.repeat <| Grid.Repeat(Value 4, pct 60))
                     "repeat(4, 60%)"
                     
                 testString
                     "Repat value and pixels"
-                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, px 250))
+                    (GridValue.repeat <| Grid.Repeat(Value 4, px 250))
                     "repeat(4, 250px)"
                             
                 testString
                     "Repat value and min-content"
-                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, MinContent))
+                    (GridValue.repeat <| Grid.Repeat(Value 4, MinContent))
                     "repeat(4, min-content)"
                 
                 testString
                     "Repat value and max-content"
-                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, MaxContent))
+                    (GridValue.repeat <| Grid.Repeat(Value 4, MaxContent))
                     "repeat(4, max-content)"
                     
                 testString
                     "Repat value and auto"
-                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, Auto))
+                    (GridValue.repeat <| Grid.Repeat(Value 4, Auto))
                     "repeat(4, auto)"     
                 
                 testString
                     "Repat value and minmax"
-                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, Grid.MinMax(px 100, fr 1.)))
+                    (GridValue.repeat <| Grid.Repeat(Value 4, Grid.MinMax(px 100, fr 1.)))
                     "repeat(4, minmax(100px, 1.00fr))"
                     
                 testString
                     "Repat value and fit content"
-                    (GridValue.repeat <| Grid.Repeat(Grid.Value 4, FitContent(px 100)))
+                    (GridValue.repeat <| Grid.Repeat(Value 4, FitContent(px 100)))
                     "repeat(4, fit-content(100px))" 
 
                 testString
                     "Repat value and px pct and auto"
-                    (GridValue.repeat <| Grid.RepeatMany(Grid.Value 4, [px 10; pct 30; Auto]))
+                    (GridValue.repeat <| Grid.RepeatMany(Value 4, [px 10; pct 30; Auto]))
                     "repeat(4, 10px 30% auto)"
                                     
                 testString
                     "Repat value and min-content max-content"
-                    (GridValue.repeat <| Grid.RepeatMany(Grid.Value 4, [MinContent; MaxContent]))
+                    (GridValue.repeat <| Grid.RepeatMany(Value 4, [MinContent; MaxContent]))
                     "repeat(4, min-content max-content)"
                     
                 testString
@@ -328,7 +560,7 @@ module Grid =
                                     
                 testString
                     "Repat value and auto-fit"
-                    (GridValue.repeat <| Grid.RepeatMany(Grid.Value 4, [MinContent; MaxContent]))
+                    (GridValue.repeat <| Grid.RepeatMany(Value 4, [MinContent; MaxContent]))
                     "repeat(4, min-content max-content)" 
                  
                 testString
@@ -582,14 +814,14 @@ module Grid =
                     ["grid-auto-rows" ==> "unset"] 
                 
                 test
-                    "Grid auto flow row"
-                    [GridAutoFlow Grid.Row]
-                    ["grid-auto-flow" ==> "row"]
+                    "Grid auto flow rosw"
+                    [GridAutoFlow Grid.Rows]
+                    ["grid-auto-flow" ==> "rows"]
                 
                 test
-                    "Grid auto flow column"
-                    [GridAutoFlow Grid.Column]
-                    ["grid-auto-flow" ==> "column"]
+                    "Grid auto flow columns"
+                    [GridAutoFlow Grid.Columns]
+                    ["grid-auto-flow" ==> "columns"]
                 
                 test
                     "Grid auto flow dense"
@@ -597,14 +829,14 @@ module Grid =
                     ["grid-auto-flow" ==> "dense"]
                 
                 test
-                    "Grid auto flow row dense"
-                    [GridAutoFlow2(Grid.Row, Grid.Dense)]
-                    ["grid-auto-flow" ==> "row dense"]
+                    "Grid auto flow rows dense"
+                    [GridAutoFlow2(Grid.Rows, Grid.Dense)]
+                    ["grid-auto-flow" ==> "rows dense"]
                 
                 test
-                    "Grid auto flow column dense"
-                    [GridAutoFlow2(Grid.Column, Grid.Dense)]
-                    ["grid-auto-flow" ==> "column dense"]
+                    "Grid auto flow columns dense"
+                    [GridAutoFlow2(Grid.Columns, Grid.Dense)]
+                    ["grid-auto-flow" ==> "columns dense"]
                 
                 test
                     "Grid auto flow inherit"
@@ -628,15 +860,15 @@ module Grid =
                     
                 test
                     "Grid template areas strings"
-                    [GridTemplateAreas (Grid.TemplateArea [[ "a"; "b"  ]]) ]
+                    [GridTemplateAreas (Grid.TemplateArea [[ Ident "a"; Ident "b"  ]]) ]
                     ["grid-template-areas" ==> "\" a b \""]
                     
                 test
                     "Grid template areas multiple strings"
                     [GridTemplateAreas (Grid.TemplateArea [
-                        ["header"; "header"; "header"; "header" ]
-                        ["main"; "main"; "."; "sidebar" ]
-                        ["footer"; "footer"; "footer"; "footer" ]
+                        [Ident "header"; Ident "header"; Ident "header"; Ident "header" ]
+                        [Ident "main"; Ident "main"; Ident "."; Ident "sidebar" ]
+                        [Ident "footer"; Ident "footer"; Ident "footer"; Ident "footer" ]
                     ]) ]
                     ["grid-template-areas" ==> "\" header header header header \" \" main main . sidebar \" \" footer footer footer footer \""]
                     

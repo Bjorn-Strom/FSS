@@ -1356,7 +1356,7 @@ let AnimationExamples () =
                 JustifyContent Center
                 AlignItems Center
                 BackgroundColor (hex "272727")
-                Value.Perspective (px 200)
+                Perspective (px 200)
             ]
 
     let loaderContainer =
@@ -2693,8 +2693,8 @@ let GridExamples () =
                         Width (px 1000)
                         Margins [px 20; Auto]
                         Display Display.Grid
-                        GridTemplateRow (Grid.Repeat(Grid.Value 2, px 150))
-                        GridTemplateColumn (Grid.Repeat(Grid.Value 3, fr 1.))
+                        GridTemplateRow (Grid.Repeat(Value 2, px 150))
+                        GridTemplateColumn (Grid.Repeat(Value 3, fr 1.))
                         GridGap (px 30)
                     ]
                     
@@ -2710,23 +2710,23 @@ let GridExamples () =
                 itemTemplate @
                 [
                     BackgroundColor Color.orangeRed
-                    GridRow [ 2; 3 ]
-                    GridColumn [ 2; 3 ]
+                    GridRow (Grid.Row (Value 2, Value 3))
+                    GridColumn (Grid.Column (Value 2, Value 3))
                 ] |> fss
                 
             let item2 =
                 itemTemplate @
                 [
                     BackgroundColor Color.yellowGreen
-                    GridRow [ 1; 2 ]
+                    GridRow (Grid.Row (Value 1, Value 2))
                 ] |> fss
                 
             let item3 =
                 itemTemplate @
                 [
                     BackgroundColor Color.blueViolet
-                    GridRow [ 2 ; 3 ]
-                    GridColumn [ 1 ; 2 ]
+                    GridRow (Grid.Row (Value 2, Value 3))
+                    GridColumn (Grid.Column (Value 1, Value 2))
                 ] |> fss
                 
             let item4 =
@@ -2739,15 +2739,16 @@ let GridExamples () =
                 itemTemplate @
                 [
                     BackgroundColor Color.royalBlue
-                    GridArea [ 1; 3; 2; 4 ]
+                    GridRow (Grid.Row (Value 2, Value 3))
+                    GridColumn (Grid.Column (Value 1, Value 2))
                 ] |> fss
                 
             let item6 =
                 itemTemplate @
                 [
                     BackgroundColor Color.goldenrod
-                    GridRow [1; 2]
-                    GridColumn [2; 3]
+                    GridRow (Grid.Row (Value 1, Value 2))
+                    GridColumn (Grid.Column (Value 2, Value 3))
                 ] |> fss
                 
             div [ ClassName container ]

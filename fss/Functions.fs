@@ -1,6 +1,5 @@
 namespace Fss
 
-open Fss.Global
 open Value
 open Selector
 open Media
@@ -54,6 +53,8 @@ module Functions =
     let (! ) (html: Html) (propertyList: CSSProperty list) = Selector (Descendant html, propertyList)
 
     // Globals
+    let Value v = Global.Value v
+    let Ident s = Global.Ident s
     let Initial = Global.Initial
     let Inherit = Global.Inherit
     let Unset   = Global.Unset
