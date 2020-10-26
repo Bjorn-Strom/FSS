@@ -281,6 +281,8 @@ module Value =
         | GridColumn          of IGridColumn
         | GridArea            of IGridArea
 
+        interface IGridRow
+
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
     let rec private createCSS (attributeList: CSSProperty list) callback =
