@@ -3,6 +3,7 @@
 open Fable.Core
 open Fable.Core.JsInterop
 
+open BoxSizing
 open Types
 open Utilities.Helpers
 open Animation
@@ -38,6 +39,8 @@ module Value =
         | BackgroundSizes       of IBackgroundSize list
         | BackgroundAttachment  of IBackgroundAttachment
         | BackgroundAttachments of IBackgroundAttachment list
+
+        | BoxSizing of BoxSizing
 
         | Active           of CSSProperty list
         | AnyLink          of CSSProperty list
@@ -150,7 +153,7 @@ module Value =
         | BorderCollapse of IBorderCollapse
         | BorderSpacing  of IBorderSpacing
         | BorderSpacing2 of IBorderSpacing * IBorderSpacing
-        
+
         | BorderImageSource  of IImage
         | BorderImageWidth   of IBorderImageWidth
         | BorderImageWidths  of IBorderImageWidth list
@@ -160,7 +163,7 @@ module Value =
         | BorderImageSlices  of IBorderImageSlice list
         | BorderImageOutset  of IBorderImageOutset
         | BorderImageOutsets of IBorderImageOutset list
-        
+
         | Width       of IContentSize
         | MinWidth    of IContentSize
         | MaxWidth    of IContentSize
@@ -251,7 +254,7 @@ module Value =
         | OverflowX  of IOverflow
         | OverflowY  of IOverflow
         | OverflowXY of IOverflow * IOverflow
-        
+
         | GridAutoColumn      of IGridAutoColumns
         | GridAutoColumns     of IGridAutoColumns list
         | GridAutoFlow        of IGridAutoFlow
@@ -277,7 +280,7 @@ module Value =
         | GridColumnEnds      of IGridColumnEnd list
         | GridColumn          of IGridColumn
         | GridArea            of IGridArea
- 
+
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
 
     let rec private createCSS (attributeList: CSSProperty list) callback =
@@ -329,6 +332,8 @@ module Value =
                 | BackgroundSizes       bs -> cssValue Property.BackgroundSize       <| combineWs BackgroundValues.size bs
                 | BackgroundAttachment  b  -> cssValue Property.BackgroundAttachment <| BackgroundValues.attachment b
                 | BackgroundAttachments bs -> cssValue Property.BackgroundAttachment <| combineWs BackgroundValues.attachment bs
+
+                | BoxSizing b -> cssValue Property.BoxSizing <| BoxSizingValue.boxSizing b
 
                 | Active         a      -> pseudoClass          Property.Active        a
                 | AnyLink        a      -> pseudoClassKebab     Property.AnyLink       a
@@ -441,7 +446,7 @@ module Value =
                 | BorderCollapse b      -> cssValue Property.BorderCollapse <| BorderValue.collapse b
                 | BorderSpacing  b      -> cssValue Property.BorderSpacing  <| BorderValue.spacing b
                 | BorderSpacing2 (x, y) -> cssValue Property.BorderSpacing  <| sprintf "%s %s" (BorderValue.spacing x) (BorderValue.spacing y)
-                
+
                 | BorderImageSource   b       -> cssValue Property.BorderImageSource <| ImageValue.image b
                 | BorderImageWidth    bw      -> cssValue Property.BorderImageWidth  <| BorderValue.imageWidth bw
                 | BorderImageWidths   bws     -> cssValue Property.BorderImageWidth  <| combineWs BorderValue.imageWidth bws
@@ -451,7 +456,7 @@ module Value =
                 | BorderImageSlices   bs      -> cssValue Property.BorderImageSlice  <| combineWs BorderValue.imageSlice bs
                 | BorderImageOutset    b      -> cssValue Property.BorderImageOutset <| BorderValue.imageOutset b
                 | BorderImageOutsets   bs     -> cssValue Property.BorderImageOutset <| combineWs BorderValue.imageOutset bs
-                
+
                 | Width     w -> cssValue Property.Width     <| ContentSize.value w
                 | MinWidth  w -> cssValue Property.MinWidth  <| ContentSize.value w
                 | MaxWidth  w -> cssValue Property.MaxWidth  <| ContentSize.value w
@@ -542,7 +547,7 @@ module Value =
                 | OverflowX  o      -> cssValueKebab Property.OverflowX <| OverflowValue.overflow o
                 | OverflowY  o      -> cssValueKebab Property.OverflowY <| OverflowValue.overflow o
                 | OverflowXY (x, y) -> cssValueKebab Property.Overflow  <| sprintf "%s %s" (OverflowValue.overflow x) (OverflowValue.overflow y)
-                
+
                 | GridAutoColumn      g       -> cssValueKebab Property.GridAutoColumns     <| GridValue.autoColumns g
                 | GridAutoColumns     gs      -> cssValueKebab Property.GridAutoColumns     <| combineWs GridValue.autoColumns gs
                 | GridAutoRow         g       -> cssValueKebab Property.GridAutoRows        <| GridValue.autoRows g

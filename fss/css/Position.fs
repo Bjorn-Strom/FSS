@@ -6,7 +6,7 @@ module PlacementValue =
     open Units.Percent
     open Units.Size
     open Global
-    
+
     let placement (v: IPlacement): string =
         match v with
             | :? Percent as p -> Units.Percent.value p
@@ -60,7 +60,7 @@ module VerticalAlignValue =
             | :? Size          as s -> Units.Size.value s
             | :? VerticalAlign as v -> duToKebab v
             | _ -> "Unknown margin size"
-            
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/float
 module Float =
     type Float =
@@ -69,15 +69,27 @@ module Float =
         | InlineStart
         | InlineEnd
         interface IFloat
-        
+
 module FloatValue =
     open Float
     open Global
     open Utilities.Helpers
-    
+
     let float (v: IFloat): string =
         match v with
             | :? Global as g -> GlobalValue.globalValue g
             | :? None   as n -> GlobalValue.none n
             | :? Float  as v -> duToKebab v
             | _ -> "Unknown float value"
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
+module BoxSizing =
+    type BoxSizing =
+        | ContentBox
+        | BorderBox
+
+module BoxSizingValue =
+    open BoxSizing
+    open Utilities.Helpers
+
+    let boxSizing (v: BoxSizing) = duToKebab v
