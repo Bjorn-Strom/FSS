@@ -152,6 +152,7 @@ module Global =
         interface IAlignItems
         interface IAlignContent
         interface IAlignSelf
+        interface IPlaceItems
         interface IOrder
         interface IFlexGrow
         interface IFlexShrink

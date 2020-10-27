@@ -4,6 +4,7 @@ open Fable.Core
 open Fable.Core.JsInterop
 
 open BoxSizing
+open Fss.Flex
 open Types
 open Utilities.Helpers
 open Animation
@@ -178,6 +179,7 @@ module Value =
         | FlexWrap       of IFlexWrap
         | JustifyContent of IJustifyContent
         | AlignItems     of IAlignItems
+        | PlaceItems     of IPlaceItems
         | AlignContent   of IAlignContent
         | Order          of IOrder
         | FlexGrow       of IFlexGrow
@@ -478,6 +480,7 @@ module Value =
                 | FlexBasis      f -> cssValue Property.FlexBasis      <| FlexValue.flexBasis f
                 | JustifyContent j -> cssValue Property.JustifyContent <| FlexValue.justifyContent j
                 | AlignItems     a -> cssValue Property.AlignItems     <| FlexValue.alignItems a
+                | PlaceItems     a -> cssValue Property.PlaceItems     <| FlexValue.placeItems a
                 | AlignContent   a -> cssValue Property.AlignContent   <| FlexValue.alignContent a
                 | Order          o -> cssValue Property.Order          <| FlexValue.order o
                 | FlexGrow       f -> cssValue Property.FlexGrow       <| FlexValue.flexGrow f

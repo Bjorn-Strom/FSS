@@ -55,6 +55,7 @@ module Types =
     type IAlignItems               = interface end
     type IAlignContent             = interface end
     type IAlignSelf                = interface end
+    type IPlaceItems               = interface end
     type IOrder                    = interface end
     type IFlexGrow                 = interface end
     type IFlexShrink               = interface end

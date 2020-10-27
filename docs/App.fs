@@ -2681,7 +2681,7 @@ let PseudoElementExamples () =
         ]
 
 let GridExamples () =
-    fragment []
+    div [ ClassName ( fss [ ! Html.All [ BackgroundColor Color.red ]  ]) ]
         [
             h2 [] [str "Grid examples"]
 

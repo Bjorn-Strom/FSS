@@ -10,6 +10,91 @@ module Flex =
         testList "Flex"
             [
                 test
+                    "Place items auto center"
+                    [ PlaceItems <| Flex.PlaceItems Auto Center ]
+                    ["" ==> ""]
+
+                test
+                    "Place items normal start"
+                    [ PlaceItems <| Flex.PlaceItems Normal Flex.Start ]
+                    ["" ==> ""]
+
+                test
+                    "Place items start auto"
+                    [ PlaceItems <| Flex.PlaceItems Flex.Start Auto ]
+                    ["" ==> ""]
+
+                test
+                    "Place items end normal"
+                    [ PlaceItems <| Flex.PlaceItems Flex.End Normal ]
+                    ["" ==> ""]
+
+                test
+                    "Place items self-start auto"
+                    [ PlaceItems <| Flex.PlaceItems Flex.SelfStart Auto ]
+                    ["" ==> ""]
+
+                test
+                    "Place items self-end normal"
+                    [ PlaceItems <| Flex.PlaceItems Flex.SelfEnd Normal ]
+                    ["" ==> ""]
+
+                test
+                    "Place items flex-start auto"
+                    [ PlaceItems <| Flex.PlaceItems Flex.Start Auto ]
+                    ["" ==> ""]
+
+                test
+                    "Place items flex-end normal"
+                    [ PlaceItems <| Flex.PlaceItems Flex.End Normal ]
+                    ["" ==> ""]
+
+                test
+                    "Place items left auto"
+                    [ PlaceItems <| Flex.PlaceItems Flex.Left Auto ]
+                    ["" ==> ""]
+
+                test
+                    "Place items right normal"
+                    [ PlaceItems <| Flex.PlaceItems Flex.Right Normal ]
+                    ["" ==> ""]
+
+                test
+                    "Place items baseline normal"
+                    [ PlaceItems <| Flex.PlaceItems Flex.Baseline Normal]
+                    ["" ==> ""]
+
+                test
+                    "Place items first baseline auto"
+                    [ PlaceItems <| Flex.PlaceItems Flex.FirstBaseline Auto]
+                    ["" ==> ""]
+
+                test
+                    "Place items last baseline normal"
+                    [ PlaceItems <| Flex.PlaceItems Flex.LastBaseline Normal]
+                    ["" ==> ""]
+
+                test
+                    "Place items stretch auto"
+                    [ PlaceItems <| Flex.PlaceItems Flex.Stretch Auto ]
+                    ["" ==> ""]
+
+                test
+                    "Place items inherit"
+                    [ PlaceItems Inherit ]
+                    ["" ==> ""]
+
+                test
+                    "Place items initial"
+                    [ PlaceItems Initial ]
+                    ["" ==> ""]
+
+                test
+                    "Place items unset"
+                    [ PlaceItems Unset ]
+                    ["" ==> ""]
+
+                test
                     "Flex direction row"
                     [ FlexDirection Flex.Row]
                     ["flexDirection" ==> "row"]

@@ -2,10 +2,11 @@ namespace Fss
 
 open Utilities.Helpers
 
-module Html = 
+module Html =
 
     type Html =
         | A
+        | All
         | Abbr
         | Acronym
         | Address
@@ -112,4 +113,7 @@ module Html =
         | Video
         | Wbr
 
-    let value (v: Html): string = duToLowercase v
+    let value (v: Html): string =
+        match v with
+        | All -> "*"
+        | _   -> duToLowercase v
