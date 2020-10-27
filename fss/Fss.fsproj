@@ -32,6 +32,7 @@
     <Compile Include="css\Attribute.fs" />
     <Compile Include="css\Content.fs" />
     <Compile Include="css\Grid.fs" />
+    <Compile Include="css\Outline.fs" />
     <Compile Include="css\CounterStyle.fs" />
     <Compile Include="css\Media.fs" />
     <Compile Include="Value.fs" />

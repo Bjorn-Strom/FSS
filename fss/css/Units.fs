@@ -34,7 +34,7 @@ module Percent =
         interface IGridTemplateRows
         interface IGridColumnGap
         interface IGridRowGap
-        interface IGridGap      
+        interface IGridGap
         interface IMinMax
         interface IRepeat
 
@@ -87,9 +87,10 @@ module Size =
         interface IGridTemplateRows
         interface IGridColumnGap
         interface IGridRowGap
-        interface IGridGap      
+        interface IGridGap
         interface IMinMax
         interface IRepeat
+        interface IOutlineWidth
 
     let private sizeValue (u: Size) =
         match u with
@@ -159,7 +160,7 @@ module Time =
             | :? Global as g -> GlobalValue.globalValue g
             | :? Time   as t -> stringifyTime t
             | _ -> "Unknown transition duration"
-            
+
 module Fraction =
     type Fraction =
         | Fr of string
@@ -170,5 +171,5 @@ module Fraction =
         interface IGridAutoRows
         interface IGridTemplateColumns
         interface IRepeat
-        
+
     let value (Fr f) = f

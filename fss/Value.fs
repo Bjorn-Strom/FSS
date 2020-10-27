@@ -281,6 +281,10 @@ module Value =
         | GridColumn          of IGridColumn
         | GridArea            of IGridArea
 
+        | OutlineColor of IOutlineColor
+        | OutlineStyle of IOutlineStyle
+        | OutlineWidth of IOutlineWidth
+
         interface IGridRow
 
     let combineAnimationNames (list: IAnimationName list): string = list |> List.map string |> String.concat ", "
@@ -575,6 +579,10 @@ module Value =
                 | GridColumnEnds      gs      -> cssValueKebab Property.GridColumnEnd       <| combineWs GridValue.columnEnd gs
                 | GridColumn          g       -> cssValueKebab Property.GridColumn          <| GridValue.column g
                 | GridArea            g       -> cssValueKebab Property.GridArea            <| GridValue.area g
+
+                | OutlineColor        c -> cssValue Property.OutlineColor <| OutlineValue.color c
+                | OutlineStyle        c -> cssValue Property.OutlineStyle <| OutlineValue.style c
+                | OutlineWidth        c -> cssValue Property.OutlineWidth <| OutlineValue.width c
         )
         |> callback
 

@@ -32,13 +32,13 @@ module Border =
         | Collapse
         | Separate
         interface IBorderCollapse
-        
+
     type Value =
         | Value of float
         interface IBorderImageWidth
         interface IBorderImageSlice
         interface IBorderImageOutset
-        
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
     type ImageRepeat =
         | Stretch
@@ -46,7 +46,7 @@ module Border =
         | Round
         | Space
         interface IBorderImageRepeat
-        
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
     type ImageSlice =
         | Fill
@@ -96,9 +96,9 @@ module BorderValue =
             | :? Global as g -> GlobalValue.globalValue g
             | :? Size   as s -> Units.Size.value s
             | _ -> "Unknown border spacing"
-    
+
     let value (Value v): string = string v
-    
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
     let imageWidth (v: IBorderImageWidth): string =
         match v with
@@ -108,30 +108,29 @@ module BorderValue =
             | :? Percent    as p -> Units.Percent.value p
             | :? Value      as v -> value v
             | _ -> "Unknown border spacing"
-            
+
     let imageRepeat (v: IBorderImageRepeat): string =
         match v with
             | :? Global      as g -> GlobalValue.globalValue g
             | :? ImageRepeat as i -> duToLowercase i
             | _ -> "Unknown border repeat"
-            
+
     let imageSlice (v: IBorderImageSlice): string =
         let stringifySlice (s: ImageSlice) =
             match s with
                 | Fill    -> "fill"
-            
+
         match v with
             | :? Global     as g -> GlobalValue.globalValue g
             | :? Percent    as p -> Units.Percent.value p
             | :? ImageSlice as i -> stringifySlice i
             | :? Value      as v -> value v
             | _ -> "Unknown border slice"
-            
+
     let imageOutset (v: IBorderImageOutset): string =
         match v with
             | :? Global     as g -> GlobalValue.globalValue g
             | :? Value      as v -> value v
             | :? Size       as s -> Units.Size.value s
             | _ -> "Unknown border outset"
-            
-    
+

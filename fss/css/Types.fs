@@ -112,6 +112,9 @@ module Types =
     type IRepeat                   = interface end
     type IRepeatTypes              = interface end
     type IFraction                 = interface end
+    type IOutlineColor             = interface end
+    type IOutlineStyle             = interface end
+    type IOutlineWidth             = interface end
 
     // Common
     type CounterStyle = CounterStyle of string

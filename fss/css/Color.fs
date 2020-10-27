@@ -13,6 +13,7 @@ module Color =
         interface IBorderColor
         interface ITextEmphasisColor
         interface IBackgroundColor
+        interface IOutlineColor
 
     let private colorValue (CssColor c) = c
 

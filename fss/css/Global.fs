@@ -12,7 +12,7 @@ module Global =
         interface IGridColumnStart
         interface IGridColumnEnd
         interface IRepeatTypes
-    
+
     type Ident =
         | Ident of string
         interface IGridRowStart
@@ -20,7 +20,7 @@ module Global =
         interface IGridColumnStart
         interface IGridColumnEnd
         interface IGridArea
-        
+
     type None =
         | None
         interface IFontVariantLigatures
@@ -46,6 +46,7 @@ module Global =
         interface IGridTemplateAreas
         interface IGridTemplateColumns
         interface IGridTemplateRows
+        interface IOutlineStyle
 
     type Auto =
         | Auto
@@ -78,6 +79,7 @@ module Global =
         interface IGridColumn
         interface IMinMax
         interface IRepeat
+        interface IOutlineStyle
 
     type Center =
         | Center
@@ -97,7 +99,7 @@ module Global =
         interface IAnimationDirection
         interface IGridColumnGap
         interface IGridRowGap
-        interface IGridGap        
+        interface IGridGap
 
     type Global =
         | Initial
@@ -197,6 +199,9 @@ module Global =
         interface IGridColumnStart
         interface IGridColumnEnd
         interface IGridColumn
+        interface IOutlineColor
+        interface IOutlineStyle
+        interface IOutlineWidth
 
 module GlobalValue =
     open Global
