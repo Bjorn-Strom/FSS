@@ -183,7 +183,6 @@ module Value =
         | AlignContent   of IAlignContent
         | AlignItems     of IAlignItems
         | AlignSelf      of IAlignSelf
-        | PlaceItems     of IPlaceItems
         | Order          of IOrder
         | FlexGrow       of IFlexGrow
         | FlexShrink     of IFlexShrink
@@ -488,7 +487,6 @@ module Value =
                 | AlignContent   a -> cssValue Property.AlignContent   <| FlexValue.alignContent a
                 | AlignSelf      a -> cssValue Property.AlignSelf      <| FlexValue.alignSelf a
                 | FlexShrink     f -> cssValue Property.FlexShrink     <| FlexValue.flexShrink f
-                //| PlaceItems     a -> cssValue Property.PlaceItems     <| FlexValue.placeItems a
                 | Order          o -> cssValue Property.Order          <| FlexValue.order o
                 | FlexGrow       f -> cssValue Property.FlexGrow       <| FlexValue.flexGrow f
                 | VerticalAlign  v -> cssValue Property.VerticalAlign  <| VerticalAlignValue.verticalAlign v

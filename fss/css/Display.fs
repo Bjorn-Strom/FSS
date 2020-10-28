@@ -127,13 +127,6 @@ module Flex =
         | Content
         interface IFlexBasis
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/place-items
-    type PlaceItems =
-        | PlaceItems of IAlignItems * IJustifyContent
-        interface IPlaceItems
-
-    let PlaceItems justify align = PlaceItems(justify, align) :> IPlaceItems
-
 module FlexValue =
     open Flex
     open Units.Size
@@ -216,12 +209,6 @@ module FlexValue =
             | :? Global as g -> GlobalValue.globalValue g
             | :? Order  as o -> stringifyOrder o
             | _ -> "Unknown order"
-
-    //let placeItems (v: IPlaceItems): string =
-    //    match v with
-    //        | :? Global    as g -> GlobalValue.globalValue g
-    //        | :? Alignment as a -> duToKebab a
-    //        | _ -> "Unknown place items"
 
     let flexGrow (v: IFlexGrow): string =
         let stringifyFlexGrow (Grow f) = string f
