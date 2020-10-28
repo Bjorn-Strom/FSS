@@ -178,14 +178,16 @@ module Value =
         | FlexDirection  of IFlexDirection
         | FlexWrap       of IFlexWrap
         | JustifyContent of IJustifyContent
-        | AlignItems     of IAlignItems
-        | PlaceItems     of IPlaceItems
+        | JustifyItems   of IJustifyItems
+        | JustifySelf    of IJustifySelf
         | AlignContent   of IAlignContent
+        | AlignItems     of IAlignItems
+        | AlignSelf      of IAlignSelf
+        | PlaceItems     of IPlaceItems
         | Order          of IOrder
         | FlexGrow       of IFlexGrow
         | FlexShrink     of IFlexShrink
         | FlexBasis      of IFlexBasis
-        | AlignSelf      of IAlignSelf
         | VerticalAlign  of IVerticalAlign
         | Visibility     of IVisibility
         | Opacity        of Opacity
@@ -478,14 +480,17 @@ module Value =
                 | FlexDirection  f -> cssValue Property.FlexDirection  <| FlexValue.flexDirection f
                 | FlexWrap       f -> cssValue Property.FlexWrap       <| FlexValue.flexWrap f
                 | FlexBasis      f -> cssValue Property.FlexBasis      <| FlexValue.flexBasis f
+
                 | JustifyContent j -> cssValue Property.JustifyContent <| FlexValue.justifyContent j
+                | JustifyItems   j -> cssValue Property.JustifyItems   <| FlexValue.justifyItems j
+                | JustifySelf    j -> cssValue Property.JustifySelf    <| FlexValue.justifySelf j
                 | AlignItems     a -> cssValue Property.AlignItems     <| FlexValue.alignItems a
-                | PlaceItems     a -> cssValue Property.PlaceItems     <| FlexValue.placeItems a
                 | AlignContent   a -> cssValue Property.AlignContent   <| FlexValue.alignContent a
+                | AlignSelf      a -> cssValue Property.AlignSelf      <| FlexValue.alignSelf a
+                | FlexShrink     f -> cssValue Property.FlexShrink     <| FlexValue.flexShrink f
+                //| PlaceItems     a -> cssValue Property.PlaceItems     <| FlexValue.placeItems a
                 | Order          o -> cssValue Property.Order          <| FlexValue.order o
                 | FlexGrow       f -> cssValue Property.FlexGrow       <| FlexValue.flexGrow f
-                | FlexShrink     f -> cssValue Property.FlexShrink     <| FlexValue.flexShrink f
-                | AlignSelf      a -> cssValue Property.AlignSelf      <| FlexValue.alignSelf a
                 | VerticalAlign  v -> cssValue Property.VerticalAlign  <| VerticalAlignValue.verticalAlign v
                 | Visibility     v -> cssValue Property.Visibility     <| VisibilityValue.visibility v
                 | Opacity        o -> cssValue Property.Opacity        <| OpacityValue.opacity o

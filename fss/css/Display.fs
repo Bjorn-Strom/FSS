@@ -1,5 +1,6 @@
 namespace Fss
 
+open System.IO.MemoryMappedFiles
 open Global
 open Types
 open Fss.Utilities.Helpers
@@ -41,27 +42,51 @@ module Flex =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
     type Alignment =
         | Start
         | End
         | FlexStart
         | FlexEnd
         | Center
-        | Left
-        | Right
-        | Normal
         | Baseline
-        | SpaceBetween
-        | SpaceAround
-        | SpaceEvenly
+        | FirstBaseline
+        | LastBaseline
         | Stretch
         | Safe
         | Unsafe
-        interface IFlexAlignment
         interface IJustifyContent
+        interface IJustifyItems
+        interface IJustifySelf
         interface IAlignItems
         interface IAlignContent
-        interface IPlaceItems
+        interface IAlignSelf
+
+    type Space =
+        | SpaceBetween
+        | SpaceAround
+        | SpaceEvenly
+        interface IAlignContent
+        interface IJustifyContent
+
+    type Position =
+        | Left
+        | Right
+        interface IJustifyContent
+        interface IJustifyItems
+
+    type Self =
+        | SelfStart
+        | SelfEnd
+        interface IAlignSelf
+        interface IJustifySelf
+        interface IAlignItems
+        interface IJustifyItems
+
+    type JustifyItems =
+        | Legacy
+        interface IJustifyItems
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
     type Direction =
@@ -77,20 +102,6 @@ module Flex =
         | Wrap
         | WrapReverse
         interface IFlexWrap
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
-    type AlignSelf =
-        | Normal
-        | SelfStart
-        | SelfEnd
-        | FlexStart
-        | FlexEnd
-        | Center
-        | Baseline
-        | Stretch
-        | Safe
-        | Unsafe
-        interface IAlignSelf
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/order
     type Order =
@@ -128,6 +139,12 @@ module FlexValue =
     open Units.Size
     open Units.Percent
 
+    let alignment (v: Alignment): string =
+        match v with
+        | FirstBaseline -> duToSpaced v
+        | LastBaseline  -> duToSpaced v
+        | _             -> duToKebab v
+
     let flexDirection (v: IFlexDirection): string =
         match v with
             | :? Global    as g -> GlobalValue.globalValue g
@@ -143,36 +160,54 @@ module FlexValue =
     let justifyContent (v: IJustifyContent): string =
         match v with
             | :? Global    as g -> GlobalValue.globalValue g
-            | :? Center    as c -> GlobalValue.center c
-            | :? Alignment as a -> duToKebab a
+            | :? Normal    as n -> GlobalValue.normal n
+            | :? Alignment as a -> alignment a
+            | :? Space     as s -> duToKebab s
+            | :? Position  as p -> duToLowercase p
             | _ -> "Unknown justify content"
-
-    let alignItems (v: IAlignItems): string =
-        match v with
-            | :? Global    as g -> GlobalValue.globalValue g
-            | :? Center    as c -> GlobalValue.center c
-            | :? Alignment as a -> duToKebab a
-            | _ -> "Unknown align items"
-
-    let placeItems (v: IPlaceItems): string =
-        match v with
-            | :? Global    as g -> GlobalValue.globalValue g
-            | :? Alignment as a -> duToKebab a
-            | _ -> "Unknown place items"
 
     let alignContent (v: IAlignContent): string =
         match v with
             | :? Global    as g -> GlobalValue.globalValue g
-            | :? Center    as c -> GlobalValue.center c
-            | :? Alignment as a -> duToKebab a
+            | :? Normal    as n -> GlobalValue.normal n
+            | :? Alignment as a -> alignment a
+            | :? Space     as s -> duToKebab s
             | _ -> "Unknown align content"
+
+    let justifyItems (v: IJustifyItems): string =
+        match v with
+            | :? Global       as g -> GlobalValue.globalValue g
+            | :? Normal       as n -> GlobalValue.normal n
+            | :? Auto         as a -> GlobalValue.auto a
+            | :? Alignment    as a -> alignment a
+            | :? Position     as p -> duToLowercase p
+            | :? Self         as s -> duToKebab s
+            | :? JustifyItems as i -> duToLowercase i
+            | _ -> "Unknown justify items"
+
+    let alignItems (v: IAlignItems): string =
+        match v with
+            | :? Global    as g -> GlobalValue.globalValue g
+            | :? Normal    as n -> GlobalValue.normal n
+            | :? Alignment as a -> alignment a
+            | :? Self      as s -> duToKebab s
+            | _ -> "Unknown align items"
+
+    let justifySelf (v: IJustifySelf): string =
+        match v with
+            | :? Global    as g -> GlobalValue.globalValue g
+            | :? Normal    as n -> GlobalValue.normal n
+            | :? Alignment as a -> alignment a
+            | :? Self      as s -> duToKebab s
+            | _ -> "Unknown align self"
 
     let alignSelf (v: IAlignSelf): string =
         match v with
             | :? Global    as g -> GlobalValue.globalValue g
+            | :? Normal    as n -> GlobalValue.normal n
+            | :? Alignment as a -> alignment a
+            | :? Self      as s -> duToKebab s
             | :? Auto      as a -> GlobalValue.auto a
-            | :? Center    as c -> GlobalValue.center c
-            | :? AlignSelf as a -> duToKebab a
             | _ -> "Unknown align self"
 
     let order (v: IOrder): string =
@@ -181,6 +216,12 @@ module FlexValue =
             | :? Global as g -> GlobalValue.globalValue g
             | :? Order  as o -> stringifyOrder o
             | _ -> "Unknown order"
+
+    //let placeItems (v: IPlaceItems): string =
+    //    match v with
+    //        | :? Global    as g -> GlobalValue.globalValue g
+    //        | :? Alignment as a -> duToKebab a
+    //        | _ -> "Unknown place items"
 
     let flexGrow (v: IFlexGrow): string =
         let stringifyFlexGrow (Grow f) = string f

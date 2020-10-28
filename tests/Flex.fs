@@ -9,6 +9,7 @@ module Flex =
      let tests =
         testList "Flex"
             [
+                (*
                 test
                     "Place items auto center"
                     [ PlaceItems <| Flex.PlaceItems Auto Center ]
@@ -93,6 +94,9 @@ module Flex =
                     "Place items unset"
                     [ PlaceItems Unset ]
                     ["" ==> ""]
+                 *)
+
+
 
                 test
                     "Flex direction row"
@@ -237,7 +241,7 @@ module Flex =
 
                 test
                     "Justify content normal"
-                    [ JustifyContent Flex.Normal]
+                    [ JustifyContent Normal]
                     ["justifyContent" ==> "normal"]
 
                 test
@@ -291,53 +295,183 @@ module Flex =
                     ["justifyContent" ==> "unset"]
 
                 test
+                    "Justify self normal"
+                    [ JustifySelf Normal ]
+                    ["justifySelf" ==> "normal"]
+
+                test
+                    "Justify self flex start"
+                    [ JustifySelf Flex.SelfStart]
+                    ["justifySelf" ==> "self-start"]
+
+                test
+                    "Justify self flex end"
+                    [ JustifySelf Flex.SelfEnd]
+                    ["justifySelf" ==> "self-end"]
+
+                test
+                    "Justify self flex start"
+                    [ JustifySelf Flex.FlexStart]
+                    ["justifySelf" ==> "flex-start"]
+
+                test
+                    "Justify self flex end"
+                    [ JustifySelf Flex.FlexEnd]
+                    ["justifySelf" ==> "flex-end"]
+
+                test
+                    "Justify self center"
+                    [ JustifySelf Flex.Center]
+                    ["justifySelf" ==> "center"]
+
+                test
+                    "Justify self baseline"
+                    [ JustifySelf Flex.Baseline]
+                    ["justifySelf" ==> "baseline"]
+
+                test
+                    "Justify self stretch"
+                    [ JustifySelf Flex.Stretch]
+                    ["justifySelf" ==> "stretch"]
+
+                test
+                    "Justify self safe"
+                    [ JustifySelf Flex.Safe]
+                    ["justifySelf" ==> "safe"]
+
+                test
+                    "Justify self unsafe"
+                    [ JustifySelf Flex.Unsafe]
+                    ["justifySelf" ==> "unsafe"]
+
+                test
+                    "Justify self inherit"
+                    [ JustifySelf Inherit]
+                    ["justifySelf" ==> "inherit"]
+
+                test
+                    "Justify self initial"
+                    [ JustifySelf Initial]
+                    ["justifySelf" ==> "initial"]
+
+                test
+                    "Justify self unset"
+                    [ JustifySelf Unset]
+                    ["justifySelf" ==> "unset"]
+
+                test
+                    "Justify items start"
+                    [ JustifyItems Flex.Start]
+                    ["justifyItems" ==> "start"]
+
+                test
+                    "Justify items end"
+                    [ JustifyItems Flex.End]
+                    ["justifyItems" ==> "end"]
+
+                test
+                    "Justify items flex start"
+                    [ JustifyItems Flex.FlexStart]
+                    ["justifyItems" ==> "flex-start"]
+
+                test
+                    "Justify items flex end"
+                    [ JustifyItems Flex.FlexEnd]
+                    ["justifyItems" ==> "flex-end"]
+
+                test
+                    "Justify items center"
+                    [ JustifyItems Flex.Center]
+                    ["justifyItems" ==> "center"]
+
+                test
+                    "Justify items normal"
+                    [ JustifyItems Normal]
+                    ["justifyItems" ==> "normal"]
+
+                test
+                    "Justify items baseline"
+                    [ JustifyItems Flex.Baseline]
+                    ["justifyItems" ==> "baseline"]
+
+                test
+                    "Justify items safe"
+                    [ JustifyItems Flex.Safe]
+                    ["justifyItems" ==> "safe"]
+
+                test
+                    "Justify items unsafe"
+                    [ JustifyItems Flex.Unsafe]
+                    ["justifyItems" ==> "unsafe"]
+
+                test
+                    "Justify items inherit"
+                    [ JustifyItems Inherit]
+                    ["justifyItems" ==> "inherit"]
+
+                test
+                    "Justify items initial"
+                    [ JustifyItems Initial]
+                    ["justifyItems" ==> "initial"]
+
+                test
+                    "Justify items unset"
+                    [ JustifyItems Unset]
+                    ["justifyItems" ==> "unset"]
+
+                test
+                    "Justify items legacy"
+                    [ JustifyItems Flex.Legacy]
+                    ["justifyItems" ==> "legacy"]
+
+                test
                     "Align self normal"
-                    [ AlignSelf Flex.AlignSelf.Normal]
+                    [ AlignSelf Normal]
                     ["alignSelf" ==> "normal"]
 
                 test
                     "Align self flex start"
-                    [ AlignSelf Flex.AlignSelf.SelfStart]
+                    [ AlignSelf Flex.SelfStart]
                     ["alignSelf" ==> "self-start"]
 
                 test
                     "Align self flex end"
-                    [ AlignSelf Flex.AlignSelf.SelfEnd]
+                    [ AlignSelf Flex.SelfEnd]
                     ["alignSelf" ==> "self-end"]
 
                 test
                     "Align self flex start"
-                    [ AlignSelf Flex.AlignSelf.FlexStart]
+                    [ AlignSelf Flex.FlexStart]
                     ["alignSelf" ==> "flex-start"]
 
                 test
                     "Align self flex end"
-                    [ AlignSelf Flex.AlignSelf.FlexEnd]
+                    [ AlignSelf Flex.FlexEnd]
                     ["alignSelf" ==> "flex-end"]
 
                 test
                     "Align self center"
-                    [ AlignSelf Flex.AlignSelf.Center]
+                    [ AlignSelf Flex.Center]
                     ["alignSelf" ==> "center"]
 
                 test
                     "Align self baseline"
-                    [ AlignSelf Flex.AlignSelf.Baseline]
+                    [ AlignSelf Flex.Baseline]
                     ["alignSelf" ==> "baseline"]
 
                 test
                     "Align self stretch"
-                    [ AlignSelf Flex.AlignSelf.Stretch]
+                    [ AlignSelf Flex.Stretch]
                     ["alignSelf" ==> "stretch"]
 
                 test
                     "Align self safe"
-                    [ AlignSelf Flex.AlignSelf.Safe]
+                    [ AlignSelf Flex.Safe]
                     ["alignSelf" ==> "safe"]
 
                 test
                     "Align self unsafe"
-                    [ AlignSelf Flex.AlignSelf.Unsafe]
+                    [ AlignSelf Flex.Unsafe]
                     ["alignSelf" ==> "unsafe"]
 
                 test
@@ -381,44 +515,14 @@ module Flex =
                     ["alignItems" ==> "center"]
 
                 test
-                    "Align items left"
-                    [ AlignItems Flex.Left]
-                    ["alignItems" ==> "left"]
-
-                test
-                    "Align items right"
-                    [ AlignItems Flex.Right]
-                    ["alignItems" ==> "right"]
-
-                test
                     "Align items normal"
-                    [ AlignItems Flex.Normal]
+                    [ AlignItems Normal]
                     ["alignItems" ==> "normal"]
 
                 test
                     "Align items baseline"
                     [ AlignItems Flex.Baseline]
                     ["alignItems" ==> "baseline"]
-
-                test
-                    "Align items space between"
-                    [ AlignItems Flex.SpaceBetween]
-                    ["alignItems" ==> "space-between"]
-
-                test
-                    "Align items space around"
-                    [ AlignItems Flex.SpaceAround]
-                    ["alignItems" ==> "space-around"]
-
-                test
-                    "Align items space evenly"
-                    [ AlignItems Flex.SpaceEvenly]
-                    ["alignItems" ==> "space-evenly"]
-
-                test
-                    "Align items right"
-                    [ AlignItems Flex.Right]
-                    ["alignItems" ==> "right"]
 
                 test
                     "Align items safe"
@@ -471,18 +575,8 @@ module Flex =
                     ["alignContent" ==> "center"]
 
                 test
-                    "Align content left"
-                    [ AlignContent Flex.Left]
-                    ["alignContent" ==> "left"]
-
-                test
-                    "Align content right"
-                    [ AlignContent Flex.Right]
-                    ["alignContent" ==> "right"]
-
-                test
                     "Align content normal"
-                    [ AlignContent Flex.Normal]
+                    [ AlignContent Normal]
                     ["alignContent" ==> "normal"]
 
                 test
@@ -504,11 +598,6 @@ module Flex =
                     "Align content space evenly"
                     [ AlignContent Flex.SpaceEvenly]
                     ["alignContent" ==> "space-evenly"]
-
-                test
-                    "Align content right"
-                    [ AlignContent Flex.Right]
-                    ["alignContent" ==> "right"]
 
                 test
                     "Align content safe"

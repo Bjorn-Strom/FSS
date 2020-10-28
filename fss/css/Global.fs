@@ -53,6 +53,7 @@ module Global =
         interface IContentSize
         interface IFlexBasis
         interface IAlignSelf
+        interface IJustifyItems
         interface IMargin
         interface IPadding
         interface ITextDecorationThickness
@@ -100,6 +101,12 @@ module Global =
         interface IGridColumnGap
         interface IGridRowGap
         interface IGridGap
+        interface IJustifyContent
+        interface IJustifyItems
+        interface IJustifySelf
+        interface IAlignItems
+        interface IAlignContent
+        interface IAlignSelf
 
     type Global =
         | Initial
@@ -149,6 +156,8 @@ module Global =
         interface IFlexDirection
         interface IFlexWrap
         interface IJustifyContent
+        interface IJustifyItems
+        interface IJustifySelf
         interface IAlignItems
         interface IAlignContent
         interface IAlignSelf
