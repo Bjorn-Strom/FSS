@@ -1,7 +1,7 @@
 namespace Fss
 
-open Units.Size
-open Units.Resolution
+open Fable.Core.JsInterop
+
 open Utilities.Helpers
 
 module Media =
@@ -13,15 +13,25 @@ module Media =
         | Not of Device
         | Only of Device
 
+    let private deviceLabel (d: Device): string =
+        match d with
+            | Not  n -> sprintf "not %s" (duToLowercase n)
+            | Only o -> sprintf "only %s" (duToLowercase o)
+            | _     -> duToLowercase d
+
     type Pointer =
         | Course
         | Fine
         | None
 
+    let private pointer (p: Pointer): string = duToLowercase p
+
     type ColorGamut =
         | SRGB
         | P3
         | REC2020
+
+    let private colorGamut (c: ColorGamut): string = duToLowercase c
 
     type DisplayMode =
         | Fullscreen
@@ -29,14 +39,20 @@ module Media =
         | MinimalUi
         | Browser
 
+    let private displayMode (dm: DisplayMode): string = duToLowercase  dm
+
     type LightLevel =
         | Dim
         | Normal
         | Washed
 
+    let private lightLevel (ll: LightLevel): string = duToLowercase ll
+
     type Orientation =
         | Landscape
         | Portrait
+
+    let private orientation (o: Orientation): string = duToLowercase o
 
     type OverflowBlock =
         | None
@@ -44,28 +60,38 @@ module Media =
         | OptionalPaged
         | Paged
 
+    let private overflowBlock (ob: OverflowBlock): string = duToKebab ob
+
     type ColorScheme =
         | Light
         | Dark
+
+    let private colorScheme (cs: ColorScheme): string = duToLowercase cs
 
     type Contrast =
         | NoPreference
         | High
         | Low
 
+    let private contrast (c: Contrast): string = duToKebab c
+
     type Scan =
         | Interlace
         | Progressive
+    let private scan (s: Scan): string = duToLowercase s
 
     type Scripting =
         | None
         | InitialOnly
         | Enabled
 
+    let private scripting (s: Scripting): string = duToKebab s
+
     type Update =
         | None
         | Slow
         | Fast
+    let private update (u: Update): string = duToLowercase u
 
     type MediaFeature =
         | AnyHover of bool
@@ -83,12 +109,12 @@ module Media =
         | DisplayMode of DisplayMode
         | ForcedColors of bool
         | Grid of bool
-        | Height of Size
-        | MinHeight of Size
-        | MaxHeight of Size
-        | Width of Size
-        | MinWidth of Size
-        | MaxWidth of Size
+        | Height of Units.Size.Size
+        | MinHeight of Units.Size.Size
+        | MaxHeight of Units.Size.Size
+        | Width of Units.Size.Size
+        | MinWidth of Units.Size.Size
+        | MaxWidth of Units.Size.Size
         | Hover of bool
         | InvertedColors of bool
         | LightLevel of LightLevel
@@ -103,43 +129,12 @@ module Media =
         | PrefersContrast of Contrast
         | PrefersReducedMotion of bool
         | PrefersReducedTransparency of bool
-        | Resolution of Resolution
-        | MinResolution of Resolution
-        | MaxResolution of Resolution
+        | Resolution of Units.Resolution.Resolution
+        | MinResolution of Units.Resolution.Resolution
+        | MaxResolution of Units.Resolution.Resolution
         | Scan of Scan
         | Scripting of Scripting
         | Update of Update
-
-module MediaValue =
-    open Media
-
-    let deviceLabel (d: Device): string =
-        match d with
-            | Not  n -> sprintf "not %s" (duToLowercase n)
-            | Only o -> sprintf "only %s" (duToLowercase o)
-            | _     -> duToLowercase d
-
-    let pointer (p: Pointer): string = duToLowercase p
-
-    let colorGamut (c: ColorGamut): string = duToLowercase c
-
-    let displayMode (dm: DisplayMode): string = duToKebab dm
-
-    let lightLevel (ll: LightLevel): string = duToLowercase ll
-
-    let orientation (o: Orientation): string = duToLowercase o
-
-    let overflowBlock (ob: OverflowBlock): string = duToKebab ob
-
-    let colorScheme (cs: ColorScheme): string = duToLowercase cs
-
-    let contrast (c: Contrast): string = duToKebab c
-
-    let scan (s: Scan): string = duToLowercase s
-
-    let scripting (s: Scripting): string = duToKebab s
-
-    let update (u: Update): string = duToLowercase u
 
     let mediaFeature (features: MediaFeature list): string =
         let stringifyMedia (v: MediaFeature): string =
@@ -194,3 +189,8 @@ module MediaValue =
         |> List.map stringifyMedia
         |> String.concat " and "
 
+    type Media =
+        static member Media (features: MediaFeature list, attributeList: CSSProperty list) =
+            mediaFeature features |> sprintf "@media %s" ==> (attributeList |> List.map GlobalValue.CSSValue) |> CSSProperty
+        static member Media (device: Device, features: MediaFeature list, attributeList: CSSProperty list) =
+            sprintf "@media %s %s" (deviceLabel device) (mediaFeature features)  ==> (attributeList |> List.map GlobalValue.CSSValue) |> CSSProperty

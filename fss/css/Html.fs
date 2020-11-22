@@ -3,7 +3,6 @@ namespace Fss
 open Utilities.Helpers
 
 module Html =
-
     type Html =
         | A
         | All

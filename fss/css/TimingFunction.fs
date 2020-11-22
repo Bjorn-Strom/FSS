@@ -1,11 +1,7 @@
-namespace Fss
+﻿namespace Fss
 
-open Fss
-open Fss.Types
-
-module TimingFunction =
-    // Animation timing
-    type Steps =
+module TimingFunctionType =
+    type StepType =
         | JumpStart
         | JumpEnd
         | JumpNone
@@ -13,7 +9,16 @@ module TimingFunction =
         | Start
         | End
 
-    type TimingFunction =
+    let  stepsValue (value: StepType) =
+        match value with
+            | JumpStart -> "jump-start"
+            | JumpEnd -> "jump-end"
+            | JumpNone -> "jump-none"
+            | JumpBoth -> "jump-both"
+            | Start -> "start"
+            | End -> "end"
+
+    type TimingType =
         | Ease
         | EaseIn
         | EaseOut
@@ -21,28 +26,45 @@ module TimingFunction =
         | Linear
         | StepStart
         | StepEnd
-        | CubicBezier of (float * float * float * float)
-        | Step of int
-        | Steps of int * Steps
-        interface ITimingFunction
+        | CubicBezier of float * float * float * float
+        | Steps of int
+        | StepsWithTerm of int * StepType
+        interface ITransitionTimingFunction
+    let timingToString (timing: ITransitionTimingFunction) =
+        let timingToString =
+            function
+                | Ease -> "ease"
+                | EaseIn -> "ease-in"
+                | EaseOut -> "ease-out"
+                | EaseInOut -> "ease-in-out"
+                | Linear -> "linear"
+                | StepStart -> "step-start"
+                | StepEnd -> "step-end"
+                | CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" p1 p2 p3 p4
+                | Steps n -> sprintf "steps(%d)" n
+                | StepsWithTerm (n, term) -> sprintf "steps(%d, %s)" n (stepsValue term)
 
-module TimingFunctionValue =
-    open TimingFunction
-    open Utilities.Helpers
-    open Global
+        match timing with
+        | :? TimingType as t -> timingToString t
+        | :? Keywords   as k -> GlobalValue.keywords k
+        | _ -> "Unknown timing function"
 
-    let private cubicBezier (a: float, b: float, c: float, d: float) =
-        sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" a b c d
+[<AutoOpen>]
+module TimingFunction =
+    open TimingFunctionType
 
-    let timingFunction (v: ITimingFunction): string =
-        let stringifyTiming (timing: TimingFunction): string =
-            match timing with
-                | CubicBezier (a, b, c, d) -> cubicBezier(a, b, c, d)
-                | Step n -> sprintf "steps(%d)" n
-                | Steps (n, direction) -> sprintf "steps(%d, %s)" n (duToKebab direction)
-                | _ -> duToKebab timing
-
-        match v with
-            | :? Global         as g -> GlobalValue.globalValue g
-            | :? TimingFunction as t -> stringifyTiming t
-            | _ -> "Unknown animation timing function"
+    type TimingFunction =
+        interface ITransitionTimingFunction
+        static member Ease = Ease |> timingToString
+        static member EaseIn = EaseIn |> timingToString
+        static member EaseOut = EaseOut |> timingToString
+        static member EaseInOut = EaseInOut |> timingToString
+        static member Linear = Linear |> timingToString
+        static member StepStart = StepStart |> timingToString
+        static member StepEnd = StepEnd |> timingToString
+        static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = CubicBezier(p1,p2,p3,p4) |> timingToString
+        static member Step (steps: int) = Steps(steps) |> timingToString
+        static member Step (steps: int, jumpTerm: StepType) = StepsWithTerm(steps, jumpTerm) |> timingToString
+        static member Inherit = Inherit |> timingToString
+        static member Initial = Initial |> timingToString
+        static member Unset =  Unset |> timingToString

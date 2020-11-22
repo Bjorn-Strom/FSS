@@ -1,170 +1,98 @@
 ﻿namespace Fss
 
+open Fable.Core.JsInterop
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style
 [<AutoOpen>]
 module Counter =
-    open Fable.Core.JsInterop
-    
-    open Utilities.Helpers
-    open Types
-    open Global
-    
+    type CounterStyle =
+        | CounterStyle of string
+        interface IContent
+        interface IListStyleType
+
+    let counterValue (CounterStyle c) = c
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/system
     type System =
-        | Cyclic
-        | Numeric
-        | Alphabetic
-        | Symbolic
-        | Additive
-        | Fixed
-        | FixedValue of int
-        | Extends of CounterStyle
-        
-    let private system (s: System): string =
-        match s with
-            | FixedValue v -> sprintf "fixed %i" v
-            | Extends    e -> sprintf "extends %s" (counterValue e)
-            | _ -> duToKebab s
-        
+        static member Cyclic = "system" ==> "cyclic"
+        static member Numeric = "system" ==> "numeric"
+        static member Alphabetic ="system" ==> "alphabetic"
+        static member Symbolic = "system" ==> "symbolic"
+        static member Additive = "system" ==> "additive"
+        static member Fixed () = "system" ==> "fixed"
+        static member Fixed (value: int) =
+            "system" ==> sprintf "fixed %d" value
+        static member Extends (system: System) =
+            "system" ==> sprintf "extends %s" (string system)
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/negative
     type Negative =
-        | Negative1 of string
-        | Negative2 of string * string
-    
-    let private negative (s: Negative): string =
-        match s with
-            | Negative1 s        -> s
-            | Negative2 (s1, s2) -> sprintf "\"%s\" \"%s\"" s1 s2
-        
+        static member Negative (first: string) =
+            "negative" ==> first
+        static member Negative (first: string, second: string) =
+            "negative" ==> sprintf "\"%s\" \"%s\"" first second
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/prefix
+    type Prefix =
+        static member Value (value: string) = "prefix" ==> value
+        static member Url (url: string) = "prefix" ==> sprintf "url(%s)" url
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/suffix
-    type Affix =
-        | String of string
-        | Url of string
-        
-    type Prefix = Affix
-    type Suffix = Affix
-    
-    let private affix (s: Affix): string =
-        match s with
-            | String s -> sprintf "'%s'" s
-            | Url    u -> sprintf "url(%s)" u
-        
-    let private prefix p = affix p
-    let private suffix s = affix s
-        
+    type Suffix =
+        static member Value (value: string) = "suffix" ==> value
+        static member Url (url: string) = "suffix" ==> sprintf "url(%s)" url
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/range
     type Range =
-        | RangeValues      of int * int
-        | RangeValueString of int * string
-        | RangeStrings     of string * string
-        interface IRange
-        
-    let private range (s: IRange): string =
-        let stringifyRange (r: Range): string =
-            match r with
-                | RangeValues (v1, v2) -> sprintf "%i %i" v1 v2
-                | RangeValueString (v, s) -> sprintf "%i %s" v s
-                | RangeStrings (s1, s2) -> sprintf "%s %s" s1 s2
-                
-        match s with
-            | :? Auto  as a -> GlobalValue.auto a
-            | :? Range as r -> stringifyRange r
-            | _ -> "unknown range value"
-        
+        static member Value (v1: int, v2: int) = "range" ==> sprintf "%d %d" v1 v2
+        static member Value (v1: int, range: Range) = "range" ==> sprintf "%d %A" v1 range
+        static member Value (r1: Range, r2: Range) = "range" ==> sprintf "%A %A" r1 r2
+        static member Value (range: Range, value: string) = "range" ==>  sprintf "%A %s" range value
+        static member Infinite = "range" ==> "infinite"
+        static member Auto = "range" ==> "auto"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/pad
     type Pad =
-        | Pad of int * char
-    
-    let private pad (s: Pad): string =
-        match s with
-            | Pad (i, c) -> sprintf "%i \"%c\"" i c
-            
+        static member pad (value: int, symbol: string) = "pad" ==> sprintf "%d \"%s\"" value symbol
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/symbols
     type Symbols =
-        | Strings of string list
-        | Urls of string list
-        | Custom of string
-        
-    let private symbols (s: Symbols) =
-        match s with
-            | Strings sl ->
-                sl
+        static member Strings(strings: string list) =
+                "symbols" ==>
+                (strings
                 |> List.map (fun s -> sprintf "\"%s\"" s)
-                |> String.concat " "
-            | Urls    ul ->
-                ul
-                |> List.map (fun u -> sprintf "url('%s')" u)
-                |> String.concat " "
-            | Custom  c  -> c
-            
+                |> String.concat " ")
+        static member Urls (urls: string list) =
+            "symbols" ==>
+            (urls
+            |> List.map (fun u -> sprintf "url('%s')" u)
+            |> String.concat " ")
+        static member Custom (custom: CounterStyle) = "symbols" ==> counterValue custom
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/additive-symbols
+    type AdditiveSymbolType =
+        | Symbol of string
+        | Url of string
+
+    let private stringifyAdditiveSymbols =
+        function
+            | Symbol s -> sprintf "\"%s\"" s
+            | Url u -> sprintf "url(%s)" u
+
     type AdditiveSymbol =
-        | AdditiveSymbolString of int * string
-        | AdditiveSymbolUrl of int * string
-    
-    let private additiveSymbol (s: AdditiveSymbol): string =
-        match s with
-            | AdditiveSymbolString (i, s) -> sprintf "%i \"%s\"" i s
-            | AdditiveSymbolUrl    (i, u) -> sprintf "%i url(\"%s\")" i u
-            
+        static member Value (symbols: (int * AdditiveSymbolType) list) =
+             "additiveSymbols" ==>
+                (symbols
+                |> List.map (fun (n, s) -> sprintf "%d %s" n (stringifyAdditiveSymbols s))
+                |> String.concat ", ")
+
+    let AdditiveSymbol' (symbols: (int * AdditiveSymbolType) list) = AdditiveSymbol.Value(symbols)
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/speak-as
     type SpeakAs =
-        | Bullets
-        | Numbers
-        | Words
-        | SpellOut
-        | Custom of string
-        interface ISpeakAs
-        
-    let private speakAs (s: ISpeakAs): string =
-        let stringifySpeakAs (s: SpeakAs): string =
-            match s with
-                | Custom c -> c
-                | _ -> duToKebab s
-                
-        match s with
-            | :? Auto    as a -> GlobalValue.auto a
-            | :? SpeakAs as s -> stringifySpeakAs s
-            | _ -> "unknown speak as value"
-            
-    type CounterProperty =
-        | System           of System
-        | Negative         of Negative
-        | Prefix           of Prefix
-        | Suffix           of Suffix
-        | Range            of IRange
-        | Ranges           of IRange list
-        | Pad              of Pad
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/fallback
-        | Fallback         of string
-        | Symbols          of Symbols
-        | AdditiveSymbol   of AdditiveSymbol
-        | AdditiveSymbols  of AdditiveSymbol list
-        | SpeakAs          of ISpeakAs
-        
-    let createCounterStyleObject (counterName: string) (attributeList: CounterProperty list) =
-        let innerStyle =
-            attributeList
-            |> List.map(
-                           function
-                               | System          s  -> "system"           ==> system s
-                               | Negative        n  -> "negative"         ==> negative n
-                               | Prefix          p  -> "prefix"           ==> prefix p
-                               | Suffix          s  -> "suffix"           ==> suffix s
-                               | Range           r  -> "range"            ==> range r
-                               | Ranges          rs -> "range"            ==> combineComma range rs
-                               | Pad             p  -> "pad"              ==> pad p
-                               | Fallback        f  -> "fallback"         ==> f
-                               | Symbols         s  -> "symbols"          ==> symbols s
-                               | AdditiveSymbol  a  -> "additive-symbols" ==> additiveSymbol a
-                               | AdditiveSymbols al -> "additive-symbols" ==> combineComma additiveSymbol al
-                               | SpeakAs         s  -> "speak-as"         ==> speakAs s
-                       )
-        
-        createObj
-            [
-                sprintf "@counter-style %s" counterName ==>
-                    createObj innerStyle
-            ]
-        
+        static member Auto = "speak-as" ==> "auto"
+        static member Bullets = "speak-as" ==> "bullets"
+        static member Numbers = "speak-as" ==> "numbers"
+        static member Words = "speak-as" ==> "words"
+        static member SpellOut = "speak-as" ==> "spell-out"
+        static member CounterStyle (counter: CounterStyle) = "speak-as" ==> counterValue counter
+

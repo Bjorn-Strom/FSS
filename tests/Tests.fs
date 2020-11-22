@@ -6,17 +6,13 @@ open Fable.Mocha
 module Tests =
     let tests =
             testList "Fss Tests" [
-                Outline.tests
                 Grid.tests
                 Keyframes.tests
                 Media.tests
-                PseudoElements.tests
                 Content.tests
                 ListStyle.tests
-                PsuedoClasses.tests
                 Cursor.tests
                 Text.tests
-                Descendant.tests
                 Transition.tests
                 Transform.tests
                 Animation.tests
@@ -24,13 +20,14 @@ module Tests =
                 Margin.tests
                 Visibility.tests
                 Position.tests
-                Flex.tests
-                Display.tests
                 Perspective.tests
-                ContentSize.tests
                 Border.tests
                 Font.tests
                 Color.tests
+                ContentSize.tests
+                Display.tests
+                Flex.tests
+                Outline.tests
                 Background.tests
             ]
 

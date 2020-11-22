@@ -1,10 +1,8 @@
 namespace FSSTests
 
 open Fable.Mocha
-open Fable.Core.JsInterop
-open Utils
 open Fss
-open Fss.Keyframes
+open Utils
 
 module Keyframes =
     let tests =
@@ -12,31 +10,31 @@ module Keyframes =
                 [
                     frame 0
                         [
-                            BackgroundColor Color.red
-                            Color Color.blue
+                            BackgroundColor.red
+                            Color.blue
                         ]
                     frame 100
                         [
-                            BackgroundColor Color.blue
-                            Color Color.red
+                            BackgroundColor.blue
+                            Color.red
                         ]
                 ]
-                
+
         let multipleKeyframes =
             [
                 frame 0
                     [
-                        BackgroundColor (hex "00FF00")
-                        BackgroundSize (px 2)
+                        BackgroundColor.Hex "00FF00"
+                        BackgroundSize' (px 2)
                     ]
                 frame 50
                     [
-                        Opacity (Opacity.Opacity 0.)
+                        Opacity' 0.
                     ]
                 frame 100
                     [
-                        BorderWidth (px 5)
-                        BackgroundColor (rgb 11 22 33)
+                        BorderWidth' (px 5)
+                        BackgroundColor.Rgb 11 22 33
                     ]
             ]
 
@@ -49,7 +47,7 @@ module Keyframes =
                         "0% backgroundColor, #ff0000,color, #0000ff"
                         "100% backgroundColor, #0000ff,color, #ff0000"
                     ]
-                    
+
                 testKeyframes
                     "Animation with multiple keyframes"
                     multipleKeyframes

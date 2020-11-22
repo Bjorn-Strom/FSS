@@ -1,96 +1,104 @@
 namespace Fss
 
-open Value
-open Selector
+open Fable.Core
+open Fable.Core.JsInterop
 open Media
-open Html
-open Units.Size
-open Color
-open FontFaceValue
 open Keyframes
-open Counter
 
 [<AutoOpen>]
 module Functions =
+    [<Import("css", from="emotion")>]
+    let private css(x) = jsNative
+    let private css' x = css(x)
+
     // Constructors
     let fss (attributeList: CSSProperty list) =
-        attributeList |> createCSSObject |> css'
-
-    let keyframes (attributeList: KeyframeAttribute list) =
-        attributeList |> createAnimationObject |> kframes'
-
-    let fontFace (fontFamily: string) (attributeList: FontFace.FontFace list) =
-        attributeList |> createFontFaceObject fontFamily |> css'
-        Font.FontName fontFamily
-
-    let fontFaces (fontFamily: string) (attributeLists: FontFace.FontFace list list) =
-        attributeLists |> List.map (createFontFaceObject fontFamily) |> css'
-        Font.FontName fontFamily
-
-    let counterStyle (attributeList: CounterProperty list) =
-        let counterName = sprintf "_%i" <| attributeList.GetHashCode() |> string
-
         attributeList
-        |> List.map (fun _ -> createCounterStyleObject counterName attributeList)
+        |> List.map GlobalValue.CSSValue
+        |> createObj
         |> css'
-        |> ignore
-
-        counterName
-        |> Types.CounterStyle
 
     // Keyframes
-    let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame
-    let frames (f: int list) (properties: CSSProperty list) = (f, properties) |> Frames
+    let keyframes (attributeList: KeyframeAttribute list) =
+        attributeList
+        |> createAnimationObject
+        |> kframes'
+        |> CssString
+        :> IAnimationName
+
+    let frame (f: int) (properties: CSSProperty list) =
+        (f, properties)
+        |> Frame
+    let frames (f: int list) (properties: CSSProperty list) =
+        (f, properties)
+        |> Frames
+
+    // TODO trenger å type her
+    let counterStyle (attributeList: (string * obj) list) =
+        let counterName = sprintf "_%i" <| attributeList.GetHashCode()
+
+        createObj
+            [
+                sprintf "@counter-style %s" counterName ==>
+                    createObj attributeList
+            ]
+            |> css'
+            |> ignore
+
+        counterName
+        |> CounterStyle
 
     // Media
-    let MediaQuery (r: MediaFeature list) (p: CSSProperty list): CSSProperty = MediaProperty(r, p)
-    let MediaQueryFor (d: Device) (r: MediaFeature list) (p: CSSProperty list): CSSProperty = MediaForProperty(d, r, p)
+    let MediaQueryFor (device: Device) (features: MediaFeature list) (attributeList: CSSProperty list) =
+        Media.Media(device, features, attributeList |> fss)
+    let MediaQuery (features: MediaFeature list) (attributeList: CSSProperty list) =
+        Media.Media(features, attributeList |> fss)
 
-    // Selectors
-    let (!+) (html: Html) (propertyList: CSSProperty list) = Selector (AdjacentSibling html, propertyList)
-    let (!~) (html: Html) (propertyList: CSSProperty list) = Selector (GeneralSibling html, propertyList)
-    let (!>) (html: Html) (propertyList: CSSProperty list) = Selector (Child html, propertyList)
-    let (! ) (html: Html) (propertyList: CSSProperty list) = Selector (Descendant html, propertyList)
+    // Font
+    let fontFace (fontFamily: string) (attributeList: CSSProperty list) =
+        attributeList
+        |> createFontFaceObject fontFamily
+        |> css'
+        FontTypes.FontName fontFamily
 
-    // Globals
-    let Value v = Global.Value v
-    let Ident s = Global.Ident s
-    let Initial = Global.Initial
-    let Inherit = Global.Inherit
-    let Unset   = Global.Unset
-    let Revert  = Global.Revert
-    let Normal  = Global.Normal
-    let None    = Global.None
-    let Center  = Global.Center
-    let Auto    = Global.Auto
+    let fontFaces (fontFamily: string) (attributeLists: CSSProperty list list) =
+        attributeLists
+        |> List.map (createFontFaceObject fontFamily)
+        |> css'
+
+        FontTypes.FontName fontFamily
+
+    // Image
+    let stop (color: CSSColor) (stop: ILengthPercentage) = ColorStop(color, stop)
+    let stop2 (color: CSSColor) (stop1: ILengthPercentage) (stop2: ILengthPercentage) = ColorStop2(color, stop1, stop2)
 
     // Color
-    let rgb (r: int) (g: int) (b: int): CssColor = Utilities.Color.rgb r g b |> CssColor
-    let rgba (r: int) (g: int) (b: int) (a: float): CssColor = Utilities.Color.rgba r g b a |> CssColor
+    let rgb (r: int) (g: int) (b: int) = CSSColor.Rgb(r,g,b)
+    let rgba (r: int) (g: int) (b: int) (a: float) = CSSColor.Rgba(r,g,b,a)
 
-    let hex (value: string): CssColor = Utilities.Color.hex value |> CssColor
+    let hex (value: string) = CSSColor.Hex value
 
-    let hsl (h: int) (s: float) (l: float): CssColor = Utilities.Color.hsl h s l |> CssColor
-    let hsla (h: int) (s: float) (l: float) (a: float):CssColor = Utilities.Color.hsla h s l a |> CssColor
+    let hsl (h: int) (s: float) (l: float) = CSSColor.Hsl(h,s,l)
+    let hsla (h: int) (s: float) (l: float) (a: float) = CSSColor.Hsla(h,s,l,a)
 
     // Sizes
     // Absolute
-    let px (v: int): Size = sprintf "%dpx" v |> Px
-    let inc (v: float): Size = sprintf "%.1fin" v |> In
-    let cm (v: float): Size = sprintf "%.1fcm" v |> Cm
-    let mm (v: float): Size = sprintf "%.1fmm" v |> Mm
-    let pt (v: float): Size = sprintf "%.1fpt" v |> Pt
-    let pc (v: float): Size = sprintf "%.1fpc" v |> Pc
+    let px (v: int): Units.Size.Size = sprintf "%dpx" v |> Units.Size.Px
+    let inc (v: float): Units.Size.Size = sprintf "%.1fin" v |> Units.Size.In
+    let cm (v: float): Units.Size.Size = sprintf "%.1fcm" v |> Units.Size.Cm
+    let mm (v: float): Units.Size.Size = sprintf "%.1fmm" v |> Units.Size.Mm
+    let pt (v: float): Units.Size.Size = sprintf "%.1fpt" v |> Units.Size.Pt
+    let pc (v: float): Units.Size.Size = sprintf "%.1fpc" v |> Units.Size.Pc
 
     // Relative
-    let em (v: float): Size = sprintf "%.1fem" v |> Em
-    let rem (v: float): Size = sprintf "%.1frem" v |> Rem
-    let ex (v: float): Size = sprintf "%.1fex" v |> Ex
-    let ch (v: float): Size = sprintf "%.1fch" v |> Ch
-    let vw (v: float): Size = sprintf "%.1fvw" v |> Vw
-    let vh (v: float): Size = sprintf "%.1fvh" v |> Vh
-    let vmax (v: float): Size = sprintf "%.1fvmax" v |> VMax
-    let vmin (v: float): Size = sprintf "%.1fvmin" v |> VMin
+    let em (v: float): Units.Size.Size = sprintf "%.1fem" v |> Units.Size.Em
+    let rem (v: float): Units.Size.Size = sprintf "%.1frem" v |> Units.Size.Rem
+    let ex (v: float): Units.Size.Size = sprintf "%.1fex" v |> Units.Size.Ex
+    let ch (v: float): Units.Size.Size = sprintf "%.1fch" v |> Units.Size.Ch
+    let vw (v: float): Units.Size.Size = sprintf "%.1fvw" v |> Units.Size.Vw
+    let vh (v: float): Units.Size.Size = sprintf "%.1fvh" v |> Units.Size.Vh
+    let vmax (v: float): Units.Size.Size = sprintf "%.1fvmax" v |> Units.Size.VMax
+    let vmin (v: float): Units.Size.Size = sprintf "%.1fvmin" v |> Units.Size.VMin
 
     // Angles
     let deg (v: float): Units.Angle.Angle = sprintf "%.2fdeg" v |> Units.Angle.Deg
@@ -104,6 +112,6 @@ module Functions =
     // Time
     let sec (v: float): Units.Time.Time = sprintf "%.2fs" v |> Units.Time.Sec
     let ms (v: float): Units.Time.Time = sprintf "%.2fms" v |> Units.Time.Ms
-    
+
     // Fractions
     let fr (v: float): Units.Fraction.Fraction = sprintf "%.2ffr" v |> Units.Fraction.Fr

@@ -11,31 +11,26 @@ module Perspective =
             [
                 test
                     "Perspective px"
-                    [ Perspective (px 100) ]
+                    [ Perspective' (px 100) ]
                     ["perspective" ==> "100px"]
-
                 test
                     "Perspective em"
-                    [ Perspective (em 3.5) ]
+                    [ Perspective' (em 3.5) ]
                     ["perspective" ==> "3.5em"]
-
                 test
                     "Perspective none"
-                    [ Perspective None ]
+                    [ Perspective.None ]
                     ["perspective" ==> "none"]
-
                 test
                     "Perspective inherit"
-                    [ Perspective Inherit]
+                    [ Perspective.Inherit]
                     [ "perspective" ==> "inherit" ]
-
                 test
                     "Perspective initial"
-                    [ Perspective Initial]
+                    [ Perspective.Initial]
                     ["perspective" ==> "initial" ]
-
                 test
                     "Perspective unset"
-                    [ Perspective Unset]
+                    [ Perspective.Unset]
                     ["perspective" ==> "unset"]
             ]

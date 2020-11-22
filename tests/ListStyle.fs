@@ -9,7 +9,7 @@ module ListStyle =
     let sampleCounterStyle =
         counterStyle
             [
-                System Counter.Alphabetic
+                Counter.System.Alphabetic
             ]
 
     let tests =
@@ -17,112 +17,90 @@ module ListStyle =
             [
                 test
                     "List style image url"
-                    [ ListStyleImage (ListStyle.Url "foofoo.jpg") ]
+                    [ ListStyleImage.Url "foofoo.jpg" ]
                     [ "listStyleImage" ==> "url('foofoo.jpg')" ]
-
                 test
                     "List style image None"
-                    [ ListStyleImage None ]
+                    [ ListStyleImage.None ]
                     [ "listStyleImage" ==> "none" ]
-
                 test
                     "List style image Initial"
-                    [ ListStyleImage Initial ]
+                    [ ListStyleImage.Initial ]
                     [ "listStyleImage" ==> "initial" ]
-
                 test
                     "List style image Inherit"
-                    [ ListStyleImage Inherit ]
+                    [ ListStyleImage.Inherit ]
                     [ "listStyleImage" ==> "inherit" ]
-
                 test
                     "List style image Unset"
-                    [ ListStyleImage Unset ]
+                    [ ListStyleImage.Unset ]
                     [ "listStyleImage" ==> "unset" ]
-
                 test
                     "List style position inside"
-                    [ ListStylePosition ListStyle.Inside]
+                    [ ListStylePosition.Inside]
                     [ "listStylePosition" ==> "inside" ]
-
                 test
                     "List style position outside"
-                    [ ListStylePosition ListStyle.Outside ]
+                    [ ListStylePosition.Outside ]
                     [ "listStylePosition" ==> "outside" ]
-
                 test
                     "List style position Initial"
-                    [ ListStylePosition Initial ]
+                    [ ListStylePosition.Initial ]
                     [ "listStylePosition" ==> "initial" ]
-
                 test
                     "List style position Inherit"
-                    [ ListStylePosition Inherit ]
+                    [ ListStylePosition.Inherit ]
                     [ "listStylePosition" ==> "inherit" ]
-
                 test
                     "List style position Unset"
-                    [ ListStylePosition Unset ]
+                    [ ListStylePosition.Unset ]
                     [ "listStylePosition" ==> "unset" ]
-
                 test
                     "List style type Disc"
-                    [ ListStyleType ListStyle.Disc ]
+                    [ ListStyleType.Disc ]
                     [ "listStyleType" ==> "disc" ]
-
                 test
                     "List style type Circle"
-                    [ ListStyleType ListStyle.Circle ]
+                    [ ListStyleType.Circle ]
                     [ "listStyleType" ==> "circle" ]
-
                 test
                     "List style type Square"
-                    [ ListStyleType ListStyle.Square ]
+                    [ ListStyleType.Square ]
                     [ "listStyleType" ==> "square" ]
-
                 test
                     "List style type Decimal"
-                    [ ListStyleType ListStyle.Decimal ]
+                    [ ListStyleType.Decimal ]
                     [ "listStyleType" ==> "decimal" ]
-
                 test
                     "List style type Georgian"
-                    [ ListStyleType ListStyle.Georgian ]
+                    [ ListStyleType.Georgian ]
                     [ "listStyleType" ==> "georgian" ]
-
                 test
                     "List style type TradChineseInformal"
-                    [ ListStyleType ListStyle.TradChineseInformal ]
+                    [ ListStyleType.TradChineseInformal ]
                     [ "listStyleType" ==> "trad-chinese-informal" ]
-
                 test
                     "List style type Kannada"
-                    [ ListStyleType ListStyle.Kannada ]
+                    [ ListStyleType.Kannada ]
                     [ "listStyleType" ==> "kannada" ]
-
                 test
                     "List style type string"
-                    [ ListStyleType (ListStyle.String "-") ]
+                    [ ListStyleType' (CssString "-") ]
                     [ "listStyleType" ==> "'-'" ]
-
                 test
                     "List style type custom"
-                    [ ListStyleType (ListStyle.Custom sampleCounterStyle) ]
-                    [ "listStyleType" ==> "_1013904226" ]
-
+                    [ ListStyleType' sampleCounterStyle ]
+                    [ "listStyleType" ==> "_223772456" ]
                 test
                     "List style type Initial"
-                    [ ListStyleType Initial ]
+                    [ ListStyleType.Initial ]
                     [ "listStyleType" ==> "initial" ]
-
                 test
                     "List style type Inherit"
-                    [ ListStyleType Inherit ]
+                    [ ListStyleType.Inherit ]
                     [ "listStyleType" ==> "inherit" ]
-
                 test
                     "List style type Unset"
-                    [ ListStyleType Unset ]
+                    [ ListStyleType.Unset ]
                     [ "listStyleType" ==> "unset" ]
-
             ]

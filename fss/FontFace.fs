@@ -1,8 +1,10 @@
 ﻿namespace Fss
 
+open Fable.Core.JsInterop
+
+
+[<AutoOpen>]
 module FontFace =
-    open Types
-    
      // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
     type Format =
         | Truetype
@@ -12,45 +14,47 @@ module FontFace =
         | Woff2
         | Svg
 
+    let private stringifyFormat =
+        function
+            | Truetype -> "truetype"
+            | Opentype -> "opentype"
+            | EmpbeddedOpentype -> "embedded-opentype"
+            | Woff -> "woff"
+            | Woff2 -> "woff2"
+            | Svg -> "svg"
+
     type Source =
-        | Url of string * Format
+        | Url of string
+        | UrlFormat of string * Format
         | Local of string
 
+    let private stringifySource =
+        function
+            | Url s -> sprintf "url('%s')" s
+            | UrlFormat (s, f) -> sprintf "url('%s') format('%s')" s (stringifyFormat f)
+            | Local l -> sprintf "local('%s')" l
+
+    let private sourceValue value = PropertyValue.cssValue Property.Src value
+    let private styleValue value = PropertyValue.cssValue Property.FontStyle value
+    let private displayValue value = PropertyValue.cssValue Property.FontDisplay value
+    let private stretchValue value = PropertyValue.cssValue Property.FontStretch value
+    let private weightValue value = PropertyValue.cssValue Property.FontWeight value
+
     type FontFace =
-        | Source of Source
-        | Sources of Source list
-        | FontStyle of IFontStyle
-        | FontDisplay of IFontDisplay
-        | FontStretch of IFontStretch
-        | FontWeight of IFontWeight
-        
-module FontFaceValue =
-    open Fable.Core.JsInterop
-    
-    open FontFace
-    open Utilities.Helpers
-    
-    let private source (v: Source): string =
-        match v with
-            | Url (s, f) -> sprintf "url('%s') format('%s')" s (duToKebab f)
-            | Local l    -> sprintf "local('%s')" l
+        static member Source (source: Source) = source |> stringifySource |> sourceValue
+        static member Sources (sources: Source list) = Utilities.Helpers.combineComma stringifySource sources |> sourceValue
+        static member Style (style: IFontStyle) = style |> FontTypes.fontStyleToString |> styleValue
+        static member Display (display: IFontDisplay) = display |> FontTypes.fontDisplayToString |> displayValue
+        static member Stretch (stretch: IFontStretch) = stretch |> FontTypes.fontStretchToString |> stretchValue
+        static member Weight (weight: IFontWeight) = weight |> FontTypes.fontWeightToString |> weightValue
 
-    let createFontFaceObject (fontName: string) (attributeList: FontFace list) =
-        let innerStyle =
-            attributeList |> List.map (
-                function
-                    | Source      s -> "src"                               ==> source s
-                    | Sources     s -> "src"                               ==> combineComma source s
-                    | FontStyle   f -> Property.value Property.FontStyle   ==> FontValues.style f
-                    | FontDisplay f -> Property.value Property.FontDisplay ==> FontValues.display f
-                    | FontStretch f -> Property.value Property.FontStretch ==> FontValues.stretch f
-                    | FontWeight  f -> Property.value Property.FontWeight  ==> FontValues.weight f)
-
+    let createFontFaceObject (fontName: string) (attributeList: CSSProperty list) =
+        let attributeList' =  List.map GlobalValue.CSSValue attributeList
         createObj
             [
                 "@font-face" ==>
                     createObj
                         ([
                             "fontFamily" ==> fontName
-                        ] @ innerStyle)
+                        ] @ attributeList')
             ]

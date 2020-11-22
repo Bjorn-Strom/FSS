@@ -20,8 +20,8 @@ module FontFace =
                                 FontFace.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", FontFace.Truetype)
                                 FontFace.Url ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", FontFace.Svg)
                             ]
-                        FontFace.FontWeight Normal
-                        FontFace.FontStyle Normal
+                        FontFace.Weight Normal
+                        FontFace.Style Normal
                     ]
                     []
             ]

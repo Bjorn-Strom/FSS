@@ -1,9 +1,10 @@
 namespace FSSTests
 
+open Fss
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open Fss
+open Media
 
 module Media =
        let tests =
@@ -12,60 +13,57 @@ module Media =
                 testNested
                     "Media query with min width and min height"
                     [
-                        MediaQuery
-                            [ Media.MinWidth (px 500); Media.MaxWidth (px 700) ]
-                            [ BackgroundColor Color.red ]
+                        Media.Media(
+                            [ MinWidth (px 500); MaxWidth (px 700) ],
+                            [ BackgroundColor.red ])
                     ]
                     ["@media (min-width: 500px) and (max-width: 700px)" ==> "[backgroundColor,#ff0000]"]
-
                 testNested
                     "Media query min height only"
                     [
-                        MediaQuery
-                            [ Media.MinHeight (px 700) ]
-                            [ BackgroundColor Color.pink ]
+                        Media.Media(
+                            [ MinHeight (px 700) ],
+                            [ BackgroundColor.pink ])
                     ]
                     ["@media (min-height: 700px)" ==> "[backgroundColor,#ffc0cb]"]
-
                 testNested
                     "Media query for print"
                     [
-                        MediaQueryFor Media.Print
-                            []
+                        Media.Media(
+                            Print,
+                            [],
                             [
-                                MarginTop (px 200)
-                                Transform (Transform.Rotate (deg 45.0))
-                                BackgroundColor Color.indianRed
-                            ]
+                                MarginTop' (px 200)
+                                Transform.Rotate (deg 45.0)
+                                BackgroundColor.indianRed
+                            ])
                     ]
                     ["@media print " ==> "[marginTop,200px,transform,rotate(45.00deg),backgroundColor,#cd5c5c]"]
-
                 testNested
                     "Media not all"
                     [
-                        MediaQueryFor (Media.Not Media.All)
-                            [ Media.Color ]
-                            [
-                                MarginTop (px 200)
-                            ]
+                        Media.Media(
+                            (Not All),
+                            [ Color ],
+                            [ MarginTop' (px 200) ])
                     ]
                     ["@media not all and (color)" ==> "[marginTop,200px]"]
-
                 testNested
                     "Media query only screen"
                     [
-                        MediaQueryFor (Media.Only Media.Screen)
+                        Media.Media (
+                            Only Screen,
                             [
-                                Media.Color
-                                Media.Pointer Media.Fine
-                                Media.Scan Media.Interlace
-                                Media.Grid true
-                            ]
+                                Color
+                                Pointer Fine
+                                Scan Interlace
+                                Grid true
+                            ],
                             [
-                                MarginTop (px 200)
-                                Transform (Transform.Rotate (deg 45.0))
-                                BackgroundColor Color.indianRed
-                            ]
+                                MarginTop' (px 200)
+                                Transform.Rotate (deg 45.0)
+                                BackgroundColor.indianRed
+                            ])
                     ]
                     [
                         "@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: 1)"

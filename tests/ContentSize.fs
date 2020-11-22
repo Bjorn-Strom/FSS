@@ -11,93 +11,74 @@ module ContentSize =
             [
                 test
                     "Width px"
-                    [ Width (px 100) ]
+                    [ Width' (px 100) ]
                     ["width" ==> "100px"]
-
                 test
                     "Width percent"
-                    [ Width (pct 25) ]
+                    [ Width' (pct 25) ]
                     ["width" ==> "25%"]
-
-
                 test
                     "Width max content"
-                    [ Width ContentSize.MaxContent ]
+                    [ Width.MaxContent ]
                     ["width" ==> "max-content"]
-
                 test
                     "Width min content"
-                    [ Width ContentSize.MinContent ]
+                    [ Width.MinContent ]
                     ["width" ==> "min-content"]
-
                 test
                     "Width fit content"
-                    [ Width (ContentSize.FitContent(px 100)) ]
+                    [ Width.FitContent (px 100) ]
                     ["width" ==> "fit-content(100px)"]
-
                 test
                     "Width auto"
-                    [ Width Auto ]
+                    [ Width.Auto ]
                     ["width" ==> "auto"]
-
                 test
                     "Width initial"
-                    [ Width Initial ]
+                    [ Width.Initial ]
                     ["width" ==> "initial"]
-
                 test
                     "Width inherit"
-                    [ Width Inherit ]
+                    [ Width.Inherit ]
                     ["width" ==> "inherit"]
-
                 test
                     "Width unset"
-                    [ Width Unset ]
+                    [ Width.Unset ]
                     ["width" ==> "unset"]
-
                 test
                     "Height px"
-                    [ Height (px 100) ]
+                    [ Height' (px 100) ]
                     ["height" ==> "100px"]
-
                 test
                     "Height percent"
-                    [ Height (pct 25) ]
+                    [ Height' (pct 25) ]
                     ["height" ==> "25%"]
-
-
                 test
                     "Height max content"
-                    [ Height ContentSize.MaxContent ]
+                    [ Height.MaxContent ]
                     ["height" ==> "max-content"]
-
                 test
                     "Height min content"
-                    [ Height ContentSize.MinContent ]
+                    [ Height.MinContent ]
                     ["height" ==> "min-content"]
-
                 test
                     "Height fit content"
-                    [ Height (ContentSize.FitContent(px 100)) ]
+                    [ Height.FitContent (px 100) ]
                     ["height" ==> "fit-content(100px)"]
-
                 test
                     "Height auto"
-                    [ Height Auto ]
+                    [ Height.Auto ]
                     ["height" ==> "auto"]
-
                 test
                     "Height initial"
-                    [ Height Initial ]
+                    [ Height.Initial ]
                     ["height" ==> "initial"]
-
                 test
                     "Height inherit"
-                    [ Height Inherit ]
+                    [ Height.Inherit ]
                     ["height" ==> "inherit"]
-
                 test
                     "Height unset"
-                    [ Height Unset ]
+                    [ Height.Unset ]
                     ["height" ==> "unset"]
             ]

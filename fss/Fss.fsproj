@@ -5,15 +5,17 @@
   <ItemGroup>
     <Compile Include="Utilities.fs" />
     <Compile Include="css\Types.fs" />
-    <Compile Include="css\Global.fs" />
+    <Compile Include="css\Property.fs" />
     <Compile Include="css\Units.fs" />
     <Compile Include="css\Html.fs" />
-    <Compile Include="css\Property.fs" />
     <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />
+    <Compile Include="css\CSSColor.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Font.fs" />
     <Compile Include="css\Text.fs" />
+    <Compile Include="css\CounterStyle.fs" />
+    <Compile Include="css\ListStyle.fs" />
     <Compile Include="css\Image.fs" />
     <Compile Include="css\Background.fs" />
     <Compile Include="css\Border.fs" />
@@ -23,22 +25,22 @@
     <Compile Include="css\Margin.fs" />
     <Compile Include="css\Padding.fs" />
     <Compile Include="css\ContentSize.fs" />
-    <Compile Include="css\Selector.fs" />
     <Compile Include="css\Visibility.fs" />
     <Compile Include="css\Position.fs" />
     <Compile Include="css\Perspective.fs" />
     <Compile Include="css\Cursor.fs" />
-    <Compile Include="css\ListStyle.fs" />
     <Compile Include="css\Attribute.fs" />
     <Compile Include="css\Content.fs" />
     <Compile Include="css\Grid.fs" />
+    <Compile Include="css\Flex.fs" />
     <Compile Include="css\Outline.fs" />
-    <Compile Include="css\CounterStyle.fs" />
     <Compile Include="css\Media.fs" />
-    <Compile Include="Value.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Functions.fs" />
+    <Compile Include="Selector.fs" />
+    <Compile Include="PseudoClass.fs" />
+    <Compile Include="PseudoElement.fs" />
 
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

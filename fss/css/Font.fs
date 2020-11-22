@@ -1,15 +1,7 @@
 namespace Fss
 
-open Units.Percent
-open Global
-open Types
-open Fss.Utilities.Helpers
-open Units.Angle
-
-module Font =
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
-    type Size =
-        // Absolute
+module FontTypes =
+    type FontSizeType =
         | XxSmall
         | XSmall
         | Small
@@ -18,22 +10,16 @@ module Font =
         | XLarge
         | XxLarge
         | XxxLarge
-        // Relative
         | Smaller
         | Larger
         interface IFontSize
-        interface IGlobal
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
-    type Style =
-        | Normal
+    type FontStyleType =
         | Italic
-        | Oblique of Angle
+        | Oblique of Units.Angle.Angle
         interface IFontStyle
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
-    type Stretch =
-        | Normal
+    type FontStretchType =
         | SemiCondensed
         | Condensed
         | ExtraCondensed
@@ -44,50 +30,24 @@ module Font =
         | UltraExpanded
         interface IFontStretch
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
-    type Weight =
-        | Normal
-        | Bold
-        | Lighter
-        | Bolder
-        | Value of int
-        interface IFontWeight
+    type FontWeightType =
+         | Bold
+         | Lighter
+         | Bolder
+         interface IFontWeight
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
-    type LineHeight =
-        | Normal
-        | Value of float
-        | Percent of Percent
-        | Size of Size
-        interface ILineHeight
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
-    type Display =
-        | Auto
+    type FontDisplayType =
         | Block
         | Swap
         | Fallback
         | Optional
         interface IFontDisplay
 
-    type FontName = FontName of string
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
-    type FontFamily =
-        | Serif
-        | SansSerif
-        | Monospace
-        | Cursive
-        | Font of FontName
-        | Custom of string
-        interface IFontFamily
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
     type SettingSwitch =
         | On
         | Off
 
-    type FeatureSetting =
+    type FontFeatureSettingType =
         | Liga of SettingSwitch
         | Dlig of SettingSwitch
         | Onum of SettingSwitch
@@ -104,7 +64,7 @@ module Font =
         | Calt of SettingSwitch
         | Swsh of SettingSwitch
         | Hist of SettingSwitch
-        | Ss   of int * SettingSwitch
+        | Ss of int * SettingSwitch
         | Kern of SettingSwitch
         | Locl of SettingSwitch
         | Rlig of SettingSwitch
@@ -116,9 +76,7 @@ module Font =
         | Mkmk of SettingSwitch
         interface IFontFeatureSetting
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
-    type VariantNumeric =
-        | Normal
+    type FontVariantNumericType =
         | Ordinal
         | SlashedZero
         | LiningNums
@@ -128,11 +86,8 @@ module Font =
         | DiagonalFractions
         | StackedFractions
         interface IFontVariantNumeric
-        interface IFontVariant
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
-    type VariantCaps =
-        | Normal
+    type FontVariantCapsType =
         | SmallCaps
         | AllSmallCaps
         | PetiteCaps
@@ -140,11 +95,8 @@ module Font =
         | Unicase
         | TitlingCaps
         interface IFontVariantCaps
-        interface IFontVariant
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-    type VariantEastAsian =
-        | Normal
+    type FontVariantEastAsianType =
         | Ruby
         | Jis78
         | Jis83
@@ -155,12 +107,8 @@ module Font =
         | FullWidth
         | ProportionalWidth
         interface IFontVariantEastAsian
-        interface IFontVariant
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-    type VariantLigatures =
-        | Normal
-        | None
+    type FontVariantLigatureType =
         | CommonLigatures
         | NoCommonLigatures
         | DiscretionaryLigatures
@@ -169,196 +117,486 @@ module Font =
         | NoHistoricalLigatures
         | Contextual
         | NoContextual
-        interface IFontVariantLigatures
-        interface IFontVariant
+        interface IFontVariantLigature
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/font
-    type Font =
-        {
-            Size    : IFontSize
-            Family  : IFontFamily
-            Stretch : IFontStretch
-            Style   : IFontStyle
-            Variant : IFontVariant
-            Weight  : IFontWeight
-            LineHeight  : ILineHeight
-        }
-        with
-            interface IFont
-            
-    let size (size: IFontSize) font =
-        { font with Size = size } 
-    let family (family: FontFamily) font =
-        { font with Family = family}   
-    let stretch (stretch: IFontStretch) font =
-        { font with Stretch = stretch }  
-    let style (style: IFontStyle) font =
-        { font with Style = style }    
-    let variant (variant: IFontVariant) font =
-        { font with Variant = variant }  
-    let weight (weight: IFontWeight) font =
-        { font with Weight = weight }   
-    let lineHeight (height: ILineHeight) font =
-        { font with LineHeight = height }   
+    type FontName = FontName of string
 
-module FontValues =
-    open Font
+    type FontFamilyType =
+        | Serif
+        | SansSerif
+        | Monospace
+        | Cursive
+        | Custom of string
+        | FontName of FontName
+        interface IFontFamily
 
-    let size (v: IFontSize): string =
-        match v with
-            | :? Global          as g -> GlobalValue.globalValue g
-            | :? Units.Size.Size as s -> Units.Size.value s
-            | :? Percent         as p -> Units.Percent.value p
-            | :? Size            as s -> duToKebab s
-            | _                       -> "Unknown font size"
+    let fontStyleToString (style: IFontStyle) =
+        let stringifyFontStyle =
+            function
+                | Italic -> "italic"
+                | Oblique a -> sprintf "oblique %s" (Units.Angle.value a)
 
-    let style (v: IFontStyle): string =
-        let stringifyStyleValue (v: Style): string =
-            match v with
-                | Oblique a -> sprintf "oblique %s" <| Units.Angle.value a
-                | _         -> duToLowercase v
+        match style with
+            | :? FontStyleType as f -> stringifyFontStyle f
+            | :? Keywords as k -> GlobalValue.keywords k
+            | :? Normal -> GlobalValue.normal
+            | _ -> "Unknown font style"
 
-        match v with
-            | :? Style  as f -> stringifyStyleValue f
-            | :? Global as g -> GlobalValue.globalValue g
-            | :? Normal as n -> GlobalValue.normal n
-            | _              -> "Unknown font style"
+    let fontStretchToString (stretch: IFontStretch) =
+        let stringifyStretch =
+            function
+                | SemiCondensed -> "semi-condensed"
+                | Condensed -> "condensed"
+                | ExtraCondensed -> "extra-condensed"
+                | UltraCondensed -> "ultra-condensed"
+                | SemiExpanded -> "semi-expanded"
+                | Expanded -> "expanded"
+                | ExtraExpanded -> "extra-expanded"
+                | UltraExpanded -> "ultra-expanded"
 
-    let stretch (v: IFontStretch): string =
-        match v with
-            | :? Stretch as f -> duToKebab f
-            | :? Normal  as n -> GlobalValue.normal n
-            | :? Percent as p -> Units.Percent.value p
-            | :? Global  as g -> GlobalValue.globalValue g
-            | _               -> "unknown font stretch value"
+        match stretch with
+            | :? FontStretchType as f -> stringifyStretch f
+            | :? Keywords as k -> GlobalValue.keywords k
+            | :? Normal -> GlobalValue.normal
+            | :? Units.Percent.Percent as p -> Units.Percent.value p
+            | _ -> "Unknown font stretch"
 
-    let weight (v: IFontWeight): string =
-        let stringifyFamilyValue (v: Weight): string =
-            match v with
-                | Weight.Value n -> string n
-                | _              -> duToLowercase v
+    let fontWeightToString (fontWeight: IFontWeight) =
+         let stringifyWeight =
+             function
+                 | Bold -> "bold"
+                 | Lighter -> "lighter"
+                 | Bolder -> "bolder"
 
-        match v with
-            | :? Global as g     -> GlobalValue.globalValue g
-            | :? Normal as n     -> GlobalValue.normal n
-            | :? Weight as f     -> stringifyFamilyValue f
-            | _                  -> "Unknown font family"
+         match fontWeight with
+            | :? CssInt as i -> GlobalValue.int i
+            | :? FontWeightType as f -> stringifyWeight f
+            | :? Keywords as k -> GlobalValue.keywords k
+            | :? Normal -> GlobalValue.normal
+            | _ -> "Unknown font weight"
 
-    let lineHeight (v: ILineHeight): string =
-        let stringifyLineHeight (v: LineHeight): string =
-            match v with
-                | Value v -> string v
-                | _       -> duToLowercase v
+    let fontDisplayToString (display: IFontDisplay) =
+        let stringifyDisplay =
+            function
+                | Block -> "block"
+                | Swap -> "swap"
+                | Fallback -> "fallback"
+                | Optional -> "optional"
 
-        match v with
-            | :? LineHeight      as f -> stringifyLineHeight f
-            | :? Percent         as p -> Units.Percent.value p
-            | :? Units.Size.Size as s -> Units.Size.value s
-            | :? Global          as g -> GlobalValue.globalValue g
-            | :? Normal          as n -> GlobalValue.normal n
-            | _                       -> "unknown font stretch value"
+        match display with
+        | :? FontDisplayType as f -> stringifyDisplay f
+        | :? Auto -> GlobalValue.auto
+        | _ -> "Unknown font display value"
 
-    let display (v: IFontDisplay): string =
-        match v with
-            | :? Display as f -> duToLowercase f
-            | _                   -> "Unknown font display"
+[<AutoOpen>]
+module Font =
+    open FontTypes
 
-    let name (FontName n) = n
+    let private fontSizeToString (fontSize: IFontSize) =
+        let stringifyFontSize =
+            function
+                | XxSmall -> "xx-small"
+                | XSmall -> "x-small"
+                | Small -> "small"
+                | Medium -> "medium"
+                | Large -> "large"
+                | XLarge -> "x-large"
+                | XxLarge -> "xx-large"
+                | XxxLarge -> "xxx-large"
+                | Smaller -> "smaller"
+                | Larger -> "larger"
 
-    let family (v: IFontFamily) : string =
-        let parseFamilyValue (v: FontFamily): string =
-            match v with
-                | Font   f -> name f
+        match fontSize with
+        | :? FontSizeType as f -> stringifyFontSize f
+        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown font size"
+
+    let private familyToString (fontFamily: IFontFamily) =
+        let stringifyFontName (FontName.FontName n) = n
+        let stringifyFamily =
+            function
+                | Serif -> "serif"
+                | SansSerif -> "sans-serif"
+                | Monospace -> "monospace"
+                | Cursive -> "cursive"
                 | Custom c -> c
-                | _ -> duToKebab v
+                | FontName n -> stringifyFontName n
 
-        match v with
-            | :? Global     as g -> GlobalValue.globalValue g
-            | :? FontFamily as f -> parseFamilyValue f
+        match fontFamily with
+            | :? FontFamilyType as f -> stringifyFamily f
+            | :? Keywords as k -> GlobalValue.keywords k
             | _ -> "Unknown font family"
 
-    let featureSetting (v: IFontFeatureSetting): string =
-        let parseFontFeatureSetting (v: FeatureSetting): string =
-            let stringify (fontFeature: string) (setting: SettingSwitch) =
-                sprintf "\"%s\" %s" fontFeature (duToString setting)
+    let private  featureSettingToString (featureSetting: IFontFeatureSetting) =
+        let stringifyFeature =
+            function
+                | Liga switch    -> sprintf "\"liga\" %A" switch
+                | Dlig switch    -> sprintf "\"dlig\" %A" switch
+                | Onum switch    -> sprintf "\"onum\" %A" switch
+                | Lnum switch    -> sprintf "\"lnum\" %A" switch
+                | Tnum switch    -> sprintf "\"tnum\" %A" switch
+                | Zero switch    -> sprintf "\"zero\" %A" switch
+                | Frac switch    -> sprintf "\"frac\" %A" switch
+                | Sups switch    -> sprintf "\"sups\" %A" switch
+                | Subs switch    -> sprintf "\"subs\" %A" switch
+                | Smcp switch    -> sprintf "\"smcp\" %A" switch
+                | C2sc switch    -> sprintf "\"c2sc\" %A" switch
+                | Case switch    -> sprintf "\"case\" %A" switch
+                | Hlig switch    -> sprintf "\"hlig\" %A" switch
+                | Calt switch    -> sprintf "\"calt\" %A" switch
+                | Swsh switch    -> sprintf "\"swsh\" %A" switch
+                | Hist switch    -> sprintf "\"hist\" %A" switch
+                | Ss (n, switch) -> sprintf "\"ss%2i\" %A" n switch
+                | Kern switch    -> sprintf "\"kern\" %A" switch
+                | Locl switch    -> sprintf "\"locl\" %A" switch
+                | Rlig switch    -> sprintf "\"rlig\" %A" switch
+                | Medi switch    -> sprintf "\"medi\" %A" switch
+                | Init switch    -> sprintf "\"init\" %A" switch
+                | Isol switch    -> sprintf "\"isol\" %A" switch
+                | Fina switch    -> sprintf "\"fina\" %A" switch
+                | Mark switch    -> sprintf "\"mark\" %A" switch
+                | Mkmk switch    -> sprintf "\"mkmk\" %A" switch
 
-            match v with
-            | Liga switch -> stringify "liga" switch
-            | Dlig switch -> stringify "dlig" switch
-            | Onum switch -> stringify "onum" switch
-            | Lnum switch -> stringify "lnum" switch
-            | Tnum switch -> stringify "tnum" switch
-            | Zero switch -> stringify "zero" switch
-            | Frac switch -> stringify "frac" switch
-            | Sups switch -> stringify "sups" switch
-            | Subs switch -> stringify "subs" switch
-            | Smcp switch -> stringify "smcp" switch
-            | C2sc switch -> stringify "c2sc" switch
-            | Case switch -> stringify "case" switch
-            | Hlig switch -> stringify "hlig" switch
-            | Calt switch -> stringify "calt" switch
-            | Swsh switch -> stringify "swsh" switch
-            | Hist switch -> stringify "hist" switch
-            | Ss   (variant, switch) -> stringify (sprintf "ss%02i" variant) switch
-            | Kern switch -> stringify "kern" switch
-            | Locl switch -> stringify "locl" switch
-            | Rlig switch -> stringify "rlig" switch
-            | Medi switch -> stringify "medi" switch
-            | Init switch -> stringify "init" switch
-            | Isol switch -> stringify "isol" switch
-            | Fina switch -> stringify "fina" switch
-            | Mark switch -> stringify "mark" switch
-            | Mkmk switch -> stringify "mkmk" switch
+        match featureSetting with
+        | :? FontFeatureSettingType as f -> stringifyFeature f
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "unknown font feature setting"
 
-        match v with
-            | :? Global         as g -> GlobalValue.globalValue g
-            | :? FeatureSetting as f -> sprintf "%s" (parseFontFeatureSetting f)
-            | _ -> "Unknown font feature setting"
+    let private  variantNumericToString (variant: IFontVariantNumeric) =
+        let stringifyVariant =
+            function
+                | Ordinal -> "ordinal"
+                | SlashedZero -> "slashed-zero"
+                | LiningNums -> "lining-nums"
+                | OldstyleNums -> "oldstyle-nums"
+                | ProportionalNums -> "proportional-nums"
+                | TabularNums -> "tabular-nums"
+                | DiagonalFractions -> "diagonal-fractions"
+                | StackedFractions -> "stacked-fractions"
 
-    let variantNumeric (v: IFontVariantNumeric): string =
-        match v with
-        | :? Global         as g -> GlobalValue.globalValue g
-        | :? VariantNumeric as f -> duToKebab f
+        match variant with
+        | :? FontVariantNumericType as f -> stringifyVariant f
+        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
 
-    let variantCap (v: IFontVariantCaps): string =
-        match v with
-        | :? Global      as g -> GlobalValue.globalValue g
-        | :? VariantCaps as f -> duToKebab f
-        | _ -> "Unknown font variant caps"
+    let private fontVariantCapsToString (variant: IFontVariantCaps) =
+        let stringifyVariant =
+            function
+                | SmallCaps -> "small-caps"
+                | AllSmallCaps -> "all-small-caps"
+                | PetiteCaps -> "petite-caps"
+                | AllPetiteCaps -> "all-petite-caps"
+                | Unicase -> "unicase"
+                | TitlingCaps -> "titling-caps"
 
-    let variantEastAsian (v: IFontVariantEastAsian): string =
-        match v with
-        | :? Global           as g -> GlobalValue.globalValue g
-        | :? VariantEastAsian as f -> duToKebab f
-        | _ -> "Unknown font variant east asian"
+        match variant with
+        | :? FontVariantCapsType as f -> stringifyVariant f
+        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Normal -> GlobalValue.normal
+        | _ -> "Unknown font variant numeric"
 
-    let variantLigature (v: IFontVariantLigatures): string =
-        match v with
-        | :? Global               as g -> GlobalValue.globalValue g
-        | :? None                 as n -> GlobalValue.none n
-        | :? VariantLigatures     as f -> duToKebab f
-        | _ -> "Unknown font variant ligatures"
+    let private variantEastAsianToString (variant: IFontVariantEastAsian) =
+        let stringifyVariant =
+            function
+            | Ruby -> "ruby"
+            | Jis78 -> "jis78"
+            | Jis83 -> "jis83"
+            | Jis90 -> "jis90"
+            | Jis04 -> "jis04"
+            | Simplified -> "simplified"
+            | Traditional -> "traditional"
+            | FullWidth -> "full-width"
+            | ProportionalWidth -> "proportional-width"
 
-    let variant (v: IFontVariant): string =
-        match v with
-            | :? VariantNumeric   as f -> duToKebab f
-            | :? VariantCaps      as f -> duToKebab f
-            | :? VariantEastAsian as f -> duToKebab f
-            | :? VariantLigatures as f -> duToKebab f
-            | :? Normal           as n -> GlobalValue.normal n
-            | _ -> "Unknown font variant ligatures"
+        match variant with
+        | :? FontVariantEastAsianType as f -> stringifyVariant f
+        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Normal -> GlobalValue.normal
+        | _ -> "Unknown font variant numeric"
 
-    let font (b: IFont): string =
-        let stringifyFont (f: Font): string =
-            sprintf "%s %s %s %s/%s %s"
-                (style f.Style)
-                (variant f.Variant)
-                (weight f.Weight)
-                (size f.Size)
-                (lineHeight f.LineHeight)
-                (family f.Family)
+    let private  variantLigatureToString (variant: IFontVariantLigature) =
+        let stringifyVariant =
+            function
+            | CommonLigatures -> "common-ligatures"
+            | NoCommonLigatures -> "no-common-ligatures"
+            | DiscretionaryLigatures -> "discretionary-ligatures"
+            | NoDiscretionaryLigatures -> "no-discretionary-ligatures"
+            | HistoricalLigatures -> "historical-ligatures"
+            | NoHistoricalLigatures -> "no-historical-ligatures"
+            | Contextual -> "contextual"
+            | NoContextual -> "no-contextual"
 
-        match b with
-            | :? Font as f -> stringifyFont f
-            | _ -> "unknown border value"
+        match variant with
+        | :? FontVariantLigatureType as f -> stringifyVariant f
+        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Normal -> GlobalValue.normal
+        | :? None -> GlobalValue.none
+        | _ -> "Unknown font variant numeric"
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
+    let private sizeCssValue value = PropertyValue.cssValue Property.FontSize value
+    let private sizeCssValue' value = value |> fontSizeToString |> sizeCssValue
+    type FontSize =
+        static member Value (value: IFontSize) = value |> sizeCssValue'
+        static member XxSmall = XxSmall |> sizeCssValue'
+        static member XSmall = XSmall |> sizeCssValue'
+        static member Small = Small |> sizeCssValue'
+        static member Medium = Medium |> sizeCssValue'
+        static member Large = Large |> sizeCssValue'
+        static member XLarge = XLarge |> sizeCssValue'
+        static member XxLarge = XxLarge |> sizeCssValue'
+        static member XxxLarge = XxxLarge |> sizeCssValue'
+        static member Smaller = Smaller |> sizeCssValue'
+        static member Larger = Larger |> sizeCssValue'
+
+        static member Inherit = Inherit |> sizeCssValue'
+        static member Initial = Initial |> sizeCssValue'
+        static member Unset = Unset |> sizeCssValue'
+
+    let FontSize' (size: IFontSize) = FontSize.Value(size)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
+    let private styleCssValue value = PropertyValue.cssValue Property.FontStyle value
+    let private styleCssValue' value = value |> fontStyleToString |> styleCssValue
+    type FontStyle =
+        static member Value (fontStyle: IFontStyle) = fontStyle |> styleCssValue'
+        static member Oblique (angle: Units.Angle.Angle) = Oblique angle |> styleCssValue'
+        static member Italic = Italic |> styleCssValue'
+
+        static member Normal = Normal |> styleCssValue'
+        static member Inherit = Inherit |> styleCssValue'
+        static member Initial = Initial |> styleCssValue'
+        static member Unset = Unset |> styleCssValue'
+
+    let FontStyle' (style: IFontStyle) = FontStyle.Value(style)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
+    let private stretchCssValue value = PropertyValue.cssValue Property.FontStretch value
+    let private stretchCssValue' value = value |> fontStretchToString |> stretchCssValue
+    type FontStretch =
+        static member Value (fontStretch: IFontStretch) = fontStretch |> stretchCssValue'
+        static member Value (percent: Units.Percent.Percent) =
+            Units.Percent.value percent
+            |> stretchCssValue
+        static member SemiCondensed = SemiCondensed |> stretchCssValue'
+        static member Condensed = Condensed |> stretchCssValue'
+        static member ExtraCondensed = ExtraCondensed |> stretchCssValue'
+        static member UltraCondensed = UltraCondensed |> stretchCssValue'
+        static member SemiExpanded = SemiExpanded |> stretchCssValue'
+        static member Expanded = Expanded |> stretchCssValue'
+        static member ExtraExpanded = ExtraExpanded |> stretchCssValue'
+        static member UltraExpanded = UltraExpanded |> stretchCssValue'
+        static member Normal = Normal |> stretchCssValue'
+        static member Inherit = Inherit |> stretchCssValue'
+        static member Initial = Initial |> stretchCssValue'
+        static member Unset = Unset |> stretchCssValue'
+
+    let FontStretch' (stretch: IFontStretch) = FontStretch.Value(stretch)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+    let private weightCssValue value = PropertyValue.cssValue Property.FontWeight value
+    let private weightCssValue' value = value |> fontWeightToString |> weightCssValue
+    type FontWeight =
+        static member Value (fontWeight: IFontWeight) = fontWeight |> weightCssValue'
+        static member Bold = Bold |> weightCssValue'
+        static member Lighter = Lighter |> weightCssValue'
+        static member Bolder = Bolder |> weightCssValue'
+
+        static member Normal = Normal |> weightCssValue'
+        static member Inherit = Inherit |> weightCssValue'
+        static member Initial = Initial |> weightCssValue'
+        static member Unset = Unset |> weightCssValue'
+
+    let FontWeight' (weight: IFontWeight) = FontWeight.Value(weight)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+    let private lineHeightToString (lineHeight: ILineHeight) =
+        match lineHeight with
+        | :? CssFloat as f -> GlobalValue.float f
+        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Normal -> GlobalValue.normal
+        | _ -> "Unknown lineheight"
+
+    let private heightCssValue value = PropertyValue.cssValue Property.LineHeight value
+    let private heightCssValue' value =
+        value
+        |> lineHeightToString
+        |> heightCssValue
+    type LineHeight =
+        static member Value (height: ILineHeight) = height |> heightCssValue'
+
+        static member Normal = Normal |> heightCssValue'
+        static member Inherit = Inherit |> heightCssValue'
+        static member Initial = Initial |>  heightCssValue'
+        static member Unset = Unset |>  heightCssValue'
+
+    let LineHeight' (height: ILineHeight) = LineHeight.Value(height)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
+    let private displayCssValue value = PropertyValue.cssValue Property.FontDisplay value
+    let private displayCssValue' value =
+        value
+        |> fontDisplayToString
+        |> PropertyValue.cssValue Property.FontDisplay
+    type FontDisplay =
+        static member Value (fontDisplay: IFontDisplay) = fontDisplay |> displayCssValue'
+        static member Block = Block |> displayCssValue'
+        static member Swap = Swap |> displayCssValue'
+        static member Fallback = Fallback |> displayCssValue'
+        static member Optional = Optional |> displayCssValue'
+
+        static member Auto = Auto |> displayCssValue'
+
+    let FontDisplay (display: IFontDisplay) = FontDisplay.Value(display)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
+    let private familyCssValue value = PropertyValue.cssValue Property.FontFamily value
+    let private familyCssValue' value = value |> familyToString |> familyCssValue
+
+    type FontFamily =
+        static member Value (fontFamily: IFontFamily) = fontFamily |> familyCssValue'
+        static member Values (families: IFontFamily list) =
+            families
+            |> Utilities.Helpers.combineComma familyToString
+            |> familyCssValue
+        static member Font (font: FontName) = font |> FontName |> familyCssValue'
+        static member Custom (font: string) = familyCssValue font
+        static member Serif = Serif |> familyCssValue'
+        static member SansSerif = SansSerif |> familyCssValue'
+        static member Monospace = Monospace |> familyCssValue'
+        static member Cursive = Cursive |> familyCssValue'
+
+        static member Inherit = Inherit |> familyCssValue'
+        static member Initial = Initial |> familyCssValue'
+        static member Unset = Unset |> familyCssValue'
+
+    let FontFamily' (fontFamily: IFontFamily) = FontFamily.Value(fontFamily)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
+    let private featureSettingCssValue value = PropertyValue.cssValue Property.FontFeatureSettings value
+    let private featureSettingCssValue' value = value |> featureSettingToString |> featureSettingCssValue
+
+    type FontFeatureSetting =
+        static member Value (featureSetting: IFontFeatureSetting) = featureSetting |> featureSettingCssValue'
+        static member Liga (switch: SettingSwitch) = Liga switch |> featureSettingCssValue'
+        static member Dlig (switch: SettingSwitch) = Dlig switch |> featureSettingCssValue'
+        static member Onum (switch: SettingSwitch) = Onum switch |> featureSettingCssValue'
+        static member Lnum (switch: SettingSwitch) = Lnum switch |> featureSettingCssValue'
+        static member Tnum (switch: SettingSwitch) = Tnum switch |> featureSettingCssValue'
+        static member Zero (switch: SettingSwitch) = Zero switch |> featureSettingCssValue'
+        static member Frac (switch: SettingSwitch) = Frac switch |> featureSettingCssValue'
+        static member Sups (switch: SettingSwitch) = Sups switch |> featureSettingCssValue'
+        static member Subs (switch: SettingSwitch) = Subs switch |> featureSettingCssValue'
+        static member Smcp (switch: SettingSwitch) = Smcp switch |> featureSettingCssValue'
+        static member C2sc (switch: SettingSwitch) = C2sc switch |> featureSettingCssValue'
+        static member Case (switch: SettingSwitch) = Case switch |> featureSettingCssValue'
+        static member Hlig (switch: SettingSwitch) = Hlig switch |> featureSettingCssValue'
+        static member Calt (switch: SettingSwitch) = Calt switch |> featureSettingCssValue'
+        static member Swsh (switch: SettingSwitch) = Swsh switch |> featureSettingCssValue'
+        static member Hist (switch: SettingSwitch) = Hist switch |> featureSettingCssValue'
+        static member Ss  (n:int, switch: SettingSwitch) = Ss (n, switch) |> featureSettingCssValue'
+        static member Kern (switch: SettingSwitch) = Kern switch |> featureSettingCssValue'
+        static member Locl (switch: SettingSwitch) = Locl switch |> featureSettingCssValue'
+        static member Rlig (switch: SettingSwitch) = Rlig switch |> featureSettingCssValue'
+        static member Medi (switch: SettingSwitch) = Medi switch |> featureSettingCssValue'
+        static member Init (switch: SettingSwitch) = Init switch |> featureSettingCssValue'
+        static member Isol (switch: SettingSwitch) = Isol switch |> featureSettingCssValue'
+        static member Fina (switch: SettingSwitch) = Fina switch |> featureSettingCssValue'
+        static member Mark (switch: SettingSwitch) = Mark switch |> featureSettingCssValue'
+        static member Mkmk (switch: SettingSwitch) = Mkmk switch |> featureSettingCssValue'
+
+        static member Inherit = Inherit |> featureSettingCssValue'
+        static member Initial = Initial |> featureSettingCssValue'
+        static member Unset = Unset |> featureSettingCssValue'
+
+    let FontFeatureSetting' (featureSetting: IFontFeatureSetting) = FontFeatureSetting.Value(featureSetting)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
+    let private variantNumericCssValue value = PropertyValue.cssValue Property.FontVariantNumeric value
+    let private variantNumericCssValue' value = value |> variantNumericToString |> variantNumericCssValue
+
+    type FontVariantNumeric =
+        static member Value (variantNumeric: IFontVariantNumeric) = variantNumeric |>  variantNumericCssValue'
+        static member Ordinal = Ordinal |> variantNumericCssValue'
+        static member SlashedZero = SlashedZero |> variantNumericCssValue'
+        static member LiningNums = LiningNums |> variantNumericCssValue'
+        static member OldstyleNums = OldstyleNums |> variantNumericCssValue'
+        static member ProportionalNums = ProportionalNums |> variantNumericCssValue'
+        static member TabularNums = TabularNums |> variantNumericCssValue'
+        static member DiagonalFractions = DiagonalFractions |> variantNumericCssValue'
+        static member StackedFractions = StackedFractions |> variantNumericCssValue'
+
+        static member Normal = Normal |> variantNumericCssValue'
+        static member Inherit = Inherit |> variantNumericCssValue'
+        static member Initial = Initial |> variantNumericCssValue'
+        static member Unset = Unset |> variantNumericCssValue'
+
+    let FontVariantNumeric' (variant: IFontVariantNumeric) = FontVariantNumeric.Value(variant)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
+    let private variantCapsCssValue value = PropertyValue.cssValue Property.FontVariantCaps value
+    let private variantCapsCssValue' value = value |> fontVariantCapsToString |> variantCapsCssValue
+    type FontVariantCaps =
+        static member Value (variantCaps: IFontVariantCaps) = variantCaps |> variantCapsCssValue'
+        static member SmallCaps = SmallCaps |> variantCapsCssValue'
+        static member AllSmallCaps = AllSmallCaps |> variantCapsCssValue'
+        static member PetiteCaps = PetiteCaps |> variantCapsCssValue'
+        static member AllPetiteCaps = AllPetiteCaps |> variantCapsCssValue'
+        static member Unicase = Unicase |> variantCapsCssValue'
+        static member TitlingCaps = TitlingCaps |> variantCapsCssValue'
+
+        static member Normal = Normal |> variantCapsCssValue'
+        static member Inherit = Inherit |> variantCapsCssValue'
+        static member Initial = Initial |> variantCapsCssValue'
+        static member Unset = Unset |> variantCapsCssValue'
+
+    let FontVariantCaps' (variant: IFontVariantCaps) = FontVariantCaps.Value(variant)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
+    let private variantEastAsianCssValue value = PropertyValue.cssValue Property.FontVariantEastAsian value
+    let private variantEastAsianCssValue' value = value |> variantEastAsianToString |> variantEastAsianCssValue
+    type FontVariantEastAsian =
+        static member Value (variant: IFontVariantEastAsian) = variant |> variantEastAsianCssValue'
+        static member Ruby = Ruby |> variantEastAsianCssValue'
+        static member Jis78 = Jis78 |> variantEastAsianCssValue'
+        static member Jis83 = Jis83 |> variantEastAsianCssValue'
+        static member Jis90 = Jis90 |> variantEastAsianCssValue'
+        static member Jis04 = Jis04 |> variantEastAsianCssValue'
+        static member Simplified = Simplified |> variantEastAsianCssValue'
+        static member Traditional = Traditional |> variantEastAsianCssValue'
+        static member FullWidth = FullWidth |> variantEastAsianCssValue'
+        static member ProportionalWidth = ProportionalWidth |> variantEastAsianCssValue'
+
+        static member Normal = Normal |> variantEastAsianCssValue'
+        static member Inherit = Inherit |> variantEastAsianCssValue'
+        static member Initial = Initial |> variantEastAsianCssValue'
+        static member Unset = Unset |> variantEastAsianCssValue'
+
+    let FontVariantEastAsian' (variant: IFontVariantEastAsian) = FontVariantEastAsian.Value(variant)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
+    let private variantLigatureCssValue value = PropertyValue.cssValue Property.FontVariantLigatures value
+    let private variantLigatureCssValue' value = value |> variantLigatureToString |> variantLigatureCssValue
+    type FontVariantLigatures =
+        static member Value (variant: IFontVariantLigature) = variant |> variantLigatureCssValue'
+        static member CommonLigatures = CommonLigatures |> variantLigatureCssValue'
+        static member NoCommonLigatures = NoCommonLigatures |> variantLigatureCssValue'
+        static member DiscretionaryLigatures = DiscretionaryLigatures |> variantLigatureCssValue'
+        static member NoDiscretionaryLigatures = NoDiscretionaryLigatures |> variantLigatureCssValue'
+        static member HistoricalLigatures = HistoricalLigatures |> variantLigatureCssValue'
+        static member NoHistoricalLigatures = NoHistoricalLigatures |> variantLigatureCssValue'
+        static member Contextual = Contextual |> variantLigatureCssValue'
+        static member NoContextual = NoContextual |> variantLigatureCssValue'
+
+        static member Normal = Normal |> variantLigatureCssValue'
+        static member None = None |> variantLigatureCssValue'
+        static member Inherit = Inherit |> variantLigatureCssValue'
+        static member Initial = Initial |> variantLigatureCssValue'
+        static member Unset = Unset |> variantLigatureCssValue'
+
+    let FontVariantLigatures' (ligature: IFontVariantLigature) = FontVariantLigatures.Value(ligature)

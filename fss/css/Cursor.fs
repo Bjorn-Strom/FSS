@@ -1,9 +1,6 @@
 ﻿namespace Fss
 
-open Utilities.Helpers
-open Types
-
-module Cursor =
+module CursorTypes =
     type CursorType =
         | Default
         | ContextMenu
@@ -37,27 +34,97 @@ module Cursor =
         | NwseResize
         interface ICursor
 
-    type Cursor = 
-        | Cursor of CursorType
-        | CursorUrl of string * CursorType
-        | CursorUrlPosition of string * int * int * CursorType
-        interface ICursor
+[<AutoOpen>]
+module Cursor =
+    open CursorTypes
 
-module CursorValue =
-    open Cursor
-    open Global
-    
-    let cursor (v: ICursor): string =
-        let stringifyCursor (c: Cursor): string =
-            match c with
-                | Cursor cursor                         -> duToKebab cursor
-                | CursorUrl (url, cursor)               -> sprintf "url(%s) %s" url (duToKebab cursor)
-                | CursorUrlPosition (url, x, y, cursor) -> sprintf "url(%s) %d %d %s" url x y (duToKebab cursor)
-        
-        match v with
-            | :? Global     as g -> GlobalValue.globalValue g
-            | :? Auto       as a -> GlobalValue.auto a
-            | :? None       as n -> GlobalValue.none n
-            | :? Cursor     as c -> stringifyCursor c
-            | :? CursorType as c -> duToKebab c
-            | _ -> "Unknown cursor"
+    let private cursorToString (cursor: ICursor) =
+        let stringifyCursor =
+            function
+                | Default -> "default"
+                | ContextMenu -> "context-menu"
+                | Help -> "help"
+                | Pointer -> "pointer"
+                | Progress -> "progress"
+                | Wait -> "wait"
+                | Cell -> "cell"
+                | Crosshair -> "crosshair"
+                | Text -> "text"
+                | VerticalText -> "vertical-text"
+                | Alias -> "alias"
+                | Copy -> "copy"
+                | Move -> "move"
+                | NoDrop -> "no-drop"
+                | NotAllowed -> "not-allowed"
+                | AllScroll -> "all-scroll"
+                | ColResize -> "col-resize"
+                | RowResize -> "row-resize"
+                | NResize -> "n-resize"
+                | EResize -> "e-resize"
+                | SResize -> "s-resize"
+                | WResize -> "w-resize"
+                | NsResize -> "ns-resize"
+                | EwResize -> "ew-resize"
+                | NeResize -> "ne-resize"
+                | NwResize -> "nw-resize"
+                | SeResize -> "se-resize"
+                | SwResize -> "sw-resize"
+                | NeswResize -> "nesw-resize"
+                | NwseResize -> "nwse-resize"
+
+        match cursor with
+        | :? CursorType as c -> stringifyCursor c
+        | :? Auto -> GlobalValue.auto
+        | :? None -> GlobalValue.none
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown cursor"
+
+    let private cursorValue value = PropertyValue.cssValue Property.Cursor value
+    let private cursorValue' value =
+        value
+        |> cursorToString
+        |> cursorValue
+
+    type Cursor =
+        static member Value (url: string) = sprintf "url(%s)" url |> cursorValue
+        static member Value (url: string, x: int, y: int) = sprintf "url(%s) %d %d" url x y |> cursorValue
+        static member Value (cursor: ICursor) = cursor |> cursorValue'
+
+        static member Default = Default |> cursorValue'
+        static member ContextMenu = ContextMenu |> cursorValue'
+        static member Help = Help |> cursorValue'
+        static member Pointer = Pointer |> cursorValue'
+        static member Progress = Progress |> cursorValue'
+        static member Wait = Wait |> cursorValue'
+        static member Cell = Cell |> cursorValue'
+        static member Crosshair = Crosshair |> cursorValue'
+        static member Text = Text |> cursorValue'
+        static member VerticalText = VerticalText |> cursorValue'
+        static member Alias = Alias |> cursorValue'
+        static member Copy = Copy |> cursorValue'
+        static member Move = Move |> cursorValue'
+        static member NoDrop = NoDrop |> cursorValue'
+        static member NotAllowed = NotAllowed |> cursorValue'
+        static member AllScroll = AllScroll |> cursorValue'
+        static member ColResize = ColResize |> cursorValue'
+        static member RowResize = RowResize |> cursorValue'
+        static member NResize = NResize |> cursorValue'
+        static member EResize = EResize |> cursorValue'
+        static member SResize = SResize |> cursorValue'
+        static member WResize = WResize |> cursorValue'
+        static member NsResize = NsResize |> cursorValue'
+        static member EwResize = EwResize |> cursorValue'
+        static member NeResize = NeResize |> cursorValue'
+        static member NwResize = NwResize |> cursorValue'
+        static member SeResize = SeResize |> cursorValue'
+        static member SwResize = SwResize |> cursorValue'
+        static member NeswResize = NeswResize |> cursorValue'
+        static member NwseResize = NwseResize |> cursorValue'
+
+        static member Auto = Auto |> cursorValue'
+        static member Inherit = Inherit |> cursorValue'
+        static member Initial = Initial |> cursorValue'
+        static member Unset = Unset |> cursorValue'
+        static member None = None |> cursorValue'
+
+    let Cursor' (cursor: ICursor) = Cursor.Value(cursor)

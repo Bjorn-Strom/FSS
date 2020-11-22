@@ -12,7 +12,6 @@
     <Compile Include="Color.fs" />
     <Compile Include="ContentSize.fs" />
     <Compile Include="Cursor.fs" />
-    <Compile Include="Descendant.fs" />
     <Compile Include="Display.fs" />
     <Compile Include="Flex.fs" />
     <Compile Include="Font.fs" />
@@ -24,10 +23,8 @@
     <Compile Include="Transform.fs" />
     <Compile Include="Transition.fs" />
     <Compile Include="Visibility.fs" />
-    <Compile Include="PseudoClasses.fs" />
     <Compile Include="ListStyle.fs" />
     <Compile Include="Content.fs" />
-    <Compile Include="PseudoElements.fs" />
     <Compile Include="Grid.fs" />
     <Compile Include="Media.fs" />
     <Compile Include="KeyFrames.fs" />

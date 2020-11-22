@@ -1,48 +1,40 @@
 namespace Fss.Units
 
 open Fss
-open Types
 
 module Percent =
     type Percent =
         | Percent of string
+        interface ILengthPercentage
+        interface ITemplateType
+        interface IBackgroundSize
+        interface IBackgroundPosition
+        interface IFlexBasis
         interface IFontSize
         interface IFontStretch
-        interface IBorderWidth
+        interface ILineHeight
         interface IBorderRadius
+        interface IBorderSpacing
         interface IBorderImageWidth
         interface IBorderImageSlice
+        interface IBorderImageOutset
+        interface IGridGap
+        interface IGridRowGap
+        interface IGridColumnGap
+        interface IGridAutoRows
+        interface IGridAutoColumns
         interface IMargin
         interface IPadding
-        interface IFlexBasis
-        interface IVerticalAlign
-        interface ILinearGradient
-        interface IRadialGradient
-        interface IImagePosition
-        interface IBackgroundSize
-        interface IContentSize
-        interface ILineHeight
-        interface ITextDecorationThickness
-        interface ITextIndent
-        interface ISize
         interface ITransformOrigin
+        interface ITextIndent
+        interface ITextDecorationThickness
         interface ITextUnderlineOffset
-        interface IPlacement
-        interface IGridAutoColumns
-        interface IGridAutoRows
-        interface IGridTemplateColumns
-        interface IGridTemplateRows
-        interface IGridColumnGap
-        interface IGridRowGap
-        interface IGridGap
-        interface IMinMax
-        interface IRepeat
-
+        interface IPositioned
+        interface IVerticalAlign
     let value (Percent p): string = p
 
 // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
 module Size =
-    open Percent
     type Size =
         | Px of string
         | In of string
@@ -58,42 +50,39 @@ module Size =
         | Vh of string
         | VMax of string
         | VMin of string
-        interface ISize
-        interface IFontSize
+        interface ILengthPercentage
+        interface ITemplateType
         interface IBorderWidth
-        interface IBorderRadius
-        interface IBorderSpacing
-        interface IBorderImageWidth
         interface IBorderImageOutset
+        interface IBorderSpacing
+        interface IBorderRadius
+        interface IBorderImageWidth
+        interface IBorderImageSlice
+        interface IPerspective
+        interface IOutlineWidth
+        interface IBackgroundSize
+        interface IBackgroundPosition
+        interface IFlexBasis
+        interface IFontSize
+        interface ILineHeight
+        interface IGridGap
+        interface IGridRowGap
+        interface IGridColumnGap
+        interface IGridTemplateRows
+        interface IGridTemplateColumns
+        interface IGridAutoRows
+        interface IGridAutoColumns
         interface IMargin
         interface IPadding
-        interface IFlexBasis
-        interface IVerticalAlign
-        interface ILinearGradient
-        interface IRadialGradient
-        interface IImagePosition
-        interface IBackgroundSize
-        interface IContentSize
-        interface ILineHeight
-        interface ITextDecorationThickness
-        interface ITextIndent
         interface ITransformOrigin
-        interface IPerspective
+        interface ITextIndent
         interface ITextUnderlineOffset
-        interface IPlacement
-        interface IGridAutoColumns
-        interface IGridAutoRows
-        interface IGridTemplateColumns
-        interface IGridTemplateRows
-        interface IGridColumnGap
-        interface IGridRowGap
-        interface IGridGap
-        interface IMinMax
-        interface IRepeat
-        interface IOutlineWidth
+        interface ITextDecorationThickness
+        interface IPositioned
+        interface IVerticalAlign
 
-    let private sizeValue (u: Size) =
-        match u with
+    let value (v: Size): string =
+        match v with
             | Px p -> p
             | In i -> i
             | Cm c -> c
@@ -109,11 +98,15 @@ module Size =
             | VMax v -> v
             | VMin v -> v
 
-    let value (v: ISize): string =
+module LengthPercentage =
+    open Size
+    open Percent
+
+    let value (v: ILengthPercentage) =
         match v with
-            | :? Percent as p -> Percent.value p
-            | :? Size    as s -> sizeValue s
-            | _               -> "Unkown size"
+        | :? Size    as s -> Size.value s
+        | :? Percent as p -> Percent.value p
+        | _ -> "Unknown length/percentage"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
 module Angle =
@@ -122,10 +115,6 @@ module Angle =
         | Grad of string
         | Rad of string
         | Turn of string
-        interface ITransform
-        interface ILinearGradient
-        interface IRadialGradient
-        interface IFontStyle
 
     let value (u: Angle) =
         match u with
@@ -143,33 +132,24 @@ module Resolution =
             | Dpi d -> sprintf "%sdpi" d
 
 module Time =
-    open Global
-
     type Time =
         | Sec of string
         | Ms of string
-        interface ITime
+        interface ITransitionDelay
+        interface ITransitionDuration
 
-    let value (v: ITime): string =
-        let stringifyTime (t: Time) =
-            match t with
-            | Sec s -> s
-            | Ms ms -> ms
-
+    let value (v: Time): string =
         match v with
-            | :? Global as g -> GlobalValue.globalValue g
-            | :? Time   as t -> stringifyTime t
-            | _ -> "Unknown transition duration"
+        | Sec s -> s
+        | Ms ms -> ms
 
 module Fraction =
     type Fraction =
         | Fr of string
-        interface IFraction
-        interface IMinMax
-        interface IGridAutoColumns
         interface IGridTemplateRows
-        interface IGridAutoRows
         interface IGridTemplateColumns
-        interface IRepeat
+        interface IGridAutoRows
+        interface IGridAutoColumns
+        interface ITemplateType
 
     let value (Fr f) = f

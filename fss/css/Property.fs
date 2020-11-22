@@ -1,7 +1,8 @@
 namespace Fss
 
+open Fable.Core.JsInterop
+
 open Utilities.Helpers
-open Types
 
 module Property =
     type Property =
@@ -214,6 +215,7 @@ module Property =
         | SpeakHeader
         | SpeakNumeral
         | SpeakPunctuation
+        | Src
         | Speak
         | SpeechRate
         | Stress
@@ -303,8 +305,10 @@ module Property =
         | FirstLetter
         | FirstLine
         | Selection
+        interface ITransitionProperty
 
-        interface IProperty
+module PropertyValue =
+    open Property
 
     let value (v: Property): string = duToCamel v
 
@@ -312,3 +316,7 @@ module Property =
         property
         |> value
         |> pascalToKebabCase
+
+    let cssValue (property: Property) cssValue =
+        property |> value ==> cssValue |> CSSProperty
+
