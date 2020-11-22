@@ -546,4 +546,28 @@ module Text =
                     "Quotes unset"
                     [ Quotes.Unset ]
                     ["quotes" ==> "unset"]
+                test
+                    "Hyphens Manual"
+                    [ Hyphens.Manual ]
+                    ["hyphens" ==> "manual"]
+                test
+                    "Hyphens none"
+                    [ Hyphens.None ]
+                    ["hyphens" ==> "none"]
+                test
+                    "Hyphens Auto"
+                    [ Hyphens.Auto ]
+                    ["hyphens" ==> "auto"]
+                test
+                    "Hyphens inherit"
+                    [ Hyphens.Inherit ]
+                    ["hyphens" ==> "inherit"]
+                test
+                    "Hyphens Initial"
+                    [ Hyphens.Initial ]
+                    ["hyphens" ==> "initial"]
+                test
+                    "Hyphens unset"
+                    [ Hyphens.Unset ]
+                    ["hyphens" ==> "unset"]
             ]

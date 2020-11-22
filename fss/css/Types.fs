@@ -46,6 +46,7 @@ module Global =
     type ITextUnderlineOffset     = interface end
     type ITextOverflow            = interface end
     type IQuotes                  = interface end
+    type IHyphens                 = interface end
     type ITextDecorationColor     = interface end
     type ITextEmphasisColor       = interface end
 
@@ -165,6 +166,7 @@ module Global =
         interface ITextUnderlinePosition
         interface ITextUnderlineOffset
         interface IQuotes
+        interface IHyphens
         interface IBackgroundSize
         interface IBorderImageWidth
         interface IFlexBasis
@@ -191,6 +193,7 @@ module Global =
         interface ITextEmphasisStyle
         interface ITextTransform
         interface IQuotes
+        interface IHyphens
         interface IListStyleImage
         interface IBorderStyle
         interface IBorderImageSource
@@ -262,6 +265,7 @@ module Global =
         interface ITextUnderlinePosition
         interface ITextUnderlineOffset
         interface IQuotes
+        interface IHyphens
         interface ITextDecorationColor
         interface ITextEmphasisColor
         interface IListStyleImage

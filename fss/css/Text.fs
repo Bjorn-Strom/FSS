@@ -101,6 +101,10 @@ module TextTypes =
         | Color of CSSColor
         interface ITextEmphasisColor
 
+    type Hyphens =
+        | Manual
+        interface IHyphens
+
 [<AutoOpen>]
 module Text =
     open TextTypes
@@ -314,6 +318,14 @@ module Text =
         | :? Auto -> GlobalValue.auto
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "unknown quotes"
+
+    let private hyphensToString (hyphens: IHyphens) =
+        match hyphens with
+        | :? Hyphens -> "manual"
+        | :? None -> GlobalValue.none
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "unknown hyphens"
 
     let private textDecorationColorToString (color: ITextDecorationColor) =
         match color with
@@ -648,6 +660,23 @@ module Text =
         static member Unset = Unset |> quoteValue'
 
     let Quotes' (quotes: IQuotes) = Quotes.Value(quotes)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
+    let private hyphensValue value = PropertyValue.cssValue Property.Hyphens value
+    let private hyphensValue' value =
+        value
+        |> hyphensToString
+        |> hyphensValue
+    type Hyphens =
+        static member Value (hyphens: IHyphens) = hyphens |> hyphensValue'
+        static member Manual = Manual |> hyphensValue'
+        static member Auto = Auto |> hyphensValue'
+        static member None = None |> hyphensValue'
+        static member Inherit = Inherit |> hyphensValue'
+        static member Initial = Initial |> hyphensValue'
+        static member Unset = Unset |> hyphensValue'
+
+    let Hyphens' (hyphens: IHyphens) = Hyphens.Value(hyphens)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color
     let private textDecorationColorValue value = PropertyValue.cssValue Property.TextDecorationColor value
