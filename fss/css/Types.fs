@@ -131,6 +131,8 @@ module Global =
 
     type INthChild = interface end
 
+    type IResize = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -208,6 +210,7 @@ module Global =
         interface IGridTemplateArea
         interface IGridTemplateRows
         interface IGridTemplateColumns
+        interface IResize
 
     type Normal =
         | Normal
@@ -332,6 +335,7 @@ module Global =
         interface IGridAutoRows
         interface IGridAutoColumns
         interface IDirection
+        interface IResize
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

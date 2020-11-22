@@ -19,6 +19,7 @@ module PseudoClass =
         | :? NthChildType as n -> stringifyNthChild n
         | :? CssString as s -> GlobalValue.string s
         | :? CssInt as i -> GlobalValue.int i
+        | _ -> "Unknown nth child"
 
     let private pseudoValue value attributeList = value ==> (attributeList |> fss) |> CSSProperty
     let Active (attributeList: CSSProperty list) = pseudoValue ":active" attributeList

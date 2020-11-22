@@ -24,6 +24,7 @@
     <Compile Include="css\Display.fs" />
     <Compile Include="css\Margin.fs" />
     <Compile Include="css\Padding.fs" />
+    <Compile Include="css\Resize.fs" />
     <Compile Include="css\ContentSize.fs" />
     <Compile Include="css\Visibility.fs" />
     <Compile Include="css\Position.fs" />

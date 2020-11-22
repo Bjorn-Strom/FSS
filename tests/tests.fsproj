@@ -21,6 +21,7 @@
     <Compile Include="Position.fs" />
     <Compile Include="Text.fs" />
     <Compile Include="Transform.fs" />
+    <Compile Include="Resize.fs" />
     <Compile Include="Transition.fs" />
     <Compile Include="Visibility.fs" />
     <Compile Include="ListStyle.fs" />

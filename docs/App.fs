@@ -2886,29 +2886,42 @@ let GridExamples () =
                     [str "Footer"]
             ]
         ]
+
+let ResizeExample () =
+    fragment []
+        [
+            let style = fss [ Resize.Both; BackgroundColor.red; Overflow.Auto ]
+            div [ClassName style]
+                [
+                    str "Hello there!"
+                ]
+        ]
+
+
 let render (model: Model) (dispatch: Msg -> unit) =
     div []
         [
             //BackgroundExamples model dispatch
-            ColorExamples ()
-            FontExamples ()
-            FontFaceExamples ()
-            BorderExamples model dispatch
-            MarginExamples ()
-            PaddingExamples ()
-            TransformExamples ()
-            TransitionExamples ()
-            TextExamples ()
-            AnimationExamples ()
-            FlexBoxExamples model dispatch
-            MediaQueryExamples ()
-            SelectorExamples ()
-            CursorExamples ()
-            ListStyleExamples ()
-            GridExamples ()
-            CounterStyleExamples ()
-            PseudoElementExamples ()
-            PsuedoClassExamples ()
+            //ColorExamples ()
+            //FontExamples ()
+            //FontFaceExamples ()
+            //BorderExamples model dispatch
+            //MarginExamples ()
+            //PaddingExamples ()
+            //TransformExamples ()
+            //TransitionExamples ()
+            //TextExamples ()
+            //AnimationExamples ()
+            //FlexBoxExamples model dispatch
+            //MediaQueryExamples ()
+            //SelectorExamples ()
+            //CursorExamples ()
+            //ListStyleExamples ()
+            //GridExamples ()
+            //CounterStyleExamples ()
+            //PseudoElementExamples ()
+            //PsuedoClassExamples ()
+            ResizeExample()
         ]
 
 Program.mkSimple init update render
