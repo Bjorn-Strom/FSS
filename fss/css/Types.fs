@@ -105,6 +105,7 @@ module Global =
     type IPositioned    = interface end
     type IVerticalAlign = interface end
     type IFloat         = interface end
+    type IDirection     = interface end
 
     type IPerspective = interface end
 
@@ -326,6 +327,7 @@ module Global =
         interface IGridTemplateColumns
         interface IGridAutoRows
         interface IGridAutoColumns
+        interface IDirection
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

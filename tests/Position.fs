@@ -10,6 +10,26 @@ module Position =
         testList "Position"
             [
                 test
+                    "Direction rtl"
+                    [ Direction.Ltr ]
+                    ["direction" ==> "ltr"]
+                test
+                    "Direction ltr"
+                    [ Direction.Rtl ]
+                    ["direction" ==> "rtl"]
+                test
+                    "Direction Inherit"
+                    [ Direction.Inherit]
+                    [ "direction" ==> "inherit" ]
+                test
+                    "Direction Initial"
+                    [ Direction.Initial]
+                    [ "direction" ==> "initial" ]
+                test
+                    "Direction Unset"
+                    [ Direction.Unset]
+                    [ "direction" ==> "unset" ]
+                test
                     "Box sizing border box "
                     [BoxSizing.BorderBox]
                     ["boxSizing" ==> "border-box"]

@@ -30,6 +30,11 @@ module PositionType =
         | ContentBox
         | BorderBox
 
+    type Direction =
+        | Rtl
+        | Ltr
+        interface IDirection
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/position
 [<AutoOpen>]
 module Position =
@@ -87,6 +92,17 @@ module Position =
         function
             | ContentBox -> "content-box"
             | BorderBox -> "border-box"
+
+    let private directionToString (direction: IDirection) =
+        let stringifyDirection =
+            function
+                | Rtl -> "rtl"
+                | Ltr -> "ltr"
+
+        match direction with
+        | :? Direction as d -> stringifyDirection d
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown direction"
 
     let private positionValue value = PropertyValue.cssValue Property.Position value
     let private positionValue' value =
@@ -217,7 +233,7 @@ module Position =
     let Float' (float: IFloat) = Float.Value(float)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
-    let private boxSizingValue value =  PropertyValue.cssValue Property.BoxSizing value
+    let private boxSizingValue value = PropertyValue.cssValue Property.BoxSizing value
     let private boxSizingValue' value =
         value
         |> boxSizingToString
@@ -228,3 +244,20 @@ module Position =
         static member BorderBox = BorderBox |> boxSizingValue'
 
     let BoxSizing' (sizing: BoxSizingType) = BoxSizing.Value(sizing)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
+    let private directionValue value = PropertyValue.cssValue Property.Direction value
+    let private directionValue' value =
+        value
+        |> directionToString
+        |> directionValue
+
+    type Direction =
+        static member Value (direction: IDirection) = direction |> directionValue'
+        static member Rtl = Rtl |> directionValue'
+        static member Ltr = Ltr |> directionValue'
+        static member Inherit = Inherit |> directionValue'
+        static member Initial = Initial |> directionValue'
+        static member Unset = Unset |> directionValue'
+
+    let Direction' (direction: IDirection) = Direction.Value(direction)
