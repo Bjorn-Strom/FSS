@@ -65,6 +65,7 @@ module Size =
         interface IFlexBasis
         interface IFontSize
         interface ILineHeight
+        interface ILetterSpacing
         interface IGridGap
         interface IGridRowGap
         interface IGridColumnGap

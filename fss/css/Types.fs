@@ -29,6 +29,7 @@ module Global =
     type IFontVariantEastAsian = interface end
     type IFontVariantLigature  = interface end
     type ILineHeight           = interface end
+    type ILetterSpacing        = interface end
 
     type ITextAlign               = interface end
     type ITextDecorationLine      = interface end
@@ -215,6 +216,7 @@ module Global =
         interface IFontVariantEastAsian
         interface IFontVariantLigature
         interface ILineHeight
+        interface ILetterSpacing
         interface IAlignContent
         interface IAlignItems
         interface IAlignSelf
@@ -244,6 +246,7 @@ module Global =
         interface IFontVariantEastAsian
         interface IFontVariantLigature
         interface ILineHeight
+        interface ILetterSpacing
         interface ITextAlign
         interface ITextDecorationLine
         interface ITextDecorationThickness

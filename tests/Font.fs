@@ -208,6 +208,26 @@ module Font =
                     [ LineHeight.Unset ]
                     [ "lineHeight" ==> "unset" ]
                 test
+                    "Letter spacing px"
+                    [ LetterSpacing' (px 10) ]
+                    [ "letterSpacing" ==> "10px" ]
+                test
+                    "Letter spacing initial"
+                    [ LetterSpacing.Initial ]
+                    [ "letterSpacing" ==> "initial" ]
+                test
+                    "Letter spacing inherit"
+                    [ LetterSpacing.Inherit ]
+                    [ "letterSpacing" ==> "inherit" ]
+                test
+                    "Letter spacing unset"
+                    [ LetterSpacing.Unset ]
+                    [ "letterSpacing" ==> "unset" ]
+                test
+                    "Letter spacing normal"
+                    [ LetterSpacing.Normal ]
+                    [ "letterSpacing" ==> "normal" ]
+                test
                      "Font family serif"
                      [ FontFamily.Serif ]
                      [ "fontFamily" ==> "serif" ]

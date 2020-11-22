@@ -336,6 +336,22 @@ module Font =
         | :? None -> GlobalValue.none
         | _ -> "Unknown font variant numeric"
 
+    let private lineHeightToString (lineHeight: ILineHeight) =
+        match lineHeight with
+        | :? CssFloat as f -> GlobalValue.float f
+        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Normal -> GlobalValue.normal
+        | _ -> "Unknown lineheight"
+
+    let private letterSpacingToString (letterSpacing: ILetterSpacing) =
+        match letterSpacing with
+        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Normal -> GlobalValue.normal
+        | _ -> "Unknown lineheight"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     let private sizeCssValue value = PropertyValue.cssValue Property.FontSize value
     let private sizeCssValue' value = value |> fontSizeToString |> sizeCssValue
@@ -413,15 +429,6 @@ module Font =
     let FontWeight' (weight: IFontWeight) = FontWeight.Value(weight)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
-    let private lineHeightToString (lineHeight: ILineHeight) =
-        match lineHeight with
-        | :? CssFloat as f -> GlobalValue.float f
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Keywords as k -> GlobalValue.keywords k
-        | :? Normal -> GlobalValue.normal
-        | _ -> "Unknown lineheight"
-
     let private heightCssValue value = PropertyValue.cssValue Property.LineHeight value
     let private heightCssValue' value =
         value
@@ -436,6 +443,22 @@ module Font =
         static member Unset = Unset |>  heightCssValue'
 
     let LineHeight' (height: ILineHeight) = LineHeight.Value(height)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
+    let private spacingCssValue value = PropertyValue.cssValue Property.LetterSpacing value
+    let private spacingCssValue' value =
+        value
+        |> letterSpacingToString
+        |> spacingCssValue
+    type LetterSpacing =
+        static member Value (spacing: ILetterSpacing) = spacing |> spacingCssValue'
+
+        static member Normal = Normal |> spacingCssValue'
+        static member Inherit = Inherit |> spacingCssValue'
+        static member Initial = Initial |>  spacingCssValue'
+        static member Unset = Unset |>  spacingCssValue'
+
+    let LetterSpacing' (height: ILetterSpacing) = LetterSpacing.Value(height)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
     let private displayCssValue value = PropertyValue.cssValue Property.FontDisplay value
