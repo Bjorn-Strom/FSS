@@ -29,6 +29,7 @@ module Global =
     type IFontVariantEastAsian = interface end
     type IFontVariantLigature  = interface end
     type ILineHeight           = interface end
+    type ILineBreak            = interface end
     type ILetterSpacing        = interface end
 
     type ITextAlign               = interface end
@@ -103,6 +104,7 @@ module Global =
     type IVisibility = interface end
 
     type IOverflow      = interface end
+    type IOverflowWrap  = interface end
     type IPositioned    = interface end
     type IVerticalAlign = interface end
     type IFloat         = interface end
@@ -186,6 +188,7 @@ module Global =
         interface IGridTemplateColumns
         interface IGridAutoRows
         interface IGridAutoColumns
+        interface ILineBreak
 
     type None =
         | None
@@ -226,6 +229,7 @@ module Global =
         interface IFontVariantEastAsian
         interface IFontVariantLigature
         interface ILineHeight
+        interface ILineBreak
         interface ILetterSpacing
         interface IAlignContent
         interface IAlignItems
@@ -238,6 +242,7 @@ module Global =
         interface IGridColumnGap
         interface IWordSpacing
         interface IWordBreak
+        interface IOverflowWrap
 
     type Keywords =
         | Inherit
@@ -258,6 +263,7 @@ module Global =
         interface IFontVariantEastAsian
         interface IFontVariantLigature
         interface ILineHeight
+        interface ILineBreak
         interface ILetterSpacing
         interface ITextAlign
         interface ITextDecorationLine
@@ -320,6 +326,7 @@ module Global =
         interface IContentSize
         interface IVisibility
         interface IOverflow
+        interface IOverflowWrap
         interface IPositioned
         interface IVerticalAlign
         interface IFloat

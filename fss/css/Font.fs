@@ -130,6 +130,12 @@ module FontTypes =
         | FontName of FontName
         interface IFontFamily
 
+    type LineBreak =
+        | Loose
+        | Strict
+        | Anywhere
+        interface ILineBreak
+
     let fontStyleToString (style: IFontStyle) =
         let stringifyFontStyle =
             function
@@ -345,12 +351,28 @@ module Font =
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown lineheight"
 
+    let private lineBreakToString (linebreak: ILineBreak) =
+        let stringifylineBreak =
+            function
+                | Loose -> "loose"
+                | Strict -> "strict"
+                | Anywhere -> "anywhere"
+
+        match linebreak with
+        | :? LineBreak as l -> stringifylineBreak l
+        | :? Auto -> GlobalValue.auto
+        | :? Normal -> GlobalValue.normal
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown line break"
+
+
     let private letterSpacingToString (letterSpacing: ILetterSpacing) =
         match letterSpacing with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown lineheight"
+
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     let private sizeCssValue value = PropertyValue.cssValue Property.FontSize value
@@ -443,6 +465,26 @@ module Font =
         static member Unset = Unset |>  heightCssValue'
 
     let LineHeight' (height: ILineHeight) = LineHeight.Value(height)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/line-break
+    let private breakCssValue value = PropertyValue.cssValue Property.LineBreak value
+    let private breakCssValue' value =
+        value
+        |> lineBreakToString
+        |> breakCssValue
+    type LineBreak =
+        static member Value (break': ILineBreak) = break' |> breakCssValue'
+        static member Loose = Loose |> breakCssValue'
+        static member Strict = Strict |> breakCssValue'
+        static member Anywhere = Anywhere |> breakCssValue'
+
+        static member Normal = Normal |> breakCssValue'
+        static member Auto = Auto |> breakCssValue'
+        static member Inherit = Inherit |> breakCssValue'
+        static member Initial = Initial |>  breakCssValue'
+        static member Unset = Unset |>  breakCssValue'
+
+    let LineBreak' (break': ILineBreak) = LineBreak.Value(break')
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
     let private spacingCssValue value = PropertyValue.cssValue Property.LetterSpacing value

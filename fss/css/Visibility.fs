@@ -53,12 +53,17 @@ module Opacity =
     let Opacity' (opacity: float) = Opacity.Value(opacity)
 
 module OverflowType =
-    type OverflowType =
+    type Overflow =
         | Visible
         | Hidden
         | Clip
         | Scroll
         interface IOverflow
+
+    type OverflowWrap =
+        | BreakWord
+        | Anywhere
+        interface IOverflowWrap
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
 [<AutoOpen>]
@@ -74,11 +79,24 @@ module Overflow =
                 | Scroll -> "scroll"
 
         match overflow with
-        | :? OverflowType as o -> stringifyOverflow o
+        | :? Overflow as o -> stringifyOverflow o
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown overflow"
 
+    let private wrapToString (wrap: IOverflowWrap) =
+        let stringifyWrap =
+            function
+                | BreakWord -> "break-word"
+                | Anywhere -> "anywhere"
+
+        match wrap with
+        | :? OverflowWrap as o -> stringifyWrap o
+        | :? Normal -> GlobalValue.normal
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown overflow wrap"
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
     let private overflowValue value = PropertyValue.cssValue Property.Overflow value
     let private overflowValue' value =
         value
@@ -143,3 +161,22 @@ module Overflow =
         static member Unset = Unset |> overflowYValue'
 
     let OverflowY' (overflow: IOverflow) = OverflowY.Value(overflow)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
+    let private overflowWrapValue value = PropertyValue.cssValue Property.OverflowWrap value
+    let private overflowWrapValue' value =
+        value
+        |> wrapToString
+        |> overflowWrapValue
+
+    type OverflowWrap =
+        static member Value (overflowWrap: IOverflowWrap) = overflowWrap |> overflowWrapValue'
+        static member BreakWord = BreakWord |> overflowWrapValue'
+        static member Anywhere = Anywhere |> overflowWrapValue'
+
+        static member Normal = Normal |> overflowWrapValue'
+        static member Inherit = Inherit |> overflowWrapValue'
+        static member Initial = Initial |> overflowWrapValue'
+        static member Unset = Unset |> overflowWrapValue'
+
+    let OverflowWrap' (overflowWrap: IOverflowWrap) = OverflowWrap.Value(overflowWrap)

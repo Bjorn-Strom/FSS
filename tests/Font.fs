@@ -207,6 +207,43 @@ module Font =
                     "Line height unset"
                     [ LineHeight.Unset ]
                     [ "lineHeight" ==> "unset" ]
+
+
+                test
+                    "Line break loose"
+                    [ LineBreak.Loose ]
+                    [ "lineBreak" ==> "loose" ]
+                test
+                    "Line break strict"
+                    [ LineBreak.Strict ]
+                    [ "lineBreak" ==> "strict" ]
+                test
+                    "Line break anywhere"
+                    [ LineBreak.Anywhere ]
+                    [ "lineBreak" ==> "anywhere" ]
+                test
+                    "Line break normal"
+                    [ LineBreak.Normal ]
+                    [ "lineBreak" ==> "normal" ]
+                test
+                    "Line break auto"
+                    [ LineBreak.Auto ]
+                    [ "lineBreak" ==> "auto" ]
+                test
+                    "Line break initial"
+                    [ LineBreak.Initial ]
+                    [ "lineBreak" ==> "initial" ]
+                test
+                    "Line break inherit"
+                    [ LineBreak.Inherit ]
+                    [ "lineBreak" ==> "inherit" ]
+                test
+                    "Line break unset"
+                    [ LineBreak.Unset ]
+                    [ "lineBreak" ==> "unset" ]
+
+
+
                 test
                     "Letter spacing px"
                     [ LetterSpacing' (px 10) ]

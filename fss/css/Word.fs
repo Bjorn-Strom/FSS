@@ -64,3 +64,4 @@ module Word =
         static member Unset = Unset |> breakCssValue'
 
     let WordBreak' (break': IWordBreak) = WordBreak.Value(break')
+

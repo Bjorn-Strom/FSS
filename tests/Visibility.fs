@@ -126,4 +126,29 @@ module Visibility =
                     "Overflow scroll Scroll"
                     [Overflow.Value (OverflowType.Scroll, OverflowType.Scroll)]
                     ["overflow" ==> "scroll scroll"]
+                test
+                    "OverflowWrap break-word"
+                    [OverflowWrap.BreakWord]
+                    ["overflowWrap" ==> "break-word"]
+                test
+                    "OverflowWrap anywhere"
+                    [OverflowWrap.Anywhere]
+                    ["overflowWrap" ==> "anywhere"]
+                test
+                    "OverflowWrap normal"
+                    [OverflowWrap.Normal]
+                    ["overflowWrap" ==> "normal"]
+                test
+                    "OverflowWrap inherit"
+                    [OverflowWrap.Inherit]
+                    ["overflowWrap" ==> "inherit"]
+                test
+                    "OverflowWrap initial"
+                    [OverflowWrap.Initial]
+                    ["overflowWrap" ==> "initial"]
+                test
+                    "OverflowWrap unset"
+                    [OverflowWrap.Unset]
+                    ["overflowWrap" ==> "unset"]
+
         ]
