@@ -30,6 +30,7 @@
     <Compile Include="Media.fs" />
     <Compile Include="KeyFrames.fs" />
     <Compile Include="Outline.fs" />
+    <Compile Include="Word.fs" />
     <Compile Include="Tests.fs" />
   </ItemGroup>
 

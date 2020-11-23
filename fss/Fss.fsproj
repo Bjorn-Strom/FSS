@@ -13,6 +13,7 @@
     <Compile Include="css\CSSColor.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Font.fs" />
+    <Compile Include="css\Word.fs" />
     <Compile Include="css\Text.fs" />
     <Compile Include="css\CounterStyle.fs" />
     <Compile Include="css\ListStyle.fs" />

@@ -31,6 +31,7 @@ module Percent =
         interface ITextUnderlineOffset
         interface IPositioned
         interface IVerticalAlign
+        interface IWordSpacing
     let value (Percent p): string = p
 
 // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
@@ -81,6 +82,7 @@ module Size =
         interface ITextDecorationThickness
         interface IPositioned
         interface IVerticalAlign
+        interface IWordSpacing
 
     let value (v: Size): string =
         match v with

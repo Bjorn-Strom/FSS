@@ -133,6 +133,8 @@ module Global =
 
     type IResize = interface end
 
+    type IWordSpacing = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -233,6 +235,7 @@ module Global =
         interface IContent
         interface IGridRowGap
         interface IGridColumnGap
+        interface IWordSpacing
 
     type Keywords =
         | Inherit
@@ -336,6 +339,7 @@ module Global =
         interface IGridAutoColumns
         interface IDirection
         interface IResize
+        interface IWordSpacing
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
