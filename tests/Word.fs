@@ -34,15 +34,40 @@ module Word =
                     "Word spacing inherit"
                     [WordSpacing.Inherit]
                     ["wordSpacing" ==> "inherit"]
-                    // inherit;
                 test
                     "Word spacing initial"
                     [WordSpacing.Initial]
                     ["wordSpacing" ==> "initial"]
-                    // initial;
                 test
                     "Word spacing unset"
                     [WordSpacing.Unset]
                     ["wordSpacing" ==> "unset"]
-                    // unset;
+                test
+                    "Word break word break"
+                    [WordBreak.WordBreak]
+                    ["wordBreak" ==> "word-break"]
+                test
+                    "Word Spacing break all"
+                    [WordBreak.BreakAll]
+                    ["wordBreak" ==> "break-all"]
+                test
+                    "Word break normal"
+                    [WordBreak.Normal]
+                    ["wordBreak" ==> "normal"]
+                test
+                    "Word Spacing inherit value"
+                    [WordBreak' Inherit]
+                    ["wordBreak" ==> "inherit"]
+                test
+                    "Word break inherit"
+                    [WordBreak.Inherit]
+                    ["wordBreak" ==> "inherit"]
+                test
+                    "Word break initial"
+                    [WordBreak.Initial]
+                    ["wordBreak" ==> "initial"]
+                test
+                    "Word break unset"
+                    [WordBreak.Unset]
+                    ["wordBreak" ==> "unset"]
             ]
