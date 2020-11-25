@@ -1,7 +1,32 @@
 namespace Fss
 
+module ColorTypes =
+    type ColorAdjust =
+        | Economy
+        | Exact
+
 [<AutoOpen>]
 module Color =
+    open ColorTypes
+    let private colorAdjustToString =
+        function
+           | Economy -> "economy"
+           | Exact -> "exact"
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/color-adjust
+    let private colorAdjustCssValue value = PropertyValue.cssValue Property.ColorAdjust value
+    let private colorAdjustCssValue' value =
+        value
+        |> colorAdjustToString
+        |> colorAdjustCssValue
+
+    type ColorAdjust =
+        static member Value (adjust: ColorTypes.ColorAdjust) = adjust |> colorAdjustCssValue'
+        static member Economy = Economy |> colorAdjustCssValue'
+        static member Exact = Exact |> colorAdjustCssValue'
+
+    let ColorAdjust' (adjust: ColorTypes.ColorAdjust) = adjust |> ColorAdjust.Value
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color
     let private colorCssValue value = PropertyValue.cssValue Property.Color value
     type Color =

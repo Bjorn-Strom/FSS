@@ -1,7 +1,6 @@
 namespace Fss
 
 open Fable.Core.JsInterop
-
 open Utilities.Helpers
 
 module Property =
@@ -73,6 +72,7 @@ module Property =
         | Clear
         | Clip
         | Color
+        | ColorAdjust
         | Columns
         | ColumnCount
         | ColumnFill
@@ -195,6 +195,7 @@ module Property =
         | PauseAfter
         | PauseBefore
         | Pause
+        | PaintOrder
         | Perspective
         | PerspectiveOrigin
         | PitchRange

@@ -11,6 +11,31 @@ module Visibility =
      let tests =
         testList "Visibility" [
                 test
+                    "Paint order normal"
+                    [PaintOrder.Normal]
+                    ["paintOrder" ==> "normal"]
+                test
+                    "Paint order stroke"
+                    [PaintOrder.Stroke]
+                    ["paintOrder" ==> "stroke"]
+                test
+                    "Paint order markers"
+                    [PaintOrder.Markers]
+                    ["paintOrder" ==> "markers"]
+                test
+                    "Paint order stroke fill"
+                    [PaintOrder.Value(PaintOrderTypes.Stroke, PaintOrderTypes.Fill)]
+                    ["paintOrder" ==> "stroke fill"]
+                test
+                    "Paint order markers stroke fill"
+                    [PaintOrder.Value(PaintOrderTypes.Markers, PaintOrderTypes.Stroke, PaintOrderTypes.Fill)]
+                    ["paintOrder" ==> "markers stroke fill"]
+                test
+                    "Paint order normal"
+                    [PaintOrder.Normal]
+                    ["paintOrder" ==> "normal"]
+
+                test
                     "Visibility hidden"
                     [ Visibility.Hidden]
                     ["visibility" ==> "hidden"]

@@ -10,6 +10,14 @@ module Color =
         testList "Colors"
             [
                 test
+                    "Color adjust exact"
+                    [ColorAdjust.Exact]
+                    ["colorAdjust" ==> "exact"]
+                test
+                    "Color adjust economy"
+                    [ColorAdjust.Economy]
+                    ["colorAdjust" ==> "economy"]
+                test
                     "Color named color"
                     [ Color.aliceBlue ]
                     [ "color" ==> "#f0f8ff"]

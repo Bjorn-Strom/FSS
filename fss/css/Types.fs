@@ -138,6 +138,8 @@ module Global =
     type IWordSpacing = interface end
     type IWordBreak   = interface end
 
+    type IPaintOrder = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -243,6 +245,7 @@ module Global =
         interface IWordSpacing
         interface IWordBreak
         interface IOverflowWrap
+        interface IPaintOrder
 
     type Keywords =
         | Inherit

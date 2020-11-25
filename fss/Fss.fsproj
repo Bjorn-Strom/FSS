@@ -28,6 +28,7 @@
     <Compile Include="css\Resize.fs" />
     <Compile Include="css\ContentSize.fs" />
     <Compile Include="css\Visibility.fs" />
+    <Compile Include="css\Overflow.fs" />
     <Compile Include="css\Position.fs" />
     <Compile Include="css\Perspective.fs" />
     <Compile Include="css\Cursor.fs" />
