@@ -11,6 +11,12 @@
 
 out/
 
+# Fable compilation
+public/*.js
+public/fss
+public-tests/*.js
+public-tests/fss
+
 # User-specific files
 *.rsuser
 *.suo

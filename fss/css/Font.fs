@@ -517,7 +517,7 @@ module Font =
 
         static member Auto = Auto |> displayCssValue'
 
-    let FontDisplay (display: IFontDisplay) = FontDisplay.Value(display)
+    let FontDisplay' (display: IFontDisplay) = FontDisplay.Value(display)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
     let private familyCssValue value = PropertyValue.cssValue Property.FontFamily value

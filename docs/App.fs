@@ -2911,7 +2911,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //TransformExamples ()
             //TransitionExamples ()
             //TextExamples ()
-            //AnimationExamples ()
+            AnimationExamples ()
             //FlexBoxExamples model dispatch
             //MediaQueryExamples ()
             //SelectorExamples ()
