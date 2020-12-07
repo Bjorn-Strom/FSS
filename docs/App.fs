@@ -1011,7 +1011,7 @@ let TransitionExamples () =
                             ]
                     ] |> fss
 
-            let box = box |> fss
+            // let box = box |> fss
 
             div [ ClassName shadow ]
                 [
@@ -1417,11 +1417,11 @@ let AnimationExamples () =
         ]
 let FlexBoxExamples model dispatch =
     // Set display to None
-    let foo =
-        fss
-            [
-                Display.None
-            ]
+    //let foo =
+    //    fss
+    //        [
+    //            Display.None
+    //        ]
 
     // Test alignment
     let parent =
@@ -2739,11 +2739,11 @@ let GridExamples () =
 
             let item1 =
                 (simpleItemTemplate @
-                [
-                    BackgroundColor.orangeRed
-                    GridRow.Value(GridPosition.Value 2, GridPosition.Value 2)
-                    GridColumn.Value(GridPosition.Value 2, GridPosition.Value 3)
-                ]) |> fss
+                    [
+                        BackgroundColor.orangeRed
+                        GridRow.Value(GridPosition.Value 2, GridPosition.Value 2)
+                        GridColumn.Value(GridPosition.Value 2, GridPosition.Value 3)
+                    ]) |> fss
 
             let item2 =
                 simpleItemTemplate @

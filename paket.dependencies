@@ -1,5 +1,20 @@
-source https://www.nuget.org/api/v2
-nuget FSharp.Core
-nuget Fable.Core
-nuget Fable.Elmish.React
-nuget Fable.React
+group Docs
+    source https://www.nuget.org/api/v2
+    nuget FSharp.Core
+    nuget Fable.Core
+    nuget Fable.Elmish.React
+    nuget Fable.React
+
+group Fss
+    source https://www.nuget.org/api/v2
+    nuget FSharp.Core
+    nuget Fable.Core
+    nuget Fable.Elmish.React
+    nuget Fable.React
+
+group Tests
+    source https://www.nuget.org/api/v2
+    nuget FSharp.Core
+    nuget Fable.Elmish.React
+    nuget Fable.React
+    nuget Fable.Mocha

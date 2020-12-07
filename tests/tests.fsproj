@@ -1,9 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Utils.fs" />
     <Compile Include="Animation.fs" />
@@ -32,18 +31,17 @@
     <Compile Include="Outline.fs" />
     <Compile Include="Word.fs" />
     <Compile Include="Tests.fs" />
+    <Content Include="paket.references" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Fable.Mocha" Version="2.9.1" />
     <PackageReference Include="Fable.ReactTestingLibrary" Version="0.24.0" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="4.7.2" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\fss\Fss.fsproj" />
   </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

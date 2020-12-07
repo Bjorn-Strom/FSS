@@ -1,5 +1,6 @@
-group Docs
+group Tests
     FSharp.Core
     Fable.Core
     Fable.Elmish.React
     Fable.React
+    Fable.Mocha
