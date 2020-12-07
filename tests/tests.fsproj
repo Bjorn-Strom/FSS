@@ -34,13 +34,6 @@
     <Content Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Fable.Mocha" Version="2.9.1" />
-    <PackageReference Include="Fable.ReactTestingLibrary" Version="0.24.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="4.7.2" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\fss\Fss.fsproj" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
