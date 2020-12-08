@@ -147,8 +147,20 @@ module Column =
                     "Column rule style unset"
                     [ ColumnRuleStyle.Unset ]
                     [ "columnRuleStyle" ==> "unset" ]
-
-
-
-
+                test
+                    "Column rule color red"
+                    [ ColumnRuleColor.red ]
+                    [ "columnRuleColor" ==> "#ff0000" ]
+                test
+                    "Column rule color initial"
+                    [ ColumnRuleColor.Initial ]
+                    [ "columnRuleColor" ==> "initial" ]
+                test
+                    "Column rule color inherit"
+                    [ ColumnRuleColor.Inherit ]
+                    [ "columnRuleColor" ==> "inherit" ]
+                test
+                    "Column rule color unset"
+                    [ ColumnRuleColor.Unset ]
+                    [ "columnRuleColor" ==> "unset" ]
             ]

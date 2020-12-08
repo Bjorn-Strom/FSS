@@ -134,6 +134,7 @@ module Global =
     type IColumnSpan          = interface end
     type IColumnRuleWidth     = interface end
     type IColumnRuleStyle     = interface end
+    type IColumnRuleColor     = interface end
 
     type INthChild = interface end
 
@@ -362,6 +363,7 @@ module Global =
         interface IColumnSpan
         interface IColumnRuleWidth
         interface IColumnRuleStyle
+        interface IColumnRuleColor
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
