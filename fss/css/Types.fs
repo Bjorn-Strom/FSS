@@ -135,6 +135,7 @@ module Global =
     type IColumnRuleWidth     = interface end
     type IColumnRuleStyle     = interface end
     type IColumnRuleColor     = interface end
+    type IColumnCount         = interface end
 
     type INthChild = interface end
 
@@ -154,6 +155,7 @@ module Global =
         interface IOrder
         interface IFontWeight
         interface INthChild
+        interface IColumnCount
 
     type CssFloat =
         | CssFloat of float
@@ -196,6 +198,7 @@ module Global =
         interface IGridAutoRows
         interface IGridAutoColumns
         interface ILineBreak
+        interface IColumnCount
 
     type None =
         | None
@@ -364,6 +367,7 @@ module Global =
         interface IColumnRuleWidth
         interface IColumnRuleStyle
         interface IColumnRuleColor
+        interface IColumnCount
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

@@ -2,6 +2,7 @@ namespace FSSTests
 
 open Fable.Mocha
 open Fable.Core.JsInterop
+open Fss.Global
 open Utils
 open Fss
 
@@ -163,4 +164,27 @@ module Column =
                     "Column rule color unset"
                     [ ColumnRuleColor.Unset ]
                     [ "columnRuleColor" ==> "unset" ]
+
+
+                test
+                    "Column count number"
+                    [ColumnCount' (CssInt 3)]
+                    ["columnCount" ==> "3"]
+                test
+                    "Column count auto"
+                    [ColumnCount.Auto]
+                    ["columnCount" ==> "auto"]
+                test
+                    "Column count inherit"
+                    [ColumnCount.Inherit]
+                    ["columnCount" ==> "inherit"]
+                test
+                    "Column count initial"
+                    [ColumnCount.Initial]
+                    ["columnCount" ==> "initial"]
+                test
+                    "Column count unset"
+                    [ColumnCount.Unset]
+                    ["columnCount" ==> "unset"]
+
             ]

@@ -84,6 +84,13 @@ module Column =
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown column rule color"
 
+    let private columnCountToString (columnCount: IColumnCount) =
+        match columnCount with
+        | :? CssInt as i -> GlobalValue.int i
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown column count"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
     let private columnGapValue value = PropertyValue.cssValue Property.ColumnGap value
     let private columnGapValue' value =
@@ -324,4 +331,22 @@ module Column =
         static member Initial = Initial |> columnRuleColorValue'
         static member Unset = Unset |> columnRuleColorValue'
 
-    let BorderColor' (color: IColumnRuleColor) = ColumnRuleColor.Value(color)
+    let ColumnRuleColor' (color: IColumnRuleColor) = ColumnRuleColor.Value(color)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/column-count
+    let private columnCountValue value = PropertyValue.cssValue Property.ColumnCount value
+    let private columnCountValue' value =
+        value
+        |> columnCountToString
+        |> columnCountValue
+
+    type ColumnCount =
+        static member Value(columnCount: IColumnCount) = columnCount |> columnCountValue'
+        static member Auto = Auto |> columnCountValue'
+        static member Inherit = Inherit |> columnCountValue'
+        static member Initial = Initial |> columnCountValue'
+        static member Unset = Unset |> columnCountValue'
+
+    let ColumnCount' (columnCount: IColumnCount) = ColumnCount.Value(columnCount)
+
+
