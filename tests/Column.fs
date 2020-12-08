@@ -89,4 +89,66 @@ module Column =
                     "Column rule width Unset"
                     [ColumnRuleWidth.Unset]
                     ["columnRuleWidth" ==> "unset"]
+
+
+
+
+
+
+                test
+                    "Column rule style hidden"
+                    [ ColumnRuleStyle.Hidden ]
+                    [ "columnRuleStyle" ==> "hidden" ]
+                test
+                    "Column rule style dotted"
+                    [ ColumnRuleStyle.Dotted ]
+                    [ "columnRuleStyle" ==> "dotted" ]
+                test
+                    "Column rule style dashed"
+                    [ ColumnRuleStyle.Dashed ]
+                    [ "columnRuleStyle" ==> "dashed" ]
+                test
+                    "Column rule style solid"
+                    [ ColumnRuleStyle.Solid ]
+                    [ "columnRuleStyle" ==> "solid" ]
+                test
+                    "Column rule style double"
+                    [ ColumnRuleStyle.Double ]
+                    [ "columnRuleStyle" ==> "double" ]
+                test
+                    "Column rule style groove"
+                    [ ColumnRuleStyle.Groove ]
+                    [ "columnRuleStyle" ==> "groove" ]
+                test
+                    "Column rule style ridge"
+                    [ ColumnRuleStyle.Ridge ]
+                    [ "columnRuleStyle" ==> "ridge" ]
+                test
+                    "Column rule style inset"
+                    [ ColumnRuleStyle.Inset ]
+                    [ "columnRuleStyle" ==> "inset" ]
+                test
+                    "Column rule style outset"
+                    [ ColumnRuleStyle.Outset ]
+                    [ "columnRuleStyle" ==> "outset" ]
+                test
+                    "Column rule style none"
+                    [ ColumnRuleStyle.None ]
+                    [ "columnRuleStyle" ==> "none" ]
+                test
+                    "Column rule style initial"
+                    [ ColumnRuleStyle.Initial ]
+                    [ "columnRuleStyle" ==> "initial" ]
+                test
+                    "Column rule style inherit"
+                    [ ColumnRuleStyle.Inherit ]
+                    [ "columnRuleStyle" ==> "inherit" ]
+                test
+                    "Column rule style unset"
+                    [ ColumnRuleStyle.Unset ]
+                    [ "columnRuleStyle" ==> "unset" ]
+
+
+
+
             ]

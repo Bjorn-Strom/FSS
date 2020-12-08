@@ -124,14 +124,16 @@ module Global =
     type IGridTemplateArea    = interface end
     type IGridGap             = interface end
     type IGridRowGap          = interface end
-    type IColumnGap           = interface end
-    type IColumnSpan          = interface end
-    type IColumnRuleWidth     = interface end
     type IGridPosition        = interface end
     type IGridTemplateRows    = interface end
     type IGridTemplateColumns = interface end
     type IGridAutoRows        = interface end
     type IGridAutoColumns     = interface end
+
+    type IColumnGap           = interface end
+    type IColumnSpan          = interface end
+    type IColumnRuleWidth     = interface end
+    type IColumnRuleStyle     = interface end
 
     type INthChild = interface end
 
@@ -222,6 +224,7 @@ module Global =
         interface IGridTemplateColumns
         interface IColumnSpan
         interface IResize
+        interface IColumnRuleStyle
 
     type Normal =
         | Normal
@@ -346,9 +349,6 @@ module Global =
         interface IGridTemplateArea
         interface IGridGap
         interface IGridRowGap
-        interface IColumnGap
-        interface IColumnSpan
-        interface IColumnRuleWidth
         interface IGridPosition
         interface IGridTemplateRows
         interface IGridTemplateColumns
@@ -358,6 +358,10 @@ module Global =
         interface IResize
         interface IWordSpacing
         interface IWordBreak
+        interface IColumnGap
+        interface IColumnSpan
+        interface IColumnRuleWidth
+        interface IColumnRuleStyle
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

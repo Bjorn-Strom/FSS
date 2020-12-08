@@ -84,6 +84,7 @@ module Border =
         | :? None -> GlobalValue.none
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown border style"
+
     let private collapseToString (collapse: IBorderCollapse) =
         let stringifyCollapse =
             function

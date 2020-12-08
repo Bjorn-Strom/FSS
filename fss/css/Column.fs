@@ -11,6 +11,18 @@ module ColumnType =
         | Thick
         interface IColumnRuleWidth
 
+    type ColumnRuleStyle =
+        | Hidden
+        | Dotted
+        | Dashed
+        | Solid
+        | Double
+        | Groove
+        | Ridge
+        | Inset
+        | Outset
+        interface IColumnRuleStyle
+
 [<AutoOpen>]
 module Column =
     open ColumnType
@@ -46,6 +58,26 @@ module Column =
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown column rule width"
+
+    let private columnRuleStyleToString (style: IColumnRuleStyle) =
+        let stringifyStyle =
+            function
+                | Hidden -> "hidden"
+                | Dotted -> "dotted"
+                | Dashed -> "dashed"
+                | Solid -> "solid"
+                | Double -> "double"
+                | Groove -> "groove"
+                | Ridge -> "ridge"
+                | Inset -> "inset"
+                | Outset -> "outset"
+
+        match style with
+        | :? ColumnRuleStyle as b -> stringifyStyle b
+        | :? None -> GlobalValue.none
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown column style"
+
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
     let private columnGapValue value = PropertyValue.cssValue Property.ColumnGap value
@@ -96,3 +128,29 @@ module Column =
         static member Unset = Unset |> columnRuleWidthValue'
 
     let ColumnRuleWidth' (ruleWidth: IColumnRuleWidth) = ruleWidth |> ColumnRuleWidth.Value
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-style
+    let private styleValue value = PropertyValue.cssValue Property.ColumnRuleStyle value
+    let private styleValue' value =
+        value
+        |> columnRuleStyleToString
+        |> styleValue
+
+    type ColumnRuleStyle =
+        static member Value (style: IColumnRuleStyle) = style |> styleValue'
+        static member Hidden = Hidden |> styleValue'
+        static member Dotted = Dotted |> styleValue'
+        static member Dashed = Dashed |> styleValue'
+        static member Solid = Solid |> styleValue'
+        static member Double = Double |> styleValue'
+        static member Groove = Groove |> styleValue'
+        static member Ridge = Ridge |> styleValue'
+        static member Inset = Inset |> styleValue'
+        static member Outset = Outset |> styleValue'
+
+        static member None = None |> styleValue'
+        static member Inherit = Inherit |> styleValue'
+        static member Initial = Initial |> styleValue'
+        static member Unset = Unset |> styleValue'
+
+    let ColumnRuleStyle' (style: IColumnRuleStyle) = ColumnRuleStyle.Value(style)
