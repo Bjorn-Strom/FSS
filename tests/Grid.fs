@@ -431,87 +431,87 @@ module Grid =
                 testString
                     "Repeat value and fr"
                     (string <| Repeat.Repeat(4, fr 1.))
-                    "GridRepeat repeat(4, 1.00fr)"
+                    "GridRepeat (repeat(4, 1.00fr))"
                 testString
                     "Repeat value and percent"
                     (string <| Repeat.Repeat(4, pct 60))
-                    "GridRepeat repeat(4, 60%)"
+                    "GridRepeat (repeat(4, 60%))"
                 testString
                     "Repeat value and pixels"
                     (string <| Repeat.Repeat(4, px 250))
-                    "GridRepeat repeat(4, 250px)"
+                    "GridRepeat (repeat(4, 250px))"
                 testString
                     "Repeat value and min-content"
                     (string <| Repeat.Repeat(4, ContentSizeType.MinContent))
-                    "GridRepeat repeat(4, min-content)"
+                    "GridRepeat (repeat(4, min-content))"
                 testString
                     "Repeat value and max-content"
                     (string <| Repeat.Repeat(4, ContentSizeType.MaxContent))
-                    "GridRepeat repeat(4, max-content)"
+                    "GridRepeat (repeat(4, max-content))"
                 testString
                     "Repeat value and minmax"
                     (string <| Repeat.Repeat(4, MinMax.MinMax(px 100, fr 1.)))
-                    "GridRepeat repeat(4, minmax(100px, 1.00fr))"
+                    "GridRepeat (repeat(4, minmax(100px, 1.00fr)))"
                 testString
                     "Repeat value and fit content"
                     (string <| Repeat.Repeat(4, ContentSizeType.FitContent(px 100)))
-                    "GridRepeat repeat(4, fit-content(100px))"
+                    "GridRepeat (repeat(4, fit-content(100px)))"
                 testString
                     "Repeat value and px pct and auto"
                     (string <| Repeat.Repeat(4, [px 10 :> ILengthPercentage; pct 30 :> ILengthPercentage]) )
-                    "GridRepeat repeat(4, 10px 30%)"
+                    "GridRepeat (repeat(4, 10px 30%))"
                 testString
                     "Repeat value and min-content max-content"
                     (string <| Repeat.Repeat(4, [ContentSizeType.MinContent; ContentSizeType.MaxContent]))
-                    "GridRepeat repeat(4, min-content max-content)"
+                    "GridRepeat (repeat(4, min-content max-content))"
                 testString
                     "Repeat auto-fill and px"
                     (string <| Repeat.Repeat(AutoFill, px 30))
-                    "GridRepeat repeat(auto-fill, 30px)"
+                    "GridRepeat (repeat(auto-fill, 30px))"
                 testString
                     "Repeat auto-fit and px"
                     (string <| Repeat.Repeat(AutoFit, px 30))
-                    "GridRepeat repeat(auto-fit, 30px)"
+                    "GridRepeat (repeat(auto-fit, 30px))"
                 testString
                     "MinMax px and fraction"
                     (string <| MinMax.MinMax(px 200, fr 1.5))
-                    "MinMaxGrid minmax(200px, 1.50fr)"
+                    "MinMaxGrid (minmax(200px, 1.50fr))"
                 testString
                     "MinMax px and percent"
                     (string <| MinMax.MinMax(px 400, pct 50))
-                    "MinMaxGrid minmax(400px, 50%)"
+                    "MinMaxGrid (minmax(400px, 50%))"
                 testString
                     "MinMax percent and px"
                     (string <| MinMax.MinMax(pct 30, px 300))
-                    "MinMaxGrid minmax(30%, 300px)"
+                    "MinMaxGrid (minmax(30%, 300px))"
                 testString
                     "MinMax px and max content"
                     (string <| MinMax.MinMax(px 100, ContentSizeType.MaxContent))
-                    "MinMaxGrid minmax(100px, max-content)"
+                    "MinMaxGrid (minmax(100px, max-content))"
                 testString
                     "MinMax min content and px"
                     (string <| MinMax.MinMax(ContentSizeType.MinContent, px 400))
-                    "MinMaxGrid minmax(min-content, 400px)"
+                    "MinMaxGrid (minmax(min-content, 400px))"
                 testString
                     "MinMax px and fr"
                     (string <| MinMax.MinMax(px 200, fr 1.) )
-                    "MinMaxGrid minmax(200px, 1.00fr)"
+                    "MinMaxGrid (minmax(200px, 1.00fr))"
                 testString
                     "MinMax percent and min content"
                     (string <| MinMax.MinMax(pct 50, ContentSizeType.MinContent))
-                    "MinMaxGrid minmax(50%, min-content)"
+                    "MinMaxGrid (minmax(50%, min-content))"
                 testString
                     "MinMax percent and max content"
                     (string <| MinMax.MinMax(px 300, ContentSizeType.MaxContent))
-                    "MinMaxGrid minmax(300px, max-content)"
+                    "MinMaxGrid (minmax(300px, max-content))"
                 testString
                     "MinMax pct and px"
                     (string <| MinMax.MinMax(pct 30, px 300))
-                    "MinMaxGrid minmax(30%, 300px)"
+                    "MinMaxGrid (minmax(30%, 300px))"
                 testString
                     "MinMax min content and px"
                     (string <| MinMax.MinMax(ContentSizeType.MinContent, px 200))
-                    "MinMaxGrid minmax(min-content, 200px)"
+                    "MinMaxGrid (minmax(min-content, 200px))"
                 test
                     "Grid auto columns min content"
                     [GridAutoColumns.MinContent]
