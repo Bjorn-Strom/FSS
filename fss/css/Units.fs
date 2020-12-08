@@ -69,11 +69,12 @@ module Size =
         interface ILetterSpacing
         interface IGridGap
         interface IGridRowGap
-        interface IColumnGap
         interface IGridTemplateRows
         interface IGridTemplateColumns
         interface IGridAutoRows
         interface IGridAutoColumns
+        interface IColumnGap
+        interface IColumnRuleWidth
         interface IMargin
         interface IPadding
         interface ITransformOrigin

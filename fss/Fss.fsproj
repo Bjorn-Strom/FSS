@@ -17,6 +17,7 @@
     <Compile Include="css\Text.fs" />
     <Compile Include="css\CounterStyle.fs" />
     <Compile Include="css\ListStyle.fs" />
+    <Compile Include="css\Column.fs" />
     <Compile Include="css\Image.fs" />
     <Compile Include="css\Background.fs" />
     <Compile Include="css\Border.fs" />

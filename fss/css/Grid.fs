@@ -25,10 +25,6 @@ module GridType =
         | Subgrid
         interface IGridTemplateRows
 
-    type ColumnSpan =
-        | All
-        interface IColumnSpan
-
 [<AutoOpen>]
 module Grid =
     open GridType
@@ -179,25 +175,6 @@ module Grid =
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | _ -> "Unkown grid template column"
 
-    let private columnGapToString (gap: IColumnGap) =
-        match gap with
-        | :? Keywords as k -> GlobalValue.keywords k
-        | :? Normal -> GlobalValue.normal
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | _ -> "Unknown column gap"
-
-    let private columnSpanToString (span: IColumnSpan) =
-        let stringifyColumnSpan =
-            function
-                | All -> "all"
-
-        match span with
-        | :? ColumnSpan as c -> stringifyColumnSpan c
-        | :? Keywords as k -> GlobalValue.keywords k
-        | :? None -> GlobalValue.none
-        | _ -> "Unknown column span"
-
     let private gridPositionToString (position: IGridPosition) =
         let stringifyGridPosition =
             function
@@ -340,38 +317,6 @@ module Grid =
         static member Normal = Normal |> gridRowGapValue'
 
     let GridRowGap' (rowGap: IGridRowGap) = GridRowGap.Value(rowGap)
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
-    let private columnGapValue value = PropertyValue.cssValue Property.ColumnGap value
-    let private columnGapValue' value =
-        value
-        |> columnGapToString
-        |> columnGapValue
-    type ColumnGap =
-        static member Value (gap: IColumnGap) = gap |> columnGapValue'
-        static member Inherit = Inherit |> columnGapValue'
-        static member Initial = Initial |> columnGapValue'
-        static member Unset = Unset |> columnGapValue'
-        static member Normal = Normal |> columnGapValue'
-
-    let ColumnGap' (columnGap: IColumnGap) = ColumnGap.Value(columnGap)
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/column-span
-    let private columnSpanValue value = PropertyValue.cssValue Property.ColumnSpan value
-    let private columnSpanValue' value =
-        value
-        |> columnSpanToString
-        |> columnSpanValue
-
-    type ColumnSpan =
-        static member Value(span: IColumnSpan) = span |> columnSpanValue'
-        static member All = All |> columnSpanValue'
-        static member Inherit = Inherit |> columnSpanValue'
-        static member Initial = Initial |> columnSpanValue'
-        static member Unset = Unset |> columnSpanValue'
-        static member None = None |> columnSpanValue'
-
-    let ColumnSpan' (span: IColumnSpan) = ColumnSpan.Value(span)
 
     // Grid position
     type GridPosition =

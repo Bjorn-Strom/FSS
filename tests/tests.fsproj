@@ -26,6 +26,7 @@
     <Compile Include="ListStyle.fs" />
     <Compile Include="Content.fs" />
     <Compile Include="Grid.fs" />
+    <Compile Include="Column.fs" />
     <Compile Include="Media.fs" />
     <Compile Include="KeyFrames.fs" />
     <Compile Include="Outline.fs" />

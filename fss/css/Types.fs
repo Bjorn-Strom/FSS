@@ -126,6 +126,7 @@ module Global =
     type IGridRowGap          = interface end
     type IColumnGap           = interface end
     type IColumnSpan          = interface end
+    type IColumnRuleWidth     = interface end
     type IGridPosition        = interface end
     type IGridTemplateRows    = interface end
     type IGridTemplateColumns = interface end
@@ -347,6 +348,7 @@ module Global =
         interface IGridRowGap
         interface IColumnGap
         interface IColumnSpan
+        interface IColumnRuleWidth
         interface IGridPosition
         interface IGridTemplateRows
         interface IGridTemplateColumns

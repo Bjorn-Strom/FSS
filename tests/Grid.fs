@@ -274,34 +274,6 @@ module Grid =
                     [GridGap.Unset]
                     ["gridGap" ==> "unset"]
                 test
-                    "Column gap normal"
-                    [ColumnGap.Normal]
-                    ["columnGap" ==> "normal"]
-                test
-                    "Column gap px"
-                    [ColumnGap' (px 3)]
-                    ["columnGap" ==> "3px"]
-                test
-                    "Column gap em"
-                    [ColumnGap' (em 2.5)]
-                    ["columnGap" ==> "2.5em"]
-                test
-                    "Column gap percent"
-                    [ColumnGap' (pct 3)]
-                    ["columnGap" ==> "3%"]
-                test
-                    "Column gap inherit"
-                    [ColumnGap.Inherit]
-                    ["columnGap" ==> "inherit"]
-                test
-                    "Column gap initial"
-                    [ColumnGap.Initial]
-                    ["columnGap" ==> "initial"]
-                test
-                    "Column gap unset"
-                    [ColumnGap.Unset]
-                    ["columnGap" ==> "unset"]
-                test
                     "Row gap normal"
                     [GridRowGap.Normal]
                     ["gridRowGap" ==> "normal"]
@@ -702,25 +674,4 @@ module Grid =
                     "Grid template areas multiple unset"
                     [GridTemplateAreas.Unset]
                     ["gridTemplateAreas" ==> "unset"]
-
-                test
-                    "Column span all"
-                    [ColumnSpan.All]
-                    ["columnSpan" ==> "all"]
-                test
-                    "Column span none"
-                    [ColumnSpan.None]
-                    ["columnSpan" ==> "none"]
-                test
-                    "Column span inherit"
-                    [ColumnSpan.Inherit]
-                    ["columnSpan" ==> "inherit"]
-                test
-                    "Column span initial"
-                    [ColumnSpan.Initial]
-                    ["columnSpan" ==> "initial"]
-                test
-                    "Column span unset"
-                    [ColumnSpan.Unset]
-                    ["columnSpan" ==> "unset"]
             ]
