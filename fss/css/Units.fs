@@ -20,7 +20,7 @@ module Percent =
         interface IBorderImageOutset
         interface IGridGap
         interface IGridRowGap
-        interface IGridColumnGap
+        interface IColumnGap
         interface IGridAutoRows
         interface IGridAutoColumns
         interface IMargin
@@ -69,7 +69,7 @@ module Size =
         interface ILetterSpacing
         interface IGridGap
         interface IGridRowGap
-        interface IGridColumnGap
+        interface IColumnGap
         interface IGridTemplateRows
         interface IGridTemplateColumns
         interface IGridAutoRows

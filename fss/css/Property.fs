@@ -127,7 +127,6 @@ module Property =
         | GridAutoFlow
         | GridAutoRows
         | GridColumnEnd
-        | GridColumnGap
         | GridColumnStart
         | GridColumn
         | GridGap

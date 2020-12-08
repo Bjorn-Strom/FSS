@@ -124,7 +124,8 @@ module Global =
     type IGridTemplateArea    = interface end
     type IGridGap             = interface end
     type IGridRowGap          = interface end
-    type IGridColumnGap       = interface end
+    type IColumnGap           = interface end
+    type IColumnSpan          = interface end
     type IGridPosition        = interface end
     type IGridTemplateRows    = interface end
     type IGridTemplateColumns = interface end
@@ -218,6 +219,7 @@ module Global =
         interface IGridTemplateArea
         interface IGridTemplateRows
         interface IGridTemplateColumns
+        interface IColumnSpan
         interface IResize
 
     type Normal =
@@ -241,7 +243,7 @@ module Global =
         interface IJustifySelf
         interface IContent
         interface IGridRowGap
-        interface IGridColumnGap
+        interface IColumnGap
         interface IWordSpacing
         interface IWordBreak
         interface IOverflowWrap
@@ -343,7 +345,8 @@ module Global =
         interface IGridTemplateArea
         interface IGridGap
         interface IGridRowGap
-        interface IGridColumnGap
+        interface IColumnGap
+        interface IColumnSpan
         interface IGridPosition
         interface IGridTemplateRows
         interface IGridTemplateColumns

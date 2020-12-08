@@ -275,32 +275,32 @@ module Grid =
                     ["gridGap" ==> "unset"]
                 test
                     "Column gap normal"
-                    [GridColumnGap.Normal]
-                    ["gridColumnGap" ==> "normal"]
+                    [ColumnGap.Normal]
+                    ["columnGap" ==> "normal"]
                 test
                     "Column gap px"
-                    [GridColumnGap' (px 3)]
-                    ["gridColumnGap" ==> "3px"]
+                    [ColumnGap' (px 3)]
+                    ["columnGap" ==> "3px"]
                 test
                     "Column gap em"
-                    [GridColumnGap' (em 2.5)]
-                    ["gridColumnGap" ==> "2.5em"]
+                    [ColumnGap' (em 2.5)]
+                    ["columnGap" ==> "2.5em"]
                 test
                     "Column gap percent"
-                    [GridColumnGap' (pct 3)]
-                    ["gridColumnGap" ==> "3%"]
+                    [ColumnGap' (pct 3)]
+                    ["columnGap" ==> "3%"]
                 test
                     "Column gap inherit"
-                    [GridColumnGap.Inherit]
-                    ["gridColumnGap" ==> "inherit"]
+                    [ColumnGap.Inherit]
+                    ["columnGap" ==> "inherit"]
                 test
                     "Column gap initial"
-                    [GridColumnGap.Initial]
-                    ["gridColumnGap" ==> "initial"]
+                    [ColumnGap.Initial]
+                    ["columnGap" ==> "initial"]
                 test
                     "Column gap unset"
-                    [GridColumnGap.Unset]
-                    ["gridColumnGap" ==> "unset"]
+                    [ColumnGap.Unset]
+                    ["columnGap" ==> "unset"]
                 test
                     "Row gap normal"
                     [GridRowGap.Normal]
@@ -702,4 +702,25 @@ module Grid =
                     "Grid template areas multiple unset"
                     [GridTemplateAreas.Unset]
                     ["gridTemplateAreas" ==> "unset"]
+
+                test
+                    "Column span all"
+                    [ColumnSpan.All]
+                    ["columnSpan" ==> "all"]
+                test
+                    "Column span none"
+                    [ColumnSpan.None]
+                    ["columnSpan" ==> "none"]
+                test
+                    "Column span inherit"
+                    [ColumnSpan.Inherit]
+                    ["columnSpan" ==> "inherit"]
+                test
+                    "Column span initial"
+                    [ColumnSpan.Initial]
+                    ["columnSpan" ==> "initial"]
+                test
+                    "Column span unset"
+                    [ColumnSpan.Unset]
+                    ["columnSpan" ==> "unset"]
             ]
