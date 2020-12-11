@@ -65,4 +65,26 @@ module Table =
                     "Empty Cells unset"
                     [EmptyCells.Unset]
                     ["emptyCells" ==> "unset"]
+
+
+                test
+                    "Table Layout fixed"
+                    [TableLayout.Fixed]
+                    ["tableLayout" ==> "fixed"]
+                test
+                    "Table Layout auto"
+                    [TableLayout.Auto]
+                    ["tableLayout" ==> "auto"]
+                test
+                    "Table Layout inherit"
+                    [TableLayout.Inherit]
+                    ["tableLayout" ==> "inherit"]
+                test
+                    "Table Layout initial"
+                    [TableLayout.Initial]
+                    ["tableLayout" ==> "initial"]
+                test
+                    "Table Layout unset"
+                    [TableLayout.Unset]
+                    ["tableLayout" ==> "unset"]
             ]

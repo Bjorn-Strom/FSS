@@ -147,7 +147,8 @@ module Global =
     type IPaintOrder = interface end
 
     type ICaptionSide = interface end
-    type IEmptyCells = interface end
+    type IEmptyCells  = interface end
+    type ITableLayout = interface end
 
     // Types
     type CSSProperty = CSSProperty of string * obj
@@ -202,6 +203,7 @@ module Global =
         interface IGridAutoColumns
         interface ILineBreak
         interface IColumnCount
+        interface ITableLayout
 
     type None =
         | None
@@ -373,6 +375,7 @@ module Global =
         interface IColumnCount
         interface ICaptionSide
         interface IEmptyCells
+        interface ITableLayout
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

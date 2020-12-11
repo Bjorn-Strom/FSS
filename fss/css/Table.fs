@@ -15,6 +15,10 @@ module TableType =
         | Hide
         interface IEmptyCells
 
+    type TableLayout =
+        | Fixed
+        interface ITableLayout
+
 [<AutoOpen>]
 module Table =
     open TableType
@@ -43,6 +47,17 @@ module Table =
         | :? EmptyCells as e -> stringifyCells e
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown empty cells"
+
+    let private tableLayoutToString (tableLayout: ITableLayout) =
+        let stringifyTableLayout =
+            function
+                | Fixed -> "fixed"
+
+        match tableLayout with
+        | :? TableLayout as t -> stringifyTableLayout t
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown table layout"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
     let private captionSideValue value = PropertyValue.cssValue Property.CaptionSide value
@@ -80,3 +95,20 @@ module Table =
         static member Unset = Unset |> emptyCellsValue'
 
     let private EmptyCells' (emptyCells: IEmptyCells) = emptyCells |> EmptyCells.Value
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
+    let private tableLayoutValue value = PropertyValue.cssValue Property.TableLayout value
+    let private tableLayoutValue' value =
+        value
+        |> tableLayoutToString
+        |> tableLayoutValue
+
+    type TableLayout =
+        static member Value (layout: ITableLayout) = layout |> tableLayoutValue'
+        static member Fixed = Fixed |> tableLayoutValue'
+        static member Auto = Auto |> tableLayoutValue'
+        static member Inherit = Inherit |> tableLayoutValue'
+        static member Initial = Initial |> tableLayoutValue'
+        static member Unset = Unset |> tableLayoutValue'
+
+    let TableLayout' layout = TableLayout.Value layout
