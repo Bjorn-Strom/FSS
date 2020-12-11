@@ -45,4 +45,24 @@ module Table =
                     "Caption side unset"
                     [CaptionSide.Unset]
                     ["captionSide" ==> "unset"]
+                test
+                    "Empty Cells show"
+                    [EmptyCells.Show]
+                    ["emptyCells" ==> "show"]
+                test
+                    "Empty Cells hide"
+                    [EmptyCells.Hide]
+                    ["emptyCells" ==> "hide"]
+                test
+                    "Empty Cells inherit"
+                    [EmptyCells.Inherit]
+                    ["emptyCells" ==> "inherit"]
+                test
+                    "Empty Cells initial"
+                    [EmptyCells.Initial]
+                    ["emptyCells" ==> "initial"]
+                test
+                    "Empty Cells unset"
+                    [EmptyCells.Unset]
+                    ["emptyCells" ==> "unset"]
             ]

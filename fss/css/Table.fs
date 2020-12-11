@@ -10,6 +10,11 @@ module TableType =
         | BottomOutside
         interface ICaptionSide
 
+    type EmptyCells =
+        | Show
+        | Hide
+        interface IEmptyCells
+
 [<AutoOpen>]
 module Table =
     open TableType
@@ -27,6 +32,17 @@ module Table =
         | :? CaptionSide as c -> stringifySide c
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown caption side"
+
+    let private emptyCellsToString (emptyCells: IEmptyCells) =
+        let stringifyCells =
+            function
+                | Show -> "show"
+                | Hide -> "hide"
+
+        match emptyCells with
+        | :? EmptyCells as e -> stringifyCells e
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown empty cells"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
     let private captionSideValue value = PropertyValue.cssValue Property.CaptionSide value
@@ -48,3 +64,19 @@ module Table =
         static member Unset = Unset |> captionSideValue'
 
     let CaptionSide' captionSide = CaptionSide.Value captionSide
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
+    let private emptyCellsValue value = PropertyValue.cssValue Property.EmptyCells value
+    let private emptyCellsValue' value =
+        value
+        |> emptyCellsToString
+        |> emptyCellsValue
+    type EmptyCells =
+        static member Value (emptyCells: IEmptyCells) = emptyCells |> emptyCellsValue'
+        static member Show = Show |> emptyCellsValue'
+        static member Hide = Hide |> emptyCellsValue'
+        static member Inherit = Inherit |> emptyCellsValue'
+        static member Initial = Initial |> emptyCellsValue'
+        static member Unset = Unset |> emptyCellsValue'
+
+    let private EmptyCells' (emptyCells: IEmptyCells) = emptyCells |> EmptyCells.Value
