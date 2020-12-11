@@ -146,6 +146,8 @@ module Global =
 
     type IPaintOrder = interface end
 
+    type ICaptionSide = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -368,6 +370,7 @@ module Global =
         interface IColumnRuleStyle
         interface IColumnRuleColor
         interface IColumnCount
+        interface ICaptionSide
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
