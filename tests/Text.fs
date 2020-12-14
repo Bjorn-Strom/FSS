@@ -654,4 +654,36 @@ module Text =
                     "TabSize unset"
                     [ TabSize.Unset ]
                     ["tabSize" ==> "unset"]
+                test
+                    "TextOrientation Mixed"
+                    [ TextOrientation.Mixed ]
+                    ["textOrientation" ==> "mixed"]
+                test
+                    "TextOrientation Upright"
+                    [ TextOrientation.Upright ]
+                    ["textOrientation" ==> "upright"]
+                test
+                    "TextOrientation sideways-right"
+                    [ TextOrientation.SidewaysRight ]
+                    ["textOrientation" ==> "sideways-right"]
+                test
+                    "TextOrientation Sideways"
+                    [ TextOrientation.Sideways ]
+                    ["textOrientation" ==> "sideways"]
+                test
+                    "TextOrientation use-glyph-orientation"
+                    [ TextOrientation.UseGlyphOrientation ]
+                    ["textOrientation" ==> "use-glyph-orientation"]
+                test
+                    "TextOrientation inherit"
+                    [ TextOrientation.Inherit ]
+                    ["textOrientation" ==> "inherit"]
+                test
+                    "TextOrientation Initial"
+                    [ TextOrientation.Initial ]
+                    ["textOrientation" ==> "initial"]
+                test
+                    "TextOrientation unset"
+                    [ TextOrientation.Unset ]
+                    ["textOrientation" ==> "unset"]
             ]

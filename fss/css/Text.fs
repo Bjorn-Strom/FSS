@@ -114,6 +114,14 @@ module TextTypes =
         | Manual
         interface IHyphens
 
+    type TextOrientation =
+        | Mixed
+        | Upright
+        | SidewaysRight
+        | Sideways
+        | UseGlyphOrientation
+        interface ITextOrientation
+
 [<AutoOpen>]
 module Text =
     open TextTypes
@@ -372,6 +380,21 @@ module Text =
         | :? CssInt as i -> GlobalValue.int i
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown tab size"
+
+    let private textOrientationToString (textOrientation: ITextOrientation) =
+        let stringifyOrientation =
+            function
+                | Mixed -> "mixed"
+                | Upright -> "upright"
+                | SidewaysRight -> "sideways-right"
+                | Sideways -> "sideways"
+                | UseGlyphOrientation -> "use-glyph-orientation"
+
+        match textOrientation with
+        | :? TextOrientation as t -> stringifyOrientation t
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown text orientation"
+
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
     let private alignCssValue value = PropertyValue.cssValue Property.TextAlign value
@@ -1095,3 +1118,20 @@ module Text =
         static member Unset = Unset |> tabSizeValue'
 
     let TabSize' tabSize = TabSize.Value tabSize
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation
+    let private textOrientationValue value = PropertyValue.cssValue Property.TextOrientation value
+    let private textOrientationValue' value = value |> textOrientationToString |> textOrientationValue
+
+    type TextOrientation =
+        static member Value (orientation: ITextOrientation) = orientation |> textOrientationValue'
+        static member Mixed = Mixed |> textOrientationValue'
+        static member Upright = Upright |> textOrientationValue'
+        static member SidewaysRight = SidewaysRight |> textOrientationValue'
+        static member Sideways = Sideways |> textOrientationValue'
+        static member UseGlyphOrientation = UseGlyphOrientation |> textOrientationValue'
+        static member Inherit = Inherit |> textOrientationValue'
+        static member Initial = Initial |> textOrientationValue'
+        static member Unset = Unset |> textOrientationValue'
+
+    let TextOrientation' orientation = TextOrientation.Value orientation

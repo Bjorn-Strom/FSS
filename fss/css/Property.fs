@@ -240,6 +240,7 @@ module Property =
         | TextUnderlineOffset
         | TextUnderlinePosition
         | TextSizeAdjust
+        | TextOrientation
         | Top
         | Transform
         | TransformOrigin

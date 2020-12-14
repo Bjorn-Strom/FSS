@@ -53,6 +53,7 @@ module Global =
     type ITextEmphasisColor       = interface end
     type ITextSizeAdjust          = interface end
     type ITabSize                 = interface end
+    type ITextOrientation         = interface end
 
     type IListStyleImage    = interface end
     type IListStylePosition = interface end
@@ -304,6 +305,7 @@ module Global =
         interface ITextEmphasisStyle
         interface ITextUnderlinePosition
         interface ITextUnderlineOffset
+        interface ITextOrientation
         interface IQuotes
         interface IHyphens
         interface ITextDecorationColor
