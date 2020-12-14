@@ -607,6 +607,30 @@ module Text =
                     [ Hyphens.Unset ]
                     ["hyphens" ==> "unset"]
                 test
+                    "TextSizeAdjust percent"
+                    [ TextSizeAdjust' (pct 80) ]
+                    ["textSizeAdjust" ==> "80%"]
+                test
+                    "TextSizeAdjust none"
+                    [ TextSizeAdjust.None ]
+                    ["textSizeAdjust" ==> "none"]
+                test
+                    "TextSizeAdjust Auto"
+                    [ TextSizeAdjust.Auto ]
+                    ["textSizeAdjust" ==> "auto"]
+                test
+                    "TextSizeAdjust inherit"
+                    [ TextSizeAdjust.Inherit ]
+                    ["textSizeAdjust" ==> "inherit"]
+                test
+                    "TextSizeAdjust Initial"
+                    [ TextSizeAdjust.Initial ]
+                    ["textSizeAdjust" ==> "initial"]
+                test
+                    "TextSizeAdjust unset"
+                    [ TextSizeAdjust.Unset ]
+                    ["textSizeAdjust" ==> "unset"]
+                test
                     "TabSize px"
                     [ TabSize' (px 10) ]
                     ["tabSize" ==> "10px"]

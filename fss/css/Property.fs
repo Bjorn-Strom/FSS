@@ -239,6 +239,7 @@ module Property =
         | TextEmphasisStyle
         | TextUnderlineOffset
         | TextUnderlinePosition
+        | TextSizeAdjust
         | Top
         | Transform
         | TransformOrigin

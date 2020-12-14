@@ -51,6 +51,7 @@ module Global =
     type IHyphens                 = interface end
     type ITextDecorationColor     = interface end
     type ITextEmphasisColor       = interface end
+    type ITextSizeAdjust          = interface end
     type ITabSize                 = interface end
 
     type IListStyleImage    = interface end
@@ -189,6 +190,7 @@ module Global =
         interface ITextUnderlinePosition
         interface ITextUnderlineOffset
         interface ITextAlignLast
+        interface ITextSizeAdjust
         interface IQuotes
         interface IHyphens
         interface IBackgroundSize
@@ -219,6 +221,7 @@ module Global =
         interface ITextDecorationSkipInk
         interface ITextEmphasisStyle
         interface ITextTransform
+        interface ITextSizeAdjust
         interface IQuotes
         interface IHyphens
         interface IListStyleImage
@@ -305,6 +308,7 @@ module Global =
         interface IHyphens
         interface ITextDecorationColor
         interface ITextEmphasisColor
+        interface ITextSizeAdjust
         interface IListStyleImage
         interface IListStylePosition
         interface IListStyleType

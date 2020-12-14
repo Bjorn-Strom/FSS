@@ -29,6 +29,7 @@ module Percent =
         interface ITextIndent
         interface ITextDecorationThickness
         interface ITextUnderlineOffset
+        interface ITextSizeAdjust
         interface IPositioned
         interface IVerticalAlign
         interface IWordSpacing

@@ -358,6 +358,14 @@ module Text =
             | :? Keywords as k -> GlobalValue.keywords k
             | _ -> "unknown text decoration color"
 
+    let private textSizeAdjustToString (size: ITextSizeAdjust) =
+        match size with
+        | :? None -> GlobalValue.none
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | _ -> "Unknown text size adjust"
+
     let private tabSizeToString (tabSize: ITabSize) =
         match tabSize with
         | :? Units.Size.Size as s -> Units.Size.value s
@@ -1061,6 +1069,20 @@ module Text =
         static member Unset = Unset |> emphasisColorValue'
 
     let TextEmphasisColor' (color: ITextEmphasisColor) = TextEmphasisColor.Value(color)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
+    let private textSizeAdjustValue value = PropertyValue.cssValue Property.TextSizeAdjust value
+    let private textSizeAdjustValue' value = value |> textSizeAdjustToString |> textSizeAdjustValue
+
+    type TextSizeAdjust =
+        static member Value (textSize: ITextSizeAdjust) = textSize |> textSizeAdjustValue'
+        static member Auto = Auto |> textSizeAdjustValue'
+        static member None = None |> textSizeAdjustValue'
+        static member Inherit = Inherit |> textSizeAdjustValue'
+        static member Initial = Initial |> textSizeAdjustValue'
+        static member Unset = Unset |> textSizeAdjustValue'
+
+    let TextSizeAdjust' textSize = TextSizeAdjust.Value textSize
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
     let private tabSizeValue value = PropertyValue.cssValue Property.TabSize value
