@@ -1,7 +1,7 @@
 namespace Fss
 
 module TextTypes =
-    type TextAlignType =
+    type TextAlign =
         | Left
         | Right
         | Center
@@ -12,18 +12,27 @@ module TextTypes =
         | MatchParent
         interface ITextAlign
 
-    type TextDecorationLineType =
+    type TextAlignLast =
+        | Start
+        | End
+        | Left
+        | Right
+        | Center
+        | Justify
+        interface ITextAlignLast
+
+    type TextDecorationLine =
         | Overline
         | Underline
         | LineThrough
         | Blink
         interface ITextDecorationLine
 
-    type TextDecorationThicknessType =
-        | FromFont
+    type TextDecorationThickness =
+        | TextDecorationThickness
         interface ITextDecorationThickness
 
-    type TextDecorationStyleType =
+    type TextDecorationStyle =
         | Solid
         | Double
         | Dotted
@@ -31,7 +40,7 @@ module TextTypes =
         | Wavy
         interface ITextDecorationStyle
 
-    type DecorationSkipType =
+    type DecorationSkip =
         | Objects
         | Spaces
         | Edges
@@ -40,11 +49,11 @@ module TextTypes =
         | TrailingSpaces
         interface ITextDecorationSkip
 
-    type TextDecorationSkipInkType =
-        | All
+    type TextDecorationSkipInk =
+        | TextDecorationSkipInk
         interface ITextDecorationSkipInk
 
-    type TextTransformType =
+    type TextTransform =
         | Capitalize
         | Uppercase
         | Lowercase
@@ -52,31 +61,31 @@ module TextTypes =
         | FullSizeKana
         interface ITextTransform
 
-    type TextIndentType =
+    type TextIndent =
         | Hanging
         | EachLine
         interface ITextIndent
 
-    type TextShadowType =
+    type TextShadow =
         | Shadow  of ITextShadow
         | Shadow2 of Units.Size.Size * Units.Size.Size
         | Shadow3 of Units.Size.Size * Units.Size.Size * CSSColor
         | Shadow4 of Units.Size.Size * Units.Size.Size * Units.Size.Size * CSSColor
         interface ITextShadow
 
-    type TextOverflowType =
+    type TextOverflow =
         | Clip
         | Ellipsis
         interface ITextOverflow
 
-    type EmphasisPositionType =
+    type EmphasisPosition =
         | Over
         | Under
         | Right
         | Left
         interface ITextEmphasisPosition
 
-    type TextEmphasisStyleType =
+    type TextEmphasisStyle =
         | Filled
         | Open
         | Dot
@@ -87,7 +96,7 @@ module TextTypes =
         | OpenSesame
         interface ITextEmphasisStyle
 
-    type UnderlinePositionType =
+    type UnderlinePosition =
         | FromFont
         | Under
         | Left
@@ -97,8 +106,8 @@ module TextTypes =
         | Below
         interface ITextUnderlinePosition
 
-    type TextEmphasisColorType =
-        | Color of CSSColor
+    type TextEmphasisColor =
+        | TextEmphasisColor of CSSColor
         interface ITextEmphasisColor
 
     type Hyphens =
@@ -112,19 +121,35 @@ module Text =
     let private textAlignToString (alignment: ITextAlign) =
         let stringifyAlignment =
             function
-                | TextAlignType.Left -> "left"
-                | TextAlignType.Right -> "right"
-                | TextAlignType.Center -> "center"
-                | TextAlignType.Justify -> "justify"
-                | TextAlignType.JustifyAll -> "justify-all"
-                | TextAlignType.Start -> "start"
-                | TextAlignType.End -> "end"
-                | TextAlignType.MatchParent -> "match-parent"
+                | TextAlign.Left -> "left"
+                | TextAlign.Right -> "right"
+                | TextAlign.Center -> "center"
+                | TextAlign.Justify -> "justify"
+                | TextAlign.JustifyAll -> "justify-all"
+                | TextAlign.Start -> "start"
+                | TextAlign.End -> "end"
+                | TextAlign.MatchParent -> "match-parent"
 
         match alignment with
-        | :? TextAlignType as t -> stringifyAlignment t
+        | :? TextAlign as t -> stringifyAlignment t
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown text alignment"
+
+    let private textAlignLastToString (alignment: ITextAlignLast) =
+        let stringifyAlignment =
+            function
+                | TextAlignLast.Left -> "left"
+                | TextAlignLast.Right -> "right"
+                | TextAlignLast.Center -> "center"
+                | TextAlignLast.Justify -> "justify"
+                | TextAlignLast.Start -> "start"
+                | TextAlignLast.End -> "end"
+
+        match alignment with
+        | :? TextAlignLast as t -> stringifyAlignment t
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown text alignment last"
 
     let private decorationLineToString (decorationLine: ITextDecorationLine) =
         let stringifyLine =
@@ -135,7 +160,7 @@ module Text =
                 | Blink -> "blink"
 
         match decorationLine with
-        | :? TextDecorationLineType as t -> stringifyLine t
+        | :? TextDecorationLine as t -> stringifyLine t
         | :? Keywords as k -> GlobalValue.keywords k
         | :? None -> GlobalValue.none
         | _ -> "Unknown text decoration line"
@@ -144,7 +169,7 @@ module Text =
         let stringifyThickness = "from-font"
 
         match thickness with
-        | :? TextDecorationThicknessType -> stringifyThickness
+        | :? TextDecorationThickness -> stringifyThickness
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Auto -> GlobalValue.auto
         | :? Units.Size.Size as s -> Units.Size.value s
@@ -161,7 +186,7 @@ module Text =
                 | Wavy -> "wavy"
 
         match style with
-        | :? TextDecorationStyleType as t -> stringifyStyle t
+        | :? TextDecorationStyle as t -> stringifyStyle t
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown text decoration style"
 
@@ -176,7 +201,7 @@ module Text =
                 | TrailingSpaces -> "trailing-spaces"
 
         match skip with
-        | :? DecorationSkipType as t-> stringifySkip t
+        | :? DecorationSkip as t-> stringifySkip t
         | :? Keywords as k -> GlobalValue.keywords k
         | :? None -> GlobalValue.none
         | _ -> "Unknown text decoration skip"
@@ -185,7 +210,7 @@ module Text =
         let stringifySkipInk = "all"
 
         match skipInk with
-        | :? TextDecorationSkipInkType -> stringifySkipInk
+        | :? TextDecorationSkipInk -> stringifySkipInk
         | :? Keywords as k -> GlobalValue.keywords k
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
@@ -201,7 +226,7 @@ module Text =
                 | FullSizeKana  -> "full-size-kana"
 
         match transform with
-        | :? TextTransformType as t -> stringifyTransform t
+        | :? TextTransform as t -> stringifyTransform t
         | :? Keywords as k -> GlobalValue.keywords k
         | :? None -> GlobalValue.none
         | _ -> "Unknown text transform"
@@ -213,7 +238,7 @@ module Text =
                 | EachLine -> "each-line"
 
         match indent with
-        | :? TextIndentType as t -> stringifyIndent t
+        | :? TextIndent as t -> stringifyIndent t
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -233,20 +258,20 @@ module Text =
                 | _ -> "Should be a keyword"
 
         match shadow with
-            | :? TextShadowType as t -> stringifyTextShadow t
+            | :? TextShadow as t -> stringifyTextShadow t
             | :? Keywords as k -> GlobalValue.keywords k
             | _ -> "unknown text shadow"
 
     let private emphasisPositionToString (emphasisPosition: ITextEmphasisPosition) =
         let positionValue =
             function
-                | EmphasisPositionType.Over -> "over"
-                | EmphasisPositionType.Under -> "under"
-                | EmphasisPositionType.Right -> "right"
-                | EmphasisPositionType.Left -> "left"
+                | EmphasisPosition.Over -> "over"
+                | EmphasisPosition.Under -> "under"
+                | EmphasisPosition.Right -> "right"
+                | EmphasisPosition.Left -> "left"
 
         match emphasisPosition with
-        | :? EmphasisPositionType as e -> positionValue e
+        | :? EmphasisPosition as e -> positionValue e
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "unknown text emphasis position"
 
@@ -257,7 +282,7 @@ module Text =
                 | Ellipsis -> "ellipsis"
 
         match overflow with
-        | :? TextOverflowType as t -> stringifyTextOveTextOverflow t
+        | :? TextOverflow as t -> stringifyTextOveTextOverflow t
         | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
         | _ -> "Unknown text overflow"
 
@@ -274,7 +299,7 @@ module Text =
                 | OpenSesame -> "open sesame"
 
         match emphasisStyle with
-        | :? TextEmphasisStyleType as t -> stringifyStyle t
+        | :? TextEmphasisStyle as t -> stringifyStyle t
         | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
         | :? Keywords as k -> GlobalValue.keywords k
         | :? None -> GlobalValue.none
@@ -292,7 +317,7 @@ module Text =
                 | Below -> "below"
 
         match underlinePosition with
-        | :? UnderlinePositionType as t -> stringifyUnderlinePosition t
+        | :? UnderlinePosition as t -> stringifyUnderlinePosition t
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Auto -> GlobalValue.auto
         | _ -> "unknown text underline position"
@@ -333,6 +358,13 @@ module Text =
             | :? Keywords as k -> GlobalValue.keywords k
             | _ -> "unknown text decoration color"
 
+    let private tabSizeToString (tabSize: ITabSize) =
+        match tabSize with
+        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? CssInt as i -> GlobalValue.int i
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown tab size"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
     let private alignCssValue value = PropertyValue.cssValue Property.TextAlign value
     let private alignCssValue' value =
@@ -341,13 +373,13 @@ module Text =
         |> alignCssValue
     type TextAlign =
         static member Value (textAlign: ITextAlign) = textAlign |> alignCssValue'
-        static member Left = TextAlignType.Left |> alignCssValue'
-        static member Right = TextAlignType.Right |> alignCssValue'
-        static member Center = Center |> alignCssValue'
-        static member Justify = Justify |> alignCssValue'
+        static member Left = TextTypes.TextAlign.Left |> alignCssValue'
+        static member Right = TextTypes.TextAlign.Right |> alignCssValue'
+        static member Center = TextTypes.TextAlign.Center |> alignCssValue'
+        static member Justify = TextTypes.TextAlign.Justify |> alignCssValue'
         static member JustifyAll = JustifyAll |> alignCssValue'
-        static member Start = Start |> alignCssValue'
-        static member End = End |> alignCssValue'
+        static member Start = TextTypes.TextAlign.Start |> alignCssValue'
+        static member End = TextTypes.TextAlign.End |> alignCssValue'
         static member MatchParent = MatchParent |> alignCssValue'
 
         static member Inherit = Inherit |> alignCssValue'
@@ -355,6 +387,27 @@ module Text =
         static member Unset = Unset |> alignCssValue'
 
     let TextAlign' (align: ITextAlign) = TextAlign.Value(align)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
+    let private alignLastCssValue value = PropertyValue.cssValue Property.TextAlignLast value
+    let private alignLastCssValue' value =
+        value
+        |> textAlignLastToString
+        |> alignLastCssValue
+    type TextAlignLast =
+        static member Value (textAlign: ITextAlignLast) = textAlign |> alignLastCssValue'
+        static member Left = TextTypes.TextAlignLast.Left |> alignLastCssValue'
+        static member Right = TextTypes.TextAlignLast.Right |> alignLastCssValue'
+        static member Center = TextTypes.TextAlignLast.Center |> alignLastCssValue'
+        static member Justify = TextTypes.TextAlignLast.Justify |> alignLastCssValue'
+        static member Start = TextTypes.TextAlignLast.Start |> alignLastCssValue'
+        static member End = TextTypes.TextAlignLast.End |> alignLastCssValue'
+
+        static member Inherit = Inherit |> alignLastCssValue'
+        static member Initial = Initial |> alignLastCssValue'
+        static member Unset = Unset |> alignLastCssValue'
+
+    let TextAlignLast' (align: ITextAlignLast) = TextAlignLast.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
     let private lineCssValue value = PropertyValue.cssValue Property.TextDecorationLine value
@@ -388,7 +441,7 @@ module Text =
         |> thicknessValue
     type TextDecorationThickness =
         static member Value (thickness: ITextDecorationThickness) = thickness |> thicknessValue'
-        static member FromFont = TextDecorationThicknessType.FromFont |> thicknessValue'
+        static member FromFont = TextDecorationThickness.TextDecorationThickness |> thicknessValue'
 
         static member Auto = Auto |> thicknessValue'
         static member Inherit = Inherit |> thicknessValue'
@@ -455,7 +508,7 @@ module Text =
         |> skipInkValue
     type TextDecorationSkipInk =
         static member Value(skipInk: ITextDecorationSkipInk) = skipInk |> skipInkValue'
-        static member All = All |> skipInkValue'
+        static member All = TextTypes.TextDecorationSkipInk |> skipInkValue'
 
         static member Inherit = Inherit |> skipInkValue'
         static member Initial = Initial |> skipInkValue'
@@ -527,7 +580,7 @@ module Text =
             Shadow3(xOffset, yOffset, color) |> shadowValue'
         static member Value (xOffset: Units.Size.Size, yOffset: Units.Size.Size, blurRadius: Units.Size.Size, color: CSSColor) =
             Shadow4 (xOffset, yOffset, blurRadius, color) |> shadowValue'
-        static member Value (shadows: TextShadowType list) = shadowValues shadows
+        static member Value (shadows: ITextShadow list) = shadowValues shadows
         static member Inherit = Inherit |> shadowValue'
         static member Initial = Initial |> shadowValue'
         static member Unset = Unset |> shadowValue'
@@ -1008,3 +1061,15 @@ module Text =
         static member Unset = Unset |> emphasisColorValue'
 
     let TextEmphasisColor' (color: ITextEmphasisColor) = TextEmphasisColor.Value(color)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
+    let private tabSizeValue value = PropertyValue.cssValue Property.TabSize value
+    let private tabSizeValue' value = value |> tabSizeToString |> tabSizeValue
+
+    type TabSize =
+        static member Value (tabSize: ITabSize) = tabSize |> tabSizeValue'
+        static member Inherit = Inherit |> tabSizeValue'
+        static member Initial = Initial |> tabSizeValue'
+        static member Unset = Unset |> tabSizeValue'
+
+    let TabSize' tabSize = TabSize.Value tabSize

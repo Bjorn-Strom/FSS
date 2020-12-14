@@ -33,6 +33,7 @@ module Global =
     type ILetterSpacing        = interface end
 
     type ITextAlign               = interface end
+    type ITextAlignLast           = interface end
     type ITextDecorationLine      = interface end
     type ITextDecorationThickness = interface end
     type ITextDecorationStyle     = interface end
@@ -50,6 +51,7 @@ module Global =
     type IHyphens                 = interface end
     type ITextDecorationColor     = interface end
     type ITextEmphasisColor       = interface end
+    type ITabSize                 = interface end
 
     type IListStyleImage    = interface end
     type IListStylePosition = interface end
@@ -160,6 +162,7 @@ module Global =
         interface IFontWeight
         interface INthChild
         interface IColumnCount
+        interface ITabSize
 
     type CssFloat =
         | CssFloat of float
@@ -185,6 +188,7 @@ module Global =
         interface ITextDecorationSkipInk
         interface ITextUnderlinePosition
         interface ITextUnderlineOffset
+        interface ITextAlignLast
         interface IQuotes
         interface IHyphens
         interface IBackgroundSize
@@ -284,6 +288,7 @@ module Global =
         interface ILineBreak
         interface ILetterSpacing
         interface ITextAlign
+        interface ITextAlignLast
         interface ITextDecorationLine
         interface ITextDecorationThickness
         interface ITextDecorationStyle
@@ -376,6 +381,7 @@ module Global =
         interface ICaptionSide
         interface IEmptyCells
         interface ITableLayout
+        interface ITabSize
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

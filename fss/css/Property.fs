@@ -222,7 +222,7 @@ module Property =
         | TabSize
         | TableLayout
         | TextAlign
-        | TextAlignlast
+        | TextAlignLast
         | TextDecoration
         | TextDecorationColor
         | TextDecorationLine

@@ -54,6 +54,42 @@ module Text =
                     [ TextAlign.Unset ]
                     ["textAlign" ==> "unset"]
                 test
+                    "Text align last left"
+                    [ TextAlignLast.Left ]
+                    ["textAlignLast" ==> "left"]
+                test
+                    "Text align last right"
+                    [ TextAlignLast.Right ]
+                    ["textAlignLast" ==> "right"]
+                test
+                    "Text align last center"
+                    [ TextAlignLast.Center ]
+                    ["textAlignLast" ==> "center"]
+                test
+                    "Text align last justify"
+                    [ TextAlignLast.Justify ]
+                    ["textAlignLast" ==> "justify"]
+                test
+                    "Text align last start"
+                    [ TextAlignLast.Start ]
+                    ["textAlignLast" ==> "start"]
+                test
+                    "Text align last end"
+                    [ TextAlignLast.End ]
+                    ["textAlignLast" ==> "end"]
+                test
+                    "Text align last inherit"
+                    [ TextAlignLast.Inherit ]
+                    ["textAlignLast" ==> "inherit"]
+                test
+                    "Text align last initial"
+                    [ TextAlignLast.Initial ]
+                    ["textAlignLast" ==> "initial"]
+                test
+                    "Text align last unset"
+                    [ TextAlignLast.Unset ]
+                    ["textAlignLast" ==> "unset"]
+                test
                     "Text decoration color red"
                     [TextDecorationColor.red]
                     ["textDecorationColor" ==> "#ff0000"]
@@ -279,31 +315,31 @@ module Text =
                     ["textEmphasisColor" ==> "unset"]
                 test
                     "Text emphasis position over right"
-                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPositionType.Over, TextTypes.EmphasisPositionType.Right) ]
+                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPosition.Over, TextTypes.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "over right"]
                 test
                     "Text emphasis position over left"
-                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPositionType.Over, TextTypes.EmphasisPositionType.Left) ]
+                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPosition.Over, TextTypes.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "over left"]
                 test
                     "Text emphasis position under right"
-                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPositionType.Under, TextTypes.EmphasisPositionType.Right) ]
+                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPosition.Under, TextTypes.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "under right"]
                 test
                     "Text emphasis position under left"
-                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPositionType.Under, TextTypes.EmphasisPositionType.Left) ]
+                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPosition.Under, TextTypes.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "under left"]
                 test
                     "Text emphasis position left over"
-                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPositionType.Left, TextTypes.EmphasisPositionType.Over) ]
+                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPosition.Left, TextTypes.EmphasisPosition.Over) ]
                     ["textEmphasisPosition" ==> "left over"]
                 test
                     "Text emphasis position right under"
-                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPositionType.Right, TextTypes.EmphasisPositionType.Under) ]
+                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPosition.Right, TextTypes.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "right under"]
                 test
                     "Text emphasis position left under"
-                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPositionType.Left, TextTypes.EmphasisPositionType.Under) ]
+                    [ TextEmphasisPosition.Value (TextTypes.EmphasisPosition.Left, TextTypes.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "left under"]
                 test
                     "Text emphasis position inherit"
@@ -373,8 +409,8 @@ module Text =
                     "Text shadow multiple"
                     [ TextShadow.Value
                           [
-                            TextTypes.Shadow4(px 1, px 1, px 2, CSSColor.black)
-                            TextTypes.Shadow4(px 10, px -10, px 20, CSSColor.red)
+                            TextTypes.Shadow4(px 1, px 1, px 2, CSSColor.black) :> ITextShadow
+                            TextTypes.Shadow4(px 10, px -10, px 20, CSSColor.red) :> ITextShadow
                           ]
                     ]
                     ["textShadow" ==> "1px 1px 2px #000000, 10px -10px 20px #ff0000"]
@@ -448,11 +484,11 @@ module Text =
                     ["textUnderlinePosition" ==> "below"]
                 test
                     "Text underline positions under left"
-                    [ TextUnderlinePosition.Value (TextTypes.UnderlinePositionType.Under, TextTypes.UnderlinePositionType.Left) ]
+                    [ TextUnderlinePosition.Value (TextTypes.UnderlinePosition.Under, TextTypes.UnderlinePosition.Left) ]
                     ["textUnderlinePosition" ==> "under left"]
                 test
                     "Text underline positions right under"
-                    [ TextUnderlinePosition.Value (TextTypes.UnderlinePositionType.Right, TextTypes.UnderlinePositionType.Under) ]
+                    [ TextUnderlinePosition.Value (TextTypes.UnderlinePosition.Right, TextTypes.UnderlinePosition.Under) ]
                     ["textUnderlinePosition" ==> "right under"]
                 test
                     "Text underline position auto"
@@ -570,4 +606,28 @@ module Text =
                     "Hyphens unset"
                     [ Hyphens.Unset ]
                     ["hyphens" ==> "unset"]
+                test
+                    "TabSize px"
+                    [ TabSize' (px 10) ]
+                    ["tabSize" ==> "10px"]
+                test
+                    "TabSize em"
+                    [ TabSize' (em 2.) ]
+                    ["tabSize" ==> "2.0em"]
+                test
+                    "TabSize number"
+                    [ TabSize' (CssInt 4) ]
+                    ["tabSize" ==> "4"]
+                test
+                    "TabSize inherit"
+                    [ TabSize.Inherit ]
+                    ["tabSize" ==> "inherit"]
+                test
+                    "TabSize Initial"
+                    [ TabSize.Initial ]
+                    ["tabSize" ==> "initial"]
+                test
+                    "TabSize unset"
+                    [ TabSize.Unset ]
+                    ["tabSize" ==> "unset"]
             ]
