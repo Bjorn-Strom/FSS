@@ -241,6 +241,7 @@ module Property =
         | TextUnderlinePosition
         | TextSizeAdjust
         | TextOrientation
+        | TextRendering
         | Top
         | Transform
         | TransformOrigin

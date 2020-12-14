@@ -122,6 +122,12 @@ module TextTypes =
         | UseGlyphOrientation
         interface ITextOrientation
 
+    type TextRendering =
+        | OptimizeSpeed
+        | OptimizeLegibility
+        | GeometricPrecision
+        interface ITextRendering
+
 [<AutoOpen>]
 module Text =
     open TextTypes
@@ -395,6 +401,18 @@ module Text =
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown text orientation"
 
+    let private textRenderingToString (textRendering: ITextRendering) =
+        let stringifyRendering =
+            function
+                | OptimizeSpeed -> "optimize-speed"
+                | OptimizeLegibility -> "optimize-legibility"
+                | GeometricPrecision -> "geometric-precision"
+
+        match textRendering with
+        | :? TextRendering as t -> stringifyRendering t
+        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Auto -> GlobalValue.auto
+        | _ -> "Unknown text rendering"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
     let private alignCssValue value = PropertyValue.cssValue Property.TextAlign value
@@ -1135,3 +1153,19 @@ module Text =
         static member Unset = Unset |> textOrientationValue'
 
     let TextOrientation' orientation = TextOrientation.Value orientation
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
+    let private textRenderingValue value = PropertyValue.cssValue Property.TextRendering value
+    let private textRenderingValue' value = value |> textRenderingToString |> textRenderingValue
+
+    type TextRendering =
+        static member Value (rendering: ITextRendering) = rendering |> textRenderingValue'
+        static member OptimizeSpeed = OptimizeSpeed |> textRenderingValue'
+        static member OptimizeLegibility = OptimizeLegibility |> textRenderingValue'
+        static member GeometricPrecision = GeometricPrecision |> textRenderingValue'
+        static member Auto = Auto |> textRenderingValue'
+        static member Inherit = Inherit |> textRenderingValue'
+        static member Initial = Initial |> textRenderingValue'
+        static member Unset = Unset |> textRenderingValue'
+
+    let TextRendering' rendering = TextRendering.Value rendering

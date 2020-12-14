@@ -54,6 +54,7 @@ module Global =
     type ITextSizeAdjust          = interface end
     type ITabSize                 = interface end
     type ITextOrientation         = interface end
+    type ITextRendering           = interface end
 
     type IListStyleImage    = interface end
     type IListStylePosition = interface end
@@ -192,6 +193,7 @@ module Global =
         interface ITextUnderlineOffset
         interface ITextAlignLast
         interface ITextSizeAdjust
+        interface ITextRendering
         interface IQuotes
         interface IHyphens
         interface IBackgroundSize
@@ -306,6 +308,7 @@ module Global =
         interface ITextUnderlinePosition
         interface ITextUnderlineOffset
         interface ITextOrientation
+        interface ITextRendering
         interface IQuotes
         interface IHyphens
         interface ITextDecorationColor

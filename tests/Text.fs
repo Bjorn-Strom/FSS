@@ -686,4 +686,32 @@ module Text =
                     "TextOrientation unset"
                     [ TextOrientation.Unset ]
                     ["textOrientation" ==> "unset"]
+                test
+                    "TextRendering optimize speed"
+                    [ TextRendering.OptimizeSpeed ]
+                    ["textRendering" ==> "optimize-speed"]
+                test
+                    "TextRendering optimize legibility"
+                    [ TextRendering.OptimizeLegibility ]
+                    ["textRendering" ==> "optimize-legibility"]
+                test
+                    "TextRendering geometric precision"
+                    [ TextRendering.GeometricPrecision ]
+                    ["textRendering" ==> "geometric-precision"]
+                test
+                    "TextRendering auto"
+                    [ TextRendering.Auto ]
+                    ["textRendering" ==> "auto"]
+                test
+                    "TextRendering inherit"
+                    [ TextRendering.Inherit ]
+                    ["textRendering" ==> "inherit"]
+                test
+                    "TextRendering Initial"
+                    [ TextRendering.Initial ]
+                    ["textRendering" ==> "initial"]
+                test
+                    "TextRendering unset"
+                    [ TextRendering.Unset ]
+                    ["textRendering" ==> "unset"]
             ]
