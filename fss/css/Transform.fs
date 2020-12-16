@@ -1,7 +1,7 @@
 ﻿namespace Fss
 
 module TransformType =
-    type TransformType =
+    type Transform =
         | Matrix of float * float * float * float * float * float
         | Matrix3D of int * int * int * int * int * int * int * int * int * int * int * int * float * float * float * float
         | Perspective of Units.Size.Size
@@ -28,7 +28,7 @@ module TransformType =
         | SkewY of Units.Angle.Angle
         interface ITransform
 
-    type TransformOriginType =
+    type TransformOrigin =
         | Top
         | Left
         | Right
@@ -72,7 +72,7 @@ module Transform =
                | SkewY a -> sprintf "skewY(%s)" <| Units.Angle.value a
 
         match transform with
-        | :? TransformType as t -> stringifyTransform t
+        | :? Transform as t -> stringifyTransform t
         | :? None -> GlobalValue.none
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown transform"
@@ -87,7 +87,7 @@ module Transform =
                 | Center -> "center"
 
         match origin with
-        | :? TransformOriginType as t -> stringifyOrigin t
+        | :? TransformOrigin as t -> stringifyOrigin t
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Keywords as k -> GlobalValue.keywords k

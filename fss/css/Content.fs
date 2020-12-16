@@ -3,7 +3,7 @@
 open Fss
 
 module ContentType =
-    type ContentType =
+    type Content =
         | OpenQuote
         | CloseQuote
         | NoOpenQuote
@@ -23,7 +23,7 @@ module Content =
                 | NoCloseQuote -> "no-close-quote"
 
         match content with
-        | :? ContentType as c -> stringifyContent c
+        | :? Content as c -> stringifyContent c
         | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none

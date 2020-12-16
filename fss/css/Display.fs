@@ -1,7 +1,7 @@
 namespace Fss
 
 module DisplayType =
-    type DisplayType =
+    type Display =
         | Inline
         | InlineBlock
         | Block
@@ -46,7 +46,7 @@ module Display =
                 | TableCaption -> "table-caption"
 
         match display with
-        | :? DisplayType as t -> stringifyDisplay t
+        | :? Display as t -> stringifyDisplay t
         | :? None -> GlobalValue.none
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown display type"

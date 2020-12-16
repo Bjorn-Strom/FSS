@@ -4,20 +4,20 @@ open Fss.CSSColor
 open Fss.Image
 
 module BackgroundType =
-    type BackgroundClipType =
+    type BackgroundClip =
         | BorderBox
         | PaddingBox
         | ContentBox
         | Text
         interface IBackgroundClip
 
-    type BackgroundOriginType =
+    type BackgroundOrigin =
         | BorderBox
         | PaddingBox
         | ContentBox
         interface IBackgroundOrigin
 
-    type BackgroundRepeatType =
+    type BackgroundRepeat =
         | RepeatX
         | RepeatY
         | Repeat
@@ -26,18 +26,18 @@ module BackgroundType =
         | NoRepeat
         interface IBackgroundRepeat
 
-    type BackgroundSizeType =
+    type BackgroundSize =
         | Cover
         | Contain
         interface IBackgroundSize
 
-    type BackgroundAttachmentType =
+    type BackgroundAttachment =
         | Scroll
         | Fixed
         | Local
         interface IBackgroundAttachment
 
-    type BackgroundPositionType =
+    type BackgroundPosition =
         | Top
         | Bottom
         | Left
@@ -52,13 +52,13 @@ module Background =
     let private backgroundClipToString (clip: IBackgroundClip) =
         let stringifyClip =
             function
-                | BackgroundClipType.BorderBox -> "border-box"
-                | BackgroundClipType.PaddingBox -> "padding-box"
-                | BackgroundClipType.ContentBox -> "content-box"
-                | BackgroundClipType.Text -> "text"
+                | BackgroundClip.BorderBox -> "border-box"
+                | BackgroundClip.PaddingBox -> "padding-box"
+                | BackgroundClip.ContentBox -> "content-box"
+                | BackgroundClip.Text -> "text"
 
         match clip with
-        | :? BackgroundClipType as b -> stringifyClip b
+        | :? BackgroundClip as b -> stringifyClip b
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown background clip"
 
@@ -70,7 +70,7 @@ module Background =
                 | ContentBox -> "content-box"
 
         match clip with
-        | :? BackgroundOriginType as b -> stringifyOrigin b
+        | :? BackgroundOrigin as b -> stringifyOrigin b
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "unknown background origin"
 
@@ -85,7 +85,7 @@ module Background =
                 | NoRepeat -> "no-repeat"
 
         match repeat with
-        | :? BackgroundRepeatType as b -> stringifyRepeat b
+        | :? BackgroundRepeat as b -> stringifyRepeat b
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "unknown background repeat"
 
@@ -96,7 +96,7 @@ module Background =
                 | Contain -> "contain"
 
         match size with
-        | :? BackgroundSizeType as b -> stringifySize b
+        | :? BackgroundSize as b -> stringifySize b
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Keywords as k -> GlobalValue.keywords k
@@ -111,7 +111,7 @@ module Background =
                 | Local -> "local"
 
         match attachment with
-        | :? BackgroundAttachmentType as b -> stringifyAttachment b
+        | :? BackgroundAttachment as b -> stringifyAttachment b
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown background attachment"
 
@@ -125,7 +125,7 @@ module Background =
                 | Center -> "center"
 
         match position with
-        | :? BackgroundPositionType as b -> stringifyPosition b
+        | :? BackgroundPosition as b -> stringifyPosition b
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p

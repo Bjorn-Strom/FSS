@@ -3,13 +3,13 @@ namespace Fss
 open Fss.CSSColor
 
 module OutlineTypes =
-    type OutlineWidthType =
+    type OutlineWidth =
         | Thin
         | Medium
         | Thick
         interface IOutlineWidth
 
-    type OutlineStyleType =
+    type OutlineStyle =
         | Hidden
         | Dotted
         | Dashed
@@ -39,7 +39,7 @@ module Outline  =
                 | Thick -> "thick"
 
         match width with
-            | :? OutlineWidthType as c -> stringifyWidth c
+            | :? OutlineWidth as c -> stringifyWidth c
             | :? Keywords as k -> GlobalValue.keywords k
             | :? Units.Size.Size as s -> Units.Size.value s
             | _ -> "Unknown outline width"
@@ -58,7 +58,7 @@ module Outline  =
                 | Outset -> "outset"
 
         match style with
-            | :? OutlineStyleType as c -> stringifyStyle c
+            | :? OutlineStyle as c -> stringifyStyle c
             | :? Keywords as k -> GlobalValue.keywords k
             | :? None -> GlobalValue.none
             | _ -> "Unknown outline style"

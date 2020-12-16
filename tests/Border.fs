@@ -363,11 +363,11 @@ module Border =
                     [ "borderImageOutset" ==> "1.0rem" ]
                 test
                     "Border image outset value"
-                    [ BorderImageOutset' (BorderType.Value 1.5) ]
+                    [ BorderImageOutset' (BorderType.BorderImageOutset 1.5) ]
                     [ "borderImageOutset" ==> "1.5" ]
                 test
                     "Border image outset vertical horizontal"
-                    [ BorderImageOutset.Value(BorderType.Value 1., BorderType.Value 1.2) ]
+                    [ BorderImageOutset.Value(BorderType.BorderImageOutset 1., BorderType.BorderImageOutset 1.2) ]
                     [ "borderImageOutset" ==> "1 1.2" ]
                 test
                     "Border image outset top right bottom left"

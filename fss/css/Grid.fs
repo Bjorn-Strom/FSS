@@ -1,7 +1,7 @@
 ﻿namespace Fss
 
 module GridType =
-    type GridAutoFlowType =
+    type GridAutoFlow =
         | Row
         | Column
         | Dense
@@ -9,11 +9,11 @@ module GridType =
         | ColumnDense
         interface IGridAutoFlow
 
-    type GridTemplateColumnsType =
-        | Subgrid
+    type GridTemplateColumns =
+        | GridTemplateColumns
         interface IGridTemplateColumns
 
-    type GridPositionType =
+    type GridPosition =
         | Value of int
         | Ident of string
         | IdentValue of string * int
@@ -21,8 +21,8 @@ module GridType =
         | Span of string
         interface IGridPosition
 
-    type GridTemplateRowsType =
-        | Subgrid
+    type GridTemplateRows =
+        | GridTemplateRows
         interface IGridTemplateRows
 
 [<AutoOpen>]
@@ -40,29 +40,29 @@ module Grid =
         static member MinMax (min: ILengthPercentage, max: ILengthPercentage) =
             sprintf "minmax(%s, %s)" (Units.LengthPercentage.value min) (Units.LengthPercentage.value max)
             |> MinMaxGrid
-        static member MinMax (min: Units.Size.Size, max: ContentSizeType) =
+        static member MinMax (min: Units.Size.Size, max: ContentSize) =
             sprintf "minmax(%s, %s)" (Units.Size.value min) (contentSizeToString max)
             |> MinMaxGrid
-        static member MinMax (min: Units.Percent.Percent, max: ContentSizeType) =
+        static member MinMax (min: Units.Percent.Percent, max: ContentSize) =
             sprintf "minmax(%s, %s)" (Units.Percent.value min) (contentSizeToString max)
             |> MinMaxGrid
-        static member MinMax (min: ContentSizeType, max: Units.Size.Size) =
+        static member MinMax (min: ContentSize, max: Units.Size.Size) =
             sprintf "minmax(%s, %s)" (contentSizeToString min) (Units.Size.value max)
             |> MinMaxGrid
-        static member MinMax (min: ContentSizeType, max: ContentSizeType) =
+        static member MinMax (min: ContentSize, max: ContentSize) =
             sprintf "minmax(%s, %s)" (contentSizeToString min) (contentSizeToString max)
             |> MinMaxGrid
-        static member MinMax (min: ILengthPercentage, contentSize: ContentSizeType) =
+        static member MinMax (min: ILengthPercentage, contentSize: ContentSize) =
             sprintf "minmax(%s, %s)"
                 (Units.LengthPercentage.value min)
                 (contentSizeToString contentSize)
             |> MinMaxGrid
-        static member MinMax ( contentSize: ContentSizeType, min: ILengthPercentage) =
+        static member MinMax ( contentSize: ContentSize, min: ILengthPercentage) =
             sprintf "minmax(%s, %s)"
                 (contentSizeToString contentSize)
                 (Units.LengthPercentage.value min)
             |> MinMaxGrid
-        static member MinMax ( contentSize: ContentSizeType, min: Units.Fraction.Fraction) =
+        static member MinMax ( contentSize: ContentSize, min: Units.Fraction.Fraction) =
             sprintf "minmax(%s, %s)"
                 (contentSizeToString contentSize)
                 (Units.Fraction.value min)
@@ -89,10 +89,10 @@ module Grid =
         static member Repeat (value: int, length: ILengthPercentage) =
             sprintf "repeat(%d, %s)" value (Units.LengthPercentage.value length)
             |> GridRepeat
-        static member Repeat (value: int, contentSize: ContentSizeType) =
+        static member Repeat (value: int, contentSize: ContentSize) =
             sprintf "repeat(%d, %s)" value (contentSizeToString contentSize)
             |> GridRepeat
-        static member Repeat (value: int, contentSizes: ContentSizeType list) =
+        static member Repeat (value: int, contentSizes: ContentSize list) =
             sprintf "repeat(%d, %s)"
                 value
                 (Utilities.Helpers.combineWs contentSizeToString contentSizes)
@@ -108,7 +108,7 @@ module Grid =
         static member Repeat (value: RepeatType, length: ILengthPercentage) =
             sprintf "repeat(%s, %s)" (repeatValue value) (Units.LengthPercentage.value length)
             |> GridRepeat
-        static member Repeat (value: RepeatType, contentSize: ContentSizeType) =
+        static member Repeat (value: RepeatType, contentSize: ContentSize) =
             sprintf "repeat(%s, %s)" (repeatValue value) (contentSizeToString contentSize)
             |> GridRepeat
         static member Repeat (value: int, minMax: MinMax) =
@@ -137,7 +137,7 @@ module Grid =
                 | ColumnDense -> "column dense"
 
         match autoFlow with
-        | :? GridAutoFlowType as g -> stringifyFlow g
+        | :? GridAutoFlow as g -> stringifyFlow g
         | :? Keywords as k ->  GlobalValue.keywords k
         | _ -> "Unknown grid auto flow"
 
@@ -165,9 +165,9 @@ module Grid =
     let private templateColumnToString (templateColumn: IGridTemplateColumns) =
         let stringifyColumn =
             function
-                | GridTemplateColumnsType.Subgrid -> "subgrid"
+                | GridTemplateColumns.GridTemplateColumns -> "subgrid"
         match templateColumn with
-        | :? GridTemplateColumnsType as g -> stringifyColumn g
+        | :? GridTemplateColumns as g -> stringifyColumn g
         | :? Auto -> GlobalValue.auto
         | :? None -> GlobalValue.none
         | :? Keywords as k -> GlobalValue.keywords k
@@ -185,7 +185,7 @@ module Grid =
                 | Span s -> s
 
         match position with
-        | :? GridPositionType as g -> stringifyGridPosition g
+        | :? GridPosition as g -> stringifyGridPosition g
         | :? Auto -> GlobalValue.auto
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown grid position"
@@ -193,9 +193,9 @@ module Grid =
     let private templateRowToString (templateRow: IGridTemplateRows) =
         let stringifyRow =
             function
-                | Subgrid -> "subgrid"
+                | GridTemplateRows -> "subgrid"
         match templateRow with
-        | :? GridTemplateRowsType as g -> stringifyRow g
+        | :? GridTemplateRows as g -> stringifyRow g
         | :? Auto -> GlobalValue.auto
         | :? None -> GlobalValue.none
         | :? Keywords as k -> GlobalValue.keywords k
@@ -208,7 +208,7 @@ module Grid =
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
-        | :? ContentSizeType as c -> contentSizeToString c
+        | :? ContentSize as c -> contentSizeToString c
         | :? Auto -> GlobalValue.auto
         | :? Keywords as k -> GlobalValue.keywords k
         | :? MinMax as m -> minMaxToString m
@@ -230,7 +230,7 @@ module Grid =
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
-        | :? ContentSizeType as c -> contentSizeToString c
+        | :? ContentSize as c -> contentSizeToString c
         | :? Auto -> GlobalValue.auto
         | :? Keywords as k -> GlobalValue.keywords k
         | :? MinMax as m -> minMaxToString m
@@ -517,11 +517,11 @@ module Grid =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateRowValue
-        static member MinMax (min: ContentSizeType, max: Units.Size.Size) =
+        static member MinMax (min: ContentSize, max: Units.Size.Size) =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateRowValue
-        static member MinMax (min: ContentSizeType, max: ContentSizeType) =
+        static member MinMax (min: ContentSize, max: ContentSize) =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateRowValue
@@ -537,7 +537,7 @@ module Grid =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: int, contentSize: ContentSizeType) =
+        static member Repeat (value: int, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
@@ -549,11 +549,11 @@ module Grid =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: RepeatType, contentSize: ContentSizeType) =
+        static member Repeat (value: RepeatType, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
-        static member Subgrid = Subgrid |> templateRowValue'
+        static member Subgrid = GridType.GridTemplateRows |> templateRowValue'
         static member None = None |> templateRowValue'
         static member Auto = Auto |> templateRowValue'
         static member Inherit = Inherit |> templateRowValue'
@@ -586,11 +586,11 @@ module Grid =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateColumnValue
-        static member MinMax (min: ContentSizeType, max: Units.Size.Size) =
+        static member MinMax (min: ContentSize, max: Units.Size.Size) =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateColumnValue
-        static member MinMax (min: ContentSizeType, max: ContentSizeType) =
+        static member MinMax (min: ContentSize, max: ContentSize) =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateColumnValue
@@ -606,7 +606,7 @@ module Grid =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: int, contentSize: ContentSizeType) =
+        static member Repeat (value: int, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
@@ -618,11 +618,11 @@ module Grid =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: RepeatType, contentSize: ContentSizeType) =
+        static member Repeat (value: RepeatType, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
-        static member Subgrid = GridTemplateColumnsType.Subgrid |> templateColumnValue'
+        static member Subgrid = GridTemplateColumns.GridTemplateColumns |> templateColumnValue'
         static member None = None |> templateColumnValue'
         static member Auto = Auto |> templateColumnValue'
         static member Inherit = Inherit |> templateColumnValue'

@@ -10,7 +10,7 @@ open Fss
 // https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
 [<AutoOpen>]
 module ContentSize =
-    type ContentSizeType =
+    type ContentSize =
         | MaxContent
         | MinContent
         | FitContent of ILengthPercentage
@@ -26,7 +26,7 @@ module ContentSize =
                 | FitContent f -> sprintf "fit-content(%s)" (Units.LengthPercentage.value f)
 
         match contentSize with
-        | :? ContentSizeType as c -> stringifyContent c
+        | :? ContentSize as c -> stringifyContent c
         | :? Auto -> GlobalValue.auto
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown content size"

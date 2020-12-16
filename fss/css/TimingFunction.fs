@@ -1,7 +1,7 @@
 ﻿namespace Fss
 
 module TimingFunctionType =
-    type StepType =
+    type Step =
         | JumpStart
         | JumpEnd
         | JumpNone
@@ -9,7 +9,7 @@ module TimingFunctionType =
         | Start
         | End
 
-    let  stepsValue (value: StepType) =
+    let stepsValue (value: Step) =
         match value with
             | JumpStart -> "jump-start"
             | JumpEnd -> "jump-end"
@@ -18,7 +18,7 @@ module TimingFunctionType =
             | Start -> "start"
             | End -> "end"
 
-    type TimingType =
+    type Timing =
         | Ease
         | EaseIn
         | EaseOut
@@ -28,8 +28,9 @@ module TimingFunctionType =
         | StepEnd
         | CubicBezier of float * float * float * float
         | Steps of int
-        | StepsWithTerm of int * StepType
+        | StepsWithTerm of int * Step
         interface ITransitionTimingFunction
+
     let timingToString (timing: ITransitionTimingFunction) =
         let timingToString =
             function
@@ -45,8 +46,8 @@ module TimingFunctionType =
                 | StepsWithTerm (n, term) -> sprintf "steps(%d, %s)" n (stepsValue term)
 
         match timing with
-        | :? TimingType as t -> timingToString t
-        | :? Keywords   as k -> GlobalValue.keywords k
+        | :? Timing as t -> timingToString t
+        | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown timing function"
 
 [<AutoOpen>]
@@ -64,7 +65,7 @@ module TimingFunction =
         static member StepEnd = StepEnd |> timingToString
         static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = CubicBezier(p1,p2,p3,p4) |> timingToString
         static member Step (steps: int) = Steps(steps) |> timingToString
-        static member Step (steps: int, jumpTerm: StepType) = StepsWithTerm(steps, jumpTerm) |> timingToString
+        static member Step (steps: int, jumpTerm: Step) = StepsWithTerm(steps, jumpTerm) |> timingToString
         static member Inherit = Inherit |> timingToString
         static member Initial = Initial |> timingToString
         static member Unset =  Unset |> timingToString

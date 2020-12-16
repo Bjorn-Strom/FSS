@@ -8,17 +8,17 @@ open Fable.React.Props
 open Fss
 
 type Model = {
-    FlexDirection: FlexType.FlexDirectionType
-    FlexWrap: FlexType.FlexWrapType
-    AlignContent: FlexType.AlignContentType
-    BackgroundRepeat: BackgroundType.BackgroundRepeatType
-    BRepeat: BorderType.BorderImageRepeatType * BorderType.BorderImageRepeatType option }
+    FlexDirection: FlexType.FlexDirection
+    FlexWrap: FlexType.FlexWrap
+    AlignContent: FlexType.AlignContent
+    BackgroundRepeat: BackgroundType.BackgroundRepeat
+    BRepeat: BorderType.BorderImageRepeat * BorderType.BorderImageRepeat option }
 type Msg =
-    | SetFlexDirection of FlexType.FlexDirectionType
-    | SetFlexWrap of FlexType.FlexWrapType
-    | SetAlignContent of FlexType.AlignContentType
-    | SetBackgroundRepeat of BackgroundType.BackgroundRepeatType
-    | SetBorderImagerRepeat of BorderType.BorderImageRepeatType * BorderType.BorderImageRepeatType option
+    | SetFlexDirection of FlexType.FlexDirection
+    | SetFlexWrap of FlexType.FlexWrap
+    | SetAlignContent of FlexType.AlignContent
+    | SetBackgroundRepeat of BackgroundType.BackgroundRepeat
+    | SetBorderImagerRepeat of BorderType.BorderImageRepeat * BorderType.BorderImageRepeat option
 
 let init() = {
     FlexDirection = FlexType.Row
@@ -716,7 +716,7 @@ let BorderExamples (model: Model) dispatch =
                     BorderWidth' (px 40)
                     BorderStyle.Solid
                     BorderImageSource.Url "https://mdn.mozillademos.org/files/4127/border.png"
-                    BorderImageSlice' (BorderType.BorderImageSliceType.Value 27.)
+                    BorderImageSlice' (BorderType.BorderImageSlice.Value 27.)
 
                     let (first, optional) = model.BRepeat
 
@@ -1355,7 +1355,7 @@ let AnimationExamples () =
                 AnimationName.Names [ bounceFrames; sizeFrames ]
                 AnimationDuration.Values [ sec 1.0; sec 3.0 ]
                 AnimationTimingFunction.Values [ TimingFunctionType.EaseInOut; TimingFunctionType.Ease ]
-                AnimationIterationCount.Values [ CssInt 3; AnimationType.Infinite ]
+                AnimationIterationCount.Values [ CssInt 3; AnimationType.IterationCount ]
             ]
 
     let spinnyMation =
@@ -2426,14 +2426,14 @@ let ListStyleExamples () =
                 fss
                     [
                         ListStylePosition.Inside
-                        ListStyleType.Square
+                        ListStyleTypeType.Square
                     ]
 
             let outside =
                 fss
                     [
                         ListStylePosition.Outside
-                        ListStyleType.Circle
+                        ListStyleTypeType.Circle
                     ]
 
             let insideImage =

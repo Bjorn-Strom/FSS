@@ -3,29 +3,29 @@ namespace Fss
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
 module AnimationType =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
-    type AnimationDirectionType =
+    type AnimationDirection =
         | Reverse
         | Alternate
         | AlternateReverse
         interface IAnimationDirection
-    type AnimationFillModeType =
+    type AnimationFillMode =
         | Forwards
         | Backwards
         | Both
         interface IAnimationFillMode
 
-    type IterationCountType =
-        | Infinite
+    type IterationCount =
+        | IterationCount
         interface IAnimationIterationCount
 
-    type AnimationPlayStateType =
+    type AnimationPlayState =
         | Running
         | Paused
         interface IAnimationPlayState
 
     let iterationCountToString (iterationCount: IAnimationIterationCount) =
         match iterationCount with
-        | :? IterationCountType as i -> "infinite"
+        | :? IterationCount as i -> "infinite"
         | :? Global.CssInt as i -> GlobalValue.int i
         | _ -> "Unknown animation iteration count"
 
@@ -41,7 +41,7 @@ module Animation =
                 | AlternateReverse -> "alternate-reverse"
 
         match direction with
-            | :? AnimationDirectionType as d -> stringifyAnimationDirection d
+            | :? AnimationDirection as d -> stringifyAnimationDirection d
             | :? Keywords as k -> GlobalValue.keywords k
             | :? Normal -> GlobalValue.normal
             | _ -> "Unknown animation direction"
@@ -54,7 +54,7 @@ module Animation =
                 | Both -> "both"
 
         match fillMode with
-            | :? AnimationFillModeType as a -> stringifyFillMode a
+            | :? AnimationFillMode as a -> stringifyFillMode a
             | :? None -> GlobalValue.none
             | _ -> "Unknown fill mode"
 
@@ -65,7 +65,7 @@ module Animation =
                 | Paused -> "paused"
 
         match playState with
-        | :? AnimationPlayStateType as a -> stringifyPlayState a
+        | :? AnimationPlayState as a -> stringifyPlayState a
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown animation play state"
 
@@ -132,7 +132,7 @@ module Animation =
             values
             |> Utilities.Helpers.combineComma iterationCountToString
             |> iterationCountCssValue
-        static member Infinite = Infinite |> iterationCountToString |> iterationCountCssValue
+        static member Infinite = IterationCount |> iterationCountToString |> iterationCountCssValue
 
     let AnimationIterationCount' (iterationCount: IAnimationIterationCount) = AnimationIterationCount.Value iterationCount
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
@@ -182,8 +182,8 @@ module Animation =
         |> TimingFunctionType.timingToString
         |> timingFunctionCssValue
     type AnimationTimingFunction =
-        static member Value (timingFunction: TimingFunctionType.TimingType) = timingFunction |> TimingFunctionType.timingToString
-        static member Values (timings: TimingFunctionType.TimingType list) = timingFunctionCssValue <| Utilities.Helpers.combineComma TimingFunctionType.timingToString timings
+        static member Value (timingFunction: TimingFunctionType.Timing) = timingFunction |> TimingFunctionType.timingToString
+        static member Values (timings: TimingFunctionType.Timing list) = timingFunctionCssValue <| Utilities.Helpers.combineComma TimingFunctionType.timingToString timings
         static member Ease = TimingFunction.TimingFunction.Ease |> timingFunctionCssValue
         static member EaseIn = TimingFunction.TimingFunction.EaseIn |> timingFunctionCssValue
         static member EaseOut = TimingFunction.TimingFunction.EaseOut |> timingFunctionCssValue
@@ -194,10 +194,10 @@ module Animation =
         static member CubicBezier (p1: float, p2:float, p3:float, p4:float) =
             TimingFunction.TimingFunction.CubicBezier(p1,p2,p3,p4) |> timingFunctionCssValue
         static member Step (steps: int) = TimingFunction.TimingFunction.Step(steps) |> timingFunctionCssValue
-        static member Step (steps: int, jumpTerm: TimingFunctionType.StepType) =
+        static member Step (steps: int, jumpTerm: TimingFunctionType.Step) =
             TimingFunction.TimingFunction.Step(steps, jumpTerm) |> timingFunctionCssValue
         static member Inherit = Inherit |> timingFunctionCssValue'
         static member Initial = Initial |> timingFunctionCssValue'
         static member Unset = Unset |> timingFunctionCssValue'
 
-    let AnimationTimingFunction' (timing: TimingFunctionType.TimingType) = AnimationTimingFunction.Value(timing)
+    let AnimationTimingFunction' (timing: TimingFunctionType.Timing) = AnimationTimingFunction.Value(timing)

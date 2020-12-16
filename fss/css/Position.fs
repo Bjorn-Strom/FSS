@@ -1,14 +1,14 @@
 namespace Fss
 
 module PositionType =
-    type PositionType =
+    type Position =
         | Static
         | Relative
         | Absolute
         | Sticky
         | Fixed
 
-    type VerticalAlignType =
+    type VerticalAlign =
         | Baseline
         | Sub
         | Super
@@ -19,14 +19,14 @@ module PositionType =
         | Bottom
         interface IVerticalAlign
 
-    type FloatType =
+    type Float =
         | Left
         | Right
         | InlineStart
         | InlineEnd
         interface IFloat
 
-    type BoxSizingType =
+    type BoxSizing =
         | ContentBox
         | BorderBox
 
@@ -68,7 +68,7 @@ module Position =
                 | Bottom -> "bottom"
 
         match alignment with
-        | :? VerticalAlignType as v -> stringifyAlignment v
+        | :? VerticalAlign as v -> stringifyAlignment v
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -83,7 +83,7 @@ module Position =
                 | InlineEnd -> "inline-end"
 
         match float with
-        | :? FloatType as v -> stringifyFloat v
+        | :? Float as v -> stringifyFloat v
         | :? Keywords as k -> GlobalValue.keywords k
         | :? None -> GlobalValue.none
         | _ -> "Unknown float"
@@ -111,14 +111,14 @@ module Position =
         |> positionValue
 
     type Position =
-        static member Value(position: PositionType) = position |> positionValue
+        static member Value(position: Position) = position |> positionValue
         static member Static = Static |> positionValue'
         static member Relative = Relative |> positionValue'
         static member Absolute = Absolute |> positionValue'
         static member Sticky = Sticky |> positionValue'
         static member Fixed = Fixed |> positionValue'
 
-    let Position' (position: PositionType) = Position.Value(position)
+    let Position' (position: Position) = Position.Value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/top
     let private topValue value = PropertyValue.cssValue Property.Top value
@@ -202,8 +202,8 @@ module Position =
         static member TextTop = TextTop |> verticalAlignValue'
         static member TextBottom = TextBottom |> verticalAlignValue'
         static member Middle = Middle |> verticalAlignValue'
-        static member Top = VerticalAlignType.Top |> verticalAlignValue'
-        static member Bottom = VerticalAlignType.Bottom |> verticalAlignValue'
+        static member Top = PositionType.VerticalAlign.Top |> verticalAlignValue'
+        static member Bottom = PositionType.VerticalAlign.Bottom |> verticalAlignValue'
 
         static member Inherit = Inherit |> verticalAlignValue'
         static member Initial = Initial |> verticalAlignValue'
@@ -220,8 +220,8 @@ module Position =
 
     type Float =
         static member Value (float: IFloat) = float |> floatValue'
-        static member Left = FloatType.Left |> floatValue'
-        static member Right = FloatType.Right |> floatValue'
+        static member Left = PositionType.Float.Left |> floatValue'
+        static member Right = PositionType.Float.Right |> floatValue'
         static member InlineStart = InlineStart |> floatValue'
         static member InlineEnd = InlineEnd |> floatValue'
 
@@ -239,11 +239,11 @@ module Position =
         |> boxSizingToString
         |> boxSizingValue
     type BoxSizing =
-        static member Value (boxSizing: BoxSizingType) = boxSizing |> boxSizingValue'
+        static member Value (boxSizing: PositionType.BoxSizing) = boxSizing |> boxSizingValue'
         static member ContentBox = ContentBox |> boxSizingValue'
         static member BorderBox = BorderBox |> boxSizingValue'
 
-    let BoxSizing' (sizing: BoxSizingType) = BoxSizing.Value(sizing)
+    let BoxSizing' (sizing: PositionType.BoxSizing) = BoxSizing.Value(sizing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
     let private directionValue value = PropertyValue.cssValue Property.Direction value

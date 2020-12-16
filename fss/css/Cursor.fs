@@ -1,7 +1,7 @@
 ﻿namespace Fss
 
 module CursorTypes =
-    type CursorType =
+    type Cursor =
         | Default
         | ContextMenu
         | Help
@@ -73,7 +73,7 @@ module Cursor =
                 | NwseResize -> "nwse-resize"
 
         match cursor with
-        | :? CursorType as c -> stringifyCursor c
+        | :? Cursor as c -> stringifyCursor c
         | :? Auto -> GlobalValue.auto
         | :? None -> GlobalValue.none
         | :? Keywords as k -> GlobalValue.keywords k

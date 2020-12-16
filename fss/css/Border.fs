@@ -3,13 +3,13 @@ namespace Fss
 open Fss
 
 module BorderType =
-    type BorderWidthType =
+    type BorderWidth =
         | Thin
         | Medium
         | Thick
         interface IBorderWidth
 
-    type BorderStyleType =
+    type BorderStyle =
         | Hidden
         | Dotted
         | Dashed
@@ -21,23 +21,23 @@ module BorderType =
         | Outset
         interface IBorderStyle
 
-    type BorderCollapseType =
+    type BorderCollapse =
         | Collapse
         | Separate
         interface IBorderCollapse
 
-    type BorderImageOutsetType =
-        | Value of float
+    type BorderImageOutset =
+        | BorderImageOutset of float
         interface IBorderImageOutset
 
-    type BorderImageRepeatType =
+    type BorderImageRepeat =
         | Stretch
         | Repeat
         | Round
         | Space
         interface IBorderRepeat
 
-    type BorderImageSliceType =
+    type BorderImageSlice =
         | Value of float
         | Fill
         interface IBorderImageSlice
@@ -61,7 +61,7 @@ module Border =
                 | Thick -> "thick"
 
         match width with
-            | :? BorderWidthType as b -> stringifyWidth b
+            | :? BorderWidth as b -> stringifyWidth b
             | :? Units.Size.Size as s -> Units.Size.value s
             | :? Keywords as k -> GlobalValue.keywords k
             | _ -> "unknown border width"
@@ -80,7 +80,7 @@ module Border =
                 | Outset -> "outset"
 
         match style with
-        | :? BorderStyleType as b -> stringifyStyle b
+        | :? BorderStyle as b -> stringifyStyle b
         | :? None -> GlobalValue.none
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown border style"
@@ -92,16 +92,16 @@ module Border =
                 | Separate -> "separate"
 
         match collapse with
-        | :? BorderCollapseType as c -> stringifyCollapse c
+        | :? BorderCollapse as c -> stringifyCollapse c
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "unknown border collapse"
     let private imageOutsetToString (imageOutset: IBorderImageOutset) =
-        let stringifyOutset (BorderImageOutsetType.Value v) = string v
+        let stringifyOutset (BorderImageOutset.BorderImageOutset v) = string v
 
         match imageOutset with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? BorderImageOutsetType as i -> stringifyOutset i
+        | :? BorderImageOutset as i -> stringifyOutset i
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "unknown border image outset"
 
@@ -114,17 +114,17 @@ module Border =
                 | Space -> "space"
 
         match repeat with
-        | :? BorderImageRepeatType as b -> stringifyRepeat b
+        | :? BorderImageRepeat as b -> stringifyRepeat b
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "unknown border repeat"
     let private imageSliceToString (imageSlice: IBorderImageSlice) =
         let stringifySlice =
             function
-                | BorderImageSliceType.Value i -> string i
-                | BorderImageSliceType.Fill -> "fill"
+                | BorderImageSlice.Value i -> string i
+                | BorderImageSlice.Fill -> "fill"
 
         match imageSlice with
-        | :? BorderImageSliceType as i -> stringifySlice i
+        | :? BorderImageSlice as i -> stringifySlice i
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Keywords as k -> GlobalValue.keywords k

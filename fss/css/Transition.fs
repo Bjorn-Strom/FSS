@@ -79,7 +79,7 @@ module Transition =
         static member StepEnd = TimingFunction.TimingFunction.StepEnd |> transitionTimingFunction
         static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = TimingFunction.CubicBezier(p1,p2,p3,p4) |> transitionTimingFunction
         static member Step (steps: int) = TimingFunction.Step(steps) |> transitionTimingFunction
-        static member Step (steps: int, jumpTerm: TimingFunctionType.StepType) = TimingFunction.Step(steps, jumpTerm) |> transitionTimingFunction
+        static member Step (steps: int, jumpTerm: TimingFunctionType.Step) = TimingFunction.Step(steps, jumpTerm) |> transitionTimingFunction
 
         static member Inherit = Inherit |> transitionTimingFunction'
         static member Initial = Initial |> transitionTimingFunction'

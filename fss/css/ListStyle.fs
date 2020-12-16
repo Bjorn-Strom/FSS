@@ -1,16 +1,16 @@
 ﻿namespace Fss
 
 module ListStyleTypeType =
-    type ListStyleImageType =
-        | Url of string
+    type ListStyleImage =
+        | ListStyleImage of string
         interface IListStyleImage
 
-    type ListStylePositionType =
+    type ListStylePosition =
         | Inside
         | Outside
         interface IListStylePosition
 
-    type ListStyleTypeType =
+    type ListStyleType =
         | Disc
         | Circle
         | Square
@@ -128,7 +128,7 @@ module ListStyleTypeType =
                 | DisclosureClosed -> "disclosure-closed"
 
         match styleType with
-        | :? ListStyleTypeType as l -> stringifyStyle l
+        | :? ListStyleType as l -> stringifyStyle l
         | :? CounterStyle as c -> counterValue c
         | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
         | :? Keywords as k -> GlobalValue.keywords k
@@ -141,10 +141,10 @@ module ListStyle =
     let private listStyleImageToString (image: IListStyleImage) =
         let stringifyImage =
             function
-                | Url u -> sprintf "url('%s')" u
+                | ListStyleImage u -> sprintf "url('%s')" u
 
         match image with
-        | :? ListStyleImageType as l -> stringifyImage l
+        | :? ListStyleImage as l -> stringifyImage l
         | :? Keywords as k -> GlobalValue.keywords k
         | :? None -> GlobalValue.none
         | _ -> "unknown list style image"
@@ -156,7 +156,7 @@ module ListStyle =
                 | Outside -> "outside"
 
         match stylePosition with
-        | :? ListStylePositionType as l -> stringifyListStyle l
+        | :? ListStylePosition as l -> stringifyListStyle l
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown list style position"
 
@@ -169,7 +169,7 @@ module ListStyle =
 
     type ListStyleImage =
         static member Value (styleImage: IListStyleImage) = styleImage |> listStyleImageValue'
-        static member Url (url: string) = Url url |> listStyleImageValue'
+        static member Url (url: string) = ListStyleTypeType.ListStyleImage url |> listStyleImageValue'
 
         static member None = None |> listStyleImageValue'
         static member Inherit = Inherit |> listStyleImageValue'

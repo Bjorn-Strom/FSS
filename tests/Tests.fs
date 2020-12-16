@@ -36,3 +36,4 @@ module Tests =
             ]
 
     Mocha.runTests tests |> ignore
+

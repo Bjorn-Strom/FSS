@@ -1,7 +1,7 @@
 namespace Fss
 
 module FontTypes =
-    type FontSizeType =
+    type FontSize =
         | XxSmall
         | XSmall
         | Small
@@ -14,12 +14,12 @@ module FontTypes =
         | Larger
         interface IFontSize
 
-    type FontStyleType =
+    type FontStyle =
         | Italic
         | Oblique of Units.Angle.Angle
         interface IFontStyle
 
-    type FontStretchType =
+    type FontStretch =
         | SemiCondensed
         | Condensed
         | ExtraCondensed
@@ -30,13 +30,13 @@ module FontTypes =
         | UltraExpanded
         interface IFontStretch
 
-    type FontWeightType =
+    type FontWeight =
          | Bold
          | Lighter
          | Bolder
          interface IFontWeight
 
-    type FontDisplayType =
+    type FontDisplay =
         | Block
         | Swap
         | Fallback
@@ -47,7 +47,7 @@ module FontTypes =
         | On
         | Off
 
-    type FontFeatureSettingType =
+    type FontFeatureSetting =
         | Liga of SettingSwitch
         | Dlig of SettingSwitch
         | Onum of SettingSwitch
@@ -76,7 +76,7 @@ module FontTypes =
         | Mkmk of SettingSwitch
         interface IFontFeatureSetting
 
-    type FontVariantNumericType =
+    type FontVariantNumeric =
         | Ordinal
         | SlashedZero
         | LiningNums
@@ -87,7 +87,7 @@ module FontTypes =
         | StackedFractions
         interface IFontVariantNumeric
 
-    type FontVariantCapsType =
+    type FontVariantCaps =
         | SmallCaps
         | AllSmallCaps
         | PetiteCaps
@@ -96,7 +96,7 @@ module FontTypes =
         | TitlingCaps
         interface IFontVariantCaps
 
-    type FontVariantEastAsianType =
+    type FontVariantEastAsian =
         | Ruby
         | Jis78
         | Jis83
@@ -108,7 +108,7 @@ module FontTypes =
         | ProportionalWidth
         interface IFontVariantEastAsian
 
-    type FontVariantLigatureType =
+    type FontVariantLigature =
         | CommonLigatures
         | NoCommonLigatures
         | DiscretionaryLigatures
@@ -121,7 +121,7 @@ module FontTypes =
 
     type FontName = FontName of string
 
-    type FontFamilyType =
+    type FontFamily =
         | Serif
         | SansSerif
         | Monospace
@@ -143,7 +143,7 @@ module FontTypes =
                 | Oblique a -> sprintf "oblique %s" (Units.Angle.value a)
 
         match style with
-            | :? FontStyleType as f -> stringifyFontStyle f
+            | :? FontStyle as f -> stringifyFontStyle f
             | :? Keywords as k -> GlobalValue.keywords k
             | :? Normal -> GlobalValue.normal
             | _ -> "Unknown font style"
@@ -161,7 +161,7 @@ module FontTypes =
                 | UltraExpanded -> "ultra-expanded"
 
         match stretch with
-            | :? FontStretchType as f -> stringifyStretch f
+            | :? FontStretch as f -> stringifyStretch f
             | :? Keywords as k -> GlobalValue.keywords k
             | :? Normal -> GlobalValue.normal
             | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -176,7 +176,7 @@ module FontTypes =
 
          match fontWeight with
             | :? CssInt as i -> GlobalValue.int i
-            | :? FontWeightType as f -> stringifyWeight f
+            | :? FontWeight as f -> stringifyWeight f
             | :? Keywords as k -> GlobalValue.keywords k
             | :? Normal -> GlobalValue.normal
             | _ -> "Unknown font weight"
@@ -190,7 +190,7 @@ module FontTypes =
                 | Optional -> "optional"
 
         match display with
-        | :? FontDisplayType as f -> stringifyDisplay f
+        | :? FontDisplay as f -> stringifyDisplay f
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown font display value"
 
@@ -213,7 +213,7 @@ module Font =
                 | Larger -> "larger"
 
         match fontSize with
-        | :? FontSizeType as f -> stringifyFontSize f
+        | :? FontSize as f -> stringifyFontSize f
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Keywords as k -> GlobalValue.keywords k
@@ -231,7 +231,7 @@ module Font =
                 | FontName n -> stringifyFontName n
 
         match fontFamily with
-            | :? FontFamilyType as f -> stringifyFamily f
+            | :? FontFamily as f -> stringifyFamily f
             | :? Keywords as k -> GlobalValue.keywords k
             | _ -> "Unknown font family"
 
@@ -266,7 +266,7 @@ module Font =
                 | Mkmk switch    -> sprintf "\"mkmk\" %A" switch
 
         match featureSetting with
-        | :? FontFeatureSettingType as f -> stringifyFeature f
+        | :? FontFeatureSetting as f -> stringifyFeature f
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "unknown font feature setting"
 
@@ -283,7 +283,7 @@ module Font =
                 | StackedFractions -> "stacked-fractions"
 
         match variant with
-        | :? FontVariantNumericType as f -> stringifyVariant f
+        | :? FontVariantNumeric as f -> stringifyVariant f
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
@@ -299,7 +299,7 @@ module Font =
                 | TitlingCaps -> "titling-caps"
 
         match variant with
-        | :? FontVariantCapsType as f -> stringifyVariant f
+        | :? FontVariantCaps as f -> stringifyVariant f
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
@@ -318,7 +318,7 @@ module Font =
             | ProportionalWidth -> "proportional-width"
 
         match variant with
-        | :? FontVariantEastAsianType as f -> stringifyVariant f
+        | :? FontVariantEastAsian as f -> stringifyVariant f
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
@@ -336,7 +336,7 @@ module Font =
             | NoContextual -> "no-contextual"
 
         match variant with
-        | :? FontVariantLigatureType as f -> stringifyVariant f
+        | :? FontVariantLigature as f -> stringifyVariant f
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none
