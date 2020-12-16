@@ -409,8 +409,8 @@ module Text =
                     "Text shadow multiple"
                     [ TextShadow.Value
                           [
-                            TextTypes.Shadow4(px 1, px 1, px 2, CSSColor.black) :> ITextShadow
-                            TextTypes.Shadow4(px 10, px -10, px 20, CSSColor.red) :> ITextShadow
+                            TextTypes.Shadow4(px 1, px 1, px 2, CSSColor.black)
+                            TextTypes.Shadow4(px 10, px -10, px 20, CSSColor.red)
                           ]
                     ]
                     ["textShadow" ==> "1px 1px 2px #000000, 10px -10px 20px #ff0000"]
@@ -730,4 +730,40 @@ module Text =
                     "TextJustify none"
                     [ TextJustify.None ]
                     ["textJustify" ==> "none"]
+                test
+                    "Whitespace nowrap"
+                    [ Whitespace.NoWrap ]
+                    ["whiteSpace" ==> "no-wrap"]
+                test
+                    "Whitespace pre"
+                    [ Whitespace.Pre ]
+                    ["whiteSpace" ==> "pre"]
+                test
+                    "Whitespace pre-wrap"
+                    [ Whitespace.PreWrap ]
+                    ["whiteSpace" ==> "pre-wrap"]
+                test
+                    "Whitespace pre-line"
+                    [ Whitespace.PreLine ]
+                    ["whiteSpace" ==> "pre-line"]
+                test
+                    "Whitespace break-spaces"
+                    [ Whitespace.BreakSpaces ]
+                    ["whiteSpace" ==> "break-spaces"]
+                test
+                    "Whitespace normal"
+                    [ Whitespace.Normal ]
+                    ["whiteSpace" ==> "normal"]
+                test
+                    "Whitespace inherit"
+                    [ Whitespace.Inherit ]
+                    ["whiteSpace" ==> "inherit"]
+                test
+                    "Whitespace Initial"
+                    [ Whitespace.Initial ]
+                    ["whiteSpace" ==> "initial"]
+                test
+                    "Whitespace unset"
+                    [ Whitespace.Unset ]
+                    ["whiteSpace" ==> "unset"]
             ]

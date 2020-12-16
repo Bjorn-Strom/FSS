@@ -56,6 +56,7 @@ module Global =
     type ITextOrientation         = interface end
     type ITextRendering           = interface end
     type ITextJustify             = interface end
+    type IWhiteSpace              = interface end
 
     type IListStyleImage    = interface end
     type IListStylePosition = interface end
@@ -274,6 +275,7 @@ module Global =
         interface IWordBreak
         interface IOverflowWrap
         interface IPaintOrder
+        interface IWhiteSpace
 
     type Keywords =
         | Inherit
@@ -394,6 +396,7 @@ module Global =
         interface IEmptyCells
         interface ITableLayout
         interface ITabSize
+        interface IWhiteSpace
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

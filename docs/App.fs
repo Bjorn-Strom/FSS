@@ -2426,14 +2426,14 @@ let ListStyleExamples () =
                 fss
                     [
                         ListStylePosition.Inside
-                        ListStyleTypeType.Square
+                        ListStyleType.Square
                     ]
 
             let outside =
                 fss
                     [
                         ListStylePosition.Outside
-                        ListStyleTypeType.Circle
+                        ListStyleType.Circle
                     ]
 
             let insideImage =

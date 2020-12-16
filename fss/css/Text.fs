@@ -133,6 +133,15 @@ module TextTypes =
         | InterCharacter
         interface ITextJustify
 
+    type WhiteSpace =
+        | NoWrap
+        | Pre
+        | PreWrap
+        | PreLine
+        | BreakSpaces
+        interface IWhiteSpace
+
+
 [<AutoOpen>]
 module Text =
     open TextTypes
@@ -431,6 +440,21 @@ module Text =
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown text justification"
 
+    let private whitespaceToString (whitespace: IWhiteSpace) =
+        let stringifyWhitespace =
+            function
+                | NoWrap -> "no-wrap"
+                | Pre -> "pre"
+                | PreWrap -> "pre-wrap"
+                | PreLine -> "pre-line"
+                | BreakSpaces -> "break-spaces"
+
+        match whitespace with
+        | :? WhiteSpace as ws -> stringifyWhitespace ws
+        | :? Normal -> GlobalValue.normal
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown whitespace"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
     let private alignCssValue value = PropertyValue.cssValue Property.TextAlign value
     let private alignCssValue' value =
@@ -633,7 +657,7 @@ module Text =
         value
         |> textShadowToString
         |> shadowValue
-    let private shadowValues values =
+    let private shadowValues (values: TextShadow list) =
         values
         |> Utilities.Helpers.combineComma textShadowToString
         |> shadowValue
@@ -646,7 +670,7 @@ module Text =
             Shadow3(xOffset, yOffset, color) |> shadowValue'
         static member Value (xOffset: Units.Size.Size, yOffset: Units.Size.Size, blurRadius: Units.Size.Size, color: CSSColor) =
             Shadow4 (xOffset, yOffset, blurRadius, color) |> shadowValue'
-        static member Value (shadows: ITextShadow list) = shadowValues shadows
+        static member Value (shadows: TextTypes.TextShadow list) = shadowValues shadows
         static member Inherit = Inherit |> shadowValue'
         static member Initial = Initial |> shadowValue'
         static member Unset = Unset |> shadowValue'
@@ -1199,3 +1223,21 @@ module Text =
         static member None = None |> textJustifyValue'
 
     let TextJustify' justification = TextJustify.Value justification
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
+    let private whiteSpaceValue value = PropertyValue.cssValue Property.WhiteSpace value
+    let private whiteSpaceValue' value = value |> whitespaceToString |> whiteSpaceValue
+
+    type Whitespace =
+        static member Value (whitespace: IWhiteSpace) = whitespace |> whiteSpaceValue'
+        static member NoWrap = NoWrap |> whiteSpaceValue'
+        static member Pre = Pre |> whiteSpaceValue'
+        static member PreWrap = PreWrap |> whiteSpaceValue'
+        static member PreLine = PreLine |> whiteSpaceValue'
+        static member BreakSpaces = BreakSpaces |> whiteSpaceValue'
+        static member Normal = Normal |> whiteSpaceValue'
+        static member Inherit = Inherit |> whiteSpaceValue'
+        static member Initial = Initial |> whiteSpaceValue'
+        static member Unset = Unset |> whiteSpaceValue'
+
+    let Whitespace' whitespace = Whitespace.Value whitespace

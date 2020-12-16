@@ -17,7 +17,7 @@ module Media =
         match d with
             | Not  n -> sprintf "not %s" (duToLowercase n)
             | Only o -> sprintf "only %s" (duToLowercase o)
-            | _     -> duToLowercase d
+            | _  -> duToLowercase d
 
     type Pointer =
         | Course
