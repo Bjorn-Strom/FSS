@@ -242,6 +242,7 @@ module Property =
         | TextSizeAdjust
         | TextOrientation
         | TextRendering
+        | TextJustify
         | Top
         | Transform
         | TransformOrigin

@@ -128,6 +128,11 @@ module TextTypes =
         | GeometricPrecision
         interface ITextRendering
 
+    type TextJustify =
+        | InterWord
+        | InterCharacter
+        interface ITextJustify
+
 [<AutoOpen>]
 module Text =
     open TextTypes
@@ -413,6 +418,18 @@ module Text =
         | :? Keywords as k -> GlobalValue.keywords k
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown text rendering"
+
+    let private textJustifyToString (textJustify: ITextJustify) =
+        let stringifyJustification =
+            function
+                | InterWord -> "inter-word"
+                | InterCharacter -> "inter-character"
+
+        match textJustify with
+        | :? TextJustify as j -> stringifyJustification j
+        | :? None -> GlobalValue.none
+        | :? Auto -> GlobalValue.auto
+        | _ -> "Unknown text justification"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
     let private alignCssValue value = PropertyValue.cssValue Property.TextAlign value
@@ -1169,3 +1186,16 @@ module Text =
         static member Unset = Unset |> textRenderingValue'
 
     let TextRendering' rendering = TextRendering.Value rendering
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
+    let private textJustifyValue value = PropertyValue.cssValue Property.TextJustify value
+    let private textJustifyValue' value = value |> textJustifyToString |> textJustifyValue
+
+    type TextJustify =
+        static member Value (justification: ITextJustify) = justification |> textJustifyValue'
+        static member InterWord = InterWord |> textJustifyValue'
+        static member InterCharacter = InterCharacter |> textJustifyValue'
+        static member Auto = Auto |> textJustifyValue'
+        static member None = None |> textJustifyValue'
+
+    let TextJustify' justification = TextJustify.Value justification

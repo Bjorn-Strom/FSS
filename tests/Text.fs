@@ -714,4 +714,20 @@ module Text =
                     "TextRendering unset"
                     [ TextRendering.Unset ]
                     ["textRendering" ==> "unset"]
+                test
+                    "TextJustify inter-character"
+                    [ TextJustify.InterCharacter ]
+                    ["textJustify" ==> "inter-character"]
+                test
+                    "TextJustify inter-word"
+                    [ TextJustify.InterWord ]
+                    ["textJustify" ==> "inter-word"]
+                test
+                    "TextJustify auto"
+                    [ TextJustify.Auto ]
+                    ["textJustify" ==> "auto"]
+                test
+                    "TextJustify none"
+                    [ TextJustify.None ]
+                    ["textJustify" ==> "none"]
             ]
