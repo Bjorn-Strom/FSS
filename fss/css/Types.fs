@@ -158,6 +158,8 @@ module Global =
     type IEmptyCells  = interface end
     type ITableLayout = interface end
 
+    type ICaretColor = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -218,6 +220,7 @@ module Global =
         interface ILineBreak
         interface IColumnCount
         interface ITableLayout
+        interface ICaretColor
 
     type None =
         | None

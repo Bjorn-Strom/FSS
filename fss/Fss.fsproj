@@ -36,6 +36,7 @@
     <Compile Include="css\Attribute.fs" />
     <Compile Include="css\Content.fs" />
     <Compile Include="css\Table.fs" />
+    <Compile Include="css\Caret.fs" />
     <Compile Include="css\Grid.fs" />
     <Compile Include="css\Flex.fs" />
     <Compile Include="css\Outline.fs" />
