@@ -766,4 +766,36 @@ module Text =
                     "Whitespace unset"
                     [ Whitespace.Unset ]
                     ["whiteSpace" ==> "unset"]
+                test
+                    "UserSelect text"
+                    [ UserSelect.Text ]
+                    ["userSelect" ==> "text"]
+                test
+                    "UserSelect Contain"
+                    [ UserSelect.Contain ]
+                    ["userSelect" ==> "contain"]
+                test
+                    "UserSelect all"
+                    [ UserSelect.All ]
+                    ["userSelect" ==> "all"]
+                test
+                    "UserSelect none"
+                    [ UserSelect.None ]
+                    ["userSelect" ==> "none"]
+                test
+                    "UserSelect auto"
+                    [ UserSelect.Auto ]
+                    ["userSelect" ==> "auto"]
+                test
+                    "UserSelect inherit"
+                    [ UserSelect.Inherit ]
+                    ["userSelect" ==> "inherit"]
+                test
+                    "UserSelect Initial"
+                    [ UserSelect.Initial ]
+                    ["userSelect" ==> "initial"]
+                test
+                    "UserSelect unset"
+                    [ UserSelect.Unset ]
+                    ["userSelect" ==> "unset"]
             ]

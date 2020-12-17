@@ -252,6 +252,7 @@ module Property =
         | TransitionProperty
         | TransitionTimingFunction
         | UnicodeBidi
+        | UserSelect
         | VerticalAlign
         | Visibility
         | VoiceBalance

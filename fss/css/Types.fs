@@ -57,6 +57,7 @@ module Global =
     type ITextRendering           = interface end
     type ITextJustify             = interface end
     type IWhiteSpace              = interface end
+    type IUserSelect              = interface end
 
     type IListStyleImage    = interface end
     type IListStylePosition = interface end
@@ -199,6 +200,7 @@ module Global =
         interface ITextJustify
         interface IQuotes
         interface IHyphens
+        interface IUserSelect
         interface IBackgroundSize
         interface IBorderImageWidth
         interface IFlexBasis
@@ -229,6 +231,7 @@ module Global =
         interface ITextTransform
         interface ITextSizeAdjust
         interface ITextJustify
+        interface IUserSelect
         interface IQuotes
         interface IHyphens
         interface IListStyleImage
@@ -319,6 +322,7 @@ module Global =
         interface ITextDecorationColor
         interface ITextEmphasisColor
         interface ITextSizeAdjust
+        interface IUserSelect
         interface IListStyleImage
         interface IListStylePosition
         interface IListStyleType

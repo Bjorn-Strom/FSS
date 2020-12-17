@@ -141,6 +141,12 @@ module TextTypes =
         | BreakSpaces
         interface IWhiteSpace
 
+    type UserSelect =
+        | Text
+        | Contain
+        | All
+        | Element
+        interface IUserSelect
 
 [<AutoOpen>]
 module Text =
@@ -454,6 +460,20 @@ module Text =
         | :? Normal -> GlobalValue.normal
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown whitespace"
+
+    let private userSelectToString (userSelect: IUserSelect) =
+        let stringifyUserSelect =
+            function
+                | Text -> "text"
+                | Contain -> "contain"
+                | All -> "all"
+
+        match userSelect with
+        | :? UserSelect as u -> stringifyUserSelect u
+        | :? None -> GlobalValue.none
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown user select"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
     let private alignCssValue value = PropertyValue.cssValue Property.TextAlign value
@@ -1241,3 +1261,20 @@ module Text =
         static member Unset = Unset |> whiteSpaceValue'
 
     let Whitespace' whitespace = Whitespace.Value whitespace
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+    let private userSelectValue value = PropertyValue.cssValue Property.UserSelect value
+    let private userSelectValue' value = value |> userSelectToString |> userSelectValue
+
+    type UserSelect =
+        static member Value (whitespace: IUserSelect) = whitespace |> userSelectValue'
+        static member Text = Text |> userSelectValue'
+        static member Contain = Contain |> userSelectValue'
+        static member All = All |> userSelectValue'
+        static member None = None |> userSelectValue'
+        static member Auto = Auto |> userSelectValue'
+        static member Inherit = Inherit |> userSelectValue'
+        static member Initial = Initial |> userSelectValue'
+        static member Unset = Unset |> userSelectValue'
+
+    let UserSelect' userSelect = UserSelect.Value userSelect
