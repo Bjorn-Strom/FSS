@@ -144,6 +144,7 @@ module Global =
     type IColumnRuleStyle     = interface end
     type IColumnRuleColor     = interface end
     type IColumnCount         = interface end
+    type IColumnFill          = interface end
 
     type INthChild = interface end
 
@@ -226,6 +227,7 @@ module Global =
         interface ITableLayout
         interface ICaretColor
         interface IAppearance
+        interface IColumnFill
 
     type None =
         | None
@@ -405,6 +407,7 @@ module Global =
         interface IColumnRuleStyle
         interface IColumnRuleColor
         interface IColumnCount
+        interface IColumnFill
         interface ICaptionSide
         interface IEmptyCells
         interface ITableLayout

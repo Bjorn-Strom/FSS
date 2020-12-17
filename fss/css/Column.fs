@@ -23,6 +23,11 @@ module ColumnType =
         | Outset
         interface IColumnRuleStyle
 
+    type ColumnFill =
+        | Balance
+        | BalanceAll
+        interface IColumnFill
+
 [<AutoOpen>]
 module Column =
     open ColumnType
@@ -90,6 +95,13 @@ module Column =
         | :? Auto -> GlobalValue.auto
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown column count"
+
+    let private columnFillToString (columnFill: IColumnFill) =
+        match columnFill with
+        | :? ColumnFill as c -> Utilities.Helpers.duToKebab c
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown column fill"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
     let private columnGapValue value = PropertyValue.cssValue Property.ColumnGap value
@@ -348,5 +360,23 @@ module Column =
         static member Unset = Unset |> columnCountValue'
 
     let ColumnCount' (columnCount: IColumnCount) = ColumnCount.Value(columnCount)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill
+    let private columnFillValue value = PropertyValue.cssValue Property.ColumnFill value
+    let private columnFillValue' value =
+        value
+        |> columnFillToString
+        |> columnFillValue
+
+    type ColumnFill =
+        static member Value(columnFill: IColumnFill) = columnFill |> columnFillValue'
+        static member Balance = Balance |> columnFillValue'
+        static member BalanceAll = BalanceAll |> columnFillValue'
+        static member Auto = Auto |> columnFillValue'
+        static member Inherit = Inherit |> columnFillValue'
+        static member Initial = Initial |> columnFillValue'
+        static member Unset = Unset |> columnFillValue'
+
+    let ColumnFill' (columnFill: IColumnFill) = ColumnFill.Value(columnFill)
 
 

@@ -11,6 +11,30 @@ module Column =
         testList "Column"
             [
                 test
+                    "Column balance"
+                    [ColumnFill.Balance]
+                    ["columnFill" ==> "balance"]
+                test
+                    "Column fill balance all"
+                    [ColumnFill.BalanceAll]
+                    ["columnFill" ==> "balance-all"]
+                test
+                    "Column fill auto"
+                    [ColumnFill.Auto]
+                    ["columnFill" ==> "auto"]
+                test
+                    "Column fill inherit"
+                    [ColumnFill.Inherit]
+                    ["columnFill" ==> "inherit"]
+                test
+                    "Column fill initial"
+                    [ColumnFill.Initial]
+                    ["columnFill" ==> "initial"]
+                test
+                    "Column fill unset"
+                    [ColumnFill.Unset]
+                    ["columnFill" ==> "unset"]
+                test
                     "Column gap normal"
                     [ColumnGap.Normal]
                     ["columnGap" ==> "normal"]
