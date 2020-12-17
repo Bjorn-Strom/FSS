@@ -467,6 +467,7 @@ module Text =
                 | Text -> "text"
                 | Contain -> "contain"
                 | All -> "all"
+                | Element -> "element"
 
         match userSelect with
         | :? UserSelect as u -> stringifyUserSelect u

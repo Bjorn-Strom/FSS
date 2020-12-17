@@ -4,6 +4,7 @@ module WordTypes =
     type WordBreak =
         | WordBreak
         | BreakAll
+        | KeepAll
         interface IWordBreak
 
 module Word =
@@ -22,6 +23,7 @@ module Word =
             function
                 | WordBreak -> "word-break"
                 | BreakAll -> "break-all"
+                | KeepAll -> "keep-all"
 
         match break' with
         | :? WordTypes.WordBreak as w -> stringifyBreak w
@@ -57,6 +59,7 @@ module Word =
         static member Value (spacing: IWordBreak) = spacing |> breakCssValue'
         static member WordBreak = WordTypes.WordBreak |> breakCssValue'
         static member BreakAll = BreakAll |> breakCssValue'
+        static member KeepAll = KeepAll |> breakCssValue'
 
         static member Normal = Normal |> breakCssValue'
         static member Initial = Initial |> breakCssValue'

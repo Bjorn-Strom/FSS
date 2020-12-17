@@ -272,6 +272,7 @@ module Property =
         | WordBreak
         | WordSpacing
         | WordWrap
+        | WritingMode
         | ZIndex
 
         | Active

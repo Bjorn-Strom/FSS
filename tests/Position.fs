@@ -253,4 +253,30 @@ module Position =
                     "Float unset"
                     [ Float.Unset]
                     ["float" ==> "unset"]
+
+                test
+                    "WritingMode horizontal-tb"
+                    [ WritingMode.HorizontalTb]
+                    ["writingMode" ==> "horizontal-tb"]
+                test
+                    "WritingMode vertical-rl"
+                    [ WritingMode.VerticalRl]
+                    ["writingMode" ==> "vertical-rl"]
+                test
+                    "WritingMode vertical-lr"
+                    [ WritingMode.VerticalLr]
+                    ["writingMode" ==> "vertical-lr"]
+                test
+                    "WritingMode inherit"
+                    [ WritingMode.Inherit]
+                    ["writingMode" ==> "inherit"]
+                test
+                    "WritingMode initial"
+                    [ WritingMode.Initial]
+                    ["writingMode" ==> "initial"]
+                test
+                    "WritingMode unset"
+                    [ WritingMode.Unset]
+                    ["writingMode" ==> "unset"]
+
             ]

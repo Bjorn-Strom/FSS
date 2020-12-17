@@ -261,3 +261,39 @@ module Position =
         static member Unset = Unset |> directionValue'
 
     let Direction' (direction: IDirection) = Direction.Value(direction)
+
+module WritingModeType =
+    type WritingMode =
+        | HorizontalTb
+        | VerticalRl
+        | VerticalLr
+        interface IWritingMode
+
+[<AutoOpen>]
+module WritingMode =
+    open WritingModeType
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode
+    let private writingModeToString (writingMode: IWritingMode) =
+        match writingMode with
+        | :? WritingMode as w -> Utilities.Helpers.duToKebab w
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown writing mode"
+
+    let private writingModeValue value = PropertyValue.cssValue Property.WritingMode value
+    let private writingModeValue' value =
+        value
+        |> writingModeToString
+        |> writingModeValue
+
+    type WritingMode =
+        static member Value (writingMode: IWritingMode) = writingMode |> writingModeValue'
+
+        static member HorizontalTb = HorizontalTb |> writingModeValue'
+        static member VerticalRl = VerticalRl |> writingModeValue'
+        static member VerticalLr = VerticalLr |> writingModeValue'
+        static member Inherit = Inherit |> writingModeValue'
+        static member Initial = Initial |> writingModeValue'
+        static member Unset = Unset |> writingModeValue'
+
+    let WritingMode' (writingMode: IWritingMode) = writingMode |> WritingMode.Value

@@ -162,6 +162,8 @@ module Global =
 
     type IAppearance = interface end
 
+    type IWritingMode = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -408,6 +410,7 @@ module Global =
         interface ITableLayout
         interface ITabSize
         interface IWhiteSpace
+        interface IWritingMode
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
