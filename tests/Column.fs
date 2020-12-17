@@ -11,6 +11,34 @@ module Column =
         testList "Column"
             [
                 test
+                    "Column Width px"
+                    [ColumnWidth' (px 60)]
+                    ["columnWidth" ==> "60px"]
+                test
+                    "Column Width em"
+                    [ColumnWidth' (em 15.5)]
+                    ["columnWidth" ==> "15.5em"]
+                test
+                    "Column Width vw"
+                    [ColumnWidth' (vw 3.3)]
+                    ["columnWidth" ==> "3.3vw"]
+                test
+                    "Column Width auto"
+                    [ColumnWidth.Auto]
+                    ["columnWidth" ==> "auto"]
+                test
+                    "Column Width inherit"
+                    [ColumnWidth.Inherit]
+                    ["columnWidth" ==> "inherit"]
+                test
+                    "Column Width initial"
+                    [ColumnWidth.Initial]
+                    ["columnWidth" ==> "initial"]
+                test
+                    "Column Width unset"
+                    [ColumnWidth.Unset]
+                    ["columnWidth" ==> "unset"]
+                test
                     "Column balance"
                     [ColumnFill.Balance]
                     ["columnFill" ==> "balance"]
@@ -114,12 +142,6 @@ module Column =
                     "Column rule width Unset"
                     [ColumnRuleWidth.Unset]
                     ["columnRuleWidth" ==> "unset"]
-
-
-
-
-
-
                 test
                     "Column rule style hidden"
                     [ ColumnRuleStyle.Hidden ]

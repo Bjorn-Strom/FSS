@@ -145,6 +145,7 @@ module Global =
     type IColumnRuleColor     = interface end
     type IColumnCount         = interface end
     type IColumnFill          = interface end
+    type IColumnWidth         = interface end
 
     type INthChild = interface end
 
@@ -224,10 +225,11 @@ module Global =
         interface IGridAutoColumns
         interface ILineBreak
         interface IColumnCount
+        interface IColumnFill
+        interface IColumnWidth
         interface ITableLayout
         interface ICaretColor
         interface IAppearance
-        interface IColumnFill
 
     type None =
         | None
@@ -408,6 +410,7 @@ module Global =
         interface IColumnRuleColor
         interface IColumnCount
         interface IColumnFill
+        interface IColumnWidth
         interface ICaptionSide
         interface IEmptyCells
         interface ITableLayout

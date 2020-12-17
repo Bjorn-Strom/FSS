@@ -76,6 +76,7 @@ module Size =
         interface IGridAutoColumns
         interface IColumnGap
         interface IColumnRuleWidth
+        interface IColumnWidth
         interface IMargin
         interface IPadding
         interface ITransformOrigin

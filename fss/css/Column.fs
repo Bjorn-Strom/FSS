@@ -103,6 +103,13 @@ module Column =
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown column fill"
 
+    let private columnWidthToString (columnWidth: IColumnWidth) =
+        match columnWidth with
+        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown column width"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
     let private columnGapValue value = PropertyValue.cssValue Property.ColumnGap value
     let private columnGapValue' value =
@@ -378,5 +385,21 @@ module Column =
         static member Unset = Unset |> columnFillValue'
 
     let ColumnFill' (columnFill: IColumnFill) = ColumnFill.Value(columnFill)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
+    let private columnWidthValue value = PropertyValue.cssValue Property.ColumnWidth value
+    let private columnWidthValue' value =
+        value
+        |> columnWidthToString
+        |> columnWidthValue
+
+    type ColumnWidth =
+        static member Value(columnWidth: IColumnWidth) = columnWidth |> columnWidthValue'
+        static member Auto = Auto |> columnWidthValue'
+        static member Inherit = Inherit |> columnWidthValue'
+        static member Initial = Initial |> columnWidthValue'
+        static member Unset = Unset |> columnWidthValue'
+
+    let ColumnWidth' (columnWidth: IColumnWidth) = ColumnWidth.Value(columnWidth)
 
 
