@@ -5,6 +5,7 @@ open Utilities.Helpers
 
 module Property =
     type Property =
+        | Appearance
         | AlignContent
         | AlignItems
         | AlignSelf

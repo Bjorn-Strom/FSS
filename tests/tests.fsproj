@@ -33,6 +33,7 @@
     <Compile Include="Word.fs" />
     <Compile Include="Table.fs" />
     <Compile Include="Caret.fs" />
+    <Compile Include="Appearance.fs" />
     <Compile Include="Tests.fs" />
     <Content Include="paket.references" />
   </ItemGroup>

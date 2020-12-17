@@ -160,6 +160,8 @@ module Global =
 
     type ICaretColor = interface end
 
+    type IAppearance = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -221,6 +223,7 @@ module Global =
         interface IColumnCount
         interface ITableLayout
         interface ICaretColor
+        interface IAppearance
 
     type None =
         | None
@@ -254,6 +257,7 @@ module Global =
         interface IColumnSpan
         interface IResize
         interface IColumnRuleStyle
+        interface IAppearance
 
     type Normal =
         | Normal
