@@ -2890,7 +2890,13 @@ let GridExamples () =
 let ResizeExample () =
     fragment []
         [
-            let style = fss [ Resize.Both; BackgroundColor.red; Overflow.Auto ]
+            let style =
+                fss
+                    [
+                        Resize.Both
+                        BackgroundColor.red
+                        Overflow.Auto
+                    ]
             div [ClassName style]
                 [
                     str "Hello there!"
@@ -2899,8 +2905,30 @@ let ResizeExample () =
 
 
 let render (model: Model) (dispatch: Msg -> unit) =
+    let buttonStyle =
+        fss
+            [
+                BackgroundColor.Hex "44c767"
+                BorderRadius' (px 30)
+                BorderWidth' (px 1)
+                BorderStyle.Solid
+                BorderColor.Hex "18ab29"
+                Display.InlineBlock
+                Cursor.Pointer
+                FontSize' (px 17)
+                Hover
+                    [
+                        BackgroundColor.Hex "5cbf2a"
+                    ]
+            ]
     div []
         [
+
+            button [ ClassName buttonStyle ]
+                [
+                    str "Click me"
+                ]
+
             //BackgroundExamples model dispatch
             //ColorExamples ()
             //FontExamples ()
@@ -2917,7 +2945,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //SelectorExamples ()
             //CursorExamples ()
             //ListStyleExamples ()
-            GridExamples ()
+            //GridExamples ()
             //CounterStyleExamples ()
             //PseudoElementExamples ()
             //PsuedoClassExamples ()
