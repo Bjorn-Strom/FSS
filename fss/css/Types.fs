@@ -70,6 +70,7 @@ module Global =
     type IBackgroundAttachment = interface end
     type IBackgroundPosition   = interface end
 
+    type IBorder            = interface end
     type IBorderRadius      = interface end
     type IBorderWidth       = interface end
     type IBorderStyle       = interface end
@@ -359,6 +360,7 @@ module Global =
         interface IBackgroundSize
         interface IBackgroundAttachment
         interface IBackgroundPosition
+        interface IBorder
         interface IBorderRadius
         interface IBorderWidth
         interface IBorderStyle

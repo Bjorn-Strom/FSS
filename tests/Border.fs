@@ -10,6 +10,18 @@ module Border =
         testList "Border"
             [
                 test
+                    "Border initial"
+                    [ Border.Initial ]
+                    [ "border" ==> "initial" ]
+                test
+                    "Border inherit"
+                    [ Border.Inherit ]
+                    [ "border" ==> "inherit" ]
+                test
+                    "Border unset"
+                    [ Border.Unset ]
+                    [ "border" ==> "unset" ]
+                test
                     "Borderstyle hidden"
                     [ BorderStyle.Hidden ]
                     [ "borderStyle" ==> "hidden" ]

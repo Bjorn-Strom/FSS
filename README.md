@@ -61,6 +61,21 @@ paket add Fss --project ./project/path
 ## Documentation 📖
 LINK
 
+- Overview
+- Installation
+- Philosophy
+- Basic use
+- Psuedoclasses and selectors
+- Composition
+- Labels
+- Transitions
+- Selectors
+- Keyframes and animation
+- Media queries
+- Global styles
+- Counters
+- Font face
+
 
 ## Disclaimer ⚠️
 Firstly not the entire spec has been implemented, and  I am sure to have made a mistake or two.

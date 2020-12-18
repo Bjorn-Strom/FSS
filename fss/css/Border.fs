@@ -158,6 +158,24 @@ module Border =
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown border image source"
 
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/border
+    let private borderToString (border: IBorder) =
+            match border with
+            | :? Keywords as k -> GlobalValue.keywords k
+            | _ -> "Unknown border"
+
+    let private borderValue value = PropertyValue.cssValue Property.Border value
+    let private borderValue' value =
+        value
+        |> borderToString
+        |> borderValue
+
+    type Border =
+        static member Value (border: IBorder) = border |> borderValue'
+        static member Inherit = Inherit |> borderValue'
+        static member Initial = Initial |> borderValue'
+        static member Unset = Unset |> borderValue'
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
     let private radiusValue value = PropertyValue.cssValue Property.BorderRadius value
     let private radiusValue' value =
