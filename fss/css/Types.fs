@@ -173,6 +173,8 @@ module Global =
     type IOrphans = interface end
     type IWidows = interface end
 
+    type IAll = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -434,6 +436,7 @@ module Global =
         interface IBreakInside
         interface IOrphans
         interface IWidows
+        interface IAll
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
