@@ -253,7 +253,6 @@ module Position =
                     "Float unset"
                     [ Float.Unset]
                     ["float" ==> "unset"]
-
                 test
                     "WritingMode horizontal-tb"
                     [ WritingMode.HorizontalTb]
@@ -278,5 +277,172 @@ module Position =
                     "WritingMode unset"
                     [ WritingMode.Unset]
                     ["writingMode" ==> "unset"]
-
+                test
+                    "BreakAfter avoid"
+                    [BreakAfter.Avoid]
+                    ["breakAfter" ==> "avoid"]
+                test
+                    "BreakAfter always"
+                    [BreakAfter.Always]
+                    ["breakAfter" ==> "always"]
+                test
+                    "BreakAfter all"
+                    [BreakAfter.All]
+                    ["breakAfter" ==> "all"]
+                test
+                    "BreakAfter avoid-page"
+                    [BreakAfter.AvoidPage]
+                    ["breakAfter" ==> "avoid-page"]
+                test
+                    "BreakAfter page"
+                    [BreakAfter.Page]
+                    ["breakAfter" ==> "page"]
+                test
+                    "BreakAfter left"
+                    [BreakAfter.Left]
+                    ["breakAfter" ==> "left"]
+                test
+                    "BreakAfter right"
+                    [BreakAfter.Right]
+                    ["breakAfter" ==> "right"]
+                test
+                    "BreakAfter recto"
+                    [BreakAfter.Recto]
+                    ["breakAfter" ==> "recto"]
+                test
+                    "BreakAfter verso"
+                    [BreakAfter.Verso]
+                    ["breakAfter" ==> "verso"]
+                test
+                    "BreakAfter avoid-column"
+                    [BreakAfter.AvoidColumn]
+                    ["breakAfter" ==> "avoid-column"]
+                test
+                    "BreakAfter column"
+                    [BreakAfter.Column]
+                    ["breakAfter" ==> "column"]
+                test
+                    "BreakAfter avoid-region"
+                    [BreakAfter.AvoidRegion]
+                    ["breakAfter" ==> "avoid-region"]
+                test
+                    "BreakAfter region"
+                    [BreakAfter.Region]
+                    ["breakAfter" ==> "region"]
+                test
+                    "BreakAfter auto"
+                    [ BreakAfter.Auto]
+                    ["breakAfter" ==> "auto"]
+                test
+                    "BreakAfter inherit"
+                    [ BreakAfter.Inherit]
+                    ["breakAfter" ==> "inherit"]
+                test
+                    "BreakAfter initial"
+                    [ BreakAfter.Initial]
+                    ["breakAfter" ==> "initial"]
+                test
+                    "BreakAfter unset"
+                    [ BreakAfter.Unset]
+                    ["breakAfter" ==> "unset"]
+                test
+                    "BreakBefore avoid"
+                    [BreakBefore.Avoid]
+                    ["breakBefore" ==> "avoid"]
+                test
+                    "BreakBefore always"
+                    [BreakBefore.Always]
+                    ["breakBefore" ==> "always"]
+                test
+                    "BreakBefore all"
+                    [BreakBefore.All]
+                    ["breakBefore" ==> "all"]
+                test
+                    "BreakBefore avoid-page"
+                    [BreakBefore.AvoidPage]
+                    ["breakBefore" ==> "avoid-page"]
+                test
+                    "BreakBefore page"
+                    [BreakBefore.Page]
+                    ["breakBefore" ==> "page"]
+                test
+                    "BreakBefore left"
+                    [BreakBefore.Left]
+                    ["breakBefore" ==> "left"]
+                test
+                    "BreakBefore right"
+                    [BreakBefore.Right]
+                    ["breakBefore" ==> "right"]
+                test
+                    "BreakBefore recto"
+                    [BreakBefore.Recto]
+                    ["breakBefore" ==> "recto"]
+                test
+                    "BreakBefore verso"
+                    [BreakBefore.Verso]
+                    ["breakBefore" ==> "verso"]
+                test
+                    "BreakBefore avoid-column"
+                    [BreakBefore.AvoidColumn]
+                    ["breakBefore" ==> "avoid-column"]
+                test
+                    "BreakBefore column"
+                    [BreakBefore.Column]
+                    ["breakBefore" ==> "column"]
+                test
+                    "BreakBefore avoid-region"
+                    [BreakBefore.AvoidRegion]
+                    ["breakBefore" ==> "avoid-region"]
+                test
+                    "BreakBefore region"
+                    [BreakBefore.Region]
+                    ["breakBefore" ==> "region"]
+                test
+                    "BreakBefore auto"
+                    [ BreakBefore.Auto]
+                    ["breakBefore" ==> "auto"]
+                test
+                    "BreakBefore inherit"
+                    [ BreakBefore.Inherit]
+                    ["breakBefore" ==> "inherit"]
+                test
+                    "BreakBefore initial"
+                    [ BreakBefore.Initial]
+                    ["breakBefore" ==> "initial"]
+                test
+                    "BreakBefore unset"
+                    [ BreakBefore.Unset]
+                    ["breakBefore" ==> "unset"]
+                test
+                    "BreakInside avoid"
+                    [BreakInside.Avoid]
+                    ["breakInside" ==> "avoid"]
+                test
+                    "BreakInside avoid-page"
+                    [BreakInside.AvoidPage]
+                    ["breakInside" ==> "avoid-page"]
+                test
+                    "BreakInside avoid-column"
+                    [BreakInside.AvoidColumn]
+                    ["breakInside" ==> "avoid-column"]
+                test
+                    "BreakInside avoid-region"
+                    [BreakInside.AvoidRegion]
+                    ["breakInside" ==> "avoid-region"]
+                test
+                    "BreakInside auto"
+                    [ BreakInside.Auto]
+                    ["breakInside" ==> "auto"]
+                test
+                    "BreakInside inherit"
+                    [ BreakInside.Inherit]
+                    ["breakInside" ==> "inherit"]
+                test
+                    "BreakInside initial"
+                    [ BreakInside.Initial]
+                    ["breakInside" ==> "initial"]
+                test
+                    "BreakInside unset"
+                    [ BreakInside.Unset]
+                    ["breakInside" ==> "unset"]
             ]

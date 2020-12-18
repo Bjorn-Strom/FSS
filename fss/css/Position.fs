@@ -297,3 +297,150 @@ module WritingMode =
         static member Unset = Unset |> writingModeValue'
 
     let WritingMode' (writingMode: IWritingMode) = writingMode |> WritingMode.Value
+
+module BreakTypes =
+    type BreakAfter =
+        | Avoid
+        | Always
+        | All
+        | AvoidPage
+        | Page
+        | Left
+        | Right
+        | Recto
+        | Verso
+        | AvoidColumn
+        | Column
+        | AvoidRegion
+        | Region
+        interface IBreakAfter
+
+    type BreakBefore =
+        | Avoid
+        | Always
+        | All
+        | AvoidPage
+        | Page
+        | Left
+        | Right
+        | Recto
+        | Verso
+        | AvoidColumn
+        | Column
+        | AvoidRegion
+        | Region
+        interface IBreakBefore
+
+    type BreakInside =
+        | Avoid
+        | AvoidPage
+        | AvoidColumn
+        | AvoidRegion
+        interface IBreakInside
+
+[<AutoOpen>]
+module Break =
+    open BreakTypes
+
+    let private breakAfterToString (breakAfter: IBreakAfter) =
+        match breakAfter with
+        | :? BreakAfter as w -> Utilities.Helpers.duToKebab w
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown break after"
+
+    let private breakBeforeToString (breakBefore: IBreakBefore) =
+        match breakBefore with
+        | :? BreakBefore as w -> Utilities.Helpers.duToKebab w
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown break before"
+
+    let private breakInsideToString (breakInside: IBreakInside) =
+        match breakInside with
+        | :? BreakInside as w -> Utilities.Helpers.duToKebab w
+        | :? Auto -> GlobalValue.auto
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown break before"
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/break-after
+    let private breakAfterValue value = PropertyValue.cssValue Property.BreakAfter value
+    let private breakAfterValue' value =
+        value
+        |> breakAfterToString
+        |> breakAfterValue
+
+    type BreakAfter =
+        static member Value (breakAfter: IBreakAfter) = breakAfter |> breakAfterValue'
+        static member Avoid = BreakTypes.BreakAfter.Avoid |> breakAfterValue'
+        static member Always = BreakTypes.BreakAfter.Always |> breakAfterValue'
+        static member All = BreakTypes.BreakAfter.All |> breakAfterValue'
+        static member AvoidPage = BreakTypes.BreakAfter.AvoidPage |> breakAfterValue'
+        static member Page = BreakTypes.BreakAfter.Page |> breakAfterValue'
+        static member Left = BreakTypes.BreakAfter.Left |> breakAfterValue'
+        static member Right = BreakTypes.BreakAfter.Right |> breakAfterValue'
+        static member Recto = BreakTypes.BreakAfter.Recto |> breakAfterValue'
+        static member Verso = BreakTypes.BreakAfter.Verso |> breakAfterValue'
+        static member AvoidColumn = BreakTypes.BreakAfter.AvoidColumn |> breakAfterValue'
+        static member Column = BreakTypes.BreakAfter.Column |> breakAfterValue'
+        static member AvoidRegion = BreakTypes.BreakAfter.AvoidRegion |> breakAfterValue'
+        static member Region = BreakTypes.BreakAfter.Region |> breakAfterValue'
+
+        static member Auto = Auto |> breakAfterValue'
+        static member Inherit = Inherit |> breakAfterValue'
+        static member Initial = Initial |> breakAfterValue'
+        static member Unset = Unset |> breakAfterValue'
+
+    let BreakAfter' (breakAfter: IBreakAfter) = breakAfter |> BreakAfter.Value
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/break-before
+    let private breakBeforeValue value = PropertyValue.cssValue Property.BreakBefore value
+    let private breakBeforeValue' value =
+        value
+        |> breakBeforeToString
+        |> breakBeforeValue
+
+    type BreakBefore =
+        static member Value (breakBefore: IBreakBefore) = breakBefore |> breakBeforeValue'
+        static member Avoid = BreakTypes.BreakBefore.Avoid |> breakBeforeValue'
+        static member Always = BreakTypes.BreakBefore.Always |> breakBeforeValue'
+        static member All = BreakTypes.BreakBefore.All |> breakBeforeValue'
+        static member AvoidPage = BreakTypes.BreakBefore.AvoidPage |> breakBeforeValue'
+        static member Page = BreakTypes.BreakBefore.Page |> breakBeforeValue'
+        static member Left = BreakTypes.BreakBefore.Left |> breakBeforeValue'
+        static member Right = BreakTypes.BreakBefore.Right |> breakBeforeValue'
+        static member Recto = BreakTypes.BreakBefore.Recto |> breakBeforeValue'
+        static member Verso = BreakTypes.BreakBefore.Verso |> breakBeforeValue'
+        static member AvoidColumn = BreakTypes.BreakBefore.AvoidColumn |> breakBeforeValue'
+        static member Column = BreakTypes.BreakBefore.Column |> breakBeforeValue'
+        static member AvoidRegion = BreakTypes.BreakBefore.AvoidRegion |> breakBeforeValue'
+        static member Region = BreakTypes.BreakBefore.Region |> breakBeforeValue'
+
+        static member Auto = Auto |> breakBeforeValue'
+        static member Inherit = Inherit |> breakBeforeValue'
+        static member Initial = Initial |> breakBeforeValue'
+        static member Unset = Unset |> breakBeforeValue'
+
+    let BreakBefore' (breakBefore: IBreakBefore) = breakBefore |> BreakBefore.Value
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside
+    let private breakInsideValue value = PropertyValue.cssValue Property.BreakInside value
+    let private breakInsideValue' value =
+        value
+        |> breakInsideToString
+        |> breakInsideValue
+
+    type BreakInside =
+        static member Value (breakInside: IBreakInside) = breakInside |> breakInsideValue'
+        static member Avoid = BreakTypes.BreakInside.Avoid |> breakInsideValue'
+        static member AvoidPage = BreakTypes.BreakInside.AvoidPage |> breakInsideValue'
+        static member AvoidColumn = BreakTypes.BreakInside.AvoidColumn |> breakInsideValue'
+        static member AvoidRegion = BreakTypes.BreakInside.AvoidRegion |> breakInsideValue'
+
+        static member Auto = Auto |> breakInsideValue'
+        static member Inherit = Inherit |> breakInsideValue'
+        static member Initial = Initial |> breakInsideValue'
+        static member Unset = Unset |> breakInsideValue'
+
+    let BreakInside' (breakInside: IBreakInside) = breakInside |> BreakInside.Value
+

@@ -166,6 +166,10 @@ module Global =
 
     type IWritingMode = interface end
 
+    type IBreakAfter  = interface end
+    type IBreakBefore = interface end
+    type IBreakInside = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -230,6 +234,9 @@ module Global =
         interface ITableLayout
         interface ICaretColor
         interface IAppearance
+        interface IBreakAfter
+        interface IBreakBefore
+        interface IBreakInside
 
     type None =
         | None
@@ -417,6 +424,9 @@ module Global =
         interface ITabSize
         interface IWhiteSpace
         interface IWritingMode
+        interface IBreakAfter
+        interface IBreakBefore
+        interface IBreakInside
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
