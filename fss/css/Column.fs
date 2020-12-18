@@ -401,5 +401,3 @@ module Column =
         static member Unset = Unset |> columnWidthValue'
 
     let ColumnWidth' (columnWidth: IColumnWidth) = ColumnWidth.Value(columnWidth)
-
-

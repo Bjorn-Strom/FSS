@@ -170,6 +170,9 @@ module Global =
     type IBreakBefore = interface end
     type IBreakInside = interface end
 
+    type IOrphans = interface end
+    type IWidows = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
 
@@ -181,6 +184,8 @@ module Global =
         interface INthChild
         interface IColumnCount
         interface ITabSize
+        interface IOrphans
+        interface IWidows
 
     type CssFloat =
         | CssFloat of float
@@ -427,6 +432,8 @@ module Global =
         interface IBreakAfter
         interface IBreakBefore
         interface IBreakInside
+        interface IOrphans
+        interface IWidows
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

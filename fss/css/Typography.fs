@@ -1,0 +1,46 @@
+namespace Fss
+
+[<AutoOpen>]
+module Typography =
+
+    let private orphansToString (orphans: IOrphans) =
+        match orphans with
+        | :? CssInt as i -> GlobalValue.int i
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown orphans"
+
+    let private widowsToString (widows: IWidows) =
+        match widows with
+        | :? CssInt as i -> GlobalValue.int i
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown widows"
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/orphans
+    let private orphansValue value = PropertyValue.cssValue Property.Orphans value
+    let private orphansValue' value =
+        value
+        |> orphansToString
+        |> orphansValue
+
+    type Orphans =
+        static member Value (orphans: IOrphans) = orphans |> orphansValue'
+        static member Inherit = Inherit |> orphansValue'
+        static member Initial = Initial |> orphansValue'
+        static member Unset = Unset |> orphansValue'
+
+    let Orphans' (orphans: IOrphans) = orphans |> Orphans.Value
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/widows
+    let private widowsValue value = PropertyValue.cssValue Property.Widows value
+    let private widowsValue' value =
+        value
+        |> widowsToString
+        |> widowsValue
+
+    type Widows =
+        static member Value (widows: IWidows) = widows |> widowsValue'
+        static member Inherit = Inherit |> widowsValue'
+        static member Initial = Initial |> widowsValue'
+        static member Unset = Unset |> widowsValue'
+
+    let Widows' (widows: IWidows) = widows |> Widows.Value
