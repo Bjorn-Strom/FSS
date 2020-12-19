@@ -188,9 +188,9 @@ module Color =
         static member currentColor = colorCssValue <| CSSColorValue.color CSSColor.currentColor
         static member Revert = colorCssValue "revert"
 
-        static member Inherit = Inherit |> GlobalValue.keywords |> colorCssValue
-        static member Initial = Initial |> GlobalValue.keywords |> colorCssValue
-        static member Unset = Unset |> GlobalValue.keywords |> colorCssValue
+        static member Inherit = Inherit |> GlobalValue.global' |> colorCssValue
+        static member Initial = Initial |> GlobalValue.global' |> colorCssValue
+        static member Unset = Unset |> GlobalValue.global' |> colorCssValue
 
     let Color' (color: CSSColor) = Color.Value(color)
 

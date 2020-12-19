@@ -59,7 +59,7 @@ module Background =
 
         match clip with
         | :? BackgroundClip as b -> stringifyClip b
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown background clip"
 
     let private backgroundOriginToString (clip: IBackgroundOrigin) =
@@ -71,7 +71,7 @@ module Background =
 
         match clip with
         | :? BackgroundOrigin as b -> stringifyOrigin b
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "unknown background origin"
 
     let private repeatToString (repeat: IBackgroundRepeat) =
@@ -86,7 +86,7 @@ module Background =
 
         match repeat with
         | :? BackgroundRepeat as b -> stringifyRepeat b
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "unknown background repeat"
 
     let private sizeToString (size: IBackgroundSize) =
@@ -99,7 +99,7 @@ module Background =
         | :? BackgroundSize as b -> stringifySize b
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | :? Auto -> GlobalValue.auto
         | _ -> "unknown background size"
 
@@ -112,7 +112,7 @@ module Background =
 
         match attachment with
         | :? BackgroundAttachment as b -> stringifyAttachment b
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown background attachment"
 
     let private positionToString (position: IBackgroundPosition) =
@@ -126,7 +126,7 @@ module Background =
 
         match position with
         | :? BackgroundPosition as b -> stringifyPosition b
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "unknown background position"

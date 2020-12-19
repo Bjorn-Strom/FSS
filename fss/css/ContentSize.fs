@@ -28,7 +28,7 @@ module ContentSize =
         match contentSize with
         | :? ContentSize as c -> stringifyContent c
         | :? Auto -> GlobalValue.auto
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown content size"
 
     let private widthValue value = PropertyValue.cssValue Property.Width value

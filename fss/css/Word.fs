@@ -15,7 +15,7 @@ module Word =
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Normal -> GlobalValue.normal
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown word spacing"
 
     let private breakToString (break': IWordBreak) =
@@ -28,7 +28,7 @@ module Word =
         match break' with
         | :? WordTypes.WordBreak as w -> stringifyBreak w
         | :? Normal -> GlobalValue.normal
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown word break"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing

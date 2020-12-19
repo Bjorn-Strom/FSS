@@ -48,7 +48,7 @@ module Display =
         match display with
         | :? Display as t -> stringifyDisplay t
         | :? None -> GlobalValue.none
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown display type"
 
     let private displayValue value = PropertyValue.cssValue Property.Display value

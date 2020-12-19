@@ -47,7 +47,7 @@ module TimingFunctionType =
 
         match timing with
         | :? Timing as t -> timingToString t
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown timing function"
 
 [<AutoOpen>]

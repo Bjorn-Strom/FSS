@@ -25,7 +25,7 @@ module Resize =
         match resize with
         | :? Resize as r -> stringifyResize r
         | :? None -> GlobalValue.none
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown resize value"
 
     let private resizeValue value = PropertyValue.cssValue Property.Resize value

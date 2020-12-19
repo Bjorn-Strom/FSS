@@ -52,7 +52,7 @@ module Position =
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Auto -> GlobalValue.auto
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ ->  "Unknown position"
 
     let private verticalAlignToString (alignment: IVerticalAlign) =
@@ -69,7 +69,7 @@ module Position =
 
         match alignment with
         | :? VerticalAlign as v -> stringifyAlignment v
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown vertical align"
@@ -84,7 +84,7 @@ module Position =
 
         match float with
         | :? Float as v -> stringifyFloat v
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | :? None -> GlobalValue.none
         | _ -> "Unknown float"
 
@@ -101,7 +101,7 @@ module Position =
 
         match direction with
         | :? Direction as d -> stringifyDirection d
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown direction"
 
     let private positionValue value = PropertyValue.cssValue Property.Position value
@@ -277,7 +277,7 @@ module WritingMode =
     let private writingModeToString (writingMode: IWritingMode) =
         match writingMode with
         | :? WritingMode as w -> Utilities.Helpers.duToKebab w
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown writing mode"
 
     let private writingModeValue value = PropertyValue.cssValue Property.WritingMode value
@@ -346,21 +346,21 @@ module Break =
         match breakAfter with
         | :? BreakAfter as w -> Utilities.Helpers.duToKebab w
         | :? Auto -> GlobalValue.auto
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown break after"
 
     let private breakBeforeToString (breakBefore: IBreakBefore) =
         match breakBefore with
         | :? BreakBefore as w -> Utilities.Helpers.duToKebab w
         | :? Auto -> GlobalValue.auto
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown break before"
 
     let private breakInsideToString (breakInside: IBreakInside) =
         match breakInside with
         | :? BreakInside as w -> Utilities.Helpers.duToKebab w
         | :? Auto -> GlobalValue.auto
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown break before"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/break-after

@@ -310,7 +310,7 @@ module Global =
         interface IPaintOrder
         interface IWhiteSpace
 
-    type Keywords =
+    type Global =
         | Inherit
         | Initial
         | Unset
@@ -454,7 +454,7 @@ module GlobalValue =
     let float (CssFloat f) = string f
     let string (CssString s) = s
 
-    let keywords =
+    let global' =
         function
             | Inherit -> "inherit"
             | Initial -> "initial"

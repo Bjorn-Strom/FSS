@@ -42,7 +42,7 @@ module Animation =
 
         match direction with
             | :? AnimationDirection as d -> stringifyAnimationDirection d
-            | :? Keywords as k -> GlobalValue.keywords k
+            | :? Global as k -> GlobalValue.global' k
             | :? Normal -> GlobalValue.normal
             | _ -> "Unknown animation direction"
 
@@ -66,7 +66,7 @@ module Animation =
 
         match playState with
         | :? AnimationPlayState as a -> stringifyPlayState a
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown animation play state"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
@@ -140,7 +140,7 @@ module Animation =
         match name with
         | :? CssString as s -> GlobalValue.string s
         | :? None -> GlobalValue.none
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown animation name"
 
     let private nameValue value = PropertyValue.cssValue Property.AnimationName value

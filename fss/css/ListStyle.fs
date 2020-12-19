@@ -131,7 +131,7 @@ module ListStyleTypeType =
         | :? ListStyleType as l -> stringifyStyle l
         | :? CounterStyle as c -> counterValue c
         | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown list style type"
 
 [<AutoOpen>]
@@ -145,7 +145,7 @@ module ListStyle =
 
         match image with
         | :? ListStyleImage as l -> stringifyImage l
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | :? None -> GlobalValue.none
         | _ -> "unknown list style image"
 
@@ -157,7 +157,7 @@ module ListStyle =
 
         match stylePosition with
         | :? ListStylePosition as l -> stringifyListStyle l
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown list style position"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image

@@ -150,7 +150,7 @@ module Flex =
         match alignment with
         | :? AlignContent as a -> stringifyAlignment a
         | :? Normal -> GlobalValue.normal
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown align content"
 
     let private alignItemsToString (alignment: IAlignItems) =
@@ -173,7 +173,7 @@ module Flex =
         match alignment with
         | :? AlignItems as a -> stringifyAlignment a
         | :? Normal -> GlobalValue.normal
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown align items"
 
     let private alignSelfToString (alignment: IAlignSelf) =
@@ -196,7 +196,7 @@ module Flex =
         match alignment with
         | :? AlignSelf as a -> stringifyAlignment a
         | :? Normal -> GlobalValue.normal
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown align self"
 
     let private justifyContentToString (justification: IJustifyContent) =
@@ -222,7 +222,7 @@ module Flex =
         match justification with
         | :? JustifyContent as a -> stringifyJustification a
         | :? Normal -> GlobalValue.normal
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown justify content"
 
 
@@ -249,7 +249,7 @@ module Flex =
         match justification with
         | :? JustifyItems as a -> stringifyJustification a
         | :? Normal -> GlobalValue.normal
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown justify items"
 
     let private justifySelfToString (justification: IJustifySelf) =
@@ -272,7 +272,7 @@ module Flex =
         match justification with
         | :? JustifySelf as a -> stringifyJustification a
         | :? Normal -> GlobalValue.normal
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown justify self"
 
     let private flexDirectionToString (direction: IFlexDirection) =
@@ -285,7 +285,7 @@ module Flex =
 
         match direction with
         | :? FlexDirection as a -> stringifyJustification a
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown flex direction"
 
     let private flexWrapToString (direction: IFlexWrap) =
@@ -297,25 +297,25 @@ module Flex =
 
         match direction with
         | :? FlexWrap as a -> stringifyJustification a
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown flex wrap"
 
     let private orderToString (order: IOrder) =
         match order with
         | :? CssInt as i -> GlobalValue.int i
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown order"
 
     let private flexGrowToString (flexGrow: IFlexGrow) =
         match flexGrow with
         | :? Global.CssFloat as f -> GlobalValue.float f
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown flex grow"
 
     let private flexShrinkToString (flexShrink: IFlexShrink) =
         match flexShrink with
         | :? Global.CssFloat as f -> GlobalValue.float f
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown flex shrink"
 
     let private flexBasisToString (basis: IFlexBasis) =
@@ -332,7 +332,7 @@ module Flex =
         | :? Auto -> GlobalValue.auto
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Keywords as k -> GlobalValue.keywords k
+        | :? Global as k -> GlobalValue.global' k
         | _ -> "Unknown flex basis"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
