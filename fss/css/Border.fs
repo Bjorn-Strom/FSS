@@ -54,45 +54,22 @@ module Border =
         | _ -> "unknown border radius"
 
     let private widthToString (width: IBorderWidth) =
-        let stringifyWidth =
-            function
-                | Thin -> "thin"
-                | Medium -> "medium"
-                | Thick -> "thick"
-
         match width with
-            | :? BorderWidth as b -> stringifyWidth b
+            | :? BorderWidth as b -> Utilities.Helpers.duToLowercase b
             | :? Units.Size.Size as s -> Units.Size.value s
             | :? Global as g -> GlobalValue.global' g
             | _ -> "unknown border width"
 
     let private styleToString (style: IBorderStyle) =
-        let stringifyStyle =
-            function
-                | Hidden -> "hidden"
-                | Dotted -> "dotted"
-                | Dashed -> "dashed"
-                | Solid -> "solid"
-                | Double -> "double"
-                | Groove -> "groove"
-                | Ridge -> "ridge"
-                | Inset -> "inset"
-                | Outset -> "outset"
-
         match style with
-        | :? BorderStyle as b -> stringifyStyle b
+        | :? BorderStyle as b -> Utilities.Helpers.duToLowercase b
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown border style"
 
     let private collapseToString (collapse: IBorderCollapse) =
-        let stringifyCollapse =
-            function
-                | Collapse -> "collapse"
-                | Separate -> "separate"
-
         match collapse with
-        | :? BorderCollapse as c -> stringifyCollapse c
+        | :? BorderCollapse as c -> Utilities.Helpers.duToLowercase c
         | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown border collapse"
     let private imageOutsetToString (imageOutset: IBorderImageOutset) =
@@ -106,17 +83,11 @@ module Border =
         | _ -> "unknown border image outset"
 
     let private repeatToString (repeat: IBorderRepeat) =
-        let stringifyRepeat =
-            function
-                | Stretch -> "stretch"
-                | Repeat -> "repeat"
-                | Round -> "round"
-                | Space -> "space"
-
         match repeat with
-        | :? BorderImageRepeat as b -> stringifyRepeat b
+        | :? BorderImageRepeat as b -> Utilities.Helpers.duToLowercase b
         | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown border repeat"
+
     let private imageSliceToString (imageSlice: IBorderImageSlice) =
         let stringifySlice =
             function

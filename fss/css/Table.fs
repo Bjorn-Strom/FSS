@@ -23,38 +23,20 @@ module TableType =
 module Table =
     open TableType
     let private captionSideToString (captionSide: ICaptionSide) =
-        let stringifySide =
-            function
-                | Top -> "top"
-                | Bottom -> "bottom"
-                | Left -> "left"
-                | Right -> "right"
-                | TopOutside -> "top-outside"
-                | BottomOutside -> "bottom-outside"
-
         match captionSide with
-        | :? CaptionSide as c -> stringifySide c
+        | :? CaptionSide as c -> Utilities.Helpers.duToKebab c
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown caption side"
 
     let private emptyCellsToString (emptyCells: IEmptyCells) =
-        let stringifyCells =
-            function
-                | Show -> "show"
-                | Hide -> "hide"
-
         match emptyCells with
-        | :? EmptyCells as e -> stringifyCells e
+        | :? EmptyCells as e -> Utilities.Helpers.duToLowercase e
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown empty cells"
 
     let private tableLayoutToString (tableLayout: ITableLayout) =
-        let stringifyTableLayout =
-            function
-                | Fixed -> "fixed"
-
         match tableLayout with
-        | :? TableLayout as t -> stringifyTableLayout t
+        | :? TableLayout as t -> Utilities.Helpers.duToLowercase t
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown table layout"

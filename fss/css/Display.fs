@@ -26,27 +26,8 @@ module Display =
     open DisplayType
 
     let private displayToString (display: IDisplay) =
-        let stringifyDisplay =
-            function
-                | Inline -> "inline"
-                | InlineBlock -> "inline-block"
-                | Block -> "block"
-                | RunIn -> "run-in"
-                | Flex -> "flex"
-                | Grid -> "grid"
-                | FlowRoot -> "flow-root"
-                | Table -> "table"
-                | TableCell -> "table-cell"
-                | TableColumn -> "table-column"
-                | TableColumnGroup -> "table-column-group"
-                | TableHeaderGroup -> "table-header-group"
-                | TableRowGroup -> "table-row-group"
-                | TableFooterGroup -> "table-footer-group"
-                | TableRow -> "table-row"
-                | TableCaption -> "table-caption"
-
         match display with
-        | :? Display as t -> stringifyDisplay t
+        | :? Display as t -> Utilities.Helpers.duToKebab t
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown display type"

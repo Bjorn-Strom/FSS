@@ -8,16 +8,11 @@ module ColorTypes =
 [<AutoOpen>]
 module Color =
     open ColorTypes
-    let private colorAdjustToString =
-        function
-           | Economy -> "economy"
-           | Exact -> "exact"
-
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color-adjust
     let private colorAdjustCssValue value = PropertyValue.cssValue Property.ColorAdjust value
-    let private colorAdjustCssValue' value =
+    let private colorAdjustCssValue' (value: ColorAdjust) =
         value
-        |> colorAdjustToString
+        |> Utilities.Helpers.duToLowercase
         |> colorAdjustCssValue
 
     type ColorAdjust =

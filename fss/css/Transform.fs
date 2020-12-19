@@ -78,16 +78,8 @@ module Transform =
         | _ -> "Unknown transform"
 
     let private originToString (origin: ITransformOrigin) =
-        let stringifyOrigin =
-            function
-                | Top -> "top"
-                | Left -> "left"
-                | Right -> "right"
-                | Bottom -> "bottom"
-                | Center -> "center"
-
         match origin with
-        | :? TransformOrigin as t -> stringifyOrigin t
+        | :? TransformOrigin as t -> Utilities.Helpers.duToLowercase t
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Global as g -> GlobalValue.global' g

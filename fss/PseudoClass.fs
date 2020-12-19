@@ -10,13 +10,8 @@ module PseudoClass =
         interface INthChild
 
     let private stringifyNthChild (nthChild: INthChild)=
-        let stringifyNthChild =
-            function
-                | Odd -> "odd"
-                | Even -> "even"
-
         match nthChild with
-        | :? NthChildType as n -> stringifyNthChild n
+        | :? NthChildType as n -> Utilities.Helpers.duToLowercase n
         | :? CssString as s -> GlobalValue.string s
         | :? CssInt as i -> GlobalValue.int i
         | _ -> "Unknown nth child"

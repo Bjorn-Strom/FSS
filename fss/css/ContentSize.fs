@@ -19,11 +19,10 @@ module ContentSize =
         interface IGridAutoColumns
 
     let contentSizeToString (contentSize: IContentSize) =
-        let stringifyContent =
-            function
-                | MaxContent -> "max-content"
-                | MinContent -> "min-content"
+        let stringifyContent content =
+            match content with
                 | FitContent f -> sprintf "fit-content(%s)" (Units.LengthPercentage.value f)
+                | _ -> Utilities.Helpers.duToKebab content
 
         match contentSize with
         | :? ContentSize as c -> stringifyContent c

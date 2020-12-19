@@ -19,27 +19,15 @@ module Overflow =
     open OverflowType
 
     let private overflowToString (overflow: IOverflow) =
-        let stringifyOverflow =
-            function
-                | Visible -> "visible"
-                | Hidden -> "hidden"
-                | Clip -> "clip"
-                | Scroll -> "scroll"
-
         match overflow with
-        | :? Overflow as o -> stringifyOverflow o
+        | :? Overflow as o -> Utilities.Helpers.duToLowercase o
         | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown overflow"
 
     let private wrapToString (wrap: IOverflowWrap) =
-        let stringifyWrap =
-            function
-                | BreakWord -> "break-word"
-                | Anywhere -> "anywhere"
-
         match wrap with
-        | :? OverflowWrap as o -> stringifyWrap o
+        | :? OverflowWrap as o -> Utilities.Helpers.duToKebab o
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown overflow wrap"

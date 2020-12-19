@@ -14,15 +14,6 @@ module FontFace =
         | Woff2
         | Svg
 
-    let private stringifyFormat =
-        function
-            | Truetype -> "truetype"
-            | Opentype -> "opentype"
-            | EmpbeddedOpentype -> "embedded-opentype"
-            | Woff -> "woff"
-            | Woff2 -> "woff2"
-            | Svg -> "svg"
-
     type Source =
         | Url of string
         | UrlFormat of string * Format
@@ -31,7 +22,7 @@ module FontFace =
     let private stringifySource =
         function
             | Url s -> sprintf "url('%s')" s
-            | UrlFormat (s, f) -> sprintf "url('%s') format('%s')" s (stringifyFormat f)
+            | UrlFormat (s, f) -> sprintf "url('%s') format('%s')" s (Utilities.Helpers.duToKebab f)
             | Local l -> sprintf "local('%s')" l
 
     let private sourceValue value = PropertyValue.cssValue Property.Src value

@@ -15,15 +15,8 @@ module Content =
     open ContentType
 
     let private contentTypeToString (content: IContent) =
-        let stringifyContent =
-            function
-                | OpenQuote -> "open-quote"
-                | CloseQuote -> "close-quote"
-                | NoOpenQuote -> "no-open-quote"
-                | NoCloseQuote -> "no-close-quote"
-
         match content with
-        | :? Content as c -> stringifyContent c
+        | :? Content as c -> Utilities.Helpers.duToKebab c
         | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none

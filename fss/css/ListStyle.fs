@@ -69,66 +69,8 @@ module ListStyleTypeType =
         interface IListStyleType
 
     let styleTypeToString (styleType: IListStyleType) =
-        let stringifyStyle =
-            function
-                | Disc -> "disc"
-                | Circle -> "circle"
-                | Square -> "square"
-                | Decimal -> "decimal"
-                | CjkDecimal -> "cjk-decimal"
-                | DecimalLeadingZero -> "decimal-leading-zero"
-                | LowerRoman -> "lower-roman"
-                | UpperRoman -> "upper-roman"
-                | LowerGreek -> "lower-greek"
-                | LowerAlpha -> "lower-alpha"
-                | LowerLatin -> "lower-latin"
-                | UpperAlpha -> "upper-alpha"
-                | UpperLatin -> "upper-latin"
-                | ArabicIndic -> "arabic-indic"
-                | Armenian -> "armenian"
-                | Bengali -> "bengali"
-                | Cambodian -> "cambodian"
-                | CjkEarthlyBranch -> "cjk-earthly-branch"
-                | CjkHeavenlyStem -> "cjk-heavenly-stem"
-                | CjkIdeographic -> "cjk-ideographic"
-                | Devanagari -> "devanagari"
-                | EthiopicNumeric -> "ethiopic-numeric"
-                | Georgian -> "georgian"
-                | Gujarati -> "gujarati"
-                | Gurmukhi -> "gurmukhi"
-                | Hebrew -> "hebrew"
-                | Hiragana -> "hiragana"
-                | HiraganaIroha -> "hiragana-iroha"
-                | JapaneseFormal -> "japanese-formal"
-                | JapaneseInformal -> "japanese-informal"
-                | Kannada -> "kannada"
-                | Katakana -> "katakana"
-                | KatakanaIroha -> "katakana-iroha"
-                | Khmer -> "khmer"
-                | KoreanHangulFormal -> "korean-hangul-formal"
-                | KoreanHanjaFormal -> "korean-hanja-formal"
-                | KoreanHanjaInformal -> "korean-hanja-informal"
-                | Lao -> "lao"
-                | LowerArmenian -> "lower-armenian"
-                | Malayalam -> "malayalam"
-                | Mongolian -> "mongolian"
-                | Myanmar -> "myanmar"
-                | Oriya -> "oriya"
-                | Persian -> "persian"
-                | SimpChineseFormal -> "simp-chinese-formal"
-                | SimpChineseInformal -> "simp-chinese-informal"
-                | Tamil -> "tamil"
-                | Telugu -> "telugu"
-                | Thai -> "thai"
-                | Tibetan -> "tibetan"
-                | TradChineseFormal -> "trad-chinese-formal"
-                | TradChineseInformal -> "trad-chinese-informal"
-                | UpperArmenian -> "upper-armenian"
-                | DisclosureOpen -> "disclosure-open"
-                | DisclosureClosed -> "disclosure-closed"
-
         match styleType with
-        | :? ListStyleType as l -> stringifyStyle l
+        | :? ListStyleType as l -> Utilities.Helpers.duToKebab l
         | :? CounterStyle as c -> counterValue c
         | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
         | :? Global as g -> GlobalValue.global' g
@@ -150,13 +92,8 @@ module ListStyle =
         | _ -> "unknown list style image"
 
     let private stylePositionToString (stylePosition: IListStylePosition) =
-        let stringifyListStyle =
-            function
-                | Inside -> "inside"
-                | Outside -> "outside"
-
         match stylePosition with
-        | :? ListStylePosition as l -> stringifyListStyle l
+        | :? ListStylePosition as l -> Utilities.Helpers.duToLowercase l
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown list style position"
 

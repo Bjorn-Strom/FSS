@@ -14,16 +14,8 @@ module Resize =
     open ResizeType
 
     let private resizeToString (resize: IResize) =
-        let stringifyResize =
-            function
-                | Both -> "both"
-                | Horizontal -> "horizontal"
-                | Vertical -> "vertical"
-                | Block -> "block"
-                | Inline -> "inline"
-
         match resize with
-        | :? Resize as r -> stringifyResize r
+        | :? Resize as r -> Utilities.Helpers.duToLowercase r
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown resize value"

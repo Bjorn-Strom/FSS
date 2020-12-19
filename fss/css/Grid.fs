@@ -75,10 +75,7 @@ module Grid =
         | AutoFill
         | AutoFit
 
-    let private repeatValue =
-        function
-            | AutoFill -> "auto-fill"
-            | AutoFit -> "auto-fit"
+    let private repeatValue (repeat: RepeatType) = Utilities.Helpers.duToKebab repeat
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/repeat
     type Repeat =
@@ -128,16 +125,8 @@ module Grid =
         interface ITemplateType
 
     let private autoFlowToString (autoFlow: IGridAutoFlow) =
-        let stringifyFlow =
-            function
-                | Row ->  "row"
-                | Column -> "column"
-                | Dense -> "dense"
-                | RowDense -> "row dense"
-                | ColumnDense -> "column dense"
-
         match autoFlow with
-        | :? GridAutoFlow as g -> stringifyFlow g
+        | :? GridAutoFlow as g -> Utilities.Helpers.duToSpaced g
         | :? Global as g ->  GlobalValue.global' g
         | _ -> "Unknown grid auto flow"
 

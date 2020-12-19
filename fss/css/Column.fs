@@ -62,33 +62,15 @@ module Column =
         | _ -> "Unknown column rule"
 
     let private columnRuleWidthToString (ruleWidth: IColumnRuleWidth) =
-        let stringifyRuleWidth =
-            function
-                | Thin -> "thin"
-                | Medium -> "medium"
-                | Thick -> "thick"
-
         match ruleWidth with
-        | :? ColumnRuleWidth as w -> stringifyRuleWidth w
+        | :? ColumnRuleWidth as w -> Utilities.Helpers.duToLowercase w
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column rule width"
 
     let private columnRuleStyleToString (style: IColumnRuleStyle) =
-        let stringifyStyle =
-            function
-                | Hidden -> "hidden"
-                | Dotted -> "dotted"
-                | Dashed -> "dashed"
-                | Solid -> "solid"
-                | Double -> "double"
-                | Groove -> "groove"
-                | Ridge -> "ridge"
-                | Inset -> "inset"
-                | Outset -> "outset"
-
         match style with
-        | :? ColumnRuleStyle as b -> stringifyStyle b
+        | :? ColumnRuleStyle as b -> Utilities.Helpers.duToLowercase b
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column style"

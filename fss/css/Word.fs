@@ -19,14 +19,8 @@ module Word =
         | _ -> "Unknown word spacing"
 
     let private breakToString (break': IWordBreak) =
-        let stringifyBreak =
-            function
-                | WordBreak -> "word-break"
-                | BreakAll -> "break-all"
-                | KeepAll -> "keep-all"
-
         match break' with
-        | :? WordTypes.WordBreak as w -> stringifyBreak w
+        | :? WordTypes.WordBreak as w -> Utilities.Helpers.duToKebab w
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown word break"

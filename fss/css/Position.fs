@@ -39,13 +39,6 @@ module PositionType =
 [<AutoOpen>]
 module Position =
     open PositionType
-    let private positionToString =
-        function
-            | Static -> "static"
-            | Relative -> "relative"
-            | Absolute -> "absolute"
-            | Sticky -> "sticky"
-            | Fixed -> "fixed"
 
     let private positionedToString (positioned: IPositioned) =
         match positioned with
@@ -56,58 +49,30 @@ module Position =
         | _ ->  "Unknown position"
 
     let private verticalAlignToString (alignment: IVerticalAlign) =
-        let stringifyAlignment =
-            function
-                | Baseline -> "baseline"
-                | Sub -> "sub"
-                | Super -> "super"
-                | TextTop -> "text-top"
-                | TextBottom -> "text-bottom"
-                | Middle -> "middle"
-                | Top -> "top"
-                | Bottom -> "bottom"
-
         match alignment with
-        | :? VerticalAlign as v -> stringifyAlignment v
+        | :? VerticalAlign as v -> Utilities.Helpers.duToKebab v
         | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown vertical align"
 
     let private floatToString (float: IFloat) =
-        let stringifyFloat =
-            function
-                | Left -> "left"
-                | Right -> "right"
-                | InlineStart -> "inline-start"
-                | InlineEnd -> "inline-end"
-
         match float with
-        | :? Float as v -> stringifyFloat v
+        | :? Float as v -> Utilities.Helpers.duToKebab v
         | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown float"
 
-    let private boxSizingToString =
-        function
-            | ContentBox -> "content-box"
-            | BorderBox -> "border-box"
-
     let private directionToString (direction: IDirection) =
-        let stringifyDirection =
-            function
-                | Rtl -> "rtl"
-                | Ltr -> "ltr"
-
         match direction with
-        | :? Direction as d -> stringifyDirection d
+        | :? Direction as d -> Utilities.Helpers.duToLowercase d
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown direction"
 
     let private positionValue value = PropertyValue.cssValue Property.Position value
-    let private positionValue' value =
+    let private positionValue' (value: Position) =
         value
-        |> positionToString
+        |> Utilities.Helpers.duToKebab
         |> positionValue
 
     type Position =
@@ -234,9 +199,9 @@ module Position =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
     let private boxSizingValue value = PropertyValue.cssValue Property.BoxSizing value
-    let private boxSizingValue' value =
+    let private boxSizingValue' (value: BoxSizing) =
         value
-        |> boxSizingToString
+        |> Utilities.Helpers.duToKebab
         |> boxSizingValue
     type BoxSizing =
         static member Value (boxSizing: PositionType.BoxSizing) = boxSizing |> boxSizingValue'

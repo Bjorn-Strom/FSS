@@ -32,33 +32,15 @@ module Outline  =
         | _ -> "Unknown outline color"
 
     let private outlineWidthToString (width: IOutlineWidth) =
-        let stringifyWidth =
-            function
-                | Thin -> "thin"
-                | Medium -> "medium"
-                | Thick -> "thick"
-
         match width with
-            | :? OutlineWidth as c -> stringifyWidth c
+            | :? OutlineWidth as c -> Utilities.Helpers.duToLowercase c
             | :? Global as g -> GlobalValue.global' g
             | :? Units.Size.Size as s -> Units.Size.value s
             | _ -> "Unknown outline width"
 
     let private outlineStyleToString (style: IOutlineStyle) =
-        let stringifyStyle =
-            function
-                | Hidden -> "hidden"
-                | Dotted -> "dotted"
-                | Dashed -> "dashed"
-                | Solid -> "solid"
-                | Double -> "double"
-                | Groove -> "groove"
-                | Ridge -> "ridge"
-                | Inset -> "inset"
-                | Outset -> "outset"
-
         match style with
-            | :? OutlineStyle as c -> stringifyStyle c
+            | :? OutlineStyle as c -> Utilities.Helpers.duToLowercase c
             | :? Global as g -> GlobalValue.global' g
             | :? None -> GlobalValue.none
             | _ -> "Unknown outline style"

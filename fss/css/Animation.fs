@@ -34,38 +34,21 @@ module Animation =
     open AnimationType
 
     let private animationDirectionToString (direction: IAnimationDirection) =
-        let stringifyAnimationDirection =
-            function
-                | Reverse -> "reverse"
-                | Alternate -> "alternate"
-                | AlternateReverse -> "alternate-reverse"
-
         match direction with
-            | :? AnimationDirection as d -> stringifyAnimationDirection d
+            | :? AnimationDirection as d -> Utilities.Helpers.duToKebab d
             | :? Global as g -> GlobalValue.global' g
             | :? Normal -> GlobalValue.normal
             | _ -> "Unknown animation direction"
 
     let private animationFillModeToString (fillMode: IAnimationFillMode) =
-        let stringifyFillMode =
-            function
-                | Forwards -> "forwards"
-                | Backwards -> "backwards"
-                | Both -> "both"
-
         match fillMode with
-            | :? AnimationFillMode as a -> stringifyFillMode a
+            | :? AnimationFillMode as a -> Utilities.Helpers.duToLowercase a
             | :? None -> GlobalValue.none
             | _ -> "Unknown fill mode"
 
     let private playStateTypeToString (playState: IAnimationPlayState) =
-        let stringifyPlayState =
-            function
-                | Running -> "running"
-                | Paused -> "paused"
-
         match playState with
-        | :? AnimationPlayState as a -> stringifyPlayState a
+        | :? AnimationPlayState as a -> Utilities.Helpers.duToLowercase a
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown animation play state"
 

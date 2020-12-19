@@ -153,57 +153,28 @@ module Text =
     open TextTypes
 
     let private textAlignToString (alignment: ITextAlign) =
-        let stringifyAlignment =
-            function
-                | TextAlign.Left -> "left"
-                | TextAlign.Right -> "right"
-                | TextAlign.Center -> "center"
-                | TextAlign.Justify -> "justify"
-                | TextAlign.JustifyAll -> "justify-all"
-                | TextAlign.Start -> "start"
-                | TextAlign.End -> "end"
-                | TextAlign.MatchParent -> "match-parent"
-
         match alignment with
-        | :? TextAlign as t -> stringifyAlignment t
+        | :? TextAlign as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown text alignment"
 
     let private textAlignLastToString (alignment: ITextAlignLast) =
-        let stringifyAlignment =
-            function
-                | TextAlignLast.Left -> "left"
-                | TextAlignLast.Right -> "right"
-                | TextAlignLast.Center -> "center"
-                | TextAlignLast.Justify -> "justify"
-                | TextAlignLast.Start -> "start"
-                | TextAlignLast.End -> "end"
-
         match alignment with
-        | :? TextAlignLast as t -> stringifyAlignment t
+        | :? TextAlignLast as t -> Utilities.Helpers.duToLowercase t
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown text alignment last"
 
     let private decorationLineToString (decorationLine: ITextDecorationLine) =
-        let stringifyLine =
-            function
-                | Overline -> "overline"
-                | Underline -> "underline"
-                | LineThrough -> "line-through"
-                | Blink -> "blink"
-
         match decorationLine with
-        | :? TextDecorationLine as t -> stringifyLine t
+        | :? TextDecorationLine as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown text decoration line"
 
     let private thicknessToString (thickness: ITextDecorationThickness) =
-        let stringifyThickness = "from-font"
-
         match thickness with
-        | :? TextDecorationThickness -> stringifyThickness
+        | :? TextDecorationThickness -> "from-font"
         | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | :? Units.Size.Size as s -> Units.Size.value s
@@ -211,68 +182,36 @@ module Text =
         | _ -> "Unknown text decoration thickness"
 
     let private decorationStyleToString (style: ITextDecorationStyle) =
-        let stringifyStyle =
-            function
-                | Solid -> "solid"
-                | Double -> "double"
-                | Dotted -> "dotted"
-                | Dashed -> "dashed"
-                | Wavy -> "wavy"
-
         match style with
-        | :? TextDecorationStyle as t -> stringifyStyle t
+        | :? TextDecorationStyle as t -> Utilities.Helpers.duToLowercase t
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown text decoration style"
 
     let private decorationSkipToString (skip: ITextDecorationSkip) =
-        let stringifySkip =
-            function
-                | Objects -> "objects"
-                | Spaces -> "spaces"
-                | Edges -> "edges"
-                | BoxDecoration -> "box-decoration"
-                | LeadingSpaces -> "leading-spaces"
-                | TrailingSpaces -> "trailing-spaces"
-
         match skip with
-        | :? DecorationSkip as t-> stringifySkip t
+        | :? DecorationSkip as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown text decoration skip"
 
     let private decorationSkipInkToString (skipInk: ITextDecorationSkipInk) =
-        let stringifySkipInk = "all"
-
         match skipInk with
-        | :? TextDecorationSkipInk -> stringifySkipInk
+        | :? TextDecorationSkipInk -> "all"
         | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown text decoration skip ink"
 
     let private textTransformToString (transform: ITextTransform) =
-        let stringifyTransform =
-            function
-                | Capitalize -> "capitalize"
-                | Uppercase -> "uppercase"
-                | Lowercase -> "lowercase"
-                | FullWidth  -> "full-width"
-                | FullSizeKana  -> "full-size-kana"
-
         match transform with
-        | :? TextTransform as t -> stringifyTransform t
+        | :? TextTransform as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown text transform"
 
     let private indentToString (indent: ITextIndent) =
-        let stringifyIndent =
-            function
-                | Hanging -> "hanging"
-                | EachLine -> "each-line"
-
         match indent with
-        | :? TextIndent as t -> stringifyIndent t
+        | :? TextIndent as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -297,40 +236,23 @@ module Text =
             | _ -> "unknown text shadow"
 
     let private emphasisPositionToString (emphasisPosition: ITextEmphasisPosition) =
-        let positionValue =
-            function
-                | EmphasisPosition.Over -> "over"
-                | EmphasisPosition.Under -> "under"
-                | EmphasisPosition.Right -> "right"
-                | EmphasisPosition.Left -> "left"
-
         match emphasisPosition with
-        | :? EmphasisPosition as e -> positionValue e
+        | :? EmphasisPosition as e -> Utilities.Helpers.duToLowercase e
         | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown text emphasis position"
 
     let private textOverflowToString (overflow: ITextOverflow) =
-        let stringifyTextOveTextOverflow =
-            function
-                | Clip -> "clip"
-                | Ellipsis -> "ellipsis"
-
         match overflow with
-        | :? TextOverflow as t -> stringifyTextOveTextOverflow t
+        | :? TextOverflow as t -> Utilities.Helpers.duToLowercase t
         | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
         | _ -> "Unknown text overflow"
 
     let private emphasisStyleToString (emphasisStyle: ITextEmphasisStyle) =
-        let stringifyStyle =
-            function
-                | Filled -> "filled"
-                | Open -> "open"
-                | Dot -> "dot"
-                | Circle -> "circle"
-                | DoubleCircle -> "double-circle"
-                | Triangle -> "triangle"
+        let stringifyStyle style =
+            match style with
                 | FilledSesame -> "filled sesame"
                 | OpenSesame -> "open sesame"
+                | _ -> Utilities.Helpers.duToKebab style
 
         match emphasisStyle with
         | :? TextEmphasisStyle as t -> stringifyStyle t
@@ -340,18 +262,8 @@ module Text =
         | _ -> "unknown text emphasis style"
 
     let private underlinePositionToString (underlinePosition: ITextUnderlinePosition) =
-        let stringifyUnderlinePosition =
-            function
-                | FromFont -> "from-font"
-                | Under -> "under"
-                | Left -> "left"
-                | Right -> "right"
-                | AutoPos -> "auto-pos"
-                | Above -> "above"
-                | Below -> "below"
-
         match underlinePosition with
-        | :? UnderlinePosition as t -> stringifyUnderlinePosition t
+        | :? UnderlinePosition as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | _ -> "unknown text underline position"
@@ -408,69 +320,35 @@ module Text =
         | _ -> "Unknown tab size"
 
     let private textOrientationToString (textOrientation: ITextOrientation) =
-        let stringifyOrientation =
-            function
-                | Mixed -> "mixed"
-                | Upright -> "upright"
-                | SidewaysRight -> "sideways-right"
-                | Sideways -> "sideways"
-                | UseGlyphOrientation -> "use-glyph-orientation"
-
         match textOrientation with
-        | :? TextOrientation as t -> stringifyOrientation t
+        | :? TextOrientation as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown text orientation"
 
     let private textRenderingToString (textRendering: ITextRendering) =
-        let stringifyRendering =
-            function
-                | OptimizeSpeed -> "optimize-speed"
-                | OptimizeLegibility -> "optimize-legibility"
-                | GeometricPrecision -> "geometric-precision"
-
         match textRendering with
-        | :? TextRendering as t -> stringifyRendering t
+        | :? TextRendering as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown text rendering"
 
     let private textJustifyToString (textJustify: ITextJustify) =
-        let stringifyJustification =
-            function
-                | InterWord -> "inter-word"
-                | InterCharacter -> "inter-character"
-
         match textJustify with
-        | :? TextJustify as j -> stringifyJustification j
+        | :? TextJustify as j -> Utilities.Helpers.duToKebab j
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown text justification"
 
     let private whitespaceToString (whitespace: IWhiteSpace) =
-        let stringifyWhitespace =
-            function
-                | NoWrap -> "no-wrap"
-                | Pre -> "pre"
-                | PreWrap -> "pre-wrap"
-                | PreLine -> "pre-line"
-                | BreakSpaces -> "break-spaces"
-
         match whitespace with
-        | :? WhiteSpace as ws -> stringifyWhitespace ws
+        | :? WhiteSpace as ws -> Utilities.Helpers.duToKebab ws
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown whitespace"
 
     let private userSelectToString (userSelect: IUserSelect) =
-        let stringifyUserSelect =
-            function
-                | Text -> "text"
-                | Contain -> "contain"
-                | All -> "all"
-                | Element -> "element"
-
         match userSelect with
-        | :? UserSelect as u -> stringifyUserSelect u
+        | :? UserSelect as u -> Utilities.Helpers.duToLowercase u
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g

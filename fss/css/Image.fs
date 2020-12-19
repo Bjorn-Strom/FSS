@@ -45,41 +45,9 @@ module ImageTypes =
         interface IColorStop
 
 module Image =
-    let private sideOrCornerValue (value: SideOrCorner) =
-        match value with
-        | ToTop -> "to top"
-        | ToTopRight -> "to top right"
-        | ToTopLeft -> "to top left"
-        | ToRight -> "to right"
-        | ToBottom -> "to bottom"
-        | ToBottomRight -> "to bottom right"
-        | ToBottomLeft -> "to bottom left"
-        | ToLeft -> "to left"
-
-    let private positionValue (value: ImagePosition) =
-        match value with
-        | AtTop -> "at top"
-        | AtTopRight -> "at top right"
-        | AtTopLeft -> "at top left"
-        | AtTopCenter -> "at top center"
-        | AtRightTop -> "at right top"
-        | AtRightBottom -> "at right bottom"
-        | AtBottom -> "at bottom"
-        | AtBottomRight -> "at bottom right"
-        | AtBottomLeft -> "at bottom left"
-        | AtBottomCenter -> "at bottom center"
-        | AtCenter -> "at center"
-        | AtCenterRight -> "at center right"
-        | AtCenterLeft -> "at center left"
-        | AtCenterBottom -> "at center bottom"
-        | AtLeft -> "at left"
-
-    let private sideValue =
-        function
-        | ClosestSide -> "closest-side"
-        | ClosestCorner -> "closest-corner"
-        | FarthestSide -> "farthest-side"
-        | FarthestCorner -> "farthest-corner"
+    let private sideOrCornerValue (value: SideOrCorner) = Utilities.Helpers.duToSpaced value
+    let private positionValue (value: ImagePosition) = Utilities.Helpers.duToSpaced value
+    let private sideValue (value: Side) = Utilities.Helpers.duToKebab value
 
     let private colorAndStopToString (colorStop: IColorStop) =
         let stringifyColorStop =

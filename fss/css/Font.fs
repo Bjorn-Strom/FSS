@@ -149,48 +149,24 @@ module FontTypes =
             | _ -> "Unknown font style"
 
     let fontStretchToString (stretch: IFontStretch) =
-        let stringifyStretch =
-            function
-                | SemiCondensed -> "semi-condensed"
-                | Condensed -> "condensed"
-                | ExtraCondensed -> "extra-condensed"
-                | UltraCondensed -> "ultra-condensed"
-                | SemiExpanded -> "semi-expanded"
-                | Expanded -> "expanded"
-                | ExtraExpanded -> "extra-expanded"
-                | UltraExpanded -> "ultra-expanded"
-
         match stretch with
-            | :? FontStretch as f -> stringifyStretch f
+            | :? FontStretch as f -> Utilities.Helpers.duToKebab f
             | :? Global as g -> GlobalValue.global' g
             | :? Normal -> GlobalValue.normal
             | :? Units.Percent.Percent as p -> Units.Percent.value p
             | _ -> "Unknown font stretch"
 
     let fontWeightToString (fontWeight: IFontWeight) =
-         let stringifyWeight =
-             function
-                 | Bold -> "bold"
-                 | Lighter -> "lighter"
-                 | Bolder -> "bolder"
-
          match fontWeight with
+            | :? FontWeight as f -> Utilities.Helpers.duToLowercase f
             | :? CssInt as i -> GlobalValue.int i
-            | :? FontWeight as f -> stringifyWeight f
             | :? Global as g -> GlobalValue.global' g
             | :? Normal -> GlobalValue.normal
             | _ -> "Unknown font weight"
 
     let fontDisplayToString (display: IFontDisplay) =
-        let stringifyDisplay =
-            function
-                | Block -> "block"
-                | Swap -> "swap"
-                | Fallback -> "fallback"
-                | Optional -> "optional"
-
         match display with
-        | :? FontDisplay as f -> stringifyDisplay f
+        | :? FontDisplay as f -> Utilities.Helpers.duToLowercase f
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown font display value"
 
@@ -199,21 +175,8 @@ module Font =
     open FontTypes
 
     let private fontSizeToString (fontSize: IFontSize) =
-        let stringifyFontSize =
-            function
-                | XxSmall -> "xx-small"
-                | XSmall -> "x-small"
-                | Small -> "small"
-                | Medium -> "medium"
-                | Large -> "large"
-                | XLarge -> "x-large"
-                | XxLarge -> "xx-large"
-                | XxxLarge -> "xxx-large"
-                | Smaller -> "smaller"
-                | Larger -> "larger"
-
         match fontSize with
-        | :? FontSize as f -> stringifyFontSize f
+        | :? FontSize as f -> Utilities.Helpers.duToKebab f
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Global as g -> GlobalValue.global' g
@@ -221,14 +184,11 @@ module Font =
 
     let private familyToString (fontFamily: IFontFamily) =
         let stringifyFontName (FontName.FontName n) = n
-        let stringifyFamily =
-            function
-                | Serif -> "serif"
-                | SansSerif -> "sans-serif"
-                | Monospace -> "monospace"
-                | Cursive -> "cursive"
+        let stringifyFamily fontFamily =
+            match fontFamily with
                 | Custom c -> c
                 | FontName n -> stringifyFontName n
+                | _ -> Utilities.Helpers.duToKebab fontFamily
 
         match fontFamily with
             | :? FontFamily as f -> stringifyFamily f
@@ -271,72 +231,29 @@ module Font =
         | _ -> "unknown font feature setting"
 
     let private  variantNumericToString (variant: IFontVariantNumeric) =
-        let stringifyVariant =
-            function
-                | Ordinal -> "ordinal"
-                | SlashedZero -> "slashed-zero"
-                | LiningNums -> "lining-nums"
-                | OldstyleNums -> "oldstyle-nums"
-                | ProportionalNums -> "proportional-nums"
-                | TabularNums -> "tabular-nums"
-                | DiagonalFractions -> "diagonal-fractions"
-                | StackedFractions -> "stacked-fractions"
-
         match variant with
-        | :? FontVariantNumeric as f -> stringifyVariant f
+        | :? FontVariantNumeric as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
 
     let private fontVariantCapsToString (variant: IFontVariantCaps) =
-        let stringifyVariant =
-            function
-                | SmallCaps -> "small-caps"
-                | AllSmallCaps -> "all-small-caps"
-                | PetiteCaps -> "petite-caps"
-                | AllPetiteCaps -> "all-petite-caps"
-                | Unicase -> "unicase"
-                | TitlingCaps -> "titling-caps"
-
         match variant with
-        | :? FontVariantCaps as f -> stringifyVariant f
+        | :? FontVariantCaps as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
 
     let private variantEastAsianToString (variant: IFontVariantEastAsian) =
-        let stringifyVariant =
-            function
-            | Ruby -> "ruby"
-            | Jis78 -> "jis78"
-            | Jis83 -> "jis83"
-            | Jis90 -> "jis90"
-            | Jis04 -> "jis04"
-            | Simplified -> "simplified"
-            | Traditional -> "traditional"
-            | FullWidth -> "full-width"
-            | ProportionalWidth -> "proportional-width"
-
         match variant with
-        | :? FontVariantEastAsian as f -> stringifyVariant f
+        | :? FontVariantEastAsian as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
 
     let private  variantLigatureToString (variant: IFontVariantLigature) =
-        let stringifyVariant =
-            function
-            | CommonLigatures -> "common-ligatures"
-            | NoCommonLigatures -> "no-common-ligatures"
-            | DiscretionaryLigatures -> "discretionary-ligatures"
-            | NoDiscretionaryLigatures -> "no-discretionary-ligatures"
-            | HistoricalLigatures -> "historical-ligatures"
-            | NoHistoricalLigatures -> "no-historical-ligatures"
-            | Contextual -> "contextual"
-            | NoContextual -> "no-contextual"
-
         match variant with
-        | :? FontVariantLigature as f -> stringifyVariant f
+        | :? FontVariantLigature as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none
@@ -352,19 +269,12 @@ module Font =
         | _ -> "Unknown lineheight"
 
     let private lineBreakToString (linebreak: ILineBreak) =
-        let stringifylineBreak =
-            function
-                | Loose -> "loose"
-                | Strict -> "strict"
-                | Anywhere -> "anywhere"
-
         match linebreak with
-        | :? LineBreak as l -> stringifylineBreak l
+        | :? LineBreak as l -> Utilities.Helpers.duToLowercase l
         | :? Auto -> GlobalValue.auto
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown line break"
-
 
     let private letterSpacingToString (letterSpacing: ILetterSpacing) =
         match letterSpacing with
@@ -372,7 +282,6 @@ module Font =
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown lineheight"
-
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     let private sizeCssValue value = PropertyValue.cssValue Property.FontSize value

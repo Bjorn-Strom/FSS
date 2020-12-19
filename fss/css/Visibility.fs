@@ -8,14 +8,8 @@ module VisibilityType =
         interface IVisibility
 
     let visibilityToString (visibility: IVisibility) =
-        let stringifyVisibility =
-            function
-                | Visible -> "visible"
-                | Hidden -> "hidden"
-                | Collapse -> "collapse"
-
         match visibility with
-        | :? VisibilityType as v -> stringifyVisibility v
+        | :? VisibilityType as v -> Utilities.Helpers.duToLowercase v
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown visibility"
 
@@ -64,14 +58,8 @@ module PaintOrder =
     open PaintOrderTypes
 
     let private paintOrderToString (paintOrder: IPaintOrder) =
-        let stringifyPaintOrder =
-            function
-                | Stroke -> "stroke"
-                | Markers -> "markers"
-                | Fill -> "fill"
-
         match paintOrder with
-        | :? PaintOrder as p -> stringifyPaintOrder p
+        | :? PaintOrder as p -> Utilities.Helpers.duToLowercase p
         | :? Normal -> GlobalValue.normal
         | _ -> "unknown paint order"
 

@@ -9,14 +9,7 @@ module TimingFunctionType =
         | Start
         | End
 
-    let stepsValue (value: Step) =
-        match value with
-            | JumpStart -> "jump-start"
-            | JumpEnd -> "jump-end"
-            | JumpNone -> "jump-none"
-            | JumpBoth -> "jump-both"
-            | Start -> "start"
-            | End -> "end"
+    let stepsValue (value: Step) = Utilities.Helpers.duToKebab value
 
     type Timing =
         | Ease
@@ -32,18 +25,12 @@ module TimingFunctionType =
         interface ITransitionTimingFunction
 
     let timingToString (timing: ITransitionTimingFunction) =
-        let timingToString =
-            function
-                | Ease -> "ease"
-                | EaseIn -> "ease-in"
-                | EaseOut -> "ease-out"
-                | EaseInOut -> "ease-in-out"
-                | Linear -> "linear"
-                | StepStart -> "step-start"
-                | StepEnd -> "step-end"
+        let timingToString timing =
+            match timing with
                 | CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" p1 p2 p3 p4
                 | Steps n -> sprintf "steps(%d)" n
                 | StepsWithTerm (n, term) -> sprintf "steps(%d, %s)" n (stepsValue term)
+                | _ -> Utilities.Helpers.duToKebab timing
 
         match timing with
         | :? Timing as t -> timingToString t

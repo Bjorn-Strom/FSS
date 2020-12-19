@@ -50,86 +50,45 @@ module Background =
     open BackgroundType
 
     let private backgroundClipToString (clip: IBackgroundClip) =
-        let stringifyClip =
-            function
-                | BackgroundClip.BorderBox -> "border-box"
-                | BackgroundClip.PaddingBox -> "padding-box"
-                | BackgroundClip.ContentBox -> "content-box"
-                | BackgroundClip.Text -> "text"
-
         match clip with
-        | :? BackgroundClip as b -> stringifyClip b
+        | :? BackgroundClip as b -> Utilities.Helpers.duToKebab b
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown background clip"
 
     let private backgroundOriginToString (clip: IBackgroundOrigin) =
-        let stringifyOrigin =
-            function
-                | BorderBox -> "border-box"
-                | PaddingBox -> "padding-box"
-                | ContentBox -> "content-box"
-
         match clip with
-        | :? BackgroundOrigin as b -> stringifyOrigin b
+        | :? BackgroundOrigin as b -> Utilities.Helpers.duToKebab b
         | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown background origin"
 
     let private repeatToString (repeat: IBackgroundRepeat) =
-        let stringifyRepeat =
-            function
-                | RepeatX -> "repeat-x"
-                | RepeatY -> "repeat-y"
-                | Repeat -> "repeat"
-                | Space -> "space"
-                | Round -> "round"
-                | NoRepeat -> "no-repeat"
-
         match repeat with
-        | :? BackgroundRepeat as b -> stringifyRepeat b
+        | :? BackgroundRepeat as b -> Utilities.Helpers.duToKebab b
         | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown background repeat"
 
     let private sizeToString (size: IBackgroundSize) =
-        let stringifySize =
-            function
-                | Cover -> "cover"
-                | Contain -> "contain"
-
         match size with
-        | :? BackgroundSize as b -> stringifySize b
+        | :? BackgroundSize as b -> Utilities.Helpers.duToLowercase b
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
-        | _ -> "unknown background size"
+        | _ -> "Unknown background size"
 
     let private attachmentToString (attachment: IBackgroundAttachment) =
-        let stringifyAttachment =
-            function
-                | Scroll -> "scroll"
-                | Fixed -> "fixed"
-                | Local -> "local"
-
         match attachment with
-        | :? BackgroundAttachment as b -> stringifyAttachment b
+        | :? BackgroundAttachment as b -> Utilities.Helpers.duToLowercase b
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown background attachment"
 
     let private positionToString (position: IBackgroundPosition) =
-        let stringifyPosition =
-            function
-                | Top -> "top"
-                | Bottom -> "bottom"
-                | Left -> "left"
-                | Right -> "right"
-                | Center -> "center"
-
         match position with
-        | :? BackgroundPosition as b -> stringifyPosition b
+        | :? BackgroundPosition as b -> Utilities.Helpers.duToLowercase b
         | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | _ -> "unknown background position"
+        | _ -> "Unknown background position"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
     let private clipValue value = PropertyValue.cssValue Property.BackgroundClip value
