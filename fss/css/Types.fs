@@ -107,8 +107,11 @@ module Global =
     type IFlexShrink     = interface end
     type IFlexBasis      = interface end
 
-    type IMargin  = interface end
-    type IPadding = interface end
+
+    type IMargin        = interface end
+    type IPadding       = interface end
+    type IScrollMargin  = interface end
+    type IScrollPadding = interface end
 
     type IContentSize = interface end
 
@@ -127,6 +130,7 @@ module Global =
 
     type IContent = interface end
 
+    type IOutline      = interface end
     type IOutlineColor = interface end
     type IOutlineWidth = interface end
     type IOutlineStyle = interface end
@@ -411,6 +415,7 @@ module Global =
         interface IPerspective
         interface ICursor
         interface IContent
+        interface IOutline
         interface IOutlineColor
         interface IOutlineWidth
         interface IOutlineStyle
@@ -450,6 +455,8 @@ module Global =
         interface IWidows
         interface IAll
         interface IFlex
+        interface IScrollMargin
+        interface IScrollPadding
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

@@ -10,6 +10,18 @@ module Outline =
         testList "Outline"
             [
                 test
+                    "Outline initial"
+                    [ Outline.Initial ]
+                    [ "outline" ==> "initial" ]
+                test
+                    "Outline inherit"
+                    [ Outline.Inherit ]
+                    [ "outline" ==> "inherit" ]
+                test
+                    "Outline unset"
+                    [ Outline.Unset ]
+                    [ "outline" ==> "unset" ]
+                test
                     "Outline width px"
                     [ OutlineWidth' (px 40) ]
                     [ "outlineWidth" ==> "40px" ]

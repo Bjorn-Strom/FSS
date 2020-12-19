@@ -101,3 +101,95 @@ module Padding =
         static member Unset = Unset |> paddingLeftValue'
 
     let PaddingLeft' (left: IPadding) = PaddingLeft.Value(left)
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
+[<AutoOpen>]
+module ScrollPadding =
+    let private scrollPaddingToString (scrollPadding: IScrollPadding) =
+        match scrollPadding with
+        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown scrollPadding"
+
+    let private scrollPaddingValue value = PropertyValue.cssValue Property.ScrollPadding value
+    let private scrollPaddingValue' value =
+        value
+        |> scrollPaddingToString
+        |> scrollPaddingValue
+
+    type ScrollPadding =
+        static member Value (width: IScrollPadding) = width |> scrollPaddingValue'
+
+        static member Value (vertical: IScrollPadding, horizontal: IScrollPadding) =
+            sprintf "%s %s"
+                (scrollPaddingToString vertical)
+                (scrollPaddingToString horizontal)
+            |> scrollPaddingValue
+        static member Value (top: IScrollPadding, auto: IScrollPadding, bottom: IScrollPadding) =
+            sprintf "%s %s %s"
+                (scrollPaddingToString top)
+                (scrollPaddingToString auto)
+                (scrollPaddingToString bottom)
+            |> scrollPaddingValue
+        static member Value (top: IScrollPadding, right: IScrollPadding, bottom: IScrollPadding, left: IScrollPadding) =
+            sprintf "%s %s %s %s"
+                (scrollPaddingToString top)
+                (scrollPaddingToString right)
+                (scrollPaddingToString bottom)
+                (scrollPaddingToString left)
+            |> scrollPaddingValue
+        static member Inherit = Inherit |> scrollPaddingValue'
+        static member Initial = Initial |> scrollPaddingValue'
+        static member Unset = Unset |> scrollPaddingValue'
+
+    let ScrollPadding' (scrollPadding: IScrollPadding) = ScrollPadding.Value(scrollPadding)
+
+    let private scrollPaddingTopValue value = PropertyValue.cssValue Property.ScrollPaddingTop value
+    let private scrollPaddingTopValue' value =
+        value
+        |> scrollPaddingToString
+        |> scrollPaddingTopValue
+    type ScrollPaddingTop =
+        static member Value (top: IScrollPadding) = top |> scrollPaddingTopValue'
+        static member Inherit = Inherit |> scrollPaddingTopValue'
+        static member Initial = Initial |> scrollPaddingTopValue'
+        static member Unset = Unset |> scrollPaddingTopValue'
+
+    let ScrollPaddingTop' (top: IScrollPadding) = ScrollPaddingTop.Value(top)
+
+    let private scrollPaddingRightValue value = PropertyValue.cssValue Property.ScrollPaddingRight value
+    let private scrollPaddingRightValue' value =
+        value
+        |> scrollPaddingToString
+        |> scrollPaddingRightValue
+    type ScrollPaddingRight =
+        static member Value (right: IScrollPadding) = right |> scrollPaddingRightValue'
+        static member Inherit = Inherit |> scrollPaddingRightValue'
+        static member Initial = Initial |> scrollPaddingRightValue'
+        static member Unset = Unset |> scrollPaddingRightValue'
+    let ScrollPaddingRight' (right: IScrollPadding) = ScrollPaddingRight.Value(right)
+
+    let private scrollPaddingBottomValue value = PropertyValue.cssValue Property.ScrollPaddingBottom value
+    let private scrollPaddingBottomValue' value =
+        value
+        |> scrollPaddingToString
+        |> scrollPaddingBottomValue
+    type ScrollPaddingBottom =
+        static member Value (bottom: IScrollPadding) = bottom |> scrollPaddingBottomValue'
+        static member Inherit = Inherit |> scrollPaddingBottomValue'
+        static member Initial = Initial |> scrollPaddingBottomValue'
+        static member Unset = Unset |> scrollPaddingBottomValue'
+    let ScrollPaddingBottom' (bottom: IScrollPadding) = ScrollPaddingBottom.Value(bottom)
+
+    let private scrollPaddingLeftValue value = PropertyValue.cssValue Property.ScrollPaddingLeft value
+    let private scrollPaddingLeftValue' value =
+        value
+        |> scrollPaddingToString
+        |> scrollPaddingLeftValue
+    type ScrollPaddingLeft =
+        static member Value (left: IScrollPadding) = left |> scrollPaddingLeftValue'
+        static member Inherit = Inherit |> scrollPaddingLeftValue'
+        static member Initial = Initial |> scrollPaddingLeftValue'
+        static member Unset = Unset |> scrollPaddingLeftValue'
+
+    let ScrollPaddingLeft' (left: IScrollPadding) = ScrollPaddingLeft.Value(left)

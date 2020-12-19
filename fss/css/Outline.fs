@@ -25,6 +25,11 @@ module OutlineTypes =
 module Outline  =
     open OutlineTypes
 
+    let private outlineToString (color: IOutline) =
+        match color with
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown outline"
+
     let private outlineColorToString (color: IOutlineColor) =
         match color with
         | :? CSSColor as c -> CSSColorValue.color c
@@ -45,13 +50,29 @@ module Outline  =
             | :? None -> GlobalValue.none
             | _ -> "Unknown outline style"
 
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/outline
+    let private outlineValue value = PropertyValue.cssValue Property.Outline value
+    let private outlineValue' value =
+        value
+        |> outlineToString
+        |> outlineValue
+
+    type Outline =
+        static member Value (outline: IOutline) = outline |> outlineValue'
+
+        static member Inherit = Inherit |> outlineValue'
+        static member Initial = Initial |> outlineValue'
+        static member Unset = Unset |> outlineValue'
+
+    let OutlineValue' (outline: IOutline) = Outline.Value(outline)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
     let private colorValue value = PropertyValue.cssValue Property.OutlineColor value
     let private colorValue' value =
         value
         |> outlineColorToString
         |> colorValue
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
     type OutlineColor =
         static member Value (color: IOutlineColor) = color |> colorValue'
         static member black = CSSColor.black |> colorValue'

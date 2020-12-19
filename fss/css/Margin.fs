@@ -98,3 +98,96 @@ module Margin =
         static member Unset = Unset |> marginLeftValue'
 
     let MarginLeft' (left: IMargin) = MarginLeft.Value(left)
+
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
+[<AutoOpen>]
+module ScrollMargin =
+    let private scrollMarginToString (scrollMargin: IScrollMargin) =
+        match scrollMargin with
+        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown scrollMargin"
+
+    let private scrollMarginValue value = PropertyValue.cssValue Property.ScrollMargin value
+    let private scrollMarginValue' value =
+        value
+        |> scrollMarginToString
+        |> scrollMarginValue
+
+    type ScrollMargin =
+        static member Value (width: IScrollMargin) = width |> scrollMarginValue'
+
+        static member Value (vertical: IScrollMargin, horizontal: IScrollMargin) =
+            sprintf "%s %s"
+                (scrollMarginToString vertical)
+                (scrollMarginToString horizontal)
+            |> scrollMarginValue
+        static member Value (top: IScrollMargin, auto: IScrollMargin, bottom: IScrollMargin) =
+            sprintf "%s %s %s"
+                (scrollMarginToString top)
+                (scrollMarginToString auto)
+                (scrollMarginToString bottom)
+            |> scrollMarginValue
+        static member Value (top: IScrollMargin, right: IScrollMargin, bottom: IScrollMargin, left: IScrollMargin) =
+            sprintf "%s %s %s %s"
+                (scrollMarginToString top)
+                (scrollMarginToString right)
+                (scrollMarginToString bottom)
+                (scrollMarginToString left)
+            |> scrollMarginValue
+        static member Inherit = Inherit |> scrollMarginValue'
+        static member Initial = Initial |> scrollMarginValue'
+        static member Unset = Unset |> scrollMarginValue'
+
+    let ScrollMargin' (scrollMargin: IScrollMargin) = ScrollMargin.Value(scrollMargin)
+
+    let private scrollMarginTopValue value = PropertyValue.cssValue Property.ScrollMarginTop value
+    let private scrollMarginTopValue' value =
+        value
+        |> scrollMarginToString
+        |> scrollMarginTopValue
+    type ScrollMarginTop =
+        static member Value (top: IScrollMargin) = top |> scrollMarginTopValue'
+        static member Inherit = Inherit |> scrollMarginTopValue'
+        static member Initial = Initial |> scrollMarginTopValue'
+        static member Unset = Unset |> scrollMarginTopValue'
+
+    let ScrollMarginTop' (top: IScrollMargin) = ScrollMarginTop.Value(top)
+
+    let private scrollMarginRightValue value = PropertyValue.cssValue Property.ScrollMarginRight value
+    let private scrollMarginRightValue' value =
+        value
+        |> scrollMarginToString
+        |> scrollMarginRightValue
+    type ScrollMarginRight =
+        static member Value (right: IScrollMargin) = right |> scrollMarginRightValue'
+        static member Inherit = Inherit |> scrollMarginRightValue'
+        static member Initial = Initial |> scrollMarginRightValue'
+        static member Unset = Unset |> scrollMarginRightValue'
+    let ScrollMarginRight' (right: IScrollMargin) = ScrollMarginRight.Value(right)
+
+    let private scrollMarginBottomValue value = PropertyValue.cssValue Property.ScrollMarginBottom value
+    let private scrollMarginBottomValue' value =
+        value
+        |> scrollMarginToString
+        |> scrollMarginBottomValue
+    type ScrollMarginBottom =
+        static member Value (bottom: IScrollMargin) = bottom |> scrollMarginBottomValue'
+        static member Inherit = Inherit |> scrollMarginBottomValue'
+        static member Initial = Initial |> scrollMarginBottomValue'
+        static member Unset = Unset |> scrollMarginBottomValue'
+    let ScrollMarginBottom' (bottom: IScrollMargin) = ScrollMarginBottom.Value(bottom)
+
+    let private scrollMarginLeftValue value = PropertyValue.cssValue Property.ScrollMarginLeft value
+    let private scrollMarginLeftValue' value =
+        value
+        |> scrollMarginToString
+        |> scrollMarginLeftValue
+    type ScrollMarginLeft =
+        static member Value (left: IScrollMargin) = left |> scrollMarginLeftValue'
+        static member Inherit = Inherit |> scrollMarginLeftValue'
+        static member Initial = Initial |> scrollMarginLeftValue'
+        static member Unset = Unset |> scrollMarginLeftValue'
+
+    let ScrollMarginLeft' (left: IScrollMargin) = ScrollMarginLeft.Value(left)

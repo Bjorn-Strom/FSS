@@ -87,6 +87,8 @@ module Size =
         interface IVerticalAlign
         interface IWordSpacing
         interface ITabSize
+        interface IScrollMargin
+        interface IScrollPadding
 
     let value (v: Size): string =
         match v with
