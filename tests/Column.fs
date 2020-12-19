@@ -111,6 +111,30 @@ module Column =
                     [ColumnSpan.Unset]
                     ["columnSpan" ==> "unset"]
                 test
+                    "Columns Inherit"
+                    [Columns.Inherit]
+                    ["columns" ==> "inherit"]
+                test
+                    "Columns Initial"
+                    [Columns.Initial]
+                    ["columns" ==> "initial"]
+                test
+                    "Columns Unset"
+                    [Columns.Unset]
+                    ["columns" ==> "unset"]
+                test
+                    "Column rule Inherit"
+                    [ColumnRule.Inherit]
+                    ["columnRule" ==> "inherit"]
+                test
+                    "Column rule Initial"
+                    [ColumnRule.Initial]
+                    ["columnRule" ==> "initial"]
+                test
+                    "Column rule Unset"
+                    [ColumnRule.Unset]
+                    ["columnRule" ==> "unset"]
+                test
                     "Column rule width thin"
                     [ColumnRuleWidth.Thin]
                     ["columnRuleWidth" ==> "thin"]

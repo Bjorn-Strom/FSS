@@ -139,8 +139,10 @@ module Global =
     type IGridAutoRows        = interface end
     type IGridAutoColumns     = interface end
 
+    type IColumns             = interface end
     type IColumnGap           = interface end
     type IColumnSpan          = interface end
+    type IColumnRule          = interface end
     type IColumnRuleWidth     = interface end
     type IColumnRuleStyle     = interface end
     type IColumnRuleColor     = interface end
@@ -419,8 +421,10 @@ module Global =
         interface IResize
         interface IWordSpacing
         interface IWordBreak
+        interface IColumns
         interface IColumnGap
         interface IColumnSpan
+        interface IColumnRule
         interface IColumnRuleWidth
         interface IColumnRuleStyle
         interface IColumnRuleColor

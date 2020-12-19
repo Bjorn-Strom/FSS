@@ -62,6 +62,7 @@ module Property =
         | BorderTopWidth
         | BorderTop
         | BorderWidth
+        | BorderBlockColor
         | Bottom
         | BoxDecorationBreak
         | BoxShadow

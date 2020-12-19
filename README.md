@@ -65,6 +65,7 @@ LINK
 - Installation
 - Philosophy
 - Basic use
+- Conditional Styling
 - Psuedoclasses and selectors
 - Composition
 - Labels

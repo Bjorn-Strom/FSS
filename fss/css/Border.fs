@@ -158,12 +158,12 @@ module Border =
         | :? Keywords as k -> GlobalValue.keywords k
         | _ -> "Unknown border image source"
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/border
     let private borderToString (border: IBorder) =
             match border with
             | :? Keywords as k -> GlobalValue.keywords k
             | _ -> "Unknown border"
 
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/border
     let private borderValue value = PropertyValue.cssValue Property.Border value
     let private borderValue' value =
         value

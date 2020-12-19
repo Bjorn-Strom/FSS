@@ -51,6 +51,16 @@ module Column =
         | :? None -> GlobalValue.none
         | _ -> "Unknown column span"
 
+    let private columnsToString(columns: IColumns) =
+        match columns with
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown columns"
+
+    let private columnRuleToString(columnRule: IColumnRule) =
+        match columnRule with
+        | :? Keywords as k -> GlobalValue.keywords k
+        | _ -> "Unknown column rule"
+
     let private columnRuleWidthToString (ruleWidth: IColumnRuleWidth) =
         let stringifyRuleWidth =
             function
@@ -141,6 +151,36 @@ module Column =
         static member None = None |> columnSpanValue'
 
     let ColumnSpan' (span: IColumnSpan) = ColumnSpan.Value(span)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/columns
+    let private columnsValue value = PropertyValue.cssValue Property.Columns value
+    let private columnsValue' value =
+        value
+        |> columnsToString
+        |> columnsValue
+
+    type Columns =
+        static member Value (columns: IColumns) = columns |> columnsValue'
+        static member Inherit = Inherit |> columnsValue'
+        static member Initial = Initial |> columnsValue'
+        static member Unset = Unset |> columnsValue'
+
+    let Columns' (columns: IColumns) = columns |> Columns.Value
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule
+    let private columnRuleValue value = PropertyValue.cssValue Property.ColumnRule value
+    let private columnRuleValue' value =
+        value
+        |> columnRuleToString
+        |> columnRuleValue
+
+    type ColumnRule =
+        static member Value (rule: IColumnRule) = rule |> columnRuleValue'
+        static member Inherit = Inherit |> columnRuleValue'
+        static member Initial = Initial |> columnRuleValue'
+        static member Unset = Unset |> columnRuleValue'
+
+    let ColumnRule' (rule: IColumnRule) = rule |> ColumnRule.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
     let private columnRuleWidthValue value = PropertyValue.cssValue Property.ColumnRuleWidth value
