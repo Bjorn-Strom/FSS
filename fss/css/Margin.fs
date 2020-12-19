@@ -7,7 +7,7 @@ module Margin =
         match margin with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown margin"
 

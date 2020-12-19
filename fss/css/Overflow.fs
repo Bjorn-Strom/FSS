@@ -28,7 +28,7 @@ module Overflow =
 
         match overflow with
         | :? Overflow as o -> stringifyOverflow o
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown overflow"
 
@@ -41,7 +41,7 @@ module Overflow =
         match wrap with
         | :? OverflowWrap as o -> stringifyWrap o
         | :? Normal -> GlobalValue.normal
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown overflow wrap"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow

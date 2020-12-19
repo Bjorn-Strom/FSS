@@ -130,209 +130,92 @@ module Flex =
     open FlexType
 
     let private alignContentToString (alignment: IAlignContent) =
-        let stringifyAlignment =
-            function
-                | AlignContent.Start -> "start"
-                | AlignContent.End -> "end"
-                | AlignContent.FlexStart -> "flex-start"
-                | AlignContent.FlexEnd -> "flex-end"
-                | AlignContent.Center -> "center"
-                | AlignContent.Baseline -> "baseline"
-                | AlignContent.FirstBaseline -> "first baseline"
-                | AlignContent.LastBaseline -> "last baseline"
-                | AlignContent.Stretch -> "stretch"
-                | AlignContent.Safe -> "safe"
-                | AlignContent.Unsafe -> "unsafe"
-                | AlignContent.SpaceBetween -> "space-between"
-                | AlignContent.SpaceAround -> "space-around"
-                | AlignContent.SpaceEvenly -> "space-evenly"
-
         match alignment with
-        | :? AlignContent as a -> stringifyAlignment a
+        | :? AlignContent as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown align content"
 
     let private alignItemsToString (alignment: IAlignItems) =
-        let stringifyAlignment =
-            function
-                | AlignItems.Start -> "start"
-                | AlignItems.End -> "end"
-                | AlignItems.FlexStart -> "flex-start"
-                | AlignItems.FlexEnd -> "flex-end"
-                | AlignItems.Center -> "center"
-                | AlignItems.Baseline -> "baseline"
-                | AlignItems.FirstBaseline -> "first baseline"
-                | AlignItems.LastBaseline -> "last baseline"
-                | AlignItems.Stretch -> "stretch"
-                | AlignItems.Safe -> "safe"
-                | AlignItems.Unsafe -> "unsafe"
-                | AlignItems.SelfStart -> "self-start"
-                | AlignItems.SelfEnd -> "self-end"
-
         match alignment with
-        | :? AlignItems as a -> stringifyAlignment a
+        | :? AlignItems as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown align items"
 
     let private alignSelfToString (alignment: IAlignSelf) =
-        let stringifyAlignment =
-            function
-                | AlignSelf.Start -> "start"
-                | AlignSelf.End -> "end"
-                | AlignSelf.FlexStart -> "flex-start"
-                | AlignSelf.FlexEnd -> "flex-end"
-                | AlignSelf.Center -> "center"
-                | AlignSelf.Baseline -> "baseline"
-                | AlignSelf.FirstBaseline -> "first baseline"
-                | AlignSelf.LastBaseline -> "last baseline"
-                | AlignSelf.Stretch -> "stretch"
-                | AlignSelf.Safe -> "safe"
-                | AlignSelf.Unsafe -> "unsafe"
-                | AlignSelf.SelfStart -> "self-start"
-                | AlignSelf.SelfEnd -> "self-end"
-
         match alignment with
-        | :? AlignSelf as a -> stringifyAlignment a
+        | :? AlignSelf as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown align self"
 
     let private justifyContentToString (justification: IJustifyContent) =
-        let stringifyJustification =
-            function
-                | JustifyContent.Start -> "start"
-                | JustifyContent.End -> "end"
-                | JustifyContent.FlexStart -> "flex-start"
-                | JustifyContent.FlexEnd -> "flex-end"
-                | JustifyContent.Center -> "center"
-                | JustifyContent.Baseline -> "baseline"
-                | JustifyContent.FirstBaseline -> "first baseline"
-                | JustifyContent.LastBaseline -> "last baseline"
-                | JustifyContent.Stretch -> "stretch"
-                | JustifyContent.Safe -> "safe"
-                | JustifyContent.Unsafe -> "unsafe"
-                | JustifyContent.SpaceBetween -> "space-between"
-                | JustifyContent.SpaceAround -> "space-around"
-                | JustifyContent.SpaceEvenly -> "space-evenly"
-                | JustifyContent.Left -> "left"
-                | JustifyContent.Right -> "right"
-
         match justification with
-        | :? JustifyContent as a -> stringifyJustification a
+        | :? JustifyContent as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown justify content"
 
 
     let private justifyItemsToString (justification: IJustifyItems) =
-        let stringifyJustification =
-            function
-                | JustifyItems.Start -> "start"
-                | JustifyItems.End -> "end"
-                | JustifyItems.FlexStart -> "flex-start"
-                | JustifyItems.FlexEnd -> "flex-end"
-                | JustifyItems.Center -> "center"
-                | JustifyItems.Baseline -> "baseline"
-                | JustifyItems.FirstBaseline -> "first baseline"
-                | JustifyItems.LastBaseline -> "last baseline"
-                | JustifyItems.Stretch -> "stretch"
-                | JustifyItems.Safe -> "safe"
-                | JustifyItems.Unsafe -> "unsafe"
-                | JustifyItems.Left -> "left"
-                | JustifyItems.Right -> "right"
-                | JustifyItems.SelfStart -> "self-start"
-                | JustifyItems.SelfEnd -> "self-end"
-                | JustifyItems.Legacy -> "legacy"
-
         match justification with
-        | :? JustifyItems as a -> stringifyJustification a
+        | :? JustifyItems as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown justify items"
 
     let private justifySelfToString (justification: IJustifySelf) =
-        let stringifyJustification =
-            function
-                | JustifySelf.Start -> "start"
-                | JustifySelf.End -> "end"
-                | JustifySelf.FlexStart -> "flex-start"
-                | JustifySelf.FlexEnd -> "flex-end"
-                | JustifySelf.Center -> "center"
-                | JustifySelf.Baseline -> "baseline"
-                | JustifySelf.FirstBaseline -> "first baseline"
-                | JustifySelf.LastBaseline -> "last baseline"
-                | JustifySelf.Stretch -> "stretch"
-                | JustifySelf.Safe -> "safe"
-                | JustifySelf.Unsafe -> "unsafe"
-                | JustifySelf.SelfStart -> "self-start"
-                | JustifySelf.SelfEnd -> "self-end"
-
         match justification with
-        | :? JustifySelf as a -> stringifyJustification a
+        | :? JustifySelf as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown justify self"
 
     let private flexDirectionToString (direction: IFlexDirection) =
-        let stringifyJustification =
-            function
-                | Row -> "row"
-                | RowReverse -> "row-reverse"
-                | Column -> "column"
-                | ColumnReverse -> "column-reverse"
-
         match direction with
-        | :? FlexDirection as a -> stringifyJustification a
-        | :? Global as k -> GlobalValue.global' k
+        | :? FlexDirection as a -> Utilities.Helpers.duToKebab a
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown flex direction"
 
-    let private flexWrapToString (direction: IFlexWrap) =
-        let stringifyJustification =
-            function
-                | NoWrap -> "no-wrap"
-                | Wrap -> "wrap"
-                | WrapReverse -> "wrap-reverse"
+    let private flexToString(flex: IFlex) =
+        match flex with
+        | :? Global as g -> GlobalValue.global' g
+        | :? Auto -> GlobalValue.auto
+        | :? None -> GlobalValue.none
+        | _ -> "Unknown flex"
 
+    let private flexWrapToString (direction: IFlexWrap) =
         match direction with
-        | :? FlexWrap as a -> stringifyJustification a
-        | :? Global as k -> GlobalValue.global' k
+        | :? FlexWrap as a -> Utilities.Helpers.duToKebab a
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown flex wrap"
 
     let private orderToString (order: IOrder) =
         match order with
         | :? CssInt as i -> GlobalValue.int i
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown order"
 
     let private flexGrowToString (flexGrow: IFlexGrow) =
         match flexGrow with
         | :? Global.CssFloat as f -> GlobalValue.float f
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown flex grow"
 
     let private flexShrinkToString (flexShrink: IFlexShrink) =
         match flexShrink with
         | :? Global.CssFloat as f -> GlobalValue.float f
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown flex shrink"
 
     let private flexBasisToString (basis: IFlexBasis) =
-        let stringifyBasis =
-            function
-                | Fill -> "fill"
-                | MaxContent -> "max-content"
-                | MinContent -> "min-content"
-                | FitContent -> "fit-content"
-                | Content -> "content"
-
         match basis with
-        | :? FlexBasis as b -> stringifyBasis b
+        | :? FlexBasis as b -> Utilities.Helpers.duToKebab b
         | :? Auto -> GlobalValue.auto
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown flex basis"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content

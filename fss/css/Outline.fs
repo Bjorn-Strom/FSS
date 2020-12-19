@@ -28,7 +28,7 @@ module Outline  =
     let private outlineColorToString (color: IOutlineColor) =
         match color with
         | :? CSSColor as c -> CSSColorValue.color c
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown outline color"
 
     let private outlineWidthToString (width: IOutlineWidth) =
@@ -40,7 +40,7 @@ module Outline  =
 
         match width with
             | :? OutlineWidth as c -> stringifyWidth c
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | :? Units.Size.Size as s -> Units.Size.value s
             | _ -> "Unknown outline width"
 
@@ -59,7 +59,7 @@ module Outline  =
 
         match style with
             | :? OutlineStyle as c -> stringifyStyle c
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | :? None -> GlobalValue.none
             | _ -> "Unknown outline style"
 

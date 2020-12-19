@@ -76,7 +76,7 @@ module Cursor =
         | :? Cursor as c -> stringifyCursor c
         | :? Auto -> GlobalValue.auto
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown cursor"
 
     let private cursorValue value = PropertyValue.cssValue Property.Cursor value

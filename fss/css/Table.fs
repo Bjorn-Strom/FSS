@@ -34,7 +34,7 @@ module Table =
 
         match captionSide with
         | :? CaptionSide as c -> stringifySide c
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown caption side"
 
     let private emptyCellsToString (emptyCells: IEmptyCells) =
@@ -45,7 +45,7 @@ module Table =
 
         match emptyCells with
         | :? EmptyCells as e -> stringifyCells e
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown empty cells"
 
     let private tableLayoutToString (tableLayout: ITableLayout) =
@@ -56,7 +56,7 @@ module Table =
         match tableLayout with
         | :? TableLayout as t -> stringifyTableLayout t
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown table layout"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side

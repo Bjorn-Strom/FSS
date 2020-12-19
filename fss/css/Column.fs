@@ -34,7 +34,7 @@ module Column =
 
     let private columnGapToString (gap: IColumnGap) =
         match gap with
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -47,18 +47,18 @@ module Column =
 
         match span with
         | :? ColumnSpan as c -> stringifyColumnSpan c
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown column span"
 
     let private columnsToString(columns: IColumns) =
         match columns with
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown columns"
 
     let private columnRuleToString(columnRule: IColumnRule) =
         match columnRule with
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column rule"
 
     let private columnRuleWidthToString (ruleWidth: IColumnRuleWidth) =
@@ -71,7 +71,7 @@ module Column =
         match ruleWidth with
         | :? ColumnRuleWidth as w -> stringifyRuleWidth w
         | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column rule width"
 
     let private columnRuleStyleToString (style: IColumnRuleStyle) =
@@ -90,34 +90,34 @@ module Column =
         match style with
         | :? ColumnRuleStyle as b -> stringifyStyle b
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column style"
 
     let private columnRuleColorToString (columnColor: IColumnRuleColor) =
         match columnColor with
         | :? CSSColor as c -> CSSColorValue.color c
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column rule color"
 
     let private columnCountToString (columnCount: IColumnCount) =
         match columnCount with
         | :? CssInt as i -> GlobalValue.int i
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column count"
 
     let private columnFillToString (columnFill: IColumnFill) =
         match columnFill with
         | :? ColumnFill as c -> Utilities.Helpers.duToKebab c
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column fill"
 
     let private columnWidthToString (columnWidth: IColumnWidth) =
         match columnWidth with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column width"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap

@@ -50,7 +50,7 @@ module Border =
         match radius with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown border radius"
 
     let private widthToString (width: IBorderWidth) =
@@ -63,7 +63,7 @@ module Border =
         match width with
             | :? BorderWidth as b -> stringifyWidth b
             | :? Units.Size.Size as s -> Units.Size.value s
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | _ -> "unknown border width"
 
     let private styleToString (style: IBorderStyle) =
@@ -82,7 +82,7 @@ module Border =
         match style with
         | :? BorderStyle as b -> stringifyStyle b
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown border style"
 
     let private collapseToString (collapse: IBorderCollapse) =
@@ -93,7 +93,7 @@ module Border =
 
         match collapse with
         | :? BorderCollapse as c -> stringifyCollapse c
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown border collapse"
     let private imageOutsetToString (imageOutset: IBorderImageOutset) =
         let stringifyOutset (BorderImageOutset.BorderImageOutset v) = string v
@@ -102,7 +102,7 @@ module Border =
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? BorderImageOutset as i -> stringifyOutset i
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown border image outset"
 
     let private repeatToString (repeat: IBorderRepeat) =
@@ -115,7 +115,7 @@ module Border =
 
         match repeat with
         | :? BorderImageRepeat as b -> stringifyRepeat b
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown border repeat"
     let private imageSliceToString (imageSlice: IBorderImageSlice) =
         let stringifySlice =
@@ -127,20 +127,20 @@ module Border =
         | :? BorderImageSlice as i -> stringifySlice i
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown border image slice"
 
     let private borderColorToString (borderColor: IBorderColor) =
         match borderColor with
         | :? CSSColor as c -> CSSColorValue.color c
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown border color"
 
     let private spacingToString (spacing: IBorderSpacing) =
         match spacing with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown border spacing"
 
     let private imageWidthToString (imageWidth: IBorderImageWidth) =
@@ -148,19 +148,19 @@ module Border =
         | :? CssFloat as f -> GlobalValue.float f
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown border image width"
 
     let private imageSourceToString (imageSource: IBorderImageSource) =
         match imageSource with
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown border image source"
 
     let private borderToString (border: IBorder) =
             match border with
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | _ -> "Unknown border"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border

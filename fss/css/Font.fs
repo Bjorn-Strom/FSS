@@ -144,7 +144,7 @@ module FontTypes =
 
         match style with
             | :? FontStyle as f -> stringifyFontStyle f
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | :? Normal -> GlobalValue.normal
             | _ -> "Unknown font style"
 
@@ -162,7 +162,7 @@ module FontTypes =
 
         match stretch with
             | :? FontStretch as f -> stringifyStretch f
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | :? Normal -> GlobalValue.normal
             | :? Units.Percent.Percent as p -> Units.Percent.value p
             | _ -> "Unknown font stretch"
@@ -177,7 +177,7 @@ module FontTypes =
          match fontWeight with
             | :? CssInt as i -> GlobalValue.int i
             | :? FontWeight as f -> stringifyWeight f
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | :? Normal -> GlobalValue.normal
             | _ -> "Unknown font weight"
 
@@ -216,7 +216,7 @@ module Font =
         | :? FontSize as f -> stringifyFontSize f
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown font size"
 
     let private familyToString (fontFamily: IFontFamily) =
@@ -232,7 +232,7 @@ module Font =
 
         match fontFamily with
             | :? FontFamily as f -> stringifyFamily f
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | _ -> "Unknown font family"
 
     let private  featureSettingToString (featureSetting: IFontFeatureSetting) =
@@ -267,7 +267,7 @@ module Font =
 
         match featureSetting with
         | :? FontFeatureSetting as f -> stringifyFeature f
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown font feature setting"
 
     let private  variantNumericToString (variant: IFontVariantNumeric) =
@@ -284,7 +284,7 @@ module Font =
 
         match variant with
         | :? FontVariantNumeric as f -> stringifyVariant f
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
 
@@ -300,7 +300,7 @@ module Font =
 
         match variant with
         | :? FontVariantCaps as f -> stringifyVariant f
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
 
@@ -319,7 +319,7 @@ module Font =
 
         match variant with
         | :? FontVariantEastAsian as f -> stringifyVariant f
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
 
@@ -337,7 +337,7 @@ module Font =
 
         match variant with
         | :? FontVariantLigature as f -> stringifyVariant f
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none
         | _ -> "Unknown font variant numeric"
@@ -347,7 +347,7 @@ module Font =
         | :? CssFloat as f -> GlobalValue.float f
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown lineheight"
 
@@ -362,14 +362,14 @@ module Font =
         | :? LineBreak as l -> stringifylineBreak l
         | :? Auto -> GlobalValue.auto
         | :? Normal -> GlobalValue.normal
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown line break"
 
 
     let private letterSpacingToString (letterSpacing: ILetterSpacing) =
         match letterSpacing with
         | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown lineheight"
 

@@ -166,7 +166,7 @@ module Text =
 
         match alignment with
         | :? TextAlign as t -> stringifyAlignment t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown text alignment"
 
     let private textAlignLastToString (alignment: ITextAlignLast) =
@@ -182,7 +182,7 @@ module Text =
         match alignment with
         | :? TextAlignLast as t -> stringifyAlignment t
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown text alignment last"
 
     let private decorationLineToString (decorationLine: ITextDecorationLine) =
@@ -195,7 +195,7 @@ module Text =
 
         match decorationLine with
         | :? TextDecorationLine as t -> stringifyLine t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown text decoration line"
 
@@ -204,7 +204,7 @@ module Text =
 
         match thickness with
         | :? TextDecorationThickness -> stringifyThickness
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -221,7 +221,7 @@ module Text =
 
         match style with
         | :? TextDecorationStyle as t -> stringifyStyle t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown text decoration style"
 
     let private decorationSkipToString (skip: ITextDecorationSkip) =
@@ -236,7 +236,7 @@ module Text =
 
         match skip with
         | :? DecorationSkip as t-> stringifySkip t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown text decoration skip"
 
@@ -245,7 +245,7 @@ module Text =
 
         match skipInk with
         | :? TextDecorationSkipInk -> stringifySkipInk
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown text decoration skip ink"
@@ -261,7 +261,7 @@ module Text =
 
         match transform with
         | :? TextTransform as t -> stringifyTransform t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown text transform"
 
@@ -273,7 +273,7 @@ module Text =
 
         match indent with
         | :? TextIndent as t -> stringifyIndent t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown text indent"
@@ -293,7 +293,7 @@ module Text =
 
         match shadow with
             | :? TextShadow as t -> stringifyTextShadow t
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | _ -> "unknown text shadow"
 
     let private emphasisPositionToString (emphasisPosition: ITextEmphasisPosition) =
@@ -306,7 +306,7 @@ module Text =
 
         match emphasisPosition with
         | :? EmphasisPosition as e -> positionValue e
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown text emphasis position"
 
     let private textOverflowToString (overflow: ITextOverflow) =
@@ -335,7 +335,7 @@ module Text =
         match emphasisStyle with
         | :? TextEmphasisStyle as t -> stringifyStyle t
         | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "unknown text emphasis style"
 
@@ -352,20 +352,20 @@ module Text =
 
         match underlinePosition with
         | :? UnderlinePosition as t -> stringifyUnderlinePosition t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | _ -> "unknown text underline position"
 
     let private textEmphasisColorToString (color: ITextEmphasisColor) =
         match color with
             | :? CSSColor as c -> CSSColorValue.color c
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | _ -> "unknown text emphasis color"
 
     let private underlineOffsetToString (underlineOffset: ITextUnderlineOffset) =
         match underlineOffset with
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "unknown text underline offset"
@@ -375,7 +375,7 @@ module Text =
         | :? CssString as s -> GlobalValue.string s
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown quotes"
 
     let private hyphensToString (hyphens: IHyphens) =
@@ -383,20 +383,20 @@ module Text =
         | :? Hyphens -> "manual"
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown hyphens"
 
     let private textDecorationColorToString (color: ITextDecorationColor) =
         match color with
             | :? CSSColor as c -> CSSColorValue.color c
-            | :? Global as k -> GlobalValue.global' k
+            | :? Global as g -> GlobalValue.global' g
             | _ -> "unknown text decoration color"
 
     let private textSizeAdjustToString (size: ITextSizeAdjust) =
         match size with
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown text size adjust"
 
@@ -404,7 +404,7 @@ module Text =
         match tabSize with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? CssInt as i -> GlobalValue.int i
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown tab size"
 
     let private textOrientationToString (textOrientation: ITextOrientation) =
@@ -418,7 +418,7 @@ module Text =
 
         match textOrientation with
         | :? TextOrientation as t -> stringifyOrientation t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown text orientation"
 
     let private textRenderingToString (textRendering: ITextRendering) =
@@ -430,7 +430,7 @@ module Text =
 
         match textRendering with
         | :? TextRendering as t -> stringifyRendering t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown text rendering"
 
@@ -458,7 +458,7 @@ module Text =
         match whitespace with
         | :? WhiteSpace as ws -> stringifyWhitespace ws
         | :? Normal -> GlobalValue.normal
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown whitespace"
 
     let private userSelectToString (userSelect: IUserSelect) =
@@ -473,7 +473,7 @@ module Text =
         | :? UserSelect as u -> stringifyUserSelect u
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown user select"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align

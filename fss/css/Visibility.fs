@@ -16,7 +16,7 @@ module VisibilityType =
 
         match visibility with
         | :? VisibilityType as v -> stringifyVisibility v
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown visibility"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/visibility

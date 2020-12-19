@@ -6,7 +6,7 @@ module Perspective =
         match perspective with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown perspective"
 
     let private perspectiveValue value = PropertyValue.cssValue Property.Perspective value

@@ -74,7 +74,7 @@ module Transform =
         match transform with
         | :? Transform as t -> stringifyTransform t
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transform"
 
     let private originToString (origin: ITransformOrigin) =
@@ -90,7 +90,7 @@ module Transform =
         | :? TransformOrigin as t -> stringifyOrigin t
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transform origin"
 
 

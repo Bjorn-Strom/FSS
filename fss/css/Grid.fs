@@ -138,25 +138,25 @@ module Grid =
 
         match autoFlow with
         | :? GridAutoFlow as g -> stringifyFlow g
-        | :? Global as k ->  GlobalValue.global' k
+        | :? Global as g ->  GlobalValue.global' g
         | _ -> "Unknown grid auto flow"
 
     let private templateAreaToString (area: IGridTemplateArea) =
         match area with
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? None-> GlobalValue.none
         | _ -> "Unknown grid template area"
 
     let private gridGapToString (gap: IGridGap) =
         match gap with
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown grid gap"
 
     let private gridRowGapToString (gap: IGridRowGap) =
         match gap with
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -170,7 +170,7 @@ module Grid =
         | :? GridTemplateColumns as g -> stringifyColumn g
         | :? Auto -> GlobalValue.auto
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | _ -> "Unkown grid template column"
@@ -187,7 +187,7 @@ module Grid =
         match position with
         | :? GridPosition as g -> stringifyGridPosition g
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown grid position"
 
     let private templateRowToString (templateRow: IGridTemplateRows) =
@@ -198,7 +198,7 @@ module Grid =
         | :? GridTemplateRows as g -> stringifyRow g
         | :? Auto -> GlobalValue.auto
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | _ -> "Unknown grid template row"
@@ -210,7 +210,7 @@ module Grid =
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | :? ContentSize as c -> contentSizeToString c
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? MinMax as m -> minMaxToString m
         | _ -> "Unknown grid auto column"
 
@@ -232,7 +232,7 @@ module Grid =
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | :? ContentSize as c -> contentSizeToString c
         | :? Auto -> GlobalValue.auto
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? MinMax as m -> minMaxToString m
         | _ -> "Unknown grid auto row"
 

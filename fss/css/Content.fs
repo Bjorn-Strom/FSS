@@ -27,7 +27,7 @@ module Content =
         | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | :? CounterStyle as c -> counterValue c
         | _ -> "Unknown content"
 

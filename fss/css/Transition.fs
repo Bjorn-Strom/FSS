@@ -5,26 +5,26 @@ module Transition =
     let private delayToString (delay: ITransitionDelay) =
         match delay with
         | :? Units.Time.Time as t -> Units.Time.value t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transition delay"
 
     let private durationToString (duration: ITransitionDuration) =
         match duration with
         | :? Units.Time.Time as t -> Units.Time.value t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transition duration"
 
     let private timingToString (duration: ITransitionTimingFunction) =
         match duration with
         | :? TimingFunction.TimingFunction as t -> TimingFunctionType.timingToString t
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transition timing"
 
     let private propertyToString (property: ITransitionProperty) =
         match property with
         | :? Property.Property as p -> PropertyValue.toKebabCase p
         | :? None -> GlobalValue.none
-        | :? Global as k -> GlobalValue.global' k
+        | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transition property"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay

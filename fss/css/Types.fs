@@ -98,6 +98,7 @@ module Global =
     type IJustifyContent = interface end
     type IJustifyItems   = interface end
     type IJustifySelf    = interface end
+    type IFlex           = interface end
     type IFlexDirection  = interface end
     type IFlexWrap       = interface end
     type IOrder          = interface end
@@ -247,6 +248,7 @@ module Global =
         interface IBreakAfter
         interface IBreakBefore
         interface IBreakInside
+        interface IFlex
 
     type None =
         | None
@@ -281,6 +283,7 @@ module Global =
         interface IResize
         interface IColumnRuleStyle
         interface IAppearance
+        interface IFlex
 
     type Normal =
         | Normal
@@ -443,6 +446,7 @@ module Global =
         interface IOrphans
         interface IWidows
         interface IAll
+        interface IFlex
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
