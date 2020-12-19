@@ -59,6 +59,7 @@ module Global =
     type IWhiteSpace              = interface end
     type IUserSelect              = interface end
 
+    type IListStyle         = interface end
     type IListStyleImage    = interface end
     type IListStylePosition = interface end
     type IListStyleType     = interface end
@@ -265,6 +266,7 @@ module Global =
         interface IUserSelect
         interface IQuotes
         interface IHyphens
+        interface IListStyle
         interface IListStyleImage
         interface IBorderStyle
         interface IBorderImageSource
@@ -356,6 +358,7 @@ module Global =
         interface ITextEmphasisColor
         interface ITextSizeAdjust
         interface IUserSelect
+        interface IListStyle
         interface IListStyleImage
         interface IListStylePosition
         interface IListStyleType

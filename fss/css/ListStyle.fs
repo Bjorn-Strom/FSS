@@ -80,6 +80,12 @@ module ListStyleTypeType =
 module ListStyle =
     open ListStyleTypeType
 
+    let private listStyleToString (style: IListStyle) =
+        match style with
+        | :? Global as g -> GlobalValue.global' g
+        | :? None -> GlobalValue.none
+        | _ -> "Unknown list style"
+
     let private listStyleImageToString (image: IListStyleImage) =
         let stringifyImage =
             function
@@ -89,13 +95,30 @@ module ListStyle =
         | :? ListStyleImage as l -> stringifyImage l
         | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
-        | _ -> "unknown list style image"
+        | _ -> "Unknown list style image"
 
     let private stylePositionToString (stylePosition: IListStylePosition) =
         match stylePosition with
         | :? ListStylePosition as l -> Utilities.Helpers.duToLowercase l
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown list style position"
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style
+    let private listStyleValue (value: string) = PropertyValue.cssValue Property.ListStyle value
+    let private listStyleValue' value =
+        value
+        |> listStyleToString
+        |> listStyleValue
+
+    type ListStyle =
+        static member Value (style: IListStyle) = style |> listStyleValue'
+
+        static member None = None |> listStyleValue'
+        static member Inherit = Inherit |> listStyleValue'
+        static member Initial = Initial |> listStyleValue'
+        static member Unset = Unset |> listStyleValue'
+
+    let ListStyle' (style: IListStyle) = ListStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
     let private listStyleImageValue (value: string) = PropertyValue.cssValue Property.ListStyleImage value

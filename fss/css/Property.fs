@@ -154,6 +154,7 @@ module Property =
         | LetterSpacing
         | LineBreak
         | LineHeight
+        | ListStyle
         | ListStyleImage
         | ListStylePosition
         | ListStyleType

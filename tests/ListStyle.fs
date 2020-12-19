@@ -16,6 +16,22 @@ module ListStyle =
         testList "List style"
             [
                 test
+                    "List style None"
+                    [ ListStyle.None ]
+                    [ "listStyle" ==> "none" ]
+                test
+                    "List style Initial"
+                    [ ListStyle.Initial ]
+                    [ "listStyle" ==> "initial" ]
+                test
+                    "List style Inherit"
+                    [ ListStyle.Inherit ]
+                    [ "listStyle" ==> "inherit" ]
+                test
+                    "List style Unset"
+                    [ ListStyle.Unset ]
+                    [ "listStyle" ==> "unset" ]
+                test
                     "List style image url"
                     [ ListStyleImage.Url "foofoo.jpg" ]
                     [ "listStyleImage" ==> "url('foofoo.jpg')" ]
