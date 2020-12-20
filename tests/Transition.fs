@@ -13,6 +13,18 @@ module Transition =
         testList "Transition"
             [
                 test
+                    "Transition inherit"
+                    [Transition.Inherit]
+                    ["transition" ==> "inherit"]
+                test
+                    "Transition initial"
+                    [ Transition.Initial ]
+                    ["transition" ==> "initial" ]
+                test
+                    "Transition unset"
+                    [Transition.Unset]
+                    ["transition" ==> "unset"]
+                test
                     "Transition duration sec"
                     [TransitionDuration' (sec 6.0) ]
                     ["transitionDuration" ==> "6.00s"]

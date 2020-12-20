@@ -248,6 +248,7 @@ module Property =
         | TextOverflow
         | TextShadow
         | TextTransform
+        | TextEmphasis
         | TextEmphasisColor
         | TextEmphasisPosition
         | TextEmphasisStyle
@@ -261,6 +262,7 @@ module Property =
         | Transform
         | TransformOrigin
         | TransformStyle
+        | Transition
         | TransitionDelay
         | TransitionDuration
         | TransitionProperty

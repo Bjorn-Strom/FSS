@@ -181,6 +181,11 @@ module Text =
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown text decoration thickness"
 
+    let private decorationToString (decoration: ITextDecoration) =
+        match decoration with
+        | :? None -> GlobalValue.none
+        | _ -> "Unknown text decoration"
+
     let private decorationStyleToString (style: ITextDecorationStyle) =
         match style with
         | :? TextDecorationStyle as t -> Utilities.Helpers.duToLowercase t
@@ -234,6 +239,12 @@ module Text =
             | :? TextShadow as t -> stringifyTextShadow t
             | :? Global as g -> GlobalValue.global' g
             | _ -> "unknown text shadow"
+
+    let private emphasisToString (emphasis: ITextEmphasis) =
+        match emphasis with
+        | :? Global as g -> GlobalValue.global' g
+        | :? None -> GlobalValue.none
+        | _ -> "unknown text emphasis"
 
     let private emphasisPositionToString (emphasisPosition: ITextEmphasisPosition) =
         match emphasisPosition with
@@ -397,6 +408,18 @@ module Text =
         static member Unset = Unset |> alignLastCssValue'
 
     let TextAlignLast' (align: ITextAlignLast) = TextAlignLast.Value(align)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
+    let private decorationValue value = PropertyValue.cssValue Property.TextDecoration value
+    let private decorationValue' value =
+        value
+        |> decorationToString
+        |> decorationValue
+    type TextDecoration =
+        static member Value (value: ITextDecoration) = value |> decorationValue'
+        static member None = None |> decorationValue'
+
+    let TextDecoration' (decoration: ITextDecoration) = TextDecoration.Value(decoration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
     let private lineCssValue value = PropertyValue.cssValue Property.TextDecorationLine value
@@ -589,6 +612,23 @@ module Text =
         static member Ellipsis = Ellipsis |> overflowValue'
 
     let TextOverflow' (overflow: ITextOverflow) = TextOverflow.Value(overflow)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
+    let private emphasisValue value = PropertyValue.cssValue Property.TextEmphasis value
+    let private emphasisValue' value =
+        value
+        |> emphasisToString
+        |> emphasisValue
+
+    type TextEmphasis =
+        static member Value (emphasis: ITextEmphasis) = emphasis |> emphasisValue'
+
+        static member None = None |> emphasisValue'
+        static member Inherit = Inherit |> emphasisValue'
+        static member Initial = Initial |> emphasisValue'
+        static member Unset = Unset |> emphasisValue'
+
+    let TextEmphasis' (emphasis: ITextEmphasis) = TextEmphasis.Value emphasis
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
     let private emphasisPositionValue value = PropertyValue.cssValue Property.TextEmphasisPosition value

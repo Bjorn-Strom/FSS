@@ -34,6 +34,7 @@ module Global =
 
     type ITextAlign               = interface end
     type ITextAlignLast           = interface end
+    type ITextDecoration          = interface end
     type ITextDecorationLine      = interface end
     type ITextDecorationThickness = interface end
     type ITextDecorationStyle     = interface end
@@ -42,6 +43,7 @@ module Global =
     type ITextTransform           = interface end
     type ITextIndent              = interface end
     type ITextShadow              = interface end
+    type ITextEmphasis            = interface end
     type ITextEmphasisPosition    = interface end
     type ITextEmphasisStyle       = interface end
     type ITextUnderlinePosition   = interface end
@@ -87,6 +89,7 @@ module Global =
     type ITransform       = interface end
     type ITransformOrigin = interface end
 
+    type ITransition               = interface end
     type ITransitionDelay          = interface end
     type ITransitionDuration       = interface end
     type ITransitionTimingFunction = interface end
@@ -260,9 +263,11 @@ module Global =
         interface IAnimationFillMode
         interface IAnimationName
         interface IFontVariantLigature
+        interface ITextDecoration
         interface ITextDecorationLine
         interface ITextDecorationSkip
         interface ITextDecorationSkipInk
+        interface ITextEmphasis
         interface ITextEmphasisStyle
         interface ITextTransform
         interface ITextSizeAdjust
@@ -350,6 +355,7 @@ module Global =
         interface ITextTransform
         interface ITextIndent
         interface ITextShadow
+        interface ITextEmphasis
         interface ITextEmphasisPosition
         interface ITextEmphasisStyle
         interface ITextUnderlinePosition
@@ -386,6 +392,7 @@ module Global =
         interface IBorderImageSource
         interface ITransform
         interface ITransformOrigin
+        interface ITransition
         interface ITransitionDelay
         interface ITransitionDuration
         interface ITransitionTimingFunction

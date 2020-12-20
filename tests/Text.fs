@@ -10,6 +10,26 @@ module Text =
         testList "Text"
             [
                 test
+                    "Text decoration none"
+                    [TextDecoration.None]
+                    ["textDecoration" ==> "none"]
+                test
+                    "Text emphasis none"
+                    [TextEmphasis.None]
+                    ["textEmphasis" ==> "none"]
+                test
+                    "Text emphasis inherit"
+                    [ TextEmphasis.Inherit ]
+                    ["textEmphasis" ==> "inherit"]
+                test
+                    "Text emphasis initial"
+                    [ TextEmphasis.Initial ]
+                    ["textEmphasis" ==> "initial"]
+                test
+                    "Text emphasis unset"
+                    [ TextEmphasis.Unset ]
+                    ["textEmphasis" ==> "unset"]
+                test
                     "Text align left"
                     [ TextAlign.Left ]
                     ["textAlign" ==> "left"]

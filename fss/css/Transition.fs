@@ -2,6 +2,11 @@
 
 [<AutoOpen>]
 module Transition =
+    let private transitionToString (transition: ITransition) =
+        match transition with
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown transition"
+
     let private delayToString (delay: ITransitionDelay) =
         match delay with
         | :? Units.Time.Time as t -> Units.Time.value t
@@ -27,19 +32,34 @@ module Transition =
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transition property"
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
-    let private transitionValue value = PropertyValue.cssValue Property.TransitionDelay value
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+    let private transitionValue value = PropertyValue.cssValue Property.Transition value
     let private transitionValue' value =
         value
-        |> delayToString
+        |> transitionToString
         |> transitionValue
-    type TransitionDelay =
-        static member Value (delay: ITransitionDelay) = delay |> transitionValue'
-        static member Value (delays: ITransitionDelay list) = Utilities.Helpers.combineComma delayToString delays |> transitionValue
+    type Transition =
+        static member Value (delay: ITransition) = delay |> transitionValue'
 
         static member Inherit = Inherit |> transitionValue'
         static member Initial = Initial |> transitionValue'
         static member Unset = Unset |> transitionValue'
+
+    let Transition' (transition: ITransition) = Transition.Value(transition)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
+    let private delayValue value = PropertyValue.cssValue Property.TransitionDelay value
+    let private delayValue' value =
+        value
+        |> delayToString
+        |> delayValue
+    type TransitionDelay =
+        static member Value (delay: ITransitionDelay) = delay |> delayValue'
+        static member Value (delays: ITransitionDelay list) = Utilities.Helpers.combineComma delayToString delays |> delayValue
+
+        static member Inherit = Inherit |> delayValue'
+        static member Initial = Initial |> delayValue'
+        static member Unset = Unset |> delayValue'
 
     let TransitionDelay' (delay: ITransitionDelay) = TransitionDelay.Value(delay)
 
