@@ -108,6 +108,10 @@ module ListStyle =
                     [ ListStyleType' sampleCounterStyle ]
                     [ "listStyleType" ==> "_223772456" ]
                 test
+                    "List style type None"
+                    [ ListStyleType.None ]
+                    [ "listStyleType" ==> "none" ]
+                test
                     "List style type Initial"
                     [ ListStyleType.Initial ]
                     [ "listStyleType" ==> "initial" ]

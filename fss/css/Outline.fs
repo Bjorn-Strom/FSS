@@ -28,6 +28,7 @@ module Outline  =
     let private outlineToString (color: IOutline) =
         match color with
         | :? Global as g -> GlobalValue.global' g
+        | :? None -> GlobalValue.none
         | _ -> "Unknown outline"
 
     let private outlineColorToString (color: IOutlineColor) =
@@ -60,6 +61,7 @@ module Outline  =
     type Outline =
         static member Value (outline: IOutline) = outline |> outlineValue'
 
+        static member None = None |> outlineValue'
         static member Inherit = Inherit |> outlineValue'
         static member Initial = Initial |> outlineValue'
         static member Unset = Unset |> outlineValue'

@@ -2,7 +2,6 @@
 
 open Fable.Core.JsInterop
 
-
 [<AutoOpen>]
 module FontFace =
      // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face

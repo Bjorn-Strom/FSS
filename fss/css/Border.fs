@@ -132,6 +132,7 @@ module Border =
     let private borderToString (border: IBorder) =
             match border with
             | :? Global as g -> GlobalValue.global' g
+            | :? None -> GlobalValue.none
             | _ -> "Unknown border"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border
@@ -143,6 +144,7 @@ module Border =
 
     type Border =
         static member Value (border: IBorder) = border |> borderValue'
+        static member None = None |> borderValue'
         static member Inherit = Inherit |> borderValue'
         static member Initial = Initial |> borderValue'
         static member Unset = Unset |> borderValue'

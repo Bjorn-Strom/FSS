@@ -22,6 +22,10 @@ module Border =
                     [ Border.Unset ]
                     [ "border" ==> "unset" ]
                 test
+                    "Border none"
+                    [ Border.None ]
+                    [ "border" ==> "none" ]
+                test
                     "Borderstyle hidden"
                     [ BorderStyle.Hidden ]
                     [ "borderStyle" ==> "hidden" ]

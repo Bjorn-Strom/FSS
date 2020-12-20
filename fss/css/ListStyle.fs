@@ -74,6 +74,7 @@ module ListStyleTypeType =
         | :? CounterStyle as c -> counterValue c
         | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
         | :? Global as g -> GlobalValue.global' g
+        | :? None -> GlobalValue.none
         | _ -> "Unknown list style type"
 
 [<AutoOpen>]
@@ -221,6 +222,7 @@ module ListStyle =
         static member DisclosureOpen = DisclosureOpen |> listStyleTypeProperty'
         static member DisclosureClosed = DisclosureClosed |> listStyleTypeProperty'
 
+        static member None = None |> listStyleTypeProperty'
         static member Inherit = Inherit |> listStyleTypeProperty'
         static member Initial = Initial |> listStyleTypeProperty'
         static member Unset = Unset |> listStyleTypeProperty'

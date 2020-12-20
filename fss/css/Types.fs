@@ -276,6 +276,7 @@ module Global =
         interface IQuotes
         interface IHyphens
         interface IListStyle
+        interface IListStyleType
         interface IListStyleImage
         interface IBorderStyle
         interface IBorderImageSource
@@ -295,6 +296,8 @@ module Global =
         interface IColumnRuleStyle
         interface IAppearance
         interface IFlex
+        interface IBorder
+        interface IOutline
 
     type Normal =
         | Normal
