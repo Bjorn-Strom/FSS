@@ -9,7 +9,7 @@ module App =
 
     open Fss
 
-    type Example =
+    type Page =
         | Overview
         | Installation
         | Philosophy
@@ -26,24 +26,24 @@ module App =
         | Counters
         | Fontface
 
-    type Model = { CurrentExample: Example }
+    type Model = { CurrentPage: Page }
 
-    type Msg =
-        | SetExample of Example
+    type SetPage =
+        | SetPage of Page
 
-    let init() = { CurrentExample = Overview }
+    let init() = { CurrentPage = Overview }
 
-    let update (msg: Msg) (model: Model): Model =
+    let update (msg: SetPage) (model: Model): Model =
         match msg with
-        | SetExample example ->
-            { model with CurrentExample = example }
+        | SetPage example ->
+            { model with CurrentPage = example }
 
     // Load font
     Import.Url "https://fonts.googleapis.com/css?family=Nunito|Raleway"
     let headingFont = FontFamily.Custom "Nunito"
     let textFont = FontFamily.Custom "Raleway"
 
-    let exampleToString =
+    let pageToString =
         function
         | Overview -> "Overview"
         | Installation -> "Installation"
@@ -61,12 +61,69 @@ module App =
         | Counters -> "Counters"
         | Fontface -> "Font face"
 
-    let menuListItem text onClick =
+    let pageToContent =
+        let imageStyle =
+            fss
+                [
+                    Display.Flex
+                    JustifyContent.Center
+                ]
+
+        let overview =
+            article []
+                [
+                    div [ ClassName imageStyle ]
+                        [
+                            Logo.logo 200 200
+                        ]
+                    h2 [] [ str "Overview" ]
+                    p []
+                        [
+                            str "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl tortor, semper in sollicitudin a, aliquam eu est. Ut sagittis, ante id pharetra vehicula, orci velit pretium arcu, et auctor nisl ligula ac ante. Nullam auctor, purus vel tincidunt pulvinar, quam risus ullamcorper ipsum, in pulvinar neque est ac massa. Nam consequat interdum nisi eget ultrices. Etiam vitae elementum mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse commodo turpis at aliquam accumsan. Aliquam erat volutpat. Nullam interdum lorem lorem, sed dignissim metus pulvinar non. In hac habitasse platea dictumst. Quisque rutrum magna purus. Suspendisse ac hendrerit velit. Integer nisl mi, commodo vitae interdum vel, tincidunt ut magna. Suspendisse a semper metus, et pulvinar ante. Proin suscipit eros ultricies purus tempor, eget sagittis odio accumsan. "
+                        ]
+                ]
+
+        let installation = article [] []
+        let philosophy = article [] []
+        let basicUse = article [] []
+        let conditionalStyling = article [] []
+        let pseudo = article [] []
+        let composition = article [] []
+        let labels = article [] []
+        let transitions = article [] []
+        let selectors = article [] []
+        let keyframesAnimations = article [] []
+        let mediaQueries = article [] []
+        let globalStyles = article [] []
+        let counters = article [] []
+        let fontFace = article [] []
+
+        function
+        | Overview -> overview
+        | Installation -> installation
+        | Philosophy -> philosophy
+        | BasicUse -> basicUse
+        | ConditionalStyling -> conditionalStyling
+        | Pseudo -> pseudo
+        | Composition -> composition
+        | Labels -> labels
+        | Transitions -> transitions
+        | Selectors -> selectors
+        | KeyframesAnimations -> keyframesAnimations
+        | MediaQueries -> mediaQueries
+        | GlobalStyles  -> globalStyles
+        | Counters -> counters
+        | Fontface -> fontFace
+
+    let menuListItem example currentExample onClick =
         let buttonStyle =
             fss
                 [
                     Border.None
-                    BackgroundColor.transparent
+                    if example = currentExample then
+                       BackgroundColor.Hex "#29A9DF"
+                    else
+                        BackgroundColor.transparent
                     Margin' (px 0)
                     Padding' (px 10)
                     Width' (px 200)
@@ -75,13 +132,7 @@ module App =
                     textFont
                     Hover
                         [
-                            BackgroundColor.Hex "808080"
-                        ]
-                    Focus
-                        [
-                            BackgroundColor.Hex "0000FF"
-                            Outline.None
-                            Color.white
+                            BackgroundColor.Hex "E0E0E0"
                         ]
                 ]
 
@@ -89,12 +140,9 @@ module App =
             [
                 button [ ClassName buttonStyle; OnClick onClick ]
                     [
-                        str text
+                        str <| pageToString example
                     ]
             ]
-
-    let exampleNavigation example dispatch =
-        menuListItem (exampleToString example) (fun _ -> dispatch <| SetExample example)
 
     let header =
         let headerStyle =
@@ -102,7 +150,8 @@ module App =
                 [
                     GridArea' (GridPosition.Ident "nav")
                     GridColumnEnd.Span 2
-                    BackgroundColor.red
+                    Color.white
+                    BackgroundColor.Hex "#0170BA"
                     PaddingLeft' (px 10)
                     AlignItems.Center
                 ]
@@ -121,7 +170,7 @@ module App =
                     ]
             ]
 
-    let menu dispatch =
+    let menu model (dispatch: SetPage -> unit)=
         let menuStyle =
             fss
                 [
@@ -134,27 +183,27 @@ module App =
                     Margin' (px 0)
                     Padding' (px 0)
                     TextIndent' (px 0)
-                    BackgroundColor.bisque
                 ]
+        let menuListItem' example = menuListItem example model.CurrentPage (fun _ -> dispatch <| SetPage example)
         aside [ ClassName menuStyle ]
             [
                 ul [ ClassName menuList ]
                     [
-                        exampleNavigation Overview dispatch
-                        exampleNavigation Installation dispatch
-                        exampleNavigation Philosophy dispatch
-                        exampleNavigation BasicUse dispatch
-                        exampleNavigation ConditionalStyling dispatch
-                        exampleNavigation Pseudo dispatch
-                        exampleNavigation Composition dispatch
-                        exampleNavigation Labels dispatch
-                        exampleNavigation Transitions dispatch
-                        exampleNavigation Selectors dispatch
-                        exampleNavigation KeyframesAnimations dispatch
-                        exampleNavigation MediaQueries dispatch
-                        exampleNavigation GlobalStyles dispatch
-                        exampleNavigation Counters dispatch
-                        exampleNavigation Fontface dispatch
+                        menuListItem' Overview
+                        menuListItem' Installation
+                        menuListItem' Philosophy
+                        menuListItem' BasicUse
+                        menuListItem' ConditionalStyling
+                        menuListItem' Pseudo
+                        menuListItem' Composition
+                        menuListItem' Labels
+                        menuListItem' Transitions
+                        menuListItem' Selectors
+                        menuListItem' KeyframesAnimations
+                        menuListItem' MediaQueries
+                        menuListItem' GlobalStyles
+                        menuListItem' Counters
+                        menuListItem' Fontface
                     ]
             ]
 
@@ -163,16 +212,14 @@ module App =
             fss
                 [
                     GridArea' (GridPosition.Ident "content")
-                    BackgroundColor.aliceBlue
                     textFont
                 ]
         article [ ClassName contentStyle ]
             [
-                str <| exampleToString model.CurrentExample
-                Logo.logo 200 200
+                pageToContent model.CurrentPage
             ]
 
-    let render (model: Model) (dispatch: Msg -> unit) =
+    let render (model: Model) (dispatch: SetPage -> unit) =
         let container =
             fss
                 [
@@ -183,6 +230,7 @@ module App =
             fss
                 [
                     Display.Grid
+                    GridGap' (px 10)
                     Height' (vh 100.)
                     Width' (pct 70)
                     GridTemplateColumns.Values [fr 0.15; fr 1.]
@@ -198,7 +246,7 @@ module App =
                 div [ ClassName grid ]
                     [
                         header
-                        menu dispatch
+                        menu model dispatch
                         content model
                     ]
             ]
