@@ -46,8 +46,8 @@
     <Compile Include="css\Media.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="FontFace.fs" />
-    <Compile Include="Import.fs" />
     <Compile Include="Functions.fs" />
+    <Compile Include="Import.fs" />
     <Compile Include="Selector.fs" />
     <Compile Include="PseudoClass.fs" />
     <Compile Include="PseudoElement.fs" />

@@ -3,7 +3,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Logo.fs" />
     <Compile Include="App.fs" />
+    <Folder Include="public\assets" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\fss\Fss.fsproj" />

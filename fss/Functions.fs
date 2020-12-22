@@ -9,7 +9,7 @@ open Keyframes
 module Functions =
     [<Import("css", from="emotion")>]
     let private css(x) = jsNative
-    let private css' x = css(x)
+    let css' x = css(x)
 
     // Constructors
     let fss (attributeList: CSSProperty list) =

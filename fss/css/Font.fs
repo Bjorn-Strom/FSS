@@ -186,7 +186,7 @@ module Font =
         let stringifyFontName (FontName.FontName n) = n
         let stringifyFamily fontFamily =
             match fontFamily with
-                | Custom c -> c
+                | Custom c -> sprintf "'%s'" c
                 | FontName n -> stringifyFontName n
                 | _ -> Utilities.Helpers.duToKebab fontFamily
 
