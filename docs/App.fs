@@ -1,7 +1,10 @@
 ﻿namespace Docs
 
+open Fss.DisplayType
+open Fss.TextTypes
+open Fss.TextTypes
+
 module App =
-    open Browser.Types
     open Elmish
     open Elmish.React
     open Fable.React
@@ -43,6 +46,13 @@ module App =
     let headingFont = FontFamily.Custom "Nunito"
     let textFont = FontFamily.Custom "Raleway"
 
+    // Styles
+    let multilineText =
+        fss
+            [
+                Whitespace.PreLine
+            ]
+
     let pageToString =
         function
         | Overview -> "Overview"
@@ -61,6 +71,18 @@ module App =
         | Counters -> "Counters"
         | Fontface -> "Font face"
 
+    let codeBlock (code: string List) =
+        let codeBlock =
+            fss
+                [
+                    BackgroundColor.Hex "#2A2A2A"
+                    Color.white
+                    Padding' (px 20)
+                ]
+
+        pre [ ClassName codeBlock ] [ str (code |> String.concat "\n") ]
+
+
     let pageToContent =
         let imageStyle =
             fss
@@ -74,18 +96,100 @@ module App =
                 [
                     div [ ClassName imageStyle ]
                         [
-                            Logo.logo 200 200
+                            Logo.logoNormal
                         ]
                     h2 [] [ str "Overview" ]
-                    p []
+                    div [ ClassName multilineText ]
                         [
-                            str "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl tortor, semper in sollicitudin a, aliquam eu est. Ut sagittis, ante id pharetra vehicula, orci velit pretium arcu, et auctor nisl ligula ac ante. Nullam auctor, purus vel tincidunt pulvinar, quam risus ullamcorper ipsum, in pulvinar neque est ac massa. Nam consequat interdum nisi eget ultrices. Etiam vitae elementum mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse commodo turpis at aliquam accumsan. Aliquam erat volutpat. Nullam interdum lorem lorem, sed dignissim metus pulvinar non. In hac habitasse platea dictumst. Quisque rutrum magna purus. Suspendisse ac hendrerit velit. Integer nisl mi, commodo vitae interdum vel, tincidunt ut magna. Suspendisse a semper metus, et pulvinar ante. Proin suscipit eros ultricies purus tempor, eget sagittis odio accumsan. "
+                            str
+                                """An opinionated styling library for F#.
+                                Have CSS as a first class citizen in your F# projects.
+                                """
+
+                            str """Built atop the fantastic """
+                            a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js" ]
+                            str " FSS allows you to have CSS as a first class citizen in your F# code and aims to support most of the CSS spec"
                         ]
                 ]
 
-        let installation = article [] []
-        let philosophy = article [] []
-        let basicUse = article [] []
+        let installation =
+                article []
+                    [
+                        h2 [] [ str "Installation" ]
+                        str "In order to use Fss you need to install the "
+                        a [ Href "" ] [ str "nuget" ]
+                        str " package"
+                        codeBlock [ "# nuget"
+                                    "dotnet add package Fss"
+                                    ""
+                                    "# paket"
+                                    "paket add Fss --project ./project/path" ]
+                    ]
+
+        let philosophy =
+            article []
+                [
+                    h2 [] [ str "Philosophy" ]
+                    str "The main idea behind Fss is discoverable CSS. Write CSS in F# quick and easy."
+
+                    str "There already exists some quite good styling alternatives to F# already"
+                    ul []
+                        [
+                            li [] [
+                                a [ Href "https://fulma.github.io/Fulma/" ] [ str "Fulma"]
+                                str " which is a really nice wrapper over Bulma"
+                            ]
+                            li []
+                                [
+                                    a [ Href "https://github.com/zanaptak/TypedCssClasses" ] [ str "TypedCssClasses" ]
+                                    str " a type provider if you want to generate types from existing CSS (or if you prefer CSS, you madman)"
+                                ]
+                            li []
+                                [
+                                    str "Webpack configuration for CSS or SCSS"
+                                ]
+                        ]
+                    p []
+                        [
+                          str "Ultimately I believe you will find whatever solution that suits your needs best. "
+                          str "Personally I find that writing CSS is bad. Just in general - bad!"
+                        ]
+
+                    p []
+                        [
+                            str "What I like is having CSS as part of my language. So I can use the language I like to write the markup and the styling "
+                            str "There are tons of benefits to this:"
+                        ]
+                    ul []
+                        [
+                            li [] [ str "Noe om å empirisk bestemme verdier and shizz" ]
+                        ]
+                ]
+
+        let basicUse = article []
+                           [
+                                h2 []
+                                    [
+                                        str "Basic usage"
+                                    ]
+
+                                h3 []
+                                    [
+                                        str "Shorthands"
+                                    ]
+                                div [ ClassName multilineText ]
+                                    [
+                                        str """ I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be..
+                                        However as this project creates CSS and interacts with it, it has to deal with some of its shortcoming, like shorthands.
+
+                                        Therefore the shorthands that are included are limited to ones where using inherit, initial, unset or none is natural. Like text-decoration.
+                                        Resetting text-decoration could be annoying without it.
+
+                                        Oh an yeah you can use margin and padding if you want to, so there are sprinkles of shorthands around
+                                        Dont you judge me, I said it was opinionated!"""
+                                    ]
+                           ]
+
         let conditionalStyling = article [] []
         let pseudo = article [] []
         let composition = article [] []
@@ -130,6 +234,7 @@ module App =
                     FontSize' (px 14)
                     TextAlign.Left
                     textFont
+                    Cursor.Pointer
                     Hover
                         [
                             BackgroundColor.Hex "E0E0E0"
@@ -214,7 +319,7 @@ module App =
                     GridArea' (GridPosition.Ident "content")
                     textFont
                 ]
-        article [ ClassName contentStyle ]
+        section [ ClassName contentStyle ]
             [
                 pageToContent model.CurrentPage
             ]
@@ -232,7 +337,7 @@ module App =
                     Display.Grid
                     GridGap' (px 10)
                     Height' (vh 100.)
-                    Width' (pct 70)
+                    Width' (pct 60)
                     GridTemplateColumns.Values [fr 0.15; fr 1.]
                     GridTemplateRows.Values [fr 0.05; fr 1.]
                     GridTemplateAreas.Value
