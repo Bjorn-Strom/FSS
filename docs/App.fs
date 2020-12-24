@@ -28,6 +28,11 @@ module App =
         | GlobalStyles
         | Counters
         | Fontface
+        | BackgroundImage
+
+    type ButtonType =
+        | Big
+        | Small
 
     type Model = { CurrentPage: Page }
 
@@ -70,14 +75,17 @@ module App =
         | GlobalStyles  -> "Global styles"
         | Counters -> "Counters"
         | Fontface -> "Font face"
+        | BackgroundImage -> "Background image"
 
     let codeBlock (code: string List) =
+        let myDecorationColor = CSSColor.white
         let codeBlock =
             fss
                 [
                     BackgroundColor.Hex "#2A2A2A"
                     Color.white
                     Padding' (px 20)
+                    TextDecorationColor.Value(myDecorationColor)
                 ]
 
         pre [ ClassName codeBlock ] [ str (code |> String.concat "\n") ]
@@ -113,18 +121,18 @@ module App =
                 ]
 
         let installation =
-                article []
-                    [
-                        h2 [] [ str "Installation" ]
-                        str "In order to use Fss you need to install the "
-                        a [ Href "" ] [ str "nuget" ]
-                        str " package"
-                        codeBlock [ "# nuget"
-                                    "dotnet add package Fss"
-                                    ""
-                                    "# paket"
-                                    "paket add Fss --project ./project/path" ]
-                    ]
+            article []
+                [
+                    h2 [] [ str "Installation" ]
+                    str "In order to use Fss you need to install the "
+                    a [ Href "" ] [ str "nuget" ]
+                    str " package"
+                    codeBlock [ "# nuget"
+                                "dotnet add package Fss"
+                                ""
+                                "# paket"
+                                "paket add Fss --project ./project/path" ]
+                ]
 
         let philosophy =
             article []
@@ -149,16 +157,14 @@ module App =
                                     str "Webpack configuration for CSS or SCSS"
                                 ]
                         ]
-                    p []
+                    div [ ClassName multilineText ]
                         [
-                          str "Ultimately I believe you will find whatever solution that suits your needs best. "
-                          str "Personally I find that writing CSS is bad. Just in general - bad!"
-                        ]
+                            str """Ultimately I believe you will find whatever solution that suits your needs best.
 
-                    p []
-                        [
-                            str "What I like is having CSS as part of my language. So I can use the language I like to write the markup and the styling "
-                            str "There are tons of benefits to this:"
+                            Personally I find that writing CSS is bad. Just in general - bad!
+                            What I like is having CSS as part of my language. So I can use the language I like to write both the markup and the styling.
+
+                            There are tons of benefits to this:"""
                         ]
                     ul []
                         [
@@ -166,32 +172,101 @@ module App =
                         ]
                 ]
 
-        let basicUse = article []
-                           [
-                                h2 []
-                                    [
-                                        str "Basic usage"
-                                    ]
+        let basicUse =
+            article []
+               [
+                    h2 []
+                        [
+                            str "Basic usage"
+                        ]
+                    div [ ClassName multilineText ]
+                        [
+                            str """The main function Fss supplies is fss. This function takes a list of CSS properties and returns a string.
+                                This string is the classname you can give to your html tag.
 
-                                h3 []
-                                    [
-                                        str "Shorthands"
-                                    ]
-                                div [ ClassName multilineText ]
-                                    [
-                                        str """ I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be..
-                                        However as this project creates CSS and interacts with it, it has to deal with some of its shortcoming, like shorthands.
+                                Simply write the CSS you want in PascalCase and dot yourself into the methods you want.
+                                For example if I want """
+                            codeBlock ["text-decoration-color: white"]
+                            str """ then you write"""
+                            codeBlock [ "let myStyle = fss [ TextDecorationColor.white ]"
+                                        "div [ClassName myStyle] []" ]
+                            str """This should work for most CSS properties you would want, if one is missing feel free to make a PR or an issue
 
-                                        Therefore the shorthands that are included are limited to ones where using inherit, initial, unset or none is natural. Like text-decoration.
-                                        Resetting text-decoration could be annoying without it.
+                            You might want to store CSS in F# variables as well and Fss supports that with value methods.
+                            All Fss properties should have a value method that accepts a type for that Css property.
+                            Continuing with our TextDecorationColor example you could do the following"""
+                            codeBlock ["let myDecorationColor = CSSColor.White"
+                                       "fss [ TextDecorationColor.Value(myDecorationColor) ]"]
+                            str """As this is something you might potentially want to do quite a but of (and we do like pipelining) there exists a shorthand which is TextDecorationPrime"""
+                            codeBlock ["let myDecorationColor = CSSColor.White"
+                                       "fss [ TextDecorationColor' myDecorationColor ]"]
+                        ]
 
-                                        Oh an yeah you can use margin and padding if you want to, so there are sprinkles of shorthands around
-                                        Dont you judge me, I said it was opinionated!"""
-                                    ]
-                           ]
+                    h3 []
+                        [
+                            str "Shorthands"
+                        ]
+                    div [ ClassName multilineText ]
+                        [
+                            str """I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be..
+                            However as this project creates CSS and interacts with it, it has to deal with some of its shortcoming, like shorthands.
 
-        let conditionalStyling = article [] []
-        let pseudo = article [] []
+                            Therefore the shorthands that are included are limited to ones where using inherit, initial, unset or none is natural. Like text-decoration.
+                            Resetting text-decoration could be annoying without it.
+
+                            Oh an yeah you can use margin and padding if you want to, so there are sprinkles of shorthands around
+                            Dont you judge me, I said it was opinionated!"""
+                        ]
+               ]
+
+        let conditionalStyling =
+            let buttonStyle buttonType =
+                fss
+                    [
+                        Padding' (px 0)
+                        match buttonType with
+                        | Big ->
+                            Height' (px 80)
+                            Width' (px 80)
+                        | Small ->
+                            Height' (px 40)
+                            Width' (px 40)
+                    ]
+            article []
+                [
+                    h2 [] [ str "Conditional styling" ]
+                    str """If you want to style something conditionally you can use conditional or match expression
+
+                        For example if you've defined a union type for your button sizes that looks like this: """
+                    codeBlock [ "type ButtonSize ="
+                                "   | Small"
+                                "   | Big" ]
+                    str "You could have a function that takes this ButtonSize as a parameter and spits out the styling you want."
+                    codeBlock [ "let buttonStyle buttonType ="
+                                "  fss"
+                                "       ["
+                                "           match buttonType with"
+                                "           | Big ->"
+                                "               Height' (px 80)"
+                                "               Width' (px 80)"
+                                "           | Small ->"
+                                "               Height' (px 40)"
+                                "               Width' (px 40)" ]
+                    str "This function creates a string that you use as your classname"
+                    codeBlock [ "button [ ClassName <| buttonStyle Small ] [ str \"Small\" ]"
+                                "button [ ClassName <| buttonStyle Big ] [ str \"Big\" ]" ]
+                    str "This has the following result: "
+
+                    button [ ClassName <| buttonStyle Small ] [ str "Small" ]
+                    button [ ClassName <| buttonStyle Big ] [ str "Big" ]
+                ]
+
+        let pseudo =
+            article []
+                [
+                    h2 [] [ str "Pseudo-classes" ]
+                    h2 [] [ str "Pseudo-selectors" ]
+                ]
         let composition = article [] []
         let labels = article [] []
         let transitions = article [] []
@@ -201,6 +276,7 @@ module App =
         let globalStyles = article [] []
         let counters = article [] []
         let fontFace = article [] []
+        let backgroundImage = article [] []
 
         function
         | Overview -> overview
@@ -218,6 +294,7 @@ module App =
         | GlobalStyles  -> globalStyles
         | Counters -> counters
         | Fontface -> fontFace
+        | BackgroundImage -> backgroundImage
 
     let menuListItem example currentExample onClick =
         let buttonStyle =
@@ -309,6 +386,7 @@ module App =
                         menuListItem' GlobalStyles
                         menuListItem' Counters
                         menuListItem' Fontface
+                        menuListItem' BackgroundImage
                     ]
             ]
 
