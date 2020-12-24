@@ -1,6 +1,7 @@
 ﻿namespace Docs
 
 open Fss.DisplayType
+open Fss.DisplayType
 open Fss.TextTypes
 open Fss.TextTypes
 
@@ -65,7 +66,7 @@ module App =
         | Philosophy -> "Philosophy"
         | BasicUse -> "Basic Usage"
         | ConditionalStyling -> "Conditional Styling"
-        | Pseudo -> "Pseduoclasses/selectors"
+        | Pseudo -> "Pseduoclasses/elements"
         | Composition -> "Composition"
         | Labels -> "Labels"
         | Transitions -> "Transitions"
@@ -262,10 +263,94 @@ module App =
                 ]
 
         let pseudo =
+            let hoverStyle =
+                fss
+                    [
+                        Padding' (px 40)
+                        Width' (px 100)
+                        BackgroundColor.orangeRed
+                        FontSize' (px 20)
+                        BorderRadius' (px 5)
+                        Color.white
+                        Hover
+                            [
+                                BackgroundColor.chartreuse
+                                Color.black
+                            ]
+                    ]
             article []
                 [
                     h2 [] [ str "Pseudo-classes" ]
-                    h2 [] [ str "Pseudo-selectors" ]
+                    div [ ClassName multilineText ]
+                        [
+                            str """All pseudo class functions take a list of CSSProperties and return a CSSProperty, which the Fss function takes as a parameter.
+                            So doing pseudo classes is as easy as calling them within the fss function.
+                            Hover for example is done like so:
+                            """
+                            codeBlock ["let hoverStyle ="
+                                       "     fss"
+                                       "         ["
+                                       "             Padding' (px 40)"
+                                       "             Width' (px 100)"
+                                       "             BackgroundColor.orangeRed"
+                                       "             FontSize' (px 20)"
+                                       "             BorderRadius' (px 5)"
+                                       "             Color.white"
+                                       "             Hover"
+                                       "                 ["
+                                       "                     BackgroundColor.chartreuse"
+                                       "                     Color.black"
+                                       "                 ]"
+                                       "         ]" ]
+                        ]
+                    div [ ClassName hoverStyle ]
+                        [
+                            str "Hover me!"
+                        ]
+                    h2 [] [ str "Pseudo-elements" ]
+                    let beforeAndAfter =
+                        let beforeAndAfter =
+                            [
+                                Content.Value ""
+                                Display.InlineBlock
+                                BackgroundColor.orangeRed
+                                Width' (px 10)
+                                Height' (px 10)
+                            ]
+                        fss
+                            [
+                                Before beforeAndAfter
+                                After beforeAndAfter
+                            ]
+                    div []
+                        [
+                            str """These bad boys work much in the same way as the pseudo classes. Example follows:"""
+                            codeBlock [ "let beforeAndAfterStyle = "
+                                        "   let beforeAndAfter ="
+                                        "      ["
+                                        "           Content.Value\"\""
+                                        "           Display.InlineBlock"
+                                        "           BackgroundColor.orangeRed"
+                                        "           Width' (px 10)"
+                                        "           Height' (px 10)"
+                                        "       ]"
+                                        "   fss"
+                                        "       ["
+                                        "           Before beforeAndAfter"
+                                        "           After beforeAndAfter"
+                                        "       ]"
+                                        "div [ ClassName beforeAndAfter ]"
+                                        "   ["
+                                        "       str \" Some content surrounded by stuff \""
+                                        "   ]"
+                                ]
+                            str """Results in"""
+                            div [ ClassName beforeAndAfter ]
+                                [
+                                    str " Some content surrounded by stuff "
+                                ]
+                            ]
+
                 ]
         let composition = article [] []
         let labels = article [] []
@@ -303,6 +388,9 @@ module App =
                     Border.None
                     if example = currentExample then
                        BackgroundColor.Hex "#29A9DF"
+                       BorderRightColor.Hex "#0170BA"
+                       BorderRightWidth' (px 3)
+                       BorderRightStyle.Solid
                     else
                         BackgroundColor.transparent
                     Margin' (px 0)

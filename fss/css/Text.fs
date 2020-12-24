@@ -924,6 +924,11 @@ module Text =
         static member Initial = Initial |> textDecorationColorValue'
         static member Unset = Unset |> textDecorationColorValue'
 
+    /// <summary>
+    /// Creates TextDecorationColor CSS property.
+    /// </summary>
+    /// <param name="color">Can be CSSColor or Global</param>
+    /// <returns>Text decoration CSS property.</returns>
     let TextDecorationColor' (color: ITextDecorationColor) = TextDecorationColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
