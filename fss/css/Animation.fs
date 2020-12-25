@@ -15,7 +15,7 @@ module AnimationType =
         interface IAnimationFillMode
 
     type IterationCount =
-        | IterationCount
+        | Infinite
         interface IAnimationIterationCount
 
     type AnimationPlayState =
@@ -115,7 +115,7 @@ module Animation =
             values
             |> Utilities.Helpers.combineComma iterationCountToString
             |> iterationCountCssValue
-        static member Infinite = IterationCount |> iterationCountToString |> iterationCountCssValue
+        static member Infinite = Infinite |> iterationCountToString |> iterationCountCssValue
 
     let AnimationIterationCount' (iterationCount: IAnimationIterationCount) = AnimationIterationCount.Value iterationCount
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name

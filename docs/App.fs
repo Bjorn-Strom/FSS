@@ -57,6 +57,7 @@ module App =
         fss
             [
                 Whitespace.PreLine
+                MarginBottom' (px 200)
             ]
 
     let pageToString =
@@ -486,7 +487,123 @@ module App =
                         ]
                 ]
 
-        let keyframesAnimations = article [] []
+        let keyframesAnimations =
+            let bounceFrames =
+                keyframes
+                    [
+                        frames [ 0; 20; 53; 80; 100 ]
+                            [ Transform.Translate3D(px 0, px 0, px 0) ]
+                        frames [40; 43]
+                            [ Transform.Translate3D(px 0, px -30, px 0) ]
+                        frame 70
+                            [ Transform.Translate3D(px 0, px -15, px 0) ]
+                        frame 90
+                            [ Transform.Translate3D(px 0, px -4, px 0) ]
+                    ]
+
+            let backgroundColorFrames =
+                keyframes
+                    [
+                        frame 0 [ BackgroundColor.red ]
+                        frame 30 [ BackgroundColor.green ]
+                        frame 60 [ BackgroundColor.blue ]
+                        frame 100 [ BackgroundColor.red ]
+                    ]
+
+            let bounceAnimation =
+                fss
+                    [
+                        AnimationName.Name bounceFrames
+                        AnimationDuration' (sec 1.0)
+                        AnimationTimingFunction.EaseInOut
+                        AnimationIterationCount.Infinite
+                    ]
+
+            let bouncyColor =
+                fss
+                    [
+                        AnimationName.Names [ bounceFrames; backgroundColorFrames ]
+                        AnimationDuration.Values [ sec 1.0; sec 5.0 ]
+                        AnimationTimingFunction.Values [ TimingFunctionType.EaseInOut; TimingFunctionType.Ease ]
+                        AnimationIterationCount.Values [ AnimationType.Infinite; CssInt 3 ]
+                    ]
+            article []
+                [
+                    h2 [] [ str "Animations" ]
+                    div [ ClassName multilineText ]
+                        [
+                            str """Animations introduce 3 new functions:"""
+                            ul []
+                                [
+                                    li []
+                                        [
+                                            str "frame"
+                                            codeBlock ["int -> CSSProperty list -> KeyframeAttribute"]
+                                        ]
+                                    li []
+                                        [
+                                            str "frames"
+                                            codeBlock ["int list -> CSSProperty list -> KeyframeAttribute"]
+                                        ]
+                                    li []
+                                        [
+                                            str "keyframes"
+                                            codeBlock ["KeyframeAttribute list -> IAnimationName"]
+                                        ]
+                                ]
+
+                            str """What this means is that keyframes is a function that takes a list of frame or frame function calls.
+                                Frame is used when you want to define a single keyframe and frames for multiple.
+                                keyframes then gives you an animation name you supply to fss"""
+
+                            codeBlock [ "let bounceFrames ="
+                                        "    keyframes"
+                                        "        ["
+                                        "            frames [ 0; 20; 53; 80; 100 ]"
+                                        "                [ Transform.Translate3D(px 0, px 0, px 0) ]"
+                                        "            frames [40; 43]"
+                                        "                [ Transform.Translate3D(px 0, px -30, px 0) ]"
+                                        "            frame 70"
+                                        "                [ Transform.Translate3D(px 0, px -15, px 0) ]"
+                                        "            frame 90"
+                                        "                [ Transform.Translate3D(px 0, px -4, px 0) ]"
+                                        "        ]"
+                                        "let bounceAnimation ="
+                                        "    fss"
+                                        "        ["
+                                        "            AnimationName.Name bounceFrames"
+                                        "            AnimationDuration' (sec 1.0)"
+                                        "            AnimationTimingFunction.EaseInOut"
+                                        "            AnimationIterationCount.Infinite"
+                                        "        ]"]
+
+                            div [ ClassName bounceAnimation ] [ str "Bouncy bounce" ]
+                            str """Animations can be combined too. So if we define another animation, say one that changes background color.
+                                We can combine it with the bouncy we already have.
+                                The main difference here is that the animation properties in Fss takes a list of arguments, each element in the list corresponds to one animation."""
+                            codeBlock [
+                                "let backgroundColorFrames ="
+                                "    keyframes"
+                                "        ["
+                                "            frame 0 [ BackgroundColor.red ]"
+                                "            frame 30 [ BackgroundColor.green ]"
+                                "            frame 60 [ BackgroundColor.blue ]"
+                                "            frame 100 [ BackgroundColor.red ]"
+                                "        ]"
+                                "let bouncyColor ="
+                                "    fss"
+                                "        ["
+                                "            AnimationName.Names [ bounceFrames; backgroundColorFrames ]"
+                                "            AnimationDuration.Values [ sec 1.0; sec 5.0 ]"
+                                "            AnimationTimingFunction.Values [ TimingFunctionType.EaseInOut; TimingFunctionType.Ease ]"
+                                "            AnimationIterationCount.Values [ AnimationType.Infinite; CssInt 3 ]"
+                                "        ]"]
+                            div [ ClassName bouncyColor ] [ str "Bouncy color" ]
+
+                        ]
+
+                ]
+
         let selectors = article [] []
         let mediaQueries = article [] []
         let globalStyles = article [] []
