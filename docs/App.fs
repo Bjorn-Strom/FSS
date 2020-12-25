@@ -23,8 +23,8 @@ module App =
         | Composition
         | Labels
         | Transitions
-        | Selectors
         | KeyframesAnimations
+        | Selectors
         | MediaQueries
         | GlobalStyles
         | Counters
@@ -70,8 +70,8 @@ module App =
         | Composition -> "Composition"
         | Labels -> "Labels"
         | Transitions -> "Transitions"
-        | Selectors -> "Selectors"
         | KeyframesAnimations -> "Keyframes and animations"
+        | Selectors -> "Selectors"
         | MediaQueries -> "Media queries"
         | GlobalStyles  -> "Global styles"
         | Counters -> "Counters"
@@ -352,11 +352,142 @@ module App =
                             ]
 
                 ]
-        let composition = article [] []
-        let labels = article [] []
-        let transitions = article [] []
-        let selectors = article [] []
+        let composition =
+            article []
+                [
+                    let baseStyle =
+                        [
+                            BackgroundColor.darkGreen
+                            Color.turquoise
+                        ]
+                    let danger = [ Color.red ]
+
+                    h2 [] [ str "Composition" ]
+                    div [ ClassName multilineText ]
+                        [
+                            str """As Fss uses """
+                            a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js" ]
+                            str " to generate the CSS we get some nice benefits like "
+                            a [ Href "https://emotion.sh/docs/composition" ] [ str "composition" ]
+                            str """. Feel free to read emotions composition docs, the following example is a re-implementation of theirs."""
+
+                            codeBlock ["let baseStyle ="
+                                       "    ["
+                                       "        BackgroundColor.darkGreen"
+                                       "        Color.turquoise"
+                                       "    ]"
+                                       "let danger = [ Color.red ]"]
+                            str """Note how we havent called Fss yet."""
+                            codeBlock ["div [ ClassName (fss baseStyle) ]"
+                                       "    [ str \"This will be turquoise\" ]"
+                                       "div [ ClassName (fss <| danger @ baseStyle)\]"
+                                       "    [ str \"This will be also be turquoise since the base styles overwrite the danger styles.\"]"
+                                       "div [ ClassName (fss <| baseStyle @ danger)]"
+                                       "    [ str \"This will be red\" ]"]
+
+                            div [ ClassName (fss baseStyle) ]
+                                [ str "This will be turquoise" ]
+                            div [ ClassName (fss <| danger @ baseStyle)]
+                                [ str "This will be also be turquoise since the base styles overwrite the danger styles."]
+                            div [ ClassName (fss <| baseStyle @ danger)]
+                                [ str "This will be red" ]
+                        ]
+                ]
+        let labels =
+            article []
+                [
+                    h2 [] [ str "Labels" ]
+                    a [ Href "https://emotion.sh/docs/labels" ] [ str "Labels" ]
+                    str """ is yet another benefit from using """
+                    a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js." ]
+
+                    str """It is a CSS property called label which appends any name to the generated classname making it more readable."""
+
+                    codeBlock ["let styleWithoutLabel = fss [ Color.red ]"
+                               "let styleWithLabel = fss [ Color.hotPink; Label' \"HotPinkLabel\" ]"
+                               "div [ ClassName styleWithoutLabel ] [ str styleWithoutLabel ]"
+                               "div [ ClassName styleWithLabel ] [ str styleWithLabel ]"]
+
+                    str """Results in: """
+
+                    let styleWithoutLabel = fss [ Color.red ]
+                    let styleWithLabel = fss [ Color.hotPink; Label' "HotPinkLabel" ]
+                    div [ ClassName styleWithoutLabel ] [ str styleWithoutLabel ]
+                    div [ ClassName styleWithLabel ] [ str styleWithLabel ]
+                ]
+
+        let transitions =
+            article []
+                [
+                    h2 [] [ str "Transition" ]
+                    div [ ClassName multilineText ]
+                        [
+                            str """The biggest difference here is that there is no transition shorthand.
+                                Apart from that transitions will work as you expect
+                                Hover example: """
+
+                            codeBlock [ "let colorTransition ="
+                                        "    fss"
+                                        "        ["
+                                        "            BackgroundColor.red"
+                                        "            TransitionProperty.BackgroundColor"
+                                        "            TransitionDuration' (sec 2.5)"
+                                        "            TransitionTimingFunction.Ease"
+                                        "            Hover [ BackgroundColor.green ]"
+                                        "       ]"
+                                        "div [ ClassName colorTransition ] [ str \"Hover me\" ]" ]
+
+                            let colorTransition =
+                                   fss
+                                       [
+                                           BackgroundColor.red
+                                           TransitionProperty.BackgroundColor
+                                           TransitionDuration' (sec 2.5)
+                                           TransitionTimingFunction.Ease
+                                           Hover [ BackgroundColor.green ]
+                                       ]
+
+                            div [ ClassName colorTransition ] [ str "Hover me" ]
+
+                            str """Another example"""
+                            codeBlock [ "let sizeAndColor ="
+                                        "    fss"
+                                        "        ["
+                                        "            Width' (px 40)"
+                                        "            Height' (px 40)"
+                                        "            BackgroundColor.yellowGreen"
+                                        "            TransitionProperty.All"
+                                        "            TransitionTimingFunction.Linear"
+                                        "            TransitionDuration' (ms 500.)"
+                                        "            Hover"
+                                        "                ["
+                                        "                    BorderRadius' (pct 100)"
+                                        "                    BackgroundColor.orangeRed"
+                                        "                ]"
+                                        "        ]"
+                                        "div [ ClassName sizeAndColor ] [ ]" ]
+
+                            let sizeAndColor =
+                                fss
+                                    [
+                                        Width' (px 40)
+                                        Height' (px 40)
+                                        BackgroundColor.yellowGreen
+                                        TransitionProperty.All
+                                        TransitionTimingFunction.Linear
+                                        TransitionDuration' (ms 500.)
+                                        Hover
+                                            [
+                                                BorderRadius' (pct 100)
+                                                BackgroundColor.orangeRed
+                                            ]
+                                    ]
+                            div [ ClassName sizeAndColor ] [ ]
+                        ]
+                ]
+
         let keyframesAnimations = article [] []
+        let selectors = article [] []
         let mediaQueries = article [] []
         let globalStyles = article [] []
         let counters = article [] []
@@ -373,8 +504,8 @@ module App =
         | Composition -> composition
         | Labels -> labels
         | Transitions -> transitions
-        | Selectors -> selectors
         | KeyframesAnimations -> keyframesAnimations
+        | Selectors -> selectors
         | MediaQueries -> mediaQueries
         | GlobalStyles  -> globalStyles
         | Counters -> counters
@@ -468,8 +599,8 @@ module App =
                         menuListItem' Composition
                         menuListItem' Labels
                         menuListItem' Transitions
-                        menuListItem' Selectors
                         menuListItem' KeyframesAnimations
+                        menuListItem' Selectors
                         menuListItem' MediaQueries
                         menuListItem' GlobalStyles
                         menuListItem' Counters
