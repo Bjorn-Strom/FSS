@@ -24,7 +24,7 @@ module App =
         | Labels
         | Transitions
         | KeyframesAnimations
-        | Selectors
+        | Combinators
         | MediaQueries
         | GlobalStyles
         | Counters
@@ -72,7 +72,7 @@ module App =
         | Labels -> "Labels"
         | Transitions -> "Transitions"
         | KeyframesAnimations -> "Keyframes and animations"
-        | Selectors -> "Selectors"
+        | Combinators -> "Combinators"
         | MediaQueries -> "Media queries"
         | GlobalStyles  -> "Global styles"
         | Counters -> "Counters"
@@ -604,7 +604,52 @@ module App =
 
                 ]
 
-        let selectors = article [] []
+        let Combinators =
+            let combinatorStyle =
+                fss
+                    [
+                        Before [ Color.black; Content.Value "(" ]
+                        After [ Color.black; Content.Value ")" ]
+                        Color.red
+                    ]
+            article []
+                [
+                    h2 [] [ str "Combinators" ]
+                    div [ ClassName multilineText ]
+                        [
+                            str """Combinators can be used when you want to style something depending on selector relationships.
+                            There are 4 combinators all of them supported by Fss."""
+                            ul []
+                                [
+                                    li []
+                                        [
+                                            str "Descendant "
+                                            span [ ClassName combinatorStyle ] [ str "! space" ]
+                                        ]
+                                    li []
+                                        [
+                                            str "Child"
+                                            span [ ClassName combinatorStyle ] [ str "! >" ]
+                                        ]
+                                    li []
+                                        [
+                                            str "Adjacent sibling"
+                                            span [ ClassName combinatorStyle ] [ str "! +" ]
+                                        ]
+                                    li []
+                                        [
+                                            str "General sibling"
+                                            span [ ClassName combinatorStyle ] [ str "! ~" ]
+                                        ]
+                                ]
+                            str """As you can see Fss uses the same characters for combinators as css, only they are prepended by a bang (!)
+                                Following are some examples. """
+
+                            str "If you want some more information about combinators or where these examples come from you can look "
+                            a [ Href "https://blog.logrocket.com/what-you-need-to-know-about-css-combinators/" ] [ str "here" ]
+                        ]
+                ]
+
         let mediaQueries = article [] []
         let globalStyles = article [] []
         let counters = article [] []
@@ -622,7 +667,7 @@ module App =
         | Labels -> labels
         | Transitions -> transitions
         | KeyframesAnimations -> keyframesAnimations
-        | Selectors -> selectors
+        | Combinators -> Combinators
         | MediaQueries -> mediaQueries
         | GlobalStyles  -> globalStyles
         | Counters -> counters
@@ -717,7 +762,7 @@ module App =
                         menuListItem' Labels
                         menuListItem' Transitions
                         menuListItem' KeyframesAnimations
-                        menuListItem' Selectors
+                        menuListItem' Combinators
                         menuListItem' MediaQueries
                         menuListItem' GlobalStyles
                         menuListItem' Counters
