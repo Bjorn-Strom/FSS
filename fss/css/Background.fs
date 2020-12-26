@@ -359,57 +359,77 @@ module Background =
     type BackgroundImage =
         static member Value (image: Image) = image |> imageValue
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
-        (*
-        static member LinearGradient (start: CSSColor, last: CSSColor) =
+
+        static member LinearGradient (start: ColorStop, last: ColorStop) =
             imageValue <| Image.Image.LinearGradient(start, last)
-        static member LinearGradient (angle: Units.Angle.Angle, start: CSSColor, last: CSSColor) =
+        static member LinearGradient (angle: Units.Angle.Angle, start: ColorStop, last: ColorStop) =
             imageValue <| Image.Image.LinearGradient(angle, start, last)
-        static member LinearGradient (sideOrCorner: SideOrCorner, start: CSSColor, last: CSSColor) =
+        static member LinearGradient (sideOrCorner: SideOrCorner, start: ColorStop, last: ColorStop) =
             imageValue <| Image.Image.LinearGradient(sideOrCorner, start, last)
-        static member LinearGradient (angle: Units.Angle.Angle, colors: CSSColor list)=
+        static member LinearGradient (colors: ColorStop list) =
+            imageValue <| Image.Image.LinearGradient(colors)
+        static member LinearGradient (angle: Units.Angle.Angle, colors: ColorStop list) =
             imageValue <| Image.Image.LinearGradient(angle, colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CSSColor list) =
+        static member LinearGradient (sideOrCorner: SideOrCorner, colors: ColorStop list) =
             imageValue <| Image.Image.LinearGradient(sideOrCorner, colors)
-        static member LinearGradient (angle: Units.Angle.Angle, (colors: (CSSColor * ILengthPercentage) list)) =
-            imageValue <| Image.Image.LinearGradient(angle,colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, (colors: (CSSColor * ILengthPercentage) list)) =
-            imageValue <| Image.Image.LinearGradient(sideOrCorner, colors)
-        static member LinearGradient (angle: Units.Angle.Angle, start: (CSSColor * ILengthPercentage), (last: CSSColor * ILengthPercentage)) =
-            imageValue <| Image.Image.LinearGradient(angle, start, last)
-        static member LinearGradient (sideOrCorner: SideOrCorner, start: (CSSColor * ILengthPercentage), (last: CSSColor * ILengthPercentage)) =
-            imageValue <| Image.Image.LinearGradient(sideOrCorner, start, last)
-        static member LinearGradient (angle: Units.Angle.Angle, (colors: (CSSColor * ILengthPercentage * ILengthPercentage) list)) =
-            imageValue <| Image.Image.LinearGradient(angle, colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, (colors: (CSSColor * ILengthPercentage * ILengthPercentage) list)) =
-            imageValue <| Image.Image.LinearGradient(sideOrCorner, colors)
-        static member LinearGradient (angle: Units.Angle.Angle, start: (CSSColor * ILengthPercentage * ILengthPercentage), (last: CSSColor * ILengthPercentage * ILengthPercentage)) =
-            imageValue <| Image.Image.LinearGradient(angle, start, last)
-        static member LinearGradient (sideOrCorner: SideOrCorner, start: (CSSColor * ILengthPercentage * ILengthPercentage), (last: CSSColor * ILengthPercentage * ILengthPercentage)) =
-            imageValue <| Image.Image.LinearGradient(sideOrCorner, start, last)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: CSSColor, last: CSSColor) =
+
+        static member RepeatingLinearGradient (start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RepeatingLinearGradient(start, last)
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: ColorStop, last: ColorStop) =
             imageValue <| Image.Image.RepeatingLinearGradient(angle, start, last)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, start: CSSColor, last: CSSColor) =
+        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, start: ColorStop, last: ColorStop) =
             imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, start, last)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, colors: CSSColor list)=
+        static member RepeatingLinearGradient (colors: ColorStop list) =
+            imageValue <| Image.Image.RepeatingLinearGradient(colors)
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, colors: ColorStop list) =
             imageValue <| Image.Image.RepeatingLinearGradient(angle, colors)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, colors: CSSColor list) =
+        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, colors: ColorStop list) =
             imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, colors)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, (colors: (CSSColor * ILengthPercentage) list)) =
-            imageValue <| Image.Image.RepeatingLinearGradient(angle, colors)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, (colors: (CSSColor * ILengthPercentage) list)) =
-            imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, colors)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: (CSSColor * ILengthPercentage), (last: CSSColor * ILengthPercentage)) =
-            imageValue <| Image.Image.RepeatingLinearGradient(angle, start, last)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, start: (CSSColor * ILengthPercentage), (last: CSSColor * ILengthPercentage)) =
-            imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, start, last)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, (colors: (CSSColor * ILengthPercentage * ILengthPercentage) list)) =
-            imageValue <| Image.Image.RepeatingLinearGradient(angle, colors)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, (colors: (CSSColor * ILengthPercentage * ILengthPercentage) list)) =
-            imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, colors)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: (CSSColor * ILengthPercentage * ILengthPercentage), (last: CSSColor * ILengthPercentage * ILengthPercentage)) =
-            imageValue <| Image.Image.RepeatingLinearGradient(angle, start, last)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, start: (CSSColor * ILengthPercentage * ILengthPercentage), (last: CSSColor * ILengthPercentage * ILengthPercentage)) =
-            imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, start, last)
+
+        static member RadialGradient (start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RadialGradient(start, last)
+        static member RadialGradient (colors: ColorStop list) =
+            imageValue <| Image.Image.RadialGradient(colors)
+        static member RadialGradient (shape: Shape, start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RadialGradient(shape, start, last)
+        static member RadialGradient (shape: Shape, colors: ColorStop list) =
+            imageValue <| Image.Image.RadialGradient(shape, colors)
+        static member RadialGradient (shape: Shape, position: ImagePosition, start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RadialGradient(shape, position, start, last)
+        static member RadialGradient (shape: Shape, position: ImagePosition, colors: ColorStop list) =
+            imageValue <| Image.Image.RadialGradient(shape, position, colors)
+        static member RadialGradient (shape: Shape, side: Side, start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RadialGradient(shape, side, start, last)
+        static member RadialGradient (shape: Shape, side: Side, colors: ColorStop list) =
+            imageValue <| Image.Image.RadialGradient(shape, side, colors)
+        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RadialGradient(shape, side, position, start, last)
+        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: ColorStop list) =
+            imageValue <| Image.Image.RadialGradient(shape, side, position, colors)
+
+        static member RepeatingRadialGradient (start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RepeatingRadialGradient(start, last)
+        static member RepeatingRadialGradient (colors: ColorStop list) =
+            imageValue <| Image.Image.RepeatingRadialGradient(colors)
+        static member RepeatingRadialGradient (shape: Shape, start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, start, last)
+        static member RepeatingRadialGradient (shape: Shape, colors: ColorStop list) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, colors)
+        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, position, start, last)
+        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, colors: ColorStop list) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, position, colors)
+        static member RepeatingRadialGradient (shape: Shape, side: Side, start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, start, last)
+        static member RepeatingRadialGradient (shape: Shape, side: Side, colors: ColorStop list) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, colors)
+        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, start: ColorStop, last: ColorStop) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, start, last)
+        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: ColorStop list) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, colors)
+
+
+        (*
         static member RadialGradient (start: CSSColor, last: CSSColor) =
             imageValue <| Image.Image.RadialGradient(start, last)
         static member RadialGradient ((start: CSSColor * ILengthPercentage), (last: CSSColor * ILengthPercentage)) =

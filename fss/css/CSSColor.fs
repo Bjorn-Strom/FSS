@@ -9,7 +9,6 @@ module CSSColor =
     interface ITextEmphasisColor
     interface IBorderColor
     interface IOutlineColor
-    interface IColorStop
     interface IColumnRuleColor
     interface ICaretColor
     static member black = Utilities.Color.hex "000000" |> CSSColor
