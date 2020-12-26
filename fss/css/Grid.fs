@@ -649,8 +649,8 @@ module Grid =
     type GridAutoColumns =
         static member Value (autoColumn: IGridAutoColumns) = autoColumn |> autoColumnsValue'
         static member Values (values: IGridAutoColumns list) = Utilities.Helpers.combineWs autoColumnsToString values |> autoColumnsValue
-        static member MaxContent = ContentSize.MaxContent |> autoColumnsValue'
-        static member MinContent = ContentSize.MinContent |> autoColumnsValue'
+        static member MaxContent = MaxContent |> autoColumnsValue'
+        static member MinContent = MinContent |> autoColumnsValue'
         static member FitContent (contentSize: ILengthPercentage) = FitContent(contentSize) |> autoColumnsValue'
 
         static member Auto = Auto |> autoColumnsValue'

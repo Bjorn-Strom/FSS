@@ -28,10 +28,10 @@ module Content =
                     "Content image with alt text"
                     [ Content.Url("http://www.example.com/test.png", "this is the alt text") ]
                     [ "content" ==> "url(http://www.example.com/test.png) / \"this is the alt text\"" ]
-                //test
-                //    "Content linear gradient"
-                //    [ Content.LinearGradient(hex "e66456", hex "9198e5") ]
-                //    [ "content" ==> "linear-gradient(#e66456, #9198e5)" ]
+                test
+                    "Content linear gradient"
+                    [ Content.LinearGradient(hex "e66456", hex "9198e5") ]
+                    [ "content" ==> "linear-gradient(#e66456, #9198e5)" ]
                 test
                     "Content string value"
                     [ Content' (CssString "prefix")]

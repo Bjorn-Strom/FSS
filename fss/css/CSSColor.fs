@@ -11,6 +11,7 @@ module CSSColor =
     interface IOutlineColor
     interface IColumnRuleColor
     interface ICaretColor
+    interface IColorStop
     static member black = Utilities.Color.hex "000000" |> CSSColor
     static member silver = Utilities.Color.hex "c0c0c0" |> CSSColor
     static member gray = Utilities.Color.hex "808080" |> CSSColor

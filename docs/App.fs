@@ -74,7 +74,7 @@ let BackgroundExamples model dispatch =
 
                     div [ ClassName (fss [
                         BackgroundOrigin.ContentBox
-                        BackgroundImage.RadialGradient(ColorStop.Color CSSColor.crimson, ColorStop.Color CSSColor.skyBlue)
+                        BackgroundImage.RadialGradient(CSSColor.crimson, CSSColor.skyBlue)
                         Height' (px 60)
                         Width' (px 60)
                     ]) ] []
@@ -90,7 +90,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width' (px 200)
                                 Height' (px 200)
-                                BackgroundImage.LinearGradient(ColorStop.Color CSSColor.red, ColorStop.Color CSSColor.blue)
+                                BackgroundImage.LinearGradient(CSSColor.red, CSSColor.blue)
                             ])
                     ] []
 
@@ -99,7 +99,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width' (px 200)
                                 Height' (px 200)
-                                BackgroundImage.LinearGradient(ToRight, ColorStop.Color CSSColor.red, ColorStop.Color CSSColor.blue)
+                                BackgroundImage.LinearGradient(ToRight, CSSColor.red, CSSColor.blue)
                             ])
                     ] []
 
@@ -108,7 +108,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width' (px 200)
                                 Height' (px 200)
-                                BackgroundImage.RadialGradient(ColorStop.Color CSSColor.red, ColorStop.Color CSSColor.blue)
+                                BackgroundImage.RadialGradient(CSSColor.red, CSSColor.blue)
                             ])
                     ] []
 
@@ -117,7 +117,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width' (px 200)
                                 Height' (px 200)
-                                BackgroundImage.RepeatingRadialGradient(ColorStop.Color CSSColor.blue, ColorStop.ColorStop(CSSColor.red, (px 10)) )
+                                BackgroundImage.RepeatingRadialGradient(CSSColor.blue, stop CSSColor.red (px 10))
                             ])
                     ] []
                 ]
@@ -130,7 +130,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width' (px 200)
                                 Height' (px 200)
-                                BackgroundImage.RepeatingRadialGradient(ColorStop.Color <| hex "#e66465", ColorStop.ColorStop(hex "9198e5", pct 20))
+                                BackgroundImage.RepeatingRadialGradient(hex "#e66465", stop (hex "9198e5") (pct 20))
                             ])
                     ] []
 
@@ -139,7 +139,7 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width' (px 200)
                                     Height' (px 200)
-                                    BackgroundImage.LinearGradient(ToBottom, ColorStop.Color CSSColor.red, ColorStop.Color <| hex "f06d06" )
+                                    BackgroundImage.LinearGradient(ToBottom, CSSColor.red, hex "f06d06" )
                                 ])
                         ] [ ]
 
@@ -148,7 +148,7 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width' (px 200)
                                     Height' (px 200)
-                                    BackgroundImage.LinearGradient(deg 72.0, ColorStop.Color CSSColor.red, ColorStop.Color <| hex "f06d06")
+                                    BackgroundImage.LinearGradient(deg 72.0, CSSColor.red, hex "f06d06")
                                 ])
                         ] []
 
@@ -159,10 +159,10 @@ let BackgroundExamples model dispatch =
                                     Height' (px 200)
                                     BackgroundImage.LinearGradient(ToRight,
                                                                    [
-                                                                       ColorStop.Color CSSColor.red
-                                                                       ColorStop.Color <| hex "f06d06"
-                                                                       ColorStop.Color <| rgb 255 255 0
-                                                                       ColorStop.Color CSSColor.green
+                                                                       CSSColor.red
+                                                                       hex "f06d06"
+                                                                       rgb 255 255 0
+                                                                       CSSColor.green
                                                                    ])
                                 ])
                         ] []
@@ -176,7 +176,7 @@ let BackgroundExamples model dispatch =
                             [
                                 Width' (px 200)
                                 Height' (px 200)
-                                BackgroundImage.LinearGradient(ToRight, ColorStop.Color CSSColor.red, ColorStop.ColorStop (CSSColor.yellow, pct 10))
+                                BackgroundImage.LinearGradient(ToRight, CSSColor.red, stop CSSColor.yellow (pct 10))
                             ])
                     ] []
 
@@ -187,11 +187,11 @@ let BackgroundExamples model dispatch =
                                     Height' (px 200)
                                     BackgroundImage.LinearGradient(ToRight,
                                                          [
-                                                             ColorStop.Color <| hex "fffdc2"
-                                                             ColorStop.ColorStop (hex "fffdc2", pct 15)
-                                                             ColorStop.ColorStop (hex "d7f0a2", pct 15)
-                                                             ColorStop.ColorStop (hex "d7f0a2", pct 85)
-                                                             ColorStop.ColorStop (hex "fffdc2", pct 85)
+                                                             hex "fffdc2" :> IColorStop
+                                                             stop (hex "fffdc2") (pct 15)
+                                                             stop (hex "d7f0a2") (pct 15)
+                                                             stop (hex "d7f0a2") (pct 85)
+                                                             stop (hex "fffdc2") (pct 85)
                                                          ] )
                                 ])
                         ] []
@@ -201,7 +201,7 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width' (px 200)
                                     Height' (px 200)
-                                    BackgroundImage.RadialGradient(Circle AtTopRight, ColorStop.Color CSSColor.yellow, ColorStop.Color <| hex "f06d06" )
+                                    BackgroundImage.RadialGradient(CircleAt AtTopRight, CSSColor.yellow, hex "f06d06" )
                                 ])
                         ] []
 
@@ -210,12 +210,12 @@ let BackgroundExamples model dispatch =
                                 [
                                     Width' (px 200)
                                     Height' (px 200)
-                                    BackgroundImage.RadialGradient(Circle <| ImagePosition.Percent (pct 100),
+                                    BackgroundImage.RadialGradient(CircleAt <| ImagePosition.Percent (pct 100),
                                                                    [
-                                                                       ColorStop.Color <| hex "333"
-                                                                       ColorStop.ColorStop (hex "333", pct 50)
-                                                                       ColorStop.ColorStop (hex "eee", pct 75)
-                                                                       ColorStop.ColorStop (hex "333", pct 75)
+                                                                       hex "333" :> IColorStop
+                                                                       stop (hex "333") (pct 50)
+                                                                       stop (hex "eee") (pct 75)
+                                                                       stop (hex "333") (pct 75)
                                                                    ])
                                 ])
                         ] []

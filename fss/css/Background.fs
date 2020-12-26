@@ -360,157 +360,63 @@ module Background =
         static member Value (image: Image) = image |> imageValue
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
 
-        static member LinearGradient (start: ColorStop, last: ColorStop) =
+        static member LinearGradient (start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.LinearGradient(start, last)
-        static member LinearGradient (angle: Units.Angle.Angle, start: ColorStop, last: ColorStop) =
+        static member LinearGradient (angle: Units.Angle.Angle, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.LinearGradient(angle, start, last)
-        static member LinearGradient (sideOrCorner: SideOrCorner, start: ColorStop, last: ColorStop) =
+        static member LinearGradient (sideOrCorner: SideOrCorner, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.LinearGradient(sideOrCorner, start, last)
-        static member LinearGradient (colors: ColorStop list) =
+        static member LinearGradient (colors: IColorStop list) =
             imageValue <| Image.Image.LinearGradient(colors)
-        static member LinearGradient (angle: Units.Angle.Angle, colors: ColorStop list) =
+        static member LinearGradient (angle: Units.Angle.Angle, colors: IColorStop list) =
             imageValue <| Image.Image.LinearGradient(angle, colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, colors: ColorStop list) =
+        static member LinearGradient (sideOrCorner: SideOrCorner, colors: IColorStop list) =
+            imageValue <| Image.Image.LinearGradient(sideOrCorner, colors)
+        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CSSColor list) =
             imageValue <| Image.Image.LinearGradient(sideOrCorner, colors)
 
-        static member RepeatingLinearGradient (start: ColorStop, last: ColorStop) =
+        static member RepeatingLinearGradient (start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RepeatingLinearGradient(start, last)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: ColorStop, last: ColorStop) =
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RepeatingLinearGradient(angle, start, last)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, start: ColorStop, last: ColorStop) =
+        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, start, last)
-        static member RepeatingLinearGradient (colors: ColorStop list) =
+        static member RepeatingLinearGradient (colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingLinearGradient(colors)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, colors: ColorStop list) =
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingLinearGradient(angle, colors)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, colors: ColorStop list) =
+        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, colors)
 
-        static member RadialGradient (start: ColorStop, last: ColorStop) =
+        static member RadialGradient (start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RadialGradient(start, last)
-        static member RadialGradient (colors: ColorStop list) =
+        static member RadialGradient (colors: IColorStop list) =
             imageValue <| Image.Image.RadialGradient(colors)
-        static member RadialGradient (shape: Shape, start: ColorStop, last: ColorStop) =
+        static member RadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RadialGradient(shape, start, last)
-        static member RadialGradient (shape: Shape, colors: ColorStop list) =
+        static member RadialGradient (shape: Shape, colors: IColorStop list) =
             imageValue <| Image.Image.RadialGradient(shape, colors)
-        static member RadialGradient (shape: Shape, position: ImagePosition, start: ColorStop, last: ColorStop) =
-            imageValue <| Image.Image.RadialGradient(shape, position, start, last)
-        static member RadialGradient (shape: Shape, position: ImagePosition, colors: ColorStop list) =
-            imageValue <| Image.Image.RadialGradient(shape, position, colors)
-        static member RadialGradient (shape: Shape, side: Side, start: ColorStop, last: ColorStop) =
+        static member RadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RadialGradient(shape, side, start, last)
-        static member RadialGradient (shape: Shape, side: Side, colors: ColorStop list) =
+        static member RadialGradient (shape: Shape, side: Side, colors: IColorStop list) =
             imageValue <| Image.Image.RadialGradient(shape, side, colors)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, start: ColorStop, last: ColorStop) =
-            imageValue <| Image.Image.RadialGradient(shape, side, position, start, last)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: ColorStop list) =
-            imageValue <| Image.Image.RadialGradient(shape, side, position, colors)
 
-        static member RepeatingRadialGradient (start: ColorStop, last: ColorStop) =
+        static member RepeatingRadialGradient (start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RepeatingRadialGradient(start, last)
-        static member RepeatingRadialGradient (colors: ColorStop list) =
+        static member RepeatingRadialGradient (colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingRadialGradient(colors)
-        static member RepeatingRadialGradient (shape: Shape, start: ColorStop, last: ColorStop) =
+        static member RepeatingRadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, start, last)
-        static member RepeatingRadialGradient (shape: Shape, colors: ColorStop list) =
+        static member RepeatingRadialGradient (shape: Shape, colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, colors)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, start: ColorStop, last: ColorStop) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, position, start, last)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, colors: ColorStop list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, position, colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, start: ColorStop, last: ColorStop) =
+        static member RepeatingRadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, side, start, last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, colors: ColorStop list) =
+        static member RepeatingRadialGradient (shape: Shape, side: Side, colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, side, colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, start: ColorStop, last: ColorStop) =
+        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, start, last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: ColorStop list) =
+        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, colors)
-
-
-        (*
-        static member RadialGradient (start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RadialGradient(start, last)
-        static member RadialGradient ((start: CSSColor * ILengthPercentage), (last: CSSColor * ILengthPercentage)) =
-            imageValue <| Image.Image.RadialGradient(start, last)
-        static member RadialGradient (colors: CSSColor list) =
-            imageValue <| Image.Image.RadialGradient(colors)
-        static member RadialGradient (colorsAndStop: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RadialGradient(colorsAndStop)
-        static member RadialGradient (shape: Shape, start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RadialGradient(shape, start, last)
-        static member RadialGradient (shape: Shape, (start: CSSColor * ILengthPercentage), (last: CSSColor * ILengthPercentage)) =
-            imageValue <| Image.Image.RadialGradient(shape, start, last)
-        static member RadialGradient (shape: Shape, colors: CSSColor list) =
-            imageValue <| Image.Image.RadialGradient(shape, colors)
-        static member RadialGradient (shape: Shape, colorsAndStop: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RadialGradient(shape, colorsAndStop)
-        static member RadialGradient (shape: Shape, position: ImagePosition, start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RadialGradient(shape, position, start, last)
-        static member RadialGradient (shape: Shape, position: ImagePosition, (start: (CSSColor * ILengthPercentage)), (last: (CSSColor * ILengthPercentage))) =
-            imageValue <| Image.Image.RadialGradient(shape, position, start, last)
-        static member RadialGradient (shape: Shape, position: ImagePosition, colors: CSSColor list) =
-            imageValue <| Image.Image.RadialGradient(shape, position, colors)
-        static member RadialGradient (shape: Shape, position: ImagePosition, colors: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RadialGradient(shape, position, colors)
-        static member RadialGradient (shape: Shape, side: Side, start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RadialGradient(shape, side, start, last)
-        static member RadialGradient (shape: Shape, side: Side, start: CSSColor * ILengthPercentage, last: CSSColor * ILengthPercentage) =
-            imageValue <| Image.Image.RadialGradient(shape, side, start, last)
-        static member RadialGradient (shape: Shape, side: Side, colors: CSSColor list) =
-            imageValue <| Image.Image.RadialGradient(shape, side, colors)
-        static member RadialGradient (shape: Shape, side: Side, colorsAndStop: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RadialGradient(shape, side, colorsAndStop)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RadialGradient(shape, side, position, start, last)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, start: CSSColor * ILengthPercentage, last: CSSColor * ILengthPercentage) =
-            imageValue <| Image.Image.RadialGradient(shape, side, position, start, last)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: CSSColor list) =
-            imageValue <| Image.Image.RadialGradient(shape, side, position, colors)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, colorsAndStop: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RadialGradient(shape, side, position, colorsAndStop)
-        static member RepeatingRadialGradient (start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RepeatingRadialGradient(start, last)
-        static member RepeatingRadialGradient ((start: CSSColor * ILengthPercentage), (last: CSSColor * ILengthPercentage)) =
-            imageValue <| Image.Image.RepeatingRadialGradient(start, last)
-        static member RepeatingRadialGradient (colors: CSSColor list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(colors)
-        static member RepeatingRadialGradient (colorsAndStop: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(colorsAndStop)
-        static member RepeatingRadialGradient (shape: Shape, start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, start, last)
-        static member RepeatingRadialGradient (shape: Shape, (start: CSSColor * ILengthPercentage), (last: CSSColor * ILengthPercentage)) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, start, last)
-        static member RepeatingRadialGradient (shape: Shape, colors: CSSColor list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, colors)
-        static member RepeatingRadialGradient (shape: Shape, colorsAndStop: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, colorsAndStop)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, position, start, last)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, (start: (CSSColor * ILengthPercentage)), (last: (CSSColor * ILengthPercentage))) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, position, start, last)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, colors: CSSColor list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, position, colors)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, colors: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, position, colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, start, last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, start: CSSColor * ILengthPercentage, last: CSSColor * ILengthPercentage) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, start, last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, colors: CSSColor list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, colorsAndStop: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, colorsAndStop)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, start: CSSColor, last: CSSColor) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, start, last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, start: CSSColor * ILengthPercentage, last: CSSColor * ILengthPercentage) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, start, last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: CSSColor list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colorsAndStop: (CSSColor * ILengthPercentage) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, colorsAndStop)
-            *)
 
     let BackgroundImage' (image: Image) = BackgroundImage.Value(image)
 
