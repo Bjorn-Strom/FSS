@@ -1,5 +1,6 @@
 namespace Fss
 
+open System
 open Fable.Core
 open Fable.Core.JsInterop
 open Media
@@ -26,27 +27,15 @@ module Functions =
         |> CssString
         :> IAnimationName
 
-    let frame (f: int) (properties: CSSProperty list) =
-        (f, properties)
-        |> Frame
-    let frames (f: int list) (properties: CSSProperty list) =
-        (f, properties)
-        |> Frames
+    let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame
+    let frames (f: int list) (properties: CSSProperty list) = (f, properties) |> Frames
 
-    // TODO trenger å type her
-    let counterStyle (attributeList: (string * obj) list) =
-        let counterName = sprintf "_%i" <| attributeList.GetHashCode()
+    let counterStyle (attributeList: CounterProperty list) =
+        let counterName = sprintf "counter_%s" <| Guid.NewGuid().ToString()
 
-        createObj
-            [
-                sprintf "@counter-style %s" counterName ==>
-                    createObj attributeList
-            ]
-            |> css'
-            |> ignore
+        createCounterObject attributeList counterName |> css' |> ignore
 
-        counterName
-        |> CounterStyle
+        counterName |> CounterType.CounterStyle
 
     // Media
     let MediaQueryFor (device: Device) (features: MediaFeature list) (attributeList: CSSProperty list) =
@@ -69,8 +58,8 @@ module Functions =
         FontTypes.FontName fontFamily
 
     // Image
-    let stop (color: CSSColor) (stop: ILengthPercentage) = ColorStop(color, stop)
-    let stop2 (color: CSSColor) (stop1: ILengthPercentage) (stop2: ILengthPercentage) = ColorStop2(color, stop1, stop2)
+    let stop (color: CSSColor) (stop: ILengthPercentage) = ColorStop(color, stop) :> IColorStop
+    let stop2 (color: CSSColor) (stop1: ILengthPercentage) (stop2: ILengthPercentage) = ColorStop2(color, stop1, stop2) :> IColorStop
 
     // Color
     let rgb (r: int) (g: int) (b: int) = CSSColor.Rgb(r,g,b)

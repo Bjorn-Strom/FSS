@@ -28,10 +28,10 @@ module Content =
                     "Content image with alt text"
                     [ Content.Url("http://www.example.com/test.png", "this is the alt text") ]
                     [ "content" ==> "url(http://www.example.com/test.png) / \"this is the alt text\"" ]
-                //test
-                //    "Content linear gradient"
-                //    [ Content.LinearGradient(hex "e66456", hex "9198e5") ]
-                //    [ "content" ==> "linear-gradient(#e66456, #9198e5)" ]
+                test
+                    "Content linear gradient"
+                    [ Content.LinearGradient(hex "e66456", hex "9198e5") ]
+                    [ "content" ==> "linear-gradient(#e66456, #9198e5)" ]
                 test
                     "Content string value"
                     [ Content' (CssString "prefix")]
@@ -39,15 +39,15 @@ module Content =
                 test
                     "Content counter"
                     [ Content.Counter sampleCounter]
-                    [ "content" ==> "counter(_0)" ]
+                    [ "content" ==> sprintf "counter(%s)" (counterValue sampleCounter) ]
                 test
                     "Content counter2"
-                    [ Content.Counter (sampleCounter, ListStyleTypeType.UpperLatin) ]
-                    [ "content" ==> "counters(_0, upper-latin)" ]
+                    [ Content.Counters (sampleCounter, ListStyleTypeType.UpperLatin) ]
+                    [ "content" ==> sprintf "counters(%s, upper-latin)" (counterValue sampleCounter) ]
                 test
                     "Content counter2"
                     [ Content.Counter (sampleCounter, ". ")]
-                    [ "content" ==> "counters(_0, '. ')" ]
+                    [ "content" ==> sprintf "counter(%s)'. '" (counterValue sampleCounter)]
                 test
                     "Content attribute"
                     [ Content.Attribute Attribute.Title ]

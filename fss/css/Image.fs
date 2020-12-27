@@ -28,6 +28,8 @@ module ImageTypes =
         | AtCenterLeft
         | AtCenterBottom
         | AtLeft
+        | Position of int * int
+        | Percent of Units.Percent.Percent
 
     type Side =
         | ClosestSide
@@ -38,6 +40,8 @@ module ImageTypes =
     type Shape =
         | Circle
         | Ellipse
+        | CircleAt of ImagePosition
+        | EllipseAt of ImagePosition
 
     type ColorStop =
         | ColorStop of CSSColor * ILengthPercentage
@@ -46,8 +50,18 @@ module ImageTypes =
 
 module Image =
     let private sideOrCornerValue (value: SideOrCorner) = Utilities.Helpers.duToSpaced value
-    let private positionValue (value: ImagePosition) = Utilities.Helpers.duToSpaced value
+    let private positionValue (value: ImagePosition) =
+        match value with
+        | Position (x,y) -> sprintf "at %d, %d" x y
+        | Percent p -> sprintf "at %s" (Units.Percent.value p)
+        | _ -> Utilities.Helpers.duToSpaced value
     let private sideValue (value: Side) = Utilities.Helpers.duToKebab value
+    let private shapeValue (value: Shape) =
+        match value with
+        | CircleAt position -> sprintf "circle %s" (positionValue position)
+        | EllipseAt position -> sprintf "ellipse %s" (positionValue position)
+        | _ -> Utilities.Helpers.duToLowercase value
+
 
     let private colorAndStopToString (colorStop: IColorStop) =
         let stringifyColorStop =
@@ -62,35 +76,12 @@ module Image =
 
     type Image =
         static member Url (url: string) = sprintf "url(%s)" url
-        static member LinearGradient (angle: Units.Angle.Angle, start: CSSColor, last: CSSColor) =
-             sprintf "linear-gradient(%s, %s, %s)"
-                (Units.Angle.value angle)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
-        static member LinearGradient (sideOrCorner: SideOrCorner, start: CSSColor, last: CSSColor) =
-             sprintf "linear-gradient(%s, %s, %s)"
-                (sideOrCornerValue sideOrCorner)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
-        static member LinearGradient (angle: Units.Angle.Angle, colors: CSSColor list)=
-             sprintf "linear-gradient(%s, %s)"
-                (Units.Angle.value angle)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CSSColor list) =
-             sprintf "linear-gradient(%s, %s)"
-                (sideOrCornerValue sideOrCorner)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member LinearGradient (angle: Units.Angle.Angle, (colors: IColorStop list)) =
-             sprintf "linear-gradient(%s, %s)"
-                (Units.Angle.value angle)
-                (Utilities.Helpers.combineComma colorAndStopToString colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, (colors: IColorStop list)) =
-             sprintf "linear-gradient(%s, %s)"
-                (sideOrCornerValue sideOrCorner)
-                (Utilities.Helpers.combineComma colorAndStopToString colors)
-
+        static member LinearGradient (start: IColorStop, last: IColorStop) =
+            sprintf "linear-gradient(%s, %s)"
+                (colorAndStopToString start)
+                (colorAndStopToString last)
         static member LinearGradient (angle: Units.Angle.Angle, start: IColorStop, last: IColorStop) =
-             sprintf "linear-gradient(%s, %s, %s)"
+            sprintf "linear-gradient(%s, %s, %s)"
                 (Units.Angle.value angle)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
@@ -99,34 +90,27 @@ module Image =
                 (sideOrCornerValue sideOrCorner)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: CSSColor, last: CSSColor) =
-             sprintf "repeating-linear-gradient(%s, %s, %s)"
-                (Units.Angle.value angle)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, start: CSSColor, last: CSSColor) =
-             sprintf "repeating-linear-gradient(%s, %s, %s)"
-                (sideOrCornerValue sideOrCorner)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, colors: CSSColor list)=
-             sprintf "repeating-linear-gradient(%s, %s)"
-                (Units.Angle.value angle)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, colors: CSSColor list) =
-             sprintf "repeating-linear-gradient(%s, %s)"
-                (sideOrCornerValue sideOrCorner)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, (colors: IColorStop list)) =
-             sprintf "repeating-linear-gradient(%s, %s)"
+        static member LinearGradient (colors: IColorStop list) =
+            sprintf "linear-gradient(%s)" <| Utilities.Helpers.combineComma colorAndStopToString colors
+        static member LinearGradient (angle: Units.Angle.Angle, colors: IColorStop list) =
+            sprintf "linear-gradient(%s, %s)"
                 (Units.Angle.value angle)
                 (Utilities.Helpers.combineComma colorAndStopToString colors)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, (colors: IColorStop list)) =
-             sprintf "repeating-linear-gradient(%s, %s)"
+        static member LinearGradient (sideOrCorner: SideOrCorner, colors: IColorStop list) =
+             sprintf "linear-gradient(%s, %s)"
                 (sideOrCornerValue sideOrCorner)
                 (Utilities.Helpers.combineComma colorAndStopToString colors)
+        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CSSColor list) =
+             sprintf "linear-gradient(%s, %s)"
+                (sideOrCornerValue sideOrCorner)
+                (Utilities.Helpers.combineComma CSSColorValue.color colors)
+
+        static member RepeatingLinearGradient (start: IColorStop, last: IColorStop) =
+            sprintf "repeating-linear-gradient(%s, %s)"
+                (colorAndStopToString start)
+                (colorAndStopToString last)
         static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: IColorStop, last: IColorStop) =
-             sprintf "repeating-linear-gradient(%s, %s, %s)"
+            sprintf "repeating-linear-gradient(%s, %s, %s)"
                 (Units.Angle.value angle)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
@@ -135,211 +119,76 @@ module Image =
                 (sideOrCornerValue sideOrCorner)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
+        static member RepeatingLinearGradient (colors: IColorStop list) =
+            sprintf "repeating-linear-gradient(%s)" <| Utilities.Helpers.combineComma colorAndStopToString colors
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, colors: IColorStop list) =
+            sprintf "repeating-linear-gradient(%s, %s)"
+                (Units.Angle.value angle)
+                (Utilities.Helpers.combineComma colorAndStopToString colors)
+        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, colors: IColorStop list) =
+             sprintf "repeating-linear-gradient(%s, %s)"
+                (sideOrCornerValue sideOrCorner)
+                (Utilities.Helpers.combineComma colorAndStopToString colors)
 
-        static member RadialGradient (start: CSSColor, last: CSSColor) =
-             sprintf "radial-gradient(%s, %s)"
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
         static member RadialGradient (start: IColorStop, last: IColorStop) =
              sprintf "radial-gradient(%s, %s)"
                 (colorAndStopToString start)
                 (colorAndStopToString last)
-        static member RadialGradient (colors: CSSColor list) =
-             sprintf "radial-gradient(%s)"
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RadialGradient (colorsAndStop: IColorStop list) =
-             sprintf "radial-gradient(%s)"
-                   (Utilities.Helpers.combineComma colorAndStopToString colorsAndStop)
-        static member RadialGradient (shape: Shape, start: CSSColor, last: CSSColor) =
-             sprintf "radial-gradient(%A, %s, %s)"
-                shape
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
+        static member RadialGradient (colors: IColorStop list) =
+             sprintf "radial-gradient(%s)" (Utilities.Helpers.combineComma colorAndStopToString colors)
         static member RadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
              sprintf "radial-gradient(%A, %s, %s)"
-                shape
+                (shapeValue shape)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
-        static member RadialGradient (shape: Shape, colors: CSSColor list) =
-             sprintf "radial-gradient(%A, %s)"
-                shape
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RadialGradient (shape: Shape, colorsAndStop: IColorStop list) =
-             sprintf "radial-gradient(%A, %s)"
-                shape
-                (Utilities.Helpers.combineComma colorAndStopToString colorsAndStop)
-        static member RadialGradient (shape: Shape, position: ImagePosition, start: CSSColor, last: CSSColor) =
-             sprintf "radial-gradient(%A %s, %s, %s)"
-                shape
-                (positionValue position)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
-        static member RadialGradient (shape: Shape, position: ImagePosition, (start: IColorStop), (last: IColorStop)) =
-             sprintf "radial-gradient(%A %s, %s, %s)"
-                shape
-                (positionValue position)
-                (colorAndStopToString start)
-                (colorAndStopToString last)
-        static member RadialGradient (shape: Shape, position: ImagePosition, colors: CSSColor list) =
-             sprintf "radial-gradient(%A %s, %s)"
-                shape
-                (positionValue position)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RadialGradient (shape: Shape, position: ImagePosition, colors: IColorStop list) =
-             sprintf "radial-gradient(%A %s, %s)"
-                shape
-                (positionValue position)
-                (Utilities.Helpers.combineComma colorAndStopToString colors)
-        static member RadialGradient (shape: Shape, side: Side, start: CSSColor, last: CSSColor) =
-             sprintf "radial-gradient(%A %s, %s, %s)"
-                shape
-                (sideValue side)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
+        static member RadialGradient (shape: Shape, colors: IColorStop list) =
+             sprintf "radial-gradient(%A, %s)" (shapeValue shape) (Utilities.Helpers.combineComma colorAndStopToString colors)
         static member RadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =
              sprintf "radial-gradient(%A %s, %s, %s)"
-                shape
+                (shapeValue shape)
                 (sideValue side)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
-        static member RadialGradient (shape: Shape, side: Side, colors: CSSColor list) =
+        static member RadialGradient (shape: Shape, side: Side, colors: IColorStop list) =
              sprintf "radial-gradient(%A %s, %s)"
-                shape
+                (shapeValue shape)
                 (sideValue side)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RadialGradient (shape: Shape, side: Side, colorsAndStop: IColorStop list) =
-             sprintf "radial-gradient(%A %s, %s)"
-                shape
-                (sideValue side)
-                (Utilities.Helpers.combineComma colorAndStopToString colorsAndStop)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, start: CSSColor, last: CSSColor) =
-             sprintf "radial-gradient(%A %s %s, %s, %s)"
-                shape
-                (sideValue side)
-                (positionValue position)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, start: IColorStop, last: IColorStop) =
-             sprintf "radial-gradient(%A %s %s, %s, %s)"
-                shape
-                (sideValue side)
-                (positionValue position)
-                (colorAndStopToString start)
-                (colorAndStopToString last)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: CSSColor list) =
-             sprintf "radial-gradient(%A %s %s, %s)"
-                shape
-                (sideValue side)
-                (positionValue position)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RadialGradient (shape: Shape, side: Side, position: ImagePosition, colorsAndStop: IColorStop list) =
-             sprintf "radial-gradient(%A %s %s, %s)"
-                shape
-                (sideValue side)
-                (positionValue position)
-                (Utilities.Helpers.combineComma colorAndStopToString colorsAndStop)
-        static member RepeatingRadialGradient (start: CSSColor, last: CSSColor) =
-             sprintf "repeating-radial-gradient(%s, %s)"
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
+                (Utilities.Helpers.combineComma colorAndStopToString colors)
+
         static member RepeatingRadialGradient (start: IColorStop, last: IColorStop) =
              sprintf "repeating-radial-gradient(%s, %s)"
                 (colorAndStopToString start)
                 (colorAndStopToString last)
-        static member RepeatingRadialGradient (colors: CSSColor list) =
-             sprintf "repeating-radial-gradient(%s)"
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RepeatingRadialGradient (colorsAndStop: IColorStop list) =
-             sprintf "repeating-radial-gradient(%s)"
-                   (Utilities.Helpers.combineComma colorAndStopToString colorsAndStop)
-        static member RepeatingRadialGradient (shape: Shape, start: CSSColor, last: CSSColor) =
-             sprintf "repeating-radial-gradient(%A, %s, %s)"
-                shape
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
+        static member RepeatingRadialGradient (colors: IColorStop list) =
+             sprintf "repeating-radial-gradient(%s)" (Utilities.Helpers.combineComma colorAndStopToString colors)
         static member RepeatingRadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
              sprintf "repeating-radial-gradient(%A, %s, %s)"
-                shape
+                (shapeValue shape)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
-        static member RepeatingRadialGradient (shape: Shape, colors: CSSColor list) =
-             sprintf "repeating-radial-gradient(%A, %s)"
-                shape
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RepeatingRadialGradient (shape: Shape, colorsAndStop: IColorStop list) =
-             sprintf "repeating-radial-gradient(%A, %s)"
-                   shape
-                   (Utilities.Helpers.combineComma colorAndStopToString colorsAndStop)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, start: CSSColor, last: CSSColor) =
-             sprintf "repeating-radial-gradient(%A %s, %s, %s)"
-                shape
-                (positionValue position)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, (start: IColorStop), (last: IColorStop)) =
-             sprintf "repeating-radial-gradient(%A %s, %s, %s)"
-                shape
-                (positionValue position)
-                (colorAndStopToString start)
-                (colorAndStopToString last)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, colors: CSSColor list) =
-             sprintf "repeating-radial-gradient(%A %s, %s)"
-                shape
-                (positionValue position)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RepeatingRadialGradient (shape: Shape, position: ImagePosition, colors: IColorStop list) =
-             sprintf "repeating-radial-gradient(%A %s, %s)"
-                shape
-                (positionValue position)
-                (Utilities.Helpers.combineComma colorAndStopToString colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, start: CSSColor, last: CSSColor) =
-             sprintf "repeating-radial-gradient(%A %s, %s, %s)"
-                shape
-                (sideValue side)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
+        static member RepeatingRadialGradient (shape: Shape, colors: IColorStop list) =
+             sprintf "repeating-radial-gradient(%A, %s)" (shapeValue shape) (Utilities.Helpers.combineComma colorAndStopToString colors)
         static member RepeatingRadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =
              sprintf "repeating-radial-gradient(%A %s, %s, %s)"
-                shape
+                (shapeValue shape)
                 (sideValue side)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, colors: CSSColor list) =
+        static member RepeatingRadialGradient (shape: Shape, side: Side, colors: IColorStop list) =
              sprintf "repeating-radial-gradient(%A %s, %s)"
-                shape
+                (shapeValue shape)
                 (sideValue side)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, colorsAndStop: IColorStop list) =
-             sprintf "repeating-radial-gradient(%A %s, %s)"
-                shape
-                (sideValue side)
-                (Utilities.Helpers.combineComma colorAndStopToString colorsAndStop)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, start: CSSColor, last: CSSColor) =
-             sprintf "repeating-radial-gradient(%A %s %s, %s, %s)"
-                shape
-                (sideValue side)
-                (positionValue position)
-                (CSSColorValue.color start)
-                (CSSColorValue.color last)
+                (Utilities.Helpers.combineComma colorAndStopToString colors)
         static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, start: IColorStop, last: IColorStop) =
              sprintf "repeating-radial-gradient(%A %s %s, %s, %s)"
-                shape
+                (shapeValue shape)
                 (sideValue side)
                 (positionValue position)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: CSSColor list) =
+        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: IColorStop list) =
              sprintf "repeating-radial-gradient(%A %s %s, %s)"
-                shape
+                (shapeValue shape)
                 (sideValue side)
                 (positionValue position)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colorsAndStop: IColorStop list) =
-             sprintf "repeating-radial-gradient(%A %s %s, %s)"
-                shape
-                (sideValue side)
-                (positionValue position)
-                (Utilities.Helpers.combineComma colorAndStopToString colorsAndStop)
-
-
-
+                (Utilities.Helpers.combineComma colorAndStopToString colors)

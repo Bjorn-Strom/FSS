@@ -21,7 +21,7 @@ module Content =
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
-        | :? CounterStyle as c -> counterValue c
+        | :? CounterType.CounterStyle as c -> counterValue c
         | _ -> "Unknown content"
 
     let private contentValue value = PropertyValue.cssValue Property.Content value
@@ -36,146 +36,78 @@ module Content =
         static member NoOpenQuote = NoOpenQuote |> contentValue'
         static member NoCloseQuote = NoCloseQuote |> contentValue'
 
-        static member Counter (counter: CounterStyle) =
+        static member Counter (counter: CounterType.CounterStyle) =
             contentValue <| sprintf "counter(%s)" (counterValue counter)
-        static member Counter (counter: CounterStyle, listType: IListStyleType) =
+        static member Counters (counter: CounterType.CounterStyle, listType: IListStyleType) =
             contentValue <| sprintf "counters(%s, %s)" (counterValue counter) (ListStyleTypeType.styleTypeToString listType)
-        static member Counter (counter: CounterStyle, value: string) =
-            contentValue <| sprintf "counters(%s, '%s')" (counterValue counter) value
+        static member Counter (counter: CounterType.CounterStyle, value: string) =
+            contentValue <| sprintf "counter(%s)'%s'" (counterValue counter) value
+        static member Counters (counters: CounterType.CounterStyle list, values: string list) =
+            List.zip (List.map counterValue counters) values
+            |> List.map (fun (x, y) -> sprintf "counter(%s) '%s'" x y)
+            |> String.concat " "
+            |> contentValue
         static member Url (url: string) = contentValue <| sprintf "url(%s)" url
         static member Url (url: string, altText: string) = contentValue <| sprintf "url(%s) / \"%s\"" url altText
         static member Value (value: string) = contentValue <| sprintf "\"%s\"" value
         static member Value (content: IContent) = content |> contentValue'
-        (*
-        static member LinearGradient (c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "linear-gradient(%s, %s)"
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member LinearGradient (angle: Units.Angle.Angle, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "linear-gradient(%s, %s, %s)"
-                (Units.Angle.value angle)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member LinearGradient (sideOrCorner: SideOrCorner, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "linear-gradient(%s, %s, %s)"
-                (string sideOrCorner)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member LinearGradient (sideOrCorner: SideOrCorner, c1: CSSColor, c2: CSSColor, percent: Units.Percent.Percent) =
-            contentValue
-            <| sprintf "linear-gradient(%s, %s, %s, %s)"
-                (string sideOrCorner)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-                (Units.Percent.value percent)
-        static member LinearGradient (angle: Units.Angle.Angle, c1: CSSColor, c2: CSSColor, percent: Units.Percent.Percent) =
-            contentValue
-            <| sprintf "linear-gradient(%s, %s, %s, %s)"
-                (Units.Angle.value angle)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-                (Units.Percent.value percent)
-        static member RepeatingLinearGradient (c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "repeating-linear-gradient(%s, %s)"
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "repeating-linear-gradient(%s, %s, %s)"
-                (Units.Angle.value angle)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "repeating-linear-gradient(%s, %s, %s)"
-                (string sideOrCorner)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, c1: CSSColor, c2: CSSColor, percent: Units.Percent.Percent) =
-            contentValue
-            <| sprintf "repeating-linear-gradient(%s, %s, %s, %s)"
-                (string sideOrCorner)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-                (Units.Percent.value percent)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, c1: CSSColor, c2: CSSColor, percent: Units.Percent.Percent) =
-            contentValue
-            <| sprintf "repeating-linear-gradient(%s, %s, %s, %s)"
-                (Units.Angle.value angle)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-                (Units.Percent.value percent)
-        static member RadialGradient (c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "radial-gradient(%s, %s)"
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RadialGradient (shape: Shape, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "radial-gradient(%s, %s, %s)"
-                (string shape)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RadialGradient (shape: Shape, side: Side, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "radial-gradient(%s, %s, %s, %s)"
-                (string shape)
-                (string side)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RadialGradient (shape: Shape, sideOrCorner: SideOrCorner, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "radial-gradient(%s at %s, %s, %s)"
-                (string shape)
-                (string sideOrCorner)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RadialGradient (shape: Shape, s1: SideOrCorner, s2: SideOrCorner, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "radial-gradient(%s at %s %s, %s, %s)"
-                (string shape)
-                (string s1)
-                (string s2)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RepeatingRadialGradient (c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "repeating-radial-gradient(%s, %s)"
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RepeatingRadialGradient (shape: Shape, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "repeating-radial-gradient(%s, %s, %s)"
-                (string shape)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "repeating-radial-gradient(%s, %s, %s, %s)"
-                (string shape)
-                (string side)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RepeatingRadialGradient (shape: Shape, sideOrCorner: SideOrCorner, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "repeating-radial-gradient(%s at %s, %s, %s)"
-                (string shape)
-                (string sideOrCorner)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        static member RepeatingRadialGradient (shape: Shape, s1: SideOrCorner, s2: SideOrCorner, c1: CSSColor, c2: CSSColor) =
-            contentValue
-            <| sprintf "repeating-radial-gradient(%s at %s %s, %s, %s)"
-                (string shape)
-                (string s1)
-                (string s2)
-                (CSSColorValue.color c1)
-                (CSSColorValue.color c2)
-        *)
+        static member LinearGradient (start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.LinearGradient(start, last)
+        static member LinearGradient (angle: Units.Angle.Angle, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.LinearGradient(angle, start, last)
+        static member LinearGradient (sideOrCorner: SideOrCorner, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.LinearGradient(sideOrCorner, start, last)
+        static member LinearGradient (colors: IColorStop list) =
+            contentValue <| Image.Image.LinearGradient(colors)
+        static member LinearGradient (angle: Units.Angle.Angle, colors: IColorStop list) =
+            contentValue <| Image.Image.LinearGradient(angle, colors)
+        static member LinearGradient (sideOrCorner: SideOrCorner, colors: IColorStop list) =
+            contentValue <| Image.Image.LinearGradient(sideOrCorner, colors)
+        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CSSColor list) =
+            contentValue <| Image.Image.LinearGradient(sideOrCorner, colors)
+
+        static member RepeatingLinearGradient (start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RepeatingLinearGradient(start, last)
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RepeatingLinearGradient(angle, start, last)
+        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, start, last)
+        static member RepeatingLinearGradient (colors: IColorStop list) =
+            contentValue <| Image.Image.RepeatingLinearGradient(colors)
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, colors: IColorStop list) =
+            contentValue <| Image.Image.RepeatingLinearGradient(angle, colors)
+        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, colors: IColorStop list) =
+            contentValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, colors)
+
+        static member RadialGradient (start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RadialGradient(start, last)
+        static member RadialGradient (colors: IColorStop list) =
+            contentValue <| Image.Image.RadialGradient(colors)
+        static member RadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RadialGradient(shape, start, last)
+        static member RadialGradient (shape: Shape, colors: IColorStop list) =
+            contentValue <| Image.Image.RadialGradient(shape, colors)
+        static member RadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RadialGradient(shape, side, start, last)
+        static member RadialGradient (shape: Shape, side: Side, colors: IColorStop list) =
+            contentValue <| Image.Image.RadialGradient(shape, side, colors)
+
+        static member RepeatingRadialGradient (start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RepeatingRadialGradient(start, last)
+        static member RepeatingRadialGradient (colors: IColorStop list) =
+            contentValue <| Image.Image.RepeatingRadialGradient(colors)
+        static member RepeatingRadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RepeatingRadialGradient(shape, start, last)
+        static member RepeatingRadialGradient (shape: Shape, colors: IColorStop list) =
+            contentValue <| Image.Image.RepeatingRadialGradient(shape, colors)
+        static member RepeatingRadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RepeatingRadialGradient(shape, side, start, last)
+        static member RepeatingRadialGradient (shape: Shape, side: Side, colors: IColorStop list) =
+            contentValue <| Image.Image.RepeatingRadialGradient(shape, side, colors)
+        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RepeatingRadialGradient(shape, side, position, start, last)
+        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: IColorStop list) =
+            contentValue <| Image.Image.RepeatingRadialGradient(shape, side, position, colors)
         static member Attribute (attribute: Attribute.Attribute) =
             contentValue <| sprintf "attr(%A)" (AttributeValues.attribute attribute)
 

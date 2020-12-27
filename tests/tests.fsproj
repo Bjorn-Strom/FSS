@@ -36,6 +36,7 @@
     <Compile Include="Appearance.fs" />
     <Compile Include="Typography.fs" />
     <Compile Include="Misc.fs" />
+    <Compile Include="Counter.fs" />
     <Compile Include="Tests.fs" />
     <Content Include="paket.references" />
   </ItemGroup>
