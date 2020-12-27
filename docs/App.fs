@@ -2606,7 +2606,75 @@ let CounterStyleExamples () =
                             li [] [ str "five" ]
                         ]
 
+                    let indexCounter = counterStyle []
+                    let subCounter = counterStyle []
+                    let sectionStyle =
+                        fss
+                            [
+                                Label' "Section"
+                                FontFamily.Custom "Roboto, sans-serif"
+                                CounterReset' indexCounter
+                            ]
+                    let commonBefore =
+                        [
+                            FontWeight' (CssInt 500)
+                            Color.Hex "48f"
+                        ]
+                    let commonStyle =
+                        [
+                            Margin.Value (px 0, px 0, px 1)
+                            Padding.Value (px 5, px 10)
+                        ]
+                    let count =
+                        fss
+                            [
+                                Label' "Count"
+                                yield! commonStyle
+                                CounterReset' subCounter
+                                CounterIncrement' indexCounter
+                                BackgroundColor.Hex "eee"
+                                Before
+                                    [
+                                        yield! commonBefore
+                                        Content.Counter(indexCounter,". ")
+                                    ]
 
+
+                            ]
+                    let sub =
+                        fss
+                            [
+                                Label' "Sub"
+                                yield! commonStyle
+                                CounterIncrement' subCounter
+                                TextIndent' (em 1.)
+                                Color.Hex "444"
+                                Before
+                                    [
+                                        yield! commonBefore
+                                        Content.Counters([indexCounter; subCounter], [".";"."])
+                                        MarginRight' (px 5)
+                                    ]
+                            ]
+
+                    section [ ClassName sectionStyle ]
+                        [
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                        ]
                 ]
 let PseudoElementExamples () =
     let required =
@@ -2948,7 +3016,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
                     str "Click me"
                 ]
 
-            BackgroundExamples model dispatch
+            //BackgroundExamples model dispatch
             //ColorExamples ()
             //FontExamples ()
             //FontFaceExamples ()
@@ -2965,7 +3033,7 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //CursorExamples ()
             //ListStyleExamples ()
             //GridExamples ()
-            //CounterStyleExamples ()
+            CounterStyleExamples ()
             //PseudoElementExamples ()
             //PsuedoClassExamples ()
             //ResizeExample()

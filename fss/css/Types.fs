@@ -187,8 +187,12 @@ module Global =
 
     type IAll = interface end
 
+    type ICounterReset     = interface end
+    type ICounterIncrement = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
+    type CounterProperty = CounterProperty of string * obj
 
     type CssInt =
         | CssInt of int
@@ -295,6 +299,8 @@ module Global =
         interface IColumnRuleStyle
         interface IAppearance
         interface IFlex
+        interface ICounterReset
+        interface ICounterIncrement
 
     type Normal =
         | Normal
@@ -464,6 +470,8 @@ module Global =
         interface IFlex
         interface IScrollMargin
         interface IScrollPadding
+        interface ICounterReset
+        interface ICounterIncrement
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
@@ -482,4 +490,4 @@ module GlobalValue =
             | Unset -> "unset"
 
     let CSSValue (CSSProperty (s,o)) = s,o
-
+    let CounterValue (CounterProperty (s,o)) = s,o

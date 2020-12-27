@@ -21,7 +21,7 @@ module Content =
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
-        | :? CounterStyle as c -> counterValue c
+        | :? CounterType.CounterStyle as c -> counterValue c
         | _ -> "Unknown content"
 
     let private contentValue value = PropertyValue.cssValue Property.Content value
@@ -36,12 +36,17 @@ module Content =
         static member NoOpenQuote = NoOpenQuote |> contentValue'
         static member NoCloseQuote = NoCloseQuote |> contentValue'
 
-        static member Counter (counter: CounterStyle) =
+        static member Counter (counter: CounterType.CounterStyle) =
             contentValue <| sprintf "counter(%s)" (counterValue counter)
-        static member Counter (counter: CounterStyle, listType: IListStyleType) =
+        static member Counters (counter: CounterType.CounterStyle, listType: IListStyleType) =
             contentValue <| sprintf "counters(%s, %s)" (counterValue counter) (ListStyleTypeType.styleTypeToString listType)
-        static member Counter (counter: CounterStyle, value: string) =
-            contentValue <| sprintf "counters(%s, '%s')" (counterValue counter) value
+        static member Counter (counter: CounterType.CounterStyle, value: string) =
+            contentValue <| sprintf "counter(%s)'%s'" (counterValue counter) value
+        static member Counters (counters: CounterType.CounterStyle list, values: string list) =
+            List.zip (List.map counterValue counters) values
+            |> List.map (fun (x, y) -> sprintf "counter(%s) '%s'" x y)
+            |> String.concat " "
+            |> contentValue
         static member Url (url: string) = contentValue <| sprintf "url(%s)" url
         static member Url (url: string, altText: string) = contentValue <| sprintf "url(%s) / \"%s\"" url altText
         static member Value (value: string) = contentValue <| sprintf "\"%s\"" value

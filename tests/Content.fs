@@ -39,15 +39,15 @@ module Content =
                 test
                     "Content counter"
                     [ Content.Counter sampleCounter]
-                    [ "content" ==> "counter(_0)" ]
+                    [ "content" ==> sprintf "counter(%s)" (counterValue sampleCounter) ]
                 test
                     "Content counter2"
-                    [ Content.Counter (sampleCounter, ListStyleTypeType.UpperLatin) ]
-                    [ "content" ==> "counters(_0, upper-latin)" ]
+                    [ Content.Counters (sampleCounter, ListStyleTypeType.UpperLatin) ]
+                    [ "content" ==> sprintf "counters(%s, upper-latin)" (counterValue sampleCounter) ]
                 test
                     "Content counter2"
                     [ Content.Counter (sampleCounter, ". ")]
-                    [ "content" ==> "counters(_0, '. ')" ]
+                    [ "content" ==> sprintf "counter(%s)'. '" (counterValue sampleCounter)]
                 test
                     "Content attribute"
                     [ Content.Attribute Attribute.Title ]

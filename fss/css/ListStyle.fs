@@ -71,7 +71,7 @@ module ListStyleTypeType =
     let styleTypeToString (styleType: IListStyleType) =
         match styleType with
         | :? ListStyleType as l -> Utilities.Helpers.duToKebab l
-        | :? CounterStyle as c -> counterValue c
+        | :? CounterType.CounterStyle as c -> counterValue c
         | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown list style type"
@@ -164,7 +164,7 @@ module ListStyle =
         |> listStyleTypeProperty
     type ListStyleType =
         static member Value (styleType: IListStyleType) = styleType |> listStyleTypeProperty'
-        static member Value(counter: CounterStyle) = counterValue counter |> listStyleTypeProperty
+        static member Value(counter: CounterType.CounterStyle) = counterValue counter |> listStyleTypeProperty
         static member Disc = Disc |> listStyleTypeProperty'
         static member Circle = Circle |> listStyleTypeProperty'
         static member Square = Square |> listStyleTypeProperty'

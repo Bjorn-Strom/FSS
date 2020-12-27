@@ -106,7 +106,7 @@ module ListStyle =
                 test
                     "List style type custom"
                     [ ListStyleType' sampleCounterStyle ]
-                    [ "listStyleType" ==> "_223772456" ]
+                    [ "listStyleType" ==> (counterValue sampleCounterStyle) ]
                 test
                     "List style type Initial"
                     [ ListStyleType.Initial ]
