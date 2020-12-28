@@ -753,7 +753,55 @@ module App =
                         ]
                 ]
 
-        let mediaQueries = article [] []
+        let mediaQueries =
+            let mediaQueryExamples =
+                fss
+                    [
+                        Width' (px 200)
+                        Height' (px 200)
+                        MediaQuery
+                            [ Media.MaxWidth (px 500); Media.MinWidth (px 200) ]
+                            [ BackgroundColor.red ]
+
+                        MediaQuery
+                            [ Media.MinHeight (px 700)]
+                            [ BackgroundColor.pink]
+
+                        MediaQueryFor Media.Print
+                            []
+                            [
+                                MarginTop' (px 200)
+                                Transform.Rotate(deg 45.0)
+                                BackgroundColor.red
+                            ]
+
+                        MediaQuery
+                            [ Media.Orientation Media.Landscape]
+                            [ Color.green; FontSize.Value (px 28)]
+                    ]
+
+            article []
+                [
+                    h2 []
+                        [
+                            str "Media queries"
+                        ]
+                    div [ ClassName multilineText ]
+                        [
+                            str """Using media queries in FSS is similar to how you would with normal css - except you have 2 functions to use here."""
+                            ul []
+                                [
+                                    li [] [ str "'MediaQuery'" ]
+                                    str """Which takes a list of features which defines when the css block should be active and a list of css properties which is the styles to be active."""
+                                    li [] [ str "'MediaQueryFor'"]
+                                    str """Which takes a device and then the list of features and a list of css properties"""
+
+                                    div [ ClassName mediaQueryExamples] [ str "Changing width also changes this thing"]
+
+                                ]
+                        ]
+                ]
+
         let globalStyles = article [] []
         let counters = article [] []
         let fontFace = article [] []
