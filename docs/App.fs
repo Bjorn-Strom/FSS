@@ -1915,7 +1915,7 @@ let MediaQueryExamples () =
                         MarginTop' (px 200)
                         Transform.Rotate(deg 45.0)
                         BackgroundColor.red
-                    ]
+                   ]
 
                 MediaQuery
                     [ Media.Orientation Media.Landscape]
@@ -3010,12 +3010,6 @@ let render (model: Model) (dispatch: Msg -> unit) =
             ]
     div []
         [
-
-            button [ ClassName buttonStyle ]
-                [
-                    str "Click me"
-                ]
-
             //BackgroundExamples model dispatch
             //ColorExamples ()
             //FontExamples ()
@@ -3028,12 +3022,12 @@ let render (model: Model) (dispatch: Msg -> unit) =
             //TextExamples ()
             //AnimationExamples ()
             //FlexBoxExamples model dispatch
-            //MediaQueryExamples ()
+            MediaQueryExamples ()
             //SelectorExamples ()
             //CursorExamples ()
             //ListStyleExamples ()
             //GridExamples ()
-            CounterStyleExamples ()
+            //CounterStyleExamples ()
             //PseudoElementExamples ()
             //PsuedoClassExamples ()
             //ResizeExample()
