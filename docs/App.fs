@@ -1,10 +1,5 @@
 ﻿namespace Docs
 
-open Fss.DisplayType
-open Fss.DisplayType
-open Fss.TextTypes
-open Fss.TextTypes
-
 module App =
     open Elmish
     open Elmish.React
@@ -605,6 +600,12 @@ module App =
                 ]
 
         let Combinators =
+            let borders =
+                [
+                    BorderStyle.Solid
+                    BorderColor.black
+                    BorderWidth' (px 1)
+                ]
             let combinatorStyle =
                 fss
                     [
@@ -612,6 +613,31 @@ module App =
                         After [ Color.black; Content.Value ")" ]
                         Color.red
                     ]
+            let descendantCombinator =
+                fss
+                    [
+                        yield! borders
+                        ! Html.P [ Color.red ]
+                    ]
+            let childCombinator =
+                fss
+                    [
+                        yield! borders
+                        !> Html.P [ Color.red ]
+
+                    ]
+            let directCombinator =
+                fss
+                    [
+                        !+ Html.P [ Color.red ]
+                    ]
+            let adjacentCombinator =
+                fss
+                    [
+                        !~ Html.P [ Color.red ]
+                    ]
+
+
             article []
                 [
                     h2 [] [ str "Combinators" ]
@@ -623,30 +649,107 @@ module App =
                                 [
                                     li []
                                         [
-                                            str "Descendant "
-                                            span [ ClassName combinatorStyle ] [ str "! space" ]
+                                            h3 []
+                                                [
+                                                    str "Descendant "
+                                                    span [ ClassName combinatorStyle ] [ str "! space" ]
+                                                ]
+                                            str """This combinator allows you to select specific selectors within a css block.
+                                            For example if we want to make all paragraphs within a div be red, we can do the following:"""
+                                            codeBlock [  "let redParagraphs = fss [ ! Html.P [ Color.red ] ]"
+                                                         "div [ ClassName redParagraphs ]"
+                                                         "   ["
+                                                         "       p [] [ str \"Text in a paragraph and therefore red\"]"
+                                                         "       str \"Text outside of paragraph\""
+                                                         "       div [] [ p [] [ str \"Text in paragraph in div and red\" ] ]"
+                                                         "   ]" ]
+                                            str """which gives us: """
+                                            div [ ClassName descendantCombinator ]
+                                                [
+                                                    p [] [ str "Text in a paragraph and therefore red"]
+                                                    str "Text outside of paragraph"
+                                                    div [] [ p [] [ str "Text in paragraph in div and red" ] ]
+                                                ]
                                         ]
                                     li []
                                         [
-                                            str "Child"
-                                            span [ ClassName combinatorStyle ] [ str "! >" ]
+                                            h3 []
+                                                [
+                                                    str "Child"
+                                                    span [ ClassName combinatorStyle ] [ str "!>" ]
+                                                ]
+                                            str """While descendants hit on all of the selector within the css block, child will only select direct descendants. I.E one level deep.
+                                            So if we copy the same example from above but use the child combinator instead we get: """
+                                            codeBlock [  "let childCombinator = fss [ !> Html.P [ Color.red ] ]"
+                                                         "div [ ClassName childCombinator ]"
+                                                         "   ["
+                                                         "       p [] [ str \"Text in a paragraph and therefore red\"]"
+                                                         "       str \"Text outside of paragraph\""
+                                                         "       div [] [ p [] [ str \"Text in paragraph in div and not red\" ] ]"
+                                                         "   ]" ]
+                                            str """which gives us: """
+                                            div [ ClassName childCombinator ]
+                                                [
+                                                    p [] [ str "Text in a paragraph and therefore red"]
+                                                    str "Text outside of paragraph"
+                                                    div [] [ p [] [ str "Text in paragraph in div and not red" ] ]
+                                                ]
                                         ]
                                     li []
                                         [
-                                            str "Adjacent sibling"
-                                            span [ ClassName combinatorStyle ] [ str "! +" ]
+                                            h3 []
+                                                [
+                                                    str "Adjacent sibling"
+                                                    span [ ClassName combinatorStyle ] [ str "!+" ]
+                                                ]
+                                            str """This combinator selects the element directly after the "main" element.
+                                            So if we do:"""
+
+                                            codeBlock [  "let directCombinator = fss [ !+ Html.P [ Color.red ] ]"
+                                                         "div []"
+                                                         "  ["
+                                                         "      div [ ClassName directCombinator ] [ p [] [ str \"Text in paragraph in div\" ] ]"
+                                                         "      p [] [ str \"Text in a paragraph and after the div with the combinator so is red\"]"
+                                                         "      p [] [ str \"Text in a paragraph but not after div with the combinator so is not red\"]"
+                                                         "   ]" ]
+                                            str """we get: """
+                                            div [ ClassName (fss borders)]
+                                                [
+                                                    div [ ClassName directCombinator ] [ p [] [ str "Text in paragraph in div " ] ]
+                                                    p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
+                                                    p [] [ str "Text in a paragraph but not after div with the combinator so is not red"]
+                                                ]
+
                                         ]
                                     li []
                                         [
-                                            str "General sibling"
-                                            span [ ClassName combinatorStyle ] [ str "! ~" ]
+                                            h3 []
+                                                [
+                                                    str "General sibling"
+                                                    span [ ClassName combinatorStyle ] [ str "!~" ]
+                                                ]
+                                            str """The general sibling combinator is similar to the adjacent one. But instead of selecting only 1 sibling, it selects them all."""
+                                            codeBlock [  "let adjacentCombinator = fss [ !+ Html.P [ Color.red ] ]"
+                                                         "div []"
+                                                         "  ["
+                                                         "      div [ ClassName adjacentCombinator ] [ p [] [ str \"Text in paragraph in div\" ] ]"
+                                                         "      p [] [ str \"Text in a paragraph and after the div with the combinator so is red\"]"
+                                                         "      p [] [ str \"Text in a paragraph but not after div with the combinator so is not red\"]"
+                                                         "   ]" ]
+                                            str """we get: """
+                                            div [ ClassName (fss borders)]
+                                                [
+                                                    div [ ClassName adjacentCombinator ] [ p [] [ str "Text in paragraph in div " ] ]
+                                                    p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
+                                                    p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
+                                                    div [] [p [] [ str "Text in a paragraph inside another div, paragraph is not directly after div with the combinator so is not red"]]
+                                                ]
                                         ]
                                 ]
-                            str """As you can see Fss uses the same characters for combinators as css, only they are prepended by a bang (!)
-                                Following are some examples. """
 
                             str "If you want some more information about combinators or where these examples come from you can look "
                             a [ Href "https://blog.logrocket.com/what-you-need-to-know-about-css-combinators/" ] [ str "here" ]
+                            str "."
                         ]
                 ]
 
