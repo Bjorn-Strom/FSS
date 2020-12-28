@@ -191,6 +191,6 @@ module Media =
 
     type Media =
         static member Media (features: MediaFeature list, attributeList: CSSProperty list) =
-            mediaFeature features |> sprintf "@media %s" ==> (attributeList |> List.map GlobalValue.CSSValue) |> CSSProperty
+            mediaFeature features |> sprintf "@media %s" ==> attributeList |> CSSProperty
         static member Media (device: Device, features: MediaFeature list, attributeList: CSSProperty list) =
-            sprintf "@media %s %s" (deviceLabel device) (mediaFeature features)  ==> (attributeList |> List.map GlobalValue.CSSValue) |> CSSProperty
+            sprintf "@media %s %s" (deviceLabel device) (mediaFeature features)  ==> attributeList |> CSSProperty
