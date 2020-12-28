@@ -23,7 +23,7 @@ module App =
         | MediaQueries
         | GlobalStyles
         | Counters
-        | Fontface
+        | Fonts
         | BackgroundImage
 
     type ButtonType =
@@ -71,7 +71,7 @@ module App =
         | MediaQueries -> "Media queries"
         | GlobalStyles  -> "Global styles"
         | Counters -> "Counters"
-        | Fontface -> "Font face"
+        | Fonts -> "Fonts"
         | BackgroundImage -> "Background image"
 
     let codeBlock (code: string List) =
@@ -819,9 +819,214 @@ module App =
                         ]
                 ]
 
-        let globalStyles = article [] []
-        let counters = article [] []
-        let fontFace = article [] []
+        let globalStyles =
+            article []
+                [
+                    h3 [] [ str "Global styles" ]
+                    div [ ClassName multilineText ] [ str """Yeah, not supported. Put your styling in the topmost html tag I guess.""" ]
+                ]
+        let counters =
+            let mozillaExampleCounter =
+                counterStyle
+                    [
+                        System.Fixed
+                        Symbols.Strings ["Ⓐ"; "Ⓑ"; "Ⓒ"; "Ⓓ"; "Ⓔ"; "Ⓕ"; "Ⓖ"; "Ⓗ"; "Ⓘ"; "Ⓙ"; "Ⓚ"; "Ⓛ"; "Ⓜ"; "Ⓝ"; "Ⓞ"; "Ⓟ"; "Ⓠ"; "Ⓡ"; "Ⓢ"; "Ⓣ"; "Ⓤ"; "Ⓥ"; "Ⓦ"; "Ⓧ"; "Ⓨ"; "Ⓩ"]
+                        Suffix.Value " "
+                    ]
+            let mozillaExampleStyle =
+                fss [ ListStyleType' mozillaExampleCounter ]
+
+            let indexCounter = counterStyle []
+            let subCounter = counterStyle []
+            let sectionStyle =
+                fss
+                    [
+                        Label' "Section"
+                        FontFamily.Custom "Roboto, sans-serif"
+                        CounterReset' indexCounter
+                    ]
+            let commonBefore =
+                [
+                    FontWeight' (CssInt 500)
+                    Color.Hex "48f"
+                ]
+            let commonStyle =
+                [
+                    Margin.Value (px 0, px 0, px 1)
+                    Padding.Value (px 5, px 10)
+                ]
+            let count =
+                fss
+                    [
+                        Label' "Count"
+                        yield! commonStyle
+                        CounterReset' subCounter
+                        CounterIncrement' indexCounter
+                        BackgroundColor.Hex "eee"
+                        Before
+                            [
+                                yield! commonBefore
+                                Content.Counter(indexCounter,". ")
+                            ]
+
+
+                    ]
+            let sub =
+                fss
+                    [
+                        Label' "Sub"
+                        yield! commonStyle
+                        CounterIncrement' subCounter
+                        TextIndent' (em 1.)
+                        Color.Hex "444"
+                        Before
+                            [
+                                yield! commonBefore
+                                Content.Counters([indexCounter; subCounter], [".";"."])
+                                MarginRight' (px 5)
+                            ]
+                    ]
+
+
+            article []
+                [
+                    h3 [] [ str "Counters" ]
+                    div [ ClassName multilineText ]
+                        [
+                            str """Counters are pretty cool and allows you to define style for well, counters.
+                                You can use the counters as liststyle type or as content. Examples follow:
+                                Example from """
+                            a [ Href "https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style" ] [ str "mozilla" ]
+                            codeBlock [ "let mozillaExampleCounter ="
+                                        "    counterStyle"
+                                        "        ["
+                                        "            System.Fixed"
+                                        "            Symbols.Strings [\"Ⓐ\"; \"Ⓑ\"; \"Ⓒ\"; \"Ⓓ\"; \"Ⓔ\";"
+                                        "                              \"Ⓕ\"; \"Ⓖ\"; \"Ⓗ\"; \"Ⓘ\"; \"Ⓙ\";"
+                                        "                              \"Ⓚ\"; \"Ⓛ\"; \"Ⓜ\"; \"Ⓝ\"; \"Ⓞ\";"
+                                        "                              \"Ⓟ\"; \"Ⓠ\"; \"Ⓡ\"; \"Ⓢ\"; \"Ⓣ\";"
+                                        "                              \"Ⓤ\"; \"Ⓥ\"; \"Ⓦ\"; \"Ⓧ\"; \"Ⓨ\"; \"Ⓩ\"]"
+                                        "            Suffix.Value \" \""
+                                        "        ]"
+                                        "let mozillaExampleStyle = fss [ ListStyleType' mozillaExampleCounter ]"]
+
+                            ul [ ClassName mozillaExampleStyle ]
+                                [
+                                    li [] [ str "one" ]
+                                    li [] [ str "two" ]
+                                    li [] [ str "three" ]
+                                    li [] [ str "four" ]
+                                    li [] [ str "five" ]
+                                    li [] [ str "one" ]
+                                    li [] [ str "two" ]
+                                    li [] [ str "three" ]
+                                    li [] [ str "four" ]
+                                    li [] [ str "five" ]
+                                    li [] [ str "one" ]
+                                    li [] [ str "two" ]
+                                    li [] [ str "three" ]
+                                    li [] [ str "four" ]
+                                    li [] [ str "five" ]
+                                    li [] [ str "one" ]
+                                    li [] [ str "two" ]
+                                    li [] [ str "three" ]
+                                    li [] [ str "four" ]
+                                    li [] [ str "five" ]
+                                    li [] [ str "one" ]
+                                    li [] [ str "two" ]
+                                    li [] [ str "three" ]
+                                    li [] [ str "four" ]
+                                    li [] [ str "five" ]
+                                    li [] [ str "one" ]
+                                    li [] [ str "two" ]
+                                    li [] [ str "three" ]
+                                    li [] [ str "four" ]
+                                    li [] [ str "five" ]
+                                ]
+
+                            str """Another example found """
+                            a [ Href "https://codepen.io/mkmueller/pen/pHiqb" ] [ str "here" ]
+                            str """."""
+
+                            codeBlock [ "let commonBefore ="
+                                        "    ["
+                                        "       FontWeight' (CssInt 500)"
+                                        "       Color.Hex \"48f\""
+                                        "   ]"
+                                        "let commonStyle ="
+                                        "   ["
+                                        "       Margin.Value (px 0, px 0, px 1)"
+                                        "       Padding.Value (px 5, px 10)"
+                                        "    ]"
+                                        "let count ="
+                                        "    fss"
+                                        "        ["
+                                        "            yield! commonStyle"
+                                        "            CounterReset' subCounter"
+                                        "            CounterIncrement' indexCounter"
+                                        "            BackgroundColor.Hex \"eee\""
+                                        "            Before"
+                                        "                ["
+                                        "                    yield! commonBefore"
+                                        "                    Content.Counter(indexCounter,\". \")"
+                                        "                ]"
+                                        "        ]"
+                                        "let sub ="
+                                        "    fss"
+                                        "        ["
+                                        "            yield! commonStyle"
+                                        "            CounterIncrement' subCounter"
+                                        "            TextIndent' (em 1.)"
+                                        "            Color.Hex \"444\""
+                                        "            Before"
+                                        "                ["
+                                        "                    yield! commonBefore"
+                                        "                    Content.Counters([indexCounter; subCounter], [\".\";\".\"])"
+                                        "                    MarginRight' (px 5)"
+                                        "                ]"
+                                        "        ]"
+                                        "section [ ClassName sectionStyle ]"
+                                        "    ["
+                                        "        p [ ClassName count] [ str \"Item\" ]"
+                                        "        p [ ClassName count] [ str \"Item\" ]"
+                                        "        p [ ClassName count] [ str \"Item\" ]"
+                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
+                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
+                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
+                                        "        p [ ClassName count] [ str \"Item\" ]"
+                                        "        p [ ClassName count] [ str \"Item\" ]"
+                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
+                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
+                                        "        p [ ClassName count] [ str \"Item\" ]"
+                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
+                                        "        p [ ClassName count] [ str \"Item\" ]"
+                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
+                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
+                                        "    ]"]
+
+                            section [ ClassName sectionStyle ]
+                                [
+                                    p [ ClassName count] [ str "Item" ]
+                                    p [ ClassName count] [ str "Item" ]
+                                    p [ ClassName count] [ str "Item" ]
+                                    p [ ClassName sub] [ str "Sub-Item" ]
+                                    p [ ClassName sub] [ str "Sub-Item" ]
+                                    p [ ClassName sub] [ str "Sub-Item" ]
+                                    p [ ClassName count] [ str "Item" ]
+                                    p [ ClassName count] [ str "Item" ]
+                                    p [ ClassName sub] [ str "Sub-Item" ]
+                                    p [ ClassName sub] [ str "Sub-Item" ]
+                                    p [ ClassName count] [ str "Item" ]
+                                    p [ ClassName sub] [ str "Sub-Item" ]
+                                    p [ ClassName count] [ str "Item" ]
+                                    p [ ClassName sub] [ str "Sub-Item" ]
+                                    p [ ClassName sub] [ str "Sub-Item" ]
+                                ]
+
+                        ]
+
+                ]
+        let fonts = article [] []
         let backgroundImage = article [] []
 
         function
@@ -839,7 +1044,7 @@ module App =
         | MediaQueries -> mediaQueries
         | GlobalStyles  -> globalStyles
         | Counters -> counters
-        | Fontface -> fontFace
+        | Fonts -> fonts
         | BackgroundImage -> backgroundImage
 
     let menuListItem example currentExample onClick =
@@ -934,7 +1139,7 @@ module App =
                         menuListItem' MediaQueries
                         menuListItem' GlobalStyles
                         menuListItem' Counters
-                        menuListItem' Fontface
+                        menuListItem' Fonts
                         menuListItem' BackgroundImage
                     ]
             ]
@@ -965,6 +1170,7 @@ module App =
                     GridGap' (px 10)
                     Height' (vh 100.)
                     Width' (pct 60)
+                    MaxWidth' (pct 60)
                     GridTemplateColumns.Values [fr 0.15; fr 1.]
                     GridTemplateRows.Values [fr 0.05; fr 1.]
                     GridTemplateAreas.Value

@@ -32,8 +32,8 @@ module Counter =
         static member Alphabetic ="system" ==> "alphabetic" |> CounterProperty
         static member Symbolic = "system" ==> "symbolic" |> CounterProperty
         static member Additive = "system" ==> "additive" |> CounterProperty
-        static member Fixed () = "system" ==> "fixed" |> CounterProperty
-        static member Fixed (value: int) =
+        static member Fixed = "system" ==> "fixed" |> CounterProperty
+        static member FixedValue (value: int) =
             "system" ==> sprintf "fixed %d" value |> CounterProperty
         static member Extends (system: System) =
             "system" ==> sprintf "extends %s" (string system) |> CounterProperty
