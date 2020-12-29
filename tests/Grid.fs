@@ -11,7 +11,7 @@ module Grid =
             [
                 test
                     "Grid area"
-                    [ GridArea' (GridPosition.Ident "foo") ]
+                    [ GridArea' "foo" ]
                     ["gridArea" ==> "foo"]
                 test
                     "Grid area"

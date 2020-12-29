@@ -1413,7 +1413,7 @@ module App =
         let headerStyle =
             fss
                 [
-                    GridArea' (GridPosition.Ident "nav")
+                    GridArea' "nav"
                     GridColumnEnd.Span 2
                     Color.white
                     BackgroundColor.Hex "#0170BA"
@@ -1429,7 +1429,7 @@ module App =
         let menuStyle =
             fss
                 [
-                    GridArea' (GridPosition.Ident "menu")
+                    GridArea' "menu"
                 ]
         let menuList =
             fss
@@ -1467,7 +1467,7 @@ module App =
         let contentStyle =
             fss
                 [
-                    GridArea' (GridPosition.Ident "content")
+                    GridArea' "content"
                     textFont
                 ]
         section [ ClassName contentStyle ]
