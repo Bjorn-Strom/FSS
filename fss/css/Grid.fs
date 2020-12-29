@@ -480,7 +480,7 @@ module Grid =
         static member Initial = GridPosition.Initial |> gridAreaValue'
         static member Unset = GridPosition.Unset |> gridAreaValue'
 
-    let GridArea' (area: IGridPosition) = GridArea.Value(area)
+    let GridArea' (area: string) = GridArea.Value(GridPosition.Ident area)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
     let private templateRowValue value = PropertyValue.cssValue Property.GridTemplateRows value
