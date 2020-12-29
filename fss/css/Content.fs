@@ -85,6 +85,10 @@ module Content =
             contentValue <| Image.Image.RadialGradient(colors)
         static member RadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
             contentValue <| Image.Image.RadialGradient(shape, start, last)
+        static member RadialGradient (side: Side, start: IColorStop, last: IColorStop) =
+            contentValue <| Image.Image.RadialGradient(side, start, last)
+        static member RadialGradient (side: Side, colors: IColorStop list) =
+            contentValue <| Image.Image.RadialGradient(side, colors)
         static member RadialGradient (shape: Shape, colors: IColorStop list) =
             contentValue <| Image.Image.RadialGradient(shape, colors)
         static member RadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =

@@ -1555,6 +1555,10 @@ module Border =
             imageValue <| Image.Image.RadialGradient(start, last)
         static member RadialGradient (colors: IColorStop list) =
             imageValue <| Image.Image.RadialGradient(colors)
+        static member RadialGradient (side: Side, start: IColorStop, last: IColorStop) =
+            imageValue <| Image.Image.RadialGradient(side, start, last)
+        static member RadialGradient (side: Side, colors: IColorStop list) =
+            imageValue <| Image.Image.RadialGradient(side, colors)
         static member RadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RadialGradient(shape, start, last)
         static member RadialGradient (shape: Shape, colors: IColorStop list) =
@@ -1568,6 +1572,10 @@ module Border =
             imageValue <| Image.Image.RepeatingRadialGradient(start, last)
         static member RepeatingRadialGradient (colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingRadialGradient(colors)
+        static member RepeatingRadialGradient (side: Side, start: IColorStop, last: IColorStop) =
+            imageValue <| Image.Image.RadialGradient(side, start, last)
+        static member RepeatingRadialGradient (side: Side, colors: IColorStop list) =
+            imageValue <| Image.Image.RadialGradient(side, colors)
         static member RepeatingRadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, start, last)
         static member RepeatingRadialGradient (shape: Shape, colors: IColorStop list) =

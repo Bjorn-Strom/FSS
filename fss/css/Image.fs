@@ -136,11 +136,18 @@ module Image =
                 (colorAndStopToString last)
         static member RadialGradient (colors: IColorStop list) =
              sprintf "radial-gradient(%s)" (Utilities.Helpers.combineComma colorAndStopToString colors)
+        static member RadialGradient (side: Side, start: IColorStop, last: IColorStop) =
+             sprintf "radial-gradient(%A, %s, %s)"
+                (sideValue side)
+                (colorAndStopToString start)
+                (colorAndStopToString last)
         static member RadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
              sprintf "radial-gradient(%A, %s, %s)"
                 (shapeValue shape)
                 (colorAndStopToString start)
                 (colorAndStopToString last)
+        static member RadialGradient (side: Side, colors: IColorStop list) =
+             sprintf "radial-gradient(%A, %s)" (sideValue side) (Utilities.Helpers.combineComma colorAndStopToString colors)
         static member RadialGradient (shape: Shape, colors: IColorStop list) =
              sprintf "radial-gradient(%A, %s)" (shapeValue shape) (Utilities.Helpers.combineComma colorAndStopToString colors)
         static member RadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =

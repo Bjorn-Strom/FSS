@@ -1026,8 +1026,337 @@ module App =
                         ]
 
                 ]
-        let fonts = article [] []
-        let backgroundImage = article [] []
+        let fonts =
+            Import.Url "https://fonts.googleapis.com/css2?family=Amatic+SC"
+            let amaticStyle =
+                fss
+                    [
+                        FontFamily.Custom "Amatic SC"
+                        FontSize' (px 24)
+                    ]
+
+            let droidSerifFont =
+                fontFaces "DroidSerif"
+                    [
+                        [
+                            FontFace.Source <| UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", FontFace.Truetype)
+                            FontFace.Weight FontTypes.Bold
+                            FontFace.Style Normal
+                        ]
+                        [
+                            FontFace.Source <| UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", FontFace.Truetype)
+                            FontFace.Weight Normal
+                            FontFace.Style Normal
+                        ]
+                    ]
+
+            let modernaFont =
+                fontFace "moderna"
+                    [
+                        FontFace.Sources
+                            [
+                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", FontFace.Woff2)
+                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", FontFace.Woff)
+                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", FontFace.Truetype)
+                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", FontFace.Svg)
+                            ]
+                        FontFace.Weight Normal
+                        FontFace.Style Normal
+                    ]
+
+            let droidSerif = fss [ FontFamily.Font droidSerifFont ]
+
+            let droidSerifBold =
+                fss
+                    [
+                        FontFamily.Font droidSerifFont
+                        FontWeight.Bold
+                    ]
+
+            let moderna = fss [ FontFamily.Font modernaFont ]
+
+
+            article []
+                [
+                    h3 [] [ str "Import" ]
+                    div [ ClassName multilineText ]
+                        [
+                            codeBlock [ "Import.Url \"https://fonts.googleapis.com/css2?family=Amatic+SC\""
+                                        "let amaticStyle ="
+                                        "    fss"
+                                        "        ["
+                                        "            FontFamily.Custom \"Amatic SC\""
+                                        "            FontSize' (px 24)"
+                                        "        ]"
+                                        "p [ ClassName amaticStyle ] [str \"\"\"This font is Amatic SC, some nice text this huh?\"\"\"]"]
+                            p [ ClassName amaticStyle ] [str """This font is Amatic SC, some nice text this huh?"""]
+
+                            h3 [] [ str "Font face" ]
+
+                            codeBlock ["let droidSerifFont ="
+                                       "    fontFaces  \"DroidSerif \""
+                                       "        ["
+                                       "            ["
+                                       "                FontFace.Source <| UrlFormat ( \"https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf \", FontFace.Truetype)"
+                                       "                FontFace.Weight FontTypes.Bold"
+                                       "                FontFace.Style Normal"
+                                       "            ]"
+                                       "            ["
+                                       "                FontFace.Source <| UrlFormat ( \https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf \, FontFace.Truetype)"
+                                       "                FontFace.Weight Normal"
+                                       "                FontFace.Style Normal"
+                                       "            ]"
+                                       "        ]"
+                                       "let modernaFont ="
+                                       "    fontFace \"moderna \""
+                                       "        ["
+                                       "            FontFace.Sources"
+                                       "                ["
+                                       "                    UrlFormat (\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2 \", FontFace.Woff2)"
+                                       "                    UrlFormat (\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff \", FontFace.Woff)"
+                                       "                    UrlFormat (\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf\", FontFace.Truetype)"
+                                       "                    UrlFormat (\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg\", FontFace.Svg)"
+                                       "                ]"
+                                       "            FontFace.Weight Normal"
+                                       "            FontFace.Style Normal"
+                                       "        ]"
+                                       "let droidSerif = fss [ FontFamily.Font droidSerifFont ]"
+                                       "let droidSerifBold ="
+                                       "    fss"
+                                       "        ["
+                                       "            FontFamily.Font droidSerifFont"
+                                       "            FontWeight.Bold"
+                                       "        ]"
+                                       "let moderna = fss [ FontFamily.Font modernaFont ]"
+                                       "p [ ClassName droidSerif ] [ str \"Droid serif\" ]"
+                                       "p [ ClassName droidSerifBold ] [ str  \"Droid serif bold\" ]"
+                                       "p [ ClassName moderna] [ str \"Moderna\" ]"]
+
+
+                            p [ ClassName droidSerif ] [ str "Droid serif" ]
+                            p [ ClassName droidSerifBold ] [ str "Droid serif bold" ]
+                            p [ ClassName moderna] [ str "Moderna" ]
+
+                        ]
+                    ]
+
+        let backgroundImage =
+            let box =
+                [
+                    Width' (px 200)
+                    Height' (px 200)
+                ]
+            let linearGradientStyle1 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.LinearGradient(CSSColor.Hex "e66465", CSSColor.Hex "9198e5")
+                    ]
+            let linearGradientStyle2 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.LinearGradient(turn 0.25,
+                                                       [CSSColor.Hex "3f87a6" :> IColorStop
+                                                        CSSColor.Hex "ebf8e1" :> IColorStop
+                                                        CSSColor.Hex "f69d3c" :> IColorStop])
+                    ]
+            let linearGradientStyle3 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.LinearGradient(ToLeft,
+                                                       [
+                                                           CSSColor.Hex "333" :> IColorStop
+                                                           stop (CSSColor.Hex "333") (pct 50)
+                                                           stop (CSSColor.Hex "eee") (pct 75)
+                                                           stop (CSSColor.Hex "333") (pct 75)
+                                                       ])
+                    ]
+            let repeatingLinearGradientStyle1 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.RepeatingLinearGradient(ToLeft,
+                                                       [
+                                                           CSSColor.Hex "e66465" :> IColorStop
+                                                           stop (CSSColor.Hex "e66465") (px 20)
+                                                           stop (CSSColor.Hex "9198e5") (px 20)
+                                                           stop (CSSColor.Hex "9198e5") (px 25)
+                                                       ])
+                    ]
+            let repeatingLinearGradientStyle2 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.RepeatingLinearGradient(deg 45.,
+                                                       [
+                                                           CSSColor.Hex "3f87a6" :> IColorStop
+                                                           stop (CSSColor.Hex "ebf8e1") (px 15)
+                                                           stop (CSSColor.Hex "f69d3c") (px 20)
+                                                       ])
+                    ]
+            let radialGradientStyle1 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.RadialGradient(CSSColor.Hex "e66465", CSSColor.Hex "9198e5")
+                    ]
+            let radialGradientStyle2 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.RadialGradient(ClosestSide, [CSSColor.Hex "3f87a6" :> IColorStop; CSSColor.Hex "ebf8e1" :> IColorStop; CSSColor.Hex "f69d3c" :> IColorStop])
+                    ]
+            let radialGradientStyle3 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.RadialGradient(
+                            CircleAt <| ImagePosition.Percent(pct 100),
+                            [CSSColor.Hex "333" :> IColorStop
+                             stop (CSSColor.Hex "333") (pct 50)
+                             stop (CSSColor.Hex "eee") (pct 75)
+                             stop (CSSColor.Hex "333") (pct 75) ])
+                    ]
+            let repeatingRadialGradientStyle1 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.RepeatingRadialGradient(CSSColor.Hex "e66465", stop (CSSColor.Hex "9198e5") (pct 20))
+                    ]
+            let repeatingRadialGradientStyle2 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.RepeatingRadialGradient(ClosestSide, [CSSColor.Hex "3f87a6" :> IColorStop; CSSColor.Hex "ebf8e1" :> IColorStop; CSSColor.Hex "f69d3c" :> IColorStop])
+                    ]
+            let repeatingRadialGradientStyle3 =
+                fss
+                    [
+                        yield! box
+                        BackgroundImage.RepeatingRadialGradient(
+                            CircleAt <| ImagePosition.Percent(pct 100),
+                            [CSSColor.Hex "333" :> IColorStop
+                             stop (CSSColor.Hex "333") (px 10)
+                             stop (CSSColor.Hex "eee") (px 10)
+                             stop (CSSColor.Hex "eee") (px 20) ])
+                    ]
+
+            article []
+                [
+                    h2 [] [ str "Background images" ]
+                    div [ ClassName multilineText ]
+                        [
+                            h3 [] [ str "Linear gradient" ]
+                            codeBlock ["let linearGradientStyle1 = fss [ BackgroundImage.LinearGradient(CSSColor.Hex \"e66465\", CSSColor.Hex \"9198e5\") ]"
+                                       "let linearGradientStyle2 ="
+                                       "   fss"
+                                       "       ["
+                                       "           BackgroundImage.LinearGradient(turn 0.25,"
+                                       "                                          [CSSColor.Hex \"3f87a6\" :> IColorStop"
+                                       "                                           CSSColor.Hex \"ebf8e1\" :> IColorStop"
+                                       "                                           CSSColor.Hex \"f69d3c\" :> IColorStop])"
+                                       "       ]"
+                                       "let linearGradientStyle3 ="
+                                       "   fss"
+                                       "       ["
+                                       "           BackgroundImage.LinearGradient(ToLeft,"
+                                       "                                          ["
+                                       "                                             CSSColor.Hex \"333\" :> IColorStop"
+                                       "                                              stop (CSSColor.Hex \"333\") (pct 50)"
+                                       "                                              stop (CSSColor.Hex \"eee\") (pct 75)"
+                                       "                                              stop (CSSColor.Hex \"333\") (pct 75)"
+                                       "                                          ])"
+                                       "       ]"]
+
+                            div [ ClassName (fss [ Display.Flex ]) ]
+                                [
+                                    div [ClassName linearGradientStyle1 ] []
+                                    div [ClassName linearGradientStyle2 ] []
+                                    div [ClassName linearGradientStyle3 ] []
+                                ]
+                            h3 [] [ str "Repeating Linear gradient" ]
+                            codeBlock [ "let repeatingLinearGradientStyle1 ="
+                                        "    fss"
+                                        "        ["
+                                        "            BackgroundImage.RepeatingLinearGradient(ToLeft,"
+                                        "                                           ["
+                                        "                                               CSSColor.Hex \"e66465\" :> IColorStop"
+                                        "                                               stop (CSSColor.Hex \"e66465\") (px 20)"
+                                        "                                               stop (CSSColor.Hex \"9198e5\") (px 20)"
+                                        "                                               stop (CSSColor.Hex \"9198e5\") (px 25)"
+                                        "                                           ])"
+                                        "        ]"
+                                        "let repeatingLinearGradientStyle2 ="
+                                        "    fss"
+                                        "        ["
+                                        "            BackgroundImage.RepeatingLinearGradient(deg 45.,"
+                                        "                                           ["
+                                        "                                               CSSColor.Hex \"3f87a6\" :> IColorStop"
+                                        "                                               stop (CSSColor.Hex \"ebf8e1\") (px 15)"
+                                        "                                               stop (CSSColor.Hex \"f69d3c\") (px 20)"
+                                        "                                           ])"
+                                        "        ]"]
+                            div [ ClassName (fss [ Display.Flex ]) ]
+                                [
+                                    div [ClassName repeatingLinearGradientStyle1 ] []
+                                    div [ClassName repeatingLinearGradientStyle2 ] []
+                                ]
+                            h3 [] [ str "Radial gradient" ]
+
+                            codeBlock [ "let radialGradientStyle1 = fss [ BackgroundImage.RadialGradient(CSSColor.Hex \"e66465\", CSSColor.Hex \"9198e5\") ]"
+                                        "let radialGradientStyle2 ="
+                                        "    fss"
+                                        "        ["
+                                        "            BackgroundImage.RadialGradient(ClosestSide, [CSSColor.Hex \"3f87a6\" :> IColorStop; CSSColor.Hex \"ebf8e1\" :> IColorStop; CSSColor.Hex \"f69d3c\" :> IColorStop])"
+                                        "        ]"
+                                        "let radialGradientStyle3 ="
+                                        "    fss"
+                                        "        ["
+                                        "            BackgroundImage.RadialGradient("
+                                        "                CircleAt <| ImagePosition.Percent(pct 100),"
+                                        "                [CSSColor.Hex \"333\" :> IColorStop"
+                                        "                 stop (CSSColor.Hex \"333\") (pct 50)"
+                                        "                 stop (CSSColor.Hex \"eee\") (pct 75)"
+                                        "                 stop (CSSColor.Hex \"333\") (pct 75) ])"
+                                        "        ]"]
+
+                            div [ ClassName (fss [ Display.Flex ]) ]
+                                [
+                                    div [ClassName radialGradientStyle1 ] []
+                                    div [ClassName radialGradientStyle2 ] []
+                                    div [ClassName radialGradientStyle3 ] []
+                                ]
+                            h3 [] [ str "Repeating radial gradient" ]
+                            codeBlock [ "let repeatingRadialGradientStyle1 ="
+                                        "    fss"
+                                        "        ["
+                                        "            BackgroundImage.RepeatingRadialGradient(CSSColor.Hex \"e66465\", stop (CSSColor.Hex \"9198e5\") (pct 20))"
+                                        "        ]"
+                                        "let repeatingRadialGradientStyle2 ="
+                                        "    fss"
+                                        "        ["
+                                        "            BackgroundImage.RepeatingRadialGradient(ClosestSide, [CSSColor.Hex \"3f87a6\" :> IColorStop; CSSColor.Hex \"ebf8e1\" :> IColorStop; CSSColor.Hex \"f69d3c\" :> IColorStop])"
+                                        "        ]"
+                                        "let repeatingRadialGradientStyle3 ="
+                                        "    fss"
+                                        "        ["
+                                        "            BackgroundImage.RepeatingRadialGradient("
+                                        "                CircleAt <| ImagePosition.Percent(pct 100),"
+                                        "                [CSSColor.Hex \"333\" :> IColorStop"
+                                        "                 stop (CSSColor.Hex \"333\") (px 10)"
+                                        "                 stop (CSSColor.Hex \"eee\") (px 10)"
+                                        "                 stop (CSSColor.Hex \"eee\") (px 20) ])"
+                                        "        ]"]
+                            div [ ClassName (fss [ Display.Flex ]) ]
+                                [
+                                    div [ClassName repeatingRadialGradientStyle1 ] []
+                                    div [ClassName repeatingRadialGradientStyle2 ] []
+                                    div [ClassName repeatingRadialGradientStyle3 ] []
+                                ]
+                        ]
+                ]
 
         function
         | Overview -> overview
@@ -1092,19 +1421,9 @@ module App =
                     AlignItems.Center
                 ]
 
-        let headerText =
-            fss
-                [
-                    headingFont
-                ]
+        let headerText = fss [ headingFont ]
 
-        header  [ ClassName headerStyle ]
-            [
-                h2 [ ClassName headerText ]
-                    [
-                        str "Fss"
-                    ]
-            ]
+        header  [ ClassName headerStyle ] [ h2 [ ClassName headerText ] [ str "Fss" ] ]
 
     let menu model (dispatch: SetPage -> unit)=
         let menuStyle =
