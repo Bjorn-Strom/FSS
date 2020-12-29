@@ -5,6 +5,7 @@
   <ItemGroup>
     <Compile Include="Logo.fs" />
     <Compile Include="App.fs" />
+    <Content Include="assets\logo.svg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\fss\Fss.fsproj" />
