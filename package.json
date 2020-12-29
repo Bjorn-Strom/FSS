@@ -2,9 +2,9 @@
   "private": true,
   "scripts": {
     "start": "dotnet fable watch ./docs -o ./public --run parcel public/index.html",
-    "build": "dotnet fable ./docs -o ./public --run parcel build public/index.html",
+    "build": "dotnet fable ./docs -o ./public --run parcel build public/index.html --no-source-maps --public-url .",
     "test": "dotnet fable watch ./tests -o ./public-tests --run parcel public-tests/index.html",
-    "clean": "rm -rf public-tests/*.js && rm -rf public-tests/fss && rm -rf public/*.js && rm -rf public/fss"
+    "clean": "rm -rf dist && rm -rf public-tests/*.js && rm -rf public-tests/fss && rm -rf public/*.js && rm -rf public/fss"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
