@@ -751,40 +751,40 @@ module Text =
                     [ TextJustify.None ]
                     ["textJustify" ==> "none"]
                 test
-                    "Whitespace nowrap"
-                    [ Whitespace.NoWrap ]
+                    "WhiteSpace nowrap"
+                    [ WhiteSpace.NoWrap ]
                     ["whiteSpace" ==> "no-wrap"]
                 test
-                    "Whitespace pre"
-                    [ Whitespace.Pre ]
+                    "WhiteSpace pre"
+                    [ WhiteSpace.Pre ]
                     ["whiteSpace" ==> "pre"]
                 test
-                    "Whitespace pre-wrap"
-                    [ Whitespace.PreWrap ]
+                    "WhiteSpace pre-wrap"
+                    [ WhiteSpace.PreWrap ]
                     ["whiteSpace" ==> "pre-wrap"]
                 test
-                    "Whitespace pre-line"
-                    [ Whitespace.PreLine ]
+                    "WhiteSpace pre-line"
+                    [ WhiteSpace.PreLine ]
                     ["whiteSpace" ==> "pre-line"]
                 test
-                    "Whitespace break-spaces"
-                    [ Whitespace.BreakSpaces ]
+                    "WhiteSpace break-spaces"
+                    [ WhiteSpace.BreakSpaces ]
                     ["whiteSpace" ==> "break-spaces"]
                 test
-                    "Whitespace normal"
-                    [ Whitespace.Normal ]
+                    "WhiteSpace normal"
+                    [ WhiteSpace.Normal ]
                     ["whiteSpace" ==> "normal"]
                 test
-                    "Whitespace inherit"
-                    [ Whitespace.Inherit ]
+                    "WhiteSpace inherit"
+                    [ WhiteSpace.Inherit ]
                     ["whiteSpace" ==> "inherit"]
                 test
-                    "Whitespace Initial"
-                    [ Whitespace.Initial ]
+                    "WhiteSpace Initial"
+                    [ WhiteSpace.Initial ]
                     ["whiteSpace" ==> "initial"]
                 test
-                    "Whitespace unset"
-                    [ Whitespace.Unset ]
+                    "WhiteSpace unset"
+                    [ WhiteSpace.Unset ]
                     ["whiteSpace" ==> "unset"]
                 test
                     "UserSelect text"

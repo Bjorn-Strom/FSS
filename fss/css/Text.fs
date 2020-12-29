@@ -1172,7 +1172,7 @@ module Text =
     let private whiteSpaceValue value = PropertyValue.cssValue Property.WhiteSpace value
     let private whiteSpaceValue' value = value |> whitespaceToString |> whiteSpaceValue
 
-    type Whitespace =
+    type WhiteSpace =
         static member Value (whitespace: IWhiteSpace) = whitespace |> whiteSpaceValue'
         static member NoWrap = NoWrap |> whiteSpaceValue'
         static member Pre = Pre |> whiteSpaceValue'
@@ -1184,7 +1184,7 @@ module Text =
         static member Initial = Initial |> whiteSpaceValue'
         static member Unset = Unset |> whiteSpaceValue'
 
-    let Whitespace' whitespace = Whitespace.Value whitespace
+    let WhiteSpace' whitespace = WhiteSpace.Value whitespace
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
     let private userSelectValue value = PropertyValue.cssValue Property.UserSelect value

@@ -126,5 +126,7 @@ module Content =
 [<AutoOpen>]
 module Label =
     type Label =
-        static member Value(label: string) = PropertyValue.cssValue Property.Label label
+        static member Value(label: string) =
+            (label.Replace(" ", ""))
+            |> PropertyValue.cssValue Property.Label
     let Label' (label: string) = Label.Value(label)

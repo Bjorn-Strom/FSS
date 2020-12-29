@@ -51,7 +51,7 @@ module App =
     let multilineText =
         fss
             [
-                Whitespace.PreLine
+                WhiteSpace.PreLine
                 MarginBottom' (px 200)
             ]
 
