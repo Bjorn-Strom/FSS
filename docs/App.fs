@@ -32,12 +32,11 @@ module App =
 
     type Model = { CurrentPage: Page }
 
-    type SetPage =
-        | SetPage of Page
+    type Msg = SetPage of Page
 
     let init() = { CurrentPage = Overview }
 
-    let update (msg: SetPage) (model: Model): Model =
+    let update (msg: Msg) (model: Model): Model =
         match msg with
         | SetPage example ->
             { model with CurrentPage = example }
@@ -159,12 +158,16 @@ module App =
 
                             Personally I find that writing CSS is bad. Just in general - bad!
                             What I like is having CSS as part of my language. So I can use the language I like to write both the markup and the styling.
+                            CSS-in-Lang is an evolution of CSS and should be the industry standard.
 
                             There are tons of benefits to this:"""
                         ]
                     ul []
                         [
-                            li [] [ str "Noe om å empirisk bestemme verdier and shizz" ]
+                            li [] [ str "Declarative and maintainable styling." ]
+                            li [] [ str "Easy to set up and use." ]
+                            li [] [ str "Take advantage of nice F# syntax and features." ]
+                            li [] [ str "Scoping! Having local styles will not affect other stuff somewhere else." ]
                         ]
                 ]
 
@@ -1425,7 +1428,7 @@ module App =
 
         header  [ ClassName headerStyle ] [ h2 [ ClassName headerText ] [ str "Fss" ] ]
 
-    let menu model (dispatch: SetPage -> unit)=
+    let menu model (dispatch: Msg -> unit)=
         let menuStyle =
             fss
                 [
@@ -1475,7 +1478,7 @@ module App =
                 pageToContent model.CurrentPage
             ]
 
-    let render (model: Model) (dispatch: SetPage -> unit) =
+    let render (model: Model) (dispatch: Msg -> unit) =
         let container =
             fss
                 [
