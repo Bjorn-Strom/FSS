@@ -61,8 +61,3 @@ paket add Fss-lib --project ./project/path
 ## Documentation 📖
 [Docs](https://Bjorn-Strom.github.io/fss)
 
-## Disclaimer ⚠️
-Firstly not the entire spec has been implemented, and  I am sure to have made a mistake or two.
-Let me know if you find any! 😅
-Second of all this is the first library I have ever written. Development is ongoing and changes will happen.
-More of the CSS-spec will be supported, bugs will be ironed out and so will the library as a whole.
