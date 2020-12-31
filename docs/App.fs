@@ -174,10 +174,7 @@ module App =
         let basicUse =
             article []
                [
-                    h2 []
-                        [
-                            str "Basic usage"
-                        ]
+                    h2 [] [ str "Basic usage" ]
                     div [ ClassName multilineText ]
                         [
                             str """The main function Fss supplies is fss. This function takes a list of CSS properties and returns a string.
@@ -201,10 +198,7 @@ module App =
                                        "fss [ TextDecorationColor' myDecorationColor ]"]
                         ]
 
-                    h3 []
-                        [
-                            str "Shorthands"
-                        ]
+                    h3 [] [ str "Shorthands" ]
                     div [ ClassName multilineText ]
                         [
                             str """I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be..
@@ -301,10 +295,7 @@ module App =
                                        "                 ]"
                                        "         ]" ]
                         ]
-                    div [ ClassName hoverStyle ]
-                        [
-                            str "Hover me!"
-                        ]
+                    div [ ClassName hoverStyle ] [ str "Hover me!" ]
                     h2 [] [ str "Pseudo-elements" ]
                     let beforeAndAfter =
                         let beforeAndAfter =
@@ -343,10 +334,7 @@ module App =
                                         "   ]"
                                 ]
                             str """Results in"""
-                            div [ ClassName beforeAndAfter ]
-                                [
-                                    str " Some content surrounded by stuff "
-                                ]
+                            div [ ClassName beforeAndAfter ] [ str " Some content surrounded by stuff " ]
                             ]
 
                 ]
@@ -383,12 +371,9 @@ module App =
                                        "div [ ClassName (fss <| baseStyle @ danger)]"
                                        "    [ str \"This will be red\" ]"]
 
-                            div [ ClassName (fss baseStyle) ]
-                                [ str "This will be turquoise" ]
-                            div [ ClassName (fss <| danger @ baseStyle)]
-                                [ str "This will be also be turquoise since the base styles overwrite the danger styles."]
-                            div [ ClassName (fss <| baseStyle @ danger)]
-                                [ str "This will be red" ]
+                            div [ ClassName (fss baseStyle) ] [ str "This will be turquoise" ]
+                            div [ ClassName (fss <| danger @ baseStyle)] [ str "This will be also be turquoise since the base styles overwrite the danger styles."]
+                            div [ ClassName (fss <| baseStyle @ danger)] [ str "This will be red" ]
                         ]
                 ]
         let labels =
@@ -628,17 +613,8 @@ module App =
                         !> Html.P [ Color.red ]
 
                     ]
-            let directCombinator =
-                fss
-                    [
-                        !+ Html.P [ Color.red ]
-                    ]
-            let adjacentCombinator =
-                fss
-                    [
-                        !~ Html.P [ Color.red ]
-                    ]
-
+            let directCombinator = fss [ !+ Html.P [ Color.red ] ]
+            let adjacentCombinator = fss [ !~ Html.P [ Color.red ] ]
 
             article []
                 [
@@ -782,10 +758,7 @@ module App =
 
             article []
                 [
-                    h2 []
-                        [
-                            str "Media queries"
-                        ]
+                    h2 [] [ str "Media queries" ]
                     div [ ClassName multilineText ]
                         [
                             str """Using media queries in FSS is similar to how you would with normal css - except you have 2 functions to use here."""
@@ -871,8 +844,6 @@ module App =
                                 yield! commonBefore
                                 Content.Counter(indexCounter,". ")
                             ]
-
-
                     ]
             let sub =
                 fss
@@ -1429,11 +1400,7 @@ module App =
         header  [ ClassName headerStyle ] [ h2 [ ClassName headerText ] [ str "Fss" ] ]
 
     let menu model (dispatch: Msg -> unit)=
-        let menuStyle =
-            fss
-                [
-                    GridArea' "menu"
-                ]
+        let menuStyle = fss [ GridArea' "menu" ]
         let menuList =
             fss
                 [
@@ -1473,10 +1440,7 @@ module App =
                     GridArea' "content"
                     textFont
                 ]
-        section [ ClassName contentStyle ]
-            [
-                pageToContent model.CurrentPage
-            ]
+        section [ ClassName contentStyle ] [ pageToContent model.CurrentPage ]
 
     let render (model: Model) (dispatch: Msg -> unit) =
         let container =

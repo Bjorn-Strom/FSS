@@ -6,7 +6,7 @@ Have CSS as a first class citizen in your F# projects.
 Built atop the fantastic [Emotion-js](https://github.com/emotion-js/emotion) library and uses that for all CSS generation.
 
 ## Examples 🤓
-Quick example here, check the documentation for more examples.
+Quick example here, check the documentation for more information.
 ```fsharp
 let buttonStyle =
     fss
@@ -30,7 +30,7 @@ button [ ClassName buttonStyle ] [ str "Click me" ]
 ## Motivation 🤔
 While you have some good alternatives with F# such as:
 - [Fulma](https://fulma.github.io/Fulma/)
-- [TypedCssClasses](https://github.com/zanaptak/TypedCssClasses) a type provider if you want to write CSS or SCSS 
+- [TypedCssClasses](https://github.com/zanaptak/TypedCssClasses) a type provider if you want to write CSS or SCSS
 - Or some kind of webpack if you want to use CSS or SCSS directly.
 
 Ultimately you will find what you like best and whatever suits your needs, I find that writing CSS is annoying.
@@ -51,15 +51,15 @@ Download one nuget package and you are ready to go.
 To install `Fss` you need to install the nuget package.
 ```
 # nuget
-dotnet add package Fss
+dotnet add package Fss-lib
 
 # paket
-paket add Fss --project ./project/path
+paket add Fss-lib --project ./project/path
 ```
 
 
 ## Documentation 📖
-LINK
+[Docs](https://Bjorn-Strom.github.io/fss)
 
 ## Disclaimer ⚠️
 Firstly not the entire spec has been implemented, and  I am sure to have made a mistake or two.
