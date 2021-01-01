@@ -59,5 +59,5 @@ paket add Fss-lib --project ./project/path
 
 
 ## Documentation 📖
-[Docs](https://Bjorn-Strom.github.io/fss)
+[Docs](https://bjorn-strom.github.io/FSS/)
 
