@@ -31,7 +31,7 @@ button [ ClassName buttonStyle ] [ str "Click me" ]
 While you have some good alternatives with F# such as:
 - [Fulma](https://fulma.github.io/Fulma/)
 - [TypedCssClasses](https://github.com/zanaptak/TypedCssClasses) a type provider if you want to write CSS or SCSS
-- Or some kind of webpack if you want to use CSS or SCSS directly.
+- Or some kind of webpack configuration if you want to use CSS or SCSS directly.
 
 Ultimately you will find what you like best and whatever suits your needs, I find that writing CSS is annoying.
 It is not discoverable, not type-safe and requires some setup.
@@ -43,7 +43,7 @@ Download one nuget package and you are ready to go.
 ## Features 🛠
 - Uses Emotion-js to generate the CSS and thus gets some of its amazing features.
 - Discoverable, use the IDE to help you write the styling.
-- Trying to support a big swathe of the CSS spec
+- Trying to support a big part of the CSS spec
 - Works independently of Fable and Feliz and thus works with both (and without them)
 - All the benefits of having your styling in your language as a first class citizen.
 

@@ -106,12 +106,9 @@ module App =
                         [
                             str
                                 """An opinionated styling library for F#.
-                                Have CSS as a first class citizen in your F# projects.
-                                """
-
-                            str """Built atop the fantastic """
+                                Built atop the fantastic """
                             a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js" ]
-                            str " FSS allows you to have CSS as a first class citizen in your F# code and aims to support most of the CSS spec"
+                            str " FSS allows you to have CSS as a first class citizen in your F# code and aims to support most of the CSS spec."
                         ]
                 ]
 
@@ -120,13 +117,13 @@ module App =
                 [
                     h2 [] [ str "Installation" ]
                     str "In order to use Fss you need to install the "
-                    a [ Href "" ] [ str "nuget" ]
+                    a [ Href "https://www.nuget.org/packages/fss-lib/" ] [ str "nuget" ]
                     str " package"
                     codeBlock [ "# nuget"
-                                "dotnet add package Fss"
+                                "dotnet add package Fss-lib"
                                 ""
                                 "# paket"
-                                "paket add Fss --project ./project/path" ]
+                                "paket add Fss-lib --project ./project/path" ]
                 ]
 
         let philosophy =
@@ -135,7 +132,7 @@ module App =
                     h2 [] [ str "Philosophy" ]
                     str "The main idea behind Fss is discoverable CSS. Write CSS in F# quick and easy."
 
-                    str "There already exists some quite good styling alternatives to F# already"
+                    str "There exists some quite good styling alternatives to F# already"
                     ul []
                         [
                             li [] [
@@ -145,7 +142,7 @@ module App =
                             li []
                                 [
                                     a [ Href "https://github.com/zanaptak/TypedCssClasses" ] [ str "TypedCssClasses" ]
-                                    str " a type provider if you want to generate types from existing CSS (or if you prefer CSS, you madman)"
+                                    str " a type provider if you want to generate types from existing CSS or SCSS"
                                 ]
                             li []
                                 [
@@ -156,18 +153,15 @@ module App =
                         [
                             str """Ultimately I believe you will find whatever solution that suits your needs best.
 
-                            Personally I find that writing CSS is bad. Just in general - bad!
-                            What I like is having CSS as part of my language. So I can use the language I like to write both the markup and the styling.
-                            CSS-in-Lang is an evolution of CSS and should be the industry standard.
-
-                            There are tons of benefits to this:"""
-                        ]
-                    ul []
-                        [
-                            li [] [ str "Declarative and maintainable styling." ]
-                            li [] [ str "Easy to set up and use." ]
-                            li [] [ str "Take advantage of nice F# syntax and features." ]
-                            li [] [ str "Scoping! Having local styles will not affect other stuff somewhere else." ]
+                            Writing css in your language has some nice benefits:"""
+                            ul []
+                                [
+                                    li [] [ str "Types" ]
+                                    li [] [ str "Declarative and maintainable styling." ]
+                                    li [] [ str "Easy to set up and use." ]
+                                    li [] [ str "Take advantage of nice F# syntax and features." ]
+                                    li [] [ str "Scoping! Having local styles will not affect other stuff somewhere else." ]
+                                ]
                         ]
                 ]
 
@@ -181,7 +175,7 @@ module App =
                                 This string is the classname you can give to your html tag.
 
                                 Simply write the CSS you want in PascalCase and dot yourself into the methods you want.
-                                For example if I want """
+                                For example if you want """
                             codeBlock ["text-decoration-color: white"]
                             str """ then you write"""
                             codeBlock [ "let myStyle = fss [ TextDecorationColor.white ]"
@@ -196,19 +190,19 @@ module App =
                             str """As this is something you might potentially want to do quite a but of (and we do like pipelining) there exists a shorthand which is TextDecorationPrime"""
                             codeBlock ["let myDecorationColor = CSSColor.White"
                                        "fss [ TextDecorationColor' myDecorationColor ]"]
-                        ]
 
-                    h3 [] [ str "Shorthands" ]
-                    div [ ClassName multilineText ]
-                        [
-                            str """I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be..
-                            However as this project creates CSS and interacts with it, it has to deal with some of its shortcoming, like shorthands.
+                            h3 [] [ str "Shorthands" ]
+                            div [ ClassName multilineText ]
+                                [
+                                    str """I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be..
+                                    However as this project creates CSS and interacts with it, it has to deal with some of its shortcoming, like shorthands.
 
-                            Therefore the shorthands that are included are limited to ones where using inherit, initial, unset or none is natural. Like text-decoration.
-                            Resetting text-decoration could be annoying without it.
+                                    Therefore the shorthands that are included are limited to ones where using inherit, initial, unset or none is natural. Like text-decoration.
+                                    Resetting text-decoration could be annoying without it.
 
-                            Oh an yeah you can use margin and padding if you want to, so there are sprinkles of shorthands around
-                            Dont you judge me, I said it was opinionated!"""
+                                    Oh an yeah you can use margin and padding if you want to, so there are sprinkles of shorthands around
+                                    Dont you judge me, I said it was opinionated!"""
+                                ]
                         ]
                ]
 
@@ -236,15 +230,15 @@ module App =
                                 "   | Big" ]
                     str "You could have a function that takes this ButtonSize as a parameter and spits out the styling you want."
                     codeBlock [ "let buttonStyle buttonType ="
-                                "  fss"
-                                "       ["
+                                "  fss  ["
                                 "           match buttonType with"
                                 "           | Big ->"
                                 "               Height' (px 80)"
                                 "               Width' (px 80)"
                                 "           | Small ->"
                                 "               Height' (px 40)"
-                                "               Width' (px 40)" ]
+                                "               Width' (px 40)"
+                                "       ]" ]
                     str "This function creates a string that you use as your classname"
                     codeBlock [ "button [ ClassName <| buttonStyle Small ] [ str \"Small\" ]"
                                 "button [ ClassName <| buttonStyle Big ] [ str \"Big\" ]" ]
@@ -270,6 +264,22 @@ module App =
                                 Color.black
                             ]
                     ]
+
+            let beforeAndAfter =
+                let beforeAndAfter =
+                    [
+                        Content.Value ""
+                        Display.InlineBlock
+                        BackgroundColor.orangeRed
+                        Width' (px 10)
+                        Height' (px 10)
+                    ]
+                fss
+                    [
+                        Before beforeAndAfter
+                        After beforeAndAfter
+                    ]
+
             article []
                 [
                     h2 [] [ str "Pseudo-classes" ]
@@ -294,25 +304,9 @@ module App =
                                        "                     Color.black"
                                        "                 ]"
                                        "         ]" ]
-                        ]
-                    div [ ClassName hoverStyle ] [ str "Hover me!" ]
-                    h2 [] [ str "Pseudo-elements" ]
-                    let beforeAndAfter =
-                        let beforeAndAfter =
-                            [
-                                Content.Value ""
-                                Display.InlineBlock
-                                BackgroundColor.orangeRed
-                                Width' (px 10)
-                                Height' (px 10)
-                            ]
-                        fss
-                            [
-                                Before beforeAndAfter
-                                After beforeAndAfter
-                            ]
-                    div []
-                        [
+                            div [ ClassName hoverStyle ] [ str "Hover me!" ]
+                            h2 [] [ str "Pseudo-elements" ]
+
                             str """These bad boys work much in the same way as the pseudo classes. Example follows:"""
                             codeBlock [ "let beforeAndAfterStyle = "
                                         "   let beforeAndAfter ="
@@ -335,8 +329,7 @@ module App =
                                 ]
                             str """Results in"""
                             div [ ClassName beforeAndAfter ] [ str " Some content surrounded by stuff " ]
-                            ]
-
+                        ]
                 ]
         let composition =
             article []
@@ -656,7 +649,7 @@ module App =
                                                     str "Child"
                                                     span [ ClassName combinatorStyle ] [ str "!>" ]
                                                 ]
-                                            str """While descendants hit on all of the selector within the css block, child will only select direct descendants. I.E one level deep.
+                                            str """While descendants hit on all of the selectors within the css block, child will only select direct descendants. I.E one level deep.
                                             So if we copy the same example from above but use the child combinator instead we get: """
                                             codeBlock [  "let childCombinator = fss [ !> Html.P [ Color.red ] ]"
                                                          "div [ ClassName childCombinator ]"
