@@ -13,11 +13,16 @@ module Functions =
     let css' x = css(x)
 
     // Constructors
-    let fss (attributeList: CSSProperty list) =
+    let private fssObject (attributeList: CSSProperty list) =
         attributeList
         |> List.map GlobalValue.CSSValue
         |> createObj
         |> css'
+
+    let fss (attributeList: CSSProperty list) =
+        attributeList
+        |> fssObject
+        |> string
 
     // Keyframes
     let keyframes (attributeList: KeyframeAttribute list) =

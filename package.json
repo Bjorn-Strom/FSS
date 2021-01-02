@@ -14,8 +14,6 @@
     "@babel/preset-react": "^7.10.4",
     "@testing-library/react": "^10.4.7",
     "@testing-library/user-event": "^11.4.2",
-    "fable-compiler": "^2.10.1",
-    "fable-loader": "^2.1.9",
     "mocha": "^6.2.3"
   },
   "dependencies": {
