@@ -13,7 +13,7 @@
   </PropertyGroup>
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="emotion" Version="&gt;= 10.0.27" />
+            <NpmPackage Name="@emotion/css" Version="&gt;= 11.0.0" />
         </NpmDependencies>
     </PropertyGroup>
   <ItemGroup>

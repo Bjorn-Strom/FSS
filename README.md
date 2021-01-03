@@ -57,6 +57,16 @@ dotnet add package Fss-lib
 paket add Fss-lib --project ./project/path
 ```
 
+And you need to install [Emotion-js](https://github.com/emotion-js/emotion).
+Fss uses version 11 or greater.
+```
+# npm
+npm i @emotion/css
+
+# yarn
+yarn add @emotion/css
+```
+
 
 ## Documentation 📖
 [Docs](https://bjorn-strom.github.io/FSS/)

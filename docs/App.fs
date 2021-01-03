@@ -124,6 +124,15 @@ module App =
                                 ""
                                 "# paket"
                                 "paket add Fss-lib --project ./project/path" ]
+
+                    str """And you need to install """
+                    a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js" ]
+                    str """. Fss uses version 11 or greater"""
+                    codeBlock [ "# npm"
+                                "npm i @emotion/css"
+                                ""
+                                "# yarn"
+                                "yarn add @emotion/css"]
                 ]
 
         let philosophy =
