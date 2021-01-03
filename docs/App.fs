@@ -49,6 +49,7 @@ module App =
     let multilineText =
         fss
             [
+                Label' "Multi Line Text"
                 WhiteSpace.PreLine
                 MarginBottom' (px 200)
             ]
@@ -73,14 +74,13 @@ module App =
         | BackgroundImage -> "Background image"
 
     let codeBlock (code: string List) =
-        let myDecorationColor = CSSColor.white
         let codeBlock =
             fss
                 [
+                    Label' "Code Block"
                     BackgroundColor.Hex "#2A2A2A"
                     Color.white
                     Padding' (px 20)
-                    TextDecorationColor.Value(myDecorationColor)
                 ]
         pre [ ClassName codeBlock ] [ str (code |> String.concat "\n") ]
 
@@ -89,6 +89,7 @@ module App =
         let imageStyle =
             fss
                 [
+                    Label' "Image Style"
                     Display.Flex
                     JustifyContent.Center
                 ]
@@ -209,6 +210,7 @@ module App =
             let buttonStyle buttonType =
                 fss
                     [
+                        Label' "Button Style"
                         Padding' (px 0)
                         match buttonType with
                         | Big ->
@@ -251,6 +253,7 @@ module App =
             let hoverStyle =
                 fss
                     [
+                        Label' "Hover Style"
                         Padding' (px 40)
                         Width' (px 100)
                         BackgroundColor.orangeRed
@@ -275,6 +278,7 @@ module App =
                     ]
                 fss
                     [
+                        Label' "Before And After"
                         Before beforeAndAfter
                         After beforeAndAfter
                     ]
@@ -335,10 +339,15 @@ module App =
                 [
                     let baseStyle =
                         [
+                            Label' "Base Style"
                             BackgroundColor.darkGreen
                             Color.turquoise
                         ]
-                    let danger = [ Color.red ]
+                    let danger =
+                        [
+                            Label' "Danger"
+                            Color.red
+                        ]
 
                     h2 [] [ str "Composition" ]
                     div [ ClassName multilineText ]
@@ -385,8 +394,19 @@ module App =
 
                     str """Results in: """
 
-                    let styleWithoutLabel = fss [ Color.red ]
-                    let styleWithLabel = fss [ Color.hotPink; Label' "HotPinkLabel" ]
+                    let styleWithoutLabel =
+                        fss
+                            [
+                                Label' "Style Without Label"
+                                Color.red
+                            ]
+                    let styleWithLabel =
+                        fss
+                            [
+                                Label' "Style With Label"
+                                Color.hotPink
+                                Label' "HotPinkLabel"
+                            ]
                     div [ ClassName styleWithoutLabel ] [ str styleWithoutLabel ]
                     div [ ClassName styleWithLabel ] [ str styleWithLabel ]
                 ]
@@ -415,6 +435,7 @@ module App =
                             let colorTransition =
                                    fss
                                        [
+                                           Label' "Color Transition"
                                            BackgroundColor.red
                                            TransitionProperty.BackgroundColor
                                            TransitionDuration' (sec 2.5)
@@ -445,6 +466,7 @@ module App =
                             let sizeAndColor =
                                 fss
                                     [
+                                        Label' "Size and Color"
                                         Width' (px 40)
                                         Height' (px 40)
                                         BackgroundColor.yellowGreen
@@ -487,6 +509,7 @@ module App =
             let bounceAnimation =
                 fss
                     [
+                        Label' "Bounce Animation"
                         AnimationName.Name bounceFrames
                         AnimationDuration' (sec 1.0)
                         AnimationTimingFunction.EaseInOut
@@ -496,6 +519,7 @@ module App =
             let bouncyColor =
                 fss
                     [
+                        Label' "Bouncy Color"
                         AnimationName.Names [ bounceFrames; backgroundColorFrames ]
                         AnimationDuration.Values [ sec 1.0; sec 5.0 ]
                         AnimationTimingFunction.Values [ TimingFunctionType.EaseInOut; TimingFunctionType.Ease ]
@@ -581,6 +605,7 @@ module App =
         let Combinators =
             let borders =
                 [
+                    Label' "Borders"
                     BorderStyle.Solid
                     BorderColor.black
                     BorderWidth' (px 1)
@@ -588,6 +613,7 @@ module App =
             let combinatorStyle =
                 fss
                     [
+                        Label' "Combinator"
                         Before [ Color.black; Content.Value "(" ]
                         After [ Color.black; Content.Value ")" ]
                         Color.red
@@ -595,18 +621,30 @@ module App =
             let descendantCombinator =
                 fss
                     [
+                        Label' "Descendant"
                         yield! borders
                         ! Html.P [ Color.red ]
                     ]
             let childCombinator =
                 fss
                     [
+                        Label' "Child"
                         yield! borders
                         !> Html.P [ Color.red ]
 
                     ]
-            let directCombinator = fss [ !+ Html.P [ Color.red ] ]
-            let adjacentCombinator = fss [ !~ Html.P [ Color.red ] ]
+            let directCombinator =
+                fss
+                    [
+                        Label' "Direct"
+                        !+ Html.P [ Color.red ]
+                    ]
+            let adjacentCombinator =
+                fss
+                    [
+                        Label' "Adjacent"
+                        !~ Html.P [ Color.red ]
+                    ]
 
             article []
                 [
@@ -727,6 +765,7 @@ module App =
             let mediaQueryExamples =
                 fss
                     [
+                        Label' "Media query examples"
                         Width' (px 200)
                         Height' (px 200)
                         BackgroundColor.blue
@@ -802,7 +841,11 @@ module App =
                         Suffix.Value " "
                     ]
             let mozillaExampleStyle =
-                fss [ ListStyleType' mozillaExampleCounter ]
+                fss
+                    [
+                        Label' "Mozilla Example Style"
+                        ListStyleType' mozillaExampleCounter
+                    ]
 
             let indexCounter = counterStyle []
             let subCounter = counterStyle []
@@ -996,6 +1039,7 @@ module App =
             let amaticStyle =
                 fss
                     [
+                        Label' "Amatic Style"
                         FontFamily.Custom "Amatic SC"
                         FontSize' (px 24)
                     ]
@@ -1029,17 +1073,27 @@ module App =
                         FontFace.Style Normal
                     ]
 
-            let droidSerif = fss [ FontFamily.Font droidSerifFont ]
+            let droidSerif =
+                fss
+                    [
+                        Label' "Droid Serif"
+                        FontFamily.Font droidSerifFont
+                    ]
 
             let droidSerifBold =
                 fss
                     [
+                        Label' "Droid Serif Bold"
                         FontFamily.Font droidSerifFont
                         FontWeight.Bold
                     ]
 
-            let moderna = fss [ FontFamily.Font modernaFont ]
-
+            let moderna =
+                fss
+                    [
+                        Label' "Moderna"
+                        FontFamily.Font modernaFont
+                    ]
 
             article []
                 [
@@ -1120,6 +1174,7 @@ module App =
             let linearGradientStyle1 =
                 fss
                     [
+                        Label' "Linear gradient style 1"
                         yield! box
                         BackgroundImage.LinearGradient(CSSColor.Hex "e66465", CSSColor.Hex "9198e5")
                     ]
@@ -1127,6 +1182,7 @@ module App =
                 fss
                     [
                         yield! box
+                        Label' "Linear gradient style 2"
                         BackgroundImage.LinearGradient(turn 0.25,
                                                        [CSSColor.Hex "3f87a6" :> IColorStop
                                                         CSSColor.Hex "ebf8e1" :> IColorStop
@@ -1136,6 +1192,7 @@ module App =
                 fss
                     [
                         yield! box
+                        Label' "Linear gradient style 3"
                         BackgroundImage.LinearGradient(ToLeft,
                                                        [
                                                            CSSColor.Hex "333" :> IColorStop
@@ -1148,6 +1205,7 @@ module App =
                 fss
                     [
                         yield! box
+                        Label' "Repeating Linear gradient style 1"
                         BackgroundImage.RepeatingLinearGradient(ToLeft,
                                                        [
                                                            CSSColor.Hex "e66465" :> IColorStop
@@ -1160,6 +1218,7 @@ module App =
                 fss
                     [
                         yield! box
+                        Label' "Repeating Linear gradient style 2"
                         BackgroundImage.RepeatingLinearGradient(deg 45.,
                                                        [
                                                            CSSColor.Hex "3f87a6" :> IColorStop
@@ -1171,11 +1230,13 @@ module App =
                 fss
                     [
                         yield! box
+                        Label' "Radial Gradient style 1"
                         BackgroundImage.RadialGradient(CSSColor.Hex "e66465", CSSColor.Hex "9198e5")
                     ]
             let radialGradientStyle2 =
                 fss
                     [
+                        Label' "Radial Gradient style 2"
                         yield! box
                         BackgroundImage.RadialGradient(ClosestSide, [CSSColor.Hex "3f87a6" :> IColorStop; CSSColor.Hex "ebf8e1" :> IColorStop; CSSColor.Hex "f69d3c" :> IColorStop])
                     ]
@@ -1183,6 +1244,7 @@ module App =
                 fss
                     [
                         yield! box
+                        Label' "Radial Gradient style 3"
                         BackgroundImage.RadialGradient(
                             CircleAt <| ImagePosition.Percent(pct 100),
                             [CSSColor.Hex "333" :> IColorStop
@@ -1193,18 +1255,21 @@ module App =
             let repeatingRadialGradientStyle1 =
                 fss
                     [
+                        Label' "Repeating Radial Gradient style 1"
                         yield! box
                         BackgroundImage.RepeatingRadialGradient(CSSColor.Hex "e66465", stop (CSSColor.Hex "9198e5") (pct 20))
                     ]
             let repeatingRadialGradientStyle2 =
                 fss
                     [
+                        Label' "Repeating Radial Gradient style 2"
                         yield! box
                         BackgroundImage.RepeatingRadialGradient(ClosestSide, [CSSColor.Hex "3f87a6" :> IColorStop; CSSColor.Hex "ebf8e1" :> IColorStop; CSSColor.Hex "f69d3c" :> IColorStop])
                     ]
             let repeatingRadialGradientStyle3 =
                 fss
                     [
+                        Label' "Repeating Radial Gradient style 3"
                         yield! box
                         BackgroundImage.RepeatingRadialGradient(
                             CircleAt <| ImagePosition.Percent(pct 100),
@@ -1241,7 +1306,7 @@ module App =
                                        "                                          ])"
                                        "       ]"]
 
-                            div [ ClassName (fss [ Display.Flex ]) ]
+                            div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
                                 [
                                     div [ClassName linearGradientStyle1 ] []
                                     div [ClassName linearGradientStyle2 ] []
@@ -1269,7 +1334,7 @@ module App =
                                         "                                               stop (CSSColor.Hex \"f69d3c\") (px 20)"
                                         "                                           ])"
                                         "        ]"]
-                            div [ ClassName (fss [ Display.Flex ]) ]
+                            div [ ClassName (fss [ Label' "Flex 2"; Display.Flex ]) ]
                                 [
                                     div [ClassName repeatingLinearGradientStyle1 ] []
                                     div [ClassName repeatingLinearGradientStyle2 ] []
@@ -1293,7 +1358,7 @@ module App =
                                         "                 stop (CSSColor.Hex \"333\") (pct 75) ])"
                                         "        ]"]
 
-                            div [ ClassName (fss [ Display.Flex ]) ]
+                            div [ ClassName (fss [ Label' "Flex 3"; Display.Flex ]) ]
                                 [
                                     div [ClassName radialGradientStyle1 ] []
                                     div [ClassName radialGradientStyle2 ] []
@@ -1320,7 +1385,7 @@ module App =
                                         "                 stop (CSSColor.Hex \"eee\") (px 10)"
                                         "                 stop (CSSColor.Hex \"eee\") (px 20) ])"
                                         "        ]"]
-                            div [ ClassName (fss [ Display.Flex ]) ]
+                            div [ ClassName (fss [ Label' "Flex 4"; Display.Flex ]) ]
                                 [
                                     div [ClassName repeatingRadialGradientStyle1 ] []
                                     div [ClassName repeatingRadialGradientStyle2 ] []
@@ -1351,6 +1416,7 @@ module App =
         let buttonStyle =
             fss
                 [
+                    Label' "Button Style"
                     Border.None
                     if example = currentExample then
                        BackgroundColor.Hex "#29A9DF"
@@ -1384,6 +1450,7 @@ module App =
         let headerStyle =
             fss
                 [
+                    Label' "Header Style"
                     GridArea' "nav"
                     GridColumnEnd.Span 2
                     Color.white
@@ -1392,15 +1459,26 @@ module App =
                     AlignItems.Center
                 ]
 
-        let headerText = fss [ headingFont ]
+        let headerText =
+            fss
+                [
+                    Label' "Header Text"
+                    headingFont
+                ]
 
         header  [ ClassName headerStyle ] [ h2 [ ClassName headerText ] [ str "Fss" ] ]
 
     let menu model (dispatch: Msg -> unit)=
-        let menuStyle = fss [ GridArea' "menu" ]
+        let menuStyle =
+            fss
+                [
+                    Label' "Menu Style"
+                    GridArea' "menu"
+                ]
         let menuList =
             fss
                 [
+                    Label' "Menu List"
                     ListStyleType.None
                     Margin' (px 0)
                     Padding' (px 0)
@@ -1434,6 +1512,7 @@ module App =
         let contentStyle =
             fss
                 [
+                    Label' "Content Style"
                     GridArea' "content"
                     textFont
                 ]
@@ -1443,12 +1522,14 @@ module App =
         let container =
             fss
                 [
+                    Label' "Container Style"
                     Display.Flex
                     JustifyContent.Center
                 ]
         let grid =
             fss
                 [
+                    Label' "Grid style"
                     Display.Grid
                     GridGap' (px 10)
                     Height' (vh 100.)

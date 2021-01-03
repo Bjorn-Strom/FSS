@@ -52,7 +52,7 @@ module Counter =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/suffix
     type Suffix =
-        static member Value (value: string) = "suffix" ==> value |> CounterProperty
+        static member Value (value: string) = "suffix" ==> sprintf "'%s'" value |> CounterProperty
         static member Url (url: string) = "suffix" ==> sprintf "url(%s)" url |> CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/range

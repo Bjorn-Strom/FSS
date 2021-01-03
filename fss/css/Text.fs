@@ -767,7 +767,7 @@ module Text =
         |> textDecorationColorToString
         |> textDecorationColorValue
     type TextDecorationColor =
-        static member Value (color: ITextDecorationColor) = color |> textDecorationColorValue
+        static member Value (color: ITextDecorationColor) = color |> textDecorationColorValue'
 
         static member black = CSSColor.black |> textDecorationColorValue'
         static member silver = CSSColor.silver |> textDecorationColorValue'
