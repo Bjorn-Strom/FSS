@@ -42,7 +42,6 @@ module App =
             { model with CurrentPage = example }
 
     // Load font
-    Import.Url "https://fonts.googleapis.com/css?family=Nunito|Raleway"
     let headingFont = FontFamily.Custom "Nunito"
     let textFont = FontFamily.Custom "Raleway"
 
@@ -994,7 +993,6 @@ module App =
 
                 ]
         let fonts =
-            Import.Url "https://fonts.googleapis.com/css2?family=Amatic+SC"
             let amaticStyle =
                 fss
                     [
@@ -1048,8 +1046,14 @@ module App =
                     h3 [] [ str "Import" ]
                     div [ ClassName multilineText ]
                         [
-                            codeBlock [ "Import.Url \"https://fonts.googleapis.com/css2?family=Amatic+SC\""
-                                        "let amaticStyle ="
+                            str """For importing fonts from google fonts for example, use link syntax within <head>"""
+                            codeBlock [ "<head>"
+                                        "    ..."
+                                        "    ..."
+                                        "    ..."
+                                        "    <link href=\"https://fonts.googleapis.com/css?family=Nunito|Raleway|Amatic+SC\" rel=\"stylesheet\">"
+                                        "</head>" ]
+                            codeBlock [ "let amaticStyle ="
                                         "    fss"
                                         "        ["
                                         "            FontFamily.Custom \"Amatic SC\""

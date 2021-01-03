@@ -13,7 +13,7 @@
   </PropertyGroup>
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="emotion" Version=">= 10.0.27" />
+            <NpmPackage Name="emotion" Version="&gt;= 10.0.27" />
         </NpmDependencies>
     </PropertyGroup>
   <ItemGroup>
@@ -61,7 +61,6 @@
     <Compile Include="Keyframes.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Functions.fs" />
-    <Compile Include="Import.fs" />
     <Compile Include="Selector.fs" />
     <Compile Include="PseudoClass.fs" />
     <Compile Include="PseudoElement.fs" />

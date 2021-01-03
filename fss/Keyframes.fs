@@ -6,9 +6,9 @@ open Utilities.Helpers
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
 module Keyframes =
-    [<Import("keyframes", from="emotion")>]
-    let private kframes(x) = jsNative
-    let kframes' x = kframes(x)
+    [<ImportMember("@emotion/css")>]
+    let private keyframes(x) = jsNative
+    let keyframes' x = keyframes(x)
 
     type KeyframeAttribute =
         | Frame of int * CSSProperty list

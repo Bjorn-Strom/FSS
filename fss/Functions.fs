@@ -8,7 +8,7 @@ open Keyframes
 
 [<AutoOpen>]
 module Functions =
-    [<Import("css", from="emotion")>]
+    [<Import("css", from="@emotion/css")>]
     let private css(x) = jsNative
     let css' x = css(x)
 
@@ -28,7 +28,7 @@ module Functions =
     let keyframes (attributeList: KeyframeAttribute list) =
         attributeList
         |> createAnimationObject
-        |> kframes'
+        |> keyframes'
         |> CssString
         :> IAnimationName
 
