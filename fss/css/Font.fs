@@ -195,7 +195,7 @@ module Font =
             | :? Global as g -> GlobalValue.global' g
             | _ -> "Unknown font family"
 
-    let private  featureSettingToString (featureSetting: IFontFeatureSetting) =
+    let private featureSettingToString (featureSetting: IFontFeatureSetting) =
         let stringifyFeature =
             function
                 | Liga switch    -> sprintf "\"liga\" %A" switch
@@ -230,7 +230,7 @@ module Font =
         | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown font feature setting"
 
-    let private  variantNumericToString (variant: IFontVariantNumeric) =
+    let private variantNumericToString (variant: IFontVariantNumeric) =
         match variant with
         | :? FontVariantNumeric as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
@@ -242,22 +242,22 @@ module Font =
         | :? FontVariantCaps as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
-        | _ -> "Unknown font variant numeric"
+        | _ -> "Unknown font variant caps"
 
     let private variantEastAsianToString (variant: IFontVariantEastAsian) =
         match variant with
         | :? FontVariantEastAsian as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
-        | _ -> "Unknown font variant numeric"
+        | _ -> "Unknown font variant east asian"
 
-    let private  variantLigatureToString (variant: IFontVariantLigature) =
+    let private variantLigatureToString (variant: IFontVariantLigature) =
         match variant with
         | :? FontVariantLigature as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none
-        | _ -> "Unknown font variant numeric"
+        | _ -> "Unknown font variant ligature"
 
     let private lineHeightToString (lineHeight: ILineHeight) =
         match lineHeight with
@@ -266,7 +266,7 @@ module Font =
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
-        | _ -> "Unknown lineheight"
+        | _ -> "Unknown line height"
 
     let private lineBreakToString (linebreak: ILineBreak) =
         match linebreak with
@@ -281,7 +281,7 @@ module Font =
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
-        | _ -> "Unknown lineheight"
+        | _ -> "Unknown letter spacing"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     let private sizeCssValue value = PropertyValue.cssValue Property.FontSize value
@@ -303,6 +303,15 @@ module Font =
         static member Initial = Initial |> sizeCssValue'
         static member Unset = Unset |> sizeCssValue'
 
+    /// <summary>Sets size of font. </summary>
+    /// <param name="size">
+    ///     can be:
+    ///     - <c> FontSize </c>
+    ///     - <c> Size </c>
+    ///     - <c> Percent </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontSize' (size: IFontSize) = FontSize.Value(size)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
@@ -318,6 +327,14 @@ module Font =
         static member Initial = Initial |> styleCssValue'
         static member Unset = Unset |> styleCssValue'
 
+    /// <summary>Specifies which style to use on a font. </summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> FontStyle </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontStyle' (style: IFontStyle) = FontStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
@@ -341,6 +358,15 @@ module Font =
         static member Initial = Initial |> stretchCssValue'
         static member Unset = Unset |> stretchCssValue'
 
+    /// <summary>Specifies width of text characters to be wider or narrower default width. </summary>
+    /// <param name="stretch">
+    ///     can be:
+    ///     - <c> FontStretch </c>
+    ///     - <c> Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontStretch' (stretch: IFontStretch) = FontStretch.Value(stretch)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
@@ -357,6 +383,15 @@ module Font =
         static member Initial = Initial |> weightCssValue'
         static member Unset = Unset |> weightCssValue'
 
+    /// <summary>Specifies weight(boldness) of font. </summary>
+    /// <param name="weight">
+    ///     can be:
+    ///     - <c> FontWeight </c>
+    ///     - <c> CssInt </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontWeight' (weight: IFontWeight) = FontWeight.Value(weight)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
@@ -373,6 +408,16 @@ module Font =
         static member Initial = Initial |>  heightCssValue'
         static member Unset = Unset |>  heightCssValue'
 
+    /// <summary>Specifies the amount of space above and below inline elements. </summary>
+    /// <param name="height">
+    ///     can be:
+    ///     - <c> CssFloat </c>
+    ///     - <c> Size </c>
+    ///     - <c> Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let LineHeight' (height: ILineHeight) = LineHeight.Value(height)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-break
@@ -393,6 +438,15 @@ module Font =
         static member Initial = Initial |>  breakCssValue'
         static member Unset = Unset |>  breakCssValue'
 
+    /// <summary>Specifies how some asian languages wrap text on newlines. </summary>
+    /// <param name="break'">
+    ///     can be:
+    ///     - <c> LineBreak </c>
+    ///     - <c> Auto </c>
+    ///     - <c> Normal </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let LineBreak' (break': ILineBreak) = LineBreak.Value(break')
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
@@ -409,7 +463,15 @@ module Font =
         static member Initial = Initial |>  spacingCssValue'
         static member Unset = Unset |>  spacingCssValue'
 
-    let LetterSpacing' (height: ILetterSpacing) = LetterSpacing.Value(height)
+    /// <summary>Sets horizontal spacing between text characters. </summary>
+    /// <param name="spacing">
+    ///     can be:
+    ///     - <c> Size </c>
+    ///     - <c> Normal </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let LetterSpacing' (spacing: ILetterSpacing) = LetterSpacing.Value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
     let private displayCssValue value = PropertyValue.cssValue Property.FontDisplay value
@@ -426,6 +488,13 @@ module Font =
 
         static member Auto = Auto |> displayCssValue'
 
+    /// <summary>Specifies how a font is loaded and displayed.</summary>
+    /// <param name="display">
+    ///     can be:
+    ///     - <c> FontDisplay </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontDisplay' (display: IFontDisplay) = FontDisplay.Value(display)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
@@ -449,6 +518,13 @@ module Font =
         static member Initial = Initial |> familyCssValue'
         static member Unset = Unset |> familyCssValue'
 
+    /// <summary>Specify which font to use on the.</summary>
+    /// <param name="fontFamily">
+    ///     can be:
+    ///     - <c> FontFamily </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontFamily' (fontFamily: IFontFamily) = FontFamily.Value(fontFamily)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
@@ -488,6 +564,13 @@ module Font =
         static member Initial = Initial |> featureSettingCssValue'
         static member Unset = Unset |> featureSettingCssValue'
 
+    /// <summary>Specify more advanced typographic settings.</summary>
+    /// <param name="featureSetting">
+    ///     can be:
+    ///     - <c> FontFeatureSetting </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontFeatureSetting' (featureSetting: IFontFeatureSetting) = FontFeatureSetting.Value(featureSetting)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
@@ -510,6 +593,13 @@ module Font =
         static member Initial = Initial |> variantNumericCssValue'
         static member Unset = Unset |> variantNumericCssValue'
 
+    /// <summary>Specifies numeric glyphs.</summary>
+    /// <param name="variant">
+    ///     can be:
+    ///     - <c> FontFeatureSetting </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontVariantNumeric' (variant: IFontVariantNumeric) = FontVariantNumeric.Value(variant)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
@@ -529,6 +619,14 @@ module Font =
         static member Initial = Initial |> variantCapsCssValue'
         static member Unset = Unset |> variantCapsCssValue'
 
+    /// <summary>Specify alternate glyphs for capital letters.</summary>
+    /// <param name="variant">
+    ///     can be:
+    ///     - <c> FontVariantCaps </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontVariantCaps' (variant: IFontVariantCaps) = FontVariantCaps.Value(variant)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
@@ -551,6 +649,14 @@ module Font =
         static member Initial = Initial |> variantEastAsianCssValue'
         static member Unset = Unset |> variantEastAsianCssValue'
 
+    /// <summary>Specifies alternate glyphs for East Asian languages.</summary>
+    /// <param name="variant">
+    ///     can be:
+    ///     - <c> FontVariantEastAsian </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontVariantEastAsian' (variant: IFontVariantEastAsian) = FontVariantEastAsian.Value(variant)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
@@ -573,4 +679,13 @@ module Font =
         static member Initial = Initial |> variantLigatureCssValue'
         static member Unset = Unset |> variantLigatureCssValue'
 
+    /// <summary>Specifies which ligatures are used.</summary>
+    /// <param name="ligature">
+    ///     can be:
+    ///     - <c> FontVariantLigature </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let FontVariantLigatures' (ligature: IFontVariantLigature) = FontVariantLigatures.Value(ligature)
