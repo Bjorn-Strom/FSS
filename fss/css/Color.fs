@@ -187,5 +187,8 @@ module Color =
         static member Initial = Initial |> GlobalValue.global' |> colorCssValue
         static member Unset = Unset |> GlobalValue.global' |> colorCssValue
 
+    /// <summary>Sets the color of text and text decoration. </summary>
+    /// <param name="color">The CSSColor to apply</param>
+    /// <returns>Css property for fss.</returns>
     let Color' (color: CSSColor) = Color.Value(color)
 
