@@ -52,10 +52,20 @@ module Animation =
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown animation play state"
 
+    let private nameToString (name: IAnimationName) =
+        match name with
+        | :? CssString as s -> GlobalValue.string s
+        | :? None -> GlobalValue.none
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown animation name"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
     type AnimationDelay =
         static member Value (delay: Units.Time.Time) = PropertyValue.cssValue Property.AnimationDelay (Units.Time.value delay)
 
+    /// <summary>Specifies an amount of time to wait before starting the animation. </summary>
+    /// <param name="delay"> Amount of time to wait.</param>
+    /// <returns>Css property for fss.</returns>
     let AnimationDelay' (delay: Units.Time.Time) = AnimationDelay.Value(delay)
 
     let private directionCssValue value = PropertyValue.cssValue Property.AnimationDirection value
@@ -74,6 +84,14 @@ module Animation =
         static member Initial = Initial |> directionCssValue'
         static member Unset = Unset |> directionCssValue'
 
+    /// <summary>Sets which direction an animation should play. </summary>
+    /// <param name="direction">
+    ///     can be:
+    ///     - <c> AnimationDirection </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let AnimationDirection' (direction: IAnimationDirection) = direction |> directionCssValue'
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
@@ -85,6 +103,9 @@ module Animation =
             |> Utilities.Helpers.combineComma Units.Time.value
             |> animationDurationCssValue
 
+    /// <summary>Specifies an amount of time for one animation cycle to complete. </summary>
+    /// <param name="duration"> Amount of time for one cycle to complete.</param>
+    /// <returns>Css property for fss.</returns>
     let AnimationDuration' (duration: Units.Time.Time) = AnimationDuration.Value(duration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
@@ -100,6 +121,13 @@ module Animation =
         static member Both = Both |> fillModeCssValue'
         static member None = None |> fillModeCssValue'
 
+    /// <summary>Specifies which styles to apply before and after the animation. </summary>
+    /// <param name="fillMode">
+    ///     can be:
+    ///     - <c> AnimationFillMode </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let AnimationFillMode' (fillMode: IAnimationFillMode) = fillMode |> AnimationFillMode.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count
@@ -117,15 +145,16 @@ module Animation =
             |> iterationCountCssValue
         static member Infinite = Infinite |> iterationCountToString |> iterationCountCssValue
 
+    /// <summary>How many times should an animation be played.</summary>
+    /// <param name="iterationCount">
+    ///     can be:
+    ///     - <c> Infinite </c>
+    ///     - <c> CssInt </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let AnimationIterationCount' (iterationCount: IAnimationIterationCount) = AnimationIterationCount.Value iterationCount
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
-    let private nameToString (name: IAnimationName) =
-        match name with
-        | :? CssString as s -> GlobalValue.string s
-        | :? None -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
-        | _ -> "Unknown animation name"
 
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
     let private nameValue value = PropertyValue.cssValue Property.AnimationName value
     let private nameValue' value =
         value
@@ -140,6 +169,15 @@ module Animation =
         static member Initial = Initial |> nameValue'
         static member Unset = Unset |> nameValue'
 
+    /// <summary>Specifies which animation to play.</summary>
+    /// <param name="name">
+    ///     can be:
+    ///     - <c> The result of a keyframe function </c>
+    ///     - <c> CssString </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let AnimationName' (name: IAnimationName) = AnimationName.Name(name)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
@@ -156,6 +194,13 @@ module Animation =
         static member Initial = Initial |> playStateCssValue'
         static member Unset = Unset |> playStateCssValue'
 
+    /// <summary>Sets if the animation is running or paused.</summary>
+    /// <param name="playState">
+    ///     can be:
+    ///     - <c> AnimationPlayState </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let AnimationPlayState' (playState: IAnimationPlayState) = playState |> AnimationPlayState.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
@@ -183,4 +228,11 @@ module Animation =
         static member Initial = Initial |> timingFunctionCssValue'
         static member Unset = Unset |> timingFunctionCssValue'
 
+    /// <summary>Specifies how the animation should be played.</summary>
+    /// <param name="timing">
+    ///     can be:
+    ///     - <c> AnimationTimingFunction </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let AnimationTimingFunction' (timing: TimingFunctionType.Timing) = AnimationTimingFunction.Value(timing)

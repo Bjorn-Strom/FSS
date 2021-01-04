@@ -1,4 +1,4 @@
-namespace Docs
+﻿namespace Docs
 
 module App =
     open Elmish
@@ -519,7 +519,7 @@ module App =
                 fss
                     [
                         Label' "Bounce Animation"
-                        AnimationName.Name bounceFrames
+                        AnimationName' bounceFrames
                         AnimationDuration' (sec 1.0)
                         AnimationTimingFunction.EaseInOut
                         AnimationIterationCount.Infinite
