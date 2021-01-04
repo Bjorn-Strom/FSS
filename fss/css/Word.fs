@@ -40,6 +40,15 @@ module Word =
         static member Inherit = Inherit |> spacingCssValue'
         static member Unset = Unset |> spacingCssValue'
 
+    /// <summary>Specifies length of space between words.</summary>
+    /// <param name="spacing">
+    ///     can be:
+    ///     - <c> Size </c>
+    ///     - <c> Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let WordSpacing' (spacing: IWordSpacing) = WordSpacing.Value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
@@ -60,5 +69,13 @@ module Word =
         static member Inherit = Inherit |> breakCssValue'
         static member Unset = Unset |> breakCssValue'
 
+    /// <summary>Specify when line breaks should happen.</summary>
+    /// <param name="break'">
+    ///     can be:
+    ///     - <c> WordBreak </c>
+    ///     - <c> Normal </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let WordBreak' (break': IWordBreak) = WordBreak.Value(break')
 
