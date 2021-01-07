@@ -180,7 +180,7 @@ module App =
                     h2 [] [ str "Basic usage" ]
                     div [ ClassName multilineText ]
                         [
-                            str """The main function Fss supplies is fss. This function takes a list of CSS properties and returns a string.
+                            str """The main function this library supplies is the function fss. It takes a list of CSS properties and returns a string.
                                 This string is the classname you can give to your html tag.
 
                                 Simply write the CSS you want in PascalCase and dot yourself into the methods you want.
@@ -196,7 +196,7 @@ module App =
                             Continuing with our TextDecorationColor example you could do the following"""
                             codeBlock ["let myDecorationColor = CSSColor.White"
                                        "fss [ TextDecorationColor.Value(myDecorationColor) ]"]
-                            str """As this is something you might potentially want to do quite a but of (and we do like pipelining) there exists a shorthand which is TextDecorationPrime"""
+                            str """As this is something you might potentially want to do quite a bit of (and we do like pipelining) there exists a shorthand which is TextDecorationPrime"""
                             codeBlock ["let myDecorationColor = CSSColor.White"
                                        "fss [ TextDecorationColor' myDecorationColor ]"]
 
