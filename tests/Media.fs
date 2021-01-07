@@ -7,8 +7,8 @@ open Utils
 open Media
 
 module Media =
-       let tests =
-        testList "Media"
+    let tests =
+       testList "Media"
             [
                 testNested
                     "Media query with min width and min height"
