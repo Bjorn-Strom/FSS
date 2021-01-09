@@ -38,7 +38,12 @@ It is not discoverable, not type-safe and requires some setup.
 
 The primary goal of this project is to avoid all of that and have an easy way to write type-safe discoverable styling with F# that supports most of the CSS spec.
 
-Download one nuget package and you are ready to go.
+3 major goals of Fss
+- I did not want to reinvent the wheel - it should be easy to use if you already know CSS.
+- Writing CSS in F# to be discoverable, strongly typed, and the IDE to help out as much as possible.
+- It is important to support pseudo-classes and elements as well as animations, counters and combinators.
+
+Download one nuget package and one npm package and you are ready to go.
 
 ## Features 🛠
 - Uses Emotion-js to generate the CSS and therefore gets some of its amazing features for free
