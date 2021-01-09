@@ -119,6 +119,13 @@ module ListStyle =
         static member Initial = Initial |> listStyleValue'
         static member Unset = Unset |> listStyleValue'
 
+    /// <summary>Resets list style.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ListStyle' (style: IListStyle) = ListStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
@@ -137,6 +144,14 @@ module ListStyle =
         static member Initial = Initial |> listStyleImageValue'
         static member Unset = Unset |> listStyleImageValue'
 
+    /// <summary>Specifies an image to be used as the list item marker..</summary>
+    /// <param name="image">
+    ///     can be:
+    ///     - <c> ListStyleImage</c>
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ListStyleImage' (image: IListStyleImage) = ListStyleImage.Value(image)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
@@ -155,6 +170,13 @@ module ListStyle =
         static member Initial = Initial |> listStylePositionProperty'
         static member Unset = Unset |> listStylePositionProperty'
 
+    /// <summary>Specifies the position of the marker of the list item.</summary>
+    /// <param name="position">
+    ///     can be:
+    ///     - <c> ListStylePosition</c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ListStylePosition' (position: IListStylePosition) = ListStylePosition.Value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
@@ -227,4 +249,14 @@ module ListStyle =
         static member Initial = Initial |> listStyleTypeProperty'
         static member Unset = Unset |> listStyleTypeProperty'
 
+    /// <summary>Specifies list style marker.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> ListStyleType</c>
+    ///     - <c> CounterStyle </c>
+    ///     - <c> CssString </c>
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ListStyleType' (style: IListStyleType) = ListStyleType.Value(style)
