@@ -108,6 +108,13 @@ module Background =
         static member Initial = Initial |> clipValue'
         static member Unset = Unset |> clipValue'
 
+    /// <summary>Specifies how an element's background extends.</summary>
+    /// <param name="clip">
+    ///     can be:
+    ///     - <c> BackgroundClip </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BackgroundClip' (clip: IBackgroundClip) = BackgroundClip.Value(clip)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
@@ -126,6 +133,13 @@ module Background =
        static member Initial = Initial |> originValue'
        static member Unset = Unset |> originValue'
 
+    /// <summary>Sets background origin.</summary>
+    /// <param name="origin">
+    ///     can be:
+    ///     - <c> BackgroundOrigin </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BackgroundOrigin' (origin: IBackgroundOrigin) = BackgroundOrigin.Value(origin)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
@@ -151,6 +165,13 @@ module Background =
         static member Initial = Initial |> repeatValue'
         static member Unset = Unset |> repeatValue'
 
+    /// <summary>Specifies how background is repeated.</summary>
+    /// <param name="repeat">
+    ///     can be:
+    ///     - <c> BackgroundRepeat </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BackgroundRepeat' (repeat: IBackgroundRepeat) = BackgroundRepeat.Value(repeat)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
@@ -173,6 +194,16 @@ module Background =
         static member Initial = Initial |> sizeValue'
         static member Unset = Unset |> sizeValue'
 
+    /// <summary>Specifies size of background.</summary>
+    /// <param name="size">
+    ///     can be:
+    ///     - <c> BackgroundSize </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BackgroundSize' (size: IBackgroundSize) = BackgroundSize.Value(size)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
@@ -191,6 +222,13 @@ module Background =
         static member Initial = Initial |> attachmentValue'
         static member Unset = Unset |> attachmentValue'
 
+    /// <summary>Specifies how background is fixed within viewport.</summary>
+    /// <param name="attachment">
+    ///     can be:
+    ///     - <c> BackgroundAttachment </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BackgroundAttachment' (attachment: IBackgroundAttachment) = BackgroundAttachment.Value(attachment)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
@@ -352,6 +390,12 @@ module Background =
         static member transparent = CssColor.transparent |> backgroundValue'
         static member currentColor = CssColor.currentColor |> backgroundValue'
 
+    /// <summary>Specifies how background color.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> CssColor </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BackgroundColor' (color: CssColor) = BackgroundColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
@@ -426,6 +470,12 @@ module Background =
         static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, colors)
 
+    /// <summary>Draws background image on element.</summary>
+    /// <param name="image">
+    ///     can be:
+    ///     - <c> Image </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BackgroundImage' (image: Image) = BackgroundImage.Value(image)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
@@ -454,4 +504,13 @@ module Background =
         static member Initial = Initial |> positionCssValue'
         static member Unset = Unset |> positionCssValue'
 
+    /// <summary>Specifies the position of a background.</summary>
+    /// <param name="position">
+    ///     can be:
+    ///     - <c> BackgroundPosition </c>
+    ///     - <c> Global </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BackgroundPosition' (position: IBackgroundPosition) = BackgroundPosition.Value(position)
