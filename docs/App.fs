@@ -1185,7 +1185,7 @@ module App =
                     [
                         Label' "Linear gradient style 1"
                         yield! box
-                        BackgroundImage.LinearGradient(CSSColor.Hex "e66465", CSSColor.Hex "9198e5")
+                        BackgroundImage.LinearGradient(CssColor.Hex "e66465", CssColor.Hex "9198e5")
                     ]
             let linearGradientStyle2 =
                 fss
@@ -1193,9 +1193,9 @@ module App =
                         yield! box
                         Label' "Linear gradient style 2"
                         BackgroundImage.LinearGradient(turn 0.25,
-                                                       [CSSColor.Hex "3f87a6" :> IColorStop
-                                                        CSSColor.Hex "ebf8e1" :> IColorStop
-                                                        CSSColor.Hex "f69d3c" :> IColorStop])
+                                                       [CssColor.Hex "3f87a6" :> IColorStop
+                                                        CssColor.Hex "ebf8e1" :> IColorStop
+                                                        CssColor.Hex "f69d3c" :> IColorStop])
                     ]
             let linearGradientStyle3 =
                 fss
@@ -1204,10 +1204,10 @@ module App =
                         Label' "Linear gradient style 3"
                         BackgroundImage.LinearGradient(ToLeft,
                                                        [
-                                                           CSSColor.Hex "333" :> IColorStop
-                                                           stop (CSSColor.Hex "333") (pct 50)
-                                                           stop (CSSColor.Hex "eee") (pct 75)
-                                                           stop (CSSColor.Hex "333") (pct 75)
+                                                           CssColor.Hex "333" :> IColorStop
+                                                           stop (CssColor.Hex "333") (pct 50)
+                                                           stop (CssColor.Hex "eee") (pct 75)
+                                                           stop (CssColor.Hex "333") (pct 75)
                                                        ])
                     ]
             let repeatingLinearGradientStyle1 =
@@ -1217,10 +1217,10 @@ module App =
                         Label' "Repeating Linear gradient style 1"
                         BackgroundImage.RepeatingLinearGradient(ToLeft,
                                                        [
-                                                           CSSColor.Hex "e66465" :> IColorStop
-                                                           stop (CSSColor.Hex "e66465") (px 20)
-                                                           stop (CSSColor.Hex "9198e5") (px 20)
-                                                           stop (CSSColor.Hex "9198e5") (px 25)
+                                                           CssColor.Hex "e66465" :> IColorStop
+                                                           stop (CssColor.Hex "e66465") (px 20)
+                                                           stop (CssColor.Hex "9198e5") (px 20)
+                                                           stop (CssColor.Hex "9198e5") (px 25)
                                                        ])
                     ]
             let repeatingLinearGradientStyle2 =
@@ -1230,9 +1230,9 @@ module App =
                         Label' "Repeating Linear gradient style 2"
                         BackgroundImage.RepeatingLinearGradient(deg 45.,
                                                        [
-                                                           CSSColor.Hex "3f87a6" :> IColorStop
-                                                           stop (CSSColor.Hex "ebf8e1") (px 15)
-                                                           stop (CSSColor.Hex "f69d3c") (px 20)
+                                                           CssColor.Hex "3f87a6" :> IColorStop
+                                                           stop (CssColor.Hex "ebf8e1") (px 15)
+                                                           stop (CssColor.Hex "f69d3c") (px 20)
                                                        ])
                     ]
             let radialGradientStyle1 =
@@ -1240,14 +1240,14 @@ module App =
                     [
                         yield! box
                         Label' "Radial Gradient style 1"
-                        BackgroundImage.RadialGradient(CSSColor.Hex "e66465", CSSColor.Hex "9198e5")
+                        BackgroundImage.RadialGradient(CssColor.Hex "e66465", CssColor.Hex "9198e5")
                     ]
             let radialGradientStyle2 =
                 fss
                     [
                         Label' "Radial Gradient style 2"
                         yield! box
-                        BackgroundImage.RadialGradient(ClosestSide, [CSSColor.Hex "3f87a6" :> IColorStop; CSSColor.Hex "ebf8e1" :> IColorStop; CSSColor.Hex "f69d3c" :> IColorStop])
+                        BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex "3f87a6" :> IColorStop; CssColor.Hex "ebf8e1" :> IColorStop; CssColor.Hex "f69d3c" :> IColorStop])
                     ]
             let radialGradientStyle3 =
                 fss
@@ -1256,24 +1256,24 @@ module App =
                         Label' "Radial Gradient style 3"
                         BackgroundImage.RadialGradient(
                             CircleAt <| ImagePosition.Percent(pct 100),
-                            [CSSColor.Hex "333" :> IColorStop
-                             stop (CSSColor.Hex "333") (pct 50)
-                             stop (CSSColor.Hex "eee") (pct 75)
-                             stop (CSSColor.Hex "333") (pct 75) ])
+                            [CssColor.Hex "333" :> IColorStop
+                             stop (CssColor.Hex "333") (pct 50)
+                             stop (CssColor.Hex "eee") (pct 75)
+                             stop (CssColor.Hex "333") (pct 75) ])
                     ]
             let repeatingRadialGradientStyle1 =
                 fss
                     [
                         Label' "Repeating Radial Gradient style 1"
                         yield! box
-                        BackgroundImage.RepeatingRadialGradient(CSSColor.Hex "e66465", stop (CSSColor.Hex "9198e5") (pct 20))
+                        BackgroundImage.RepeatingRadialGradient(CssColor.Hex "e66465", stop (CssColor.Hex "9198e5") (pct 20))
                     ]
             let repeatingRadialGradientStyle2 =
                 fss
                     [
                         Label' "Repeating Radial Gradient style 2"
                         yield! box
-                        BackgroundImage.RepeatingRadialGradient(ClosestSide, [CSSColor.Hex "3f87a6" :> IColorStop; CSSColor.Hex "ebf8e1" :> IColorStop; CSSColor.Hex "f69d3c" :> IColorStop])
+                        BackgroundImage.RepeatingRadialGradient(ClosestSide, [CssColor.Hex "3f87a6" :> IColorStop; CssColor.Hex "ebf8e1" :> IColorStop; CssColor.Hex "f69d3c" :> IColorStop])
                     ]
             let repeatingRadialGradientStyle3 =
                 fss
@@ -1282,10 +1282,10 @@ module App =
                         yield! box
                         BackgroundImage.RepeatingRadialGradient(
                             CircleAt <| ImagePosition.Percent(pct 100),
-                            [CSSColor.Hex "333" :> IColorStop
-                             stop (CSSColor.Hex "333") (px 10)
-                             stop (CSSColor.Hex "eee") (px 10)
-                             stop (CSSColor.Hex "eee") (px 20) ])
+                            [CssColor.Hex "333" :> IColorStop
+                             stop (CssColor.Hex "333") (px 10)
+                             stop (CssColor.Hex "eee") (px 10)
+                             stop (CssColor.Hex "eee") (px 20) ])
                     ]
 
             article []

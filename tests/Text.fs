@@ -423,14 +423,14 @@ module Text =
                     ["textEmphasisStyle" ==> "unset"]
                 test
                     "Text shadow single"
-                    [ TextShadow.Value (px 1, px 1, px 2, CSSColor.black) ]
+                    [ TextShadow.Value (px 1, px 1, px 2, CssColor.black) ]
                     ["textShadow" ==> "1px 1px 2px #000000"]
                 test
                     "Text shadow multiple"
                     [ TextShadow.Value
                           [
-                            TextTypes.Shadow4(px 1, px 1, px 2, CSSColor.black)
-                            TextTypes.Shadow4(px 10, px -10, px 20, CSSColor.red)
+                            TextTypes.Shadow4(px 1, px 1, px 2, CssColor.black)
+                            TextTypes.Shadow4(px 10, px -10, px 20, CssColor.red)
                           ]
                     ]
                     ["textShadow" ==> "1px 1px 2px #000000, 10px -10px 20px #ff0000"]

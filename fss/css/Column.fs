@@ -77,7 +77,7 @@ module Column =
 
     let private columnRuleColorToString (columnColor: IColumnRuleColor) =
         match columnColor with
-        | :? CSSColor as c -> CSSColorValue.color c
+        | :? CssColor as c -> CSSColorValue.color c
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column rule color"
 
@@ -115,6 +115,15 @@ module Column =
         static member Unset = Unset |> columnGapValue'
         static member Normal = Normal |> columnGapValue'
 
+    /// <summary>Sets gap width between element.</summary>
+    /// <param name="columnGap">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Normal </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ColumnGap' (columnGap: IColumnGap) = ColumnGap.Value(columnGap)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-span
@@ -132,6 +141,14 @@ module Column =
         static member Unset = Unset |> columnSpanValue'
         static member None = None |> columnSpanValue'
 
+    /// <summary>Sets gap width between element.</summary>
+    /// <param name="span">
+    ///     can be:
+    ///     - <c> ColumnSpan </c>
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ColumnSpan' (span: IColumnSpan) = ColumnSpan.Value(span)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/columns
@@ -147,6 +164,12 @@ module Column =
         static member Initial = Initial |> columnsValue'
         static member Unset = Unset |> columnsValue'
 
+    /// <summary>Resets columns.</summary>
+    /// <param name="columns">
+    ///     can be:
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Columns' (columns: IColumns) = columns |> Columns.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule
@@ -162,6 +185,12 @@ module Column =
         static member Initial = Initial |> columnRuleValue'
         static member Unset = Unset |> columnRuleValue'
 
+    /// <summary>Resets column rule.</summary>
+    /// <param name="rule">
+    ///     can be:
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ColumnRule' (rule: IColumnRule) = rule |> ColumnRule.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
@@ -180,6 +209,14 @@ module Column =
         static member Initial = Initial |> columnRuleWidthValue'
         static member Unset = Unset |> columnRuleWidthValue'
 
+    /// <summary>Specifies width of the line drawn between columns.</summary>
+    /// <param name="ruleWidth">
+    ///     can be:
+    ///     - <c> ColumnRuleWidth </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ColumnRuleWidth' (ruleWidth: IColumnRuleWidth) = ruleWidth |> ColumnRuleWidth.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-style
@@ -206,6 +243,14 @@ module Column =
         static member Initial = Initial |> styleValue'
         static member Unset = Unset |> styleValue'
 
+    /// <summary>Specifies style of the line drawn between columns.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> ColumnRuleStyle </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ColumnRuleStyle' (style: IColumnRuleStyle) = ColumnRuleStyle.Value(style)
 
      // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-color
@@ -217,161 +262,168 @@ module Column =
 
     type ColumnRuleColor =
         static member Value (color: IColumnRuleColor) = color |> columnRuleColorValue'
-        static member black = CSSColor.black |> columnRuleColorValue'
-        static member silver = CSSColor.silver |> columnRuleColorValue'
-        static member gray = CSSColor.gray |> columnRuleColorValue'
-        static member white = CSSColor.white |> columnRuleColorValue'
-        static member maroon = CSSColor.maroon |> columnRuleColorValue'
-        static member red = CSSColor.red |> columnRuleColorValue'
-        static member purple = CSSColor.purple |> columnRuleColorValue'
-        static member fuchsia = CSSColor.fuchsia |> columnRuleColorValue'
-        static member green = CSSColor.green |> columnRuleColorValue'
-        static member lime = CSSColor.lime |> columnRuleColorValue'
-        static member olive = CSSColor.olive |> columnRuleColorValue'
-        static member yellow = CSSColor.yellow |> columnRuleColorValue'
-        static member navy = CSSColor.navy |> columnRuleColorValue'
-        static member blue = CSSColor.blue |> columnRuleColorValue'
-        static member teal = CSSColor.teal |> columnRuleColorValue'
-        static member aqua = CSSColor.aqua |> columnRuleColorValue'
-        static member orange = CSSColor.orange |> columnRuleColorValue'
-        static member aliceBlue = CSSColor.aliceBlue |> columnRuleColorValue'
-        static member antiqueWhite = CSSColor.antiqueWhite |> columnRuleColorValue'
-        static member aquaMarine = CSSColor.aquaMarine |> columnRuleColorValue'
-        static member azure = CSSColor.azure |> columnRuleColorValue'
-        static member beige = CSSColor.beige |> columnRuleColorValue'
-        static member bisque = CSSColor.bisque |> columnRuleColorValue'
-        static member blanchedAlmond = CSSColor.blanchedAlmond |> columnRuleColorValue'
-        static member blueViolet = CSSColor.blueViolet |> columnRuleColorValue'
-        static member brown = CSSColor.brown |> columnRuleColorValue'
-        static member burlywood = CSSColor.burlywood |> columnRuleColorValue'
-        static member cadetBlue = CSSColor.cadetBlue |> columnRuleColorValue'
-        static member chartreuse = CSSColor.chartreuse |> columnRuleColorValue'
-        static member chocolate = CSSColor.chocolate |> columnRuleColorValue'
-        static member coral = CSSColor.coral |> columnRuleColorValue'
-        static member cornflowerBlue = CSSColor.cornflowerBlue |> columnRuleColorValue'
-        static member cornsilk = CSSColor.cornsilk |> columnRuleColorValue'
-        static member crimson = CSSColor.crimson |> columnRuleColorValue'
-        static member cyan = CSSColor.cyan |> columnRuleColorValue'
-        static member darkBlue = CSSColor.darkBlue |> columnRuleColorValue'
-        static member darkCyan = CSSColor.darkCyan |> columnRuleColorValue'
-        static member darkGoldenrod = CSSColor.darkGoldenrod |> columnRuleColorValue'
-        static member darkGray = CSSColor.darkGray |> columnRuleColorValue'
-        static member darkGreen = CSSColor.darkGreen |> columnRuleColorValue'
-        static member darkKhaki = CSSColor.darkKhaki |> columnRuleColorValue'
-        static member darkMagenta = CSSColor.darkMagenta |> columnRuleColorValue'
-        static member darkOliveGreen = CSSColor.darkOliveGreen |> columnRuleColorValue'
-        static member darkOrange = CSSColor.darkOrange |> columnRuleColorValue'
-        static member darkOrchid = CSSColor.darkOrchid |> columnRuleColorValue'
-        static member darkRed = CSSColor.darkRed |> columnRuleColorValue'
-        static member darkSalmon = CSSColor.darkSalmon |> columnRuleColorValue'
-        static member darkSeaGreen = CSSColor.darkSeaGreen |> columnRuleColorValue'
-        static member darkSlateBlue = CSSColor.darkSlateBlue |> columnRuleColorValue'
-        static member darkSlateGray = CSSColor.darkSlateGray |> columnRuleColorValue'
-        static member darkTurquoise = CSSColor.darkTurquoise |> columnRuleColorValue'
-        static member darkViolet = CSSColor.darkViolet |> columnRuleColorValue'
-        static member deepPink = CSSColor.deepPink |> columnRuleColorValue'
-        static member deepSkyBlue = CSSColor.deepSkyBlue |> columnRuleColorValue'
-        static member dimGrey = CSSColor.dimGrey |> columnRuleColorValue'
-        static member dodgerBlue = CSSColor.dodgerBlue |> columnRuleColorValue'
-        static member fireBrick = CSSColor.fireBrick |> columnRuleColorValue'
-        static member floralWhite = CSSColor.floralWhite |> columnRuleColorValue'
-        static member forestGreen = CSSColor.forestGreen |> columnRuleColorValue'
-        static member gainsboro = CSSColor.gainsboro |> columnRuleColorValue'
-        static member ghostWhite = CSSColor.ghostWhite |> columnRuleColorValue'
-        static member gold = CSSColor.gold |> columnRuleColorValue'
-        static member goldenrod = CSSColor.goldenrod |> columnRuleColorValue'
-        static member greenYellow = CSSColor.greenYellow |> columnRuleColorValue'
-        static member grey = CSSColor.grey |> columnRuleColorValue'
-        static member honeydew = CSSColor.honeydew |> columnRuleColorValue'
-        static member hotPink = CSSColor.hotPink |> columnRuleColorValue'
-        static member indianRed = CSSColor.indianRed |> columnRuleColorValue'
-        static member indigo = CSSColor.indigo |> columnRuleColorValue'
-        static member ivory = CSSColor.ivory |> columnRuleColorValue'
-        static member khaki = CSSColor.khaki |> columnRuleColorValue'
-        static member lavender = CSSColor.lavender |> columnRuleColorValue'
-        static member lavenderBlush = CSSColor.lavenderBlush |> columnRuleColorValue'
-        static member lawnGreen = CSSColor.lawnGreen |> columnRuleColorValue'
-        static member lemonChiffon = CSSColor.lemonChiffon |> columnRuleColorValue'
-        static member lightBlue = CSSColor.lightBlue |> columnRuleColorValue'
-        static member lightCoral = CSSColor.lightCoral |> columnRuleColorValue'
-        static member lightCyan = CSSColor.lightCyan |> columnRuleColorValue'
-        static member lightGoldenrodYellow = CSSColor.lightGoldenrodYellow |> columnRuleColorValue'
-        static member lightGray = CSSColor.lightGray |> columnRuleColorValue'
-        static member lightGreen = CSSColor.lightGreen |> columnRuleColorValue'
-        static member lightGrey = CSSColor.lightGrey |> columnRuleColorValue'
-        static member lightPink = CSSColor.lightPink |> columnRuleColorValue'
-        static member lightSalmon = CSSColor.lightSalmon |> columnRuleColorValue'
-        static member lightSeaGreen = CSSColor.lightSeaGreen |> columnRuleColorValue'
-        static member lightSkyBlue = CSSColor.lightSkyBlue |> columnRuleColorValue'
-        static member lightSlateGrey = CSSColor.lightSlateGrey |> columnRuleColorValue'
-        static member lightSteelBlue = CSSColor.lightSteelBlue |> columnRuleColorValue'
-        static member lightYellow = CSSColor.lightYellow |> columnRuleColorValue'
-        static member limeGreen = CSSColor.limeGreen |> columnRuleColorValue'
-        static member linen = CSSColor.linen |> columnRuleColorValue'
-        static member magenta = CSSColor.magenta |> columnRuleColorValue'
-        static member mediumAquamarine = CSSColor.mediumAquamarine |> columnRuleColorValue'
-        static member mediumBlue = CSSColor.mediumBlue |> columnRuleColorValue'
-        static member mediumOrchid = CSSColor.mediumOrchid |> columnRuleColorValue'
-        static member mediumPurple = CSSColor.mediumPurple |> columnRuleColorValue'
-        static member mediumSeaGreen = CSSColor.mediumSeaGreen |> columnRuleColorValue'
-        static member mediumSlateBlue = CSSColor.mediumSlateBlue |> columnRuleColorValue'
-        static member mediumSpringGreen = CSSColor.mediumSpringGreen |> columnRuleColorValue'
-        static member mediumTurquoise = CSSColor.mediumTurquoise |> columnRuleColorValue'
-        static member mediumVioletRed = CSSColor.mediumVioletRed |> columnRuleColorValue'
-        static member midnightBlue = CSSColor.midnightBlue |> columnRuleColorValue'
-        static member mintCream = CSSColor.mintCream |> columnRuleColorValue'
-        static member mistyRose = CSSColor.mistyRose |> columnRuleColorValue'
-        static member moccasin = CSSColor.moccasin |> columnRuleColorValue'
-        static member navajoWhite = CSSColor.navajoWhite |> columnRuleColorValue'
-        static member oldLace = CSSColor.oldLace |> columnRuleColorValue'
-        static member olivedrab = CSSColor.olivedrab |> columnRuleColorValue'
-        static member orangeRed = CSSColor.orangeRed |> columnRuleColorValue'
-        static member orchid = CSSColor.orchid |> columnRuleColorValue'
-        static member paleGoldenrod = CSSColor.paleGoldenrod |> columnRuleColorValue'
-        static member paleGreen = CSSColor.paleGreen |> columnRuleColorValue'
-        static member paleTurquoise = CSSColor.paleTurquoise |> columnRuleColorValue'
-        static member paleVioletred = CSSColor.paleVioletred |> columnRuleColorValue'
-        static member papayaWhip = CSSColor.papayaWhip |> columnRuleColorValue'
-        static member peachpuff = CSSColor.peachpuff |> columnRuleColorValue'
-        static member peru = CSSColor.peru |> columnRuleColorValue'
-        static member pink = CSSColor.pink |> columnRuleColorValue'
-        static member plum = CSSColor.plum |> columnRuleColorValue'
-        static member powderBlue = CSSColor.powderBlue |> columnRuleColorValue'
-        static member rosyBrown = CSSColor.rosyBrown |> columnRuleColorValue'
-        static member royalBlue = CSSColor.royalBlue |> columnRuleColorValue'
-        static member saddleBrown = CSSColor.saddleBrown |> columnRuleColorValue'
-        static member salmon = CSSColor.salmon |> columnRuleColorValue'
-        static member sandyBrown = CSSColor.sandyBrown |> columnRuleColorValue'
-        static member seaGreen = CSSColor.seaGreen |> columnRuleColorValue'
-        static member seaShell = CSSColor.seaShell |> columnRuleColorValue'
-        static member sienna = CSSColor.sienna |> columnRuleColorValue'
-        static member skyBlue = CSSColor.skyBlue |> columnRuleColorValue'
-        static member slateBlue = CSSColor.slateBlue |> columnRuleColorValue'
-        static member slateGray = CSSColor.slateGray |> columnRuleColorValue'
-        static member snow = CSSColor.snow |> columnRuleColorValue'
-        static member springGreen = CSSColor.springGreen |> columnRuleColorValue'
-        static member steelBlue = CSSColor.steelBlue |> columnRuleColorValue'
-        static member tan = CSSColor.tan |> columnRuleColorValue'
-        static member thistle = CSSColor.thistle |> columnRuleColorValue'
-        static member tomato = CSSColor.tomato |> columnRuleColorValue'
-        static member turquoise = CSSColor.turquoise |> columnRuleColorValue'
-        static member violet = CSSColor.violet |> columnRuleColorValue'
-        static member wheat = CSSColor.wheat |> columnRuleColorValue'
-        static member whiteSmoke = CSSColor.whiteSmoke |> columnRuleColorValue'
-        static member yellowGreen = CSSColor.yellowGreen |> columnRuleColorValue'
-        static member rebeccaPurple = CSSColor.rebeccaPurple |> columnRuleColorValue'
-        static member Rgb r g b = CSSColor.Rgb(r, g, b) |> columnRuleColorValue'
-        static member Rgba r g b a = CSSColor.Rgba(r, g, b, a) |> columnRuleColorValue'
-        static member Hex value = CSSColor.Hex value |> columnRuleColorValue'
-        static member Hsl h s l = CSSColor.Hsl(h, s, l) |> columnRuleColorValue'
-        static member Hsla h s l a  = CSSColor.Hsla (h, s, l, a) |> columnRuleColorValue'
-        static member transparent = CSSColor.transparent |> columnRuleColorValue'
-        static member currentColor = CSSColor.currentColor |> columnRuleColorValue'
+        static member black = CssColor.black |> columnRuleColorValue'
+        static member silver = CssColor.silver |> columnRuleColorValue'
+        static member gray = CssColor.gray |> columnRuleColorValue'
+        static member white = CssColor.white |> columnRuleColorValue'
+        static member maroon = CssColor.maroon |> columnRuleColorValue'
+        static member red = CssColor.red |> columnRuleColorValue'
+        static member purple = CssColor.purple |> columnRuleColorValue'
+        static member fuchsia = CssColor.fuchsia |> columnRuleColorValue'
+        static member green = CssColor.green |> columnRuleColorValue'
+        static member lime = CssColor.lime |> columnRuleColorValue'
+        static member olive = CssColor.olive |> columnRuleColorValue'
+        static member yellow = CssColor.yellow |> columnRuleColorValue'
+        static member navy = CssColor.navy |> columnRuleColorValue'
+        static member blue = CssColor.blue |> columnRuleColorValue'
+        static member teal = CssColor.teal |> columnRuleColorValue'
+        static member aqua = CssColor.aqua |> columnRuleColorValue'
+        static member orange = CssColor.orange |> columnRuleColorValue'
+        static member aliceBlue = CssColor.aliceBlue |> columnRuleColorValue'
+        static member antiqueWhite = CssColor.antiqueWhite |> columnRuleColorValue'
+        static member aquaMarine = CssColor.aquaMarine |> columnRuleColorValue'
+        static member azure = CssColor.azure |> columnRuleColorValue'
+        static member beige = CssColor.beige |> columnRuleColorValue'
+        static member bisque = CssColor.bisque |> columnRuleColorValue'
+        static member blanchedAlmond = CssColor.blanchedAlmond |> columnRuleColorValue'
+        static member blueViolet = CssColor.blueViolet |> columnRuleColorValue'
+        static member brown = CssColor.brown |> columnRuleColorValue'
+        static member burlywood = CssColor.burlywood |> columnRuleColorValue'
+        static member cadetBlue = CssColor.cadetBlue |> columnRuleColorValue'
+        static member chartreuse = CssColor.chartreuse |> columnRuleColorValue'
+        static member chocolate = CssColor.chocolate |> columnRuleColorValue'
+        static member coral = CssColor.coral |> columnRuleColorValue'
+        static member cornflowerBlue = CssColor.cornflowerBlue |> columnRuleColorValue'
+        static member cornsilk = CssColor.cornsilk |> columnRuleColorValue'
+        static member crimson = CssColor.crimson |> columnRuleColorValue'
+        static member cyan = CssColor.cyan |> columnRuleColorValue'
+        static member darkBlue = CssColor.darkBlue |> columnRuleColorValue'
+        static member darkCyan = CssColor.darkCyan |> columnRuleColorValue'
+        static member darkGoldenrod = CssColor.darkGoldenrod |> columnRuleColorValue'
+        static member darkGray = CssColor.darkGray |> columnRuleColorValue'
+        static member darkGreen = CssColor.darkGreen |> columnRuleColorValue'
+        static member darkKhaki = CssColor.darkKhaki |> columnRuleColorValue'
+        static member darkMagenta = CssColor.darkMagenta |> columnRuleColorValue'
+        static member darkOliveGreen = CssColor.darkOliveGreen |> columnRuleColorValue'
+        static member darkOrange = CssColor.darkOrange |> columnRuleColorValue'
+        static member darkOrchid = CssColor.darkOrchid |> columnRuleColorValue'
+        static member darkRed = CssColor.darkRed |> columnRuleColorValue'
+        static member darkSalmon = CssColor.darkSalmon |> columnRuleColorValue'
+        static member darkSeaGreen = CssColor.darkSeaGreen |> columnRuleColorValue'
+        static member darkSlateBlue = CssColor.darkSlateBlue |> columnRuleColorValue'
+        static member darkSlateGray = CssColor.darkSlateGray |> columnRuleColorValue'
+        static member darkTurquoise = CssColor.darkTurquoise |> columnRuleColorValue'
+        static member darkViolet = CssColor.darkViolet |> columnRuleColorValue'
+        static member deepPink = CssColor.deepPink |> columnRuleColorValue'
+        static member deepSkyBlue = CssColor.deepSkyBlue |> columnRuleColorValue'
+        static member dimGrey = CssColor.dimGrey |> columnRuleColorValue'
+        static member dodgerBlue = CssColor.dodgerBlue |> columnRuleColorValue'
+        static member fireBrick = CssColor.fireBrick |> columnRuleColorValue'
+        static member floralWhite = CssColor.floralWhite |> columnRuleColorValue'
+        static member forestGreen = CssColor.forestGreen |> columnRuleColorValue'
+        static member gainsboro = CssColor.gainsboro |> columnRuleColorValue'
+        static member ghostWhite = CssColor.ghostWhite |> columnRuleColorValue'
+        static member gold = CssColor.gold |> columnRuleColorValue'
+        static member goldenrod = CssColor.goldenrod |> columnRuleColorValue'
+        static member greenYellow = CssColor.greenYellow |> columnRuleColorValue'
+        static member grey = CssColor.grey |> columnRuleColorValue'
+        static member honeydew = CssColor.honeydew |> columnRuleColorValue'
+        static member hotPink = CssColor.hotPink |> columnRuleColorValue'
+        static member indianRed = CssColor.indianRed |> columnRuleColorValue'
+        static member indigo = CssColor.indigo |> columnRuleColorValue'
+        static member ivory = CssColor.ivory |> columnRuleColorValue'
+        static member khaki = CssColor.khaki |> columnRuleColorValue'
+        static member lavender = CssColor.lavender |> columnRuleColorValue'
+        static member lavenderBlush = CssColor.lavenderBlush |> columnRuleColorValue'
+        static member lawnGreen = CssColor.lawnGreen |> columnRuleColorValue'
+        static member lemonChiffon = CssColor.lemonChiffon |> columnRuleColorValue'
+        static member lightBlue = CssColor.lightBlue |> columnRuleColorValue'
+        static member lightCoral = CssColor.lightCoral |> columnRuleColorValue'
+        static member lightCyan = CssColor.lightCyan |> columnRuleColorValue'
+        static member lightGoldenrodYellow = CssColor.lightGoldenrodYellow |> columnRuleColorValue'
+        static member lightGray = CssColor.lightGray |> columnRuleColorValue'
+        static member lightGreen = CssColor.lightGreen |> columnRuleColorValue'
+        static member lightGrey = CssColor.lightGrey |> columnRuleColorValue'
+        static member lightPink = CssColor.lightPink |> columnRuleColorValue'
+        static member lightSalmon = CssColor.lightSalmon |> columnRuleColorValue'
+        static member lightSeaGreen = CssColor.lightSeaGreen |> columnRuleColorValue'
+        static member lightSkyBlue = CssColor.lightSkyBlue |> columnRuleColorValue'
+        static member lightSlateGrey = CssColor.lightSlateGrey |> columnRuleColorValue'
+        static member lightSteelBlue = CssColor.lightSteelBlue |> columnRuleColorValue'
+        static member lightYellow = CssColor.lightYellow |> columnRuleColorValue'
+        static member limeGreen = CssColor.limeGreen |> columnRuleColorValue'
+        static member linen = CssColor.linen |> columnRuleColorValue'
+        static member magenta = CssColor.magenta |> columnRuleColorValue'
+        static member mediumAquamarine = CssColor.mediumAquamarine |> columnRuleColorValue'
+        static member mediumBlue = CssColor.mediumBlue |> columnRuleColorValue'
+        static member mediumOrchid = CssColor.mediumOrchid |> columnRuleColorValue'
+        static member mediumPurple = CssColor.mediumPurple |> columnRuleColorValue'
+        static member mediumSeaGreen = CssColor.mediumSeaGreen |> columnRuleColorValue'
+        static member mediumSlateBlue = CssColor.mediumSlateBlue |> columnRuleColorValue'
+        static member mediumSpringGreen = CssColor.mediumSpringGreen |> columnRuleColorValue'
+        static member mediumTurquoise = CssColor.mediumTurquoise |> columnRuleColorValue'
+        static member mediumVioletRed = CssColor.mediumVioletRed |> columnRuleColorValue'
+        static member midnightBlue = CssColor.midnightBlue |> columnRuleColorValue'
+        static member mintCream = CssColor.mintCream |> columnRuleColorValue'
+        static member mistyRose = CssColor.mistyRose |> columnRuleColorValue'
+        static member moccasin = CssColor.moccasin |> columnRuleColorValue'
+        static member navajoWhite = CssColor.navajoWhite |> columnRuleColorValue'
+        static member oldLace = CssColor.oldLace |> columnRuleColorValue'
+        static member olivedrab = CssColor.olivedrab |> columnRuleColorValue'
+        static member orangeRed = CssColor.orangeRed |> columnRuleColorValue'
+        static member orchid = CssColor.orchid |> columnRuleColorValue'
+        static member paleGoldenrod = CssColor.paleGoldenrod |> columnRuleColorValue'
+        static member paleGreen = CssColor.paleGreen |> columnRuleColorValue'
+        static member paleTurquoise = CssColor.paleTurquoise |> columnRuleColorValue'
+        static member paleVioletred = CssColor.paleVioletred |> columnRuleColorValue'
+        static member papayaWhip = CssColor.papayaWhip |> columnRuleColorValue'
+        static member peachpuff = CssColor.peachpuff |> columnRuleColorValue'
+        static member peru = CssColor.peru |> columnRuleColorValue'
+        static member pink = CssColor.pink |> columnRuleColorValue'
+        static member plum = CssColor.plum |> columnRuleColorValue'
+        static member powderBlue = CssColor.powderBlue |> columnRuleColorValue'
+        static member rosyBrown = CssColor.rosyBrown |> columnRuleColorValue'
+        static member royalBlue = CssColor.royalBlue |> columnRuleColorValue'
+        static member saddleBrown = CssColor.saddleBrown |> columnRuleColorValue'
+        static member salmon = CssColor.salmon |> columnRuleColorValue'
+        static member sandyBrown = CssColor.sandyBrown |> columnRuleColorValue'
+        static member seaGreen = CssColor.seaGreen |> columnRuleColorValue'
+        static member seaShell = CssColor.seaShell |> columnRuleColorValue'
+        static member sienna = CssColor.sienna |> columnRuleColorValue'
+        static member skyBlue = CssColor.skyBlue |> columnRuleColorValue'
+        static member slateBlue = CssColor.slateBlue |> columnRuleColorValue'
+        static member slateGray = CssColor.slateGray |> columnRuleColorValue'
+        static member snow = CssColor.snow |> columnRuleColorValue'
+        static member springGreen = CssColor.springGreen |> columnRuleColorValue'
+        static member steelBlue = CssColor.steelBlue |> columnRuleColorValue'
+        static member tan = CssColor.tan |> columnRuleColorValue'
+        static member thistle = CssColor.thistle |> columnRuleColorValue'
+        static member tomato = CssColor.tomato |> columnRuleColorValue'
+        static member turquoise = CssColor.turquoise |> columnRuleColorValue'
+        static member violet = CssColor.violet |> columnRuleColorValue'
+        static member wheat = CssColor.wheat |> columnRuleColorValue'
+        static member whiteSmoke = CssColor.whiteSmoke |> columnRuleColorValue'
+        static member yellowGreen = CssColor.yellowGreen |> columnRuleColorValue'
+        static member rebeccaPurple = CssColor.rebeccaPurple |> columnRuleColorValue'
+        static member Rgb r g b = CssColor.Rgb(r, g, b) |> columnRuleColorValue'
+        static member Rgba r g b a = CssColor.Rgba(r, g, b, a) |> columnRuleColorValue'
+        static member Hex value = CssColor.Hex value |> columnRuleColorValue'
+        static member Hsl h s l = CssColor.Hsl(h, s, l) |> columnRuleColorValue'
+        static member Hsla h s l a  = CssColor.Hsla (h, s, l, a) |> columnRuleColorValue'
+        static member transparent = CssColor.transparent |> columnRuleColorValue'
+        static member currentColor = CssColor.currentColor |> columnRuleColorValue'
 
         static member Inherit = Inherit |> columnRuleColorValue'
         static member Initial = Initial |> columnRuleColorValue'
         static member Unset = Unset |> columnRuleColorValue'
 
+    /// <summary>Specifies color of the line drawn between columns.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> CssColor </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ColumnRuleColor' (color: IColumnRuleColor) = ColumnRuleColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-count
@@ -388,6 +440,14 @@ module Column =
         static member Initial = Initial |> columnCountValue'
         static member Unset = Unset |> columnCountValue'
 
+    /// <summary>Specifies number of column to break content into.</summary>
+    /// <param name="columnCount">
+    ///     can be:
+    ///     - <c> CssInt </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ColumnCount' (columnCount: IColumnCount) = ColumnCount.Value(columnCount)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill
@@ -406,6 +466,14 @@ module Column =
         static member Initial = Initial |> columnFillValue'
         static member Unset = Unset |> columnFillValue'
 
+    /// <summary>Specifies how content fills columns.</summary>
+    /// <param name="columnFill">
+    ///     can be:
+    ///     - <c> ColumnFill </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ColumnFill' (columnFill: IColumnFill) = ColumnFill.Value(columnFill)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
@@ -422,4 +490,12 @@ module Column =
         static member Initial = Initial |> columnWidthValue'
         static member Unset = Unset |> columnWidthValue'
 
+    /// <summary>Specifies width of line drawn between column.</summary>
+    /// <param name="columnWidth">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ColumnWidth' (columnWidth: IColumnWidth) = ColumnWidth.Value(columnWidth)

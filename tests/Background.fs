@@ -23,7 +23,7 @@ module Background =
                     [ "backgroundImage" ==> "url(image.png)" ]
                 test
                     "background as linear gradient"
-                    [ BackgroundImage.LinearGradient (deg 45., CSSColor.red, CSSColor.blue)  ]
+                    [ BackgroundImage.LinearGradient (deg 45., CssColor.red, CssColor.blue)  ]
                     ["backgroundImage" ==> "linear-gradient(45.00deg, #ff0000, #0000ff)"]
                 test
                     "background as circular radial gradient"
@@ -31,135 +31,135 @@ module Background =
                     [ "backgroundImage" ==> "radial-gradient(circle, #ffff00, #f06d06)"]
                 test
                     "background as Ellipse radial gradient"
-                    [ BackgroundImage.RadialGradient (Ellipse, CSSColor.yellow, CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient (Ellipse, CssColor.yellow, CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circleside closest corner"
-                    [ BackgroundImage.RadialGradient(Circle, ClosestCorner, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(Circle, ClosestCorner, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-corner, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circleside closest side"
-                    [ BackgroundImage.RadialGradient(Circle, ClosestSide, CSSColor.yellow, CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(Circle, ClosestSide, CssColor.yellow, CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-side, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circleside farthest corner"
-                    [ BackgroundImage.RadialGradient(Circle, FarthestCorner, CSSColor.yellow, CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(Circle, FarthestCorner, CssColor.yellow, CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-corner, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circleside farthest side"
-                    [ BackgroundImage.RadialGradient(Circle, FarthestSide, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(Circle, FarthestSide, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-side, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circleside closest corner"
-                    [ BackgroundImage.RadialGradient(Circle, ClosestCorner, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(Circle, ClosestCorner, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-corner, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circleside closest side"
-                    [ BackgroundImage.RadialGradient(Circle, ClosestSide, CSSColor.yellow, CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(Circle, ClosestSide, CssColor.yellow, CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-side, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circleside farthest corner"
-                    [ BackgroundImage.RadialGradient(Circle, FarthestCorner, CSSColor.yellow, CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(Circle, FarthestCorner, CssColor.yellow, CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-corner, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circleside farthest side"
-                    [ BackgroundImage.RadialGradient(Circle, FarthestSide, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(Circle, FarthestSide, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-side, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at top"
-                    [ BackgroundImage.RadialGradient(CircleAt AtTop, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtTop, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at top, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at top right"
-                    [ BackgroundImage.RadialGradient(CircleAt AtTopRight, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtTopRight, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at top right, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at top left"
-                    [ BackgroundImage.RadialGradient(CircleAt AtTopLeft, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtTopLeft, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at top left, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at top center"
-                    [ BackgroundImage.RadialGradient(CircleAt AtTopCenter, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtTopCenter, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at top center, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at bottom"
-                    [ BackgroundImage.RadialGradient(CircleAt AtBottom, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtBottom, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at bottom, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at bottom right"
-                    [ BackgroundImage.RadialGradient(CircleAt AtBottomRight, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtBottomRight, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at bottom right, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at bottom left"
-                    [ BackgroundImage.RadialGradient(CircleAt AtBottomLeft, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtBottomLeft, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at bottom left, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at bottom center"
-                    [ BackgroundImage.RadialGradient(CircleAt AtBottomCenter, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtBottomCenter, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at bottom center, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at center"
-                    [ BackgroundImage.RadialGradient(CircleAt AtCenter, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtCenter, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at center, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at center right"
-                    [ BackgroundImage.RadialGradient(CircleAt AtCenterRight, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtCenterRight, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at center right, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at center left"
-                    [ BackgroundImage.RadialGradient(CircleAt AtCenterLeft, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtCenterLeft, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at center left, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Circle at center bottom"
-                    [ BackgroundImage.RadialGradient(CircleAt AtCenterBottom, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(CircleAt AtCenterBottom, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(circle at center bottom, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at top"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtTop, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtTop, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at top, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at top right"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtTopRight, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtTopRight, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at top right, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at top left"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtTopLeft, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtTopLeft, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at top left, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at top center"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtTopCenter, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtTopCenter, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at top center, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at bottom"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtBottom, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtBottom, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at bottom, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at bottom right"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtBottomRight, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtBottomRight, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at bottom right, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at bottom left"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtBottomLeft, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtBottomLeft, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at bottom left, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at bottom center"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtBottomCenter, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtBottomCenter, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at bottom center, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at center"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtCenter, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtCenter, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at center, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at center right"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtCenterRight, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtCenterRight, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at center right, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at center left"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtCenterLeft, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtCenterLeft, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at center left, #ffff00, #f06d06)"]
                 test
                     "background as radial gradient Ellipse at center bottom"
-                    [ BackgroundImage.RadialGradient(EllipseAt AtCenterBottom, CSSColor.Hex "ffff00", CSSColor.Hex "f06d06") ]
+                    [ BackgroundImage.RadialGradient(EllipseAt AtCenterBottom, CssColor.Hex "ffff00", CssColor.Hex "f06d06") ]
                     [ "backgroundImage" ==> "radial-gradient(ellipse at center bottom, #ffff00, #f06d06)"]
                 test
                     "background position to top"

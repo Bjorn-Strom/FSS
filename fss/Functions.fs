@@ -63,17 +63,17 @@ module Functions =
         FontTypes.FontName fontFamily
 
     // Image
-    let stop (color: CSSColor) (stop: ILengthPercentage) = ColorStop(color, stop) :> IColorStop
-    let stop2 (color: CSSColor) (stop1: ILengthPercentage) (stop2: ILengthPercentage) = ColorStop2(color, stop1, stop2) :> IColorStop
+    let stop (color: CssColor) (stop: ILengthPercentage) = ColorStop(color, stop) :> IColorStop
+    let stop2 (color: CssColor) (stop1: ILengthPercentage) (stop2: ILengthPercentage) = ColorStop2(color, stop1, stop2) :> IColorStop
 
     // Color
-    let rgb (r: int) (g: int) (b: int) = CSSColor.Rgb(r,g,b)
-    let rgba (r: int) (g: int) (b: int) (a: float) = CSSColor.Rgba(r,g,b,a)
+    let rgb (r: int) (g: int) (b: int) = CssColor.Rgb(r,g,b)
+    let rgba (r: int) (g: int) (b: int) (a: float) = CssColor.Rgba(r,g,b,a)
 
-    let hex (value: string) = CSSColor.Hex value
+    let hex (value: string) = CssColor.Hex value
 
-    let hsl (h: int) (s: float) (l: float) = CSSColor.Hsl(h,s,l)
-    let hsla (h: int) (s: float) (l: float) (a: float) = CSSColor.Hsla(h,s,l,a)
+    let hsl (h: int) (s: float) (l: float) = CssColor.Hsl(h,s,l)
+    let hsla (h: int) (s: float) (l: float) (a: float) = CssColor.Hsla(h,s,l,a)
 
     // Sizes
     // Absolute

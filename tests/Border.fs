@@ -195,7 +195,7 @@ module Border =
                     [ "borderColor" ==> "unset" ]
                 test
                     "Border colors multiple"
-                    [ BorderColor.Value (CSSColor.red, CSSColor.green, CSSColor.blue, CSSColor.white) ]
+                    [ BorderColor.Value (CssColor.red, CssColor.green, CssColor.blue, CssColor.white) ]
                     [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
                 test
                     "Border top color rgb"
@@ -263,7 +263,7 @@ module Border =
                     [ "borderImageSource" ==> "url(image.jpg)" ]
                 test
                     "Border image source linear gradient"
-                    [ BorderImageSource.LinearGradient(ToTop, CSSColor.red, CSSColor.yellow) ]
+                    [ BorderImageSource.LinearGradient(ToTop, CssColor.red, CssColor.yellow) ]
                     [ "borderImageSource" ==> "linear-gradient(to top, #ff0000, #ffff00)" ]
                 test
                     "Border image source inherit"

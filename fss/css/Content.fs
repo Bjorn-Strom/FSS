@@ -63,7 +63,7 @@ module Content =
             contentValue <| Image.Image.LinearGradient(angle, colors)
         static member LinearGradient (sideOrCorner: SideOrCorner, colors: IColorStop list) =
             contentValue <| Image.Image.LinearGradient(sideOrCorner, colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CSSColor list) =
+        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CssColor list) =
             contentValue <| Image.Image.LinearGradient(sideOrCorner, colors)
 
         static member RepeatingLinearGradient (start: IColorStop, last: IColorStop) =

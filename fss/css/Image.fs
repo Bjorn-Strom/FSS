@@ -44,8 +44,8 @@ module ImageTypes =
         | EllipseAt of ImagePosition
 
     type ColorStop =
-        | ColorStop of CSSColor * ILengthPercentage
-        | ColorStop2 of (CSSColor * ILengthPercentage * ILengthPercentage)
+        | ColorStop of CssColor * ILengthPercentage
+        | ColorStop2 of (CssColor * ILengthPercentage * ILengthPercentage)
         interface IColorStop
 
 module Image =
@@ -70,7 +70,7 @@ module Image =
                 | ColorStop2 (c, s1, s2) -> sprintf "%s %s %s" (CSSColorValue.color c) (Units.LengthPercentage.value s1) (Units.LengthPercentage.value s2)
 
         match colorStop with
-        | :? CSSColor as c -> CSSColorValue.color c
+        | :? CssColor as c -> CSSColorValue.color c
         | :? ColorStop as cs -> stringifyColorStop cs
         | _ -> "Unknown color and stop"
 
@@ -100,7 +100,7 @@ module Image =
              sprintf "linear-gradient(%s, %s)"
                 (sideOrCornerValue sideOrCorner)
                 (Utilities.Helpers.combineComma colorAndStopToString colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CSSColor list) =
+        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CssColor list) =
              sprintf "linear-gradient(%s, %s)"
                 (sideOrCornerValue sideOrCorner)
                 (Utilities.Helpers.combineComma CSSColorValue.color colors)
