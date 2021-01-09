@@ -149,6 +149,15 @@ module Border =
         static member Initial = Initial |> borderValue'
         static member Unset = Unset |> borderValue'
 
+    /// <summary>Resets border.</summary>
+    /// <param name="border">
+    ///     can be:
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let Border' border = border |> Border.Value
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
     let private radiusValue value = PropertyValue.cssValue Property.BorderRadius value
     let private radiusValue' value =
@@ -183,6 +192,14 @@ module Border =
         static member Initial = Initial |> radiusValue'
         static member Unset = Unset |> radiusValue'
 
+    /// <summary>Specifies roundness of border edge.</summary>
+    /// <param name="radius">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderRadius' (radius: IBorderRadius) = BorderRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
@@ -200,6 +217,14 @@ module Border =
         static member Initial = Initial |> bottomLeftRadiusValue'
         static member Unset = Unset |> bottomLeftRadiusValue'
 
+    /// <summary>Specifies roundness of bottom left corner.</summary>
+    /// <param name="radius">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderBottomLeftRadius' (radius: IBorderRadius) = BorderBottomLeftRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
@@ -217,6 +242,14 @@ module Border =
         static member Initial = Initial |> bottomRightRadiusValue'
         static member Unset = Unset |> bottomRightRadiusValue'
 
+    /// <summary>Specifies roundness of bottom right corner.</summary>
+    /// <param name="radius">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderBottomRightRadius' (radius: IBorderRadius) = BorderBottomRightRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
@@ -234,6 +267,14 @@ module Border =
         static member Initial = Initial |> topLeftRadiusValue'
         static member Unset = Unset |> topLeftRadiusValue'
 
+    /// <summary>Specifies roundness of top left corner.</summary>
+    /// <param name="radius">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderTopLeftRadius' (radius: IBorderRadius) = BorderTopLeftRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
@@ -251,6 +292,14 @@ module Border =
         static member Initial = Initial |> topRightRadiusValue'
         static member Unset = Unset |> topRightRadiusValue'
 
+    /// <summary>Specifies roundness of top right corner.</summary>
+    /// <param name="radius">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderTopRightRadius' (radius: IBorderRadius) = BorderTopRightRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
@@ -289,6 +338,14 @@ module Border =
         static member Initial = Initial |> widthValue'
         static member Unset = Unset |> widthValue'
 
+    /// <summary>Specifies width of border.</summary>
+    /// <param name="width">
+    ///     can be:
+    ///     - <c> BorderWidth </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderWidth' (width: IBorderWidth) = BorderWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width
@@ -307,6 +364,14 @@ module Border =
         static member Initial = Initial |> topWidthValue
         static member Unset = Unset |> topWidthValue
 
+    /// <summary>Specifies width of top border.</summary>
+    /// <param name="width">
+    ///     can be:
+    ///     - <c> BorderWidth </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderTopWidth' (width: IBorderWidth) = BorderTopWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width
@@ -325,6 +390,14 @@ module Border =
         static member Initial = Initial |> rightWidthValue
         static member Unset = Unset |> rightWidthValue
 
+    /// <summary>Specifies width of right border.</summary>
+    /// <param name="width">
+    ///     can be:
+    ///     - <c> BorderWidth </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderRightWidth' (width: IBorderWidth) = BorderRightWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width
@@ -343,6 +416,14 @@ module Border =
         static member Initial = Initial |> bottomWidthValue
         static member Unset = Unset |> bottomWidthValue
 
+    /// <summary>Specifies width of bottom border.</summary>
+    /// <param name="width">
+    ///     can be:
+    ///     - <c> BorderWidth </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderBottomWidth' (width: IBorderWidth) = BorderBottomWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width
@@ -361,6 +442,14 @@ module Border =
         static member Initial = Initial |> leftWidthValue
         static member Unset = Unset |> leftWidthValue
 
+    /// <summary>Specifies width of left border.</summary>
+    /// <param name="width">
+    ///     can be:
+    ///     - <c> BorderWidth </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderLeftWidth' (width: IBorderWidth) = BorderLeftWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
@@ -406,6 +495,14 @@ module Border =
         static member Initial = Initial |> styleValue'
         static member Unset = Unset |> styleValue'
 
+    /// <summary>Specifies style of border.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> BorderStyle </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderStyle' (style: IBorderStyle) = BorderStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style
@@ -432,6 +529,14 @@ module Border =
         static member Initial = Initial |> topStyleValue'
         static member Unset = Unset |> topStyleValue'
 
+    /// <summary>Specifies style of top border.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> BorderStyle </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderTopStyle' (style: IBorderStyle) = BorderTopStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style
@@ -458,6 +563,14 @@ module Border =
         static member Initial = Initial |> rightStyleValue'
         static member Unset = Unset |> rightStyleValue'
 
+    /// <summary>Specifies style of right border.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> BorderStyle </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderRightStyle' (style: IBorderStyle) = BorderRightStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style
@@ -484,6 +597,14 @@ module Border =
         static member Initial = Initial |> bottomStyleValue'
         static member Unset = Unset |> bottomStyleValue'
 
+    /// <summary>Specifies style of bottom border.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> BorderStyle </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderBottomStyle' (style: IBorderStyle) = BorderBottomStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style
@@ -510,6 +631,14 @@ module Border =
         static member Initial = Initial |> leftStyleValue'
         static member Unset = Unset |> leftStyleValue'
 
+    /// <summary>Specifies style of left border.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> BorderStyle </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderLeftStyle' (style: IBorderStyle) = BorderLeftStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
@@ -528,6 +657,13 @@ module Border =
         static member Initial = Initial |> collapseValue'
         static member Unset = Unset |> collapseValue'
 
+    /// <summary>Specifies whether cells inside a table have shared borders.</summary>
+    /// <param name="collapse">
+    ///     can be:
+    ///     - <c> BorderCollapse </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderCollapse' (collapse: IBorderCollapse) =  BorderCollapse.Value(collapse)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
@@ -559,6 +695,15 @@ module Border =
         static member Initial = Initial |> imageOutsetValue'
         static member Unset = Unset |> imageOutsetValue'
 
+    /// <summary>Specifies distance between elements border and border box.</summary>
+    /// <param name="outset">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> BorderImageOutset </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderImageOutset' (outset: IBorderImageOutset) =  BorderImageOutset.Value(outset)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
@@ -581,6 +726,13 @@ module Border =
         static member Initial = Initial |> imageRepeatValue'
         static member Unset = Unset |> imageRepeatValue'
 
+    /// <summary>Specifies how border image surrounds border box.</summary>
+    /// <param name="repeat">
+    ///     can be:
+    ///     - <c> BorderImageRepeat </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderImageRepeat' (repeat: IBorderRepeat) = BorderImageRepeat.Value(repeat)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
@@ -613,6 +765,15 @@ module Border =
         static member Initial = Initial |> imageSliceValue'
         static member Unset = Unset |> imageSliceValue'
 
+    /// <summary>Specifies how border image is divided into regions.</summary>
+    /// <param name="slice">
+    ///     can be:
+    ///     - <c> BorderImageSlice </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderImageSlice' (slice: IBorderImageSlice) = BorderImageSlice.Value(slice)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-color
@@ -797,6 +958,13 @@ module Border =
         static member Initial = Initial |> borderColorValue'
         static member Unset = Unset |> borderColorValue'
 
+    /// <summary>Specifies color of border.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> CssColor </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderColor' (color: IBorderColor) = BorderColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color
@@ -962,6 +1130,13 @@ module Border =
         static member Initial = Initial |> topColorValue'
         static member Unset = Unset |> topColorValue'
 
+    /// <summary>Specifies color of top border.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> CssColor </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderTopColor' (color: IBorderColor) = BorderTopColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
@@ -1127,6 +1302,13 @@ module Border =
         static member Initial = Initial |> rightColorValue'
         static member Unset = Unset |> rightColorValue'
 
+    /// <summary>Specifies color of right border.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> CssColor </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderRightColor' (color: IBorderColor) = BorderRightColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color
@@ -1292,6 +1474,13 @@ module Border =
         static member Initial = Initial |> bottomColorValue'
         static member Unset = Unset |> bottomColorValue'
 
+    /// <summary>Specifies color of bottom border.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> CssColor </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderBottomColor' (color: IBorderColor) = BorderBottomColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color
@@ -1457,6 +1646,13 @@ module Border =
         static member Initial = Initial |> leftColorValue'
         static member Unset = Unset |> leftColorValue'
 
+    /// <summary>Specifies color of left border.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> CssColor </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderLeftColor' (color: IBorderColor) = BorderLeftColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing
@@ -1477,6 +1673,14 @@ module Border =
         static member Initial = Initial |> spacingValue'
         static member Unset = Unset |> spacingValue'
 
+    /// <summary>Specifies distance borders of table cells.</summary>
+    /// <param name="spacing">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderSpacing' (spacing: IBorderSpacing) = BorderSpacing.Value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
@@ -1511,6 +1715,16 @@ module Border =
         static member Initial = Initial |> imageWidthValue'
         static member Unset = Unset |> imageWidthValue'
 
+    /// <summary>Specifies width of border image.</summary>
+    /// <param name="width">
+    ///     can be:
+    ///     - <c> CssFloat </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderImageWidth' (width: IBorderImageWidth) = BorderImageWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
@@ -1593,4 +1807,12 @@ module Border =
         static member Initial = Initial |> imageValue'
         static member Unset = Unset |> imageValue'
 
+    /// <summary>Specifies width of border image.</summary>
+    /// <param name="source">
+    ///     can be:
+    ///     - <c> Image </c>
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BorderImageSource' (source: IBorderImageSource) = BorderImageSource.Value(source)
