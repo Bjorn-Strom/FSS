@@ -1,7 +1,7 @@
 namespace Fss
 
 module VisibilityType =
-    type VisibilityType =
+    type Visibility =
         | Visible
         | Hidden
         | Collapse
@@ -9,7 +9,7 @@ module VisibilityType =
 
     let visibilityToString (visibility: IVisibility) =
         match visibility with
-        | :? VisibilityType as v -> Utilities.Helpers.duToLowercase v
+        | :? Visibility as v -> Utilities.Helpers.duToLowercase v
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown visibility"
 
@@ -34,6 +34,13 @@ module Visibility =
         static member Initial = Initial |> visibilityValue'
         static member Unset = Unset |> visibilityValue'
 
+    /// <summary>Specifies if an element is visible.</summary>
+    /// <param name="visibility">
+    ///     can be:
+    ///     - <c> Visibility </c> 
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Visibility' (visibility: IVisibility) = Visibility.Value(visibility)
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
@@ -44,6 +51,9 @@ module Opacity =
             PropertyValue.cssValue Property.Opacity
             <| string (Utilities.Helpers.clamp 0.0 1.0 value)
 
+    /// <summary>Specifies the opacity of an element.</summary>
+    /// <param name="opacity"> </param>
+    /// <returns>Css property for fss.</returns>
     let Opacity' (opacity: float) = Opacity.Value(opacity)
 
 module PaintOrderTypes =
@@ -88,5 +98,12 @@ module PaintOrder =
         static member Fill = Fill |> paintOrderValue'
         static member Normal = Normal |> paintOrderValue'
 
+    /// <summary>Specifies in which order the fill and strokes are drawn.</summary>
+    /// <param name="order">
+    ///     can be:
+    ///     - <c> PaintOrder </c> 
+    ///     - <c> Normal </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let PaintOrder' (order: IPaintOrder) = PaintOrder.Value(order)
 
