@@ -50,6 +50,15 @@ module ContentSize =
         static member Initial = Initial |> widthValue'
         static member Unset = Unset |> widthValue'
 
+    /// <summary>Specifies width of element.</summary>
+    /// <param name="width">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Width' (size: ILengthPercentage) = Width.Value(size)
 
     let private minWidthValue value = PropertyValue.cssValue Property.MinWidth value
@@ -72,6 +81,15 @@ module ContentSize =
         static member Initial = Initial |> minWidthValue'
         static member Unset = Unset |> minWidthValue'
 
+    /// <summary>Specifies minimum width of element.</summary>
+    /// <param name="minWidth">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let MinWidth' (minWidth: ILengthPercentage) = MinWidth.Value(minWidth)
 
     let private maxWidthValue value = PropertyValue.cssValue Property.MaxWidth value
@@ -94,6 +112,15 @@ module ContentSize =
         static member Initial = Initial |> maxWidthValue'
         static member Unset = Unset |> maxWidthValue'
 
+    /// <summary>Specifies maximum width of element.</summary>
+    /// <param name="maxWidth">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let MaxWidth' (maxWidth: ILengthPercentage) = MaxWidth.Value(maxWidth)
 
     let private heightValue value = PropertyValue.cssValue Property.Height value
@@ -116,6 +143,15 @@ module ContentSize =
         static member Initial = Initial |> heightValue'
         static member Unset = Unset |> heightValue'
 
+    /// <summary>Specifies height of element.</summary>
+    /// <param name="height">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Height' (height: ILengthPercentage) = Height.Value(height)
 
     let private minHeightValue value = PropertyValue.cssValue Property.MinHeight value
@@ -138,6 +174,15 @@ module ContentSize =
         static member Initial = Initial |> minHeightValue'
         static member Unset = Unset |> minHeightValue'
 
+    /// <summary>Specifies min height of element.</summary>
+    /// <param name="minHeight">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let MinHeight' (minHeight: ILengthPercentage) = MinHeight.Value(minHeight)
 
     let private maxHeightValue value = PropertyValue.cssValue Property.MaxHeight value
@@ -160,4 +205,13 @@ module ContentSize =
         static member Initial = Initial |> maxHeightValue'
         static member Unset = Unset |> maxHeightValue'
 
+    /// <summary>Specifies max height of element.</summary>
+    /// <param name="maxHeight">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let MaxHeight' (maxHeight: ILengthPercentage) = MaxHeight.Value(maxHeight)
