@@ -43,6 +43,15 @@ module Margin =
         static member Initial = Initial |> marginValue'
         static member Unset = Unset |> marginValue'
 
+    /// <summary>Specifies the margin on all sides of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Margin' (margin: IMargin) = Margin.Value(margin)
 
     let private marginTopValue value = PropertyValue.cssValue Property.MarginTop value
@@ -57,6 +66,15 @@ module Margin =
         static member Initial = Initial |> marginTopValue'
         static member Unset = Unset |> marginTopValue'
 
+    /// <summary>Specifies the margin on top side of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let MarginTop' (top: IMargin) = MarginTop.Value(top)
 
     let private marginRightValue value = PropertyValue.cssValue Property.MarginRight value
@@ -64,6 +82,16 @@ module Margin =
         value
         |> marginToString
         |> marginRightValue
+
+    /// <summary>Specifies the margin on right side of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     type MarginRight =
         static member Value (right: IMargin) = right |> marginRightValue'
         static member Auto = Auto |> marginRightValue'
@@ -83,6 +111,16 @@ module Margin =
         static member Inherit = Inherit |> marginBottomValue'
         static member Initial = Initial |> marginBottomValue'
         static member Unset = Unset |> marginBottomValue'
+    
+    /// <summary>Specifies the margin on bottom side of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let MarginBottom' (bottom: IMargin) = MarginBottom.Value(bottom)
 
     let private marginLeftValue value = PropertyValue.cssValue Property.MarginLeft value
@@ -90,6 +128,16 @@ module Margin =
         value
         |> marginToString
         |> marginLeftValue
+
+    /// <summary>Specifies the margin on left side of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     type MarginLeft =
         static member Value (left: IMargin) = left |> marginLeftValue'
         static member Auto = Auto |> marginLeftValue'
@@ -140,6 +188,13 @@ module ScrollMargin =
         static member Initial = Initial |> scrollMarginValue'
         static member Unset = Unset |> scrollMarginValue'
 
+    /// <summary>Specifies the scroll margin on all sides of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ScrollMargin' (scrollMargin: IScrollMargin) = ScrollMargin.Value(scrollMargin)
 
     let private scrollMarginTopValue value = PropertyValue.cssValue Property.ScrollMarginTop value
@@ -153,6 +208,13 @@ module ScrollMargin =
         static member Initial = Initial |> scrollMarginTopValue'
         static member Unset = Unset |> scrollMarginTopValue'
 
+    /// <summary>Specifies the scroll margin on top side of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ScrollMarginTop' (top: IScrollMargin) = ScrollMarginTop.Value(top)
 
     let private scrollMarginRightValue value = PropertyValue.cssValue Property.ScrollMarginRight value
@@ -165,6 +227,14 @@ module ScrollMargin =
         static member Inherit = Inherit |> scrollMarginRightValue'
         static member Initial = Initial |> scrollMarginRightValue'
         static member Unset = Unset |> scrollMarginRightValue'
+
+    /// <summary>Specifies the scroll margin on right side of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ScrollMarginRight' (right: IScrollMargin) = ScrollMarginRight.Value(right)
 
     let private scrollMarginBottomValue value = PropertyValue.cssValue Property.ScrollMarginBottom value
@@ -177,6 +247,13 @@ module ScrollMargin =
         static member Inherit = Inherit |> scrollMarginBottomValue'
         static member Initial = Initial |> scrollMarginBottomValue'
         static member Unset = Unset |> scrollMarginBottomValue'
+    /// <summary>Specifies the scroll margin on bottom side of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ScrollMarginBottom' (bottom: IScrollMargin) = ScrollMarginBottom.Value(bottom)
 
     let private scrollMarginLeftValue value = PropertyValue.cssValue Property.ScrollMarginLeft value
@@ -190,4 +267,11 @@ module ScrollMargin =
         static member Initial = Initial |> scrollMarginLeftValue'
         static member Unset = Unset |> scrollMarginLeftValue'
 
+    /// <summary>Specifies the scroll margin on left side of an element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let ScrollMarginLeft' (left: IScrollMargin) = ScrollMarginLeft.Value(left)
