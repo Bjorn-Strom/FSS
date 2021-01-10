@@ -139,6 +139,14 @@ module Transform =
         static member Initial = Initial |> transformValue'
         static member Unset = Unset |> transformValue'
 
+    /// <summary>Specify transformation of element.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Transform </c>
+    ///     - <c> None </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Transform' (transform: ITransform) = Transform.Value(transform)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
@@ -171,4 +179,13 @@ module Transform =
         static member Initial = Initial |> originValue'
         static member Unset = Unset |> originValue'
 
+    /// <summary>Specifies the origin of an elements transformation.</summary>
+    /// <param name="origin">
+    ///     can be:
+    ///     - <c> TransformOrigin </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let TransformOrigin' (origin: ITransformOrigin) = TransformOrigin.Value(origin)
