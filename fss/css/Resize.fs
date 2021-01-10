@@ -38,4 +38,12 @@ module Resize =
         static member Inherit = Inherit |> resizeValue'
         static member Unset = Unset |> resizeValue'
 
+    /// <summary>Specifies how elemnts are resizable.</summary>
+    /// <param name="resize">
+    ///     can be:
+    ///     - <c> Resize </c>
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Resize' (resize: IResize) = Resize.Value resize
