@@ -56,6 +56,14 @@ module Overflow =
         static member Initial = Initial |> overflowValue'
         static member Unset = Unset |> overflowValue'
 
+    /// <summary>Specifies overflow behavior.</summary>
+    /// <param name="overflow">
+    ///     can be:
+    ///     - <c> Overflow </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Overflow' (overflow: IOverflow) = Overflow.Value(overflow)
 
     let private overflowXValue value = PropertyValue.cssValue Property.OverflowX value
@@ -76,6 +84,14 @@ module Overflow =
         static member Initial = Initial |> overflowXValue'
         static member Unset = Unset |> overflowXValue'
 
+    /// <summary>Specifies overflow left and right edge behavior.</summary>
+    /// <param name="overflow">
+    ///     can be:
+    ///     - <c> Overflow </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let OverflowX' (overflow: IOverflow) = OverflowX.Value(overflow)
 
     let private overflowYValue value = PropertyValue.cssValue Property.OverflowY value
@@ -96,6 +112,14 @@ module Overflow =
         static member Initial = Initial |> overflowYValue'
         static member Unset = Unset |> overflowYValue'
 
+    /// <summary>Specifies overflow top and bottom edge behavior.</summary>
+    /// <param name="overflow">
+    ///     can be:
+    ///     - <c> Overflow </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let OverflowY' (overflow: IOverflow) = OverflowY.Value(overflow)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
@@ -115,4 +139,12 @@ module Overflow =
         static member Initial = Initial |> overflowWrapValue'
         static member Unset = Unset |> overflowWrapValue'
 
+    /// <summary>Specifies how to insert line breaks on overflow.</summary>
+    /// <param name="overflowWrap">
+    ///     can be:
+    ///     - <c> Overflow </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Normal </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let OverflowWrap' (overflowWrap: IOverflowWrap) = OverflowWrap.Value(overflowWrap)
