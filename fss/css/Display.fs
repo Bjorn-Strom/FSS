@@ -62,4 +62,12 @@ module Display =
         static member Initial = Initial |> displayValue'
         static member Unset = Unset |> displayValue'
 
+    /// <summary>Specifies the layout of the elements children.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Display </c>
+    ///     - <c> Global </c> 
+    ///     - <c> None </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Display' (display: IDisplay) = Display.Value(display)
