@@ -45,6 +45,12 @@ module Transition =
         static member Initial = Initial |> transitionValue'
         static member Unset = Unset |> transitionValue'
 
+    /// <summary>Resets transition.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Transition' (transition: ITransition) = Transition.Value(transition)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
@@ -61,6 +67,13 @@ module Transition =
         static member Initial = Initial |> delayValue'
         static member Unset = Unset |> delayValue'
 
+    /// <summary>Specifies the duration to wait before a transition starts.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Time </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let TransitionDelay' (delay: ITransitionDelay) = TransitionDelay.Value(delay)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duraion
@@ -78,6 +91,13 @@ module Transition =
         static member Initial = Initial |> transitionDurationValue'
         static member Unset = Unset |> transitionDurationValue'
 
+    /// <summary>Specifies the duration of the transition.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Units.Time </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let TransitionDuration' (duration: ITransitionDuration) = TransitionDuration.Value(duration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
@@ -105,6 +125,13 @@ module Transition =
         static member Initial = Initial |> transitionTimingFunction'
         static member Unset = Unset |> transitionTimingFunction'
 
+    /// <summary>Specifies how the intermediate values are calculated.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> TransitionTiming </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let TransitionTimingFunction' (timingFunction: ITransitionTimingFunction) = TransitionTimingFunction.Value(timingFunction)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property
@@ -383,4 +410,12 @@ module Transition =
         static member Initial = Initial |> transitionProperty'
         static member Unset = Unset |> transitionProperty'
 
+    /// <summary>Specifies which properties should be affected by transition.</summary>
+    /// <param name="transform">
+    ///     can be:
+    ///     - <c> Property </c>
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let TransitionProperty' (property: ITransitionProperty) = TransitionProperty.Value(property)
