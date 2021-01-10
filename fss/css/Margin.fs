@@ -44,7 +44,7 @@ module Margin =
         static member Unset = Unset |> marginValue'
 
     /// <summary>Specifies the margin on all sides of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
@@ -67,7 +67,7 @@ module Margin =
         static member Unset = Unset |> marginTopValue'
 
     /// <summary>Specifies the margin on top side of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
@@ -84,7 +84,7 @@ module Margin =
         |> marginRightValue
 
     /// <summary>Specifies the margin on right side of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
@@ -113,7 +113,7 @@ module Margin =
         static member Unset = Unset |> marginBottomValue'
     
     /// <summary>Specifies the margin on bottom side of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
@@ -130,7 +130,7 @@ module Margin =
         |> marginLeftValue
 
     /// <summary>Specifies the margin on left side of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
@@ -189,7 +189,7 @@ module ScrollMargin =
         static member Unset = Unset |> scrollMarginValue'
 
     /// <summary>Specifies the scroll margin on all sides of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Global </c> 
@@ -209,7 +209,7 @@ module ScrollMargin =
         static member Unset = Unset |> scrollMarginTopValue'
 
     /// <summary>Specifies the scroll margin on top side of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Global </c> 
@@ -229,7 +229,7 @@ module ScrollMargin =
         static member Unset = Unset |> scrollMarginRightValue'
 
     /// <summary>Specifies the scroll margin on right side of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Global </c> 
@@ -248,7 +248,7 @@ module ScrollMargin =
         static member Initial = Initial |> scrollMarginBottomValue'
         static member Unset = Unset |> scrollMarginBottomValue'
     /// <summary>Specifies the scroll margin on bottom side of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Global </c> 
@@ -268,7 +268,7 @@ module ScrollMargin =
         static member Unset = Unset |> scrollMarginLeftValue'
 
     /// <summary>Specifies the scroll margin on left side of an element.</summary>
-    /// <param name="transform">
+    /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Global </c> 
