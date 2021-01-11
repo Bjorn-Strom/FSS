@@ -83,6 +83,9 @@ module Position =
         static member Sticky = Sticky |> positionValue'
         static member Fixed = Fixed |> positionValue'
 
+    /// <summary>Specifies how an element is to be positioned.</summary>
+    /// <param name="position">How to position element</param>
+    /// <returns>Css property for fss.</returns>
     let Position' (position: Position) = Position.Value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/top
@@ -99,6 +102,15 @@ module Position =
         static member Initial = Initial |> topValue'
         static member Unset = Unset |> topValue'
 
+    /// <summary>Specifies vertical position of element.</summary>
+    /// <param name="top">
+    ///     can be:
+    ///     - <c> Units.Size </c> 
+    ///     - <c> Units.Percent </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Top' (top: IPositioned) = Top.Value(top)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/right
@@ -116,6 +128,15 @@ module Position =
         static member Initial = Initial |> rightValue'
         static member Unset = Unset |> rightValue'
 
+    /// <summary>Specifies horizontal position of element.</summary>
+    /// <param name="right">
+    ///     can be:
+    ///     - <c> Units.Size </c> 
+    ///     - <c> Units.Percent </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Right' (right: IPositioned) = Right.Value(right)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
@@ -133,6 +154,15 @@ module Position =
         static member Initial = Initial |> bottomValue'
         static member Unset = Unset |> bottomValue'
 
+    /// <summary>Specifies vertial position of element.</summary>
+    /// <param name="bottom">
+    ///     can be:
+    ///     - <c> Units.Size </c> 
+    ///     - <c> Units.Percent </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Bottom' (bottom: IPositioned) = Bottom.Value(bottom)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/left
@@ -150,6 +180,15 @@ module Position =
         static member Initial = Initial |> leftValue'
         static member Unset = Unset |> leftValue'
 
+    /// <summary>Specifies vertical alignment.</summary>
+    /// <param name="left">
+    ///     can be:
+    ///     - <c> Units.Size </c> 
+    ///     - <c> Units.Percent </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Left' (left: IPositioned) = Left.Value(left)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
@@ -174,6 +213,15 @@ module Position =
         static member Initial = Initial |> verticalAlignValue'
         static member Unset = Unset |> verticalAlignValue'
 
+    /// <summary>Specifies vertical alignment.</summary>
+    /// <param name="alignment">
+    ///     can be:
+    ///     - <c> VerticalAlign </c> 
+    ///     - <c> Units.Size </c> 
+    ///     - <c> Units.Percent </c> 
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns
     let VerticalAlign' (alignment: IVerticalAlign) = VerticalAlign.Value(alignment)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/float
@@ -195,6 +243,14 @@ module Position =
         static member Initial = Initial |> floatValue'
         static member Unset = Unset |> floatValue'
 
+    /// <summary>Specifies element float.</summary>
+    /// <param name="float">
+    ///     can be:
+    ///     - <c> Float </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> None </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Float' (float: IFloat) = Float.Value(float)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
@@ -208,6 +264,9 @@ module Position =
         static member ContentBox = ContentBox |> boxSizingValue'
         static member BorderBox = BorderBox |> boxSizingValue'
 
+    /// <summary>Specifies how the total width and height of an elemenent is calculated.</summary>
+    /// <param name="sizing"> How to calculate width and height How to calculate width. </param>
+    /// <returns>Css property for fss.</returns>
     let BoxSizing' (sizing: PositionType.BoxSizing) = BoxSizing.Value(sizing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
@@ -225,6 +284,13 @@ module Position =
         static member Initial = Initial |> directionValue'
         static member Unset = Unset |> directionValue'
 
+    /// <summary>Specifies element float.</summary>
+    /// <param name="direction">
+    ///     can be:
+    ///     - <c> Direction </c> 
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Direction' (direction: IDirection) = Direction.Value(direction)
 
 module WritingModeType =
@@ -261,6 +327,13 @@ module WritingMode =
         static member Initial = Initial |> writingModeValue'
         static member Unset = Unset |> writingModeValue'
 
+    /// <summary>Specifies direction elements are written.</summary>
+    /// <param name="writingMode">
+    ///     can be:
+    ///     - <c> WritingMode </c> 
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let WritingMode' (writingMode: IWritingMode) = writingMode |> WritingMode.Value
 
 module BreakTypes =
@@ -356,6 +429,14 @@ module Break =
         static member Initial = Initial |> breakAfterValue'
         static member Unset = Unset |> breakAfterValue'
 
+    /// <summary>Specifies how elements behave after a generated box.</summary>
+    /// <param name="breakAfter">
+    ///     can be:
+    ///     - <c> BreakAfter </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BreakAfter' (breakAfter: IBreakAfter) = breakAfter |> BreakAfter.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/break-before
@@ -386,6 +467,14 @@ module Break =
         static member Initial = Initial |> breakBeforeValue'
         static member Unset = Unset |> breakBeforeValue'
 
+    /// <summary>Specifies how elements behave before a generated box.</summary>
+    /// <param name="breakBefore">
+    ///     can be:
+    ///     - <c> BreakBefore </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BreakBefore' (breakBefore: IBreakBefore) = breakBefore |> BreakBefore.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside
@@ -407,5 +496,13 @@ module Break =
         static member Initial = Initial |> breakInsideValue'
         static member Unset = Unset |> breakInsideValue'
 
+    /// <summary>Specifies how elements behave inside a generated box.</summary>
+    /// <param name="breakInside">
+    ///     can be:
+    ///     - <c> BreakInside </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let BreakInside' (breakInside: IBreakInside) = breakInside |> BreakInside.Value
 
