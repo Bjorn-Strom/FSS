@@ -18,8 +18,13 @@ module All =
         static member Value (all: IAll) = all |> allValue'
         static member Inherit = Inherit |> allValue'
 
-
         static member Initial = Initial |> allValue'
         static member Unset = Unset |> allValue'
 
+    /// <summary>Resets all of an elements properties.</summary>
+    /// <param name="all">
+    ///     can be:
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let private All' (all: IAll) = all |> All.Value
