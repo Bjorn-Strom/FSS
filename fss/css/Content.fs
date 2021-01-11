@@ -121,6 +121,17 @@ module Content =
         static member Initial = Initial |> contentValue'
         static member Unset = Unset |> contentValue'
 
+    /// <summary>Replaces element with a value.</summary>
+    /// <param name="content">
+    ///     can be:
+    ///     - <c> Content </c> 
+    ///     - <c> CssString </c> 
+    ///     - <c> Normal </c> 
+    ///     - <c> None </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> CounterStyle </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Content' (content: IContent) = Content.Value(content)
 
 [<AutoOpen>]
@@ -129,4 +140,8 @@ module Label =
         static member Value(label: string) =
             (label.Replace(" ", ""))
             |> PropertyValue.cssValue Property.Label
+
+    /// <summary>Gives label to generated CSS string.</summary>
+    /// <param name="label">The name to give to the generated CSS string</param>
+    /// <returns>Css property for fss.</returns>
     let Label' (label: string) = Label.Value(label)
