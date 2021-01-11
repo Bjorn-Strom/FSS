@@ -159,4 +159,12 @@ module Appeareance =
         static member Auto = Auto |> appearanceValue'
         static member None = None |> appearanceValue'
 
+    /// <summary>Specifies platform native styling.</summary>
+    /// <param name="appearance">
+    ///     can be:
+    ///     - <c> Appearance </c> 
+    ///     - <c> None </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Appearance' (appearance: IAppearance) = appearance |> Appearance.Value
