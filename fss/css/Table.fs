@@ -60,6 +60,13 @@ module Table =
         static member Initial = Initial |> captionSideValue'
         static member Unset = Unset |> captionSideValue'
 
+    /// <summary>Specifies which side the caption of a table will be.</summary>
+    /// <param name="captionSide">
+    ///     can be:
+    ///     - <c> CaptionSide </c> 
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let CaptionSide' captionSide = CaptionSide.Value captionSide
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
@@ -76,6 +83,13 @@ module Table =
         static member Initial = Initial |> emptyCellsValue'
         static member Unset = Unset |> emptyCellsValue'
 
+    /// <summary>Specifies whether or not emtpy cells should have borders.</summary>
+    /// <param name="emptyCells">
+    ///     can be:
+    ///     - <c> EmptyCells </c> 
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let private EmptyCells' (emptyCells: IEmptyCells) = emptyCells |> EmptyCells.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
@@ -93,4 +107,12 @@ module Table =
         static member Initial = Initial |> tableLayoutValue'
         static member Unset = Unset |> tableLayoutValue'
 
+    /// <summary>Specifies table layout.</summary>
+    /// <param name="layout">
+    ///     can be:
+    ///     - <c> TableLayout </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let TableLayout' layout = TableLayout.Value layout
