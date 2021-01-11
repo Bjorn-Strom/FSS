@@ -243,8 +243,16 @@ module Grid =
         static member Initial = Initial |> autoFlowValue'
         static member Unset = Unset |> autoFlowValue'
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
+    /// <summary>Specifies how the auto placement algorithm works.</summary>
+    /// <param name="flow">
+    ///     can be:
+    ///     - <c> GridAutoFlow </c>
+    ///     - <c> Global </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridAutoFlow' (flow: IGridAutoFlow) = GridAutoFlow.Value(flow)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
 
     let private templateAreaValue value = PropertyValue.cssValue Property.GridTemplateAreas value
     let private templateAreaValue' value =
@@ -271,6 +279,13 @@ module Grid =
         static member Initial = Initial |> templateAreaValue'
         static member Unset = Unset |> templateAreaValue'
 
+    /// <summary>Resets grid template area.</summary>
+    /// <param name="areas">
+    ///     can be:
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridTemplateAreas' (areas: IGridTemplateArea) = GridTemplateAreas.Value(areas)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/gap
@@ -290,6 +305,14 @@ module Grid =
         static member Initial = Initial |> gridGapValue'
         static member Unset = Unset |> gridGapValue'
 
+    /// <summary>Specifies gap between rows and column in grid.</summary>
+    /// <param name="gap">
+    ///     can be:
+    ///     - <c> Global </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridGap' (gap: IGridGap) = GridGap.Value(gap)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
@@ -305,7 +328,38 @@ module Grid =
         static member Unset = Unset |> gridRowGapValue'
         static member Normal = Normal |> gridRowGapValue'
 
+    /// <summary>Specifies gap between rows in grid.</summary>
+    /// <param name="gap">
+    ///     can be:
+    ///     - <c> Global </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridRowGap' (rowGap: IGridRowGap) = GridRowGap.Value(rowGap)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+    let private gridColumnGapValue value = PropertyValue.cssValue Property.GridColumnGap value
+    let private gridColumnGapValue' value =
+        value
+        |> gridColumnGapToString
+        |> gridColumnGapValue
+    type GridColumnGap =
+        static member Value (gap: IGridColumnGap) = gap |> gridColumnGapValue'
+        static member Inherit = Inherit |> gridColumnGapValue'
+        static member Initial = Initial |> gridColumnGapValue'
+        static member Unset = Unset |> gridColumnGapValue'
+        static member Normal = Normal |> gridColumnGapValue'
+
+    /// <summary>Specifies gap between columns in grid.</summary>
+    /// <param name="gap">
+    ///     can be:
+    ///     - <c> Global </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let GridColumnGap' (ColumnGap: IGridColumnGap) = GridColumnGap.Value(ColumnGap)
 
     // Grid position
     type GridPosition =
@@ -323,6 +377,14 @@ module Grid =
         static member Initial = Initial
         static member Unset = Unset
 
+    /// <summary>Specifies gap between columns in grid.</summary>
+    /// <param name="position">
+    ///     can be:
+    ///     - <c> GridPosition </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridPosition' (position: IGridPosition) = GridPosition.Value(position)
 
     let private gridRowStartValue value = PropertyValue.cssValue Property.GridRowStart value
@@ -344,6 +406,9 @@ module Grid =
         static member Initial = GridPosition.Initial |> gridRowStartValue'
         static member Unset = GridPosition.Unset |> gridRowStartValue'
 
+    /// <summary>Specifies start position in grid row.</summary>
+    /// <param name="rowStart">Number which specifies location</param>
+    /// <returns>Css property for fss.</returns>
     let GridRowStart' (rowStart: int) = GridRowStart.Value(rowStart)
 
     let private gridRowEndValue value = PropertyValue.cssValue Property.GridRowEnd value
@@ -365,6 +430,9 @@ module Grid =
         static member Initial = GridPosition.Initial |> gridRowEndValue'
         static member Unset = GridPosition.Unset |> gridRowEndValue'
 
+    /// <summary>Specifies end position in grid row.</summary>
+    /// <param name="rowEnd">Number which specifies location</param>
+    /// <returns>Css property for fss.</returns>
     let GridRowEnd' (rowEnd: int) = GridRowEnd.Value(rowEnd)
 
     let private gridRowValue value = PropertyValue.cssValue Property.GridRow value
@@ -382,6 +450,14 @@ module Grid =
         static member Initial = GridPosition.Initial |> gridRowValue'
         static member Unset = GridPosition.Unset |> gridRowValue'
 
+    /// <summary>Specifies position in gird by row.</summary>
+    /// <param name="row">
+    ///     can be:
+    ///     - <c> GridPosition </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridRow' (row: IGridPosition) = GridRow.Value(row)
 
     let private gridColumnStartValue value = PropertyValue.cssValue Property.GridColumnStart value
@@ -403,6 +479,9 @@ module Grid =
         static member Initial = GridPosition.Initial |> gridColumnStartValue'
         static member Unset = GridPosition.Unset |> gridColumnStartValue'
 
+    /// <summary>Specifies start position in grid column.</summary>
+    /// <param name="columnStart">Number which specifies location</param>
+    /// <returns>Css property for fss.</returns>
     let GridColumnStart' (columnStart: int) = GridColumnStart.Value(columnStart)
 
     let private gridColumnEndValue value = PropertyValue.cssValue Property.GridColumnEnd value
@@ -424,6 +503,9 @@ module Grid =
         static member Initial = GridPosition.Initial |> gridColumnEndValue'
         static member Unset = GridPosition.Unset |> gridColumnEndValue'
 
+    /// <summary>Specifies end position in grid column.</summary>
+    /// <param name="columnEnd">Number which specifies location</param>
+    /// <returns>Css property for fss.</returns>
     let GridColumnEnd' (columnEnd: int) = GridColumnEnd.Value(columnEnd)
 
     let private gridColumnValue value = PropertyValue.cssValue Property.GridColumn value
@@ -444,6 +526,14 @@ module Grid =
         static member Initial = GridPosition.Initial |> gridColumnValue'
         static member Unset = GridPosition.Unset |> gridColumnValue'
 
+    /// <summary>Specifies position in grid by column.</summary>
+    /// <param name="row">
+    ///     can be:
+    ///     - <c> GridPosition </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridColumn' (column: IGridPosition) = GridColumn.Value(column)
 
     let private gridAreaValue value = PropertyValue.cssValue Property.GridArea value
@@ -480,6 +570,9 @@ module Grid =
         static member Initial = GridPosition.Initial |> gridAreaValue'
         static member Unset = GridPosition.Unset |> gridAreaValue'
 
+    /// <summary>Specifies position in grid by area name.</summary>
+    /// <param name="area">Area name</param>
+    /// <returns>Css property for fss.</returns>
     let GridArea' (area: string) = GridArea.Value(GridPosition.Ident area)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
@@ -549,6 +642,17 @@ module Grid =
         static member Initial = Initial |> templateRowValue'
         static member Unset = Unset |> templateRowValue'
 
+    /// <summary>Defines grid rows.</summary>
+    /// <param name="row">
+    ///     can be:
+    ///     - <c> GridTemplateRows </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    ///     - <c> None </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridTemplateRows' (templateRows: IGridTemplateRows) = GridTemplateRows.Value(templateRows)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
@@ -618,6 +722,17 @@ module Grid =
         static member Initial = Initial |> templateColumnValue'
         static member Unset = Unset |> templateColumnValue'
 
+    /// <summary>Defines grid columns.</summary>
+    /// <param name="row">
+    ///     can be:
+    ///     - <c> GridTemplateRows </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    ///     - <c> None </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridTemplateColumns' (templateColumns: IGridTemplateColumns) = GridTemplateColumns.Value(templateColumns)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows
@@ -638,6 +753,18 @@ module Grid =
         static member Initial = Initial |> autoRowsValue'
         static member Unset = Unset |> autoRowsValue'
 
+    /// <summary>Defines auto generated grid row.</summary>
+    /// <param name="autoRows">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Units.Fraction </c>
+    ///     - <c> ContentSize </c>
+    ///     - <c> Auto </c>
+    ///     - <c> Global </c>
+    ///     - <c> MinMax </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridAutoRows' (autoRows: IGridAutoRows) = GridAutoRows.Value(autoRows)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns
@@ -658,4 +785,16 @@ module Grid =
         static member Initial = Initial |> autoColumnsValue'
         static member Unset = Unset |> autoColumnsValue'
 
+    /// <summary>Defines auto generated grid column.</summary>
+    /// <param name="autoColumn">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Units.Fraction </c>
+    ///     - <c> ContentSize </c>
+    ///     - <c> Auto </c>
+    ///     - <c> Global </c>
+    ///     - <c> MinMax </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let GridAutoColumns' (autoColumns: IGridAutoColumns) = GridAutoColumns.Value(autoColumns)
