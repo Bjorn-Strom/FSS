@@ -22,4 +22,12 @@ module Perspective =
         static member Initial = Initial |> perspectiveValue'
         static member Unset = Unset |> perspectiveValue'
 
+    /// <summary>Specifies distance in z plane.</summary>
+    /// <param name="perspective">
+    ///     can be:
+    ///     - <c> Units.Size </c> 
+    ///     - <c> None </c> 
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Perspective' (perspective: IPerspective) = Perspective.Value(perspective)

@@ -94,4 +94,13 @@ module Cursor =
         static member Unset = Unset |> cursorValue'
         static member None = None |> cursorValue'
 
+    /// <summary>Specifies how elements behave before a generated box.</summary>
+    /// <param name="cursor">
+    ///     can be:
+    ///     - <c> Cursor </c> 
+    ///     - <c> Global </c> 
+    ///     - <c> Auto </c> 
+    ///     - <c> None </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Cursor' (cursor: ICursor) = Cursor.Value(cursor)
