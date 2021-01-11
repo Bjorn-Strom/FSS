@@ -21,13 +21,19 @@ module Typography =
         value
         |> orphansToString
         |> orphansValue
-
     type Orphans =
         static member Value (orphans: IOrphans) = orphans |> orphansValue'
         static member Inherit = Inherit |> orphansValue'
         static member Initial = Initial |> orphansValue'
         static member Unset = Unset |> orphansValue'
 
+    /// <summary>Specifies minimum number of lines a container must show at bottom.</summary>
+    /// <param name="orphans">
+    ///     can be:
+    ///     - <c> CssInt </c> 
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Orphans' (orphans: IOrphans) = orphans |> Orphans.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/widows
@@ -43,4 +49,11 @@ module Typography =
         static member Initial = Initial |> widowsValue'
         static member Unset = Unset |> widowsValue'
 
+    /// <summary>Specifies minimum number of lines a container must show at top.</summary>
+    /// <param name="widows">
+    ///     can be:
+    ///     - <c> CssInt </c> 
+    ///     - <c> Global </c> 
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let Widows' (widows: IWidows) = widows |> Widows.Value
