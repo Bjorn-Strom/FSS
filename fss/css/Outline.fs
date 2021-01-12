@@ -1,6 +1,6 @@
 namespace Fss
 
-open Fss.CSSColor
+open Fss.CssColor
 
 module OutlineTypes =
     type OutlineWidth =
@@ -33,7 +33,7 @@ module Outline  =
 
     let private outlineColorToString (color: IOutlineColor) =
         match color with
-        | :? CssColor as c -> CSSColorValue.color c
+        | :? CssColor as c -> CssColorValue.color c
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown outline color"
 

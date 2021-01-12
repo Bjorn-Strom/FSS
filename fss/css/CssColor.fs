@@ -163,6 +163,6 @@ module CssColor =
     static member Hsl (h: int, s: float, l: float) = Utilities.Color.hsl h s l |> CssColor
     static member Hsla (h: int, s: float, l: float, a: float) = Utilities.Color.hsla h s l a |> CssColor
 
-module CSSColorValue =
-    open CSSColor
+module CssColorValue =
+    open CssColor
     let color (CssColor c) = c

@@ -6,7 +6,7 @@ open Fss
 module Caret =
     let private caretColorToString (caretColor: ICaretColor) =
         match caretColor with
-        | :? CssColor as c -> CSSColorValue.color c
+        | :? CssColor as c -> CssColorValue.color c
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown caret color"
 

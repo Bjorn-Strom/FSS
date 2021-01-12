@@ -66,11 +66,11 @@ module Image =
     let private colorAndStopToString (colorStop: IColorStop) =
         let stringifyColorStop =
             function
-                | ColorStop (c, s) -> sprintf "%s %s" (CSSColorValue.color c) (Units.LengthPercentage.value s)
-                | ColorStop2 (c, s1, s2) -> sprintf "%s %s %s" (CSSColorValue.color c) (Units.LengthPercentage.value s1) (Units.LengthPercentage.value s2)
+                | ColorStop (c, s) -> sprintf "%s %s" (CssColorValue.color c) (Units.LengthPercentage.value s)
+                | ColorStop2 (c, s1, s2) -> sprintf "%s %s %s" (CssColorValue.color c) (Units.LengthPercentage.value s1) (Units.LengthPercentage.value s2)
 
         match colorStop with
-        | :? CssColor as c -> CSSColorValue.color c
+        | :? CssColor as c -> CssColorValue.color c
         | :? ColorStop as cs -> stringifyColorStop cs
         | _ -> "Unknown color and stop"
 
@@ -103,7 +103,7 @@ module Image =
         static member LinearGradient (sideOrCorner: SideOrCorner, colors: CssColor list) =
              sprintf "linear-gradient(%s, %s)"
                 (sideOrCornerValue sideOrCorner)
-                (Utilities.Helpers.combineComma CSSColorValue.color colors)
+                (Utilities.Helpers.combineComma CssColorValue.color colors)
 
         static member RepeatingLinearGradient (start: IColorStop, last: IColorStop) =
             sprintf "repeating-linear-gradient(%s, %s)"

@@ -77,7 +77,7 @@ module Column =
 
     let private columnRuleColorToString (columnColor: IColumnRuleColor) =
         match columnColor with
-        | :? CssColor as c -> CSSColorValue.color c
+        | :? CssColor as c -> CssColorValue.color c
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column rule color"
 

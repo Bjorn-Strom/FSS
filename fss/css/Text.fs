@@ -226,13 +226,13 @@ module Text =
         let stringifyTextShadow =
             function
                 | Shadow2 (x,y) -> sprintf "%s %s" (Units.Size.value x) (Units.Size.value y)
-                | Shadow3 (x,y,c) -> sprintf "%s %s %s" (Units.Size.value x) (Units.Size.value y) (CSSColorValue.color c)
+                | Shadow3 (x,y,c) -> sprintf "%s %s %s" (Units.Size.value x) (Units.Size.value y) (CssColorValue.color c)
                 | Shadow4 (x,y,b,c) ->
                     sprintf "%s %s %s %s"
                         (Units.Size.value x)
                         (Units.Size.value y)
                         (Units.Size.value b)
-                        (CSSColorValue.color c)
+                        (CssColorValue.color c)
                 | _ -> "Should be a keyword"
 
         match shadow with
@@ -281,7 +281,7 @@ module Text =
 
     let private textEmphasisColorToString (color: ITextEmphasisColor) =
         match color with
-            | :? CssColor as c -> CSSColorValue.color c
+            | :? CssColor as c -> CssColorValue.color c
             | :? Global as g -> GlobalValue.global' g
             | _ -> "unknown text emphasis color"
 
@@ -311,7 +311,7 @@ module Text =
 
     let private textDecorationColorToString (color: ITextDecorationColor) =
         match color with
-            | :? CssColor as c -> CSSColorValue.color c
+            | :? CssColor as c -> CssColorValue.color c
             | :? Global as g -> GlobalValue.global' g
             | _ -> "unknown text decoration color"
 

@@ -1,6 +1,6 @@
 namespace Fss
 
-open Fss.CSSColor
+open Fss.CssColor
 open Fss.Image
 
 module BackgroundType =
@@ -235,7 +235,7 @@ module Background =
     let private backgroundValue value = PropertyValue.cssValue Property.BackgroundColor value
     let private backgroundValue' value =
         value
-        |> CSSColorValue.color
+        |> CssColorValue.color
         |> backgroundValue
     type BackgroundColor =
         static member Value (color: CssColor) = color |> backgroundValue'

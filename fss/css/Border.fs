@@ -103,7 +103,7 @@ module Border =
 
     let private borderColorToString (borderColor: IBorderColor) =
         match borderColor with
-        | :? CssColor as c -> CSSColorValue.color c
+        | :? CssColor as c -> CssColorValue.color c
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown border color"
 
