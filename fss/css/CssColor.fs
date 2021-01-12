@@ -2,7 +2,7 @@
 namespace Fss
 
 [<AutoOpen>]
-module CSSColor =
+module CssColor =
    type CssColor =
     | CssColor of string
     interface ITextDecorationColor

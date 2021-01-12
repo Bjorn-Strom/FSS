@@ -5,7 +5,7 @@
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;emotion;CSS;styling;css-in-lang;fable;react;html</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>1.0.30</Version>
+    <Version>1.1</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
@@ -24,7 +24,7 @@
     <Compile Include="css\Html.fs" />
     <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />
-    <Compile Include="css\CSSColor.fs" />
+    <Compile Include="css\CssColor.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Font.fs" />
     <Compile Include="css\Word.fs" />
