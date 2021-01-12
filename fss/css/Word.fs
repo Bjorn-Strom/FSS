@@ -45,7 +45,9 @@ module Word =
     ///     can be:
     ///     - <c> Size </c>
     ///     - <c> Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -74,7 +76,9 @@ module Word =
     ///     can be:
     ///     - <c> WordBreak </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let WordBreak' (break': IWordBreak) = WordBreak.Value(break')

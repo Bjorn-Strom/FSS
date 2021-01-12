@@ -98,7 +98,9 @@ module Cursor =
     /// <param name="cursor">
     ///     can be:
     ///     - <c> Cursor </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     ///     - <c> Auto </c> 
     ///     - <c> None </c> 
     /// </param>

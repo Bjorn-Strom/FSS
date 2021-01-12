@@ -128,7 +128,9 @@ module Content =
     ///     - <c> CssString </c> 
     ///     - <c> Normal </c> 
     ///     - <c> None </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     ///     - <c> CounterStyle </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>

@@ -24,7 +24,9 @@ module All =
     /// <summary>Resets all of an elements properties.</summary>
     /// <param name="all">
     ///     can be:
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
     let private All' (all: IAll) = all |> All.Value

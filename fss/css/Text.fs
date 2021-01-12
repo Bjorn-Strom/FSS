@@ -390,7 +390,9 @@ module Text =
     /// <param name="align">
     ///     can be:
     ///     - <c> TextAlign </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TextAlign' (align: ITextAlign) = TextAlign.Value(align)
@@ -418,7 +420,9 @@ module Text =
     /// <param name="align">
     ///     can be:
     ///     - <c> TextAlign </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TextAlignLast' (align: ITextAlignLast) = TextAlignLast.Value(align)
@@ -467,7 +471,9 @@ module Text =
     /// <param name="decoration">
     ///     can be:
     ///     - <c> TextDecorationLine </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -492,7 +498,9 @@ module Text =
     /// <param name="thickness">
     ///     can be:
     ///     - <c> TextDecorationThickness </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     ///     - <c> Auto </c>
     ///     - <c> Size </c>
@@ -523,7 +531,9 @@ module Text =
     /// <param name="decoration">
     ///     can be:
     ///     - <c> TextDecorationStyle </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TextDecorationStyle' (decoration: ITextDecorationStyle) = TextDecorationStyle.Value(decoration)
@@ -560,7 +570,9 @@ module Text =
     /// <param name="skip">
     ///     can be:
     ///     - <c> TextDecorationSkip </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -586,7 +598,9 @@ module Text =
     /// <param name="skip">
     ///     can be:
     ///     - <c> TextDecorationSkipInk </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     ///     - <c> Auto </c>
     /// </param>
@@ -616,7 +630,9 @@ module Text =
     /// <param name="transform">
     ///     can be:
     ///     - <c> TextTransform </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -645,7 +661,9 @@ module Text =
     /// <param name="indent">
     ///     can be:
     ///     - <c> TextIndent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Size </c>
     ///     - <c> Percent </c>
     /// </param>
@@ -681,7 +699,9 @@ module Text =
     /// <param name="shadow">
     ///     can be:
     ///     - <c> TextShadow </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TextShadow' (shadow: ITextShadow) = TextShadow.Value(shadow)
@@ -725,7 +745,9 @@ module Text =
     /// <summary>Specifies emphasis marks to text.</summary>
     /// <param name="emphasis">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -753,7 +775,9 @@ module Text =
     /// Both params can be:
     ///     - <c> TextEmphasisStyle </c>
     ///     - <c> CssString </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// <returns>Css property for fss.</returns>
     let TextEmphasisPosition' (e1: ITextEmphasisPosition) (e2: ITextEmphasisPosition) = TextEmphasisPosition.Value(e1, e2)
@@ -785,7 +809,9 @@ module Text =
     ///     can be:
     ///     - <c> TextEmphasisStyle </c>
     ///     - <c> CssString </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -821,7 +847,9 @@ module Text =
     /// <param name="position">
     ///     can be:
     ///     - <c> UnderlinePosition </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -845,7 +873,9 @@ module Text =
     ///     can be:
     ///     - <c> Size  </c>
     ///     - <c> Percent  </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -882,7 +912,9 @@ module Text =
     ///     can be:
     ///     - <c> CssString  </c>
     ///     - <c> None  </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -908,7 +940,9 @@ module Text =
     ///     can be:
     ///     - <c> Hyphens  </c>
     ///     - <c> None  </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -1082,7 +1116,9 @@ module Text =
     /// <param name="color">
     ///     can be:
     ///     - <c> CSSColor </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TextDecorationColor' (color: ITextDecorationColor) = TextDecorationColor.Value(color)
@@ -1254,7 +1290,9 @@ module Text =
     /// <param name="color">
     ///     can be:
     ///     - <c> CSSColor </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TextEmphasisColor' (color: ITextEmphasisColor) = TextEmphasisColor.Value(color)
@@ -1275,7 +1313,9 @@ module Text =
     /// <param name="textSize">
     ///     can be:
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     ///     - <c> Percent </c>
     /// </param>
@@ -1297,7 +1337,9 @@ module Text =
     ///     can be:
     ///     - <c> Size </c>
     ///     - <c> CssInt </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TabSize' tabSize = TabSize.Value tabSize
@@ -1321,7 +1363,9 @@ module Text =
     /// <param name="orientation">
     ///     can be:
     ///     - <c> TextOrientation </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TextOrientation' orientation = TextOrientation.Value orientation
@@ -1344,7 +1388,9 @@ module Text =
     /// <param name="rendering">
     ///     can be:
     ///     - <c> TextRendering </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -1392,7 +1438,9 @@ module Text =
     ///     can be:
     ///     - <c> WhiteSpace </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let WhiteSpace' whitespace = WhiteSpace.Value whitespace
@@ -1418,7 +1466,9 @@ module Text =
     ///     - <c> UserSelect </c>
     ///     - <c> None </c>
     ///     - <c> Auto </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let UserSelect' userSelect = UserSelect.Value userSelect

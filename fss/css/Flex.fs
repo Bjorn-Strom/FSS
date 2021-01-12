@@ -251,7 +251,9 @@ module Flex =
     ///     can be:
     ///     - <c> AlignContent </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let AlignContent' (align: IAlignContent) = AlignContent.Value(align)
@@ -289,7 +291,9 @@ module Flex =
     ///     can be:
     ///     - <c> AlignContent </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let AlignItems' (align: IAlignItems) = AlignItems.Value(align)
@@ -327,7 +331,9 @@ module Flex =
     ///     can be:
     ///     - <c> AlignContent </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let AlignSelf' (align: IAlignSelf) = AlignSelf.Value(align)
@@ -368,7 +374,9 @@ module Flex =
     ///     can be:
     ///     - <c> JustifyContent </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let JustifyContent' (align: IJustifyContent) = JustifyContent.Value(align)
@@ -409,7 +417,9 @@ module Flex =
     ///     can be:
     ///     - <c> JustifyItems </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let JustifyItems' (align: IJustifyItems) = JustifyItems.Value(align)
@@ -446,7 +456,9 @@ module Flex =
     ///     can be:
     ///     - <c> JustifySelf </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let JustifySelf' (align: IJustifySelf) = JustifySelf.Value(align)
@@ -473,7 +485,9 @@ module Flex =
     /// <param name="direction">
     ///     can be:
     ///     - <c> FlexDirection </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FlexDirection' (direction: IFlexDirection) = FlexDirection.Value(direction)
@@ -498,7 +512,9 @@ module Flex =
     /// <param name="wrap">
     ///     can be:
     ///     - <c> FlexDirection </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FlexWrap' (wrap: IFlexWrap) = FlexWrap.Value(wrap)
@@ -520,7 +536,9 @@ module Flex =
     /// <param name="order">
     ///     can be:
     ///     - <c> CssInt </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Order' (order: IOrder) = Order.Value(order)
@@ -543,7 +561,9 @@ module Flex =
     /// <param name="grow">
     ///     can be:
     ///     - <c> CssFloat </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FlexGrow' (grow: IFlexGrow) = FlexGrow.Value(grow)
@@ -565,7 +585,9 @@ module Flex =
     /// <param name="shrink">
     ///     can be:
     ///     - <c> CssFloat </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FlexShrink' (shrink: IFlexShrink) = FlexShrink.Value(shrink)
@@ -594,7 +616,9 @@ module Flex =
     /// <param name="basis">
     ///     can be:
     ///     - <c> FlexBasis </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>

@@ -88,7 +88,9 @@ module Animation =
     /// <param name="direction">
     ///     can be:
     ///     - <c> AnimationDirection </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -175,7 +177,9 @@ module Animation =
     ///     - <c> The result of a keyframe function </c>
     ///     - <c> CssString </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let AnimationName' (name: IAnimationName) = AnimationName.Name(name)
@@ -198,7 +202,9 @@ module Animation =
     /// <param name="playState">
     ///     can be:
     ///     - <c> AnimationPlayState </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let AnimationPlayState' (playState: IAnimationPlayState) = playState |> AnimationPlayState.Value
@@ -232,7 +238,9 @@ module Animation =
     /// <param name="timing">
     ///     can be:
     ///     - <c> AnimationTimingFunction </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let AnimationTimingFunction' (timing: TimingFunctionType.Timing) = AnimationTimingFunction.Value(timing)

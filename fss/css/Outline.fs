@@ -69,7 +69,9 @@ module Outline  =
     /// <summary>Resets outline.</summary>
     /// <param name="outline">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -242,7 +244,9 @@ module Outline  =
     /// <summary>Sets color of outline.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> CssColor </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -270,7 +274,9 @@ module Outline  =
     /// <param name="width">
     ///     can be:
     ///     - <c> OutlineWidth </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Units.Size </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -304,7 +310,9 @@ module Outline  =
     /// <param name="style">
     ///     can be:
     ///     - <c> OutlineStyle </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>

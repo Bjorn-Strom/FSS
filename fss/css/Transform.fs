@@ -144,7 +144,9 @@ module Transform =
     ///     can be:
     ///     - <c> Transform </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Transform' (transform: ITransform) = Transform.Value(transform)
@@ -185,7 +187,9 @@ module Transform =
     ///     - <c> TransformOrigin </c>
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TransformOrigin' (origin: ITransformOrigin) = TransformOrigin.Value(origin)

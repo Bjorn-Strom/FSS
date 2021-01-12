@@ -120,7 +120,9 @@ module Column =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -145,7 +147,9 @@ module Column =
     /// <param name="span">
     ///     can be:
     ///     - <c> ColumnSpan </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -167,7 +171,9 @@ module Column =
     /// <summary>Resets columns.</summary>
     /// <param name="columns">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Columns' (columns: IColumns) = columns |> Columns.Value
@@ -188,7 +194,9 @@ module Column =
     /// <summary>Resets column rule.</summary>
     /// <param name="rule">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ColumnRule' (rule: IColumnRule) = rule |> ColumnRule.Value
@@ -214,7 +222,9 @@ module Column =
     ///     can be:
     ///     - <c> ColumnRuleWidth </c>
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ColumnRuleWidth' (ruleWidth: IColumnRuleWidth) = ruleWidth |> ColumnRuleWidth.Value
@@ -248,7 +258,9 @@ module Column =
     ///     can be:
     ///     - <c> ColumnRuleStyle </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ColumnRuleStyle' (style: IColumnRuleStyle) = ColumnRuleStyle.Value(style)
@@ -421,7 +433,9 @@ module Column =
     /// <param name="color">
     ///     can be:
     ///     - <c> CssColor </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ColumnRuleColor' (color: IColumnRuleColor) = ColumnRuleColor.Value(color)
@@ -444,7 +458,9 @@ module Column =
     /// <param name="columnCount">
     ///     can be:
     ///     - <c> CssInt </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -470,7 +486,9 @@ module Column =
     /// <param name="columnFill">
     ///     can be:
     ///     - <c> ColumnFill </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -494,7 +512,9 @@ module Column =
     /// <param name="columnWidth">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>

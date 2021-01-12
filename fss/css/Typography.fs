@@ -31,7 +31,9 @@ module Typography =
     /// <param name="orphans">
     ///     can be:
     ///     - <c> CssInt </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Orphans' (orphans: IOrphans) = orphans |> Orphans.Value
@@ -53,7 +55,9 @@ module Typography =
     /// <param name="widows">
     ///     can be:
     ///     - <c> CssInt </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Widows' (widows: IWidows) = widows |> Widows.Value

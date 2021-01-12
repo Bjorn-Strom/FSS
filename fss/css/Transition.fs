@@ -48,7 +48,9 @@ module Transition =
     /// <summary>Resets transition.</summary>
     /// <param name="transition">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Transition' (transition: ITransition) = Transition.Value(transition)
@@ -71,7 +73,9 @@ module Transition =
     /// <param name="delay">
     ///     can be:
     ///     - <c> Units.Time </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TransitionDelay' (delay: ITransitionDelay) = TransitionDelay.Value(delay)
@@ -95,7 +99,9 @@ module Transition =
     /// <param name="duration">
     ///     can be:
     ///     - <c> Units.Time </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TransitionDuration' (duration: ITransitionDuration) = TransitionDuration.Value(duration)
@@ -129,7 +135,9 @@ module Transition =
     /// <param name="timingFunction">
     ///     can be:
     ///     - <c> TransitionTiming </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TransitionTimingFunction' (timingFunction: ITransitionTimingFunction) = TransitionTimingFunction.Value(timingFunction)
@@ -414,7 +422,9 @@ module Transition =
     /// <param name="property">
     ///     can be:
     ///     - <c> Property </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>

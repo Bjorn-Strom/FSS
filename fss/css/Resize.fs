@@ -42,7 +42,9 @@ module Resize =
     /// <param name="resize">
     ///     can be:
     ///     - <c> Resize </c>
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     ///     - <c> Auto </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>

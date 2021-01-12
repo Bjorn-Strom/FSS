@@ -66,7 +66,9 @@ module Display =
     /// <param name="display">
     ///     can be:
     ///     - <c> Display </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>

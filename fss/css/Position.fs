@@ -107,7 +107,9 @@ module Position =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -133,7 +135,9 @@ module Position =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -159,7 +163,9 @@ module Position =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -185,7 +191,9 @@ module Position =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -219,7 +227,9 @@ module Position =
     ///     - <c> VerticalAlign </c>
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let VerticalAlign' (alignment: IVerticalAlign) = VerticalAlign.Value(alignment)
@@ -247,7 +257,9 @@ module Position =
     /// <param name="float">
     ///     can be:
     ///     - <c> Float </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -288,7 +300,9 @@ module Position =
     /// <param name="direction">
     ///     can be:
     ///     - <c> Direction </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Direction' (direction: IDirection) = Direction.Value(direction)
@@ -331,7 +345,9 @@ module WritingMode =
     /// <param name="writingMode">
     ///     can be:
     ///     - <c> WritingMode </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let WritingMode' (writingMode: IWritingMode) = writingMode |> WritingMode.Value
@@ -433,7 +449,9 @@ module Break =
     /// <param name="breakAfter">
     ///     can be:
     ///     - <c> BreakAfter </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -471,7 +489,9 @@ module Break =
     /// <param name="breakBefore">
     ///     can be:
     ///     - <c> BreakBefore </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -500,7 +520,9 @@ module Break =
     /// <param name="breakInside">
     ///     can be:
     ///     - <c> BreakInside </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>

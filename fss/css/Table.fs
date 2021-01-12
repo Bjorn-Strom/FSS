@@ -64,7 +64,9 @@ module Table =
     /// <param name="captionSide">
     ///     can be:
     ///     - <c> CaptionSide </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
     let CaptionSide' captionSide = CaptionSide.Value captionSide
@@ -87,7 +89,9 @@ module Table =
     /// <param name="emptyCells">
     ///     can be:
     ///     - <c> EmptyCells </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
     let private EmptyCells' (emptyCells: IEmptyCells) = emptyCells |> EmptyCells.Value
@@ -111,7 +115,9 @@ module Table =
     /// <param name="layout">
     ///     can be:
     ///     - <c> TableLayout </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     ///     - <c> Auto </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>

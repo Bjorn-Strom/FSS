@@ -60,7 +60,9 @@ module Overflow =
     /// <param name="overflow">
     ///     can be:
     ///     - <c> Overflow </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     ///     - <c> Auto </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -88,7 +90,9 @@ module Overflow =
     /// <param name="overflow">
     ///     can be:
     ///     - <c> Overflow </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     ///     - <c> Auto </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -116,7 +120,9 @@ module Overflow =
     /// <param name="overflow">
     ///     can be:
     ///     - <c> Overflow </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     ///     - <c> Auto </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -143,7 +149,9 @@ module Overflow =
     /// <param name="overflowWrap">
     ///     can be:
     ///     - <c> Overflow </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     ///     - <c> Normal </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>

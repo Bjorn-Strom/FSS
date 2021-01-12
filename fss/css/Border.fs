@@ -152,7 +152,9 @@ module Border =
     /// <summary>Resets border.</summary>
     /// <param name="border">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -197,7 +199,9 @@ module Border =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderRadius' (radius: IBorderRadius) = BorderRadius.Value(radius)
@@ -222,7 +226,9 @@ module Border =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderBottomLeftRadius' (radius: IBorderRadius) = BorderBottomLeftRadius.Value(radius)
@@ -247,7 +253,9 @@ module Border =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderBottomRightRadius' (radius: IBorderRadius) = BorderBottomRightRadius.Value(radius)
@@ -272,7 +280,9 @@ module Border =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderTopLeftRadius' (radius: IBorderRadius) = BorderTopLeftRadius.Value(radius)
@@ -297,7 +307,9 @@ module Border =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderTopRightRadius' (radius: IBorderRadius) = BorderTopRightRadius.Value(radius)
@@ -343,7 +355,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderWidth </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderWidth' (width: IBorderWidth) = BorderWidth.Value(width)
@@ -369,7 +383,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderWidth </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderTopWidth' (width: IBorderWidth) = BorderTopWidth.Value(width)
@@ -395,7 +411,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderWidth </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderRightWidth' (width: IBorderWidth) = BorderRightWidth.Value(width)
@@ -421,7 +439,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderWidth </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderBottomWidth' (width: IBorderWidth) = BorderBottomWidth.Value(width)
@@ -447,7 +467,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderWidth </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderLeftWidth' (width: IBorderWidth) = BorderLeftWidth.Value(width)
@@ -500,7 +522,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderStyle </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderStyle' (style: IBorderStyle) = BorderStyle.Value(style)
@@ -534,7 +558,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderStyle </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderTopStyle' (style: IBorderStyle) = BorderTopStyle.Value(style)
@@ -568,7 +594,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderStyle </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderRightStyle' (style: IBorderStyle) = BorderRightStyle.Value(style)
@@ -602,7 +630,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderStyle </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderBottomStyle' (style: IBorderStyle) = BorderBottomStyle.Value(style)
@@ -636,7 +666,9 @@ module Border =
     ///     can be:
     ///     - <c> BorderStyle </c>
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderLeftStyle' (style: IBorderStyle) = BorderLeftStyle.Value(style)
@@ -661,7 +693,9 @@ module Border =
     /// <param name="collapse">
     ///     can be:
     ///     - <c> BorderCollapse </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderCollapse' (collapse: IBorderCollapse) =  BorderCollapse.Value(collapse)
@@ -701,7 +735,9 @@ module Border =
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
     ///     - <c> BorderImageOutset </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderImageOutset' (outset: IBorderImageOutset) =  BorderImageOutset.Value(outset)
@@ -730,7 +766,9 @@ module Border =
     /// <param name="repeat">
     ///     can be:
     ///     - <c> BorderImageRepeat </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderImageRepeat' (repeat: IBorderRepeat) = BorderImageRepeat.Value(repeat)
@@ -771,7 +809,9 @@ module Border =
     ///     - <c> BorderImageSlice </c>
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderImageSlice' (slice: IBorderImageSlice) = BorderImageSlice.Value(slice)
@@ -962,7 +1002,9 @@ module Border =
     /// <param name="color">
     ///     can be:
     ///     - <c> CssColor </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderColor' (color: IBorderColor) = BorderColor.Value(color)
@@ -1134,7 +1176,9 @@ module Border =
     /// <param name="color">
     ///     can be:
     ///     - <c> CssColor </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderTopColor' (color: IBorderColor) = BorderTopColor.Value(color)
@@ -1306,7 +1350,9 @@ module Border =
     /// <param name="color">
     ///     can be:
     ///     - <c> CssColor </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderRightColor' (color: IBorderColor) = BorderRightColor.Value(color)
@@ -1478,7 +1524,9 @@ module Border =
     /// <param name="color">
     ///     can be:
     ///     - <c> CssColor </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderBottomColor' (color: IBorderColor) = BorderBottomColor.Value(color)
@@ -1650,7 +1698,9 @@ module Border =
     /// <param name="color">
     ///     can be:
     ///     - <c> CssColor </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderLeftColor' (color: IBorderColor) = BorderLeftColor.Value(color)
@@ -1678,7 +1728,9 @@ module Border =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BorderSpacing' (spacing: IBorderSpacing) = BorderSpacing.Value(spacing)
@@ -1721,7 +1773,9 @@ module Border =
     ///     - <c> CssFloat </c>
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -1811,7 +1865,9 @@ module Border =
     /// <param name="source">
     ///     can be:
     ///     - <c> Image </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>

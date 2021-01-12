@@ -49,7 +49,9 @@ module Padding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -72,7 +74,9 @@ module Padding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -95,7 +99,9 @@ module Padding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -118,7 +124,9 @@ module Padding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -141,7 +149,9 @@ module Padding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -192,7 +202,9 @@ module ScrollPadding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -214,7 +226,9 @@ module ScrollPadding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -236,7 +250,9 @@ module ScrollPadding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -257,7 +273,9 @@ module ScrollPadding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -279,7 +297,9 @@ module ScrollPadding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>

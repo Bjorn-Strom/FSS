@@ -309,7 +309,9 @@ module Font =
     ///     - <c> FontSize </c>
     ///     - <c> Size </c>
     ///     - <c> Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FontSize' (size: IFontSize) = FontSize.Value(size)
@@ -331,7 +333,9 @@ module Font =
     /// <param name="style">
     ///     can be:
     ///     - <c> FontStyle </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -363,7 +367,9 @@ module Font =
     ///     can be:
     ///     - <c> FontStretch </c>
     ///     - <c> Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -388,7 +394,9 @@ module Font =
     ///     can be:
     ///     - <c> FontWeight </c>
     ///     - <c> CssInt </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -414,7 +422,9 @@ module Font =
     ///     - <c> CssFloat </c>
     ///     - <c> Size </c>
     ///     - <c> Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -444,7 +454,9 @@ module Font =
     ///     - <c> LineBreak </c>
     ///     - <c> Auto </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let LineBreak' (break': ILineBreak) = LineBreak.Value(break')
@@ -468,7 +480,9 @@ module Font =
     ///     can be:
     ///     - <c> Size </c>
     ///     - <c> Normal </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let LetterSpacing' (spacing: ILetterSpacing) = LetterSpacing.Value(spacing)
@@ -522,7 +536,9 @@ module Font =
     /// <param name="fontFamily">
     ///     can be:
     ///     - <c> FontFamily </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FontFamily' (fontFamily: IFontFamily) = FontFamily.Value(fontFamily)
@@ -568,7 +584,9 @@ module Font =
     /// <param name="featureSetting">
     ///     can be:
     ///     - <c> FontFeatureSetting </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FontFeatureSetting' (featureSetting: IFontFeatureSetting) = FontFeatureSetting.Value(featureSetting)
@@ -597,7 +615,9 @@ module Font =
     /// <param name="variant">
     ///     can be:
     ///     - <c> FontFeatureSetting </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FontVariantNumeric' (variant: IFontVariantNumeric) = FontVariantNumeric.Value(variant)
@@ -623,7 +643,9 @@ module Font =
     /// <param name="variant">
     ///     can be:
     ///     - <c> FontVariantCaps </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -653,7 +675,9 @@ module Font =
     /// <param name="variant">
     ///     can be:
     ///     - <c> FontVariantEastAsian </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -683,7 +707,9 @@ module Font =
     /// <param name="ligature">
     ///     can be:
     ///     - <c> FontVariantLigature </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Normal </c>
     ///     - <c> None </c>
     /// </param>

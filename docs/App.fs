@@ -194,10 +194,10 @@ module App =
                             You might want to store CSS in F# variables as well and Fss supports that with value methods.
                             All Fss properties should have a value method that accepts a type for that Css property.
                             Continuing with our TextDecorationColor example you could do the following"""
-                            codeBlock ["let myDecorationColor = CSSColor.White"
+                            codeBlock ["let myDecorationColor = CssColor.White"
                                        "fss [ TextDecorationColor.Value(myDecorationColor) ]"]
                             str """As this is something you might potentially want to do quite a bit of (and we do like pipelining) there exists a shorthand which is TextDecorationPrime"""
-                            codeBlock ["let myDecorationColor = CSSColor.White"
+                            codeBlock ["let myDecorationColor = CssColor.White"
                                        "fss [ TextDecorationColor' myDecorationColor ]"]
 
                             h3 [] [ str "Shorthands" ]
@@ -1294,24 +1294,24 @@ module App =
                     div [ ClassName multilineText ]
                         [
                             h3 [] [ str "Linear gradient" ]
-                            codeBlock ["let linearGradientStyle1 = fss [ BackgroundImage.LinearGradient(CSSColor.Hex \"e66465\", CSSColor.Hex \"9198e5\") ]"
+                            codeBlock ["let linearGradientStyle1 = fss [ BackgroundImage.LinearGradient(CssColor.Hex \"e66465\", CssColor.Hex \"9198e5\") ]"
                                        "let linearGradientStyle2 ="
                                        "   fss"
                                        "       ["
                                        "           BackgroundImage.LinearGradient(turn 0.25,"
-                                       "                                          [CSSColor.Hex \"3f87a6\" :> IColorStop"
-                                       "                                           CSSColor.Hex \"ebf8e1\" :> IColorStop"
-                                       "                                           CSSColor.Hex \"f69d3c\" :> IColorStop])"
+                                       "                                          [CssColor.Hex \"3f87a6\" :> IColorStop"
+                                       "                                           CssColor.Hex \"ebf8e1\" :> IColorStop"
+                                       "                                           CssColor.Hex \"f69d3c\" :> IColorStop])"
                                        "       ]"
                                        "let linearGradientStyle3 ="
                                        "   fss"
                                        "       ["
                                        "           BackgroundImage.LinearGradient(ToLeft,"
                                        "                                          ["
-                                       "                                             CSSColor.Hex \"333\" :> IColorStop"
-                                       "                                              stop (CSSColor.Hex \"333\") (pct 50)"
-                                       "                                              stop (CSSColor.Hex \"eee\") (pct 75)"
-                                       "                                              stop (CSSColor.Hex \"333\") (pct 75)"
+                                       "                                             CssColor.Hex \"333\" :> IColorStop"
+                                       "                                              stop (CssColor.Hex \"333\") (pct 50)"
+                                       "                                              stop (CssColor.Hex \"eee\") (pct 75)"
+                                       "                                              stop (CssColor.Hex \"333\") (pct 75)"
                                        "                                          ])"
                                        "       ]"]
 
@@ -1327,10 +1327,10 @@ module App =
                                         "        ["
                                         "            BackgroundImage.RepeatingLinearGradient(ToLeft,"
                                         "                                           ["
-                                        "                                               CSSColor.Hex \"e66465\" :> IColorStop"
-                                        "                                               stop (CSSColor.Hex \"e66465\") (px 20)"
-                                        "                                               stop (CSSColor.Hex \"9198e5\") (px 20)"
-                                        "                                               stop (CSSColor.Hex \"9198e5\") (px 25)"
+                                        "                                               CssColor.Hex \"e66465\" :> IColorStop"
+                                        "                                               stop (CssColor.Hex \"e66465\") (px 20)"
+                                        "                                               stop (CssColor.Hex \"9198e5\") (px 20)"
+                                        "                                               stop (CssColor.Hex \"9198e5\") (px 25)"
                                         "                                           ])"
                                         "        ]"
                                         "let repeatingLinearGradientStyle2 ="
@@ -1338,9 +1338,9 @@ module App =
                                         "        ["
                                         "            BackgroundImage.RepeatingLinearGradient(deg 45.,"
                                         "                                           ["
-                                        "                                               CSSColor.Hex \"3f87a6\" :> IColorStop"
-                                        "                                               stop (CSSColor.Hex \"ebf8e1\") (px 15)"
-                                        "                                               stop (CSSColor.Hex \"f69d3c\") (px 20)"
+                                        "                                               CssColor.Hex \"3f87a6\" :> IColorStop"
+                                        "                                               stop (CssColor.Hex \"ebf8e1\") (px 15)"
+                                        "                                               stop (CssColor.Hex \"f69d3c\") (px 20)"
                                         "                                           ])"
                                         "        ]"]
                             div [ ClassName (fss [ Label' "Flex 2"; Display.Flex ]) ]
@@ -1350,21 +1350,21 @@ module App =
                                 ]
                             h3 [] [ str "Radial gradient" ]
 
-                            codeBlock [ "let radialGradientStyle1 = fss [ BackgroundImage.RadialGradient(CSSColor.Hex \"e66465\", CSSColor.Hex \"9198e5\") ]"
+                            codeBlock [ "let radialGradientStyle1 = fss [ BackgroundImage.RadialGradient(CssColor.Hex \"e66465\", CssColor.Hex \"9198e5\") ]"
                                         "let radialGradientStyle2 ="
                                         "    fss"
                                         "        ["
-                                        "            BackgroundImage.RadialGradient(ClosestSide, [CSSColor.Hex \"3f87a6\" :> IColorStop; CSSColor.Hex \"ebf8e1\" :> IColorStop; CSSColor.Hex \"f69d3c\" :> IColorStop])"
+                                        "            BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex \"3f87a6\" :> IColorStop; CssColor.Hex \"ebf8e1\" :> IColorStop; CssColor.Hex \"f69d3c\" :> IColorStop])"
                                         "        ]"
                                         "let radialGradientStyle3 ="
                                         "    fss"
                                         "        ["
                                         "            BackgroundImage.RadialGradient("
                                         "                CircleAt <| ImagePosition.Percent(pct 100),"
-                                        "                [CSSColor.Hex \"333\" :> IColorStop"
-                                        "                 stop (CSSColor.Hex \"333\") (pct 50)"
-                                        "                 stop (CSSColor.Hex \"eee\") (pct 75)"
-                                        "                 stop (CSSColor.Hex \"333\") (pct 75) ])"
+                                        "                [CssColor.Hex \"333\" :> IColorStop"
+                                        "                 stop (CssColor.Hex \"333\") (pct 50)"
+                                        "                 stop (CssColor.Hex \"eee\") (pct 75)"
+                                        "                 stop (CssColor.Hex \"333\") (pct 75) ])"
                                         "        ]"]
 
                             div [ ClassName (fss [ Label' "Flex 3"; Display.Flex ]) ]
@@ -1377,22 +1377,22 @@ module App =
                             codeBlock [ "let repeatingRadialGradientStyle1 ="
                                         "    fss"
                                         "        ["
-                                        "            BackgroundImage.RepeatingRadialGradient(CSSColor.Hex \"e66465\", stop (CSSColor.Hex \"9198e5\") (pct 20))"
+                                        "            BackgroundImage.RepeatingRadialGradient(CssColor.Hex \"e66465\", stop (CssColor.Hex \"9198e5\") (pct 20))"
                                         "        ]"
                                         "let repeatingRadialGradientStyle2 ="
                                         "    fss"
                                         "        ["
-                                        "            BackgroundImage.RepeatingRadialGradient(ClosestSide, [CSSColor.Hex \"3f87a6\" :> IColorStop; CSSColor.Hex \"ebf8e1\" :> IColorStop; CSSColor.Hex \"f69d3c\" :> IColorStop])"
+                                        "            BackgroundImage.RepeatingRadialGradient(ClosestSide, [CssColor.Hex \"3f87a6\" :> IColorStop; CssColor.Hex \"ebf8e1\" :> IColorStop; CssColor.Hex \"f69d3c\" :> IColorStop])"
                                         "        ]"
                                         "let repeatingRadialGradientStyle3 ="
                                         "    fss"
                                         "        ["
                                         "            BackgroundImage.RepeatingRadialGradient("
                                         "                CircleAt <| ImagePosition.Percent(pct 100),"
-                                        "                [CSSColor.Hex \"333\" :> IColorStop"
-                                        "                 stop (CSSColor.Hex \"333\") (px 10)"
-                                        "                 stop (CSSColor.Hex \"eee\") (px 10)"
-                                        "                 stop (CSSColor.Hex \"eee\") (px 20) ])"
+                                        "                [CssColor.Hex \"333\" :> IColorStop"
+                                        "                 stop (CssColor.Hex \"333\") (px 10)"
+                                        "                 stop (CssColor.Hex \"eee\") (px 10)"
+                                        "                 stop (CssColor.Hex \"eee\") (px 20) ])"
                                         "        ]"]
                             div [ ClassName (fss [ Label' "Flex 4"; Display.Flex ]) ]
                                 [

@@ -27,7 +27,9 @@ module Perspective =
     ///     can be:
     ///     - <c> Units.Size </c> 
     ///     - <c> None </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Perspective' (perspective: IPerspective) = Perspective.Value(perspective)

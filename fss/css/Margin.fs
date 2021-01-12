@@ -48,7 +48,9 @@ module Margin =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -71,7 +73,9 @@ module Margin =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -95,7 +99,9 @@ module Margin =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -118,7 +124,9 @@ module Margin =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -142,7 +150,9 @@ module Margin =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -193,7 +203,9 @@ module ScrollMargin =
     /// <param name="scrollMargin">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMargin' (scrollMargin: IScrollMargin) = ScrollMargin.Value(scrollMargin)
@@ -213,7 +225,9 @@ module ScrollMargin =
     /// <param name="top">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMarginTop' (top: IScrollMargin) = ScrollMarginTop.Value(top)
@@ -233,7 +247,9 @@ module ScrollMargin =
     /// <param name="right">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMarginRight' (right: IScrollMargin) = ScrollMarginRight.Value(right)
@@ -252,7 +268,9 @@ module ScrollMargin =
     /// <param name="bottom">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMarginBottom' (bottom: IScrollMargin) = ScrollMarginBottom.Value(bottom)
@@ -272,7 +290,9 @@ module ScrollMargin =
     /// <param name="left">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMarginLeft' (left: IScrollMargin) = ScrollMarginLeft.Value(left)

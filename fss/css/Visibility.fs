@@ -38,7 +38,9 @@ module Visibility =
     /// <param name="visibility">
     ///     can be:
     ///     - <c> Visibility </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c> 
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Visibility' (visibility: IVisibility) = Visibility.Value(visibility)

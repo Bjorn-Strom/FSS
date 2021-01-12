@@ -112,7 +112,9 @@ module Background =
     /// <param name="clip">
     ///     can be:
     ///     - <c> BackgroundClip </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BackgroundClip' (clip: IBackgroundClip) = BackgroundClip.Value(clip)
@@ -137,7 +139,9 @@ module Background =
     /// <param name="origin">
     ///     can be:
     ///     - <c> BackgroundOrigin </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BackgroundOrigin' (origin: IBackgroundOrigin) = BackgroundOrigin.Value(origin)
@@ -169,7 +173,9 @@ module Background =
     /// <param name="repeat">
     ///     can be:
     ///     - <c> BackgroundRepeat </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BackgroundRepeat' (repeat: IBackgroundRepeat) = BackgroundRepeat.Value(repeat)
@@ -200,7 +206,9 @@ module Background =
     ///     - <c> BackgroundSize </c>
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -226,7 +234,9 @@ module Background =
     /// <param name="attachment">
     ///     can be:
     ///     - <c> BackgroundAttachment </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BackgroundAttachment' (attachment: IBackgroundAttachment) = BackgroundAttachment.Value(attachment)
@@ -508,7 +518,9 @@ module Background =
     /// <param name="position">
     ///     can be:
     ///     - <c> BackgroundPosition </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
     /// </param>

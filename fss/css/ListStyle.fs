@@ -123,7 +123,9 @@ module ListStyle =
     /// <param name="style">
     ///     can be:
     ///     - <c> None </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ListStyle' (style: IListStyle) = ListStyle.Value(style)
@@ -148,7 +150,9 @@ module ListStyle =
     /// <param name="image">
     ///     can be:
     ///     - <c> ListStyleImage</c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -174,7 +178,9 @@ module ListStyle =
     /// <param name="position">
     ///     can be:
     ///     - <c> ListStylePosition</c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ListStylePosition' (position: IListStylePosition) = ListStylePosition.Value(position)
@@ -255,7 +261,9 @@ module ListStyle =
     ///     - <c> ListStyleType</c>
     ///     - <c> CounterStyle </c>
     ///     - <c> CssString </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>

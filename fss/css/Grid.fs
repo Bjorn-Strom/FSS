@@ -247,7 +247,9 @@ module Grid =
     /// <param name="flow">
     ///     can be:
     ///     - <c> GridAutoFlow </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let GridAutoFlow' (flow: IGridAutoFlow) = GridAutoFlow.Value(flow)
@@ -282,7 +284,9 @@ module Grid =
     /// <summary>Resets grid template area.</summary>
     /// <param name="areas">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -308,7 +312,9 @@ module Grid =
     /// <summary>Specifies gap between rows and column in grid.</summary>
     /// <param name="gap">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
     /// </param>
@@ -331,7 +337,9 @@ module Grid =
     /// <summary>Specifies gap between rows in grid.</summary>
     /// <param name="rowGap">
     ///     can be:
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
     /// </param>
@@ -358,7 +366,9 @@ module Grid =
     /// <param name="position">
     ///     can be:
     ///     - <c> GridPosition </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -431,7 +441,9 @@ module Grid =
     /// <param name="row">
     ///     can be:
     ///     - <c> GridPosition </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -507,7 +519,9 @@ module Grid =
     /// <param name="column">
     ///     can be:
     ///     - <c> GridPosition </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -623,7 +637,9 @@ module Grid =
     /// <param name="templateRows">
     ///     can be:
     ///     - <c> GridTemplateRows </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     ///     - <c> None </c>
     ///     - <c> Units.Size </c>
@@ -703,7 +719,9 @@ module Grid =
     /// <param name="templateColumns">
     ///     can be:
     ///     - <c> GridTemplateColumns </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> Auto </c>
     ///     - <c> None </c>
     ///     - <c> Units.Size </c>
@@ -738,7 +756,9 @@ module Grid =
     ///     - <c> Units.Fraction </c>
     ///     - <c> ContentSize </c>
     ///     - <c> Auto </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> MinMax </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -770,7 +790,9 @@ module Grid =
     ///     - <c> Units.Fraction </c>
     ///     - <c> ContentSize </c>
     ///     - <c> Auto </c>
-    ///     - <c> Global </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
     ///     - <c> MinMax </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
