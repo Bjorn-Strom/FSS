@@ -105,10 +105,10 @@ module Position =
     /// <summary>Specifies vertical position of element.</summary>
     /// <param name="top">
     ///     can be:
-    ///     - <c> Units.Size </c> 
-    ///     - <c> Units.Percent </c> 
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Top' (top: IPositioned) = Top.Value(top)
@@ -131,10 +131,10 @@ module Position =
     /// <summary>Specifies horizontal position of element.</summary>
     /// <param name="right">
     ///     can be:
-    ///     - <c> Units.Size </c> 
-    ///     - <c> Units.Percent </c> 
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Right' (right: IPositioned) = Right.Value(right)
@@ -157,10 +157,10 @@ module Position =
     /// <summary>Specifies vertial position of element.</summary>
     /// <param name="bottom">
     ///     can be:
-    ///     - <c> Units.Size </c> 
-    ///     - <c> Units.Percent </c> 
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Bottom' (bottom: IPositioned) = Bottom.Value(bottom)
@@ -183,10 +183,10 @@ module Position =
     /// <summary>Specifies vertical alignment.</summary>
     /// <param name="left">
     ///     can be:
-    ///     - <c> Units.Size </c> 
-    ///     - <c> Units.Percent </c> 
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Left' (left: IPositioned) = Left.Value(left)
@@ -216,12 +216,12 @@ module Position =
     /// <summary>Specifies vertical alignment.</summary>
     /// <param name="alignment">
     ///     can be:
-    ///     - <c> VerticalAlign </c> 
-    ///     - <c> Units.Size </c> 
-    ///     - <c> Units.Percent </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> VerticalAlign </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
     /// </param>
-    /// <returns>Css property for fss.</returns
+    /// <returns>Css property for fss.</returns>
     let VerticalAlign' (alignment: IVerticalAlign) = VerticalAlign.Value(alignment)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/float
@@ -246,9 +246,9 @@ module Position =
     /// <summary>Specifies element float.</summary>
     /// <param name="float">
     ///     can be:
-    ///     - <c> Float </c> 
-    ///     - <c> Global </c> 
-    ///     - <c> None </c> 
+    ///     - <c> Float </c>
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Float' (float: IFloat) = Float.Value(float)
@@ -287,8 +287,8 @@ module Position =
     /// <summary>Specifies element float.</summary>
     /// <param name="direction">
     ///     can be:
-    ///     - <c> Direction </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> Direction </c>
+    ///     - <c> Global </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Direction' (direction: IDirection) = Direction.Value(direction)
@@ -330,8 +330,8 @@ module WritingMode =
     /// <summary>Specifies direction elements are written.</summary>
     /// <param name="writingMode">
     ///     can be:
-    ///     - <c> WritingMode </c> 
-    ///     - <c> Global </c> 
+    ///     - <c> WritingMode </c>
+    ///     - <c> Global </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let WritingMode' (writingMode: IWritingMode) = writingMode |> WritingMode.Value
@@ -432,9 +432,9 @@ module Break =
     /// <summary>Specifies how elements behave after a generated box.</summary>
     /// <param name="breakAfter">
     ///     can be:
-    ///     - <c> BreakAfter </c> 
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> BreakAfter </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BreakAfter' (breakAfter: IBreakAfter) = breakAfter |> BreakAfter.Value
@@ -470,9 +470,9 @@ module Break =
     /// <summary>Specifies how elements behave before a generated box.</summary>
     /// <param name="breakBefore">
     ///     can be:
-    ///     - <c> BreakBefore </c> 
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> BreakBefore </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BreakBefore' (breakBefore: IBreakBefore) = breakBefore |> BreakBefore.Value
@@ -499,9 +499,9 @@ module Break =
     /// <summary>Specifies how elements behave inside a generated box.</summary>
     /// <param name="breakInside">
     ///     can be:
-    ///     - <c> BreakInside </c> 
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> BreakInside </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BreakInside' (breakInside: IBreakInside) = breakInside |> BreakInside.Value

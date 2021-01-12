@@ -48,8 +48,8 @@ module Margin =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Margin' (margin: IMargin) = Margin.Value(margin)
@@ -67,12 +67,12 @@ module Margin =
         static member Unset = Unset |> marginTopValue'
 
     /// <summary>Specifies the margin on top side of an element.</summary>
-    /// <param name="margin">
+    /// <param name="top">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let MarginTop' (top: IMargin) = MarginTop.Value(top)
@@ -83,21 +83,22 @@ module Margin =
         |> marginToString
         |> marginRightValue
 
-    /// <summary>Specifies the margin on right side of an element.</summary>
-    /// <param name="margin">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
-    /// </param>
-    /// <returns>Css property for fss.</returns>
     type MarginRight =
         static member Value (right: IMargin) = right |> marginRightValue'
         static member Auto = Auto |> marginRightValue'
         static member Inherit = Inherit |> marginRightValue'
         static member Initial = Initial |> marginRightValue'
         static member Unset = Unset |> marginRightValue'
+
+    /// <summary>Specifies the margin on right side of an element.</summary>
+    /// <param name="right">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let MarginRight' (right: IMargin) = MarginRight.Value(right)
 
     let private marginBottomValue value = PropertyValue.cssValue Property.MarginBottom value
@@ -111,14 +112,14 @@ module Margin =
         static member Inherit = Inherit |> marginBottomValue'
         static member Initial = Initial |> marginBottomValue'
         static member Unset = Unset |> marginBottomValue'
-    
+
     /// <summary>Specifies the margin on bottom side of an element.</summary>
-    /// <param name="margin">
+    /// <param name="bottom">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let MarginBottom' (bottom: IMargin) = MarginBottom.Value(bottom)
@@ -129,15 +130,6 @@ module Margin =
         |> marginToString
         |> marginLeftValue
 
-    /// <summary>Specifies the margin on left side of an element.</summary>
-    /// <param name="margin">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
-    /// </param>
-    /// <returns>Css property for fss.</returns>
     type MarginLeft =
         static member Value (left: IMargin) = left |> marginLeftValue'
         static member Auto = Auto |> marginLeftValue'
@@ -145,6 +137,15 @@ module Margin =
         static member Initial = Initial |> marginLeftValue'
         static member Unset = Unset |> marginLeftValue'
 
+    /// <summary>Specifies the margin on left side of an element.</summary>
+    /// <param name="left">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let MarginLeft' (left: IMargin) = MarginLeft.Value(left)
 
 
@@ -189,10 +190,10 @@ module ScrollMargin =
         static member Unset = Unset |> scrollMarginValue'
 
     /// <summary>Specifies the scroll margin on all sides of an element.</summary>
-    /// <param name="margin">
+    /// <param name="scrollMargin">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c> 
+    ///     - <c> Global </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMargin' (scrollMargin: IScrollMargin) = ScrollMargin.Value(scrollMargin)
@@ -209,10 +210,10 @@ module ScrollMargin =
         static member Unset = Unset |> scrollMarginTopValue'
 
     /// <summary>Specifies the scroll margin on top side of an element.</summary>
-    /// <param name="margin">
+    /// <param name="top">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c> 
+    ///     - <c> Global </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMarginTop' (top: IScrollMargin) = ScrollMarginTop.Value(top)
@@ -229,10 +230,10 @@ module ScrollMargin =
         static member Unset = Unset |> scrollMarginRightValue'
 
     /// <summary>Specifies the scroll margin on right side of an element.</summary>
-    /// <param name="margin">
+    /// <param name="right">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c> 
+    ///     - <c> Global </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMarginRight' (right: IScrollMargin) = ScrollMarginRight.Value(right)
@@ -248,10 +249,10 @@ module ScrollMargin =
         static member Initial = Initial |> scrollMarginBottomValue'
         static member Unset = Unset |> scrollMarginBottomValue'
     /// <summary>Specifies the scroll margin on bottom side of an element.</summary>
-    /// <param name="margin">
+    /// <param name="bottom">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c> 
+    ///     - <c> Global </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMarginBottom' (bottom: IScrollMargin) = ScrollMarginBottom.Value(bottom)
@@ -268,10 +269,10 @@ module ScrollMargin =
         static member Unset = Unset |> scrollMarginLeftValue'
 
     /// <summary>Specifies the scroll margin on left side of an element.</summary>
-    /// <param name="margin">
+    /// <param name="left">
     ///     can be:
     ///     - <c> Units.Size </c>
-    ///     - <c> Global </c> 
+    ///     - <c> Global </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollMarginLeft' (left: IScrollMargin) = ScrollMarginLeft.Value(left)

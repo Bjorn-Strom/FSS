@@ -329,7 +329,7 @@ module Grid =
         static member Normal = Normal |> gridRowGapValue'
 
     /// <summary>Specifies gap between rows in grid.</summary>
-    /// <param name="gap">
+    /// <param name="rowGap">
     ///     can be:
     ///     - <c> Global </c>
     ///     - <c> Units.Size </c>
@@ -337,29 +337,6 @@ module Grid =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let GridRowGap' (rowGap: IGridRowGap) = GridRowGap.Value(rowGap)
-
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
-    let private gridColumnGapValue value = PropertyValue.cssValue Property.GridColumnGap value
-    let private gridColumnGapValue' value =
-        value
-        |> gridColumnGapToString
-        |> gridColumnGapValue
-    type GridColumnGap =
-        static member Value (gap: IGridColumnGap) = gap |> gridColumnGapValue'
-        static member Inherit = Inherit |> gridColumnGapValue'
-        static member Initial = Initial |> gridColumnGapValue'
-        static member Unset = Unset |> gridColumnGapValue'
-        static member Normal = Normal |> gridColumnGapValue'
-
-    /// <summary>Specifies gap between columns in grid.</summary>
-    /// <param name="gap">
-    ///     can be:
-    ///     - <c> Global </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let GridColumnGap' (ColumnGap: IGridColumnGap) = GridColumnGap.Value(ColumnGap)
 
     // Grid position
     type GridPosition =
@@ -527,7 +504,7 @@ module Grid =
         static member Unset = GridPosition.Unset |> gridColumnValue'
 
     /// <summary>Specifies position in grid by column.</summary>
-    /// <param name="row">
+    /// <param name="column">
     ///     can be:
     ///     - <c> GridPosition </c>
     ///     - <c> Global </c>
@@ -643,7 +620,7 @@ module Grid =
         static member Unset = Unset |> templateRowValue'
 
     /// <summary>Defines grid rows.</summary>
-    /// <param name="row">
+    /// <param name="templateRows">
     ///     can be:
     ///     - <c> GridTemplateRows </c>
     ///     - <c> Global </c>
@@ -723,9 +700,9 @@ module Grid =
         static member Unset = Unset |> templateColumnValue'
 
     /// <summary>Defines grid columns.</summary>
-    /// <param name="row">
+    /// <param name="templateColumns">
     ///     can be:
-    ///     - <c> GridTemplateRows </c>
+    ///     - <c> GridTemplateColumns </c>
     ///     - <c> Global </c>
     ///     - <c> Auto </c>
     ///     - <c> None </c>
@@ -786,7 +763,7 @@ module Grid =
         static member Unset = Unset |> autoColumnsValue'
 
     /// <summary>Defines auto generated grid column.</summary>
-    /// <param name="autoColumn">
+    /// <param name="autoColumns">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>

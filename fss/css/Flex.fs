@@ -470,7 +470,7 @@ module Flex =
         static member Unset = Unset |> flexDirectionValue'
 
     /// <summary>Specifies in which direction items in a flex container are oriented.</summary>
-    /// <param name="align">
+    /// <param name="direction">
     ///     can be:
     ///     - <c> FlexDirection </c>
     ///     - <c> Global </c>
@@ -517,7 +517,7 @@ module Flex =
         static member Unset = Unset |> orderValue'
 
     /// <summary>Specify order of items in flex.</summary>
-    /// <param name="wrap">
+    /// <param name="order">
     ///     can be:
     ///     - <c> CssInt </c>
     ///     - <c> Global </c>

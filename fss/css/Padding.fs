@@ -49,8 +49,8 @@ module Padding =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Padding' (padding: IPadding) = Padding.Value(padding)
@@ -68,12 +68,12 @@ module Padding =
         static member Unset = Unset |> paddingTopValue'
 
     /// <summary>Specifies the padding on top sides of an element.</summary>
-    /// <param name="padding">
+    /// <param name="top">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let PaddingTop' (top: IPadding) = PaddingTop.Value(top)
@@ -91,12 +91,12 @@ module Padding =
         static member Unset = Unset |> paddingRightValue'
 
     /// <summary>Specifies the padding on right side of an element.</summary>
-    /// <param name="padding">
+    /// <param name="right">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let PaddingRight' (right: IPadding) = PaddingRight.Value(right)
@@ -114,12 +114,12 @@ module Padding =
         static member Unset = Unset |> paddingBottomValue'
 
     /// <summary>Specifies the padding on bottom side of an element.</summary>
-    /// <param name="padding">
+    /// <param name="bottom">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let PaddingBottom' (bottom: IPadding) = PaddingBottom.Value(bottom)
@@ -137,12 +137,12 @@ module Padding =
         static member Unset = Unset |> paddingLeftValue'
 
     /// <summary>Specifies the padding on left side of an element.</summary>
-    /// <param name="padding">
+    /// <param name="left">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let PaddingLeft' (left: IPadding) = PaddingLeft.Value(left)
@@ -188,12 +188,12 @@ module ScrollPadding =
         static member Unset = Unset |> scrollPaddingValue'
 
     /// <summary>Specifies the scroll padding on all sides of an element.</summary>
-    /// <param name="padding">
+    /// <param name="scrollPadding">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollPadding' (scrollPadding: IScrollPadding) = ScrollPadding.Value(scrollPadding)
@@ -210,12 +210,12 @@ module ScrollPadding =
         static member Unset = Unset |> scrollPaddingTopValue'
 
     /// <summary>Specifies the scroll padding on top side of an element.</summary>
-    /// <param name="padding">
+    /// <param name="top">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollPaddingTop' (top: IScrollPadding) = ScrollPaddingTop.Value(top)
@@ -232,12 +232,12 @@ module ScrollPadding =
         static member Unset = Unset |> scrollPaddingRightValue'
 
     /// <summary>Specifies the scroll padding on right side of an element.</summary>
-    /// <param name="padding">
+    /// <param name="right">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollPaddingRight' (right: IScrollPadding) = ScrollPaddingRight.Value(right)
@@ -253,12 +253,12 @@ module ScrollPadding =
         static member Initial = Initial |> scrollPaddingBottomValue'
         static member Unset = Unset |> scrollPaddingBottomValue'
     /// <summary>Specifies the scroll padding on bottom side of an element.</summary>
-    /// <param name="padding">
+    /// <param name="bottom">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollPaddingBottom' (bottom: IScrollPadding) = ScrollPaddingBottom.Value(bottom)
@@ -275,12 +275,12 @@ module ScrollPadding =
         static member Unset = Unset |> scrollPaddingLeftValue'
 
     /// <summary>Specifies the scroll padding on left side of an element.</summary>
-    /// <param name="padding">
+    /// <param name="left">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ScrollPaddingLeft' (left: IScrollPadding) = ScrollPaddingLeft.Value(left)

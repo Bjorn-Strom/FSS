@@ -63,11 +63,11 @@ module Display =
         static member Unset = Unset |> displayValue'
 
     /// <summary>Specifies the layout of the elements children.</summary>
-    /// <param name="transform">
+    /// <param name="display">
     ///     can be:
     ///     - <c> Display </c>
-    ///     - <c> Global </c> 
-    ///     - <c> None </c> 
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Display' (display: IDisplay) = Display.Value(display)

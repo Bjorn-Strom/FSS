@@ -46,7 +46,7 @@ module Transition =
         static member Unset = Unset |> transitionValue'
 
     /// <summary>Resets transition.</summary>
-    /// <param name="transform">
+    /// <param name="transition">
     ///     can be:
     ///     - <c> Global </c>
     /// </param>
@@ -68,7 +68,7 @@ module Transition =
         static member Unset = Unset |> delayValue'
 
     /// <summary>Specifies the duration to wait before a transition starts.</summary>
-    /// <param name="transform">
+    /// <param name="delay">
     ///     can be:
     ///     - <c> Units.Time </c>
     ///     - <c> Global </c>
@@ -92,7 +92,7 @@ module Transition =
         static member Unset = Unset |> transitionDurationValue'
 
     /// <summary>Specifies the duration of the transition.</summary>
-    /// <param name="transform">
+    /// <param name="duration">
     ///     can be:
     ///     - <c> Units.Time </c>
     ///     - <c> Global </c>
@@ -126,7 +126,7 @@ module Transition =
         static member Unset = Unset |> transitionTimingFunction'
 
     /// <summary>Specifies how the intermediate values are calculated.</summary>
-    /// <param name="transform">
+    /// <param name="timingFunction">
     ///     can be:
     ///     - <c> TransitionTiming </c>
     ///     - <c> Global </c>
@@ -411,7 +411,7 @@ module Transition =
         static member Unset = Unset |> transitionProperty'
 
     /// <summary>Specifies which properties should be affected by transition.</summary>
-    /// <param name="transform">
+    /// <param name="property">
     ///     can be:
     ///     - <c> Property </c>
     ///     - <c> Global </c>

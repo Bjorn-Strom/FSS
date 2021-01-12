@@ -51,12 +51,12 @@ module ContentSize =
         static member Unset = Unset |> widthValue'
 
     /// <summary>Specifies width of element.</summary>
-    /// <param name="width">
+    /// <param name="size">
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Width' (size: ILengthPercentage) = Width.Value(size)
@@ -86,8 +86,8 @@ module ContentSize =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let MinWidth' (minWidth: ILengthPercentage) = MinWidth.Value(minWidth)
@@ -117,8 +117,8 @@ module ContentSize =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let MaxWidth' (maxWidth: ILengthPercentage) = MaxWidth.Value(maxWidth)
@@ -148,8 +148,8 @@ module ContentSize =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Height' (height: ILengthPercentage) = Height.Value(height)
@@ -179,8 +179,8 @@ module ContentSize =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let MinHeight' (minHeight: ILengthPercentage) = MinHeight.Value(minHeight)
@@ -210,8 +210,8 @@ module ContentSize =
     ///     can be:
     ///     - <c> Units.Size </c>
     ///     - <c> Units.Percent </c>
-    ///     - <c> Global </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Global </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let MaxHeight' (maxHeight: ILengthPercentage) = MaxHeight.Value(maxHeight)

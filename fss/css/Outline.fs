@@ -267,7 +267,7 @@ module Outline  =
 
 
     /// <summary>Sets width of outline.</summary>
-    /// <param name="color">
+    /// <param name="width">
     ///     can be:
     ///     - <c> OutlineWidth </c>
     ///     - <c> Global </c>
