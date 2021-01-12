@@ -66,7 +66,14 @@ module Outline  =
         static member Initial = Initial |> outlineValue'
         static member Unset = Unset |> outlineValue'
 
-    let OutlineValue' (outline: IOutline) = Outline.Value(outline)
+    /// <summary>Resets outline.</summary>
+    /// <param name="outline">
+    ///     can be:
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let Outline' (outline: IOutline) = Outline.Value(outline)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
     let private colorValue value = PropertyValue.cssValue Property.OutlineColor value
@@ -232,6 +239,13 @@ module Outline  =
         static member Initial = Initial |> colorValue'
         static member Unset = Unset |> colorValue'
 
+    /// <summary>Sets color of outline.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> Global </c>
+    ///     - <c> CssColor </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let OutlineColor' (color: IOutlineColor) = OutlineColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width
@@ -251,6 +265,15 @@ module Outline  =
         static member Initial = Initial |> outlineWidthValue'
         static member Unset = Unset |> outlineWidthValue'
 
+
+    /// <summary>Sets width of outline.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> OutlineWidth </c>
+    ///     - <c> Global </c>
+    ///     - <c> Units.Size </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let OutlineWidth' (width: IOutlineWidth) = OutlineWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style
@@ -277,4 +300,12 @@ module Outline  =
         static member Initial = Initial |> outlineStyleValue'
         static member Unset = Unset |> outlineStyleValue'
 
+    /// <summary>Sets style of outline.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> OutlineStyle </c>
+    ///     - <c> Global </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
     let OutlineStyle' (style: IOutlineStyle) = OutlineStyle.Value(style)
