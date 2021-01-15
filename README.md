@@ -73,6 +73,8 @@ yarn add @emotion/css
 ```
 
 
+You can also check out this template [repo](https://github.com/Bjorn-Strom/elmish-fss-template).
+
 ## Documentation 📖
 [Docs](https://bjorn-strom.github.io/FSS/)
 

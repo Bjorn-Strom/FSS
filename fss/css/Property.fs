@@ -191,9 +191,6 @@ module Property =
         | PaddingRight
         | PaddingTop
         | Padding
-        | PageBreakAfter
-        | PageBreakBefore
-        | PageBreakInside
         | Page
         | PauseAfter
         | PauseBefore
