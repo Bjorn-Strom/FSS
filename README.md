@@ -49,7 +49,7 @@ Download one nuget package and one npm package and you are ready to go.
 - Uses Emotion-js to generate the CSS and therefore gets some of its amazing features for free
 - Discoverable, use the IDE to help you write the styling
 - Trying to support a big part of the CSS spec
-- Works independently of Fable and Feliz and thus works with both (and without them)
+- Works independently of Fable.React and Feliz and thus works with both (and without them)
 - All the benefits of having your styling in your language as a first class citizen
 
 ## Installation 💾
