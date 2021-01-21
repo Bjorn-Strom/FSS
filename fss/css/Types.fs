@@ -72,6 +72,7 @@ module Global =
     type IBackgroundSize       = interface end
     type IBackgroundAttachment = interface end
     type IBackgroundPosition   = interface end
+    type IBackgroundBlendMode  = interface end
 
     type IBorder            = interface end
     type IBorderRadius      = interface end
@@ -335,6 +336,7 @@ module Global =
         interface IOverflowWrap
         interface IPaintOrder
         interface IWhiteSpace
+        interface IBackgroundBlendMode
 
     type Global =
         | Inherit
@@ -390,6 +392,7 @@ module Global =
         interface IBackgroundSize
         interface IBackgroundAttachment
         interface IBackgroundPosition
+        interface IBackgroundBlendMode
         interface IBorder
         interface IBorderRadius
         interface IBorderWidth

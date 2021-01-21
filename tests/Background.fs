@@ -341,4 +341,80 @@ module Background =
                     "background attachment unset"
                     [ BackgroundAttachment.Unset ]
                     [ "backgroundAttachment" ==> "unset" ]
+                test
+                    "Background blend mode Multiply"
+                    [ BackgroundBlendMode.Multiply]
+                    ["backgroundBlendMode" ==> "multiply"]
+                test
+                    "Background blend mode Screen"
+                    [ BackgroundBlendMode.Screen]
+                    ["backgroundBlendMode" ==> "screen"]
+                test
+                    "Background blend mode Overlay"
+                    [ BackgroundBlendMode.Overlay]
+                    ["backgroundBlendMode" ==> "overlay"]
+                test
+                    "Background blend mode Darken"
+                    [ BackgroundBlendMode.Darken]
+                    ["backgroundBlendMode" ==> "darken"]
+                test
+                    "Background blend mode Lighten"
+                    [ BackgroundBlendMode.Lighten]
+                    ["backgroundBlendMode" ==> "lighten"]
+                test
+                    "Background blend mode ColorDodge"
+                    [ BackgroundBlendMode.ColorDodge]
+                    ["backgroundBlendMode" ==> "color-dodge"]
+                test
+                    "Background blend mode HardLight"
+                    [ BackgroundBlendMode.HardLight]
+                    ["backgroundBlendMode" ==> "hard-light"]
+                test
+                    "Background blend mode SoftLight"
+                    [ BackgroundBlendMode.SoftLight]
+                    ["backgroundBlendMode" ==> "soft-light"]
+                test
+                    "Background blend mode Difference"
+                    [ BackgroundBlendMode.Difference]
+                    ["backgroundBlendMode" ==> "difference"]
+                test
+                    "Background blend mode Exclusion"
+                    [ BackgroundBlendMode.Exclusion]
+                    ["backgroundBlendMode" ==> "exclusion"]
+                test
+                    "Background blend mode Hue"
+                    [ BackgroundBlendMode.Hue]
+                    ["backgroundBlendMode" ==> "hue"]
+                test
+                    "Background blend mode Saturation"
+                    [ BackgroundBlendMode.Saturation]
+                    ["backgroundBlendMode" ==> "saturation"]
+                test
+                    "Background blend mode Color"
+                    [ BackgroundBlendMode.Color]
+                    ["backgroundBlendMode" ==> "color"]
+                test
+                    "Background blend mode Luminosity"
+                    [ BackgroundBlendMode.Luminosity]
+                    ["backgroundBlendMode" ==> "luminosity"]
+                test
+                    "background blend mode multiple"
+                    [ BackgroundBlendMode.Values [ BackgroundType.Hue; BackgroundType.Saturation; BackgroundType.Exclusion ] ]
+                    [ "backgroundBlendMode" ==> "hue, saturation, exclusion" ]
+                test
+                    "background blend mode normal"
+                    [ BackgroundBlendMode.Normal ]
+                    [ "backgroundBlendMode" ==> "normal" ]
+                test
+                    "background blend mode inherit"
+                    [ BackgroundBlendMode.Inherit ]
+                    [ "backgroundBlendMode" ==> "inherit" ]
+                test
+                    "background blend mode initial"
+                    [ BackgroundBlendMode.Initial ]
+                    [ "backgroundBlendMode" ==> "initial" ]
+                test
+                    "background blend mode unset"
+                    [ BackgroundBlendMode.Unset ]
+                    [ "backgroundBlendMode" ==> "unset" ]
             ]

@@ -45,6 +45,23 @@ module BackgroundType =
         | Center
         interface IBackgroundPosition
 
+    type BackgroundBlendMode =
+        | Multiply
+        | Screen
+        | Overlay
+        | Darken
+        | Lighten
+        | ColorDodge
+        | HardLight
+        | SoftLight
+        | Difference
+        | Exclusion
+        | Hue
+        | Saturation
+        | Color
+        | Luminosity
+        interface IBackgroundBlendMode
+
 [<AutoOpen>]
 module Background =
     open BackgroundType
@@ -89,6 +106,13 @@ module Background =
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown background position"
+
+    let private blendModeToString (blendMode: IBackgroundBlendMode) =
+        match blendMode with
+        | :? BackgroundBlendMode as b -> Utilities.Helpers.duToKebab b
+        | :? Normal -> GlobalValue.normal
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown background blend mode"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
     let private clipValue value = PropertyValue.cssValue Property.BackgroundClip value
@@ -526,3 +550,52 @@ module Background =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BackgroundPosition' (position: IBackgroundPosition) = BackgroundPosition.Value(position)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
+    let private blendModeCssValue value = PropertyValue.cssValue Property.BackgroundBlendMode value
+    let private blendModeCssValue' value =
+        value
+        |> blendModeToString
+        |> blendModeCssValue
+
+    let private blendModeValues (values: BackgroundBlendMode list) =
+        values
+        |> Utilities.Helpers.combineComma blendModeToString
+        |> blendModeCssValue
+
+    type BackgroundBlendMode =
+        static member Value(blendMode: IBackgroundBlendMode) = blendMode |> blendModeCssValue'
+        static member Values(blendModes: BackgroundType.BackgroundBlendMode list) = blendModeValues blendModes
+
+        static member Multiply = Multiply |> blendModeCssValue'
+        static member Screen = Screen |> blendModeCssValue'
+        static member Overlay = Overlay |> blendModeCssValue'
+        static member Darken = Darken |> blendModeCssValue'
+        static member Lighten = Lighten |> blendModeCssValue'
+        static member ColorDodge = ColorDodge |> blendModeCssValue'
+        static member HardLight = HardLight |> blendModeCssValue'
+        static member SoftLight = SoftLight |> blendModeCssValue'
+        static member Difference = Difference |> blendModeCssValue'
+        static member Exclusion = Exclusion |> blendModeCssValue'
+        static member Hue = Hue |> blendModeCssValue'
+        static member Saturation = Saturation |> blendModeCssValue'
+        static member Color = Color |> blendModeCssValue'
+        static member Luminosity = Luminosity |> blendModeCssValue'
+
+        static member Normal = Normal |> blendModeCssValue'
+        static member Inherit = Inherit |> blendModeCssValue'
+        static member Initial = Initial |> blendModeCssValue'
+        static member Unset = Unset |> blendModeCssValue'
+
+
+    /// <summary>Specifies how an elements background image should interact with its background color.</summary>
+    /// <param name="backgroundBlendMode">
+    ///     can be:
+    ///     - <c> BackgroundBlendMode </c>
+    ///     - <c> Normal </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let BackgroundBlendMode' (backgroundBlendMode: IBackgroundBlendMode) = backgroundBlendMode |> BackgroundBlendMode.Value

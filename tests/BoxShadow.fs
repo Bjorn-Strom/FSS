@@ -11,7 +11,7 @@ module BoxShadow =
             [
                 test
                     "BoxShadow color"
-                    [ BoxShadow.Color(px 10, px 10, CssColor.blue)]
+                    [ BoxShadow.Color(px 10, px 10, CssColor.blue) ]
                     [ "boxShadow" ==> "10px 10px #0000ff" ]
                 test
                     "BoxShadow blur color"
