@@ -190,8 +190,6 @@ module Global =
     type ICounterReset     = interface end
     type ICounterIncrement = interface end
 
-    type IBoxShadow = interface end
-
     // Types
     type CSSProperty = CSSProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -305,7 +303,6 @@ module Global =
         interface IOutline
         interface ICounterReset
         interface ICounterIncrement
-        interface IBoxShadow
 
     type Normal =
         | Normal
@@ -478,7 +475,6 @@ module Global =
         interface IScrollPadding
         interface ICounterReset
         interface ICounterIncrement
-        interface IBoxShadow
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

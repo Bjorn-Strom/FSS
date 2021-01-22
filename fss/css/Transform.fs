@@ -137,8 +137,7 @@ module Transform =
     /// Supply a list of transforms to be applied to the element.
     let Transforms (transforms: TransformType.Transform list): CSSProperty =
         transforms
-        |> List.map transformToString
-        |> String.concat " "
+        |> Utilities.Helpers.combineWs transformToString
         |> transformValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
