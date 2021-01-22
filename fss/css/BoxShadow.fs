@@ -6,11 +6,13 @@ module BoxShadowType =
         | Color of Units.Size.Size * Units.Size.Size * CssColor
         | BlurColor of Units.Size.Size * Units.Size.Size * Units.Size.Size * CssColor
         | BlurSpreadColor of Units.Size.Size * Units.Size.Size * Units.Size.Size * Units.Size.Size * CssColor
+        | Inset of BoxShadow
+
 
 [<AutoOpen>]
 module BoxShadow =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
-    let private boxShadowToString =
+    let rec private boxShadowToString =
         function
             | BoxShadowType.Color (x, y, color) ->
                 sprintf "%s %s %s"
@@ -30,6 +32,8 @@ module BoxShadow =
                     (Units.Size.value blur)
                     (Units.Size.value spread)
                     (CssColorValue.color color)
+            | BoxShadowType.Inset shadow ->
+                sprintf "inset %s" <| boxShadowToString shadow
 
     let private boxShadowValue value = PropertyValue.cssValue Property.BoxShadow value
     type BoxShadow =
@@ -45,4 +49,5 @@ module BoxShadow =
         |> Utilities.Helpers.combineComma boxShadowToString
         |> boxShadowValue
 
-
+    /// Can be used to invert box shadow
+    let Inset (shadow: BoxShadowType.BoxShadow) = BoxShadowType.Inset shadow
