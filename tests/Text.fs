@@ -423,29 +423,15 @@ module Text =
                     ["textEmphasisStyle" ==> "unset"]
                 test
                     "Text shadow single"
-                    [ TextShadow.Value (px 1, px 1, px 2, CssColor.black) ]
-                    ["textShadow" ==> "1px 1px 2px #000000"]
+                    [ TextShadows [ TextShadow.ColorXYBlur (px 1, px 1, px 2, CssColor.black) ] ]
+                    ["textShadow" ==> "#000000 1px 1px 2px"]
                 test
                     "Text shadow multiple"
-                    [ TextShadow.Value
-                          [
-                            TextTypes.Shadow4(px 1, px 1, px 2, CssColor.black)
-                            TextTypes.Shadow4(px 10, px -10, px 20, CssColor.red)
-                          ]
+                    [ TextShadows
+                          [ TextShadow.ColorXYBlur(px 1, px 1, px 2, CssColor.black)
+                            TextShadow.ColorXYBlur(px 10, px -10, px 20, CssColor.red) ]
                     ]
-                    ["textShadow" ==> "1px 1px 2px #000000, 10px -10px 20px #ff0000"]
-                test
-                    "Text shadow style inherit"
-                    [ TextShadow.Inherit ]
-                    ["textShadow" ==> "inherit"]
-                test
-                    "Text shadow style Initial"
-                    [ TextShadow.Initial ]
-                    ["textShadow" ==> "initial"]
-                test
-                    "Text shadow style unset"
-                    [ TextShadow.Unset ]
-                    ["textShadow" ==> "unset"]
+                    ["textShadow" ==> "#000000 1px 1px 2px, #ff0000 10px -10px 20px"]
                 test
                     "Text underline offset auto"
                     [ TextUnderlineOffset.Auto ]

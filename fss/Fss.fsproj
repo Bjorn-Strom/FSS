@@ -53,7 +53,7 @@
     <Compile Include="css\Caret.fs" />
     <Compile Include="css\Appearance.fs" />
     <Compile Include="css\Typography.fs" />
-    <Compile Include="css\Misc.fs" />
+    <Compile Include="css\All.fs" />
     <Compile Include="css\Grid.fs" />
     <Compile Include="css\Flex.fs" />
     <Compile Include="css\Outline.fs" />

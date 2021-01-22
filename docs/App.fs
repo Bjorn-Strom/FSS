@@ -175,6 +175,7 @@ module App =
                 ]
 
         let basicUse =
+            let borderStyle = fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)" ]
             article []
                [
                     h2 [] [ str "Basic usage" ]
@@ -207,11 +208,22 @@ module App =
                                     However as this project creates CSS and interacts with it, it has to deal with some of its shortcoming, like shorthands.
 
                                     Therefore the shorthands that are included are limited to ones where using inherit, initial, unset or none is natural. Like text-decoration.
-                                    Resetting text-decoration could be annoying without it.
+                                    Resetting text-decoration would be  really annoying without it - having to go through each property resetting it.
 
-                                    Oh an yeah you can use margin and padding if you want to, so there are sprinkles of shorthands around
-                                    Dont you judge me, I said it was opinionated!"""
+                                    However if shorthands is something you really want to use, you can use the custom escape hatch to write them up in string.
+                                    The escape hatch is a function that takes two string, a key and a value and attempts to make Css with it.
+                                    For example if I want to set border with shorthand I can write:
+                                    """
+                                    codeBlock [ "fss"
+                                                "[ Custom \"border\" \"4mm ridge rgba(170, 50, 220, .6)\" ]" ]
+
+                                    str """Which has the following result"""
+                                    div [ ClassName borderStyle ]
+                                        [
+                                            str "Border style made with custom escape hatch"
+                                        ]
                                 ]
+
                         ]
                ]
 
@@ -497,13 +509,13 @@ module App =
                 keyframes
                     [
                         frames [ 0; 20; 53; 80; 100 ]
-                            [ Transform.Translate3D(px 0, px 0, px 0) ]
+                            [ Transforms [ Transform.Translate3D(px 0, px 0, px 0) ] ]
                         frames [40; 43]
-                            [ Transform.Translate3D(px 0, px -30, px 0) ]
+                            [ Transforms [ Transform.Translate3D(px 0, px -30, px 0) ] ]
                         frame 70
-                            [ Transform.Translate3D(px 0, px -15, px 0) ]
+                            [ Transforms [ Transform.Translate3D(px 0, px -15, px 0) ] ]
                         frame 90
-                            [ Transform.Translate3D(px 0, px -4, px 0) ]
+                            [ Transforms [ Transform.Translate3D(px 0, px -4, px 0) ] ]
                     ]
 
             let backgroundColorFrames =
@@ -567,13 +579,28 @@ module App =
                                         "    keyframes"
                                         "        ["
                                         "            frames [ 0; 20; 53; 80; 100 ]"
-                                        "                [ Transform.Translate3D(px 0, px 0, px 0) ]"
+                                        "                ["
+                                        "                   transforms"
+                                        "                       ["
+                                        "                           Transform.Translate3D(px 0, px 0, px 0) ]"
+                                        "                       ]"
                                         "            frames [40; 43]"
-                                        "                [ Transform.Translate3D(px 0, px -30, px 0) ]"
+                                        "                   transforms"
+                                        "                       ["
+                                        "                           Transform.Translate3D(px 0, px -30, px 0) ]"
+                                        "                       ]"
                                         "            frame 70"
-                                        "                [ Transform.Translate3D(px 0, px -15, px 0) ]"
+                                        "                ["
+                                        "                   transforms"
+                                        "                       ["
+                                        "                            Transform.Translate3D(px 0, px -15, px 0) ]"
+                                        "                       ]"
                                         "            frame 90"
-                                        "                [ Transform.Translate3D(px 0, px -4, px 0) ]"
+                                        "                ["
+                                        "                   transforms"
+                                        "                       ["
+                                        "                           Transform.Translate3D(px 0, px -4, px 0) ]"
+                                        "                       ]"
                                         "        ]"
                                         "let bounceAnimation ="
                                         "    fss"
@@ -607,8 +634,19 @@ module App =
                                 "        ]"]
                             div [ ClassName bouncyColor ] [ str "Bouncy color" ]
 
+                            h2 [] [ str "Transforms" ]
+                            str """Just a quick note on transforms. In Css it is easy to think that when you apply a transform Css expects just one transform
+                            It works with one, but it is easier to think about transforms as accepting a list of transforms, now this list can have just one element.
+                            I have also seen it as a mistake from people who don't know Css too well (I have made it myself), where combining transforms can be a bit of an issue.
+                            For there reasons in Fss when you apply transforms it always expects a list, but otherwise works as you would expect.
+                            """
+                            codeBlock ["Transforms"
+                                       "    ["
+                                       "        Transform.RotateX <| deg 10."
+                                       "        Transform.RotateY <| deg 15."
+                                       "        Transform.Perspective <| px 20"
+                                       "    ]"]
                         ]
-
                 ]
 
         let Combinators =
@@ -736,7 +774,6 @@ module App =
                                                     p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
                                                     p [] [ str "Text in a paragraph but not after div with the combinator so is not red"]
                                                 ]
-
                                         ]
                                     li []
                                         [
@@ -787,7 +824,7 @@ module App =
                             []
                             [
                                 MarginTop' (px 200)
-                                Transform.Rotate(deg 45.0)
+                                Transforms [ Transform.Rotate(deg 45.0) ]
                                 BackgroundColor.red
                             ]
 
@@ -822,7 +859,10 @@ module App =
                                                 "               []"
                                                 "               ["
                                                 "                   MarginTop' (px 200)"
-                                                "                   Transform.Rotate(deg 45.0)"
+                                                "                   Transforms"
+                                                "                       ["
+                                                "                           Transform.Rotate(deg 45.0)"
+                                                "                       ]"
                                                 "                   BackgroundColor.red"
                                                 "               ]"
                                                 "           MediaQuery"
@@ -1193,9 +1233,9 @@ module App =
                         yield! box
                         Label' "Linear gradient style 2"
                         BackgroundImage.LinearGradient(turn 0.25,
-                                                       [CssColor.Hex "3f87a6" :> IColorStop
-                                                        CssColor.Hex "ebf8e1" :> IColorStop
-                                                        CssColor.Hex "f69d3c" :> IColorStop])
+                                                       [CssColor.Hex "3f87a6"
+                                                        CssColor.Hex "ebf8e1"
+                                                        CssColor.Hex "f69d3c"])
                     ]
             let linearGradientStyle3 =
                 fss
@@ -1247,7 +1287,7 @@ module App =
                     [
                         Label' "Radial Gradient style 2"
                         yield! box
-                        BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex "3f87a6" :> IColorStop; CssColor.Hex "ebf8e1" :> IColorStop; CssColor.Hex "f69d3c" :> IColorStop])
+                        BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex "3f87a6"; CssColor.Hex "ebf8e1"; CssColor.Hex "f69d3c"])
                     ]
             let radialGradientStyle3 =
                 fss
@@ -1273,7 +1313,7 @@ module App =
                     [
                         Label' "Repeating Radial Gradient style 2"
                         yield! box
-                        BackgroundImage.RepeatingRadialGradient(ClosestSide, [CssColor.Hex "3f87a6" :> IColorStop; CssColor.Hex "ebf8e1" :> IColorStop; CssColor.Hex "f69d3c" :> IColorStop])
+                        BackgroundImage.RepeatingRadialGradient(ClosestSide, [CssColor.Hex "3f87a6"; CssColor.Hex "ebf8e1"; CssColor.Hex "f69d3c" ])
                     ]
             let repeatingRadialGradientStyle3 =
                 fss
@@ -1299,9 +1339,9 @@ module App =
                                        "   fss"
                                        "       ["
                                        "           BackgroundImage.LinearGradient(turn 0.25,"
-                                       "                                          [CssColor.Hex \"3f87a6\" :> IColorStop"
-                                       "                                           CssColor.Hex \"ebf8e1\" :> IColorStop"
-                                       "                                           CssColor.Hex \"f69d3c\" :> IColorStop])"
+                                       "                                          [CssColor.Hex \"3f87a6\""
+                                       "                                           CssColor.Hex \"ebf8e1\""
+                                       "                                           CssColor.Hex \"f69d3c\"])"
                                        "       ]"
                                        "let linearGradientStyle3 ="
                                        "   fss"
@@ -1354,7 +1394,7 @@ module App =
                                         "let radialGradientStyle2 ="
                                         "    fss"
                                         "        ["
-                                        "            BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex \"3f87a6\" :> IColorStop; CssColor.Hex \"ebf8e1\" :> IColorStop; CssColor.Hex \"f69d3c\" :> IColorStop])"
+                                        "            BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex \"3f87a6\"; CssColor.Hex \"ebf8e1\"; CssColor.Hex \"f69d3c\" ])"
                                         "        ]"
                                         "let radialGradientStyle3 ="
                                         "    fss"

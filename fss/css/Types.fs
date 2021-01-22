@@ -42,7 +42,6 @@ module Global =
     type ITextDecorationSkipInk   = interface end
     type ITextTransform           = interface end
     type ITextIndent              = interface end
-    type ITextShadow              = interface end
     type ITextEmphasis            = interface end
     type ITextEmphasisPosition    = interface end
     type ITextEmphasisStyle       = interface end
@@ -87,7 +86,6 @@ module Global =
     type IBorderImageWidth  = interface end
     type IBorderImageSource = interface end
 
-    type ITransform       = interface end
     type ITransformOrigin = interface end
 
     type ITransition               = interface end
@@ -191,8 +189,6 @@ module Global =
     type ICounterReset     = interface end
     type ICounterIncrement = interface end
 
-    type IBoxShadow = interface end
-
     // Types
     type CSSProperty = CSSProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -287,7 +283,6 @@ module Global =
         interface IListStyleImage
         interface IBorderStyle
         interface IBorderImageSource
-        interface ITransform
         interface ITransitionProperty
         interface IDisplay
         interface IFloat
@@ -307,7 +302,6 @@ module Global =
         interface IOutline
         interface ICounterReset
         interface ICounterIncrement
-        interface IBoxShadow
 
     type Normal =
         | Normal
@@ -368,7 +362,6 @@ module Global =
         interface ITextDecorationSkipInk
         interface ITextTransform
         interface ITextIndent
-        interface ITextShadow
         interface ITextEmphasis
         interface ITextEmphasisPosition
         interface ITextEmphasisStyle
@@ -405,7 +398,6 @@ module Global =
         interface IBorderSpacing
         interface IBorderImageWidth
         interface IBorderImageSource
-        interface ITransform
         interface ITransformOrigin
         interface ITransition
         interface ITransitionDelay
@@ -481,7 +473,6 @@ module Global =
         interface IScrollPadding
         interface ICounterReset
         interface ICounterIncrement
-        interface IBoxShadow
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

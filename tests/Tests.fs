@@ -6,9 +6,10 @@ open Fable.Mocha
 module Tests =
     let tests =
             testList "Fss Tests" [
+                Custom.tests
                 BoxShadow.tests
                 Counter.tests
-                Misc.tests
+                All.tests
                 Typography.tests
                 Appearance.tests
                 Caret.tests

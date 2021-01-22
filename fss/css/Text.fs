@@ -67,11 +67,9 @@ module TextTypes =
         interface ITextIndent
 
     type TextShadow =
-        | Shadow  of ITextShadow
-        | Shadow2 of Units.Size.Size * Units.Size.Size
-        | Shadow3 of Units.Size.Size * Units.Size.Size * CssColor
-        | Shadow4 of Units.Size.Size * Units.Size.Size * Units.Size.Size * CssColor
-        interface ITextShadow
+        | XY of Units.Size.Size * Units.Size.Size
+        | ColorXY of CssColor * Units.Size.Size * Units.Size.Size
+        | ColorXYBlur of CssColor * Units.Size.Size * Units.Size.Size * Units.Size.Size
 
     type TextOverflow =
         | Clip
@@ -222,23 +220,16 @@ module Text =
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown text indent"
 
-    let private textShadowToString (shadow: ITextShadow) =
-        let stringifyTextShadow =
-            function
-                | Shadow2 (x,y) -> sprintf "%s %s" (Units.Size.value x) (Units.Size.value y)
-                | Shadow3 (x,y,c) -> sprintf "%s %s %s" (Units.Size.value x) (Units.Size.value y) (CssColorValue.color c)
-                | Shadow4 (x,y,b,c) ->
-                    sprintf "%s %s %s %s"
-                        (Units.Size.value x)
-                        (Units.Size.value y)
-                        (Units.Size.value b)
-                        (CssColorValue.color c)
-                | _ -> "Should be a keyword"
-
-        match shadow with
-            | :? TextShadow as t -> stringifyTextShadow t
-            | :? Global as g -> GlobalValue.global' g
-            | _ -> "unknown text shadow"
+    let private textShadowToString =
+        function
+            | XY (x,y) -> sprintf "%s %s" (Units.Size.value x) (Units.Size.value y)
+            | ColorXY (c,x,y) -> sprintf "%s %s %s" (CssColorValue.color c) (Units.Size.value x) (Units.Size.value y)
+            | ColorXYBlur (c,x,y,b) ->
+                sprintf "%s %s %s %s"
+                    (CssColorValue.color c)
+                    (Units.Size.value x)
+                    (Units.Size.value y)
+                    (Units.Size.value b)
 
     let private emphasisToString (emphasis: ITextEmphasis) =
         match emphasis with
@@ -673,38 +664,20 @@ module Text =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
     // https://css-tricks.com/almanac/properties/t/text-shadow/
     let private shadowValue value = PropertyValue.cssValue Property.TextShadow value
-    let private shadowValue' value =
-        value
-        |> textShadowToString
-        |> shadowValue
-    let private shadowValues (values: TextShadow list) =
-        values
-        |> Utilities.Helpers.combineComma textShadowToString
-        |> shadowValue
 
     type TextShadow =
-        static member Value (shadow: ITextShadow) = shadow |> shadowValue'
-        static member Value (xOffset: Units.Size.Size, yOffset: Units.Size.Size) =
-            Shadow2(xOffset,yOffset) |> shadowValue'
-        static member Value (xOffset: Units.Size.Size, yOffset: Units.Size.Size, color: CssColor) =
-            Shadow3(xOffset, yOffset, color) |> shadowValue'
-        static member Value (xOffset: Units.Size.Size, yOffset: Units.Size.Size, blurRadius: Units.Size.Size, color: CssColor) =
-            Shadow4 (xOffset, yOffset, blurRadius, color) |> shadowValue'
-        static member Value (shadows: TextTypes.TextShadow list) = shadowValues shadows
-        static member Inherit = Inherit |> shadowValue'
-        static member Initial = Initial |> shadowValue'
-        static member Unset = Unset |> shadowValue'
+        static member XY (xOffset: Units.Size.Size, yOffset: Units.Size.Size) =
+            XY(xOffset,yOffset)
+        static member ColorXY (color: CssColor, xOffset: Units.Size.Size, yOffset: Units.Size.Size) =
+            ColorXY(color, xOffset, yOffset)
+        static member ColorXYBlur (xOffset: Units.Size.Size, yOffset: Units.Size.Size, blurRadius: Units.Size.Size, color: CssColor) =
+            ColorXYBlur (color, xOffset, yOffset, blurRadius)
 
-    /// <summary>Adds shadow to text.</summary>
-    /// <param name="shadow">
-    ///     can be:
-    ///     - <c> TextShadow </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let TextShadow' (shadow: ITextShadow) = TextShadow.Value(shadow)
+    /// Supply a list of text shadows to apply to the text
+    let TextShadows (shadows: TextTypes.TextShadow list) =
+        shadows
+        |> Utilities.Helpers.combineComma textShadowToString
+        |> shadowValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
     let private overflowValue value = PropertyValue.cssValue Property.TextOverflow value
