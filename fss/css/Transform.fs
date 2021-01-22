@@ -1,5 +1,6 @@
 ﻿namespace Fss
 
+[<RequireQualifiedAccess>]
 module TransformType =
     type Transform =
         | Matrix of float * float * float * float * float * float
@@ -26,7 +27,6 @@ module TransformType =
         | Skew2 of Units.Angle.Angle * Units.Angle.Angle
         | SkewX of Units.Angle.Angle
         | SkewY of Units.Angle.Angle
-        interface ITransform
 
     type TransformOrigin =
         | Top
@@ -39,117 +39,107 @@ module TransformType =
 // https://developer.mozilla.org/en-US/docs/Web/CSS/transform
 [<AutoOpen>]
 module Transform =
-    open TransformType
-
-    let private transformToString (transform: ITransform) =
-        let stringifyTransform =
-            function
-               | Matrix (a, b, c, d, e, f) ->
-                   sprintf "matrix(%.1f, %.1f, %.1f, %.1f, %.1f, %.1f)" a b c d e f
-               | Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
-                   sprintf "matrix3d(%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.1f)" a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4
-               | Perspective size -> sprintf "perspective(%s)" <| Units.Size.value size
-               | Rotate angle -> sprintf "rotate(%s)" <| Units.Angle.value angle
-               | Rotate3D (a, b, c, angle) -> sprintf "rotate3d(%.1f, %.1f, %.1f, %s)" a b c (Units.Angle.value angle)
-               | RotateX angle -> sprintf "rotateX(%s)" <| Units.Angle.value angle
-               | RotateY angle -> sprintf "rotateY(%s)" <| Units.Angle.value angle
-               | RotateZ angle -> sprintf "rotateZ(%s)" <| Units.Angle.value angle
-               | Translate size -> sprintf "translate(%s)" (Units.LengthPercentage.value size)
-               | Translate2 (sx, sy) -> sprintf "translate(%s, %s)" (Units.LengthPercentage.value sx) (Units.LengthPercentage.value sy)
-               | Translate3D (size1, size2, size3) -> sprintf "translate3d(%s, %s, %s)" (Units.LengthPercentage.value size1) (Units.LengthPercentage.value size2) (Units.LengthPercentage.value size3)
-               | TranslateX size -> sprintf "translateX(%s)" <| Units.LengthPercentage.value size
-               | TranslateY size -> sprintf "translateY(%s)" <| Units.LengthPercentage.value size
-               | TranslateZ size -> sprintf "translateZ(%s)" <| Units.LengthPercentage.value size
-               | Scale n -> sprintf "scale(%.2f)" n
-               | Scale2 (sx, sy) -> sprintf "scale(%.2f, %.2f)" sx sy
-               | Scale3D (n1, n2, n3) -> sprintf "scale3d(%.2f, %.2f, %.2f)" n1 n2 n3
-               | ScaleX n -> sprintf "scaleX(%.2f)" n
-               | ScaleY n -> sprintf "scaleY(%.2f)" n
-               | ScaleZ n -> sprintf "scaleZ(%.2f)" n
-               | Skew a -> sprintf "skew(%s)" (Units.Angle.value a)
-               | Skew2 (ax, ay) -> sprintf "skew(%s, %s)" (Units.Angle.value ax) (Units.Angle.value ay)
-               | SkewX a -> sprintf "skewX(%s)" <| Units.Angle.value a
-               | SkewY a -> sprintf "skewY(%s)" <| Units.Angle.value a
-
-        match transform with
-        | :? Transform as t -> stringifyTransform t
-        | :? None -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
-        | _ -> "Unknown transform"
+    let private transformToString =
+        function
+           | TransformType.Matrix (a, b, c, d, e, f) ->
+               sprintf "matrix(%.1f, %.1f, %.1f, %.1f, %.1f, %.1f)" a b c d e f
+           | TransformType.Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
+               sprintf "matrix3d(%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.1f)" a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4
+           | TransformType.Perspective size -> sprintf "perspective(%s)" <| Units.Size.value size
+           | TransformType.Rotate angle -> sprintf "rotate(%s)" <| Units.Angle.value angle
+           | TransformType.Rotate3D (a, b, c, angle) -> sprintf "rotate3d(%.1f, %.1f, %.1f, %s)" a b c (Units.Angle.value angle)
+           | TransformType.RotateX angle -> sprintf "rotateX(%s)" <| Units.Angle.value angle
+           | TransformType.RotateY angle -> sprintf "rotateY(%s)" <| Units.Angle.value angle
+           | TransformType.RotateZ angle -> sprintf "rotateZ(%s)" <| Units.Angle.value angle
+           | TransformType.Translate size -> sprintf "translate(%s)" (Units.LengthPercentage.value size)
+           | TransformType.Translate2 (sx, sy) -> sprintf "translate(%s, %s)" (Units.LengthPercentage.value sx) (Units.LengthPercentage.value sy)
+           | TransformType.Translate3D (size1, size2, size3) -> sprintf "translate3d(%s, %s, %s)" (Units.LengthPercentage.value size1) (Units.LengthPercentage.value size2) (Units.LengthPercentage.value size3)
+           | TransformType.TranslateX size -> sprintf "translateX(%s)" <| Units.LengthPercentage.value size
+           | TransformType.TranslateY size -> sprintf "translateY(%s)" <| Units.LengthPercentage.value size
+           | TransformType.TranslateZ size -> sprintf "translateZ(%s)" <| Units.LengthPercentage.value size
+           | TransformType.Scale n -> sprintf "scale(%.2f)" n
+           | TransformType.Scale2 (sx, sy) -> sprintf "scale(%.2f, %.2f)" sx sy
+           | TransformType.Scale3D (n1, n2, n3) -> sprintf "scale3d(%.2f, %.2f, %.2f)" n1 n2 n3
+           | TransformType.ScaleX n -> sprintf "scaleX(%.2f)" n
+           | TransformType.ScaleY n -> sprintf "scaleY(%.2f)" n
+           | TransformType.ScaleZ n -> sprintf "scaleZ(%.2f)" n
+           | TransformType.Skew a -> sprintf "skew(%s)" (Units.Angle.value a)
+           | TransformType.Skew2 (ax, ay) -> sprintf "skew(%s, %s)" (Units.Angle.value ax) (Units.Angle.value ay)
+           | TransformType.SkewX a -> sprintf "skewX(%s)" <| Units.Angle.value a
+           | TransformType.SkewY a -> sprintf "skewY(%s)" <| Units.Angle.value a
 
     let private originToString (origin: ITransformOrigin) =
         match origin with
-        | :? TransformOrigin as t -> Utilities.Helpers.duToLowercase t
+        | :? TransformType.TransformOrigin as t -> Utilities.Helpers.duToLowercase t
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transform origin"
 
-
     let private transformValue value = PropertyValue.cssValue Property.Transform value
-    let private transformValue' value =
-        value
-        |> transformToString
-        |> transformValue
     type Transform =
-        static member Value (transform: ITransform) = transform |> transformValue'
-        static member Value (transforms: ITransform list) =
-            transforms
-            |> List.map transformToString
-            |> String.concat " "
-            |> transformValue
         static member Matrix (n1: float, n2: float, n3: float, n4: float, n5: float, n6: float) =
-            Matrix(n1,n2,n3,n4,n5,n6) |> transformValue'
+            TransformType.Matrix(n1,n2,n3,n4,n5,n6)
         static member Matrix3D
             (a1: int, b1: int, c1: int, d1: int,
              a2: int, b2: int, c2: int, d2: int,
              a3: int, b3: int, c3: int, d3: int,
              a4: float, b4: float, c4: float, d4: float) =
-             Matrix3D(a1, b1, c1, d1,
+             TransformType.Matrix3D(a1, b1, c1, d1,
                       a2, b2, c2, d2,
                       a3, b3, c3, d3,
                       a4, b4, c4, d4)
-            |> transformValue'
-        static member Perspective (value: Units.Size.Size) = Perspective value |> transformValue'
-        static member Rotate (angle: Units.Angle.Angle) = Rotate angle |> transformValue'
+        static member Perspective (value: Units.Size.Size) =
+            TransformType.Perspective value
+        static member Rotate (angle: Units.Angle.Angle) =
+            TransformType.Rotate angle
         static member Rotate3D (n1: float, n2: float, n3: float, angle: Units.Angle.Angle) =
-            Rotate3D(n1,n2,n3,angle) |> transformValue'
-        static member RotateX (angle: Units.Angle.Angle) =  RotateX angle |> transformValue'
-        static member RotateY (angle: Units.Angle.Angle) = RotateY angle |> transformValue'
-        static member RotateZ (angle: Units.Angle.Angle) =  RotateZ angle  |> transformValue'
-        static member Translate (value: ILengthPercentage) = Translate value |> transformValue'
-        static member Translate (x: ILengthPercentage, y: ILengthPercentage) = Translate2(x,y) |> transformValue'
-        static member Translate3D (x: ILengthPercentage, y: ILengthPercentage, z: ILengthPercentage) = Translate3D(x,y,z) |> transformValue'
-        static member TranslateX (x: ILengthPercentage) = TranslateX x |>  transformValue'
-        static member TranslateY (y: ILengthPercentage) = TranslateY y  |> transformValue'
-        static member TranslateZ (z: ILengthPercentage) = TranslateZ z |> transformValue'
-        static member Scale (value: float) = Scale value |> transformValue'
-        static member Scale (x: float, y: float) = Scale2(x,y) |> transformValue'
-        static member Scale3D (x: float, y: float, z: float) = Scale3D (x,y,z) |> transformValue'
-        static member ScaleX (x: float) = ScaleX x |> transformValue'
-        static member ScaleY (y: float) = ScaleY y |> transformValue'
-        static member ScaleZ (z: float) = ScaleZ z |> transformValue'
-        static member Skew (angle: Units.Angle.Angle) = Skew  angle |>  transformValue'
-        static member Skew (x: Units.Angle.Angle, y: Units.Angle.Angle) = Skew2(x,y) |> transformValue'
-        static member SkewX (x: Units.Angle.Angle) = SkewX x |> transformValue'
-        static member SkewY (y: Units.Angle.Angle) = SkewY y |> transformValue'
+            TransformType.Rotate3D(n1,n2,n3,angle)
+        static member RotateX (angle: Units.Angle.Angle) =
+            TransformType.RotateX angle
+        static member RotateY (angle: Units.Angle.Angle) =
+            TransformType.RotateY angle
+        static member RotateZ (angle: Units.Angle.Angle) =
+            TransformType.RotateZ angle
+        static member Translate (value: ILengthPercentage) =
+            TransformType.Translate value
+        static member Translate (x: ILengthPercentage, y: ILengthPercentage) =
+            TransformType.Translate2(x,y)
+        static member Translate3D (x: ILengthPercentage, y: ILengthPercentage, z: ILengthPercentage) =
+            TransformType.Translate3D(x,y,z)
+        static member TranslateX (x: ILengthPercentage) =
+            TransformType.TranslateX x
+        static member TranslateY (y: ILengthPercentage) =
+            TransformType.TranslateY y
+        static member TranslateZ (z: ILengthPercentage) =
+            TransformType.TranslateZ z
+        static member Scale (value: float) =
+            TransformType.Scale value
+        static member Scale (x: float, y: float) =
+            TransformType.Scale2(x,y)
+        static member Scale3D (x: float, y: float, z: float) =
+            TransformType.Scale3D (x,y,z)
+        static member ScaleX (x: float) =
+            TransformType.ScaleX x
+        static member ScaleY (y: float) =
+            TransformType.ScaleY y
+        static member ScaleZ (z: float) =
+            TransformType.ScaleZ z
+        static member Skew (angle: Units.Angle.Angle) =
+            TransformType.Skew angle
+        static member Skew (x: Units.Angle.Angle, y: Units.Angle.Angle) =
+            TransformType.Skew2(x,y)
+        static member SkewX (x: Units.Angle.Angle) =
+            TransformType.SkewX x
+        static member SkewY (y: Units.Angle.Angle) =
+            TransformType.SkewY y
 
-        static member None = None |> transformValue'
-        static member Inherit = Inherit |> transformValue'
-        static member Initial = Initial |> transformValue'
-        static member Unset = Unset |> transformValue'
-
-    /// <summary>Specify transformation of element.</summary>
-    /// <param name="transform">
-    ///     can be:
-    ///     - <c> Transform </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let Transform' (transform: ITransform) = Transform.Value(transform)
+    /// Supply a list of transforms to be applied to the element.
+    let Transforms (transforms: TransformType.Transform list): CSSProperty =
+        transforms
+        |> List.map transformToString
+        |> String.concat " "
+        |> transformValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
     let private originValue value = PropertyValue.cssValue Property.TransformOrigin value
@@ -171,11 +161,11 @@ module Transform =
                 (originToString zOffset)
             |> originValue
 
-        static member Top = Top |> originValue'
-        static member Left = Left |> originValue'
-        static member Right = Right |> originValue'
-        static member Bottom = Bottom |> originValue'
-        static member Center = Center |> originValue'
+        static member Top = TransformType.Top |> originValue'
+        static member Left = TransformType.Left |> originValue'
+        static member Right = TransformType.Right |> originValue'
+        static member Bottom = TransformType.Bottom |> originValue'
+        static member Center = TransformType.Center |> originValue'
 
         static member Inherit = Inherit |> originValue'
         static member Initial = Initial |> originValue'

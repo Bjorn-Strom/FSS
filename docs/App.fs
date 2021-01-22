@@ -509,13 +509,13 @@ module App =
                 keyframes
                     [
                         frames [ 0; 20; 53; 80; 100 ]
-                            [ Transform.Translate3D(px 0, px 0, px 0) ]
+                            [ Transforms [ Transform.Translate3D(px 0, px 0, px 0) ] ]
                         frames [40; 43]
-                            [ Transform.Translate3D(px 0, px -30, px 0) ]
+                            [ Transforms [ Transform.Translate3D(px 0, px -30, px 0) ] ]
                         frame 70
-                            [ Transform.Translate3D(px 0, px -15, px 0) ]
+                            [ Transforms [ Transform.Translate3D(px 0, px -15, px 0) ] ]
                         frame 90
-                            [ Transform.Translate3D(px 0, px -4, px 0) ]
+                            [ Transforms [ Transform.Translate3D(px 0, px -4, px 0) ] ]
                     ]
 
             let backgroundColorFrames =
@@ -579,13 +579,28 @@ module App =
                                         "    keyframes"
                                         "        ["
                                         "            frames [ 0; 20; 53; 80; 100 ]"
-                                        "                [ Transform.Translate3D(px 0, px 0, px 0) ]"
+                                        "                ["
+                                        "                   transforms"
+                                        "                       ["
+                                        "                           Transform.Translate3D(px 0, px 0, px 0) ]"
+                                        "                       ]"
                                         "            frames [40; 43]"
-                                        "                [ Transform.Translate3D(px 0, px -30, px 0) ]"
+                                        "                   transforms"
+                                        "                       ["
+                                        "                           Transform.Translate3D(px 0, px -30, px 0) ]"
+                                        "                       ]"
                                         "            frame 70"
-                                        "                [ Transform.Translate3D(px 0, px -15, px 0) ]"
+                                        "                ["
+                                        "                   transforms"
+                                        "                       ["
+                                        "                            Transform.Translate3D(px 0, px -15, px 0) ]"
+                                        "                       ]"
                                         "            frame 90"
-                                        "                [ Transform.Translate3D(px 0, px -4, px 0) ]"
+                                        "                ["
+                                        "                   transforms"
+                                        "                       ["
+                                        "                           Transform.Translate3D(px 0, px -4, px 0) ]"
+                                        "                       ]"
                                         "        ]"
                                         "let bounceAnimation ="
                                         "    fss"
@@ -619,8 +634,19 @@ module App =
                                 "        ]"]
                             div [ ClassName bouncyColor ] [ str "Bouncy color" ]
 
+                            h2 [] [ str "Transforms" ]
+                            str """Just a quick note on transforms. In Css it is easy to think that when you apply a transform Css expects just one transform
+                            It works with one, but it is easier to think about transforms as accepting a list of transforms, now this list can have just one element.
+                            I have also seen it as a mistake from people who don't know Css too well (I have made it myself), where combining transforms can be a bit of an issue.
+                            For there reasons in Fss when you apply transforms it always expects a list, but otherwise works as you would expect.
+                            """
+                            codeBlock ["Transforms"
+                                       "    ["
+                                       "        Transform.RotateX <| deg 10."
+                                       "        Transform.RotateY <| deg 15."
+                                       "        Transform.Perspective <| px 20"
+                                       "    ]"]
                         ]
-
                 ]
 
         let Combinators =
@@ -748,7 +774,6 @@ module App =
                                                     p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
                                                     p [] [ str "Text in a paragraph but not after div with the combinator so is not red"]
                                                 ]
-
                                         ]
                                     li []
                                         [
@@ -799,7 +824,7 @@ module App =
                             []
                             [
                                 MarginTop' (px 200)
-                                Transform.Rotate(deg 45.0)
+                                Transforms [ Transform.Rotate(deg 45.0) ]
                                 BackgroundColor.red
                             ]
 
@@ -834,7 +859,10 @@ module App =
                                                 "               []"
                                                 "               ["
                                                 "                   MarginTop' (px 200)"
-                                                "                   Transform.Rotate(deg 45.0)"
+                                                "                   Transforms"
+                                                "                       ["
+                                                "                           Transform.Rotate(deg 45.0)"
+                                                "                       ]"
                                                 "                   BackgroundColor.red"
                                                 "               ]"
                                                 "           MediaQuery"
