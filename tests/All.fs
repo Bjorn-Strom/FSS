@@ -5,9 +5,9 @@ open Fable.Core.JsInterop
 open Utils
 open Fss
 
-module Misc =
+module All =
      let tests =
-        testList "Misc"
+        testList "All"
             [
                 test
                     "All inherit"

@@ -32,6 +32,13 @@ module Functions =
         |> CssString
         :> IAnimationName
 
+    /// <summary>Write Css as key value string pairs.
+    /// Allows you to add values not supported by Fss.</summary>
+    /// <param name="key">Css property</param>
+    /// <param name="value">Css value </param>
+    /// <returns>Css property for fss.</returns>
+    let Custom (key: string) (value: string) = key ==> value |> CSSProperty
+
     let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame
     let frames (f: int list) (properties: CSSProperty list) = (f, properties) |> Frames
 

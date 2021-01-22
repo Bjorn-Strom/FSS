@@ -175,6 +175,7 @@ module App =
                 ]
 
         let basicUse =
+            let borderStyle = fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)" ]
             article []
                [
                     h2 [] [ str "Basic usage" ]
@@ -207,11 +208,22 @@ module App =
                                     However as this project creates CSS and interacts with it, it has to deal with some of its shortcoming, like shorthands.
 
                                     Therefore the shorthands that are included are limited to ones where using inherit, initial, unset or none is natural. Like text-decoration.
-                                    Resetting text-decoration could be annoying without it.
+                                    Resetting text-decoration would be  really annoying without it - having to go through each property resetting it.
 
-                                    Oh an yeah you can use margin and padding if you want to, so there are sprinkles of shorthands around
-                                    Dont you judge me, I said it was opinionated!"""
+                                    However if shorthands is something you really want to use, you can use the custom escape hatch to write them up in string.
+                                    The escape hatch is a function that takes two string, a key and a value and attempts to make Css with it.
+                                    For example if I want to set border with shorthand I can write:
+                                    """
+                                    codeBlock [ "fss"
+                                                "[ Custom \"border\" \"4mm ridge rgba(170, 50, 220, .6)\" ]" ]
+
+                                    str """Which has the following result"""
+                                    div [ ClassName borderStyle ]
+                                        [
+                                            str "Border style made with custom escape hatch"
+                                        ]
                                 ]
+
                         ]
                ]
 
