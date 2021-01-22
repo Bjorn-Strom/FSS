@@ -42,7 +42,6 @@ module Global =
     type ITextDecorationSkipInk   = interface end
     type ITextTransform           = interface end
     type ITextIndent              = interface end
-    type ITextShadow              = interface end
     type ITextEmphasis            = interface end
     type ITextEmphasisPosition    = interface end
     type ITextEmphasisStyle       = interface end
@@ -363,7 +362,6 @@ module Global =
         interface ITextDecorationSkipInk
         interface ITextTransform
         interface ITextIndent
-        interface ITextShadow
         interface ITextEmphasis
         interface ITextEmphasisPosition
         interface ITextEmphasisStyle
