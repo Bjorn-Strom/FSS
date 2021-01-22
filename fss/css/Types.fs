@@ -87,7 +87,6 @@ module Global =
     type IBorderImageWidth  = interface end
     type IBorderImageSource = interface end
 
-    type ITransform       = interface end
     type ITransformOrigin = interface end
 
     type ITransition               = interface end
@@ -287,7 +286,6 @@ module Global =
         interface IListStyleImage
         interface IBorderStyle
         interface IBorderImageSource
-        interface ITransform
         interface ITransitionProperty
         interface IDisplay
         interface IFloat
@@ -405,7 +403,6 @@ module Global =
         interface IBorderSpacing
         interface IBorderImageWidth
         interface IBorderImageSource
-        interface ITransform
         interface ITransformOrigin
         interface ITransition
         interface ITransitionDelay

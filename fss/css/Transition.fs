@@ -150,8 +150,10 @@ module Transition =
         |> transitionProperty
     type TransitionProperty =
         static member Value (property: ITransitionProperty) = property |> transitionProperty'
-        static member Value (properties: ITransitionProperty list) =
-             Utilities.Helpers.combineComma propertyToString properties |> transitionProperty
+        static member Values (properties: Property.Property list) =
+             properties
+             |> Utilities.Helpers.combineComma propertyToString
+             |> transitionProperty
         static member All = Property.All |> transitionProperty'
         static member AlignContent = Property.AlignContent |> transitionProperty'
         static member AlignItems = Property.AlignItems |> transitionProperty'

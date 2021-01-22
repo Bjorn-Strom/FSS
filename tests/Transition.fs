@@ -98,7 +98,7 @@ module Transition =
                     ["transitionProperty" ==> "unset"]
                 test
                     "Transition properties"
-                    [TransitionProperty.Value [Property.BackgroundColor :> ITransitionProperty; Property.Color :> ITransitionProperty] ]
+                    [TransitionProperty.Values [Property.BackgroundColor; Property.Color ] ]
                     ["transitionProperty" ==> "background-color, color"]
                 test
                     "Transition timing function ease"

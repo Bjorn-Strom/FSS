@@ -1233,9 +1233,9 @@ module App =
                         yield! box
                         Label' "Linear gradient style 2"
                         BackgroundImage.LinearGradient(turn 0.25,
-                                                       [CssColor.Hex "3f87a6" :> IColorStop
-                                                        CssColor.Hex "ebf8e1" :> IColorStop
-                                                        CssColor.Hex "f69d3c" :> IColorStop])
+                                                       [CssColor.Hex "3f87a6"
+                                                        CssColor.Hex "ebf8e1"
+                                                        CssColor.Hex "f69d3c"])
                     ]
             let linearGradientStyle3 =
                 fss
@@ -1287,7 +1287,7 @@ module App =
                     [
                         Label' "Radial Gradient style 2"
                         yield! box
-                        BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex "3f87a6" :> IColorStop; CssColor.Hex "ebf8e1" :> IColorStop; CssColor.Hex "f69d3c" :> IColorStop])
+                        BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex "3f87a6"; CssColor.Hex "ebf8e1"; CssColor.Hex "f69d3c"])
                     ]
             let radialGradientStyle3 =
                 fss
@@ -1313,7 +1313,7 @@ module App =
                     [
                         Label' "Repeating Radial Gradient style 2"
                         yield! box
-                        BackgroundImage.RepeatingRadialGradient(ClosestSide, [CssColor.Hex "3f87a6" :> IColorStop; CssColor.Hex "ebf8e1" :> IColorStop; CssColor.Hex "f69d3c" :> IColorStop])
+                        BackgroundImage.RepeatingRadialGradient(ClosestSide, [CssColor.Hex "3f87a6"; CssColor.Hex "ebf8e1"; CssColor.Hex "f69d3c" ])
                     ]
             let repeatingRadialGradientStyle3 =
                 fss
@@ -1339,9 +1339,9 @@ module App =
                                        "   fss"
                                        "       ["
                                        "           BackgroundImage.LinearGradient(turn 0.25,"
-                                       "                                          [CssColor.Hex \"3f87a6\" :> IColorStop"
-                                       "                                           CssColor.Hex \"ebf8e1\" :> IColorStop"
-                                       "                                           CssColor.Hex \"f69d3c\" :> IColorStop])"
+                                       "                                          [CssColor.Hex \"3f87a6\""
+                                       "                                           CssColor.Hex \"ebf8e1\""
+                                       "                                           CssColor.Hex \"f69d3c\"])"
                                        "       ]"
                                        "let linearGradientStyle3 ="
                                        "   fss"
@@ -1394,7 +1394,7 @@ module App =
                                         "let radialGradientStyle2 ="
                                         "    fss"
                                         "        ["
-                                        "            BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex \"3f87a6\" :> IColorStop; CssColor.Hex \"ebf8e1\" :> IColorStop; CssColor.Hex \"f69d3c\" :> IColorStop])"
+                                        "            BackgroundImage.RadialGradient(ClosestSide, [CssColor.Hex \"3f87a6\"; CssColor.Hex \"ebf8e1\"; CssColor.Hex \"f69d3c\" ])"
                                         "        ]"
                                         "let radialGradientStyle3 ="
                                         "    fss"
