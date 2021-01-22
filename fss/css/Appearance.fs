@@ -1,5 +1,6 @@
 namespace Fss
 
+[<RequireQualifiedAccess>]
 module AppearanceType =
     type Appearance =
         | PushButton
@@ -72,11 +73,9 @@ module AppearanceType =
 
 [<AutoOpen>]
 module Appeareance =
-    open AppearanceType
-
     let private appearanceToString (appearance: IAppearance) =
         match appearance with
-        | :? Appearance as a -> Utilities.Helpers.duToKebab a
+        | :? AppearanceType.Appearance as a -> Utilities.Helpers.duToKebab a
         | :? None -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown appearance"
@@ -89,72 +88,72 @@ module Appeareance =
 
     type Appearance =
         static member Value (appearance: IAppearance) = appearance |> appearanceValue'
-        static member PushButton = PushButton |> appearanceValue'
-        static member SquareButton = SquareButton |> appearanceValue'
-        static member Button = Button |> appearanceValue'
-        static member ButtonBevel = ButtonBevel |> appearanceValue'
-        static member Listbox = Listbox |> appearanceValue'
-        static member Listitem = Listitem |> appearanceValue'
-        static member Menulist = Menulist |> appearanceValue'
-        static member MenulistButton = MenulistButton |> appearanceValue'
-        static member MenulistText = MenulistText |> appearanceValue'
-        static member MenulistTextfield = MenulistTextfield |> appearanceValue'
-        static member Menupopup = Menupopup |> appearanceValue'
-        static member ScrollbarbuttonUp = ScrollbarbuttonUp |> appearanceValue'
-        static member ScrollbarbuttonDown = ScrollbarbuttonDown |> appearanceValue'
-        static member ScrollbarbuttonLeft = ScrollbarbuttonLeft |> appearanceValue'
-        static member ScrollbarbuttonRight = ScrollbarbuttonRight |> appearanceValue'
-        static member ScrollbartrackHorizontal = ScrollbartrackHorizontal |> appearanceValue'
-        static member ScrollbartrackVertical = ScrollbartrackVertical |> appearanceValue'
-        static member ScrollbarthumbHorizontal = ScrollbarthumbHorizontal |> appearanceValue'
-        static member ScrollbarthumbVertical = ScrollbarthumbVertical |> appearanceValue'
-        static member ScrollbargripperHorizontal = ScrollbargripperHorizontal |> appearanceValue'
-        static member ScrollbargripperVertical = ScrollbargripperVertical |> appearanceValue'
-        static member SliderHorizontal = SliderHorizontal |> appearanceValue'
-        static member SliderVertical = SliderVertical |> appearanceValue'
-        static member SliderthumbHorizontal = SliderthumbHorizontal |> appearanceValue'
-        static member SliderthumbVertical = SliderthumbVertical |> appearanceValue'
-        static member Caret = Caret |> appearanceValue'
-        static member Searchfield = Searchfield |> appearanceValue'
-        static member SearchfieldDecoration = SearchfieldDecoration |> appearanceValue'
-        static member SearchfieldResultsDecoration = SearchfieldResultsDecoration |> appearanceValue'
-        static member SearchfieldResultsButton = SearchfieldResultsButton |> appearanceValue'
-        static member SearchfieldCancelButton = SearchfieldCancelButton |> appearanceValue'
-        static member Textfield = Textfield |> appearanceValue'
-        static member Textarea = Textarea |> appearanceValue'
-        static member Checkbox = Checkbox |> appearanceValue'
-        static member CheckboxContainer = CheckboxContainer |> appearanceValue'
-        static member CheckboxSmall = CheckboxSmall |> appearanceValue'
-        static member Dialog = Dialog |> appearanceValue'
-        static member Menuitem = Menuitem |> appearanceValue'
-        static member Progressbar = Progressbar |> appearanceValue'
-        static member Radio = Radio |> appearanceValue'
-        static member RadioContainer = RadioContainer |> appearanceValue'
-        static member RadioSmall = RadioSmall |> appearanceValue'
-        static member Resizer = Resizer |> appearanceValue'
-        static member Scrollbar = Scrollbar |> appearanceValue'
-        static member Separator = Separator |> appearanceValue'
-        static member Statusbar = Statusbar |> appearanceValue'
-        static member Tab = Tab |> appearanceValue'
-        static member Tabpanels = Tabpanels |> appearanceValue'
-        static member TextfieldMultiline = TextfieldMultiline |> appearanceValue'
-        static member Toolbar = Toolbar |> appearanceValue'
-        static member Toolbarbutton = Toolbarbutton |> appearanceValue'
-        static member Toolbox = Toolbox |> appearanceValue'
-        static member MozMacUnifiedToolbar = MozMacUnifiedToolbar |> appearanceValue'
-        static member MozWinBorderlessGlass = MozWinBorderlessGlass |> appearanceValue'
-        static member MozWinBrowsertabbarToolbox = MozWinBrowsertabbarToolbox |> appearanceValue'
-        static member MozWinCommunicationsToolbox = MozWinCommunicationsToolbox |> appearanceValue'
-        static member MozWinGlass = MozWinGlass |> appearanceValue'
-        static member MozWinMediaToolbox = MozWinMediaToolbox |> appearanceValue'
-        static member Tooltip = Tooltip |> appearanceValue'
-        static member Treeheadercell = Treeheadercell |> appearanceValue'
-        static member Treeheadersortarrow = Treeheadersortarrow |> appearanceValue'
-        static member Treeitem = Treeitem |> appearanceValue'
-        static member Treetwisty = Treetwisty |> appearanceValue'
-        static member Treetwistyopen = Treetwistyopen |> appearanceValue'
-        static member Treeview = Treeview |> appearanceValue'
-        static member Window = Window |> appearanceValue'
+        static member PushButton = AppearanceType.PushButton |> appearanceValue'
+        static member SquareButton = AppearanceType.SquareButton |> appearanceValue'
+        static member Button = AppearanceType.Button |> appearanceValue'
+        static member ButtonBevel = AppearanceType.ButtonBevel |> appearanceValue'
+        static member Listbox = AppearanceType.Listbox |> appearanceValue'
+        static member Listitem = AppearanceType.Listitem |> appearanceValue'
+        static member Menulist = AppearanceType.Menulist |> appearanceValue'
+        static member MenulistButton = AppearanceType.MenulistButton |> appearanceValue'
+        static member MenulistText = AppearanceType.MenulistText |> appearanceValue'
+        static member MenulistTextfield = AppearanceType.MenulistTextfield |> appearanceValue'
+        static member Menupopup = AppearanceType.Menupopup |> appearanceValue'
+        static member ScrollbarbuttonUp = AppearanceType.ScrollbarbuttonUp |> appearanceValue'
+        static member ScrollbarbuttonDown = AppearanceType.ScrollbarbuttonDown |> appearanceValue'
+        static member ScrollbarbuttonLeft = AppearanceType.ScrollbarbuttonLeft |> appearanceValue'
+        static member ScrollbarbuttonRight = AppearanceType.ScrollbarbuttonRight |> appearanceValue'
+        static member ScrollbartrackHorizontal = AppearanceType.ScrollbartrackHorizontal |> appearanceValue'
+        static member ScrollbartrackVertical = AppearanceType.ScrollbartrackVertical |> appearanceValue'
+        static member ScrollbarthumbHorizontal = AppearanceType.ScrollbarthumbHorizontal |> appearanceValue'
+        static member ScrollbarthumbVertical = AppearanceType.ScrollbarthumbVertical |> appearanceValue'
+        static member ScrollbargripperHorizontal = AppearanceType.ScrollbargripperHorizontal |> appearanceValue'
+        static member ScrollbargripperVertical = AppearanceType.ScrollbargripperVertical |> appearanceValue'
+        static member SliderHorizontal = AppearanceType.SliderHorizontal |> appearanceValue'
+        static member SliderVertical = AppearanceType.SliderVertical |> appearanceValue'
+        static member SliderthumbHorizontal = AppearanceType.SliderthumbHorizontal |> appearanceValue'
+        static member SliderthumbVertical = AppearanceType.SliderthumbVertical |> appearanceValue'
+        static member Caret = AppearanceType.Caret |> appearanceValue'
+        static member Searchfield = AppearanceType.Searchfield |> appearanceValue'
+        static member SearchfieldDecoration = AppearanceType.SearchfieldDecoration |> appearanceValue'
+        static member SearchfieldResultsDecoration = AppearanceType.SearchfieldResultsDecoration |> appearanceValue'
+        static member SearchfieldResultsButton = AppearanceType.SearchfieldResultsButton |> appearanceValue'
+        static member SearchfieldCancelButton = AppearanceType.SearchfieldCancelButton |> appearanceValue'
+        static member Textfield = AppearanceType.Textfield |> appearanceValue'
+        static member Textarea = AppearanceType.Textarea |> appearanceValue'
+        static member Checkbox = AppearanceType.Checkbox |> appearanceValue'
+        static member CheckboxContainer = AppearanceType.CheckboxContainer |> appearanceValue'
+        static member CheckboxSmall = AppearanceType.CheckboxSmall |> appearanceValue'
+        static member Dialog = AppearanceType.Dialog |> appearanceValue'
+        static member Menuitem = AppearanceType.Menuitem |> appearanceValue'
+        static member Progressbar = AppearanceType.Progressbar |> appearanceValue'
+        static member Radio = AppearanceType.Radio |> appearanceValue'
+        static member RadioContainer = AppearanceType.RadioContainer |> appearanceValue'
+        static member RadioSmall = AppearanceType.RadioSmall |> appearanceValue'
+        static member Resizer = AppearanceType.Resizer |> appearanceValue'
+        static member Scrollbar = AppearanceType.Scrollbar |> appearanceValue'
+        static member Separator = AppearanceType.Separator |> appearanceValue'
+        static member Statusbar = AppearanceType.Statusbar |> appearanceValue'
+        static member Tab = AppearanceType.Tab |> appearanceValue'
+        static member Tabpanels = AppearanceType.Tabpanels |> appearanceValue'
+        static member TextfieldMultiline = AppearanceType.TextfieldMultiline |> appearanceValue'
+        static member Toolbar = AppearanceType.Toolbar |> appearanceValue'
+        static member Toolbarbutton = AppearanceType.Toolbarbutton |> appearanceValue'
+        static member Toolbox = AppearanceType.Toolbox |> appearanceValue'
+        static member MozMacUnifiedToolbar = AppearanceType.MozMacUnifiedToolbar |> appearanceValue'
+        static member MozWinBorderlessGlass = AppearanceType.MozWinBorderlessGlass |> appearanceValue'
+        static member MozWinBrowsertabbarToolbox = AppearanceType.MozWinBrowsertabbarToolbox |> appearanceValue'
+        static member MozWinCommunicationsToolbox = AppearanceType.MozWinCommunicationsToolbox |> appearanceValue'
+        static member MozWinGlass = AppearanceType.MozWinGlass |> appearanceValue'
+        static member MozWinMediaToolbox = AppearanceType.MozWinMediaToolbox |> appearanceValue'
+        static member Tooltip = AppearanceType.Tooltip |> appearanceValue'
+        static member Treeheadercell = AppearanceType.Treeheadercell |> appearanceValue'
+        static member Treeheadersortarrow = AppearanceType.Treeheadersortarrow |> appearanceValue'
+        static member Treeitem = AppearanceType.Treeitem |> appearanceValue'
+        static member Treetwisty = AppearanceType.Treetwisty |> appearanceValue'
+        static member Treetwistyopen = AppearanceType.Treetwistyopen |> appearanceValue'
+        static member Treeview = AppearanceType.Treeview |> appearanceValue'
+        static member Window = AppearanceType.Window |> appearanceValue'
 
         static member Auto = Auto |> appearanceValue'
         static member None = None |> appearanceValue'
@@ -162,9 +161,9 @@ module Appeareance =
     /// <summary>Specifies platform native styling.</summary>
     /// <param name="appearance">
     ///     can be:
-    ///     - <c> Appearance </c> 
-    ///     - <c> None </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Appearance </c>
+    ///     - <c> None </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Appearance' (appearance: IAppearance) = appearance |> Appearance.Value

@@ -1,5 +1,6 @@
 namespace Fss
 
+[<RequireQualifiedAccess>]
 module VisibilityType =
     type Visibility =
         | Visible
@@ -16,19 +17,18 @@ module VisibilityType =
 // https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
 [<AutoOpen>]
 module Visibility =
-    open VisibilityType
 
     let private visibilityValue value = PropertyValue.cssValue Property.Visibility value
     let private visibilityValue' value =
         value
-        |> visibilityToString
+        |> VisibilityType.visibilityToString
         |> visibilityValue
 
     type Visibility =
         static member Value (visibility: IVisibility) = visibility |> visibilityValue'
-        static member Visible = Visible |> visibilityValue'
-        static member Hidden = Hidden |> visibilityValue'
-        static member Collapse = Collapse |> visibilityValue'
+        static member Visible = VisibilityType.Visible |> visibilityValue'
+        static member Hidden = VisibilityType.Hidden |> visibilityValue'
+        static member Collapse = VisibilityType.Collapse |> visibilityValue'
 
         static member Inherit = Inherit |> visibilityValue'
         static member Initial = Initial |> visibilityValue'
@@ -37,10 +37,10 @@ module Visibility =
     /// <summary>Specifies if an element is visible.</summary>
     /// <param name="visibility">
     ///     can be:
-    ///     - <c> Visibility </c> 
+    ///     - <c> Visibility </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Visibility' (visibility: IVisibility) = Visibility.Value(visibility)
@@ -103,8 +103,8 @@ module PaintOrder =
     /// <summary>Specifies in which order the fill and strokes are drawn.</summary>
     /// <param name="order">
     ///     can be:
-    ///     - <c> PaintOrder </c> 
-    ///     - <c> Normal </c> 
+    ///     - <c> PaintOrder </c>
+    ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let PaintOrder' (order: IPaintOrder) = PaintOrder.Value(order)

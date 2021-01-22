@@ -1,6 +1,7 @@
 namespace Fss
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
+[<RequireQualifiedAccess>]
 module AnimationType =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
     type AnimationDirection =
@@ -31,24 +32,23 @@ module AnimationType =
 
 [<AutoOpen>]
 module Animation =
-    open AnimationType
 
     let private animationDirectionToString (direction: IAnimationDirection) =
         match direction with
-            | :? AnimationDirection as d -> Utilities.Helpers.duToKebab d
+            | :? AnimationType.AnimationDirection as d -> Utilities.Helpers.duToKebab d
             | :? Global as g -> GlobalValue.global' g
             | :? Normal -> GlobalValue.normal
             | _ -> "Unknown animation direction"
 
     let private animationFillModeToString (fillMode: IAnimationFillMode) =
         match fillMode with
-            | :? AnimationFillMode as a -> Utilities.Helpers.duToLowercase a
+            | :? AnimationType.AnimationFillMode as a -> Utilities.Helpers.duToLowercase a
             | :? None -> GlobalValue.none
             | _ -> "Unknown fill mode"
 
     let private playStateTypeToString (playState: IAnimationPlayState) =
         match playState with
-        | :? AnimationPlayState as a -> Utilities.Helpers.duToLowercase a
+        | :? AnimationType.AnimationPlayState as a -> Utilities.Helpers.duToLowercase a
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown animation play state"
 
@@ -75,9 +75,9 @@ module Animation =
         |> directionCssValue
     type AnimationDirection =
         static member value (direction: IAnimationDirection) = direction |> directionCssValue'
-        static member Reverse = Reverse |> directionCssValue'
-        static member Alternate = Alternate |> directionCssValue'
-        static member AlternateReverse = AlternateReverse |> directionCssValue'
+        static member Reverse = AnimationType.Reverse |> directionCssValue'
+        static member Alternate = AnimationType.Alternate |> directionCssValue'
+        static member AlternateReverse = AnimationType.AlternateReverse |> directionCssValue'
 
         static member Normal = Normal |> directionCssValue'
         static member Inherit = Inherit |>  directionCssValue'
@@ -118,9 +118,9 @@ module Animation =
         |> fillModeCssValue
     type AnimationFillMode =
         static member Value (fillMode: IAnimationFillMode) = fillMode |> fillModeCssValue'
-        static member Forwards = Forwards |> fillModeCssValue'
-        static member Backwards = Backwards |> fillModeCssValue'
-        static member Both = Both |> fillModeCssValue'
+        static member Forwards = AnimationType.Forwards |> fillModeCssValue'
+        static member Backwards = AnimationType.Backwards |> fillModeCssValue'
+        static member Both = AnimationType.Both |> fillModeCssValue'
         static member None = None |> fillModeCssValue'
 
     /// <summary>Specifies which styles to apply before and after the animation. </summary>
@@ -136,16 +136,16 @@ module Animation =
     let private iterationCountCssValue value = PropertyValue.cssValue Property.AnimationIterationCount value
     let private iterationCountCssValue' value =
         value
-        |> iterationCountToString
+        |> AnimationType.iterationCountToString
         |> iterationCountCssValue
 
     type AnimationIterationCount =
         static member Value (count: IAnimationIterationCount) = count |> iterationCountCssValue'
         static member Values (values: IAnimationIterationCount list) =
             values
-            |> Utilities.Helpers.combineComma iterationCountToString
+            |> Utilities.Helpers.combineComma AnimationType.iterationCountToString
             |> iterationCountCssValue
-        static member Infinite = Infinite |> iterationCountToString |> iterationCountCssValue
+        static member Infinite = AnimationType.Infinite |> AnimationType.iterationCountToString |> iterationCountCssValue
 
     /// <summary>How many times should an animation be played.</summary>
     /// <param name="iterationCount">
@@ -192,8 +192,8 @@ module Animation =
         |> playStateCssValue
     type AnimationPlayState =
         static member Value (playState: IAnimationPlayState) = playState |> playStateCssValue'
-        static member Running = Running |> playStateCssValue'
-        static member Paused = Paused |> playStateCssValue'
+        static member Running = AnimationType.Running |> playStateCssValue'
+        static member Paused = AnimationType.Paused |> playStateCssValue'
         static member Inherit = Inherit |> playStateCssValue'
         static member Initial = Initial |> playStateCssValue'
         static member Unset = Unset |> playStateCssValue'

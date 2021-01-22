@@ -1,7 +1,7 @@
 namespace Fss
 
 [<AutoOpen>]
-module ImageTypes =
+module Image =
     type SideOrCorner =
         | ToTop
         | ToTopRight
@@ -48,7 +48,6 @@ module ImageTypes =
         | ColorStop2 of (CssColor * ILengthPercentage * ILengthPercentage)
         interface IColorStop
 
-module Image =
     let private sideOrCornerValue (value: SideOrCorner) = Utilities.Helpers.duToSpaced value
     let private positionValue (value: ImagePosition) =
         match value with

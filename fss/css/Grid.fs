@@ -1,5 +1,6 @@
 ﻿namespace Fss
 
+[<RequireQualifiedAccess>]
 module GridType =
     type GridAutoFlow =
         | Row
@@ -27,7 +28,6 @@ module GridType =
 
 [<AutoOpen>]
 module Grid =
-    open GridType
 
      // https://developer.mozilla.org/en-US/docs/Web/CSS/minmax
     type MinMax =
@@ -126,7 +126,7 @@ module Grid =
 
     let private autoFlowToString (autoFlow: IGridAutoFlow) =
         match autoFlow with
-        | :? GridAutoFlow as g -> Utilities.Helpers.duToSpaced g
+        | :? GridType.GridAutoFlow as g -> Utilities.Helpers.duToSpaced g
         | :? Global as g ->  GlobalValue.global' g
         | _ -> "Unknown grid auto flow"
 
@@ -154,9 +154,9 @@ module Grid =
     let private templateColumnToString (templateColumn: IGridTemplateColumns) =
         let stringifyColumn =
             function
-                | GridTemplateColumns.GridTemplateColumns -> "subgrid"
+                | GridType.GridTemplateColumns -> "subgrid"
         match templateColumn with
-        | :? GridTemplateColumns as g -> stringifyColumn g
+        | :? GridType.GridTemplateColumns as g -> stringifyColumn g
         | :? Auto -> GlobalValue.auto
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
@@ -167,14 +167,14 @@ module Grid =
     let private gridPositionToString (position: IGridPosition) =
         let stringifyGridPosition =
             function
-                | Value v -> string v
-                | Ident i -> i
-                | IdentValue (i, v) -> sprintf "%s %d" i v
-                | ValueIdentSpan (v, i) -> sprintf "%d %s span" v i
-                | Span s -> s
+                | GridType.Value v -> string v
+                | GridType.Ident i -> i
+                | GridType.IdentValue (i, v) -> sprintf "%s %d" i v
+                | GridType.ValueIdentSpan (v, i) -> sprintf "%d %s span" v i
+                | GridType.Span s -> s
 
         match position with
-        | :? GridPosition as g -> stringifyGridPosition g
+        | :? GridType.GridPosition as g -> stringifyGridPosition g
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown grid position"
@@ -182,9 +182,9 @@ module Grid =
     let private templateRowToString (templateRow: IGridTemplateRows) =
         let stringifyRow =
             function
-                | GridTemplateRows -> "subgrid"
+                | GridType.GridTemplateRows -> "subgrid"
         match templateRow with
-        | :? GridTemplateRows as g -> stringifyRow g
+        | :? GridType.GridTemplateRows as g -> stringifyRow g
         | :? Auto -> GlobalValue.auto
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
@@ -233,11 +233,11 @@ module Grid =
         |> autoFlowValue
     type GridAutoFlow =
         static member Value (autoFlow: IGridAutoFlow) = autoFlow |> autoFlowValue'
-        static member Row = Row |> autoFlowValue'
-        static member Column = Column |> autoFlowValue'
-        static member Dense = Dense |> autoFlowValue'
-        static member RowDense = RowDense |> autoFlowValue'
-        static member ColumnDense = ColumnDense |> autoFlowValue'
+        static member Row = GridType.Row |> autoFlowValue'
+        static member Column = GridType.Column |> autoFlowValue'
+        static member Dense = GridType.Dense |> autoFlowValue'
+        static member RowDense = GridType.RowDense |> autoFlowValue'
+        static member ColumnDense = GridType.ColumnDense |> autoFlowValue'
 
         static member Inherit = Inherit |> autoFlowValue'
         static member Initial = Initial |> autoFlowValue'
@@ -349,13 +349,13 @@ module Grid =
     // Grid position
     type GridPosition =
         static member Value (position: IGridPosition) = position
-        static member Ident ident = ident |> Ident
-        static member Value (value: int) = value |> Value
-        static member IdentValue (ident: string, value: int) = IdentValue(ident, value)
-        static member ValueIdentSpan (value: int, ident: string) = ValueIdentSpan(value, ident)
-        static member Span (value: int) = sprintf "span %d" value |> Span
-        static member Span (ident: string) = sprintf "span %s" ident |> Span
-        static member Span (value: int, ident: string) = sprintf "%d %s span" value ident |> Span
+        static member Ident ident = ident |>GridType.Ident
+        static member Value (value: int) = value |>GridType.Value
+        static member IdentValue (ident: string, value: int) = GridType.IdentValue(ident, value)
+        static member ValueIdentSpan (value: int, ident: string) = GridType.ValueIdentSpan(value, ident)
+        static member Span (value: int) = sprintf "span %d" value |>GridType.Span
+        static member Span (ident: string) = sprintf "span %s" ident |>GridType.Span
+        static member Span (value: int, ident: string) = sprintf "%d %s span" value ident |>GridType.Span
 
         static member Auto = Auto
         static member Inherit = Inherit
@@ -708,7 +708,7 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
-        static member Subgrid = GridTemplateColumns.GridTemplateColumns |> templateColumnValue'
+        static member Subgrid = GridType.GridTemplateColumns |> templateColumnValue'
         static member None = None |> templateColumnValue'
         static member Auto = Auto |> templateColumnValue'
         static member Inherit = Inherit |> templateColumnValue'
@@ -739,8 +739,8 @@ module Grid =
     type GridAutoRows =
         static member Value (autoRow: IGridAutoRows) = autoRow |> autoRowsValue'
         static member Values (values: IGridAutoRows list) = Utilities.Helpers.combineWs autoRowsToString values |> autoRowsValue
-        static member MaxContent = ContentSize.MaxContent |> autoRowsValue'
-        static member MinContent = ContentSize.MinContent |> autoRowsValue'
+        static member MaxContent = MaxContent |> autoRowsValue'
+        static member MinContent = MinContent |> autoRowsValue'
         static member FitContent (contentSize: ILengthPercentage) = FitContent(contentSize) |> autoRowsValue'
 
         static member Auto = Auto |> autoRowsValue'

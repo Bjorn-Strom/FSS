@@ -1,5 +1,6 @@
 namespace Fss
 
+[<RequireQualifiedAccess>]
 module FlexType =
     type AlignContent =
         | Start
@@ -127,53 +128,52 @@ module FlexType =
 
 [<AutoOpen>]
 module Flex =
-    open FlexType
 
     let private alignContentToString (alignment: IAlignContent) =
         match alignment with
-        | :? AlignContent as a -> Utilities.Helpers.duToKebab a
+        | :? FlexType.AlignContent as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown align content"
 
     let private alignItemsToString (alignment: IAlignItems) =
         match alignment with
-        | :? AlignItems as a -> Utilities.Helpers.duToKebab a
+        | :? FlexType.AlignItems as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown align items"
 
     let private alignSelfToString (alignment: IAlignSelf) =
         match alignment with
-        | :? AlignSelf as a -> Utilities.Helpers.duToKebab a
+        | :? FlexType.AlignSelf as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown align self"
 
     let private justifyContentToString (justification: IJustifyContent) =
         match justification with
-        | :? JustifyContent as a -> Utilities.Helpers.duToKebab a
+        | :? FlexType.JustifyContent as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown justify content"
 
     let private justifyItemsToString (justification: IJustifyItems) =
         match justification with
-        | :? JustifyItems as a -> Utilities.Helpers.duToKebab a
+        | :? FlexType.JustifyItems as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown justify items"
 
     let private justifySelfToString (justification: IJustifySelf) =
         match justification with
-        | :? JustifySelf as a -> Utilities.Helpers.duToKebab a
+        | :? FlexType.JustifySelf as a -> Utilities.Helpers.duToKebab a
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown justify self"
 
     let private flexDirectionToString (direction: IFlexDirection) =
         match direction with
-        | :? FlexDirection as a -> Utilities.Helpers.duToKebab a
+        | :? FlexType.FlexDirection as a -> Utilities.Helpers.duToKebab a
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown flex direction"
 
@@ -186,7 +186,7 @@ module Flex =
 
     let private flexWrapToString (direction: IFlexWrap) =
         match direction with
-        | :? FlexWrap as a -> Utilities.Helpers.duToKebab a
+        | :? FlexType.FlexWrap as a -> Utilities.Helpers.duToKebab a
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown flex wrap"
 
@@ -210,7 +210,7 @@ module Flex =
 
     let private flexBasisToString (basis: IFlexBasis) =
         match basis with
-        | :? FlexBasis as b -> Utilities.Helpers.duToKebab b
+        | :? FlexType.FlexBasis as b -> Utilities.Helpers.duToKebab b
         | :? Auto -> GlobalValue.auto
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -432,19 +432,19 @@ module Flex =
         |> justifySelfValue
     type JustifySelf =
         static member Value (justification: IJustifySelf) = justification |> justifySelfValue'
-        static member Start = Start |> justifySelfValue'
-        static member End = End |> justifySelfValue'
-        static member FlexStart = FlexStart |> justifySelfValue'
-        static member FlexEnd = FlexEnd |> justifySelfValue'
-        static member Center = Center |> justifySelfValue'
-        static member Baseline = Baseline |> justifySelfValue'
-        static member FirstBaseline = FirstBaseline |> justifySelfValue'
-        static member LastBaseline = LastBaseline |> justifySelfValue'
-        static member Stretch = Stretch |> justifySelfValue'
-        static member Safe = Safe |> justifySelfValue'
-        static member Unsafe = Unsafe |> justifySelfValue'
-        static member SelfStart = SelfStart |> justifySelfValue'
-        static member SelfEnd = SelfEnd |> justifySelfValue'
+        static member Start = FlexType.JustifySelf.Start |> justifySelfValue'
+        static member End = FlexType.JustifySelf.End |> justifySelfValue'
+        static member FlexStart = FlexType.JustifySelf.FlexStart |> justifySelfValue'
+        static member FlexEnd = FlexType.JustifySelf.FlexEnd |> justifySelfValue'
+        static member Center = FlexType.JustifySelf.Center |> justifySelfValue'
+        static member Baseline = FlexType.JustifySelf.Baseline |> justifySelfValue'
+        static member FirstBaseline = FlexType.JustifySelf.FirstBaseline |> justifySelfValue'
+        static member LastBaseline = FlexType.JustifySelf.LastBaseline |> justifySelfValue'
+        static member Stretch = FlexType.JustifySelf.Stretch |> justifySelfValue'
+        static member Safe = FlexType.JustifySelf.Safe |> justifySelfValue'
+        static member Unsafe = FlexType.JustifySelf.Unsafe |> justifySelfValue'
+        static member SelfStart = FlexType.JustifySelf.SelfStart |> justifySelfValue'
+        static member SelfEnd = FlexType.JustifySelf.SelfEnd |> justifySelfValue'
 
         static member Normal = Normal |> justifySelfValue'
         static member Inherit = Inherit |> justifySelfValue'
@@ -472,10 +472,10 @@ module Flex =
 
     type FlexDirection =
         static member Value (direction: IFlexDirection) = direction |> flexDirectionValue'
-        static member Row = Row |> flexDirectionValue'
-        static member RowReverse = RowReverse |> flexDirectionValue'
-        static member Column = Column |> flexDirectionValue'
-        static member ColumnReverse = ColumnReverse |> flexDirectionValue'
+        static member Row = FlexType.Row |> flexDirectionValue'
+        static member RowReverse = FlexType.RowReverse |> flexDirectionValue'
+        static member Column = FlexType.Column |> flexDirectionValue'
+        static member ColumnReverse = FlexType.ColumnReverse |> flexDirectionValue'
 
         static member Inherit = Inherit |> flexDirectionValue'
         static member Initial = Initial |> flexDirectionValue'
@@ -500,9 +500,9 @@ module Flex =
         |> flexWrapValue
     type FlexWrap =
         static member Value (direction: IFlexWrap) = direction |> flexWrapValue'
-        static member NoWrap = NoWrap |> flexWrapValue'
-        static member Wrap = Wrap |> flexWrapValue'
-        static member WrapReverse = WrapReverse |> flexWrapValue'
+        static member NoWrap = FlexType.NoWrap |> flexWrapValue'
+        static member Wrap = FlexType.Wrap |> flexWrapValue'
+        static member WrapReverse = FlexType.WrapReverse |> flexWrapValue'
 
         static member Inherit = Inherit |> flexWrapValue'
         static member Initial = Initial |> flexWrapValue'
@@ -601,11 +601,11 @@ module Flex =
 
     type FlexBasis =
         static member Value (basis: IFlexBasis) = basis |> flexBasisValue'
-        static member Fill = Fill |> flexBasisValue'
-        static member MaxContent = MaxContent |> flexBasisValue'
-        static member MinContent = MinContent |> flexBasisValue'
-        static member FitContent = FitContent |> flexBasisValue'
-        static member Content = Content |> flexBasisValue'
+        static member Fill = FlexType.Fill |> flexBasisValue'
+        static member MaxContent = FlexType.MaxContent |> flexBasisValue'
+        static member MinContent = FlexType.MinContent |> flexBasisValue'
+        static member FitContent = FlexType.FitContent |> flexBasisValue'
+        static member Content = FlexType.Content |> flexBasisValue'
 
         static member Auto = Auto |> flexBasisValue'
         static member Inherit = Inherit |> flexBasisValue'

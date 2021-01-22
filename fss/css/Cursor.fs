@@ -1,6 +1,7 @@
 ﻿namespace Fss
 
-module CursorTypes =
+[<RequireQualifiedAccess>]
+module CursorType =
     type Cursor =
         | Default
         | ContextMenu
@@ -36,11 +37,10 @@ module CursorTypes =
 
 [<AutoOpen>]
 module Cursor =
-    open CursorTypes
 
     let private cursorToString (cursor: ICursor) =
         match cursor with
-        | :? Cursor as c -> Utilities.Helpers.duToKebab c
+        | :? CursorType.Cursor as c -> Utilities.Helpers.duToKebab c
         | :? Auto -> GlobalValue.auto
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
@@ -57,36 +57,36 @@ module Cursor =
         static member Value (url: string, x: int, y: int) = sprintf "url(%s) %d %d" url x y |> cursorValue
         static member Value (cursor: ICursor) = cursor |> cursorValue'
 
-        static member Default = Default |> cursorValue'
-        static member ContextMenu = ContextMenu |> cursorValue'
-        static member Help = Help |> cursorValue'
-        static member Pointer = Pointer |> cursorValue'
-        static member Progress = Progress |> cursorValue'
-        static member Wait = Wait |> cursorValue'
-        static member Cell = Cell |> cursorValue'
-        static member Crosshair = Crosshair |> cursorValue'
-        static member Text = Text |> cursorValue'
-        static member VerticalText = VerticalText |> cursorValue'
-        static member Alias = Alias |> cursorValue'
-        static member Copy = Copy |> cursorValue'
-        static member Move = Move |> cursorValue'
-        static member NoDrop = NoDrop |> cursorValue'
-        static member NotAllowed = NotAllowed |> cursorValue'
-        static member AllScroll = AllScroll |> cursorValue'
-        static member ColResize = ColResize |> cursorValue'
-        static member RowResize = RowResize |> cursorValue'
-        static member NResize = NResize |> cursorValue'
-        static member EResize = EResize |> cursorValue'
-        static member SResize = SResize |> cursorValue'
-        static member WResize = WResize |> cursorValue'
-        static member NsResize = NsResize |> cursorValue'
-        static member EwResize = EwResize |> cursorValue'
-        static member NeResize = NeResize |> cursorValue'
-        static member NwResize = NwResize |> cursorValue'
-        static member SeResize = SeResize |> cursorValue'
-        static member SwResize = SwResize |> cursorValue'
-        static member NeswResize = NeswResize |> cursorValue'
-        static member NwseResize = NwseResize |> cursorValue'
+        static member Default = CursorType.Default |> cursorValue'
+        static member ContextMenu = CursorType.ContextMenu |> cursorValue'
+        static member Help = CursorType.Help |> cursorValue'
+        static member Pointer = CursorType.Pointer |> cursorValue'
+        static member Progress = CursorType.Progress |> cursorValue'
+        static member Wait = CursorType.Wait |> cursorValue'
+        static member Cell = CursorType.Cell |> cursorValue'
+        static member Crosshair = CursorType.Crosshair |> cursorValue'
+        static member Text = CursorType.Text |> cursorValue'
+        static member VerticalText = CursorType.VerticalText |> cursorValue'
+        static member Alias = CursorType.Alias |> cursorValue'
+        static member Copy = CursorType.Copy |> cursorValue'
+        static member Move = CursorType.Move |> cursorValue'
+        static member NoDrop = CursorType.NoDrop |> cursorValue'
+        static member NotAllowed = CursorType.NotAllowed |> cursorValue'
+        static member AllScroll = CursorType.AllScroll |> cursorValue'
+        static member ColResize = CursorType.ColResize |> cursorValue'
+        static member RowResize = CursorType.RowResize |> cursorValue'
+        static member NResize = CursorType.NResize |> cursorValue'
+        static member EResize = CursorType.EResize |> cursorValue'
+        static member SResize = CursorType.SResize |> cursorValue'
+        static member WResize = CursorType.WResize |> cursorValue'
+        static member NsResize = CursorType.NsResize |> cursorValue'
+        static member EwResize = CursorType.EwResize |> cursorValue'
+        static member NeResize = CursorType.NeResize |> cursorValue'
+        static member NwResize = CursorType.NwResize |> cursorValue'
+        static member SeResize = CursorType.SeResize |> cursorValue'
+        static member SwResize = CursorType.SwResize |> cursorValue'
+        static member NeswResize = CursorType.NeswResize |> cursorValue'
+        static member NwseResize = CursorType.NwseResize |> cursorValue'
 
         static member Auto = Auto |> cursorValue'
         static member Inherit = Inherit |> cursorValue'
@@ -97,12 +97,12 @@ module Cursor =
     /// <summary>Specifies how elements behave before a generated box.</summary>
     /// <param name="cursor">
     ///     can be:
-    ///     - <c> Cursor </c> 
+    ///     - <c> Cursor </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
-    ///     - <c> Auto </c> 
-    ///     - <c> None </c> 
+    ///     - <c> Unset </c>
+    ///     - <c> Auto </c>
+    ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Cursor' (cursor: ICursor) = Cursor.Value(cursor)

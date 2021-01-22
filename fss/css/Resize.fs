@@ -1,5 +1,6 @@
 namespace Fss
 
+[<RequireQualifiedAccess>]
 module ResizeType =
     type Resize =
         | Both
@@ -11,11 +12,10 @@ module ResizeType =
 
 [<AutoOpen>]
 module Resize =
-    open ResizeType
 
     let private resizeToString (resize: IResize) =
         match resize with
-        | :? Resize as r -> Utilities.Helpers.duToLowercase r
+        | :? ResizeType.Resize as r -> Utilities.Helpers.duToLowercase r
         | :? None -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown resize value"
@@ -28,11 +28,11 @@ module Resize =
 
     type Resize =
         static member Value (resize: IResize) = resize |> resizeValue'
-        static member Both = Both |> resizeValue'
-        static member Horizontal = Horizontal |> resizeValue'
-        static member Vertical = Vertical |> resizeValue'
-        static member Block = Block |> resizeValue'
-        static member Inline = Inline |> resizeValue'
+        static member Both = ResizeType.Both |> resizeValue'
+        static member Horizontal = ResizeType.Horizontal |> resizeValue'
+        static member Vertical = ResizeType.Vertical |> resizeValue'
+        static member Block = ResizeType.Block |> resizeValue'
+        static member Inline = ResizeType.Inline |> resizeValue'
         static member None = None |> resizeValue'
         static member Initial = Initial |> resizeValue'
         static member Inherit = Inherit |> resizeValue'
@@ -44,8 +44,8 @@ module Resize =
     ///     - <c> Resize </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> Unset </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Resize' (resize: IResize) = Resize.Value resize
