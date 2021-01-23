@@ -1,7 +1,7 @@
 ﻿namespace Fss
 
 [<RequireQualifiedAccess>]
-module ListStyleType =
+module ListStyleTypeType =
     type ListStyleImage =
         | ListStyleImage of string
         interface IListStyleImage
@@ -89,17 +89,17 @@ module ListStyle =
     let private listStyleImageToString (image: IListStyleImage) =
         let stringifyImage =
             function
-                | ListStyleType.ListStyleImage u -> sprintf "url('%s')" u
+                | ListStyleTypeType.ListStyleImage u -> sprintf "url('%s')" u
 
         match image with
-        | :? ListStyleType.ListStyleImage as l -> stringifyImage l
+        | :? ListStyleTypeType.ListStyleImage as l -> stringifyImage l
         | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown list style image"
 
     let private stylePositionToString (stylePosition: IListStylePosition) =
         match stylePosition with
-        | :? ListStyleType.ListStylePosition as l -> Utilities.Helpers.duToLowercase l
+        | :? ListStyleTypeType.ListStylePosition as l -> Utilities.Helpers.duToLowercase l
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown list style position"
 
@@ -138,7 +138,7 @@ module ListStyle =
 
     type ListStyleImage =
         static member Value (styleImage: IListStyleImage) = styleImage |> listStyleImageValue'
-        static member Url (url: string) = ListStyleType.ListStyleImage url |> listStyleImageValue'
+        static member Url (url: string) = ListStyleTypeType.ListStyleImage url |> listStyleImageValue'
 
         static member None = None |> listStyleImageValue'
         static member Inherit = Inherit |> listStyleImageValue'
@@ -166,8 +166,8 @@ module ListStyle =
 
     type ListStylePosition =
         static member Value (stylePosition: IListStylePosition) = stylePosition |> listStylePositionProperty'
-        static member Inside = ListStyleType.Inside |> listStylePositionProperty'
-        static member Outside = ListStyleType.Outside |> listStylePositionProperty'
+        static member Inside = ListStyleTypeType.Inside |> listStylePositionProperty'
+        static member Outside = ListStyleTypeType.Outside |> listStylePositionProperty'
 
         static member Inherit = Inherit |> listStylePositionProperty'
         static member Initial = Initial |> listStylePositionProperty'
@@ -188,66 +188,66 @@ module ListStyle =
     let private listStyleTypeProperty (value: string) = PropertyValue.cssValue Property.ListStyleType value
     let private listStyleTypeProperty' value =
         value
-        |> ListStyleType.styleTypeToString
+        |> ListStyleTypeType.styleTypeToString
         |> listStyleTypeProperty
     type ListStyleType =
         static member Value (styleType: IListStyleType) = styleType |> listStyleTypeProperty'
         static member Value(counter: CounterType.CounterStyle) = counterValue counter |> listStyleTypeProperty
-        static member Disc = ListStyleType.Disc |> listStyleTypeProperty'
-        static member Circle = ListStyleType.Circle |> listStyleTypeProperty'
-        static member Square = ListStyleType.Square |> listStyleTypeProperty'
-        static member Decimal = ListStyleType.Decimal |> listStyleTypeProperty'
-        static member CjkDecimal = ListStyleType.CjkDecimal |> listStyleTypeProperty'
-        static member DecimalLeadingZero = ListStyleType.DecimalLeadingZero |> listStyleTypeProperty'
-        static member LowerRoman = ListStyleType.LowerRoman |> listStyleTypeProperty'
-        static member UpperRoman = ListStyleType.UpperRoman |> listStyleTypeProperty'
-        static member LowerGreek = ListStyleType.LowerGreek |> listStyleTypeProperty'
-        static member LowerAlpha = ListStyleType.LowerAlpha |> listStyleTypeProperty'
-        static member LowerLatin = ListStyleType.LowerLatin |> listStyleTypeProperty'
-        static member UpperAlpha = ListStyleType.UpperAlpha |> listStyleTypeProperty'
-        static member UpperLatin = ListStyleType.UpperLatin |> listStyleTypeProperty'
-        static member ArabicIndic = ListStyleType.ArabicIndic |> listStyleTypeProperty'
-        static member Armenian = ListStyleType.Armenian |> listStyleTypeProperty'
-        static member Bengali = ListStyleType.Bengali |> listStyleTypeProperty'
-        static member Cambodian = ListStyleType.Cambodian |> listStyleTypeProperty'
-        static member CjkEarthlyBranch = ListStyleType.CjkEarthlyBranch |> listStyleTypeProperty'
-        static member CjkHeavenlyStem = ListStyleType.CjkHeavenlyStem |> listStyleTypeProperty'
-        static member CjkIdeographic = ListStyleType.CjkIdeographic |> listStyleTypeProperty'
-        static member Devanagari = ListStyleType.Devanagari |> listStyleTypeProperty'
-        static member EthiopicNumeric = ListStyleType.EthiopicNumeric |> listStyleTypeProperty'
-        static member Georgian = ListStyleType.Georgian |> listStyleTypeProperty'
-        static member Gujarati = ListStyleType.Gujarati |> listStyleTypeProperty'
-        static member Gurmukhi = ListStyleType.Gurmukhi |> listStyleTypeProperty'
-        static member Hebrew = ListStyleType.Hebrew |> listStyleTypeProperty'
-        static member Hiragana = ListStyleType.Hiragana |> listStyleTypeProperty'
-        static member HiraganaIroha = ListStyleType.HiraganaIroha |> listStyleTypeProperty'
-        static member JapaneseFormal = ListStyleType.JapaneseFormal |> listStyleTypeProperty'
-        static member JapaneseInformal = ListStyleType.JapaneseInformal |> listStyleTypeProperty'
-        static member Kannada = ListStyleType.Kannada |> listStyleTypeProperty'
-        static member Katakana = ListStyleType.Katakana |> listStyleTypeProperty'
-        static member KatakanaIroha = ListStyleType.KatakanaIroha |> listStyleTypeProperty'
-        static member Khmer = ListStyleType.Khmer |> listStyleTypeProperty'
-        static member KoreanHangulFormal = ListStyleType.KoreanHangulFormal |> listStyleTypeProperty'
-        static member KoreanHanjaFormal = ListStyleType.KoreanHanjaFormal |> listStyleTypeProperty'
-        static member KoreanHanjaInformal = ListStyleType.KoreanHanjaInformal |> listStyleTypeProperty'
-        static member Lao = ListStyleType.Lao |> listStyleTypeProperty'
-        static member LowerArmenian = ListStyleType.LowerArmenian |> listStyleTypeProperty'
-        static member Malayalam = ListStyleType.Malayalam |> listStyleTypeProperty'
-        static member Mongolian = ListStyleType.Mongolian |> listStyleTypeProperty'
-        static member Myanmar = ListStyleType.Myanmar |> listStyleTypeProperty'
-        static member Oriya = ListStyleType.Oriya |> listStyleTypeProperty'
-        static member Persian = ListStyleType.Persian |> listStyleTypeProperty'
-        static member SimpChineseFormal = ListStyleType.SimpChineseFormal |> listStyleTypeProperty'
-        static member SimpChineeInformal = ListStyleType.SimpChineseInformal |> listStyleTypeProperty'
-        static member Tamil = ListStyleType.Tamil |> listStyleTypeProperty'
-        static member Telugu = ListStyleType.Telugu |> listStyleTypeProperty'
-        static member Thai = ListStyleType.Thai |> listStyleTypeProperty'
-        static member Tibetan = ListStyleType.Tibetan |> listStyleTypeProperty'
-        static member TradChineseFormal = ListStyleType.TradChineseFormal |> listStyleTypeProperty'
-        static member TradChineseInformal = ListStyleType.TradChineseInformal |> listStyleTypeProperty'
-        static member UpperArmenian = ListStyleType.UpperArmenian |> listStyleTypeProperty'
-        static member DisclosureOpen = ListStyleType.DisclosureOpen |> listStyleTypeProperty'
-        static member DisclosureClosed = ListStyleType.DisclosureClosed |> listStyleTypeProperty'
+        static member Disc = ListStyleTypeType.Disc |> listStyleTypeProperty'
+        static member Circle = ListStyleTypeType.Circle |> listStyleTypeProperty'
+        static member Square = ListStyleTypeType.Square |> listStyleTypeProperty'
+        static member Decimal = ListStyleTypeType.Decimal |> listStyleTypeProperty'
+        static member CjkDecimal = ListStyleTypeType.CjkDecimal |> listStyleTypeProperty'
+        static member DecimalLeadingZero = ListStyleTypeType.DecimalLeadingZero |> listStyleTypeProperty'
+        static member LowerRoman = ListStyleTypeType.LowerRoman |> listStyleTypeProperty'
+        static member UpperRoman = ListStyleTypeType.UpperRoman |> listStyleTypeProperty'
+        static member LowerGreek = ListStyleTypeType.LowerGreek |> listStyleTypeProperty'
+        static member LowerAlpha = ListStyleTypeType.LowerAlpha |> listStyleTypeProperty'
+        static member LowerLatin = ListStyleTypeType.LowerLatin |> listStyleTypeProperty'
+        static member UpperAlpha = ListStyleTypeType.UpperAlpha |> listStyleTypeProperty'
+        static member UpperLatin = ListStyleTypeType.UpperLatin |> listStyleTypeProperty'
+        static member ArabicIndic = ListStyleTypeType.ArabicIndic |> listStyleTypeProperty'
+        static member Armenian = ListStyleTypeType.Armenian |> listStyleTypeProperty'
+        static member Bengali = ListStyleTypeType.Bengali |> listStyleTypeProperty'
+        static member Cambodian = ListStyleTypeType.Cambodian |> listStyleTypeProperty'
+        static member CjkEarthlyBranch = ListStyleTypeType.CjkEarthlyBranch |> listStyleTypeProperty'
+        static member CjkHeavenlyStem = ListStyleTypeType.CjkHeavenlyStem |> listStyleTypeProperty'
+        static member CjkIdeographic = ListStyleTypeType.CjkIdeographic |> listStyleTypeProperty'
+        static member Devanagari = ListStyleTypeType.Devanagari |> listStyleTypeProperty'
+        static member EthiopicNumeric = ListStyleTypeType.EthiopicNumeric |> listStyleTypeProperty'
+        static member Georgian = ListStyleTypeType.Georgian |> listStyleTypeProperty'
+        static member Gujarati = ListStyleTypeType.Gujarati |> listStyleTypeProperty'
+        static member Gurmukhi = ListStyleTypeType.Gurmukhi |> listStyleTypeProperty'
+        static member Hebrew = ListStyleTypeType.Hebrew |> listStyleTypeProperty'
+        static member Hiragana = ListStyleTypeType.Hiragana |> listStyleTypeProperty'
+        static member HiraganaIroha = ListStyleTypeType.HiraganaIroha |> listStyleTypeProperty'
+        static member JapaneseFormal = ListStyleTypeType.JapaneseFormal |> listStyleTypeProperty'
+        static member JapaneseInformal = ListStyleTypeType.JapaneseInformal |> listStyleTypeProperty'
+        static member Kannada = ListStyleTypeType.Kannada |> listStyleTypeProperty'
+        static member Katakana = ListStyleTypeType.Katakana |> listStyleTypeProperty'
+        static member KatakanaIroha = ListStyleTypeType.KatakanaIroha |> listStyleTypeProperty'
+        static member Khmer = ListStyleTypeType.Khmer |> listStyleTypeProperty'
+        static member KoreanHangulFormal = ListStyleTypeType.KoreanHangulFormal |> listStyleTypeProperty'
+        static member KoreanHanjaFormal = ListStyleTypeType.KoreanHanjaFormal |> listStyleTypeProperty'
+        static member KoreanHanjaInformal = ListStyleTypeType.KoreanHanjaInformal |> listStyleTypeProperty'
+        static member Lao = ListStyleTypeType.Lao |> listStyleTypeProperty'
+        static member LowerArmenian = ListStyleTypeType.LowerArmenian |> listStyleTypeProperty'
+        static member Malayalam = ListStyleTypeType.Malayalam |> listStyleTypeProperty'
+        static member Mongolian = ListStyleTypeType.Mongolian |> listStyleTypeProperty'
+        static member Myanmar = ListStyleTypeType.Myanmar |> listStyleTypeProperty'
+        static member Oriya = ListStyleTypeType.Oriya |> listStyleTypeProperty'
+        static member Persian = ListStyleTypeType.Persian |> listStyleTypeProperty'
+        static member SimpChineseFormal = ListStyleTypeType.SimpChineseFormal |> listStyleTypeProperty'
+        static member SimpChineeInformal = ListStyleTypeType.SimpChineseInformal |> listStyleTypeProperty'
+        static member Tamil = ListStyleTypeType.Tamil |> listStyleTypeProperty'
+        static member Telugu = ListStyleTypeType.Telugu |> listStyleTypeProperty'
+        static member Thai = ListStyleTypeType.Thai |> listStyleTypeProperty'
+        static member Tibetan = ListStyleTypeType.Tibetan |> listStyleTypeProperty'
+        static member TradChineseFormal = ListStyleTypeType.TradChineseFormal |> listStyleTypeProperty'
+        static member TradChineseInformal = ListStyleTypeType.TradChineseInformal |> listStyleTypeProperty'
+        static member UpperArmenian = ListStyleTypeType.UpperArmenian |> listStyleTypeProperty'
+        static member DisclosureOpen = ListStyleTypeType.DisclosureOpen |> listStyleTypeProperty'
+        static member DisclosureClosed = ListStyleTypeType.DisclosureClosed |> listStyleTypeProperty'
 
         static member None = None |> listStyleTypeProperty'
         static member Inherit = Inherit |> listStyleTypeProperty'

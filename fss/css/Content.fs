@@ -39,7 +39,7 @@ module Content =
         static member Counter (counter: CounterType.CounterStyle) =
             contentValue <| sprintf "counter(%s)" (counterValue counter)
         static member Counters (counter: CounterType.CounterStyle, listType: IListStyleType) =
-            contentValue <| sprintf "counters(%s, %s)" (counterValue counter) (ListStyleType.styleTypeToString listType)
+            contentValue <| sprintf "counters(%s, %s)" (counterValue counter) (ListStyleTypeType.styleTypeToString listType)
         static member Counter (counter: CounterType.CounterStyle, value: string) =
             contentValue <| sprintf "counter(%s)'%s'" (counterValue counter) value
         static member Counters (counters: CounterType.CounterStyle list, values: string list) =
