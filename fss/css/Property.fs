@@ -291,19 +291,25 @@ module Property =
         | AnyLink
         | Blank
         | Checked
+        | Current
         | Disabled
         | Empty
         | Enabled
         | FirstChild
         | FirstOfType
         | Focus
+        | FocusVisible
+        | FocusWithin
+        | Future
         | Hover
         | Indeterminate
         | Invalid
+        | InRange
         | Lang
         | LastChild
         | LastOfType
         | Link
+        | LocalLink
         | NthChild
         | NthLastChild
         | NthLastOfType
@@ -312,12 +318,20 @@ module Property =
         | OnlyOfType
         | Optional
         | OutOfRange
+        | Past
+        | Playing
+        | Paused
+        | PlaceholderShown
         | ReadOnly
         | ReadWrite
         | Required
+        | Root
+        | Scope
         | Target
+        | TargetWithin
         | Valid
         | Visited
+        | UserInvalid
 
         | After
         | Before
