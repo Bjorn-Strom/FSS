@@ -1,5 +1,6 @@
 namespace Fss
 
+[<RequireQualifiedAccess>]
 module FontTypes =
     type FontSize =
         | XxSmall
@@ -172,88 +173,86 @@ module FontTypes =
 
 [<AutoOpen>]
 module Font =
-    open FontTypes
-
     let private fontSizeToString (fontSize: IFontSize) =
         match fontSize with
-        | :? FontSize as f -> Utilities.Helpers.duToKebab f
+        | :? FontTypes.FontSize as f -> Utilities.Helpers.duToKebab f
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown font size"
 
     let private familyToString (fontFamily: IFontFamily) =
-        let stringifyFontName (FontName.FontName n) = n
+        let stringifyFontName (FontTypes.FontName n) = n
         let stringifyFamily fontFamily =
             match fontFamily with
-                | Custom c -> sprintf "'%s'" c
-                | FontName n -> stringifyFontName n
+                | FontTypes.Custom c -> sprintf "'%s'" c
+                | FontTypes.FontFamily.FontName n -> stringifyFontName n
                 | _ -> Utilities.Helpers.duToKebab fontFamily
 
         match fontFamily with
-            | :? FontFamily as f -> stringifyFamily f
+            | :? FontTypes.FontFamily as f -> stringifyFamily f
             | :? Global as g -> GlobalValue.global' g
             | _ -> "Unknown font family"
 
     let private featureSettingToString (featureSetting: IFontFeatureSetting) =
         let stringifyFeature =
             function
-                | Liga switch    -> sprintf "\"liga\" %A" switch
-                | Dlig switch    -> sprintf "\"dlig\" %A" switch
-                | Onum switch    -> sprintf "\"onum\" %A" switch
-                | Lnum switch    -> sprintf "\"lnum\" %A" switch
-                | Tnum switch    -> sprintf "\"tnum\" %A" switch
-                | Zero switch    -> sprintf "\"zero\" %A" switch
-                | Frac switch    -> sprintf "\"frac\" %A" switch
-                | Sups switch    -> sprintf "\"sups\" %A" switch
-                | Subs switch    -> sprintf "\"subs\" %A" switch
-                | Smcp switch    -> sprintf "\"smcp\" %A" switch
-                | C2sc switch    -> sprintf "\"c2sc\" %A" switch
-                | Case switch    -> sprintf "\"case\" %A" switch
-                | Hlig switch    -> sprintf "\"hlig\" %A" switch
-                | Calt switch    -> sprintf "\"calt\" %A" switch
-                | Swsh switch    -> sprintf "\"swsh\" %A" switch
-                | Hist switch    -> sprintf "\"hist\" %A" switch
-                | Ss (n, switch) -> sprintf "\"ss%2i\" %A" n switch
-                | Kern switch    -> sprintf "\"kern\" %A" switch
-                | Locl switch    -> sprintf "\"locl\" %A" switch
-                | Rlig switch    -> sprintf "\"rlig\" %A" switch
-                | Medi switch    -> sprintf "\"medi\" %A" switch
-                | Init switch    -> sprintf "\"init\" %A" switch
-                | Isol switch    -> sprintf "\"isol\" %A" switch
-                | Fina switch    -> sprintf "\"fina\" %A" switch
-                | Mark switch    -> sprintf "\"mark\" %A" switch
-                | Mkmk switch    -> sprintf "\"mkmk\" %A" switch
+                | FontTypes.Liga switch    -> sprintf "\"liga\" %A" switch
+                | FontTypes.Dlig switch    -> sprintf "\"dlig\" %A" switch
+                | FontTypes.Onum switch    -> sprintf "\"onum\" %A" switch
+                | FontTypes.Lnum switch    -> sprintf "\"lnum\" %A" switch
+                | FontTypes.Tnum switch    -> sprintf "\"tnum\" %A" switch
+                | FontTypes.Zero switch    -> sprintf "\"zero\" %A" switch
+                | FontTypes.Frac switch    -> sprintf "\"frac\" %A" switch
+                | FontTypes.Sups switch    -> sprintf "\"sups\" %A" switch
+                | FontTypes.Subs switch    -> sprintf "\"subs\" %A" switch
+                | FontTypes.Smcp switch    -> sprintf "\"smcp\" %A" switch
+                | FontTypes.C2sc switch    -> sprintf "\"c2sc\" %A" switch
+                | FontTypes.Case switch    -> sprintf "\"case\" %A" switch
+                | FontTypes.Hlig switch    -> sprintf "\"hlig\" %A" switch
+                | FontTypes.Calt switch    -> sprintf "\"calt\" %A" switch
+                | FontTypes.Swsh switch    -> sprintf "\"swsh\" %A" switch
+                | FontTypes.Hist switch    -> sprintf "\"hist\" %A" switch
+                | FontTypes.Ss (n, switch) -> sprintf "\"ss%2i\" %A" n switch
+                | FontTypes.Kern switch    -> sprintf "\"kern\" %A" switch
+                | FontTypes.Locl switch    -> sprintf "\"locl\" %A" switch
+                | FontTypes.Rlig switch    -> sprintf "\"rlig\" %A" switch
+                | FontTypes.Medi switch    -> sprintf "\"medi\" %A" switch
+                | FontTypes.Init switch    -> sprintf "\"init\" %A" switch
+                | FontTypes.Isol switch    -> sprintf "\"isol\" %A" switch
+                | FontTypes.Fina switch    -> sprintf "\"fina\" %A" switch
+                | FontTypes.Mark switch    -> sprintf "\"mark\" %A" switch
+                | FontTypes.Mkmk switch    -> sprintf "\"mkmk\" %A" switch
 
         match featureSetting with
-        | :? FontFeatureSetting as f -> stringifyFeature f
+        | :? FontTypes.FontFeatureSetting as f -> stringifyFeature f
         | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown font feature setting"
 
     let private variantNumericToString (variant: IFontVariantNumeric) =
         match variant with
-        | :? FontVariantNumeric as f -> Utilities.Helpers.duToKebab f
+        | :? FontTypes.FontVariantNumeric as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant numeric"
 
     let private fontVariantCapsToString (variant: IFontVariantCaps) =
         match variant with
-        | :? FontVariantCaps as f -> Utilities.Helpers.duToKebab f
+        | :? FontTypes.FontVariantCaps as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant caps"
 
     let private variantEastAsianToString (variant: IFontVariantEastAsian) =
         match variant with
-        | :? FontVariantEastAsian as f -> Utilities.Helpers.duToKebab f
+        | :? FontTypes.FontVariantEastAsian as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown font variant east asian"
 
     let private variantLigatureToString (variant: IFontVariantLigature) =
         match variant with
-        | :? FontVariantLigature as f -> Utilities.Helpers.duToKebab f
+        | :? FontTypes.FontVariantLigature as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none
@@ -270,7 +269,7 @@ module Font =
 
     let private lineBreakToString (linebreak: ILineBreak) =
         match linebreak with
-        | :? LineBreak as l -> Utilities.Helpers.duToLowercase l
+        | :? FontTypes.LineBreak as l -> Utilities.Helpers.duToLowercase l
         | :? Auto -> GlobalValue.auto
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
@@ -288,16 +287,16 @@ module Font =
     let private sizeCssValue' value = value |> fontSizeToString |> sizeCssValue
     type FontSize =
         static member Value (value: IFontSize) = value |> sizeCssValue'
-        static member XxSmall = XxSmall |> sizeCssValue'
-        static member XSmall = XSmall |> sizeCssValue'
-        static member Small = Small |> sizeCssValue'
-        static member Medium = Medium |> sizeCssValue'
-        static member Large = Large |> sizeCssValue'
-        static member XLarge = XLarge |> sizeCssValue'
-        static member XxLarge = XxLarge |> sizeCssValue'
-        static member XxxLarge = XxxLarge |> sizeCssValue'
-        static member Smaller = Smaller |> sizeCssValue'
-        static member Larger = Larger |> sizeCssValue'
+        static member XxSmall = FontTypes.XxSmall |> sizeCssValue'
+        static member XSmall = FontTypes.XSmall |> sizeCssValue'
+        static member Small = FontTypes.Small |> sizeCssValue'
+        static member Medium = FontTypes.Medium |> sizeCssValue'
+        static member Large = FontTypes.Large |> sizeCssValue'
+        static member XLarge = FontTypes.XLarge |> sizeCssValue'
+        static member XxLarge = FontTypes.XxLarge |> sizeCssValue'
+        static member XxxLarge = FontTypes.XxxLarge |> sizeCssValue'
+        static member Smaller = FontTypes.Smaller |> sizeCssValue'
+        static member Larger = FontTypes.Larger |> sizeCssValue'
 
         static member Inherit = Inherit |> sizeCssValue'
         static member Initial = Initial |> sizeCssValue'
@@ -318,11 +317,11 @@ module Font =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
     let private styleCssValue value = PropertyValue.cssValue Property.FontStyle value
-    let private styleCssValue' value = value |> fontStyleToString |> styleCssValue
+    let private styleCssValue' value = value |> FontTypes.fontStyleToString |> styleCssValue
     type FontStyle =
         static member Value (fontStyle: IFontStyle) = fontStyle |> styleCssValue'
-        static member Oblique (angle: Units.Angle.Angle) = Oblique angle |> styleCssValue'
-        static member Italic = Italic |> styleCssValue'
+        static member Oblique (angle: Units.Angle.Angle) = FontTypes.Oblique angle |> styleCssValue'
+        static member Italic = FontTypes.Italic |> styleCssValue'
 
         static member Normal = Normal |> styleCssValue'
         static member Inherit = Inherit |> styleCssValue'
@@ -343,20 +342,20 @@ module Font =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
     let private stretchCssValue value = PropertyValue.cssValue Property.FontStretch value
-    let private stretchCssValue' value = value |> fontStretchToString |> stretchCssValue
+    let private stretchCssValue' value = value |> FontTypes.fontStretchToString |> stretchCssValue
     type FontStretch =
         static member Value (fontStretch: IFontStretch) = fontStretch |> stretchCssValue'
         static member Value (percent: Units.Percent.Percent) =
             Units.Percent.value percent
             |> stretchCssValue
-        static member SemiCondensed = SemiCondensed |> stretchCssValue'
-        static member Condensed = Condensed |> stretchCssValue'
-        static member ExtraCondensed = ExtraCondensed |> stretchCssValue'
-        static member UltraCondensed = UltraCondensed |> stretchCssValue'
-        static member SemiExpanded = SemiExpanded |> stretchCssValue'
-        static member Expanded = Expanded |> stretchCssValue'
-        static member ExtraExpanded = ExtraExpanded |> stretchCssValue'
-        static member UltraExpanded = UltraExpanded |> stretchCssValue'
+        static member SemiCondensed = FontTypes.SemiCondensed |> stretchCssValue'
+        static member Condensed = FontTypes.Condensed |> stretchCssValue'
+        static member ExtraCondensed = FontTypes.ExtraCondensed |> stretchCssValue'
+        static member UltraCondensed = FontTypes.UltraCondensed |> stretchCssValue'
+        static member SemiExpanded = FontTypes.SemiExpanded |> stretchCssValue'
+        static member Expanded = FontTypes.Expanded |> stretchCssValue'
+        static member ExtraExpanded = FontTypes.ExtraExpanded |> stretchCssValue'
+        static member UltraExpanded = FontTypes.UltraExpanded |> stretchCssValue'
         static member Normal = Normal |> stretchCssValue'
         static member Inherit = Inherit |> stretchCssValue'
         static member Initial = Initial |> stretchCssValue'
@@ -377,12 +376,12 @@ module Font =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
     let private weightCssValue value = PropertyValue.cssValue Property.FontWeight value
-    let private weightCssValue' value = value |> fontWeightToString |> weightCssValue
+    let private weightCssValue' value = value |> FontTypes.fontWeightToString |> weightCssValue
     type FontWeight =
         static member Value (fontWeight: IFontWeight) = fontWeight |> weightCssValue'
-        static member Bold = Bold |> weightCssValue'
-        static member Lighter = Lighter |> weightCssValue'
-        static member Bolder = Bolder |> weightCssValue'
+        static member Bold = FontTypes.Bold |> weightCssValue'
+        static member Lighter = FontTypes.Lighter |> weightCssValue'
+        static member Bolder = FontTypes.Bolder |> weightCssValue'
 
         static member Normal = Normal |> weightCssValue'
         static member Inherit = Inherit |> weightCssValue'
@@ -438,9 +437,9 @@ module Font =
         |> breakCssValue
     type LineBreak =
         static member Value (break': ILineBreak) = break' |> breakCssValue'
-        static member Loose = Loose |> breakCssValue'
-        static member Strict = Strict |> breakCssValue'
-        static member Anywhere = Anywhere |> breakCssValue'
+        static member Loose = FontTypes.Loose |> breakCssValue'
+        static member Strict = FontTypes.Strict |> breakCssValue'
+        static member Anywhere = FontTypes.Anywhere |> breakCssValue'
 
         static member Normal = Normal |> breakCssValue'
         static member Auto = Auto |> breakCssValue'
@@ -491,14 +490,14 @@ module Font =
     let private displayCssValue value = PropertyValue.cssValue Property.FontDisplay value
     let private displayCssValue' value =
         value
-        |> fontDisplayToString
+        |> FontTypes.fontDisplayToString
         |> PropertyValue.cssValue Property.FontDisplay
     type FontDisplay =
         static member Value (fontDisplay: IFontDisplay) = fontDisplay |> displayCssValue'
-        static member Block = Block |> displayCssValue'
-        static member Swap = Swap |> displayCssValue'
-        static member Fallback = Fallback |> displayCssValue'
-        static member Optional = Optional |> displayCssValue'
+        static member Block = FontTypes.Block |> displayCssValue'
+        static member Swap = FontTypes.Swap |> displayCssValue'
+        static member Fallback = FontTypes.Fallback |> displayCssValue'
+        static member Optional = FontTypes.Optional |> displayCssValue'
 
         static member Auto = Auto |> displayCssValue'
 
@@ -521,12 +520,12 @@ module Font =
             families
             |> Utilities.Helpers.combineComma familyToString
             |> familyCssValue
-        static member Font (font: FontName) = font |> FontName |> familyCssValue'
+        static member Font (font: FontTypes.FontName) = font |> FontTypes.FontFamily.FontName |> familyCssValue'
         static member Custom (font: string) = familyCssValue font
-        static member Serif = Serif |> familyCssValue'
-        static member SansSerif = SansSerif |> familyCssValue'
-        static member Monospace = Monospace |> familyCssValue'
-        static member Cursive = Cursive |> familyCssValue'
+        static member Serif = FontTypes.Serif |> familyCssValue'
+        static member SansSerif = FontTypes.SansSerif |> familyCssValue'
+        static member Monospace = FontTypes.Monospace |> familyCssValue'
+        static member Cursive = FontTypes.Cursive |> familyCssValue'
 
         static member Inherit = Inherit |> familyCssValue'
         static member Initial = Initial |> familyCssValue'
@@ -549,32 +548,32 @@ module Font =
 
     type FontFeatureSetting =
         static member Value (featureSetting: IFontFeatureSetting) = featureSetting |> featureSettingCssValue'
-        static member Liga (switch: SettingSwitch) = Liga switch |> featureSettingCssValue'
-        static member Dlig (switch: SettingSwitch) = Dlig switch |> featureSettingCssValue'
-        static member Onum (switch: SettingSwitch) = Onum switch |> featureSettingCssValue'
-        static member Lnum (switch: SettingSwitch) = Lnum switch |> featureSettingCssValue'
-        static member Tnum (switch: SettingSwitch) = Tnum switch |> featureSettingCssValue'
-        static member Zero (switch: SettingSwitch) = Zero switch |> featureSettingCssValue'
-        static member Frac (switch: SettingSwitch) = Frac switch |> featureSettingCssValue'
-        static member Sups (switch: SettingSwitch) = Sups switch |> featureSettingCssValue'
-        static member Subs (switch: SettingSwitch) = Subs switch |> featureSettingCssValue'
-        static member Smcp (switch: SettingSwitch) = Smcp switch |> featureSettingCssValue'
-        static member C2sc (switch: SettingSwitch) = C2sc switch |> featureSettingCssValue'
-        static member Case (switch: SettingSwitch) = Case switch |> featureSettingCssValue'
-        static member Hlig (switch: SettingSwitch) = Hlig switch |> featureSettingCssValue'
-        static member Calt (switch: SettingSwitch) = Calt switch |> featureSettingCssValue'
-        static member Swsh (switch: SettingSwitch) = Swsh switch |> featureSettingCssValue'
-        static member Hist (switch: SettingSwitch) = Hist switch |> featureSettingCssValue'
-        static member Ss  (n:int, switch: SettingSwitch) = Ss (n, switch) |> featureSettingCssValue'
-        static member Kern (switch: SettingSwitch) = Kern switch |> featureSettingCssValue'
-        static member Locl (switch: SettingSwitch) = Locl switch |> featureSettingCssValue'
-        static member Rlig (switch: SettingSwitch) = Rlig switch |> featureSettingCssValue'
-        static member Medi (switch: SettingSwitch) = Medi switch |> featureSettingCssValue'
-        static member Init (switch: SettingSwitch) = Init switch |> featureSettingCssValue'
-        static member Isol (switch: SettingSwitch) = Isol switch |> featureSettingCssValue'
-        static member Fina (switch: SettingSwitch) = Fina switch |> featureSettingCssValue'
-        static member Mark (switch: SettingSwitch) = Mark switch |> featureSettingCssValue'
-        static member Mkmk (switch: SettingSwitch) = Mkmk switch |> featureSettingCssValue'
+        static member Liga (switch: FontTypes.SettingSwitch) = FontTypes.Liga switch |> featureSettingCssValue'
+        static member Dlig (switch: FontTypes.SettingSwitch) = FontTypes.Dlig switch |> featureSettingCssValue'
+        static member Onum (switch: FontTypes.SettingSwitch) = FontTypes.Onum switch |> featureSettingCssValue'
+        static member Lnum (switch: FontTypes.SettingSwitch) = FontTypes.Lnum switch |> featureSettingCssValue'
+        static member Tnum (switch: FontTypes.SettingSwitch) = FontTypes.Tnum switch |> featureSettingCssValue'
+        static member Zero (switch: FontTypes.SettingSwitch) = FontTypes.Zero switch |> featureSettingCssValue'
+        static member Frac (switch: FontTypes.SettingSwitch) = FontTypes.Frac switch |> featureSettingCssValue'
+        static member Sups (switch: FontTypes.SettingSwitch) = FontTypes.Sups switch |> featureSettingCssValue'
+        static member Subs (switch: FontTypes.SettingSwitch) = FontTypes.Subs switch |> featureSettingCssValue'
+        static member Smcp (switch: FontTypes.SettingSwitch) = FontTypes.Smcp switch |> featureSettingCssValue'
+        static member C2sc (switch: FontTypes.SettingSwitch) = FontTypes.C2sc switch |> featureSettingCssValue'
+        static member Case (switch: FontTypes.SettingSwitch) = FontTypes.Case switch |> featureSettingCssValue'
+        static member Hlig (switch: FontTypes.SettingSwitch) = FontTypes.Hlig switch |> featureSettingCssValue'
+        static member Calt (switch: FontTypes.SettingSwitch) = FontTypes.Calt switch |> featureSettingCssValue'
+        static member Swsh (switch: FontTypes.SettingSwitch) = FontTypes.Swsh switch |> featureSettingCssValue'
+        static member Hist (switch: FontTypes.SettingSwitch) = FontTypes.Hist switch |> featureSettingCssValue'
+        static member Ss  (n:int, switch: FontTypes.SettingSwitch) = FontTypes.Ss (n, switch) |> featureSettingCssValue'
+        static member Kern (switch: FontTypes.SettingSwitch) = FontTypes.Kern switch |> featureSettingCssValue'
+        static member Locl (switch: FontTypes.SettingSwitch) = FontTypes.Locl switch |> featureSettingCssValue'
+        static member Rlig (switch: FontTypes.SettingSwitch) = FontTypes.Rlig switch |> featureSettingCssValue'
+        static member Medi (switch: FontTypes.SettingSwitch) = FontTypes.Medi switch |> featureSettingCssValue'
+        static member Init (switch: FontTypes.SettingSwitch) = FontTypes.Init switch |> featureSettingCssValue'
+        static member Isol (switch: FontTypes.SettingSwitch) = FontTypes.Isol switch |> featureSettingCssValue'
+        static member Fina (switch: FontTypes.SettingSwitch) = FontTypes.Fina switch |> featureSettingCssValue'
+        static member Mark (switch: FontTypes.SettingSwitch) = FontTypes.Mark switch |> featureSettingCssValue'
+        static member Mkmk (switch: FontTypes.SettingSwitch) = FontTypes.Mkmk switch |> featureSettingCssValue'
 
         static member Inherit = Inherit |> featureSettingCssValue'
         static member Initial = Initial |> featureSettingCssValue'
@@ -597,14 +596,14 @@ module Font =
 
     type FontVariantNumeric =
         static member Value (variantNumeric: IFontVariantNumeric) = variantNumeric |>  variantNumericCssValue'
-        static member Ordinal = Ordinal |> variantNumericCssValue'
-        static member SlashedZero = SlashedZero |> variantNumericCssValue'
-        static member LiningNums = LiningNums |> variantNumericCssValue'
-        static member OldstyleNums = OldstyleNums |> variantNumericCssValue'
-        static member ProportionalNums = ProportionalNums |> variantNumericCssValue'
-        static member TabularNums = TabularNums |> variantNumericCssValue'
-        static member DiagonalFractions = DiagonalFractions |> variantNumericCssValue'
-        static member StackedFractions = StackedFractions |> variantNumericCssValue'
+        static member Ordinal = FontTypes.Ordinal |> variantNumericCssValue'
+        static member SlashedZero = FontTypes.SlashedZero |> variantNumericCssValue'
+        static member LiningNums = FontTypes.LiningNums |> variantNumericCssValue'
+        static member OldstyleNums = FontTypes.OldstyleNums |> variantNumericCssValue'
+        static member ProportionalNums = FontTypes.ProportionalNums |> variantNumericCssValue'
+        static member TabularNums = FontTypes.TabularNums |> variantNumericCssValue'
+        static member DiagonalFractions = FontTypes.DiagonalFractions |> variantNumericCssValue'
+        static member StackedFractions = FontTypes.StackedFractions |> variantNumericCssValue'
 
         static member Normal = Normal |> variantNumericCssValue'
         static member Inherit = Inherit |> variantNumericCssValue'
@@ -627,12 +626,12 @@ module Font =
     let private variantCapsCssValue' value = value |> fontVariantCapsToString |> variantCapsCssValue
     type FontVariantCaps =
         static member Value (variantCaps: IFontVariantCaps) = variantCaps |> variantCapsCssValue'
-        static member SmallCaps = SmallCaps |> variantCapsCssValue'
-        static member AllSmallCaps = AllSmallCaps |> variantCapsCssValue'
-        static member PetiteCaps = PetiteCaps |> variantCapsCssValue'
-        static member AllPetiteCaps = AllPetiteCaps |> variantCapsCssValue'
-        static member Unicase = Unicase |> variantCapsCssValue'
-        static member TitlingCaps = TitlingCaps |> variantCapsCssValue'
+        static member SmallCaps = FontTypes.SmallCaps |> variantCapsCssValue'
+        static member AllSmallCaps = FontTypes.AllSmallCaps |> variantCapsCssValue'
+        static member PetiteCaps = FontTypes.PetiteCaps |> variantCapsCssValue'
+        static member AllPetiteCaps = FontTypes.AllPetiteCaps |> variantCapsCssValue'
+        static member Unicase = FontTypes.Unicase |> variantCapsCssValue'
+        static member TitlingCaps = FontTypes.TitlingCaps |> variantCapsCssValue'
 
         static member Normal = Normal |> variantCapsCssValue'
         static member Inherit = Inherit |> variantCapsCssValue'
@@ -656,15 +655,15 @@ module Font =
     let private variantEastAsianCssValue' value = value |> variantEastAsianToString |> variantEastAsianCssValue
     type FontVariantEastAsian =
         static member Value (variant: IFontVariantEastAsian) = variant |> variantEastAsianCssValue'
-        static member Ruby = Ruby |> variantEastAsianCssValue'
-        static member Jis78 = Jis78 |> variantEastAsianCssValue'
-        static member Jis83 = Jis83 |> variantEastAsianCssValue'
-        static member Jis90 = Jis90 |> variantEastAsianCssValue'
-        static member Jis04 = Jis04 |> variantEastAsianCssValue'
-        static member Simplified = Simplified |> variantEastAsianCssValue'
-        static member Traditional = Traditional |> variantEastAsianCssValue'
-        static member FullWidth = FullWidth |> variantEastAsianCssValue'
-        static member ProportionalWidth = ProportionalWidth |> variantEastAsianCssValue'
+        static member Ruby = FontTypes.Ruby |> variantEastAsianCssValue'
+        static member Jis78 = FontTypes.Jis78 |> variantEastAsianCssValue'
+        static member Jis83 = FontTypes.Jis83 |> variantEastAsianCssValue'
+        static member Jis90 = FontTypes.Jis90 |> variantEastAsianCssValue'
+        static member Jis04 = FontTypes.Jis04 |> variantEastAsianCssValue'
+        static member Simplified = FontTypes.Simplified |> variantEastAsianCssValue'
+        static member Traditional = FontTypes.Traditional |> variantEastAsianCssValue'
+        static member FullWidth = FontTypes.FullWidth |> variantEastAsianCssValue'
+        static member ProportionalWidth = FontTypes.ProportionalWidth |> variantEastAsianCssValue'
 
         static member Normal = Normal |> variantEastAsianCssValue'
         static member Inherit = Inherit |> variantEastAsianCssValue'
@@ -688,14 +687,14 @@ module Font =
     let private variantLigatureCssValue' value = value |> variantLigatureToString |> variantLigatureCssValue
     type FontVariantLigatures =
         static member Value (variant: IFontVariantLigature) = variant |> variantLigatureCssValue'
-        static member CommonLigatures = CommonLigatures |> variantLigatureCssValue'
-        static member NoCommonLigatures = NoCommonLigatures |> variantLigatureCssValue'
-        static member DiscretionaryLigatures = DiscretionaryLigatures |> variantLigatureCssValue'
-        static member NoDiscretionaryLigatures = NoDiscretionaryLigatures |> variantLigatureCssValue'
-        static member HistoricalLigatures = HistoricalLigatures |> variantLigatureCssValue'
-        static member NoHistoricalLigatures = NoHistoricalLigatures |> variantLigatureCssValue'
-        static member Contextual = Contextual |> variantLigatureCssValue'
-        static member NoContextual = NoContextual |> variantLigatureCssValue'
+        static member CommonLigatures = FontTypes.CommonLigatures |> variantLigatureCssValue'
+        static member NoCommonLigatures = FontTypes.NoCommonLigatures |> variantLigatureCssValue'
+        static member DiscretionaryLigatures = FontTypes.DiscretionaryLigatures |> variantLigatureCssValue'
+        static member NoDiscretionaryLigatures = FontTypes.NoDiscretionaryLigatures |> variantLigatureCssValue'
+        static member HistoricalLigatures = FontTypes.HistoricalLigatures |> variantLigatureCssValue'
+        static member NoHistoricalLigatures = FontTypes.NoHistoricalLigatures |> variantLigatureCssValue'
+        static member Contextual = FontTypes.Contextual |> variantLigatureCssValue'
+        static member NoContextual = FontTypes.NoContextual |> variantLigatureCssValue'
 
         static member Normal = Normal |> variantLigatureCssValue'
         static member None = None |> variantLigatureCssValue'

@@ -1,5 +1,6 @@
 namespace Fss
 
+[<RequireQualifiedAccess>]
 module WordTypes =
     type WordBreak =
         | WordBreak
@@ -8,8 +9,6 @@ module WordTypes =
         interface IWordBreak
 
 module Word =
-    open WordTypes
-
     let private spacingToString (spacing: IWordSpacing) =
         match spacing with
         | :? Units.Size.Size as s -> Units.Size.value s
@@ -63,8 +62,8 @@ module Word =
     type WordBreak =
         static member Value (spacing: IWordBreak) = spacing |> breakCssValue'
         static member WordBreak = WordTypes.WordBreak |> breakCssValue'
-        static member BreakAll = BreakAll |> breakCssValue'
-        static member KeepAll = KeepAll |> breakCssValue'
+        static member BreakAll = WordTypes.BreakAll |> breakCssValue'
+        static member KeepAll = WordTypes.KeepAll |> breakCssValue'
 
         static member Normal = Normal |> breakCssValue'
         static member Initial = Initial |> breakCssValue'

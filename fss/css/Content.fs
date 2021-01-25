@@ -2,6 +2,7 @@
 
 open Fss
 
+[<RequireQualifiedAccess>]
 module ContentType =
     type Content =
         | OpenQuote
@@ -12,11 +13,10 @@ module ContentType =
 
 [<AutoOpen>]
 module Content =
-    open ContentType
 
     let private contentTypeToString (content: IContent) =
         match content with
-        | :? Content as c -> Utilities.Helpers.duToKebab c
+        | :? ContentType.Content as c -> Utilities.Helpers.duToKebab c
         | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
         | :? Normal -> GlobalValue.normal
         | :? None -> GlobalValue.none
@@ -31,10 +31,10 @@ module Content =
         |> contentValue
 
     type Content =
-        static member OpenQuote = OpenQuote |> contentValue'
-        static member CloseQuote = CloseQuote |> contentValue'
-        static member NoOpenQuote = NoOpenQuote |> contentValue'
-        static member NoCloseQuote = NoCloseQuote |> contentValue'
+        static member OpenQuote = ContentType.OpenQuote |> contentValue'
+        static member CloseQuote = ContentType.CloseQuote |> contentValue'
+        static member NoOpenQuote = ContentType.NoOpenQuote |> contentValue'
+        static member NoCloseQuote = ContentType.NoCloseQuote |> contentValue'
 
         static member Counter (counter: CounterType.CounterStyle) =
             contentValue <| sprintf "counter(%s)" (counterValue counter)
@@ -124,14 +124,14 @@ module Content =
     /// <summary>Replaces element with a value.</summary>
     /// <param name="content">
     ///     can be:
-    ///     - <c> Content </c> 
-    ///     - <c> CssString </c> 
-    ///     - <c> Normal </c> 
-    ///     - <c> None </c> 
+    ///     - <c> Content </c>
+    ///     - <c> CssString </c>
+    ///     - <c> Normal </c>
+    ///     - <c> None </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
-    ///     - <c> CounterStyle </c> 
+    ///     - <c> Unset </c>
+    ///     - <c> CounterStyle </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Content' (content: IContent) = Content.Value(content)
