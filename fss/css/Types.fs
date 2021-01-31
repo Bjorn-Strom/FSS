@@ -112,8 +112,12 @@ module Global =
 
     type IMargin        = interface end
     type IPadding       = interface end
-    type IScrollMargin  = interface end
-    type IScrollPadding = interface end
+
+    type IScrollBehavior       = interface end
+    type IScrollMargin         = interface end
+    type IScrollPadding        = interface end
+    type IOverscrollBehaviorX  = interface end
+    type IOverscrollBehaviorY  = interface end
 
     type IContentSize = interface end
 
@@ -263,6 +267,9 @@ module Global =
         interface IBreakBefore
         interface IBreakInside
         interface IFlex
+        interface IScrollBehavior
+        interface IOverscrollBehaviorX
+        interface IOverscrollBehaviorY
 
     type None =
         | None
@@ -306,6 +313,8 @@ module Global =
         interface IOutline
         interface ICounterReset
         interface ICounterIncrement
+        interface IOverscrollBehaviorX
+        interface IOverscrollBehaviorY
 
     type Normal =
         | Normal
@@ -476,10 +485,13 @@ module Global =
         interface IWidows
         interface IAll
         interface IFlex
+        interface IScrollBehavior
         interface IScrollMargin
         interface IScrollPadding
         interface ICounterReset
         interface ICounterIncrement
+        interface IOverscrollBehaviorX
+        interface IOverscrollBehaviorY
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

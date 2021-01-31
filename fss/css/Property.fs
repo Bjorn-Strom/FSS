@@ -222,6 +222,7 @@ module Property =
         | Speak
         | SpeechRate
         | Stress
+        | ScrollBehavior
         | ScrollMarginBottom
         | ScrollMarginLeft
         | ScrollMarginRight
@@ -232,6 +233,8 @@ module Property =
         | ScrollPaddingRight
         | ScrollPaddingTop
         | ScrollPadding
+        | OverscrollBehaviorX
+        | OverscrollBehaviorY
         | TabSize
         | TableLayout
         | TextAlign

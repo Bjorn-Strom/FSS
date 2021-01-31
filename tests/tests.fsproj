@@ -36,6 +36,7 @@
     <Compile Include="Appearance.fs" />
     <Compile Include="Typography.fs" />
     <Compile Include="All.fs" />
+    <Compile Include="Scroll.fs" />
     <Compile Include="Counter.fs" />
     <Compile Include="BoxShadow.fs" />
     <Compile Include="Custom.fs" />

@@ -60,6 +60,7 @@
     <Compile Include="css\Outline.fs" />
     <Compile Include="css\Media.fs" />
     <Compile Include="css\BoxShadow.fs" />
+    <Compile Include="css\Scroll.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Functions.fs" />
