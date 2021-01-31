@@ -128,7 +128,8 @@ module Global =
 
     type IPerspective = interface end
 
-    type ICursor = interface end
+    type ICursor        = interface end
+    type IPointerEvents = interface end
 
     type IContent = interface end
 
@@ -244,6 +245,7 @@ module Global =
         interface IOverflow
         interface IPositioned
         interface ICursor
+        interface IPointerEvents
         interface IGridPosition
         interface IGridTemplateRows
         interface IGridTemplateColumns
@@ -288,6 +290,7 @@ module Global =
         interface IFloat
         interface IPerspective
         interface ICursor
+        interface IPointerEvents
         interface IContent
         interface IOutlineStyle
         interface IGridTemplateArea
@@ -428,6 +431,7 @@ module Global =
         interface IFloat
         interface IPerspective
         interface ICursor
+        interface IPointerEvents
         interface IContent
         interface IOutline
         interface IOutlineColor

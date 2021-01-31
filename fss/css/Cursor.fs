@@ -1,5 +1,7 @@
 ﻿namespace Fss
 
+open Fss
+
 [<RequireQualifiedAccess>]
 module CursorType =
     type Cursor =

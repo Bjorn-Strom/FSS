@@ -46,6 +46,7 @@
     <Compile Include="css\Overflow.fs" />
     <Compile Include="css\Position.fs" />
     <Compile Include="css\Perspective.fs" />
+    <Compile Include="css\PointerEvents.fs" />
     <Compile Include="css\Cursor.fs" />
     <Compile Include="css\Attribute.fs" />
     <Compile Include="css\Content.fs" />

@@ -196,6 +196,7 @@ module Property =
         | PauseBefore
         | Pause
         | PaintOrder
+        | PointerEvents
         | Perspective
         | PerspectiveOrigin
         | PitchRange
