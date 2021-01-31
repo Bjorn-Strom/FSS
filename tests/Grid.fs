@@ -302,6 +302,34 @@ module Grid =
                     [GridRowGap.Unset]
                     ["gridRowGap" ==> "unset"]
                 test
+                    "Column gap normal"
+                    [GridColumnGap.Normal]
+                    ["gridColumnGap" ==> "normal"]
+                test
+                    "Column gap px"
+                    [GridColumnGap' (px 3)]
+                    ["gridColumnGap" ==> "3px"]
+                test
+                    "Column gap em"
+                    [GridColumnGap' (em 2.5)]
+                    ["gridColumnGap" ==> "2.5em"]
+                test
+                    "Column gap percent"
+                    [GridColumnGap' (pct 3)]
+                    ["gridColumnGap" ==> "3%"]
+                test
+                    "Column gap inherit"
+                    [GridColumnGap.Inherit]
+                    ["gridColumnGap" ==> "inherit"]
+                test
+                    "Column gap initial"
+                    [GridColumnGap.Initial]
+                    ["gridColumnGap" ==> "initial"]
+                test
+                    "Column gap unset"
+                    [GridColumnGap.Unset]
+                    ["gridColumnGap" ==> "unset"]
+                test
                     "Grid template row px"
                     [GridTemplateRows' (px 100)]
                     ["gridTemplateRows" ==> "100px"]

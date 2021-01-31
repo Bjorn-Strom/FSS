@@ -151,6 +151,14 @@ module Grid =
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown grid row gap"
 
+    let private gridColumnGapToString (gap: IGridColumnGap) =
+        match gap with
+        | :? Global as g -> GlobalValue.global' g
+        | :? Normal -> GlobalValue.normal
+        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | _ -> "Unknown grid column gap"
+
     let private templateColumnToString (templateColumn: IGridTemplateColumns) =
         let stringifyColumn =
             function
@@ -345,6 +353,31 @@ module Grid =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let GridRowGap' (rowGap: IGridRowGap) = GridRowGap.Value(rowGap)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+    let private gridColumnGapValue value = PropertyValue.cssValue Property.GridColumnGap value
+    let private gridColumnGapValue' value =
+        value
+        |> gridColumnGapToString
+        |> gridColumnGapValue
+    type GridColumnGap =
+        static member Value (gap: IGridColumnGap) = gap |> gridColumnGapValue'
+        static member Inherit = Inherit |> gridColumnGapValue'
+        static member Initial = Initial |> gridColumnGapValue'
+        static member Unset = Unset |> gridColumnGapValue'
+        static member Normal = Normal |> gridColumnGapValue'
+
+    /// <summary>Specifies gap between columns in grid.</summary>
+    /// <param name="columnGap">
+    ///     can be:
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let GridColumnGap' (columnGap: IGridColumnGap) = GridColumnGap.Value(columnGap)
 
     // Grid position
     type GridPosition =

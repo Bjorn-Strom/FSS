@@ -135,6 +135,7 @@ module Property =
         | GridGap
         | GridRowEnd
         | GridRowGap
+        | GridColumnGap
         | GridRowStart
         | GridRow
         | GridTemplateAreas
