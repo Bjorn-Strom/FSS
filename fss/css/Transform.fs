@@ -27,6 +27,7 @@ module TransformType =
         | Skew2 of Units.Angle.Angle * Units.Angle.Angle
         | SkewX of Units.Angle.Angle
         | SkewY of Units.Angle.Angle
+        interface ITransform
 
     type TransformOrigin =
         | Top
@@ -36,11 +37,16 @@ module TransformType =
         | Center
         interface ITransformOrigin
 
+    type TransformStyle =
+        | Flat
+        | Preserve3d
+        interface ITransformStyle
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/transform
 [<AutoOpen>]
 module Transform =
-    let private transformToString =
-        function
+    let private transformToString (transform: ITransform) =
+        let stringifyTransform = function
            | TransformType.Matrix (a, b, c, d, e, f) ->
                sprintf "matrix(%.1f, %.1f, %.1f, %.1f, %.1f, %.1f)" a b c d e f
            | TransformType.Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
@@ -68,6 +74,12 @@ module Transform =
            | TransformType.SkewX a -> sprintf "skewX(%s)" <| Units.Angle.value a
            | TransformType.SkewY a -> sprintf "skewY(%s)" <| Units.Angle.value a
 
+        match transform with
+        | :? TransformType.Transform as t -> stringifyTransform t
+        | :? Global as g -> GlobalValue.global' g
+        | :? None -> GlobalValue.none
+        | _ -> "Unknown transform value"
+
     let private originToString (origin: ITransformOrigin) =
         match origin with
         | :? TransformType.TransformOrigin as t -> Utilities.Helpers.duToLowercase t
@@ -76,7 +88,18 @@ module Transform =
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transform origin"
 
+    let private styleToString (origin: ITransformStyle) =
+        match origin with
+        | :? TransformType.TransformStyle as t -> Utilities.Helpers.duToLowercase t
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown transform style"
+
     let private transformValue value = PropertyValue.cssValue Property.Transform value
+    let private transformValue' value =
+        value
+        |> transformToString
+        |> transformValue
+
     type Transform =
         static member Matrix (n1: float, n2: float, n3: float, n4: float, n5: float, n6: float) =
             TransformType.Matrix(n1,n2,n3,n4,n5,n6)
@@ -134,6 +157,12 @@ module Transform =
         static member SkewY (y: Units.Angle.Angle) =
             TransformType.SkewY y
 
+        static member None = None |> transformValue'
+        static member Inherit = Inherit |> transformValue'
+        static member Initial = Initial |> transformValue'
+        static member Unset = Unset |> transformValue'
+
+
     /// Supply a list of transforms to be applied to the element.
     let Transforms (transforms: TransformType.Transform list): CSSProperty =
         transforms
@@ -182,3 +211,31 @@ module Transform =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TransformOrigin' (origin: ITransformOrigin) = TransformOrigin.Value(origin)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
+    let private styleValue value = PropertyValue.cssValue Property.TransformStyle value
+    let private styleValue' value =
+        value
+        |> styleToString
+        |> styleValue
+    type TransformStyle =
+        static member Value (value: ITransformStyle) = value |> styleValue'
+
+        static member Flat = TransformType.Flat |> styleValue'
+        static member Preserve3d = TransformType.Preserve3d |> styleValue'
+
+        static member Inherit = Inherit |> styleValue'
+        static member Initial = Initial |> styleValue'
+        static member Unset = Unset |> styleValue'
+
+    /// <summary>Specifies the whether children of an element are positioned flat or in 3d.</summary>
+    /// <param name="style">
+    ///     can be:
+    ///     - <c> TransformStyle </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let TransformStyle' (style: ITransformStyle) = TransformStyle.Value(style)
+

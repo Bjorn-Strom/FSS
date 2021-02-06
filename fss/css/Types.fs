@@ -86,7 +86,9 @@ module Global =
     type IBorderImageWidth  = interface end
     type IBorderImageSource = interface end
 
+    type ITransform       = interface end
     type ITransformOrigin = interface end
+    type ITransformStyle  = interface end
 
     type ITransition               = interface end
     type ITransitionDelay          = interface end
@@ -315,6 +317,7 @@ module Global =
         interface ICounterIncrement
         interface IOverscrollBehaviorX
         interface IOverscrollBehaviorY
+        interface ITransform
 
     type Normal =
         | Normal
@@ -412,7 +415,9 @@ module Global =
         interface IBorderSpacing
         interface IBorderImageWidth
         interface IBorderImageSource
+        interface ITransform
         interface ITransformOrigin
+        interface ITransformStyle
         interface ITransition
         interface ITransitionDelay
         interface ITransitionDuration

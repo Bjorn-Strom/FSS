@@ -9,12 +9,22 @@ module Transform =
        let tests =
         testList "Transform"
             [
-                (*
                 test
                     "Transform none"
                     [ Transform.None ]
                     [ "transform" ==> "none" ]
-                    *)
+                test
+                    "Transform inherit"
+                    [ Transform.Inherit ]
+                    [ "transform" ==> "inherit" ]
+                test
+                    "Transform initial"
+                    [ Transform.Initial ]
+                    [ "transform" ==> "initial" ]
+                test
+                    "Transform unset"
+                    [ Transform.Unset ]
+                    [ "transform" ==> "unset" ]
                 test
                     "Transform matrix"
                     [ Transforms [ Transform.Matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0) ] ]
@@ -135,4 +145,24 @@ module Transform =
                     "Transform origin unset"
                     [ TransformOrigin.Unset ]
                     [ "transformOrigin" ==> "unset" ]
+                test
+                    "Transform style flat"
+                    [ TransformStyle.Flat ]
+                    [ "transformStyle" ==> "flat" ]
+                test
+                    "Transform style preserve 3d"
+                    [ TransformStyle.Preserve3d ]
+                    [ "transformStyle" ==> "preserve3d" ]
+                test
+                    "Transform style inherit"
+                    [ TransformStyle.Inherit ]
+                    [ "transformStyle" ==> "inherit" ]
+                test
+                    "Transform style initial"
+                    [ TransformStyle.Initial ]
+                    [ "transformStyle" ==> "initial" ]
+                test
+                    "Transform style unset"
+                    [ TransformStyle.Unset ]
+                    [ "transformStyle" ==> "unset" ]
             ]
