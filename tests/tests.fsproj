@@ -41,6 +41,7 @@
     <Compile Include="BoxShadow.fs" />
     <Compile Include="Custom.fs" />
     <Compile Include="PointerEvents.fs" />
+    <Compile Include="ClipPath.fs" />
     <Compile Include="Tests.fs" />
     <Content Include="paket.references" />
   </ItemGroup>

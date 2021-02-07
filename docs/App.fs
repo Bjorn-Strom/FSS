@@ -1605,6 +1605,16 @@ module App =
                         menu model dispatch
                         content model
                     ]
+
+
+                let foo =
+                    fss
+                        [
+                            ClipPath.Inset(px 500, px 40, px 40, px 40)
+                        ]
+                img [ ClassName foo; Src "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/Harry-Potter-1-.jpg" ]
+
+
             ]
 
     Program.mkSimple init update render

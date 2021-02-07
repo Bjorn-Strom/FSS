@@ -197,6 +197,8 @@ module Global =
     type ICounterReset     = interface end
     type ICounterIncrement = interface end
 
+    type IClipPath = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -318,6 +320,7 @@ module Global =
         interface IOverscrollBehaviorX
         interface IOverscrollBehaviorY
         interface ITransform
+        interface IClipPath
 
     type Normal =
         | Normal
@@ -497,6 +500,7 @@ module Global =
         interface ICounterIncrement
         interface IOverscrollBehaviorX
         interface IOverscrollBehaviorY
+        interface IClipPath
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

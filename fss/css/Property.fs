@@ -74,6 +74,7 @@ module Property =
         | CaretColor
         | Clear
         | Clip
+        | ClipPath
         | Color
         | ColorAdjust
         | Columns

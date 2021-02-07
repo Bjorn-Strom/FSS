@@ -61,6 +61,7 @@
     <Compile Include="css\Media.fs" />
     <Compile Include="css\BoxShadow.fs" />
     <Compile Include="css\Scroll.fs" />
+    <Compile Include="css\ClipPath.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Functions.fs" />
