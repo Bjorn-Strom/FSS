@@ -38,6 +38,14 @@ module ClipPath =
                     [ClipPath.ViewBox]
                     ["clipPath" ==> "view-box"]
                 test
+                    "Clip path url"
+                    [ClipPath.Url "resources.svg#c1"]
+                    ["clipPath" ==> "url(resources.svg#c1)"]
+                test
+                    "Clip path path"
+                    [ClipPath.Path "M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z"]
+                    ["clipPath" ==> "path('M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z')"]
+                test
                     "ClipPath all sides pct"
                     [ ClipPath.Inset(pct 40)]
                     [ "clipPath" ==> "inset(40%)" ]

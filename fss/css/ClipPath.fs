@@ -118,6 +118,12 @@ module ClipPath =
             ClipPathType.Round (ClipPathType.Inset.TopRightBottomLeft(top, right, bottom, left), round)
             |> clipPathValue'
 
+        static member Url (url: string) =
+            sprintf "url(%s)" url
+            |> clipPathValue
+        static member Path (path: string) =
+            sprintf "path('%s')" path
+            |> clipPathValue
         static member Polygon (points: ClipPathType.Point list) =
             ClipPathType.Polygon points
             |> clipPathValue'
