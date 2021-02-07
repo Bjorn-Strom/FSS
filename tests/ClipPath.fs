@@ -29,7 +29,6 @@ module ClipPath =
                     "ClipPath top-right-bottom-left"
                     [ ClipPath.Inset(pct 40, px 50, vh 3., rem 2.)]
                     [ "clipPath" ==> "inset(40% 50px 3.0vh 2.0rem)" ]
-
                 test
                     "ClipPath all sides pct with round"
                     [ ClipPath.Inset(pct 40, [ pct 50 :> ILengthPercentage ])]
@@ -50,6 +49,21 @@ module ClipPath =
                     "ClipPath top-right-bottom-left"
                     [ ClipPath.Inset(pct 40, px 50, vh 3., rem 2., [ px 50 :> ILengthPercentage; pct 50 :> ILengthPercentage ])]
                     [ "clipPath" ==> "inset(40% 50px 3.0vh 2.0rem round 50px 50%)" ]
+
+
+                test
+                    "ClipPath Polygon"
+                    [ ClipPath.Polygon
+                                [
+                                    pct 43, pct 0
+                                    pct 62, pct 0
+                                    pct 52, pct 26
+                                    pct 69, pct 20
+                                    pct 32, pct 100
+                                    pct 42, pct 40
+                                    pct 26, pct 46
+                                ]]
+                    [ "clipPath" ==> "polygon(43% 0%, 62% 0%, 52% 26%, 69% 20%, 32% 100%, 42% 40%, 26% 46%)" ]
 
                 test
                     "ClipPath none"

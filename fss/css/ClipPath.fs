@@ -1,6 +1,7 @@
 namespace Fss
 
 open Fss.Units
+open Fss.Units.Percent
 
 [<RequireQualifiedAccess>]
 module ClipPathType =
@@ -29,8 +30,10 @@ module ClipPathType =
     type Ellipse = Ellipse of ILengthPercentage * ILengthPercentage
     type EllipseAt = Ellipse * ILengthPercentage * ILengthPercentage
 
-    type Point = Point of ILengthPercentage * ILengthPercentage
-    type Polygon = Polygon of Point list
+    type Point = Percent * Percent
+    type Polygon =
+        | Polygon of Point list
+        interface IClipPath
 
     type Url = Url of string
     type Path = Path of string
@@ -59,15 +62,24 @@ module ClipPath =
                         (LengthPercentage.value b)
                         (LengthPercentage.value l)
         let stringifyRound r = Utilities.Helpers.combineWs LengthPercentage.value r
+        let stringifyPolygon p =
+            let unboxPolygon (ClipPathType.Polygon p) = p
+            unboxPolygon p
+            |> Utilities.Helpers.combineComma (fun (x, y) ->
+                sprintf "%s %s"
+                    (LengthPercentage.value x)
+                    (LengthPercentage.value y))
 
         match clipPath with
         | :? ClipPathType.Inset as i -> sprintf "inset(%s)" <| stringifyInset i
         | :? ClipPathType.Round as r ->
-            let foo (ClipPathType.Round (r, i)) = i, r
-            let (r, i) = foo r
+            let unboxRound (ClipPathType.Round (r, i)) = i, r
+            let (r, i) = unboxRound r
             sprintf "inset(%s round %s)"
                 (stringifyInset i)
                 (stringifyRound r)
+        | :? ClipPathType.Polygon as p ->
+            sprintf "polygon(%s)" <| stringifyPolygon p
         | :? Global as g -> GlobalValue.global' g
         | :? None -> GlobalValue.none
         | _ -> "Unknown clip path"
@@ -102,6 +114,10 @@ module ClipPath =
             |> clipPathValue'
         static member Inset (top: ILengthPercentage, right: ILengthPercentage, bottom: ILengthPercentage, left: ILengthPercentage, round: ILengthPercentage list) =
             ClipPathType.Round (ClipPathType.Inset.TopRightBottomLeft(top, right, bottom, left), round)
+            |> clipPathValue'
+
+        static member Polygon (points: ClipPathType.Point list) =
+            ClipPathType.Polygon points
             |> clipPathValue'
 
         static member None = None |> clipPathValue'
