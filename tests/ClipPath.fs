@@ -10,6 +10,34 @@ module ClipPath =
         testList "ClipPath"
             [
                 test
+                    "Clip path MarginBox"
+                    [ClipPath.MarginBox]
+                    ["clipPath" ==> "margin-box"]
+                test
+                    "Clip path BorderBox"
+                    [ClipPath.BorderBox]
+                    ["clipPath" ==> "border-box"]
+                test
+                    "Clip path PaddingBox"
+                    [ClipPath.PaddingBox]
+                    ["clipPath" ==> "padding-box"]
+                test
+                    "Clip path ContentBox"
+                    [ClipPath.ContentBox]
+                    ["clipPath" ==> "content-box"]
+                test
+                    "Clip path FillBox"
+                    [ClipPath.FillBox]
+                    ["clipPath" ==> "fill-box"]
+                test
+                    "Clip path StrokeBox"
+                    [ClipPath.StrokeBox]
+                    ["clipPath" ==> "stroke-box"]
+                test
+                    "Clip path ViewBox"
+                    [ClipPath.ViewBox]
+                    ["clipPath" ==> "view-box"]
+                test
                     "ClipPath all sides pct"
                     [ ClipPath.Inset(pct 40)]
                     [ "clipPath" ==> "inset(40%)" ]

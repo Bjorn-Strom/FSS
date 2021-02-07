@@ -13,6 +13,7 @@ module ClipPathType =
         | FillBox
         | StrokeBox
         | ViewBox
+        interface IClipPath
 
     type Inset =
         | All of ILengthPercentage
@@ -71,6 +72,7 @@ module ClipPath =
                     (LengthPercentage.value y))
 
         match clipPath with
+        | :? ClipPathType.Geometry as g -> Utilities.Helpers.duToKebab g
         | :? ClipPathType.Inset as i -> sprintf "inset(%s)" <| stringifyInset i
         | :? ClipPathType.Round as r ->
             let unboxRound (ClipPathType.Round (r, i)) = i, r
@@ -119,6 +121,14 @@ module ClipPath =
         static member Polygon (points: ClipPathType.Point list) =
             ClipPathType.Polygon points
             |> clipPathValue'
+
+        static member MarginBox = ClipPathType.MarginBox |> clipPathValue'
+        static member BorderBox = ClipPathType.BorderBox |> clipPathValue'
+        static member PaddingBox = ClipPathType.PaddingBox |> clipPathValue'
+        static member ContentBox = ClipPathType.ContentBox |> clipPathValue'
+        static member FillBox = ClipPathType.FillBox |> clipPathValue'
+        static member StrokeBox = ClipPathType.StrokeBox |> clipPathValue'
+        static member ViewBox = ClipPathType.ViewBox |> clipPathValue'
 
         static member None = None |> clipPathValue'
         static member Inherit = Inherit |> clipPathValue'
