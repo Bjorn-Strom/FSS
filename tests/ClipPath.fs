@@ -85,8 +85,38 @@ module ClipPath =
                     "ClipPath top-right-bottom-left"
                     [ ClipPath.Inset(pct 40, px 50, vh 3., rem 2., [ px 50 :> ILengthPercentage; pct 50 :> ILengthPercentage ])]
                     [ "clipPath" ==> "inset(40% 50px 3.0vh 2.0rem round 50px 50%)" ]
-
-
+                test
+                    "ClipPath circle pct"
+                    [ ClipPath.Circle(pct 50)]
+                    [ "clipPath" ==> "circle(50%)" ]
+                test
+                    "ClipPath circle px"
+                    [ ClipPath.Circle(px 25)]
+                    [ "clipPath" ==> "circle(25px)" ]
+                test
+                    "ClipPath circle at pct"
+                    [ ClipPath.CircleAt(pct 50, pct 25, pct 25)]
+                    [ "clipPath" ==> "circle(50% at 25% 25%)" ]
+                test
+                    "ClipPath circle at px"
+                    [ ClipPath.CircleAt(px 25, px 10, px 10)]
+                    [ "clipPath" ==> "circle(25px at 10px 10px)" ]
+                test
+                    "ClipPath ellipse pct"
+                    [ ClipPath.Ellipse(pct 50)]
+                    [ "clipPath" ==> "ellipse(50%)" ]
+                test
+                    "ClipPath ellipse px"
+                    [ ClipPath.Ellipse(px 25)]
+                    [ "clipPath" ==> "ellipse(25px)" ]
+                test
+                    "ClipPath ellipse at pct"
+                    [ ClipPath.EllipseAt(pct 50, pct 25, pct 25)]
+                    [ "clipPath" ==> "ellipse(50% at 25% 25%)" ]
+                test
+                    "ClipPath ellipse at px"
+                    [ ClipPath.EllipseAt(px 25, px 10, px 10)]
+                    [ "clipPath" ==> "ellipse(25px at 10px 10px)" ]
                 test
                     "ClipPath Polygon"
                     [ ClipPath.Polygon

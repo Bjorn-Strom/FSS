@@ -25,12 +25,6 @@ module ClipPathType =
         | Round of Inset * ILengthPercentage list
         interface IClipPath
 
-    type Circle = Circle of ILengthPercentage
-    type CircleAt = CircleAt of Circle * ILengthPercentage * ILengthPercentage
-
-    type Ellipse = Ellipse of ILengthPercentage * ILengthPercentage
-    type EllipseAt = Ellipse * ILengthPercentage * ILengthPercentage
-
     type Point = Percent * Percent
     type Polygon =
         | Polygon of Point list
@@ -117,7 +111,26 @@ module ClipPath =
         static member Inset (top: ILengthPercentage, right: ILengthPercentage, bottom: ILengthPercentage, left: ILengthPercentage, round: ILengthPercentage list) =
             ClipPathType.Round (ClipPathType.Inset.TopRightBottomLeft(top, right, bottom, left), round)
             |> clipPathValue'
-
+        static member Circle (radius: ILengthPercentage) =
+            sprintf "circle(%s)"
+                (LengthPercentage.value radius)
+            |> clipPathValue
+        static member CircleAt (radius: ILengthPercentage, x: ILengthPercentage, y: ILengthPercentage) =
+            sprintf "circle(%s at %s %s)"
+                (LengthPercentage.value radius)
+                (LengthPercentage.value x)
+                (LengthPercentage.value y)
+            |> clipPathValue
+        static member Ellipse (radius: ILengthPercentage) =
+            sprintf "ellipse(%s)"
+                (LengthPercentage.value radius)
+            |> clipPathValue
+        static member EllipseAt (radius: ILengthPercentage, x: ILengthPercentage, y: ILengthPercentage) =
+            sprintf "ellipse(%s at %s %s)"
+                (LengthPercentage.value radius)
+                (LengthPercentage.value x)
+                (LengthPercentage.value y)
+            |> clipPathValue
         static member Url (url: string) =
             sprintf "url(%s)" url
             |> clipPathValue
