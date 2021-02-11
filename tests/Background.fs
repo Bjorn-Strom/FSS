@@ -417,4 +417,24 @@ module Background =
                     "background blend mode unset"
                     [ BackgroundBlendMode.Unset ]
                     [ "backgroundBlendMode" ==> "unset" ]
+                test
+                    "isolation isolate"
+                    [ Isolation.Isolate ]
+                    [ "isolation" ==> "isolate" ]
+                test
+                    "isolation normal"
+                    [ Isolation.Auto ]
+                    [ "isolation" ==> "auto" ]
+                test
+                    "isolation inherit"
+                    [ Isolation.Inherit ]
+                    [ "isolation" ==> "inherit" ]
+                test
+                    "isolation initial"
+                    [ Isolation.Initial ]
+                    [ "isolation" ==> "initial" ]
+                test
+                    "isolation unset"
+                    [ Isolation.Unset ]
+                    [ "isolation" ==> "unset" ]
             ]

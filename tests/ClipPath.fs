@@ -1,5 +1,6 @@
 namespace FSSTests
 
+open System
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
@@ -148,3 +149,4 @@ module ClipPath =
                     [ ClipPath.Unset ]
                     [ "clipPath" ==> "unset" ]
             ]
+

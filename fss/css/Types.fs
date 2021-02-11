@@ -199,6 +199,8 @@ module Global =
 
     type IClipPath = interface end
 
+    type IIsolation = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -274,6 +276,7 @@ module Global =
         interface IScrollBehavior
         interface IOverscrollBehaviorX
         interface IOverscrollBehaviorY
+        interface IIsolation
 
     type None =
         | None
@@ -501,6 +504,7 @@ module Global =
         interface IOverscrollBehaviorX
         interface IOverscrollBehaviorY
         interface IClipPath
+        interface IIsolation
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

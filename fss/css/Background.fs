@@ -63,6 +63,10 @@ module BackgroundType =
         | Luminosity
         interface IBackgroundBlendMode
 
+    type Isolation =
+        | Isolate
+        interface IIsolation
+
 [<AutoOpen>]
 module Background =
 
@@ -113,6 +117,13 @@ module Background =
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown background blend mode"
+
+    let private isolationToString (isolation: IIsolation) =
+        match isolation with
+        | :? BackgroundType.Isolation as i -> "isolate"
+        | :? Global as g -> GlobalValue.global' g
+        | :? Auto -> GlobalValue.auto
+        | _ -> "Unknown isolation"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
     let private clipValue value = PropertyValue.cssValue Property.BackgroundClip value
@@ -630,7 +641,6 @@ module Background =
         static member Initial = Initial |> blendModeCssValue'
         static member Unset = Unset |> blendModeCssValue'
 
-
     /// <summary>Specifies how an elements background image should interact with its background color.</summary>
     /// <param name="backgroundBlendMode">
     ///     can be:
@@ -642,3 +652,43 @@ module Background =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let BackgroundBlendMode' (backgroundBlendMode: IBackgroundBlendMode) = backgroundBlendMode |> BackgroundBlendMode.Value
+
+
+
+
+
+
+
+
+
+
+
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
+    let private isolationValue value = PropertyValue.cssValue Property.Isolation value
+    let private isolationValue' value =
+        value
+        |> isolationToString
+        |> isolationValue
+
+    type Isolation =
+        static member Value(isolation: IIsolation) = isolation |> isolationValue'
+
+        static member Isolate = BackgroundType.Isolate |> isolationValue'
+        static member Auto = Auto |> isolationValue'
+        static member Inherit = Inherit |> isolationValue'
+        static member Initial = Initial |> isolationValue'
+        static member Unset = Unset |> isolationValue'
+
+
+    /// <summary>Specifies how an element is blended with backdrop.</summary>
+    /// <param name="isolation">
+    ///     can be:
+    ///     - <c> Isolation </c>
+    ///     - <c> Auto </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let Isolation' (isolation: IIsolation) = isolation |> Isolation.Value
