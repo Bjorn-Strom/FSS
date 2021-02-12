@@ -201,6 +201,8 @@ module Global =
 
     type IIsolation = interface end
 
+    type IClear = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -324,6 +326,7 @@ module Global =
         interface IOverscrollBehaviorY
         interface ITransform
         interface IClipPath
+        interface IClear
 
     type Normal =
         | Normal
@@ -505,6 +508,7 @@ module Global =
         interface IOverscrollBehaviorY
         interface IClipPath
         interface IIsolation
+        interface IClear
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
