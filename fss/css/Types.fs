@@ -132,7 +132,8 @@ module Global =
     type IFloat         = interface end
     type IDirection     = interface end
 
-    type IPerspective = interface end
+    type IPerspective        = interface end
+    type IBackfaceVisibility = interface end
 
     type ICursor        = interface end
     type IPointerEvents = interface end
@@ -200,6 +201,8 @@ module Global =
     type IClipPath = interface end
 
     type IIsolation = interface end
+
+    type IBoxDecorationBreak = interface end
 
     type IClear = interface end
 
@@ -509,6 +512,8 @@ module Global =
         interface IClipPath
         interface IIsolation
         interface IClear
+        interface IBackfaceVisibility
+        interface IBoxDecorationBreak
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

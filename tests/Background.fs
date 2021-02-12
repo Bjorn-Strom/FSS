@@ -437,4 +437,24 @@ module Background =
                     "isolation unset"
                     [ Isolation.Unset ]
                     [ "isolation" ==> "unset" ]
+                test
+                    "boxDecorationBreak clone"
+                    [ BoxDecorationBreak.Clone ]
+                    [ "boxDecorationBreak" ==> "clone" ]
+                test
+                    "boxDecorationBreak slice"
+                    [ BoxDecorationBreak.Slice ]
+                    [ "boxDecorationBreak" ==> "slice" ]
+                test
+                    "boxDecorationBreak inherit"
+                    [ BoxDecorationBreak.Inherit ]
+                    [ "boxDecorationBreak" ==> "inherit" ]
+                test
+                    "boxDecorationBreak initial"
+                    [ BoxDecorationBreak.Initial ]
+                    [ "boxDecorationBreak" ==> "initial" ]
+                test
+                    "boxDecorationBreak unset"
+                    [ BoxDecorationBreak.Unset ]
+                    [ "boxDecorationBreak" ==> "unset" ]
             ]

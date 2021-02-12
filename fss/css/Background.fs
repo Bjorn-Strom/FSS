@@ -653,17 +653,6 @@ module Background =
     /// <returns>Css property for fss.</returns>
     let BackgroundBlendMode' (backgroundBlendMode: IBackgroundBlendMode) = backgroundBlendMode |> BackgroundBlendMode.Value
 
-
-
-
-
-
-
-
-
-
-
-
     // https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
     let private isolationValue value = PropertyValue.cssValue Property.Isolation value
     let private isolationValue' value =
@@ -692,3 +681,53 @@ module Background =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Isolation' (isolation: IIsolation) = isolation |> Isolation.Value
+
+
+
+
+
+[<RequireQualifiedAccess>]
+module BoxDecorationBreakType =
+    type BoxDecorationBreak =
+        | Slice
+        | Clone
+        interface IBoxDecorationBreak
+
+[<AutoOpen>]
+module BoxDecorationBreak =
+    let private boxDecorationBreakToString (boxDecoration: IBoxDecorationBreak) =
+        match boxDecoration with
+        | :? BoxDecorationBreakType.BoxDecorationBreak as b -> Utilities.Helpers.duToLowercase b
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown box decoration break"
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/box-decoration-break
+    let private boxDecorationBreakValue value = PropertyValue.cssValue Property.BoxDecorationBreak value
+    let private boxDecorationBreakValue' value =
+        value
+        |> boxDecorationBreakToString
+        |> boxDecorationBreakValue
+
+    type BoxDecorationBreak =
+        static member Value(boxDecorationBreak: IBoxDecorationBreak) = boxDecorationBreak |> boxDecorationBreakValue'
+
+        static member Slice = BoxDecorationBreakType.Slice |> boxDecorationBreakValue'
+        static member Clone = BoxDecorationBreakType.Clone |> boxDecorationBreakValue'
+        static member Inherit = Inherit |> boxDecorationBreakValue'
+        static member Initial = Initial |> boxDecorationBreakValue'
+        static member Unset = Unset |> boxDecorationBreakValue'
+
+
+    /// <summary>Specifies how an element is blended with backdrop.</summary>
+    /// <param name="boxDecorationBreak">
+    ///     can be:
+    ///     - <c> BoxDecorationBreak </c>
+    ///     - <c> Auto </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let BoxDecorationBreak' (boxDecorationBreak: IBoxDecorationBreak) = boxDecorationBreak |> BoxDecorationBreak.Value
+
+

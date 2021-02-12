@@ -33,4 +33,24 @@ module Perspective =
                     "Perspective unset"
                     [ Perspective.Unset]
                     ["perspective" ==> "unset"]
+                test
+                    "BackfaceVisibility hidden"
+                    [ BackfaceVisibility.Hidden]
+                    [ "backfaceVisibility" ==> "hidden" ]
+                test
+                    "BackfaceVisibility visible"
+                    [ BackfaceVisibility.Visible]
+                    [ "backfaceVisibility" ==> "visible" ]
+                test
+                    "BackfaceVisibility inherit"
+                    [ BackfaceVisibility.Inherit]
+                    [ "backfaceVisibility" ==> "inherit" ]
+                test
+                    "BackfaceVisibility initial"
+                    [ BackfaceVisibility.Initial]
+                    ["backfaceVisibility" ==> "initial" ]
+                test
+                    "BackfaceVisibility unset"
+                    [ BackfaceVisibility.Unset]
+                    ["backfaceVisibility" ==> "unset"]
             ]
