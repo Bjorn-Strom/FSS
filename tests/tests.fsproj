@@ -43,6 +43,7 @@
     <Compile Include="PointerEvents.fs" />
     <Compile Include="ClipPath.fs" />
     <Compile Include="Clear.fs" />
+    <Compile Include="Filter.fs" />
     <Compile Include="Tests.fs" />
     <Content Include="paket.references" />
   </ItemGroup>
