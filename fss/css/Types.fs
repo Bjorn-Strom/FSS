@@ -28,6 +28,7 @@ module Global =
     type IFontVariantCaps      = interface end
     type IFontVariantEastAsian = interface end
     type IFontVariantLigature  = interface end
+    type IFontKerning          = interface end
     type ILineHeight           = interface end
     type ILineBreak            = interface end
     type ILetterSpacing        = interface end
@@ -285,6 +286,7 @@ module Global =
         interface IOverscrollBehaviorX
         interface IOverscrollBehaviorY
         interface IIsolation
+        interface IFontKerning
 
     type None =
         | None
@@ -335,6 +337,7 @@ module Global =
         interface IClear
         interface IFilter
         interface IBackdropFilter
+        interface IFontKerning
 
     type Normal =
         | Normal
@@ -346,6 +349,7 @@ module Global =
         interface IFontVariantCaps
         interface IFontVariantEastAsian
         interface IFontVariantLigature
+        interface IFontKerning
         interface ILineHeight
         interface ILineBreak
         interface ILetterSpacing

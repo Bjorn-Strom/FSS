@@ -10,6 +10,18 @@ module Font =
         testList "Fonts"
             [
                 test
+                    "Font kerning none"
+                    [ FontKerning.None ]
+                    [ "fontKerning" ==> "none" ]
+                test
+                    "Font kerning auto"
+                    [ FontKerning.Auto ]
+                    [ "fontKerning" ==> "auto" ]
+                test
+                    "Font kerning normal"
+                    [ FontKerning.Normal ]
+                    [ "fontKerning" ==> "normal" ]
+                test
                     "Font size XX-Small"
                     [ FontSize.XxSmall ]
                     [ "fontSize" ==> "xx-small" ]

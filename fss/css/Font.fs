@@ -282,6 +282,13 @@ module Font =
         | :? Normal -> GlobalValue.normal
         | _ -> "Unknown letter spacing"
 
+    let private fontKerningTostring (fontKerning: IFontKerning) =
+        match fontKerning with
+        | :? Normal -> GlobalValue.normal
+        | :? Auto -> GlobalValue.auto
+        | :? None -> GlobalValue.none
+        | _ -> "Unknown font kerning"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     let private sizeCssValue value = PropertyValue.cssValue Property.FontSize value
     let private sizeCssValue' value = value |> fontSizeToString |> sizeCssValue
@@ -714,3 +721,23 @@ module Font =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FontVariantLigatures' (ligature: IFontVariantLigature) = FontVariantLigatures.Value(ligature)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-kerning
+    let private kerningValue value = PropertyValue.cssValue Property.FontKerning value
+    let private kerningValue' value = value |> fontKerningTostring |> kerningValue
+
+    type FontKerning =
+        static member Value (fontKerning: IFontKerning) = fontKerning |> kerningValue'
+        static member Auto = Auto |> kerningValue'
+        static member Normal = Normal |> kerningValue'
+        static member None = None |> kerningValue'
+
+    /// <summary>Specifies use of font-kerning.</summary>
+    /// <param name="fontKerning">
+    ///     can be:
+    ///     - <c> Auto </c>
+    ///     - <c> Normal </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let FontKerning' (fontKerning: IFontKerning) = FontKerning.Value(fontKerning)
