@@ -289,6 +289,12 @@ module Font =
         | :? None -> GlobalValue.none
         | _ -> "Unknown font kerning"
 
+    let private fontLanguageOverrideToString (fontLanguageOverride: IFontLanguageOverride) =
+        match fontLanguageOverride with
+        | :? Normal -> GlobalValue.normal
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown font language override"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     let private sizeCssValue value = PropertyValue.cssValue Property.FontSize value
     let private sizeCssValue' value = value |> fontSizeToString |> sizeCssValue
@@ -741,3 +747,26 @@ module Font =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FontKerning' (fontKerning: IFontKerning) = FontKerning.Value(fontKerning)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-language-override
+    let private fontLanguageOverrideValue value = PropertyValue.cssValue Property.FontLanguageOverride value
+    let private fontLanguageOverrideValue' value = value |> fontLanguageOverrideToString |> fontLanguageOverrideValue
+
+    type FontLanguageOverride =
+        static member Value (languageOverride: IFontLanguageOverride) = languageOverride |> fontLanguageOverrideValue'
+        static member Value (languageOverride: string) = $"\"{languageOverride}\"" |> fontLanguageOverrideValue
+        static member Normal = Normal |> fontLanguageOverrideValue'
+        static member Inherit = Inherit |> fontLanguageOverrideValue'
+        static member Initial = Initial |> fontLanguageOverrideValue'
+        static member Unset = Unset |> fontLanguageOverrideValue'
+
+    /// <summary>Specifies language specific glyphs.</summary>
+    /// <param name="languageOverride">
+    ///     can be:
+    ///     - <c> Normal </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let FontLanguageOverride' (languageOverride: IFontLanguageOverride) = FontLanguageOverride.Value(languageOverride)

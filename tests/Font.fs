@@ -10,6 +10,25 @@ module Font =
         testList "Fonts"
             [
                 test
+                    "Font language override string"
+                    [ FontLanguageOverride.Value "ENG" ]
+                    [ "fontLanguageOverride" ==> "\"ENG\""]
+                test
+                    "Font language override inherit"
+                    [ FontLanguageOverride.Inherit ]
+                    [ "fontLanguageOverride" ==> "inherit" ]
+                test
+                    "Font language override initial"
+                    [ FontLanguageOverride.Initial ]
+                    [ "fontLanguageOverride" ==> "initial" ]
+                test
+                    "Font language override unset"
+                    [ FontLanguageOverride.Unset ]
+                    [ "fontLanguageOverride" ==> "unset" ]
+
+
+
+                test
                     "Font kerning none"
                     [ FontKerning.None ]
                     [ "fontKerning" ==> "none" ]
