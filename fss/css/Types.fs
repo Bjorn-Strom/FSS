@@ -29,6 +29,7 @@ module Global =
     type IFontVariantEastAsian = interface end
     type IFontVariantLigature  = interface end
     type IFontKerning          = interface end
+    type IFontSynthesis        = interface end
     type IFontLanguageOverride = interface end
     type ILineHeight           = interface end
     type ILineBreak            = interface end
@@ -339,6 +340,7 @@ module Global =
         interface IFilter
         interface IBackdropFilter
         interface IFontKerning
+        interface IFontSynthesis
 
     type Normal =
         | Normal

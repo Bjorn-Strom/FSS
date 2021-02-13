@@ -10,6 +10,22 @@ module Font =
         testList "Fonts"
             [
                 test
+                    "Font synthesis none"
+                    [ FontSynthesis.None ]
+                    [ "fontSynthesis" ==> "none" ]
+                test
+                    "Font synthesis weight"
+                    [ FontSynthesis.Weight ]
+                    [ "fontSynthesis" ==> "weight" ]
+                test
+                    "Font synthesis style"
+                    [ FontSynthesis.Style ]
+                    [ "fontSynthesis" ==> "style" ]
+                test
+                    "Font synthesis weight style"
+                    [ FontSynthesis.WeightStyle ]
+                    [ "fontSynthesis" ==> "weight style" ]
+                test
                     "Font language override string"
                     [ FontLanguageOverride.Value "ENG" ]
                     [ "fontLanguageOverride" ==> "\"ENG\""]
@@ -25,9 +41,6 @@ module Font =
                     "Font language override unset"
                     [ FontLanguageOverride.Unset ]
                     [ "fontLanguageOverride" ==> "unset" ]
-
-
-
                 test
                     "Font kerning none"
                     [ FontKerning.None ]
@@ -116,34 +129,44 @@ module Font =
                      "Font stretch extra-condensed"
                     [ FontStretch.ExtraCondensed ]
                     [ "fontStretch" ==> "extra-condensed" ]
-                test "Font stretch extra-condensed"
+                test
+                    "Font stretch extra-condensed"
                     [ FontStretch.ExtraCondensed ]
                     [ "fontStretch" ==> "extra-condensed" ]
-                test "Font stretch condensed"
+                test
+                    "Font stretch condensed"
                     [ FontStretch.Condensed ]
                     [ "fontStretch" ==> "condensed" ]
-                test "Font stretch semi-condensed"
+                test
+                    "Font stretch semi-condensed"
                     [ FontStretch.SemiCondensed ]
                     [ "fontStretch" ==> "semi-condensed" ]
-                test "Font stretch expanded"
+                test
+                    "Font stretch expanded"
                     [ FontStretch.Expanded]
                     [ "fontStretch" ==> "expanded" ]
-                test "Font stretch extra-expanded"
+                test
+                    "Font stretch extra-expanded"
                     [ FontStretch.ExtraExpanded]
                     [ "fontStretch" ==> "extra-expanded" ]
-                test "Font stretch ultra-expanded"
+                test
+                    "Font stretch ultra-expanded"
                     [ FontStretch.UltraExpanded]
                     [ "fontStretch" ==> "ultra-expanded" ]
-                test "Font stretch percent"
+                test
+                    "Font stretch percent"
                     [ FontStretch' (pct 200) ]
                     [ "fontStretch" ==> "200%" ]
-                test "Font stretch inherit"
+                test
+                    "Font stretch inherit"
                     [ FontStretch.Inherit ]
                     [ "fontStretch" ==> "inherit" ]
-                test "Font stretch initial"
+                test
+                    "Font stretch initial"
                     [ FontStretch.Initial ]
                     [ "fontStretch" ==> "initial" ]
-                test "Font stretch unset"
+                test
+                    "Font stretch unset"
                     [ FontStretch.Unset ]
                     [ "fontStretch" ==> "unset" ]
                 test

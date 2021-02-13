@@ -137,6 +137,12 @@ module FontTypes =
         | Anywhere
         interface ILineBreak
 
+    type FontSynthesis =
+        | Weight
+        | Style
+        | WeightStyle
+        interface IFontSynthesis
+
     let fontStyleToString (style: IFontStyle) =
         let stringifyFontStyle =
             function
@@ -294,6 +300,12 @@ module Font =
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown font language override"
+
+    let private fontSynthesisToString (synthesis: IFontSynthesis) =
+        match synthesis with
+        | :? FontTypes.FontSynthesis as f -> Utilities.Helpers.duToSpaced f
+        | :? None -> GlobalValue.none
+        | _ -> "Unknown font synthesis"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     let private sizeCssValue value = PropertyValue.cssValue Property.FontSize value
@@ -770,3 +782,31 @@ module Font =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FontLanguageOverride' (languageOverride: IFontLanguageOverride) = FontLanguageOverride.Value(languageOverride)
+
+
+
+
+
+
+
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis
+    let private fontSynthesisValue value = PropertyValue.cssValue Property.FontSynthesis value
+    let private fontSynthesisValue' value = value |> fontSynthesisToString |> fontSynthesisValue
+
+    type FontSynthesis =
+        static member Value (synthesis: IFontSynthesis) = synthesis |> fontSynthesisValue'
+        static member Weight = FontTypes.Weight |> fontSynthesisValue'
+        static member Style = FontTypes.Style |> fontSynthesisValue'
+        static member WeightStyle = FontTypes.WeightStyle |> fontSynthesisValue'
+        static member None = None |> fontSynthesisValue'
+
+    /// <summary>Specifies which missing typefaces can be synthesized by the browser.</summary>
+    /// <param name="synthesis">
+    ///     can be:
+    ///     - <c> FontSynthesis </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let FontSynthesis' (synthesis: IFontSynthesis) = FontSynthesis.Value(synthesis)
+
