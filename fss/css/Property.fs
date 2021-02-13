@@ -28,6 +28,7 @@ module Property =
         | BackgroundPosition
         | BackgroundRepeat
         | BackgroundSize
+        | BackdropFilter
         | Bleed
         | Border
         | BorderBottomColor

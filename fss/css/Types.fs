@@ -206,7 +206,8 @@ module Global =
 
     type IClear = interface end
 
-    type IFilter = interface end
+    type IFilter         = interface end
+    type IBackdropFilter = interface end
 
     // Types
     type CSSProperty = CSSProperty of string * obj
@@ -333,6 +334,7 @@ module Global =
         interface IClipPath
         interface IClear
         interface IFilter
+        interface IBackdropFilter
 
     type Normal =
         | Normal
@@ -518,6 +520,7 @@ module Global =
         interface IBackfaceVisibility
         interface IBoxDecorationBreak
         interface IFilter
+        interface IBackdropFilter
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
