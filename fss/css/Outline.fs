@@ -51,6 +51,12 @@ module Outline  =
             | :? None -> GlobalValue.none
             | _ -> "Unknown outline style"
 
+    let private outlineOffsetToString (style: IOutlineOffset) =
+        match style with
+            | :? Global as g -> GlobalValue.global' g
+            | :? Units.Size.Size as s -> Units.Size.value s
+            | _ -> "Unknown outline offset"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline
     let private outlineValue value = PropertyValue.cssValue Property.Outline value
     let private outlineValue' value =
@@ -317,3 +323,27 @@ module Outline  =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let OutlineStyle' (style: IOutlineStyle) = OutlineStyle.Value(style)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset
+    let private outlineOffsetValue value = PropertyValue.cssValue Property.OutlineOffset value
+    let private outlineOffsetValue' value =
+        value
+        |> outlineOffsetToString
+        |> outlineOffsetValue
+
+    type OutlineOffset =
+        static member Value (offset: IOutlineOffset) = offset |> outlineOffsetValue'
+        static member Inherit = Inherit |> outlineOffsetValue'
+        static member Initial = Initial |> outlineOffsetValue'
+        static member Unset = Unset |> outlineOffsetValue'
+
+    /// <summary>Sets offset of outline.</summary>
+    /// <param name="offset">
+    ///     can be:
+    ///     - <c> OutlineOffset </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let OutlineOffset' (offset: IOutlineOffset) = OutlineOffset.Value(offset)

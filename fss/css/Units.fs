@@ -63,6 +63,7 @@ module Size =
         interface IBorderImageSlice
         interface IPerspective
         interface IOutlineWidth
+        interface IOutlineOffset
         interface IBackgroundSize
         interface IBackgroundPosition
         interface IFlexBasis

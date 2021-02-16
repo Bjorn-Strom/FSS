@@ -143,10 +143,11 @@ module Global =
 
     type IContent = interface end
 
-    type IOutline      = interface end
-    type IOutlineColor = interface end
-    type IOutlineWidth = interface end
-    type IOutlineStyle = interface end
+    type IOutline       = interface end
+    type IOutlineColor  = interface end
+    type IOutlineWidth  = interface end
+    type IOutlineStyle  = interface end
+    type IOutlineOffset = interface end
 
     type IGridAutoFlow        = interface end
     type IGridTemplateArea    = interface end
@@ -479,6 +480,7 @@ module Global =
         interface IOutlineColor
         interface IOutlineWidth
         interface IOutlineStyle
+        interface IOutlineOffset
         interface IGridAutoFlow
         interface IGridTemplateArea
         interface IGridGap

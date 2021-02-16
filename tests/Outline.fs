@@ -10,6 +10,26 @@ module Outline =
         testList "Outline"
             [
                 test
+                    "Outline offset px"
+                    [ OutlineOffset.Value <| px 3 ]
+                    [ "outlineOffset" ==> "3px" ]
+                test
+                    "Outline offset em"
+                    [ OutlineOffset' <| em 0.2 ]
+                    [ "outlineOffset" ==> "0.2em" ]
+                test
+                    "Outline offset initial"
+                    [ OutlineOffset.Initial ]
+                    [ "outlineOffset" ==> "initial" ]
+                test
+                    "Outline offset inherit"
+                    [ OutlineOffset.Inherit ]
+                    [ "outlineOffset" ==> "inherit" ]
+                test
+                    "Outline offset unset"
+                    [ OutlineOffset.Unset ]
+                    [ "outlineOffset" ==> "unset" ]
+                test
                     "Outline initial"
                     [ Outline.Initial ]
                     [ "outline" ==> "initial" ]
