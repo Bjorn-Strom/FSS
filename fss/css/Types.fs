@@ -28,6 +28,7 @@ module Global =
     type IFontVariantCaps      = interface end
     type IFontVariantEastAsian = interface end
     type IFontVariantLigature  = interface end
+    type IFontVariantPosition  = interface end
     type IFontKerning          = interface end
     type IFontSynthesis        = interface end
     type IFontLanguageOverride = interface end
@@ -353,6 +354,7 @@ module Global =
         interface IFontVariantCaps
         interface IFontVariantEastAsian
         interface IFontVariantLigature
+        interface IFontVariantPosition
         interface IFontKerning
         interface IFontLanguageOverride
         interface ILineHeight
@@ -394,6 +396,7 @@ module Global =
         interface IFontVariantEastAsian
         interface IFontVariantLigature
         interface IFontLanguageOverride
+        interface IFontVariantPosition
         interface ILineHeight
         interface ILineBreak
         interface ILetterSpacing

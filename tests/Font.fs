@@ -261,8 +261,6 @@ module Font =
                     "Line height unset"
                     [ LineHeight.Unset ]
                     [ "lineHeight" ==> "unset" ]
-
-
                 test
                     "Line break loose"
                     [ LineBreak.Loose ]
@@ -295,9 +293,6 @@ module Font =
                     "Line break unset"
                     [ LineBreak.Unset ]
                     [ "lineBreak" ==> "unset" ]
-
-
-
                 test
                     "Letter spacing px"
                     [ LetterSpacing' (px 10) ]
@@ -550,4 +545,28 @@ module Font =
                     "Font variant ligatures no unset"
                     [ FontVariantLigatures.Unset]
                     ["fontVariantLigatures" ==> "unset"]
+                test
+                    "Font variant position super"
+                    [ FontVariantPosition.Super ]
+                    ["fontVariantPosition" ==> "super"]
+                test
+                    "Font variant position sub"
+                    [ FontVariantPosition.Sub]
+                    ["fontVariantPosition" ==> "sub"]
+                test
+                    "Font variant position unset"
+                    [ FontVariantPosition.Unset]
+                    ["fontVariantPosition" ==> "unset"]
+                test
+                    "Font variant position initial"
+                    [ FontVariantPosition.Initial ]
+                    ["fontVariantPosition" ==> "initial"]
+                test
+                    "Font variant position inherit"
+                    [ FontVariantPosition.Inherit]
+                    ["fontVariantPosition" ==> "inherit"]
+                test
+                    "Font variant position no unset"
+                    [ FontVariantPosition.Unset]
+                    ["fontVariantPosition" ==> "unset"]
         ]

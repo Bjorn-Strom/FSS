@@ -143,6 +143,11 @@ module FontTypes =
         | WeightStyle
         interface IFontSynthesis
 
+    type FontVariantPosition =
+        | Sub
+        | Super
+        interface IFontVariantPosition
+
     let fontStyleToString (style: IFontStyle) =
         let stringifyFontStyle =
             function
@@ -306,6 +311,13 @@ module Font =
         | :? FontTypes.FontSynthesis as f -> Utilities.Helpers.duToSpaced f
         | :? None -> GlobalValue.none
         | _ -> "Unknown font synthesis"
+
+    let private fontVariantPositionToString (variantPosition: IFontVariantPosition) =
+        match variantPosition with
+        | :? FontTypes.FontVariantPosition as f -> Utilities.Helpers.duToLowercase f
+        | :? Global as g -> GlobalValue.global' g
+        | :? Normal -> GlobalValue.normal
+        | _ -> "Unknown font variant position"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     let private sizeCssValue value = PropertyValue.cssValue Property.FontSize value
@@ -783,13 +795,6 @@ module Font =
     /// <returns>Css property for fss.</returns>
     let FontLanguageOverride' (languageOverride: IFontLanguageOverride) = FontLanguageOverride.Value(languageOverride)
 
-
-
-
-
-
-
-
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis
     let private fontSynthesisValue value = PropertyValue.cssValue Property.FontSynthesis value
     let private fontSynthesisValue' value = value |> fontSynthesisToString |> fontSynthesisValue
@@ -809,4 +814,40 @@ module Font =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FontSynthesis' (synthesis: IFontSynthesis) = FontSynthesis.Value(synthesis)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-position
+    let private fontVariantPositionValue value = PropertyValue.cssValue Property.FontVariantPosition value
+    let private fontVariantPositionValue' value = value |> fontVariantPositionToString |> fontVariantPositionValue
+
+    type FontVariantPosition =
+        static member Value (variantPosition: IFontVariantPosition) = variantPosition |> fontVariantPositionValue'
+        static member Sub = FontTypes.Sub |> fontVariantPositionValue'
+        static member Super = FontTypes.Super |> fontVariantPositionValue'
+        static member Normal = Normal |> fontVariantPositionValue'
+        static member Inherit = Inherit |> fontVariantPositionValue'
+        static member Initial = Initial |> fontVariantPositionValue'
+        static member Unset = Unset |> fontVariantPositionValue'
+
+    /// <summary>Specifies which missing typefaces can be synthesized by the browser.</summary>
+    /// <param name="variantPosition">
+    ///     can be:
+    ///     - <c> FontVariantPosition </c>
+    ///     - <c> Normal </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let FontVariantPosition' (variantPosition: IFontVariantPosition) = FontVariantPosition.Value(variantPosition)
+
+
+
+
+
+
+
+
+
+
+
 
