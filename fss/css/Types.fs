@@ -137,6 +137,7 @@ module Global =
     type IDirection     = interface end
 
     type IPerspective        = interface end
+    type IPerspectiveOrigin  = interface end
     type IBackfaceVisibility = interface end
 
     type ICursor        = interface end
@@ -539,6 +540,7 @@ module Global =
         interface IFilter
         interface IBackdropFilter
         interface IMixBlendMode
+        interface IPerspectiveOrigin
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

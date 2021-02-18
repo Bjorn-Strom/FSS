@@ -34,6 +34,26 @@ module Perspective =
                     [ Perspective.Unset]
                     ["perspective" ==> "unset"]
                 test
+                    "Perspective x"
+                    [ PerspectiveOrigin.Value <| pct 100 ]
+                    ["perspectiveOrigin" ==> "100%"]
+                test
+                    "Perspective x y"
+                    [ PerspectiveOrigin.Value (pct 100, pct 50) ]
+                    ["perspectiveOrigin" ==> "100% 50%"]
+                test
+                    "Perspective origin inherit"
+                    [ PerspectiveOrigin.Inherit]
+                    [ "perspectiveOrigin" ==> "inherit" ]
+                test
+                    "Perspective origin initial"
+                    [ PerspectiveOrigin.Initial]
+                    ["perspectiveOrigin" ==> "initial" ]
+                test
+                    "Perspective origin unset"
+                    [ PerspectiveOrigin.Unset]
+                    ["perspectiveOrigin" ==> "unset"]
+                test
                     "BackfaceVisibility hidden"
                     [ BackfaceVisibility.Hidden]
                     [ "backfaceVisibility" ==> "hidden" ]

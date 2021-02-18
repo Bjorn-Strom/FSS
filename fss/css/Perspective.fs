@@ -9,6 +9,13 @@ module Perspective =
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown perspective"
 
+    let private perspectiveOriginToString (perspectiveOrigin: IPerspectiveOrigin) =
+        match perspectiveOrigin with
+        | :? Units.Percent.Percent as s -> Units.Percent.value s
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown perspective origin"
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
     let private perspectiveValue value = PropertyValue.cssValue Property.Perspective value
     let private perspectiveValue' value =
         value
@@ -33,6 +40,33 @@ module Perspective =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Perspective' (perspective: IPerspective) = Perspective.Value(perspective)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective-origin
+    let private perspectiveOriginValue value = PropertyValue.cssValue Property.PerspectiveOrigin value
+    let private perspectiveOriginValue' value =
+        value
+        |> perspectiveOriginToString
+        |> perspectiveOriginValue
+
+    type PerspectiveOrigin =
+        static member Value (origin: IPerspectiveOrigin) = origin |> perspectiveOriginValue'
+        static member Value (x: IPerspectiveOrigin, y: IPerspectiveOrigin) =
+            $"{perspectiveOriginToString x} {perspectiveOriginToString y}"
+            |> perspectiveOriginValue
+        static member Inherit = Inherit |> perspectiveOriginValue'
+        static member Initial = Initial |> perspectiveOriginValue'
+        static member Unset = Unset |> perspectiveOriginValue'
+
+    /// <summary>Specifies vanishing point for the perspective property.</summary>
+    /// <param name="origin">
+    ///     can be:
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let PerspectiveOrigin' (origin: IPerspectiveOrigin) = PerspectiveOrigin.Value(origin)
 
 [<RequireQualifiedAccess>]
 module BackfaceVisibilityType =
