@@ -214,6 +214,8 @@ module Global =
     type IFilter         = interface end
     type IBackdropFilter = interface end
 
+    type IMixBlendMode = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -376,6 +378,7 @@ module Global =
         interface IPaintOrder
         interface IWhiteSpace
         interface IBackgroundBlendMode
+        interface IMixBlendMode
 
     type Global =
         | Inherit
@@ -535,6 +538,7 @@ module Global =
         interface IBoxDecorationBreak
         interface IFilter
         interface IBackdropFilter
+        interface IMixBlendMode
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

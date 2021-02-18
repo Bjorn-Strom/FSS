@@ -53,6 +53,7 @@ module BackgroundType =
         | Darken
         | Lighten
         | ColorDodge
+        | ColorBurn
         | HardLight
         | SoftLight
         | Difference
@@ -627,6 +628,7 @@ module Background =
         static member Darken = BackgroundType.Darken |> blendModeCssValue'
         static member Lighten = BackgroundType.Lighten |> blendModeCssValue'
         static member ColorDodge = BackgroundType.ColorDodge |> blendModeCssValue'
+        static member ColorBurn = BackgroundType.ColorBurn |> blendModeCssValue'
         static member HardLight = BackgroundType.HardLight |> blendModeCssValue'
         static member SoftLight = BackgroundType.SoftLight |> blendModeCssValue'
         static member Difference = BackgroundType.Difference |> blendModeCssValue'

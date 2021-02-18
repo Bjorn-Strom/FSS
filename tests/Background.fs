@@ -366,6 +366,10 @@ module Background =
                     [ BackgroundBlendMode.ColorDodge]
                     ["backgroundBlendMode" ==> "color-dodge"]
                 test
+                    "Background blend mode ColorBurn"
+                    [ BackgroundBlendMode.ColorBurn]
+                    ["backgroundBlendMode" ==> "color-burn"]
+                test
                     "Background blend mode HardLight"
                     [ BackgroundBlendMode.HardLight]
                     ["backgroundBlendMode" ==> "hard-light"]
