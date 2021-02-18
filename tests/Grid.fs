@@ -350,6 +350,10 @@ module Grid =
                     [GridTemplateRows.Subgrid ]
                     ["gridTemplateRows" ==> "subgrid"]
                 test
+                    "Grid template row masonry"
+                    [GridTemplateRows.Masonry ]
+                    ["gridTemplateRows" ==> "masonry"]
+                test
                     "Grid template row none"
                     [GridTemplateRows.None]
                     ["gridTemplateRows" ==> "none"]
@@ -400,6 +404,10 @@ module Grid =
                     "Grid template column subgrid"
                     [GridTemplateColumns.Subgrid]
                     ["gridTemplateColumns" ==> "subgrid"]
+                test
+                    "Grid template column masonry"
+                    [GridTemplateColumns.Masonry]
+                    ["gridTemplateColumns" ==> "masonry"]
                 test
                     "Grid template column none"
                     [GridTemplateColumns.None]

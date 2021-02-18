@@ -11,7 +11,8 @@ module GridType =
         interface IGridAutoFlow
 
     type GridTemplateColumns =
-        | GridTemplateColumns
+        | Subgrid
+        | Masonry
         interface IGridTemplateColumns
 
     type GridPosition =
@@ -23,7 +24,8 @@ module GridType =
         interface IGridPosition
 
     type GridTemplateRows =
-        | GridTemplateRows
+        | Subgrid
+        | Masonry
         interface IGridTemplateRows
 
 [<AutoOpen>]
@@ -160,11 +162,8 @@ module Grid =
         | _ -> "Unknown grid column gap"
 
     let private templateColumnToString (templateColumn: IGridTemplateColumns) =
-        let stringifyColumn =
-            function
-                | GridType.GridTemplateColumns -> "subgrid"
         match templateColumn with
-        | :? GridType.GridTemplateColumns as g -> stringifyColumn g
+        | :? GridType.GridTemplateColumns as g -> Utilities.Helpers.duToLowercase g
         | :? Auto -> GlobalValue.auto
         | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
@@ -188,11 +187,8 @@ module Grid =
         | _ -> "Unknown grid position"
 
     let private templateRowToString (templateRow: IGridTemplateRows) =
-        let stringifyRow =
-            function
-                | GridType.GridTemplateRows -> "subgrid"
         match templateRow with
-        | :? GridType.GridTemplateRows as g -> stringifyRow g
+        | :? GridType.GridTemplateRows as g -> Utilities.Helpers.duToLowercase g
         | :? Auto -> GlobalValue.auto
         | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
@@ -659,7 +655,8 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
-        static member Subgrid = GridType.GridTemplateRows |> templateRowValue'
+        static member Subgrid = GridType.GridTemplateRows.Subgrid |> templateRowValue'
+        static member Masonry = GridType.GridTemplateRows.Masonry |> templateRowValue'
         static member None = None' |> templateRowValue'
         static member Auto = Auto |> templateRowValue'
         static member Inherit = Inherit |> templateRowValue'
@@ -741,7 +738,8 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
-        static member Subgrid = GridType.GridTemplateColumns |> templateColumnValue'
+        static member Subgrid = GridType.Subgrid |> templateColumnValue'
+        static member Masonry = GridType.Masonry |> templateColumnValue'
         static member None = None' |> templateColumnValue'
         static member Auto = Auto |> templateColumnValue'
         static member Inherit = Inherit |> templateColumnValue'
