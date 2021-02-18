@@ -65,6 +65,7 @@
     <Compile Include="css\Clear.fs" />
     <Compile Include="css\Filter.fs" />
     <Compile Include="css\MixBlendMode.fs" />
+    <Compile Include="css\AspectRatio.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Functions.fs" />

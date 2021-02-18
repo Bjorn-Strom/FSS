@@ -18,6 +18,7 @@ module Property =
         | AnimationName
         | AnimationPlayState
         | AnimationTimingFunction
+        | AspectRatio
         | BackfaceVisibility
         | BackgroundAttachment
         | BackgroundBlendMode

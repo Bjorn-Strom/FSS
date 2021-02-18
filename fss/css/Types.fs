@@ -217,6 +217,8 @@ module Global =
 
     type IMixBlendMode = interface end
 
+    type IAspectRatio = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -541,6 +543,7 @@ module Global =
         interface IBackdropFilter
         interface IMixBlendMode
         interface IPerspectiveOrigin
+        interface IAspectRatio
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
