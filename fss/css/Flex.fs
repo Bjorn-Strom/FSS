@@ -181,7 +181,7 @@ module Flex =
         match flex with
         | :? Global as g -> GlobalValue.global' g
         | :? Auto -> GlobalValue.auto
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown flex"
 
     let private flexWrapToString (direction: IFlexWrap) =

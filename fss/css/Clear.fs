@@ -17,7 +17,7 @@ module Clear =
         match clear with
         | :? ClearType.Clear as c -> Utilities.Helpers.duToKebab c
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown clear"
 
     let private clearValue value = PropertyValue.cssValue Property.Clear value
@@ -28,7 +28,7 @@ module Clear =
 
     type Clear =
         static member Value (clear: IClear) = clear |> clearValue'
-        static member None = None |> clearValue'
+        static member None = None' |> clearValue'
         static member Inherit = Inherit |> clearValue'
         static member Initial = Initial |> clearValue'
         static member Unset = Unset |> clearValue'

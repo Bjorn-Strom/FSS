@@ -133,7 +133,7 @@ module Grid =
     let private templateAreaToString (area: IGridTemplateArea) =
         match area with
         | :? Global as g -> GlobalValue.global' g
-        | :? None-> GlobalValue.none
+        | :? None'-> GlobalValue.none
         | _ -> "Unknown grid template area"
 
     let private gridGapToString (gap: IGridGap) =
@@ -166,7 +166,7 @@ module Grid =
         match templateColumn with
         | :? GridType.GridTemplateColumns as g -> stringifyColumn g
         | :? Auto -> GlobalValue.auto
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
@@ -194,7 +194,7 @@ module Grid =
         match templateRow with
         | :? GridType.GridTemplateRows as g -> stringifyRow g
         | :? Auto -> GlobalValue.auto
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
@@ -284,7 +284,7 @@ module Grid =
                 |> sprintf "\"%s\"")
             |> String.concat " "
             |> templateAreaValue
-        static member None = None |> templateAreaValue'
+        static member None = None' |> templateAreaValue'
         static member Inherit = Inherit |> templateAreaValue'
         static member Initial = Initial |> templateAreaValue'
         static member Unset = Unset |> templateAreaValue'
@@ -660,7 +660,7 @@ module Grid =
             |> repeatToString
             |> templateRowValue
         static member Subgrid = GridType.GridTemplateRows |> templateRowValue'
-        static member None = None |> templateRowValue'
+        static member None = None' |> templateRowValue'
         static member Auto = Auto |> templateRowValue'
         static member Inherit = Inherit |> templateRowValue'
         static member Initial = Initial |> templateRowValue'
@@ -742,7 +742,7 @@ module Grid =
             |> repeatToString
             |> templateColumnValue
         static member Subgrid = GridType.GridTemplateColumns |> templateColumnValue'
-        static member None = None |> templateColumnValue'
+        static member None = None' |> templateColumnValue'
         static member Auto = Auto |> templateColumnValue'
         static member Inherit = Inherit |> templateColumnValue'
         static member Initial = Initial |> templateColumnValue'

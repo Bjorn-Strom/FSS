@@ -28,7 +28,7 @@ module Outline  =
     let private outlineToString (color: IOutline) =
         match color with
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown outline"
 
     let private outlineColorToString (color: IOutlineColor) =
@@ -48,7 +48,7 @@ module Outline  =
         match style with
             | :? OutlineTypes.OutlineStyle as c -> Utilities.Helpers.duToLowercase c
             | :? Global as g -> GlobalValue.global' g
-            | :? None -> GlobalValue.none
+            | :? None' -> GlobalValue.none
             | _ -> "Unknown outline style"
 
     let private outlineOffsetToString (style: IOutlineOffset) =
@@ -67,7 +67,7 @@ module Outline  =
     type Outline =
         static member Value (outline: IOutline) = outline |> outlineValue'
 
-        static member None = None |> outlineValue'
+        static member None = None' |> outlineValue'
         static member Inherit = Inherit |> outlineValue'
         static member Initial = Initial |> outlineValue'
         static member Unset = Unset |> outlineValue'
@@ -307,7 +307,7 @@ module Outline  =
         static member Inset = OutlineTypes.Inset |> outlineStyleValue'
         static member Outset = OutlineTypes.Outset |> outlineStyleValue'
 
-        static member None = None |> outlineStyleValue'
+        static member None = None' |> outlineStyleValue'
         static member Inherit = Inherit |> outlineStyleValue'
         static member Initial = Initial |> outlineStyleValue'
         static member Unset = Unset |> outlineStyleValue'

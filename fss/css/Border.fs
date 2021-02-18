@@ -63,7 +63,7 @@ module Border =
     let private styleToString (style: IBorderStyle) =
         match style with
         | :? BorderType.BorderStyle as b -> Utilities.Helpers.duToLowercase b
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown border style"
 
@@ -125,14 +125,14 @@ module Border =
 
     let private imageSourceToString (imageSource: IBorderImageSource) =
         match imageSource with
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown border image source"
 
     let private borderToString (border: IBorder) =
             match border with
             | :? Global as g -> GlobalValue.global' g
-            | :? None -> GlobalValue.none
+            | :? None' -> GlobalValue.none
             | _ -> "Unknown border"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border
@@ -144,7 +144,7 @@ module Border =
 
     type Border =
         static member Value (border: IBorder) = border |> borderValue'
-        static member None = None |> borderValue'
+        static member None = None' |> borderValue'
         static member Inherit = Inherit |> borderValue'
         static member Initial = Initial |> borderValue'
         static member Unset = Unset |> borderValue'
@@ -512,7 +512,7 @@ module Border =
         static member Inset = BorderType.Inset |> styleValue'
         static member Outset = BorderType.Outset |> styleValue'
 
-        static member None = None |> styleValue'
+        static member None = None' |> styleValue'
         static member Inherit = Inherit |> styleValue'
         static member Initial = Initial |> styleValue'
         static member Unset = Unset |> styleValue'
@@ -548,7 +548,7 @@ module Border =
         static member Inset = BorderType.Inset |> topStyleValue'
         static member Outset = BorderType.Outset |> topStyleValue'
 
-        static member None = None |> topStyleValue'
+        static member None = None' |> topStyleValue'
         static member Inherit = Inherit |> topStyleValue'
         static member Initial = Initial |> topStyleValue'
         static member Unset = Unset |> topStyleValue'
@@ -584,7 +584,7 @@ module Border =
         static member Inset = BorderType.Inset |> rightStyleValue'
         static member Outset = BorderType.Outset |> rightStyleValue'
 
-        static member None = None |> rightStyleValue'
+        static member None = None' |> rightStyleValue'
         static member Inherit = Inherit |> rightStyleValue'
         static member Initial = Initial |> rightStyleValue'
         static member Unset = Unset |> rightStyleValue'
@@ -620,7 +620,7 @@ module Border =
         static member Inset = BorderType.Inset |> bottomStyleValue'
         static member Outset = BorderType.Outset |> bottomStyleValue'
 
-        static member None = None |> bottomStyleValue'
+        static member None = None' |> bottomStyleValue'
         static member Inherit = Inherit |> bottomStyleValue'
         static member Initial = Initial |> bottomStyleValue'
         static member Unset = Unset |> bottomStyleValue'
@@ -656,7 +656,7 @@ module Border =
         static member Inset = BorderType.Inset |> leftStyleValue'
         static member Outset = BorderType.Outset |> leftStyleValue'
 
-        static member None = None |> leftStyleValue'
+        static member None = None' |> leftStyleValue'
         static member Inherit = Inherit |> leftStyleValue'
         static member Initial = Initial |> leftStyleValue'
         static member Unset = Unset |> leftStyleValue'
@@ -1856,7 +1856,7 @@ module Border =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, start, last)
         static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: IColorStop list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, colors)
-        static member None = None |> imageValue'
+        static member None = None' |> imageValue'
         static member Inherit = Inherit |> imageValue'
         static member Initial = Initial |> imageValue'
         static member Unset = Unset |> imageValue'

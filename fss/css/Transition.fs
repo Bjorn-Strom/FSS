@@ -28,7 +28,7 @@ module Transition =
     let private propertyToString (property: ITransitionProperty) =
         match property with
         | :? Property.Property as p -> PropertyValue.toKebabCase p
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transition property"
 
@@ -412,7 +412,7 @@ module Transition =
         static member WordWrap = Property.WordWrap |> transitionProperty'
         static member ZIndex = Property.ZIndex |> transitionProperty'
 
-        static member None = None |> transitionProperty'
+        static member None = None' |> transitionProperty'
         static member Inherit = Inherit |> transitionProperty'
         static member Initial = Initial |> transitionProperty'
         static member Unset = Unset |> transitionProperty'

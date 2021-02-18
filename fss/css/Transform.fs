@@ -77,7 +77,7 @@ module Transform =
         match transform with
         | :? TransformType.Transform as t -> stringifyTransform t
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown transform value"
 
     let private originToString (origin: ITransformOrigin) =
@@ -157,7 +157,7 @@ module Transform =
         static member SkewY (y: Units.Angle.Angle) =
             TransformType.SkewY y
 
-        static member None = None |> transformValue'
+        static member None = None' |> transformValue'
         static member Inherit = Inherit |> transformValue'
         static member Initial = Initial |> transformValue'
         static member Unset = Unset |> transformValue'

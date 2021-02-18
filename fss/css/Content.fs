@@ -19,7 +19,7 @@ module Content =
         | :? ContentType.Content as c -> Utilities.Helpers.duToKebab c
         | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
         | :? Normal -> GlobalValue.normal
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | :? CounterType.CounterStyle as c -> counterValue c
         | _ -> "Unknown content"
@@ -116,7 +116,7 @@ module Content =
             contentValue <| sprintf "attr(%A)" (AttributeValues.attribute attribute)
 
         static member Normal = Normal |> contentValue'
-        static member None = None |> contentValue'
+        static member None = None' |> contentValue'
         static member Inherit = Inherit |> contentValue'
         static member Initial = Initial |> contentValue'
         static member Unset = Unset |> contentValue'

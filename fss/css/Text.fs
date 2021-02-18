@@ -166,7 +166,7 @@ module Text =
         match decorationLine with
         | :? TextTypes.TextDecorationLine as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown text decoration line"
 
     let private thicknessToString (thickness: ITextDecorationThickness) =
@@ -180,7 +180,7 @@ module Text =
 
     let private decorationToString (decoration: ITextDecoration) =
         match decoration with
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown text decoration"
 
     let private decorationStyleToString (style: ITextDecorationStyle) =
@@ -193,14 +193,14 @@ module Text =
         match skip with
         | :? TextTypes.DecorationSkip as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown text decoration skip"
 
     let private decorationSkipInkToString (skipInk: ITextDecorationSkipInk) =
         match skipInk with
         | :? TextTypes.TextDecorationSkipInk -> "all"
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown text decoration skip ink"
 
@@ -208,7 +208,7 @@ module Text =
         match transform with
         | :? TextTypes.TextTransform as t -> Utilities.Helpers.duToKebab t
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown text transform"
 
     let private indentToString (indent: ITextIndent) =
@@ -233,7 +233,7 @@ module Text =
     let private emphasisToString (emphasis: ITextEmphasis) =
         match emphasis with
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "unknown text emphasis"
 
     let private emphasisPositionToString (emphasisPosition: ITextEmphasisPosition) =
@@ -259,7 +259,7 @@ module Text =
         | :? TextTypes.TextEmphasisStyle as t -> stringifyStyle t
         | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "unknown text emphasis style"
 
     let private underlinePositionToString (underlinePosition: ITextUnderlinePosition) =
@@ -286,7 +286,7 @@ module Text =
     let private quoteToString (quote: IQuotes) =
         match quote with
         | :? CssString as s -> GlobalValue.string s
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown quotes"
@@ -294,7 +294,7 @@ module Text =
     let private hyphensToString (hyphens: IHyphens) =
         match hyphens with
         | :? TextTypes.Hyphens -> "manual"
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "unknown hyphens"
@@ -307,7 +307,7 @@ module Text =
 
     let private textSizeAdjustToString (size: ITextSizeAdjust) =
         match size with
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -336,7 +336,7 @@ module Text =
     let private textJustifyToString (textJustify: ITextJustify) =
         match textJustify with
         | :? TextTypes.TextJustify as j -> Utilities.Helpers.duToKebab j
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown text justification"
 
@@ -350,7 +350,7 @@ module Text =
     let private userSelectToString (userSelect: IUserSelect) =
         match userSelect with
         | :? TextTypes.UserSelect as u -> Utilities.Helpers.duToLowercase u
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown user select"
@@ -425,7 +425,7 @@ module Text =
         |> decorationValue
     type TextDecoration =
         static member Value (value: ITextDecoration) = value |> decorationValue'
-        static member None = None |> decorationValue'
+        static member None = None' |> decorationValue'
 
     /// <summary>Resets text decoration.</summary>
     /// <param name="decoration">
@@ -455,7 +455,7 @@ module Text =
         static member Inherit = Inherit |> lineCssValue'
         static member Initial = Initial |> lineCssValue'
         static member Unset = Unset |> lineCssValue'
-        static member None = None |> lineCssValue'
+        static member None = None' |> lineCssValue'
 
     /// <summary>Specifies how to decorate text.</summary>
     /// <param name="decoration">
@@ -554,7 +554,7 @@ module Text =
         static member Inherit = Inherit |> skipValue'
         static member Initial = Initial |> skipValue'
         static member Unset = Unset |> skipValue'
-        static member None = None |> skipValue'
+        static member None = None' |> skipValue'
 
     /// <summary>Specifies what parts of decoration should be skipped.</summary>
     /// <param name="skip">
@@ -581,7 +581,7 @@ module Text =
         static member Inherit = Inherit |> skipInkValue'
         static member Initial = Initial |> skipInkValue'
         static member Unset = Unset |> skipInkValue'
-        static member None = None |> skipInkValue'
+        static member None = None' |> skipInkValue'
         static member Auto = Auto |> skipInkValue'
 
     /// <summary>Specifies what parts of decoration should be skipped.</summary>
@@ -614,7 +614,7 @@ module Text =
         static member Inherit = Inherit |> transformValue'
         static member Initial = Initial |> transformValue'
         static member Unset = Unset |> transformValue'
-        static member None = None |> transformValue'
+        static member None = None' |> transformValue'
 
     /// <summary>Specifies what parts of text to capitalize.</summary>
     /// <param name="transform">
@@ -709,7 +709,7 @@ module Text =
     type TextEmphasis =
         static member Value (emphasis: ITextEmphasis) = emphasis |> emphasisValue'
 
-        static member None = None |> emphasisValue'
+        static member None = None' |> emphasisValue'
         static member Inherit = Inherit |> emphasisValue'
         static member Initial = Initial |> emphasisValue'
         static member Unset = Unset |> emphasisValue'
@@ -771,7 +771,7 @@ module Text =
         static member FilledSesame = TextTypes.FilledSesame |> emphasisStyleValue'
         static member OpenSesame = TextTypes.OpenSesame |> emphasisStyleValue'
 
-        static member None = None |> emphasisStyleValue'
+        static member None = None' |> emphasisStyleValue'
         static member Inherit = Inherit |> emphasisStyleValue'
         static member Initial = Initial |> emphasisStyleValue'
         static member Unset = Unset |> emphasisStyleValue'
@@ -873,7 +873,7 @@ module Text =
             |> String.concat " "
             |> quoteValue
 
-        static member None = None |> quoteValue'
+        static member None = None' |> quoteValue'
         static member Auto = Auto |> quoteValue'
         static member Inherit = Inherit |> quoteValue'
         static member Initial = Initial |> quoteValue'
@@ -902,7 +902,7 @@ module Text =
         static member Value (hyphens: IHyphens) = hyphens |> hyphensValue'
         static member Manual = TextTypes.Manual |> hyphensValue'
         static member Auto = Auto |> hyphensValue'
-        static member None = None |> hyphensValue'
+        static member None = None' |> hyphensValue'
         static member Inherit = Inherit |> hyphensValue'
         static member Initial = Initial |> hyphensValue'
         static member Unset = Unset |> hyphensValue'
@@ -1276,7 +1276,7 @@ module Text =
     type TextSizeAdjust =
         static member Value (textSize: ITextSizeAdjust) = textSize |> textSizeAdjustValue'
         static member Auto = Auto |> textSizeAdjustValue'
-        static member None = None |> textSizeAdjustValue'
+        static member None = None' |> textSizeAdjustValue'
         static member Inherit = Inherit |> textSizeAdjustValue'
         static member Initial = Initial |> textSizeAdjustValue'
         static member Unset = Unset |> textSizeAdjustValue'
@@ -1377,7 +1377,7 @@ module Text =
         static member InterWord = TextTypes.InterWord |> textJustifyValue'
         static member InterCharacter = TextTypes.InterCharacter |> textJustifyValue'
         static member Auto = Auto |> textJustifyValue'
-        static member None = None |> textJustifyValue'
+        static member None = None' |> textJustifyValue'
 
     /// <summary>Specifies how to justify text.</summary>
     /// <param name="justification">
@@ -1426,7 +1426,7 @@ module Text =
         static member Text = TextTypes.Text |> userSelectValue'
         static member Contain = TextTypes.Contain |> userSelectValue'
         static member All = TextTypes.All |> userSelectValue'
-        static member None = None |> userSelectValue'
+        static member None = None' |> userSelectValue'
         static member Auto = Auto |> userSelectValue'
         static member Inherit = Inherit |> userSelectValue'
         static member Initial = Initial |> userSelectValue'

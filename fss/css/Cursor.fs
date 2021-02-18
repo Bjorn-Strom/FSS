@@ -44,7 +44,7 @@ module Cursor =
         match cursor with
         | :? CursorType.Cursor as c -> Utilities.Helpers.duToKebab c
         | :? Auto -> GlobalValue.auto
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown cursor"
 
@@ -94,7 +94,7 @@ module Cursor =
         static member Inherit = Inherit |> cursorValue'
         static member Initial = Initial |> cursorValue'
         static member Unset = Unset |> cursorValue'
-        static member None = None |> cursorValue'
+        static member None = None' |> cursorValue'
 
     /// <summary>Specifies how elements behave before a generated box.</summary>
     /// <param name="cursor">

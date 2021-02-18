@@ -28,7 +28,7 @@ module Display =
     let private displayToString (display: IDisplay) =
         match display with
         | :? DisplayType.Display as t -> Utilities.Helpers.duToKebab t
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown display type"
 
@@ -57,7 +57,7 @@ module Display =
         static member TableRow = DisplayType.TableRow |> displayValue'
         static member TableCaption = DisplayType.TableCaption |> displayValue'
 
-        static member None = None |> displayValue'
+        static member None = None' |> displayValue'
         static member Inherit = Inherit |> displayValue'
         static member Initial = Initial |> displayValue'
         static member Unset = Unset |> displayValue'

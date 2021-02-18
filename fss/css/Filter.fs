@@ -42,7 +42,7 @@ module Filter =
         match filter with
         | :? FilterType.Filter as f -> FilterType.stringifyFilter f
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown filter"
 
     let private filterValue value = PropertyValue.cssValue Property.Filter value
@@ -64,7 +64,7 @@ module Filter =
         static member Saturate saturate = FilterType.Saturate saturate
         static member Sepia sepia = FilterType.Sepia sepia
 
-        static member None = None |> filterValue'
+        static member None = None' |> filterValue'
         static member Inherit = Inherit |> filterValue'
         static member Initial = Initial |> filterValue'
         static member Unset = Unset |> filterValue'
@@ -82,7 +82,7 @@ module BackdropFilter =
         match backdropFilter with
         | :? FilterType.Filter as f -> FilterType.stringifyFilter f
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown backdrop filter"
 
     let private backdropFilterValue value = PropertyValue.cssValue Property.BackdropFilter value
@@ -104,7 +104,7 @@ module BackdropFilter =
         static member Saturate saturate = FilterType.Saturate saturate
         static member Sepia sepia = FilterType.Sepia sepia
 
-        static member None = None |> backdropFilterValue'
+        static member None = None' |> backdropFilterValue'
         static member Inherit = Inherit |> backdropFilterValue'
         static member Initial = Initial |> backdropFilterValue'
         static member Unset = Unset |> backdropFilterValue'

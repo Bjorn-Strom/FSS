@@ -43,7 +43,7 @@ module Animation =
     let private animationFillModeToString (fillMode: IAnimationFillMode) =
         match fillMode with
             | :? AnimationType.AnimationFillMode as a -> Utilities.Helpers.duToLowercase a
-            | :? None -> GlobalValue.none
+            | :? None' -> GlobalValue.none
             | _ -> "Unknown fill mode"
 
     let private playStateTypeToString (playState: IAnimationPlayState) =
@@ -55,7 +55,7 @@ module Animation =
     let private nameToString (name: IAnimationName) =
         match name with
         | :? CssString as s -> GlobalValue.string s
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown animation name"
 
@@ -121,7 +121,7 @@ module Animation =
         static member Forwards = AnimationType.Forwards |> fillModeCssValue'
         static member Backwards = AnimationType.Backwards |> fillModeCssValue'
         static member Both = AnimationType.Both |> fillModeCssValue'
-        static member None = None |> fillModeCssValue'
+        static member None = None' |> fillModeCssValue'
 
     /// <summary>Specifies which styles to apply before and after the animation. </summary>
     /// <param name="fillMode">
@@ -166,7 +166,7 @@ module Animation =
     type AnimationName =
         static member Name (name: IAnimationName) = name |> nameValue'
         static member Names (names: IAnimationName list) = Utilities.Helpers.combineComma nameToString names |> nameValue
-        static member None = None |> nameValue'
+        static member None = None' |> nameValue'
         static member Inherit = Inherit |> nameValue'
         static member Initial = Initial |> nameValue'
         static member Unset = Unset |> nameValue'

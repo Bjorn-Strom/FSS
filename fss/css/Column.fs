@@ -48,7 +48,7 @@ module Column =
         match span with
         | :? ColumnType.ColumnSpan as c -> stringifyColumnSpan c
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown column span"
 
     let private columnsToString(columns: IColumns) =
@@ -71,7 +71,7 @@ module Column =
     let private columnRuleStyleToString (style: IColumnRuleStyle) =
         match style with
         | :? ColumnType.ColumnRuleStyle as b -> Utilities.Helpers.duToLowercase b
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column style"
 
@@ -141,7 +141,7 @@ module Column =
         static member Inherit = Inherit |> columnSpanValue'
         static member Initial = Initial |> columnSpanValue'
         static member Unset = Unset |> columnSpanValue'
-        static member None = None |> columnSpanValue'
+        static member None = None' |> columnSpanValue'
 
     /// <summary>Sets gap width between element.</summary>
     /// <param name="span">
@@ -248,7 +248,7 @@ module Column =
         static member Inset = ColumnType.Inset |> styleValue'
         static member Outset = ColumnType.Outset |> styleValue'
 
-        static member None = None |> styleValue'
+        static member None = None' |> styleValue'
         static member Inherit = Inherit |> styleValue'
         static member Initial = Initial |> styleValue'
         static member Unset = Unset |> styleValue'

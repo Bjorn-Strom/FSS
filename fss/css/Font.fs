@@ -266,7 +266,7 @@ module Font =
         | :? FontTypes.FontVariantLigature as f -> Utilities.Helpers.duToKebab f
         | :? Global as g -> GlobalValue.global' g
         | :? Normal -> GlobalValue.normal
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown font variant ligature"
 
     let private lineHeightToString (lineHeight: ILineHeight) =
@@ -297,7 +297,7 @@ module Font =
         match fontKerning with
         | :? Normal -> GlobalValue.normal
         | :? Auto -> GlobalValue.auto
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown font kerning"
 
     let private fontLanguageOverrideToString (fontLanguageOverride: IFontLanguageOverride) =
@@ -309,7 +309,7 @@ module Font =
     let private fontSynthesisToString (synthesis: IFontSynthesis) =
         match synthesis with
         | :? FontTypes.FontSynthesis as f -> Utilities.Helpers.duToSpaced f
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown font synthesis"
 
     let private fontVariantPositionToString (variantPosition: IFontVariantPosition) =
@@ -734,7 +734,7 @@ module Font =
         static member NoContextual = FontTypes.NoContextual |> variantLigatureCssValue'
 
         static member Normal = Normal |> variantLigatureCssValue'
-        static member None = None |> variantLigatureCssValue'
+        static member None = None' |> variantLigatureCssValue'
         static member Inherit = Inherit |> variantLigatureCssValue'
         static member Initial = Initial |> variantLigatureCssValue'
         static member Unset = Unset |> variantLigatureCssValue'
@@ -760,7 +760,7 @@ module Font =
         static member Value (fontKerning: IFontKerning) = fontKerning |> kerningValue'
         static member Auto = Auto |> kerningValue'
         static member Normal = Normal |> kerningValue'
-        static member None = None |> kerningValue'
+        static member None = None' |> kerningValue'
 
     /// <summary>Specifies use of font-kerning.</summary>
     /// <param name="fontKerning">
@@ -804,7 +804,7 @@ module Font =
         static member Weight = FontTypes.Weight |> fontSynthesisValue'
         static member Style = FontTypes.Style |> fontSynthesisValue'
         static member WeightStyle = FontTypes.WeightStyle |> fontSynthesisValue'
-        static member None = None |> fontSynthesisValue'
+        static member None = None' |> fontSynthesisValue'
 
     /// <summary>Specifies which missing typefaces can be synthesized by the browser.</summary>
     /// <param name="synthesis">

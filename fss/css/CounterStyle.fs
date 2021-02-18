@@ -118,7 +118,7 @@ module Counter =
 
         match reset with
         | :? CounterType.CounterReset as cr -> stringifyReset cr
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown counter reset"
 
@@ -132,7 +132,7 @@ module Counter =
         static member Value (counterReset: ICounterReset) = counterReset |> counterResetValue'
         static member Reset (counter: CounterType.CounterStyle) = counter |> CounterType.Reset |> counterResetValue'
         static member ResetTo (counter: CounterType.CounterStyle) (value: int) = CounterType.ResetTo(counter, value) |> counterResetValue'
-        static member None = None |> counterResetValue'
+        static member None = None' |> counterResetValue'
         static member Inherit = Inherit |> counterResetValue'
         static member Initial = Initial |> counterResetValue'
         static member Unset = Unset |> counterResetValue'
@@ -148,7 +148,7 @@ module Counter =
 
         match increment with
         | :? CounterType.CounterIncrement as cr -> stringifyIncrement cr
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown counter increment"
 
@@ -162,7 +162,7 @@ module Counter =
         static member Value (counterIncrement: ICounterIncrement) = counterIncrement |> counterIncrementValue'
         static member Increment (counter: CounterType.CounterStyle) = counter |> CounterType.Increment |> counterIncrementValue'
         static member IncrementTo (counter: CounterType.CounterStyle) (value: int) = CounterType.Add(counter, value) |> counterIncrementValue'
-        static member None = None |> counterIncrementValue'
+        static member None = None' |> counterIncrementValue'
         static member Inherit = Inherit |> counterIncrementValue'
         static member Initial = Initial |> counterIncrementValue'
         static member Unset = Unset |> counterIncrementValue'

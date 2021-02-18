@@ -75,7 +75,7 @@ module ListStyleTypeType =
         | :? CounterType.CounterStyle as c -> counterValue c
         | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown list style type"
 
 [<AutoOpen>]
@@ -83,7 +83,7 @@ module ListStyle =
     let private listStyleToString (style: IListStyle) =
         match style with
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown list style"
 
     let private listStyleImageToString (image: IListStyleImage) =
@@ -94,7 +94,7 @@ module ListStyle =
         match image with
         | :? ListStyleTypeType.ListStyleImage as l -> stringifyImage l
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown list style image"
 
     let private stylePositionToString (stylePosition: IListStylePosition) =
@@ -113,7 +113,7 @@ module ListStyle =
     type ListStyle =
         static member Value (style: IListStyle) = style |> listStyleValue'
 
-        static member None = None |> listStyleValue'
+        static member None = None' |> listStyleValue'
         static member Inherit = Inherit |> listStyleValue'
         static member Initial = Initial |> listStyleValue'
         static member Unset = Unset |> listStyleValue'
@@ -140,7 +140,7 @@ module ListStyle =
         static member Value (styleImage: IListStyleImage) = styleImage |> listStyleImageValue'
         static member Url (url: string) = ListStyleTypeType.ListStyleImage url |> listStyleImageValue'
 
-        static member None = None |> listStyleImageValue'
+        static member None = None' |> listStyleImageValue'
         static member Inherit = Inherit |> listStyleImageValue'
         static member Initial = Initial |> listStyleImageValue'
         static member Unset = Unset |> listStyleImageValue'
@@ -249,7 +249,7 @@ module ListStyle =
         static member DisclosureOpen = ListStyleTypeType.DisclosureOpen |> listStyleTypeProperty'
         static member DisclosureClosed = ListStyleTypeType.DisclosureClosed |> listStyleTypeProperty'
 
-        static member None = None |> listStyleTypeProperty'
+        static member None = None' |> listStyleTypeProperty'
         static member Inherit = Inherit |> listStyleTypeProperty'
         static member Initial = Initial |> listStyleTypeProperty'
         static member Unset = Unset |> listStyleTypeProperty'

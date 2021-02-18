@@ -76,7 +76,7 @@ module Appeareance =
     let private appearanceToString (appearance: IAppearance) =
         match appearance with
         | :? AppearanceType.Appearance as a -> Utilities.Helpers.duToKebab a
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Auto -> GlobalValue.auto
         | _ -> "Unknown appearance"
 
@@ -156,7 +156,7 @@ module Appeareance =
         static member Window = AppearanceType.Window |> appearanceValue'
 
         static member Auto = Auto |> appearanceValue'
-        static member None = None |> appearanceValue'
+        static member None = None' |> appearanceValue'
 
     /// <summary>Specifies platform native styling.</summary>
     /// <param name="appearance">

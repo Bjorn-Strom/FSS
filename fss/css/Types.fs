@@ -295,8 +295,8 @@ module Global =
         interface IIsolation
         interface IFontKerning
 
-    type None =
-        | None
+    type None' =
+        | None'
         interface IAnimationFillMode
         interface IAnimationName
         interface IFontVariantLigature

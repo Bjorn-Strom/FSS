@@ -60,7 +60,7 @@ module Position =
         match float with
         | :? PositionType.Float as v -> Utilities.Helpers.duToKebab v
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown float"
 
     let private directionToString (direction: IDirection) =
@@ -248,7 +248,7 @@ module Position =
         static member InlineStart = PositionType.InlineStart |> floatValue'
         static member InlineEnd = PositionType.InlineEnd |> floatValue'
 
-        static member None = None |> floatValue'
+        static member None = None' |> floatValue'
         static member Inherit = Inherit |> floatValue'
         static member Initial = Initial |> floatValue'
         static member Unset = Unset |> floatValue'

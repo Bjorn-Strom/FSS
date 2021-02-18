@@ -20,7 +20,7 @@ module PointerEvents =
         match event with
         | :? PointerEventsTypes.PointerEvents as p -> Utilities.Helpers.duToCamel p
         | :? Auto -> GlobalValue.auto
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown pointer event"
 
@@ -45,7 +45,7 @@ module PointerEvents =
         static member Inherit = Inherit |> pointerEventsValue'
         static member Initial = Initial |> pointerEventsValue'
         static member Unset = Unset |> pointerEventsValue'
-        static member None = None |> pointerEventsValue'
+        static member None = None' |> pointerEventsValue'
 
     /// <summary>Specifies when an element can be the target of pointer events.</summary>
     /// <param name="pointerEvents">

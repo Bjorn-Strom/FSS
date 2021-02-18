@@ -16,7 +16,7 @@ module Resize =
     let private resizeToString (resize: IResize) =
         match resize with
         | :? ResizeType.Resize as r -> Utilities.Helpers.duToLowercase r
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown resize value"
 
@@ -33,7 +33,7 @@ module Resize =
         static member Vertical = ResizeType.Vertical |> resizeValue'
         static member Block = ResizeType.Block |> resizeValue'
         static member Inline = ResizeType.Inline |> resizeValue'
-        static member None = None |> resizeValue'
+        static member None = None' |> resizeValue'
         static member Initial = Initial |> resizeValue'
         static member Inherit = Inherit |> resizeValue'
         static member Unset = Unset |> resizeValue'

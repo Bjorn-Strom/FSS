@@ -77,7 +77,7 @@ module ClipPath =
         | :? ClipPathType.Polygon as p ->
             sprintf "polygon(%s)" <| stringifyPolygon p
         | :? Global as g -> GlobalValue.global' g
-        | :? None -> GlobalValue.none
+        | :? None' -> GlobalValue.none
         | _ -> "Unknown clip path"
 
     let private clipPathValue value = PropertyValue.cssValue Property.ClipPath value
@@ -149,7 +149,7 @@ module ClipPath =
         static member StrokeBox = ClipPathType.StrokeBox |> clipPathValue'
         static member ViewBox = ClipPathType.ViewBox |> clipPathValue'
 
-        static member None = None |> clipPathValue'
+        static member None = None' |> clipPathValue'
         static member Inherit = Inherit |> clipPathValue'
         static member Initial = Initial |> clipPathValue'
         static member Unset = Unset |> clipPathValue'
