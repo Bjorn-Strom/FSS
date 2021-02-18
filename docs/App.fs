@@ -170,6 +170,7 @@ module App =
                                     li [] [ str "Easy to set up and use." ]
                                     li [] [ str "Take advantage of nice F# syntax and features." ]
                                     li [] [ str "Scoping! Having local styles will not affect other stuff somewhere else." ]
+                                    li [] [ str "Parameterize your styling." ]
                                 ]
                         ]
                 ]
@@ -184,22 +185,24 @@ module App =
                             str """The main function this library supplies is the function fss. It takes a list of CSS properties and returns a string.
                                 This string is the classname you can give to your html tag.
 
-                                Simply write the CSS you want in PascalCase and dot yourself into the methods you want.
+                                Simply write the CSS you want in PascalCase and dot yourself into the method you want.
+                                What is available are the typical options the property might provide.
+
                                 For example if you want """
                             codeBlock ["text-decoration-color: white"]
                             str """ then you write"""
-                            codeBlock [ "let myStyle = fss [ TextDecorationColor.white ]"
-                                        "div [ClassName myStyle] []" ]
-                            str """This should work for most CSS properties you would want, if one is missing feel free to make a PR or an issue
+                            codeBlock [ "TextDecorationColor.white" ]
 
-                            You might want to store CSS in F# variables as well and Fss supports that with value methods.
-                            All Fss properties should have a value method that accepts a type for that Css property.
-                            Continuing with our TextDecorationColor example you could do the following"""
+                            str """This works in nearly all cases and is the idiomatic way to write most things.
+                                   However you sometimes also want to have the “right hand side” as a variable or parameter.
+                                   In this case you can fallback on the .Value function, which every CSS property has and is how the library works behind the scenes.
+                                Here is an example of that. """
                             codeBlock ["let myDecorationColor = CssColor.White"
-                                       "fss [ TextDecorationColor.Value(myDecorationColor) ]"]
-                            str """As this is something you might potentially want to do quite a bit of (and we do like pipelining) there exists a shorthand which is TextDecorationPrime"""
+                                       "fss [ TextDecorationColor.Value myDecorationColor ]"]
+                            str """As this is something you might potentially want to do quite a bit there exists a shorthand which is TextDecorationColor'"""
                             codeBlock ["let myDecorationColor = CssColor.White"
                                        "fss [ TextDecorationColor' myDecorationColor ]"]
+                            str """The .Value function is particularly useful when you wish to apply a function to a property. Like pixel size or percent, that does not exist as a member on the property you are trying to style."""
 
                             h3 [] [ str "Shorthands" ]
                             div [ ClassName multilineText ]
