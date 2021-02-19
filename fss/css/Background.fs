@@ -450,114 +450,35 @@ module Background =
         static member Value (image: Image) = image |> imageValue
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
 
-        static member LinearGradient (start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.LinearGradient(start, last)
-        static member LinearGradient (angle: Units.Angle.Angle, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.LinearGradient(angle, start, last)
-        static member LinearGradient (sideOrCorner: SideOrCorner, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.LinearGradient(sideOrCorner, start, last)
-        static member LinearGradient (colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.LinearGradient(colors)
-        static member LinearGradient (colors: IColorStop list) =
-            imageValue <| Image.Image.LinearGradient(colors)
-        static member LinearGradient (angle: Units.Angle.Angle, colors: IColorStop list) =
-            imageValue <| Image.Image.LinearGradient(angle, colors)
-        static member LinearGradient (angle: Units.Angle.Angle, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.LinearGradient(angle, colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, colors: IColorStop list) =
-            imageValue <| Image.Image.LinearGradient(sideOrCorner, colors)
-        static member LinearGradient (sideOrCorner: SideOrCorner, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.LinearGradient(sideOrCorner, colors)
+        static member LinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.Image.LinearGradient((angle, gradients))
+        static member LinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Size.Size) list) =
+            imageValue <| Image.Image.LinearGradient((angle, gradients))
+        static member LinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
+            imageValue <| Image.Image.LinearGradients(gradients)
+        static member LinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Size.Size) list)) list) =
+            imageValue <| Image.Image.LinearGradients(gradients)
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Size.Size) list) =
+            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+        static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Size.Size) list)) list) =
+            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
+        static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
+            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RepeatingLinearGradient (start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RepeatingLinearGradient(start, last)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RepeatingLinearGradient(angle, start, last)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, start, last)
-        static member RepeatingLinearGradient (colors: IColorStop list) =
-            imageValue <| Image.Image.RepeatingLinearGradient(colors)
-        static member RepeatingLinearGradient (colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RepeatingLinearGradient(colors)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, colors: IColorStop list) =
-            imageValue <| Image.Image.RepeatingLinearGradient(angle, colors)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RepeatingLinearGradient(angle, colors)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, colors: IColorStop list) =
-            imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, colors)
-        static member RepeatingLinearGradient (sideOrCorner: SideOrCorner, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RepeatingLinearGradient(sideOrCorner, colors)
-
-        static member RadialGradient (start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RadialGradient(start, last)
-        static member RadialGradient (colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RadialGradient(colors)
-        static member RadialGradient (colors: IColorStop list) =
-            imageValue <| Image.Image.RadialGradient(colors)
-        static member RadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RadialGradient(shape, start, last)
-        static member RadialGradient (side: Side, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RadialGradient(side, start, last)
-        static member RadialGradient (side: Side, colors: IColorStop list) =
-            imageValue <| Image.Image.RadialGradient(side, colors)
-        static member RadialGradient (side: Side, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RadialGradient(side, colors)
-        static member RadialGradient (shape: Shape, colors: IColorStop list) =
-            imageValue <| Image.Image.RadialGradient(shape, colors)
-        static member RadialGradient (shape: Shape, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RadialGradient(shape, colors)
-        static member RadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RadialGradient(shape, side, start, last)
-        static member RadialGradient (shape: Shape, side: Side, colors: IColorStop list) =
-            imageValue <| Image.Image.RadialGradient(shape, side, colors)
-        static member RadialGradient (shape: Shape, side: Side, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RadialGradient(shape, side, colors)
-
-        static member RepeatingRadialGradient (start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RepeatingRadialGradient(start, last)
-        static member RepeatingRadialGradient (colors: IColorStop list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(colors)
-        static member RepeatingRadialGradient (colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RepeatingRadialGradient(colors)
-        static member RepeatingRadialGradient (side: Side, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RadialGradient(side, start, last)
-        static member RepeatingRadialGradient (side: Side, colors: IColorStop list) =
-            imageValue <| Image.Image.RadialGradient(side, colors)
-        static member RepeatingRadialGradient (side: Side, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RadialGradient(side, colors)
-        static member RepeatingRadialGradient (shape: Shape, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, start, last)
-        static member RepeatingRadialGradient (shape: Shape, colors: IColorStop list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, colors)
-        static member RepeatingRadialGradient (shape: Shape, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, start, last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, colors: IColorStop list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, start: IColorStop, last: IColorStop) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, start, last)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: IColorStop list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, colors)
-        static member RepeatingRadialGradient (shape: Shape, side: Side, position: ImagePosition, colors: CssColor list) =
-            let colors = colors |> List.map (fun x -> x :> IColorStop)
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, side, position, colors)
+        static member RadialGradient (shape: Shape, size: Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradient (shape: Shape, size: Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+            imageValue <| Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradients (gradients: (Shape * Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Percent.Percent) list) list) =
+            imageValue <| Image.Image.RadialGradients(gradients)
+        static member RadialGradients (gradients: (Shape * Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Size.Size) list) list) =
+            imageValue <| Image.Image.RadialGradients(gradients)
+        static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
 
     /// <summary>Draws background image on element.</summary>
     /// <param name="image">

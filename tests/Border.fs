@@ -263,8 +263,8 @@ module Border =
                     [ "borderImageSource" ==> "url(image.jpg)" ]
                 test
                     "Border image source linear gradient"
-                    [ BorderImageSource.LinearGradient(ToTop, CssColor.red, CssColor.yellow) ]
-                    [ "borderImageSource" ==> "linear-gradient(to top, #ff0000, #ffff00)" ]
+                    [ BorderImageSource.LinearGradient(deg 45., [ CssColor.red, pct 0; CssColor.blue, pct 100 ]) ]
+                    [ "borderImageSource" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
                 test
                     "Border image source inherit"
                     [ BorderImageSource.Inherit ]

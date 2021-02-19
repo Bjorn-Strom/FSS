@@ -69,10 +69,6 @@ module Functions =
 
         FontTypes.FontName fontFamily
 
-    // Image
-    let stop (color: CssColor) (stop: ILengthPercentage) = ColorStop(color, stop) :> IColorStop
-    let stop2 (color: CssColor) (stop1: ILengthPercentage) (stop2: ILengthPercentage) = ColorStop2(color, stop1, stop2) :> IColorStop
-
     // Color
     let rgb (r: int) (g: int) (b: int) = CssColor.Rgb(r,g,b)
     let rgba (r: int) (g: int) (b: int) (a: float) = CssColor.Rgba(r,g,b,a)
