@@ -58,6 +58,18 @@ module Background =
                     [ BackgroundImage.RadialGradient(Ellipse, FarthestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
+                    "background as conic gradient"
+                    [BackgroundImage.ConicGradient(deg 0., pct 50, pct 50, [ CssColor.red, deg 0.; CssColor.orange, deg 90.; CssColor.yellow, deg 180.; CssColor.green, deg 270.; CssColor.blue, deg 360.; ])]
+                    [ "backgroundImage" ==> "conic-Gradient(from 0.00deg at 50% 50%, #ff0000 0.00deg, #ffa500 90.00deg, #ffff00 180.00deg, #008000 270.00deg, #0000ff 360.00deg)"]
+                test
+                    "background as conic gradient"
+                    [BackgroundImage.ConicGradient(rad 3.1416, pct 10, pct 50, [ hex "#e66465", deg 0.; hex "#9198e5", deg 360. ])]
+                    [ "backgroundImage" ==> "conic-Gradient(from 3.1416rad at 10% 50%, #e66465 0.00deg, #9198e5 360.00deg)"]
+                test
+                    "background as repeating conic gradient"
+                    [ BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50, [ CssColor.white, pct 0; CssColor.white, pct 25; CssColor.black, pct 25; CssColor.black, pct 50; ]) ]
+                    [ "backgroundImage" ==> "repeating-conic-Gradient(from 0.00deg at 50% 50%, #ffffff 0%, #ffffff 25%, #000000 25%, #000000 50%)"]
+                test
                     "background position to top"
                     [ BackgroundPosition.Top ]
                     [ "backgroundPosition" ==> "top"]

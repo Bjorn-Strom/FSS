@@ -480,6 +480,15 @@ module Background =
         static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
 
+        static member ConicGradient (angle: Units.Angle.Angle, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Angle.Angle) list) =
+            imageValue <| Image.Image.ConicGradient(angle, x, y, gradients)
+        static member RepeatingConicGradient (angle: Units.Angle.Angle, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Angle.Angle) list) =
+            imageValue <| Image.Image.RepeatingConicGradient(angle, x, y, gradients)
+        static member ConicGradient (angle: Units.Angle.Angle, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.Image.ConicGradient(angle, x, y, gradients)
+        static member RepeatingConicGradient (angle: Units.Angle.Angle, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.Image.RepeatingConicGradient(angle, x, y, gradients)
+
     /// <summary>Draws background image on element.</summary>
     /// <param name="image">
     ///     can be:
@@ -604,10 +613,6 @@ module Background =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Isolation' (isolation: IIsolation) = isolation |> Isolation.Value
-
-
-
-
 
 [<RequireQualifiedAccess>]
 module BoxDecorationBreakType =

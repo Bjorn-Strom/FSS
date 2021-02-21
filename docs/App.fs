@@ -1234,8 +1234,8 @@ module App =
                         Label' "Linear gradient style 1"
                         yield! box
                         BackgroundImage.LinearGradient(deg 0.,
-                                                       [ CssColor.Hex "e66465", pct 0
-                                                         CssColor.Hex "9198e5", pct 100 ])
+                                                       [ hex "e66465", pct 0
+                                                         hex "9198e5", pct 100 ])
                     ]
             let linearGradientStyle2 =
                 fss
@@ -1243,9 +1243,9 @@ module App =
                         yield! box
                         Label' "Linear gradient style 2"
                         BackgroundImage.LinearGradient(turn 0.25,
-                                                       [CssColor.Hex "3f87a6", pct 0
-                                                        CssColor.Hex "ebf8e1", pct 50
-                                                        CssColor.Hex "f69d3c", pct 100])
+                                                       [hex "3f87a6", pct 0
+                                                        hex "ebf8e1", pct 50
+                                                        hex "f69d3c", pct 100])
                     ]
             let linearGradientStyle3 =
                 fss
@@ -1254,10 +1254,10 @@ module App =
                         Label' "Linear gradient style 3"
                         BackgroundImage.LinearGradient(deg 270.,
                                                        [
-                                                           CssColor.Hex "333", pct 0
-                                                           CssColor.Hex "333", pct 50
-                                                           CssColor.Hex "eee", pct 75
-                                                           CssColor.Hex "333", pct 75
+                                                           hex "333", pct 0
+                                                           hex "333", pct 50
+                                                           hex "eee", pct 75
+                                                           hex "333", pct 75
                                                        ])
                     ]
             let repeatingLinearGradientStyle1 =
@@ -1267,10 +1267,10 @@ module App =
                         Label' "Repeating Linear gradient style 1"
                         BackgroundImage.RepeatingLinearGradient(deg 0.,
                                                        [
-                                                           CssColor.Hex "e66465", px 0
-                                                           CssColor.Hex "e66465", px 20
-                                                           CssColor.Hex "9198e5", px 20
-                                                           CssColor.Hex "9198e5", px 25
+                                                           hex "e66465", px 0
+                                                           hex "e66465", px 20
+                                                           hex "9198e5", px 20
+                                                           hex "9198e5", px 25
                                                        ])
                     ]
             let repeatingLinearGradientStyle2 =
@@ -1280,9 +1280,9 @@ module App =
                         Label' "Repeating Linear gradient style 2"
                         BackgroundImage.RepeatingLinearGradient(deg 45.,
                                                        [
-                                                           CssColor.Hex "3f87a6", px 0
-                                                           CssColor.Hex "ebf8e1", px 15
-                                                           CssColor.Hex "f69d3c", px 20
+                                                           hex "3f87a6", px 0
+                                                           hex "ebf8e1", px 15
+                                                           hex "f69d3c", px 20
                                                        ])
                     ]
             let repeatingLinearGradientsStyle =
@@ -1316,8 +1316,8 @@ module App =
                         yield! box
                         Label' "Radial Gradient style 1"
                         BackgroundImage.RadialGradient(Ellipse, FarthestCorner, pct 50, pct 50,
-                                                       [ CssColor.Hex "e66465", pct 0
-                                                         CssColor.Hex "9198e5", pct 100])
+                                                       [ hex "e66465", pct 0
+                                                         hex "9198e5", pct 100])
                     ]
             let radialGradientStyle2 =
                 fss
@@ -1326,9 +1326,9 @@ module App =
                         yield! box
                         BackgroundImage.RadialGradient(Ellipse, ClosestSide, pct 50, pct 50,
                                 [
-                                    CssColor.Hex "3f87a6", pct 0
-                                    CssColor.Hex "ebf8e1", pct 50
-                                    CssColor.Hex "f69d3c", pct 100
+                                    hex "3f87a6", pct 0
+                                    hex "ebf8e1", pct 50
+                                    hex "f69d3c", pct 100
                                 ])
                     ]
             let radialGradientStyle3 =
@@ -1337,10 +1337,10 @@ module App =
                         yield! box
                         Label' "Radial Gradient style 3"
                         BackgroundImage.RadialGradient(Circle, FarthestCorner, pct 100, pct 50,
-                            [CssColor.Hex "333", pct 0
-                             CssColor.Hex "333", pct 50
-                             CssColor.Hex "eee", pct 75
-                             CssColor.Hex "333", pct 75 ])
+                            [hex "333", pct 0
+                             hex "333", pct 50
+                             hex "eee", pct 75
+                             hex "333", pct 75 ])
                     ]
             let repeatingRadialGradientStyle1 =
                 fss
@@ -1350,8 +1350,8 @@ module App =
                         BackgroundImage.RepeatingRadialGradient(
                                 Ellipse, FarthestCorner, pct 50, pct 50,
                                     [
-                                        CssColor.Hex "e66465", pct 0
-                                        CssColor.Hex "9198e5", pct 20
+                                        hex "e66465", pct 0
+                                        hex "9198e5", pct 20
                                     ])
                     ]
             let repeatingRadialGradientStyle2 =
@@ -1362,9 +1362,9 @@ module App =
                         BackgroundImage.RepeatingRadialGradient(
                             Ellipse, ClosestSide, pct 50, pct 50,
                                 [
-                                    CssColor.Hex "3f87a6", pct 0
-                                    CssColor.Hex "ebf8e1", pct 50
-                                    CssColor.Hex "f69d3c", pct 100
+                                    hex "3f87a6", pct 0
+                                    hex "ebf8e1", pct 50
+                                    hex "f69d3c", pct 100
                                 ])
                     ]
             let repeatingRadialGradientStyle3 =
@@ -1375,11 +1375,88 @@ module App =
                         BackgroundImage.RepeatingRadialGradient(
                                 Circle, FarthestCorner, pct 100, pct 50,
                                     [
-                                        CssColor.Hex "333", px 0
-                                        CssColor.Hex "333", px 10
-                                        CssColor.Hex "eee", px 10
-                                        CssColor.Hex "eee", px 20
+                                        hex "333", px 0
+                                        hex "333", px 10
+                                        hex "eee", px 10
+                                        hex "eee", px 20
                                     ])
+                    ]
+            let conicGradientStyle1 =
+                fss
+                    [
+                        Label' "Conic gradient style 1"
+                        yield! box
+                        BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
+                              [
+                                  CssColor.red, deg 0.
+                                  CssColor.orange, deg 90.
+                                  CssColor.yellow, deg 180.
+                                  CssColor.green, deg 270.
+                                  CssColor.blue, deg 360.
+                              ])
+                    ]
+            let conicGradientStyle2 =
+                fss
+                    [
+                        Label' "Conic gradient style 2"
+                        yield! box
+                        BackgroundImage.ConicGradient(rad 3.1416, pct 10, pct 50,
+                                                      [
+                                                            hex "#e66465", deg 0.
+                                                            hex "#9198e5", deg 360.
+                                                      ])
+                    ]
+            let conicGradientStyle3 =
+                fss
+                    [
+                        Label' "Conic gradient style 3"
+                        yield! box
+                        BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
+                                                      [
+                                                         CssColor.red, deg 6.
+                                                         CssColor.orange, deg 6.
+                                                         CssColor.orange, deg 18.
+                                                         CssColor.yellow, deg 18.
+                                                         CssColor.yellow, deg 45.
+                                                         CssColor.green, deg 45.
+                                                         CssColor.green, deg 110.
+                                                         CssColor.blue, deg 110.
+                                                         CssColor.blue, deg 200.
+                                                         CssColor.purple, deg 200.
+                                                      ])
+                    ]
+            let conicGradientStyle4 =
+                fss
+                    [
+                        Label' "Conic gradient style 4"
+                        yield! box
+                        BorderRadius' <| px 200
+                        BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
+                                                      [
+                                                         CssColor.yellow, deg (360. / 6.)
+                                                         CssColor.lime,   deg <| (360. / 6.) * 2.
+                                                         CssColor.blue,   deg <| (360. / 6.) * 3.
+                                                         CssColor.violet, deg <| (360. / 6.) * 4.
+                                                         CssColor.red,    deg <| (360. / 6.) * 5.
+                                                         CssColor.yellow, deg <| (360. / 6.) * 6.
+                                                      ])
+                    ]
+            let repeatingConicGradientStyle =
+                fss
+                    [
+                        Label' "Repeating conic gradient style"
+                        yield! box
+                        BackgroundSize.Value(px 50, px 50)
+                        BorderColor.black
+                        BorderStyle.Solid
+                        BorderWidth' (px 1)
+                        BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50,
+                                                      [
+                                                         CssColor.white, pct 0
+                                                         CssColor.white, pct 25
+                                                         CssColor.black, pct 25
+                                                         CssColor.black, pct 50
+                                                      ])
                     ]
 
             article []
@@ -1390,22 +1467,22 @@ module App =
                             h3 [] [ str "Linear gradient" ]
                             codeBlock ["let linearGradientStyle1 = "
                                        "    BackgroundImage.LinearGradient(deg 0.,"
-                                       "        [ CssColor.Hex \"e66465\", pct 0"
-                                       "          CssColor.Hex \"9198e5\", pct 100 ])"
+                                       "        [ hex \"e66465\", pct 0"
+                                       "          hex \"9198e5\", pct 100 ])"
                                        ""
                                        "let linearGradientStyle2 ="
                                        "    BackgroundImage.LinearGradient(turn 0.25,"
-                                       "                                   [CssColor.Hex \"3f87a6\", pct 0"
-                                       "                                    CssColor.Hex \"ebf8e1\", pct 50"
-                                       "                                    CssColor.Hex \"f69d3c\", pct 100])"
+                                       "                                   [hex \"3f87a6\", pct 0"
+                                       "                                    hex \"ebf8e1\", pct 50"
+                                       "                                    hex \"f69d3c\", pct 100])"
                                        ""
                                        "let linearGradientStyle3 ="
                                        "    BackgroundImage.LinearGradient(deg 270.,"
                                        "                                   ["
-                                       "                                       CssColor.Hex \"333\", pct 0"
-                                       "                                       CssColor.Hex \"333\", pct 50"
-                                       "                                       CssColor.Hex \"eee\", pct 75"
-                                       "                                       CssColor.Hex \"333\", pct 75"
+                                       "                                       hex \"333\", pct 0"
+                                       "                                       hex \"333\", pct 50"
+                                       "                                       hex \"eee\", pct 75"
+                                       "                                       hex \"333\", pct 75"
                                        "                                   ])"]
 
                             div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
@@ -1418,18 +1495,18 @@ module App =
                             codeBlock [ "let repeatingLinearGradientStyle1 ="
                                         "   BackgroundImage.RepeatingLinearGradient(deg 0.,"
                                         "               ["
-                                        "                   CssColor.Hex \"e66465\", px 0"
-                                        "                   CssColor.Hex \"e66465\", px 20"
-                                        "                   CssColor.Hex \"9198e5\", px 20"
-                                        "                   CssColor.Hex \"9198e5\", px 25"
+                                        "                   hex \"e66465\", px 0"
+                                        "                   hex \"e66465\", px 20"
+                                        "                   hex \"9198e5\", px 20"
+                                        "                   hex \"9198e5\", px 25"
                                         "               ])"
                                         ""
                                         "let repeatingLinearGradientStyle2 ="
                                         "   BackgroundImage.RepeatingLinearGradient(deg 45.,"
                                         "                                  ["
-                                        "                                      CssColor.Hex \"3f87a6\", px 0"
-                                        "                                      CssColor.Hex \"ebf8e1\", px 15"
-                                        "                                      CssColor.Hex \"f69d3c\", px 20"
+                                        "                                      hex \"3f87a6\", px 0"
+                                        "                                      hex \"ebf8e1\", px 15"
+                                        "                                      hex \"f69d3c\", px 20"
                                         "                                  ])"]
                             div [ ClassName (fss [ Label' "Flex 2"; Display.Flex ]) ]
                                 [
@@ -1440,24 +1517,24 @@ module App =
 
                             codeBlock [ "let radialGradientStyle1 = "
                                         "  BackgroundImage.RadialGradient(Ellipse, FarthestCorner, pct 50, pct 50,"
-                                        "             [ CssColor.Hex \"e66465\", pct 0"
-                                        "               CssColor.Hex \"9198e5\", pct 100])"
+                                        "             [ hex \"e66465\", pct 0"
+                                        "               hex \"9198e5\", pct 100])"
                                         ""
                                         "let radialGradientStyle2 ="
                                         "  BackgroundImage.RadialGradient(Ellipse, ClosestSide, pct 50, pct 50,"
                                         "       ["
-                                        "           CssColor.Hex \"3f87a6\", pct 0"
-                                        "           CssColor.Hex \"ebf8e1\", pct 50"
-                                        "           CssColor.Hex \"f69d3c\", pct 100"
+                                        "           hex \"3f87a6\", pct 0"
+                                        "           hex \"ebf8e1\", pct 50"
+                                        "           hex \"f69d3c\", pct 100"
                                         "       ])"
                                         ""
                                         "let radialGradientStyle3 ="
                                         "  BackgroundImage.RadialGradient(Circle, FarthestCorner, pct 100, pct 50,"
                                         "        ["
-                                        "            CssColor.Hex \"333\", pct 0"
-                                        "            CssColor.Hex \"333\", pct 50"
-                                        "            CssColor.Hex \"eee\", pct 75"
-                                        "            CssColor.Hex \"333\", pct 75 ])"
+                                        "            hex \"333\", pct 0"
+                                        "            hex \"333\", pct 50"
+                                        "            hex \"eee\", pct 75"
+                                        "            hex \"333\", pct 75 ])"
                                         ]
 
                             div [ ClassName (fss [ Label' "Flex 3"; Display.Flex ]) ]
@@ -1471,33 +1548,102 @@ module App =
                                         "    BackgroundImage.RepeatingRadialGradient("
                                         "            Ellipse, FarthestCorner, pct 50, pct 50,"
                                         "                ["
-                                        "                    CssColor.Hex \"e66465\", pct 0"
-                                        "                    CssColor.Hex \"9198e5\", pct 20"
+                                        "                    hex \"e66465\", pct 0"
+                                        "                    hex \"9198e5\", pct 20"
                                         "                ])"
                                         ""
                                         "let repeatingRadialGradientStyle2 ="
                                         "   BackgroundImage.RepeatingRadialGradient("
                                         "        Ellipse, ClosestSide, pct 50, pct 50,"
                                         "            ["
-                                        "                CssColor.Hex \"3f87a6\", pct 0"
-                                        "                CssColor.Hex \"ebf8e1\", pct 50"
-                                        "                CssColor.Hex \"f69d3c\", pct 100"
+                                        "                hex \"3f87a6\", pct 0"
+                                        "                hex \"ebf8e1\", pct 50"
+                                        "                hex \"f69d3c\", pct 100"
                                         "            ])"
                                         ""
                                         "let repeatingRadialGradientStyle3 ="
                                         "    BackgroundImage.RepeatingRadialGradient("
                                         "            Circle, FarthestCorner, pct 100, pct 50,"
                                         "                ["
-                                        "                    CssColor.Hex \"333\", px 0"
-                                        "                    CssColor.Hex \"333\", px 10"
-                                        "                    CssColor.Hex \"eee\", px 10"
-                                        "                    CssColor.Hex \"eee\", px 20"
+                                        "                    hex \"333\", px 0"
+                                        "                    hex \"333\", px 10"
+                                        "                    hex \"eee\", px 10"
+                                        "                    hex \"eee\", px 20"
                                         "                ]"]
                             div [ ClassName (fss [ Label' "Flex 4"; Display.Flex ]) ]
                                 [
                                     div [ClassName repeatingRadialGradientStyle1 ] []
                                     div [ClassName repeatingRadialGradientStyle2 ] []
                                     div [ClassName repeatingRadialGradientStyle3 ] []
+                                ]
+                            h3 [] [ str "Conic gradient" ]
+                            codeBlock ["let conicGradientStyle1 = "
+                                       "    BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,"
+                                       "                                  ["
+                                       "                                      CssColor.red, deg 0."
+                                       "                                      CssColor.orange, deg 90."
+                                       "                                      CssColor.yellow, deg 180."
+                                       "                                      CssColor.green, deg 270."
+                                       "                                      CssColor.blue, deg 360."
+                                       "                                  ])"
+                                       ""
+                                       "let conicGradientStyle2 ="
+                                       "     BackgroundImage.ConicGradient(rad 3.1416, pct 10, pct 50,"
+                                       "                                   ["
+                                       "                                         hex \"#e66465\", deg 0."
+                                       "                                         hex \"#9198e5\", deg 360."
+                                       "                                   ])"
+                                       ""
+                                       "let conicGradientStyle3 ="
+                                       "     BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,"
+                                       "                                   ["
+                                       "                                      CssColor.red, deg 6."
+                                       "                                      CssColor.orange, deg 6."
+                                       "                                      CssColor.orange, deg 18."
+                                       "                                      CssColor.yellow, deg 18."
+                                       "                                      CssColor.yellow, deg 45."
+                                       "                                      CssColor.green, deg 45."
+                                       "                                      CssColor.green, deg 110."
+                                       "                                      CssColor.blue, deg 110."
+                                       "                                      CssColor.blue, deg 200."
+                                       "                                      CssColor.purple, deg 200."
+                                       "                                   ])"
+                                       ""
+                                       "let conicGradientStyle4 = "
+                                       "     BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,"
+                                       "       ["
+                                       "          CssColor.yellow, deg (360. / 6.)"
+                                       "          CssColor.lime,   deg <| (360. / 6.) * 2."
+                                       "          CssColor.blue,   deg <| (360. / 6.) * 3."
+                                       "          CssColor.violet, deg <| (360. / 6.) * 4."
+                                       "          CssColor.red,    deg <| (360. / 6.) * 5."
+                                       "          CssColor.yellow, deg <| (360. / 6.) * 6."
+                                       "       ])"]
+
+                            div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
+                                [
+                                    div [ClassName conicGradientStyle1 ] []
+                                    div [ClassName conicGradientStyle2 ] []
+                                    div [ClassName conicGradientStyle3 ] []
+                                    div [ClassName conicGradientStyle4 ] []
+                                ]
+                            h3 [] [ str "Repeating Conic gradient" ]
+                            codeBlock ["let linearGradientStyle1 = "
+                                       "    BackgroundSize.Value(px 50, px 50)"
+                                       "    BorderColor.black"
+                                       "    BorderStyle.Solid"
+                                       "    BorderWidth' (px 1)"
+                                       "    BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50,"
+                                       "                                  ["
+                                       "                                     CssColor.white, pct 0"
+                                       "                                     CssColor.white, pct 25"
+                                       "                                     CssColor.black, pct 25"
+                                       "                                     CssColor.black, pct 50"
+                                       "                                  ])"]
+
+                            div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
+                                [
+                                    div [ClassName repeatingConicGradientStyle ] []
                                 ]
                         ]
                     ]
@@ -1660,263 +1806,7 @@ module App =
                         content model
                     ]
             ]
-(*
 
-        let foo =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.LinearGradient (deg 360.,
-                        [
-                            CssColor.Hex "e66465", pct 0
-                            CssColor.Hex "9198e5", pct 100
-                        ])
-                ]
-        let foo2 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.LinearGradient (turn 0.25,
-                        [
-                            CssColor.Hex "3f87a6", pct 0
-                            CssColor.Hex "ebf8e1", pct 50
-                            CssColor.Hex "f69d3c", pct 100
-                        ])
-                ]
-        let foo3 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.LinearGradient (deg 270.,
-                        [
-                            CssColor.Hex "333", pct 0
-                            CssColor.Hex "333", pct 50
-                            CssColor.Hex "eee", pct 75
-                            CssColor.Hex "333", pct 75
-                        ])
-                ]
-        let foo4 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.LinearGradients
-                        [
-                            deg 217.,
-                                [
-                                    CssColor.Rgba(255, 0, 0, 0.8), pct 0
-                                    CssColor.Rgba(255, 0, 0, 0.0), pct 70
-                                ]
-                            deg 127.,
-                                [
-                                    CssColor.Rgba(0, 255, 0,0.8), pct 0
-                                    CssColor.Rgba(0, 255, 0,0.0), pct 70
-                                ]
-                            deg 336.,
-                                [
-                                    CssColor.Rgba(0, 0, 255, 0.8), pct 0
-                                    CssColor.Rgba(0, 0, 255,0.0), pct 70
-                                ]
-
-                        ]
-                ]
-
-        let foo5 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RepeatingLinearGradient (deg 360.,
-                        [
-                            CssColor.Hex "e66465", px 0
-                            CssColor.Hex "e66465", px 20
-                            CssColor.Hex "9198e5", px 20
-                            CssColor.Hex "9198e5", px 25
-                        ])
-                ]
-
-        let foo6 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RepeatingLinearGradient (deg 45.,
-                        [
-                            CssColor.Hex "3f87a6", pct 0
-                            CssColor.Hex "ebf8e1", pct 15
-                            CssColor.Hex "f69d3c", pct 20
-                        ])
-                ]
-
-        let foo7 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RepeatingLinearGradients
-                        [
-                            deg 217.,
-                                [
-                                    CssColor.Rgba(255, 0, 0, 0.8), pct 0
-                                    CssColor.Rgba(255, 0, 0, 0.0), pct 70
-                                ]
-                            deg 127.,
-                                [
-                                    CssColor.Rgba(0, 255, 0,0.8), pct 0
-                                    CssColor.Rgba(0, 255, 0,0.0), pct 70
-                                ]
-                            deg 336.,
-                                [
-                                    CssColor.Rgba(0, 0, 255, 0.8), pct 0
-                                    CssColor.Rgba(0, 0, 255,0.0), pct 70
-                                ]
-
-                        ]
-                ]
-
-        let foo8 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RepeatingLinearGradients
-                        [
-                            deg 0.,
-                                [
-                                    CssColor.transparent, px 0
-                                    CssColor.Hex "4d9f0c", px 40
-                                ]
-                            turn 0.25,
-                                [
-                                    CssColor.transparent, px 0
-                                    CssColor.Hex "3f87a6", px 20
-                                ]
-                        ]
-                ]
-
-        let foo9 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RadialGradient(Ellipse, FarthestCorner, pct 50, pct 50,
-                                                   [
-                                                       CssColor.Hex "e66465", pct 0
-                                                       CssColor.Hex "9198e5", pct 100
-                                                   ])
-                ]
-
-        let foo10 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RadialGradient(Ellipse, ClosestSide, pct 50, pct 50,
-                                                   [
-                                                       CssColor.Hex "3f87a6", pct 0
-                                                       CssColor.Hex "ebf8e1", pct 50
-                                                       CssColor.Hex "f69d3c", pct 100
-                                                   ])
-                ]
-
-        let foo11 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RadialGradient(Circle, FarthestCorner, pct 100, pct 50,
-                                                   [
-                                                       CssColor.Hex "333", pct 0
-                                                       CssColor.Hex "333", pct 50
-                                                       CssColor.Hex "eee", pct 75
-                                                       CssColor.Hex "333", pct 75
-                                                   ])
-                ]
-
-        let foo12 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RadialGradients
-                        [
-                            Ellipse, FarthestCorner, pct 50, pct 0,
-                                [
-                                    CssColor.Hex "e66465", pct 0
-                                    CssColor.transparent, pct 100
-                                ]
-                            Ellipse, FarthestCorner, pct 50, pct 100,
-                                [
-                                    CssColor.Hex "4d9f0c", pct 0
-                                    CssColor.transparent, pct 100
-                                ]
-                        ]
-                ]
-
-        let foo13 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RepeatingRadialGradient(
-                            Ellipse, FarthestCorner, pct 50, pct 50,
-                                [
-                                    CssColor.Hex "e66465", pct 0
-                                    CssColor.Hex "9198e5", pct 20
-                                ])
-                ]
-
-        let foo14 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RepeatingRadialGradient(
-                            Ellipse, ClosestSide, pct 50, pct 50,
-                                [
-                                    CssColor.Hex "3f87a6", pct 0
-                                    CssColor.Hex "ebf8e1", pct 50
-                                    CssColor.Hex "f69d3c", pct 100
-                                ])
-                ]
-
-        let foo15 =
-            fss
-                [
-                    Width' (px 200)
-                    Height' (px 200)
-                    BackgroundImage.RepeatingRadialGradient(
-                            Circle, FarthestCorner, pct 100, pct 50,
-                                [
-                                    CssColor.Hex "333", px 0
-                                    CssColor.Hex "333", px 10
-                                    CssColor.Hex "eee", px 10
-                                    CssColor.Hex "eee", px 20
-                                ])
-                ]
-
-        div [ ClassName (fss [ Display.Flex; FlexDirection.Row; FlexWrap.Wrap ]) ]
-            [
-                div [ClassName foo] [ ]
-                div [ClassName foo2] [ ]
-                div [ClassName foo3] [ ]
-                div [ClassName foo4] [ ]
-                div [ClassName foo5] [ ]
-                div [ClassName foo6] [ ]
-                div [ClassName foo7] [ ]
-                div [ClassName foo8] [ ]
-                div [ClassName foo9 ] [ ]
-                div [ClassName foo10 ] [ ]
-                div [ClassName foo11 ] [ ]
-                div [ClassName foo12 ] [ ]
-                div [ClassName foo13 ] [ ]
-                div [ClassName foo14 ] [ ]
-                div [ClassName foo15 ] [ ]
-            ]
-*)
     Program.mkSimple init update render
     |> Program.withReactSynchronous "elmish-app"
     |> Program.run

@@ -54,6 +54,31 @@ module Image =
     let private stringifyRepeatingRadialPx (gradient: Shape * Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Size.Size) list) =
         $"repeating-{stringifyRadialPx gradient}"
 
+    let private stringifyConicAngle (color, angle) =
+        $"{CssColorValue.color color} {Units.Angle.value angle}"
+
+    let private stringifyConicPercent (color, angle) =
+        $"{CssColorValue.color color} {Units.Percent.value angle}"
+
+    let private stringifyConicGradientAngle angle x y gradients =
+        let angle = Units.Angle.value angle
+        let x = Units.Percent.value x
+        let y = Units.Percent.value y
+        let gradients = Utilities.Helpers.combineComma stringifyConicAngle gradients
+        $"conic-Gradient(from {angle} at {x} {y}, {gradients})"
+
+    let private stringifyConicGradientPercent angle x y gradients =
+        let angle = Units.Angle.value angle
+        let x = Units.Percent.value x
+        let y = Units.Percent.value y
+        let gradients = Utilities.Helpers.combineComma stringifyConicPercent gradients
+        $"conic-Gradient(from {angle} at {x} {y}, {gradients})"
+
+    let private stringifyRepeatingConicAngle angle x y gradients =
+        $"repeating-{stringifyConicGradientAngle angle x y gradients}"
+
+    let private stringifyRepeatingConicPercent angle x y gradients =
+        $"repeating-{stringifyConicGradientPercent angle x y gradients}"
 
     type Image =
         static member Url (url: string) = sprintf "url(%s)" url
@@ -86,3 +111,13 @@ module Image =
             stringifyRepeatingRadialPercent(shape, size, x, y, gradients)
         static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
             stringifyRepeatingRadialPx(shape, size, x, y, gradients)
+
+        static member ConicGradient (angle: Units.Angle.Angle, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Angle.Angle) list) =
+            stringifyConicGradientAngle angle x y gradients
+        static member RepeatingConicGradient (angle: Units.Angle.Angle, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Angle.Angle) list) =
+            stringifyRepeatingConicAngle angle x y gradients
+        static member ConicGradient (angle: Units.Angle.Angle, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            stringifyConicGradientPercent angle x y gradients
+        static member RepeatingConicGradient (angle: Units.Angle.Angle, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            stringifyRepeatingConicPercent angle x y gradients
+
