@@ -5,8 +5,8 @@ module App =
     open Elmish.React
     open Fable.React
     open Fable.React.Props
-
     open Fss
+    open Elmish.Navigation
 
     type Page =
         | Overview
@@ -32,14 +32,14 @@ module App =
 
     type Model = { CurrentPage: Page }
 
-    type Msg = SetPage of Page
+    type Msg = Unit
 
-    let init() = { CurrentPage = Overview }
+    let init page =
+        let page = page |> Option.defaultValue Overview
+        { CurrentPage = page }, Cmd.none
 
-    let update (msg: Msg) (model: Model): Model =
-        match msg with
-        | SetPage example ->
-            { model with CurrentPage = example }
+    let update (msg: Msg) (model: Model) =
+        model, Cmd.none
 
     // Load font
     let headingFont = FontFamily.Custom "Nunito"
@@ -1666,12 +1666,20 @@ module App =
         | Fonts -> fonts
         | BackgroundImage -> backgroundImage
 
-    let menuListItem example currentExample onClick =
+    let menuListItem example currentExample page =
+        let listStyle =
+            fss
+                [
+                    Height' <| px 40
+                    Width' <| px 200
+                ]
         let buttonStyle =
             fss
                 [
                     Label' "Button Style"
                     Border.None
+                    TextDecoration.None
+                    Color.black
                     if example = currentExample then
                        BackgroundColor.Hex "#29A9DF"
                        BorderRightColor.Hex "#4a8ab5"
@@ -1681,7 +1689,7 @@ module App =
                         BackgroundColor.transparent
                     Margin' (px 0)
                     Padding' (px 10)
-                    Width' (px 200)
+                    Width' (px 50)
                     FontSize' (px 14)
                     TextAlign.Left
                     textFont
@@ -1692,12 +1700,9 @@ module App =
                         ]
                 ]
 
-        li []
+        li [ ClassName listStyle ]
             [
-                button [ ClassName buttonStyle; OnClick onClick ]
-                    [
-                        str <| pageToString example
-                    ]
+                a [ ClassName buttonStyle; Href $"#{Utilities.duToKebab example}" ] [ str $"{pageToString example}" ]
             ]
 
     let header =
@@ -1731,7 +1736,7 @@ module App =
                     PaddingRight' (px 5)
                     TextIndent' (px 0)
                 ]
-        let menuListItem' example = menuListItem example model.CurrentPage (fun _ -> dispatch <| SetPage example)
+        let menuListItem' example = menuListItem example model.CurrentPage example
         aside []
             [
                 ul [ ClassName menuList ]
@@ -1786,6 +1791,35 @@ module App =
                     ]
             ]
 
-    Program.mkSimple init update render
+    open Elmish.UrlParser
+
+    let pageParser : Parser<_,_> =
+        oneOf
+            [ map Overview (s <| Utilities.duToKebab Overview)
+              map Installation (s <| Utilities.duToKebab Installation)
+              map Philosophy (s <| Utilities.duToKebab Philosophy)
+              map BasicUse (s <| Utilities.duToKebab BasicUse)
+              map ConditionalStyling (s <| Utilities.duToKebab ConditionalStyling)
+              map Pseudo (s <| Utilities.duToKebab Pseudo)
+              map Composition (s <| Utilities.duToKebab Composition)
+              map Labels (s <| Utilities.duToKebab Labels)
+              map Transitions (s <| Utilities.duToKebab Transitions)
+              map KeyframesAnimations (s <| Utilities.duToKebab KeyframesAnimations)
+              map Combinators (s <| Utilities.duToKebab Combinators)
+              map MediaQueries (s <| Utilities.duToKebab MediaQueries)
+              map GlobalStyles (s <| Utilities.duToKebab GlobalStyles)
+              map Counters (s <| Utilities.duToKebab Counters)
+              map Fonts (s <| Utilities.duToKebab Fonts)
+              map BackgroundImage (s <| Utilities.duToKebab BackgroundImage)
+            ]
+
+    let urlUpdate (page: Page option) _ =
+        let page = page |> Option.defaultValue Overview
+        let model, _ = Some page |> init
+
+        { model with CurrentPage = page }, Cmd.none
+
+    Program.mkProgram init update render
+    |> Program.toNavigable (parseHash pageParser) urlUpdate
     |> Program.withReactSynchronous "elmish-app"
     |> Program.run
