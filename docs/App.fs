@@ -1674,7 +1674,7 @@ module App =
                     Border.None
                     if example = currentExample then
                        BackgroundColor.Hex "#29A9DF"
-                       BorderRightColor.Hex "#0170BA"
+                       BorderRightColor.Hex "#4a8ab5"
                        BorderRightWidth' (px 3)
                        BorderRightStyle.Solid
                     else
@@ -1705,10 +1705,8 @@ module App =
             fss
                 [
                     Label' "Header Style"
-                    GridArea' "nav"
-                    GridColumnEnd.Span 2
                     Color.white
-                    BackgroundColor.Hex "#0170BA"
+                    BackgroundColor.Hex "#4a8ab5"
                     PaddingLeft' (px 10)
                     AlignItems.Center
                 ]
@@ -1723,12 +1721,6 @@ module App =
         header  [ ClassName headerStyle ] [ h2 [ ClassName headerText ] [ str "Fss" ] ]
 
     let menu model (dispatch: Msg -> unit)=
-        let menuStyle =
-            fss
-                [
-                    Label' "Menu Style"
-                    GridArea' "menu"
-                ]
         let menuList =
             fss
                 [
@@ -1736,10 +1728,11 @@ module App =
                     ListStyleType.None
                     Margin' (px 0)
                     Padding' (px 0)
+                    PaddingRight' (px 5)
                     TextIndent' (px 0)
                 ]
         let menuListItem' example = menuListItem example model.CurrentPage (fun _ -> dispatch <| SetPage example)
-        aside [ ClassName menuStyle ]
+        aside []
             [
                 ul [ ClassName menuList ]
                     [
@@ -1767,41 +1760,27 @@ module App =
             fss
                 [
                     Label' "Content Style"
-                    GridArea' "content"
                     textFont
                 ]
         section [ ClassName contentStyle ] [ pageToContent model.CurrentPage ]
 
     let render (model: Model) (dispatch: Msg -> unit) =
-        let container =
+        let contentStyle =
             fss
                 [
-                    Label' "Container Style"
-                    Display.Flex
-                    JustifyContent.Center
-                ]
-        let grid =
-            fss
-                [
-                    Label' "Grid style"
-                    Display.Grid
-                    GridGap' (px 10)
-                    Height' (vh 100.)
+                    Label' "Content style"
                     Width' (pct 60)
                     MaxWidth' (pct 60)
-                    GridTemplateColumns.Values [fr 0.15; fr 1.]
-                    GridTemplateRows.Values [fr 0.05; fr 1.]
-                    GridTemplateAreas.Value
-                        [
-                            [ "nav"; "nav" ]
-                            [ "menu"; "content" ]
-                        ]
+                    Display.Flex
+                    FlexDirection.Row
+                    MarginLeft.Auto
+                    MarginRight.Auto
                 ]
-        div [ ClassName container ]
+        div []
             [
-                div [ ClassName grid ]
+                header
+                div [ ClassName contentStyle ]
                     [
-                        header
                         menu model dispatch
                         content model
                     ]
