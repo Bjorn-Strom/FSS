@@ -9,6 +9,7 @@ module App =
     open Fss
 
     open Markdown
+    open Service
 
     type Page =
         | Overview
@@ -32,16 +33,25 @@ module App =
         | Big
         | Small
 
-    type Model = { CurrentPage: Page }
+    type Model = { CurrentPage: Page; CurrentMarkdown: string }
 
-    type Msg = Unit
+    type Msg =
+        | GetMarkdown
+        | GotMarkdown of string
+        | FailedGettingMarkdown of exn
 
     let init page =
         let page = page |> Option.defaultValue Overview
-        { CurrentPage = page }, Cmd.none
+        { CurrentPage = page; CurrentMarkdown = "" }, Cmd.ofMsg GetMarkdown
 
     let update (msg: Msg) (model: Model) =
-        model, Cmd.none
+        match msg with
+        | GetMarkdown ->
+            model, Cmd.OfPromise.either getMarkdown (Utilities.duToString model.CurrentPage) GotMarkdown FailedGettingMarkdown
+        | GotMarkdown markdown ->
+            { model with CurrentMarkdown = markdown }, Cmd.none
+        | FailedGettingMarkdown e ->
+            model, Cmd.none
 
     // Load font
     let headingFont = FontFamily.Custom "Nunito"
@@ -1839,7 +1849,7 @@ let hoverStyle =
         let page = page |> Option.defaultValue Overview
         let model, _ = Some page |> init
 
-        { model with CurrentPage = page }, Cmd.none
+        { model with CurrentPage = page }, Cmd.ofMsg GetMarkdown
 
     Program.mkProgram init update render
     |> Program.toNavigable (parseHash pageParser) urlUpdate
