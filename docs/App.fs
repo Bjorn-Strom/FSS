@@ -3,10 +3,10 @@
 module App =
     open Elmish
     open Elmish.React
+    open Elmish.Navigation
     open Fable.React
     open Fable.React.Props
     open Fss
-    open Elmish.Navigation
 
     type Page =
         | Overview

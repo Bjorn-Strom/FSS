@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Logo.fs" />
+    <Compile Include="Markdown.fs" />
     <Compile Include="Utilities.fs" />
     <Compile Include="App.fs" />
     <Content Include="assets\logo.svg" />
