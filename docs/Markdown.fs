@@ -1,11 +1,19 @@
  namespace Docs
 
+
  module Markdown =
     open Fable.Core.JS
     open Fable.Core.JsInterop
+    open Fable.React
 
     let darcula:obj = importMember "react-syntax-highlighter/dist/styles/prism"
     let fsharp:obj = importMember "react-syntax-highlighter/dist/languages/prism"
+
+    type HighlightProps =
+        | Language of string
+        | Children of string
+        | ShowLineNumbers of bool
+        | Style of obj
 
     let syntaxHighlighter (props: HighlightProps list): ReactElement =
         printfn "SYNTAX HIGHLIGHTER FOO"
