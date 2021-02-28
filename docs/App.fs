@@ -8,6 +8,8 @@ module App =
     open Fable.React.Props
     open Fss
 
+    open Markdown
+
     type Page =
         | Overview
         | Installation
@@ -109,6 +111,26 @@ module App =
                             a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js" ]
                             str " FSS allows you to have CSS as a first class citizen in your F# code and aims to support most of the CSS spec."
                         ]
+                    let foo = """
+```fsharp
+let hoverStyle =
+     fss
+         [
+             Padding' (px 40)
+             Width' (px 100)
+             BackgroundColor.orangeRed
+             FontSize' (px 20)
+             BorderRadius' (px 5)
+             Color.white
+             Hover
+                 [
+                     BackgroundColor.chartreuse
+                     Color.black
+                 ]
+         ]
+```
+"""
+                    markdown [ Children foo; Renderers renderers  ]
                 ]
 
         let installation =

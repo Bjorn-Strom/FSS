@@ -2,12 +2,11 @@
 
 
  module Markdown =
-    open Fable.Core.JS
+    open Fable.Core
     open Fable.Core.JsInterop
     open Fable.React
 
-    let darcula:obj = importMember "react-syntax-highlighter/dist/styles/prism"
-    let fsharp:obj = importMember "react-syntax-highlighter/dist/languages/prism"
+    let materialDark:obj = importMember "react-syntax-highlighter/dist/styles/prism"
 
     type HighlightProps =
         | Language of string
@@ -16,7 +15,6 @@
         | Style of obj
 
     let syntaxHighlighter (props: HighlightProps list): ReactElement =
-        printfn "SYNTAX HIGHLIGHTER FOO"
         let propsObject = keyValueList CaseRules.LowerFirst props
         ofImport "default" "react-syntax-highlighter" propsObject []
 
@@ -29,13 +27,9 @@
           value: string }
 
     let renderers =
-        printfn "RENDERERS FOO"
-        createObj [ "code" ==> fun (a: Renderer) ->
-            printfn "%A" <| JSON.stringify a
-            printfn "CREATING A SYNTAX HIGHLIGGHTER IN A FUNCTION FOO"
-            syntaxHighlighter [ Language a.language; HighlightProps.Children a.value; ShowLineNumbers true ] ]
+        createObj [ "code" ==> fun (renderer: Renderer) ->
+            syntaxHighlighter [ Language renderer.language; HighlightProps.Children renderer.value; ShowLineNumbers true; Style materialDark ] ]
 
-    let reactMarkdown (props: MarkdownProps list): ReactElement =
-        printfn "REACT MARKDOWN FOO"
+    let markdown (props: MarkdownProps list): ReactElement =
         let propsObject = keyValueList CaseRules.LowerFirst props
         ofImport "default" "react-markdown" propsObject []
