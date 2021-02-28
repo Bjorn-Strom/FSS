@@ -1,19 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Logo.fs" />
-    <Compile Include="Markdown.fs" />
-    <Compile Include="Utilities.fs" />
-    <Compile Include="App.fs" />
-    <Content Include="assets\logo.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\fss\Fss.fsproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Fable.Elmish.Browser" Version="3.0.4" />
-  </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="assets\logo.svg" />
+        <Content Include="documentation\Overview.md" />
+
+        <Compile Include="Logo.fs" />
+        <Compile Include="Markdown.fs" />
+        <Compile Include="Utilities.fs" />
+        <Compile Include="Service.fs" />
+        <Compile Include="App.fs" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\fss\Fss.fsproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Fable.Elmish.Browser" Version="3.0.4" />
+        <PackageReference Include="Thoth.Fetch" Version="2.0.0" />
+    </ItemGroup>
+    <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
