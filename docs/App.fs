@@ -47,7 +47,8 @@ module App =
     let update (msg: Msg) (model: Model) =
         match msg with
         | GetMarkdown ->
-            model, Cmd.OfPromise.either getMarkdown (Utilities.duToString model.CurrentPage) GotMarkdown FailedGettingMarkdown
+            //model, Cmd.OfPromise.either getMarkdown (Utilities.duToString model.CurrentPage) GotMarkdown FailedGettingMarkdown
+            model, Cmd.none
         | GotMarkdown markdown ->
             { model with CurrentMarkdown = markdown }, Cmd.none
         | FailedGettingMarkdown e ->
@@ -121,26 +122,6 @@ module App =
                             a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js" ]
                             str " FSS allows you to have CSS as a first class citizen in your F# code and aims to support most of the CSS spec."
                         ]
-                    let foo = """
-```fsharp
-let hoverStyle =
-     fss
-         [
-             Padding' (px 40)
-             Width' (px 100)
-             BackgroundColor.orangeRed
-             FontSize' (px 20)
-             BorderRadius' (px 5)
-             Color.white
-             Hover
-                 [
-                     BackgroundColor.chartreuse
-                     Color.black
-                 ]
-         ]
-```
-"""
-                    markdown [ Children foo; Renderers renderers  ]
                 ]
 
         let installation =

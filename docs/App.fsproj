@@ -23,8 +23,8 @@
         <Compile Include="Markdown.fs" />
         <Compile Include="Utilities.fs" />
         <Compile Include="Service.fs" />
-        <Compile Include="App.fs" />
         <Compile Include="Logo.fs" />
+        <Compile Include="App.fs" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\fss\Fss.fsproj" />
