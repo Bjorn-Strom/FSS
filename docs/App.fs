@@ -964,19 +964,10 @@ module App =
         | BackgroundImage -> backgroundImage
 
     let menuListItem example currentExample =
-        let listStyle =
+        let linkStyle =
             fss
                 [
-                    Height' <| px 40
                     Width' <| px 200
-                ]
-        let buttonStyle =
-            fss
-                [
-                    Label' "Button Style"
-                    Border.None
-                    TextDecoration.None
-                    Color.black
                     if example = currentExample then
                        BackgroundColor.Hex "#29A9DF"
                        BorderRightColor.Hex "#4a8ab5"
@@ -984,23 +975,21 @@ module App =
                        BorderRightStyle.Solid
                     else
                         BackgroundColor.transparent
-                    Margin' (px 0)
-                    Padding' (px 10)
-                    Width' (px 50)
-                    FontSize' (px 14)
-                    TextAlign.Left
-                    textFont
-                    Cursor.Pointer
                     Hover
                         [
                             BackgroundColor.Hex "E0E0E0"
                         ]
+                    MarginRight' <| px 25
+                    Label' "Button Style"
+                    TextDecoration.None
+                    Color.black
+                    Padding' (px 10)
+                    FontSize' (px 14)
+                    textFont
+                    VerticalAlign.Middle
                 ]
 
-        li [ ClassName listStyle ]
-            [
-                a [ ClassName buttonStyle; Href $"#{Utilities.duToKebab example}" ] [ str $"{pageToString example}" ]
-            ]
+        a [ ClassName linkStyle; Href $"#{Utilities.duToKebab example}" ] [ str $"{pageToString example}" ]
 
     let header =
         let headerStyle =
@@ -1032,11 +1021,13 @@ module App =
                     Padding' (px 0)
                     PaddingRight' (px 5)
                     TextIndent' (px 0)
+                    Display.Flex
+                    FlexDirection.Column
                 ]
         let menuListItem' example = menuListItem example model.CurrentPage
         aside []
             [
-                ul [ ClassName menuList ]
+                div [ ClassName menuList ]
                     [
                         menuListItem' Overview
                         menuListItem' Installation
