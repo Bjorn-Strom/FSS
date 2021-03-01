@@ -22,7 +22,6 @@
         <Content Include="documentation\BackgroundImages.md" />
         <Compile Include="Markdown.fs" />
         <Compile Include="Utilities.fs" />
-        <Compile Include="Service.fs" />
         <Compile Include="Logo.fs" />
         <Compile Include="App.fs" />
     </ItemGroup>
@@ -31,7 +30,7 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Fable.Elmish.Browser" Version="3.0.4" />
-        <PackageReference Include="Thoth.Fetch" Version="2.0.0" />
+        <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
     </ItemGroup>
     <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

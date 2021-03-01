@@ -6,21 +6,24 @@ module App =
     open Elmish.Navigation
     open Fable.React
     open Fable.React.Props
+    open Fable.SimpleHttp
     open Fss
 
     open Markdown
-    open Service
+
+    let inline getMarkdown (markdown: string) =
+        Http.get $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/docs/documentation/{markdown}.md"
 
     type Page =
         | Overview
         | Installation
         | Philosophy
-        | BasicUse
+        | BasicUsage
         | ConditionalStyling
         | Pseudo
         | Composition
         | Labels
-        | Transitions
+        | Transition
         | KeyframesAnimations
         | Combinators
         | MediaQueries
@@ -33,24 +36,39 @@ module App =
         | Big
         | Small
 
-    type Model = { CurrentPage: Page; CurrentMarkdown: string }
+    type Model = { CurrentPage: Page; Pages: Map<Page, string>; CurrentMarkdown: string }
 
     type Msg =
         | GetMarkdown
         | GotMarkdown of string
-        | FailedGettingMarkdown of exn
+        | FailedGettingMarkdown of string
 
     let init page =
         let page = page |> Option.defaultValue Overview
-        { CurrentPage = page; CurrentMarkdown = "" }, Cmd.ofMsg GetMarkdown
+        { CurrentPage = page; Pages = Map.empty; CurrentMarkdown = "" }, Cmd.ofMsg GetMarkdown
 
     let update (msg: Msg) (model: Model) =
         match msg with
         | GetMarkdown ->
-            //model, Cmd.OfPromise.either getMarkdown (Utilities.duToString model.CurrentPage) GotMarkdown FailedGettingMarkdown
-            model, Cmd.none
+            Map.tryFind model.CurrentPage model.Pages
+            |> function
+                | None ->
+                    let nextCommand =
+                        async {
+                            let! (statusCode, response) = getMarkdown (Utilities.duToString model.CurrentPage)
+
+                            if statusCode = 200 then
+                                return GotMarkdown response
+                            else
+                                return FailedGettingMarkdown "Unable to get markdown"
+                        }
+                    model, Cmd.OfAsync.result nextCommand
+                | Some markdown ->
+                    model, Cmd.ofMsg <| GotMarkdown markdown
+
         | GotMarkdown markdown ->
-            { model with CurrentMarkdown = markdown }, Cmd.none
+            let pages = model.Pages.Add(model.CurrentPage, markdown)
+            { model with CurrentMarkdown = markdown; Pages = pages }, Cmd.none
         | FailedGettingMarkdown e ->
             model, Cmd.none
 
@@ -72,12 +90,12 @@ module App =
         | Overview -> "Overview"
         | Installation -> "Installation"
         | Philosophy -> "Philosophy"
-        | BasicUse -> "Basic Usage"
+        | BasicUsage -> "Basic Usage"
         | ConditionalStyling -> "Conditional Styling"
         | Pseudo -> "Pseduoclasses/elements"
         | Composition -> "Composition"
         | Labels -> "Labels"
-        | Transitions -> "Transitions"
+        | Transition -> "Transition"
         | KeyframesAnimations -> "Keyframes and animations"
         | Combinators -> "Combinators"
         | MediaQueries -> "Media queries"
@@ -97,149 +115,18 @@ module App =
                 ]
         pre [ ClassName codeBlock ] [ str (code |> String.concat "\n") ]
 
-    let pageToContent =
-        let imageStyle =
-            fss
-                [
-                    Label' "Image Style"
-                    Display.Flex
-                    JustifyContent.Center
-                ]
+    let pageToContent page currentMarkdown =
 
-        let overview =
-            article []
-                [
-                    div [ ClassName imageStyle ]
-                        [
-                            Logo.logoNormal
-                        ]
-                    h2 [] [ str "Overview" ]
-                    div [ ClassName multilineText ]
-                        [
-                            str
-                                """An opinionated styling library for F#.
-                                Built atop the fantastic """
-                            a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js" ]
-                            str " FSS allows you to have CSS as a first class citizen in your F# code and aims to support most of the CSS spec."
-                        ]
-                ]
-
-        let installation =
-            article []
-                [
-                    h2 [] [ str "Installation" ]
-                    str "In order to use Fss you need to install the "
-                    a [ Href "https://www.nuget.org/packages/fss-lib/" ] [ str "nuget" ]
-                    str " package"
-                    codeBlock [ "# nuget"
-                                "dotnet add package Fss-lib"
-                                ""
-                                "# paket"
-                                "paket add Fss-lib --project ./project/path" ]
-
-                    str """And you need to install """
-                    a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js" ]
-                    str """. Fss uses version 11 or greater"""
-                    codeBlock [ "# npm"
-                                "npm i @emotion/css"
-                                ""
-                                "# yarn"
-                                "yarn add @emotion/css"]
-                ]
-
-        let philosophy =
-            article []
-                [
-                    h2 [] [ str "Philosophy" ]
-                    str "The main idea behind Fss is discoverable CSS. Write CSS in F# quick and easy."
-
-                    str "There exists some quite good styling alternatives to F# already"
-                    ul []
-                        [
-                            li [] [
-                                a [ Href "https://fulma.github.io/Fulma/" ] [ str "Fulma"]
-                                str " which is a really nice wrapper over Bulma"
-                            ]
-                            li []
-                                [
-                                    a [ Href "https://github.com/zanaptak/TypedCssClasses" ] [ str "TypedCssClasses" ]
-                                    str " a type provider if you want to generate types from existing CSS or SCSS"
-                                ]
-                            li []
-                                [
-                                    str "Webpack configuration for CSS or SCSS"
-                                ]
-                        ]
-                    div [ ClassName multilineText ]
-                        [
-                            str """Ultimately I believe you will find whatever solution that suits your needs best.
-
-                            Writing css in your language has some nice benefits:"""
-                            ul []
-                                [
-                                    li [] [ str "Types" ]
-                                    li [] [ str "Declarative and maintainable styling." ]
-                                    li [] [ str "Easy to set up and use." ]
-                                    li [] [ str "Take advantage of nice F# syntax and features." ]
-                                    li [] [ str "Scoping! Having local styles will not affect other stuff somewhere else." ]
-                                    li [] [ str "Parameterize your styling." ]
-                                ]
-                        ]
-                ]
+        let overview = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
+        let installation = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
+        let philosophy = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
 
         let basicUse =
             let borderStyle = fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)" ]
             article []
                [
-                    h2 [] [ str "Basic usage" ]
-                    div [ ClassName multilineText ]
-                        [
-                            str """The main function this library supplies is the function fss. It takes a list of CSS properties and returns a string.
-                                This string is the classname you can give to your html tag.
-
-                                Simply write the CSS you want in PascalCase and dot yourself into the method you want.
-                                What is available are the typical options the property might provide.
-
-                                For example if you want """
-                            codeBlock ["text-decoration-color: white"]
-                            str """ then you write"""
-                            codeBlock [ "TextDecorationColor.white" ]
-
-                            str """This works in nearly all cases and is the idiomatic way to write most things.
-                                   However you sometimes also want to have the “right hand side” as a variable or parameter.
-                                   In this case you can fallback on the .Value function, which every CSS property has and is how the library works behind the scenes.
-                                Here is an example of that. """
-                            codeBlock ["let myDecorationColor = CssColor.White"
-                                       "fss [ TextDecorationColor.Value myDecorationColor ]"]
-                            str """As this is something you might potentially want to do quite a bit there exists a shorthand which is TextDecorationColor'"""
-                            codeBlock ["let myDecorationColor = CssColor.White"
-                                       "fss [ TextDecorationColor' myDecorationColor ]"]
-                            str """The .Value function is particularly useful when you wish to apply a function to a property. Like pixel size or percent, that does not exist as a member on the property you are trying to style."""
-
-                            h3 [] [ str "Shorthands" ]
-                            div [ ClassName multilineText ]
-                                [
-                                    str """I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be..
-                                    However as this project creates CSS and interacts with it, it has to deal with some of its shortcoming, like shorthands.
-
-                                    Therefore the shorthands that are included are limited to ones where using inherit, initial, unset or none is natural. Like text-decoration.
-                                    Resetting text-decoration would be  really annoying without it - having to go through each property resetting it.
-
-                                    However if shorthands is something you really want to use, you can use the custom escape hatch to write them up in string.
-                                    The escape hatch is a function that takes two string, a key and a value and attempts to make Css with it.
-                                    For example if I want to set border with shorthand I can write:
-                                    """
-                                    codeBlock [ "fss"
-                                                "[ Custom \"border\" \"4mm ridge rgba(170, 50, 220, .6)\" ]" ]
-
-                                    str """Which has the following result"""
-                                    div [ ClassName borderStyle ]
-                                        [
-                                            str "Border style made with custom escape hatch"
-                                        ]
-                                ]
-
-                        ]
+                    markdown [ Renderers renderers; Children currentMarkdown ]
+                    div [ ClassName borderStyle ] [ str "Border style made with custom escape hatch" ]
                ]
 
         let conditionalStyling =
@@ -258,29 +145,7 @@ module App =
                     ]
             article []
                 [
-                    h2 [] [ str "Conditional styling" ]
-                    str """If you want to style something conditionally you can use conditional or match expression
-
-                        For example if you've defined a union type for your button sizes that looks like this: """
-                    codeBlock [ "type ButtonSize ="
-                                "   | Small"
-                                "   | Big" ]
-                    str "You could have a function that takes this ButtonSize as a parameter and spits out the styling you want."
-                    codeBlock [ "let buttonStyle buttonType ="
-                                "  fss  ["
-                                "           match buttonType with"
-                                "           | Big ->"
-                                "               Height' (px 80)"
-                                "               Width' (px 80)"
-                                "           | Small ->"
-                                "               Height' (px 40)"
-                                "               Width' (px 40)"
-                                "       ]" ]
-                    str "This function creates a string that you use as your classname"
-                    codeBlock [ "button [ ClassName <| buttonStyle Small ] [ str \"Small\" ]"
-                                "button [ ClassName <| buttonStyle Big ] [ str \"Big\" ]" ]
-                    str "This has the following result: "
-
+                    markdown [ Renderers renderers; Children currentMarkdown ]
                     button [ ClassName <| buttonStyle Small ] [ str "Small" ]
                     button [ ClassName <| buttonStyle Big ] [ str "Big" ]
                 ]
@@ -319,57 +184,25 @@ module App =
                         After beforeAndAfter
                     ]
 
-            article []
-                [
-                    h2 [] [ str "Pseudo-classes" ]
-                    div [ ClassName multilineText ]
-                        [
-                            str """All pseudo class functions take a list of CSSProperties and return a CSSProperty, which the Fss function takes as a parameter.
-                            So doing pseudo classes is as easy as calling them within the fss function.
-                            Hover for example is done like so:
-                            """
-                            codeBlock ["let hoverStyle ="
-                                       "     fss"
-                                       "         ["
-                                       "             Padding' (px 40)"
-                                       "             Width' (px 100)"
-                                       "             BackgroundColor.orangeRed"
-                                       "             FontSize' (px 20)"
-                                       "             BorderRadius' (px 5)"
-                                       "             Color.white"
-                                       "             Hover"
-                                       "                 ["
-                                       "                     BackgroundColor.chartreuse"
-                                       "                     Color.black"
-                                       "                 ]"
-                                       "         ]" ]
-                            div [ ClassName hoverStyle ] [ str "Hover me!" ]
-                            h2 [] [ str "Pseudo-elements" ]
+            let examples =
+                    [ div [ ClassName hoverStyle ] [ str "Hover me!" ]
+                      div [ ClassName beforeAndAfter ] [ str " Some content surrounded by stuff " ]
+                    ]
 
-                            str """These bad boys work much in the same way as the pseudo classes. Example follows:"""
-                            codeBlock [ "let beforeAndAfterStyle = "
-                                        "   let beforeAndAfter ="
-                                        "      ["
-                                        "           Content.Value\"\""
-                                        "           Display.InlineBlock"
-                                        "           BackgroundColor.orangeRed"
-                                        "           Width' (px 10)"
-                                        "           Height' (px 10)"
-                                        "       ]"
-                                        "   fss"
-                                        "       ["
-                                        "           Before beforeAndAfter"
-                                        "           After beforeAndAfter"
-                                        "       ]"
-                                        "div [ ClassName beforeAndAfter ]"
-                                        "   ["
-                                        "       str \" Some content surrounded by stuff \""
-                                        "   ]"
-                                ]
-                            str """Results in"""
-                            div [ ClassName beforeAndAfter ] [ str " Some content surrounded by stuff " ]
-                        ]
-                ]
+            let pseudoElements =
+                currentMarkdown.Split "##"
+                |> Seq.toList
+                |> List.skip 1
+                |> List.zip examples
+                |> List.map (fun (e, s) ->
+                    fragment []
+                        [
+                            markdown [ Renderers renderers; Children $"## {s}" ]
+                            e
+                        ])
+
+            article [] pseudoElements
+
         let composition =
             article []
                 [
@@ -385,55 +218,20 @@ module App =
                             Color.red
                         ]
 
-                    h2 [] [ str "Composition" ]
-                    div [ ClassName multilineText ]
-                        [
-                            str """As Fss uses """
-                            a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js" ]
-                            str " to generate the CSS we get some nice benefits like "
-                            a [ Href "https://emotion.sh/docs/composition" ] [ str "composition" ]
-                            str """. Feel free to read emotions composition docs, the following example is a re-implementation of theirs."""
-
-                            codeBlock ["let baseStyle ="
-                                       "    ["
-                                       "        BackgroundColor.darkGreen"
-                                       "        Color.turquoise"
-                                       "    ]"
-                                       "let danger = [ Color.red ]"]
-                            str """Note how we havent called Fss yet."""
-                            codeBlock ["div [ ClassName (fss baseStyle) ]"
-                                       "    [ str \"This will be turquoise\" ]"
-                                       "div [ ClassName (fss <| danger @ baseStyle)\]"
-                                       "    [ str \"This will be also be turquoise since the base styles overwrite the danger styles.\"]"
-                                       "div [ ClassName (fss <| baseStyle @ danger)]"
-                                       "    [ str \"This will be red\" ]"]
-
-                            div [ ClassName (fss baseStyle) ] [ str "This will be turquoise" ]
-                            div [ ClassName (fss <| danger @ baseStyle)] [ str "This will be also be turquoise since the base styles overwrite the danger styles."]
-                            div [ ClassName (fss <| baseStyle @ danger)] [ str "This will be red" ]
-                        ]
+                    markdown [ Renderers renderers; Children currentMarkdown ]
+                    div [ ClassName (fss baseStyle) ] [ str "This will be turquoise" ]
+                    div [ ClassName (fss <| danger @ baseStyle)] [ str "This will be also be turquoise since the base styles overwrite the danger styles."]
+                    div [ ClassName (fss <| baseStyle @ danger)] [ str "This will be red" ]
                 ]
+
         let labels =
             article []
                 [
-                    h2 [] [ str "Labels" ]
-                    a [ Href "https://emotion.sh/docs/labels" ] [ str "Labels" ]
-                    str """ is yet another benefit from using """
-                    a [ Href "https://github.com/emotion-js/emotion" ] [ str "Emotion-js." ]
-
-                    str """It is a CSS property called label which appends any name to the generated classname making it more readable."""
-
-                    codeBlock ["let styleWithoutLabel = fss [ Color.red ]"
-                               "let styleWithLabel = fss [ Color.hotPink; Label' \"HotPinkLabel\" ]"
-                               "div [ ClassName styleWithoutLabel ] [ str styleWithoutLabel ]"
-                               "div [ ClassName styleWithLabel ] [ str styleWithLabel ]"]
-
-                    str """Results in: """
+                    markdown [ Renderers renderers; Children currentMarkdown ]
 
                     let styleWithoutLabel =
                         fss
                             [
-                                Label' "Style Without Label"
                                 Color.red
                             ]
                     let styleWithLabel =
@@ -450,73 +248,37 @@ module App =
         let transitions =
             article []
                 [
-                    h2 [] [ str "Transition" ]
-                    div [ ClassName multilineText ]
-                        [
-                            str """The biggest difference here is that there is no transition shorthand.
-                                Apart from that transitions will work as you expect
-                                Hover example: """
-
-                            codeBlock [ "let colorTransition ="
-                                        "    fss"
-                                        "        ["
-                                        "            BackgroundColor.red"
-                                        "            TransitionProperty.BackgroundColor"
-                                        "            TransitionDuration' (sec 2.5)"
-                                        "            TransitionTimingFunction.Ease"
-                                        "            Hover [ BackgroundColor.green ]"
-                                        "       ]"
-                                        "div [ ClassName colorTransition ] [ str \"Hover me\" ]" ]
-
-                            let colorTransition =
-                                   fss
-                                       [
-                                           Label' "Color Transition"
-                                           BackgroundColor.red
-                                           TransitionProperty.BackgroundColor
-                                           TransitionDuration' (sec 2.5)
-                                           TransitionTimingFunction.Ease
-                                           Hover [ BackgroundColor.green ]
-                                       ]
-
-                            div [ ClassName colorTransition ] [ str "Hover me" ]
-
-                            str """Another example"""
-                            codeBlock [ "let sizeAndColor ="
-                                        "    fss"
-                                        "        ["
-                                        "            Width' (px 40)"
-                                        "            Height' (px 40)"
-                                        "            BackgroundColor.yellowGreen"
-                                        "            TransitionProperty.All"
-                                        "            TransitionTimingFunction.Linear"
-                                        "            TransitionDuration' (ms 500.)"
-                                        "            Hover"
-                                        "                ["
-                                        "                    BorderRadius' (pct 100)"
-                                        "                    BackgroundColor.orangeRed"
-                                        "                ]"
-                                        "        ]"
-                                        "div [ ClassName sizeAndColor ] [ ]" ]
-
-                            let sizeAndColor =
-                                fss
+                    let colorTransition =
+                           fss
+                               [
+                                   Label' "Color Transition"
+                                   BackgroundColor.red
+                                   TransitionProperty.BackgroundColor
+                                   TransitionDuration' (sec 2.5)
+                                   TransitionTimingFunction.Ease
+                                   Hover [ BackgroundColor.green ]
+                               ]
+                    let sizeAndColor =
+                        fss
+                            [
+                                Label' "Size and Color"
+                                Width' (px 40)
+                                Height' (px 40)
+                                BackgroundColor.yellowGreen
+                                TransitionProperty.All
+                                TransitionTimingFunction.Linear
+                                TransitionDuration' (ms 500.)
+                                Hover
                                     [
-                                        Label' "Size and Color"
-                                        Width' (px 40)
-                                        Height' (px 40)
-                                        BackgroundColor.yellowGreen
-                                        TransitionProperty.All
-                                        TransitionTimingFunction.Linear
-                                        TransitionDuration' (ms 500.)
-                                        Hover
-                                            [
-                                                BorderRadius' (pct 100)
-                                                BackgroundColor.orangeRed
-                                            ]
+                                        BorderRadius' (pct 100)
+                                        BackgroundColor.orangeRed
                                     ]
-                            div [ ClassName sizeAndColor ] [ ]
-                        ]
+                            ]
+
+
+                    markdown [ Renderers renderers; Children currentMarkdown ]
+                    div [ ClassName colorTransition ] [ str "Hover me" ]
+                    div [ ClassName sizeAndColor ] [ ]
                 ]
 
         let keyframesAnimations =
@@ -563,110 +325,13 @@ module App =
                     ]
             article []
                 [
-                    h2 [] [ str "Animations" ]
-                    div [ ClassName multilineText ]
-                        [
-                            str """Animations introduce 3 new functions:"""
-                            ul []
-                                [
-                                    li []
-                                        [
-                                            str "frame"
-                                            codeBlock ["int -> CSSProperty list -> KeyframeAttribute"]
-                                        ]
-                                    li []
-                                        [
-                                            str "frames"
-                                            codeBlock ["int list -> CSSProperty list -> KeyframeAttribute"]
-                                        ]
-                                    li []
-                                        [
-                                            str "keyframes"
-                                            codeBlock ["KeyframeAttribute list -> IAnimationName"]
-                                        ]
-                                ]
-
-                            str """What this means is that keyframes is a function that takes a list of frame or frame function calls.
-                                Frame is used when you want to define a single keyframe and frames for multiple.
-                                keyframes then gives you an animation name you supply to fss"""
-
-                            codeBlock [ "let bounceFrames ="
-                                        "    keyframes"
-                                        "        ["
-                                        "            frames [ 0; 20; 53; 80; 100 ]"
-                                        "                ["
-                                        "                   transforms"
-                                        "                       ["
-                                        "                           Transform.Translate3D(px 0, px 0, px 0) ]"
-                                        "                       ]"
-                                        "                ]"
-                                        "            frames [40; 43]"
-                                        "                ["
-                                        "                   transforms"
-                                        "                       ["
-                                        "                           Transform.Translate3D(px 0, px -30, px 0) ]"
-                                        "                       ]"
-                                        "                ]"
-                                        "            frame 70"
-                                        "                ["
-                                        "                   transforms"
-                                        "                       ["
-                                        "                            Transform.Translate3D(px 0, px -15, px 0) ]"
-                                        "                       ]"
-                                        "                ]"
-                                        "            frame 90"
-                                        "                ["
-                                        "                   transforms"
-                                        "                       ["
-                                        "                           Transform.Translate3D(px 0, px -4, px 0) ]"
-                                        "                       ]"
-                                        "                ]"
-                                        "        ]"
-                                        "let bounceAnimation ="
-                                        "    fss"
-                                        "        ["
-                                        "            AnimationName.Name bounceFrames"
-                                        "            AnimationDuration' (sec 1.0)"
-                                        "            AnimationTimingFunction.EaseInOut"
-                                        "            AnimationIterationCount.Infinite"
-                                        "        ]"]
-
-                            div [ ClassName bounceAnimation ] [ str "Bouncy bounce" ]
-                            str """Animations can be combined too. So if we define another animation, say one that changes background color.
-                                We can combine it with the bouncy we already have.
-                                The main difference here is that the animation properties in Fss takes a list of arguments, each element in the list corresponds to one animation."""
-                            codeBlock [
-                                "let backgroundColorFrames ="
-                                "    keyframes"
-                                "        ["
-                                "            frame 0 [ BackgroundColor.red ]"
-                                "            frame 30 [ BackgroundColor.green ]"
-                                "            frame 60 [ BackgroundColor.blue ]"
-                                "            frame 100 [ BackgroundColor.red ]"
-                                "        ]"
-                                "let bouncyColor ="
-                                "    fss"
-                                "        ["
-                                "            AnimationName.Names [ bounceFrames; backgroundColorFrames ]"
-                                "            AnimationDuration.Values [ sec 1.0; sec 5.0 ]"
-                                "            AnimationTimingFunction.Values [ TimingFunctionType.EaseInOut; TimingFunctionType.Ease ]"
-                                "            AnimationIterationCount.Values [ AnimationType.Infinite; CssInt 3 ]"
-                                "        ]"]
-                            div [ ClassName bouncyColor ] [ str "Bouncy color" ]
-
-                            h2 [] [ str "Transforms" ]
-                            str """Just a quick note on transforms. In Css it is easy to think that when you apply a transform Css expects just one transform
-                            It works with one, but it is easier to think about transforms as accepting a list of transforms, now this list can have just one element.
-                            I have also seen it as a mistake from people who don't know Css too well (I have made it myself), where combining transforms can be a bit of an issue.
-                            For there reasons in Fss when you apply transforms it always expects a list, but otherwise works as you would expect.
-                            """
-                            codeBlock ["Transforms"
-                                       "    ["
-                                       "        Transform.RotateX <| deg 10."
-                                       "        Transform.RotateY <| deg 15."
-                                       "        Transform.Perspective <| px 20"
-                                       "    ]"]
-                        ]
+                    let elements = currentMarkdown.Split "##"
+                    let animations = elements |> Seq.skip 1 |> Seq.head
+                    let transforms = elements |> Seq.rev |> Seq.head
+                    markdown [ Renderers renderers; Children $"##{animations}" ]
+                    div [ ClassName bounceAnimation ] [ str "Bouncy bounce" ]
+                    div [ ClassName bouncyColor ] [ str "Bouncy color" ]
+                    markdown [ Renderers renderers; Children $"##{transforms}" ]
                 ]
 
         let Combinators =
@@ -677,14 +342,6 @@ module App =
                     BorderColor.black
                     BorderWidth' (px 1)
                 ]
-            let combinatorStyle =
-                fss
-                    [
-                        Label' "Combinator"
-                        Before [ Color.black; Content.Value "(" ]
-                        After [ Color.black; Content.Value ")" ]
-                        Color.red
-                    ]
             let descendantCombinator =
                 fss
                     [
@@ -715,116 +372,55 @@ module App =
 
             article []
                 [
-                    h2 [] [ str "Combinators" ]
-                    div [ ClassName multilineText ]
+                    let info  =
+                        currentMarkdown.Split "- "
+                        |> Seq.head
+
+                    let elements =
                         [
-                            str """Combinators can be used when you want to style something depending on selector relationships.
-                            There are 4 combinators all of them supported by Fss."""
-                            ul []
+                            div [ ClassName descendantCombinator ]
                                 [
-                                    li []
-                                        [
-                                            h3 []
-                                                [
-                                                    str "Descendant "
-                                                    span [ ClassName combinatorStyle ] [ str "! space" ]
-                                                ]
-                                            str """This combinator allows you to select specific selectors within a css block.
-                                            For example if we want to make all paragraphs within a div be red, we can do the following:"""
-                                            codeBlock [  "let redParagraphs = fss [ ! Html.P [ Color.red ] ]"
-                                                         "div [ ClassName redParagraphs ]"
-                                                         "   ["
-                                                         "       p [] [ str \"Text in a paragraph and therefore red\"]"
-                                                         "       str \"Text outside of paragraph\""
-                                                         "       div [] [ p [] [ str \"Text in paragraph in div and red\" ] ]"
-                                                         "   ]" ]
-                                            str """which gives us: """
-                                            div [ ClassName descendantCombinator ]
-                                                [
-                                                    p [] [ str "Text in a paragraph and therefore red"]
-                                                    str "Text outside of paragraph"
-                                                    div [] [ p [] [ str "Text in paragraph in div and red" ] ]
-                                                ]
-                                        ]
-                                    li []
-                                        [
-                                            h3 []
-                                                [
-                                                    str "Child"
-                                                    span [ ClassName combinatorStyle ] [ str "!>" ]
-                                                ]
-                                            str """While descendants hit on all of the selectors within the css block, child will only select direct descendants. I.E one level deep.
-                                            So if we copy the same example from above but use the child combinator instead we get: """
-                                            codeBlock [  "let childCombinator = fss [ !> Html.P [ Color.red ] ]"
-                                                         "div [ ClassName childCombinator ]"
-                                                         "   ["
-                                                         "       p [] [ str \"Text in a paragraph and therefore red\"]"
-                                                         "       str \"Text outside of paragraph\""
-                                                         "       div [] [ p [] [ str \"Text in paragraph in div and not red\" ] ]"
-                                                         "   ]" ]
-                                            str """which gives us: """
-                                            div [ ClassName childCombinator ]
-                                                [
-                                                    p [] [ str "Text in a paragraph and therefore red"]
-                                                    str "Text outside of paragraph"
-                                                    div [] [ p [] [ str "Text in paragraph in div and not red" ] ]
-                                                ]
-                                        ]
-                                    li []
-                                        [
-                                            h3 []
-                                                [
-                                                    str "Adjacent sibling"
-                                                    span [ ClassName combinatorStyle ] [ str "!+" ]
-                                                ]
-                                            str """This combinator selects the element directly after the "main" element.
-                                            So if we do:"""
-
-                                            codeBlock [  "let directCombinator = fss [ !+ Html.P [ Color.red ] ]"
-                                                         "div []"
-                                                         "  ["
-                                                         "      div [ ClassName directCombinator ] [ p [] [ str \"Text in paragraph in div\" ] ]"
-                                                         "      p [] [ str \"Text in a paragraph and after the div with the combinator so is red\"]"
-                                                         "      p [] [ str \"Text in a paragraph but not after div with the combinator so is not red\"]"
-                                                         "   ]" ]
-                                            str """we get: """
-                                            div [ ClassName (fss borders)]
-                                                [
-                                                    div [ ClassName directCombinator ] [ p [] [ str "Text in paragraph in div " ] ]
-                                                    p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
-                                                    p [] [ str "Text in a paragraph but not after div with the combinator so is not red"]
-                                                ]
-                                        ]
-                                    li []
-                                        [
-                                            h3 []
-                                                [
-                                                    str "General sibling"
-                                                    span [ ClassName combinatorStyle ] [ str "!~" ]
-                                                ]
-                                            str """The general sibling combinator is similar to the adjacent one. But instead of selecting only 1 sibling, it selects them all."""
-                                            codeBlock [  "let adjacentCombinator = fss [ !+ Html.P [ Color.red ] ]"
-                                                         "div []"
-                                                         "  ["
-                                                         "      div [ ClassName adjacentCombinator ] [ p [] [ str \"Text in paragraph in div\" ] ]"
-                                                         "      p [] [ str \"Text in a paragraph and after the div with the combinator so is red\"]"
-                                                         "      p [] [ str \"Text in a paragraph but not after div with the combinator so is not red\"]"
-                                                         "   ]" ]
-                                            str """we get: """
-                                            div [ ClassName (fss borders)]
-                                                [
-                                                    div [ ClassName adjacentCombinator ] [ p [] [ str "Text in paragraph in div " ] ]
-                                                    p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
-                                                    p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
-                                                    div [] [p [] [ str "Text in a paragraph inside another div, paragraph is not directly after div with the combinator so is not red"]]
-                                                ]
-                                        ]
+                                    p [] [ str "Text in a paragraph and therefore red"]
+                                    str "Text outside of paragraph"
+                                    div [] [ p [] [ str "Text in paragraph in div and red" ] ]
                                 ]
-
-                            str "If you want some more information about combinators or where these examples come from you can look "
-                            a [ Href "https://blog.logrocket.com/what-you-need-to-know-about-css-combinators/" ] [ str "here" ]
-                            str "."
+                            div [ ClassName childCombinator ]
+                                [
+                                    p [] [ str "Text in a paragraph and therefore red"]
+                                    str "Text outside of paragraph"
+                                    div [] [ p [] [ str "Text in paragraph in div and not red" ] ]
+                                ]
+                            div [ ClassName (fss borders)]
+                                [
+                                    div [ ClassName directCombinator ] [ p [] [ str "Text in paragraph in div " ] ]
+                                    p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
+                                    p [] [ str "Text in a paragraph but not after div with the combinator so is not red"]
+                                ]
+                            div [ ClassName (fss borders)]
+                                [
+                                    div [ ClassName adjacentCombinator ] [ p [] [ str "Text in paragraph in div " ] ]
+                                    p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
+                                    p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
+                                    div [] [p [] [ str "Text in a paragraph inside another div, paragraph is not directly after div with the combinator so is not red"]]
+                                ]
                         ]
+
+                    let pseudoElements =
+                        currentMarkdown.Split "- "
+                        |> Seq.skip 1
+                        |> Seq.zip elements
+                        |> Seq.map (fun (e, s) ->
+                            fragment []
+                                [
+                                    markdown [ Renderers renderers; Children s ]
+                                    e
+                                ])
+
+
+                    markdown [ Renderers renderers; Children info ]
+                    div [] pseudoElements
+
+
                 ]
 
         let mediaQueries =
@@ -1661,16 +1257,16 @@ module App =
                         ]
                     ]
 
-        function
+        match page with
         | Overview -> overview
         | Installation -> installation
         | Philosophy -> philosophy
-        | BasicUse -> basicUse
+        | BasicUsage -> basicUse
         | ConditionalStyling -> conditionalStyling
         | Pseudo -> pseudo
         | Composition -> composition
         | Labels -> labels
-        | Transitions -> transitions
+        | Transition -> transitions
         | KeyframesAnimations -> keyframesAnimations
         | Combinators -> Combinators
         | MediaQueries -> mediaQueries
@@ -1757,12 +1353,12 @@ module App =
                         menuListItem' Overview
                         menuListItem' Installation
                         menuListItem' Philosophy
-                        menuListItem' BasicUse
+                        menuListItem' BasicUsage
                         menuListItem' ConditionalStyling
                         menuListItem' Pseudo
                         menuListItem' Composition
                         menuListItem' Labels
-                        menuListItem' Transitions
+                        menuListItem' Transition
                         menuListItem' KeyframesAnimations
                         menuListItem' Combinators
                         menuListItem' MediaQueries
@@ -1780,7 +1376,7 @@ module App =
                     Label' "Content Style"
                     textFont
                 ]
-        section [ ClassName contentStyle ] [ pageToContent model.CurrentPage ]
+        section [ ClassName contentStyle ] [ pageToContent model.CurrentPage model.CurrentMarkdown ]
 
     let render (model: Model) (dispatch: Msg -> unit) =
         let contentStyle =
@@ -1800,7 +1396,8 @@ module App =
                 div [ ClassName contentStyle ]
                     [
                         menu model dispatch
-                        content model
+                        if model.CurrentMarkdown.Length > 0 then
+                            content model
                     ]
             ]
 
@@ -1811,12 +1408,12 @@ module App =
             [ map Overview (s <| Utilities.duToKebab Overview)
               map Installation (s <| Utilities.duToKebab Installation)
               map Philosophy (s <| Utilities.duToKebab Philosophy)
-              map BasicUse (s <| Utilities.duToKebab BasicUse)
+              map BasicUsage (s <| Utilities.duToKebab BasicUsage)
               map ConditionalStyling (s <| Utilities.duToKebab ConditionalStyling)
               map Pseudo (s <| Utilities.duToKebab Pseudo)
               map Composition (s <| Utilities.duToKebab Composition)
               map Labels (s <| Utilities.duToKebab Labels)
-              map Transitions (s <| Utilities.duToKebab Transitions)
+              map Transition (s <| Utilities.duToKebab Transition)
               map KeyframesAnimations (s <| Utilities.duToKebab KeyframesAnimations)
               map Combinators (s <| Utilities.duToKebab Combinators)
               map MediaQueries (s <| Utilities.duToKebab MediaQueries)
@@ -1826,9 +1423,8 @@ module App =
               map BackgroundImage (s <| Utilities.duToKebab BackgroundImage)
             ]
 
-    let urlUpdate (page: Page option) _ =
+    let urlUpdate (page: Page option) model =
         let page = page |> Option.defaultValue Overview
-        let model, _ = Some page |> init
 
         { model with CurrentPage = page }, Cmd.ofMsg GetMarkdown
 
