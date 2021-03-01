@@ -13,13 +13,13 @@
         <Content Include="documentation\Composition.md" />
         <Content Include="documentation\Labels.md" />
         <Content Include="documentation\Transition.md" />
-        <Content Include="documentation\KeyframesAndAnimations.md" />
+        <Content Include="documentation\KeyframesAnimations.md" />
         <Content Include="documentation\Combinators.md" />
         <Content Include="documentation\MediaQueries.md" />
         <Content Include="documentation\GlobalStyles.md" />
         <Content Include="documentation\Counters.md" />
         <Content Include="documentation\Fonts.md" />
-        <Content Include="documentation\BackgroundImages.md" />
+        <Content Include="documentation\BackgroundImage.md" />
         <Compile Include="Markdown.fs" />
         <Compile Include="Utilities.fs" />
         <Compile Include="Logo.fs" />

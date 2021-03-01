@@ -419,8 +419,6 @@ module App =
 
                     markdown [ Renderers renderers; Children info ]
                     div [] pseudoElements
-
-
                 ]
 
         let mediaQueries =
@@ -451,52 +449,12 @@ module App =
 
             article []
                 [
-                    h2 [] [ str "Media queries" ]
-                    div [ ClassName multilineText ]
-                        [
-                            str """Using media queries in FSS is similar to how you would with normal css - except you have 2 functions to use here."""
-                            ul []
-                                [
-                                    li [] [ str "'MediaQuery'" ]
-                                    str """Which takes a list of features which defines when the css block should be active and a list of css properties which is the styles to be active."""
-                                    li [] [ str "'MediaQueryFor'"]
-                                    str """Which takes a device and then the list of features and a list of css properties"""
-                                    codeBlock [ "let mediaQueryExamples ="
-                                                "   fss"
-                                                "       ["
-                                                "           Width' (px 200)"
-                                                "           Height' (px 200)"
-                                                "           BackgroundColor.blue"
-                                                "           MediaQuery"
-                                                "               [ Media.MinHeight (px 700)]"
-                                                "               [ BackgroundColor.pink ]"
-                                                ""
-                                                "           MediaQueryFor Media.Print"
-                                                "               []"
-                                                "               ["
-                                                "                   MarginTop' (px 200)"
-                                                "                   Transforms"
-                                                "                       ["
-                                                "                           Transform.Rotate(deg 45.0)"
-                                                "                       ]"
-                                                "                   BackgroundColor.red"
-                                                "               ]"
-                                                "           MediaQuery"
-                                                "               [ Media.Orientation Media.Landscape]"
-                                                "               [ Color.green; FontSize.Value (px 28)]" ]
-
-                                    div [ ClassName mediaQueryExamples] [ str "Changing height changes this thing"]
-
-                                ]
-                        ]
+                    markdown [ Renderers renderers; Children currentMarkdown ]
+                    div [ ClassName mediaQueryExamples] [ str "Changing height changes this thing"]
                 ]
 
         let globalStyles =
-            article []
-                [
-                    h3 [] [ str "Global styles" ]
-                    div [ ClassName multilineText ] [ str """Yeah, not supported. Put your styling in the topmost html tag I guess.""" ]
-                ]
+            article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
         let counters =
             let mozillaExampleCounter =
                 counterStyle
@@ -561,144 +519,61 @@ module App =
                             ]
                     ]
 
-
             article []
                 [
-                    h3 [] [ str "Counters" ]
-                    div [ ClassName multilineText ]
+                    markdown [ Renderers renderers; Children currentMarkdown ]
+                    ul [ ClassName mozillaExampleStyle ]
                         [
-                            str """Counters are pretty cool and allows you to define style for well, counters.
-                                You can use the counters as liststyle type or as content. Examples follow:
-                                Example from """
-                            a [ Href "https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style" ] [ str "mozilla" ]
-                            codeBlock [ "let mozillaExampleCounter ="
-                                        "    counterStyle"
-                                        "        ["
-                                        "            System.Fixed"
-                                        "            Symbols.Strings [\"Ⓐ\"; \"Ⓑ\"; \"Ⓒ\"; \"Ⓓ\"; \"Ⓔ\";"
-                                        "                              \"Ⓕ\"; \"Ⓖ\"; \"Ⓗ\"; \"Ⓘ\"; \"Ⓙ\";"
-                                        "                              \"Ⓚ\"; \"Ⓛ\"; \"Ⓜ\"; \"Ⓝ\"; \"Ⓞ\";"
-                                        "                              \"Ⓟ\"; \"Ⓠ\"; \"Ⓡ\"; \"Ⓢ\"; \"Ⓣ\";"
-                                        "                              \"Ⓤ\"; \"Ⓥ\"; \"Ⓦ\"; \"Ⓧ\"; \"Ⓨ\"; \"Ⓩ\"]"
-                                        "            Suffix.Value \" \""
-                                        "        ]"
-                                        "let mozillaExampleStyle = fss [ ListStyleType' mozillaExampleCounter ]"]
-
-                            ul [ ClassName mozillaExampleStyle ]
-                                [
-                                    li [] [ str "one" ]
-                                    li [] [ str "two" ]
-                                    li [] [ str "three" ]
-                                    li [] [ str "four" ]
-                                    li [] [ str "five" ]
-                                    li [] [ str "one" ]
-                                    li [] [ str "two" ]
-                                    li [] [ str "three" ]
-                                    li [] [ str "four" ]
-                                    li [] [ str "five" ]
-                                    li [] [ str "one" ]
-                                    li [] [ str "two" ]
-                                    li [] [ str "three" ]
-                                    li [] [ str "four" ]
-                                    li [] [ str "five" ]
-                                    li [] [ str "one" ]
-                                    li [] [ str "two" ]
-                                    li [] [ str "three" ]
-                                    li [] [ str "four" ]
-                                    li [] [ str "five" ]
-                                    li [] [ str "one" ]
-                                    li [] [ str "two" ]
-                                    li [] [ str "three" ]
-                                    li [] [ str "four" ]
-                                    li [] [ str "five" ]
-                                    li [] [ str "one" ]
-                                    li [] [ str "two" ]
-                                    li [] [ str "three" ]
-                                    li [] [ str "four" ]
-                                    li [] [ str "five" ]
-                                ]
-
-                            str """Another example found """
-                            a [ Href "https://codepen.io/mkmueller/pen/pHiqb" ] [ str "here" ]
-                            str """."""
-
-                            codeBlock [ "let commonBefore ="
-                                        "    ["
-                                        "       FontWeight' (CssInt 500)"
-                                        "       Color.Hex \"48f\""
-                                        "   ]"
-                                        "let commonStyle ="
-                                        "   ["
-                                        "       Margin.Value (px 0, px 0, px 1)"
-                                        "       Padding.Value (px 5, px 10)"
-                                        "    ]"
-                                        "let count ="
-                                        "    fss"
-                                        "        ["
-                                        "            yield! commonStyle"
-                                        "            CounterReset' subCounter"
-                                        "            CounterIncrement' indexCounter"
-                                        "            BackgroundColor.Hex \"eee\""
-                                        "            Before"
-                                        "                ["
-                                        "                    yield! commonBefore"
-                                        "                    Content.Counter(indexCounter,\". \")"
-                                        "                ]"
-                                        "        ]"
-                                        "let sub ="
-                                        "    fss"
-                                        "        ["
-                                        "            yield! commonStyle"
-                                        "            CounterIncrement' subCounter"
-                                        "            TextIndent' (em 1.)"
-                                        "            Color.Hex \"444\""
-                                        "            Before"
-                                        "                ["
-                                        "                    yield! commonBefore"
-                                        "                    Content.Counters([indexCounter; subCounter], [\".\";\".\"])"
-                                        "                    MarginRight' (px 5)"
-                                        "                ]"
-                                        "        ]"
-                                        "section [ ClassName sectionStyle ]"
-                                        "    ["
-                                        "        p [ ClassName count] [ str \"Item\" ]"
-                                        "        p [ ClassName count] [ str \"Item\" ]"
-                                        "        p [ ClassName count] [ str \"Item\" ]"
-                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
-                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
-                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
-                                        "        p [ ClassName count] [ str \"Item\" ]"
-                                        "        p [ ClassName count] [ str \"Item\" ]"
-                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
-                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
-                                        "        p [ ClassName count] [ str \"Item\" ]"
-                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
-                                        "        p [ ClassName count] [ str \"Item\" ]"
-                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
-                                        "        p [ ClassName sub] [ str \"Sub-Item\" ]"
-                                        "    ]"]
-
-                            section [ ClassName sectionStyle ]
-                                [
-                                    p [ ClassName count] [ str "Item" ]
-                                    p [ ClassName count] [ str "Item" ]
-                                    p [ ClassName count] [ str "Item" ]
-                                    p [ ClassName sub] [ str "Sub-Item" ]
-                                    p [ ClassName sub] [ str "Sub-Item" ]
-                                    p [ ClassName sub] [ str "Sub-Item" ]
-                                    p [ ClassName count] [ str "Item" ]
-                                    p [ ClassName count] [ str "Item" ]
-                                    p [ ClassName sub] [ str "Sub-Item" ]
-                                    p [ ClassName sub] [ str "Sub-Item" ]
-                                    p [ ClassName count] [ str "Item" ]
-                                    p [ ClassName sub] [ str "Sub-Item" ]
-                                    p [ ClassName count] [ str "Item" ]
-                                    p [ ClassName sub] [ str "Sub-Item" ]
-                                    p [ ClassName sub] [ str "Sub-Item" ]
-                                ]
-
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
+                            li [] [ str "one" ]
+                            li [] [ str "two" ]
+                            li [] [ str "three" ]
+                            li [] [ str "four" ]
+                            li [] [ str "five" ]
                         ]
 
+                    section [ ClassName sectionStyle ]
+                        [
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName count] [ str "Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                            p [ ClassName sub] [ str "Sub-Item" ]
+                        ]
                 ]
         let fonts =
             let amaticStyle =
@@ -762,73 +637,12 @@ module App =
 
             article []
                 [
-                    h3 [] [ str "Import" ]
-                    div [ ClassName multilineText ]
-                        [
-                            str """For importing fonts from google fonts for example, use link syntax within <head>"""
-                            codeBlock [ "<head>"
-                                        "    ..."
-                                        "    ..."
-                                        "    ..."
-                                        "    <link href=\"https://fonts.googleapis.com/css?family=Nunito|Raleway|Amatic+SC\" rel=\"stylesheet\">"
-                                        "</head>" ]
-                            codeBlock [ "let amaticStyle ="
-                                        "    fss"
-                                        "        ["
-                                        "            FontFamily.Custom \"Amatic SC\""
-                                        "            FontSize' (px 24)"
-                                        "        ]"
-                                        "p [ ClassName amaticStyle ] [str \"\"\"This font is Amatic SC, some nice text this huh?\"\"\"]"]
-                            p [ ClassName amaticStyle ] [str """This font is Amatic SC, some nice text this huh?"""]
-
-                            h3 [] [ str "Font face" ]
-
-                            codeBlock ["let droidSerifFont ="
-                                       "    fontFaces  \"DroidSerif \""
-                                       "        ["
-                                       "            ["
-                                       "                FontFace.Source <| UrlFormat ( \"https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf \", FontFace.Truetype)"
-                                       "                FontFace.Weight FontTypes.Bold"
-                                       "                FontFace.Style Normal"
-                                       "            ]"
-                                       "            ["
-                                       "                FontFace.Source <| UrlFormat ( \https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf \, FontFace.Truetype)"
-                                       "                FontFace.Weight Normal"
-                                       "                FontFace.Style Normal"
-                                       "            ]"
-                                       "        ]"
-                                       "let modernaFont ="
-                                       "    fontFace \"moderna \""
-                                       "        ["
-                                       "            FontFace.Sources"
-                                       "                ["
-                                       "                    UrlFormat (\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2 \", FontFace.Woff2)"
-                                       "                    UrlFormat (\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff \", FontFace.Woff)"
-                                       "                    UrlFormat (\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf\", FontFace.Truetype)"
-                                       "                    UrlFormat (\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg\", FontFace.Svg)"
-                                       "                ]"
-                                       "            FontFace.Weight Normal"
-                                       "            FontFace.Style Normal"
-                                       "        ]"
-                                       "let droidSerif = fss [ FontFamily.Font droidSerifFont ]"
-                                       "let droidSerifBold ="
-                                       "    fss"
-                                       "        ["
-                                       "            FontFamily.Font droidSerifFont"
-                                       "            FontWeight.Bold"
-                                       "        ]"
-                                       "let moderna = fss [ FontFamily.Font modernaFont ]"
-                                       "p [ ClassName droidSerif ] [ str \"Droid serif\" ]"
-                                       "p [ ClassName droidSerifBold ] [ str  \"Droid serif bold\" ]"
-                                       "p [ ClassName moderna] [ str \"Moderna\" ]"]
-
-
-                            p [ ClassName droidSerif ] [ str "Droid serif" ]
-                            p [ ClassName droidSerifBold ] [ str "Droid serif bold" ]
-                            p [ ClassName moderna] [ str "Moderna" ]
-
-                        ]
-                    ]
+                    markdown [ Renderers renderers; Children currentMarkdown ]
+                    p [ ClassName amaticStyle ] [str """This font is Amatic SC, some nice text this huh?"""]
+                    p [ ClassName droidSerif ] [ str "Droid serif" ]
+                    p [ ClassName droidSerifBold ] [ str "Droid serif bold" ]
+                    p [ ClassName moderna] [ str "Moderna" ]
+                ]
 
         let backgroundImage =
             let box =
@@ -894,7 +708,7 @@ module App =
                                                            hex "f69d3c", px 20
                                                        ])
                     ]
-            let repeatingLinearGradientsStyle =
+            let repeatingLinearGradientsStyle3 =
                 fss
                     [
                         yield! box
@@ -1070,192 +884,66 @@ module App =
 
             article []
                 [
-                    h2 [] [ str "Background images" ]
-                    div [ ClassName multilineText ]
+                    let elements =
+                        [ div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
+                            [
+                                div [ClassName linearGradientStyle1 ] []
+                                div [ClassName linearGradientStyle2 ] []
+                                div [ClassName linearGradientStyle3 ] []
+                            ]
+                          div [ ClassName (fss [ Label' "Flex 2"; Display.Flex ]) ]
+                            [
+                                div [ClassName repeatingLinearGradientStyle1 ] []
+                                div [ClassName repeatingLinearGradientStyle2 ] []
+                                div [ClassName repeatingLinearGradientsStyle3 ] []
+                            ]
+                          div [ ClassName (fss [ Label' "Flex 3"; Display.Flex ]) ]
+                            [
+                                div [ClassName radialGradientStyle1 ] []
+                                div [ClassName radialGradientStyle2 ] []
+                                div [ClassName radialGradientStyle3 ] []
+                            ]
+                          div [ ClassName (fss [ Label' "Flex 4"; Display.Flex ]) ]
+                            [
+                                div [ClassName repeatingRadialGradientStyle1 ] []
+                                div [ClassName repeatingRadialGradientStyle2 ] []
+                                div [ClassName repeatingRadialGradientStyle3 ] []
+                            ]
+                          div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
+                            [
+                                div [ClassName conicGradientStyle1 ] []
+                                div [ClassName conicGradientStyle2 ] []
+                                div [ClassName conicGradientStyle3 ] []
+                                div [ClassName conicGradientStyle4 ] []
+                            ]
+                          div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
+                            [
+                                div [ClassName repeatingConicGradientStyle ] []
+                            ]]
+
+                    let title =
+                        currentMarkdown.Split "##"
+                        |> Seq.skip 1
+                        |> Seq.head
+                    let elements =
+                        currentMarkdown.Split "###"
+                        |> Seq.skip 1
+                        |> Seq.map (fun x -> $"### {x}")
+                        |> Seq.zip elements
+                        |> Seq.map (fun (e, s) ->
+                                fragment []
+                                    [
+                                        markdown [ Renderers renderers; Children s ]
+                                        e
+                                    ]
+                            )
+
+                    div []
                         [
-                            h3 [] [ str "Linear gradient" ]
-                            codeBlock ["let linearGradientStyle1 = "
-                                       "    BackgroundImage.LinearGradient(deg 0.,"
-                                       "        [ hex \"e66465\", pct 0"
-                                       "          hex \"9198e5\", pct 100 ])"
-                                       ""
-                                       "let linearGradientStyle2 ="
-                                       "    BackgroundImage.LinearGradient(turn 0.25,"
-                                       "                                   [hex \"3f87a6\", pct 0"
-                                       "                                    hex \"ebf8e1\", pct 50"
-                                       "                                    hex \"f69d3c\", pct 100])"
-                                       ""
-                                       "let linearGradientStyle3 ="
-                                       "    BackgroundImage.LinearGradient(deg 270.,"
-                                       "                                   ["
-                                       "                                       hex \"333\", pct 0"
-                                       "                                       hex \"333\", pct 50"
-                                       "                                       hex \"eee\", pct 75"
-                                       "                                       hex \"333\", pct 75"
-                                       "                                   ])"]
-
-                            div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
-                                [
-                                    div [ClassName linearGradientStyle1 ] []
-                                    div [ClassName linearGradientStyle2 ] []
-                                    div [ClassName linearGradientStyle3 ] []
-                                ]
-                            h3 [] [ str "Repeating Linear gradient" ]
-                            codeBlock [ "let repeatingLinearGradientStyle1 ="
-                                        "   BackgroundImage.RepeatingLinearGradient(deg 0.,"
-                                        "               ["
-                                        "                   hex \"e66465\", px 0"
-                                        "                   hex \"e66465\", px 20"
-                                        "                   hex \"9198e5\", px 20"
-                                        "                   hex \"9198e5\", px 25"
-                                        "               ])"
-                                        ""
-                                        "let repeatingLinearGradientStyle2 ="
-                                        "   BackgroundImage.RepeatingLinearGradient(deg 45.,"
-                                        "                                  ["
-                                        "                                      hex \"3f87a6\", px 0"
-                                        "                                      hex \"ebf8e1\", px 15"
-                                        "                                      hex \"f69d3c\", px 20"
-                                        "                                  ])"]
-                            div [ ClassName (fss [ Label' "Flex 2"; Display.Flex ]) ]
-                                [
-                                    div [ClassName repeatingLinearGradientStyle1 ] []
-                                    div [ClassName repeatingLinearGradientStyle2 ] []
-                                ]
-                            h3 [] [ str "Radial gradient" ]
-
-                            codeBlock [ "let radialGradientStyle1 = "
-                                        "  BackgroundImage.RadialGradient(Ellipse, FarthestCorner, pct 50, pct 50,"
-                                        "             [ hex \"e66465\", pct 0"
-                                        "               hex \"9198e5\", pct 100])"
-                                        ""
-                                        "let radialGradientStyle2 ="
-                                        "  BackgroundImage.RadialGradient(Ellipse, ClosestSide, pct 50, pct 50,"
-                                        "       ["
-                                        "           hex \"3f87a6\", pct 0"
-                                        "           hex \"ebf8e1\", pct 50"
-                                        "           hex \"f69d3c\", pct 100"
-                                        "       ])"
-                                        ""
-                                        "let radialGradientStyle3 ="
-                                        "  BackgroundImage.RadialGradient(Circle, FarthestCorner, pct 100, pct 50,"
-                                        "        ["
-                                        "            hex \"333\", pct 0"
-                                        "            hex \"333\", pct 50"
-                                        "            hex \"eee\", pct 75"
-                                        "            hex \"333\", pct 75 ])"
-                                        ]
-
-                            div [ ClassName (fss [ Label' "Flex 3"; Display.Flex ]) ]
-                                [
-                                    div [ClassName radialGradientStyle1 ] []
-                                    div [ClassName radialGradientStyle2 ] []
-                                    div [ClassName radialGradientStyle3 ] []
-                                ]
-                            h3 [] [ str "Repeating radial gradient" ]
-                            codeBlock [ "let repeatingRadialGradientStyle1 ="
-                                        "    BackgroundImage.RepeatingRadialGradient("
-                                        "            Ellipse, FarthestCorner, pct 50, pct 50,"
-                                        "                ["
-                                        "                    hex \"e66465\", pct 0"
-                                        "                    hex \"9198e5\", pct 20"
-                                        "                ])"
-                                        ""
-                                        "let repeatingRadialGradientStyle2 ="
-                                        "   BackgroundImage.RepeatingRadialGradient("
-                                        "        Ellipse, ClosestSide, pct 50, pct 50,"
-                                        "            ["
-                                        "                hex \"3f87a6\", pct 0"
-                                        "                hex \"ebf8e1\", pct 50"
-                                        "                hex \"f69d3c\", pct 100"
-                                        "            ])"
-                                        ""
-                                        "let repeatingRadialGradientStyle3 ="
-                                        "    BackgroundImage.RepeatingRadialGradient("
-                                        "            Circle, FarthestCorner, pct 100, pct 50,"
-                                        "                ["
-                                        "                    hex \"333\", px 0"
-                                        "                    hex \"333\", px 10"
-                                        "                    hex \"eee\", px 10"
-                                        "                    hex \"eee\", px 20"
-                                        "                ]"]
-                            div [ ClassName (fss [ Label' "Flex 4"; Display.Flex ]) ]
-                                [
-                                    div [ClassName repeatingRadialGradientStyle1 ] []
-                                    div [ClassName repeatingRadialGradientStyle2 ] []
-                                    div [ClassName repeatingRadialGradientStyle3 ] []
-                                ]
-                            h3 [] [ str "Conic gradient" ]
-                            codeBlock ["let conicGradientStyle1 = "
-                                       "    BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,"
-                                       "                                  ["
-                                       "                                      CssColor.red, deg 0."
-                                       "                                      CssColor.orange, deg 90."
-                                       "                                      CssColor.yellow, deg 180."
-                                       "                                      CssColor.green, deg 270."
-                                       "                                      CssColor.blue, deg 360."
-                                       "                                  ])"
-                                       ""
-                                       "let conicGradientStyle2 ="
-                                       "     BackgroundImage.ConicGradient(rad 3.1416, pct 10, pct 50,"
-                                       "                                   ["
-                                       "                                         hex \"#e66465\", deg 0."
-                                       "                                         hex \"#9198e5\", deg 360."
-                                       "                                   ])"
-                                       ""
-                                       "let conicGradientStyle3 ="
-                                       "     BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,"
-                                       "                                   ["
-                                       "                                      CssColor.red, deg 6."
-                                       "                                      CssColor.orange, deg 6."
-                                       "                                      CssColor.orange, deg 18."
-                                       "                                      CssColor.yellow, deg 18."
-                                       "                                      CssColor.yellow, deg 45."
-                                       "                                      CssColor.green, deg 45."
-                                       "                                      CssColor.green, deg 110."
-                                       "                                      CssColor.blue, deg 110."
-                                       "                                      CssColor.blue, deg 200."
-                                       "                                      CssColor.purple, deg 200."
-                                       "                                   ])"
-                                       ""
-                                       "let conicGradientStyle4 = "
-                                       "     BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,"
-                                       "       ["
-                                       "          CssColor.yellow, deg (360. / 6.)"
-                                       "          CssColor.lime,   deg <| (360. / 6.) * 2."
-                                       "          CssColor.blue,   deg <| (360. / 6.) * 3."
-                                       "          CssColor.violet, deg <| (360. / 6.) * 4."
-                                       "          CssColor.red,    deg <| (360. / 6.) * 5."
-                                       "          CssColor.yellow, deg <| (360. / 6.) * 6."
-                                       "       ])"]
-
-                            div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
-                                [
-                                    div [ClassName conicGradientStyle1 ] []
-                                    div [ClassName conicGradientStyle2 ] []
-                                    div [ClassName conicGradientStyle3 ] []
-                                    div [ClassName conicGradientStyle4 ] []
-                                ]
-                            h3 [] [ str "Repeating Conic gradient" ]
-                            codeBlock ["let linearGradientStyle1 = "
-                                       "    BackgroundSize.Value(px 50, px 50)"
-                                       "    BorderColor.black"
-                                       "    BorderStyle.Solid"
-                                       "    BorderWidth' (px 1)"
-                                       "    BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50,"
-                                       "                                  ["
-                                       "                                     CssColor.white, pct 0"
-                                       "                                     CssColor.white, pct 25"
-                                       "                                     CssColor.black, pct 25"
-                                       "                                     CssColor.black, pct 50"
-                                       "                                  ])"]
-
-                            div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
-                                [
-                                    div [ClassName repeatingConicGradientStyle ] []
-                                ]
+                            markdown [ Renderers renderers; Children $"## {title}"]
+                            yield! elements
                         ]
-                    ]
+                ]
 
         match page with
         | Overview -> overview

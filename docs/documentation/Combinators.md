@@ -3,6 +3,8 @@
 Combinators can be used when you want to style something depending on selector relationships.
 There are 4 combinators all of them supported by Fss.
 
+If you want even more information about combinators or where these examples come from you can take a look at this [article](https://blog.logrocket.com/what-you-need-to-know-about-css-combinators/)
+
 - ### Descendant (! )
 This combinator allows you to select specific selectors within a CSS block.
 For example if we want to make all paragraphs within a div be red, we can do the following:
@@ -59,5 +61,3 @@ div []
       p [] [ str "Text in a paragraph but not after div with the combinator so is not red"]
    ]
 ```
-
-If you want even more information about combinators or where these examples come from you can take a look at this [article](https://blog.logrocket.com/what-you-need-to-know-about-css-combinators/)
