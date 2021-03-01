@@ -963,7 +963,7 @@ module App =
         | Fonts -> fonts
         | BackgroundImage -> backgroundImage
 
-    let menuListItem example currentExample page =
+    let menuListItem example currentExample =
         let listStyle =
             fss
                 [
@@ -1022,7 +1022,7 @@ module App =
 
         header  [ ClassName headerStyle ] [ h2 [ ClassName headerText ] [ str "Fss" ] ]
 
-    let menu model (dispatch: Msg -> unit)=
+    let menu model =
         let menuList =
             fss
                 [
@@ -1033,7 +1033,7 @@ module App =
                     PaddingRight' (px 5)
                     TextIndent' (px 0)
                 ]
-        let menuListItem' example = menuListItem example model.CurrentPage example
+        let menuListItem' example = menuListItem example model.CurrentPage
         aside []
             [
                 ul [ ClassName menuList ]
@@ -1083,7 +1083,7 @@ module App =
                 header
                 div [ ClassName contentStyle ]
                     [
-                        menu model dispatch
+                        menu model
                         if model.CurrentMarkdown.Length > 0 then
                             content model
                     ]
