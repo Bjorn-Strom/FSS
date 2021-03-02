@@ -198,7 +198,7 @@ module Margin =
         static member Initial = Initial |> marginInlineEndValue'
         static member Unset = Unset |> marginInlineEndValue'
 
-    /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
+    /// <summary>Specifies the amount of space along the outer ending edge of an element.</summary>
     /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
@@ -210,14 +210,6 @@ module Margin =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let MarginInlineEnd' (margin: IMargin) = MarginInlineEnd.Value(margin)
-
-
-
-
-
-
-
-
 
     let private marginBlockStartValue value = PropertyValue.cssValue Property.MarginBlockStart value
     let private marginBlockStartValue' value =
@@ -232,7 +224,7 @@ module Margin =
         static member Initial = Initial |> marginBlockStartValue'
         static member Unset = Unset |> marginBlockStartValue'
 
-    /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
+    /// <summary>Specifies the amount of start margin of an element.</summary>
     /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
@@ -258,7 +250,7 @@ module Margin =
         static member Initial = Initial |> marginBlockEndValue'
         static member Unset = Unset |> marginBlockEndValue'
 
-    /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
+    /// <summary>Specifies the amount of end margin of an element </summary>
     /// <param name="margin">
     ///     can be:
     ///     - <c> Units.Size </c>
