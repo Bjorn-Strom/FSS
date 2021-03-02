@@ -272,3 +272,42 @@ module Mask =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let private MaskOrigin' (mode: IMaskOrigin) = mode |> MaskOrigin.Value
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
+    let private stringifyPosition (composite: IMaskPosition) =
+        match composite with
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown mask position"
+
+    let private maskPositionValue value = PropertyValue.cssValue Property.MaskPosition value
+    let private maskPositionValue' value =
+        value
+        |> stringifyPosition
+        |> maskPositionValue
+
+    let private stringifyPixelPositions ps =
+        let (x, y) = ps
+        $"{Units.Size.value x} {Units.Size.value y}"
+
+    let private stringifyPercentPositions ps =
+        let (x, y) = ps
+        $"{Units.Percent.value x} {Units.Percent.value y}"
+
+    type MaskPosition =
+        static member Value (x: Units.Size.Size, y: Units.Size.Size) =
+            stringifyPixelPositions(x,y)
+            |> maskPositionValue
+        static member Value (positions: (Units.Size.Size * Units.Size.Size) list ) =
+            positions
+            |> Utilities.Helpers.combineComma stringifyPixelPositions
+            |> maskPositionValue
+        static member Value (x: Units.Percent.Percent, y: Units.Percent.Percent) =
+            stringifyPercentPositions(x,y)
+            |> maskPositionValue
+        static member Value (positions: (Units.Percent.Percent * Units.Percent.Percent) list ) =
+            positions
+            |> Utilities.Helpers.combineComma stringifyPercentPositions
+            |> maskPositionValue
+        static member Inherit = Inherit |> maskPositionValue'
+        static member Initial = Initial |> maskPositionValue'
+        static member Unset = Unset |> maskPositionValue'

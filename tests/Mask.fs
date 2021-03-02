@@ -205,4 +205,32 @@ module Mask =
                     "MaskOrigin unset"
                     [ MaskOrigin.Unset ]
                     [ "maskOrigin" ==> "unset" ]
+                test
+                    "MaskPosition size"
+                    [ MaskPosition.Value(px 1, rem 1.)]
+                    [ "maskPosition" ==> "1px 1.0rem" ]
+                test
+                    "MaskPosition sizes"
+                    [ MaskPosition.Value([px 1, rem 1.; px 10, px 100])]
+                    [ "maskPosition" ==> "1px 1.0rem, 10px 100px" ]
+                test
+                    "MaskPosition percent"
+                    [ MaskPosition.Value(pct 10, pct 50)]
+                    [ "maskPosition" ==> "10% 50%" ]
+                test
+                    "MaskPosition percents"
+                    [ MaskPosition.Value([pct 10, pct 50; pct 50, pct 50])]
+                    [ "maskPosition" ==> "10% 50%, 50% 50%" ]
+                test
+                    "MaskPosition inherit"
+                    [ MaskPosition.Inherit]
+                    [ "maskPosition" ==> "inherit" ]
+                test
+                    "MaskPosition initial"
+                    [ MaskPosition.Initial]
+                    [ "maskPosition" ==> "initial" ]
+                test
+                    "MaskPosition unset"
+                    [ MaskPosition.Unset ]
+                    [ "maskPosition" ==> "unset" ]
             ]

@@ -35,6 +35,7 @@ module Percent =
         interface IVerticalAlign
         interface IWordSpacing
         interface IPerspectiveOrigin
+        interface IMaskPosition
     let value (Percent p): string = p
 
 // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
@@ -93,6 +94,7 @@ module Size =
         interface ITabSize
         interface IScrollMargin
         interface IScrollPadding
+        interface IMaskPosition
 
     let value (v: Size): string =
         match v with
@@ -118,7 +120,7 @@ module LengthPercentage =
     let value (v: ILengthPercentage) =
         match v with
         | :? Size    as s -> Size.value s
-        | :? Percent as p -> Percent.value p
+        | :? Percent as p -> value p
         | _ -> "Unknown length/percentage"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
