@@ -219,6 +219,8 @@ module Global =
 
     type IAspectRatio = interface end
 
+    type IMaskClip = interface end
+
     // Types
     type CSSProperty = CSSProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -544,6 +546,7 @@ module Global =
         interface IMixBlendMode
         interface IPerspectiveOrigin
         interface IAspectRatio
+        interface IMaskClip
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
