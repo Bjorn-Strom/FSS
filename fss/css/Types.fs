@@ -221,6 +221,7 @@ module Global =
 
     type IMaskClip      = interface end
     type IMaskComposite = interface end
+    type IMaskImage     = interface end
 
     // Types
     type CSSProperty = CSSProperty of string * obj
@@ -351,6 +352,7 @@ module Global =
         interface IBackdropFilter
         interface IFontKerning
         interface IFontSynthesis
+        interface IMaskImage
 
     type Normal =
         | Normal
@@ -549,6 +551,7 @@ module Global =
         interface IAspectRatio
         interface IMaskClip
         interface IMaskComposite
+        interface IMaskImage
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

@@ -98,4 +98,28 @@ module Mask =
                     "MaskComposite unset"
                     [ MaskComposite.Unset ]
                     [ "maskComposite" ==> "unset" ]
+                test
+                    "Mask image source none"
+                    [ MaskImage.None ]
+                    [ "maskImage" ==> "none" ]
+                test
+                    "Mask image source url"
+                    [ MaskImage.Url "image.jpg" ]
+                    [ "maskImage" ==> "url(image.jpg)" ]
+                test
+                    "Mask image source linear gradient"
+                    [ MaskImage.LinearGradient(deg 45., [ CssColor.red, pct 0; CssColor.blue, pct 100 ]) ]
+                    [ "maskImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
+                test
+                    "Mask image source inherit"
+                    [ MaskImage.Inherit ]
+                    [ "maskImage" ==> "inherit" ]
+                test
+                    "Mask image source initial"
+                    [ MaskImage.Initial ]
+                    [ "maskImage" ==> "initial" ]
+                test
+                    "Mask image source unset"
+                    [ MaskImage.Unset ]
+                    [ "maskImage" ==> "unset" ]
             ]

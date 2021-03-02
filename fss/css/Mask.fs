@@ -109,3 +109,74 @@ module Mask =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let private MaskComposite' (clip: IMaskComposite) = clip |> MaskComposite.Value
+
+
+
+
+
+
+
+
+
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
+    let private imageSourceToString (imageSource: IMaskImage) =
+        match imageSource with
+        | :? None' -> GlobalValue.none
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown mask image"
+
+    let private imageValue value = PropertyValue.cssValue Property.MaskImage value
+    let private imageValue' value =
+        value
+        |> imageSourceToString
+        |> imageValue
+
+    type MaskImage =
+        static member Value (source: IMaskImage) = source |> imageValue'
+        static member Url (url: string) = imageValue <| sprintf "url(%s)" url
+        static member LinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.Image.LinearGradient((angle, gradients))
+        static member LinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Size.Size) list) =
+            imageValue <| Image.Image.LinearGradient((angle, gradients))
+        static member LinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
+            imageValue <| Image.Image.LinearGradients(gradients)
+        static member LinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Size.Size) list)) list) =
+            imageValue <| Image.Image.LinearGradients(gradients)
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Size.Size) list) =
+            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+        static member RepeatingLinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+        static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Size.Size) list)) list) =
+            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
+        static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
+            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
+
+        static member RadialGradient (shape: Shape, size: Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradient (shape: Shape, size: Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+            imageValue <| Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradients (gradients: (Shape * Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Percent.Percent) list) list) =
+            imageValue <| Image.Image.RadialGradients(gradients)
+        static member RadialGradients (gradients: (Shape * Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Size.Size) list) list) =
+            imageValue <| Image.Image.RadialGradients(gradients)
+        static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member None = None' |> imageValue'
+        static member Inherit = Inherit |> imageValue'
+        static member Initial = Initial |> imageValue'
+        static member Unset = Unset |> imageValue'
+
+    /// <summary>Specifies width of border image.</summary>
+    /// <param name="source">
+    ///     can be:
+    ///     - <c> Image </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    ///     - <c> None </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let MaskImage' (source: IMaskImage) = MaskImage.Value(source)
