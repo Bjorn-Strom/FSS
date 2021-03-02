@@ -222,6 +222,8 @@ module Global =
     type IMaskClip      = interface end
     type IMaskComposite = interface end
     type IMaskImage     = interface end
+    type IMaskMode      = interface end
+    type IMaskOrigin    = interface end
 
     // Types
     type CSSProperty = CSSProperty of string * obj
@@ -552,6 +554,8 @@ module Global =
         interface IMaskClip
         interface IMaskComposite
         interface IMaskImage
+        interface IMaskMode
+        interface IMaskOrigin
 
 [<RequireQualifiedAccess>]
 module GlobalValue =
@@ -563,11 +567,7 @@ module GlobalValue =
     let float (CssFloat f) = string f
     let string (CssString s) = s
 
-    let global' =
-        function
-            | Inherit -> "inherit"
-            | Initial -> "initial"
-            | Unset -> "unset"
+    let global' (g: Global) = Utilities.Helpers.duToLowercase g
 
     let CSSValue (CSSProperty (s,o)) = s,o
     let CounterValue (CounterProperty (s,o)) = s,o

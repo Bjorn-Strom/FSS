@@ -69,7 +69,6 @@ module Mask =
                     "MaskClip unset"
                     [ MaskClip.Unset ]
                     [ "maskClip" ==> "unset" ]
-
                 test
                     "MaskComposite add"
                     [ MaskComposite.Add]
@@ -122,4 +121,88 @@ module Mask =
                     "Mask image source unset"
                     [ MaskImage.Unset ]
                     [ "maskImage" ==> "unset" ]
+                test
+                    "Mask mode alpha"
+                    [ MaskMode.Alpha ]
+                    [ "maskMode" ==> "alpha" ]
+                test
+                    "Mask mode luminance"
+                    [ MaskMode.Luminance ]
+                    [ "maskMode" ==> "luminance" ]
+                test
+                    "Mask mode match-source"
+                    [ MaskMode.MatchSource ]
+                    [ "maskMode" ==> "match-source" ]
+                test
+                    "Mask mode multiple"
+                    [ MaskMode.Value([MaskTypes.Alpha; MaskTypes.MatchSource]) ]
+                    [ "maskMode" ==> "alpha, match-source" ]
+                test
+                    "Mask mode inherit"
+                    [ MaskMode.Inherit ]
+                    [ "maskMode" ==> "inherit" ]
+                test
+                    "Mask mode initial"
+                    [ MaskMode.Initial ]
+                    [ "maskMode" ==> "initial" ]
+                test
+                    "Mask mode unset"
+                    [ MaskMode.Unset ]
+                    [ "maskMode" ==> "unset" ]
+                test
+                    "MaskOrigin multiple"
+                    [ MaskOrigin.Value([MaskTypes.MaskOrigin.ViewBox; MaskTypes.MaskOrigin.FillBox; MaskTypes.MaskOrigin.BorderBox])]
+                    [ "maskOrigin" ==> "view-box, fill-box, border-box" ]
+                test
+                    "MaskOrigin content-box"
+                    [ MaskOrigin.ContentBox]
+                    [ "maskOrigin" ==> "content-box" ]
+                test
+                    "MaskOrigin padding-box"
+                    [ MaskOrigin.PaddingBox]
+                    [ "maskOrigin" ==> "padding-box" ]
+                test
+                    "MaskOrigin border-box"
+                    [ MaskOrigin.BorderBox]
+                    [ "maskOrigin" ==> "border-box" ]
+                test
+                    "MaskOrigin margin-box"
+                    [ MaskOrigin.MarginBox]
+                    [ "maskOrigin" ==> "margin-box" ]
+                test
+                    "MaskOrigin fill-box"
+                    [ MaskOrigin.FillBox]
+                    [ "maskOrigin" ==> "fill-box" ]
+                test
+                    "MaskOrigin stroke-box"
+                    [ MaskOrigin.StrokeBox]
+                    [ "maskOrigin" ==> "stroke-box" ]
+                test
+                    "MaskOrigin view-box"
+                    [ MaskOrigin.ViewBox]
+                    [ "maskOrigin" ==> "view-box" ]
+                test
+                    "MaskOrigin border"
+                    [ MaskOrigin.Border]
+                    [ "maskOrigin" ==> "border" ]
+                test
+                    "MaskOrigin padding"
+                    [ MaskOrigin.Padding]
+                    [ "maskOrigin" ==> "padding" ]
+                test
+                    "MaskOrigin content"
+                    [ MaskOrigin.Content]
+                    [ "maskOrigin" ==> "content" ]
+                test
+                    "MaskOrigin inherit"
+                    [ MaskOrigin.Inherit]
+                    [ "maskOrigin" ==> "inherit" ]
+                test
+                    "MaskOrigin initial"
+                    [ MaskOrigin.Initial]
+                    [ "maskOrigin" ==> "initial" ]
+                test
+                    "MaskOrigin unset"
+                    [ MaskOrigin.Unset ]
+                    [ "maskOrigin" ==> "unset" ]
             ]

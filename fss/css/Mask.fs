@@ -24,6 +24,25 @@ module MaskTypes =
         | Exclude
         interface IMaskComposite
 
+    type MaskMode =
+        | Alpha
+        | Luminance
+        | MatchSource
+        interface IMaskMode
+
+    type MaskOrigin =
+        | ContentBox
+        | PaddingBox
+        | BorderBox
+        | MarginBox
+        | FillBox
+        | StrokeBox
+        | ViewBox
+        | Content
+        | Padding
+        | Border
+        interface IMaskOrigin
+
 [<AutoOpen>]
 module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
@@ -72,7 +91,7 @@ module Mask =
     /// <returns>Css property for fss.</returns>
     let private MaskClip' (clip: IMaskClip) = clip |> MaskClip.Value
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite
     let private stringifyComposite (composite: IMaskComposite) =
         match composite with
         | :? MaskTypes.MaskComposite as m -> Utilities.Helpers.duToLowercase m
@@ -109,15 +128,6 @@ module Mask =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let private MaskComposite' (clip: IMaskComposite) = clip |> MaskComposite.Value
-
-
-
-
-
-
-
-
-
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
     let private imageSourceToString (imageSource: IMaskImage) =
@@ -180,3 +190,85 @@ module Mask =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let MaskImage' (source: IMaskImage) = MaskImage.Value(source)
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode
+    let private stringifyMode (composite: IMaskMode) =
+        match composite with
+        | :? MaskTypes.MaskMode as m -> Utilities.Helpers.duToKebab m
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown mask mode"
+
+    let private maskModeValue value = PropertyValue.cssValue Property.MaskMode value
+    let private maskModeValue' value =
+        value
+        |> stringifyMode
+        |> maskModeValue
+
+    type MaskMode =
+        static member Value (mode: IMaskMode) = mode |> maskModeValue'
+        static member Value (modes: MaskTypes.MaskMode list) =
+            modes
+            |> Utilities.Helpers.combineComma stringifyMode
+            |> maskModeValue
+        static member Alpha = MaskTypes.Alpha |> maskModeValue'
+        static member Luminance = MaskTypes.Luminance |> maskModeValue'
+        static member MatchSource = MaskTypes.MatchSource |> maskModeValue'
+        static member Inherit = Inherit |> maskModeValue'
+        static member Initial = Initial |> maskModeValue'
+        static member Unset = Unset |> maskModeValue'
+
+    /// <summary>Allows composing of masks with masks under it.</summary>
+    /// <param name="mode">
+    ///     can be:
+    ///     - <c> MaskMode </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let private MaskMode' (mode: IMaskMode) = mode |> MaskMode.Value
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
+    let private stringifyOrigin (composite: IMaskOrigin) =
+        match composite with
+        | :? MaskTypes.MaskOrigin as m -> Utilities.Helpers.duToKebab m
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown mask mode"
+
+    let private maskOriginValue value = PropertyValue.cssValue Property.MaskOrigin value
+    let private maskOriginValue' value =
+        value
+        |> stringifyOrigin
+        |> maskOriginValue
+
+    type MaskOrigin =
+        static member Value (origin: IMaskOrigin) = origin |> maskOriginValue'
+        static member Value (origins: MaskTypes.MaskOrigin list) =
+            origins
+            |> Utilities.Helpers.combineComma stringifyOrigin
+            |> maskOriginValue
+        static member ContentBox = MaskTypes.MaskOrigin.ContentBox |> maskOriginValue'
+        static member PaddingBox = MaskTypes.MaskOrigin.PaddingBox |> maskOriginValue'
+        static member BorderBox = MaskTypes.MaskOrigin.BorderBox |> maskOriginValue'
+        static member MarginBox = MaskTypes.MaskOrigin.MarginBox |> maskOriginValue'
+        static member FillBox = MaskTypes.MaskOrigin.FillBox |> maskOriginValue'
+        static member StrokeBox = MaskTypes.MaskOrigin.StrokeBox |> maskOriginValue'
+        static member ViewBox = MaskTypes.MaskOrigin.ViewBox |> maskOriginValue'
+        static member Content = MaskTypes.MaskOrigin.Content |> maskOriginValue'
+        static member Padding = MaskTypes.MaskOrigin.Padding |> maskOriginValue'
+        static member Border = MaskTypes.MaskOrigin.Border |> maskOriginValue'
+
+        static member Inherit = Inherit |> maskOriginValue'
+        static member Initial = Initial |> maskOriginValue'
+        static member Unset = Unset |> maskOriginValue'
+
+    /// <summary>Specifies origin of masks.</summary>
+    /// <param name="mode">
+    ///     can be:
+    ///     - <c> MaskOrigin </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let private MaskOrigin' (mode: IMaskOrigin) = mode |> MaskOrigin.Value
