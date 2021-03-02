@@ -156,4 +156,118 @@ module Margin =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
+
     let MarginLeft' (left: IMargin) = MarginLeft.Value(left)
+
+    let private marginInlineStartValue value = PropertyValue.cssValue Property.MarginInlineStart value
+    let private marginInlineStartValue' value =
+        value
+        |> marginToString
+        |> marginInlineStartValue
+
+    type MarginInlineStart =
+        static member Value (margin: IMargin) = margin |> marginInlineStartValue'
+        static member Auto = Auto |> marginInlineStartValue'
+        static member Inherit = Inherit |> marginInlineStartValue'
+        static member Initial = Initial |> marginInlineStartValue'
+        static member Unset = Unset |> marginInlineStartValue'
+
+    /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
+    /// <param name="margin">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let MarginInlineStart' (margin: IMargin) = MarginInlineStart.Value(margin)
+
+    let private marginInlineEndValue value = PropertyValue.cssValue Property.MarginInlineEnd value
+    let private marginInlineEndValue' value =
+        value
+        |> marginToString
+        |> marginInlineEndValue
+
+    type MarginInlineEnd =
+        static member Value (margin: IMargin) = margin |> marginInlineEndValue'
+        static member Auto = Auto |> marginInlineEndValue'
+        static member Inherit = Inherit |> marginInlineEndValue'
+        static member Initial = Initial |> marginInlineEndValue'
+        static member Unset = Unset |> marginInlineEndValue'
+
+    /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
+    /// <param name="margin">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let MarginInlineEnd' (margin: IMargin) = MarginInlineEnd.Value(margin)
+
+
+
+
+
+
+
+
+
+    let private marginBlockStartValue value = PropertyValue.cssValue Property.MarginBlockStart value
+    let private marginBlockStartValue' value =
+        value
+        |> marginToString
+        |> marginBlockStartValue
+
+    type MarginBlockStart =
+        static member Value (margin: IMargin) = margin |> marginBlockStartValue'
+        static member Auto = Auto |> marginBlockStartValue'
+        static member Inherit = Inherit |> marginBlockStartValue'
+        static member Initial = Initial |> marginBlockStartValue'
+        static member Unset = Unset |> marginBlockStartValue'
+
+    /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
+    /// <param name="margin">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let MarginBlockStart' (margin: IMargin) = MarginBlockStart.Value(margin)
+
+    let private marginBlockEndValue value = PropertyValue.cssValue Property.MarginBlockEnd value
+    let private marginBlockEndValue' value =
+        value
+        |> marginToString
+        |> marginBlockEndValue
+
+    type MarginBlockEnd =
+        static member Value (margin: IMargin) = margin |> marginBlockEndValue'
+        static member Auto = Auto |> marginBlockEndValue'
+        static member Inherit = Inherit |> marginBlockEndValue'
+        static member Initial = Initial |> marginBlockEndValue'
+        static member Unset = Unset |> marginBlockEndValue'
+
+    /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
+    /// <param name="margin">
+    ///     can be:
+    ///     - <c> Units.Size </c>
+    ///     - <c> Units.Percent </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let MarginBlockEnd' (margin: IMargin) = MarginBlockEnd.Value(margin)
+

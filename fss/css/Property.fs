@@ -162,11 +162,23 @@ module Property =
         | ListStyleImage
         | ListStylePosition
         | ListStyleType
+        | MaskClip
+        | MaskComposite
+        | MaskImage
+        | MaskMode
+        | MaskOrigin
+        | MaskPosition
+        | MaskRepeat
+        | MaskSize
         | MarginBottom
         | MarginLeft
         | MarginRight
         | MarginTop
         | Margin
+        | MarginInlineStart
+        | MarginInlineEnd
+        | MarginBlockStart
+        | MarginBlockEnd
         | MarkerOffset
         | Marks
         | MaxHeight
