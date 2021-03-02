@@ -219,7 +219,8 @@ module Global =
 
     type IAspectRatio = interface end
 
-    type IMaskClip = interface end
+    type IMaskClip      = interface end
+    type IMaskComposite = interface end
 
     // Types
     type CSSProperty = CSSProperty of string * obj
@@ -547,6 +548,7 @@ module Global =
         interface IPerspectiveOrigin
         interface IAspectRatio
         interface IMaskClip
+        interface IMaskComposite
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

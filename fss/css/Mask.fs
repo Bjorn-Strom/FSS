@@ -17,6 +17,13 @@ module MaskTypes =
         | Text
         interface IMaskClip
 
+    type MaskComposite =
+        | Add
+        | Subtract
+        | Intersect
+        | Exclude
+        interface IMaskComposite
+
 [<AutoOpen>]
 module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
@@ -64,3 +71,41 @@ module Mask =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let private MaskClip' (clip: IMaskClip) = clip |> MaskClip.Value
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
+    let private stringifyComposite (composite: IMaskComposite) =
+        match composite with
+        | :? MaskTypes.MaskComposite as m -> Utilities.Helpers.duToLowercase m
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown mask-composite"
+
+    let private maskCompositeValue value = PropertyValue.cssValue Property.MaskComposite value
+    let private maskCompositeValue' value =
+        value
+        |> stringifyComposite
+        |> maskCompositeValue
+
+    type MaskComposite =
+        static member Value (clip: IMaskComposite) = clip |> maskCompositeValue'
+        static member Value (clips: MaskTypes.MaskComposite list) =
+            clips
+            |> Utilities.Helpers.combineComma stringifyComposite
+            |> maskCompositeValue
+        static member Add = MaskTypes.Add |> maskCompositeValue'
+        static member Subtract = MaskTypes.Subtract |> maskCompositeValue'
+        static member Intersect = MaskTypes.Intersect |> maskCompositeValue'
+        static member Exclude = MaskTypes.Exclude |> maskCompositeValue'
+        static member Inherit = Inherit |> maskCompositeValue'
+        static member Initial = Initial |> maskCompositeValue'
+        static member Unset = Unset |> maskCompositeValue'
+
+    /// <summary>Allows composing of masks with masks under it.</summary>
+    /// <param name="clip">
+    ///     can be:
+    ///     - <c> MaskComposite </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let private MaskComposite' (clip: IMaskComposite) = clip |> MaskComposite.Value

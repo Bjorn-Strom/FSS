@@ -69,4 +69,33 @@ module Mask =
                     "MaskClip unset"
                     [ MaskClip.Unset ]
                     [ "maskClip" ==> "unset" ]
+
+                test
+                    "MaskComposite add"
+                    [ MaskComposite.Add]
+                    [ "maskComposite" ==> "add" ]
+                test
+                    "MaskComposite subtract"
+                    [ MaskComposite.Subtract]
+                    [ "maskComposite" ==> "subtract" ]
+                test
+                    "MaskComposite intersect"
+                    [ MaskComposite.Intersect]
+                    [ "maskComposite" ==> "intersect" ]
+                test
+                    "MaskComposite exclude"
+                    [ MaskComposite.Exclude]
+                    [ "maskComposite" ==> "exclude" ]
+                test
+                    "MaskComposite inherit"
+                    [ MaskComposite.Inherit]
+                    [ "maskComposite" ==> "inherit" ]
+                test
+                    "MaskComposite initial"
+                    [ MaskComposite.Initial]
+                    [ "maskComposite" ==> "initial" ]
+                test
+                    "MaskComposite unset"
+                    [ MaskComposite.Unset ]
+                    [ "maskComposite" ==> "unset" ]
             ]
