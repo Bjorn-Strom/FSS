@@ -207,6 +207,10 @@ module Property =
         | PaddingRight
         | PaddingTop
         | Padding
+        | PaddingInlineStart
+        | PaddingInlineEnd
+        | PaddingBlockStart
+        | PaddingBlockEnd
         | Page
         | PauseAfter
         | PauseBefore
