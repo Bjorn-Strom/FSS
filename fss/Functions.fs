@@ -51,9 +51,9 @@ module Functions =
 
     // Media
     let MediaQueryFor (device: Device) (features: MediaFeature list) (attributeList: CSSProperty list) =
-        Media.Media(device, features, attributeList |> fssObject)
+        Media.Media(device, features, attributeList)
     let MediaQuery (features: MediaFeature list) (attributeList: CSSProperty list) =
-        Media.Media(features, attributeList |> fssObject)
+        Media.Media(features, attributeList)
 
     // Font
     let fontFace (fontFamily: string) (attributeList: CSSProperty list) =

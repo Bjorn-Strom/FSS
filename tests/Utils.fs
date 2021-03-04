@@ -19,12 +19,15 @@ module Utils =
             let actual =
                 attributeList
                 |> List.map GlobalValue.CSSValue
-                |> List.map (fun (x: string, y: obj) ->
-                    let y: string list =
-                        y :?> string list list
-                       |> List.collect id
-                    x ==> (sprintf "[%s]" <| String.concat "," y)
-                )
+                |> List.map (fun (x, y) ->
+                    printfn "Y:    %A" y
+                    let properY: string =
+                        y :?> CSSProperty list
+                        |> List.map GlobalValue.CSSValue
+                        |> List.map (fun x -> $"{x}")
+                        |> String.concat ","
+                    printfn $"x: {x}, y: {properY}"
+                    x ==> properY)
 
             Expect.equal actual correct testName
 
