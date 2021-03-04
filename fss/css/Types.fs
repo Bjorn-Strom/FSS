@@ -225,6 +225,7 @@ module Global =
     type IMaskMode      = interface end
     type IMaskOrigin    = interface end
     type IMaskPosition  = interface end
+    type IMaskRepeat    = interface end
 
     // Types
     type CSSProperty = CSSProperty of string * obj
@@ -558,6 +559,7 @@ module Global =
         interface IMaskMode
         interface IMaskOrigin
         interface IMaskPosition
+        interface IMaskRepeat
 
 [<RequireQualifiedAccess>]
 module GlobalValue =

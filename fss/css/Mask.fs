@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fss
+
 [<RequireQualifiedAccess>]
 module MaskTypes =
     type MaskClip =
@@ -42,6 +44,15 @@ module MaskTypes =
         | Padding
         | Border
         interface IMaskOrigin
+
+    type MaskRepeat =
+        | RepeatX
+        | RepeatY
+        | Repeat
+        | Space
+        | Round
+        | NoRepeat
+        interface IMaskRepeat
 
 [<AutoOpen>]
 module Mask =
@@ -311,3 +322,63 @@ module Mask =
         static member Inherit = Inherit |> maskPositionValue'
         static member Initial = Initial |> maskPositionValue'
         static member Unset = Unset |> maskPositionValue'
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
+    let private stringifyRepeat (composite: IMaskRepeat) =
+        match composite with
+        | :? MaskTypes.MaskRepeat as r -> Utilities.Helpers.duToKebab r
+        | :? Global as g -> GlobalValue.global' g
+        | _ -> "Unknown mask repeat"
+
+    let private maskRepeatValue value = PropertyValue.cssValue Property.MaskRepeat value
+    let private maskRepeatValue' value =
+        value
+        |> stringifyRepeat
+        |> maskRepeatValue
+
+    let private repeatValue (x: MaskTypes.MaskRepeat, y: MaskTypes.MaskRepeat) =
+        $"{stringifyRepeat x} {stringifyRepeat y}"
+
+    type MaskRepeat =
+        static member Value (repeat: IMaskRepeat) =
+            repeat
+            |> maskRepeatValue'
+        static member Value (repeatX: IMaskRepeat, repeatY: IMaskRepeat) =
+            $"{stringifyRepeat repeatX} {stringifyRepeat repeatY}"
+            |> maskRepeatValue
+        static member Value(repeats: (MaskTypes.MaskRepeat * MaskTypes.MaskRepeat) list) =
+            repeats
+            |> Utilities.Helpers.combineComma repeatValue
+            |> maskRepeatValue
+        static member RepeatX = MaskTypes.RepeatX |> maskRepeatValue'
+        static member RepeatY = MaskTypes.RepeatY |> maskRepeatValue'
+        static member Repeat = MaskTypes.Repeat |> maskRepeatValue'
+        static member Space = MaskTypes.Space |> maskRepeatValue'
+        static member Round = MaskTypes.Round |> maskRepeatValue'
+        static member NoRepeat = MaskTypes.NoRepeat |> maskRepeatValue'
+        static member Inherit = Inherit |> maskRepeatValue'
+        static member Initial = Initial |> maskRepeatValue'
+        static member Unset = Unset |> maskRepeatValue'
+
+    /// <summary>Specifies how masks are repeated.</summary>
+    /// <param name="repeat">
+    ///     can be:
+    ///     - <c> MaskRepeat </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let private MaskRepeat' (repeat: IMaskRepeat) = repeat |> MaskRepeat.Value

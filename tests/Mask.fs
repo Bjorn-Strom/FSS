@@ -233,4 +233,53 @@ module Mask =
                     "MaskPosition unset"
                     [ MaskPosition.Unset ]
                     [ "maskPosition" ==> "unset" ]
+
+                test
+                    "MaskRepeat value"
+                    [ MaskRepeat.Value(MaskTypes.Repeat)]
+                    [ "maskRepeat" ==> "repeat" ]
+                test
+                    "MaskRepeat 2 value"
+                    [ MaskRepeat.Value(MaskTypes.RepeatX, MaskTypes.RepeatY)]
+                    [ "maskRepeat" ==> "repeat-x repeat-y" ]
+                test
+                    "MaskRepeat multiple values"
+                    [ MaskRepeat.Value([MaskTypes.RepeatX, MaskTypes.RepeatY; MaskTypes.NoRepeat, MaskTypes.Round])]
+                    [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
+                test
+                    "MaskRepeat repeatX"
+                    [ MaskRepeat.RepeatX]
+                    [ "maskRepeat" ==> "repeat-x" ]
+                test
+                    "MaskRepeat repeatY"
+                    [ MaskRepeat.RepeatY]
+                    [ "maskRepeat" ==> "repeat-y" ]
+                test
+                    "MaskRepeat no-repeat"
+                    [ MaskRepeat.NoRepeat]
+                    [ "maskRepeat" ==> "no-repeat" ]
+                test
+                    "MaskRepeat repeat"
+                    [ MaskRepeat.Repeat]
+                    [ "maskRepeat" ==> "repeat" ]
+                test
+                    "MaskRepeat round"
+                    [ MaskRepeat.Round]
+                    [ "maskRepeat" ==> "round" ]
+                test
+                    "MaskRepeat space"
+                    [ MaskRepeat.Space]
+                    [ "maskRepeat" ==> "space" ]
+                test
+                    "MaskRepeat inherit"
+                    [ MaskRepeat.Inherit]
+                    [ "maskRepeat" ==> "inherit" ]
+                test
+                    "MaskRepeat initial"
+                    [ MaskRepeat.Initial]
+                    [ "maskRepeat" ==> "initial" ]
+                test
+                    "MaskRepeat unset"
+                    [ MaskRepeat.Unset ]
+                    [ "maskRepeat" ==> "unset" ]
             ]
