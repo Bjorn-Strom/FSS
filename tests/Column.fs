@@ -234,8 +234,6 @@ module Column =
                     "Column rule color unset"
                     [ ColumnRuleColor.Unset ]
                     [ "columnRuleColor" ==> "unset" ]
-
-
                 test
                     "Column count number"
                     [ColumnCount' (CssInt 3)]
@@ -256,5 +254,4 @@ module Column =
                     "Column count unset"
                     [ColumnCount.Unset]
                     ["columnCount" ==> "unset"]
-
             ]

@@ -73,6 +73,7 @@
     <Compile Include="Selector.fs" />
     <Compile Include="PseudoClass.fs" />
     <Compile Include="PseudoElement.fs" />
+    <Compile Include="Feliz.fs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="*.*" PackagePath="fable\" />
