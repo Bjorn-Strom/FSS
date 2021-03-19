@@ -1228,7 +1228,7 @@ module Feliz =
                     [ "filter" ==> "url(\"someFilter\")" ]
                 test
                     "Filter drop shadow"
-                    [ style.filters [ Filter.DropShadow 16 16 20 CssColor.red (pct 5)  ] ]
+                    [ style.filters [ style.filter.DropShadow 16 16 20 CssColor.red (pct 5)  ] ]
                     [ "filter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
                 test
                     "Filter unset"

@@ -360,7 +360,7 @@ module Grid =
                     ["gridTemplateRows" ==> "none"]
                 test
                     "Grid template row px repeat px"
-                    [GridTemplateRows.Values [ px 200; Grid.Repeat.Repeat(RepeatType.AutoFill, px 100); px 300]]
+                    [GridTemplateRows.Values [ px 200; Grid.Repeat.Repeat(Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateRows" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid template row minmax repeat percent"
@@ -415,11 +415,11 @@ module Grid =
                     ["gridTemplateColumns" ==> "none"]
                 test
                     "Grid template column px repeat px"
-                    [GridTemplateColumns.Values [px 200; Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
+                    [GridTemplateColumns.Values [px 200; Repeat.Repeat(Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateColumns" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid template column minmax repeat percent"
-                    [GridTemplateColumns.Values [ MinMax.MinMax(px 100, ContentSize.MaxContent); Repeat.Repeat(FssTypes.Grid.AutoFill, px 200); pct 20 ]]
+                    [GridTemplateColumns.Values [ MinMax.MinMax(px 100, ContentSize.MaxContent); Repeat.Repeat(Grid.AutoFill, px 200); pct 20 ]]
                     ["gridTemplateColumns" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
                 test
                     "Grid template column auto"
@@ -471,11 +471,11 @@ module Grid =
                     "GridRepeat (repeat(4, min-content max-content))"
                 testString
                     "Repeat auto-fill and px"
-                    (string <| Repeat.Repeat(AutoFill, px 30))
+                    (string <| Repeat.Repeat(Grid.AutoFill, px 30))
                     "GridRepeat (repeat(auto-fill, 30px))"
                 testString
                     "Repeat auto-fit and px"
-                    (string <| Repeat.Repeat(AutoFit, px 30))
+                    (string <| Repeat.Repeat(Grid.AutoFit, px 30))
                     "GridRepeat (repeat(auto-fit, 30px))"
                 testString
                     "MinMax px and fraction"

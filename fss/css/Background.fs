@@ -218,7 +218,7 @@ module Background =
         |> CssColorValue.color
         |> backgroundValue
     type BackgroundColor =
-        static member Value (color: CssColor) = color |> backgroundValue'
+        static member Value (color: FssTypes.CssColor) = color |> backgroundValue'
         static member black = CssColor.black |> backgroundValue'
         static member silver = CssColor.silver |> backgroundValue'
         static member gray = CssColor.gray |> backgroundValue'
@@ -376,7 +376,7 @@ module Background =
     ///     - <c> CssColor </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundColor' (color: CssColor) = BackgroundColor.Value(color)
+    let BackgroundColor' (color: FssTypes.CssColor) = BackgroundColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
     let private imageValue value = PropertyValue.cssValue Property.BackgroundImage value

@@ -1,5 +1,6 @@
 namespace Fss
 
+open Fss.CssColor
 open FssTypes
 
 [<AutoOpen>]

@@ -173,7 +173,7 @@ module Color =
             colorCssValue <| CssColorValue.color (CssColor.Hsl(h, s, l))
         static member Hsla h s l a =
             colorCssValue <| CssColorValue.color (CssColor.Hsla (h, s, l, a))
-        static member Value (color: CssColor) = colorCssValue <| CssColorValue.color color
+        static member Value (color: FssTypes.CssColor) = colorCssValue <| CssColorValue.color color
         static member transparent = colorCssValue <| CssColorValue.color CssColor.transparent
         static member currentColor = colorCssValue <| CssColorValue.color CssColor.currentColor
         static member Revert = colorCssValue "revert"

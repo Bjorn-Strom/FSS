@@ -2,8 +2,8 @@ namespace FSSTests
 
 open Fable.Mocha
 open Fable.Core.JsInterop
-open Utils
 open Fss
+open Utils
 
 module Filter =
      let tests =
@@ -22,7 +22,7 @@ module Filter =
                     [ Filters [ Filter.Brightness <| pct 40 ] ]
                     [ "filter" ==> "brightness(40%)" ]
                 test
-                    "Filter contrast"
+                    "Filter contras"
                     [ Filters [ Filter.Contrast <| pct 40 ] ]
                     [ "filter" ==> "contrast(40%)" ]
                 test
@@ -55,7 +55,7 @@ module Filter =
                     [ "filter" ==> "sepia(60%)" ]
                 test
                     "Filter multiple"
-                    [ Filters  [ FilterType.Contrast <| pct 175; FilterType.Brightness <| pct 3  ] ]
+                    [ Filters  [ Filter.Contrast <| pct 175; Filter.Brightness <| pct 3  ] ]
                     [ "filter" ==> "contrast(175%) brightness(3%)" ]
                 test
                     "Filter none"
@@ -119,7 +119,7 @@ module Filter =
                     [ "backdropFilter" ==> "sepia(60%)" ]
                 test
                     "BackdropFilter multiple"
-                    [ BackdropFilters  [ FilterType.Contrast <| pct 175; FilterType.Brightness <| pct 3  ] ]
+                    [ BackdropFilters  [ Filter.Contrast <| pct 175; Filter.Brightness <| pct 3  ] ]
                     [ "backdropFilter" ==> "contrast(175%) brightness(3%)" ]
                 test
                     "BackdropFilter none"

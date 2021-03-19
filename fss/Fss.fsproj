@@ -61,6 +61,7 @@
     <Compile Include="Types\FontFace.fs" />
     <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />
+    <Compile Include="css\CssColor.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Font.fs" />
     <Compile Include="css\Word.fs" />

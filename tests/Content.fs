@@ -34,23 +34,23 @@ module Content =
                     [ "content" ==> "linear-gradient(45.00deg, #e66456 0px, #9198e5 100px)" ]
                 test
                     "Content string value"
-                    [ Content' (CssString "prefix")]
+                    [ Content' (FssTypes.Global.CssString "prefix")]
                     [ "content" ==> "\"prefix\"" ]
                 test
                     "Content counter"
                     [ Content.Counter sampleCounter]
-                    [ "content" ==> sprintf "counter(%s)" (counterValue sampleCounter) ]
+                    [ "content" ==> sprintf "counter(%s)" (FssTypes.Counter.counterValue sampleCounter) ]
                 test
                     "Content counter2"
-                    [ Content.Counters (sampleCounter, ListStyleType.UpperLatin) ]
-                    [ "content" ==> sprintf "counters(%s, upper-latin)" (counterValue sampleCounter) ]
+                    [ Content.Counters (sampleCounter, FssTypes.ListStyleType.UpperLatin) ]
+                    [ "content" ==> sprintf "counters(%s, upper-latin)" (FssTypes.Counter.counterValue sampleCounter) ]
                 test
                     "Content counter2"
                     [ Content.Counter (sampleCounter, ". ")]
-                    [ "content" ==> sprintf "counter(%s)'. '" (counterValue sampleCounter)]
+                    [ "content" ==> sprintf "counter(%s)'. '" (FssTypes.Counter.counterValue sampleCounter)]
                 test
                     "Content attribute"
-                    [ Content.Attribute Attribute.Title ]
+                    [ Content.Attribute FssTypes.Attribute.Title ]
                     [ "content" ==> "attr(title)" ]
                 test
                     "Content open quote"

@@ -108,7 +108,7 @@ module Mask =
                     [ "maskImage" ==> "url(image.jpg)" ]
                 test
                     "Mask image source linear gradient"
-                    [ MaskImage.LinearGradient(deg 45., [ CssColor.red, pct 0; CssColor.blue, pct 100 ]) ]
+                    [ MaskImage.LinearGradient(deg 45., [ Fss.CssColor.CssColor.red, pct 0; Fss.CssColor.CssColor.blue, pct 100 ]) ]
                     [ "maskImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
                 test
                     "Mask image source inherit"

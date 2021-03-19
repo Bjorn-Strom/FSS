@@ -135,19 +135,19 @@ module Visibility =
                     ["overflowY" ==> "unset"]
                 test
                     "Overflow visible visible"
-                    [Overflow.Value (Overflow.Visible, Overflow.Visible)]
+                    [Overflow.Value (FssTypes.Overflow.Visible, FssTypes.Overflow.Visible)]
                     ["overflow" ==> "visible visible"]
                 test
                     "OverflowXY hidden hidden"
-                    [Overflow.Value (Overflow.Hidden, Overflow.Hidden)]
+                    [Overflow.Value (FssTypes.Overflow.Hidden, FssTypes.Overflow.Hidden)]
                     ["overflow" ==> "hidden hidden"]
                 test
                     "Overflow Clip clip"
-                    [Overflow.Value (Overflow.Clip, Overflow.Clip)]
+                    [Overflow.Value (FssTypes.Overflow.Clip, FssTypes.Overflow.Clip)]
                     ["overflow" ==> "clip clip"]
                 test
                     "Overflow scroll Scroll"
-                    [Overflow.Value (Overflow.Scroll, Overflow.Scroll)]
+                    [Overflow.Value (FssTypes.Overflow.Scroll, FssTypes.Overflow.Scroll)]
                     ["overflow" ==> "scroll scroll"]
                 test
                     "OverflowWrap break-word"

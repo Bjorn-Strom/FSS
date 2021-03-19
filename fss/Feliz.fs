@@ -2,6 +2,7 @@ namespace Feliz.Fss
 
 open Feliz
 open Fss
+open Fss.CssColor
 open Fss.Word
 open FssTypes
 
@@ -25,9 +26,6 @@ module fss =
         static member css (properties: CssProperty list) =
             prop.className (fss properties)
     type CssColor = CssColor.CssColor
-    let CssInt i = CssInt i
-    let CssString s = CssString s
-    let CssFloat f = CssFloat f
 
     // Keyframes
     let keyframes attributeList = keyframes attributeList
@@ -75,6 +73,68 @@ module fss =
     let sec v = sec v
     let ms v = ms v
     let fr v = fr v
+
+    // Selectors
+    let (!+) html propertyList = !+ html propertyList
+    let (!~) html propertyList = !~ html propertyList
+    let (!>) html propertyList = !> html propertyList
+    let (! ) html propertyList = ! html propertyList
+
+    // PseudoClass
+
+    let Active attributeList = Active attributeList
+    let AnyLink attributeList = AnyLink attributeList
+    let Blank attributeList = Blank attributeList
+    let Checked attributeList = Checked attributeList
+    let Current attributeList = Current attributeList
+    let Disabled attributeList = Disabled attributeList
+    let Empty attributeList = Empty attributeList
+    let Enabled attributeList = Enabled attributeList
+    let FirstOfType attributeList = FirstOfType attributeList
+    let Focus attributeList = Focus attributeList
+    let FocusVisible attributeList = FocusVisible attributeList
+    let FocusWithin attributeList = FocusWithin attributeList
+    let Future attributeList = Future attributeList
+    let Hover attributeList = Hover attributeList
+    let Indeterminate attributeList = Indeterminate attributeList
+    let Invalid attributeList = Invalid attributeList
+    let InRange attributeList = InRange attributeList
+    let Lang language attributeList = Lang language attributeList
+    let LastChild attributeList = LastChild attributeList
+    let LastOfType attributeList = LastOfType attributeList
+    let LocalLink attributeList = LocalLink attributeList
+    let Link attributeList = Link attributeList
+    let NthChild n attributeList = NthChild n attributeList
+    let NthLastChild n attributeList = NthLastChild n attributeList
+    let NthLastOfType n attributeList = NthLastOfType n attributeList
+    let NthOfType attributeList = NthOfType attributeList
+    let OnlyChild attributeList = OnlyChild attributeList
+    let OnlyOfType attributeList = OnlyOfType attributeList
+    let Optional attributeList = Optional attributeList
+    let OutOfRange attributeList = OutOfRange attributeList
+    let Past attributeList = Past attributeList
+    let Playing attributeList = Playing attributeList
+    let Paused attributeList = Paused attributeList
+    let PlaceholderShown attributeList = PlaceholderShown attributeList
+    let ReadOnly attributeList = ReadOnly attributeList
+    let ReadWrite attributeList = ReadWrite attributeList
+    let Required attributeList = Required attributeList
+    let Root attributeList = Root attributeList
+    let Scope attributeList = Scope attributeList
+    let Target attributeList = Target attributeList
+    let TargetWithin attributeList = TargetWithin attributeList
+    let Valid attributeList = Valid attributeList
+    let Visited attributeList = Visited attributeList
+    let FirstChild attributeList = FirstChild attributeList
+    let UserInvalid attributeList = UserInvalid attributeList
+    // PseudoElement
+    let After       attributeList = After attributeList
+    let Before      attributeList = Before attributeList
+    let FirstLetter attributeList = FirstLetter attributeList
+    let FirstLine   attributeList = FirstLine attributeList
+    let Selection   attributeList = Selection attributeList
+    let Marker      attributeList = Marker attributeList
+
 
 [<RequireQualifiedAccess>]
 module style =

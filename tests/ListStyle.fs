@@ -101,12 +101,12 @@ module ListStyle =
                     [ "listStyleType" ==> "kannada" ]
                 test
                     "List style type string"
-                    [ ListStyleType' (CssString "-") ]
+                    [ ListStyleType' (FssTypes.Global.CssString "-") ]
                     [ "listStyleType" ==> "'-'" ]
                 test
                     "List style type custom"
                     [ ListStyleType' sampleCounterStyle ]
-                    [ "listStyleType" ==> (ounterValue sampleCounterStyle) ]
+                    [ "listStyleType" ==> (FssTypes.Counter.counterValue sampleCounterStyle) ]
                 test
                     "List style type None"
                     [ ListStyleType.None ]
