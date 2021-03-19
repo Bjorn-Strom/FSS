@@ -156,28 +156,28 @@ module Font =
 
         match style with
             | :? FontStyle as f -> stringifyFontStyle f
-            | :? Global as g -> GlobalValue.global' g
-            | :? Normal -> GlobalValue.normal
+            | :? Global as g -> global' g
+            | :? Normal -> normal
             | _ -> "Unknown font style"
 
     let fontStretchToString (stretch: IFontStretch) =
         match stretch with
             | :? FontStretch as f -> Fss.Utilities.Helpers.duToKebab f
-            | :? Global as g -> GlobalValue.global' g
-            | :? Normal -> GlobalValue.normal
+            | :? Global as g -> global' g
+            | :? Normal -> normal
             | :? Units.Percent.Percent as p -> Units.Percent.value p
             | _ -> "Unknown font stretch"
 
     let fontWeightToString (fontWeight: IFontWeight) =
          match fontWeight with
             | :? FontWeight as f -> Fss.Utilities.Helpers.duToLowercase f
-            | :? CssInt as i -> GlobalValue.int i
-            | :? Global as g -> GlobalValue.global' g
-            | :? Normal -> GlobalValue.normal
+            | :? CssInt as i -> int i
+            | :? Global as g -> global' g
+            | :? Normal -> normal
             | _ -> "Unknown font weight"
 
     let fontDisplayToString (display: IFontDisplay) =
         match display with
         | :? FontDisplay as f -> Fss.Utilities.Helpers.duToLowercase f
-        | :? Auto -> GlobalValue.auto
+        | :? Auto -> auto
         | _ -> "Unknown font display value"

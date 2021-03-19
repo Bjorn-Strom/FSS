@@ -231,33 +231,6 @@ module Global =
     type CssProperty = CssProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
 
-    type CssInt =
-        | CssInt of int
-        interface IAnimationIterationCount
-        interface IOrder
-        interface IFontWeight
-        interface INthChild
-        interface IColumnCount
-        interface ITabSize
-        interface IOrphans
-        interface IWidows
-
-    type CssFloat =
-        | CssFloat of float
-        interface IBorderImageWidth
-        interface IFlexGrow
-        interface IFlexShrink
-        interface ILineHeight
-
-    type CssString =
-        | CssString of string
-        interface IAnimationName
-        interface ITextEmphasisStyle
-        interface ITextOverflow
-        interface IQuotes
-        interface IListStyleType
-        interface IContent
-        interface INthChild
 
     type Auto =
         | Auto
@@ -561,7 +534,35 @@ module Global =
         interface IMaskPosition
         interface IMaskRepeat
 
-[<RequireQualifiedAccess>]
+type CssInt =
+    | CssInt of int
+    interface IAnimationIterationCount
+    interface IOrder
+    interface IFontWeight
+    interface INthChild
+    interface IColumnCount
+    interface ITabSize
+    interface IOrphans
+    interface IWidows
+
+type CssFloat =
+    | CssFloat of float
+    interface IBorderImageWidth
+    interface IFlexGrow
+    interface IFlexShrink
+    interface ILineHeight
+
+type CssString =
+    | CssString of string
+    interface IAnimationName
+    interface ITextEmphasisStyle
+    interface ITextOverflow
+    interface IQuotes
+    interface IListStyleType
+    interface IContent
+    interface INthChild
+
+[<AutoOpen>]
 module GlobalValue =
     let auto = "auto"
     let none = "none"
