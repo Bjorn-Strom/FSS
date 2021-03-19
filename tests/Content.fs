@@ -42,7 +42,7 @@ module Content =
                     [ "content" ==> sprintf "counter(%s)" (counterValue sampleCounter) ]
                 test
                     "Content counter2"
-                    [ Content.Counters (sampleCounter, ListStyleTypeType.UpperLatin) ]
+                    [ Content.Counters (sampleCounter, ListStyleType.UpperLatin) ]
                     [ "content" ==> sprintf "counters(%s, upper-latin)" (counterValue sampleCounter) ]
                 test
                     "Content counter2"

@@ -44,12 +44,7 @@ module Grid =
         interface ITemplateType
 
     let private minMaxToString (MinMaxGrid m) = m
-
-    type RepeatType =
-        | AutoFill
-        | AutoFit
-
-    let private repeatValue (repeat: RepeatType) = Utilities.Helpers.duToKebab repeat
+    let private repeatValue (repeat: Grid.Repeat) = Utilities.Helpers.duToKebab repeat
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/repeat
     type Repeat =
@@ -73,13 +68,13 @@ module Grid =
                 value
                 (Utilities.Helpers.combineWs Units.LengthPercentage.value sizes)
             |> GridRepeat
-        static member Repeat (value: RepeatType, fraction: Units.Fraction.Fraction) =
+        static member Repeat (value: Grid.Repeat, fraction: Units.Fraction.Fraction) =
             sprintf "repeat(%s, %s)" (repeatValue value) (Units.Fraction.value fraction)
             |> GridRepeat
-        static member Repeat (value: RepeatType, length: ILengthPercentage) =
+        static member Repeat (value: Grid.Repeat, length: ILengthPercentage) =
             sprintf "repeat(%s, %s)" (repeatValue value) (Units.LengthPercentage.value length)
             |> GridRepeat
-        static member Repeat (value: RepeatType, contentSize: ContentSize) =
+        static member Repeat (value: Grid.Repeat, contentSize: ContentSize) =
             sprintf "repeat(%s, %s)" (repeatValue value) (contentSizeToString contentSize)
             |> GridRepeat
         static member Repeat (value: int, minMax: MinMax) =
@@ -615,15 +610,15 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: RepeatType, fraction: Units.Fraction.Fraction) =
+        static member Repeat (value: Grid.Repeat, fraction: Units.Fraction.Fraction) =
             Repeat.Repeat(value, fraction)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: RepeatType, length: ILengthPercentage) =
+        static member Repeat (value: Grid.Repeat, length: ILengthPercentage) =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: RepeatType, contentSize: ContentSize) =
+        static member Repeat (value: Grid.Repeat, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
@@ -698,15 +693,15 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: RepeatType, fraction: Units.Fraction.Fraction) =
+        static member Repeat (value: Grid.Repeat, fraction: Units.Fraction.Fraction) =
             Repeat.Repeat(value, fraction)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: RepeatType, length: ILengthPercentage) =
+        static member Repeat (value: Grid.Repeat, length: ILengthPercentage) =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: RepeatType, contentSize: ContentSize) =
+        static member Repeat (value: Grid.Repeat, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue

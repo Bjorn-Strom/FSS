@@ -5,6 +5,7 @@ open Fable.Core.JsInterop
 open Fss.Word
 open Utils
 open Fss
+open FssTypes
 
 module Word =
     let tests =

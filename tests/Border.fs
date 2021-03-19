@@ -4,6 +4,7 @@ open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
+open FssTypes
 
 module Border =
      let tests =
@@ -63,7 +64,7 @@ module Border =
                     [ "borderStyle" ==> "outset" ]
                 test
                     "Borderstyle multiple"
-                    [ BorderStyle.Value(BorderType.Inset, BorderType.Outset, BorderType.Ridge, BorderType.Groove) ]
+                    [ BorderStyle.Value(Border.Inset, Border.Outset, Border.Ridge, Border.Groove) ]
                     [ "borderStyle" ==> "inset outset ridge groove" ]
                 test
                     "Borderstyle none"
@@ -335,7 +336,7 @@ module Border =
                     [ "borderImageRepeat" ==> "space" ]
                 test
                     "Border image repeat space"
-                    [ BorderImageRepeat.Value(BorderType.Stretch, BorderType.Repeat) ]
+                    [ BorderImageRepeat.Value(Border.Stretch, Border.Repeat) ]
                     [ "borderImageRepeat" ==> "stretch repeat" ]
                 test
                     "Border image repeat inherit"
@@ -379,11 +380,11 @@ module Border =
                     [ "borderImageOutset" ==> "1.0rem" ]
                 test
                     "Border image outset value"
-                    [ BorderImageOutset' (BorderType.BorderImageOutset 1.5) ]
+                    [ BorderImageOutset' (Border.BorderImageOutset 1.5) ]
                     [ "borderImageOutset" ==> "1.5" ]
                 test
                     "Border image outset vertical horizontal"
-                    [ BorderImageOutset.Value(BorderType.BorderImageOutset 1., BorderType.BorderImageOutset 1.2) ]
+                    [ BorderImageOutset.Value(Border.BorderImageOutset 1., Border.BorderImageOutset 1.2) ]
                     [ "borderImageOutset" ==> "1 1.2" ]
                 test
                     "Border image outset top right bottom left"

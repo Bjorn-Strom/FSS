@@ -4,6 +4,7 @@ open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
+open FssTypes
 
 module Flex =
      let tests =

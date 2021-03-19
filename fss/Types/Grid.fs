@@ -28,4 +28,8 @@ module Grid =
         | Masonry
         interface IGridTemplateRows
 
+    type Repeat =
+        | AutoFill
+        | AutoFit
+
 

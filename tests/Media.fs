@@ -4,7 +4,7 @@ open Fss
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open Media
+open FssTypes
 
 module Media =
     let tests =
@@ -14,7 +14,7 @@ module Media =
                     "Media query with min width and min height"
                     [
                         MediaQuery
-                            [ MinWidth (px 500); MaxWidth (px 700) ]
+                            [ Media.MinWidth (px 500); Media.MaxWidth (px 700) ]
                             [ BackgroundColor.red ]
                     ]
                     ["@media (min-width: 500px) and (max-width: 700px)" ==> "backgroundColor,#ff0000"]
@@ -22,14 +22,14 @@ module Media =
                     "Media query min height only"
                     [
                         MediaQuery
-                            [ MinHeight (px 700) ]
+                            [ Media.MinHeight (px 700) ]
                             [ BackgroundColor.pink ]
                     ]
                     ["@media (min-height: 700px)" ==> "backgroundColor,#ffc0cb"]
                 testNested
                     "Media query for print"
                     [
-                        MediaQueryFor Print []
+                        MediaQueryFor Media.Print []
                             [
                                 MarginTop' (px 200)
                                 Transforms
@@ -43,18 +43,18 @@ module Media =
                 testNested
                     "Media not all"
                     [
-                        MediaQueryFor (Not All) [ Color ] [ MarginTop' (px 200) ]
+                        MediaQueryFor (Media.Not Media.All) [ Media.Color ] [ MarginTop' (px 200) ]
                     ]
                     ["@media not all and (color)" ==> "marginTop,200px"]
                 testNested
                     "Media query only screen"
                     [
-                        MediaQueryFor (Only Screen)
+                        MediaQueryFor (Media.Only Media.Screen)
                             [
-                                Color
-                                Pointer Fine
-                                Scan Interlace
-                                Grid true
+                                Media.Color
+                                Media.Pointer Media.Fine
+                                Media.Scan Media.Interlace
+                                Media.Grid true
                             ]
                             [
                                 MarginTop' (px 200)

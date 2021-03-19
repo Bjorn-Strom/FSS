@@ -2,8 +2,6 @@
 
 open Fable.Mocha
 open Fable.Core.JsInterop
-open Fss.Overflow
-open Fss.Overflow
 open Utils
 open Fss
 
@@ -137,19 +135,19 @@ module Visibility =
                     ["overflowY" ==> "unset"]
                 test
                     "Overflow visible visible"
-                    [Overflow.Value (OverflowType.Visible, OverflowType.Visible)]
+                    [Overflow.Value (Overflow.Visible, Overflow.Visible)]
                     ["overflow" ==> "visible visible"]
                 test
                     "OverflowXY hidden hidden"
-                    [Overflow.Value (OverflowType.Hidden, OverflowType.Hidden)]
+                    [Overflow.Value (Overflow.Hidden, Overflow.Hidden)]
                     ["overflow" ==> "hidden hidden"]
                 test
                     "Overflow Clip clip"
-                    [Overflow.Value (OverflowType.Clip, OverflowType.Clip)]
+                    [Overflow.Value (Overflow.Clip, Overflow.Clip)]
                     ["overflow" ==> "clip clip"]
                 test
                     "Overflow scroll Scroll"
-                    [Overflow.Value (OverflowType.Scroll, OverflowType.Scroll)]
+                    [Overflow.Value (Overflow.Scroll, Overflow.Scroll)]
                     ["overflow" ==> "scroll scroll"]
                 test
                     "OverflowWrap break-word"

@@ -4,6 +4,7 @@ open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
+open FssTypes
 
 module Background =
      let tests =
@@ -199,7 +200,7 @@ module Background =
                     [ "backgroundRepeat" ==> "unset" ]
                 test
                     "background repeats horizontal and vertical - repeat space"
-                    [ BackgroundRepeat.Value(BackgroundType.Repeat, BackgroundType.Space) ]
+                    [ BackgroundRepeat.Value(Background.Repeat, Background.Space) ]
                     [ "backgroundRepeat" ==> "repeat space" ]
                 test
                     "background size cover"
@@ -311,7 +312,7 @@ module Background =
                     ["backgroundBlendMode" ==> "luminosity"]
                 test
                     "background blend mode multiple"
-                    [ BackgroundBlendMode.Values [ BackgroundType.Hue; BackgroundType.Saturation; BackgroundType.Exclusion ] ]
+                    [ BackgroundBlendMode.Values [ Background.Hue; Background.Saturation; Background.Exclusion ] ]
                     [ "backgroundBlendMode" ==> "hue, saturation, exclusion" ]
                 test
                     "background blend mode normal"

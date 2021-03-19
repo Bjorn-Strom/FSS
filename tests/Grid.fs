@@ -4,6 +4,7 @@ open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
+open FssTypes
 
 module Grid =
     let tests =
@@ -414,11 +415,11 @@ module Grid =
                     ["gridTemplateColumns" ==> "none"]
                 test
                     "Grid template column px repeat px"
-                    [GridTemplateColumns.Values [px 200; Repeat.Repeat(Grid.AutoFill, px 100); px 300]]
+                    [GridTemplateColumns.Values [px 200; Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateColumns" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid template column minmax repeat percent"
-                    [GridTemplateColumns.Values [ MinMax.MinMax(px 100, ContentSize.MaxContent); Repeat.Repeat(Grid.AutoFill, px 200); pct 20 ]]
+                    [GridTemplateColumns.Values [ MinMax.MinMax(px 100, ContentSize.MaxContent); Repeat.Repeat(FssTypes.Grid.AutoFill, px 200); pct 20 ]]
                     ["gridTemplateColumns" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
                 test
                     "Grid template column auto"
@@ -464,10 +465,6 @@ module Grid =
                     "Repeat value and fit content"
                     (string <| Repeat.Repeat(4, ContentSize.FitContent(px 100)))
                     "GridRepeat (repeat(4, fit-content(100px)))"
-                testString
-                    "Repeat value and px pct and auto"
-                    (string <| Repeat.Repeat(4, [px 10 :> ILengthPercentage; pct 30 :> ILengthPercentage]) )
-                    "GridRepeat (repeat(4, 10px 30%))"
                 testString
                     "Repeat value and min-content max-content"
                     (string <| Repeat.Repeat(4, [ContentSize.MinContent; ContentSize.MaxContent]))

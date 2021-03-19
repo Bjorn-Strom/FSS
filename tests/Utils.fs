@@ -3,27 +3,28 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Fss
+open FssTypes
 open Keyframes
 
 module Utils =
-    let test (testName: string) (attributeList: CSSProperty list) (correct: (string * obj) list) =
+    let test (testName: string) (attributeList: CssProperty list) (correct: (string * obj) list) =
         testCase testName <| fun _ ->
             let actual =
                 attributeList
-                |> List.map GlobalValue.CSSValue
+                |> List.map GlobalValue.CssValue
 
             Expect.equal actual correct testName
 
-    let testNested (testName: string) (attributeList: CSSProperty list) (correct: (string * obj) list) =
+    let testNested (testName: string) (attributeList: CssProperty list) (correct: (string * obj) list) =
         testCase testName <| fun _ ->
             let actual =
                 attributeList
-                |> List.map GlobalValue.CSSValue
+                |> List.map GlobalValue.CssValue
                 |> List.map (fun (x, y) ->
                     printfn "Y:    %A" y
                     let properY: string =
-                        y :?> CSSProperty list
-                        |> List.map GlobalValue.CSSValue
+                        y :?> CssProperty list
+                        |> List.map GlobalValue.CssValue
                         |> List.map (fun x -> $"{x}")
                         |> String.concat ","
                     printfn $"x: {x}, y: {properY}"

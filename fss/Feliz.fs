@@ -2,10 +2,22 @@ namespace Feliz.Fss
 
 open Feliz
 open Fss
-open Fss.Keyframes
 open Fss.Word
-open Fss.Media
 open FssTypes
+
+[<RequireQualifiedAccess>]
+module Counter =
+    type System = Counter.System
+    type Negative = Counter.Negative
+    type Prefix = Counter.Prefix
+    type Suffix = Counter.Suffix
+    type Range = Counter.Range
+    type Pad = Counter.Pad
+    type Symbols = Counter.Symbols
+    type AdditiveSymbol = Counter.AdditiveSymbol
+    type SpeakAs = Counter.SpeakAs
+    type CounterReset = Counter.CounterReset
+    type CounterIncrement = Counter.CounterIncrement
 
 [<AutoOpen>]
 module fss =
@@ -16,17 +28,17 @@ module fss =
     let CssInt i = CssInt i
     let CssString s = CssString s
     let CssFloat f = CssFloat f
-    type Transform = Transform.Transform
 
     // Keyframes
-    let keyframes (attributeList: KeyframeAttribute list) = keyframes attributeList
-    let frame (f: int) (properties: CssProperty list) = frame f properties
-    let frames (f: int list) (properties: CssProperty list) = frames f properties
-    let counterStyle (attributeList: CounterProperty list) = counterStyle attributeList
+    let keyframes attributeList = keyframes attributeList
+    let frame f properties = frame f properties
+    let frames f properties = frames f properties
+    // Counter
+    let counterStyle attributeList = counterStyle attributeList
     // Media
-    let MediaQueryFor (device: Device) (features: MediaFeature list) (attributeList: CssProperty list) =
+    let MediaQueryFor device features attributeList =
         MediaQueryFor device features attributeList
-    let MediaQuery (features: MediaFeature list) (attributeList: CssProperty list) =
+    let MediaQuery features attributeList=
         MediaQuery features attributeList
     // Font
     type Format = FontFace.Format
@@ -284,7 +296,7 @@ module style =
     let userSelect' userSelect = UserSelect' userSelect
 
     // Transform
-    type transform = Transform.Transform
+    type transform = Transform
     let transforms transforms = Transforms transforms
 
     type transformOrigin = TransformOrigin
@@ -531,8 +543,8 @@ module style =
     type paintOrder = PaintOrder
     let paintOrder' paintOrder = PaintOrder' paintOrder
 
-    type overFlow = Overflow
-    let overFlow' overFlow = Overflow' overFlow
+    type overflow = Overflow
+    let overflow' overFlow = Overflow' overFlow
 
     type overflowX = OverflowX
     let overFlowX' overFlowX = OverflowX' overFlowX
@@ -638,6 +650,9 @@ module style =
     let all' all = All' all
 
     // Grid
+    type repeat = Repeat
+    type minMax = MinMax
+
     type gridAutoFlow = GridAutoFlow
     let gridAutoFlow' gridAutoFlow = GridAutoFlow' gridAutoFlow
 

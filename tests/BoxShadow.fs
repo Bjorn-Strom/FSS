@@ -4,6 +4,7 @@ open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
+open FssTypes
 
 module BoxShadow =
      let tests =
@@ -41,11 +42,11 @@ module BoxShadow =
                     [
                         BoxShadows
                             [
-                                BoxShadowType.Color(px 10, px 10, CssColor.blue)
-                                BoxShadowType.BlurColor(px 10, px 10, px 10, CssColor.blue)
-                                BoxShadowType.BlurSpreadColor(px 10, px 10, px 10, px 10, CssColor.blue)
-                                BoxShadowType.Color(px 3, px 3, CssColor.red)
-                                BoxShadowType.BlurColor(em -1., px 0, em 0.4, CssColor.olive)
+                                BoxShadow.Color(px 10, px 10, CssColor.blue)
+                                BoxShadow.BlurColor(px 10, px 10, px 10, CssColor.blue)
+                                BoxShadow.BlurSpreadColor(px 10, px 10, px 10, px 10, CssColor.blue)
+                                BoxShadow.Color(px 3, px 3, CssColor.red)
+                                BoxShadow.BlurColor(em -1., px 0, em 0.4, CssColor.olive)
                             ]
                     ]
                     ["boxShadow" ==> "10px 10px #0000ff, 10px 10px 10px #0000ff, 10px 10px 10px 10px #0000ff, 3px 3px #ff0000, -1.0em 0px 0.4em #808000"]

@@ -4,6 +4,7 @@ open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
+open FssTypes
 
 module Mask =
      let tests =
@@ -135,7 +136,7 @@ module Mask =
                     [ "maskMode" ==> "match-source" ]
                 test
                     "Mask mode multiple"
-                    [ MaskMode.Value([MaskTypes.Alpha; MaskTypes.MatchSource]) ]
+                    [ MaskMode.Value([Mask.Alpha; Mask.MatchSource]) ]
                     [ "maskMode" ==> "alpha, match-source" ]
                 test
                     "Mask mode inherit"
@@ -151,7 +152,7 @@ module Mask =
                     [ "maskMode" ==> "unset" ]
                 test
                     "MaskOrigin multiple"
-                    [ MaskOrigin.Value([MaskTypes.MaskOrigin.ViewBox; MaskTypes.MaskOrigin.FillBox; MaskTypes.MaskOrigin.BorderBox])]
+                    [ MaskOrigin.Value([Mask.MaskOrigin.ViewBox; Mask.MaskOrigin.FillBox; Mask.MaskOrigin.BorderBox])]
                     [ "maskOrigin" ==> "view-box, fill-box, border-box" ]
                 test
                     "MaskOrigin content-box"
@@ -236,15 +237,15 @@ module Mask =
 
                 test
                     "MaskRepeat value"
-                    [ MaskRepeat.Value(MaskTypes.Repeat)]
+                    [ MaskRepeat.Value(Mask.Repeat)]
                     [ "maskRepeat" ==> "repeat" ]
                 test
                     "MaskRepeat 2 value"
-                    [ MaskRepeat.Value(MaskTypes.RepeatX, MaskTypes.RepeatY)]
+                    [ MaskRepeat.Value(Mask.RepeatX, Mask.RepeatY)]
                     [ "maskRepeat" ==> "repeat-x repeat-y" ]
                 test
                     "MaskRepeat multiple values"
-                    [ MaskRepeat.Value([MaskTypes.RepeatX, MaskTypes.RepeatY; MaskTypes.NoRepeat, MaskTypes.Round])]
+                    [ MaskRepeat.Value([Mask.RepeatX, Mask.RepeatY; Mask.NoRepeat, Mask.Round])]
                     [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
                 test
                     "MaskRepeat repeatX"
