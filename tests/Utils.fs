@@ -21,13 +21,11 @@ module Utils =
                 attributeList
                 |> List.map GlobalValue.CssValue
                 |> List.map (fun (x, y) ->
-                    printfn "Y:    %A" y
                     let properY: string =
                         y :?> CssProperty list
                         |> List.map GlobalValue.CssValue
                         |> List.map (fun x -> $"{x}")
                         |> String.concat ","
-                    printfn $"x: {x}, y: {properY}"
                     x ==> properY)
 
             Expect.equal actual correct testName

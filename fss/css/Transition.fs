@@ -108,7 +108,9 @@ module Transition =
     let TransitionDuration' (duration: ITransitionDuration) = TransitionDuration.Value(duration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
-    let private transitionTimingFunction value = PropertyValue.cssValue Property.TransitionTimingFunction value
+    let private transitionTimingFunction value =
+        printfn $"{value}"
+        PropertyValue.cssValue Property.TransitionTimingFunction value
     let private transitionTimingFunction' value =
         value
         |> timingToString
@@ -124,7 +126,7 @@ module Transition =
         static member Linear = TimingFunction.TimingFunction.Linear |> transitionTimingFunction
         static member StepStart = TimingFunction.TimingFunction.StepStart |> transitionTimingFunction
         static member StepEnd = TimingFunction.TimingFunction.StepEnd |> transitionTimingFunction
-        static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = TimingFunction.CubicBezier(p1,p2,p3,p4) |> transitionTimingFunction
+        static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = TimingFunction.TimingFunction.CubicBezier(p1,p2,p3,p4) |> transitionTimingFunction
         static member Step (steps: int) = TimingFunction.Step(steps) |> transitionTimingFunction
         static member Step (steps: int, jumpTerm: TimingFunction.Step) = TimingFunction.Step(steps, jumpTerm) |> transitionTimingFunction
 
