@@ -1,6 +1,6 @@
-namespace Fss.Units
+namespace FssTypes.Units
 
-open Fss
+open FssTypes
 
 module Percent =
     type Percent =

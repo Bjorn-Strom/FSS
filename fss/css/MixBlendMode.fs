@@ -1,30 +1,11 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module MixBlendModeTypes =
-    type MixBlendMode =
-        | Multiply
-        | Screen
-        | Overlay
-        | Darken
-        | Lighten
-        | ColorDodge
-        | ColorBurn
-        | HardLight
-        | SoftLight
-        | Difference
-        | Exclusion
-        | Hue
-        | Saturation
-        | Color
-        | Luminosity
-        interface IMixBlendMode
-
+open FssTypes
 [<AutoOpen>]
 module MixBlendMode =
     let private blendModeToString (blendMode: IMixBlendMode) =
         match blendMode with
-        | :? MixBlendModeTypes.MixBlendMode as b -> Utilities.Helpers.duToKebab b
+        | :? MixBlendMode.MixBlendMode as b -> Utilities.Helpers.duToKebab b
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown mix blend mode"
@@ -39,21 +20,21 @@ module MixBlendMode =
     type MixBlendMode =
         static member Value(mixBlendMode: IMixBlendMode) = mixBlendMode |> mixBlendModeCssValue'
 
-        static member Multiply = MixBlendModeTypes.Multiply |> mixBlendModeCssValue'
-        static member Screen = MixBlendModeTypes.Screen |> mixBlendModeCssValue'
-        static member Overlay = MixBlendModeTypes.Overlay |> mixBlendModeCssValue'
-        static member Darken = MixBlendModeTypes.Darken |> mixBlendModeCssValue'
-        static member Lighten = MixBlendModeTypes.Lighten |> mixBlendModeCssValue'
-        static member ColorDodge = MixBlendModeTypes.ColorDodge |> mixBlendModeCssValue'
-        static member ColorBurn = MixBlendModeTypes.ColorBurn |> mixBlendModeCssValue'
-        static member HardLight = MixBlendModeTypes.HardLight |> mixBlendModeCssValue'
-        static member SoftLight = MixBlendModeTypes.SoftLight |> mixBlendModeCssValue'
-        static member Difference = MixBlendModeTypes.Difference |> mixBlendModeCssValue'
-        static member Exclusion = MixBlendModeTypes.Exclusion |> mixBlendModeCssValue'
-        static member Hue = MixBlendModeTypes.Hue |> mixBlendModeCssValue'
-        static member Saturation = MixBlendModeTypes.Saturation |> mixBlendModeCssValue'
-        static member Color = MixBlendModeTypes.Color |> mixBlendModeCssValue'
-        static member Luminosity = MixBlendModeTypes.Luminosity |> mixBlendModeCssValue'
+        static member Multiply = MixBlendMode.Multiply |> mixBlendModeCssValue'
+        static member Screen = MixBlendMode.Screen |> mixBlendModeCssValue'
+        static member Overlay = MixBlendMode.Overlay |> mixBlendModeCssValue'
+        static member Darken = MixBlendMode.Darken |> mixBlendModeCssValue'
+        static member Lighten = MixBlendMode.Lighten |> mixBlendModeCssValue'
+        static member ColorDodge = MixBlendMode.ColorDodge |> mixBlendModeCssValue'
+        static member ColorBurn = MixBlendMode.ColorBurn |> mixBlendModeCssValue'
+        static member HardLight = MixBlendMode.HardLight |> mixBlendModeCssValue'
+        static member SoftLight = MixBlendMode.SoftLight |> mixBlendModeCssValue'
+        static member Difference = MixBlendMode.Difference |> mixBlendModeCssValue'
+        static member Exclusion = MixBlendMode.Exclusion |> mixBlendModeCssValue'
+        static member Hue = MixBlendMode.Hue |> mixBlendModeCssValue'
+        static member Saturation = MixBlendMode.Saturation |> mixBlendModeCssValue'
+        static member Color = MixBlendMode.Color |> mixBlendModeCssValue'
+        static member Luminosity = MixBlendMode.Luminosity |> mixBlendModeCssValue'
 
         static member Normal = Normal |> mixBlendModeCssValue'
         static member Inherit = Inherit |> mixBlendModeCssValue'

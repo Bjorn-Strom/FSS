@@ -1,34 +1,20 @@
 namespace Fss
-
-[<RequireQualifiedAccess>]
-module VisibilityType =
-    type Visibility =
-        | Visible
-        | Hidden
-        | Collapse
-        interface IVisibility
-
-    let visibilityToString (visibility: IVisibility) =
-        match visibility with
-        | :? Visibility as v -> Utilities.Helpers.duToLowercase v
-        | :? Global as g -> GlobalValue.global' g
-        | _ -> "Unknown visibility"
+open FssTypes
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
 [<AutoOpen>]
 module Visibility =
-
     let private visibilityValue value = PropertyValue.cssValue Property.Visibility value
     let private visibilityValue' value =
         value
-        |> VisibilityType.visibilityToString
+        |> Visibility.visibilityToString
         |> visibilityValue
 
     type Visibility =
         static member Value (visibility: IVisibility) = visibility |> visibilityValue'
-        static member Visible = VisibilityType.Visible |> visibilityValue'
-        static member Hidden = VisibilityType.Hidden |> visibilityValue'
-        static member Collapse = VisibilityType.Collapse |> visibilityValue'
+        static member Visible = Visibility.Visible |> visibilityValue'
+        static member Hidden = Visibility.Hidden |> visibilityValue'
+        static member Collapse = Visibility.Collapse |> visibilityValue'
 
         static member Inherit = Inherit |> visibilityValue'
         static member Initial = Initial |> visibilityValue'

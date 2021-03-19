@@ -1,7 +1,6 @@
-namespace Fss
+namespace FssTypes
 
 open Fable.Core.JsInterop
-open Utilities.Helpers
 
 module Property =
     type Property =
@@ -367,13 +366,13 @@ module Property =
 module PropertyValue =
     open Property
 
-    let value (v: Property): string = duToCamel v
+    let value (v: Property): string = Fss.Utilities.Helpers.duToCamel v
 
     let toKebabCase (property: Property): string =
         property
         |> value
-        |> pascalToKebabCase
+        |> Fss.Utilities.Helpers.pascalToKebabCase
 
     let cssValue (property: Property) cssValue =
-        property |> value ==> cssValue |> CSSProperty
+        property |> value ==> cssValue |> CssProperty
 

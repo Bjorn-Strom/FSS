@@ -1,27 +1,17 @@
 ﻿namespace Fss
-
-open Fss
-
-[<RequireQualifiedAccess>]
-module ContentType =
-    type Content =
-        | OpenQuote
-        | CloseQuote
-        | NoOpenQuote
-        | NoCloseQuote
-        interface IContent
+open FssTypes
 
 [<AutoOpen>]
 module Content =
 
     let private contentTypeToString (content: IContent) =
         match content with
-        | :? ContentType.Content as c -> Utilities.Helpers.duToKebab c
+        | :? Content.Content as c -> Utilities.Helpers.duToKebab c
         | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
         | :? Normal -> GlobalValue.normal
         | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
-        | :? CounterType.CounterStyle as c -> counterValue c
+        | :? Counter.CounterStyle as c -> Counter.counterValue c
         | _ -> "Unknown content"
 
     let private contentValue value = PropertyValue.cssValue Property.Content value
@@ -31,19 +21,19 @@ module Content =
         |> contentValue
 
     type Content =
-        static member OpenQuote = ContentType.OpenQuote |> contentValue'
-        static member CloseQuote = ContentType.CloseQuote |> contentValue'
-        static member NoOpenQuote = ContentType.NoOpenQuote |> contentValue'
-        static member NoCloseQuote = ContentType.NoCloseQuote |> contentValue'
+        static member OpenQuote = Content.OpenQuote |> contentValue'
+        static member CloseQuote = Content.CloseQuote |> contentValue'
+        static member NoOpenQuote = Content.NoOpenQuote |> contentValue'
+        static member NoCloseQuote = Content.NoCloseQuote |> contentValue'
 
-        static member Counter (counter: CounterType.CounterStyle) =
-            contentValue <| sprintf "counter(%s)" (counterValue counter)
-        static member Counters (counter: CounterType.CounterStyle, listType: IListStyleType) =
-            contentValue <| sprintf "counters(%s, %s)" (counterValue counter) (ListStyleTypeType.styleTypeToString listType)
-        static member Counter (counter: CounterType.CounterStyle, value: string) =
-            contentValue <| sprintf "counter(%s)'%s'" (counterValue counter) value
-        static member Counters (counters: CounterType.CounterStyle list, values: string list) =
-            List.zip (List.map counterValue counters) values
+        static member Counter (counter: Counter.CounterStyle) =
+            contentValue <| sprintf "counter(%s)" (Counter.counterValue counter)
+        static member Counters (counter: Counter.CounterStyle, listType: IListStyleType) =
+            contentValue <| sprintf "counters(%s, %s)" (Counter.counterValue counter) (ListStyleType.styleTypeToString listType)
+        static member Counter (counter: Counter.CounterStyle, value: string) =
+            contentValue <| sprintf "counter(%s)'%s'" (Counter.counterValue counter) value
+        static member Counters (counters: Counter.CounterStyle list, values: string list) =
+            List.zip (List.map Counter.counterValue counters) values
             |> List.map (fun (x, y) -> sprintf "counter(%s) '%s'" x y)
             |> String.concat " "
             |> contentValue

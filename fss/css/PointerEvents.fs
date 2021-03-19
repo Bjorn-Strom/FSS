@@ -1,24 +1,11 @@
 namespace Fss
-
-open Fss
-
-[<RequireQualifiedAccess>]
-module PointerEventsTypes =
-    type PointerEvents =
-        | VisiblePainted
-        | VisibleFill
-        | VisibleStroke
-        | Visible
-        | Painted
-        | Stroke
-        | All
-        interface IPointerEvents
+open FssTypes
 
 [<AutoOpen>]
 module PointerEvents =
     let private eventToString (event: IPointerEvents) =
         match event with
-        | :? PointerEventsTypes.PointerEvents as p -> Utilities.Helpers.duToCamel p
+        | :? PointerEvents.PointerEvents as p -> Utilities.Helpers.duToCamel p
         | :? Auto -> GlobalValue.auto
         | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
@@ -33,13 +20,13 @@ module PointerEvents =
     type PointerEvents =
         static member Value (pointerEvents: IPointerEvents) = pointerEvents |> pointerEventsValue
 
-        static member VisiblePainted = PointerEventsTypes.VisiblePainted |> pointerEventsValue'
-        static member VisibleFill = PointerEventsTypes.VisibleFill |> pointerEventsValue'
-        static member VisibleStroke = PointerEventsTypes.VisibleStroke |> pointerEventsValue'
-        static member Visible = PointerEventsTypes.Visible |> pointerEventsValue'
-        static member Painted = PointerEventsTypes.Painted |> pointerEventsValue'
-        static member Stroke = PointerEventsTypes.Stroke |> pointerEventsValue'
-        static member All = PointerEventsTypes.All |> pointerEventsValue'
+        static member VisiblePainted = PointerEvents.VisiblePainted |> pointerEventsValue'
+        static member VisibleFill = PointerEvents.VisibleFill |> pointerEventsValue'
+        static member VisibleStroke = PointerEvents.VisibleStroke |> pointerEventsValue'
+        static member Visible = PointerEvents.Visible |> pointerEventsValue'
+        static member Painted = PointerEvents.Painted |> pointerEventsValue'
+        static member Stroke = PointerEvents.Stroke |> pointerEventsValue'
+        static member All = PointerEvents.All |> pointerEventsValue'
 
         static member Auto = Auto |> pointerEventsValue'
         static member Inherit = Inherit |> pointerEventsValue'

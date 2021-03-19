@@ -1,4 +1,4 @@
-﻿namespace Fss
+﻿namespace FssTypes
 
 module Attribute =
     type Attribute =
@@ -88,8 +88,7 @@ module Attribute =
         | Datetime
         | Pubdate
         | Manifest
-    
+
 module AttributeValues =
     open Attribute
-    open Utilities.Helpers
-    let attribute (a: Attribute) = duToKebab a
+    let attribute (a: Attribute) = Fss.Utilities.Helpers.duToKebab a

@@ -1,25 +1,5 @@
 namespace Fss
-
-[<RequireQualifiedAccess>]
-module DisplayType =
-    type Display =
-        | Inline
-        | InlineBlock
-        | Block
-        | RunIn
-        | Flex
-        | Grid
-        | FlowRoot
-        | Table
-        | TableCell
-        | TableColumn
-        | TableColumnGroup
-        | TableHeaderGroup
-        | TableRowGroup
-        | TableFooterGroup
-        | TableRow
-        | TableCaption
-        interface IDisplay
+open FssTypes
 
 [<AutoOpen>]
 module Display =
@@ -27,7 +7,7 @@ module Display =
 
     let private displayToString (display: IDisplay) =
         match display with
-        | :? DisplayType.Display as t -> Utilities.Helpers.duToKebab t
+        | :? Display.Display as t -> Utilities.Helpers.duToKebab t
         | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown display type"
@@ -40,22 +20,22 @@ module Display =
 
     type Display =
         static member Value (display: IDisplay) = display |> displayValue'
-        static member Inline = DisplayType.Inline |> displayValue'
-        static member InlineBlock = DisplayType.InlineBlock |> displayValue'
-        static member Block = DisplayType.Block |> displayValue'
-        static member RunIn = DisplayType.RunIn |> displayValue'
-        static member Flex = DisplayType.Flex |> displayValue'
-        static member Grid = DisplayType.Grid |> displayValue'
-        static member FlowRoot = DisplayType.FlowRoot |> displayValue'
-        static member Table = DisplayType.Table |> displayValue'
-        static member TableCell = DisplayType.TableCell |> displayValue'
-        static member TableColumn = DisplayType.TableColumn |> displayValue'
-        static member TableColumnGroup = DisplayType.TableColumnGroup |> displayValue'
-        static member TableHeaderGroup = DisplayType.TableHeaderGroup |> displayValue'
-        static member TableRowGroup = DisplayType.TableRowGroup |> displayValue'
-        static member TableFooterGroup = DisplayType.TableFooterGroup |> displayValue'
-        static member TableRow = DisplayType.TableRow |> displayValue'
-        static member TableCaption = DisplayType.TableCaption |> displayValue'
+        static member Inline = Display.Inline |> displayValue'
+        static member InlineBlock = Display.InlineBlock |> displayValue'
+        static member Block = Display.Block |> displayValue'
+        static member RunIn = Display.RunIn |> displayValue'
+        static member Flex = Display.Flex |> displayValue'
+        static member Grid = Display.Grid |> displayValue'
+        static member FlowRoot = Display.FlowRoot |> displayValue'
+        static member Table = Display.Table |> displayValue'
+        static member TableCell = Display.TableCell |> displayValue'
+        static member TableColumn = Display.TableColumn |> displayValue'
+        static member TableColumnGroup = Display.TableColumnGroup |> displayValue'
+        static member TableHeaderGroup = Display.TableHeaderGroup |> displayValue'
+        static member TableRowGroup = Display.TableRowGroup |> displayValue'
+        static member TableFooterGroup = Display.TableFooterGroup |> displayValue'
+        static member TableRow = Display.TableRow |> displayValue'
+        static member TableCaption = Display.TableCaption |> displayValue'
 
         static member None = None' |> displayValue'
         static member Inherit = Inherit |> displayValue'

@@ -1,82 +1,6 @@
 ﻿namespace Fss
+open FssTypes
 
-[<RequireQualifiedAccess>]
-module ListStyleTypeType =
-    type ListStyleImage =
-        | ListStyleImage of string
-        interface IListStyleImage
-
-    type ListStylePosition =
-        | Inside
-        | Outside
-        interface IListStylePosition
-
-    type ListStyleType =
-        | Disc
-        | Circle
-        | Square
-        | Decimal
-        | CjkDecimal
-        | DecimalLeadingZero
-        | LowerRoman
-        | UpperRoman
-        | LowerGreek
-        | LowerAlpha
-        | LowerLatin
-        | UpperAlpha
-        | UpperLatin
-        | ArabicIndic
-        | Armenian
-        | Bengali
-        | Cambodian
-        | CjkEarthlyBranch
-        | CjkHeavenlyStem
-        | CjkIdeographic
-        | Devanagari
-        | EthiopicNumeric
-        | Georgian
-        | Gujarati
-        | Gurmukhi
-        | Hebrew
-        | Hiragana
-        | HiraganaIroha
-        | JapaneseFormal
-        | JapaneseInformal
-        | Kannada
-        | Katakana
-        | KatakanaIroha
-        | Khmer
-        | KoreanHangulFormal
-        | KoreanHanjaFormal
-        | KoreanHanjaInformal
-        | Lao
-        | LowerArmenian
-        | Malayalam
-        | Mongolian
-        | Myanmar
-        | Oriya
-        | Persian
-        | SimpChineseFormal
-        | SimpChineseInformal
-        | Tamil
-        | Telugu
-        | Thai
-        | Tibetan
-        | TradChineseFormal
-        | TradChineseInformal
-        | UpperArmenian
-        | DisclosureOpen
-        | DisclosureClosed
-        interface IListStyleType
-
-    let styleTypeToString (styleType: IListStyleType) =
-        match styleType with
-        | :? ListStyleType as l -> Utilities.Helpers.duToKebab l
-        | :? CounterType.CounterStyle as c -> counterValue c
-        | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
-        | _ -> "Unknown list style type"
 
 [<AutoOpen>]
 module ListStyle =
@@ -192,7 +116,7 @@ module ListStyle =
         |> listStyleTypeProperty
     type ListStyleType =
         static member Value (styleType: IListStyleType) = styleType |> listStyleTypeProperty'
-        static member Value(counter: CounterType.CounterStyle) = counterValue counter |> listStyleTypeProperty
+        static member Value(counter: Counter.CounterStyle) = counterValue counter |> listStyleTypeProperty
         static member Disc = ListStyleTypeType.Disc |> listStyleTypeProperty'
         static member Circle = ListStyleTypeType.Circle |> listStyleTypeProperty'
         static member Square = ListStyleTypeType.Square |> listStyleTypeProperty'

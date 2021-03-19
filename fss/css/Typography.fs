@@ -1,8 +1,8 @@
 namespace Fss
+open FssTypes
 
 [<AutoOpen>]
 module Typography =
-
     let private orphansToString (orphans: IOrphans) =
         match orphans with
         | :? CssInt as i -> GlobalValue.int i
@@ -30,10 +30,10 @@ module Typography =
     /// <summary>Specifies minimum number of lines a container must show at bottom.</summary>
     /// <param name="orphans">
     ///     can be:
-    ///     - <c> CssInt </c> 
+    ///     - <c> CssInt </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Orphans' (orphans: IOrphans) = orphans |> Orphans.Value
@@ -54,10 +54,10 @@ module Typography =
     /// <summary>Specifies minimum number of lines a container must show at top.</summary>
     /// <param name="widows">
     ///     can be:
-    ///     - <c> CssInt </c> 
+    ///     - <c> CssInt </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let Widows' (widows: IWidows) = widows |> Widows.Value

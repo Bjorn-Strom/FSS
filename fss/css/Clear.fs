@@ -1,21 +1,13 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module ClearType =
-    type Clear =
-        | Left
-        | Right
-        | Both
-        | InlineStart
-        | InlineEnd
-        interface IClear
+open FssTypes
 
 [<AutoOpen>]
 module Clear =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/clear
     let private stringifyClear (clear: IClear) =
         match clear with
-        | :? ClearType.Clear as c -> Utilities.Helpers.duToKebab c
+        | :? Clear.Clear as c -> Utilities.Helpers.duToKebab c
         | :? Global as g -> GlobalValue.global' g
         | :? None' -> GlobalValue.none
         | _ -> "Unknown clear"

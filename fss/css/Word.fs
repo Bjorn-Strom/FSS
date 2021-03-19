@@ -1,12 +1,5 @@
 namespace Fss
-
-[<RequireQualifiedAccess>]
-module WordTypes =
-    type WordBreak =
-        | WordBreak
-        | BreakAll
-        | KeepAll
-        interface IWordBreak
+open FssTypes
 
 module Word =
     let private spacingToString (spacing: IWordSpacing) =
@@ -19,7 +12,7 @@ module Word =
 
     let private breakToString (break': IWordBreak) =
         match break' with
-        | :? WordTypes.WordBreak as w -> Utilities.Helpers.duToKebab w
+        | :? Word.WordBreak as w -> Utilities.Helpers.duToKebab w
         | :? Normal -> GlobalValue.normal
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown word break"
@@ -61,9 +54,9 @@ module Word =
 
     type WordBreak =
         static member Value (spacing: IWordBreak) = spacing |> breakCssValue'
-        static member WordBreak = WordTypes.WordBreak |> breakCssValue'
-        static member BreakAll = WordTypes.BreakAll |> breakCssValue'
-        static member KeepAll = WordTypes.KeepAll |> breakCssValue'
+        static member WordBreak = Word.WordBreak |> breakCssValue'
+        static member BreakAll = Word.BreakAll |> breakCssValue'
+        static member KeepAll = Word.KeepAll |> breakCssValue'
 
         static member Normal = Normal |> breakCssValue'
         static member Initial = Initial |> breakCssValue'

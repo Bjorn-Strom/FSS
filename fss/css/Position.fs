@@ -1,40 +1,5 @@
 namespace Fss
-
-[<RequireQualifiedAccess>]
-module PositionType =
-    type Position =
-        | Static
-        | Relative
-        | Absolute
-        | Sticky
-        | Fixed
-
-    type VerticalAlign =
-        | Baseline
-        | Sub
-        | Super
-        | TextTop
-        | TextBottom
-        | Middle
-        | Top
-        | Bottom
-        interface IVerticalAlign
-
-    type Float =
-        | Left
-        | Right
-        | InlineStart
-        | InlineEnd
-        interface IFloat
-
-    type BoxSizing =
-        | ContentBox
-        | BorderBox
-
-    type Direction =
-        | Rtl
-        | Ltr
-        interface IDirection
+open FssTypes
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/position
 [<AutoOpen>]
@@ -50,7 +15,7 @@ module Position =
 
     let private verticalAlignToString (alignment: IVerticalAlign) =
         match alignment with
-        | :? PositionType.VerticalAlign as v -> Utilities.Helpers.duToKebab v
+        | :? Position.VerticalAlign as v -> Utilities.Helpers.duToKebab v
         | :? Global as g -> GlobalValue.global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
@@ -58,30 +23,30 @@ module Position =
 
     let private floatToString (float: IFloat) =
         match float with
-        | :? PositionType.Float as v -> Utilities.Helpers.duToKebab v
+        | :? Position.Float as v -> Utilities.Helpers.duToKebab v
         | :? Global as g -> GlobalValue.global' g
         | :? None' -> GlobalValue.none
         | _ -> "Unknown float"
 
     let private directionToString (direction: IDirection) =
         match direction with
-        | :? PositionType.Direction as d -> Utilities.Helpers.duToLowercase d
+        | :? Position.Direction as d -> Utilities.Helpers.duToLowercase d
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown direction"
 
     let private positionValue value = PropertyValue.cssValue Property.Position value
-    let private positionValue' (value: PositionType.Position) =
+    let private positionValue' (value: Position.Position) =
         value
         |> Utilities.Helpers.duToKebab
         |> positionValue
 
     type Position =
         static member Value(position: Position) = position |> positionValue
-        static member Static = PositionType.Static |> positionValue'
-        static member Relative = PositionType.Relative |> positionValue'
-        static member Absolute = PositionType.Absolute |> positionValue'
-        static member Sticky = PositionType.Sticky |> positionValue'
-        static member Fixed = PositionType.Fixed |> positionValue'
+        static member Static = Position.Static |> positionValue'
+        static member Relative = Position.Relative |> positionValue'
+        static member Absolute = Position.Absolute |> positionValue'
+        static member Sticky = Position.Sticky |> positionValue'
+        static member Fixed = Position.Fixed |> positionValue'
 
     /// <summary>Specifies how an element is to be positioned.</summary>
     /// <param name="position">How to position element</param>
@@ -208,14 +173,14 @@ module Position =
 
     type VerticalAlign =
         static member Value (alignment: IVerticalAlign) = alignment |> verticalAlignValue'
-        static member Baseline = PositionType.Baseline |> verticalAlignValue'
-        static member Sub = PositionType.Sub |> verticalAlignValue'
-        static member Super = PositionType.Super |> verticalAlignValue'
-        static member TextTop = PositionType.TextTop |> verticalAlignValue'
-        static member TextBottom = PositionType.TextBottom |> verticalAlignValue'
-        static member Middle = PositionType.Middle |> verticalAlignValue'
-        static member Top = PositionType.VerticalAlign.Top |> verticalAlignValue'
-        static member Bottom = PositionType.VerticalAlign.Bottom |> verticalAlignValue'
+        static member Baseline = Position.Baseline |> verticalAlignValue'
+        static member Sub = Position.Sub |> verticalAlignValue'
+        static member Super = Position.Super |> verticalAlignValue'
+        static member TextTop = Position.TextTop |> verticalAlignValue'
+        static member TextBottom = Position.TextBottom |> verticalAlignValue'
+        static member Middle = Position.Middle |> verticalAlignValue'
+        static member Top = Position.VerticalAlign.Top |> verticalAlignValue'
+        static member Bottom = Position.VerticalAlign.Bottom |> verticalAlignValue'
 
         static member Inherit = Inherit |> verticalAlignValue'
         static member Initial = Initial |> verticalAlignValue'
@@ -243,10 +208,10 @@ module Position =
 
     type Float =
         static member Value (float: IFloat) = float |> floatValue'
-        static member Left = PositionType.Float.Left |> floatValue'
-        static member Right = PositionType.Float.Right |> floatValue'
-        static member InlineStart = PositionType.InlineStart |> floatValue'
-        static member InlineEnd = PositionType.InlineEnd |> floatValue'
+        static member Left = Position.Float.Left |> floatValue'
+        static member Right = Position.Float.Right |> floatValue'
+        static member InlineStart = Position.InlineStart |> floatValue'
+        static member InlineEnd = Position.InlineEnd |> floatValue'
 
         static member None = None' |> floatValue'
         static member Inherit = Inherit |> floatValue'
@@ -267,19 +232,19 @@ module Position =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
     let private boxSizingValue value = PropertyValue.cssValue Property.BoxSizing value
-    let private boxSizingValue' (value: PositionType.BoxSizing) =
+    let private boxSizingValue' (value: Position.BoxSizing) =
         value
         |> Utilities.Helpers.duToKebab
         |> boxSizingValue
     type BoxSizing =
-        static member Value (boxSizing: PositionType.BoxSizing) = boxSizing |> boxSizingValue'
-        static member ContentBox = PositionType.ContentBox |> boxSizingValue'
-        static member BorderBox = PositionType.BorderBox |> boxSizingValue'
+        static member Value (boxSizing: Position.BoxSizing) = boxSizing |> boxSizingValue'
+        static member ContentBox = Position.ContentBox |> boxSizingValue'
+        static member BorderBox = Position.BorderBox |> boxSizingValue'
 
     /// <summary>Specifies how the total width and height of an elemenent is calculated.</summary>
     /// <param name="sizing"> How to calculate width and height How to calculate width. </param>
     /// <returns>Css property for fss.</returns>
-    let BoxSizing' (sizing: PositionType.BoxSizing) = BoxSizing.Value(sizing)
+    let BoxSizing' (sizing: Position.BoxSizing) = BoxSizing.Value(sizing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
     let private directionValue value = PropertyValue.cssValue Property.Direction value
@@ -290,8 +255,8 @@ module Position =
 
     type Direction =
         static member Value (direction: IDirection) = direction |> directionValue'
-        static member Rtl = PositionType.Rtl |> directionValue'
-        static member Ltr = PositionType.Ltr |> directionValue'
+        static member Rtl = Position.Rtl |> directionValue'
+        static member Ltr = Position.Ltr |> directionValue'
         static member Inherit = Inherit |> directionValue'
         static member Initial = Initial |> directionValue'
         static member Unset = Unset |> directionValue'

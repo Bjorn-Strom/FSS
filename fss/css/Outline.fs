@@ -1,26 +1,6 @@
 namespace Fss
 
-open Fss.CssColor
-
-[<RequireQualifiedAccess>]
-module OutlineTypes =
-    type OutlineWidth =
-        | Thin
-        | Medium
-        | Thick
-        interface IOutlineWidth
-
-    type OutlineStyle =
-        | Hidden
-        | Dotted
-        | Dashed
-        | Solid
-        | Double
-        | Groove
-        | Ridge
-        | Inset
-        | Outset
-        interface IOutlineStyle
+open FssTypes
 
 [<AutoOpen>]
 module Outline  =
@@ -39,14 +19,14 @@ module Outline  =
 
     let private outlineWidthToString (width: IOutlineWidth) =
         match width with
-            | :? OutlineTypes.OutlineWidth as c -> Utilities.Helpers.duToLowercase c
+            | :? Outline.OutlineWidth as c -> Utilities.Helpers.duToLowercase c
             | :? Global as g -> GlobalValue.global' g
             | :? Units.Size.Size as s -> Units.Size.value s
             | _ -> "Unknown outline width"
 
     let private outlineStyleToString (style: IOutlineStyle) =
         match style with
-            | :? OutlineTypes.OutlineStyle as c -> Utilities.Helpers.duToLowercase c
+            | :? Outline.OutlineStyle as c -> Utilities.Helpers.duToLowercase c
             | :? Global as g -> GlobalValue.global' g
             | :? None' -> GlobalValue.none
             | _ -> "Unknown outline style"
@@ -267,9 +247,9 @@ module Outline  =
 
     type OutlineWidth =
         static member Value (width: IOutlineWidth) = width |> outlineWidthValue'
-        static member Thin = OutlineTypes.Thin |> outlineWidthValue'
-        static member Medium = OutlineTypes.Medium |> outlineWidthValue'
-        static member Thick = OutlineTypes.Thick |> outlineWidthValue'
+        static member Thin = Outline.Thin |> outlineWidthValue'
+        static member Medium = Outline.Medium |> outlineWidthValue'
+        static member Thick = Outline.Thick |> outlineWidthValue'
 
         static member Inherit = Inherit |> outlineWidthValue'
         static member Initial = Initial |> outlineWidthValue'
@@ -297,15 +277,15 @@ module Outline  =
 
     type OutlineStyle =
         static member Value (style: IOutlineStyle) = style |> outlineStyleValue'
-        static member Hidden = OutlineTypes.Hidden |> outlineStyleValue'
-        static member Dotted = OutlineTypes.Dotted |> outlineStyleValue'
-        static member Dashed = OutlineTypes.Dashed |> outlineStyleValue'
-        static member Solid = OutlineTypes.Solid |> outlineStyleValue'
-        static member Double = OutlineTypes.Double |> outlineStyleValue'
-        static member Groove = OutlineTypes.Groove |> outlineStyleValue'
-        static member Ridge = OutlineTypes.Ridge |> outlineStyleValue'
-        static member Inset = OutlineTypes.Inset |> outlineStyleValue'
-        static member Outset = OutlineTypes.Outset |> outlineStyleValue'
+        static member Hidden = Outline.Hidden |> outlineStyleValue'
+        static member Dotted = Outline.Dotted |> outlineStyleValue'
+        static member Dashed = Outline.Dashed |> outlineStyleValue'
+        static member Solid = Outline.Solid |> outlineStyleValue'
+        static member Double = Outline.Double |> outlineStyleValue'
+        static member Groove = Outline.Groove |> outlineStyleValue'
+        static member Ridge = Outline.Ridge |> outlineStyleValue'
+        static member Inset = Outline.Inset |> outlineStyleValue'
+        static member Outset = Outline.Outset |> outlineStyleValue'
 
         static member None = None' |> outlineStyleValue'
         static member Inherit = Inherit |> outlineStyleValue'

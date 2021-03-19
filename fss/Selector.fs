@@ -2,6 +2,8 @@ namespace Fss
 
 open Fable.Core.JsInterop
 
+open FssTypes
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_combinator
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Child_combinator
 // https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator
@@ -16,7 +18,7 @@ module Selector =
         static member Child (html: Html) = sprintf " > %A" (value html)
         static member Descendant (html: Html) = sprintf " %A" (value html)
 
-    let (!+) (html: Html.Html) (propertyList: CSSProperty list) = Selector.AdjacentSibling(html) ==> (propertyList |> fss) |> CSSProperty
-    let (!~) (html: Html.Html) (propertyList: CSSProperty list) = Selector.GeneralSibling(html) ==> (propertyList  |> fss) |> CSSProperty
-    let (!>) (html: Html.Html) (propertyList: CSSProperty list) = Selector.Child(html) ==> (propertyList |> fss) |> CSSProperty
-    let (! ) (html: Html.Html) (propertyList: CSSProperty list) = Selector.Descendant(html) ==> (propertyList |> fss) |> CSSProperty
+    let (!+) (html: Html.Html) (propertyList: CssProperty list) = Selector.AdjacentSibling(html) ==> (propertyList |> fss) |> CssProperty
+    let (!~) (html: Html.Html) (propertyList: CssProperty list) = Selector.GeneralSibling(html) ==> (propertyList  |> fss) |> CssProperty
+    let (!>) (html: Html.Html) (propertyList: CssProperty list) = Selector.Child(html) ==> (propertyList |> fss) |> CssProperty
+    let (! ) (html: Html.Html) (propertyList: CssProperty list) = Selector.Descendant(html) ==> (propertyList |> fss) |> CssProperty

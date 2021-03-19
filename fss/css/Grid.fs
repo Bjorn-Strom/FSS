@@ -1,36 +1,8 @@
 ﻿namespace Fss
-
-[<RequireQualifiedAccess>]
-module GridType =
-    type GridAutoFlow =
-        | Row
-        | Column
-        | Dense
-        | RowDense
-        | ColumnDense
-        interface IGridAutoFlow
-
-    type GridTemplateColumns =
-        | Subgrid
-        | Masonry
-        interface IGridTemplateColumns
-
-    type GridPosition =
-        | Value of int
-        | Ident of string
-        | IdentValue of string * int
-        | ValueIdentSpan of int * string
-        | Span of string
-        interface IGridPosition
-
-    type GridTemplateRows =
-        | Subgrid
-        | Masonry
-        interface IGridTemplateRows
+open FssTypes
 
 [<AutoOpen>]
 module Grid =
-
      // https://developer.mozilla.org/en-US/docs/Web/CSS/minmax
     type MinMax =
         | MinMaxGrid of string
@@ -128,7 +100,7 @@ module Grid =
 
     let private autoFlowToString (autoFlow: IGridAutoFlow) =
         match autoFlow with
-        | :? GridType.GridAutoFlow as g -> Utilities.Helpers.duToSpaced g
+        | :? Grid.GridAutoFlow as g -> Utilities.Helpers.duToSpaced g
         | :? Global as g ->  GlobalValue.global' g
         | _ -> "Unknown grid auto flow"
 
@@ -163,7 +135,7 @@ module Grid =
 
     let private templateColumnToString (templateColumn: IGridTemplateColumns) =
         match templateColumn with
-        | :? GridType.GridTemplateColumns as g -> Utilities.Helpers.duToLowercase g
+        | :? Grid.GridTemplateColumns as g -> Utilities.Helpers.duToLowercase g
         | :? Auto -> GlobalValue.auto
         | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
@@ -174,21 +146,21 @@ module Grid =
     let private gridPositionToString (position: IGridPosition) =
         let stringifyGridPosition =
             function
-                | GridType.Value v -> string v
-                | GridType.Ident i -> i
-                | GridType.IdentValue (i, v) -> sprintf "%s %d" i v
-                | GridType.ValueIdentSpan (v, i) -> sprintf "%d %s span" v i
-                | GridType.Span s -> s
+                | Grid.Value v -> string v
+                | Grid.Ident i -> i
+                | Grid.IdentValue (i, v) -> sprintf "%s %d" i v
+                | Grid.ValueIdentSpan (v, i) -> sprintf "%d %s span" v i
+                | Grid.Span s -> s
 
         match position with
-        | :? GridType.GridPosition as g -> stringifyGridPosition g
+        | :? Grid.GridPosition as g -> stringifyGridPosition g
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown grid position"
 
     let private templateRowToString (templateRow: IGridTemplateRows) =
         match templateRow with
-        | :? GridType.GridTemplateRows as g -> Utilities.Helpers.duToLowercase g
+        | :? Grid.GridTemplateRows as g -> Utilities.Helpers.duToLowercase g
         | :? Auto -> GlobalValue.auto
         | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
@@ -237,11 +209,11 @@ module Grid =
         |> autoFlowValue
     type GridAutoFlow =
         static member Value (autoFlow: IGridAutoFlow) = autoFlow |> autoFlowValue'
-        static member Row = GridType.Row |> autoFlowValue'
-        static member Column = GridType.Column |> autoFlowValue'
-        static member Dense = GridType.Dense |> autoFlowValue'
-        static member RowDense = GridType.RowDense |> autoFlowValue'
-        static member ColumnDense = GridType.ColumnDense |> autoFlowValue'
+        static member Row = Grid.Row |> autoFlowValue'
+        static member Column = Grid.Column |> autoFlowValue'
+        static member Dense = Grid.Dense |> autoFlowValue'
+        static member RowDense = Grid.RowDense |> autoFlowValue'
+        static member ColumnDense = Grid.ColumnDense |> autoFlowValue'
 
         static member Inherit = Inherit |> autoFlowValue'
         static member Initial = Initial |> autoFlowValue'
@@ -378,13 +350,13 @@ module Grid =
     // Grid position
     type GridPosition =
         static member Value (position: IGridPosition) = position
-        static member Ident ident = ident |>GridType.Ident
-        static member Value (value: int) = value |>GridType.Value
-        static member IdentValue (ident: string, value: int) = GridType.IdentValue(ident, value)
-        static member ValueIdentSpan (value: int, ident: string) = GridType.ValueIdentSpan(value, ident)
-        static member Span (value: int) = sprintf "span %d" value |>GridType.Span
-        static member Span (ident: string) = sprintf "span %s" ident |>GridType.Span
-        static member Span (value: int, ident: string) = sprintf "%d %s span" value ident |>GridType.Span
+        static member Ident ident = ident |>Grid.Ident
+        static member Value (value: int) = value |>Grid.Value
+        static member IdentValue (ident: string, value: int) = Grid.IdentValue(ident, value)
+        static member ValueIdentSpan (value: int, ident: string) = Grid.ValueIdentSpan(value, ident)
+        static member Span (value: int) = sprintf "span %d" value |>Grid.Span
+        static member Span (ident: string) = sprintf "span %s" ident |>Grid.Span
+        static member Span (value: int, ident: string) = sprintf "%d %s span" value ident |>Grid.Span
 
         static member Auto = Auto
         static member Inherit = Inherit
@@ -655,8 +627,8 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
-        static member Subgrid = GridType.GridTemplateRows.Subgrid |> templateRowValue'
-        static member Masonry = GridType.GridTemplateRows.Masonry |> templateRowValue'
+        static member Subgrid = Grid.GridTemplateRows.Subgrid |> templateRowValue'
+        static member Masonry = Grid.GridTemplateRows.Masonry |> templateRowValue'
         static member None = None' |> templateRowValue'
         static member Auto = Auto |> templateRowValue'
         static member Inherit = Inherit |> templateRowValue'
@@ -738,8 +710,8 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
-        static member Subgrid = GridType.Subgrid |> templateColumnValue'
-        static member Masonry = GridType.Masonry |> templateColumnValue'
+        static member Subgrid = Grid.Subgrid |> templateColumnValue'
+        static member Masonry = Grid.Masonry |> templateColumnValue'
         static member None = None' |> templateColumnValue'
         static member Auto = Auto |> templateColumnValue'
         static member Inherit = Inherit |> templateColumnValue'

@@ -1,4 +1,5 @@
 ﻿namespace Fss
+open FssTypes
 
 [<AutoOpen>]
 module Transition =
@@ -21,7 +22,7 @@ module Transition =
 
     let private timingToString (duration: ITransitionTimingFunction) =
         match duration with
-        | :? TimingFunction.TimingFunction as t -> TimingFunctionType.timingToString t
+        | :? TimingFunction.TimingFunction as t -> TimingFunction.timingToString t
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown transition timing"
 
@@ -115,7 +116,7 @@ module Transition =
     type TransitionTimingFunction =
         static member Value (timingFunction: ITransitionTimingFunction) = timingFunction |> transitionTimingFunction'
         static member Value (timingFunctions: ITransitionTimingFunction list) =
-             Utilities.Helpers.combineComma TimingFunctionType.timingToString timingFunctions |> transitionTimingFunction
+             Utilities.Helpers.combineComma TimingFunction.timingToString timingFunctions |> transitionTimingFunction
         static member Ease = TimingFunction.TimingFunction.Ease |> transitionTimingFunction
         static member EaseIn = TimingFunction.TimingFunction.EaseIn |> transitionTimingFunction
         static member EaseOut = TimingFunction.TimingFunction.EaseOut |> transitionTimingFunction
@@ -125,7 +126,7 @@ module Transition =
         static member StepEnd = TimingFunction.TimingFunction.StepEnd |> transitionTimingFunction
         static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = TimingFunction.CubicBezier(p1,p2,p3,p4) |> transitionTimingFunction
         static member Step (steps: int) = TimingFunction.Step(steps) |> transitionTimingFunction
-        static member Step (steps: int, jumpTerm: TimingFunctionType.Step) = TimingFunction.Step(steps, jumpTerm) |> transitionTimingFunction
+        static member Step (steps: int, jumpTerm: TimingFunction.Step) = TimingFunction.Step(steps, jumpTerm) |> transitionTimingFunction
 
         static member Inherit = Inherit |> transitionTimingFunction'
         static member Initial = Initial |> transitionTimingFunction'

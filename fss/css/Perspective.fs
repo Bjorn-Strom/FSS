@@ -1,4 +1,5 @@
 ﻿namespace Fss
+open FssTypes
 
 [<AutoOpen>]
 module Perspective =

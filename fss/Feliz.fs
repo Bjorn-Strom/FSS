@@ -5,34 +5,35 @@ open Fss
 open Fss.Keyframes
 open Fss.Word
 open Fss.Media
+open FssTypes
 
 [<AutoOpen>]
 module fss =
     type prop with
-        static member css (properties: CSSProperty list) =
+        static member css (properties: CssProperty list) =
             prop.className (fss properties)
     type CssColor = CssColor.CssColor
     let CssInt i = CssInt i
     let CssString s = CssString s
     let CssFloat f = CssFloat f
-    type Transform = TransformType.Transform
+    type Transform = Transform.Transform
 
     // Keyframes
     let keyframes (attributeList: KeyframeAttribute list) = keyframes attributeList
-    let frame (f: int) (properties: CSSProperty list) = frame f properties
-    let frames (f: int list) (properties: CSSProperty list) = frames f properties
+    let frame (f: int) (properties: CssProperty list) = frame f properties
+    let frames (f: int list) (properties: CssProperty list) = frames f properties
     let counterStyle (attributeList: CounterProperty list) = counterStyle attributeList
     // Media
-    let MediaQueryFor (device: Device) (features: MediaFeature list) (attributeList: CSSProperty list) =
+    let MediaQueryFor (device: Device) (features: MediaFeature list) (attributeList: CssProperty list) =
         MediaQueryFor device features attributeList
-    let MediaQuery (features: MediaFeature list) (attributeList: CSSProperty list) =
+    let MediaQuery (features: MediaFeature list) (attributeList: CssProperty list) =
         MediaQuery features attributeList
     // Font
     type Format = FontFace.Format
     type Source = FontFace.Source
     type FontFace = FontFace.FontFace
-    let fontFace (fontFamily: string) (attributeList: CSSProperty list) = fontFace fontFamily attributeList
-    let fontFaces (fontFamily: string) (attributeLists: CSSProperty list list) = fontFaces fontFamily attributeLists
+    let fontFace (fontFamily: string) (attributeList: CssProperty list) = fontFace fontFamily attributeList
+    let fontFaces (fontFamily: string) (attributeLists: CssProperty list list) = fontFaces fontFamily attributeLists
     // Color
     let rgb r g b = rgb r g b
     let rgba r g b a = rgba r g b a
@@ -744,7 +745,7 @@ module style =
     // box shadow
     type boxShadow = BoxShadow
     let boxShadows boxShadows = BoxShadows boxShadows
-    let inset shadow = BoxShadowType.Inset shadow
+    let inset shadow = BoxShadow.Inset shadow
 
     // Scroll
     type scrollBehavior = ScrollBehavior

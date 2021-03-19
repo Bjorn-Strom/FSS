@@ -1,65 +1,13 @@
 namespace Fss
 
-open Fss
-
-[<RequireQualifiedAccess>]
-module MaskTypes =
-    type MaskClip =
-        | ContentBox
-        | PaddingBox
-        | BorderBox
-        | MarginBox
-        | FillBox
-        | StrokeBox
-        | ViewBox
-        | NoClip
-        | Border
-        | Padding
-        | Content
-        | Text
-        interface IMaskClip
-
-    type MaskComposite =
-        | Add
-        | Subtract
-        | Intersect
-        | Exclude
-        interface IMaskComposite
-
-    type MaskMode =
-        | Alpha
-        | Luminance
-        | MatchSource
-        interface IMaskMode
-
-    type MaskOrigin =
-        | ContentBox
-        | PaddingBox
-        | BorderBox
-        | MarginBox
-        | FillBox
-        | StrokeBox
-        | ViewBox
-        | Content
-        | Padding
-        | Border
-        interface IMaskOrigin
-
-    type MaskRepeat =
-        | RepeatX
-        | RepeatY
-        | Repeat
-        | Space
-        | Round
-        | NoRepeat
-        interface IMaskRepeat
+open FssTypes
 
 [<AutoOpen>]
 module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
     let private stringifyClip (clip: IMaskClip) =
         match clip with
-        | :? MaskTypes.MaskClip as m -> Utilities.Helpers.duToKebab m
+        | :? Mask.MaskClip as m -> Utilities.Helpers.duToKebab m
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown mask-clip"
 
@@ -71,22 +19,22 @@ module Mask =
 
     type MaskClip =
         static member Value (clip: IMaskClip) = clip |> maskClipValue'
-        static member Value (clips: MaskTypes.MaskClip list) =
+        static member Value (clips: Mask.MaskClip list) =
             clips
             |> Utilities.Helpers.combineComma stringifyClip
             |> maskClipValue
-        static member ContentBox = MaskTypes.ContentBox |> maskClipValue'
-        static member PaddingBox = MaskTypes.PaddingBox |> maskClipValue'
-        static member BorderBox = MaskTypes.BorderBox |> maskClipValue'
-        static member MarginBox = MaskTypes.MarginBox |> maskClipValue'
-        static member FillBox = MaskTypes.FillBox |> maskClipValue'
-        static member StrokeBox = MaskTypes.StrokeBox |> maskClipValue'
-        static member ViewBox = MaskTypes.ViewBox |> maskClipValue'
-        static member NoClip = MaskTypes.NoClip |> maskClipValue'
-        static member Border = MaskTypes.Border |> maskClipValue'
-        static member Padding = MaskTypes.Padding |> maskClipValue'
-        static member Content = MaskTypes.Content |> maskClipValue'
-        static member Text = MaskTypes.Text |> maskClipValue'
+        static member ContentBox = Mask.ContentBox |> maskClipValue'
+        static member PaddingBox = Mask.PaddingBox |> maskClipValue'
+        static member BorderBox = Mask.BorderBox |> maskClipValue'
+        static member MarginBox = Mask.MarginBox |> maskClipValue'
+        static member FillBox = Mask.FillBox |> maskClipValue'
+        static member StrokeBox = Mask.StrokeBox |> maskClipValue'
+        static member ViewBox = Mask.ViewBox |> maskClipValue'
+        static member NoClip = Mask.NoClip |> maskClipValue'
+        static member Border = Mask.Border |> maskClipValue'
+        static member Padding = Mask.Padding |> maskClipValue'
+        static member Content = Mask.Content |> maskClipValue'
+        static member Text = Mask.Text |> maskClipValue'
         static member Inherit = Inherit |> maskClipValue'
         static member Initial = Initial |> maskClipValue'
         static member Unset = Unset |> maskClipValue'
@@ -105,7 +53,7 @@ module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite
     let private stringifyComposite (composite: IMaskComposite) =
         match composite with
-        | :? MaskTypes.MaskComposite as m -> Utilities.Helpers.duToLowercase m
+        | :? Mask.MaskComposite as m -> Utilities.Helpers.duToLowercase m
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown mask-composite"
 
@@ -117,14 +65,14 @@ module Mask =
 
     type MaskComposite =
         static member Value (clip: IMaskComposite) = clip |> maskCompositeValue'
-        static member Value (clips: MaskTypes.MaskComposite list) =
+        static member Value (clips: Mask.MaskComposite list) =
             clips
             |> Utilities.Helpers.combineComma stringifyComposite
             |> maskCompositeValue
-        static member Add = MaskTypes.Add |> maskCompositeValue'
-        static member Subtract = MaskTypes.Subtract |> maskCompositeValue'
-        static member Intersect = MaskTypes.Intersect |> maskCompositeValue'
-        static member Exclude = MaskTypes.Exclude |> maskCompositeValue'
+        static member Add = Mask.Add |> maskCompositeValue'
+        static member Subtract = Mask.Subtract |> maskCompositeValue'
+        static member Intersect = Mask.Intersect |> maskCompositeValue'
+        static member Exclude = Mask.Exclude |> maskCompositeValue'
         static member Inherit = Inherit |> maskCompositeValue'
         static member Initial = Initial |> maskCompositeValue'
         static member Unset = Unset |> maskCompositeValue'
@@ -205,7 +153,7 @@ module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode
     let private stringifyMode (composite: IMaskMode) =
         match composite with
-        | :? MaskTypes.MaskMode as m -> Utilities.Helpers.duToKebab m
+        | :? Mask.MaskMode as m -> Utilities.Helpers.duToKebab m
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown mask mode"
 
@@ -217,13 +165,13 @@ module Mask =
 
     type MaskMode =
         static member Value (mode: IMaskMode) = mode |> maskModeValue'
-        static member Value (modes: MaskTypes.MaskMode list) =
+        static member Value (modes: Mask.MaskMode list) =
             modes
             |> Utilities.Helpers.combineComma stringifyMode
             |> maskModeValue
-        static member Alpha = MaskTypes.Alpha |> maskModeValue'
-        static member Luminance = MaskTypes.Luminance |> maskModeValue'
-        static member MatchSource = MaskTypes.MatchSource |> maskModeValue'
+        static member Alpha = Mask.Alpha |> maskModeValue'
+        static member Luminance = Mask.Luminance |> maskModeValue'
+        static member MatchSource = Mask.MatchSource |> maskModeValue'
         static member Inherit = Inherit |> maskModeValue'
         static member Initial = Initial |> maskModeValue'
         static member Unset = Unset |> maskModeValue'
@@ -242,7 +190,7 @@ module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
     let private stringifyOrigin (composite: IMaskOrigin) =
         match composite with
-        | :? MaskTypes.MaskOrigin as m -> Utilities.Helpers.duToKebab m
+        | :? Mask.MaskOrigin as m -> Utilities.Helpers.duToKebab m
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown mask mode"
 
@@ -254,20 +202,20 @@ module Mask =
 
     type MaskOrigin =
         static member Value (origin: IMaskOrigin) = origin |> maskOriginValue'
-        static member Value (origins: MaskTypes.MaskOrigin list) =
+        static member Value (origins: Mask.MaskOrigin list) =
             origins
             |> Utilities.Helpers.combineComma stringifyOrigin
             |> maskOriginValue
-        static member ContentBox = MaskTypes.MaskOrigin.ContentBox |> maskOriginValue'
-        static member PaddingBox = MaskTypes.MaskOrigin.PaddingBox |> maskOriginValue'
-        static member BorderBox = MaskTypes.MaskOrigin.BorderBox |> maskOriginValue'
-        static member MarginBox = MaskTypes.MaskOrigin.MarginBox |> maskOriginValue'
-        static member FillBox = MaskTypes.MaskOrigin.FillBox |> maskOriginValue'
-        static member StrokeBox = MaskTypes.MaskOrigin.StrokeBox |> maskOriginValue'
-        static member ViewBox = MaskTypes.MaskOrigin.ViewBox |> maskOriginValue'
-        static member Content = MaskTypes.MaskOrigin.Content |> maskOriginValue'
-        static member Padding = MaskTypes.MaskOrigin.Padding |> maskOriginValue'
-        static member Border = MaskTypes.MaskOrigin.Border |> maskOriginValue'
+        static member ContentBox = Mask.MaskOrigin.ContentBox |> maskOriginValue'
+        static member PaddingBox = Mask.MaskOrigin.PaddingBox |> maskOriginValue'
+        static member BorderBox = Mask.MaskOrigin.BorderBox |> maskOriginValue'
+        static member MarginBox = Mask.MaskOrigin.MarginBox |> maskOriginValue'
+        static member FillBox = Mask.MaskOrigin.FillBox |> maskOriginValue'
+        static member StrokeBox = Mask.MaskOrigin.StrokeBox |> maskOriginValue'
+        static member ViewBox = Mask.MaskOrigin.ViewBox |> maskOriginValue'
+        static member Content = Mask.MaskOrigin.Content |> maskOriginValue'
+        static member Padding = Mask.MaskOrigin.Padding |> maskOriginValue'
+        static member Border = Mask.MaskOrigin.Border |> maskOriginValue'
 
         static member Inherit = Inherit |> maskOriginValue'
         static member Initial = Initial |> maskOriginValue'
@@ -338,7 +286,7 @@ module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
     let private stringifyRepeat (composite: IMaskRepeat) =
         match composite with
-        | :? MaskTypes.MaskRepeat as r -> Utilities.Helpers.duToKebab r
+        | :? Mask.MaskRepeat as r -> Utilities.Helpers.duToKebab r
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown mask repeat"
 
@@ -348,7 +296,7 @@ module Mask =
         |> stringifyRepeat
         |> maskRepeatValue
 
-    let private repeatValue (x: MaskTypes.MaskRepeat, y: MaskTypes.MaskRepeat) =
+    let private repeatValue (x: Mask.MaskRepeat, y: Mask.MaskRepeat) =
         $"{stringifyRepeat x} {stringifyRepeat y}"
 
     type MaskRepeat =
@@ -358,16 +306,16 @@ module Mask =
         static member Value (repeatX: IMaskRepeat, repeatY: IMaskRepeat) =
             $"{stringifyRepeat repeatX} {stringifyRepeat repeatY}"
             |> maskRepeatValue
-        static member Value(repeats: (MaskTypes.MaskRepeat * MaskTypes.MaskRepeat) list) =
+        static member Value(repeats: (Mask.MaskRepeat * Mask.MaskRepeat) list) =
             repeats
             |> Utilities.Helpers.combineComma repeatValue
             |> maskRepeatValue
-        static member RepeatX = MaskTypes.RepeatX |> maskRepeatValue'
-        static member RepeatY = MaskTypes.RepeatY |> maskRepeatValue'
-        static member Repeat = MaskTypes.Repeat |> maskRepeatValue'
-        static member Space = MaskTypes.Space |> maskRepeatValue'
-        static member Round = MaskTypes.Round |> maskRepeatValue'
-        static member NoRepeat = MaskTypes.NoRepeat |> maskRepeatValue'
+        static member RepeatX = Mask.RepeatX |> maskRepeatValue'
+        static member RepeatY = Mask.RepeatY |> maskRepeatValue'
+        static member Repeat = Mask.Repeat |> maskRepeatValue'
+        static member Space = Mask.Space |> maskRepeatValue'
+        static member Round = Mask.Round |> maskRepeatValue'
+        static member NoRepeat = Mask.NoRepeat |> maskRepeatValue'
         static member Inherit = Inherit |> maskRepeatValue'
         static member Initial = Initial |> maskRepeatValue'
         static member Unset = Unset |> maskRepeatValue'

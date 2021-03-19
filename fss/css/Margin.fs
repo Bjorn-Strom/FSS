@@ -1,4 +1,5 @@
 namespace Fss
+open FssTypes
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/margin
 [<AutoOpen>]

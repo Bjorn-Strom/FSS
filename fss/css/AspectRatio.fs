@@ -1,5 +1,7 @@
 namespace Fss
 
+open FssTypes
+
 [<AutoOpen>]
 module AspectRatio =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio

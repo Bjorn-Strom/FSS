@@ -1,6 +1,5 @@
 namespace Fss
-
-open Fss
+open FssTypes
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/width
 // https://developer.mozilla.org/en-US/docs/Web/CSS/height

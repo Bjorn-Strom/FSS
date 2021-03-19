@@ -1,26 +1,21 @@
 namespace Fss
-
-[<RequireQualifiedAccess>]
-module ColorTypes =
-    type ColorAdjust =
-        | Economy
-        | Exact
+open FssTypes
 
 [<AutoOpen>]
 module Color =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color-adjust
     let private colorAdjustCssValue value = PropertyValue.cssValue Property.ColorAdjust value
-    let private colorAdjustCssValue' (value: ColorTypes.ColorAdjust) =
+    let private colorAdjustCssValue' (value: Color.ColorAdjust) =
         value
         |> Utilities.Helpers.duToLowercase
         |> colorAdjustCssValue
 
     type ColorAdjust =
-        static member Value (adjust: ColorTypes.ColorAdjust) = adjust |> colorAdjustCssValue'
-        static member Economy = ColorTypes.Economy |> colorAdjustCssValue'
-        static member Exact = ColorTypes.Exact |> colorAdjustCssValue'
+        static member Value (adjust: Color.ColorAdjust) = adjust |> colorAdjustCssValue'
+        static member Economy = Color.Economy |> colorAdjustCssValue'
+        static member Exact = Color.Exact |> colorAdjustCssValue'
 
-    let ColorAdjust' (adjust: ColorTypes.ColorAdjust) = adjust |> ColorAdjust.Value
+    let ColorAdjust' (adjust: Color.ColorAdjust) = adjust |> ColorAdjust.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color
     let private colorCssValue value = PropertyValue.cssValue Property.Color value

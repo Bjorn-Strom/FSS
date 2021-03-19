@@ -1,22 +1,22 @@
 ﻿namespace Fss
 
 open Fable.Core.JsInterop
-open Fss
+open FssTypes
 
 [<AutoOpen>]
 module PseudoElement =
-    let private pseudoValue value attributeList = value ==> (attributeList |> fss) |> CSSProperty
+    let private pseudoValue value attributeList = value ==> (attributeList |> fss) |> CssProperty
     type PseudoElement =
-        static member AfterElement (attributeList: CSSProperty list) = pseudoValue "::after" attributeList
-        static member BeforeElement (attributeList: CSSProperty list) = pseudoValue "::before" attributeList
-        static member FirstLetterElement (attributeList: CSSProperty list) = pseudoValue "::first-letter" attributeList
-        static member FirstLineElement (attributeList: CSSProperty list) = pseudoValue "::first-line" attributeList
-        static member SelectionElement (attributeList: CSSProperty list) = pseudoValue "::selection" attributeList
-        static member MarkerElement (attributeList: CSSProperty list) = pseudoValue "::marker" attributeList
+        static member AfterElement (attributeList: CssProperty list) = pseudoValue "::after" attributeList
+        static member BeforeElement (attributeList: CssProperty list) = pseudoValue "::before" attributeList
+        static member FirstLetterElement (attributeList: CssProperty list) = pseudoValue "::first-letter" attributeList
+        static member FirstLineElement (attributeList: CssProperty list) = pseudoValue "::first-line" attributeList
+        static member SelectionElement (attributeList: CssProperty list) = pseudoValue "::selection" attributeList
+        static member MarkerElement (attributeList: CssProperty list) = pseudoValue "::marker" attributeList
 
-    let After       (attributeList: CSSProperty list) = PseudoElement.AfterElement attributeList
-    let Before      (attributeList: CSSProperty list) = PseudoElement.BeforeElement attributeList
-    let FirstLetter (attributeList: CSSProperty list) = PseudoElement.FirstLetterElement attributeList
-    let FirstLine   (attributeList: CSSProperty list) = PseudoElement.FirstLineElement attributeList
-    let Selection   (attributeList: CSSProperty list) = PseudoElement.SelectionElement attributeList
-    let Marker      (attributeList: CSSProperty list) = PseudoElement.MarkerElement attributeList
+    let After       (attributeList: CssProperty list) = PseudoElement.AfterElement attributeList
+    let Before      (attributeList: CssProperty list) = PseudoElement.BeforeElement attributeList
+    let FirstLetter (attributeList: CssProperty list) = PseudoElement.FirstLetterElement attributeList
+    let FirstLine   (attributeList: CssProperty list) = PseudoElement.FirstLineElement attributeList
+    let Selection   (attributeList: CssProperty list) = PseudoElement.SelectionElement attributeList
+    let Marker      (attributeList: CssProperty list) = PseudoElement.MarkerElement attributeList

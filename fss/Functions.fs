@@ -3,8 +3,10 @@ namespace Fss
 open System
 open Fable.Core
 open Fable.Core.JsInterop
+
 open Media
 open Keyframes
+open FssTypes
 
 [<AutoOpen>]
 module Functions =
@@ -13,13 +15,13 @@ module Functions =
     let css' x = css(x)
 
     // Constructors
-    let private fssObject (attributeList: CSSProperty list) =
+    let private fssObject (attributeList: CssProperty list) =
         attributeList
-        |> List.map GlobalValue.CSSValue
+        |> List.map GlobalValue.CssValue
         |> createObj
         |> css'
 
-    let fss (attributeList: CSSProperty list) =
+    let fss (attributeList: CssProperty list) =
         attributeList
         |> fssObject
         |> string
@@ -37,37 +39,37 @@ module Functions =
     /// <param name="key">Css property</param>
     /// <param name="value">Css value </param>
     /// <returns>Css property for fss.</returns>
-    let Custom (key: string) (value: string) = key ==> value |> CSSProperty
+    let Custom (key: string) (value: string) = key ==> value |> CssProperty
 
-    let frame (f: int) (properties: CSSProperty list) = (f, properties) |> Frame
-    let frames (f: int list) (properties: CSSProperty list) = (f, properties) |> Frames
+    let frame (f: int) (properties: CssProperty list) = (f, properties) |> Frame
+    let frames (f: int list) (properties: CssProperty list) = (f, properties) |> Frames
 
     let counterStyle (attributeList: CounterProperty list) =
         let counterName = sprintf "counter_%s" <| Guid.NewGuid().ToString()
 
         createCounterObject attributeList counterName |> css' |> ignore
 
-        counterName |> CounterType.CounterStyle
+        counterName |> Counter.CounterStyle
 
     // Media
-    let MediaQueryFor (device: Device) (features: MediaFeature list) (attributeList: CSSProperty list) =
+    let MediaQueryFor (device: Media.Device) (features: Media.MediaFeature list) (attributeList: CssProperty list) =
         Media.Media(device, features, attributeList)
-    let MediaQuery (features: MediaFeature list) (attributeList: CSSProperty list) =
+    let MediaQuery (features: Media.MediaFeature list) (attributeList: CssProperty list) =
         Media.Media(features, attributeList)
 
     // Font
-    let fontFace (fontFamily: string) (attributeList: CSSProperty list) =
+    let fontFace (fontFamily: string) (attributeList: CssProperty list) =
         attributeList
         |> createFontFaceObject fontFamily
         |> css'
-        FontTypes.FontName fontFamily
+        Font.FontName fontFamily
 
-    let fontFaces (fontFamily: string) (attributeLists: CSSProperty list list) =
+    let fontFaces (fontFamily: string) (attributeLists: CssProperty list list) =
         attributeLists
         |> List.map (createFontFaceObject fontFamily)
         |> css'
 
-        FontTypes.FontName fontFamily
+        Font.FontName fontFamily
 
     // Color
     let rgb (r: int) (g: int) (b: int) = CssColor.Rgb(r,g,b)

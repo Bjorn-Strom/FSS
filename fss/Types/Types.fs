@@ -1,4 +1,4 @@
-namespace Fss
+namespace FssTypes
 
 [<AutoOpen>]
 module Global =
@@ -228,7 +228,7 @@ module Global =
     type IMaskRepeat    = interface end
 
     // Types
-    type CSSProperty = CSSProperty of string * obj
+    type CssProperty = CssProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
 
     type CssInt =
@@ -571,7 +571,7 @@ module GlobalValue =
     let float (CssFloat f) = string f
     let string (CssString s) = s
 
-    let global' (g: Global) = Utilities.Helpers.duToLowercase g
+    let global' (g: Global) = Fss.Utilities.Helpers.duToLowercase g
 
-    let CSSValue (CSSProperty (s,o)) = s,o
+    let CssValue (CssProperty (s,o)) = s,o
     let CounterValue (CounterProperty (s,o)) = s,o

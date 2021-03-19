@@ -1,33 +1,5 @@
 namespace Fss
-
-[<RequireQualifiedAccess>]
-module ColumnType =
-    type ColumnSpan =
-        | All
-        interface IColumnSpan
-
-    type ColumnRuleWidth =
-        | Thin
-        | Medium
-        | Thick
-        interface IColumnRuleWidth
-
-    type ColumnRuleStyle =
-        | Hidden
-        | Dotted
-        | Dashed
-        | Solid
-        | Double
-        | Groove
-        | Ridge
-        | Inset
-        | Outset
-        interface IColumnRuleStyle
-
-    type ColumnFill =
-        | Balance
-        | BalanceAll
-        interface IColumnFill
+open FssTypes
 
 [<AutoOpen>]
 module Column =
@@ -43,10 +15,10 @@ module Column =
     let private columnSpanToString (span: IColumnSpan) =
         let stringifyColumnSpan =
             function
-                | ColumnType.All -> "all"
+                | Column.All -> "all"
 
         match span with
-        | :? ColumnType.ColumnSpan as c -> stringifyColumnSpan c
+        | :? Column.ColumnSpan as c -> stringifyColumnSpan c
         | :? Global as g -> GlobalValue.global' g
         | :? None' -> GlobalValue.none
         | _ -> "Unknown column span"
@@ -63,14 +35,14 @@ module Column =
 
     let private columnRuleWidthToString (ruleWidth: IColumnRuleWidth) =
         match ruleWidth with
-        | :? ColumnType.ColumnRuleWidth as w -> Utilities.Helpers.duToLowercase w
+        | :? Column.ColumnRuleWidth as w -> Utilities.Helpers.duToLowercase w
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column rule width"
 
     let private columnRuleStyleToString (style: IColumnRuleStyle) =
         match style with
-        | :? ColumnType.ColumnRuleStyle as b -> Utilities.Helpers.duToLowercase b
+        | :? Column.ColumnRuleStyle as b -> Utilities.Helpers.duToLowercase b
         | :? None' -> GlobalValue.none
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column style"
@@ -90,7 +62,7 @@ module Column =
 
     let private columnFillToString (columnFill: IColumnFill) =
         match columnFill with
-        | :? ColumnType.ColumnFill as c -> Utilities.Helpers.duToKebab c
+        | :? Column.ColumnFill as c -> Utilities.Helpers.duToKebab c
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown column fill"
@@ -137,7 +109,7 @@ module Column =
 
     type ColumnSpan =
         static member Value(span: IColumnSpan) = span |> columnSpanValue'
-        static member All = ColumnType.All |> columnSpanValue'
+        static member All = Column.All |> columnSpanValue'
         static member Inherit = Inherit |> columnSpanValue'
         static member Initial = Initial |> columnSpanValue'
         static member Unset = Unset |> columnSpanValue'
@@ -210,9 +182,9 @@ module Column =
 
     type ColumnRuleWidth =
         static member Value (ruleWidth: IColumnRuleWidth) = ruleWidth |> columnRuleWidthValue'
-        static member Thin = ColumnType.Thin |> columnRuleWidthValue'
-        static member Medium = ColumnType.Medium |> columnRuleWidthValue'
-        static member Thick = ColumnType.Thick |> columnRuleWidthValue'
+        static member Thin = Column.Thin |> columnRuleWidthValue'
+        static member Medium = Column.Medium |> columnRuleWidthValue'
+        static member Thick = Column.Thick |> columnRuleWidthValue'
         static member Inherit = Inherit |> columnRuleWidthValue'
         static member Initial = Initial |> columnRuleWidthValue'
         static member Unset = Unset |> columnRuleWidthValue'
@@ -238,15 +210,15 @@ module Column =
 
     type ColumnRuleStyle =
         static member Value (style: IColumnRuleStyle) = style |> styleValue'
-        static member Hidden = ColumnType.Hidden |> styleValue'
-        static member Dotted = ColumnType.Dotted |> styleValue'
-        static member Dashed = ColumnType.Dashed |> styleValue'
-        static member Solid = ColumnType.Solid |> styleValue'
-        static member Double = ColumnType.Double |> styleValue'
-        static member Groove = ColumnType.Groove |> styleValue'
-        static member Ridge = ColumnType.Ridge |> styleValue'
-        static member Inset = ColumnType.Inset |> styleValue'
-        static member Outset = ColumnType.Outset |> styleValue'
+        static member Hidden = Column.Hidden |> styleValue'
+        static member Dotted = Column.Dotted |> styleValue'
+        static member Dashed = Column.Dashed |> styleValue'
+        static member Solid = Column.Solid |> styleValue'
+        static member Double = Column.Double |> styleValue'
+        static member Groove = Column.Groove |> styleValue'
+        static member Ridge = Column.Ridge |> styleValue'
+        static member Inset = Column.Inset |> styleValue'
+        static member Outset = Column.Outset |> styleValue'
 
         static member None = None' |> styleValue'
         static member Inherit = Inherit |> styleValue'
@@ -475,8 +447,8 @@ module Column =
 
     type ColumnFill =
         static member Value(columnFill: IColumnFill) = columnFill |> columnFillValue'
-        static member Balance = ColumnType.Balance |> columnFillValue'
-        static member BalanceAll = ColumnType.BalanceAll |> columnFillValue'
+        static member Balance = Column.Balance |> columnFillValue'
+        static member BalanceAll = Column.BalanceAll |> columnFillValue'
         static member Auto = Auto |> columnFillValue'
         static member Inherit = Inherit |> columnFillValue'
         static member Initial = Initial |> columnFillValue'

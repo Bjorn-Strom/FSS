@@ -1,6 +1,4 @@
-namespace Fss
-
-open Utilities.Helpers
+namespace FssTypes
 
 module Html =
     type Html =
@@ -115,4 +113,4 @@ module Html =
     let value (v: Html): string =
         match v with
         | All -> "*"
-        | _   -> duToLowercase v
+        | _   -> Fss.Utilities.Helpers.duToLowercase v

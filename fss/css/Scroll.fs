@@ -1,20 +1,13 @@
 namespace Fss
 
-open Fss
-open Fss
-
-[<RequireQualifiedAccess>]
-module ScrollBehaviorTypes =
-    type ScrollBehavior =
-        | Smooth
-        interface IScrollBehavior
+open FssTypes
 
 [<AutoOpen>]
 module ScrollBehavior =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
     let private stringifyScrollBehavior (behavior: IScrollBehavior) =
         match behavior with
-        | :? ScrollBehaviorTypes.ScrollBehavior as s -> Utilities.Helpers.duToKebab s
+        | :? ScrollBehavior.ScrollBehavior as s -> Utilities.Helpers.duToKebab s
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown all"
@@ -27,7 +20,7 @@ module ScrollBehavior =
 
     type ScrollBehavior =
         static member Value (behavior: IScrollBehavior) = behavior |> BehaviorValue'
-        static member Smooth = ScrollBehaviorTypes.Smooth |> BehaviorValue'
+        static member Smooth = ScrollBehavior.Smooth |> BehaviorValue'
         static member Auto = Auto |> BehaviorValue'
         static member Inherit = Inherit |> BehaviorValue'
         static member Initial = Initial |> BehaviorValue'
@@ -330,21 +323,12 @@ module ScrollPadding =
     /// <returns>Css property for fss.</returns>
     let ScrollPaddingLeft' (left: IScrollPadding) = ScrollPaddingLeft.Value(left)
 
-
-
-[<RequireQualifiedAccess>]
-module OverscrollBehaviorTypes =
-    type OverscrollBehavior =
-        | Contain
-        interface IOverscrollBehaviorX
-        interface IOverscrollBehaviorY
-
 [<AutoOpen>]
 module OverscrollBehaviorX =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
     let private stringifyBehavior (behavior: IOverscrollBehaviorX) =
         match behavior with
-        | :? OverscrollBehaviorTypes.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
+        | :? OverscrollBehavior.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
         | :? Auto -> GlobalValue.auto
         | :? Global as g -> GlobalValue.global' g
         | _ -> "Unknown all"
@@ -358,7 +342,7 @@ module OverscrollBehaviorX =
     type OverscrollBehaviorX =
         static member Value (behavior: IOverscrollBehaviorX) = behavior |> overscrollBehaviour
         static member Auto = Auto |> overscrollBehaviour'
-        static member Contain = OverscrollBehaviorTypes.Contain |> overscrollBehaviour'
+        static member Contain = OverscrollBehavior.Contain |> overscrollBehaviour'
         static member Inherit = Inherit |> overscrollBehaviour'
         static member Initial = Initial |> overscrollBehaviour'
         static member Unset = Unset |> overscrollBehaviour'
@@ -380,7 +364,7 @@ module OverscrollBehaviorX =
         // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
         let private stringifyBehavior (behavior: IOverscrollBehaviorY) =
             match behavior with
-            | :? OverscrollBehaviorTypes.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
+            | :? OverscrollBehavior.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
             | :? Auto -> GlobalValue.auto
             | :? Global as g -> GlobalValue.global' g
             | _ -> "Unknown all"
@@ -394,7 +378,7 @@ module OverscrollBehaviorX =
         type OverscrollBehaviorY =
             static member Value (behavior: IOverscrollBehaviorY) = behavior |> overscrollBehaviour
             static member Auto = Auto |> overscrollBehaviour'
-            static member Contain = OverscrollBehaviorTypes.Contain |> overscrollBehaviour'
+            static member Contain = OverscrollBehavior.Contain |> overscrollBehaviour'
             static member Inherit = Inherit |> overscrollBehaviour'
             static member Initial = Initial |> overscrollBehaviour'
             static member Unset = Unset |> overscrollBehaviour'

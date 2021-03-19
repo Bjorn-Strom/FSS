@@ -2,195 +2,82 @@ namespace Fss
 
 open Fable.Core.JsInterop
 
+open FssTypes
 open Utilities.Helpers
 
 module Media =
-    type Device =
-        | Screen
-        | Speech
-        | Print
-        | All
-        | Not of Device
-        | Only of Device
-
-    let private deviceLabel (d: Device): string =
+    let private deviceLabel (d: Media.Device): string =
         match d with
-            | Not  n -> sprintf "not %s" (duToLowercase n)
-            | Only o -> sprintf "only %s" (duToLowercase o)
+            | Media.Not  n -> sprintf "not %s" (duToLowercase n)
+            | Media.Only o -> sprintf "only %s" (duToLowercase o)
             | _  -> duToLowercase d
 
-    type Pointer =
-        | Course
-        | Fine
-        | None
-
-    let private pointer (p: Pointer): string = duToLowercase p
-
-    type ColorGamut =
-        | SRGB
-        | P3
-        | REC2020
-
-    let private colorGamut (c: ColorGamut): string = duToLowercase c
-
-    type DisplayMode =
-        | Fullscreen
-        | Standalone
-        | MinimalUi
-        | Browser
-
-    let private displayMode (dm: DisplayMode): string = duToLowercase  dm
-
-    type LightLevel =
-        | Dim
-        | Normal
-        | Washed
-
-    let private lightLevel (ll: LightLevel): string = duToLowercase ll
-
-    type Orientation =
-        | Landscape
-        | Portrait
-
-    let private orientation (o: Orientation): string = duToLowercase o
-
-    type OverflowBlock =
-        | None
-        | Scrolled
-        | OptionalPaged
-        | Paged
-
-    let private overflowBlock (ob: OverflowBlock): string = duToKebab ob
-
-    type ColorScheme =
-        | Light
-        | Dark
-
-    let private colorScheme (cs: ColorScheme): string = duToLowercase cs
-
-    type Contrast =
-        | NoPreference
-        | High
-        | Low
-
-    let private contrast (c: Contrast): string = duToKebab c
-
-    type Scan =
-        | Interlace
-        | Progressive
-    let private scan (s: Scan): string = duToLowercase s
-
-    type Scripting =
-        | None
-        | InitialOnly
-        | Enabled
-
-    let private scripting (s: Scripting): string = duToKebab s
-
-    type Update =
-        | None
-        | Slow
-        | Fast
-    let private update (u: Update): string = duToLowercase u
-
-    type MediaFeature =
-        | AnyHover of bool
-        | AnyPointer of Pointer
-        | AspectRatio of int
-        | MinAspectRatio of int
-        | MaxAspectRatio of int
-        | Color
-        | MinColor of int
-        | MaxColor of int
-        | ColorGamut of ColorGamut
-        | ColorIndex of int
-        | MinColorIndex of int
-        | MaxColorIndex of int
-        | DisplayMode of DisplayMode
-        | ForcedColors of bool
-        | Grid of bool
-        | Height of Units.Size.Size
-        | MinHeight of Units.Size.Size
-        | MaxHeight of Units.Size.Size
-        | Width of Units.Size.Size
-        | MinWidth of Units.Size.Size
-        | MaxWidth of Units.Size.Size
-        | Hover of bool
-        | InvertedColors of bool
-        | LightLevel of LightLevel
-        | Monochrome of int
-        | MinMonochrome of int
-        | MaxMonochrome of int
-        | Orientation of Orientation
-        | OverflowBlock of OverflowBlock
-        | OverflowInline of bool
-        | Pointer of Pointer
-        | PrefersColorScheme of ColorScheme
-        | PrefersContrast of Contrast
-        | PrefersReducedMotion of bool
-        | PrefersReducedTransparency of bool
-        | Resolution of Units.Resolution.Resolution
-        | MinResolution of Units.Resolution.Resolution
-        | MaxResolution of Units.Resolution.Resolution
-        | Scan of Scan
-        | Scripting of Scripting
-        | Update of Update
-
-    let mediaFeature (features: MediaFeature list): string =
-        let stringifyMedia (v: MediaFeature): string =
+    let private pointer (p: Media.Pointer): string = duToLowercase p
+    let private colorGamut (c: Media.ColorGamut): string = duToLowercase c
+    let private displayMode (dm: Media.DisplayMode): string = duToLowercase  dm
+    let private lightLevel (ll: Media.LightLevel): string = duToLowercase ll
+    let private orientation (o: Media.Orientation): string = duToLowercase o
+    let private overflowBlock (ob: Media.OverflowBlock): string = duToKebab ob
+    let private colorScheme (cs: Media.ColorScheme): string = duToLowercase cs
+    let private contrast (c: Media.Contrast): string = duToKebab c
+    let private scan (s: Media.Scan): string = duToLowercase s
+    let private scripting (s: Media.Scripting): string = duToKebab s
+    let private update (u: Media.Update): string = duToLowercase u
+    let mediaFeature (features: Media.MediaFeature list): string =
+        let stringifyMedia (v: Media.MediaFeature): string =
             match v with
-                | AnyHover                   h -> sprintf "(any-hover: %s)" <| if h then "hover" else "none"
-                | AnyPointer                 p -> sprintf "(any-pointer: %s)" <| pointer p
-                | AspectRatio                r -> sprintf "(aspect-ratio: %d)" r
-                | MinAspectRatio             r -> sprintf "(min-aspect-ratio: %d)" r
-                | MaxAspectRatio             r -> sprintf "(max-aspect-ratio: %d)" r
-                | Color                        ->
+                | Media.AnyHover                   h -> sprintf "(any-hover: %s)" <| if h then "hover" else "none"
+                | Media.AnyPointer                 p -> sprintf "(any-pointer: %s)" <| pointer p
+                | Media.AspectRatio                r -> sprintf "(aspect-ratio: %d)" r
+                | Media.MinAspectRatio             r -> sprintf "(min-aspect-ratio: %d)" r
+                | Media.MaxAspectRatio             r -> sprintf "(max-aspect-ratio: %d)" r
+                | Media.Color                        ->
                     if List.length features >= 1 then
                         sprintf "and (color)"
                     else
                         sprintf "(color)"
-                | MinColor                   c -> sprintf "(min-color: %d)" c
-                | MaxColor                   c -> sprintf "(max-color: %d)" c
-                | ColorGamut                 c -> sprintf "(color-gamut: %s)" <| colorGamut c
-                | ColorIndex                 c -> sprintf "(color-index: %d)" c
-                | MinColorIndex              c -> sprintf "(min-color-index: %d)" c
-                | MaxColorIndex              c -> sprintf "(max-color-index: %d)" c
-                | DisplayMode                d -> sprintf "(display-mode: %s)" <| displayMode d
-                | ForcedColors               f -> sprintf "(forced-colors: %s)" <| if f then "active" else "none"
-                | Grid                       g -> sprintf "(grid: %s)" <| if g then "1" else "0"
-                | Height                     h -> sprintf "(height: %s)" <| Units.Size.value h
-                | MinHeight                  s -> sprintf "(min-height: %s)" <| Units.Size.value s
-                | MaxHeight                  s -> sprintf "(max-height: %s)" <| Units.Size.value s
-                | Width                      s -> sprintf "(width: %s)" <| Units.Size.value s
-                | MinWidth                   s -> sprintf "(min-width: %s)" <| Units.Size.value s
-                | MaxWidth                   s -> sprintf "(max-width: %s)" <| Units.Size.value s
-                | Hover                      h -> sprintf "(hover %s)" <| if h then "hover" else "none"
-                | InvertedColors             c -> sprintf "(inverted-colors: %s)" <| if c then "inverted" else "none"
-                | LightLevel                 l -> sprintf "(light-level: %s)" <| lightLevel l
-                | Monochrome                 m -> sprintf "(monochrome: %d)" m
-                | MinMonochrome              m -> sprintf "(min-monochrome: %d)" m
-                | MaxMonochrome              m -> sprintf "(max-monochrome: %d)" m
-                | Orientation                o -> sprintf "(orientation: %s)" <| orientation o
-                | OverflowBlock              o -> sprintf "(overflow-block: %s)" <| overflowBlock o
-                | OverflowInline             o -> sprintf "(overflow-inline: %s)" <| if o then "scroll" else "none"
-                | Pointer                    p -> sprintf "(pointer: %s)" <| pointer p
-                | PrefersColorScheme         p -> sprintf "(prefers-color-scheme: %s)" <| colorScheme p
-                | PrefersContrast            c -> sprintf "(prefers-contrast: %s)" <| contrast c
-                | PrefersReducedMotion       p -> sprintf "(prefers-reduced-motion: %s)" <| if p then "reduce" else "no-preference"
-                | PrefersReducedTransparency p -> sprintf "(prefers-reduced-transparency: %s)" <| if p then "reduce" else "no-preference"
-                | Resolution                 r -> sprintf "(resolution: %s)" <| Units.Resolution.value r
-                | MinResolution              r -> sprintf "(min-resolution: %s)" <| Units.Resolution.value r
-                | MaxResolution              r -> sprintf "(max-resolution: %s)" <| Units.Resolution.value r
-                | Scan                       s -> sprintf "(scan: %s)" <| scan s
-                | Scripting                  s -> sprintf "(scripting: %s)" <| scripting s
-                | Update                     u -> sprintf "(update: %s)" <| update u
+                | Media.MinColor                   c -> sprintf "(min-color: %d)" c
+                | Media.MaxColor                   c -> sprintf "(max-color: %d)" c
+                | Media.ColorGamut                 c -> sprintf "(color-gamut: %s)" <| colorGamut c
+                | Media.ColorIndex                 c -> sprintf "(color-index: %d)" c
+                | Media.MinColorIndex              c -> sprintf "(min-color-index: %d)" c
+                | Media.MaxColorIndex              c -> sprintf "(max-color-index: %d)" c
+                | Media.DisplayMode                d -> sprintf "(display-mode: %s)" <| displayMode d
+                | Media.ForcedColors               f -> sprintf "(forced-colors: %s)" <| if f then "active" else "none"
+                | Media.Grid                       g -> sprintf "(grid: %s)" <| if g then "1" else "0"
+                | Media.Height                     h -> sprintf "(height: %s)" <| Units.Size.value h
+                | Media.MinHeight                  s -> sprintf "(min-height: %s)" <| Units.Size.value s
+                | Media.MaxHeight                  s -> sprintf "(max-height: %s)" <| Units.Size.value s
+                | Media.Width                      s -> sprintf "(width: %s)" <| Units.Size.value s
+                | Media.MinWidth                   s -> sprintf "(min-width: %s)" <| Units.Size.value s
+                | Media.MaxWidth                   s -> sprintf "(max-width: %s)" <| Units.Size.value s
+                | Media.Hover                      h -> sprintf "(hover %s)" <| if h then "hover" else "none"
+                | Media.InvertedColors             c -> sprintf "(inverted-colors: %s)" <| if c then "inverted" else "none"
+                | Media.LightLevel                 l -> sprintf "(light-level: %s)" <| lightLevel l
+                | Media.Monochrome                 m -> sprintf "(monochrome: %d)" m
+                | Media.MinMonochrome              m -> sprintf "(min-monochrome: %d)" m
+                | Media.MaxMonochrome              m -> sprintf "(max-monochrome: %d)" m
+                | Media.Orientation                o -> sprintf "(orientation: %s)" <| orientation o
+                | Media.OverflowBlock              o -> sprintf "(overflow-block: %s)" <| overflowBlock o
+                | Media.OverflowInline             o -> sprintf "(overflow-inline: %s)" <| if o then "scroll" else "none"
+                | Media.Pointer                    p -> sprintf "(pointer: %s)" <| pointer p
+                | Media.PrefersColorScheme         p -> sprintf "(prefers-color-scheme: %s)" <| colorScheme p
+                | Media.PrefersContrast            c -> sprintf "(prefers-contrast: %s)" <| contrast c
+                | Media.PrefersReducedMotion       p -> sprintf "(prefers-reduced-motion: %s)" <| if p then "reduce" else "no-preference"
+                | Media.PrefersReducedTransparency p -> sprintf "(prefers-reduced-transparency: %s)" <| if p then "reduce" else "no-preference"
+                | Media.Resolution                 r -> sprintf "(resolution: %s)" <| Units.Resolution.value r
+                | Media.MinResolution              r -> sprintf "(min-resolution: %s)" <| Units.Resolution.value r
+                | Media.MaxResolution              r -> sprintf "(max-resolution: %s)" <| Units.Resolution.value r
+                | Media.Scan                       s -> sprintf "(scan: %s)" <| scan s
+                | Media.Scripting                  s -> sprintf "(scripting: %s)" <| scripting s
+                | Media.Update                     u -> sprintf "(update: %s)" <| update u
 
         features
         |> List.map stringifyMedia
         |> String.concat " and "
 
     type Media =
-        static member Media (features: MediaFeature list, attributeList: CSSProperty list) =
-            mediaFeature features |> sprintf "@media %s" ==> attributeList |> CSSProperty
-        static member Media (device: Device, features: MediaFeature list, attributeList: CSSProperty list) =
-            sprintf "@media %s %s" (deviceLabel device) (mediaFeature features)  ==> attributeList |> CSSProperty
+        static member Media (features: Media.MediaFeature list, attributeList: CssProperty list) =
+            mediaFeature features |> sprintf "@media %s" ==> attributeList |> CssProperty
+        static member Media (device: Media.Device, features: Media.MediaFeature list, attributeList: CssProperty list) =
+            sprintf "@media %s %s" (deviceLabel device) (mediaFeature features)  ==> attributeList |> CssProperty

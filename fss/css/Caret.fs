@@ -1,6 +1,5 @@
 namespace Fss
-
-open Fss
+open FssTypes
 
 [<AutoOpen>]
 module Caret =
@@ -174,8 +173,8 @@ module Caret =
     /// <summary>Specifies caret color.</summary>
     /// <param name="caretColor">
     ///     can be:
-    ///     - <c> CssColor </c> 
-    ///     - <c> Auto </c> 
+    ///     - <c> CssColor </c>
+    ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let CaretColor' (caretColor: ICaretColor) = CaretColor.Value caretColor
