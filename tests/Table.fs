@@ -65,8 +65,6 @@ module Table =
                     "Empty Cells unset"
                     [EmptyCells.Unset]
                     ["emptyCells" ==> "unset"]
-
-
                 test
                     "Table Layout fixed"
                     [TableLayout.Fixed]

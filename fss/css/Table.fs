@@ -94,7 +94,7 @@ module Table =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private EmptyCells' (emptyCells: IEmptyCells) = emptyCells |> EmptyCells.Value
+    let EmptyCells' (emptyCells: IEmptyCells) = emptyCells |> EmptyCells.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
     let private tableLayoutValue value = PropertyValue.cssValue Property.TableLayout value

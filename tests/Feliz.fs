@@ -103,9 +103,6 @@ module Feliz =
                     "Color"
                     [ style.color' (CssColor.red)]
                     [ "color" ==> "#ff0000" ]
-
-
-
                 test
                     "Font synthesis weight"
                     [ style.fontSynthesis.Weight ]
@@ -138,10 +135,10 @@ module Feliz =
                     "Line height normal"
                     [ style.lineHeight.Normal ]
                     [ "lineHeight" ==> "normal" ]
-              //  test
-              //      "Line height value"
-              //      [ style.lineHeight' (CssFloat 2.5) ]
-              //      [ "lineHeight" ==> "2.5" ]
+                test
+                    "Line height value"
+                    [ style.lineHeight' <| CssFloat 2.5 ]
+                    [ "lineHeight" ==> "2.5" ]
                 test
                     "Line break loose"
                     [ style.lineBreak.Loose ]
@@ -154,14 +151,14 @@ module Feliz =
                      "Font family serif"
                      [ style.fontFamily.Serif ]
                      [ "fontFamily" ==> "serif" ]
-              //  test
-              //      "Font families"
-              //      [ style.fontFamily.Values ([ FontFamily.Serif; FontTypes.Monospace ]) ]
-              //      [ "fontFamily" ==> "serif, monospace" ]
-              //  test
-              //      "font feature setting On"
-              //      [ style.fontFeatureSetting.Liga FontTypes.On ]
-              //      [ "fontFeatureSettings" ==> "\"liga\" On" ]
+                test
+                    "Font families"
+                    [ style.fontFamily.Values ([ FontTypes.Serif; FontTypes.Monospace ]) ]
+                    [ "fontFamily" ==> "serif, monospace" ]
+                test
+                    "font feature setting On"
+                    [ style.fontFeatureSetting.Liga FontFeatureSettingSwitch.On ]
+                    [ "fontFeatureSettings" ==> "\"liga\" On" ]
                 test
                     "Font variant numeric ordinal"
                     [ style.fontVariantNumeric.Ordinal]
@@ -218,18 +215,18 @@ module Feliz =
                      "Text decoration line underline"
                      [style.textDecorationLine.Underline]
                      ["textDecorationLine" ==> "underline"]
-               // test
-               //      "Text decorations multiple"
-               //      [style.textDecorationLine.Value(TextTypes.Overline, TextTypes.Underline, TextTypes.LineThrough)]
-               //      ["textDecorationLine" ==> "overline underline line-through"]
+                test
+                     "Text decorations multiple"
+                     [style.textDecorationLine.Value(TextDecorationLine.Overline, TextDecorationLine.Underline, TextDecorationLine.LineThrough)]
+                     ["textDecorationLine" ==> "overline underline line-through"]
                 test
                      "Text decoration skip objects"
                      [style.textDecorationSkip.Objects]
                      ["textDecorationSkip" ==> "objects"]
- //               test
- //                    "Text decoration skip multiple - leading spaces and trailing spaces"
- //                    [TextDecorationSkip.Value(TextTypes.LeadingSpaces, TextTypes.TrailingSpaces)]
- //                    ["textDecorationSkip" ==> "leading-spaces trailing-spaces"]
+                test
+                     "Text decoration skip multiple - leading spaces and trailing spaces"
+                     [TextDecorationSkip.Value(TextTypes.LeadingSpaces, TextTypes.TrailingSpaces)]
+                     ["textDecorationSkip" ==> "leading-spaces trailing-spaces"]
                 test
                      "Text decoration skip All"
                      [style.textDecorationSkipInk.All]
@@ -250,22 +247,22 @@ module Feliz =
                      "Text emphasis color hex"
                      [ style.textEmphasisColor.Hex "#555" ]
                      ["textEmphasisColor" ==> "#555"]
-//                test
-//                     "Text emphasis position left under"
-//                     [ TextEmphasisPosition.Value (TextTypes.EmphasisPosition.Left, TextTypes.EmphasisPosition.Under) ]
-//                     ["textEmphasisPosition" ==> "left under"]
-//                test
-//                     "Text Emphasis Style x"
-//                     [style.textEmphasisStyle' (CssString "x")]
-//                     ["textEmphasisStyle" ==> "'x'"]
+                test
+                     "Text emphasis position left under"
+                     [ TextEmphasisPosition.Value (TextTypes.EmphasisPosition.Left, TextTypes.EmphasisPosition.Under) ]
+                     ["textEmphasisPosition" ==> "left under"]
+                test
+                     "Text Emphasis Style x"
+                     [style.textEmphasisStyle' (CssString "x")]
+                     ["textEmphasisStyle" ==> "'x'"]
                 test
                      "Text Emphasis Style filled"
                      [style.textEmphasisStyle.Filled ]
                      ["textEmphasisStyle" ==> "filled"]
-//                test
-//                     "Text shadow single"
-//                     [ style.textShadows [ TextShadow.ColorXYBlur (px 1, px 1, px 2, CssColor.black) ] ]
-//                     ["textShadow" ==> "#000000 1px 1px 2px"]
+                test
+                     "Text shadow single"
+                     [ style.textShadows [ TextShadow.ColorXYBlur (px 1, px 1, px 2, CssColor.black) ] ]
+                     ["textShadow" ==> "#000000 1px 1px 2px"]
                 test
                      "Text underline offset auto"
                      [ style.textUnderlineOffset.Auto ]
@@ -362,14 +359,14 @@ module Feliz =
                     "List style type Disc"
                     [ style.listStyleType.Disc ]
                     [ "listStyleType" ==> "disc" ]
-            //    test
-            //        "List style type string"
-            //        [ style.listStyleType' (CssString "-") ]
-            //        [ "listStyleType" ==> "'-'" ]
-            //    test
-            //        "List style type custom"
-            //        [ ListStyleType' sampleCounterStyle ]
-            //        [ "listStyleType" ==> (counterValue sampleCounterStyle) ]
+                test
+                    "List style type string"
+                    [ style.listStyleType' (CssString "-") ]
+                    [ "listStyleType" ==> "'-'" ]
+                test
+                    "List style type custom"
+                    [ ListStyleType' sampleCounterStyle ]
+                    [ "listStyleType" ==> (counterValue sampleCounterStyle) ]
                 test
                     "Column Width px"
                     [style.columnWidth' (px 60)]
@@ -406,10 +403,10 @@ module Feliz =
                     "Column rule color red"
                     [ style.columnRuleColor.red ]
                     [ "columnRuleColor" ==> "#ff0000" ]
-              //  test
-              //      "Column count number"
-              //      [style.columnCount' (CssInt 3)]
-              //      ["columnCount" ==> "3"]
+                test
+                    "Column count number"
+                    [style.columnCount' (CssInt 3)]
+                    ["columnCount" ==> "3"]
                 test
                     "Column count auto"
                     [style.columnCount.Auto]
@@ -422,10 +419,10 @@ module Feliz =
                     "Borderstyle hidden"
                     [ style.borderStyle.Hidden ]
                     [ "borderStyle" ==> "hidden" ]
-             //   test
-              //      "Borderstyle multiple"
-              //      [ style.borderStyle.Value(BorderType.Inset, BorderType.Outset, BorderType.Ridge, BorderType.Groove) ]
-              //      [ "borderStyle" ==> "inset outset ridge groove" ]
+                test
+                    "Borderstyle multiple"
+                    [ style.borderStyle.Value(BorderType.Inset, BorderType.Outset, BorderType.Ridge, BorderType.Groove) ]
+                    [ "borderStyle" ==> "inset outset ridge groove" ]
                 test
                     "Border radius px"
                     [ style.borderRadius' (px 10)]
@@ -526,10 +523,10 @@ module Feliz =
                     "Transition duration sec"
                     [style.transitionDuration' (sec 6.0) ]
                     ["transitionDuration" ==> "6.00s"]
-            //    test
-             //       "Transition duration multiple"
-              //      [style.transitionDuration.Value transitionDurations ]
-               //     ["transitionDuration" ==> "10.00s, 100.00ms, initial, inherit"]
+                test
+                    "Transition duration multiple"
+                    [style.transitionDuration.Value transitionDurations ]
+                    ["transitionDuration" ==> "10.00s, 100.00ms, initial, inherit"]
                 test
                     "Transition delay sec"
                     [style.transitionDelay' (sec 6.0) ]
@@ -618,10 +615,10 @@ module Feliz =
                     "Padding block end 5%"
                     [ style.paddingBlockEnd' <| pct 5]
                     [ "paddingBlockEnd" ==> "5%" ]
-           //     test
-            //        "Resize Value"
-             //       [style.resize' (ResizeType.Block)]
-              //      ["resize" ==> "block"]
+                test
+                    "Resize Value"
+                    [style.resize' (ResizeType.Block)]
+                    ["resize" ==> "block"]
                 test
                     "Resize Both"
                     [style.resize.Both]
@@ -674,38 +671,615 @@ module Feliz =
                     "OverflowY visible"
                     [style.overflowY.Visible]
                     ["overflowY" ==> "visible"]
-//                test
- //                   "Overflow scroll Scroll"
-  //                  [Overflow.Value (OverflowType.Scroll, OverflowType.Scroll)]
-   //                 ["overflow" ==> "scroll scroll"]
+                test
+                    "Overflow scroll Scroll"
+                    [Overflow.Value (OverflowType.Scroll, OverflowType.Scroll)]
+                    ["overflow" ==> "scroll scroll"]
                 test
                     "OverflowWrap break-word"
                     [style.overflowWrap.BreakWord]
                     ["overflowWrap" ==> "break-word"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                test
+                    "Direction rtl"
+                    [ style.direction.Ltr ]
+                    ["direction" ==> "ltr"]
+                test
+                    "Box sizing border box "
+                    [style.boxSizing.BorderBox]
+                    ["boxSizing" ==> "border-box"]
+                test
+                    "Left px"
+                    [ style.left' (px 3) ]
+                    [ "left" ==> "3px" ]
+                test
+                    "Right px"
+                    [ style.right' (px 3) ]
+                    [ "right" ==> "3px" ]
+                test
+                    "Bottom px"
+                    [ style.bottom' (px 3) ]
+                    [ "bottom" ==> "3px" ]
+                test
+                    "Top px"
+                    [ style.top' (px 3) ]
+                    [ "top" ==> "3px" ]
+                test
+                    "Vertical align baseline"
+                    [ style.verticalAlign.Baseline]
+                    ["verticalAlign" ==> "baseline"]
+                test
+                    "Position static"
+                    [ style.position.Static]
+                    ["position" ==> "static"]
+                test
+                    "Float left"
+                    [ style.float.Left]
+                    ["float" ==> "left"]
+                test
+                    "WritingMode horizontal-tb"
+                    [ style.writingMode.HorizontalTb]
+                    ["writingMode" ==> "horizontal-tb"]
+                test
+                    "BreakAfter avoid"
+                    [style.breakAfter.Avoid]
+                    ["breakAfter" ==> "avoid"]
+                test
+                    "BreakBefore avoid"
+                    [style.breakBefore.Avoid]
+                    ["breakBefore" ==> "avoid"]
+                test
+                    "BreakInside avoid-column"
+                    [style.breakInside.AvoidColumn]
+                    ["breakInside" ==> "avoid-column"]
+                test
+                    "Perspective px"
+                    [ style.perspective' (px 100) ]
+                    ["perspective" ==> "100px"]
+                test
+                    "Perspective x"
+                    [ style.perspectiveOrigin' <| pct 100 ]
+                    ["perspectiveOrigin" ==> "100%"]
+                test
+                    "BackfaceVisibility inherit"
+                    [ style.backfaceVisibility.Inherit]
+                    [ "backfaceVisibility" ==> "inherit" ]
+                test
+                    "PointerEvents VisiblePainted"
+                    [ style.pointerEvents.VisiblePainted ]
+                    ["pointerEvents" ==> "visiblePainted"]
+                test
+                    "Cursor Wait"
+                    [style.cursor.Wait]
+                    [ "cursor" ==> "wait"]
+                test
+                    "Content image"
+                    [ style.content.Url "http://www.example.com/test.png" ]
+                    [ "content" ==> "url(http://www.example.com/test.png)" ]
+                test
+                    "Content image with alt text"
+                    [ style.content.Url("http://www.example.com/test.png", "this is the alt text") ]
+                    [ "content" ==> "url(http://www.example.com/test.png) / \"this is the alt text\"" ]
+                test
+                    "Content linear gradient"
+                    [ style.content.LinearGradient(deg 45.0, [hex "e66456", px 0; hex "9198e5", px 100]) ]
+                    [ "content" ==> "linear-gradient(45.00deg, #e66456 0px, #9198e5 100px)" ]
+                test
+                   "Content counter"
+                   [ Content.Counter sampleCounter]
+                    [ "content" ==> sprintf "counter(%s)" (counterValue sampleCounter) ]
+                test
+                    "Content counter2"
+                    [ Content.Counters (sampleCounter, ListStyleTypeType.UpperLatin) ]
+                    [ "content" ==> sprintf "counters(%s, upper-latin)" (counterValue sampleCounter) ]
+                test
+                    "Caption side top"
+                    [style.captionSide.Top]
+                    ["captionSide" ==> "top"]
+                test
+                    "Empty Cells show"
+                    [style.emptyCells.Show]
+                    ["emptyCells" ==> "show"]
+                test
+                    "Table Layout fixed"
+                    [style.tableLayout.Fixed]
+                    ["tableLayout" ==> "fixed"]
+                test
+                    "caret color hsl"
+                    [ style.caretColor.Hsl 255 0. 0. ]
+                    ["caretColor" ==> "hsl(255, 0%, 0%)"]
+                test
+                    "caret color green"
+                    [ style.caretColor.green ]
+                    ["caretColor" ==> "#008000"]
+                test
+                    "Appearance square button"
+                    [style.appearance.SquareButton]
+                    ["appearance" ==> "square-button"]
+                test
+                    "Orphans number"
+                    [ style.orphans' (CssInt 2)]
+                    [ "orphans" ==> "2" ]
+                test
+                    "Orphans inherit"
+                    [ style.orphans.Inherit]
+                    [ "orphans" ==> "inherit" ]
+                test
+                    "Widows number"
+                    [ style.widows' (CssInt 2)]
+                    [ "widows" ==> "2" ]
+                test
+                    "Widows unset"
+                    [ style.widows.Unset ]
+                    [ "widows" ==> "unset" ]
+                test
+                    "All inherit"
+                    [ style.all.Inherit]
+                    [ "all" ==> "inherit" ]
+                test
+                    "Grid area"
+                    [ style.gridArea' "foo" ]
+                    ["gridArea" ==> "foo"]
+                test
+                    "Grid area"
+                    [ style.gridArea.Value (GridPosition.Ident "area1", GridPosition.Ident "area2") ]
+                    ["gridArea" ==> "area1 / area2"]
+                test
+                    "Grid area initial"
+                    [style.gridArea.Initial]
+                    ["gridArea" ==> "initial"]
+                test
+                    "Grid column ident and ident"
+                    [ style.gridColumn.Value(GridPosition.Ident "someStart", GridPosition.Ident "someEnd") ]
+                    ["gridColumn" ==> "someStart / someEnd"]
+                test
+                    "Grid column unset"
+                    [style.gridColumn.Unset]
+                    ["gridColumn" ==> "unset"]
+                test
+                    "Grid column start ident"
+                    [style.gridColumnStart.Ident "somegridarea"]
+                    ["gridColumnStart" ==> "somegridarea"]
+                test
+                    "Grid column end value"
+                    [style.gridColumnEnd' 1]
+                    ["gridColumnEnd" ==> "1"]
+                test
+                    "Grid column end ident"
+                    [style.gridColumnEnd.Ident "somegridarea"]
+                    ["gridColumnEnd" ==> "somegridarea"]
+                test
+                    "Grid row ident and ident"
+                    [ style.gridRow.Value (GridPosition.Ident "someStart", GridPosition.Ident "someEnd") ]
+                    ["gridRow" ==> "someStart / someEnd"]
+                test
+                    "Grid row auto"
+                    [style.gridRow.Auto]
+                    ["gridRow" ==> "auto"]
+                test
+                    "Grid row start value"
+                    [style.gridRowStart' 1]
+                    ["gridRowStart" ==> "1"]
+                test
+                    "Grid row start ident"
+                    [style.gridRowStart.Ident "somegridarea"]
+                    ["gridRowStart" ==> "somegridarea"]
+                test
+                    "Grid row end value"
+                    [style.gridRowEnd' 1 ]
+                    ["gridRowEnd" ==> "1"]
+                test
+                    "Grid row end ident"
+                    [style.gridRowEnd.Ident "somegridarea"]
+                    ["gridRowEnd" ==> "somegridarea"]
+                test
+                    "Grid gap px"
+                    [style.gridGap' (px 10)]
+                    ["gridGap" ==> "10px"]
+                test
+                    "Grid gap px and px"
+                    [ style.gridGap.Value (px 20, px 10) ]
+                    ["gridGap" ==> "20px 10px"]
+                test
+                    "Row gap normal"
+                    [style.gridRowGap.Normal]
+                    ["gridRowGap" ==> "normal"]
+                test
+                    "Row gap px"
+                    [style.gridRowGap' (px 3)]
+                    ["gridRowGap" ==> "3px"]
+                test
+                    "Column gap normal"
+                    [style.gridColumnGap.Normal]
+                    ["gridColumnGap" ==> "normal"]
+                test
+                    "Column gap px"
+                    [style.gridColumnGap' (px 3)]
+                    ["gridColumnGap" ==> "3px"]
+                test
+                    "Grid template row px"
+                    [style.gridTemplateRows' (px 100)]
+                    ["gridTemplateRows" ==> "100px"]
+                test
+                    "Grid template row minmax"
+                    [style.gridTemplateRows.MinMax (px 100, fr 1.) ]
+                    ["gridTemplateRows" ==> "minmax(100px, 1.00fr)"]
+                test
+                    "Grid template row px repeat px"
+                    [style.gridTemplateRows.Values [ px 200; Grid.Repeat.Repeat(RepeatType.AutoFill, px 100); px 300]]
+                    ["gridTemplateRows" ==> "200px repeat(auto-fill, 100px) 300px"]
+                test
+                    "Grid template column px"
+                    [style.gridTemplateColumns' (px 100)]
+                    ["gridTemplateColumns" ==> "100px"]
+                test
+                    "Grid template column masonry"
+                    [style.gridTemplateColumns.Masonry]
+                    ["gridTemplateColumns" ==> "masonry"]
+                test
+                    "Grid template column px repeat px"
+                    [style.gridTemplateColumns.Values [px 200; Repeat.Repeat(Grid.AutoFill, px 100); px 300]]
+                    ["gridTemplateColumns" ==> "200px repeat(auto-fill, 100px) 300px"]
+                testString
+                    "Repeat value and fr"
+                    (string <| Repeat.Repeat(4, fr 1.))
+                    "GridRepeat (repeat(4, 1.00fr))"
+                testString
+                    "MinMax px and fraction"
+                    (string <| MinMax.MinMax(px 200, fr 1.5))
+                    "MinMaxGrid (minmax(200px, 1.50fr))"
+                test
+                    "Grid auto columns min content"
+                    [style.gridAutoColumns.MinContent]
+                    ["gridAutoColumns" ==> "min-content"]
+                test
+                    "Grid auto columns multiple with pxs"
+                    [ style.gridAutoColumns.Values [px 100; px 150; px 390;] ]
+                    ["gridAutoColumns" ==> "100px 150px 390px"]
+                test
+                    "Grid auto rows min content"
+                    [style.gridAutoRows.MinContent]
+                    ["gridAutoRows" ==> "min-content"]
+                test
+                    "Grid auto rows fit content"
+                    [style.gridAutoRows.FitContent(px 400) ]
+                    ["gridAutoRows" ==> "fit-content(400px)"]
+                test
+                    "Grid auto flow rows"
+                    [style.gridAutoFlow.Row]
+                    ["gridAutoFlow" ==> "row"]
+                test
+                    "Grid template areas None"
+                    [style.gridTemplateAreas.None]
+                    ["gridTemplateAreas" ==> "none"]
+                test
+                    "Grid template areas strings"
+                    [style.gridTemplateAreas.Value [ "a"; "b"  ] ]
+                    ["gridTemplateAreas" ==> "\"a b\""]
+                test
+                    "Grid template areas multiple strings"
+                    [style.gridTemplateAreas.Value
+                         [
+                            [ "header";  "header";  "header";  "header" ]
+                            [ "main";  "main";  ".";  "sidebar" ]
+                            [ "footer";  "footer";  "footer";  "footer" ]
+                        ]
+                    ]
+                    ["gridTemplateAreas" ==> "\"header header header header\" \"main main . sidebar\" \"footer footer footer footer\""]
+                test
+                    "Flex direction row"
+                    [ style.flexDirection.Row]
+                    ["flexDirection" ==> "row"]
+                test
+                    "Flex wrap no-wrap"
+                    [ style.flexWrap.NoWrap]
+                    ["flexWrap" ==> "no-wrap"]
+                test
+                    "Flex basis em"
+                    [ style.flexBasis' (em 10.0)]
+                    ["flexBasis" ==> "10.0em"]
+                test
+                    "Justify content start"
+                    [ style.justifyContent.Start]
+                    ["justifyContent" ==> "start"]
+                test
+                    "Justify self normal"
+                    [ style.justifySelf.Normal ]
+                    ["justifySelf" ==> "normal"]
+                test
+                    "Justify items end"
+                    [ style.justifyItems.End]
+                    ["justifyItems" ==> "end"]
+                test
+                    "Align self normal"
+                    [ style.alignSelf.Normal]
+                    ["alignSelf" ==> "normal"]
+                test
+                    "Align items start"
+                    [ style.alignItems.Start]
+                    ["alignItems" ==> "start"]
+                test
+                    "Align content start"
+                    [ style.alignContent.Start]
+                    ["alignContent" ==> "start"]
+                test
+                    "Order value"
+                    [ style.order' (CssInt 1) ]
+                    ["order" ==> "1"]
+                test
+                    "Order inherit"
+                    [ style.order.Inherit]
+                    ["order" ==> "inherit"]
+                test
+                    "Flex grow value"
+                    [ style.flexGrow' (CssFloat 1.5) ]
+                    ["flexGrow" ==> "1.5"]
+                test
+                    "FlexGrow inherit"
+                    [ style.flexGrow.Inherit]
+                    ["flexGrow" ==> "inherit"]
+                test
+                    "FlexShrink value"
+                    [ FlexShrink' (CssFloat 1.5) ]
+                    ["flexShrink" ==> "1.5"]
+                test
+                    "FlexShrink inherit"
+                    [ style.flexShrink.Inherit]
+                    ["flexShrink" ==> "inherit"]
+                test
+                    "Outline offset px"
+                    [ style.outlineOffset.Value <| px 3 ]
+                    [ "outlineOffset" ==> "3px" ]
+                test
+                    "Outline initial"
+                    [ style.outline.Initial ]
+                    [ "outline" ==> "initial" ]
+                test
+                    "Outline width px"
+                    [ style.outlineWidth' (px 40) ]
+                    [ "outlineWidth" ==> "40px" ]
+                test
+                    "Outline width thin"
+                    [ style.outlineWidth.Thin ]
+                    [ "outlineWidth" ==> "thin" ]
+                test
+                    "Outline style hidden"
+                    [ style.outlineStyle.Hidden ]
+                    [ "outlineStyle" ==> "hidden" ]
+                test
+                    "Outline color hex"
+                    [ style.outlineColor.Hex "f92525"]
+                    ["outlineColor" ==> "#f92525"]
+                testNested
+                    "Media query with min width and min height"
+                    [
+                        MediaQuery
+                            [ MinWidth (px 500); MaxWidth (px 700) ]
+                            [ style.backgroundColor.red ]
+                    ]
+                    ["@media (min-width: 500px) and (max-width: 700px)" ==> "backgroundColor,#ff0000"]
+                testNested
+                    "Media query min height only"
+                    [
+                        MediaQuery
+                            [ MinHeight (px 700) ]
+                            [ style.backgroundColor.pink ]
+                    ]
+                    ["@media (min-height: 700px)" ==> "backgroundColor,#ffc0cb"]
+                testNested
+                    "Media query for print"
+                    [
+                        MediaQueryFor Print []
+                            [
+                                style.marginTop' (px 200)
+                                style.transforms
+                                    [
+                                        Transform.Rotate (deg 45.0)
+                                    ]
+                                style.backgroundColor.indianRed
+                            ]
+                    ]
+                    ["@media print " ==> "marginTop,200px,transform,rotate(45.00deg),backgroundColor,#cd5c5c"]
+                testNested
+                    "Media not all"
+                    [
+                        MediaQueryFor (Not All) [ Color ] [ style.marginTop' (px 200) ]
+                    ]
+                    ["@media not all and (color)" ==> "marginTop,200px"]
+                testNested
+                    "Media query only screen"
+                    [
+                        MediaQueryFor (Only Screen)
+                            [
+                                Color
+                                Pointer Fine
+                                Scan Interlace
+                                Grid true
+                            ]
+                            [
+                                style.marginTop' (px 200)
+                                style.transforms
+                                    [
+                                        Transform.Rotate (deg 45.0)
+                                    ]
+                                style.backgroundColor.indianRed
+                            ]
+                    ]
+                    [
+                        "@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: 1)"
+                        ==>
+                        "marginTop,200px,transform,rotate(45.00deg),backgroundColor,#cd5c5c"
+                    ]
+                test
+                    "BoxShadow color"
+                    [
+                        style.boxShadows
+                            [
+                                style.boxShadow.Color(px 10, px 10, CssColor.blue)
+                            ]
+                    ]
+                    [ "boxShadow" ==> "10px 10px #0000ff" ]
+                test
+                    "BoxShadow blur color"
+                    [
+                        style.boxShadows
+                            [
+                                style.boxShadow.BlurColor(px 10, px 10, em 1.5, CssColor.red)
+                            ]
+                    ]
+                    [ "boxShadow" ==> "10px 10px 1.5em #ff0000" ]
+                test
+                    "BoxShadow blur spread color"
+                    [
+                        style.boxShadows
+                            [
+                                style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, CssColor.chocolate)
+                            ]
+                    ]
+                    [ "boxShadow" ==> "1px 100px 1.5vh 1px #d2691e" ]
+                test
+                    "Multiple box shadows"
+                   [
+                        style.boxShadows
+                            [
+                                style.boxShadow.Color(px 10, px 10, CssColor.blue)
+                                style.boxShadow.BlurColor(px 10, px 10, px 10, CssColor.blue)
+                                style.boxShadow.BlurSpreadColor(px 10, px 10, px 10, px 10, CssColor.blue)
+                                style.boxShadow.Color(px 3, px 3, CssColor.red)
+                                style.boxShadow.BlurColor(em -1., px 0, em 0.4, CssColor.olive)
+                            ]
+                    ]
+                    ["boxShadow" ==> "10px 10px #0000ff, 10px 10px 10px #0000ff, 10px 10px 10px 10px #0000ff, 3px 3px #ff0000, -1.0em 0px 0.4em #808000"]
+                test
+                    "BoxShadow invert"
+                    [
+                        style.boxShadows
+                            [
+                                style.inset <| style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, CssColor.chocolate)
+                            ]
+                    ]
+                    [ "boxShadow" ==> "inset 1px 100px 1.5vh 1px #d2691e" ]
+                test
+                    "ScrollBehavior smooth"
+                    [ style.scrollBehavior.Smooth]
+                    [ "scrollBehavior" ==> "smooth" ]
+                test
+                    "OverscrollBehaviorX contain"
+                    [ style.overscrollBehaviorX.Contain]
+                    [ "overscrollBehaviorX" ==> "contain" ]
+                test
+                    "OverscrollBehaviorY contain"
+                    [ style.overscrollBehaviorY.Contain]
+                    [ "overscrollBehaviorY" ==> "contain" ]
+                test
+                    "ScrollPadding top px"
+                    [ style.scrollPaddingTop' (px 10)]
+                    ["scrollPaddingTop" ==> "10px"]
+                test
+                    "ScrollPadding right px"
+                    [ style.scrollPaddingRight' (px 10)]
+                    ["scrollPaddingRight" ==> "10px"]
+                test
+                    "ScrollPadding bottom px"
+                    [ style.scrollPaddingBottom' (px 10)]
+                    ["scrollPaddingBottom" ==> "10px"]
+                test
+                    "ScrollPadding left px"
+                    [ style.scrollPaddingLeft' (px 10)]
+                    ["scrollPaddingLeft" ==> "10px"]
+                test
+                    "ScrollPadding px"
+                    [ style.scrollPadding' (px 10)]
+                    [ "scrollPadding" ==> "10px" ]
+                test
+                    "ScrollMargin top px"
+                    [ style.scrollMarginTop' (px 10)]
+                    ["scrollMarginTop" ==> "10px"]
+                test
+                    "ScrollMargin right px"
+                    [ style.scrollMarginRight' (px 10)]
+                    ["scrollMarginRight" ==> "10px"]
+                test
+                    "ScrollMargin bottom px"
+                    [ style.scrollMarginBottom' (px 10)]
+                    ["scrollMarginBottom" ==> "10px"]
+                test
+                    "ScrollMargin left px"
+                    [ style.scrollMarginLeft' (px 10)]
+                    ["scrollMarginLeft" ==> "10px"]
+                test
+                    "ScrollMargin px"
+                    [ style.scrollMargin' (px 10)]
+                    [ "scrollMargin" ==> "10px" ]
+                test
+                    "Clip path path"
+                    [style.clipPath.Path "M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z"]
+                    ["clipPath" ==> "path('M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z')"]
+                test
+                    "Clear initial"
+                    [ style.clear.Initial]
+                    [ "clear" ==> "initial" ]
+                test
+                    "Filter Url"
+                    [ style.filters [ Filter.Url "someFilter" ] ]
+                    [ "filter" ==> "url(\"someFilter\")" ]
+                test
+                    "Filter drop shadow"
+                    [ style.filters [ Filter.DropShadow 16 16 20 CssColor.red (pct 5)  ] ]
+                    [ "filter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
+                test
+                    "Filter unset"
+                    [ style.filter.Unset ]
+                    [ "filter" ==> "unset" ]
+                test
+                    "BackdropFilter Url"
+                    [ style.backdropFilters [ Filter.Url "someFilter" ] ]
+                    [ "backdropFilter" ==> "url(\"someFilter\")" ]
+                test
+                    "BackdropFilter unset"
+                    [ style.backdropFilter.Unset ]
+                    [ "backdropFilter" ==> "unset" ]
+                test
+                      "Mix blend mode HardLight"
+                      [ style.mixBlendMode.HardLight]
+                      ["mixBlendMode" ==> "hard-light"]
+                test
+                    "AspectRatio"
+                    [ style.aspectRatio.Value(16, 9) ]
+                    [ "aspectRatio" ==> "16 / 9" ]
+                test
+                    "MaskClip content-box"
+                    [ style.maskClip.ContentBox]
+                    [ "maskClip" ==> "content-box" ]
+                test
+                    "MaskComposite add"
+                    [ style.maskComposite.Add]
+                    [ "maskComposite" ==> "add" ]
+                test
+                    "Mask image source url"
+                    [ style.maskImage.Url "image.jpg" ]
+                    [ "maskImage" ==> "url(image.jpg)" ]
+                test
+                    "MaskOrigin margin-box"
+                    [ style.maskOrigin.MarginBox]
+                    [ "maskOrigin" ==> "margin-box" ]
+                test
+                    "MaskPosition size"
+                    [ style.maskPosition' (px 1) (rem 1.)]
+                    [ "maskPosition" ==> "1px 1.0rem" ]
+                test
+                    "MaskPosition sizes"
+                    [ style.maskPosition.Value([px 1, rem 1.; px 10, px 100])]
+                    [ "maskPosition" ==> "1px 1.0rem, 10px 100px" ]
+                test
+                    "MaskRepeat value"
+                    [ style.maskRepeat.Value(MaskTypes.Repeat)]
+                    [ "maskRepeat" ==> "repeat" ]
+                test
+                    "MaskRepeat multiple values"
+                    [ style.maskRepeat.Value([MaskTypes.RepeatX, MaskTypes.RepeatY; MaskTypes.NoRepeat, MaskTypes.Round])]
+                    [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
+                test
+                    "MaskRepeat repeatX"
+                    [ style.maskRepeat.RepeatX]
+                    [ "maskRepeat" ==> "repeat-x" ]
             ]

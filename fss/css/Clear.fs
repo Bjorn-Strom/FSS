@@ -42,4 +42,4 @@ module Clear =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private Clear' (clear: IClear) = clear |> Clear.Value
+    let Clear' (clear: IClear) = clear |> Clear.Value

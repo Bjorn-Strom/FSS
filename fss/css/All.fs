@@ -26,7 +26,7 @@ module All =
     ///     can be:
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
+    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private All' (all: IAll) = all |> All.Value
+    let All' (all: IAll) = all |> All.Value

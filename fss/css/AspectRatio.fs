@@ -22,4 +22,4 @@ module AspectRatio =
         static member Initial = Initial |> aspectRatioValue'
         static member Unset = Unset |> aspectRatioValue'
 
-    let private AspectRatio' width height = aspectRatioValue(width, height)
+    let AspectRatio' width height = aspectRatioValue(width, height)

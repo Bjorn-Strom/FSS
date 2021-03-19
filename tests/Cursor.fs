@@ -85,82 +85,66 @@ module Cursor =
                     "Cursor NoDrop"
                     [Cursor.NoDrop]
                     [ "cursor" ==> "no-drop"]
-                    
                 test
                     "Cursor NotAllowed"
                     [Cursor.NotAllowed]
                     [ "cursor" ==> "not-allowed"]
-                    
                 test
                     "Cursor AllScroll"
                     [Cursor.AllScroll]
                     [ "cursor" ==> "all-scroll"]
-                    
                 test
                     "Cursor ColResize"
                     [Cursor.ColResize]
                     [ "cursor" ==> "col-resize"]
-                    
                 test
                     "Cursor RowResize"
                     [Cursor.RowResize]
                     [ "cursor" ==> "row-resize"]
-                    
                 test
                     "Cursor NResize"
                     [Cursor.NResize]
                     [ "cursor" ==> "n-resize"]
-                    
                 test
                     "Cursor EResize"
                     [Cursor.EResize]
                     [ "cursor" ==> "e-resize"]
-                    
                 test
                     "Cursor SResize"
                     [Cursor.SResize]
                     [ "cursor" ==> "s-resize"]
-                    
                 test
                     "Cursor WResize"
                     [Cursor.WResize]
                     [ "cursor" ==> "w-resize"]
-                    
                 test
                     "Cursor NsResize"
                     [Cursor.NsResize]
                     [ "cursor" ==> "ns-resize"]
-                    
                 test
                     "Cursor EwResize"
                     [Cursor.EwResize]
                     [ "cursor" ==> "ew-resize"]
-                    
                 test
                     "Cursor NeResize"
                     [Cursor.NeResize]
                     [ "cursor" ==> "ne-resize"]
-                    
                 test
                     "Cursor NwResize"
                     [Cursor.NwResize]
                     [ "cursor" ==> "nw-resize"]
-                    
                 test
                     "Cursor SeResize"
                     [Cursor.SeResize]
                     [ "cursor" ==> "se-resize"]
-                    
                 test
                     "Cursor SwResize"
                     [Cursor.SwResize]
                     [ "cursor" ==> "sw-resize"]
-                    
                 test
                     "Cursor NeswResize"
                     [Cursor.NeswResize]
                     [ "cursor" ==> "nesw-resize"]
-                    
                 test
                     "Cursor NwseResize"
                     [Cursor.NwseResize]

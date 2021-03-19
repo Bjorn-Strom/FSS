@@ -41,7 +41,7 @@ module ScrollBehavior =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private ScrollBehavior' (behavior: IScrollBehavior) = behavior |> ScrollBehavior.Value
+    let ScrollBehavior' (behavior: IScrollBehavior) = behavior |> ScrollBehavior.Value
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
 [<AutoOpen>]
@@ -373,7 +373,7 @@ module OverscrollBehaviorX =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private OverscrollBehaviorX' (behavior: IOverscrollBehaviorX) = behavior |> OverscrollBehaviorX.Value
+    let OverscrollBehaviorX' (behavior: IOverscrollBehaviorX) = behavior |> OverscrollBehaviorX.Value
 
     [<AutoOpen>]
     module OverscrollBehaviorY =
@@ -409,4 +409,4 @@ module OverscrollBehaviorX =
         ///     - <c> Unset </c>
         /// </param>
         /// <returns>Css property for fss.</returns>
-        let private OverscrollBehaviorY' (behavior: IOverscrollBehaviorY) = behavior |> OverscrollBehaviorY.Value
+        let OverscrollBehaviorY' (behavior: IOverscrollBehaviorY) = behavior |> OverscrollBehaviorY.Value

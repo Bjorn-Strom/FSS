@@ -100,7 +100,7 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private MaskClip' (clip: IMaskClip) = clip |> MaskClip.Value
+    let MaskClip' (clip: IMaskClip) = clip |> MaskClip.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite
     let private stringifyComposite (composite: IMaskComposite) =
@@ -138,7 +138,7 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private MaskComposite' (clip: IMaskComposite) = clip |> MaskComposite.Value
+    let MaskComposite' (clip: IMaskComposite) = clip |> MaskComposite.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
     let private imageSourceToString (imageSource: IMaskImage) =
@@ -237,7 +237,7 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private MaskMode' (mode: IMaskMode) = mode |> MaskMode.Value
+    let MaskMode' (mode: IMaskMode) = mode |> MaskMode.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
     let private stringifyOrigin (composite: IMaskOrigin) =
@@ -247,7 +247,7 @@ module Mask =
         | _ -> "Unknown mask mode"
 
     let private maskOriginValue value = PropertyValue.cssValue Property.MaskOrigin value
-    let private maskOriginValue' value =
+    let maskOriginValue' value =
         value
         |> stringifyOrigin
         |> maskOriginValue
@@ -282,7 +282,7 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private MaskOrigin' (mode: IMaskOrigin) = mode |> MaskOrigin.Value
+    let MaskOrigin' (mode: IMaskOrigin) = mode |> MaskOrigin.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
     let private stringifyPosition (composite: IMaskPosition) =
@@ -323,17 +323,17 @@ module Mask =
         static member Initial = Initial |> maskPositionValue'
         static member Unset = Unset |> maskPositionValue'
 
-
-
-
-
-
-
-
-
-
-
-
+    /// <summary>Specifies position of masks.</summary>
+    /// <param name="x">
+    ///     can be:
+    ///     - <c> x: Size  </c>
+    /// </param>
+    /// <param name="y">
+    ///     can be:
+    ///     - <c> x: Size  </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let MaskPosition' (x: Units.Size.Size) (y: Units.Size.Size) = MaskPosition.Value(x,y)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
     let private stringifyRepeat (composite: IMaskRepeat) =
@@ -381,4 +381,4 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let private MaskRepeat' (repeat: IMaskRepeat) = repeat |> MaskRepeat.Value
+    let MaskRepeat' (repeat: IMaskRepeat) = repeat |> MaskRepeat.Value

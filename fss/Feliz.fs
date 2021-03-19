@@ -3,25 +3,19 @@ namespace Feliz.Fss
 open Feliz
 open Fss
 open Fss.Keyframes
-open Fss.Media
 open Fss.Word
-
+open Fss.Media
 
 [<AutoOpen>]
 module fss =
-    // Todo: FIX
-    module FontTypes = FontTypes
-    // Todo: FIX
-    module Counter = Counter
     type prop with
         static member css (properties: CSSProperty list) =
             prop.className (fss properties)
     type CssColor = CssColor.CssColor
-    type CssInt = Global.CssInt
-    type CssString = Global.CssString
-    type CssFloat = Global.CssFloat
+    let CssInt i = CssInt i
+    let CssString s = CssString s
+    let CssFloat f = CssFloat f
     type Transform = TransformType.Transform
-
 
     // Keyframes
     let keyframes (attributeList: KeyframeAttribute list) = keyframes attributeList
@@ -34,6 +28,9 @@ module fss =
     let MediaQuery (features: MediaFeature list) (attributeList: CSSProperty list) =
         MediaQuery features attributeList
     // Font
+    type Format = FontFace.Format
+    type Source = FontFace.Source
+    type FontFace = FontFace.FontFace
     let fontFace (fontFamily: string) (attributeList: CSSProperty list) = fontFace fontFamily attributeList
     let fontFaces (fontFamily: string) (attributeLists: CSSProperty list list) = fontFaces fontFamily attributeLists
     // Color
@@ -544,3 +541,291 @@ module style =
 
     type overflowWrap = OverflowWrap
     let overflowWrap' overFlowWrap = OverflowWrap' overFlowWrap
+
+    // Position
+    type position = Position
+    let position' position = Position' position
+
+    type top = Top
+    let top' top = Top' top
+
+    type right = Right
+    let right' right = Right' right
+
+    type bottom = Bottom
+    let bottom' bottom = Bottom' bottom
+
+    type left = Left
+    let left' left = Left' left
+
+    type verticalAlign = VerticalAlign
+    let verticalAlign' verticalAlign = VerticalAlign' verticalAlign
+
+    type float = Float
+    let float' float = Float' float
+
+    type boxSizing = BoxSizing
+    let boxSizing' boxSizing = BoxSizing' boxSizing
+
+    type direction = Direction
+    let direction' direction = Direction' direction
+
+    type writingMode = WritingMode
+    let writingMode' writingMode = WritingMode' writingMode
+
+    type breakAfter = BreakAfter
+    let breakAfter' breakAfter = BreakAfter' breakAfter
+
+    type breakBefore = BreakBefore
+    let breakBefore' breakBefore = BreakBefore' breakBefore
+
+    type breakInside = BreakInside
+    let breakInside' breakInside = BreakInside' breakInside
+
+    // Perspective
+    type perspective = Perspective
+    let perspective' perspective = Perspective' perspective
+
+    type perspectiveOrigin = PerspectiveOrigin
+    let perspectiveOrigin' perspectiveOrigin = PerspectiveOrigin' perspectiveOrigin
+
+    type backfaceVisibility = BackfaceVisibility
+    let backfaceVisibility' backfaceVisibility = BackfaceVisibility' backfaceVisibility
+
+    // Pointer events
+    type pointerEvents = PointerEvents
+    let pointerEvents' pointerEvents = PointerEvents' pointerEvents
+
+    // Cursor
+    type cursor = Cursor
+    let cursor' cursor = Cursor' cursor
+
+    // Content
+    type content = Content
+    let content' content = Content' content
+
+    type label = Label
+    let label' label = Label' label
+
+    // Table
+    type captionSide = CaptionSide
+    let captionSide' captionSide = CaptionSide' captionSide
+
+    type emptyCells = EmptyCells
+    let emptyCells' emptyCells = EmptyCells' emptyCells
+
+    type tableLayout = TableLayout
+    let tableLayout' tableLayout = TableLayout' tableLayout
+
+    // Caret
+    type caretColor = CaretColor
+    let caretColor' caretColor = CaretColor' caretColor
+
+    // Appearance
+    type appearance = Appearance
+    let appearance' appearance = Appearance' appearance
+
+    // Typography
+    type orphans = Orphans
+    let orphans' orphans = Orphans' orphans
+
+    type widows = Widows
+    let widows' widows = Widows' widows
+
+    // All
+    type all = All
+    let all' all = All' all
+
+    // Grid
+    type gridAutoFlow = GridAutoFlow
+    let gridAutoFlow' gridAutoFlow = GridAutoFlow' gridAutoFlow
+
+    type gridTemplateAreas = GridTemplateAreas
+    let gridTemplateAreas' gridTemplateAreas = GridTemplateAreas' gridTemplateAreas
+
+    type gridGap = GridGap
+    let gridGap' gridGap = GridGap' gridGap
+
+    type gridRowGap = GridRowGap
+    let gridRowGap' gridRowGap = GridRowGap' gridRowGap
+
+    type gridColumnGap = GridColumnGap
+    let gridColumnGap' gridColumnGap = GridColumnGap' gridColumnGap
+
+    type gridPosition = GridPosition
+    let gridPosition' gridPosition = GridPosition' gridPosition
+
+    type gridRowStart = GridRowStart
+    let gridRowStart' gridRowStart = GridRowStart' gridRowStart
+
+    type gridRowEnd = GridRowEnd
+    let gridRowEnd' gridRowEnd = GridRowEnd' gridRowEnd
+
+    type gridRow = GridRow
+    let gridRow' gridRow = GridRow' gridRow
+
+    type gridColumnStart = GridColumnStart
+    let gridColumnStart' gridColumnStart = GridColumnStart' gridColumnStart
+
+    type gridColumnEnd = GridColumnEnd
+    let gridColumnEnd' gridColumnEnd = GridColumnEnd' gridColumnEnd
+
+    type gridColumn = GridColumn
+    let gridColumn' gridColumn = GridColumn' gridColumn
+
+    type gridArea = GridArea
+    let gridArea' gridArea = GridArea' gridArea
+
+    type gridTemplateRows = GridTemplateRows
+    let gridTemplateRows' gridTemplateRows = GridTemplateRows' gridTemplateRows
+
+    type gridTemplateColumns = GridTemplateColumns
+    let gridTemplateColumns' gridTemplateColumns = GridTemplateColumns' gridTemplateColumns
+
+    type gridAutoRows = GridAutoRows
+    let gridAutoRows' gridAutoRows = GridAutoRows' gridAutoRows
+
+    type gridAutoColumns = GridAutoColumns
+    let gridAutoColumns' gridAutoColumns = GridAutoColumns' gridAutoColumns
+
+    // Flex
+    type alignContent = AlignContent
+    let alignContent' alignContent = AlignContent' alignContent
+
+    type alignItems = AlignItems
+    let alignItems' alignItems = AlignItems' alignItems
+
+    type alignSelf = AlignSelf
+    let alignSelf' alignSelf = AlignSelf' alignSelf
+
+    type justifyContent = JustifyContent
+    let justifyContent' justifyContent = JustifyContent' justifyContent
+
+    type justifyItems = JustifyItems
+    let justifyItems' justifyItems = JustifyItems' justifyItems
+
+    type justifySelf = JustifySelf
+    let justifySelf' justifySelf = JustifySelf' justifySelf
+
+    type flexDirection = FlexDirection
+    let flexDirection' flexDirection = FlexDirection' flexDirection
+
+    type flexWrap = FlexWrap
+    let flexWrap' flexWrap = FlexWrap' flexWrap
+
+    type order = Order
+    let order' order = Order' order
+
+    type flexGrow = FlexGrow
+    let flexGrow' flexGrow = FlexGrow' flexGrow
+
+    type flexShrink = FlexShrink
+    let flexShrink' flexShrink = FlexShrink' flexShrink
+
+    type flexBasis = FlexBasis
+    let flexBasis' flexBasis = FlexBasis' flexBasis
+
+    // Outline
+    type outline = Outline
+    let outline' outline = Outline' outline
+
+    type outlineColor = OutlineColor
+    let outlineColor' outlineColor = OutlineColor' outlineColor
+
+    type outlineWidth = OutlineWidth
+    let outlineWidth' outlineWidth = OutlineWidth' outlineWidth
+
+    type outlineStyle = OutlineStyle
+    let outlineStyle' outlineStyle = OutlineStyle' outlineStyle
+
+    type outlineOffset = OutlineOffset
+    let outlineOffset' outlineOffset = OutlineOffset' outlineOffset
+
+    // box shadow
+    type boxShadow = BoxShadow
+    let boxShadows boxShadows = BoxShadows boxShadows
+    let inset shadow = BoxShadowType.Inset shadow
+
+    // Scroll
+    type scrollBehavior = ScrollBehavior
+    let scrollBehavior' scrollBehaviour = ScrollBehavior' scrollBehaviour
+
+    type scrollMargin = ScrollMargin
+    let scrollMargin' scrollMargin = ScrollMargin' scrollMargin
+
+    type scrollMarginTop = ScrollMarginTop
+    let scrollMarginTop' scrollMarginTop = ScrollMarginTop' scrollMarginTop
+
+    type scrollMarginRight = ScrollMarginRight
+    let scrollMarginRight' scrollMarginRight = ScrollMarginRight' scrollMarginRight
+
+    type scrollMarginBottom = ScrollMarginBottom
+    let scrollMarginBottom' scrollMarginBottom = ScrollMarginBottom' scrollMarginBottom
+
+    type scrollMarginLeft = ScrollMarginLeft
+    let scrollMarginLeft' scrollMarginLeft = ScrollMarginLeft' scrollMarginLeft
+
+    type scrollPadding = ScrollPadding
+    let scrollPadding' scrollPadding = ScrollPadding' scrollPadding
+
+    type scrollPaddingTop = ScrollPaddingTop
+    let scrollPaddingTop' scrollPaddingTop = ScrollPaddingTop' scrollPaddingTop
+
+    type scrollPaddingRight = ScrollPaddingRight
+    let scrollPaddingRight' scrollPaddingRight = ScrollPaddingRight' scrollPaddingRight
+
+    type scrollPaddingBottom = ScrollPaddingBottom
+    let scrollPaddingBottom' scrollPaddingBottom = ScrollPaddingBottom' scrollPaddingBottom
+
+    type scrollPaddingLeft = ScrollPaddingLeft
+    let scrollPaddingLeft' scrollPaddingLeft = ScrollPaddingLeft' scrollPaddingLeft
+
+    type overscrollBehaviorX = OverscrollBehaviorX
+    let overscrollBehaviorX' overscrollBehaviorX = OverscrollBehaviorX' overscrollBehaviorX
+
+    type overscrollBehaviorY = OverscrollBehaviorY
+    let overscrollBehaviorY' overscrollBehaviorY = OverscrollBehaviorY' overscrollBehaviorY
+
+    // Clip path
+    type clipPath = ClipPath
+
+    // Clear
+    type clear = Clear
+    let clear' clear = Clear' clear
+
+    // filter
+    type filter = Filter
+    let filters filters = Filters filters
+
+    type backdropFilter = BackdropFilter
+    let backdropFilters backdropFilters = BackdropFilters backdropFilters
+
+    // Mix blend mode
+    type mixBlendMode = MixBlendMode
+    let mixBlendMode' mixBlendMode = MixBlendMode' mixBlendMode
+
+    // aspect ratio
+    type aspectRatio = AspectRatio
+    let aspectRatio' aspectRatio = AspectRatio' aspectRatio
+
+    // Mask
+    type maskClip = MaskClip
+    let maskClip' maskClip = MaskClip' maskClip
+
+    type maskComposite = MaskComposite
+    let maskComposite' maskComposite = MaskComposite' maskComposite
+
+    type maskImage = MaskImage
+    let maskImage' maskImage = MaskImage' maskImage
+
+    type maskMode = MaskMode
+    let maskMode' maskMode = MaskMode' maskMode
+
+    type maskOrigin = MaskOrigin
+    let maskOrigin' maskOrigin = MaskOrigin' maskOrigin
+
+    type maskPosition = MaskPosition
+    let maskPosition' x y = MaskPosition' x y
+
+    type maskRepeat = MaskRepeat
+    let maskRepeat' maskRepeat = MaskRepeat' maskRepeat
