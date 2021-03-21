@@ -43,12 +43,12 @@ module Media =
                 | Types.DisplayMode                d -> sprintf "(display-mode: %s)" <| displayMode d
                 | Types.ForcedColors               f -> sprintf "(forced-colors: %s)" <| if f then "active" else "none"
                 | Types.MediaFeature.Grid          g -> sprintf "(grid: %s)" <| if g then "1" else "0"
-                | Types.Height                     h -> sprintf "(height: %s)" <| Types.sizeToString h
-                | Types.MinHeight                  s -> sprintf "(min-height: %s)" <| Types.sizeToString s
-                | Types.MaxHeight                  s -> sprintf "(max-height: %s)" <| Types.sizeToString s
-                | Types.Width                      s -> sprintf "(width: %s)" <| Types.sizeToString s
-                | Types.MinWidth                   s -> sprintf "(min-width: %s)" <| Types.sizeToString s
-                | Types.MaxWidth                   s -> sprintf "(max-width: %s)" <| Types.sizeToString s
+                | Types.Height                     h -> sprintf "(height: %s)" <| Types.unitHelpers.sizeToString h
+                | Types.MinHeight                  s -> sprintf "(min-height: %s)" <| Types.unitHelpers.sizeToString s
+                | Types.MaxHeight                  s -> sprintf "(max-height: %s)" <| Types.unitHelpers.sizeToString s
+                | Types.Width                      s -> sprintf "(width: %s)" <| Types.unitHelpers.sizeToString s
+                | Types.MinWidth                   s -> sprintf "(min-width: %s)" <| Types.unitHelpers.sizeToString s
+                | Types.MaxWidth                   s -> sprintf "(max-width: %s)" <| Types.unitHelpers.sizeToString s
                 | Types.Hover                      h -> sprintf "(hover %s)" <| if h then "hover" else "none"
                 | Types.InvertedColors             c -> sprintf "(inverted-colors: %s)" <| if c then "inverted" else "none"
                 | Types.LightLevel                 l -> sprintf "(light-level: %s)" <| lightLevel l
@@ -63,9 +63,9 @@ module Media =
                 | Types.PrefersContrast            c -> sprintf "(prefers-contrast: %s)" <| contrast c
                 | Types.PrefersReducedMotion       p -> sprintf "(prefers-reduced-motion: %s)" <| if p then "reduce" else "no-preference"
                 | Types.PrefersReducedTransparency p -> sprintf "(prefers-reduced-transparency: %s)" <| if p then "reduce" else "no-preference"
-                | Types.Resolution                 r -> sprintf "(resolution: %s)" <| Types.resolutionToString r
-                | Types.MinResolution              r -> sprintf "(min-resolution: %s)" <| Types.resolutionToString r
-                | Types.MaxResolution              r -> sprintf "(max-resolution: %s)" <| Types.resolutionToString r
+                | Types.Resolution                 r -> sprintf "(resolution: %s)" <| Types.unitHelpers.resolutionToString r
+                | Types.MinResolution              r -> sprintf "(min-resolution: %s)" <| Types.unitHelpers.resolutionToString r
+                | Types.MaxResolution              r -> sprintf "(max-resolution: %s)" <| Types.unitHelpers.resolutionToString r
                 | Types.Scan                       s -> sprintf "(scan: %s)" <| scan s
                 | Types.Scripting                  s -> sprintf "(scripting: %s)" <| scripting s
                 | Types.Update                     u -> sprintf "(update: %s)" <| update u

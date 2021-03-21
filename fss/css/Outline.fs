@@ -5,38 +5,38 @@ module Outline  =
 
     let private outlineToString (color: Types.IOutline) =
         match color with
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown outline"
 
     let private outlineColorToString (color: Types.IOutlineColor) =
         match color with
-        | :? Types.Color as c -> Types.colorToString c
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Color as c -> Types.colorHelpers.colorToString c
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown outline color"
 
     let private outlineWidthToString (width: Types.IOutlineWidth) =
         match width with
             | :? Types.OutlineWidth as c -> Utilities.Helpers.duToLowercase c
-            | :? Types.Keywords as k -> Types.keywordsToString k
-            | :? Types.Size as s -> Types.sizeToString s
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+            | :? Types.Size as s -> Types.unitHelpers.sizeToString s
             | _ -> "Unknown outline width"
 
     let private outlineStyleToString (style: Types.IOutlineStyle) =
         match style with
             | :? Types.OutlineStyle as c -> Utilities.Helpers.duToLowercase c
-            | :? Types.Keywords as k -> Types.keywordsToString k
-            | :? Types.None' -> Types.none
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+            | :? Types.None' -> Types.masterTypeHelpers.none
             | _ -> "Unknown outline style"
 
     let private outlineOffsetToString (style: Types.IOutlineOffset) =
         match style with
-            | :? Types.Keywords as k -> Types.keywordsToString k
-            | :? Types.Size as s -> Types.sizeToString s
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+            | :? Types.Size as s -> Types.unitHelpers.sizeToString s
             | _ -> "Unknown outline offset"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline
-    let private outlineValue value = Types.cssValue Types.Property.Outline value
+    let private outlineValue value = Types.propertyHelpers.cssValue Types.Property.Outline value
     let private outlineValue' value =
         value
         |> outlineToString
@@ -62,7 +62,7 @@ module Outline  =
     let Outline' (outline: Types.IOutline) = Outline.Value(outline)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
-    let private colorValue value = Types.cssValue Types.Property.OutlineColor value
+    let private colorValue value = Types.propertyHelpers.cssValue Types.Property.OutlineColor value
     let private colorValue' value =
         value
         |> outlineColorToString
@@ -237,7 +237,7 @@ module Outline  =
     let OutlineColor' (color: Types.IOutlineColor) = OutlineColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width
-    let private outlineWidthValue value = Types.cssValue Types.Property.OutlineWidth value
+    let private outlineWidthValue value = Types.propertyHelpers.cssValue Types.Property.OutlineWidth value
     let private outlineWidthValue' value =
         value
         |> outlineWidthToString
@@ -267,7 +267,7 @@ module Outline  =
     let OutlineWidth' (width: Types.IOutlineWidth) = OutlineWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style
-    let private outlineStyleValue value = Types.cssValue Types.Property.OutlineStyle value
+    let private outlineStyleValue value = Types.propertyHelpers.cssValue Types.Property.OutlineStyle value
     let private outlineStyleValue' value =
         value
         |> outlineStyleToString
@@ -303,7 +303,7 @@ module Outline  =
     let OutlineStyle' (style: Types.IOutlineStyle) = OutlineStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset
-    let private outlineOffsetValue value = Types.cssValue Types.Property.OutlineOffset value
+    let private outlineOffsetValue value = Types.propertyHelpers.cssValue Types.Property.OutlineOffset value
     let private outlineOffsetValue' value =
         value
         |> outlineOffsetToString

@@ -5,12 +5,12 @@ module MixBlendMode =
     let private blendModeToString (blendMode: Types.IMixBlendMode) =
         match blendMode with
         | :? Types.MixBlendMode as b -> Utilities.Helpers.duToKebab b
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mix blend mode"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
-    let private mixBlendModeCssValue value = Types.cssValue Types.Property.MixBlendMode value
+    let private mixBlendModeCssValue value = Types.propertyHelpers.cssValue Types.Property.MixBlendMode value
     let private mixBlendModeCssValue' value =
         value
         |> blendModeToString

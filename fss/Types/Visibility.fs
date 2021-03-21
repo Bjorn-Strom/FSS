@@ -1,26 +1,27 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Visibility =
         | Visible
         | Hidden
         | Collapse
-        interface Types.IVisibility
-
-    let internal visibilityToString (visibility: Types.IVisibility) =
-        match visibility with
-        | :? Visibility as v -> Fss.Utilities.Helpers.duToLowercase v
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | _ -> "Unknown visibility"
+        interface IVisibility
 
     type PaintOrder =
         | Stroke
         | Markers
         | Fill
-        interface Types.IPaintOrder
+        interface IPaintOrder
 
     type BackfaceVisibility =
         | Visible
         | Hidden
-        interface Types.IBackfaceVisibility
+        interface IBackfaceVisibility
+
+    [<AutoOpen>]
+    module visibilityHelpers =
+        let internal visibilityToString (visibility: IVisibility) =
+            match visibility with
+            | :? Visibility as v -> Fss.Utilities.Helpers.duToLowercase v
+            | :? Keywords as k -> keywordsToString k
+            | _ -> "Unknown visibility"

@@ -4,8 +4,8 @@
 module ListStyle =
     let private listStyleToString (style: Types.IListStyle) =
         match style with
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown list style"
 
     let private listStyleImageToString (image: Types.IListStyleImage) =
@@ -15,18 +15,18 @@ module ListStyle =
 
         match image with
         | :? Types.ListStyleImage as l -> stringifyImage l
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown list style image"
 
     let private stylePositionToString (stylePosition: Types.IListStylePosition) =
         match stylePosition with
         | :? Types.ListStylePosition as l -> Utilities.Helpers.duToLowercase l
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown list style position"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style
-    let private listStyleValue (value: string) = Types.cssValue Types.Property.ListStyle value
+    let private listStyleValue (value: string) = Types.propertyHelpers.cssValue Types.Property.ListStyle value
     let private listStyleValue' value =
         value
         |> listStyleToString
@@ -52,7 +52,7 @@ module ListStyle =
     let ListStyle' (style: Types.IListStyle) = ListStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
-    let private listStyleImageValue (value: string) = Types.cssValue Types.Property.ListStyleImage value
+    let private listStyleImageValue (value: string) = Types.propertyHelpers.cssValue Types.Property.ListStyleImage value
     let private listStyleImageValue' value =
         value
         |> listStyleImageToString
@@ -80,7 +80,7 @@ module ListStyle =
     let ListStyleImage' (image: Types.IListStyleImage) = ListStyleImage.Value(image)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
-    let private listStylePositionProperty (value: string) = Types.cssValue Types.Property.ListStylePosition value
+    let private listStylePositionProperty (value: string) = Types.propertyHelpers.cssValue Types.Property.ListStylePosition value
     let private listStylePositionProperty' value =
         value
         |> stylePositionToString
@@ -107,14 +107,14 @@ module ListStyle =
     let ListStylePosition' (position: Types.IListStylePosition) = ListStylePosition.Value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
-    let private listStyleTypeProperty (value: string) = Types.cssValue Types.Property.ListStyleType value
+    let private listStyleTypeProperty (value: string) = Types.propertyHelpers.cssValue Types.Property.ListStyleType value
     let private listStyleTypeProperty' value =
         value
-        |> Types.styleTypeToString
+        |> Types.listStyleHelpers.styleTypeToString
         |> listStyleTypeProperty
     type ListStyleType =
         static member Value (styleType: Types.IListStyleType) = styleType |> listStyleTypeProperty'
-        static member Value(counter: Types.CounterStyle) = Types.counterStyleToString counter |> listStyleTypeProperty
+        static member Value(counter: Types.CounterStyle) = Types.counterStyleHelpers.counterStyleToString counter |> listStyleTypeProperty
         static member Disc = Types.Disc |> listStyleTypeProperty'
         static member Circle = Types.Circle |> listStyleTypeProperty'
         static member Square = Types.Square |> listStyleTypeProperty'

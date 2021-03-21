@@ -7,11 +7,11 @@ module Display =
     let private displayToString (display: Types.IDisplay) =
         match display with
         | :? Types.Display as t -> Utilities.Helpers.duToKebab t
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown display type"
 
-    let private displayValue value = Types.cssValue Types.Property.Display value
+    let private displayValue value = Types.propertyHelpers.cssValue Types.Property.Display value
     let private displayValue' value =
         value
         |> displayToString

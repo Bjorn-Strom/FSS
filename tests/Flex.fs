@@ -3,7 +3,6 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open FssTypes
 open Fss
 
 module Flex =
@@ -432,7 +431,7 @@ module Flex =
                     ["alignContent" ==> "unset"]
                 test
                     "Order value"
-                    [ Order' (CssInt 1) ]
+                    [ Order' (Types.CssInt 1) ]
                     ["order" ==> "1"]
                 test
                     "Order inherit"
@@ -448,7 +447,7 @@ module Flex =
                     ["order" ==> "unset"]
                 test
                     "Flex grow value"
-                    [ FlexGrow' (CssFloat 1.5) ]
+                    [ FlexGrow' (Types.CssFloat 1.5) ]
                     ["flexGrow" ==> "1.5"]
                 test
                     "FlexGrow inherit"
@@ -464,7 +463,7 @@ module Flex =
                     ["flexGrow" ==> "unset"]
                 test
                     "FlexShrink value"
-                    [ FlexShrink' (CssFloat 1.5) ]
+                    [ FlexShrink' (Types.CssFloat 1.5) ]
                     ["flexShrink" ==> "1.5"]
                 test
                     "FlexShrink inherit"

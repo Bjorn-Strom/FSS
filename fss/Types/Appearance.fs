@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Appearance =
         | PushButton
         | SquareButton
@@ -69,5 +68,5 @@ module Types =
         | Treetwistyopen
         | Treeview
         | Window
-        interface Types.IAppearance
+        interface IAppearance
 

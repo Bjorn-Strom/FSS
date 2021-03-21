@@ -3,10 +3,10 @@ namespace Fss
 // https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
 [<AutoOpen>]
 module Visibility =
-    let private visibilityValue value = Types.cssValue Types.Property.Visibility value
+    let private visibilityValue value = Types.propertyHelpers.cssValue Types.Property.Visibility value
     let private visibilityValue' value =
         value
-        |> Types.visibilityToString
+        |> Types.visibilityHelpers.visibilityToString
         |> visibilityValue
 
     type Visibility =
@@ -35,7 +35,7 @@ module Visibility =
 module Opacity =
     type Opacity =
         static member Value value =
-            Types.cssValue Types.Property.Opacity
+            Types.propertyHelpers.cssValue Types.Property.Opacity
             <| string (Utilities.Helpers.clamp 0.0 1.0 value)
 
     /// <summary>Specifies the opacity of an element.</summary>
@@ -49,10 +49,10 @@ module PaintOrder =
     let private paintOrderToString (paintOrder: Types.IPaintOrder) =
         match paintOrder with
         | :? Types.PaintOrder as p -> Utilities.Helpers.duToLowercase p
-        | :? Types.Normal -> Types.normal
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
         | _ -> "unknown paint order"
 
-    let private paintOrderValue value = Types.cssValue Types.Property.PaintOrder value
+    let private paintOrderValue value = Types.propertyHelpers.cssValue Types.Property.PaintOrder value
     let private paintOrderValue' value =
         value
         |> paintOrderToString

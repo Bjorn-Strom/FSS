@@ -16,7 +16,7 @@ module Functions =
     // Constructors
     let private fssObject (attributeList: Types.CssProperty list) =
         attributeList
-        |> List.map Types.CssValue
+        |> List.map Types.masterTypeHelpers.CssValue
         |> createObj
         |> css'
 
@@ -30,7 +30,7 @@ module Functions =
         attributeList
         |> createAnimationObject
         |> keyframes'
-        |> Types.String
+        |> Types.CssString
         :> Types.IAnimationName
 
     /// <summary>Write Css as key value string pairs.

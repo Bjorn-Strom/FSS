@@ -6,10 +6,10 @@ module Mask =
     let private stringifyClip (clip: Types.IMaskClip) =
         match clip with
         | :? Types.MaskClip as m -> Utilities.Helpers.duToKebab m
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask-clip"
 
-    let private maskClipValue value = Types.cssValue Types.Property.MaskClip value
+    let private maskClipValue value = Types.propertyHelpers.cssValue Types.Property.MaskClip value
     let private maskClipValue' value =
         value
         |> stringifyClip
@@ -52,10 +52,10 @@ module Mask =
     let private stringifyComposite (composite: Types.IMaskComposite) =
         match composite with
         | :? Types.MaskComposite as m -> Utilities.Helpers.duToLowercase m
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask-composite"
 
-    let private maskCompositeValue value = Types.cssValue Types.Property.MaskComposite value
+    let private maskCompositeValue value = Types.propertyHelpers.cssValue Types.Property.MaskComposite value
     let private maskCompositeValue' value =
         value
         |> stringifyComposite
@@ -89,11 +89,11 @@ module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
     let private imageSourceToString (imageSource: Types.IMaskImage) =
         match imageSource with
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask image"
 
-    let private imageValue value = Types.cssValue Types.Property.MaskImage value
+    let private imageValue value = Types.propertyHelpers.cssValue Types.Property.MaskImage value
     let private imageValue' value =
         value
         |> imageSourceToString
@@ -103,34 +103,34 @@ module Mask =
         static member Value (source: Types.IMaskImage) = source |> imageValue'
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
         static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.LinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.LinearGradient((angle, gradients))
         static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.LinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.LinearGradient((angle, gradients))
         static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
-            imageValue <| Image.Image.LinearGradients(gradients)
+            imageValue <| Types.Image.Image.LinearGradients(gradients)
         static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
-            imageValue <| Image.Image.LinearGradients(gradients)
+            imageValue <| Types.Image.Image.LinearGradients(gradients)
         static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
         static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
         static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
-            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
+            imageValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
         static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
-            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
+            imageValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
-            imageValue <| Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
-            imageValue <| Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+            imageValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+            imageValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
+            imageValue <| Types.Image.Image.RadialGradients(gradients)
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
+            imageValue <| Types.Image.Image.RadialGradients(gradients)
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+            imageValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+            imageValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
         static member None = Types.None' |> imageValue'
         static member Inherit = Types.Inherit |> imageValue'
         static member Initial = Types.Initial |> imageValue'
@@ -152,10 +152,10 @@ module Mask =
     let private stringifyMode (composite: Types.IMaskMode) =
         match composite with
         | :? Types.MaskMode as m -> Utilities.Helpers.duToKebab m
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask mode"
 
-    let private maskModeValue value = Types.cssValue Types.Property.MaskMode value
+    let private maskModeValue value = Types.propertyHelpers.cssValue Types.Property.MaskMode value
     let private maskModeValue' value =
         value
         |> stringifyMode
@@ -189,10 +189,10 @@ module Mask =
     let private stringifyOrigin (composite: Types.IMaskOrigin) =
         match composite with
         | :? Types.MaskOrigin as m -> Utilities.Helpers.duToKebab m
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask mode"
 
-    let private maskOriginValue value = Types.cssValue Types.Property.MaskOrigin value
+    let private maskOriginValue value = Types.propertyHelpers.cssValue Types.Property.MaskOrigin value
     let maskOriginValue' value =
         value
         |> stringifyOrigin
@@ -233,10 +233,10 @@ module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
     let private stringifyPosition (composite: Types.IMaskPosition) =
         match composite with
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask position"
 
-    let private maskPositionValue value = Types.cssValue Types.Property.MaskPosition value
+    let private maskPositionValue value = Types.propertyHelpers.cssValue Types.Property.MaskPosition value
     let private maskPositionValue' value =
         value
         |> stringifyPosition
@@ -244,11 +244,11 @@ module Mask =
 
     let private stringifyPixelPositions ps =
         let (x, y) = ps
-        $"{Types.sizeToString x} {Types.sizeToString y}"
+        $"{Types.unitHelpers.sizeToString x} {Types.unitHelpers.sizeToString y}"
 
     let private stringifyPercentPositions ps =
         let (x, y) = ps
-        $"{Types.percentToString x} {Types.percentToString y}"
+        $"{Types.unitHelpers.percentToString x} {Types.unitHelpers.percentToString y}"
 
     type MaskPosition =
         static member Value (x: Types.Size, y: Types.Size) =
@@ -284,11 +284,14 @@ module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
     let private stringifyRepeat (composite: Types.IMaskRepeat) =
         match composite with
-        | :? Types.MaskRepeat as r -> Utilities.Helpers.duToKebab r
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.MaskRepeat as r ->
+            match r with
+            | Types.MaskRepeat.Repeat' -> "repeat"
+            | _ -> Utilities.Helpers.duToKebab r
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask repeat"
 
-    let private maskRepeatValue value = Types.cssValue Types.Property.MaskRepeat value
+    let private maskRepeatValue value = Types.propertyHelpers.cssValue Types.Property.MaskRepeat value
     let private maskRepeatValue' value =
         value
         |> stringifyRepeat

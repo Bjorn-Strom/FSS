@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Format =
         | Truetype
         | Opentype

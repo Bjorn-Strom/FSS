@@ -3,7 +3,6 @@ namespace FSSTests
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open FssTypes
 open Fss
 
 module Mask =
@@ -108,7 +107,7 @@ module Mask =
                     [ "maskImage" ==> "url(image.jpg)" ]
                 test
                     "Mask image source linear gradient"
-                    [ MaskImage.LinearGradient(deg 45., [ Fss.Types.Color.Types.Color.red, pct 0; Fss.Types.Color.Types.Color.blue, pct 100 ]) ]
+                    [ MaskImage.LinearGradient(deg 45., [ Types.Color.red, pct 0; Types.Color.blue, pct 100 ]) ]
                     [ "maskImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
                 test
                     "Mask image source inherit"
@@ -136,7 +135,7 @@ module Mask =
                     [ "maskMode" ==> "match-source" ]
                 test
                     "Mask mode multiple"
-                    [ MaskMode.Value([Alpha; MatchSource]) ]
+                    [ MaskMode.Value([Types.Alpha; Types.MatchSource]) ]
                     [ "maskMode" ==> "alpha, match-source" ]
                 test
                     "Mask mode inherit"
@@ -237,7 +236,7 @@ module Mask =
 
                 test
                     "MaskRepeat value"
-                    [ MaskRepeat.Value(Types.MaskRepeat.Repeat)]
+                    [ MaskRepeat.Value(Types.MaskRepeat.Repeat')]
                     [ "maskRepeat" ==> "repeat" ]
                 test
                     "MaskRepeat 2 value"

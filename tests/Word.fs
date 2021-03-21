@@ -5,7 +5,6 @@ open Fable.Core.JsInterop
 open Fss.Word
 open Utils
 open Fss
-open FssTypes
 
 module Word =
     let tests =
@@ -29,7 +28,7 @@ module Word =
                     ["wordSpacing" ==> "50%"]
                 test
                     "Word Spacing inherit value"
-                    [WordSpacing' Inherit]
+                    [WordSpacing' Types.Inherit]
                     ["wordSpacing" ==> "inherit"]
                 test
                     "Word spacing inherit"
@@ -57,7 +56,7 @@ module Word =
                     ["wordBreak" ==> "normal"]
                 test
                     "Word Spacing inherit value"
-                    [WordBreak' Inherit]
+                    [WordBreak' Types.Inherit]
                     ["wordBreak" ==> "inherit"]
                 test
                     "Word break inherit"

@@ -6,60 +6,63 @@ module Background =
     let private backgroundClipToString (clip: Types.IBackgroundClip) =
         match clip with
         | :? Types.BackgroundClip as b -> Utilities.Helpers.duToKebab b
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown background clip"
 
     let private backgroundOriginToString (clip: Types.IBackgroundOrigin) =
         match clip with
         | :? Types.BackgroundOrigin as b -> Utilities.Helpers.duToKebab b
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown background origin"
 
     let private repeatToString (repeat: Types.IBackgroundRepeat) =
         match repeat with
         | :? Types.BackgroundRepeat as b -> Utilities.Helpers.duToKebab b
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown background repeat"
 
     let private sizeToString (size: Types.IBackgroundSize) =
         match size with
         | :? Types.BackgroundSize as b -> Utilities.Helpers.duToLowercase b
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown background size"
 
     let private attachmentToString (attachment: Types.IBackgroundAttachment) =
         match attachment with
         | :? Types.BackgroundAttachment as b -> Utilities.Helpers.duToLowercase b
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown background attachment"
 
     let private positionToString (position: Types.IBackgroundPosition) =
         match position with
         | :? Types.BackgroundPosition as b -> Utilities.Helpers.duToLowercase b
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | _ -> "Unknown background position"
 
     let private blendModeToString (blendMode: Types.IBackgroundBlendMode) =
         match blendMode with
-        | :? Types.BackgroundBlendMode as b -> Utilities.Helpers.duToKebab b
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.BackgroundBlendMode as b ->
+            match b with
+            | Types.Color' -> "color"
+            | _ -> Utilities.Helpers.duToKebab b
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown background blend mode"
 
     let private isolationToString (isolation: Types.IIsolation) =
         match isolation with
         | :? Types.Isolation as i -> "isolate"
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown isolation"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
-    let private clipValue value = Types.cssValue Types.Property.BackgroundClip value
+    let private clipValue value = Types.propertyHelpers.cssValue Types.Property.BackgroundClip value
     let private clipValue' value =
         value
         |> backgroundClipToString
@@ -88,7 +91,7 @@ module Background =
     let BackgroundClip' (clip: Types.IBackgroundClip) = BackgroundClip.Value(clip)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
-    let private originValue value = Types.cssValue Types.Property.BackgroundOrigin value
+    let private originValue value = Types.propertyHelpers.cssValue Types.Property.BackgroundOrigin value
     let private originValue' value =
         value
         |> backgroundOriginToString
@@ -115,7 +118,7 @@ module Background =
     let BackgroundOrigin' (origin: Types.IBackgroundOrigin) = BackgroundOrigin.Value(origin)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
-    let private repeatValue value = Types.cssValue Types.Property.BackgroundRepeat value
+    let private repeatValue value = Types.propertyHelpers.cssValue Types.Property.BackgroundRepeat value
     let private repeatValue' value =
         value
         |> repeatToString
@@ -149,7 +152,7 @@ module Background =
     let BackgroundRepeat' (repeat: Types.IBackgroundRepeat) = BackgroundRepeat.Value(repeat)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
-    let private sizeValue value = Types.cssValue Types.Property.BackgroundSize value
+    let private sizeValue value = Types.propertyHelpers.cssValue Types.Property.BackgroundSize value
     let private sizeValue' value =
         value
         |> sizeToString
@@ -183,7 +186,7 @@ module Background =
     let BackgroundSize' (size: Types.IBackgroundSize) = BackgroundSize.Value(size)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
-    let private attachmentValue value = Types.cssValue Types.Property.BackgroundAttachment value
+    let private attachmentValue value = Types.propertyHelpers.cssValue Types.Property.BackgroundAttachment value
     let private attachmentValue' value =
         value
         |> attachmentToString
@@ -210,10 +213,10 @@ module Background =
     let BackgroundAttachment' (attachment: Types.IBackgroundAttachment) = BackgroundAttachment.Value(attachment)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
-    let private backgroundValue value = Types.cssValue Types.Property.BackgroundColor value
+    let private backgroundValue value = Types.propertyHelpers.cssValue Types.Property.BackgroundColor value
     let private backgroundValue' value =
         value
-        |> Types.colorToString
+        |> Types.colorHelpers.colorToString
         |> backgroundValue
     type BackgroundColor =
         static member Value (color: Types.Color) = color |> backgroundValue'
@@ -377,49 +380,49 @@ module Background =
     let BackgroundColor' (color: Types.Color) = BackgroundColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
-    let private imageValue value = Types.cssValue Types.Property.BackgroundImage value
+    let private imageValue value = Types.propertyHelpers.cssValue Types.Property.BackgroundImage value
     type BackgroundImage =
-        static member Value (image: Image.Image) = image |> imageValue
+        static member Value (image: Types.Image.Image) = image |> imageValue
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
 
         static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.LinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.LinearGradient((angle, gradients))
         static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.LinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.LinearGradient((angle, gradients))
         static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
-            imageValue <| Image.Image.LinearGradients(gradients)
+            imageValue <| Types.Image.Image.LinearGradients(gradients)
         static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
-            imageValue <| Image.Image.LinearGradients(gradients)
+            imageValue <| Types.Image.Image.LinearGradients(gradients)
         static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
         static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
         static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
-            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
+            imageValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
         static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
-            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
+            imageValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
-            imageValue <| Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
-            imageValue <| Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+            imageValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+            imageValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
+            imageValue <| Types.Image.Image.RadialGradients(gradients)
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
+            imageValue <| Types.Image.Image.RadialGradients(gradients)
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+            imageValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+            imageValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
 
         static member ConicGradient (angle: Types.Angle, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Angle) list) =
-            imageValue <| Image.Image.ConicGradient(angle, x, y, gradients)
+            imageValue <| Types.Image.Image.ConicGradient(angle, x, y, gradients)
         static member RepeatingConicGradient (angle: Types.Angle, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Angle) list) =
-            imageValue <| Image.Image.RepeatingConicGradient(angle, x, y, gradients)
+            imageValue <| Types.Image.Image.RepeatingConicGradient(angle, x, y, gradients)
         static member ConicGradient (angle: Types.Angle, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.ConicGradient(angle, x, y, gradients)
+            imageValue <| Types.Image.Image.ConicGradient(angle, x, y, gradients)
         static member RepeatingConicGradient (angle: Types.Angle, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RepeatingConicGradient(angle, x, y, gradients)
+            imageValue <| Types.Image.Image.RepeatingConicGradient(angle, x, y, gradients)
 
     /// <summary>Draws background image on element.</summary>
     /// <param name="image">
@@ -427,10 +430,10 @@ module Background =
     ///     - <c> Image </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundImage' (image: Image.Image) = BackgroundImage.Value(image)
+    let BackgroundImage' (image: Types.Image.Image) = BackgroundImage.Value(image)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
-    let private positionCssValue value = Types.cssValue Types.Property.BackgroundPosition value
+    let private positionCssValue value = Types.propertyHelpers.cssValue Types.Property.BackgroundPosition value
     let private positionCssValue' value =
         value
         |> positionToString
@@ -469,7 +472,7 @@ module Background =
     let BackgroundPosition' (position: Types.IBackgroundPosition) = BackgroundPosition.Value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
-    let private blendModeCssValue value = Types.cssValue Types.Property.BackgroundBlendMode value
+    let private blendModeCssValue value = Types.propertyHelpers.cssValue Types.Property.BackgroundBlendMode value
     let private blendModeCssValue' value =
         value
         |> blendModeToString
@@ -518,7 +521,7 @@ module Background =
     let BackgroundBlendMode' (backgroundBlendMode: Types.IBackgroundBlendMode) = backgroundBlendMode |> BackgroundBlendMode.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
-    let private isolationValue value = Types.cssValue Types.Property.Isolation value
+    let private isolationValue value = Types.propertyHelpers.cssValue Types.Property.Isolation value
     let private isolationValue' value =
         value
         |> isolationToString
@@ -551,11 +554,11 @@ module BoxDecorationBreak =
     let private boxDecorationBreakToString (boxDecoration: Types.IBoxDecorationBreak) =
         match boxDecoration with
         | :? Types.BoxDecorationBreak as b -> Utilities.Helpers.duToLowercase b
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown box decoration break"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-decoration-break
-    let private boxDecorationBreakValue value = Types.cssValue Types.Property.BoxDecorationBreak value
+    let private boxDecorationBreakValue value = Types.propertyHelpers.cssValue Types.Property.BoxDecorationBreak value
     let private boxDecorationBreakValue' value =
         value
         |> boxDecorationBreakToString

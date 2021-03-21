@@ -5,11 +5,11 @@ module Appearance =
     let private appearanceToString (appearance: Types.IAppearance) =
         match appearance with
         | :? Types.Appearance as a -> Utilities.Helpers.duToKebab a
-        | :? Types.None' -> Types.none
-        | :? Types.Auto -> Types.auto
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown appearance"
 
-    let private appearanceValue value = Types.cssValue Types.Property.Appearance value
+    let private appearanceValue value = Types.propertyHelpers.cssValue Types.Property.Appearance value
     let private appearanceValue' value =
         value
         |> appearanceToString

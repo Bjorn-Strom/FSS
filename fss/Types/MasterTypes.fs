@@ -1,8 +1,6 @@
 namespace Fss
-
 // Interfaces
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type IAnimationDirection      = interface end
     type IAnimationFillMode       = interface end
     type IAnimationPlayState      = interface end
@@ -534,8 +532,8 @@ module Types =
         interface IMaskPosition
         interface IMaskRepeat
 
-    type Int =
-        | Int of int
+    type CssInt =
+        | CssInt of int
         interface IAnimationIterationCount
         interface IOrder
         interface IFontWeight
@@ -545,15 +543,15 @@ module Types =
         interface IOrphans
         interface IWidows
 
-    type Float =
-        | Float of float
+    type CssFloat =
+        | CssFloat of float
         interface IBorderImageWidth
         interface IFlexGrow
         interface IFlexShrink
         interface ILineHeight
 
-    type String =
-        | String of string
+    type CssString =
+        | CssString of string
         interface IAnimationName
         interface ITextEmphasisStyle
         interface ITextOverflow
@@ -562,15 +560,17 @@ module Types =
         interface IContent
         interface INthChild
 
-    let internal auto = "auto"
-    let internal none = "none"
-    let internal normal = "normal"
+    [<AutoOpen>]
+    module masterTypeHelpers =
+        let internal auto = "auto"
+        let internal none = "none"
+        let internal normal = "normal"
 
-    let internal IntToString (Int i) = string i
-    let internal FloatToString (Float f) = string f
-    let internal StringToString (String s) = s
+        let internal IntToString (CssInt i) = string i
+        let internal FloatToString (CssFloat f) = string f
+        let internal StringToString (CssString s) = s
 
-    let internal keywordsToString (g: Keywords) = Fss.Utilities.Helpers.duToLowercase g
+        let internal keywordsToString (g: Keywords) = Fss.Utilities.Helpers.duToLowercase g
 
-    let CssValue (CssProperty (s,o)) = s,o
-    let CounterValue (CounterProperty (s,o)) = s,o
+        let CssValue (CssProperty (s,o)) = s,o
+        let CounterValue (CounterProperty (s,o)) = s,o

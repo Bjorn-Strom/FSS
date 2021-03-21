@@ -6,34 +6,34 @@ module Position =
 
     let private positionedToString (positioned: Types.IPositioned) =
         match positioned with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ ->  "Unknown position"
 
     let private verticalAlignToString (alignment: Types.IVerticalAlign) =
         match alignment with
         | :? Types.VerticalAlign as v -> Utilities.Helpers.duToKebab v
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | _ -> "Unknown vertical align"
 
     let private floatToString (float: Types.IFloat) =
         match float with
         | :? Types.Float' as v -> Utilities.Helpers.duToKebab v
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown float"
 
     let private directionToString (direction: Types.IDirection) =
         match direction with
         | :? Types.Direction as d -> Utilities.Helpers.duToLowercase d
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown direction"
 
-    let private positionValue value = Types.cssValue Types.Property.Position value
+    let private positionValue value = Types.propertyHelpers.cssValue Types.Property.Position value
     let private positionValue' (value: Types.Position) =
         value
         |> Utilities.Helpers.duToKebab
@@ -53,7 +53,7 @@ module Position =
     let Position' (position: Position) = Position.Value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/top
-    let private topValue value = Types.cssValue Types.Property.Top value
+    let private topValue value = Types.propertyHelpers.cssValue Types.Property.Top value
     let private topValue' value =
         value
         |> positionedToString
@@ -80,7 +80,7 @@ module Position =
     let Top' (top: Types.IPositioned) = Top.Value(top)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/right
-    let private rightValue value = Types.cssValue Types.Property.Right value
+    let private rightValue value = Types.propertyHelpers.cssValue Types.Property.Right value
     let private rightValue' value =
         value
         |> positionedToString
@@ -108,7 +108,7 @@ module Position =
     let Right' (right: Types.IPositioned) = Right.Value(right)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
-    let private bottomValue value = Types.cssValue Types.Property.Bottom value
+    let private bottomValue value = Types.propertyHelpers.cssValue Types.Property.Bottom value
     let private bottomValue' value =
         value
         |> positionedToString
@@ -136,7 +136,7 @@ module Position =
     let Bottom' (bottom: Types.IPositioned) = Bottom.Value(bottom)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/left
-    let private leftValue value = Types.cssValue Types.Property.Left value
+    let private leftValue value = Types.propertyHelpers.cssValue Types.Property.Left value
     let private leftValue' value =
         value
         |> positionedToString
@@ -164,7 +164,7 @@ module Position =
     let Left' (left: Types.IPositioned) = Left.Value(left)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
-    let private verticalAlignValue value = Types.cssValue Types.Property.VerticalAlign value
+    let private verticalAlignValue value = Types.propertyHelpers.cssValue Types.Property.VerticalAlign value
     let private verticalAlignValue' value =
         value
         |> verticalAlignToString
@@ -199,7 +199,7 @@ module Position =
     let VerticalAlign' (alignment: Types.IVerticalAlign) = VerticalAlign.Value(alignment)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/float
-    let private floatValue value = Types.cssValue Types.Property.Float value
+    let private floatValue value = Types.propertyHelpers.cssValue Types.Property.Float value
     let private floatValue' value =
         value
         |> floatToString
@@ -230,7 +230,7 @@ module Position =
     let Float' (float: Types.IFloat) = Float.Value(float)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
-    let private boxSizingValue value = Types.cssValue Types.Property.BoxSizing value
+    let private boxSizingValue value = Types.propertyHelpers.cssValue Types.Property.BoxSizing value
     let private boxSizingValue' (value: Types.BoxSizing) =
         value
         |> Utilities.Helpers.duToKebab
@@ -246,7 +246,7 @@ module Position =
     let BoxSizing' (sizing: Types.BoxSizing) = BoxSizing.Value(sizing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
-    let private directionValue value = Types.cssValue Types.Property.Direction value
+    let private directionValue value = Types.propertyHelpers.cssValue Types.Property.Direction value
     let private directionValue' value =
         value
         |> directionToString
@@ -286,10 +286,10 @@ module WritingMode =
     let private writingModeToString (writingMode: Types.IWritingMode) =
         match writingMode with
         | :? WritingMode as w -> Utilities.Helpers.duToKebab w
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown writing mode"
 
-    let private writingModeValue value = Types.cssValue Types.Property.WritingMode value
+    let private writingModeValue value = Types.propertyHelpers.cssValue Types.Property.WritingMode value
     let private writingModeValue' value =
         value
         |> writingModeToString
@@ -322,26 +322,26 @@ module Break =
     let private breakAfterToString (breakAfter: Types.IBreakAfter) =
         match breakAfter with
         | :? Types.BreakAfter as w -> Utilities.Helpers.duToKebab w
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown break after"
 
     let private breakBeforeToString (breakBefore: Types.IBreakBefore) =
         match breakBefore with
         | :? Types.BreakBefore as w -> Utilities.Helpers.duToKebab w
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown break before"
 
     let private breakInsideToString (breakInside: Types.IBreakInside) =
         match breakInside with
         | :? Types.BreakInside as w -> Utilities.Helpers.duToKebab w
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown break before"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/break-after
-    let private breakAfterValue value = Types.cssValue Types.Property.BreakAfter value
+    let private breakAfterValue value = Types.propertyHelpers.cssValue Types.Property.BreakAfter value
     let private breakAfterValue' value =
         value
         |> breakAfterToString
@@ -381,7 +381,7 @@ module Break =
     let BreakAfter' (breakAfter: Types.IBreakAfter) = breakAfter |> BreakAfter.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/break-before
-    let private breakBeforeValue value = Types.cssValue Types.Property.BreakBefore value
+    let private breakBeforeValue value = Types.propertyHelpers.cssValue Types.Property.BreakBefore value
     let private breakBeforeValue' value =
         value
         |> breakBeforeToString
@@ -421,7 +421,7 @@ module Break =
     let BreakBefore' (breakBefore: Types.IBreakBefore) = breakBefore |> BreakBefore.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside
-    let private breakInsideValue value = Types.cssValue Types.Property.BreakInside value
+    let private breakInsideValue value = Types.propertyHelpers.cssValue Types.Property.BreakInside value
     let private breakInsideValue' value =
         value
         |> breakInsideToString

@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Display =
         | Inline
         | InlineBlock
@@ -19,5 +18,5 @@ module Types =
         | TableFooterGroup
         | TableRow
         | TableCaption
-        interface Types.IDisplay
+        interface IDisplay
 

@@ -3,7 +3,6 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open FssTypes
 open Fss
 
 module Content =
@@ -35,23 +34,23 @@ module Content =
                     [ "content" ==> "linear-gradient(45.00deg, #e66456 0px, #9198e5 100px)" ]
                 test
                     "Content string value"
-                    [ Content' (CssString "prefix")]
+                    [ Content' (Types.CssString "prefix")]
                     [ "content" ==> "\"prefix\"" ]
                 test
                     "Content counter"
                     [ Content.Counter sampleCounter]
-                    [ "content" ==> sprintf "counter(%s)" (Types.Counter.counterValue sampleCounter) ]
+                    [ "content" ==> sprintf "counter(%s)" (Types.counterStyleHelpers.counterStyleToString sampleCounter) ]
                 test
                     "Content counter2"
                     [ Content.Counters (sampleCounter, Types.ListStyleType.UpperLatin) ]
-                    [ "content" ==> sprintf "counters(%s, upper-latin)" (Types.Counter.counterValue sampleCounter) ]
+                    [ "content" ==> sprintf "counters(%s, upper-latin)" (Types.counterStyleHelpers.counterStyleToString sampleCounter) ]
                 test
                     "Content counter2"
                     [ Content.Counter (sampleCounter, ". ")]
-                    [ "content" ==> sprintf "counter(%s)'. '" (Types.Counter.counterValue sampleCounter)]
+                    [ "content" ==> sprintf "counter(%s)'. '" (Types.counterStyleHelpers.counterStyleToString sampleCounter)]
                 test
                     "Content attribute"
-                    [ Content.Attribute Attribute.Title ]
+                    [ Content.Attribute Types.Attribute.Title ]
                     [ "content" ==> "attr(title)" ]
                 test
                     "Content open quote"

@@ -3,7 +3,6 @@ namespace FSSTests
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open FssTypes
 open Fss
 
 module ClipPath =

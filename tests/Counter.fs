@@ -3,7 +3,6 @@ namespace FSSTests
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open FssTypes
 open Fss
 
 module Counter =
@@ -19,11 +18,11 @@ module Counter =
                 test
                     "CounterReset reset"
                     [ CounterReset.Reset sampleCounterStyle]
-                    [ "counterReset" ==> (Types.Counter.counterValue sampleCounterStyle) ]
+                    [ "counterReset" ==> (Types.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
                 test
                     "CounterReset reset to"
                     [ CounterReset.ResetTo sampleCounterStyle 5]
-                    [ "counterReset" ==> sprintf "%s 5" (Types.Counter.counterValue sampleCounterStyle) ]
+                    [ "counterReset" ==> sprintf "%s 5" (Types.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
                 test
                     "CounterReset none"
                     [ CounterReset.None]
@@ -43,11 +42,11 @@ module Counter =
                 test
                     "CounterIncrement increment"
                     [ CounterIncrement.Increment sampleCounterStyle]
-                    [ "counterIncrement" ==> (Types.Counter.counterValue sampleCounterStyle) ]
+                    [ "counterIncrement" ==> (Types.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
                 test
                     "CounterIncrement increment to"
                     [ CounterIncrement.IncrementTo sampleCounterStyle 5]
-                    [ "counterIncrement" ==> sprintf "%s 5"(Types.Counter.counterValue sampleCounterStyle)]
+                    [ "counterIncrement" ==> sprintf "%s 5"(Types.counterStyleHelpers.counterStyleToString sampleCounterStyle)]
                 test
                     "CounterIncrement none"
                     [ CounterIncrement.None]

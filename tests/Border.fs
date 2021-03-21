@@ -3,7 +3,6 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open FssTypes
 open Fss
 
 module Border =
@@ -292,7 +291,7 @@ module Border =
                     [ "borderImageWidth" ==> "25%" ]
                 test
                     "Border image width value"
-                    [ BorderImageWidth' (CssFloat 3.) ]
+                    [ BorderImageWidth' (Types.CssFloat 3.) ]
                     [ "borderImageWidth" ==> "3" ]
                 test
                     "Border image width vertical horizontal"

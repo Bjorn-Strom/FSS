@@ -1,23 +1,24 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type ContentSize =
         | MaxContent
         | MinContent
-        | FitContent of Types.ILengthPercentage
-        interface Types.IContentSize
-        interface Types.IGridAutoRows
-        interface Types.IGridAutoColumns
+        | FitContent of ILengthPercentage
+        interface IContentSize
+        interface IGridAutoRows
+        interface IGridAutoColumns
 
-    let internal contentSizeToString (contentSize: Types.IContentSize) =
-        let stringifyContent content =
-            match content with
-                | FitContent f -> sprintf "fit-content(%s)" (Types.lengthPercentageToString f)
-                | _ -> Utilities.Helpers.duToKebab content
+    [<AutoOpen>]
+    module contentSizeHelpers =
+        let internal contentSizeToString (contentSize: IContentSize) =
+            let stringifyContent content =
+                match content with
+                    | FitContent f -> sprintf "fit-content(%s)" (lengthPercentageToString f)
+                    | _ -> Fss.Utilities.Helpers.duToKebab content
 
-        match contentSize with
-        | :? ContentSize as c -> stringifyContent c
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | _ -> "Unknown content size"
+            match contentSize with
+            | :? ContentSize as c -> stringifyContent c
+            | :? Auto -> auto
+            | :? Keywords as k -> keywordsToString k
+            | _ -> "Unknown content size"

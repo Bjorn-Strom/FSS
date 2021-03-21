@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Position =
         | Static
         | Relative
@@ -18,14 +17,14 @@ module Types =
         | Middle
         | Top
         | Bottom
-        interface Types.IVerticalAlign
+        interface IVerticalAlign
 
     type Float' =
         | Left
         | Right
         | InlineStart
         | InlineEnd
-        interface Types.IFloat
+        interface IFloat
 
     type BoxSizing =
         | ContentBox
@@ -34,7 +33,7 @@ module Types =
     type Direction =
         | Rtl
         | Ltr
-        interface Types.IDirection
+        interface IDirection
 
     type BreakAfter =
         | Avoid
@@ -50,7 +49,7 @@ module Types =
         | Column
         | AvoidRegion
         | Region
-        interface Types.IBreakAfter
+        interface IBreakAfter
 
     type BreakBefore =
         | Avoid
@@ -66,11 +65,11 @@ module Types =
         | Column
         | AvoidRegion
         | Region
-        interface Types.IBreakBefore
+        interface IBreakBefore
 
     type BreakInside =
         | Avoid
         | AvoidPage
         | AvoidColumn
         | AvoidRegion
-        interface Types.IBreakInside
+        interface IBreakInside

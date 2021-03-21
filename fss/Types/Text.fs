@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type TextAlign =
         | Left
         | Right
@@ -11,7 +10,7 @@ module Types =
         | Start
         | End
         | MatchParent
-        interface Types.ITextAlign
+        interface ITextAlign
 
     type TextAlignLast =
         | Start
@@ -20,18 +19,18 @@ module Types =
         | Right
         | Center
         | Justify
-        interface Types.ITextAlignLast
+        interface ITextAlignLast
 
     type TextDecorationLine =
         | Overline
         | Underline
         | LineThrough
         | Blink
-        interface Types.ITextDecorationLine
+        interface ITextDecorationLine
 
     type TextDecorationThickness =
         | TextDecorationThickness
-        interface Types.ITextDecorationThickness
+        interface ITextDecorationThickness
 
     type TextDecorationStyle =
         | Solid
@@ -39,7 +38,7 @@ module Types =
         | Dotted
         | Dashed
         | Wavy
-        interface Types.ITextDecorationStyle
+        interface ITextDecorationStyle
 
     type DecorationSkip =
         | Objects
@@ -48,11 +47,11 @@ module Types =
         | BoxDecoration
         | LeadingSpaces
         | TrailingSpaces
-        interface Types.ITextDecorationSkip
+        interface ITextDecorationSkip
 
     type TextDecorationSkipInk =
         | TextDecorationSkipInk
-        interface Types.ITextDecorationSkipInk
+        interface ITextDecorationSkipInk
 
     type TextTransform =
         | Capitalize
@@ -60,29 +59,29 @@ module Types =
         | Lowercase
         | FullWidth
         | FullSizeKana
-        interface Types.ITextTransform
+        interface ITextTransform
 
     type TextIndent =
         | Hanging
         | EachLine
-        interface Types.ITextIndent
+        interface ITextIndent
 
     type TextShadow =
-        | XY of Types.Size * Types.Size
-        | ColorXY of Types.Color * Types.Size * Types.Size
-        | ColorXYBlur of Types.Color * Types.Size * Types.Size * Types.Size
+        | XY of Size * Size
+        | ColorXY of Color * Size * Size
+        | ColorXYBlur of Color * Size * Size * Size
 
     type TextOverflow =
         | Clip
         | Ellipsis
-        interface Types.ITextOverflow
+        interface ITextOverflow
 
     type EmphasisPosition =
         | Over
         | Under
         | Right
         | Left
-        interface Types.ITextEmphasisPosition
+        interface ITextEmphasisPosition
 
     type TextEmphasisStyle =
         | Filled
@@ -93,7 +92,7 @@ module Types =
         | Triangle
         | FilledSesame
         | OpenSesame
-        interface Types.ITextEmphasisStyle
+        interface ITextEmphasisStyle
 
     type UnderlinePosition =
         | FromFont
@@ -103,15 +102,15 @@ module Types =
         | AutoPos
         | Above
         | Below
-        interface Types.ITextUnderlinePosition
+        interface ITextUnderlinePosition
 
     type TextEmphasisColor =
-        | TextEmphasisColor of Types.Color
-        interface Types.ITextEmphasisColor
+        | TextEmphasisColor of Color
+        interface ITextEmphasisColor
 
     type Hyphens =
         | Manual
-        interface Types.IHyphens
+        interface IHyphens
 
     type TextOrientation =
         | Mixed
@@ -119,18 +118,18 @@ module Types =
         | SidewaysRight
         | Sideways
         | UseGlyphOrientation
-        interface Types.ITextOrientation
+        interface ITextOrientation
 
     type TextRendering =
         | OptimizeSpeed
         | OptimizeLegibility
         | GeometricPrecision
-        interface Types.ITextRendering
+        interface ITextRendering
 
     type TextJustify =
         | InterWord
         | InterCharacter
-        interface Types.ITextJustify
+        interface ITextJustify
 
     type WhiteSpace =
         | NoWrap
@@ -138,11 +137,11 @@ module Types =
         | PreWrap
         | PreLine
         | BreakSpaces
-        interface Types.IWhiteSpace
+        interface IWhiteSpace
 
     type UserSelect =
         | Text
         | Contain
         | All
         | Element
-        interface Types.IUserSelect
+        interface IUserSelect

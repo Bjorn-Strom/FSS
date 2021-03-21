@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type MaskClip =
         | ContentBox
         | PaddingBox
@@ -15,20 +14,20 @@ module Types =
         | Padding
         | Content
         | Text
-        interface Types.IMaskClip
+        interface IMaskClip
 
     type MaskComposite =
         | Add
         | Subtract
         | Intersect
         | Exclude
-        interface Types.IMaskComposite
+        interface IMaskComposite
 
     type MaskMode =
         | Alpha
         | Luminance
         | MatchSource
-        interface Types.IMaskMode
+        interface IMaskMode
 
     type MaskOrigin =
         | ContentBox
@@ -41,7 +40,7 @@ module Types =
         | Content
         | Padding
         | Border
-        interface Types.IMaskOrigin
+        interface IMaskOrigin
 
     type MaskRepeat =
         | RepeatX
@@ -50,5 +49,5 @@ module Types =
         | Space
         | Round
         | NoRepeat
-        interface Types.IMaskRepeat
+        interface IMaskRepeat
 

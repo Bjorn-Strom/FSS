@@ -1,9 +1,8 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type WordBreak =
         | WordBreak
         | BreakAll
         | KeepAll
-        interface Types.IWordBreak
+        interface IWordBreak

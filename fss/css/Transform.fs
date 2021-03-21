@@ -9,50 +9,50 @@ module Transform =
                sprintf "matrix(%.1f, %.1f, %.1f, %.1f, %.1f, %.1f)" a b c d e f
            | Types.Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
                sprintf "matrix3d(%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.1f)" a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4
-           | Types.Perspective size -> sprintf "perspective(%s)" <| Types.sizeToString size
-           | Types.Rotate angle -> sprintf "rotate(%s)" <| Types.angleToString angle
-           | Types.Rotate3D (a, b, c, angle) -> sprintf "rotate3d(%.1f, %.1f, %.1f, %s)" a b c (Types.angleToString angle)
-           | Types.RotateX angle -> sprintf "rotateX(%s)" <| Types.angleToString angle
-           | Types.RotateY angle -> sprintf "rotateY(%s)" <| Types.angleToString angle
-           | Types.RotateZ angle -> sprintf "rotateZ(%s)" <| Types.angleToString angle
-           | Types.Translate size -> sprintf "translate(%s)" (Types.lengthPercentageToString size)
-           | Types.Translate2 (sx, sy) -> sprintf "translate(%s, %s)" (Types.lengthPercentageToString sx) (Types.lengthPercentageToString sy)
-           | Types.Translate3D (size1, size2, size3) -> sprintf "translate3d(%s, %s, %s)" (Types.lengthPercentageToString size1) (Types.lengthPercentageToString size2) (Types.lengthPercentageToString size3)
-           | Types.TranslateX size -> sprintf "translateX(%s)" <| Types.lengthPercentageToString size
-           | Types.TranslateY size -> sprintf "translateY(%s)" <| Types.lengthPercentageToString size
-           | Types.TranslateZ size -> sprintf "translateZ(%s)" <| Types.lengthPercentageToString size
+           | Types.Perspective size -> sprintf "perspective(%s)" <| Types.unitHelpers.sizeToString size
+           | Types.Rotate angle -> sprintf "rotate(%s)" <| Types.unitHelpers.angleToString angle
+           | Types.Rotate3D (a, b, c, angle) -> sprintf "rotate3d(%.1f, %.1f, %.1f, %s)" a b c (Types.unitHelpers.angleToString angle)
+           | Types.RotateX angle -> sprintf "rotateX(%s)" <| Types.unitHelpers.angleToString angle
+           | Types.RotateY angle -> sprintf "rotateY(%s)" <| Types.unitHelpers.angleToString angle
+           | Types.RotateZ angle -> sprintf "rotateZ(%s)" <| Types.unitHelpers.angleToString angle
+           | Types.Translate size -> sprintf "translate(%s)" (Types.unitHelpers.lengthPercentageToString size)
+           | Types.Translate2 (sx, sy) -> sprintf "translate(%s, %s)" (Types.unitHelpers.lengthPercentageToString sx) (Types.unitHelpers.lengthPercentageToString sy)
+           | Types.Translate3D (size1, size2, size3) -> sprintf "translate3d(%s, %s, %s)" (Types.unitHelpers.lengthPercentageToString size1) (Types.unitHelpers.lengthPercentageToString size2) (Types.unitHelpers.lengthPercentageToString size3)
+           | Types.TranslateX size -> sprintf "translateX(%s)" <| Types.unitHelpers.lengthPercentageToString size
+           | Types.TranslateY size -> sprintf "translateY(%s)" <| Types.unitHelpers.lengthPercentageToString size
+           | Types.TranslateZ size -> sprintf "translateZ(%s)" <| Types.unitHelpers.lengthPercentageToString size
            | Types.Scale n -> sprintf "scale(%.2f)" n
            | Types.Scale2 (sx, sy) -> sprintf "scale(%.2f, %.2f)" sx sy
            | Types.Scale3D (n1, n2, n3) -> sprintf "scale3d(%.2f, %.2f, %.2f)" n1 n2 n3
            | Types.ScaleX n -> sprintf "scaleX(%.2f)" n
            | Types.ScaleY n -> sprintf "scaleY(%.2f)" n
            | Types.ScaleZ n -> sprintf "scaleZ(%.2f)" n
-           | Types.Skew a -> sprintf "skew(%s)" (Types.angleToString a)
-           | Types.Skew2 (ax, ay) -> sprintf "skew(%s, %s)" (Types.angleToString ax) (Types.angleToString ay)
-           | Types.SkewX a -> sprintf "skewX(%s)" <| Types.angleToString a
-           | Types.SkewY a -> sprintf "skewY(%s)" <| Types.angleToString a
+           | Types.Skew a -> sprintf "skew(%s)" (Types.unitHelpers.angleToString a)
+           | Types.Skew2 (ax, ay) -> sprintf "skew(%s, %s)" (Types.unitHelpers.angleToString ax) (Types.unitHelpers.angleToString ay)
+           | Types.SkewX a -> sprintf "skewX(%s)" <| Types.unitHelpers.angleToString a
+           | Types.SkewY a -> sprintf "skewY(%s)" <| Types.unitHelpers.angleToString a
 
         match transform with
         | :? Types.Transform as t -> stringifyTransform t
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown transform value"
 
     let private originToString (origin: Types.ITransformOrigin) =
         match origin with
         | :? Types.TransformOrigin as t -> Utilities.Helpers.duToLowercase t
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transform origin"
 
     let private styleToString (origin: Types.ITransformStyle) =
         match origin with
         | :? Types.TransformStyle as t -> Utilities.Helpers.duToLowercase t
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transform style"
 
-    let private transformValue value = Types.cssValue Types.Property.Transform value
+    let private transformValue value = Types.propertyHelpers.cssValue Types.Property.Transform value
     let private transformValue' value =
         value
         |> transformToString
@@ -128,7 +128,7 @@ module Transform =
         |> transformValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
-    let private originValue value = Types.cssValue Types.Property.TransformOrigin value
+    let private originValue value = Types.propertyHelpers.cssValue Types.Property.TransformOrigin value
     let private originValue' value =
         value
         |> originToString
@@ -171,7 +171,7 @@ module Transform =
     let TransformOrigin' (origin: Types.ITransformOrigin) = TransformOrigin.Value(origin)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
-    let private styleValue value = Types.cssValue Types.Property.TransformStyle value
+    let private styleValue value = Types.propertyHelpers.cssValue Types.Property.TransformStyle value
     let private styleValue' value =
         value
         |> styleToString

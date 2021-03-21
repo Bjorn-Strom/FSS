@@ -4,19 +4,19 @@
 module Perspective =
     let private perspectiveToString (perspective: Types.IPerspective) =
         match perspective with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown perspective"
 
     let private perspectiveOriginToString (perspectiveOrigin: Types.IPerspectiveOrigin) =
         match perspectiveOrigin with
-        | :? Types.Percent as s -> Types.percentToString s
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Percent as s -> Types.unitHelpers.percentToString s
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown perspective origin"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
-    let private perspectiveValue value = Types.cssValue Types.Property.Perspective value
+    let private perspectiveValue value = Types.propertyHelpers.cssValue Types.Property.Perspective value
     let private perspectiveValue' value =
         value
         |> perspectiveToString
@@ -42,7 +42,7 @@ module Perspective =
     let Perspective' (perspective: Types.IPerspective) = Perspective.Value(perspective)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective-origin
-    let private perspectiveOriginValue value = Types.cssValue Types.Property.PerspectiveOrigin value
+    let private perspectiveOriginValue value = Types.propertyHelpers.cssValue Types.Property.PerspectiveOrigin value
     let private perspectiveOriginValue' value =
         value
         |> perspectiveOriginToString
@@ -74,10 +74,10 @@ module BackfaceVisibility =
     let private visibilityToString (visibility: Types.IBackfaceVisibility) =
         match visibility with
         | :? Types.BackfaceVisibility as v -> Utilities.Helpers.duToLowercase v
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown backface visibility"
 
-    let private backfaceVisibilityValue value = Types.cssValue Types.Property.BackfaceVisibility value
+    let private backfaceVisibilityValue value = Types.propertyHelpers.cssValue Types.Property.BackfaceVisibility value
     let private backfaceVisibilityValue' value =
         value
         |> visibilityToString

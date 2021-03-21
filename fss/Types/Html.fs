@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Html =
         | A
         | All
@@ -111,7 +110,9 @@ module Types =
         | Video
         | Wbr
 
-    let internal htmlToString (v: Html): string =
-        match v with
-        | All -> "*"
-        | _   -> Fss.Utilities.Helpers.duToLowercase v
+    [<AutoOpen>]
+    module htmlHelpers =
+        let internal htmlToString (v: Html): string =
+            match v with
+            | All -> "*"
+            | _   -> Fss.Utilities.Helpers.duToLowercase v

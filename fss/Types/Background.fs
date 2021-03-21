@@ -1,19 +1,18 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type BackgroundClip =
         | BorderBox
         | PaddingBox
         | ContentBox
         | Text
-        interface Types.IBackgroundClip
+        interface IBackgroundClip
 
     type BackgroundOrigin =
         | BorderBox
         | PaddingBox
         | ContentBox
-        interface Types.IBackgroundOrigin
+        interface IBackgroundOrigin
 
     type BackgroundRepeat =
         | RepeatX
@@ -22,18 +21,18 @@ module Types =
         | Space
         | Round
         | NoRepeat
-        interface Types.IBackgroundRepeat
+        interface IBackgroundRepeat
 
     type BackgroundSize =
         | Cover
         | Contain
-        interface Types.IBackgroundSize
+        interface IBackgroundSize
 
     type BackgroundAttachment =
         | Scroll
         | Fixed
         | Local
-        interface Types.IBackgroundAttachment
+        interface IBackgroundAttachment
 
     type BackgroundPosition =
         | Top
@@ -41,7 +40,7 @@ module Types =
         | Left
         | Right
         | Center
-        interface Types.IBackgroundPosition
+        interface IBackgroundPosition
 
     type BackgroundBlendMode =
         | Multiply
@@ -59,13 +58,13 @@ module Types =
         | Saturation
         | Color'
         | Luminosity
-        interface Types.IBackgroundBlendMode
+        interface IBackgroundBlendMode
 
     type Isolation =
         | Isolate
-        interface Types.IIsolation
+        interface IIsolation
 
     type BoxDecorationBreak =
         | Slice
         | Clone
-        interface Types.IBoxDecorationBreak
+        interface IBoxDecorationBreak

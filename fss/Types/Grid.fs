@@ -1,127 +1,128 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
-    type GridAutoFlow =
-        | Row
-        | Column
-        | Dense
-        | RowDense
-        | ColumnDense
-        interface Types.IGridAutoFlow
+namespace Fss.Types
+    [<AutoOpen>]
+    module Grid =
 
-    type GridTemplateColumns =
-        | Subgrid
-        | Masonry
-        interface Types.IGridTemplateColumns
+        type GridAutoFlow =
+            | Row
+            | Column
+            | Dense
+            | RowDense
+            | ColumnDense
+            interface IGridAutoFlow
 
-    type GridPosition =
-        | Value of int
-        | Ident of string
-        | IdentValue of string * int
-        | ValueIdentSpan of int * string
-        | Span of string
-        interface Types.IGridPosition
+        type GridTemplateColumns =
+            | Subgrid
+            | Masonry
+            interface IGridTemplateColumns
 
-    type GridTemplateRows =
-        | Subgrid
-        | Masonry
-        interface Types.IGridTemplateRows
+        type GridPosition =
+            | Value of int
+            | Ident of string
+            | IdentValue of string * int
+            | ValueIdentSpan of int * string
+            | Span of string
+            interface IGridPosition
 
-    type RepeatType =
-        | AutoFill
-        | AutoFit
+        type GridTemplateRows =
+            | Subgrid
+            | Masonry
+            interface IGridTemplateRows
 
-    let private repeatTypeToString (repeat: RepeatType) = Utilities.Helpers.duToKebab repeat
+        type RepeatType =
+            | AutoFill
+            | AutoFit
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/minmax
-    type MinMax =
-        | MinMaxGrid of string
-        interface Types.IGridAutoRows
-        interface Types.IGridAutoColumns
-        static member MinMax (min: Types.ILengthPercentage, max: Types.Fraction) =
-            sprintf "minmax(%s, %s)" (Types.lengthPercentageToString min) (Types.fractionToString max)
-            |> MinMaxGrid
-        static member MinMax (min: Types.ILengthPercentage, max: Types.ILengthPercentage) =
-            sprintf "minmax(%s, %s)" (Types.lengthPercentageToString min) (Types.lengthPercentageToString max)
-            |> MinMaxGrid
-        static member MinMax (min: Types.Size, max: Types.ContentSize) =
-            sprintf "minmax(%s, %s)" (Types.sizeToString min) (Types.contentSizeToString max)
-            |> MinMaxGrid
-        static member MinMax (min: Types.Percent, max: Types.ContentSize) =
-            sprintf "minmax(%s, %s)" (Types.percentToString min) (Types.contentSizeToString max)
-            |> MinMaxGrid
-        static member MinMax (min: Types.ContentSize, max: Types.Size) =
-            sprintf "minmax(%s, %s)" (Types.contentSizeToString min) (Types.sizeToString max)
-            |> MinMaxGrid
-        static member MinMax (min: Types.ContentSize, max: Types.ContentSize) =
-            sprintf "minmax(%s, %s)" (Types.contentSizeToString min) (Types.contentSizeToString max)
-            |> MinMaxGrid
-        static member MinMax (min: Types.ILengthPercentage, contentSize: Types.ContentSize) =
-            sprintf "minmax(%s, %s)"
-                (Types.lengthPercentageToString min)
-                (Types.contentSizeToString contentSize)
-            |> MinMaxGrid
-        static member MinMax ( contentSize: Types.ContentSize, min: Types.ILengthPercentage) =
-            sprintf "minmax(%s, %s)"
-                (Types.contentSizeToString contentSize)
-                (Types.lengthPercentageToString min)
-            |> MinMaxGrid
-        static member MinMax ( contentSize: Types.ContentSize, min: Types.Fraction) =
-            sprintf "minmax(%s, %s)"
-                (Types.contentSizeToString contentSize)
-                (Types.fractionToString min)
-            |> MinMaxGrid
-        interface Types.ITemplateType
 
-    let internal minMaxToString (MinMaxGrid m) = m
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/minmax
+        type MinMax =
+            | MinMaxGrid of string
+            interface IGridAutoRows
+            interface IGridAutoColumns
+            static member MinMax (min: ILengthPercentage, max: Fraction) =
+                sprintf "minmax(%s, %s)" (lengthPercentageToString min) (fractionToString max)
+                |> MinMaxGrid
+            static member MinMax (min: ILengthPercentage, max: ILengthPercentage) =
+                sprintf "minmax(%s, %s)" (lengthPercentageToString min) (lengthPercentageToString max)
+                |> MinMaxGrid
+            static member MinMax (min: Size, max: ContentSize) =
+                sprintf "minmax(%s, %s)" (sizeToString min) (contentSizeToString max)
+                |> MinMaxGrid
+            static member MinMax (min: Percent, max: ContentSize) =
+                sprintf "minmax(%s, %s)" (percentToString min) (contentSizeToString max)
+                |> MinMaxGrid
+            static member MinMax (min: ContentSize, max: Size) =
+                sprintf "minmax(%s, %s)" (contentSizeToString min) (sizeToString max)
+                |> MinMaxGrid
+            static member MinMax (min: ContentSize, max: ContentSize) =
+                sprintf "minmax(%s, %s)" (contentSizeToString min) (contentSizeToString max)
+                |> MinMaxGrid
+            static member MinMax (min: ILengthPercentage, contentSize: ContentSize) =
+                sprintf "minmax(%s, %s)"
+                    (lengthPercentageToString min)
+                    (contentSizeToString contentSize)
+                |> MinMaxGrid
+            static member MinMax ( contentSize: ContentSize, min: ILengthPercentage) =
+                sprintf "minmax(%s, %s)"
+                    (contentSizeToString contentSize)
+                    (lengthPercentageToString min)
+                |> MinMaxGrid
+            static member MinMax ( contentSize: ContentSize, min: Fraction) =
+                sprintf "minmax(%s, %s)"
+                    (contentSizeToString contentSize)
+                    (fractionToString min)
+                |> MinMaxGrid
+            interface ITemplateType
 
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/repeat
-    type Repeat =
-        | GridRepeat of string
-        static member Repeat (value: int, fraction: Types.Fraction) =
-            sprintf "repeat(%d, %s)" value (Types.fractionToString fraction)
-            |> GridRepeat
-        static member Repeat (value: int, length: Types.ILengthPercentage) =
-            sprintf "repeat(%d, %s)" value (Types.lengthPercentageToString length)
-            |> GridRepeat
-        static member Repeat (value: int, contentSize: Types.ContentSize) =
-            sprintf "repeat(%d, %s)" value (Types.contentSizeToString contentSize)
-            |> GridRepeat
-        static member Repeat (value: int, contentSizes: Types.ContentSize list) =
-            sprintf "repeat(%d, %s)"
-                value
-                (Utilities.Helpers.combineWs Types.contentSizeToString contentSizes)
-            |> GridRepeat
-        static member Repeat (value: int, sizes: Types.ILengthPercentage list) =
-            sprintf "repeat(%d, %s)"
-                value
-                (Utilities.Helpers.combineWs Types.lengthPercentageToString sizes)
-            |> GridRepeat
-        static member Repeat (value: RepeatType, fraction: Types.Fraction) =
-            sprintf "repeat(%s, %s)" (repeatTypeToString value) (Types.fractionToString fraction)
-            |> GridRepeat
-        static member Repeat (value: RepeatType, length: Types.ILengthPercentage) =
-            sprintf "repeat(%s, %s)" (repeatTypeToString value) (Types.lengthPercentageToString length)
-            |> GridRepeat
-        static member Repeat (value: RepeatType, contentSize: Types.ContentSize) =
-            sprintf "repeat(%s, %s)" (repeatTypeToString value) (Types.contentSizeToString contentSize)
-            |> GridRepeat
-        static member Repeat (value: int, minMax: MinMax) =
-            sprintf "repeat(%d, %s)" value (minMaxToString minMax)
-            |> GridRepeat
-        static member Repeat (value: int, sizes: Types.Size list) =
-            sprintf "repeat(%d, %s)"
-                value
-                (Utilities.Helpers.combineWs Types.sizeToString sizes)
-            |> GridRepeat
-        static member Repeat (value: int, sizes: Types.Percent list) =
-            sprintf "repeat(%d, %s)"
-                value
-                (Utilities.Helpers.combineWs Types.percentToString sizes)
-            |> GridRepeat
+        let private repeatTypeToString (repeat: RepeatType) = Fss.Utilities.Helpers.duToKebab repeat
+        let internal minMaxToString (MinMaxGrid m) = m
 
-        interface Types.ITemplateType
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/repeat
+        type Repeat =
+            | GridRepeat of string
+            static member Repeat (value: int, fraction: Fraction) =
+                sprintf "repeat(%d, %s)" value (fractionToString fraction)
+                |> GridRepeat
+            static member Repeat (value: int, length: ILengthPercentage) =
+                sprintf "repeat(%d, %s)" value (lengthPercentageToString length)
+                |> GridRepeat
+            static member Repeat (value: int, contentSize: ContentSize) =
+                sprintf "repeat(%d, %s)" value (contentSizeToString contentSize)
+                |> GridRepeat
+            static member Repeat (value: int, contentSizes: ContentSize list) =
+                sprintf "repeat(%d, %s)"
+                    value
+                    (Fss.Utilities.Helpers.combineWs contentSizeToString contentSizes)
+                |> GridRepeat
+            static member Repeat (value: int, sizes: ILengthPercentage list) =
+                sprintf "repeat(%d, %s)"
+                    value
+                    (Fss.Utilities.Helpers.combineWs lengthPercentageToString sizes)
+                |> GridRepeat
+            static member Repeat (value: RepeatType, fraction: Fraction) =
+                sprintf "repeat(%s, %s)" (repeatTypeToString value) (fractionToString fraction)
+                |> GridRepeat
+            static member Repeat (value: RepeatType, length: ILengthPercentage) =
+                sprintf "repeat(%s, %s)" (repeatTypeToString value) (lengthPercentageToString length)
+                |> GridRepeat
+            static member Repeat (value: RepeatType, contentSize: ContentSize) =
+                sprintf "repeat(%s, %s)" (repeatTypeToString value) (contentSizeToString contentSize)
+                |> GridRepeat
+            static member Repeat (value: int, minMax: MinMax) =
+                sprintf "repeat(%d, %s)" value (minMaxToString minMax)
+                |> GridRepeat
+            static member Repeat (value: int, sizes: Size list) =
+                sprintf "repeat(%d, %s)"
+                    value
+                    (Fss.Utilities.Helpers.combineWs sizeToString sizes)
+                |> GridRepeat
+            static member Repeat (value: int, sizes: Percent list) =
+                sprintf "repeat(%d, %s)"
+                    value
+                    (Fss.Utilities.Helpers.combineWs percentToString sizes)
+                |> GridRepeat
 
-    let internal repeatToString (GridRepeat g) = g
+            interface ITemplateType
 
+        let internal repeatToString (GridRepeat g) = g

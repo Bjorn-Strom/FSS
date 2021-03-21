@@ -3,21 +3,21 @@ namespace Fss
 module Word =
     let private spacingToString (spacing: Types.IWordSpacing) =
         match spacing with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown word spacing"
 
     let private breakToString (break': Types.IWordBreak) =
         match break' with
         | :? Types.WordBreak as w -> Utilities.Helpers.duToKebab w
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown word break"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing
-    let private spacingCssValue value = Types.cssValue Types.Property.WordSpacing value
+    let private spacingCssValue value = Types.propertyHelpers.cssValue Types.Property.WordSpacing value
     let private spacingCssValue' value =
         value
         |> spacingToString
@@ -45,7 +45,7 @@ module Word =
     let WordSpacing' (spacing: Types.IWordSpacing) = WordSpacing.Value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
-    let private breakCssValue value = Types.cssValue Types.Property.WordBreak value
+    let private breakCssValue value = Types.propertyHelpers.cssValue Types.Property.WordBreak value
     let private breakCssValue' value =
         value
         |> breakToString

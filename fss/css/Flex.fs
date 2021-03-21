@@ -6,93 +6,93 @@ module Flex =
     let private alignContentToString (alignment: Types.IAlignContent) =
         match alignment with
         | :? Types.AlignContent as a -> Utilities.Helpers.duToKebab a
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown align content"
 
     let private alignItemsToString (alignment: Types.IAlignItems) =
         match alignment with
         | :? Types.AlignItems as a -> Utilities.Helpers.duToKebab a
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown align items"
 
     let private alignSelfToString (alignment: Types.IAlignSelf) =
         match alignment with
         | :? Types.AlignSelf as a -> Utilities.Helpers.duToKebab a
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown align self"
 
     let private justifyContentToString (justification: Types.IJustifyContent) =
         match justification with
         | :? Types.JustifyContent as a -> Utilities.Helpers.duToKebab a
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown justify content"
 
     let private justifyItemsToString (justification: Types.IJustifyItems) =
         match justification with
         | :? Types.JustifyItems as a -> Utilities.Helpers.duToKebab a
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown justify items"
 
     let private justifySelfToString (justification: Types.IJustifySelf) =
         match justification with
         | :? Types.JustifySelf as a -> Utilities.Helpers.duToKebab a
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown justify self"
 
     let private flexDirectionToString (direction: Types.IFlexDirection) =
         match direction with
         | :? Types.FlexDirection as a -> Utilities.Helpers.duToKebab a
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown flex direction"
 
     let private flexToString(flex: Types.IFlex) =
         match flex with
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown flex"
 
     let private flexWrapToString (direction: Types.IFlexWrap) =
         match direction with
         | :? Types.FlexWrap as a -> Utilities.Helpers.duToKebab a
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown flex wrap"
 
     let private orderToString (order: Types.IOrder) =
         match order with
-        | :? Types.Int as i -> Types.IntToString i
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.CssInt as i -> Types.masterTypeHelpers.IntToString i
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown order"
 
     let private flexGrowToString (flexGrow: Types.IFlexGrow) =
         match flexGrow with
-        | :? Types.Float as f -> Types.FloatToString f
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.CssFloat as f -> Types.masterTypeHelpers.FloatToString f
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown flex grow"
 
     let private flexShrinkToString (flexShrink: Types.IFlexShrink) =
         match flexShrink with
-        | :? Types.Float as f -> Types.FloatToString f
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.CssFloat as f -> Types.masterTypeHelpers.FloatToString f
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown flex shrink"
 
     let private flexBasisToString (basis: Types.IFlexBasis) =
         match basis with
         | :? Types.FlexBasis as b -> Utilities.Helpers.duToKebab b
-        | :? Types.Auto -> Types.auto
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown flex basis"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
-    let private alignContentValue value = Types.cssValue Types.Property.AlignContent value
+    let private alignContentValue value = Types.propertyHelpers.cssValue Types.Property.AlignContent value
     let private alignContentValue' value =
         value
         |> alignContentToString
@@ -133,7 +133,7 @@ module Flex =
     let AlignContent' (align: Types.IAlignContent) = AlignContent.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
-    let private alignItemsValue value = Types.cssValue Types.Property.AlignItems value
+    let private alignItemsValue value = Types.propertyHelpers.cssValue Types.Property.AlignItems value
     let private alignItemsValue' value =
         value
         |> alignItemsToString
@@ -173,7 +173,7 @@ module Flex =
     let AlignItems' (align: Types.IAlignItems) = AlignItems.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
-    let private alignSelfValue value = Types.cssValue Types.Property.AlignSelf value
+    let private alignSelfValue value = Types.propertyHelpers.cssValue Types.Property.AlignSelf value
     let private alignSelfValue' value =
         value
         |> alignSelfToString
@@ -213,7 +213,7 @@ module Flex =
     let AlignSelf' (align: Types.IAlignSelf) = AlignSelf.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
-    let private justifyContentValue value = Types.cssValue Types.Property.JustifyContent value
+    let private justifyContentValue value = Types.propertyHelpers.cssValue Types.Property.JustifyContent value
     let private justifyContentValue' value =
         value
         |> justifyContentToString
@@ -256,7 +256,7 @@ module Flex =
     let JustifyContent' (align: Types.IJustifyContent) = JustifyContent.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
-    let private justifyItemsValue value = Types.cssValue Types.Property.JustifyItems value
+    let private justifyItemsValue value = Types.propertyHelpers.cssValue Types.Property.JustifyItems value
     let private justifyItemsValue' value =
         value
         |> justifyItemsToString
@@ -299,7 +299,7 @@ module Flex =
     let JustifyItems' (align: Types.IJustifyItems) = JustifyItems.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
-    let private justifySelfValue value = Types.cssValue Types.Property.JustifySelf value
+    let private justifySelfValue value = Types.propertyHelpers.cssValue Types.Property.JustifySelf value
     let private justifySelfValue' value =
         value
         |> justifySelfToString
@@ -338,7 +338,7 @@ module Flex =
     let JustifySelf' (align: Types.IJustifySelf) = JustifySelf.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
-    let private flexDirectionValue value = Types.cssValue Types.Property.FlexDirection value
+    let private flexDirectionValue value = Types.propertyHelpers.cssValue Types.Property.FlexDirection value
     let private flexDirectionValue' value =
         value
         |> flexDirectionToString
@@ -367,7 +367,7 @@ module Flex =
     let FlexDirection' (direction: Types.IFlexDirection) = FlexDirection.Value(direction)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
-    let private flexWrapValue value = Types.cssValue Types.Property.FlexWrap value
+    let private flexWrapValue value = Types.propertyHelpers.cssValue Types.Property.FlexWrap value
     let private flexWrapValue' value =
         value
         |> flexWrapToString
@@ -394,7 +394,7 @@ module Flex =
     let FlexWrap' (wrap: Types.IFlexWrap) = FlexWrap.Value(wrap)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/order
-    let private orderValue value = Types.cssValue Types.Property.Order value
+    let private orderValue value = Types.propertyHelpers.cssValue Types.Property.Order value
     let private orderValue' value =
         value
         |> orderToString
@@ -418,7 +418,7 @@ module Flex =
     let Order' (order: Types.IOrder) = Order.Value(order)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
-    let private flexGrowValue value = Types.cssValue Types.Property.FlexGrow value
+    let private flexGrowValue value = Types.propertyHelpers.cssValue Types.Property.FlexGrow value
     let private flexGrowValue' value =
         value
         |> flexGrowToString
@@ -443,7 +443,7 @@ module Flex =
     let FlexGrow' (grow: Types.IFlexGrow) = FlexGrow.Value(grow)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
-    let private flexShrinkValue value = Types.cssValue Types.Property.FlexShrink value
+    let private flexShrinkValue value = Types.propertyHelpers.cssValue Types.Property.FlexShrink value
     let private flexShrinkValue' value =
         value
         |> flexShrinkToString
@@ -467,7 +467,7 @@ module Flex =
     let FlexShrink' (shrink: Types.IFlexShrink) = FlexShrink.Value(shrink)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
-    let private flexBasisValue value = Types.cssValue Types.Property.FlexBasis value
+    let private flexBasisValue value = Types.propertyHelpers.cssValue Types.Property.FlexBasis value
     let private flexBasisValue' value =
         value
         |> flexBasisToString

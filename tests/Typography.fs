@@ -4,7 +4,6 @@ open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
-open FssTypes
 
 module Typography =
      let tests =
@@ -12,7 +11,7 @@ module Typography =
             [
                 test
                     "Orphans number"
-                    [ Orphans' (CssInt 2)]
+                    [ Orphans' (Types.CssInt 2)]
                     [ "orphans" ==> "2" ]
                 test
                     "Orphans inherit"
@@ -28,7 +27,7 @@ module Typography =
                     [ "orphans" ==> "unset" ]
                 test
                     "Widows number"
-                    [ Widows' (CssInt 2)]
+                    [ Widows' (Types.CssInt 2)]
                     [ "widows" ==> "2" ]
                 test
                     "Widows inherit"

@@ -5,44 +5,44 @@ module Border =
 
     let private radiusToString (radius: Types.IBorderRadius) =
         match radius with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown border radius"
 
     let private widthToString (width: Types.IBorderWidth) =
         match width with
             | :? Types.BorderWidth as b -> Utilities.Helpers.duToLowercase b
-            | :? Types.Size as s -> Types.sizeToString s
-            | :? Types.Keywords as k -> Types.keywordsToString k
+            | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
             | _ -> "unknown border width"
 
     let private styleToString (style: Types.IBorderStyle) =
         match style with
         | :? Types.BorderStyle as b -> Utilities.Helpers.duToLowercase b
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown border style"
 
     let private collapseToString (collapse: Types.IBorderCollapse) =
         match collapse with
         | :? Types.BorderCollapse as c -> Utilities.Helpers.duToLowercase c
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown border collapse"
     let private imageOutsetToString (imageOutset: Types.IBorderImageOutset) =
         let stringifyOutset (Types.BorderImageOutset v) = string v
 
         match imageOutset with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | :? Types.BorderImageOutset as i -> stringifyOutset i
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown border image outset"
 
     let private repeatToString (repeat: Types.IBorderRepeat) =
         match repeat with
         | :? Types.BorderImageRepeat as b -> Utilities.Helpers.duToLowercase b
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown border repeat"
 
     let private imageSliceToString (imageSlice: Types.IBorderImageSlice) =
@@ -53,47 +53,47 @@ module Border =
 
         match imageSlice with
         | :? Types.BorderImageSlice as i -> stringifySlice i
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown border image slice"
 
     let private borderColorToString (borderColor: Types.IBorderColor) =
         match borderColor with
-        | :? Types.Color as c -> Types.colorToString c
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Color as c -> Types.colorHelpers.colorToString c
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown border color"
 
     let private spacingToString (spacing: Types.IBorderSpacing) =
         match spacing with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown border spacing"
 
     let private imageWidthToString (imageWidth: Types.IBorderImageWidth) =
         match imageWidth with
-        | :? Types.Float as f -> Types.FloatToString f
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
+        | :? Types.CssFloat as f -> Types.masterTypeHelpers.FloatToString f
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown border image width"
 
     let private imageSourceToString (imageSource: Types.IBorderImageSource) =
         match imageSource with
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown border image source"
 
     let private borderToString (border: Types.IBorder) =
             match border with
-            | :? Types.Keywords as k -> Types.keywordsToString k
-            | :? Types.None' -> Types.none
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+            | :? Types.None' -> Types.masterTypeHelpers.none
             | _ -> "Unknown border"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border
-    let private borderValue value = Types.cssValue Types.Property.Border value
+    let private borderValue value = Types.propertyHelpers.cssValue Types.Property.Border value
     let private borderValue' value =
         value
         |> borderToString
@@ -118,7 +118,7 @@ module Border =
     let Border' border = border |> Border.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
-    let private radiusValue value = Types.cssValue Types.Property.BorderRadius value
+    let private radiusValue value = Types.propertyHelpers.cssValue Types.Property.BorderRadius value
     let private radiusValue' value =
         value
         |> radiusToString
@@ -164,7 +164,7 @@ module Border =
     let BorderRadius' (radius: Types.IBorderRadius) = BorderRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-    let private bottomLeftRadiusValue value = Types.cssValue Types.Property.BorderBottomLeftRadius value
+    let private bottomLeftRadiusValue value = Types.propertyHelpers.cssValue Types.Property.BorderBottomLeftRadius value
     let private bottomLeftRadiusValue' value =
         value
         |> radiusToString
@@ -191,7 +191,7 @@ module Border =
     let BorderBottomLeftRadius' (radius: Types.IBorderRadius) = BorderBottomLeftRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-    let private bottomRightRadiusValue value = Types.cssValue Types.Property.BorderBottomRightRadius value
+    let private bottomRightRadiusValue value = Types.propertyHelpers.cssValue Types.Property.BorderBottomRightRadius value
     let private bottomRightRadiusValue' value =
         value
         |> radiusToString
@@ -218,7 +218,7 @@ module Border =
     let BorderBottomRightRadius' (radius: Types.IBorderRadius) = BorderBottomRightRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-    let private topLeftRadiusValue value = Types.cssValue Types.Property.BorderTopLeftRadius value
+    let private topLeftRadiusValue value = Types.propertyHelpers.cssValue Types.Property.BorderTopLeftRadius value
     let private topLeftRadiusValue' value =
         value
         |> radiusToString
@@ -245,7 +245,7 @@ module Border =
     let BorderTopLeftRadius' (radius: Types.IBorderRadius) = BorderTopLeftRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
-    let private topRightRadiusValue value = Types.cssValue Types.Property.BorderTopRightRadius value
+    let private topRightRadiusValue value = Types.propertyHelpers.cssValue Types.Property.BorderTopRightRadius value
     let private topRightRadiusValue' value =
         value
         |> radiusToString
@@ -272,7 +272,7 @@ module Border =
     let BorderTopRightRadius' (radius: Types.IBorderRadius) = BorderTopRightRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
-    let private widthValue value = Types.cssValue Types.Property.BorderWidth value
+    let private widthValue value = Types.propertyHelpers.cssValue Types.Property.BorderWidth value
     let private widthValue' value =
         value
         |> widthToString
@@ -320,7 +320,7 @@ module Border =
     let BorderWidth' (width: Types.IBorderWidth) = BorderWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width
-    let private topWidthValue value = Types.cssValue Types.Property.BorderTopWidth value
+    let private topWidthValue value = Types.propertyHelpers.cssValue Types.Property.BorderTopWidth value
     let private topWidthValue' value =
         value
         |> widthToString
@@ -348,7 +348,7 @@ module Border =
     let BorderTopWidth' (width: Types.IBorderWidth) = BorderTopWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width
-    let private rightWidthValue value = Types.cssValue Types.Property.BorderRightWidth value
+    let private rightWidthValue value = Types.propertyHelpers.cssValue Types.Property.BorderRightWidth value
     let private rightWidthValue' value =
         value
         |> widthToString
@@ -376,7 +376,7 @@ module Border =
     let BorderRightWidth' (width: Types.IBorderWidth) = BorderRightWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width
-    let private bottomWidthValue value = Types.cssValue Types.Property.BorderBottomWidth value
+    let private bottomWidthValue value = Types.propertyHelpers.cssValue Types.Property.BorderBottomWidth value
     let private bottomWidthValue' value =
         value
         |> widthToString
@@ -404,7 +404,7 @@ module Border =
     let BorderBottomWidth' (width: Types.IBorderWidth) = BorderBottomWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width
-    let private leftWidthValue value = Types.cssValue Types.Property.BorderLeftWidth value
+    let private leftWidthValue value = Types.propertyHelpers.cssValue Types.Property.BorderLeftWidth value
     let private leftWidthValue' value =
         value
         |> widthToString
@@ -432,7 +432,7 @@ module Border =
     let BorderLeftWidth' (width: Types.IBorderWidth) = BorderLeftWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
-    let private styleValue value = Types.cssValue Types.Property.BorderStyle value
+    let private styleValue value = Types.propertyHelpers.cssValue Types.Property.BorderStyle value
     let private styleValue' value =
         value
         |> styleToString
@@ -487,7 +487,7 @@ module Border =
     let BorderStyle' (style: Types.IBorderStyle) = BorderStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style
-    let private topStyleValue value = Types.cssValue Types.Property.BorderTopStyle value
+    let private topStyleValue value = Types.propertyHelpers.cssValue Types.Property.BorderTopStyle value
     let private topStyleValue' value =
         value
         |> styleToString
@@ -523,7 +523,7 @@ module Border =
     let BorderTopStyle' (style: Types.IBorderStyle) = BorderTopStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style
-    let private rightStyleValue value = Types.cssValue Types.Property.BorderRightStyle value
+    let private rightStyleValue value = Types.propertyHelpers.cssValue Types.Property.BorderRightStyle value
     let private rightStyleValue' value =
         value
         |> styleToString
@@ -559,7 +559,7 @@ module Border =
     let BorderRightStyle' (style: Types.IBorderStyle) = BorderRightStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style
-    let private bottomStyleValue value = Types.cssValue Types.Property.BorderBottomStyle value
+    let private bottomStyleValue value = Types.propertyHelpers.cssValue Types.Property.BorderBottomStyle value
     let private bottomStyleValue' value =
         value
         |> styleToString
@@ -595,7 +595,7 @@ module Border =
     let BorderBottomStyle' (style: Types.IBorderStyle) = BorderBottomStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style
-    let private leftStyleValue value = Types.cssValue Types.Property.BorderLeftStyle value
+    let private leftStyleValue value = Types.propertyHelpers.cssValue Types.Property.BorderLeftStyle value
     let private leftStyleValue' value =
         value
         |> styleToString
@@ -631,7 +631,7 @@ module Border =
     let BorderLeftStyle' (style: Types.IBorderStyle) = BorderLeftStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
-    let private collapseValue value = Types.cssValue Types.Property.BorderCollapse value
+    let private collapseValue value = Types.propertyHelpers.cssValue Types.Property.BorderCollapse value
     let private collapseValue' value =
         value
         |> collapseToString
@@ -658,7 +658,7 @@ module Border =
     let BorderCollapse' (collapse: Types.IBorderCollapse) =  BorderCollapse.Value(collapse)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
-    let private imageOutsetValue value = Types.cssValue Types.Property.BorderImageOutset value
+    let private imageOutsetValue value = Types.propertyHelpers.cssValue Types.Property.BorderImageOutset value
     let private imageOutsetValue' value =
         value
         |> imageOutsetToString
@@ -700,7 +700,7 @@ module Border =
     let BorderImageOutset' (outset: Types.IBorderImageOutset) =  BorderImageOutset.Value(outset)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
-    let private imageRepeatValue value = Types.cssValue Types.Property.BorderImageRepeat value
+    let private imageRepeatValue value = Types.propertyHelpers.cssValue Types.Property.BorderImageRepeat value
     let private imageRepeatValue' value =
         value
         |> repeatToString
@@ -731,7 +731,7 @@ module Border =
     let BorderImageRepeat' (repeat: Types.IBorderRepeat) = BorderImageRepeat.Value(repeat)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
-    let private imageSliceValue value = Types.cssValue Types.Property.BorderImageSlice value
+    let private imageSliceValue value = Types.propertyHelpers.cssValue Types.Property.BorderImageSlice value
     let private imageSliceValue' value =
         value
         |> imageSliceToString
@@ -774,7 +774,7 @@ module Border =
     let BorderImageSlice' (slice: Types.IBorderImageSlice) = BorderImageSlice.Value(slice)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-color
-    let private borderColorValue value = Types.cssValue Types.Property.BorderColor value
+    let private borderColorValue value = Types.propertyHelpers.cssValue Types.Property.BorderColor value
     let private borderColorValue' value =
         value
         |> borderColorToString
@@ -967,7 +967,7 @@ module Border =
     let BorderColor' (color: Types.IBorderColor) = BorderColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color
-    let private topColorValue value = Types.cssValue Types.Property.BorderTopColor value
+    let private topColorValue value = Types.propertyHelpers.cssValue Types.Property.BorderTopColor value
     let private topColorValue' value =
         value
         |> borderColorToString
@@ -1141,7 +1141,7 @@ module Border =
     let BorderTopColor' (color: Types.IBorderColor) = BorderTopColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
-    let private rightColorValue value = Types.cssValue Types.Property.BorderRightColor value
+    let private rightColorValue value = Types.propertyHelpers.cssValue Types.Property.BorderRightColor value
     let private rightColorValue' value =
         value
         |> borderColorToString
@@ -1315,7 +1315,7 @@ module Border =
     let BorderRightColor' (color: Types.IBorderColor) = BorderRightColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color
-    let private bottomColorValue value = Types.cssValue Types.Property.BorderBottomColor value
+    let private bottomColorValue value = Types.propertyHelpers.cssValue Types.Property.BorderBottomColor value
     let private bottomColorValue' value =
         value
         |> borderColorToString
@@ -1489,7 +1489,7 @@ module Border =
     let BorderBottomColor' (color: Types.IBorderColor) = BorderBottomColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color
-    let private leftColorValue value = Types.cssValue Types.Property.BorderLeftColor value
+    let private leftColorValue value = Types.propertyHelpers.cssValue Types.Property.BorderLeftColor value
     let private leftColorValue' value =
         value
         |> borderColorToString
@@ -1663,7 +1663,7 @@ module Border =
     let BorderLeftColor' (color: Types.IBorderColor) = BorderLeftColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing
-    let private spacingValue value = Types.cssValue Types.Property.BorderSpacing value
+    let private spacingValue value = Types.propertyHelpers.cssValue Types.Property.BorderSpacing value
     let private spacingValue' value =
         value
         |> spacingToString
@@ -1693,7 +1693,7 @@ module Border =
     let BorderSpacing' (spacing: Types.IBorderSpacing) = BorderSpacing.Value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
-    let private imageWidthValue value = Types.cssValue Types.Property.BorderImageWidth value
+    let private imageWidthValue value = Types.propertyHelpers.cssValue Types.Property.BorderImageWidth value
     let private imageWidthValue' value =
         value
         |> imageWidthToString
@@ -1739,7 +1739,7 @@ module Border =
     let BorderImageWidth' (width: Types.IBorderImageWidth) = BorderImageWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
-    let private imageValue value = Types.cssValue Types.Property.BorderImageSource value
+    let private imageValue value = Types.propertyHelpers.cssValue Types.Property.BorderImageSource value
     let private imageValue' value =
         value
         |> imageSourceToString
@@ -1749,34 +1749,34 @@ module Border =
         static member Value (source: Types.IBorderImageSource) = source |> imageValue'
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
         static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.LinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.LinearGradient((angle, gradients))
         static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.LinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.LinearGradient((angle, gradients))
         static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
-            imageValue <| Image.Image.LinearGradients(gradients)
+            imageValue <| Types.Image.Image.LinearGradients(gradients)
         static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
-            imageValue <| Image.Image.LinearGradients(gradients)
+            imageValue <| Types.Image.Image.LinearGradients(gradients)
         static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
         static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+            imageValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
         static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
-            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
+            imageValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
         static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
-            imageValue <| Image.Image.RepeatingLinearGradients(gradients)
+            imageValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
-            imageValue <| Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
-            imageValue <| Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
-            imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+            imageValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+            imageValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
+            imageValue <| Types.Image.Image.RadialGradients(gradients)
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
+            imageValue <| Types.Image.Image.RadialGradients(gradients)
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+            imageValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+            imageValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
         static member None = Types.None' |> imageValue'
         static member Inherit = Types.Inherit |> imageValue'
         static member Initial = Types.Initial |> imageValue'

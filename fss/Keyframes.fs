@@ -24,12 +24,12 @@ module Keyframes =
                 | Frame (f, ps) ->
                     let ps' =
                         ps
-                        |> List.map Types.CssValue
+                        |> List.map Types.masterTypeHelpers.CssValue
                     frameValue f ==> createObj ps'
                 | Frames (fs, ps) ->
                     let ps' =
                         ps
-                        |> List.map Types.CssValue
+                        |> List.map Types.masterTypeHelpers.CssValue
                     frameValues fs ==> (createObj ps')
         )
         |> callback

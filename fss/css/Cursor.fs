@@ -5,12 +5,12 @@ module Cursor =
     let private cursorToString (cursor: Types.ICursor) =
         match cursor with
         | :? Types.Cursor as c -> Utilities.Helpers.duToKebab c
-        | :? Types.Auto -> Types.auto
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown cursor"
 
-    let private cursorValue value = Types.cssValue Types.Property.Cursor value
+    let private cursorValue value = Types.propertyHelpers.cssValue Types.Property.Cursor value
     let private cursorValue' value =
         value
         |> cursorToString

@@ -5,12 +5,12 @@ module Filter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/filter
     let private stringifyFilter (filter: Types.IFilter) =
         match filter with
-        | :? Types.Filter as f -> Types.stringifyFilter f
-        | :? Types.Keywords as g -> Types.keywordsToString g
-        | :? Types.None' -> Types.none
+        | :? Types.Filter as f -> Types.filterHelpers.stringifyFilter f
+        | :? Types.Keywords as g -> Types.masterTypeHelpers.keywordsToString g
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown filter"
 
-    let private filterValue value = Types.cssValue Types.Property.Filter value
+    let private filterValue value = Types.propertyHelpers.cssValue Types.Property.Filter value
     let private filterValue' value =
         value
         |> stringifyFilter
@@ -37,7 +37,7 @@ module Filter =
     /// Supply a list of filters to be applied to the element.
     let Filters (filters: Types.Filter list): Types.CssProperty =
         filters
-        |> Utilities.Helpers.combineWs Types.stringifyFilter
+        |> Utilities.Helpers.combineWs Types.filterHelpers.stringifyFilter
         |> filterValue
 
 [<AutoOpen>]
@@ -45,12 +45,12 @@ module BackdropFilter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
     let private stringifyFilter (backdropFilter: Types.IBackdropFilter) =
         match backdropFilter with
-        | :? Types.Filter as f -> Types.stringifyFilter f
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Filter as f -> Types.filterHelpers.stringifyFilter f
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown backdrop filter"
 
-    let private backdropFilterValue value = Types.cssValue Types.Property.BackdropFilter value
+    let private backdropFilterValue value = Types.propertyHelpers.cssValue Types.Property.BackdropFilter value
     let private backdropFilterValue' value =
         value
         |> stringifyFilter
@@ -77,5 +77,5 @@ module BackdropFilter =
     /// Supply a list of filters to be applied to the element.
     let BackdropFilters (backdropFilters: Types.Filter list): Types.CssProperty =
         backdropFilters
-        |> Utilities.Helpers.combineWs Types.stringifyFilter
+        |> Utilities.Helpers.combineWs Types.filterHelpers.stringifyFilter
         |> backdropFilterValue

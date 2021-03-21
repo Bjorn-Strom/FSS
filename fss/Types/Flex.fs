@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type AlignContent =
         | Start
         | End
@@ -17,7 +16,7 @@ module Types =
         | SpaceBetween
         | SpaceAround
         | SpaceEvenly
-        interface Types.IAlignContent
+        interface IAlignContent
 
     type AlignItems =
         | Start
@@ -33,7 +32,7 @@ module Types =
         | Unsafe
         | SelfStart
         | SelfEnd
-        interface Types.IAlignItems
+        interface IAlignItems
 
     type AlignSelf =
         | Start
@@ -49,7 +48,7 @@ module Types =
         | Unsafe
         | SelfStart
         | SelfEnd
-        interface Types.IAlignSelf
+        interface IAlignSelf
 
     type JustifyContent =
         | Start
@@ -68,7 +67,7 @@ module Types =
         | SpaceEvenly
         | Left
         | Right
-        interface Types.IJustifyContent
+        interface IJustifyContent
 
     type JustifyItems =
         | Start
@@ -87,7 +86,7 @@ module Types =
         | SelfStart
         | SelfEnd
         | Legacy
-        interface Types.IJustifyItems
+        interface IJustifyItems
 
     type JustifySelf =
         | Start
@@ -103,20 +102,20 @@ module Types =
         | Unsafe
         | SelfStart
         | SelfEnd
-        interface Types.IJustifySelf
+        interface IJustifySelf
 
     type FlexWrap =
         | NoWrap
         | Wrap
         | WrapReverse
-        interface Types.IFlexWrap
+        interface IFlexWrap
 
     type FlexDirection =
         | Row
         | RowReverse
         | Column
         | ColumnReverse
-        interface Types.IFlexDirection
+        interface IFlexDirection
 
     type FlexBasis =
         | Fill
@@ -124,5 +123,5 @@ module Types =
         | MinContent
         | FitContent
         | Content
-        interface Types.IFlexBasis
+        interface IFlexBasis
 

@@ -6,14 +6,14 @@ module Content =
     let private contentTypeToString (content: Types.IContent) =
         match content with
         | :? Types.Content as c -> Utilities.Helpers.duToKebab c
-        | :? Types.String as s -> Types.StringToString s |> sprintf "\"%s\""
-        | :? Types.Normal -> Types.normal
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.CounterStyle as c -> Types.counterStyleToString c
+        | :? Types.CssString as s -> Types.masterTypeHelpers.StringToString s |> sprintf "\"%s\""
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.CounterStyle as c -> Types.counterStyleHelpers.counterStyleToString c
         | _ -> "Unknown content"
 
-    let private contentValue value = Types.cssValue Types.Property.Content value
+    let private contentValue value = Types.propertyHelpers.cssValue Types.Property.Content value
     let private contentValue' value =
         value
         |> contentTypeToString
@@ -26,13 +26,13 @@ module Content =
         static member NoCloseQuote = Types.Content.NoCloseQuote |> contentValue'
 
         static member Counter (counter: Types.CounterStyle) =
-            contentValue <| sprintf "counter(%s)" (Types.counterStyleToString counter)
+            contentValue <| sprintf "counter(%s)" (Types.counterStyleHelpers.counterStyleToString counter)
         static member Counters (counter: Types.CounterStyle, listType: Types.IListStyleType) =
-            contentValue <| sprintf "counters(%s, %s)" (Types.counterStyleToString counter) (Types.styleTypeToString listType)
+            contentValue <| sprintf "counters(%s, %s)" (Types.counterStyleHelpers.counterStyleToString counter) (Types.listStyleHelpers.styleTypeToString listType)
         static member Counter (counter: Types.CounterStyle, value: string) =
-            contentValue <| sprintf "counter(%s)'%s'" (Types.counterStyleToString counter) value
+            contentValue <| sprintf "counter(%s)'%s'" (Types.counterStyleHelpers.counterStyleToString counter) value
         static member Counters (counters: Types.CounterStyle list, values: string list) =
-            List.zip (List.map Types.counterStyleToString counters) values
+            List.zip (List.map Types.counterStyleHelpers.counterStyleToString counters) values
             |> List.map (fun (x, y) -> sprintf "counter(%s) '%s'" x y)
             |> String.concat " "
             |> contentValue
@@ -41,36 +41,36 @@ module Content =
         static member Value (value: string) = contentValue <| sprintf "\"%s\"" value
         static member Value (content: Types.IContent) = content |> contentValue'
         static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
-            contentValue <| Image.Image.LinearGradient((angle, gradients))
+            contentValue <| Types.Image.Image.LinearGradient((angle, gradients))
         static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
-            contentValue <| Image.Image.LinearGradient((angle, gradients))
+            contentValue <| Types.Image.Image.LinearGradient((angle, gradients))
         static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
-            contentValue <| Image.Image.LinearGradients(gradients)
+            contentValue <| Types.Image.Image.LinearGradients(gradients)
         static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
-            contentValue <| Image.Image.LinearGradients(gradients)
+            contentValue <| Types.Image.Image.LinearGradients(gradients)
         static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
-            contentValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+            contentValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
         static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
-            contentValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
+            contentValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
         static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
-            contentValue <| Image.Image.RepeatingLinearGradients(gradients)
+            contentValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
         static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
-            contentValue <| Image.Image.RepeatingLinearGradients(gradients)
+            contentValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            contentValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
-            contentValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
-            contentValue <| Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
-            contentValue <| Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
-            contentValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
-            contentValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member Attribute (attribute: Types.Attribute) =
-            contentValue <| sprintf "attr(%A)" (Types.attributeToString attribute)
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+            contentValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+            contentValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
+            contentValue <| Types.Image.Image.RadialGradients(gradients)
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
+            contentValue <| Types.Image.Image.RadialGradients(gradients)
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+            contentValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+            contentValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
+        static member Attribute (attribute: Types.Attribute.Attribute) =
+            contentValue <| sprintf "attr(%A)" (Types.attributeHelpers.attributeToString attribute)
 
         static member Normal = Types.Normal |> contentValue'
         static member None = Types.None' |> contentValue'
@@ -98,7 +98,7 @@ module Label =
     type Label =
         static member Value(label: string) =
             (label.Replace(" ", ""))
-            |> Types.cssValue Types.Property.Label
+            |> Types.propertyHelpers.cssValue Types.Property.Label
 
     /// <summary>Gives label to generated CSS string.</summary>
     /// <param name="label">The name to give to the generated CSS string</param>

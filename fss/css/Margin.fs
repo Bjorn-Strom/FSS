@@ -5,13 +5,13 @@ namespace Fss
 module Margin =
     let private marginToString (margin: Types.IMargin) =
         match margin with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown margin"
 
-    let private marginValue value = Types.cssValue Types.Property.Margin value
+    let private marginValue value = Types.propertyHelpers.cssValue Types.Property.Margin value
     let private marginValue' value =
         value
         |> marginToString
@@ -56,7 +56,7 @@ module Margin =
     /// <returns>Css property for fss.</returns>
     let Margin' (margin: Types.IMargin) = Margin.Value(margin)
 
-    let private marginTopValue value = Types.cssValue Types.Property.MarginTop value
+    let private marginTopValue value = Types.propertyHelpers.cssValue Types.Property.MarginTop value
     let private marginTopValue' value =
         value
         |> marginToString
@@ -81,7 +81,7 @@ module Margin =
     /// <returns>Css property for fss.</returns>
     let MarginTop' (top: Types.IMargin) = MarginTop.Value(top)
 
-    let private marginRightValue value = Types.cssValue Types.Property.MarginRight value
+    let private marginRightValue value = Types.propertyHelpers.cssValue Types.Property.MarginRight value
     let private marginRightValue' value =
         value
         |> marginToString
@@ -107,7 +107,7 @@ module Margin =
     /// <returns>Css property for fss.</returns>
     let MarginRight' (right: Types.IMargin) = MarginRight.Value(right)
 
-    let private marginBottomValue value = Types.cssValue Types.Property.MarginBottom value
+    let private marginBottomValue value = Types.propertyHelpers.cssValue Types.Property.MarginBottom value
     let private marginBottomValue' value =
         value
         |> marginToString
@@ -132,7 +132,7 @@ module Margin =
     /// <returns>Css property for fss.</returns>
     let MarginBottom' (bottom: Types.IMargin) = MarginBottom.Value(bottom)
 
-    let private marginLeftValue value = Types.cssValue Types.Property.MarginLeft value
+    let private marginLeftValue value = Types.propertyHelpers.cssValue Types.Property.MarginLeft value
     let private marginLeftValue' value =
         value
         |> marginToString
@@ -159,7 +159,7 @@ module Margin =
 
     let MarginLeft' (left: Types.IMargin) = MarginLeft.Value(left)
 
-    let private marginInlineStartValue value = Types.cssValue Types.Property.MarginInlineStart value
+    let private marginInlineStartValue value = Types.propertyHelpers.cssValue Types.Property.MarginInlineStart value
     let private marginInlineStartValue' value =
         value
         |> marginToString
@@ -185,7 +185,7 @@ module Margin =
     /// <returns>Css property for fss.</returns>
     let MarginInlineStart' (margin: Types.IMargin) = MarginInlineStart.Value(margin)
 
-    let private marginInlineEndValue value = Types.cssValue Types.Property.MarginInlineEnd value
+    let private marginInlineEndValue value = Types.propertyHelpers.cssValue Types.Property.MarginInlineEnd value
     let private marginInlineEndValue' value =
         value
         |> marginToString
@@ -211,7 +211,7 @@ module Margin =
     /// <returns>Css property for fss.</returns>
     let MarginInlineEnd' (margin: Types.IMargin) = MarginInlineEnd.Value(margin)
 
-    let private marginBlockStartValue value = Types.cssValue Types.Property.MarginBlockStart value
+    let private marginBlockStartValue value = Types.propertyHelpers.cssValue Types.Property.MarginBlockStart value
     let private marginBlockStartValue' value =
         value
         |> marginToString
@@ -237,7 +237,7 @@ module Margin =
     /// <returns>Css property for fss.</returns>
     let MarginBlockStart' (margin: Types.IMargin) = MarginBlockStart.Value(margin)
 
-    let private marginBlockEndValue value = Types.cssValue Types.Property.MarginBlockEnd value
+    let private marginBlockEndValue value = Types.propertyHelpers.cssValue Types.Property.MarginBlockEnd value
     let private marginBlockEndValue' value =
         value
         |> marginToString

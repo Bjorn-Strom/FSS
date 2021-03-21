@@ -3,7 +3,6 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open FssTypes
 open Fss
 
 module Font =
@@ -216,7 +215,7 @@ module Font =
                     [ "fontWeight" ==> "bolder"]
                 test
                     "Font weight value"
-                    [ FontWeight' (CssInt 500) ]
+                    [ FontWeight' (Types.CssInt 500) ]
                     [ "fontWeight" ==> "500"]
                 test
                     "Font weight inherit"
@@ -236,7 +235,7 @@ module Font =
                     [ "lineHeight" ==> "normal" ]
                 test
                     "Line height value"
-                    [ LineHeight' (CssFloat 2.5) ]
+                    [ LineHeight' (Types.CssFloat 2.5) ]
                     [ "lineHeight" ==> "2.5" ]
                 test
                     "Line height em"
@@ -348,15 +347,15 @@ module Font =
                      [ "fontFamily" ==> "unset" ]
                 test
                     "Font families"
-                    [ FontFamily.Values ([ Serif; Monospace ]) ]
+                    [ FontFamily.Values ([ Types.Serif; Types.Monospace ]) ]
                     [ "fontFamily" ==> "serif, monospace" ]
                 test
                     "font feature setting On"
-                    [ FontFeatureSetting.Liga On ]
+                    [ FontFeatureSetting.Liga Types.On ]
                     [ "fontFeatureSettings" ==> "\"liga\" On" ]
                 test
                     "font feature setting Off"
-                    [ FontFeatureSetting.Liga Off ]
+                    [ FontFeatureSetting.Liga Types.Off ]
                     [ "fontFeatureSettings" ==> "\"liga\" Off" ]
                 test
                     "font feature setting initial"

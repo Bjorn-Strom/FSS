@@ -4,7 +4,6 @@ open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
-open FssTypes
 
 module BoxShadow =
      let tests =

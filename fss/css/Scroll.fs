@@ -6,11 +6,11 @@ module ScrollBehavior =
     let private stringifyScrollBehavior (behavior: Types.IScrollBehavior) =
         match behavior with
         | :? Types.ScrollBehavior as s -> Utilities.Helpers.duToKebab s
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private BehaviorValue value = Types.cssValue Types.Property.ScrollBehavior value
+    let private BehaviorValue value = Types.propertyHelpers.cssValue Types.Property.ScrollBehavior value
     let private BehaviorValue' value =
         value
         |> stringifyScrollBehavior
@@ -39,11 +39,11 @@ module ScrollBehavior =
 module ScrollMargin =
     let private scrollMarginToString (scrollMargin: Types.IScrollMargin) =
         match scrollMargin with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown scrollMargin"
 
-    let private scrollMarginValue value = Types.cssValue Types.Property.ScrollMargin value
+    let private scrollMarginValue value = Types.propertyHelpers.cssValue Types.Property.ScrollMargin value
     let private scrollMarginValue' value =
         value
         |> scrollMarginToString
@@ -85,7 +85,7 @@ module ScrollMargin =
     /// <returns>Css property for fss.</returns>
     let ScrollMargin' (scrollMargin: Types.IScrollMargin) = ScrollMargin.Value(scrollMargin)
 
-    let private scrollMarginTopValue value = Types.cssValue Types.Property.ScrollMarginTop value
+    let private scrollMarginTopValue value = Types.propertyHelpers.cssValue Types.Property.ScrollMarginTop value
     let private scrollMarginTopValue' value =
         value
         |> scrollMarginToString
@@ -107,7 +107,7 @@ module ScrollMargin =
     /// <returns>Css property for fss.</returns>
     let ScrollMarginTop' (top: Types.IScrollMargin) = ScrollMarginTop.Value(top)
 
-    let private scrollMarginRightValue value = Types.cssValue Types.Property.ScrollMarginRight value
+    let private scrollMarginRightValue value = Types.propertyHelpers.cssValue Types.Property.ScrollMarginRight value
     let private scrollMarginRightValue' value =
         value
         |> scrollMarginToString
@@ -129,7 +129,7 @@ module ScrollMargin =
     /// <returns>Css property for fss.</returns>
     let ScrollMarginRight' (right: Types.IScrollMargin) = ScrollMarginRight.Value(right)
 
-    let private scrollMarginBottomValue value = Types.cssValue Types.Property.ScrollMarginBottom value
+    let private scrollMarginBottomValue value = Types.propertyHelpers.cssValue Types.Property.ScrollMarginBottom value
     let private scrollMarginBottomValue' value =
         value
         |> scrollMarginToString
@@ -150,7 +150,7 @@ module ScrollMargin =
     /// <returns>Css property for fss.</returns>
     let ScrollMarginBottom' (bottom: Types.IScrollMargin) = ScrollMarginBottom.Value(bottom)
 
-    let private scrollMarginLeftValue value = Types.cssValue Types.Property.ScrollMarginLeft value
+    let private scrollMarginLeftValue value = Types.propertyHelpers.cssValue Types.Property.ScrollMarginLeft value
     let private scrollMarginLeftValue' value =
         value
         |> scrollMarginToString
@@ -178,11 +178,11 @@ module ScrollMargin =
 module ScrollPadding =
     let private scrollPaddingToString (scrollPadding: Types.IScrollPadding) =
         match scrollPadding with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Keywords as g -> Types.keywordsToString g
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Keywords as g -> Types.masterTypeHelpers.keywordsToString g
         | _ -> "Unknown scrollPadding"
 
-    let private scrollPaddingValue value = Types.cssValue Types.Property.ScrollPadding value
+    let private scrollPaddingValue value = Types.propertyHelpers.cssValue Types.Property.ScrollPadding value
     let private scrollPaddingValue' value =
         value
         |> scrollPaddingToString
@@ -226,7 +226,7 @@ module ScrollPadding =
     /// <returns>Css property for fss.</returns>
     let ScrollPadding' (scrollPadding: Types.IScrollPadding) = ScrollPadding.Value(scrollPadding)
 
-    let private scrollPaddingTopValue value = Types.cssValue Types.Property.ScrollPaddingTop value
+    let private scrollPaddingTopValue value = Types.propertyHelpers.cssValue Types.Property.ScrollPaddingTop value
     let private scrollPaddingTopValue' value =
         value
         |> scrollPaddingToString
@@ -250,7 +250,7 @@ module ScrollPadding =
     /// <returns>Css property for fss.</returns>
     let ScrollPaddingTop' (top: Types.IScrollPadding) = ScrollPaddingTop.Value(top)
 
-    let private scrollPaddingRightValue value = Types.cssValue Types.Property.ScrollPaddingRight value
+    let private scrollPaddingRightValue value = Types.propertyHelpers.cssValue Types.Property.ScrollPaddingRight value
     let private scrollPaddingRightValue' value =
         value
         |> scrollPaddingToString
@@ -274,7 +274,7 @@ module ScrollPadding =
     /// <returns>Css property for fss.</returns>
     let ScrollPaddingRight' (right: Types.IScrollPadding) = ScrollPaddingRight.Value(right)
 
-    let private scrollPaddingBottomValue value = Types.cssValue Types.Property.ScrollPaddingBottom value
+    let private scrollPaddingBottomValue value = Types.propertyHelpers.cssValue Types.Property.ScrollPaddingBottom value
     let private scrollPaddingBottomValue' value =
         value
         |> scrollPaddingToString
@@ -297,7 +297,7 @@ module ScrollPadding =
     /// <returns>Css property for fss.</returns>
     let ScrollPaddingBottom' (bottom: Types.IScrollPadding) = ScrollPaddingBottom.Value(bottom)
 
-    let private scrollPaddingLeftValue value = Types.cssValue Types.Property.ScrollPaddingLeft value
+    let private scrollPaddingLeftValue value = Types.propertyHelpers.cssValue Types.Property.ScrollPaddingLeft value
     let private scrollPaddingLeftValue' value =
         value
         |> scrollPaddingToString
@@ -327,11 +327,11 @@ module OverscrollBehaviorX =
     let private stringifyBehavior (behavior: Types.IOverscrollBehaviorX) =
         match behavior with
         | :? Types.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private overscrollBehaviour value = Types.cssValue Types.Property.OverscrollBehaviorX value
+    let private overscrollBehaviour value = Types.propertyHelpers.cssValue Types.Property.OverscrollBehaviorX value
     let private overscrollBehaviour' value =
         value
         |> stringifyBehavior
@@ -363,11 +363,11 @@ module OverscrollBehaviorX =
         let private stringifyBehavior (behavior: Types.IOverscrollBehaviorY) =
             match behavior with
             | :? Types.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
-            | :? Types.Auto -> Types.auto
-            | :? Types.Keywords as k -> Types.keywordsToString k
+            | :? Types.Auto -> Types.masterTypeHelpers.auto
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
             | _ -> "Unknown all"
 
-        let private overscrollBehaviour value = Types.cssValue Types.Property.OverscrollBehaviorY value
+        let private overscrollBehaviour value = Types.propertyHelpers.cssValue Types.Property.OverscrollBehaviorY value
         let private overscrollBehaviour' value =
             value
             |> stringifyBehavior

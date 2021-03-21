@@ -6,30 +6,30 @@ module ClipPath =
     let private stringifyClipPath (clipPath: Types.IClipPath) =
         let stringifyInset =
             function
-                | Types.All a -> Types.lengthPercentageToString a
+                | Types.All a -> Types.unitHelpers.lengthPercentageToString a
                 | Types.HorizontalVertical (h, v) ->
                     sprintf "%s %s"
-                        (Types.lengthPercentageToString h)
-                        (Types.lengthPercentageToString v)
+                        (Types.unitHelpers.lengthPercentageToString h)
+                        (Types.unitHelpers.lengthPercentageToString v)
                 | Types.TopHorizontalBottom (t, h, b) ->
                     sprintf "%s %s %s"
-                        (Types.lengthPercentageToString t)
-                        (Types.lengthPercentageToString h)
-                        (Types.lengthPercentageToString b)
+                        (Types.unitHelpers.lengthPercentageToString t)
+                        (Types.unitHelpers.lengthPercentageToString h)
+                        (Types.unitHelpers.lengthPercentageToString b)
                 | Types.TopRightBottomLeft (t, r, b, l) ->
                     sprintf "%s %s %s %s"
-                        (Types.lengthPercentageToString t)
-                        (Types.lengthPercentageToString r)
-                        (Types.lengthPercentageToString b)
-                        (Types.lengthPercentageToString l)
-        let stringifyRound r = Utilities.Helpers.combineWs Types.lengthPercentageToString r
+                        (Types.unitHelpers.lengthPercentageToString t)
+                        (Types.unitHelpers.lengthPercentageToString r)
+                        (Types.unitHelpers.lengthPercentageToString b)
+                        (Types.unitHelpers.lengthPercentageToString l)
+        let stringifyRound r = Utilities.Helpers.combineWs Types.unitHelpers.lengthPercentageToString r
         let stringifyPolygon p =
             let unboxPolygon (Types.Polygon p) = p
             unboxPolygon p
             |> Utilities.Helpers.combineComma (fun (x, y) ->
                 sprintf "%s %s"
-                    (Types.lengthPercentageToString x)
-                    (Types.lengthPercentageToString y))
+                    (Types.unitHelpers.lengthPercentageToString x)
+                    (Types.unitHelpers.lengthPercentageToString y))
 
         match clipPath with
         | :? Types.Geometry as g -> Utilities.Helpers.duToKebab g
@@ -42,11 +42,11 @@ module ClipPath =
                 (stringifyRound r)
         | :? Types.Polygon as p ->
             sprintf "polygon(%s)" <| stringifyPolygon p
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown clip path"
 
-    let private clipPathValue value = Types.cssValue Types.Property.ClipPath value
+    let private clipPathValue value = Types.propertyHelpers.cssValue Types.Property.ClipPath value
     let private clipPathValue' value =
         value
         |> stringifyClipPath
@@ -79,23 +79,23 @@ module ClipPath =
             |> clipPathValue'
         static member Circle (radius: Types.ILengthPercentage) =
             sprintf "circle(%s)"
-                (Types.lengthPercentageToString radius)
+                (Types.unitHelpers.lengthPercentageToString radius)
             |> clipPathValue
         static member CircleAt (radius: Types.ILengthPercentage, x: Types.ILengthPercentage, y: Types.ILengthPercentage) =
             sprintf "circle(%s at %s %s)"
-                (Types.lengthPercentageToString radius)
-                (Types.lengthPercentageToString x)
-                (Types.lengthPercentageToString y)
+                (Types.unitHelpers.lengthPercentageToString radius)
+                (Types.unitHelpers.lengthPercentageToString x)
+                (Types.unitHelpers.lengthPercentageToString y)
             |> clipPathValue
         static member Ellipse (radius: Types.ILengthPercentage) =
             sprintf "ellipse(%s)"
-                (Types.lengthPercentageToString radius)
+                (Types.unitHelpers.lengthPercentageToString radius)
             |> clipPathValue
         static member EllipseAt (radius: Types.ILengthPercentage, x: Types.ILengthPercentage, y: Types.ILengthPercentage) =
             sprintf "ellipse(%s at %s %s)"
-                (Types.lengthPercentageToString radius)
-                (Types.lengthPercentageToString x)
-                (Types.lengthPercentageToString y)
+                (Types.unitHelpers.lengthPercentageToString radius)
+                (Types.unitHelpers.lengthPercentageToString x)
+                (Types.unitHelpers.lengthPercentageToString y)
             |> clipPathValue
         static member Url (url: string) =
             sprintf "url(%s)" url

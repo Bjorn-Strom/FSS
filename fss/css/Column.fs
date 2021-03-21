@@ -5,10 +5,10 @@ module Column =
 
     let private columnGapToString (gap: Types.IColumnGap) =
         match gap with
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Normal -> Types.normal
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | _ -> "Unknown column gap"
 
     let private columnSpanToString (span: Types.IColumnSpan) =
@@ -18,63 +18,63 @@ module Column =
 
         match span with
         | :? Types.ColumnSpan as c -> stringifyColumnSpan c
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown column span"
 
     let private columnsToString(columns: Types.IColumns) =
         match columns with
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown columns"
 
     let private columnRuleToString(columnRule: Types.IColumnRule) =
         match columnRule with
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column rule"
 
     let private columnRuleWidthToString (ruleWidth: Types.IColumnRuleWidth) =
         match ruleWidth with
         | :? Types.ColumnRuleWidth as w -> Utilities.Helpers.duToLowercase w
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column rule width"
 
     let private columnRuleStyleToString (style: Types.IColumnRuleStyle) =
         match style with
         | :? Types.ColumnRuleStyle as b -> Utilities.Helpers.duToLowercase b
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column style"
 
     let private columnRuleColorToString (columnColor: Types.IColumnRuleColor) =
         match columnColor with
-        | :? Types.Color as c -> Types.colorToString c
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Color as c -> Types.colorHelpers.colorToString c
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column rule color"
 
     let private columnCountToString (columnCount: Types.IColumnCount) =
         match columnCount with
-        | :? Types.Int as i -> Types.IntToString i
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.CssInt as i -> Types.masterTypeHelpers.IntToString i
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column count"
 
     let private columnFillToString (columnFill: Types.IColumnFill) =
         match columnFill with
         | :? Types.ColumnFill as c -> Utilities.Helpers.duToKebab c
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column fill"
 
     let private columnWidthToString (columnWidth: Types.IColumnWidth) =
         match columnWidth with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column width"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
-    let private columnGapValue value = Types.cssValue Types.Property.ColumnGap value
+    let private columnGapValue value = Types.propertyHelpers.cssValue Types.Property.ColumnGap value
     let private columnGapValue' value =
         value
         |> columnGapToString
@@ -100,7 +100,7 @@ module Column =
     let ColumnGap' (columnGap: Types.IColumnGap) = ColumnGap.Value(columnGap)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-span
-    let private columnSpanValue value = Types.cssValue Types.Property.ColumnSpan value
+    let private columnSpanValue value = Types.propertyHelpers.cssValue Types.Property.ColumnSpan value
     let private columnSpanValue' value =
         value
         |> columnSpanToString
@@ -127,7 +127,7 @@ module Column =
     let ColumnSpan' (span: Types.IColumnSpan) = ColumnSpan.Value(span)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/columns
-    let private columnsValue value = Types.cssValue Types.Property.Columns value
+    let private columnsValue value = Types.propertyHelpers.cssValue Types.Property.Columns value
     let private columnsValue' value =
         value
         |> columnsToString
@@ -150,7 +150,7 @@ module Column =
     let Columns' (columns: Types.IColumns) = columns |> Columns.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule
-    let private columnRuleValue value = Types.cssValue Types.Property.ColumnRule value
+    let private columnRuleValue value = Types.propertyHelpers.cssValue Types.Property.ColumnRule value
     let private columnRuleValue' value =
         value
         |> columnRuleToString
@@ -173,7 +173,7 @@ module Column =
     let ColumnRule' (rule: Types.IColumnRule) = rule |> ColumnRule.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
-    let private columnRuleWidthValue value = Types.cssValue Types.Property.ColumnRuleWidth value
+    let private columnRuleWidthValue value = Types.propertyHelpers.cssValue Types.Property.ColumnRuleWidth value
     let private columnRuleWidthValue' value =
         value
         |> columnRuleWidthToString
@@ -201,7 +201,7 @@ module Column =
     let ColumnRuleWidth' (ruleWidth: Types.IColumnRuleWidth) = ruleWidth |> ColumnRuleWidth.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-style
-    let private styleValue value = Types.cssValue Types.Property.ColumnRuleStyle value
+    let private styleValue value = Types.propertyHelpers.cssValue Types.Property.ColumnRuleStyle value
     let private styleValue' value =
         value
         |> columnRuleStyleToString
@@ -237,7 +237,7 @@ module Column =
     let ColumnRuleStyle' (style: Types.IColumnRuleStyle) = ColumnRuleStyle.Value(style)
 
      // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-color
-    let private columnRuleColorValue value = Types.cssValue Types.Property.ColumnRuleColor value
+    let private columnRuleColorValue value = Types.propertyHelpers.cssValue Types.Property.ColumnRuleColor value
     let private columnRuleColorValue' value =
         value
         |> columnRuleColorToString
@@ -412,7 +412,7 @@ module Column =
     let ColumnRuleColor' (color: Types.IColumnRuleColor) = ColumnRuleColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-count
-    let private columnCountValue value = Types.cssValue Types.Property.ColumnCount value
+    let private columnCountValue value = Types.propertyHelpers.cssValue Types.Property.ColumnCount value
     let private columnCountValue' value =
         value
         |> columnCountToString
@@ -438,7 +438,7 @@ module Column =
     let ColumnCount' (columnCount: Types.IColumnCount) = ColumnCount.Value(columnCount)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill
-    let private columnFillValue value = Types.cssValue Types.Property.ColumnFill value
+    let private columnFillValue value = Types.propertyHelpers.cssValue Types.Property.ColumnFill value
     let private columnFillValue' value =
         value
         |> columnFillToString
@@ -466,7 +466,7 @@ module Column =
     let ColumnFill' (columnFill: Types.IColumnFill) = ColumnFill.Value(columnFill)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
-    let private columnWidthValue value = Types.cssValue Types.Property.ColumnWidth value
+    let private columnWidthValue value = Types.propertyHelpers.cssValue Types.Property.ColumnWidth value
     let private columnWidthValue' value =
         value
         |> columnWidthToString

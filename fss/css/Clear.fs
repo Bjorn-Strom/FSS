@@ -6,11 +6,11 @@ module Clear =
     let private stringifyClear (clear: Types.IClear) =
         match clear with
         | :? Types.Clear as c -> Utilities.Helpers.duToKebab c
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown clear"
 
-    let private clearValue value = Types.cssValue Types.Property.Clear value
+    let private clearValue value = Types.propertyHelpers.cssValue Types.Property.Clear value
     let private clearValue' value =
         value
         |> stringifyClear

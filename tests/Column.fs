@@ -3,7 +3,6 @@ namespace FSSTests
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open FssTypes
 open Fss
 
 module Column =
@@ -236,7 +235,7 @@ module Column =
                     [ "columnRuleColor" ==> "unset" ]
                 test
                     "Column count number"
-                    [ColumnCount' (CssInt 3)]
+                    [ColumnCount' (Types.CssInt 3)]
                     ["columnCount" ==> "3"]
                 test
                     "Column count auto"

@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type MixBlendMode =
         | Multiply
         | Screen
@@ -18,5 +17,5 @@ module Types =
         | Saturation
         | Color'
         | Luminosity
-        interface Types.IMixBlendMode
+        interface IMixBlendMode
 

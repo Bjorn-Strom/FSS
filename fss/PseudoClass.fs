@@ -8,8 +8,8 @@ module PseudoClass =
     let private stringifyNthChild (nthChild: Types.INthChild)=
         match nthChild with
         | :? Types.NthChildType as n -> Utilities.Helpers.duToLowercase n
-        | :? Types.String as s -> Types.StringToString s
-        | :? Types.Int as i -> Types.IntToString i
+        | :? Types.CssString as s -> Types.masterTypeHelpers.StringToString s
+        | :? Types.CssInt as i -> Types.masterTypeHelpers.IntToString i
         | _ -> "Unknown nth child"
 
     let private pseudoValue value attributeList = value ==> (attributeList |> fss) |> Types.CssProperty

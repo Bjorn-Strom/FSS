@@ -11,22 +11,22 @@ module FontFace =
             | Types.UrlFormat (s, f) -> sprintf "url('%s') format('%s')" s (Utilities.Helpers.duToKebab f)
             | Types.Local l -> sprintf "local('%s')" l
 
-    let private sourceValue value = Types.cssValue Types.Property.Src value
-    let private styleValue value = Types.cssValue Types.Property.FontStyle value
-    let private displayValue value = Types.cssValue Types.Property.FontDisplay value
-    let private stretchValue value = Types.cssValue Types.Property.FontStretch value
-    let private weightValue value = Types.cssValue Types.Property.FontWeight value
+    let private sourceValue value = Types.propertyHelpers.cssValue Types.Property.Src value
+    let private styleValue value = Types.propertyHelpers.cssValue Types.Property.FontStyle value
+    let private displayValue value = Types.propertyHelpers.cssValue Types.Property.FontDisplay value
+    let private stretchValue value = Types.propertyHelpers.cssValue Types.Property.FontStretch value
+    let private weightValue value = Types.propertyHelpers.cssValue Types.Property.FontWeight value
 
     type FontFace =
         static member Source (source: Types.Source) = source |> stringifySource |> sourceValue
         static member Sources (sources: Types.Source list) = Utilities.Helpers.combineComma stringifySource sources |> sourceValue
-        static member Style (style: Types.IFontStyle) = style |> Types.fontStyleToString |> styleValue
-        static member Display (display: Types.IFontDisplay) = display |> Types.fontDisplayToString |> displayValue
-        static member Stretch (stretch: Types.IFontStretch) = stretch |> Types.fontStretchToString |> stretchValue
-        static member Weight (weight: Types.IFontWeight) = weight |> Types.fontWeightToString |> weightValue
+        static member Style (style: Types.IFontStyle) = style |> Types.fontHelpers.fontStyleToString |> styleValue
+        static member Display (display: Types.IFontDisplay) = display |> Types.fontHelpers.fontDisplayToString |> displayValue
+        static member Stretch (stretch: Types.IFontStretch) = stretch |> Types.fontHelpers.fontStretchToString |> stretchValue
+        static member Weight (weight: Types.IFontWeight) = weight |> Types.fontHelpers.fontWeightToString |> weightValue
 
     let createFontFaceObject (fontName: string) (attributeList: Types.CssProperty list) =
-        let attributeList' =  List.map Types.CssValue attributeList
+        let attributeList' =  List.map Types.masterTypeHelpers.CssValue attributeList
         createObj
             [
                 "@font-face" ==>

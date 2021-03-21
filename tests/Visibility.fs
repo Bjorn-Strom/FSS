@@ -22,11 +22,11 @@ module Visibility =
                     ["paintOrder" ==> "markers"]
                 test
                     "Paint order stroke fill"
-                    [PaintOrder.Value(Stroke, Types.PaintOrder.Fill)]
+                    [PaintOrder.Value(Types.PaintOrder.Stroke, Types.PaintOrder.Fill)]
                     ["paintOrder" ==> "stroke fill"]
                 test
                     "Paint order markers stroke fill"
-                    [PaintOrder.Value(Markers, Stroke, Types.PaintOrder.Fill)]
+                    [PaintOrder.Value(Types.PaintOrder.Markers, Types.PaintOrder.Stroke, Types.PaintOrder.Fill)]
                     ["paintOrder" ==> "markers stroke fill"]
                 test
                     "Paint order normal"

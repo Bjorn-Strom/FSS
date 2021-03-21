@@ -23,7 +23,6 @@ module fss =
     type prop with
         static member css (properties: Types.CssProperty list) =
             prop.className (fss properties)
-    type Color = Types.Color
 
     // Keyframes
     let keyframes attributeList = keyframes attributeList
@@ -203,7 +202,7 @@ module style =
     type colorAdjust = ColorAdjust
     let colorAdjust' adjust = ColorAdjust' adjust
 
-    type color = Color
+    type color = Color.Color
     let color' color = Color' color
 
     // Font
@@ -708,8 +707,8 @@ module style =
     let all' all = All' all
 
     // Grid
-    type repeat = Types.Repeat
-    type minMax = Types.MinMax
+    type repeat = Types.Grid.Repeat
+    type minMax = Types.Grid.MinMax
 
     type gridAutoFlow = GridAutoFlow
     let gridAutoFlow' gridAutoFlow = GridAutoFlow' gridAutoFlow

@@ -1,9 +1,8 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type BoxShadow =
-        | Color' of Types.Size * Types.Size * Types.Color
-        | BlurColor of Types.Size * Types.Size * Types.Size * Types.Color
-        | BlurSpreadColor of Types.Size * Types.Size * Types.Size * Types.Size * Types.Color
+        | Color' of Size * Size * Color
+        | BlurColor of Size * Size * Size * Color
+        | BlurSpreadColor of Size * Size * Size * Size * Color
         | Inset of BoxShadow

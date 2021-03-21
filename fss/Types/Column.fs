@@ -1,16 +1,15 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type ColumnSpan =
         | All
-        interface Types.IColumnSpan
+        interface IColumnSpan
 
     type ColumnRuleWidth =
         | Thin
         | Medium
         | Thick
-        interface Types.IColumnRuleWidth
+        interface IColumnRuleWidth
 
     type ColumnRuleStyle =
         | Hidden
@@ -22,9 +21,9 @@ module Types =
         | Ridge
         | Inset
         | Outset
-        interface Types.IColumnRuleStyle
+        interface IColumnRuleStyle
 
     type ColumnFill =
         | Balance
         | BalanceAll
-        interface Types.IColumnFill
+        interface IColumnFill

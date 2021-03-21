@@ -1,12 +1,11 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type ScrollBehavior =
         | Smooth
-        interface Types.IScrollBehavior
+        interface IScrollBehavior
 
     type OverscrollBehavior =
         | Contain
-        interface Types.IOverscrollBehaviorX
-        interface Types.IOverscrollBehaviorY
+        interface IOverscrollBehaviorX
+        interface IOverscrollBehaviorY

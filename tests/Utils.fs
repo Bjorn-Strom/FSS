@@ -9,7 +9,7 @@ module Utils =
         testCase testName <| fun _ ->
             let actual =
                 attributeList
-                |> List.map GlobalValue.CssValue
+                |> List.map Types.masterTypeHelpers.CssValue
 
             Expect.equal actual correct testName
 
@@ -17,11 +17,11 @@ module Utils =
         testCase testName <| fun _ ->
             let actual =
                 attributeList
-                |> List.map GlobalValue.CssValue
+                |> List.map Types.masterTypeHelpers.CssValue
                 |> List.map (fun (x, y) ->
                     let properY: string =
                         y :?> Types.CssProperty list
-                        |> List.map GlobalValue.CssValue
+                        |> List.map Types.masterTypeHelpers.CssValue
                         |> List.map (fun x -> $"{x}")
                         |> String.concat ","
                     x ==> properY)
@@ -32,10 +32,10 @@ module Utils =
         testCase testName <| fun _ ->
             Expect.equal actual expected testName
 
-    let testKeyframes (testName: string) (actual: KeyframeAttribute list) (expected: string list) =
+    let testKeyframes (testName: string) (actual: Keyframes.KeyframeAttribute list) (expected: string list) =
         let actual =
             actual
-            |> createAnimationRecord
+            |> Keyframes.createAnimationRecord
             |> List.map (fun (key, value) ->
                       sprintf "%s %A" key (Fable.Core.JS.JSON.stringify(value)
                               .Replace("\\", "")

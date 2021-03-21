@@ -7,39 +7,39 @@ module Animation =
     let private animationDirectionToString (direction: Types.IAnimationDirection) =
         match direction with
             | :? Types.AnimationDirection as d -> Utilities.Helpers.duToKebab d
-            | :? Types.Keywords as k -> Types.keywordsToString k
-            | :? Types.Normal -> Types.normal
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+            | :? Types.Normal -> Types.masterTypeHelpers.normal
             | _ -> "Unknown animation direction"
 
     let private animationFillModeToString (fillMode: Types.IAnimationFillMode) =
         match fillMode with
             | :? Types.AnimationFillMode as a -> Utilities.Helpers.duToLowercase a
-            | :? Types.None' -> Types.none
+            | :? Types.None' -> Types.masterTypeHelpers.none
             | _ -> "Unknown fill mode"
 
     let private playStateTypeToString (playState: Types.IAnimationPlayState) =
         match playState with
         | :? Types.AnimationPlayState as a -> Utilities.Helpers.duToLowercase a
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown animation play state"
 
     let private nameToString (name: Types.IAnimationName) =
         match name with
-        | :? Types.String as s -> Types.StringToString s
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.CssString as s -> Types.masterTypeHelpers.StringToString s
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown animation name"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
     type AnimationDelay =
-        static member Value (delay: Types.Time) = Types.cssValue Types.Property.AnimationDelay (Types.timeToString delay)
+        static member Value (delay: Types.Time) = Types.propertyHelpers.cssValue Types.Property.AnimationDelay (Types.unitHelpers.timeToString delay)
 
     /// <summary>Specifies an amount of time to wait before starting the animation. </summary>
     /// <param name="delay"> Amount of time to wait.</param>
     /// <returns>Css property for fss.</returns>
     let AnimationDelay' (delay: Types.Time) = AnimationDelay.Value(delay)
 
-    let private directionCssValue value = Types.cssValue Types.Property.AnimationDirection value
+    let private directionCssValue value = Types.propertyHelpers.cssValue Types.Property.AnimationDirection value
     let private directionCssValue' value =
         value
         |> animationDirectionToString
@@ -68,12 +68,12 @@ module Animation =
     let AnimationDirection' (direction: Types.IAnimationDirection) = direction |> directionCssValue'
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
-    let private animationDurationCssValue value = Types.cssValue Types.Property.AnimationDuration value
+    let private animationDurationCssValue value = Types.propertyHelpers.cssValue Types.Property.AnimationDuration value
     type AnimationDuration =
-        static member Value (duration: Types.Time) = animationDurationCssValue (Types.timeToString duration)
+        static member Value (duration: Types.Time) = animationDurationCssValue (Types.unitHelpers.timeToString duration)
         static member Values (durations: Types.Time list) =
             durations
-            |> Utilities.Helpers.combineComma Types.timeToString
+            |> Utilities.Helpers.combineComma Types.unitHelpers.timeToString
             |> animationDurationCssValue
 
     /// <summary>Specifies an amount of time for one animation cycle to complete. </summary>
@@ -82,7 +82,7 @@ module Animation =
     let AnimationDuration' (duration: Types.Time) = AnimationDuration.Value(duration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
-    let private fillModeCssValue value = Types.cssValue Types.Property.AnimationFillMode value
+    let private fillModeCssValue value = Types.propertyHelpers.cssValue Types.Property.AnimationFillMode value
     let private fillModeCssValue' value =
         value
         |> animationFillModeToString
@@ -104,19 +104,19 @@ module Animation =
     let AnimationFillMode' (fillMode: Types.IAnimationFillMode) = fillMode |> AnimationFillMode.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count
-    let private iterationCountCssValue value = Types.cssValue Types.Property.AnimationIterationCount value
+    let private iterationCountCssValue value = Types.propertyHelpers.cssValue Types.Property.AnimationIterationCount value
     let private iterationCountCssValue' value =
         value
-        |> Types.iterationCountToString
+        |> Types.animationHelpers.iterationCountToString
         |> iterationCountCssValue
 
     type AnimationIterationCount =
         static member Value (count: Types.IAnimationIterationCount) = count |> iterationCountCssValue'
         static member Values (values: Types.IAnimationIterationCount list) =
             values
-            |> Utilities.Helpers.combineComma Types.iterationCountToString
+            |> Utilities.Helpers.combineComma Types.animationHelpers.iterationCountToString
             |> iterationCountCssValue
-        static member Infinite = Types.Infinite |> Types.iterationCountToString |> iterationCountCssValue
+        static member Infinite = Types.Infinite |> Types.animationHelpers.iterationCountToString |> iterationCountCssValue
 
     /// <summary>How many times should an animation be played.</summary>
     /// <param name="iterationCount">
@@ -128,7 +128,7 @@ module Animation =
     let AnimationIterationCount' (iterationCount: Types.IAnimationIterationCount) = AnimationIterationCount.Value iterationCount
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
-    let private nameValue value = Types.cssValue Types.Property.AnimationName value
+    let private nameValue value = Types.propertyHelpers.cssValue Types.Property.AnimationName value
     let private nameValue' value =
         value
         |> nameToString
@@ -156,7 +156,7 @@ module Animation =
     let AnimationName' (name: Types.IAnimationName) = AnimationName.Name(name)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
-    let private playStateCssValue value = Types.cssValue Types.Property.AnimationPlayState value
+    let private playStateCssValue value = Types.propertyHelpers.cssValue Types.Property.AnimationPlayState value
     let private playStateCssValue' value =
         value
         |> playStateTypeToString
@@ -181,23 +181,23 @@ module Animation =
     let AnimationPlayState' (playState: Types.IAnimationPlayState) = playState |> AnimationPlayState.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
-    let private timingFunctionCssValue value = Types.cssValue Types.Property.AnimationTimingFunction value
+    let private timingFunctionCssValue value = Types.propertyHelpers.cssValue Types.Property.AnimationTimingFunction value
     let private timingFunctionCssValue' value =
         value
-        |> Types.timingToString
+        |> Types.timingFunctionHelpers.timingToString
         |> timingFunctionCssValue
     type AnimationTimingFunction =
-        static member Value (timingFunction: Types.Timing) = timingFunction |> Types.timingToString
-        static member Values (timings: Types.Timing list) = timingFunctionCssValue <| Utilities.Helpers.combineComma Types.timingToString timings
-        static member Ease = Types.Ease |> timingFunctionCssValue
-        static member EaseIn = Types.EaseIn |> timingFunctionCssValue
-        static member EaseOut = Types.EaseOut |> timingFunctionCssValue
-        static member EaseInOut = Types.EaseInOut |> timingFunctionCssValue
-        static member Linear = Types.Linear |> timingFunctionCssValue
-        static member StepStart = Types.StepStart |> timingFunctionCssValue
-        static member StepEnd = Types.StepEnd |> timingFunctionCssValue
+        static member Value (timingFunction: Types.Timing) = timingFunction |> Types.timingFunctionHelpers.timingToString
+        static member Values (timings: Types.Timing list) = timingFunctionCssValue <| Utilities.Helpers.combineComma Types.timingFunctionHelpers.timingToString timings
+        static member Ease = Types.Ease |> timingFunctionCssValue'
+        static member EaseIn = Types.EaseIn |> timingFunctionCssValue'
+        static member EaseOut = Types.EaseOut |> timingFunctionCssValue'
+        static member EaseInOut = Types.EaseInOut |> timingFunctionCssValue'
+        static member Linear = Types.Linear |> timingFunctionCssValue'
+        static member StepStart = Types.StepStart |> timingFunctionCssValue'
+        static member StepEnd = Types.StepEnd |> timingFunctionCssValue'
         static member CubicBezier (p1: float, p2:float, p3:float, p4:float) =
-            Types.CubicBezier(p1,p2,p3,p4) |> timingFunctionCssValue
+            Types.CubicBezier(p1,p2,p3,p4) |> timingFunctionCssValue'
         static member Step (steps: int) = Types.Steps(steps) |> timingFunctionCssValue
         static member Step (steps: int, jumpTerm: Types.Step) =
             Types.StepsWithTerm(steps, jumpTerm) |> timingFunctionCssValue

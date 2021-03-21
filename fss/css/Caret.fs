@@ -4,12 +4,12 @@ namespace Fss
 module Caret =
     let private caretColorToString (caretColor: Types.ICaretColor) =
         match caretColor with
-        | :? Types.Color as c -> Types.colorToString c
-        | :? Types.Auto -> Types.auto
+        | :? Types.Color as c -> Types.colorHelpers.colorToString c
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown caret color"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
-    let private caretColorValue value = Types.cssValue Types.Property.CaretColor value
+    let private caretColorValue value = Types.propertyHelpers.cssValue Types.Property.CaretColor value
     let private caretColorValue' value =
         value
         |> caretColorToString

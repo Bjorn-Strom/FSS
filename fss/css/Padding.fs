@@ -5,13 +5,13 @@ namespace Fss
 module Padding =
     let private paddingToString (padding: Types.IPadding) =
         match padding with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown padding"
 
-    let private paddingValue value = Types.cssValue Types.Property.Padding value
+    let private paddingValue value = Types.propertyHelpers.cssValue Types.Property.Padding value
     let private paddingValue' value =
         value
         |> paddingToString
@@ -57,7 +57,7 @@ module Padding =
     /// <returns>Css property for fss.</returns>
     let Padding' (padding: Types.IPadding) = Padding.Value(padding)
 
-    let private paddingTopValue value = Types.cssValue Types.Property.PaddingTop value
+    let private paddingTopValue value = Types.propertyHelpers.cssValue Types.Property.PaddingTop value
     let private paddingTopValue' value =
         value
         |> paddingToString
@@ -82,7 +82,7 @@ module Padding =
     /// <returns>Css property for fss.</returns>
     let PaddingTop' (top: Types.IPadding) = PaddingTop.Value(top)
 
-    let private paddingRightValue value = Types.cssValue Types.Property.PaddingRight value
+    let private paddingRightValue value = Types.propertyHelpers.cssValue Types.Property.PaddingRight value
     let private paddingRightValue' value =
         value
         |> paddingToString
@@ -107,7 +107,7 @@ module Padding =
     /// <returns>Css property for fss.</returns>
     let PaddingRight' (right: Types.IPadding) = PaddingRight.Value(right)
 
-    let private paddingBottomValue value = Types.cssValue Types.Property.PaddingBottom value
+    let private paddingBottomValue value = Types.propertyHelpers.cssValue Types.Property.PaddingBottom value
     let private paddingBottomValue' value =
         value
         |> paddingToString
@@ -132,7 +132,7 @@ module Padding =
     /// <returns>Css property for fss.</returns>
     let PaddingBottom' (bottom: Types.IPadding) = PaddingBottom.Value(bottom)
 
-    let private paddingLeftValue value = Types.cssValue Types.Property.PaddingLeft value
+    let private paddingLeftValue value = Types.propertyHelpers.cssValue Types.Property.PaddingLeft value
     let private paddingLeftValue' value =
         value
         |> paddingToString
@@ -157,7 +157,7 @@ module Padding =
     /// <returns>Css property for fss.</returns>
     let PaddingLeft' (left: Types.IPadding) = PaddingLeft.Value(left)
 
-    let private paddingInlineStartValue value = Types.cssValue Types.Property.PaddingInlineStart value
+    let private paddingInlineStartValue value = Types.propertyHelpers.cssValue Types.Property.PaddingInlineStart value
     let private paddingInlineStartValue' value =
         value
         |> paddingToString
@@ -183,7 +183,7 @@ module Padding =
     /// <returns>Css property for fss.</returns>
     let PaddingInlineStart' (padding: Types.IPadding) = PaddingInlineStart.Value(padding)
 
-    let private paddingInlineEndValue value = Types.cssValue Types.Property.PaddingInlineEnd value
+    let private paddingInlineEndValue value = Types.propertyHelpers.cssValue Types.Property.PaddingInlineEnd value
     let private paddingInlineEndValue' value =
         value
         |> paddingToString
@@ -209,7 +209,7 @@ module Padding =
     /// <returns>Css property for fss.</returns>
     let PaddingInlineEnd' (padding: Types.IPadding) = PaddingInlineEnd.Value(padding)
 
-    let private paddingBlockStartValue value = Types.cssValue Types.Property.PaddingBlockStart value
+    let private paddingBlockStartValue value = Types.propertyHelpers.cssValue Types.Property.PaddingBlockStart value
     let private paddingBlockStartValue' value =
         value
         |> paddingToString
@@ -235,7 +235,7 @@ module Padding =
     /// <returns>Css property for fss.</returns>
     let PaddingBlockStart' (padding: Types.IPadding) = PaddingBlockStart.Value(padding)
 
-    let private paddingBlockEndValue value = Types.cssValue Types.Property.PaddingBlockEnd value
+    let private paddingBlockEndValue value = Types.propertyHelpers.cssValue Types.Property.PaddingBlockEnd value
     let private paddingBlockEndValue' value =
         value
         |> paddingToString

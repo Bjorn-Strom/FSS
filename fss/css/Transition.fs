@@ -4,36 +4,36 @@
 module Transition =
     let private transitionToString (transition: Types.ITransition) =
         match transition with
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transition"
 
     let private delayToString (delay: Types.ITransitionDelay) =
         match delay with
-        | :? Types.Time as t -> Types.timeToString t
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Time as t -> Types.unitHelpers.timeToString t
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transition delay"
 
     let private durationToString (duration: Types.ITransitionDuration) =
         match duration with
-        | :? Types.Time as t -> Types.timeToString t
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Time as t -> Types.unitHelpers.timeToString t
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transition duration"
 
     let private timingToString (duration: Types.ITransitionTimingFunction) =
         match duration with
-        | :? TimingFunction.TimingFunction as t -> Types.timingToString t
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? TimingFunction.TimingFunction as t -> Types.timingFunctionHelpers.timingToString t
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transition timing"
 
     let private propertyToString (property: Types.ITransitionProperty) =
         match property with
-        | :? Types.Property as p -> Types.toKebabCase p
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Property.Property as p -> Types.propertyHelpers.toKebabCase p
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transition property"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition
-    let private transitionValue value = Types.cssValue Types.Property.Transition value
+    let private transitionValue value = Types.propertyHelpers.cssValue Types.Property.Transition value
     let private transitionValue' value =
         value
         |> transitionToString
@@ -56,7 +56,7 @@ module Transition =
     let Transition' (transition: Types.ITransition) = Transition.Value(transition)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
-    let private delayValue value = Types.cssValue Types.Property.TransitionDelay value
+    let private delayValue value = Types.propertyHelpers.cssValue Types.Property.TransitionDelay value
     let private delayValue' value =
         value
         |> delayToString
@@ -81,7 +81,7 @@ module Transition =
     let TransitionDelay' (delay: Types.ITransitionDelay) = TransitionDelay.Value(delay)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duraion
-    let private transitionDurationValue value = Types.cssValue Types.Property.TransitionDuration value
+    let private transitionDurationValue value = Types.propertyHelpers.cssValue Types.Property.TransitionDuration value
     let private transitionDurationValue' value =
         value
         |> durationToString
@@ -109,7 +109,7 @@ module Transition =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
     let private transitionTimingFunction value =
         printfn $"{value}"
-        Types.cssValue Types.Property.TransitionTimingFunction value
+        Types.propertyHelpers.cssValue Types.Property.TransitionTimingFunction value
     let private transitionTimingFunction' value =
         value
         |> timingToString
@@ -117,7 +117,7 @@ module Transition =
     type TransitionTimingFunction =
         static member Value (timingFunction: Types.ITransitionTimingFunction) = timingFunction |> transitionTimingFunction'
         static member Value (timingFunctions: Types.ITransitionTimingFunction list) =
-             Utilities.Helpers.combineComma Types.timingToString timingFunctions |> transitionTimingFunction
+             Utilities.Helpers.combineComma Types.timingFunctionHelpers.timingToString timingFunctions |> transitionTimingFunction
         static member Ease = TimingFunction.TimingFunction.Ease |> transitionTimingFunction
         static member EaseIn = TimingFunction.TimingFunction.EaseIn |> transitionTimingFunction
         static member EaseOut = TimingFunction.TimingFunction.EaseOut |> transitionTimingFunction
@@ -145,14 +145,14 @@ module Transition =
     let TransitionTimingFunction' (timingFunction: Types.ITransitionTimingFunction) = TransitionTimingFunction.Value(timingFunction)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property
-    let private transitionProperty value = Types.cssValue Types.Property.TransitionProperty value
+    let private transitionProperty value = Types.propertyHelpers.cssValue Types.Property.TransitionProperty value
     let private transitionProperty' value =
         value
         |> propertyToString
         |> transitionProperty
     type TransitionProperty =
         static member Value (property: Types.ITransitionProperty) = property |> transitionProperty'
-        static member Values (properties: Types.Property list) =
+        static member Values (properties: Types.Property.Property list) =
              properties
              |> Utilities.Helpers.combineComma propertyToString
              |> transitionProperty
@@ -222,7 +222,7 @@ module Transition =
         static member CaretColor = Types.Property.CaretColor |> transitionProperty'
         static member Clear = Types.Property.Clear |> transitionProperty'
         static member Clip = Types.Property.Clip |> transitionProperty'
-        static member Color = Types.Property.Color |> transitionProperty'
+        static member Color = Types.Property.Color' |> transitionProperty'
         static member Columns = Types.Property.Columns |> transitionProperty'
         static member ColumnCount = Types.Property.ColumnCount |> transitionProperty'
         static member ColumnFill = Types.Property.ColumnFill |> transitionProperty'

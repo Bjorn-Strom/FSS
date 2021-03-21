@@ -5,12 +5,12 @@ module PointerEvents =
     let private eventToString (event: Types.IPointerEvents) =
         match event with
         | :? Types.PointerEvents as p -> Utilities.Helpers.duToCamel p
-        | :? Types.Auto -> Types.auto
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown pointer event"
 
-    let private pointerEventsValue value = Types.cssValue Types.Property.PointerEvents value
+    let private pointerEventsValue value = Types.propertyHelpers.cssValue Types.Property.PointerEvents value
     let private pointerEventsValue' value =
         value
         |> eventToString

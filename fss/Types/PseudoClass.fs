@@ -1,9 +1,8 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type NthChildType =
         | Odd
         | Even
-        interface Types.INthChild
+        interface INthChild
 

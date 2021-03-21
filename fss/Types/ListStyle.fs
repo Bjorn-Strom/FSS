@@ -1,15 +1,14 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type ListStyleImage =
         | ListStyleImage of string
-        interface Types.IListStyleImage
+        interface IListStyleImage
 
     type ListStylePosition =
         | Inside
         | Outside
-        interface Types.IListStylePosition
+        interface IListStylePosition
 
     type ListStyleType =
         | Disc
@@ -67,13 +66,15 @@ module Types =
         | UpperArmenian
         | DisclosureOpen
         | DisclosureClosed
-        interface Types.IListStyleType
+        interface IListStyleType
 
-    let styleTypeToString (styleType: Types.IListStyleType) =
-        match styleType with
-        | :? ListStyleType as l -> Fss.Utilities.Helpers.duToKebab l
-        | :? Types.CounterStyle as c -> Types.counterStyleToString c
-        | :? Types.String as s -> Types.StringToString s |> sprintf "'%s'"
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
-        | _ -> "Unknown list style type"
+    [<AutoOpen>]
+    module listStyleHelpers =
+        let inline styleTypeToString (styleType: IListStyleType) =
+            match styleType with
+            | :? ListStyleType as l -> Fss.Utilities.Helpers.duToKebab l
+            | :? CounterStyle as c -> counterStyleToString c
+            | :? CssString as s -> StringToString s |> sprintf "'%s'"
+            | :? Keywords as k -> keywordsToString k
+            | :? None' -> none
+            | _ -> "Unknown list style type"

@@ -2,7 +2,7 @@
 
 [<AutoOpen>]
 module TimingFunction =
-    let private timingToString timing = Types.timingToString timing
+    let private timingToString timing = Fss.Types.timingFunctionHelpers.timingToString timing
     type TimingFunction =
         interface Types.ITransitionTimingFunction
         static member Ease = Types.Ease |> timingToString

@@ -4,18 +4,18 @@ namespace Fss
 module Typography =
     let private orphansToString (orphans: Types.IOrphans) =
         match orphans with
-        | :? Types.Int as i -> Types.IntToString i
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.CssInt as i -> Types.masterTypeHelpers.IntToString i
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown orphans"
 
     let private widowsToString (widows: Types.IWidows) =
         match widows with
-        | :? Types.Int as i -> Types.IntToString i
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.CssInt as i -> Types.masterTypeHelpers.IntToString i
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown widows"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/orphans
-    let private orphansValue value = Types.cssValue Types.Property.Orphans value
+    let private orphansValue value = Types.propertyHelpers.cssValue Types.Property.Orphans value
     let private orphansValue' value =
         value
         |> orphansToString
@@ -38,7 +38,7 @@ module Typography =
     let Orphans' (orphans: Types.IOrphans) = orphans |> Orphans.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/widows
-    let private widowsValue value = Types.cssValue Types.Property.Widows value
+    let private widowsValue value = Types.propertyHelpers.cssValue Types.Property.Widows value
     let private widowsValue' value =
         value
         |> widowsToString

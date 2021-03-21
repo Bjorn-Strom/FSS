@@ -5,10 +5,10 @@ module All =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/all
     let private stringifyAll (all: Types.IAll) =
         match all with
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private allValue value = Types.cssValue Types.Property.All value
+    let private allValue value = Types.propertyHelpers.cssValue Types.Property.All value
     let private allValue' value =
         value
         |> stringifyAll

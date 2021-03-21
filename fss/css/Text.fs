@@ -5,211 +5,211 @@ module Text =
     let private textAlignToString (alignment: Types.ITextAlign) =
         match alignment with
         | :? Types.TextAlign as t -> Utilities.Helpers.duToKebab t
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown text alignment"
 
     let private textAlignLastToString (alignment: Types.ITextAlignLast) =
         match alignment with
         | :? Types.TextAlignLast as t -> Utilities.Helpers.duToLowercase t
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown text alignment last"
 
     let private decorationLineToString (decorationLine: Types.ITextDecorationLine) =
         match decorationLine with
         | :? Types.TextDecorationLine as t -> Utilities.Helpers.duToKebab t
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown text decoration line"
 
     let private thicknessToString (thickness: Types.ITextDecorationThickness) =
         match thickness with
         | :? Types.TextDecorationThickness -> "from-font"
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | _ -> "Unknown text decoration thickness"
 
     let private decorationToString (decoration: Types.ITextDecoration) =
         match decoration with
-        | :? Types.None' -> Types.none
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown text decoration"
 
     let private decorationStyleToString (style: Types.ITextDecorationStyle) =
         match style with
         | :? Types.TextDecorationStyle as t -> Utilities.Helpers.duToLowercase t
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown text decoration style"
 
     let private decorationSkipToString (skip: Types.ITextDecorationSkip) =
         match skip with
         | :? Types.DecorationSkip as t -> Utilities.Helpers.duToKebab t
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown text decoration skip"
 
     let private decorationSkipInkToString (skipInk: Types.ITextDecorationSkipInk) =
         match skipInk with
         | :? Types.TextDecorationSkipInk -> "all"
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
-        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown text decoration skip ink"
 
     let private textTransformToString (transform: Types.ITextTransform) =
         match transform with
         | :? Types.TextTransform as t -> Utilities.Helpers.duToKebab t
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown text transform"
 
     let private indentToString (indent: Types.ITextIndent) =
         match indent with
         | :? Types.TextIndent as t -> Utilities.Helpers.duToKebab t
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | _ -> "Unknown text indent"
 
     let private textShadowToString =
         function
-            | Types.XY (x,y) -> sprintf "%s %s" (Types.sizeToString x) (Types.sizeToString y)
-            | Types.ColorXY (c,x,y) -> sprintf "%s %s %s" (Types.colorToString c) (Types.sizeToString x) (Types.sizeToString y)
+            | Types.XY (x,y) -> sprintf "%s %s" (Types.unitHelpers.sizeToString x) (Types.unitHelpers.sizeToString y)
+            | Types.ColorXY (c,x,y) -> sprintf "%s %s %s" (Types.colorHelpers.colorToString c) (Types.unitHelpers.sizeToString x) (Types.unitHelpers.sizeToString y)
             | Types.ColorXYBlur (c,x,y,b) ->
                 sprintf "%s %s %s %s"
-                    (Types.colorToString c)
-                    (Types.sizeToString x)
-                    (Types.sizeToString y)
-                    (Types.sizeToString b)
+                    (Types.colorHelpers.colorToString c)
+                    (Types.unitHelpers.sizeToString x)
+                    (Types.unitHelpers.sizeToString y)
+                    (Types.unitHelpers.sizeToString b)
 
     let private emphasisToString (emphasis: Types.ITextEmphasis) =
         match emphasis with
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "unknown text emphasis"
 
     let private emphasisPositionToString (emphasisPosition: Types.ITextEmphasisPosition) =
         match emphasisPosition with
         | :? Types.EmphasisPosition as e -> Utilities.Helpers.duToLowercase e
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown text emphasis position"
 
     let private textOverflowToString (overflow: Types.ITextOverflow) =
         match overflow with
         | :? Types.TextOverflow as t -> Utilities.Helpers.duToLowercase t
-        | :? Types.String as s -> Types.StringToString s |> sprintf "\"%s\""
+        | :? Types.CssString as s -> Types.masterTypeHelpers.StringToString s |> sprintf "\"%s\""
         | _ -> "Unknown text overflow"
 
     let private emphasisStyleToString (emphasisStyle: Types.ITextEmphasisStyle) =
         let stringifyStyle (style: Types.TextEmphasisStyle) =
             match style with
-                | FilledSesame -> "filled sesame"
-                | OpenSesame -> "open sesame"
-                | _ -> Utilities.Helpers.duToKebab style
+            | Types.TextEmphasisStyle.FilledSesame -> "filled sesame"
+            | Types.TextEmphasisStyle.OpenSesame -> "open sesame"
+            | _ -> Utilities.Helpers.duToKebab style
 
         match emphasisStyle with
         | :? Types.TextEmphasisStyle as t -> stringifyStyle t
-        | :? Types.String as s -> Types.StringToString s |> sprintf "'%s'"
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.None' -> Types.none
+        | :? Types.CssString as s -> Types.masterTypeHelpers.StringToString s |> sprintf "'%s'"
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "unknown text emphasis style"
 
     let private underlinePositionToString (underlinePosition: Types.ITextUnderlinePosition) =
         match underlinePosition with
         | :? Types.UnderlinePosition as t -> Utilities.Helpers.duToKebab t
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "unknown text underline position"
 
     let private textEmphasisColorToString (color: Types.ITextEmphasisColor) =
         match color with
-            | :? Types.Color as c -> Types.colorToString c
-            | :? Types.Keywords as k -> Types.keywordsToString k
+            | :? Types.Color as c -> Types.colorHelpers.colorToString c
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
             | _ -> "unknown text emphasis color"
 
     let private underlineOffsetToString (underlineOffset: Types.ITextUnderlineOffset) =
         match underlineOffset with
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | _ -> "unknown text underline offset"
 
     let private quoteToString (quote: Types.IQuotes) =
         match quote with
-        | :? Types.String as s -> Types.StringToString s
-        | :? Types.None' -> Types.none
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.CssString as s -> Types.masterTypeHelpers.StringToString s
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown quotes"
 
     let private hyphensToString (hyphens: Types.IHyphens) =
         match hyphens with
         | :? Types.Hyphens -> "manual"
-        | :? Types.None' -> Types.none
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown hyphens"
 
     let private textDecorationColorToString (color: Types.ITextDecorationColor) =
         match color with
-            | :? Types.Color as c -> Types.colorToString c
-            | :? Types.Keywords as k -> Types.keywordsToString k
+            | :? Types.Color as c -> Types.colorHelpers.colorToString c
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
             | _ -> "unknown text decoration color"
 
     let private textSizeAdjustToString (size: Types.ITextSizeAdjust) =
         match size with
-        | :? Types.None' -> Types.none
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | _ -> "Unknown text size adjust"
 
     let private tabSizeToString (tabSize: Types.ITabSize) =
         match tabSize with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Int as i -> Types.IntToString i
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.CssInt as i -> Types.masterTypeHelpers.IntToString i
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown tab size"
 
     let private textOrientationToString (textOrientation: Types.ITextOrientation) =
         match textOrientation with
         | :? Types.TextOrientation as t -> Utilities.Helpers.duToKebab t
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown text orientation"
 
     let private textRenderingToString (textRendering: Types.ITextRendering) =
         match textRendering with
         | :? Types.TextRendering as t -> Utilities.Helpers.duToKebab t
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown text rendering"
 
     let private textJustifyToString (textJustify: Types.ITextJustify) =
         match textJustify with
         | :? Types.TextJustify as j -> Utilities.Helpers.duToKebab j
-        | :? Types.None' -> Types.none
-        | :? Types.Auto -> Types.auto
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown text justification"
 
     let private whitespaceToString (whitespace: Types.IWhiteSpace) =
         match whitespace with
         | :? Types.WhiteSpace as ws -> Utilities.Helpers.duToKebab ws
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown whitespace"
 
     let private userSelectToString (userSelect: Types.IUserSelect) =
         match userSelect with
         | :? Types.UserSelect as u -> Utilities.Helpers.duToLowercase u
-        | :? Types.None' -> Types.none
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown user select"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
-    let private alignCssValue value = Types.cssValue Types.Property.TextAlign value
+    let private alignCssValue value = Types.propertyHelpers.cssValue Types.Property.TextAlign value
     let private alignCssValue' value =
         value
         |> textAlignToString
@@ -241,7 +241,7 @@ module Text =
     let TextAlign' (align: Types.ITextAlign) = TextAlign.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
-    let private alignLastCssValue value = Types.cssValue Types.Property.TextAlignLast value
+    let private alignLastCssValue value = Types.propertyHelpers.cssValue Types.Property.TextAlignLast value
     let private alignLastCssValue' value =
         value
         |> textAlignLastToString
@@ -271,7 +271,7 @@ module Text =
     let TextAlignLast' (align: Types.ITextAlignLast) = TextAlignLast.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
-    let private decorationValue value = Types.cssValue Types.Property.TextDecoration value
+    let private decorationValue value = Types.propertyHelpers.cssValue Types.Property.TextDecoration value
     let private decorationValue' value =
         value
         |> decorationToString
@@ -289,7 +289,7 @@ module Text =
     let TextDecoration' (decoration: Types.ITextDecoration) = TextDecoration.Value(decoration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
-    let private lineCssValue value = Types.cssValue Types.Property.TextDecorationLine value
+    let private lineCssValue value = Types.propertyHelpers.cssValue Types.Property.TextDecorationLine value
     let private lineCssValue' value =
         value
         |> decorationLineToString
@@ -323,7 +323,7 @@ module Text =
     let TextDecorationLine' (decoration: Types.ITextDecorationLine) = TextDecorationLine.Value(decoration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
-    let private thicknessValue value = Types.cssValue Types.Property.TextDecorationThickness value
+    let private thicknessValue value = Types.propertyHelpers.cssValue Types.Property.TextDecorationThickness value
     let private thicknessValue' value =
         value
         |> thicknessToString
@@ -353,7 +353,7 @@ module Text =
     let TextDecorationThickness' (thickness: Types.ITextDecorationThickness) = TextDecorationThickness.Value(thickness)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
-    let private decorationStyleValue value = Types.cssValue Types.Property.TextDecorationStyle value
+    let private decorationStyleValue value = Types.propertyHelpers.cssValue Types.Property.TextDecorationStyle value
     let private decorationStyleValue' value =
         value
         |> decorationStyleToString
@@ -382,7 +382,7 @@ module Text =
     let TextDecorationStyle' (decoration: Types.ITextDecorationStyle) = TextDecorationStyle.Value(decoration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
-    let private skipValue value = Types.cssValue Types.Property.TextDecorationSkip value
+    let private skipValue value = Types.propertyHelpers.cssValue Types.Property.TextDecorationSkip value
     let private skipValue' value =
         value
         |> decorationSkipToString
@@ -422,7 +422,7 @@ module Text =
     let TextDecorationSkip' (skip: Types.ITextDecorationSkip) = TextDecorationSkip.Value(skip)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
-    let private skipInkValue value = Types.cssValue Types.Property.TextDecorationSkipInk value
+    let private skipInkValue value = Types.propertyHelpers.cssValue Types.Property.TextDecorationSkipInk value
     let private skipInkValue' value =
         value
         |> decorationSkipInkToString
@@ -451,7 +451,7 @@ module Text =
     let TextDecorationSkipInk' (skip: Types.ITextDecorationSkipInk) = TextDecorationSkipInk.Value(skip)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
-    let private transformValue value = Types.cssValue Types.Property.TextTransform value
+    let private transformValue value = Types.propertyHelpers.cssValue Types.Property.TextTransform value
     let private transformValue' value =
         value
         |> textTransformToString
@@ -482,7 +482,7 @@ module Text =
     let TextTransform' (transform: Types.ITextTransform) = TextTransform.Value(transform)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
-    let private indentCssValue value = Types.cssValue Types.Property.TextIndent value
+    let private indentCssValue value = Types.propertyHelpers.cssValue Types.Property.TextIndent value
     let private indentCssValue' value =
         value
         |> indentToString
@@ -515,7 +515,7 @@ module Text =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
     // https://css-tricks.com/almanac/properties/t/text-shadow/
-    let private shadowValue value = Types.cssValue Types.Property.TextShadow value
+    let private shadowValue value = Types.propertyHelpers.cssValue Types.Property.TextShadow value
 
     type TextShadow =
         static member XY (xOffset: Types.Size, yOffset: Types.Size) =
@@ -532,7 +532,7 @@ module Text =
         |> shadowValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
-    let private overflowValue value = Types.cssValue Types.Property.TextOverflow value
+    let private overflowValue value = Types.propertyHelpers.cssValue Types.Property.TextOverflow value
     let private overflowValue' value =
         value
         |> textOverflowToString
@@ -553,7 +553,7 @@ module Text =
     let TextOverflow' (overflow: Types.ITextOverflow) = TextOverflow.Value(overflow)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
-    let private emphasisValue value = Types.cssValue Types.Property.TextEmphasis value
+    let private emphasisValue value = Types.propertyHelpers.cssValue Types.Property.TextEmphasis value
     let private emphasisValue' value =
         value
         |> emphasisToString
@@ -579,7 +579,7 @@ module Text =
     let TextEmphasis' (emphasis: Types.ITextEmphasis) = TextEmphasis.Value emphasis
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
-    let private emphasisPositionValue value = Types.cssValue Types.Property.TextEmphasisPosition value
+    let private emphasisPositionValue value = Types.propertyHelpers.cssValue Types.Property.TextEmphasisPosition value
     let private emphasisPositionValue' value =
         value
         |> emphasisPositionToString
@@ -608,7 +608,7 @@ module Text =
     let TextEmphasisPosition' (e1: Types.ITextEmphasisPosition) (e2: Types.ITextEmphasisPosition) = TextEmphasisPosition.Value(e1, e2)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
-    let private emphasisStyleValue value = Types.cssValue Types.Property.TextEmphasisStyle value
+    let private emphasisStyleValue value = Types.propertyHelpers.cssValue Types.Property.TextEmphasisStyle value
     let private emphasisStyleValue' value =
         value
         |> emphasisStyleToString
@@ -643,7 +643,7 @@ module Text =
     let TextEmphasisStyle' (style: Types.ITextEmphasisStyle) = TextEmphasisStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-position
-    let private underlinePositionCssValue value = Types.cssValue Types.Property.TextUnderlinePosition value
+    let private underlinePositionCssValue value = Types.propertyHelpers.cssValue Types.Property.TextUnderlinePosition value
     let private underlinePositionCssValue' value =
         value
         |> underlinePositionToString
@@ -681,7 +681,7 @@ module Text =
     let TextUnderlinePosition' (position: Types.ITextUnderlinePosition) = TextUnderlinePosition.Value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
-    let private offsetValue value = Types.cssValue Types.Property.TextUnderlineOffset value
+    let private offsetValue value = Types.propertyHelpers.cssValue Types.Property.TextUnderlineOffset value
     let private offsetValue' value =
         value
         |> underlineOffsetToString
@@ -707,7 +707,7 @@ module Text =
     let TextUnderlineOffset' (offset: Types.ITextUnderlineOffset) = TextUnderlineOffset.Value(offset)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/quotes
-    let private quoteValue value = Types.cssValue Types.Property.Quotes value
+    let private quoteValue value = Types.propertyHelpers.cssValue Types.Property.Quotes value
     let private quoteValue' value =
         value
         |> quoteToString
@@ -746,7 +746,7 @@ module Text =
     let Quotes' (quotes: Types.IQuotes) = Quotes.Value(quotes)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
-    let private hyphensValue value = Types.cssValue Types.Property.Hyphens value
+    let private hyphensValue value = Types.propertyHelpers.cssValue Types.Property.Hyphens value
     let private hyphensValue' value =
         value
         |> hyphensToString
@@ -774,7 +774,7 @@ module Text =
     let Hyphens' (hyphens: Types.IHyphens) = Hyphens.Value(hyphens)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color
-    let private textDecorationColorValue value = Types.cssValue Types.Property.TextDecorationColor value
+    let private textDecorationColorValue value = Types.propertyHelpers.cssValue Types.Property.TextDecorationColor value
     let private textDecorationColorValue' value =
         value
         |> textDecorationColorToString
@@ -949,7 +949,7 @@ module Text =
     let TextDecorationColor' (color: Types.ITextDecorationColor) = TextDecorationColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
-    let private emphasisColorValue value = Types.cssValue Types.Property.TextEmphasisColor value
+    let private emphasisColorValue value = Types.propertyHelpers.cssValue Types.Property.TextEmphasisColor value
     let private emphasisColorValue' value =
         value
         |> textEmphasisColorToString
@@ -1123,7 +1123,7 @@ module Text =
     let TextEmphasisColor' (color: Types.ITextEmphasisColor) = TextEmphasisColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
-    let private textSizeAdjustValue value = Types.cssValue Types.Property.TextSizeAdjust value
+    let private textSizeAdjustValue value = Types.propertyHelpers.cssValue Types.Property.TextSizeAdjust value
     let private textSizeAdjustValue' value = value |> textSizeAdjustToString |> textSizeAdjustValue
 
     type TextSizeAdjust =
@@ -1148,7 +1148,7 @@ module Text =
     let TextSizeAdjust' textSize = TextSizeAdjust.Value textSize
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
-    let private tabSizeValue value = Types.cssValue Types.Property.TabSize value
+    let private tabSizeValue value = Types.propertyHelpers.cssValue Types.Property.TabSize value
     let private tabSizeValue' value = value |> tabSizeToString |> tabSizeValue
 
     type TabSize =
@@ -1170,7 +1170,7 @@ module Text =
     let TabSize' tabSize = TabSize.Value tabSize
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation
-    let private textOrientationValue value = Types.cssValue Types.Property.TextOrientation value
+    let private textOrientationValue value = Types.propertyHelpers.cssValue Types.Property.TextOrientation value
     let private textOrientationValue' value = value |> textOrientationToString |> textOrientationValue
 
     type TextOrientation =
@@ -1196,7 +1196,7 @@ module Text =
     let TextOrientation' orientation = TextOrientation.Value orientation
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
-    let private textRenderingValue value = Types.cssValue Types.Property.TextRendering value
+    let private textRenderingValue value = Types.propertyHelpers.cssValue Types.Property.TextRendering value
     let private textRenderingValue' value = value |> textRenderingToString |> textRenderingValue
 
     type TextRendering =
@@ -1222,7 +1222,7 @@ module Text =
     let TextRendering' rendering = TextRendering.Value rendering
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
-    let private textJustifyValue value = Types.cssValue Types.Property.TextJustify value
+    let private textJustifyValue value = Types.propertyHelpers.cssValue Types.Property.TextJustify value
     let private textJustifyValue' value = value |> textJustifyToString |> textJustifyValue
 
     type TextJustify =
@@ -1243,7 +1243,7 @@ module Text =
     let TextJustify' justification = TextJustify.Value justification
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
-    let private whiteSpaceValue value = Types.cssValue Types.Property.WhiteSpace value
+    let private whiteSpaceValue value = Types.propertyHelpers.cssValue Types.Property.WhiteSpace value
     let private whiteSpaceValue' value = value |> whitespaceToString |> whiteSpaceValue
 
     type WhiteSpace =
@@ -1271,7 +1271,7 @@ module Text =
     let WhiteSpace' whitespace = WhiteSpace.Value whitespace
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-    let private userSelectValue value = Types.cssValue Types.Property.UserSelect value
+    let private userSelectValue value = Types.propertyHelpers.cssValue Types.Property.UserSelect value
     let private userSelectValue' value = value |> userSelectToString |> userSelectValue
 
     type UserSelect =

@@ -7,19 +7,19 @@ module Overflow =
     let private overflowToString (overflow: Types.IOverflow) =
         match overflow with
         | :? Types.Overflow as o -> Utilities.Helpers.duToLowercase o
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown overflow"
 
     let private wrapToString (wrap: Types.IOverflowWrap) =
         match wrap with
         | :? Types.OverflowWrap as o -> Utilities.Helpers.duToKebab o
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown overflow wrap"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
-    let private overflowValue value = Types.cssValue Types.Property.Overflow value
+    let private overflowValue value = Types.propertyHelpers.cssValue Types.Property.Overflow value
     let private overflowValue' value =
         value
         |> overflowToString
@@ -54,7 +54,7 @@ module Overflow =
     /// <returns>Css property for fss.</returns>
     let Overflow' (overflow: Types.IOverflow) = Overflow.Value(overflow)
 
-    let private overflowXValue value = Types.cssValue Types.Property.OverflowX value
+    let private overflowXValue value = Types.propertyHelpers.cssValue Types.Property.OverflowX value
     let private overflowXValue' value =
         value
         |> overflowToString
@@ -84,7 +84,7 @@ module Overflow =
     /// <returns>Css property for fss.</returns>
     let OverflowX' (overflow: Types.IOverflow) = OverflowX.Value(overflow)
 
-    let private overflowYValue value = Types.cssValue Types.Property.OverflowY value
+    let private overflowYValue value = Types.propertyHelpers.cssValue Types.Property.OverflowY value
     let private overflowYValue' value =
         value
         |> overflowToString
@@ -115,7 +115,7 @@ module Overflow =
     let OverflowY' (overflow: Types.IOverflow) = OverflowY.Value(overflow)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
-    let private overflowWrapValue value = Types.cssValue Types.Property.OverflowWrap value
+    let private overflowWrapValue value = Types.propertyHelpers.cssValue Types.Property.OverflowWrap value
     let private overflowWrapValue' value =
         value
         |> wrapToString

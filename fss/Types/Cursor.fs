@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Cursor =
         | Default
         | ContextMenu
@@ -33,5 +32,5 @@ module Types =
         | SwResize
         | NeswResize
         | NwseResize
-        interface Types.ICursor
+        interface ICursor
 

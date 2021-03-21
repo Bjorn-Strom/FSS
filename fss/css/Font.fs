@@ -5,9 +5,9 @@ module Font =
     let private fontSizeToString (fontSize: Types.IFontSize) =
         match fontSize with
         | :? Types.FontSize as f -> Utilities.Helpers.duToKebab f
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown font size"
 
     let private familyToString (fontFamily: Types.IFontFamily) =
@@ -20,7 +20,7 @@ module Font =
 
         match fontFamily with
             | :? Types.FontFamily as f -> stringifyFamily f
-            | :? Types.Keywords as k -> Types.keywordsToString k
+            | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
             | _ -> "Unknown font family"
 
     let private featureSettingToString (featureSetting: Types.IFontFeatureSetting) =
@@ -55,90 +55,90 @@ module Font =
 
         match featureSetting with
         | :? Types.FontFeatureSetting as f -> stringifyFeature f
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown font feature setting"
 
     let private variantNumericToString (variant: Types.IFontVariantNumeric) =
         match variant with
         | :? Types.FontVariantNumeric as f -> Utilities.Helpers.duToKebab f
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Normal -> Types.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
         | _ -> "Unknown font variant numeric"
 
     let private fontVariantCapsToString (variant: Types.IFontVariantCaps) =
         match variant with
         | :? Types.FontVariantCaps as f -> Utilities.Helpers.duToKebab f
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Normal -> Types.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
         | _ -> "Unknown font variant caps"
 
     let private variantEastAsianToString (variant: Types.IFontVariantEastAsian) =
         match variant with
         | :? Types.FontVariantEastAsian as f -> Utilities.Helpers.duToKebab f
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Normal -> Types.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
         | _ -> "Unknown font variant east asian"
 
     let private variantLigatureToString (variant: Types.IFontVariantLigature) =
         match variant with
         | :? Types.FontVariantLigature as f -> Utilities.Helpers.duToKebab f
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Normal -> Types.normal
-        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown font variant ligature"
 
     let private lineHeightToString (lineHeight: Types.ILineHeight) =
         match lineHeight with
-        | :? Types.Float as f -> Types.FloatToString f
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Percent as p -> Types.percentToString p
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Normal -> Types.normal
+        | :? Types.CssFloat as f -> Types.masterTypeHelpers.FloatToString f
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Percent as p -> Types.unitHelpers.percentToString p
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
         | _ -> "Unknown line height"
 
     let private lineBreakToString (linebreak: Types.ILineBreak) =
         match linebreak with
         | :? Types.LineBreak as l -> Utilities.Helpers.duToLowercase l
-        | :? Types.Auto -> Types.auto
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown line break"
 
     let private letterSpacingToString (letterSpacing: Types.ILetterSpacing) =
         match letterSpacing with
-        | :? Types.Size as s -> Types.sizeToString s
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Normal -> Types.normal
+        | :? Types.Size as s -> Types.unitHelpers.sizeToString s
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
         | _ -> "Unknown letter spacing"
 
     let private fontKerningTostring (fontKerning: Types.IFontKerning) =
         match fontKerning with
-        | :? Types.Normal -> Types.normal
-        | :? Types.Auto -> Types.auto
-        | :? Types.None' -> Types.none
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown font kerning"
 
     let private fontLanguageOverrideToString (fontLanguageOverride: Types.IFontLanguageOverride) =
         match fontLanguageOverride with
-        | :? Types.Normal -> Types.normal
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown font language override"
 
     let private fontSynthesisToString (synthesis: Types.IFontSynthesis) =
         match synthesis with
         | :? Types.FontSynthesis as f -> Utilities.Helpers.duToSpaced f
-        | :? Types.None' -> Types.none
+        | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown font synthesis"
 
     let private fontVariantPositionToString (variantPosition: Types.IFontVariantPosition) =
         match variantPosition with
         | :? Types.FontVariantPosition as f -> Utilities.Helpers.duToLowercase f
-        | :? Types.Keywords as k -> Types.keywordsToString k
-        | :? Types.Normal -> Types.normal
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? Types.Normal -> Types.masterTypeHelpers.normal
         | _ -> "Unknown font variant position"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
-    let private sizeCssValue value = Types.cssValue Types.Property.FontSize value
+    let private sizeCssValue value = Types.propertyHelpers.cssValue Types.Property.FontSize value
     let private sizeCssValue' value = value |> fontSizeToString |> sizeCssValue
     type FontSize =
         static member Value (value: Types.IFontSize) = value |> sizeCssValue'
@@ -171,8 +171,8 @@ module Font =
     let FontSize' (size: Types.IFontSize) = FontSize.Value(size)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
-    let private styleCssValue value = Types.cssValue Types.Property.FontStyle value
-    let private styleCssValue' value = value |> Types.fontStyleToString |> styleCssValue
+    let private styleCssValue value = Types.propertyHelpers.cssValue Types.Property.FontStyle value
+    let private styleCssValue' value = value |> Types.fontHelpers.fontStyleToString |> styleCssValue
     type FontStyle =
         static member Value (fontStyle: Types.IFontStyle) = fontStyle |> styleCssValue'
         static member Oblique (angle: Types.Angle) = Types.Oblique angle |> styleCssValue'
@@ -196,12 +196,12 @@ module Font =
     let FontStyle' (style: Types.IFontStyle) = FontStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
-    let private stretchCssValue value = Types.cssValue Types.Property.FontStretch value
-    let private stretchCssValue' value = value |> Types.fontStretchToString |> stretchCssValue
+    let private stretchCssValue value = Types.propertyHelpers.cssValue Types.Property.FontStretch value
+    let private stretchCssValue' value = value |> Types.fontHelpers.fontStretchToString |> stretchCssValue
     type FontStretch =
         static member Value (fontStretch: Types.IFontStretch) = fontStretch |> stretchCssValue'
         static member Value (percent: Types.Percent) =
-            Types.percentToString percent
+            Types.unitHelpers.percentToString percent
             |> stretchCssValue
         static member SemiCondensed = Types.SemiCondensed |> stretchCssValue'
         static member Condensed = Types.Condensed |> stretchCssValue'
@@ -230,8 +230,8 @@ module Font =
     let FontStretch' (stretch: Types.IFontStretch) = FontStretch.Value(stretch)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
-    let private weightCssValue value = Types.cssValue Types.Property.FontWeight value
-    let private weightCssValue' value = value |> Types.fontWeightToString |> weightCssValue
+    let private weightCssValue value = Types.propertyHelpers.cssValue Types.Property.FontWeight value
+    let private weightCssValue' value = value |> Types.fontHelpers.fontWeightToString |> weightCssValue
     type FontWeight =
         static member Value (fontWeight: Types.IFontWeight) = fontWeight |> weightCssValue'
         static member Bold = Types.Bold |> weightCssValue'
@@ -257,7 +257,7 @@ module Font =
     let FontWeight' (weight: Types.IFontWeight) = FontWeight.Value(weight)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
-    let private heightCssValue value = Types.cssValue Types.Property.LineHeight value
+    let private heightCssValue value = Types.propertyHelpers.cssValue Types.Property.LineHeight value
     let private heightCssValue' value =
         value
         |> lineHeightToString
@@ -285,7 +285,7 @@ module Font =
     let LineHeight' (height: Types.ILineHeight) = LineHeight.Value(height)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-break
-    let private breakCssValue value = Types.cssValue Types.Property.LineBreak value
+    let private breakCssValue value = Types.propertyHelpers.cssValue Types.Property.LineBreak value
     let private breakCssValue' value =
         value
         |> lineBreakToString
@@ -316,7 +316,7 @@ module Font =
     let LineBreak' (break': Types.ILineBreak) = LineBreak.Value(break')
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
-    let private spacingCssValue value = Types.cssValue Types.Property.LetterSpacing value
+    let private spacingCssValue value = Types.propertyHelpers.cssValue Types.Property.LetterSpacing value
     let private spacingCssValue' value =
         value
         |> letterSpacingToString
@@ -342,11 +342,11 @@ module Font =
     let LetterSpacing' (spacing: Types.ILetterSpacing) = LetterSpacing.Value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
-    let private displayCssValue value = Types.cssValue Types.Property.FontDisplay value
+    let private displayCssValue value = Types.propertyHelpers.cssValue Types.Property.FontDisplay value
     let private displayCssValue' value =
         value
-        |> Types.fontDisplayToString
-        |> Types.cssValue Types.Property.FontDisplay
+        |> Types.fontHelpers.fontDisplayToString
+        |> Types.propertyHelpers.cssValue Types.Property.FontDisplay
     type FontDisplay =
         static member Value (fontDisplay: Types.IFontDisplay) = fontDisplay |> displayCssValue'
         static member Block = Types.FontDisplay.Block |> displayCssValue'
@@ -366,7 +366,7 @@ module Font =
     let FontDisplay' (display: Types.IFontDisplay) = FontDisplay.Value(display)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
-    let private familyCssValue value = Types.cssValue Types.Property.FontFamily value
+    let private familyCssValue value = Types.propertyHelpers.cssValue Types.Property.FontFamily value
     let private familyCssValue' value = value |> familyToString |> familyCssValue
 
     type FontFamily =
@@ -398,7 +398,7 @@ module Font =
     let FontFamily' (fontFamily: Types.IFontFamily) = FontFamily.Value(fontFamily)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
-    let private featureSettingCssValue value = Types.cssValue Types.Property.FontFeatureSettings value
+    let private featureSettingCssValue value = Types.propertyHelpers.cssValue Types.Property.FontFeatureSettings value
     let private featureSettingCssValue' value = value |> featureSettingToString |> featureSettingCssValue
 
     type FontFeatureSetting =
@@ -446,7 +446,7 @@ module Font =
     let FontFeatureSetting' (featureSetting: Types.IFontFeatureSetting) = FontFeatureSetting.Value(featureSetting)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
-    let private variantNumericCssValue value = Types.cssValue Types.Property.FontVariantNumeric value
+    let private variantNumericCssValue value = Types.propertyHelpers.cssValue Types.Property.FontVariantNumeric value
     let private variantNumericCssValue' value = value |> variantNumericToString |> variantNumericCssValue
 
     type FontVariantNumeric =
@@ -477,7 +477,7 @@ module Font =
     let FontVariantNumeric' (variant: Types.IFontVariantNumeric) = FontVariantNumeric.Value(variant)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
-    let private variantCapsCssValue value = Types.cssValue Types.Property.FontVariantCaps value
+    let private variantCapsCssValue value = Types.propertyHelpers.cssValue Types.Property.FontVariantCaps value
     let private variantCapsCssValue' value = value |> fontVariantCapsToString |> variantCapsCssValue
     type FontVariantCaps =
         static member Value (variantCaps: Types.IFontVariantCaps) = variantCaps |> variantCapsCssValue'
@@ -506,7 +506,7 @@ module Font =
     let FontVariantCaps' (variant: Types.IFontVariantCaps) = FontVariantCaps.Value(variant)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-    let private variantEastAsianCssValue value = Types.cssValue Types.Property.FontVariantEastAsian value
+    let private variantEastAsianCssValue value = Types.propertyHelpers.cssValue Types.Property.FontVariantEastAsian value
     let private variantEastAsianCssValue' value = value |> variantEastAsianToString |> variantEastAsianCssValue
     type FontVariantEastAsian =
         static member Value (variant: Types.IFontVariantEastAsian) = variant |> variantEastAsianCssValue'
@@ -538,7 +538,7 @@ module Font =
     let FontVariantEastAsian' (variant: Types.IFontVariantEastAsian) = FontVariantEastAsian.Value(variant)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-    let private variantLigatureCssValue value = Types.cssValue Types.Property.FontVariantLigatures value
+    let private variantLigatureCssValue value = Types.propertyHelpers.cssValue Types.Property.FontVariantLigatures value
     let private variantLigatureCssValue' value = value |> variantLigatureToString |> variantLigatureCssValue
     type FontVariantLigatures =
         static member Value (variant: Types.IFontVariantLigature) = variant |> variantLigatureCssValue'
@@ -571,7 +571,7 @@ module Font =
     let FontVariantLigatures' (ligature: Types.IFontVariantLigature) = FontVariantLigatures.Value(ligature)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-kerning
-    let private kerningValue value = Types.cssValue Types.Property.FontKerning value
+    let private kerningValue value = Types.propertyHelpers.cssValue Types.Property.FontKerning value
     let private kerningValue' value = value |> fontKerningTostring |> kerningValue
 
     type FontKerning =
@@ -591,7 +591,7 @@ module Font =
     let FontKerning' (fontKerning: Types.IFontKerning) = FontKerning.Value(fontKerning)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-language-override
-    let private fontLanguageOverrideValue value = Types.cssValue Types.Property.FontLanguageOverride value
+    let private fontLanguageOverrideValue value = Types.propertyHelpers.cssValue Types.Property.FontLanguageOverride value
     let private fontLanguageOverrideValue' value = value |> fontLanguageOverrideToString |> fontLanguageOverrideValue
 
     type FontLanguageOverride =
@@ -614,7 +614,7 @@ module Font =
     let FontLanguageOverride' (languageOverride: Types.IFontLanguageOverride) = FontLanguageOverride.Value(languageOverride)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis
-    let private fontSynthesisValue value = Types.cssValue Types.Property.FontSynthesis value
+    let private fontSynthesisValue value = Types.propertyHelpers.cssValue Types.Property.FontSynthesis value
     let private fontSynthesisValue' value = value |> fontSynthesisToString |> fontSynthesisValue
 
     type FontSynthesis =
@@ -634,7 +634,7 @@ module Font =
     let FontSynthesis' (synthesis: Types.IFontSynthesis) = FontSynthesis.Value(synthesis)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-position
-    let private fontVariantPositionValue value = Types.cssValue Types.Property.FontVariantPosition value
+    let private fontVariantPositionValue value = Types.propertyHelpers.cssValue Types.Property.FontVariantPosition value
     let private fontVariantPositionValue' value = value |> fontVariantPositionToString |> fontVariantPositionValue
 
     type FontVariantPosition =

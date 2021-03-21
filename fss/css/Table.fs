@@ -5,24 +5,24 @@ module Table =
     let private captionSideToString (captionSide: Types.ICaptionSide) =
         match captionSide with
         | :? Types.CaptionSide as c -> Utilities.Helpers.duToKebab c
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown caption side"
 
     let private emptyCellsToString (emptyCells: Types.IEmptyCells) =
         match emptyCells with
         | :? Types.EmptyCells as e -> Utilities.Helpers.duToLowercase e
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown empty cells"
 
     let private tableLayoutToString (tableLayout: Types.ITableLayout) =
         match tableLayout with
         | :? Types.TableLayout as t -> Utilities.Helpers.duToLowercase t
-        | :? Types.Auto -> Types.auto
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.masterTypeHelpers.auto
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown table layout"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
-    let private captionSideValue value = Types.cssValue Types.Property.CaptionSide value
+    let private captionSideValue value = Types.propertyHelpers.cssValue Types.Property.CaptionSide value
     let private captionSideValue' value =
         value
         |> captionSideToString
@@ -52,7 +52,7 @@ module Table =
     let CaptionSide' captionSide = CaptionSide.Value captionSide
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
-    let private emptyCellsValue value = Types.cssValue Types.Property.EmptyCells value
+    let private emptyCellsValue value = Types.propertyHelpers.cssValue Types.Property.EmptyCells value
     let private emptyCellsValue' value =
         value
         |> emptyCellsToString
@@ -77,7 +77,7 @@ module Table =
     let EmptyCells' (emptyCells: Types.IEmptyCells) = emptyCells |> EmptyCells.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
-    let private tableLayoutValue value = Types.cssValue Types.Property.TableLayout value
+    let private tableLayoutValue value = Types.propertyHelpers.cssValue Types.Property.TableLayout value
     let private tableLayoutValue' value =
         value
         |> tableLayoutToString

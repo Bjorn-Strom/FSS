@@ -1,12 +1,11 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Resize =
         | Both
         | Horizontal
         | Vertical
         | Block
         | Inline
-        interface Types.IResize
+        interface IResize
 

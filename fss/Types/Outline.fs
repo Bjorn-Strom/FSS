@@ -1,12 +1,11 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type OutlineWidth =
         | Thin
         | Medium
         | Thick
-        interface Types.IOutlineWidth
+        interface IOutlineWidth
 
     type OutlineStyle =
         | Hidden
@@ -18,4 +17,4 @@ module Types =
         | Ridge
         | Inset
         | Outset
-        interface Types.IOutlineStyle
+        interface IOutlineStyle

@@ -4,11 +4,10 @@ open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
-open FssTypes
 
 module Transition =
-    let transitionDurations: ITransitionDuration list = [sec 10.0; ms 100.0; Initial; Inherit]
-    let transitionDelays: ITransitionDelay list = [sec 10.0; ms 100.0; Initial; Unset]
+    let transitionDurations: Types.ITransitionDuration list = [sec 10.0; ms 100.0; Types.Initial; Types.Inherit]
+    let transitionDelays: Types.ITransitionDelay list = [sec 10.0; ms 100.0; Types.Initial; Types.Unset]
 
     let tests =
         testList "Transition"
@@ -35,7 +34,7 @@ module Transition =
                     [ "transitionDuration" ==> "120.00ms" ]
                 test
                     "Transition duration value unset"
-                    [TransitionDuration' Unset ]
+                    [TransitionDuration' Types.Unset ]
                     ["transitionDuration" ==> "unset"]
                 test
                     "Transition duration inherit"
@@ -99,7 +98,7 @@ module Transition =
                     ["transitionProperty" ==> "unset"]
                 test
                     "Transition properties"
-                    [TransitionProperty.Values [Property.BackgroundColor; Property.Color ] ]
+                    [TransitionProperty.Values [Types.Property.BackgroundColor; Types.Property.Color' ] ]
                     ["transitionProperty" ==> "background-color, color"]
                 test
                     "Transition timing function ease"
@@ -139,27 +138,27 @@ module Transition =
                     ["transitionTimingFunction" ==> "steps(5)"]
                 test
                     "Transition timing function  step jump start"
-                    [ TransitionTimingFunction.Step(5, JumpStart) ]
+                    [ TransitionTimingFunction.Step(5, Types.JumpStart) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-start)"]
                 test
                     "Transition timing function step jump end"
-                    [ TransitionTimingFunction.Step(5, JumpEnd) ]
+                    [ TransitionTimingFunction.Step(5, Types.JumpEnd) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-end)"]
                 test
                     "Transition timing function step jump none"
-                    [ TransitionTimingFunction.Step(5, JumpNone) ]
+                    [ TransitionTimingFunction.Step(5, Types.JumpNone) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-none)"]
                 test
                     "Transition timing function step jump both"
-                    [ TransitionTimingFunction.Step(5, JumpBoth) ]
+                    [ TransitionTimingFunction.Step(5, Types.JumpBoth) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-both)"]
                 test
                     "Transition timing function step start"
-                    [ TransitionTimingFunction.Step(5, Step.Start) ]
+                    [ TransitionTimingFunction.Step(5, Types.Step.Start) ]
                     ["transitionTimingFunction" ==> "steps(5, start)"]
                 test
                     "Transition timing function step end"
-                    [ TransitionTimingFunction.Step(5, End) ]
+                    [ TransitionTimingFunction.Step(5, Types.Step.End) ]
                     ["transitionTimingFunction" ==> "steps(5, end)"]
                 test
                     "Transition timing function inherit"

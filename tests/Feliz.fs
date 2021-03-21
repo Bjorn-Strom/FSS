@@ -2,8 +2,8 @@ namespace FSSTests
 
 open Fable.Mocha
 open Fable.Core.JsInterop
+open Fss.Types
 open Utils
-open FssTypes
 open Feliz.Fss
 
 module Feliz =
@@ -104,12 +104,12 @@ module Feliz =
                     [ style.boxDecorationBreak.Clone ]
                     [ "boxDecorationBreak" ==> "clone" ]
                 test
-                    "Color"
+                    "Color gainsboro"
                     [ style.color.gainsboro]
                     [ "color" ==> "#dcdcdc" ]
                 test
-                    "Color"
-                    [ style.color' (Types.Color.red)]
+                    "Color red"
+                    [ style.color' (Color.red)]
                     [ "color" ==> "#ff0000" ]
                 test
                     "Font synthesis weight"
@@ -145,7 +145,7 @@ module Feliz =
                     [ "lineHeight" ==> "normal" ]
                 test
                     "Line height value"
-                    [ style.lineHeight' <| CssFloat 2.5 ]
+                    [ style.lineHeight' (CssFloat 2.5) ]
                     [ "lineHeight" ==> "2.5" ]
                 test
                     "Line break loose"
@@ -269,7 +269,7 @@ module Feliz =
                      ["textEmphasisStyle" ==> "filled"]
                 test
                      "Text shadow single"
-                     [ style.textShadows [ ColorXYBlur (Types.Color.black, px 1, px 1, px 2) ] ]
+                     [ style.textShadows [ ColorXYBlur (Color.black, px 1, px 1, px 2) ] ]
                      ["textShadow" ==> "#000000 1px 1px 2px"]
                 test
                      "Text underline offset auto"
@@ -374,7 +374,7 @@ module Feliz =
                 test
                     "List style type custom"
                     [ style.listStyleType' sampleCounter]
-                    [ "listStyleType" ==> (Counter.counterValue sampleCounter) ]
+                    [ "listStyleType" ==> (counterStyleHelpers.counterStyleToString sampleCounter) ]
                 test
                     "Column Width px"
                     [style.columnWidth' (px 60)]
@@ -473,7 +473,7 @@ module Feliz =
                     [ "borderColor" ==> "#ff0000" ]
                 test
                     "Border colors multiple"
-                    [ style.borderColor.Value (Types.Color.red, Types.Color.green, Types.Color.blue, Types.Color.white) ]
+                    [ style.borderColor.Value (Color.red, Color.green, Color.blue, Color.white) ]
                     [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
                 test
                     "Border top color rgb"
@@ -774,11 +774,11 @@ module Feliz =
                 test
                    "Content counter"
                     [ style.content.Counter sampleCounter]
-                    [ "content" ==> sprintf "counter(%s)" (Counter.counterValue sampleCounter) ]
+                    [ "content" ==> sprintf "counter(%s)" (counterStyleHelpers.counterStyleToString sampleCounter) ]
                 test
                     "Content counter2"
                     [ style.content.Counters (sampleCounter, ListStyleType.UpperLatin) ]
-                    [ "content" ==> sprintf "counters(%s, upper-latin)" (Counter.counterValue sampleCounter) ]
+                    [ "content" ==> sprintf "counters(%s, upper-latin)" (counterStyleHelpers.counterStyleToString  sampleCounter) ]
                 test
                     "Caption side top"
                     [style.captionSide.Top]
@@ -1086,7 +1086,7 @@ module Feliz =
                 testNested
                     "Media not all"
                     [
-                        MediaQueryFor (Not Device.All) [ MediaFeature.Color ] [ style.marginTop' (px 200) ]
+                        MediaQueryFor (Not Device.All) [ MediaFeature.Color' ] [ style.marginTop' (px 200) ]
                     ]
                     ["@media not all and (color)" ==> "marginTop,200px"]
                 testNested
@@ -1094,7 +1094,7 @@ module Feliz =
                     [
                         MediaQueryFor (Only Device.Screen)
                             [
-                                MediaFeature.Color
+                                MediaFeature.Color'
                                 MediaFeature.Pointer Fine
                                 MediaFeature.Scan Interlace
                                 MediaFeature.Grid true
@@ -1118,7 +1118,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.boxShadow.Color(px 10, px 10, Types.Color.blue)
+                                style.boxShadow.Color(px 10, px 10, Color.blue)
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px #0000ff" ]
@@ -1127,7 +1127,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.boxShadow.BlurColor(px 10, px 10, em 1.5, Types.Color.red)
+                                style.boxShadow.BlurColor(px 10, px 10, em 1.5, Color.red)
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px 1.5em #ff0000" ]
@@ -1136,7 +1136,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Types.Color.chocolate)
+                                style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Color.chocolate)
                             ]
                     ]
                     [ "boxShadow" ==> "1px 100px 1.5vh 1px #d2691e" ]
@@ -1145,11 +1145,11 @@ module Feliz =
                    [
                         style.boxShadows
                             [
-                                style.boxShadow.Color(px 10, px 10, Types.Color.blue)
-                                style.boxShadow.BlurColor(px 10, px 10, px 10, Types.Color.blue)
-                                style.boxShadow.BlurSpreadColor(px 10, px 10, px 10, px 10, Types.Color.blue)
-                                style.boxShadow.Color(px 3, px 3, Types.Color.red)
-                                style.boxShadow.BlurColor(em -1., px 0, em 0.4, Types.Color.olive)
+                                style.boxShadow.Color(px 10, px 10, Color.blue)
+                                style.boxShadow.BlurColor(px 10, px 10, px 10, Color.blue)
+                                style.boxShadow.BlurSpreadColor(px 10, px 10, px 10, px 10, Color.blue)
+                                style.boxShadow.Color(px 3, px 3, Color.red)
+                                style.boxShadow.BlurColor(em -1., px 0, em 0.4, Color.olive)
                             ]
                     ]
                     ["boxShadow" ==> "10px 10px #0000ff, 10px 10px 10px #0000ff, 10px 10px 10px 10px #0000ff, 3px 3px #ff0000, -1.0em 0px 0.4em #808000"]
@@ -1158,7 +1158,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.inset <| style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Types.Color.chocolate)
+                                style.inset <| style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Color.chocolate)
                             ]
                     ]
                     [ "boxShadow" ==> "inset 1px 100px 1.5vh 1px #d2691e" ]
@@ -1228,7 +1228,7 @@ module Feliz =
                     [ "filter" ==> "url(\"someFilter\")" ]
                 test
                     "Filter drop shadow"
-                    [ style.filters [ style.filter.DropShadow 16 16 20 Types.Color.red (pct 5)  ] ]
+                    [ style.filters [ style.filter.DropShadow 16 16 20 Color.red (pct 5)  ] ]
                     [ "filter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
                 test
                     "Filter unset"
@@ -1276,7 +1276,7 @@ module Feliz =
                     [ "maskPosition" ==> "1px 1.0rem, 10px 100px" ]
                 test
                     "MaskRepeat value"
-                    [ style.maskRepeat.Value(MaskRepeat.Repeat)]
+                    [ style.maskRepeat.Value(MaskRepeat.Repeat')]
                     [ "maskRepeat" ==> "repeat" ]
                 test
                     "MaskRepeat multiple values"

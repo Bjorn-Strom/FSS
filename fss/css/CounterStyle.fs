@@ -60,7 +60,7 @@ module Counter =
             (urls
             |> List.map (fun u -> sprintf "url('%s')" u)
             |> String.concat " ") |> Types.CounterProperty
-        static member Custom (custom: Types.CounterStyle) = "symbols" ==> Types.counterStyleToString custom |> Types.CounterProperty
+        static member Custom (custom: Types.CounterStyle) = "symbols" ==> Types.counterStyleHelpers.counterStyleToString custom |> Types.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/additive-symbols
     type AdditiveSymbolType =
@@ -88,22 +88,22 @@ module Counter =
         static member Numbers = "speak-as" ==> "numbers" |> Types.CounterProperty
         static member Words = "speak-as" ==> "words" |> Types.CounterProperty
         static member SpellOut = "speak-as" ==> "spell-out" |> Types.CounterProperty
-        static member CounterStyle (counter: Types.CounterStyle) = "speak-as" ==> Types.counterStyleToString counter |> Types.CounterProperty
+        static member CounterStyle (counter: Types.CounterStyle) = "speak-as" ==> Types.counterStyleHelpers.counterStyleToString counter |> Types.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-reset
     let private counterResetToString (reset: Types.ICounterReset) =
         let stringifyReset =
             function
-                | Types.Reset counter -> Types.counterStyleToString counter
-                | Types.ResetTo (counter, number) -> sprintf "%A %d" (Types.counterStyleToString counter) number
+                | Types.Reset counter -> Types.counterStyleHelpers.counterStyleToString counter
+                | Types.ResetTo (counter, number) -> sprintf "%A %d" (Types.counterStyleHelpers.counterStyleToString counter) number
 
         match reset with
         | :? Types.CounterReset as cr -> stringifyReset cr
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown counter reset"
 
-    let private counterResetValue value = Types.cssValue Types.Property.CounterReset value
+    let private counterResetValue value = Types.propertyHelpers.cssValue Types.Property.CounterReset value
     let private counterResetValue' value =
         value
         |> counterResetToString
@@ -124,16 +124,16 @@ module Counter =
     let private counterIncrementToString (increment: Types.ICounterIncrement) =
         let stringifyIncrement =
             function
-                | Types.Increment counter -> Types.counterStyleToString counter
-                | Types.CounterIncrement.Add (counter, number) -> sprintf "%A %d" (Types.counterStyleToString counter) number
+                | Types.Increment counter -> Types.counterStyleHelpers.counterStyleToString counter
+                | Types.CounterIncrement.Add (counter, number) -> sprintf "%A %d" (Types.counterStyleHelpers.counterStyleToString counter) number
 
         match increment with
         | :? Types.CounterIncrement as cr -> stringifyIncrement cr
-        | :? Types.None' -> Types.none
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.masterTypeHelpers.none
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown counter increment"
 
-    let private counterIncrementValue value = Types.cssValue Types.Property.CounterIncrement value
+    let private counterIncrementValue value = Types.propertyHelpers.cssValue Types.Property.CounterIncrement value
     let private counterIncrementValue' value =
         value
         |> counterIncrementToString
@@ -154,5 +154,5 @@ module Counter =
         createObj
             [
                 sprintf "@counter-style %s"
-                    counterName ==> createObj (attributeList |> List.map Types.CounterValue)
+                    counterName ==> createObj (attributeList |> List.map Types.masterTypeHelpers.CounterValue)
             ]

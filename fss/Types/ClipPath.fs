@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Geometry =
         | MarginBox
         | BorderBox
@@ -10,22 +9,22 @@ module Types =
         | FillBox
         | StrokeBox
         | ViewBox
-        interface Types.IClipPath
+        interface IClipPath
 
     type Inset =
-        | All of Types.ILengthPercentage
-        | HorizontalVertical of Types.ILengthPercentage * Types.ILengthPercentage
-        | TopHorizontalBottom of Types.ILengthPercentage * Types.ILengthPercentage * Types.ILengthPercentage
-        | TopRightBottomLeft of Types.ILengthPercentage * Types.ILengthPercentage * Types.ILengthPercentage * Types.ILengthPercentage
-        interface Types.IClipPath
+        | All of ILengthPercentage
+        | HorizontalVertical of ILengthPercentage * ILengthPercentage
+        | TopHorizontalBottom of ILengthPercentage * ILengthPercentage * ILengthPercentage
+        | TopRightBottomLeft of ILengthPercentage * ILengthPercentage * ILengthPercentage * ILengthPercentage
+        interface IClipPath
     type Round =
-        | Round of Inset * Types.ILengthPercentage list
-        interface Types.IClipPath
+        | Round of Inset * ILengthPercentage list
+        interface IClipPath
 
-    type Point = Types.Percent * Types.Percent
+    type Point = Percent * Percent
     type Polygon =
         | Polygon of Point list
-        interface Types.IClipPath
+        interface IClipPath
 
     type Url = Url of string
     type Path = Path of string

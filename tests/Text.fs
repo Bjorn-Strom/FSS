@@ -3,7 +3,6 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open FssTypes
 open Fss
 
 module Text =
@@ -172,7 +171,7 @@ module Text =
                     ["textDecorationLine" ==> "unset"]
                 test
                     "Text decorations multiple"
-                    [TextDecorationLine.Value(Overline, Underline, LineThrough)]
+                    [TextDecorationLine.Value(Types.Overline, Types.Underline, Types.LineThrough)]
                     ["textDecorationLine" ==> "overline underline line-through"]
                 test
                     "Text decoration skip none"
@@ -196,15 +195,15 @@ module Text =
                     ["textDecorationSkip" ==> "box-decoration"]
                 test
                     "Text decoration skip multiple - objects and spaces"
-                    [TextDecorationSkip.Value(Objects, Spaces) ]
+                    [TextDecorationSkip.Value(Types.Objects, Types.Spaces) ]
                     ["textDecorationSkip" ==> "objects spaces"]
                 test
                     "Text decoration skip multiple - leading spaces and trailing spaces"
-                    [TextDecorationSkip.Value(LeadingSpaces, TrailingSpaces)]
+                    [TextDecorationSkip.Value(Types.LeadingSpaces, Types.TrailingSpaces)]
                     ["textDecorationSkip" ==> "leading-spaces trailing-spaces"]
                 test
                     "Text decoration skip multiple - objects edges box-decoration"
-                    [TextDecorationSkip.Value(Objects, Edges, BoxDecoration) ]
+                    [TextDecorationSkip.Value(Types.Objects, Types.Edges, Types.BoxDecoration) ]
                     ["textDecorationSkip" ==> "objects edges box-decoration"]
                 test
                     "Text decoration skip inherit"
@@ -336,31 +335,31 @@ module Text =
                     ["textEmphasisColor" ==> "unset"]
                 test
                     "Text emphasis position over right"
-                    [ TextEmphasisPosition.Value (EmphasisPosition.Over, EmphasisPosition.Right) ]
+                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Over, Types.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "over right"]
                 test
                     "Text emphasis position over left"
-                    [ TextEmphasisPosition.Value (EmphasisPosition.Over, EmphasisPosition.Left) ]
+                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Over, Types.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "over left"]
                 test
                     "Text emphasis position under right"
-                    [ TextEmphasisPosition.Value (EmphasisPosition.Under, EmphasisPosition.Right) ]
+                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Under, Types.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "under right"]
                 test
                     "Text emphasis position under left"
-                    [ TextEmphasisPosition.Value (EmphasisPosition.Under, EmphasisPosition.Left) ]
+                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Under, Types.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "under left"]
                 test
                     "Text emphasis position left over"
-                    [ TextEmphasisPosition.Value (EmphasisPosition.Left, EmphasisPosition.Over) ]
+                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Left, Types.EmphasisPosition.Over) ]
                     ["textEmphasisPosition" ==> "left over"]
                 test
                     "Text emphasis position right under"
-                    [ TextEmphasisPosition.Value (EmphasisPosition.Right, EmphasisPosition.Under) ]
+                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Right, Types.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "right under"]
                 test
                     "Text emphasis position left under"
-                    [ TextEmphasisPosition.Value (EmphasisPosition.Left, EmphasisPosition.Under) ]
+                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Left, Types.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "left under"]
                 test
                     "Text emphasis position inherit"
@@ -376,11 +375,11 @@ module Text =
                     ["textEmphasisPosition" ==> "unset"]
                 test
                     "Text Emphasis Style x"
-                    [TextEmphasisStyle' (CssString "x")]
+                    [TextEmphasisStyle' (Types.CssString "x")]
                     ["textEmphasisStyle" ==> "'x'"]
                 test
                     "Text Emphasis Style *"
-                    [TextEmphasisStyle' (CssString "*")]
+                    [TextEmphasisStyle' (Types.CssString "*")]
                     ["textEmphasisStyle" ==> "'*'"]
                 test
                     "Text Emphasis Style filled"
@@ -491,11 +490,11 @@ module Text =
                     ["textUnderlinePosition" ==> "below"]
                 test
                     "Text underline positions under left"
-                    [ TextUnderlinePosition.Value (UnderlinePosition.Under, UnderlinePosition.Left) ]
+                    [ TextUnderlinePosition.Value (Types.UnderlinePosition.Under, Types.UnderlinePosition.Left) ]
                     ["textUnderlinePosition" ==> "under left"]
                 test
                     "Text underline positions right under"
-                    [ TextUnderlinePosition.Value (UnderlinePosition.Right, UnderlinePosition.Under) ]
+                    [ TextUnderlinePosition.Value (Types.UnderlinePosition.Right, Types.UnderlinePosition.Under) ]
                     ["textUnderlinePosition" ==> "right under"]
                 test
                     "Text underline position auto"
@@ -527,15 +526,15 @@ module Text =
                     ["textIndent" ==> "15%"]
                 test
                     "Text indent hanging"
-                    [ TextIndent.Value (em 5.0, Hanging;) ]
+                    [ TextIndent.Value (em 5.0, Types.Hanging;) ]
                     ["textIndent" ==> "5.0em hanging"]
                 test
                     "Text indent each line"
-                    [ TextIndent.Value (em 5.0, EachLine;) ]
+                    [ TextIndent.Value (em 5.0, Types.EachLine;) ]
                     ["textIndent" ==> "5.0em each-line"]
                 test
                     "Text indent hanging each line"
-                    [ TextIndent.Value (em 5.0, Hanging, EachLine) ]
+                    [ TextIndent.Value (em 5.0, Types.Hanging, Types.EachLine) ]
                     ["textIndent" ==> "5.0em hanging each-line"]
                 test
                     "Text indent inherit"
@@ -559,7 +558,7 @@ module Text =
                     ["textOverflow" ==> "ellipsis"]
                 test
                     "Text overflow -"
-                    [ TextOverflow' (CssString "-") ]
+                    [ TextOverflow' (Types.CssString "-") ]
                     ["textOverflow" ==> "\"-\""]
                 test
                     "Quotes none"
@@ -571,11 +570,11 @@ module Text =
                     ["quotes" ==> "auto"]
                 test
                     "Quotes strings"
-                    [ Quotes.Value(CssString "<<", CssString ">>") ]
+                    [ Quotes.Value(Types.CssString "<<", Types.CssString ">>") ]
                     ["quotes" ==> "\"<<\" \">>\""]
                 test
                     "Quotes multiple"
-                    [ Quotes.Value [ CssString "<<" :> IQuotes, CssString ">>" :> IQuotes; CssString "<" :> IQuotes,  CssString ">" :> IQuotes] ]
+                    [ Quotes.Value [ Types.CssString "<<" :> Types.IQuotes, Types.CssString ">>" :> Types.IQuotes; Types.CssString "<" :> Types.IQuotes,  Types.CssString ">" :> Types.IQuotes] ]
                     ["quotes" ==> "\"<<\" \">>\" \"<\" \">\""]
                 test
                     "Quotes inherit"
@@ -647,7 +646,7 @@ module Text =
                     ["tabSize" ==> "2.0em"]
                 test
                     "TabSize number"
-                    [ TabSize' (CssInt 4) ]
+                    [ TabSize' (Types.CssInt 4) ]
                     ["tabSize" ==> "4"]
                 test
                     "TabSize inherit"

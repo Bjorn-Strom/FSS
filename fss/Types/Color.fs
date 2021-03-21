@@ -1,16 +1,15 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Color =
         | Color' of string
-        interface Types.ITextDecorationColor
-        interface Types.ITextEmphasisColor
-        interface Types.IBorderColor
-        interface Types.IOutlineColor
-        interface Types.IColumnRuleColor
-        interface Types.ICaretColor
-        interface Types.IColorStop
+        interface ITextDecorationColor
+        interface ITextEmphasisColor
+        interface IBorderColor
+        interface IOutlineColor
+        interface IColumnRuleColor
+        interface ICaretColor
+        interface IColorStop
         static member black = Fss.Utilities.Color.hex "000000" |> Color'
         static member silver = Fss.Utilities.Color.hex "c0c0c0" |> Color'
         static member gray = Fss.Utilities.Color.hex "808080" |> Color'
@@ -166,4 +165,6 @@ module Types =
         | Economy
         | Exact
 
-    let internal colorToString (Color' c) = c
+    [<AutoOpen>]
+    module colorHelpers =
+        let internal colorToString (Color' c) = c

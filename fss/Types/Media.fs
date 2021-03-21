@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type Device =
         | Screen
         | Speech
@@ -79,12 +78,12 @@ module Types =
         | DisplayMode of DisplayMode
         | ForcedColors of bool
         | Grid of bool
-        | Height of Types.Size
-        | MinHeight of Types.Size
-        | MaxHeight of Types.Size
-        | Width of Types.Size
-        | MinWidth of Types.Size
-        | MaxWidth of Types.Size
+        | Height of Size
+        | MinHeight of Size
+        | MaxHeight of Size
+        | Width of Size
+        | MinWidth of Size
+        | MaxWidth of Size
         | Hover of bool
         | InvertedColors of bool
         | LightLevel of LightLevel
@@ -99,9 +98,9 @@ module Types =
         | PrefersContrast of Contrast
         | PrefersReducedMotion of bool
         | PrefersReducedTransparency of bool
-        | Resolution of Types.Resolution
-        | MinResolution of Types.Resolution
-        | MaxResolution of Types.Resolution
+        | Resolution of Resolution
+        | MinResolution of Resolution
+        | MaxResolution of Resolution
         | Scan of Scan
         | Scripting of Scripting
         | Update of Update

@@ -5,10 +5,10 @@ module AspectRatio =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
     let private stringifyAspectRatio (all: Types.IAll) =
         match all with
-        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private aspectRatioValue value = Types.cssValue Types.Property.AspectRatio value
+    let private aspectRatioValue value = Types.propertyHelpers.cssValue Types.Property.AspectRatio value
     let private aspectRatioValue' value =
         value
         |> stringifyAspectRatio

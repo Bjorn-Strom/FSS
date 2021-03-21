@@ -1,7 +1,6 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module Types =
+namespace Fss.Types
     type FontSize =
         | XxSmall
         | XSmall
@@ -13,12 +12,12 @@ module Types =
         | XxxLarge
         | Smaller
         | Larger
-        interface Types.IFontSize
+        interface IFontSize
 
     type FontStyle =
         | Italic
-        | Oblique of Types.Angle
-        interface Types.IFontStyle
+        | Oblique of Angle
+        interface IFontStyle
 
     type FontStretch =
         | SemiCondensed
@@ -29,20 +28,20 @@ module Types =
         | Expanded
         | ExtraExpanded
         | UltraExpanded
-        interface Types.IFontStretch
+        interface IFontStretch
 
     type FontWeight =
          | Bold
          | Lighter
          | Bolder
-         interface Types.IFontWeight
+         interface IFontWeight
 
     type FontDisplay =
         | Block
         | Swap
         | Fallback
         | Optional
-        interface Types.IFontDisplay
+        interface IFontDisplay
 
     type SettingSwitch =
         | On
@@ -75,7 +74,7 @@ module Types =
         | Fina of SettingSwitch
         | Mark of SettingSwitch
         | Mkmk of SettingSwitch
-        interface Types.IFontFeatureSetting
+        interface IFontFeatureSetting
 
     type FontVariantNumeric =
         | Ordinal
@@ -86,7 +85,7 @@ module Types =
         | TabularNums
         | DiagonalFractions
         | StackedFractions
-        interface Types.IFontVariantNumeric
+        interface IFontVariantNumeric
 
     type FontVariantCaps =
         | SmallCaps
@@ -95,7 +94,7 @@ module Types =
         | AllPetiteCaps
         | Unicase
         | TitlingCaps
-        interface Types.IFontVariantCaps
+        interface IFontVariantCaps
 
     type FontVariantEastAsian =
         | Ruby
@@ -107,7 +106,7 @@ module Types =
         | Traditional
         | FullWidth
         | ProportionalWidth
-        interface Types.IFontVariantEastAsian
+        interface IFontVariantEastAsian
 
     type FontVariantLigature =
         | CommonLigatures
@@ -118,11 +117,11 @@ module Types =
         | NoHistoricalLigatures
         | Contextual
         | NoContextual
-        interface Types.IFontVariantLigature
+        interface IFontVariantLigature
 
     type FontName =
         | FontName of string
-        interface Types.IFontFamily
+        interface IFontFamily
 
     type FontFamily =
         | Serif
@@ -131,55 +130,57 @@ module Types =
         | Cursive
         | Custom of string
         | FontName of FontName
-        interface Types.IFontFamily
+        interface IFontFamily
 
     type LineBreak =
         | Loose
         | Strict
         | Anywhere
-        interface Types.ILineBreak
+        interface ILineBreak
 
     type FontSynthesis =
         | Weight
         | Style
         | WeightStyle
-        interface Types.IFontSynthesis
+        interface IFontSynthesis
 
     type FontVariantPosition =
         | Sub
         | Super
-        interface Types.IFontVariantPosition
+        interface IFontVariantPosition
 
-    let internal fontStyleToString (style: Types.IFontStyle) =
-        let stringifyFontStyle =
-            function
-                | Italic -> "italic"
-                | Oblique a -> sprintf "oblique %s" (Types.angleToString a)
+    [<AutoOpen>]
+    module fontHelpers =
+        let internal fontStyleToString (style: IFontStyle) =
+            let stringifyFontStyle =
+                function
+                    | Italic -> "italic"
+                    | Oblique a -> sprintf "oblique %s" (angleToString a)
 
-        match style with
-            | :? FontStyle as f -> stringifyFontStyle f
-            | :? Types.Keywords as g -> Types.keywordsToString g
-            | :? Types.Normal -> Types.normal
-            | _ -> "Unknown font style"
+            match style with
+                | :? FontStyle as f -> stringifyFontStyle f
+                | :? Keywords as g -> keywordsToString g
+                | :? Normal -> normal
+                | _ -> "Unknown font style"
 
-    let internal fontStretchToString (stretch: Types.IFontStretch) =
-        match stretch with
-            | :? FontStretch as f -> Fss.Utilities.Helpers.duToKebab f
-            | :? Types.Keywords as k -> Types.keywordsToString k
-            | :? Types.Normal -> Types.normal
-            | :? Types.Percent as p -> Types.percentToString p
-            | _ -> "Unknown font stretch"
+        let internal fontStretchToString (stretch: IFontStretch) =
+            match stretch with
+                | :? FontStretch as f -> Fss.Utilities.Helpers.duToKebab f
+                | :? Keywords as k -> keywordsToString k
+                | :? Normal -> normal
+                | :? Percent as p -> percentToString p
+                | _ -> "Unknown font stretch"
 
-    let internal fontWeightToString (fontWeight: Types.IFontWeight) =
-         match fontWeight with
-            | :? FontWeight as f -> Fss.Utilities.Helpers.duToLowercase f
-            | :? Types.Int as i -> Types.IntToString i
-            | :? Types.Keywords as k -> Types.keywordsToString k
-            | :? Types.Normal -> Types.normal
-            | _ -> "Unknown font weight"
+        let internal fontWeightToString (fontWeight: IFontWeight) =
+             match fontWeight with
+                | :? FontWeight as f -> Fss.Utilities.Helpers.duToLowercase f
+                | :? CssInt as i -> IntToString i
+                | :? Keywords as k -> keywordsToString k
+                | :? Normal -> normal
+                | _ -> "Unknown font weight"
 
-    let internal fontDisplayToString (display: Types.IFontDisplay) =
-        match display with
-        | :? FontDisplay as f -> Fss.Utilities.Helpers.duToLowercase f
-        | :? Types.Auto -> Types.auto
-        | _ -> "Unknown font display value"
+        let internal fontDisplayToString (display: IFontDisplay) =
+            match display with
+            | :? FontDisplay as f -> Fss.Utilities.Helpers.duToLowercase f
+            | :? Auto -> auto
+            | _ -> "Unknown font display value"
