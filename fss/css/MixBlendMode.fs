@@ -1,11 +1,10 @@
 namespace Fss
 
-open FssTypes
 [<AutoOpen>]
 module MixBlendMode =
-    let private blendModeToString (blendMode: IMixBlendMode) =
+    let private blendModeToString (blendMode: Types.IMixBlendMode) =
         match blendMode with
-        | :? MixBlendMode as b -> Utilities.Helpers.duToKebab b
+        | :? Types.MixBlendMode as b -> Utilities.Helpers.duToKebab b
         | :? Types.Normal -> Types.normal
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mix blend mode"
@@ -18,7 +17,7 @@ module MixBlendMode =
         |> mixBlendModeCssValue
 
     type MixBlendMode =
-        static member Value(mixBlendMode: IMixBlendMode) = mixBlendMode |> mixBlendModeCssValue'
+        static member Value(mixBlendMode: Types.IMixBlendMode) = mixBlendMode |> mixBlendModeCssValue'
 
         static member Multiply = Types.MixBlendMode.Multiply |> mixBlendModeCssValue'
         static member Screen = Types.MixBlendMode.Screen |> mixBlendModeCssValue'
@@ -33,7 +32,7 @@ module MixBlendMode =
         static member Exclusion = Types.MixBlendMode.Exclusion |> mixBlendModeCssValue'
         static member Hue = Types.MixBlendMode.Hue |> mixBlendModeCssValue'
         static member Saturation = Types.MixBlendMode.Saturation |> mixBlendModeCssValue'
-        static member Color = Types.MixBlendMode.Color |> mixBlendModeCssValue'
+        static member Color = Types.MixBlendMode.Color' |> mixBlendModeCssValue'
         static member Luminosity = Types.MixBlendMode.Luminosity |> mixBlendModeCssValue'
 
         static member Normal = Types.Normal |> mixBlendModeCssValue'
@@ -51,4 +50,4 @@ module MixBlendMode =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MixBlendMode' (mixBlendMode: IMixBlendMode) = mixBlendMode |> MixBlendMode.Value
+    let MixBlendMode' (mixBlendMode: Types.IMixBlendMode) = mixBlendMode |> MixBlendMode.Value

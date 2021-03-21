@@ -44,7 +44,7 @@ module Types =
         | Mm of string
         | Pt of string
         | Pc of string
-        | Em of string
+        | Em' of string
         | Rem of string
         | Ex of string
         | Ch of string
@@ -101,7 +101,7 @@ module Types =
             | Mm m -> m
             | Pt p -> p
             | Pc p -> p
-            | Em e -> e
+            | Em' e -> e
             | Rem r -> r
             | Ex e -> e
             | Ch c -> c

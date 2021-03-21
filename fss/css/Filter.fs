@@ -1,15 +1,13 @@
 namespace Fss
 
-open FssTypes
-
 [<AutoOpen>]
 module Filter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/filter
-    let private stringifyFilter (filter: IFilter) =
+    let private stringifyFilter (filter: Types.IFilter) =
         match filter with
-        | :? Filter as f -> Filter.stringifyFilter f
-        | :? Global as g -> GlobalValue.Types.keywordsToString g
-        | :? None' -> GlobalValue.none
+        | :? Types.Filter as f -> Types.stringifyFilter f
+        | :? Types.Keywords as g -> Types.keywordsToString g
+        | :? Types.None' -> Types.none
         | _ -> "Unknown filter"
 
     let private filterValue value = Types.cssValue Types.Property.Filter value
@@ -37,17 +35,17 @@ module Filter =
         static member Unset = Types.Unset |> filterValue'
 
     /// Supply a list of filters to be applied to the element.
-    let Filters (filters: Types.Filter list): CssProperty =
+    let Filters (filters: Types.Filter list): Types.CssProperty =
         filters
-        |> Utilities.Helpers.combineWs Filter.stringifyFilter
+        |> Utilities.Helpers.combineWs Types.stringifyFilter
         |> filterValue
 
 [<AutoOpen>]
 module BackdropFilter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
-    let private stringifyFilter (backdropFilter: IBackdropFilter) =
+    let private stringifyFilter (backdropFilter: Types.IBackdropFilter) =
         match backdropFilter with
-        | :? Types.Filter as f -> Filter.stringifyFilter f
+        | :? Types.Filter as f -> Types.stringifyFilter f
         | :? Types.Keywords as k -> Types.keywordsToString k
         | :? Types.None' -> Types.none
         | _ -> "Unknown backdrop filter"
@@ -77,7 +75,7 @@ module BackdropFilter =
         static member Unset = Types.Unset |> backdropFilterValue'
 
     /// Supply a list of filters to be applied to the element.
-    let BackdropFilters (backdropFilters: Types.Filter list): CssProperty =
+    let BackdropFilters (backdropFilters: Types.Filter list): Types.CssProperty =
         backdropFilters
-        |> Utilities.Helpers.combineWs Filter.stringifyFilter
+        |> Utilities.Helpers.combineWs Types.stringifyFilter
         |> backdropFilterValue

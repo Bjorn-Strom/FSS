@@ -59,6 +59,7 @@
     <Compile Include="Types\Content.fs" />
     <Compile Include="Types\ClipPath.fs" />
     <Compile Include="Types\FontFace.fs" />
+    <Compile Include="Types\PseudoClass.fs" />
     <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />
     <Compile Include="css\Color.fs" />

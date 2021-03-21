@@ -1,37 +1,35 @@
 namespace Fss
 
-open FssTypes
-
 [<AutoOpen>]
 module Outline  =
 
-    let private outlineToString (color: IOutline) =
+    let private outlineToString (color: Types.IOutline) =
         match color with
         | :? Types.Keywords as k -> Types.keywordsToString k
         | :? Types.None' -> Types.none
         | _ -> "Unknown outline"
 
-    let private outlineColorToString (color: IOutlineColor) =
+    let private outlineColorToString (color: Types.IOutlineColor) =
         match color with
         | :? Types.Color as c -> Types.colorToString c
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown outline color"
 
-    let private outlineWidthToString (width: IOutlineWidth) =
+    let private outlineWidthToString (width: Types.IOutlineWidth) =
         match width with
-            | :? OutlineWidth as c -> Utilities.Helpers.duToLowercase c
+            | :? Types.OutlineWidth as c -> Utilities.Helpers.duToLowercase c
             | :? Types.Keywords as k -> Types.keywordsToString k
             | :? Types.Size as s -> Types.sizeToString s
             | _ -> "Unknown outline width"
 
-    let private outlineStyleToString (style: IOutlineStyle) =
+    let private outlineStyleToString (style: Types.IOutlineStyle) =
         match style with
-            | :? OutlineStyle as c -> Utilities.Helpers.duToLowercase c
+            | :? Types.OutlineStyle as c -> Utilities.Helpers.duToLowercase c
             | :? Types.Keywords as k -> Types.keywordsToString k
             | :? Types.None' -> Types.none
             | _ -> "Unknown outline style"
 
-    let private outlineOffsetToString (style: IOutlineOffset) =
+    let private outlineOffsetToString (style: Types.IOutlineOffset) =
         match style with
             | :? Types.Keywords as k -> Types.keywordsToString k
             | :? Types.Size as s -> Types.sizeToString s
@@ -45,7 +43,7 @@ module Outline  =
         |> outlineValue
 
     type Outline =
-        static member Value (outline: IOutline) = outline |> outlineValue'
+        static member Value (outline: Types.IOutline) = outline |> outlineValue'
 
         static member None = Types.None' |> outlineValue'
         static member Inherit = Types.Inherit |> outlineValue'
@@ -61,7 +59,7 @@ module Outline  =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Outline' (outline: IOutline) = Outline.Value(outline)
+    let Outline' (outline: Types.IOutline) = Outline.Value(outline)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
     let private colorValue value = Types.cssValue Types.Property.OutlineColor value
@@ -71,7 +69,7 @@ module Outline  =
         |> colorValue
 
     type OutlineColor =
-        static member Value (color: IOutlineColor) = color |> colorValue'
+        static member Value (color: Types.IOutlineColor) = color |> colorValue'
         static member black = Types.Color.black |> colorValue'
         static member silver = Types.Color.silver |> colorValue'
         static member gray = Types.Color.gray |> colorValue'
@@ -236,7 +234,7 @@ module Outline  =
     ///     - <c> Types.Color </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineColor' (color: IOutlineColor) = OutlineColor.Value(color)
+    let OutlineColor' (color: Types.IOutlineColor) = OutlineColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width
     let private outlineWidthValue value = Types.cssValue Types.Property.OutlineWidth value
@@ -246,7 +244,7 @@ module Outline  =
         |> outlineWidthValue
 
     type OutlineWidth =
-        static member Value (width: IOutlineWidth) = width |> outlineWidthValue'
+        static member Value (width: Types.IOutlineWidth) = width |> outlineWidthValue'
         static member Thin = Types.OutlineWidth.Thin |> outlineWidthValue'
         static member Medium = Types.OutlineWidth.Medium |> outlineWidthValue'
         static member Thick = Types.OutlineWidth.Thick |> outlineWidthValue'
@@ -266,7 +264,7 @@ module Outline  =
     ///     - <c> Units.Size </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineWidth' (width: IOutlineWidth) = OutlineWidth.Value(width)
+    let OutlineWidth' (width: Types.IOutlineWidth) = OutlineWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style
     let private outlineStyleValue value = Types.cssValue Types.Property.OutlineStyle value
@@ -276,7 +274,7 @@ module Outline  =
         |> outlineStyleValue
 
     type OutlineStyle =
-        static member Value (style: IOutlineStyle) = style |> outlineStyleValue'
+        static member Value (style: Types.IOutlineStyle) = style |> outlineStyleValue'
         static member Hidden = Types.OutlineStyle.Hidden |> outlineStyleValue'
         static member Dotted = Types.OutlineStyle.Dotted |> outlineStyleValue'
         static member Dashed = Types.OutlineStyle.Dashed |> outlineStyleValue'
@@ -302,7 +300,7 @@ module Outline  =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineStyle' (style: IOutlineStyle) = OutlineStyle.Value(style)
+    let OutlineStyle' (style: Types.IOutlineStyle) = OutlineStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset
     let private outlineOffsetValue value = Types.cssValue Types.Property.OutlineOffset value
@@ -312,7 +310,7 @@ module Outline  =
         |> outlineOffsetValue
 
     type OutlineOffset =
-        static member Value (offset: IOutlineOffset) = offset |> outlineOffsetValue'
+        static member Value (offset: Types.IOutlineOffset) = offset |> outlineOffsetValue'
         static member Inherit = Types.Inherit |> outlineOffsetValue'
         static member Initial = Types.Initial |> outlineOffsetValue'
         static member Unset = Types.Unset |> outlineOffsetValue'
@@ -326,4 +324,4 @@ module Outline  =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineOffset' (offset: IOutlineOffset) = OutlineOffset.Value(offset)
+    let OutlineOffset' (offset: Types.IOutlineOffset) = OutlineOffset.Value(offset)

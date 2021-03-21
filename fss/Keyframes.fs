@@ -4,8 +4,6 @@ open Fable.Core
 open Fable.Core.JsInterop
 open Utilities.Helpers
 
-open FssTypes
-
 // https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
 module Keyframes =
     [<ImportMember("@emotion/css")>]
@@ -13,8 +11,8 @@ module Keyframes =
     let keyframes' x = keyframes(x)
 
     type KeyframeAttribute =
-        | Frame of int * CssProperty list
-        | Frames of int list * CssProperty list
+        | Frame of int * Types.CssProperty list
+        | Frames of int list * Types.CssProperty list
 
     let frameValue f = sprintf "%d%%" f
     let frameValues fs = combineList fs frameValue ", "
@@ -26,12 +24,12 @@ module Keyframes =
                 | Frame (f, ps) ->
                     let ps' =
                         ps
-                        |> List.map GlobalValue.CssValue
+                        |> List.map Types.CssValue
                     frameValue f ==> createObj ps'
                 | Frames (fs, ps) ->
                     let ps' =
                         ps
-                        |> List.map GlobalValue.CssValue
+                        |> List.map Types.CssValue
                     frameValues fs ==> (createObj ps')
         )
         |> callback

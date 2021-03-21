@@ -1,11 +1,9 @@
 namespace Fss
 
-open FssTypes
-
 [<AutoOpen>]
 module AspectRatio =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
-    let private stringifyAspectRatio (all: IAll) =
+    let private stringifyAspectRatio (all: Types.IAll) =
         match all with
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown all"

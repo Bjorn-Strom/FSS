@@ -2,11 +2,7 @@ namespace Feliz.Fss
 
 open Feliz
 open Fss
-open Fss.Types.Color
-open Fss.ScrollBehavior
-open Fss.Visibility
 open Fss.Word
-open FssTypes
 
 [<RequireQualifiedAccess>]
 module Counter =
@@ -25,9 +21,9 @@ module Counter =
 [<AutoOpen>]
 module fss =
     type prop with
-        static member css (properties: CssProperty list) =
+        static member css (properties: Types.CssProperty list) =
             prop.className (fss properties)
-    type Types.Color = Types.Color.Types.Color
+    type Color = Types.Color
 
     // Keyframes
     let keyframes attributeList = keyframes attributeList
@@ -44,8 +40,8 @@ module fss =
     type Format = Format
     type Source = Source
     type FontFace = FontFace.FontFace
-    let fontFace (fontFamily: string) (attributeList: CssProperty list) = fontFace fontFamily attributeList
-    let fontFaces (fontFamily: string) (attributeLists: CssProperty list list) = fontFaces fontFamily attributeLists
+    let fontFace (fontFamily: string) (attributeList: Types.CssProperty list) = fontFace fontFamily attributeList
+    let fontFaces (fontFamily: string) (attributeLists: Types.CssProperty list list) = fontFaces fontFamily attributeLists
     // Color
     let rgb r g b = rgb r g b
     let rgba r g b a = rgba r g b a
@@ -84,58 +80,58 @@ module fss =
 
     // PseudoClass
 
-    let Active attributeList = PseudoClass.Active attributeList
-    let AnyLink attributeList = PseudoClass.AnyLink attributeList
-    let Blank attributeList = PseudoClass.Blank attributeList
-    let Checked attributeList = PseudoClass.Checked attributeList
-    let Current attributeList = PseudoClass.Current attributeList
-    let Disabled attributeList = PseudoClass.Disabled attributeList
-    let Empty attributeList = PseudoClass.Empty attributeList
-    let Enabled attributeList = PseudoClass.Enabled attributeList
-    let FirstOfType attributeList = PseudoClass.FirstOfType attributeList
-    let Focus attributeList = PseudoClass.Focus attributeList
-    let FocusVisible attributeList = PseudoClass.FocusVisible attributeList
-    let FocusWithin attributeList = PseudoClass.FocusWithin attributeList
-    let Future attributeList = PseudoClass.Future attributeList
-    let Hover attributeList = PseudoClass.Hover attributeList
-    let Indeterminate attributeList = PseudoClass.Indeterminate attributeList
-    let Invalid attributeList = PseudoClass.Invalid attributeList
-    let InRange attributeList = PseudoClass.InRange attributeList
-    let Lang language attributeList = PseudoClass.Lang language attributeList
-    let LastChild attributeList = PseudoClass.LastChild attributeList
-    let LastOfType attributeList = PseudoClass.LastOfType attributeList
-    let LocalLink attributeList = PseudoClass.LocalLink attributeList
-    let Link attributeList = PseudoClass.Link attributeList
-    let NthChild n attributeList = PseudoClass.NthChild n attributeList
-    let NthLastChild n attributeList = PseudoClass.NthLastChild n attributeList
-    let NthLastOfType n attributeList = PseudoClass.NthLastOfType n attributeList
-    let NthOfType attributeList = PseudoClass.NthOfType attributeList
-    let OnlyChild attributeList = PseudoClass.OnlyChild attributeList
-    let OnlyOfType attributeList = PseudoClass.OnlyOfType attributeList
-    let Optional attributeList = PseudoClass.Optional attributeList
-    let OutOfRange attributeList = PseudoClass.OutOfRange attributeList
-    let Past attributeList = PseudoClass.Past attributeList
-    let Playing attributeList = PseudoClass.Playing attributeList
-    let Paused attributeList = PseudoClass.Paused attributeList
-    let PlaceholderShown attributeList = PseudoClass.PlaceholderShown attributeList
-    let ReadOnly attributeList = PseudoClass.ReadOnly attributeList
-    let ReadWrite attributeList = PseudoClass.ReadWrite attributeList
-    let Required attributeList = PseudoClass.Required attributeList
-    let Root attributeList = PseudoClass.Root attributeList
-    let Scope attributeList = PseudoClass.Scope attributeList
-    let Target attributeList = PseudoClass.Target attributeList
-    let TargetWithin attributeList = PseudoClass.TargetWithin attributeList
-    let Valid attributeList = PseudoClass.Valid attributeList
-    let Visited attributeList = PseudoClass.Visited attributeList
-    let FirstChild attributeList = PseudoClass.FirstChild attributeList
-    let UserInvalid attributeList = PseudoClass.UserInvalid attributeList
+    let Active attributeList = Active attributeList
+    let AnyLink attributeList = AnyLink attributeList
+    let Blank attributeList = Blank attributeList
+    let Checked attributeList = Checked attributeList
+    let Current attributeList = Current attributeList
+    let Disabled attributeList = Disabled attributeList
+    let Empty attributeList = Empty attributeList
+    let Enabled attributeList = Enabled attributeList
+    let FirstOfType attributeList = FirstOfType attributeList
+    let Focus attributeList = Focus attributeList
+    let FocusVisible attributeList = FocusVisible attributeList
+    let FocusWithin attributeList = FocusWithin attributeList
+    let Future attributeList = Future attributeList
+    let Hover attributeList = Hover attributeList
+    let Indeterminate attributeList = Indeterminate attributeList
+    let Invalid attributeList = Invalid attributeList
+    let InRange attributeList = InRange attributeList
+    let Lang language attributeList = Lang language attributeList
+    let LastChild attributeList = LastChild attributeList
+    let LastOfType attributeList = LastOfType attributeList
+    let LocalLink attributeList = LocalLink attributeList
+    let Link attributeList = Link attributeList
+    let NthChild n attributeList = NthChild n attributeList
+    let NthLastChild n attributeList = NthLastChild n attributeList
+    let NthLastOfType n attributeList = NthLastOfType n attributeList
+    let NthOfType attributeList = NthOfType attributeList
+    let OnlyChild attributeList = OnlyChild attributeList
+    let OnlyOfType attributeList = OnlyOfType attributeList
+    let Optional attributeList = Optional attributeList
+    let OutOfRange attributeList = OutOfRange attributeList
+    let Past attributeList = Past attributeList
+    let Playing attributeList = Playing attributeList
+    let Paused attributeList = Paused attributeList
+    let PlaceholderShown attributeList = PlaceholderShown attributeList
+    let ReadOnly attributeList = ReadOnly attributeList
+    let ReadWrite attributeList = ReadWrite attributeList
+    let Required attributeList = Required attributeList
+    let Root attributeList = Root attributeList
+    let Scope attributeList = Scope attributeList
+    let Target attributeList = Target attributeList
+    let TargetWithin attributeList = TargetWithin attributeList
+    let Valid attributeList = Valid attributeList
+    let Visited attributeList = Visited attributeList
+    let FirstChild attributeList = FirstChild attributeList
+    let UserInvalid attributeList = UserInvalid attributeList
     // PseudoElement
-    let After       attributeList = PseudoElement.After attributeList
-    let Before      attributeList = PseudoElement.Before attributeList
-    let FirstLetter attributeList = PseudoElement.FirstLetter attributeList
-    let FirstLine   attributeList = PseudoElement.FirstLine attributeList
-    let Selection   attributeList = PseudoElement.Selection attributeList
-    let Marker      attributeList = PseudoElement.Marker attributeList
+    let After       attributeList = After attributeList
+    let Before      attributeList = Before attributeList
+    let FirstLetter attributeList = FirstLetter attributeList
+    let FirstLine   attributeList = FirstLine attributeList
+    let Selection   attributeList = Selection attributeList
+    let Marker      attributeList = Marker attributeList
 
 
 [<RequireQualifiedAccess>]
@@ -144,13 +140,13 @@ module style =
     type animationDelay = AnimationDelay
     let animationDelay' delay = AnimationDelay' delay
 
-    type animationDirection = Fss.Animation.AnimationDirection
+    type animationDirection = AnimationDirection
     let animationDirection' direction = AnimationDirection' direction
 
     type animationDuration = AnimationDuration
     let animationDuration' duration = AnimationDuration' duration
 
-    type animationFillMode = Fss.Animation.AnimationFillMode
+    type animationFillMode = AnimationFillMode
     let animationFillMode' fillMode = AnimationFillMode' fillMode
 
     type animationIterationCount = AnimationIterationCount
@@ -159,29 +155,29 @@ module style =
     type animationName = AnimationName
     let animationName' name = AnimationName' name
 
-    type animationPlayState = Fss.Animation.AnimationPlayState
+    type animationPlayState = AnimationPlayState
     let animationPlayState' playState = AnimationName' playState
 
     type animationTimingFunction = AnimationTimingFunction
     let animationTimingFunction' timing = AnimationTimingFunction' timing
 
     // Custom
-    let custom (key: string) (value: string) = Functions.Custom key value
+    let custom (key: string) (value: string) = Custom key value
 
     // Background
     type backgroundClip = BackgroundClip
     let backgroundClip' clip = BackgroundClip' clip
 
-    type backgroundOrigin = Background.BackgroundOrigin
+    type backgroundOrigin = BackgroundOrigin
     let backgroundOrigin' origin = BackgroundOrigin' origin
 
-    type backgroundRepeat = Background.BackgroundRepeat
+    type backgroundRepeat = BackgroundRepeat
     let backgroundRepeat' repeat = BackgroundRepeat' repeat
 
-    type backgroundSize = Background.BackgroundSize
+    type backgroundSize = BackgroundSize
     let backgroundSize' size = BackgroundSize' size
 
-    type backgroundAttachment = Background.BackgroundAttachment
+    type backgroundAttachment = BackgroundAttachment
     let backgroundAttachment' attachment = BackgroundAttachment' attachment
 
     type backgroundColor = BackgroundColor
@@ -190,13 +186,13 @@ module style =
     type backgroundImage = BackgroundImage
     let backgroundImage' image = BackgroundImage' image
 
-    type backgroundPosition = Background.BackgroundPosition
+    type backgroundPosition = BackgroundPosition
     let backgroundPosition' position = BackgroundPosition' position
 
-    type backgroundBlendMode = Background.BackgroundBlendMode
+    type backgroundBlendMode = BackgroundBlendMode
     let backgroundBlendMode' blendMode = BackgroundBlendMode' blendMode
 
-    type isolation = Background.Isolation
+    type isolation = Isolation
     let isolation' isolation = Isolation' isolation
 
     // Box
@@ -211,58 +207,58 @@ module style =
     let color' color = Color' color
 
     // Font
-    type fontSize = Font.FontSize
+    type fontSize = FontSize
     let fontSize' size = FontSize' size
 
-    type fontStyle = Font.FontStyle
+    type fontStyle = FontStyle
     let fontStyle' style = FontStyle' style
 
-    type fontStretch = Font.FontStretch
+    type fontStretch = FontStretch
     let fontStretch' stretch = FontStretch' stretch
 
-    type fontWeight = Font.FontWeight
+    type fontWeight = FontWeight
     let fontWeight' weight = FontWeight' weight
 
     type lineHeight = LineHeight
     let lineHeight' height = LineHeight' height
 
-    type lineBreak = Font.LineBreak
+    type lineBreak = LineBreak
     let lineBreak' ``break`` = LineBreak' ``break``
 
     type letterSpacing = LetterSpacing
     let letterSpacing' spacing = LetterSpacing' spacing
 
-    type fontDisplay = Font.FontDisplay
+    type fontDisplay = FontDisplay
     let fontDisplay' display = FontDisplay' display
 
-    type fontFamily = Font.FontFamily
+    type fontFamily = FontFamily
     let fontFamily' family = FontFamily' family
 
-    type fontFeatureSetting = Font.FontFeatureSetting
+    type fontFeatureSetting = FontFeatureSetting
     let fontFeatureSetting' setting = FontFeatureSetting' setting
 
-    type fontVariantNumeric = Font.FontVariantNumeric
+    type fontVariantNumeric = FontVariantNumeric
     let fontVariantNumeric' variant = FontVariantNumeric' variant
 
-    type fontVariantCaps = Font.FontVariantCaps
+    type fontVariantCaps = FontVariantCaps
     let fontVariantCaps' caps = FontVariantCaps' caps
 
-    type fontVariantEastAsian = Font.FontVariantEastAsian
+    type fontVariantEastAsian = FontVariantEastAsian
     let fontVariantEastAsian' variant = FontVariantEastAsian' variant
 
-    type fontVariantLigatures = Font.FontVariantLigatures
+    type fontVariantLigatures = FontVariantLigatures
     let fontVariantLigatures' ligature = FontVariantLigatures' ligature
 
-    type fontKerning = Font.FontKerning
+    type fontKerning = FontKerning
     let fontKerning' kerning = FontKerning' kerning
 
-    type fontLanguageOverride = Font.FontLanguageOverride
+    type fontLanguageOverride = FontLanguageOverride
     let fontLanguageOverride' languageOverride = FontLanguageOverride' languageOverride
 
-    type fontSynthesis = Font.FontSynthesis
+    type fontSynthesis = FontSynthesis
     let fontSynthesis' synthesis = FontSynthesis' synthesis
 
-    type fontVariantPosition = Font.FontVariantPosition
+    type fontVariantPosition = FontVariantPosition
     let fontVariantPosition' variantPosition = FontVariantPosition' variantPosition
 
     // Word
@@ -273,227 +269,227 @@ module style =
     let wordBreak' ``break`` = WordBreak' ``break``
 
     // Text
-    type textAlign = Text.TextAlign
+    type textAlign = TextAlign
     let textAlign' align = TextAlign' align
 
-    type textAlignLast = Text.TextAlignLast
+    type textAlignLast = TextAlignLast
     let textAlignLast' align = TextAlignLast' align
 
-    type textDecoration = Text.TextDecoration
+    type textDecoration = TextDecoration
     let textDecoration' decoration = TextDecoration' decoration
 
-    type textDecorationLine = Text.TextDecorationLine
+    type textDecorationLine = TextDecorationLine
     let textDecorationLine' line = TextDecorationLine' line
 
-    type textDecorationThickness = Text.TextDecorationThickness
+    type textDecorationThickness = TextDecorationThickness
     let textDecorationThickness' thickness = TextDecorationThickness' thickness
 
-    type textDecorationStyle = Text.TextDecorationStyle
+    type textDecorationStyle = TextDecorationStyle
     let textDecorationStyle' style = TextDecorationStyle' style
 
-    type textDecorationSkip = Text.TextDecorationSkip
+    type textDecorationSkip = TextDecorationSkip
     let textDecorationSkip' skip = TextDecorationSkip' skip
 
-    type textDecorationSkipInk = Text.TextDecorationSkipInk
+    type textDecorationSkipInk = TextDecorationSkipInk
     let textDecorationSkipInk' skip = TextDecorationSkipInk' skip
 
-    type textTransform = Text.TextTransform
+    type textTransform = TextTransform
     let textTransform' transform = TextTransform' transform
 
-    type textIndent = Text.TextIndent
+    type textIndent = TextIndent
     let textIndent' indent = TextIndent' indent
 
-    type textShadow = Text.TextShadow
+    type textShadow = TextShadow
     let textShadows shadows = TextShadows shadows
 
-    type textOverflow = Text.TextOverflow
+    type textOverflow = TextOverflow
     let textOverflow' overflow = TextOverflow' overflow
 
-    type textEmphasis = Text.TextEmphasis
+    type textEmphasis = TextEmphasis
     let textEmphasis' emphasis = TextEmphasis' emphasis
 
-    type textEmphasisPosition = Text.TextEmphasisPosition
+    type textEmphasisPosition = TextEmphasisPosition
     let textEmphasisPosition' e1 e2 = TextEmphasisPosition' e1 e2
 
-    type textEmphasisStyle = Text.TextEmphasisStyle
+    type textEmphasisStyle = TextEmphasisStyle
     let textEmphasisStyle' style = TextEmphasisStyle' style
 
-    type textUnderlinePosition = Text.TextUnderlinePosition
+    type textUnderlinePosition = TextUnderlinePosition
     let textUnderlinePosition' position = TextUnderlinePosition' position
 
-    type textUnderlineOffset = Text.TextUnderlineOffset
+    type textUnderlineOffset = TextUnderlineOffset
     let textUnderlineOffset' position = TextUnderlineOffset' position
 
     type quotes = Quotes
     let quotes' position = Quotes' position
 
-    type hyphens = Text.Hyphens
+    type hyphens = Hyphens
     let hyphens' hyphens = Hyphens' hyphens
 
-    type textDecorationColor = Text.TextDecorationColor
+    type textDecorationColor = TextDecorationColor
     let textDecorationColor' color = TextDecorationColor' color
 
-    type textEmphasisColor = Text.TextEmphasisColor
+    type textEmphasisColor = TextEmphasisColor
     let textEmphasisColor' color = TextEmphasisColor' color
 
-    type textSizeAdjust = Text.TextSizeAdjust
+    type textSizeAdjust = TextSizeAdjust
     let textSizeAdjust' color = TextSizeAdjust' color
 
     type tabSize = TabSize
     let tabSize' size = TabSize' size
 
-    type textOrientation = Text.TextOrientation
+    type textOrientation = TextOrientation
     let textOrientation' orientation = TextOrientation' orientation
 
-    type textRendering = Text.TextRendering
+    type textRendering = TextRendering
     let textRendering' rendering = TextRendering' rendering
 
-    type textJustify = Text.TextJustify
+    type textJustify = TextJustify
     let textJustify' justify = TextJustify' justify
 
-    type whiteSpace = Text.WhiteSpace
+    type whiteSpace = WhiteSpace
     let whiteSpace' ws = WhiteSpace' ws
 
-    type userSelect = Text.UserSelect
+    type userSelect = UserSelect
     let userSelect' userSelect = UserSelect' userSelect
 
     // Transform
-    type transform = Transform.Transform
+    type transform = Transform
     let transforms transforms = Transforms transforms
 
-    type transformOrigin = Transform.TransformOrigin
-    let transformOrigin' origin = Transform.TransformOrigin' origin
+    type transformOrigin = TransformOrigin
+    let transformOrigin' origin = TransformOrigin' origin
 
-    type transformStyle = Transform.TransformStyle
-    let transformStyle' style = Transform.TransformStyle' style
+    type transformStyle = TransformStyle
+    let transformStyle' style = TransformStyle' style
 
     // ListStyle
     type listStyle = ListStyle
     let listStyle' style = ListStyle' style
 
-    type listStyleImage = ListStyle.ListStyleImage
+    type listStyleImage = ListStyleImage
     let listStyleImage' image = ListStyleImage' image
 
-    type listStylePosition = ListStyle.ListStylePosition
+    type listStylePosition = ListStylePosition
     let listStylePosition' position = ListStylePosition' position
 
-    type listStyleType = ListStyle.ListStyleType
+    type listStyleType = ListStyleType
     let listStyleType' ``type`` = ListStyleType' ``type``
 
     // column
-    type columnGap = Column.ColumnGap
+    type columnGap = ColumnGap
     let columnGap' column = ColumnGap' column
 
-    type columnSpan = Column.ColumnSpan
+    type columnSpan = ColumnSpan
     let columnSpan' column = ColumnSpan' column
 
-    type columns = Column.Columns
+    type columns = Columns
     let columns' columns = Columns' columns
 
-    type columnRule = Column.ColumnRule
+    type columnRule = ColumnRule
     let columnRule' columnRule = ColumnRule' columnRule
 
-    type columnRuleWidth = Column.ColumnRuleWidth
+    type columnRuleWidth = ColumnRuleWidth
     let columnRuleWidth' columnRuleWidth = ColumnRuleWidth' columnRuleWidth
 
-    type columnRuleStyle = Column.ColumnRuleStyle
+    type columnRuleStyle = ColumnRuleStyle
     let columnRuleStyle' columnRuleStyle = ColumnRuleStyle' columnRuleStyle
 
-    type columnRuleColor = Column.ColumnRuleColor
+    type columnRuleColor = ColumnRuleColor
     let columnRuleColor' columnRuleColor = ColumnRuleColor' columnRuleColor
 
-    type columnCount = Column.ColumnCount
+    type columnCount = ColumnCount
     let columnCount' columnCount = ColumnCount' columnCount
 
-    type columnFill = Column.ColumnFill
+    type columnFill = ColumnFill
     let columnFill' columnFill = ColumnFill' columnFill
 
-    type columnWidth = Column.ColumnWidth
+    type columnWidth = ColumnWidth
     let columnWidth' columnWidth = ColumnWidth' columnWidth
 
     // border
-    type border = Border.Border
+    type border = Border
     let border' border = Border' border
 
-    type borderRadius = Border.BorderRadius
+    type borderRadius = BorderRadius
     let borderRadius' radius = BorderRadius' radius
 
-    type borderBottomLeftRadius = Border.BorderBottomLeftRadius
+    type borderBottomLeftRadius = BorderBottomLeftRadius
     let borderBottomLeftRadius' radius = BorderBottomLeftRadius' radius
 
-    type borderBottomRightRadius = Border.BorderBottomRightRadius
+    type borderBottomRightRadius = BorderBottomRightRadius
     let borderBottomRightRadius' radius = BorderBottomRightRadius' radius
 
-    type borderTopLeftRadius = Border.BorderTopLeftRadius
+    type borderTopLeftRadius = BorderTopLeftRadius
     let borderTopLeftRadius' radius = BorderTopLeftRadius' radius
 
-    type borderTopRightRadius = Border.BorderTopRightRadius
+    type borderTopRightRadius = BorderTopRightRadius
     let borderTopRightRadius' radius = BorderTopRightRadius' radius
 
-    type borderWidth = Border.BorderWidth
+    type borderWidth = BorderWidth
     let borderWidth' width = BorderWidth' width
 
-    type borderTopWidth = Border.BorderTopWidth
+    type borderTopWidth = BorderTopWidth
     let borderTopWidth' width = BorderTopWidth' width
 
-    type borderRightWidth = Border.BorderRightWidth
+    type borderRightWidth = BorderRightWidth
     let borderRightWidth' width = BorderRightWidth' width
 
-    type borderBottomWidth = Border.BorderBottomWidth
+    type borderBottomWidth = BorderBottomWidth
     let borderBottomWidth' width = BorderBottomWidth' width
 
-    type borderLeftWidth = Border.BorderLeftWidth
+    type borderLeftWidth = BorderLeftWidth
     let borderLeftWidth' width = BorderLeftWidth' width
 
-    type borderStyle = Border.BorderStyle
+    type borderStyle = BorderStyle
     let borderStyle' style = BorderStyle' style
 
-    type borderTopStyle = Border.BorderTopStyle
+    type borderTopStyle = BorderTopStyle
     let borderTopStyle' style = BorderTopStyle' style
 
-    type borderRightStyle = Border.BorderRightStyle
+    type borderRightStyle = BorderRightStyle
     let borderRightStyle' style = BorderRightStyle' style
 
-    type borderBottomStyle = Border.BorderBottomStyle
+    type borderBottomStyle = BorderBottomStyle
     let borderBottomStyle' style = BorderBottomStyle' style
 
-    type borderLeftStyle = Border.BorderLeftStyle
+    type borderLeftStyle = BorderLeftStyle
     let borderLeftStyle' style = BorderLeftStyle' style
 
-    type borderCollapse = Border.BorderCollapse
+    type borderCollapse = BorderCollapse
     let borderCollapse' collapse = BorderCollapse' collapse
 
-    type borderImageOutset = Border.BorderImageOutset
+    type borderImageOutset = BorderImageOutset
     let borderImageOutset' outset = BorderImageOutset' outset
 
-    type borderImageRepeat = Border.BorderImageRepeat
+    type borderImageRepeat = BorderImageRepeat
     let borderImageRepeat' repeat = BorderImageRepeat' repeat
 
-    type borderImageSlice = Border.BorderImageSlice
+    type borderImageSlice = BorderImageSlice
     let borderImageSlice' repeat = BorderImageSlice' repeat
 
-    type borderColor = Border.BorderColor
+    type borderColor = BorderColor
     let borderColor' color = BorderColor' color
 
-    type borderTopColor = Border.BorderTopColor
+    type borderTopColor = BorderTopColor
     let borderTopColor' color = BorderTopColor' color
 
-    type borderRightColor = Border.BorderRightColor
+    type borderRightColor = BorderRightColor
     let borderRightColor' color = BorderRightColor' color
 
-    type borderBottomColor = Border.BorderBottomColor
+    type borderBottomColor = BorderBottomColor
     let borderBottomColor' color = BorderBottomColor' color
 
-    type borderLeftColor = Border.BorderLeftColor
+    type borderLeftColor = BorderLeftColor
     let borderLeftColor' color = BorderLeftColor' color
 
-    type borderSpacing = Border.BorderSpacing
+    type borderSpacing = BorderSpacing
     let borderSpacing' spacing = BorderSpacing' spacing
 
-    type borderImageWidth = Border.BorderImageWidth
+    type borderImageWidth = BorderImageWidth
     let borderImageWidth' imageWidth = BorderImageWidth' imageWidth
 
-    type borderImageSource = Border.BorderImageSource
+    type borderImageSource = BorderImageSource
     let borderImageSource' imageSource = BorderImageSource' imageSource
 
     // Transition
@@ -605,20 +601,20 @@ module style =
     type paintOrder = PaintOrder.PaintOrder
     let paintOrder' paintOrder = PaintOrder' paintOrder
 
-    type overflow = Overflow.Overflow
+    type overflow = Overflow
     let overflow' overFlow = Overflow' overFlow
 
-    type overflowX = Overflow.OverflowX
+    type overflowX = OverflowX
     let overFlowX' overFlowX = OverflowX' overFlowX
 
-    type overflowY = Overflow.OverflowY
+    type overflowY = OverflowY
     let overflowY' overflowY = OverflowY' overflowY
 
-    type overflowWrap = Overflow.OverflowWrap
+    type overflowWrap = OverflowWrap
     let overflowWrap' overFlowWrap = OverflowWrap' overFlowWrap
 
     // Position
-    type position = Position.Position
+    type position = Position
     let position' position = Position' position
 
     type top = Top
@@ -630,19 +626,19 @@ module style =
     type bottom = Bottom
     let bottom' bottom = Bottom' bottom
 
-    type left = Position.Left
+    type left = Left
     let left' left = Left' left
 
-    type verticalAlign = Position.VerticalAlign
+    type verticalAlign = VerticalAlign
     let verticalAlign' verticalAlign = VerticalAlign' verticalAlign
 
-    type float = Position.Float
+    type float = Float
     let float' float = Float' float
 
-    type boxSizing = Position.BoxSizing
+    type boxSizing = BoxSizing
     let boxSizing' boxSizing = BoxSizing' boxSizing
 
-    type direction = Position.Direction
+    type direction = Direction
     let direction' direction = Direction' direction
 
     type writingMode = WritingMode
@@ -683,13 +679,13 @@ module style =
     let label' label = Label' label
 
     // Table
-    type captionSide = Table.CaptionSide
+    type captionSide = CaptionSide
     let captionSide' captionSide = CaptionSide' captionSide
 
-    type emptyCells = Table.EmptyCells
+    type emptyCells = EmptyCells
     let emptyCells' emptyCells = EmptyCells' emptyCells
 
-    type tableLayout = Table.TableLayout
+    type tableLayout = TableLayout
     let tableLayout' tableLayout = TableLayout' tableLayout
 
     // Caret
@@ -697,8 +693,8 @@ module style =
     let caretColor' caretColor = CaretColor' caretColor
 
     // Appearance
-    type appearance = Fss.Appearance.Appearance
-    let appearance' appearance = Appearance.Appearance' appearance
+    type appearance = Appearance.Appearance
+    let appearance' appearance = Appearance' appearance
 
     // Typography
     type orphans = Orphans
@@ -712,150 +708,150 @@ module style =
     let all' all = All' all
 
     // Grid
-    type repeat = Grid.Repeat
-    type minMax = Grid.MinMax
+    type repeat = Types.Repeat
+    type minMax = Types.MinMax
 
-    type gridAutoFlow = Grid.GridAutoFlow
+    type gridAutoFlow = GridAutoFlow
     let gridAutoFlow' gridAutoFlow = GridAutoFlow' gridAutoFlow
 
-    type gridTemplateAreas = Grid.GridTemplateAreas
+    type gridTemplateAreas = GridTemplateAreas
     let gridTemplateAreas' gridTemplateAreas = GridTemplateAreas' gridTemplateAreas
 
-    type gridGap = Grid.GridGap
+    type gridGap = GridGap
     let gridGap' gridGap = GridGap' gridGap
 
-    type gridRowGap = Grid.GridRowGap
+    type gridRowGap = GridRowGap
     let gridRowGap' gridRowGap = GridRowGap' gridRowGap
 
-    type gridColumnGap = Grid.GridColumnGap
+    type gridColumnGap = GridColumnGap
     let gridColumnGap' gridColumnGap = GridColumnGap' gridColumnGap
 
-    type gridPosition = Grid.GridPosition
+    type gridPosition = GridPosition
     let gridPosition' gridPosition = GridPosition' gridPosition
 
-    type gridRowStart = Grid.GridRowStart
+    type gridRowStart = GridRowStart
     let gridRowStart' gridRowStart = GridRowStart' gridRowStart
 
-    type gridRowEnd = Grid.GridRowEnd
+    type gridRowEnd = GridRowEnd
     let gridRowEnd' gridRowEnd = GridRowEnd' gridRowEnd
 
-    type gridRow = Grid.GridRow
+    type gridRow = GridRow
     let gridRow' gridRow = GridRow' gridRow
 
-    type gridColumnStart = Grid.GridColumnStart
+    type gridColumnStart = GridColumnStart
     let gridColumnStart' gridColumnStart = GridColumnStart' gridColumnStart
 
-    type gridColumnEnd = Grid.GridColumnEnd
+    type gridColumnEnd = GridColumnEnd
     let gridColumnEnd' gridColumnEnd = GridColumnEnd' gridColumnEnd
 
-    type gridColumn = Grid.GridColumn
+    type gridColumn = GridColumn
     let gridColumn' gridColumn = GridColumn' gridColumn
 
-    type gridArea = Grid.GridArea
+    type gridArea = GridArea
     let gridArea' gridArea = GridArea' gridArea
 
-    type gridTemplateRows = Grid.GridTemplateRows
+    type gridTemplateRows = GridTemplateRows
     let gridTemplateRows' gridTemplateRows = GridTemplateRows' gridTemplateRows
 
-    type gridTemplateColumns = Grid.GridTemplateColumns
+    type gridTemplateColumns = GridTemplateColumns
     let gridTemplateColumns' gridTemplateColumns = GridTemplateColumns' gridTemplateColumns
 
-    type gridAutoRows = Grid.GridAutoRows
+    type gridAutoRows = GridAutoRows
     let gridAutoRows' gridAutoRows = GridAutoRows' gridAutoRows
 
-    type gridAutoColumns = Grid.GridAutoColumns
+    type gridAutoColumns = GridAutoColumns
     let gridAutoColumns' gridAutoColumns = GridAutoColumns' gridAutoColumns
 
     // Flex
-    type alignContent = Flex.AlignContent
+    type alignContent = AlignContent
     let alignContent' alignContent = AlignContent' alignContent
 
-    type alignItems = Flex.AlignItems
+    type alignItems = AlignItems
     let alignItems' alignItems = AlignItems' alignItems
 
-    type alignSelf = Flex.AlignSelf
+    type alignSelf = AlignSelf
     let alignSelf' alignSelf = AlignSelf' alignSelf
 
-    type justifyContent = Flex.JustifyContent
+    type justifyContent = JustifyContent
     let justifyContent' justifyContent = JustifyContent' justifyContent
 
-    type justifyItems = Flex.JustifyItems
+    type justifyItems = JustifyItems
     let justifyItems' justifyItems = JustifyItems' justifyItems
 
-    type justifySelf = Flex.JustifySelf
+    type justifySelf = JustifySelf
     let justifySelf' justifySelf = JustifySelf' justifySelf
 
-    type flexDirection = Flex.FlexDirection
+    type flexDirection = FlexDirection
     let flexDirection' flexDirection = FlexDirection' flexDirection
 
-    type flexWrap = Flex.FlexWrap
+    type flexWrap = FlexWrap
     let flexWrap' flexWrap = FlexWrap' flexWrap
 
     type order = Order
     let order' order = Order' order
 
-    type flexGrow = Flex.FlexGrow
+    type flexGrow = FlexGrow
     let flexGrow' flexGrow = FlexGrow' flexGrow
 
-    type flexShrink = Flex.FlexShrink
+    type flexShrink = FlexShrink
     let flexShrink' flexShrink = FlexShrink' flexShrink
 
-    type flexBasis = Flex.FlexBasis
+    type flexBasis = FlexBasis
     let flexBasis' flexBasis = FlexBasis' flexBasis
 
     // Outline
-    type outline = Outline.Outline
+    type outline = Outline
     let outline' outline = Outline' outline
 
-    type outlineColor = Outline.OutlineColor
+    type outlineColor = OutlineColor
     let outlineColor' outlineColor = OutlineColor' outlineColor
 
-    type outlineWidth = Outline.OutlineWidth
+    type outlineWidth = OutlineWidth
     let outlineWidth' outlineWidth = OutlineWidth' outlineWidth
 
-    type outlineStyle = Outline.OutlineStyle
+    type outlineStyle = OutlineStyle
     let outlineStyle' outlineStyle = OutlineStyle' outlineStyle
 
-    type outlineOffset = Outline.OutlineOffset
+    type outlineOffset = OutlineOffset
     let outlineOffset' outlineOffset = OutlineOffset' outlineOffset
 
     // box shadow
     type boxShadow = BoxShadow
     let boxShadows boxShadows = BoxShadows boxShadows
-    let inset shadow = BoxShadow.Inset shadow
+    let inset shadow = Inset shadow
 
     // Scroll
     type scrollBehavior = ScrollBehavior.ScrollBehavior
     let scrollBehavior' scrollBehaviour = ScrollBehavior' scrollBehaviour
 
-    type scrollMargin = ScrollMargin.ScrollMargin
+    type scrollMargin = ScrollMargin
     let scrollMargin' scrollMargin = ScrollMargin' scrollMargin
 
-    type scrollMarginTop = ScrollMargin.ScrollMarginTop
+    type scrollMarginTop = ScrollMarginTop
     let scrollMarginTop' scrollMarginTop = ScrollMarginTop' scrollMarginTop
 
-    type scrollMarginRight = ScrollMargin.ScrollMarginRight
+    type scrollMarginRight = ScrollMarginRight
     let scrollMarginRight' scrollMarginRight = ScrollMarginRight' scrollMarginRight
 
-    type scrollMarginBottom = ScrollMargin.ScrollMarginBottom
+    type scrollMarginBottom = ScrollMarginBottom
     let scrollMarginBottom' scrollMarginBottom = ScrollMarginBottom' scrollMarginBottom
 
-    type scrollMarginLeft = ScrollMargin.ScrollMarginLeft
+    type scrollMarginLeft = ScrollMarginLeft
     let scrollMarginLeft' scrollMarginLeft = ScrollMarginLeft' scrollMarginLeft
 
-    type scrollPadding = ScrollPadding.ScrollPadding
+    type scrollPadding = ScrollPadding
     let scrollPadding' scrollPadding = ScrollPadding' scrollPadding
 
-    type scrollPaddingTop = ScrollPadding.ScrollPaddingTop
+    type scrollPaddingTop = ScrollPaddingTop
     let scrollPaddingTop' scrollPaddingTop = ScrollPaddingTop' scrollPaddingTop
 
-    type scrollPaddingRight = ScrollPadding.ScrollPaddingRight
+    type scrollPaddingRight = ScrollPaddingRight
     let scrollPaddingRight' scrollPaddingRight = ScrollPaddingRight' scrollPaddingRight
 
-    type scrollPaddingBottom = ScrollPadding.ScrollPaddingBottom
+    type scrollPaddingBottom = ScrollPaddingBottom
     let scrollPaddingBottom' scrollPaddingBottom = ScrollPaddingBottom' scrollPaddingBottom
 
-    type scrollPaddingLeft = ScrollPadding.ScrollPaddingLeft
+    type scrollPaddingLeft = ScrollPaddingLeft
     let scrollPaddingLeft' scrollPaddingLeft = ScrollPaddingLeft' scrollPaddingLeft
 
     type overscrollBehaviorX = OverscrollBehaviorX
@@ -887,23 +883,23 @@ module style =
     let aspectRatio' aspectRatio = AspectRatio' aspectRatio
 
     // Mask
-    type maskClip = Mask.MaskClip
+    type maskClip = MaskClip
     let maskClip' maskClip = MaskClip' maskClip
 
-    type maskComposite = Mask.MaskComposite
+    type maskComposite = MaskComposite
     let maskComposite' maskComposite = MaskComposite' maskComposite
 
-    type maskImage = Mask.MaskImage
+    type maskImage = MaskImage
     let maskImage' maskImage = MaskImage' maskImage
 
-    type maskMode = Mask.MaskMode
+    type maskMode = MaskMode
     let maskMode' maskMode = MaskMode' maskMode
 
-    type maskOrigin = Mask.MaskOrigin
+    type maskOrigin = MaskOrigin
     let maskOrigin' maskOrigin = MaskOrigin' maskOrigin
 
-    type maskPosition = Mask.MaskPosition
+    type maskPosition = MaskPosition
     let maskPosition' x y = MaskPosition' x y
 
-    type maskRepeat = Mask.MaskRepeat
+    type maskRepeat = MaskRepeat
     let maskRepeat' maskRepeat = MaskRepeat' maskRepeat

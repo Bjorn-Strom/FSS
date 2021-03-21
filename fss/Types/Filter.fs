@@ -17,22 +17,21 @@ module Types =
         interface Types.IFilter
         interface Types.IBackdropFilter
 
-    module Filter =
-        let stringifyFilter (filter: Filter) =
-            match filter with
-                | Url u -> $"url(\"{u}\")"
-                | Blur b -> $"blur({b}px)"
-                | Brightness b -> $"brightness({Types.percentToString b})"
-                | Contrast c -> $"contrast({Types.percentToString c})"
-                | DropShadow (x, y, b, c, i)  -> $"drop-shadow({x}px {y}px {b}px {Types.colorToString c}) invert({Types.percentToString i})"
-                | Grayscale g -> $"grayscale({Types.percentToString g})"
-                | HueRotate h -> $"hue-rotate({h}deg)"
-                | Invert i -> $"invert({Types.percentToString i})"
-                | Opacity o -> $"opacity({Types.percentToString o})"
-                | Saturate s -> $"saturate({Types.percentToString s})"
-                | Sepia s -> $"sepia({Types.percentToString s})"
+    let stringifyFilter (filter: Filter) =
+        match filter with
+            | Url u -> $"url(\"{u}\")"
+            | Blur b -> $"blur({b}px)"
+            | Brightness b -> $"brightness({Types.percentToString b})"
+            | Contrast c -> $"contrast({Types.percentToString c})"
+            | DropShadow (x, y, b, c, i)  -> $"drop-shadow({x}px {y}px {b}px {Types.colorToString c}) invert({Types.percentToString i})"
+            | Grayscale g -> $"grayscale({Types.percentToString g})"
+            | HueRotate h -> $"hue-rotate({h}deg)"
+            | Invert i -> $"invert({Types.percentToString i})"
+            | Opacity o -> $"opacity({Types.percentToString o})"
+            | Saturate s -> $"saturate({Types.percentToString s})"
+            | Sepia s -> $"sepia({Types.percentToString s})"
 
-        let stringifyFilters filters =
-            filters
-            |> Fss.Utilities.Helpers.combineWs stringifyFilter
+    let stringifyFilters filters =
+        filters
+        |> Fss.Utilities.Helpers.combineWs stringifyFilter
 

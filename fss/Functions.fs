@@ -6,7 +6,6 @@ open Fable.Core.JsInterop
 
 open Media
 open Keyframes
-open FssTypes
 
 [<AutoOpen>]
 module Functions =
@@ -15,13 +14,13 @@ module Functions =
     let css' x = css(x)
 
     // Constructors
-    let private fssObject (attributeList: CssProperty list) =
+    let private fssObject (attributeList: Types.CssProperty list) =
         attributeList
-        |> List.map GlobalValue.CssValue
+        |> List.map Types.CssValue
         |> createObj
         |> css'
 
-    let fss (attributeList: CssProperty list) =
+    let fss (attributeList: Types.CssProperty list) =
         attributeList
         |> fssObject
         |> string
@@ -31,40 +30,40 @@ module Functions =
         attributeList
         |> createAnimationObject
         |> keyframes'
-        |> CssString
-        :> IAnimationName
+        |> Types.String
+        :> Types.IAnimationName
 
     /// <summary>Write Css as key value string pairs.
     /// Allows you to add values not supported by Fss.</summary>
     /// <param name="key">Css property</param>
     /// <param name="value">Css value </param>
     /// <returns>Css property for fss.</returns>
-    let Custom (key: string) (value: string) = key ==> value |> CssProperty
+    let Custom (key: string) (value: string) = key ==> value |> Types.CssProperty
 
-    let frame (f: int) (properties: CssProperty list) = (f, properties) |> Keyframes.Frame
-    let frames (f: int list) (properties: CssProperty list) = (f, properties) |> Keyframes.Frames
+    let frame (f: int) (properties: Types.CssProperty list) = (f, properties) |> Frame
+    let frames (f: int list) (properties: Types.CssProperty list) = (f, properties) |> Frames
 
-    let counterStyle (attributeList: CounterProperty list) =
+    let counterStyle (attributeList: Types.CounterProperty list) =
         let counterName = sprintf "counter_%s" <| Guid.NewGuid().ToString()
 
         createCounterObject attributeList counterName |> css' |> ignore
 
-        counterName |> CounterStyle
+        counterName |> Types.CounterStyle
 
     // Media
-    let MediaQueryFor (device: Device) (features: MediaFeature list) (attributeList: CssProperty list) =
+    let MediaQueryFor (device: Types.Device) (features: Types.MediaFeature list) (attributeList: Types.CssProperty list) =
         Media.Media(device, features, attributeList)
-    let MediaQuery (features: MediaFeature list) (attributeList: CssProperty list) =
+    let MediaQuery (features: Types.MediaFeature list) (attributeList: Types.CssProperty list) =
         Media.Media(features, attributeList)
 
     // Font
-    let fontFace (fontFamily: string) (attributeList: CssProperty list) =
+    let fontFace (fontFamily: string) (attributeList: Types.CssProperty list) =
         attributeList
         |> createFontFaceObject fontFamily
         |> css'
         Types.FontName fontFamily
 
-    let fontFaces (fontFamily: string) (attributeLists: CssProperty list list) =
+    let fontFaces (fontFamily: string) (attributeLists: Types.CssProperty list list) =
         attributeLists
         |> List.map (createFontFaceObject fontFamily)
         |> css'
@@ -82,35 +81,35 @@ module Functions =
 
     // Sizes
     // Absolute
-    let px (v: int): Types.Size = sprintf "%dpx" v |> Units.Size.Px
-    let inc (v: float): Types.Size = sprintf "%.1fin" v |> Units.Size.In
-    let cm (v: float): Types.Size = sprintf "%.1fcm" v |> Units.Size.Cm
-    let mm (v: float): Types.Size = sprintf "%.1fmm" v |> Units.Size.Mm
-    let pt (v: float): Types.Size = sprintf "%.1fpt" v |> Units.Size.Pt
-    let pc (v: float): Types.Size = sprintf "%.1fpc" v |> Units.Size.Pc
+    let px (v: int): Types.Size = sprintf "%dpx" v |> Types.Px
+    let inc (v: float): Types.Size = sprintf "%.1fin" v |> Types.In
+    let cm (v: float): Types.Size = sprintf "%.1fcm" v |> Types.Cm
+    let mm (v: float): Types.Size = sprintf "%.1fmm" v |> Types.Mm
+    let pt (v: float): Types.Size = sprintf "%.1fpt" v |> Types.Pt
+    let pc (v: float): Types.Size = sprintf "%.1fpc" v |> Types.Pc
 
     // Relative
-    let em (v: float): Types.Size = sprintf "%.1fem" v |> Units.Size.Em
-    let rem (v: float): Types.Size = sprintf "%.1frem" v |> Units.Size.Rem
-    let ex (v: float): Types.Size = sprintf "%.1fex" v |> Units.Size.Ex
-    let ch (v: float): Types.Size = sprintf "%.1fch" v |> Units.Size.Ch
-    let vw (v: float): Types.Size = sprintf "%.1fvw" v |> Units.Size.Vw
-    let vh (v: float): Types.Size = sprintf "%.1fvh" v |> Units.Size.Vh
-    let vmax (v: float): Types.Size = sprintf "%.1fvmax" v |> Units.Size.VMax
-    let vmin (v: float): Types.Size = sprintf "%.1fvmin" v |> Units.Size.VMin
+    let em (v: float): Types.Size = sprintf "%.1fem" v |> Types.Em'
+    let rem (v: float): Types.Size = sprintf "%.1frem" v |> Types.Rem
+    let ex (v: float): Types.Size = sprintf "%.1fex" v |> Types.Ex
+    let ch (v: float): Types.Size = sprintf "%.1fch" v |> Types.Ch
+    let vw (v: float): Types.Size = sprintf "%.1fvw" v |> Types.Vw
+    let vh (v: float): Types.Size = sprintf "%.1fvh" v |> Types.Vh
+    let vmax (v: float): Types.Size = sprintf "%.1fvmax" v |> Types.VMax
+    let vmin (v: float): Types.Size = sprintf "%.1fvmin" v |> Types.VMin
 
     // Angles
-    let deg (v: float): Types.Angle = sprintf "%.2fdeg" v |> Units.Angle.Deg
-    let grad (v: float): Types.Angle = sprintf "%.2fgrad" v |> Units.Angle.Grad
-    let rad (v: float): Types.Angle = sprintf "%.4frad" v |> Units.Angle.Rad
-    let turn (v: float): Types.Angle = sprintf "%.2fturn" v |> Units.Angle.Turn
+    let deg (v: float): Types.Angle = sprintf "%.2fdeg" v |> Types.Deg
+    let grad (v: float): Types.Angle = sprintf "%.2fgrad" v |> Types.Grad
+    let rad (v: float): Types.Angle = sprintf "%.4frad" v |> Types.Rad
+    let turn (v: float): Types.Angle = sprintf "%.2fturn" v |> Types.Turn
 
     // Percent
     let pct (v: int): Types.Percent = sprintf "%d%%" v |> Types.Percent
 
     // Time
-    let sec (v: float): Types.Time = sprintf "%.2fs" v |> Units.Time.Sec
-    let ms (v: float): Types.Time = sprintf "%.2fms" v |> Units.Time.Ms
+    let sec (v: float): Types.Time = sprintf "%.2fs" v |> Types.Sec
+    let ms (v: float): Types.Time = sprintf "%.2fms" v |> Types.Ms
 
     // Fractions
-    let fr (v: float): Types.Fraction = sprintf "%.2ffr" v |> Units.Fraction.Fr
+    let fr (v: float): Types.Fraction = sprintf "%.2ffr" v |> Types.Fr

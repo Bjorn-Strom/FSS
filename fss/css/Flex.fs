@@ -1,91 +1,90 @@
 namespace Fss
-open FssTypes
 
 [<AutoOpen>]
 module Flex =
 
-    let private alignContentToString (alignment: IAlignContent) =
+    let private alignContentToString (alignment: Types.IAlignContent) =
         match alignment with
-        | :? AlignContent as a -> Utilities.Helpers.duToKebab a
+        | :? Types.AlignContent as a -> Utilities.Helpers.duToKebab a
         | :? Types.Normal -> Types.normal
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown align content"
 
-    let private alignItemsToString (alignment: IAlignItems) =
+    let private alignItemsToString (alignment: Types.IAlignItems) =
         match alignment with
-        | :? AlignItems as a -> Utilities.Helpers.duToKebab a
+        | :? Types.AlignItems as a -> Utilities.Helpers.duToKebab a
         | :? Types.Normal -> Types.normal
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown align items"
 
-    let private alignSelfToString (alignment: IAlignSelf) =
+    let private alignSelfToString (alignment: Types.IAlignSelf) =
         match alignment with
-        | :? AlignSelf as a -> Utilities.Helpers.duToKebab a
+        | :? Types.AlignSelf as a -> Utilities.Helpers.duToKebab a
         | :? Types.Normal -> Types.normal
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown align self"
 
-    let private justifyContentToString (justification: IJustifyContent) =
+    let private justifyContentToString (justification: Types.IJustifyContent) =
         match justification with
-        | :? JustifyContent as a -> Utilities.Helpers.duToKebab a
+        | :? Types.JustifyContent as a -> Utilities.Helpers.duToKebab a
         | :? Types.Normal -> Types.normal
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown justify content"
 
-    let private justifyItemsToString (justification: IJustifyItems) =
+    let private justifyItemsToString (justification: Types.IJustifyItems) =
         match justification with
-        | :? JustifyItems as a -> Utilities.Helpers.duToKebab a
+        | :? Types.JustifyItems as a -> Utilities.Helpers.duToKebab a
         | :? Types.Normal -> Types.normal
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown justify items"
 
-    let private justifySelfToString (justification: IJustifySelf) =
+    let private justifySelfToString (justification: Types.IJustifySelf) =
         match justification with
-        | :? JustifySelf as a -> Utilities.Helpers.duToKebab a
+        | :? Types.JustifySelf as a -> Utilities.Helpers.duToKebab a
         | :? Types.Normal -> Types.normal
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown justify self"
 
-    let private flexDirectionToString (direction: IFlexDirection) =
+    let private flexDirectionToString (direction: Types.IFlexDirection) =
         match direction with
-        | :? FlexDirection as a -> Utilities.Helpers.duToKebab a
+        | :? Types.FlexDirection as a -> Utilities.Helpers.duToKebab a
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown flex direction"
 
-    let private flexToString(flex: IFlex) =
+    let private flexToString(flex: Types.IFlex) =
         match flex with
         | :? Types.Keywords as k -> Types.keywordsToString k
         | :? Types.Auto -> Types.auto
         | :? Types.None' -> Types.none
         | _ -> "Unknown flex"
 
-    let private flexWrapToString (direction: IFlexWrap) =
+    let private flexWrapToString (direction: Types.IFlexWrap) =
         match direction with
-        | :? FlexWrap as a -> Utilities.Helpers.duToKebab a
+        | :? Types.FlexWrap as a -> Utilities.Helpers.duToKebab a
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown flex wrap"
 
-    let private orderToString (order: IOrder) =
+    let private orderToString (order: Types.IOrder) =
         match order with
         | :? Types.Int as i -> Types.IntToString i
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown order"
 
-    let private flexGrowToString (flexGrow: IFlexGrow) =
+    let private flexGrowToString (flexGrow: Types.IFlexGrow) =
         match flexGrow with
-        | :? CssFloat as f -> cssFloatToString f
+        | :? Types.Float as f -> Types.FloatToString f
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown flex grow"
 
-    let private flexShrinkToString (flexShrink: IFlexShrink) =
+    let private flexShrinkToString (flexShrink: Types.IFlexShrink) =
         match flexShrink with
-        | :? CssFloat as f -> cssFloatToString f
+        | :? Types.Float as f -> Types.FloatToString f
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown flex shrink"
 
-    let private flexBasisToString (basis: IFlexBasis) =
+    let private flexBasisToString (basis: Types.IFlexBasis) =
         match basis with
-        | :? FlexBasis as b -> Utilities.Helpers.duToKebab b
+        | :? Types.FlexBasis as b -> Utilities.Helpers.duToKebab b
         | :? Types.Auto -> Types.auto
         | :? Types.Size as s -> Types.sizeToString s
         | :? Types.Percent as p -> Types.percentToString p
@@ -100,7 +99,7 @@ module Flex =
         |> alignContentValue
 
     type AlignContent =
-        static member Value (alignment: IAlignContent) = alignment |> alignContentValue'
+        static member Value (alignment: Types.IAlignContent) = alignment |> alignContentValue'
         static member Start = Types.AlignContent.Start |> alignContentValue'
         static member End = Types.AlignContent.End |> alignContentValue'
         static member FlexStart = Types.AlignContent.FlexStart |> alignContentValue'
@@ -131,7 +130,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AlignContent' (align: IAlignContent) = AlignContent.Value(align)
+    let AlignContent' (align: Types.IAlignContent) = AlignContent.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
     let private alignItemsValue value = Types.cssValue Types.Property.AlignItems value
@@ -141,7 +140,7 @@ module Flex =
         |> alignItemsValue
 
     type AlignItems =
-        static member Value (alignment: IAlignItems) = alignment |> alignItemsValue'
+        static member Value (alignment: Types.IAlignItems) = alignment |> alignItemsValue'
         static member Start = Types.AlignItems.Start |> alignItemsValue'
         static member End = Types.AlignItems.End |> alignItemsValue'
         static member FlexStart = Types.AlignItems.FlexStart |> alignItemsValue'
@@ -171,7 +170,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AlignItems' (align: IAlignItems) = AlignItems.Value(align)
+    let AlignItems' (align: Types.IAlignItems) = AlignItems.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
     let private alignSelfValue value = Types.cssValue Types.Property.AlignSelf value
@@ -181,7 +180,7 @@ module Flex =
         |> alignSelfValue
 
     type AlignSelf =
-        static member Value (alignment: IAlignSelf) = alignment |> alignSelfValue'
+        static member Value (alignment: Types.IAlignSelf) = alignment |> alignSelfValue'
         static member Start = Types.AlignSelf.Start |> alignSelfValue'
         static member End = Types.AlignSelf.End |> alignSelfValue'
         static member FlexStart = Types.AlignSelf.FlexStart |> alignSelfValue'
@@ -211,7 +210,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AlignSelf' (align: IAlignSelf) = AlignSelf.Value(align)
+    let AlignSelf' (align: Types.IAlignSelf) = AlignSelf.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
     let private justifyContentValue value = Types.cssValue Types.Property.JustifyContent value
@@ -221,7 +220,7 @@ module Flex =
         |> justifyContentValue
 
     type JustifyContent =
-        static member Value (justification: IJustifyContent) = justification |> justifyContentValue
+        static member Value (justification: Types.IJustifyContent) = justification |> justifyContentValue
         static member Start = Types.JustifyContent.Start |> justifyContentValue'
         static member End = Types.JustifyContent.End |> justifyContentValue'
         static member FlexStart = Types.JustifyContent.FlexStart |> justifyContentValue'
@@ -254,7 +253,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let JustifyContent' (align: IJustifyContent) = JustifyContent.Value(align)
+    let JustifyContent' (align: Types.IJustifyContent) = JustifyContent.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
     let private justifyItemsValue value = Types.cssValue Types.Property.JustifyItems value
@@ -264,7 +263,7 @@ module Flex =
         |> justifyItemsValue
 
     type JustifyItems =
-        static member Value (justification: IJustifyItems) = justification |> justifyItemsValue'
+        static member Value (justification: Types.IJustifyItems) = justification |> justifyItemsValue'
         static member Start = Types.JustifyItems.Start |> justifyItemsValue'
         static member End = Types.JustifyItems.End |> justifyItemsValue'
         static member FlexStart = Types.JustifyItems.FlexStart |> justifyItemsValue'
@@ -297,7 +296,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let JustifyItems' (align: IJustifyItems) = JustifyItems.Value(align)
+    let JustifyItems' (align: Types.IJustifyItems) = JustifyItems.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
     let private justifySelfValue value = Types.cssValue Types.Property.JustifySelf value
@@ -306,7 +305,7 @@ module Flex =
         |> justifySelfToString
         |> justifySelfValue
     type JustifySelf =
-        static member Value (justification: IJustifySelf) = justification |> justifySelfValue'
+        static member Value (justification: Types.IJustifySelf) = justification |> justifySelfValue'
         static member Start = Types.JustifySelf.Start |> justifySelfValue'
         static member End = Types.JustifySelf.End |> justifySelfValue'
         static member FlexStart = Types.JustifySelf.FlexStart |> justifySelfValue'
@@ -336,7 +335,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let JustifySelf' (align: IJustifySelf) = JustifySelf.Value(align)
+    let JustifySelf' (align: Types.IJustifySelf) = JustifySelf.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
     let private flexDirectionValue value = Types.cssValue Types.Property.FlexDirection value
@@ -346,7 +345,7 @@ module Flex =
         |> flexDirectionValue
 
     type FlexDirection =
-        static member Value (direction: IFlexDirection) = direction |> flexDirectionValue'
+        static member Value (direction: Types.IFlexDirection) = direction |> flexDirectionValue'
         static member Row = Types.FlexDirection.Row |> flexDirectionValue'
         static member RowReverse = Types.FlexDirection.RowReverse |> flexDirectionValue'
         static member Column = Types.FlexDirection.Column |> flexDirectionValue'
@@ -365,7 +364,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexDirection' (direction: IFlexDirection) = FlexDirection.Value(direction)
+    let FlexDirection' (direction: Types.IFlexDirection) = FlexDirection.Value(direction)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
     let private flexWrapValue value = Types.cssValue Types.Property.FlexWrap value
@@ -374,7 +373,7 @@ module Flex =
         |> flexWrapToString
         |> flexWrapValue
     type FlexWrap =
-        static member Value (direction: IFlexWrap) = direction |> flexWrapValue'
+        static member Value (direction: Types.IFlexWrap) = direction |> flexWrapValue'
         static member NoWrap = Types.FlexWrap.NoWrap |> flexWrapValue'
         static member Wrap = Types.FlexWrap.Wrap |> flexWrapValue'
         static member WrapReverse = Types.FlexWrap.WrapReverse |> flexWrapValue'
@@ -392,7 +391,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexWrap' (wrap: IFlexWrap) = FlexWrap.Value(wrap)
+    let FlexWrap' (wrap: Types.IFlexWrap) = FlexWrap.Value(wrap)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/order
     let private orderValue value = Types.cssValue Types.Property.Order value
@@ -401,7 +400,7 @@ module Flex =
         |> orderToString
         |> orderValue
     type Order =
-        static member Value (order: IOrder) = order |> orderValue'
+        static member Value (order: Types.IOrder) = order |> orderValue'
 
         static member Inherit = Types.Inherit |> orderValue'
         static member Initial = Types.Initial |> orderValue'
@@ -416,7 +415,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Order' (order: IOrder) = Order.Value(order)
+    let Order' (order: Types.IOrder) = Order.Value(order)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
     let private flexGrowValue value = Types.cssValue Types.Property.FlexGrow value
@@ -426,7 +425,7 @@ module Flex =
         |> flexGrowValue
 
     type FlexGrow =
-        static member Value (grow: IFlexGrow) = grow |> flexGrowValue'
+        static member Value (grow: Types.IFlexGrow) = grow |> flexGrowValue'
 
         static member Inherit = Types.Inherit |> flexGrowValue'
         static member Initial = Types.Initial |> flexGrowValue'
@@ -441,7 +440,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexGrow' (grow: IFlexGrow) = FlexGrow.Value(grow)
+    let FlexGrow' (grow: Types.IFlexGrow) = FlexGrow.Value(grow)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
     let private flexShrinkValue value = Types.cssValue Types.Property.FlexShrink value
@@ -451,10 +450,10 @@ module Flex =
         |> flexShrinkValue
 
     type FlexShrink =
-        static member Value (shrink: IFlexShrink) = shrink |> flexShrinkValue'
+        static member Value (shrink: Types.IFlexShrink) = shrink |> flexShrinkValue'
         static member Inherit = Types.Inherit |> flexShrinkValue'
         static member Initial = Types.Initial |> flexShrinkValue'
-        static member Unset =  Unset |> flexShrinkValue'
+        static member Unset =  Types.Unset |> flexShrinkValue'
 
     /// <summary>Sets shrink factor of flex item.</summary>
     /// <param name="shrink">
@@ -465,7 +464,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexShrink' (shrink: IFlexShrink) = FlexShrink.Value(shrink)
+    let FlexShrink' (shrink: Types.IFlexShrink) = FlexShrink.Value(shrink)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
     let private flexBasisValue value = Types.cssValue Types.Property.FlexBasis value
@@ -475,7 +474,7 @@ module Flex =
         |> flexBasisValue
 
     type FlexBasis =
-        static member Value (basis: IFlexBasis) = basis |> flexBasisValue'
+        static member Value (basis: Types.IFlexBasis) = basis |> flexBasisValue'
         static member Fill = Types.FlexBasis.Fill |> flexBasisValue'
         static member MaxContent = Types.FlexBasis.MaxContent |> flexBasisValue'
         static member MinContent = Types.FlexBasis.MinContent |> flexBasisValue'
@@ -499,4 +498,4 @@ module Flex =
     ///     - <c> Units.Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexBasis' (basis: IFlexBasis) = FlexBasis.Value(basis)
+    let FlexBasis' (basis: Types.IFlexBasis) = FlexBasis.Value(basis)

@@ -1,13 +1,11 @@
 namespace Fss
 
-open FssTypes
-
 [<AutoOpen>]
 module Clear =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/clear
-    let private stringifyClear (clear: IClear) =
+    let private stringifyClear (clear: Types.IClear) =
         match clear with
-        | :? Clear as c -> Utilities.Helpers.duToKebab c
+        | :? Types.Clear as c -> Utilities.Helpers.duToKebab c
         | :? Types.Keywords as k -> Types.keywordsToString k
         | :? Types.None' -> Types.none
         | _ -> "Unknown clear"
@@ -19,7 +17,7 @@ module Clear =
         |> clearValue
 
     type Clear =
-        static member Value (clear: IClear) = clear |> clearValue'
+        static member Value (clear: Types.IClear) = clear |> clearValue'
         static member None = Types.None' |> clearValue'
         static member Inherit = Types.Inherit |> clearValue'
         static member Initial = Types.Initial |> clearValue'
@@ -34,4 +32,4 @@ module Clear =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Clear' (clear: IClear) = clear |> Clear.Value
+    let Clear' (clear: Types.IClear) = clear |> Clear.Value

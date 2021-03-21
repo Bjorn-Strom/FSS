@@ -1,13 +1,11 @@
 namespace Fss
 
-open FssTypes
-
 [<AutoOpen>]
 module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
-    let private stringifyClip (clip: IMaskClip) =
+    let private stringifyClip (clip: Types.IMaskClip) =
         match clip with
-        | :? MaskClip as m -> Utilities.Helpers.duToKebab m
+        | :? Types.MaskClip as m -> Utilities.Helpers.duToKebab m
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask-clip"
 
@@ -18,7 +16,7 @@ module Mask =
         |> maskClipValue
 
     type MaskClip =
-        static member Value (clip: IMaskClip) = clip |> maskClipValue'
+        static member Value (clip: Types.IMaskClip) = clip |> maskClipValue'
         static member Value (clips: Types.MaskClip list) =
             clips
             |> Utilities.Helpers.combineComma stringifyClip
@@ -48,12 +46,12 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskClip' (clip: IMaskClip) = clip |> MaskClip.Value
+    let MaskClip' (clip: Types.IMaskClip) = clip |> MaskClip.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite
-    let private stringifyComposite (composite: IMaskComposite) =
+    let private stringifyComposite (composite: Types.IMaskComposite) =
         match composite with
-        | :? MaskComposite as m -> Utilities.Helpers.duToLowercase m
+        | :? Types.MaskComposite as m -> Utilities.Helpers.duToLowercase m
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask-composite"
 
@@ -64,7 +62,7 @@ module Mask =
         |> maskCompositeValue
 
     type MaskComposite =
-        static member Value (clip: IMaskComposite) = clip |> maskCompositeValue'
+        static member Value (clip: Types.IMaskComposite) = clip |> maskCompositeValue'
         static member Value (clips: Types.MaskComposite list) =
             clips
             |> Utilities.Helpers.combineComma stringifyComposite
@@ -86,10 +84,10 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskComposite' (clip: IMaskComposite) = clip |> MaskComposite.Value
+    let MaskComposite' (clip: Types.IMaskComposite) = clip |> MaskComposite.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
-    let private imageSourceToString (imageSource: IMaskImage) =
+    let private imageSourceToString (imageSource: Types.IMaskImage) =
         match imageSource with
         | :? Types.None' -> Types.none
         | :? Types.Keywords as k -> Types.keywordsToString k
@@ -102,7 +100,7 @@ module Mask =
         |> imageValue
 
     type MaskImage =
-        static member Value (source: IMaskImage) = source |> imageValue'
+        static member Value (source: Types.IMaskImage) = source |> imageValue'
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
         static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
             imageValue <| Image.Image.LinearGradient((angle, gradients))
@@ -148,12 +146,12 @@ module Mask =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskImage' (source: IMaskImage) = MaskImage.Value(source)
+    let MaskImage' (source: Types.IMaskImage) = MaskImage.Value(source)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode
-    let private stringifyMode (composite: IMaskMode) =
+    let private stringifyMode (composite: Types.IMaskMode) =
         match composite with
-        | :? MaskMode as m -> Utilities.Helpers.duToKebab m
+        | :? Types.MaskMode as m -> Utilities.Helpers.duToKebab m
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask mode"
 
@@ -164,7 +162,7 @@ module Mask =
         |> maskModeValue
 
     type MaskMode =
-        static member Value (mode: IMaskMode) = mode |> maskModeValue'
+        static member Value (mode: Types.IMaskMode) = mode |> maskModeValue'
         static member Value (modes: Types.MaskMode list) =
             modes
             |> Utilities.Helpers.combineComma stringifyMode
@@ -185,12 +183,12 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskMode' (mode: IMaskMode) = mode |> MaskMode.Value
+    let MaskMode' (mode: Types.IMaskMode) = mode |> MaskMode.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
-    let private stringifyOrigin (composite: IMaskOrigin) =
+    let private stringifyOrigin (composite: Types.IMaskOrigin) =
         match composite with
-        | :? MaskOrigin as m -> Utilities.Helpers.duToKebab m
+        | :? Types.MaskOrigin as m -> Utilities.Helpers.duToKebab m
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask mode"
 
@@ -201,7 +199,7 @@ module Mask =
         |> maskOriginValue
 
     type MaskOrigin =
-        static member Value (origin: IMaskOrigin) = origin |> maskOriginValue'
+        static member Value (origin: Types.IMaskOrigin) = origin |> maskOriginValue'
         static member Value (origins: Types.MaskOrigin list) =
             origins
             |> Utilities.Helpers.combineComma stringifyOrigin
@@ -230,10 +228,10 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskOrigin' (mode: IMaskOrigin) = mode |> MaskOrigin.Value
+    let MaskOrigin' (mode: Types.IMaskOrigin) = mode |> MaskOrigin.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
-    let private stringifyPosition (composite: IMaskPosition) =
+    let private stringifyPosition (composite: Types.IMaskPosition) =
         match composite with
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask position"
@@ -284,9 +282,9 @@ module Mask =
     let MaskPosition' (x: Types.Size) (y: Types.Size) = MaskPosition.Value(x,y)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
-    let private stringifyRepeat (composite: IMaskRepeat) =
+    let private stringifyRepeat (composite: Types.IMaskRepeat) =
         match composite with
-        | :? MaskRepeat as r -> Utilities.Helpers.duToKebab r
+        | :? Types.MaskRepeat as r -> Utilities.Helpers.duToKebab r
         | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask repeat"
 
@@ -296,14 +294,14 @@ module Mask =
         |> stringifyRepeat
         |> maskRepeatValue
 
-    let private repeatValue (x: MaskRepeat, y: MaskRepeat) =
+    let private repeatValue (x: Types.MaskRepeat, y: Types.MaskRepeat) =
         $"{stringifyRepeat x} {stringifyRepeat y}"
 
     type MaskRepeat =
-        static member Value (repeat: IMaskRepeat) =
+        static member Value (repeat: Types.IMaskRepeat) =
             repeat
             |> maskRepeatValue'
-        static member Value (repeatX: IMaskRepeat, repeatY: IMaskRepeat) =
+        static member Value (repeatX: Types.IMaskRepeat, repeatY: Types.IMaskRepeat) =
             $"{stringifyRepeat repeatX} {stringifyRepeat repeatY}"
             |> maskRepeatValue
         static member Value(repeats: (Types.MaskRepeat * Types.MaskRepeat) list) =
@@ -312,7 +310,7 @@ module Mask =
             |> maskRepeatValue
         static member RepeatX = Types.MaskRepeat.RepeatX |> maskRepeatValue'
         static member RepeatY = Types.MaskRepeat.RepeatY |> maskRepeatValue'
-        static member Repeat = Types.MaskRepeat.Repeat |> maskRepeatValue'
+        static member Repeat = Types.MaskRepeat.Repeat' |> maskRepeatValue'
         static member Space = Types.MaskRepeat.Space |> maskRepeatValue'
         static member Round = Types.MaskRepeat.Round |> maskRepeatValue'
         static member NoRepeat = Types.MaskRepeat.NoRepeat |> maskRepeatValue'
@@ -329,4 +327,4 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskRepeat' (repeat: IMaskRepeat) = repeat |> MaskRepeat.Value
+    let MaskRepeat' (repeat: Types.IMaskRepeat) = repeat |> MaskRepeat.Value

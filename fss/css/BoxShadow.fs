@@ -1,31 +1,29 @@
 namespace Fss
 
-open FssTypes
-
 [<AutoOpen>]
 module BoxShadow =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
     let rec private boxShadowToString =
         function
-            | BoxShadow.Color (x, y, color) ->
+            | Types.BoxShadow.Color' (x, y, color) ->
                 sprintf "%s %s %s"
                     (Types.sizeToString x)
                     (Types.sizeToString y)
                     (Types.colorToString color)
-            | BoxShadow.BlurColor (x, y, blur, color) ->
+            | Types.BoxShadow.BlurColor (x, y, blur, color) ->
                 sprintf "%s %s %s %s"
                     (Types.sizeToString x)
                     (Types.sizeToString y)
                     (Types.sizeToString blur)
                     (Types.colorToString color)
-            | BoxShadow.BlurSpreadColor (x, y, blur, spread, color) ->
+            | Types.BoxShadow.BlurSpreadColor (x, y, blur, spread, color) ->
                 sprintf "%s %s %s %s %s"
                     (Types.sizeToString x)
                     (Types.sizeToString y)
                     (Types.sizeToString blur)
                     (Types.sizeToString spread)
                     (Types.colorToString color)
-            | BoxShadow.Inset shadow ->
+            | Types.BoxShadow.Inset shadow ->
                 sprintf "inset %s" <| boxShadowToString shadow
 
     let private boxShadowValue value = Types.cssValue Types.Property.BoxShadow value
@@ -37,10 +35,10 @@ module BoxShadow =
                 BoxShadow.BlurSpreadColor(x, y, blur, spread, color)
 
     /// Supply a list of box shadows to be applied to the element.
-    let BoxShadows (shadows: Types.BoxShadow list): CssProperty =
+    let BoxShadows (shadows: Types.BoxShadow list): Types.CssProperty =
         shadows
         |> Utilities.Helpers.combineComma boxShadowToString
         |> boxShadowValue
 
     /// Can be used to invert box shadow
-    let Inset (shadow: Types.BoxShadow) = BoxShadow.Inset shadow
+    let Inset (shadow: Types.BoxShadow) = Types.BoxShadow.Inset shadow
