@@ -46,7 +46,7 @@ module Types =
     type MaskRepeat =
         | RepeatX
         | RepeatY
-        | Repeat
+        | Repeat'
         | Space
         | Round
         | NoRepeat

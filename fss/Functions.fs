@@ -113,4 +113,4 @@ module Functions =
     let ms (v: float): Types.Time = sprintf "%.2fms" v |> Units.Time.Ms
 
     // Fractions
-    let fr (v: float): Units.Fraction.Fraction = sprintf "%.2ffr" v |> Units.Fraction.Fr
+    let fr (v: float): Types.Fraction = sprintf "%.2ffr" v |> Units.Fraction.Fr
