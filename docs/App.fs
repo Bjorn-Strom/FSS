@@ -320,8 +320,8 @@ module App =
                         Label' "Bouncy Color"
                         AnimationName.Names [ bounceFrames; backgroundColorFrames ]
                         AnimationDuration.Values [ sec 1.0; sec 5.0 ]
-                        AnimationTimingFunction.Values [ FssTypes.TimingFunction.EaseInOut; FssTypes.TimingFunction.Ease ]
-                        AnimationIterationCount.Values [ FssTypes.Animation.Infinite; FssTypes.CssInt 3 ]
+                        AnimationTimingFunction.Values [ Types.TimingFunction.EaseInOut; Types.TimingFunction.Ease ]
+                        AnimationIterationCount.Values [ Types.Animation.Infinite; Types.CssInt 3 ]
                     ]
             article []
                 [
@@ -347,27 +347,27 @@ module App =
                     [
                         Label' "Descendant"
                         yield! borders
-                        ! FssTypes.Html.P [ Color.red ]
+                        ! Types.Html.P [ Color.red ]
                     ]
             let childCombinator =
                 fss
                     [
                         Label' "Child"
                         yield! borders
-                        !> FssTypes.Html.P [ Color.red ]
+                        !> Types.Html.P [ Color.red ]
 
                     ]
             let directCombinator =
                 fss
                     [
                         Label' "Direct"
-                        !+ FssTypes.Html.P [ Color.red ]
+                        !+ Types.Html.P [ Color.red ]
                     ]
             let adjacentCombinator =
                 fss
                     [
                         Label' "Adjacent"
-                        !~ FssTypes.Html.P [ Color.red ]
+                        !~ Types.Html.P [ Color.red ]
                     ]
 
             article []
@@ -431,10 +431,10 @@ module App =
                         BackgroundColor.blue
 
                         MediaQuery
-                            [ FssTypes.Media.MinHeight (px 700)]
+                            [ Types.Media.MinHeight (px 700)]
                             [ BackgroundColor.pink ]
 
-                        MediaQueryFor FssTypes.Media.Print
+                        MediaQueryFor Types.Media.Print
                             []
                             [
                                 MarginTop' (px 200)
@@ -443,7 +443,7 @@ module App =
                             ]
 
                         MediaQuery
-                            [ FssTypes.Media.Orientation FssTypes.Media.Landscape]
+                            [ Types.Media.Orientation Types.Media.Landscape]
                             [ Color.green; FontSize.Value (px 28)]
                     ]
 
@@ -481,7 +481,7 @@ module App =
                     ]
             let commonBefore =
                 [
-                    FontWeight' (FssTypes.CssInt 500)
+                    FontWeight' (Types.CssInt 500)
                     Color.Hex "48f"
                 ]
             let commonStyle =
@@ -588,13 +588,13 @@ module App =
                 fontFaces "DroidSerif"
                     [
                         [
-                            FontFace.Source <| FssTypes.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", FssTypes.FontFace.Truetype)
-                            FontFace.Weight FssTypes.Font.Bold
-                            FontFace.Style FssTypes.Font.FontStyle.Normal
+                            FontFace.Source <| Types.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Types.FontFace.Truetype)
+                            FontFace.Weight Types.Font.Bold
+                            FontFace.Style Types.Font.FontStyle.Normal
                         ]
                         [
-                            FontFace.Source <| FssTypes.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", FssTypes.FontFace.Truetype)
-                            FontFace.Weight FssTypes.Font.FontWeight.Normal
+                            FontFace.Source <| Types.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Types.FontFace.Truetype)
+                            FontFace.Weight Types.Font.FontWeight.Normal
                             FontFace.Style Normal
                         ]
                     ]
@@ -716,18 +716,18 @@ module App =
                             [
                                 deg 217.,
                                     [
-                                        CssColor.Rgba(255, 0, 0, 0.8), pct 0
-                                        CssColor.Rgba(255, 0, 0, 0.0), pct 70
+                                        Types.Color.Rgba(255, 0, 0, 0.8), pct 0
+                                        Types.Color.Rgba(255, 0, 0, 0.0), pct 70
                                     ]
                                 deg 127.,
                                     [
-                                        CssColor.Rgba(0, 255, 0,0.8), pct 0
-                                        CssColor.Rgba(0, 255, 0,0.0), pct 70
+                                        Types.Color.Rgba(0, 255, 0,0.8), pct 0
+                                        Types.Color.Rgba(0, 255, 0,0.0), pct 70
                                     ]
                                 deg 336.,
                                     [
-                                        CssColor.Rgba(0, 0, 255, 0.8), pct 0
-                                        CssColor.Rgba(0, 0, 255,0.0), pct 70
+                                        Types.Color.Rgba(0, 0, 255, 0.8), pct 0
+                                        Types.Color.Rgba(0, 0, 255,0.0), pct 70
                                     ]
 
                             ]
@@ -811,11 +811,11 @@ module App =
                         yield! box
                         BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
                               [
-                                  CssColor.red, deg 0.
-                                  CssColor.orange, deg 90.
-                                  CssColor.yellow, deg 180.
-                                  CssColor.green, deg 270.
-                                  CssColor.blue, deg 360.
+                                  Types.Color.red, deg 0.
+                                  Types.Color.orange, deg 90.
+                                  Types.Color.yellow, deg 180.
+                                  Types.Color.green, deg 270.
+                                  Types.Color.blue, deg 360.
                               ])
                     ]
             let conicGradientStyle2 =
@@ -836,16 +836,16 @@ module App =
                         yield! box
                         BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
                                                       [
-                                                         CssColor.red, deg 6.
-                                                         CssColor.orange, deg 6.
-                                                         CssColor.orange, deg 18.
-                                                         CssColor.yellow, deg 18.
-                                                         CssColor.yellow, deg 45.
-                                                         CssColor.green, deg 45.
-                                                         CssColor.green, deg 110.
-                                                         CssColor.blue, deg 110.
-                                                         CssColor.blue, deg 200.
-                                                         CssColor.purple, deg 200.
+                                                         Types.Color.red, deg 6.
+                                                         Types.Color.orange, deg 6.
+                                                         Types.Color.orange, deg 18.
+                                                         Types.Color.yellow, deg 18.
+                                                         Types.Color.yellow, deg 45.
+                                                         Types.Color.green, deg 45.
+                                                         Types.Color.green, deg 110.
+                                                         Types.Color.blue, deg 110.
+                                                         Types.Color.blue, deg 200.
+                                                         Types.Color.purple, deg 200.
                                                       ])
                     ]
             let conicGradientStyle4 =
@@ -856,12 +856,12 @@ module App =
                         BorderRadius' <| px 200
                         BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
                                                       [
-                                                         CssColor.yellow, deg (360. / 6.)
-                                                         CssColor.lime,   deg <| (360. / 6.) * 2.
-                                                         CssColor.blue,   deg <| (360. / 6.) * 3.
-                                                         CssColor.violet, deg <| (360. / 6.) * 4.
-                                                         CssColor.red,    deg <| (360. / 6.) * 5.
-                                                         CssColor.yellow, deg <| (360. / 6.) * 6.
+                                                         Types.Color.yellow, deg (360. / 6.)
+                                                         Types.Color.lime,   deg <| (360. / 6.) * 2.
+                                                         Types.Color.blue,   deg <| (360. / 6.) * 3.
+                                                         Types.Color.violet, deg <| (360. / 6.) * 4.
+                                                         Types.Color.red,    deg <| (360. / 6.) * 5.
+                                                         Types.Color.yellow, deg <| (360. / 6.) * 6.
                                                       ])
                     ]
             let repeatingConicGradientStyle =
@@ -875,10 +875,10 @@ module App =
                         BorderWidth' (px 1)
                         BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50,
                                                       [
-                                                         CssColor.white, pct 0
-                                                         CssColor.white, pct 25
-                                                         CssColor.black, pct 25
-                                                         CssColor.black, pct 50
+                                                         Types.Color.white, pct 0
+                                                         Types.Color.white, pct 25
+                                                         Types.Color.black, pct 25
+                                                         Types.Color.black, pct 50
                                                       ])
                     ]
 

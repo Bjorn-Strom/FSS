@@ -11,7 +11,7 @@ module Resize =
             [
                 test
                     "Resize Value"
-                    [Resize' FssTypes.Resize.Block]
+                    [Resize' Types.Resize.Block]
                     ["resize" ==> "block"]
                 test
                     "Resize Both"

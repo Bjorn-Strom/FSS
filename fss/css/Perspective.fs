@@ -1,34 +1,33 @@
 ﻿namespace Fss
-open FssTypes
 
 [<AutoOpen>]
 module Perspective =
-    let private perspectiveToString (perspective: IPerspective) =
+    let private perspectiveToString (perspective: Types.IPerspective) =
         match perspective with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? None' -> none
-        | :? Global as g -> global' g
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown perspective"
 
-    let private perspectiveOriginToString (perspectiveOrigin: IPerspectiveOrigin) =
+    let private perspectiveOriginToString (perspectiveOrigin: Types.IPerspectiveOrigin) =
         match perspectiveOrigin with
-        | :? Units.Percent.Percent as s -> Units.Percent.value s
-        | :? Global as g -> global' g
+        | :? Types.Percent as s -> Types.percentToString s
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown perspective origin"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
-    let private perspectiveValue value = PropertyValue.cssValue Property.Perspective value
+    let private perspectiveValue value = Types.cssValue Types.Property.Perspective value
     let private perspectiveValue' value =
         value
         |> perspectiveToString
         |> perspectiveValue
 
     type Perspective =
-        static member Value (perspective: IPerspective) = perspective |> perspectiveValue'
-        static member None = None' |> perspectiveValue'
-        static member Inherit = Inherit |> perspectiveValue'
-        static member Initial = Initial |> perspectiveValue'
-        static member Unset = Unset |> perspectiveValue'
+        static member Value (perspective: Types.IPerspective) = perspective |> perspectiveValue'
+        static member None = Types.None' |> perspectiveValue'
+        static member Inherit = Types.Inherit |> perspectiveValue'
+        static member Initial = Types.Initial |> perspectiveValue'
+        static member Unset = Types.Unset |> perspectiveValue'
 
     /// <summary>Specifies distance in z plane.</summary>
     /// <param name="perspective">
@@ -40,23 +39,23 @@ module Perspective =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Perspective' (perspective: IPerspective) = Perspective.Value(perspective)
+    let Perspective' (perspective: Types.IPerspective) = Perspective.Value(perspective)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective-origin
-    let private perspectiveOriginValue value = PropertyValue.cssValue Property.PerspectiveOrigin value
+    let private perspectiveOriginValue value = Types.cssValue Types.Property.PerspectiveOrigin value
     let private perspectiveOriginValue' value =
         value
         |> perspectiveOriginToString
         |> perspectiveOriginValue
 
     type PerspectiveOrigin =
-        static member Value (origin: IPerspectiveOrigin) = origin |> perspectiveOriginValue'
-        static member Value (x: IPerspectiveOrigin, y: IPerspectiveOrigin) =
+        static member Value (origin: Types.IPerspectiveOrigin) = origin |> perspectiveOriginValue'
+        static member Value (x: Types.IPerspectiveOrigin, y: Types.IPerspectiveOrigin) =
             $"{perspectiveOriginToString x} {perspectiveOriginToString y}"
             |> perspectiveOriginValue
-        static member Inherit = Inherit |> perspectiveOriginValue'
-        static member Initial = Initial |> perspectiveOriginValue'
-        static member Unset = Unset |> perspectiveOriginValue'
+        static member Inherit = Types.Inherit |> perspectiveOriginValue'
+        static member Initial = Types.Initial |> perspectiveOriginValue'
+        static member Unset = Types.Unset |> perspectiveOriginValue'
 
     /// <summary>Specifies vanishing point for the perspective property.</summary>
     /// <param name="origin">
@@ -67,36 +66,30 @@ module Perspective =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PerspectiveOrigin' (origin: IPerspectiveOrigin) = PerspectiveOrigin.Value(origin)
+    let PerspectiveOrigin' (origin: Types.IPerspectiveOrigin) = PerspectiveOrigin.Value(origin)
 
-[<RequireQualifiedAccess>]
-module BackfaceVisibilityType =
-    type BackfaceVisibility =
-        | Visible
-        | Hidden
-        interface IBackfaceVisibility
 
 [<AutoOpen>]
 module BackfaceVisibility =
-    let private visibilityToString (visibility: IBackfaceVisibility) =
+    let private visibilityToString (visibility: Types.IBackfaceVisibility) =
         match visibility with
-        | :? BackfaceVisibilityType.BackfaceVisibility as v -> Utilities.Helpers.duToLowercase v
-        | :? Global as g -> GlobalValue.global' g
+        | :? Types.BackfaceVisibility as v -> Utilities.Helpers.duToLowercase v
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown backface visibility"
 
-    let private backfaceVisibilityValue value = PropertyValue.cssValue Property.BackfaceVisibility value
+    let private backfaceVisibilityValue value = Types.cssValue Types.Property.BackfaceVisibility value
     let private backfaceVisibilityValue' value =
         value
         |> visibilityToString
         |> backfaceVisibilityValue
 
     type BackfaceVisibility =
-        static member Value (visibility: IBackfaceVisibility) = visibility |> backfaceVisibilityValue'
-        static member Hidden = BackfaceVisibilityType.Hidden |> backfaceVisibilityValue'
-        static member Visible = BackfaceVisibilityType.Visible |> backfaceVisibilityValue'
-        static member Inherit = Inherit |> backfaceVisibilityValue'
-        static member Initial = Initial |> backfaceVisibilityValue'
-        static member Unset = Unset |> backfaceVisibilityValue'
+        static member Value (visibility: Types.IBackfaceVisibility) = visibility |> backfaceVisibilityValue'
+        static member Hidden = Types.BackfaceVisibility.Hidden |> backfaceVisibilityValue'
+        static member Visible = Types.BackfaceVisibility.Visible |> backfaceVisibilityValue'
+        static member Inherit = Types.Inherit |> backfaceVisibilityValue'
+        static member Initial = Types.Initial |> backfaceVisibilityValue'
+        static member Unset = Types.Unset |> backfaceVisibilityValue'
 
     /// <summary>Specifies whether the backface of an element is visible.</summary>
     /// <param name="visibility">
@@ -107,4 +100,4 @@ module BackfaceVisibility =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackfaceVisibility' (visibility: IBackfaceVisibility) = BackfaceVisibility.Value(visibility)
+    let BackfaceVisibility' (visibility: Types.IBackfaceVisibility) = BackfaceVisibility.Value(visibility)

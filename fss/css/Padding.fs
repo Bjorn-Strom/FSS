@@ -1,38 +1,37 @@
 namespace Fss
-open FssTypes
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/padding
 [<AutoOpen>]
 module Padding =
-    let private paddingToString (padding: IPadding) =
+    let private paddingToString (padding: Types.IPadding) =
         match padding with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> global' g
-        | :? Auto -> auto
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.auto
         | _ -> "Unknown padding"
 
-    let private paddingValue value = PropertyValue.cssValue Property.Padding value
+    let private paddingValue value = Types.cssValue Types.Property.Padding value
     let private paddingValue' value =
         value
         |> paddingToString
         |> paddingValue
 
     type Padding =
-        static member Value (width: IPadding) = width |> paddingValue'
+        static member Value (width: Types.IPadding) = width |> paddingValue'
 
-        static member Value (vertical: IPadding, horizontal: IPadding) =
+        static member Value (vertical: Types.IPadding, horizontal: Types.IPadding) =
             sprintf "%s %s"
                 (paddingToString vertical)
                 (paddingToString horizontal)
             |> paddingValue
-        static member Value (top: IPadding, horizontal: IPadding, bottom: IPadding) =
+        static member Value (top: Types.IPadding, horizontal: Types.IPadding, bottom: Types.IPadding) =
             sprintf "%s %s %s"
                 (paddingToString top)
                 (paddingToString horizontal)
                 (paddingToString bottom)
             |> paddingValue
-        static member Value (top: IPadding, right: IPadding, bottom: IPadding, left: IPadding) =
+        static member Value (top: Types.IPadding, right: Types.IPadding, bottom: Types.IPadding, left: Types.IPadding) =
             sprintf "%s %s %s %s"
                 (paddingToString top)
                 (paddingToString right)
@@ -40,10 +39,10 @@ module Padding =
                 (paddingToString left)
             |> paddingValue
 
-        static member Auto = Auto |> paddingValue'
-        static member Inherit = Inherit |> paddingValue'
-        static member Initial = Initial |> paddingValue'
-        static member Unset = Unset |> paddingValue'
+        static member Auto = Types.Auto |> paddingValue'
+        static member Inherit = Types.Inherit |> paddingValue'
+        static member Initial = Types.Initial |> paddingValue'
+        static member Unset = Types.Unset |> paddingValue'
 
     /// <summary>Specifies the padding on all sides of an element.</summary>
     /// <param name="padding">
@@ -56,19 +55,19 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Padding' (padding: IPadding) = Padding.Value(padding)
+    let Padding' (padding: Types.IPadding) = Padding.Value(padding)
 
-    let private paddingTopValue value = PropertyValue.cssValue Property.PaddingTop value
+    let private paddingTopValue value = Types.cssValue Types.Property.PaddingTop value
     let private paddingTopValue' value =
         value
         |> paddingToString
         |> paddingTopValue
     type PaddingTop =
-        static member Value (top: IPadding) = top |> paddingTopValue'
-        static member Auto = Auto |> paddingTopValue'
-        static member Inherit = Inherit |> paddingTopValue'
-        static member Initial = Initial |> paddingTopValue'
-        static member Unset = Unset |> paddingTopValue'
+        static member Value (top: Types.IPadding) = top |> paddingTopValue'
+        static member Auto = Types.Auto |> paddingTopValue'
+        static member Inherit = Types.Inherit |> paddingTopValue'
+        static member Initial = Types.Initial |> paddingTopValue'
+        static member Unset = Types.Unset |> paddingTopValue'
 
     /// <summary>Specifies the padding on top sides of an element.</summary>
     /// <param name="top">
@@ -81,19 +80,19 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingTop' (top: IPadding) = PaddingTop.Value(top)
+    let PaddingTop' (top: Types.IPadding) = PaddingTop.Value(top)
 
-    let private paddingRightValue value = PropertyValue.cssValue Property.PaddingRight value
+    let private paddingRightValue value = Types.cssValue Types.Property.PaddingRight value
     let private paddingRightValue' value =
         value
         |> paddingToString
         |> paddingRightValue
     type PaddingRight =
-        static member Value (right: IPadding) = right |> paddingRightValue'
-        static member Auto = Auto |> paddingRightValue'
-        static member Inherit = Inherit |> paddingRightValue'
-        static member Initial = Initial |> paddingRightValue'
-        static member Unset = Unset |> paddingRightValue'
+        static member Value (right: Types.IPadding) = right |> paddingRightValue'
+        static member Auto = Types.Auto |> paddingRightValue'
+        static member Inherit = Types.Inherit |> paddingRightValue'
+        static member Initial = Types.Initial |> paddingRightValue'
+        static member Unset = Types.Unset |> paddingRightValue'
 
     /// <summary>Specifies the padding on right side of an element.</summary>
     /// <param name="right">
@@ -106,19 +105,19 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingRight' (right: IPadding) = PaddingRight.Value(right)
+    let PaddingRight' (right: Types.IPadding) = PaddingRight.Value(right)
 
-    let private paddingBottomValue value = PropertyValue.cssValue Property.PaddingBottom value
+    let private paddingBottomValue value = Types.cssValue Types.Property.PaddingBottom value
     let private paddingBottomValue' value =
         value
         |> paddingToString
         |> paddingBottomValue
     type PaddingBottom =
-        static member Value (bottom: IPadding) = bottom |> paddingBottomValue'
-        static member Auto = Auto |> paddingBottomValue'
-        static member Inherit = Inherit |> paddingBottomValue'
-        static member Initial = Initial |> paddingBottomValue'
-        static member Unset = Unset |> paddingBottomValue'
+        static member Value (bottom: Types.IPadding) = bottom |> paddingBottomValue'
+        static member Auto = Types.Auto |> paddingBottomValue'
+        static member Inherit = Types.Inherit |> paddingBottomValue'
+        static member Initial = Types.Initial |> paddingBottomValue'
+        static member Unset = Types.Unset |> paddingBottomValue'
 
     /// <summary>Specifies the padding on bottom side of an element.</summary>
     /// <param name="bottom">
@@ -131,19 +130,19 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingBottom' (bottom: IPadding) = PaddingBottom.Value(bottom)
+    let PaddingBottom' (bottom: Types.IPadding) = PaddingBottom.Value(bottom)
 
-    let private paddingLeftValue value = PropertyValue.cssValue Property.PaddingLeft value
+    let private paddingLeftValue value = Types.cssValue Types.Property.PaddingLeft value
     let private paddingLeftValue' value =
         value
         |> paddingToString
         |> paddingLeftValue
     type PaddingLeft =
-        static member Value (left: IPadding) = left |> paddingLeftValue'
-        static member Auto = Auto |> paddingLeftValue'
-        static member Inherit = Inherit |> paddingLeftValue'
-        static member Initial = Initial |> paddingLeftValue'
-        static member Unset = Unset |> paddingLeftValue'
+        static member Value (left: Types.IPadding) = left |> paddingLeftValue'
+        static member Auto = Types.Auto |> paddingLeftValue'
+        static member Inherit = Types.Inherit |> paddingLeftValue'
+        static member Initial = Types.Initial |> paddingLeftValue'
+        static member Unset = Types.Unset |> paddingLeftValue'
 
     /// <summary>Specifies the padding on left side of an element.</summary>
     /// <param name="left">
@@ -156,20 +155,20 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingLeft' (left: IPadding) = PaddingLeft.Value(left)
+    let PaddingLeft' (left: Types.IPadding) = PaddingLeft.Value(left)
 
-    let private paddingInlineStartValue value = PropertyValue.cssValue Property.PaddingInlineStart value
+    let private paddingInlineStartValue value = Types.cssValue Types.Property.PaddingInlineStart value
     let private paddingInlineStartValue' value =
         value
         |> paddingToString
         |> paddingInlineStartValue
 
     type PaddingInlineStart =
-        static member Value (padding: IPadding) = padding |> paddingInlineStartValue'
-        static member Auto = Auto |> paddingInlineStartValue'
-        static member Inherit = Inherit |> paddingInlineStartValue'
-        static member Initial = Initial |> paddingInlineStartValue'
-        static member Unset = Unset |> paddingInlineStartValue'
+        static member Value (padding: Types.IPadding) = padding |> paddingInlineStartValue'
+        static member Auto = Types.Auto |> paddingInlineStartValue'
+        static member Inherit = Types.Inherit |> paddingInlineStartValue'
+        static member Initial = Types.Initial |> paddingInlineStartValue'
+        static member Unset = Types.Unset |> paddingInlineStartValue'
 
     /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
     /// <param name="padding">
@@ -182,20 +181,20 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingInlineStart' (padding: IPadding) = PaddingInlineStart.Value(padding)
+    let PaddingInlineStart' (padding: Types.IPadding) = PaddingInlineStart.Value(padding)
 
-    let private paddingInlineEndValue value = PropertyValue.cssValue Property.PaddingInlineEnd value
+    let private paddingInlineEndValue value = Types.cssValue Types.Property.PaddingInlineEnd value
     let private paddingInlineEndValue' value =
         value
         |> paddingToString
         |> paddingInlineEndValue
 
     type PaddingInlineEnd =
-        static member Value (padding: IPadding) = padding |> paddingInlineEndValue'
-        static member Auto = Auto |> paddingInlineEndValue'
-        static member Inherit = Inherit |> paddingInlineEndValue'
-        static member Initial = Initial |> paddingInlineEndValue'
-        static member Unset = Unset |> paddingInlineEndValue'
+        static member Value (padding: Types.IPadding) = padding |> paddingInlineEndValue'
+        static member Auto = Types.Auto |> paddingInlineEndValue'
+        static member Inherit = Types.Inherit |> paddingInlineEndValue'
+        static member Initial = Types.Initial |> paddingInlineEndValue'
+        static member Unset = Types.Unset |> paddingInlineEndValue'
 
     /// <summary>Specifies the amount of space along the outer ending edge of an element.</summary>
     /// <param name="padding">
@@ -208,20 +207,20 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingInlineEnd' (padding: IPadding) = PaddingInlineEnd.Value(padding)
+    let PaddingInlineEnd' (padding: Types.IPadding) = PaddingInlineEnd.Value(padding)
 
-    let private paddingBlockStartValue value = PropertyValue.cssValue Property.PaddingBlockStart value
+    let private paddingBlockStartValue value = Types.cssValue Types.Property.PaddingBlockStart value
     let private paddingBlockStartValue' value =
         value
         |> paddingToString
         |> paddingBlockStartValue
 
     type PaddingBlockStart =
-        static member Value (padding: IPadding) = padding |> paddingBlockStartValue'
-        static member Auto = Auto |> paddingBlockStartValue'
-        static member Inherit = Inherit |> paddingBlockStartValue'
-        static member Initial = Initial |> paddingBlockStartValue'
-        static member Unset = Unset |> paddingBlockStartValue'
+        static member Value (padding: Types.IPadding) = padding |> paddingBlockStartValue'
+        static member Auto = Types.Auto |> paddingBlockStartValue'
+        static member Inherit = Types.Inherit |> paddingBlockStartValue'
+        static member Initial = Types.Initial |> paddingBlockStartValue'
+        static member Unset = Types.Unset |> paddingBlockStartValue'
 
     /// <summary>Specifies the amount of start padding of an element.</summary>
     /// <param name="padding">
@@ -234,20 +233,20 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingBlockStart' (padding: IPadding) = PaddingBlockStart.Value(padding)
+    let PaddingBlockStart' (padding: Types.IPadding) = PaddingBlockStart.Value(padding)
 
-    let private paddingBlockEndValue value = PropertyValue.cssValue Property.PaddingBlockEnd value
+    let private paddingBlockEndValue value = Types.cssValue Types.Property.PaddingBlockEnd value
     let private paddingBlockEndValue' value =
         value
         |> paddingToString
         |> paddingBlockEndValue
 
     type PaddingBlockEnd =
-        static member Value (padding: IPadding) = padding |> paddingBlockEndValue'
-        static member Auto = Auto |> paddingBlockEndValue'
-        static member Inherit = Inherit |> paddingBlockEndValue'
-        static member Initial = Initial |> paddingBlockEndValue'
-        static member Unset = Unset |> paddingBlockEndValue'
+        static member Value (padding: Types.IPadding) = padding |> paddingBlockEndValue'
+        static member Auto = Types.Auto |> paddingBlockEndValue'
+        static member Inherit = Types.Inherit |> paddingBlockEndValue'
+        static member Initial = Types.Initial |> paddingBlockEndValue'
+        static member Unset = Types.Unset |> paddingBlockEndValue'
 
     /// <summary>Specifies the amount of end padding of an element </summary>
     /// <param name="padding">
@@ -260,4 +259,4 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingBlockEnd' (padding: IPadding) = PaddingBlockEnd.Value(padding)
+    let PaddingBlockEnd' (padding: Types.IPadding) = PaddingBlockEnd.Value(padding)

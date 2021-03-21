@@ -45,12 +45,12 @@ module Media =
                 | DisplayMode                d -> sprintf "(display-mode: %s)" <| displayMode d
                 | ForcedColors               f -> sprintf "(forced-colors: %s)" <| if f then "active" else "none"
                 | Grid                       g -> sprintf "(grid: %s)" <| if g then "1" else "0"
-                | Height                     h -> sprintf "(height: %s)" <| Units.Size.value h
-                | MinHeight                  s -> sprintf "(min-height: %s)" <| Units.Size.value s
-                | MaxHeight                  s -> sprintf "(max-height: %s)" <| Units.Size.value s
-                | Width                      s -> sprintf "(width: %s)" <| Units.Size.value s
-                | MinWidth                   s -> sprintf "(min-width: %s)" <| Units.Size.value s
-                | MaxWidth                   s -> sprintf "(max-width: %s)" <| Units.Size.value s
+                | Height                     h -> sprintf "(height: %s)" <| Types.sizeToString h
+                | MinHeight                  s -> sprintf "(min-height: %s)" <| Types.sizeToString s
+                | MaxHeight                  s -> sprintf "(max-height: %s)" <| Types.sizeToString s
+                | Width                      s -> sprintf "(width: %s)" <| Types.sizeToString s
+                | MinWidth                   s -> sprintf "(min-width: %s)" <| Types.sizeToString s
+                | MaxWidth                   s -> sprintf "(max-width: %s)" <| Types.sizeToString s
                 | Hover                      h -> sprintf "(hover %s)" <| if h then "hover" else "none"
                 | InvertedColors             c -> sprintf "(inverted-colors: %s)" <| if c then "inverted" else "none"
                 | LightLevel                 l -> sprintf "(light-level: %s)" <| lightLevel l

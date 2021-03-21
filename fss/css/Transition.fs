@@ -1,50 +1,49 @@
 ﻿namespace Fss
-open FssTypes
 
 [<AutoOpen>]
 module Transition =
-    let private transitionToString (transition: ITransition) =
+    let private transitionToString (transition: Types.ITransition) =
         match transition with
-        | :? Global as g -> global' g
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown transition"
 
-    let private delayToString (delay: ITransitionDelay) =
+    let private delayToString (delay: Types.ITransitionDelay) =
         match delay with
-        | :? Units.Time.Time as t -> Units.Time.value t
-        | :? Global as g -> global' g
+        | :? Types.Time as t -> Types.timeToString t
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown transition delay"
 
-    let private durationToString (duration: ITransitionDuration) =
+    let private durationToString (duration: Types.ITransitionDuration) =
         match duration with
-        | :? Units.Time.Time as t -> Units.Time.value t
-        | :? Global as g -> global' g
+        | :? Types.Time as t -> Types.timeToString t
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown transition duration"
 
-    let private timingToString (duration: ITransitionTimingFunction) =
+    let private timingToString (duration: Types.ITransitionTimingFunction) =
         match duration with
-        | :? TimingFunction.TimingFunction as t -> TimingFunction.timingToString t
-        | :? Global as g -> global' g
+        | :? TimingFunction.TimingFunction as t -> Types.timingToString t
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown transition timing"
 
-    let private propertyToString (property: ITransitionProperty) =
+    let private propertyToString (property: Types.ITransitionProperty) =
         match property with
-        | :? Property as p -> PropertyValue.toKebabCase p
-        | :? None' -> none
-        | :? Global as g -> global' g
+        | :? Types.Property as p -> Types.toKebabCase p
+        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown transition property"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition
-    let private transitionValue value = PropertyValue.cssValue Property.Transition value
+    let private transitionValue value = Types.cssValue Types.Property.Transition value
     let private transitionValue' value =
         value
         |> transitionToString
         |> transitionValue
     type Transition =
-        static member Value (delay: ITransition) = delay |> transitionValue'
+        static member Value (delay: Types.ITransition) = delay |> transitionValue'
 
-        static member Inherit = Inherit |> transitionValue'
-        static member Initial = Initial |> transitionValue'
-        static member Unset = Unset |> transitionValue'
+        static member Inherit = Types.Inherit |> transitionValue'
+        static member Initial = Types.Initial |> transitionValue'
+        static member Unset = Types.Unset |> transitionValue'
 
     /// <summary>Resets transition.</summary>
     /// <param name="transition">
@@ -54,21 +53,21 @@ module Transition =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Transition' (transition: ITransition) = Transition.Value(transition)
+    let Transition' (transition: Types.ITransition) = Transition.Value(transition)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
-    let private delayValue value = PropertyValue.cssValue Property.TransitionDelay value
+    let private delayValue value = Types.cssValue Types.Property.TransitionDelay value
     let private delayValue' value =
         value
         |> delayToString
         |> delayValue
     type TransitionDelay =
-        static member Value (delay: ITransitionDelay) = delay |> delayValue'
-        static member Value (delays: ITransitionDelay list) = Utilities.Helpers.combineComma delayToString delays |> delayValue
+        static member Value (delay: Types.ITransitionDelay) = delay |> delayValue'
+        static member Value (delays: Types.ITransitionDelay list) = Utilities.Helpers.combineComma delayToString delays |> delayValue
 
-        static member Inherit = Inherit |> delayValue'
-        static member Initial = Initial |> delayValue'
-        static member Unset = Unset |> delayValue'
+        static member Inherit = Types.Inherit |> delayValue'
+        static member Initial = Types.Initial |> delayValue'
+        static member Unset = Types.Unset |> delayValue'
 
     /// <summary>Specifies the duration to wait before a transition starts.</summary>
     /// <param name="delay">
@@ -79,22 +78,22 @@ module Transition =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransitionDelay' (delay: ITransitionDelay) = TransitionDelay.Value(delay)
+    let TransitionDelay' (delay: Types.ITransitionDelay) = TransitionDelay.Value(delay)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duraion
-    let private transitionDurationValue value = PropertyValue.cssValue Property.TransitionDuration value
+    let private transitionDurationValue value = Types.cssValue Types.Property.TransitionDuration value
     let private transitionDurationValue' value =
         value
         |> durationToString
         |> transitionDurationValue
     type TransitionDuration =
-        static member Value (duration: ITransitionDuration) = duration |> transitionDurationValue'
-        static member Value (durations: ITransitionDuration list) =
+        static member Value (duration: Types.ITransitionDuration) = duration |> transitionDurationValue'
+        static member Value (durations: Types.ITransitionDuration list) =
             Utilities.Helpers.combineComma durationToString durations |> transitionDurationValue
 
-        static member Inherit = Inherit |> transitionDurationValue'
-        static member Initial = Initial |> transitionDurationValue'
-        static member Unset = Unset |> transitionDurationValue'
+        static member Inherit = Types.Inherit |> transitionDurationValue'
+        static member Initial = Types.Initial |> transitionDurationValue'
+        static member Unset = Types.Unset |> transitionDurationValue'
 
     /// <summary>Specifies the duration of the transition.</summary>
     /// <param name="duration">
@@ -105,20 +104,20 @@ module Transition =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransitionDuration' (duration: ITransitionDuration) = TransitionDuration.Value(duration)
+    let TransitionDuration' (duration: Types.ITransitionDuration) = TransitionDuration.Value(duration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
     let private transitionTimingFunction value =
         printfn $"{value}"
-        PropertyValue.cssValue Property.TransitionTimingFunction value
+        Types.cssValue Types.Property.TransitionTimingFunction value
     let private transitionTimingFunction' value =
         value
         |> timingToString
         |> transitionTimingFunction
     type TransitionTimingFunction =
-        static member Value (timingFunction: ITransitionTimingFunction) = timingFunction |> transitionTimingFunction'
-        static member Value (timingFunctions: ITransitionTimingFunction list) =
-             Utilities.Helpers.combineComma TimingFunction.timingToString timingFunctions |> transitionTimingFunction
+        static member Value (timingFunction: Types.ITransitionTimingFunction) = timingFunction |> transitionTimingFunction'
+        static member Value (timingFunctions: Types.ITransitionTimingFunction list) =
+             Utilities.Helpers.combineComma Types.timingToString timingFunctions |> transitionTimingFunction
         static member Ease = TimingFunction.TimingFunction.Ease |> transitionTimingFunction
         static member EaseIn = TimingFunction.TimingFunction.EaseIn |> transitionTimingFunction
         static member EaseOut = TimingFunction.TimingFunction.EaseOut |> transitionTimingFunction
@@ -128,11 +127,11 @@ module Transition =
         static member StepEnd = TimingFunction.TimingFunction.StepEnd |> transitionTimingFunction
         static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = TimingFunction.TimingFunction.CubicBezier(p1,p2,p3,p4) |> transitionTimingFunction
         static member Step (steps: int) = TimingFunction.Step(steps) |> transitionTimingFunction
-        static member Step (steps: int, jumpTerm: Step) = TimingFunction.Step(steps, jumpTerm) |> transitionTimingFunction
+        static member Step (steps: int, jumpTerm: Types.Step) = TimingFunction.Step(steps, jumpTerm) |> transitionTimingFunction
 
-        static member Inherit = Inherit |> transitionTimingFunction'
-        static member Initial = Initial |> transitionTimingFunction'
-        static member Unset = Unset |> transitionTimingFunction'
+        static member Inherit = Types.Inherit |> transitionTimingFunction'
+        static member Initial = Types.Initial |> transitionTimingFunction'
+        static member Unset = Types.Unset |> transitionTimingFunction'
 
     /// <summary>Specifies how the intermediate values are calculated.</summary>
     /// <param name="timingFunction">
@@ -143,282 +142,282 @@ module Transition =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransitionTimingFunction' (timingFunction: ITransitionTimingFunction) = TransitionTimingFunction.Value(timingFunction)
+    let TransitionTimingFunction' (timingFunction: Types.ITransitionTimingFunction) = TransitionTimingFunction.Value(timingFunction)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property
-    let private transitionProperty value = PropertyValue.cssValue Property.TransitionProperty value
+    let private transitionProperty value = Types.cssValue Types.Property.TransitionProperty value
     let private transitionProperty' value =
         value
         |> propertyToString
         |> transitionProperty
     type TransitionProperty =
-        static member Value (property: ITransitionProperty) = property |> transitionProperty'
-        static member Values (properties: Property list) =
+        static member Value (property: Types.ITransitionProperty) = property |> transitionProperty'
+        static member Values (properties: Types.Property list) =
              properties
              |> Utilities.Helpers.combineComma propertyToString
              |> transitionProperty
-        static member All = Property.All |> transitionProperty'
-        static member AlignContent = Property.AlignContent |> transitionProperty'
-        static member AlignItems = Property.AlignItems |> transitionProperty'
-        static member AlignSelf = Property.AlignSelf |> transitionProperty'
-        static member AnimationDelay = Property.AnimationDelay |> transitionProperty'
-        static member AnimationDirection = Property.AnimationDirection |> transitionProperty'
-        static member AnimationDuration = Property.AnimationDuration |> transitionProperty'
-        static member AnimationFillMode = Property.AnimationFillMode |> transitionProperty'
-        static member AnimationIterationCount = Property.AnimationIterationCount |> transitionProperty'
-        static member AnimationName = Property.AnimationName |> transitionProperty'
-        static member AnimationPlayState = Property.AnimationPlayState |> transitionProperty'
-        static member AnimationTimingFunction = Property.AnimationTimingFunction |> transitionProperty'
-        static member BackfaceVisibility = Property.BackfaceVisibility |> transitionProperty'
-        static member BackgroundAttachment = Property.BackgroundAttachment |> transitionProperty'
-        static member BackgroundBlendMode = Property.BackgroundBlendMode |> transitionProperty'
-        static member BackgroundClip = Property.BackgroundClip |> transitionProperty'
-        static member BackgroundColor = Property.BackgroundColor |> transitionProperty'
-        static member BackgroundImage = Property.BackgroundImage |> transitionProperty'
-        static member BackgroundOrigin = Property.BackgroundOrigin |> transitionProperty'
-        static member BackgroundPosition = Property.BackgroundPosition |> transitionProperty'
-        static member BackgroundRepeat = Property.BackgroundRepeat |> transitionProperty'
-        static member BackgroundSize = Property.BackgroundSize |> transitionProperty'
-        static member Bleed = Property.Bleed |> transitionProperty'
-        static member BorderBottomColor = Property.BorderBottomColor |> transitionProperty'
-        static member BorderBottomLeftRadius = Property.BorderBottomLeftRadius |> transitionProperty'
-        static member BorderBottomRightRadius = Property.BorderBottomRightRadius |> transitionProperty'
-        static member BorderBottomStyle = Property.BorderBottomStyle |> transitionProperty'
-        static member BorderBottomWidth = Property.BorderBottomWidth |> transitionProperty'
-        static member BorderBottom = Property.BorderBottom |> transitionProperty'
-        static member BorderCollapse = Property.BorderCollapse |> transitionProperty'
-        static member BorderColor = Property.BorderColor |> transitionProperty'
-        static member BorderImage = Property.BorderImage |> transitionProperty'
-        static member BorderImageOutset = Property.BorderImageOutset |> transitionProperty'
-        static member BorderImageRepeat = Property.BorderImageRepeat |> transitionProperty'
-        static member BorderImageSource = Property.BorderImageSource |> transitionProperty'
-        static member BorderImageSlice = Property.BorderImageSlice |> transitionProperty'
-        static member BorderImageWidth = Property.BorderImageWidth |> transitionProperty'
-        static member BorderLeftColor = Property.BorderLeftColor |> transitionProperty'
-        static member BorderLeftStyle = Property.BorderLeftStyle |> transitionProperty'
-        static member BorderLeftWidth = Property.BorderLeftWidth |> transitionProperty'
-        static member BorderLeft = Property.BorderLeft |> transitionProperty'
-        static member BorderRadius = Property.BorderRadius |> transitionProperty'
-        static member BorderRightColor = Property.BorderRightColor |> transitionProperty'
-        static member BorderRightStyle = Property.BorderRightStyle |> transitionProperty'
-        static member BorderRightWidth = Property.BorderRightWidth |> transitionProperty'
-        static member BorderRight = Property.BorderRight |> transitionProperty'
-        static member BorderSpacing = Property.BorderSpacing |> transitionProperty'
-        static member BorderStyle = Property.BorderStyle |> transitionProperty'
-        static member BorderTopColor = Property.BorderTopColor |> transitionProperty'
-        static member BorderTopLeftRadius = Property.BorderTopLeftRadius |> transitionProperty'
-        static member BorderTopRightRadius = Property.BorderTopRightRadius |> transitionProperty'
-        static member BorderTopStyle = Property.BorderTopStyle |> transitionProperty'
-        static member BorderTopWidth = Property.BorderTopWidth |> transitionProperty'
-        static member BorderTop = Property.BorderTop |> transitionProperty'
-        static member BorderWidth = Property.BorderWidth |> transitionProperty'
-        static member Bottom = Property.Bottom |> transitionProperty'
-        static member BoxDecorationBreak = Property.BoxDecorationBreak |> transitionProperty'
-        static member BoxShadow = Property.BoxShadow |> transitionProperty'
-        static member BoxSizing = Property.BoxSizing |> transitionProperty'
-        static member BreakAfter = Property.BreakAfter |> transitionProperty'
-        static member BreakBefore = Property.BreakBefore |> transitionProperty'
-        static member BreakInside = Property.BreakInside |> transitionProperty'
-        static member CaptionSide = Property.CaptionSide |> transitionProperty'
-        static member CaretColor = Property.CaretColor |> transitionProperty'
-        static member Clear = Property.Clear |> transitionProperty'
-        static member Clip = Property.Clip |> transitionProperty'
-        static member Color = Property.Color |> transitionProperty'
-        static member Columns = Property.Columns |> transitionProperty'
-        static member ColumnCount = Property.ColumnCount |> transitionProperty'
-        static member ColumnFill = Property.ColumnFill |> transitionProperty'
-        static member ColumnGap = Property.ColumnGap |> transitionProperty'
-        static member ColumnRule = Property.ColumnRule |> transitionProperty'
-        static member ColumnRuleColor = Property.ColumnRuleColor |> transitionProperty'
-        static member ColumnRuleStyle = Property.ColumnRuleStyle |> transitionProperty'
-        static member ColumnRuleWidth = Property.ColumnRuleWidth |> transitionProperty'
-        static member ColumnSpan = Property.ColumnSpan |> transitionProperty'
-        static member ColumnWidth = Property.ColumnWidth |> transitionProperty'
-        static member Content = Property.Content |> transitionProperty'
-        static member CounterIncrement = Property.CounterIncrement |> transitionProperty'
-        static member CounterReset = Property.CounterReset |> transitionProperty'
-        static member CueAfter = Property.CueAfter |> transitionProperty'
-        static member CueBefore = Property.CueBefore |> transitionProperty'
-        static member Cue = Property.Cue |> transitionProperty'
-        static member Cursor = Property.Cursor |> transitionProperty'
-        static member Direction = Property.Direction |> transitionProperty'
-        static member Display = Property.Display |> transitionProperty'
-        static member Elevation = Property.Elevation |> transitionProperty'
-        static member EmptyCells = Property.EmptyCells |> transitionProperty'
-        static member Filter = Property.Filter |> transitionProperty'
-        static member Flex = Property.Flex |> transitionProperty'
-        static member FlexBasis = Property.FlexBasis |> transitionProperty'
-        static member FlexDirection = Property.FlexDirection |> transitionProperty'
-        static member FontFeatureSettings = Property.FontFeatureSettings |> transitionProperty'
-        static member FlexFlow = Property.FlexFlow |> transitionProperty'
-        static member FlexGrow = Property.FlexGrow |> transitionProperty'
-        static member FlexShrink = Property.FlexShrink |> transitionProperty'
-        static member FlexWrap = Property.FlexWrap |> transitionProperty'
-        static member Float = Property.Float |> transitionProperty'
-        static member FontFamily = Property.FontFamily |> transitionProperty'
-        static member FontKerning = Property.FontKerning |> transitionProperty'
-        static member FontLanguageOverride = Property.FontLanguageOverride |> transitionProperty'
-        static member FontSizeAdjust = Property.FontSizeAdjust |> transitionProperty'
-        static member FontSize = Property.FontSize |> transitionProperty'
-        static member FontStretch = Property.FontStretch |> transitionProperty'
-        static member FontStyle = Property.FontStyle |> transitionProperty'
-        static member FontDisplay = Property.FontDisplay |> transitionProperty'
-        static member FontSynthesis = Property.FontSynthesis |> transitionProperty'
-        static member FontVariant = Property.FontVariant |> transitionProperty'
-        static member FontVariantAlternates = Property.FontVariantAlternates |> transitionProperty'
-        static member FontVariantCaps = Property.FontVariantCaps |> transitionProperty'
-        static member FontVariantEastAsian = Property.FontVariantEastAsian |> transitionProperty'
-        static member FontVariantLigatures = Property.FontVariantLigatures |> transitionProperty'
-        static member FontVariantNumeric = Property.FontVariantNumeric |> transitionProperty'
-        static member FontVariantPosition = Property.FontVariantPosition |> transitionProperty'
-        static member FontWeight = Property.FontWeight |> transitionProperty'
-        static member Font = Property.Font |> transitionProperty'
-        static member GridArea = Property.GridArea |> transitionProperty'
-        static member GridAutoColumns = Property.GridAutoColumns |> transitionProperty'
-        static member GridAutoFlow = Property.GridAutoFlow |> transitionProperty'
-        static member GridAutoRows = Property.GridAutoRows |> transitionProperty'
-        static member GridColumnEnd = Property.GridColumnEnd |> transitionProperty'
-        static member GridColumnGap = Property.ColumnGap |> transitionProperty'
-        static member GridColumnStart = Property.GridColumnStart |> transitionProperty'
-        static member GridColumn = Property.GridColumn |> transitionProperty'
-        static member GridGap = Property.GridGap |> transitionProperty'
-        static member GridRowEnd = Property.GridRowEnd |> transitionProperty'
-        static member GridRowGap = Property.GridRowGap |> transitionProperty'
-        static member GridRowStart = Property.GridRowStart |> transitionProperty'
-        static member GridRow = Property.GridRow |> transitionProperty'
-        static member GridTemplateAreas = Property.GridTemplateAreas |> transitionProperty'
-        static member GridTemplateColumns = Property.GridTemplateColumns |> transitionProperty'
-        static member GridTemplateRows = Property.GridTemplateRows |> transitionProperty'
-        static member GridTemplate = Property.GridTemplate |> transitionProperty'
-        static member Grid = Property.Grid |> transitionProperty'
-        static member HangingPunctuation = Property.HangingPunctuation |> transitionProperty'
-        static member Height = Property.Height |> transitionProperty'
-        static member Hyphens = Property.Hyphens |> transitionProperty'
-        static member Isolation = Property.Isolation |> transitionProperty'
-        static member JustifyContent = Property.JustifyContent |> transitionProperty'
-        static member JustifyItems = Property.JustifyItems |> transitionProperty'
-        static member JustifySelf = Property.JustifySelf |> transitionProperty'
-        static member Label = Property.Label |> transitionProperty'
-        static member Left = Property.Left |> transitionProperty'
-        static member LetterSpacing = Property.LetterSpacing |> transitionProperty'
-        static member LineBreak = Property.LineBreak |> transitionProperty'
-        static member LineHeight = Property.LineHeight |> transitionProperty'
-        static member ListStyleImage = Property.ListStyleImage |> transitionProperty'
-        static member ListStylePosition = Property.ListStylePosition |> transitionProperty'
-        static member ListStyleType = Property.ListStyleType |> transitionProperty'
-        static member MarginBottom = Property.MarginBottom |> transitionProperty'
-        static member MarginLeft = Property.MarginLeft |> transitionProperty'
-        static member MarginRight = Property.MarginRight |> transitionProperty'
-        static member MarginTop = Property.MarginTop |> transitionProperty'
-        static member Margin = Property.Margin |> transitionProperty'
-        static member MarkerOffset = Property.MarkerOffset |> transitionProperty'
-        static member Marks = Property.Marks |> transitionProperty'
-        static member MaxHeight = Property.MaxHeight |> transitionProperty'
-        static member MaxWidth = Property.MaxWidth |> transitionProperty'
-        static member MinHeight = Property.MinHeight |> transitionProperty'
-        static member MinWidth = Property.MinWidth |> transitionProperty'
-        static member MixBlendMode = Property.MixBlendMode |> transitionProperty'
-        static member NavUp = Property.NavUp |> transitionProperty'
-        static member NavDown = Property.NavDown |> transitionProperty'
-        static member NavLeft = Property.NavLeft |> transitionProperty'
-        static member NavRight = Property.NavRight |> transitionProperty'
-        static member Opacity = Property.Opacity |> transitionProperty'
-        static member Order = Property.Order |> transitionProperty'
-        static member Orphans = Property.Orphans |> transitionProperty'
-        static member OutlineColor = Property.OutlineColor |> transitionProperty'
-        static member OutlineOffset = Property.OutlineOffset |> transitionProperty'
-        static member OutlineStyle = Property.OutlineStyle |> transitionProperty'
-        static member OutlineWidth = Property.OutlineWidth |> transitionProperty'
-        static member Outline = Property.Outline |> transitionProperty'
-        static member Overflow = Property.Overflow |> transitionProperty'
-        static member OverflowWrap = Property.OverflowWrap |> transitionProperty'
-        static member OverflowX = Property.OverflowX |> transitionProperty'
-        static member OverflowY = Property.OverflowY |> transitionProperty'
-        static member PaddingBottom = Property.PaddingBottom |> transitionProperty'
-        static member PaddingLeft = Property.PaddingLeft |> transitionProperty'
-        static member PaddingRight = Property.PaddingRight |> transitionProperty'
-        static member PaddingTop = Property.PaddingTop |> transitionProperty'
-        static member Padding = Property.Padding |> transitionProperty'
-        static member Page = Property.Page |> transitionProperty'
-        static member PauseAfter = Property.PauseAfter |> transitionProperty'
-        static member PauseBefore = Property.PauseBefore |> transitionProperty'
-        static member Pause = Property.Pause |> transitionProperty'
-        static member Perspective = Property.Perspective |> transitionProperty'
-        static member PerspectiveOrigin = Property.PerspectiveOrigin |> transitionProperty'
-        static member PitchRange = Property.PitchRange |> transitionProperty'
-        static member Pitch = Property.Pitch |> transitionProperty'
-        static member PlaceContent = Property.PlaceContent |> transitionProperty'
-        static member PlaceItems = Property.PlaceItems |> transitionProperty'
-        static member PlaceSelf = Property.PlaceSelf |> transitionProperty'
-        static member PlayDuring = Property.PlayDuring |> transitionProperty'
-        static member Position = Property.Position |> transitionProperty'
-        static member Quotes = Property.Quotes |> transitionProperty'
-        static member Resize = Property.Resize |> transitionProperty'
-        static member RestAfter = Property.RestAfter |> transitionProperty'
-        static member RestBefore = Property.RestBefore |> transitionProperty'
-        static member Rest = Property.Rest |> transitionProperty'
-        static member Richness = Property.Richness |> transitionProperty'
-        static member Right = Property.Right |> transitionProperty'
-        static member Size = Property.Size |> transitionProperty'
-        static member SpeakHeader = Property.SpeakHeader |> transitionProperty'
-        static member SpeakNumeral = Property.SpeakNumeral |> transitionProperty'
-        static member SpeakPunctuation = Property.SpeakPunctuation |> transitionProperty'
-        static member Speak = Property.Speak |> transitionProperty'
-        static member SpeechRate = Property.SpeechRate |> transitionProperty'
-        static member Stress = Property.Stress |> transitionProperty'
-        static member TabSize = Property.TabSize |> transitionProperty'
-        static member TableLayout = Property.TableLayout |> transitionProperty'
-        static member TextAlign = Property.TextAlign |> transitionProperty'
-        static member TextAlignlast = Property.TextAlignLast |> transitionProperty'
-        static member TextDecoration = Property.TextDecoration |> transitionProperty'
-        static member TextDecorationColor = Property.TextDecorationColor |> transitionProperty'
-        static member TextDecorationLine = Property.TextDecorationLine |> transitionProperty'
-        static member TextDecorationThickness = Property.TextDecorationThickness |> transitionProperty'
-        static member TextDecorationSkip = Property.TextDecorationSkip |> transitionProperty'
-        static member TextDecorationSkipInk = Property.TextDecorationSkipInk |> transitionProperty'
-        static member TextDecorationStyle = Property.TextDecorationStyle |> transitionProperty'
-        static member TextIndent = Property.TextIndent |> transitionProperty'
-        static member TextOverflow = Property.TextOverflow |> transitionProperty'
-        static member TextShadow = Property.TextShadow |> transitionProperty'
-        static member TextTransform = Property.TextTransform |> transitionProperty'
-        static member TextEmphasisColor = Property.TextEmphasisColor |> transitionProperty'
-        static member TextEmphasisPosition = Property.TextEmphasisPosition |> transitionProperty'
-        static member TextEmphasisStyle = Property.TextEmphasisStyle |> transitionProperty'
-        static member TextUnderlineOffset = Property.TextUnderlineOffset |> transitionProperty'
-        static member TextUnderlinePosition = Property.TextUnderlinePosition |> transitionProperty'
-        static member Top = Property.Top |> transitionProperty'
-        static member Transform = Property.Transform |> transitionProperty'
-        static member TransformOrigin = Property.TransformOrigin |> transitionProperty'
-        static member TransformStyle = Property.TransformStyle |> transitionProperty'
-        static member TransitionDelay = Property.TransitionDelay |> transitionProperty'
-        static member TransitionDuration = Property.TransitionDuration |> transitionProperty'
-        static member TransitionProperty = Property.TransitionProperty |> transitionProperty'
-        static member TransitionTimingFunction = Property.TransitionTimingFunction |> transitionProperty'
-        static member UnicodeBidi = Property.UnicodeBidi |> transitionProperty'
-        static member VerticalAlign = Property.VerticalAlign |> transitionProperty'
-        static member Visibility = Property.Visibility |> transitionProperty'
-        static member VoiceBalance = Property.VoiceBalance |> transitionProperty'
-        static member VoiceDuration = Property.VoiceDuration |> transitionProperty'
-        static member VoiceFamily = Property.VoiceFamily |> transitionProperty'
-        static member VoicePitch = Property.VoicePitch |> transitionProperty'
-        static member VoiceRange = Property.VoiceRange |> transitionProperty'
-        static member VoiceRate = Property.VoiceRate |> transitionProperty'
-        static member VoiceStress = Property.VoiceStress |> transitionProperty'
-        static member VoiceVolume = Property.VoiceVolume |> transitionProperty'
-        static member Volume = Property.Volume |> transitionProperty'
-        static member WhiteSpace = Property.WhiteSpace |> transitionProperty'
-        static member Widows = Property.Widows |> transitionProperty'
-        static member Width = Property.Width |> transitionProperty'
-        static member WillChange = Property.WillChange |> transitionProperty'
-        static member WordBreak = Property.WordBreak |> transitionProperty'
-        static member WordSpacing = Property.WordSpacing |> transitionProperty'
-        static member WordWrap = Property.WordWrap |> transitionProperty'
-        static member ZIndex = Property.ZIndex |> transitionProperty'
+        static member All = Types.Property.All |> transitionProperty'
+        static member AlignContent = Types.Property.AlignContent |> transitionProperty'
+        static member AlignItems = Types.Property.AlignItems |> transitionProperty'
+        static member AlignSelf = Types.Property.AlignSelf |> transitionProperty'
+        static member AnimationDelay = Types.Property.AnimationDelay |> transitionProperty'
+        static member AnimationDirection = Types.Property.AnimationDirection |> transitionProperty'
+        static member AnimationDuration = Types.Property.AnimationDuration |> transitionProperty'
+        static member AnimationFillMode = Types.Property.AnimationFillMode |> transitionProperty'
+        static member AnimationIterationCount = Types.Property.AnimationIterationCount |> transitionProperty'
+        static member AnimationName = Types.Property.AnimationName |> transitionProperty'
+        static member AnimationPlayState = Types.Property.AnimationPlayState |> transitionProperty'
+        static member AnimationTimingFunction = Types.Property.AnimationTimingFunction |> transitionProperty'
+        static member BackfaceVisibility = Types.Property.BackfaceVisibility |> transitionProperty'
+        static member BackgroundAttachment = Types.Property.BackgroundAttachment |> transitionProperty'
+        static member BackgroundBlendMode = Types.Property.BackgroundBlendMode |> transitionProperty'
+        static member BackgroundClip = Types.Property.BackgroundClip |> transitionProperty'
+        static member BackgroundColor = Types.Property.BackgroundColor |> transitionProperty'
+        static member BackgroundImage = Types.Property.BackgroundImage |> transitionProperty'
+        static member BackgroundOrigin = Types.Property.BackgroundOrigin |> transitionProperty'
+        static member BackgroundPosition = Types.Property.BackgroundPosition |> transitionProperty'
+        static member BackgroundRepeat = Types.Property.BackgroundRepeat |> transitionProperty'
+        static member BackgroundSize = Types.Property.BackgroundSize |> transitionProperty'
+        static member Bleed = Types.Property.Bleed |> transitionProperty'
+        static member BorderBottomColor = Types.Property.BorderBottomColor |> transitionProperty'
+        static member BorderBottomLeftRadius = Types.Property.BorderBottomLeftRadius |> transitionProperty'
+        static member BorderBottomRightRadius = Types.Property.BorderBottomRightRadius |> transitionProperty'
+        static member BorderBottomStyle = Types.Property.BorderBottomStyle |> transitionProperty'
+        static member BorderBottomWidth = Types.Property.BorderBottomWidth |> transitionProperty'
+        static member BorderBottom = Types.Property.BorderBottom |> transitionProperty'
+        static member BorderCollapse = Types.Property.BorderCollapse |> transitionProperty'
+        static member BorderColor = Types.Property.BorderColor |> transitionProperty'
+        static member BorderImage = Types.Property.BorderImage |> transitionProperty'
+        static member BorderImageOutset = Types.Property.BorderImageOutset |> transitionProperty'
+        static member BorderImageRepeat = Types.Property.BorderImageRepeat |> transitionProperty'
+        static member BorderImageSource = Types.Property.BorderImageSource |> transitionProperty'
+        static member BorderImageSlice = Types.Property.BorderImageSlice |> transitionProperty'
+        static member BorderImageWidth = Types.Property.BorderImageWidth |> transitionProperty'
+        static member BorderLeftColor = Types.Property.BorderLeftColor |> transitionProperty'
+        static member BorderLeftStyle = Types.Property.BorderLeftStyle |> transitionProperty'
+        static member BorderLeftWidth = Types.Property.BorderLeftWidth |> transitionProperty'
+        static member BorderLeft = Types.Property.BorderLeft |> transitionProperty'
+        static member BorderRadius = Types.Property.BorderRadius |> transitionProperty'
+        static member BorderRightColor = Types.Property.BorderRightColor |> transitionProperty'
+        static member BorderRightStyle = Types.Property.BorderRightStyle |> transitionProperty'
+        static member BorderRightWidth = Types.Property.BorderRightWidth |> transitionProperty'
+        static member BorderRight = Types.Property.BorderRight |> transitionProperty'
+        static member BorderSpacing = Types.Property.BorderSpacing |> transitionProperty'
+        static member BorderStyle = Types.Property.BorderStyle |> transitionProperty'
+        static member BorderTopColor = Types.Property.BorderTopColor |> transitionProperty'
+        static member BorderTopLeftRadius = Types.Property.BorderTopLeftRadius |> transitionProperty'
+        static member BorderTopRightRadius = Types.Property.BorderTopRightRadius |> transitionProperty'
+        static member BorderTopStyle = Types.Property.BorderTopStyle |> transitionProperty'
+        static member BorderTopWidth = Types.Property.BorderTopWidth |> transitionProperty'
+        static member BorderTop = Types.Property.BorderTop |> transitionProperty'
+        static member BorderWidth = Types.Property.BorderWidth |> transitionProperty'
+        static member Bottom = Types.Property.Bottom |> transitionProperty'
+        static member BoxDecorationBreak = Types.Property.BoxDecorationBreak |> transitionProperty'
+        static member BoxShadow = Types.Property.BoxShadow |> transitionProperty'
+        static member BoxSizing = Types.Property.BoxSizing |> transitionProperty'
+        static member BreakAfter = Types.Property.BreakAfter |> transitionProperty'
+        static member BreakBefore = Types.Property.BreakBefore |> transitionProperty'
+        static member BreakInside = Types.Property.BreakInside |> transitionProperty'
+        static member CaptionSide = Types.Property.CaptionSide |> transitionProperty'
+        static member CaretColor = Types.Property.CaretColor |> transitionProperty'
+        static member Clear = Types.Property.Clear |> transitionProperty'
+        static member Clip = Types.Property.Clip |> transitionProperty'
+        static member Color = Types.Property.Color |> transitionProperty'
+        static member Columns = Types.Property.Columns |> transitionProperty'
+        static member ColumnCount = Types.Property.ColumnCount |> transitionProperty'
+        static member ColumnFill = Types.Property.ColumnFill |> transitionProperty'
+        static member ColumnGap = Types.Property.ColumnGap |> transitionProperty'
+        static member ColumnRule = Types.Property.ColumnRule |> transitionProperty'
+        static member ColumnRuleColor = Types.Property.ColumnRuleColor |> transitionProperty'
+        static member ColumnRuleStyle = Types.Property.ColumnRuleStyle |> transitionProperty'
+        static member ColumnRuleWidth = Types.Property.ColumnRuleWidth |> transitionProperty'
+        static member ColumnSpan = Types.Property.ColumnSpan |> transitionProperty'
+        static member ColumnWidth = Types.Property.ColumnWidth |> transitionProperty'
+        static member Content = Types.Property.Content |> transitionProperty'
+        static member CounterIncrement = Types.Property.CounterIncrement |> transitionProperty'
+        static member CounterReset = Types.Property.CounterReset |> transitionProperty'
+        static member CueAfter = Types.Property.CueAfter |> transitionProperty'
+        static member CueBefore = Types.Property.CueBefore |> transitionProperty'
+        static member Cue = Types.Property.Cue |> transitionProperty'
+        static member Cursor = Types.Property.Cursor |> transitionProperty'
+        static member Direction = Types.Property.Direction |> transitionProperty'
+        static member Display = Types.Property.Display |> transitionProperty'
+        static member Elevation = Types.Property.Elevation |> transitionProperty'
+        static member EmptyCells = Types.Property.EmptyCells |> transitionProperty'
+        static member Filter = Types.Property.Filter |> transitionProperty'
+        static member Flex = Types.Property.Flex |> transitionProperty'
+        static member FlexBasis = Types.Property.FlexBasis |> transitionProperty'
+        static member FlexDirection = Types.Property.FlexDirection |> transitionProperty'
+        static member FontFeatureSettings = Types.Property.FontFeatureSettings |> transitionProperty'
+        static member FlexFlow = Types.Property.FlexFlow |> transitionProperty'
+        static member FlexGrow = Types.Property.FlexGrow |> transitionProperty'
+        static member FlexShrink = Types.Property.FlexShrink |> transitionProperty'
+        static member FlexWrap = Types.Property.FlexWrap |> transitionProperty'
+        static member Float = Types.Property.Float |> transitionProperty'
+        static member FontFamily = Types.Property.FontFamily |> transitionProperty'
+        static member FontKerning = Types.Property.FontKerning |> transitionProperty'
+        static member FontLanguageOverride = Types.Property.FontLanguageOverride |> transitionProperty'
+        static member FontSizeAdjust = Types.Property.FontSizeAdjust |> transitionProperty'
+        static member FontSize = Types.Property.FontSize |> transitionProperty'
+        static member FontStretch = Types.Property.FontStretch |> transitionProperty'
+        static member FontStyle = Types.Property.FontStyle |> transitionProperty'
+        static member FontDisplay = Types.Property.FontDisplay |> transitionProperty'
+        static member FontSynthesis = Types.Property.FontSynthesis |> transitionProperty'
+        static member FontVariant = Types.Property.FontVariant |> transitionProperty'
+        static member FontVariantAlternates = Types.Property.FontVariantAlternates |> transitionProperty'
+        static member FontVariantCaps = Types.Property.FontVariantCaps |> transitionProperty'
+        static member FontVariantEastAsian = Types.Property.FontVariantEastAsian |> transitionProperty'
+        static member FontVariantLigatures = Types.Property.FontVariantLigatures |> transitionProperty'
+        static member FontVariantNumeric = Types.Property.FontVariantNumeric |> transitionProperty'
+        static member FontVariantPosition = Types.Property.FontVariantPosition |> transitionProperty'
+        static member FontWeight = Types.Property.FontWeight |> transitionProperty'
+        static member Font = Types.Property.Font |> transitionProperty'
+        static member GridArea = Types.Property.GridArea |> transitionProperty'
+        static member GridAutoColumns = Types.Property.GridAutoColumns |> transitionProperty'
+        static member GridAutoFlow = Types.Property.GridAutoFlow |> transitionProperty'
+        static member GridAutoRows = Types.Property.GridAutoRows |> transitionProperty'
+        static member GridColumnEnd = Types.Property.GridColumnEnd |> transitionProperty'
+        static member GridColumnGap = Types.Property.ColumnGap |> transitionProperty'
+        static member GridColumnStart = Types.Property.GridColumnStart |> transitionProperty'
+        static member GridColumn = Types.Property.GridColumn |> transitionProperty'
+        static member GridGap = Types.Property.GridGap |> transitionProperty'
+        static member GridRowEnd = Types.Property.GridRowEnd |> transitionProperty'
+        static member GridRowGap = Types.Property.GridRowGap |> transitionProperty'
+        static member GridRowStart = Types.Property.GridRowStart |> transitionProperty'
+        static member GridRow = Types.Property.GridRow |> transitionProperty'
+        static member GridTemplateAreas = Types.Property.GridTemplateAreas |> transitionProperty'
+        static member GridTemplateColumns = Types.Property.GridTemplateColumns |> transitionProperty'
+        static member GridTemplateRows = Types.Property.GridTemplateRows |> transitionProperty'
+        static member GridTemplate = Types.Property.GridTemplate |> transitionProperty'
+        static member Grid = Types.Property.Grid |> transitionProperty'
+        static member HangingPunctuation = Types.Property.HangingPunctuation |> transitionProperty'
+        static member Height = Types.Property.Height |> transitionProperty'
+        static member Hyphens = Types.Property.Hyphens |> transitionProperty'
+        static member Isolation = Types.Property.Isolation |> transitionProperty'
+        static member JustifyContent = Types.Property.JustifyContent |> transitionProperty'
+        static member JustifyItems = Types.Property.JustifyItems |> transitionProperty'
+        static member JustifySelf = Types.Property.JustifySelf |> transitionProperty'
+        static member Label = Types.Property.Label |> transitionProperty'
+        static member Left = Types.Property.Left |> transitionProperty'
+        static member LetterSpacing = Types.Property.LetterSpacing |> transitionProperty'
+        static member LineBreak = Types.Property.LineBreak |> transitionProperty'
+        static member LineHeight = Types.Property.LineHeight |> transitionProperty'
+        static member ListStyleImage = Types.Property.ListStyleImage |> transitionProperty'
+        static member ListStylePosition = Types.Property.ListStylePosition |> transitionProperty'
+        static member ListStyleType = Types.Property.ListStyleType |> transitionProperty'
+        static member MarginBottom = Types.Property.MarginBottom |> transitionProperty'
+        static member MarginLeft = Types.Property.MarginLeft |> transitionProperty'
+        static member MarginRight = Types.Property.MarginRight |> transitionProperty'
+        static member MarginTop = Types.Property.MarginTop |> transitionProperty'
+        static member Margin = Types.Property.Margin |> transitionProperty'
+        static member MarkerOffset = Types.Property.MarkerOffset |> transitionProperty'
+        static member Marks = Types.Property.Marks |> transitionProperty'
+        static member MaxHeight = Types.Property.MaxHeight |> transitionProperty'
+        static member MaxWidth = Types.Property.MaxWidth |> transitionProperty'
+        static member MinHeight = Types.Property.MinHeight |> transitionProperty'
+        static member MinWidth = Types.Property.MinWidth |> transitionProperty'
+        static member MixBlendMode = Types.Property.MixBlendMode |> transitionProperty'
+        static member NavUp = Types.Property.NavUp |> transitionProperty'
+        static member NavDown = Types.Property.NavDown |> transitionProperty'
+        static member NavLeft = Types.Property.NavLeft |> transitionProperty'
+        static member NavRight = Types.Property.NavRight |> transitionProperty'
+        static member Opacity = Types.Property.Opacity |> transitionProperty'
+        static member Order = Types.Property.Order |> transitionProperty'
+        static member Orphans = Types.Property.Orphans |> transitionProperty'
+        static member OutlineColor = Types.Property.OutlineColor |> transitionProperty'
+        static member OutlineOffset = Types.Property.OutlineOffset |> transitionProperty'
+        static member OutlineStyle = Types.Property.OutlineStyle |> transitionProperty'
+        static member OutlineWidth = Types.Property.OutlineWidth |> transitionProperty'
+        static member Outline = Types.Property.Outline |> transitionProperty'
+        static member Overflow = Types.Property.Overflow |> transitionProperty'
+        static member OverflowWrap = Types.Property.OverflowWrap |> transitionProperty'
+        static member OverflowX = Types.Property.OverflowX |> transitionProperty'
+        static member OverflowY = Types.Property.OverflowY |> transitionProperty'
+        static member PaddingBottom = Types.Property.PaddingBottom |> transitionProperty'
+        static member PaddingLeft = Types.Property.PaddingLeft |> transitionProperty'
+        static member PaddingRight = Types.Property.PaddingRight |> transitionProperty'
+        static member PaddingTop = Types.Property.PaddingTop |> transitionProperty'
+        static member Padding = Types.Property.Padding |> transitionProperty'
+        static member Page = Types.Property.Page |> transitionProperty'
+        static member PauseAfter = Types.Property.PauseAfter |> transitionProperty'
+        static member PauseBefore = Types.Property.PauseBefore |> transitionProperty'
+        static member Pause = Types.Property.Pause |> transitionProperty'
+        static member Perspective = Types.Property.Perspective |> transitionProperty'
+        static member PerspectiveOrigin = Types.Property.PerspectiveOrigin |> transitionProperty'
+        static member PitchRange = Types.Property.PitchRange |> transitionProperty'
+        static member Pitch = Types.Property.Pitch |> transitionProperty'
+        static member PlaceContent = Types.Property.PlaceContent |> transitionProperty'
+        static member PlaceItems = Types.Property.PlaceItems |> transitionProperty'
+        static member PlaceSelf = Types.Property.PlaceSelf |> transitionProperty'
+        static member PlayDuring = Types.Property.PlayDuring |> transitionProperty'
+        static member Position = Types.Property.Position |> transitionProperty'
+        static member Quotes = Types.Property.Quotes |> transitionProperty'
+        static member Resize = Types.Property.Resize |> transitionProperty'
+        static member RestAfter = Types.Property.RestAfter |> transitionProperty'
+        static member RestBefore = Types.Property.RestBefore |> transitionProperty'
+        static member Rest = Types.Property.Rest |> transitionProperty'
+        static member Richness = Types.Property.Richness |> transitionProperty'
+        static member Right = Types.Property.Right |> transitionProperty'
+        static member Size = Types.Property.Size |> transitionProperty'
+        static member SpeakHeader = Types.Property.SpeakHeader |> transitionProperty'
+        static member SpeakNumeral = Types.Property.SpeakNumeral |> transitionProperty'
+        static member SpeakPunctuation = Types.Property.SpeakPunctuation |> transitionProperty'
+        static member Speak = Types.Property.Speak |> transitionProperty'
+        static member SpeechRate = Types.Property.SpeechRate |> transitionProperty'
+        static member Stress = Types.Property.Stress |> transitionProperty'
+        static member TabSize = Types.Property.TabSize |> transitionProperty'
+        static member TableLayout = Types.Property.TableLayout |> transitionProperty'
+        static member TextAlign = Types.Property.TextAlign |> transitionProperty'
+        static member TextAlignlast = Types.Property.TextAlignLast |> transitionProperty'
+        static member TextDecoration = Types.Property.TextDecoration |> transitionProperty'
+        static member TextDecorationColor = Types.Property.TextDecorationColor |> transitionProperty'
+        static member TextDecorationLine = Types.Property.TextDecorationLine |> transitionProperty'
+        static member TextDecorationThickness = Types.Property.TextDecorationThickness |> transitionProperty'
+        static member TextDecorationSkip = Types.Property.TextDecorationSkip |> transitionProperty'
+        static member TextDecorationSkipInk = Types.Property.TextDecorationSkipInk |> transitionProperty'
+        static member TextDecorationStyle = Types.Property.TextDecorationStyle |> transitionProperty'
+        static member TextIndent = Types.Property.TextIndent |> transitionProperty'
+        static member TextOverflow = Types.Property.TextOverflow |> transitionProperty'
+        static member TextShadow = Types.Property.TextShadow |> transitionProperty'
+        static member TextTransform = Types.Property.TextTransform |> transitionProperty'
+        static member TextEmphasisColor = Types.Property.TextEmphasisColor |> transitionProperty'
+        static member TextEmphasisPosition = Types.Property.TextEmphasisPosition |> transitionProperty'
+        static member TextEmphasisStyle = Types.Property.TextEmphasisStyle |> transitionProperty'
+        static member TextUnderlineOffset = Types.Property.TextUnderlineOffset |> transitionProperty'
+        static member TextUnderlinePosition = Types.Property.TextUnderlinePosition |> transitionProperty'
+        static member Top = Types.Property.Top |> transitionProperty'
+        static member Transform = Types.Property.Transform |> transitionProperty'
+        static member TransformOrigin = Types.Property.TransformOrigin |> transitionProperty'
+        static member TransformStyle = Types.Property.TransformStyle |> transitionProperty'
+        static member TransitionDelay = Types.Property.TransitionDelay |> transitionProperty'
+        static member TransitionDuration = Types.Property.TransitionDuration |> transitionProperty'
+        static member TransitionProperty = Types.Property.TransitionProperty |> transitionProperty'
+        static member TransitionTimingFunction = Types.Property.TransitionTimingFunction |> transitionProperty'
+        static member UnicodeBidi = Types.Property.UnicodeBidi |> transitionProperty'
+        static member VerticalAlign = Types.Property.VerticalAlign |> transitionProperty'
+        static member Visibility = Types.Property.Visibility |> transitionProperty'
+        static member VoiceBalance = Types.Property.VoiceBalance |> transitionProperty'
+        static member VoiceDuration = Types.Property.VoiceDuration |> transitionProperty'
+        static member VoiceFamily = Types.Property.VoiceFamily |> transitionProperty'
+        static member VoicePitch = Types.Property.VoicePitch |> transitionProperty'
+        static member VoiceRange = Types.Property.VoiceRange |> transitionProperty'
+        static member VoiceRate = Types.Property.VoiceRate |> transitionProperty'
+        static member VoiceStress = Types.Property.VoiceStress |> transitionProperty'
+        static member VoiceVolume = Types.Property.VoiceVolume |> transitionProperty'
+        static member Volume = Types.Property.Volume |> transitionProperty'
+        static member WhiteSpace = Types.Property.WhiteSpace |> transitionProperty'
+        static member Widows = Types.Property.Widows |> transitionProperty'
+        static member Width = Types.Property.Width |> transitionProperty'
+        static member WillChange = Types.Property.WillChange |> transitionProperty'
+        static member WordBreak = Types.Property.WordBreak |> transitionProperty'
+        static member WordSpacing = Types.Property.WordSpacing |> transitionProperty'
+        static member WordWrap = Types.Property.WordWrap |> transitionProperty'
+        static member ZIndex = Types.Property.ZIndex |> transitionProperty'
 
-        static member None = None' |> transitionProperty'
-        static member Inherit = Inherit |> transitionProperty'
-        static member Initial = Initial |> transitionProperty'
-        static member Unset = Unset |> transitionProperty'
+        static member None = Types.None' |> transitionProperty'
+        static member Inherit = Types.Inherit |> transitionProperty'
+        static member Initial = Types.Initial |> transitionProperty'
+        static member Unset = Types.Unset |> transitionProperty'
 
     /// <summary>Specifies which properties should be affected by transition.</summary>
     /// <param name="property">
@@ -430,4 +429,4 @@ module Transition =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransitionProperty' (property: ITransitionProperty) = TransitionProperty.Value(property)
+    let TransitionProperty' (property: Types.ITransitionProperty) = TransitionProperty.Value(property)

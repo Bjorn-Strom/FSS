@@ -18,15 +18,17 @@
     </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utilities.fs" />
-    <Compile Include="Types\Types.fs" />
-    <Compile Include="Types\Property.fs" />
+    <Compile Include="Types\MasterTypes.fs" />
     <Compile Include="Types\Units.fs" />
     <Compile Include="Types\Html.fs" />
     <Compile Include="Types\Attribute.fs" />
+    <Compile Include="Types\Property.fs" />
     <Compile Include="Types\TimingFunction.fs" />
     <Compile Include="Types\Animation.fs" />
-    <Compile Include="Types\CssColor.fs" />
     <Compile Include="Types\Color.fs" />
+    <Compile Include="Types\MixBlendMode.fs" />
+    <Compile Include="Types\BoxShadow.fs" />
+    <Compile Include="Types\Media.fs" />
     <Compile Include="Types\Font.fs" />
     <Compile Include="Types\Word.fs" />
     <Compile Include="Types\Text.fs" />
@@ -49,19 +51,15 @@
     <Compile Include="Types\Grid.fs" />
     <Compile Include="Types\Flex.fs" />
     <Compile Include="Types\Outline.fs" />
-    <Compile Include="Types\Media.fs" />
-    <Compile Include="Types\BoxShadow.fs" />
     <Compile Include="Types\Scroll.fs" />
     <Compile Include="Types\Clear.fs" />
     <Compile Include="Types\Filter.fs" />
-    <Compile Include="Types\MixBlendMode.fs" />
     <Compile Include="Types\Mask.fs" />
     <Compile Include="Types\ClipPath.fs" />
     <Compile Include="Types\Content.fs" />
     <Compile Include="Types\FontFace.fs" />
     <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />
-    <Compile Include="css\CssColor.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Font.fs" />
     <Compile Include="css\Word.fs" />

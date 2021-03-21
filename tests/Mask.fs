@@ -108,7 +108,7 @@ module Mask =
                     [ "maskImage" ==> "url(image.jpg)" ]
                 test
                     "Mask image source linear gradient"
-                    [ MaskImage.LinearGradient(deg 45., [ Fss.CssColor.CssColor.red, pct 0; Fss.CssColor.CssColor.blue, pct 100 ]) ]
+                    [ MaskImage.LinearGradient(deg 45., [ Fss.Types.Color.Types.Color.red, pct 0; Fss.Types.Color.Types.Color.blue, pct 100 ]) ]
                     [ "maskImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
                 test
                     "Mask image source inherit"
@@ -152,7 +152,7 @@ module Mask =
                     [ "maskMode" ==> "unset" ]
                 test
                     "MaskOrigin multiple"
-                    [ MaskOrigin.Value([FssTypes.MaskOrigin.ViewBox; FssTypes.MaskOrigin.FillBox; FssTypes.MaskOrigin.BorderBox])]
+                    [ MaskOrigin.Value([Types.MaskOrigin.ViewBox; Types.MaskOrigin.FillBox; Types.MaskOrigin.BorderBox])]
                     [ "maskOrigin" ==> "view-box, fill-box, border-box" ]
                 test
                     "MaskOrigin content-box"
@@ -237,15 +237,15 @@ module Mask =
 
                 test
                     "MaskRepeat value"
-                    [ MaskRepeat.Value(FssTypes.MaskRepeat.Repeat)]
+                    [ MaskRepeat.Value(Types.MaskRepeat.Repeat)]
                     [ "maskRepeat" ==> "repeat" ]
                 test
                     "MaskRepeat 2 value"
-                    [ MaskRepeat.Value(FssTypes.MaskRepeat.RepeatX, FssTypes.MaskRepeat.RepeatY)]
+                    [ MaskRepeat.Value(Types.MaskRepeat.RepeatX, Types.MaskRepeat.RepeatY)]
                     [ "maskRepeat" ==> "repeat-x repeat-y" ]
                 test
                     "MaskRepeat multiple values"
-                    [ MaskRepeat.Value([FssTypes.MaskRepeat.RepeatX, FssTypes.MaskRepeat.RepeatY; FssTypes.MaskRepeat.NoRepeat, FssTypes.MaskRepeat.Round])]
+                    [ MaskRepeat.Value([Types.MaskRepeat.RepeatX, Types.MaskRepeat.RepeatY; Types.MaskRepeat.NoRepeat, Types.MaskRepeat.Round])]
                     [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
                 test
                     "MaskRepeat repeatX"

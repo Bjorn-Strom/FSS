@@ -107,7 +107,7 @@ module ListStyle =
                 test
                     "List style type custom"
                     [ ListStyleType' sampleCounterStyle ]
-                    [ "listStyleType" ==> (FssTypes.Counter.counterValue sampleCounterStyle) ]
+                    [ "listStyleType" ==> (Types.Counter.counterValue sampleCounterStyle) ]
                 test
                     "List style type None"
                     [ ListStyleType.None ]

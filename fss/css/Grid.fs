@@ -1,5 +1,4 @@
 ﻿namespace Fss
-open FssTypes
 
 [<AutoOpen>]
 module Grid =
@@ -14,14 +13,14 @@ module Grid =
         static member MinMax (min: ILengthPercentage, max: ILengthPercentage) =
             sprintf "minmax(%s, %s)" (Units.LengthPercentage.value min) (Units.LengthPercentage.value max)
             |> MinMaxGrid
-        static member MinMax (min: Units.Size.Size, max: ContentSize) =
-            sprintf "minmax(%s, %s)" (Units.Size.value min) (contentSizeToString max)
+        static member MinMax (min: Types.Size, max: ContentSize) =
+            sprintf "minmax(%s, %s)" (Types.sizeToString min) (contentSizeToString max)
             |> MinMaxGrid
-        static member MinMax (min: Units.Percent.Percent, max: ContentSize) =
-            sprintf "minmax(%s, %s)" (Units.Percent.value min) (contentSizeToString max)
+        static member MinMax (min: Types.Percent, max: ContentSize) =
+            sprintf "minmax(%s, %s)" (Types.percentToString min) (contentSizeToString max)
             |> MinMaxGrid
-        static member MinMax (min: ContentSize, max: Units.Size.Size) =
-            sprintf "minmax(%s, %s)" (contentSizeToString min) (Units.Size.value max)
+        static member MinMax (min: ContentSize, max: Types.Size) =
+            sprintf "minmax(%s, %s)" (contentSizeToString min) (Types.sizeToString max)
             |> MinMaxGrid
         static member MinMax (min: ContentSize, max: ContentSize) =
             sprintf "minmax(%s, %s)" (contentSizeToString min) (contentSizeToString max)
@@ -68,27 +67,27 @@ module Grid =
                 value
                 (Utilities.Helpers.combineWs Units.LengthPercentage.value sizes)
             |> GridRepeat
-        static member Repeat (value: FssTypes.Repeat, fraction: Units.Fraction.Fraction) =
+        static member Repeat (value: Types.Repeat, fraction: Units.Fraction.Fraction) =
             sprintf "repeat(%s, %s)" (repeatValue value) (Units.Fraction.value fraction)
             |> GridRepeat
-        static member Repeat (value: FssTypes.Repeat, length: ILengthPercentage) =
+        static member Repeat (value: Types.Repeat, length: ILengthPercentage) =
             sprintf "repeat(%s, %s)" (repeatValue value) (Units.LengthPercentage.value length)
             |> GridRepeat
-        static member Repeat (value: FssTypes.Repeat, contentSize: ContentSize) =
+        static member Repeat (value: Types.Repeat, contentSize: ContentSize) =
             sprintf "repeat(%s, %s)" (repeatValue value) (contentSizeToString contentSize)
             |> GridRepeat
         static member Repeat (value: int, minMax: MinMax) =
             sprintf "repeat(%d, %s)" value (minMaxToString minMax)
             |> GridRepeat
-        static member Repeat (value: int, sizes: Units.Size.Size list) =
+        static member Repeat (value: int, sizes: Types.Size list) =
             sprintf "repeat(%d, %s)"
                 value
-                (Utilities.Helpers.combineWs Units.Size.value sizes)
+                (Utilities.Helpers.combineWs Types.sizeToString sizes)
             |> GridRepeat
-        static member Repeat (value: int, sizes: Units.Percent.Percent list) =
+        static member Repeat (value: int, sizes: Types.Percent list) =
             sprintf "repeat(%d, %s)"
                 value
-                (Utilities.Helpers.combineWs Units.Percent.value sizes)
+                (Utilities.Helpers.combineWs Types.percentToString sizes)
             |> GridRepeat
 
         interface ITemplateType
@@ -96,45 +95,45 @@ module Grid =
     let private autoFlowToString (autoFlow: IGridAutoFlow) =
         match autoFlow with
         | :? GridAutoFlow as g -> Utilities.Helpers.duToSpaced g
-        | :? Global as g ->  global' g
+        | :? Global as g ->  Types.keywordsToString g
         | _ -> "Unknown grid auto flow"
 
     let private templateAreaToString (area: IGridTemplateArea) =
         match area with
-        | :? Global as g -> global' g
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | :? None'-> none
         | _ -> "Unknown grid template area"
 
     let private gridGapToString (gap: IGridGap) =
         match gap with
-        | :? Global as g -> global' g
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
         | _ -> "Unknown grid gap"
 
     let private gridRowGapToString (gap: IGridRowGap) =
         match gap with
-        | :? Global as g -> global' g
-        | :? Normal -> normal
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.normal
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
         | _ -> "Unknown grid row gap"
 
     let private gridColumnGapToString (gap: IGridColumnGap) =
         match gap with
-        | :? Global as g -> global' g
-        | :? Normal -> normal
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Normal -> Types.normal
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
         | _ -> "Unknown grid column gap"
 
     let private templateColumnToString (templateColumn: IGridTemplateColumns) =
         match templateColumn with
         | :? GridTemplateColumns as g -> Utilities.Helpers.duToLowercase g
-        | :? Auto -> auto
-        | :? None' -> none
-        | :? Global as g -> global' g
-        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Types.Auto -> Types.auto
+        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.sizeToString s
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | _ -> "Unkown grid template column"
 
@@ -149,28 +148,28 @@ module Grid =
 
         match position with
         | :? GridPosition as g -> stringifyGridPosition g
-        | :? Auto -> auto
-        | :? Global as g -> global' g
+        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown grid position"
 
     let private templateRowToString (templateRow: IGridTemplateRows) =
         match templateRow with
         | :? GridTemplateRows as g -> Utilities.Helpers.duToLowercase g
-        | :? Auto -> auto
-        | :? None' -> none
-        | :? Global as g -> global' g
-        | :? Units.Size.Size as s -> Units.Size.value s
+        | :? Types.Auto -> Types.auto
+        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.sizeToString s
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | _ -> "Unknown grid template row"
 
     let private autoColumnsToString (autoColumns: IGridAutoColumns) =
         match autoColumns with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | :? ContentSize as c -> contentSizeToString c
-        | :? Auto -> auto
-        | :? Global as g -> global' g
+        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | :? MinMax as m -> minMaxToString m
         | _ -> "Unknown grid auto column"
 
@@ -178,8 +177,8 @@ module Grid =
 
     let private templateTypeValue (i: ITemplateType) =
         match i with
-            | :? Units.Percent.Percent as p -> Units.Percent.value p
-            | :? Units.Size.Size as s -> Units.Size.value s
+            | :? Types.Percent as p -> Types.percentToString p
+            | :? Types.Size as s -> Types.sizeToString s
             | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
             | :? MinMax as m -> minMaxToString m
             | :? Repeat as r -> repeatToString r
@@ -187,32 +186,32 @@ module Grid =
 
     let private autoRowsToString (autoRows: IGridAutoRows) =
         match autoRows with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | :? ContentSize as c -> contentSizeToString c
-        | :? Auto -> auto
-        | :? Global as g -> global' g
+        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | :? MinMax as m -> minMaxToString m
         | _ -> "Unknown grid auto row"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
-    let private autoFlowValue value = PropertyValue.cssValue Property.GridAutoFlow value
+    let private autoFlowValue value = Types.cssValue Types.Property.GridAutoFlow value
     let private autoFlowValue' value =
         value
         |> autoFlowToString
         |> autoFlowValue
     type GridAutoFlow =
         static member Value (autoFlow: IGridAutoFlow) = autoFlow |> autoFlowValue'
-        static member Row = FssTypes.GridAutoFlow.Row |> autoFlowValue'
-        static member Column = FssTypes.GridAutoFlow.Column |> autoFlowValue'
-        static member Dense = FssTypes.GridAutoFlow.Dense |> autoFlowValue'
-        static member RowDense = FssTypes.GridAutoFlow.RowDense |> autoFlowValue'
-        static member ColumnDense = FssTypes.GridAutoFlow.ColumnDense |> autoFlowValue'
+        static member Row = Types.GridAutoFlow.Row |> autoFlowValue'
+        static member Column = Types.GridAutoFlow.Column |> autoFlowValue'
+        static member Dense = Types.GridAutoFlow.Dense |> autoFlowValue'
+        static member RowDense = Types.GridAutoFlow.RowDense |> autoFlowValue'
+        static member ColumnDense = Types.GridAutoFlow.ColumnDense |> autoFlowValue'
 
-        static member Inherit = Inherit |> autoFlowValue'
-        static member Initial = Initial |> autoFlowValue'
-        static member Unset = Unset |> autoFlowValue'
+        static member Inherit = Types.Inherit |> autoFlowValue'
+        static member Initial = Types.Initial |> autoFlowValue'
+        static member Unset = Types.Unset |> autoFlowValue'
 
     /// <summary>Specifies how the auto placement algorithm works.</summary>
     /// <param name="flow">
@@ -227,7 +226,7 @@ module Grid =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
 
-    let private templateAreaValue value = PropertyValue.cssValue Property.GridTemplateAreas value
+    let private templateAreaValue value = Types.cssValue Types.Property.GridTemplateAreas value
     let private templateAreaValue' value =
         value
         |> templateAreaToString
@@ -247,10 +246,10 @@ module Grid =
                 |> sprintf "\"%s\"")
             |> String.concat " "
             |> templateAreaValue
-        static member None = None' |> templateAreaValue'
-        static member Inherit = Inherit |> templateAreaValue'
-        static member Initial = Initial |> templateAreaValue'
-        static member Unset = Unset |> templateAreaValue'
+        static member None = Types.None' |> templateAreaValue'
+        static member Inherit = Types.Inherit |> templateAreaValue'
+        static member Initial = Types.Initial |> templateAreaValue'
+        static member Unset = Types.Unset |> templateAreaValue'
 
     /// <summary>Resets grid template area.</summary>
     /// <param name="areas">
@@ -264,7 +263,7 @@ module Grid =
     let GridTemplateAreas' (areas: IGridTemplateArea) = GridTemplateAreas.Value(areas)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/gap
-    let private gridGapValue value = PropertyValue.cssValue Property.GridGap value
+    let private gridGapValue value = Types.cssValue Types.Property.GridGap value
     let private gridGapValue' value =
         value
         |> gridGapToString
@@ -276,9 +275,9 @@ module Grid =
                 (gridGapToString rowGap)
                 (gridGapToString columnGap)
             |> gridGapValue
-        static member Inherit = Inherit |> gridGapValue'
-        static member Initial = Initial |> gridGapValue'
-        static member Unset = Unset |> gridGapValue'
+        static member Inherit = Types.Inherit |> gridGapValue'
+        static member Initial = Types.Initial |> gridGapValue'
+        static member Unset = Types.Unset |> gridGapValue'
 
     /// <summary>Specifies gap between rows and column in grid.</summary>
     /// <param name="gap">
@@ -293,17 +292,17 @@ module Grid =
     let GridGap' (gap: IGridGap) = GridGap.Value(gap)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
-    let private gridRowGapValue value = PropertyValue.cssValue Property.GridRowGap value
+    let private gridRowGapValue value = Types.cssValue Types.Property.GridRowGap value
     let private gridRowGapValue' value =
         value
         |> gridRowGapToString
         |> gridRowGapValue
     type GridRowGap =
         static member Value (gap: IGridRowGap) = gap |> gridRowGapValue'
-        static member Inherit = Inherit |> gridRowGapValue'
-        static member Initial = Initial |> gridRowGapValue'
-        static member Unset = Unset |> gridRowGapValue'
-        static member Normal = Normal |> gridRowGapValue'
+        static member Inherit = Types.Inherit |> gridRowGapValue'
+        static member Initial = Types.Initial |> gridRowGapValue'
+        static member Unset = Types.Unset |> gridRowGapValue'
+        static member Normal = Types.Normal |> gridRowGapValue'
 
     /// <summary>Specifies gap between rows in grid.</summary>
     /// <param name="rowGap">
@@ -318,17 +317,17 @@ module Grid =
     let GridRowGap' (rowGap: IGridRowGap) = GridRowGap.Value(rowGap)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
-    let private gridColumnGapValue value = PropertyValue.cssValue Property.GridColumnGap value
+    let private gridColumnGapValue value = Types.cssValue Types.Property.GridColumnGap value
     let private gridColumnGapValue' value =
         value
         |> gridColumnGapToString
         |> gridColumnGapValue
     type GridColumnGap =
         static member Value (gap: IGridColumnGap) = gap |> gridColumnGapValue'
-        static member Inherit = Inherit |> gridColumnGapValue'
-        static member Initial = Initial |> gridColumnGapValue'
-        static member Unset = Unset |> gridColumnGapValue'
-        static member Normal = Normal |> gridColumnGapValue'
+        static member Inherit = Types.Inherit |> gridColumnGapValue'
+        static member Initial = Types.Initial |> gridColumnGapValue'
+        static member Unset = Types.Unset |> gridColumnGapValue'
+        static member Normal = Types.Normal |> gridColumnGapValue'
 
     /// <summary>Specifies gap between columns in grid.</summary>
     /// <param name="columnGap">
@@ -353,10 +352,10 @@ module Grid =
         static member Span (ident: string) = sprintf "span %s" ident |> Span
         static member Span (value: int, ident: string) = sprintf "%d %s span" value ident |> Span
 
-        static member Auto = Auto
-        static member Inherit = Inherit
-        static member Initial = Initial
-        static member Unset = Unset
+        static member Auto = Types.Auto
+        static member Inherit = Types.Inherit
+        static member Initial = Types.Initial
+        static member Unset = Types.Unset
 
     /// <summary>Specifies gap between columns in grid.</summary>
     /// <param name="position">
@@ -370,7 +369,7 @@ module Grid =
     /// <returns>Css property for fss.</returns>
     let GridPosition' (position: IGridPosition) = GridPosition.Value(position)
 
-    let private gridRowStartValue value = PropertyValue.cssValue Property.GridRowStart value
+    let private gridRowStartValue value = Types.cssValue Types.Property.GridRowStart value
     let private gridRowStartValue' value =
         value
         |> gridPositionToString
@@ -394,7 +393,7 @@ module Grid =
     /// <returns>Css property for fss.</returns>
     let GridRowStart' (rowStart: int) = GridRowStart.Value(rowStart)
 
-    let private gridRowEndValue value = PropertyValue.cssValue Property.GridRowEnd value
+    let private gridRowEndValue value = Types.cssValue Types.Property.GridRowEnd value
     let private gridRowEndValue' value =
         value
         |> gridPositionToString
@@ -418,7 +417,7 @@ module Grid =
     /// <returns>Css property for fss.</returns>
     let GridRowEnd' (rowEnd: int) = GridRowEnd.Value(rowEnd)
 
-    let private gridRowValue value = PropertyValue.cssValue Property.GridRow value
+    let private gridRowValue value = Types.cssValue Types.Property.GridRow value
     let private gridRowValue' value =
         value
         |> gridPositionToString
@@ -445,7 +444,7 @@ module Grid =
     /// <returns>Css property for fss.</returns>
     let GridRow' (row: IGridPosition) = GridRow.Value(row)
 
-    let private gridColumnStartValue value = PropertyValue.cssValue Property.GridColumnStart value
+    let private gridColumnStartValue value = Types.cssValue Types.Property.GridColumnStart value
     let private gridColumnStartValue' value =
         value
         |> gridPositionToString
@@ -469,7 +468,7 @@ module Grid =
     /// <returns>Css property for fss.</returns>
     let GridColumnStart' (columnStart: int) = GridColumnStart.Value(columnStart)
 
-    let private gridColumnEndValue value = PropertyValue.cssValue Property.GridColumnEnd value
+    let private gridColumnEndValue value = Types.cssValue Types.Property.GridColumnEnd value
     let private gridColumnEndValue' value =
         value
         |> gridPositionToString
@@ -493,7 +492,7 @@ module Grid =
     /// <returns>Css property for fss.</returns>
     let GridColumnEnd' (columnEnd: int) = GridColumnEnd.Value(columnEnd)
 
-    let private gridColumnValue value = PropertyValue.cssValue Property.GridColumn value
+    let private gridColumnValue value = Types.cssValue Types.Property.GridColumn value
     let private gridColumnValue' value =
         value
         |> gridPositionToString
@@ -523,7 +522,7 @@ module Grid =
     /// <returns>Css property for fss.</returns>
     let GridColumn' (column: IGridPosition) = GridColumn.Value(column)
 
-    let private gridAreaValue value = PropertyValue.cssValue Property.GridArea value
+    let private gridAreaValue value = Types.cssValue Types.Property.GridArea value
     let private gridAreaValue' value =
         value
         |> gridPositionToString
@@ -563,7 +562,7 @@ module Grid =
     let GridArea' (area: string) = GridArea.Value(GridPosition.Ident area)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
-    let private templateRowValue value = PropertyValue.cssValue Property.GridTemplateRows value
+    let private templateRowValue value = Types.cssValue Types.Property.GridTemplateRows value
     let private templateRowValue' value =
         value
         |> templateRowToString
@@ -586,7 +585,7 @@ module Grid =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateRowValue
-        static member MinMax (min: ContentSize, max: Units.Size.Size) =
+        static member MinMax (min: ContentSize, max: Types.Size) =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateRowValue
@@ -610,25 +609,25 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: FssTypes.Repeat, fraction: Units.Fraction.Fraction) =
+        static member Repeat (value: Types.Repeat, fraction: Units.Fraction.Fraction) =
             Repeat.Repeat(value, fraction)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: FssTypes.Repeat, length: ILengthPercentage) =
+        static member Repeat (value: Types.Repeat, length: ILengthPercentage) =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: FssTypes.Repeat, contentSize: ContentSize) =
+        static member Repeat (value: Types.Repeat, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
-        static member Subgrid = FssTypes.GridTemplateRows.Subgrid |> templateRowValue'
-        static member Masonry = FssTypes.GridTemplateRows.Masonry |> templateRowValue'
-        static member None = None' |> templateRowValue'
-        static member Auto = Auto |> templateRowValue'
-        static member Inherit = Inherit |> templateRowValue'
-        static member Initial = Initial |> templateRowValue'
-        static member Unset = Unset |> templateRowValue'
+        static member Subgrid = Types.GridTemplateRows.Subgrid |> templateRowValue'
+        static member Masonry = Types.GridTemplateRows.Masonry |> templateRowValue'
+        static member None = Types.None' |> templateRowValue'
+        static member Auto = Types.Auto |> templateRowValue'
+        static member Inherit = Types.Inherit |> templateRowValue'
+        static member Initial = Types.Initial |> templateRowValue'
+        static member Unset = Types.Unset |> templateRowValue'
 
     /// <summary>Defines grid rows.</summary>
     /// <param name="templateRows">
@@ -646,7 +645,7 @@ module Grid =
     let GridTemplateRows' (templateRows: IGridTemplateRows) = GridTemplateRows.Value(templateRows)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
-    let private templateColumnValue value = PropertyValue.cssValue Property.GridTemplateColumns value
+    let private templateColumnValue value = Types.cssValue Types.Property.GridTemplateColumns value
     let private templateColumnValue' value =
         value
         |> templateColumnToString
@@ -669,7 +668,7 @@ module Grid =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateColumnValue
-        static member MinMax (min: ContentSize, max: Units.Size.Size) =
+        static member MinMax (min: ContentSize, max: Types.Size) =
             MinMax.MinMax(min, max)
             |> minMaxToString
             |> templateColumnValue
@@ -693,25 +692,25 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: FssTypes.Repeat, fraction: Units.Fraction.Fraction) =
+        static member Repeat (value: Types.Repeat, fraction: Units.Fraction.Fraction) =
             Repeat.Repeat(value, fraction)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: FssTypes.Repeat, length: ILengthPercentage) =
+        static member Repeat (value: Types.Repeat, length: ILengthPercentage) =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: FssTypes.Repeat, contentSize: ContentSize) =
+        static member Repeat (value: Types.Repeat, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
-        static member Subgrid = FssTypes.Subgrid |> templateColumnValue'
-        static member Masonry = FssTypes.Masonry |> templateColumnValue'
-        static member None = None' |> templateColumnValue'
-        static member Auto = Auto |> templateColumnValue'
-        static member Inherit = Inherit |> templateColumnValue'
-        static member Initial = Initial |> templateColumnValue'
-        static member Unset = Unset |> templateColumnValue'
+        static member Subgrid = Types.Subgrid |> templateColumnValue'
+        static member Masonry = Types.Masonry |> templateColumnValue'
+        static member None = Types.None' |> templateColumnValue'
+        static member Auto = Types.Auto |> templateColumnValue'
+        static member Inherit = Types.Inherit |> templateColumnValue'
+        static member Initial = Types.Initial |> templateColumnValue'
+        static member Unset = Types.Unset |> templateColumnValue'
 
     /// <summary>Defines grid columns.</summary>
     /// <param name="templateColumns">
@@ -729,7 +728,7 @@ module Grid =
     let GridTemplateColumns' (templateColumns: IGridTemplateColumns) = GridTemplateColumns.Value(templateColumns)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows
-    let private autoRowsValue value = PropertyValue.cssValue Property.GridAutoRows value
+    let private autoRowsValue value = Types.cssValue Types.Property.GridAutoRows value
     let private autoRowsValue' value =
         value
         |> autoRowsToString
@@ -741,10 +740,10 @@ module Grid =
         static member MinContent = ContentSize.MinContent |> autoRowsValue'
         static member FitContent (contentSize: ILengthPercentage) = ContentSize.FitContent(contentSize) |> autoRowsValue'
 
-        static member Auto = Auto |> autoRowsValue'
-        static member Inherit = Inherit |> autoRowsValue'
-        static member Initial = Initial |> autoRowsValue'
-        static member Unset = Unset |> autoRowsValue'
+        static member Auto = Types.Auto |> autoRowsValue'
+        static member Inherit = Types.Inherit |> autoRowsValue'
+        static member Initial = Types.Initial |> autoRowsValue'
+        static member Unset = Types.Unset |> autoRowsValue'
 
     /// <summary>Defines auto generated grid row.</summary>
     /// <param name="autoRows">
@@ -763,7 +762,7 @@ module Grid =
     let GridAutoRows' (autoRows: IGridAutoRows) = GridAutoRows.Value(autoRows)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns
-    let private autoColumnsValue value = PropertyValue.cssValue Property.GridAutoColumns value
+    let private autoColumnsValue value = Types.cssValue Types.Property.GridAutoColumns value
     let private autoColumnsValue' value =
         value
         |> autoColumnsToString
@@ -775,10 +774,10 @@ module Grid =
         static member MinContent = ContentSize.MinContent |> autoColumnsValue'
         static member FitContent (contentSize: ILengthPercentage) = ContentSize.FitContent(contentSize) |> autoColumnsValue'
 
-        static member Auto = Auto |> autoColumnsValue'
-        static member Inherit = Inherit |> autoColumnsValue'
-        static member Initial = Initial |> autoColumnsValue'
-        static member Unset = Unset |> autoColumnsValue'
+        static member Auto = Types.Auto |> autoColumnsValue'
+        static member Inherit = Types.Inherit |> autoColumnsValue'
+        static member Initial = Types.Initial |> autoColumnsValue'
+        static member Unset = Types.Unset |> autoColumnsValue'
 
     /// <summary>Defines auto generated grid column.</summary>
     /// <param name="autoColumns">

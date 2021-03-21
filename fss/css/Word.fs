@@ -1,36 +1,35 @@
 namespace Fss
-open FssTypes
 
 module Word =
-    let private spacingToString (spacing: IWordSpacing) =
+    let private spacingToString (spacing: Types.IWordSpacing) =
         match spacing with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Normal -> normal
-        | :? Global as g -> global' g
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Normal -> Types.normal
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown word spacing"
 
-    let private breakToString (break': IWordBreak) =
+    let private breakToString (break': Types.IWordBreak) =
         match break' with
-        | :? Word.WordBreak as w -> Utilities.Helpers.duToKebab w
-        | :? Normal -> normal
-        | :? Global as g -> global' g
+        | :? Types.WordBreak as w -> Utilities.Helpers.duToKebab w
+        | :? Types.Normal -> Types.normal
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown word break"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing
-    let private spacingCssValue value = PropertyValue.cssValue Property.WordSpacing value
+    let private spacingCssValue value = Types.cssValue Types.Property.WordSpacing value
     let private spacingCssValue' value =
         value
         |> spacingToString
         |> spacingCssValue
 
     type WordSpacing =
-        static member Value (spacing: IWordSpacing) = spacing |> spacingCssValue'
+        static member Value (spacing: Types.IWordSpacing) = spacing |> spacingCssValue'
 
-        static member Normal = Normal |> spacingCssValue'
-        static member Initial = Initial |> spacingCssValue'
-        static member Inherit = Inherit |> spacingCssValue'
-        static member Unset = Unset |> spacingCssValue'
+        static member Normal = Types.Normal |> spacingCssValue'
+        static member Initial = Types.Initial |> spacingCssValue'
+        static member Inherit = Types.Inherit |> spacingCssValue'
+        static member Unset = Types.Unset |> spacingCssValue'
 
     /// <summary>Specifies length of space between words.</summary>
     /// <param name="spacing">
@@ -43,25 +42,25 @@ module Word =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let WordSpacing' (spacing: IWordSpacing) = WordSpacing.Value(spacing)
+    let WordSpacing' (spacing: Types.IWordSpacing) = WordSpacing.Value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
-    let private breakCssValue value = PropertyValue.cssValue Property.WordBreak value
+    let private breakCssValue value = Types.cssValue Types.Property.Property.WordBreak value
     let private breakCssValue' value =
         value
         |> breakToString
         |> breakCssValue
 
     type WordBreak =
-        static member Value (spacing: IWordBreak) = spacing |> breakCssValue'
-        static member WordBreak = Word.WordBreak |> breakCssValue'
-        static member BreakAll = Word.BreakAll |> breakCssValue'
-        static member KeepAll = Word.KeepAll |> breakCssValue'
+        static member Value (spacing: Types.IWordBreak) = spacing |> breakCssValue'
+        static member WordBreak = Types.WordBreak |> breakCssValue'
+        static member BreakAll = Types.BreakAll |> breakCssValue'
+        static member KeepAll = Types.KeepAll |> breakCssValue'
 
-        static member Normal = Normal |> breakCssValue'
-        static member Initial = Initial |> breakCssValue'
-        static member Inherit = Inherit |> breakCssValue'
-        static member Unset = Unset |> breakCssValue'
+        static member Normal = Types.Normal |> breakCssValue'
+        static member Initial = Types.Initial |> breakCssValue'
+        static member Inherit = Types.Inherit |> breakCssValue'
+        static member Unset = Types.Unset |> breakCssValue'
 
     /// <summary>Specify when line breaks should happen.</summary>
     /// <param name="break'">
@@ -73,5 +72,5 @@ module Word =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let WordBreak' (break': IWordBreak) = WordBreak.Value(break')
+    let WordBreak' (break': Types.IWordBreak) = WordBreak.Value(break')
 

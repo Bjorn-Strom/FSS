@@ -103,11 +103,11 @@ let repeatingRadialGradientStyle3 =
 let conicGradientStyle1 =
     BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
                                   [
-                                      CssColor.red, deg 0.
-                                      CssColor.orange, deg 90.
-                                      CssColor.yellow, deg 180.
-                                      CssColor.green, deg 270.
-                                      CssColor.blue, deg 360.
+                                      Types.Color.red, deg 0.
+                                      Types.Color.orange, deg 90.
+                                      Types.Color.yellow, deg 180.
+                                      Types.Color.green, deg 270.
+                                      Types.Color.blue, deg 360.
                                   ])
 
 let conicGradientStyle2 =
@@ -120,27 +120,27 @@ let conicGradientStyle2 =
 let conicGradientStyle3 =
      BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
                                    [
-                                      CssColor.red, deg 6.
-                                      CssColor.orange, deg 6.
-                                      CssColor.orange, deg 18.
-                                      CssColor.yellow, deg 18.
-                                      CssColor.yellow, deg 45.
-                                      CssColor.green, deg 45.
-                                      CssColor.green, deg 110.
-                                      CssColor.blue, deg 110.
-                                      CssColor.blue, deg 200.
-                                      CssColor.purple, deg 200.
+                                      Types.Color.red, deg 6.
+                                      Types.Color.orange, deg 6.
+                                      Types.Color.orange, deg 18.
+                                      Types.Color.yellow, deg 18.
+                                      Types.Color.yellow, deg 45.
+                                      Types.Color.green, deg 45.
+                                      Types.Color.green, deg 110.
+                                      Types.Color.blue, deg 110.
+                                      Types.Color.blue, deg 200.
+                                      Types.Color.purple, deg 200.
                                    ])
 
 let conicGradientStyle4 =
      BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
        [
-          CssColor.yellow, deg (360. / 6.)
-          CssColor.lime,   deg <| (360. / 6.) * 2.
-          CssColor.blue,   deg <| (360. / 6.) * 3.
-          CssColor.violet, deg <| (360. / 6.) * 4.
-          CssColor.red,    deg <| (360. / 6.) * 5.
-          CssColor.yellow, deg <| (360. / 6.) * 6.
+          Types.Color.yellow, deg (360. / 6.)
+          Types.Color.lime,   deg <| (360. / 6.) * 2.
+          Types.Color.blue,   deg <| (360. / 6.) * 3.
+          Types.Color.violet, deg <| (360. / 6.) * 4.
+          Types.Color.red,    deg <| (360. / 6.) * 5.
+          Types.Color.yellow, deg <| (360. / 6.) * 6.
        ])
 ```
 
@@ -153,9 +153,9 @@ let linearGradientStyle1 =
     BorderWidth' (px 1)
     BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50,
                                   [
-                                     CssColor.white, pct 0
-                                     CssColor.white, pct 25
-                                     CssColor.black, pct 25
-                                     CssColor.black, pct 50
+                                     Types.Color.white, pct 0
+                                     Types.Color.white, pct 25
+                                     Types.Color.black, pct 25
+                                     Types.Color.black, pct 50
                                   ])
 ```

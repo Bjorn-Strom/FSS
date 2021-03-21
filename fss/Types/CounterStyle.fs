@@ -1,20 +1,21 @@
-namespace FssTypes
+namespace Fss
 
-type CounterStyle =
-    | CounterStyle of string
-    interface IContent
-    interface IListStyleType
+[<RequireQualifiedAccess>]
+module Types =
+    type CounterStyle =
+        | CounterStyle of string
+        interface Types.IContent
+        interface Types.IListStyleType
 
-type CounterReset =
-    | Reset of CounterStyle
-    | ResetTo of CounterStyle * int
-    interface ICounterReset
+    type CounterReset =
+        | Reset of CounterStyle
+        | ResetTo of CounterStyle * int
+        interface Types.ICounterReset
 
-type CounterIncrement =
-    | Increment of CounterStyle
-    | Add of CounterStyle * int
-    interface ICounterIncrement
+    type CounterIncrement =
+        | Increment of CounterStyle
+        | Add of CounterStyle * int
+        interface Types.ICounterIncrement
 
-module Counter =
-    let counterValue (CounterStyle c) = c
+    let internal counterStyleToString (CounterStyle c) = c
 

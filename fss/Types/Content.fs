@@ -1,8 +1,10 @@
-namespace FssTypes
+namespace Fss
 
-type Content =
-    | OpenQuote
-    | CloseQuote
-    | NoOpenQuote
-    | NoCloseQuote
-    interface IContent
+[<RequireQualifiedAccess>]
+module Types =
+    type Content =
+        | OpenQuote
+        | CloseQuote
+        | NoOpenQuote
+        | NoCloseQuote
+        interface Types.IContent

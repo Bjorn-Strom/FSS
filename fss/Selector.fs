@@ -10,13 +10,12 @@ open FssTypes
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_combinator
 [<AutoOpen>]
 module Selector =
-    open Html
 
     type Selector =
-        static member AdjacentSibling (html: Html) = sprintf " + %A" (value html)
-        static member GeneralSibling (html: Html) = sprintf " ~ %A" (value html)
-        static member Child (html: Html) = sprintf " > %A" (value html)
-        static member Descendant (html: Html) = sprintf " %A" (value html)
+        static member AdjacentSibling (html: Html) = sprintf " + %A" (Html.value html)
+        static member GeneralSibling (html: Html) = sprintf " ~ %A" (Html.value html)
+        static member Child (html: Html) = sprintf " > %A" (Html.value html)
+        static member Descendant (html: Html) = sprintf " %A" (Html.value html)
 
     let (!+) (html: Html) (propertyList: CssProperty list) = Selector.AdjacentSibling(html) ==> (propertyList |> fss) |> CssProperty
     let (!~) (html: Html) (propertyList: CssProperty list) = Selector.GeneralSibling(html) ==> (propertyList  |> fss) |> CssProperty

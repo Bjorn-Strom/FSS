@@ -109,7 +109,7 @@ module Feliz =
                     [ "color" ==> "#dcdcdc" ]
                 test
                     "Color"
-                    [ style.color' (CssColor.red)]
+                    [ style.color' (Types.Color.red)]
                     [ "color" ==> "#ff0000" ]
                 test
                     "Font synthesis weight"
@@ -269,7 +269,7 @@ module Feliz =
                      ["textEmphasisStyle" ==> "filled"]
                 test
                      "Text shadow single"
-                     [ style.textShadows [ ColorXYBlur (CssColor.black, px 1, px 1, px 2) ] ]
+                     [ style.textShadows [ ColorXYBlur (Types.Color.black, px 1, px 1, px 2) ] ]
                      ["textShadow" ==> "#000000 1px 1px 2px"]
                 test
                      "Text underline offset auto"
@@ -473,7 +473,7 @@ module Feliz =
                     [ "borderColor" ==> "#ff0000" ]
                 test
                     "Border colors multiple"
-                    [ style.borderColor.Value (CssColor.red, CssColor.green, CssColor.blue, CssColor.white) ]
+                    [ style.borderColor.Value (Types.Color.red, Types.Color.green, Types.Color.blue, Types.Color.white) ]
                     [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
                 test
                     "Border top color rgb"
@@ -1118,7 +1118,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.boxShadow.Color(px 10, px 10, CssColor.blue)
+                                style.boxShadow.Color(px 10, px 10, Types.Color.blue)
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px #0000ff" ]
@@ -1127,7 +1127,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.boxShadow.BlurColor(px 10, px 10, em 1.5, CssColor.red)
+                                style.boxShadow.BlurColor(px 10, px 10, em 1.5, Types.Color.red)
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px 1.5em #ff0000" ]
@@ -1136,7 +1136,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, CssColor.chocolate)
+                                style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Types.Color.chocolate)
                             ]
                     ]
                     [ "boxShadow" ==> "1px 100px 1.5vh 1px #d2691e" ]
@@ -1145,11 +1145,11 @@ module Feliz =
                    [
                         style.boxShadows
                             [
-                                style.boxShadow.Color(px 10, px 10, CssColor.blue)
-                                style.boxShadow.BlurColor(px 10, px 10, px 10, CssColor.blue)
-                                style.boxShadow.BlurSpreadColor(px 10, px 10, px 10, px 10, CssColor.blue)
-                                style.boxShadow.Color(px 3, px 3, CssColor.red)
-                                style.boxShadow.BlurColor(em -1., px 0, em 0.4, CssColor.olive)
+                                style.boxShadow.Color(px 10, px 10, Types.Color.blue)
+                                style.boxShadow.BlurColor(px 10, px 10, px 10, Types.Color.blue)
+                                style.boxShadow.BlurSpreadColor(px 10, px 10, px 10, px 10, Types.Color.blue)
+                                style.boxShadow.Color(px 3, px 3, Types.Color.red)
+                                style.boxShadow.BlurColor(em -1., px 0, em 0.4, Types.Color.olive)
                             ]
                     ]
                     ["boxShadow" ==> "10px 10px #0000ff, 10px 10px 10px #0000ff, 10px 10px 10px 10px #0000ff, 3px 3px #ff0000, -1.0em 0px 0.4em #808000"]
@@ -1158,7 +1158,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.inset <| style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, CssColor.chocolate)
+                                style.inset <| style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Types.Color.chocolate)
                             ]
                     ]
                     [ "boxShadow" ==> "inset 1px 100px 1.5vh 1px #d2691e" ]
@@ -1228,7 +1228,7 @@ module Feliz =
                     [ "filter" ==> "url(\"someFilter\")" ]
                 test
                     "Filter drop shadow"
-                    [ style.filters [ style.filter.DropShadow 16 16 20 CssColor.red (pct 5)  ] ]
+                    [ style.filters [ style.filter.DropShadow 16 16 20 Types.Color.red (pct 5)  ] ]
                     [ "filter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
                 test
                     "Filter unset"

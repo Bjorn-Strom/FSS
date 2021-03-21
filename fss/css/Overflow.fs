@@ -1,47 +1,46 @@
 namespace Fss
-open FssTypes
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
 [<AutoOpen>]
 module Overflow =
 
-    let private overflowToString (overflow: IOverflow) =
+    let private overflowToString (overflow: Types.IOverflow) =
         match overflow with
-        | :? Overflow as o -> Utilities.Helpers.duToLowercase o
-        | :? Global as g -> global' g
-        | :? Auto -> auto
+        | :? Types.Overflow as o -> Utilities.Helpers.duToLowercase o
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.auto
         | _ -> "Unknown overflow"
 
-    let private wrapToString (wrap: IOverflowWrap) =
+    let private wrapToString (wrap: Types.IOverflowWrap) =
         match wrap with
-        | :? OverflowWrap as o -> Utilities.Helpers.duToKebab o
-        | :? Normal -> normal
-        | :? Global as g -> global' g
+        | :? Types.OverflowWrap as o -> Utilities.Helpers.duToKebab o
+        | :? Types.Normal -> Types.normal
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown overflow wrap"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
-    let private overflowValue value = PropertyValue.cssValue Property.Overflow value
+    let private overflowValue value = Types.cssValue Types.Property.Overflow value
     let private overflowValue' value =
         value
         |> overflowToString
         |> overflowValue
 
     type Overflow =
-        static member Value (overflow: IOverflow) = overflow |> overflowValue'
-        static member Value (x: IOverflow, y: IOverflow) =
+        static member Value (overflow: Types.IOverflow) = overflow |> overflowValue'
+        static member Value (x: Types.IOverflow, y: Types.IOverflow) =
             sprintf "%s %s"
                 (overflowToString x)
                 (overflowToString y)
             |> overflowValue
-        static member Visible = FssTypes.Overflow.Visible |> overflowValue'
-        static member Hidden = FssTypes.Overflow.Hidden |> overflowValue'
-        static member Clip = FssTypes.Overflow.Clip |> overflowValue'
-        static member Scroll = FssTypes.Overflow.Scroll |> overflowValue'
+        static member Visible = Types.Overflow.Visible |> overflowValue'
+        static member Hidden = Types.Overflow.Hidden |> overflowValue'
+        static member Clip = Types.Overflow.Clip |> overflowValue'
+        static member Scroll = Types.Overflow.Scroll |> overflowValue'
 
-        static member Auto = Auto |> overflowValue'
-        static member Inherit = Inherit |> overflowValue'
-        static member Initial = Initial |> overflowValue'
-        static member Unset = Unset |> overflowValue'
+        static member Auto = Types.Auto |> overflowValue'
+        static member Inherit = Types.Inherit |> overflowValue'
+        static member Initial = Types.Initial |> overflowValue'
+        static member Unset = Types.Unset |> overflowValue'
 
     /// <summary>Specifies overflow behavior.</summary>
     /// <param name="overflow">
@@ -53,25 +52,25 @@ module Overflow =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Overflow' (overflow: IOverflow) = Overflow.Value(overflow)
+    let Overflow' (overflow: Types.IOverflow) = Overflow.Value(overflow)
 
-    let private overflowXValue value = PropertyValue.cssValue Property.OverflowX value
+    let private overflowXValue value = Types.cssValue Types.Property.OverflowX value
     let private overflowXValue' value =
         value
         |> overflowToString
         |> overflowXValue
 
     type OverflowX =
-        static member Value (overflow: IOverflow) = overflow |> overflowXValue'
-        static member Visible = FssTypes.Overflow.Visible |> overflowXValue'
-        static member Hidden = FssTypes.Overflow.Hidden |> overflowXValue'
-        static member Clip = FssTypes.Overflow.Clip |> overflowXValue'
-        static member Scroll = FssTypes.Overflow.Scroll |> overflowXValue'
+        static member Value (overflow: Types.IOverflow) = overflow |> overflowXValue'
+        static member Visible = Types.Overflow.Visible |> overflowXValue'
+        static member Hidden = Types.Overflow.Hidden |> overflowXValue'
+        static member Clip = Types.Overflow.Clip |> overflowXValue'
+        static member Scroll = Types.Overflow.Scroll |> overflowXValue'
 
-        static member Auto = Auto |> overflowXValue'
-        static member Inherit = Inherit |> overflowXValue'
-        static member Initial = Initial |> overflowXValue'
-        static member Unset = Unset |> overflowXValue'
+        static member Auto = Types.Auto |> overflowXValue'
+        static member Inherit = Types.Inherit |> overflowXValue'
+        static member Initial = Types.Initial |> overflowXValue'
+        static member Unset = Types.Unset |> overflowXValue'
 
     /// <summary>Specifies overflow left and right edge behavior.</summary>
     /// <param name="overflow">
@@ -83,25 +82,25 @@ module Overflow =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OverflowX' (overflow: IOverflow) = OverflowX.Value(overflow)
+    let OverflowX' (overflow: Types.IOverflow) = OverflowX.Value(overflow)
 
-    let private overflowYValue value = PropertyValue.cssValue Property.OverflowY value
+    let private overflowYValue value = Types.cssValue Types.Property.OverflowY value
     let private overflowYValue' value =
         value
         |> overflowToString
         |> overflowYValue
 
     type OverflowY =
-        static member Value (overflow: IOverflow) = overflow |> overflowYValue'
-        static member Visible = FssTypes.Overflow.Visible |> overflowYValue'
-        static member Hidden = FssTypes.Overflow.Hidden |> overflowYValue'
-        static member Clip = FssTypes.Overflow.Clip |> overflowYValue'
-        static member Scroll = FssTypes.Overflow.Scroll |> overflowYValue'
+        static member Value (overflow: Types.IOverflow) = overflow |> overflowYValue'
+        static member Visible = Types.Overflow.Visible |> overflowYValue'
+        static member Hidden = Types.Overflow.Hidden |> overflowYValue'
+        static member Clip = Types.Overflow.Clip |> overflowYValue'
+        static member Scroll = Types.Overflow.Scroll |> overflowYValue'
 
-        static member Auto = Auto |> overflowYValue'
-        static member Inherit = Inherit |> overflowYValue'
-        static member Initial = Initial |> overflowYValue'
-        static member Unset = Unset |> overflowYValue'
+        static member Auto = Types.Auto |> overflowYValue'
+        static member Inherit = Types.Inherit |> overflowYValue'
+        static member Initial = Types.Initial |> overflowYValue'
+        static member Unset = Types.Unset |> overflowYValue'
 
     /// <summary>Specifies overflow top and bottom edge behavior.</summary>
     /// <param name="overflow">
@@ -113,24 +112,24 @@ module Overflow =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OverflowY' (overflow: IOverflow) = OverflowY.Value(overflow)
+    let OverflowY' (overflow: Types.IOverflow) = OverflowY.Value(overflow)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
-    let private overflowWrapValue value = PropertyValue.cssValue Property.OverflowWrap value
+    let private overflowWrapValue value = Types.cssValue Types.Property.OverflowWrap value
     let private overflowWrapValue' value =
         value
         |> wrapToString
         |> overflowWrapValue
 
     type OverflowWrap =
-        static member Value (overflowWrap: IOverflowWrap) = overflowWrap |> overflowWrapValue'
-        static member BreakWord = FssTypes.OverflowWrap.BreakWord |> overflowWrapValue'
-        static member Anywhere = FssTypes.OverflowWrap.Anywhere |> overflowWrapValue'
+        static member Value (overflowWrap: Types.IOverflowWrap) = overflowWrap |> overflowWrapValue'
+        static member BreakWord = Types.OverflowWrap.BreakWord |> overflowWrapValue'
+        static member Anywhere = Types.OverflowWrap.Anywhere |> overflowWrapValue'
 
-        static member Normal = Normal |> overflowWrapValue'
-        static member Inherit = Inherit |> overflowWrapValue'
-        static member Initial = Initial |> overflowWrapValue'
-        static member Unset = Unset |> overflowWrapValue'
+        static member Normal = Types.Normal |> overflowWrapValue'
+        static member Inherit = Types.Inherit |> overflowWrapValue'
+        static member Initial = Types.Initial |> overflowWrapValue'
+        static member Unset = Types.Unset |> overflowWrapValue'
 
     /// <summary>Specifies how to insert line breaks on overflow.</summary>
     /// <param name="overflowWrap">
@@ -142,4 +141,4 @@ module Overflow =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OverflowWrap' (overflowWrap: IOverflowWrap) = OverflowWrap.Value(overflowWrap)
+    let OverflowWrap' (overflowWrap: Types.IOverflowWrap) = OverflowWrap.Value(overflowWrap)

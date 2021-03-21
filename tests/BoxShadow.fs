@@ -15,7 +15,7 @@ module BoxShadow =
                     [
                         BoxShadows
                             [
-                                BoxShadow.Color(px 10, px 10, CssColor.blue)
+                                BoxShadow.Color(px 10, px 10, Types.Color.blue)
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px #0000ff" ]
@@ -24,7 +24,7 @@ module BoxShadow =
                     [
                         BoxShadows
                             [
-                                BoxShadow.BlurColor(px 10, px 10, em 1.5, CssColor.red)
+                                BoxShadow.BlurColor(px 10, px 10, em 1.5, Types.Color.red)
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px 1.5em #ff0000" ]
@@ -33,7 +33,7 @@ module BoxShadow =
                     [
                         BoxShadows
                             [
-                                BoxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, CssColor.chocolate)
+                                BoxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Types.Color.chocolate)
                             ]
                     ]
                     [ "boxShadow" ==> "1px 100px 1.5vh 1px #d2691e" ]
@@ -42,11 +42,11 @@ module BoxShadow =
                     [
                         BoxShadows
                             [
-                                BoxShadow.Color(px 10, px 10, CssColor.blue)
-                                BoxShadow.BlurColor(px 10, px 10, px 10, CssColor.blue)
-                                BoxShadow.BlurSpreadColor(px 10, px 10, px 10, px 10, CssColor.blue)
-                                BoxShadow.Color(px 3, px 3, CssColor.red)
-                                BoxShadow.BlurColor(em -1., px 0, em 0.4, CssColor.olive)
+                                BoxShadow.Color(px 10, px 10, Types.Color.blue)
+                                BoxShadow.BlurColor(px 10, px 10, px 10, Types.Color.blue)
+                                BoxShadow.BlurSpreadColor(px 10, px 10, px 10, px 10, Types.Color.blue)
+                                BoxShadow.Color(px 3, px 3, Types.Color.red)
+                                BoxShadow.BlurColor(em -1., px 0, em 0.4, Types.Color.olive)
                             ]
                     ]
                     ["boxShadow" ==> "10px 10px #0000ff, 10px 10px 10px #0000ff, 10px 10px 10px 10px #0000ff, 3px 3px #ff0000, -1.0em 0px 0.4em #808000"]
@@ -55,7 +55,7 @@ module BoxShadow =
                     [
                         BoxShadows
                             [
-                                BoxShadow.Inset <| BoxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, CssColor.chocolate)
+                                BoxShadow.Inset <| BoxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Types.Color.chocolate)
                             ]
                     ]
                     [ "boxShadow" ==> "inset 1px 100px 1.5vh 1px #d2691e" ]

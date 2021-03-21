@@ -1,32 +1,31 @@
 namespace Fss
-open FssTypes
 
 [<AutoOpen>]
 module Resize =
-    let private resizeToString (resize: IResize) =
+    let private resizeToString (resize: Types.IResize) =
         match resize with
-        | :? Resize as r -> Utilities.Helpers.duToLowercase r
-        | :? None' -> none
-        | :? Global as g -> global' g
+        | :? Types.Resize as r -> Utilities.Helpers.duToLowercase r
+        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown resize value"
 
-    let private resizeValue value = PropertyValue.cssValue Property.Resize value
+    let private resizeValue value = Types.cssValue Types.Property.Resize value
     let private resizeValue' value =
         value
         |> resizeToString
         |> resizeValue
 
     type Resize =
-        static member Value (resize: IResize) = resize |> resizeValue'
-        static member Both = FssTypes.Resize.Both |> resizeValue'
-        static member Horizontal = FssTypes.Resize.Horizontal |> resizeValue'
-        static member Vertical = FssTypes.Resize.Vertical |> resizeValue'
-        static member Block = FssTypes.Resize.Block |> resizeValue'
-        static member Inline = FssTypes.Resize.Inline |> resizeValue'
-        static member None = None' |> resizeValue'
-        static member Initial = Initial |> resizeValue'
-        static member Inherit = Inherit |> resizeValue'
-        static member Unset = Unset |> resizeValue'
+        static member Value (resize: Types.IResize) = resize |> resizeValue'
+        static member Both = Types.Resize.Both |> resizeValue'
+        static member Horizontal = Types.Resize.Horizontal |> resizeValue'
+        static member Vertical = Types.Resize.Vertical |> resizeValue'
+        static member Block = Types.Resize.Block |> resizeValue'
+        static member Inline = Types.Resize.Inline |> resizeValue'
+        static member None = Types.None' |> resizeValue'
+        static member Initial = Types.Initial |> resizeValue'
+        static member Inherit = Types.Inherit |> resizeValue'
+        static member Unset = Types.Unset |> resizeValue'
 
     /// <summary>Specifies how elemnts are resizable.</summary>
     /// <param name="resize">
@@ -38,4 +37,4 @@ module Resize =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Resize' (resize: IResize) = Resize.Value resize
+    let Resize' (resize: Types.IResize) = Resize.Value resize

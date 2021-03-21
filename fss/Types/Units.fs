@@ -1,45 +1,42 @@
-namespace FssTypes.Units
+namespace Fss
 
-open FssTypes
-
-module Percent =
+module Types =
     type Percent =
         | Percent of string
-        interface ILengthPercentage
-        interface ITemplateType
-        interface IBackgroundSize
-        interface IBackgroundPosition
-        interface IFlexBasis
-        interface IFontSize
-        interface IFontStretch
-        interface ILineHeight
-        interface IBorderRadius
-        interface IBorderSpacing
-        interface IBorderImageWidth
-        interface IBorderImageSlice
-        interface IBorderImageOutset
-        interface IGridGap
-        interface IGridRowGap
-        interface IGridColumnGap
-        interface IColumnGap
-        interface IGridAutoRows
-        interface IGridAutoColumns
-        interface IMargin
-        interface IPadding
-        interface ITransformOrigin
-        interface ITextIndent
-        interface ITextDecorationThickness
-        interface ITextUnderlineOffset
-        interface ITextSizeAdjust
-        interface IPositioned
-        interface IVerticalAlign
-        interface IWordSpacing
-        interface IPerspectiveOrigin
-        interface IMaskPosition
-    let value (Percent p): string = p
+        interface Types.ILengthPercentage
+        interface Types.ITemplateType
+        interface Types.IBackgroundSize
+        interface Types.IBackgroundPosition
+        interface Types.IFlexBasis
+        interface Types.IFontSize
+        interface Types.IFontStretch
+        interface Types.ILineHeight
+        interface Types.IBorderRadius
+        interface Types.IBorderSpacing
+        interface Types.IBorderImageWidth
+        interface Types.IBorderImageSlice
+        interface Types.IBorderImageOutset
+        interface Types.IGridGap
+        interface Types.IGridRowGap
+        interface Types.IGridColumnGap
+        interface Types.IColumnGap
+        interface Types.IGridAutoRows
+        interface Types.IGridAutoColumns
+        interface Types.IMargin
+        interface Types.IPadding
+        interface Types.ITransformOrigin
+        interface Types.ITextIndent
+        interface Types.ITextDecorationThickness
+        interface Types.ITextUnderlineOffset
+        interface Types.ITextSizeAdjust
+        interface Types.IPositioned
+        interface Types.IVerticalAlign
+        interface Types.IWordSpacing
+        interface Types.IPerspectiveOrigin
+        interface Types.IMaskPosition
+    let internal percentToString (Percent p): string = p
 
-// https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
-module Size =
+    // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
     type Size =
         | Px of string
         | In of string
@@ -55,48 +52,48 @@ module Size =
         | Vh of string
         | VMax of string
         | VMin of string
-        interface ILengthPercentage
-        interface ITemplateType
-        interface IBorderWidth
-        interface IBorderImageOutset
-        interface IBorderSpacing
-        interface IBorderRadius
-        interface IBorderImageWidth
-        interface IBorderImageSlice
-        interface IPerspective
-        interface IOutlineWidth
-        interface IOutlineOffset
-        interface IBackgroundSize
-        interface IBackgroundPosition
-        interface IFlexBasis
-        interface IFontSize
-        interface ILineHeight
-        interface ILetterSpacing
-        interface IGridGap
-        interface IGridRowGap
-        interface IGridColumnGap
-        interface IGridTemplateRows
-        interface IGridTemplateColumns
-        interface IGridAutoRows
-        interface IGridAutoColumns
-        interface IColumnGap
-        interface IColumnRuleWidth
-        interface IColumnWidth
-        interface IMargin
-        interface IPadding
-        interface ITransformOrigin
-        interface ITextIndent
-        interface ITextUnderlineOffset
-        interface ITextDecorationThickness
-        interface IPositioned
-        interface IVerticalAlign
-        interface IWordSpacing
-        interface ITabSize
-        interface IScrollMargin
-        interface IScrollPadding
-        interface IMaskPosition
+        interface Types.ILengthPercentage
+        interface Types.ITemplateType
+        interface Types.IBorderWidth
+        interface Types.IBorderImageOutset
+        interface Types.IBorderSpacing
+        interface Types.IBorderRadius
+        interface Types.IBorderImageWidth
+        interface Types.IBorderImageSlice
+        interface Types.IPerspective
+        interface Types.IOutlineWidth
+        interface Types.IOutlineOffset
+        interface Types.IBackgroundSize
+        interface Types.IBackgroundPosition
+        interface Types.IFlexBasis
+        interface Types.IFontSize
+        interface Types.ILineHeight
+        interface Types.ILetterSpacing
+        interface Types.IGridGap
+        interface Types.IGridRowGap
+        interface Types.IGridColumnGap
+        interface Types.IGridTemplateRows
+        interface Types.IGridTemplateColumns
+        interface Types.IGridAutoRows
+        interface Types.IGridAutoColumns
+        interface Types.IColumnGap
+        interface Types.IColumnRuleWidth
+        interface Types.IColumnWidth
+        interface Types.IMargin
+        interface Types.IPadding
+        interface Types.ITransformOrigin
+        interface Types.ITextIndent
+        interface Types.ITextUnderlineOffset
+        interface Types.ITextDecorationThickness
+        interface Types.IPositioned
+        interface Types.IVerticalAlign
+        interface Types.IWordSpacing
+        interface Types.ITabSize
+        interface Types.IScrollMargin
+        interface Types.IScrollPadding
+        interface Types.IMaskPosition
 
-    let value (v: Size): string =
+    let internal sizeToString (v: Size): string =
         match v with
             | Px p -> p
             | In i -> i
@@ -113,58 +110,50 @@ module Size =
             | VMax v -> v
             | VMin v -> v
 
-module LengthPercentage =
-    open Size
-    open Percent
-
-    let value (v: ILengthPercentage) =
+    let internal lengthPercentageToString (v: Types.ILengthPercentage) =
         match v with
-        | :? Size    as s -> Size.value s
-        | :? Percent as p -> value p
+        | :? Size    as s -> sizeToString s
+        | :? Percent as p -> percentToString p
         | _ -> "Unknown length/percentage"
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/angle
-module Angle =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
     type Angle =
         | Deg of string
         | Grad of string
         | Rad of string
         | Turn of string
 
-    let value (u: Angle) =
+    let internal angleToString (u: Angle) =
         match u with
             | Deg d -> d
             | Grad g -> g
             | Rad r -> r
             | Turn t -> t
 
-module Resolution =
     type Resolution =
         | Dpi of string
 
-    let value (r: Resolution) =
+    let internal resolutionToString (r: Resolution) =
         match r with
             | Dpi d -> sprintf "%sdpi" d
 
-module Time =
     type Time =
         | Sec of string
         | Ms of string
-        interface ITransitionDelay
-        interface ITransitionDuration
+        interface Types.ITransitionDelay
+        interface Types.ITransitionDuration
 
-    let value (v: Time): string =
+    let internal timeToString (v: Time): string =
         match v with
         | Sec s -> s
         | Ms ms -> ms
 
-module Fraction =
     type Fraction =
         | Fr of string
-        interface IGridTemplateRows
-        interface IGridTemplateColumns
-        interface IGridAutoRows
-        interface IGridAutoColumns
-        interface ITemplateType
+        interface Types.IGridTemplateRows
+        interface Types.IGridTemplateColumns
+        interface Types.IGridAutoRows
+        interface Types.IGridAutoColumns
+        interface Types.ITemplateType
 
-    let value (Fr f) = f
+    let internal fractionToString (Fr f) = f

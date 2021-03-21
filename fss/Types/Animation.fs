@@ -1,29 +1,30 @@
-namespace FssTypes
+namespace Fss
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
-type AnimationDirection =
-    | Reverse
-    | Alternate
-    | AlternateReverse
-    interface IAnimationDirection
-type AnimationFillMode =
-    | Forwards
-    | Backwards
-    | Both
-    interface IAnimationFillMode
+[<RequireQualifiedAccess>]
+module Types =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
+    type AnimationDirection =
+        | Reverse
+        | Alternate
+        | AlternateReverse
+        interface Types.IAnimationDirection
+    type AnimationFillMode =
+        | Forwards
+        | Backwards
+        | Both
+        interface Types.IAnimationFillMode
 
-type IterationCount =
-    | Infinite
-    interface IAnimationIterationCount
+    type IterationCount =
+        | Infinite
+        interface Types.IAnimationIterationCount
 
-type AnimationPlayState =
-    | Running
-    | Paused
-    interface IAnimationPlayState
+    type AnimationPlayState =
+        | Running
+        | Paused
+        interface Types.IAnimationPlayState
 
-module Animation =
-    let iterationCountToString (iterationCount: IAnimationIterationCount) =
+    let internal iterationCountToString (iterationCount: Types.IAnimationIterationCount) =
         match iterationCount with
         | :? IterationCount as i -> "infinite"
-        | :? CssInt as i -> GlobalValue.int i
+        | :? Types.Int as i -> Types.IntToString i
         | _ -> "Unknown animation iteration count"

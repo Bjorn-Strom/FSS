@@ -13,11 +13,11 @@ module FontFace =
             | UrlFormat (s, f) -> sprintf "url('%s') format('%s')" s (Utilities.Helpers.duToKebab f)
             | Local l -> sprintf "local('%s')" l
 
-    let private sourceValue value = PropertyValue.cssValue Property.Src value
-    let private styleValue value = PropertyValue.cssValue Property.FontStyle value
-    let private displayValue value = PropertyValue.cssValue Property.FontDisplay value
-    let private stretchValue value = PropertyValue.cssValue Property.FontStretch value
-    let private weightValue value = PropertyValue.cssValue Property.FontWeight value
+    let private sourceValue value = Types.cssValue Types.Property.Src value
+    let private styleValue value = Types.cssValue Types.Property.FontStyle value
+    let private displayValue value = Types.cssValue Types.Property.FontDisplay value
+    let private stretchValue value = Types.cssValue Types.Property.FontStretch value
+    let private weightValue value = Types.cssValue Types.Property.FontWeight value
 
     type FontFace =
         static member Source (source: Source) = source |> stringifySource |> sourceValue

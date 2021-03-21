@@ -1,19 +1,21 @@
-namespace FssTypes
+namespace Fss
 
-type OutlineWidth =
-    | Thin
-    | Medium
-    | Thick
-    interface IOutlineWidth
+[<RequireQualifiedAccess>]
+module Types =
+    type OutlineWidth =
+        | Thin
+        | Medium
+        | Thick
+        interface Types.IOutlineWidth
 
-type OutlineStyle =
-    | Hidden
-    | Dotted
-    | Dashed
-    | Solid
-    | Double
-    | Groove
-    | Ridge
-    | Inset
-    | Outset
-    interface IOutlineStyle
+    type OutlineStyle =
+        | Hidden
+        | Dotted
+        | Dashed
+        | Solid
+        | Double
+        | Groove
+        | Ridge
+        | Inset
+        | Outset
+        interface Types.IOutlineStyle

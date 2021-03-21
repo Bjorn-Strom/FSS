@@ -1,21 +1,23 @@
-namespace FssTypes
+namespace Fss
 
-type Display =
-    | Inline
-    | InlineBlock
-    | Block
-    | RunIn
-    | Flex
-    | Grid
-    | FlowRoot
-    | Table
-    | TableCell
-    | TableColumn
-    | TableColumnGroup
-    | TableHeaderGroup
-    | TableRowGroup
-    | TableFooterGroup
-    | TableRow
-    | TableCaption
-    interface IDisplay
+[<RequireQualifiedAccess>]
+module Types =
+    type Display =
+        | Inline
+        | InlineBlock
+        | Block
+        | RunIn
+        | Flex
+        | Grid
+        | FlowRoot
+        | Table
+        | TableCell
+        | TableColumn
+        | TableColumnGroup
+        | TableHeaderGroup
+        | TableRowGroup
+        | TableFooterGroup
+        | TableRow
+        | TableCaption
+        interface Types.IDisplay
 

@@ -1,8 +1,9 @@
-namespace FssTypes
+namespace Fss
 
 open Fable.Core.JsInterop
 
-module Property =
+[<RequireQualifiedAccess>]
+module Types =
     type Property =
         | Appearance
         | AlignContent
@@ -361,16 +362,15 @@ module Property =
         | FirstLetter
         | FirstLine
         | Selection
-        interface ITransitionProperty
+        interface Types.ITransitionProperty
 
-module PropertyValue =
-    let value (v: Property.Property): string = Fss.Utilities.Helpers.duToCamel v
+    let internal propertyToString (v: Property): string = Fss.Utilities.Helpers.duToCamel v
 
-    let toKebabCase (property: Property.Property): string =
+    let internal toKebabCase (property: Property): string =
         property
-        |> value
+        |> propertyToString
         |> Fss.Utilities.Helpers.pascalToKebabCase
 
-    let cssValue (property: Property.Property) cssValue =
-        property |> value ==> cssValue |> CssProperty
+    let internal cssValue (property: Property) cssValue =
+        property |> propertyToString ==> cssValue |> Types.CssProperty
 

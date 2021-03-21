@@ -1,31 +1,30 @@
 namespace Fss
-open FssTypes
 
 [<AutoOpen>]
 module Typography =
-    let private orphansToString (orphans: IOrphans) =
+    let private orphansToString (orphans: Types.IOrphans) =
         match orphans with
-        | :? CssInt as i -> cssIntToString i
-        | :? Global as g -> global' g
+        | :? Types.Int as i -> Types.IntToString i
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown orphans"
 
-    let private widowsToString (widows: IWidows) =
+    let private widowsToString (widows: Types.IWidows) =
         match widows with
-        | :? CssInt as i -> cssIntToString i
-        | :? Global as g -> global' g
+        | :? Types.Int as i -> Types.IntToString i
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown widows"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/orphans
-    let private orphansValue value = PropertyValue.cssValue Property.Orphans value
+    let private orphansValue value = Types.cssValue Types.Property.Orphans value
     let private orphansValue' value =
         value
         |> orphansToString
         |> orphansValue
     type Orphans =
-        static member Value (orphans: IOrphans) = orphans |> orphansValue'
-        static member Inherit = Inherit |> orphansValue'
-        static member Initial = Initial |> orphansValue'
-        static member Unset = Unset |> orphansValue'
+        static member Value (orphans: Types.IOrphans) = orphans |> orphansValue'
+        static member Inherit = Types.Inherit |> orphansValue'
+        static member Initial = Types.Initial |> orphansValue'
+        static member Unset = Types.Unset |> orphansValue'
 
     /// <summary>Specifies minimum number of lines a container must show at bottom.</summary>
     /// <param name="orphans">
@@ -36,20 +35,20 @@ module Typography =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Orphans' (orphans: IOrphans) = orphans |> Orphans.Value
+    let Orphans' (orphans: Types.IOrphans) = orphans |> Orphans.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/widows
-    let private widowsValue value = PropertyValue.cssValue Property.Widows value
+    let private widowsValue value = Types.cssValue Types.Property.Widows value
     let private widowsValue' value =
         value
         |> widowsToString
         |> widowsValue
 
     type Widows =
-        static member Value (widows: IWidows) = widows |> widowsValue'
-        static member Inherit = Inherit |> widowsValue'
-        static member Initial = Initial |> widowsValue'
-        static member Unset = Unset |> widowsValue'
+        static member Value (widows: Types.IWidows) = widows |> widowsValue'
+        static member Inherit = Types.Inherit |> widowsValue'
+        static member Initial = Types.Initial |> widowsValue'
+        static member Unset = Types.Unset |> widowsValue'
 
     /// <summary>Specifies minimum number of lines a container must show at top.</summary>
     /// <param name="widows">
@@ -60,4 +59,4 @@ module Typography =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Widows' (widows: IWidows) = widows |> Widows.Value
+    let Widows' (widows: Types.IWidows) = widows |> Widows.Value

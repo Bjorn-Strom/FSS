@@ -1,41 +1,43 @@
-namespace FssTypes
+namespace Fss
 
-type BorderWidth =
-    | Thin
-    | Medium
-    | Thick
-    interface IBorderWidth
+[<RequireQualifiedAccess>]
+module Types =
+    type BorderWidth =
+        | Thin
+        | Medium
+        | Thick
+        interface Types.IBorderWidth
 
-type BorderStyle =
-    | Hidden
-    | Dotted
-    | Dashed
-    | Solid
-    | Double
-    | Groove
-    | Ridge
-    | Inset
-    | Outset
-    interface IBorderStyle
+    type BorderStyle =
+        | Hidden
+        | Dotted
+        | Dashed
+        | Solid
+        | Double
+        | Groove
+        | Ridge
+        | Inset
+        | Outset
+        interface Types.IBorderStyle
 
-type BorderCollapse =
-    | Collapse
-    | Separate
-    interface IBorderCollapse
+    type BorderCollapse =
+        | Collapse
+        | Separate
+        interface Types.IBorderCollapse
 
-type BorderImageOutset =
-    | BorderImageOutset of float
-    interface IBorderImageOutset
+    type BorderImageOutset =
+        | BorderImageOutset of float
+        interface Types.IBorderImageOutset
 
-type BorderImageRepeat =
-    | Stretch
-    | Repeat
-    | Round
-    | Space
-    interface IBorderRepeat
+    type BorderImageRepeat =
+        | Stretch
+        | Repeat
+        | Round
+        | Space
+        interface Types.IBorderRepeat
 
-type BorderImageSlice =
-    | Value of float
-    | Fill
-    interface IBorderImageSlice
+    type BorderImageSlice =
+        | Value of float
+        | Fill
+        interface Types.IBorderImageSlice
 

@@ -64,7 +64,7 @@ module Border =
                     [ "borderStyle" ==> "outset" ]
                 test
                     "Borderstyle multiple"
-                    [ BorderStyle.Value(FssTypes.BorderStyle.Inset, FssTypes.BorderStyle.Outset, FssTypes.BorderStyle.Ridge, FssTypes.BorderStyle.Groove) ]
+                    [ BorderStyle.Value(Types.BorderStyle.Inset, Types.BorderStyle.Outset, Types.BorderStyle.Ridge, Types.BorderStyle.Groove) ]
                     [ "borderStyle" ==> "inset outset ridge groove" ]
                 test
                     "Borderstyle none"
@@ -196,7 +196,7 @@ module Border =
                     [ "borderColor" ==> "unset" ]
                 test
                     "Border colors multiple"
-                    [ BorderColor.Value (CssColor.red, CssColor.green, CssColor.blue, CssColor.white) ]
+                    [ BorderColor.Value (Types.Color.red, Types.Color.green, Types.Color.blue, Types.Color.white) ]
                     [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
                 test
                     "Border top color rgb"
@@ -264,7 +264,7 @@ module Border =
                     [ "borderImageSource" ==> "url(image.jpg)" ]
                 test
                     "Border image source linear gradient"
-                    [ BorderImageSource.LinearGradient(deg 45., [ CssColor.red, pct 0; CssColor.blue, pct 100 ]) ]
+                    [ BorderImageSource.LinearGradient(deg 45., [ Types.Color.red, pct 0; Types.Color.blue, pct 100 ]) ]
                     [ "borderImageSource" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
                 test
                     "Border image source inherit"
@@ -336,7 +336,7 @@ module Border =
                     [ "borderImageRepeat" ==> "space" ]
                 test
                     "Border image repeat space"
-                    [ BorderImageRepeat.Value(FssTypes.BorderImageRepeat.Stretch, FssTypes.BorderImageRepeat.Repeat) ]
+                    [ BorderImageRepeat.Value(Types.BorderImageRepeat.Stretch, Types.BorderImageRepeat.Repeat) ]
                     [ "borderImageRepeat" ==> "stretch repeat" ]
                 test
                     "Border image repeat inherit"
@@ -380,11 +380,11 @@ module Border =
                     [ "borderImageOutset" ==> "1.0rem" ]
                 test
                     "Border image outset value"
-                    [ BorderImageOutset' (FssTypes.BorderImageOutset 1.5) ]
+                    [ BorderImageOutset' (Types.BorderImageOutset 1.5) ]
                     [ "borderImageOutset" ==> "1.5" ]
                 test
                     "Border image outset vertical horizontal"
-                    [ BorderImageOutset.Value(FssTypes.BorderImageOutset 1., FssTypes.BorderImageOutset 1.2) ]
+                    [ BorderImageOutset.Value(Types.BorderImageOutset 1., Types.BorderImageOutset 1.2) ]
                     [ "borderImageOutset" ==> "1 1.2" ]
                 test
                     "Border image outset top right bottom left"

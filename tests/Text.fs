@@ -424,13 +424,13 @@ module Text =
                     ["textEmphasisStyle" ==> "unset"]
                 test
                     "Text shadow single"
-                    [ TextShadows [ TextShadow.ColorXYBlur (px 1, px 1, px 2, CssColor.black) ] ]
+                    [ TextShadows [ TextShadow.ColorXYBlur (px 1, px 1, px 2, Types.Color.black) ] ]
                     ["textShadow" ==> "#000000 1px 1px 2px"]
                 test
                     "Text shadow multiple"
                     [ TextShadows
-                          [ TextShadow.ColorXYBlur(px 1, px 1, px 2, CssColor.black)
-                            TextShadow.ColorXYBlur(px 10, px -10, px 20, CssColor.red) ]
+                          [ TextShadow.ColorXYBlur(px 1, px 1, px 2, Types.Color.black)
+                            TextShadow.ColorXYBlur(px 10, px -10, px 20, Types.Color.red) ]
                     ]
                     ["textShadow" ==> "#000000 1px 1px 2px, #ff0000 10px -10px 20px"]
                 test

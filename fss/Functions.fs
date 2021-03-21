@@ -62,55 +62,55 @@ module Functions =
         attributeList
         |> createFontFaceObject fontFamily
         |> css'
-        FssTypes.FontName fontFamily
+        Types.FontName fontFamily
 
     let fontFaces (fontFamily: string) (attributeLists: CssProperty list list) =
         attributeLists
         |> List.map (createFontFaceObject fontFamily)
         |> css'
 
-        FssTypes.FontName fontFamily
+        Types.FontName fontFamily
 
     // Color
-    let rgb (r: int) (g: int) (b: int) = CssColor.Rgb(r,g,b)
-    let rgba (r: int) (g: int) (b: int) (a: float) = CssColor.Rgba(r,g,b,a)
+    let rgb (r: int) (g: int) (b: int) = Types.Color.Rgb(r,g,b)
+    let rgba (r: int) (g: int) (b: int) (a: float) = Types.Color.Rgba(r,g,b,a)
 
-    let hex (value: string) = CssColor.Hex value
+    let hex (value: string) = Types.Color.Hex value
 
-    let hsl (h: int) (s: float) (l: float) = CssColor.Hsl(h,s,l)
-    let hsla (h: int) (s: float) (l: float) (a: float) = CssColor.Hsla(h,s,l,a)
+    let hsl (h: int) (s: float) (l: float) = Types.Color.Hsl(h,s,l)
+    let hsla (h: int) (s: float) (l: float) (a: float) = Types.Color.Hsla(h,s,l,a)
 
     // Sizes
     // Absolute
-    let px (v: int): Units.Size.Size = sprintf "%dpx" v |> Units.Size.Px
-    let inc (v: float): Units.Size.Size = sprintf "%.1fin" v |> Units.Size.In
-    let cm (v: float): Units.Size.Size = sprintf "%.1fcm" v |> Units.Size.Cm
-    let mm (v: float): Units.Size.Size = sprintf "%.1fmm" v |> Units.Size.Mm
-    let pt (v: float): Units.Size.Size = sprintf "%.1fpt" v |> Units.Size.Pt
-    let pc (v: float): Units.Size.Size = sprintf "%.1fpc" v |> Units.Size.Pc
+    let px (v: int): Types.Size = sprintf "%dpx" v |> Units.Size.Px
+    let inc (v: float): Types.Size = sprintf "%.1fin" v |> Units.Size.In
+    let cm (v: float): Types.Size = sprintf "%.1fcm" v |> Units.Size.Cm
+    let mm (v: float): Types.Size = sprintf "%.1fmm" v |> Units.Size.Mm
+    let pt (v: float): Types.Size = sprintf "%.1fpt" v |> Units.Size.Pt
+    let pc (v: float): Types.Size = sprintf "%.1fpc" v |> Units.Size.Pc
 
     // Relative
-    let em (v: float): Units.Size.Size = sprintf "%.1fem" v |> Units.Size.Em
-    let rem (v: float): Units.Size.Size = sprintf "%.1frem" v |> Units.Size.Rem
-    let ex (v: float): Units.Size.Size = sprintf "%.1fex" v |> Units.Size.Ex
-    let ch (v: float): Units.Size.Size = sprintf "%.1fch" v |> Units.Size.Ch
-    let vw (v: float): Units.Size.Size = sprintf "%.1fvw" v |> Units.Size.Vw
-    let vh (v: float): Units.Size.Size = sprintf "%.1fvh" v |> Units.Size.Vh
-    let vmax (v: float): Units.Size.Size = sprintf "%.1fvmax" v |> Units.Size.VMax
-    let vmin (v: float): Units.Size.Size = sprintf "%.1fvmin" v |> Units.Size.VMin
+    let em (v: float): Types.Size = sprintf "%.1fem" v |> Units.Size.Em
+    let rem (v: float): Types.Size = sprintf "%.1frem" v |> Units.Size.Rem
+    let ex (v: float): Types.Size = sprintf "%.1fex" v |> Units.Size.Ex
+    let ch (v: float): Types.Size = sprintf "%.1fch" v |> Units.Size.Ch
+    let vw (v: float): Types.Size = sprintf "%.1fvw" v |> Units.Size.Vw
+    let vh (v: float): Types.Size = sprintf "%.1fvh" v |> Units.Size.Vh
+    let vmax (v: float): Types.Size = sprintf "%.1fvmax" v |> Units.Size.VMax
+    let vmin (v: float): Types.Size = sprintf "%.1fvmin" v |> Units.Size.VMin
 
     // Angles
-    let deg (v: float): Units.Angle.Angle = sprintf "%.2fdeg" v |> Units.Angle.Deg
-    let grad (v: float): Units.Angle.Angle = sprintf "%.2fgrad" v |> Units.Angle.Grad
-    let rad (v: float): Units.Angle.Angle = sprintf "%.4frad" v |> Units.Angle.Rad
-    let turn (v: float): Units.Angle.Angle = sprintf "%.2fturn" v |> Units.Angle.Turn
+    let deg (v: float): Types.Angle = sprintf "%.2fdeg" v |> Units.Angle.Deg
+    let grad (v: float): Types.Angle = sprintf "%.2fgrad" v |> Units.Angle.Grad
+    let rad (v: float): Types.Angle = sprintf "%.4frad" v |> Units.Angle.Rad
+    let turn (v: float): Types.Angle = sprintf "%.2fturn" v |> Units.Angle.Turn
 
     // Percent
-    let pct (v: int): Units.Percent.Percent = sprintf "%d%%" v |> Units.Percent.Percent
+    let pct (v: int): Types.Percent = sprintf "%d%%" v |> Types.Percent
 
     // Time
-    let sec (v: float): Units.Time.Time = sprintf "%.2fs" v |> Units.Time.Sec
-    let ms (v: float): Units.Time.Time = sprintf "%.2fms" v |> Units.Time.Ms
+    let sec (v: float): Types.Time = sprintf "%.2fs" v |> Units.Time.Sec
+    let ms (v: float): Types.Time = sprintf "%.2fms" v |> Units.Time.Ms
 
     // Fractions
     let fr (v: float): Units.Fraction.Fraction = sprintf "%.2ffr" v |> Units.Fraction.Fr

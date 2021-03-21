@@ -2,7 +2,7 @@ namespace Feliz.Fss
 
 open Feliz
 open Fss
-open Fss.CssColor
+open Fss.Types.Color
 open Fss.ScrollBehavior
 open Fss.Visibility
 open Fss.Word
@@ -27,7 +27,7 @@ module fss =
     type prop with
         static member css (properties: CssProperty list) =
             prop.className (fss properties)
-    type CssColor = CssColor.CssColor
+    type Types.Color = Types.Color.Types.Color
 
     // Keyframes
     let keyframes attributeList = keyframes attributeList

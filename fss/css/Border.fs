@@ -1,113 +1,110 @@
 namespace Fss
 
-open Fss.CssColor
-open FssTypes
-
 [<AutoOpen>]
 module Border =
 
-    let private radiusToString (radius: IBorderRadius) =
+    let private radiusToString (radius: Types.IBorderRadius) =
         match radius with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> global' g
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "unknown border radius"
 
-    let private widthToString (width: IBorderWidth) =
+    let private widthToString (width: Types.IBorderWidth) =
         match width with
-            | :? BorderWidth as b -> Utilities.Helpers.duToLowercase b
-            | :? Units.Size.Size as s -> Units.Size.value s
-            | :? Global as g -> global' g
+            | :? Types.BorderWidth as b -> Utilities.Helpers.duToLowercase b
+            | :? Types.Size as s -> Types.sizeToString s
+            | :? Types.Keywords as k -> Types.keywordsToString k
             | _ -> "unknown border width"
 
-    let private styleToString (style: IBorderStyle) =
+    let private styleToString (style: Types.IBorderStyle) =
         match style with
-        | :? BorderStyle as b -> Utilities.Helpers.duToLowercase b
-        | :? None' -> none
-        | :? Global as g -> global' g
+        | :? Types.BorderStyle as b -> Utilities.Helpers.duToLowercase b
+        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown border style"
 
-    let private collapseToString (collapse: IBorderCollapse) =
+    let private collapseToString (collapse: Types.IBorderCollapse) =
         match collapse with
-        | :? BorderCollapse as c -> Utilities.Helpers.duToLowercase c
-        | :? Global as g -> global' g
+        | :? Types.BorderCollapse as c -> Utilities.Helpers.duToLowercase c
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "unknown border collapse"
-    let private imageOutsetToString (imageOutset: IBorderImageOutset) =
-        let stringifyOutset (BorderImageOutset v) = string v
+    let private imageOutsetToString (imageOutset: Types.IBorderImageOutset) =
+        let stringifyOutset (Types.BorderImageOutset v) = string v
 
         match imageOutset with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? FssTypes.BorderImageOutset as i -> stringifyOutset i
-        | :? Global as g -> global' g
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.BorderImageOutset as i -> stringifyOutset i
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "unknown border image outset"
 
-    let private repeatToString (repeat: IBorderRepeat) =
+    let private repeatToString (repeat: Types.IBorderRepeat) =
         match repeat with
-        | :? BorderImageRepeat as b -> Utilities.Helpers.duToLowercase b
-        | :? Global as g -> global' g
+        | :? Types.BorderImageRepeat as b -> Utilities.Helpers.duToLowercase b
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "unknown border repeat"
 
-    let private imageSliceToString (imageSlice: IBorderImageSlice) =
+    let private imageSliceToString (imageSlice: Types.IBorderImageSlice) =
         let stringifySlice =
             function
-                | BorderImageSlice.Value i -> string i
-                | BorderImageSlice.Fill -> "fill"
+                | Types.BorderImageSlice.Value i -> string i
+                | Types.BorderImageSlice.Fill -> "fill"
 
         match imageSlice with
-        | :? BorderImageSlice as i -> stringifySlice i
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> global' g
+        | :? Types.BorderImageSlice as i -> stringifySlice i
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown border image slice"
 
-    let private borderColorToString (borderColor: IBorderColor) =
+    let private borderColorToString (borderColor: Types.IBorderColor) =
         match borderColor with
-        | :? CssColor as c -> CssColorValue.color c
-        | :? Global as g -> global' g
+        | :? Types.Color as c -> Types.colorToString c
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown border color"
 
-    let private spacingToString (spacing: IBorderSpacing) =
+    let private spacingToString (spacing: Types.IBorderSpacing) =
         match spacing with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> global' g
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown border spacing"
 
-    let private imageWidthToString (imageWidth: IBorderImageWidth) =
+    let private imageWidthToString (imageWidth: Types.IBorderImageWidth) =
         match imageWidth with
-        | :? CssFloat as f -> cssFloatToString f
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> global' g
-        | :? Auto -> auto
+        | :? Types.Float as f -> Types.FloatToString f
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.auto
         | _ -> "Unknown border image width"
 
-    let private imageSourceToString (imageSource: IBorderImageSource) =
+    let private imageSourceToString (imageSource: Types.IBorderImageSource) =
         match imageSource with
-        | :? None' -> none
-        | :? Global as g -> global' g
+        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown border image source"
 
-    let private borderToString (border: IBorder) =
+    let private borderToString (border: Types.IBorder) =
             match border with
-            | :? Global as g -> global' g
-            | :? None' -> none
+            | :? Types.Keywords as k -> Types.keywordsToString k
+            | :? Types.None' -> Types.none
             | _ -> "Unknown border"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border
-    let private borderValue value = PropertyValue.cssValue Property.Border value
+    let private borderValue value = Types.cssValue Types.Property.Border value
     let private borderValue' value =
         value
         |> borderToString
         |> borderValue
 
     type Border =
-        static member Value (border: IBorder) = border |> borderValue'
-        static member None = None' |> borderValue'
-        static member Inherit = Inherit |> borderValue'
-        static member Initial = Initial |> borderValue'
-        static member Unset = Unset |> borderValue'
+        static member Value (border: Types.IBorder) = border |> borderValue'
+        static member None = Types.None' |> borderValue'
+        static member Inherit = Types.Inherit |> borderValue'
+        static member Initial = Types.Initial |> borderValue'
+        static member Unset = Types.Unset |> borderValue'
 
     /// <summary>Resets border.</summary>
     /// <param name="border">
@@ -121,28 +118,28 @@ module Border =
     let Border' border = border |> Border.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
-    let private radiusValue value = PropertyValue.cssValue Property.BorderRadius value
+    let private radiusValue value = Types.cssValue Types.Property.BorderRadius value
     let private radiusValue' value =
         value
         |> radiusToString
         |> radiusValue
     type BorderRadius =
-        static member Value (radius: IBorderRadius) =
+        static member Value (radius: Types.IBorderRadius) =
             sprintf "%s"
                 (radiusToString radius)
                 |> radiusValue
-        static member Value (topLeftBottomRight: IBorderRadius, topRightBottomLeft: IBorderRadius) =
+        static member Value (topLeftBottomRight: Types.IBorderRadius, topRightBottomLeft: Types.IBorderRadius) =
             sprintf "%s %s"
                 (radiusToString topLeftBottomRight)
                 (radiusToString topRightBottomLeft)
                 |> radiusValue
-        static member Value (topLeft: IBorderRadius, topRightBottomLeft: IBorderRadius, bottomRight: IBorderRadius) =
+        static member Value (topLeft: Types.IBorderRadius, topRightBottomLeft: Types.IBorderRadius, bottomRight: Types.IBorderRadius) =
             sprintf "%s %s %s"
                 (radiusToString topLeft)
                 (radiusToString topRightBottomLeft)
                 (radiusToString bottomRight)
                 |> radiusValue
-        static member Value (topLeft: IBorderRadius, topRight: IBorderRadius, bottomRight: IBorderRadius, bottomLeft: IBorderRadius) =
+        static member Value (topLeft: Types.IBorderRadius, topRight: Types.IBorderRadius, bottomRight: Types.IBorderRadius, bottomLeft: Types.IBorderRadius) =
             sprintf "%s %s %s %s"
                 (radiusToString topLeft)
                 (radiusToString topRight)
@@ -150,9 +147,9 @@ module Border =
                 (radiusToString bottomLeft)
                 |> radiusValue
 
-        static member Inherit = Inherit |> radiusValue'
-        static member Initial = Initial |> radiusValue'
-        static member Unset = Unset |> radiusValue'
+        static member Inherit = Types.Inherit |> radiusValue'
+        static member Initial = Types.Initial |> radiusValue'
+        static member Unset = Types.Unset |> radiusValue'
 
     /// <summary>Specifies roundness of border edge.</summary>
     /// <param name="radius">
@@ -164,22 +161,22 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderRadius' (radius: IBorderRadius) = BorderRadius.Value(radius)
+    let BorderRadius' (radius: Types.IBorderRadius) = BorderRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-    let private bottomLeftRadiusValue value = PropertyValue.cssValue Property.BorderBottomLeftRadius value
+    let private bottomLeftRadiusValue value = Types.cssValue Types.Property.BorderBottomLeftRadius value
     let private bottomLeftRadiusValue' value =
         value
         |> radiusToString
         |> bottomLeftRadiusValue
     type BorderBottomLeftRadius =
-        static member Value (horizontal: IBorderRadius) =
+        static member Value (horizontal: Types.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> bottomLeftRadiusValue
-        static member Value (horizontal: IBorderRadius, vertical: IBorderRadius) =
+        static member Value (horizontal: Types.IBorderRadius, vertical: Types.IBorderRadius) =
             sprintf "%s %s" (radiusToString horizontal) (radiusToString vertical) |> bottomLeftRadiusValue
-        static member Inherit = Inherit |> bottomLeftRadiusValue'
-        static member Initial = Initial |> bottomLeftRadiusValue'
-        static member Unset = Unset |> bottomLeftRadiusValue'
+        static member Inherit = Types.Inherit |> bottomLeftRadiusValue'
+        static member Initial = Types.Initial |> bottomLeftRadiusValue'
+        static member Unset = Types.Unset |> bottomLeftRadiusValue'
 
     /// <summary>Specifies roundness of bottom left corner.</summary>
     /// <param name="radius">
@@ -191,22 +188,22 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomLeftRadius' (radius: IBorderRadius) = BorderBottomLeftRadius.Value(radius)
+    let BorderBottomLeftRadius' (radius: Types.IBorderRadius) = BorderBottomLeftRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-    let private bottomRightRadiusValue value = PropertyValue.cssValue Property.BorderBottomRightRadius value
+    let private bottomRightRadiusValue value = Types.cssValue Types.Property.BorderBottomRightRadius value
     let private bottomRightRadiusValue' value =
         value
         |> radiusToString
         |> bottomRightRadiusValue
     type BorderBottomRightRadius =
-        static member Value (horizontal: IBorderRadius) =
+        static member Value (horizontal: Types.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> bottomRightRadiusValue
-        static member Value (horizontal: IBorderRadius, vertical: IBorderRadius) =
+        static member Value (horizontal: Types.IBorderRadius, vertical: Types.IBorderRadius) =
             sprintf "%s %s" (radiusToString horizontal) (radiusToString vertical) |> bottomRightRadiusValue
-        static member Inherit = Inherit |> bottomRightRadiusValue'
-        static member Initial = Initial |> bottomRightRadiusValue'
-        static member Unset = Unset |> bottomRightRadiusValue'
+        static member Inherit = Types.Inherit |> bottomRightRadiusValue'
+        static member Initial = Types.Initial |> bottomRightRadiusValue'
+        static member Unset = Types.Unset |> bottomRightRadiusValue'
 
     /// <summary>Specifies roundness of bottom right corner.</summary>
     /// <param name="radius">
@@ -218,22 +215,22 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomRightRadius' (radius: IBorderRadius) = BorderBottomRightRadius.Value(radius)
+    let BorderBottomRightRadius' (radius: Types.IBorderRadius) = BorderBottomRightRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-    let private topLeftRadiusValue value = PropertyValue.cssValue Property.BorderTopLeftRadius value
+    let private topLeftRadiusValue value = Types.cssValue Types.Property.BorderTopLeftRadius value
     let private topLeftRadiusValue' value =
         value
         |> radiusToString
         |> topLeftRadiusValue
     type BorderTopLeftRadius =
-        static member Value (horizontal: IBorderRadius) =
+        static member Value (horizontal: Types.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> topLeftRadiusValue
-        static member Value (horizontal: IBorderRadius, vertical: IBorderRadius) =
+        static member Value (horizontal: Types.IBorderRadius, vertical: Types.IBorderRadius) =
             sprintf "%s %s" (radiusToString horizontal) (radiusToString vertical) |> topLeftRadiusValue
-        static member Inherit = Inherit |> topLeftRadiusValue'
-        static member Initial = Initial |> topLeftRadiusValue'
-        static member Unset = Unset |> topLeftRadiusValue'
+        static member Inherit = Types.Inherit |> topLeftRadiusValue'
+        static member Initial = Types.Initial |> topLeftRadiusValue'
+        static member Unset = Types.Unset |> topLeftRadiusValue'
 
     /// <summary>Specifies roundness of top left corner.</summary>
     /// <param name="radius">
@@ -245,22 +242,22 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopLeftRadius' (radius: IBorderRadius) = BorderTopLeftRadius.Value(radius)
+    let BorderTopLeftRadius' (radius: Types.IBorderRadius) = BorderTopLeftRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
-    let private topRightRadiusValue value = PropertyValue.cssValue Property.BorderTopRightRadius value
+    let private topRightRadiusValue value = Types.cssValue Types.Property.BorderTopRightRadius value
     let private topRightRadiusValue' value =
         value
         |> radiusToString
         |> topRightRadiusValue
     type BorderTopRightRadius =
-        static member Value (horizontal: IBorderRadius) =
+        static member Value (horizontal: Types.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> topRightRadiusValue
-        static member Value (horizontal: IBorderRadius, vertical: IBorderRadius) =
+        static member Value (horizontal: Types.IBorderRadius, vertical: Types.IBorderRadius) =
             sprintf "%s %s" (radiusToString horizontal) (radiusToString vertical) |> topRightRadiusValue
-        static member Inherit = Inherit |> topRightRadiusValue'
-        static member Initial = Initial |> topRightRadiusValue'
-        static member Unset = Unset |> topRightRadiusValue'
+        static member Inherit = Types.Inherit |> topRightRadiusValue'
+        static member Initial = Types.Initial |> topRightRadiusValue'
+        static member Unset = Types.Unset |> topRightRadiusValue'
 
     /// <summary>Specifies roundness of top right corner.</summary>
     /// <param name="radius">
@@ -272,29 +269,29 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopRightRadius' (radius: IBorderRadius) = BorderTopRightRadius.Value(radius)
+    let BorderTopRightRadius' (radius: Types.IBorderRadius) = BorderTopRightRadius.Value(radius)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
-    let private widthValue value = PropertyValue.cssValue Property.BorderWidth value
+    let private widthValue value = Types.cssValue Types.Property.BorderWidth value
     let private widthValue' value =
         value
         |> widthToString
         |> widthValue
 
     type BorderWidth =
-        static member Value (width: IBorderWidth) = widthValue (widthToString width)
-        static member Value (vertical: IBorderWidth, horizontal: IBorderWidth) =
+        static member Value (width: Types.IBorderWidth) = widthValue (widthToString width)
+        static member Value (vertical: Types.IBorderWidth, horizontal: Types.IBorderWidth) =
             sprintf "%s %s"
                 (widthToString vertical)
                 (widthToString horizontal)
             |> widthValue
-        static member Value (top: IBorderWidth, horizontal: IBorderWidth, bottom: IBorderWidth) =
+        static member Value (top: Types.IBorderWidth, horizontal: Types.IBorderWidth, bottom: Types.IBorderWidth) =
             sprintf "%s %s %s"
                 (widthToString top)
                 (widthToString horizontal)
                 (widthToString bottom)
             |> widthValue
-        static member Value (top: IBorderWidth, right: IBorderWidth, bottom: IBorderWidth, left: IBorderWidth) =
+        static member Value (top: Types.IBorderWidth, right: Types.IBorderWidth, bottom: Types.IBorderWidth, left: Types.IBorderWidth) =
             sprintf "%s %s %s %s"
                 (widthToString top)
                 (widthToString right)
@@ -302,13 +299,13 @@ module Border =
                 (widthToString left)
             |> widthValue
 
-        static member Thin = FssTypes.BorderWidth.Thin |> widthValue'
-        static member Medium = FssTypes.BorderWidth.Medium |> widthValue'
-        static member Thick = FssTypes.BorderWidth.Thick |> widthValue'
+        static member Thin = Types.BorderWidth.Thin |> widthValue'
+        static member Medium = Types.BorderWidth.Medium |> widthValue'
+        static member Thick = Types.BorderWidth.Thick |> widthValue'
 
-        static member Inherit = Inherit |> widthValue'
-        static member Initial = Initial |> widthValue'
-        static member Unset = Unset |> widthValue'
+        static member Inherit = Types.Inherit |> widthValue'
+        static member Initial = Types.Initial |> widthValue'
+        static member Unset = Types.Unset |> widthValue'
 
     /// <summary>Specifies width of border.</summary>
     /// <param name="width">
@@ -320,23 +317,23 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderWidth' (width: IBorderWidth) = BorderWidth.Value(width)
+    let BorderWidth' (width: Types.IBorderWidth) = BorderWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width
-    let private topWidthValue value = PropertyValue.cssValue Property.BorderTopWidth value
+    let private topWidthValue value = Types.cssValue Types.Property.BorderTopWidth value
     let private topWidthValue' value =
         value
         |> widthToString
         |> topWidthValue
     type BorderTopWidth =
-        static member Value (width: IBorderWidth) = width |> topWidthValue'
-        static member Thin = FssTypes.BorderWidth.Thin |> topWidthValue
-        static member Medium = FssTypes.BorderWidth.Medium |> topWidthValue
-        static member Thick = FssTypes.BorderWidth.Thick |> topWidthValue
+        static member Value (width: Types.IBorderWidth) = width |> topWidthValue'
+        static member Thin = Types.BorderWidth.Thin |> topWidthValue
+        static member Medium = Types.BorderWidth.Medium |> topWidthValue
+        static member Thick = Types.BorderWidth.Thick |> topWidthValue
 
-        static member Inherit = Inherit |> topWidthValue
-        static member Initial = Initial |> topWidthValue
-        static member Unset = Unset |> topWidthValue
+        static member Inherit = Types.Inherit |> topWidthValue
+        static member Initial = Types.Initial |> topWidthValue
+        static member Unset = Types.Unset |> topWidthValue
 
     /// <summary>Specifies width of top border.</summary>
     /// <param name="width">
@@ -348,23 +345,23 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopWidth' (width: IBorderWidth) = BorderTopWidth.Value(width)
+    let BorderTopWidth' (width: Types.IBorderWidth) = BorderTopWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width
-    let private rightWidthValue value = PropertyValue.cssValue Property.BorderRightWidth value
+    let private rightWidthValue value = Types.cssValue Types.Property.BorderRightWidth value
     let private rightWidthValue' value =
         value
         |> widthToString
         |> rightWidthValue
     type BorderRightWidth =
-        static member Value (width: IBorderWidth) = width |> rightWidthValue'
-        static member Thin = FssTypes.BorderWidth.Thin |> rightWidthValue
-        static member Medium = FssTypes.BorderWidth.Medium |> rightWidthValue
-        static member Thick = FssTypes.BorderWidth.Thick |> rightWidthValue
+        static member Value (width: Types.IBorderWidth) = width |> rightWidthValue'
+        static member Thin = Types.BorderWidth.Thin |> rightWidthValue
+        static member Medium = Types.BorderWidth.Medium |> rightWidthValue
+        static member Thick = Types.BorderWidth.Thick |> rightWidthValue
 
-        static member Inherit = Inherit |> rightWidthValue
-        static member Initial = Initial |> rightWidthValue
-        static member Unset = Unset |> rightWidthValue
+        static member Inherit = Types.Inherit |> rightWidthValue
+        static member Initial = Types.Initial |> rightWidthValue
+        static member Unset = Types.Unset |> rightWidthValue
 
     /// <summary>Specifies width of right border.</summary>
     /// <param name="width">
@@ -376,23 +373,23 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderRightWidth' (width: IBorderWidth) = BorderRightWidth.Value(width)
+    let BorderRightWidth' (width: Types.IBorderWidth) = BorderRightWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width
-    let private bottomWidthValue value = PropertyValue.cssValue Property.BorderBottomWidth value
+    let private bottomWidthValue value = Types.cssValue Types.Property.BorderBottomWidth value
     let private bottomWidthValue' value =
         value
         |> widthToString
         |> bottomWidthValue
     type BorderBottomWidth =
-        static member Value (width: IBorderWidth) = width |> bottomWidthValue'
-        static member Thin = FssTypes.BorderWidth.Thin |> bottomWidthValue
-        static member Medium = FssTypes.BorderWidth.Medium |> bottomWidthValue
-        static member Thick = FssTypes.BorderWidth.Thick |> bottomWidthValue
+        static member Value (width: Types.IBorderWidth) = width |> bottomWidthValue'
+        static member Thin = Types.BorderWidth.Thin |> bottomWidthValue
+        static member Medium = Types.BorderWidth.Medium |> bottomWidthValue
+        static member Thick = Types.BorderWidth.Thick |> bottomWidthValue
 
-        static member Inherit = Inherit |> bottomWidthValue
-        static member Initial = Initial |> bottomWidthValue
-        static member Unset = Unset |> bottomWidthValue
+        static member Inherit = Types.Inherit |> bottomWidthValue
+        static member Initial = Types.Initial |> bottomWidthValue
+        static member Unset = Types.Unset |> bottomWidthValue
 
     /// <summary>Specifies width of bottom border.</summary>
     /// <param name="width">
@@ -404,23 +401,23 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomWidth' (width: IBorderWidth) = BorderBottomWidth.Value(width)
+    let BorderBottomWidth' (width: Types.IBorderWidth) = BorderBottomWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width
-    let private leftWidthValue value = PropertyValue.cssValue Property.BorderLeftWidth value
+    let private leftWidthValue value = Types.cssValue Types.Property.BorderLeftWidth value
     let private leftWidthValue' value =
         value
         |> widthToString
         |> leftWidthValue
     type BorderLeftWidth =
-        static member Value (width: IBorderWidth) = width |> leftWidthValue'
-        static member Thin = FssTypes.BorderWidth.Thin |> leftWidthValue
-        static member Medium = FssTypes.BorderWidth.Medium |> leftWidthValue
-        static member Thick = FssTypes.BorderWidth.Thick |> leftWidthValue
+        static member Value (width: Types.IBorderWidth) = width |> leftWidthValue'
+        static member Thin = Types.BorderWidth.Thin |> leftWidthValue
+        static member Medium = Types.BorderWidth.Medium |> leftWidthValue
+        static member Thick = Types.BorderWidth.Thick |> leftWidthValue
 
-        static member Inherit = Inherit |> leftWidthValue
-        static member Initial = Initial |> leftWidthValue
-        static member Unset = Unset |> leftWidthValue
+        static member Inherit = Types.Inherit |> leftWidthValue
+        static member Initial = Types.Initial |> leftWidthValue
+        static member Unset = Types.Unset |> leftWidthValue
 
     /// <summary>Specifies width of left border.</summary>
     /// <param name="width">
@@ -432,29 +429,29 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderLeftWidth' (width: IBorderWidth) = BorderLeftWidth.Value(width)
+    let BorderLeftWidth' (width: Types.IBorderWidth) = BorderLeftWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
-    let private styleValue value = PropertyValue.cssValue Property.BorderStyle value
+    let private styleValue value = Types.cssValue Types.Property.BorderStyle value
     let private styleValue' value =
         value
         |> styleToString
         |> styleValue
 
     type BorderStyle =
-        static member Value (style: IBorderStyle) = style |> styleValue'
-        static member Value (vertical: IBorderStyle, horizontal: IBorderStyle) =
+        static member Value (style: Types.IBorderStyle) = style |> styleValue'
+        static member Value (vertical: Types.IBorderStyle, horizontal: Types.IBorderStyle) =
             sprintf "%s %s"
                 (styleToString vertical)
                 (styleToString horizontal)
             |> styleValue
-        static member Value (top: IBorderStyle, horizontal: IBorderStyle, bottom: IBorderStyle) =
+        static member Value (top: Types.IBorderStyle, horizontal: Types.IBorderStyle, bottom: Types.IBorderStyle) =
             sprintf "%s %s %s"
                 (styleToString top)
                 (styleToString horizontal)
                 (styleToString bottom)
             |> styleValue
-        static member Value (top: IBorderStyle, right: IBorderStyle, bottom: IBorderStyle, left: IBorderStyle) =
+        static member Value (top: Types.IBorderStyle, right: Types.IBorderStyle, bottom: Types.IBorderStyle, left: Types.IBorderStyle) =
             sprintf "%s %s %s %s"
                 (styleToString top)
                 (styleToString right)
@@ -462,20 +459,20 @@ module Border =
                 (styleToString left)
             |> styleValue
 
-        static member Hidden = FssTypes.BorderStyle.Hidden |> styleValue'
-        static member Dotted = FssTypes.BorderStyle.Dotted |> styleValue'
-        static member Dashed = FssTypes.BorderStyle.Dashed |> styleValue'
-        static member Solid = FssTypes.BorderStyle.Solid |> styleValue'
-        static member Double = FssTypes.BorderStyle.Double |> styleValue'
-        static member Groove = FssTypes.BorderStyle.Groove |> styleValue'
-        static member Ridge = FssTypes.BorderStyle.Ridge |> styleValue'
-        static member Inset = FssTypes.BorderStyle.Inset |> styleValue'
-        static member Outset = FssTypes.BorderStyle.Outset |> styleValue'
+        static member Hidden = Types.BorderStyle.Hidden |> styleValue'
+        static member Dotted = Types.BorderStyle.Dotted |> styleValue'
+        static member Dashed = Types.BorderStyle.Dashed |> styleValue'
+        static member Solid = Types.BorderStyle.Solid |> styleValue'
+        static member Double = Types.BorderStyle.Double |> styleValue'
+        static member Groove = Types.BorderStyle.Groove |> styleValue'
+        static member Ridge = Types.BorderStyle.Ridge |> styleValue'
+        static member Inset = Types.BorderStyle.Inset |> styleValue'
+        static member Outset = Types.BorderStyle.Outset |> styleValue'
 
-        static member None = None' |> styleValue'
-        static member Inherit = Inherit |> styleValue'
-        static member Initial = Initial |> styleValue'
-        static member Unset = Unset |> styleValue'
+        static member None = Types.None' |> styleValue'
+        static member Inherit = Types.Inherit |> styleValue'
+        static member Initial = Types.Initial |> styleValue'
+        static member Unset = Types.Unset |> styleValue'
 
     /// <summary>Specifies style of border.</summary>
     /// <param name="style">
@@ -487,31 +484,31 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderStyle' (style: IBorderStyle) = BorderStyle.Value(style)
+    let BorderStyle' (style: Types.IBorderStyle) = BorderStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style
-    let private topStyleValue value = PropertyValue.cssValue Property.BorderTopStyle value
+    let private topStyleValue value = Types.cssValue Types.Property.BorderTopStyle value
     let private topStyleValue' value =
         value
         |> styleToString
         |> topStyleValue
 
     type BorderTopStyle =
-        static member Value (style: IBorderStyle) = style |> topStyleValue'
-        static member Hidden = FssTypes.BorderStyle.Hidden |> topStyleValue'
-        static member Dotted = FssTypes.BorderStyle.Dotted |> topStyleValue'
-        static member Dashed = FssTypes.BorderStyle.Dashed |> topStyleValue'
-        static member Solid = FssTypes.BorderStyle.Solid |> topStyleValue'
-        static member Double = FssTypes.BorderStyle.Double |> topStyleValue'
-        static member Groove = FssTypes.BorderStyle.Groove |> topStyleValue'
-        static member Ridge = FssTypes.BorderStyle.Ridge |> topStyleValue'
-        static member Inset = FssTypes.BorderStyle.Inset |> topStyleValue'
-        static member Outset = FssTypes.BorderStyle.Outset |> topStyleValue'
+        static member Value (style: Types.IBorderStyle) = style |> topStyleValue'
+        static member Hidden = Types.BorderStyle.Hidden |> topStyleValue'
+        static member Dotted = Types.BorderStyle.Dotted |> topStyleValue'
+        static member Dashed = Types.BorderStyle.Dashed |> topStyleValue'
+        static member Solid = Types.BorderStyle.Solid |> topStyleValue'
+        static member Double = Types.BorderStyle.Double |> topStyleValue'
+        static member Groove = Types.BorderStyle.Groove |> topStyleValue'
+        static member Ridge = Types.BorderStyle.Ridge |> topStyleValue'
+        static member Inset = Types.BorderStyle.Inset |> topStyleValue'
+        static member Outset = Types.BorderStyle.Outset |> topStyleValue'
 
-        static member None = None' |> topStyleValue'
-        static member Inherit = Inherit |> topStyleValue'
-        static member Initial = Initial |> topStyleValue'
-        static member Unset = Unset |> topStyleValue'
+        static member None = Types.None' |> topStyleValue'
+        static member Inherit = Types.Inherit |> topStyleValue'
+        static member Initial = Types.Initial |> topStyleValue'
+        static member Unset = Types.Unset |> topStyleValue'
 
     /// <summary>Specifies style of top border.</summary>
     /// <param name="style">
@@ -523,31 +520,31 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopStyle' (style: IBorderStyle) = BorderTopStyle.Value(style)
+    let BorderTopStyle' (style: Types.IBorderStyle) = BorderTopStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style
-    let private rightStyleValue value = PropertyValue.cssValue Property.BorderRightStyle value
+    let private rightStyleValue value = Types.cssValue Types.Property.BorderRightStyle value
     let private rightStyleValue' value =
         value
         |> styleToString
         |> rightStyleValue
 
     type BorderRightStyle =
-        static member Value (style: IBorderStyle) = style |> rightStyleValue'
-        static member Hidden = FssTypes.BorderStyle.Hidden |> rightStyleValue'
-        static member Dotted = FssTypes.BorderStyle.Dotted |> rightStyleValue'
-        static member Dashed = FssTypes.BorderStyle.Dashed |> rightStyleValue'
-        static member Solid = FssTypes.BorderStyle.Solid |> rightStyleValue'
-        static member Double = FssTypes.BorderStyle.Double |> rightStyleValue'
-        static member Groove = FssTypes.BorderStyle.Groove |> rightStyleValue'
-        static member Ridge = FssTypes.BorderStyle.Ridge |> rightStyleValue'
-        static member Inset = FssTypes.BorderStyle.Inset |> rightStyleValue'
-        static member Outset = FssTypes.BorderStyle.Outset |> rightStyleValue'
+        static member Value (style: Types.IBorderStyle) = style |> rightStyleValue'
+        static member Hidden = Types.BorderStyle.Hidden |> rightStyleValue'
+        static member Dotted = Types.BorderStyle.Dotted |> rightStyleValue'
+        static member Dashed = Types.BorderStyle.Dashed |> rightStyleValue'
+        static member Solid = Types.BorderStyle.Solid |> rightStyleValue'
+        static member Double = Types.BorderStyle.Double |> rightStyleValue'
+        static member Groove = Types.BorderStyle.Groove |> rightStyleValue'
+        static member Ridge = Types.BorderStyle.Ridge |> rightStyleValue'
+        static member Inset = Types.BorderStyle.Inset |> rightStyleValue'
+        static member Outset = Types.BorderStyle.Outset |> rightStyleValue'
 
-        static member None = None' |> rightStyleValue'
-        static member Inherit = Inherit |> rightStyleValue'
-        static member Initial = Initial |> rightStyleValue'
-        static member Unset = Unset |> rightStyleValue'
+        static member None = Types.None' |> rightStyleValue'
+        static member Inherit = Types.Inherit |> rightStyleValue'
+        static member Initial = Types.Initial |> rightStyleValue'
+        static member Unset = Types.Unset |> rightStyleValue'
 
     /// <summary>Specifies style of right border.</summary>
     /// <param name="style">
@@ -559,31 +556,31 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderRightStyle' (style: IBorderStyle) = BorderRightStyle.Value(style)
+    let BorderRightStyle' (style: Types.IBorderStyle) = BorderRightStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style
-    let private bottomStyleValue value = PropertyValue.cssValue Property.BorderBottomStyle value
+    let private bottomStyleValue value = Types.cssValue Types.Property.BorderBottomStyle value
     let private bottomStyleValue' value =
         value
         |> styleToString
         |> bottomStyleValue
 
     type BorderBottomStyle =
-        static member Value (style: IBorderStyle) = style |> bottomStyleValue'
-        static member Hidden = FssTypes.BorderStyle.Hidden |> bottomStyleValue'
-        static member Dotted = FssTypes.BorderStyle.Dotted |> bottomStyleValue'
-        static member Dashed = FssTypes.BorderStyle.Dashed |> bottomStyleValue'
-        static member Solid = FssTypes.BorderStyle.Solid |> bottomStyleValue'
-        static member Double = FssTypes.BorderStyle.Double |> bottomStyleValue'
-        static member Groove = FssTypes.BorderStyle.Groove |> bottomStyleValue'
-        static member Ridge = FssTypes.BorderStyle.Ridge |> bottomStyleValue'
-        static member Inset = FssTypes.BorderStyle.Inset |> bottomStyleValue'
-        static member Outset = FssTypes.BorderStyle.Outset |> bottomStyleValue'
+        static member Value (style: Types.IBorderStyle) = style |> bottomStyleValue'
+        static member Hidden = Types.BorderStyle.Hidden |> bottomStyleValue'
+        static member Dotted = Types.BorderStyle.Dotted |> bottomStyleValue'
+        static member Dashed = Types.BorderStyle.Dashed |> bottomStyleValue'
+        static member Solid = Types.BorderStyle.Solid |> bottomStyleValue'
+        static member Double = Types.BorderStyle.Double |> bottomStyleValue'
+        static member Groove = Types.BorderStyle.Groove |> bottomStyleValue'
+        static member Ridge = Types.BorderStyle.Ridge |> bottomStyleValue'
+        static member Inset = Types.BorderStyle.Inset |> bottomStyleValue'
+        static member Outset = Types.BorderStyle.Outset |> bottomStyleValue'
 
-        static member None = None' |> bottomStyleValue'
-        static member Inherit = Inherit |> bottomStyleValue'
-        static member Initial = Initial |> bottomStyleValue'
-        static member Unset = Unset |> bottomStyleValue'
+        static member None = Types.None' |> bottomStyleValue'
+        static member Inherit = Types.Inherit |> bottomStyleValue'
+        static member Initial = Types.Initial |> bottomStyleValue'
+        static member Unset = Types.Unset |> bottomStyleValue'
 
     /// <summary>Specifies style of bottom border.</summary>
     /// <param name="style">
@@ -595,31 +592,31 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomStyle' (style: IBorderStyle) = BorderBottomStyle.Value(style)
+    let BorderBottomStyle' (style: Types.IBorderStyle) = BorderBottomStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style
-    let private leftStyleValue value = PropertyValue.cssValue Property.BorderLeftStyle value
+    let private leftStyleValue value = Types.cssValue Types.Property.BorderLeftStyle value
     let private leftStyleValue' value =
         value
         |> styleToString
         |> leftStyleValue
 
     type BorderLeftStyle =
-        static member Value (style: IBorderStyle) = style |> leftStyleValue'
-        static member Hidden = FssTypes.BorderStyle.Hidden |> leftStyleValue'
-        static member Dotted = FssTypes.BorderStyle.Dotted |> leftStyleValue'
-        static member Dashed = FssTypes.BorderStyle.Dashed |> leftStyleValue'
-        static member Solid = FssTypes.BorderStyle.Solid |> leftStyleValue'
-        static member Double = FssTypes.BorderStyle.Double |> leftStyleValue'
-        static member Groove = FssTypes.BorderStyle.Groove |> leftStyleValue'
-        static member Ridge = FssTypes.BorderStyle.Ridge |> leftStyleValue'
-        static member Inset = FssTypes.BorderStyle.Inset |> leftStyleValue'
-        static member Outset = FssTypes.BorderStyle.Outset |> leftStyleValue'
+        static member Value (style: Types.IBorderStyle) = style |> leftStyleValue'
+        static member Hidden = Types.BorderStyle.Hidden |> leftStyleValue'
+        static member Dotted = Types.BorderStyle.Dotted |> leftStyleValue'
+        static member Dashed = Types.BorderStyle.Dashed |> leftStyleValue'
+        static member Solid = Types.BorderStyle.Solid |> leftStyleValue'
+        static member Double = Types.BorderStyle.Double |> leftStyleValue'
+        static member Groove = Types.BorderStyle.Groove |> leftStyleValue'
+        static member Ridge = Types.BorderStyle.Ridge |> leftStyleValue'
+        static member Inset = Types.BorderStyle.Inset |> leftStyleValue'
+        static member Outset = Types.BorderStyle.Outset |> leftStyleValue'
 
-        static member None = None' |> leftStyleValue'
-        static member Inherit = Inherit |> leftStyleValue'
-        static member Initial = Initial |> leftStyleValue'
-        static member Unset = Unset |> leftStyleValue'
+        static member None = Types.None' |> leftStyleValue'
+        static member Inherit = Types.Inherit |> leftStyleValue'
+        static member Initial = Types.Initial |> leftStyleValue'
+        static member Unset = Types.Unset |> leftStyleValue'
 
     /// <summary>Specifies style of left border.</summary>
     /// <param name="style">
@@ -631,23 +628,23 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderLeftStyle' (style: IBorderStyle) = BorderLeftStyle.Value(style)
+    let BorderLeftStyle' (style: Types.IBorderStyle) = BorderLeftStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
-    let private collapseValue value = PropertyValue.cssValue Property.BorderCollapse value
+    let private collapseValue value = Types.cssValue Types.Property.BorderCollapse value
     let private collapseValue' value =
         value
         |> collapseToString
         |> collapseValue
 
     type BorderCollapse =
-        static member Value (collapse: IBorderCollapse) = collapse |> collapseValue'
-        static member Collapse = FssTypes.BorderCollapse.Collapse |> collapseValue'
-        static member Separate = FssTypes.BorderCollapse.Separate |> collapseValue'
+        static member Value (collapse: Types.IBorderCollapse) = collapse |> collapseValue'
+        static member Collapse = Types.BorderCollapse.Collapse |> collapseValue'
+        static member Separate = Types.BorderCollapse.Separate |> collapseValue'
 
-        static member Inherit = Inherit |> collapseValue'
-        static member Initial = Initial |> collapseValue'
-        static member Unset = Unset |> collapseValue'
+        static member Inherit = Types.Inherit |> collapseValue'
+        static member Initial = Types.Initial |> collapseValue'
+        static member Unset = Types.Unset |> collapseValue'
 
     /// <summary>Specifies whether cells inside a table have shared borders.</summary>
     /// <param name="collapse">
@@ -658,26 +655,26 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderCollapse' (collapse: IBorderCollapse) =  BorderCollapse.Value(collapse)
+    let BorderCollapse' (collapse: Types.IBorderCollapse) =  BorderCollapse.Value(collapse)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
-    let private imageOutsetValue value = PropertyValue.cssValue Property.BorderImageOutset value
+    let private imageOutsetValue value = Types.cssValue Types.Property.BorderImageOutset value
     let private imageOutsetValue' value =
         value
         |> imageOutsetToString
         |> imageOutsetValue
 
     type BorderImageOutset =
-        static member Value (outset: IBorderImageOutset) = outset |> imageOutsetValue'
-        static member Value (vertical: IBorderImageOutset, horizontal: IBorderImageOutset) =
+        static member Value (outset: Types.IBorderImageOutset) = outset |> imageOutsetValue'
+        static member Value (vertical: Types.IBorderImageOutset, horizontal: Types.IBorderImageOutset) =
             sprintf "%s %s" (imageOutsetToString vertical) (imageOutsetToString horizontal) |> imageOutsetValue
-        static member Value (top: IBorderImageOutset, horizontal: IBorderImageOutset, bottom: IBorderImageOutset) =
+        static member Value (top: Types.IBorderImageOutset, horizontal: Types.IBorderImageOutset, bottom: Types.IBorderImageOutset) =
             sprintf "%s %s %s"
                 (imageOutsetToString top)
                 (imageOutsetToString horizontal)
                 (imageOutsetToString bottom)
             |> imageOutsetValue
-        static member Value (top: IBorderImageOutset, right: IBorderImageOutset, bottom: IBorderImageOutset, left: IBorderImageOutset) =
+        static member Value (top: Types.IBorderImageOutset, right: Types.IBorderImageOutset, bottom: Types.IBorderImageOutset, left: Types.IBorderImageOutset) =
             sprintf "%s %s %s %s"
                 (imageOutsetToString top)
                 (imageOutsetToString right)
@@ -685,9 +682,9 @@ module Border =
                 (imageOutsetToString left)
             |> imageOutsetValue
 
-        static member Inherit = Inherit |> imageOutsetValue'
-        static member Initial = Initial |> imageOutsetValue'
-        static member Unset = Unset |> imageOutsetValue'
+        static member Inherit = Types.Inherit |> imageOutsetValue'
+        static member Initial = Types.Initial |> imageOutsetValue'
+        static member Unset = Types.Unset |> imageOutsetValue'
 
     /// <summary>Specifies distance between elements border and border box.</summary>
     /// <param name="outset">
@@ -700,27 +697,27 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageOutset' (outset: IBorderImageOutset) =  BorderImageOutset.Value(outset)
+    let BorderImageOutset' (outset: Types.IBorderImageOutset) =  BorderImageOutset.Value(outset)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
-    let private imageRepeatValue value = PropertyValue.cssValue Property.BorderImageRepeat value
+    let private imageRepeatValue value = Types.cssValue Types.Property.BorderImageRepeat value
     let private imageRepeatValue' value =
         value
         |> repeatToString
         |> imageRepeatValue
     type BorderImageRepeat =
-        static member Value (repeat: IBorderRepeat) = repeat |> imageRepeatValue'
-        static member Value (vertical: IBorderRepeat, horizontal: IBorderRepeat) =
+        static member Value (repeat: Types.IBorderRepeat) = repeat |> imageRepeatValue'
+        static member Value (vertical: Types.IBorderRepeat, horizontal: Types.IBorderRepeat) =
             sprintf "%s %s" (repeatToString vertical) (repeatToString horizontal)
             |> imageRepeatValue
-        static member Stretch = FssTypes.BorderImageRepeat.Stretch |> imageRepeatValue'
-        static member Repeat = FssTypes.BorderImageRepeat.Repeat |> imageRepeatValue'
-        static member Round = FssTypes.BorderImageRepeat.Round |> imageRepeatValue'
-        static member Space = FssTypes.BorderImageRepeat.Space |> imageRepeatValue'
+        static member Stretch = Types.BorderImageRepeat.Stretch |> imageRepeatValue'
+        static member Repeat = Types.BorderImageRepeat.Repeat |> imageRepeatValue'
+        static member Round = Types.BorderImageRepeat.Round |> imageRepeatValue'
+        static member Space = Types.BorderImageRepeat.Space |> imageRepeatValue'
 
-        static member Inherit = Inherit |> imageRepeatValue'
-        static member Initial = Initial |> imageRepeatValue'
-        static member Unset = Unset |> imageRepeatValue'
+        static member Inherit = Types.Inherit |> imageRepeatValue'
+        static member Initial = Types.Initial |> imageRepeatValue'
+        static member Unset = Types.Unset |> imageRepeatValue'
 
     /// <summary>Specifies how border image surrounds border box.</summary>
     /// <param name="repeat">
@@ -731,27 +728,27 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageRepeat' (repeat: IBorderRepeat) = BorderImageRepeat.Value(repeat)
+    let BorderImageRepeat' (repeat: Types.IBorderRepeat) = BorderImageRepeat.Value(repeat)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
-    let private imageSliceValue value = PropertyValue.cssValue Property.BorderImageSlice value
+    let private imageSliceValue value = Types.cssValue Types.Property.BorderImageSlice value
     let private imageSliceValue' value =
         value
         |> imageSliceToString
         |> imageSliceValue
 
     type BorderImageSlice =
-        static member Fill = FssTypes.BorderImageSlice.Fill |> imageSliceValue'
-        static member Value (imageSlice: IBorderImageSlice) = imageSlice |> imageSliceValue'
-        static member Value (vertical: IBorderImageSlice, horizontal: IBorderImageSlice) =
+        static member Fill = Types.BorderImageSlice.Fill |> imageSliceValue'
+        static member Value (imageSlice: Types.IBorderImageSlice) = imageSlice |> imageSliceValue'
+        static member Value (vertical: Types.IBorderImageSlice, horizontal: Types.IBorderImageSlice) =
             sprintf "%s %s" (imageSliceToString vertical) (imageSliceToString horizontal) |> imageSliceValue
-        static member Value (w1: IBorderImageSlice, w2: IBorderImageSlice, w3: IBorderImageSlice) =
+        static member Value (w1: Types.IBorderImageSlice, w2: Types.IBorderImageSlice, w3: Types.IBorderImageSlice) =
             sprintf "%s %s %s"
                 (imageSliceToString w1)
                 (imageSliceToString w2)
                 (imageSliceToString w3)
             |> imageSliceValue
-        static member Value (w1: IBorderImageSlice, w2: IBorderImageSlice, w3: IBorderImageSlice, w4: IBorderImageSlice) =
+        static member Value (w1: Types.IBorderImageSlice, w2: Types.IBorderImageSlice, w3: Types.IBorderImageSlice, w4: Types.IBorderImageSlice) =
             sprintf "%s %s %s %s"
                 (imageSliceToString w1)
                 (imageSliceToString w2)
@@ -759,9 +756,9 @@ module Border =
                 (imageSliceToString w4)
             |> imageSliceValue
 
-        static member Inherit = Inherit |> imageSliceValue'
-        static member Initial = Initial |> imageSliceValue'
-        static member Unset = Unset |> imageSliceValue'
+        static member Inherit = Types.Inherit |> imageSliceValue'
+        static member Initial = Types.Initial |> imageSliceValue'
+        static member Unset = Types.Unset |> imageSliceValue'
 
     /// <summary>Specifies how border image is divided into regions.</summary>
     /// <param name="slice">
@@ -774,914 +771,914 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageSlice' (slice: IBorderImageSlice) = BorderImageSlice.Value(slice)
+    let BorderImageSlice' (slice: Types.IBorderImageSlice) = BorderImageSlice.Value(slice)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-color
-    let private borderColorValue value = PropertyValue.cssValue Property.BorderColor value
+    let private borderColorValue value = Types.cssValue Types.Property.BorderColor value
     let private borderColorValue' value =
         value
         |> borderColorToString
         |> borderColorValue
 
     type BorderColor =
-        static member Value (color: IBorderColor) = color |> borderColorValue'
-        static member Value (horizontal: IBorderColor, vertical: IBorderColor) =
+        static member Value (color: Types.IBorderColor) = color |> borderColorValue'
+        static member Value (horizontal: Types.IBorderColor, vertical: Types.IBorderColor) =
             sprintf "%s %s"
                 (borderColorToString horizontal)
                 (borderColorToString vertical)
             |> borderColorValue
-        static member Value (top: IBorderColor, vertical: IBorderColor, bottom: IBorderColor) =
+        static member Value (top: Types.IBorderColor, vertical: Types.IBorderColor, bottom: Types.IBorderColor) =
             sprintf "%s %s %s"
                 (borderColorToString top)
                 (borderColorToString vertical)
                 (borderColorToString bottom)
             |> borderColorValue
-        static member Value (top: IBorderColor, right: IBorderColor, bottom: IBorderColor, left: IBorderColor) =
+        static member Value (top: Types.IBorderColor, right: Types.IBorderColor, bottom: Types.IBorderColor, left: Types.IBorderColor) =
             sprintf "%s %s %s %s"
                 (borderColorToString top)
                 (borderColorToString right)
                 (borderColorToString bottom)
                 (borderColorToString left)
             |> borderColorValue
-        static member black = CssColor.black |> borderColorValue'
-        static member silver = CssColor.silver |> borderColorValue'
-        static member gray = CssColor.gray |> borderColorValue'
-        static member white = CssColor.white |> borderColorValue'
-        static member maroon = CssColor.maroon |> borderColorValue'
-        static member red = CssColor.red |> borderColorValue'
-        static member purple = CssColor.purple |> borderColorValue'
-        static member fuchsia = CssColor.fuchsia |> borderColorValue'
-        static member green = CssColor.green |> borderColorValue'
-        static member lime = CssColor.lime |> borderColorValue'
-        static member olive = CssColor.olive |> borderColorValue'
-        static member yellow = CssColor.yellow |> borderColorValue'
-        static member navy = CssColor.navy |> borderColorValue'
-        static member blue = CssColor.blue |> borderColorValue'
-        static member teal = CssColor.teal |> borderColorValue'
-        static member aqua = CssColor.aqua |> borderColorValue'
-        static member orange = CssColor.orange |> borderColorValue'
-        static member aliceBlue = CssColor.aliceBlue |> borderColorValue'
-        static member antiqueWhite = CssColor.antiqueWhite |> borderColorValue'
-        static member aquaMarine = CssColor.aquaMarine |> borderColorValue'
-        static member azure = CssColor.azure |> borderColorValue'
-        static member beige = CssColor.beige |> borderColorValue'
-        static member bisque = CssColor.bisque |> borderColorValue'
-        static member blanchedAlmond = CssColor.blanchedAlmond |> borderColorValue'
-        static member blueViolet = CssColor.blueViolet |> borderColorValue'
-        static member brown = CssColor.brown |> borderColorValue'
-        static member burlywood = CssColor.burlywood |> borderColorValue'
-        static member cadetBlue = CssColor.cadetBlue |> borderColorValue'
-        static member chartreuse = CssColor.chartreuse |> borderColorValue'
-        static member chocolate = CssColor.chocolate |> borderColorValue'
-        static member coral = CssColor.coral |> borderColorValue'
-        static member cornflowerBlue = CssColor.cornflowerBlue |> borderColorValue'
-        static member cornsilk = CssColor.cornsilk |> borderColorValue'
-        static member crimson = CssColor.crimson |> borderColorValue'
-        static member cyan = CssColor.cyan |> borderColorValue'
-        static member darkBlue = CssColor.darkBlue |> borderColorValue'
-        static member darkCyan = CssColor.darkCyan |> borderColorValue'
-        static member darkGoldenrod = CssColor.darkGoldenrod |> borderColorValue'
-        static member darkGray = CssColor.darkGray |> borderColorValue'
-        static member darkGreen = CssColor.darkGreen |> borderColorValue'
-        static member darkKhaki = CssColor.darkKhaki |> borderColorValue'
-        static member darkMagenta = CssColor.darkMagenta |> borderColorValue'
-        static member darkOliveGreen = CssColor.darkOliveGreen |> borderColorValue'
-        static member darkOrange = CssColor.darkOrange |> borderColorValue'
-        static member darkOrchid = CssColor.darkOrchid |> borderColorValue'
-        static member darkRed = CssColor.darkRed |> borderColorValue'
-        static member darkSalmon = CssColor.darkSalmon |> borderColorValue'
-        static member darkSeaGreen = CssColor.darkSeaGreen |> borderColorValue'
-        static member darkSlateBlue = CssColor.darkSlateBlue |> borderColorValue'
-        static member darkSlateGray = CssColor.darkSlateGray |> borderColorValue'
-        static member darkTurquoise = CssColor.darkTurquoise |> borderColorValue'
-        static member darkViolet = CssColor.darkViolet |> borderColorValue'
-        static member deepPink = CssColor.deepPink |> borderColorValue'
-        static member deepSkyBlue = CssColor.deepSkyBlue |> borderColorValue'
-        static member dimGrey = CssColor.dimGrey |> borderColorValue'
-        static member dodgerBlue = CssColor.dodgerBlue |> borderColorValue'
-        static member fireBrick = CssColor.fireBrick |> borderColorValue'
-        static member floralWhite = CssColor.floralWhite |> borderColorValue'
-        static member forestGreen = CssColor.forestGreen |> borderColorValue'
-        static member gainsboro = CssColor.gainsboro |> borderColorValue'
-        static member ghostWhite = CssColor.ghostWhite |> borderColorValue'
-        static member gold = CssColor.gold |> borderColorValue'
-        static member goldenrod = CssColor.goldenrod |> borderColorValue'
-        static member greenYellow = CssColor.greenYellow |> borderColorValue'
-        static member grey = CssColor.grey |> borderColorValue'
-        static member honeydew = CssColor.honeydew |> borderColorValue'
-        static member hotPink = CssColor.hotPink |> borderColorValue'
-        static member indianRed = CssColor.indianRed |> borderColorValue'
-        static member indigo = CssColor.indigo |> borderColorValue'
-        static member ivory = CssColor.ivory |> borderColorValue'
-        static member khaki = CssColor.khaki |> borderColorValue'
-        static member lavender = CssColor.lavender |> borderColorValue'
-        static member lavenderBlush = CssColor.lavenderBlush |> borderColorValue'
-        static member lawnGreen = CssColor.lawnGreen |> borderColorValue'
-        static member lemonChiffon = CssColor.lemonChiffon |> borderColorValue'
-        static member lightBlue = CssColor.lightBlue |> borderColorValue'
-        static member lightCoral = CssColor.lightCoral |> borderColorValue'
-        static member lightCyan = CssColor.lightCyan |> borderColorValue'
-        static member lightGoldenrodYellow = CssColor.lightGoldenrodYellow |> borderColorValue'
-        static member lightGray = CssColor.lightGray |> borderColorValue'
-        static member lightGreen = CssColor.lightGreen |> borderColorValue'
-        static member lightGrey = CssColor.lightGrey |> borderColorValue'
-        static member lightPink = CssColor.lightPink |> borderColorValue'
-        static member lightSalmon = CssColor.lightSalmon |> borderColorValue'
-        static member lightSeaGreen = CssColor.lightSeaGreen |> borderColorValue'
-        static member lightSkyBlue = CssColor.lightSkyBlue |> borderColorValue'
-        static member lightSlateGrey = CssColor.lightSlateGrey |> borderColorValue'
-        static member lightSteelBlue = CssColor.lightSteelBlue |> borderColorValue'
-        static member lightYellow = CssColor.lightYellow |> borderColorValue'
-        static member limeGreen = CssColor.limeGreen |> borderColorValue'
-        static member linen = CssColor.linen |> borderColorValue'
-        static member magenta = CssColor.magenta |> borderColorValue'
-        static member mediumAquamarine = CssColor.mediumAquamarine |> borderColorValue'
-        static member mediumBlue = CssColor.mediumBlue |> borderColorValue'
-        static member mediumOrchid = CssColor.mediumOrchid |> borderColorValue'
-        static member mediumPurple = CssColor.mediumPurple |> borderColorValue'
-        static member mediumSeaGreen = CssColor.mediumSeaGreen |> borderColorValue'
-        static member mediumSlateBlue = CssColor.mediumSlateBlue |> borderColorValue'
-        static member mediumSpringGreen = CssColor.mediumSpringGreen |> borderColorValue'
-        static member mediumTurquoise = CssColor.mediumTurquoise |> borderColorValue'
-        static member mediumVioletRed = CssColor.mediumVioletRed |> borderColorValue'
-        static member midnightBlue = CssColor.midnightBlue |> borderColorValue'
-        static member mintCream = CssColor.mintCream |> borderColorValue'
-        static member mistyRose = CssColor.mistyRose |> borderColorValue'
-        static member moccasin = CssColor.moccasin |> borderColorValue'
-        static member navajoWhite = CssColor.navajoWhite |> borderColorValue'
-        static member oldLace = CssColor.oldLace |> borderColorValue'
-        static member olivedrab = CssColor.olivedrab |> borderColorValue'
-        static member orangeRed = CssColor.orangeRed |> borderColorValue'
-        static member orchid = CssColor.orchid |> borderColorValue'
-        static member paleGoldenrod = CssColor.paleGoldenrod |> borderColorValue'
-        static member paleGreen = CssColor.paleGreen |> borderColorValue'
-        static member paleTurquoise = CssColor.paleTurquoise |> borderColorValue'
-        static member paleVioletred = CssColor.paleVioletred |> borderColorValue'
-        static member papayaWhip = CssColor.papayaWhip |> borderColorValue'
-        static member peachpuff = CssColor.peachpuff |> borderColorValue'
-        static member peru = CssColor.peru |> borderColorValue'
-        static member pink = CssColor.pink |> borderColorValue'
-        static member plum = CssColor.plum |> borderColorValue'
-        static member powderBlue = CssColor.powderBlue |> borderColorValue'
-        static member rosyBrown = CssColor.rosyBrown |> borderColorValue'
-        static member royalBlue = CssColor.royalBlue |> borderColorValue'
-        static member saddleBrown = CssColor.saddleBrown |> borderColorValue'
-        static member salmon = CssColor.salmon |> borderColorValue'
-        static member sandyBrown = CssColor.sandyBrown |> borderColorValue'
-        static member seaGreen = CssColor.seaGreen |> borderColorValue'
-        static member seaShell = CssColor.seaShell |> borderColorValue'
-        static member sienna = CssColor.sienna |> borderColorValue'
-        static member skyBlue = CssColor.skyBlue |> borderColorValue'
-        static member slateBlue = CssColor.slateBlue |> borderColorValue'
-        static member slateGray = CssColor.slateGray |> borderColorValue'
-        static member snow = CssColor.snow |> borderColorValue'
-        static member springGreen = CssColor.springGreen |> borderColorValue'
-        static member steelBlue = CssColor.steelBlue |> borderColorValue'
-        static member tan = CssColor.tan |> borderColorValue'
-        static member thistle = CssColor.thistle |> borderColorValue'
-        static member tomato = CssColor.tomato |> borderColorValue'
-        static member turquoise = CssColor.turquoise |> borderColorValue'
-        static member violet = CssColor.violet |> borderColorValue'
-        static member wheat = CssColor.wheat |> borderColorValue'
-        static member whiteSmoke = CssColor.whiteSmoke |> borderColorValue'
-        static member yellowGreen = CssColor.yellowGreen |> borderColorValue'
-        static member rebeccaPurple = CssColor.rebeccaPurple |> borderColorValue'
-        static member Rgb r g b = CssColor.Rgb(r, g, b) |> borderColorValue'
-        static member Rgba r g b a = CssColor.Rgba(r, g, b, a) |> borderColorValue'
-        static member Hex value = CssColor.Hex value |> borderColorValue'
-        static member Hsl h s l = CssColor.Hsl(h, s, l) |> borderColorValue'
-        static member Hsla h s l a  = CssColor.Hsla (h, s, l, a) |> borderColorValue'
-        static member transparent = CssColor.transparent |> borderColorValue'
-        static member currentColor = CssColor.currentColor |> borderColorValue'
+        static member black = Types.Color.black |> borderColorValue'
+        static member silver = Types.Color.silver |> borderColorValue'
+        static member gray = Types.Color.gray |> borderColorValue'
+        static member white = Types.Color.white |> borderColorValue'
+        static member maroon = Types.Color.maroon |> borderColorValue'
+        static member red = Types.Color.red |> borderColorValue'
+        static member purple = Types.Color.purple |> borderColorValue'
+        static member fuchsia = Types.Color.fuchsia |> borderColorValue'
+        static member green = Types.Color.green |> borderColorValue'
+        static member lime = Types.Color.lime |> borderColorValue'
+        static member olive = Types.Color.olive |> borderColorValue'
+        static member yellow = Types.Color.yellow |> borderColorValue'
+        static member navy = Types.Color.navy |> borderColorValue'
+        static member blue = Types.Color.blue |> borderColorValue'
+        static member teal = Types.Color.teal |> borderColorValue'
+        static member aqua = Types.Color.aqua |> borderColorValue'
+        static member orange = Types.Color.orange |> borderColorValue'
+        static member aliceBlue = Types.Color.aliceBlue |> borderColorValue'
+        static member antiqueWhite = Types.Color.antiqueWhite |> borderColorValue'
+        static member aquaMarine = Types.Color.aquaMarine |> borderColorValue'
+        static member azure = Types.Color.azure |> borderColorValue'
+        static member beige = Types.Color.beige |> borderColorValue'
+        static member bisque = Types.Color.bisque |> borderColorValue'
+        static member blanchedAlmond = Types.Color.blanchedAlmond |> borderColorValue'
+        static member blueViolet = Types.Color.blueViolet |> borderColorValue'
+        static member brown = Types.Color.brown |> borderColorValue'
+        static member burlywood = Types.Color.burlywood |> borderColorValue'
+        static member cadetBlue = Types.Color.cadetBlue |> borderColorValue'
+        static member chartreuse = Types.Color.chartreuse |> borderColorValue'
+        static member chocolate = Types.Color.chocolate |> borderColorValue'
+        static member coral = Types.Color.coral |> borderColorValue'
+        static member cornflowerBlue = Types.Color.cornflowerBlue |> borderColorValue'
+        static member cornsilk = Types.Color.cornsilk |> borderColorValue'
+        static member crimson = Types.Color.crimson |> borderColorValue'
+        static member cyan = Types.Color.cyan |> borderColorValue'
+        static member darkBlue = Types.Color.darkBlue |> borderColorValue'
+        static member darkCyan = Types.Color.darkCyan |> borderColorValue'
+        static member darkGoldenrod = Types.Color.darkGoldenrod |> borderColorValue'
+        static member darkGray = Types.Color.darkGray |> borderColorValue'
+        static member darkGreen = Types.Color.darkGreen |> borderColorValue'
+        static member darkKhaki = Types.Color.darkKhaki |> borderColorValue'
+        static member darkMagenta = Types.Color.darkMagenta |> borderColorValue'
+        static member darkOliveGreen = Types.Color.darkOliveGreen |> borderColorValue'
+        static member darkOrange = Types.Color.darkOrange |> borderColorValue'
+        static member darkOrchid = Types.Color.darkOrchid |> borderColorValue'
+        static member darkRed = Types.Color.darkRed |> borderColorValue'
+        static member darkSalmon = Types.Color.darkSalmon |> borderColorValue'
+        static member darkSeaGreen = Types.Color.darkSeaGreen |> borderColorValue'
+        static member darkSlateBlue = Types.Color.darkSlateBlue |> borderColorValue'
+        static member darkSlateGray = Types.Color.darkSlateGray |> borderColorValue'
+        static member darkTurquoise = Types.Color.darkTurquoise |> borderColorValue'
+        static member darkViolet = Types.Color.darkViolet |> borderColorValue'
+        static member deepPink = Types.Color.deepPink |> borderColorValue'
+        static member deepSkyBlue = Types.Color.deepSkyBlue |> borderColorValue'
+        static member dimGrey = Types.Color.dimGrey |> borderColorValue'
+        static member dodgerBlue = Types.Color.dodgerBlue |> borderColorValue'
+        static member fireBrick = Types.Color.fireBrick |> borderColorValue'
+        static member floralWhite = Types.Color.floralWhite |> borderColorValue'
+        static member forestGreen = Types.Color.forestGreen |> borderColorValue'
+        static member gainsboro = Types.Color.gainsboro |> borderColorValue'
+        static member ghostWhite = Types.Color.ghostWhite |> borderColorValue'
+        static member gold = Types.Color.gold |> borderColorValue'
+        static member goldenrod = Types.Color.goldenrod |> borderColorValue'
+        static member greenYellow = Types.Color.greenYellow |> borderColorValue'
+        static member grey = Types.Color.grey |> borderColorValue'
+        static member honeydew = Types.Color.honeydew |> borderColorValue'
+        static member hotPink = Types.Color.hotPink |> borderColorValue'
+        static member indianRed = Types.Color.indianRed |> borderColorValue'
+        static member indigo = Types.Color.indigo |> borderColorValue'
+        static member ivory = Types.Color.ivory |> borderColorValue'
+        static member khaki = Types.Color.khaki |> borderColorValue'
+        static member lavender = Types.Color.lavender |> borderColorValue'
+        static member lavenderBlush = Types.Color.lavenderBlush |> borderColorValue'
+        static member lawnGreen = Types.Color.lawnGreen |> borderColorValue'
+        static member lemonChiffon = Types.Color.lemonChiffon |> borderColorValue'
+        static member lightBlue = Types.Color.lightBlue |> borderColorValue'
+        static member lightCoral = Types.Color.lightCoral |> borderColorValue'
+        static member lightCyan = Types.Color.lightCyan |> borderColorValue'
+        static member lightGoldenrodYellow = Types.Color.lightGoldenrodYellow |> borderColorValue'
+        static member lightGray = Types.Color.lightGray |> borderColorValue'
+        static member lightGreen = Types.Color.lightGreen |> borderColorValue'
+        static member lightGrey = Types.Color.lightGrey |> borderColorValue'
+        static member lightPink = Types.Color.lightPink |> borderColorValue'
+        static member lightSalmon = Types.Color.lightSalmon |> borderColorValue'
+        static member lightSeaGreen = Types.Color.lightSeaGreen |> borderColorValue'
+        static member lightSkyBlue = Types.Color.lightSkyBlue |> borderColorValue'
+        static member lightSlateGrey = Types.Color.lightSlateGrey |> borderColorValue'
+        static member lightSteelBlue = Types.Color.lightSteelBlue |> borderColorValue'
+        static member lightYellow = Types.Color.lightYellow |> borderColorValue'
+        static member limeGreen = Types.Color.limeGreen |> borderColorValue'
+        static member linen = Types.Color.linen |> borderColorValue'
+        static member magenta = Types.Color.magenta |> borderColorValue'
+        static member mediumAquamarine = Types.Color.mediumAquamarine |> borderColorValue'
+        static member mediumBlue = Types.Color.mediumBlue |> borderColorValue'
+        static member mediumOrchid = Types.Color.mediumOrchid |> borderColorValue'
+        static member mediumPurple = Types.Color.mediumPurple |> borderColorValue'
+        static member mediumSeaGreen = Types.Color.mediumSeaGreen |> borderColorValue'
+        static member mediumSlateBlue = Types.Color.mediumSlateBlue |> borderColorValue'
+        static member mediumSpringGreen = Types.Color.mediumSpringGreen |> borderColorValue'
+        static member mediumTurquoise = Types.Color.mediumTurquoise |> borderColorValue'
+        static member mediumVioletRed = Types.Color.mediumVioletRed |> borderColorValue'
+        static member midnightBlue = Types.Color.midnightBlue |> borderColorValue'
+        static member mintCream = Types.Color.mintCream |> borderColorValue'
+        static member mistyRose = Types.Color.mistyRose |> borderColorValue'
+        static member moccasin = Types.Color.moccasin |> borderColorValue'
+        static member navajoWhite = Types.Color.navajoWhite |> borderColorValue'
+        static member oldLace = Types.Color.oldLace |> borderColorValue'
+        static member olivedrab = Types.Color.olivedrab |> borderColorValue'
+        static member orangeRed = Types.Color.orangeRed |> borderColorValue'
+        static member orchid = Types.Color.orchid |> borderColorValue'
+        static member paleGoldenrod = Types.Color.paleGoldenrod |> borderColorValue'
+        static member paleGreen = Types.Color.paleGreen |> borderColorValue'
+        static member paleTurquoise = Types.Color.paleTurquoise |> borderColorValue'
+        static member paleVioletred = Types.Color.paleVioletred |> borderColorValue'
+        static member papayaWhip = Types.Color.papayaWhip |> borderColorValue'
+        static member peachpuff = Types.Color.peachpuff |> borderColorValue'
+        static member peru = Types.Color.peru |> borderColorValue'
+        static member pink = Types.Color.pink |> borderColorValue'
+        static member plum = Types.Color.plum |> borderColorValue'
+        static member powderBlue = Types.Color.powderBlue |> borderColorValue'
+        static member rosyBrown = Types.Color.rosyBrown |> borderColorValue'
+        static member royalBlue = Types.Color.royalBlue |> borderColorValue'
+        static member saddleBrown = Types.Color.saddleBrown |> borderColorValue'
+        static member salmon = Types.Color.salmon |> borderColorValue'
+        static member sandyBrown = Types.Color.sandyBrown |> borderColorValue'
+        static member seaGreen = Types.Color.seaGreen |> borderColorValue'
+        static member seaShell = Types.Color.seaShell |> borderColorValue'
+        static member sienna = Types.Color.sienna |> borderColorValue'
+        static member skyBlue = Types.Color.skyBlue |> borderColorValue'
+        static member slateBlue = Types.Color.slateBlue |> borderColorValue'
+        static member slateGray = Types.Color.slateGray |> borderColorValue'
+        static member snow = Types.Color.snow |> borderColorValue'
+        static member springGreen = Types.Color.springGreen |> borderColorValue'
+        static member steelBlue = Types.Color.steelBlue |> borderColorValue'
+        static member tan = Types.Color.tan |> borderColorValue'
+        static member thistle = Types.Color.thistle |> borderColorValue'
+        static member tomato = Types.Color.tomato |> borderColorValue'
+        static member turquoise = Types.Color.turquoise |> borderColorValue'
+        static member violet = Types.Color.violet |> borderColorValue'
+        static member wheat = Types.Color.wheat |> borderColorValue'
+        static member whiteSmoke = Types.Color.whiteSmoke |> borderColorValue'
+        static member yellowGreen = Types.Color.yellowGreen |> borderColorValue'
+        static member rebeccaPurple = Types.Color.rebeccaPurple |> borderColorValue'
+        static member Rgb r g b = Types.Color.Rgb(r, g, b) |> borderColorValue'
+        static member Rgba r g b a = Types.Color.Rgba(r, g, b, a) |> borderColorValue'
+        static member Hex value = Types.Color.Hex value |> borderColorValue'
+        static member Hsl h s l = Types.Color.Hsl(h, s, l) |> borderColorValue'
+        static member Hsla h s l a  = Types.Color.Hsla (h, s, l, a) |> borderColorValue'
+        static member transparent = Types.Color.transparent |> borderColorValue'
+        static member currentColor = Types.Color.currentColor |> borderColorValue'
 
-        static member Inherit = Inherit |> borderColorValue'
-        static member Initial = Initial |> borderColorValue'
-        static member Unset = Unset |> borderColorValue'
+        static member Inherit = Types.Inherit |> borderColorValue'
+        static member Initial = Types.Initial |> borderColorValue'
+        static member Unset = Types.Unset |> borderColorValue'
 
     /// <summary>Specifies color of border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> CssColor </c>
+    ///     - <c> Types.Color </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderColor' (color: IBorderColor) = BorderColor.Value(color)
+    let BorderColor' (color: Types.IBorderColor) = BorderColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color
-    let private topColorValue value = PropertyValue.cssValue Property.BorderTopColor value
+    let private topColorValue value = Types.cssValue Types.Property.BorderTopColor value
     let private topColorValue' value =
         value
         |> borderColorToString
         |> topColorValue
     type BorderTopColor =
-        static member Value (color: IBorderColor) = color |> topColorValue'
-        static member black = CssColor.black |> topColorValue'
-        static member silver = CssColor.silver |> topColorValue'
-        static member gray = CssColor.gray |> topColorValue'
-        static member white = CssColor.white |> topColorValue'
-        static member maroon = CssColor.maroon |> topColorValue'
-        static member red = CssColor.red |> topColorValue'
-        static member purple = CssColor.purple |> topColorValue'
-        static member fuchsia = CssColor.fuchsia |> topColorValue'
-        static member green = CssColor.green |> topColorValue'
-        static member lime = CssColor.lime |> topColorValue'
-        static member olive = CssColor.olive |> topColorValue'
-        static member yellow = CssColor.yellow |> topColorValue'
-        static member navy = CssColor.navy |> topColorValue'
-        static member blue = CssColor.blue |> topColorValue'
-        static member teal = CssColor.teal |> topColorValue'
-        static member aqua = CssColor.aqua |> topColorValue'
-        static member orange = CssColor.orange |> topColorValue'
-        static member aliceBlue = CssColor.aliceBlue |> topColorValue'
-        static member antiqueWhite = CssColor.antiqueWhite |> topColorValue'
-        static member aquaMarine = CssColor.aquaMarine |> topColorValue'
-        static member azure = CssColor.azure |> topColorValue'
-        static member beige = CssColor.beige |> topColorValue'
-        static member bisque = CssColor.bisque |> topColorValue'
-        static member blanchedAlmond = CssColor.blanchedAlmond |> topColorValue'
-        static member blueViolet = CssColor.blueViolet |> topColorValue'
-        static member brown = CssColor.brown |> topColorValue'
-        static member burlywood = CssColor.burlywood |> topColorValue'
-        static member cadetBlue = CssColor.cadetBlue |> topColorValue'
-        static member chartreuse = CssColor.chartreuse |> topColorValue'
-        static member chocolate = CssColor.chocolate |> topColorValue'
-        static member coral = CssColor.coral |> topColorValue'
-        static member cornflowerBlue = CssColor.cornflowerBlue |> topColorValue'
-        static member cornsilk = CssColor.cornsilk |> topColorValue'
-        static member crimson = CssColor.crimson |> topColorValue'
-        static member cyan = CssColor.cyan |> topColorValue'
-        static member darkBlue = CssColor.darkBlue |> topColorValue'
-        static member darkCyan = CssColor.darkCyan |> topColorValue'
-        static member darkGoldenrod = CssColor.darkGoldenrod |> topColorValue'
-        static member darkGray = CssColor.darkGray |> topColorValue'
-        static member darkGreen = CssColor.darkGreen |> topColorValue'
-        static member darkKhaki = CssColor.darkKhaki |> topColorValue'
-        static member darkMagenta = CssColor.darkMagenta |> topColorValue'
-        static member darkOliveGreen = CssColor.darkOliveGreen |> topColorValue'
-        static member darkOrange = CssColor.darkOrange |> topColorValue'
-        static member darkOrchid = CssColor.darkOrchid |> topColorValue'
-        static member darkRed = CssColor.darkRed |> topColorValue'
-        static member darkSalmon = CssColor.darkSalmon |> topColorValue'
-        static member darkSeaGreen = CssColor.darkSeaGreen |> topColorValue'
-        static member darkSlateBlue = CssColor.darkSlateBlue |> topColorValue'
-        static member darkSlateGray = CssColor.darkSlateGray |> topColorValue'
-        static member darkTurquoise = CssColor.darkTurquoise |> topColorValue'
-        static member darkViolet = CssColor.darkViolet |> topColorValue'
-        static member deepPink = CssColor.deepPink |> topColorValue'
-        static member deepSkyBlue = CssColor.deepSkyBlue |> topColorValue'
-        static member dimGrey = CssColor.dimGrey |> topColorValue'
-        static member dodgerBlue = CssColor.dodgerBlue |> topColorValue'
-        static member fireBrick = CssColor.fireBrick |> topColorValue'
-        static member floralWhite = CssColor.floralWhite |> topColorValue'
-        static member forestGreen = CssColor.forestGreen |> topColorValue'
-        static member gainsboro = CssColor.gainsboro |> topColorValue'
-        static member ghostWhite = CssColor.ghostWhite |> topColorValue'
-        static member gold = CssColor.gold |> topColorValue'
-        static member goldenrod = CssColor.goldenrod |> topColorValue'
-        static member greenYellow = CssColor.greenYellow |> topColorValue'
-        static member grey = CssColor.grey |> topColorValue'
-        static member honeydew = CssColor.honeydew |> topColorValue'
-        static member hotPink = CssColor.hotPink |> topColorValue'
-        static member indianRed = CssColor.indianRed |> topColorValue'
-        static member indigo = CssColor.indigo |> topColorValue'
-        static member ivory = CssColor.ivory |> topColorValue'
-        static member khaki = CssColor.khaki |> topColorValue'
-        static member lavender = CssColor.lavender |> topColorValue'
-        static member lavenderBlush = CssColor.lavenderBlush |> topColorValue'
-        static member lawnGreen = CssColor.lawnGreen |> topColorValue'
-        static member lemonChiffon = CssColor.lemonChiffon |> topColorValue'
-        static member lightBlue = CssColor.lightBlue |> topColorValue'
-        static member lightCoral = CssColor.lightCoral |> topColorValue'
-        static member lightCyan = CssColor.lightCyan |> topColorValue'
-        static member lightGoldenrodYellow = CssColor.lightGoldenrodYellow |> topColorValue'
-        static member lightGray = CssColor.lightGray |> topColorValue'
-        static member lightGreen = CssColor.lightGreen |> topColorValue'
-        static member lightGrey = CssColor.lightGrey |> topColorValue'
-        static member lightPink = CssColor.lightPink |> topColorValue'
-        static member lightSalmon = CssColor.lightSalmon |> topColorValue'
-        static member lightSeaGreen = CssColor.lightSeaGreen |> topColorValue'
-        static member lightSkyBlue = CssColor.lightSkyBlue |> topColorValue'
-        static member lightSlateGrey = CssColor.lightSlateGrey |> topColorValue'
-        static member lightSteelBlue = CssColor.lightSteelBlue |> topColorValue'
-        static member lightYellow = CssColor.lightYellow |> topColorValue'
-        static member limeGreen = CssColor.limeGreen |> topColorValue'
-        static member linen = CssColor.linen |> topColorValue'
-        static member magenta = CssColor.magenta |> topColorValue'
-        static member mediumAquamarine = CssColor.mediumAquamarine |> topColorValue'
-        static member mediumBlue = CssColor.mediumBlue |> topColorValue'
-        static member mediumOrchid = CssColor.mediumOrchid |> topColorValue'
-        static member mediumPurple = CssColor.mediumPurple |> topColorValue'
-        static member mediumSeaGreen = CssColor.mediumSeaGreen |> topColorValue'
-        static member mediumSlateBlue = CssColor.mediumSlateBlue |> topColorValue'
-        static member mediumSpringGreen = CssColor.mediumSpringGreen |> topColorValue'
-        static member mediumTurquoise = CssColor.mediumTurquoise |> topColorValue'
-        static member mediumVioletRed = CssColor.mediumVioletRed |> topColorValue'
-        static member midnightBlue = CssColor.midnightBlue |> topColorValue'
-        static member mintCream = CssColor.mintCream |> topColorValue'
-        static member mistyRose = CssColor.mistyRose |> topColorValue'
-        static member moccasin = CssColor.moccasin |> topColorValue'
-        static member navajoWhite = CssColor.navajoWhite |> topColorValue'
-        static member oldLace = CssColor.oldLace |> topColorValue'
-        static member olivedrab = CssColor.olivedrab |> topColorValue'
-        static member orangeRed = CssColor.orangeRed |> topColorValue'
-        static member orchid = CssColor.orchid |> topColorValue'
-        static member paleGoldenrod = CssColor.paleGoldenrod |> topColorValue'
-        static member paleGreen = CssColor.paleGreen |> topColorValue'
-        static member paleTurquoise = CssColor.paleTurquoise |> topColorValue'
-        static member paleVioletred = CssColor.paleVioletred |> topColorValue'
-        static member papayaWhip = CssColor.papayaWhip |> topColorValue'
-        static member peachpuff = CssColor.peachpuff |> topColorValue'
-        static member peru = CssColor.peru |> topColorValue'
-        static member pink = CssColor.pink |> topColorValue'
-        static member plum = CssColor.plum |> topColorValue'
-        static member powderBlue = CssColor.powderBlue |> topColorValue'
-        static member rosyBrown = CssColor.rosyBrown |> topColorValue'
-        static member royalBlue = CssColor.royalBlue |> topColorValue'
-        static member saddleBrown = CssColor.saddleBrown |> topColorValue'
-        static member salmon = CssColor.salmon |> topColorValue'
-        static member sandyBrown = CssColor.sandyBrown |> topColorValue'
-        static member seaGreen = CssColor.seaGreen |> topColorValue'
-        static member seaShell = CssColor.seaShell |> topColorValue'
-        static member sienna = CssColor.sienna |> topColorValue'
-        static member skyBlue = CssColor.skyBlue |> topColorValue'
-        static member slateBlue = CssColor.slateBlue |> topColorValue'
-        static member slateGray = CssColor.slateGray |> topColorValue'
-        static member snow = CssColor.snow |> topColorValue'
-        static member springGreen = CssColor.springGreen |> topColorValue'
-        static member steelBlue = CssColor.steelBlue |> topColorValue'
-        static member tan = CssColor.tan |> topColorValue'
-        static member thistle = CssColor.thistle |> topColorValue'
-        static member tomato = CssColor.tomato |> topColorValue'
-        static member turquoise = CssColor.turquoise |> topColorValue'
-        static member violet = CssColor.violet |> topColorValue'
-        static member wheat = CssColor.wheat |> topColorValue'
-        static member whiteSmoke = CssColor.whiteSmoke |> topColorValue'
-        static member yellowGreen = CssColor.yellowGreen |> topColorValue'
-        static member rebeccaPurple = CssColor.rebeccaPurple |> topColorValue'
-        static member Rgb r g b = CssColor.Rgb(r, g, b) |> topColorValue'
-        static member Rgba r g b a = CssColor.Rgba(r, g, b, a) |> topColorValue'
-        static member Hex value = CssColor.Hex value |> topColorValue'
-        static member Hsl h s l = CssColor.Hsl(h, s, l) |> topColorValue'
-        static member Hsla h s l a  = CssColor.Hsla (h, s, l, a) |> topColorValue'
-        static member transparent = CssColor.transparent |> topColorValue'
-        static member currentColor = CssColor.currentColor |> topColorValue'
+        static member Value (color: Types.IBorderColor) = color |> topColorValue'
+        static member black = Types.Color.black |> topColorValue'
+        static member silver = Types.Color.silver |> topColorValue'
+        static member gray = Types.Color.gray |> topColorValue'
+        static member white = Types.Color.white |> topColorValue'
+        static member maroon = Types.Color.maroon |> topColorValue'
+        static member red = Types.Color.red |> topColorValue'
+        static member purple = Types.Color.purple |> topColorValue'
+        static member fuchsia = Types.Color.fuchsia |> topColorValue'
+        static member green = Types.Color.green |> topColorValue'
+        static member lime = Types.Color.lime |> topColorValue'
+        static member olive = Types.Color.olive |> topColorValue'
+        static member yellow = Types.Color.yellow |> topColorValue'
+        static member navy = Types.Color.navy |> topColorValue'
+        static member blue = Types.Color.blue |> topColorValue'
+        static member teal = Types.Color.teal |> topColorValue'
+        static member aqua = Types.Color.aqua |> topColorValue'
+        static member orange = Types.Color.orange |> topColorValue'
+        static member aliceBlue = Types.Color.aliceBlue |> topColorValue'
+        static member antiqueWhite = Types.Color.antiqueWhite |> topColorValue'
+        static member aquaMarine = Types.Color.aquaMarine |> topColorValue'
+        static member azure = Types.Color.azure |> topColorValue'
+        static member beige = Types.Color.beige |> topColorValue'
+        static member bisque = Types.Color.bisque |> topColorValue'
+        static member blanchedAlmond = Types.Color.blanchedAlmond |> topColorValue'
+        static member blueViolet = Types.Color.blueViolet |> topColorValue'
+        static member brown = Types.Color.brown |> topColorValue'
+        static member burlywood = Types.Color.burlywood |> topColorValue'
+        static member cadetBlue = Types.Color.cadetBlue |> topColorValue'
+        static member chartreuse = Types.Color.chartreuse |> topColorValue'
+        static member chocolate = Types.Color.chocolate |> topColorValue'
+        static member coral = Types.Color.coral |> topColorValue'
+        static member cornflowerBlue = Types.Color.cornflowerBlue |> topColorValue'
+        static member cornsilk = Types.Color.cornsilk |> topColorValue'
+        static member crimson = Types.Color.crimson |> topColorValue'
+        static member cyan = Types.Color.cyan |> topColorValue'
+        static member darkBlue = Types.Color.darkBlue |> topColorValue'
+        static member darkCyan = Types.Color.darkCyan |> topColorValue'
+        static member darkGoldenrod = Types.Color.darkGoldenrod |> topColorValue'
+        static member darkGray = Types.Color.darkGray |> topColorValue'
+        static member darkGreen = Types.Color.darkGreen |> topColorValue'
+        static member darkKhaki = Types.Color.darkKhaki |> topColorValue'
+        static member darkMagenta = Types.Color.darkMagenta |> topColorValue'
+        static member darkOliveGreen = Types.Color.darkOliveGreen |> topColorValue'
+        static member darkOrange = Types.Color.darkOrange |> topColorValue'
+        static member darkOrchid = Types.Color.darkOrchid |> topColorValue'
+        static member darkRed = Types.Color.darkRed |> topColorValue'
+        static member darkSalmon = Types.Color.darkSalmon |> topColorValue'
+        static member darkSeaGreen = Types.Color.darkSeaGreen |> topColorValue'
+        static member darkSlateBlue = Types.Color.darkSlateBlue |> topColorValue'
+        static member darkSlateGray = Types.Color.darkSlateGray |> topColorValue'
+        static member darkTurquoise = Types.Color.darkTurquoise |> topColorValue'
+        static member darkViolet = Types.Color.darkViolet |> topColorValue'
+        static member deepPink = Types.Color.deepPink |> topColorValue'
+        static member deepSkyBlue = Types.Color.deepSkyBlue |> topColorValue'
+        static member dimGrey = Types.Color.dimGrey |> topColorValue'
+        static member dodgerBlue = Types.Color.dodgerBlue |> topColorValue'
+        static member fireBrick = Types.Color.fireBrick |> topColorValue'
+        static member floralWhite = Types.Color.floralWhite |> topColorValue'
+        static member forestGreen = Types.Color.forestGreen |> topColorValue'
+        static member gainsboro = Types.Color.gainsboro |> topColorValue'
+        static member ghostWhite = Types.Color.ghostWhite |> topColorValue'
+        static member gold = Types.Color.gold |> topColorValue'
+        static member goldenrod = Types.Color.goldenrod |> topColorValue'
+        static member greenYellow = Types.Color.greenYellow |> topColorValue'
+        static member grey = Types.Color.grey |> topColorValue'
+        static member honeydew = Types.Color.honeydew |> topColorValue'
+        static member hotPink = Types.Color.hotPink |> topColorValue'
+        static member indianRed = Types.Color.indianRed |> topColorValue'
+        static member indigo = Types.Color.indigo |> topColorValue'
+        static member ivory = Types.Color.ivory |> topColorValue'
+        static member khaki = Types.Color.khaki |> topColorValue'
+        static member lavender = Types.Color.lavender |> topColorValue'
+        static member lavenderBlush = Types.Color.lavenderBlush |> topColorValue'
+        static member lawnGreen = Types.Color.lawnGreen |> topColorValue'
+        static member lemonChiffon = Types.Color.lemonChiffon |> topColorValue'
+        static member lightBlue = Types.Color.lightBlue |> topColorValue'
+        static member lightCoral = Types.Color.lightCoral |> topColorValue'
+        static member lightCyan = Types.Color.lightCyan |> topColorValue'
+        static member lightGoldenrodYellow = Types.Color.lightGoldenrodYellow |> topColorValue'
+        static member lightGray = Types.Color.lightGray |> topColorValue'
+        static member lightGreen = Types.Color.lightGreen |> topColorValue'
+        static member lightGrey = Types.Color.lightGrey |> topColorValue'
+        static member lightPink = Types.Color.lightPink |> topColorValue'
+        static member lightSalmon = Types.Color.lightSalmon |> topColorValue'
+        static member lightSeaGreen = Types.Color.lightSeaGreen |> topColorValue'
+        static member lightSkyBlue = Types.Color.lightSkyBlue |> topColorValue'
+        static member lightSlateGrey = Types.Color.lightSlateGrey |> topColorValue'
+        static member lightSteelBlue = Types.Color.lightSteelBlue |> topColorValue'
+        static member lightYellow = Types.Color.lightYellow |> topColorValue'
+        static member limeGreen = Types.Color.limeGreen |> topColorValue'
+        static member linen = Types.Color.linen |> topColorValue'
+        static member magenta = Types.Color.magenta |> topColorValue'
+        static member mediumAquamarine = Types.Color.mediumAquamarine |> topColorValue'
+        static member mediumBlue = Types.Color.mediumBlue |> topColorValue'
+        static member mediumOrchid = Types.Color.mediumOrchid |> topColorValue'
+        static member mediumPurple = Types.Color.mediumPurple |> topColorValue'
+        static member mediumSeaGreen = Types.Color.mediumSeaGreen |> topColorValue'
+        static member mediumSlateBlue = Types.Color.mediumSlateBlue |> topColorValue'
+        static member mediumSpringGreen = Types.Color.mediumSpringGreen |> topColorValue'
+        static member mediumTurquoise = Types.Color.mediumTurquoise |> topColorValue'
+        static member mediumVioletRed = Types.Color.mediumVioletRed |> topColorValue'
+        static member midnightBlue = Types.Color.midnightBlue |> topColorValue'
+        static member mintCream = Types.Color.mintCream |> topColorValue'
+        static member mistyRose = Types.Color.mistyRose |> topColorValue'
+        static member moccasin = Types.Color.moccasin |> topColorValue'
+        static member navajoWhite = Types.Color.navajoWhite |> topColorValue'
+        static member oldLace = Types.Color.oldLace |> topColorValue'
+        static member olivedrab = Types.Color.olivedrab |> topColorValue'
+        static member orangeRed = Types.Color.orangeRed |> topColorValue'
+        static member orchid = Types.Color.orchid |> topColorValue'
+        static member paleGoldenrod = Types.Color.paleGoldenrod |> topColorValue'
+        static member paleGreen = Types.Color.paleGreen |> topColorValue'
+        static member paleTurquoise = Types.Color.paleTurquoise |> topColorValue'
+        static member paleVioletred = Types.Color.paleVioletred |> topColorValue'
+        static member papayaWhip = Types.Color.papayaWhip |> topColorValue'
+        static member peachpuff = Types.Color.peachpuff |> topColorValue'
+        static member peru = Types.Color.peru |> topColorValue'
+        static member pink = Types.Color.pink |> topColorValue'
+        static member plum = Types.Color.plum |> topColorValue'
+        static member powderBlue = Types.Color.powderBlue |> topColorValue'
+        static member rosyBrown = Types.Color.rosyBrown |> topColorValue'
+        static member royalBlue = Types.Color.royalBlue |> topColorValue'
+        static member saddleBrown = Types.Color.saddleBrown |> topColorValue'
+        static member salmon = Types.Color.salmon |> topColorValue'
+        static member sandyBrown = Types.Color.sandyBrown |> topColorValue'
+        static member seaGreen = Types.Color.seaGreen |> topColorValue'
+        static member seaShell = Types.Color.seaShell |> topColorValue'
+        static member sienna = Types.Color.sienna |> topColorValue'
+        static member skyBlue = Types.Color.skyBlue |> topColorValue'
+        static member slateBlue = Types.Color.slateBlue |> topColorValue'
+        static member slateGray = Types.Color.slateGray |> topColorValue'
+        static member snow = Types.Color.snow |> topColorValue'
+        static member springGreen = Types.Color.springGreen |> topColorValue'
+        static member steelBlue = Types.Color.steelBlue |> topColorValue'
+        static member tan = Types.Color.tan |> topColorValue'
+        static member thistle = Types.Color.thistle |> topColorValue'
+        static member tomato = Types.Color.tomato |> topColorValue'
+        static member turquoise = Types.Color.turquoise |> topColorValue'
+        static member violet = Types.Color.violet |> topColorValue'
+        static member wheat = Types.Color.wheat |> topColorValue'
+        static member whiteSmoke = Types.Color.whiteSmoke |> topColorValue'
+        static member yellowGreen = Types.Color.yellowGreen |> topColorValue'
+        static member rebeccaPurple = Types.Color.rebeccaPurple |> topColorValue'
+        static member Rgb r g b = Types.Color.Rgb(r, g, b) |> topColorValue'
+        static member Rgba r g b a = Types.Color.Rgba(r, g, b, a) |> topColorValue'
+        static member Hex value = Types.Color.Hex value |> topColorValue'
+        static member Hsl h s l = Types.Color.Hsl(h, s, l) |> topColorValue'
+        static member Hsla h s l a  = Types.Color.Hsla (h, s, l, a) |> topColorValue'
+        static member transparent = Types.Color.transparent |> topColorValue'
+        static member currentColor = Types.Color.currentColor |> topColorValue'
 
-        static member Inherit = Inherit |> topColorValue'
-        static member Initial = Initial |> topColorValue'
-        static member Unset = Unset |> topColorValue'
+        static member Inherit = Types.Inherit |> topColorValue'
+        static member Initial = Types.Initial |> topColorValue'
+        static member Unset = Types.Unset |> topColorValue'
 
     /// <summary>Specifies color of top border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> CssColor </c>
+    ///     - <c> Types.Color </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopColor' (color: IBorderColor) = BorderTopColor.Value(color)
+    let BorderTopColor' (color: Types.IBorderColor) = BorderTopColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
-    let private rightColorValue value = PropertyValue.cssValue Property.BorderRightColor value
+    let private rightColorValue value = Types.cssValue Types.Property.BorderRightColor value
     let private rightColorValue' value =
         value
         |> borderColorToString
         |> rightColorValue
     type BorderRightColor =
-        static member Value (color: IBorderColor) = color |> rightColorValue'
-        static member black = CssColor.black |> rightColorValue'
-        static member silver = CssColor.silver |> rightColorValue'
-        static member gray = CssColor.gray |> rightColorValue'
-        static member white = CssColor.white |> rightColorValue'
-        static member maroon = CssColor.maroon |> rightColorValue'
-        static member red = CssColor.red |> rightColorValue'
-        static member purple = CssColor.purple |> rightColorValue'
-        static member fuchsia = CssColor.fuchsia |> rightColorValue'
-        static member green = CssColor.green |> rightColorValue'
-        static member lime = CssColor.lime |> rightColorValue'
-        static member olive = CssColor.olive |> rightColorValue'
-        static member yellow = CssColor.yellow |> rightColorValue'
-        static member navy = CssColor.navy |> rightColorValue'
-        static member blue = CssColor.blue |> rightColorValue'
-        static member teal = CssColor.teal |> rightColorValue'
-        static member aqua = CssColor.aqua |> rightColorValue'
-        static member orange = CssColor.orange |> rightColorValue'
-        static member aliceBlue = CssColor.aliceBlue |> rightColorValue'
-        static member antiqueWhite = CssColor.antiqueWhite |> rightColorValue'
-        static member aquaMarine = CssColor.aquaMarine |> rightColorValue'
-        static member azure = CssColor.azure |> rightColorValue'
-        static member beige = CssColor.beige |> rightColorValue'
-        static member bisque = CssColor.bisque |> rightColorValue'
-        static member blanchedAlmond = CssColor.blanchedAlmond |> rightColorValue'
-        static member blueViolet = CssColor.blueViolet |> rightColorValue'
-        static member brown = CssColor.brown |> rightColorValue'
-        static member burlywood = CssColor.burlywood |> rightColorValue'
-        static member cadetBlue = CssColor.cadetBlue |> rightColorValue'
-        static member chartreuse = CssColor.chartreuse |> rightColorValue'
-        static member chocolate = CssColor.chocolate |> rightColorValue'
-        static member coral = CssColor.coral |> rightColorValue'
-        static member cornflowerBlue = CssColor.cornflowerBlue |> rightColorValue'
-        static member cornsilk = CssColor.cornsilk |> rightColorValue'
-        static member crimson = CssColor.crimson |> rightColorValue'
-        static member cyan = CssColor.cyan |> rightColorValue'
-        static member darkBlue = CssColor.darkBlue |> rightColorValue'
-        static member darkCyan = CssColor.darkCyan |> rightColorValue'
-        static member darkGoldenrod = CssColor.darkGoldenrod |> rightColorValue'
-        static member darkGray = CssColor.darkGray |> rightColorValue'
-        static member darkGreen = CssColor.darkGreen |> rightColorValue'
-        static member darkKhaki = CssColor.darkKhaki |> rightColorValue'
-        static member darkMagenta = CssColor.darkMagenta |> rightColorValue'
-        static member darkOliveGreen = CssColor.darkOliveGreen |> rightColorValue'
-        static member darkOrange = CssColor.darkOrange |> rightColorValue'
-        static member darkOrchid = CssColor.darkOrchid |> rightColorValue'
-        static member darkRed = CssColor.darkRed |> rightColorValue'
-        static member darkSalmon = CssColor.darkSalmon |> rightColorValue'
-        static member darkSeaGreen = CssColor.darkSeaGreen |> rightColorValue'
-        static member darkSlateBlue = CssColor.darkSlateBlue |> rightColorValue'
-        static member darkSlateGray = CssColor.darkSlateGray |> rightColorValue'
-        static member darkTurquoise = CssColor.darkTurquoise |> rightColorValue'
-        static member darkViolet = CssColor.darkViolet |> rightColorValue'
-        static member deepPink = CssColor.deepPink |> rightColorValue'
-        static member deepSkyBlue = CssColor.deepSkyBlue |> rightColorValue'
-        static member dimGrey = CssColor.dimGrey |> rightColorValue'
-        static member dodgerBlue = CssColor.dodgerBlue |> rightColorValue'
-        static member fireBrick = CssColor.fireBrick |> rightColorValue'
-        static member floralWhite = CssColor.floralWhite |> rightColorValue'
-        static member forestGreen = CssColor.forestGreen |> rightColorValue'
-        static member gainsboro = CssColor.gainsboro |> rightColorValue'
-        static member ghostWhite = CssColor.ghostWhite |> rightColorValue'
-        static member gold = CssColor.gold |> rightColorValue'
-        static member goldenrod = CssColor.goldenrod |> rightColorValue'
-        static member greenYellow = CssColor.greenYellow |> rightColorValue'
-        static member grey = CssColor.grey |> rightColorValue'
-        static member honeydew = CssColor.honeydew |> rightColorValue'
-        static member hotPink = CssColor.hotPink |> rightColorValue'
-        static member indianRed = CssColor.indianRed |> rightColorValue'
-        static member indigo = CssColor.indigo |> rightColorValue'
-        static member ivory = CssColor.ivory |> rightColorValue'
-        static member khaki = CssColor.khaki |> rightColorValue'
-        static member lavender = CssColor.lavender |> rightColorValue'
-        static member lavenderBlush = CssColor.lavenderBlush |> rightColorValue'
-        static member lawnGreen = CssColor.lawnGreen |> rightColorValue'
-        static member lemonChiffon = CssColor.lemonChiffon |> rightColorValue'
-        static member lightBlue = CssColor.lightBlue |> rightColorValue'
-        static member lightCoral = CssColor.lightCoral |> rightColorValue'
-        static member lightCyan = CssColor.lightCyan |> rightColorValue'
-        static member lightGoldenrodYellow = CssColor.lightGoldenrodYellow |> rightColorValue'
-        static member lightGray = CssColor.lightGray |> rightColorValue'
-        static member lightGreen = CssColor.lightGreen |> rightColorValue'
-        static member lightGrey = CssColor.lightGrey |> rightColorValue'
-        static member lightPink = CssColor.lightPink |> rightColorValue'
-        static member lightSalmon = CssColor.lightSalmon |> rightColorValue'
-        static member lightSeaGreen = CssColor.lightSeaGreen |> rightColorValue'
-        static member lightSkyBlue = CssColor.lightSkyBlue |> rightColorValue'
-        static member lightSlateGrey = CssColor.lightSlateGrey |> rightColorValue'
-        static member lightSteelBlue = CssColor.lightSteelBlue |> rightColorValue'
-        static member lightYellow = CssColor.lightYellow |> rightColorValue'
-        static member limeGreen = CssColor.limeGreen |> rightColorValue'
-        static member linen = CssColor.linen |> rightColorValue'
-        static member magenta = CssColor.magenta |> rightColorValue'
-        static member mediumAquamarine = CssColor.mediumAquamarine |> rightColorValue'
-        static member mediumBlue = CssColor.mediumBlue |> rightColorValue'
-        static member mediumOrchid = CssColor.mediumOrchid |> rightColorValue'
-        static member mediumPurple = CssColor.mediumPurple |> rightColorValue'
-        static member mediumSeaGreen = CssColor.mediumSeaGreen |> rightColorValue'
-        static member mediumSlateBlue = CssColor.mediumSlateBlue |> rightColorValue'
-        static member mediumSpringGreen = CssColor.mediumSpringGreen |> rightColorValue'
-        static member mediumTurquoise = CssColor.mediumTurquoise |> rightColorValue'
-        static member mediumVioletRed = CssColor.mediumVioletRed |> rightColorValue'
-        static member midnightBlue = CssColor.midnightBlue |> rightColorValue'
-        static member mintCream = CssColor.mintCream |> rightColorValue'
-        static member mistyRose = CssColor.mistyRose |> rightColorValue'
-        static member moccasin = CssColor.moccasin |> rightColorValue'
-        static member navajoWhite = CssColor.navajoWhite |> rightColorValue'
-        static member oldLace = CssColor.oldLace |> rightColorValue'
-        static member olivedrab = CssColor.olivedrab |> rightColorValue'
-        static member orangeRed = CssColor.orangeRed |> rightColorValue'
-        static member orchid = CssColor.orchid |> rightColorValue'
-        static member paleGoldenrod = CssColor.paleGoldenrod |> rightColorValue'
-        static member paleGreen = CssColor.paleGreen |> rightColorValue'
-        static member paleTurquoise = CssColor.paleTurquoise |> rightColorValue'
-        static member paleVioletred = CssColor.paleVioletred |> rightColorValue'
-        static member papayaWhip = CssColor.papayaWhip |> rightColorValue'
-        static member peachpuff = CssColor.peachpuff |> rightColorValue'
-        static member peru = CssColor.peru |> rightColorValue'
-        static member pink = CssColor.pink |> rightColorValue'
-        static member plum = CssColor.plum |> rightColorValue'
-        static member powderBlue = CssColor.powderBlue |> rightColorValue'
-        static member rosyBrown = CssColor.rosyBrown |> rightColorValue'
-        static member royalBlue = CssColor.royalBlue |> rightColorValue'
-        static member saddleBrown = CssColor.saddleBrown |> rightColorValue'
-        static member salmon = CssColor.salmon |> rightColorValue'
-        static member sandyBrown = CssColor.sandyBrown |> rightColorValue'
-        static member seaGreen = CssColor.seaGreen |> rightColorValue'
-        static member seaShell = CssColor.seaShell |> rightColorValue'
-        static member sienna = CssColor.sienna |> rightColorValue'
-        static member skyBlue = CssColor.skyBlue |> rightColorValue'
-        static member slateBlue = CssColor.slateBlue |> rightColorValue'
-        static member slateGray = CssColor.slateGray |> rightColorValue'
-        static member snow = CssColor.snow |> rightColorValue'
-        static member springGreen = CssColor.springGreen |> rightColorValue'
-        static member steelBlue = CssColor.steelBlue |> rightColorValue'
-        static member tan = CssColor.tan |> rightColorValue'
-        static member thistle = CssColor.thistle |> rightColorValue'
-        static member tomato = CssColor.tomato |> rightColorValue'
-        static member turquoise = CssColor.turquoise |> rightColorValue'
-        static member violet = CssColor.violet |> rightColorValue'
-        static member wheat = CssColor.wheat |> rightColorValue'
-        static member whiteSmoke = CssColor.whiteSmoke |> rightColorValue'
-        static member yellowGreen = CssColor.yellowGreen |> rightColorValue'
-        static member rebeccaPurple = CssColor.rebeccaPurple |> rightColorValue'
-        static member Rgb r g b = CssColor.Rgb(r, g, b) |> rightColorValue'
-        static member Rgba r g b a = CssColor.Rgba(r, g, b, a) |> rightColorValue'
-        static member Hex value = CssColor.Hex value |> rightColorValue'
-        static member Hsl h s l = CssColor.Hsl(h, s, l) |> rightColorValue'
-        static member Hsla h s l a  = CssColor.Hsla (h, s, l, a) |> rightColorValue'
-        static member transparent = CssColor.transparent |> rightColorValue'
-        static member currentColor = CssColor.currentColor |> rightColorValue'
+        static member Value (color: Types.IBorderColor) = color |> rightColorValue'
+        static member black = Types.Color.black |> rightColorValue'
+        static member silver = Types.Color.silver |> rightColorValue'
+        static member gray = Types.Color.gray |> rightColorValue'
+        static member white = Types.Color.white |> rightColorValue'
+        static member maroon = Types.Color.maroon |> rightColorValue'
+        static member red = Types.Color.red |> rightColorValue'
+        static member purple = Types.Color.purple |> rightColorValue'
+        static member fuchsia = Types.Color.fuchsia |> rightColorValue'
+        static member green = Types.Color.green |> rightColorValue'
+        static member lime = Types.Color.lime |> rightColorValue'
+        static member olive = Types.Color.olive |> rightColorValue'
+        static member yellow = Types.Color.yellow |> rightColorValue'
+        static member navy = Types.Color.navy |> rightColorValue'
+        static member blue = Types.Color.blue |> rightColorValue'
+        static member teal = Types.Color.teal |> rightColorValue'
+        static member aqua = Types.Color.aqua |> rightColorValue'
+        static member orange = Types.Color.orange |> rightColorValue'
+        static member aliceBlue = Types.Color.aliceBlue |> rightColorValue'
+        static member antiqueWhite = Types.Color.antiqueWhite |> rightColorValue'
+        static member aquaMarine = Types.Color.aquaMarine |> rightColorValue'
+        static member azure = Types.Color.azure |> rightColorValue'
+        static member beige = Types.Color.beige |> rightColorValue'
+        static member bisque = Types.Color.bisque |> rightColorValue'
+        static member blanchedAlmond = Types.Color.blanchedAlmond |> rightColorValue'
+        static member blueViolet = Types.Color.blueViolet |> rightColorValue'
+        static member brown = Types.Color.brown |> rightColorValue'
+        static member burlywood = Types.Color.burlywood |> rightColorValue'
+        static member cadetBlue = Types.Color.cadetBlue |> rightColorValue'
+        static member chartreuse = Types.Color.chartreuse |> rightColorValue'
+        static member chocolate = Types.Color.chocolate |> rightColorValue'
+        static member coral = Types.Color.coral |> rightColorValue'
+        static member cornflowerBlue = Types.Color.cornflowerBlue |> rightColorValue'
+        static member cornsilk = Types.Color.cornsilk |> rightColorValue'
+        static member crimson = Types.Color.crimson |> rightColorValue'
+        static member cyan = Types.Color.cyan |> rightColorValue'
+        static member darkBlue = Types.Color.darkBlue |> rightColorValue'
+        static member darkCyan = Types.Color.darkCyan |> rightColorValue'
+        static member darkGoldenrod = Types.Color.darkGoldenrod |> rightColorValue'
+        static member darkGray = Types.Color.darkGray |> rightColorValue'
+        static member darkGreen = Types.Color.darkGreen |> rightColorValue'
+        static member darkKhaki = Types.Color.darkKhaki |> rightColorValue'
+        static member darkMagenta = Types.Color.darkMagenta |> rightColorValue'
+        static member darkOliveGreen = Types.Color.darkOliveGreen |> rightColorValue'
+        static member darkOrange = Types.Color.darkOrange |> rightColorValue'
+        static member darkOrchid = Types.Color.darkOrchid |> rightColorValue'
+        static member darkRed = Types.Color.darkRed |> rightColorValue'
+        static member darkSalmon = Types.Color.darkSalmon |> rightColorValue'
+        static member darkSeaGreen = Types.Color.darkSeaGreen |> rightColorValue'
+        static member darkSlateBlue = Types.Color.darkSlateBlue |> rightColorValue'
+        static member darkSlateGray = Types.Color.darkSlateGray |> rightColorValue'
+        static member darkTurquoise = Types.Color.darkTurquoise |> rightColorValue'
+        static member darkViolet = Types.Color.darkViolet |> rightColorValue'
+        static member deepPink = Types.Color.deepPink |> rightColorValue'
+        static member deepSkyBlue = Types.Color.deepSkyBlue |> rightColorValue'
+        static member dimGrey = Types.Color.dimGrey |> rightColorValue'
+        static member dodgerBlue = Types.Color.dodgerBlue |> rightColorValue'
+        static member fireBrick = Types.Color.fireBrick |> rightColorValue'
+        static member floralWhite = Types.Color.floralWhite |> rightColorValue'
+        static member forestGreen = Types.Color.forestGreen |> rightColorValue'
+        static member gainsboro = Types.Color.gainsboro |> rightColorValue'
+        static member ghostWhite = Types.Color.ghostWhite |> rightColorValue'
+        static member gold = Types.Color.gold |> rightColorValue'
+        static member goldenrod = Types.Color.goldenrod |> rightColorValue'
+        static member greenYellow = Types.Color.greenYellow |> rightColorValue'
+        static member grey = Types.Color.grey |> rightColorValue'
+        static member honeydew = Types.Color.honeydew |> rightColorValue'
+        static member hotPink = Types.Color.hotPink |> rightColorValue'
+        static member indianRed = Types.Color.indianRed |> rightColorValue'
+        static member indigo = Types.Color.indigo |> rightColorValue'
+        static member ivory = Types.Color.ivory |> rightColorValue'
+        static member khaki = Types.Color.khaki |> rightColorValue'
+        static member lavender = Types.Color.lavender |> rightColorValue'
+        static member lavenderBlush = Types.Color.lavenderBlush |> rightColorValue'
+        static member lawnGreen = Types.Color.lawnGreen |> rightColorValue'
+        static member lemonChiffon = Types.Color.lemonChiffon |> rightColorValue'
+        static member lightBlue = Types.Color.lightBlue |> rightColorValue'
+        static member lightCoral = Types.Color.lightCoral |> rightColorValue'
+        static member lightCyan = Types.Color.lightCyan |> rightColorValue'
+        static member lightGoldenrodYellow = Types.Color.lightGoldenrodYellow |> rightColorValue'
+        static member lightGray = Types.Color.lightGray |> rightColorValue'
+        static member lightGreen = Types.Color.lightGreen |> rightColorValue'
+        static member lightGrey = Types.Color.lightGrey |> rightColorValue'
+        static member lightPink = Types.Color.lightPink |> rightColorValue'
+        static member lightSalmon = Types.Color.lightSalmon |> rightColorValue'
+        static member lightSeaGreen = Types.Color.lightSeaGreen |> rightColorValue'
+        static member lightSkyBlue = Types.Color.lightSkyBlue |> rightColorValue'
+        static member lightSlateGrey = Types.Color.lightSlateGrey |> rightColorValue'
+        static member lightSteelBlue = Types.Color.lightSteelBlue |> rightColorValue'
+        static member lightYellow = Types.Color.lightYellow |> rightColorValue'
+        static member limeGreen = Types.Color.limeGreen |> rightColorValue'
+        static member linen = Types.Color.linen |> rightColorValue'
+        static member magenta = Types.Color.magenta |> rightColorValue'
+        static member mediumAquamarine = Types.Color.mediumAquamarine |> rightColorValue'
+        static member mediumBlue = Types.Color.mediumBlue |> rightColorValue'
+        static member mediumOrchid = Types.Color.mediumOrchid |> rightColorValue'
+        static member mediumPurple = Types.Color.mediumPurple |> rightColorValue'
+        static member mediumSeaGreen = Types.Color.mediumSeaGreen |> rightColorValue'
+        static member mediumSlateBlue = Types.Color.mediumSlateBlue |> rightColorValue'
+        static member mediumSpringGreen = Types.Color.mediumSpringGreen |> rightColorValue'
+        static member mediumTurquoise = Types.Color.mediumTurquoise |> rightColorValue'
+        static member mediumVioletRed = Types.Color.mediumVioletRed |> rightColorValue'
+        static member midnightBlue = Types.Color.midnightBlue |> rightColorValue'
+        static member mintCream = Types.Color.mintCream |> rightColorValue'
+        static member mistyRose = Types.Color.mistyRose |> rightColorValue'
+        static member moccasin = Types.Color.moccasin |> rightColorValue'
+        static member navajoWhite = Types.Color.navajoWhite |> rightColorValue'
+        static member oldLace = Types.Color.oldLace |> rightColorValue'
+        static member olivedrab = Types.Color.olivedrab |> rightColorValue'
+        static member orangeRed = Types.Color.orangeRed |> rightColorValue'
+        static member orchid = Types.Color.orchid |> rightColorValue'
+        static member paleGoldenrod = Types.Color.paleGoldenrod |> rightColorValue'
+        static member paleGreen = Types.Color.paleGreen |> rightColorValue'
+        static member paleTurquoise = Types.Color.paleTurquoise |> rightColorValue'
+        static member paleVioletred = Types.Color.paleVioletred |> rightColorValue'
+        static member papayaWhip = Types.Color.papayaWhip |> rightColorValue'
+        static member peachpuff = Types.Color.peachpuff |> rightColorValue'
+        static member peru = Types.Color.peru |> rightColorValue'
+        static member pink = Types.Color.pink |> rightColorValue'
+        static member plum = Types.Color.plum |> rightColorValue'
+        static member powderBlue = Types.Color.powderBlue |> rightColorValue'
+        static member rosyBrown = Types.Color.rosyBrown |> rightColorValue'
+        static member royalBlue = Types.Color.royalBlue |> rightColorValue'
+        static member saddleBrown = Types.Color.saddleBrown |> rightColorValue'
+        static member salmon = Types.Color.salmon |> rightColorValue'
+        static member sandyBrown = Types.Color.sandyBrown |> rightColorValue'
+        static member seaGreen = Types.Color.seaGreen |> rightColorValue'
+        static member seaShell = Types.Color.seaShell |> rightColorValue'
+        static member sienna = Types.Color.sienna |> rightColorValue'
+        static member skyBlue = Types.Color.skyBlue |> rightColorValue'
+        static member slateBlue = Types.Color.slateBlue |> rightColorValue'
+        static member slateGray = Types.Color.slateGray |> rightColorValue'
+        static member snow = Types.Color.snow |> rightColorValue'
+        static member springGreen = Types.Color.springGreen |> rightColorValue'
+        static member steelBlue = Types.Color.steelBlue |> rightColorValue'
+        static member tan = Types.Color.tan |> rightColorValue'
+        static member thistle = Types.Color.thistle |> rightColorValue'
+        static member tomato = Types.Color.tomato |> rightColorValue'
+        static member turquoise = Types.Color.turquoise |> rightColorValue'
+        static member violet = Types.Color.violet |> rightColorValue'
+        static member wheat = Types.Color.wheat |> rightColorValue'
+        static member whiteSmoke = Types.Color.whiteSmoke |> rightColorValue'
+        static member yellowGreen = Types.Color.yellowGreen |> rightColorValue'
+        static member rebeccaPurple = Types.Color.rebeccaPurple |> rightColorValue'
+        static member Rgb r g b = Types.Color.Rgb(r, g, b) |> rightColorValue'
+        static member Rgba r g b a = Types.Color.Rgba(r, g, b, a) |> rightColorValue'
+        static member Hex value = Types.Color.Hex value |> rightColorValue'
+        static member Hsl h s l = Types.Color.Hsl(h, s, l) |> rightColorValue'
+        static member Hsla h s l a  = Types.Color.Hsla (h, s, l, a) |> rightColorValue'
+        static member transparent = Types.Color.transparent |> rightColorValue'
+        static member currentColor = Types.Color.currentColor |> rightColorValue'
 
-        static member Inherit = Inherit |> rightColorValue'
-        static member Initial = Initial |> rightColorValue'
-        static member Unset = Unset |> rightColorValue'
+        static member Inherit = Types.Inherit |> rightColorValue'
+        static member Initial = Types.Initial |> rightColorValue'
+        static member Unset = Types.Unset |> rightColorValue'
 
     /// <summary>Specifies color of right border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> CssColor </c>
+    ///     - <c> Types.Color </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderRightColor' (color: IBorderColor) = BorderRightColor.Value(color)
+    let BorderRightColor' (color: Types.IBorderColor) = BorderRightColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color
-    let private bottomColorValue value = PropertyValue.cssValue Property.BorderBottomColor value
+    let private bottomColorValue value = Types.cssValue Types.Property.BorderBottomColor value
     let private bottomColorValue' value =
         value
         |> borderColorToString
         |> bottomColorValue
     type BorderBottomColor =
-        static member Value (color: IBorderColor) = color |> bottomColorValue'
-        static member black = CssColor.black |> bottomColorValue'
-        static member silver = CssColor.silver |> bottomColorValue'
-        static member gray = CssColor.gray |> bottomColorValue'
-        static member white = CssColor.white |> bottomColorValue'
-        static member maroon = CssColor.maroon |> bottomColorValue'
-        static member red = CssColor.red |> bottomColorValue'
-        static member purple = CssColor.purple |> bottomColorValue'
-        static member fuchsia = CssColor.fuchsia |> bottomColorValue'
-        static member green = CssColor.green |> bottomColorValue'
-        static member lime = CssColor.lime |> bottomColorValue'
-        static member olive = CssColor.olive |> bottomColorValue'
-        static member yellow = CssColor.yellow |> bottomColorValue'
-        static member navy = CssColor.navy |> bottomColorValue'
-        static member blue = CssColor.blue |> bottomColorValue'
-        static member teal = CssColor.teal |> bottomColorValue'
-        static member aqua = CssColor.aqua |> bottomColorValue'
-        static member orange = CssColor.orange |> bottomColorValue'
-        static member aliceBlue = CssColor.aliceBlue |> bottomColorValue'
-        static member antiqueWhite = CssColor.antiqueWhite |> bottomColorValue'
-        static member aquaMarine = CssColor.aquaMarine |> bottomColorValue'
-        static member azure = CssColor.azure |> bottomColorValue'
-        static member beige = CssColor.beige |> bottomColorValue'
-        static member bisque = CssColor.bisque |> bottomColorValue'
-        static member blanchedAlmond = CssColor.blanchedAlmond |> bottomColorValue'
-        static member blueViolet = CssColor.blueViolet |> bottomColorValue'
-        static member brown = CssColor.brown |> bottomColorValue'
-        static member burlywood = CssColor.burlywood |> bottomColorValue'
-        static member cadetBlue = CssColor.cadetBlue |> bottomColorValue'
-        static member chartreuse = CssColor.chartreuse |> bottomColorValue'
-        static member chocolate = CssColor.chocolate |> bottomColorValue'
-        static member coral = CssColor.coral |> bottomColorValue'
-        static member cornflowerBlue = CssColor.cornflowerBlue |> bottomColorValue'
-        static member cornsilk = CssColor.cornsilk |> bottomColorValue'
-        static member crimson = CssColor.crimson |> bottomColorValue'
-        static member cyan = CssColor.cyan |> bottomColorValue'
-        static member darkBlue = CssColor.darkBlue |> bottomColorValue'
-        static member darkCyan = CssColor.darkCyan |> bottomColorValue'
-        static member darkGoldenrod = CssColor.darkGoldenrod |> bottomColorValue'
-        static member darkGray = CssColor.darkGray |> bottomColorValue'
-        static member darkGreen = CssColor.darkGreen |> bottomColorValue'
-        static member darkKhaki = CssColor.darkKhaki |> bottomColorValue'
-        static member darkMagenta = CssColor.darkMagenta |> bottomColorValue'
-        static member darkOliveGreen = CssColor.darkOliveGreen |> bottomColorValue'
-        static member darkOrange = CssColor.darkOrange |> bottomColorValue'
-        static member darkOrchid = CssColor.darkOrchid |> bottomColorValue'
-        static member darkRed = CssColor.darkRed |> bottomColorValue'
-        static member darkSalmon = CssColor.darkSalmon |> bottomColorValue'
-        static member darkSeaGreen = CssColor.darkSeaGreen |> bottomColorValue'
-        static member darkSlateBlue = CssColor.darkSlateBlue |> bottomColorValue'
-        static member darkSlateGray = CssColor.darkSlateGray |> bottomColorValue'
-        static member darkTurquoise = CssColor.darkTurquoise |> bottomColorValue'
-        static member darkViolet = CssColor.darkViolet |> bottomColorValue'
-        static member deepPink = CssColor.deepPink |> bottomColorValue'
-        static member deepSkyBlue = CssColor.deepSkyBlue |> bottomColorValue'
-        static member dimGrey = CssColor.dimGrey |> bottomColorValue'
-        static member dodgerBlue = CssColor.dodgerBlue |> bottomColorValue'
-        static member fireBrick = CssColor.fireBrick |> bottomColorValue'
-        static member floralWhite = CssColor.floralWhite |> bottomColorValue'
-        static member forestGreen = CssColor.forestGreen |> bottomColorValue'
-        static member gainsboro = CssColor.gainsboro |> bottomColorValue'
-        static member ghostWhite = CssColor.ghostWhite |> bottomColorValue'
-        static member gold = CssColor.gold |> bottomColorValue'
-        static member goldenrod = CssColor.goldenrod |> bottomColorValue'
-        static member greenYellow = CssColor.greenYellow |> bottomColorValue'
-        static member grey = CssColor.grey |> bottomColorValue'
-        static member honeydew = CssColor.honeydew |> bottomColorValue'
-        static member hotPink = CssColor.hotPink |> bottomColorValue'
-        static member indianRed = CssColor.indianRed |> bottomColorValue'
-        static member indigo = CssColor.indigo |> bottomColorValue'
-        static member ivory = CssColor.ivory |> bottomColorValue'
-        static member khaki = CssColor.khaki |> bottomColorValue'
-        static member lavender = CssColor.lavender |> bottomColorValue'
-        static member lavenderBlush = CssColor.lavenderBlush |> bottomColorValue'
-        static member lawnGreen = CssColor.lawnGreen |> bottomColorValue'
-        static member lemonChiffon = CssColor.lemonChiffon |> bottomColorValue'
-        static member lightBlue = CssColor.lightBlue |> bottomColorValue'
-        static member lightCoral = CssColor.lightCoral |> bottomColorValue'
-        static member lightCyan = CssColor.lightCyan |> bottomColorValue'
-        static member lightGoldenrodYellow = CssColor.lightGoldenrodYellow |> bottomColorValue'
-        static member lightGray = CssColor.lightGray |> bottomColorValue'
-        static member lightGreen = CssColor.lightGreen |> bottomColorValue'
-        static member lightGrey = CssColor.lightGrey |> bottomColorValue'
-        static member lightPink = CssColor.lightPink |> bottomColorValue'
-        static member lightSalmon = CssColor.lightSalmon |> bottomColorValue'
-        static member lightSeaGreen = CssColor.lightSeaGreen |> bottomColorValue'
-        static member lightSkyBlue = CssColor.lightSkyBlue |> bottomColorValue'
-        static member lightSlateGrey = CssColor.lightSlateGrey |> bottomColorValue'
-        static member lightSteelBlue = CssColor.lightSteelBlue |> bottomColorValue'
-        static member lightYellow = CssColor.lightYellow |> bottomColorValue'
-        static member limeGreen = CssColor.limeGreen |> bottomColorValue'
-        static member linen = CssColor.linen |> bottomColorValue'
-        static member magenta = CssColor.magenta |> bottomColorValue'
-        static member mediumAquamarine = CssColor.mediumAquamarine |> bottomColorValue'
-        static member mediumBlue = CssColor.mediumBlue |> bottomColorValue'
-        static member mediumOrchid = CssColor.mediumOrchid |> bottomColorValue'
-        static member mediumPurple = CssColor.mediumPurple |> bottomColorValue'
-        static member mediumSeaGreen = CssColor.mediumSeaGreen |> bottomColorValue'
-        static member mediumSlateBlue = CssColor.mediumSlateBlue |> bottomColorValue'
-        static member mediumSpringGreen = CssColor.mediumSpringGreen |> bottomColorValue'
-        static member mediumTurquoise = CssColor.mediumTurquoise |> bottomColorValue'
-        static member mediumVioletRed = CssColor.mediumVioletRed |> bottomColorValue'
-        static member midnightBlue = CssColor.midnightBlue |> bottomColorValue'
-        static member mintCream = CssColor.mintCream |> bottomColorValue'
-        static member mistyRose = CssColor.mistyRose |> bottomColorValue'
-        static member moccasin = CssColor.moccasin |> bottomColorValue'
-        static member navajoWhite = CssColor.navajoWhite |> bottomColorValue'
-        static member oldLace = CssColor.oldLace |> bottomColorValue'
-        static member olivedrab = CssColor.olivedrab |> bottomColorValue'
-        static member orangeRed = CssColor.orangeRed |> bottomColorValue'
-        static member orchid = CssColor.orchid |> bottomColorValue'
-        static member paleGoldenrod = CssColor.paleGoldenrod |> bottomColorValue'
-        static member paleGreen = CssColor.paleGreen |> bottomColorValue'
-        static member paleTurquoise = CssColor.paleTurquoise |> bottomColorValue'
-        static member paleVioletred = CssColor.paleVioletred |> bottomColorValue'
-        static member papayaWhip = CssColor.papayaWhip |> bottomColorValue'
-        static member peachpuff = CssColor.peachpuff |> bottomColorValue'
-        static member peru = CssColor.peru |> bottomColorValue'
-        static member pink = CssColor.pink |> bottomColorValue'
-        static member plum = CssColor.plum |> bottomColorValue'
-        static member powderBlue = CssColor.powderBlue |> bottomColorValue'
-        static member rosyBrown = CssColor.rosyBrown |> bottomColorValue'
-        static member royalBlue = CssColor.royalBlue |> bottomColorValue'
-        static member saddleBrown = CssColor.saddleBrown |> bottomColorValue'
-        static member salmon = CssColor.salmon |> bottomColorValue'
-        static member sandyBrown = CssColor.sandyBrown |> bottomColorValue'
-        static member seaGreen = CssColor.seaGreen |> bottomColorValue'
-        static member seaShell = CssColor.seaShell |> bottomColorValue'
-        static member sienna = CssColor.sienna |> bottomColorValue'
-        static member skyBlue = CssColor.skyBlue |> bottomColorValue'
-        static member slateBlue = CssColor.slateBlue |> bottomColorValue'
-        static member slateGray = CssColor.slateGray |> bottomColorValue'
-        static member snow = CssColor.snow |> bottomColorValue'
-        static member springGreen = CssColor.springGreen |> bottomColorValue'
-        static member steelBlue = CssColor.steelBlue |> bottomColorValue'
-        static member tan = CssColor.tan |> bottomColorValue'
-        static member thistle = CssColor.thistle |> bottomColorValue'
-        static member tomato = CssColor.tomato |> bottomColorValue'
-        static member turquoise = CssColor.turquoise |> bottomColorValue'
-        static member violet = CssColor.violet |> bottomColorValue'
-        static member wheat = CssColor.wheat |> bottomColorValue'
-        static member whiteSmoke = CssColor.whiteSmoke |> bottomColorValue'
-        static member yellowGreen = CssColor.yellowGreen |> bottomColorValue'
-        static member rebeccaPurple = CssColor.rebeccaPurple |> bottomColorValue'
-        static member Rgb r g b = CssColor.Rgb(r, g, b) |> bottomColorValue'
-        static member Rgba r g b a = CssColor.Rgba(r, g, b, a) |> bottomColorValue'
-        static member Hex value = CssColor.Hex value |> bottomColorValue'
-        static member Hsl h s l = CssColor.Hsl(h, s, l) |> bottomColorValue'
-        static member Hsla h s l a  = CssColor.Hsla (h, s, l, a) |> bottomColorValue'
-        static member transparent = CssColor.transparent |> bottomColorValue'
-        static member currentColor = CssColor.currentColor |> bottomColorValue'
+        static member Value (color: Types.IBorderColor) = color |> bottomColorValue'
+        static member black = Types.Color.black |> bottomColorValue'
+        static member silver = Types.Color.silver |> bottomColorValue'
+        static member gray = Types.Color.gray |> bottomColorValue'
+        static member white = Types.Color.white |> bottomColorValue'
+        static member maroon = Types.Color.maroon |> bottomColorValue'
+        static member red = Types.Color.red |> bottomColorValue'
+        static member purple = Types.Color.purple |> bottomColorValue'
+        static member fuchsia = Types.Color.fuchsia |> bottomColorValue'
+        static member green = Types.Color.green |> bottomColorValue'
+        static member lime = Types.Color.lime |> bottomColorValue'
+        static member olive = Types.Color.olive |> bottomColorValue'
+        static member yellow = Types.Color.yellow |> bottomColorValue'
+        static member navy = Types.Color.navy |> bottomColorValue'
+        static member blue = Types.Color.blue |> bottomColorValue'
+        static member teal = Types.Color.teal |> bottomColorValue'
+        static member aqua = Types.Color.aqua |> bottomColorValue'
+        static member orange = Types.Color.orange |> bottomColorValue'
+        static member aliceBlue = Types.Color.aliceBlue |> bottomColorValue'
+        static member antiqueWhite = Types.Color.antiqueWhite |> bottomColorValue'
+        static member aquaMarine = Types.Color.aquaMarine |> bottomColorValue'
+        static member azure = Types.Color.azure |> bottomColorValue'
+        static member beige = Types.Color.beige |> bottomColorValue'
+        static member bisque = Types.Color.bisque |> bottomColorValue'
+        static member blanchedAlmond = Types.Color.blanchedAlmond |> bottomColorValue'
+        static member blueViolet = Types.Color.blueViolet |> bottomColorValue'
+        static member brown = Types.Color.brown |> bottomColorValue'
+        static member burlywood = Types.Color.burlywood |> bottomColorValue'
+        static member cadetBlue = Types.Color.cadetBlue |> bottomColorValue'
+        static member chartreuse = Types.Color.chartreuse |> bottomColorValue'
+        static member chocolate = Types.Color.chocolate |> bottomColorValue'
+        static member coral = Types.Color.coral |> bottomColorValue'
+        static member cornflowerBlue = Types.Color.cornflowerBlue |> bottomColorValue'
+        static member cornsilk = Types.Color.cornsilk |> bottomColorValue'
+        static member crimson = Types.Color.crimson |> bottomColorValue'
+        static member cyan = Types.Color.cyan |> bottomColorValue'
+        static member darkBlue = Types.Color.darkBlue |> bottomColorValue'
+        static member darkCyan = Types.Color.darkCyan |> bottomColorValue'
+        static member darkGoldenrod = Types.Color.darkGoldenrod |> bottomColorValue'
+        static member darkGray = Types.Color.darkGray |> bottomColorValue'
+        static member darkGreen = Types.Color.darkGreen |> bottomColorValue'
+        static member darkKhaki = Types.Color.darkKhaki |> bottomColorValue'
+        static member darkMagenta = Types.Color.darkMagenta |> bottomColorValue'
+        static member darkOliveGreen = Types.Color.darkOliveGreen |> bottomColorValue'
+        static member darkOrange = Types.Color.darkOrange |> bottomColorValue'
+        static member darkOrchid = Types.Color.darkOrchid |> bottomColorValue'
+        static member darkRed = Types.Color.darkRed |> bottomColorValue'
+        static member darkSalmon = Types.Color.darkSalmon |> bottomColorValue'
+        static member darkSeaGreen = Types.Color.darkSeaGreen |> bottomColorValue'
+        static member darkSlateBlue = Types.Color.darkSlateBlue |> bottomColorValue'
+        static member darkSlateGray = Types.Color.darkSlateGray |> bottomColorValue'
+        static member darkTurquoise = Types.Color.darkTurquoise |> bottomColorValue'
+        static member darkViolet = Types.Color.darkViolet |> bottomColorValue'
+        static member deepPink = Types.Color.deepPink |> bottomColorValue'
+        static member deepSkyBlue = Types.Color.deepSkyBlue |> bottomColorValue'
+        static member dimGrey = Types.Color.dimGrey |> bottomColorValue'
+        static member dodgerBlue = Types.Color.dodgerBlue |> bottomColorValue'
+        static member fireBrick = Types.Color.fireBrick |> bottomColorValue'
+        static member floralWhite = Types.Color.floralWhite |> bottomColorValue'
+        static member forestGreen = Types.Color.forestGreen |> bottomColorValue'
+        static member gainsboro = Types.Color.gainsboro |> bottomColorValue'
+        static member ghostWhite = Types.Color.ghostWhite |> bottomColorValue'
+        static member gold = Types.Color.gold |> bottomColorValue'
+        static member goldenrod = Types.Color.goldenrod |> bottomColorValue'
+        static member greenYellow = Types.Color.greenYellow |> bottomColorValue'
+        static member grey = Types.Color.grey |> bottomColorValue'
+        static member honeydew = Types.Color.honeydew |> bottomColorValue'
+        static member hotPink = Types.Color.hotPink |> bottomColorValue'
+        static member indianRed = Types.Color.indianRed |> bottomColorValue'
+        static member indigo = Types.Color.indigo |> bottomColorValue'
+        static member ivory = Types.Color.ivory |> bottomColorValue'
+        static member khaki = Types.Color.khaki |> bottomColorValue'
+        static member lavender = Types.Color.lavender |> bottomColorValue'
+        static member lavenderBlush = Types.Color.lavenderBlush |> bottomColorValue'
+        static member lawnGreen = Types.Color.lawnGreen |> bottomColorValue'
+        static member lemonChiffon = Types.Color.lemonChiffon |> bottomColorValue'
+        static member lightBlue = Types.Color.lightBlue |> bottomColorValue'
+        static member lightCoral = Types.Color.lightCoral |> bottomColorValue'
+        static member lightCyan = Types.Color.lightCyan |> bottomColorValue'
+        static member lightGoldenrodYellow = Types.Color.lightGoldenrodYellow |> bottomColorValue'
+        static member lightGray = Types.Color.lightGray |> bottomColorValue'
+        static member lightGreen = Types.Color.lightGreen |> bottomColorValue'
+        static member lightGrey = Types.Color.lightGrey |> bottomColorValue'
+        static member lightPink = Types.Color.lightPink |> bottomColorValue'
+        static member lightSalmon = Types.Color.lightSalmon |> bottomColorValue'
+        static member lightSeaGreen = Types.Color.lightSeaGreen |> bottomColorValue'
+        static member lightSkyBlue = Types.Color.lightSkyBlue |> bottomColorValue'
+        static member lightSlateGrey = Types.Color.lightSlateGrey |> bottomColorValue'
+        static member lightSteelBlue = Types.Color.lightSteelBlue |> bottomColorValue'
+        static member lightYellow = Types.Color.lightYellow |> bottomColorValue'
+        static member limeGreen = Types.Color.limeGreen |> bottomColorValue'
+        static member linen = Types.Color.linen |> bottomColorValue'
+        static member magenta = Types.Color.magenta |> bottomColorValue'
+        static member mediumAquamarine = Types.Color.mediumAquamarine |> bottomColorValue'
+        static member mediumBlue = Types.Color.mediumBlue |> bottomColorValue'
+        static member mediumOrchid = Types.Color.mediumOrchid |> bottomColorValue'
+        static member mediumPurple = Types.Color.mediumPurple |> bottomColorValue'
+        static member mediumSeaGreen = Types.Color.mediumSeaGreen |> bottomColorValue'
+        static member mediumSlateBlue = Types.Color.mediumSlateBlue |> bottomColorValue'
+        static member mediumSpringGreen = Types.Color.mediumSpringGreen |> bottomColorValue'
+        static member mediumTurquoise = Types.Color.mediumTurquoise |> bottomColorValue'
+        static member mediumVioletRed = Types.Color.mediumVioletRed |> bottomColorValue'
+        static member midnightBlue = Types.Color.midnightBlue |> bottomColorValue'
+        static member mintCream = Types.Color.mintCream |> bottomColorValue'
+        static member mistyRose = Types.Color.mistyRose |> bottomColorValue'
+        static member moccasin = Types.Color.moccasin |> bottomColorValue'
+        static member navajoWhite = Types.Color.navajoWhite |> bottomColorValue'
+        static member oldLace = Types.Color.oldLace |> bottomColorValue'
+        static member olivedrab = Types.Color.olivedrab |> bottomColorValue'
+        static member orangeRed = Types.Color.orangeRed |> bottomColorValue'
+        static member orchid = Types.Color.orchid |> bottomColorValue'
+        static member paleGoldenrod = Types.Color.paleGoldenrod |> bottomColorValue'
+        static member paleGreen = Types.Color.paleGreen |> bottomColorValue'
+        static member paleTurquoise = Types.Color.paleTurquoise |> bottomColorValue'
+        static member paleVioletred = Types.Color.paleVioletred |> bottomColorValue'
+        static member papayaWhip = Types.Color.papayaWhip |> bottomColorValue'
+        static member peachpuff = Types.Color.peachpuff |> bottomColorValue'
+        static member peru = Types.Color.peru |> bottomColorValue'
+        static member pink = Types.Color.pink |> bottomColorValue'
+        static member plum = Types.Color.plum |> bottomColorValue'
+        static member powderBlue = Types.Color.powderBlue |> bottomColorValue'
+        static member rosyBrown = Types.Color.rosyBrown |> bottomColorValue'
+        static member royalBlue = Types.Color.royalBlue |> bottomColorValue'
+        static member saddleBrown = Types.Color.saddleBrown |> bottomColorValue'
+        static member salmon = Types.Color.salmon |> bottomColorValue'
+        static member sandyBrown = Types.Color.sandyBrown |> bottomColorValue'
+        static member seaGreen = Types.Color.seaGreen |> bottomColorValue'
+        static member seaShell = Types.Color.seaShell |> bottomColorValue'
+        static member sienna = Types.Color.sienna |> bottomColorValue'
+        static member skyBlue = Types.Color.skyBlue |> bottomColorValue'
+        static member slateBlue = Types.Color.slateBlue |> bottomColorValue'
+        static member slateGray = Types.Color.slateGray |> bottomColorValue'
+        static member snow = Types.Color.snow |> bottomColorValue'
+        static member springGreen = Types.Color.springGreen |> bottomColorValue'
+        static member steelBlue = Types.Color.steelBlue |> bottomColorValue'
+        static member tan = Types.Color.tan |> bottomColorValue'
+        static member thistle = Types.Color.thistle |> bottomColorValue'
+        static member tomato = Types.Color.tomato |> bottomColorValue'
+        static member turquoise = Types.Color.turquoise |> bottomColorValue'
+        static member violet = Types.Color.violet |> bottomColorValue'
+        static member wheat = Types.Color.wheat |> bottomColorValue'
+        static member whiteSmoke = Types.Color.whiteSmoke |> bottomColorValue'
+        static member yellowGreen = Types.Color.yellowGreen |> bottomColorValue'
+        static member rebeccaPurple = Types.Color.rebeccaPurple |> bottomColorValue'
+        static member Rgb r g b = Types.Color.Rgb(r, g, b) |> bottomColorValue'
+        static member Rgba r g b a = Types.Color.Rgba(r, g, b, a) |> bottomColorValue'
+        static member Hex value = Types.Color.Hex value |> bottomColorValue'
+        static member Hsl h s l = Types.Color.Hsl(h, s, l) |> bottomColorValue'
+        static member Hsla h s l a  = Types.Color.Hsla (h, s, l, a) |> bottomColorValue'
+        static member transparent = Types.Color.transparent |> bottomColorValue'
+        static member currentColor = Types.Color.currentColor |> bottomColorValue'
 
-        static member Inherit = Inherit |> bottomColorValue'
-        static member Initial = Initial |> bottomColorValue'
-        static member Unset = Unset |> bottomColorValue'
+        static member Inherit = Types.Inherit |> bottomColorValue'
+        static member Initial = Types.Initial |> bottomColorValue'
+        static member Unset = Types.Unset |> bottomColorValue'
 
     /// <summary>Specifies color of bottom border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> CssColor </c>
+    ///     - <c> Types.Color </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomColor' (color: IBorderColor) = BorderBottomColor.Value(color)
+    let BorderBottomColor' (color: Types.IBorderColor) = BorderBottomColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color
-    let private leftColorValue value = PropertyValue.cssValue Property.BorderLeftColor value
+    let private leftColorValue value = Types.cssValue Types.Property.BorderLeftColor value
     let private leftColorValue' value =
         value
         |> borderColorToString
         |> leftColorValue
     type BorderLeftColor =
-        static member Value (color: IBorderColor) = color |> leftColorValue'
-        static member black = CssColor.black |> leftColorValue'
-        static member silver = CssColor.silver |> leftColorValue'
-        static member gray = CssColor.gray |> leftColorValue'
-        static member white = CssColor.white |> leftColorValue'
-        static member maroon = CssColor.maroon |> leftColorValue'
-        static member red = CssColor.red |> leftColorValue'
-        static member purple = CssColor.purple |> leftColorValue'
-        static member fuchsia = CssColor.fuchsia |> leftColorValue'
-        static member green = CssColor.green |> leftColorValue'
-        static member lime = CssColor.lime |> leftColorValue'
-        static member olive = CssColor.olive |> leftColorValue'
-        static member yellow = CssColor.yellow |> leftColorValue'
-        static member navy = CssColor.navy |> leftColorValue'
-        static member blue = CssColor.blue |> leftColorValue'
-        static member teal = CssColor.teal |> leftColorValue'
-        static member aqua = CssColor.aqua |> leftColorValue'
-        static member orange = CssColor.orange |> leftColorValue'
-        static member aliceBlue = CssColor.aliceBlue |> leftColorValue'
-        static member antiqueWhite = CssColor.antiqueWhite |> leftColorValue'
-        static member aquaMarine = CssColor.aquaMarine |> leftColorValue'
-        static member azure = CssColor.azure |> leftColorValue'
-        static member beige = CssColor.beige |> leftColorValue'
-        static member bisque = CssColor.bisque |> leftColorValue'
-        static member blanchedAlmond = CssColor.blanchedAlmond |> leftColorValue'
-        static member blueViolet = CssColor.blueViolet |> leftColorValue'
-        static member brown = CssColor.brown |> leftColorValue'
-        static member burlywood = CssColor.burlywood |> leftColorValue'
-        static member cadetBlue = CssColor.cadetBlue |> leftColorValue'
-        static member chartreuse = CssColor.chartreuse |> leftColorValue'
-        static member chocolate = CssColor.chocolate |> leftColorValue'
-        static member coral = CssColor.coral |> leftColorValue'
-        static member cornflowerBlue = CssColor.cornflowerBlue |> leftColorValue'
-        static member cornsilk = CssColor.cornsilk |> leftColorValue'
-        static member crimson = CssColor.crimson |> leftColorValue'
-        static member cyan = CssColor.cyan |> leftColorValue'
-        static member darkBlue = CssColor.darkBlue |> leftColorValue'
-        static member darkCyan = CssColor.darkCyan |> leftColorValue'
-        static member darkGoldenrod = CssColor.darkGoldenrod |> leftColorValue'
-        static member darkGray = CssColor.darkGray |> leftColorValue'
-        static member darkGreen = CssColor.darkGreen |> leftColorValue'
-        static member darkKhaki = CssColor.darkKhaki |> leftColorValue'
-        static member darkMagenta = CssColor.darkMagenta |> leftColorValue'
-        static member darkOliveGreen = CssColor.darkOliveGreen |> leftColorValue'
-        static member darkOrange = CssColor.darkOrange |> leftColorValue'
-        static member darkOrchid = CssColor.darkOrchid |> leftColorValue'
-        static member darkRed = CssColor.darkRed |> leftColorValue'
-        static member darkSalmon = CssColor.darkSalmon |> leftColorValue'
-        static member darkSeaGreen = CssColor.darkSeaGreen |> leftColorValue'
-        static member darkSlateBlue = CssColor.darkSlateBlue |> leftColorValue'
-        static member darkSlateGray = CssColor.darkSlateGray |> leftColorValue'
-        static member darkTurquoise = CssColor.darkTurquoise |> leftColorValue'
-        static member darkViolet = CssColor.darkViolet |> leftColorValue'
-        static member deepPink = CssColor.deepPink |> leftColorValue'
-        static member deepSkyBlue = CssColor.deepSkyBlue |> leftColorValue'
-        static member dimGrey = CssColor.dimGrey |> leftColorValue'
-        static member dodgerBlue = CssColor.dodgerBlue |> leftColorValue'
-        static member fireBrick = CssColor.fireBrick |> leftColorValue'
-        static member floralWhite = CssColor.floralWhite |> leftColorValue'
-        static member forestGreen = CssColor.forestGreen |> leftColorValue'
-        static member gainsboro = CssColor.gainsboro |> leftColorValue'
-        static member ghostWhite = CssColor.ghostWhite |> leftColorValue'
-        static member gold = CssColor.gold |> leftColorValue'
-        static member goldenrod = CssColor.goldenrod |> leftColorValue'
-        static member greenYellow = CssColor.greenYellow |> leftColorValue'
-        static member grey = CssColor.grey |> leftColorValue'
-        static member honeydew = CssColor.honeydew |> leftColorValue'
-        static member hotPink = CssColor.hotPink |> leftColorValue'
-        static member indianRed = CssColor.indianRed |> leftColorValue'
-        static member indigo = CssColor.indigo |> leftColorValue'
-        static member ivory = CssColor.ivory |> leftColorValue'
-        static member khaki = CssColor.khaki |> leftColorValue'
-        static member lavender = CssColor.lavender |> leftColorValue'
-        static member lavenderBlush = CssColor.lavenderBlush |> leftColorValue'
-        static member lawnGreen = CssColor.lawnGreen |> leftColorValue'
-        static member lemonChiffon = CssColor.lemonChiffon |> leftColorValue'
-        static member lightBlue = CssColor.lightBlue |> leftColorValue'
-        static member lightCoral = CssColor.lightCoral |> leftColorValue'
-        static member lightCyan = CssColor.lightCyan |> leftColorValue'
-        static member lightGoldenrodYellow = CssColor.lightGoldenrodYellow |> leftColorValue'
-        static member lightGray = CssColor.lightGray |> leftColorValue'
-        static member lightGreen = CssColor.lightGreen |> leftColorValue'
-        static member lightGrey = CssColor.lightGrey |> leftColorValue'
-        static member lightPink = CssColor.lightPink |> leftColorValue'
-        static member lightSalmon = CssColor.lightSalmon |> leftColorValue'
-        static member lightSeaGreen = CssColor.lightSeaGreen |> leftColorValue'
-        static member lightSkyBlue = CssColor.lightSkyBlue |> leftColorValue'
-        static member lightSlateGrey = CssColor.lightSlateGrey |> leftColorValue'
-        static member lightSteelBlue = CssColor.lightSteelBlue |> leftColorValue'
-        static member lightYellow = CssColor.lightYellow |> leftColorValue'
-        static member limeGreen = CssColor.limeGreen |> leftColorValue'
-        static member linen = CssColor.linen |> leftColorValue'
-        static member magenta = CssColor.magenta |> leftColorValue'
-        static member mediumAquamarine = CssColor.mediumAquamarine |> leftColorValue'
-        static member mediumBlue = CssColor.mediumBlue |> leftColorValue'
-        static member mediumOrchid = CssColor.mediumOrchid |> leftColorValue'
-        static member mediumPurple = CssColor.mediumPurple |> leftColorValue'
-        static member mediumSeaGreen = CssColor.mediumSeaGreen |> leftColorValue'
-        static member mediumSlateBlue = CssColor.mediumSlateBlue |> leftColorValue'
-        static member mediumSpringGreen = CssColor.mediumSpringGreen |> leftColorValue'
-        static member mediumTurquoise = CssColor.mediumTurquoise |> leftColorValue'
-        static member mediumVioletRed = CssColor.mediumVioletRed |> leftColorValue'
-        static member midnightBlue = CssColor.midnightBlue |> leftColorValue'
-        static member mintCream = CssColor.mintCream |> leftColorValue'
-        static member mistyRose = CssColor.mistyRose |> leftColorValue'
-        static member moccasin = CssColor.moccasin |> leftColorValue'
-        static member navajoWhite = CssColor.navajoWhite |> leftColorValue'
-        static member oldLace = CssColor.oldLace |> leftColorValue'
-        static member olivedrab = CssColor.olivedrab |> leftColorValue'
-        static member orangeRed = CssColor.orangeRed |> leftColorValue'
-        static member orchid = CssColor.orchid |> leftColorValue'
-        static member paleGoldenrod = CssColor.paleGoldenrod |> leftColorValue'
-        static member paleGreen = CssColor.paleGreen |> leftColorValue'
-        static member paleTurquoise = CssColor.paleTurquoise |> leftColorValue'
-        static member paleVioletred = CssColor.paleVioletred |> leftColorValue'
-        static member papayaWhip = CssColor.papayaWhip |> leftColorValue'
-        static member peachpuff = CssColor.peachpuff |> leftColorValue'
-        static member peru = CssColor.peru |> leftColorValue'
-        static member pink = CssColor.pink |> leftColorValue'
-        static member plum = CssColor.plum |> leftColorValue'
-        static member powderBlue = CssColor.powderBlue |> leftColorValue'
-        static member rosyBrown = CssColor.rosyBrown |> leftColorValue'
-        static member royalBlue = CssColor.royalBlue |> leftColorValue'
-        static member saddleBrown = CssColor.saddleBrown |> leftColorValue'
-        static member salmon = CssColor.salmon |> leftColorValue'
-        static member sandyBrown = CssColor.sandyBrown |> leftColorValue'
-        static member seaGreen = CssColor.seaGreen |> leftColorValue'
-        static member seaShell = CssColor.seaShell |> leftColorValue'
-        static member sienna = CssColor.sienna |> leftColorValue'
-        static member skyBlue = CssColor.skyBlue |> leftColorValue'
-        static member slateBlue = CssColor.slateBlue |> leftColorValue'
-        static member slateGray = CssColor.slateGray |> leftColorValue'
-        static member snow = CssColor.snow |> leftColorValue'
-        static member springGreen = CssColor.springGreen |> leftColorValue'
-        static member steelBlue = CssColor.steelBlue |> leftColorValue'
-        static member tan = CssColor.tan |> leftColorValue'
-        static member thistle = CssColor.thistle |> leftColorValue'
-        static member tomato = CssColor.tomato |> leftColorValue'
-        static member turquoise = CssColor.turquoise |> leftColorValue'
-        static member violet = CssColor.violet |> leftColorValue'
-        static member wheat = CssColor.wheat |> leftColorValue'
-        static member whiteSmoke = CssColor.whiteSmoke |> leftColorValue'
-        static member yellowGreen = CssColor.yellowGreen |> leftColorValue'
-        static member rebeccaPurple = CssColor.rebeccaPurple |> leftColorValue'
-        static member Rgb r g b = CssColor.Rgb(r, g, b) |> leftColorValue'
-        static member Rgba r g b a = CssColor.Rgba(r, g, b, a) |> leftColorValue'
-        static member Hex value = CssColor.Hex value |> leftColorValue'
-        static member Hsl h s l = CssColor.Hsl(h, s, l) |> leftColorValue'
-        static member Hsla h s l a  = CssColor.Hsla (h, s, l, a) |> leftColorValue'
-        static member transparent = CssColor.transparent |> leftColorValue'
-        static member currentColor = CssColor.currentColor |> leftColorValue'
+        static member Value (color: Types.IBorderColor) = color |> leftColorValue'
+        static member black = Types.Color.black |> leftColorValue'
+        static member silver = Types.Color.silver |> leftColorValue'
+        static member gray = Types.Color.gray |> leftColorValue'
+        static member white = Types.Color.white |> leftColorValue'
+        static member maroon = Types.Color.maroon |> leftColorValue'
+        static member red = Types.Color.red |> leftColorValue'
+        static member purple = Types.Color.purple |> leftColorValue'
+        static member fuchsia = Types.Color.fuchsia |> leftColorValue'
+        static member green = Types.Color.green |> leftColorValue'
+        static member lime = Types.Color.lime |> leftColorValue'
+        static member olive = Types.Color.olive |> leftColorValue'
+        static member yellow = Types.Color.yellow |> leftColorValue'
+        static member navy = Types.Color.navy |> leftColorValue'
+        static member blue = Types.Color.blue |> leftColorValue'
+        static member teal = Types.Color.teal |> leftColorValue'
+        static member aqua = Types.Color.aqua |> leftColorValue'
+        static member orange = Types.Color.orange |> leftColorValue'
+        static member aliceBlue = Types.Color.aliceBlue |> leftColorValue'
+        static member antiqueWhite = Types.Color.antiqueWhite |> leftColorValue'
+        static member aquaMarine = Types.Color.aquaMarine |> leftColorValue'
+        static member azure = Types.Color.azure |> leftColorValue'
+        static member beige = Types.Color.beige |> leftColorValue'
+        static member bisque = Types.Color.bisque |> leftColorValue'
+        static member blanchedAlmond = Types.Color.blanchedAlmond |> leftColorValue'
+        static member blueViolet = Types.Color.blueViolet |> leftColorValue'
+        static member brown = Types.Color.brown |> leftColorValue'
+        static member burlywood = Types.Color.burlywood |> leftColorValue'
+        static member cadetBlue = Types.Color.cadetBlue |> leftColorValue'
+        static member chartreuse = Types.Color.chartreuse |> leftColorValue'
+        static member chocolate = Types.Color.chocolate |> leftColorValue'
+        static member coral = Types.Color.coral |> leftColorValue'
+        static member cornflowerBlue = Types.Color.cornflowerBlue |> leftColorValue'
+        static member cornsilk = Types.Color.cornsilk |> leftColorValue'
+        static member crimson = Types.Color.crimson |> leftColorValue'
+        static member cyan = Types.Color.cyan |> leftColorValue'
+        static member darkBlue = Types.Color.darkBlue |> leftColorValue'
+        static member darkCyan = Types.Color.darkCyan |> leftColorValue'
+        static member darkGoldenrod = Types.Color.darkGoldenrod |> leftColorValue'
+        static member darkGray = Types.Color.darkGray |> leftColorValue'
+        static member darkGreen = Types.Color.darkGreen |> leftColorValue'
+        static member darkKhaki = Types.Color.darkKhaki |> leftColorValue'
+        static member darkMagenta = Types.Color.darkMagenta |> leftColorValue'
+        static member darkOliveGreen = Types.Color.darkOliveGreen |> leftColorValue'
+        static member darkOrange = Types.Color.darkOrange |> leftColorValue'
+        static member darkOrchid = Types.Color.darkOrchid |> leftColorValue'
+        static member darkRed = Types.Color.darkRed |> leftColorValue'
+        static member darkSalmon = Types.Color.darkSalmon |> leftColorValue'
+        static member darkSeaGreen = Types.Color.darkSeaGreen |> leftColorValue'
+        static member darkSlateBlue = Types.Color.darkSlateBlue |> leftColorValue'
+        static member darkSlateGray = Types.Color.darkSlateGray |> leftColorValue'
+        static member darkTurquoise = Types.Color.darkTurquoise |> leftColorValue'
+        static member darkViolet = Types.Color.darkViolet |> leftColorValue'
+        static member deepPink = Types.Color.deepPink |> leftColorValue'
+        static member deepSkyBlue = Types.Color.deepSkyBlue |> leftColorValue'
+        static member dimGrey = Types.Color.dimGrey |> leftColorValue'
+        static member dodgerBlue = Types.Color.dodgerBlue |> leftColorValue'
+        static member fireBrick = Types.Color.fireBrick |> leftColorValue'
+        static member floralWhite = Types.Color.floralWhite |> leftColorValue'
+        static member forestGreen = Types.Color.forestGreen |> leftColorValue'
+        static member gainsboro = Types.Color.gainsboro |> leftColorValue'
+        static member ghostWhite = Types.Color.ghostWhite |> leftColorValue'
+        static member gold = Types.Color.gold |> leftColorValue'
+        static member goldenrod = Types.Color.goldenrod |> leftColorValue'
+        static member greenYellow = Types.Color.greenYellow |> leftColorValue'
+        static member grey = Types.Color.grey |> leftColorValue'
+        static member honeydew = Types.Color.honeydew |> leftColorValue'
+        static member hotPink = Types.Color.hotPink |> leftColorValue'
+        static member indianRed = Types.Color.indianRed |> leftColorValue'
+        static member indigo = Types.Color.indigo |> leftColorValue'
+        static member ivory = Types.Color.ivory |> leftColorValue'
+        static member khaki = Types.Color.khaki |> leftColorValue'
+        static member lavender = Types.Color.lavender |> leftColorValue'
+        static member lavenderBlush = Types.Color.lavenderBlush |> leftColorValue'
+        static member lawnGreen = Types.Color.lawnGreen |> leftColorValue'
+        static member lemonChiffon = Types.Color.lemonChiffon |> leftColorValue'
+        static member lightBlue = Types.Color.lightBlue |> leftColorValue'
+        static member lightCoral = Types.Color.lightCoral |> leftColorValue'
+        static member lightCyan = Types.Color.lightCyan |> leftColorValue'
+        static member lightGoldenrodYellow = Types.Color.lightGoldenrodYellow |> leftColorValue'
+        static member lightGray = Types.Color.lightGray |> leftColorValue'
+        static member lightGreen = Types.Color.lightGreen |> leftColorValue'
+        static member lightGrey = Types.Color.lightGrey |> leftColorValue'
+        static member lightPink = Types.Color.lightPink |> leftColorValue'
+        static member lightSalmon = Types.Color.lightSalmon |> leftColorValue'
+        static member lightSeaGreen = Types.Color.lightSeaGreen |> leftColorValue'
+        static member lightSkyBlue = Types.Color.lightSkyBlue |> leftColorValue'
+        static member lightSlateGrey = Types.Color.lightSlateGrey |> leftColorValue'
+        static member lightSteelBlue = Types.Color.lightSteelBlue |> leftColorValue'
+        static member lightYellow = Types.Color.lightYellow |> leftColorValue'
+        static member limeGreen = Types.Color.limeGreen |> leftColorValue'
+        static member linen = Types.Color.linen |> leftColorValue'
+        static member magenta = Types.Color.magenta |> leftColorValue'
+        static member mediumAquamarine = Types.Color.mediumAquamarine |> leftColorValue'
+        static member mediumBlue = Types.Color.mediumBlue |> leftColorValue'
+        static member mediumOrchid = Types.Color.mediumOrchid |> leftColorValue'
+        static member mediumPurple = Types.Color.mediumPurple |> leftColorValue'
+        static member mediumSeaGreen = Types.Color.mediumSeaGreen |> leftColorValue'
+        static member mediumSlateBlue = Types.Color.mediumSlateBlue |> leftColorValue'
+        static member mediumSpringGreen = Types.Color.mediumSpringGreen |> leftColorValue'
+        static member mediumTurquoise = Types.Color.mediumTurquoise |> leftColorValue'
+        static member mediumVioletRed = Types.Color.mediumVioletRed |> leftColorValue'
+        static member midnightBlue = Types.Color.midnightBlue |> leftColorValue'
+        static member mintCream = Types.Color.mintCream |> leftColorValue'
+        static member mistyRose = Types.Color.mistyRose |> leftColorValue'
+        static member moccasin = Types.Color.moccasin |> leftColorValue'
+        static member navajoWhite = Types.Color.navajoWhite |> leftColorValue'
+        static member oldLace = Types.Color.oldLace |> leftColorValue'
+        static member olivedrab = Types.Color.olivedrab |> leftColorValue'
+        static member orangeRed = Types.Color.orangeRed |> leftColorValue'
+        static member orchid = Types.Color.orchid |> leftColorValue'
+        static member paleGoldenrod = Types.Color.paleGoldenrod |> leftColorValue'
+        static member paleGreen = Types.Color.paleGreen |> leftColorValue'
+        static member paleTurquoise = Types.Color.paleTurquoise |> leftColorValue'
+        static member paleVioletred = Types.Color.paleVioletred |> leftColorValue'
+        static member papayaWhip = Types.Color.papayaWhip |> leftColorValue'
+        static member peachpuff = Types.Color.peachpuff |> leftColorValue'
+        static member peru = Types.Color.peru |> leftColorValue'
+        static member pink = Types.Color.pink |> leftColorValue'
+        static member plum = Types.Color.plum |> leftColorValue'
+        static member powderBlue = Types.Color.powderBlue |> leftColorValue'
+        static member rosyBrown = Types.Color.rosyBrown |> leftColorValue'
+        static member royalBlue = Types.Color.royalBlue |> leftColorValue'
+        static member saddleBrown = Types.Color.saddleBrown |> leftColorValue'
+        static member salmon = Types.Color.salmon |> leftColorValue'
+        static member sandyBrown = Types.Color.sandyBrown |> leftColorValue'
+        static member seaGreen = Types.Color.seaGreen |> leftColorValue'
+        static member seaShell = Types.Color.seaShell |> leftColorValue'
+        static member sienna = Types.Color.sienna |> leftColorValue'
+        static member skyBlue = Types.Color.skyBlue |> leftColorValue'
+        static member slateBlue = Types.Color.slateBlue |> leftColorValue'
+        static member slateGray = Types.Color.slateGray |> leftColorValue'
+        static member snow = Types.Color.snow |> leftColorValue'
+        static member springGreen = Types.Color.springGreen |> leftColorValue'
+        static member steelBlue = Types.Color.steelBlue |> leftColorValue'
+        static member tan = Types.Color.tan |> leftColorValue'
+        static member thistle = Types.Color.thistle |> leftColorValue'
+        static member tomato = Types.Color.tomato |> leftColorValue'
+        static member turquoise = Types.Color.turquoise |> leftColorValue'
+        static member violet = Types.Color.violet |> leftColorValue'
+        static member wheat = Types.Color.wheat |> leftColorValue'
+        static member whiteSmoke = Types.Color.whiteSmoke |> leftColorValue'
+        static member yellowGreen = Types.Color.yellowGreen |> leftColorValue'
+        static member rebeccaPurple = Types.Color.rebeccaPurple |> leftColorValue'
+        static member Rgb r g b = Types.Color.Rgb(r, g, b) |> leftColorValue'
+        static member Rgba r g b a = Types.Color.Rgba(r, g, b, a) |> leftColorValue'
+        static member Hex value = Types.Color.Hex value |> leftColorValue'
+        static member Hsl h s l = Types.Color.Hsl(h, s, l) |> leftColorValue'
+        static member Hsla h s l a  = Types.Color.Hsla (h, s, l, a) |> leftColorValue'
+        static member transparent = Types.Color.transparent |> leftColorValue'
+        static member currentColor = Types.Color.currentColor |> leftColorValue'
 
-        static member Inherit = Inherit |> leftColorValue'
-        static member Initial = Initial |> leftColorValue'
-        static member Unset = Unset |> leftColorValue'
+        static member Inherit = Types.Inherit |> leftColorValue'
+        static member Initial = Types.Initial |> leftColorValue'
+        static member Unset = Types.Unset |> leftColorValue'
 
     /// <summary>Specifies color of left border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> CssColor </c>
+    ///     - <c> Types.Color </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderLeftColor' (color: IBorderColor) = BorderLeftColor.Value(color)
+    let BorderLeftColor' (color: Types.IBorderColor) = BorderLeftColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing
-    let private spacingValue value = PropertyValue.cssValue Property.BorderSpacing value
+    let private spacingValue value = Types.cssValue Types.Property.BorderSpacing value
     let private spacingValue' value =
         value
         |> spacingToString
         |> spacingValue
     type BorderSpacing =
-        static member Value (width: IBorderSpacing) =
+        static member Value (width: Types.IBorderSpacing) =
             spacingValue (spacingToString width)
-        static member Value (w1: IBorderSpacing, w2: IBorderSpacing) =
+        static member Value (w1: Types.IBorderSpacing, w2: Types.IBorderSpacing) =
             sprintf "%s %s"
                 (spacingToString w1)
                 (spacingToString w2)
             |> spacingValue
-        static member Inherit = Inherit |> spacingValue'
-        static member Initial = Initial |> spacingValue'
-        static member Unset = Unset |> spacingValue'
+        static member Inherit = Types.Inherit |> spacingValue'
+        static member Initial = Types.Initial |> spacingValue'
+        static member Unset = Types.Unset |> spacingValue'
 
     /// <summary>Specifies distance borders of table cells.</summary>
     /// <param name="spacing">
@@ -1693,28 +1690,28 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderSpacing' (spacing: IBorderSpacing) = BorderSpacing.Value(spacing)
+    let BorderSpacing' (spacing: Types.IBorderSpacing) = BorderSpacing.Value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
-    let private imageWidthValue value = PropertyValue.cssValue Property.BorderImageWidth value
+    let private imageWidthValue value = Types.cssValue Types.Property.BorderImageWidth value
     let private imageWidthValue' value =
         value
         |> imageWidthToString
         |> imageWidthValue
     type BorderImageWidth =
-        static member Value (width: IBorderImageWidth) = width |> imageWidthValue'
-        static member Value (w1: IBorderImageWidth, w2: IBorderImageWidth) =
+        static member Value (width: Types.IBorderImageWidth) = width |> imageWidthValue'
+        static member Value (w1: Types.IBorderImageWidth, w2: Types.IBorderImageWidth) =
             sprintf "%s %s"
                 (imageWidthToString w1)
                 (imageWidthToString w2)
             |> imageWidthValue
-        static member Value (w1: IBorderImageWidth, w2: IBorderImageWidth, w3: IBorderImageWidth) =
+        static member Value (w1: Types.IBorderImageWidth, w2: Types.IBorderImageWidth, w3: Types.IBorderImageWidth) =
             sprintf "%s %s %s"
                 (imageWidthToString w1)
                 (imageWidthToString w2)
                 (imageWidthToString w3)
             |> imageWidthValue
-        static member Value (w1: IBorderImageWidth, w2: IBorderImageWidth, w3: IBorderImageWidth, w4: IBorderImageWidth) =
+        static member Value (w1: Types.IBorderImageWidth, w2: Types.IBorderImageWidth, w3: Types.IBorderImageWidth, w4: Types.IBorderImageWidth) =
             sprintf "%s %s %s %s"
                 (imageWidthToString w1)
                 (imageWidthToString w2)
@@ -1722,10 +1719,10 @@ module Border =
                 (imageWidthToString w4)
             |> imageWidthValue
 
-        static member Auto = Auto |> imageWidthValue'
-        static member Inherit = Inherit |> imageWidthValue'
-        static member Initial = Initial |> imageWidthValue'
-        static member Unset = Unset |> imageWidthValue'
+        static member Auto = Types.Auto |> imageWidthValue'
+        static member Inherit = Types.Inherit |> imageWidthValue'
+        static member Initial = Types.Initial |> imageWidthValue'
+        static member Unset = Types.Unset |> imageWidthValue'
 
     /// <summary>Specifies width of border image.</summary>
     /// <param name="width">
@@ -1739,51 +1736,51 @@ module Border =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageWidth' (width: IBorderImageWidth) = BorderImageWidth.Value(width)
+    let BorderImageWidth' (width: Types.IBorderImageWidth) = BorderImageWidth.Value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
-    let private imageValue value = PropertyValue.cssValue Property.BorderImageSource value
+    let private imageValue value = Types.cssValue Types.Property.BorderImageSource value
     let private imageValue' value =
         value
         |> imageSourceToString
         |> imageValue
 
     type BorderImageSource =
-        static member Value (source: IBorderImageSource) = source |> imageValue'
+        static member Value (source: Types.IBorderImageSource) = source |> imageValue'
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
-        static member LinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
             imageValue <| Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Size.Size) list) =
+        static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
             imageValue <| Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
+        static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
             imageValue <| Image.Image.LinearGradients(gradients)
-        static member LinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Size.Size) list)) list) =
+        static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
             imageValue <| Image.Image.LinearGradients(gradients)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Size.Size) list) =
+        static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
             imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
             imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Size.Size) list)) list) =
+        static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
             imageValue <| Image.Image.RepeatingLinearGradients(gradients)
-        static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
+        static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
             imageValue <| Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
             imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
             imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Percent.Percent) list) list) =
+        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
             imageValue <| Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Size.Size) list) list) =
+        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
             imageValue <| Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member None = None' |> imageValue'
-        static member Inherit = Inherit |> imageValue'
-        static member Initial = Initial |> imageValue'
-        static member Unset = Unset |> imageValue'
+        static member None = Types.None' |> imageValue'
+        static member Inherit = Types.Inherit |> imageValue'
+        static member Initial = Types.Initial |> imageValue'
+        static member Unset = Types.Unset |> imageValue'
 
     /// <summary>Specifies width of border image.</summary>
     /// <param name="source">
@@ -1795,4 +1792,4 @@ module Border =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageSource' (source: IBorderImageSource) = BorderImageSource.Value(source)
+    let BorderImageSource' (source: Types.IBorderImageSource) = BorderImageSource.Value(source)

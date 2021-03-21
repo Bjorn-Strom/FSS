@@ -1,234 +1,233 @@
 namespace Fss
-open FssTypes
 
 [<AutoOpen>]
 module Text =
-    let private textAlignToString (alignment: ITextAlign) =
+    let private textAlignToString (alignment: Types.ITextAlign) =
         match alignment with
-        | :? TextAlign as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> global' g
+        | :? Types.TextAlign as t -> Utilities.Helpers.duToKebab t
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown text alignment"
 
-    let private textAlignLastToString (alignment: ITextAlignLast) =
+    let private textAlignLastToString (alignment: Types.ITextAlignLast) =
         match alignment with
-        | :? TextAlignLast as t -> Utilities.Helpers.duToLowercase t
-        | :? Auto -> auto
-        | :? Global as g -> global' g
+        | :? Types.TextAlignLast as t -> Utilities.Helpers.duToLowercase t
+        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown text alignment last"
 
-    let private decorationLineToString (decorationLine: ITextDecorationLine) =
+    let private decorationLineToString (decorationLine: Types.ITextDecorationLine) =
         match decorationLine with
-        | :? TextDecorationLine as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> global' g
-        | :? None' -> none
+        | :? Types.TextDecorationLine as t -> Utilities.Helpers.duToKebab t
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.none
         | _ -> "Unknown text decoration line"
 
-    let private thicknessToString (thickness: ITextDecorationThickness) =
+    let private thicknessToString (thickness: Types.ITextDecorationThickness) =
         match thickness with
-        | :? TextDecorationThickness -> "from-font"
-        | :? Global as g -> global' g
-        | :? Auto -> auto
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Types.TextDecorationThickness -> "from-font"
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.auto
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
         | _ -> "Unknown text decoration thickness"
 
-    let private decorationToString (decoration: ITextDecoration) =
+    let private decorationToString (decoration: Types.ITextDecoration) =
         match decoration with
-        | :? None' -> none
+        | :? Types.None' -> Types.none
         | _ -> "Unknown text decoration"
 
-    let private decorationStyleToString (style: ITextDecorationStyle) =
+    let private decorationStyleToString (style: Types.ITextDecorationStyle) =
         match style with
-        | :? TextDecorationStyle as t -> Utilities.Helpers.duToLowercase t
-        | :? Global as g -> global' g
+        | :? Types.TextDecorationStyle as t -> Utilities.Helpers.duToLowercase t
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown text decoration style"
 
-    let private decorationSkipToString (skip: ITextDecorationSkip) =
+    let private decorationSkipToString (skip: Types.ITextDecorationSkip) =
         match skip with
-        | :? DecorationSkip as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> global' g
-        | :? None' -> none
+        | :? Types.DecorationSkip as t -> Utilities.Helpers.duToKebab t
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.none
         | _ -> "Unknown text decoration skip"
 
-    let private decorationSkipInkToString (skipInk: ITextDecorationSkipInk) =
+    let private decorationSkipInkToString (skipInk: Types.ITextDecorationSkipInk) =
         match skipInk with
-        | :? TextDecorationSkipInk -> "all"
-        | :? Global as g -> global' g
-        | :? None' -> none
-        | :? Auto -> auto
+        | :? Types.TextDecorationSkipInk -> "all"
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.none
+        | :? Types.Auto -> Types.auto
         | _ -> "Unknown text decoration skip ink"
 
-    let private textTransformToString (transform: ITextTransform) =
+    let private textTransformToString (transform: Types.ITextTransform) =
         match transform with
-        | :? TextTransform as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> global' g
-        | :? None' -> none
+        | :? Types.TextTransform as t -> Utilities.Helpers.duToKebab t
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.none
         | _ -> "Unknown text transform"
 
-    let private indentToString (indent: ITextIndent) =
+    let private indentToString (indent: Types.ITextIndent) =
         match indent with
-        | :? TextIndent as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> global' g
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Types.TextIndent as t -> Utilities.Helpers.duToKebab t
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
         | _ -> "Unknown text indent"
 
     let private textShadowToString =
         function
-            | XY (x,y) -> sprintf "%s %s" (Units.Size.value x) (Units.Size.value y)
-            | ColorXY (c,x,y) -> sprintf "%s %s %s" (CssColorValue.color c) (Units.Size.value x) (Units.Size.value y)
-            | ColorXYBlur (c,x,y,b) ->
+            | Types.XY (x,y) -> sprintf "%s %s" (Types.sizeToString x) (Types.sizeToString y)
+            | Types.ColorXY (c,x,y) -> sprintf "%s %s %s" (Types.colorToString c) (Types.sizeToString x) (Types.sizeToString y)
+            | Types.ColorXYBlur (c,x,y,b) ->
                 sprintf "%s %s %s %s"
-                    (CssColorValue.color c)
-                    (Units.Size.value x)
-                    (Units.Size.value y)
-                    (Units.Size.value b)
+                    (Types.colorToString c)
+                    (Types.sizeToString x)
+                    (Types.sizeToString y)
+                    (Types.sizeToString b)
 
-    let private emphasisToString (emphasis: ITextEmphasis) =
+    let private emphasisToString (emphasis: Types.ITextEmphasis) =
         match emphasis with
-        | :? Global as g -> global' g
-        | :? None' -> none
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.none
         | _ -> "unknown text emphasis"
 
-    let private emphasisPositionToString (emphasisPosition: ITextEmphasisPosition) =
+    let private emphasisPositionToString (emphasisPosition: Types.ITextEmphasisPosition) =
         match emphasisPosition with
-        | :? EmphasisPosition as e -> Utilities.Helpers.duToLowercase e
-        | :? Global as g -> global' g
+        | :? Types.EmphasisPosition as e -> Utilities.Helpers.duToLowercase e
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "unknown text emphasis position"
 
-    let private textOverflowToString (overflow: ITextOverflow) =
+    let private textOverflowToString (overflow: Types.ITextOverflow) =
         match overflow with
-        | :? TextOverflow as t -> Utilities.Helpers.duToLowercase t
-        | :? CssString as s -> string s |> sprintf "\"%s\""
+        | :? Types.TextOverflow as t -> Utilities.Helpers.duToLowercase t
+        | :? Types.String as s -> Types.StringToString s |> sprintf "\"%s\""
         | _ -> "Unknown text overflow"
 
-    let private emphasisStyleToString (emphasisStyle: ITextEmphasisStyle) =
-        let stringifyStyle style =
+    let private emphasisStyleToString (emphasisStyle: Types.ITextEmphasisStyle) =
+        let stringifyStyle (style: Types.TextEmphasisStyle) =
             match style with
                 | FilledSesame -> "filled sesame"
                 | OpenSesame -> "open sesame"
                 | _ -> Utilities.Helpers.duToKebab style
 
         match emphasisStyle with
-        | :? TextEmphasisStyle as t -> stringifyStyle t
-        | :? CssString as s -> string s |> sprintf "'%s'"
-        | :? Global as g -> global' g
-        | :? None' -> none
+        | :? Types.TextEmphasisStyle as t -> stringifyStyle t
+        | :? Types.String as s -> Types.StringToString s |> sprintf "'%s'"
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.none
         | _ -> "unknown text emphasis style"
 
-    let private underlinePositionToString (underlinePosition: ITextUnderlinePosition) =
+    let private underlinePositionToString (underlinePosition: Types.ITextUnderlinePosition) =
         match underlinePosition with
-        | :? UnderlinePosition as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> global' g
-        | :? Auto -> auto
+        | :? Types.UnderlinePosition as t -> Utilities.Helpers.duToKebab t
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.auto
         | _ -> "unknown text underline position"
 
-    let private textEmphasisColorToString (color: ITextEmphasisColor) =
+    let private textEmphasisColorToString (color: Types.ITextEmphasisColor) =
         match color with
-            | :? CssColor as c -> CssColorValue.color c
-            | :? Global as g -> global' g
+            | :? Types.Color as c -> Types.colorToString c
+            | :? Types.Keywords as k -> Types.keywordsToString k
             | _ -> "unknown text emphasis color"
 
-    let private underlineOffsetToString (underlineOffset: ITextUnderlineOffset) =
+    let private underlineOffsetToString (underlineOffset: Types.ITextUnderlineOffset) =
         match underlineOffset with
-        | :? Auto -> auto
-        | :? Global as g -> global' g
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Percent as p -> Types.percentToString p
         | _ -> "unknown text underline offset"
 
-    let private quoteToString (quote: IQuotes) =
+    let private quoteToString (quote: Types.IQuotes) =
         match quote with
-        | :? CssString as s -> string s
-        | :? None' -> none
-        | :? Auto -> auto
-        | :? Global as g -> global' g
+        | :? Types.String as s -> Types.StringToString s
+        | :? Types.None' -> Types.none
+        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "unknown quotes"
 
-    let private hyphensToString (hyphens: IHyphens) =
+    let private hyphensToString (hyphens: Types.IHyphens) =
         match hyphens with
-        | :? Hyphens -> "manual"
-        | :? None' -> none
-        | :? Auto -> auto
-        | :? Global as g -> global' g
+        | :? Types.Hyphens -> "manual"
+        | :? Types.None' -> Types.none
+        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "unknown hyphens"
 
-    let private textDecorationColorToString (color: ITextDecorationColor) =
+    let private textDecorationColorToString (color: Types.ITextDecorationColor) =
         match color with
-            | :? CssColor as c -> CssColorValue.color c
-            | :? Global as g -> global' g
+            | :? Types.Color as c -> Types.colorToString c
+            | :? Types.Keywords as k -> Types.keywordsToString k
             | _ -> "unknown text decoration color"
 
-    let private textSizeAdjustToString (size: ITextSizeAdjust) =
+    let private textSizeAdjustToString (size: Types.ITextSizeAdjust) =
         match size with
-        | :? None' -> none
-        | :? Auto -> auto
-        | :? Global as g -> global' g
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
+        | :? Types.None' -> Types.none
+        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Percent as p -> Types.percentToString p
         | _ -> "Unknown text size adjust"
 
-    let private tabSizeToString (tabSize: ITabSize) =
+    let private tabSizeToString (tabSize: Types.ITabSize) =
         match tabSize with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? CssInt as i -> cssIntToString i
-        | :? Global as g -> global' g
+        | :? Types.Size as s -> Types.sizeToString s
+        | :? Types.Int as i -> Types.IntToString i
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown tab size"
 
-    let private textOrientationToString (textOrientation: ITextOrientation) =
+    let private textOrientationToString (textOrientation: Types.ITextOrientation) =
         match textOrientation with
-        | :? TextOrientation as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> global' g
+        | :? Types.TextOrientation as t -> Utilities.Helpers.duToKebab t
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown text orientation"
 
-    let private textRenderingToString (textRendering: ITextRendering) =
+    let private textRenderingToString (textRendering: Types.ITextRendering) =
         match textRendering with
-        | :? TextRendering as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> global' g
-        | :? Auto -> auto
+        | :? Types.TextRendering as t -> Utilities.Helpers.duToKebab t
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.Auto -> Types.auto
         | _ -> "Unknown text rendering"
 
-    let private textJustifyToString (textJustify: ITextJustify) =
+    let private textJustifyToString (textJustify: Types.ITextJustify) =
         match textJustify with
-        | :? TextJustify as j -> Utilities.Helpers.duToKebab j
-        | :? None' -> none
-        | :? Auto -> auto
+        | :? Types.TextJustify as j -> Utilities.Helpers.duToKebab j
+        | :? Types.None' -> Types.none
+        | :? Types.Auto -> Types.auto
         | _ -> "Unknown text justification"
 
-    let private whitespaceToString (whitespace: IWhiteSpace) =
+    let private whitespaceToString (whitespace: Types.IWhiteSpace) =
         match whitespace with
-        | :? WhiteSpace as ws -> Utilities.Helpers.duToKebab ws
-        | :? Normal -> normal
-        | :? Global as g -> global' g
+        | :? Types.WhiteSpace as ws -> Utilities.Helpers.duToKebab ws
+        | :? Types.Normal -> Types.normal
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown whitespace"
 
-    let private userSelectToString (userSelect: IUserSelect) =
+    let private userSelectToString (userSelect: Types.IUserSelect) =
         match userSelect with
-        | :? UserSelect as u -> Utilities.Helpers.duToLowercase u
-        | :? None' -> none
-        | :? Auto -> auto
-        | :? Global as g -> global' g
+        | :? Types.UserSelect as u -> Utilities.Helpers.duToLowercase u
+        | :? Types.None' -> Types.none
+        | :? Types.Auto -> Types.auto
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown user select"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
-    let private alignCssValue value = PropertyValue.cssValue Property.TextAlign value
+    let private alignCssValue value = Types.cssValue Types.Property.TextAlign value
     let private alignCssValue' value =
         value
         |> textAlignToString
         |> alignCssValue
     type TextAlign =
-        static member Value (textAlign: ITextAlign) = textAlign |> alignCssValue'
-        static member Left = FssTypes.TextAlign.Left |> alignCssValue'
-        static member Right = FssTypes.TextAlign.Right |> alignCssValue'
-        static member Center = FssTypes.TextAlign.Center |> alignCssValue'
-        static member Justify = FssTypes.TextAlign.Justify |> alignCssValue'
-        static member JustifyAll = JustifyAll |> alignCssValue'
-        static member Start = FssTypes.TextAlign.Start |> alignCssValue'
-        static member End = FssTypes.TextAlign.End |> alignCssValue'
-        static member MatchParent = MatchParent |> alignCssValue'
+        static member Value (textAlign: Types.ITextAlign) = textAlign |> alignCssValue'
+        static member Left = Types.TextAlign.Left |> alignCssValue'
+        static member Right = Types.TextAlign.Right |> alignCssValue'
+        static member Center = Types.TextAlign.Center |> alignCssValue'
+        static member Justify = Types.TextAlign.Justify |> alignCssValue'
+        static member JustifyAll = Types.JustifyAll |> alignCssValue'
+        static member Start = Types.TextAlign.Start |> alignCssValue'
+        static member End = Types.TextAlign.End |> alignCssValue'
+        static member MatchParent = Types.MatchParent |> alignCssValue'
 
-        static member Inherit = Inherit |> alignCssValue'
-        static member Initial = Initial |> alignCssValue'
-        static member Unset = Unset |> alignCssValue'
+        static member Inherit = Types.Inherit |> alignCssValue'
+        static member Initial = Types.Initial |> alignCssValue'
+        static member Unset = Types.Unset |> alignCssValue'
 
     /// <summary>Specifies the horizontal alignment of text.</summary>
     /// <param name="align">
@@ -239,26 +238,26 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextAlign' (align: ITextAlign) = TextAlign.Value(align)
+    let TextAlign' (align: Types.ITextAlign) = TextAlign.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
-    let private alignLastCssValue value = PropertyValue.cssValue Property.TextAlignLast value
+    let private alignLastCssValue value = Types.cssValue Types.Property.TextAlignLast value
     let private alignLastCssValue' value =
         value
         |> textAlignLastToString
         |> alignLastCssValue
     type TextAlignLast =
-        static member Value (textAlign: ITextAlignLast) = textAlign |> alignLastCssValue'
-        static member Left = FssTypes.TextAlignLast.Left |> alignLastCssValue'
-        static member Right = FssTypes.TextAlignLast.Right |> alignLastCssValue'
-        static member Center = FssTypes.TextAlignLast.Center |> alignLastCssValue'
-        static member Justify = FssTypes.TextAlignLast.Justify |> alignLastCssValue'
-        static member Start = FssTypes.TextAlignLast.Start |> alignLastCssValue'
-        static member End = FssTypes.TextAlignLast.End |> alignLastCssValue'
+        static member Value (textAlign: Types.ITextAlignLast) = textAlign |> alignLastCssValue'
+        static member Left = Types.TextAlignLast.Left |> alignLastCssValue'
+        static member Right = Types.TextAlignLast.Right |> alignLastCssValue'
+        static member Center = Types.TextAlignLast.Center |> alignLastCssValue'
+        static member Justify = Types.TextAlignLast.Justify |> alignLastCssValue'
+        static member Start = Types.TextAlignLast.Start |> alignLastCssValue'
+        static member End = Types.TextAlignLast.End |> alignLastCssValue'
 
-        static member Inherit = Inherit |> alignLastCssValue'
-        static member Initial = Initial |> alignLastCssValue'
-        static member Unset = Unset |> alignLastCssValue'
+        static member Inherit = Types.Inherit |> alignLastCssValue'
+        static member Initial = Types.Initial |> alignLastCssValue'
+        static member Unset = Types.Unset |> alignLastCssValue'
 
     /// <summary>Specifies the horizontal alignment of the last line of text.</summary>
     /// <param name="align">
@@ -269,17 +268,17 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextAlignLast' (align: ITextAlignLast) = TextAlignLast.Value(align)
+    let TextAlignLast' (align: Types.ITextAlignLast) = TextAlignLast.Value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
-    let private decorationValue value = PropertyValue.cssValue Property.TextDecoration value
+    let private decorationValue value = Types.cssValue Types.Property.TextDecoration value
     let private decorationValue' value =
         value
         |> decorationToString
         |> decorationValue
     type TextDecoration =
-        static member Value (value: ITextDecoration) = value |> decorationValue'
-        static member None = None' |> decorationValue'
+        static member Value (value: Types.ITextDecoration) = value |> decorationValue'
+        static member None = Types.None' |> decorationValue'
 
     /// <summary>Resets text decoration.</summary>
     /// <param name="decoration">
@@ -287,29 +286,29 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecoration' (decoration: ITextDecoration) = TextDecoration.Value(decoration)
+    let TextDecoration' (decoration: Types.ITextDecoration) = TextDecoration.Value(decoration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
-    let private lineCssValue value = PropertyValue.cssValue Property.TextDecorationLine value
+    let private lineCssValue value = Types.cssValue Types.Property.TextDecorationLine value
     let private lineCssValue' value =
         value
         |> decorationLineToString
         |> lineCssValue
     type TextDecorationLine =
-        static member Value (value: ITextDecorationLine) = value |> lineCssValue'
-        static member Value (v1: ITextDecorationLine, v2: ITextDecorationLine) =
+        static member Value (value: Types.ITextDecorationLine) = value |> lineCssValue'
+        static member Value (v1: Types.ITextDecorationLine, v2: Types.ITextDecorationLine) =
             lineCssValue <| sprintf "%s %s" (decorationLineToString v1) (decorationLineToString v2)
-        static member Value (v1: ITextDecorationLine, v2: ITextDecorationLine, v3: ITextDecorationLine) =
+        static member Value (v1: Types.ITextDecorationLine, v2: Types.ITextDecorationLine, v3: Types.ITextDecorationLine) =
             lineCssValue <| sprintf "%s %s %s" (decorationLineToString v1) (decorationLineToString v2) (decorationLineToString v3)
-        static member Underline = Underline |> lineCssValue'
-        static member Overline = Overline |> lineCssValue'
-        static member LineThrough = LineThrough |> lineCssValue'
-        static member Blink = Blink |> lineCssValue'
+        static member Underline = Types.Underline |> lineCssValue'
+        static member Overline = Types.Overline |> lineCssValue'
+        static member LineThrough = Types.LineThrough |> lineCssValue'
+        static member Blink = Types.Blink |> lineCssValue'
 
-        static member Inherit = Inherit |> lineCssValue'
-        static member Initial = Initial |> lineCssValue'
-        static member Unset = Unset |> lineCssValue'
-        static member None = None' |> lineCssValue'
+        static member Inherit = Types.Inherit |> lineCssValue'
+        static member Initial = Types.Initial |> lineCssValue'
+        static member Unset = Types.Unset |> lineCssValue'
+        static member None = Types.None' |> lineCssValue'
 
     /// <summary>Specifies how to decorate text.</summary>
     /// <param name="decoration">
@@ -321,22 +320,22 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationLine' (decoration: ITextDecorationLine) = TextDecorationLine.Value(decoration)
+    let TextDecorationLine' (decoration: Types.ITextDecorationLine) = TextDecorationLine.Value(decoration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
-    let private thicknessValue value = PropertyValue.cssValue Property.TextDecorationThickness value
+    let private thicknessValue value = Types.cssValue Types.Property.Property.TextDecorationThickness value
     let private thicknessValue' value =
         value
         |> thicknessToString
         |> thicknessValue
     type TextDecorationThickness =
-        static member Value (thickness: ITextDecorationThickness) = thickness |> thicknessValue'
-        static member FromFont = FssTypes.TextDecorationThickness |> thicknessValue'
+        static member Value (thickness: Types.ITextDecorationThickness) = thickness |> thicknessValue'
+        static member FromFont = Types.TextDecorationThickness |> thicknessValue'
 
-        static member Auto = Auto |> thicknessValue'
-        static member Inherit = Inherit |> thicknessValue'
-        static member Initial = Initial |> thicknessValue'
-        static member Unset = Unset |> thicknessValue'
+        static member Auto = Types.Auto |> thicknessValue'
+        static member Inherit = Types.Inherit |> thicknessValue'
+        static member Initial = Types.Initial |> thicknessValue'
+        static member Unset = Types.Unset |> thicknessValue'
 
     /// <summary>Specifies thickness of text decoration.</summary>
     /// <param name="thickness">
@@ -351,25 +350,25 @@ module Text =
     ///     - <c> Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationThickness' (thickness: ITextDecorationThickness) = TextDecorationThickness.Value(thickness)
+    let TextDecorationThickness' (thickness: Types.ITextDecorationThickness) = TextDecorationThickness.Value(thickness)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
-    let private decorationStyleValue value = PropertyValue.cssValue Property.TextDecorationStyle value
+    let private decorationStyleValue value = Types.cssValue Types.Property.TextDecorationStyle value
     let private decorationStyleValue' value =
         value
         |> decorationStyleToString
         |> decorationStyleValue
     type TextDecorationStyle =
-        static member Value(style: ITextDecorationStyle) = style |> decorationStyleValue'
-        static member Solid = FssTypes.TextDecorationStyle.Solid |> decorationStyleValue'
-        static member Double = FssTypes.TextDecorationStyle.Double |> decorationStyleValue'
-        static member Dotted = FssTypes.TextDecorationStyle.Dotted |> decorationStyleValue'
-        static member Dashed = FssTypes.TextDecorationStyle.Dashed |> decorationStyleValue'
-        static member Wavy = Wavy |> decorationStyleValue'
+        static member Value(style: Types.ITextDecorationStyle) = style |> decorationStyleValue'
+        static member Solid = Types.TextDecorationStyle.Solid |> decorationStyleValue'
+        static member Double = Types.TextDecorationStyle.Double |> decorationStyleValue'
+        static member Dotted = Types.TextDecorationStyle.Dotted |> decorationStyleValue'
+        static member Dashed = Types.TextDecorationStyle.Dashed |> decorationStyleValue'
+        static member Wavy = Types.Wavy |> decorationStyleValue'
 
-        static member Inherit = Inherit |> decorationStyleValue'
-        static member Initial = Initial |> decorationStyleValue'
-        static member Unset = Unset |> decorationStyleValue'
+        static member Inherit = Types.Inherit |> decorationStyleValue'
+        static member Initial = Types.Initial |> decorationStyleValue'
+        static member Unset = Types.Unset |> decorationStyleValue'
 
     /// <summary>Specifies style of text decoration.</summary>
     /// <param name="decoration">
@@ -380,35 +379,35 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationStyle' (decoration: ITextDecorationStyle) = TextDecorationStyle.Value(decoration)
+    let TextDecorationStyle' (decoration: Types.ITextDecorationStyle) = TextDecorationStyle.Value(decoration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
-    let private skipValue value = PropertyValue.cssValue Property.TextDecorationSkip value
+    let private skipValue value = Types.cssValue Types.Property.TextDecorationSkip value
     let private skipValue' value =
         value
         |> decorationSkipToString
         |> skipValue
 
     type TextDecorationSkip =
-        static member Value (value: ITextDecorationSkip) = value |> skipValue'
-        static member Value (v1: ITextDecorationSkip, v2: ITextDecorationSkip) =
+        static member Value (value: Types.ITextDecorationSkip) = value |> skipValue'
+        static member Value (v1: Types.ITextDecorationSkip, v2: Types.ITextDecorationSkip) =
             sprintf "%s %s" (decorationSkipToString v1) (decorationSkipToString v2) |> skipValue
-        static member Value (v1: ITextDecorationSkip, v2: ITextDecorationSkip, v3: ITextDecorationSkip) =
+        static member Value (v1: Types.ITextDecorationSkip, v2: Types.ITextDecorationSkip, v3: Types.ITextDecorationSkip) =
             sprintf "%s %s %s" (decorationSkipToString v1) (decorationSkipToString v2) (decorationSkipToString v3) |> skipValue
-        static member Value (v1: ITextDecorationSkip, v2: ITextDecorationSkip, v3: ITextDecorationSkip, v4: ITextDecorationSkip) =
+        static member Value (v1: Types.ITextDecorationSkip, v2: Types.ITextDecorationSkip, v3: Types.ITextDecorationSkip, v4: Types.ITextDecorationSkip) =
             sprintf "%s %s %s %s" (decorationSkipToString v1) (decorationSkipToString v2) (decorationSkipToString v3) (decorationSkipToString v4) |> skipValue
 
-        static member Objects = Objects |> skipValue'
-        static member Spaces = Spaces |> skipValue'
-        static member LeadingSpaces = LeadingSpaces |> skipValue'
-        static member TrailingSpaces = TrailingSpaces |> skipValue'
-        static member Edges = Edges |> skipValue'
-        static member BoxDecoration = BoxDecoration |> skipValue'
+        static member Objects = Types.Objects |> skipValue'
+        static member Spaces = Types.Spaces |> skipValue'
+        static member LeadingSpaces = Types.LeadingSpaces |> skipValue'
+        static member TrailingSpaces = Types.TrailingSpaces |> skipValue'
+        static member Edges = Types.Edges |> skipValue'
+        static member BoxDecoration = Types.BoxDecoration |> skipValue'
 
-        static member Inherit = Inherit |> skipValue'
-        static member Initial = Initial |> skipValue'
-        static member Unset = Unset |> skipValue'
-        static member None = None' |> skipValue'
+        static member Inherit = Types.Inherit |> skipValue'
+        static member Initial = Types.Initial |> skipValue'
+        static member Unset = Types.Unset |> skipValue'
+        static member None = Types.None' |> skipValue'
 
     /// <summary>Specifies what parts of decoration should be skipped.</summary>
     /// <param name="skip">
@@ -420,23 +419,23 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationSkip' (skip: ITextDecorationSkip) = TextDecorationSkip.Value(skip)
+    let TextDecorationSkip' (skip: Types.ITextDecorationSkip) = TextDecorationSkip.Value(skip)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
-    let private skipInkValue value = PropertyValue.cssValue Property.TextDecorationSkipInk value
+    let private skipInkValue value = Types.cssValue Types.Property.Property.TextDecorationSkipInk value
     let private skipInkValue' value =
         value
         |> decorationSkipInkToString
         |> skipInkValue
     type TextDecorationSkipInk =
-        static member Value(skipInk: ITextDecorationSkipInk) = skipInk |> skipInkValue'
-        static member All = FssTypes.TextDecorationSkipInk |> skipInkValue'
+        static member Value(skipInk: Types.ITextDecorationSkipInk) = skipInk |> skipInkValue'
+        static member All = Types.TextDecorationSkipInk |> skipInkValue'
 
-        static member Inherit = Inherit |> skipInkValue'
-        static member Initial = Initial |> skipInkValue'
-        static member Unset = Unset |> skipInkValue'
-        static member None = None' |> skipInkValue'
-        static member Auto = Auto |> skipInkValue'
+        static member Inherit = Types.Inherit |> skipInkValue'
+        static member Initial = Types.Initial |> skipInkValue'
+        static member Unset = Types.Unset |> skipInkValue'
+        static member None = Types.None' |> skipInkValue'
+        static member Auto = Types.Auto |> skipInkValue'
 
     /// <summary>Specifies what parts of decoration should be skipped.</summary>
     /// <param name="skip">
@@ -449,26 +448,26 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationSkipInk' (skip: ITextDecorationSkipInk) = TextDecorationSkipInk.Value(skip)
+    let TextDecorationSkipInk' (skip: Types.ITextDecorationSkipInk) = TextDecorationSkipInk.Value(skip)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
-    let private transformValue value = PropertyValue.cssValue Property.TextTransform value
+    let private transformValue value = Types.cssValue Types.Property.TextTransform value
     let private transformValue' value =
         value
         |> textTransformToString
         |> transformValue
     type TextTransform =
-        static member Value (transform: ITextTransform) = transform |> transformValue'
-        static member Capitalize = Capitalize |> transformValue'
-        static member Uppercase = Uppercase |> transformValue'
-        static member Lowercase = Lowercase |> transformValue'
-        static member FullWidth = FullWidth |> transformValue'
-        static member FullSizeKana = FullSizeKana |> transformValue'
+        static member Value (transform: Types.ITextTransform) = transform |> transformValue'
+        static member Capitalize = Types.Capitalize |> transformValue'
+        static member Uppercase = Types.Uppercase |> transformValue'
+        static member Lowercase = Types.Lowercase |> transformValue'
+        static member FullWidth = Types.FullWidth |> transformValue'
+        static member FullSizeKana = Types.FullSizeKana |> transformValue'
 
-        static member Inherit = Inherit |> transformValue'
-        static member Initial = Initial |> transformValue'
-        static member Unset = Unset |> transformValue'
-        static member None = None' |> transformValue'
+        static member Inherit = Types.Inherit |> transformValue'
+        static member Initial = Types.Initial |> transformValue'
+        static member Unset = Types.Unset |> transformValue'
+        static member None = Types.None' |> transformValue'
 
     /// <summary>Specifies what parts of text to capitalize.</summary>
     /// <param name="transform">
@@ -480,26 +479,26 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextTransform' (transform: ITextTransform) = TextTransform.Value(transform)
+    let TextTransform' (transform: Types.ITextTransform) = TextTransform.Value(transform)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
-    let private indentCssValue value = PropertyValue.cssValue Property.TextIndent value
+    let private indentCssValue value = Types.cssValue Types.Property.TextIndent value
     let private indentCssValue' value =
         value
         |> indentToString
         |> indentCssValue
     type TextIndent =
-        static member Value (indent: ITextIndent) = indent |> indentCssValue'
-        static member Value (i1: ITextIndent, i2: ITextIndent) = sprintf "%s %s" (indentToString i1) (indentToString i2) |> indentCssValue
-        static member Value (i1: ITextIndent, i2: ITextIndent, i3: ITextIndent) =
+        static member Value (indent: Types.ITextIndent) = indent |> indentCssValue'
+        static member Value (i1: Types.ITextIndent, i2: Types.ITextIndent) = sprintf "%s %s" (indentToString i1) (indentToString i2) |> indentCssValue
+        static member Value (i1: Types.ITextIndent, i2: Types.ITextIndent, i3: Types.ITextIndent) =
             sprintf "%s %s %s" (indentToString i1) (indentToString i2) (indentToString i3) |> indentCssValue
 
-        static member Hanging = Hanging |> indentCssValue'
-        static member EachLine = EachLine |> indentCssValue'
+        static member Hanging = Types.Hanging |> indentCssValue'
+        static member EachLine = Types.EachLine |> indentCssValue'
 
-        static member Inherit = Inherit |> indentCssValue'
-        static member Initial = Initial |> indentCssValue'
-        static member Unset = Unset |> indentCssValue'
+        static member Inherit = Types.Inherit |> indentCssValue'
+        static member Initial = Types.Initial |> indentCssValue'
+        static member Unset = Types.Unset |> indentCssValue'
 
     /// <summary>Specifies how much indentation is put before lines of text.</summary>
     /// <param name="indent">
@@ -512,37 +511,37 @@ module Text =
     ///     - <c> Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextIndent' (indent: ITextIndent) = TextIndent.Value(indent)
+    let TextIndent' (indent: Types.ITextIndent) = TextIndent.Value(indent)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
     // https://css-tricks.com/almanac/properties/t/text-shadow/
-    let private shadowValue value = PropertyValue.cssValue Property.TextShadow value
+    let private shadowValue value = Types.cssValue Types.Property.TextShadow value
 
     type TextShadow =
-        static member XY (xOffset: Units.Size.Size, yOffset: Units.Size.Size) =
-            XY(xOffset,yOffset)
-        static member ColorXY (color: CssColor, xOffset: Units.Size.Size, yOffset: Units.Size.Size) =
-            ColorXY(color, xOffset, yOffset)
-        static member ColorXYBlur (xOffset: Units.Size.Size, yOffset: Units.Size.Size, blurRadius: Units.Size.Size, color: CssColor) =
-            ColorXYBlur (color, xOffset, yOffset, blurRadius)
+        static member XY (xOffset: Types.Size, yOffset: Types.Size) =
+            Types.XY(xOffset,yOffset)
+        static member ColorXY (color: Types.Color, xOffset: Types.Size, yOffset: Types.Size) =
+            Types.ColorXY(color, xOffset, yOffset)
+        static member ColorXYBlur (xOffset: Types.Size, yOffset: Types.Size, blurRadius: Types.Size, color: Types.Color) =
+            Types.ColorXYBlur (color, xOffset, yOffset, blurRadius)
 
     /// Supply a list of text shadows to apply to the text
-    let TextShadows (shadows: FssTypes.TextShadow list) =
+    let TextShadows (shadows: Types.TextShadow list) =
         shadows
         |> Utilities.Helpers.combineComma textShadowToString
         |> shadowValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
-    let private overflowValue value = PropertyValue.cssValue Property.TextOverflow value
+    let private overflowValue value = Types.cssValue Types.Property.TextOverflow value
     let private overflowValue' value =
         value
         |> textOverflowToString
         |> overflowValue
     type TextOverflow =
-        static member Value (overflow: ITextOverflow) = overflow |> overflowValue'
+        static member Value (overflow: Types.ITextOverflow) = overflow |> overflowValue'
 
-        static member Clip = FssTypes.TextOverflow.Clip |> overflowValue'
-        static member Ellipsis = Ellipsis |> overflowValue'
+        static member Clip = Types.TextOverflow.Clip |> overflowValue'
+        static member Ellipsis = Types.Ellipsis |> overflowValue'
 
     /// <summary>If there is hidden content this specifies how that is signalled.</summary>
     /// <param name="overflow">
@@ -551,22 +550,22 @@ module Text =
     ///     - <c> CssString </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextOverflow' (overflow: ITextOverflow) = TextOverflow.Value(overflow)
+    let TextOverflow' (overflow: Types.ITextOverflow) = TextOverflow.Value(overflow)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
-    let private emphasisValue value = PropertyValue.cssValue Property.TextEmphasis value
+    let private emphasisValue value = Types.cssValue Types.Property.TextEmphasis value
     let private emphasisValue' value =
         value
         |> emphasisToString
         |> emphasisValue
 
     type TextEmphasis =
-        static member Value (emphasis: ITextEmphasis) = emphasis |> emphasisValue'
+        static member Value (emphasis: Types.ITextEmphasis) = emphasis |> emphasisValue'
 
-        static member None = None' |> emphasisValue'
-        static member Inherit = Inherit |> emphasisValue'
-        static member Initial = Initial |> emphasisValue'
-        static member Unset = Unset |> emphasisValue'
+        static member None = Types.None' |> emphasisValue'
+        static member Inherit = Types.Inherit |> emphasisValue'
+        static member Initial = Types.Initial |> emphasisValue'
+        static member Unset = Types.Unset |> emphasisValue'
 
     /// <summary>Specifies emphasis marks to text.</summary>
     /// <param name="emphasis">
@@ -577,23 +576,23 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextEmphasis' (emphasis: ITextEmphasis) = TextEmphasis.Value emphasis
+    let TextEmphasis' (emphasis: Types.ITextEmphasis) = TextEmphasis.Value emphasis
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
-    let private emphasisPositionValue value = PropertyValue.cssValue Property.TextEmphasisPosition value
+    let private emphasisPositionValue value = Types.cssValue Types.Property.TextEmphasisPosition value
     let private emphasisPositionValue' value =
         value
         |> emphasisPositionToString
         |> emphasisPositionValue
 
     type TextEmphasisPosition =
-        static member Value (v1: ITextEmphasisPosition, v2: ITextEmphasisPosition) =
+        static member Value (v1: Types.ITextEmphasisPosition, v2: Types.ITextEmphasisPosition) =
             sprintf "%s %s" (emphasisPositionToString v1) (emphasisPositionToString v2)
             |> emphasisPositionValue
 
-        static member Inherit = Inherit |> emphasisPositionValue'
-        static member Initial = Initial |> emphasisPositionValue'
-        static member Unset = Unset |> emphasisPositionValue'
+        static member Inherit = Types.Inherit |> emphasisPositionValue'
+        static member Initial = Types.Initial |> emphasisPositionValue'
+        static member Unset = Types.Unset |> emphasisPositionValue'
 
     /// <summary>Specifies where emphasis marks are drawn.</summary>
     /// <param name="e1"> </param>
@@ -606,29 +605,29 @@ module Text =
     ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// <returns>Css property for fss.</returns>
-    let TextEmphasisPosition' (e1: ITextEmphasisPosition) (e2: ITextEmphasisPosition) = TextEmphasisPosition.Value(e1, e2)
+    let TextEmphasisPosition' (e1: Types.ITextEmphasisPosition) (e2: Types.ITextEmphasisPosition) = TextEmphasisPosition.Value(e1, e2)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
-    let private emphasisStyleValue value = PropertyValue.cssValue Property.TextEmphasisStyle value
+    let private emphasisStyleValue value = Types.cssValue Types.Property.TextEmphasisStyle value
     let private emphasisStyleValue' value =
         value
         |> emphasisStyleToString
         |> emphasisStyleValue
     type TextEmphasisStyle =
-        static member Value (emphasisStyle: ITextEmphasisStyle) = emphasisStyle |> emphasisStyleValue'
-        static member Filled = Filled |> emphasisStyleValue'
-        static member Open = Open |> emphasisStyleValue'
-        static member Dot = Dot |> emphasisStyleValue'
-        static member Circle = FssTypes.TextEmphasisStyle.Circle |> emphasisStyleValue'
-        static member DoubleCircle = DoubleCircle |> emphasisStyleValue'
-        static member Triangle = Triangle |> emphasisStyleValue'
-        static member FilledSesame = FilledSesame |> emphasisStyleValue'
-        static member OpenSesame = OpenSesame |> emphasisStyleValue'
+        static member Value (emphasisStyle: Types.ITextEmphasisStyle) = emphasisStyle |> emphasisStyleValue'
+        static member Filled = Types.Filled |> emphasisStyleValue'
+        static member Open = Types.Open |> emphasisStyleValue'
+        static member Dot = Types.Dot |> emphasisStyleValue'
+        static member Circle = Types.TextEmphasisStyle.Circle |> emphasisStyleValue'
+        static member DoubleCircle = Types.DoubleCircle |> emphasisStyleValue'
+        static member Triangle = Types.Triangle |> emphasisStyleValue'
+        static member FilledSesame = Types.FilledSesame |> emphasisStyleValue'
+        static member OpenSesame = Types.OpenSesame |> emphasisStyleValue'
 
-        static member None = None' |> emphasisStyleValue'
-        static member Inherit = Inherit |> emphasisStyleValue'
-        static member Initial = Initial |> emphasisStyleValue'
-        static member Unset = Unset |> emphasisStyleValue'
+        static member None = Types.None' |> emphasisStyleValue'
+        static member Inherit = Types.Inherit |> emphasisStyleValue'
+        static member Initial = Types.Initial |> emphasisStyleValue'
+        static member Unset = Types.Unset |> emphasisStyleValue'
 
     /// <summary>Specifies style of text emphasis.</summary>
     /// <param name="style">
@@ -641,33 +640,33 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextEmphasisStyle' (style: ITextEmphasisStyle) = TextEmphasisStyle.Value(style)
+    let TextEmphasisStyle' (style: Types.ITextEmphasisStyle) = TextEmphasisStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-position
-    let private underlinePositionCssValue value = PropertyValue.cssValue Property.TextUnderlinePosition value
+    let private underlinePositionCssValue value = Types.cssValue Types.Property.TextUnderlinePosition value
     let private underlinePositionCssValue' value =
         value
         |> underlinePositionToString
         |> underlinePositionCssValue
 
     type TextUnderlinePosition =
-        static member Value (underlinePosition: ITextUnderlinePosition) =
+        static member Value (underlinePosition: Types.ITextUnderlinePosition) =
             underlinePosition |> underlinePositionCssValue'
-        static member Value (v1: ITextUnderlinePosition, v2: ITextUnderlinePosition) =
+        static member Value (v1: Types.ITextUnderlinePosition, v2: Types.ITextUnderlinePosition) =
             sprintf "%s %s" (underlinePositionToString v1) (underlinePositionToString v2) |> underlinePositionCssValue
 
-        static member FromFont = UnderlinePosition.FromFont |> underlinePositionCssValue'
-        static member Under = UnderlinePosition.Under |> underlinePositionCssValue'
-        static member Left = UnderlinePosition.Left |> underlinePositionCssValue'
-        static member Right = UnderlinePosition.Right |> underlinePositionCssValue'
-        static member AutoPos = UnderlinePosition.AutoPos  |> underlinePositionCssValue'
-        static member Above = UnderlinePosition.Above |> underlinePositionCssValue'
-        static member Below = UnderlinePosition.Below |> underlinePositionCssValue'
+        static member FromFont = Types.UnderlinePosition.FromFont |> underlinePositionCssValue'
+        static member Under = Types.UnderlinePosition.Under |> underlinePositionCssValue'
+        static member Left = Types.UnderlinePosition.Left |> underlinePositionCssValue'
+        static member Right = Types.UnderlinePosition.Right |> underlinePositionCssValue'
+        static member AutoPos = Types.UnderlinePosition.AutoPos  |> underlinePositionCssValue'
+        static member Above = Types.UnderlinePosition.Above |> underlinePositionCssValue'
+        static member Below = Types.UnderlinePosition.Below |> underlinePositionCssValue'
 
-        static member Auto = Auto |> underlinePositionCssValue'
-        static member Inherit = Inherit |> underlinePositionCssValue'
-        static member Initial = Initial |> underlinePositionCssValue'
-        static member Unset = Unset |> underlinePositionCssValue'
+        static member Auto = Types.Auto |> underlinePositionCssValue'
+        static member Inherit = Types.Inherit |> underlinePositionCssValue'
+        static member Initial = Types.Initial |> underlinePositionCssValue'
+        static member Unset = Types.Unset |> underlinePositionCssValue'
 
     /// <summary>Specifies the position of text underline.</summary>
     /// <param name="position">
@@ -679,20 +678,20 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextUnderlinePosition' (position: ITextUnderlinePosition) = TextUnderlinePosition.Value(position)
+    let TextUnderlinePosition' (position: Types.ITextUnderlinePosition) = TextUnderlinePosition.Value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
-    let private offsetValue value = PropertyValue.cssValue Property.TextUnderlineOffset value
+    let private offsetValue value = Types.cssValue Types.Property.TextUnderlineOffset value
     let private offsetValue' value =
         value
         |> underlineOffsetToString
         |> offsetValue
     type TextUnderlineOffset =
-        static member Value (underlineOffset: ITextUnderlineOffset) = underlineOffset |> offsetValue'
-        static member Inherit = Inherit |> offsetValue'
-        static member Initial = Initial |> offsetValue'
-        static member Unset = Unset |> offsetValue'
-        static member Auto = Auto |> offsetValue'
+        static member Value (underlineOffset: Types.ITextUnderlineOffset) = underlineOffset |> offsetValue'
+        static member Inherit = Types.Inherit |> offsetValue'
+        static member Initial = Types.Initial |> offsetValue'
+        static member Unset = Types.Unset |> offsetValue'
+        static member Auto = Types.Auto |> offsetValue'
 
     /// <summary>Specifies the offset of text underline.</summary>
     /// <param name="offset">
@@ -705,33 +704,33 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextUnderlineOffset' (offset: ITextUnderlineOffset) = TextUnderlineOffset.Value(offset)
+    let TextUnderlineOffset' (offset: Types.ITextUnderlineOffset) = TextUnderlineOffset.Value(offset)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/quotes
-    let private quoteValue value = PropertyValue.cssValue Property.Quotes value
+    let private quoteValue value = Types.cssValue Types.Property.Quotes value
     let private quoteValue' value =
         value
         |> quoteToString
         |> quoteValue
     type Quotes =
-        static member Value (quote: IQuotes) =
+        static member Value (quote: Types.IQuotes) =
             quote
             |> quoteValue'
-        static member Value (openQuote: IQuotes, closeQuote: IQuotes) =
+        static member Value (openQuote: Types.IQuotes, closeQuote: Types.IQuotes) =
             quoteValue
             <| sprintf "\"%s\" \"%s\"" (quoteToString openQuote) (quoteToString closeQuote)
-        static member Value (openCloseQuotes: ((IQuotes * IQuotes) list)) =
+        static member Value (openCloseQuotes: ((Types.IQuotes * Types.IQuotes) list)) =
             openCloseQuotes
             |> List.map (fun (openQuote, closeQuote) ->
                 sprintf "\"%s\" \"%s\"" (quoteToString openQuote) (quoteToString closeQuote))
             |> String.concat " "
             |> quoteValue
 
-        static member None = None' |> quoteValue'
-        static member Auto = Auto |> quoteValue'
-        static member Inherit = Inherit |> quoteValue'
-        static member Initial = Initial |> quoteValue'
-        static member Unset = Unset |> quoteValue'
+        static member None = Types.None' |> quoteValue'
+        static member Auto = Types.Auto |> quoteValue'
+        static member Inherit = Types.Inherit |> quoteValue'
+        static member Initial = Types.Initial |> quoteValue'
+        static member Unset = Types.Unset |> quoteValue'
 
     /// <summary>Specifies how to render quotation marks.</summary>
     /// <param name="quotes">
@@ -744,22 +743,22 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Quotes' (quotes: IQuotes) = Quotes.Value(quotes)
+    let Quotes' (quotes: Types.IQuotes) = Quotes.Value(quotes)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
-    let private hyphensValue value = PropertyValue.cssValue Property.Hyphens value
+    let private hyphensValue value = Types.cssValue Types.Property.Hyphens value
     let private hyphensValue' value =
         value
         |> hyphensToString
         |> hyphensValue
     type Hyphens =
-        static member Value (hyphens: IHyphens) = hyphens |> hyphensValue'
-        static member Manual = Manual |> hyphensValue'
-        static member Auto = Auto |> hyphensValue'
-        static member None = None' |> hyphensValue'
-        static member Inherit = Inherit |> hyphensValue'
-        static member Initial = Initial |> hyphensValue'
-        static member Unset = Unset |> hyphensValue'
+        static member Value (hyphens: Types.IHyphens) = hyphens |> hyphensValue'
+        static member Manual = Types.Manual |> hyphensValue'
+        static member Auto = Types.Auto |> hyphensValue'
+        static member None = Types.None' |> hyphensValue'
+        static member Inherit = Types.Inherit |> hyphensValue'
+        static member Initial = Types.Initial |> hyphensValue'
+        static member Unset = Types.Unset |> hyphensValue'
 
     /// <summary>Specifies words will be hyphenated when text wraps.</summary>
     /// <param name="hyphens">
@@ -772,368 +771,368 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Hyphens' (hyphens: IHyphens) = Hyphens.Value(hyphens)
+    let Hyphens' (hyphens: Types.IHyphens) = Hyphens.Value(hyphens)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color
-    let private textDecorationColorValue value = PropertyValue.cssValue Property.TextDecorationColor value
+    let private textDecorationColorValue value = Types.cssValue Types.Property.TextDecorationColor value
     let private textDecorationColorValue' value =
         value
         |> textDecorationColorToString
         |> textDecorationColorValue
     type TextDecorationColor =
-        static member Value (color: ITextDecorationColor) = color |> textDecorationColorValue'
+        static member Value (color: Types.ITextDecorationColor) = color |> textDecorationColorValue'
 
-        static member black = CssColor.black |> textDecorationColorValue'
-        static member silver = CssColor.silver |> textDecorationColorValue'
-        static member gray = CssColor.gray |> textDecorationColorValue'
-        static member white = CssColor.white |> textDecorationColorValue'
-        static member maroon = CssColor.maroon |> textDecorationColorValue'
-        static member red = CssColor.red |> textDecorationColorValue'
-        static member purple = CssColor.purple |> textDecorationColorValue'
-        static member fuchsia = CssColor.fuchsia |> textDecorationColorValue'
-        static member green = CssColor.green |> textDecorationColorValue'
-        static member lime = CssColor.lime |> textDecorationColorValue'
-        static member olive = CssColor.olive |> textDecorationColorValue'
-        static member yellow = CssColor.yellow |> textDecorationColorValue'
-        static member navy = CssColor.navy |> textDecorationColorValue'
-        static member blue = CssColor.blue |> textDecorationColorValue'
-        static member teal = CssColor.teal |> textDecorationColorValue'
-        static member aqua = CssColor.aqua |> textDecorationColorValue'
-        static member orange = CssColor.orange |> textDecorationColorValue'
-        static member aliceBlue = CssColor.aliceBlue |> textDecorationColorValue'
-        static member antiqueWhite = CssColor.antiqueWhite |> textDecorationColorValue'
-        static member aquaMarine = CssColor.aquaMarine |> textDecorationColorValue'
-        static member azure = CssColor.azure |> textDecorationColorValue'
-        static member beige = CssColor.beige |> textDecorationColorValue'
-        static member bisque = CssColor.bisque |> textDecorationColorValue'
-        static member blanchedAlmond = CssColor.blanchedAlmond |> textDecorationColorValue'
-        static member blueViolet = CssColor.blueViolet |> textDecorationColorValue'
-        static member brown = CssColor.brown |> textDecorationColorValue'
-        static member burlywood = CssColor.burlywood |> textDecorationColorValue'
-        static member cadetBlue = CssColor.cadetBlue |> textDecorationColorValue'
-        static member chartreuse = CssColor.chartreuse |> textDecorationColorValue'
-        static member chocolate = CssColor.chocolate |> textDecorationColorValue'
-        static member coral = CssColor.coral |> textDecorationColorValue'
-        static member cornflowerBlue = CssColor.cornflowerBlue |> textDecorationColorValue'
-        static member cornsilk = CssColor.cornsilk |> textDecorationColorValue'
-        static member crimson = CssColor.crimson |> textDecorationColorValue'
-        static member cyan = CssColor.cyan |> textDecorationColorValue'
-        static member darkBlue = CssColor.darkBlue |> textDecorationColorValue'
-        static member darkCyan = CssColor.darkCyan |> textDecorationColorValue'
-        static member darkGoldenrod = CssColor.darkGoldenrod |> textDecorationColorValue'
-        static member darkGray = CssColor.darkGray |> textDecorationColorValue'
-        static member darkGreen = CssColor.darkGreen |> textDecorationColorValue'
-        static member darkKhaki = CssColor.darkKhaki |> textDecorationColorValue'
-        static member darkMagenta = CssColor.darkMagenta |> textDecorationColorValue'
-        static member darkOliveGreen = CssColor.darkOliveGreen |> textDecorationColorValue'
-        static member darkOrange = CssColor.darkOrange |> textDecorationColorValue'
-        static member darkOrchid = CssColor.darkOrchid |> textDecorationColorValue'
-        static member darkRed = CssColor.darkRed |> textDecorationColorValue'
-        static member darkSalmon = CssColor.darkSalmon |> textDecorationColorValue'
-        static member darkSeaGreen = CssColor.darkSeaGreen |> textDecorationColorValue'
-        static member darkSlateBlue = CssColor.darkSlateBlue |> textDecorationColorValue'
-        static member darkSlateGray = CssColor.darkSlateGray |> textDecorationColorValue'
-        static member darkTurquoise = CssColor.darkTurquoise |> textDecorationColorValue'
-        static member darkViolet = CssColor.darkViolet |> textDecorationColorValue'
-        static member deepPink = CssColor.deepPink |> textDecorationColorValue'
-        static member deepSkyBlue = CssColor.deepSkyBlue |> textDecorationColorValue'
-        static member dimGrey = CssColor.dimGrey |> textDecorationColorValue'
-        static member dodgerBlue = CssColor.dodgerBlue |> textDecorationColorValue'
-        static member fireBrick = CssColor.fireBrick |> textDecorationColorValue'
-        static member floralWhite = CssColor.floralWhite |> textDecorationColorValue'
-        static member forestGreen = CssColor.forestGreen |> textDecorationColorValue'
-        static member gainsboro = CssColor.gainsboro |> textDecorationColorValue'
-        static member ghostWhite = CssColor.ghostWhite |> textDecorationColorValue'
-        static member gold = CssColor.gold |> textDecorationColorValue'
-        static member goldenrod = CssColor.goldenrod |> textDecorationColorValue'
-        static member greenYellow = CssColor.greenYellow |> textDecorationColorValue'
-        static member grey = CssColor.grey |> textDecorationColorValue'
-        static member honeydew = CssColor.honeydew |> textDecorationColorValue'
-        static member hotPink = CssColor.hotPink |> textDecorationColorValue'
-        static member indianRed = CssColor.indianRed |> textDecorationColorValue'
-        static member indigo = CssColor.indigo |> textDecorationColorValue'
-        static member ivory = CssColor.ivory |> textDecorationColorValue'
-        static member khaki = CssColor.khaki |> textDecorationColorValue'
-        static member lavender = CssColor.lavender |> textDecorationColorValue'
-        static member lavenderBlush = CssColor.lavenderBlush |> textDecorationColorValue'
-        static member lawnGreen = CssColor.lawnGreen |> textDecorationColorValue'
-        static member lemonChiffon = CssColor.lemonChiffon |> textDecorationColorValue'
-        static member lightBlue = CssColor.lightBlue |> textDecorationColorValue'
-        static member lightCoral = CssColor.lightCoral |> textDecorationColorValue'
-        static member lightCyan = CssColor.lightCyan |> textDecorationColorValue'
-        static member lightGoldenrodYellow = CssColor.lightGoldenrodYellow |> textDecorationColorValue'
-        static member lightGray = CssColor.lightGray |> textDecorationColorValue'
-        static member lightGreen = CssColor.lightGreen |> textDecorationColorValue'
-        static member lightGrey = CssColor.lightGrey |> textDecorationColorValue'
-        static member lightPink = CssColor.lightPink |> textDecorationColorValue'
-        static member lightSalmon = CssColor.lightSalmon |> textDecorationColorValue'
-        static member lightSeaGreen = CssColor.lightSeaGreen |> textDecorationColorValue'
-        static member lightSkyBlue = CssColor.lightSkyBlue |> textDecorationColorValue'
-        static member lightSlateGrey = CssColor.lightSlateGrey |> textDecorationColorValue'
-        static member lightSteelBlue = CssColor.lightSteelBlue |> textDecorationColorValue'
-        static member lightYellow = CssColor.lightYellow |> textDecorationColorValue'
-        static member limeGreen = CssColor.limeGreen |> textDecorationColorValue'
-        static member linen = CssColor.linen |> textDecorationColorValue'
-        static member magenta = CssColor.magenta |> textDecorationColorValue'
-        static member mediumAquamarine = CssColor.mediumAquamarine |> textDecorationColorValue'
-        static member mediumBlue = CssColor.mediumBlue |> textDecorationColorValue'
-        static member mediumOrchid = CssColor.mediumOrchid |> textDecorationColorValue'
-        static member mediumPurple = CssColor.mediumPurple |> textDecorationColorValue'
-        static member mediumSeaGreen = CssColor.mediumSeaGreen |> textDecorationColorValue'
-        static member mediumSlateBlue = CssColor.mediumSlateBlue |> textDecorationColorValue'
-        static member mediumSpringGreen = CssColor.mediumSpringGreen |> textDecorationColorValue'
-        static member mediumTurquoise = CssColor.mediumTurquoise |> textDecorationColorValue'
-        static member mediumVioletRed = CssColor.mediumVioletRed |> textDecorationColorValue'
-        static member midnightBlue = CssColor.midnightBlue |> textDecorationColorValue'
-        static member mintCream = CssColor.mintCream |> textDecorationColorValue'
-        static member mistyRose = CssColor.mistyRose |> textDecorationColorValue'
-        static member moccasin = CssColor.moccasin |> textDecorationColorValue'
-        static member navajoWhite = CssColor.navajoWhite |> textDecorationColorValue'
-        static member oldLace = CssColor.oldLace |> textDecorationColorValue'
-        static member olivedrab = CssColor.olivedrab |> textDecorationColorValue'
-        static member orangeRed = CssColor.orangeRed |> textDecorationColorValue'
-        static member orchid = CssColor.orchid |> textDecorationColorValue'
-        static member paleGoldenrod = CssColor.paleGoldenrod |> textDecorationColorValue'
-        static member paleGreen = CssColor.paleGreen |> textDecorationColorValue'
-        static member paleTurquoise = CssColor.paleTurquoise |> textDecorationColorValue'
-        static member paleVioletred = CssColor.paleVioletred |> textDecorationColorValue'
-        static member papayaWhip = CssColor.papayaWhip |> textDecorationColorValue'
-        static member peachpuff = CssColor.peachpuff |> textDecorationColorValue'
-        static member peru = CssColor.peru |> textDecorationColorValue'
-        static member pink = CssColor.pink |> textDecorationColorValue'
-        static member plum = CssColor.plum |> textDecorationColorValue'
-        static member powderBlue = CssColor.powderBlue |> textDecorationColorValue'
-        static member rosyBrown = CssColor.rosyBrown |> textDecorationColorValue'
-        static member royalBlue = CssColor.royalBlue |> textDecorationColorValue'
-        static member saddleBrown = CssColor.saddleBrown |> textDecorationColorValue'
-        static member salmon = CssColor.salmon |> textDecorationColorValue'
-        static member sandyBrown = CssColor.sandyBrown |> textDecorationColorValue'
-        static member seaGreen = CssColor.seaGreen |> textDecorationColorValue'
-        static member seaShell = CssColor.seaShell |> textDecorationColorValue'
-        static member sienna = CssColor.sienna |> textDecorationColorValue'
-        static member skyBlue = CssColor.skyBlue |> textDecorationColorValue'
-        static member slateBlue = CssColor.slateBlue |> textDecorationColorValue'
-        static member slateGray = CssColor.slateGray |> textDecorationColorValue'
-        static member snow = CssColor.snow |> textDecorationColorValue'
-        static member springGreen = CssColor.springGreen |> textDecorationColorValue'
-        static member steelBlue = CssColor.steelBlue |> textDecorationColorValue'
-        static member tan = CssColor.tan |> textDecorationColorValue'
-        static member thistle = CssColor.thistle |> textDecorationColorValue'
-        static member tomato = CssColor.tomato |> textDecorationColorValue'
-        static member turquoise = CssColor.turquoise |> textDecorationColorValue'
-        static member violet = CssColor.violet |> textDecorationColorValue'
-        static member wheat = CssColor.wheat |> textDecorationColorValue'
-        static member whiteSmoke = CssColor.whiteSmoke |> textDecorationColorValue'
-        static member yellowGreen = CssColor.yellowGreen |> textDecorationColorValue'
-        static member rebeccaPurple = CssColor.rebeccaPurple |> textDecorationColorValue'
-        static member Rgb r g b = CssColor.Rgb(r, g, b) |> textDecorationColorValue'
-        static member Rgba r g b a = CssColor.Rgba(r, g, b, a) |> textDecorationColorValue'
-        static member Hex value = CssColor.Hex value |> textDecorationColorValue'
-        static member Hsl h s l = CssColor.Hsl(h, s, l) |> textDecorationColorValue'
-        static member Hsla h s l a = CssColor.Hsla (h, s, l, a) |> textDecorationColorValue'
-        static member transparent = CssColor.transparent |> textDecorationColorValue'
-        static member currentColor = CssColor.currentColor |> textDecorationColorValue'
+        static member black = Types.Color.black |> textDecorationColorValue'
+        static member silver = Types.Color.silver |> textDecorationColorValue'
+        static member gray = Types.Color.gray |> textDecorationColorValue'
+        static member white = Types.Color.white |> textDecorationColorValue'
+        static member maroon = Types.Color.maroon |> textDecorationColorValue'
+        static member red = Types.Color.red |> textDecorationColorValue'
+        static member purple = Types.Color.purple |> textDecorationColorValue'
+        static member fuchsia = Types.Color.fuchsia |> textDecorationColorValue'
+        static member green = Types.Color.green |> textDecorationColorValue'
+        static member lime = Types.Color.lime |> textDecorationColorValue'
+        static member olive = Types.Color.olive |> textDecorationColorValue'
+        static member yellow = Types.Color.yellow |> textDecorationColorValue'
+        static member navy = Types.Color.navy |> textDecorationColorValue'
+        static member blue = Types.Color.blue |> textDecorationColorValue'
+        static member teal = Types.Color.teal |> textDecorationColorValue'
+        static member aqua = Types.Color.aqua |> textDecorationColorValue'
+        static member orange = Types.Color.orange |> textDecorationColorValue'
+        static member aliceBlue = Types.Color.aliceBlue |> textDecorationColorValue'
+        static member antiqueWhite = Types.Color.antiqueWhite |> textDecorationColorValue'
+        static member aquaMarine = Types.Color.aquaMarine |> textDecorationColorValue'
+        static member azure = Types.Color.azure |> textDecorationColorValue'
+        static member beige = Types.Color.beige |> textDecorationColorValue'
+        static member bisque = Types.Color.bisque |> textDecorationColorValue'
+        static member blanchedAlmond = Types.Color.blanchedAlmond |> textDecorationColorValue'
+        static member blueViolet = Types.Color.blueViolet |> textDecorationColorValue'
+        static member brown = Types.Color.brown |> textDecorationColorValue'
+        static member burlywood = Types.Color.burlywood |> textDecorationColorValue'
+        static member cadetBlue = Types.Color.cadetBlue |> textDecorationColorValue'
+        static member chartreuse = Types.Color.chartreuse |> textDecorationColorValue'
+        static member chocolate = Types.Color.chocolate |> textDecorationColorValue'
+        static member coral = Types.Color.coral |> textDecorationColorValue'
+        static member cornflowerBlue = Types.Color.cornflowerBlue |> textDecorationColorValue'
+        static member cornsilk = Types.Color.cornsilk |> textDecorationColorValue'
+        static member crimson = Types.Color.crimson |> textDecorationColorValue'
+        static member cyan = Types.Color.cyan |> textDecorationColorValue'
+        static member darkBlue = Types.Color.darkBlue |> textDecorationColorValue'
+        static member darkCyan = Types.Color.darkCyan |> textDecorationColorValue'
+        static member darkGoldenrod = Types.Color.darkGoldenrod |> textDecorationColorValue'
+        static member darkGray = Types.Color.darkGray |> textDecorationColorValue'
+        static member darkGreen = Types.Color.darkGreen |> textDecorationColorValue'
+        static member darkKhaki = Types.Color.darkKhaki |> textDecorationColorValue'
+        static member darkMagenta = Types.Color.darkMagenta |> textDecorationColorValue'
+        static member darkOliveGreen = Types.Color.darkOliveGreen |> textDecorationColorValue'
+        static member darkOrange = Types.Color.darkOrange |> textDecorationColorValue'
+        static member darkOrchid = Types.Color.darkOrchid |> textDecorationColorValue'
+        static member darkRed = Types.Color.darkRed |> textDecorationColorValue'
+        static member darkSalmon = Types.Color.darkSalmon |> textDecorationColorValue'
+        static member darkSeaGreen = Types.Color.darkSeaGreen |> textDecorationColorValue'
+        static member darkSlateBlue = Types.Color.darkSlateBlue |> textDecorationColorValue'
+        static member darkSlateGray = Types.Color.darkSlateGray |> textDecorationColorValue'
+        static member darkTurquoise = Types.Color.darkTurquoise |> textDecorationColorValue'
+        static member darkViolet = Types.Color.darkViolet |> textDecorationColorValue'
+        static member deepPink = Types.Color.deepPink |> textDecorationColorValue'
+        static member deepSkyBlue = Types.Color.deepSkyBlue |> textDecorationColorValue'
+        static member dimGrey = Types.Color.dimGrey |> textDecorationColorValue'
+        static member dodgerBlue = Types.Color.dodgerBlue |> textDecorationColorValue'
+        static member fireBrick = Types.Color.fireBrick |> textDecorationColorValue'
+        static member floralWhite = Types.Color.floralWhite |> textDecorationColorValue'
+        static member forestGreen = Types.Color.forestGreen |> textDecorationColorValue'
+        static member gainsboro = Types.Color.gainsboro |> textDecorationColorValue'
+        static member ghostWhite = Types.Color.ghostWhite |> textDecorationColorValue'
+        static member gold = Types.Color.gold |> textDecorationColorValue'
+        static member goldenrod = Types.Color.goldenrod |> textDecorationColorValue'
+        static member greenYellow = Types.Color.greenYellow |> textDecorationColorValue'
+        static member grey = Types.Color.grey |> textDecorationColorValue'
+        static member honeydew = Types.Color.honeydew |> textDecorationColorValue'
+        static member hotPink = Types.Color.hotPink |> textDecorationColorValue'
+        static member indianRed = Types.Color.indianRed |> textDecorationColorValue'
+        static member indigo = Types.Color.indigo |> textDecorationColorValue'
+        static member ivory = Types.Color.ivory |> textDecorationColorValue'
+        static member khaki = Types.Color.khaki |> textDecorationColorValue'
+        static member lavender = Types.Color.lavender |> textDecorationColorValue'
+        static member lavenderBlush = Types.Color.lavenderBlush |> textDecorationColorValue'
+        static member lawnGreen = Types.Color.lawnGreen |> textDecorationColorValue'
+        static member lemonChiffon = Types.Color.lemonChiffon |> textDecorationColorValue'
+        static member lightBlue = Types.Color.lightBlue |> textDecorationColorValue'
+        static member lightCoral = Types.Color.lightCoral |> textDecorationColorValue'
+        static member lightCyan = Types.Color.lightCyan |> textDecorationColorValue'
+        static member lightGoldenrodYellow = Types.Color.lightGoldenrodYellow |> textDecorationColorValue'
+        static member lightGray = Types.Color.lightGray |> textDecorationColorValue'
+        static member lightGreen = Types.Color.lightGreen |> textDecorationColorValue'
+        static member lightGrey = Types.Color.lightGrey |> textDecorationColorValue'
+        static member lightPink = Types.Color.lightPink |> textDecorationColorValue'
+        static member lightSalmon = Types.Color.lightSalmon |> textDecorationColorValue'
+        static member lightSeaGreen = Types.Color.lightSeaGreen |> textDecorationColorValue'
+        static member lightSkyBlue = Types.Color.lightSkyBlue |> textDecorationColorValue'
+        static member lightSlateGrey = Types.Color.lightSlateGrey |> textDecorationColorValue'
+        static member lightSteelBlue = Types.Color.lightSteelBlue |> textDecorationColorValue'
+        static member lightYellow = Types.Color.lightYellow |> textDecorationColorValue'
+        static member limeGreen = Types.Color.limeGreen |> textDecorationColorValue'
+        static member linen = Types.Color.linen |> textDecorationColorValue'
+        static member magenta = Types.Color.magenta |> textDecorationColorValue'
+        static member mediumAquamarine = Types.Color.mediumAquamarine |> textDecorationColorValue'
+        static member mediumBlue = Types.Color.mediumBlue |> textDecorationColorValue'
+        static member mediumOrchid = Types.Color.mediumOrchid |> textDecorationColorValue'
+        static member mediumPurple = Types.Color.mediumPurple |> textDecorationColorValue'
+        static member mediumSeaGreen = Types.Color.mediumSeaGreen |> textDecorationColorValue'
+        static member mediumSlateBlue = Types.Color.mediumSlateBlue |> textDecorationColorValue'
+        static member mediumSpringGreen = Types.Color.mediumSpringGreen |> textDecorationColorValue'
+        static member mediumTurquoise = Types.Color.mediumTurquoise |> textDecorationColorValue'
+        static member mediumVioletRed = Types.Color.mediumVioletRed |> textDecorationColorValue'
+        static member midnightBlue = Types.Color.midnightBlue |> textDecorationColorValue'
+        static member mintCream = Types.Color.mintCream |> textDecorationColorValue'
+        static member mistyRose = Types.Color.mistyRose |> textDecorationColorValue'
+        static member moccasin = Types.Color.moccasin |> textDecorationColorValue'
+        static member navajoWhite = Types.Color.navajoWhite |> textDecorationColorValue'
+        static member oldLace = Types.Color.oldLace |> textDecorationColorValue'
+        static member olivedrab = Types.Color.olivedrab |> textDecorationColorValue'
+        static member orangeRed = Types.Color.orangeRed |> textDecorationColorValue'
+        static member orchid = Types.Color.orchid |> textDecorationColorValue'
+        static member paleGoldenrod = Types.Color.paleGoldenrod |> textDecorationColorValue'
+        static member paleGreen = Types.Color.paleGreen |> textDecorationColorValue'
+        static member paleTurquoise = Types.Color.paleTurquoise |> textDecorationColorValue'
+        static member paleVioletred = Types.Color.paleVioletred |> textDecorationColorValue'
+        static member papayaWhip = Types.Color.papayaWhip |> textDecorationColorValue'
+        static member peachpuff = Types.Color.peachpuff |> textDecorationColorValue'
+        static member peru = Types.Color.peru |> textDecorationColorValue'
+        static member pink = Types.Color.pink |> textDecorationColorValue'
+        static member plum = Types.Color.plum |> textDecorationColorValue'
+        static member powderBlue = Types.Color.powderBlue |> textDecorationColorValue'
+        static member rosyBrown = Types.Color.rosyBrown |> textDecorationColorValue'
+        static member royalBlue = Types.Color.royalBlue |> textDecorationColorValue'
+        static member saddleBrown = Types.Color.saddleBrown |> textDecorationColorValue'
+        static member salmon = Types.Color.salmon |> textDecorationColorValue'
+        static member sandyBrown = Types.Color.sandyBrown |> textDecorationColorValue'
+        static member seaGreen = Types.Color.seaGreen |> textDecorationColorValue'
+        static member seaShell = Types.Color.seaShell |> textDecorationColorValue'
+        static member sienna = Types.Color.sienna |> textDecorationColorValue'
+        static member skyBlue = Types.Color.skyBlue |> textDecorationColorValue'
+        static member slateBlue = Types.Color.slateBlue |> textDecorationColorValue'
+        static member slateGray = Types.Color.slateGray |> textDecorationColorValue'
+        static member snow = Types.Color.snow |> textDecorationColorValue'
+        static member springGreen = Types.Color.springGreen |> textDecorationColorValue'
+        static member steelBlue = Types.Color.steelBlue |> textDecorationColorValue'
+        static member tan = Types.Color.tan |> textDecorationColorValue'
+        static member thistle = Types.Color.thistle |> textDecorationColorValue'
+        static member tomato = Types.Color.tomato |> textDecorationColorValue'
+        static member turquoise = Types.Color.turquoise |> textDecorationColorValue'
+        static member violet = Types.Color.violet |> textDecorationColorValue'
+        static member wheat = Types.Color.wheat |> textDecorationColorValue'
+        static member whiteSmoke = Types.Color.whiteSmoke |> textDecorationColorValue'
+        static member yellowGreen = Types.Color.yellowGreen |> textDecorationColorValue'
+        static member rebeccaPurple = Types.Color.rebeccaPurple |> textDecorationColorValue'
+        static member Rgb r g b = Types.Color.Rgb(r, g, b) |> textDecorationColorValue'
+        static member Rgba r g b a = Types.Color.Rgba(r, g, b, a) |> textDecorationColorValue'
+        static member Hex value = Types.Color.Hex value |> textDecorationColorValue'
+        static member Hsl h s l = Types.Color.Hsl(h, s, l) |> textDecorationColorValue'
+        static member Hsla h s l a = Types.Color.Hsla (h, s, l, a) |> textDecorationColorValue'
+        static member transparent = Types.Color.transparent |> textDecorationColorValue'
+        static member currentColor = Types.Color.currentColor |> textDecorationColorValue'
 
-        static member Inherit = Inherit |> textDecorationColorValue'
-        static member Initial = Initial |> textDecorationColorValue'
-        static member Unset = Unset |> textDecorationColorValue'
+        static member Inherit = Types.Inherit |> textDecorationColorValue'
+        static member Initial = Types.Initial |> textDecorationColorValue'
+        static member Unset = Types.Unset |> textDecorationColorValue'
 
     /// <summary>Specifies color of text decoration.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> CSSColor </c>
+    ///     - <c> Types.Color </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationColor' (color: ITextDecorationColor) = TextDecorationColor.Value(color)
+    let TextDecorationColor' (color: Types.ITextDecorationColor) = TextDecorationColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
-    let private emphasisColorValue value = PropertyValue.cssValue Property.TextEmphasisColor value
+    let private emphasisColorValue value = Types.cssValue Types.Property.Property.TextEmphasisColor value
     let private emphasisColorValue' value =
         value
         |> textEmphasisColorToString
         |> emphasisColorValue
     type TextEmphasisColor =
-        static member Value (color: ITextEmphasisColor) = color |> emphasisColorValue'
-        static member black = CssColor.black |> emphasisColorValue'
-        static member silver = CssColor.silver |> emphasisColorValue'
-        static member gray = CssColor.gray |> emphasisColorValue'
-        static member white = CssColor.white |> emphasisColorValue'
-        static member maroon = CssColor.maroon |> emphasisColorValue'
-        static member red = CssColor.red |> emphasisColorValue'
-        static member purple = CssColor.purple |> emphasisColorValue'
-        static member fuchsia = CssColor.fuchsia |> emphasisColorValue'
-        static member green = CssColor.green |> emphasisColorValue'
-        static member lime = CssColor.lime |> emphasisColorValue'
-        static member olive = CssColor.olive |> emphasisColorValue'
-        static member yellow = CssColor.yellow |> emphasisColorValue'
-        static member navy = CssColor.navy |> emphasisColorValue'
-        static member blue = CssColor.blue |> emphasisColorValue'
-        static member teal = CssColor.teal |> emphasisColorValue'
-        static member aqua = CssColor.aqua |> emphasisColorValue'
-        static member orange = CssColor.orange |> emphasisColorValue'
-        static member aliceBlue = CssColor.aliceBlue |> emphasisColorValue'
-        static member antiqueWhite = CssColor.antiqueWhite |> emphasisColorValue'
-        static member aquaMarine = CssColor.aquaMarine |> emphasisColorValue'
-        static member azure = CssColor.azure |> emphasisColorValue'
-        static member beige = CssColor.beige |> emphasisColorValue'
-        static member bisque = CssColor.bisque |> emphasisColorValue'
-        static member blanchedAlmond = CssColor.blanchedAlmond |> emphasisColorValue'
-        static member blueViolet = CssColor.blueViolet |> emphasisColorValue'
-        static member brown = CssColor.brown |> emphasisColorValue'
-        static member burlywood = CssColor.burlywood |> emphasisColorValue'
-        static member cadetBlue = CssColor.cadetBlue |> emphasisColorValue'
-        static member chartreuse = CssColor.chartreuse |> emphasisColorValue'
-        static member chocolate = CssColor.chocolate |> emphasisColorValue'
-        static member coral = CssColor.coral |> emphasisColorValue'
-        static member cornflowerBlue = CssColor.cornflowerBlue |> emphasisColorValue'
-        static member cornsilk = CssColor.cornsilk |> emphasisColorValue'
-        static member crimson = CssColor.crimson |> emphasisColorValue'
-        static member cyan = CssColor.cyan |> emphasisColorValue'
-        static member darkBlue = CssColor.darkBlue |> emphasisColorValue'
-        static member darkCyan = CssColor.darkCyan |> emphasisColorValue'
-        static member darkGoldenrod = CssColor.darkGoldenrod |> emphasisColorValue'
-        static member darkGray = CssColor.darkGray |> emphasisColorValue'
-        static member darkGreen = CssColor.darkGreen |> emphasisColorValue'
-        static member darkKhaki = CssColor.darkKhaki |> emphasisColorValue'
-        static member darkMagenta = CssColor.darkMagenta |> emphasisColorValue'
-        static member darkOliveGreen = CssColor.darkOliveGreen |> emphasisColorValue'
-        static member darkOrange = CssColor.darkOrange |> emphasisColorValue'
-        static member darkOrchid = CssColor.darkOrchid |> emphasisColorValue'
-        static member darkRed = CssColor.darkRed |> emphasisColorValue'
-        static member darkSalmon = CssColor.darkSalmon |> emphasisColorValue'
-        static member darkSeaGreen = CssColor.darkSeaGreen |> emphasisColorValue'
-        static member darkSlateBlue = CssColor.darkSlateBlue |> emphasisColorValue'
-        static member darkSlateGray = CssColor.darkSlateGray |> emphasisColorValue'
-        static member darkTurquoise = CssColor.darkTurquoise |> emphasisColorValue'
-        static member darkViolet = CssColor.darkViolet |> emphasisColorValue'
-        static member deepPink = CssColor.deepPink |> emphasisColorValue'
-        static member deepSkyBlue = CssColor.deepSkyBlue |> emphasisColorValue'
-        static member dimGrey = CssColor.dimGrey |> emphasisColorValue'
-        static member dodgerBlue = CssColor.dodgerBlue |> emphasisColorValue'
-        static member fireBrick = CssColor.fireBrick |> emphasisColorValue'
-        static member floralWhite = CssColor.floralWhite |> emphasisColorValue'
-        static member forestGreen = CssColor.forestGreen |> emphasisColorValue'
-        static member gainsboro = CssColor.gainsboro |> emphasisColorValue'
-        static member ghostWhite = CssColor.ghostWhite |> emphasisColorValue'
-        static member gold = CssColor.gold |> emphasisColorValue'
-        static member goldenrod = CssColor.goldenrod |> emphasisColorValue'
-        static member greenYellow = CssColor.greenYellow |> emphasisColorValue'
-        static member grey = CssColor.grey |> emphasisColorValue'
-        static member honeydew = CssColor.honeydew |> emphasisColorValue'
-        static member hotPink = CssColor.hotPink |> emphasisColorValue'
-        static member indianRed = CssColor.indianRed |> emphasisColorValue'
-        static member indigo = CssColor.indigo |> emphasisColorValue'
-        static member ivory = CssColor.ivory |> emphasisColorValue'
-        static member khaki = CssColor.khaki |> emphasisColorValue'
-        static member lavender = CssColor.lavender |> emphasisColorValue'
-        static member lavenderBlush = CssColor.lavenderBlush |> emphasisColorValue'
-        static member lawnGreen = CssColor.lawnGreen |> emphasisColorValue'
-        static member lemonChiffon = CssColor.lemonChiffon |> emphasisColorValue'
-        static member lightBlue = CssColor.lightBlue |> emphasisColorValue'
-        static member lightCoral = CssColor.lightCoral |> emphasisColorValue'
-        static member lightCyan = CssColor.lightCyan |> emphasisColorValue'
-        static member lightGoldenrodYellow = CssColor.lightGoldenrodYellow |> emphasisColorValue'
-        static member lightGray = CssColor.lightGray |> emphasisColorValue'
-        static member lightGreen = CssColor.lightGreen |> emphasisColorValue'
-        static member lightGrey = CssColor.lightGrey |> emphasisColorValue'
-        static member lightPink = CssColor.lightPink |> emphasisColorValue'
-        static member lightSalmon = CssColor.lightSalmon |> emphasisColorValue'
-        static member lightSeaGreen = CssColor.lightSeaGreen |> emphasisColorValue'
-        static member lightSkyBlue = CssColor.lightSkyBlue |> emphasisColorValue'
-        static member lightSlateGrey = CssColor.lightSlateGrey |> emphasisColorValue'
-        static member lightSteelBlue = CssColor.lightSteelBlue |> emphasisColorValue'
-        static member lightYellow = CssColor.lightYellow |> emphasisColorValue'
-        static member limeGreen = CssColor.limeGreen |> emphasisColorValue'
-        static member linen = CssColor.linen |> emphasisColorValue'
-        static member magenta = CssColor.magenta |> emphasisColorValue'
-        static member mediumAquamarine = CssColor.mediumAquamarine |> emphasisColorValue'
-        static member mediumBlue = CssColor.mediumBlue |> emphasisColorValue'
-        static member mediumOrchid = CssColor.mediumOrchid |> emphasisColorValue'
-        static member mediumPurple = CssColor.mediumPurple |> emphasisColorValue'
-        static member mediumSeaGreen = CssColor.mediumSeaGreen |> emphasisColorValue'
-        static member mediumSlateBlue = CssColor.mediumSlateBlue |> emphasisColorValue'
-        static member mediumSpringGreen = CssColor.mediumSpringGreen |> emphasisColorValue'
-        static member mediumTurquoise = CssColor.mediumTurquoise |> emphasisColorValue'
-        static member mediumVioletRed = CssColor.mediumVioletRed |> emphasisColorValue'
-        static member midnightBlue = CssColor.midnightBlue |> emphasisColorValue'
-        static member mintCream = CssColor.mintCream |> emphasisColorValue'
-        static member mistyRose = CssColor.mistyRose |> emphasisColorValue'
-        static member moccasin = CssColor.moccasin |> emphasisColorValue'
-        static member navajoWhite = CssColor.navajoWhite |> emphasisColorValue'
-        static member oldLace = CssColor.oldLace |> emphasisColorValue'
-        static member olivedrab = CssColor.olivedrab |> emphasisColorValue'
-        static member orangeRed = CssColor.orangeRed |> emphasisColorValue'
-        static member orchid = CssColor.orchid |> emphasisColorValue'
-        static member paleGoldenrod = CssColor.paleGoldenrod |> emphasisColorValue'
-        static member paleGreen = CssColor.paleGreen |> emphasisColorValue'
-        static member paleTurquoise = CssColor.paleTurquoise |> emphasisColorValue'
-        static member paleVioletred = CssColor.paleVioletred |> emphasisColorValue'
-        static member papayaWhip = CssColor.papayaWhip |> emphasisColorValue'
-        static member peachpuff = CssColor.peachpuff |> emphasisColorValue'
-        static member peru = CssColor.peru |> emphasisColorValue'
-        static member pink = CssColor.pink |> emphasisColorValue'
-        static member plum = CssColor.plum |> emphasisColorValue'
-        static member powderBlue = CssColor.powderBlue |> emphasisColorValue'
-        static member rosyBrown = CssColor.rosyBrown |> emphasisColorValue'
-        static member royalBlue = CssColor.royalBlue |> emphasisColorValue'
-        static member saddleBrown = CssColor.saddleBrown |> emphasisColorValue'
-        static member salmon = CssColor.salmon |> emphasisColorValue'
-        static member sandyBrown = CssColor.sandyBrown |> emphasisColorValue'
-        static member seaGreen = CssColor.seaGreen |> emphasisColorValue'
-        static member seaShell = CssColor.seaShell |> emphasisColorValue'
-        static member sienna = CssColor.sienna |> emphasisColorValue'
-        static member skyBlue = CssColor.skyBlue |> emphasisColorValue'
-        static member slateBlue = CssColor.slateBlue |> emphasisColorValue'
-        static member slateGray = CssColor.slateGray |> emphasisColorValue'
-        static member snow = CssColor.snow |> emphasisColorValue'
-        static member springGreen = CssColor.springGreen |> emphasisColorValue'
-        static member steelBlue = CssColor.steelBlue |> emphasisColorValue'
-        static member tan = CssColor.tan |> emphasisColorValue'
-        static member thistle = CssColor.thistle |> emphasisColorValue'
-        static member tomato = CssColor.tomato |> emphasisColorValue'
-        static member turquoise = CssColor.turquoise |> emphasisColorValue'
-        static member violet = CssColor.violet |> emphasisColorValue'
-        static member wheat = CssColor.wheat |> emphasisColorValue'
-        static member whiteSmoke = CssColor.whiteSmoke |> emphasisColorValue'
-        static member yellowGreen = CssColor.yellowGreen |> emphasisColorValue'
-        static member rebeccaPurple = CssColor.rebeccaPurple |> emphasisColorValue'
-        static member Rgb r g b = CssColor.Rgb(r, g, b) |> emphasisColorValue'
-        static member Rgba r g b a = CssColor.Rgba(r, g, b, a) |> emphasisColorValue'
-        static member Hex value = CssColor.Hex value |> emphasisColorValue'
-        static member Hsl h s l = CssColor.Hsl(h, s, l) |> emphasisColorValue'
-        static member Hsla h s l a  = CssColor.Hsla (h, s, l, a) |> emphasisColorValue'
-        static member transparent = CssColor.transparent |> emphasisColorValue'
-        static member currentColor = CssColor.currentColor |> emphasisColorValue'
+        static member Value (color: Types.ITextEmphasisColor) = color |> emphasisColorValue'
+        static member black = Types.Color.black |> emphasisColorValue'
+        static member silver = Types.Color.silver |> emphasisColorValue'
+        static member gray = Types.Color.gray |> emphasisColorValue'
+        static member white = Types.Color.white |> emphasisColorValue'
+        static member maroon = Types.Color.maroon |> emphasisColorValue'
+        static member red = Types.Color.red |> emphasisColorValue'
+        static member purple = Types.Color.purple |> emphasisColorValue'
+        static member fuchsia = Types.Color.fuchsia |> emphasisColorValue'
+        static member green = Types.Color.green |> emphasisColorValue'
+        static member lime = Types.Color.lime |> emphasisColorValue'
+        static member olive = Types.Color.olive |> emphasisColorValue'
+        static member yellow = Types.Color.yellow |> emphasisColorValue'
+        static member navy = Types.Color.navy |> emphasisColorValue'
+        static member blue = Types.Color.blue |> emphasisColorValue'
+        static member teal = Types.Color.teal |> emphasisColorValue'
+        static member aqua = Types.Color.aqua |> emphasisColorValue'
+        static member orange = Types.Color.orange |> emphasisColorValue'
+        static member aliceBlue = Types.Color.aliceBlue |> emphasisColorValue'
+        static member antiqueWhite = Types.Color.antiqueWhite |> emphasisColorValue'
+        static member aquaMarine = Types.Color.aquaMarine |> emphasisColorValue'
+        static member azure = Types.Color.azure |> emphasisColorValue'
+        static member beige = Types.Color.beige |> emphasisColorValue'
+        static member bisque = Types.Color.bisque |> emphasisColorValue'
+        static member blanchedAlmond = Types.Color.blanchedAlmond |> emphasisColorValue'
+        static member blueViolet = Types.Color.blueViolet |> emphasisColorValue'
+        static member brown = Types.Color.brown |> emphasisColorValue'
+        static member burlywood = Types.Color.burlywood |> emphasisColorValue'
+        static member cadetBlue = Types.Color.cadetBlue |> emphasisColorValue'
+        static member chartreuse = Types.Color.chartreuse |> emphasisColorValue'
+        static member chocolate = Types.Color.chocolate |> emphasisColorValue'
+        static member coral = Types.Color.coral |> emphasisColorValue'
+        static member cornflowerBlue = Types.Color.cornflowerBlue |> emphasisColorValue'
+        static member cornsilk = Types.Color.cornsilk |> emphasisColorValue'
+        static member crimson = Types.Color.crimson |> emphasisColorValue'
+        static member cyan = Types.Color.cyan |> emphasisColorValue'
+        static member darkBlue = Types.Color.darkBlue |> emphasisColorValue'
+        static member darkCyan = Types.Color.darkCyan |> emphasisColorValue'
+        static member darkGoldenrod = Types.Color.darkGoldenrod |> emphasisColorValue'
+        static member darkGray = Types.Color.darkGray |> emphasisColorValue'
+        static member darkGreen = Types.Color.darkGreen |> emphasisColorValue'
+        static member darkKhaki = Types.Color.darkKhaki |> emphasisColorValue'
+        static member darkMagenta = Types.Color.darkMagenta |> emphasisColorValue'
+        static member darkOliveGreen = Types.Color.darkOliveGreen |> emphasisColorValue'
+        static member darkOrange = Types.Color.darkOrange |> emphasisColorValue'
+        static member darkOrchid = Types.Color.darkOrchid |> emphasisColorValue'
+        static member darkRed = Types.Color.darkRed |> emphasisColorValue'
+        static member darkSalmon = Types.Color.darkSalmon |> emphasisColorValue'
+        static member darkSeaGreen = Types.Color.darkSeaGreen |> emphasisColorValue'
+        static member darkSlateBlue = Types.Color.darkSlateBlue |> emphasisColorValue'
+        static member darkSlateGray = Types.Color.darkSlateGray |> emphasisColorValue'
+        static member darkTurquoise = Types.Color.darkTurquoise |> emphasisColorValue'
+        static member darkViolet = Types.Color.darkViolet |> emphasisColorValue'
+        static member deepPink = Types.Color.deepPink |> emphasisColorValue'
+        static member deepSkyBlue = Types.Color.deepSkyBlue |> emphasisColorValue'
+        static member dimGrey = Types.Color.dimGrey |> emphasisColorValue'
+        static member dodgerBlue = Types.Color.dodgerBlue |> emphasisColorValue'
+        static member fireBrick = Types.Color.fireBrick |> emphasisColorValue'
+        static member floralWhite = Types.Color.floralWhite |> emphasisColorValue'
+        static member forestGreen = Types.Color.forestGreen |> emphasisColorValue'
+        static member gainsboro = Types.Color.gainsboro |> emphasisColorValue'
+        static member ghostWhite = Types.Color.ghostWhite |> emphasisColorValue'
+        static member gold = Types.Color.gold |> emphasisColorValue'
+        static member goldenrod = Types.Color.goldenrod |> emphasisColorValue'
+        static member greenYellow = Types.Color.greenYellow |> emphasisColorValue'
+        static member grey = Types.Color.grey |> emphasisColorValue'
+        static member honeydew = Types.Color.honeydew |> emphasisColorValue'
+        static member hotPink = Types.Color.hotPink |> emphasisColorValue'
+        static member indianRed = Types.Color.indianRed |> emphasisColorValue'
+        static member indigo = Types.Color.indigo |> emphasisColorValue'
+        static member ivory = Types.Color.ivory |> emphasisColorValue'
+        static member khaki = Types.Color.khaki |> emphasisColorValue'
+        static member lavender = Types.Color.lavender |> emphasisColorValue'
+        static member lavenderBlush = Types.Color.lavenderBlush |> emphasisColorValue'
+        static member lawnGreen = Types.Color.lawnGreen |> emphasisColorValue'
+        static member lemonChiffon = Types.Color.lemonChiffon |> emphasisColorValue'
+        static member lightBlue = Types.Color.lightBlue |> emphasisColorValue'
+        static member lightCoral = Types.Color.lightCoral |> emphasisColorValue'
+        static member lightCyan = Types.Color.lightCyan |> emphasisColorValue'
+        static member lightGoldenrodYellow = Types.Color.lightGoldenrodYellow |> emphasisColorValue'
+        static member lightGray = Types.Color.lightGray |> emphasisColorValue'
+        static member lightGreen = Types.Color.lightGreen |> emphasisColorValue'
+        static member lightGrey = Types.Color.lightGrey |> emphasisColorValue'
+        static member lightPink = Types.Color.lightPink |> emphasisColorValue'
+        static member lightSalmon = Types.Color.lightSalmon |> emphasisColorValue'
+        static member lightSeaGreen = Types.Color.lightSeaGreen |> emphasisColorValue'
+        static member lightSkyBlue = Types.Color.lightSkyBlue |> emphasisColorValue'
+        static member lightSlateGrey = Types.Color.lightSlateGrey |> emphasisColorValue'
+        static member lightSteelBlue = Types.Color.lightSteelBlue |> emphasisColorValue'
+        static member lightYellow = Types.Color.lightYellow |> emphasisColorValue'
+        static member limeGreen = Types.Color.limeGreen |> emphasisColorValue'
+        static member linen = Types.Color.linen |> emphasisColorValue'
+        static member magenta = Types.Color.magenta |> emphasisColorValue'
+        static member mediumAquamarine = Types.Color.mediumAquamarine |> emphasisColorValue'
+        static member mediumBlue = Types.Color.mediumBlue |> emphasisColorValue'
+        static member mediumOrchid = Types.Color.mediumOrchid |> emphasisColorValue'
+        static member mediumPurple = Types.Color.mediumPurple |> emphasisColorValue'
+        static member mediumSeaGreen = Types.Color.mediumSeaGreen |> emphasisColorValue'
+        static member mediumSlateBlue = Types.Color.mediumSlateBlue |> emphasisColorValue'
+        static member mediumSpringGreen = Types.Color.mediumSpringGreen |> emphasisColorValue'
+        static member mediumTurquoise = Types.Color.mediumTurquoise |> emphasisColorValue'
+        static member mediumVioletRed = Types.Color.mediumVioletRed |> emphasisColorValue'
+        static member midnightBlue = Types.Color.midnightBlue |> emphasisColorValue'
+        static member mintCream = Types.Color.mintCream |> emphasisColorValue'
+        static member mistyRose = Types.Color.mistyRose |> emphasisColorValue'
+        static member moccasin = Types.Color.moccasin |> emphasisColorValue'
+        static member navajoWhite = Types.Color.navajoWhite |> emphasisColorValue'
+        static member oldLace = Types.Color.oldLace |> emphasisColorValue'
+        static member olivedrab = Types.Color.olivedrab |> emphasisColorValue'
+        static member orangeRed = Types.Color.orangeRed |> emphasisColorValue'
+        static member orchid = Types.Color.orchid |> emphasisColorValue'
+        static member paleGoldenrod = Types.Color.paleGoldenrod |> emphasisColorValue'
+        static member paleGreen = Types.Color.paleGreen |> emphasisColorValue'
+        static member paleTurquoise = Types.Color.paleTurquoise |> emphasisColorValue'
+        static member paleVioletred = Types.Color.paleVioletred |> emphasisColorValue'
+        static member papayaWhip = Types.Color.papayaWhip |> emphasisColorValue'
+        static member peachpuff = Types.Color.peachpuff |> emphasisColorValue'
+        static member peru = Types.Color.peru |> emphasisColorValue'
+        static member pink = Types.Color.pink |> emphasisColorValue'
+        static member plum = Types.Color.plum |> emphasisColorValue'
+        static member powderBlue = Types.Color.powderBlue |> emphasisColorValue'
+        static member rosyBrown = Types.Color.rosyBrown |> emphasisColorValue'
+        static member royalBlue = Types.Color.royalBlue |> emphasisColorValue'
+        static member saddleBrown = Types.Color.saddleBrown |> emphasisColorValue'
+        static member salmon = Types.Color.salmon |> emphasisColorValue'
+        static member sandyBrown = Types.Color.sandyBrown |> emphasisColorValue'
+        static member seaGreen = Types.Color.seaGreen |> emphasisColorValue'
+        static member seaShell = Types.Color.seaShell |> emphasisColorValue'
+        static member sienna = Types.Color.sienna |> emphasisColorValue'
+        static member skyBlue = Types.Color.skyBlue |> emphasisColorValue'
+        static member slateBlue = Types.Color.slateBlue |> emphasisColorValue'
+        static member slateGray = Types.Color.slateGray |> emphasisColorValue'
+        static member snow = Types.Color.snow |> emphasisColorValue'
+        static member springGreen = Types.Color.springGreen |> emphasisColorValue'
+        static member steelBlue = Types.Color.steelBlue |> emphasisColorValue'
+        static member tan = Types.Color.tan |> emphasisColorValue'
+        static member thistle = Types.Color.thistle |> emphasisColorValue'
+        static member tomato = Types.Color.tomato |> emphasisColorValue'
+        static member turquoise = Types.Color.turquoise |> emphasisColorValue'
+        static member violet = Types.Color.violet |> emphasisColorValue'
+        static member wheat = Types.Color.wheat |> emphasisColorValue'
+        static member whiteSmoke = Types.Color.whiteSmoke |> emphasisColorValue'
+        static member yellowGreen = Types.Color.yellowGreen |> emphasisColorValue'
+        static member rebeccaPurple = Types.Color.rebeccaPurple |> emphasisColorValue'
+        static member Rgb r g b = Types.Color.Rgb(r, g, b) |> emphasisColorValue'
+        static member Rgba r g b a = Types.Color.Rgba(r, g, b, a) |> emphasisColorValue'
+        static member Hex value = Types.Color.Hex value |> emphasisColorValue'
+        static member Hsl h s l = Types.Color.Hsl(h, s, l) |> emphasisColorValue'
+        static member Hsla h s l a  = Types.Color.Hsla (h, s, l, a) |> emphasisColorValue'
+        static member transparent = Types.Color.transparent |> emphasisColorValue'
+        static member currentColor = Types.Color.currentColor |> emphasisColorValue'
 
-        static member Inherit = Inherit |> emphasisColorValue'
-        static member Initial = Initial |> emphasisColorValue'
-        static member Unset = Unset |> emphasisColorValue'
+        static member Inherit = Types.Inherit |> emphasisColorValue'
+        static member Initial = Types.Initial |> emphasisColorValue'
+        static member Unset = Types.Unset |> emphasisColorValue'
 
     /// <summary>Specifies color of text emphasis.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> CSSColor </c>
+    ///     - <c> Types.Color </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextEmphasisColor' (color: ITextEmphasisColor) = TextEmphasisColor.Value(color)
+    let TextEmphasisColor' (color: Types.ITextEmphasisColor) = TextEmphasisColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
-    let private textSizeAdjustValue value = PropertyValue.cssValue Property.TextSizeAdjust value
+    let private textSizeAdjustValue value = Types.cssValue Types.Property.TextSizeAdjust value
     let private textSizeAdjustValue' value = value |> textSizeAdjustToString |> textSizeAdjustValue
 
     type TextSizeAdjust =
-        static member Value (textSize: ITextSizeAdjust) = textSize |> textSizeAdjustValue'
-        static member Auto = Auto |> textSizeAdjustValue'
-        static member None = None' |> textSizeAdjustValue'
-        static member Inherit = Inherit |> textSizeAdjustValue'
-        static member Initial = Initial |> textSizeAdjustValue'
-        static member Unset = Unset |> textSizeAdjustValue'
+        static member Value (textSize: Types.ITextSizeAdjust) = textSize |> textSizeAdjustValue'
+        static member Auto = Types.Auto |> textSizeAdjustValue'
+        static member None = Types.None' |> textSizeAdjustValue'
+        static member Inherit = Types.Inherit |> textSizeAdjustValue'
+        static member Initial = Types.Initial |> textSizeAdjustValue'
+        static member Unset = Types.Unset |> textSizeAdjustValue'
 
     /// <summary>Controls the text inflation on some mobile browsers.</summary>
     /// <param name="textSize">
@@ -1149,14 +1148,14 @@ module Text =
     let TextSizeAdjust' textSize = TextSizeAdjust.Value textSize
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
-    let private tabSizeValue value = PropertyValue.cssValue Property.TabSize value
+    let private tabSizeValue value = Types.cssValue Types.Property.TabSize value
     let private tabSizeValue' value = value |> tabSizeToString |> tabSizeValue
 
     type TabSize =
-        static member Value (tabSize: ITabSize) = tabSize |> tabSizeValue'
-        static member Inherit = Inherit |> tabSizeValue'
-        static member Initial = Initial |> tabSizeValue'
-        static member Unset = Unset |> tabSizeValue'
+        static member Value (tabSize: Types.ITabSize) = tabSize |> tabSizeValue'
+        static member Inherit = Types.Inherit |> tabSizeValue'
+        static member Initial = Types.Initial |> tabSizeValue'
+        static member Unset = Types.Unset |> tabSizeValue'
 
     /// <summary>Specifies the width of tab characters.</summary>
     /// <param name="tabSize">
@@ -1171,19 +1170,19 @@ module Text =
     let TabSize' tabSize = TabSize.Value tabSize
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation
-    let private textOrientationValue value = PropertyValue.cssValue Property.TextOrientation value
+    let private textOrientationValue value = Types.cssValue Types.Property.TextOrientation value
     let private textOrientationValue' value = value |> textOrientationToString |> textOrientationValue
 
     type TextOrientation =
-        static member Value (orientation: ITextOrientation) = orientation |> textOrientationValue'
-        static member Mixed = Mixed |> textOrientationValue'
-        static member Upright = Upright |> textOrientationValue'
-        static member SidewaysRight = SidewaysRight |> textOrientationValue'
-        static member Sideways = Sideways |> textOrientationValue'
-        static member UseGlyphOrientation = UseGlyphOrientation |> textOrientationValue'
-        static member Inherit = Inherit |> textOrientationValue'
-        static member Initial = Initial |> textOrientationValue'
-        static member Unset = Unset |> textOrientationValue'
+        static member Value (orientation: Types.ITextOrientation) = orientation |> textOrientationValue'
+        static member Mixed = Types.Mixed |> textOrientationValue'
+        static member Upright = Types.Upright |> textOrientationValue'
+        static member SidewaysRight = Types.SidewaysRight |> textOrientationValue'
+        static member Sideways = Types.Sideways |> textOrientationValue'
+        static member UseGlyphOrientation = Types.UseGlyphOrientation |> textOrientationValue'
+        static member Inherit = Types.Inherit |> textOrientationValue'
+        static member Initial = Types.Initial |> textOrientationValue'
+        static member Unset = Types.Unset |> textOrientationValue'
 
     /// <summary>Sets the orientation of the text characters.</summary>
     /// <param name="orientation">
@@ -1197,18 +1196,18 @@ module Text =
     let TextOrientation' orientation = TextOrientation.Value orientation
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
-    let private textRenderingValue value = PropertyValue.cssValue Property.TextRendering value
+    let private textRenderingValue value = Types.cssValue Types.Property.TextRendering value
     let private textRenderingValue' value = value |> textRenderingToString |> textRenderingValue
 
     type TextRendering =
-        static member Value (rendering: ITextRendering) = rendering |> textRenderingValue'
-        static member OptimizeSpeed = OptimizeSpeed |> textRenderingValue'
-        static member OptimizeLegibility = OptimizeLegibility |> textRenderingValue'
-        static member GeometricPrecision = GeometricPrecision |> textRenderingValue'
-        static member Auto = Auto |> textRenderingValue'
-        static member Inherit = Inherit |> textRenderingValue'
-        static member Initial = Initial |> textRenderingValue'
-        static member Unset = Unset |> textRenderingValue'
+        static member Value (rendering: Types.ITextRendering) = rendering |> textRenderingValue'
+        static member OptimizeSpeed = Types.OptimizeSpeed |> textRenderingValue'
+        static member OptimizeLegibility = Types.OptimizeLegibility |> textRenderingValue'
+        static member GeometricPrecision = Types.GeometricPrecision |> textRenderingValue'
+        static member Auto = Types.Auto |> textRenderingValue'
+        static member Inherit = Types.Inherit |> textRenderingValue'
+        static member Initial = Types.Initial |> textRenderingValue'
+        static member Unset = Types.Unset |> textRenderingValue'
 
     /// <summary>Specifies how to render text.</summary>
     /// <param name="rendering">
@@ -1223,15 +1222,15 @@ module Text =
     let TextRendering' rendering = TextRendering.Value rendering
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
-    let private textJustifyValue value = PropertyValue.cssValue Property.TextJustify value
+    let private textJustifyValue value = Types.cssValue Types.Property.TextJustify value
     let private textJustifyValue' value = value |> textJustifyToString |> textJustifyValue
 
     type TextJustify =
-        static member Value (justification: ITextJustify) = justification |> textJustifyValue'
-        static member InterWord = InterWord |> textJustifyValue'
-        static member InterCharacter = InterCharacter |> textJustifyValue'
-        static member Auto = Auto |> textJustifyValue'
-        static member None = None' |> textJustifyValue'
+        static member Value (justification: Types.ITextJustify) = justification |> textJustifyValue'
+        static member InterWord = Types.InterWord |> textJustifyValue'
+        static member InterCharacter = Types.InterCharacter |> textJustifyValue'
+        static member Auto = Types.Auto |> textJustifyValue'
+        static member None = Types.None' |> textJustifyValue'
 
     /// <summary>Specifies how to justify text.</summary>
     /// <param name="justification">
@@ -1244,20 +1243,20 @@ module Text =
     let TextJustify' justification = TextJustify.Value justification
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
-    let private whiteSpaceValue value = PropertyValue.cssValue Property.WhiteSpace value
+    let private whiteSpaceValue value = Types.cssValue Types.Property.WhiteSpace value
     let private whiteSpaceValue' value = value |> whitespaceToString |> whiteSpaceValue
 
     type WhiteSpace =
-        static member Value (whitespace: IWhiteSpace) = whitespace |> whiteSpaceValue'
-        static member NoWrap = FssTypes.WhiteSpace.NoWrap |> whiteSpaceValue'
-        static member Pre = Pre |> whiteSpaceValue'
-        static member PreWrap = PreWrap |> whiteSpaceValue'
-        static member PreLine = PreLine |> whiteSpaceValue'
-        static member BreakSpaces = BreakSpaces |> whiteSpaceValue'
-        static member Normal = Normal |> whiteSpaceValue'
-        static member Inherit = Inherit |> whiteSpaceValue'
-        static member Initial = Initial |> whiteSpaceValue'
-        static member Unset = Unset |> whiteSpaceValue'
+        static member Value (whitespace: Types.IWhiteSpace) = whitespace |> whiteSpaceValue'
+        static member NoWrap = Types.WhiteSpace.NoWrap |> whiteSpaceValue'
+        static member Pre = Types.Pre |> whiteSpaceValue'
+        static member PreWrap = Types.PreWrap |> whiteSpaceValue'
+        static member PreLine = Types.PreLine |> whiteSpaceValue'
+        static member BreakSpaces = Types.BreakSpaces |> whiteSpaceValue'
+        static member Normal = Types.Normal |> whiteSpaceValue'
+        static member Inherit = Types.Inherit |> whiteSpaceValue'
+        static member Initial = Types.Initial |> whiteSpaceValue'
+        static member Unset = Types.Unset |> whiteSpaceValue'
 
     /// <summary>Specifies how white space is handled.</summary>
     /// <param name="whitespace">
@@ -1272,19 +1271,19 @@ module Text =
     let WhiteSpace' whitespace = WhiteSpace.Value whitespace
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-    let private userSelectValue value = PropertyValue.cssValue Property.UserSelect value
+    let private userSelectValue value = Types.cssValue Types.Property.UserSelect value
     let private userSelectValue' value = value |> userSelectToString |> userSelectValue
 
     type UserSelect =
-        static member Value (whitespace: IUserSelect) = whitespace |> userSelectValue'
-        static member Text = FssTypes.UserSelect.Text |> userSelectValue'
-        static member Contain = FssTypes.UserSelect.Contain |> userSelectValue'
-        static member All = FssTypes.UserSelect.All |> userSelectValue'
-        static member None = None' |> userSelectValue'
-        static member Auto = Auto |> userSelectValue'
-        static member Inherit = Inherit |> userSelectValue'
-        static member Initial = Initial |> userSelectValue'
-        static member Unset = Unset |> userSelectValue'
+        static member Value (whitespace: Types.IUserSelect) = whitespace |> userSelectValue'
+        static member Text = Types.UserSelect.Text |> userSelectValue'
+        static member Contain = Types.UserSelect.Contain |> userSelectValue'
+        static member All = Types.UserSelect.All |> userSelectValue'
+        static member None = Types.None' |> userSelectValue'
+        static member Auto = Types.Auto |> userSelectValue'
+        static member Inherit = Types.Inherit |> userSelectValue'
+        static member Initial = Types.Initial |> userSelectValue'
+        static member Unset = Types.Unset |> userSelectValue'
 
     /// <summary>Specifies whether the user can select text.</summary>
     /// <param name="userSelect">

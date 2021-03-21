@@ -1,146 +1,148 @@
-namespace FssTypes
+namespace Fss
 
-type TextAlign =
-    | Left
-    | Right
-    | Center
-    | Justify
-    | JustifyAll
-    | Start
-    | End
-    | MatchParent
-    interface ITextAlign
+[<RequireQualifiedAccess>]
+module Types =
+    type TextAlign =
+        | Left
+        | Right
+        | Center
+        | Justify
+        | JustifyAll
+        | Start
+        | End
+        | MatchParent
+        interface Types.ITextAlign
 
-type TextAlignLast =
-    | Start
-    | End
-    | Left
-    | Right
-    | Center
-    | Justify
-    interface ITextAlignLast
+    type TextAlignLast =
+        | Start
+        | End
+        | Left
+        | Right
+        | Center
+        | Justify
+        interface Types.ITextAlignLast
 
-type TextDecorationLine =
-    | Overline
-    | Underline
-    | LineThrough
-    | Blink
-    interface ITextDecorationLine
+    type TextDecorationLine =
+        | Overline
+        | Underline
+        | LineThrough
+        | Blink
+        interface Types.ITextDecorationLine
 
-type TextDecorationThickness =
-    | TextDecorationThickness
-    interface ITextDecorationThickness
+    type TextDecorationThickness =
+        | TextDecorationThickness
+        interface Types.ITextDecorationThickness
 
-type TextDecorationStyle =
-    | Solid
-    | Double
-    | Dotted
-    | Dashed
-    | Wavy
-    interface ITextDecorationStyle
+    type TextDecorationStyle =
+        | Solid
+        | Double
+        | Dotted
+        | Dashed
+        | Wavy
+        interface Types.ITextDecorationStyle
 
-type DecorationSkip =
-    | Objects
-    | Spaces
-    | Edges
-    | BoxDecoration
-    | LeadingSpaces
-    | TrailingSpaces
-    interface ITextDecorationSkip
+    type DecorationSkip =
+        | Objects
+        | Spaces
+        | Edges
+        | BoxDecoration
+        | LeadingSpaces
+        | TrailingSpaces
+        interface Types.ITextDecorationSkip
 
-type TextDecorationSkipInk =
-    | TextDecorationSkipInk
-    interface ITextDecorationSkipInk
+    type TextDecorationSkipInk =
+        | TextDecorationSkipInk
+        interface Types.ITextDecorationSkipInk
 
-type TextTransform =
-    | Capitalize
-    | Uppercase
-    | Lowercase
-    | FullWidth
-    | FullSizeKana
-    interface ITextTransform
+    type TextTransform =
+        | Capitalize
+        | Uppercase
+        | Lowercase
+        | FullWidth
+        | FullSizeKana
+        interface Types.ITextTransform
 
-type TextIndent =
-    | Hanging
-    | EachLine
-    interface ITextIndent
+    type TextIndent =
+        | Hanging
+        | EachLine
+        interface Types.ITextIndent
 
-type TextShadow =
-    | XY of Units.Size.Size * Units.Size.Size
-    | ColorXY of CssColor * Units.Size.Size * Units.Size.Size
-    | ColorXYBlur of CssColor * Units.Size.Size * Units.Size.Size * Units.Size.Size
+    type TextShadow =
+        | XY of Types.Size * Types.Size
+        | ColorXY of Types.Color * Types.Size * Types.Size
+        | ColorXYBlur of Types.Color * Types.Size * Types.Size * Types.Size
 
-type TextOverflow =
-    | Clip
-    | Ellipsis
-    interface ITextOverflow
+    type TextOverflow =
+        | Clip
+        | Ellipsis
+        interface Types.ITextOverflow
 
-type EmphasisPosition =
-    | Over
-    | Under
-    | Right
-    | Left
-    interface ITextEmphasisPosition
+    type EmphasisPosition =
+        | Over
+        | Under
+        | Right
+        | Left
+        interface Types.ITextEmphasisPosition
 
-type TextEmphasisStyle =
-    | Filled
-    | Open
-    | Dot
-    | Circle
-    | DoubleCircle
-    | Triangle
-    | FilledSesame
-    | OpenSesame
-    interface ITextEmphasisStyle
+    type TextEmphasisStyle =
+        | Filled
+        | Open
+        | Dot
+        | Circle
+        | DoubleCircle
+        | Triangle
+        | FilledSesame
+        | OpenSesame
+        interface Types.ITextEmphasisStyle
 
-type UnderlinePosition =
-    | FromFont
-    | Under
-    | Left
-    | Right
-    | AutoPos
-    | Above
-    | Below
-    interface ITextUnderlinePosition
+    type UnderlinePosition =
+        | FromFont
+        | Under
+        | Left
+        | Right
+        | AutoPos
+        | Above
+        | Below
+        interface Types.ITextUnderlinePosition
 
-type TextEmphasisColor =
-    | TextEmphasisColor of CssColor
-    interface ITextEmphasisColor
+    type TextEmphasisColor =
+        | TextEmphasisColor of Types.Color
+        interface Types.ITextEmphasisColor
 
-type Hyphens =
-    | Manual
-    interface IHyphens
+    type Hyphens =
+        | Manual
+        interface Types.IHyphens
 
-type TextOrientation =
-    | Mixed
-    | Upright
-    | SidewaysRight
-    | Sideways
-    | UseGlyphOrientation
-    interface ITextOrientation
+    type TextOrientation =
+        | Mixed
+        | Upright
+        | SidewaysRight
+        | Sideways
+        | UseGlyphOrientation
+        interface Types.ITextOrientation
 
-type TextRendering =
-    | OptimizeSpeed
-    | OptimizeLegibility
-    | GeometricPrecision
-    interface ITextRendering
+    type TextRendering =
+        | OptimizeSpeed
+        | OptimizeLegibility
+        | GeometricPrecision
+        interface Types.ITextRendering
 
-type TextJustify =
-    | InterWord
-    | InterCharacter
-    interface ITextJustify
+    type TextJustify =
+        | InterWord
+        | InterCharacter
+        interface Types.ITextJustify
 
-type WhiteSpace =
-    | NoWrap
-    | Pre
-    | PreWrap
-    | PreLine
-    | BreakSpaces
-    interface IWhiteSpace
+    type WhiteSpace =
+        | NoWrap
+        | Pre
+        | PreWrap
+        | PreLine
+        | BreakSpaces
+        interface Types.IWhiteSpace
 
-type UserSelect =
-    | Text
-    | Contain
-    | All
-    | Element
-    interface IUserSelect
+    type UserSelect =
+        | Text
+        | Contain
+        | All
+        | Element
+        interface Types.IUserSelect

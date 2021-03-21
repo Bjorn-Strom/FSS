@@ -1,10 +1,12 @@
-namespace FssTypes
+namespace Fss
 
-type Clear =
-    | Left
-    | Right
-    | Both
-    | InlineStart
-    | InlineEnd
-    interface IClear
+[<RequireQualifiedAccess>]
+module Types =
+    type Clear =
+        | Left
+        | Right
+        | Both
+        | InlineStart
+        | InlineEnd
+        interface Types.IClear
 

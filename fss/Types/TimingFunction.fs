@@ -1,29 +1,30 @@
-namespace FssTypes
+namespace Fss
 
-type Step =
-    | JumpStart
-    | JumpEnd
-    | JumpNone
-    | JumpBoth
-    | Start
-    | End
+[<RequireQualifiedAccess>]
+module Types =
+    type Step =
+        | JumpStart
+        | JumpEnd
+        | JumpNone
+        | JumpBoth
+        | Stat
+        | End
 
-type Timing =
-    | Ease
-    | EaseIn
-    | EaseOut
-    | EaseInOut
-    | Linear
-    | StepStart
-    | StepEnd
-    | CubicBezier of float * float * float * float
-    | Steps of int
-    | StepsWithTerm of int * Step
-    interface ITransitionTimingFunction
+    type Timing =
+        | Ease
+        | EaseIn
+        | EaseOut
+        | EaseInOut
+        | Linear
+        | StepStart
+        | StepEnd
+        | CubicBezier of float * float * float * float
+        | Steps of int
+        | StepsWithTerm of int * Step
+        interface Types.ITransitionTimingFunction
 
-module TimingFunction =
     let stepsValue (value: Step) = Fss.Utilities.Helpers.duToKebab value
-    let timingToString (timing: ITransitionTimingFunction) =
+    let timingToString (timing: Types.ITransitionTimingFunction) =
         let timingToString timing =
             match timing with
                 | CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" p1 p2 p3 p4
@@ -33,5 +34,5 @@ module TimingFunction =
 
         match timing with
         | :? Timing as t -> timingToString t
-        | :? Global as g -> global' g
+        | :? Types.Keywords as g -> Types.keywordsToString g
         | _ -> "Unknown timing function"

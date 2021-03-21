@@ -6,12 +6,12 @@ module MixBlendMode =
     let private blendModeToString (blendMode: IMixBlendMode) =
         match blendMode with
         | :? MixBlendMode as b -> Utilities.Helpers.duToKebab b
-        | :? Normal -> normal
-        | :? Global as g -> global' g
+        | :? Types.Normal -> Types.normal
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mix blend mode"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
-    let private mixBlendModeCssValue value = PropertyValue.cssValue Property.MixBlendMode value
+    let private mixBlendModeCssValue value = Types.cssValue Types.Property.MixBlendMode value
     let private mixBlendModeCssValue' value =
         value
         |> blendModeToString
@@ -20,26 +20,26 @@ module MixBlendMode =
     type MixBlendMode =
         static member Value(mixBlendMode: IMixBlendMode) = mixBlendMode |> mixBlendModeCssValue'
 
-        static member Multiply = FssTypes.MixBlendMode.Multiply |> mixBlendModeCssValue'
-        static member Screen = FssTypes.MixBlendMode.Screen |> mixBlendModeCssValue'
-        static member Overlay = FssTypes.MixBlendMode.Overlay |> mixBlendModeCssValue'
-        static member Darken = FssTypes.MixBlendMode.Darken |> mixBlendModeCssValue'
-        static member Lighten = FssTypes.MixBlendMode.Lighten |> mixBlendModeCssValue'
-        static member ColorDodge = FssTypes.MixBlendMode.ColorDodge |> mixBlendModeCssValue'
-        static member ColorBurn = FssTypes.MixBlendMode.ColorBurn |> mixBlendModeCssValue'
-        static member HardLight = FssTypes.MixBlendMode.HardLight |> mixBlendModeCssValue'
-        static member SoftLight = FssTypes.MixBlendMode.SoftLight |> mixBlendModeCssValue'
-        static member Difference = FssTypes.MixBlendMode.Difference |> mixBlendModeCssValue'
-        static member Exclusion = FssTypes.MixBlendMode.Exclusion |> mixBlendModeCssValue'
-        static member Hue = FssTypes.MixBlendMode.Hue |> mixBlendModeCssValue'
-        static member Saturation = FssTypes.MixBlendMode.Saturation |> mixBlendModeCssValue'
-        static member Color = FssTypes.MixBlendMode.Color |> mixBlendModeCssValue'
-        static member Luminosity = FssTypes.MixBlendMode.Luminosity |> mixBlendModeCssValue'
+        static member Multiply = Types.MixBlendMode.Multiply |> mixBlendModeCssValue'
+        static member Screen = Types.MixBlendMode.Screen |> mixBlendModeCssValue'
+        static member Overlay = Types.MixBlendMode.Overlay |> mixBlendModeCssValue'
+        static member Darken = Types.MixBlendMode.Darken |> mixBlendModeCssValue'
+        static member Lighten = Types.MixBlendMode.Lighten |> mixBlendModeCssValue'
+        static member ColorDodge = Types.MixBlendMode.ColorDodge |> mixBlendModeCssValue'
+        static member ColorBurn = Types.MixBlendMode.ColorBurn |> mixBlendModeCssValue'
+        static member HardLight = Types.MixBlendMode.HardLight |> mixBlendModeCssValue'
+        static member SoftLight = Types.MixBlendMode.SoftLight |> mixBlendModeCssValue'
+        static member Difference = Types.MixBlendMode.Difference |> mixBlendModeCssValue'
+        static member Exclusion = Types.MixBlendMode.Exclusion |> mixBlendModeCssValue'
+        static member Hue = Types.MixBlendMode.Hue |> mixBlendModeCssValue'
+        static member Saturation = Types.MixBlendMode.Saturation |> mixBlendModeCssValue'
+        static member Color = Types.MixBlendMode.Color |> mixBlendModeCssValue'
+        static member Luminosity = Types.MixBlendMode.Luminosity |> mixBlendModeCssValue'
 
-        static member Normal = Normal |> mixBlendModeCssValue'
-        static member Inherit = Inherit |> mixBlendModeCssValue'
-        static member Initial = Initial |> mixBlendModeCssValue'
-        static member Unset = Unset |> mixBlendModeCssValue'
+        static member Normal = Types.Normal |> mixBlendModeCssValue'
+        static member Inherit = Types.Inherit |> mixBlendModeCssValue'
+        static member Initial = Types.Initial |> mixBlendModeCssValue'
+        static member Unset = Types.Unset |> mixBlendModeCssValue'
 
     /// <summary>Specifies how an elements content should blend with its parent.</summary>
     /// <param name="mixBlendMode">

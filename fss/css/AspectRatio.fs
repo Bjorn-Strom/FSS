@@ -7,10 +7,10 @@ module AspectRatio =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
     let private stringifyAspectRatio (all: IAll) =
         match all with
-        | :? Global as g -> global' g
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown all"
 
-    let private aspectRatioValue value = PropertyValue.cssValue Property.AspectRatio value
+    let private aspectRatioValue value = Types.cssValue Types.Property.AspectRatio value
     let private aspectRatioValue' value =
         value
         |> stringifyAspectRatio
@@ -20,8 +20,8 @@ module AspectRatio =
         static member Value (width: int, height: int) =
             $"{width} / {height}"
             |> aspectRatioValue
-        static member Inherit = Inherit |> aspectRatioValue'
-        static member Initial = Initial |> aspectRatioValue'
-        static member Unset = Unset |> aspectRatioValue'
+        static member Inherit = Types.Inherit |> aspectRatioValue'
+        static member Initial = Types.Initial |> aspectRatioValue'
+        static member Unset = Types.Unset |> aspectRatioValue'
 
     let AspectRatio' width height = aspectRatioValue(width, height)

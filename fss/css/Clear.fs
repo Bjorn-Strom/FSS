@@ -8,11 +8,11 @@ module Clear =
     let private stringifyClear (clear: IClear) =
         match clear with
         | :? Clear as c -> Utilities.Helpers.duToKebab c
-        | :? Global as g -> global' g
-        | :? None' -> none
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.none
         | _ -> "Unknown clear"
 
-    let private clearValue value = PropertyValue.cssValue Property.Clear value
+    let private clearValue value = Types.cssValue Types.Property.Clear value
     let private clearValue' value =
         value
         |> stringifyClear
@@ -20,10 +20,10 @@ module Clear =
 
     type Clear =
         static member Value (clear: IClear) = clear |> clearValue'
-        static member None = None' |> clearValue'
-        static member Inherit = Inherit |> clearValue'
-        static member Initial = Initial |> clearValue'
-        static member Unset = Unset |> clearValue'
+        static member None = Types.None' |> clearValue'
+        static member Inherit = Types.Inherit |> clearValue'
+        static member Initial = Types.Initial |> clearValue'
+        static member Unset = Types.Unset |> clearValue'
 
     /// <summary>Specifies how if an element is to be moved downwards by floating elements.</summary>
     /// <param name="clear">

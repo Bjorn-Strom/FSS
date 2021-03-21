@@ -1,22 +1,20 @@
 ﻿namespace Fss
 
-open FssTypes
-
 [<AutoOpen>]
 module TimingFunction =
-    let private timingToString timing = TimingFunction.timingToString timing
+    let private timingToString timing = Types.timingToString timing
     type TimingFunction =
-        interface ITransitionTimingFunction
-        static member Ease = Ease |> timingToString
-        static member EaseIn = EaseIn |> timingToString
-        static member EaseOut = EaseOut |> timingToString
-        static member EaseInOut = EaseInOut |> timingToString
-        static member Linear = Linear |> timingToString
-        static member StepStart = StepStart |> timingToString
-        static member StepEnd = StepEnd |> timingToString
-        static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = CubicBezier(p1,p2,p3,p4) |> timingToString
-        static member Step (steps: int) = Steps(steps) |> timingToString
-        static member Step (steps: int, jumpTerm: Step) = StepsWithTerm(steps, jumpTerm) |> timingToString
-        static member Inherit = Inherit |> timingToString
-        static member Initial = Initial |> timingToString
-        static member Unset =  Unset |> timingToString
+        interface Types.ITransitionTimingFunction
+        static member Ease = Types.Ease |> timingToString
+        static member EaseIn = Types.EaseIn |> timingToString
+        static member EaseOut = Types.EaseOut |> timingToString
+        static member EaseInOut = Types.EaseInOut |> timingToString
+        static member Linear = Types.Linear |> timingToString
+        static member StepStart = Types.StepStart |> timingToString
+        static member StepEnd = Types.StepEnd |> timingToString
+        static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = Types.CubicBezier(p1,p2,p3,p4) |> timingToString
+        static member Step (steps: int) = Types.Steps(steps) |> timingToString
+        static member Step (steps: int, jumpTerm: Types.Step) = Types.StepsWithTerm(steps, jumpTerm) |> timingToString
+        static member Inherit = Types.Inherit |> timingToString
+        static member Initial = Types.Initial |> timingToString
+        static member Unset =  Types.Unset |> timingToString

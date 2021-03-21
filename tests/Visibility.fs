@@ -23,11 +23,11 @@ module Visibility =
                     ["paintOrder" ==> "markers"]
                 test
                     "Paint order stroke fill"
-                    [PaintOrder.Value(Stroke, FssTypes.PaintOrder.Fill)]
+                    [PaintOrder.Value(Stroke, Types.PaintOrder.Fill)]
                     ["paintOrder" ==> "stroke fill"]
                 test
                     "Paint order markers stroke fill"
-                    [PaintOrder.Value(Markers, Stroke, FssTypes.PaintOrder.Fill)]
+                    [PaintOrder.Value(Markers, Stroke, Types.PaintOrder.Fill)]
                     ["paintOrder" ==> "markers stroke fill"]
                 test
                     "Paint order normal"
@@ -136,19 +136,19 @@ module Visibility =
                     ["overflowY" ==> "unset"]
                 test
                     "Overflow visible visible"
-                    [Overflow.Value (FssTypes.Overflow.Visible, FssTypes.Overflow.Visible)]
+                    [Overflow.Value (Types.Overflow.Visible, Types.Overflow.Visible)]
                     ["overflow" ==> "visible visible"]
                 test
                     "OverflowXY hidden hidden"
-                    [Overflow.Value (FssTypes.Overflow.Hidden, FssTypes.Overflow.Hidden)]
+                    [Overflow.Value (Types.Overflow.Hidden, Types.Overflow.Hidden)]
                     ["overflow" ==> "hidden hidden"]
                 test
                     "Overflow Clip clip"
-                    [Overflow.Value (FssTypes.Overflow.Clip, FssTypes.Overflow.Clip)]
+                    [Overflow.Value (Types.Overflow.Clip, Types.Overflow.Clip)]
                     ["overflow" ==> "clip clip"]
                 test
                     "Overflow scroll Scroll"
-                    [Overflow.Value (FssTypes.Overflow.Scroll, FssTypes.Overflow.Scroll)]
+                    [Overflow.Value (Types.Overflow.Scroll, Types.Overflow.Scroll)]
                     ["overflow" ==> "scroll scroll"]
                 test
                     "OverflowWrap break-word"

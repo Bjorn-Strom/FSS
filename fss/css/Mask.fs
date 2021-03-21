@@ -8,10 +8,10 @@ module Mask =
     let private stringifyClip (clip: IMaskClip) =
         match clip with
         | :? MaskClip as m -> Utilities.Helpers.duToKebab m
-        | :? Global as g -> global' g
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask-clip"
 
-    let private maskClipValue value = PropertyValue.cssValue Property.MaskClip value
+    let private maskClipValue value = Types.cssValue Types.Property.MaskClip value
     let private maskClipValue' value =
         value
         |> stringifyClip
@@ -19,25 +19,25 @@ module Mask =
 
     type MaskClip =
         static member Value (clip: IMaskClip) = clip |> maskClipValue'
-        static member Value (clips: FssTypes.MaskClip list) =
+        static member Value (clips: Types.MaskClip list) =
             clips
             |> Utilities.Helpers.combineComma stringifyClip
             |> maskClipValue
-        static member ContentBox = FssTypes.MaskClip.ContentBox |> maskClipValue'
-        static member PaddingBox = FssTypes.MaskClip.PaddingBox |> maskClipValue'
-        static member BorderBox = FssTypes.MaskClip.BorderBox |> maskClipValue'
-        static member MarginBox = FssTypes.MaskClip.MarginBox |> maskClipValue'
-        static member FillBox = FssTypes.MaskClip.FillBox |> maskClipValue'
-        static member StrokeBox = FssTypes.MaskClip.StrokeBox |> maskClipValue'
-        static member ViewBox = FssTypes.MaskClip.ViewBox |> maskClipValue'
-        static member NoClip = FssTypes.MaskClip.NoClip |> maskClipValue'
-        static member Border = FssTypes.MaskClip.Border |> maskClipValue'
-        static member Padding = FssTypes.MaskClip.Padding |> maskClipValue'
-        static member Content = FssTypes.MaskClip.Content |> maskClipValue'
-        static member Text = FssTypes.MaskClip.Text |> maskClipValue'
-        static member Inherit = Inherit |> maskClipValue'
-        static member Initial = Initial |> maskClipValue'
-        static member Unset = Unset |> maskClipValue'
+        static member ContentBox = Types.MaskClip.ContentBox |> maskClipValue'
+        static member PaddingBox = Types.MaskClip.PaddingBox |> maskClipValue'
+        static member BorderBox = Types.MaskClip.BorderBox |> maskClipValue'
+        static member MarginBox = Types.MaskClip.MarginBox |> maskClipValue'
+        static member FillBox = Types.MaskClip.FillBox |> maskClipValue'
+        static member StrokeBox = Types.MaskClip.StrokeBox |> maskClipValue'
+        static member ViewBox = Types.MaskClip.ViewBox |> maskClipValue'
+        static member NoClip = Types.MaskClip.NoClip |> maskClipValue'
+        static member Border = Types.MaskClip.Border |> maskClipValue'
+        static member Padding = Types.MaskClip.Padding |> maskClipValue'
+        static member Content = Types.MaskClip.Content |> maskClipValue'
+        static member Text = Types.MaskClip.Text |> maskClipValue'
+        static member Inherit = Types.Inherit |> maskClipValue'
+        static member Initial = Types.Initial |> maskClipValue'
+        static member Unset = Types.Unset |> maskClipValue'
 
     /// <summary>Specifies which area is affected by a mask.</summary>
     /// <param name="clip">
@@ -54,10 +54,10 @@ module Mask =
     let private stringifyComposite (composite: IMaskComposite) =
         match composite with
         | :? MaskComposite as m -> Utilities.Helpers.duToLowercase m
-        | :? Global as g -> global' g
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask-composite"
 
-    let private maskCompositeValue value = PropertyValue.cssValue Property.MaskComposite value
+    let private maskCompositeValue value = Types.cssValue Types.Property.MaskComposite value
     let private maskCompositeValue' value =
         value
         |> stringifyComposite
@@ -65,17 +65,17 @@ module Mask =
 
     type MaskComposite =
         static member Value (clip: IMaskComposite) = clip |> maskCompositeValue'
-        static member Value (clips: FssTypes.MaskComposite list) =
+        static member Value (clips: Types.MaskComposite list) =
             clips
             |> Utilities.Helpers.combineComma stringifyComposite
             |> maskCompositeValue
-        static member Add = FssTypes.MaskComposite.Add |> maskCompositeValue'
-        static member Subtract = FssTypes.MaskComposite.Subtract |> maskCompositeValue'
-        static member Intersect = FssTypes.MaskComposite.Intersect |> maskCompositeValue'
-        static member Exclude = FssTypes.MaskComposite.Exclude |> maskCompositeValue'
-        static member Inherit = Inherit |> maskCompositeValue'
-        static member Initial = Initial |> maskCompositeValue'
-        static member Unset = Unset |> maskCompositeValue'
+        static member Add = Types.MaskComposite.Add |> maskCompositeValue'
+        static member Subtract = Types.MaskComposite.Subtract |> maskCompositeValue'
+        static member Intersect = Types.MaskComposite.Intersect |> maskCompositeValue'
+        static member Exclude = Types.MaskComposite.Exclude |> maskCompositeValue'
+        static member Inherit = Types.Inherit |> maskCompositeValue'
+        static member Initial = Types.Initial |> maskCompositeValue'
+        static member Unset = Types.Unset |> maskCompositeValue'
 
     /// <summary>Allows composing of masks with masks under it.</summary>
     /// <param name="clip">
@@ -91,11 +91,11 @@ module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
     let private imageSourceToString (imageSource: IMaskImage) =
         match imageSource with
-        | :? None' -> none
-        | :? Global as g -> global' g
+        | :? Types.None' -> Types.none
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask image"
 
-    let private imageValue value = PropertyValue.cssValue Property.MaskImage value
+    let private imageValue value = Types.cssValue Types.Property.MaskImage value
     let private imageValue' value =
         value
         |> imageSourceToString
@@ -104,39 +104,39 @@ module Mask =
     type MaskImage =
         static member Value (source: IMaskImage) = source |> imageValue'
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
-        static member LinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
             imageValue <| Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Size.Size) list) =
+        static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
             imageValue <| Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
+        static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
             imageValue <| Image.Image.LinearGradients(gradients)
-        static member LinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Size.Size) list)) list) =
+        static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
             imageValue <| Image.Image.LinearGradients(gradients)
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Size.Size) list) =
+        static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
             imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
             imageValue <| Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Size.Size) list)) list) =
+        static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
             imageValue <| Image.Image.RepeatingLinearGradients(gradients)
-        static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
+        static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
             imageValue <| Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
             imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
             imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Percent.Percent) list) list) =
+        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
             imageValue <| Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (Image.Shape * Image.Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Size.Size) list) list) =
+        static member RadialGradients (gradients: (Image.Shape * Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
             imageValue <| Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member None = None' |> imageValue'
-        static member Inherit = Inherit |> imageValue'
-        static member Initial = Initial |> imageValue'
-        static member Unset = Unset |> imageValue'
+        static member None = Types.None' |> imageValue'
+        static member Inherit = Types.Inherit |> imageValue'
+        static member Initial = Types.Initial |> imageValue'
+        static member Unset = Types.Unset |> imageValue'
 
     /// <summary>Specifies width of border image.</summary>
     /// <param name="source">
@@ -154,10 +154,10 @@ module Mask =
     let private stringifyMode (composite: IMaskMode) =
         match composite with
         | :? MaskMode as m -> Utilities.Helpers.duToKebab m
-        | :? Global as g -> global' g
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask mode"
 
-    let private maskModeValue value = PropertyValue.cssValue Property.MaskMode value
+    let private maskModeValue value = Types.cssValue Types.Property.MaskMode value
     let private maskModeValue' value =
         value
         |> stringifyMode
@@ -165,16 +165,16 @@ module Mask =
 
     type MaskMode =
         static member Value (mode: IMaskMode) = mode |> maskModeValue'
-        static member Value (modes: FssTypes.MaskMode list) =
+        static member Value (modes: Types.MaskMode list) =
             modes
             |> Utilities.Helpers.combineComma stringifyMode
             |> maskModeValue
-        static member Alpha = FssTypes.Alpha |> maskModeValue'
-        static member Luminance = FssTypes.Luminance |> maskModeValue'
-        static member MatchSource = FssTypes.MatchSource |> maskModeValue'
-        static member Inherit = Inherit |> maskModeValue'
-        static member Initial = Initial |> maskModeValue'
-        static member Unset = Unset |> maskModeValue'
+        static member Alpha = Types.Alpha |> maskModeValue'
+        static member Luminance = Types.Luminance |> maskModeValue'
+        static member MatchSource = Types.MatchSource |> maskModeValue'
+        static member Inherit = Types.Inherit |> maskModeValue'
+        static member Initial = Types.Initial |> maskModeValue'
+        static member Unset = Types.Unset |> maskModeValue'
 
     /// <summary>Allows composing of masks with masks under it.</summary>
     /// <param name="mode">
@@ -191,10 +191,10 @@ module Mask =
     let private stringifyOrigin (composite: IMaskOrigin) =
         match composite with
         | :? MaskOrigin as m -> Utilities.Helpers.duToKebab m
-        | :? Global as g -> global' g
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask mode"
 
-    let private maskOriginValue value = PropertyValue.cssValue Property.MaskOrigin value
+    let private maskOriginValue value = Types.cssValue Types.Property.MaskOrigin value
     let maskOriginValue' value =
         value
         |> stringifyOrigin
@@ -202,24 +202,24 @@ module Mask =
 
     type MaskOrigin =
         static member Value (origin: IMaskOrigin) = origin |> maskOriginValue'
-        static member Value (origins: FssTypes.MaskOrigin list) =
+        static member Value (origins: Types.MaskOrigin list) =
             origins
             |> Utilities.Helpers.combineComma stringifyOrigin
             |> maskOriginValue
-        static member ContentBox = FssTypes.MaskOrigin.ContentBox |> maskOriginValue'
-        static member PaddingBox = FssTypes.MaskOrigin.PaddingBox |> maskOriginValue'
-        static member BorderBox = FssTypes.MaskOrigin.BorderBox |> maskOriginValue'
-        static member MarginBox = FssTypes.MaskOrigin.MarginBox |> maskOriginValue'
-        static member FillBox = FssTypes.MaskOrigin.FillBox |> maskOriginValue'
-        static member StrokeBox = FssTypes.MaskOrigin.StrokeBox |> maskOriginValue'
-        static member ViewBox = FssTypes.MaskOrigin.ViewBox |> maskOriginValue'
-        static member Content = FssTypes.MaskOrigin.Content |> maskOriginValue'
-        static member Padding = FssTypes.MaskOrigin.Padding |> maskOriginValue'
-        static member Border = FssTypes.MaskOrigin.Border |> maskOriginValue'
+        static member ContentBox = Types.MaskOrigin.ContentBox |> maskOriginValue'
+        static member PaddingBox = Types.MaskOrigin.PaddingBox |> maskOriginValue'
+        static member BorderBox = Types.MaskOrigin.BorderBox |> maskOriginValue'
+        static member MarginBox = Types.MaskOrigin.MarginBox |> maskOriginValue'
+        static member FillBox = Types.MaskOrigin.FillBox |> maskOriginValue'
+        static member StrokeBox = Types.MaskOrigin.StrokeBox |> maskOriginValue'
+        static member ViewBox = Types.MaskOrigin.ViewBox |> maskOriginValue'
+        static member Content = Types.MaskOrigin.Content |> maskOriginValue'
+        static member Padding = Types.MaskOrigin.Padding |> maskOriginValue'
+        static member Border = Types.MaskOrigin.Border |> maskOriginValue'
 
-        static member Inherit = Inherit |> maskOriginValue'
-        static member Initial = Initial |> maskOriginValue'
-        static member Unset = Unset |> maskOriginValue'
+        static member Inherit = Types.Inherit |> maskOriginValue'
+        static member Initial = Types.Initial |> maskOriginValue'
+        static member Unset = Types.Unset |> maskOriginValue'
 
     /// <summary>Specifies origin of masks.</summary>
     /// <param name="mode">
@@ -235,10 +235,10 @@ module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
     let private stringifyPosition (composite: IMaskPosition) =
         match composite with
-        | :? Global as g -> global' g
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask position"
 
-    let private maskPositionValue value = PropertyValue.cssValue Property.MaskPosition value
+    let private maskPositionValue value = Types.cssValue Types.Property.MaskPosition value
     let private maskPositionValue' value =
         value
         |> stringifyPosition
@@ -246,30 +246,30 @@ module Mask =
 
     let private stringifyPixelPositions ps =
         let (x, y) = ps
-        $"{Units.Size.value x} {Units.Size.value y}"
+        $"{Types.sizeToString x} {Types.sizeToString y}"
 
     let private stringifyPercentPositions ps =
         let (x, y) = ps
-        $"{Units.Percent.value x} {Units.Percent.value y}"
+        $"{Types.percentToString x} {Types.percentToString y}"
 
     type MaskPosition =
-        static member Value (x: Units.Size.Size, y: Units.Size.Size) =
+        static member Value (x: Types.Size, y: Types.Size) =
             stringifyPixelPositions(x,y)
             |> maskPositionValue
-        static member Value (positions: (Units.Size.Size * Units.Size.Size) list ) =
+        static member Value (positions: (Types.Size * Types.Size) list ) =
             positions
             |> Utilities.Helpers.combineComma stringifyPixelPositions
             |> maskPositionValue
-        static member Value (x: Units.Percent.Percent, y: Units.Percent.Percent) =
+        static member Value (x: Types.Percent, y: Types.Percent) =
             stringifyPercentPositions(x,y)
             |> maskPositionValue
-        static member Value (positions: (Units.Percent.Percent * Units.Percent.Percent) list ) =
+        static member Value (positions: (Types.Percent * Types.Percent) list ) =
             positions
             |> Utilities.Helpers.combineComma stringifyPercentPositions
             |> maskPositionValue
-        static member Inherit = Inherit |> maskPositionValue'
-        static member Initial = Initial |> maskPositionValue'
-        static member Unset = Unset |> maskPositionValue'
+        static member Inherit = Types.Inherit |> maskPositionValue'
+        static member Initial = Types.Initial |> maskPositionValue'
+        static member Unset = Types.Unset |> maskPositionValue'
 
     /// <summary>Specifies position of masks.</summary>
     /// <param name="x">
@@ -281,16 +281,16 @@ module Mask =
     ///     - <c> x: Size  </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskPosition' (x: Units.Size.Size) (y: Units.Size.Size) = MaskPosition.Value(x,y)
+    let MaskPosition' (x: Types.Size) (y: Types.Size) = MaskPosition.Value(x,y)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
     let private stringifyRepeat (composite: IMaskRepeat) =
         match composite with
         | :? MaskRepeat as r -> Utilities.Helpers.duToKebab r
-        | :? Global as g -> global' g
+        | :? Types.Keywords as k -> Types.keywordsToString k
         | _ -> "Unknown mask repeat"
 
-    let private maskRepeatValue value = PropertyValue.cssValue Property.MaskRepeat value
+    let private maskRepeatValue value = Types.cssValue Types.Property.MaskRepeat value
     let private maskRepeatValue' value =
         value
         |> stringifyRepeat
@@ -306,19 +306,19 @@ module Mask =
         static member Value (repeatX: IMaskRepeat, repeatY: IMaskRepeat) =
             $"{stringifyRepeat repeatX} {stringifyRepeat repeatY}"
             |> maskRepeatValue
-        static member Value(repeats: (FssTypes.MaskRepeat * FssTypes.MaskRepeat) list) =
+        static member Value(repeats: (Types.MaskRepeat * Types.MaskRepeat) list) =
             repeats
             |> Utilities.Helpers.combineComma repeatValue
             |> maskRepeatValue
-        static member RepeatX = FssTypes.MaskRepeat.RepeatX |> maskRepeatValue'
-        static member RepeatY = FssTypes.MaskRepeat.RepeatY |> maskRepeatValue'
-        static member Repeat = FssTypes.MaskRepeat.Repeat |> maskRepeatValue'
-        static member Space = FssTypes.MaskRepeat.Space |> maskRepeatValue'
-        static member Round = FssTypes.MaskRepeat.Round |> maskRepeatValue'
-        static member NoRepeat = FssTypes.MaskRepeat.NoRepeat |> maskRepeatValue'
-        static member Inherit = Inherit |> maskRepeatValue'
-        static member Initial = Initial |> maskRepeatValue'
-        static member Unset = Unset |> maskRepeatValue'
+        static member RepeatX = Types.MaskRepeat.RepeatX |> maskRepeatValue'
+        static member RepeatY = Types.MaskRepeat.RepeatY |> maskRepeatValue'
+        static member Repeat = Types.MaskRepeat.Repeat |> maskRepeatValue'
+        static member Space = Types.MaskRepeat.Space |> maskRepeatValue'
+        static member Round = Types.MaskRepeat.Round |> maskRepeatValue'
+        static member NoRepeat = Types.MaskRepeat.NoRepeat |> maskRepeatValue'
+        static member Inherit = Types.Inherit |> maskRepeatValue'
+        static member Initial = Types.Initial |> maskRepeatValue'
+        static member Unset = Types.Unset |> maskRepeatValue'
 
     /// <summary>Specifies how masks are repeated.</summary>
     /// <param name="repeat">

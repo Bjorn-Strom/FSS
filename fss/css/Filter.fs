@@ -8,36 +8,36 @@ module Filter =
     let private stringifyFilter (filter: IFilter) =
         match filter with
         | :? Filter as f -> Filter.stringifyFilter f
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> GlobalValue.Types.keywordsToString g
         | :? None' -> GlobalValue.none
         | _ -> "Unknown filter"
 
-    let private filterValue value = PropertyValue.cssValue Property.Filter value
+    let private filterValue value = Types.cssValue Types.Property.Filter value
     let private filterValue' value =
         value
         |> stringifyFilter
         |> filterValue
 
     type Filter =
-        static member Url url  = FssTypes.Filter.Url url
-        static member Blur blur = FssTypes.Filter.Blur blur
-        static member Brightness brightness = FssTypes.Filter.Brightness brightness
-        static member Contrast contrast = FssTypes.Filter.Contrast contrast
-        static member DropShadow x y blur color invert = FssTypes.Filter.DropShadow(x,y,blur,color, invert)
-        static member Grayscale grayScale = FssTypes.Filter.Grayscale grayScale
-        static member HueRotate hueRotate = FssTypes.Filter.HueRotate hueRotate
-        static member Invert invert = FssTypes.Filter.Invert invert
-        static member Opacity opacity = FssTypes.Filter.Opacity opacity
-        static member Saturate saturate = FssTypes.Filter.Saturate saturate
-        static member Sepia sepia = FssTypes.Filter.Sepia sepia
+        static member Url url  = Types.Filter.Url url
+        static member Blur blur = Types.Filter.Blur blur
+        static member Brightness brightness = Types.Filter.Brightness brightness
+        static member Contrast contrast = Types.Filter.Contrast contrast
+        static member DropShadow x y blur color invert = Types.Filter.DropShadow(x,y,blur,color, invert)
+        static member Grayscale grayScale = Types.Filter.Grayscale grayScale
+        static member HueRotate hueRotate = Types.Filter.HueRotate hueRotate
+        static member Invert invert = Types.Filter.Invert invert
+        static member Opacity opacity = Types.Filter.Opacity opacity
+        static member Saturate saturate = Types.Filter.Saturate saturate
+        static member Sepia sepia = Types.Filter.Sepia sepia
 
-        static member None = None' |> filterValue'
-        static member Inherit = Inherit |> filterValue'
-        static member Initial = Initial |> filterValue'
-        static member Unset = Unset |> filterValue'
+        static member None = Types.None' |> filterValue'
+        static member Inherit = Types.Inherit |> filterValue'
+        static member Initial = Types.Initial |> filterValue'
+        static member Unset = Types.Unset |> filterValue'
 
     /// Supply a list of filters to be applied to the element.
-    let Filters (filters: FssTypes.Filter list): CssProperty =
+    let Filters (filters: Types.Filter list): CssProperty =
         filters
         |> Utilities.Helpers.combineWs Filter.stringifyFilter
         |> filterValue
@@ -47,37 +47,37 @@ module BackdropFilter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
     let private stringifyFilter (backdropFilter: IBackdropFilter) =
         match backdropFilter with
-        | :? FssTypes.Filter as f -> Filter.stringifyFilter f
-        | :? Global as g -> global' g
-        | :? None' -> none
+        | :? Types.Filter as f -> Filter.stringifyFilter f
+        | :? Types.Keywords as k -> Types.keywordsToString k
+        | :? Types.None' -> Types.none
         | _ -> "Unknown backdrop filter"
 
-    let private backdropFilterValue value = PropertyValue.cssValue Property.BackdropFilter value
+    let private backdropFilterValue value = Types.cssValue Types.Property.BackdropFilter value
     let private backdropFilterValue' value =
         value
         |> stringifyFilter
         |> backdropFilterValue
 
     type BackdropFilter =
-        static member Url url = FssTypes.Filter.Url url
-        static member Blur blur = FssTypes.Filter.Blur blur
-        static member Brightness brightness = FssTypes.Filter.Brightness brightness
-        static member Contrast contrast = FssTypes.Filter.Contrast contrast
-        static member DropShadow x y blur color invert = FssTypes.Filter.DropShadow(x,y,blur,color, invert)
-        static member Grayscale grayScale = FssTypes.Filter.Grayscale grayScale
-        static member HueRotate hueRotate = FssTypes.Filter.HueRotate hueRotate
-        static member Invert invert = FssTypes.Filter.Invert invert
-        static member Opacity opacity = FssTypes.Filter.Opacity opacity
-        static member Saturate saturate = FssTypes.Filter.Saturate saturate
-        static member Sepia sepia = FssTypes.Filter.Sepia sepia
+        static member Url url = Types.Filter.Url url
+        static member Blur blur = Types.Filter.Blur blur
+        static member Brightness brightness = Types.Filter.Brightness brightness
+        static member Contrast contrast = Types.Filter.Contrast contrast
+        static member DropShadow x y blur color invert = Types.Filter.DropShadow(x,y,blur,color, invert)
+        static member Grayscale grayScale = Types.Filter.Grayscale grayScale
+        static member HueRotate hueRotate = Types.Filter.HueRotate hueRotate
+        static member Invert invert = Types.Filter.Invert invert
+        static member Opacity opacity = Types.Filter.Opacity opacity
+        static member Saturate saturate = Types.Filter.Saturate saturate
+        static member Sepia sepia = Types.Filter.Sepia sepia
 
-        static member None = None' |> backdropFilterValue'
-        static member Inherit = Inherit |> backdropFilterValue'
-        static member Initial = Initial |> backdropFilterValue'
-        static member Unset = Unset |> backdropFilterValue'
+        static member None = Types.None' |> backdropFilterValue'
+        static member Inherit = Types.Inherit |> backdropFilterValue'
+        static member Initial = Types.Initial |> backdropFilterValue'
+        static member Unset = Types.Unset |> backdropFilterValue'
 
     /// Supply a list of filters to be applied to the element.
-    let BackdropFilters (backdropFilters: FssTypes.Filter list): CssProperty =
+    let BackdropFilters (backdropFilters: Types.Filter list): CssProperty =
         backdropFilters
         |> Utilities.Helpers.combineWs Filter.stringifyFilter
         |> backdropFilterValue

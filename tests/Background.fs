@@ -24,43 +24,43 @@ module Background =
                     [ "backgroundImage" ==> "url(image.png)" ]
                 test
                     "background as linear gradient"
-                    [ BackgroundImage.LinearGradient (deg 45., [ CssColor.red, pct 0; CssColor.blue, pct 100 ])]
+                    [ BackgroundImage.LinearGradient (deg 45., [ Types.Color.red, pct 0; Types.Color.blue, pct 100 ])]
                     ["backgroundImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Image.Circle, Image.ClosestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Circle, Image.ClosestSide, pct 50, pct 50, [ Types.Color.Hex "e66465", pct 0; Types.Color.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Image.Circle, Image.ClosestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Circle, Image.ClosestCorner, pct 50, pct 50, [ Types.Color.Hex "e66465", pct 0; Types.Color.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Image.Circle, Image.FarthestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Circle, Image.FarthestSide, pct 50, pct 50, [ Types.Color.Hex "e66465", pct 0; Types.Color.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Image.Circle, Image.FarthestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Circle, Image.FarthestCorner, pct 50, pct 50, [ Types.Color.Hex "e66465", pct 0; Types.Color.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.ClosestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.ClosestSide, pct 50, pct 50, [ Types.Color.Hex "e66465", pct 0; Types.Color.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.ClosestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.ClosestCorner, pct 50, pct 50, [ Types.Color.Hex "e66465", pct 0; Types.Color.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.FarthestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.FarthestSide, pct 50, pct 50, [ Types.Color.Hex "e66465", pct 0; Types.Color.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.FarthestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.FarthestCorner, pct 50, pct 50, [ Types.Color.Hex "e66465", pct 0; Types.Color.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as conic gradient"
-                    [BackgroundImage.ConicGradient(deg 0., pct 50, pct 50, [ CssColor.red, deg 0.; CssColor.orange, deg 90.; CssColor.yellow, deg 180.; CssColor.green, deg 270.; CssColor.blue, deg 360.; ])]
+                    [BackgroundImage.ConicGradient(deg 0., pct 50, pct 50, [ Types.Color.red, deg 0.; Types.Color.orange, deg 90.; Types.Color.yellow, deg 180.; Types.Color.green, deg 270.; Types.Color.blue, deg 360.; ])]
                     [ "backgroundImage" ==> "conic-Gradient(from 0.00deg at 50% 50%, #ff0000 0.00deg, #ffa500 90.00deg, #ffff00 180.00deg, #008000 270.00deg, #0000ff 360.00deg)"]
                 test
                     "background as conic gradient"
@@ -68,7 +68,7 @@ module Background =
                     [ "backgroundImage" ==> "conic-Gradient(from 3.1416rad at 10% 50%, #e66465 0.00deg, #9198e5 360.00deg)"]
                 test
                     "background as repeating conic gradient"
-                    [ BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50, [ CssColor.white, pct 0; CssColor.white, pct 25; CssColor.black, pct 25; CssColor.black, pct 50; ]) ]
+                    [ BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50, [ Types.Color.white, pct 0; Types.Color.white, pct 25; Types.Color.black, pct 25; Types.Color.black, pct 50; ]) ]
                     [ "backgroundImage" ==> "repeating-conic-Gradient(from 0.00deg at 50% 50%, #ffffff 0%, #ffffff 25%, #000000 25%, #000000 50%)"]
                 test
                     "background position to top"

@@ -1,12 +1,14 @@
-namespace FssTypes
+namespace Fss
 
-type PointerEvents =
-    | VisiblePainted
-    | VisibleFill
-    | VisibleStroke
-    | Visible
-    | Painted
-    | Stroke
-    | All
-    interface IPointerEvents
+[<RequireQualifiedAccess>]
+module Types =
+    type PointerEvents =
+        | VisiblePainted
+        | VisibleFill
+        | VisibleStroke
+        | Visible
+        | Painted
+        | Stroke
+        | All
+        interface Types.IPointerEvents
 
