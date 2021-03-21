@@ -1,7 +1,6 @@
 ﻿namespace Fss
 
 open Fable.Core.JsInterop
-open FssTypes
 
 [<AutoOpen>]
 module PseudoElement =

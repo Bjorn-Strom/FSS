@@ -1,5 +1,6 @@
 namespace Fss
 
+[<RequireQualifiedAccess>]
 module Types =
     type Percent =
         | Percent of string

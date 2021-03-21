@@ -52,7 +52,7 @@ module ListStyle =
     let ListStyle' (style: Types.IListStyle) = ListStyle.Value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
-    let private listStyleImageValue (value: string) = Types.cssValue Types.Property.Property.ListStyleImage value
+    let private listStyleImageValue (value: string) = Types.cssValue Types.Property.ListStyleImage value
     let private listStyleImageValue' value =
         value
         |> listStyleImageToString

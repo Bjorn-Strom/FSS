@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="*.*" PackagePath="fable\" />
+    <Content Include="Types\" PackagePath="fable\Types" />
     <Content Include="css\" PackagePath="fable\css" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

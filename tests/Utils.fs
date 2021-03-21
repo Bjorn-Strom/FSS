@@ -3,11 +3,9 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Fss
-open FssTypes
-open Keyframes
 
 module Utils =
-    let test (testName: string) (attributeList: CssProperty list) (correct: (string * obj) list) =
+    let test (testName: string) (attributeList: Types.CssProperty list) (correct: (string * obj) list) =
         testCase testName <| fun _ ->
             let actual =
                 attributeList
@@ -15,14 +13,14 @@ module Utils =
 
             Expect.equal actual correct testName
 
-    let testNested (testName: string) (attributeList: CssProperty list) (correct: (string * obj) list) =
+    let testNested (testName: string) (attributeList: Types.CssProperty list) (correct: (string * obj) list) =
         testCase testName <| fun _ ->
             let actual =
                 attributeList
                 |> List.map GlobalValue.CssValue
                 |> List.map (fun (x, y) ->
                     let properY: string =
-                        y :?> CssProperty list
+                        y :?> Types.CssProperty list
                         |> List.map GlobalValue.CssValue
                         |> List.map (fun x -> $"{x}")
                         |> String.concat ","

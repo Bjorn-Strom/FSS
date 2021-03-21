@@ -45,7 +45,7 @@ module Word =
     let WordSpacing' (spacing: Types.IWordSpacing) = WordSpacing.Value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
-    let private breakCssValue value = Types.cssValue Types.Property.Property.WordBreak value
+    let private breakCssValue value = Types.cssValue Types.Property.WordBreak value
     let private breakCssValue' value =
         value
         |> breakToString

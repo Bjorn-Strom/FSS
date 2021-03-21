@@ -323,7 +323,7 @@ module Text =
     let TextDecorationLine' (decoration: Types.ITextDecorationLine) = TextDecorationLine.Value(decoration)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
-    let private thicknessValue value = Types.cssValue Types.Property.Property.TextDecorationThickness value
+    let private thicknessValue value = Types.cssValue Types.Property.TextDecorationThickness value
     let private thicknessValue' value =
         value
         |> thicknessToString
@@ -422,7 +422,7 @@ module Text =
     let TextDecorationSkip' (skip: Types.ITextDecorationSkip) = TextDecorationSkip.Value(skip)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
-    let private skipInkValue value = Types.cssValue Types.Property.Property.TextDecorationSkipInk value
+    let private skipInkValue value = Types.cssValue Types.Property.TextDecorationSkipInk value
     let private skipInkValue' value =
         value
         |> decorationSkipInkToString
@@ -949,7 +949,7 @@ module Text =
     let TextDecorationColor' (color: Types.ITextDecorationColor) = TextDecorationColor.Value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
-    let private emphasisColorValue value = Types.cssValue Types.Property.Property.TextEmphasisColor value
+    let private emphasisColorValue value = Types.cssValue Types.Property.TextEmphasisColor value
     let private emphasisColorValue' value =
         value
         |> textEmphasisColorToString

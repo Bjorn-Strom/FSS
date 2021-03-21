@@ -17,7 +17,7 @@ module Color =
     let ColorAdjust' (adjust: Types.ColorAdjust) = adjust |> ColorAdjust.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color
-    let private colorCssValue value = Types.cssValue Types.Property.Property.Color value
+    let private colorCssValue value = Types.cssValue Types.Property.Color value
     type Color =
         static member black = colorCssValue <| Types.colorToString Types.Color.black
         static member silver = colorCssValue <| Types.Color.silver
