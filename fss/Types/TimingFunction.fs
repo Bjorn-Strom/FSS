@@ -1,30 +1,28 @@
 namespace FssTypes
 
-[<RequireQualifiedAccess>]
+type Step =
+    | JumpStart
+    | JumpEnd
+    | JumpNone
+    | JumpBoth
+    | Start
+    | End
+
+type Timing =
+    | Ease
+    | EaseIn
+    | EaseOut
+    | EaseInOut
+    | Linear
+    | StepStart
+    | StepEnd
+    | CubicBezier of float * float * float * float
+    | Steps of int
+    | StepsWithTerm of int * Step
+    interface ITransitionTimingFunction
+
 module TimingFunction =
-    type Step =
-        | JumpStart
-        | JumpEnd
-        | JumpNone
-        | JumpBoth
-        | Start
-        | End
-
     let stepsValue (value: Step) = Fss.Utilities.Helpers.duToKebab value
-
-    type Timing =
-        | Ease
-        | EaseIn
-        | EaseOut
-        | EaseInOut
-        | Linear
-        | StepStart
-        | StepEnd
-        | CubicBezier of float * float * float * float
-        | Steps of int
-        | StepsWithTerm of int * Step
-        interface ITransitionTimingFunction
-
     let timingToString (timing: ITransitionTimingFunction) =
         let timingToString timing =
             match timing with
@@ -35,5 +33,5 @@ module TimingFunction =
 
         match timing with
         | :? Timing as t -> timingToString t
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown timing function"

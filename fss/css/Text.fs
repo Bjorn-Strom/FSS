@@ -5,79 +5,79 @@ open FssTypes
 module Text =
     let private textAlignToString (alignment: ITextAlign) =
         match alignment with
-        | :? Text.TextAlign as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> GlobalValue.global' g
+        | :? TextAlign as t -> Utilities.Helpers.duToKebab t
+        | :? Global as g -> global' g
         | _ -> "Unknown text alignment"
 
     let private textAlignLastToString (alignment: ITextAlignLast) =
         match alignment with
-        | :? Text.TextAlignLast as t -> Utilities.Helpers.duToLowercase t
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? TextAlignLast as t -> Utilities.Helpers.duToLowercase t
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "Unknown text alignment last"
 
     let private decorationLineToString (decorationLine: ITextDecorationLine) =
         match decorationLine with
-        | :? Text.TextDecorationLine as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? TextDecorationLine as t -> Utilities.Helpers.duToKebab t
+        | :? Global as g -> global' g
+        | :? None' -> none
         | _ -> "Unknown text decoration line"
 
     let private thicknessToString (thickness: ITextDecorationThickness) =
         match thickness with
-        | :? Text.TextDecorationThickness -> "from-font"
-        | :? Global as g -> GlobalValue.global' g
-        | :? Auto -> GlobalValue.auto
+        | :? TextDecorationThickness -> "from-font"
+        | :? Global as g -> global' g
+        | :? Auto -> auto
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown text decoration thickness"
 
     let private decorationToString (decoration: ITextDecoration) =
         match decoration with
-        | :? None' -> GlobalValue.none
+        | :? None' -> none
         | _ -> "Unknown text decoration"
 
     let private decorationStyleToString (style: ITextDecorationStyle) =
         match style with
-        | :? Text.TextDecorationStyle as t -> Utilities.Helpers.duToLowercase t
-        | :? Global as g -> GlobalValue.global' g
+        | :? TextDecorationStyle as t -> Utilities.Helpers.duToLowercase t
+        | :? Global as g -> global' g
         | _ -> "Unknown text decoration style"
 
     let private decorationSkipToString (skip: ITextDecorationSkip) =
         match skip with
-        | :? Text.DecorationSkip as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? DecorationSkip as t -> Utilities.Helpers.duToKebab t
+        | :? Global as g -> global' g
+        | :? None' -> none
         | _ -> "Unknown text decoration skip"
 
     let private decorationSkipInkToString (skipInk: ITextDecorationSkipInk) =
         match skipInk with
-        | :? Text.TextDecorationSkipInk -> "all"
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
-        | :? Auto -> GlobalValue.auto
+        | :? TextDecorationSkipInk -> "all"
+        | :? Global as g -> global' g
+        | :? None' -> none
+        | :? Auto -> auto
         | _ -> "Unknown text decoration skip ink"
 
     let private textTransformToString (transform: ITextTransform) =
         match transform with
-        | :? Text.TextTransform as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? TextTransform as t -> Utilities.Helpers.duToKebab t
+        | :? Global as g -> global' g
+        | :? None' -> none
         | _ -> "Unknown text transform"
 
     let private indentToString (indent: ITextIndent) =
         match indent with
-        | :? Text.TextIndent as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> GlobalValue.global' g
+        | :? TextIndent as t -> Utilities.Helpers.duToKebab t
+        | :? Global as g -> global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown text indent"
 
     let private textShadowToString =
         function
-            | Text.XY (x,y) -> sprintf "%s %s" (Units.Size.value x) (Units.Size.value y)
-            | Text.ColorXY (c,x,y) -> sprintf "%s %s %s" (CssColorValue.color c) (Units.Size.value x) (Units.Size.value y)
-            | Text.ColorXYBlur (c,x,y,b) ->
+            | XY (x,y) -> sprintf "%s %s" (Units.Size.value x) (Units.Size.value y)
+            | ColorXY (c,x,y) -> sprintf "%s %s %s" (CssColorValue.color c) (Units.Size.value x) (Units.Size.value y)
+            | ColorXYBlur (c,x,y,b) ->
                 sprintf "%s %s %s %s"
                     (CssColorValue.color c)
                     (Units.Size.value x)
@@ -86,127 +86,127 @@ module Text =
 
     let private emphasisToString (emphasis: ITextEmphasis) =
         match emphasis with
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? Global as g -> global' g
+        | :? None' -> none
         | _ -> "unknown text emphasis"
 
     let private emphasisPositionToString (emphasisPosition: ITextEmphasisPosition) =
         match emphasisPosition with
-        | :? Text.EmphasisPosition as e -> Utilities.Helpers.duToLowercase e
-        | :? Global as g -> GlobalValue.global' g
+        | :? EmphasisPosition as e -> Utilities.Helpers.duToLowercase e
+        | :? Global as g -> global' g
         | _ -> "unknown text emphasis position"
 
     let private textOverflowToString (overflow: ITextOverflow) =
         match overflow with
-        | :? Text.TextOverflow as t -> Utilities.Helpers.duToLowercase t
-        | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
+        | :? TextOverflow as t -> Utilities.Helpers.duToLowercase t
+        | :? CssString as s -> string s |> sprintf "\"%s\""
         | _ -> "Unknown text overflow"
 
     let private emphasisStyleToString (emphasisStyle: ITextEmphasisStyle) =
         let stringifyStyle style =
             match style with
-                | Text.FilledSesame -> "filled sesame"
-                | Text.OpenSesame -> "open sesame"
+                | FilledSesame -> "filled sesame"
+                | OpenSesame -> "open sesame"
                 | _ -> Utilities.Helpers.duToKebab style
 
         match emphasisStyle with
-        | :? Text.TextEmphasisStyle as t -> stringifyStyle t
-        | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? TextEmphasisStyle as t -> stringifyStyle t
+        | :? CssString as s -> string s |> sprintf "'%s'"
+        | :? Global as g -> global' g
+        | :? None' -> none
         | _ -> "unknown text emphasis style"
 
     let private underlinePositionToString (underlinePosition: ITextUnderlinePosition) =
         match underlinePosition with
-        | :? Text.UnderlinePosition as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> GlobalValue.global' g
-        | :? Auto -> GlobalValue.auto
+        | :? UnderlinePosition as t -> Utilities.Helpers.duToKebab t
+        | :? Global as g -> global' g
+        | :? Auto -> auto
         | _ -> "unknown text underline position"
 
     let private textEmphasisColorToString (color: ITextEmphasisColor) =
         match color with
             | :? CssColor as c -> CssColorValue.color c
-            | :? Global as g -> GlobalValue.global' g
+            | :? Global as g -> global' g
             | _ -> "unknown text emphasis color"
 
     let private underlineOffsetToString (underlineOffset: ITextUnderlineOffset) =
         match underlineOffset with
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "unknown text underline offset"
 
     let private quoteToString (quote: IQuotes) =
         match quote with
-        | :? CssString as s -> GlobalValue.string s
-        | :? None' -> GlobalValue.none
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? CssString as s -> string s
+        | :? None' -> none
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "unknown quotes"
 
     let private hyphensToString (hyphens: IHyphens) =
         match hyphens with
-        | :? Text.Hyphens -> "manual"
-        | :? None' -> GlobalValue.none
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? Hyphens -> "manual"
+        | :? None' -> none
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "unknown hyphens"
 
     let private textDecorationColorToString (color: ITextDecorationColor) =
         match color with
             | :? CssColor as c -> CssColorValue.color c
-            | :? Global as g -> GlobalValue.global' g
+            | :? Global as g -> global' g
             | _ -> "unknown text decoration color"
 
     let private textSizeAdjustToString (size: ITextSizeAdjust) =
         match size with
-        | :? None' -> GlobalValue.none
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? None' -> none
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown text size adjust"
 
     let private tabSizeToString (tabSize: ITabSize) =
         match tabSize with
         | :? Units.Size.Size as s -> Units.Size.value s
-        | :? CssInt as i -> GlobalValue.int i
-        | :? Global as g -> GlobalValue.global' g
+        | :? CssInt as i -> cssIntToString i
+        | :? Global as g -> global' g
         | _ -> "Unknown tab size"
 
     let private textOrientationToString (textOrientation: ITextOrientation) =
         match textOrientation with
-        | :? Text.TextOrientation as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> GlobalValue.global' g
+        | :? TextOrientation as t -> Utilities.Helpers.duToKebab t
+        | :? Global as g -> global' g
         | _ -> "Unknown text orientation"
 
     let private textRenderingToString (textRendering: ITextRendering) =
         match textRendering with
-        | :? Text.TextRendering as t -> Utilities.Helpers.duToKebab t
-        | :? Global as g -> GlobalValue.global' g
-        | :? Auto -> GlobalValue.auto
+        | :? TextRendering as t -> Utilities.Helpers.duToKebab t
+        | :? Global as g -> global' g
+        | :? Auto -> auto
         | _ -> "Unknown text rendering"
 
     let private textJustifyToString (textJustify: ITextJustify) =
         match textJustify with
-        | :? Text.TextJustify as j -> Utilities.Helpers.duToKebab j
-        | :? None' -> GlobalValue.none
-        | :? Auto -> GlobalValue.auto
+        | :? TextJustify as j -> Utilities.Helpers.duToKebab j
+        | :? None' -> none
+        | :? Auto -> auto
         | _ -> "Unknown text justification"
 
     let private whitespaceToString (whitespace: IWhiteSpace) =
         match whitespace with
-        | :? Text.WhiteSpace as ws -> Utilities.Helpers.duToKebab ws
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? WhiteSpace as ws -> Utilities.Helpers.duToKebab ws
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown whitespace"
 
     let private userSelectToString (userSelect: IUserSelect) =
         match userSelect with
-        | :? Text.UserSelect as u -> Utilities.Helpers.duToLowercase u
-        | :? None' -> GlobalValue.none
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? UserSelect as u -> Utilities.Helpers.duToLowercase u
+        | :? None' -> none
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "Unknown user select"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
@@ -217,14 +217,14 @@ module Text =
         |> alignCssValue
     type TextAlign =
         static member Value (textAlign: ITextAlign) = textAlign |> alignCssValue'
-        static member Left = Text.TextAlign.Left |> alignCssValue'
-        static member Right = Text.TextAlign.Right |> alignCssValue'
-        static member Center = Text.TextAlign.Center |> alignCssValue'
-        static member Justify = Text.TextAlign.Justify |> alignCssValue'
-        static member JustifyAll = Text.JustifyAll |> alignCssValue'
-        static member Start = Text.TextAlign.Start |> alignCssValue'
-        static member End = Text.TextAlign.End |> alignCssValue'
-        static member MatchParent = Text.MatchParent |> alignCssValue'
+        static member Left = FssTypes.TextAlign.Left |> alignCssValue'
+        static member Right = FssTypes.TextAlign.Right |> alignCssValue'
+        static member Center = FssTypes.TextAlign.Center |> alignCssValue'
+        static member Justify = FssTypes.TextAlign.Justify |> alignCssValue'
+        static member JustifyAll = JustifyAll |> alignCssValue'
+        static member Start = FssTypes.TextAlign.Start |> alignCssValue'
+        static member End = FssTypes.TextAlign.End |> alignCssValue'
+        static member MatchParent = MatchParent |> alignCssValue'
 
         static member Inherit = Inherit |> alignCssValue'
         static member Initial = Initial |> alignCssValue'
@@ -249,12 +249,12 @@ module Text =
         |> alignLastCssValue
     type TextAlignLast =
         static member Value (textAlign: ITextAlignLast) = textAlign |> alignLastCssValue'
-        static member Left = Text.TextAlignLast.Left |> alignLastCssValue'
-        static member Right = Text.TextAlignLast.Right |> alignLastCssValue'
-        static member Center = Text.TextAlignLast.Center |> alignLastCssValue'
-        static member Justify = Text.TextAlignLast.Justify |> alignLastCssValue'
-        static member Start = Text.TextAlignLast.Start |> alignLastCssValue'
-        static member End = Text.TextAlignLast.End |> alignLastCssValue'
+        static member Left = FssTypes.TextAlignLast.Left |> alignLastCssValue'
+        static member Right = FssTypes.TextAlignLast.Right |> alignLastCssValue'
+        static member Center = FssTypes.TextAlignLast.Center |> alignLastCssValue'
+        static member Justify = FssTypes.TextAlignLast.Justify |> alignLastCssValue'
+        static member Start = FssTypes.TextAlignLast.Start |> alignLastCssValue'
+        static member End = FssTypes.TextAlignLast.End |> alignLastCssValue'
 
         static member Inherit = Inherit |> alignLastCssValue'
         static member Initial = Initial |> alignLastCssValue'
@@ -298,13 +298,13 @@ module Text =
     type TextDecorationLine =
         static member Value (value: ITextDecorationLine) = value |> lineCssValue'
         static member Value (v1: ITextDecorationLine, v2: ITextDecorationLine) =
-            lineCssValue <| sprintf "%s %s" (string v1) (decorationLineToString v2)
+            lineCssValue <| sprintf "%s %s" (decorationLineToString v1) (decorationLineToString v2)
         static member Value (v1: ITextDecorationLine, v2: ITextDecorationLine, v3: ITextDecorationLine) =
             lineCssValue <| sprintf "%s %s %s" (decorationLineToString v1) (decorationLineToString v2) (decorationLineToString v3)
-        static member Underline = Text.Underline |> lineCssValue'
-        static member Overline = Text.Overline |> lineCssValue'
-        static member LineThrough = Text.LineThrough |> lineCssValue'
-        static member Blink = Text.Blink |> lineCssValue'
+        static member Underline = Underline |> lineCssValue'
+        static member Overline = Overline |> lineCssValue'
+        static member LineThrough = LineThrough |> lineCssValue'
+        static member Blink = Blink |> lineCssValue'
 
         static member Inherit = Inherit |> lineCssValue'
         static member Initial = Initial |> lineCssValue'
@@ -331,7 +331,7 @@ module Text =
         |> thicknessValue
     type TextDecorationThickness =
         static member Value (thickness: ITextDecorationThickness) = thickness |> thicknessValue'
-        static member FromFont = Text.TextDecorationThickness |> thicknessValue'
+        static member FromFont = FssTypes.TextDecorationThickness |> thicknessValue'
 
         static member Auto = Auto |> thicknessValue'
         static member Inherit = Inherit |> thicknessValue'
@@ -361,11 +361,11 @@ module Text =
         |> decorationStyleValue
     type TextDecorationStyle =
         static member Value(style: ITextDecorationStyle) = style |> decorationStyleValue'
-        static member Solid = Text.Solid |> decorationStyleValue'
-        static member Double = Text.Double |> decorationStyleValue'
-        static member Dotted = Text.Dotted |> decorationStyleValue'
-        static member Dashed = Text.Dashed |> decorationStyleValue'
-        static member Wavy = Text.Wavy |> decorationStyleValue'
+        static member Solid = FssTypes.TextDecorationStyle.Solid |> decorationStyleValue'
+        static member Double = FssTypes.TextDecorationStyle.Double |> decorationStyleValue'
+        static member Dotted = FssTypes.TextDecorationStyle.Dotted |> decorationStyleValue'
+        static member Dashed = FssTypes.TextDecorationStyle.Dashed |> decorationStyleValue'
+        static member Wavy = Wavy |> decorationStyleValue'
 
         static member Inherit = Inherit |> decorationStyleValue'
         static member Initial = Initial |> decorationStyleValue'
@@ -398,12 +398,12 @@ module Text =
         static member Value (v1: ITextDecorationSkip, v2: ITextDecorationSkip, v3: ITextDecorationSkip, v4: ITextDecorationSkip) =
             sprintf "%s %s %s %s" (decorationSkipToString v1) (decorationSkipToString v2) (decorationSkipToString v3) (decorationSkipToString v4) |> skipValue
 
-        static member Objects = Text.Objects |> skipValue'
-        static member Spaces = Text.Spaces |> skipValue'
-        static member LeadingSpaces = Text.LeadingSpaces |> skipValue'
-        static member TrailingSpaces = Text.TrailingSpaces |> skipValue'
-        static member Edges = Text.Edges |> skipValue'
-        static member BoxDecoration = Text.BoxDecoration |> skipValue'
+        static member Objects = Objects |> skipValue'
+        static member Spaces = Spaces |> skipValue'
+        static member LeadingSpaces = LeadingSpaces |> skipValue'
+        static member TrailingSpaces = TrailingSpaces |> skipValue'
+        static member Edges = Edges |> skipValue'
+        static member BoxDecoration = BoxDecoration |> skipValue'
 
         static member Inherit = Inherit |> skipValue'
         static member Initial = Initial |> skipValue'
@@ -430,7 +430,7 @@ module Text =
         |> skipInkValue
     type TextDecorationSkipInk =
         static member Value(skipInk: ITextDecorationSkipInk) = skipInk |> skipInkValue'
-        static member All = Text.TextDecorationSkipInk |> skipInkValue'
+        static member All = FssTypes.TextDecorationSkipInk |> skipInkValue'
 
         static member Inherit = Inherit |> skipInkValue'
         static member Initial = Initial |> skipInkValue'
@@ -459,11 +459,11 @@ module Text =
         |> transformValue
     type TextTransform =
         static member Value (transform: ITextTransform) = transform |> transformValue'
-        static member Capitalize = Text.Capitalize |> transformValue'
-        static member Uppercase = Text.Uppercase |> transformValue'
-        static member Lowercase = Text.Lowercase |> transformValue'
-        static member FullWidth = Text.FullWidth |> transformValue'
-        static member FullSizeKana = Text.FullSizeKana |> transformValue'
+        static member Capitalize = Capitalize |> transformValue'
+        static member Uppercase = Uppercase |> transformValue'
+        static member Lowercase = Lowercase |> transformValue'
+        static member FullWidth = FullWidth |> transformValue'
+        static member FullSizeKana = FullSizeKana |> transformValue'
 
         static member Inherit = Inherit |> transformValue'
         static member Initial = Initial |> transformValue'
@@ -494,8 +494,8 @@ module Text =
         static member Value (i1: ITextIndent, i2: ITextIndent, i3: ITextIndent) =
             sprintf "%s %s %s" (indentToString i1) (indentToString i2) (indentToString i3) |> indentCssValue
 
-        static member Hanging = Text.Hanging |> indentCssValue'
-        static member EachLine = Text.EachLine |> indentCssValue'
+        static member Hanging = Hanging |> indentCssValue'
+        static member EachLine = EachLine |> indentCssValue'
 
         static member Inherit = Inherit |> indentCssValue'
         static member Initial = Initial |> indentCssValue'
@@ -520,14 +520,14 @@ module Text =
 
     type TextShadow =
         static member XY (xOffset: Units.Size.Size, yOffset: Units.Size.Size) =
-            Text.XY(xOffset,yOffset)
+            XY(xOffset,yOffset)
         static member ColorXY (color: CssColor, xOffset: Units.Size.Size, yOffset: Units.Size.Size) =
-            Text.ColorXY(color, xOffset, yOffset)
+            ColorXY(color, xOffset, yOffset)
         static member ColorXYBlur (xOffset: Units.Size.Size, yOffset: Units.Size.Size, blurRadius: Units.Size.Size, color: CssColor) =
-            Text.ColorXYBlur (color, xOffset, yOffset, blurRadius)
+            ColorXYBlur (color, xOffset, yOffset, blurRadius)
 
     /// Supply a list of text shadows to apply to the text
-    let TextShadows (shadows: Text.TextShadow list) =
+    let TextShadows (shadows: FssTypes.TextShadow list) =
         shadows
         |> Utilities.Helpers.combineComma textShadowToString
         |> shadowValue
@@ -541,8 +541,8 @@ module Text =
     type TextOverflow =
         static member Value (overflow: ITextOverflow) = overflow |> overflowValue'
 
-        static member Clip = Text.Clip |> overflowValue'
-        static member Ellipsis = Text.Ellipsis |> overflowValue'
+        static member Clip = FssTypes.TextOverflow.Clip |> overflowValue'
+        static member Ellipsis = Ellipsis |> overflowValue'
 
     /// <summary>If there is hidden content this specifies how that is signalled.</summary>
     /// <param name="overflow">
@@ -616,14 +616,14 @@ module Text =
         |> emphasisStyleValue
     type TextEmphasisStyle =
         static member Value (emphasisStyle: ITextEmphasisStyle) = emphasisStyle |> emphasisStyleValue'
-        static member Filled = Text.Filled |> emphasisStyleValue'
-        static member Open = Text.Open |> emphasisStyleValue'
-        static member Dot = Text.Dot |> emphasisStyleValue'
-        static member Circle = Text.Circle |> emphasisStyleValue'
-        static member DoubleCircle = Text.DoubleCircle |> emphasisStyleValue'
-        static member Triangle = Text.Triangle |> emphasisStyleValue'
-        static member FilledSesame = Text.FilledSesame |> emphasisStyleValue'
-        static member OpenSesame = Text.OpenSesame |> emphasisStyleValue'
+        static member Filled = Filled |> emphasisStyleValue'
+        static member Open = Open |> emphasisStyleValue'
+        static member Dot = Dot |> emphasisStyleValue'
+        static member Circle = FssTypes.TextEmphasisStyle.Circle |> emphasisStyleValue'
+        static member DoubleCircle = DoubleCircle |> emphasisStyleValue'
+        static member Triangle = Triangle |> emphasisStyleValue'
+        static member FilledSesame = FilledSesame |> emphasisStyleValue'
+        static member OpenSesame = OpenSesame |> emphasisStyleValue'
 
         static member None = None' |> emphasisStyleValue'
         static member Inherit = Inherit |> emphasisStyleValue'
@@ -656,13 +656,13 @@ module Text =
         static member Value (v1: ITextUnderlinePosition, v2: ITextUnderlinePosition) =
             sprintf "%s %s" (underlinePositionToString v1) (underlinePositionToString v2) |> underlinePositionCssValue
 
-        static member FromFont = Text.UnderlinePosition.FromFont |> underlinePositionCssValue'
-        static member Under = Text.UnderlinePosition.Under |> underlinePositionCssValue'
-        static member Left = Text.UnderlinePosition.Left |> underlinePositionCssValue'
-        static member Right = Text.UnderlinePosition.Right |> underlinePositionCssValue'
-        static member AutoPos = Text.UnderlinePosition.AutoPos  |> underlinePositionCssValue'
-        static member Above = Text.UnderlinePosition.Above |> underlinePositionCssValue'
-        static member Below = Text.UnderlinePosition.Below |> underlinePositionCssValue'
+        static member FromFont = UnderlinePosition.FromFont |> underlinePositionCssValue'
+        static member Under = UnderlinePosition.Under |> underlinePositionCssValue'
+        static member Left = UnderlinePosition.Left |> underlinePositionCssValue'
+        static member Right = UnderlinePosition.Right |> underlinePositionCssValue'
+        static member AutoPos = UnderlinePosition.AutoPos  |> underlinePositionCssValue'
+        static member Above = UnderlinePosition.Above |> underlinePositionCssValue'
+        static member Below = UnderlinePosition.Below |> underlinePositionCssValue'
 
         static member Auto = Auto |> underlinePositionCssValue'
         static member Inherit = Inherit |> underlinePositionCssValue'
@@ -754,7 +754,7 @@ module Text =
         |> hyphensValue
     type Hyphens =
         static member Value (hyphens: IHyphens) = hyphens |> hyphensValue'
-        static member Manual = Text.Manual |> hyphensValue'
+        static member Manual = Manual |> hyphensValue'
         static member Auto = Auto |> hyphensValue'
         static member None = None' |> hyphensValue'
         static member Inherit = Inherit |> hyphensValue'
@@ -1176,11 +1176,11 @@ module Text =
 
     type TextOrientation =
         static member Value (orientation: ITextOrientation) = orientation |> textOrientationValue'
-        static member Mixed = Text.Mixed |> textOrientationValue'
-        static member Upright = Text.Upright |> textOrientationValue'
-        static member SidewaysRight = Text.SidewaysRight |> textOrientationValue'
-        static member Sideways = Text.Sideways |> textOrientationValue'
-        static member UseGlyphOrientation = Text.UseGlyphOrientation |> textOrientationValue'
+        static member Mixed = Mixed |> textOrientationValue'
+        static member Upright = Upright |> textOrientationValue'
+        static member SidewaysRight = SidewaysRight |> textOrientationValue'
+        static member Sideways = Sideways |> textOrientationValue'
+        static member UseGlyphOrientation = UseGlyphOrientation |> textOrientationValue'
         static member Inherit = Inherit |> textOrientationValue'
         static member Initial = Initial |> textOrientationValue'
         static member Unset = Unset |> textOrientationValue'
@@ -1202,9 +1202,9 @@ module Text =
 
     type TextRendering =
         static member Value (rendering: ITextRendering) = rendering |> textRenderingValue'
-        static member OptimizeSpeed = Text.OptimizeSpeed |> textRenderingValue'
-        static member OptimizeLegibility = Text.OptimizeLegibility |> textRenderingValue'
-        static member GeometricPrecision = Text.GeometricPrecision |> textRenderingValue'
+        static member OptimizeSpeed = OptimizeSpeed |> textRenderingValue'
+        static member OptimizeLegibility = OptimizeLegibility |> textRenderingValue'
+        static member GeometricPrecision = GeometricPrecision |> textRenderingValue'
         static member Auto = Auto |> textRenderingValue'
         static member Inherit = Inherit |> textRenderingValue'
         static member Initial = Initial |> textRenderingValue'
@@ -1228,8 +1228,8 @@ module Text =
 
     type TextJustify =
         static member Value (justification: ITextJustify) = justification |> textJustifyValue'
-        static member InterWord = Text.InterWord |> textJustifyValue'
-        static member InterCharacter = Text.InterCharacter |> textJustifyValue'
+        static member InterWord = InterWord |> textJustifyValue'
+        static member InterCharacter = InterCharacter |> textJustifyValue'
         static member Auto = Auto |> textJustifyValue'
         static member None = None' |> textJustifyValue'
 
@@ -1249,11 +1249,11 @@ module Text =
 
     type WhiteSpace =
         static member Value (whitespace: IWhiteSpace) = whitespace |> whiteSpaceValue'
-        static member NoWrap = Text.NoWrap |> whiteSpaceValue'
-        static member Pre = Text.Pre |> whiteSpaceValue'
-        static member PreWrap = Text.PreWrap |> whiteSpaceValue'
-        static member PreLine = Text.PreLine |> whiteSpaceValue'
-        static member BreakSpaces = Text.BreakSpaces |> whiteSpaceValue'
+        static member NoWrap = FssTypes.WhiteSpace.NoWrap |> whiteSpaceValue'
+        static member Pre = Pre |> whiteSpaceValue'
+        static member PreWrap = PreWrap |> whiteSpaceValue'
+        static member PreLine = PreLine |> whiteSpaceValue'
+        static member BreakSpaces = BreakSpaces |> whiteSpaceValue'
         static member Normal = Normal |> whiteSpaceValue'
         static member Inherit = Inherit |> whiteSpaceValue'
         static member Initial = Initial |> whiteSpaceValue'
@@ -1277,9 +1277,9 @@ module Text =
 
     type UserSelect =
         static member Value (whitespace: IUserSelect) = whitespace |> userSelectValue'
-        static member Text = Text.Text |> userSelectValue'
-        static member Contain = Text.Contain |> userSelectValue'
-        static member All = Text.All |> userSelectValue'
+        static member Text = FssTypes.UserSelect.Text |> userSelectValue'
+        static member Contain = FssTypes.UserSelect.Contain |> userSelectValue'
+        static member All = FssTypes.UserSelect.All |> userSelectValue'
         static member None = None' |> userSelectValue'
         static member Auto = Auto |> userSelectValue'
         static member Inherit = Inherit |> userSelectValue'

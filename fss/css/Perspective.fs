@@ -6,14 +6,14 @@ module Perspective =
     let private perspectiveToString (perspective: IPerspective) =
         match perspective with
         | :? Units.Size.Size as s -> Units.Size.value s
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? None' -> none
+        | :? Global as g -> global' g
         | _ -> "Unknown perspective"
 
     let private perspectiveOriginToString (perspectiveOrigin: IPerspectiveOrigin) =
         match perspectiveOrigin with
         | :? Units.Percent.Percent as s -> Units.Percent.value s
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown perspective origin"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective

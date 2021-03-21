@@ -8,8 +8,8 @@ module Padding =
         match padding with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> GlobalValue.global' g
-        | :? Auto -> GlobalValue.auto
+        | :? Global as g -> global' g
+        | :? Auto -> auto
         | _ -> "Unknown padding"
 
     let private paddingValue value = PropertyValue.cssValue Property.Padding value

@@ -5,14 +5,14 @@ open FssTypes
 module Typography =
     let private orphansToString (orphans: IOrphans) =
         match orphans with
-        | :? CssInt as i -> GlobalValue.int i
-        | :? Global as g -> GlobalValue.global' g
+        | :? CssInt as i -> cssIntToString i
+        | :? Global as g -> global' g
         | _ -> "Unknown orphans"
 
     let private widowsToString (widows: IWidows) =
         match widows with
-        | :? CssInt as i -> GlobalValue.int i
-        | :? Global as g -> GlobalValue.global' g
+        | :? CssInt as i -> cssIntToString i
+        | :? Global as g -> global' g
         | _ -> "Unknown widows"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/orphans

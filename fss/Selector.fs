@@ -18,7 +18,7 @@ module Selector =
         static member Child (html: Html) = sprintf " > %A" (value html)
         static member Descendant (html: Html) = sprintf " %A" (value html)
 
-    let (!+) (html: Html.Html) (propertyList: CssProperty list) = Selector.AdjacentSibling(html) ==> (propertyList |> fss) |> CssProperty
-    let (!~) (html: Html.Html) (propertyList: CssProperty list) = Selector.GeneralSibling(html) ==> (propertyList  |> fss) |> CssProperty
-    let (!>) (html: Html.Html) (propertyList: CssProperty list) = Selector.Child(html) ==> (propertyList |> fss) |> CssProperty
-    let (! ) (html: Html.Html) (propertyList: CssProperty list) = Selector.Descendant(html) ==> (propertyList |> fss) |> CssProperty
+    let (!+) (html: Html) (propertyList: CssProperty list) = Selector.AdjacentSibling(html) ==> (propertyList |> fss) |> CssProperty
+    let (!~) (html: Html) (propertyList: CssProperty list) = Selector.GeneralSibling(html) ==> (propertyList  |> fss) |> CssProperty
+    let (!>) (html: Html) (propertyList: CssProperty list) = Selector.Child(html) ==> (propertyList |> fss) |> CssProperty
+    let (! ) (html: Html) (propertyList: CssProperty list) = Selector.Descendant(html) ==> (propertyList |> fss) |> CssProperty

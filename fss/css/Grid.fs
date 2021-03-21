@@ -44,7 +44,7 @@ module Grid =
         interface ITemplateType
 
     let private minMaxToString (MinMaxGrid m) = m
-    let private repeatValue (repeat: Grid.Repeat) = Utilities.Helpers.duToKebab repeat
+    let private repeatValue (repeat: Repeat) = Utilities.Helpers.duToKebab repeat
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/repeat
     type Repeat =
@@ -68,13 +68,13 @@ module Grid =
                 value
                 (Utilities.Helpers.combineWs Units.LengthPercentage.value sizes)
             |> GridRepeat
-        static member Repeat (value: Grid.Repeat, fraction: Units.Fraction.Fraction) =
+        static member Repeat (value: FssTypes.Repeat, fraction: Units.Fraction.Fraction) =
             sprintf "repeat(%s, %s)" (repeatValue value) (Units.Fraction.value fraction)
             |> GridRepeat
-        static member Repeat (value: Grid.Repeat, length: ILengthPercentage) =
+        static member Repeat (value: FssTypes.Repeat, length: ILengthPercentage) =
             sprintf "repeat(%s, %s)" (repeatValue value) (Units.LengthPercentage.value length)
             |> GridRepeat
-        static member Repeat (value: Grid.Repeat, contentSize: ContentSize) =
+        static member Repeat (value: FssTypes.Repeat, contentSize: ContentSize) =
             sprintf "repeat(%s, %s)" (repeatValue value) (contentSizeToString contentSize)
             |> GridRepeat
         static member Repeat (value: int, minMax: MinMax) =
@@ -95,45 +95,45 @@ module Grid =
 
     let private autoFlowToString (autoFlow: IGridAutoFlow) =
         match autoFlow with
-        | :? Grid.GridAutoFlow as g -> Utilities.Helpers.duToSpaced g
-        | :? Global as g ->  GlobalValue.global' g
+        | :? GridAutoFlow as g -> Utilities.Helpers.duToSpaced g
+        | :? Global as g ->  global' g
         | _ -> "Unknown grid auto flow"
 
     let private templateAreaToString (area: IGridTemplateArea) =
         match area with
-        | :? Global as g -> GlobalValue.global' g
-        | :? None'-> GlobalValue.none
+        | :? Global as g -> global' g
+        | :? None'-> none
         | _ -> "Unknown grid template area"
 
     let private gridGapToString (gap: IGridGap) =
         match gap with
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown grid gap"
 
     let private gridRowGapToString (gap: IGridRowGap) =
         match gap with
-        | :? Global as g -> GlobalValue.global' g
-        | :? Normal -> GlobalValue.normal
+        | :? Global as g -> global' g
+        | :? Normal -> normal
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown grid row gap"
 
     let private gridColumnGapToString (gap: IGridColumnGap) =
         match gap with
-        | :? Global as g -> GlobalValue.global' g
-        | :? Normal -> GlobalValue.normal
+        | :? Global as g -> global' g
+        | :? Normal -> normal
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown grid column gap"
 
     let private templateColumnToString (templateColumn: IGridTemplateColumns) =
         match templateColumn with
-        | :? Grid.GridTemplateColumns as g -> Utilities.Helpers.duToLowercase g
-        | :? Auto -> GlobalValue.auto
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? GridTemplateColumns as g -> Utilities.Helpers.duToLowercase g
+        | :? Auto -> auto
+        | :? None' -> none
+        | :? Global as g -> global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | _ -> "Unkown grid template column"
@@ -141,24 +141,24 @@ module Grid =
     let private gridPositionToString (position: IGridPosition) =
         let stringifyGridPosition =
             function
-                | Grid.Value v -> string v
-                | Grid.Ident i -> i
-                | Grid.IdentValue (i, v) -> sprintf "%s %d" i v
-                | Grid.ValueIdentSpan (v, i) -> sprintf "%d %s span" v i
-                | Grid.Span s -> s
+                | Value v -> string v
+                | Ident i -> i
+                | IdentValue (i, v) -> sprintf "%s %d" i v
+                | ValueIdentSpan (v, i) -> sprintf "%d %s span" v i
+                | Span s -> s
 
         match position with
-        | :? Grid.GridPosition as g -> stringifyGridPosition g
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? GridPosition as g -> stringifyGridPosition g
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "Unknown grid position"
 
     let private templateRowToString (templateRow: IGridTemplateRows) =
         match templateRow with
-        | :? Grid.GridTemplateRows as g -> Utilities.Helpers.duToLowercase g
-        | :? Auto -> GlobalValue.auto
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? GridTemplateRows as g -> Utilities.Helpers.duToLowercase g
+        | :? Auto -> auto
+        | :? None' -> none
+        | :? Global as g -> global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | _ -> "Unknown grid template row"
@@ -169,8 +169,8 @@ module Grid =
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | :? ContentSize as c -> contentSizeToString c
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | :? MinMax as m -> minMaxToString m
         | _ -> "Unknown grid auto column"
 
@@ -191,8 +191,8 @@ module Grid =
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | :? Units.Fraction.Fraction as f -> Units.Fraction.value f
         | :? ContentSize as c -> contentSizeToString c
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | :? MinMax as m -> minMaxToString m
         | _ -> "Unknown grid auto row"
 
@@ -204,11 +204,11 @@ module Grid =
         |> autoFlowValue
     type GridAutoFlow =
         static member Value (autoFlow: IGridAutoFlow) = autoFlow |> autoFlowValue'
-        static member Row = Grid.Row |> autoFlowValue'
-        static member Column = Grid.Column |> autoFlowValue'
-        static member Dense = Grid.Dense |> autoFlowValue'
-        static member RowDense = Grid.RowDense |> autoFlowValue'
-        static member ColumnDense = Grid.ColumnDense |> autoFlowValue'
+        static member Row = FssTypes.GridAutoFlow.Row |> autoFlowValue'
+        static member Column = FssTypes.GridAutoFlow.Column |> autoFlowValue'
+        static member Dense = FssTypes.GridAutoFlow.Dense |> autoFlowValue'
+        static member RowDense = FssTypes.GridAutoFlow.RowDense |> autoFlowValue'
+        static member ColumnDense = FssTypes.GridAutoFlow.ColumnDense |> autoFlowValue'
 
         static member Inherit = Inherit |> autoFlowValue'
         static member Initial = Initial |> autoFlowValue'
@@ -345,13 +345,13 @@ module Grid =
     // Grid position
     type GridPosition =
         static member Value (position: IGridPosition) = position
-        static member Ident ident = ident |>Grid.Ident
-        static member Value (value: int) = value |>Grid.Value
-        static member IdentValue (ident: string, value: int) = Grid.IdentValue(ident, value)
-        static member ValueIdentSpan (value: int, ident: string) = Grid.ValueIdentSpan(value, ident)
-        static member Span (value: int) = sprintf "span %d" value |>Grid.Span
-        static member Span (ident: string) = sprintf "span %s" ident |>Grid.Span
-        static member Span (value: int, ident: string) = sprintf "%d %s span" value ident |>Grid.Span
+        static member Ident ident = ident |> Ident
+        static member Value (value: int) = value |> Value
+        static member IdentValue (ident: string, value: int) = IdentValue(ident, value)
+        static member ValueIdentSpan (value: int, ident: string) = ValueIdentSpan(value, ident)
+        static member Span (value: int) = sprintf "span %d" value |> Span
+        static member Span (ident: string) = sprintf "span %s" ident |> Span
+        static member Span (value: int, ident: string) = sprintf "%d %s span" value ident |> Span
 
         static member Auto = Auto
         static member Inherit = Inherit
@@ -610,20 +610,20 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: Grid.Repeat, fraction: Units.Fraction.Fraction) =
+        static member Repeat (value: FssTypes.Repeat, fraction: Units.Fraction.Fraction) =
             Repeat.Repeat(value, fraction)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: Grid.Repeat, length: ILengthPercentage) =
+        static member Repeat (value: FssTypes.Repeat, length: ILengthPercentage) =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateRowValue
-        static member Repeat (value: Grid.Repeat, contentSize: ContentSize) =
+        static member Repeat (value: FssTypes.Repeat, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateRowValue
-        static member Subgrid = Grid.GridTemplateRows.Subgrid |> templateRowValue'
-        static member Masonry = Grid.GridTemplateRows.Masonry |> templateRowValue'
+        static member Subgrid = FssTypes.GridTemplateRows.Subgrid |> templateRowValue'
+        static member Masonry = FssTypes.GridTemplateRows.Masonry |> templateRowValue'
         static member None = None' |> templateRowValue'
         static member Auto = Auto |> templateRowValue'
         static member Inherit = Inherit |> templateRowValue'
@@ -693,20 +693,20 @@ module Grid =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: Grid.Repeat, fraction: Units.Fraction.Fraction) =
+        static member Repeat (value: FssTypes.Repeat, fraction: Units.Fraction.Fraction) =
             Repeat.Repeat(value, fraction)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: Grid.Repeat, length: ILengthPercentage) =
+        static member Repeat (value: FssTypes.Repeat, length: ILengthPercentage) =
             Repeat.Repeat(value, length)
             |> repeatToString
             |> templateColumnValue
-        static member Repeat (value: Grid.Repeat, contentSize: ContentSize) =
+        static member Repeat (value: FssTypes.Repeat, contentSize: ContentSize) =
             Repeat.Repeat(value, contentSize)
             |> repeatToString
             |> templateColumnValue
-        static member Subgrid = Grid.Subgrid |> templateColumnValue'
-        static member Masonry = Grid.Masonry |> templateColumnValue'
+        static member Subgrid = FssTypes.Subgrid |> templateColumnValue'
+        static member Masonry = FssTypes.Masonry |> templateColumnValue'
         static member None = None' |> templateColumnValue'
         static member Auto = Auto |> templateColumnValue'
         static member Inherit = Inherit |> templateColumnValue'
@@ -737,9 +737,9 @@ module Grid =
     type GridAutoRows =
         static member Value (autoRow: IGridAutoRows) = autoRow |> autoRowsValue'
         static member Values (values: IGridAutoRows list) = Utilities.Helpers.combineWs autoRowsToString values |> autoRowsValue
-        static member MaxContent = MaxContent |> autoRowsValue'
-        static member MinContent = MinContent |> autoRowsValue'
-        static member FitContent (contentSize: ILengthPercentage) = FitContent(contentSize) |> autoRowsValue'
+        static member MaxContent = ContentSize.MaxContent |> autoRowsValue'
+        static member MinContent = ContentSize.MinContent |> autoRowsValue'
+        static member FitContent (contentSize: ILengthPercentage) = ContentSize.FitContent(contentSize) |> autoRowsValue'
 
         static member Auto = Auto |> autoRowsValue'
         static member Inherit = Inherit |> autoRowsValue'
@@ -771,9 +771,9 @@ module Grid =
     type GridAutoColumns =
         static member Value (autoColumn: IGridAutoColumns) = autoColumn |> autoColumnsValue'
         static member Values (values: IGridAutoColumns list) = Utilities.Helpers.combineWs autoColumnsToString values |> autoColumnsValue
-        static member MaxContent = MaxContent |> autoColumnsValue'
-        static member MinContent = MinContent |> autoColumnsValue'
-        static member FitContent (contentSize: ILengthPercentage) = FitContent(contentSize) |> autoColumnsValue'
+        static member MaxContent = ContentSize.MaxContent |> autoColumnsValue'
+        static member MinContent = ContentSize.MinContent |> autoColumnsValue'
+        static member FitContent (contentSize: ILengthPercentage) = ContentSize.FitContent(contentSize) |> autoColumnsValue'
 
         static member Auto = Auto |> autoColumnsValue'
         static member Inherit = Inherit |> autoColumnsValue'

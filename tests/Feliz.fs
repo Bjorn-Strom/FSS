@@ -161,11 +161,11 @@ module Feliz =
                      [ "fontFamily" ==> "serif" ]
                 test
                     "Font families"
-                    [ style.fontFamily.Values ([ Font.Serif; Font.Monospace ]) ]
+                    [ style.fontFamily.Values ([ Serif; Monospace ]) ]
                     [ "fontFamily" ==> "serif, monospace" ]
                 test
                     "font feature setting On"
-                    [ style.fontFeatureSetting.Liga Font.On ]
+                    [ style.fontFeatureSetting.Liga On ]
                     [ "fontFeatureSettings" ==> "\"liga\" On" ]
                 test
                     "Font variant numeric ordinal"
@@ -225,7 +225,7 @@ module Feliz =
                      ["textDecorationLine" ==> "underline"]
                 test
                      "Text decorations multiple"
-                     [style.textDecorationLine.Value(Text.Overline, Text.Underline, Text.LineThrough)]
+                     [style.textDecorationLine.Value(Overline, Underline, LineThrough)]
                      ["textDecorationLine" ==> "overline underline line-through"]
                 test
                      "Text decoration skip objects"
@@ -233,7 +233,7 @@ module Feliz =
                      ["textDecorationSkip" ==> "objects"]
                 test
                      "Text decoration skip multiple - leading spaces and trailing spaces"
-                     [style.textDecorationSkip.Value(Text.LeadingSpaces, Text.TrailingSpaces)]
+                     [style.textDecorationSkip.Value(LeadingSpaces, TrailingSpaces)]
                      ["textDecorationSkip" ==> "leading-spaces trailing-spaces"]
                 test
                      "Text decoration skip All"
@@ -257,7 +257,7 @@ module Feliz =
                      ["textEmphasisColor" ==> "#555"]
                 test
                      "Text emphasis position left under"
-                     [ style.textEmphasisPosition.Value (Text.EmphasisPosition.Left, Text.EmphasisPosition.Under) ]
+                     [ style.textEmphasisPosition.Value (EmphasisPosition.Left, EmphasisPosition.Under) ]
                      ["textEmphasisPosition" ==> "left under"]
                 test
                      "Text Emphasis Style x"
@@ -269,7 +269,7 @@ module Feliz =
                      ["textEmphasisStyle" ==> "filled"]
                 test
                      "Text shadow single"
-                     [ style.textShadows [ Text.ColorXYBlur (CssColor.black, px 1, px 1, px 2) ] ]
+                     [ style.textShadows [ ColorXYBlur (CssColor.black, px 1, px 1, px 2) ] ]
                      ["textShadow" ==> "#000000 1px 1px 2px"]
                 test
                      "Text underline offset auto"
@@ -429,7 +429,7 @@ module Feliz =
                     [ "borderStyle" ==> "hidden" ]
                 test
                     "Borderstyle multiple"
-                    [ style.borderStyle.Value(Border.Inset, Border.Outset, Border.Ridge, Border.Groove) ]
+                    [ style.borderStyle.Value(BorderStyle.Inset, BorderStyle.Outset, BorderStyle.Ridge, BorderStyle.Groove) ]
                     [ "borderStyle" ==> "inset outset ridge groove" ]
                 test
                     "Border radius px"
@@ -659,10 +659,10 @@ module Feliz =
                     "Paint order normal"
                     [style.paintOrder.Normal]
                     ["paintOrder" ==> "normal"]
-//                test
- //                   "Paint order stroke fill"
-  //                  [PaintOrder.Value(PaintOrderTypes.Stroke, PaintOrderTypes.Fill)]
-   //                 ["paintOrder" ==> "stroke fill"]
+                test
+                    "Paint order stroke fill"
+                    [style.paintOrder.Value(PaintOrder.Stroke, PaintOrder.Fill)]
+                    ["paintOrder" ==> "stroke fill"]
                 test
                     "Visibility hidden"
                     [ style.visibility.Hidden]
@@ -829,7 +829,7 @@ module Feliz =
                     ["gridArea" ==> "foo"]
                 test
                     "Grid area"
-                    [ style.gridArea.Value (Grid.Ident "area1", Grid.Ident "area2") ]
+                    [ style.gridArea.Value (Ident "area1", Ident "area2") ]
                     ["gridArea" ==> "area1 / area2"]
                 test
                     "Grid area initial"
@@ -837,7 +837,7 @@ module Feliz =
                     ["gridArea" ==> "initial"]
                 test
                     "Grid column ident and ident"
-                    [ style.gridColumn.Value(Grid.Ident "someStart", Grid.Ident "someEnd") ]
+                    [ style.gridColumn.Value(Ident "someStart", Ident "someEnd") ]
                     ["gridColumn" ==> "someStart / someEnd"]
                 test
                     "Grid column unset"
@@ -857,7 +857,7 @@ module Feliz =
                     ["gridColumnEnd" ==> "somegridarea"]
                 test
                     "Grid row ident and ident"
-                    [ style.gridRow.Value (Grid.Ident "someStart", Grid.Ident "someEnd") ]
+                    [ style.gridRow.Value (Ident "someStart", Ident "someEnd") ]
                     ["gridRow" ==> "someStart / someEnd"]
                 test
                     "Grid row auto"
@@ -913,7 +913,7 @@ module Feliz =
                     ["gridTemplateRows" ==> "minmax(100px, 1.00fr)"]
                 test
                     "Grid template row px repeat px"
-                    [style.gridTemplateRows.Values [ px 200; style.repeat.Repeat(Grid.AutoFill, px 100); px 300]]
+                    [style.gridTemplateRows.Values [ px 200; style.repeat.Repeat(AutoFill, px 100); px 300]]
                     ["gridTemplateRows" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid template column px"
@@ -929,7 +929,7 @@ module Feliz =
                     ["gridTemplateColumns" ==> "repeat(3, 200px)"]
                 test
                     "Grid template column px repeat px"
-                    [style.gridTemplateColumns.Values [px 200; style.repeat.Repeat(Grid.AutoFill, px 100); px 300]]
+                    [style.gridTemplateColumns.Values [px 200; style.repeat.Repeat(AutoFill, px 100); px 300]]
                     ["gridTemplateColumns" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid auto columns min content"
@@ -1057,7 +1057,7 @@ module Feliz =
                     "Media query with min width and min height"
                     [
                         MediaQuery
-                            [ Media.MinWidth (px 500); Media.MaxWidth (px 700) ]
+                            [ MediaFeature.MinWidth (px 500); MediaFeature.MaxWidth (px 700) ]
                             [ style.backgroundColor.red ]
                     ]
                     ["@media (min-width: 500px) and (max-width: 700px)" ==> "backgroundColor,#ff0000"]
@@ -1065,14 +1065,14 @@ module Feliz =
                     "Media query min height only"
                     [
                         MediaQuery
-                            [ Media.MinHeight (px 700) ]
+                            [ MediaFeature.MinHeight (px 700) ]
                             [ style.backgroundColor.pink ]
                     ]
                     ["@media (min-height: 700px)" ==> "backgroundColor,#ffc0cb"]
                 testNested
                     "Media query for print"
                     [
-                        MediaQueryFor Media.Print []
+                        MediaQueryFor Print []
                             [
                                 style.marginTop' (px 200)
                                 style.transforms
@@ -1086,18 +1086,18 @@ module Feliz =
                 testNested
                     "Media not all"
                     [
-                        MediaQueryFor (Media.Not Media.All) [ Media.Color ] [ style.marginTop' (px 200) ]
+                        MediaQueryFor (Not Device.All) [ MediaFeature.Color ] [ style.marginTop' (px 200) ]
                     ]
                     ["@media not all and (color)" ==> "marginTop,200px"]
                 testNested
                     "Media query only screen"
                     [
-                        MediaQueryFor (Media.Only Media.Screen)
+                        MediaQueryFor (Only Device.Screen)
                             [
-                                Media.Color
-                                Media.Pointer Media.Fine
-                                Media.Scan Media.Interlace
-                                Media.Grid true
+                                MediaFeature.Color
+                                MediaFeature.Pointer Fine
+                                MediaFeature.Scan Interlace
+                                MediaFeature.Grid true
                             ]
                             [
                                 style.marginTop' (px 200)
@@ -1243,9 +1243,9 @@ module Feliz =
                     [ style.backdropFilter.Unset ]
                     [ "backdropFilter" ==> "unset" ]
                 test
-                      "Mix blend mode HardLight"
-                      [ style.mixBlendMode.HardLight]
-                      ["mixBlendMode" ==> "hard-light"]
+                   "Mix blend mode HardLight"
+                   [ style.mixBlendMode.HardLight]
+                   ["mixBlendMode" ==> "hard-light"]
                 test
                     "AspectRatio"
                     [ style.aspectRatio.Value(16, 9) ]
@@ -1276,11 +1276,11 @@ module Feliz =
                     [ "maskPosition" ==> "1px 1.0rem, 10px 100px" ]
                 test
                     "MaskRepeat value"
-                    [ style.maskRepeat.Value(Mask.Repeat)]
+                    [ style.maskRepeat.Value(MaskRepeat.Repeat)]
                     [ "maskRepeat" ==> "repeat" ]
                 test
                     "MaskRepeat multiple values"
-                    [ style.maskRepeat.Value([Mask.RepeatX, Mask.RepeatY; Mask.NoRepeat, Mask.Round])]
+                    [ style.maskRepeat.Value([MaskRepeat.RepeatX, MaskRepeat.RepeatY; MaskRepeat.NoRepeat, MaskRepeat.Round])]
                     [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
                 test
                     "MaskRepeat repeatX"

@@ -3,8 +3,8 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open Fss
 open FssTypes
+open Fss
 
 module Animation =
     let tests =
@@ -87,27 +87,27 @@ module Animation =
                     ["animationTimingFunction" ==> "steps(5)"]
                 test
                     "Animation timing function  step jump start"
-                    [ AnimationTimingFunction.Step(5, TimingFunction.JumpStart) ]
+                    [ AnimationTimingFunction.Step(5, JumpStart) ]
                     ["animationTimingFunction" ==> "steps(5, jump-start)"]
                 test
                     "Animation timing function step jump end"
-                    [ AnimationTimingFunction.Step (5, TimingFunction.JumpEnd) ]
+                    [ AnimationTimingFunction.Step (5, JumpEnd) ]
                     ["animationTimingFunction" ==> "steps(5, jump-end)"]
                 test
                     "Animation timing function step jump none"
-                    [ AnimationTimingFunction.Step (5, TimingFunction.JumpNone) ]
+                    [ AnimationTimingFunction.Step (5, JumpNone) ]
                     ["animationTimingFunction" ==> "steps(5, jump-none)"]
                 test
                     "Animation timing function step jump both"
-                    [ AnimationTimingFunction.Step (5, TimingFunction.JumpBoth) ]
+                    [ AnimationTimingFunction.Step (5, JumpBoth) ]
                     ["animationTimingFunction" ==> "steps(5, jump-both)"]
                 test
                     "Animation timing function step start"
-                    [ AnimationTimingFunction.Step (5, TimingFunction.Start) ]
+                    [ AnimationTimingFunction.Step (5, Step.Start) ]
                     ["animationTimingFunction" ==> "steps(5, start)"]
                 test
                     "Animation timing function step end"
-                    [ AnimationTimingFunction.Step (5, TimingFunction.End) ]
+                    [ AnimationTimingFunction.Step (5, End) ]
                     ["animationTimingFunction" ==> "steps(5, end)"]
                 test
                     "Animation timing function inherit"

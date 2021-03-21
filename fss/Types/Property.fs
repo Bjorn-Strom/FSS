@@ -364,15 +364,13 @@ module Property =
         interface ITransitionProperty
 
 module PropertyValue =
-    open Property
+    let value (v: Property.Property): string = Fss.Utilities.Helpers.duToCamel v
 
-    let value (v: Property): string = Fss.Utilities.Helpers.duToCamel v
-
-    let toKebabCase (property: Property): string =
+    let toKebabCase (property: Property.Property): string =
         property
         |> value
         |> Fss.Utilities.Helpers.pascalToKebabCase
 
-    let cssValue (property: Property) cssValue =
+    let cssValue (property: Property.Property) cssValue =
         property |> value ==> cssValue |> CssProperty
 

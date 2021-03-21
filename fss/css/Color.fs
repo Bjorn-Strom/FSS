@@ -5,17 +5,17 @@ open FssTypes
 module Color =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color-adjust
     let private colorAdjustCssValue value = PropertyValue.cssValue Property.ColorAdjust value
-    let private colorAdjustCssValue' (value: Color.ColorAdjust) =
+    let private colorAdjustCssValue' (value: ColorAdjust) =
         value
         |> Utilities.Helpers.duToLowercase
         |> colorAdjustCssValue
 
     type ColorAdjust =
-        static member Value (adjust: Color.ColorAdjust) = adjust |> colorAdjustCssValue'
-        static member Economy = Color.Economy |> colorAdjustCssValue'
-        static member Exact = Color.Exact |> colorAdjustCssValue'
+        static member Value (adjust: FssTypes.ColorAdjust) = adjust |> colorAdjustCssValue'
+        static member Economy = Economy |> colorAdjustCssValue'
+        static member Exact = Exact |> colorAdjustCssValue'
 
-    let ColorAdjust' (adjust: Color.ColorAdjust) = adjust |> ColorAdjust.Value
+    let ColorAdjust' (adjust: FssTypes.ColorAdjust) = adjust |> ColorAdjust.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color
     let private colorCssValue value = PropertyValue.cssValue Property.Color value
@@ -178,9 +178,9 @@ module Color =
         static member currentColor = colorCssValue <| CssColorValue.color CssColor.currentColor
         static member Revert = colorCssValue "revert"
 
-        static member Inherit = Inherit |> GlobalValue.global' |> colorCssValue
-        static member Initial = Initial |> GlobalValue.global' |> colorCssValue
-        static member Unset = Unset |> GlobalValue.global' |> colorCssValue
+        static member Inherit = Inherit |> global' |> colorCssValue
+        static member Initial = Initial |> global' |> colorCssValue
+        static member Unset = Unset |> global' |> colorCssValue
 
     /// <summary>Sets the color of text and text decoration. </summary>
     /// <param name="color">The CSSColor to apply</param>

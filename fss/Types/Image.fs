@@ -1,6 +1,5 @@
 namespace FssTypes
 
-[<AutoOpen>]
 module Image =
     type Side =
         | ClosestSide

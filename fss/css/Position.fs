@@ -9,44 +9,44 @@ module Position =
         match positioned with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ ->  "Unknown position"
 
     let private verticalAlignToString (alignment: IVerticalAlign) =
         match alignment with
-        | :? Position.VerticalAlign as v -> Utilities.Helpers.duToKebab v
-        | :? Global as g -> GlobalValue.global' g
+        | :? VerticalAlign as v -> Utilities.Helpers.duToKebab v
+        | :? Global as g -> global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown vertical align"
 
     let private floatToString (float: IFloat) =
         match float with
-        | :? Position.Float as v -> Utilities.Helpers.duToKebab v
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? Float as v -> Utilities.Helpers.duToKebab v
+        | :? Global as g -> global' g
+        | :? None' -> none
         | _ -> "Unknown float"
 
     let private directionToString (direction: IDirection) =
         match direction with
-        | :? Position.Direction as d -> Utilities.Helpers.duToLowercase d
-        | :? Global as g -> GlobalValue.global' g
+        | :? Direction as d -> Utilities.Helpers.duToLowercase d
+        | :? Global as g -> global' g
         | _ -> "Unknown direction"
 
     let private positionValue value = PropertyValue.cssValue Property.Position value
-    let private positionValue' (value: Position.Position) =
+    let private positionValue' (value: Position) =
         value
         |> Utilities.Helpers.duToKebab
         |> positionValue
 
     type Position =
         static member Value(position: Position) = position |> positionValue
-        static member Static = Position.Static |> positionValue'
-        static member Relative = Position.Relative |> positionValue'
-        static member Absolute = Position.Absolute |> positionValue'
-        static member Sticky = Position.Sticky |> positionValue'
-        static member Fixed = Position.Fixed |> positionValue'
+        static member Static = FssTypes.Position.Static |> positionValue'
+        static member Relative = FssTypes.Position.Relative |> positionValue'
+        static member Absolute = FssTypes.Position.Absolute |> positionValue'
+        static member Sticky = FssTypes.Position.Sticky |> positionValue'
+        static member Fixed = FssTypes.Position.Fixed |> positionValue'
 
     /// <summary>Specifies how an element is to be positioned.</summary>
     /// <param name="position">How to position element</param>
@@ -173,14 +173,14 @@ module Position =
 
     type VerticalAlign =
         static member Value (alignment: IVerticalAlign) = alignment |> verticalAlignValue'
-        static member Baseline = Position.Baseline |> verticalAlignValue'
-        static member Sub = Position.Sub |> verticalAlignValue'
-        static member Super = Position.Super |> verticalAlignValue'
-        static member TextTop = Position.TextTop |> verticalAlignValue'
-        static member TextBottom = Position.TextBottom |> verticalAlignValue'
-        static member Middle = Position.Middle |> verticalAlignValue'
-        static member Top = Position.VerticalAlign.Top |> verticalAlignValue'
-        static member Bottom = Position.VerticalAlign.Bottom |> verticalAlignValue'
+        static member Baseline = FssTypes.VerticalAlign.Baseline |> verticalAlignValue'
+        static member Sub = FssTypes.VerticalAlign.Sub |> verticalAlignValue'
+        static member Super = FssTypes.VerticalAlign.Super |> verticalAlignValue'
+        static member TextTop = FssTypes.VerticalAlign.TextTop |> verticalAlignValue'
+        static member TextBottom = FssTypes.VerticalAlign.TextBottom |> verticalAlignValue'
+        static member Middle = FssTypes.VerticalAlign.Middle |> verticalAlignValue'
+        static member Top = FssTypes.VerticalAlign.Top |> verticalAlignValue'
+        static member Bottom = FssTypes.VerticalAlign.Bottom |> verticalAlignValue'
 
         static member Inherit = Inherit |> verticalAlignValue'
         static member Initial = Initial |> verticalAlignValue'
@@ -208,10 +208,10 @@ module Position =
 
     type Float =
         static member Value (float: IFloat) = float |> floatValue'
-        static member Left = Position.Float.Left |> floatValue'
-        static member Right = Position.Float.Right |> floatValue'
-        static member InlineStart = Position.InlineStart |> floatValue'
-        static member InlineEnd = Position.InlineEnd |> floatValue'
+        static member Left = FssTypes.Float.Left |> floatValue'
+        static member Right = FssTypes.Float.Right |> floatValue'
+        static member InlineStart = FssTypes.Float.InlineStart |> floatValue'
+        static member InlineEnd = FssTypes.Float.InlineEnd |> floatValue'
 
         static member None = None' |> floatValue'
         static member Inherit = Inherit |> floatValue'
@@ -232,19 +232,19 @@ module Position =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
     let private boxSizingValue value = PropertyValue.cssValue Property.BoxSizing value
-    let private boxSizingValue' (value: Position.BoxSizing) =
+    let private boxSizingValue' (value: BoxSizing) =
         value
         |> Utilities.Helpers.duToKebab
         |> boxSizingValue
     type BoxSizing =
-        static member Value (boxSizing: Position.BoxSizing) = boxSizing |> boxSizingValue'
-        static member ContentBox = Position.ContentBox |> boxSizingValue'
-        static member BorderBox = Position.BorderBox |> boxSizingValue'
+        static member Value (boxSizing: FssTypes.BoxSizing) = boxSizing |> boxSizingValue'
+        static member ContentBox = FssTypes.BoxSizing.ContentBox |> boxSizingValue'
+        static member BorderBox = FssTypes.BoxSizing.BorderBox |> boxSizingValue'
 
     /// <summary>Specifies how the total width and height of an elemenent is calculated.</summary>
     /// <param name="sizing"> How to calculate width and height How to calculate width. </param>
     /// <returns>Css property for fss.</returns>
-    let BoxSizing' (sizing: Position.BoxSizing) = BoxSizing.Value(sizing)
+    let BoxSizing' (sizing: FssTypes.BoxSizing) = BoxSizing.Value(sizing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
     let private directionValue value = PropertyValue.cssValue Property.Direction value
@@ -255,8 +255,8 @@ module Position =
 
     type Direction =
         static member Value (direction: IDirection) = direction |> directionValue'
-        static member Rtl = Position.Rtl |> directionValue'
-        static member Ltr = Position.Ltr |> directionValue'
+        static member Rtl = FssTypes.Direction.Rtl |> directionValue'
+        static member Ltr = FssTypes.Direction.Ltr |> directionValue'
         static member Inherit = Inherit |> directionValue'
         static member Initial = Initial |> directionValue'
         static member Unset = Unset |> directionValue'
@@ -287,7 +287,7 @@ module WritingMode =
     let private writingModeToString (writingMode: IWritingMode) =
         match writingMode with
         | :? WritingMode as w -> Utilities.Helpers.duToKebab w
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown writing mode"
 
     let private writingModeValue value = PropertyValue.cssValue Property.WritingMode value
@@ -364,22 +364,22 @@ module Break =
     let private breakAfterToString (breakAfter: IBreakAfter) =
         match breakAfter with
         | :? BreakAfter as w -> Utilities.Helpers.duToKebab w
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "Unknown break after"
 
     let private breakBeforeToString (breakBefore: IBreakBefore) =
         match breakBefore with
         | :? BreakBefore as w -> Utilities.Helpers.duToKebab w
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "Unknown break before"
 
     let private breakInsideToString (breakInside: IBreakInside) =
         match breakInside with
         | :? BreakInside as w -> Utilities.Helpers.duToKebab w
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "Unknown break before"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/break-after

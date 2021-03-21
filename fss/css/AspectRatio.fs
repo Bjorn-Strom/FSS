@@ -7,7 +7,7 @@ module AspectRatio =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
     let private stringifyAspectRatio (all: IAll) =
         match all with
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown all"
 
     let private aspectRatioValue value = PropertyValue.cssValue Property.AspectRatio value

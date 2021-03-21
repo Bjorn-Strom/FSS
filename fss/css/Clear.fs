@@ -7,9 +7,9 @@ module Clear =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/clear
     let private stringifyClear (clear: IClear) =
         match clear with
-        | :? Clear.Clear as c -> Utilities.Helpers.duToKebab c
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? Clear as c -> Utilities.Helpers.duToKebab c
+        | :? Global as g -> global' g
+        | :? None' -> none
         | _ -> "Unknown clear"
 
     let private clearValue value = PropertyValue.cssValue Property.Clear value

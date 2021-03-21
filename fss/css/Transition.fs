@@ -5,32 +5,32 @@ open FssTypes
 module Transition =
     let private transitionToString (transition: ITransition) =
         match transition with
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown transition"
 
     let private delayToString (delay: ITransitionDelay) =
         match delay with
         | :? Units.Time.Time as t -> Units.Time.value t
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown transition delay"
 
     let private durationToString (duration: ITransitionDuration) =
         match duration with
         | :? Units.Time.Time as t -> Units.Time.value t
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown transition duration"
 
     let private timingToString (duration: ITransitionTimingFunction) =
         match duration with
         | :? TimingFunction.TimingFunction as t -> TimingFunction.timingToString t
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown transition timing"
 
     let private propertyToString (property: ITransitionProperty) =
         match property with
-        | :? Property.Property as p -> PropertyValue.toKebabCase p
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? Property as p -> PropertyValue.toKebabCase p
+        | :? None' -> none
+        | :? Global as g -> global' g
         | _ -> "Unknown transition property"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition
@@ -128,7 +128,7 @@ module Transition =
         static member StepEnd = TimingFunction.TimingFunction.StepEnd |> transitionTimingFunction
         static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = TimingFunction.TimingFunction.CubicBezier(p1,p2,p3,p4) |> transitionTimingFunction
         static member Step (steps: int) = TimingFunction.Step(steps) |> transitionTimingFunction
-        static member Step (steps: int, jumpTerm: TimingFunction.Step) = TimingFunction.Step(steps, jumpTerm) |> transitionTimingFunction
+        static member Step (steps: int, jumpTerm: Step) = TimingFunction.Step(steps, jumpTerm) |> transitionTimingFunction
 
         static member Inherit = Inherit |> transitionTimingFunction'
         static member Initial = Initial |> transitionTimingFunction'
@@ -153,7 +153,7 @@ module Transition =
         |> transitionProperty
     type TransitionProperty =
         static member Value (property: ITransitionProperty) = property |> transitionProperty'
-        static member Values (properties: Property.Property list) =
+        static member Values (properties: Property list) =
              properties
              |> Utilities.Helpers.combineComma propertyToString
              |> transitionProperty

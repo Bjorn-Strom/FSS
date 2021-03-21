@@ -14,8 +14,8 @@ module PseudoClass =
     let private stringifyNthChild (nthChild: INthChild)=
         match nthChild with
         | :? NthChildType as n -> Utilities.Helpers.duToLowercase n
-        | :? CssString as s -> GlobalValue.string s
-        | :? CssInt as i -> GlobalValue.int i
+        | :? CssString as s -> cssStringToString s
+        | :? CssInt as i -> cssIntToString i
         | _ -> "Unknown nth child"
 
     let private pseudoValue value attributeList = value ==> (attributeList |> fss) |> CssProperty

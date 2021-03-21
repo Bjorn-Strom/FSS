@@ -3,6 +3,7 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
+open FssTypes
 open Fss
 
 module Visibility =
@@ -22,11 +23,11 @@ module Visibility =
                     ["paintOrder" ==> "markers"]
                 test
                     "Paint order stroke fill"
-                    [PaintOrder.Value(PaintOrderTypes.Stroke, PaintOrderTypes.Fill)]
+                    [PaintOrder.Value(Stroke, FssTypes.PaintOrder.Fill)]
                     ["paintOrder" ==> "stroke fill"]
                 test
                     "Paint order markers stroke fill"
-                    [PaintOrder.Value(PaintOrderTypes.Markers, PaintOrderTypes.Stroke, PaintOrderTypes.Fill)]
+                    [PaintOrder.Value(Markers, Stroke, FssTypes.PaintOrder.Fill)]
                     ["paintOrder" ==> "markers stroke fill"]
                 test
                     "Paint order normal"

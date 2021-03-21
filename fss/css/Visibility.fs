@@ -7,14 +7,14 @@ module Visibility =
     let private visibilityValue value = PropertyValue.cssValue Property.Visibility value
     let private visibilityValue' value =
         value
-        |> Visibility.visibilityToString
+        |> FssTypes.Visibility.value
         |> visibilityValue
 
     type Visibility =
         static member Value (visibility: IVisibility) = visibility |> visibilityValue'
-        static member Visible = Visibility.Visible |> visibilityValue'
-        static member Hidden = Visibility.Hidden |> visibilityValue'
-        static member Collapse = Visibility.Collapse |> visibilityValue'
+        static member Visible = FssTypes.Visibility.Visible |> visibilityValue'
+        static member Hidden = FssTypes.Visibility.Hidden |> visibilityValue'
+        static member Collapse = FssTypes.Visibility.Collapse |> visibilityValue'
 
         static member Inherit = Inherit |> visibilityValue'
         static member Initial = Initial |> visibilityValue'
@@ -44,21 +44,13 @@ module Opacity =
     /// <returns>Css property for fss.</returns>
     let Opacity' (opacity: float) = Opacity.Value(opacity)
 
-module PaintOrderTypes =
-    type PaintOrder =
-        | Stroke
-        | Markers
-        | Fill
-        interface IPaintOrder
 
 [<AutoOpen>]
 module PaintOrder =
-    open PaintOrderTypes
-
     let private paintOrderToString (paintOrder: IPaintOrder) =
         match paintOrder with
         | :? PaintOrder as p -> Utilities.Helpers.duToLowercase p
-        | :? Normal -> GlobalValue.normal
+        | :? Normal -> normal
         | _ -> "unknown paint order"
 
     let private paintOrderValue value = PropertyValue.cssValue Property.PaintOrder value
@@ -81,9 +73,9 @@ module PaintOrder =
                 (paintOrderToString o2)
                 (paintOrderToString o3)
             |> paintOrderValue
-        static member Stroke = Stroke |> paintOrderValue'
-        static member Markers = Markers |> paintOrderValue'
-        static member Fill = Fill |> paintOrderValue'
+        static member Stroke = FssTypes.PaintOrder.Stroke |> paintOrderValue'
+        static member Markers = FssTypes.PaintOrder.Markers |> paintOrderValue'
+        static member Fill = FssTypes.PaintOrder.Fill |> paintOrderValue'
         static member Normal = Normal |> paintOrderValue'
 
     /// <summary>Specifies in which order the fill and strokes are drawn.</summary>

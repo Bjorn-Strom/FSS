@@ -37,10 +37,10 @@ module BoxShadow =
                 BoxShadow.BlurSpreadColor(x, y, blur, spread, color)
 
     /// Supply a list of box shadows to be applied to the element.
-    let BoxShadows (shadows: BoxShadow.BoxShadow list): CssProperty =
+    let BoxShadows (shadows: FssTypes.BoxShadow list): CssProperty =
         shadows
         |> Utilities.Helpers.combineComma boxShadowToString
         |> boxShadowValue
 
     /// Can be used to invert box shadow
-    let Inset (shadow: BoxShadow.BoxShadow) = BoxShadow.Inset shadow
+    let Inset (shadow: FssTypes.BoxShadow) = BoxShadow.Inset shadow

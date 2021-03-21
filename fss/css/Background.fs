@@ -7,57 +7,57 @@ module Background =
 
     let private backgroundClipToString (clip: IBackgroundClip) =
         match clip with
-        | :? Background.BackgroundClip as b -> Utilities.Helpers.duToKebab b
-        | :? Global as g -> GlobalValue.global' g
+        | :? BackgroundClip as b -> Utilities.Helpers.duToKebab b
+        | :? Global as g -> global' g
         | _ -> "Unknown background clip"
 
     let private backgroundOriginToString (clip: IBackgroundOrigin) =
         match clip with
-        | :? Background.BackgroundOrigin as b -> Utilities.Helpers.duToKebab b
-        | :? Global as g -> GlobalValue.global' g
+        | :? BackgroundOrigin as b -> Utilities.Helpers.duToKebab b
+        | :? Global as g -> global' g
         | _ -> "unknown background origin"
 
     let private repeatToString (repeat: IBackgroundRepeat) =
         match repeat with
-        | :? Background.BackgroundRepeat as b -> Utilities.Helpers.duToKebab b
-        | :? Global as g -> GlobalValue.global' g
+        | :? BackgroundRepeat as b -> Utilities.Helpers.duToKebab b
+        | :? Global as g -> global' g
         | _ -> "unknown background repeat"
 
     let private sizeToString (size: IBackgroundSize) =
         match size with
-        | :? Background.BackgroundSize as b -> Utilities.Helpers.duToLowercase b
+        | :? BackgroundSize as b -> Utilities.Helpers.duToLowercase b
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> GlobalValue.global' g
-        | :? Auto -> GlobalValue.auto
+        | :? Global as g -> global' g
+        | :? Auto -> auto
         | _ -> "Unknown background size"
 
     let private attachmentToString (attachment: IBackgroundAttachment) =
         match attachment with
-        | :? Background.BackgroundAttachment as b -> Utilities.Helpers.duToLowercase b
-        | :? Global as g -> GlobalValue.global' g
+        | :? BackgroundAttachment as b -> Utilities.Helpers.duToLowercase b
+        | :? Global as g -> global' g
         | _ -> "Unknown background attachment"
 
     let private positionToString (position: IBackgroundPosition) =
         match position with
-        | :? Background.BackgroundPosition as b -> Utilities.Helpers.duToLowercase b
-        | :? Global as g -> GlobalValue.global' g
+        | :? BackgroundPosition as b -> Utilities.Helpers.duToLowercase b
+        | :? Global as g -> global' g
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
         | _ -> "Unknown background position"
 
     let private blendModeToString (blendMode: IBackgroundBlendMode) =
         match blendMode with
-        | :? Background.BackgroundBlendMode as b -> Utilities.Helpers.duToKebab b
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? BackgroundBlendMode as b -> Utilities.Helpers.duToKebab b
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown background blend mode"
 
     let private isolationToString (isolation: IIsolation) =
         match isolation with
-        | :? Background.Isolation as i -> "isolate"
-        | :? Global as g -> GlobalValue.global' g
-        | :? Auto -> GlobalValue.auto
+        | :? Isolation as i -> "isolate"
+        | :? Global as g -> global' g
+        | :? Auto -> auto
         | _ -> "Unknown isolation"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
@@ -69,10 +69,10 @@ module Background =
 
     type BackgroundClip =
         static member Value (clip: IBackgroundClip) = clip |> clipValue'
-        static member BorderBox = Background.BorderBox |> clipValue'
-        static member PaddingBox = Background.PaddingBox |> clipValue'
-        static member ContentBox = Background.ContentBox |> clipValue'
-        static member Text = Background.Text |> clipValue'
+        static member BorderBox = FssTypes.BackgroundClip.BorderBox |> clipValue'
+        static member PaddingBox = FssTypes.BackgroundClip.PaddingBox |> clipValue'
+        static member ContentBox = FssTypes.BackgroundClip.ContentBox |> clipValue'
+        static member Text = FssTypes.BackgroundClip.Text |> clipValue'
 
         static member Inherit = Inherit |> clipValue'
         static member Initial = Initial |> clipValue'
@@ -97,9 +97,9 @@ module Background =
         |> originValue
     type BackgroundOrigin =
        static member Value (origin: IBackgroundOrigin) = origin |> originValue'
-       static member BorderBox = Background.BackgroundOrigin.BorderBox |> originValue'
-       static member PaddingBox = Background.BackgroundOrigin.PaddingBox |> originValue'
-       static member ContentBox = Background.BackgroundOrigin.ContentBox |> originValue'
+       static member BorderBox = FssTypes.BackgroundOrigin.BorderBox |> originValue'
+       static member PaddingBox = FssTypes.BackgroundOrigin.PaddingBox |> originValue'
+       static member ContentBox = FssTypes.BackgroundOrigin.ContentBox |> originValue'
 
        static member Inherit = Inherit |> originValue'
        static member Initial = Initial |> originValue'
@@ -128,12 +128,12 @@ module Background =
         static member Value (v1: IBackgroundRepeat, v2: IBackgroundRepeat) =
             sprintf "%s %s" (repeatToString v1) (repeatToString v2)
             |> repeatValue
-        static member RepeatX = Background.RepeatX |> repeatValue'
-        static member RepeatY = Background.RepeatY |> repeatValue'
-        static member Repeat = Background.Repeat |> repeatValue'
-        static member Space = Background.Space |> repeatValue'
-        static member Round = Background.Round |> repeatValue'
-        static member NoRepeat = Background.NoRepeat |> repeatValue'
+        static member RepeatX = FssTypes.BackgroundRepeat.RepeatX |> repeatValue'
+        static member RepeatY = FssTypes.BackgroundRepeat.RepeatY |> repeatValue'
+        static member Repeat = FssTypes.BackgroundRepeat.Repeat |> repeatValue'
+        static member Space = FssTypes.BackgroundRepeat.Space |> repeatValue'
+        static member Round = FssTypes.BackgroundRepeat.Round |> repeatValue'
+        static member NoRepeat = FssTypes.BackgroundRepeat.NoRepeat |> repeatValue'
 
         static member Inherit = Inherit |> repeatValue'
         static member Initial = Initial |> repeatValue'
@@ -162,8 +162,8 @@ module Background =
             sprintf "%s %s" (sizeToString s1) (sizeToString s2)
                 |> sizeValue
 
-        static member Cover = Background.Cover |> sizeValue'
-        static member Contain = Background.Contain |> sizeValue'
+        static member Cover = FssTypes.BackgroundSize.Cover |> sizeValue'
+        static member Contain = FssTypes.BackgroundSize.Contain |> sizeValue'
 
         static member Auto = Auto |> sizeValue'
         static member Inherit = Inherit |> sizeValue'
@@ -192,9 +192,9 @@ module Background =
         |> attachmentValue
     type BackgroundAttachment =
         static member Value (attachment: IBackgroundAttachment) = attachment |> attachmentValue'
-        static member Scroll = Background.Scroll |> attachmentValue'
-        static member Fixed = Background.Fixed |> attachmentValue'
-        static member Local = Background.Local |> attachmentValue'
+        static member Scroll = FssTypes.BackgroundAttachment.Scroll |> attachmentValue'
+        static member Fixed = FssTypes.BackgroundAttachment.Fixed |> attachmentValue'
+        static member Local = FssTypes.BackgroundAttachment.Local |> attachmentValue'
 
         static member Inherit = Inherit |> attachmentValue'
         static member Initial = Initial |> attachmentValue'
@@ -381,7 +381,7 @@ module Background =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
     let private imageValue value = PropertyValue.cssValue Property.BackgroundImage value
     type BackgroundImage =
-        static member Value (image: Image) = image |> imageValue
+        static member Value (image: Image.Image) = image |> imageValue
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
 
         static member LinearGradient (angle: Units.Angle.Angle, gradients: (CssColor * Units.Percent.Percent) list) =
@@ -401,17 +401,17 @@ module Background =
         static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
             imageValue <| Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: Shape, size: Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
-            imageValue <| Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: Shape, size: Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
-            imageValue <| Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (Shape * Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Percent.Percent) list) list) =
+        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+            imageValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradients (gradients: (Image.Shape * Image.Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Percent.Percent) list) list) =
             imageValue <| Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (Shape * Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Size.Size) list) list) =
+        static member RadialGradients (gradients: (Image.Shape * Image.Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Size.Size) list) list) =
             imageValue <| Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
             imageValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
 
         static member ConicGradient (angle: Units.Angle.Angle, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Angle.Angle) list) =
@@ -429,7 +429,7 @@ module Background =
     ///     - <c> Image </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundImage' (image: Image) = BackgroundImage.Value(image)
+    let BackgroundImage' (image: Image.Image) = BackgroundImage.Value(image)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
     let private positionCssValue value = PropertyValue.cssValue Property.BackgroundPosition value
@@ -439,11 +439,11 @@ module Background =
         |> positionCssValue
 
     type BackgroundPosition =
-        static member Top = Background.Top |> positionCssValue'
-        static member Bottom = Background.Bottom |> positionCssValue'
-        static member Left = Background.Left |> positionCssValue'
-        static member Right = Background.Right |> positionCssValue'
-        static member Center = Background.Center |> positionCssValue'
+        static member Top = FssTypes.BackgroundPosition.Top |> positionCssValue'
+        static member Bottom = FssTypes.BackgroundPosition.Bottom |> positionCssValue'
+        static member Left = FssTypes.BackgroundPosition.Left |> positionCssValue'
+        static member Right = FssTypes.BackgroundPosition.Right |> positionCssValue'
+        static member Center = FssTypes.BackgroundPosition.Center |> positionCssValue'
 
         static member Value (value: IBackgroundPosition) = value |> positionCssValue'
         static member Values (v1: IBackgroundPosition, v2: IBackgroundPosition) =
@@ -477,30 +477,30 @@ module Background =
         |> blendModeToString
         |> blendModeCssValue
 
-    let private blendModeValues (values: Background.BackgroundBlendMode list) =
+    let private blendModeValues (values: BackgroundBlendMode list) =
         values
         |> Utilities.Helpers.combineComma blendModeToString
         |> blendModeCssValue
 
     type BackgroundBlendMode =
         static member Value(blendMode: IBackgroundBlendMode) = blendMode |> blendModeCssValue'
-        static member Values(blendModes: Background.BackgroundBlendMode list) = blendModeValues blendModes
+        static member Values(blendModes: FssTypes.BackgroundBlendMode list) = blendModeValues blendModes
 
-        static member Multiply = Background.Multiply |> blendModeCssValue'
-        static member Screen = Background.Screen |> blendModeCssValue'
-        static member Overlay = Background.Overlay |> blendModeCssValue'
-        static member Darken = Background.Darken |> blendModeCssValue'
-        static member Lighten = Background.Lighten |> blendModeCssValue'
-        static member ColorDodge = Background.ColorDodge |> blendModeCssValue'
-        static member ColorBurn = Background.ColorBurn |> blendModeCssValue'
-        static member HardLight = Background.HardLight |> blendModeCssValue'
-        static member SoftLight = Background.SoftLight |> blendModeCssValue'
-        static member Difference = Background.Difference |> blendModeCssValue'
-        static member Exclusion = Background.Exclusion |> blendModeCssValue'
-        static member Hue = Background.Hue |> blendModeCssValue'
-        static member Saturation = Background.Saturation |> blendModeCssValue'
-        static member Color = Background.Color |> blendModeCssValue'
-        static member Luminosity = Background.Luminosity |> blendModeCssValue'
+        static member Multiply = FssTypes.BackgroundBlendMode.Multiply |> blendModeCssValue'
+        static member Screen = FssTypes.BackgroundBlendMode.Screen |> blendModeCssValue'
+        static member Overlay = FssTypes.BackgroundBlendMode.Overlay |> blendModeCssValue'
+        static member Darken = FssTypes.BackgroundBlendMode.Darken |> blendModeCssValue'
+        static member Lighten = FssTypes.BackgroundBlendMode.Lighten |> blendModeCssValue'
+        static member ColorDodge = FssTypes.BackgroundBlendMode.ColorDodge |> blendModeCssValue'
+        static member ColorBurn = FssTypes.BackgroundBlendMode.ColorBurn |> blendModeCssValue'
+        static member HardLight = FssTypes.BackgroundBlendMode.HardLight |> blendModeCssValue'
+        static member SoftLight = FssTypes.BackgroundBlendMode.SoftLight |> blendModeCssValue'
+        static member Difference = FssTypes.BackgroundBlendMode.Difference |> blendModeCssValue'
+        static member Exclusion = FssTypes.BackgroundBlendMode.Exclusion |> blendModeCssValue'
+        static member Hue = FssTypes.BackgroundBlendMode.Hue |> blendModeCssValue'
+        static member Saturation = FssTypes.BackgroundBlendMode.Saturation |> blendModeCssValue'
+        static member Color = FssTypes.BackgroundBlendMode.Color |> blendModeCssValue'
+        static member Luminosity = FssTypes.BackgroundBlendMode.Luminosity |> blendModeCssValue'
 
         static member Normal = Normal |> blendModeCssValue'
         static member Inherit = Inherit |> blendModeCssValue'
@@ -529,7 +529,7 @@ module Background =
     type Isolation =
         static member Value(isolation: IIsolation) = isolation |> isolationValue'
 
-        static member Isolate = Background.Isolate |> isolationValue'
+        static member Isolate = Isolate |> isolationValue'
         static member Auto = Auto |> isolationValue'
         static member Inherit = Inherit |> isolationValue'
         static member Initial = Initial |> isolationValue'
@@ -560,7 +560,7 @@ module BoxDecorationBreak =
     let private boxDecorationBreakToString (boxDecoration: IBoxDecorationBreak) =
         match boxDecoration with
         | :? BoxDecorationBreakType.BoxDecorationBreak as b -> Utilities.Helpers.duToLowercase b
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown box decoration break"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-decoration-break

@@ -1,23 +1,22 @@
 namespace Fss
 open FssTypes
 
-
 // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
 [<AutoOpen>]
 module Overflow =
 
     let private overflowToString (overflow: IOverflow) =
         match overflow with
-        | :? Overflow.Overflow as o -> Utilities.Helpers.duToLowercase o
-        | :? Global as g -> GlobalValue.global' g
-        | :? Auto -> GlobalValue.auto
+        | :? Overflow as o -> Utilities.Helpers.duToLowercase o
+        | :? Global as g -> global' g
+        | :? Auto -> auto
         | _ -> "Unknown overflow"
 
     let private wrapToString (wrap: IOverflowWrap) =
         match wrap with
-        | :? Overflow.OverflowWrap as o -> Utilities.Helpers.duToKebab o
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? OverflowWrap as o -> Utilities.Helpers.duToKebab o
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown overflow wrap"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
@@ -34,10 +33,10 @@ module Overflow =
                 (overflowToString x)
                 (overflowToString y)
             |> overflowValue
-        static member Visible = Overflow.Visible |> overflowValue'
-        static member Hidden = Overflow.Hidden |> overflowValue'
-        static member Clip = Overflow.Clip |> overflowValue'
-        static member Scroll = Overflow.Scroll |> overflowValue'
+        static member Visible = FssTypes.Overflow.Visible |> overflowValue'
+        static member Hidden = FssTypes.Overflow.Hidden |> overflowValue'
+        static member Clip = FssTypes.Overflow.Clip |> overflowValue'
+        static member Scroll = FssTypes.Overflow.Scroll |> overflowValue'
 
         static member Auto = Auto |> overflowValue'
         static member Inherit = Inherit |> overflowValue'
@@ -64,10 +63,10 @@ module Overflow =
 
     type OverflowX =
         static member Value (overflow: IOverflow) = overflow |> overflowXValue'
-        static member Visible = Overflow.Visible |> overflowXValue'
-        static member Hidden = Overflow.Hidden |> overflowXValue'
-        static member Clip = Overflow.Clip |> overflowXValue'
-        static member Scroll = Overflow.Scroll |> overflowXValue'
+        static member Visible = FssTypes.Overflow.Visible |> overflowXValue'
+        static member Hidden = FssTypes.Overflow.Hidden |> overflowXValue'
+        static member Clip = FssTypes.Overflow.Clip |> overflowXValue'
+        static member Scroll = FssTypes.Overflow.Scroll |> overflowXValue'
 
         static member Auto = Auto |> overflowXValue'
         static member Inherit = Inherit |> overflowXValue'
@@ -94,10 +93,10 @@ module Overflow =
 
     type OverflowY =
         static member Value (overflow: IOverflow) = overflow |> overflowYValue'
-        static member Visible = Overflow.Visible |> overflowYValue'
-        static member Hidden = Overflow.Hidden |> overflowYValue'
-        static member Clip = Overflow.Clip |> overflowYValue'
-        static member Scroll = Overflow.Scroll |> overflowYValue'
+        static member Visible = FssTypes.Overflow.Visible |> overflowYValue'
+        static member Hidden = FssTypes.Overflow.Hidden |> overflowYValue'
+        static member Clip = FssTypes.Overflow.Clip |> overflowYValue'
+        static member Scroll = FssTypes.Overflow.Scroll |> overflowYValue'
 
         static member Auto = Auto |> overflowYValue'
         static member Inherit = Inherit |> overflowYValue'
@@ -125,8 +124,8 @@ module Overflow =
 
     type OverflowWrap =
         static member Value (overflowWrap: IOverflowWrap) = overflowWrap |> overflowWrapValue'
-        static member BreakWord = Overflow.BreakWord |> overflowWrapValue'
-        static member Anywhere = Overflow.Anywhere |> overflowWrapValue'
+        static member BreakWord = FssTypes.OverflowWrap.BreakWord |> overflowWrapValue'
+        static member Anywhere = FssTypes.OverflowWrap.Anywhere |> overflowWrapValue'
 
         static member Normal = Normal |> overflowWrapValue'
         static member Inherit = Inherit |> overflowWrapValue'

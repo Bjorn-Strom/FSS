@@ -1,22 +1,21 @@
 namespace FssTypes
 
-[<RequireQualifiedAccess>]
-module Filter =
-    type Filter =
-        | Url of string
-        | Blur of int
-        | Brightness of Units.Percent.Percent
-        | Contrast of Units.Percent.Percent
-        | DropShadow of int * int * int * CssColor * Units.Percent.Percent
-        | Grayscale of Units.Percent.Percent
-        | HueRotate of int
-        | Invert of Units.Percent.Percent
-        | Opacity of Units.Percent.Percent
-        | Saturate of Units.Percent.Percent
-        | Sepia of Units.Percent.Percent
-        interface IFilter
-        interface IBackdropFilter
+type Filter =
+    | Url of string
+    | Blur of int
+    | Brightness of Units.Percent.Percent
+    | Contrast of Units.Percent.Percent
+    | DropShadow of int * int * int * CssColor * Units.Percent.Percent
+    | Grayscale of Units.Percent.Percent
+    | HueRotate of int
+    | Invert of Units.Percent.Percent
+    | Opacity of Units.Percent.Percent
+    | Saturate of Units.Percent.Percent
+    | Sepia of Units.Percent.Percent
+    interface IFilter
+    interface IBackdropFilter
 
+module Filter =
     let stringifyFilter (filter: Filter) =
         match filter with
             | Url u -> $"url(\"{u}\")"

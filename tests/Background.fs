@@ -3,8 +3,8 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open Fss
 open FssTypes
+open Fss
 
 module Background =
      let tests =
@@ -28,35 +28,35 @@ module Background =
                     ["backgroundImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Circle, ClosestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Circle, Image.ClosestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Circle, ClosestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Circle, Image.ClosestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Circle, FarthestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Circle, Image.FarthestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Circle, FarthestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Circle, Image.FarthestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Ellipse, ClosestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.ClosestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Ellipse, ClosestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.ClosestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Ellipse, FarthestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.FarthestSide, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(Ellipse, FarthestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.RadialGradient(Image.Ellipse, Image.FarthestCorner, pct 50, pct 50, [ CssColor.Hex "e66465", pct 0; CssColor.Hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as conic gradient"
@@ -200,7 +200,7 @@ module Background =
                     [ "backgroundRepeat" ==> "unset" ]
                 test
                     "background repeats horizontal and vertical - repeat space"
-                    [ BackgroundRepeat.Value(Background.Repeat, Background.Space) ]
+                    [ BackgroundRepeat.Value(Repeat, Space) ]
                     [ "backgroundRepeat" ==> "repeat space" ]
                 test
                     "background size cover"
@@ -312,7 +312,7 @@ module Background =
                     ["backgroundBlendMode" ==> "luminosity"]
                 test
                     "background blend mode multiple"
-                    [ BackgroundBlendMode.Values [ Background.Hue; Background.Saturation; Background.Exclusion ] ]
+                    [ BackgroundBlendMode.Values [ Hue; Saturation; Exclusion ] ]
                     [ "backgroundBlendMode" ==> "hue, saturation, exclusion" ]
                 test
                     "background blend mode normal"

@@ -6,15 +6,15 @@ module Word =
         match spacing with
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown word spacing"
 
     let private breakToString (break': IWordBreak) =
         match break' with
         | :? Word.WordBreak as w -> Utilities.Helpers.duToKebab w
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown word break"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing

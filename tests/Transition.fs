@@ -139,27 +139,27 @@ module Transition =
                     ["transitionTimingFunction" ==> "steps(5)"]
                 test
                     "Transition timing function  step jump start"
-                    [ TransitionTimingFunction.Step(5, TimingFunction.JumpStart) ]
+                    [ TransitionTimingFunction.Step(5, JumpStart) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-start)"]
                 test
                     "Transition timing function step jump end"
-                    [ TransitionTimingFunction.Step(5, TimingFunction.JumpEnd) ]
+                    [ TransitionTimingFunction.Step(5, JumpEnd) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-end)"]
                 test
                     "Transition timing function step jump none"
-                    [ TransitionTimingFunction.Step(5, TimingFunction.JumpNone) ]
+                    [ TransitionTimingFunction.Step(5, JumpNone) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-none)"]
                 test
                     "Transition timing function step jump both"
-                    [ TransitionTimingFunction.Step(5, TimingFunction.JumpBoth) ]
+                    [ TransitionTimingFunction.Step(5, JumpBoth) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-both)"]
                 test
                     "Transition timing function step start"
-                    [ TransitionTimingFunction.Step(5, TimingFunction.Start) ]
+                    [ TransitionTimingFunction.Step(5, Step.Start) ]
                     ["transitionTimingFunction" ==> "steps(5, start)"]
                 test
                     "Transition timing function step end"
-                    [ TransitionTimingFunction.Step(5, TimingFunction.End) ]
+                    [ TransitionTimingFunction.Step(5, End) ]
                     ["transitionTimingFunction" ==> "steps(5, end)"]
                 test
                     "Transition timing function inherit"

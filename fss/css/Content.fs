@@ -6,12 +6,12 @@ module Content =
 
     let private contentTypeToString (content: IContent) =
         match content with
-        | :? Content.Content as c -> Utilities.Helpers.duToKebab c
-        | :? CssString as s -> GlobalValue.string s |> sprintf "\"%s\""
-        | :? Normal -> GlobalValue.normal
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
-        | :? Counter.CounterStyle as c -> Counter.counterValue c
+        | :? Content as c -> Utilities.Helpers.duToKebab c
+        | :? CssString as s -> cssStringToString s |> sprintf "\"%s\""
+        | :? Normal -> normal
+        | :? None' -> none
+        | :? Global as g -> global' g
+        | :? CounterStyle as c -> Counter.counterValue c
         | _ -> "Unknown content"
 
     let private contentValue value = PropertyValue.cssValue Property.Content value
@@ -21,18 +21,18 @@ module Content =
         |> contentValue
 
     type Content =
-        static member OpenQuote = Content.OpenQuote |> contentValue'
-        static member CloseQuote = Content.CloseQuote |> contentValue'
-        static member NoOpenQuote = Content.NoOpenQuote |> contentValue'
-        static member NoCloseQuote = Content.NoCloseQuote |> contentValue'
+        static member OpenQuote = FssTypes.Content.OpenQuote |> contentValue'
+        static member CloseQuote = FssTypes.Content.CloseQuote |> contentValue'
+        static member NoOpenQuote = FssTypes.Content.NoOpenQuote |> contentValue'
+        static member NoCloseQuote = FssTypes.Content.NoCloseQuote |> contentValue'
 
-        static member Counter (counter: Counter.CounterStyle) =
+        static member Counter (counter: CounterStyle) =
             contentValue <| sprintf "counter(%s)" (Counter.counterValue counter)
-        static member Counters (counter: Counter.CounterStyle, listType: IListStyleType) =
+        static member Counters (counter: CounterStyle, listType: IListStyleType) =
             contentValue <| sprintf "counters(%s, %s)" (Counter.counterValue counter) (ListStyleType.styleTypeToString listType)
-        static member Counter (counter: Counter.CounterStyle, value: string) =
+        static member Counter (counter: CounterStyle, value: string) =
             contentValue <| sprintf "counter(%s)'%s'" (Counter.counterValue counter) value
-        static member Counters (counters: Counter.CounterStyle list, values: string list) =
+        static member Counters (counters: CounterStyle list, values: string list) =
             List.zip (List.map Counter.counterValue counters) values
             |> List.map (fun (x, y) -> sprintf "counter(%s) '%s'" x y)
             |> String.concat " "
@@ -58,20 +58,20 @@ module Content =
         static member RepeatingLinearGradients (gradients: (Units.Angle.Angle * ((CssColor * Units.Percent.Percent) list)) list) =
             contentValue <| Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: Shape, size: Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
-            contentValue <| Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: Shape, size: Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
-            contentValue <| Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (Shape * Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Percent.Percent) list) list) =
+        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+            contentValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradient (shape: Image.Shape, size: Image.Side, xPosition: Units.Percent.Percent, yPosition: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+            contentValue <| Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
+        static member RadialGradients (gradients: (Image.Shape * Image.Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Percent.Percent) list) list) =
             contentValue <| Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (Shape * Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Size.Size) list) list) =
+        static member RadialGradients (gradients: (Image.Shape * Image.Side * Units.Percent.Percent * Units.Percent.Percent * (CssColor * Units.Size.Size) list) list) =
             contentValue <| Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
+        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Percent.Percent) list) =
             contentValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: Shape, size: Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
+        static member RepeatingRadialGradient (shape: Image.Shape, size: Image.Side, x: Units.Percent.Percent, y: Units.Percent.Percent, gradients: (CssColor * Units.Size.Size) list) =
             contentValue <| Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member Attribute (attribute: Attribute.Attribute) =
-            contentValue <| sprintf "attr(%A)" (AttributeValues.attribute attribute)
+        static member Attribute (attribute: Attribute) =
+            contentValue <| sprintf "attr(%A)" (AttributeValue.value attribute)
 
         static member Normal = Normal |> contentValue'
         static member None = None' |> contentValue'

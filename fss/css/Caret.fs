@@ -6,7 +6,7 @@ module Caret =
     let private caretColorToString (caretColor: ICaretColor) =
         match caretColor with
         | :? CssColor as c -> CssColorValue.color c
-        | :? Auto -> GlobalValue.auto
+        | :? Auto -> auto
         | _ -> "Unknown caret color"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color

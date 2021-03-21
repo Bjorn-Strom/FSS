@@ -44,7 +44,6 @@
     <Compile Include="Types\Position.fs" />
     <Compile Include="Types\PointerEvents.fs" />
     <Compile Include="Types\Cursor.fs" />
-    <Compile Include="Types\Content.fs" />
     <Compile Include="Types\Table.fs" />
     <Compile Include="Types\Appearance.fs" />
     <Compile Include="Types\Grid.fs" />
@@ -53,11 +52,12 @@
     <Compile Include="Types\Media.fs" />
     <Compile Include="Types\BoxShadow.fs" />
     <Compile Include="Types\Scroll.fs" />
-    <Compile Include="Types\ClipPath.fs" />
     <Compile Include="Types\Clear.fs" />
     <Compile Include="Types\Filter.fs" />
     <Compile Include="Types\MixBlendMode.fs" />
     <Compile Include="Types\Mask.fs" />
+    <Compile Include="Types\ClipPath.fs" />
+    <Compile Include="Types\Content.fs" />
     <Compile Include="Types\FontFace.fs" />
     <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />

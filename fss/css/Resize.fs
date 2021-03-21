@@ -5,9 +5,9 @@ open FssTypes
 module Resize =
     let private resizeToString (resize: IResize) =
         match resize with
-        | :? Resize.Resize as r -> Utilities.Helpers.duToLowercase r
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? Resize as r -> Utilities.Helpers.duToLowercase r
+        | :? None' -> none
+        | :? Global as g -> global' g
         | _ -> "Unknown resize value"
 
     let private resizeValue value = PropertyValue.cssValue Property.Resize value
@@ -18,11 +18,11 @@ module Resize =
 
     type Resize =
         static member Value (resize: IResize) = resize |> resizeValue'
-        static member Both = Resize.Both |> resizeValue'
-        static member Horizontal = Resize.Horizontal |> resizeValue'
-        static member Vertical = Resize.Vertical |> resizeValue'
-        static member Block = Resize.Block |> resizeValue'
-        static member Inline = Resize.Inline |> resizeValue'
+        static member Both = FssTypes.Resize.Both |> resizeValue'
+        static member Horizontal = FssTypes.Resize.Horizontal |> resizeValue'
+        static member Vertical = FssTypes.Resize.Vertical |> resizeValue'
+        static member Block = FssTypes.Resize.Block |> resizeValue'
+        static member Inline = FssTypes.Resize.Inline |> resizeValue'
         static member None = None' |> resizeValue'
         static member Initial = Initial |> resizeValue'
         static member Inherit = Inherit |> resizeValue'

@@ -3,8 +3,8 @@ namespace FSSTests
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open Fss
 open FssTypes
+open Fss
 
 module Mask =
      let tests =
@@ -136,7 +136,7 @@ module Mask =
                     [ "maskMode" ==> "match-source" ]
                 test
                     "Mask mode multiple"
-                    [ MaskMode.Value([Mask.Alpha; Mask.MatchSource]) ]
+                    [ MaskMode.Value([Alpha; MatchSource]) ]
                     [ "maskMode" ==> "alpha, match-source" ]
                 test
                     "Mask mode inherit"
@@ -152,7 +152,7 @@ module Mask =
                     [ "maskMode" ==> "unset" ]
                 test
                     "MaskOrigin multiple"
-                    [ MaskOrigin.Value([Mask.MaskOrigin.ViewBox; Mask.MaskOrigin.FillBox; Mask.MaskOrigin.BorderBox])]
+                    [ MaskOrigin.Value([FssTypes.MaskOrigin.ViewBox; FssTypes.MaskOrigin.FillBox; FssTypes.MaskOrigin.BorderBox])]
                     [ "maskOrigin" ==> "view-box, fill-box, border-box" ]
                 test
                     "MaskOrigin content-box"
@@ -237,15 +237,15 @@ module Mask =
 
                 test
                     "MaskRepeat value"
-                    [ MaskRepeat.Value(Mask.Repeat)]
+                    [ MaskRepeat.Value(FssTypes.MaskRepeat.Repeat)]
                     [ "maskRepeat" ==> "repeat" ]
                 test
                     "MaskRepeat 2 value"
-                    [ MaskRepeat.Value(Mask.RepeatX, Mask.RepeatY)]
+                    [ MaskRepeat.Value(FssTypes.MaskRepeat.RepeatX, FssTypes.MaskRepeat.RepeatY)]
                     [ "maskRepeat" ==> "repeat-x repeat-y" ]
                 test
                     "MaskRepeat multiple values"
-                    [ MaskRepeat.Value([Mask.RepeatX, Mask.RepeatY; Mask.NoRepeat, Mask.Round])]
+                    [ MaskRepeat.Value([FssTypes.MaskRepeat.RepeatX, FssTypes.MaskRepeat.RepeatY; FssTypes.MaskRepeat.NoRepeat, FssTypes.MaskRepeat.Round])]
                     [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
                 test
                     "MaskRepeat repeatX"

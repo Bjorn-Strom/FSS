@@ -41,20 +41,20 @@ module Functions =
     /// <returns>Css property for fss.</returns>
     let Custom (key: string) (value: string) = key ==> value |> CssProperty
 
-    let frame (f: int) (properties: CssProperty list) = (f, properties) |> Frame
-    let frames (f: int list) (properties: CssProperty list) = (f, properties) |> Frames
+    let frame (f: int) (properties: CssProperty list) = (f, properties) |> Keyframes.Frame
+    let frames (f: int list) (properties: CssProperty list) = (f, properties) |> Keyframes.Frames
 
     let counterStyle (attributeList: CounterProperty list) =
         let counterName = sprintf "counter_%s" <| Guid.NewGuid().ToString()
 
         createCounterObject attributeList counterName |> css' |> ignore
 
-        counterName |> Counter.CounterStyle
+        counterName |> CounterStyle
 
     // Media
-    let MediaQueryFor (device: Media.Device) (features: Media.MediaFeature list) (attributeList: CssProperty list) =
+    let MediaQueryFor (device: Device) (features: MediaFeature list) (attributeList: CssProperty list) =
         Media.Media(device, features, attributeList)
-    let MediaQuery (features: Media.MediaFeature list) (attributeList: CssProperty list) =
+    let MediaQuery (features: MediaFeature list) (attributeList: CssProperty list) =
         Media.Media(features, attributeList)
 
     // Font
@@ -62,14 +62,14 @@ module Functions =
         attributeList
         |> createFontFaceObject fontFamily
         |> css'
-        Font.FontName fontFamily
+        FssTypes.FontName fontFamily
 
     let fontFaces (fontFamily: string) (attributeLists: CssProperty list list) =
         attributeLists
         |> List.map (createFontFaceObject fontFamily)
         |> css'
 
-        Font.FontName fontFamily
+        FssTypes.FontName fontFamily
 
     // Color
     let rgb (r: int) (g: int) (b: int) = CssColor.Rgb(r,g,b)

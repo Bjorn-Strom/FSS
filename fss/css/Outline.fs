@@ -7,33 +7,33 @@ module Outline  =
 
     let private outlineToString (color: IOutline) =
         match color with
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? Global as g -> global' g
+        | :? None' -> none
         | _ -> "Unknown outline"
 
     let private outlineColorToString (color: IOutlineColor) =
         match color with
         | :? CssColor as c -> CssColorValue.color c
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown outline color"
 
     let private outlineWidthToString (width: IOutlineWidth) =
         match width with
-            | :? Outline.OutlineWidth as c -> Utilities.Helpers.duToLowercase c
-            | :? Global as g -> GlobalValue.global' g
+            | :? OutlineWidth as c -> Utilities.Helpers.duToLowercase c
+            | :? Global as g -> global' g
             | :? Units.Size.Size as s -> Units.Size.value s
             | _ -> "Unknown outline width"
 
     let private outlineStyleToString (style: IOutlineStyle) =
         match style with
-            | :? Outline.OutlineStyle as c -> Utilities.Helpers.duToLowercase c
-            | :? Global as g -> GlobalValue.global' g
-            | :? None' -> GlobalValue.none
+            | :? OutlineStyle as c -> Utilities.Helpers.duToLowercase c
+            | :? Global as g -> global' g
+            | :? None' -> none
             | _ -> "Unknown outline style"
 
     let private outlineOffsetToString (style: IOutlineOffset) =
         match style with
-            | :? Global as g -> GlobalValue.global' g
+            | :? Global as g -> global' g
             | :? Units.Size.Size as s -> Units.Size.value s
             | _ -> "Unknown outline offset"
 
@@ -247,9 +247,9 @@ module Outline  =
 
     type OutlineWidth =
         static member Value (width: IOutlineWidth) = width |> outlineWidthValue'
-        static member Thin = Outline.Thin |> outlineWidthValue'
-        static member Medium = Outline.Medium |> outlineWidthValue'
-        static member Thick = Outline.Thick |> outlineWidthValue'
+        static member Thin = FssTypes.OutlineWidth.Thin |> outlineWidthValue'
+        static member Medium = FssTypes.OutlineWidth.Medium |> outlineWidthValue'
+        static member Thick = FssTypes.OutlineWidth.Thick |> outlineWidthValue'
 
         static member Inherit = Inherit |> outlineWidthValue'
         static member Initial = Initial |> outlineWidthValue'
@@ -277,15 +277,15 @@ module Outline  =
 
     type OutlineStyle =
         static member Value (style: IOutlineStyle) = style |> outlineStyleValue'
-        static member Hidden = Outline.Hidden |> outlineStyleValue'
-        static member Dotted = Outline.Dotted |> outlineStyleValue'
-        static member Dashed = Outline.Dashed |> outlineStyleValue'
-        static member Solid = Outline.Solid |> outlineStyleValue'
-        static member Double = Outline.Double |> outlineStyleValue'
-        static member Groove = Outline.Groove |> outlineStyleValue'
-        static member Ridge = Outline.Ridge |> outlineStyleValue'
-        static member Inset = Outline.Inset |> outlineStyleValue'
-        static member Outset = Outline.Outset |> outlineStyleValue'
+        static member Hidden = FssTypes.OutlineStyle.Hidden |> outlineStyleValue'
+        static member Dotted = FssTypes.OutlineStyle.Dotted |> outlineStyleValue'
+        static member Dashed = FssTypes.OutlineStyle.Dashed |> outlineStyleValue'
+        static member Solid = FssTypes.OutlineStyle.Solid |> outlineStyleValue'
+        static member Double = FssTypes.OutlineStyle.Double |> outlineStyleValue'
+        static member Groove = FssTypes.OutlineStyle.Groove |> outlineStyleValue'
+        static member Ridge = FssTypes.OutlineStyle.Ridge |> outlineStyleValue'
+        static member Inset = FssTypes.OutlineStyle.Inset |> outlineStyleValue'
+        static member Outset = FssTypes.OutlineStyle.Outset |> outlineStyleValue'
 
         static member None = None' |> outlineStyleValue'
         static member Inherit = Inherit |> outlineStyleValue'

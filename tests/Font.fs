@@ -3,8 +3,8 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
-open Fss
 open FssTypes
+open Fss
 
 module Font =
     let tests =
@@ -348,15 +348,15 @@ module Font =
                      [ "fontFamily" ==> "unset" ]
                 test
                     "Font families"
-                    [ FontFamily.Values ([ Font.Serif; Font.Monospace ]) ]
+                    [ FontFamily.Values ([ Serif; Monospace ]) ]
                     [ "fontFamily" ==> "serif, monospace" ]
                 test
                     "font feature setting On"
-                    [ FontFeatureSetting.Liga Font.On ]
+                    [ FontFeatureSetting.Liga On ]
                     [ "fontFeatureSettings" ==> "\"liga\" On" ]
                 test
                     "font feature setting Off"
-                    [ FontFeatureSetting.Liga Font.Off ]
+                    [ FontFeatureSetting.Liga Off ]
                     [ "fontFeatureSettings" ==> "\"liga\" Off" ]
                 test
                     "font feature setting initial"

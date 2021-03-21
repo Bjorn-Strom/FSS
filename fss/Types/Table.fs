@@ -1,22 +1,20 @@
 namespace FssTypes
 
-[<RequireQualifiedAccess>]
-module Table =
-    type CaptionSide =
-        | Top
-        | Bottom
-        | Left
-        | Right
-        | TopOutside
-        | BottomOutside
-        interface ICaptionSide
+type CaptionSide =
+    | Top
+    | Bottom
+    | Left
+    | Right
+    | TopOutside
+    | BottomOutside
+    interface ICaptionSide
 
-    type EmptyCells =
-        | Show
-        | Hide
-        interface IEmptyCells
+type EmptyCells =
+    | Show
+    | Hide
+    interface IEmptyCells
 
-    type TableLayout =
-        | Fixed
-        interface ITableLayout
+type TableLayout =
+    | Fixed
+    interface ITableLayout
 

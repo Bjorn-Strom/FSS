@@ -5,10 +5,10 @@ open FssTypes
 module PointerEvents =
     let private eventToString (event: IPointerEvents) =
         match event with
-        | :? PointerEvents.PointerEvents as p -> Utilities.Helpers.duToCamel p
-        | :? Auto -> GlobalValue.auto
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? PointerEvents as p -> Utilities.Helpers.duToCamel p
+        | :? Auto -> auto
+        | :? None' -> none
+        | :? Global as g -> global' g
         | _ -> "Unknown pointer event"
 
     let private pointerEventsValue value = PropertyValue.cssValue Property.PointerEvents value
@@ -20,13 +20,13 @@ module PointerEvents =
     type PointerEvents =
         static member Value (pointerEvents: IPointerEvents) = pointerEvents |> pointerEventsValue
 
-        static member VisiblePainted = PointerEvents.VisiblePainted |> pointerEventsValue'
-        static member VisibleFill = PointerEvents.VisibleFill |> pointerEventsValue'
-        static member VisibleStroke = PointerEvents.VisibleStroke |> pointerEventsValue'
-        static member Visible = PointerEvents.Visible |> pointerEventsValue'
-        static member Painted = PointerEvents.Painted |> pointerEventsValue'
-        static member Stroke = PointerEvents.Stroke |> pointerEventsValue'
-        static member All = PointerEvents.All |> pointerEventsValue'
+        static member VisiblePainted = FssTypes.PointerEvents.VisiblePainted |> pointerEventsValue'
+        static member VisibleFill = FssTypes.PointerEvents.VisibleFill |> pointerEventsValue'
+        static member VisibleStroke = FssTypes.PointerEvents.VisibleStroke |> pointerEventsValue'
+        static member Visible = FssTypes.PointerEvents.Visible |> pointerEventsValue'
+        static member Painted = FssTypes.PointerEvents.Painted |> pointerEventsValue'
+        static member Stroke = FssTypes.PointerEvents.Stroke |> pointerEventsValue'
+        static member All = FssTypes.PointerEvents.All |> pointerEventsValue'
 
         static member Auto = Auto |> pointerEventsValue'
         static member Inherit = Inherit |> pointerEventsValue'

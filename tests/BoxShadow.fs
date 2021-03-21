@@ -55,7 +55,7 @@ module BoxShadow =
                     [
                         BoxShadows
                             [
-                                Inset <| BoxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, CssColor.chocolate)
+                                BoxShadow.Inset <| BoxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, CssColor.chocolate)
                             ]
                     ]
                     [ "boxShadow" ==> "inset 1px 100px 1.5vh 1px #d2691e" ]

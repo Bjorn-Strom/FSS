@@ -6,90 +6,90 @@ module Flex =
 
     let private alignContentToString (alignment: IAlignContent) =
         match alignment with
-        | :? Flex.AlignContent as a -> Utilities.Helpers.duToKebab a
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? AlignContent as a -> Utilities.Helpers.duToKebab a
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown align content"
 
     let private alignItemsToString (alignment: IAlignItems) =
         match alignment with
-        | :? Flex.AlignItems as a -> Utilities.Helpers.duToKebab a
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? AlignItems as a -> Utilities.Helpers.duToKebab a
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown align items"
 
     let private alignSelfToString (alignment: IAlignSelf) =
         match alignment with
-        | :? Flex.AlignSelf as a -> Utilities.Helpers.duToKebab a
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? AlignSelf as a -> Utilities.Helpers.duToKebab a
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown align self"
 
     let private justifyContentToString (justification: IJustifyContent) =
         match justification with
-        | :? Flex.JustifyContent as a -> Utilities.Helpers.duToKebab a
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? JustifyContent as a -> Utilities.Helpers.duToKebab a
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown justify content"
 
     let private justifyItemsToString (justification: IJustifyItems) =
         match justification with
-        | :? Flex.JustifyItems as a -> Utilities.Helpers.duToKebab a
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? JustifyItems as a -> Utilities.Helpers.duToKebab a
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown justify items"
 
     let private justifySelfToString (justification: IJustifySelf) =
         match justification with
-        | :? Flex.JustifySelf as a -> Utilities.Helpers.duToKebab a
-        | :? Normal -> GlobalValue.normal
-        | :? Global as g -> GlobalValue.global' g
+        | :? JustifySelf as a -> Utilities.Helpers.duToKebab a
+        | :? Normal -> normal
+        | :? Global as g -> global' g
         | _ -> "Unknown justify self"
 
     let private flexDirectionToString (direction: IFlexDirection) =
         match direction with
-        | :? Flex.FlexDirection as a -> Utilities.Helpers.duToKebab a
-        | :? Global as g -> GlobalValue.global' g
+        | :? FlexDirection as a -> Utilities.Helpers.duToKebab a
+        | :? Global as g -> global' g
         | _ -> "Unknown flex direction"
 
     let private flexToString(flex: IFlex) =
         match flex with
-        | :? Global as g -> GlobalValue.global' g
-        | :? Auto -> GlobalValue.auto
-        | :? None' -> GlobalValue.none
+        | :? Global as g -> global' g
+        | :? Auto -> auto
+        | :? None' -> none
         | _ -> "Unknown flex"
 
     let private flexWrapToString (direction: IFlexWrap) =
         match direction with
-        | :? Flex.FlexWrap as a -> Utilities.Helpers.duToKebab a
-        | :? Global as g -> GlobalValue.global' g
+        | :? FlexWrap as a -> Utilities.Helpers.duToKebab a
+        | :? Global as g -> global' g
         | _ -> "Unknown flex wrap"
 
     let private orderToString (order: IOrder) =
         match order with
-        | :? CssInt as i -> GlobalValue.int i
-        | :? Global as g -> GlobalValue.global' g
+        | :? CssInt as i -> cssIntToString i
+        | :? Global as g -> global' g
         | _ -> "Unknown order"
 
     let private flexGrowToString (flexGrow: IFlexGrow) =
         match flexGrow with
-        | :? Global.CssFloat as f -> GlobalValue.float f
-        | :? Global as g -> GlobalValue.global' g
+        | :? CssFloat as f -> cssFloatToString f
+        | :? Global as g -> global' g
         | _ -> "Unknown flex grow"
 
     let private flexShrinkToString (flexShrink: IFlexShrink) =
         match flexShrink with
-        | :? Global.CssFloat as f -> GlobalValue.float f
-        | :? Global as g -> GlobalValue.global' g
+        | :? CssFloat as f -> cssFloatToString f
+        | :? Global as g -> global' g
         | _ -> "Unknown flex shrink"
 
     let private flexBasisToString (basis: IFlexBasis) =
         match basis with
-        | :? Flex.FlexBasis as b -> Utilities.Helpers.duToKebab b
-        | :? Auto -> GlobalValue.auto
+        | :? FlexBasis as b -> Utilities.Helpers.duToKebab b
+        | :? Auto -> auto
         | :? Units.Size.Size as s -> Units.Size.value s
         | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown flex basis"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
@@ -101,20 +101,20 @@ module Flex =
 
     type AlignContent =
         static member Value (alignment: IAlignContent) = alignment |> alignContentValue'
-        static member Start = Flex.AlignContent.Start |> alignContentValue'
-        static member End = Flex.AlignContent.End |> alignContentValue'
-        static member FlexStart = Flex.AlignContent.FlexStart |> alignContentValue'
-        static member FlexEnd = Flex.AlignContent.FlexEnd |> alignContentValue'
-        static member Center = Flex.AlignContent.Center |> alignContentValue'
-        static member Baseline = Flex.AlignContent.Baseline |> alignContentValue'
-        static member FirstBaseline = Flex.AlignContent.FirstBaseline |> alignContentValue'
-        static member LastBaseline = Flex.AlignContent.LastBaseline |> alignContentValue'
-        static member Stretch = Flex.AlignContent.Stretch |> alignContentValue'
-        static member Safe = Flex.AlignContent.Safe |> alignContentValue'
-        static member Unsafe = Flex.AlignContent.Unsafe |> alignContentValue'
-        static member SpaceBetween = Flex.AlignContent.SpaceBetween |> alignContentValue'
-        static member SpaceAround = Flex.AlignContent.SpaceAround |> alignContentValue'
-        static member SpaceEvenly = Flex.AlignContent.SpaceEvenly |> alignContentValue'
+        static member Start = FssTypes.AlignContent.Start |> alignContentValue'
+        static member End = FssTypes.AlignContent.End |> alignContentValue'
+        static member FlexStart = FssTypes.AlignContent.FlexStart |> alignContentValue'
+        static member FlexEnd = FssTypes.AlignContent.FlexEnd |> alignContentValue'
+        static member Center = FssTypes.AlignContent.Center |> alignContentValue'
+        static member Baseline = FssTypes.AlignContent.Baseline |> alignContentValue'
+        static member FirstBaseline = FssTypes.AlignContent.FirstBaseline |> alignContentValue'
+        static member LastBaseline = FssTypes.AlignContent.LastBaseline |> alignContentValue'
+        static member Stretch = FssTypes.AlignContent.Stretch |> alignContentValue'
+        static member Safe = FssTypes.AlignContent.Safe |> alignContentValue'
+        static member Unsafe = FssTypes.AlignContent.Unsafe |> alignContentValue'
+        static member SpaceBetween = FssTypes.AlignContent.SpaceBetween |> alignContentValue'
+        static member SpaceAround = FssTypes.AlignContent.SpaceAround |> alignContentValue'
+        static member SpaceEvenly = FssTypes.AlignContent.SpaceEvenly |> alignContentValue'
 
         static member Normal = Normal |> alignContentValue'
         static member Inherit = Inherit |> alignContentValue'
@@ -142,19 +142,19 @@ module Flex =
 
     type AlignItems =
         static member Value (alignment: IAlignItems) = alignment |> alignItemsValue'
-        static member Start = Flex.AlignItems.Start |> alignItemsValue'
-        static member End = Flex.AlignItems.End |> alignItemsValue'
-        static member FlexStart = Flex.AlignItems.FlexStart |> alignItemsValue'
-        static member FlexEnd = Flex.AlignItems.FlexEnd |> alignItemsValue'
-        static member Center = Flex.AlignItems.Center |> alignItemsValue'
-        static member Baseline = Flex.AlignItems.Baseline |> alignItemsValue'
-        static member FirstBaseline = Flex.AlignItems.FirstBaseline |> alignItemsValue'
-        static member LastBaseline = Flex.AlignItems.LastBaseline |> alignItemsValue'
-        static member Stretch = Flex.AlignItems.Stretch |> alignItemsValue'
-        static member Safe = Flex.AlignItems.Safe |> alignItemsValue'
-        static member Unsafe = Flex.AlignItems.Unsafe |> alignItemsValue'
-        static member SelfStart = Flex.AlignItems.SelfStart |> alignItemsValue'
-        static member SelfEnd = Flex.AlignItems.SelfEnd |> alignItemsValue'
+        static member Start = FssTypes.AlignItems.Start |> alignItemsValue'
+        static member End = FssTypes.AlignItems.End |> alignItemsValue'
+        static member FlexStart = FssTypes.AlignItems.FlexStart |> alignItemsValue'
+        static member FlexEnd = FssTypes.AlignItems.FlexEnd |> alignItemsValue'
+        static member Center = FssTypes.AlignItems.Center |> alignItemsValue'
+        static member Baseline = FssTypes.AlignItems.Baseline |> alignItemsValue'
+        static member FirstBaseline = FssTypes.AlignItems.FirstBaseline |> alignItemsValue'
+        static member LastBaseline = FssTypes.AlignItems.LastBaseline |> alignItemsValue'
+        static member Stretch = FssTypes.AlignItems.Stretch |> alignItemsValue'
+        static member Safe = FssTypes.AlignItems.Safe |> alignItemsValue'
+        static member Unsafe = FssTypes.AlignItems.Unsafe |> alignItemsValue'
+        static member SelfStart = FssTypes.AlignItems.SelfStart |> alignItemsValue'
+        static member SelfEnd = FssTypes.AlignItems.SelfEnd |> alignItemsValue'
 
         static member Normal = Normal |> alignItemsValue'
         static member Inherit = Inherit |> alignItemsValue'
@@ -182,19 +182,19 @@ module Flex =
 
     type AlignSelf =
         static member Value (alignment: IAlignSelf) = alignment |> alignSelfValue'
-        static member Start = Flex.AlignSelf.Start |> alignSelfValue'
-        static member End = Flex.AlignSelf.End |> alignSelfValue'
-        static member FlexStart = Flex.AlignSelf.FlexStart |> alignSelfValue'
-        static member FlexEnd = Flex.AlignSelf.FlexEnd |> alignSelfValue'
-        static member Center = Flex.AlignSelf.Center |> alignSelfValue'
-        static member Baseline = Flex.AlignSelf.Baseline |> alignSelfValue'
-        static member FirstBaseline = Flex.AlignSelf.FirstBaseline |> alignSelfValue'
-        static member LastBaseline = Flex.AlignSelf.LastBaseline |> alignSelfValue'
-        static member Stretch = Flex.AlignSelf.Stretch |> alignSelfValue'
-        static member Safe = Flex.AlignSelf.Safe |> alignSelfValue'
-        static member Unsafe = Flex.AlignSelf.Unsafe |> alignSelfValue'
-        static member SelfStart = Flex.AlignSelf.SelfStart |> alignSelfValue'
-        static member SelfEnd = Flex.AlignSelf.SelfEnd |> alignSelfValue'
+        static member Start = FssTypes.AlignSelf.Start |> alignSelfValue'
+        static member End = FssTypes.AlignSelf.End |> alignSelfValue'
+        static member FlexStart = FssTypes.AlignSelf.FlexStart |> alignSelfValue'
+        static member FlexEnd = FssTypes.AlignSelf.FlexEnd |> alignSelfValue'
+        static member Center = FssTypes.AlignSelf.Center |> alignSelfValue'
+        static member Baseline = FssTypes.AlignSelf.Baseline |> alignSelfValue'
+        static member FirstBaseline = FssTypes.AlignSelf.FirstBaseline |> alignSelfValue'
+        static member LastBaseline = FssTypes.AlignSelf.LastBaseline |> alignSelfValue'
+        static member Stretch = FssTypes.AlignSelf.Stretch |> alignSelfValue'
+        static member Safe = FssTypes.AlignSelf.Safe |> alignSelfValue'
+        static member Unsafe = FssTypes.AlignSelf.Unsafe |> alignSelfValue'
+        static member SelfStart = FssTypes.AlignSelf.SelfStart |> alignSelfValue'
+        static member SelfEnd = FssTypes.AlignSelf.SelfEnd |> alignSelfValue'
 
         static member Normal = Normal |> alignSelfValue'
         static member Inherit = Inherit |> alignSelfValue'
@@ -222,22 +222,22 @@ module Flex =
 
     type JustifyContent =
         static member Value (justification: IJustifyContent) = justification |> justifyContentValue
-        static member Start = Flex.JustifyContent.Start |> justifyContentValue'
-        static member End = Flex.JustifyContent.End |> justifyContentValue'
-        static member FlexStart = Flex.JustifyContent.FlexStart |> justifyContentValue'
-        static member FlexEnd = Flex.JustifyContent.FlexEnd |> justifyContentValue'
-        static member Center = Flex.JustifyContent.Center |> justifyContentValue'
-        static member Baseline = Flex.JustifyContent.Baseline |> justifyContentValue'
-        static member FirstBaseline = Flex.JustifyContent.FirstBaseline |> justifyContentValue'
-        static member LastBaseline = Flex.JustifyContent.LastBaseline |> justifyContentValue'
-        static member Stretch = Flex.JustifyContent.Stretch |> justifyContentValue'
-        static member Safe = Flex.JustifyContent.Safe |> justifyContentValue'
-        static member Unsafe = Flex.JustifyContent.Unsafe |> justifyContentValue'
-        static member Left = Flex.JustifyContent.Left |> justifyContentValue'
-        static member Right = Flex.JustifyContent.Right |> justifyContentValue'
-        static member SpaceBetween = Flex.JustifyContent.SpaceBetween |> justifyContentValue'
-        static member SpaceAround = Flex.JustifyContent.SpaceAround |> justifyContentValue'
-        static member SpaceEvenly = Flex.JustifyContent.SpaceEvenly |> justifyContentValue'
+        static member Start = FssTypes.JustifyContent.Start |> justifyContentValue'
+        static member End = FssTypes.JustifyContent.End |> justifyContentValue'
+        static member FlexStart = FssTypes.JustifyContent.FlexStart |> justifyContentValue'
+        static member FlexEnd = FssTypes.JustifyContent.FlexEnd |> justifyContentValue'
+        static member Center = FssTypes.JustifyContent.Center |> justifyContentValue'
+        static member Baseline = FssTypes.JustifyContent.Baseline |> justifyContentValue'
+        static member FirstBaseline = FssTypes.JustifyContent.FirstBaseline |> justifyContentValue'
+        static member LastBaseline = FssTypes.JustifyContent.LastBaseline |> justifyContentValue'
+        static member Stretch = FssTypes.JustifyContent.Stretch |> justifyContentValue'
+        static member Safe = FssTypes.JustifyContent.Safe |> justifyContentValue'
+        static member Unsafe = FssTypes.JustifyContent.Unsafe |> justifyContentValue'
+        static member Left = FssTypes.JustifyContent.Left |> justifyContentValue'
+        static member Right = FssTypes.JustifyContent.Right |> justifyContentValue'
+        static member SpaceBetween = FssTypes.JustifyContent.SpaceBetween |> justifyContentValue'
+        static member SpaceAround = FssTypes.JustifyContent.SpaceAround |> justifyContentValue'
+        static member SpaceEvenly = FssTypes.JustifyContent.SpaceEvenly |> justifyContentValue'
 
         static member Normal = Normal |> justifyContentValue'
         static member Inherit = Inherit |> justifyContentValue'
@@ -265,22 +265,22 @@ module Flex =
 
     type JustifyItems =
         static member Value (justification: IJustifyItems) = justification |> justifyItemsValue'
-        static member Start = Flex.JustifyItems.Start |> justifyItemsValue'
-        static member End = Flex.JustifyItems.End |> justifyItemsValue'
-        static member FlexStart = Flex.JustifyItems.FlexStart |> justifyItemsValue'
-        static member FlexEnd = Flex.JustifyItems.FlexEnd |> justifyItemsValue'
-        static member Center = Flex.JustifyItems.Center |> justifyItemsValue'
-        static member Baseline = Flex.JustifyItems.Baseline |> justifyItemsValue'
-        static member FirstBaseline = Flex.JustifyItems.FirstBaseline |> justifyItemsValue'
-        static member LastBaseline = Flex.JustifyItems.LastBaseline |> justifyItemsValue'
-        static member Stretch = Flex.JustifyItems.Stretch |> justifyItemsValue'
-        static member Safe = Flex.JustifyItems.Safe |> justifyItemsValue'
-        static member Unsafe = Flex.JustifyItems.Unsafe |> justifyItemsValue'
-        static member Left = Flex.JustifyItems.Left |> justifyItemsValue'
-        static member Right = Flex.JustifyItems.Right |> justifyItemsValue'
-        static member SelfStart = Flex.JustifyItems.SelfStart |> justifyItemsValue'
-        static member SelfEnd = Flex.JustifyItems.SelfEnd |> justifyItemsValue'
-        static member Legacy = Flex.JustifyItems.Legacy |> justifyItemsValue'
+        static member Start = FssTypes.JustifyItems.Start |> justifyItemsValue'
+        static member End = FssTypes.JustifyItems.End |> justifyItemsValue'
+        static member FlexStart = FssTypes.JustifyItems.FlexStart |> justifyItemsValue'
+        static member FlexEnd = FssTypes.JustifyItems.FlexEnd |> justifyItemsValue'
+        static member Center = FssTypes.JustifyItems.Center |> justifyItemsValue'
+        static member Baseline = FssTypes.JustifyItems.Baseline |> justifyItemsValue'
+        static member FirstBaseline = FssTypes.JustifyItems.FirstBaseline |> justifyItemsValue'
+        static member LastBaseline = FssTypes.JustifyItems.LastBaseline |> justifyItemsValue'
+        static member Stretch = FssTypes.JustifyItems.Stretch |> justifyItemsValue'
+        static member Safe = FssTypes.JustifyItems.Safe |> justifyItemsValue'
+        static member Unsafe = FssTypes.JustifyItems.Unsafe |> justifyItemsValue'
+        static member Left = FssTypes.JustifyItems.Left |> justifyItemsValue'
+        static member Right = FssTypes.JustifyItems.Right |> justifyItemsValue'
+        static member SelfStart = FssTypes.JustifyItems.SelfStart |> justifyItemsValue'
+        static member SelfEnd = FssTypes.JustifyItems.SelfEnd |> justifyItemsValue'
+        static member Legacy = FssTypes.JustifyItems.Legacy |> justifyItemsValue'
 
         static member Normal = Normal |> justifyItemsValue'
         static member Inherit = Inherit |> justifyItemsValue'
@@ -307,19 +307,19 @@ module Flex =
         |> justifySelfValue
     type JustifySelf =
         static member Value (justification: IJustifySelf) = justification |> justifySelfValue'
-        static member Start = Flex.JustifySelf.Start |> justifySelfValue'
-        static member End = Flex.JustifySelf.End |> justifySelfValue'
-        static member FlexStart = Flex.JustifySelf.FlexStart |> justifySelfValue'
-        static member FlexEnd = Flex.JustifySelf.FlexEnd |> justifySelfValue'
-        static member Center = Flex.JustifySelf.Center |> justifySelfValue'
-        static member Baseline = Flex.JustifySelf.Baseline |> justifySelfValue'
-        static member FirstBaseline = Flex.JustifySelf.FirstBaseline |> justifySelfValue'
-        static member LastBaseline = Flex.JustifySelf.LastBaseline |> justifySelfValue'
-        static member Stretch = Flex.JustifySelf.Stretch |> justifySelfValue'
-        static member Safe = Flex.JustifySelf.Safe |> justifySelfValue'
-        static member Unsafe = Flex.JustifySelf.Unsafe |> justifySelfValue'
-        static member SelfStart = Flex.JustifySelf.SelfStart |> justifySelfValue'
-        static member SelfEnd = Flex.JustifySelf.SelfEnd |> justifySelfValue'
+        static member Start = FssTypes.JustifySelf.Start |> justifySelfValue'
+        static member End = FssTypes.JustifySelf.End |> justifySelfValue'
+        static member FlexStart = FssTypes.JustifySelf.FlexStart |> justifySelfValue'
+        static member FlexEnd = FssTypes.JustifySelf.FlexEnd |> justifySelfValue'
+        static member Center = FssTypes.JustifySelf.Center |> justifySelfValue'
+        static member Baseline = FssTypes.JustifySelf.Baseline |> justifySelfValue'
+        static member FirstBaseline = FssTypes.JustifySelf.FirstBaseline |> justifySelfValue'
+        static member LastBaseline = FssTypes.JustifySelf.LastBaseline |> justifySelfValue'
+        static member Stretch = FssTypes.JustifySelf.Stretch |> justifySelfValue'
+        static member Safe = FssTypes.JustifySelf.Safe |> justifySelfValue'
+        static member Unsafe = FssTypes.JustifySelf.Unsafe |> justifySelfValue'
+        static member SelfStart = FssTypes.JustifySelf.SelfStart |> justifySelfValue'
+        static member SelfEnd = FssTypes.JustifySelf.SelfEnd |> justifySelfValue'
 
         static member Normal = Normal |> justifySelfValue'
         static member Inherit = Inherit |> justifySelfValue'
@@ -347,10 +347,10 @@ module Flex =
 
     type FlexDirection =
         static member Value (direction: IFlexDirection) = direction |> flexDirectionValue'
-        static member Row = Flex.Row |> flexDirectionValue'
-        static member RowReverse = Flex.RowReverse |> flexDirectionValue'
-        static member Column = Flex.Column |> flexDirectionValue'
-        static member ColumnReverse = Flex.ColumnReverse |> flexDirectionValue'
+        static member Row = FssTypes.FlexDirection.Row |> flexDirectionValue'
+        static member RowReverse = FssTypes.FlexDirection.RowReverse |> flexDirectionValue'
+        static member Column = FssTypes.FlexDirection.Column |> flexDirectionValue'
+        static member ColumnReverse = FssTypes.FlexDirection.ColumnReverse |> flexDirectionValue'
 
         static member Inherit = Inherit |> flexDirectionValue'
         static member Initial = Initial |> flexDirectionValue'
@@ -375,9 +375,9 @@ module Flex =
         |> flexWrapValue
     type FlexWrap =
         static member Value (direction: IFlexWrap) = direction |> flexWrapValue'
-        static member NoWrap = Flex.NoWrap |> flexWrapValue'
-        static member Wrap = Flex.Wrap |> flexWrapValue'
-        static member WrapReverse = Flex.WrapReverse |> flexWrapValue'
+        static member NoWrap = FssTypes.FlexWrap.NoWrap |> flexWrapValue'
+        static member Wrap = FssTypes.FlexWrap.Wrap |> flexWrapValue'
+        static member WrapReverse = FssTypes.FlexWrap.WrapReverse |> flexWrapValue'
 
         static member Inherit = Inherit |> flexWrapValue'
         static member Initial = Initial |> flexWrapValue'
@@ -476,11 +476,11 @@ module Flex =
 
     type FlexBasis =
         static member Value (basis: IFlexBasis) = basis |> flexBasisValue'
-        static member Fill = Flex.Fill |> flexBasisValue'
-        static member MaxContent = Flex.MaxContent |> flexBasisValue'
-        static member MinContent = Flex.MinContent |> flexBasisValue'
-        static member FitContent = Flex.FitContent |> flexBasisValue'
-        static member Content = Flex.Content |> flexBasisValue'
+        static member Fill = FssTypes.FlexBasis.Fill |> flexBasisValue'
+        static member MaxContent = FssTypes.FlexBasis.MaxContent |> flexBasisValue'
+        static member MinContent = FssTypes.FlexBasis.MinContent |> flexBasisValue'
+        static member FitContent = FssTypes.FlexBasis.FitContent |> flexBasisValue'
+        static member Content = FssTypes.FlexBasis.Content |> flexBasisValue'
 
         static member Auto = Auto |> flexBasisValue'
         static member Inherit = Inherit |> flexBasisValue'

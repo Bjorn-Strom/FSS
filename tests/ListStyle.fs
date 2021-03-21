@@ -3,6 +3,7 @@
 open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
+open FssTypes
 open Fss
 
 module ListStyle =
@@ -101,7 +102,7 @@ module ListStyle =
                     [ "listStyleType" ==> "kannada" ]
                 test
                     "List style type string"
-                    [ ListStyleType' (FssTypes.Global.CssString "-") ]
+                    [ ListStyleType' (CssString "-") ]
                     [ "listStyleType" ==> "'-'" ]
                 test
                     "List style type custom"

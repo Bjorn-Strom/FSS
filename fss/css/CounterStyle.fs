@@ -16,8 +16,8 @@ module Counter =
         static member Fixed = "system" ==> "fixed" |> CounterProperty
         static member FixedValue (value: int) =
             "system" ==> sprintf "fixed %d" value |> CounterProperty
-        static member Extends (system: System) =
-            "system" ==> sprintf "extends %s" (string system) |> CounterProperty
+        static member Extends (extend: FssTypes.ListStyleType) =
+            "system" ==> sprintf "extends %s" (Utilities.Helpers.duToKebab extend) |> CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/negative
     type Negative =
@@ -61,7 +61,7 @@ module Counter =
             (urls
             |> List.map (fun u -> sprintf "url('%s')" u)
             |> String.concat " ") |> CounterProperty
-        static member Custom (custom: Counter.CounterStyle) = "symbols" ==> Counter.counterValue custom |> CounterProperty
+        static member Custom (custom: FssTypes.CounterStyle) = "symbols" ==> Counter.counterValue custom |> CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/additive-symbols
     type AdditiveSymbolType =
@@ -89,19 +89,19 @@ module Counter =
         static member Numbers = "speak-as" ==> "numbers" |> CounterProperty
         static member Words = "speak-as" ==> "words" |> CounterProperty
         static member SpellOut = "speak-as" ==> "spell-out" |> CounterProperty
-        static member CounterStyle (counter: Counter.CounterStyle) = "speak-as" ==> Counter.counterValue counter |> CounterProperty
+        static member CounterStyle (counter: FssTypes.CounterStyle) = "speak-as" ==> Counter.counterValue counter |> CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-reset
     let private counterResetToString (reset: ICounterReset) =
         let stringifyReset =
             function
-                | Counter.Reset counter -> Counter.counterValue counter
-                | Counter.ResetTo (counter, number) -> sprintf "%A %d" (Counter.counterValue counter) number
+                | Reset counter -> Counter.counterValue counter
+                | ResetTo (counter, number) -> sprintf "%A %d" (Counter.counterValue counter) number
 
         match reset with
-        | :? Counter.CounterReset as cr -> stringifyReset cr
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? CounterReset as cr -> stringifyReset cr
+        | :? None' -> none
+        | :? Global as g -> global' g
         | _ -> "Unknown counter reset"
 
     let private counterResetValue value = PropertyValue.cssValue Property.CounterReset value
@@ -112,26 +112,26 @@ module Counter =
 
     type CounterReset =
         static member Value (counterReset: ICounterReset) = counterReset |> counterResetValue'
-        static member Reset (counter: Counter.CounterStyle) = counter |> Counter.Reset |> counterResetValue'
-        static member ResetTo (counter: Counter.CounterStyle) (value: int) = Counter.ResetTo(counter, value) |> counterResetValue'
+        static member Reset (counter: CounterStyle) = counter |> Reset |> counterResetValue'
+        static member ResetTo (counter: CounterStyle) (value: int) = ResetTo(counter, value) |> counterResetValue'
         static member None = None' |> counterResetValue'
         static member Inherit = Inherit |> counterResetValue'
         static member Initial = Initial |> counterResetValue'
         static member Unset = Unset |> counterResetValue'
 
-    let CounterReset' (counterReset: Counter.CounterStyle) = counterReset |> Counter.Reset |> CounterReset.Value
+    let CounterReset' (counterReset: CounterStyle) = counterReset |> Reset |> CounterReset.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment
     let private counterIncrementToString (increment: ICounterIncrement) =
         let stringifyIncrement =
             function
-                | Counter.Increment counter -> Counter.counterValue counter
-                | Counter.Add (counter, number) -> sprintf "%A %d" (Counter.counterValue counter) number
+                | Increment counter -> Counter.counterValue counter
+                | CounterIncrement.Add (counter, number) -> sprintf "%A %d" (Counter.counterValue counter) number
 
         match increment with
-        | :? Counter.CounterIncrement as cr -> stringifyIncrement cr
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? CounterIncrement as cr -> stringifyIncrement cr
+        | :? None' -> none
+        | :? Global as g -> global' g
         | _ -> "Unknown counter increment"
 
     let private counterIncrementValue value = PropertyValue.cssValue Property.CounterIncrement value
@@ -142,18 +142,18 @@ module Counter =
 
     type CounterIncrement =
         static member Value (counterIncrement: ICounterIncrement) = counterIncrement |> counterIncrementValue'
-        static member Increment (counter: Counter.CounterStyle) = counter |> Counter.Increment |> counterIncrementValue'
-        static member IncrementTo (counter: Counter.CounterStyle) (value: int) = Counter.Add(counter, value) |> counterIncrementValue'
+        static member Increment (counter: CounterStyle) = counter |> Increment |> counterIncrementValue'
+        static member IncrementTo (counter: CounterStyle) (value: int) = CounterIncrement.Add(counter, value) |> counterIncrementValue'
         static member None = None' |> counterIncrementValue'
         static member Inherit = Inherit |> counterIncrementValue'
         static member Initial = Initial |> counterIncrementValue'
         static member Unset = Unset |> counterIncrementValue'
 
-    let CounterIncrement' (counterIncrement: Counter.CounterStyle) = counterIncrement |> Counter.Increment |> CounterIncrement.Value
+    let CounterIncrement' (counterIncrement: CounterStyle) = counterIncrement |> Increment |> CounterIncrement.Value
 
     let createCounterObject (attributeList: CounterProperty list) counterName =
         createObj
             [
                 sprintf "@counter-style %s"
-                    counterName ==> createObj (attributeList |> List.map GlobalValue.CounterValue)
+                    counterName ==> createObj (attributeList |> List.map CounterValue)
             ]

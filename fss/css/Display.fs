@@ -7,9 +7,9 @@ module Display =
 
     let private displayToString (display: IDisplay) =
         match display with
-        | :? Display.Display as t -> Utilities.Helpers.duToKebab t
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? Display as t -> Utilities.Helpers.duToKebab t
+        | :? None' -> none
+        | :? Global as g -> global' g
         | _ -> "Unknown display type"
 
     let private displayValue value = PropertyValue.cssValue Property.Display value
@@ -20,22 +20,22 @@ module Display =
 
     type Display =
         static member Value (display: IDisplay) = display |> displayValue'
-        static member Inline = Display.Inline |> displayValue'
-        static member InlineBlock = Display.InlineBlock |> displayValue'
-        static member Block = Display.Block |> displayValue'
-        static member RunIn = Display.RunIn |> displayValue'
-        static member Flex = Display.Flex |> displayValue'
-        static member Grid = Display.Grid |> displayValue'
-        static member FlowRoot = Display.FlowRoot |> displayValue'
-        static member Table = Display.Table |> displayValue'
-        static member TableCell = Display.TableCell |> displayValue'
-        static member TableColumn = Display.TableColumn |> displayValue'
-        static member TableColumnGroup = Display.TableColumnGroup |> displayValue'
-        static member TableHeaderGroup = Display.TableHeaderGroup |> displayValue'
-        static member TableRowGroup = Display.TableRowGroup |> displayValue'
-        static member TableFooterGroup = Display.TableFooterGroup |> displayValue'
-        static member TableRow = Display.TableRow |> displayValue'
-        static member TableCaption = Display.TableCaption |> displayValue'
+        static member Inline = FssTypes.Display.Inline |> displayValue'
+        static member InlineBlock = FssTypes.Display.InlineBlock |> displayValue'
+        static member Block = FssTypes.Display.Block |> displayValue'
+        static member RunIn = FssTypes.Display.RunIn |> displayValue'
+        static member Flex = FssTypes.Display.Flex |> displayValue'
+        static member Grid = FssTypes.Display.Grid |> displayValue'
+        static member FlowRoot = FssTypes.Display.FlowRoot |> displayValue'
+        static member Table = FssTypes.Display.Table |> displayValue'
+        static member TableCell = FssTypes.Display.TableCell |> displayValue'
+        static member TableColumn = FssTypes.Display.TableColumn |> displayValue'
+        static member TableColumnGroup = FssTypes.Display.TableColumnGroup |> displayValue'
+        static member TableHeaderGroup = FssTypes.Display.TableHeaderGroup |> displayValue'
+        static member TableRowGroup = FssTypes.Display.TableRowGroup |> displayValue'
+        static member TableFooterGroup = FssTypes.Display.TableFooterGroup |> displayValue'
+        static member TableRow = FssTypes.Display.TableRow |> displayValue'
+        static member TableCaption = FssTypes.Display.TableCaption |> displayValue'
 
         static member None = None' |> displayValue'
         static member Inherit = Inherit |> displayValue'

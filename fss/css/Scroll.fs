@@ -7,9 +7,9 @@ module ScrollBehavior =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
     let private stringifyScrollBehavior (behavior: IScrollBehavior) =
         match behavior with
-        | :? ScrollBehavior.ScrollBehavior as s -> Utilities.Helpers.duToKebab s
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? ScrollBehavior as s -> Utilities.Helpers.duToKebab s
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "Unknown all"
 
     let private BehaviorValue value = PropertyValue.cssValue Property.ScrollBehavior value
@@ -20,7 +20,7 @@ module ScrollBehavior =
 
     type ScrollBehavior =
         static member Value (behavior: IScrollBehavior) = behavior |> BehaviorValue'
-        static member Smooth = ScrollBehavior.Smooth |> BehaviorValue'
+        static member Smooth = FssTypes.ScrollBehavior.Smooth |> BehaviorValue'
         static member Auto = Auto |> BehaviorValue'
         static member Inherit = Inherit |> BehaviorValue'
         static member Initial = Initial |> BehaviorValue'
@@ -42,7 +42,7 @@ module ScrollMargin =
     let private scrollMarginToString (scrollMargin: IScrollMargin) =
         match scrollMargin with
         | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Global as g -> GlobalValue.global' g
+        | :? Global as g -> global' g
         | _ -> "Unknown scrollMargin"
 
     let private scrollMarginValue value = PropertyValue.cssValue Property.ScrollMargin value
@@ -328,9 +328,9 @@ module OverscrollBehaviorX =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
     let private stringifyBehavior (behavior: IOverscrollBehaviorX) =
         match behavior with
-        | :? OverscrollBehavior.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
+        | :? Auto -> auto
+        | :? Global as g -> global' g
         | _ -> "Unknown all"
 
     let private overscrollBehaviour value = PropertyValue.cssValue Property.OverscrollBehaviorX value
@@ -364,9 +364,9 @@ module OverscrollBehaviorX =
         // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
         let private stringifyBehavior (behavior: IOverscrollBehaviorY) =
             match behavior with
-            | :? OverscrollBehavior.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
-            | :? Auto -> GlobalValue.auto
-            | :? Global as g -> GlobalValue.global' g
+            | :? OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
+            | :? Auto -> auto
+            | :? Global as g -> global' g
             | _ -> "Unknown all"
 
         let private overscrollBehaviour value = PropertyValue.cssValue Property.OverscrollBehaviorY value
