@@ -320,8 +320,8 @@ module App =
                         Label' "Bouncy Color"
                         AnimationName.Names [ bounceFrames; backgroundColorFrames ]
                         AnimationDuration.Values [ sec 1.0; sec 5.0 ]
-                        AnimationTimingFunction.Values [ Types.TimingFunction.EaseInOut; Types.TimingFunction.Ease ]
-                        AnimationIterationCount.Values [ Types.Animation.Infinite; Types.CssInt 3 ]
+                        AnimationTimingFunction.Values [ Types.EaseInOut; Types.Ease ]
+                        AnimationIterationCount.Values [ Types.Infinite; Types.CssInt 3 ]
                     ]
             article []
                 [
@@ -347,27 +347,27 @@ module App =
                     [
                         Label' "Descendant"
                         yield! borders
-                        ! Types.Html.P [ Color.red ]
+                        ! Types.P [ Color.red ]
                     ]
             let childCombinator =
                 fss
                     [
                         Label' "Child"
                         yield! borders
-                        !> Types.Html.P [ Color.red ]
+                        !> Types.P [ Color.red ]
 
                     ]
             let directCombinator =
                 fss
                     [
                         Label' "Direct"
-                        !+ Types.Html.P [ Color.red ]
+                        !+ Types.P [ Color.red ]
                     ]
             let adjacentCombinator =
                 fss
                     [
                         Label' "Adjacent"
-                        !~ Types.Html.P [ Color.red ]
+                        !~ Types.P [ Color.red ]
                     ]
 
             article []
@@ -431,10 +431,10 @@ module App =
                         BackgroundColor.blue
 
                         MediaQuery
-                            [ Types.Media.MinHeight (px 700)]
+                            [ Types.MinHeight (px 700)]
                             [ BackgroundColor.pink ]
 
-                        MediaQueryFor Types.Media.Print
+                        MediaQueryFor Types.Print
                             []
                             [
                                 MarginTop' (px 200)
@@ -443,7 +443,7 @@ module App =
                             ]
 
                         MediaQuery
-                            [ Types.Media.Orientation Types.Media.Landscape]
+                            [ Types.Orientation Types.Landscape]
                             [ Color.green; FontSize.Value (px 28)]
                     ]
 
@@ -588,14 +588,14 @@ module App =
                 fontFaces "DroidSerif"
                     [
                         [
-                            FontFace.Source <| Types.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Types.FontFace.Truetype)
-                            FontFace.Weight Types.Font.Bold
-                            FontFace.Style Types.Font.FontStyle.Normal
+                            FontFace.Source <| Types.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Types.Truetype)
+                            FontFace.Weight Types.Bold
+                            FontFace.Style Types.Normal
                         ]
                         [
-                            FontFace.Source <| Types.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Types.FontFace.Truetype)
-                            FontFace.Weight Types.Font.FontWeight.Normal
-                            FontFace.Style Normal
+                            FontFace.Source <| Types.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Types.Truetype)
+                            FontFace.Weight Types.Normal
+                            FontFace.Style Types.Normal
                         ]
                     ]
 
@@ -604,13 +604,13 @@ module App =
                     [
                         FontFace.Sources
                             [
-                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", FontFace.Woff2)
-                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", FontFace.Woff)
-                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", FontFace.Truetype)
-                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", FontFace.Svg)
+                                Types.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", Types.Woff2)
+                                Types.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", Types.Woff)
+                                Types.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", Types.Truetype)
+                                Types.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", Types.Svg)
                             ]
-                        FontFace.Weight Normal
-                        FontFace.Style Normal
+                        FontFace.Weight Types.Normal
+                        FontFace.Style Types.Normal
                     ]
 
             let droidSerif =
@@ -738,7 +738,7 @@ module App =
                     [
                         yield! box
                         Label' "Radial Gradient style 1"
-                        BackgroundImage.RadialGradient(Ellipse, FarthestCorner, pct 50, pct 50,
+                        BackgroundImage.RadialGradient(Types.Image.Ellipse, Types.Image.FarthestCorner, pct 50, pct 50,
                                                        [ hex "e66465", pct 0
                                                          hex "9198e5", pct 100])
                     ]
@@ -747,7 +747,7 @@ module App =
                     [
                         Label' "Radial Gradient style 2"
                         yield! box
-                        BackgroundImage.RadialGradient(Ellipse, ClosestSide, pct 50, pct 50,
+                        BackgroundImage.RadialGradient(Types.Image.Ellipse, Types.Image.ClosestSide, pct 50, pct 50,
                                 [
                                     hex "3f87a6", pct 0
                                     hex "ebf8e1", pct 50
@@ -759,7 +759,7 @@ module App =
                     [
                         yield! box
                         Label' "Radial Gradient style 3"
-                        BackgroundImage.RadialGradient(Circle, FarthestCorner, pct 100, pct 50,
+                        BackgroundImage.RadialGradient(Types.Image.Circle, Types.Image.FarthestCorner, pct 100, pct 50,
                             [hex "333", pct 0
                              hex "333", pct 50
                              hex "eee", pct 75
@@ -771,7 +771,7 @@ module App =
                         Label' "Repeating Radial Gradient style 1"
                         yield! box
                         BackgroundImage.RepeatingRadialGradient(
-                                Ellipse, FarthestCorner, pct 50, pct 50,
+                                Types.Image.Ellipse, Types.Image.FarthestCorner, pct 50, pct 50,
                                     [
                                         hex "e66465", pct 0
                                         hex "9198e5", pct 20
@@ -783,7 +783,7 @@ module App =
                         Label' "Repeating Radial Gradient style 2"
                         yield! box
                         BackgroundImage.RepeatingRadialGradient(
-                            Ellipse, ClosestSide, pct 50, pct 50,
+                            Types.Image.Ellipse, Types.Image.ClosestSide, pct 50, pct 50,
                                 [
                                     hex "3f87a6", pct 0
                                     hex "ebf8e1", pct 50
@@ -796,7 +796,7 @@ module App =
                         Label' "Repeating Radial Gradient style 3"
                         yield! box
                         BackgroundImage.RepeatingRadialGradient(
-                                Circle, FarthestCorner, pct 100, pct 50,
+                                Types.Image.Circle, Types.Image.FarthestCorner, pct 100, pct 50,
                                     [
                                         hex "333", px 0
                                         hex "333", px 10
@@ -996,7 +996,7 @@ module App =
             fss
                 [
                     Label' "Header Style"
-                    Color.white
+                    //Color.white // FUCKED
                     BackgroundColor.Hex "#4a8ab5"
                     PaddingLeft' (px 10)
                     AlignItems.Center
