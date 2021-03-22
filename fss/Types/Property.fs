@@ -76,7 +76,7 @@ namespace Fss.Types
             | Clear
             | Clip
             | ClipPath
-            | Color'
+            | Color
             | ColorAdjust
             | Columns
             | ColumnCount

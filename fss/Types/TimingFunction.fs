@@ -26,7 +26,7 @@ namespace Fss.Types
     [<AutoOpen>]
     module timingFunctionHelpers =
         let internal stepsValue (value: TimingFunction.Step) = Fss.Utilities.Helpers.duToKebab value
-        let internal timingToString (timing: ITransitionTimingFunction) =
+        let timingToString (timing: ITransitionTimingFunction) =
             let timingToString timing =
                 match timing with
                     | TimingFunction.CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" p1 p2 p3 p4
@@ -36,5 +36,5 @@ namespace Fss.Types
 
             match timing with
             | :? TimingFunction.Timing as t -> timingToString t
-            | :? Keywords as g -> keywordsToString g
+            | :? Keywords as k -> keywordsToString k
             | _ -> "Unknown timing function"

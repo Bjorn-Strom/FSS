@@ -17,7 +17,7 @@ namespace Fss.Types
             | Exclusion
             | Hue
             | Saturation
-            | Color'
+            | Color
             | Luminosity
             interface IMixBlendMode
 

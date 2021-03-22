@@ -19,7 +19,7 @@ module Color =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color
     let private colorCssValue value =
         value
-        |> Types.propertyHelpers.cssValue Types.Property.Color'
+        |> Types.propertyHelpers.cssValue Types.Property.Color
     let private colorCssValue' value =
         value
         |> Types.colorHelpers.colorToString

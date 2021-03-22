@@ -32,7 +32,7 @@ module MixBlendMode =
         static member Exclusion = Types.MixBlendMode.Exclusion |> mixBlendModeCssValue'
         static member Hue = Types.MixBlendMode.Hue |> mixBlendModeCssValue'
         static member Saturation = Types.MixBlendMode.Saturation |> mixBlendModeCssValue'
-        static member Color = Types.MixBlendMode.Color' |> mixBlendModeCssValue'
+        static member Color = Types.MixBlendMode.Color |> mixBlendModeCssValue'
         static member Luminosity = Types.MixBlendMode.Luminosity |> mixBlendModeCssValue'
 
         static member Normal = Types.Normal |> mixBlendModeCssValue'
