@@ -15,7 +15,7 @@ module Counter =
         static member Fixed = "system" ==> "fixed" |> Types.CounterProperty
         static member FixedValue (value: int) =
             "system" ==> sprintf "fixed %d" value |> Types.CounterProperty
-        static member Extends (extend: Types.ListStyleType) =
+        static member Extends (extend: Types.ListStyle.Type) =
             "system" ==> sprintf "extends %s" (Utilities.Helpers.duToKebab extend) |> Types.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/negative
@@ -60,7 +60,7 @@ module Counter =
             (urls
             |> List.map (fun u -> sprintf "url('%s')" u)
             |> String.concat " ") |> Types.CounterProperty
-        static member Custom (custom: Types.CounterStyle) = "symbols" ==> Types.counterStyleHelpers.counterStyleToString custom |> Types.CounterProperty
+        static member Custom (custom: Types.Counter.Style) = "symbols" ==> Types.counterStyleHelpers.counterStyleToString custom |> Types.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/additive-symbols
     type AdditiveSymbolType =
@@ -88,17 +88,17 @@ module Counter =
         static member Numbers = "speak-as" ==> "numbers" |> Types.CounterProperty
         static member Words = "speak-as" ==> "words" |> Types.CounterProperty
         static member SpellOut = "speak-as" ==> "spell-out" |> Types.CounterProperty
-        static member CounterStyle (counter: Types.CounterStyle) = "speak-as" ==> Types.counterStyleHelpers.counterStyleToString counter |> Types.CounterProperty
+        static member CounterStyle (counter: Types.Counter.Style) = "speak-as" ==> Types.counterStyleHelpers.counterStyleToString counter |> Types.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-reset
     let private counterResetToString (reset: Types.ICounterReset) =
         let stringifyReset =
             function
-                | Types.Reset counter -> Types.counterStyleHelpers.counterStyleToString counter
-                | Types.ResetTo (counter, number) -> sprintf "%A %d" (Types.counterStyleHelpers.counterStyleToString counter) number
+                | Types.Counter.Reset counter -> Types.counterStyleHelpers.counterStyleToString counter
+                | Types.Counter.ResetTo (counter, number) -> sprintf "%A %d" (Types.counterStyleHelpers.counterStyleToString counter) number
 
         match reset with
-        | :? Types.CounterReset as cr -> stringifyReset cr
+        | :? Types.Counter.Reset as cr -> stringifyReset cr
         | :? Types.None' -> Types.masterTypeHelpers.none
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown counter reset"
@@ -111,24 +111,24 @@ module Counter =
 
     type CounterReset =
         static member Value (counterReset: Types.ICounterReset) = counterReset |> counterResetValue'
-        static member Reset (counter: Types.CounterStyle) = counter |> Types.Reset |> counterResetValue'
-        static member ResetTo (counter: Types.CounterStyle) (value: int) = Types.ResetTo(counter, value) |> counterResetValue'
+        static member Reset (counter: Types.Counter.Style) = counter |> Types.Counter.Reset |> counterResetValue'
+        static member ResetTo (counter: Types.Counter.Style) (value: int) = Types.Counter.ResetTo(counter, value) |> counterResetValue'
         static member None = Types.None' |> counterResetValue'
         static member Inherit = Types.Inherit |> counterResetValue'
         static member Initial = Types.Initial |> counterResetValue'
         static member Unset = Types.Unset |> counterResetValue'
 
-    let CounterReset' (counterReset: Types.CounterStyle) = counterReset |> Types.Reset |> CounterReset.Value
+    let CounterReset' (counterReset: Types.Counter.Style) = counterReset |> Types.Counter.Reset |> CounterReset.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment
     let private counterIncrementToString (increment: Types.ICounterIncrement) =
         let stringifyIncrement =
             function
-                | Types.Increment counter -> Types.counterStyleHelpers.counterStyleToString counter
-                | Types.CounterIncrement.Add (counter, number) -> sprintf "%A %d" (Types.counterStyleHelpers.counterStyleToString counter) number
+                | Types.Counter.Increment counter -> Types.counterStyleHelpers.counterStyleToString counter
+                | Types.Counter.Add (counter, number) -> sprintf "%A %d" (Types.counterStyleHelpers.counterStyleToString counter) number
 
         match increment with
-        | :? Types.CounterIncrement as cr -> stringifyIncrement cr
+        | :? Types.Counter.Increment as cr -> stringifyIncrement cr
         | :? Types.None' -> Types.masterTypeHelpers.none
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown counter increment"
@@ -141,14 +141,14 @@ module Counter =
 
     type CounterIncrement =
         static member Value (counterIncrement: Types.ICounterIncrement) = counterIncrement |> counterIncrementValue'
-        static member Increment (counter: Types.CounterStyle) = counter |> Types.Increment |> counterIncrementValue'
-        static member IncrementTo (counter: Types.CounterStyle) (value: int) = Types.CounterIncrement.Add(counter, value) |> counterIncrementValue'
+        static member Increment (counter: Types.Counter.Style) = counter |> Types.Counter.Increment |> counterIncrementValue'
+        static member IncrementTo (counter: Types.Counter.Style) (value: int) = Types.Counter.Add(counter, value) |> counterIncrementValue'
         static member None = Types.None' |> counterIncrementValue'
         static member Inherit = Types.Inherit |> counterIncrementValue'
         static member Initial = Types.Initial |> counterIncrementValue'
         static member Unset = Types.Unset |> counterIncrementValue'
 
-    let CounterIncrement' (counterIncrement: Types.CounterStyle) = counterIncrement |> Types.Increment |> CounterIncrement.Value
+    let CounterIncrement' (counterIncrement: Types.Counter.Style) = counterIncrement |> Types.Counter.Increment |> CounterIncrement.Value
 
     let createCounterObject (attributeList: Types.CounterProperty list) counterName =
         createObj

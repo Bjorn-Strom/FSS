@@ -1,8 +1,10 @@
 namespace Fss
 
 namespace Fss.Types
-    type WordBreak =
-        | WordBreak
-        | BreakAll
-        | KeepAll
-        interface IWordBreak
+    [<RequireQualifiedAccess>]
+    module WordBreak =
+        type WordBreak =
+            | WordBreak
+            | BreakAll
+            | KeepAll
+            interface IWordBreak

@@ -4,7 +4,7 @@ namespace Fss
 module MixBlendMode =
     let private blendModeToString (blendMode: Types.IMixBlendMode) =
         match blendMode with
-        | :? Types.MixBlendMode as b -> Utilities.Helpers.duToKebab b
+        | :? Types.MixBlendMode.MixBlendMode as b -> Utilities.Helpers.duToKebab b
         | :? Types.Normal -> Types.masterTypeHelpers.normal
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mix blend mode"

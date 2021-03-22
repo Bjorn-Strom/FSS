@@ -5,7 +5,7 @@ module Clear =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/clear
     let private stringifyClear (clear: Types.IClear) =
         match clear with
-        | :? Types.Clear as c -> Utilities.Helpers.duToKebab c
+        | :? Types.Clear.Clear as c -> Utilities.Helpers.duToKebab c
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown clear"

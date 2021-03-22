@@ -171,7 +171,7 @@ module Text =
                     ["textDecorationLine" ==> "unset"]
                 test
                     "Text decorations multiple"
-                    [TextDecorationLine.Value(Types.Overline, Types.Underline, Types.LineThrough)]
+                    [TextDecorationLine.Value(Types.Text.DecorationLine.Overline, Types.Text.DecorationLine.Underline, Types.Text.DecorationLine.LineThrough)]
                     ["textDecorationLine" ==> "overline underline line-through"]
                 test
                     "Text decoration skip none"
@@ -195,15 +195,15 @@ module Text =
                     ["textDecorationSkip" ==> "box-decoration"]
                 test
                     "Text decoration skip multiple - objects and spaces"
-                    [TextDecorationSkip.Value(Types.Objects, Types.Spaces) ]
+                    [TextDecorationSkip.Value(Types.Text.DecorationSkip.Objects, Types.Text.DecorationSkip.Spaces) ]
                     ["textDecorationSkip" ==> "objects spaces"]
                 test
                     "Text decoration skip multiple - leading spaces and trailing spaces"
-                    [TextDecorationSkip.Value(Types.LeadingSpaces, Types.TrailingSpaces)]
+                    [TextDecorationSkip.Value(Types.Text.DecorationSkip.LeadingSpaces, Types.Text.DecorationSkip.TrailingSpaces)]
                     ["textDecorationSkip" ==> "leading-spaces trailing-spaces"]
                 test
                     "Text decoration skip multiple - objects edges box-decoration"
-                    [TextDecorationSkip.Value(Types.Objects, Types.Edges, Types.BoxDecoration) ]
+                    [TextDecorationSkip.Value(Types.Text.DecorationSkip.Objects, Types.Text.DecorationSkip.Edges, Types.Text.DecorationSkip.BoxDecoration) ]
                     ["textDecorationSkip" ==> "objects edges box-decoration"]
                 test
                     "Text decoration skip inherit"
@@ -335,31 +335,31 @@ module Text =
                     ["textEmphasisColor" ==> "unset"]
                 test
                     "Text emphasis position over right"
-                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Over, Types.EmphasisPosition.Right) ]
+                    [ TextEmphasisPosition.Value (Types.Text.EmphasisPosition.Over, Types.Text.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "over right"]
                 test
                     "Text emphasis position over left"
-                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Over, Types.EmphasisPosition.Left) ]
+                    [ TextEmphasisPosition.Value (Types.Text.EmphasisPosition.Over, Types.Text.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "over left"]
                 test
                     "Text emphasis position under right"
-                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Under, Types.EmphasisPosition.Right) ]
+                    [ TextEmphasisPosition.Value (Types.Text.EmphasisPosition.Under, Types.Text.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "under right"]
                 test
                     "Text emphasis position under left"
-                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Under, Types.EmphasisPosition.Left) ]
+                    [ TextEmphasisPosition.Value (Types.Text.EmphasisPosition.Under, Types.Text.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "under left"]
                 test
                     "Text emphasis position left over"
-                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Left, Types.EmphasisPosition.Over) ]
+                    [ TextEmphasisPosition.Value (Types.Text.EmphasisPosition.Left, Types.Text.EmphasisPosition.Over) ]
                     ["textEmphasisPosition" ==> "left over"]
                 test
                     "Text emphasis position right under"
-                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Right, Types.EmphasisPosition.Under) ]
+                    [ TextEmphasisPosition.Value (Types.Text.EmphasisPosition.Right, Types.Text.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "right under"]
                 test
                     "Text emphasis position left under"
-                    [ TextEmphasisPosition.Value (Types.EmphasisPosition.Left, Types.EmphasisPosition.Under) ]
+                    [ TextEmphasisPosition.Value (Types.Text.EmphasisPosition.Left, Types.Text.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "left under"]
                 test
                     "Text emphasis position inherit"
@@ -490,11 +490,11 @@ module Text =
                     ["textUnderlinePosition" ==> "below"]
                 test
                     "Text underline positions under left"
-                    [ TextUnderlinePosition.Value (Types.UnderlinePosition.Under, Types.UnderlinePosition.Left) ]
+                    [ TextUnderlinePosition.Value (Types.Text.UnderlinePosition.Under, Types.Text.UnderlinePosition.Left) ]
                     ["textUnderlinePosition" ==> "under left"]
                 test
                     "Text underline positions right under"
-                    [ TextUnderlinePosition.Value (Types.UnderlinePosition.Right, Types.UnderlinePosition.Under) ]
+                    [ TextUnderlinePosition.Value (Types.Text.UnderlinePosition.Right, Types.Text.UnderlinePosition.Under) ]
                     ["textUnderlinePosition" ==> "right under"]
                 test
                     "Text underline position auto"
@@ -526,15 +526,15 @@ module Text =
                     ["textIndent" ==> "15%"]
                 test
                     "Text indent hanging"
-                    [ TextIndent.Value (em 5.0, Types.Hanging;) ]
+                    [ TextIndent.Value (em 5.0, Types.Text.Hanging;) ]
                     ["textIndent" ==> "5.0em hanging"]
                 test
                     "Text indent each line"
-                    [ TextIndent.Value (em 5.0, Types.EachLine;) ]
+                    [ TextIndent.Value (em 5.0, Types.Text.EachLine;) ]
                     ["textIndent" ==> "5.0em each-line"]
                 test
                     "Text indent hanging each line"
-                    [ TextIndent.Value (em 5.0, Types.Hanging, Types.EachLine) ]
+                    [ TextIndent.Value (em 5.0, Types.Text.Hanging, Types.Text.EachLine) ]
                     ["textIndent" ==> "5.0em hanging each-line"]
                 test
                     "Text indent inherit"

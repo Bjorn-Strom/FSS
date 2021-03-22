@@ -4,19 +4,19 @@ namespace Fss
 module Table =
     let private captionSideToString (captionSide: Types.ICaptionSide) =
         match captionSide with
-        | :? Types.CaptionSide as c -> Utilities.Helpers.duToKebab c
+        | :? Types.Table.CaptionSide as c -> Utilities.Helpers.duToKebab c
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown caption side"
 
     let private emptyCellsToString (emptyCells: Types.IEmptyCells) =
         match emptyCells with
-        | :? Types.EmptyCells as e -> Utilities.Helpers.duToLowercase e
+        | :? Types.Table.EmptyCells as e -> Utilities.Helpers.duToLowercase e
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown empty cells"
 
     let private tableLayoutToString (tableLayout: Types.ITableLayout) =
         match tableLayout with
-        | :? Types.TableLayout as t -> Utilities.Helpers.duToLowercase t
+        | :? Types.Table.Layout as t -> Utilities.Helpers.duToLowercase t
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown table layout"
@@ -30,12 +30,12 @@ module Table =
 
     type CaptionSide =
         static member Value (captionSide: Types.ICaptionSide) = captionSide |> captionSideValue'
-        static member Top = Types.CaptionSide.Top |> captionSideValue'
-        static member Bottom = Types.CaptionSide.Bottom |> captionSideValue'
-        static member Left = Types.CaptionSide.Left |> captionSideValue'
-        static member Right = Types.CaptionSide.Right |> captionSideValue'
-        static member TopOutside = Types.CaptionSide.TopOutside |> captionSideValue'
-        static member BottomOutside = Types.CaptionSide.BottomOutside |> captionSideValue'
+        static member Top = Types.Table.CaptionSide.Top |> captionSideValue'
+        static member Bottom = Types.Table.CaptionSide.Bottom |> captionSideValue'
+        static member Left = Types.Table.CaptionSide.Left |> captionSideValue'
+        static member Right = Types.Table.CaptionSide.Right |> captionSideValue'
+        static member TopOutside = Types.Table.CaptionSide.TopOutside |> captionSideValue'
+        static member BottomOutside = Types.Table.CaptionSide.BottomOutside |> captionSideValue'
         static member Inherit = Types.Inherit |> captionSideValue'
         static member Initial = Types.Initial |> captionSideValue'
         static member Unset = Types.Unset |> captionSideValue'
@@ -59,8 +59,8 @@ module Table =
         |> emptyCellsValue
     type EmptyCells =
         static member Value (emptyCells: Types.IEmptyCells) = emptyCells |> emptyCellsValue'
-        static member Show = Types.EmptyCells.Show |> emptyCellsValue'
-        static member Hide = Types.EmptyCells.Hide |> emptyCellsValue'
+        static member Show = Types.Table.EmptyCells.Show |> emptyCellsValue'
+        static member Hide = Types.Table.EmptyCells.Hide |> emptyCellsValue'
         static member Inherit = Types.Inherit |> emptyCellsValue'
         static member Initial = Types.Initial |> emptyCellsValue'
         static member Unset = Types.Unset |> emptyCellsValue'
@@ -85,7 +85,7 @@ module Table =
 
     type TableLayout =
         static member Value (layout: Types.ITableLayout) = layout |> tableLayoutValue'
-        static member Fixed = Types.TableLayout.Fixed |> tableLayoutValue'
+        static member Fixed = Types.Table.Layout.Fixed |> tableLayoutValue'
         static member Auto = Types.Auto |> tableLayoutValue'
         static member Inherit = Types.Inherit |> tableLayoutValue'
         static member Initial = Types.Initial |> tableLayoutValue'

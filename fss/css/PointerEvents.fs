@@ -4,7 +4,7 @@ namespace Fss
 module PointerEvents =
     let private eventToString (event: Types.IPointerEvents) =
         match event with
-        | :? Types.PointerEvents as p -> Utilities.Helpers.duToCamel p
+        | :? Types.PointerEvents.PointerEvents as p -> Utilities.Helpers.duToCamel p
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.None' -> Types.masterTypeHelpers.none
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k

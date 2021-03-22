@@ -1,6 +1,7 @@
 namespace Fss
 namespace Fss.Types
     open Fable.Core.JsInterop
+    [<RequireQualifiedAccess>]
     module Property =
         type Property =
             | Appearance

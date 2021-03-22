@@ -6,14 +6,14 @@ module Overflow =
 
     let private overflowToString (overflow: Types.IOverflow) =
         match overflow with
-        | :? Types.Overflow as o -> Utilities.Helpers.duToLowercase o
+        | :? Types.Overflow.Overflow as o -> Utilities.Helpers.duToLowercase o
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown overflow"
 
     let private wrapToString (wrap: Types.IOverflowWrap) =
         match wrap with
-        | :? Types.OverflowWrap as o -> Utilities.Helpers.duToKebab o
+        | :? Types.Overflow.Wrap as o -> Utilities.Helpers.duToKebab o
         | :? Types.Normal -> Types.masterTypeHelpers.normal
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown overflow wrap"
@@ -123,8 +123,8 @@ module Overflow =
 
     type OverflowWrap =
         static member Value (overflowWrap: Types.IOverflowWrap) = overflowWrap |> overflowWrapValue'
-        static member BreakWord = Types.OverflowWrap.BreakWord |> overflowWrapValue'
-        static member Anywhere = Types.OverflowWrap.Anywhere |> overflowWrapValue'
+        static member BreakWord = Types.Overflow.Wrap.BreakWord |> overflowWrapValue'
+        static member Anywhere = Types.Overflow.Wrap.Anywhere |> overflowWrapValue'
 
         static member Normal = Types.Normal |> overflowWrapValue'
         static member Inherit = Types.Inherit |> overflowWrapValue'

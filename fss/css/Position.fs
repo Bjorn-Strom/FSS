@@ -14,7 +14,7 @@ module Position =
 
     let private verticalAlignToString (alignment: Types.IVerticalAlign) =
         match alignment with
-        | :? Types.VerticalAlign as v -> Utilities.Helpers.duToKebab v
+        | :? Types.Position.VerticalAlign as v -> Utilities.Helpers.duToKebab v
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | :? Types.Size as s -> Types.unitHelpers.sizeToString s
         | :? Types.Percent as p -> Types.unitHelpers.percentToString p
@@ -22,19 +22,19 @@ module Position =
 
     let private floatToString (float: Types.IFloat) =
         match float with
-        | :? Types.Float' as v -> Utilities.Helpers.duToKebab v
+        | :? Types.Position.Float as v -> Utilities.Helpers.duToKebab v
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown float"
 
     let private directionToString (direction: Types.IDirection) =
         match direction with
-        | :? Types.Direction as d -> Utilities.Helpers.duToLowercase d
+        | :? Types.Position.Direction as d -> Utilities.Helpers.duToLowercase d
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown direction"
 
     let private positionValue value = Types.propertyHelpers.cssValue Types.Property.Position value
-    let private positionValue' (value: Types.Position) =
+    let private positionValue' (value: Types.Position.Position) =
         value
         |> Utilities.Helpers.duToKebab
         |> positionValue
@@ -172,14 +172,14 @@ module Position =
 
     type VerticalAlign =
         static member Value (alignment: Types.IVerticalAlign) = alignment |> verticalAlignValue'
-        static member Baseline = Types.VerticalAlign.Baseline |> verticalAlignValue'
-        static member Sub = Types.VerticalAlign.Sub |> verticalAlignValue'
-        static member Super = Types.VerticalAlign.Super |> verticalAlignValue'
-        static member TextTop = Types.VerticalAlign.TextTop |> verticalAlignValue'
-        static member TextBottom = Types.VerticalAlign.TextBottom |> verticalAlignValue'
-        static member Middle = Types.VerticalAlign.Middle |> verticalAlignValue'
-        static member Top = Types.VerticalAlign.Top |> verticalAlignValue'
-        static member Bottom = Types.VerticalAlign.Bottom |> verticalAlignValue'
+        static member Baseline = Types.Position.VerticalAlign.Baseline |> verticalAlignValue'
+        static member Sub = Types.Position.VerticalAlign.Sub |> verticalAlignValue'
+        static member Super = Types.Position.VerticalAlign.Super |> verticalAlignValue'
+        static member TextTop = Types.Position.VerticalAlign.TextTop |> verticalAlignValue'
+        static member TextBottom = Types.Position.VerticalAlign.TextBottom |> verticalAlignValue'
+        static member Middle = Types.Position.VerticalAlign.Middle |> verticalAlignValue'
+        static member Top = Types.Position.VerticalAlign.Top |> verticalAlignValue'
+        static member Bottom = Types.Position.VerticalAlign.Bottom |> verticalAlignValue'
 
         static member Inherit = Types.Inherit |> verticalAlignValue'
         static member Initial = Types.Initial |> verticalAlignValue'
@@ -207,10 +207,10 @@ module Position =
 
     type Float =
         static member Value (float: Types.IFloat) = float |> floatValue'
-        static member Left = Types.Float'.Left |> floatValue'
-        static member Right = Types.Float'.Right |> floatValue'
-        static member InlineStart = Types.Float'.InlineStart |> floatValue'
-        static member InlineEnd = Types.Float'.InlineEnd |> floatValue'
+        static member Left = Types.Position.Float.Left |> floatValue'
+        static member Right = Types.Position.Float.Right |> floatValue'
+        static member InlineStart = Types.Position.Float.InlineStart |> floatValue'
+        static member InlineEnd = Types.Position.Float.InlineEnd |> floatValue'
 
         static member None = Types.None' |> floatValue'
         static member Inherit = Types.Inherit |> floatValue'
@@ -231,19 +231,19 @@ module Position =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
     let private boxSizingValue value = Types.propertyHelpers.cssValue Types.Property.BoxSizing value
-    let private boxSizingValue' (value: Types.BoxSizing) =
+    let private boxSizingValue' (value: Types.Position.BoxSizing) =
         value
         |> Utilities.Helpers.duToKebab
         |> boxSizingValue
     type BoxSizing =
-        static member Value (boxSizing: Types.BoxSizing) = boxSizing |> boxSizingValue'
-        static member ContentBox = Types.BoxSizing.ContentBox |> boxSizingValue'
-        static member BorderBox = Types.BoxSizing.BorderBox |> boxSizingValue'
+        static member Value (boxSizing: Types.Position.BoxSizing) = boxSizing |> boxSizingValue'
+        static member ContentBox = Types.Position.BoxSizing.ContentBox |> boxSizingValue'
+        static member BorderBox = Types.Position.BoxSizing.BorderBox |> boxSizingValue'
 
     /// <summary>Specifies how the total width and height of an elemenent is calculated.</summary>
     /// <param name="sizing"> How to calculate width and height How to calculate width. </param>
     /// <returns>Css property for fss.</returns>
-    let BoxSizing' (sizing: Types.BoxSizing) = BoxSizing.Value(sizing)
+    let BoxSizing' (sizing: Types.Position.BoxSizing) = BoxSizing.Value(sizing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
     let private directionValue value = Types.propertyHelpers.cssValue Types.Property.Direction value
@@ -254,8 +254,8 @@ module Position =
 
     type Direction =
         static member Value (direction: Types.IDirection) = direction |> directionValue'
-        static member Rtl = Types.Direction.Rtl |> directionValue'
-        static member Ltr = Types.Direction.Ltr |> directionValue'
+        static member Rtl = Types.Position.Direction.Rtl |> directionValue'
+        static member Ltr = Types.Position.Direction.Ltr |> directionValue'
         static member Inherit = Types.Inherit |> directionValue'
         static member Initial = Types.Initial |> directionValue'
         static member Unset = Types.Unset |> directionValue'
@@ -321,21 +321,21 @@ module WritingMode =
 module Break =
     let private breakAfterToString (breakAfter: Types.IBreakAfter) =
         match breakAfter with
-        | :? Types.BreakAfter as w -> Utilities.Helpers.duToKebab w
+        | :? Types.Position.BreakAfter as w -> Utilities.Helpers.duToKebab w
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown break after"
 
     let private breakBeforeToString (breakBefore: Types.IBreakBefore) =
         match breakBefore with
-        | :? Types.BreakBefore as w -> Utilities.Helpers.duToKebab w
+        | :? Types.Position.BreakBefore as w -> Utilities.Helpers.duToKebab w
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown break before"
 
     let private breakInsideToString (breakInside: Types.IBreakInside) =
         match breakInside with
-        | :? Types.BreakInside as w -> Utilities.Helpers.duToKebab w
+        | :? Types.Position.BreakInside as w -> Utilities.Helpers.duToKebab w
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown break before"
@@ -349,19 +349,19 @@ module Break =
 
     type BreakAfter =
         static member Value (breakAfter: Types.IBreakAfter) = breakAfter |> breakAfterValue'
-        static member Avoid = Types.BreakAfter.Avoid |> breakAfterValue'
-        static member Always = Types.BreakAfter.Always |> breakAfterValue'
-        static member All = Types.BreakAfter.All |> breakAfterValue'
-        static member AvoidPage = Types.BreakAfter.AvoidPage |> breakAfterValue'
-        static member Page = Types.BreakAfter.Page |> breakAfterValue'
-        static member Left = Types.BreakAfter.Left |> breakAfterValue'
-        static member Right = Types.BreakAfter.Right |> breakAfterValue'
-        static member Recto = Types.BreakAfter.Recto |> breakAfterValue'
-        static member Verso = Types.BreakAfter.Verso |> breakAfterValue'
-        static member AvoidColumn = Types.BreakAfter.AvoidColumn |> breakAfterValue'
-        static member Column = Types.BreakAfter.Column |> breakAfterValue'
-        static member AvoidRegion = Types.BreakAfter.AvoidRegion |> breakAfterValue'
-        static member Region = Types.BreakAfter.Region |> breakAfterValue'
+        static member Avoid = Types.Position.BreakAfter.Avoid |> breakAfterValue'
+        static member Always = Types.Position.BreakAfter.Always |> breakAfterValue'
+        static member All = Types.Position.BreakAfter.All |> breakAfterValue'
+        static member AvoidPage = Types.Position.BreakAfter.AvoidPage |> breakAfterValue'
+        static member Page = Types.Position.BreakAfter.Page |> breakAfterValue'
+        static member Left = Types.Position.BreakAfter.Left |> breakAfterValue'
+        static member Right = Types.Position.BreakAfter.Right |> breakAfterValue'
+        static member Recto = Types.Position.BreakAfter.Recto |> breakAfterValue'
+        static member Verso = Types.Position.BreakAfter.Verso |> breakAfterValue'
+        static member AvoidColumn = Types.Position.BreakAfter.AvoidColumn |> breakAfterValue'
+        static member Column = Types.Position.BreakAfter.Column |> breakAfterValue'
+        static member AvoidRegion = Types.Position.BreakAfter.AvoidRegion |> breakAfterValue'
+        static member Region = Types.Position.BreakAfter.Region |> breakAfterValue'
 
         static member Auto = Types.Auto |> breakAfterValue'
         static member Inherit = Types.Inherit |> breakAfterValue'
@@ -389,19 +389,19 @@ module Break =
 
     type BreakBefore =
         static member Value (breakBefore: Types.IBreakBefore) = breakBefore |> breakBeforeValue'
-        static member Avoid = Types.BreakBefore.Avoid |> breakBeforeValue'
-        static member Always = Types.BreakBefore.Always |> breakBeforeValue'
-        static member All = Types.BreakBefore.All |> breakBeforeValue'
-        static member AvoidPage = Types.BreakBefore.AvoidPage |> breakBeforeValue'
-        static member Page = Types.BreakBefore.Page |> breakBeforeValue'
-        static member Left = Types.BreakBefore.Left |> breakBeforeValue'
-        static member Right = Types.BreakBefore.Right |> breakBeforeValue'
-        static member Recto = Types.BreakBefore.Recto |> breakBeforeValue'
-        static member Verso = Types.BreakBefore.Verso |> breakBeforeValue'
-        static member AvoidColumn = Types.BreakBefore.AvoidColumn |> breakBeforeValue'
-        static member Column = Types.BreakBefore.Column |> breakBeforeValue'
-        static member AvoidRegion = Types.BreakBefore.AvoidRegion |> breakBeforeValue'
-        static member Region = Types.BreakBefore.Region |> breakBeforeValue'
+        static member Avoid = Types.Position.BreakBefore.Avoid |> breakBeforeValue'
+        static member Always = Types.Position.BreakBefore.Always |> breakBeforeValue'
+        static member All = Types.Position.BreakBefore.All |> breakBeforeValue'
+        static member AvoidPage = Types.Position.BreakBefore.AvoidPage |> breakBeforeValue'
+        static member Page = Types.Position.BreakBefore.Page |> breakBeforeValue'
+        static member Left = Types.Position.BreakBefore.Left |> breakBeforeValue'
+        static member Right = Types.Position.BreakBefore.Right |> breakBeforeValue'
+        static member Recto = Types.Position.BreakBefore.Recto |> breakBeforeValue'
+        static member Verso = Types.Position.BreakBefore.Verso |> breakBeforeValue'
+        static member AvoidColumn = Types.Position.BreakBefore.AvoidColumn |> breakBeforeValue'
+        static member Column = Types.Position.BreakBefore.Column |> breakBeforeValue'
+        static member AvoidRegion = Types.Position.BreakBefore.AvoidRegion |> breakBeforeValue'
+        static member Region = Types.Position.BreakBefore.Region |> breakBeforeValue'
 
         static member Auto = Types.Auto |> breakBeforeValue'
         static member Inherit = Types.Inherit |> breakBeforeValue'
@@ -429,10 +429,10 @@ module Break =
 
     type BreakInside =
         static member Value (breakInside: Types.IBreakInside) = breakInside |> breakInsideValue'
-        static member Avoid = Types.BreakInside.Avoid |> breakInsideValue'
-        static member AvoidPage = Types.BreakInside.AvoidPage |> breakInsideValue'
-        static member AvoidColumn = Types.BreakInside.AvoidColumn |> breakInsideValue'
-        static member AvoidRegion = Types.BreakInside.AvoidRegion |> breakInsideValue'
+        static member Avoid = Types.Position.BreakInside.Avoid |> breakInsideValue'
+        static member AvoidPage = Types.Position.BreakInside.AvoidPage |> breakInsideValue'
+        static member AvoidColumn = Types.Position.BreakInside.AvoidColumn |> breakInsideValue'
+        static member AvoidRegion = Types.Position.BreakInside.AvoidRegion |> breakInsideValue'
 
         static member Auto = Types.Auto |> breakInsideValue'
         static member Inherit = Types.Inherit |> breakInsideValue'

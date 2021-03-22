@@ -1,8 +1,10 @@
 namespace Fss
 
 namespace Fss.Types
-    type BoxShadow =
-        | Color' of Size * Size * Color
-        | BlurColor of Size * Size * Size * Color
-        | BlurSpreadColor of Size * Size * Size * Size * Color
-        | Inset of BoxShadow
+    [<RequireQualifiedAccess>]
+    module BoxShadow =
+        type BoxShadow =
+            | Color of Size * Size * ColorTypeFoo
+            | BlurColor of Size * Size * Size * ColorTypeFoo
+            | BlurSpreadColor of Size * Size * Size * Size * ColorTypeFoo
+            | Inset of BoxShadow

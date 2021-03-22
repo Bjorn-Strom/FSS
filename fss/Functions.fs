@@ -48,12 +48,12 @@ module Functions =
 
         createCounterObject attributeList counterName |> css' |> ignore
 
-        counterName |> Types.CounterStyle
+        counterName |> Types.Counter.Style
 
     // Media
-    let MediaQueryFor (device: Types.Device) (features: Types.MediaFeature list) (attributeList: Types.CssProperty list) =
+    let MediaQueryFor (device: Types.Media.Device) (features: Types.Media.Feature list) (attributeList: Types.CssProperty list) =
         Media.Media(device, features, attributeList)
-    let MediaQuery (features: Types.MediaFeature list) (attributeList: Types.CssProperty list) =
+    let MediaQuery (features: Types.Media.Feature list) (attributeList: Types.CssProperty list) =
         Media.Media(features, attributeList)
 
     // Font
@@ -61,14 +61,14 @@ module Functions =
         attributeList
         |> createFontFaceObject fontFamily
         |> css'
-        Types.FontName fontFamily
+        Types.Font.Name fontFamily
 
     let fontFaces (fontFamily: string) (attributeLists: Types.CssProperty list list) =
         attributeLists
         |> List.map (createFontFaceObject fontFamily)
         |> css'
 
-        Types.FontName fontFamily
+        Types.Font.Name fontFamily
 
     // Color
     let rgb (r: int) (g: int) (b: int) = Types.Color.Rgb(r,g,b)

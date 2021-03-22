@@ -73,7 +73,7 @@ module Perspective =
 module BackfaceVisibility =
     let private visibilityToString (visibility: Types.IBackfaceVisibility) =
         match visibility with
-        | :? Types.BackfaceVisibility as v -> Utilities.Helpers.duToLowercase v
+        | :? Types.Visibility.BackfaceVisibility as v -> Utilities.Helpers.duToLowercase v
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown backface visibility"
 
@@ -85,8 +85,8 @@ module BackfaceVisibility =
 
     type BackfaceVisibility =
         static member Value (visibility: Types.IBackfaceVisibility) = visibility |> backfaceVisibilityValue'
-        static member Hidden = Types.BackfaceVisibility.Hidden |> backfaceVisibilityValue'
-        static member Visible = Types.BackfaceVisibility.Visible |> backfaceVisibilityValue'
+        static member Hidden = Types.Visibility.BackfaceVisibility.Hidden |> backfaceVisibilityValue'
+        static member Visible = Types.Visibility.BackfaceVisibility.Visible |> backfaceVisibilityValue'
         static member Inherit = Types.Inherit |> backfaceVisibilityValue'
         static member Initial = Types.Initial |> backfaceVisibilityValue'
         static member Unset = Types.Unset |> backfaceVisibilityValue'

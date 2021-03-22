@@ -4,7 +4,7 @@ namespace Fss
 module Resize =
     let private resizeToString (resize: Types.IResize) =
         match resize with
-        | :? Types.Resize as r -> Utilities.Helpers.duToLowercase r
+        | :? Types.Resize.Resize as r -> Utilities.Helpers.duToLowercase r
         | :? Types.None' -> Types.masterTypeHelpers.none
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown resize value"

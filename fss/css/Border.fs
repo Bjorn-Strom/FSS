@@ -12,47 +12,47 @@ module Border =
 
     let private widthToString (width: Types.IBorderWidth) =
         match width with
-            | :? Types.BorderWidth as b -> Utilities.Helpers.duToLowercase b
+            | :? Types.Border.Width as b -> Utilities.Helpers.duToLowercase b
             | :? Types.Size as s -> Types.unitHelpers.sizeToString s
             | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
             | _ -> "unknown border width"
 
     let private styleToString (style: Types.IBorderStyle) =
         match style with
-        | :? Types.BorderStyle as b -> Utilities.Helpers.duToLowercase b
+        | :? Types.Border.Style as b -> Utilities.Helpers.duToLowercase b
         | :? Types.None' -> Types.masterTypeHelpers.none
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown border style"
 
     let private collapseToString (collapse: Types.IBorderCollapse) =
         match collapse with
-        | :? Types.BorderCollapse as c -> Utilities.Helpers.duToLowercase c
+        | :? Types.Border.Collapse as c -> Utilities.Helpers.duToLowercase c
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown border collapse"
     let private imageOutsetToString (imageOutset: Types.IBorderImageOutset) =
-        let stringifyOutset (Types.BorderImageOutset v) = string v
+        let stringifyOutset (Types.Border.ImageOutset v) = string v
 
         match imageOutset with
         | :? Types.Size as s -> Types.unitHelpers.sizeToString s
         | :? Types.Percent as p -> Types.unitHelpers.percentToString p
-        | :? Types.BorderImageOutset as i -> stringifyOutset i
+        | :? Types.Border.ImageOutset as i -> stringifyOutset i
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown border image outset"
 
     let private repeatToString (repeat: Types.IBorderRepeat) =
         match repeat with
-        | :? Types.BorderImageRepeat as b -> Utilities.Helpers.duToLowercase b
+        | :? Types.Border.ImageRepeat as b -> Utilities.Helpers.duToLowercase b
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "unknown border repeat"
 
     let private imageSliceToString (imageSlice: Types.IBorderImageSlice) =
         let stringifySlice =
             function
-                | Types.BorderImageSlice.Value i -> string i
-                | Types.BorderImageSlice.Fill -> "fill"
+                | Types.Border.ImageSlice.Value i -> string i
+                | Types.Border.ImageSlice.Fill -> "fill"
 
         match imageSlice with
-        | :? Types.BorderImageSlice as i -> stringifySlice i
+        | :? Types.Border.ImageSlice as i -> stringifySlice i
         | :? Types.Size as s -> Types.unitHelpers.sizeToString s
         | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
@@ -60,7 +60,7 @@ module Border =
 
     let private borderColorToString (borderColor: Types.IBorderColor) =
         match borderColor with
-        | :? Types.Color as c -> Types.colorHelpers.colorToString c
+        | :? Types.ColorTypeFoo as c -> Types.colorHelpers.colorToString c
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown border color"
 
@@ -299,9 +299,9 @@ module Border =
                 (widthToString left)
             |> widthValue
 
-        static member Thin = Types.BorderWidth.Thin |> widthValue'
-        static member Medium = Types.BorderWidth.Medium |> widthValue'
-        static member Thick = Types.BorderWidth.Thick |> widthValue'
+        static member Thin = Types.Border.Width.Thin |> widthValue'
+        static member Medium = Types.Border.Width.Medium |> widthValue'
+        static member Thick = Types.Border.Width.Thick |> widthValue'
 
         static member Inherit = Types.Inherit |> widthValue'
         static member Initial = Types.Initial |> widthValue'
@@ -327,9 +327,9 @@ module Border =
         |> topWidthValue
     type BorderTopWidth =
         static member Value (width: Types.IBorderWidth) = width |> topWidthValue'
-        static member Thin = Types.BorderWidth.Thin |> topWidthValue
-        static member Medium = Types.BorderWidth.Medium |> topWidthValue
-        static member Thick = Types.BorderWidth.Thick |> topWidthValue
+        static member Thin = Types.Border.Width.Thin |> topWidthValue
+        static member Medium = Types.Border.Width.Medium |> topWidthValue
+        static member Thick = Types.Border.Width.Thick |> topWidthValue
 
         static member Inherit = Types.Inherit |> topWidthValue
         static member Initial = Types.Initial |> topWidthValue
@@ -355,9 +355,9 @@ module Border =
         |> rightWidthValue
     type BorderRightWidth =
         static member Value (width: Types.IBorderWidth) = width |> rightWidthValue'
-        static member Thin = Types.BorderWidth.Thin |> rightWidthValue
-        static member Medium = Types.BorderWidth.Medium |> rightWidthValue
-        static member Thick = Types.BorderWidth.Thick |> rightWidthValue
+        static member Thin = Types.Border.Width.Thin |> rightWidthValue
+        static member Medium = Types.Border.Width.Medium |> rightWidthValue
+        static member Thick = Types.Border.Width.Thick |> rightWidthValue
 
         static member Inherit = Types.Inherit |> rightWidthValue
         static member Initial = Types.Initial |> rightWidthValue
@@ -383,9 +383,9 @@ module Border =
         |> bottomWidthValue
     type BorderBottomWidth =
         static member Value (width: Types.IBorderWidth) = width |> bottomWidthValue'
-        static member Thin = Types.BorderWidth.Thin |> bottomWidthValue
-        static member Medium = Types.BorderWidth.Medium |> bottomWidthValue
-        static member Thick = Types.BorderWidth.Thick |> bottomWidthValue
+        static member Thin = Types.Border.Width.Thin |> bottomWidthValue
+        static member Medium = Types.Border.Width.Medium |> bottomWidthValue
+        static member Thick = Types.Border.Width.Thick |> bottomWidthValue
 
         static member Inherit = Types.Inherit |> bottomWidthValue
         static member Initial = Types.Initial |> bottomWidthValue
@@ -411,9 +411,9 @@ module Border =
         |> leftWidthValue
     type BorderLeftWidth =
         static member Value (width: Types.IBorderWidth) = width |> leftWidthValue'
-        static member Thin = Types.BorderWidth.Thin |> leftWidthValue
-        static member Medium = Types.BorderWidth.Medium |> leftWidthValue
-        static member Thick = Types.BorderWidth.Thick |> leftWidthValue
+        static member Thin = Types.Border.Width.Thin |> leftWidthValue
+        static member Medium = Types.Border.Width.Medium |> leftWidthValue
+        static member Thick = Types.Border.Width.Thick |> leftWidthValue
 
         static member Inherit = Types.Inherit |> leftWidthValue
         static member Initial = Types.Initial |> leftWidthValue
@@ -459,15 +459,15 @@ module Border =
                 (styleToString left)
             |> styleValue
 
-        static member Hidden = Types.BorderStyle.Hidden |> styleValue'
-        static member Dotted = Types.BorderStyle.Dotted |> styleValue'
-        static member Dashed = Types.BorderStyle.Dashed |> styleValue'
-        static member Solid = Types.BorderStyle.Solid |> styleValue'
-        static member Double = Types.BorderStyle.Double |> styleValue'
-        static member Groove = Types.BorderStyle.Groove |> styleValue'
-        static member Ridge = Types.BorderStyle.Ridge |> styleValue'
-        static member Inset = Types.BorderStyle.Inset |> styleValue'
-        static member Outset = Types.BorderStyle.Outset |> styleValue'
+        static member Hidden = Types.Border.Style.Hidden |> styleValue'
+        static member Dotted = Types.Border.Style.Dotted |> styleValue'
+        static member Dashed = Types.Border.Style.Dashed |> styleValue'
+        static member Solid = Types.Border.Style.Solid |> styleValue'
+        static member Double = Types.Border.Style.Double |> styleValue'
+        static member Groove = Types.Border.Style.Groove |> styleValue'
+        static member Ridge = Types.Border.Style.Ridge |> styleValue'
+        static member Inset = Types.Border.Style.Inset |> styleValue'
+        static member Outset = Types.Border.Style.Outset |> styleValue'
 
         static member None = Types.None' |> styleValue'
         static member Inherit = Types.Inherit |> styleValue'
@@ -495,15 +495,15 @@ module Border =
 
     type BorderTopStyle =
         static member Value (style: Types.IBorderStyle) = style |> topStyleValue'
-        static member Hidden = Types.BorderStyle.Hidden |> topStyleValue'
-        static member Dotted = Types.BorderStyle.Dotted |> topStyleValue'
-        static member Dashed = Types.BorderStyle.Dashed |> topStyleValue'
-        static member Solid = Types.BorderStyle.Solid |> topStyleValue'
-        static member Double = Types.BorderStyle.Double |> topStyleValue'
-        static member Groove = Types.BorderStyle.Groove |> topStyleValue'
-        static member Ridge = Types.BorderStyle.Ridge |> topStyleValue'
-        static member Inset = Types.BorderStyle.Inset |> topStyleValue'
-        static member Outset = Types.BorderStyle.Outset |> topStyleValue'
+        static member Hidden = Types.Border.Style.Hidden |> topStyleValue'
+        static member Dotted = Types.Border.Style.Dotted |> topStyleValue'
+        static member Dashed = Types.Border.Style.Dashed |> topStyleValue'
+        static member Solid = Types.Border.Style.Solid |> topStyleValue'
+        static member Double = Types.Border.Style.Double |> topStyleValue'
+        static member Groove = Types.Border.Style.Groove |> topStyleValue'
+        static member Ridge = Types.Border.Style.Ridge |> topStyleValue'
+        static member Inset = Types.Border.Style.Inset |> topStyleValue'
+        static member Outset = Types.Border.Style.Outset |> topStyleValue'
 
         static member None = Types.None' |> topStyleValue'
         static member Inherit = Types.Inherit |> topStyleValue'
@@ -531,15 +531,15 @@ module Border =
 
     type BorderRightStyle =
         static member Value (style: Types.IBorderStyle) = style |> rightStyleValue'
-        static member Hidden = Types.BorderStyle.Hidden |> rightStyleValue'
-        static member Dotted = Types.BorderStyle.Dotted |> rightStyleValue'
-        static member Dashed = Types.BorderStyle.Dashed |> rightStyleValue'
-        static member Solid = Types.BorderStyle.Solid |> rightStyleValue'
-        static member Double = Types.BorderStyle.Double |> rightStyleValue'
-        static member Groove = Types.BorderStyle.Groove |> rightStyleValue'
-        static member Ridge = Types.BorderStyle.Ridge |> rightStyleValue'
-        static member Inset = Types.BorderStyle.Inset |> rightStyleValue'
-        static member Outset = Types.BorderStyle.Outset |> rightStyleValue'
+        static member Hidden = Types.Border.Style.Hidden |> rightStyleValue'
+        static member Dotted = Types.Border.Style.Dotted |> rightStyleValue'
+        static member Dashed = Types.Border.Style.Dashed |> rightStyleValue'
+        static member Solid = Types.Border.Style.Solid |> rightStyleValue'
+        static member Double = Types.Border.Style.Double |> rightStyleValue'
+        static member Groove = Types.Border.Style.Groove |> rightStyleValue'
+        static member Ridge = Types.Border.Style.Ridge |> rightStyleValue'
+        static member Inset = Types.Border.Style.Inset |> rightStyleValue'
+        static member Outset = Types.Border.Style.Outset |> rightStyleValue'
 
         static member None = Types.None' |> rightStyleValue'
         static member Inherit = Types.Inherit |> rightStyleValue'
@@ -567,15 +567,15 @@ module Border =
 
     type BorderBottomStyle =
         static member Value (style: Types.IBorderStyle) = style |> bottomStyleValue'
-        static member Hidden = Types.BorderStyle.Hidden |> bottomStyleValue'
-        static member Dotted = Types.BorderStyle.Dotted |> bottomStyleValue'
-        static member Dashed = Types.BorderStyle.Dashed |> bottomStyleValue'
-        static member Solid = Types.BorderStyle.Solid |> bottomStyleValue'
-        static member Double = Types.BorderStyle.Double |> bottomStyleValue'
-        static member Groove = Types.BorderStyle.Groove |> bottomStyleValue'
-        static member Ridge = Types.BorderStyle.Ridge |> bottomStyleValue'
-        static member Inset = Types.BorderStyle.Inset |> bottomStyleValue'
-        static member Outset = Types.BorderStyle.Outset |> bottomStyleValue'
+        static member Hidden = Types.Border.Style.Hidden |> bottomStyleValue'
+        static member Dotted = Types.Border.Style.Dotted |> bottomStyleValue'
+        static member Dashed = Types.Border.Style.Dashed |> bottomStyleValue'
+        static member Solid = Types.Border.Style.Solid |> bottomStyleValue'
+        static member Double = Types.Border.Style.Double |> bottomStyleValue'
+        static member Groove = Types.Border.Style.Groove |> bottomStyleValue'
+        static member Ridge = Types.Border.Style.Ridge |> bottomStyleValue'
+        static member Inset = Types.Border.Style.Inset |> bottomStyleValue'
+        static member Outset = Types.Border.Style.Outset |> bottomStyleValue'
 
         static member None = Types.None' |> bottomStyleValue'
         static member Inherit = Types.Inherit |> bottomStyleValue'
@@ -603,15 +603,15 @@ module Border =
 
     type BorderLeftStyle =
         static member Value (style: Types.IBorderStyle) = style |> leftStyleValue'
-        static member Hidden = Types.BorderStyle.Hidden |> leftStyleValue'
-        static member Dotted = Types.BorderStyle.Dotted |> leftStyleValue'
-        static member Dashed = Types.BorderStyle.Dashed |> leftStyleValue'
-        static member Solid = Types.BorderStyle.Solid |> leftStyleValue'
-        static member Double = Types.BorderStyle.Double |> leftStyleValue'
-        static member Groove = Types.BorderStyle.Groove |> leftStyleValue'
-        static member Ridge = Types.BorderStyle.Ridge |> leftStyleValue'
-        static member Inset = Types.BorderStyle.Inset |> leftStyleValue'
-        static member Outset = Types.BorderStyle.Outset |> leftStyleValue'
+        static member Hidden = Types.Border.Style.Hidden |> leftStyleValue'
+        static member Dotted = Types.Border.Style.Dotted |> leftStyleValue'
+        static member Dashed = Types.Border.Style.Dashed |> leftStyleValue'
+        static member Solid = Types.Border.Style.Solid |> leftStyleValue'
+        static member Double = Types.Border.Style.Double |> leftStyleValue'
+        static member Groove = Types.Border.Style.Groove |> leftStyleValue'
+        static member Ridge = Types.Border.Style.Ridge |> leftStyleValue'
+        static member Inset = Types.Border.Style.Inset |> leftStyleValue'
+        static member Outset = Types.Border.Style.Outset |> leftStyleValue'
 
         static member None = Types.None' |> leftStyleValue'
         static member Inherit = Types.Inherit |> leftStyleValue'
@@ -639,8 +639,8 @@ module Border =
 
     type BorderCollapse =
         static member Value (collapse: Types.IBorderCollapse) = collapse |> collapseValue'
-        static member Collapse = Types.BorderCollapse.Collapse |> collapseValue'
-        static member Separate = Types.BorderCollapse.Separate |> collapseValue'
+        static member Collapse = Types.Border.Collapse |> collapseValue'
+        static member Separate = Types.Border.Separate |> collapseValue'
 
         static member Inherit = Types.Inherit |> collapseValue'
         static member Initial = Types.Initial |> collapseValue'
@@ -710,10 +710,10 @@ module Border =
         static member Value (vertical: Types.IBorderRepeat, horizontal: Types.IBorderRepeat) =
             sprintf "%s %s" (repeatToString vertical) (repeatToString horizontal)
             |> imageRepeatValue
-        static member Stretch = Types.BorderImageRepeat.Stretch |> imageRepeatValue'
-        static member Repeat = Types.BorderImageRepeat.Repeat |> imageRepeatValue'
-        static member Round = Types.BorderImageRepeat.Round |> imageRepeatValue'
-        static member Space = Types.BorderImageRepeat.Space |> imageRepeatValue'
+        static member Stretch = Types.Border.ImageRepeat.Stretch |> imageRepeatValue'
+        static member Repeat = Types.Border.ImageRepeat.Repeat |> imageRepeatValue'
+        static member Round = Types.Border.ImageRepeat.Round |> imageRepeatValue'
+        static member Space = Types.Border.ImageRepeat.Space |> imageRepeatValue'
 
         static member Inherit = Types.Inherit |> imageRepeatValue'
         static member Initial = Types.Initial |> imageRepeatValue'
@@ -738,7 +738,7 @@ module Border =
         |> imageSliceValue
 
     type BorderImageSlice =
-        static member Fill = Types.BorderImageSlice.Fill |> imageSliceValue'
+        static member Fill = Types.Border.ImageSlice.Fill |> imageSliceValue'
         static member Value (imageSlice: Types.IBorderImageSlice) = imageSlice |> imageSliceValue'
         static member Value (vertical: Types.IBorderImageSlice, horizontal: Types.IBorderImageSlice) =
             sprintf "%s %s" (imageSliceToString vertical) (imageSliceToString horizontal) |> imageSliceValue
@@ -958,7 +958,7 @@ module Border =
     /// <summary>Specifies color of border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> Types.Color </c>
+    ///     - <c> Types.ColorTypeFoo</c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
@@ -1132,7 +1132,7 @@ module Border =
     /// <summary>Specifies color of top border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> Types.Color </c>
+    ///     - <c> Types.ColorTypeFoo</c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
@@ -1306,7 +1306,7 @@ module Border =
     /// <summary>Specifies color of right border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> Types.Color </c>
+    ///     - <c> Types.ColorTypeFoo</c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
@@ -1480,7 +1480,7 @@ module Border =
     /// <summary>Specifies color of bottom border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> Types.Color </c>
+    ///     - <c> Types.ColorTypeFoo</c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
@@ -1654,7 +1654,7 @@ module Border =
     /// <summary>Specifies color of left border.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> Types.Color </c>
+    ///     - <c> Types.ColorTypeFoo</c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
@@ -1748,34 +1748,34 @@ module Border =
     type BorderImageSource =
         static member Value (source: Types.IBorderImageSource) = source |> imageValue'
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
-        static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
+        static member LinearGradient (angle: Types.Angle, gradients: (Types.ColorTypeFoo * Types.Percent) list) =
             imageValue <| Types.Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
+        static member LinearGradient (angle: Types.Angle, gradients: (Types.ColorTypeFoo * Types.Size) list) =
             imageValue <| Types.Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
+        static member LinearGradients (gradients: (Types.Angle * ((Types.ColorTypeFoo * Types.Percent) list)) list) =
             imageValue <| Types.Image.Image.LinearGradients(gradients)
-        static member LinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
+        static member LinearGradients (gradients: (Types.Angle * ((Types.ColorTypeFoo * Types.Size) list)) list) =
             imageValue <| Types.Image.Image.LinearGradients(gradients)
-        static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Size) list) =
+        static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.ColorTypeFoo * Types.Size) list) =
             imageValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.Color * Types.Percent) list) =
+        static member RepeatingLinearGradient (angle: Types.Angle, gradients: (Types.ColorTypeFoo * Types.Percent) list) =
             imageValue <| Types.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Size) list)) list) =
+        static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.ColorTypeFoo * Types.Size) list)) list) =
             imageValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
-        static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.Color * Types.Percent) list)) list) =
+        static member RepeatingLinearGradients (gradients: (Types.Angle * ((Types.ColorTypeFoo * Types.Percent) list)) list) =
             imageValue <| Types.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.ColorTypeFoo * Types.Percent) list) =
             imageValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+        static member RadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, xPosition: Types.Percent, yPosition: Types.Percent, gradients: (Types.ColorTypeFoo * Types.Size) list) =
             imageValue <| Types.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Percent) list) list) =
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.ColorTypeFoo * Types.Percent) list) list) =
             imageValue <| Types.Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.Color * Types.Size) list) list) =
+        static member RadialGradients (gradients: (Types.Image.Shape * Types.Image.Side * Types.Percent * Types.Percent * (Types.ColorTypeFoo * Types.Size) list) list) =
             imageValue <| Types.Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Percent) list) =
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.ColorTypeFoo * Types.Percent) list) =
             imageValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.Color * Types.Size) list) =
+        static member RepeatingRadialGradient (shape: Types.Image.Shape, size: Types.Image.Side, x: Types.Percent, y: Types.Percent, gradients: (Types.ColorTypeFoo * Types.Size) list) =
             imageValue <| Types.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
         static member None = Types.None' |> imageValue'
         static member Inherit = Types.Inherit |> imageValue'

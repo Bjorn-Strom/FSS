@@ -2,7 +2,6 @@ namespace Fss
 
 [<AutoOpen>]
 module Column =
-
     let private columnGapToString (gap: Types.IColumnGap) =
         match gap with
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
@@ -14,10 +13,10 @@ module Column =
     let private columnSpanToString (span: Types.IColumnSpan) =
         let stringifyColumnSpan =
             function
-                | Types.ColumnSpan.All -> "all"
+                | Types.Column.Span.All -> "all"
 
         match span with
-        | :? Types.ColumnSpan as c -> stringifyColumnSpan c
+        | :? Types.Column.Span as c -> stringifyColumnSpan c
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown column span"
@@ -34,21 +33,21 @@ module Column =
 
     let private columnRuleWidthToString (ruleWidth: Types.IColumnRuleWidth) =
         match ruleWidth with
-        | :? Types.ColumnRuleWidth as w -> Utilities.Helpers.duToLowercase w
+        | :? Types.Column.RuleWidth as w -> Utilities.Helpers.duToLowercase w
         | :? Types.Size as s -> Types.unitHelpers.sizeToString s
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column rule width"
 
     let private columnRuleStyleToString (style: Types.IColumnRuleStyle) =
         match style with
-        | :? Types.ColumnRuleStyle as b -> Utilities.Helpers.duToLowercase b
+        | :? Types.Column.RuleStyle as b -> Utilities.Helpers.duToLowercase b
         | :? Types.None' -> Types.masterTypeHelpers.none
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column style"
 
     let private columnRuleColorToString (columnColor: Types.IColumnRuleColor) =
         match columnColor with
-        | :? Types.Color as c -> Types.colorHelpers.colorToString c
+        | :? Types.ColorTypeFoo as c -> Types.colorHelpers.colorToString c
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column rule color"
 
@@ -61,7 +60,7 @@ module Column =
 
     let private columnFillToString (columnFill: Types.IColumnFill) =
         match columnFill with
-        | :? Types.ColumnFill as c -> Utilities.Helpers.duToKebab c
+        | :? Types.Column.Fill as c -> Utilities.Helpers.duToKebab c
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column fill"
@@ -108,7 +107,7 @@ module Column =
 
     type ColumnSpan =
         static member Value(span: Types.IColumnSpan) = span |> columnSpanValue'
-        static member All = Types.ColumnSpan.All |> columnSpanValue'
+        static member All = Types.Column.Span.All |> columnSpanValue'
         static member Inherit = Types.Inherit |> columnSpanValue'
         static member Initial = Types.Initial |> columnSpanValue'
         static member Unset = Types.Unset |> columnSpanValue'
@@ -181,9 +180,9 @@ module Column =
 
     type ColumnRuleWidth =
         static member Value (ruleWidth: Types.IColumnRuleWidth) = ruleWidth |> columnRuleWidthValue'
-        static member Thin = Types.ColumnRuleWidth.Thin |> columnRuleWidthValue'
-        static member Medium = Types.ColumnRuleWidth.Medium |> columnRuleWidthValue'
-        static member Thick = Types.ColumnRuleWidth.Thick |> columnRuleWidthValue'
+        static member Thin = Types.Column.RuleWidth.Thin |> columnRuleWidthValue'
+        static member Medium = Types.Column.RuleWidth.Medium |> columnRuleWidthValue'
+        static member Thick = Types.Column.RuleWidth.Thick |> columnRuleWidthValue'
         static member Inherit = Types.Inherit |> columnRuleWidthValue'
         static member Initial = Types.Initial |> columnRuleWidthValue'
         static member Unset = Types.Unset |> columnRuleWidthValue'
@@ -209,15 +208,15 @@ module Column =
 
     type ColumnRuleStyle =
         static member Value (style: Types.IColumnRuleStyle) = style |> styleValue'
-        static member Hidden = Types.ColumnRuleStyle.Hidden |> styleValue'
-        static member Dotted = Types.ColumnRuleStyle.Dotted |> styleValue'
-        static member Dashed = Types.ColumnRuleStyle.Dashed |> styleValue'
-        static member Solid = Types.ColumnRuleStyle.Solid |> styleValue'
-        static member Double = Types.ColumnRuleStyle.Double |> styleValue'
-        static member Groove = Types.ColumnRuleStyle.Groove |> styleValue'
-        static member Ridge = Types.ColumnRuleStyle.Ridge |> styleValue'
-        static member Inset = Types.ColumnRuleStyle.Inset |> styleValue'
-        static member Outset = Types.ColumnRuleStyle.Outset |> styleValue'
+        static member Hidden = Types.Column.RuleStyle.Hidden |> styleValue'
+        static member Dotted = Types.Column.RuleStyle.Dotted |> styleValue'
+        static member Dashed = Types.Column.RuleStyle.Dashed |> styleValue'
+        static member Solid = Types.Column.RuleStyle.Solid |> styleValue'
+        static member Double = Types.Column.RuleStyle.Double |> styleValue'
+        static member Groove = Types.Column.RuleStyle.Groove |> styleValue'
+        static member Ridge = Types.Column.RuleStyle.Ridge |> styleValue'
+        static member Inset = Types.Column.RuleStyle.Inset |> styleValue'
+        static member Outset = Types.Column.RuleStyle.Outset |> styleValue'
 
         static member None = Types.None' |> styleValue'
         static member Inherit = Types.Inherit |> styleValue'
@@ -403,7 +402,7 @@ module Column =
     /// <summary>Specifies color of the line drawn between columns.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> Types.Color </c>
+    ///     - <c> Types.ColorTypeFoo</c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
@@ -446,8 +445,8 @@ module Column =
 
     type ColumnFill =
         static member Value(columnFill: Types.IColumnFill) = columnFill |> columnFillValue'
-        static member Balance = Types.ColumnFill.Balance |> columnFillValue'
-        static member BalanceAll = Types.ColumnFill.BalanceAll |> columnFillValue'
+        static member Balance = Types.Column.Fill.Balance |> columnFillValue'
+        static member BalanceAll = Types.Column.Fill.BalanceAll |> columnFillValue'
         static member Auto = Types.Auto |> columnFillValue'
         static member Inherit = Types.Inherit |> columnFillValue'
         static member Initial = Types.Initial |> columnFillValue'

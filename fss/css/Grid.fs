@@ -77,7 +77,7 @@ module Grid =
         | :? Types.Size as s -> Types.unitHelpers.sizeToString s
         | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | :? Types.Fraction as f -> Types.unitHelpers.fractionToString f
-        | :? Types.ContentSize as c -> Types.contentSizeHelpers.contentSizeToString c
+        | :? Types.ContentSize.ContentSize as c -> Types.contentSizeHelpers.contentSizeToString c
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | :? Types.Grid.MinMax as m -> Types.Grid.minMaxToString m
@@ -98,7 +98,7 @@ module Grid =
         | :? Types.Size as s -> Types.unitHelpers.sizeToString s
         | :? Types.Percent as p -> Types.unitHelpers.percentToString p
         | :? Types.Fraction as f -> Types.unitHelpers.fractionToString f
-        | :? Types.ContentSize as c -> Types.contentSizeHelpers.contentSizeToString c
+        | :? Types.ContentSize.ContentSize as c -> Types.contentSizeHelpers.contentSizeToString c
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | :? Types.Grid.MinMax as m -> Types.Grid.minMaxToString m
@@ -494,11 +494,11 @@ module Grid =
             Types.Grid.MinMax.MinMax(min, max)
             |> Types.Grid.minMaxToString
             |> templateRowValue
-        static member MinMax (min: Types.ContentSize, max: Types.Size) =
+        static member MinMax (min: Types.ContentSize.ContentSize, max: Types.Size) =
             Types.Grid.MinMax.MinMax(min, max)
             |> Types.Grid.minMaxToString
             |> templateRowValue
-        static member MinMax (min: Types.ContentSize, max: Types.ContentSize) =
+        static member MinMax (min: Types.ContentSize.ContentSize, max: Types.ContentSize.ContentSize) =
             Types.Grid.MinMax.MinMax(min, max)
             |> Types.Grid.minMaxToString
             |> templateRowValue
@@ -514,7 +514,7 @@ module Grid =
             Types.Grid.Repeat.Repeat(value, length)
             |> Types.Grid.repeatToString
             |> templateRowValue
-        static member Repeat (value: int, contentSize: Types.ContentSize) =
+        static member Repeat (value: int, contentSize: Types.ContentSize.ContentSize) =
             Types.Grid.Repeat.Repeat(value, contentSize)
             |> Types.Grid.repeatToString
             |> templateRowValue
@@ -526,7 +526,7 @@ module Grid =
             Types.Grid.Repeat.Repeat(value, length)
             |> Types.Grid.repeatToString
             |> templateRowValue
-        static member Repeat (value: Types.Grid.RepeatType, contentSize: Types.ContentSize) =
+        static member Repeat (value: Types.Grid.RepeatType, contentSize: Types.ContentSize.ContentSize) =
             Types.Grid.Repeat.Repeat(value, contentSize)
             |> Types.Grid.repeatToString
             |> templateRowValue
@@ -577,11 +577,11 @@ module Grid =
             Types.Grid.MinMax.MinMax(min, max)
             |> Types.Grid.minMaxToString
             |> templateColumnValue
-        static member MinMax (min: Types.ContentSize, max: Types.Size) =
+        static member MinMax (min: Types.ContentSize.ContentSize, max: Types.Size) =
             Types.Grid.MinMax.MinMax(min, max)
             |> Types.Grid.minMaxToString
             |> templateColumnValue
-        static member MinMax (min: Types.ContentSize, max: Types.ContentSize) =
+        static member MinMax (min: Types.ContentSize.ContentSize, max: Types.ContentSize.ContentSize) =
             Types.Grid.MinMax.MinMax(min, max)
             |> Types.Grid.minMaxToString
             |> templateColumnValue
@@ -597,7 +597,7 @@ module Grid =
             Types.Grid.Repeat.Repeat(value, length)
             |> Types.Grid.repeatToString
             |> templateColumnValue
-        static member Repeat (value: int, contentSize: Types.ContentSize) =
+        static member Repeat (value: int, contentSize: Types.ContentSize.ContentSize) =
             Types.Grid.Repeat.Repeat(value, contentSize)
             |> Types.Grid.repeatToString
             |> templateColumnValue
@@ -609,7 +609,7 @@ module Grid =
             Types.Grid.Repeat.Repeat(value, length)
             |> Types.Grid.repeatToString
             |> templateColumnValue
-        static member Repeat (value: Types.Grid.RepeatType, contentSize: Types.ContentSize) =
+        static member Repeat (value: Types.Grid.RepeatType, contentSize: Types.ContentSize.ContentSize) =
             Types.Grid.Repeat.Repeat(value, contentSize)
             |> Types.Grid.repeatToString
             |> templateColumnValue

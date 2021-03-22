@@ -5,7 +5,7 @@ module ScrollBehavior =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
     let private stringifyScrollBehavior (behavior: Types.IScrollBehavior) =
         match behavior with
-        | :? Types.ScrollBehavior as s -> Utilities.Helpers.duToKebab s
+        | :? Types.Scroll.ScrollBehavior as s -> Utilities.Helpers.duToKebab s
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
@@ -18,7 +18,7 @@ module ScrollBehavior =
 
     type ScrollBehavior =
         static member Value (behavior: Types.IScrollBehavior) = behavior |> BehaviorValue'
-        static member Smooth = Types.ScrollBehavior.Smooth |> BehaviorValue'
+        static member Smooth = Types.Scroll.ScrollBehavior.Smooth |> BehaviorValue'
         static member Auto = Types.Auto |> BehaviorValue'
         static member Inherit = Types.Inherit |> BehaviorValue'
         static member Initial = Types.Initial |> BehaviorValue'
@@ -326,7 +326,7 @@ module OverscrollBehaviorX =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
     let private stringifyBehavior (behavior: Types.IOverscrollBehaviorX) =
         match behavior with
-        | :? Types.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
+        | :? Types.Scroll.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
@@ -340,7 +340,7 @@ module OverscrollBehaviorX =
     type OverscrollBehaviorX =
         static member Value (behavior: Types.IOverscrollBehaviorX) = behavior |> overscrollBehaviour
         static member Auto = Types.Auto |> overscrollBehaviour'
-        static member Contain = Types.OverscrollBehavior.Contain |> overscrollBehaviour'
+        static member Contain = Types.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
         static member Inherit = Types.Inherit |> overscrollBehaviour'
         static member Initial = Types.Initial |> overscrollBehaviour'
         static member Unset = Types.Unset |> overscrollBehaviour'
@@ -362,7 +362,7 @@ module OverscrollBehaviorX =
         // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
         let private stringifyBehavior (behavior: Types.IOverscrollBehaviorY) =
             match behavior with
-            | :? Types.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
+            | :? Types.Scroll.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
             | :? Types.Auto -> Types.masterTypeHelpers.auto
             | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
             | _ -> "Unknown all"
@@ -376,7 +376,7 @@ module OverscrollBehaviorX =
         type OverscrollBehaviorY =
             static member Value (behavior: Types.IOverscrollBehaviorY) = behavior |> overscrollBehaviour
             static member Auto = Types.Auto |> overscrollBehaviour'
-            static member Contain = Types.OverscrollBehavior.Contain |> overscrollBehaviour'
+            static member Contain = Types.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
             static member Inherit = Types.Inherit |> overscrollBehaviour'
             static member Initial = Types.Initial |> overscrollBehaviour'
             static member Unset = Types.Unset |> overscrollBehaviour'

@@ -5,7 +5,7 @@ module BoxShadow =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
     let rec private boxShadowToString =
         function
-            | Types.BoxShadow.Color' (x, y, color) ->
+            | Types.BoxShadow.Color (x, y, color) ->
                 sprintf "%s %s %s"
                     (Types.unitHelpers.sizeToString x)
                     (Types.unitHelpers.sizeToString y)
@@ -28,17 +28,17 @@ module BoxShadow =
 
     let private boxShadowValue value = Types.propertyHelpers.cssValue Types.Property.BoxShadow value
     type BoxShadow =
-        static member Color (x: Types.Size, y: Types.Size, color: Types.Color) = Types.BoxShadow.Color'(x, y, color)
-        static member BlurColor (x: Types.Size, y: Types.Size, blur: Types.Size, color: Types.Color) =
+        static member Color (x: Types.Size, y: Types.Size, color: Types.ColorTypeFoo) = Types.BoxShadow.Color(x, y, color)
+        static member BlurColor (x: Types.Size, y: Types.Size, blur: Types.Size, color: Types.ColorTypeFoo) =
                 Types.BoxShadow.BlurColor(x, y, blur, color)
-        static member BlurSpreadColor (x: Types.Size, y: Types.Size, blur: Types.Size, spread: Types.Size, color: Types.Color) =
+        static member BlurSpreadColor (x: Types.Size, y: Types.Size, blur: Types.Size, spread: Types.Size, color: Types.ColorTypeFoo) =
                 Types.BoxShadow.BlurSpreadColor(x, y, blur, spread, color)
 
     /// Supply a list of box shadows to be applied to the element.
-    let BoxShadows (shadows: Types.BoxShadow list): Types.CssProperty =
+    let BoxShadows (shadows: Types.BoxShadow.BoxShadow list): Types.CssProperty =
         shadows
         |> Utilities.Helpers.combineComma boxShadowToString
         |> boxShadowValue
 
     /// Can be used to invert box shadow
-    let Inset (shadow: Types.BoxShadow) = Types.BoxShadow.Inset shadow
+    let Inset (shadow: Types.BoxShadow.BoxShadow) = Types.BoxShadow.Inset shadow

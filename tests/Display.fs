@@ -77,4 +77,8 @@ module Display =
                     "Display none"
                     [ Display.None]
                     ["display" ==> "none"]
+                test
+                    "Display none"
+                    [ Display' Types.Display.Grid]
+                    ["display" ==> "grid"]
             ]

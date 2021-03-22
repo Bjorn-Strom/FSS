@@ -200,7 +200,7 @@ module Background =
                     [ "backgroundRepeat" ==> "unset" ]
                 test
                     "background repeats horizontal and vertical - repeat space"
-                    [ BackgroundRepeat.Value(Types.BackgroundRepeat.Repeat, Types.BackgroundRepeat.Space) ]
+                    [ BackgroundRepeat.Value(Types.Background.Repeat, Types.Background.Space) ]
                     [ "backgroundRepeat" ==> "repeat space" ]
                 test
                     "background size cover"
@@ -312,7 +312,7 @@ module Background =
                     ["backgroundBlendMode" ==> "luminosity"]
                 test
                     "background blend mode multiple"
-                    [ BackgroundBlendMode.Values [ Types.Hue; Types.Saturation; Types.Exclusion ] ]
+                    [ BackgroundBlendMode.Values [ Types.Background.Hue; Types.Background.Saturation; Types.Background.Exclusion ] ]
                     [ "backgroundBlendMode" ==> "hue, saturation, exclusion" ]
                 test
                     "background blend mode normal"

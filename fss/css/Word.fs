@@ -11,7 +11,7 @@ module Word =
 
     let private breakToString (break': Types.IWordBreak) =
         match break' with
-        | :? Types.WordBreak as w -> Utilities.Helpers.duToKebab w
+        | :? Types.WordBreak.WordBreak as w -> Utilities.Helpers.duToKebab w
         | :? Types.Normal -> Types.masterTypeHelpers.normal
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown word break"
@@ -53,9 +53,9 @@ module Word =
 
     type WordBreak =
         static member Value (spacing: Types.IWordBreak) = spacing |> breakCssValue'
-        static member WordBreak = Types.WordBreak |> breakCssValue'
-        static member BreakAll = Types.BreakAll |> breakCssValue'
-        static member KeepAll = Types.KeepAll |> breakCssValue'
+        static member WordBreak = Types.WordBreak.WordBreak |> breakCssValue'
+        static member BreakAll = Types.WordBreak.BreakAll |> breakCssValue'
+        static member KeepAll = Types.WordBreak.KeepAll |> breakCssValue'
 
         static member Normal = Types.Normal |> breakCssValue'
         static member Initial = Types.Initial |> breakCssValue'

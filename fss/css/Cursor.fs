@@ -4,7 +4,7 @@
 module Cursor =
     let private cursorToString (cursor: Types.ICursor) =
         match cursor with
-        | :? Types.Cursor as c -> Utilities.Helpers.duToKebab c
+        | :? Types.Cursor.Cursor as c -> Utilities.Helpers.duToKebab c
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | :? Types.None' -> Types.masterTypeHelpers.none
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k

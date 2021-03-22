@@ -6,20 +6,20 @@ module Animation =
 
     let private animationDirectionToString (direction: Types.IAnimationDirection) =
         match direction with
-            | :? Types.AnimationDirection as d -> Utilities.Helpers.duToKebab d
+            | :? Types.Animation.Direction as d -> Utilities.Helpers.duToKebab d
             | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
             | :? Types.Normal -> Types.masterTypeHelpers.normal
             | _ -> "Unknown animation direction"
 
     let private animationFillModeToString (fillMode: Types.IAnimationFillMode) =
         match fillMode with
-            | :? Types.AnimationFillMode as a -> Utilities.Helpers.duToLowercase a
+            | :? Types.Animation.FillMode as a -> Utilities.Helpers.duToLowercase a
             | :? Types.None' -> Types.masterTypeHelpers.none
             | _ -> "Unknown fill mode"
 
     let private playStateTypeToString (playState: Types.IAnimationPlayState) =
         match playState with
-        | :? Types.AnimationPlayState as a -> Utilities.Helpers.duToLowercase a
+        | :? Types.Animation.PlayState as a -> Utilities.Helpers.duToLowercase a
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown animation play state"
 
@@ -46,9 +46,9 @@ module Animation =
         |> directionCssValue
     type AnimationDirection =
         static member value (direction: Types.IAnimationDirection) = direction |> directionCssValue'
-        static member Reverse = Types.Reverse |> directionCssValue'
-        static member Alternate = Types.Alternate |> directionCssValue'
-        static member AlternateReverse = Types.AlternateReverse |> directionCssValue'
+        static member Reverse = Types.Animation.Direction.Reverse |> directionCssValue'
+        static member Alternate = Types.Animation.Direction.Alternate |> directionCssValue'
+        static member AlternateReverse = Types.Animation.Direction.AlternateReverse |> directionCssValue'
 
         static member Normal = Types.Normal |> directionCssValue'
         static member Inherit = Types.Inherit |>  directionCssValue'
@@ -89,9 +89,9 @@ module Animation =
         |> fillModeCssValue
     type AnimationFillMode =
         static member Value (fillMode: Types.IAnimationFillMode) = fillMode |> fillModeCssValue'
-        static member Forwards = Types.Forwards |> fillModeCssValue'
-        static member Backwards = Types.Backwards |> fillModeCssValue'
-        static member Both = Types.AnimationFillMode.Both |> fillModeCssValue'
+        static member Forwards = Types.Animation.FillMode.Forwards |> fillModeCssValue'
+        static member Backwards = Types.Animation.FillMode.Backwards |> fillModeCssValue'
+        static member Both = Types.Animation.FillMode.Both |> fillModeCssValue'
         static member None = Types.None' |> fillModeCssValue'
 
     /// <summary>Specifies which styles to apply before and after the animation. </summary>
@@ -116,7 +116,7 @@ module Animation =
             values
             |> Utilities.Helpers.combineComma Types.animationHelpers.iterationCountToString
             |> iterationCountCssValue
-        static member Infinite = Types.Infinite |> Types.animationHelpers.iterationCountToString |> iterationCountCssValue
+        static member Infinite = Types.Animation.IterationCount.Infinite |> Types.animationHelpers.iterationCountToString |> iterationCountCssValue
 
     /// <summary>How many times should an animation be played.</summary>
     /// <param name="iterationCount">
@@ -163,8 +163,8 @@ module Animation =
         |> playStateCssValue
     type AnimationPlayState =
         static member Value (playState: Types.IAnimationPlayState) = playState |> playStateCssValue'
-        static member Running = Types.Running |> playStateCssValue'
-        static member Paused = Types.Paused |> playStateCssValue'
+        static member Running = Types.Animation.PlayState.Running |> playStateCssValue'
+        static member Paused = Types.Animation.PlayState.Paused |> playStateCssValue'
         static member Inherit = Types.Inherit |> playStateCssValue'
         static member Initial = Types.Initial |> playStateCssValue'
         static member Unset = Types.Unset |> playStateCssValue'
@@ -187,20 +187,20 @@ module Animation =
         |> Types.timingFunctionHelpers.timingToString
         |> timingFunctionCssValue
     type AnimationTimingFunction =
-        static member Value (timingFunction: Types.Timing) = timingFunction |> Types.timingFunctionHelpers.timingToString
-        static member Values (timings: Types.Timing list) = timingFunctionCssValue <| Utilities.Helpers.combineComma Types.timingFunctionHelpers.timingToString timings
-        static member Ease = Types.Ease |> timingFunctionCssValue'
-        static member EaseIn = Types.EaseIn |> timingFunctionCssValue'
-        static member EaseOut = Types.EaseOut |> timingFunctionCssValue'
-        static member EaseInOut = Types.EaseInOut |> timingFunctionCssValue'
-        static member Linear = Types.Linear |> timingFunctionCssValue'
-        static member StepStart = Types.StepStart |> timingFunctionCssValue'
-        static member StepEnd = Types.StepEnd |> timingFunctionCssValue'
+        static member Value (timingFunction: Types.TimingFunction.Timing) = timingFunction |> Types.timingFunctionHelpers.timingToString
+        static member Values (timings: Types.TimingFunction.Timing list) = timingFunctionCssValue <| Utilities.Helpers.combineComma Types.timingFunctionHelpers.timingToString timings
+        static member Ease = Types.TimingFunction.Ease |> timingFunctionCssValue'
+        static member EaseIn = Types.TimingFunction.EaseIn |> timingFunctionCssValue'
+        static member EaseOut = Types.TimingFunction.EaseOut |> timingFunctionCssValue'
+        static member EaseInOut = Types.TimingFunction.EaseInOut |> timingFunctionCssValue'
+        static member Linear = Types.TimingFunction.Linear |> timingFunctionCssValue'
+        static member StepStart = Types.TimingFunction.StepStart |> timingFunctionCssValue'
+        static member StepEnd = Types.TimingFunction.StepEnd |> timingFunctionCssValue'
         static member CubicBezier (p1: float, p2:float, p3:float, p4:float) =
-            Types.CubicBezier(p1,p2,p3,p4) |> timingFunctionCssValue'
-        static member Step (steps: int) = Types.Steps(steps) |> timingFunctionCssValue
-        static member Step (steps: int, jumpTerm: Types.Step) =
-            Types.StepsWithTerm(steps, jumpTerm) |> timingFunctionCssValue
+            Types.TimingFunction.CubicBezier(p1,p2,p3,p4) |> timingFunctionCssValue'
+        static member Step (steps: int) = Types.TimingFunction.Steps(steps) |> timingFunctionCssValue
+        static member Step (steps: int, jumpTerm: Types.TimingFunction.Step) =
+            Types.TimingFunction.StepsWithTerm(steps, jumpTerm) |> timingFunctionCssValue
         static member Inherit = Types.Inherit |> timingFunctionCssValue'
         static member Initial = Types.Initial |> timingFunctionCssValue'
         static member Unset = Types.Unset |> timingFunctionCssValue'
@@ -214,4 +214,4 @@ module Animation =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AnimationTimingFunction' (timing: Types.Timing) = AnimationTimingFunction.Value(timing)
+    let AnimationTimingFunction' (timing: Types.TimingFunction.Timing) = AnimationTimingFunction.Value(timing)

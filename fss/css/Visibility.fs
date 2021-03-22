@@ -48,7 +48,7 @@ module Opacity =
 module PaintOrder =
     let private paintOrderToString (paintOrder: Types.IPaintOrder) =
         match paintOrder with
-        | :? Types.PaintOrder as p -> Utilities.Helpers.duToLowercase p
+        | :? Types.Visibility.PaintOrder as p -> Utilities.Helpers.duToLowercase p
         | :? Types.Normal -> Types.masterTypeHelpers.normal
         | _ -> "unknown paint order"
 
@@ -72,9 +72,9 @@ module PaintOrder =
                 (paintOrderToString o2)
                 (paintOrderToString o3)
             |> paintOrderValue
-        static member Stroke = Types.PaintOrder.Stroke |> paintOrderValue'
-        static member Markers = Types.PaintOrder.Markers |> paintOrderValue'
-        static member Fill = Types.PaintOrder.Fill |> paintOrderValue'
+        static member Stroke = Types.Visibility.PaintOrder.Stroke |> paintOrderValue'
+        static member Markers = Types.Visibility.PaintOrder.Markers |> paintOrderValue'
+        static member Fill = Types.Visibility.PaintOrder.Fill |> paintOrderValue'
         static member Normal = Types.Normal |> paintOrderValue'
 
     /// <summary>Specifies in which order the fill and strokes are drawn.</summary>

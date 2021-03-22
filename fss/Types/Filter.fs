@@ -1,36 +1,38 @@
 namespace Fss
 
 namespace Fss.Types
-    type Filter =
-        | Url of string
-        | Blur of int
-        | Brightness of Percent
-        | Contrast of Percent
-        | DropShadow of int * int * int * Color * Percent
-        | Grayscale of Percent
-        | HueRotate of int
-        | Invert of Percent
-        | Opacity of Percent
-        | Saturate of Percent
-        | Sepia of Percent
-        interface IFilter
-        interface IBackdropFilter
+    [<RequireQualifiedAccess>]
+    module Filter =
+        type Filter =
+            | Url of string
+            | Blur of int
+            | Brightness of Percent
+            | Contrast of Percent
+            | DropShadow of int * int * int * ColorTypeFoo * Percent
+            | Grayscale of Percent
+            | HueRotate of int
+            | Invert of Percent
+            | Opacity of Percent
+            | Saturate of Percent
+            | Sepia of Percent
+            interface IFilter
+            interface IBackdropFilter
 
     [<AutoOpen>]
     module filterHelpers =
-        let stringifyFilter (filter: Filter) =
+        let stringifyFilter (filter: Filter.Filter) =
             match filter with
-                | Url u -> $"url(\"{u}\")"
-                | Blur b -> $"blur({b}px)"
-                | Brightness b -> $"brightness({percentToString b})"
-                | Contrast c -> $"contrast({percentToString c})"
-                | DropShadow (x, y, b, c, i)  -> $"drop-shadow({x}px {y}px {b}px {colorToString c}) invert({percentToString i})"
-                | Grayscale g -> $"grayscale({percentToString g})"
-                | HueRotate h -> $"hue-rotate({h}deg)"
-                | Invert i -> $"invert({percentToString i})"
-                | Opacity o -> $"opacity({percentToString o})"
-                | Saturate s -> $"saturate({percentToString s})"
-                | Sepia s -> $"sepia({percentToString s})"
+                | Filter.Url u -> $"url(\"{u}\")"
+                | Filter.Blur b -> $"blur({b}px)"
+                | Filter.Brightness b -> $"brightness({percentToString b})"
+                | Filter.Contrast c -> $"contrast({percentToString c})"
+                | Filter.DropShadow (x, y, b, c, i)  -> $"drop-shadow({x}px {y}px {b}px {colorToString c}) invert({percentToString i})"
+                | Filter.Grayscale g -> $"grayscale({percentToString g})"
+                | Filter.HueRotate h -> $"hue-rotate({h}deg)"
+                | Filter.Invert i -> $"invert({percentToString i})"
+                | Filter.Opacity o -> $"opacity({percentToString o})"
+                | Filter.Saturate s -> $"saturate({percentToString s})"
+                | Filter.Sepia s -> $"sepia({percentToString s})"
 
         let stringifyFilters filters =
             filters

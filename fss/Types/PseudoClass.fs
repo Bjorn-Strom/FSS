@@ -1,8 +1,10 @@
 namespace Fss
 
 namespace Fss.Types
-    type NthChildType =
-        | Odd
-        | Even
-        interface INthChild
+    [<RequireQualifiedAccess>]
+    module PseudoClass =
+        type NthChildType =
+            | Odd
+            | Even
+            interface INthChild
 

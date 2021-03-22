@@ -7,7 +7,7 @@ module PseudoClass =
 
     let private stringifyNthChild (nthChild: Types.INthChild)=
         match nthChild with
-        | :? Types.NthChildType as n -> Utilities.Helpers.duToLowercase n
+        | :? Types.PseudoClass.NthChildType as n -> Utilities.Helpers.duToLowercase n
         | :? Types.CssString as s -> Types.masterTypeHelpers.StringToString s
         | :? Types.CssInt as i -> Types.masterTypeHelpers.IntToString i
         | _ -> "Unknown nth child"

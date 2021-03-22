@@ -347,15 +347,15 @@ module Font =
                      [ "fontFamily" ==> "unset" ]
                 test
                     "Font families"
-                    [ FontFamily.Values ([ Types.Serif; Types.Monospace ]) ]
+                    [ FontFamily.Values ([ Types.Font.Serif; Types.Font.Monospace ]) ]
                     [ "fontFamily" ==> "serif, monospace" ]
                 test
                     "font feature setting On"
-                    [ FontFeatureSetting.Liga Types.On ]
+                    [ FontFeatureSetting.Liga Types.Font.On ]
                     [ "fontFeatureSettings" ==> "\"liga\" On" ]
                 test
                     "font feature setting Off"
-                    [ FontFeatureSetting.Liga Types.Off ]
+                    [ FontFeatureSetting.Liga Types.Font.Off ]
                     [ "fontFeatureSettings" ==> "\"liga\" Off" ]
                 test
                     "font feature setting initial"

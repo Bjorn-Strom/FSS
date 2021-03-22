@@ -4,7 +4,7 @@ namespace Fss
 module Caret =
     let private caretColorToString (caretColor: Types.ICaretColor) =
         match caretColor with
-        | :? Types.Color as c -> Types.colorHelpers.colorToString c
+        | :? Types.ColorTypeFoo as c -> Types.colorHelpers.colorToString c
         | :? Types.Auto -> Types.masterTypeHelpers.auto
         | _ -> "Unknown caret color"
 
@@ -172,7 +172,7 @@ module Caret =
     /// <summary>Specifies caret color.</summary>
     /// <param name="caretColor">
     ///     can be:
-    ///     - <c> Types.Color </c>
+    ///     - <c> Types.ColorTypeFoo</c>
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>

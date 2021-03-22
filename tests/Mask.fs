@@ -135,7 +135,7 @@ module Mask =
                     [ "maskMode" ==> "match-source" ]
                 test
                     "Mask mode multiple"
-                    [ MaskMode.Value([Types.Alpha; Types.MatchSource]) ]
+                    [ MaskMode.Value([Types.Mask.Alpha; Types.Mask.MatchSource]) ]
                     [ "maskMode" ==> "alpha, match-source" ]
                 test
                     "Mask mode inherit"
@@ -151,7 +151,7 @@ module Mask =
                     [ "maskMode" ==> "unset" ]
                 test
                     "MaskOrigin multiple"
-                    [ MaskOrigin.Value([Types.MaskOrigin.ViewBox; Types.MaskOrigin.FillBox; Types.MaskOrigin.BorderBox])]
+                    [ MaskOrigin.Value([Types.Mask.Origin.ViewBox; Types.Mask.Origin.FillBox; Types.Mask.Origin.BorderBox])]
                     [ "maskOrigin" ==> "view-box, fill-box, border-box" ]
                 test
                     "MaskOrigin content-box"
@@ -236,15 +236,15 @@ module Mask =
 
                 test
                     "MaskRepeat value"
-                    [ MaskRepeat.Value(Types.MaskRepeat.Repeat')]
+                    [ MaskRepeat.Value(Types.Mask.Repeat)]
                     [ "maskRepeat" ==> "repeat" ]
                 test
                     "MaskRepeat 2 value"
-                    [ MaskRepeat.Value(Types.MaskRepeat.RepeatX, Types.MaskRepeat.RepeatY)]
+                    [ MaskRepeat.Value(Types.Mask.RepeatX, Types.Mask.RepeatY)]
                     [ "maskRepeat" ==> "repeat-x repeat-y" ]
                 test
                     "MaskRepeat multiple values"
-                    [ MaskRepeat.Value([Types.MaskRepeat.RepeatX, Types.MaskRepeat.RepeatY; Types.MaskRepeat.NoRepeat, Types.MaskRepeat.Round])]
+                    [ MaskRepeat.Value([Types.Mask.RepeatX, Types.Mask.RepeatY; Types.Mask.NoRepeat, Types.Mask.Round])]
                     [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
                 test
                     "MaskRepeat repeatX"

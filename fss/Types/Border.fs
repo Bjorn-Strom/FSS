@@ -1,42 +1,44 @@
 namespace Fss
 
 namespace Fss.Types
-    type BorderWidth =
-        | Thin
-        | Medium
-        | Thick
-        interface IBorderWidth
+    [<RequireQualifiedAccess>]
+    module Border =
+        type Width =
+            | Thin
+            | Medium
+            | Thick
+            interface IBorderWidth
 
-    type BorderStyle =
-        | Hidden
-        | Dotted
-        | Dashed
-        | Solid
-        | Double
-        | Groove
-        | Ridge
-        | Inset
-        | Outset
-        interface IBorderStyle
+        type Style =
+            | Hidden
+            | Dotted
+            | Dashed
+            | Solid
+            | Double
+            | Groove
+            | Ridge
+            | Inset
+            | Outset
+            interface IBorderStyle
 
-    type BorderCollapse =
-        | Collapse
-        | Separate
-        interface IBorderCollapse
+        type Collapse =
+            | Collapse
+            | Separate
+            interface IBorderCollapse
 
-    type BorderImageOutset =
-        | BorderImageOutset of float
-        interface IBorderImageOutset
+        type ImageOutset =
+            | ImageOutset of float
+            interface IBorderImageOutset
 
-    type BorderImageRepeat =
-        | Stretch
-        | Repeat
-        | Round
-        | Space
-        interface IBorderRepeat
+        type ImageRepeat =
+            | Stretch
+            | Repeat
+            | Round
+            | Space
+            interface IBorderRepeat
 
-    type BorderImageSlice =
-        | Value of float
-        | Fill
-        interface IBorderImageSlice
+        type ImageSlice =
+            | Value of float
+            | Fill
+            interface IBorderImageSlice
 

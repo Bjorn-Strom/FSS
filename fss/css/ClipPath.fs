@@ -6,17 +6,17 @@ module ClipPath =
     let private stringifyClipPath (clipPath: Types.IClipPath) =
         let stringifyInset =
             function
-                | Types.All a -> Types.unitHelpers.lengthPercentageToString a
-                | Types.HorizontalVertical (h, v) ->
+                | Types.ClipPath.All a -> Types.unitHelpers.lengthPercentageToString a
+                | Types.ClipPath.HorizontalVertical (h, v) ->
                     sprintf "%s %s"
                         (Types.unitHelpers.lengthPercentageToString h)
                         (Types.unitHelpers.lengthPercentageToString v)
-                | Types.TopHorizontalBottom (t, h, b) ->
+                | Types.ClipPath.TopHorizontalBottom (t, h, b) ->
                     sprintf "%s %s %s"
                         (Types.unitHelpers.lengthPercentageToString t)
                         (Types.unitHelpers.lengthPercentageToString h)
                         (Types.unitHelpers.lengthPercentageToString b)
-                | Types.TopRightBottomLeft (t, r, b, l) ->
+                | Types.ClipPath.TopRightBottomLeft (t, r, b, l) ->
                     sprintf "%s %s %s %s"
                         (Types.unitHelpers.lengthPercentageToString t)
                         (Types.unitHelpers.lengthPercentageToString r)
@@ -24,7 +24,7 @@ module ClipPath =
                         (Types.unitHelpers.lengthPercentageToString l)
         let stringifyRound r = Utilities.Helpers.combineWs Types.unitHelpers.lengthPercentageToString r
         let stringifyPolygon p =
-            let unboxPolygon (Types.Polygon p) = p
+            let unboxPolygon (Types.ClipPath.Polygon p) = p
             unboxPolygon p
             |> Utilities.Helpers.combineComma (fun (x, y) ->
                 sprintf "%s %s"
@@ -32,15 +32,15 @@ module ClipPath =
                     (Types.unitHelpers.lengthPercentageToString y))
 
         match clipPath with
-        | :? Types.Geometry as g -> Utilities.Helpers.duToKebab g
-        | :? Types.Inset as i -> sprintf "inset(%s)" <| stringifyInset i
-        | :? Types.Round as r ->
-            let unboxRound (Types.Round(r, i)) = i, r
+        | :? Types.ClipPath.Geometry as g -> Utilities.Helpers.duToKebab g
+        | :? Types.ClipPath.Inset as i -> sprintf "inset(%s)" <| stringifyInset i
+        | :? Types.ClipPath.Round as r ->
+            let unboxRound (Types.ClipPath.Round(r, i)) = i, r
             let (r, i) = unboxRound r
             sprintf "inset(%s round %s)"
                 (stringifyInset i)
                 (stringifyRound r)
-        | :? Types.Polygon as p ->
+        | :? Types.ClipPath.Polygon as p ->
             sprintf "polygon(%s)" <| stringifyPolygon p
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | :? Types.None' -> Types.masterTypeHelpers.none
@@ -54,28 +54,28 @@ module ClipPath =
 
     type ClipPath =
         static member Inset (inset: Types.ILengthPercentage) =
-            Types.Inset.All inset
+            Types.ClipPath.Inset.All inset
             |> clipPathValue'
         static member Inset (horizontal: Types.ILengthPercentage, vertical: Types.ILengthPercentage) =
-            Types.Inset.HorizontalVertical(horizontal, vertical)
+            Types.ClipPath.Inset.HorizontalVertical(horizontal, vertical)
             |> clipPathValue'
         static member Inset (top: Types.ILengthPercentage, horizontal: Types.ILengthPercentage, bottom: Types.ILengthPercentage) =
-            Types.Inset.TopHorizontalBottom(top, horizontal, bottom)
+            Types.ClipPath.Inset.TopHorizontalBottom(top, horizontal, bottom)
             |> clipPathValue'
         static member Inset (top: Types.ILengthPercentage, right: Types.ILengthPercentage, bottom: Types.ILengthPercentage, left: Types.ILengthPercentage) =
-            Types.Inset.TopRightBottomLeft(top, right, bottom, left)
+            Types.ClipPath.Inset.TopRightBottomLeft(top, right, bottom, left)
             |> clipPathValue'
         static member Inset (inset: Types.ILengthPercentage, round: Types.ILengthPercentage list) =
-            Types.Round (Types.Inset.All inset, round)
+            Types.ClipPath.Round (Types.ClipPath.Inset.All inset, round)
             |> clipPathValue'
         static member Inset (horizontal: Types.ILengthPercentage, vertical: Types.ILengthPercentage, round: Types.ILengthPercentage list) =
-            Types.Round (Types.Inset.HorizontalVertical(horizontal, vertical), round)
+            Types.ClipPath.Round (Types.ClipPath.Inset.HorizontalVertical(horizontal, vertical), round)
             |> clipPathValue'
         static member Inset (top: Types.ILengthPercentage, horizontal: Types.ILengthPercentage, bottom: Types.ILengthPercentage, round: Types.ILengthPercentage list) =
-            Types.Round (Types.Inset.TopHorizontalBottom(top, horizontal, bottom), round)
+            Types.ClipPath.Round (Types.ClipPath.Inset.TopHorizontalBottom(top, horizontal, bottom), round)
             |> clipPathValue'
         static member Inset (top: Types.ILengthPercentage, right: Types.ILengthPercentage, bottom: Types.ILengthPercentage, left: Types.ILengthPercentage, round: Types.ILengthPercentage list) =
-            Types.Round (Types.Inset.TopRightBottomLeft(top, right, bottom, left), round)
+            Types.ClipPath.Round (Types.ClipPath.Inset.TopRightBottomLeft(top, right, bottom, left), round)
             |> clipPathValue'
         static member Circle (radius: Types.ILengthPercentage) =
             sprintf "circle(%s)"
@@ -103,17 +103,17 @@ module ClipPath =
         static member Path (path: string) =
             sprintf "path('%s')" path
             |> clipPathValue
-        static member Polygon (points: Types.Point list) =
-            Types.Polygon points
+        static member Polygon (points: Types.ClipPath.Point list) =
+            Types.ClipPath.Polygon points
             |> clipPathValue'
 
-        static member MarginBox = Types.MarginBox |> clipPathValue'
-        static member BorderBox = Types.BorderBox |> clipPathValue'
-        static member PaddingBox = Types.PaddingBox |> clipPathValue'
-        static member ContentBox = Types.ContentBox |> clipPathValue'
-        static member FillBox = Types.FillBox |> clipPathValue'
-        static member StrokeBox = Types.StrokeBox |> clipPathValue'
-        static member ViewBox = Types.ViewBox |> clipPathValue'
+        static member MarginBox = Types.ClipPath.MarginBox |> clipPathValue'
+        static member BorderBox = Types.ClipPath.BorderBox |> clipPathValue'
+        static member PaddingBox = Types.ClipPath.PaddingBox |> clipPathValue'
+        static member ContentBox = Types.ClipPath.ContentBox |> clipPathValue'
+        static member FillBox = Types.ClipPath.FillBox |> clipPathValue'
+        static member StrokeBox = Types.ClipPath.StrokeBox |> clipPathValue'
+        static member ViewBox = Types.ClipPath.ViewBox |> clipPathValue'
 
         static member None = Types.None' |> clipPathValue'
         static member Inherit = Types.Inherit |> clipPathValue'

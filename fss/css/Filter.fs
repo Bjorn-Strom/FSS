@@ -5,7 +5,7 @@ module Filter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/filter
     let private stringifyFilter (filter: Types.IFilter) =
         match filter with
-        | :? Types.Filter as f -> Types.filterHelpers.stringifyFilter f
+        | :? Types.Filter.Filter as f -> Types.filterHelpers.stringifyFilter f
         | :? Types.Keywords as g -> Types.masterTypeHelpers.keywordsToString g
         | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown filter"
@@ -35,7 +35,7 @@ module Filter =
         static member Unset = Types.Unset |> filterValue'
 
     /// Supply a list of filters to be applied to the element.
-    let Filters (filters: Types.Filter list): Types.CssProperty =
+    let Filters (filters: Types.Filter.Filter list): Types.CssProperty =
         filters
         |> Utilities.Helpers.combineWs Types.filterHelpers.stringifyFilter
         |> filterValue
@@ -45,7 +45,7 @@ module BackdropFilter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
     let private stringifyFilter (backdropFilter: Types.IBackdropFilter) =
         match backdropFilter with
-        | :? Types.Filter as f -> Types.filterHelpers.stringifyFilter f
+        | :? Types.Filter.Filter as f -> Types.filterHelpers.stringifyFilter f
         | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
         | :? Types.None' -> Types.masterTypeHelpers.none
         | _ -> "Unknown backdrop filter"
@@ -75,7 +75,7 @@ module BackdropFilter =
         static member Unset = Types.Unset |> backdropFilterValue'
 
     /// Supply a list of filters to be applied to the element.
-    let BackdropFilters (backdropFilters: Types.Filter list): Types.CssProperty =
+    let BackdropFilters (backdropFilters: Types.Filter.Filter list): Types.CssProperty =
         backdropFilters
         |> Utilities.Helpers.combineWs Types.filterHelpers.stringifyFilter
         |> backdropFilterValue

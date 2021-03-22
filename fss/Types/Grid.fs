@@ -1,9 +1,8 @@
 namespace Fss
 
 namespace Fss.Types
-    [<AutoOpen>]
+    [<RequireQualifiedAccess>]
     module Grid =
-
         type GridAutoFlow =
             | Row
             | Column
@@ -46,29 +45,29 @@ namespace Fss.Types
             static member MinMax (min: ILengthPercentage, max: ILengthPercentage) =
                 sprintf "minmax(%s, %s)" (lengthPercentageToString min) (lengthPercentageToString max)
                 |> MinMaxGrid
-            static member MinMax (min: Size, max: ContentSize) =
+            static member MinMax (min: Size, max: ContentSize.ContentSize) =
                 sprintf "minmax(%s, %s)" (sizeToString min) (contentSizeToString max)
                 |> MinMaxGrid
-            static member MinMax (min: Percent, max: ContentSize) =
+            static member MinMax (min: Percent, max: ContentSize.ContentSize) =
                 sprintf "minmax(%s, %s)" (percentToString min) (contentSizeToString max)
                 |> MinMaxGrid
-            static member MinMax (min: ContentSize, max: Size) =
+            static member MinMax (min: ContentSize.ContentSize, max: Size) =
                 sprintf "minmax(%s, %s)" (contentSizeToString min) (sizeToString max)
                 |> MinMaxGrid
-            static member MinMax (min: ContentSize, max: ContentSize) =
+            static member MinMax (min: ContentSize.ContentSize, max: ContentSize.ContentSize) =
                 sprintf "minmax(%s, %s)" (contentSizeToString min) (contentSizeToString max)
                 |> MinMaxGrid
-            static member MinMax (min: ILengthPercentage, contentSize: ContentSize) =
+            static member MinMax (min: ILengthPercentage, contentSize: ContentSize.ContentSize) =
                 sprintf "minmax(%s, %s)"
                     (lengthPercentageToString min)
                     (contentSizeToString contentSize)
                 |> MinMaxGrid
-            static member MinMax ( contentSize: ContentSize, min: ILengthPercentage) =
+            static member MinMax ( contentSize: ContentSize.ContentSize, min: ILengthPercentage) =
                 sprintf "minmax(%s, %s)"
                     (contentSizeToString contentSize)
                     (lengthPercentageToString min)
                 |> MinMaxGrid
-            static member MinMax ( contentSize: ContentSize, min: Fraction) =
+            static member MinMax ( contentSize: ContentSize.ContentSize, min: Fraction) =
                 sprintf "minmax(%s, %s)"
                     (contentSizeToString contentSize)
                     (fractionToString min)
@@ -87,10 +86,10 @@ namespace Fss.Types
             static member Repeat (value: int, length: ILengthPercentage) =
                 sprintf "repeat(%d, %s)" value (lengthPercentageToString length)
                 |> GridRepeat
-            static member Repeat (value: int, contentSize: ContentSize) =
+            static member Repeat (value: int, contentSize: ContentSize.ContentSize) =
                 sprintf "repeat(%d, %s)" value (contentSizeToString contentSize)
                 |> GridRepeat
-            static member Repeat (value: int, contentSizes: ContentSize list) =
+            static member Repeat (value: int, contentSizes: ContentSize.ContentSize list) =
                 sprintf "repeat(%d, %s)"
                     value
                     (Fss.Utilities.Helpers.combineWs contentSizeToString contentSizes)
@@ -106,7 +105,7 @@ namespace Fss.Types
             static member Repeat (value: RepeatType, length: ILengthPercentage) =
                 sprintf "repeat(%s, %s)" (repeatTypeToString value) (lengthPercentageToString length)
                 |> GridRepeat
-            static member Repeat (value: RepeatType, contentSize: ContentSize) =
+            static member Repeat (value: RepeatType, contentSize: ContentSize.ContentSize) =
                 sprintf "repeat(%s, %s)" (repeatTypeToString value) (contentSizeToString contentSize)
                 |> GridRepeat
             static member Repeat (value: int, minMax: MinMax) =

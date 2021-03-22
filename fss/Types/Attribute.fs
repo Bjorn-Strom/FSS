@@ -1,7 +1,7 @@
 ﻿namespace Fss
 
 namespace Fss.Types
-
+    [<RequireQualifiedAccess>]
     module Attribute =
         type Attribute =
             | Property

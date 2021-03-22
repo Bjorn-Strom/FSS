@@ -1,70 +1,72 @@
 namespace Fss
 
 namespace Fss.Types
-    type BackgroundClip =
-        | BorderBox
-        | PaddingBox
-        | ContentBox
-        | Text
-        interface IBackgroundClip
+    [<RequireQualifiedAccess>]
+    module Background =
+        type Clip =
+            | BorderBox
+            | PaddingBox
+            | ContentBox
+            | Text
+            interface IBackgroundClip
 
-    type BackgroundOrigin =
-        | BorderBox
-        | PaddingBox
-        | ContentBox
-        interface IBackgroundOrigin
+        type Origin =
+            | BorderBox
+            | PaddingBox
+            | ContentBox
+            interface IBackgroundOrigin
 
-    type BackgroundRepeat =
-        | RepeatX
-        | RepeatY
-        | Repeat
-        | Space
-        | Round
-        | NoRepeat
-        interface IBackgroundRepeat
+        type Repeat =
+            | RepeatX
+            | RepeatY
+            | Repeat
+            | Space
+            | Round
+            | NoRepeat
+            interface IBackgroundRepeat
 
-    type BackgroundSize =
-        | Cover
-        | Contain
-        interface IBackgroundSize
+        type Size =
+            | Cover
+            | Contain
+            interface IBackgroundSize
 
-    type BackgroundAttachment =
-        | Scroll
-        | Fixed
-        | Local
-        interface IBackgroundAttachment
+        type Attachment =
+            | Scroll
+            | Fixed
+            | Local
+            interface IBackgroundAttachment
 
-    type BackgroundPosition =
-        | Top
-        | Bottom
-        | Left
-        | Right
-        | Center
-        interface IBackgroundPosition
+        type Position =
+            | Top
+            | Bottom
+            | Left
+            | Right
+            | Center
+            interface IBackgroundPosition
 
-    type BackgroundBlendMode =
-        | Multiply
-        | Screen
-        | Overlay
-        | Darken
-        | Lighten
-        | ColorDodge
-        | ColorBurn
-        | HardLight
-        | SoftLight
-        | Difference
-        | Exclusion
-        | Hue
-        | Saturation
-        | Color'
-        | Luminosity
-        interface IBackgroundBlendMode
+        type BlendMode =
+            | Multiply
+            | Screen
+            | Overlay
+            | Darken
+            | Lighten
+            | ColorDodge
+            | ColorBurn
+            | HardLight
+            | SoftLight
+            | Difference
+            | Exclusion
+            | Hue
+            | Saturation
+            | Color
+            | Luminosity
+            interface IBackgroundBlendMode
 
-    type Isolation =
-        | Isolate
-        interface IIsolation
+        type Isolation =
+            | Isolate
+            interface IIsolation
 
-    type BoxDecorationBreak =
-        | Slice
-        | Clone
-        interface IBoxDecorationBreak
+        type BoxDecorationBreak =
+            | Slice
+            | Clone
+            interface IBoxDecorationBreak

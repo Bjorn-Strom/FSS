@@ -178,7 +178,7 @@ module Color =
               Types.Color.Hsl(h, s, l) |> colorCssValue'
         static member Hsla h s l a =
               Types.Color.Hsla (h, s, l, a) |> colorCssValue'
-        static member Value (color: Types.Color) = color |> colorCssValue'
+        static member Value (color: Types.ColorTypeFoo) = color |> colorCssValue'
         static member transparent = Types.Color.transparent |> colorCssValue'
         static member currentColor = Types.Color.currentColor |> colorCssValue'
         static member Revert = colorCssValue "revert"
@@ -188,7 +188,7 @@ module Color =
         static member Unset = Types.Unset |> Types.masterTypeHelpers.keywordsToString |> colorCssValue
 
     /// <summary>Sets the color of text and text decoration. </summary>
-    /// <param name="color">The Types.Color to apply</param>
+    /// <param name="color">The Types.ColorTypeFooto apply</param>
     /// <returns>Css property for fss.</returns>
-    let Color' (color: Types.Color) = Color.Value(color)
+    let Color' (color: Types.ColorTypeFoo) = Color.Value(color)
 

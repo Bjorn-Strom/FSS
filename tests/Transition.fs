@@ -138,27 +138,27 @@ module Transition =
                     ["transitionTimingFunction" ==> "steps(5)"]
                 test
                     "Transition timing function  step jump start"
-                    [ TransitionTimingFunction.Step(5, Types.JumpStart) ]
+                    [ TransitionTimingFunction.Step(5, Types.TimingFunction.JumpStart) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-start)"]
                 test
                     "Transition timing function step jump end"
-                    [ TransitionTimingFunction.Step(5, Types.JumpEnd) ]
+                    [ TransitionTimingFunction.Step(5, Types.TimingFunction.JumpEnd) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-end)"]
                 test
                     "Transition timing function step jump none"
-                    [ TransitionTimingFunction.Step(5, Types.JumpNone) ]
+                    [ TransitionTimingFunction.Step(5, Types.TimingFunction.JumpNone) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-none)"]
                 test
                     "Transition timing function step jump both"
-                    [ TransitionTimingFunction.Step(5, Types.JumpBoth) ]
+                    [ TransitionTimingFunction.Step(5, Types.TimingFunction.JumpBoth) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-both)"]
                 test
                     "Transition timing function step start"
-                    [ TransitionTimingFunction.Step(5, Types.Step.Start) ]
+                    [ TransitionTimingFunction.Step(5, Types.TimingFunction.Step.Start) ]
                     ["transitionTimingFunction" ==> "steps(5, start)"]
                 test
                     "Transition timing function step end"
-                    [ TransitionTimingFunction.Step(5, Types.Step.End) ]
+                    [ TransitionTimingFunction.Step(5, Types.TimingFunction.Step.End) ]
                     ["transitionTimingFunction" ==> "steps(5, end)"]
                 test
                     "Transition timing function inherit"

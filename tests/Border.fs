@@ -63,7 +63,7 @@ module Border =
                     [ "borderStyle" ==> "outset" ]
                 test
                     "Borderstyle multiple"
-                    [ BorderStyle.Value(Types.BorderStyle.Inset, Types.BorderStyle.Outset, Types.BorderStyle.Ridge, Types.BorderStyle.Groove) ]
+                    [ BorderStyle.Value(Types.Border.Style.Inset, Types.Border.Style.Outset, Types.Border.Style.Ridge, Types.Border.Style.Groove) ]
                     [ "borderStyle" ==> "inset outset ridge groove" ]
                 test
                     "Borderstyle none"
@@ -335,7 +335,7 @@ module Border =
                     [ "borderImageRepeat" ==> "space" ]
                 test
                     "Border image repeat space"
-                    [ BorderImageRepeat.Value(Types.BorderImageRepeat.Stretch, Types.BorderImageRepeat.Repeat) ]
+                    [ BorderImageRepeat.Value(Types.Border.ImageRepeat.Stretch, Types.Border.ImageRepeat.Repeat) ]
                     [ "borderImageRepeat" ==> "stretch repeat" ]
                 test
                     "Border image repeat inherit"
@@ -379,11 +379,11 @@ module Border =
                     [ "borderImageOutset" ==> "1.0rem" ]
                 test
                     "Border image outset value"
-                    [ BorderImageOutset' (Types.BorderImageOutset 1.5) ]
+                    [ BorderImageOutset' (Types.Border.ImageOutset 1.5) ]
                     [ "borderImageOutset" ==> "1.5" ]
                 test
                     "Border image outset vertical horizontal"
-                    [ BorderImageOutset.Value(Types.BorderImageOutset 1., Types.BorderImageOutset 1.2) ]
+                    [ BorderImageOutset.Value(Types.Border.ImageOutset 1., Types.Border.ImageOutset 1.2) ]
                     [ "borderImageOutset" ==> "1 1.2" ]
                 test
                     "Border image outset top right bottom left"
