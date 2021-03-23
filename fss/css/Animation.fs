@@ -198,9 +198,9 @@ module Animation =
         static member StepEnd = Types.TimingFunction.StepEnd |> timingFunctionCssValue'
         static member CubicBezier (p1: float, p2:float, p3:float, p4:float) =
             Types.TimingFunction.CubicBezier(p1,p2,p3,p4) |> timingFunctionCssValue'
-        static member Step (steps: int) = Types.TimingFunction.Steps(steps) |> timingFunctionCssValue
+        static member Step (steps: int) = Types.TimingFunction.Steps(steps) |> timingFunctionCssValue'
         static member Step (steps: int, jumpTerm: Types.TimingFunction.Step) =
-            Types.TimingFunction.StepsWithTerm(steps, jumpTerm) |> timingFunctionCssValue
+            Types.TimingFunction.StepsWithTerm(steps, jumpTerm) |> timingFunctionCssValue'
         static member Inherit = Types.Inherit |> timingFunctionCssValue'
         static member Initial = Types.Initial |> timingFunctionCssValue'
         static member Unset = Types.Unset |> timingFunctionCssValue'
