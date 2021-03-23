@@ -75,7 +75,7 @@ module Media =
         |> String.concat " and "
 
     type Media =
-        static member Media (features: Types.Media.Feature list, attributeList: Types.CssProperty list) =
+        static member Media (features: Types.Media.Feature list, attributeList) =
             mediaFeature features |> sprintf "@media %s" ==> attributeList |> Types.CssProperty
-        static member Media (device: Types.Media.Device, features: Types.Media.Feature list, attributeList: Types.CssProperty list) =
+        static member Media (device: Types.Media.Device, features: Types.Media.Feature list, attributeList) =
             sprintf "@media %s %s" (deviceLabel device) (mediaFeature features)  ==> attributeList |> Types.CssProperty
