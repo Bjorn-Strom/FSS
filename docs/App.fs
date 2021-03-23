@@ -320,8 +320,8 @@ module App =
                         Label' "Bouncy Color"
                         AnimationName.Names [ bounceFrames; backgroundColorFrames ]
                         AnimationDuration.Values [ sec 1.0; sec 5.0 ]
-                        AnimationTimingFunction.Values [ Types.EaseInOut; Types.Ease ]
-                        AnimationIterationCount.Values [ Types.Infinite; Types.CssInt 3 ]
+                        AnimationTimingFunction.Values [ Types.Animation.Timing.EaseInOut; Types.Animation.Timing.Ease ]
+                        AnimationIterationCount.Values [ Types.Animation.Infinite; Types.CssInt 3 ]
                     ]
             article []
                 [
@@ -347,27 +347,27 @@ module App =
                     [
                         Label' "Descendant"
                         yield! borders
-                        ! Types.P [ Color.red ]
+                        ! Types.Html.P [ Color.red ]
                     ]
             let childCombinator =
                 fss
                     [
                         Label' "Child"
                         yield! borders
-                        !> Types.P [ Color.red ]
+                        !> Types.Html.P [ Color.red ]
 
                     ]
             let directCombinator =
                 fss
                     [
                         Label' "Direct"
-                        !+ Types.P [ Color.red ]
+                        !+ Types.Html.P [ Color.red ]
                     ]
             let adjacentCombinator =
                 fss
                     [
                         Label' "Adjacent"
-                        !~ Types.P [ Color.red ]
+                        !~ Types.Html.P [ Color.red ]
                     ]
 
             article []
@@ -431,10 +431,10 @@ module App =
                         BackgroundColor.blue
 
                         MediaQuery
-                            [ Types.MinHeight (px 700)]
+                            [ Types.Media.MinHeight (px 700)]
                             [ BackgroundColor.pink ]
 
-                        MediaQueryFor Types.Print
+                        MediaQueryFor Types.Media.Print
                             []
                             [
                                 MarginTop' (px 200)
@@ -443,7 +443,7 @@ module App =
                             ]
 
                         MediaQuery
-                            [ Types.Orientation Types.Landscape]
+                            [ Types.Media.Orientation Types.Media.Landscape]
                             [ Color.green; FontSize.Value (px 28)]
                     ]
 
@@ -588,12 +588,12 @@ module App =
                 fontFaces "DroidSerif"
                     [
                         [
-                            FontFace.Source <| Types.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Types.Truetype)
-                            FontFace.Weight Types.Bold
+                            FontFace.Source <| Types.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", Types.FontFace.Truetype)
+                            FontFace.Weight Types.Font.Bold
                             FontFace.Style Types.Normal
                         ]
                         [
-                            FontFace.Source <| Types.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Types.Truetype)
+                            FontFace.Source <| Types.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", Types.FontFace.Truetype)
                             FontFace.Weight Types.Normal
                             FontFace.Style Types.Normal
                         ]
@@ -604,10 +604,10 @@ module App =
                     [
                         FontFace.Sources
                             [
-                                Types.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", Types.Woff2)
-                                Types.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", Types.Woff)
-                                Types.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", Types.Truetype)
-                                Types.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", Types.Svg)
+                                Types.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", Types.FontFace.Woff2)
+                                Types.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", Types.FontFace.Woff)
+                                Types.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", Types.FontFace.Truetype)
+                                Types.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", Types.FontFace.Svg)
                             ]
                         FontFace.Weight Types.Normal
                         FontFace.Style Types.Normal
@@ -996,7 +996,7 @@ module App =
             fss
                 [
                     Label' "Header Style"
-                    //Color.white // FUCKED
+                    Color.white
                     BackgroundColor.Hex "#4a8ab5"
                     PaddingLeft' (px 10)
                     AlignItems.Center

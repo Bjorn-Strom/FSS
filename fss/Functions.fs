@@ -61,14 +61,14 @@ module Functions =
         attributeList
         |> createFontFaceObject fontFamily
         |> css'
-        Types.Font.Name fontFamily
+        Types.Font.Family.Name (Types.Font.Name fontFamily)
 
     let fontFaces (fontFamily: string) (attributeLists: Types.CssProperty list list) =
         attributeLists
         |> List.map (createFontFaceObject fontFamily)
         |> css'
 
-        Types.Font.Name fontFamily
+        Types.Font.Family.Name (Types.Font.Name fontFamily)
 
     // Color
     let rgb (r: int) (g: int) (b: int) = Types.Color.Rgb(r,g,b)

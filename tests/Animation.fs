@@ -86,27 +86,27 @@ module Animation =
                     ["animationTimingFunction" ==> "steps(5)"]
                 test
                     "Animation timing function  step jump start"
-                    [ AnimationTimingFunction.Step(5, Types.TimingFunction.JumpStart) ]
+                    [ AnimationTimingFunction.Step(5, Types.Animation.Step.JumpStart) ]
                     ["animationTimingFunction" ==> "steps(5, jump-start)"]
                 test
                     "Animation timing function step jump end"
-                    [ AnimationTimingFunction.Step (5, Types.TimingFunction.JumpEnd) ]
+                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.JumpEnd) ]
                     ["animationTimingFunction" ==> "steps(5, jump-end)"]
                 test
                     "Animation timing function step jump none"
-                    [ AnimationTimingFunction.Step (5, Types.TimingFunction.JumpNone) ]
+                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.JumpNone) ]
                     ["animationTimingFunction" ==> "steps(5, jump-none)"]
                 test
                     "Animation timing function step jump both"
-                    [ AnimationTimingFunction.Step (5, Types.TimingFunction.JumpBoth) ]
+                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.JumpBoth) ]
                     ["animationTimingFunction" ==> "steps(5, jump-both)"]
                 test
                     "Animation timing function step start"
-                    [ AnimationTimingFunction.Step (5, Types.TimingFunction.Step.Start) ]
+                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.Start) ]
                     ["animationTimingFunction" ==> "steps(5, start)"]
                 test
                     "Animation timing function step end"
-                    [ AnimationTimingFunction.Step (5, Types.TimingFunction.Step.End) ]
+                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.End) ]
                     ["animationTimingFunction" ==> "steps(5, end)"]
                 test
                     "Animation timing function inherit"

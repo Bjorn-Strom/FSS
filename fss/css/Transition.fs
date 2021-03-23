@@ -108,7 +108,6 @@ module Transition =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
     let private transitionTimingFunction value =
-        printfn $"{value}"
         Types.propertyHelpers.cssValue Types.Property.TransitionTimingFunction value
     let private transitionTimingFunction' value =
         value

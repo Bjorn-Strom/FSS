@@ -9,6 +9,8 @@ namespace Fss.Types
             | Alternate
             | AlternateReverse
             interface IAnimationDirection
+        type Step = TimingFunction.Step
+        type Timing = TimingFunction.Timing
         type FillMode =
             | Forwards
             | Backwards

@@ -15,7 +15,7 @@ module Font =
         let stringifyFamily fontFamily =
             match fontFamily with
                 | Types.Font.Custom c -> sprintf "'%s'" c
-                | Types.Font.Family.FontName n -> stringifyFontName n
+                | Types.Font.Family.Name n -> stringifyFontName n
                 | _ -> Utilities.Helpers.duToKebab fontFamily
 
         match fontFamily with
@@ -375,7 +375,7 @@ module Font =
             families
             |> Utilities.Helpers.combineComma familyToString
             |> familyCssValue
-        static member Font (font: Types.Font.Name) = font |> familyCssValue'
+        static member Font (font: Types.Font.Family) = font |> familyCssValue'
         static member Custom (font: string) = familyCssValue font
         static member Serif = Types.Font.Serif |> familyCssValue'
         static member SansSerif = Types.Font.SansSerif |> familyCssValue'

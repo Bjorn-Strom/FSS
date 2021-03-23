@@ -123,7 +123,6 @@ namespace Fss.Types
 
         type Name =
             | Name of string
-            interface IFontFamily
 
         type Family =
             | Serif
@@ -131,7 +130,7 @@ namespace Fss.Types
             | Monospace
             | Cursive
             | Custom of string
-            | FontName of Name
+            | Name of Name
             interface IFontFamily
 
         type LineBreak =
