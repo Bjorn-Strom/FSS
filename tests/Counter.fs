@@ -18,11 +18,11 @@ module Counter =
                 test
                     "CounterReset reset"
                     [ CounterReset.Reset sampleCounterStyle]
-                    [ "counterReset" ==> (Types.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
+                    [ "counterReset" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
                 test
                     "CounterReset reset to"
                     [ CounterReset.ResetTo sampleCounterStyle 5]
-                    [ "counterReset" ==> sprintf "%s 5" (Types.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
+                    [ "counterReset" ==> sprintf "%s 5" (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
                 test
                     "CounterReset none"
                     [ CounterReset.None]
@@ -42,11 +42,11 @@ module Counter =
                 test
                     "CounterIncrement increment"
                     [ CounterIncrement.Increment sampleCounterStyle]
-                    [ "counterIncrement" ==> (Types.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
+                    [ "counterIncrement" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
                 test
                     "CounterIncrement increment to"
                     [ CounterIncrement.IncrementTo sampleCounterStyle 5]
-                    [ "counterIncrement" ==> sprintf "%s 5"(Types.counterStyleHelpers.counterStyleToString sampleCounterStyle)]
+                    [ "counterIncrement" ==> sprintf "%s 5"(FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle)]
                 test
                     "CounterIncrement none"
                     [ CounterIncrement.None]

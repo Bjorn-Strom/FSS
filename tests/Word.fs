@@ -28,7 +28,7 @@ module Word =
                     ["wordSpacing" ==> "50%"]
                 test
                     "Word Spacing inherit value"
-                    [WordSpacing' Types.Inherit]
+                    [WordSpacing' FssTypes.Inherit]
                     ["wordSpacing" ==> "inherit"]
                 test
                     "Word spacing inherit"
@@ -56,7 +56,7 @@ module Word =
                     ["wordBreak" ==> "normal"]
                 test
                     "Word Spacing inherit value"
-                    [WordBreak' Types.Inherit]
+                    [WordBreak' FssTypes.Inherit]
                     ["wordBreak" ==> "inherit"]
                 test
                     "Word break inherit"

@@ -431,7 +431,7 @@ module Flex =
                     ["alignContent" ==> "unset"]
                 test
                     "Order value"
-                    [ Order' (Types.CssInt 1) ]
+                    [ Order' (FssTypes.CssInt 1) ]
                     ["order" ==> "1"]
                 test
                     "Order inherit"
@@ -447,7 +447,7 @@ module Flex =
                     ["order" ==> "unset"]
                 test
                     "Flex grow value"
-                    [ FlexGrow' (Types.CssFloat 1.5) ]
+                    [ FlexGrow' (FssTypes.CssFloat 1.5) ]
                     ["flexGrow" ==> "1.5"]
                 test
                     "FlexGrow inherit"
@@ -463,7 +463,7 @@ module Flex =
                     ["flexGrow" ==> "unset"]
                 test
                     "FlexShrink value"
-                    [ FlexShrink' (Types.CssFloat 1.5) ]
+                    [ FlexShrink' (FssTypes.CssFloat 1.5) ]
                     ["flexShrink" ==> "1.5"]
                 test
                     "FlexShrink inherit"

@@ -11,17 +11,17 @@ module Media =
             [
                 testMedia
                     "Media query with min width and min height"
-                    [ Types.Media.MinWidth (px 500); Types.Media.MaxWidth (px 700) ]
+                    [ FssTypes.Media.MinWidth (px 500); FssTypes.Media.MaxWidth (px 700) ]
                     [ BackgroundColor.red ]
                     ("@media (min-width: 500px) and (max-width: 700px)" ==> "[backgroundColor,#ff0000]")
                 testMedia
                     "Media query min height only"
-                        [ Types.Media.MinHeight (px 700) ]
+                        [ FssTypes.Media.MinHeight (px 700) ]
                         [ BackgroundColor.pink ]
                         ("@media (min-height: 700px)" ==> "[backgroundColor,#ffc0cb]")
                 testMediaFor
                     "Media query for print"
-                        (Types.Media.Print)
+                        (FssTypes.Media.Print)
                         []
                         [
                             MarginTop' (px 200)
@@ -34,18 +34,18 @@ module Media =
                     ("@media print " ==> "[marginTop,200px; transform,rotate(45.00deg); backgroundColor,#cd5c5c]")
                 testMediaFor
                     "Media not all"
-                        (Types.Media.Not Types.Media.Device.All)
-                        [ Types.Media.Feature.Color ]
+                        (FssTypes.Media.Not FssTypes.Media.Device.All)
+                        [ FssTypes.Media.Feature.Color ]
                         [MarginTop' (px 200) ]
                         ("@media not all and (color)" ==> "[marginTop,200px]")
                 testMediaFor
                     "Media query only screen"
-                    (Types.Media.Only Types.Media.Device.Screen)
+                    (FssTypes.Media.Only FssTypes.Media.Device.Screen)
                     [
-                        Types.Media.Feature.Color
-                        Types.Media.Feature.Pointer Types.Media.Fine
-                        Types.Media.Feature.Scan Types.Media.Interlace
-                        Types.Media.Feature.Grid true
+                        FssTypes.Media.Feature.Color
+                        FssTypes.Media.Feature.Pointer FssTypes.Media.Fine
+                        FssTypes.Media.Feature.Scan FssTypes.Media.Interlace
+                        FssTypes.Media.Feature.Grid true
                     ]
                     [
                         MarginTop' (px 200)

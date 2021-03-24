@@ -6,35 +6,35 @@ open Fss
 open Fss.Media
 
 module Utils =
-    let test (testName: string) (attributeList: Types.CssProperty list) (correct: (string * obj) list) =
+    let test (testName: string) (attributeList: FssTypes.CssProperty list) (correct: (string * obj) list) =
         testCase testName <| fun _ ->
             let actual =
                 attributeList
-                |> List.map Types.masterTypeHelpers.CssValue
+                |> List.map FssTypes.masterTypeHelpers.CssValue
 
             Expect.equal actual correct testName
 
-    let testMedia (testName: string) (featureList: Types.Media.Feature list) (attributeList: Types.CssProperty list) (correct: (string * obj)) =
+    let testMedia (testName: string) (featureList: FssTypes.Media.Feature list) (attributeList: FssTypes.CssProperty list) (correct: (string * obj)) =
         testCase testName <| fun _ ->
-            let actual = mediaFeature featureList |> sprintf "@media %s" ==> (attributeList |> List.map Types.masterTypeHelpers.CssValue)
+            let actual = mediaFeature featureList |> sprintf "@media %s" ==> (attributeList |> List.map FssTypes.masterTypeHelpers.CssValue)
 
             Expect.equal (actual.ToString()) (correct.ToString()) testName
 
-    let testMediaFor (testName: string) device (featureList: Types.Media.Feature list) (attributeList: Types.CssProperty list) (correct: (string * obj)) =
+    let testMediaFor (testName: string) device (featureList: FssTypes.Media.Feature list) (attributeList: FssTypes.CssProperty list) (correct: (string * obj)) =
         testCase testName <| fun _ ->
-            let actual = sprintf "@media %s %s" (deviceLabel device) (mediaFeature featureList)  ==> (attributeList |> List.map Types.masterTypeHelpers.CssValue)
+            let actual = sprintf "@media %s %s" (deviceLabel device) (mediaFeature featureList)  ==> (attributeList |> List.map FssTypes.masterTypeHelpers.CssValue)
 
             Expect.equal (actual.ToString()) (correct.ToString()) testName
 
-    let testNested (testName: string) (attributeList: Types.CssProperty list) (correct: (string * obj) list) =
+    let testNested (testName: string) (attributeList: FssTypes.CssProperty list) (correct: (string * obj) list) =
         testCase testName <| fun _ ->
             let actual =
                 attributeList
-                |> List.map Types.masterTypeHelpers.CssValue
+                |> List.map FssTypes.masterTypeHelpers.CssValue
                 |> List.map (fun (x, y) ->
                     let properY: string =
-                        y :?> Types.CssProperty list
-                        |> List.map Types.masterTypeHelpers.CssValue
+                        y :?> FssTypes.CssProperty list
+                        |> List.map FssTypes.masterTypeHelpers.CssValue
                         |> List.map (fun x -> $"{x}")
                         |> String.concat ","
                     x ==> properY)

@@ -359,13 +359,13 @@ module Grid =
                     ["gridTemplateRows" ==> "none"]
                 test
                     "Grid template row px repeat px"
-                    [GridTemplateRows.Values [ px 200; Types.Grid.Repeat.Repeat(Types.Grid.AutoFill, px 100); px 300]]
+                    [GridTemplateRows.Values [ px 200; FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateRows" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid template row minmax repeat percent"
                     [GridTemplateRows.Values [
-                        Types.Grid.MinMax.MinMax(px 100, Types.ContentSize.MaxContent)
-                        Types.Grid.Repeat.Repeat(Types.Grid.AutoFill, px 200); pct 20
+                        FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent)
+                        FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 200); pct 20
                     ]]
                     ["gridTemplateRows" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
                 test
@@ -554,7 +554,7 @@ module Grid =
                     ["gridAutoColumns" ==> "fit-content(400px)"]
                 test
                     "Grid auto columns multiple with min-content max-content and auto"
-                    [ GridAutoColumns.Values [Types.ContentSize.MinContent; Types.ContentSize.MaxContent] ]
+                    [ GridAutoColumns.Values [Types.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
                     ["gridAutoColumns" ==> "min-content max-content"]
                 test
                     "Grid auto columns multiple with pxs"
@@ -618,7 +618,7 @@ module Grid =
                     ["gridAutoRows" ==> "fit-content(400px)"]
                 test
                     "Grid auto rows multiple with min-content max-content and auto"
-                    [ GridAutoRows.Values [Types.ContentSize.MinContent; Types.ContentSize.MaxContent] ]
+                    [ GridAutoRows.Values [Types.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
                     ["gridAutoRows" ==> "min-content max-content"]
                 test
                     "Grid auto rows multiple with pxs"

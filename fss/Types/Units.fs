@@ -1,6 +1,6 @@
 namespace Fss
 
-namespace Fss.Types
+namespace Fss.FssTypes
     type Percent =
         | Percent of string
         interface ILengthPercentage

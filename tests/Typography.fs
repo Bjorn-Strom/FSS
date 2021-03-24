@@ -11,7 +11,7 @@ module Typography =
             [
                 test
                     "Orphans number"
-                    [ Orphans' (Types.CssInt 2)]
+                    [ Orphans' (FssTypes.CssInt 2)]
                     [ "orphans" ==> "2" ]
                 test
                     "Orphans inherit"
@@ -27,7 +27,7 @@ module Typography =
                     [ "orphans" ==> "unset" ]
                 test
                     "Widows number"
-                    [ Widows' (Types.CssInt 2)]
+                    [ Widows' (FssTypes.CssInt 2)]
                     [ "widows" ==> "2" ]
                 test
                     "Widows inherit"

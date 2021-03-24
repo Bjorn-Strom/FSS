@@ -1,6 +1,6 @@
 namespace Fss
 
-namespace Fss.Types
+namespace Fss.FssTypes
     [<RequireQualifiedAccess>]
     module Outline =
         type Width =

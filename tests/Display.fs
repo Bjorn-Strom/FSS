@@ -79,6 +79,6 @@ module Display =
                     ["display" ==> "none"]
                 test
                     "Display none"
-                    [ Display' Types.Display.Grid]
+                    [ Display' FssTypes.Display.Grid]
                     ["display" ==> "grid"]
             ]

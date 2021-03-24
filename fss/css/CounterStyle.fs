@@ -7,46 +7,46 @@ open Fable.Core.JsInterop
 module Counter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/system
     type System =
-        static member Cyclic = "system" ==> "cyclic" |> Types.CounterProperty
-        static member Numeric = "system" ==> "numeric" |> Types.CounterProperty
-        static member Alphabetic ="system" ==> "alphabetic" |> Types.CounterProperty
-        static member Symbolic = "system" ==> "symbolic" |> Types.CounterProperty
-        static member Additive = "system" ==> "additive" |> Types.CounterProperty
-        static member Fixed = "system" ==> "fixed" |> Types.CounterProperty
+        static member Cyclic = "system" ==> "cyclic" |> FssTypes.CounterProperty
+        static member Numeric = "system" ==> "numeric" |> FssTypes.CounterProperty
+        static member Alphabetic ="system" ==> "alphabetic" |> FssTypes.CounterProperty
+        static member Symbolic = "system" ==> "symbolic" |> FssTypes.CounterProperty
+        static member Additive = "system" ==> "additive" |> FssTypes.CounterProperty
+        static member Fixed = "system" ==> "fixed" |> FssTypes.CounterProperty
         static member FixedValue (value: int) =
-            "system" ==> sprintf "fixed %d" value |> Types.CounterProperty
-        static member Extends (extend: Types.ListStyle.Type) =
-            "system" ==> sprintf "extends %s" (Utilities.Helpers.duToKebab extend) |> Types.CounterProperty
+            "system" ==> sprintf "fixed %d" value |> FssTypes.CounterProperty
+        static member Extends (extend: FssTypes.ListStyle.Type) =
+            "system" ==> sprintf "extends %s" (Utilities.Helpers.duToKebab extend) |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/negative
     type Negative =
         static member Negative (first: string) =
-            "negative" ==> first |> Types.CounterProperty
+            "negative" ==> first |> FssTypes.CounterProperty
         static member Negative (first: string, second: string) =
-            "negative" ==> sprintf "\"%s\" \"%s\"" first second |> Types.CounterProperty
+            "negative" ==> sprintf "\"%s\" \"%s\"" first second |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/prefix
     type Prefix =
-        static member Value (value: string) = "prefix" ==> value |> Types.CounterProperty
-        static member Url (url: string) = "prefix" ==> sprintf "url(%s)" url |> Types.CounterProperty
+        static member Value (value: string) = "prefix" ==> value |> FssTypes.CounterProperty
+        static member Url (url: string) = "prefix" ==> sprintf "url(%s)" url |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/suffix
     type Suffix =
-        static member Value (value: string) = "suffix" ==> sprintf "'%s'" value |> Types.CounterProperty
-        static member Url (url: string) = "suffix" ==> sprintf "url(%s)" url |> Types.CounterProperty
+        static member Value (value: string) = "suffix" ==> sprintf "'%s'" value |> FssTypes.CounterProperty
+        static member Url (url: string) = "suffix" ==> sprintf "url(%s)" url |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/range
     type Range =
-        static member Value (v1: int, v2: int) = "range" ==> sprintf "%d %d" v1 v2 |> Types.CounterProperty
-        static member Value (v1: int, range: Range) = "range" ==> sprintf "%d %A" v1 range |> Types.CounterProperty
-        static member Value (r1: Range, r2: Range) = "range" ==> sprintf "%A %A" r1 r2 |> Types.CounterProperty
-        static member Value (range: Range, value: string) = "range" ==>  sprintf "%A %s" range value |> Types.CounterProperty
-        static member Infinite = "range" ==> "infinite" |> Types.CounterProperty
-        static member Auto = "range" ==> "auto" |> Types.CounterProperty
+        static member Value (v1: int, v2: int) = "range" ==> sprintf "%d %d" v1 v2 |> FssTypes.CounterProperty
+        static member Value (v1: int, range: Range) = "range" ==> sprintf "%d %A" v1 range |> FssTypes.CounterProperty
+        static member Value (r1: Range, r2: Range) = "range" ==> sprintf "%A %A" r1 r2 |> FssTypes.CounterProperty
+        static member Value (range: Range, value: string) = "range" ==>  sprintf "%A %s" range value |> FssTypes.CounterProperty
+        static member Infinite = "range" ==> "infinite" |> FssTypes.CounterProperty
+        static member Auto = "range" ==> "auto" |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/pad
     type Pad =
-        static member pad (value: int, symbol: string) = "pad" ==> sprintf "%d \"%s\"" value symbol |> Types.CounterProperty
+        static member pad (value: int, symbol: string) = "pad" ==> sprintf "%d \"%s\"" value symbol |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/symbols
     type Symbols =
@@ -54,13 +54,13 @@ module Counter =
                 "symbols" ==>
                 (strings
                 |> List.map (fun s -> sprintf "\"%s\"" s)
-                |> String.concat " ") |> Types.CounterProperty
+                |> String.concat " ") |> FssTypes.CounterProperty
         static member Urls (urls: string list) =
             "symbols" ==>
             (urls
             |> List.map (fun u -> sprintf "url('%s')" u)
-            |> String.concat " ") |> Types.CounterProperty
-        static member Custom (custom: Types.Counter.Style) = "symbols" ==> Types.counterStyleHelpers.counterStyleToString custom |> Types.CounterProperty
+            |> String.concat " ") |> FssTypes.CounterProperty
+        static member Custom (custom: FssTypes.Counter.Style) = "symbols" ==> FssTypes.counterStyleHelpers.counterStyleToString custom |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/additive-symbols
     type AdditiveSymbolType =
@@ -77,82 +77,82 @@ module Counter =
              "additiveSymbols" ==>
                 (symbols
                 |> List.map (fun (n, s) -> sprintf "%d %s" n (stringifyAdditiveSymbols s))
-                |> String.concat ", ") |> Types.CounterProperty
+                |> String.concat ", ") |> FssTypes.CounterProperty
 
     let AdditiveSymbol' (symbols: (int * AdditiveSymbolType) list) = AdditiveSymbol.Value(symbols)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/speak-as
     type SpeakAs =
-        static member Auto = "speak-as" ==> "auto" |> Types.CounterProperty
-        static member Bullets = "speak-as" ==> "bullets" |> Types.CounterProperty
-        static member Numbers = "speak-as" ==> "numbers" |> Types.CounterProperty
-        static member Words = "speak-as" ==> "words" |> Types.CounterProperty
-        static member SpellOut = "speak-as" ==> "spell-out" |> Types.CounterProperty
-        static member CounterStyle (counter: Types.Counter.Style) = "speak-as" ==> Types.counterStyleHelpers.counterStyleToString counter |> Types.CounterProperty
+        static member Auto = "speak-as" ==> "auto" |> FssTypes.CounterProperty
+        static member Bullets = "speak-as" ==> "bullets" |> FssTypes.CounterProperty
+        static member Numbers = "speak-as" ==> "numbers" |> FssTypes.CounterProperty
+        static member Words = "speak-as" ==> "words" |> FssTypes.CounterProperty
+        static member SpellOut = "speak-as" ==> "spell-out" |> FssTypes.CounterProperty
+        static member CounterStyle (counter: FssTypes.Counter.Style) = "speak-as" ==> FssTypes.counterStyleHelpers.counterStyleToString counter |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-reset
-    let private counterResetToString (reset: Types.ICounterReset) =
+    let private counterResetToString (reset: FssTypes.ICounterReset) =
         let stringifyReset =
             function
-                | Types.Counter.Reset counter -> Types.counterStyleHelpers.counterStyleToString counter
-                | Types.Counter.ResetTo (counter, number) -> sprintf "%A %d" (Types.counterStyleHelpers.counterStyleToString counter) number
+                | FssTypes.Counter.Reset counter -> FssTypes.counterStyleHelpers.counterStyleToString counter
+                | FssTypes.Counter.ResetTo (counter, number) -> sprintf "%A %d" (FssTypes.counterStyleHelpers.counterStyleToString counter) number
 
         match reset with
-        | :? Types.Counter.Reset as cr -> stringifyReset cr
-        | :? Types.None' -> Types.masterTypeHelpers.none
-        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.Counter.Reset as cr -> stringifyReset cr
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown counter reset"
 
-    let private counterResetValue value = Types.propertyHelpers.cssValue Types.Property.CounterReset value
+    let private counterResetValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.CounterReset value
     let private counterResetValue' value =
         value
         |> counterResetToString
         |> counterResetValue
 
     type CounterReset =
-        static member Value (counterReset: Types.ICounterReset) = counterReset |> counterResetValue'
-        static member Reset (counter: Types.Counter.Style) = counter |> Types.Counter.Reset |> counterResetValue'
-        static member ResetTo (counter: Types.Counter.Style) (value: int) = Types.Counter.ResetTo(counter, value) |> counterResetValue'
-        static member None = Types.None' |> counterResetValue'
-        static member Inherit = Types.Inherit |> counterResetValue'
-        static member Initial = Types.Initial |> counterResetValue'
-        static member Unset = Types.Unset |> counterResetValue'
+        static member Value (counterReset: FssTypes.ICounterReset) = counterReset |> counterResetValue'
+        static member Reset (counter: FssTypes.Counter.Style) = counter |> FssTypes.Counter.Reset |> counterResetValue'
+        static member ResetTo (counter: FssTypes.Counter.Style) (value: int) = FssTypes.Counter.ResetTo(counter, value) |> counterResetValue'
+        static member None = FssTypes.None' |> counterResetValue'
+        static member Inherit = FssTypes.Inherit |> counterResetValue'
+        static member Initial = FssTypes.Initial |> counterResetValue'
+        static member Unset = FssTypes.Unset |> counterResetValue'
 
-    let CounterReset' (counterReset: Types.Counter.Style) = counterReset |> Types.Counter.Reset |> CounterReset.Value
+    let CounterReset' (counterReset: FssTypes.Counter.Style) = counterReset |> FssTypes.Counter.Reset |> CounterReset.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment
-    let private counterIncrementToString (increment: Types.ICounterIncrement) =
+    let private counterIncrementToString (increment: FssTypes.ICounterIncrement) =
         let stringifyIncrement =
             function
-                | Types.Counter.Increment counter -> Types.counterStyleHelpers.counterStyleToString counter
-                | Types.Counter.Add (counter, number) -> sprintf "%A %d" (Types.counterStyleHelpers.counterStyleToString counter) number
+                | FssTypes.Counter.Increment counter -> FssTypes.counterStyleHelpers.counterStyleToString counter
+                | FssTypes.Counter.Add (counter, number) -> sprintf "%A %d" (FssTypes.counterStyleHelpers.counterStyleToString counter) number
 
         match increment with
-        | :? Types.Counter.Increment as cr -> stringifyIncrement cr
-        | :? Types.None' -> Types.masterTypeHelpers.none
-        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.Counter.Increment as cr -> stringifyIncrement cr
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown counter increment"
 
-    let private counterIncrementValue value = Types.propertyHelpers.cssValue Types.Property.CounterIncrement value
+    let private counterIncrementValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.CounterIncrement value
     let private counterIncrementValue' value =
         value
         |> counterIncrementToString
         |> counterIncrementValue
 
     type CounterIncrement =
-        static member Value (counterIncrement: Types.ICounterIncrement) = counterIncrement |> counterIncrementValue'
-        static member Increment (counter: Types.Counter.Style) = counter |> Types.Counter.Increment |> counterIncrementValue'
-        static member IncrementTo (counter: Types.Counter.Style) (value: int) = Types.Counter.Add(counter, value) |> counterIncrementValue'
-        static member None = Types.None' |> counterIncrementValue'
-        static member Inherit = Types.Inherit |> counterIncrementValue'
-        static member Initial = Types.Initial |> counterIncrementValue'
-        static member Unset = Types.Unset |> counterIncrementValue'
+        static member Value (counterIncrement: FssTypes.ICounterIncrement) = counterIncrement |> counterIncrementValue'
+        static member Increment (counter: FssTypes.Counter.Style) = counter |> FssTypes.Counter.Increment |> counterIncrementValue'
+        static member IncrementTo (counter: FssTypes.Counter.Style) (value: int) = FssTypes.Counter.Add(counter, value) |> counterIncrementValue'
+        static member None = FssTypes.None' |> counterIncrementValue'
+        static member Inherit = FssTypes.Inherit |> counterIncrementValue'
+        static member Initial = FssTypes.Initial |> counterIncrementValue'
+        static member Unset = FssTypes.Unset |> counterIncrementValue'
 
-    let CounterIncrement' (counterIncrement: Types.Counter.Style) = counterIncrement |> Types.Counter.Increment |> CounterIncrement.Value
+    let CounterIncrement' (counterIncrement: FssTypes.Counter.Style) = counterIncrement |> FssTypes.Counter.Increment |> CounterIncrement.Value
 
-    let createCounterObject (attributeList: Types.CounterProperty list) counterName =
+    let createCounterObject (attributeList: FssTypes.CounterProperty list) counterName =
         createObj
             [
                 sprintf "@counter-style %s"
-                    counterName ==> createObj (attributeList |> List.map Types.masterTypeHelpers.CounterValue)
+                    counterName ==> createObj (attributeList |> List.map FssTypes.masterTypeHelpers.CounterValue)
             ]

@@ -215,7 +215,7 @@ module Font =
                     [ "fontWeight" ==> "bolder"]
                 test
                     "Font weight value"
-                    [ FontWeight' (Types.CssInt 500) ]
+                    [ FontWeight' (FssTypes.CssInt 500) ]
                     [ "fontWeight" ==> "500"]
                 test
                     "Font weight inherit"
@@ -235,7 +235,7 @@ module Font =
                     [ "lineHeight" ==> "normal" ]
                 test
                     "Line height value"
-                    [ LineHeight' (Types.CssFloat 2.5) ]
+                    [ LineHeight' (FssTypes.CssFloat 2.5) ]
                     [ "lineHeight" ==> "2.5" ]
                 test
                     "Line height em"
@@ -347,15 +347,15 @@ module Font =
                      [ "fontFamily" ==> "unset" ]
                 test
                     "Font families"
-                    [ FontFamily.Values ([ Types.Font.Serif; Types.Font.Monospace ]) ]
+                    [ FontFamily.Values ([ FssTypes.Font.Serif; FssTypes.Font.Monospace ]) ]
                     [ "fontFamily" ==> "serif, monospace" ]
                 test
                     "font feature setting On"
-                    [ FontFeatureSetting.Liga Types.Font.On ]
+                    [ FontFeatureSetting.Liga FssTypes.Font.On ]
                     [ "fontFeatureSettings" ==> "\"liga\" On" ]
                 test
                     "font feature setting Off"
-                    [ FontFeatureSetting.Liga Types.Font.Off ]
+                    [ FontFeatureSetting.Liga FssTypes.Font.Off ]
                     [ "fontFeatureSettings" ==> "\"liga\" Off" ]
                 test
                     "font feature setting initial"

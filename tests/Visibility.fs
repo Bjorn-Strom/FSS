@@ -22,11 +22,11 @@ module Visibility =
                     ["paintOrder" ==> "markers"]
                 test
                     "Paint order stroke fill"
-                    [PaintOrder.Value(Types.Visibility.PaintOrder.Stroke, Types.Visibility.PaintOrder.Fill)]
+                    [PaintOrder.Value(FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
                     ["paintOrder" ==> "stroke fill"]
                 test
                     "Paint order markers stroke fill"
-                    [PaintOrder.Value(Types.Visibility.PaintOrder.Markers, Types.Visibility.PaintOrder.Stroke, Types.Visibility.PaintOrder.Fill)]
+                    [PaintOrder.Value(FssTypes.Visibility.PaintOrder.Markers, FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
                     ["paintOrder" ==> "markers stroke fill"]
                 test
                     "Paint order normal"
@@ -135,19 +135,19 @@ module Visibility =
                     ["overflowY" ==> "unset"]
                 test
                     "Overflow visible visible"
-                    [Overflow.Value (Types.Overflow.Visible, Types.Overflow.Visible)]
+                    [Overflow.Value (FssTypes.Overflow.Visible, FssTypes.Overflow.Visible)]
                     ["overflow" ==> "visible visible"]
                 test
                     "OverflowXY hidden hidden"
-                    [Overflow.Value (Types.Overflow.Hidden, Types.Overflow.Hidden)]
+                    [Overflow.Value (FssTypes.Overflow.Hidden, FssTypes.Overflow.Hidden)]
                     ["overflow" ==> "hidden hidden"]
                 test
                     "Overflow Clip clip"
-                    [Overflow.Value (Types.Overflow.Clip, Types.Overflow.Clip)]
+                    [Overflow.Value (FssTypes.Overflow.Clip, FssTypes.Overflow.Clip)]
                     ["overflow" ==> "clip clip"]
                 test
                     "Overflow scroll Scroll"
-                    [Overflow.Value (Types.Overflow.Scroll, Types.Overflow.Scroll)]
+                    [Overflow.Value (FssTypes.Overflow.Scroll, FssTypes.Overflow.Scroll)]
                     ["overflow" ==> "scroll scroll"]
                 test
                     "OverflowWrap break-word"

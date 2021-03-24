@@ -27,7 +27,7 @@ module Filter =
                     [ "filter" ==> "contrast(40%)" ]
                 test
                     "Filter drop shadow"
-                    [ Filters [ Filter.DropShadow 16 16 20 Types.Color.red (pct 5)  ] ]
+                    [ Filters [ Filter.DropShadow 16 16 20 FssTypes.Color.red (pct 5)  ] ]
                     [ "filter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
                 test
                     "Filter grayscale"
@@ -91,7 +91,7 @@ module Filter =
                     [ "backdropFilter" ==> "contrast(40%)" ]
                 test
                     "BackdropFilter drop shadow"
-                    [ BackdropFilters [ Filter.DropShadow 16 16 20 Types.Color.red (pct 5)  ] ]
+                    [ BackdropFilters [ Filter.DropShadow 16 16 20 FssTypes.Color.red (pct 5)  ] ]
                     [ "backdropFilter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
                 test
                     "BackdropFilter grayscale"

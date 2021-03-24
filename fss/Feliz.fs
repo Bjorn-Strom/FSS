@@ -21,7 +21,7 @@ module Counter =
 [<AutoOpen>]
 module fss =
     type prop with
-        static member css (properties: Types.CssProperty list) =
+        static member css (properties: FssTypes.CssProperty list) =
             prop.className (fss properties)
 
     // Keyframes
@@ -39,8 +39,8 @@ module fss =
     type Format = Format
     type Source = Source
     type FontFace = FontFace.FontFace
-    let fontFace (fontFamily: string) (attributeList: Types.CssProperty list) = fontFace fontFamily attributeList
-    let fontFaces (fontFamily: string) (attributeLists: Types.CssProperty list list) = fontFaces fontFamily attributeLists
+    let fontFace (fontFamily: string) (attributeList: FssTypes.CssProperty list) = fontFace fontFamily attributeList
+    let fontFaces (fontFamily: string) (attributeLists: FssTypes.CssProperty list list) = fontFaces fontFamily attributeLists
     // Color
     let rgb r g b = rgb r g b
     let rgba r g b a = rgba r g b a
@@ -707,8 +707,8 @@ module style =
     let all' all = All' all
 
     // Grid
-    type repeat = Types.Grid.Repeat
-    type minMax = Types.Grid.MinMax
+    type repeat = FssTypes.Grid.Repeat
+    type minMax = FssTypes.Grid.MinMax
 
     type gridAutoFlow = GridAutoFlow
     let gridAutoFlow' gridAutoFlow = GridAutoFlow' gridAutoFlow

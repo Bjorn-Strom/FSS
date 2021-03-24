@@ -1,6 +1,6 @@
 namespace Fss
 
-namespace Fss.Types
+namespace Fss.FssTypes
    type ColorTypeFoo =
         | ColorTypeFoo of string
         interface ITextDecorationColor

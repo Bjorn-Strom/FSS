@@ -1,6 +1,6 @@
 namespace Fss
 // Interfaces
-namespace Fss.Types
+namespace Fss.FssTypes
     type IAnimationDirection      = interface end
     type IAnimationFillMode       = interface end
     type IAnimationPlayState      = interface end

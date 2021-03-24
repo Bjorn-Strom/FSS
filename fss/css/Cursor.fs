@@ -2,15 +2,15 @@
 
 [<AutoOpen>]
 module Cursor =
-    let private cursorToString (cursor: Types.ICursor) =
+    let private cursorToString (cursor: FssTypes.ICursor) =
         match cursor with
-        | :? Types.Cursor.Cursor as c -> Utilities.Helpers.duToKebab c
-        | :? Types.Auto -> Types.masterTypeHelpers.auto
-        | :? Types.None' -> Types.masterTypeHelpers.none
-        | :? Types.Keywords as k -> Types.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.Cursor.Cursor as c -> Utilities.Helpers.duToKebab c
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown cursor"
 
-    let private cursorValue value = Types.propertyHelpers.cssValue Types.Property.Cursor value
+    let private cursorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Cursor value
     let private cursorValue' value =
         value
         |> cursorToString
@@ -19,44 +19,44 @@ module Cursor =
     type Cursor =
         static member Value (url: string) = sprintf "url(%s)" url |> cursorValue
         static member Value (url: string, x: int, y: int) = sprintf "url(%s) %d %d" url x y |> cursorValue
-        static member Value (cursor: Types.ICursor) = cursor |> cursorValue'
+        static member Value (cursor: FssTypes.ICursor) = cursor |> cursorValue'
 
-        static member Default = Types.Cursor.Default |> cursorValue'
-        static member ContextMenu = Types.Cursor.ContextMenu |> cursorValue'
-        static member Help = Types.Cursor.Help |> cursorValue'
-        static member Pointer = Types.Cursor.Pointer |> cursorValue'
-        static member Progress = Types.Cursor.Progress |> cursorValue'
-        static member Wait = Types.Cursor.Wait |> cursorValue'
-        static member Cell = Types.Cursor.Cell |> cursorValue'
-        static member Crosshair = Types.Cursor.Crosshair |> cursorValue'
-        static member Text = Types.Cursor.Text |> cursorValue'
-        static member VerticalText = Types.Cursor.VerticalText |> cursorValue'
-        static member Alias = Types.Cursor.Alias |> cursorValue'
-        static member Copy = Types.Cursor.Copy |> cursorValue'
-        static member Move = Types.Cursor.Move |> cursorValue'
-        static member NoDrop = Types.Cursor.NoDrop |> cursorValue'
-        static member NotAllowed = Types.Cursor.NotAllowed |> cursorValue'
-        static member AllScroll = Types.Cursor.AllScroll |> cursorValue'
-        static member ColResize = Types.Cursor.ColResize |> cursorValue'
-        static member RowResize = Types.Cursor.RowResize |> cursorValue'
-        static member NResize = Types.Cursor.NResize |> cursorValue'
-        static member EResize = Types.Cursor.EResize |> cursorValue'
-        static member SResize = Types.Cursor.SResize |> cursorValue'
-        static member WResize = Types.Cursor.WResize |> cursorValue'
-        static member NsResize = Types.Cursor.NsResize |> cursorValue'
-        static member EwResize = Types.Cursor.EwResize |> cursorValue'
-        static member NeResize = Types.Cursor.NeResize |> cursorValue'
-        static member NwResize = Types.Cursor.NwResize |> cursorValue'
-        static member SeResize = Types.Cursor.SeResize |> cursorValue'
-        static member SwResize = Types.Cursor.SwResize |> cursorValue'
-        static member NeswResize = Types.Cursor.NeswResize |> cursorValue'
-        static member NwseResize = Types.Cursor.NwseResize |> cursorValue'
+        static member Default = FssTypes.Cursor.Default |> cursorValue'
+        static member ContextMenu = FssTypes.Cursor.ContextMenu |> cursorValue'
+        static member Help = FssTypes.Cursor.Help |> cursorValue'
+        static member Pointer = FssTypes.Cursor.Pointer |> cursorValue'
+        static member Progress = FssTypes.Cursor.Progress |> cursorValue'
+        static member Wait = FssTypes.Cursor.Wait |> cursorValue'
+        static member Cell = FssTypes.Cursor.Cell |> cursorValue'
+        static member Crosshair = FssTypes.Cursor.Crosshair |> cursorValue'
+        static member Text = FssTypes.Cursor.Text |> cursorValue'
+        static member VerticalText = FssTypes.Cursor.VerticalText |> cursorValue'
+        static member Alias = FssTypes.Cursor.Alias |> cursorValue'
+        static member Copy = FssTypes.Cursor.Copy |> cursorValue'
+        static member Move = FssTypes.Cursor.Move |> cursorValue'
+        static member NoDrop = FssTypes.Cursor.NoDrop |> cursorValue'
+        static member NotAllowed = FssTypes.Cursor.NotAllowed |> cursorValue'
+        static member AllScroll = FssTypes.Cursor.AllScroll |> cursorValue'
+        static member ColResize = FssTypes.Cursor.ColResize |> cursorValue'
+        static member RowResize = FssTypes.Cursor.RowResize |> cursorValue'
+        static member NResize = FssTypes.Cursor.NResize |> cursorValue'
+        static member EResize = FssTypes.Cursor.EResize |> cursorValue'
+        static member SResize = FssTypes.Cursor.SResize |> cursorValue'
+        static member WResize = FssTypes.Cursor.WResize |> cursorValue'
+        static member NsResize = FssTypes.Cursor.NsResize |> cursorValue'
+        static member EwResize = FssTypes.Cursor.EwResize |> cursorValue'
+        static member NeResize = FssTypes.Cursor.NeResize |> cursorValue'
+        static member NwResize = FssTypes.Cursor.NwResize |> cursorValue'
+        static member SeResize = FssTypes.Cursor.SeResize |> cursorValue'
+        static member SwResize = FssTypes.Cursor.SwResize |> cursorValue'
+        static member NeswResize = FssTypes.Cursor.NeswResize |> cursorValue'
+        static member NwseResize = FssTypes.Cursor.NwseResize |> cursorValue'
 
-        static member Auto = Types.Auto |> cursorValue'
-        static member Inherit = Types.Inherit |> cursorValue'
-        static member Initial = Types.Initial |> cursorValue'
-        static member Unset = Types.Unset |> cursorValue'
-        static member None = Types.None' |> cursorValue'
+        static member Auto = FssTypes.Auto |> cursorValue'
+        static member Inherit = FssTypes.Inherit |> cursorValue'
+        static member Initial = FssTypes.Initial |> cursorValue'
+        static member Unset = FssTypes.Unset |> cursorValue'
+        static member None = FssTypes.None' |> cursorValue'
 
     /// <summary>Specifies how elements behave before a generated box.</summary>
     /// <param name="cursor">
@@ -69,4 +69,4 @@ module Cursor =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Cursor' (cursor: Types.ICursor) = Cursor.Value(cursor)
+    let Cursor' (cursor: FssTypes.ICursor) = Cursor.Value(cursor)

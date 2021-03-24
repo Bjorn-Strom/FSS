@@ -22,7 +22,7 @@ module Animation =
                     [ "animationName" ==> "animation-1oejj34" ]
                 test
                     "Animation names"
-                    [ AnimationName.Names [animationSample; Types.CssString "foo" ] ]
+                    [ AnimationName.Names [animationSample; FssTypes.CssString "foo" ] ]
                     [ "animationName" ==> "animation-1oejj34, foo" ]
                 test
                     "Animation name inherit"
@@ -86,27 +86,27 @@ module Animation =
                     ["animationTimingFunction" ==> "steps(5)"]
                 test
                     "Animation timing function  step jump start"
-                    [ AnimationTimingFunction.Step(5, Types.Animation.Step.JumpStart) ]
+                    [ AnimationTimingFunction.Step(5, FssTypes.Animation.Step.JumpStart) ]
                     ["animationTimingFunction" ==> "steps(5, jump-start)"]
                 test
                     "Animation timing function step jump end"
-                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.JumpEnd) ]
+                    [ AnimationTimingFunction.Step (5, FssTypes.Animation.Step.JumpEnd) ]
                     ["animationTimingFunction" ==> "steps(5, jump-end)"]
                 test
                     "Animation timing function step jump none"
-                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.JumpNone) ]
+                    [ AnimationTimingFunction.Step (5, FssTypes.Animation.Step.JumpNone) ]
                     ["animationTimingFunction" ==> "steps(5, jump-none)"]
                 test
                     "Animation timing function step jump both"
-                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.JumpBoth) ]
+                    [ AnimationTimingFunction.Step (5, FssTypes.Animation.Step.JumpBoth) ]
                     ["animationTimingFunction" ==> "steps(5, jump-both)"]
                 test
                     "Animation timing function step start"
-                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.Start) ]
+                    [ AnimationTimingFunction.Step (5, FssTypes.Animation.Step.Start) ]
                     ["animationTimingFunction" ==> "steps(5, start)"]
                 test
                     "Animation timing function step end"
-                    [ AnimationTimingFunction.Step (5, Types.Animation.Step.End) ]
+                    [ AnimationTimingFunction.Step (5, FssTypes.Animation.Step.End) ]
                     ["animationTimingFunction" ==> "steps(5, end)"]
                 test
                     "Animation timing function inherit"
@@ -130,7 +130,7 @@ module Animation =
                     ["animationIterationCount" ==> "infinite"]
                 test
                     "Animation iteration count value"
-                    [ AnimationIterationCount' (Types.CssInt 5) ]
+                    [ AnimationIterationCount' (FssTypes.CssInt 5) ]
                     ["animationIterationCount" ==> "5"]
                 test
                     "Animation direction normal"

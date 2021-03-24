@@ -11,8 +11,8 @@ module Keyframes =
     let keyframes' x = keyframes(x)
 
     type KeyframeAttribute =
-        | Frame of int * Types.CssProperty list
-        | Frames of int list * Types.CssProperty list
+        | Frame of int * FssTypes.CssProperty list
+        | Frames of int list * FssTypes.CssProperty list
 
     let frameValue f = sprintf "%d%%" f
     let frameValues fs = combineList fs frameValue ", "
@@ -24,12 +24,12 @@ module Keyframes =
                 | Frame (f, ps) ->
                     let ps' =
                         ps
-                        |> List.map Types.masterTypeHelpers.CssValue
+                        |> List.map FssTypes.masterTypeHelpers.CssValue
                     frameValue f ==> createObj ps'
                 | Frames (fs, ps) ->
                     let ps' =
                         ps
-                        |> List.map Types.masterTypeHelpers.CssValue
+                        |> List.map FssTypes.masterTypeHelpers.CssValue
                     frameValues fs ==> (createObj ps')
         )
         |> callback

@@ -1,6 +1,6 @@
 namespace Fss
 
-namespace Fss.Types
+namespace Fss.FssTypes
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
     [<RequireQualifiedAccess>]
     module Animation =

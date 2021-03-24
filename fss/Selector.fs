@@ -10,12 +10,12 @@ open Fable.Core.JsInterop
 module Selector =
 
     type Selector =
-        static member AdjacentSibling (html: Types.Html.Html) = sprintf " + %A" (Types.htmlHelpers.htmlToString html)
-        static member GeneralSibling (html: Types.Html.Html) = sprintf " ~ %A" (Types.htmlHelpers.htmlToString html)
-        static member Child (html: Types.Html.Html) = sprintf " > %A" (Types.htmlHelpers.htmlToString html)
-        static member Descendant (html: Types.Html.Html) = sprintf " %A" (Types.htmlHelpers.htmlToString html)
+        static member AdjacentSibling (html: FssTypes.Html.Html) = sprintf " + %A" (FssTypes.htmlHelpers.htmlToString html)
+        static member GeneralSibling (html: FssTypes.Html.Html) = sprintf " ~ %A" (FssTypes.htmlHelpers.htmlToString html)
+        static member Child (html: FssTypes.Html.Html) = sprintf " > %A" (FssTypes.htmlHelpers.htmlToString html)
+        static member Descendant (html: FssTypes.Html.Html) = sprintf " %A" (FssTypes.htmlHelpers.htmlToString html)
 
-    let (!+) (html: Types.Html.Html) (propertyList: Types.CssProperty list) = Selector.AdjacentSibling(html) ==> (propertyList |> fss) |> Types.CssProperty
-    let (!~) (html: Types.Html.Html) (propertyList: Types.CssProperty list) = Selector.GeneralSibling(html) ==> (propertyList  |> fss) |> Types.CssProperty
-    let (!>) (html: Types.Html.Html) (propertyList: Types.CssProperty list) = Selector.Child(html) ==> (propertyList |> fss) |> Types.CssProperty
-    let (! ) (html: Types.Html.Html) (propertyList: Types.CssProperty list) = Selector.Descendant(html) ==> (propertyList |> fss) |> Types.CssProperty
+    let (!+) (html: FssTypes.Html.Html) (propertyList: FssTypes.CssProperty list) = Selector.AdjacentSibling(html) ==> (propertyList |> fss) |> FssTypes.CssProperty
+    let (!~) (html: FssTypes.Html.Html) (propertyList: FssTypes.CssProperty list) = Selector.GeneralSibling(html) ==> (propertyList  |> fss) |> FssTypes.CssProperty
+    let (!>) (html: FssTypes.Html.Html) (propertyList: FssTypes.CssProperty list) = Selector.Child(html) ==> (propertyList |> fss) |> FssTypes.CssProperty
+    let (! ) (html: FssTypes.Html.Html) (propertyList: FssTypes.CssProperty list) = Selector.Descendant(html) ==> (propertyList |> fss) |> FssTypes.CssProperty

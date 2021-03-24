@@ -235,7 +235,7 @@ module Column =
                     [ "columnRuleColor" ==> "unset" ]
                 test
                     "Column count number"
-                    [ColumnCount' (Types.CssInt 3)]
+                    [ColumnCount' (FssTypes.CssInt 3)]
                     ["columnCount" ==> "3"]
                 test
                     "Column count auto"

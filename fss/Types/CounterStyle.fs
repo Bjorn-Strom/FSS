@@ -1,8 +1,8 @@
 namespace Fss
 
-namespace Fss.Types
+namespace Fss.FssTypes
 
-    open Fss.Types
+    open Fss.FssTypes
 
     [<RequireQualifiedAccess>]
     module Counter =
