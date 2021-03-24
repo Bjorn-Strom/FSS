@@ -35,24 +35,24 @@ namespace Fss.FssTypes
             let (angle, gradients) = gradients
             $"repeating-linear-gradient({angleToString angle}, {Fss.Utilities.Helpers.combineComma stringifyGradientPx gradients})"
 
-        let private stringifyRadialPercent (gradient: Shape * Side * Percent * Percent * (ColorTypeFoo * Percent) list) =
+        let private stringifyRadialPercent (gradient: Shape * Side * Percent * Percent * (ColorType * Percent) list) =
             let shape, size, x, y, gradients = gradient
             let shape = Fss.Utilities.Helpers.duToLowercase shape
             let size = Fss.Utilities.Helpers.duToKebab size
             let gradients = Fss.Utilities.Helpers.combineComma stringifyGradientPercent gradients
             $"radial-gradient({shape} {size} at {percentToString x} {percentToString y}, {gradients})"
 
-        let private stringifyRadialPx (gradient: Shape * Side * Percent * Percent * (ColorTypeFoo * Size) list) =
+        let private stringifyRadialPx (gradient: Shape * Side * Percent * Percent * (ColorType * Size) list) =
             let shape, size, x, y, gradients = gradient
             let shape = Fss.Utilities.Helpers.duToLowercase shape
             let size = Fss.Utilities.Helpers.duToKebab size
             let gradients = Fss.Utilities.Helpers.combineComma stringifyGradientPx gradients
             $"radial-gradient({shape} {size} at {percentToString x} {percentToString y}, {gradients})"
 
-        let private stringifyRepeatingRadialPercent (gradient: Shape * Side * Percent * Percent * (ColorTypeFoo * Percent) list) =
+        let private stringifyRepeatingRadialPercent (gradient: Shape * Side * Percent * Percent * (ColorType * Percent) list) =
             $"repeating-{stringifyRadialPercent gradient}"
 
-        let private stringifyRepeatingRadialPx (gradient: Shape * Side * Percent * Percent * (ColorTypeFoo * Size) list) =
+        let private stringifyRepeatingRadialPx (gradient: Shape * Side * Percent * Percent * (ColorType * Size) list) =
             $"repeating-{stringifyRadialPx gradient}"
 
         let private stringifyConicAngle (color, angle) =
@@ -83,42 +83,42 @@ namespace Fss.FssTypes
 
         type Image =
             static member Url (url: string) = sprintf "url(%s)" url
-            static member LinearGradient (gradients: Angle * (ColorTypeFoo * Percent) list) =
+            static member LinearGradient (gradients: Angle * (ColorType * Percent) list) =
                 stringifyLinearPercent gradients
-            static member LinearGradient (gradients: Angle * (ColorTypeFoo * Size) list) =
+            static member LinearGradient (gradients: Angle * (ColorType * Size) list) =
                 stringifyLinearPixels gradients
-            static member LinearGradients (gradients: (Angle * ((ColorTypeFoo * Size) list)) list) =
+            static member LinearGradients (gradients: (Angle * ((ColorType * Size) list)) list) =
                 Fss.Utilities.Helpers.combineComma stringifyLinearPixels gradients
-            static member LinearGradients (gradients: (Angle * ((ColorTypeFoo * Percent) list)) list) =
+            static member LinearGradients (gradients: (Angle * ((ColorType * Percent) list)) list) =
                 Fss.Utilities.Helpers.combineComma stringifyLinearPercent gradients
-            static member RepeatingLinearGradient (gradients: Angle * (ColorTypeFoo * Percent) list) =
+            static member RepeatingLinearGradient (gradients: Angle * (ColorType * Percent) list) =
                 stringifyRepeatingLinearPercent gradients
-            static member RepeatingLinearGradient (gradients: Angle * (ColorTypeFoo * Size) list) =
+            static member RepeatingLinearGradient (gradients: Angle * (ColorType * Size) list) =
                 stringifyRepeatingLinearPixels gradients
-            static member RepeatingLinearGradients (gradients: (Angle * ((ColorTypeFoo * Size) list)) list) =
+            static member RepeatingLinearGradients (gradients: (Angle * ((ColorType * Size) list)) list) =
                 Fss.Utilities.Helpers.combineComma stringifyRepeatingLinearPixels gradients
-            static member RepeatingLinearGradients (gradients: (Angle * ((ColorTypeFoo * Percent) list)) list) =
+            static member RepeatingLinearGradients (gradients: (Angle * ((ColorType * Percent) list)) list) =
                 Fss.Utilities.Helpers.combineComma stringifyRepeatingLinearPercent gradients
 
-            static member RadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorTypeFoo * Percent) list) =
+            static member RadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorType * Percent) list) =
                 stringifyRadialPercent(shape, size, x, y, gradients)
-            static member RadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorTypeFoo * Size) list) =
+            static member RadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorType * Size) list) =
                 stringifyRadialPx(shape, size, x, y, gradients)
-            static member RadialGradients (gradients: (Shape * Side * Percent * Percent * (ColorTypeFoo * Percent) list) list) =
+            static member RadialGradients (gradients: (Shape * Side * Percent * Percent * (ColorType * Percent) list) list) =
                 Fss.Utilities.Helpers.combineComma stringifyRadialPercent gradients
-            static member RadialGradients (gradients: (Shape * Side * Percent * Percent * (ColorTypeFoo * Size) list) list) =
+            static member RadialGradients (gradients: (Shape * Side * Percent * Percent * (ColorType * Size) list) list) =
                 Fss.Utilities.Helpers.combineComma stringifyRadialPx gradients
-            static member RepeatingRadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorTypeFoo * Percent) list) =
+            static member RepeatingRadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorType * Percent) list) =
                 stringifyRepeatingRadialPercent(shape, size, x, y, gradients)
-            static member RepeatingRadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorTypeFoo * Size) list) =
+            static member RepeatingRadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorType * Size) list) =
                 stringifyRepeatingRadialPx(shape, size, x, y, gradients)
 
-            static member ConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorTypeFoo * Angle) list) =
+            static member ConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorType * Angle) list) =
                 stringifyConicGradientAngle angle x y gradients
-            static member RepeatingConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorTypeFoo * Angle) list) =
+            static member RepeatingConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorType * Angle) list) =
                 stringifyRepeatingConicAngle angle x y gradients
-            static member ConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorTypeFoo * Percent) list) =
+            static member ConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorType * Percent) list) =
                 stringifyConicGradientPercent angle x y gradients
-            static member RepeatingConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorTypeFoo * Percent) list) =
+            static member RepeatingConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorType * Percent) list) =
                 stringifyRepeatingConicPercent angle x y gradients
 

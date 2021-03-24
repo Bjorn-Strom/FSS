@@ -47,7 +47,7 @@ module Column =
 
     let private columnRuleColorToString (columnColor: FssTypes.IColumnRuleColor) =
         match columnColor with
-        | :? FssTypes.ColorTypeFoo as c -> FssTypes.colorHelpers.colorToString c
+        | :? FssTypes.ColorType as c -> FssTypes.colorHelpers.colorToString c
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column rule color"
 
@@ -402,7 +402,7 @@ module Column =
     /// <summary>Specifies color of the line drawn between columns.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> FssTypes.ColorTypeFoo</c>
+    ///     - <c> FssTypes.ColorType</c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>

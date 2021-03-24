@@ -554,7 +554,7 @@ module Grid =
                     ["gridAutoColumns" ==> "fit-content(400px)"]
                 test
                     "Grid auto columns multiple with min-content max-content and auto"
-                    [ GridAutoColumns.Values [Types.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
+                    [ GridAutoColumns.Values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
                     ["gridAutoColumns" ==> "min-content max-content"]
                 test
                     "Grid auto columns multiple with pxs"
@@ -618,7 +618,7 @@ module Grid =
                     ["gridAutoRows" ==> "fit-content(400px)"]
                 test
                     "Grid auto rows multiple with min-content max-content and auto"
-                    [ GridAutoRows.Values [Types.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
+                    [ GridAutoRows.Values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
                     ["gridAutoRows" ==> "min-content max-content"]
                 test
                     "Grid auto rows multiple with pxs"

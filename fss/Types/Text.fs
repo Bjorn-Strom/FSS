@@ -70,8 +70,8 @@ namespace Fss.FssTypes
 
         type Shadow =
             | XY of Size * Size
-            | ColorXY of ColorTypeFoo * Size * Size
-            | ColorXYBlur of ColorTypeFoo * Size * Size * Size
+            | ColorXY of ColorType * Size * Size
+            | ColorXYBlur of ColorType * Size * Size * Size
 
         type Overflow =
             | Clip

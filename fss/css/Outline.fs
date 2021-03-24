@@ -11,7 +11,7 @@ module Outline  =
 
     let private outlineColorToString (color: FssTypes.IOutlineColor) =
         match color with
-        | :? FssTypes.ColorTypeFoo as c -> FssTypes.colorHelpers.colorToString c
+        | :? FssTypes.ColorType as c -> FssTypes.colorHelpers.colorToString c
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown outline color"
 
@@ -231,7 +231,7 @@ module Outline  =
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
-    ///     - <c> FssTypes.ColorTypeFoo</c>
+    ///     - <c> FssTypes.ColorType</c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let OutlineColor' (color: FssTypes.IOutlineColor) = OutlineColor.Value(color)

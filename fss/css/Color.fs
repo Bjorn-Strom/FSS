@@ -178,7 +178,7 @@ module Color =
               FssTypes.Color.Hsl(h, s, l) |> colorCssValue'
         static member Hsla h s l a =
               FssTypes.Color.Hsla (h, s, l, a) |> colorCssValue'
-        static member Value (color: FssTypes.ColorTypeFoo) = color |> colorCssValue'
+        static member Value (color: FssTypes.ColorType) = color |> colorCssValue'
         static member transparent = FssTypes.Color.transparent |> colorCssValue'
         static member currentColor = FssTypes.Color.currentColor |> colorCssValue'
         static member Revert = colorCssValue "revert"
@@ -188,7 +188,7 @@ module Color =
         static member Unset = FssTypes.Unset |> FssTypes.masterTypeHelpers.keywordsToString |> colorCssValue
 
     /// <summary>Sets the color of text and text decoration. </summary>
-    /// <param name="color">The FssTypes.ColorTypeFooto apply</param>
+    /// <param name="color">The FssTypes.ColorTypeto apply</param>
     /// <returns>Css property for fss.</returns>
-    let Color' (color: FssTypes.ColorTypeFoo) = Color.Value(color)
+    let Color' (color: FssTypes.ColorType) = Color.Value(color)
 

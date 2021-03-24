@@ -8,7 +8,7 @@ namespace Fss.FssTypes
             | Blur of int
             | Brightness of Percent
             | Contrast of Percent
-            | DropShadow of int * int * int * ColorTypeFoo * Percent
+            | DropShadow of int * int * int * ColorType * Percent
             | Grayscale of Percent
             | HueRotate of int
             | Invert of Percent

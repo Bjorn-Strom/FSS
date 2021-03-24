@@ -124,7 +124,7 @@ module Text =
 
     let private textEmphasisColorToString (color: FssTypes.ITextEmphasisColor) =
         match color with
-            | :? FssTypes.ColorTypeFoo as c -> FssTypes.colorHelpers.colorToString c
+            | :? FssTypes.ColorType as c -> FssTypes.colorHelpers.colorToString c
             | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
             | _ -> "unknown text emphasis color"
 
@@ -154,7 +154,7 @@ module Text =
 
     let private textDecorationColorToString (color: FssTypes.ITextDecorationColor) =
         match color with
-            | :? FssTypes.ColorTypeFoo as c -> FssTypes.colorHelpers.colorToString c
+            | :? FssTypes.ColorType as c -> FssTypes.colorHelpers.colorToString c
             | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
             | _ -> "unknown text decoration color"
 
@@ -520,9 +520,9 @@ module Text =
     type TextShadow =
         static member XY (xOffset: FssTypes.Size, yOffset: FssTypes.Size) =
             FssTypes.Text.XY(xOffset,yOffset)
-        static member ColorXY (color: FssTypes.ColorTypeFoo, xOffset: FssTypes.Size, yOffset: FssTypes.Size) =
+        static member ColorXY (color: FssTypes.ColorType, xOffset: FssTypes.Size, yOffset: FssTypes.Size) =
             FssTypes.Text.ColorXY(color, xOffset, yOffset)
-        static member ColorXYBlur (xOffset: FssTypes.Size, yOffset: FssTypes.Size, blurRadius: FssTypes.Size, color: FssTypes.ColorTypeFoo) =
+        static member ColorXYBlur (xOffset: FssTypes.Size, yOffset: FssTypes.Size, blurRadius: FssTypes.Size, color: FssTypes.ColorType) =
             FssTypes.Text.ColorXYBlur (color, xOffset, yOffset, blurRadius)
 
     /// Supply a list of text shadows to apply to the text
@@ -940,7 +940,7 @@ module Text =
     /// <summary>Specifies color of text decoration.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> FssTypes.ColorTypeFoo</c>
+    ///     - <c> FssTypes.ColorType</c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
@@ -1114,7 +1114,7 @@ module Text =
     /// <summary>Specifies color of text emphasis.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> FssTypes.ColorTypeFoo</c>
+    ///     - <c> FssTypes.ColorType</c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>

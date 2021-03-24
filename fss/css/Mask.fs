@@ -102,34 +102,34 @@ module Mask =
     type MaskImage =
         static member Value (source: FssTypes.IMaskImage) = source |> imageValue'
         static member Url (url: string) = imageValue <| sprintf "url(%s)" url
-        static member LinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorTypeFoo* FssTypes.Percent) list) =
+        static member LinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType* FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorTypeFoo* FssTypes.Size) list) =
+        static member LinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType* FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorTypeFoo* FssTypes.Percent) list)) list) =
+        static member LinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType* FssTypes.Percent) list)) list) =
             imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member LinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorTypeFoo* FssTypes.Size) list)) list) =
+        static member LinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType* FssTypes.Size) list)) list) =
             imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member RepeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorTypeFoo* FssTypes.Size) list) =
+        static member RepeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType* FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorTypeFoo* FssTypes.Percent) list) =
+        static member RepeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType* FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorTypeFoo* FssTypes.Size) list)) list) =
+        static member RepeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType* FssTypes.Size) list)) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
-        static member RepeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorTypeFoo* FssTypes.Percent) list)) list) =
+        static member RepeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType* FssTypes.Percent) list)) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorTypeFoo* FssTypes.Percent) list) =
+        static member RadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType* FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorTypeFoo* FssTypes.Size) list) =
+        static member RadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType* FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorTypeFoo* FssTypes.Percent) list) list) =
+        static member RadialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType* FssTypes.Percent) list) list) =
             imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorTypeFoo* FssTypes.Size) list) list) =
+        static member RadialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType* FssTypes.Size) list) list) =
             imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorTypeFoo* FssTypes.Percent) list) =
+        static member RepeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType* FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorTypeFoo* FssTypes.Size) list) =
+        static member RepeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType* FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
         static member None = FssTypes.None' |> imageValue'
         static member Inherit = FssTypes.Inherit |> imageValue'
