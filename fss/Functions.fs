@@ -2,6 +2,7 @@ namespace Fss
 
 open System
 open Fable.Core
+open Fable.Core.JS
 open Fable.Core.JsInterop
 
 open Media
@@ -66,7 +67,7 @@ module Functions =
     let fontFaces (fontFamily: string) (attributeLists: Types.CssProperty list list) =
         attributeLists
         |> List.map (createFontFaceObject fontFamily)
-        |> css'
+        |> List.iter css'
 
         Types.Font.Family.Name (Types.Font.Name fontFamily)
 
