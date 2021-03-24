@@ -1053,66 +1053,55 @@ module Feliz =
                     "Outline color hex"
                     [ style.outlineColor.Hex "f92525"]
                     ["outlineColor" ==> "#f92525"]
-                testNested
+                testMedia
                     "Media query with min width and min height"
-                    [
-                        MediaQuery
-                            [ Media.Feature.MinWidth (px 500); Media.Feature.MaxWidth (px 700) ]
-                            [ style.backgroundColor.red ]
-                    ]
-                    ["@media (min-width: 500px) and (max-width: 700px)" ==> "backgroundColor,#ff0000"]
-                testNested
+                    [ Media.MinWidth (px 500); Media.MaxWidth (px 700) ]
+                    [ style.backgroundColor.red ]
+                    ("@media (min-width: 500px) and (max-width: 700px)" ==> "[backgroundColor,#ff0000]")
+                testMedia
                     "Media query min height only"
-                    [
-                        MediaQuery
-                            [ Media.Feature.MinHeight (px 700) ]
-                            [ style.backgroundColor.pink ]
-                    ]
-                    ["@media (min-height: 700px)" ==> "backgroundColor,#ffc0cb"]
-                testNested
+                        [ Media.MinHeight (px 700) ]
+                        [ style.backgroundColor.pink ]
+                        ("@media (min-height: 700px)" ==> "[backgroundColor,#ffc0cb]")
+                testMediaFor
                     "Media query for print"
-                    [
-                        MediaQueryFor Media.Print []
-                            [
-                                style.marginTop' (px 200)
-                                style.transforms
-                                    [
-                                        Transform.Rotate (deg 45.0)
+                        (Media.Print)
+                        []
+                        [
+                            style.marginTop' (px 200)
+                            style.transforms
+                                [
+                                Transform.Rotate (deg 45.0)
                                     ]
-                                style.backgroundColor.indianRed
+                            style.backgroundColor.indianRed
                             ]
-                    ]
-                    ["@media print " ==> "marginTop,200px,transform,rotate(45.00deg),backgroundColor,#cd5c5c"]
-                testNested
+                    ("@media print " ==> "[marginTop,200px; transform,rotate(45.00deg); backgroundColor,#cd5c5c]")
+                testMediaFor
                     "Media not all"
-                    [
-                        MediaQueryFor (Media.Not Media.Device.All) [ Media.Feature.Color ] [ style.marginTop' (px 200) ]
-                    ]
-                    ["@media not all and (color)" ==> "marginTop,200px"]
-                testNested
+                        (Media.Not Media.Device.All)
+                        [ Media.Feature.Color ]
+                        [style.marginTop' (px 200) ]
+                        ("@media not all and (color)" ==> "[marginTop,200px]")
+                testMediaFor
                     "Media query only screen"
+                    (Media.Only Media.Device.Screen)
                     [
-                        MediaQueryFor (Media.Only Media.Device.Screen)
-                            [
-                                Media.Feature.Color
-                                Media.Feature.Pointer Media.Fine
-                                Media.Feature.Scan Media.Interlace
-                                Media.Feature.Grid true
-                            ]
-                            [
-                                style.marginTop' (px 200)
-                                style.transforms
-                                    [
-                                        Transform.Rotate (deg 45.0)
-                                    ]
-                                style.backgroundColor.indianRed
-                            ]
+                        Media.Feature.Color
+                        Media.Feature.Pointer Media.Fine
+                        Media.Feature.Scan Media.Interlace
+                        Media.Feature.Grid true
                     ]
                     [
-                        "@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: 1)"
-                        ==>
-                        "marginTop,200px,transform,rotate(45.00deg),backgroundColor,#cd5c5c"
+                        style.marginTop' (px 200)
+                        style.transforms
+                            [
+                                Transform.Rotate (deg 45.0)
+                            ]
+                        style.backgroundColor.indianRed
                     ]
+                    ("@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: 1)"
+                    ==>
+                    "[marginTop,200px; transform,rotate(45.00deg); backgroundColor,#cd5c5c]")
                 test
                     "BoxShadow color"
                     [

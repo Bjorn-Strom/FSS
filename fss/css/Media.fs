@@ -4,7 +4,7 @@ open Fable.Core.JsInterop
 open Utilities.Helpers
 
 module Media =
-    let private deviceLabel (d: Types.Media.Device): string =
+    let deviceLabel (d: Types.Media.Device): string =
         match d with
             | Types.Media.Not n -> sprintf "not %s" (duToLowercase n)
             | Types.Media.Only o -> sprintf "only %s" (duToLowercase o)
