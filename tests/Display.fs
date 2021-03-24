@@ -11,71 +11,71 @@ module Display =
             [
                 test
                     "Display inline"
-                    [ Display.Inline ]
+                    [ Display.inline' ]
                     ["display" ==> "inline"]
                 test
                     "Display inline-block"
-                    [ Display.InlineBlock]
+                    [ Display.inlineBlock]
                     ["display" ==> "inline-block"]
                 test
                     "Display block"
-                    [ Display.Block]
+                    [ Display.block]
                     ["display" ==> "block"]
                 test
                     "Display run-in"
-                    [ Display.RunIn]
+                    [ Display.runIn]
                     ["display" ==> "run-in"]
                 test
                     "Display flex"
-                    [ Display.Flex]
+                    [ Display.flex]
                     ["display" ==> "flex"]
                 test
                     "Display grid"
-                    [ Display.Grid]
+                    [ Display.grid]
                     ["display" ==> "grid"]
                 test
                     "Display flow-root"
-                    [ Display.FlowRoot]
+                    [ Display.flowRoot]
                     ["display" ==> "flow-root"]
                 test
                     "Display table"
-                    [ Display.Table]
+                    [ Display.table]
                     ["display" ==> "table"]
                 test
                     "Display table-cell"
-                    [ Display.TableCell]
+                    [ Display.tableCell]
                     ["display" ==> "table-cell"]
                 test
                     "Display table-column"
-                    [ Display.TableColumn]
+                    [ Display.tableColumn]
                     ["display" ==> "table-column"]
                 test
                     "Display table-column-group"
-                    [ Display.TableColumnGroup]
+                    [ Display.tableColumnGroup]
                     ["display" ==> "table-column-group"]
                 test
                     "Display table-header-group"
-                    [ Display.TableHeaderGroup]
+                    [ Display.tableHeaderGroup]
                     ["display" ==> "table-header-group"]
                 test
                     "Display table row group"
-                    [ Display.TableRowGroup]
+                    [ Display.tableRowGroup]
                     ["display" ==> "table-row-group"]
                 test
                     "table footer group"
-                    [ Display.TableFooterGroup]
+                    [ Display.tableFooterGroup]
                     ["display" ==> "table-footer-group"]
                 test
                     "Display table row"
-                    [ Display.TableRow]
+                    [ Display.tableRow]
                     ["display" ==> "table-row"]
                 test
                     "Display table-caption"
-                    [ Display.TableCaption]
+                    [ Display.tableCaption]
                     ["display" ==> "table-caption"]
                 test
                     "Display none"
-                    [ Display.None]
+                    [ Display.none]
                     ["display" ==> "none"]
                 test
                     "Display none"

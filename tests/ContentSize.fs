@@ -19,31 +19,31 @@ module ContentSize =
                     ["width" ==> "25%"]
                 test
                     "Width max content"
-                    [ Width.MaxContent ]
+                    [ Width.maxContent ]
                     ["width" ==> "max-content"]
                 test
                     "Width min content"
-                    [ Width.MinContent ]
+                    [ Width.minContent ]
                     ["width" ==> "min-content"]
                 test
                     "Width fit content"
-                    [ Width.FitContent (px 100) ]
+                    [ Width.fitContent (px 100) ]
                     ["width" ==> "fit-content(100px)"]
                 test
                     "Width auto"
-                    [ Width.Auto ]
+                    [ Width.auto ]
                     ["width" ==> "auto"]
                 test
                     "Width initial"
-                    [ Width.Initial ]
+                    [ Width.initial ]
                     ["width" ==> "initial"]
                 test
                     "Width inherit"
-                    [ Width.Inherit ]
+                    [ Width.inherit' ]
                     ["width" ==> "inherit"]
                 test
                     "Width unset"
-                    [ Width.Unset ]
+                    [ Width.unset ]
                     ["width" ==> "unset"]
                 test
                     "Height px"
@@ -55,30 +55,30 @@ module ContentSize =
                     ["height" ==> "25%"]
                 test
                     "Height max content"
-                    [ Height.MaxContent ]
+                    [ Height.maxContent ]
                     ["height" ==> "max-content"]
                 test
                     "Height min content"
-                    [ Height.MinContent ]
+                    [ Height.minContent ]
                     ["height" ==> "min-content"]
                 test
                     "Height fit content"
-                    [ Height.FitContent (px 100) ]
+                    [ Height.fitContent (px 100) ]
                     ["height" ==> "fit-content(100px)"]
                 test
                     "Height auto"
-                    [ Height.Auto ]
+                    [ Height.auto ]
                     ["height" ==> "auto"]
                 test
                     "Height initial"
-                    [ Height.Initial ]
+                    [ Height.initial ]
                     ["height" ==> "initial"]
                 test
                     "Height inherit"
-                    [ Height.Inherit ]
+                    [ Height.inherit' ]
                     ["height" ==> "inherit"]
                 test
                     "Height unset"
-                    [ Height.Unset ]
+                    [ Height.unset ]
                     ["height" ==> "unset"]
             ]

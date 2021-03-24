@@ -12,7 +12,7 @@ module Word =
             [
                 test
                     "Word spacing normal"
-                    [WordSpacing.Normal]
+                    [WordSpacing.normal]
                     ["wordSpacing" ==> "normal"]
                 test
                     "Word spacing px"
@@ -32,27 +32,27 @@ module Word =
                     ["wordSpacing" ==> "inherit"]
                 test
                     "Word spacing inherit"
-                    [WordSpacing.Inherit]
+                    [WordSpacing.inherit']
                     ["wordSpacing" ==> "inherit"]
                 test
                     "Word spacing initial"
-                    [WordSpacing.Initial]
+                    [WordSpacing.initial]
                     ["wordSpacing" ==> "initial"]
                 test
                     "Word spacing unset"
-                    [WordSpacing.Unset]
+                    [WordSpacing.unset]
                     ["wordSpacing" ==> "unset"]
                 test
                     "Word break word break"
-                    [WordBreak.WordBreak]
+                    [WordBreak.wordBreak]
                     ["wordBreak" ==> "word-break"]
                 test
                     "Word Spacing break all"
-                    [WordBreak.BreakAll]
+                    [WordBreak.breakAll]
                     ["wordBreak" ==> "break-all"]
                 test
                     "Word break normal"
-                    [WordBreak.Normal]
+                    [WordBreak.normal]
                     ["wordBreak" ==> "normal"]
                 test
                     "Word Spacing inherit value"
@@ -60,14 +60,14 @@ module Word =
                     ["wordBreak" ==> "inherit"]
                 test
                     "Word break inherit"
-                    [WordBreak.Inherit]
+                    [WordBreak.inherit']
                     ["wordBreak" ==> "inherit"]
                 test
                     "Word break initial"
-                    [WordBreak.Initial]
+                    [WordBreak.initial]
                     ["wordBreak" ==> "initial"]
                 test
                     "Word break unset"
-                    [WordBreak.Unset]
+                    [WordBreak.unset]
                     ["wordBreak" ==> "unset"]
             ]

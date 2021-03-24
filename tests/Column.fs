@@ -23,47 +23,47 @@ module Column =
                     ["columnWidth" ==> "3.3vw"]
                 test
                     "Column Width auto"
-                    [ColumnWidth.Auto]
+                    [ColumnWidth.auto]
                     ["columnWidth" ==> "auto"]
                 test
                     "Column Width inherit"
-                    [ColumnWidth.Inherit]
+                    [ColumnWidth.inherit']
                     ["columnWidth" ==> "inherit"]
                 test
                     "Column Width initial"
-                    [ColumnWidth.Initial]
+                    [ColumnWidth.initial]
                     ["columnWidth" ==> "initial"]
                 test
                     "Column Width unset"
-                    [ColumnWidth.Unset]
+                    [ColumnWidth.unset]
                     ["columnWidth" ==> "unset"]
                 test
                     "Column balance"
-                    [ColumnFill.Balance]
+                    [ColumnFill.balance]
                     ["columnFill" ==> "balance"]
                 test
                     "Column fill balance all"
-                    [ColumnFill.BalanceAll]
+                    [ColumnFill.balanceAll]
                     ["columnFill" ==> "balance-all"]
                 test
                     "Column fill auto"
-                    [ColumnFill.Auto]
+                    [ColumnFill.auto]
                     ["columnFill" ==> "auto"]
                 test
                     "Column fill inherit"
-                    [ColumnFill.Inherit]
+                    [ColumnFill.inherit']
                     ["columnFill" ==> "inherit"]
                 test
                     "Column fill initial"
-                    [ColumnFill.Initial]
+                    [ColumnFill.initial]
                     ["columnFill" ==> "initial"]
                 test
                     "Column fill unset"
-                    [ColumnFill.Unset]
+                    [ColumnFill.unset]
                     ["columnFill" ==> "unset"]
                 test
                     "Column gap normal"
-                    [ColumnGap.Normal]
+                    [ColumnGap.normal]
                     ["columnGap" ==> "normal"]
                 test
                     "Column gap px"
@@ -79,71 +79,71 @@ module Column =
                     ["columnGap" ==> "3%"]
                 test
                     "Column gap inherit"
-                    [ColumnGap.Inherit]
+                    [ColumnGap.inherit']
                     ["columnGap" ==> "inherit"]
                 test
                     "Column gap initial"
-                    [ColumnGap.Initial]
+                    [ColumnGap.initial]
                     ["columnGap" ==> "initial"]
                 test
                     "Column gap unset"
-                    [ColumnGap.Unset]
+                    [ColumnGap.unset]
                     ["columnGap" ==> "unset"]
                 test
                     "Column span all"
-                    [ColumnSpan.All]
+                    [ColumnSpan.all]
                     ["columnSpan" ==> "all"]
                 test
                     "Column span none"
-                    [ColumnSpan.None]
+                    [ColumnSpan.none]
                     ["columnSpan" ==> "none"]
                 test
                     "Column span inherit"
-                    [ColumnSpan.Inherit]
+                    [ColumnSpan.inherit']
                     ["columnSpan" ==> "inherit"]
                 test
                     "Column span initial"
-                    [ColumnSpan.Initial]
+                    [ColumnSpan.initial]
                     ["columnSpan" ==> "initial"]
                 test
                     "Column span unset"
-                    [ColumnSpan.Unset]
+                    [ColumnSpan.unset]
                     ["columnSpan" ==> "unset"]
                 test
                     "Columns Inherit"
-                    [Columns.Inherit]
+                    [Columns.inherit']
                     ["columns" ==> "inherit"]
                 test
                     "Columns Initial"
-                    [Columns.Initial]
+                    [Columns.initial]
                     ["columns" ==> "initial"]
                 test
                     "Columns Unset"
-                    [Columns.Unset]
+                    [Columns.unset]
                     ["columns" ==> "unset"]
                 test
                     "Column rule Inherit"
-                    [ColumnRule.Inherit]
+                    [ColumnRule.inherit']
                     ["columnRule" ==> "inherit"]
                 test
                     "Column rule Initial"
-                    [ColumnRule.Initial]
+                    [ColumnRule.initial]
                     ["columnRule" ==> "initial"]
                 test
                     "Column rule Unset"
-                    [ColumnRule.Unset]
+                    [ColumnRule.unset]
                     ["columnRule" ==> "unset"]
                 test
                     "Column rule width thin"
-                    [ColumnRuleWidth.Thin]
+                    [ColumnRuleWidth.thin]
                     ["columnRuleWidth" ==> "thin"]
                 test
                     "Column rule width medium"
-                    [ColumnRuleWidth.Medium]
+                    [ColumnRuleWidth.medium]
                     ["columnRuleWidth" ==> "medium"]
                 test
                     "Column rule width thick"
-                    [ColumnRuleWidth.Thick]
+                    [ColumnRuleWidth.thick]
                     ["columnRuleWidth" ==> "thick"]
                 test
                     "Column rule width px"
@@ -155,67 +155,67 @@ module Column =
                     ["columnRuleWidth" ==> "2.5em"]
                 test
                     "Column rule width Inherit"
-                    [ColumnRuleWidth.Inherit]
+                    [ColumnRuleWidth.inherit']
                     ["columnRuleWidth" ==> "inherit"]
                 test
                     "Column rule width Initial"
-                    [ColumnRuleWidth.Initial]
+                    [ColumnRuleWidth.initial]
                     ["columnRuleWidth" ==> "initial"]
                 test
                     "Column rule width Unset"
-                    [ColumnRuleWidth.Unset]
+                    [ColumnRuleWidth.unset]
                     ["columnRuleWidth" ==> "unset"]
                 test
                     "Column rule style hidden"
-                    [ ColumnRuleStyle.Hidden ]
+                    [ ColumnRuleStyle.hidden ]
                     [ "columnRuleStyle" ==> "hidden" ]
                 test
                     "Column rule style dotted"
-                    [ ColumnRuleStyle.Dotted ]
+                    [ ColumnRuleStyle.dotted ]
                     [ "columnRuleStyle" ==> "dotted" ]
                 test
                     "Column rule style dashed"
-                    [ ColumnRuleStyle.Dashed ]
+                    [ ColumnRuleStyle.dashed ]
                     [ "columnRuleStyle" ==> "dashed" ]
                 test
                     "Column rule style solid"
-                    [ ColumnRuleStyle.Solid ]
+                    [ ColumnRuleStyle.solid ]
                     [ "columnRuleStyle" ==> "solid" ]
                 test
                     "Column rule style double"
-                    [ ColumnRuleStyle.Double ]
+                    [ ColumnRuleStyle.double ]
                     [ "columnRuleStyle" ==> "double" ]
                 test
                     "Column rule style groove"
-                    [ ColumnRuleStyle.Groove ]
+                    [ ColumnRuleStyle.groove ]
                     [ "columnRuleStyle" ==> "groove" ]
                 test
                     "Column rule style ridge"
-                    [ ColumnRuleStyle.Ridge ]
+                    [ ColumnRuleStyle.ridge ]
                     [ "columnRuleStyle" ==> "ridge" ]
                 test
                     "Column rule style inset"
-                    [ ColumnRuleStyle.Inset ]
+                    [ ColumnRuleStyle.inset ]
                     [ "columnRuleStyle" ==> "inset" ]
                 test
                     "Column rule style outset"
-                    [ ColumnRuleStyle.Outset ]
+                    [ ColumnRuleStyle.outset ]
                     [ "columnRuleStyle" ==> "outset" ]
                 test
                     "Column rule style none"
-                    [ ColumnRuleStyle.None ]
+                    [ ColumnRuleStyle.none ]
                     [ "columnRuleStyle" ==> "none" ]
                 test
                     "Column rule style initial"
-                    [ ColumnRuleStyle.Initial ]
+                    [ ColumnRuleStyle.initial ]
                     [ "columnRuleStyle" ==> "initial" ]
                 test
                     "Column rule style inherit"
-                    [ ColumnRuleStyle.Inherit ]
+                    [ ColumnRuleStyle.inherit' ]
                     [ "columnRuleStyle" ==> "inherit" ]
                 test
                     "Column rule style unset"
-                    [ ColumnRuleStyle.Unset ]
+                    [ ColumnRuleStyle.unset ]
                     [ "columnRuleStyle" ==> "unset" ]
                 test
                     "Column rule color red"
@@ -223,15 +223,15 @@ module Column =
                     [ "columnRuleColor" ==> "#ff0000" ]
                 test
                     "Column rule color initial"
-                    [ ColumnRuleColor.Initial ]
+                    [ ColumnRuleColor.initial ]
                     [ "columnRuleColor" ==> "initial" ]
                 test
                     "Column rule color inherit"
-                    [ ColumnRuleColor.Inherit ]
+                    [ ColumnRuleColor.inherit' ]
                     [ "columnRuleColor" ==> "inherit" ]
                 test
                     "Column rule color unset"
-                    [ ColumnRuleColor.Unset ]
+                    [ ColumnRuleColor.unset ]
                     [ "columnRuleColor" ==> "unset" ]
                 test
                     "Column count number"
@@ -239,18 +239,18 @@ module Column =
                     ["columnCount" ==> "3"]
                 test
                     "Column count auto"
-                    [ColumnCount.Auto]
+                    [ColumnCount.auto]
                     ["columnCount" ==> "auto"]
                 test
                     "Column count inherit"
-                    [ColumnCount.Inherit]
+                    [ColumnCount.inherit']
                     ["columnCount" ==> "inherit"]
                 test
                     "Column count initial"
-                    [ColumnCount.Initial]
+                    [ColumnCount.initial]
                     ["columnCount" ==> "initial"]
                 test
                     "Column count unset"
-                    [ColumnCount.Unset]
+                    [ColumnCount.unset]
                     ["columnCount" ==> "unset"]
             ]

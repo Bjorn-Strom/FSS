@@ -11,11 +11,11 @@ module Color =
             [
                 test
                     "Color adjust exact"
-                    [ColorAdjust.Exact]
+                    [ColorAdjust.exact]
                     ["colorAdjust" ==> "exact"]
                 test
                     "Color adjust economy"
-                    [ColorAdjust.Economy]
+                    [ColorAdjust.economy]
                     ["colorAdjust" ==> "economy"]
                 test
                     "Color named color"
@@ -23,39 +23,39 @@ module Color =
                     [ "color" ==> "#f0f8ff"]
                 test
                     "Color RGB"
-                    [ Color.Rgb 255 0 0 ]
+                    [ Color.rgb 255 0 0 ]
                     ["color" ==> "rgb(255, 0, 0)"]
                 test
                     "Color RBGA"
-                    [ Color.Rgba 255 0 0 0.5 ]
+                    [ Color.rgba 255 0 0 0.5 ]
                     ["color" ==> "rgba(255, 0, 0, 0.500000)"]
                 test
                     "Color HEX no #"
-                    [ Color.Hex "ff0000" ]
+                    [ Color.hex "ff0000" ]
                     ["color" ==> "#ff0000"]
                 test
                     "Color HEX with alpha"
-                    [ Color.Hex "#ff000080" ]
+                    [ Color.hex "#ff000080" ]
                     ["color" ==> "#ff000080"]
                 test
                     "Color HSL"
-                    [ Color.Hsl 120 1.0 0.5 ]
+                    [ Color.hsl 120 1.0 0.5 ]
                     ["color" ==> "hsl(120, 100%, 50%)"]
                 test
                     "Color HSLA"
-                    [ Color.Hsla 120 1.0 0.5 0.5 ]
+                    [ Color.hsla 120 1.0 0.5 0.5 ]
                     ["color" ==> "hsla(120, 100%, 50%, 50%)"]
                 test
                     "Color Inherit"
-                    [ Color.Inherit ]
+                    [ Color.inherit' ]
                     ["color" ==> "inherit"]
                 test
                     "Color Initial"
-                    [ Color.Initial ]
+                    [ Color.initial ]
                     ["color" ==> "initial"]
                 test
                     "Color Unset"
-                    [ Color.Unset ]
+                    [ Color.unset ]
                     ["color" ==> "unset"]
                 test
                     "Color Value"

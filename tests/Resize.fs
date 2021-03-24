@@ -15,38 +15,38 @@ module Resize =
                     ["resize" ==> "block"]
                 test
                     "Resize Both"
-                    [Resize.Both]
+                    [Resize.both]
                     ["resize" ==> "both"]
                 test
                     "Resize Horizontal"
-                    [Resize.Horizontal]
+                    [Resize.horizontal]
                     ["resize" ==> "horizontal"]
                 test
                     "Resize Vertical"
-                    [Resize.Vertical]
+                    [Resize.vertical]
                     ["resize" ==> "vertical"]
                 test
                     "Resize Inline"
-                    [Resize.Inline]
+                    [Resize.inline']
                     ["resize" ==> "inline"]
                 test
                     "Resize Block"
-                    [Resize.Block]
+                    [Resize.block]
                     ["resize" ==> "block"]
                 test
                     "Resize None"
-                    [Resize.None]
+                    [Resize.none]
                     ["resize" ==> "none"]
                 test
                     "Resize Initial"
-                    [Resize.Initial]
+                    [Resize.initial]
                     ["resize" ==> "initial"]
                 test
                     "Resize Inherit"
-                    [Resize.Inherit]
+                    [Resize.inherit']
                     ["resize" ==> "inherit"]
                 test
                     "Resize Unset"
-                    [Resize.Unset]
+                    [Resize.unset]
                     ["resize" ==> "unset"]
             ]

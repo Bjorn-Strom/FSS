@@ -15,11 +15,11 @@ module All =
         |> allValue
 
     type All =
-        static member Value (all: FssTypes.IAll) = all |> allValue'
-        static member Inherit = FssTypes.Inherit |> allValue'
+        static member value (all: FssTypes.IAll) = all |> allValue'
+        static member inherit' = FssTypes.Inherit |> allValue'
 
-        static member Initial = FssTypes.Initial |> allValue'
-        static member Unset = FssTypes.Unset |> allValue'
+        static member initial = FssTypes.Initial |> allValue'
+        static member unset = FssTypes.Unset |> allValue'
 
     /// <summary>Resets all of an elements properties.</summary>
     /// <param name="all">
@@ -29,4 +29,4 @@ module All =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let All' (all: FssTypes.IAll) = all |> All.Value
+    let All' (all: FssTypes.IAll) = all |> All.value

@@ -11,18 +11,18 @@ module AspectRatio =
             [
                 test
                     "AspectRatio"
-                    [ AspectRatio.Value(16, 9) ]
+                    [ AspectRatio.value(16, 9) ]
                     [ "aspectRatio" ==> "16 / 9" ]
                 test
                     "AspectRatio inherit"
-                    [ AspectRatio.Inherit]
+                    [ AspectRatio.inherit']
                     [ "aspectRatio" ==> "inherit" ]
                 test
                     "AspectRatio initial"
-                    [ AspectRatio.Initial]
+                    [ AspectRatio.initial]
                     [ "aspectRatio" ==> "initial" ]
                 test
                     "AspectRatio unset"
-                    [ AspectRatio.Unset ]
+                    [ AspectRatio.unset ]
                     [ "aspectRatio" ==> "unset" ]
             ]

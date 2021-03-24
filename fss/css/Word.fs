@@ -24,12 +24,12 @@ module Word =
         |> spacingCssValue
 
     type WordSpacing =
-        static member Value (spacing: FssTypes.IWordSpacing) = spacing |> spacingCssValue'
+        static member value (spacing: FssTypes.IWordSpacing) = spacing |> spacingCssValue'
 
-        static member Normal = FssTypes.Normal |> spacingCssValue'
-        static member Initial = FssTypes.Initial |> spacingCssValue'
-        static member Inherit = FssTypes.Inherit |> spacingCssValue'
-        static member Unset = FssTypes.Unset |> spacingCssValue'
+        static member normal = FssTypes.Normal |> spacingCssValue'
+        static member initial = FssTypes.Initial |> spacingCssValue'
+        static member inherit' = FssTypes.Inherit |> spacingCssValue'
+        static member unset = FssTypes.Unset |> spacingCssValue'
 
     /// <summary>Specifies length of space between words.</summary>
     /// <param name="spacing">
@@ -42,7 +42,7 @@ module Word =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let WordSpacing' (spacing: FssTypes.IWordSpacing) = WordSpacing.Value(spacing)
+    let WordSpacing' (spacing: FssTypes.IWordSpacing) = WordSpacing.value(spacing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
     let private breakCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.WordBreak value
@@ -52,15 +52,15 @@ module Word =
         |> breakCssValue
 
     type WordBreak =
-        static member Value (spacing: FssTypes.IWordBreak) = spacing |> breakCssValue'
-        static member WordBreak = FssTypes.WordBreak.WordBreak |> breakCssValue'
-        static member BreakAll = FssTypes.WordBreak.BreakAll |> breakCssValue'
-        static member KeepAll = FssTypes.WordBreak.KeepAll |> breakCssValue'
+        static member value (spacing: FssTypes.IWordBreak) = spacing |> breakCssValue'
+        static member wordBreak = FssTypes.WordBreak.WordBreak |> breakCssValue'
+        static member breakAll = FssTypes.WordBreak.BreakAll |> breakCssValue'
+        static member keepAll = FssTypes.WordBreak.KeepAll |> breakCssValue'
 
-        static member Normal = FssTypes.Normal |> breakCssValue'
-        static member Initial = FssTypes.Initial |> breakCssValue'
-        static member Inherit = FssTypes.Inherit |> breakCssValue'
-        static member Unset = FssTypes.Unset |> breakCssValue'
+        static member normal = FssTypes.Normal |> breakCssValue'
+        static member initial = FssTypes.Initial |> breakCssValue'
+        static member inherit' = FssTypes.Inherit |> breakCssValue'
+        static member unset = FssTypes.Unset |> breakCssValue'
 
     /// <summary>Specify when line breaks should happen.</summary>
     /// <param name="break'">
@@ -72,5 +72,5 @@ module Word =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let WordBreak' (break': FssTypes.IWordBreak) = WordBreak.Value(break')
+    let WordBreak' (break': FssTypes.IWordBreak) = WordBreak.value(break')
 

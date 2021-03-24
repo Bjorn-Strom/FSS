@@ -10,40 +10,40 @@ module Visibility =
         testList "Visibility" [
                 test
                     "Paint order normal"
-                    [PaintOrder.Normal]
+                    [PaintOrder.normal]
                     ["paintOrder" ==> "normal"]
                 test
                     "Paint order stroke"
-                    [PaintOrder.Stroke]
+                    [PaintOrder.stroke]
                     ["paintOrder" ==> "stroke"]
                 test
                     "Paint order markers"
-                    [PaintOrder.Markers]
+                    [PaintOrder.markers]
                     ["paintOrder" ==> "markers"]
                 test
                     "Paint order stroke fill"
-                    [PaintOrder.Value(FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
+                    [PaintOrder.value(FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
                     ["paintOrder" ==> "stroke fill"]
                 test
                     "Paint order markers stroke fill"
-                    [PaintOrder.Value(FssTypes.Visibility.PaintOrder.Markers, FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
+                    [PaintOrder.value(FssTypes.Visibility.PaintOrder.Markers, FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
                     ["paintOrder" ==> "markers stroke fill"]
                 test
                     "Paint order normal"
-                    [PaintOrder.Normal]
+                    [PaintOrder.normal]
                     ["paintOrder" ==> "normal"]
 
                 test
                     "Visibility hidden"
-                    [ Visibility.Hidden]
+                    [ Visibility.hidden]
                     ["visibility" ==> "hidden"]
                 test
                     "Visibility collapse"
-                    [ Visibility.Collapse]
+                    [ Visibility.collapse]
                     ["visibility" ==> "collapse"]
                 test
                     "Visibility visible"
-                    [ Visibility.Visible]
+                    [ Visibility.visible]
                     ["visibility" ==> "visible"]
                 test
                     "Opacity 1"
@@ -71,107 +71,107 @@ module Visibility =
                     ["opacity" ==> "1"]
                 test
                     "Overflow-X visible"
-                    [OverflowX.Visible]
+                    [OverflowX.visible]
                     ["overflowX" ==> "visible"]
                 test
                     "Overflow-X hidden"
-                    [OverflowX.Hidden]
+                    [OverflowX.hidden]
                     ["overflowX" ==> "hidden"]
                 test
                     "Overflow-X Clip"
-                    [OverflowX.Clip]
+                    [OverflowX.clip]
                     ["overflowX" ==> "clip"]
                 test
                     "Overflow-X Scroll"
-                    [OverflowX.Scroll]
+                    [OverflowX.scroll]
                     ["overflowX" ==> "scroll"]
                 test
                     "Overflow-X Auto"
-                    [OverflowX.Auto]
+                    [OverflowX.auto]
                     ["overflowX" ==> "auto"]
                 test
                     "Overflow-X inherit"
-                    [OverflowX.Inherit]
+                    [OverflowX.inherit']
                     ["overflowX" ==> "inherit"]
                 test
                     "Overflow-X initial"
-                    [OverflowX.Initial]
+                    [OverflowX.initial]
                     ["overflowX" ==> "initial"]
                 test
                     "Overflow-X unset"
-                    [OverflowX.Unset]
+                    [OverflowX.unset]
                     ["overflowX" ==> "unset"]
                 test
                     "OverflowY visible"
-                    [OverflowY.Visible]
+                    [OverflowY.visible]
                     ["overflowY" ==> "visible"]
                 test
                     "OverflowY hidden"
-                    [OverflowY.Hidden]
+                    [OverflowY.hidden]
                     ["overflowY" ==> "hidden"]
                 test
                     "OverflowY Clip"
-                    [OverflowY.Clip]
+                    [OverflowY.clip]
                     ["overflowY" ==> "clip"]
                 test
                     "OverflowY Scroll"
-                    [OverflowY.Scroll]
+                    [OverflowY.scroll]
                     ["overflowY" ==> "scroll"]
                 test
                     "OverflowY Auto"
-                    [OverflowY.Auto]
+                    [OverflowY.auto]
                     ["overflowY" ==> "auto"]
                 test
                     "OverflowY inherit"
-                    [OverflowY.Inherit]
+                    [OverflowY.inherit']
                     ["overflowY" ==> "inherit"]
                 test
                     "OverflowY initial"
-                    [OverflowY.Initial]
+                    [OverflowY.initial]
                     ["overflowY" ==> "initial"]
                 test
                     "OverflowY unset"
-                    [OverflowY.Unset]
+                    [OverflowY.unset]
                     ["overflowY" ==> "unset"]
                 test
                     "Overflow visible visible"
-                    [Overflow.Value (FssTypes.Overflow.Visible, FssTypes.Overflow.Visible)]
+                    [Overflow.value (FssTypes.Overflow.Visible, FssTypes.Overflow.Visible)]
                     ["overflow" ==> "visible visible"]
                 test
                     "OverflowXY hidden hidden"
-                    [Overflow.Value (FssTypes.Overflow.Hidden, FssTypes.Overflow.Hidden)]
+                    [Overflow.value (FssTypes.Overflow.Hidden, FssTypes.Overflow.Hidden)]
                     ["overflow" ==> "hidden hidden"]
                 test
                     "Overflow Clip clip"
-                    [Overflow.Value (FssTypes.Overflow.Clip, FssTypes.Overflow.Clip)]
+                    [Overflow.value (FssTypes.Overflow.Clip, FssTypes.Overflow.Clip)]
                     ["overflow" ==> "clip clip"]
                 test
                     "Overflow scroll Scroll"
-                    [Overflow.Value (FssTypes.Overflow.Scroll, FssTypes.Overflow.Scroll)]
+                    [Overflow.value (FssTypes.Overflow.Scroll, FssTypes.Overflow.Scroll)]
                     ["overflow" ==> "scroll scroll"]
                 test
                     "OverflowWrap break-word"
-                    [OverflowWrap.BreakWord]
+                    [OverflowWrap.breakWord]
                     ["overflowWrap" ==> "break-word"]
                 test
                     "OverflowWrap anywhere"
-                    [OverflowWrap.Anywhere]
+                    [OverflowWrap.anywhere]
                     ["overflowWrap" ==> "anywhere"]
                 test
                     "OverflowWrap normal"
-                    [OverflowWrap.Normal]
+                    [OverflowWrap.normal]
                     ["overflowWrap" ==> "normal"]
                 test
                     "OverflowWrap inherit"
-                    [OverflowWrap.Inherit]
+                    [OverflowWrap.inherit']
                     ["overflowWrap" ==> "inherit"]
                 test
                     "OverflowWrap initial"
-                    [OverflowWrap.Initial]
+                    [OverflowWrap.initial]
                     ["overflowWrap" ==> "initial"]
                 test
                     "OverflowWrap unset"
-                    [OverflowWrap.Unset]
+                    [OverflowWrap.unset]
                     ["overflowWrap" ==> "unset"]
 
         ]

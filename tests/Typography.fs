@@ -15,15 +15,15 @@ module Typography =
                     [ "orphans" ==> "2" ]
                 test
                     "Orphans inherit"
-                    [ Orphans.Inherit]
+                    [ Orphans.inherit']
                     [ "orphans" ==> "inherit" ]
                 test
                     "Orphans initial"
-                    [ Orphans.Initial]
+                    [ Orphans.initial]
                     [ "orphans" ==> "initial" ]
                 test
                     "Orphans unset"
-                    [ Orphans.Unset ]
+                    [ Orphans.unset ]
                     [ "orphans" ==> "unset" ]
                 test
                     "Widows number"
@@ -31,14 +31,14 @@ module Typography =
                     [ "widows" ==> "2" ]
                 test
                     "Widows inherit"
-                    [ Widows.Inherit]
+                    [ Widows.inherit']
                     [ "widows" ==> "inherit" ]
                 test
                     "Widows initial"
-                    [ Widows.Initial]
+                    [ Widows.initial]
                     [ "widows" ==> "initial" ]
                 test
                     "Widows unset"
-                    [ Widows.Unset ]
+                    [ Widows.unset ]
                     [ "widows" ==> "unset" ]
             ]

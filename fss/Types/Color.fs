@@ -157,11 +157,11 @@ namespace Fss.FssTypes
         static member rebeccaPurple = Fss.Utilities.Color.hex "663399" |> ColorType
         static member transparent = Fss.Utilities.Color.rgba 0 0 0 0.0 |> ColorType
         static member currentColor = "currentColor" |> ColorType
-        static member Rgb (r: int, g: int, b: int) = Fss.Utilities.Color.rgb r g b |> ColorType
-        static member Rgba (r: int, g: int, b: int, a: float) = Fss.Utilities.Color.rgba r g b a |> ColorType
-        static member Hex (value: string) = Fss.Utilities.Color.hex value |> ColorType
-        static member Hsl (h: int, s: float, l: float) = Fss.Utilities.Color.hsl h s l |> ColorType
-        static member Hsla (h: int, s: float, l: float, a: float) = Fss.Utilities.Color.hsla h s l a |> ColorType
+        static member rgb (r: int, g: int, b: int) = Fss.Utilities.Color.rgb r g b |> ColorType
+        static member rgba (r: int, g: int, b: int, a: float) = Fss.Utilities.Color.rgba r g b a |> ColorType
+        static member hex (value: string) = Fss.Utilities.Color.hex value |> ColorType
+        static member hsl (h: int, s: float, l: float) = Fss.Utilities.Color.hsl h s l |> ColorType
+        static member hsla (h: int, s: float, l: float, a: float) = Fss.Utilities.Color.hsla h s l a |> ColorType
 
     type ColorAdjust =
         | Economy

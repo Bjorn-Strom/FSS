@@ -11,130 +11,130 @@ module Filter =
             [
                 test
                     "Filter Url"
-                    [ Filters [ Filter.Url "someFilter" ] ]
+                    [ Filters [ Filter.url "someFilter" ] ]
                     [ "filter" ==> "url(\"someFilter\")" ]
                 test
                     "Filter blur"
-                    [ Filters [ Filter.Blur 50 ] ]
+                    [ Filters [ Filter.blur 50 ] ]
                     [ "filter" ==> "blur(50px)" ]
                 test
                     "Filter brightness"
-                    [ Filters [ Filter.Brightness <| pct 40 ] ]
+                    [ Filters [ Filter.brightness <| pct 40 ] ]
                     [ "filter" ==> "brightness(40%)" ]
                 test
                     "Filter contras"
-                    [ Filters [ Filter.Contrast <| pct 40 ] ]
+                    [ Filters [ Filter.contrast <| pct 40 ] ]
                     [ "filter" ==> "contrast(40%)" ]
                 test
                     "Filter drop shadow"
-                    [ Filters [ Filter.DropShadow 16 16 20 FssTypes.Color.red (pct 5)  ] ]
+                    [ Filters [ Filter.dropShadow 16 16 20 FssTypes.Color.red (pct 5)  ] ]
                     [ "filter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
                 test
                     "Filter grayscale"
-                    [ Filters [ Filter.Grayscale <| pct 50 ] ]
+                    [ Filters [ Filter.grayscale <| pct 50 ] ]
                     [ "filter" ==> "grayscale(50%)" ]
                 test
                     "Filter hue-rotate"
-                    [ Filters [ Filter.HueRotate 90 ] ]
+                    [ Filters [ Filter.hueRotate 90 ] ]
                     [ "filter" ==> "hue-rotate(90deg)" ]
                 test
                     "Filter invert"
-                    [ Filters [ Filter.Invert <| pct 75 ] ]
+                    [ Filters [ Filter.invert <| pct 75 ] ]
                     [ "filter" ==> "invert(75%)" ]
                 test
                     "Filter opacity"
-                    [ Filters [ Filter.Opacity <| pct 25 ] ]
+                    [ Filters [ Filter.opacity <| pct 25 ] ]
                     [ "filter" ==> "opacity(25%)" ]
                 test
                     "Filter saturate"
-                    [ Filters [ Filter.Saturate <| pct 30 ] ]
+                    [ Filters [ Filter.saturate <| pct 30 ] ]
                     [ "filter" ==> "saturate(30%)" ]
                 test
                     "Filter sepia"
-                    [ Filters [ Filter.Sepia <| pct 60 ] ]
+                    [ Filters [ Filter.sepia <| pct 60 ] ]
                     [ "filter" ==> "sepia(60%)" ]
                 test
                     "Filter multiple"
-                    [ Filters  [ Filter.Contrast <| pct 175; Filter.Brightness <| pct 3  ] ]
+                    [ Filters  [ Filter.contrast <| pct 175; Filter.brightness <| pct 3  ] ]
                     [ "filter" ==> "contrast(175%) brightness(3%)" ]
                 test
                     "Filter none"
-                    [ Filter.None ]
+                    [ Filter.none ]
                     [ "filter" ==> "none" ]
                 test
                     "Filter inherit"
-                    [ Filter.Inherit ]
+                    [ Filter.inherit' ]
                     [ "filter" ==> "inherit" ]
                 test
                     "Filter initial"
-                    [ Filter.Initial ]
+                    [ Filter.initial ]
                     [ "filter" ==> "initial" ]
                 test
                     "Filter unset"
-                    [ Filter.Unset ]
+                    [ Filter.unset ]
                     [ "filter" ==> "unset" ]
                 test
                     "BackdropFilter Url"
-                    [ BackdropFilters [ Filter.Url "someFilter" ] ]
+                    [ BackdropFilters [ Filter.url "someFilter" ] ]
                     [ "backdropFilter" ==> "url(\"someFilter\")" ]
                 test
                     "BackdropFilter blur"
-                    [ BackdropFilters [ Filter.Blur 50 ] ]
+                    [ BackdropFilters [ Filter.blur 50 ] ]
                     [ "backdropFilter" ==> "blur(50px)" ]
                 test
                     "BackdropFilter brightness"
-                    [ BackdropFilters [ Filter.Brightness <| pct 40 ] ]
+                    [ BackdropFilters [ Filter.brightness <| pct 40 ] ]
                     [ "backdropFilter" ==> "brightness(40%)" ]
                 test
                     "BackdropFilter contrast"
-                    [ BackdropFilters [ Filter.Contrast <| pct 40 ] ]
+                    [ BackdropFilters [ Filter.contrast <| pct 40 ] ]
                     [ "backdropFilter" ==> "contrast(40%)" ]
                 test
                     "BackdropFilter drop shadow"
-                    [ BackdropFilters [ Filter.DropShadow 16 16 20 FssTypes.Color.red (pct 5)  ] ]
+                    [ BackdropFilters [ Filter.dropShadow 16 16 20 FssTypes.Color.red (pct 5)  ] ]
                     [ "backdropFilter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
                 test
                     "BackdropFilter grayscale"
-                    [ BackdropFilters [ Filter.Grayscale <| pct 50 ] ]
+                    [ BackdropFilters [ Filter.grayscale <| pct 50 ] ]
                     [ "backdropFilter" ==> "grayscale(50%)" ]
                 test
                     "BackdropFilter hue-rotate"
-                    [ BackdropFilters [ Filter.HueRotate 90 ] ]
+                    [ BackdropFilters [ Filter.hueRotate 90 ] ]
                     [ "backdropFilter" ==> "hue-rotate(90deg)" ]
                 test
                     "BackdropFilter invert"
-                    [ BackdropFilters [ Filter.Invert <| pct 75 ] ]
+                    [ BackdropFilters [ Filter.invert <| pct 75 ] ]
                     [ "backdropFilter" ==> "invert(75%)" ]
                 test
                     "BackdropFilter opacity"
-                    [ BackdropFilters [ Filter.Opacity <| pct 25 ] ]
+                    [ BackdropFilters [ Filter.opacity <| pct 25 ] ]
                     [ "backdropFilter" ==> "opacity(25%)" ]
                 test
                     "BackdropFilter saturate"
-                    [ BackdropFilters [ Filter.Saturate <| pct 30 ] ]
+                    [ BackdropFilters [ Filter.saturate <| pct 30 ] ]
                     [ "backdropFilter" ==> "saturate(30%)" ]
                 test
                     "BackdropFilter sepia"
-                    [ BackdropFilters [ Filter.Sepia <| pct 60 ] ]
+                    [ BackdropFilters [ Filter.sepia <| pct 60 ] ]
                     [ "backdropFilter" ==> "sepia(60%)" ]
                 test
                     "BackdropFilter multiple"
-                    [ BackdropFilters  [ Filter.Contrast <| pct 175; Filter.Brightness <| pct 3  ] ]
+                    [ BackdropFilters  [ Filter.contrast <| pct 175; Filter.brightness <| pct 3  ] ]
                     [ "backdropFilter" ==> "contrast(175%) brightness(3%)" ]
                 test
                     "BackdropFilter none"
-                    [ BackdropFilter.None ]
+                    [ BackdropFilter.none ]
                     [ "backdropFilter" ==> "none" ]
                 test
                     "BackdropFilter inherit"
-                    [ BackdropFilter.Inherit ]
+                    [ BackdropFilter.inherit' ]
                     [ "backdropFilter" ==> "inherit" ]
                 test
                     "BackdropFilter initial"
-                    [ BackdropFilter.Initial ]
+                    [ BackdropFilter.initial ]
                     [ "backdropFilter" ==> "initial" ]
                 test
                     "BackdropFilter unset"
-                    [ BackdropFilter.Unset ]
+                    [ BackdropFilter.unset ]
                     [ "backdropFilter" ==> "unset" ]
             ]

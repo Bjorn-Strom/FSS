@@ -20,75 +20,75 @@ module Background =
                     ["backgroundColor"  ==> "rgb(1, 2, 3)"]
                 test
                     "background image"
-                    [ BackgroundImage.Url "image.png" ]
+                    [ BackgroundImage.url "image.png" ]
                     [ "backgroundImage" ==> "url(image.png)" ]
                 test
                     "background as linear gradient"
-                    [ BackgroundImage.LinearGradient (deg 45., [ FssTypes.Color.red, pct 0; FssTypes.Color.blue, pct 100 ])]
+                    [ BackgroundImage.linearGradient (deg 45., [ FssTypes.Color.red, pct 0; FssTypes.Color.blue, pct 100 ])]
                     ["backgroundImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.Hex "e66465", pct 0; FssTypes.Color.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.Hex "e66465", pct 0; FssTypes.Color.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.Hex "e66465", pct 0; FssTypes.Color.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.Hex "e66465", pct 0; FssTypes.Color.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.Hex "e66465", pct 0; FssTypes.Color.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.Hex "e66465", pct 0; FssTypes.Color.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.Hex "e66465", pct 0; FssTypes.Color.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as circular radial gradient"
-                    [ BackgroundImage.RadialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.Hex "e66465", pct 0; FssTypes.Color.Hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 test
                     "background as conic gradient"
-                    [BackgroundImage.ConicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.red, deg 0.; FssTypes.Color.orange, deg 90.; FssTypes.Color.yellow, deg 180.; FssTypes.Color.green, deg 270.; FssTypes.Color.blue, deg 360.; ])]
+                    [BackgroundImage.conicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.red, deg 0.; FssTypes.Color.orange, deg 90.; FssTypes.Color.yellow, deg 180.; FssTypes.Color.green, deg 270.; FssTypes.Color.blue, deg 360.; ])]
                     [ "backgroundImage" ==> "conic-Gradient(from 0.00deg at 50% 50%, #ff0000 0.00deg, #ffa500 90.00deg, #ffff00 180.00deg, #008000 270.00deg, #0000ff 360.00deg)"]
                 test
                     "background as conic gradient"
-                    [BackgroundImage.ConicGradient(rad 3.1416, pct 10, pct 50, [ hex "#e66465", deg 0.; hex "#9198e5", deg 360. ])]
+                    [BackgroundImage.conicGradient(rad 3.1416, pct 10, pct 50, [ hex "#e66465", deg 0.; hex "#9198e5", deg 360. ])]
                     [ "backgroundImage" ==> "conic-Gradient(from 3.1416rad at 10% 50%, #e66465 0.00deg, #9198e5 360.00deg)"]
                 test
                     "background as repeating conic gradient"
-                    [ BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.white, pct 0; FssTypes.Color.white, pct 25; FssTypes.Color.black, pct 25; FssTypes.Color.black, pct 50; ]) ]
+                    [ BackgroundImage.repeatingConicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.white, pct 0; FssTypes.Color.white, pct 25; FssTypes.Color.black, pct 25; FssTypes.Color.black, pct 50; ]) ]
                     [ "backgroundImage" ==> "repeating-conic-Gradient(from 0.00deg at 50% 50%, #ffffff 0%, #ffffff 25%, #000000 25%, #000000 50%)"]
                 test
                     "background position to top"
-                    [ BackgroundPosition.Top ]
+                    [ BackgroundPosition.top ]
                     [ "backgroundPosition" ==> "top"]
                 test
                     "background position to bottom"
-                    [ BackgroundPosition.Bottom]
+                    [ BackgroundPosition.bottom]
                     [ "backgroundPosition" ==> "bottom" ]
                 test
                     "background position to left"
-                    [ BackgroundPosition.Left]
+                    [ BackgroundPosition.left]
                     [ "backgroundPosition" ==> "left" ]
                 test
                     "background position to right"
-                    [ BackgroundPosition.Right]
+                    [ BackgroundPosition.right]
                     [ "backgroundPosition" ==> "right" ]
                 test
                     "background position to center"
-                    [ BackgroundPosition.Center]
+                    [ BackgroundPosition.center]
                     [ "backgroundPosition" ==> "center" ]
                 test
                     "background position with pixels"
@@ -100,115 +100,115 @@ module Background =
                     [ "backgroundPosition" ==> "100%" ]
                 test
                     "background position to initial"
-                    [ BackgroundPosition.Initial]
+                    [ BackgroundPosition.initial]
                     [ "backgroundPosition" ==> "initial" ]
                 test
                     "background position to inherit"
-                    [ BackgroundPosition.Inherit]
+                    [ BackgroundPosition.inherit']
                     [ "backgroundPosition" ==> "inherit" ]
                 test
                     "background position to unset"
-                    [ BackgroundPosition.Unset]
+                    [ BackgroundPosition.unset]
                     [ "backgroundPosition" ==> "unset" ]
                 test
                     "background origin to border-box"
-                    [ BackgroundOrigin.BorderBox]
+                    [ BackgroundOrigin.borderBox]
                     [ "backgroundOrigin" ==> "border-box" ]
                 test
                     "background origin to padding-box"
-                    [ BackgroundOrigin.PaddingBox]
+                    [ BackgroundOrigin.paddingBox]
                     [ "backgroundOrigin" ==> "padding-box" ]
                 test
                     "background origin to content-box"
-                    [ BackgroundOrigin.ContentBox]
+                    [ BackgroundOrigin.contentBox]
                     ["backgroundOrigin" ==> "content-box"]
                 test
                     "background origin to inherit"
-                    [ BackgroundOrigin.Inherit ]
+                    [ BackgroundOrigin.inherit' ]
                     ["backgroundOrigin" ==> "inherit"]
                 test
                     "background origin to initial"
-                    [ BackgroundOrigin.Initial ]
+                    [ BackgroundOrigin.initial ]
                     ["backgroundOrigin" ==> "initial"]
                 test
                     "background origin to unset"
-                    [ BackgroundOrigin.Unset ]
+                    [ BackgroundOrigin.unset ]
                     ["backgroundOrigin" ==> "unset"]
                 test
                     "background clip to text"
-                    [ BackgroundClip.Text]
+                    [ BackgroundClip.text]
                     [ "backgroundClip" ==> "text" ]
                 test
                     "background clip to BorderBox"
-                    [ BackgroundClip.BorderBox ]
+                    [ BackgroundClip.borderBox ]
                     ["backgroundClip" ==> "border-box" ]
                 test
                     "background clip to PaddingBox"
-                    [ BackgroundClip.PaddingBox]
+                    [ BackgroundClip.paddingBox]
                     [ "backgroundClip" ==> "padding-box" ]
                 test
                     "background clip to ContentBox"
-                    [ BackgroundClip.ContentBox]
+                    [ BackgroundClip.contentBox]
                     ["backgroundClip" ==> "content-box" ]
                 test
                     "background clip to inherit"
-                    [ BackgroundClip.Inherit ]
+                    [ BackgroundClip.inherit' ]
                     ["backgroundClip" ==> "inherit" ]
                 test
                     "background clip to Initial"
-                    [ BackgroundClip.Initial]
+                    [ BackgroundClip.initial]
                     [ "backgroundClip" ==> "initial" ]
                 test
                     "background clip to Unset"
-                    [ BackgroundClip.Unset ]
+                    [ BackgroundClip.unset ]
                     [ "backgroundClip" ==> "unset" ]
                 test
                     "background repeat repeat-x"
-                    [ BackgroundRepeat.RepeatX ]
+                    [ BackgroundRepeat.repeatX ]
                     [ "backgroundRepeat" ==> "repeat-x" ]
                 test
                     "background repeat repeat-y"
-                    [ BackgroundRepeat.RepeatY ]
+                    [ BackgroundRepeat.repeatY ]
                     [ "backgroundRepeat" ==> "repeat-y" ]
                 test
                     "background repeat repeat"
-                    [ BackgroundRepeat.Repeat]
+                    [ BackgroundRepeat.repeat]
                     [ "backgroundRepeat" ==> "repeat" ]
                 test
                     "background repeat space"
-                    [ BackgroundRepeat.Space]
+                    [ BackgroundRepeat.space]
                     [ "backgroundRepeat" ==> "space" ]
                 test
                     "background repeat round"
-                    [ BackgroundRepeat.Round]
+                    [ BackgroundRepeat.round]
                     [ "backgroundRepeat" ==> "round" ]
                 test
                     "background repeat no repeat"
-                    [ BackgroundRepeat.NoRepeat]
+                    [ BackgroundRepeat.noRepeat]
                     [ "backgroundRepeat" ==> "no-repeat" ]
                 test
                     "background repeat to inherit"
-                    [ BackgroundRepeat.Inherit ]
+                    [ BackgroundRepeat.inherit' ]
                     [ "backgroundRepeat" ==> "inherit" ]
                 test
                     "background repeat to Initial"
-                    [ BackgroundRepeat.Initial]
+                    [ BackgroundRepeat.initial]
                     [ "backgroundRepeat" ==> "initial" ]
                 test
                     "background repeat to Unset"
-                    [ BackgroundRepeat.Unset ]
+                    [ BackgroundRepeat.unset ]
                     [ "backgroundRepeat" ==> "unset" ]
                 test
                     "background repeats horizontal and vertical - repeat space"
-                    [ BackgroundRepeat.Value(FssTypes.Background.Repeat, FssTypes.Background.Space) ]
+                    [ BackgroundRepeat.value(FssTypes.Background.Repeat, FssTypes.Background.Space) ]
                     [ "backgroundRepeat" ==> "repeat space" ]
                 test
                     "background size cover"
-                    [ BackgroundSize.Cover]
+                    [ BackgroundSize.cover]
                     [ "backgroundSize" ==> "cover"]
                 test
                     "background size contain"
-                    [ BackgroundSize.Contain]
+                    [ BackgroundSize.contain]
                     [ "backgroundSize" ==> "contain"]
                 test
                     "background size percent"
@@ -224,150 +224,150 @@ module Background =
                     [ "backgroundSize" ==> "10px"]
                 test
                     "background size auto"
-                    [ BackgroundSize.Auto ]
+                    [ BackgroundSize.auto ]
                     [ "backgroundSize" ==> "auto"]
                 test
                     "background attachment scroll"
-                    [ BackgroundAttachment.Scroll]
+                    [ BackgroundAttachment.scroll]
                     [ "backgroundAttachment" ==> "scroll" ]
                 test
                     "background attachment fixed"
-                    [ BackgroundAttachment.Fixed]
+                    [ BackgroundAttachment.fixed']
                     [ "backgroundAttachment" ==> "fixed" ]
                 test
                     "background attachment local"
-                    [ BackgroundAttachment.Local]
+                    [ BackgroundAttachment.local]
                     [ "backgroundAttachment" ==> "local" ]
                 test
                     "background attachment inherit"
-                    [ BackgroundAttachment.Inherit ]
+                    [ BackgroundAttachment.inherit' ]
                     [ "backgroundAttachment" ==> "inherit" ]
                 test
                     "background attachment initial"
-                    [ BackgroundAttachment.Initial ]
+                    [ BackgroundAttachment.initial ]
                     [ "backgroundAttachment" ==> "initial" ]
                 test
                     "background attachment unset"
-                    [ BackgroundAttachment.Unset ]
+                    [ BackgroundAttachment.unset ]
                     [ "backgroundAttachment" ==> "unset" ]
                 test
                     "Background blend mode Multiply"
-                    [ BackgroundBlendMode.Multiply]
+                    [ BackgroundBlendMode.multiply]
                     ["backgroundBlendMode" ==> "multiply"]
                 test
                     "Background blend mode Screen"
-                    [ BackgroundBlendMode.Screen]
+                    [ BackgroundBlendMode.screen]
                     ["backgroundBlendMode" ==> "screen"]
                 test
                     "Background blend mode Overlay"
-                    [ BackgroundBlendMode.Overlay]
+                    [ BackgroundBlendMode.overlay]
                     ["backgroundBlendMode" ==> "overlay"]
                 test
                     "Background blend mode Darken"
-                    [ BackgroundBlendMode.Darken]
+                    [ BackgroundBlendMode.darken]
                     ["backgroundBlendMode" ==> "darken"]
                 test
                     "Background blend mode Lighten"
-                    [ BackgroundBlendMode.Lighten]
+                    [ BackgroundBlendMode.lighten]
                     ["backgroundBlendMode" ==> "lighten"]
                 test
                     "Background blend mode ColorDodge"
-                    [ BackgroundBlendMode.ColorDodge]
+                    [ BackgroundBlendMode.colorDodge]
                     ["backgroundBlendMode" ==> "color-dodge"]
                 test
                     "Background blend mode ColorBurn"
-                    [ BackgroundBlendMode.ColorBurn]
+                    [ BackgroundBlendMode.colorBurn]
                     ["backgroundBlendMode" ==> "color-burn"]
                 test
                     "Background blend mode HardLight"
-                    [ BackgroundBlendMode.HardLight]
+                    [ BackgroundBlendMode.hardLight]
                     ["backgroundBlendMode" ==> "hard-light"]
                 test
                     "Background blend mode SoftLight"
-                    [ BackgroundBlendMode.SoftLight]
+                    [ BackgroundBlendMode.softLight]
                     ["backgroundBlendMode" ==> "soft-light"]
                 test
                     "Background blend mode Difference"
-                    [ BackgroundBlendMode.Difference]
+                    [ BackgroundBlendMode.difference]
                     ["backgroundBlendMode" ==> "difference"]
                 test
                     "Background blend mode Exclusion"
-                    [ BackgroundBlendMode.Exclusion]
+                    [ BackgroundBlendMode.exclusion]
                     ["backgroundBlendMode" ==> "exclusion"]
                 test
                     "Background blend mode Hue"
-                    [ BackgroundBlendMode.Hue]
+                    [ BackgroundBlendMode.hue]
                     ["backgroundBlendMode" ==> "hue"]
                 test
                     "Background blend mode Saturation"
-                    [ BackgroundBlendMode.Saturation]
+                    [ BackgroundBlendMode.saturation]
                     ["backgroundBlendMode" ==> "saturation"]
                 test
                     "Background blend mode Color"
-                    [ BackgroundBlendMode.Color]
+                    [ BackgroundBlendMode.color]
                     ["backgroundBlendMode" ==> "color"]
                 test
                     "Background blend mode Luminosity"
-                    [ BackgroundBlendMode.Luminosity]
+                    [ BackgroundBlendMode.luminosity]
                     ["backgroundBlendMode" ==> "luminosity"]
                 test
                     "background blend mode multiple"
-                    [ BackgroundBlendMode.Values [ FssTypes.Background.Hue; FssTypes.Background.Saturation; FssTypes.Background.Exclusion ] ]
+                    [ BackgroundBlendMode.values [ FssTypes.Background.Hue; FssTypes.Background.Saturation; FssTypes.Background.Exclusion ] ]
                     [ "backgroundBlendMode" ==> "hue, saturation, exclusion" ]
                 test
                     "background blend mode normal"
-                    [ BackgroundBlendMode.Normal ]
+                    [ BackgroundBlendMode.normal ]
                     [ "backgroundBlendMode" ==> "normal" ]
                 test
                     "background blend mode inherit"
-                    [ BackgroundBlendMode.Inherit ]
+                    [ BackgroundBlendMode.inherit' ]
                     [ "backgroundBlendMode" ==> "inherit" ]
                 test
                     "background blend mode initial"
-                    [ BackgroundBlendMode.Initial ]
+                    [ BackgroundBlendMode.initial ]
                     [ "backgroundBlendMode" ==> "initial" ]
                 test
                     "background blend mode unset"
-                    [ BackgroundBlendMode.Unset ]
+                    [ BackgroundBlendMode.unset ]
                     [ "backgroundBlendMode" ==> "unset" ]
                 test
                     "isolation isolate"
-                    [ Isolation.Isolate ]
+                    [ Isolation.isolate ]
                     [ "isolation" ==> "isolate" ]
                 test
                     "isolation normal"
-                    [ Isolation.Auto ]
+                    [ Isolation.auto ]
                     [ "isolation" ==> "auto" ]
                 test
                     "isolation inherit"
-                    [ Isolation.Inherit ]
+                    [ Isolation.inherit' ]
                     [ "isolation" ==> "inherit" ]
                 test
                     "isolation initial"
-                    [ Isolation.Initial ]
+                    [ Isolation.initial ]
                     [ "isolation" ==> "initial" ]
                 test
                     "isolation unset"
-                    [ Isolation.Unset ]
+                    [ Isolation.unset ]
                     [ "isolation" ==> "unset" ]
                 test
                     "boxDecorationBreak clone"
-                    [ BoxDecorationBreak.Clone ]
+                    [ BoxDecorationBreak.clone ]
                     [ "boxDecorationBreak" ==> "clone" ]
                 test
                     "boxDecorationBreak slice"
-                    [ BoxDecorationBreak.Slice ]
+                    [ BoxDecorationBreak.slice ]
                     [ "boxDecorationBreak" ==> "slice" ]
                 test
                     "boxDecorationBreak inherit"
-                    [ BoxDecorationBreak.Inherit ]
+                    [ BoxDecorationBreak.inherit' ]
                     [ "boxDecorationBreak" ==> "inherit" ]
                 test
                     "boxDecorationBreak initial"
-                    [ BoxDecorationBreak.Initial ]
+                    [ BoxDecorationBreak.initial ]
                     [ "boxDecorationBreak" ==> "initial" ]
                 test
                     "boxDecorationBreak unset"
-                    [ BoxDecorationBreak.Unset ]
+                    [ BoxDecorationBreak.unset ]
                     [ "boxDecorationBreak" ==> "unset" ]
             ]

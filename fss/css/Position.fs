@@ -40,17 +40,17 @@ module Position =
         |> positionValue
 
     type Position =
-        static member Value(position: Position) = position |> positionValue
-        static member Static = FssTypes.Position.Static |> positionValue'
-        static member Relative = FssTypes.Position.Relative |> positionValue'
-        static member Absolute = FssTypes.Position.Absolute |> positionValue'
-        static member Sticky = FssTypes.Position.Sticky |> positionValue'
-        static member Fixed = FssTypes.Position.Fixed |> positionValue'
+        static member value(position: Position) = position |> positionValue
+        static member static' = FssTypes.Position.Static |> positionValue'
+        static member relative = FssTypes.Position.Relative |> positionValue'
+        static member absolute = FssTypes.Position.Absolute |> positionValue'
+        static member sticky = FssTypes.Position.Sticky |> positionValue'
+        static member fixed' = FssTypes.Position.Fixed |> positionValue'
 
     /// <summary>Specifies how an element is to be positioned.</summary>
     /// <param name="position">How to position element</param>
     /// <returns>Css property for fss.</returns>
-    let Position' (position: Position) = Position.Value(position)
+    let Position' (position: Position) = Position.value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/top
     let private topValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Top value
@@ -60,11 +60,11 @@ module Position =
         |> topValue
 
     type Top =
-        static member Value (top: FssTypes.IPositioned) = top |> topValue'
-        static member Auto = FssTypes.Auto |> topValue'
-        static member Inherit = FssTypes.Inherit |> topValue'
-        static member Initial = FssTypes.Initial |> topValue'
-        static member Unset = FssTypes.Unset |> topValue'
+        static member value (top: FssTypes.IPositioned) = top |> topValue'
+        static member auto = FssTypes.Auto |> topValue'
+        static member inherit' = FssTypes.Inherit |> topValue'
+        static member initial = FssTypes.Initial |> topValue'
+        static member unset = FssTypes.Unset |> topValue'
 
     /// <summary>Specifies vertical position of element.</summary>
     /// <param name="top">
@@ -77,7 +77,7 @@ module Position =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Top' (top: FssTypes.IPositioned) = Top.Value(top)
+    let Top' (top: FssTypes.IPositioned) = Top.value(top)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/right
     let private rightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Right value
@@ -87,12 +87,12 @@ module Position =
         |> rightValue
 
     type Right =
-        static member Value (right: FssTypes.IPositioned) = right |> rightValue'
+        static member value (right: FssTypes.IPositioned) = right |> rightValue'
 
-        static member Auto = FssTypes.Auto |> rightValue'
-        static member Inherit = FssTypes.Inherit |> rightValue'
-        static member Initial = FssTypes.Initial |> rightValue'
-        static member Unset = FssTypes.Unset |> rightValue'
+        static member auto = FssTypes.Auto |> rightValue'
+        static member inherit' = FssTypes.Inherit |> rightValue'
+        static member initial = FssTypes.Initial |> rightValue'
+        static member unset = FssTypes.Unset |> rightValue'
 
     /// <summary>Specifies horizontal position of element.</summary>
     /// <param name="right">
@@ -105,7 +105,7 @@ module Position =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Right' (right: FssTypes.IPositioned) = Right.Value(right)
+    let Right' (right: FssTypes.IPositioned) = Right.value(right)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
     let private bottomValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Bottom value
@@ -115,12 +115,12 @@ module Position =
         |> bottomValue
 
     type Bottom =
-        static member Value (bottom: FssTypes.IPositioned) = bottom |> bottomValue'
+        static member value (bottom: FssTypes.IPositioned) = bottom |> bottomValue'
 
-        static member Auto = FssTypes.Auto |> bottomValue'
-        static member Inherit = FssTypes.Inherit |> bottomValue'
-        static member Initial = FssTypes.Initial |> bottomValue'
-        static member Unset = FssTypes.Unset |> bottomValue'
+        static member auto = FssTypes.Auto |> bottomValue'
+        static member inherit' = FssTypes.Inherit |> bottomValue'
+        static member initial = FssTypes.Initial |> bottomValue'
+        static member unset = FssTypes.Unset |> bottomValue'
 
     /// <summary>Specifies vertial position of element.</summary>
     /// <param name="bottom">
@@ -133,7 +133,7 @@ module Position =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Bottom' (bottom: FssTypes.IPositioned) = Bottom.Value(bottom)
+    let Bottom' (bottom: FssTypes.IPositioned) = Bottom.value(bottom)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/left
     let private leftValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Left value
@@ -143,12 +143,12 @@ module Position =
         |> leftValue
 
     type Left =
-        static member Value (left: FssTypes.IPositioned) = left |> leftValue'
+        static member value (left: FssTypes.IPositioned) = left |> leftValue'
 
-        static member Auto = FssTypes.Auto |> leftValue'
-        static member Inherit = FssTypes.Inherit |> leftValue'
-        static member Initial = FssTypes.Initial |> leftValue'
-        static member Unset = FssTypes.Unset |> leftValue'
+        static member auto = FssTypes.Auto |> leftValue'
+        static member inherit' = FssTypes.Inherit |> leftValue'
+        static member initial = FssTypes.Initial |> leftValue'
+        static member unset = FssTypes.Unset |> leftValue'
 
     /// <summary>Specifies vertical alignment.</summary>
     /// <param name="left">
@@ -161,7 +161,7 @@ module Position =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Left' (left: FssTypes.IPositioned) = Left.Value(left)
+    let Left' (left: FssTypes.IPositioned) = Left.value(left)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
     let private verticalAlignValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.VerticalAlign value
@@ -171,19 +171,19 @@ module Position =
         |> verticalAlignValue
 
     type VerticalAlign =
-        static member Value (alignment: FssTypes.IVerticalAlign) = alignment |> verticalAlignValue'
-        static member Baseline = FssTypes.Position.VerticalAlign.Baseline |> verticalAlignValue'
-        static member Sub = FssTypes.Position.VerticalAlign.Sub |> verticalAlignValue'
-        static member Super = FssTypes.Position.VerticalAlign.Super |> verticalAlignValue'
-        static member TextTop = FssTypes.Position.VerticalAlign.TextTop |> verticalAlignValue'
-        static member TextBottom = FssTypes.Position.VerticalAlign.TextBottom |> verticalAlignValue'
-        static member Middle = FssTypes.Position.VerticalAlign.Middle |> verticalAlignValue'
-        static member Top = FssTypes.Position.VerticalAlign.Top |> verticalAlignValue'
-        static member Bottom = FssTypes.Position.VerticalAlign.Bottom |> verticalAlignValue'
+        static member value (alignment: FssTypes.IVerticalAlign) = alignment |> verticalAlignValue'
+        static member baseline = FssTypes.Position.VerticalAlign.Baseline |> verticalAlignValue'
+        static member sub = FssTypes.Position.VerticalAlign.Sub |> verticalAlignValue'
+        static member super = FssTypes.Position.VerticalAlign.Super |> verticalAlignValue'
+        static member textTop = FssTypes.Position.VerticalAlign.TextTop |> verticalAlignValue'
+        static member textBottom = FssTypes.Position.VerticalAlign.TextBottom |> verticalAlignValue'
+        static member middle = FssTypes.Position.VerticalAlign.Middle |> verticalAlignValue'
+        static member top = FssTypes.Position.VerticalAlign.Top |> verticalAlignValue'
+        static member bottom = FssTypes.Position.VerticalAlign.Bottom |> verticalAlignValue'
 
-        static member Inherit = FssTypes.Inherit |> verticalAlignValue'
-        static member Initial = FssTypes.Initial |> verticalAlignValue'
-        static member Unset = FssTypes.Unset |> verticalAlignValue'
+        static member inherit' = FssTypes.Inherit |> verticalAlignValue'
+        static member initial = FssTypes.Initial |> verticalAlignValue'
+        static member unset = FssTypes.Unset |> verticalAlignValue'
 
     /// <summary>Specifies vertical alignment.</summary>
     /// <param name="alignment">
@@ -196,7 +196,7 @@ module Position =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let VerticalAlign' (alignment: FssTypes.IVerticalAlign) = VerticalAlign.Value(alignment)
+    let VerticalAlign' (alignment: FssTypes.IVerticalAlign) = VerticalAlign.value(alignment)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/float
     let private floatValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Float value
@@ -206,16 +206,16 @@ module Position =
         |> floatValue
 
     type Float =
-        static member Value (float: FssTypes.IFloat) = float |> floatValue'
-        static member Left = FssTypes.Position.Float.Left |> floatValue'
-        static member Right = FssTypes.Position.Float.Right |> floatValue'
-        static member InlineStart = FssTypes.Position.Float.InlineStart |> floatValue'
-        static member InlineEnd = FssTypes.Position.Float.InlineEnd |> floatValue'
+        static member value (float: FssTypes.IFloat) = float |> floatValue'
+        static member left = FssTypes.Position.Float.Left |> floatValue'
+        static member right = FssTypes.Position.Float.Right |> floatValue'
+        static member inlineStart = FssTypes.Position.Float.InlineStart |> floatValue'
+        static member inlineEnd = FssTypes.Position.Float.InlineEnd |> floatValue'
 
-        static member None = FssTypes.None' |> floatValue'
-        static member Inherit = FssTypes.Inherit |> floatValue'
-        static member Initial = FssTypes.Initial |> floatValue'
-        static member Unset = FssTypes.Unset |> floatValue'
+        static member none = FssTypes.None' |> floatValue'
+        static member inherit' = FssTypes.Inherit |> floatValue'
+        static member initial = FssTypes.Initial |> floatValue'
+        static member unset = FssTypes.Unset |> floatValue'
 
     /// <summary>Specifies element float.</summary>
     /// <param name="float">
@@ -227,7 +227,7 @@ module Position =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Float' (float: FssTypes.IFloat) = Float.Value(float)
+    let Float' (float: FssTypes.IFloat) = Float.value(float)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
     let private boxSizingValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BoxSizing value
@@ -236,14 +236,14 @@ module Position =
         |> Utilities.Helpers.duToKebab
         |> boxSizingValue
     type BoxSizing =
-        static member Value (boxSizing: FssTypes.Position.BoxSizing) = boxSizing |> boxSizingValue'
-        static member ContentBox = FssTypes.Position.BoxSizing.ContentBox |> boxSizingValue'
-        static member BorderBox = FssTypes.Position.BoxSizing.BorderBox |> boxSizingValue'
+        static member value (boxSizing: FssTypes.Position.BoxSizing) = boxSizing |> boxSizingValue'
+        static member contentBox = FssTypes.Position.BoxSizing.ContentBox |> boxSizingValue'
+        static member borderBox = FssTypes.Position.BoxSizing.BorderBox |> boxSizingValue'
 
     /// <summary>Specifies how the total width and height of an elemenent is calculated.</summary>
     /// <param name="sizing"> How to calculate width and height How to calculate width. </param>
     /// <returns>Css property for fss.</returns>
-    let BoxSizing' (sizing: FssTypes.Position.BoxSizing) = BoxSizing.Value(sizing)
+    let BoxSizing' (sizing: FssTypes.Position.BoxSizing) = BoxSizing.value(sizing)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
     let private directionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Direction value
@@ -253,12 +253,12 @@ module Position =
         |> directionValue
 
     type Direction =
-        static member Value (direction: FssTypes.IDirection) = direction |> directionValue'
-        static member Rtl = FssTypes.Position.Direction.Rtl |> directionValue'
-        static member Ltr = FssTypes.Position.Direction.Ltr |> directionValue'
-        static member Inherit = FssTypes.Inherit |> directionValue'
-        static member Initial = FssTypes.Initial |> directionValue'
-        static member Unset = FssTypes.Unset |> directionValue'
+        static member value (direction: FssTypes.IDirection) = direction |> directionValue'
+        static member rtl = FssTypes.Position.Direction.Rtl |> directionValue'
+        static member ltr = FssTypes.Position.Direction.Ltr |> directionValue'
+        static member inherit' = FssTypes.Inherit |> directionValue'
+        static member initial = FssTypes.Initial |> directionValue'
+        static member unset = FssTypes.Unset |> directionValue'
 
     /// <summary>Specifies element float.</summary>
     /// <param name="direction">
@@ -269,7 +269,7 @@ module Position =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Direction' (direction: FssTypes.IDirection) = Direction.Value(direction)
+    let Direction' (direction: FssTypes.IDirection) = Direction.value(direction)
 
 module WritingModeType =
     type WritingMode =
@@ -296,14 +296,14 @@ module WritingMode =
         |> writingModeValue
 
     type WritingMode =
-        static member Value (writingMode: FssTypes.IWritingMode) = writingMode |> writingModeValue'
+        static member value (writingMode: FssTypes.IWritingMode) = writingMode |> writingModeValue'
 
-        static member HorizontalTb = HorizontalTb |> writingModeValue'
-        static member VerticalRl = VerticalRl |> writingModeValue'
-        static member VerticalLr = VerticalLr |> writingModeValue'
-        static member Inherit = FssTypes.Inherit |> writingModeValue'
-        static member Initial = FssTypes.Initial |> writingModeValue'
-        static member Unset = FssTypes.Unset |> writingModeValue'
+        static member horizontalTb = HorizontalTb |> writingModeValue'
+        static member verticalRl = VerticalRl |> writingModeValue'
+        static member verticalLr = VerticalLr |> writingModeValue'
+        static member inherit' = FssTypes.Inherit |> writingModeValue'
+        static member initial = FssTypes.Initial |> writingModeValue'
+        static member unset = FssTypes.Unset |> writingModeValue'
 
     /// <summary>Specifies direction elements are written.</summary>
     /// <param name="writingMode">
@@ -314,7 +314,7 @@ module WritingMode =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let WritingMode' (writingMode: FssTypes.IWritingMode) = writingMode |> WritingMode.Value
+    let WritingMode' (writingMode: FssTypes.IWritingMode) = writingMode |> WritingMode.value
 
 
 [<AutoOpen>]
@@ -348,25 +348,25 @@ module Break =
         |> breakAfterValue
 
     type BreakAfter =
-        static member Value (breakAfter: FssTypes.IBreakAfter) = breakAfter |> breakAfterValue'
-        static member Avoid = FssTypes.Position.BreakAfter.Avoid |> breakAfterValue'
-        static member Always = FssTypes.Position.BreakAfter.Always |> breakAfterValue'
-        static member All = FssTypes.Position.BreakAfter.All |> breakAfterValue'
-        static member AvoidPage = FssTypes.Position.BreakAfter.AvoidPage |> breakAfterValue'
-        static member Page = FssTypes.Position.BreakAfter.Page |> breakAfterValue'
-        static member Left = FssTypes.Position.BreakAfter.Left |> breakAfterValue'
-        static member Right = FssTypes.Position.BreakAfter.Right |> breakAfterValue'
-        static member Recto = FssTypes.Position.BreakAfter.Recto |> breakAfterValue'
-        static member Verso = FssTypes.Position.BreakAfter.Verso |> breakAfterValue'
-        static member AvoidColumn = FssTypes.Position.BreakAfter.AvoidColumn |> breakAfterValue'
-        static member Column = FssTypes.Position.BreakAfter.Column |> breakAfterValue'
-        static member AvoidRegion = FssTypes.Position.BreakAfter.AvoidRegion |> breakAfterValue'
-        static member Region = FssTypes.Position.BreakAfter.Region |> breakAfterValue'
+        static member value (breakAfter: FssTypes.IBreakAfter) = breakAfter |> breakAfterValue'
+        static member avoid = FssTypes.Position.BreakAfter.Avoid |> breakAfterValue'
+        static member always = FssTypes.Position.BreakAfter.Always |> breakAfterValue'
+        static member all = FssTypes.Position.BreakAfter.All |> breakAfterValue'
+        static member avoidPage = FssTypes.Position.BreakAfter.AvoidPage |> breakAfterValue'
+        static member page = FssTypes.Position.BreakAfter.Page |> breakAfterValue'
+        static member left = FssTypes.Position.BreakAfter.Left |> breakAfterValue'
+        static member right = FssTypes.Position.BreakAfter.Right |> breakAfterValue'
+        static member recto = FssTypes.Position.BreakAfter.Recto |> breakAfterValue'
+        static member verso = FssTypes.Position.BreakAfter.Verso |> breakAfterValue'
+        static member avoidColumn = FssTypes.Position.BreakAfter.AvoidColumn |> breakAfterValue'
+        static member column = FssTypes.Position.BreakAfter.Column |> breakAfterValue'
+        static member avoidRegion = FssTypes.Position.BreakAfter.AvoidRegion |> breakAfterValue'
+        static member region = FssTypes.Position.BreakAfter.Region |> breakAfterValue'
 
-        static member Auto = FssTypes.Auto |> breakAfterValue'
-        static member Inherit = FssTypes.Inherit |> breakAfterValue'
-        static member Initial = FssTypes.Initial |> breakAfterValue'
-        static member Unset = FssTypes.Unset |> breakAfterValue'
+        static member auto = FssTypes.Auto |> breakAfterValue'
+        static member inherit' = FssTypes.Inherit |> breakAfterValue'
+        static member initial = FssTypes.Initial |> breakAfterValue'
+        static member unset = FssTypes.Unset |> breakAfterValue'
 
     /// <summary>Specifies how elements behave after a generated box.</summary>
     /// <param name="breakAfter">
@@ -378,7 +378,7 @@ module Break =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BreakAfter' (breakAfter: FssTypes.IBreakAfter) = breakAfter |> BreakAfter.Value
+    let BreakAfter' (breakAfter: FssTypes.IBreakAfter) = breakAfter |> BreakAfter.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/break-before
     let private breakBeforeValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BreakBefore value
@@ -388,25 +388,25 @@ module Break =
         |> breakBeforeValue
 
     type BreakBefore =
-        static member Value (breakBefore: FssTypes.IBreakBefore) = breakBefore |> breakBeforeValue'
-        static member Avoid = FssTypes.Position.BreakBefore.Avoid |> breakBeforeValue'
-        static member Always = FssTypes.Position.BreakBefore.Always |> breakBeforeValue'
-        static member All = FssTypes.Position.BreakBefore.All |> breakBeforeValue'
-        static member AvoidPage = FssTypes.Position.BreakBefore.AvoidPage |> breakBeforeValue'
-        static member Page = FssTypes.Position.BreakBefore.Page |> breakBeforeValue'
-        static member Left = FssTypes.Position.BreakBefore.Left |> breakBeforeValue'
-        static member Right = FssTypes.Position.BreakBefore.Right |> breakBeforeValue'
-        static member Recto = FssTypes.Position.BreakBefore.Recto |> breakBeforeValue'
-        static member Verso = FssTypes.Position.BreakBefore.Verso |> breakBeforeValue'
-        static member AvoidColumn = FssTypes.Position.BreakBefore.AvoidColumn |> breakBeforeValue'
-        static member Column = FssTypes.Position.BreakBefore.Column |> breakBeforeValue'
-        static member AvoidRegion = FssTypes.Position.BreakBefore.AvoidRegion |> breakBeforeValue'
-        static member Region = FssTypes.Position.BreakBefore.Region |> breakBeforeValue'
+        static member value (breakBefore: FssTypes.IBreakBefore) = breakBefore |> breakBeforeValue'
+        static member avoid = FssTypes.Position.BreakBefore.Avoid |> breakBeforeValue'
+        static member always = FssTypes.Position.BreakBefore.Always |> breakBeforeValue'
+        static member all = FssTypes.Position.BreakBefore.All |> breakBeforeValue'
+        static member avoidPage = FssTypes.Position.BreakBefore.AvoidPage |> breakBeforeValue'
+        static member page = FssTypes.Position.BreakBefore.Page |> breakBeforeValue'
+        static member left = FssTypes.Position.BreakBefore.Left |> breakBeforeValue'
+        static member right = FssTypes.Position.BreakBefore.Right |> breakBeforeValue'
+        static member recto = FssTypes.Position.BreakBefore.Recto |> breakBeforeValue'
+        static member verso = FssTypes.Position.BreakBefore.Verso |> breakBeforeValue'
+        static member avoidColumn = FssTypes.Position.BreakBefore.AvoidColumn |> breakBeforeValue'
+        static member column = FssTypes.Position.BreakBefore.Column |> breakBeforeValue'
+        static member avoidRegion = FssTypes.Position.BreakBefore.AvoidRegion |> breakBeforeValue'
+        static member region = FssTypes.Position.BreakBefore.Region |> breakBeforeValue'
 
-        static member Auto = FssTypes.Auto |> breakBeforeValue'
-        static member Inherit = FssTypes.Inherit |> breakBeforeValue'
-        static member Initial = FssTypes.Initial |> breakBeforeValue'
-        static member Unset = FssTypes.Unset |> breakBeforeValue'
+        static member auto = FssTypes.Auto |> breakBeforeValue'
+        static member inherit' = FssTypes.Inherit |> breakBeforeValue'
+        static member initial = FssTypes.Initial |> breakBeforeValue'
+        static member unset = FssTypes.Unset |> breakBeforeValue'
 
     /// <summary>Specifies how elements behave before a generated box.</summary>
     /// <param name="breakBefore">
@@ -418,7 +418,7 @@ module Break =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BreakBefore' (breakBefore: FssTypes.IBreakBefore) = breakBefore |> BreakBefore.Value
+    let BreakBefore' (breakBefore: FssTypes.IBreakBefore) = breakBefore |> BreakBefore.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside
     let private breakInsideValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BreakInside value
@@ -428,16 +428,16 @@ module Break =
         |> breakInsideValue
 
     type BreakInside =
-        static member Value (breakInside: FssTypes.IBreakInside) = breakInside |> breakInsideValue'
-        static member Avoid = FssTypes.Position.BreakInside.Avoid |> breakInsideValue'
-        static member AvoidPage = FssTypes.Position.BreakInside.AvoidPage |> breakInsideValue'
-        static member AvoidColumn = FssTypes.Position.BreakInside.AvoidColumn |> breakInsideValue'
-        static member AvoidRegion = FssTypes.Position.BreakInside.AvoidRegion |> breakInsideValue'
+        static member value (breakInside: FssTypes.IBreakInside) = breakInside |> breakInsideValue'
+        static member avoid = FssTypes.Position.BreakInside.Avoid |> breakInsideValue'
+        static member avoidPage = FssTypes.Position.BreakInside.AvoidPage |> breakInsideValue'
+        static member avoidColumn = FssTypes.Position.BreakInside.AvoidColumn |> breakInsideValue'
+        static member avoidRegion = FssTypes.Position.BreakInside.AvoidRegion |> breakInsideValue'
 
-        static member Auto = FssTypes.Auto |> breakInsideValue'
-        static member Inherit = FssTypes.Inherit |> breakInsideValue'
-        static member Initial = FssTypes.Initial |> breakInsideValue'
-        static member Unset = FssTypes.Unset |> breakInsideValue'
+        static member auto = FssTypes.Auto |> breakInsideValue'
+        static member inherit' = FssTypes.Inherit |> breakInsideValue'
+        static member initial = FssTypes.Initial |> breakInsideValue'
+        static member unset = FssTypes.Unset |> breakInsideValue'
 
     /// <summary>Specifies how elements behave inside a generated box.</summary>
     /// <param name="breakInside">
@@ -449,5 +449,5 @@ module Break =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BreakInside' (breakInside: FssTypes.IBreakInside) = breakInside |> BreakInside.Value
+    let BreakInside' (breakInside: FssTypes.IBreakInside) = breakInside |> BreakInside.value
 

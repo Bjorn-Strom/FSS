@@ -28,10 +28,10 @@ module BoxShadow =
 
     let private boxShadowValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BoxShadow value
     type BoxShadow =
-        static member Color (x: FssTypes.Size, y: FssTypes.Size, color: FssTypes.ColorType) = FssTypes.BoxShadow.Color(x, y, color)
-        static member BlurColor (x: FssTypes.Size, y: FssTypes.Size, blur: FssTypes.Size, color: FssTypes.ColorType) =
+        static member color (x: FssTypes.Size, y: FssTypes.Size, color: FssTypes.ColorType) = FssTypes.BoxShadow.Color(x, y, color)
+        static member blurColor (x: FssTypes.Size, y: FssTypes.Size, blur: FssTypes.Size, color: FssTypes.ColorType) =
                 FssTypes.BoxShadow.BlurColor(x, y, blur, color)
-        static member BlurSpreadColor (x: FssTypes.Size, y: FssTypes.Size, blur: FssTypes.Size, spread: FssTypes.Size, color: FssTypes.ColorType) =
+        static member blurSpreadColor (x: FssTypes.Size, y: FssTypes.Size, blur: FssTypes.Size, spread: FssTypes.Size, color: FssTypes.ColorType) =
                 FssTypes.BoxShadow.BlurSpreadColor(x, y, blur, spread, color)
 
     /// Supply a list of box shadows to be applied to the element.

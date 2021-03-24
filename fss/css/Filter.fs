@@ -17,22 +17,22 @@ module Filter =
         |> filterValue
 
     type Filter =
-        static member Url url  = FssTypes.Filter.Url url
-        static member Blur blur = FssTypes.Filter.Blur blur
-        static member Brightness brightness = FssTypes.Filter.Brightness brightness
-        static member Contrast contrast = FssTypes.Filter.Contrast contrast
-        static member DropShadow x y blur color invert = FssTypes.Filter.DropShadow(x,y,blur,color, invert)
-        static member Grayscale grayScale = FssTypes.Filter.Grayscale grayScale
-        static member HueRotate hueRotate = FssTypes.Filter.HueRotate hueRotate
-        static member Invert invert = FssTypes.Filter.Invert invert
-        static member Opacity opacity = FssTypes.Filter.Opacity opacity
-        static member Saturate saturate = FssTypes.Filter.Saturate saturate
-        static member Sepia sepia = FssTypes.Filter.Sepia sepia
+        static member url url  = FssTypes.Filter.Url url
+        static member blur blur = FssTypes.Filter.Blur blur
+        static member brightness brightness = FssTypes.Filter.Brightness brightness
+        static member contrast contrast = FssTypes.Filter.Contrast contrast
+        static member dropShadow x y blur color invert = FssTypes.Filter.DropShadow(x,y,blur,color, invert)
+        static member grayscale grayScale = FssTypes.Filter.Grayscale grayScale
+        static member hueRotate hueRotate = FssTypes.Filter.HueRotate hueRotate
+        static member invert invert = FssTypes.Filter.Invert invert
+        static member opacity opacity = FssTypes.Filter.Opacity opacity
+        static member saturate saturate = FssTypes.Filter.Saturate saturate
+        static member sepia sepia = FssTypes.Filter.Sepia sepia
 
-        static member None = FssTypes.None' |> filterValue'
-        static member Inherit = FssTypes.Inherit |> filterValue'
-        static member Initial = FssTypes.Initial |> filterValue'
-        static member Unset = FssTypes.Unset |> filterValue'
+        static member none = FssTypes.None' |> filterValue'
+        static member inherit' = FssTypes.Inherit |> filterValue'
+        static member initial = FssTypes.Initial |> filterValue'
+        static member unset = FssTypes.Unset |> filterValue'
 
     /// Supply a list of filters to be applied to the element.
     let Filters (filters: FssTypes.Filter.Filter list): FssTypes.CssProperty =
@@ -57,22 +57,22 @@ module BackdropFilter =
         |> backdropFilterValue
 
     type BackdropFilter =
-        static member Url url = FssTypes.Filter.Url url
-        static member Blur blur = FssTypes.Filter.Blur blur
-        static member Brightness brightness = FssTypes.Filter.Brightness brightness
-        static member Contrast contrast = FssTypes.Filter.Contrast contrast
-        static member DropShadow x y blur color invert = FssTypes.Filter.DropShadow(x,y,blur,color, invert)
-        static member Grayscale grayScale = FssTypes.Filter.Grayscale grayScale
-        static member HueRotate hueRotate = FssTypes.Filter.HueRotate hueRotate
-        static member Invert invert = FssTypes.Filter.Invert invert
-        static member Opacity opacity = FssTypes.Filter.Opacity opacity
-        static member Saturate saturate = FssTypes.Filter.Saturate saturate
-        static member Sepia sepia = FssTypes.Filter.Sepia sepia
+        static member url url = FssTypes.Filter.Url url
+        static member blur blur = FssTypes.Filter.Blur blur
+        static member brightness brightness = FssTypes.Filter.Brightness brightness
+        static member contrast contrast = FssTypes.Filter.Contrast contrast
+        static member dropShadow x y blur color invert = FssTypes.Filter.DropShadow(x,y,blur,color, invert)
+        static member grayscale grayScale = FssTypes.Filter.Grayscale grayScale
+        static member hueRotate hueRotate = FssTypes.Filter.HueRotate hueRotate
+        static member invert invert = FssTypes.Filter.Invert invert
+        static member opacity opacity = FssTypes.Filter.Opacity opacity
+        static member saturate saturate = FssTypes.Filter.Saturate saturate
+        static member sepia sepia = FssTypes.Filter.Sepia sepia
 
-        static member None = FssTypes.None' |> backdropFilterValue'
-        static member Inherit = FssTypes.Inherit |> backdropFilterValue'
-        static member Initial = FssTypes.Initial |> backdropFilterValue'
-        static member Unset = FssTypes.Unset |> backdropFilterValue'
+        static member none = FssTypes.None' |> backdropFilterValue'
+        static member inherit' = FssTypes.Inherit |> backdropFilterValue'
+        static member initial = FssTypes.Initial |> backdropFilterValue'
+        static member unset = FssTypes.Unset |> backdropFilterValue'
 
     /// Supply a list of filters to be applied to the element.
     let BackdropFilters (backdropFilters: FssTypes.Filter.Filter list): FssTypes.CssProperty =

@@ -39,23 +39,23 @@ module Padding =
                     [ "padding" ==> "10.0em" ]
                 test
                     "Padding auto"
-                    [ Padding.Auto]
+                    [ Padding.auto]
                     [ "padding" ==> "auto" ]
                 test
                     "Padding inherit"
-                    [ Padding.Inherit]
+                    [ Padding.inherit']
                     [ "padding" ==> "inherit" ]
                 test
                     "Padding initial"
-                    [ Padding.Initial]
+                    [ Padding.initial]
                     [ "padding" ==> "initial" ]
                 test
                     "Padding unset"
-                    [ Padding.Unset ]
+                    [ Padding.unset ]
                     [ "padding" ==> "unset" ]
                 test
                     "Paddings multiple"
-                    [ Padding.Value (px 10, px 20, px 30, px 40) ]
+                    [ Padding.value (px 10, px 20, px 30, px 40) ]
                     [ "padding" ==> "10px 20px 30px 40px" ]
                 test
                     "Padding inline start 5%"
@@ -71,23 +71,23 @@ module Padding =
                     [ "paddingInlineStart" ==> "10px" ]
                 test
                     "Padding inline start initial"
-                    [ PaddingInlineStart.Initial]
+                    [ PaddingInlineStart.initial]
                     [ "paddingInlineStart" ==> "initial" ]
                 test
                     "Padding inline start unset"
-                    [ PaddingInlineStart.Unset ]
+                    [ PaddingInlineStart.unset ]
                     [ "paddingInlineStart" ==> "unset" ]
                 test
                     "Padding inline start inherit"
-                    [ PaddingInlineStart.Inherit]
+                    [ PaddingInlineStart.inherit']
                     [ "paddingInlineStart" ==> "inherit" ]
                 test
                     "Padding inline start initial"
-                    [ PaddingInlineStart.Initial]
+                    [ PaddingInlineStart.initial]
                     [ "paddingInlineStart" ==> "initial" ]
                 test
                     "Padding inline start unset"
-                    [ PaddingInlineStart.Unset ]
+                    [ PaddingInlineStart.unset ]
                     [ "paddingInlineStart" ==> "unset" ]
                 test
                     "Padding inline end 5%"
@@ -103,23 +103,23 @@ module Padding =
                     [ "paddingInlineEnd" ==> "10px" ]
                 test
                     "Padding inline end initial"
-                    [ PaddingInlineEnd.Initial]
+                    [ PaddingInlineEnd.initial]
                     [ "paddingInlineEnd" ==> "initial" ]
                 test
                     "Padding inline end unset"
-                    [ PaddingInlineEnd.Unset ]
+                    [ PaddingInlineEnd.unset ]
                     [ "paddingInlineEnd" ==> "unset" ]
                 test
                     "Padding inline end inherit"
-                    [ PaddingInlineEnd.Inherit]
+                    [ PaddingInlineEnd.inherit']
                     [ "paddingInlineEnd" ==> "inherit" ]
                 test
                     "Padding inline end initial"
-                    [ PaddingInlineEnd.Initial]
+                    [ PaddingInlineEnd.initial]
                     [ "paddingInlineEnd" ==> "initial" ]
                 test
                     "Padding inline end unset"
-                    [ PaddingInlineEnd.Unset ]
+                    [ PaddingInlineEnd.unset ]
                     [ "paddingInlineEnd" ==> "unset" ]
                 test
                     "Padding block start 5%"
@@ -135,23 +135,23 @@ module Padding =
                     [ "paddingBlockStart" ==> "10px" ]
                 test
                     "Padding block start initial"
-                    [ PaddingBlockStart.Initial]
+                    [ PaddingBlockStart.initial]
                     [ "paddingBlockStart" ==> "initial" ]
                 test
                     "Padding block start unset"
-                    [ PaddingBlockStart.Unset ]
+                    [ PaddingBlockStart.unset ]
                     [ "paddingBlockStart" ==> "unset" ]
                 test
                     "Padding block start inherit"
-                    [ PaddingBlockStart.Inherit]
+                    [ PaddingBlockStart.inherit']
                     [ "paddingBlockStart" ==> "inherit" ]
                 test
                     "Padding block start initial"
-                    [ PaddingBlockStart.Initial]
+                    [ PaddingBlockStart.initial]
                     [ "paddingBlockStart" ==> "initial" ]
                 test
                     "Padding block start unset"
-                    [ PaddingBlockStart.Unset ]
+                    [ PaddingBlockStart.unset ]
                     [ "paddingBlockStart" ==> "unset" ]
                 test
                     "Padding block end 5%"
@@ -167,22 +167,22 @@ module Padding =
                     [ "paddingBlockEnd" ==> "10px" ]
                 test
                     "Padding block end initial"
-                    [ PaddingBlockEnd.Initial]
+                    [ PaddingBlockEnd.initial]
                     [ "paddingBlockEnd" ==> "initial" ]
                 test
                     "Padding block end unset"
-                    [ PaddingBlockEnd.Unset ]
+                    [ PaddingBlockEnd.unset ]
                     [ "paddingBlockEnd" ==> "unset" ]
                 test
                     "Padding block end inherit"
-                    [ PaddingBlockEnd.Inherit]
+                    [ PaddingBlockEnd.inherit']
                     [ "paddingBlockEnd" ==> "inherit" ]
                 test
                     "Padding block end initial"
-                    [ PaddingBlockEnd.Initial]
+                    [ PaddingBlockEnd.initial]
                     [ "paddingBlockEnd" ==> "initial" ]
                 test
                     "Padding block end unset"
-                    [ PaddingBlockEnd.Unset ]
+                    [ PaddingBlockEnd.unset ]
                     [ "paddingBlockEnd" ==> "unset" ]
             ]

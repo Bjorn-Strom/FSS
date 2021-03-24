@@ -11,142 +11,142 @@ module Cursor =
             [
                 test
                     "Cursor None"
-                    [Cursor.None]
+                    [Cursor.none]
                     [ "cursor" ==> "none"]
                 test
                     "Cursor auto"
-                    [Cursor.Auto]
+                    [Cursor.auto]
                     [ "cursor" ==> "auto"]
                 test
                     "Cursor inherit"
-                    [Cursor.Inherit]
+                    [Cursor.inherit']
                     [ "cursor" ==> "inherit"]
                 test
                     "Cursor initial"
-                    [Cursor.Initial]
+                    [Cursor.initial]
                     [ "cursor" ==> "initial"]
                 test
                     "Cursor unset"
-                    [Cursor.Unset]
+                    [Cursor.unset]
                     [ "cursor" ==> "unset"]
                 test
                     "Cursor alias"
-                    [Cursor.Alias]
+                    [Cursor.alias]
                     [ "cursor" ==> "alias"]
                 test
                     "Cursor ContextMenu"
-                    [Cursor.ContextMenu]
+                    [Cursor.contextMenu]
                     [ "cursor" ==> "context-menu"]
                 test
                     "Cursor Help"
-                    [Cursor.Help]
+                    [Cursor.help]
                     [ "cursor" ==> "help"]
                 test
                     "Cursor Pointer"
-                    [Cursor.Pointer]
+                    [Cursor.pointer]
                     [ "cursor" ==> "pointer"]
                 test
                     "Cursor Progress"
-                    [Cursor.Progress]
+                    [Cursor.progress]
                     [ "cursor" ==> "progress"]
                 test
                     "Cursor Wait"
-                    [Cursor.Wait]
+                    [Cursor.wait]
                     [ "cursor" ==> "wait"]
                 test
                     "Cursor Cell"
-                    [Cursor.Cell]
+                    [Cursor.cell]
                     [ "cursor" ==> "cell"]
                 test
                     "Cursor Crosshair"
-                    [Cursor.Crosshair]
+                    [Cursor.crosshair]
                     [ "cursor" ==> "crosshair"]
                 test
                     "Cursor Text"
-                    [Cursor.Text]
+                    [Cursor.text]
                     [ "cursor" ==> "text"]
                 test
                     "Cursor VerticalText"
-                    [Cursor.VerticalText]
+                    [Cursor.verticalText]
                     [ "cursor" ==> "vertical-text"]
                 test
                     "Cursor Alias"
-                    [Cursor.Alias]
+                    [Cursor.alias]
                     [ "cursor" ==> "alias"]
                 test
                     "Cursor Copy"
-                    [Cursor.Copy]
+                    [Cursor.copy]
                     [ "cursor" ==> "copy"]
                 test
                     "Cursor Move"
-                    [Cursor.Move]
+                    [Cursor.move]
                     [ "cursor" ==> "move"]
                 test
                     "Cursor NoDrop"
-                    [Cursor.NoDrop]
+                    [Cursor.noDrop]
                     [ "cursor" ==> "no-drop"]
                 test
                     "Cursor NotAllowed"
-                    [Cursor.NotAllowed]
+                    [Cursor.notAllowed]
                     [ "cursor" ==> "not-allowed"]
                 test
                     "Cursor AllScroll"
-                    [Cursor.AllScroll]
+                    [Cursor.allScroll]
                     [ "cursor" ==> "all-scroll"]
                 test
                     "Cursor ColResize"
-                    [Cursor.ColResize]
+                    [Cursor.colResize]
                     [ "cursor" ==> "col-resize"]
                 test
                     "Cursor RowResize"
-                    [Cursor.RowResize]
+                    [Cursor.rowResize]
                     [ "cursor" ==> "row-resize"]
                 test
                     "Cursor NResize"
-                    [Cursor.NResize]
+                    [Cursor.nResize]
                     [ "cursor" ==> "n-resize"]
                 test
                     "Cursor EResize"
-                    [Cursor.EResize]
+                    [Cursor.eResize]
                     [ "cursor" ==> "e-resize"]
                 test
                     "Cursor SResize"
-                    [Cursor.SResize]
+                    [Cursor.sResize]
                     [ "cursor" ==> "s-resize"]
                 test
                     "Cursor WResize"
-                    [Cursor.WResize]
+                    [Cursor.wResize]
                     [ "cursor" ==> "w-resize"]
                 test
                     "Cursor NsResize"
-                    [Cursor.NsResize]
+                    [Cursor.nsResize]
                     [ "cursor" ==> "ns-resize"]
                 test
                     "Cursor EwResize"
-                    [Cursor.EwResize]
+                    [Cursor.ewResize]
                     [ "cursor" ==> "ew-resize"]
                 test
                     "Cursor NeResize"
-                    [Cursor.NeResize]
+                    [Cursor.neResize]
                     [ "cursor" ==> "ne-resize"]
                 test
                     "Cursor NwResize"
-                    [Cursor.NwResize]
+                    [Cursor.nwResize]
                     [ "cursor" ==> "nw-resize"]
                 test
                     "Cursor SeResize"
-                    [Cursor.SeResize]
+                    [Cursor.seResize]
                     [ "cursor" ==> "se-resize"]
                 test
                     "Cursor SwResize"
-                    [Cursor.SwResize]
+                    [Cursor.swResize]
                     [ "cursor" ==> "sw-resize"]
                 test
                     "Cursor NeswResize"
-                    [Cursor.NeswResize]
+                    [Cursor.neswResize]
                     [ "cursor" ==> "nesw-resize"]
                 test
                     "Cursor NwseResize"
-                    [Cursor.NwseResize]
+                    [Cursor.nwseResize]
                     [ "cursor" ==> "nwse-resize"]
             ]

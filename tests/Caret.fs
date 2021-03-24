@@ -12,11 +12,11 @@ module Caret =
             [
                 test
                     "caret color rgb"
-                    [ CaretColor.Rgb 255 0 0 ]
+                    [ CaretColor.rgb 255 0 0 ]
                     ["caretColor" ==> "rgb(255, 0, 0)"]
                 test
                     "caret color hsl"
-                    [ CaretColor.Hsl 255 0. 0. ]
+                    [ CaretColor.hsl 255 0. 0. ]
                     ["caretColor" ==> "hsl(255, 0%, 0%)"]
                 test
                     "caret color green"
@@ -24,6 +24,6 @@ module Caret =
                     ["caretColor" ==> "#008000"]
                 test
                     "Caret Color Auto"
-                    [CaretColor.Auto]
+                    [CaretColor.auto]
                     ["caretColor" ==> "auto"]
             ]

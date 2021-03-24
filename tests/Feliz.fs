@@ -17,7 +17,7 @@ module Feliz =
         let sampleCounter =
             counterStyle
                 [
-                    Counter.System.Alphabetic
+                    Counter.System.alphabetic
                 ]
         let transitionDurations: ITransitionDuration list = [sec 10.0; ms 100.0; Initial; Inherit]
 
@@ -33,11 +33,11 @@ module Feliz =
                     [ "animationDuration" ==> "10.00s" ]
                 test
                     "Animation timing function ease"
-                    [ style.animationTimingFunction.Ease ]
+                    [ style.animationTimingFunction.ease ]
                     ["animationTimingFunction" ==> "ease"]
                 test
                     "Animation timing function cubic bezier"
-                    [ style.animationTimingFunction.CubicBezier (0.0, 0.47, 0.32, 1.97) ]
+                    [ style.animationTimingFunction.cubicBezier (0.0, 0.47, 0.32, 1.97) ]
                     ["animationTimingFunction" ==> "cubic-bezier(0.00, 0.47, 0.32, 1.97)"]
                 test
                     "Animation delay sec"
@@ -45,19 +45,19 @@ module Feliz =
                     ["animationDelay" ==> "10.00s"]
                 test
                     "Animation iteration count infininte"
-                    [ style.animationIterationCount.Infinite ]
+                    [ style.animationIterationCount.infinite ]
                     ["animationIterationCount" ==> "infinite"]
                 test
                     "Animation direction normal"
-                    [ style.animationDirection.Normal ]
+                    [ style.animationDirection.normal ]
                     ["animationDirection" ==> "normal"]
                 test
                     "Animation fill mode backwards"
-                    [ style.animationFillMode.Backwards ]
+                    [ style.animationFillMode.backwards ]
                     ["animationFillMode" ==> "backwards"]
                 test
                     "Animation play state running"
-                    [ style.animationPlayState.Running ]
+                    [ style.animationPlayState.running ]
                     ["animationPlayState" ==> "running"]
                 test
                     "Custom styles"
@@ -69,39 +69,39 @@ module Feliz =
                     [ "backgroundColor" ==> "#ff0000" ]
                 test
                     "Background origin"
-                    [ style.backgroundOrigin.BorderBox ]
+                    [ style.backgroundOrigin.borderBox ]
                     [ "backgroundOrigin" ==> "border-box" ]
                 test
                     "Background repeat"
-                    [ style.backgroundRepeat.Repeat ]
+                    [ style.backgroundRepeat.repeat ]
                     [ "backgroundRepeat" ==> "repeat" ]
                 test
                     "Background size"
-                    [ style.backgroundSize.Cover ]
+                    [ style.backgroundSize.cover ]
                     [ "backgroundSize" ==> "cover" ]
                 test
                     "Background attachment"
-                    [ style.backgroundAttachment.Scroll ]
+                    [ style.backgroundAttachment.scroll ]
                     [ "backgroundAttachment" ==> "scroll" ]
                 test
                     "Background image"
-                    [ style.backgroundImage.Url "urlTest" ]
+                    [ style.backgroundImage.url "urlTest" ]
                     [ "backgroundImage" ==> "url(urlTest)" ]
                 test
                     "Background position"
-                    [ style.backgroundPosition.Bottom ]
+                    [ style.backgroundPosition.bottom ]
                     [ "backgroundPosition" ==> "bottom" ]
                 test
                     "Background blend mode"
-                    [ style.backgroundBlendMode.Color ]
+                    [ style.backgroundBlendMode.color ]
                     [ "backgroundBlendMode" ==> "color" ]
                 test
                     "Isolation"
-                    [ style.isolation.Unset ]
+                    [ style.isolation.unset ]
                     [ "isolation" ==> "unset" ]
                 test
                     "Box decoration break"
-                    [ style.boxDecorationBreak.Clone ]
+                    [ style.boxDecorationBreak.clone ]
                     [ "boxDecorationBreak" ==> "clone" ]
                 test
                     "Color gainsboro"
@@ -113,35 +113,35 @@ module Feliz =
                     [ "color" ==> "#ff0000" ]
                 test
                     "Font synthesis weight"
-                    [ style.fontSynthesis.Weight ]
+                    [ style.fontSynthesis.weight ]
                     [ "fontSynthesis" ==> "weight" ]
                 test
                     "Font language override string"
-                    [ style.fontLanguageOverride.Value "ENG" ]
+                    [ style.fontLanguageOverride.value "ENG" ]
                     [ "fontLanguageOverride" ==> "\"ENG\""]
                 test
                     "Font kerning normal"
-                    [ style.fontKerning.Normal]
+                    [ style.fontKerning.normal]
                     [ "fontKerning" ==> "normal" ]
                 test
                     "Font size XX-Small"
-                    [ style.fontSize.XxSmall ]
+                    [ style.fontSize.xxSmall ]
                     [ "fontSize" ==> "xx-small" ]
                 test
                     "Font stretch normal"
-                    [ style.fontStretch.Normal ]
+                    [ style.fontStretch.normal ]
                     [ "fontStretch" ==> "normal" ]
                 test
                     "Font style oblique -90"
-                    [ style.fontStyle.Oblique (deg -90.0)]
+                    [ style.fontStyle.oblique (deg -90.0)]
                     [ "fontStyle" ==> "oblique -90.00deg"]
                 test
                     "Font weight bold"
-                    [ style.fontWeight.Bold ]
+                    [ style.fontWeight.bold ]
                     [ "fontWeight" ==> "bold"]
                 test
                     "Line height normal"
-                    [ style.lineHeight.Normal ]
+                    [ style.lineHeight.normal ]
                     [ "lineHeight" ==> "normal" ]
                 test
                     "Line height value"
@@ -149,7 +149,7 @@ module Feliz =
                     [ "lineHeight" ==> "2.5" ]
                 test
                     "Line break loose"
-                    [ style.lineBreak.Loose ]
+                    [ style.lineBreak.loose ]
                     [ "lineBreak" ==> "loose" ]
                 test
                     "Letter spacing px"
@@ -157,39 +157,39 @@ module Feliz =
                     [ "letterSpacing" ==> "10px" ]
                 test
                      "Font family serif"
-                     [ style.fontFamily.Serif ]
+                     [ style.fontFamily.serif ]
                      [ "fontFamily" ==> "serif" ]
                 test
                     "Font families"
-                    [ style.fontFamily.Values ([ Font.Serif; Font.Monospace ]) ]
+                    [ style.fontFamily.values ([ Font.Serif; Font.Monospace ]) ]
                     [ "fontFamily" ==> "serif, monospace" ]
                 test
                     "font feature setting On"
-                    [ style.fontFeatureSetting.Liga Font.On ]
+                    [ style.fontFeatureSetting.liga Font.On ]
                     [ "fontFeatureSettings" ==> "\"liga\" On" ]
                 test
                     "Font variant numeric ordinal"
-                    [ style.fontVariantNumeric.Ordinal]
+                    [ style.fontVariantNumeric.ordinal]
                     ["fontVariantNumeric" ==> "ordinal"]
                 test
                     "Font variant caps small caps"
-                    [ style.fontVariantCaps.SmallCaps]
+                    [ style.fontVariantCaps.smallCaps]
                     ["fontVariantCaps" ==> "small-caps"]
                 test
                     "Font variant east asian ruby"
-                    [ style.fontVariantEastAsian.Ruby]
+                    [ style.fontVariantEastAsian.ruby]
                     ["fontVariantEastAsian" ==> "ruby"]
                 test
                     "Font variant ligatures normal"
-                    [ style.fontVariantLigatures.Normal]
+                    [ style.fontVariantLigatures.normal]
                     ["fontVariantLigatures" ==> "normal"]
                 test
                     "Font variant position super"
-                    [ style.fontVariantPosition.Super ]
+                    [ style.fontVariantPosition.super ]
                     ["fontVariantPosition" ==> "super"]
                 test
                     "Word spacing normal"
-                    [style.wordSpacing.Normal]
+                    [style.wordSpacing.normal]
                     ["wordSpacing" ==> "normal"]
                 test
                     "Word spacing px"
@@ -197,23 +197,23 @@ module Feliz =
                     ["wordSpacing" ==> "3px"]
                 test
                     "Word break word break"
-                    [style.wordBreak.WordBreak]
+                    [style.wordBreak.wordBreak]
                     ["wordBreak" ==> "word-break"]
                 test
                      "Text decoration none"
-                     [style.textDecoration.None]
+                     [style.textDecoration.none]
                      ["textDecoration" ==> "none"]
                 test
                      "Text emphasis inherit"
-                     [ style.textEmphasis.Inherit ]
+                     [ style.textEmphasis.inherit' ]
                      ["textEmphasis" ==> "inherit"]
                 test
                      "Text align left"
-                     [ style.textAlign.Left ]
+                     [ style.textAlign.left ]
                      ["textAlign" ==> "left"]
                 test
                      "Text align last center"
-                     [ style.textAlignLast.Center ]
+                     [ style.textAlignLast.center ]
                      ["textAlignLast" ==> "center"]
                 test
                      "Text decoration color red"
@@ -221,31 +221,31 @@ module Feliz =
                      ["textDecorationColor" ==> "#ff0000"]
                 test
                      "Text decoration line underline"
-                     [style.textDecorationLine.Underline]
+                     [style.textDecorationLine.underline]
                      ["textDecorationLine" ==> "underline"]
                 test
                      "Text decorations multiple"
-                     [style.textDecorationLine.Value(Text.Overline, Text.Underline, Text.LineThrough)]
+                     [style.textDecorationLine.value(Text.Overline, Text.Underline, Text.LineThrough)]
                      ["textDecorationLine" ==> "overline underline line-through"]
                 test
                      "Text decoration skip objects"
-                     [style.textDecorationSkip.Objects]
+                     [style.textDecorationSkip.objects]
                      ["textDecorationSkip" ==> "objects"]
                 test
                      "Text decoration skip multiple - leading spaces and trailing spaces"
-                     [style.textDecorationSkip.Value(Text.LeadingSpaces, Text.TrailingSpaces)]
+                     [style.textDecorationSkip.value(Text.LeadingSpaces, Text.TrailingSpaces)]
                      ["textDecorationSkip" ==> "leading-spaces trailing-spaces"]
                 test
                      "Text decoration skip All"
-                     [style.textDecorationSkipInk.All]
+                     [style.textDecorationSkipInk.all]
                      ["textDecorationSkipInk" ==> "all"]
                 test
                      "Text decoration style solid"
-                     [style.textDecorationStyle.Solid]
+                     [style.textDecorationStyle.solid]
                      ["textDecorationStyle" ==> "solid"]
                 test
                      "Text decoration thickness auto"
-                     [ style.textDecorationThickness.Auto ]
+                     [ style.textDecorationThickness.auto ]
                      [ "textDecorationThickness" ==> "auto" ]
                 test
                      "Text decoration thickness px"
@@ -253,11 +253,11 @@ module Feliz =
                      ["textDecorationThickness" ==> "3px" ]
                 test
                      "Text emphasis color hex"
-                     [ style.textEmphasisColor.Hex "#555" ]
+                     [ style.textEmphasisColor.hex "#555" ]
                      ["textEmphasisColor" ==> "#555"]
                 test
                      "Text emphasis position left under"
-                     [ style.textEmphasisPosition.Value (Text.EmphasisPosition.Left, Text.EmphasisPosition.Under) ]
+                     [ style.textEmphasisPosition.value (Text.EmphasisPosition.Left, Text.EmphasisPosition.Under) ]
                      ["textEmphasisPosition" ==> "left under"]
                 test
                      "Text Emphasis Style x"
@@ -265,7 +265,7 @@ module Feliz =
                      ["textEmphasisStyle" ==> "'x'"]
                 test
                      "Text Emphasis Style filled"
-                     [style.textEmphasisStyle.Filled ]
+                     [style.textEmphasisStyle.filled ]
                      ["textEmphasisStyle" ==> "filled"]
                 test
                      "Text shadow single"
@@ -273,7 +273,7 @@ module Feliz =
                      ["textShadow" ==> "#000000 1px 1px 2px"]
                 test
                      "Text underline offset auto"
-                     [ style.textUnderlineOffset.Auto ]
+                     [ style.textUnderlineOffset.auto ]
                      ["textUnderlineOffset" ==> "auto"]
                 test
                      "Text underline offset em"
@@ -281,7 +281,7 @@ module Feliz =
                      ["textUnderlineOffset" ==> "3.0em"]
                 test
                      "Text underline position from-font"
-                     [ style.textUnderlinePosition.FromFont ]
+                     [ style.textUnderlinePosition.fromFont ]
                      ["textUnderlinePosition" ==> "from-font"]
                 test
                      "Text indent mm"
@@ -289,15 +289,15 @@ module Feliz =
                      ["textIndent" ==> "3.0mm"]
                 test
                      "Text overflow clip"
-                     [ style.textOverflow.Clip ]
+                     [ style.textOverflow.clip ]
                      ["textOverflow" ==> "clip"]
                 test
                      "Quotes none"
-                     [ style.quotes.None ]
+                     [ style.quotes.none ]
                      ["quotes" ==> "none"]
                 test
                      "Hyphens Manual"
-                     [ style.hyphens.Manual ]
+                     [ style.hyphens.manual ]
                      ["hyphens" ==> "manual"]
                 test
                      "TextSizeAdjust percent"
@@ -305,7 +305,7 @@ module Feliz =
                      ["textSizeAdjust" ==> "80%"]
                 test
                      "TextSizeAdjust Auto"
-                     [ style.textSizeAdjust.Auto ]
+                     [ style.textSizeAdjust.auto ]
                      ["textSizeAdjust" ==> "auto"]
                 test
                      "TabSize px"
@@ -313,23 +313,23 @@ module Feliz =
                      ["tabSize" ==> "10px"]
                 test
                      "TextOrientation Mixed"
-                     [ style.textOrientation.Mixed ]
+                     [ style.textOrientation.mixed ]
                      ["textOrientation" ==> "mixed"]
                 test
                      "TextJustify inter-character"
-                     [ style.textJustify.InterCharacter ]
+                     [ style.textJustify.interCharacter ]
                      ["textJustify" ==> "inter-character"]
                 test
                      "WhiteSpace nowrap"
-                     [ style.whiteSpace.NoWrap ]
+                     [ style.whiteSpace.noWrap ]
                      ["whiteSpace" ==> "no-wrap"]
                 test
                      "UserSelect text"
-                     [ style.userSelect.Text ]
+                     [ style.userSelect.text ]
                      ["userSelect" ==> "text"]
                 test
                     "Transform none"
-                    [ style.transform.None ]
+                    [ style.transform.none ]
                     [ "transform" ==> "none" ]
                 test
                     "Transform matrix"
@@ -345,27 +345,27 @@ module Feliz =
                     [ "transformOrigin" ==> "2px" ]
                 test
                     "Transform origin position"
-                    [ style.transformOrigin.Bottom ]
+                    [ style.transformOrigin.bottom ]
                     [ "transformOrigin" ==> "bottom" ]
                 test
                     "Transform style flat"
-                    [ style.transformStyle.Flat ]
+                    [ style.transformStyle.flat ]
                     [ "transformStyle" ==> "flat" ]
                 test
                     "List style None"
-                    [ style.listStyle.None ]
+                    [ style.listStyle.none ]
                     [ "listStyle" ==> "none" ]
                 test
                     "List style image url"
-                    [ style.listStyleImage.Url "foofoo.jpg" ]
+                    [ style.listStyleImage.url "foofoo.jpg" ]
                     [ "listStyleImage" ==> "url('foofoo.jpg')" ]
                 test
                     "List style position inside"
-                    [ style.listStylePosition.Inside]
+                    [ style.listStylePosition.inside]
                     [ "listStylePosition" ==> "inside" ]
                 test
                     "List style type Disc"
-                    [ style.listStyleType.Disc ]
+                    [ style.listStyleType.disc ]
                     [ "listStyleType" ==> "disc" ]
                 test
                     "List style type string"
@@ -381,31 +381,31 @@ module Feliz =
                     ["columnWidth" ==> "60px"]
                 test
                     "Column balance"
-                    [style.columnFill.Balance]
+                    [style.columnFill.balance]
                     ["columnFill" ==> "balance"]
                 test
                     "Column gap normal"
-                    [style.columnGap.Normal]
+                    [style.columnGap.normal]
                     ["columnGap" ==> "normal"]
                 test
                     "Column span all"
-                    [style.columnSpan.All]
+                    [style.columnSpan.all]
                     ["columnSpan" ==> "all"]
                 test
                     "Columns Inherit"
-                    [style.columns.Inherit]
+                    [style.columns.inherit']
                     ["columns" ==> "inherit"]
                 test
                     "Column rule Inherit"
-                    [style.columnRule.Inherit]
+                    [style.columnRule.inherit']
                     ["columnRule" ==> "inherit"]
                 test
                     "Column rule width thin"
-                    [style.columnRuleWidth.Thin]
+                    [style.columnRuleWidth.thin]
                     ["columnRuleWidth" ==> "thin"]
                 test
                     "Column rule style hidden"
-                    [ style.columnRuleStyle.Hidden ]
+                    [ style.columnRuleStyle.hidden ]
                     [ "columnRuleStyle" ==> "hidden" ]
                 test
                     "Column rule color red"
@@ -417,19 +417,19 @@ module Feliz =
                     ["columnCount" ==> "3"]
                 test
                     "Column count auto"
-                    [style.columnCount.Auto]
+                    [style.columnCount.auto]
                     ["columnCount" ==> "auto"]
                 test
                     "Border initial"
-                    [ style.border.Initial ]
+                    [ style.border.initial ]
                     [ "border" ==> "initial" ]
                 test
                     "Borderstyle hidden"
-                    [ style.borderStyle.Hidden ]
+                    [ style.borderStyle.hidden ]
                     [ "borderStyle" ==> "hidden" ]
                 test
                     "Borderstyle multiple"
-                    [ style.borderStyle.Value(Border.Inset, Border.Outset, Border.Ridge, Border.Groove) ]
+                    [ style.borderStyle.value(Border.Inset, Border.Outset, Border.Ridge, Border.Groove) ]
                     [ "borderStyle" ==> "inset outset ridge groove" ]
                 test
                     "Border radius px"
@@ -445,15 +445,15 @@ module Feliz =
                     ["borderBottomLeftRadius" ==> "10px"]
                 test
                     "Border radius top left initial"
-                    [ style.borderTopLeftRadius.Initial ]
+                    [ style.borderTopLeftRadius.initial ]
                     ["borderTopLeftRadius" ==> "initial"]
                 test
                     "Border bottom left radius unset"
-                    [ style.borderBottomLeftRadius.Unset ]
+                    [ style.borderBottomLeftRadius.unset ]
                     ["borderBottomLeftRadius" ==> "unset"]
                 test
                     "Border bottom right radius initial"
-                    [ style.borderBottomRightRadius.Initial ]
+                    [ style.borderBottomRightRadius.initial ]
                     ["borderBottomRightRadius" ==> "initial"]
                 test
                     "Border width px"
@@ -473,11 +473,11 @@ module Feliz =
                     [ "borderColor" ==> "#ff0000" ]
                 test
                     "Border colors multiple"
-                    [ style.borderColor.Value (Color.red, Color.green, Color.blue, Color.white) ]
+                    [ style.borderColor.value (Color.red, Color.green, Color.blue, Color.white) ]
                     [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
                 test
                     "Border top color rgb"
-                    [ style.borderTopColor.Rgb 255 0 0 ]
+                    [ style.borderTopColor.rgb 255 0 0 ]
                     ["borderTopColor" ==> "rgb(255, 0, 0)"]
                 test
                     "Border right color green"
@@ -493,7 +493,7 @@ module Feliz =
                     ["borderLeftColor" ==> "#ffffff"]
                 test
                     "Border collapse collapse"
-                    [ style.borderCollapse.Collapse ]
+                    [ style.borderCollapse.collapse ]
                     [ "borderCollapse" ==> "collapse" ]
                 test
                     "Border spacing px"
@@ -501,11 +501,11 @@ module Feliz =
                     [ "borderSpacing" ==> "2px" ]
                 test
                     "Border image source none"
-                    [ style.borderImageSource.None]
+                    [ style.borderImageSource.none]
                     [ "borderImageSource" ==> "none" ]
                 test
                     "Border image source url"
-                    [ style.borderImageSource.Url "image.jpg" ]
+                    [ style.borderImageSource.url "image.jpg" ]
                     [ "borderImageSource" ==> "url(image.jpg)" ]
                 test
                     "Border image width rem"
@@ -513,7 +513,7 @@ module Feliz =
                     [ "borderImageWidth" ==> "1.0rem" ]
                 test
                     "Border image repeat stretch"
-                    [ style.borderImageRepeat.Stretch ]
+                    [ style.borderImageRepeat.stretch ]
                     [ "borderImageRepeat" ==> "stretch" ]
                 test
                     "Border image slice percent"
@@ -525,7 +525,7 @@ module Feliz =
                     [ "borderImageOutset" ==> "1.0rem" ]
                 test
                     "Transition inherit"
-                    [style.transition.Inherit]
+                    [style.transition.inherit']
                     ["transition" ==> "inherit"]
                 test
                     "Transition duration sec"
@@ -533,7 +533,7 @@ module Feliz =
                     ["transitionDuration" ==> "6.00s"]
                 test
                     "Transition duration multiple"
-                    [style.transitionDuration.Value transitionDurations ]
+                    [style.transitionDuration.value transitionDurations ]
                     ["transitionDuration" ==> "10.00s, 100.00ms, initial, inherit"]
                 test
                     "Transition delay sec"
@@ -541,15 +541,15 @@ module Feliz =
                     ["transitionDelay" ==> "6.00s"]
                 test
                     "Transition property"
-                    [style.transitionProperty.BackgroundColor]
+                    [style.transitionProperty.backgroundColor]
                     ["transitionProperty" ==> "background-color"]
                 test
                     "Transition timing function ease"
-                    [ style.transitionTimingFunction.Ease ]
+                    [ style.transitionTimingFunction.ease ]
                     ["transitionTimingFunction" ==> "ease"]
                 test
                     "Display inline"
-                    [ style.display.Inline ]
+                    [ style.display.inline' ]
                     ["display" ==> "inline"]
                 test
                     "Margin top px"
@@ -629,7 +629,7 @@ module Feliz =
                     ["resize" ==> "block"]
                 test
                     "Resize Both"
-                    [style.resize.Both]
+                    [style.resize.both]
                     ["resize" ==> "both"]
                 test
                     "Width px"
@@ -637,7 +637,7 @@ module Feliz =
                     ["width" ==> "100px"]
                 test
                     "Width max content"
-                    [ style.width.MaxContent ]
+                    [ style.width.maxContent ]
                     ["width" ==> "max-content"]
                 test
                     "Height px"
@@ -645,7 +645,7 @@ module Feliz =
                     ["height" ==> "100px"]
                 test
                     "Height max content"
-                    [ style.height.MaxContent ]
+                    [ style.height.maxContent ]
                     ["height" ==> "max-content"]
                 test
                     "Max width px"
@@ -657,15 +657,15 @@ module Feliz =
                     ["maxHeight" ==> "100px"]
                 test
                     "Paint order normal"
-                    [style.paintOrder.Normal]
+                    [style.paintOrder.normal]
                     ["paintOrder" ==> "normal"]
                 test
                     "Paint order stroke fill"
-                    [style.paintOrder.Value(Visibility.PaintOrder.Stroke, Visibility.PaintOrder.Fill)]
+                    [style.paintOrder.value(Visibility.PaintOrder.Stroke, Visibility.PaintOrder.Fill)]
                     ["paintOrder" ==> "stroke fill"]
                 test
                     "Visibility hidden"
-                    [ style.visibility.Hidden]
+                    [ style.visibility.hidden]
                     ["visibility" ==> "hidden"]
                 test
                     "Opacity 1"
@@ -673,27 +673,27 @@ module Feliz =
                     ["opacity" ==> "1"]
                 test
                     "Overflow-X visible"
-                    [style.overflowX.Visible]
+                    [style.overflowX.visible]
                     ["overflowX" ==> "visible"]
                 test
                     "OverflowY visible"
-                    [style.overflowY.Visible]
+                    [style.overflowY.visible]
                     ["overflowY" ==> "visible"]
                 test
                     "Overflow scroll Scroll"
-                    [style.overflow.Value (Overflow.Scroll, Overflow.Scroll)]
+                    [style.overflow.value (Overflow.Scroll, Overflow.Scroll)]
                     ["overflow" ==> "scroll scroll"]
                 test
                     "OverflowWrap break-word"
-                    [style.overflowWrap.BreakWord]
+                    [style.overflowWrap.breakWord]
                     ["overflowWrap" ==> "break-word"]
                 test
                     "Direction rtl"
-                    [ style.direction.Ltr ]
+                    [ style.direction.ltr ]
                     ["direction" ==> "ltr"]
                 test
                     "Box sizing border box "
-                    [style.boxSizing.BorderBox]
+                    [style.boxSizing.borderBox]
                     ["boxSizing" ==> "border-box"]
                 test
                     "Left px"
@@ -713,31 +713,31 @@ module Feliz =
                     [ "top" ==> "3px" ]
                 test
                     "Vertical align baseline"
-                    [ style.verticalAlign.Baseline]
+                    [ style.verticalAlign.baseline]
                     ["verticalAlign" ==> "baseline"]
                 test
                     "Position static"
-                    [ style.position.Static]
+                    [ style.position.static']
                     ["position" ==> "static"]
                 test
                     "Float left"
-                    [ style.float.Left]
+                    [ style.float.left]
                     ["float" ==> "left"]
                 test
                     "WritingMode horizontal-tb"
-                    [ style.writingMode.HorizontalTb]
+                    [ style.writingMode.horizontalTb]
                     ["writingMode" ==> "horizontal-tb"]
                 test
                     "BreakAfter avoid"
-                    [style.breakAfter.Avoid]
+                    [style.breakAfter.avoid]
                     ["breakAfter" ==> "avoid"]
                 test
                     "BreakBefore avoid"
-                    [style.breakBefore.Avoid]
+                    [style.breakBefore.avoid]
                     ["breakBefore" ==> "avoid"]
                 test
                     "BreakInside avoid-column"
-                    [style.breakInside.AvoidColumn]
+                    [style.breakInside.avoidColumn]
                     ["breakInside" ==> "avoid-column"]
                 test
                     "Perspective px"
@@ -749,51 +749,51 @@ module Feliz =
                     ["perspectiveOrigin" ==> "100%"]
                 test
                     "BackfaceVisibility inherit"
-                    [ style.backfaceVisibility.Inherit]
+                    [ style.backfaceVisibility.inherit']
                     [ "backfaceVisibility" ==> "inherit" ]
                 test
                     "PointerEvents VisiblePainted"
-                    [ style.pointerEvents.VisiblePainted ]
+                    [ style.pointerEvents.visiblePainted ]
                     ["pointerEvents" ==> "visiblePainted"]
                 test
                     "Cursor Wait"
-                    [style.cursor.Wait]
+                    [style.cursor.wait]
                     [ "cursor" ==> "wait"]
                 test
                     "Content image"
-                    [ style.content.Url "http://www.example.com/test.png" ]
+                    [ style.content.url "http://www.example.com/test.png" ]
                     [ "content" ==> "url(http://www.example.com/test.png)" ]
                 test
                     "Content image with alt text"
-                    [ style.content.Url("http://www.example.com/test.png", "this is the alt text") ]
+                    [ style.content.url("http://www.example.com/test.png", "this is the alt text") ]
                     [ "content" ==> "url(http://www.example.com/test.png) / \"this is the alt text\"" ]
                 test
                     "Content linear gradient"
-                    [ style.content.LinearGradient(deg 45.0, [hex "e66456", px 0; hex "9198e5", px 100]) ]
+                    [ style.content.linearGradient(deg 45.0, [hex "e66456", px 0; hex "9198e5", px 100]) ]
                     [ "content" ==> "linear-gradient(45.00deg, #e66456 0px, #9198e5 100px)" ]
                 test
                    "Content counter"
-                    [ style.content.Counter sampleCounter]
+                    [ style.content.counter sampleCounter]
                     [ "content" ==> sprintf "counter(%s)" (counterStyleHelpers.counterStyleToString sampleCounter) ]
                 test
                     "Content counter2"
-                    [ style.content.Counters (sampleCounter, ListStyle.Type.UpperLatin) ]
+                    [ style.content.counters (sampleCounter, ListStyle.Type.UpperLatin) ]
                     [ "content" ==> sprintf "counters(%s, upper-latin)" (counterStyleHelpers.counterStyleToString  sampleCounter) ]
                 test
                     "Caption side top"
-                    [style.captionSide.Top]
+                    [style.captionSide.top]
                     ["captionSide" ==> "top"]
                 test
                     "Empty Cells show"
-                    [style.emptyCells.Show]
+                    [style.emptyCells.show]
                     ["emptyCells" ==> "show"]
                 test
                     "Table Layout fixed"
-                    [style.tableLayout.Fixed]
+                    [style.tableLayout.fixed']
                     ["tableLayout" ==> "fixed"]
                 test
                     "caret color hsl"
-                    [ style.caretColor.Hsl 255 0. 0. ]
+                    [ style.caretColor.hsl 255 0. 0. ]
                     ["caretColor" ==> "hsl(255, 0%, 0%)"]
                 test
                     "caret color green"
@@ -801,7 +801,7 @@ module Feliz =
                     ["caretColor" ==> "#008000"]
                 test
                     "Appearance square button"
-                    [style.appearance.SquareButton]
+                    [style.appearance.squareButton]
                     ["appearance" ==> "square-button"]
                 test
                     "Orphans number"
@@ -809,7 +809,7 @@ module Feliz =
                     [ "orphans" ==> "2" ]
                 test
                     "Orphans inherit"
-                    [ style.orphans.Inherit]
+                    [ style.orphans.inherit']
                     [ "orphans" ==> "inherit" ]
                 test
                     "Widows number"
@@ -817,11 +817,11 @@ module Feliz =
                     [ "widows" ==> "2" ]
                 test
                     "Widows unset"
-                    [ style.widows.Unset ]
+                    [ style.widows.unset ]
                     [ "widows" ==> "unset" ]
                 test
                     "All inherit"
-                    [ style.all.Inherit]
+                    [ style.all.inherit']
                     [ "all" ==> "inherit" ]
                 test
                     "Grid area"
@@ -829,23 +829,23 @@ module Feliz =
                     ["gridArea" ==> "foo"]
                 test
                     "Grid area"
-                    [ style.gridArea.Value (Grid.Ident "area1", Grid.Ident "area2") ]
+                    [ style.gridArea.value (Grid.Ident "area1", Grid.Ident "area2") ]
                     ["gridArea" ==> "area1 / area2"]
                 test
                     "Grid area initial"
-                    [style.gridArea.Initial]
+                    [style.gridArea.initial]
                     ["gridArea" ==> "initial"]
                 test
                     "Grid column ident and ident"
-                    [ style.gridColumn.Value(Grid.Ident "someStart", Grid.Ident "someEnd") ]
+                    [ style.gridColumn.value(Grid.Ident "someStart", Grid.Ident "someEnd") ]
                     ["gridColumn" ==> "someStart / someEnd"]
                 test
                     "Grid column unset"
-                    [style.gridColumn.Unset]
+                    [style.gridColumn.unset]
                     ["gridColumn" ==> "unset"]
                 test
                     "Grid column start ident"
-                    [style.gridColumnStart.Ident "somegridarea"]
+                    [style.gridColumnStart.ident "somegridarea"]
                     ["gridColumnStart" ==> "somegridarea"]
                 test
                     "Grid column end value"
@@ -853,15 +853,15 @@ module Feliz =
                     ["gridColumnEnd" ==> "1"]
                 test
                     "Grid column end ident"
-                    [style.gridColumnEnd.Ident "somegridarea"]
+                    [style.gridColumnEnd.ident "somegridarea"]
                     ["gridColumnEnd" ==> "somegridarea"]
                 test
                     "Grid row ident and ident"
-                    [ style.gridRow.Value (Grid.Ident "someStart", Grid.Ident "someEnd") ]
+                    [ style.gridRow.value (Grid.Ident "someStart", Grid.Ident "someEnd") ]
                     ["gridRow" ==> "someStart / someEnd"]
                 test
                     "Grid row auto"
-                    [style.gridRow.Auto]
+                    [style.gridRow.auto]
                     ["gridRow" ==> "auto"]
                 test
                     "Grid row start value"
@@ -869,7 +869,7 @@ module Feliz =
                     ["gridRowStart" ==> "1"]
                 test
                     "Grid row start ident"
-                    [style.gridRowStart.Ident "somegridarea"]
+                    [style.gridRowStart.ident "somegridarea"]
                     ["gridRowStart" ==> "somegridarea"]
                 test
                     "Grid row end value"
@@ -877,7 +877,7 @@ module Feliz =
                     ["gridRowEnd" ==> "1"]
                 test
                     "Grid row end ident"
-                    [style.gridRowEnd.Ident "somegridarea"]
+                    [style.gridRowEnd.ident "somegridarea"]
                     ["gridRowEnd" ==> "somegridarea"]
                 test
                     "Grid gap px"
@@ -885,11 +885,11 @@ module Feliz =
                     ["gridGap" ==> "10px"]
                 test
                     "Grid gap px and px"
-                    [ style.gridGap.Value (px 20, px 10) ]
+                    [ style.gridGap.value (px 20, px 10) ]
                     ["gridGap" ==> "20px 10px"]
                 test
                     "Row gap normal"
-                    [style.gridRowGap.Normal]
+                    [style.gridRowGap.normal]
                     ["gridRowGap" ==> "normal"]
                 test
                     "Row gap px"
@@ -897,7 +897,7 @@ module Feliz =
                     ["gridRowGap" ==> "3px"]
                 test
                     "Column gap normal"
-                    [style.gridColumnGap.Normal]
+                    [style.gridColumnGap.normal]
                     ["gridColumnGap" ==> "normal"]
                 test
                     "Column gap px"
@@ -909,11 +909,11 @@ module Feliz =
                     ["gridTemplateRows" ==> "100px"]
                 test
                     "Grid template row minmax"
-                    [style.gridTemplateRows.MinMax (px 100, fr 1.) ]
+                    [style.gridTemplateRows.minMax (px 100, fr 1.) ]
                     ["gridTemplateRows" ==> "minmax(100px, 1.00fr)"]
                 test
                     "Grid template row px repeat px"
-                    [style.gridTemplateRows.Values [ px 200; Grid.Repeat.Repeat(Grid.AutoFill, px 100); px 300]]
+                    [style.gridTemplateRows.values [ px 200; Grid.Repeat.Repeat(Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateRows" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid template column px"
@@ -921,47 +921,47 @@ module Feliz =
                     ["gridTemplateColumns" ==> "100px"]
                 test
                     "Grid template column masonry"
-                    [style.gridTemplateColumns.Masonry]
+                    [style.gridTemplateColumns.masonry]
                     ["gridTemplateColumns" ==> "masonry"]
                 test
                     "Grid template column repeat"
-                    [style.gridTemplateColumns.Repeat(3, px 200)]
+                    [style.gridTemplateColumns.repeat(3, px 200)]
                     ["gridTemplateColumns" ==> "repeat(3, 200px)"]
                 test
                     "Grid template column px repeat px"
-                    [style.gridTemplateColumns.Values [px 200; Grid.Repeat.Repeat(Grid.AutoFill, px 100); px 300]]
+                    [style.gridTemplateColumns.values [px 200; Grid.Repeat.Repeat(Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateColumns" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid auto columns min content"
-                    [style.gridAutoColumns.MinContent]
+                    [style.gridAutoColumns.minContent]
                     ["gridAutoColumns" ==> "min-content"]
                 test
                     "Grid auto columns multiple with pxs"
-                    [ style.gridAutoColumns.Values [px 100; px 150; px 390;] ]
+                    [ style.gridAutoColumns.values [px 100; px 150; px 390;] ]
                     ["gridAutoColumns" ==> "100px 150px 390px"]
                 test
                     "Grid auto rows min content"
-                    [style.gridAutoRows.MinContent]
+                    [style.gridAutoRows.minContent]
                     ["gridAutoRows" ==> "min-content"]
                 test
                     "Grid auto rows fit content"
-                    [style.gridAutoRows.FitContent(px 400) ]
+                    [style.gridAutoRows.fitContent(px 400) ]
                     ["gridAutoRows" ==> "fit-content(400px)"]
                 test
                     "Grid auto flow rows"
-                    [style.gridAutoFlow.Row]
+                    [style.gridAutoFlow.row]
                     ["gridAutoFlow" ==> "row"]
                 test
                     "Grid template areas None"
-                    [style.gridTemplateAreas.None]
+                    [style.gridTemplateAreas.none]
                     ["gridTemplateAreas" ==> "none"]
                 test
                     "Grid template areas strings"
-                    [style.gridTemplateAreas.Value [ "a"; "b"  ] ]
+                    [style.gridTemplateAreas.value [ "a"; "b"  ] ]
                     ["gridTemplateAreas" ==> "\"a b\""]
                 test
                     "Grid template areas multiple strings"
-                    [style.gridTemplateAreas.Value
+                    [style.gridTemplateAreas.value
                          [
                             [ "header";  "header";  "header";  "header" ]
                             [ "main";  "main";  ".";  "sidebar" ]
@@ -971,11 +971,11 @@ module Feliz =
                     ["gridTemplateAreas" ==> "\"header header header header\" \"main main . sidebar\" \"footer footer footer footer\""]
                 test
                     "Flex direction row"
-                    [ style.flexDirection.Row]
+                    [ style.flexDirection.row]
                     ["flexDirection" ==> "row"]
                 test
                     "Flex wrap no-wrap"
-                    [ style.flexWrap.NoWrap]
+                    [ style.flexWrap.noWrap]
                     ["flexWrap" ==> "no-wrap"]
                 test
                     "Flex basis em"
@@ -983,27 +983,27 @@ module Feliz =
                     ["flexBasis" ==> "10.0em"]
                 test
                     "Justify content start"
-                    [ style.justifyContent.Start]
+                    [ style.justifyContent.start]
                     ["justifyContent" ==> "start"]
                 test
                     "Justify self normal"
-                    [ style.justifySelf.Normal ]
+                    [ style.justifySelf.normal ]
                     ["justifySelf" ==> "normal"]
                 test
                     "Justify items end"
-                    [ style.justifyItems.End]
+                    [ style.justifyItems.end']
                     ["justifyItems" ==> "end"]
                 test
                     "Align self normal"
-                    [ style.alignSelf.Normal]
+                    [ style.alignSelf.normal]
                     ["alignSelf" ==> "normal"]
                 test
                     "Align items start"
-                    [ style.alignItems.Start]
+                    [ style.alignItems.start]
                     ["alignItems" ==> "start"]
                 test
                     "Align content start"
-                    [ style.alignContent.Start]
+                    [ style.alignContent.start']
                     ["alignContent" ==> "start"]
                 test
                     "Order value"
@@ -1011,7 +1011,7 @@ module Feliz =
                     ["order" ==> "1"]
                 test
                     "Order inherit"
-                    [ style.order.Inherit]
+                    [ style.order.inherit']
                     ["order" ==> "inherit"]
                 test
                     "Flex grow value"
@@ -1019,7 +1019,7 @@ module Feliz =
                     ["flexGrow" ==> "1.5"]
                 test
                     "FlexGrow inherit"
-                    [ style.flexGrow.Inherit]
+                    [ style.flexGrow.inherit']
                     ["flexGrow" ==> "inherit"]
                 test
                     "FlexShrink value"
@@ -1027,15 +1027,15 @@ module Feliz =
                     ["flexShrink" ==> "1.5"]
                 test
                     "FlexShrink inherit"
-                    [ style.flexShrink.Inherit]
+                    [ style.flexShrink.inherit']
                     ["flexShrink" ==> "inherit"]
                 test
                     "Outline offset px"
-                    [ style.outlineOffset.Value <| px 3 ]
+                    [ style.outlineOffset.value <| px 3 ]
                     [ "outlineOffset" ==> "3px" ]
                 test
                     "Outline initial"
-                    [ style.outline.Initial ]
+                    [ style.outline.initial ]
                     [ "outline" ==> "initial" ]
                 test
                     "Outline width px"
@@ -1043,15 +1043,15 @@ module Feliz =
                     [ "outlineWidth" ==> "40px" ]
                 test
                     "Outline width thin"
-                    [ style.outlineWidth.Thin ]
+                    [ style.outlineWidth.thin ]
                     [ "outlineWidth" ==> "thin" ]
                 test
                     "Outline style hidden"
-                    [ style.outlineStyle.Hidden ]
+                    [ style.outlineStyle.hidden ]
                     [ "outlineStyle" ==> "hidden" ]
                 test
                     "Outline color hex"
-                    [ style.outlineColor.Hex "f92525"]
+                    [ style.outlineColor.hex "f92525"]
                     ["outlineColor" ==> "#f92525"]
                 testMedia
                     "Media query with min width and min height"
@@ -1107,7 +1107,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.boxShadow.Color(px 10, px 10, Color.blue)
+                                style.boxShadow.color(px 10, px 10, Color.blue)
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px #0000ff" ]
@@ -1116,7 +1116,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.boxShadow.BlurColor(px 10, px 10, em 1.5, Color.red)
+                                style.boxShadow.blurColor(px 10, px 10, em 1.5, Color.red)
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px 1.5em #ff0000" ]
@@ -1125,7 +1125,7 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Color.chocolate)
+                                style.boxShadow.blurSpreadColor(px 1, px 100, vh 1.5, px 1, Color.chocolate)
                             ]
                     ]
                     [ "boxShadow" ==> "1px 100px 1.5vh 1px #d2691e" ]
@@ -1134,11 +1134,11 @@ module Feliz =
                    [
                         style.boxShadows
                             [
-                                style.boxShadow.Color(px 10, px 10, Color.blue)
-                                style.boxShadow.BlurColor(px 10, px 10, px 10, Color.blue)
-                                style.boxShadow.BlurSpreadColor(px 10, px 10, px 10, px 10, Color.blue)
-                                style.boxShadow.Color(px 3, px 3, Color.red)
-                                style.boxShadow.BlurColor(em -1., px 0, em 0.4, Color.olive)
+                                style.boxShadow.color(px 10, px 10, Color.blue)
+                                style.boxShadow.blurColor(px 10, px 10, px 10, Color.blue)
+                                style.boxShadow.blurSpreadColor(px 10, px 10, px 10, px 10, Color.blue)
+                                style.boxShadow.color(px 3, px 3, Color.red)
+                                style.boxShadow.blurColor(em -1., px 0, em 0.4, Color.olive)
                             ]
                     ]
                     ["boxShadow" ==> "10px 10px #0000ff, 10px 10px 10px #0000ff, 10px 10px 10px 10px #0000ff, 3px 3px #ff0000, -1.0em 0px 0.4em #808000"]
@@ -1147,21 +1147,21 @@ module Feliz =
                     [
                         style.boxShadows
                             [
-                                style.inset <| style.boxShadow.BlurSpreadColor(px 1, px 100, vh 1.5, px 1, Color.chocolate)
+                                style.inset <| style.boxShadow.blurSpreadColor(px 1, px 100, vh 1.5, px 1, Color.chocolate)
                             ]
                     ]
                     [ "boxShadow" ==> "inset 1px 100px 1.5vh 1px #d2691e" ]
                 test
                     "ScrollBehavior smooth"
-                    [ style.scrollBehavior.Smooth]
+                    [ style.scrollBehavior.smooth]
                     [ "scrollBehavior" ==> "smooth" ]
                 test
                     "OverscrollBehaviorX contain"
-                    [ style.overscrollBehaviorX.Contain]
+                    [ style.overscrollBehaviorX.contain]
                     [ "overscrollBehaviorX" ==> "contain" ]
                 test
                     "OverscrollBehaviorY contain"
-                    [ style.overscrollBehaviorY.Contain]
+                    [ style.overscrollBehaviorY.contain]
                     [ "overscrollBehaviorY" ==> "contain" ]
                 test
                     "ScrollPadding top px"
@@ -1205,11 +1205,11 @@ module Feliz =
                     [ "scrollMargin" ==> "10px" ]
                 test
                     "Clip path path"
-                    [style.clipPath.Path "M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z"]
+                    [style.clipPath.path "M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z"]
                     ["clipPath" ==> "path('M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z')"]
                 test
                     "Clear initial"
-                    [ style.clear.Initial]
+                    [ style.clear.initial]
                     [ "clear" ==> "initial" ]
                 test
                     "Filter Url"
@@ -1217,11 +1217,11 @@ module Feliz =
                     [ "filter" ==> "url(\"someFilter\")" ]
                 test
                     "Filter drop shadow"
-                    [ style.filters [ style.filter.DropShadow 16 16 20 Color.red (pct 5)  ] ]
+                    [ style.filters [ style.filter.dropShadow 16 16 20 Color.red (pct 5)  ] ]
                     [ "filter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
                 test
                     "Filter unset"
-                    [ style.filter.Unset ]
+                    [ style.filter.unset ]
                     [ "filter" ==> "unset" ]
                 test
                     "BackdropFilter Url"
@@ -1229,31 +1229,31 @@ module Feliz =
                     [ "backdropFilter" ==> "url(\"someFilter\")" ]
                 test
                     "BackdropFilter unset"
-                    [ style.backdropFilter.Unset ]
+                    [ style.backdropFilter.unset ]
                     [ "backdropFilter" ==> "unset" ]
                 test
                    "Mix blend mode HardLight"
-                   [ style.mixBlendMode.HardLight]
+                   [ style.mixBlendMode.hardLight]
                    ["mixBlendMode" ==> "hard-light"]
                 test
                     "AspectRatio"
-                    [ style.aspectRatio.Value(16, 9) ]
+                    [ style.aspectRatio.value(16, 9) ]
                     [ "aspectRatio" ==> "16 / 9" ]
                 test
                     "MaskClip content-box"
-                    [ style.maskClip.ContentBox]
+                    [ style.maskClip.contentBox]
                     [ "maskClip" ==> "content-box" ]
                 test
                     "MaskComposite add"
-                    [ style.maskComposite.Add]
+                    [ style.maskComposite.add]
                     [ "maskComposite" ==> "add" ]
                 test
                     "Mask image source url"
-                    [ style.maskImage.Url "image.jpg" ]
+                    [ style.maskImage.url "image.jpg" ]
                     [ "maskImage" ==> "url(image.jpg)" ]
                 test
                     "MaskOrigin margin-box"
-                    [ style.maskOrigin.MarginBox]
+                    [ style.maskOrigin.marginBox]
                     [ "maskOrigin" ==> "margin-box" ]
                 test
                     "MaskPosition size"
@@ -1261,18 +1261,18 @@ module Feliz =
                     [ "maskPosition" ==> "1px 1.0rem" ]
                 test
                     "MaskPosition sizes"
-                    [ style.maskPosition.Value([px 1, rem 1.; px 10, px 100])]
+                    [ style.maskPosition.value([px 1, rem 1.; px 10, px 100])]
                     [ "maskPosition" ==> "1px 1.0rem, 10px 100px" ]
                 test
                     "MaskRepeat value"
-                    [ style.maskRepeat.Value(Mask.Repeat)]
+                    [ style.maskRepeat.value(Mask.Repeat)]
                     [ "maskRepeat" ==> "repeat" ]
                 test
                     "MaskRepeat multiple values"
-                    [ style.maskRepeat.Value([Mask.RepeatX, Mask.RepeatY; Mask.NoRepeat, Mask.Round])]
+                    [ style.maskRepeat.value([Mask.RepeatX, Mask.RepeatY; Mask.NoRepeat, Mask.Round])]
                     [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
                 test
                     "MaskRepeat repeatX"
-                    [ style.maskRepeat.RepeatX]
+                    [ style.maskRepeat.repeatX]
                     [ "maskRepeat" ==> "repeat-x" ]
             ]

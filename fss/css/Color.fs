@@ -10,11 +10,11 @@ module Color =
         |> colorAdjustCssValue
 
     type ColorAdjust =
-        static member Value (adjust: FssTypes.ColorAdjust) = adjust |> colorAdjustCssValue'
-        static member Economy = FssTypes.Economy |> colorAdjustCssValue'
-        static member Exact = FssTypes.Exact |> colorAdjustCssValue'
+        static member value (adjust: FssTypes.ColorAdjust) = adjust |> colorAdjustCssValue'
+        static member economy = FssTypes.Economy |> colorAdjustCssValue'
+        static member exact = FssTypes.Exact |> colorAdjustCssValue'
 
-    let ColorAdjust' (adjust: FssTypes.ColorAdjust) = adjust |> ColorAdjust.Value
+    let ColorAdjust' (adjust: FssTypes.ColorAdjust) = adjust |> ColorAdjust.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color
     let private colorCssValue value =
@@ -168,27 +168,27 @@ module Color =
         static member whiteSmoke = FssTypes.Color.whiteSmoke |> colorCssValue'
         static member yellowGreen = FssTypes.Color.yellowGreen |> colorCssValue'
         static member rebeccaPurple = FssTypes.Color.rebeccaPurple |> colorCssValue'
-        static member Rgb r g b =
-              FssTypes.Color.Rgb(r, g, b) |> colorCssValue'
-        static member Rgba r g b a =
-              FssTypes.Color.Rgba(r, g, b, a) |> colorCssValue'
-        static member Hex value =
-              FssTypes.Color.Hex value |> colorCssValue'
-        static member Hsl h s l =
-              FssTypes.Color.Hsl(h, s, l) |> colorCssValue'
-        static member Hsla h s l a =
-              FssTypes.Color.Hsla (h, s, l, a) |> colorCssValue'
-        static member Value (color: FssTypes.ColorType) = color |> colorCssValue'
+        static member rgb r g b =
+              FssTypes.Color.rgb(r, g, b) |> colorCssValue'
+        static member rgba r g b a =
+              FssTypes.Color.rgba(r, g, b, a) |> colorCssValue'
+        static member hex value =
+              FssTypes.Color.hex value |> colorCssValue'
+        static member hsl h s l =
+              FssTypes.Color.hsl(h, s, l) |> colorCssValue'
+        static member hsla h s l a =
+              FssTypes.Color.hsla (h, s, l, a) |> colorCssValue'
+        static member value (color: FssTypes.ColorType) = color |> colorCssValue'
         static member transparent = FssTypes.Color.transparent |> colorCssValue'
         static member currentColor = FssTypes.Color.currentColor |> colorCssValue'
-        static member Revert = colorCssValue "revert"
+        static member revert = colorCssValue "revert"
 
-        static member Inherit = FssTypes.Inherit |> FssTypes.masterTypeHelpers.keywordsToString |> colorCssValue
-        static member Initial = FssTypes.Initial |> FssTypes.masterTypeHelpers.keywordsToString |> colorCssValue
-        static member Unset = FssTypes.Unset |> FssTypes.masterTypeHelpers.keywordsToString |> colorCssValue
+        static member inherit' = FssTypes.Inherit |> FssTypes.masterTypeHelpers.keywordsToString |> colorCssValue
+        static member initial = FssTypes.Initial |> FssTypes.masterTypeHelpers.keywordsToString |> colorCssValue
+        static member unset = FssTypes.Unset |> FssTypes.masterTypeHelpers.keywordsToString |> colorCssValue
 
     /// <summary>Sets the color of text and text decoration. </summary>
     /// <param name="color">The FssTypes.ColorTypeto apply</param>
     /// <returns>Css property for fss.</returns>
-    let Color' (color: FssTypes.ColorType) = Color.Value(color)
+    let Color' (color: FssTypes.ColorType) = Color.value(color)
 

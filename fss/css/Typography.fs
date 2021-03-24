@@ -21,10 +21,10 @@ module Typography =
         |> orphansToString
         |> orphansValue
     type Orphans =
-        static member Value (orphans: FssTypes.IOrphans) = orphans |> orphansValue'
-        static member Inherit = FssTypes.Inherit |> orphansValue'
-        static member Initial = FssTypes.Initial |> orphansValue'
-        static member Unset = FssTypes.Unset |> orphansValue'
+        static member value (orphans: FssTypes.IOrphans) = orphans |> orphansValue'
+        static member inherit' = FssTypes.Inherit |> orphansValue'
+        static member initial = FssTypes.Initial |> orphansValue'
+        static member unset = FssTypes.Unset |> orphansValue'
 
     /// <summary>Specifies minimum number of lines a container must show at bottom.</summary>
     /// <param name="orphans">
@@ -35,7 +35,7 @@ module Typography =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Orphans' (orphans: FssTypes.IOrphans) = orphans |> Orphans.Value
+    let Orphans' (orphans: FssTypes.IOrphans) = orphans |> Orphans.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/widows
     let private widowsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Widows value
@@ -45,10 +45,10 @@ module Typography =
         |> widowsValue
 
     type Widows =
-        static member Value (widows: FssTypes.IWidows) = widows |> widowsValue'
-        static member Inherit = FssTypes.Inherit |> widowsValue'
-        static member Initial = FssTypes.Initial |> widowsValue'
-        static member Unset = FssTypes.Unset |> widowsValue'
+        static member value (widows: FssTypes.IWidows) = widows |> widowsValue'
+        static member inherit' = FssTypes.Inherit |> widowsValue'
+        static member initial = FssTypes.Initial |> widowsValue'
+        static member unset = FssTypes.Unset |> widowsValue'
 
     /// <summary>Specifies minimum number of lines a container must show at top.</summary>
     /// <param name="widows">
@@ -59,4 +59,4 @@ module Typography =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Widows' (widows: FssTypes.IWidows) = widows |> Widows.Value
+    let Widows' (widows: FssTypes.IWidows) = widows |> Widows.value

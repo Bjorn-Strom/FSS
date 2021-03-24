@@ -16,16 +16,16 @@ module Resize =
         |> resizeValue
 
     type Resize =
-        static member Value (resize: FssTypes.IResize) = resize |> resizeValue'
-        static member Both = FssTypes.Resize.Both |> resizeValue'
-        static member Horizontal = FssTypes.Resize.Horizontal |> resizeValue'
-        static member Vertical = FssTypes.Resize.Vertical |> resizeValue'
-        static member Block = FssTypes.Resize.Block |> resizeValue'
-        static member Inline = FssTypes.Resize.Inline |> resizeValue'
-        static member None = FssTypes.None' |> resizeValue'
-        static member Initial = FssTypes.Initial |> resizeValue'
-        static member Inherit = FssTypes.Inherit |> resizeValue'
-        static member Unset = FssTypes.Unset |> resizeValue'
+        static member value (resize: FssTypes.IResize) = resize |> resizeValue'
+        static member both = FssTypes.Resize.Both |> resizeValue'
+        static member horizontal = FssTypes.Resize.Horizontal |> resizeValue'
+        static member vertical = FssTypes.Resize.Vertical |> resizeValue'
+        static member block = FssTypes.Resize.Block |> resizeValue'
+        static member inline' = FssTypes.Resize.Inline |> resizeValue'
+        static member none = FssTypes.None' |> resizeValue'
+        static member initial = FssTypes.Initial |> resizeValue'
+        static member inherit' = FssTypes.Inherit |> resizeValue'
+        static member unset = FssTypes.Unset |> resizeValue'
 
     /// <summary>Specifies how elemnts are resizable.</summary>
     /// <param name="resize">
@@ -37,4 +37,4 @@ module Resize =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Resize' (resize: FssTypes.IResize) = Resize.Value resize
+    let Resize' (resize: FssTypes.IResize) = Resize.value resize

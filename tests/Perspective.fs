@@ -19,58 +19,58 @@ module Perspective =
                     ["perspective" ==> "3.5em"]
                 test
                     "Perspective none"
-                    [ Perspective.None ]
+                    [ Perspective.none ]
                     ["perspective" ==> "none"]
                 test
                     "Perspective inherit"
-                    [ Perspective.Inherit]
+                    [ Perspective.inherit']
                     [ "perspective" ==> "inherit" ]
                 test
                     "Perspective initial"
-                    [ Perspective.Initial]
+                    [ Perspective.initial]
                     ["perspective" ==> "initial" ]
                 test
                     "Perspective unset"
-                    [ Perspective.Unset]
+                    [ Perspective.unset]
                     ["perspective" ==> "unset"]
                 test
                     "Perspective x"
-                    [ PerspectiveOrigin.Value <| pct 100 ]
+                    [ PerspectiveOrigin.value <| pct 100 ]
                     ["perspectiveOrigin" ==> "100%"]
                 test
                     "Perspective x y"
-                    [ PerspectiveOrigin.Value (pct 100, pct 50) ]
+                    [ PerspectiveOrigin.value (pct 100, pct 50) ]
                     ["perspectiveOrigin" ==> "100% 50%"]
                 test
                     "Perspective origin inherit"
-                    [ PerspectiveOrigin.Inherit]
+                    [ PerspectiveOrigin.inherit']
                     [ "perspectiveOrigin" ==> "inherit" ]
                 test
                     "Perspective origin initial"
-                    [ PerspectiveOrigin.Initial]
+                    [ PerspectiveOrigin.initial]
                     ["perspectiveOrigin" ==> "initial" ]
                 test
                     "Perspective origin unset"
-                    [ PerspectiveOrigin.Unset]
+                    [ PerspectiveOrigin.unset]
                     ["perspectiveOrigin" ==> "unset"]
                 test
                     "BackfaceVisibility hidden"
-                    [ BackfaceVisibility.Hidden]
+                    [ BackfaceVisibility.hidden]
                     [ "backfaceVisibility" ==> "hidden" ]
                 test
                     "BackfaceVisibility visible"
-                    [ BackfaceVisibility.Visible]
+                    [ BackfaceVisibility.visible]
                     [ "backfaceVisibility" ==> "visible" ]
                 test
                     "BackfaceVisibility inherit"
-                    [ BackfaceVisibility.Inherit]
+                    [ BackfaceVisibility.inherit']
                     [ "backfaceVisibility" ==> "inherit" ]
                 test
                     "BackfaceVisibility initial"
-                    [ BackfaceVisibility.Initial]
+                    [ BackfaceVisibility.initial]
                     ["backfaceVisibility" ==> "initial" ]
                 test
                     "BackfaceVisibility unset"
-                    [ BackfaceVisibility.Unset]
+                    [ BackfaceVisibility.unset]
                     ["backfaceVisibility" ==> "unset"]
             ]

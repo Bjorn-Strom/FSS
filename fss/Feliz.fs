@@ -77,64 +77,64 @@ module fss =
     let (!>) html propertyList = !> html propertyList
     let (! ) html propertyList = ! html propertyList
 
-    // PseudoClass
-
-    let Active attributeList = Active attributeList
-    let AnyLink attributeList = AnyLink attributeList
-    let Blank attributeList = Blank attributeList
-    let Checked attributeList = Checked attributeList
-    let Current attributeList = Current attributeList
-    let Disabled attributeList = Disabled attributeList
-    let Empty attributeList = Empty attributeList
-    let Enabled attributeList = Enabled attributeList
-    let FirstOfType attributeList = FirstOfType attributeList
-    let Focus attributeList = Focus attributeList
-    let FocusVisible attributeList = FocusVisible attributeList
-    let FocusWithin attributeList = FocusWithin attributeList
-    let Future attributeList = Future attributeList
-    let Hover attributeList = Hover attributeList
-    let Indeterminate attributeList = Indeterminate attributeList
-    let Invalid attributeList = Invalid attributeList
-    let InRange attributeList = InRange attributeList
-    let Lang language attributeList = Lang language attributeList
-    let LastChild attributeList = LastChild attributeList
-    let LastOfType attributeList = LastOfType attributeList
-    let LocalLink attributeList = LocalLink attributeList
-    let Link attributeList = Link attributeList
-    let NthChild n attributeList = NthChild n attributeList
-    let NthLastChild n attributeList = NthLastChild n attributeList
-    let NthLastOfType n attributeList = NthLastOfType n attributeList
-    let NthOfType attributeList = NthOfType attributeList
-    let OnlyChild attributeList = OnlyChild attributeList
-    let OnlyOfType attributeList = OnlyOfType attributeList
-    let Optional attributeList = Optional attributeList
-    let OutOfRange attributeList = OutOfRange attributeList
-    let Past attributeList = Past attributeList
-    let Playing attributeList = Playing attributeList
-    let Paused attributeList = Paused attributeList
-    let PlaceholderShown attributeList = PlaceholderShown attributeList
-    let ReadOnly attributeList = ReadOnly attributeList
-    let ReadWrite attributeList = ReadWrite attributeList
-    let Required attributeList = Required attributeList
-    let Root attributeList = Root attributeList
-    let Scope attributeList = Scope attributeList
-    let Target attributeList = Target attributeList
-    let TargetWithin attributeList = TargetWithin attributeList
-    let Valid attributeList = Valid attributeList
-    let Visited attributeList = Visited attributeList
-    let FirstChild attributeList = FirstChild attributeList
-    let UserInvalid attributeList = UserInvalid attributeList
-    // PseudoElement
-    let After       attributeList = After attributeList
-    let Before      attributeList = Before attributeList
-    let FirstLetter attributeList = FirstLetter attributeList
-    let FirstLine   attributeList = FirstLine attributeList
-    let Selection   attributeList = Selection attributeList
-    let Marker      attributeList = Marker attributeList
-
 
 [<RequireQualifiedAccess>]
 module style =
+     // PseudoClass
+    let active attributeList = Active attributeList
+    let anyLink attributeList = AnyLink attributeList
+    let blank attributeList = Blank attributeList
+    let checked' attributeList = Checked attributeList
+    let current attributeList = Current attributeList
+    let disabled attributeList = Disabled attributeList
+    let empty attributeList = Empty attributeList
+    let enabled attributeList = Enabled attributeList
+    let firstOfType attributeList = FirstOfType attributeList
+    let focus attributeList = Focus attributeList
+    let focusVisible attributeList = FocusVisible attributeList
+    let focusWithin attributeList = FocusWithin attributeList
+    let future attributeList = Future attributeList
+    let hover attributeList = Hover attributeList
+    let indeterminate attributeList = Indeterminate attributeList
+    let invalid attributeList = Invalid attributeList
+    let inRange attributeList = InRange attributeList
+    let lang language attributeList = Lang language attributeList
+    let lastChild attributeList = LastChild attributeList
+    let lastOfType attributeList = LastOfType attributeList
+    let localLink attributeList = LocalLink attributeList
+    let link attributeList = Link attributeList
+    let nthChild n attributeList = NthChild n attributeList
+    let nthLastChild n attributeList = NthLastChild n attributeList
+    let nthLastOfType n attributeList = NthLastOfType n attributeList
+    let nthOfType attributeList = NthOfType attributeList
+    let onlyChild attributeList = OnlyChild attributeList
+    let onlyOfType attributeList = OnlyOfType attributeList
+    let optional attributeList = Optional attributeList
+    let outOfRange attributeList = OutOfRange attributeList
+    let past attributeList = Past attributeList
+    let playing attributeList = Playing attributeList
+    let paused attributeList = Paused attributeList
+    let placeholderShown attributeList = PlaceholderShown attributeList
+    let readOnly attributeList = ReadOnly attributeList
+    let readWrite attributeList = ReadWrite attributeList
+    let required attributeList = Required attributeList
+    let root attributeList = Root attributeList
+    let scope attributeList = Scope attributeList
+    let target attributeList = Target attributeList
+    let targetWithin attributeList = TargetWithin attributeList
+    let valid attributeList = Valid attributeList
+    let visited attributeList = Visited attributeList
+    let firstChild attributeList = FirstChild attributeList
+    let userInvalid attributeList = UserInvalid attributeList
+    // PseudoElement
+    let after       attributeList = After attributeList
+    let before      attributeList = Before attributeList
+    let firstLetter attributeList = FirstLetter attributeList
+    let firstLine   attributeList = FirstLine attributeList
+    let selection   attributeList = Selection attributeList
+    let marker      attributeList = Marker attributeList
+
+
     // Animation
     type animationDelay = AnimationDelay
     let animationDelay' delay = AnimationDelay' delay

@@ -11,31 +11,31 @@ module Position =
             [
                 test
                     "Direction rtl"
-                    [ Direction.Ltr ]
+                    [ Direction.ltr ]
                     ["direction" ==> "ltr"]
                 test
                     "Direction ltr"
-                    [ Direction.Rtl ]
+                    [ Direction.rtl ]
                     ["direction" ==> "rtl"]
                 test
                     "Direction Inherit"
-                    [ Direction.Inherit]
+                    [ Direction.inherit']
                     [ "direction" ==> "inherit" ]
                 test
                     "Direction Initial"
-                    [ Direction.Initial]
+                    [ Direction.initial]
                     [ "direction" ==> "initial" ]
                 test
                     "Direction Unset"
-                    [ Direction.Unset]
+                    [ Direction.unset]
                     [ "direction" ==> "unset" ]
                 test
                     "Box sizing border box "
-                    [BoxSizing.BorderBox]
+                    [BoxSizing.borderBox]
                     ["boxSizing" ==> "border-box"]
                 test
                     "Box sizing content box "
-                    [BoxSizing.ContentBox]
+                    [BoxSizing.contentBox]
                     ["boxSizing" ==> "content-box"]
                 test
                     "Left px"
@@ -51,19 +51,19 @@ module Position =
                     [ "left" ==> "10%" ]
                 test
                     "Left Auto"
-                    [ Left.Auto]
+                    [ Left.auto]
                     [ "left" ==> "auto" ]
                 test
                     "Left Inherit"
-                    [ Left.Inherit]
+                    [ Left.inherit']
                     [ "left" ==> "inherit" ]
                 test
                     "Left Initial"
-                    [ Left.Initial]
+                    [ Left.initial]
                     [ "left" ==> "initial" ]
                 test
                     "Left Unset"
-                    [ Left.Unset]
+                    [ Left.unset]
                     [ "left" ==> "unset" ]
                 test
                     "Right px"
@@ -79,19 +79,19 @@ module Position =
                     [ "right" ==> "10%" ]
                 test
                     "Right Auto"
-                    [ Right.Auto]
+                    [ Right.auto]
                     [ "right" ==> "auto" ]
                 test
                     "Right Inherit"
-                    [ Right.Inherit]
+                    [ Right.inherit']
                     [ "right" ==> "inherit" ]
                 test
                     "Right Initial"
-                    [ Right.Initial]
+                    [ Right.initial]
                     [ "right" ==> "initial" ]
                 test
                     "Right Unset"
-                    [ Right.Unset]
+                    [ Right.unset]
                     [ "right" ==> "unset" ]
                 test
                     "Bottom px"
@@ -107,19 +107,19 @@ module Position =
                     [ "bottom" ==> "10%" ]
                 test
                     "Bottom Auto"
-                    [ Bottom.Auto]
+                    [ Bottom.auto]
                     [ "bottom" ==> "auto" ]
                 test
                     "Bottom Inherit"
-                    [ Bottom.Inherit]
+                    [ Bottom.inherit']
                     [ "bottom" ==> "inherit" ]
                 test
                     "Bottom Initial"
-                    [ Bottom.Initial]
+                    [ Bottom.initial]
                     [ "bottom" ==> "initial" ]
                 test
                     "Bottom Unset"
-                    [ Bottom.Unset]
+                    [ Bottom.unset]
                     [ "bottom" ==> "unset" ]
                 test
                     "Top px"
@@ -135,51 +135,51 @@ module Position =
                     [ "top" ==> "10%" ]
                 test
                     "Top Auto"
-                    [ Top.Auto]
+                    [ Top.auto]
                     [ "top" ==> "auto" ]
                 test
                     "Top Inherit"
-                    [ Top.Inherit]
+                    [ Top.inherit']
                     [ "top" ==> "inherit" ]
                 test
                     "Top Initial"
-                    [ Top.Initial]
+                    [ Top.initial]
                     [ "top" ==> "initial" ]
                 test
                     "Top Unset"
-                    [ Top.Unset]
+                    [ Top.unset]
                     [ "top" ==> "unset" ]
                 test
                     "Vertical align baseline"
-                    [ VerticalAlign.Baseline]
+                    [ VerticalAlign.baseline]
                     ["verticalAlign" ==> "baseline"]
                 test
                     "Vertical align sub"
-                    [ VerticalAlign.Sub]
+                    [ VerticalAlign.sub]
                     ["verticalAlign" ==> "sub"]
                 test
                     "Vertical align super"
-                    [ VerticalAlign.Super]
+                    [ VerticalAlign.super]
                     ["verticalAlign" ==> "super"]
                 test
                     "Vertical align text top"
-                    [ VerticalAlign.TextTop]
+                    [ VerticalAlign.textTop]
                     ["verticalAlign" ==> "text-top"]
                 test
                     "Vertical align text bottom"
-                    [ VerticalAlign.TextBottom]
+                    [ VerticalAlign.textBottom]
                     ["verticalAlign" ==> "text-bottom"]
                 test
                     "Vertical align middle"
-                    [ VerticalAlign.Middle]
+                    [ VerticalAlign.middle]
                     ["verticalAlign" ==> "middle"]
                 test
                     "Vertical align top"
-                    [ VerticalAlign.Top]
+                    [ VerticalAlign.top]
                     ["verticalAlign" ==> "top"]
                 test
                     "Vertical align bottom"
-                    [ VerticalAlign.Bottom]
+                    [ VerticalAlign.bottom]
                     ["verticalAlign" ==> "bottom"]
                 test
                     "Vertical align px"
@@ -191,258 +191,258 @@ module Position =
                     ["verticalAlign" ==> "100%"]
                 test
                     "Vertical align  inherit"
-                    [ VerticalAlign.Inherit ]
+                    [ VerticalAlign.inherit' ]
                     ["verticalAlign" ==> "inherit"]
                 test
                     "Vertical align initial"
-                    [ VerticalAlign.Initial ]
+                    [ VerticalAlign.initial ]
                     ["verticalAlign" ==> "initial"]
                 test
                     "Vertical align unset"
-                    [ VerticalAlign.Unset ]
+                    [ VerticalAlign.unset ]
                     ["verticalAlign" ==> "unset"]
                 test
                     "Position static"
-                    [ Position.Static]
+                    [ Position.static']
                     ["position" ==> "static"]
                 test
                     "Position relative"
-                    [ Position.Relative]
+                    [ Position.relative]
                     ["position" ==> "relative"]
                 test
                     "Position absolute"
-                    [ Position.Absolute]
+                    [ Position.absolute]
                     ["position" ==> "absolute"]
                 test
                     "Position sticky"
-                    [ Position.Sticky]
+                    [ Position.sticky]
                     ["position" ==> "sticky"]
                 test
                     "Position fixed"
-                    [ Position.Fixed]
+                    [ Position.fixed']
                     ["position" ==> "fixed"]
                 test
                     "Float left"
-                    [ Float.Left]
+                    [ Float.left]
                     ["float" ==> "left"]
                 test
                     "Float right"
-                    [ Float.Right]
+                    [ Float.right]
                     ["float" ==> "right"]
                 test
                     "Float inline-start"
-                    [ Float.InlineStart]
+                    [ Float.inlineStart]
                     ["float" ==> "inline-start"]
                 test
                     "Float inline-end"
-                    [ Float.InlineEnd]
+                    [ Float.inlineEnd]
                     ["float" ==> "inline-end"]
                 test
                     "Float none"
-                    [ Float.None]
+                    [ Float.none]
                     ["float" ==> "none"]
                 test
                     "Float inherit"
-                    [ Float.Inherit]
+                    [ Float.inherit']
                     ["float" ==> "inherit"]
                 test
                     "Float initial"
-                    [ Float.Initial]
+                    [ Float.initial]
                     ["float" ==> "initial"]
                 test
                     "Float unset"
-                    [ Float.Unset]
+                    [ Float.unset]
                     ["float" ==> "unset"]
                 test
                     "WritingMode horizontal-tb"
-                    [ WritingMode.HorizontalTb]
+                    [ WritingMode.horizontalTb]
                     ["writingMode" ==> "horizontal-tb"]
                 test
                     "WritingMode vertical-rl"
-                    [ WritingMode.VerticalRl]
+                    [ WritingMode.verticalRl]
                     ["writingMode" ==> "vertical-rl"]
                 test
                     "WritingMode vertical-lr"
-                    [ WritingMode.VerticalLr]
+                    [ WritingMode.verticalLr]
                     ["writingMode" ==> "vertical-lr"]
                 test
                     "WritingMode inherit"
-                    [ WritingMode.Inherit]
+                    [ WritingMode.inherit']
                     ["writingMode" ==> "inherit"]
                 test
                     "WritingMode initial"
-                    [ WritingMode.Initial]
+                    [ WritingMode.initial]
                     ["writingMode" ==> "initial"]
                 test
                     "WritingMode unset"
-                    [ WritingMode.Unset]
+                    [ WritingMode.unset]
                     ["writingMode" ==> "unset"]
                 test
                     "BreakAfter avoid"
-                    [BreakAfter.Avoid]
+                    [BreakAfter.avoid]
                     ["breakAfter" ==> "avoid"]
                 test
                     "BreakAfter always"
-                    [BreakAfter.Always]
+                    [BreakAfter.always]
                     ["breakAfter" ==> "always"]
                 test
                     "BreakAfter all"
-                    [BreakAfter.All]
+                    [BreakAfter.all]
                     ["breakAfter" ==> "all"]
                 test
                     "BreakAfter avoid-page"
-                    [BreakAfter.AvoidPage]
+                    [BreakAfter.avoidPage]
                     ["breakAfter" ==> "avoid-page"]
                 test
                     "BreakAfter page"
-                    [BreakAfter.Page]
+                    [BreakAfter.page]
                     ["breakAfter" ==> "page"]
                 test
                     "BreakAfter left"
-                    [BreakAfter.Left]
+                    [BreakAfter.left]
                     ["breakAfter" ==> "left"]
                 test
                     "BreakAfter right"
-                    [BreakAfter.Right]
+                    [BreakAfter.right]
                     ["breakAfter" ==> "right"]
                 test
                     "BreakAfter recto"
-                    [BreakAfter.Recto]
+                    [BreakAfter.recto]
                     ["breakAfter" ==> "recto"]
                 test
                     "BreakAfter verso"
-                    [BreakAfter.Verso]
+                    [BreakAfter.verso]
                     ["breakAfter" ==> "verso"]
                 test
                     "BreakAfter avoid-column"
-                    [BreakAfter.AvoidColumn]
+                    [BreakAfter.avoidColumn]
                     ["breakAfter" ==> "avoid-column"]
                 test
                     "BreakAfter column"
-                    [BreakAfter.Column]
+                    [BreakAfter.column]
                     ["breakAfter" ==> "column"]
                 test
                     "BreakAfter avoid-region"
-                    [BreakAfter.AvoidRegion]
+                    [BreakAfter.avoidRegion]
                     ["breakAfter" ==> "avoid-region"]
                 test
                     "BreakAfter region"
-                    [BreakAfter.Region]
+                    [BreakAfter.region]
                     ["breakAfter" ==> "region"]
                 test
                     "BreakAfter auto"
-                    [ BreakAfter.Auto]
+                    [ BreakAfter.auto]
                     ["breakAfter" ==> "auto"]
                 test
                     "BreakAfter inherit"
-                    [ BreakAfter.Inherit]
+                    [ BreakAfter.inherit']
                     ["breakAfter" ==> "inherit"]
                 test
                     "BreakAfter initial"
-                    [ BreakAfter.Initial]
+                    [ BreakAfter.initial]
                     ["breakAfter" ==> "initial"]
                 test
                     "BreakAfter unset"
-                    [ BreakAfter.Unset]
+                    [ BreakAfter.unset]
                     ["breakAfter" ==> "unset"]
                 test
                     "BreakBefore avoid"
-                    [BreakBefore.Avoid]
+                    [BreakBefore.avoid]
                     ["breakBefore" ==> "avoid"]
                 test
                     "BreakBefore always"
-                    [BreakBefore.Always]
+                    [BreakBefore.always]
                     ["breakBefore" ==> "always"]
                 test
                     "BreakBefore all"
-                    [BreakBefore.All]
+                    [BreakBefore.all]
                     ["breakBefore" ==> "all"]
                 test
                     "BreakBefore avoid-page"
-                    [BreakBefore.AvoidPage]
+                    [BreakBefore.avoidPage]
                     ["breakBefore" ==> "avoid-page"]
                 test
                     "BreakBefore page"
-                    [BreakBefore.Page]
+                    [BreakBefore.page]
                     ["breakBefore" ==> "page"]
                 test
                     "BreakBefore left"
-                    [BreakBefore.Left]
+                    [BreakBefore.left]
                     ["breakBefore" ==> "left"]
                 test
                     "BreakBefore right"
-                    [BreakBefore.Right]
+                    [BreakBefore.right]
                     ["breakBefore" ==> "right"]
                 test
                     "BreakBefore recto"
-                    [BreakBefore.Recto]
+                    [BreakBefore.recto]
                     ["breakBefore" ==> "recto"]
                 test
                     "BreakBefore verso"
-                    [BreakBefore.Verso]
+                    [BreakBefore.verso]
                     ["breakBefore" ==> "verso"]
                 test
                     "BreakBefore avoid-column"
-                    [BreakBefore.AvoidColumn]
+                    [BreakBefore.avoidColumn]
                     ["breakBefore" ==> "avoid-column"]
                 test
                     "BreakBefore column"
-                    [BreakBefore.Column]
+                    [BreakBefore.column]
                     ["breakBefore" ==> "column"]
                 test
                     "BreakBefore avoid-region"
-                    [BreakBefore.AvoidRegion]
+                    [BreakBefore.avoidRegion]
                     ["breakBefore" ==> "avoid-region"]
                 test
                     "BreakBefore region"
-                    [BreakBefore.Region]
+                    [BreakBefore.region]
                     ["breakBefore" ==> "region"]
                 test
                     "BreakBefore auto"
-                    [ BreakBefore.Auto]
+                    [ BreakBefore.auto]
                     ["breakBefore" ==> "auto"]
                 test
                     "BreakBefore inherit"
-                    [ BreakBefore.Inherit]
+                    [ BreakBefore.inherit']
                     ["breakBefore" ==> "inherit"]
                 test
                     "BreakBefore initial"
-                    [ BreakBefore.Initial]
+                    [ BreakBefore.initial]
                     ["breakBefore" ==> "initial"]
                 test
                     "BreakBefore unset"
-                    [ BreakBefore.Unset]
+                    [ BreakBefore.unset]
                     ["breakBefore" ==> "unset"]
                 test
                     "BreakInside avoid"
-                    [BreakInside.Avoid]
+                    [BreakInside.avoid]
                     ["breakInside" ==> "avoid"]
                 test
                     "BreakInside avoid-page"
-                    [BreakInside.AvoidPage]
+                    [BreakInside.avoidPage]
                     ["breakInside" ==> "avoid-page"]
                 test
                     "BreakInside avoid-column"
-                    [BreakInside.AvoidColumn]
+                    [BreakInside.avoidColumn]
                     ["breakInside" ==> "avoid-column"]
                 test
                     "BreakInside avoid-region"
-                    [BreakInside.AvoidRegion]
+                    [BreakInside.avoidRegion]
                     ["breakInside" ==> "avoid-region"]
                 test
                     "BreakInside auto"
-                    [ BreakInside.Auto]
+                    [ BreakInside.auto]
                     ["breakInside" ==> "auto"]
                 test
                     "BreakInside inherit"
-                    [ BreakInside.Inherit]
+                    [ BreakInside.inherit']
                     ["breakInside" ==> "inherit"]
                 test
                     "BreakInside initial"
-                    [ BreakInside.Initial]
+                    [ BreakInside.initial]
                     ["breakInside" ==> "initial"]
                 test
                     "BreakInside unset"
-                    [ BreakInside.Unset]
+                    [ BreakInside.unset]
                     ["breakInside" ==> "unset"]
             ]

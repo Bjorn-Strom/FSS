@@ -9,7 +9,7 @@ module Counter =
     let sampleCounterStyle =
         counterStyle
             [
-                Counter.System.Alphabetic
+                Counter.System.alphabetic
             ]
 
     let tests =
@@ -17,50 +17,50 @@ module Counter =
             [
                 test
                     "CounterReset reset"
-                    [ CounterReset.Reset sampleCounterStyle]
+                    [ CounterReset.reset sampleCounterStyle]
                     [ "counterReset" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
                 test
                     "CounterReset reset to"
-                    [ CounterReset.ResetTo sampleCounterStyle 5]
+                    [ CounterReset.resetTo sampleCounterStyle 5]
                     [ "counterReset" ==> sprintf "%s 5" (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
                 test
                     "CounterReset none"
-                    [ CounterReset.None]
+                    [ CounterReset.none]
                     [ "counterReset" ==> "none" ]
                 test
                     "CounterReset inherit"
-                    [ CounterReset.Inherit]
+                    [ CounterReset.inherit']
                     [ "counterReset" ==> "inherit" ]
                 test
                     "CounterReset initial"
-                    [ CounterReset.Initial]
+                    [ CounterReset.initial]
                     [ "counterReset" ==> "initial" ]
                 test
                     "CounterReset unset"
-                    [ CounterReset.Unset ]
+                    [ CounterReset.unset ]
                     [ "counterReset" ==> "unset" ]
                 test
                     "CounterIncrement increment"
-                    [ CounterIncrement.Increment sampleCounterStyle]
+                    [ CounterIncrement.increment sampleCounterStyle]
                     [ "counterIncrement" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
                 test
                     "CounterIncrement increment to"
-                    [ CounterIncrement.IncrementTo sampleCounterStyle 5]
+                    [ CounterIncrement.incrementTo sampleCounterStyle 5]
                     [ "counterIncrement" ==> sprintf "%s 5"(FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle)]
                 test
                     "CounterIncrement none"
-                    [ CounterIncrement.None]
+                    [ CounterIncrement.none]
                     [ "counterIncrement" ==> "none" ]
                 test
                     "CounterIncrement inherit"
-                    [ CounterIncrement.Inherit]
+                    [ CounterIncrement.inherit']
                     [ "counterIncrement" ==> "inherit" ]
                 test
                     "CounterIncrement initial"
-                    [ CounterIncrement.Initial]
+                    [ CounterIncrement.initial]
                     [ "counterIncrement" ==> "initial" ]
                 test
                     "CounterIncrement unset"
-                    [ CounterIncrement.Unset ]
+                    [ CounterIncrement.unset ]
                     [ "counterIncrement" ==> "unset" ]
             ]

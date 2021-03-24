@@ -29,16 +29,16 @@ module Table =
         |> captionSideValue
 
     type CaptionSide =
-        static member Value (captionSide: FssTypes.ICaptionSide) = captionSide |> captionSideValue'
-        static member Top = FssTypes.Table.CaptionSide.Top |> captionSideValue'
-        static member Bottom = FssTypes.Table.CaptionSide.Bottom |> captionSideValue'
-        static member Left = FssTypes.Table.CaptionSide.Left |> captionSideValue'
-        static member Right = FssTypes.Table.CaptionSide.Right |> captionSideValue'
-        static member TopOutside = FssTypes.Table.CaptionSide.TopOutside |> captionSideValue'
-        static member BottomOutside = FssTypes.Table.CaptionSide.BottomOutside |> captionSideValue'
-        static member Inherit = FssTypes.Inherit |> captionSideValue'
-        static member Initial = FssTypes.Initial |> captionSideValue'
-        static member Unset = FssTypes.Unset |> captionSideValue'
+        static member value (captionSide: FssTypes.ICaptionSide) = captionSide |> captionSideValue'
+        static member top = FssTypes.Table.CaptionSide.Top |> captionSideValue'
+        static member bottom = FssTypes.Table.CaptionSide.Bottom |> captionSideValue'
+        static member left = FssTypes.Table.CaptionSide.Left |> captionSideValue'
+        static member right = FssTypes.Table.CaptionSide.Right |> captionSideValue'
+        static member topOutside = FssTypes.Table.CaptionSide.TopOutside |> captionSideValue'
+        static member bottomOutside = FssTypes.Table.CaptionSide.BottomOutside |> captionSideValue'
+        static member inherit' = FssTypes.Inherit |> captionSideValue'
+        static member initial = FssTypes.Initial |> captionSideValue'
+        static member unset = FssTypes.Unset |> captionSideValue'
 
     /// <summary>Specifies which side the caption of a table will be.</summary>
     /// <param name="captionSide">
@@ -49,7 +49,7 @@ module Table =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let CaptionSide' captionSide = CaptionSide.Value captionSide
+    let CaptionSide' captionSide = CaptionSide.value captionSide
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
     let private emptyCellsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.EmptyCells value
@@ -58,12 +58,12 @@ module Table =
         |> emptyCellsToString
         |> emptyCellsValue
     type EmptyCells =
-        static member Value (emptyCells: FssTypes.IEmptyCells) = emptyCells |> emptyCellsValue'
-        static member Show = FssTypes.Table.EmptyCells.Show |> emptyCellsValue'
-        static member Hide = FssTypes.Table.EmptyCells.Hide |> emptyCellsValue'
-        static member Inherit = FssTypes.Inherit |> emptyCellsValue'
-        static member Initial = FssTypes.Initial |> emptyCellsValue'
-        static member Unset = FssTypes.Unset |> emptyCellsValue'
+        static member value (emptyCells: FssTypes.IEmptyCells) = emptyCells |> emptyCellsValue'
+        static member show = FssTypes.Table.EmptyCells.Show |> emptyCellsValue'
+        static member hide = FssTypes.Table.EmptyCells.Hide |> emptyCellsValue'
+        static member inherit' = FssTypes.Inherit |> emptyCellsValue'
+        static member initial = FssTypes.Initial |> emptyCellsValue'
+        static member unset = FssTypes.Unset |> emptyCellsValue'
 
     /// <summary>Specifies whether or not emtpy cells should have borders.</summary>
     /// <param name="emptyCells">
@@ -74,7 +74,7 @@ module Table =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let EmptyCells' (emptyCells: FssTypes.IEmptyCells) = emptyCells |> EmptyCells.Value
+    let EmptyCells' (emptyCells: FssTypes.IEmptyCells) = emptyCells |> EmptyCells.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
     let private tableLayoutValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TableLayout value
@@ -84,12 +84,12 @@ module Table =
         |> tableLayoutValue
 
     type TableLayout =
-        static member Value (layout: FssTypes.ITableLayout) = layout |> tableLayoutValue'
-        static member Fixed = FssTypes.Table.Layout.Fixed |> tableLayoutValue'
-        static member Auto = FssTypes.Auto |> tableLayoutValue'
-        static member Inherit = FssTypes.Inherit |> tableLayoutValue'
-        static member Initial = FssTypes.Initial |> tableLayoutValue'
-        static member Unset = FssTypes.Unset |> tableLayoutValue'
+        static member value (layout: FssTypes.ITableLayout) = layout |> tableLayoutValue'
+        static member fixed' = FssTypes.Table.Layout.Fixed |> tableLayoutValue'
+        static member auto = FssTypes.Auto |> tableLayoutValue'
+        static member inherit' = FssTypes.Inherit |> tableLayoutValue'
+        static member initial = FssTypes.Initial |> tableLayoutValue'
+        static member unset = FssTypes.Unset |> tableLayoutValue'
 
     /// <summary>Specifies table layout.</summary>
     /// <param name="layout">
@@ -101,4 +101,4 @@ module Table =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TableLayout' layout = TableLayout.Value layout
+    let TableLayout' layout = TableLayout.value layout

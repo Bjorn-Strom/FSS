@@ -11,14 +11,14 @@ module All =
             [
                 test
                     "All inherit"
-                    [ All.Inherit]
+                    [ All.inherit']
                     [ "all" ==> "inherit" ]
                 test
                     "All initial"
-                    [ All.Initial]
+                    [ All.initial]
                     [ "all" ==> "initial" ]
                 test
                     "All unset"
-                    [ All.Unset ]
+                    [ All.unset ]
                     [ "all" ==> "unset" ]
             ]

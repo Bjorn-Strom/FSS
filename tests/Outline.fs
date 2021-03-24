@@ -11,7 +11,7 @@ module Outline =
             [
                 test
                     "Outline offset px"
-                    [ OutlineOffset.Value <| px 3 ]
+                    [ OutlineOffset.value <| px 3 ]
                     [ "outlineOffset" ==> "3px" ]
                 test
                     "Outline offset em"
@@ -19,27 +19,27 @@ module Outline =
                     [ "outlineOffset" ==> "0.2em" ]
                 test
                     "Outline offset initial"
-                    [ OutlineOffset.Initial ]
+                    [ OutlineOffset.initial ]
                     [ "outlineOffset" ==> "initial" ]
                 test
                     "Outline offset inherit"
-                    [ OutlineOffset.Inherit ]
+                    [ OutlineOffset.inherit' ]
                     [ "outlineOffset" ==> "inherit" ]
                 test
                     "Outline offset unset"
-                    [ OutlineOffset.Unset ]
+                    [ OutlineOffset.unset ]
                     [ "outlineOffset" ==> "unset" ]
                 test
                     "Outline initial"
-                    [ Outline.Initial ]
+                    [ Outline.initial ]
                     [ "outline" ==> "initial" ]
                 test
                     "Outline inherit"
-                    [ Outline.Inherit ]
+                    [ Outline.inherit' ]
                     [ "outline" ==> "inherit" ]
                 test
                     "Outline unset"
-                    [ Outline.Unset ]
+                    [ Outline.unset ]
                     [ "outline" ==> "unset" ]
                 test
                     "Outline width px"
@@ -47,87 +47,87 @@ module Outline =
                     [ "outlineWidth" ==> "40px" ]
                 test
                     "Outline width thin"
-                    [ OutlineWidth.Thin ]
+                    [ OutlineWidth.thin ]
                     [ "outlineWidth" ==> "thin" ]
                 test
                     "Outline width medium"
-                    [ OutlineWidth.Medium ]
+                    [ OutlineWidth.medium ]
                     [ "outlineWidth" ==> "medium" ]
                 test
                     "Outline width thick"
-                    [ OutlineWidth.Thick ]
+                    [ OutlineWidth.thick ]
                     [ "outlineWidth" ==> "thick" ]
                 test
                     "Outline width initial"
-                    [ OutlineWidth.Initial ]
+                    [ OutlineWidth.initial ]
                     [ "outlineWidth" ==> "initial" ]
                 test
                     "Outline width inherit"
-                    [ OutlineWidth.Inherit ]
+                    [ OutlineWidth.inherit' ]
                     [ "outlineWidth" ==> "inherit" ]
                 test
                     "Outline width unset"
-                    [ OutlineWidth.Unset ]
+                    [ OutlineWidth.unset ]
                     [ "outlineWidth" ==> "unset" ]
                 test
                     "Outline style hidden"
-                    [ OutlineStyle.Hidden ]
+                    [ OutlineStyle.hidden ]
                     [ "outlineStyle" ==> "hidden" ]
                 test
                     "Outline style dotted"
-                    [ OutlineStyle.Dotted ]
+                    [ OutlineStyle.dotted ]
                     [ "outlineStyle" ==> "dotted" ]
                 test
                     "Outline style dashed"
-                    [ OutlineStyle.Dashed ]
+                    [ OutlineStyle.dashed ]
                     [ "outlineStyle" ==> "dashed" ]
                 test
                     "Outline style solid"
-                    [ OutlineStyle.Solid ]
+                    [ OutlineStyle.solid ]
                     [ "outlineStyle" ==> "solid" ]
                 test
                     "Outline style double"
-                    [ OutlineStyle.Double ]
+                    [ OutlineStyle.double ]
                     [ "outlineStyle" ==> "double" ]
                 test
                     "Outline style groove"
-                    [ OutlineStyle.Groove ]
+                    [ OutlineStyle.groove ]
                     [ "outlineStyle" ==> "groove" ]
                 test
                     "Outline style ridge"
-                    [ OutlineStyle.Ridge ]
+                    [ OutlineStyle.ridge ]
                     [ "outlineStyle" ==> "ridge" ]
                 test
                     "Outline style inset"
-                    [ OutlineStyle.Inset ]
+                    [ OutlineStyle.inset ]
                     [ "outlineStyle" ==> "inset" ]
                 test
                     "Outline style outset"
-                    [ OutlineStyle.Outset ]
+                    [ OutlineStyle.outset ]
                     [ "outlineStyle" ==> "outset" ]
                 test
                     "Outline style none"
-                    [ OutlineStyle.None ]
+                    [ OutlineStyle.none ]
                     [ "outlineStyle" ==> "none" ]
                 test
                     "Outline style initial"
-                    [ OutlineStyle.Initial ]
+                    [ OutlineStyle.initial ]
                     [ "outlineStyle" ==> "initial" ]
                 test
                     "Outline style inherit"
-                    [ OutlineStyle.Inherit ]
+                    [ OutlineStyle.inherit' ]
                     [ "outlineStyle" ==> "inherit" ]
                 test
                     "Outline style unset"
-                    [ OutlineStyle.Unset ]
+                    [ OutlineStyle.unset ]
                     [ "outlineStyle" ==> "unset" ]
                 test
                     "Outline color hex"
-                    [OutlineColor.Hex "f92525"]
+                    [OutlineColor.hex "f92525"]
                     ["outlineColor" ==> "#f92525"]
                 test
                     "Outline color rgb"
-                    [OutlineColor.Rgb 30 222 121]
+                    [OutlineColor.rgb 30 222 121]
                     ["outlineColor" ==> "rgb(30, 222, 121)"]
                 test
                     "Outline color blue"
@@ -135,15 +135,15 @@ module Outline =
                     ["outlineColor" ==> "#0000ff"]
                 test
                     "Outline color inherit"
-                    [OutlineColor.Inherit]
+                    [OutlineColor.inherit']
                     ["outlineColor" ==> "inherit"]
                 test
                     "Outline color initial"
-                    [OutlineColor.Initial]
+                    [OutlineColor.initial]
                     ["outlineColor" ==> "initial"]
                 test
                     "Outline color unset"
-                    [OutlineColor.Unset ]
+                    [OutlineColor.unset ]
                     ["outlineColor" ==> "unset"]
                 test
                     "Outline Color Value"

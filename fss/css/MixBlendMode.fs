@@ -17,28 +17,28 @@ module MixBlendMode =
         |> mixBlendModeCssValue
 
     type MixBlendMode =
-        static member Value(mixBlendMode: FssTypes.IMixBlendMode) = mixBlendMode |> mixBlendModeCssValue'
+        static member value(mixBlendMode: FssTypes.IMixBlendMode) = mixBlendMode |> mixBlendModeCssValue'
 
-        static member Multiply = FssTypes.MixBlendMode.Multiply |> mixBlendModeCssValue'
-        static member Screen = FssTypes.MixBlendMode.Screen |> mixBlendModeCssValue'
-        static member Overlay = FssTypes.MixBlendMode.Overlay |> mixBlendModeCssValue'
-        static member Darken = FssTypes.MixBlendMode.Darken |> mixBlendModeCssValue'
-        static member Lighten = FssTypes.MixBlendMode.Lighten |> mixBlendModeCssValue'
-        static member ColorDodge = FssTypes.MixBlendMode.ColorDodge |> mixBlendModeCssValue'
-        static member ColorBurn = FssTypes.MixBlendMode.ColorBurn |> mixBlendModeCssValue'
-        static member HardLight = FssTypes.MixBlendMode.HardLight |> mixBlendModeCssValue'
-        static member SoftLight = FssTypes.MixBlendMode.SoftLight |> mixBlendModeCssValue'
-        static member Difference = FssTypes.MixBlendMode.Difference |> mixBlendModeCssValue'
-        static member Exclusion = FssTypes.MixBlendMode.Exclusion |> mixBlendModeCssValue'
-        static member Hue = FssTypes.MixBlendMode.Hue |> mixBlendModeCssValue'
-        static member Saturation = FssTypes.MixBlendMode.Saturation |> mixBlendModeCssValue'
-        static member Color = FssTypes.MixBlendMode.Color |> mixBlendModeCssValue'
-        static member Luminosity = FssTypes.MixBlendMode.Luminosity |> mixBlendModeCssValue'
+        static member multiply = FssTypes.MixBlendMode.Multiply |> mixBlendModeCssValue'
+        static member screen = FssTypes.MixBlendMode.Screen |> mixBlendModeCssValue'
+        static member overlay = FssTypes.MixBlendMode.Overlay |> mixBlendModeCssValue'
+        static member darken = FssTypes.MixBlendMode.Darken |> mixBlendModeCssValue'
+        static member lighten = FssTypes.MixBlendMode.Lighten |> mixBlendModeCssValue'
+        static member colorDodge = FssTypes.MixBlendMode.ColorDodge |> mixBlendModeCssValue'
+        static member colorBurn = FssTypes.MixBlendMode.ColorBurn |> mixBlendModeCssValue'
+        static member hardLight = FssTypes.MixBlendMode.HardLight |> mixBlendModeCssValue'
+        static member softLight = FssTypes.MixBlendMode.SoftLight |> mixBlendModeCssValue'
+        static member difference = FssTypes.MixBlendMode.Difference |> mixBlendModeCssValue'
+        static member exclusion = FssTypes.MixBlendMode.Exclusion |> mixBlendModeCssValue'
+        static member hue = FssTypes.MixBlendMode.Hue |> mixBlendModeCssValue'
+        static member saturation = FssTypes.MixBlendMode.Saturation |> mixBlendModeCssValue'
+        static member color = FssTypes.MixBlendMode.Color |> mixBlendModeCssValue'
+        static member luminosity = FssTypes.MixBlendMode.Luminosity |> mixBlendModeCssValue'
 
-        static member Normal = FssTypes.Normal |> mixBlendModeCssValue'
-        static member Inherit = FssTypes.Inherit |> mixBlendModeCssValue'
-        static member Initial = FssTypes.Initial |> mixBlendModeCssValue'
-        static member Unset = FssTypes.Unset |> mixBlendModeCssValue'
+        static member normal = FssTypes.Normal |> mixBlendModeCssValue'
+        static member inherit' = FssTypes.Inherit |> mixBlendModeCssValue'
+        static member initial = FssTypes.Initial |> mixBlendModeCssValue'
+        static member unset = FssTypes.Unset |> mixBlendModeCssValue'
 
     /// <summary>Specifies how an elements content should blend with its parent.</summary>
     /// <param name="mixBlendMode">
@@ -50,4 +50,4 @@ module MixBlendMode =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MixBlendMode' (mixBlendMode: FssTypes.IMixBlendMode) = mixBlendMode |> MixBlendMode.Value
+    let MixBlendMode' (mixBlendMode: FssTypes.IMixBlendMode) = mixBlendMode |> MixBlendMode.value

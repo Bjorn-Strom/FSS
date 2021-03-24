@@ -2,7 +2,6 @@ namespace Fss
 
 [<AutoOpen>]
 module Background =
-
     let private backgroundClipToString (clip: FssTypes.IBackgroundClip) =
         match clip with
         | :? FssTypes.Background.Clip as b -> Utilities.Helpers.duToKebab b
@@ -69,15 +68,15 @@ module Background =
         |> clipValue
 
     type BackgroundClip =
-        static member Value (clip: FssTypes.IBackgroundClip) = clip |> clipValue'
-        static member BorderBox = FssTypes.Background.Clip.BorderBox |> clipValue'
-        static member PaddingBox = FssTypes.Background.Clip.PaddingBox |> clipValue'
-        static member ContentBox = FssTypes.Background.Clip.ContentBox |> clipValue'
-        static member Text = FssTypes.Background.Clip.Text |> clipValue'
+        static member value (clip: FssTypes.IBackgroundClip) = clip |> clipValue'
+        static member borderBox = FssTypes.Background.Clip.BorderBox |> clipValue'
+        static member paddingBox = FssTypes.Background.Clip.PaddingBox |> clipValue'
+        static member contentBox = FssTypes.Background.Clip.ContentBox |> clipValue'
+        static member text = FssTypes.Background.Clip.Text |> clipValue'
 
-        static member Inherit = FssTypes.Inherit |> clipValue'
-        static member Initial = FssTypes.Initial |> clipValue'
-        static member Unset = FssTypes.Unset |> clipValue'
+        static member inherit' = FssTypes.Inherit |> clipValue'
+        static member initial = FssTypes.Initial |> clipValue'
+        static member unset = FssTypes.Unset |> clipValue'
 
     /// <summary>Specifies how an element's background extends.</summary>
     /// <param name="clip">
@@ -88,7 +87,7 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundClip' (clip: FssTypes.IBackgroundClip) = BackgroundClip.Value(clip)
+    let BackgroundClip' (clip: FssTypes.IBackgroundClip) = BackgroundClip.value(clip)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
     let private originValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundOrigin value
@@ -97,14 +96,14 @@ module Background =
         |> backgroundOriginToString
         |> originValue
     type BackgroundOrigin =
-       static member Value (origin: FssTypes.IBackgroundOrigin) = origin |> originValue'
-       static member BorderBox = FssTypes.Background.Origin.BorderBox |> originValue'
-       static member PaddingBox = FssTypes.Background.Origin.PaddingBox |> originValue'
-       static member ContentBox = FssTypes.Background.Origin.ContentBox |> originValue'
+       static member value (origin: FssTypes.IBackgroundOrigin) = origin |> originValue'
+       static member borderBox = FssTypes.Background.Origin.BorderBox |> originValue'
+       static member paddingBox = FssTypes.Background.Origin.PaddingBox |> originValue'
+       static member contentBox = FssTypes.Background.Origin.ContentBox |> originValue'
 
-       static member Inherit = FssTypes.Inherit |> originValue'
-       static member Initial = FssTypes.Initial |> originValue'
-       static member Unset = FssTypes.Unset |> originValue'
+       static member inherit' = FssTypes.Inherit |> originValue'
+       static member initial = FssTypes.Initial |> originValue'
+       static member unset = FssTypes.Unset |> originValue'
 
     /// <summary>Sets background origin.</summary>
     /// <param name="origin">
@@ -115,7 +114,7 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundOrigin' (origin: FssTypes.IBackgroundOrigin) = BackgroundOrigin.Value(origin)
+    let BackgroundOrigin' (origin: FssTypes.IBackgroundOrigin) = BackgroundOrigin.value(origin)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
     let private repeatValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundRepeat value
@@ -125,20 +124,20 @@ module Background =
         |> repeatValue
 
     type BackgroundRepeat =
-        static member Value (repeat: FssTypes.IBackgroundRepeat) = repeat |> repeatValue'
-        static member Value (v1: FssTypes.IBackgroundRepeat, v2: FssTypes.IBackgroundRepeat) =
+        static member value (repeat: FssTypes.IBackgroundRepeat) = repeat |> repeatValue'
+        static member value (v1: FssTypes.IBackgroundRepeat, v2: FssTypes.IBackgroundRepeat) =
             sprintf "%s %s" (repeatToString v1) (repeatToString v2)
             |> repeatValue
-        static member RepeatX = FssTypes.Background.RepeatX |> repeatValue'
-        static member RepeatY = FssTypes.Background.RepeatY |> repeatValue'
-        static member Repeat = FssTypes.Background.Repeat |> repeatValue'
-        static member Space = FssTypes.Background.Space |> repeatValue'
-        static member Round = FssTypes.Background.Round |> repeatValue'
-        static member NoRepeat = FssTypes.Background.NoRepeat |> repeatValue'
+        static member repeatX = FssTypes.Background.RepeatX |> repeatValue'
+        static member repeatY = FssTypes.Background.RepeatY |> repeatValue'
+        static member repeat = FssTypes.Background.Repeat |> repeatValue'
+        static member space = FssTypes.Background.Space |> repeatValue'
+        static member round = FssTypes.Background.Round |> repeatValue'
+        static member noRepeat = FssTypes.Background.NoRepeat |> repeatValue'
 
-        static member Inherit = FssTypes.Inherit |> repeatValue'
-        static member Initial = FssTypes.Initial |> repeatValue'
-        static member Unset = FssTypes.Unset |> repeatValue'
+        static member inherit' = FssTypes.Inherit |> repeatValue'
+        static member initial = FssTypes.Initial |> repeatValue'
+        static member unset = FssTypes.Unset |> repeatValue'
 
     /// <summary>Specifies how background is repeated.</summary>
     /// <param name="repeat">
@@ -149,7 +148,7 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundRepeat' (repeat: FssTypes.IBackgroundRepeat) = BackgroundRepeat.Value(repeat)
+    let BackgroundRepeat' (repeat: FssTypes.IBackgroundRepeat) = BackgroundRepeat.value(repeat)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
     let private sizeValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundSize value
@@ -158,18 +157,18 @@ module Background =
         |> sizeToString
         |> sizeValue
     type BackgroundSize =
-        static member Value (size: FssTypes.IBackgroundSize) = size |> sizeValue'
-        static member Value (s1: FssTypes.IBackgroundSize, s2: FssTypes.IBackgroundSize) =
+        static member value (size: FssTypes.IBackgroundSize) = size |> sizeValue'
+        static member value (s1: FssTypes.IBackgroundSize, s2: FssTypes.IBackgroundSize) =
             sprintf "%s %s" (sizeToString s1) (sizeToString s2)
                 |> sizeValue
 
-        static member Cover = FssTypes.Background.Size.Cover |> sizeValue'
-        static member Contain = FssTypes.Background.Size.Contain |> sizeValue'
+        static member cover = FssTypes.Background.Size.Cover |> sizeValue'
+        static member contain = FssTypes.Background.Size.Contain |> sizeValue'
 
-        static member Auto = FssTypes.Auto |> sizeValue'
-        static member Inherit = FssTypes.Inherit |> sizeValue'
-        static member Initial = FssTypes.Initial |> sizeValue'
-        static member Unset = FssTypes.Unset |> sizeValue'
+        static member auto = FssTypes.Auto |> sizeValue'
+        static member inherit' = FssTypes.Inherit |> sizeValue'
+        static member initial = FssTypes.Initial |> sizeValue'
+        static member unset = FssTypes.Unset |> sizeValue'
 
     /// <summary>Specifies size of background.</summary>
     /// <param name="size">
@@ -183,7 +182,7 @@ module Background =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundSize' (size: FssTypes.IBackgroundSize) = BackgroundSize.Value(size)
+    let BackgroundSize' (size: FssTypes.IBackgroundSize) = BackgroundSize.value(size)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
     let private attachmentValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundAttachment value
@@ -192,14 +191,14 @@ module Background =
         |> attachmentToString
         |> attachmentValue
     type BackgroundAttachment =
-        static member Value (attachment: FssTypes.IBackgroundAttachment) = attachment |> attachmentValue'
-        static member Scroll = FssTypes.Background.Attachment.Scroll |> attachmentValue'
-        static member Fixed = FssTypes.Background.Attachment.Fixed |> attachmentValue'
-        static member Local = FssTypes.Background.Attachment.Local |> attachmentValue'
+        static member value (attachment: FssTypes.IBackgroundAttachment) = attachment |> attachmentValue'
+        static member scroll = FssTypes.Background.Attachment.Scroll |> attachmentValue'
+        static member fixed' = FssTypes.Background.Attachment.Fixed |> attachmentValue'
+        static member local = FssTypes.Background.Attachment.Local |> attachmentValue'
 
-        static member Inherit = FssTypes.Inherit |> attachmentValue'
-        static member Initial = FssTypes.Initial |> attachmentValue'
-        static member Unset = FssTypes.Unset |> attachmentValue'
+        static member inherit' = FssTypes.Inherit |> attachmentValue'
+        static member initial = FssTypes.Initial |> attachmentValue'
+        static member unset = FssTypes.Unset |> attachmentValue'
 
     /// <summary>Specifies how background is fixed within viewport.</summary>
     /// <param name="attachment">
@@ -210,7 +209,7 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundAttachment' (attachment: FssTypes.IBackgroundAttachment) = BackgroundAttachment.Value(attachment)
+    let BackgroundAttachment' (attachment: FssTypes.IBackgroundAttachment) = BackgroundAttachment.value(attachment)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
     let private backgroundValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundColor value
@@ -219,7 +218,7 @@ module Background =
         |> FssTypes.colorHelpers.colorToString
         |> backgroundValue
     type BackgroundColor =
-        static member Value (color: FssTypes.ColorType) = color |> backgroundValue'
+        static member value (color: FssTypes.ColorType) = color |> backgroundValue'
         static member black = FssTypes.Color.black |> backgroundValue'
         static member silver = FssTypes.Color.silver |> backgroundValue'
         static member gray = FssTypes.Color.gray |> backgroundValue'
@@ -363,11 +362,11 @@ module Background =
         static member whiteSmoke = FssTypes.Color.whiteSmoke |> backgroundValue'
         static member yellowGreen = FssTypes.Color.yellowGreen |> backgroundValue'
         static member rebeccaPurple = FssTypes.Color.rebeccaPurple |> backgroundValue'
-        static member Rgb r g b = FssTypes.Color.Rgb(r, g, b) |> backgroundValue'
-        static member Rgba r g b a = FssTypes.Color.Rgba(r, g, b, a) |> backgroundValue'
-        static member Hex value = FssTypes.Color.Hex value |> backgroundValue'
-        static member Hsl h s l = FssTypes.Color.Hsl(h, s, l) |> backgroundValue'
-        static member Hsla h s l a  = FssTypes.Color.Hsla (h, s, l, a) |> backgroundValue'
+        static member rgb r g b = FssTypes.Color.rgb(r, g, b) |> backgroundValue'
+        static member rgba r g b a = FssTypes.Color.rgba(r, g, b, a) |> backgroundValue'
+        static member hex value = FssTypes.Color.hex value |> backgroundValue'
+        static member hsl h s l = FssTypes.Color.hsl(h, s, l) |> backgroundValue'
+        static member hsla h s l a  = FssTypes.Color.hsla (h, s, l, a) |> backgroundValue'
         static member transparent = FssTypes.Color.transparent |> backgroundValue'
         static member currentColor = FssTypes.Color.currentColor |> backgroundValue'
 
@@ -377,51 +376,51 @@ module Background =
     ///     - <c> FssTypes.ColorType</c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundColor' (color: FssTypes.ColorType) = BackgroundColor.Value(color)
+    let BackgroundColor' (color: FssTypes.ColorType) = BackgroundColor.value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
     let private imageValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundImage value
     type BackgroundImage =
-        static member Value (image: FssTypes.Image.Image) = image |> imageValue
-        static member Url (url: string) = imageValue <| sprintf "url(%s)" url
+        static member value (image: FssTypes.Image.Image) = image |> imageValue
+        static member url (url: string) = imageValue <| sprintf "url(%s)" url
 
-        static member LinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
+        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
             imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member LinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
+        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
             imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member RepeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
+        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
-        static member RepeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
+        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Percent) list) list) =
+        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Percent) list) list) =
             imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Size) list) list) =
+        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Size) list) list) =
             imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
 
-        static member ConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Angle) list) =
+        static member conicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Angle) list) =
             imageValue <| FssTypes.Image.Image.ConicGradient(angle, x, y, gradients)
-        static member RepeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Angle) list) =
+        static member repeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Angle) list) =
             imageValue <| FssTypes.Image.Image.RepeatingConicGradient(angle, x, y, gradients)
-        static member ConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member conicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.ConicGradient(angle, x, y, gradients)
-        static member RepeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingConicGradient(angle, x, y, gradients)
 
     /// <summary>Draws background image on element.</summary>
@@ -430,7 +429,7 @@ module Background =
     ///     - <c> Image </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundImage' (image: FssTypes.Image.Image) = BackgroundImage.Value(image)
+    let BackgroundImage' (image: FssTypes.Image.Image) = BackgroundImage.value(image)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
     let private positionCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundPosition value
@@ -440,23 +439,23 @@ module Background =
         |> positionCssValue
 
     type BackgroundPosition =
-        static member Top = FssTypes.Background.Position.Top |> positionCssValue'
-        static member Bottom = FssTypes.Background.Position.Bottom |> positionCssValue'
-        static member Left = FssTypes.Background.Position.Left |> positionCssValue'
-        static member Right = FssTypes.Background.Position.Right |> positionCssValue'
-        static member Center = FssTypes.Background.Position.Center |> positionCssValue'
+        static member top = FssTypes.Background.Position.Top |> positionCssValue'
+        static member bottom = FssTypes.Background.Position.Bottom |> positionCssValue'
+        static member left = FssTypes.Background.Position.Left |> positionCssValue'
+        static member right = FssTypes.Background.Position.Right |> positionCssValue'
+        static member center = FssTypes.Background.Position.Center |> positionCssValue'
 
-        static member Value (value: FssTypes.IBackgroundPosition) = value |> positionCssValue'
-        static member Values (v1: FssTypes.IBackgroundPosition, v2: FssTypes.IBackgroundPosition) =
+        static member value (value: FssTypes.IBackgroundPosition) = value |> positionCssValue'
+        static member values (v1: FssTypes.IBackgroundPosition, v2: FssTypes.IBackgroundPosition) =
             sprintf "%s %s" (positionToString v1) (positionToString v2) |> positionCssValue
-        static member Values (v1: FssTypes.IBackgroundPosition, v2: FssTypes.IBackgroundPosition, v3: FssTypes.IBackgroundPosition) =
+        static member values (v1: FssTypes.IBackgroundPosition, v2: FssTypes.IBackgroundPosition, v3: FssTypes.IBackgroundPosition) =
             sprintf "%s %s %s" (positionToString v1) (positionToString v2) (positionToString v3) |> positionCssValue
-        static member Values (v1: FssTypes.IBackgroundPosition, v2: FssTypes.IBackgroundPosition, v3: FssTypes.IBackgroundPosition, v4: FssTypes.IBackgroundPosition) =
+        static member values (v1: FssTypes.IBackgroundPosition, v2: FssTypes.IBackgroundPosition, v3: FssTypes.IBackgroundPosition, v4: FssTypes.IBackgroundPosition) =
             sprintf "%s %s %s %s" (positionToString v1) (positionToString v2) (positionToString v3) (positionToString v4) |> positionCssValue
 
-        static member Inherit = FssTypes.Inherit |> positionCssValue'
-        static member Initial = FssTypes.Initial |> positionCssValue'
-        static member Unset = FssTypes.Unset |> positionCssValue'
+        static member inherit' = FssTypes.Inherit |> positionCssValue'
+        static member initial = FssTypes.Initial |> positionCssValue'
+        static member unset = FssTypes.Unset |> positionCssValue'
 
     /// <summary>Specifies the position of a background.</summary>
     /// <param name="position">
@@ -469,7 +468,7 @@ module Background =
     ///     - <c> Units.Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundPosition' (position: FssTypes.IBackgroundPosition) = BackgroundPosition.Value(position)
+    let BackgroundPosition' (position: FssTypes.IBackgroundPosition) = BackgroundPosition.value(position)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
     let private blendModeCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundBlendMode value
@@ -484,29 +483,29 @@ module Background =
         |> blendModeCssValue
 
     type BackgroundBlendMode =
-        static member Value(blendMode: FssTypes.IBackgroundBlendMode) = blendMode |> blendModeCssValue'
-        static member Values(blendModes: FssTypes.Background.BlendMode list) = blendModeValues blendModes
+        static member value(blendMode: FssTypes.IBackgroundBlendMode) = blendMode |> blendModeCssValue'
+        static member values(blendModes: FssTypes.Background.BlendMode list) = blendModeValues blendModes
 
-        static member Multiply = FssTypes.Background.BlendMode.Multiply |> blendModeCssValue'
-        static member Screen = FssTypes.Background.BlendMode.Screen |> blendModeCssValue'
-        static member Overlay = FssTypes.Background.BlendMode.Overlay |> blendModeCssValue'
-        static member Darken = FssTypes.Background.BlendMode.Darken |> blendModeCssValue'
-        static member Lighten = FssTypes.Background.BlendMode.Lighten |> blendModeCssValue'
-        static member ColorDodge = FssTypes.Background.BlendMode.ColorDodge |> blendModeCssValue'
-        static member ColorBurn = FssTypes.Background.BlendMode.ColorBurn |> blendModeCssValue'
-        static member HardLight = FssTypes.Background.BlendMode.HardLight |> blendModeCssValue'
-        static member SoftLight = FssTypes.Background.BlendMode.SoftLight |> blendModeCssValue'
-        static member Difference = FssTypes.Background.BlendMode.Difference |> blendModeCssValue'
-        static member Exclusion = FssTypes.Background.BlendMode.Exclusion |> blendModeCssValue'
-        static member Hue = FssTypes.Background.BlendMode.Hue |> blendModeCssValue'
-        static member Saturation = FssTypes.Background.BlendMode.Saturation |> blendModeCssValue'
-        static member Color = FssTypes.Background.BlendMode.Color |> blendModeCssValue'
-        static member Luminosity = FssTypes.Background.BlendMode.Luminosity |> blendModeCssValue'
+        static member multiply = FssTypes.Background.BlendMode.Multiply |> blendModeCssValue'
+        static member screen = FssTypes.Background.BlendMode.Screen |> blendModeCssValue'
+        static member overlay = FssTypes.Background.BlendMode.Overlay |> blendModeCssValue'
+        static member darken = FssTypes.Background.BlendMode.Darken |> blendModeCssValue'
+        static member lighten = FssTypes.Background.BlendMode.Lighten |> blendModeCssValue'
+        static member colorDodge = FssTypes.Background.BlendMode.ColorDodge |> blendModeCssValue'
+        static member colorBurn = FssTypes.Background.BlendMode.ColorBurn |> blendModeCssValue'
+        static member hardLight = FssTypes.Background.BlendMode.HardLight |> blendModeCssValue'
+        static member softLight = FssTypes.Background.BlendMode.SoftLight |> blendModeCssValue'
+        static member difference = FssTypes.Background.BlendMode.Difference |> blendModeCssValue'
+        static member exclusion = FssTypes.Background.BlendMode.Exclusion |> blendModeCssValue'
+        static member hue = FssTypes.Background.BlendMode.Hue |> blendModeCssValue'
+        static member saturation = FssTypes.Background.BlendMode.Saturation |> blendModeCssValue'
+        static member color = FssTypes.Background.BlendMode.Color |> blendModeCssValue'
+        static member luminosity = FssTypes.Background.BlendMode.Luminosity |> blendModeCssValue'
 
-        static member Normal = FssTypes.Normal |> blendModeCssValue'
-        static member Inherit = FssTypes.Inherit |> blendModeCssValue'
-        static member Initial = FssTypes.Initial |> blendModeCssValue'
-        static member Unset = FssTypes.Unset |> blendModeCssValue'
+        static member normal = FssTypes.Normal |> blendModeCssValue'
+        static member inherit' = FssTypes.Inherit |> blendModeCssValue'
+        static member initial = FssTypes.Initial |> blendModeCssValue'
+        static member unset = FssTypes.Unset |> blendModeCssValue'
 
     /// <summary>Specifies how an elements background image should interact with its background color.</summary>
     /// <param name="backgroundBlendMode">
@@ -518,7 +517,7 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundBlendMode' (backgroundBlendMode: FssTypes.IBackgroundBlendMode) = backgroundBlendMode |> BackgroundBlendMode.Value
+    let BackgroundBlendMode' (backgroundBlendMode: FssTypes.IBackgroundBlendMode) = backgroundBlendMode |> BackgroundBlendMode.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
     let private isolationValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Isolation value
@@ -528,13 +527,13 @@ module Background =
         |> isolationValue
 
     type Isolation =
-        static member Value(isolation: FssTypes.IIsolation) = isolation |> isolationValue'
+        static member value(isolation: FssTypes.IIsolation) = isolation |> isolationValue'
 
-        static member Isolate = FssTypes.Background.Isolate |> isolationValue'
-        static member Auto = FssTypes.Auto |> isolationValue'
-        static member Inherit = FssTypes.Inherit |> isolationValue'
-        static member Initial = FssTypes.Initial |> isolationValue'
-        static member Unset = FssTypes.Unset |> isolationValue'
+        static member isolate = FssTypes.Background.Isolate |> isolationValue'
+        static member auto = FssTypes.Auto |> isolationValue'
+        static member inherit' = FssTypes.Inherit |> isolationValue'
+        static member initial = FssTypes.Initial |> isolationValue'
+        static member unset = FssTypes.Unset |> isolationValue'
 
 
     /// <summary>Specifies how an element is blended with backdrop.</summary>
@@ -547,7 +546,7 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Isolation' (isolation: FssTypes.IIsolation) = isolation |> Isolation.Value
+    let Isolation' (isolation: FssTypes.IIsolation) = isolation |> Isolation.value
 
 [<AutoOpen>]
 module BoxDecorationBreak =
@@ -565,13 +564,13 @@ module BoxDecorationBreak =
         |> boxDecorationBreakValue
 
     type BoxDecorationBreak =
-        static member Value(boxDecorationBreak: FssTypes.IBoxDecorationBreak) = boxDecorationBreak |> boxDecorationBreakValue'
+        static member value(boxDecorationBreak: FssTypes.IBoxDecorationBreak) = boxDecorationBreak |> boxDecorationBreakValue'
 
-        static member Slice = FssTypes.Background.Slice |> boxDecorationBreakValue'
-        static member Clone = FssTypes.Background.Clone |> boxDecorationBreakValue'
-        static member Inherit = FssTypes.Inherit |> boxDecorationBreakValue'
-        static member Initial = FssTypes.Initial |> boxDecorationBreakValue'
-        static member Unset = FssTypes.Unset |> boxDecorationBreakValue'
+        static member slice = FssTypes.Background.Slice |> boxDecorationBreakValue'
+        static member clone = FssTypes.Background.Clone |> boxDecorationBreakValue'
+        static member inherit' = FssTypes.Inherit |> boxDecorationBreakValue'
+        static member initial = FssTypes.Initial |> boxDecorationBreakValue'
+        static member unset = FssTypes.Unset |> boxDecorationBreakValue'
 
 
     /// <summary>Specifies how an element is blended with backdrop.</summary>
@@ -584,6 +583,6 @@ module BoxDecorationBreak =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BoxDecorationBreak' (boxDecorationBreak: FssTypes.IBoxDecorationBreak) = boxDecorationBreak |> BoxDecorationBreak.Value
+    let BoxDecorationBreak' (boxDecorationBreak: FssTypes.IBoxDecorationBreak) = boxDecorationBreak |> BoxDecorationBreak.value
 
 

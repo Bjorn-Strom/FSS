@@ -11,78 +11,78 @@ module Table =
             [
                 test
                     "Caption side top"
-                    [CaptionSide.Top]
+                    [CaptionSide.top]
                     ["captionSide" ==> "top"]
                 test
                     "Caption side bottom"
-                    [CaptionSide.Bottom]
+                    [CaptionSide.bottom]
                     ["captionSide" ==> "bottom"]
                 test
                     "Caption side left"
-                    [CaptionSide.Left]
+                    [CaptionSide.left]
                     ["captionSide" ==> "left"]
                 test
                     "Caption side right"
-                    [CaptionSide.Right]
+                    [CaptionSide.right]
                     ["captionSide" ==> "right"]
                 test
                     "Caption side top-outside"
-                    [CaptionSide.TopOutside]
+                    [CaptionSide.topOutside]
                     ["captionSide" ==> "top-outside"]
                 test
                     "Caption side bottom-outside"
-                    [CaptionSide.BottomOutside]
+                    [CaptionSide.bottomOutside]
                     ["captionSide" ==> "bottom-outside"]
                 test
                     "Caption side inherit"
-                    [CaptionSide.Inherit]
+                    [CaptionSide.inherit']
                     ["captionSide" ==> "inherit"]
                 test
                     "Caption side initial"
-                    [CaptionSide.Initial]
+                    [CaptionSide.initial]
                     ["captionSide" ==> "initial"]
                 test
                     "Caption side unset"
-                    [CaptionSide.Unset]
+                    [CaptionSide.unset]
                     ["captionSide" ==> "unset"]
                 test
                     "Empty Cells show"
-                    [EmptyCells.Show]
+                    [EmptyCells.show]
                     ["emptyCells" ==> "show"]
                 test
                     "Empty Cells hide"
-                    [EmptyCells.Hide]
+                    [EmptyCells.hide]
                     ["emptyCells" ==> "hide"]
                 test
                     "Empty Cells inherit"
-                    [EmptyCells.Inherit]
+                    [EmptyCells.inherit']
                     ["emptyCells" ==> "inherit"]
                 test
                     "Empty Cells initial"
-                    [EmptyCells.Initial]
+                    [EmptyCells.initial]
                     ["emptyCells" ==> "initial"]
                 test
                     "Empty Cells unset"
-                    [EmptyCells.Unset]
+                    [EmptyCells.unset]
                     ["emptyCells" ==> "unset"]
                 test
                     "Table Layout fixed"
-                    [TableLayout.Fixed]
+                    [TableLayout.fixed']
                     ["tableLayout" ==> "fixed"]
                 test
                     "Table Layout auto"
-                    [TableLayout.Auto]
+                    [TableLayout.auto]
                     ["tableLayout" ==> "auto"]
                 test
                     "Table Layout inherit"
-                    [TableLayout.Inherit]
+                    [TableLayout.inherit']
                     ["tableLayout" ==> "inherit"]
                 test
                     "Table Layout initial"
-                    [TableLayout.Initial]
+                    [TableLayout.initial]
                     ["tableLayout" ==> "initial"]
                 test
                     "Table Layout unset"
-                    [TableLayout.Unset]
+                    [TableLayout.unset]
                     ["tableLayout" ==> "unset"]
             ]

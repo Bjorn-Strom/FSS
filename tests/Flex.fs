@@ -11,55 +11,55 @@ module Flex =
             [
                 test
                     "Flex direction row"
-                    [ FlexDirection.Row]
+                    [ FlexDirection.row]
                     ["flexDirection" ==> "row"]
                 test
                     "Flex direction row-reverse"
-                    [ FlexDirection.RowReverse]
+                    [ FlexDirection.rowReverse]
                     ["flexDirection" ==> "row-reverse"]
                 test
                     "Flex direction column"
-                    [ FlexDirection.Column]
+                    [ FlexDirection.column]
                     ["flexDirection" ==> "column"]
                 test
                     "Flex direction column-reverse"
-                    [ FlexDirection.ColumnReverse]
+                    [ FlexDirection.columnReverse]
                     ["flexDirection" ==> "column-reverse"]
                 test
                     "Flex direction inherit"
-                    [ FlexDirection.Inherit]
+                    [ FlexDirection.inherit']
                     ["flexDirection" ==> "inherit"]
                 test
                     "Flex direction initial"
-                    [ FlexDirection.Initial]
+                    [ FlexDirection.initial]
                     ["flexDirection" ==> "initial"]
                 test
                     "Flex direction unset"
-                    [ FlexDirection.Unset]
+                    [ FlexDirection.unset]
                     ["flexDirection" ==> "unset"]
                 test
                     "Flex wrap no-wrap"
-                    [ FlexWrap.NoWrap]
+                    [ FlexWrap.noWrap]
                     ["flexWrap" ==> "no-wrap"]
                 test
                     "Flex wrap wrap"
-                    [ FlexWrap.Wrap]
+                    [ FlexWrap.wrap]
                     ["flexWrap" ==> "wrap"]
                 test
                     "Flex wrap wrap-reverse"
-                    [ FlexWrap.WrapReverse]
+                    [ FlexWrap.wrapReverse]
                     ["flexWrap" ==> "wrap-reverse"]
                 test
                     "Flex wrap inherit"
-                    [ FlexWrap.Inherit]
+                    [ FlexWrap.inherit']
                     ["flexWrap" ==> "inherit"]
                 test
                     "Flex wrap initial"
-                    [ FlexWrap.Initial]
+                    [ FlexWrap.initial]
                     ["flexWrap" ==> "initial"]
                 test
                     "Flex wrap unset"
-                    [ FlexWrap.Unset]
+                    [ FlexWrap.unset]
                     ["flexWrap" ==> "unset"]
                 test
                     "Flex basis em"
@@ -71,363 +71,363 @@ module Flex =
                     ["flexBasis" ==> "100px"]
                 test
                     "Flex basis auto"
-                    [ FlexBasis.Auto]
+                    [ FlexBasis.auto]
                     ["flexBasis" ==> "auto"]
                 test
                     "Flex basis fill"
-                    [ FlexBasis.Fill ]
+                    [ FlexBasis.fill ]
                     ["flexBasis" ==> "fill"]
                 test
                     "Flex basis max-content"
-                    [ FlexBasis.MaxContent]
+                    [ FlexBasis.maxContent]
                     ["flexBasis" ==> "max-content"]
                 test
                     "Flex basis min-content"
-                    [ FlexBasis.MinContent]
+                    [ FlexBasis.minContent]
                     ["flexBasis" ==> "min-content"]
                 test
                     "Flex basis fit-content"
-                    [ FlexBasis.FitContent ]
+                    [ FlexBasis.fitContent ]
                     ["flexBasis" ==> "fit-content"]
                 test
                     "Flex basis content"
-                    [ FlexBasis.Content]
+                    [ FlexBasis.content]
                     ["flexBasis" ==> "content"]
                 test
                     "Justify content start"
-                    [ JustifyContent.Start]
+                    [ JustifyContent.start]
                     ["justifyContent" ==> "start"]
                 test
                     "Justify content end"
-                    [ JustifyContent.End]
+                    [ JustifyContent.end']
                     ["justifyContent" ==> "end"]
                 test
                     "Justify content flex start"
-                    [ JustifyContent.FlexStart]
+                    [ JustifyContent.flexStart]
                     ["justifyContent" ==> "flex-start"]
                 test
                     "Justify content flex end"
-                    [ JustifyContent.FlexEnd]
+                    [ JustifyContent.flexEnd]
                     ["justifyContent" ==> "flex-end"]
                 test
                     "Justify content center"
-                    [ JustifyContent.Center]
+                    [ JustifyContent.center]
                     ["justifyContent" ==> "center"]
                 test
                     "Justify content left"
-                    [ JustifyContent.Left]
+                    [ JustifyContent.left]
                     ["justifyContent" ==> "left"]
                 test
                     "Justify content right"
-                    [ JustifyContent.Right]
+                    [ JustifyContent.right]
                     ["justifyContent" ==> "right"]
                 test
                     "Justify content normal"
-                    [ JustifyContent.Normal]
+                    [ JustifyContent.normal]
                     ["justifyContent" ==> "normal"]
                 test
                     "Justify content baseline"
-                    [ JustifyContent.Baseline]
+                    [ JustifyContent.baseline]
                     ["justifyContent" ==> "baseline"]
                 test
                     "Justify content space between"
-                    [ JustifyContent.SpaceBetween]
+                    [ JustifyContent.spaceBetween]
                     ["justifyContent" ==> "space-between"]
                 test
                     "Justify content space around"
-                    [ JustifyContent.SpaceAround]
+                    [ JustifyContent.spaceAround]
                     ["justifyContent" ==> "space-around"]
                 test
                     "Justify content space evenly"
-                    [ JustifyContent.SpaceEvenly]
+                    [ JustifyContent.spaceEvenly]
                     ["justifyContent" ==> "space-evenly"]
                 test
                     "Justify content right"
-                    [ JustifyContent.Right]
+                    [ JustifyContent.right]
                     ["justifyContent" ==> "right"]
                 test
                     "Justify content safe"
-                    [ JustifyContent.Safe]
+                    [ JustifyContent.safe]
                     ["justifyContent" ==> "safe"]
                 test
                     "Justify content unsafe"
-                    [ JustifyContent.Unsafe]
+                    [ JustifyContent.unsafe]
                     ["justifyContent" ==> "unsafe"]
                 test
                     "Justify content inherit"
-                    [ JustifyContent.Inherit]
+                    [ JustifyContent.inherit']
                     ["justifyContent" ==> "inherit"]
                 test
                     "Justify content initial"
-                    [ JustifyContent.Initial]
+                    [ JustifyContent.initial]
                     ["justifyContent" ==> "initial"]
                 test
                     "Justify content unset"
-                    [ JustifyContent.Unset]
+                    [ JustifyContent.unset]
                     ["justifyContent" ==> "unset"]
                 test
                     "Justify self normal"
-                    [ JustifySelf.Normal ]
+                    [ JustifySelf.normal ]
                     ["justifySelf" ==> "normal"]
                 test
                     "Justify self flex start"
-                    [ JustifySelf.SelfStart]
+                    [ JustifySelf.selfStart]
                     ["justifySelf" ==> "self-start"]
                 test
                     "Justify self flex end"
-                    [ JustifySelf.SelfEnd]
+                    [ JustifySelf.selfEnd]
                     ["justifySelf" ==> "self-end"]
                 test
                     "Justify self flex start"
-                    [ JustifySelf.FlexStart]
+                    [ JustifySelf.flexStart]
                     ["justifySelf" ==> "flex-start"]
                 test
                     "Justify self flex end"
-                    [ JustifySelf.FlexEnd]
+                    [ JustifySelf.flexEnd]
                     ["justifySelf" ==> "flex-end"]
                 test
                     "Justify self center"
-                    [ JustifySelf.Center]
+                    [ JustifySelf.center]
                     ["justifySelf" ==> "center"]
                 test
                     "Justify self baseline"
-                    [ JustifySelf.Baseline]
+                    [ JustifySelf.baseline]
                     ["justifySelf" ==> "baseline"]
                 test
                     "Justify self stretch"
-                    [ JustifySelf.Stretch]
+                    [ JustifySelf.stretch]
                     ["justifySelf" ==> "stretch"]
                 test
                     "Justify self safe"
-                    [ JustifySelf.Safe]
+                    [ JustifySelf.safe]
                     ["justifySelf" ==> "safe"]
                 test
                     "Justify self unsafe"
-                    [ JustifySelf.Unsafe]
+                    [ JustifySelf.unsafe]
                     ["justifySelf" ==> "unsafe"]
                 test
                     "Justify self inherit"
-                    [ JustifySelf.Inherit]
+                    [ JustifySelf.inherit']
                     ["justifySelf" ==> "inherit"]
                 test
                     "Justify self initial"
-                    [ JustifySelf.Initial]
+                    [ JustifySelf.initial]
                     ["justifySelf" ==> "initial"]
                 test
                     "Justify self unset"
-                    [ JustifySelf.Unset]
+                    [ JustifySelf.unset]
                     ["justifySelf" ==> "unset"]
                 test
                     "Justify items start"
-                    [ JustifyItems.Start]
+                    [ JustifyItems.start]
                     ["justifyItems" ==> "start"]
                 test
                     "Justify items end"
-                    [ JustifyItems.End]
+                    [ JustifyItems.end']
                     ["justifyItems" ==> "end"]
                 test
                     "Justify items flex start"
-                    [ JustifyItems.FlexStart]
+                    [ JustifyItems.flexStart]
                     ["justifyItems" ==> "flex-start"]
                 test
                     "Justify items flex end"
-                    [ JustifyItems.FlexEnd]
+                    [ JustifyItems.flexEnd]
                     ["justifyItems" ==> "flex-end"]
                 test
                     "Justify items center"
-                    [ JustifyItems.Center]
+                    [ JustifyItems.center]
                     ["justifyItems" ==> "center"]
                 test
                     "Justify items normal"
-                    [ JustifyItems.Normal]
+                    [ JustifyItems.normal]
                     ["justifyItems" ==> "normal"]
                 test
                     "Justify items baseline"
-                    [ JustifyItems.Baseline]
+                    [ JustifyItems.baseline]
                     ["justifyItems" ==> "baseline"]
                 test
                     "Justify items safe"
-                    [ JustifyItems.Safe]
+                    [ JustifyItems.safe]
                     ["justifyItems" ==> "safe"]
                 test
                     "Justify items unsafe"
-                    [ JustifyItems.Unsafe]
+                    [ JustifyItems.unsafe]
                     ["justifyItems" ==> "unsafe"]
                 test
                     "Justify items inherit"
-                    [ JustifyItems.Inherit]
+                    [ JustifyItems.inherit']
                     ["justifyItems" ==> "inherit"]
                 test
                     "Justify items initial"
-                    [ JustifyItems.Initial]
+                    [ JustifyItems.initial]
                     ["justifyItems" ==> "initial"]
                 test
                     "Justify items unset"
-                    [ JustifyItems.Unset]
+                    [ JustifyItems.unset]
                     ["justifyItems" ==> "unset"]
                 test
                     "Justify items legacy"
-                    [ JustifyItems.Legacy]
+                    [ JustifyItems.legacy]
                     ["justifyItems" ==> "legacy"]
                 test
                     "Align self normal"
-                    [ AlignSelf.Normal]
+                    [ AlignSelf.normal]
                     ["alignSelf" ==> "normal"]
                 test
                     "Align self flex start"
-                    [ AlignSelf.SelfStart]
+                    [ AlignSelf.selfStart]
                     ["alignSelf" ==> "self-start"]
                 test
                     "Align self flex end"
-                    [ AlignSelf.SelfEnd]
+                    [ AlignSelf.selfEnd]
                     ["alignSelf" ==> "self-end"]
                 test
                     "Align self flex start"
-                    [ AlignSelf.FlexStart]
+                    [ AlignSelf.flexStart]
                     ["alignSelf" ==> "flex-start"]
                 test
                     "Align self flex end"
-                    [ AlignSelf.FlexEnd]
+                    [ AlignSelf.flexEnd]
                     ["alignSelf" ==> "flex-end"]
                 test
                     "Align self center"
-                    [ AlignSelf.Center]
+                    [ AlignSelf.center]
                     ["alignSelf" ==> "center"]
                 test
                     "Align self baseline"
-                    [ AlignSelf.Baseline]
+                    [ AlignSelf.baseline]
                     ["alignSelf" ==> "baseline"]
                 test
                     "Align self stretch"
-                    [ AlignSelf.Stretch]
+                    [ AlignSelf.stretch]
                     ["alignSelf" ==> "stretch"]
                 test
                     "Align self safe"
-                    [ AlignSelf.Safe]
+                    [ AlignSelf.safe]
                     ["alignSelf" ==> "safe"]
                 test
                     "Align self unsafe"
-                    [ AlignSelf.Unsafe]
+                    [ AlignSelf.unsafe]
                     ["alignSelf" ==> "unsafe"]
                 test
                     "Align self inherit"
-                    [ AlignSelf.Inherit]
+                    [ AlignSelf.inherit']
                     ["alignSelf" ==> "inherit"]
                 test
                     "Align self initial"
-                    [ AlignSelf.Initial]
+                    [ AlignSelf.initial]
                     ["alignSelf" ==> "initial"]
                 test
                     "Align self unset"
-                    [ AlignSelf.Unset]
+                    [ AlignSelf.unset]
                     ["alignSelf" ==> "unset"]
                 test
                     "Align items start"
-                    [ AlignItems.Start]
+                    [ AlignItems.start]
                     ["alignItems" ==> "start"]
                 test
                     "Align items end"
-                    [ AlignItems.End]
+                    [ AlignItems.end']
                     ["alignItems" ==> "end"]
                 test
                     "Align items flex start"
-                    [ AlignItems.FlexStart]
+                    [ AlignItems.flexStart]
                     ["alignItems" ==> "flex-start"]
                 test
                     "Align items flex end"
-                    [ AlignItems.FlexEnd]
+                    [ AlignItems.flexEnd]
                     ["alignItems" ==> "flex-end"]
                 test
                     "Align items center"
-                    [ AlignItems.Center]
+                    [ AlignItems.center]
                     ["alignItems" ==> "center"]
                 test
                     "Align items normal"
-                    [ AlignItems.Normal]
+                    [ AlignItems.normal]
                     ["alignItems" ==> "normal"]
                 test
                     "Align items baseline"
-                    [ AlignItems.Baseline]
+                    [ AlignItems.baseline]
                     ["alignItems" ==> "baseline"]
                 test
                     "Align items safe"
-                    [ AlignItems.Safe]
+                    [ AlignItems.safe]
                     ["alignItems" ==> "safe"]
                 test
                     "Align items unsafe"
-                    [ AlignItems.Unsafe]
+                    [ AlignItems.unsafe]
                     ["alignItems" ==> "unsafe"]
                 test
                     "Align items inherit"
-                    [ AlignItems.Inherit]
+                    [ AlignItems.inherit']
                     ["alignItems" ==> "inherit"]
                 test
                     "Align items initial"
-                    [ AlignItems.Initial]
+                    [ AlignItems.initial]
                     ["alignItems" ==> "initial"]
                 test
                     "Align items unset"
-                    [ AlignItems.Unset]
+                    [ AlignItems.unset]
                     ["alignItems" ==> "unset"]
                 test
                     "Align content start"
-                    [ AlignContent.Start]
+                    [ AlignContent.start']
                     ["alignContent" ==> "start"]
                 test
                     "Align content end"
-                    [ AlignContent.End]
+                    [ AlignContent.end']
                     ["alignContent" ==> "end"]
                 test
                     "Align content flex start"
-                    [ AlignContent.FlexStart]
+                    [ AlignContent.flexStart]
                     ["alignContent" ==> "flex-start"]
                 test
                     "Align content flex end"
-                    [ AlignContent.FlexEnd]
+                    [ AlignContent.flexEnd]
                     ["alignContent" ==> "flex-end"]
                 test
                     "Align content center"
-                    [ AlignContent.Center]
+                    [ AlignContent.center]
                     ["alignContent" ==> "center"]
                 test
                     "Align content normal"
-                    [ AlignContent.Normal]
+                    [ AlignContent.normal]
                     ["alignContent" ==> "normal"]
                 test
                     "Align content baseline"
-                    [ AlignContent.Baseline]
+                    [ AlignContent.baseline]
                     ["alignContent" ==> "baseline"]
                 test
                     "Align content space between"
-                    [ AlignContent.SpaceBetween]
+                    [ AlignContent.spaceBetween]
                     ["alignContent" ==> "space-between"]
                 test
                     "Align content space around"
-                    [ AlignContent.SpaceAround]
+                    [ AlignContent.spaceAround]
                     ["alignContent" ==> "space-around"]
                 test
                     "Align content space evenly"
-                    [ AlignContent.SpaceEvenly]
+                    [ AlignContent.spaceEvenly]
                     ["alignContent" ==> "space-evenly"]
                 test
                     "Align content safe"
-                    [ AlignContent.Safe]
+                    [ AlignContent.safe]
                     ["alignContent" ==> "safe"]
                 test
                     "Align content unsafe"
-                    [ AlignContent.Unsafe]
+                    [ AlignContent.unsafe]
                     ["alignContent" ==> "unsafe"]
                 test
                     "Align content inherit"
-                    [ AlignContent.Inherit]
+                    [ AlignContent.inherit']
                     ["alignContent" ==> "inherit"]
                 test
                     "Align content initial"
-                    [ AlignContent.Initial]
+                    [ AlignContent.initial]
                     ["alignContent" ==> "initial"]
                 test
                     "Align content unset"
-                    [ AlignContent.Unset]
+                    [ AlignContent.unset]
                     ["alignContent" ==> "unset"]
                 test
                     "Order value"
@@ -435,15 +435,15 @@ module Flex =
                     ["order" ==> "1"]
                 test
                     "Order inherit"
-                    [ Order.Inherit]
+                    [ Order.inherit']
                     ["order" ==> "inherit"]
                 test
                     "Order initial"
-                    [ Order.Initial]
+                    [ Order.initial]
                     ["order" ==> "initial"]
                 test
                     "Order unset"
-                    [ Order.Unset]
+                    [ Order.unset]
                     ["order" ==> "unset"]
                 test
                     "Flex grow value"
@@ -451,15 +451,15 @@ module Flex =
                     ["flexGrow" ==> "1.5"]
                 test
                     "FlexGrow inherit"
-                    [ FlexGrow.Inherit]
+                    [ FlexGrow.inherit']
                     ["flexGrow" ==> "inherit"]
                 test
                     "FlexGrow initial"
-                    [ FlexGrow.Initial]
+                    [ FlexGrow.initial]
                     ["flexGrow" ==> "initial"]
                 test
                     "FlexGrow unset"
-                    [ FlexGrow.Unset]
+                    [ FlexGrow.unset]
                     ["flexGrow" ==> "unset"]
                 test
                     "FlexShrink value"
@@ -467,14 +467,14 @@ module Flex =
                     ["flexShrink" ==> "1.5"]
                 test
                     "FlexShrink inherit"
-                    [ FlexShrink.Inherit]
+                    [ FlexShrink.inherit']
                     ["flexShrink" ==> "inherit"]
                 test
                     "FlexShrink initial"
-                    [ FlexShrink.Initial]
+                    [ FlexShrink.initial]
                     ["flexShrink" ==> "initial"]
                 test
                     "FlexShrink unset"
-                    [ FlexShrink.Unset]
+                    [ FlexShrink.unset]
                     ["flexShrink" ==> "unset"]
             ]

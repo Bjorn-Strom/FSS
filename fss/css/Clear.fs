@@ -17,11 +17,11 @@ module Clear =
         |> clearValue
 
     type Clear =
-        static member Value (clear: FssTypes.IClear) = clear |> clearValue'
-        static member None = FssTypes.None' |> clearValue'
-        static member Inherit = FssTypes.Inherit |> clearValue'
-        static member Initial = FssTypes.Initial |> clearValue'
-        static member Unset = FssTypes.Unset |> clearValue'
+        static member value (clear: FssTypes.IClear) = clear |> clearValue'
+        static member none = FssTypes.None' |> clearValue'
+        static member inherit' = FssTypes.Inherit |> clearValue'
+        static member initial = FssTypes.Initial |> clearValue'
+        static member unset = FssTypes.Unset |> clearValue'
 
     /// <summary>Specifies how if an element is to be moved downwards by floating elements.</summary>
     /// <param name="clear">
@@ -32,4 +32,4 @@ module Clear =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Clear' (clear: FssTypes.IClear) = clear |> Clear.Value
+    let Clear' (clear: FssTypes.IClear) = clear |> Clear.value

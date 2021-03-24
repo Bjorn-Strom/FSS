@@ -27,7 +27,7 @@ module Media =
                             MarginTop' (px 200)
                             Transforms
                                 [
-                                Transform.Rotate (deg 45.0)
+                                Transform.rotate (deg 45.0)
                                     ]
                             BackgroundColor.indianRed
                             ]
@@ -51,7 +51,7 @@ module Media =
                         MarginTop' (px 200)
                         Transforms
                             [
-                                Transform.Rotate (deg 45.0)
+                                Transform.rotate (deg 45.0)
                             ]
                         BackgroundColor.indianRed
                     ]

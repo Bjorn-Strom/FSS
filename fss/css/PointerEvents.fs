@@ -17,21 +17,21 @@ module PointerEvents =
         |> pointerEventsValue
 
     type PointerEvents =
-        static member Value (pointerEvents: FssTypes.IPointerEvents) = pointerEvents |> pointerEventsValue
+        static member value (pointerEvents: FssTypes.IPointerEvents) = pointerEvents |> pointerEventsValue
 
-        static member VisiblePainted = FssTypes.PointerEvents.VisiblePainted |> pointerEventsValue'
-        static member VisibleFill = FssTypes.PointerEvents.VisibleFill |> pointerEventsValue'
-        static member VisibleStroke = FssTypes.PointerEvents.VisibleStroke |> pointerEventsValue'
-        static member Visible = FssTypes.PointerEvents.Visible |> pointerEventsValue'
-        static member Painted = FssTypes.PointerEvents.Painted |> pointerEventsValue'
-        static member Stroke = FssTypes.PointerEvents.Stroke |> pointerEventsValue'
-        static member All = FssTypes.PointerEvents.All |> pointerEventsValue'
+        static member visiblePainted = FssTypes.PointerEvents.VisiblePainted |> pointerEventsValue'
+        static member visibleFill = FssTypes.PointerEvents.VisibleFill |> pointerEventsValue'
+        static member visibleStroke = FssTypes.PointerEvents.VisibleStroke |> pointerEventsValue'
+        static member visible = FssTypes.PointerEvents.Visible |> pointerEventsValue'
+        static member painted = FssTypes.PointerEvents.Painted |> pointerEventsValue'
+        static member stroke = FssTypes.PointerEvents.Stroke |> pointerEventsValue'
+        static member all = FssTypes.PointerEvents.All |> pointerEventsValue'
 
-        static member Auto = FssTypes.Auto |> pointerEventsValue'
-        static member Inherit = FssTypes.Inherit |> pointerEventsValue'
-        static member Initial = FssTypes.Initial |> pointerEventsValue'
-        static member Unset = FssTypes.Unset |> pointerEventsValue'
-        static member None = FssTypes.None' |> pointerEventsValue'
+        static member auto = FssTypes.Auto |> pointerEventsValue'
+        static member inherit' = FssTypes.Inherit |> pointerEventsValue'
+        static member initial = FssTypes.Initial |> pointerEventsValue'
+        static member unset = FssTypes.Unset |> pointerEventsValue'
+        static member none = FssTypes.None' |> pointerEventsValue'
 
     /// <summary>Specifies when an element can be the target of pointer events.</summary>
     /// <param name="pointerEvents">
@@ -44,4 +44,4 @@ module PointerEvents =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PointerEvents' (pointerEvents: FssTypes.IPointerEvents) = PointerEvents.Value(pointerEvents)
+    let PointerEvents' (pointerEvents: FssTypes.IPointerEvents) = PointerEvents.value(pointerEvents)

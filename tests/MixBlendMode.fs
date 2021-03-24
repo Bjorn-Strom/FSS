@@ -11,78 +11,78 @@ module MixBlendMode =
             [
                 test
                     "Mix blend mode Multiply"
-                    [ MixBlendMode.Multiply]
+                    [ MixBlendMode.multiply]
                     ["mixBlendMode" ==> "multiply"]
                 test
                     "Mix blend mode Screen"
-                    [ MixBlendMode.Screen]
+                    [ MixBlendMode.screen]
                     ["mixBlendMode" ==> "screen"]
                 test
                     "Mix blend mode Overlay"
-                    [ MixBlendMode.Overlay]
+                    [ MixBlendMode.overlay]
                     ["mixBlendMode" ==> "overlay"]
                 test
                     "Mix blend mode Darken"
-                    [ MixBlendMode.Darken]
+                    [ MixBlendMode.darken]
                     ["mixBlendMode" ==> "darken"]
                 test
                     "Mix blend mode Lighten"
-                    [ MixBlendMode.Lighten]
+                    [ MixBlendMode.lighten]
                     ["mixBlendMode" ==> "lighten"]
                 test
                     "Mix blend mode ColorDodge"
-                    [ MixBlendMode.ColorDodge]
+                    [ MixBlendMode.colorDodge]
                     ["mixBlendMode" ==> "color-dodge"]
                 test
                     "Mix blend mode ColorBurn"
-                    [ MixBlendMode.ColorBurn]
+                    [ MixBlendMode.colorBurn]
                     ["mixBlendMode" ==> "color-burn"]
                 test
                     "Mix blend mode HardLight"
-                    [ MixBlendMode.HardLight]
+                    [ MixBlendMode.hardLight]
                     ["mixBlendMode" ==> "hard-light"]
                 test
                     "Mix blend mode SoftLight"
-                    [ MixBlendMode.SoftLight]
+                    [ MixBlendMode.softLight]
                     ["mixBlendMode" ==> "soft-light"]
                 test
                     "Mix blend mode Difference"
-                    [ MixBlendMode.Difference]
+                    [ MixBlendMode.difference]
                     ["mixBlendMode" ==> "difference"]
                 test
                     "Mix blend mode Exclusion"
-                    [ MixBlendMode.Exclusion]
+                    [ MixBlendMode.exclusion]
                     ["mixBlendMode" ==> "exclusion"]
                 test
                     "Mix blend mode Hue"
-                    [ MixBlendMode.Hue]
+                    [ MixBlendMode.hue]
                     ["mixBlendMode" ==> "hue"]
                 test
                     "Mix blend mode Saturation"
-                    [ MixBlendMode.Saturation]
+                    [ MixBlendMode.saturation]
                     ["mixBlendMode" ==> "saturation"]
                 test
                     "Mix blend mode Color"
-                    [ MixBlendMode.Color]
+                    [ MixBlendMode.color]
                     ["mixBlendMode" ==> "color"]
                 test
                     "Mix blend mode Luminosity"
-                    [ MixBlendMode.Luminosity]
+                    [ MixBlendMode.luminosity]
                     ["mixBlendMode" ==> "luminosity"]
                 test
                     "mix blend mode normal"
-                    [ MixBlendMode.Normal ]
+                    [ MixBlendMode.normal ]
                     [ "mixBlendMode" ==> "normal" ]
                 test
                     "mix blend mode inherit"
-                    [ MixBlendMode.Inherit ]
+                    [ MixBlendMode.inherit' ]
                     [ "mixBlendMode" ==> "inherit" ]
                 test
                     "mix blend mode initial"
-                    [ MixBlendMode.Initial ]
+                    [ MixBlendMode.initial ]
                     [ "mixBlendMode" ==> "initial" ]
                 test
                     "mix blend mode unset"
-                    [ MixBlendMode.Unset ]
+                    [ MixBlendMode.unset ]
                     [ "mixBlendMode" ==> "unset" ]
             ]

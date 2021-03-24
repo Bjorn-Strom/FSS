@@ -39,23 +39,23 @@ module Margin =
                     [ "margin" ==> "10.0em" ]
                 test
                     "Margin auto"
-                    [ Margin.Auto]
+                    [ Margin.auto]
                     [ "margin" ==> "auto" ]
                 test
                     "Margin inherit"
-                    [ Margin.Inherit]
+                    [ Margin.inherit']
                     [ "margin" ==> "inherit" ]
                 test
                     "Margin initial"
-                    [ Margin.Initial]
+                    [ Margin.initial]
                     [ "margin" ==> "initial" ]
                 test
                     "Margin unset"
-                    [ Margin.Unset ]
+                    [ Margin.unset ]
                     [ "margin" ==> "unset" ]
                 test
                     "Margins multiple"
-                    [ Margin.Value (px 10, px 20, px 30, px 40) ]
+                    [ Margin.value (px 10, px 20, px 30, px 40) ]
                     [ "margin" ==> "10px 20px 30px 40px" ]
                 test
                     "Margin inline start 5%"
@@ -71,23 +71,23 @@ module Margin =
                     [ "marginInlineStart" ==> "10px" ]
                 test
                     "Margin inline start initial"
-                    [ MarginInlineStart.Initial]
+                    [ MarginInlineStart.initial]
                     [ "marginInlineStart" ==> "initial" ]
                 test
                     "Margin inline start unset"
-                    [ MarginInlineStart.Unset ]
+                    [ MarginInlineStart.unset ]
                     [ "marginInlineStart" ==> "unset" ]
                 test
                     "Margin inline start inherit"
-                    [ MarginInlineStart.Inherit]
+                    [ MarginInlineStart.inherit']
                     [ "marginInlineStart" ==> "inherit" ]
                 test
                     "Margin inline start initial"
-                    [ MarginInlineStart.Initial]
+                    [ MarginInlineStart.initial]
                     [ "marginInlineStart" ==> "initial" ]
                 test
                     "Margin inline start unset"
-                    [ MarginInlineStart.Unset ]
+                    [ MarginInlineStart.unset ]
                     [ "marginInlineStart" ==> "unset" ]
                 test
                     "Margin inline end 5%"
@@ -103,23 +103,23 @@ module Margin =
                     [ "marginInlineEnd" ==> "10px" ]
                 test
                     "Margin inline end initial"
-                    [ MarginInlineEnd.Initial]
+                    [ MarginInlineEnd.initial]
                     [ "marginInlineEnd" ==> "initial" ]
                 test
                     "Margin inline end unset"
-                    [ MarginInlineEnd.Unset ]
+                    [ MarginInlineEnd.unset ]
                     [ "marginInlineEnd" ==> "unset" ]
                 test
                     "Margin inline end inherit"
-                    [ MarginInlineEnd.Inherit]
+                    [ MarginInlineEnd.inherit']
                     [ "marginInlineEnd" ==> "inherit" ]
                 test
                     "Margin inline end initial"
-                    [ MarginInlineEnd.Initial]
+                    [ MarginInlineEnd.initial]
                     [ "marginInlineEnd" ==> "initial" ]
                 test
                     "Margin inline end unset"
-                    [ MarginInlineEnd.Unset ]
+                    [ MarginInlineEnd.unset ]
                     [ "marginInlineEnd" ==> "unset" ]
                 test
                     "Margin block start 5%"
@@ -135,23 +135,23 @@ module Margin =
                     [ "marginBlockStart" ==> "10px" ]
                 test
                     "Margin block start initial"
-                    [ MarginBlockStart.Initial]
+                    [ MarginBlockStart.initial]
                     [ "marginBlockStart" ==> "initial" ]
                 test
                     "Margin block start unset"
-                    [ MarginBlockStart.Unset ]
+                    [ MarginBlockStart.unset ]
                     [ "marginBlockStart" ==> "unset" ]
                 test
                     "Margin block start inherit"
-                    [ MarginBlockStart.Inherit]
+                    [ MarginBlockStart.inherit']
                     [ "marginBlockStart" ==> "inherit" ]
                 test
                     "Margin block start initial"
-                    [ MarginBlockStart.Initial]
+                    [ MarginBlockStart.initial]
                     [ "marginBlockStart" ==> "initial" ]
                 test
                     "Margin block start unset"
-                    [ MarginBlockStart.Unset ]
+                    [ MarginBlockStart.unset ]
                     [ "marginBlockStart" ==> "unset" ]
                 test
                     "Margin block end 5%"
@@ -167,22 +167,22 @@ module Margin =
                     [ "marginBlockEnd" ==> "10px" ]
                 test
                     "Margin block end initial"
-                    [ MarginBlockEnd.Initial]
+                    [ MarginBlockEnd.initial]
                     [ "marginBlockEnd" ==> "initial" ]
                 test
                     "Margin block end unset"
-                    [ MarginBlockEnd.Unset ]
+                    [ MarginBlockEnd.unset ]
                     [ "marginBlockEnd" ==> "unset" ]
                 test
                     "Margin block end inherit"
-                    [ MarginBlockEnd.Inherit]
+                    [ MarginBlockEnd.inherit']
                     [ "marginBlockEnd" ==> "inherit" ]
                 test
                     "Margin block end initial"
-                    [ MarginBlockEnd.Initial]
+                    [ MarginBlockEnd.initial]
                     [ "marginBlockEnd" ==> "initial" ]
                 test
                     "Margin block end unset"
-                    [ MarginBlockEnd.Unset ]
+                    [ MarginBlockEnd.unset ]
                     [ "marginBlockEnd" ==> "unset" ]
             ]

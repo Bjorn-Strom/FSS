@@ -15,7 +15,7 @@ module Caret =
         |> caretColorToString
         |> caretColorValue
     type CaretColor =
-        static member Value (color: FssTypes.ICaretColor) = color |> caretColorValue'
+        static member value (color: FssTypes.ICaretColor) = color |> caretColorValue'
         static member black = FssTypes.Color.black |> caretColorValue'
         static member silver = FssTypes.Color.silver |> caretColorValue'
         static member gray = FssTypes.Color.gray |> caretColorValue'
@@ -159,15 +159,15 @@ module Caret =
         static member whiteSmoke = FssTypes.Color.whiteSmoke |> caretColorValue'
         static member yellowGreen = FssTypes.Color.yellowGreen |> caretColorValue'
         static member rebeccaPurple = FssTypes.Color.rebeccaPurple |> caretColorValue'
-        static member Rgb r g b = FssTypes.Color.Rgb(r, g, b) |> caretColorValue'
-        static member Rgba r g b a = FssTypes.Color.Rgba(r, g, b, a) |> caretColorValue'
-        static member Hex value = FssTypes.Color.Hex value |> caretColorValue'
-        static member Hsl h s l = FssTypes.Color.Hsl(h, s, l) |> caretColorValue'
-        static member Hsla h s l a  = FssTypes.Color.Hsla (h, s, l, a) |> caretColorValue'
+        static member rgb r g b = FssTypes.Color.rgb(r, g, b) |> caretColorValue'
+        static member rgba r g b a = FssTypes.Color.rgba(r, g, b, a) |> caretColorValue'
+        static member hex value = FssTypes.Color.hex value |> caretColorValue'
+        static member hsl h s l = FssTypes.Color.hsl(h, s, l) |> caretColorValue'
+        static member hsla h s l a  = FssTypes.Color.hsla (h, s, l, a) |> caretColorValue'
         static member transparent = FssTypes.Color.transparent |> caretColorValue'
         static member currentColor = FssTypes.Color.currentColor |> caretColorValue'
 
-        static member Auto = FssTypes.Auto |> caretColorValue'
+        static member auto = FssTypes.Auto |> caretColorValue'
 
     /// <summary>Specifies caret color.</summary>
     /// <param name="caretColor">
@@ -176,4 +176,4 @@ module Caret =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let CaretColor' (caretColor: FssTypes.ICaretColor) = CaretColor.Value caretColor
+    let CaretColor' (caretColor: FssTypes.ICaretColor) = CaretColor.value caretColor

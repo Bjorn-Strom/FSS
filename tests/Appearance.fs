@@ -11,274 +11,274 @@ module Appearance =
             [
                 test
                     "Appearance push button"
-                    [Appearance.PushButton]
+                    [Appearance.pushButton]
                     ["appearance" ==> "push-button"]
                 test
                     "Appearance square button"
-                    [Appearance.SquareButton]
+                    [Appearance.squareButton]
                     ["appearance" ==> "square-button"]
                 test
                     "Appearance button"
-                    [Appearance.Button]
+                    [Appearance.button]
                     ["appearance" ==> "button"]
                 test
                     "Appearance button bevel"
-                    [Appearance.ButtonBevel]
+                    [Appearance.buttonBevel]
                     ["appearance" ==> "button-bevel"]
                 test
                     "Appearance list-box"
-                    [Appearance.Listbox]
+                    [Appearance.listbox]
                     ["appearance" ==> "listbox"]
                 test
                     "Appearance list-item"
-                    [Appearance.Listitem]
+                    [Appearance.listitem]
                     ["appearance" ==> "listitem"]
                 test
                     "Appearance menulist"
-                    [Appearance.Menulist]
+                    [Appearance.menulist]
                     ["appearance" ==> "menulist"]
                 test
                     "Appearance menulist-button"
-                    [Appearance.MenulistButton]
+                    [Appearance.menulistButton]
                     ["appearance" ==> "menulist-button"]
                 test
                     "Appearance menulist-text"
-                    [Appearance.MenulistText]
+                    [Appearance.menulistText]
                     ["appearance" ==> "menulist-text"]
                 test
                     "Appearance menulist-textfield"
-                    [Appearance.MenulistTextfield]
+                    [Appearance.menulistTextfield]
                     ["appearance" ==> "menulist-textfield"]
                 test
                     "Appearance menupopup"
-                    [Appearance.Menupopup]
+                    [Appearance.menupopup]
                     ["appearance" ==> "menupopup"]
                 test
                     "Appearance scrollbarbutton-up"
-                    [Appearance.ScrollbarbuttonUp]
+                    [Appearance.scrollbarbuttonUp]
                     ["appearance" ==> "scrollbarbutton-up"]
                 test
                     "Appearance scrollbarbutton down"
-                    [Appearance.ScrollbarbuttonDown]
+                    [Appearance.scrollbarbuttonDown]
                     ["appearance" ==> "scrollbarbutton-down"]
                 test
                     "Appearance scrollbarbutton left"
-                    [Appearance.ScrollbarbuttonLeft]
+                    [Appearance.scrollbarbuttonLeft]
                     ["appearance" ==> "scrollbarbutton-left"]
                 test
                     "Appearance scrollbarbutton"
-                    [Appearance.ScrollbarbuttonRight]
+                    [Appearance.scrollbarbuttonRight]
                     ["appearance" ==> "scrollbarbutton-right"]
                 test
                     "Appearance scrollbartrack-horizontal"
-                    [Appearance.ScrollbartrackHorizontal]
+                    [Appearance.scrollbartrackHorizontal]
                     ["appearance" ==> "scrollbartrack-horizontal"]
                 test
                     "Appearance scrollbartrack-vertical"
-                    [Appearance.ScrollbartrackVertical]
+                    [Appearance.scrollbartrackVertical]
                     ["appearance" ==> "scrollbartrack-vertical"]
                 test
                     "Appearance scrollbarthumb-horizontal"
-                    [Appearance.ScrollbarthumbHorizontal]
+                    [Appearance.scrollbarthumbHorizontal]
                     ["appearance" ==> "scrollbarthumb-horizontal"]
                 test
                     "Appearance scrollbarthumb-vertical"
-                    [Appearance.ScrollbarthumbVertical]
+                    [Appearance.scrollbarthumbVertical]
                     ["appearance" ==> "scrollbarthumb-vertical"]
                 test
                     "Appearance scrollbargripper-horizontal"
-                    [Appearance.ScrollbargripperHorizontal]
+                    [Appearance.scrollbargripperHorizontal]
                     ["appearance" ==> "scrollbargripper-horizontal"]
                 test
                     "Appearance scrollbargripper-vertical"
-                    [Appearance.ScrollbargripperVertical]
+                    [Appearance.scrollbargripperVertical]
                     ["appearance" ==> "scrollbargripper-vertical"]
                 test
                     "Appearance slider-horizontal"
-                    [Appearance.SliderHorizontal]
+                    [Appearance.sliderHorizontal]
                     ["appearance" ==> "slider-horizontal"]
                 test
                     "Appearance slider-vertical"
-                    [Appearance.SliderVertical]
+                    [Appearance.sliderVertical]
                     ["appearance" ==> "slider-vertical"]
                 test
                     "Appearance sliderthumb-horizontal"
-                    [Appearance.SliderthumbHorizontal]
+                    [Appearance.sliderthumbHorizontal]
                     ["appearance" ==> "sliderthumb-horizontal"]
                 test
                     "Appearance sliderthumb-vertical"
-                    [Appearance.SliderthumbVertical]
+                    [Appearance.sliderthumbVertical]
                     ["appearance" ==> "sliderthumb-vertical"]
                 test
                     "Appearance caret"
-                    [Appearance.Caret]
+                    [Appearance.caret]
                     ["appearance" ==> "caret"]
                 test
                     "Appearance searchfield"
-                    [Appearance.Searchfield]
+                    [Appearance.searchfield]
                     ["appearance" ==> "searchfield"]
                 test
                     "Appearance searchfield-decoration"
-                    [Appearance.SearchfieldDecoration]
+                    [Appearance.searchfieldDecoration]
                     ["appearance" ==> "searchfield-decoration"]
                 test
                     "Appearance searchfield-results-decoration"
-                    [Appearance.SearchfieldResultsDecoration]
+                    [Appearance.searchfieldResultsDecoration]
                     ["appearance" ==> "searchfield-results-decoration"]
                 test
                     "Appearance searchfield-results-button"
-                    [Appearance.SearchfieldResultsButton]
+                    [Appearance.searchfieldResultsButton]
                     ["appearance" ==> "searchfield-results-button"]
                 test
                     "Appearance searchfield-cancel-button"
-                    [Appearance.SearchfieldCancelButton]
+                    [Appearance.searchfieldCancelButton]
                     ["appearance" ==> "searchfield-cancel-button"]
                 test
                     "Appearance textfield"
-                    [Appearance.Textfield]
+                    [Appearance.textfield]
                     ["appearance" ==> "textfield"]
                 test
                     "Appearance textarea"
-                    [Appearance.Textarea]
+                    [Appearance.textarea]
                     ["appearance" ==> "textarea"]
                 test
                     "Appearance checkbox"
-                    [Appearance.Checkbox]
+                    [Appearance.checkbox]
                     ["appearance" ==> "checkbox"]
                 test
                     "Appearance checkbox-container"
-                    [Appearance.CheckboxContainer]
+                    [Appearance.checkboxContainer]
                     ["appearance" ==> "checkbox-container"]
                 test
                     "Appearance checkbox-small"
-                    [Appearance.CheckboxSmall]
+                    [Appearance.checkboxSmall]
                     ["appearance" ==> "checkbox-small"]
                 test
                     "Appearance dialog"
-                    [Appearance.Dialog]
+                    [Appearance.dialog]
                     ["appearance" ==> "dialog"]
                 test
                     "Appearance menuitem"
-                    [Appearance.Menuitem]
+                    [Appearance.menuitem]
                     ["appearance" ==> "menuitem"]
                 test
                     "Appearance progressbar"
-                    [Appearance.Progressbar]
+                    [Appearance.progressbar]
                     ["appearance" ==> "progressbar"]
                 test
                     "Appearance radio"
-                    [Appearance.Radio]
+                    [Appearance.radio]
                     ["appearance" ==> "radio"]
                 test
                     "Appearance radio-container"
-                    [Appearance.RadioContainer]
+                    [Appearance.radioContainer]
                     ["appearance" ==> "radio-container"]
                 test
                     "Appearance radio-small"
-                    [Appearance.RadioSmall]
+                    [Appearance.radioSmall]
                     ["appearance" ==> "radio-small"]
                 test
                     "Appearance "
-                    [Appearance.Resizer]
+                    [Appearance.resizer]
                     ["appearance" ==> "resizer"]
                 test
                     "Appearance scrollbar"
-                    [Appearance.Scrollbar]
+                    [Appearance.scrollbar]
                     ["appearance" ==> "scrollbar"]
                 test
                     "Appearance separator"
-                    [Appearance.Separator]
+                    [Appearance.separator]
                     ["appearance" ==> "separator"]
                 test
                     "Appearance statusbar"
-                    [Appearance.Statusbar]
+                    [Appearance.statusbar]
                     ["appearance" ==> "statusbar"]
                 test
                     "Appearance tab"
-                    [Appearance.Tab]
+                    [Appearance.tab]
                     ["appearance" ==> "tab"]
                 test
                     "Appearance tabpanels"
-                    [Appearance.Tabpanels]
+                    [Appearance.tabpanels]
                     ["appearance" ==> "tabpanels"]
                 test
                     "Appearance textfield-multiline"
-                    [Appearance.TextfieldMultiline]
+                    [Appearance.textfieldMultiline]
                     ["appearance" ==> "textfield-multiline"]
                 test
                     "Appearance toolbar"
-                    [Appearance.Toolbar]
+                    [Appearance.toolbar]
                     ["appearance" ==> "toolbar"]
                 test
                     "Appearance toolbarbutton"
-                    [Appearance.Toolbarbutton]
+                    [Appearance.toolbarbutton]
                     ["appearance" ==> "toolbarbutton"]
                 test
                     "Appearance toolbox"
-                    [Appearance.Toolbox]
+                    [Appearance.toolbox]
                     ["appearance" ==> "toolbox"]
                 test
                     "Appearance moz-mac-unified-toolbar"
-                    [Appearance.MozMacUnifiedToolbar]
+                    [Appearance.mozMacUnifiedToolbar]
                     ["appearance" ==> "moz-mac-unified-toolbar"]
                 test
                     "Appearance moz-win-borderless-glass"
-                    [Appearance.MozWinBorderlessGlass]
+                    [Appearance.mozWinBorderlessGlass]
                     ["appearance" ==> "moz-win-borderless-glass"]
                 test
                     "Appearance moz-win-browsertabbar-toolbox"
-                    [Appearance.MozWinBrowsertabbarToolbox]
+                    [Appearance.mozWinBrowsertabbarToolbox]
                     ["appearance" ==> "moz-win-browsertabbar-toolbox"]
                 test
                     "Appearance moz-win-communications-toolbox"
-                    [Appearance.MozWinCommunicationsToolbox]
+                    [Appearance.mozWinCommunicationsToolbox]
                     ["appearance" ==> "moz-win-communications-toolbox"]
                 test
                     "Appearance moz-win-glass"
-                    [Appearance.MozWinGlass]
+                    [Appearance.mozWinGlass]
                     ["appearance" ==> "moz-win-glass"]
                 test
                     "Appearance moz-win-media-toolbox"
-                    [Appearance.MozWinMediaToolbox]
+                    [Appearance.mozWinMediaToolbox]
                     ["appearance" ==> "moz-win-media-toolbox"]
                 test
                     "Appearance tooltip"
-                    [Appearance.Tooltip]
+                    [Appearance.tooltip]
                     ["appearance" ==> "tooltip"]
                 test
                     "Appearance treeheadercell"
-                    [Appearance.Treeheadercell]
+                    [Appearance.treeheadercell]
                     ["appearance" ==> "treeheadercell"]
                 test
                     "Appearance treeheadersortarrow"
-                    [Appearance.Treeheadersortarrow]
+                    [Appearance.treeheadersortarrow]
                     ["appearance" ==> "treeheadersortarrow"]
                 test
                     "Appearance treeitem"
-                    [Appearance.Treeitem]
+                    [Appearance.treeitem]
                     ["appearance" ==> "treeitem"]
                 test
                     "Appearance treetwisty"
-                    [Appearance.Treetwisty]
+                    [Appearance.treetwisty]
                     ["appearance" ==> "treetwisty"]
                 test
                     "Appearance treetwistyopen"
-                    [Appearance.Treetwistyopen]
+                    [Appearance.treetwistyopen]
                     ["appearance" ==> "treetwistyopen"]
                 test
                     "Appearance treeview"
-                    [Appearance.Treeview]
+                    [Appearance.treeview]
                     ["appearance" ==> "treeview"]
                 test
                     "Appearance window"
-                    [Appearance.Window]
+                    [Appearance.window]
                     ["appearance" ==> "window"]
                 test
                     "Apperance none"
-                    [Appearance.None]
+                    [Appearance.none]
                     ["appearance" ==> "none"]
                 test
                     "Apperance auto"
-                    [Appearance.Auto]
+                    [Appearance.auto]
                     ["appearance" ==> "auto"]
             ]

@@ -99,26 +99,26 @@ module Flex =
         |> alignContentValue
 
     type AlignContent =
-        static member Value (alignment: FssTypes.IAlignContent) = alignment |> alignContentValue'
-        static member Start = FssTypes.Flex.AlignContent.Start |> alignContentValue'
-        static member End = FssTypes.Flex.AlignContent.End |> alignContentValue'
-        static member FlexStart = FssTypes.Flex.AlignContent.FlexStart |> alignContentValue'
-        static member FlexEnd = FssTypes.Flex.AlignContent.FlexEnd |> alignContentValue'
-        static member Center = FssTypes.Flex.AlignContent.Center |> alignContentValue'
-        static member Baseline = FssTypes.Flex.AlignContent.Baseline |> alignContentValue'
-        static member FirstBaseline = FssTypes.Flex.AlignContent.FirstBaseline |> alignContentValue'
-        static member LastBaseline = FssTypes.Flex.AlignContent.LastBaseline |> alignContentValue'
-        static member Stretch = FssTypes.Flex.AlignContent.Stretch |> alignContentValue'
-        static member Safe = FssTypes.Flex.AlignContent.Safe |> alignContentValue'
-        static member Unsafe = FssTypes.Flex.AlignContent.Unsafe |> alignContentValue'
-        static member SpaceBetween = FssTypes.Flex.AlignContent.SpaceBetween |> alignContentValue'
-        static member SpaceAround = FssTypes.Flex.AlignContent.SpaceAround |> alignContentValue'
-        static member SpaceEvenly = FssTypes.Flex.AlignContent.SpaceEvenly |> alignContentValue'
+        static member value (alignment: FssTypes.IAlignContent) = alignment |> alignContentValue'
+        static member start' = FssTypes.Flex.AlignContent.Start |> alignContentValue'
+        static member end' = FssTypes.Flex.AlignContent.End |> alignContentValue'
+        static member flexStart = FssTypes.Flex.AlignContent.FlexStart |> alignContentValue'
+        static member flexEnd = FssTypes.Flex.AlignContent.FlexEnd |> alignContentValue'
+        static member center = FssTypes.Flex.AlignContent.Center |> alignContentValue'
+        static member baseline = FssTypes.Flex.AlignContent.Baseline |> alignContentValue'
+        static member firstBaseline = FssTypes.Flex.AlignContent.FirstBaseline |> alignContentValue'
+        static member lastBaseline = FssTypes.Flex.AlignContent.LastBaseline |> alignContentValue'
+        static member stretch = FssTypes.Flex.AlignContent.Stretch |> alignContentValue'
+        static member safe = FssTypes.Flex.AlignContent.Safe |> alignContentValue'
+        static member unsafe = FssTypes.Flex.AlignContent.Unsafe |> alignContentValue'
+        static member spaceBetween = FssTypes.Flex.AlignContent.SpaceBetween |> alignContentValue'
+        static member spaceAround = FssTypes.Flex.AlignContent.SpaceAround |> alignContentValue'
+        static member spaceEvenly = FssTypes.Flex.AlignContent.SpaceEvenly |> alignContentValue'
 
-        static member Normal = FssTypes.Normal |> alignContentValue'
-        static member Inherit = FssTypes.Inherit |> alignContentValue'
-        static member Initial = FssTypes.Initial |> alignContentValue'
-        static member Unset = FssTypes.Unset |> alignContentValue'
+        static member normal = FssTypes.Normal |> alignContentValue'
+        static member inherit' = FssTypes.Inherit |> alignContentValue'
+        static member initial = FssTypes.Initial |> alignContentValue'
+        static member unset = FssTypes.Unset |> alignContentValue'
 
     /// <summary>Aligns elements vertically in flex.</summary>
     /// <param name="align">
@@ -130,7 +130,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AlignContent' (align: FssTypes.IAlignContent) = AlignContent.Value(align)
+    let AlignContent' (align: FssTypes.IAlignContent) = AlignContent.value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
     let private alignItemsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AlignItems value
@@ -140,25 +140,25 @@ module Flex =
         |> alignItemsValue
 
     type AlignItems =
-        static member Value (alignment: FssTypes.IAlignItems) = alignment |> alignItemsValue'
-        static member Start = FssTypes.Flex.AlignItems.Start |> alignItemsValue'
-        static member End = FssTypes.Flex.AlignItems.End |> alignItemsValue'
-        static member FlexStart = FssTypes.Flex.AlignItems.FlexStart |> alignItemsValue'
-        static member FlexEnd = FssTypes.Flex.AlignItems.FlexEnd |> alignItemsValue'
-        static member Center = FssTypes.Flex.AlignItems.Center |> alignItemsValue'
-        static member Baseline = FssTypes.Flex.AlignItems.Baseline |> alignItemsValue'
-        static member FirstBaseline = FssTypes.Flex.AlignItems.FirstBaseline |> alignItemsValue'
-        static member LastBaseline = FssTypes.Flex.AlignItems.LastBaseline |> alignItemsValue'
-        static member Stretch = FssTypes.Flex.AlignItems.Stretch |> alignItemsValue'
-        static member Safe = FssTypes.Flex.AlignItems.Safe |> alignItemsValue'
-        static member Unsafe = FssTypes.Flex.AlignItems.Unsafe |> alignItemsValue'
-        static member SelfStart = FssTypes.Flex.AlignItems.SelfStart |> alignItemsValue'
-        static member SelfEnd = FssTypes.Flex.AlignItems.SelfEnd |> alignItemsValue'
+        static member value (alignment: FssTypes.IAlignItems) = alignment |> alignItemsValue'
+        static member start = FssTypes.Flex.AlignItems.Start |> alignItemsValue'
+        static member end' = FssTypes.Flex.AlignItems.End |> alignItemsValue'
+        static member flexStart = FssTypes.Flex.AlignItems.FlexStart |> alignItemsValue'
+        static member flexEnd = FssTypes.Flex.AlignItems.FlexEnd |> alignItemsValue'
+        static member center = FssTypes.Flex.AlignItems.Center |> alignItemsValue'
+        static member baseline = FssTypes.Flex.AlignItems.Baseline |> alignItemsValue'
+        static member firstBaseline = FssTypes.Flex.AlignItems.FirstBaseline |> alignItemsValue'
+        static member lastBaseline = FssTypes.Flex.AlignItems.LastBaseline |> alignItemsValue'
+        static member stretch = FssTypes.Flex.AlignItems.Stretch |> alignItemsValue'
+        static member safe = FssTypes.Flex.AlignItems.Safe |> alignItemsValue'
+        static member unsafe = FssTypes.Flex.AlignItems.Unsafe |> alignItemsValue'
+        static member selfStart = FssTypes.Flex.AlignItems.SelfStart |> alignItemsValue'
+        static member selfEnd = FssTypes.Flex.AlignItems.SelfEnd |> alignItemsValue'
 
-        static member Normal = FssTypes.Normal |> alignItemsValue'
-        static member Inherit = FssTypes.Inherit |> alignItemsValue'
-        static member Initial = FssTypes.Initial |> alignItemsValue'
-        static member Unset = FssTypes.Unset |> alignItemsValue'
+        static member normal = FssTypes.Normal |> alignItemsValue'
+        static member inherit' = FssTypes.Inherit |> alignItemsValue'
+        static member initial = FssTypes.Initial |> alignItemsValue'
+        static member unset = FssTypes.Unset |> alignItemsValue'
 
     /// <summary>Aligns elements along cross axis along the main axis in flex.</summary>
     /// <param name="align">
@@ -170,7 +170,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AlignItems' (align: FssTypes.IAlignItems) = AlignItems.Value(align)
+    let AlignItems' (align: FssTypes.IAlignItems) = AlignItems.value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
     let private alignSelfValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AlignSelf value
@@ -180,25 +180,25 @@ module Flex =
         |> alignSelfValue
 
     type AlignSelf =
-        static member Value (alignment: FssTypes.IAlignSelf) = alignment |> alignSelfValue'
-        static member Start = FssTypes.Flex.AlignSelf.Start |> alignSelfValue'
-        static member End = FssTypes.Flex.AlignSelf.End |> alignSelfValue'
-        static member FlexStart = FssTypes.Flex.AlignSelf.FlexStart |> alignSelfValue'
-        static member FlexEnd = FssTypes.Flex.AlignSelf.FlexEnd |> alignSelfValue'
-        static member Center = FssTypes.Flex.AlignSelf.Center |> alignSelfValue'
-        static member Baseline = FssTypes.Flex.AlignSelf.Baseline |> alignSelfValue'
-        static member FirstBaseline = FssTypes.Flex.AlignSelf.FirstBaseline |> alignSelfValue'
-        static member LastBaseline = FssTypes.Flex.AlignSelf.LastBaseline |> alignSelfValue'
-        static member Stretch = FssTypes.Flex.AlignSelf.Stretch |> alignSelfValue'
-        static member Safe = FssTypes.Flex.AlignSelf.Safe |> alignSelfValue'
-        static member Unsafe = FssTypes.Flex.AlignSelf.Unsafe |> alignSelfValue'
-        static member SelfStart = FssTypes.Flex.AlignSelf.SelfStart |> alignSelfValue'
-        static member SelfEnd = FssTypes.Flex.AlignSelf.SelfEnd |> alignSelfValue'
+        static member value (alignment: FssTypes.IAlignSelf) = alignment |> alignSelfValue'
+        static member start = FssTypes.Flex.AlignSelf.Start |> alignSelfValue'
+        static member end' = FssTypes.Flex.AlignSelf.End |> alignSelfValue'
+        static member flexStart = FssTypes.Flex.AlignSelf.FlexStart |> alignSelfValue'
+        static member flexEnd = FssTypes.Flex.AlignSelf.FlexEnd |> alignSelfValue'
+        static member center = FssTypes.Flex.AlignSelf.Center |> alignSelfValue'
+        static member baseline = FssTypes.Flex.AlignSelf.Baseline |> alignSelfValue'
+        static member firstBaseline = FssTypes.Flex.AlignSelf.FirstBaseline |> alignSelfValue'
+        static member lastBaseline = FssTypes.Flex.AlignSelf.LastBaseline |> alignSelfValue'
+        static member stretch = FssTypes.Flex.AlignSelf.Stretch |> alignSelfValue'
+        static member safe = FssTypes.Flex.AlignSelf.Safe |> alignSelfValue'
+        static member unsafe = FssTypes.Flex.AlignSelf.Unsafe |> alignSelfValue'
+        static member selfStart = FssTypes.Flex.AlignSelf.SelfStart |> alignSelfValue'
+        static member selfEnd = FssTypes.Flex.AlignSelf.SelfEnd |> alignSelfValue'
 
-        static member Normal = FssTypes.Normal |> alignSelfValue'
-        static member Inherit = FssTypes.Inherit |> alignSelfValue'
-        static member Initial = FssTypes.Initial |> alignSelfValue'
-        static member Unset = FssTypes.Unset |> alignSelfValue'
+        static member normal = FssTypes.Normal |> alignSelfValue'
+        static member inherit' = FssTypes.Inherit |> alignSelfValue'
+        static member initial = FssTypes.Initial |> alignSelfValue'
+        static member unset = FssTypes.Unset |> alignSelfValue'
 
     /// <summary>Overrides an elements <c>align-items</c> value-.</summary>
     /// <param name="align">
@@ -210,7 +210,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AlignSelf' (align: FssTypes.IAlignSelf) = AlignSelf.Value(align)
+    let AlignSelf' (align: FssTypes.IAlignSelf) = AlignSelf.value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
     let private justifyContentValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifyContent value
@@ -220,28 +220,28 @@ module Flex =
         |> justifyContentValue
 
     type JustifyContent =
-        static member Value (justification: FssTypes.IJustifyContent) = justification |> justifyContentValue
-        static member Start = FssTypes.Flex.JustifyContent.Start |> justifyContentValue'
-        static member End = FssTypes.Flex.JustifyContent.End |> justifyContentValue'
-        static member FlexStart = FssTypes.Flex.JustifyContent.FlexStart |> justifyContentValue'
-        static member FlexEnd = FssTypes.Flex.JustifyContent.FlexEnd |> justifyContentValue'
-        static member Center = FssTypes.Flex.JustifyContent.Center |> justifyContentValue'
-        static member Baseline = FssTypes.Flex.JustifyContent.Baseline |> justifyContentValue'
-        static member FirstBaseline = FssTypes.Flex.JustifyContent.FirstBaseline |> justifyContentValue'
-        static member LastBaseline = FssTypes.Flex.JustifyContent.LastBaseline |> justifyContentValue'
-        static member Stretch = FssTypes.Flex.JustifyContent.Stretch |> justifyContentValue'
-        static member Safe = FssTypes.Flex.JustifyContent.Safe |> justifyContentValue'
-        static member Unsafe = FssTypes.Flex.JustifyContent.Unsafe |> justifyContentValue'
-        static member Left = FssTypes.Flex.JustifyContent.Left |> justifyContentValue'
-        static member Right = FssTypes.Flex.JustifyContent.Right |> justifyContentValue'
-        static member SpaceBetween = FssTypes.Flex.JustifyContent.SpaceBetween |> justifyContentValue'
-        static member SpaceAround = FssTypes.Flex.JustifyContent.SpaceAround |> justifyContentValue'
-        static member SpaceEvenly = FssTypes.Flex.JustifyContent.SpaceEvenly |> justifyContentValue'
+        static member value (justification: FssTypes.IJustifyContent) = justification |> justifyContentValue
+        static member start = FssTypes.Flex.JustifyContent.Start |> justifyContentValue'
+        static member end' = FssTypes.Flex.JustifyContent.End |> justifyContentValue'
+        static member flexStart = FssTypes.Flex.JustifyContent.FlexStart |> justifyContentValue'
+        static member flexEnd = FssTypes.Flex.JustifyContent.FlexEnd |> justifyContentValue'
+        static member center = FssTypes.Flex.JustifyContent.Center |> justifyContentValue'
+        static member baseline = FssTypes.Flex.JustifyContent.Baseline |> justifyContentValue'
+        static member firstBaseline = FssTypes.Flex.JustifyContent.FirstBaseline |> justifyContentValue'
+        static member lastBaseline = FssTypes.Flex.JustifyContent.LastBaseline |> justifyContentValue'
+        static member stretch = FssTypes.Flex.JustifyContent.Stretch |> justifyContentValue'
+        static member safe = FssTypes.Flex.JustifyContent.Safe |> justifyContentValue'
+        static member unsafe = FssTypes.Flex.JustifyContent.Unsafe |> justifyContentValue'
+        static member left = FssTypes.Flex.JustifyContent.Left |> justifyContentValue'
+        static member right = FssTypes.Flex.JustifyContent.Right |> justifyContentValue'
+        static member spaceBetween = FssTypes.Flex.JustifyContent.SpaceBetween |> justifyContentValue'
+        static member spaceAround = FssTypes.Flex.JustifyContent.SpaceAround |> justifyContentValue'
+        static member spaceEvenly = FssTypes.Flex.JustifyContent.SpaceEvenly |> justifyContentValue'
 
-        static member Normal = FssTypes.Normal |> justifyContentValue'
-        static member Inherit = FssTypes.Inherit |> justifyContentValue'
-        static member Initial = FssTypes.Initial |> justifyContentValue'
-        static member Unset = FssTypes.Unset |> justifyContentValue'
+        static member normal = FssTypes.Normal |> justifyContentValue'
+        static member inherit' = FssTypes.Inherit |> justifyContentValue'
+        static member initial = FssTypes.Initial |> justifyContentValue'
+        static member unset = FssTypes.Unset |> justifyContentValue'
 
     /// <summary>Aligns elements horizontally in flex.</summary>
     /// <param name="align">
@@ -253,7 +253,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let JustifyContent' (align: FssTypes.IJustifyContent) = JustifyContent.Value(align)
+    let JustifyContent' (align: FssTypes.IJustifyContent) = JustifyContent.value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
     let private justifyItemsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifyItems value
@@ -263,28 +263,28 @@ module Flex =
         |> justifyItemsValue
 
     type JustifyItems =
-        static member Value (justification: FssTypes.IJustifyItems) = justification |> justifyItemsValue'
-        static member Start = FssTypes.Flex.JustifyItems.Start |> justifyItemsValue'
-        static member End = FssTypes.Flex.JustifyItems.End |> justifyItemsValue'
-        static member FlexStart = FssTypes.Flex.JustifyItems.FlexStart |> justifyItemsValue'
-        static member FlexEnd = FssTypes.Flex.JustifyItems.FlexEnd |> justifyItemsValue'
-        static member Center = FssTypes.Flex.JustifyItems.Center |> justifyItemsValue'
-        static member Baseline = FssTypes.Flex.JustifyItems.Baseline |> justifyItemsValue'
-        static member FirstBaseline = FssTypes.Flex.JustifyItems.FirstBaseline |> justifyItemsValue'
-        static member LastBaseline = FssTypes.Flex.JustifyItems.LastBaseline |> justifyItemsValue'
-        static member Stretch = FssTypes.Flex.JustifyItems.Stretch |> justifyItemsValue'
-        static member Safe = FssTypes.Flex.JustifyItems.Safe |> justifyItemsValue'
-        static member Unsafe = FssTypes.Flex.JustifyItems.Unsafe |> justifyItemsValue'
-        static member Left = FssTypes.Flex.JustifyItems.Left |> justifyItemsValue'
-        static member Right = FssTypes.Flex.JustifyItems.Right |> justifyItemsValue'
-        static member SelfStart = FssTypes.Flex.JustifyItems.SelfStart |> justifyItemsValue'
-        static member SelfEnd = FssTypes.Flex.JustifyItems.SelfEnd |> justifyItemsValue'
-        static member Legacy = FssTypes.Flex.JustifyItems.Legacy |> justifyItemsValue'
+        static member value (justification: FssTypes.IJustifyItems) = justification |> justifyItemsValue'
+        static member start = FssTypes.Flex.JustifyItems.Start |> justifyItemsValue'
+        static member end' = FssTypes.Flex.JustifyItems.End |> justifyItemsValue'
+        static member flexStart = FssTypes.Flex.JustifyItems.FlexStart |> justifyItemsValue'
+        static member flexEnd = FssTypes.Flex.JustifyItems.FlexEnd |> justifyItemsValue'
+        static member center = FssTypes.Flex.JustifyItems.Center |> justifyItemsValue'
+        static member baseline = FssTypes.Flex.JustifyItems.Baseline |> justifyItemsValue'
+        static member firstBaseline = FssTypes.Flex.JustifyItems.FirstBaseline |> justifyItemsValue'
+        static member lastBaseline = FssTypes.Flex.JustifyItems.LastBaseline |> justifyItemsValue'
+        static member stretch = FssTypes.Flex.JustifyItems.Stretch |> justifyItemsValue'
+        static member safe = FssTypes.Flex.JustifyItems.Safe |> justifyItemsValue'
+        static member unsafe = FssTypes.Flex.JustifyItems.Unsafe |> justifyItemsValue'
+        static member left = FssTypes.Flex.JustifyItems.Left |> justifyItemsValue'
+        static member right = FssTypes.Flex.JustifyItems.Right |> justifyItemsValue'
+        static member selfStart = FssTypes.Flex.JustifyItems.SelfStart |> justifyItemsValue'
+        static member selfEnd = FssTypes.Flex.JustifyItems.SelfEnd |> justifyItemsValue'
+        static member legacy = FssTypes.Flex.JustifyItems.Legacy |> justifyItemsValue'
 
-        static member Normal = FssTypes.Normal |> justifyItemsValue'
-        static member Inherit = FssTypes.Inherit |> justifyItemsValue'
-        static member Initial = FssTypes.Initial |> justifyItemsValue'
-        static member Unset = FssTypes.Unset |> justifyItemsValue'
+        static member normal = FssTypes.Normal |> justifyItemsValue'
+        static member inherit' = FssTypes.Inherit |> justifyItemsValue'
+        static member initial = FssTypes.Initial |> justifyItemsValue'
+        static member unset = FssTypes.Unset |> justifyItemsValue'
 
     /// <summary>Specifies default <c>justify-self</c> for items of element.</summary>
     /// <param name="align">
@@ -296,7 +296,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let JustifyItems' (align: FssTypes.IJustifyItems) = JustifyItems.Value(align)
+    let JustifyItems' (align: FssTypes.IJustifyItems) = JustifyItems.value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
     let private justifySelfValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifySelf value
@@ -305,25 +305,25 @@ module Flex =
         |> justifySelfToString
         |> justifySelfValue
     type JustifySelf =
-        static member Value (justification: FssTypes.IJustifySelf) = justification |> justifySelfValue'
-        static member Start = FssTypes.Flex.JustifySelf.Start |> justifySelfValue'
-        static member End = FssTypes.Flex.JustifySelf.End |> justifySelfValue'
-        static member FlexStart = FssTypes.Flex.JustifySelf.FlexStart |> justifySelfValue'
-        static member FlexEnd = FssTypes.Flex.JustifySelf.FlexEnd |> justifySelfValue'
-        static member Center = FssTypes.Flex.JustifySelf.Center |> justifySelfValue'
-        static member Baseline = FssTypes.Flex.JustifySelf.Baseline |> justifySelfValue'
-        static member FirstBaseline = FssTypes.Flex.JustifySelf.FirstBaseline |> justifySelfValue'
-        static member LastBaseline = FssTypes.Flex.JustifySelf.LastBaseline |> justifySelfValue'
-        static member Stretch = FssTypes.Flex.JustifySelf.Stretch |> justifySelfValue'
-        static member Safe = FssTypes.Flex.JustifySelf.Safe |> justifySelfValue'
-        static member Unsafe = FssTypes.Flex.JustifySelf.Unsafe |> justifySelfValue'
-        static member SelfStart = FssTypes.Flex.JustifySelf.SelfStart |> justifySelfValue'
-        static member SelfEnd = FssTypes.Flex.JustifySelf.SelfEnd |> justifySelfValue'
+        static member value (justification: FssTypes.IJustifySelf) = justification |> justifySelfValue'
+        static member start = FssTypes.Flex.JustifySelf.Start |> justifySelfValue'
+        static member end' = FssTypes.Flex.JustifySelf.End |> justifySelfValue'
+        static member flexStart = FssTypes.Flex.JustifySelf.FlexStart |> justifySelfValue'
+        static member flexEnd = FssTypes.Flex.JustifySelf.FlexEnd |> justifySelfValue'
+        static member center = FssTypes.Flex.JustifySelf.Center |> justifySelfValue'
+        static member baseline = FssTypes.Flex.JustifySelf.Baseline |> justifySelfValue'
+        static member firstBaseline = FssTypes.Flex.JustifySelf.FirstBaseline |> justifySelfValue'
+        static member lastBaseline = FssTypes.Flex.JustifySelf.LastBaseline |> justifySelfValue'
+        static member stretch = FssTypes.Flex.JustifySelf.Stretch |> justifySelfValue'
+        static member safe = FssTypes.Flex.JustifySelf.Safe |> justifySelfValue'
+        static member unsafe = FssTypes.Flex.JustifySelf.Unsafe |> justifySelfValue'
+        static member selfStart = FssTypes.Flex.JustifySelf.SelfStart |> justifySelfValue'
+        static member selfEnd = FssTypes.Flex.JustifySelf.SelfEnd |> justifySelfValue'
 
-        static member Normal = FssTypes.Normal |> justifySelfValue'
-        static member Inherit = FssTypes.Inherit |> justifySelfValue'
-        static member Initial = FssTypes.Initial |> justifySelfValue'
-        static member Unset = FssTypes.Unset |> justifySelfValue'
+        static member normal = FssTypes.Normal |> justifySelfValue'
+        static member inherit' = FssTypes.Inherit |> justifySelfValue'
+        static member initial = FssTypes.Initial |> justifySelfValue'
+        static member unset = FssTypes.Unset |> justifySelfValue'
 
     /// <summary>Specifies how elements are justified in its container.</summary>
     /// <param name="align">
@@ -335,7 +335,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let JustifySelf' (align: FssTypes.IJustifySelf) = JustifySelf.Value(align)
+    let JustifySelf' (align: FssTypes.IJustifySelf) = JustifySelf.value(align)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
     let private flexDirectionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexDirection value
@@ -345,15 +345,15 @@ module Flex =
         |> flexDirectionValue
 
     type FlexDirection =
-        static member Value (direction: FssTypes.IFlexDirection) = direction |> flexDirectionValue'
-        static member Row = FssTypes.Flex.Direction.Row |> flexDirectionValue'
-        static member RowReverse = FssTypes.Flex.Direction.RowReverse |> flexDirectionValue'
-        static member Column = FssTypes.Flex.Direction.Column |> flexDirectionValue'
-        static member ColumnReverse = FssTypes.Flex.Direction.ColumnReverse |> flexDirectionValue'
+        static member value (direction: FssTypes.IFlexDirection) = direction |> flexDirectionValue'
+        static member row = FssTypes.Flex.Direction.Row |> flexDirectionValue'
+        static member rowReverse = FssTypes.Flex.Direction.RowReverse |> flexDirectionValue'
+        static member column = FssTypes.Flex.Direction.Column |> flexDirectionValue'
+        static member columnReverse = FssTypes.Flex.Direction.ColumnReverse |> flexDirectionValue'
 
-        static member Inherit = FssTypes.Inherit |> flexDirectionValue'
-        static member Initial = FssTypes.Initial |> flexDirectionValue'
-        static member Unset = FssTypes.Unset |> flexDirectionValue'
+        static member inherit' = FssTypes.Inherit |> flexDirectionValue'
+        static member initial = FssTypes.Initial |> flexDirectionValue'
+        static member unset = FssTypes.Unset |> flexDirectionValue'
 
     /// <summary>Specifies in which direction items in a flex container are oriented.</summary>
     /// <param name="direction">
@@ -364,7 +364,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexDirection' (direction: FssTypes.IFlexDirection) = FlexDirection.Value(direction)
+    let FlexDirection' (direction: FssTypes.IFlexDirection) = FlexDirection.value(direction)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
     let private flexWrapValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexWrap value
@@ -373,14 +373,14 @@ module Flex =
         |> flexWrapToString
         |> flexWrapValue
     type FlexWrap =
-        static member Value (direction: FssTypes.IFlexWrap) = direction |> flexWrapValue'
-        static member NoWrap = FssTypes.Flex.NoWrap |> flexWrapValue'
-        static member Wrap = FssTypes.Flex.Wrap |> flexWrapValue'
-        static member WrapReverse = FssTypes.Flex.WrapReverse |> flexWrapValue'
+        static member value (direction: FssTypes.IFlexWrap) = direction |> flexWrapValue'
+        static member noWrap = FssTypes.Flex.NoWrap |> flexWrapValue'
+        static member wrap = FssTypes.Flex.Wrap |> flexWrapValue'
+        static member wrapReverse = FssTypes.Flex.WrapReverse |> flexWrapValue'
 
-        static member Inherit = FssTypes.Inherit |> flexWrapValue'
-        static member Initial = FssTypes.Initial |> flexWrapValue'
-        static member Unset = FssTypes.Unset |> flexWrapValue'
+        static member inherit' = FssTypes.Inherit |> flexWrapValue'
+        static member initial = FssTypes.Initial |> flexWrapValue'
+        static member unset = FssTypes.Unset |> flexWrapValue'
 
     /// <summary>Specifies if flex items can wrap onto multiple lines.</summary>
     /// <param name="wrap">
@@ -391,7 +391,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexWrap' (wrap: FssTypes.IFlexWrap) = FlexWrap.Value(wrap)
+    let FlexWrap' (wrap: FssTypes.IFlexWrap) = FlexWrap.value(wrap)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/order
     let private orderValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Order value
@@ -400,11 +400,11 @@ module Flex =
         |> orderToString
         |> orderValue
     type Order =
-        static member Value (order: FssTypes.IOrder) = order |> orderValue'
+        static member value (order: FssTypes.IOrder) = order |> orderValue'
 
-        static member Inherit = FssTypes.Inherit |> orderValue'
-        static member Initial = FssTypes.Initial |> orderValue'
-        static member Unset = FssTypes.Unset |> orderValue'
+        static member inherit' = FssTypes.Inherit |> orderValue'
+        static member initial = FssTypes.Initial |> orderValue'
+        static member unset = FssTypes.Unset |> orderValue'
 
     /// <summary>Specify order of items in flex.</summary>
     /// <param name="order">
@@ -415,7 +415,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Order' (order: FssTypes.IOrder) = Order.Value(order)
+    let Order' (order: FssTypes.IOrder) = Order.value(order)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
     let private flexGrowValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexGrow value
@@ -425,11 +425,11 @@ module Flex =
         |> flexGrowValue
 
     type FlexGrow =
-        static member Value (grow: FssTypes.IFlexGrow) = grow |> flexGrowValue'
+        static member value (grow: FssTypes.IFlexGrow) = grow |> flexGrowValue'
 
-        static member Inherit = FssTypes.Inherit |> flexGrowValue'
-        static member Initial = FssTypes.Initial |> flexGrowValue'
-        static member Unset = FssTypes.Unset |> flexGrowValue'
+        static member inherit' = FssTypes.Inherit |> flexGrowValue'
+        static member initial = FssTypes.Initial |> flexGrowValue'
+        static member unset = FssTypes.Unset |> flexGrowValue'
 
     /// <summary>Sets grow factor of flex item.</summary>
     /// <param name="grow">
@@ -440,7 +440,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexGrow' (grow: FssTypes.IFlexGrow) = FlexGrow.Value(grow)
+    let FlexGrow' (grow: FssTypes.IFlexGrow) = FlexGrow.value(grow)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
     let private flexShrinkValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexShrink value
@@ -450,10 +450,10 @@ module Flex =
         |> flexShrinkValue
 
     type FlexShrink =
-        static member Value (shrink: FssTypes.IFlexShrink) = shrink |> flexShrinkValue'
-        static member Inherit = FssTypes.Inherit |> flexShrinkValue'
-        static member Initial = FssTypes.Initial |> flexShrinkValue'
-        static member Unset =  FssTypes.Unset |> flexShrinkValue'
+        static member value (shrink: FssTypes.IFlexShrink) = shrink |> flexShrinkValue'
+        static member inherit' = FssTypes.Inherit |> flexShrinkValue'
+        static member initial = FssTypes.Initial |> flexShrinkValue'
+        static member unset =  FssTypes.Unset |> flexShrinkValue'
 
     /// <summary>Sets shrink factor of flex item.</summary>
     /// <param name="shrink">
@@ -464,7 +464,7 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexShrink' (shrink: FssTypes.IFlexShrink) = FlexShrink.Value(shrink)
+    let FlexShrink' (shrink: FssTypes.IFlexShrink) = FlexShrink.value(shrink)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
     let private flexBasisValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexBasis value
@@ -474,17 +474,17 @@ module Flex =
         |> flexBasisValue
 
     type FlexBasis =
-        static member Value (basis: FssTypes.IFlexBasis) = basis |> flexBasisValue'
-        static member Fill = FssTypes.Flex.Basis.Fill |> flexBasisValue'
-        static member MaxContent = FssTypes.Flex.Basis.MaxContent |> flexBasisValue'
-        static member MinContent = FssTypes.Flex.Basis.MinContent |> flexBasisValue'
-        static member FitContent = FssTypes.Flex.Basis.FitContent |> flexBasisValue'
-        static member Content = FssTypes.Flex.Basis.Content |> flexBasisValue'
+        static member value (basis: FssTypes.IFlexBasis) = basis |> flexBasisValue'
+        static member fill = FssTypes.Flex.Basis.Fill |> flexBasisValue'
+        static member maxContent = FssTypes.Flex.Basis.MaxContent |> flexBasisValue'
+        static member minContent = FssTypes.Flex.Basis.MinContent |> flexBasisValue'
+        static member fitContent = FssTypes.Flex.Basis.FitContent |> flexBasisValue'
+        static member content = FssTypes.Flex.Basis.Content |> flexBasisValue'
 
-        static member Auto = FssTypes.Auto |> flexBasisValue'
-        static member Inherit = FssTypes.Inherit |> flexBasisValue'
-        static member Initial = FssTypes.Initial |> flexBasisValue'
-        static member Unset = FssTypes.Unset |> flexBasisValue'
+        static member auto = FssTypes.Auto |> flexBasisValue'
+        static member inherit' = FssTypes.Inherit |> flexBasisValue'
+        static member initial = FssTypes.Initial |> flexBasisValue'
+        static member unset = FssTypes.Unset |> flexBasisValue'
 
     /// <summary>Sets initial main size of flex item.</summary>
     /// <param name="basis">
@@ -498,4 +498,4 @@ module Flex =
     ///     - <c> Units.Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexBasis' (basis: FssTypes.IFlexBasis) = FlexBasis.Value(basis)
+    let FlexBasis' (basis: FssTypes.IFlexBasis) = FlexBasis.value(basis)

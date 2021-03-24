@@ -18,12 +18,12 @@ module FontFace =
     let private weightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight value
 
     type FontFace =
-        static member Source (source: FssTypes.FontFace.Source) = source |> stringifySource |> sourceValue
-        static member Sources (sources: FssTypes.FontFace.Source list) = Utilities.Helpers.combineComma stringifySource sources |> sourceValue
-        static member Style (style: FssTypes.IFontStyle) = style |> FssTypes.fontHelpers.fontStyleToString |> styleValue
-        static member Display (display: FssTypes.IFontDisplay) = display |> FssTypes.fontHelpers.fontDisplayToString |> displayValue
-        static member Stretch (stretch: FssTypes.IFontStretch) = stretch |> FssTypes.fontHelpers.fontStretchToString |> stretchValue
-        static member Weight (weight: FssTypes.IFontWeight) = weight |> FssTypes.fontHelpers.fontWeightToString |> weightValue
+        static member source (source: FssTypes.FontFace.Source) = source |> stringifySource |> sourceValue
+        static member sources (sources: FssTypes.FontFace.Source list) = Utilities.Helpers.combineComma stringifySource sources |> sourceValue
+        static member style (style: FssTypes.IFontStyle) = style |> FssTypes.fontHelpers.fontStyleToString |> styleValue
+        static member display (display: FssTypes.IFontDisplay) = display |> FssTypes.fontHelpers.fontDisplayToString |> displayValue
+        static member stretch (stretch: FssTypes.IFontStretch) = stretch |> FssTypes.fontHelpers.fontStretchToString |> stretchValue
+        static member weight (weight: FssTypes.IFontWeight) = weight |> FssTypes.fontHelpers.fontWeightToString |> weightValue
 
     let createFontFaceObject (fontName: string) (attributeList: FssTypes.CssProperty list) =
         let attributeList' =  List.map FssTypes.masterTypeHelpers.CssValue attributeList

@@ -11,103 +11,103 @@ module Text =
             [
                 test
                     "Text decoration none"
-                    [TextDecoration.None]
+                    [TextDecoration.none]
                     ["textDecoration" ==> "none"]
                 test
                     "Text emphasis none"
-                    [TextEmphasis.None]
+                    [TextEmphasis.none]
                     ["textEmphasis" ==> "none"]
                 test
                     "Text emphasis inherit"
-                    [ TextEmphasis.Inherit ]
+                    [ TextEmphasis.inherit' ]
                     ["textEmphasis" ==> "inherit"]
                 test
                     "Text emphasis initial"
-                    [ TextEmphasis.Initial ]
+                    [ TextEmphasis.initial ]
                     ["textEmphasis" ==> "initial"]
                 test
                     "Text emphasis unset"
-                    [ TextEmphasis.Unset ]
+                    [ TextEmphasis.unset ]
                     ["textEmphasis" ==> "unset"]
                 test
                     "Text align left"
-                    [ TextAlign.Left ]
+                    [ TextAlign.left ]
                     ["textAlign" ==> "left"]
                 test
                     "Text align right"
-                    [ TextAlign.Right ]
+                    [ TextAlign.right ]
                     ["textAlign" ==> "right"]
                 test
                     "Text align center"
-                    [ TextAlign.Center ]
+                    [ TextAlign.center ]
                     ["textAlign" ==> "center"]
                 test
                     "Text align justify"
-                    [ TextAlign.Justify ]
+                    [ TextAlign.justify ]
                     ["textAlign" ==> "justify"]
                 test
                     "Text align justify all"
-                    [ TextAlign.JustifyAll ]
+                    [ TextAlign.justifyAll ]
                     ["textAlign" ==> "justify-all"]
                 test
                     "Text align start"
-                    [ TextAlign.Start ]
+                    [ TextAlign.start ]
                     ["textAlign" ==> "start"]
                 test
                     "Text align end"
-                    [ TextAlign.End ]
+                    [ TextAlign.end' ]
                     ["textAlign" ==> "end"]
                 test
                     "Text align match-parent"
-                    [ TextAlign.MatchParent ]
+                    [ TextAlign.matchParent ]
                     ["textAlign" ==> "match-parent"]
                 test
                     "Text align inherit"
-                    [ TextAlign.Inherit ]
+                    [ TextAlign.inherit' ]
                     ["textAlign" ==> "inherit"]
                 test
                     "Text align initial"
-                    [ TextAlign.Initial ]
+                    [ TextAlign.initial ]
                     ["textAlign" ==> "initial"]
                 test
                     "Text align unset"
-                    [ TextAlign.Unset ]
+                    [ TextAlign.unset ]
                     ["textAlign" ==> "unset"]
                 test
                     "Text align last left"
-                    [ TextAlignLast.Left ]
+                    [ TextAlignLast.left ]
                     ["textAlignLast" ==> "left"]
                 test
                     "Text align last right"
-                    [ TextAlignLast.Right ]
+                    [ TextAlignLast.right ]
                     ["textAlignLast" ==> "right"]
                 test
                     "Text align last center"
-                    [ TextAlignLast.Center ]
+                    [ TextAlignLast.center ]
                     ["textAlignLast" ==> "center"]
                 test
                     "Text align last justify"
-                    [ TextAlignLast.Justify ]
+                    [ TextAlignLast.justify ]
                     ["textAlignLast" ==> "justify"]
                 test
                     "Text align last start"
-                    [ TextAlignLast.Start ]
+                    [ TextAlignLast.start ]
                     ["textAlignLast" ==> "start"]
                 test
                     "Text align last end"
-                    [ TextAlignLast.End ]
+                    [ TextAlignLast.end' ]
                     ["textAlignLast" ==> "end"]
                 test
                     "Text align last inherit"
-                    [ TextAlignLast.Inherit ]
+                    [ TextAlignLast.inherit' ]
                     ["textAlignLast" ==> "inherit"]
                 test
                     "Text align last initial"
-                    [ TextAlignLast.Initial ]
+                    [ TextAlignLast.initial ]
                     ["textAlignLast" ==> "initial"]
                 test
                     "Text align last unset"
-                    [ TextAlignLast.Unset ]
+                    [ TextAlignLast.unset ]
                     ["textAlignLast" ==> "unset"]
                 test
                     "Text decoration color red"
@@ -115,11 +115,11 @@ module Text =
                     ["textDecorationColor" ==> "#ff0000"]
                 test
                     "Text decoration color hex"
-                    [TextDecorationColor.Hex "00ff00" ]
+                    [TextDecorationColor.hex "00ff00" ]
                     ["textDecorationColor" ==> "#00ff00" ]
                 test
                     "Text decoration color rgba"
-                    [TextDecorationColor.Rgba 255 128 128 0.5 ]
+                    [TextDecorationColor.rgba 255 128 128 0.5 ]
                     ["textDecorationColor" ==> "rgba(255, 128, 128, 0.500000)"]
                 test
                     "Text decoration color transparent"
@@ -127,159 +127,159 @@ module Text =
                     ["textDecorationColor" ==> "rgba(0, 0, 0, 0.000000)"]
                 test
                     "Text decoration color inherit"
-                    [TextDecorationColor.Inherit]
+                    [TextDecorationColor.inherit']
                     ["textDecorationColor" ==> "inherit"]
                 test
                     "Text decoration color initial"
-                    [TextDecorationColor.Initial]
+                    [TextDecorationColor.initial]
                     ["textDecorationColor" ==> "initial"]
                 test
                     "Text decoration color unset"
-                    [TextDecorationColor.Unset]
+                    [TextDecorationColor.unset]
                     ["textDecorationColor" ==> "unset"]
                 test
                     "Text decoration line none"
-                    [TextDecorationLine.None]
+                    [TextDecorationLine.none]
                     ["textDecorationLine" ==> "none"]
                 test
                     "Text decoration line underline"
-                    [TextDecorationLine.Underline]
+                    [TextDecorationLine.underline]
                     ["textDecorationLine" ==> "underline"]
                 test
                     "Text decoration line overline"
-                    [TextDecorationLine.Overline]
+                    [TextDecorationLine.overline]
                     ["textDecorationLine" ==> "overline"]
                 test
                     "Text decoration line line-through"
-                    [TextDecorationLine.LineThrough]
+                    [TextDecorationLine.lineThrough]
                     ["textDecorationLine" ==> "line-through"]
                 test
                     "Text decoration line blink"
-                    [TextDecorationLine.Blink]
+                    [TextDecorationLine.blink]
                     ["textDecorationLine" ==> "blink"]
                 test
                     "Text decoration line inherit"
-                    [ TextDecorationLine.Inherit ]
+                    [ TextDecorationLine.inherit' ]
                     ["textDecorationLine" ==> "inherit"]
                 test
                     "Text decoration line initial"
-                    [ TextDecorationLine.Initial ]
+                    [ TextDecorationLine.initial ]
                     ["textDecorationLine" ==> "initial"]
                 test
                     "Text decoration line unset"
-                    [ TextDecorationLine.Unset ]
+                    [ TextDecorationLine.unset ]
                     ["textDecorationLine" ==> "unset"]
                 test
                     "Text decorations multiple"
-                    [TextDecorationLine.Value(FssTypes.Text.DecorationLine.Overline, FssTypes.Text.DecorationLine.Underline, FssTypes.Text.DecorationLine.LineThrough)]
+                    [TextDecorationLine.value(FssTypes.Text.DecorationLine.Overline, FssTypes.Text.DecorationLine.Underline, FssTypes.Text.DecorationLine.LineThrough)]
                     ["textDecorationLine" ==> "overline underline line-through"]
                 test
                     "Text decoration skip none"
-                    [TextDecorationSkip.None]
+                    [TextDecorationSkip.none]
                     ["textDecorationSkip" ==> "none"]
                 test
                     "Text decoration skip objects"
-                    [TextDecorationSkip.Objects]
+                    [TextDecorationSkip.objects]
                     ["textDecorationSkip" ==> "objects"]
                 test
                     "Text decoration skip spaces"
-                    [TextDecorationSkip.Spaces]
+                    [TextDecorationSkip.spaces]
                     ["textDecorationSkip" ==> "spaces"]
                 test
                     "Text decoration skip edges"
-                    [TextDecorationSkip.Edges]
+                    [TextDecorationSkip.edges]
                     ["textDecorationSkip" ==> "edges"]
                 test
                     "Text decoration skip box-decoration"
-                    [TextDecorationSkip.BoxDecoration]
+                    [TextDecorationSkip.boxDecoration]
                     ["textDecorationSkip" ==> "box-decoration"]
                 test
                     "Text decoration skip multiple - objects and spaces"
-                    [TextDecorationSkip.Value(FssTypes.Text.DecorationSkip.Objects, FssTypes.Text.DecorationSkip.Spaces) ]
+                    [TextDecorationSkip.value(FssTypes.Text.DecorationSkip.Objects, FssTypes.Text.DecorationSkip.Spaces) ]
                     ["textDecorationSkip" ==> "objects spaces"]
                 test
                     "Text decoration skip multiple - leading spaces and trailing spaces"
-                    [TextDecorationSkip.Value(FssTypes.Text.DecorationSkip.LeadingSpaces, FssTypes.Text.DecorationSkip.TrailingSpaces)]
+                    [TextDecorationSkip.value(FssTypes.Text.DecorationSkip.LeadingSpaces, FssTypes.Text.DecorationSkip.TrailingSpaces)]
                     ["textDecorationSkip" ==> "leading-spaces trailing-spaces"]
                 test
                     "Text decoration skip multiple - objects edges box-decoration"
-                    [TextDecorationSkip.Value(FssTypes.Text.DecorationSkip.Objects, FssTypes.Text.DecorationSkip.Edges, FssTypes.Text.DecorationSkip.BoxDecoration) ]
+                    [TextDecorationSkip.value(FssTypes.Text.DecorationSkip.Objects, FssTypes.Text.DecorationSkip.Edges, FssTypes.Text.DecorationSkip.BoxDecoration) ]
                     ["textDecorationSkip" ==> "objects edges box-decoration"]
                 test
                     "Text decoration skip inherit"
-                    [TextDecorationSkip.Inherit]
+                    [TextDecorationSkip.inherit']
                     ["textDecorationSkip" ==> "inherit"]
                 test
                     "Text decoration skip initial"
-                    [TextDecorationSkip.Initial]
+                    [TextDecorationSkip.initial]
                     ["textDecorationSkip" ==> "initial"]
                 test
                     "Text decoration skip unset"
-                    [TextDecorationSkip.Unset]
+                    [TextDecorationSkip.unset]
                     ["textDecorationSkip" ==> "unset"]
                 test
                     "Text decoration skip unset"
-                    [TextDecorationSkipInk.Auto]
+                    [TextDecorationSkipInk.auto]
                     ["textDecorationSkipInk" ==> "auto"]
                 test
                     "Text decoration skip All"
-                    [TextDecorationSkipInk.All]
+                    [TextDecorationSkipInk.all]
                     ["textDecorationSkipInk" ==> "all"]
                 test
                     "Text decoration skip none"
-                    [TextDecorationSkipInk.None]
+                    [TextDecorationSkipInk.none]
                     ["textDecorationSkipInk" ==> "none"]
                 test
                     "Text decoration skipink inherit"
-                    [TextDecorationSkipInk.Inherit]
+                    [TextDecorationSkipInk.inherit']
                     ["textDecorationSkipInk" ==> "inherit"]
                 test
                     "Text decoration skipink unset"
-                    [TextDecorationSkipInk.Unset]
+                    [TextDecorationSkipInk.unset]
                     ["textDecorationSkipInk" ==> "unset"]
                 test
                     "Text decoration skipink initial"
-                    [TextDecorationSkipInk.Initial]
+                    [TextDecorationSkipInk.initial]
                     ["textDecorationSkipInk" ==> "initial"]
                 test
                     "Text decoration style solid"
-                    [TextDecorationStyle.Solid]
+                    [TextDecorationStyle.solid]
                     ["textDecorationStyle" ==> "solid"]
                 test
                     "Text decoration style double"
-                    [TextDecorationStyle.Double]
+                    [TextDecorationStyle.double]
                     ["textDecorationStyle" ==> "double"]
                 test
                     "Text decoration style dotted"
-                    [TextDecorationStyle.Dotted]
+                    [TextDecorationStyle.dotted]
                     ["textDecorationStyle" ==> "dotted"]
                 test
                     "Text decoration style dashed"
-                    [TextDecorationStyle.Dashed]
+                    [TextDecorationStyle.dashed]
                     ["textDecorationStyle" ==> "dashed"]
                 test
                     "Text decoration style wavy"
-                    [TextDecorationStyle.Wavy]
+                    [TextDecorationStyle.wavy]
                     ["textDecorationStyle" ==> "wavy"]
                 test
                     "Text decoration style inherit"
-                    [TextDecorationStyle.Inherit]
+                    [TextDecorationStyle.inherit']
                     ["textDecorationStyle" ==> "inherit"]
                 test
                     "Text decoration style initial"
-                    [TextDecorationStyle.Initial]
+                    [TextDecorationStyle.initial]
                     ["textDecorationStyle" ==> "initial"]
                 test
                     "Text decoration style unset"
-                    [TextDecorationStyle.Unset]
+                    [TextDecorationStyle.unset]
                     ["textDecorationStyle" ==> "unset"]
                 test
                     "Text decoration thickness auto"
-                    [ TextDecorationThickness.Auto ]
+                    [ TextDecorationThickness.auto ]
                     [ "textDecorationThickness" ==> "auto" ]
                 test
                     "Text decoration thickness from font"
-                    [ TextDecorationThickness.FromFont ]
+                    [ TextDecorationThickness.fromFont ]
                     ["textDecorationThickness" ==> "from-font" ]
                 test
                     "Text decoration thickness em"
@@ -295,19 +295,19 @@ module Text =
                     ["textDecorationThickness" ==> "10%" ]
                 test
                     "Text decoration thickness inherit"
-                    [ TextDecorationThickness.Inherit ]
+                    [ TextDecorationThickness.inherit' ]
                     ["textDecorationThickness" ==> "inherit" ]
                 test
                     "Text decoration thickness initial"
-                    [ TextDecorationThickness.Initial ]
+                    [ TextDecorationThickness.initial ]
                     ["textDecorationThickness" ==> "initial" ]
                 test
                     "Text decoration thickness unset"
-                    [ TextDecorationThickness.Unset ]
+                    [ TextDecorationThickness.unset ]
                     ["textDecorationThickness" ==> "unset" ]
                 test
                     "Text emphasis color hex"
-                    [ TextEmphasisColor.Hex "#555" ]
+                    [ TextEmphasisColor.hex "#555" ]
                     ["textEmphasisColor" ==> "#555"]
                 test
                     "Text emphasis color color name"
@@ -315,7 +315,7 @@ module Text =
                     ["textEmphasisColor" ==> "#0000ff"]
                 test
                     "Text emphasis color rgba"
-                    [ TextEmphasisColor.Rgba 90 200 160 0.8 ]
+                    [ TextEmphasisColor.rgba 90 200 160 0.8 ]
                     ["textEmphasisColor" ==> "rgba(90, 200, 160, 0.800000)"]
                 test
                     "Text emphasis color transparent"
@@ -323,55 +323,55 @@ module Text =
                     ["textEmphasisColor" ==> "rgba(0, 0, 0, 0.000000)"]
                 test
                     "Text emphasis color inherit"
-                    [ TextEmphasisColor.Inherit ]
+                    [ TextEmphasisColor.inherit' ]
                     ["textEmphasisColor" ==> "inherit"]
                 test
                     "Text emphasis color Initial"
-                    [ TextEmphasisColor.Initial ]
+                    [ TextEmphasisColor.initial ]
                     ["textEmphasisColor" ==> "initial"]
                 test
                     "Text emphasis color unset"
-                    [ TextEmphasisColor.Unset ]
+                    [ TextEmphasisColor.unset ]
                     ["textEmphasisColor" ==> "unset"]
                 test
                     "Text emphasis position over right"
-                    [ TextEmphasisPosition.Value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Right) ]
+                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "over right"]
                 test
                     "Text emphasis position over left"
-                    [ TextEmphasisPosition.Value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Left) ]
+                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "over left"]
                 test
                     "Text emphasis position under right"
-                    [ TextEmphasisPosition.Value (FssTypes.Text.EmphasisPosition.Under, FssTypes.Text.EmphasisPosition.Right) ]
+                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Under, FssTypes.Text.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "under right"]
                 test
                     "Text emphasis position under left"
-                    [ TextEmphasisPosition.Value (FssTypes.Text.EmphasisPosition.Under, FssTypes.Text.EmphasisPosition.Left) ]
+                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Under, FssTypes.Text.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "under left"]
                 test
                     "Text emphasis position left over"
-                    [ TextEmphasisPosition.Value (FssTypes.Text.EmphasisPosition.Left, FssTypes.Text.EmphasisPosition.Over) ]
+                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Left, FssTypes.Text.EmphasisPosition.Over) ]
                     ["textEmphasisPosition" ==> "left over"]
                 test
                     "Text emphasis position right under"
-                    [ TextEmphasisPosition.Value (FssTypes.Text.EmphasisPosition.Right, FssTypes.Text.EmphasisPosition.Under) ]
+                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Right, FssTypes.Text.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "right under"]
                 test
                     "Text emphasis position left under"
-                    [ TextEmphasisPosition.Value (FssTypes.Text.EmphasisPosition.Left, FssTypes.Text.EmphasisPosition.Under) ]
+                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Left, FssTypes.Text.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "left under"]
                 test
                     "Text emphasis position inherit"
-                    [ TextEmphasisPosition.Inherit ]
+                    [ TextEmphasisPosition.inherit' ]
                     ["textEmphasisPosition" ==> "inherit"]
                 test
                     "Text emphasis position Initial"
-                    [ TextEmphasisPosition.Initial ]
+                    [ TextEmphasisPosition.initial ]
                     ["textEmphasisPosition" ==> "initial"]
                 test
                     "Text emphasis position unset"
-                    [ TextEmphasisPosition.Unset ]
+                    [ TextEmphasisPosition.unset ]
                     ["textEmphasisPosition" ==> "unset"]
                 test
                     "Text Emphasis Style x"
@@ -383,58 +383,58 @@ module Text =
                     ["textEmphasisStyle" ==> "'*'"]
                 test
                     "Text Emphasis Style filled"
-                    [TextEmphasisStyle.Filled ]
+                    [TextEmphasisStyle.filled ]
                     ["textEmphasisStyle" ==> "filled"]
                 test
                     "Text Emphasis Style open"
-                    [TextEmphasisStyle.Open]
+                    [TextEmphasisStyle.open']
                     ["textEmphasisStyle" ==> "open"]
                 test
                     "Text Emphasis Style circle"
-                    [TextEmphasisStyle.Circle]
+                    [TextEmphasisStyle.circle]
                     ["textEmphasisStyle" ==> "circle"]
                 test
                     "Text Emphasis Style double circle"
-                    [TextEmphasisStyle.DoubleCircle]
+                    [TextEmphasisStyle.doubleCircle]
                     ["textEmphasisStyle" ==> "double-circle"]
                 test
                     "Text Emphasis Style triangle"
-                    [TextEmphasisStyle.Triangle]
+                    [TextEmphasisStyle.triangle]
                     ["textEmphasisStyle" ==> "triangle"]
                 test
                     "Text Emphasis Style filled sesame"
-                    [TextEmphasisStyle.FilledSesame]
+                    [TextEmphasisStyle.filledSesame]
                     ["textEmphasisStyle" ==> "filled sesame"]
                 test
                     "Text Emphasis Style open sesame"
-                    [TextEmphasisStyle.OpenSesame]
+                    [TextEmphasisStyle.openSesame]
                     ["textEmphasisStyle" ==> "open sesame"]
                 test
                     "Text emphasis style inherit"
-                    [ TextEmphasisStyle.Inherit ]
+                    [ TextEmphasisStyle.inherit' ]
                     ["textEmphasisStyle" ==> "inherit"]
                 test
                     "Text emphasis style Initial"
-                    [ TextEmphasisStyle.Initial ]
+                    [ TextEmphasisStyle.initial ]
                     ["textEmphasisStyle" ==> "initial"]
                 test
                     "Text emphasis style unset"
-                    [ TextEmphasisStyle.Unset ]
+                    [ TextEmphasisStyle.unset ]
                     ["textEmphasisStyle" ==> "unset"]
                 test
                     "Text shadow single"
-                    [ TextShadows [ TextShadow.ColorXYBlur (px 1, px 1, px 2, FssTypes.Color.black) ] ]
+                    [ TextShadows [ TextShadow.colorXyBlur (px 1, px 1, px 2, FssTypes.Color.black) ] ]
                     ["textShadow" ==> "#000000 1px 1px 2px"]
                 test
                     "Text shadow multiple"
                     [ TextShadows
-                          [ TextShadow.ColorXYBlur(px 1, px 1, px 2, FssTypes.Color.black)
-                            TextShadow.ColorXYBlur(px 10, px -10, px 20, FssTypes.Color.red) ]
+                          [ TextShadow.colorXyBlur(px 1, px 1, px 2, FssTypes.Color.black)
+                            TextShadow.colorXyBlur(px 10, px -10, px 20, FssTypes.Color.red) ]
                     ]
                     ["textShadow" ==> "#000000 1px 1px 2px, #ff0000 10px -10px 20px"]
                 test
                     "Text underline offset auto"
-                    [ TextUnderlineOffset.Auto ]
+                    [ TextUnderlineOffset.auto ]
                     ["textUnderlineOffset" ==> "auto"]
                 test
                     "Text underline offset em"
@@ -450,67 +450,67 @@ module Text =
                     ["textUnderlineOffset" ==> "10%"]
                 test
                     "Text underline offset inherit"
-                    [ TextUnderlineOffset.Inherit ]
+                    [ TextUnderlineOffset.inherit' ]
                     ["textUnderlineOffset" ==> "inherit"]
                 test
                     "Text underline offset Initial"
-                    [ TextUnderlineOffset.Initial ]
+                    [ TextUnderlineOffset.initial ]
                     ["textUnderlineOffset" ==> "initial"]
                 test
                     "Text underline offset unset"
-                    [ TextUnderlineOffset.Unset ]
+                    [ TextUnderlineOffset.unset ]
                     ["textUnderlineOffset" ==> "unset"]
                 test
                     "Text underline position from-font"
-                    [ TextUnderlinePosition.FromFont ]
+                    [ TextUnderlinePosition.fromFont ]
                     ["textUnderlinePosition" ==> "from-font"]
                 test
                     "Text underline position Under"
-                    [ TextUnderlinePosition.Under ]
+                    [ TextUnderlinePosition.under ]
                     ["textUnderlinePosition" ==> "under"]
                 test
                     "Text underline position left"
-                    [ TextUnderlinePosition.Left ]
+                    [ TextUnderlinePosition.left ]
                     ["textUnderlinePosition" ==> "left"]
                 test
                     "Text underline position right"
-                    [ TextUnderlinePosition.Right ]
+                    [ TextUnderlinePosition.right ]
                     ["textUnderlinePosition" ==> "right"]
                 test
                     "Text underline position auto-pos"
-                    [ TextUnderlinePosition.AutoPos ]
+                    [ TextUnderlinePosition.autoPos ]
                     ["textUnderlinePosition" ==> "auto-pos"]
                 test
                     "Text underline position above"
-                    [ TextUnderlinePosition.Above ]
+                    [ TextUnderlinePosition.above ]
                     ["textUnderlinePosition" ==> "above"]
                 test
                     "Text underline position below"
-                    [ TextUnderlinePosition.Below ]
+                    [ TextUnderlinePosition.below ]
                     ["textUnderlinePosition" ==> "below"]
                 test
                     "Text underline positions under left"
-                    [ TextUnderlinePosition.Value (FssTypes.Text.UnderlinePosition.Under, FssTypes.Text.UnderlinePosition.Left) ]
+                    [ TextUnderlinePosition.value (FssTypes.Text.UnderlinePosition.Under, FssTypes.Text.UnderlinePosition.Left) ]
                     ["textUnderlinePosition" ==> "under left"]
                 test
                     "Text underline positions right under"
-                    [ TextUnderlinePosition.Value (FssTypes.Text.UnderlinePosition.Right, FssTypes.Text.UnderlinePosition.Under) ]
+                    [ TextUnderlinePosition.value (FssTypes.Text.UnderlinePosition.Right, FssTypes.Text.UnderlinePosition.Under) ]
                     ["textUnderlinePosition" ==> "right under"]
                 test
                     "Text underline position auto"
-                    [ TextUnderlinePosition.Auto ]
+                    [ TextUnderlinePosition.auto ]
                     ["textUnderlinePosition" ==> "auto"]
                 test
                     "Text underline position inherit"
-                    [ TextUnderlinePosition.Inherit ]
+                    [ TextUnderlinePosition.inherit' ]
                     ["textUnderlinePosition" ==> "inherit"]
                 test
                     "Text underline position Initial"
-                    [ TextUnderlinePosition.Initial ]
+                    [ TextUnderlinePosition.initial ]
                     ["textUnderlinePosition" ==> "initial"]
                 test
                     "Text underline position unset"
-                    [ TextUnderlinePosition.Unset ]
+                    [ TextUnderlinePosition.unset ]
                     ["textUnderlinePosition" ==> "unset"]
                 test
                     "Text indent mm"
@@ -526,35 +526,35 @@ module Text =
                     ["textIndent" ==> "15%"]
                 test
                     "Text indent hanging"
-                    [ TextIndent.Value (em 5.0, FssTypes.Text.Hanging;) ]
+                    [ TextIndent.value (em 5.0, FssTypes.Text.Hanging;) ]
                     ["textIndent" ==> "5.0em hanging"]
                 test
                     "Text indent each line"
-                    [ TextIndent.Value (em 5.0, FssTypes.Text.EachLine;) ]
+                    [ TextIndent.value (em 5.0, FssTypes.Text.EachLine;) ]
                     ["textIndent" ==> "5.0em each-line"]
                 test
                     "Text indent hanging each line"
-                    [ TextIndent.Value (em 5.0, FssTypes.Text.Hanging, FssTypes.Text.EachLine) ]
+                    [ TextIndent.value (em 5.0, FssTypes.Text.Hanging, FssTypes.Text.EachLine) ]
                     ["textIndent" ==> "5.0em hanging each-line"]
                 test
                     "Text indent inherit"
-                    [ TextIndent.Inherit ]
+                    [ TextIndent.inherit' ]
                     ["textIndent" ==> "inherit"]
                 test
                     "Text indent Initial"
-                    [ TextIndent.Initial ]
+                    [ TextIndent.initial ]
                     ["textIndent" ==> "initial"]
                 test
                     "Text indent unset"
-                    [ TextIndent.Unset ]
+                    [ TextIndent.unset ]
                     ["textIndent" ==> "unset"]
                 test
                     "Text overflow clip"
-                    [ TextOverflow.Clip ]
+                    [ TextOverflow.clip ]
                     ["textOverflow" ==> "clip"]
                 test
                     "Text overflow ellipsis"
-                    [ TextOverflow.Ellipsis ]
+                    [ TextOverflow.ellipsis ]
                     ["textOverflow" ==> "ellipsis"]
                 test
                     "Text overflow -"
@@ -562,55 +562,55 @@ module Text =
                     ["textOverflow" ==> "\"-\""]
                 test
                     "Quotes none"
-                    [ Quotes.None ]
+                    [ Quotes.none ]
                     ["quotes" ==> "none"]
                 test
                     "Quotes Auto"
-                    [ Quotes.Auto ]
+                    [ Quotes.auto ]
                     ["quotes" ==> "auto"]
                 test
                     "Quotes strings"
-                    [ Quotes.Value(FssTypes.CssString "<<", FssTypes.CssString ">>") ]
+                    [ Quotes.value(FssTypes.CssString "<<", FssTypes.CssString ">>") ]
                     ["quotes" ==> "\"<<\" \">>\""]
                 test
                     "Quotes multiple"
-                    [ Quotes.Value [ FssTypes.CssString "<<" :> FssTypes.IQuotes, FssTypes.CssString ">>" :> FssTypes.IQuotes; FssTypes.CssString "<" :> FssTypes.IQuotes,  FssTypes.CssString ">" :> FssTypes.IQuotes] ]
+                    [ Quotes.value [ FssTypes.CssString "<<" :> FssTypes.IQuotes, FssTypes.CssString ">>" :> FssTypes.IQuotes; FssTypes.CssString "<" :> FssTypes.IQuotes,  FssTypes.CssString ">" :> FssTypes.IQuotes] ]
                     ["quotes" ==> "\"<<\" \">>\" \"<\" \">\""]
                 test
                     "Quotes inherit"
-                    [ Quotes.Inherit ]
+                    [ Quotes.inherit' ]
                     ["quotes" ==> "inherit"]
                 test
                     "Quotes Initial"
-                    [ Quotes.Initial ]
+                    [ Quotes.initial ]
                     ["quotes" ==> "initial"]
                 test
                     "Quotes unset"
-                    [ Quotes.Unset ]
+                    [ Quotes.unset ]
                     ["quotes" ==> "unset"]
                 test
                     "Hyphens Manual"
-                    [ Hyphens.Manual ]
+                    [ Hyphens.manual ]
                     ["hyphens" ==> "manual"]
                 test
                     "Hyphens none"
-                    [ Hyphens.None ]
+                    [ Hyphens.none ]
                     ["hyphens" ==> "none"]
                 test
                     "Hyphens Auto"
-                    [ Hyphens.Auto ]
+                    [ Hyphens.auto ]
                     ["hyphens" ==> "auto"]
                 test
                     "Hyphens inherit"
-                    [ Hyphens.Inherit ]
+                    [ Hyphens.inherit' ]
                     ["hyphens" ==> "inherit"]
                 test
                     "Hyphens Initial"
-                    [ Hyphens.Initial ]
+                    [ Hyphens.initial ]
                     ["hyphens" ==> "initial"]
                 test
                     "Hyphens unset"
-                    [ Hyphens.Unset ]
+                    [ Hyphens.unset ]
                     ["hyphens" ==> "unset"]
                 test
                     "TextSizeAdjust percent"
@@ -618,23 +618,23 @@ module Text =
                     ["textSizeAdjust" ==> "80%"]
                 test
                     "TextSizeAdjust none"
-                    [ TextSizeAdjust.None ]
+                    [ TextSizeAdjust.none ]
                     ["textSizeAdjust" ==> "none"]
                 test
                     "TextSizeAdjust Auto"
-                    [ TextSizeAdjust.Auto ]
+                    [ TextSizeAdjust.auto ]
                     ["textSizeAdjust" ==> "auto"]
                 test
                     "TextSizeAdjust inherit"
-                    [ TextSizeAdjust.Inherit ]
+                    [ TextSizeAdjust.inherit' ]
                     ["textSizeAdjust" ==> "inherit"]
                 test
                     "TextSizeAdjust Initial"
-                    [ TextSizeAdjust.Initial ]
+                    [ TextSizeAdjust.initial ]
                     ["textSizeAdjust" ==> "initial"]
                 test
                     "TextSizeAdjust unset"
-                    [ TextSizeAdjust.Unset ]
+                    [ TextSizeAdjust.unset ]
                     ["textSizeAdjust" ==> "unset"]
                 test
                     "TabSize px"
@@ -650,158 +650,158 @@ module Text =
                     ["tabSize" ==> "4"]
                 test
                     "TabSize inherit"
-                    [ TabSize.Inherit ]
+                    [ TabSize.inherit' ]
                     ["tabSize" ==> "inherit"]
                 test
                     "TabSize Initial"
-                    [ TabSize.Initial ]
+                    [ TabSize.initial ]
                     ["tabSize" ==> "initial"]
                 test
                     "TabSize unset"
-                    [ TabSize.Unset ]
+                    [ TabSize.unset ]
                     ["tabSize" ==> "unset"]
                 test
                     "TextOrientation Mixed"
-                    [ TextOrientation.Mixed ]
+                    [ TextOrientation.mixed ]
                     ["textOrientation" ==> "mixed"]
                 test
                     "TextOrientation Upright"
-                    [ TextOrientation.Upright ]
+                    [ TextOrientation.upright ]
                     ["textOrientation" ==> "upright"]
                 test
                     "TextOrientation sideways-right"
-                    [ TextOrientation.SidewaysRight ]
+                    [ TextOrientation.sidewaysRight ]
                     ["textOrientation" ==> "sideways-right"]
                 test
                     "TextOrientation Sideways"
-                    [ TextOrientation.Sideways ]
+                    [ TextOrientation.sideways ]
                     ["textOrientation" ==> "sideways"]
                 test
                     "TextOrientation use-glyph-orientation"
-                    [ TextOrientation.UseGlyphOrientation ]
+                    [ TextOrientation.useGlyphOrientation ]
                     ["textOrientation" ==> "use-glyph-orientation"]
                 test
                     "TextOrientation inherit"
-                    [ TextOrientation.Inherit ]
+                    [ TextOrientation.inherit' ]
                     ["textOrientation" ==> "inherit"]
                 test
                     "TextOrientation Initial"
-                    [ TextOrientation.Initial ]
+                    [ TextOrientation.initial ]
                     ["textOrientation" ==> "initial"]
                 test
                     "TextOrientation unset"
-                    [ TextOrientation.Unset ]
+                    [ TextOrientation.unset ]
                     ["textOrientation" ==> "unset"]
                 test
                     "TextRendering optimize speed"
-                    [ TextRendering.OptimizeSpeed ]
+                    [ TextRendering.optimizeSpeed ]
                     ["textRendering" ==> "optimize-speed"]
                 test
                     "TextRendering optimize legibility"
-                    [ TextRendering.OptimizeLegibility ]
+                    [ TextRendering.optimizeLegibility ]
                     ["textRendering" ==> "optimize-legibility"]
                 test
                     "TextRendering geometric precision"
-                    [ TextRendering.GeometricPrecision ]
+                    [ TextRendering.geometricPrecision ]
                     ["textRendering" ==> "geometric-precision"]
                 test
                     "TextRendering auto"
-                    [ TextRendering.Auto ]
+                    [ TextRendering.auto ]
                     ["textRendering" ==> "auto"]
                 test
                     "TextRendering inherit"
-                    [ TextRendering.Inherit ]
+                    [ TextRendering.inherit' ]
                     ["textRendering" ==> "inherit"]
                 test
                     "TextRendering Initial"
-                    [ TextRendering.Initial ]
+                    [ TextRendering.initial ]
                     ["textRendering" ==> "initial"]
                 test
                     "TextRendering unset"
-                    [ TextRendering.Unset ]
+                    [ TextRendering.unset ]
                     ["textRendering" ==> "unset"]
                 test
                     "TextJustify inter-character"
-                    [ TextJustify.InterCharacter ]
+                    [ TextJustify.interCharacter ]
                     ["textJustify" ==> "inter-character"]
                 test
                     "TextJustify inter-word"
-                    [ TextJustify.InterWord ]
+                    [ TextJustify.interWord ]
                     ["textJustify" ==> "inter-word"]
                 test
                     "TextJustify auto"
-                    [ TextJustify.Auto ]
+                    [ TextJustify.auto ]
                     ["textJustify" ==> "auto"]
                 test
                     "TextJustify none"
-                    [ TextJustify.None ]
+                    [ TextJustify.none ]
                     ["textJustify" ==> "none"]
                 test
                     "WhiteSpace nowrap"
-                    [ WhiteSpace.NoWrap ]
+                    [ WhiteSpace.noWrap ]
                     ["whiteSpace" ==> "no-wrap"]
                 test
                     "WhiteSpace pre"
-                    [ WhiteSpace.Pre ]
+                    [ WhiteSpace.pre ]
                     ["whiteSpace" ==> "pre"]
                 test
                     "WhiteSpace pre-wrap"
-                    [ WhiteSpace.PreWrap ]
+                    [ WhiteSpace.preWrap ]
                     ["whiteSpace" ==> "pre-wrap"]
                 test
                     "WhiteSpace pre-line"
-                    [ WhiteSpace.PreLine ]
+                    [ WhiteSpace.preLine ]
                     ["whiteSpace" ==> "pre-line"]
                 test
                     "WhiteSpace break-spaces"
-                    [ WhiteSpace.BreakSpaces ]
+                    [ WhiteSpace.breakSpaces ]
                     ["whiteSpace" ==> "break-spaces"]
                 test
                     "WhiteSpace normal"
-                    [ WhiteSpace.Normal ]
+                    [ WhiteSpace.normal ]
                     ["whiteSpace" ==> "normal"]
                 test
                     "WhiteSpace inherit"
-                    [ WhiteSpace.Inherit ]
+                    [ WhiteSpace.inherit' ]
                     ["whiteSpace" ==> "inherit"]
                 test
                     "WhiteSpace Initial"
-                    [ WhiteSpace.Initial ]
+                    [ WhiteSpace.initial ]
                     ["whiteSpace" ==> "initial"]
                 test
                     "WhiteSpace unset"
-                    [ WhiteSpace.Unset ]
+                    [ WhiteSpace.unset ]
                     ["whiteSpace" ==> "unset"]
                 test
                     "UserSelect text"
-                    [ UserSelect.Text ]
+                    [ UserSelect.text ]
                     ["userSelect" ==> "text"]
                 test
                     "UserSelect Contain"
-                    [ UserSelect.Contain ]
+                    [ UserSelect.contain ]
                     ["userSelect" ==> "contain"]
                 test
                     "UserSelect all"
-                    [ UserSelect.All ]
+                    [ UserSelect.all ]
                     ["userSelect" ==> "all"]
                 test
                     "UserSelect none"
-                    [ UserSelect.None ]
+                    [ UserSelect.none ]
                     ["userSelect" ==> "none"]
                 test
                     "UserSelect auto"
-                    [ UserSelect.Auto ]
+                    [ UserSelect.auto ]
                     ["userSelect" ==> "auto"]
                 test
                     "UserSelect inherit"
-                    [ UserSelect.Inherit ]
+                    [ UserSelect.inherit' ]
                     ["userSelect" ==> "inherit"]
                 test
                     "UserSelect Initial"
-                    [ UserSelect.Initial ]
+                    [ UserSelect.initial ]
                     ["userSelect" ==> "initial"]
                 test
                     "UserSelect unset"
-                    [ UserSelect.Unset ]
+                    [ UserSelect.unset ]
                     ["userSelect" ==> "unset"]
             ]

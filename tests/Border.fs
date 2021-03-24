@@ -11,75 +11,75 @@ module Border =
             [
                 test
                     "Border initial"
-                    [ Border.Initial ]
+                    [ Border.initial ]
                     [ "border" ==> "initial" ]
                 test
                     "Border inherit"
-                    [ Border.Inherit ]
+                    [ Border.inherit' ]
                     [ "border" ==> "inherit" ]
                 test
                     "Border unset"
-                    [ Border.Unset ]
+                    [ Border.unset ]
                     [ "border" ==> "unset" ]
                 test
                     "Border none"
-                    [ Border.None ]
+                    [ Border.none ]
                     [ "border" ==> "none" ]
                 test
                     "Borderstyle hidden"
-                    [ BorderStyle.Hidden ]
+                    [ BorderStyle.hidden ]
                     [ "borderStyle" ==> "hidden" ]
                 test
                     "Borderstyle dotted"
-                    [ BorderStyle.Dotted ]
+                    [ BorderStyle.dotted ]
                     [ "borderStyle" ==> "dotted" ]
                 test
                     "Borderstyle dashed"
-                    [ BorderStyle.Dashed ]
+                    [ BorderStyle.dashed ]
                     [ "borderStyle" ==> "dashed" ]
                 test
                     "Borderstyle solid"
-                    [ BorderStyle.Solid ]
+                    [ BorderStyle.solid ]
                     [ "borderStyle" ==> "solid" ]
                 test
                     "Borderstyle double"
-                    [ BorderStyle.Double ]
+                    [ BorderStyle.double ]
                     [ "borderStyle" ==> "double" ]
                 test
                     "Borderstyle groove"
-                    [ BorderStyle.Groove ]
+                    [ BorderStyle.groove ]
                     [ "borderStyle" ==> "groove" ]
                 test
                     "Borderstyle ridge"
-                    [ BorderStyle.Ridge ]
+                    [ BorderStyle.ridge ]
                     [ "borderStyle" ==> "ridge" ]
                 test
                     "Borderstyle inset"
-                    [ BorderStyle.Inset ]
+                    [ BorderStyle.inset ]
                     [ "borderStyle" ==> "inset" ]
                 test
                     "Borderstyle outset"
-                    [ BorderStyle.Outset ]
+                    [ BorderStyle.outset ]
                     [ "borderStyle" ==> "outset" ]
                 test
                     "Borderstyle multiple"
-                    [ BorderStyle.Value(FssTypes.Border.Style.Inset, FssTypes.Border.Style.Outset, FssTypes.Border.Style.Ridge, FssTypes.Border.Style.Groove) ]
+                    [ BorderStyle.value(FssTypes.Border.Style.Inset, FssTypes.Border.Style.Outset, FssTypes.Border.Style.Ridge, FssTypes.Border.Style.Groove) ]
                     [ "borderStyle" ==> "inset outset ridge groove" ]
                 test
                     "Borderstyle none"
-                    [ BorderStyle.None ]
+                    [ BorderStyle.none ]
                     [ "borderStyle" ==> "none" ]
                 test
                     "Borderstyle initial"
-                    [ BorderStyle.Initial ]
+                    [ BorderStyle.initial ]
                     [ "borderStyle" ==> "initial" ]
                 test
                     "Borderstyle inherit"
-                    [ BorderStyle.Inherit ]
+                    [ BorderStyle.inherit' ]
                     [ "borderStyle" ==> "inherit" ]
                 test
                     "Borderstyle unset"
-                    [ BorderStyle.Unset ]
+                    [ BorderStyle.unset ]
                     [ "borderStyle" ==> "unset" ]
                 test
                     "Border radius px"
@@ -107,35 +107,35 @@ module Border =
                     ["borderBottomRightRadius" ==> "10px"]
                 test
                     "Border radius multiple px"
-                    [ BorderRadius.Value (px 10, px 20, px 30, px 40) ]
+                    [ BorderRadius.value (px 10, px 20, px 30, px 40) ]
                     [ "borderRadius" ==> "10px 20px 30px 40px" ]
                 test
                     "Border radius top left initial"
-                    [ BorderTopLeftRadius.Initial ]
+                    [ BorderTopLeftRadius.initial ]
                     ["borderTopLeftRadius" ==> "initial"]
                 test
                     "Border radius top right inherit"
-                    [ BorderTopRightRadius.Inherit ]
+                    [ BorderTopRightRadius.inherit' ]
                     ["borderTopRightRadius" ==> "inherit"]
                 test
                     "Border bottom left radius unset"
-                    [ BorderBottomLeftRadius.Unset ]
+                    [ BorderBottomLeftRadius.unset ]
                     ["borderBottomLeftRadius" ==> "unset"]
                 test
                     "Border bottom right radius initial"
-                    [ BorderBottomRightRadius.Initial ]
+                    [ BorderBottomRightRadius.initial ]
                     ["borderBottomRightRadius" ==> "initial"]
                 test
                     "Border radius inherit"
-                    [ BorderRadius.Inherit ]
+                    [ BorderRadius.inherit' ]
                     ["borderRadius" ==> "inherit"]
                 test
                     "Border radius inherit"
-                    [ BorderRadius.Inherit ]
+                    [ BorderRadius.inherit' ]
                     ["borderRadius" ==> "inherit"]
                 test
                     "Border radius unset"
-                    [ BorderRadius.Unset ]
+                    [ BorderRadius.unset ]
                     ["borderRadius" ==> "unset"]
                 test
                     "Border width px"
@@ -143,31 +143,31 @@ module Border =
                     [ "borderWidth" ==> "40px" ]
                 test
                     "Border width thin"
-                    [ BorderWidth.Thin ]
+                    [ BorderWidth.thin ]
                     [ "borderWidth" ==> "thin" ]
                 test
                     "Border width medium"
-                    [ BorderWidth.Medium ]
+                    [ BorderWidth.medium ]
                     [ "borderWidth" ==> "medium" ]
                 test
                     "Border width thick"
-                    [ BorderWidth.Thick ]
+                    [ BorderWidth.thick ]
                     [ "borderWidth" ==> "thick" ]
                 test
                     "Border width initial"
-                    [ BorderWidth.Initial ]
+                    [ BorderWidth.initial ]
                     [ "borderWidth" ==> "initial" ]
                 test
                     "Border width inherit"
-                    [ BorderWidth.Inherit ]
+                    [ BorderWidth.inherit' ]
                     [ "borderWidth" ==> "inherit" ]
                 test
                     "Border width unset"
-                    [ BorderWidth.Unset ]
+                    [ BorderWidth.unset ]
                     [ "borderWidth" ==> "unset" ]
                 test
                     "Border widths combination"
-                    [ BorderWidth.Value (px 1, px 20, em 3.0, rem 4.5) ]
+                    [ BorderWidth.value (px 1, px 20, em 3.0, rem 4.5) ]
                     [ "borderWidth" ==> "1px 20px 3.0em 4.5rem" ]
                 test
                     "Border left width px"
@@ -183,23 +183,23 @@ module Border =
                     [ "borderColor" ==> "#ff0000" ]
                 test
                     "Border color initial"
-                    [ BorderColor.Initial ]
+                    [ BorderColor.initial ]
                     [ "borderColor" ==> "initial" ]
                 test
                     "Border color inherit"
-                    [ BorderColor.Inherit ]
+                    [ BorderColor.inherit' ]
                     [ "borderColor" ==> "inherit" ]
                 test
                     "Border color unset"
-                    [ BorderColor.Unset ]
+                    [ BorderColor.unset ]
                     [ "borderColor" ==> "unset" ]
                 test
                     "Border colors multiple"
-                    [ BorderColor.Value (FssTypes.Color.red, FssTypes.Color.green, FssTypes.Color.blue, FssTypes.Color.white) ]
+                    [ BorderColor.value (FssTypes.Color.red, FssTypes.Color.green, FssTypes.Color.blue, FssTypes.Color.white) ]
                     [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
                 test
                     "Border top color rgb"
-                    [ BorderTopColor.Rgb 255 0 0 ]
+                    [ BorderTopColor.rgb 255 0 0 ]
                     ["borderTopColor" ==> "rgb(255, 0, 0)"]
                 test
                     "Border right color green"
@@ -215,23 +215,23 @@ module Border =
                     ["borderLeftColor" ==> "#ffffff"]
                 test
                     "Border collapse collapse"
-                    [ BorderCollapse.Collapse ]
+                    [ BorderCollapse.collapse ]
                     [ "borderCollapse" ==> "collapse" ]
                 test
                     "Border collapse separate"
-                    [ BorderCollapse.Separate ]
+                    [ BorderCollapse.separate ]
                     [ "borderCollapse" ==> "separate" ]
                 test
                     "Border collapse initial"
-                    [ BorderCollapse.Initial ]
+                    [ BorderCollapse.initial ]
                     [ "borderCollapse" ==> "initial" ]
                 test
                     "Border collapse inherit"
-                    [ BorderCollapse.Inherit ]
+                    [ BorderCollapse.inherit' ]
                     [ "borderCollapse" ==> "inherit" ]
                 test
                     "Border collapse unset"
-                    [ BorderCollapse.Unset ]
+                    [ BorderCollapse.unset ]
                     [ "borderCollapse" ==> "unset" ]
                 test
                     "Border spacing px"
@@ -239,47 +239,47 @@ module Border =
                     [ "borderSpacing" ==> "2px" ]
                 test
                     "Border spacing px"
-                    [ BorderSpacing.Value (px 2, px 2) ]
+                    [ BorderSpacing.value (px 2, px 2) ]
                     [ "borderSpacing" ==> "2px 2px" ]
                 test
                     "Border spacing initial"
-                    [ BorderSpacing.Initial ]
+                    [ BorderSpacing.initial ]
                     [ "borderSpacing" ==> "initial" ]
                 test
                     "Border spacing inherit"
-                    [ BorderSpacing.Inherit ]
+                    [ BorderSpacing.inherit' ]
                     [ "borderSpacing" ==> "inherit" ]
                 test
                     "Border spacing unset"
-                    [ BorderSpacing.Unset ]
+                    [ BorderSpacing.unset ]
                     [ "borderSpacing" ==> "unset" ]
                 test
                     "Border image source none"
-                    [ BorderImageSource.None ]
+                    [ BorderImageSource.none ]
                     [ "borderImageSource" ==> "none" ]
                 test
                     "Border image source url"
-                    [ BorderImageSource.Url "image.jpg" ]
+                    [ BorderImageSource.url "image.jpg" ]
                     [ "borderImageSource" ==> "url(image.jpg)" ]
                 test
                     "Border image source linear gradient"
-                    [ BorderImageSource.LinearGradient(deg 45., [ FssTypes.Color.red, pct 0; FssTypes.Color.blue, pct 100 ]) ]
+                    [ BorderImageSource.linearGradient(deg 45., [ FssTypes.Color.red, pct 0; FssTypes.Color.blue, pct 100 ]) ]
                     [ "borderImageSource" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
                 test
                     "Border image source inherit"
-                    [ BorderImageSource.Inherit ]
+                    [ BorderImageSource.inherit' ]
                     [ "borderImageSource" ==> "inherit" ]
                 test
                     "Border image source initial"
-                    [ BorderImageSource.Initial ]
+                    [ BorderImageSource.initial ]
                     [ "borderImageSource" ==> "initial" ]
                 test
                     "Border image source unset"
-                    [ BorderImageSource.Unset ]
+                    [ BorderImageSource.unset ]
                     [ "borderImageSource" ==> "unset" ]
                 test
                     "Border image width auto"
-                    [ BorderImageWidth.Auto ]
+                    [ BorderImageWidth.auto ]
                     [ "borderImageWidth" ==> "auto" ]
                 test
                     "Border image width rem"
@@ -295,59 +295,59 @@ module Border =
                     [ "borderImageWidth" ==> "3" ]
                 test
                     "Border image width vertical horizontal"
-                    [ BorderImageWidth.Value (em 2., em 3.) ]
+                    [ BorderImageWidth.value (em 2., em 3.) ]
                     [ "borderImageWidth" ==> "2.0em 3.0em" ]
                 test
                     "Border image width top horizontal bottom"
-                    [ BorderImageWidth.Value (pct 5, pct 15, pct 10) ]
+                    [ BorderImageWidth.value (pct 5, pct 15, pct 10) ]
                     [ "borderImageWidth" ==> "5% 15% 10%" ]
                 test
                     "Border image width top right bottom left"
-                    [ BorderImageWidth.Value (pct 5, em 2., pct 10, px 2) ]
+                    [ BorderImageWidth.value (pct 5, em 2., pct 10, px 2) ]
                     [ "borderImageWidth" ==> "5% 2.0em 10% 2px" ]
                 test
                     "Border image width inherit"
-                    [ BorderImageWidth.Inherit ]
+                    [ BorderImageWidth.inherit' ]
                     [ "borderImageWidth" ==> "inherit" ]
                 test
                     "Border image width initial"
-                    [ BorderImageWidth.Initial ]
+                    [ BorderImageWidth.initial ]
                     [ "borderImageWidth" ==> "initial" ]
                 test
                     "Border image width unset"
-                    [ BorderImageWidth.Unset ]
+                    [ BorderImageWidth.unset ]
                     [ "borderImageWidth" ==> "unset" ]
                 test
                     "Border image repeat stretch"
-                    [ BorderImageRepeat.Stretch ]
+                    [ BorderImageRepeat.stretch ]
                     [ "borderImageRepeat" ==> "stretch" ]
                 test
                     "Border image repeat repeat"
-                    [ BorderImageRepeat.Repeat ]
+                    [ BorderImageRepeat.repeat ]
                     [ "borderImageRepeat" ==> "repeat" ]
                 test
                     "Border image repeat round"
-                    [ BorderImageRepeat.Round ]
+                    [ BorderImageRepeat.round ]
                     [ "borderImageRepeat" ==> "round" ]
                 test
                     "Border image repeat space"
-                    [ BorderImageRepeat.Space ]
+                    [ BorderImageRepeat.space ]
                     [ "borderImageRepeat" ==> "space" ]
                 test
                     "Border image repeat space"
-                    [ BorderImageRepeat.Value(FssTypes.Border.ImageRepeat.Stretch, FssTypes.Border.ImageRepeat.Repeat) ]
+                    [ BorderImageRepeat.value(FssTypes.Border.ImageRepeat.Stretch, FssTypes.Border.ImageRepeat.Repeat) ]
                     [ "borderImageRepeat" ==> "stretch repeat" ]
                 test
                     "Border image repeat inherit"
-                    [ BorderImageRepeat.Inherit ]
+                    [ BorderImageRepeat.inherit' ]
                     [ "borderImageRepeat" ==> "inherit" ]
                 test
                     "Border image repeat initial"
-                    [ BorderImageRepeat.Initial ]
+                    [ BorderImageRepeat.initial ]
                     [ "borderImageRepeat" ==> "initial" ]
                 test
                     "Border image repeat unset"
-                    [ BorderImageRepeat.Unset ]
+                    [ BorderImageRepeat.unset ]
                     [ "borderImageRepeat" ==> "unset" ]
                 test
                     "Border image slice percent"
@@ -355,23 +355,23 @@ module Border =
                     [ "borderImageSlice" ==> "30%" ]
                 test
                     "Border image slice multiple percent"
-                    [ BorderImageSlice.Value (pct 10, pct 30) ]
+                    [ BorderImageSlice.value (pct 10, pct 30) ]
                     [ "borderImageSlice" ==> "10% 30%" ]
                 test
                     "Border image slice top horizontal bottom"
-                    [ BorderImageSlice.Value (px 30, pct 30, px 45) ]
+                    [ BorderImageSlice.value (px 30, pct 30, px 45) ]
                     [ "borderImageSlice" ==> "30px 30% 45px" ]
                 test
                     "Border image slice inherit"
-                    [ BorderImageSlice.Inherit ]
+                    [ BorderImageSlice.inherit' ]
                     [ "borderImageSlice" ==> "inherit" ]
                 test
                     "Border image slice initial"
-                    [ BorderImageSlice.Initial ]
+                    [ BorderImageSlice.initial ]
                     [ "borderImageSlice" ==> "initial" ]
                 test
                     "Border image slice unset"
-                    [ BorderImageSlice.Unset ]
+                    [ BorderImageSlice.unset ]
                     [ "borderImageSlice" ==> "unset" ]
                 test
                     "Border image outset rem"
@@ -383,22 +383,22 @@ module Border =
                     [ "borderImageOutset" ==> "1.5" ]
                 test
                     "Border image outset vertical horizontal"
-                    [ BorderImageOutset.Value(FssTypes.Border.ImageOutset 1., FssTypes.Border.ImageOutset 1.2) ]
+                    [ BorderImageOutset.value(FssTypes.Border.ImageOutset 1., FssTypes.Border.ImageOutset 1.2) ]
                     [ "borderImageOutset" ==> "1 1.2" ]
                 test
                     "Border image outset top right bottom left"
-                    [ BorderImageOutset.Value (px 7, px 12, px 14, px 5) ]
+                    [ BorderImageOutset.value (px 7, px 12, px 14, px 5) ]
                     [ "borderImageOutset" ==> "7px 12px 14px 5px" ]
                 test
                     "Border image outset inherit"
-                    [ BorderImageOutset.Inherit ]
+                    [ BorderImageOutset.inherit' ]
                     [ "borderImageOutset" ==> "inherit" ]
                 test
                     "Border image outset initial"
-                    [ BorderImageOutset.Initial ]
+                    [ BorderImageOutset.initial ]
                     [ "borderImageOutset" ==> "initial" ]
                 test
                     "Border image outset unset"
-                    [ BorderImageOutset.Unset ]
+                    [ BorderImageOutset.unset ]
                     [ "borderImageOutset" ==> "unset" ]
             ]

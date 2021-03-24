@@ -11,18 +11,18 @@ module Clear =
             [
                 test
                     "Clear none"
-                    [ Clear.None]
+                    [ Clear.none]
                     [ "clear" ==> "none" ]
                 test
                     "Clear inherit"
-                    [ Clear.Inherit]
+                    [ Clear.inherit']
                     [ "clear" ==> "inherit" ]
                 test
                     "Clear initial"
-                    [ Clear.Initial]
+                    [ Clear.initial]
                     [ "clear" ==> "initial" ]
                 test
                     "Clear unset"
-                    [ Clear.Unset ]
+                    [ Clear.unset ]
                     [ "clear" ==> "unset" ]
             ]

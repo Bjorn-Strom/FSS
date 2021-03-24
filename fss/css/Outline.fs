@@ -43,12 +43,12 @@ module Outline  =
         |> outlineValue
 
     type Outline =
-        static member Value (outline: FssTypes.IOutline) = outline |> outlineValue'
+        static member value (outline: FssTypes.IOutline) = outline |> outlineValue'
 
-        static member None = FssTypes.None' |> outlineValue'
-        static member Inherit = FssTypes.Inherit |> outlineValue'
-        static member Initial = FssTypes.Initial |> outlineValue'
-        static member Unset = FssTypes.Unset |> outlineValue'
+        static member none = FssTypes.None' |> outlineValue'
+        static member inherit' = FssTypes.Inherit |> outlineValue'
+        static member initial = FssTypes.Initial |> outlineValue'
+        static member unset = FssTypes.Unset |> outlineValue'
 
     /// <summary>Resets outline.</summary>
     /// <param name="outline">
@@ -59,7 +59,7 @@ module Outline  =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Outline' (outline: FssTypes.IOutline) = Outline.Value(outline)
+    let Outline' (outline: FssTypes.IOutline) = Outline.value(outline)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
     let private colorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineColor value
@@ -69,7 +69,7 @@ module Outline  =
         |> colorValue
 
     type OutlineColor =
-        static member Value (color: FssTypes.IOutlineColor) = color |> colorValue'
+        static member value (color: FssTypes.IOutlineColor) = color |> colorValue'
         static member black = FssTypes.Color.black |> colorValue'
         static member silver = FssTypes.Color.silver |> colorValue'
         static member gray = FssTypes.Color.gray |> colorValue'
@@ -213,17 +213,17 @@ module Outline  =
         static member whiteSmoke = FssTypes.Color.whiteSmoke |> colorValue'
         static member yellowGreen = FssTypes.Color.yellowGreen |> colorValue'
         static member rebeccaPurple = FssTypes.Color.rebeccaPurple |> colorValue'
-        static member Rgb r g b = FssTypes.Color.Rgb(r, g, b) |> colorValue'
-        static member Rgba r g b a = FssTypes.Color.Rgba(r, g, b, a) |> colorValue'
-        static member Hex value = FssTypes.Color.Hex value |> colorValue'
-        static member Hsl h s l = FssTypes.Color.Hsl(h, s, l) |> colorValue'
-        static member Hsla h s l a  = FssTypes.Color.Hsla (h, s, l, a) |> colorValue'
+        static member rgb r g b = FssTypes.Color.rgb(r, g, b) |> colorValue'
+        static member rgba r g b a = FssTypes.Color.rgba(r, g, b, a) |> colorValue'
+        static member hex value = FssTypes.Color.hex value |> colorValue'
+        static member hsl h s l = FssTypes.Color.hsl(h, s, l) |> colorValue'
+        static member hsla h s l a  = FssTypes.Color.hsla (h, s, l, a) |> colorValue'
         static member transparent = FssTypes.Color.transparent |> colorValue'
         static member currentColor = FssTypes.Color.currentColor |> colorValue'
 
-        static member Inherit = FssTypes.Inherit |> colorValue'
-        static member Initial = FssTypes.Initial |> colorValue'
-        static member Unset = FssTypes.Unset |> colorValue'
+        static member inherit' = FssTypes.Inherit |> colorValue'
+        static member initial = FssTypes.Initial |> colorValue'
+        static member unset = FssTypes.Unset |> colorValue'
 
     /// <summary>Sets color of outline.</summary>
     /// <param name="color">
@@ -234,7 +234,7 @@ module Outline  =
     ///     - <c> FssTypes.ColorType</c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineColor' (color: FssTypes.IOutlineColor) = OutlineColor.Value(color)
+    let OutlineColor' (color: FssTypes.IOutlineColor) = OutlineColor.value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width
     let private outlineWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineWidth value
@@ -244,14 +244,14 @@ module Outline  =
         |> outlineWidthValue
 
     type OutlineWidth =
-        static member Value (width: FssTypes.IOutlineWidth) = width |> outlineWidthValue'
-        static member Thin = FssTypes.Outline.Width.Thin |> outlineWidthValue'
-        static member Medium = FssTypes.Outline.Width.Medium |> outlineWidthValue'
-        static member Thick = FssTypes.Outline.Width.Thick |> outlineWidthValue'
+        static member value (width: FssTypes.IOutlineWidth) = width |> outlineWidthValue'
+        static member thin = FssTypes.Outline.Width.Thin |> outlineWidthValue'
+        static member medium = FssTypes.Outline.Width.Medium |> outlineWidthValue'
+        static member thick = FssTypes.Outline.Width.Thick |> outlineWidthValue'
 
-        static member Inherit = FssTypes.Inherit |> outlineWidthValue'
-        static member Initial = FssTypes.Initial |> outlineWidthValue'
-        static member Unset = FssTypes.Unset |> outlineWidthValue'
+        static member inherit' = FssTypes.Inherit |> outlineWidthValue'
+        static member initial = FssTypes.Initial |> outlineWidthValue'
+        static member unset = FssTypes.Unset |> outlineWidthValue'
 
 
     /// <summary>Sets width of outline.</summary>
@@ -264,7 +264,7 @@ module Outline  =
     ///     - <c> Units.Size </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineWidth' (width: FssTypes.IOutlineWidth) = OutlineWidth.Value(width)
+    let OutlineWidth' (width: FssTypes.IOutlineWidth) = OutlineWidth.value(width)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style
     let private outlineStyleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineStyle value
@@ -274,21 +274,21 @@ module Outline  =
         |> outlineStyleValue
 
     type OutlineStyle =
-        static member Value (style: FssTypes.IOutlineStyle) = style |> outlineStyleValue'
-        static member Hidden = FssTypes.Outline.Style.Hidden |> outlineStyleValue'
-        static member Dotted = FssTypes.Outline.Style.Dotted |> outlineStyleValue'
-        static member Dashed = FssTypes.Outline.Style.Dashed |> outlineStyleValue'
-        static member Solid = FssTypes.Outline.Style.Solid |> outlineStyleValue'
-        static member Double = FssTypes.Outline.Style.Double |> outlineStyleValue'
-        static member Groove = FssTypes.Outline.Style.Groove |> outlineStyleValue'
-        static member Ridge = FssTypes.Outline.Style.Ridge |> outlineStyleValue'
-        static member Inset = FssTypes.Outline.Style.Inset |> outlineStyleValue'
-        static member Outset = FssTypes.Outline.Style.Outset |> outlineStyleValue'
+        static member value (style: FssTypes.IOutlineStyle) = style |> outlineStyleValue'
+        static member hidden = FssTypes.Outline.Style.Hidden |> outlineStyleValue'
+        static member dotted = FssTypes.Outline.Style.Dotted |> outlineStyleValue'
+        static member dashed = FssTypes.Outline.Style.Dashed |> outlineStyleValue'
+        static member solid = FssTypes.Outline.Style.Solid |> outlineStyleValue'
+        static member double = FssTypes.Outline.Style.Double |> outlineStyleValue'
+        static member groove = FssTypes.Outline.Style.Groove |> outlineStyleValue'
+        static member ridge = FssTypes.Outline.Style.Ridge |> outlineStyleValue'
+        static member inset = FssTypes.Outline.Style.Inset |> outlineStyleValue'
+        static member outset = FssTypes.Outline.Style.Outset |> outlineStyleValue'
 
-        static member None = FssTypes.None' |> outlineStyleValue'
-        static member Inherit = FssTypes.Inherit |> outlineStyleValue'
-        static member Initial = FssTypes.Initial |> outlineStyleValue'
-        static member Unset = FssTypes.Unset |> outlineStyleValue'
+        static member none = FssTypes.None' |> outlineStyleValue'
+        static member inherit' = FssTypes.Inherit |> outlineStyleValue'
+        static member initial = FssTypes.Initial |> outlineStyleValue'
+        static member unset = FssTypes.Unset |> outlineStyleValue'
 
     /// <summary>Sets style of outline.</summary>
     /// <param name="style">
@@ -300,7 +300,7 @@ module Outline  =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineStyle' (style: FssTypes.IOutlineStyle) = OutlineStyle.Value(style)
+    let OutlineStyle' (style: FssTypes.IOutlineStyle) = OutlineStyle.value(style)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset
     let private outlineOffsetValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineOffset value
@@ -310,10 +310,10 @@ module Outline  =
         |> outlineOffsetValue
 
     type OutlineOffset =
-        static member Value (offset: FssTypes.IOutlineOffset) = offset |> outlineOffsetValue'
-        static member Inherit = FssTypes.Inherit |> outlineOffsetValue'
-        static member Initial = FssTypes.Initial |> outlineOffsetValue'
-        static member Unset = FssTypes.Unset |> outlineOffsetValue'
+        static member value (offset: FssTypes.IOutlineOffset) = offset |> outlineOffsetValue'
+        static member inherit' = FssTypes.Inherit |> outlineOffsetValue'
+        static member initial = FssTypes.Initial |> outlineOffsetValue'
+        static member unset = FssTypes.Unset |> outlineOffsetValue'
 
     /// <summary>Sets offset of outline.</summary>
     /// <param name="offset">
@@ -324,4 +324,4 @@ module Outline  =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineOffset' (offset: FssTypes.IOutlineOffset) = OutlineOffset.Value(offset)
+    let OutlineOffset' (offset: FssTypes.IOutlineOffset) = OutlineOffset.value(offset)

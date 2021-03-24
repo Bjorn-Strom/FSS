@@ -17,12 +17,12 @@ module ScrollBehavior =
         |> BehaviorValue
 
     type ScrollBehavior =
-        static member Value (behavior: FssTypes.IScrollBehavior) = behavior |> BehaviorValue'
-        static member Smooth = FssTypes.Scroll.ScrollBehavior.Smooth |> BehaviorValue'
-        static member Auto = FssTypes.Auto |> BehaviorValue'
-        static member Inherit = FssTypes.Inherit |> BehaviorValue'
-        static member Initial = FssTypes.Initial |> BehaviorValue'
-        static member Unset = FssTypes.Unset |> BehaviorValue'
+        static member value (behavior: FssTypes.IScrollBehavior) = behavior |> BehaviorValue'
+        static member smooth = FssTypes.Scroll.ScrollBehavior.Smooth |> BehaviorValue'
+        static member auto = FssTypes.Auto |> BehaviorValue'
+        static member inherit' = FssTypes.Inherit |> BehaviorValue'
+        static member initial = FssTypes.Initial |> BehaviorValue'
+        static member unset = FssTypes.Unset |> BehaviorValue'
 
     /// <summary>Specifies the Behavior of scrolling.</summary>
     /// <param name="behavior">
@@ -32,7 +32,7 @@ module ScrollBehavior =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollBehavior' (behavior: FssTypes.IScrollBehavior) = behavior |> ScrollBehavior.Value
+    let ScrollBehavior' (behavior: FssTypes.IScrollBehavior) = behavior |> ScrollBehavior.value
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
 [<AutoOpen>]
@@ -50,29 +50,29 @@ module ScrollMargin =
         |> scrollMarginValue
 
     type ScrollMargin =
-        static member Value (width: FssTypes.IScrollMargin) = width |> scrollMarginValue'
+        static member value (width: FssTypes.IScrollMargin) = width |> scrollMarginValue'
 
-        static member Value (vertical: FssTypes.IScrollMargin, horizontal: FssTypes.IScrollMargin) =
+        static member value (vertical: FssTypes.IScrollMargin, horizontal: FssTypes.IScrollMargin) =
             sprintf "%s %s"
                 (scrollMarginToString vertical)
                 (scrollMarginToString horizontal)
             |> scrollMarginValue
-        static member Value (top: FssTypes.IScrollMargin, auto: FssTypes.IScrollMargin, bottom: FssTypes.IScrollMargin) =
+        static member value (top: FssTypes.IScrollMargin, auto: FssTypes.IScrollMargin, bottom: FssTypes.IScrollMargin) =
             sprintf "%s %s %s"
                 (scrollMarginToString top)
                 (scrollMarginToString auto)
                 (scrollMarginToString bottom)
             |> scrollMarginValue
-        static member Value (top: FssTypes.IScrollMargin, right: FssTypes.IScrollMargin, bottom: FssTypes.IScrollMargin, left: FssTypes.IScrollMargin) =
+        static member value (top: FssTypes.IScrollMargin, right: FssTypes.IScrollMargin, bottom: FssTypes.IScrollMargin, left: FssTypes.IScrollMargin) =
             sprintf "%s %s %s %s"
                 (scrollMarginToString top)
                 (scrollMarginToString right)
                 (scrollMarginToString bottom)
                 (scrollMarginToString left)
             |> scrollMarginValue
-        static member Inherit = FssTypes.Inherit |> scrollMarginValue'
-        static member Initial = FssTypes.Initial |> scrollMarginValue'
-        static member Unset = FssTypes.Unset |> scrollMarginValue'
+        static member inherit' = FssTypes.Inherit |> scrollMarginValue'
+        static member initial = FssTypes.Initial |> scrollMarginValue'
+        static member unset = FssTypes.Unset |> scrollMarginValue'
 
     /// <summary>Specifies the scroll margin on all sides of an element.</summary>
     /// <param name="scrollMargin">
@@ -83,7 +83,7 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMargin' (scrollMargin: FssTypes.IScrollMargin) = ScrollMargin.Value(scrollMargin)
+    let ScrollMargin' (scrollMargin: FssTypes.IScrollMargin) = ScrollMargin.value(scrollMargin)
 
     let private scrollMarginTopValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginTop value
     let private scrollMarginTopValue' value =
@@ -91,10 +91,10 @@ module ScrollMargin =
         |> scrollMarginToString
         |> scrollMarginTopValue
     type ScrollMarginTop =
-        static member Value (top: FssTypes.IScrollMargin) = top |> scrollMarginTopValue'
-        static member Inherit = FssTypes.Inherit |> scrollMarginTopValue'
-        static member Initial = FssTypes.Initial |> scrollMarginTopValue'
-        static member Unset = FssTypes.Unset |> scrollMarginTopValue'
+        static member value (top: FssTypes.IScrollMargin) = top |> scrollMarginTopValue'
+        static member inherit' = FssTypes.Inherit |> scrollMarginTopValue'
+        static member initial = FssTypes.Initial |> scrollMarginTopValue'
+        static member unset = FssTypes.Unset |> scrollMarginTopValue'
 
     /// <summary>Specifies the scroll margin on top side of an element.</summary>
     /// <param name="top">
@@ -105,7 +105,7 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMarginTop' (top: FssTypes.IScrollMargin) = ScrollMarginTop.Value(top)
+    let ScrollMarginTop' (top: FssTypes.IScrollMargin) = ScrollMarginTop.value(top)
 
     let private scrollMarginRightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginRight value
     let private scrollMarginRightValue' value =
@@ -113,10 +113,10 @@ module ScrollMargin =
         |> scrollMarginToString
         |> scrollMarginRightValue
     type ScrollMarginRight =
-        static member Value (right: FssTypes.IScrollMargin) = right |> scrollMarginRightValue'
-        static member Inherit = FssTypes.Inherit |> scrollMarginRightValue'
-        static member Initial = FssTypes.Initial |> scrollMarginRightValue'
-        static member Unset = FssTypes.Unset |> scrollMarginRightValue'
+        static member value (right: FssTypes.IScrollMargin) = right |> scrollMarginRightValue'
+        static member inherit' = FssTypes.Inherit |> scrollMarginRightValue'
+        static member initial = FssTypes.Initial |> scrollMarginRightValue'
+        static member unset = FssTypes.Unset |> scrollMarginRightValue'
 
     /// <summary>Specifies the scroll margin on right side of an element.</summary>
     /// <param name="right">
@@ -127,7 +127,7 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMarginRight' (right: FssTypes.IScrollMargin) = ScrollMarginRight.Value(right)
+    let ScrollMarginRight' (right: FssTypes.IScrollMargin) = ScrollMarginRight.value(right)
 
     let private scrollMarginBottomValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginBottom value
     let private scrollMarginBottomValue' value =
@@ -135,10 +135,10 @@ module ScrollMargin =
         |> scrollMarginToString
         |> scrollMarginBottomValue
     type ScrollMarginBottom =
-        static member Value (bottom: FssTypes.IScrollMargin) = bottom |> scrollMarginBottomValue'
-        static member Inherit = FssTypes.Inherit |> scrollMarginBottomValue'
-        static member Initial = FssTypes.Initial |> scrollMarginBottomValue'
-        static member Unset = FssTypes.Unset |> scrollMarginBottomValue'
+        static member value (bottom: FssTypes.IScrollMargin) = bottom |> scrollMarginBottomValue'
+        static member inherit' = FssTypes.Inherit |> scrollMarginBottomValue'
+        static member initial = FssTypes.Initial |> scrollMarginBottomValue'
+        static member unset = FssTypes.Unset |> scrollMarginBottomValue'
     /// <summary>Specifies the scroll margin on bottom side of an element.</summary>
     /// <param name="bottom">
     ///     can be:
@@ -148,7 +148,7 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMarginBottom' (bottom: FssTypes.IScrollMargin) = ScrollMarginBottom.Value(bottom)
+    let ScrollMarginBottom' (bottom: FssTypes.IScrollMargin) = ScrollMarginBottom.value(bottom)
 
     let private scrollMarginLeftValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginLeft value
     let private scrollMarginLeftValue' value =
@@ -156,10 +156,10 @@ module ScrollMargin =
         |> scrollMarginToString
         |> scrollMarginLeftValue
     type ScrollMarginLeft =
-        static member Value (left: FssTypes.IScrollMargin) = left |> scrollMarginLeftValue'
-        static member Inherit = FssTypes.Inherit |> scrollMarginLeftValue'
-        static member Initial = FssTypes.Initial |> scrollMarginLeftValue'
-        static member Unset = FssTypes.Unset |> scrollMarginLeftValue'
+        static member value (left: FssTypes.IScrollMargin) = left |> scrollMarginLeftValue'
+        static member inherit' = FssTypes.Inherit |> scrollMarginLeftValue'
+        static member initial = FssTypes.Initial |> scrollMarginLeftValue'
+        static member unset = FssTypes.Unset |> scrollMarginLeftValue'
 
     /// <summary>Specifies the scroll margin on left side of an element.</summary>
     /// <param name="left">
@@ -170,7 +170,7 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMarginLeft' (left: FssTypes.IScrollMargin) = ScrollMarginLeft.Value(left)
+    let ScrollMarginLeft' (left: FssTypes.IScrollMargin) = ScrollMarginLeft.value(left)
 
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
@@ -189,29 +189,29 @@ module ScrollPadding =
         |> scrollPaddingValue
 
     type ScrollPadding =
-        static member Value (width: FssTypes.IScrollPadding) = width |> scrollPaddingValue'
+        static member value (width: FssTypes.IScrollPadding) = width |> scrollPaddingValue'
 
-        static member Value (vertical: FssTypes.IScrollPadding, horizontal: FssTypes.IScrollPadding) =
+        static member value (vertical: FssTypes.IScrollPadding, horizontal: FssTypes.IScrollPadding) =
             sprintf "%s %s"
                 (scrollPaddingToString vertical)
                 (scrollPaddingToString horizontal)
             |> scrollPaddingValue
-        static member Value (top: FssTypes.IScrollPadding, auto: FssTypes.IScrollPadding, bottom: FssTypes.IScrollPadding) =
+        static member value (top: FssTypes.IScrollPadding, auto: FssTypes.IScrollPadding, bottom: FssTypes.IScrollPadding) =
             sprintf "%s %s %s"
                 (scrollPaddingToString top)
                 (scrollPaddingToString auto)
                 (scrollPaddingToString bottom)
             |> scrollPaddingValue
-        static member Value (top: FssTypes.IScrollPadding, right: FssTypes.IScrollPadding, bottom: FssTypes.IScrollPadding, left: FssTypes.IScrollPadding) =
+        static member value (top: FssTypes.IScrollPadding, right: FssTypes.IScrollPadding, bottom: FssTypes.IScrollPadding, left: FssTypes.IScrollPadding) =
             sprintf "%s %s %s %s"
                 (scrollPaddingToString top)
                 (scrollPaddingToString right)
                 (scrollPaddingToString bottom)
                 (scrollPaddingToString left)
             |> scrollPaddingValue
-        static member Inherit = FssTypes.Inherit |> scrollPaddingValue'
-        static member Initial = FssTypes.Initial |> scrollPaddingValue'
-        static member Unset = FssTypes.Unset |> scrollPaddingValue'
+        static member inherit' = FssTypes.Inherit |> scrollPaddingValue'
+        static member initial = FssTypes.Initial |> scrollPaddingValue'
+        static member unset = FssTypes.Unset |> scrollPaddingValue'
 
     /// <summary>Specifies the scroll padding on all sides of an element.</summary>
     /// <param name="scrollPadding">
@@ -224,7 +224,7 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPadding' (scrollPadding: FssTypes.IScrollPadding) = ScrollPadding.Value(scrollPadding)
+    let ScrollPadding' (scrollPadding: FssTypes.IScrollPadding) = ScrollPadding.value(scrollPadding)
 
     let private scrollPaddingTopValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingTop value
     let private scrollPaddingTopValue' value =
@@ -232,10 +232,10 @@ module ScrollPadding =
         |> scrollPaddingToString
         |> scrollPaddingTopValue
     type ScrollPaddingTop =
-        static member Value (top: FssTypes.IScrollPadding) = top |> scrollPaddingTopValue'
-        static member Inherit = FssTypes.Inherit |> scrollPaddingTopValue'
-        static member Initial = FssTypes.Initial |> scrollPaddingTopValue'
-        static member Unset = FssTypes.Unset |> scrollPaddingTopValue'
+        static member value (top: FssTypes.IScrollPadding) = top |> scrollPaddingTopValue'
+        static member inherit' = FssTypes.Inherit |> scrollPaddingTopValue'
+        static member initial = FssTypes.Initial |> scrollPaddingTopValue'
+        static member unset = FssTypes.Unset |> scrollPaddingTopValue'
 
     /// <summary>Specifies the scroll padding on top side of an element.</summary>
     /// <param name="top">
@@ -248,7 +248,7 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPaddingTop' (top: FssTypes.IScrollPadding) = ScrollPaddingTop.Value(top)
+    let ScrollPaddingTop' (top: FssTypes.IScrollPadding) = ScrollPaddingTop.value(top)
 
     let private scrollPaddingRightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingRight value
     let private scrollPaddingRightValue' value =
@@ -256,10 +256,10 @@ module ScrollPadding =
         |> scrollPaddingToString
         |> scrollPaddingRightValue
     type ScrollPaddingRight =
-        static member Value (right: FssTypes.IScrollPadding) = right |> scrollPaddingRightValue'
-        static member Inherit = FssTypes.Inherit |> scrollPaddingRightValue'
-        static member Initial = FssTypes.Initial |> scrollPaddingRightValue'
-        static member Unset = FssTypes.Unset |> scrollPaddingRightValue'
+        static member value (right: FssTypes.IScrollPadding) = right |> scrollPaddingRightValue'
+        static member inherit' = FssTypes.Inherit |> scrollPaddingRightValue'
+        static member initial = FssTypes.Initial |> scrollPaddingRightValue'
+        static member unset = FssTypes.Unset |> scrollPaddingRightValue'
 
     /// <summary>Specifies the scroll padding on right side of an element.</summary>
     /// <param name="right">
@@ -272,7 +272,7 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPaddingRight' (right: FssTypes.IScrollPadding) = ScrollPaddingRight.Value(right)
+    let ScrollPaddingRight' (right: FssTypes.IScrollPadding) = ScrollPaddingRight.value(right)
 
     let private scrollPaddingBottomValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingBottom value
     let private scrollPaddingBottomValue' value =
@@ -280,10 +280,10 @@ module ScrollPadding =
         |> scrollPaddingToString
         |> scrollPaddingBottomValue
     type ScrollPaddingBottom =
-        static member Value (bottom: FssTypes.IScrollPadding) = bottom |> scrollPaddingBottomValue'
-        static member Inherit = FssTypes.Inherit |> scrollPaddingBottomValue'
-        static member Initial = FssTypes.Initial |> scrollPaddingBottomValue'
-        static member Unset = FssTypes.Unset |> scrollPaddingBottomValue'
+        static member value (bottom: FssTypes.IScrollPadding) = bottom |> scrollPaddingBottomValue'
+        static member inherit' = FssTypes.Inherit |> scrollPaddingBottomValue'
+        static member initial = FssTypes.Initial |> scrollPaddingBottomValue'
+        static member unset = FssTypes.Unset |> scrollPaddingBottomValue'
     /// <summary>Specifies the scroll padding on bottom side of an element.</summary>
     /// <param name="bottom">
     ///     can be:
@@ -295,7 +295,7 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPaddingBottom' (bottom: FssTypes.IScrollPadding) = ScrollPaddingBottom.Value(bottom)
+    let ScrollPaddingBottom' (bottom: FssTypes.IScrollPadding) = ScrollPaddingBottom.value(bottom)
 
     let private scrollPaddingLeftValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingLeft value
     let private scrollPaddingLeftValue' value =
@@ -303,10 +303,10 @@ module ScrollPadding =
         |> scrollPaddingToString
         |> scrollPaddingLeftValue
     type ScrollPaddingLeft =
-        static member Value (left: FssTypes.IScrollPadding) = left |> scrollPaddingLeftValue'
-        static member Inherit = FssTypes.Inherit |> scrollPaddingLeftValue'
-        static member Initial = FssTypes.Initial |> scrollPaddingLeftValue'
-        static member Unset = FssTypes.Unset |> scrollPaddingLeftValue'
+        static member value (left: FssTypes.IScrollPadding) = left |> scrollPaddingLeftValue'
+        static member inherit' = FssTypes.Inherit |> scrollPaddingLeftValue'
+        static member initial = FssTypes.Initial |> scrollPaddingLeftValue'
+        static member unset = FssTypes.Unset |> scrollPaddingLeftValue'
 
     /// <summary>Specifies the scroll padding on left side of an element.</summary>
     /// <param name="left">
@@ -319,7 +319,7 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPaddingLeft' (left: FssTypes.IScrollPadding) = ScrollPaddingLeft.Value(left)
+    let ScrollPaddingLeft' (left: FssTypes.IScrollPadding) = ScrollPaddingLeft.value(left)
 
 [<AutoOpen>]
 module OverscrollBehaviorX =
@@ -338,12 +338,12 @@ module OverscrollBehaviorX =
         |> overscrollBehaviour
 
     type OverscrollBehaviorX =
-        static member Value (behavior: FssTypes.IOverscrollBehaviorX) = behavior |> overscrollBehaviour
-        static member Auto = FssTypes.Auto |> overscrollBehaviour'
-        static member Contain = FssTypes.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
-        static member Inherit = FssTypes.Inherit |> overscrollBehaviour'
-        static member Initial = FssTypes.Initial |> overscrollBehaviour'
-        static member Unset = FssTypes.Unset |> overscrollBehaviour'
+        static member value (behavior: FssTypes.IOverscrollBehaviorX) = behavior |> overscrollBehaviour
+        static member auto = FssTypes.Auto |> overscrollBehaviour'
+        static member contain = FssTypes.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
+        static member inherit' = FssTypes.Inherit |> overscrollBehaviour'
+        static member initial = FssTypes.Initial |> overscrollBehaviour'
+        static member unset = FssTypes.Unset |> overscrollBehaviour'
 
     /// <summary>Specify browser behavior when scroll hits horizontal boundry.</summary>
     /// <param name="behavior">
@@ -355,7 +355,7 @@ module OverscrollBehaviorX =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OverscrollBehaviorX' (behavior: FssTypes.IOverscrollBehaviorX) = behavior |> OverscrollBehaviorX.Value
+    let OverscrollBehaviorX' (behavior: FssTypes.IOverscrollBehaviorX) = behavior |> OverscrollBehaviorX.value
 
     [<AutoOpen>]
     module OverscrollBehaviorY =
@@ -374,12 +374,12 @@ module OverscrollBehaviorX =
             |> overscrollBehaviour
 
         type OverscrollBehaviorY =
-            static member Value (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> overscrollBehaviour
-            static member Auto = FssTypes.Auto |> overscrollBehaviour'
-            static member Contain = FssTypes.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
-            static member Inherit = FssTypes.Inherit |> overscrollBehaviour'
-            static member Initial = FssTypes.Initial |> overscrollBehaviour'
-            static member Unset = FssTypes.Unset |> overscrollBehaviour'
+            static member value (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> overscrollBehaviour
+            static member auto = FssTypes.Auto |> overscrollBehaviour'
+            static member contain = FssTypes.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
+            static member inherit' = FssTypes.Inherit |> overscrollBehaviour'
+            static member initial = FssTypes.Initial |> overscrollBehaviour'
+            static member unset = FssTypes.Unset |> overscrollBehaviour'
 
         /// <summary>Specify browser behavior when scroll hits vertical boundry.</summary>
         /// <param name="behavior">
@@ -391,4 +391,4 @@ module OverscrollBehaviorX =
         ///     - <c> Unset </c>
         /// </param>
         /// <returns>Css property for fss.</returns>
-        let OverscrollBehaviorY' (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> OverscrollBehaviorY.Value
+        let OverscrollBehaviorY' (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> OverscrollBehaviorY.value

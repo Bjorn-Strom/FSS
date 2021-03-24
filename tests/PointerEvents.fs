@@ -11,50 +11,50 @@ module PointerEvents =
             [
                 test
                     "PointerEvents VisiblePainted"
-                    [ PointerEvents.VisiblePainted ]
+                    [ PointerEvents.visiblePainted ]
                     ["pointerEvents" ==> "visiblePainted"]
                 test
                     "PointerEvents VisibleFill"
-                    [ PointerEvents.VisibleFill ]
+                    [ PointerEvents.visibleFill ]
                     ["pointerEvents" ==> "visibleFill"]
                 test
                     "PointerEvents VisibleStroke"
-                    [ PointerEvents.VisibleStroke ]
+                    [ PointerEvents.visibleStroke ]
                     ["pointerEvents" ==> "visibleStroke"]
                 test
                     "PointerEvents Visible"
-                    [ PointerEvents.Visible ]
+                    [ PointerEvents.visible ]
                     ["pointerEvents" ==> "visible"]
                 test
                     "PointerEvents Painted"
-                    [ PointerEvents.Painted ]
+                    [ PointerEvents.painted ]
                     ["pointerEvents" ==> "painted"]
                 test
                     "PointerEvents Stroke"
-                    [ PointerEvents.Stroke ]
+                    [ PointerEvents.stroke ]
                     ["pointerEvents" ==> "stroke"]
                 test
                     "PointerEvents All"
-                    [ PointerEvents.All ]
+                    [ PointerEvents.all ]
                     ["pointerEvents" ==> "all"]
                 test
                     "PointerEvents none"
-                    [ PointerEvents.None]
+                    [ PointerEvents.none]
                     [ "pointerEvents" ==> "none" ]
                 test
                     "PointerEvents auto"
-                    [ PointerEvents.Auto]
+                    [ PointerEvents.auto]
                     [ "pointerEvents" ==> "auto" ]
                 test
                     "PointerEvents inherit"
-                    [ PointerEvents.Inherit]
+                    [ PointerEvents.inherit']
                     [ "pointerEvents" ==> "inherit" ]
                 test
                     "PointerEvents initial"
-                    [ PointerEvents.Initial]
+                    [ PointerEvents.initial]
                     [ "pointerEvents" ==> "initial" ]
                 test
                     "PointerEvents unset"
-                    [ PointerEvents.Unset ]
+                    [ PointerEvents.unset ]
                     [ "pointerEvents" ==> "unset" ]
             ]

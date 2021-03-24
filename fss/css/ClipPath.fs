@@ -53,69 +53,69 @@ module ClipPath =
         |> clipPathValue
 
     type ClipPath =
-        static member Inset (inset: FssTypes.ILengthPercentage) =
+        static member inset (inset: FssTypes.ILengthPercentage) =
             FssTypes.ClipPath.Inset.All inset
             |> clipPathValue'
-        static member Inset (horizontal: FssTypes.ILengthPercentage, vertical: FssTypes.ILengthPercentage) =
+        static member inset (horizontal: FssTypes.ILengthPercentage, vertical: FssTypes.ILengthPercentage) =
             FssTypes.ClipPath.Inset.HorizontalVertical(horizontal, vertical)
             |> clipPathValue'
-        static member Inset (top: FssTypes.ILengthPercentage, horizontal: FssTypes.ILengthPercentage, bottom: FssTypes.ILengthPercentage) =
+        static member inset (top: FssTypes.ILengthPercentage, horizontal: FssTypes.ILengthPercentage, bottom: FssTypes.ILengthPercentage) =
             FssTypes.ClipPath.Inset.TopHorizontalBottom(top, horizontal, bottom)
             |> clipPathValue'
-        static member Inset (top: FssTypes.ILengthPercentage, right: FssTypes.ILengthPercentage, bottom: FssTypes.ILengthPercentage, left: FssTypes.ILengthPercentage) =
+        static member inset (top: FssTypes.ILengthPercentage, right: FssTypes.ILengthPercentage, bottom: FssTypes.ILengthPercentage, left: FssTypes.ILengthPercentage) =
             FssTypes.ClipPath.Inset.TopRightBottomLeft(top, right, bottom, left)
             |> clipPathValue'
-        static member Inset (inset: FssTypes.ILengthPercentage, round: FssTypes.ILengthPercentage list) =
+        static member inset (inset: FssTypes.ILengthPercentage, round: FssTypes.ILengthPercentage list) =
             FssTypes.ClipPath.Round (FssTypes.ClipPath.Inset.All inset, round)
             |> clipPathValue'
-        static member Inset (horizontal: FssTypes.ILengthPercentage, vertical: FssTypes.ILengthPercentage, round: FssTypes.ILengthPercentage list) =
+        static member inset (horizontal: FssTypes.ILengthPercentage, vertical: FssTypes.ILengthPercentage, round: FssTypes.ILengthPercentage list) =
             FssTypes.ClipPath.Round (FssTypes.ClipPath.Inset.HorizontalVertical(horizontal, vertical), round)
             |> clipPathValue'
-        static member Inset (top: FssTypes.ILengthPercentage, horizontal: FssTypes.ILengthPercentage, bottom: FssTypes.ILengthPercentage, round: FssTypes.ILengthPercentage list) =
+        static member inset (top: FssTypes.ILengthPercentage, horizontal: FssTypes.ILengthPercentage, bottom: FssTypes.ILengthPercentage, round: FssTypes.ILengthPercentage list) =
             FssTypes.ClipPath.Round (FssTypes.ClipPath.Inset.TopHorizontalBottom(top, horizontal, bottom), round)
             |> clipPathValue'
-        static member Inset (top: FssTypes.ILengthPercentage, right: FssTypes.ILengthPercentage, bottom: FssTypes.ILengthPercentage, left: FssTypes.ILengthPercentage, round: FssTypes.ILengthPercentage list) =
+        static member inset (top: FssTypes.ILengthPercentage, right: FssTypes.ILengthPercentage, bottom: FssTypes.ILengthPercentage, left: FssTypes.ILengthPercentage, round: FssTypes.ILengthPercentage list) =
             FssTypes.ClipPath.Round (FssTypes.ClipPath.Inset.TopRightBottomLeft(top, right, bottom, left), round)
             |> clipPathValue'
-        static member Circle (radius: FssTypes.ILengthPercentage) =
+        static member circle (radius: FssTypes.ILengthPercentage) =
             sprintf "circle(%s)"
                 (FssTypes.unitHelpers.lengthPercentageToString radius)
             |> clipPathValue
-        static member CircleAt (radius: FssTypes.ILengthPercentage, x: FssTypes.ILengthPercentage, y: FssTypes.ILengthPercentage) =
+        static member circleAt (radius: FssTypes.ILengthPercentage, x: FssTypes.ILengthPercentage, y: FssTypes.ILengthPercentage) =
             sprintf "circle(%s at %s %s)"
                 (FssTypes.unitHelpers.lengthPercentageToString radius)
                 (FssTypes.unitHelpers.lengthPercentageToString x)
                 (FssTypes.unitHelpers.lengthPercentageToString y)
             |> clipPathValue
-        static member Ellipse (radius: FssTypes.ILengthPercentage) =
+        static member ellipse (radius: FssTypes.ILengthPercentage) =
             sprintf "ellipse(%s)"
                 (FssTypes.unitHelpers.lengthPercentageToString radius)
             |> clipPathValue
-        static member EllipseAt (radius: FssTypes.ILengthPercentage, x: FssTypes.ILengthPercentage, y: FssTypes.ILengthPercentage) =
+        static member ellipseAt (radius: FssTypes.ILengthPercentage, x: FssTypes.ILengthPercentage, y: FssTypes.ILengthPercentage) =
             sprintf "ellipse(%s at %s %s)"
                 (FssTypes.unitHelpers.lengthPercentageToString radius)
                 (FssTypes.unitHelpers.lengthPercentageToString x)
                 (FssTypes.unitHelpers.lengthPercentageToString y)
             |> clipPathValue
-        static member Url (url: string) =
+        static member url (url: string) =
             sprintf "url(%s)" url
             |> clipPathValue
-        static member Path (path: string) =
+        static member path (path: string) =
             sprintf "path('%s')" path
             |> clipPathValue
-        static member Polygon (points: FssTypes.ClipPath.Point list) =
+        static member polygon (points: FssTypes.ClipPath.Point list) =
             FssTypes.ClipPath.Polygon points
             |> clipPathValue'
 
-        static member MarginBox = FssTypes.ClipPath.MarginBox |> clipPathValue'
-        static member BorderBox = FssTypes.ClipPath.BorderBox |> clipPathValue'
-        static member PaddingBox = FssTypes.ClipPath.PaddingBox |> clipPathValue'
-        static member ContentBox = FssTypes.ClipPath.ContentBox |> clipPathValue'
-        static member FillBox = FssTypes.ClipPath.FillBox |> clipPathValue'
-        static member StrokeBox = FssTypes.ClipPath.StrokeBox |> clipPathValue'
-        static member ViewBox = FssTypes.ClipPath.ViewBox |> clipPathValue'
+        static member marginBox = FssTypes.ClipPath.MarginBox |> clipPathValue'
+        static member borderBox = FssTypes.ClipPath.BorderBox |> clipPathValue'
+        static member paddingBox = FssTypes.ClipPath.PaddingBox |> clipPathValue'
+        static member contentBox = FssTypes.ClipPath.ContentBox |> clipPathValue'
+        static member fillBox = FssTypes.ClipPath.FillBox |> clipPathValue'
+        static member strokeBox = FssTypes.ClipPath.StrokeBox |> clipPathValue'
+        static member viewBox = FssTypes.ClipPath.ViewBox |> clipPathValue'
 
-        static member None = FssTypes.None' |> clipPathValue'
-        static member Inherit = FssTypes.Inherit |> clipPathValue'
-        static member Initial = FssTypes.Initial |> clipPathValue'
-        static member Unset = FssTypes.Unset |> clipPathValue'
+        static member none = FssTypes.None' |> clipPathValue'
+        static member inherit' = FssTypes.Inherit |> clipPathValue'
+        static member initial = FssTypes.Initial |> clipPathValue'
+        static member unset = FssTypes.Unset |> clipPathValue'

@@ -20,63 +20,63 @@ module Content =
         |> contentValue
 
     type Content =
-        static member OpenQuote = FssTypes.Content.OpenQuote |> contentValue'
-        static member CloseQuote = FssTypes.Content.CloseQuote |> contentValue'
-        static member NoOpenQuote = FssTypes.Content.NoOpenQuote |> contentValue'
-        static member NoCloseQuote = FssTypes.Content.NoCloseQuote |> contentValue'
+        static member openQuote = FssTypes.Content.OpenQuote |> contentValue'
+        static member closeQuote = FssTypes.Content.CloseQuote |> contentValue'
+        static member noOpenQuote = FssTypes.Content.NoOpenQuote |> contentValue'
+        static member noCloseQuote = FssTypes.Content.NoCloseQuote |> contentValue'
 
-        static member Counter (counter: FssTypes.Counter.Style) =
+        static member counter (counter: FssTypes.Counter.Style) =
             contentValue <| sprintf "counter(%s)" (FssTypes.counterStyleHelpers.counterStyleToString counter)
-        static member Counters (counter: FssTypes.Counter.Style, listType: FssTypes.IListStyleType) =
+        static member counters (counter: FssTypes.Counter.Style, listType: FssTypes.IListStyleType) =
             contentValue <| sprintf "counters(%s, %s)" (FssTypes.counterStyleHelpers.counterStyleToString counter) (FssTypes.listStyleHelpers.styleTypeToString listType)
-        static member Counter (counter: FssTypes.Counter.Style, value: string) =
+        static member counter (counter: FssTypes.Counter.Style, value: string) =
             contentValue <| sprintf "counter(%s)'%s'" (FssTypes.counterStyleHelpers.counterStyleToString counter) value
-        static member Counters (counters: FssTypes.Counter.Style list, values: string list) =
+        static member counters (counters: FssTypes.Counter.Style list, values: string list) =
             List.zip (List.map FssTypes.counterStyleHelpers.counterStyleToString counters) values
             |> List.map (fun (x, y) -> sprintf "counter(%s) '%s'" x y)
             |> String.concat " "
             |> contentValue
-        static member Url (url: string) = contentValue <| sprintf "url(%s)" url
-        static member Url (url: string, altText: string) = contentValue <| sprintf "url(%s) / \"%s\"" url altText
-        static member Value (value: string) = contentValue <| sprintf "\"%s\"" value
-        static member Value (content: FssTypes.IContent) = content |> contentValue'
-        static member LinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member url (url: string) = contentValue <| sprintf "url(%s)" url
+        static member url (url: string, altText: string) = contentValue <| sprintf "url(%s) / \"%s\"" url altText
+        static member value (value: string) = contentValue <| sprintf "\"%s\"" value
+        static member value (content: FssTypes.IContent) = content |> contentValue'
+        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             contentValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
             contentValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member LinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
+        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
             contentValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member LinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
+        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
             contentValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member RepeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
             contentValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             contentValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member RepeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
+        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
             contentValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
-        static member RepeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
+        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
             contentValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member RadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             contentValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
             contentValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member RadialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Percent) list) list) =
+        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Percent) list) list) =
             contentValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member RadialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Size) list) list) =
+        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Size) list) list) =
             contentValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member RepeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
             contentValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member RepeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
             contentValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member Attribute (attribute: FssTypes.Attribute.Attribute) =
+        static member attribute (attribute: FssTypes.Attribute.Attribute) =
             contentValue <| sprintf "attr(%A)" (FssTypes.attributeHelpers.attributeToString attribute)
 
-        static member Normal = FssTypes.Normal |> contentValue'
-        static member None = FssTypes.None' |> contentValue'
-        static member Inherit = FssTypes.Inherit |> contentValue'
-        static member Initial = FssTypes.Initial |> contentValue'
-        static member Unset = FssTypes.Unset |> contentValue'
+        static member normal = FssTypes.Normal |> contentValue'
+        static member none = FssTypes.None' |> contentValue'
+        static member inherit' = FssTypes.Inherit |> contentValue'
+        static member initial = FssTypes.Initial |> contentValue'
+        static member unset = FssTypes.Unset |> contentValue'
 
     /// <summary>Replaces element with a value.</summary>
     /// <param name="content">
@@ -91,16 +91,16 @@ module Content =
     ///     - <c> CounterStyle </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Content' (content: FssTypes.IContent) = Content.Value(content)
+    let Content' (content: FssTypes.IContent) = Content.value(content)
 
 [<AutoOpen>]
 module Label =
     type Label =
-        static member Value(label: string) =
+        static member value(label: string) =
             (label.Replace(" ", ""))
             |> FssTypes.propertyHelpers.cssValue FssTypes.Property.Label
 
     /// <summary>Gives label to generated CSS string.</summary>
     /// <param name="label">The name to give to the generated CSS string</param>
     /// <returns>Css property for fss.</returns>
-    let Label' (label: string) = Label.Value(label)
+    let Label' (label: string) = Label.value(label)

@@ -15,67 +15,67 @@ module Grid =
                     ["gridArea" ==> "foo"]
                 test
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Ident "area1", GridPosition.Ident "area2") ]
+                    [ GridArea.value (GridPosition.ident "area1", GridPosition.ident "area2") ]
                     ["gridArea" ==> "area1 / area2"]
                 test
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Span 3, GridPosition.Ident "area2") ]
+                    [ GridArea.value (GridPosition.span 3, GridPosition.ident "area2") ]
                     ["gridArea" ==> "span 3 / area2"]
                 test
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Auto, GridPosition.Auto) ]
+                    [ GridArea.value (GridPosition.auto, GridPosition.auto) ]
                     ["gridArea" ==> "auto / auto"]
                 test
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Auto, GridPosition.Auto, GridPosition.Auto) ]
+                    [ GridArea.value (GridPosition.auto, GridPosition.auto, GridPosition.auto) ]
                     ["gridArea" ==> "auto / auto / auto"]
                 test
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Auto, GridPosition.Auto, GridPosition.Auto, GridPosition.Auto) ]
+                    [ GridArea.value (GridPosition.auto, GridPosition.auto, GridPosition.auto, GridPosition.auto) ]
                     ["gridArea" ==> "auto / auto / auto / auto"]
                 test
                     "Grid area auto"
-                    [ GridArea.Auto ]
+                    [ GridArea.auto ]
                     ["gridArea" ==> "auto"]
                 test
                     "Grid area inherit"
-                    [GridArea.Inherit]
+                    [GridArea.inherit']
                     ["gridArea" ==> "inherit"]
                 test
                     "Grid area initial"
-                    [GridArea.Initial]
+                    [GridArea.initial]
                     ["gridArea" ==> "initial"]
                 test
                     "Grid area unset"
-                    [GridArea.Unset]
+                    [GridArea.unset]
                     ["gridArea" ==> "unset"]
                 test
                     "Grid column ident and ident"
-                    [ GridColumn.Value(GridPosition.Ident "someStart", GridPosition.Ident "someEnd") ]
+                    [ GridColumn.value(GridPosition.ident "someStart", GridPosition.ident "someEnd") ]
                     ["gridColumn" ==> "someStart / someEnd"]
                 test
                     "Grid column ident and value"
-                    [ GridColumn.Value (GridPosition.Ident "someStart", GridPosition.Value 2) ]
+                    [ GridColumn.value (GridPosition.ident "someStart", GridPosition.value 2) ]
                     ["gridColumn" ==> "someStart / 2"]
                 test
                     "Grid column auto"
-                    [GridColumn.Auto]
+                    [GridColumn.auto]
                     ["gridColumn" ==> "auto"]
                 test
                     "Grid column inherit"
-                    [GridColumn.Inherit]
+                    [GridColumn.inherit']
                     ["gridColumn" ==> "inherit"]
                 test
                     "Grid column initial"
-                    [GridColumn.Initial]
+                    [GridColumn.initial]
                     ["gridColumn" ==> "initial"]
                 test
                     "Grid column unset"
-                    [GridColumn.Unset]
+                    [GridColumn.unset]
                     ["gridColumn" ==> "unset"]
                 test
                     "Grid column start auto"
-                    [GridColumnStart.Auto]
+                    [GridColumnStart.auto]
                     ["gridColumnStart" ==> "auto"]
                 test
                     "Grid column start value"
@@ -83,31 +83,31 @@ module Grid =
                     ["gridColumnStart" ==> "1"]
                 test
                     "Grid column start ident"
-                    [GridColumnStart.Ident "somegridarea"]
+                    [GridColumnStart.ident "somegridarea"]
                     ["gridColumnStart" ==> "somegridarea"]
                 test
                     "Grid column value ident and span"
-                    [GridColumnStart.ValueIdentSpan(1, "area") ]
+                    [GridColumnStart.valueIdentSpan(1, "area") ]
                     ["gridColumnStart" ==> "1 area span"]
                 test
                     "Grid column start span"
-                    [GridColumnStart.Span 2 ]
+                    [GridColumnStart.span 2 ]
                     ["gridColumnStart" ==> "span 2"]
                 test
                     "Grid column start inherit"
-                    [GridColumnStart.Inherit]
+                    [GridColumnStart.inherit']
                     ["gridColumnStart" ==> "inherit"]
                 test
                     "Grid column start initial"
-                    [GridColumnStart.Initial]
+                    [GridColumnStart.initial]
                     ["gridColumnStart" ==> "initial"]
                 test
                     "Grid column start unset"
-                    [GridColumnStart.Unset]
+                    [GridColumnStart.unset]
                     ["gridColumnStart" ==> "unset"]
                 test
                     "Grid column end auto"
-                    [GridColumnEnd.Auto]
+                    [GridColumnEnd.auto]
                     ["gridColumnEnd" ==> "auto"]
                 test
                     "Grid column end value"
@@ -115,55 +115,55 @@ module Grid =
                     ["gridColumnEnd" ==> "1"]
                 test
                     "Grid column end ident"
-                    [GridColumnEnd.Ident "somegridarea"]
+                    [GridColumnEnd.ident "somegridarea"]
                     ["gridColumnEnd" ==> "somegridarea"]
                 test
                     "Grid column value ident and span"
-                    [GridColumnEnd.ValueIdentSpan (1, "area") ]
+                    [GridColumnEnd.valueIdentSpan (1, "area") ]
                     ["gridColumnEnd" ==> "1 area span"]
                 test
                     "Grid column end span"
-                    [GridColumnEnd.Span 2 ]
+                    [GridColumnEnd.span 2 ]
                     ["gridColumnEnd" ==> "span 2"]
                 test
                     "Grid column end inherit"
-                    [GridColumnEnd.Inherit]
+                    [GridColumnEnd.inherit']
                     ["gridColumnEnd" ==> "inherit"]
                 test
                     "Grid column end initial"
-                    [GridColumnEnd.Initial]
+                    [GridColumnEnd.initial]
                     ["gridColumnEnd" ==> "initial"]
                 test
                     "Grid column end unset"
-                    [GridColumnEnd.Unset]
+                    [GridColumnEnd.unset]
                     ["gridColumnEnd" ==> "unset"]
                 test
                     "Grid row ident and ident"
-                    [ GridRow.Value (GridPosition.Ident "someStart", GridPosition.Ident "someEnd") ]
+                    [ GridRow.value (GridPosition.ident "someStart", GridPosition.ident "someEnd") ]
                     ["gridRow" ==> "someStart / someEnd"]
                 test
                     "Grid row ident and value"
-                    [ GridRow.Value (GridPosition.Ident "someStart", GridPosition.Value 2) ]
+                    [ GridRow.value (GridPosition.ident "someStart", GridPosition.value 2) ]
                     ["gridRow" ==> "someStart / 2"]
                 test
                     "Grid row auto"
-                    [GridRow.Auto]
+                    [GridRow.auto]
                     ["gridRow" ==> "auto"]
                 test
                     "Grid row inherit"
-                    [GridRow.Inherit]
+                    [GridRow.inherit']
                     ["gridRow" ==> "inherit"]
                 test
                     "Grid row initial"
-                    [GridRow.Initial]
+                    [GridRow.initial]
                     ["gridRow" ==> "initial"]
                 test
                     "Grid row unset"
-                    [GridRow.Unset]
+                    [GridRow.unset]
                     ["gridRow" ==> "unset"]
                 test
                     "Grid row start auto"
-                    [GridRowStart.Auto]
+                    [GridRowStart.auto]
                     ["gridRowStart" ==> "auto"]
                 test
                     "Grid row start value"
@@ -171,31 +171,31 @@ module Grid =
                     ["gridRowStart" ==> "1"]
                 test
                     "Grid row start ident"
-                    [GridRowStart.Ident "somegridarea"]
+                    [GridRowStart.ident "somegridarea"]
                     ["gridRowStart" ==> "somegridarea"]
                 test
                     "Grid row value ident and span"
-                    [GridRowStart.ValueIdentSpan (1, "area") ]
+                    [GridRowStart.valueIdentSpan (1, "area") ]
                     ["gridRowStart" ==> "1 area span"]
                 test
                     "Grid row start span"
-                    [GridRowStart.Span 2]
+                    [GridRowStart.span 2]
                     ["gridRowStart" ==> "span 2"]
                 test
                     "Grid row start inherit"
-                    [GridRowStart.Inherit]
+                    [GridRowStart.inherit']
                     ["gridRowStart" ==> "inherit"]
                 test
                     "Grid row start initial"
-                    [GridRowStart.Initial]
+                    [GridRowStart.initial]
                     ["gridRowStart" ==> "initial"]
                 test
                     "Grid row start unset"
-                    [GridRowStart.Unset]
+                    [GridRowStart.unset]
                     ["gridRowStart" ==> "unset"]
                 test
                     "Grid row end auto"
-                    [GridRowEnd.Auto]
+                    [GridRowEnd.auto]
                     ["gridRowEnd" ==> "auto"]
                 test
                     "Grid row end value"
@@ -203,27 +203,27 @@ module Grid =
                     ["gridRowEnd" ==> "1"]
                 test
                     "Grid row end ident"
-                    [GridRowEnd.Ident "somegridarea"]
+                    [GridRowEnd.ident "somegridarea"]
                     ["gridRowEnd" ==> "somegridarea"]
                 test
                     "Grid row value ident and span"
-                    [GridRowEnd.ValueIdentSpan (1, "area") ]
+                    [GridRowEnd.valueIdentSpan (1, "area") ]
                     ["gridRowEnd" ==> "1 area span"]
                 test
                     "Grid row end span"
-                    [GridRowEnd.Span 2 ]
+                    [GridRowEnd.span 2 ]
                     ["gridRowEnd" ==> "span 2"]
                 test
                     "Grid row end inherit"
-                    [GridRowEnd.Inherit]
+                    [GridRowEnd.inherit']
                     ["gridRowEnd" ==> "inherit"]
                 test
                     "Grid row end initial"
-                    [GridRowEnd.Initial]
+                    [GridRowEnd.initial]
                     ["gridRowEnd" ==> "initial"]
                 test
                     "Grid row end unset"
-                    [GridRowEnd.Unset]
+                    [GridRowEnd.unset]
                     ["gridRowEnd" ==> "unset"]
                 test
                     "Grid gap px"
@@ -239,43 +239,43 @@ module Grid =
                     ["gridGap" ==> "16%"]
                 test
                     "Grid gap px and px"
-                    [ GridGap.Value (px 20, px 10) ]
+                    [ GridGap.value (px 20, px 10) ]
                     ["gridGap" ==> "20px 10px"]
                 test
                     "Grid gap em and em"
-                    [GridGap.Value (em 1., em 0.5) ]
+                    [GridGap.value (em 1., em 0.5) ]
                     ["gridGap" ==> "1.0em 0.5em"]
                 test
                     "Grid gap vmin and vmax"
-                    [GridGap.Value (vmin 3., vmax 2.) ]
+                    [GridGap.value (vmin 3., vmax 2.) ]
                     ["gridGap" ==> "3.0vmin 2.0vmax"]
                 test
                     "Grid gap cm and mm"
-                    [GridGap.Value (cm 0.5, mm 2.) ]
+                    [GridGap.value (cm 0.5, mm 2.) ]
                     ["gridGap" ==> "0.5cm 2.0mm"]
                 test
                     "Grid gap percent and percent"
-                    [GridGap.Value (pct 16, pct 100) ]
+                    [GridGap.value (pct 16, pct 100) ]
                     ["gridGap" ==> "16% 100%"]
                 test
                     "Grid gap px and percent"
-                    [ GridGap.Value (px 21, pct 82) ]
+                    [ GridGap.value (px 21, pct 82) ]
                     ["gridGap" ==> "21px 82%"]
                 test
                     "Grid gap inherit"
-                    [GridGap.Inherit]
+                    [GridGap.inherit']
                     ["gridGap" ==> "inherit"]
                 test
                     "Grid gap initial"
-                    [GridGap.Initial]
+                    [GridGap.initial]
                     ["gridGap" ==> "initial"]
                 test
                     "Grid gap unset"
-                    [GridGap.Unset]
+                    [GridGap.unset]
                     ["gridGap" ==> "unset"]
                 test
                     "Row gap normal"
-                    [GridRowGap.Normal]
+                    [GridRowGap.normal]
                     ["gridRowGap" ==> "normal"]
                 test
                     "Row gap px"
@@ -291,19 +291,19 @@ module Grid =
                     ["gridRowGap" ==> "3%"]
                 test
                     "Row gap inherit"
-                    [GridRowGap.Inherit]
+                    [GridRowGap.inherit']
                     ["gridRowGap" ==> "inherit"]
                 test
                     "Row gap initial"
-                    [GridRowGap.Initial]
+                    [GridRowGap.initial]
                     ["gridRowGap" ==> "initial"]
                 test
                     "Row gap unset"
-                    [GridRowGap.Unset]
+                    [GridRowGap.unset]
                     ["gridRowGap" ==> "unset"]
                 test
                     "Column gap normal"
-                    [GridColumnGap.Normal]
+                    [GridColumnGap.normal]
                     ["gridColumnGap" ==> "normal"]
                 test
                     "Column gap px"
@@ -319,15 +319,15 @@ module Grid =
                     ["gridColumnGap" ==> "3%"]
                 test
                     "Column gap inherit"
-                    [GridColumnGap.Inherit]
+                    [GridColumnGap.inherit']
                     ["gridColumnGap" ==> "inherit"]
                 test
                     "Column gap initial"
-                    [GridColumnGap.Initial]
+                    [GridColumnGap.initial]
                     ["gridColumnGap" ==> "initial"]
                 test
                     "Column gap unset"
-                    [GridColumnGap.Unset]
+                    [GridColumnGap.unset]
                     ["gridColumnGap" ==> "unset"]
                 test
                     "Grid template row px"
@@ -335,54 +335,54 @@ module Grid =
                     ["gridTemplateRows" ==> "100px"]
                 test
                     "Grid template row minmax"
-                    [GridTemplateRows.MinMax (px 100, fr 1.) ]
+                    [GridTemplateRows.minMax (px 100, fr 1.) ]
                     ["gridTemplateRows" ==> "minmax(100px, 1.00fr)"]
                 test
                     "Grid template row fit-content"
-                    [GridTemplateRows.FitContent(px 100)]
+                    [GridTemplateRows.fitContent(px 100)]
                     ["gridTemplateRows" ==> "fit-content(100px)"]
                 test
                     "Grid template row repeat"
-                    [GridTemplateRows.Repeat(3, px 200)]
+                    [GridTemplateRows.repeat(3, px 200)]
                     ["gridTemplateRows" ==> "repeat(3, 200px)"]
                 test
                     "Grid template row subgrid"
-                    [GridTemplateRows.Subgrid ]
+                    [GridTemplateRows.subgrid ]
                     ["gridTemplateRows" ==> "subgrid"]
                 test
                     "Grid template row masonry"
-                    [GridTemplateRows.Masonry ]
+                    [GridTemplateRows.masonry ]
                     ["gridTemplateRows" ==> "masonry"]
                 test
                     "Grid template row none"
-                    [GridTemplateRows.None]
+                    [GridTemplateRows.none]
                     ["gridTemplateRows" ==> "none"]
                 test
                     "Grid template row px repeat px"
-                    [GridTemplateRows.Values [ px 200; FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
+                    [GridTemplateRows.values [ px 200; FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateRows" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid template row minmax repeat percent"
-                    [GridTemplateRows.Values [
+                    [GridTemplateRows.values [
                         FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent)
                         FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 200); pct 20
                     ]]
                     ["gridTemplateRows" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
                 test
                     "Grid template row auto"
-                    [GridTemplateRows.Auto]
+                    [GridTemplateRows.auto]
                     ["gridTemplateRows" ==> "auto"]
                 test
                     "Grid template row inherit"
-                    [GridTemplateRows.Inherit]
+                    [GridTemplateRows.inherit']
                     ["gridTemplateRows" ==> "inherit"]
                 test
                     "Grid template row initial"
-                    [GridTemplateRows.Initial]
+                    [GridTemplateRows.initial]
                     ["gridTemplateRows" ==> "initial"]
                 test
                     "Grid template row unset"
-                    [GridTemplateRows.Unset]
+                    [GridTemplateRows.unset]
                     ["gridTemplateRows" ==> "unset"]
                 test
                     "Grid template column px"
@@ -390,143 +390,143 @@ module Grid =
                     ["gridTemplateColumns" ==> "100px"]
                 test
                     "Grid template column minmax"
-                    [GridTemplateColumns.MinMax(px 100, fr 1.)]
+                    [GridTemplateColumns.minMax(px 100, fr 1.)]
                     ["gridTemplateColumns" ==> "minmax(100px, 1.00fr)"]
                 test
                     "Grid template column fit-content"
-                    [GridTemplateColumns.FitContent(px 100)]
+                    [GridTemplateColumns.fitContent(px 100)]
                     ["gridTemplateColumns" ==> "fit-content(100px)"]
                 test
                     "Grid template column repeat"
-                    [GridTemplateColumns.Repeat(3, px 200)]
+                    [GridTemplateColumns.repeat(3, px 200)]
                     ["gridTemplateColumns" ==> "repeat(3, 200px)"]
                 test
                     "Grid template column subgrid"
-                    [GridTemplateColumns.Subgrid]
+                    [GridTemplateColumns.subgrid]
                     ["gridTemplateColumns" ==> "subgrid"]
                 test
                     "Grid template column masonry"
-                    [GridTemplateColumns.Masonry]
+                    [GridTemplateColumns.masonry]
                     ["gridTemplateColumns" ==> "masonry"]
                 test
                     "Grid template column none"
-                    [GridTemplateColumns.None]
+                    [GridTemplateColumns.none]
                     ["gridTemplateColumns" ==> "none"]
-            (*    test
+                test
                     "Grid template column px repeat px"
-                    [GridTemplateColumns.Values [px 200; Repeat.Repeat(AutoFill, px 100); px 300]]
+                    [GridTemplateColumns.values [px 200; FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateColumns" ==> "200px repeat(auto-fill, 100px) 300px"]
                 test
                     "Grid template column minmax repeat percent"
-                    [GridTemplateColumns.Values [ MinMax.MinMax(px 100, ContentSize.MaxContent); Repeat.Repeat(AutoFill, px 200); pct 20 ]]
-                    ["gridTemplateColumns" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]*)
+                    [GridTemplateColumns.values [ FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent); FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 200); pct 20 ]]
+                    ["gridTemplateColumns" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
                 test
                     "Grid template column auto"
-                    [GridTemplateColumns.Auto]
+                    [GridTemplateColumns.auto]
                     ["gridTemplateColumns" ==> "auto"]
                 test
                     "Grid template column inherit"
-                    [GridTemplateColumns.Inherit]
+                    [GridTemplateColumns.inherit']
                     ["gridTemplateColumns" ==> "inherit"]
                 test
                     "Grid template column initial"
-                    [GridTemplateColumns.Initial]
+                    [GridTemplateColumns.initial]
                     ["gridTemplateColumns" ==> "initial"]
                 test
                     "Grid template column unset"
-                    [GridTemplateColumns.Unset]
+                    [GridTemplateColumns.unset]
                     ["gridTemplateColumns" ==> "unset"]
-        (*       testString
-                    "Repeat value and fr"
-                    (string <| Repeat.Repeat(4, fr 1.))
+                testString
+                    "Repeat value and percent"
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, fr 1.))
                     "GridRepeat (repeat(4, 1.00fr))"
                 testString
                     "Repeat value and percent"
-                    (string <| Repeat.Repeat(4, pct 60))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, pct 60))
                     "GridRepeat (repeat(4, 60%))"
                 testString
                     "Repeat value and pixels"
-                    (string <| Repeat.Repeat(4, px 250))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, px 250))
                     "GridRepeat (repeat(4, 250px))"
                 testString
                     "Repeat value and min-content"
-                    (string <| Repeat.Repeat(4, ContentSize.MinContent))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.ContentSize.MinContent))
                     "GridRepeat (repeat(4, min-content))"
                 testString
                     "Repeat value and max-content"
-                    (string <| Repeat.Repeat(4, ContentSize.MaxContent))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.ContentSize.MaxContent))
                     "GridRepeat (repeat(4, max-content))"
                 testString
                     "Repeat value and minmax"
-                    (string <| Repeat.Repeat(4, MinMax.MinMax(px 100, fr 1.)))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.Grid.MinMax.MinMax(px 100, fr 1.)))
                     "GridRepeat (repeat(4, minmax(100px, 1.00fr)))"
                 testString
                     "Repeat value and fit content"
-                    (string <| Repeat.Repeat(4, ContentSize.FitContent(px 100)))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.ContentSize.FitContent(px 100)))
                     "GridRepeat (repeat(4, fit-content(100px)))"
                 testString
                     "Repeat value and min-content max-content"
-                    (string <| Repeat.Repeat(4, [ContentSize.MinContent; ContentSize.MaxContent]))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent]))
                     "GridRepeat (repeat(4, min-content max-content))"
                 testString
                     "Repeat auto-fill and px"
-                    (string <| Repeat.Repeat(AutoFill, px 30))
+                    (string <| FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 30))
                     "GridRepeat (repeat(auto-fill, 30px))"
                 testString
                     "Repeat auto-fit and px"
-                    (string <| Repeat.Repeat(AutoFit, px 30))
+                    (string <| FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFit, px 30))
                     "GridRepeat (repeat(auto-fit, 30px))"
                 testString
                     "MinMax px and fraction"
-                    (string <| MinMax.MinMax(px 200, fr 1.5))
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 200, fr 1.5))
                     "MinMaxGrid (minmax(200px, 1.50fr))"
                 testString
                     "MinMax px and percent"
-                    (string <| MinMax.MinMax(px 400, pct 50))
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 400, pct 50))
                     "MinMaxGrid (minmax(400px, 50%))"
                 testString
                     "MinMax percent and px"
-                    (string <| MinMax.MinMax(pct 30, px 300))
+                    (string <| FssTypes.Grid.MinMax.MinMax(pct 30, px 300))
                     "MinMaxGrid (minmax(30%, 300px))"
                 testString
                     "MinMax px and max content"
-                    (string <| MinMax.MinMax(px 100, ContentSize.MaxContent))
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent))
                     "MinMaxGrid (minmax(100px, max-content))"
                 testString
                     "MinMax min content and px"
-                    (string <| MinMax.MinMax(ContentSize.MinContent, px 400))
+                    (string <| FssTypes.Grid.MinMax.MinMax(FssTypes.ContentSize.MinContent, px 400))
                     "MinMaxGrid (minmax(min-content, 400px))"
                 testString
                     "MinMax px and fr"
-                    (string <| MinMax.MinMax(px 200, fr 1.) )
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 200, fr 1.) )
                     "MinMaxGrid (minmax(200px, 1.00fr))"
                 testString
                     "MinMax percent and min content"
-                    (string <| MinMax.MinMax(pct 50, ContentSize.MinContent))
+                    (string <| FssTypes.Grid.MinMax.MinMax(pct 50, FssTypes.ContentSize.MinContent))
                     "MinMaxGrid (minmax(50%, min-content))"
                 testString
                     "MinMax percent and max content"
-                    (string <| MinMax.MinMax(px 300, ContentSize.MaxContent))
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 300, FssTypes.ContentSize.MaxContent))
                     "MinMaxGrid (minmax(300px, max-content))"
                 testString
                     "MinMax pct and px"
-                    (string <| MinMax.MinMax(pct 30, px 300))
+                    (string <| FssTypes.Grid.MinMax.MinMax(pct 30, px 300))
                     "MinMaxGrid (minmax(30%, 300px))"
                 testString
                     "MinMax min content and px"
-                    (string <| MinMax.MinMax(ContentSize.MinContent, px 200))
-                    "MinMaxGrid (minmax(min-content, 200px))"*)
+                    (string <| FssTypes.Grid.MinMax.MinMax(FssTypes.ContentSize.MinContent, px 200))
+                    "MinMaxGrid (minmax(min-content, 200px))"
                 test
                     "Grid auto columns min content"
-                    [GridAutoColumns.MinContent]
+                    [GridAutoColumns.minContent]
                     ["gridAutoColumns" ==> "min-content"]
                 test
                     "Grid auto columns max content"
-                    [GridAutoColumns.MaxContent]
+                    [GridAutoColumns.maxContent]
                     ["gridAutoColumns" ==> "max-content"]
                 test
                     "Grid auto columns auto"
-                    [GridAutoColumns.Auto]
+                    [GridAutoColumns.auto]
                     ["gridAutoColumns" ==> "auto"]
                 test
                     "Grid auto columns px"
@@ -550,47 +550,47 @@ module Grid =
                     ["gridAutoColumns" ==> "0.50fr"]
                 test
                     "Grid auto columns fit content"
-                    [GridAutoColumns.FitContent(px 400) ]
+                    [GridAutoColumns.fitContent(px 400) ]
                     ["gridAutoColumns" ==> "fit-content(400px)"]
                 test
                     "Grid auto columns multiple with min-content max-content and auto"
-                    [ GridAutoColumns.Values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
+                    [ GridAutoColumns.values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
                     ["gridAutoColumns" ==> "min-content max-content"]
                 test
                     "Grid auto columns multiple with pxs"
-                    [ GridAutoColumns.Values [px 100; px 150; px 390;] ]
+                    [ GridAutoColumns.values [px 100; px 150; px 390;] ]
                     ["gridAutoColumns" ==> "100px 150px 390px"]
                 test
                     "Grid auto columns multiple with percents"
-                    [ GridAutoColumns.Values [pct 10; pct 33] ]
+                    [ GridAutoColumns.values [pct 10; pct 33] ]
                     ["gridAutoColumns" ==> "10% 33%"]
                 test
                     "Grid auto columns multiple with fractions"
-                    [ GridAutoColumns.Values [fr 0.5; fr 3.; fr 1.] ]
+                    [ GridAutoColumns.values [fr 0.5; fr 3.; fr 1.] ]
                     ["gridAutoColumns" ==> "0.50fr 3.00fr 1.00fr"]
                 test
                     "Grid auto columns inherit"
-                    [GridAutoColumns.Inherit]
+                    [GridAutoColumns.inherit']
                     ["gridAutoColumns" ==> "inherit"]
                 test
                     "Grid auto columns initial"
-                    [GridAutoColumns.Initial]
+                    [GridAutoColumns.initial]
                     ["gridAutoColumns" ==> "initial"]
                 test
                     "Grid auto columns unset"
-                    [GridAutoColumns.Unset]
+                    [GridAutoColumns.unset]
                     ["gridAutoColumns" ==> "unset"]
                 test
                     "Grid auto rows min content"
-                    [GridAutoRows.MinContent]
+                    [GridAutoRows.minContent]
                     ["gridAutoRows" ==> "min-content"]
                 test
                     "Grid auto rows max content"
-                    [GridAutoRows.MaxContent]
+                    [GridAutoRows.maxContent]
                     ["gridAutoRows" ==> "max-content"]
                 test
                     "Grid auto rows auto"
-                    [GridAutoRows.Auto]
+                    [GridAutoRows.auto]
                     ["gridAutoRows" ==> "auto"]
                 test
                     "Grid auto rows px"
@@ -614,79 +614,79 @@ module Grid =
                     ["gridAutoRows" ==> "0.50fr"]
                 test
                     "Grid auto rows fit content"
-                    [GridAutoRows.FitContent(px 400) ]
+                    [GridAutoRows.fitContent(px 400) ]
                     ["gridAutoRows" ==> "fit-content(400px)"]
                 test
                     "Grid auto rows multiple with min-content max-content and auto"
-                    [ GridAutoRows.Values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
+                    [ GridAutoRows.values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
                     ["gridAutoRows" ==> "min-content max-content"]
                 test
                     "Grid auto rows multiple with pxs"
-                    [ GridAutoRows.Values [px 100; px 150; px 390;] ]
+                    [ GridAutoRows.values [px 100; px 150; px 390;] ]
                     ["gridAutoRows" ==> "100px 150px 390px"]
                 test
                     "Grid auto rows multiple with percents"
-                    [ GridAutoRows.Values [pct 10; pct 33] ]
+                    [ GridAutoRows.values [pct 10; pct 33] ]
                     ["gridAutoRows" ==> "10% 33%"]
                 test
                     "Grid auto rows multiple with fractions"
-                    [ GridAutoRows.Values [fr 0.5; fr 3.; fr 1.] ]
+                    [ GridAutoRows.values [fr 0.5; fr 3.; fr 1.] ]
                     ["gridAutoRows" ==> "0.50fr 3.00fr 1.00fr"]
                 test
                     "Grid auto rows inherit"
-                    [GridAutoRows.Inherit]
+                    [GridAutoRows.inherit']
                     ["gridAutoRows" ==> "inherit"]
                 test
                     "Grid auto rows initial"
-                    [GridAutoRows.Initial]
+                    [GridAutoRows.initial]
                     ["gridAutoRows" ==> "initial"]
                 test
                     "Grid auto rows unset"
-                    [GridAutoRows.Unset]
+                    [GridAutoRows.unset]
                     ["gridAutoRows" ==> "unset"]
                 test
                     "Grid auto flow rows"
-                    [GridAutoFlow.Row]
+                    [GridAutoFlow.row]
                     ["gridAutoFlow" ==> "row"]
                 test
                     "Grid auto flow columns"
-                    [GridAutoFlow.Column]
+                    [GridAutoFlow.column]
                     ["gridAutoFlow" ==> "column"]
                 test
                     "Grid auto flow dense"
-                    [GridAutoFlow.Dense]
+                    [GridAutoFlow.dense]
                     ["gridAutoFlow" ==> "dense"]
                 test
                     "Grid auto flow rows dense"
-                    [GridAutoFlow.RowDense]
+                    [GridAutoFlow.rowDense]
                     ["gridAutoFlow" ==> "row dense"]
                 test
                     "Grid auto flow columns dense"
-                    [GridAutoFlow.ColumnDense]
+                    [GridAutoFlow.columnDense]
                     ["gridAutoFlow" ==> "column dense"]
                 test
                     "Grid auto flow inherit"
-                    [GridAutoFlow.Inherit]
+                    [GridAutoFlow.inherit']
                     ["gridAutoFlow" ==> "inherit"]
                 test
                     "Grid auto flow initial"
-                    [GridAutoFlow.Initial]
+                    [GridAutoFlow.initial]
                     ["gridAutoFlow" ==> "initial"]
                 test
                     "Grid auto flow unset"
-                    [GridAutoFlow.Unset]
+                    [GridAutoFlow.unset]
                     ["gridAutoFlow" ==> "unset"]
                 test
                     "Grid template areas None"
-                    [GridTemplateAreas.None]
+                    [GridTemplateAreas.none]
                     ["gridTemplateAreas" ==> "none"]
                 test
                     "Grid template areas strings"
-                    [GridTemplateAreas.Value [ "a"; "b"  ] ]
+                    [GridTemplateAreas.value [ "a"; "b"  ] ]
                     ["gridTemplateAreas" ==> "\"a b\""]
                 test
                     "Grid template areas multiple strings"
-                    [GridTemplateAreas.Value
+                    [GridTemplateAreas.value
                          [
                             [ "header";  "header";  "header";  "header" ]
                             [ "main";  "main";  ".";  "sidebar" ]
@@ -696,14 +696,14 @@ module Grid =
                     ["gridTemplateAreas" ==> "\"header header header header\" \"main main . sidebar\" \"footer footer footer footer\""]
                 test
                     "Grid template areas inherit"
-                    [GridTemplateAreas.Inherit ]
+                    [GridTemplateAreas.inherit' ]
                     ["gridTemplateAreas" ==> "inherit"]
                 test
                     "Grid template areas initial"
-                    [GridTemplateAreas.Initial]
+                    [GridTemplateAreas.initial]
                     ["gridTemplateAreas" ==> "initial"]
                 test
                     "Grid template areas multiple unset"
-                    [GridTemplateAreas.Unset]
+                    [GridTemplateAreas.unset]
                     ["gridTemplateAreas" ==> "unset"]
             ]

@@ -15,11 +15,11 @@ module AspectRatio =
         |> aspectRatioValue
 
     type AspectRatio =
-        static member Value (width: int, height: int) =
+        static member value (width: int, height: int) =
             $"{width} / {height}"
             |> aspectRatioValue
-        static member Inherit = FssTypes.Inherit |> aspectRatioValue'
-        static member Initial = FssTypes.Initial |> aspectRatioValue'
-        static member Unset = FssTypes.Unset |> aspectRatioValue'
+        static member inherit' = FssTypes.Inherit |> aspectRatioValue'
+        static member initial = FssTypes.Initial |> aspectRatioValue'
+        static member unset = FssTypes.Unset |> aspectRatioValue'
 
     let AspectRatio' width height = aspectRatioValue(width, height)

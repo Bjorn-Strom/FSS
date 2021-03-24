@@ -11,63 +11,63 @@ module Scroll =
             [
                 test
                     "ScrollBehavior auto"
-                    [ ScrollBehavior.Auto]
+                    [ ScrollBehavior.auto]
                     [ "scrollBehavior" ==> "auto" ]
                 test
                     "ScrollBehavior smooth"
-                    [ ScrollBehavior.Smooth]
+                    [ ScrollBehavior.smooth]
                     [ "scrollBehavior" ==> "smooth" ]
                 test
                     "ScrollBehavior inherit"
-                    [ ScrollBehavior.Inherit]
+                    [ ScrollBehavior.inherit']
                     [ "scrollBehavior" ==> "inherit" ]
                 test
                     "ScrollBehavior initial"
-                    [ ScrollBehavior.Initial]
+                    [ ScrollBehavior.initial]
                     [ "scrollBehavior" ==> "initial" ]
                 test
                     "ScrollBehavior unset"
-                    [ ScrollBehavior.Unset ]
+                    [ ScrollBehavior.unset ]
                     [ "scrollBehavior" ==> "unset" ]
                 test
                     "OverscrollBehaviorX contain"
-                    [ OverscrollBehaviorX.Contain]
+                    [ OverscrollBehaviorX.contain]
                     [ "overscrollBehaviorX" ==> "contain" ]
                 test
                     "OverscrollBehaviorX auto"
-                    [ OverscrollBehaviorX.Auto]
+                    [ OverscrollBehaviorX.auto]
                     [ "overscrollBehaviorX" ==> "auto" ]
                 test
                     "OverscrollBehaviorX inherit"
-                    [ OverscrollBehaviorX.Inherit]
+                    [ OverscrollBehaviorX.inherit']
                     [ "overscrollBehaviorX" ==> "inherit" ]
                 test
                     "OverscrollBehaviorX initial"
-                    [ OverscrollBehaviorX.Initial]
+                    [ OverscrollBehaviorX.initial]
                     [ "overscrollBehaviorX" ==> "initial" ]
                 test
                     "OverscrollBehaviorX unset"
-                    [ OverscrollBehaviorX.Unset ]
+                    [ OverscrollBehaviorX.unset ]
                     [ "overscrollBehaviorX" ==> "unset" ]
                 test
                     "OverscrollBehaviorY contain"
-                    [ OverscrollBehaviorY.Contain]
+                    [ OverscrollBehaviorY.contain]
                     [ "overscrollBehaviorY" ==> "contain" ]
                 test
                     "OverscrollBehaviorY auto"
-                    [ OverscrollBehaviorY.Auto]
+                    [ OverscrollBehaviorY.auto]
                     [ "overscrollBehaviorY" ==> "auto" ]
                 test
                     "OverscrollBehaviorY inherit"
-                    [ OverscrollBehaviorY.Inherit]
+                    [ OverscrollBehaviorY.inherit']
                     [ "overscrollBehaviorY" ==> "inherit" ]
                 test
                     "OverscrollBehaviorY initial"
-                    [ OverscrollBehaviorY.Initial]
+                    [ OverscrollBehaviorY.initial]
                     [ "overscrollBehaviorY" ==> "initial" ]
                 test
                     "OverscrollBehaviorY unset"
-                    [ OverscrollBehaviorY.Unset ]
+                    [ OverscrollBehaviorY.unset ]
                     [ "overscrollBehaviorY" ==> "unset" ]
                 test
                     "ScrollPadding top px"
@@ -95,19 +95,19 @@ module Scroll =
                     [ "scrollPadding" ==> "10.0em" ]
                 test
                     "ScrollPadding inherit"
-                    [ ScrollPadding.Inherit]
+                    [ ScrollPadding.inherit']
                     [ "scrollPadding" ==> "inherit" ]
                 test
                     "ScrollPadding initial"
-                    [ ScrollPadding.Initial]
+                    [ ScrollPadding.initial]
                     [ "scrollPadding" ==> "initial" ]
                 test
                     "ScrollPadding unset"
-                    [ ScrollPadding.Unset ]
+                    [ ScrollPadding.unset ]
                     [ "scrollPadding" ==> "unset" ]
                 test
                     "ScrollPaddings multiple"
-                    [ ScrollPadding.Value (px 10, px 20, px 30, px 40) ]
+                    [ ScrollPadding.value (px 10, px 20, px 30, px 40) ]
                     [ "scrollPadding" ==> "10px 20px 30px 40px" ]
                 test
                     "ScrollMargin top px"
@@ -135,18 +135,18 @@ module Scroll =
                     [ "scrollMargin" ==> "10.0em" ]
                 test
                     "ScrollMargin inherit"
-                    [ ScrollMargin.Inherit]
+                    [ ScrollMargin.inherit']
                     [ "scrollMargin" ==> "inherit" ]
                 test
                     "ScrollMargin initial"
-                    [ ScrollMargin.Initial]
+                    [ ScrollMargin.initial]
                     [ "scrollMargin" ==> "initial" ]
                 test
                     "ScrollMargin unset"
-                    [ ScrollMargin.Unset ]
+                    [ ScrollMargin.unset ]
                     [ "scrollMargin" ==> "unset" ]
                 test
                     "ScrollMargins multiple"
-                    [ ScrollMargin.Value (px 10, px 20, px 30, px 40) ]
+                    [ ScrollMargin.value (px 10, px 20, px 30, px 40) ]
                     [ "scrollMargin" ==> "10px 20px 30px 40px" ]
             ]
