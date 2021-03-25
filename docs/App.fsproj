@@ -20,6 +20,8 @@
         <Content Include="documentation\Counters.md" />
         <Content Include="documentation\Fonts.md" />
         <Content Include="documentation\BackgroundImage.md" />
+        <Content Include="documentation\Feliz.md" />
+        <Content Include="documentation\New.md" />
         <Compile Include="Markdown.fs" />
         <Compile Include="Utilities.fs" />
         <Compile Include="Logo.fs" />
