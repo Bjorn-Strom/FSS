@@ -11,20 +11,46 @@ Quick example here, check the documentation for more information.
 let buttonStyle =
     fss
         [
-            BackgroundColor.Hex "44c767"
+            BackgroundColor.hex "44c767"
             BorderRadius' (px 30)
             BorderWidth' (px 1)
-            BorderStyle.Solid
-            BorderColor.Hex "18ab29"
-            Display.InlineBlock
-            Cursor.Pointer
+            BorderStyle.solid
+            BorderColor.hex "18ab29"
+            Display.inlineBlock
+            Cursor.pointer
             FontSize' (px 17)
             Hover
                 [
-                    BackgroundColor.Hex "5cbf2a"
+                    BackgroundColor.hex "5cbf2a"
                 ]
         ]
 button [ ClassName buttonStyle ] [ str "Click me" ]
+```
+
+### Feliz specific styling api
+```fsharp
+open Feliz
+open Feliz.Fss
+
+[<ReactComponent>]
+let Button() =
+    Html.button [
+        prop.css [
+            style.backgroundColor.hex "44c767"
+            style.borderRadius' (px 30)
+            style.borderWidth' (px 1)
+            style.borderStyle.solid
+            style.borderColor.hex "18ab29"
+            style.display.inlineBlock
+            style.cursor.pointer
+            style.fontSize' (px 17)
+            style.hover
+                [
+                    BackgroundColor.hex "5cbf2a"
+                ]
+        ]
+        prop.text "Click me"
+    ]
 ```
 
 ## Motivation 🤔
