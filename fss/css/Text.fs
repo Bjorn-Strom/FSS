@@ -780,7 +780,7 @@ module Text =
         |> textDecorationColorToString
         |> textDecorationColorValue
     type TextDecorationColor =
-        static member Value (color: FssTypes.ITextDecorationColor) = color |> textDecorationColorValue'
+        static member value (color: FssTypes.ITextDecorationColor) = color |> textDecorationColorValue'
 
         static member black = FssTypes.Color.black |> textDecorationColorValue'
         static member silver = FssTypes.Color.silver |> textDecorationColorValue'
@@ -946,7 +946,7 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationColor' (color: FssTypes.ITextDecorationColor) = TextDecorationColor.Value(color)
+    let TextDecorationColor' (color: FssTypes.ITextDecorationColor) = TextDecorationColor.value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
     let private emphasisColorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasisColor value
@@ -955,7 +955,7 @@ module Text =
         |> textEmphasisColorToString
         |> emphasisColorValue
     type TextEmphasisColor =
-        static member Value (color: FssTypes.ITextEmphasisColor) = color |> emphasisColorValue'
+        static member value (color: FssTypes.ITextEmphasisColor) = color |> emphasisColorValue'
         static member black = FssTypes.Color.black |> emphasisColorValue'
         static member silver = FssTypes.Color.silver |> emphasisColorValue'
         static member gray = FssTypes.Color.gray |> emphasisColorValue'
@@ -1120,7 +1120,7 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextEmphasisColor' (color: FssTypes.ITextEmphasisColor) = TextEmphasisColor.Value(color)
+    let TextEmphasisColor' (color: FssTypes.ITextEmphasisColor) = TextEmphasisColor.value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
     let private textSizeAdjustValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextSizeAdjust value

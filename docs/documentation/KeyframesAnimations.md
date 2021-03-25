@@ -17,28 +17,28 @@ let bounceFrames =
                 [
                    transforms
                        [
-                           Transform.Translate3D(px 0, px 0, px 0) ]
+                           Transform.translate3D(px 0, px 0, px 0) ]
                        ]
                 ]
             frames [40; 43]
                 [
                    transforms
                        [
-                           Transform.Translate3D(px 0, px -30, px 0) ]
+                           Transform.translate3D(px 0, px -30, px 0) ]
                        ]
                 ]
             frame 70
                 [
                    transforms
                        [
-                            Transform.Translate3D(px 0, px -15, px 0) ]
+                            Transform.translate3D(px 0, px -15, px 0) ]
                        ]
                 ]
             frame 90
                 [
                    transforms
                        [
-                           Transform.Translate3D(px 0, px -4, px 0) ]
+                           Transform.translate3D(px 0, px -4, px 0) ]
                        ]
                 ]
         ]
@@ -47,8 +47,8 @@ let bounceAnimation =
         [
             AnimationName.Name bounceFrames
             AnimationDuration' (sec 1.0)
-            AnimationTimingFunction.EaseInOut
-            AnimationIterationCount.Infinite
+            AnimationTimingFunction.easeInOut
+            AnimationIterationCount.infinite
         ]
 ```
 
@@ -66,8 +66,8 @@ For these reasons in Fss when you apply transforms it always expects a list, but
 ```fsharp
 Transforms
     [
-        Transform.RotateX <| deg 10.
-        Transform.RotateY <| deg 15.
-        Transform.Perspective <| px 20
+        Transform.rotateX <| deg 10.
+        Transform.rotateY <| deg 15.
+        Transform.perspective <| px 20
     ]
 ```

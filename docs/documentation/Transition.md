@@ -9,9 +9,9 @@ let colorTransition =
     fss
         [
             BackgroundColor.red
-            TransitionProperty.BackgroundColor
+            TransitionProperty.backgroundColor
             TransitionDuration' (sec 2.5)
-            TransitionTimingFunction.Ease
+            TransitionTimingFunction.ease
             Hover [ BackgroundColor.green ]
        ]
 div [ ClassName colorTransition ] [ str "Hover me" ]
@@ -24,8 +24,8 @@ let sizeAndColor =
             Width' (px 40)
             Height' (px 40)
             BackgroundColor.yellowGreen
-            TransitionProperty.All
-            TransitionTimingFunction.Linear
+            TransitionProperty.all
+            TransitionTimingFunction.linear
             TransitionDuration' (ms 500.)
             Hover
                 [

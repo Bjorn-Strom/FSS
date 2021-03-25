@@ -22,17 +22,17 @@ In this case you can fallback on the .Value function, which every CSS property h
 Here is an example of that.
 
 ```fsharp
-let myDecorationColor = FssTypes.Color.White
-fss [ TextDecorationColor.Value myDecorationColor ]
+let myDecorationColor = FssTypes.Color.white
+fss [ TextDecorationColor.value myDecorationColor ]
 ```
 
 As this is something you might want to do quite a bit there exists a shorthand which is TextDecorationColor'.
 ```fsharp
-let myDecorationColor = FssTypes.Color.White
+let myDecorationColor = FssTypes.Color.white
 fss [ TextDecorationColor' myDecorationColor ]
 ```
 
-The `.Value` function is particularly useful when you wish to apply a function to a property. Like pixel, size, or percent, that does not exist as a member on the property you are trying to style.
+The `.value` function is particularly useful when you wish to apply a function to a property. Like pixel, size, or percent, that does not exist as a member on the property you are trying to style.
 
 ## Shorthands
 

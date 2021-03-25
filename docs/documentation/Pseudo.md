@@ -31,8 +31,8 @@ These work much in the same way as the pseudo classes. Example follows:
 let beforeAndAfterStyle =
    let beforeAndAfter =
       [
-           Content.Value""
-           Display.InlineBlock
+           Content.value""
+           Display.inlineBlock
            BackgroundColor.orangeRed
            Width' (px 10)
            Height' (px 10)
