@@ -3,4 +3,3 @@ group Fss
     Fable.Core
     Fable.Elmish.React
     Fable.React
-    Feliz

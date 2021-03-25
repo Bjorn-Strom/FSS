@@ -15,7 +15,6 @@ group Fss
     nuget Fable.Core
     nuget Fable.Elmish.React
     nuget Fable.React
-    nuget Feliz
 
 group Tests
     source https://www.nuget.org/api/v2
