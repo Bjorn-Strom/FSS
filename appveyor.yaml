@@ -1,0 +1,4 @@
+image: Visual Studio 2019
+test: off
+test_script:
+    - npm run test
