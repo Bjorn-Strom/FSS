@@ -2,10 +2,9 @@ image: Visual Studio 2019
 branches:
     only:
         - fss2.0
-install:
+test: off
+build_script:
     - dotnet tool restore
     - dotnet paket install
     - npm install
-test: off
-test_script:
     - npm run test
