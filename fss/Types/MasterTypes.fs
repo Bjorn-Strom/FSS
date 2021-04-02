@@ -67,6 +67,7 @@ namespace Fss.FssTypes
     type IListStylePosition = interface end
     type IListStyleType     = interface end
 
+    type IBackgroundColor      = interface end
     type IBackgroundClip       = interface end
     type IBackgroundOrigin     = interface end
     type IBackgroundRepeat     = interface end
@@ -412,6 +413,7 @@ namespace Fss.FssTypes
         interface IListStyleImage
         interface IListStylePosition
         interface IListStyleType
+        interface IBackgroundColor
         interface IBackgroundClip
         interface IBackgroundOrigin
         interface IBackgroundRepeat

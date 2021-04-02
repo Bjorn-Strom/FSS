@@ -20,3 +20,10 @@ namespace Fss.FssTypes
             | Inset
             | Outset
             interface IOutlineStyle
+
+    type OutlineColorClass (valueFunction: IOutlineColor -> CssProperty) =
+        inherit ColorBase(valueFunction)
+        member this.value color = color |> valueFunction
+        member this.inherit' = Inherit |> valueFunction
+        member this.initial = Initial |> valueFunction
+        member this.unset = Unset |> valueFunction

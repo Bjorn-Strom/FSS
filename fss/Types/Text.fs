@@ -107,7 +107,7 @@ namespace Fss.FssTypes
             interface ITextUnderlinePosition
 
         type EmphasisColor =
-            | TextEmphasisColor of Color
+            | TextEmphasisColor of Color.ColorType
             interface ITextEmphasisColor
 
         type Hyphens =
@@ -147,3 +147,17 @@ namespace Fss.FssTypes
             | All
             | Element
             interface IUserSelect
+
+    type TextDecorationColor (valueFunction: ITextDecorationColor -> CssProperty) =
+        inherit ColorBase(valueFunction)
+        member this.value color = color |> valueFunction
+        member this.inherit' = Inherit |> valueFunction
+        member this.initial = Initial |> valueFunction
+        member this.unset = Unset |> valueFunction
+
+    type TextEmphasisColor (valueFunction: ITextEmphasisColor -> CssProperty) =
+        inherit ColorBase(valueFunction)
+        member this.value color = color |> valueFunction
+        member this.inherit' = Inherit |> valueFunction
+        member this.initial = Initial |> valueFunction
+        member this.unset = Unset |> valueFunction

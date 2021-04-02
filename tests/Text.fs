@@ -423,13 +423,13 @@ module Text =
                     ["textEmphasisStyle" ==> "unset"]
                 testCase
                     "Text shadow single"
-                    [ TextShadows [ TextShadow.colorXyBlur (px 1, px 1, px 2, FssTypes.Color.black) ] ]
+                    [ TextShadows [ TextShadow.colorXyBlur (px 1, px 1, px 2, FssTypes.Color.Color.black) ] ]
                     ["textShadow" ==> "#000000 1px 1px 2px"]
                 testCase
                     "Text shadow multiple"
                     [ TextShadows
-                          [ TextShadow.colorXyBlur(px 1, px 1, px 2, FssTypes.Color.black)
-                            TextShadow.colorXyBlur(px 10, px -10, px 20, FssTypes.Color.red) ]
+                          [ TextShadow.colorXyBlur(px 1, px 1, px 2, FssTypes.Color.Color.black)
+                            TextShadow.colorXyBlur(px 10, px -10, px 20, FssTypes.Color.Color.red) ]
                     ]
                     ["textShadow" ==> "#000000 1px 1px 2px, #ff0000 10px -10px 20px"]
                 testCase

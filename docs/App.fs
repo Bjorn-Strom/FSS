@@ -127,6 +127,16 @@ module App =
                [
                     markdown [ Renderers renderers; Children currentMarkdown ]
                     div [ ClassName borderStyle ] [ str "Border style made with custom escape hatch" ]
+
+
+                    p [ ClassName (fss [
+                        BorderTopWidth.thin
+                        BorderTopStyle.dashed
+                        BorderTopColor.orangeRed
+                        BorderBottomWidth.thick
+                        BorderBottomStyle.solid
+                        BorderBottomColor.red
+                    ]) ] [str "foo"]
                ]
 
         let conditionalStyling =
@@ -716,18 +726,18 @@ module App =
                             [
                                 deg 217.,
                                     [
-                                        FssTypes.Color.rgba(255, 0, 0, 0.8), pct 0
-                                        FssTypes.Color.rgba(255, 0, 0, 0.0), pct 70
+                                        FssTypes.Color.Color.rgba(255, 0, 0, 0.8), pct 0
+                                        FssTypes.Color.Color.rgba(255, 0, 0, 0.0), pct 70
                                     ]
                                 deg 127.,
                                     [
-                                        FssTypes.Color.rgba(0, 255, 0,0.8), pct 0
-                                        FssTypes.Color.rgba(0, 255, 0,0.0), pct 70
+                                        FssTypes.Color.Color.rgba(0, 255, 0,0.8), pct 0
+                                        FssTypes.Color.Color.rgba(0, 255, 0,0.0), pct 70
                                     ]
                                 deg 336.,
                                     [
-                                        FssTypes.Color.rgba(0, 0, 255, 0.8), pct 0
-                                        FssTypes.Color.rgba(0, 0, 255,0.0), pct 70
+                                        FssTypes.Color.Color.rgba(0, 0, 255, 0.8), pct 0
+                                        FssTypes.Color.Color.rgba(0, 0, 255,0.0), pct 70
                                     ]
 
                             ]
@@ -811,11 +821,11 @@ module App =
                         yield! box
                         BackgroundImage.conicGradient(deg 0., pct 50, pct 50,
                               [
-                                  FssTypes.Color.red, deg 0.
-                                  FssTypes.Color.orange, deg 90.
-                                  FssTypes.Color.yellow, deg 180.
-                                  FssTypes.Color.green, deg 270.
-                                  FssTypes.Color.blue, deg 360.
+                                  FssTypes.Color.Color.red, deg 0.
+                                  FssTypes.Color.Color.orange, deg 90.
+                                  FssTypes.Color.Color.yellow, deg 180.
+                                  FssTypes.Color.Color.green, deg 270.
+                                  FssTypes.Color.Color.blue, deg 360.
                               ])
                     ]
             let conicGradientStyle2 =
@@ -836,16 +846,16 @@ module App =
                         yield! box
                         BackgroundImage.conicGradient(deg 0., pct 50, pct 50,
                                                       [
-                                                         FssTypes.Color.red, deg 6.
-                                                         FssTypes.Color.orange, deg 6.
-                                                         FssTypes.Color.orange, deg 18.
-                                                         FssTypes.Color.yellow, deg 18.
-                                                         FssTypes.Color.yellow, deg 45.
-                                                         FssTypes.Color.green, deg 45.
-                                                         FssTypes.Color.green, deg 110.
-                                                         FssTypes.Color.blue, deg 110.
-                                                         FssTypes.Color.blue, deg 200.
-                                                         FssTypes.Color.purple, deg 200.
+                                                         FssTypes.Color.Color.red, deg 6.
+                                                         FssTypes.Color.Color.orange, deg 6.
+                                                         FssTypes.Color.Color.orange, deg 18.
+                                                         FssTypes.Color.Color.yellow, deg 18.
+                                                         FssTypes.Color.Color.yellow, deg 45.
+                                                         FssTypes.Color.Color.green, deg 45.
+                                                         FssTypes.Color.Color.green, deg 110.
+                                                         FssTypes.Color.Color.blue, deg 110.
+                                                         FssTypes.Color.Color.blue, deg 200.
+                                                         FssTypes.Color.Color.purple, deg 200.
                                                       ])
                     ]
             let conicGradientStyle4 =
@@ -856,12 +866,12 @@ module App =
                         BorderRadius' <| px 200
                         BackgroundImage.conicGradient(deg 0., pct 50, pct 50,
                                                       [
-                                                         FssTypes.Color.yellow, deg (360. / 6.)
-                                                         FssTypes.Color.lime,   deg <| (360. / 6.) * 2.
-                                                         FssTypes.Color.blue,   deg <| (360. / 6.) * 3.
-                                                         FssTypes.Color.violet, deg <| (360. / 6.) * 4.
-                                                         FssTypes.Color.red,    deg <| (360. / 6.) * 5.
-                                                         FssTypes.Color.yellow, deg <| (360. / 6.) * 6.
+                                                         FssTypes.Color.Color.yellow, deg (360. / 6.)
+                                                         FssTypes.Color.Color.lime,   deg <| (360. / 6.) * 2.
+                                                         FssTypes.Color.Color.blue,   deg <| (360. / 6.) * 3.
+                                                         FssTypes.Color.Color.violet, deg <| (360. / 6.) * 4.
+                                                         FssTypes.Color.Color.red,    deg <| (360. / 6.) * 5.
+                                                         FssTypes.Color.Color.yellow, deg <| (360. / 6.) * 6.
                                                       ])
                     ]
             let repeatingConicGradientStyle =
@@ -875,10 +885,10 @@ module App =
                         BorderWidth' (px 1)
                         BackgroundImage.repeatingConicGradient(deg 0., pct 50, pct 50,
                                                       [
-                                                         FssTypes.Color.white, pct 0
-                                                         FssTypes.Color.white, pct 25
-                                                         FssTypes.Color.black, pct 25
-                                                         FssTypes.Color.black, pct 50
+                                                         FssTypes.Color.Color.white, pct 0
+                                                         FssTypes.Color.Color.white, pct 25
+                                                         FssTypes.Color.Color.black, pct 25
+                                                         FssTypes.Color.Color.black, pct 50
                                                       ])
                     ]
 

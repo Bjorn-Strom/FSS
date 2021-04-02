@@ -15,7 +15,8 @@
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "cssnano": "^4.1.10",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "parcel-plugin-bundle-visualiser": "^1.2.0"
   },
   "dependencies": {
     "@emotion/css": "11.1.3",

@@ -23,43 +23,43 @@ module Background =
                     [ "backgroundImage" ==> "url(image.png)" ]
                 testCase
                     "background as linear gradient"
-                    [ BackgroundImage.linearGradient (deg 45., [ FssTypes.Color.red, pct 0; FssTypes.Color.blue, pct 100 ])]
+                    [ BackgroundImage.linearGradient (deg 45., [ FssTypes.Color.Color.red, pct 0; FssTypes.Color.Color.blue, pct 100 ])]
                     ["backgroundImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)"]
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.Color.hex "e66465", pct 0; FssTypes.Color.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.Color.hex "e66465", pct 0; FssTypes.Color.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.Color.hex "e66465", pct 0; FssTypes.Color.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.Color.hex "e66465", pct 0; FssTypes.Color.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.Color.hex "e66465", pct 0; FssTypes.Color.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.Color.hex "e66465", pct 0; FssTypes.Color.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.Color.hex "e66465", pct 0; FssTypes.Color.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.Color.hex "e66465", pct 0; FssTypes.Color.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
                 testCase
                     "background as conic gradient"
-                    [BackgroundImage.conicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.red, deg 0.; FssTypes.Color.orange, deg 90.; FssTypes.Color.yellow, deg 180.; FssTypes.Color.green, deg 270.; FssTypes.Color.blue, deg 360.; ])]
+                    [BackgroundImage.conicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.Color.red, deg 0.; FssTypes.Color.Color.orange, deg 90.; FssTypes.Color.Color.yellow, deg 180.; FssTypes.Color.Color.green, deg 270.; FssTypes.Color.Color.blue, deg 360.; ])]
                     [ "backgroundImage" ==> "conic-Gradient(from 0.00deg at 50% 50%, #ff0000 0.00deg, #ffa500 90.00deg, #ffff00 180.00deg, #008000 270.00deg, #0000ff 360.00deg)"]
                 testCase
                     "background as conic gradient"
@@ -67,7 +67,7 @@ module Background =
                     [ "backgroundImage" ==> "conic-Gradient(from 3.1416rad at 10% 50%, #e66465 0.00deg, #9198e5 360.00deg)"]
                 testCase
                     "background as repeating conic gradient"
-                    [ BackgroundImage.repeatingConicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.white, pct 0; FssTypes.Color.white, pct 25; FssTypes.Color.black, pct 25; FssTypes.Color.black, pct 50; ]) ]
+                    [ BackgroundImage.repeatingConicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.Color.white, pct 0; FssTypes.Color.Color.white, pct 25; FssTypes.Color.Color.black, pct 25; FssTypes.Color.Color.black, pct 50; ]) ]
                     [ "backgroundImage" ==> "repeating-conic-Gradient(from 0.00deg at 50% 50%, #ffffff 0%, #ffffff 25%, #000000 25%, #000000 50%)"]
                 testCase
                     "background position to top"

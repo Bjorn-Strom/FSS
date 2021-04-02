@@ -39,7 +39,6 @@ module Tests =
         Visibility.tests
         Position.tests
         Perspective.tests
-        Border.tests
         Font.tests
         Color.tests
         ContentSize.tests
@@ -47,5 +46,6 @@ module Tests =
         Flex.tests
         Outline.tests
         Background.tests
+        Border.tests
     ]
 

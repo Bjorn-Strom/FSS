@@ -62,6 +62,12 @@ module Background =
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | _ -> "Unknown isolation"
 
+    let private backgroundColorToString (backgroundColor: FssTypes.IBackgroundColor) =
+        match backgroundColor with
+        | :? FssTypes.Color.ColorType as c -> FssTypes.Color.colorHelpers.colorToString c
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | _ -> "Unknown background color"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
     let private clipValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundClip value
     let private clipValue' value =
@@ -222,169 +228,25 @@ module Background =
     let private backgroundValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundColor value
     let private backgroundValue' value =
         value
-        |> FssTypes.colorHelpers.colorToString
+        |> backgroundColorToString
         |> backgroundValue
-    [<Erase>]
-    type BackgroundColor =
-        static member value (color: FssTypes.ColorType) = color |> backgroundValue'
-        static member black = FssTypes.Color.black |> backgroundValue'
-        static member silver = FssTypes.Color.silver |> backgroundValue'
-        static member gray = FssTypes.Color.gray |> backgroundValue'
-        static member white = FssTypes.Color.white |> backgroundValue'
-        static member maroon = FssTypes.Color.maroon |> backgroundValue'
-        static member red = FssTypes.Color.red |> backgroundValue'
-        static member purple = FssTypes.Color.purple |> backgroundValue'
-        static member fuchsia = FssTypes.Color.fuchsia |> backgroundValue'
-        static member green = FssTypes.Color.green |> backgroundValue'
-        static member lime = FssTypes.Color.lime |> backgroundValue'
-        static member olive = FssTypes.Color.olive |> backgroundValue'
-        static member yellow = FssTypes.Color.yellow |> backgroundValue'
-        static member navy = FssTypes.Color.navy |> backgroundValue'
-        static member blue = FssTypes.Color.blue |> backgroundValue'
-        static member teal = FssTypes.Color.teal |> backgroundValue'
-        static member aqua = FssTypes.Color.aqua |> backgroundValue'
-        static member orange = FssTypes.Color.orange |> backgroundValue'
-        static member aliceBlue = FssTypes.Color.aliceBlue |> backgroundValue'
-        static member antiqueWhite = FssTypes.Color.antiqueWhite |> backgroundValue'
-        static member aquaMarine = FssTypes.Color.aquaMarine |> backgroundValue'
-        static member azure = FssTypes.Color.azure |> backgroundValue'
-        static member beige = FssTypes.Color.beige |> backgroundValue'
-        static member bisque = FssTypes.Color.bisque |> backgroundValue'
-        static member blanchedAlmond = FssTypes.Color.blanchedAlmond |> backgroundValue'
-        static member blueViolet = FssTypes.Color.blueViolet |> backgroundValue'
-        static member brown = FssTypes.Color.brown |> backgroundValue'
-        static member burlywood = FssTypes.Color.burlywood |> backgroundValue'
-        static member cadetBlue = FssTypes.Color.cadetBlue |> backgroundValue'
-        static member chartreuse = FssTypes.Color.chartreuse |> backgroundValue'
-        static member chocolate = FssTypes.Color.chocolate |> backgroundValue'
-        static member coral = FssTypes.Color.coral |> backgroundValue'
-        static member cornflowerBlue = FssTypes.Color.cornflowerBlue |> backgroundValue'
-        static member cornsilk = FssTypes.Color.cornsilk |> backgroundValue'
-        static member crimson = FssTypes.Color.crimson |> backgroundValue'
-        static member cyan = FssTypes.Color.cyan |> backgroundValue'
-        static member darkBlue = FssTypes.Color.darkBlue |> backgroundValue'
-        static member darkCyan = FssTypes.Color.darkCyan |> backgroundValue'
-        static member darkGoldenrod = FssTypes.Color.darkGoldenrod |> backgroundValue'
-        static member darkGray = FssTypes.Color.darkGray |> backgroundValue'
-        static member darkGreen = FssTypes.Color.darkGreen |> backgroundValue'
-        static member darkKhaki = FssTypes.Color.darkKhaki |> backgroundValue'
-        static member darkMagenta = FssTypes.Color.darkMagenta |> backgroundValue'
-        static member darkOliveGreen = FssTypes.Color.darkOliveGreen |> backgroundValue'
-        static member darkOrange = FssTypes.Color.darkOrange |> backgroundValue'
-        static member darkOrchid = FssTypes.Color.darkOrchid |> backgroundValue'
-        static member darkRed = FssTypes.Color.darkRed |> backgroundValue'
-        static member darkSalmon = FssTypes.Color.darkSalmon |> backgroundValue'
-        static member darkSeaGreen = FssTypes.Color.darkSeaGreen |> backgroundValue'
-        static member darkSlateBlue = FssTypes.Color.darkSlateBlue |> backgroundValue'
-        static member darkSlateGray = FssTypes.Color.darkSlateGray |> backgroundValue'
-        static member darkTurquoise = FssTypes.Color.darkTurquoise |> backgroundValue'
-        static member darkViolet = FssTypes.Color.darkViolet |> backgroundValue'
-        static member deepPink = FssTypes.Color.deepPink |> backgroundValue'
-        static member deepSkyBlue = FssTypes.Color.deepSkyBlue |> backgroundValue'
-        static member dimGrey = FssTypes.Color.dimGrey |> backgroundValue'
-        static member dodgerBlue = FssTypes.Color.dodgerBlue |> backgroundValue'
-        static member fireBrick = FssTypes.Color.fireBrick |> backgroundValue'
-        static member floralWhite = FssTypes.Color.floralWhite |> backgroundValue'
-        static member forestGreen = FssTypes.Color.forestGreen |> backgroundValue'
-        static member gainsboro = FssTypes.Color.gainsboro |> backgroundValue'
-        static member ghostWhite = FssTypes.Color.ghostWhite |> backgroundValue'
-        static member gold = FssTypes.Color.gold |> backgroundValue'
-        static member goldenrod = FssTypes.Color.goldenrod |> backgroundValue'
-        static member greenYellow = FssTypes.Color.greenYellow |> backgroundValue'
-        static member grey = FssTypes.Color.grey |> backgroundValue'
-        static member honeydew = FssTypes.Color.honeydew |> backgroundValue'
-        static member hotPink = FssTypes.Color.hotPink |> backgroundValue'
-        static member indianRed = FssTypes.Color.indianRed |> backgroundValue'
-        static member indigo = FssTypes.Color.indigo |> backgroundValue'
-        static member ivory = FssTypes.Color.ivory |> backgroundValue'
-        static member khaki = FssTypes.Color.khaki |> backgroundValue'
-        static member lavender = FssTypes.Color.lavender |> backgroundValue'
-        static member lavenderBlush = FssTypes.Color.lavenderBlush |> backgroundValue'
-        static member lawnGreen = FssTypes.Color.lawnGreen |> backgroundValue'
-        static member lemonChiffon = FssTypes.Color.lemonChiffon |> backgroundValue'
-        static member lightBlue = FssTypes.Color.lightBlue |> backgroundValue'
-        static member lightCoral = FssTypes.Color.lightCoral |> backgroundValue'
-        static member lightCyan = FssTypes.Color.lightCyan |> backgroundValue'
-        static member lightGoldenrodYellow = FssTypes.Color.lightGoldenrodYellow |> backgroundValue'
-        static member lightGray = FssTypes.Color.lightGray |> backgroundValue'
-        static member lightGreen = FssTypes.Color.lightGreen |> backgroundValue'
-        static member lightGrey = FssTypes.Color.lightGrey |> backgroundValue'
-        static member lightPink = FssTypes.Color.lightPink |> backgroundValue'
-        static member lightSalmon = FssTypes.Color.lightSalmon |> backgroundValue'
-        static member lightSeaGreen = FssTypes.Color.lightSeaGreen |> backgroundValue'
-        static member lightSkyBlue = FssTypes.Color.lightSkyBlue |> backgroundValue'
-        static member lightSlateGrey = FssTypes.Color.lightSlateGrey |> backgroundValue'
-        static member lightSteelBlue = FssTypes.Color.lightSteelBlue |> backgroundValue'
-        static member lightYellow = FssTypes.Color.lightYellow |> backgroundValue'
-        static member limeGreen = FssTypes.Color.limeGreen |> backgroundValue'
-        static member linen = FssTypes.Color.linen |> backgroundValue'
-        static member magenta = FssTypes.Color.magenta |> backgroundValue'
-        static member mediumAquamarine = FssTypes.Color.mediumAquamarine |> backgroundValue'
-        static member mediumBlue = FssTypes.Color.mediumBlue |> backgroundValue'
-        static member mediumOrchid = FssTypes.Color.mediumOrchid |> backgroundValue'
-        static member mediumPurple = FssTypes.Color.mediumPurple |> backgroundValue'
-        static member mediumSeaGreen = FssTypes.Color.mediumSeaGreen |> backgroundValue'
-        static member mediumSlateBlue = FssTypes.Color.mediumSlateBlue |> backgroundValue'
-        static member mediumSpringGreen = FssTypes.Color.mediumSpringGreen |> backgroundValue'
-        static member mediumTurquoise = FssTypes.Color.mediumTurquoise |> backgroundValue'
-        static member mediumVioletRed = FssTypes.Color.mediumVioletRed |> backgroundValue'
-        static member midnightBlue = FssTypes.Color.midnightBlue |> backgroundValue'
-        static member mintCream = FssTypes.Color.mintCream |> backgroundValue'
-        static member mistyRose = FssTypes.Color.mistyRose |> backgroundValue'
-        static member moccasin = FssTypes.Color.moccasin |> backgroundValue'
-        static member navajoWhite = FssTypes.Color.navajoWhite |> backgroundValue'
-        static member oldLace = FssTypes.Color.oldLace |> backgroundValue'
-        static member olivedrab = FssTypes.Color.olivedrab |> backgroundValue'
-        static member orangeRed = FssTypes.Color.orangeRed |> backgroundValue'
-        static member orchid = FssTypes.Color.orchid |> backgroundValue'
-        static member paleGoldenrod = FssTypes.Color.paleGoldenrod |> backgroundValue'
-        static member paleGreen = FssTypes.Color.paleGreen |> backgroundValue'
-        static member paleTurquoise = FssTypes.Color.paleTurquoise |> backgroundValue'
-        static member paleVioletred = FssTypes.Color.paleVioletred |> backgroundValue'
-        static member papayaWhip = FssTypes.Color.papayaWhip |> backgroundValue'
-        static member peachpuff = FssTypes.Color.peachpuff |> backgroundValue'
-        static member peru = FssTypes.Color.peru |> backgroundValue'
-        static member pink = FssTypes.Color.pink |> backgroundValue'
-        static member plum = FssTypes.Color.plum |> backgroundValue'
-        static member powderBlue = FssTypes.Color.powderBlue |> backgroundValue'
-        static member rosyBrown = FssTypes.Color.rosyBrown |> backgroundValue'
-        static member royalBlue = FssTypes.Color.royalBlue |> backgroundValue'
-        static member saddleBrown = FssTypes.Color.saddleBrown |> backgroundValue'
-        static member salmon = FssTypes.Color.salmon |> backgroundValue'
-        static member sandyBrown = FssTypes.Color.sandyBrown |> backgroundValue'
-        static member seaGreen = FssTypes.Color.seaGreen |> backgroundValue'
-        static member seaShell = FssTypes.Color.seaShell |> backgroundValue'
-        static member sienna = FssTypes.Color.sienna |> backgroundValue'
-        static member skyBlue = FssTypes.Color.skyBlue |> backgroundValue'
-        static member slateBlue = FssTypes.Color.slateBlue |> backgroundValue'
-        static member slateGray = FssTypes.Color.slateGray |> backgroundValue'
-        static member snow = FssTypes.Color.snow |> backgroundValue'
-        static member springGreen = FssTypes.Color.springGreen |> backgroundValue'
-        static member steelBlue = FssTypes.Color.steelBlue |> backgroundValue'
-        static member tan = FssTypes.Color.tan |> backgroundValue'
-        static member thistle = FssTypes.Color.thistle |> backgroundValue'
-        static member tomato = FssTypes.Color.tomato |> backgroundValue'
-        static member turquoise = FssTypes.Color.turquoise |> backgroundValue'
-        static member violet = FssTypes.Color.violet |> backgroundValue'
-        static member wheat = FssTypes.Color.wheat |> backgroundValue'
-        static member whiteSmoke = FssTypes.Color.whiteSmoke |> backgroundValue'
-        static member yellowGreen = FssTypes.Color.yellowGreen |> backgroundValue'
-        static member rebeccaPurple = FssTypes.Color.rebeccaPurple |> backgroundValue'
-        static member rgb r g b = FssTypes.Color.rgb(r, g, b) |> backgroundValue'
-        static member rgba r g b a = FssTypes.Color.rgba(r, g, b, a) |> backgroundValue'
-        static member hex value = FssTypes.Color.hex value |> backgroundValue'
-        static member hsl h s l = FssTypes.Color.hsl(h, s, l) |> backgroundValue'
-        static member hsla h s l a  = FssTypes.Color.hsla (h, s, l, a) |> backgroundValue'
-        static member transparent = FssTypes.Color.transparent |> backgroundValue'
-        static member currentColor = FssTypes.Color.currentColor |> backgroundValue'
+
+    type BackgroundColorClass (valueFunction: FssTypes.IBackgroundColor -> FssTypes.CssProperty) =
+        inherit FssTypes.Color.ColorBase(valueFunction)
+        member this.value color = color |> valueFunction
+        member this.inherit' = FssTypes.Inherit |> valueFunction
+        member this.initial = FssTypes.Initial |> valueFunction
+        member this.unset = FssTypes.Unset |> valueFunction
+
+    let BackgroundColor = BackgroundColorClass(backgroundValue')
 
     /// <summary>Specifies how background color.</summary>
     /// <param name="color">
     ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
+    ///     - <c> FssTypes.Color.ColorType</c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundColor' (color: FssTypes.ColorType) = BackgroundColor.value(color)
+    let BackgroundColor' (color: FssTypes.Color.ColorType) = BackgroundColor.value(color)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
     let private imageValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundImage value
@@ -393,43 +255,43 @@ module Background =
         static member value (image: FssTypes.Image.Image) = image |> imageValue
         static member url (url: string) = imageValue <| sprintf "url(%s)" url
 
-        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
+        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Percent) list)) list) =
             imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
+        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Size) list)) list) =
             imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
+        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Size) list)) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
-        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
+        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Percent) list)) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Percent) list) list) =
+        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.Color.ColorType * FssTypes.Percent) list) list) =
             imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Size) list) list) =
+        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.Color.ColorType * FssTypes.Size) list) list) =
             imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Size) list) =
             imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
 
-        static member conicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Angle) list) =
+        static member conicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Angle) list) =
             imageValue <| FssTypes.Image.Image.ConicGradient(angle, x, y, gradients)
-        static member repeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Angle) list) =
+        static member repeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Angle) list) =
             imageValue <| FssTypes.Image.Image.RepeatingConicGradient(angle, x, y, gradients)
-        static member conicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member conicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.ConicGradient(angle, x, y, gradients)
-        static member repeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingConicGradient(angle, x, y, gradients)
 
     /// <summary>Draws background image on element.</summary>

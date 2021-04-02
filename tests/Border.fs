@@ -81,6 +81,219 @@ module Border =
                     "Borderstyle unset"
                     [ BorderStyle.unset ]
                     [ "borderStyle" ==> "unset" ]
+
+
+
+
+
+                testCase
+                    "BorderTopStyle hidden"
+                    [ BorderTopStyle.hidden ]
+                    [ "borderTopStyle" ==> "hidden" ]
+                testCase
+                    "BorderTopStyle dotted"
+                    [ BorderTopStyle.dotted ]
+                    [ "borderTopStyle" ==> "dotted" ]
+                testCase
+                    "BorderTopStyle dashed"
+                    [ BorderTopStyle.dashed ]
+                    [ "borderTopStyle" ==> "dashed" ]
+                testCase
+                    "BorderTopStyle solid"
+                    [ BorderTopStyle.solid ]
+                    [ "borderTopStyle" ==> "solid" ]
+                testCase
+                    "BorderTopStyle double"
+                    [ BorderTopStyle.double ]
+                    [ "borderTopStyle" ==> "double" ]
+                testCase
+                    "BorderTopStyle groove"
+                    [ BorderTopStyle.groove ]
+                    [ "borderTopStyle" ==> "groove" ]
+                testCase
+                    "BorderTopStyle ridge"
+                    [ BorderTopStyle.ridge ]
+                    [ "borderTopStyle" ==> "ridge" ]
+                testCase
+                    "BorderTopStyle inset"
+                    [ BorderTopStyle.inset ]
+                    [ "borderTopStyle" ==> "inset" ]
+                testCase
+                    "BorderTopStyle outset"
+                    [ BorderTopStyle.outset ]
+                    [ "borderTopStyle" ==> "outset" ]
+                testCase
+                    "BorderTopStyle none"
+                    [ BorderTopStyle.none ]
+                    [ "borderTopStyle" ==> "none" ]
+                testCase
+                    "BorderTopStyle initial"
+                    [ BorderTopStyle.initial ]
+                    [ "borderTopStyle" ==> "initial" ]
+                testCase
+                    "BorderTopStyle inherit"
+                    [ BorderTopStyle.inherit' ]
+                    [ "borderTopStyle" ==> "inherit" ]
+                testCase
+                    "BorderTopStyle unset"
+                    [ BorderTopStyle.unset ]
+                    [ "borderTopStyle" ==> "unset" ]
+                testCase
+                    "BorderRightStyle hidden"
+                    [ BorderRightStyle.hidden ]
+                    [ "borderRightStyle" ==> "hidden" ]
+                testCase
+                    "BorderRightStyle dotted"
+                    [ BorderRightStyle.dotted ]
+                    [ "borderRightStyle" ==> "dotted" ]
+                testCase
+                    "BorderRightStyle dashed"
+                    [ BorderRightStyle.dashed ]
+                    [ "borderRightStyle" ==> "dashed" ]
+                testCase
+                    "BorderRightStyle solid"
+                    [ BorderRightStyle.solid ]
+                    [ "borderRightStyle" ==> "solid" ]
+                testCase
+                    "BorderRightStyle double"
+                    [ BorderRightStyle.double ]
+                    [ "borderRightStyle" ==> "double" ]
+                testCase
+                    "BorderRightStyle groove"
+                    [ BorderRightStyle.groove ]
+                    [ "borderRightStyle" ==> "groove" ]
+                testCase
+                    "BorderRightStyle ridge"
+                    [ BorderRightStyle.ridge ]
+                    [ "borderRightStyle" ==> "ridge" ]
+                testCase
+                    "BorderRightStyle inset"
+                    [ BorderRightStyle.inset ]
+                    [ "borderRightStyle" ==> "inset" ]
+                testCase
+                    "BorderRightStyle outset"
+                    [ BorderRightStyle.outset ]
+                    [ "borderRightStyle" ==> "outset" ]
+                testCase
+                    "BorderRightStyle none"
+                    [ BorderRightStyle.none ]
+                    [ "borderRightStyle" ==> "none" ]
+                testCase
+                    "BorderRightStyle initial"
+                    [ BorderRightStyle.initial ]
+                    [ "borderRightStyle" ==> "initial" ]
+                testCase
+                    "BorderRightStyle inherit"
+                    [ BorderRightStyle.inherit' ]
+                    [ "borderRightStyle" ==> "inherit" ]
+                testCase
+                    "BorderRightStyle unset"
+                    [ BorderRightStyle.unset ]
+                    [ "borderRightStyle" ==> "unset" ]
+                testCase
+                    "BorderBottomStyle hidden"
+                    [ BorderBottomStyle.hidden ]
+                    [ "borderBottomStyle" ==> "hidden" ]
+                testCase
+                    "BorderBottomStyle dotted"
+                    [ BorderBottomStyle.dotted ]
+                    [ "borderBottomStyle" ==> "dotted" ]
+                testCase
+                    "BorderBottomStyle dashed"
+                    [ BorderBottomStyle.dashed ]
+                    [ "borderBottomStyle" ==> "dashed" ]
+                testCase
+                    "BorderBottomStyle solid"
+                    [ BorderBottomStyle.solid ]
+                    [ "borderBottomStyle" ==> "solid" ]
+                testCase
+                    "BorderBottomStyle double"
+                    [ BorderBottomStyle.double ]
+                    [ "borderBottomStyle" ==> "double" ]
+                testCase
+                    "BorderBottomStyle groove"
+                    [ BorderBottomStyle.groove ]
+                    [ "borderBottomStyle" ==> "groove" ]
+                testCase
+                    "BorderBottomStyle ridge"
+                    [ BorderBottomStyle.ridge ]
+                    [ "borderBottomStyle" ==> "ridge" ]
+                testCase
+                    "BorderBottomStyle inset"
+                    [ BorderBottomStyle.inset ]
+                    [ "borderBottomStyle" ==> "inset" ]
+                testCase
+                    "BorderBottomStyle outset"
+                    [ BorderBottomStyle.outset ]
+                    [ "borderBottomStyle" ==> "outset" ]
+                testCase
+                    "BorderBottomStyle none"
+                    [ BorderBottomStyle.none ]
+                    [ "borderBottomStyle" ==> "none" ]
+                testCase
+                    "BorderBottomStyle initial"
+                    [ BorderBottomStyle.initial ]
+                    [ "borderBottomStyle" ==> "initial" ]
+                testCase
+                    "BorderBottomStyle inherit"
+                    [ BorderBottomStyle.inherit' ]
+                    [ "borderBottomStyle" ==> "inherit" ]
+                testCase
+                    "BorderBottomStyle unset"
+                    [ BorderBottomStyle.unset ]
+                    [ "borderBottomStyle" ==> "unset" ]
+                testCase
+                    "BorderLeftStyle hidden"
+                    [ BorderLeftStyle.hidden ]
+                    [ "borderLeftStyle" ==> "hidden" ]
+                testCase
+                    "BorderLeftStyle dotted"
+                    [ BorderLeftStyle.dotted ]
+                    [ "borderLeftStyle" ==> "dotted" ]
+                testCase
+                    "BorderLeftStyle dashed"
+                    [ BorderLeftStyle.dashed ]
+                    [ "borderLeftStyle" ==> "dashed" ]
+                testCase
+                    "BorderLeftStyle solid"
+                    [ BorderLeftStyle.solid ]
+                    [ "borderLeftStyle" ==> "solid" ]
+                testCase
+                    "BorderLeftStyle double"
+                    [ BorderLeftStyle.double ]
+                    [ "borderLeftStyle" ==> "double" ]
+                testCase
+                    "BorderLeftStyle groove"
+                    [ BorderLeftStyle.groove ]
+                    [ "borderLeftStyle" ==> "groove" ]
+                testCase
+                    "BorderLeftStyle ridge"
+                    [ BorderLeftStyle.ridge ]
+                    [ "borderLeftStyle" ==> "ridge" ]
+                testCase
+                    "BorderLeftStyle inset"
+                    [ BorderLeftStyle.inset ]
+                    [ "borderLeftStyle" ==> "inset" ]
+                testCase
+                    "BorderLeftStyle outset"
+                    [ BorderLeftStyle.outset ]
+                    [ "borderLeftStyle" ==> "outset" ]
+                testCase
+                    "BorderLeftStyle none"
+                    [ BorderLeftStyle.none ]
+                    [ "borderLeftStyle" ==> "none" ]
+                testCase
+                    "BorderLeftStyle initial"
+                    [ BorderLeftStyle.initial ]
+                    [ "borderLeftStyle" ==> "initial" ]
+                testCase
+                    "BorderLeftStyle inherit"
+                    [ BorderLeftStyle.inherit' ]
+                    [ "borderLeftStyle" ==> "inherit" ]
+                testCase
+                    "BorderLeftStyle unset"
+                    [ BorderLeftStyle.unset ]
+                    [ "borderLeftStyle" ==> "unset" ]
                 testCase
                     "Border radius px"
                     [ BorderRadius' (px 10)]
@@ -170,13 +383,117 @@ module Border =
                     [ BorderWidth.value (px 1, px 20, em 3.0, rem 4.5) ]
                     [ "borderWidth" ==> "1px 20px 3.0em 4.5rem" ]
                 testCase
+                    "Border top width px"
+                    [ BorderTopWidth' (px 40) ]
+                    [ "borderTopWidth" ==> "40px" ]
+                testCase
+                    "Border top width thin"
+                    [ BorderTopWidth.thin ]
+                    [ "borderTopWidth" ==> "thin" ]
+                testCase
+                    "Border top width medium"
+                    [ BorderTopWidth.medium ]
+                    [ "borderTopWidth" ==> "medium" ]
+                testCase
+                    "Border top width thick"
+                    [ BorderTopWidth.thick ]
+                    [ "borderTopWidth" ==> "thick" ]
+                testCase
+                    "Border top width initial"
+                    [ BorderTopWidth.initial ]
+                    [ "borderTopWidth" ==> "initial" ]
+                testCase
+                    "Border top width inherit"
+                    [ BorderTopWidth.inherit' ]
+                    [ "borderTopWidth" ==> "inherit" ]
+                testCase
+                    "Border top width unset"
+                    [ BorderTopWidth.unset ]
+                    [ "borderTopWidth" ==> "unset" ]
+                testCase
+                    "Border right width px"
+                    [ BorderRightWidth' (px 40) ]
+                    [ "borderRightWidth" ==> "40px" ]
+                testCase
+                    "Border right width thin"
+                    [ BorderRightWidth.thin ]
+                    [ "borderRightWidth" ==> "thin" ]
+                testCase
+                    "Border right width medium"
+                    [ BorderRightWidth.medium ]
+                    [ "borderRightWidth" ==> "medium" ]
+                testCase
+                    "Border right width thick"
+                    [ BorderRightWidth.thick ]
+                    [ "borderRightWidth" ==> "thick" ]
+                testCase
+                    "Border right width initial"
+                    [ BorderRightWidth.initial ]
+                    [ "borderRightWidth" ==> "initial" ]
+                testCase
+                    "Border right width inherit"
+                    [ BorderRightWidth.inherit' ]
+                    [ "borderRightWidth" ==> "inherit" ]
+                testCase
+                    "Border right width unset"
+                    [ BorderRightWidth.unset ]
+                    [ "borderRightWidth" ==> "unset" ]
+                testCase
+                    "Border bottom width px"
+                    [ BorderBottomWidth' (px 40) ]
+                    [ "borderBottomWidth" ==> "40px" ]
+                testCase
+                    "Border bottom width thin"
+                    [ BorderBottomWidth.thin ]
+                    [ "borderBottomWidth" ==> "thin" ]
+                testCase
+                    "Border bottom width medium"
+                    [ BorderBottomWidth.medium ]
+                    [ "borderBottomWidth" ==> "medium" ]
+                testCase
+                    "Border bottom width thick"
+                    [ BorderBottomWidth.thick ]
+                    [ "borderBottomWidth" ==> "thick" ]
+                testCase
+                    "Border bottom width initial"
+                    [ BorderBottomWidth.initial ]
+                    [ "borderBottomWidth" ==> "initial" ]
+                testCase
+                    "Border bottom width inherit"
+                    [ BorderBottomWidth.inherit' ]
+                    [ "borderBottomWidth" ==> "inherit" ]
+                testCase
+                    "Border bottom width unset"
+                    [ BorderBottomWidth.unset ]
+                    [ "borderBottomWidth" ==> "unset" ]
+                testCase
                     "Border left width px"
                     [ BorderLeftWidth' (px 40) ]
-                    ["borderLeftWidth" ==> "40px"]
+                    [ "borderLeftWidth" ==> "40px" ]
                 testCase
-                    "Border right width cm"
-                    [ BorderRightWidth' (cm 40.0) ]
-                    ["borderRightWidth" ==> "40.0cm"]
+                    "Border left width thin"
+                    [ BorderLeftWidth.thin ]
+                    [ "borderLeftWidth" ==> "thin" ]
+                testCase
+                    "Border left width medium"
+                    [ BorderLeftWidth.medium ]
+                    [ "borderLeftWidth" ==> "medium" ]
+                testCase
+                    "Border left width thick"
+                    [ BorderLeftWidth.thick ]
+                    [ "borderLeftWidth" ==> "thick" ]
+                testCase
+                    "Border left width initial"
+                    [ BorderLeftWidth.initial ]
+                    [ "borderLeftWidth" ==> "initial" ]
+                testCase
+                    "Border left width inherit"
+                    [ BorderLeftWidth.inherit' ]
+                    [ "borderLeftWidth" ==> "inherit" ]
+                testCase
+                    "Border left width unset"
+                    [ BorderLeftWidth.unset ]
+                    [ "borderLeftWidth" ==> "unset" ]
                 testCase
                     "Border color red"
                     [ BorderColor.red ]
@@ -195,7 +512,7 @@ module Border =
                     [ "borderColor" ==> "unset" ]
                 testCase
                     "Border colors multiple"
-                    [ BorderColor.value (FssTypes.Color.red, FssTypes.Color.green, FssTypes.Color.blue, FssTypes.Color.white) ]
+                    [ BorderColor.value (FssTypes.Color.Color.red, FssTypes.Color.Color.green, FssTypes.Color.Color.blue, FssTypes.Color.Color.white) ]
                     [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
                 testCase
                     "Border top color rgb"
@@ -263,7 +580,7 @@ module Border =
                     [ "borderImageSource" ==> "url(image.jpg)" ]
                 testCase
                     "Border image source linear gradient"
-                    [ BorderImageSource.linearGradient(deg 45., [ FssTypes.Color.red, pct 0; FssTypes.Color.blue, pct 100 ]) ]
+                    [ BorderImageSource.linearGradient(deg 45., [ FssTypes.Color.Color.red, pct 0; FssTypes.Color.Color.blue, pct 100 ]) ]
                     [ "borderImageSource" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
                 testCase
                     "Border image source inherit"

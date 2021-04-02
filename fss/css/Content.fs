@@ -43,34 +43,34 @@ module Content =
         static member url (url: string, altText: string) = contentValue <| sprintf "url(%s) / \"%s\"" url altText
         static member value (value: string) = contentValue <| sprintf "\"%s\"" value
         static member value (content: FssTypes.IContent) = content |> contentValue'
-        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType* FssTypes.Percent) list) =
             contentValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType* FssTypes.Size) list) =
             contentValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
+        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType* FssTypes.Percent) list)) list) =
             contentValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
+        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType* FssTypes.Size) list)) list) =
             contentValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType* FssTypes.Size) list) =
             contentValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType* FssTypes.Percent) list) =
             contentValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Size) list)) list) =
+        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType* FssTypes.Size) list)) list) =
             contentValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
-        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.ColorType * FssTypes.Percent) list)) list) =
+        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType* FssTypes.Percent) list)) list) =
             contentValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
 
-        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.Color.ColorType* FssTypes.Percent) list) =
             contentValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.Color.ColorType* FssTypes.Size) list) =
             contentValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Percent) list) list) =
+        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.Color.ColorType* FssTypes.Percent) list) list) =
             contentValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.ColorType * FssTypes.Size) list) list) =
+        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.Color.ColorType* FssTypes.Size) list) list) =
             contentValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Percent) list) =
+        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType* FssTypes.Percent) list) =
             contentValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.ColorType * FssTypes.Size) list) =
+        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType* FssTypes.Size) list) =
             contentValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
         static member attribute (attribute: FssTypes.Attribute.Attribute) =
             contentValue <| sprintf "attr(%A)" (FssTypes.attributeHelpers.attributeToString attribute)

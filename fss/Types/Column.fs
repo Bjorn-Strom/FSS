@@ -29,3 +29,10 @@ namespace Fss.FssTypes
             | Balance
             | BalanceAll
             interface IColumnFill
+
+    type ColumnRuleColorClass (valueFunction: IColumnRuleColor -> CssProperty) =
+        inherit ColorBase(valueFunction)
+        member this.value color = color |> valueFunction
+        member this.inherit' = Inherit |> valueFunction
+        member this.initial = Initial |> valueFunction
+        member this.unset = Unset |> valueFunction
