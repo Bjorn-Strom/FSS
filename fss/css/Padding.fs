@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/padding
 [<AutoOpen>]
 module Padding =
@@ -17,6 +19,7 @@ module Padding =
         |> paddingToString
         |> paddingValue
 
+    [<Erase>]
     type Padding =
         static member value (width: FssTypes.IPadding) = width |> paddingValue'
 
@@ -62,6 +65,7 @@ module Padding =
         value
         |> paddingToString
         |> paddingTopValue
+    [<Erase>]
     type PaddingTop =
         static member value (top: FssTypes.IPadding) = top |> paddingTopValue'
         static member auto = FssTypes.Auto |> paddingTopValue'
@@ -87,6 +91,7 @@ module Padding =
         value
         |> paddingToString
         |> paddingRightValue
+    [<Erase>]
     type PaddingRight =
         static member value (right: FssTypes.IPadding) = right |> paddingRightValue'
         static member auto = FssTypes.Auto |> paddingRightValue'
@@ -112,6 +117,7 @@ module Padding =
         value
         |> paddingToString
         |> paddingBottomValue
+    [<Erase>]
     type PaddingBottom =
         static member value (bottom: FssTypes.IPadding) = bottom |> paddingBottomValue'
         static member auto = FssTypes.Auto |> paddingBottomValue'
@@ -137,6 +143,7 @@ module Padding =
         value
         |> paddingToString
         |> paddingLeftValue
+    [<Erase>]
     type PaddingLeft =
         static member value (left: FssTypes.IPadding) = left |> paddingLeftValue'
         static member auto = FssTypes.Auto |> paddingLeftValue'
@@ -163,6 +170,7 @@ module Padding =
         |> paddingToString
         |> paddingInlineStartValue
 
+    [<Erase>]
     type PaddingInlineStart =
         static member value (padding: FssTypes.IPadding) = padding |> paddingInlineStartValue'
         static member auto = FssTypes.Auto |> paddingInlineStartValue'
@@ -189,6 +197,7 @@ module Padding =
         |> paddingToString
         |> paddingInlineEndValue
 
+    [<Erase>]
     type PaddingInlineEnd =
         static member value (padding: FssTypes.IPadding) = padding |> paddingInlineEndValue'
         static member auto = FssTypes.Auto |> paddingInlineEndValue'
@@ -215,6 +224,7 @@ module Padding =
         |> paddingToString
         |> paddingBlockStartValue
 
+    [<Erase>]
     type PaddingBlockStart =
         static member value (padding: FssTypes.IPadding) = padding |> paddingBlockStartValue'
         static member auto = FssTypes.Auto |> paddingBlockStartValue'
@@ -241,6 +251,7 @@ module Padding =
         |> paddingToString
         |> paddingBlockEndValue
 
+    [<Erase>]
     type PaddingBlockEnd =
         static member value (padding: FssTypes.IPadding) = padding |> paddingBlockEndValue'
         static member auto = FssTypes.Auto |> paddingBlockEndValue'

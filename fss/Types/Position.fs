@@ -75,3 +75,11 @@ namespace Fss.FssTypes
             | AvoidColumn
             | AvoidRegion
             interface IBreakInside
+
+    [<RequireQualifiedAccess>]
+    module WritingMode =
+        type WritingMode =
+            | HorizontalTb
+            | VerticalRl
+            | VerticalLr
+            interface IWritingMode

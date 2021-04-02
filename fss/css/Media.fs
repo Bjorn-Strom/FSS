@@ -1,5 +1,6 @@
 namespace Fss
 
+open Fable.Core
 open Fable.Core.JsInterop
 open Utilities.Helpers
 
@@ -74,6 +75,7 @@ module Media =
         |> List.map stringifyMedia
         |> String.concat " and "
 
+    [<Erase>]
     type Media =
         static member Media (features: FssTypes.Media.Feature list, attributeList) =
             mediaFeature features |> sprintf "@media %s" ==> attributeList |> FssTypes.CssProperty

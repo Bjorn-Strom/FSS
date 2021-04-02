@@ -72,7 +72,7 @@ namespace Fss.FssTypes
 
     [<AutoOpen>]
     module listStyleHelpers =
-        let inline styleTypeToString (styleType: IListStyleType) =
+        let internal styleTypeToString (styleType: IListStyleType) =
             match styleType with
             | :? ListStyle.Type as l -> Fss.Utilities.Helpers.duToKebab l
             | :? Counter.Style as c -> counterStyleToString c

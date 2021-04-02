@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Text =
     let private textAlignToString (alignment: FssTypes.ITextAlign) =
@@ -214,6 +216,7 @@ module Text =
         value
         |> textAlignToString
         |> alignCssValue
+    [<Erase>]
     type TextAlign =
         static member value (textAlign: FssTypes.ITextAlign) = textAlign |> alignCssValue'
         static member left = FssTypes.Text.Align.Left |> alignCssValue'
@@ -246,6 +249,7 @@ module Text =
         value
         |> textAlignLastToString
         |> alignLastCssValue
+    [<Erase>]
     type TextAlignLast =
         static member value (textAlign: FssTypes.ITextAlignLast) = textAlign |> alignLastCssValue'
         static member left = FssTypes.Text.AlignLast.Left |> alignLastCssValue'
@@ -276,6 +280,7 @@ module Text =
         value
         |> decorationToString
         |> decorationValue
+    [<Erase>]
     type TextDecoration =
         static member value (value: FssTypes.ITextDecoration) = value |> decorationValue'
         static member none = FssTypes.None' |> decorationValue'
@@ -294,6 +299,7 @@ module Text =
         value
         |> decorationLineToString
         |> lineCssValue
+    [<Erase>]
     type TextDecorationLine =
         static member value (value: FssTypes.ITextDecorationLine) = value |> lineCssValue'
         static member value (v1: FssTypes.ITextDecorationLine, v2: FssTypes.ITextDecorationLine) =
@@ -328,6 +334,7 @@ module Text =
         value
         |> thicknessToString
         |> thicknessValue
+    [<Erase>]
     type TextDecorationThickness =
         static member value (thickness: FssTypes.ITextDecorationThickness) = thickness |> thicknessValue'
         static member fromFont = FssTypes.Text.DecorationThickness |> thicknessValue'
@@ -358,6 +365,7 @@ module Text =
         value
         |> decorationStyleToString
         |> decorationStyleValue
+    [<Erase>]
     type TextDecorationStyle =
         static member value(style: FssTypes.ITextDecorationStyle) = style |> decorationStyleValue'
         static member solid = FssTypes.Text.DecorationStyle.Solid |> decorationStyleValue'
@@ -388,6 +396,7 @@ module Text =
         |> decorationSkipToString
         |> skipValue
 
+    [<Erase>]
     type TextDecorationSkip =
         static member value (value: FssTypes.ITextDecorationSkip) = value |> skipValue'
         static member value (v1: FssTypes.ITextDecorationSkip, v2: FssTypes.ITextDecorationSkip) =
@@ -427,6 +436,7 @@ module Text =
         value
         |> decorationSkipInkToString
         |> skipInkValue
+    [<Erase>]
     type TextDecorationSkipInk =
         static member value(skipInk: FssTypes.ITextDecorationSkipInk) = skipInk |> skipInkValue'
         static member all = FssTypes.Text.DecorationSkipInk |> skipInkValue'
@@ -456,6 +466,7 @@ module Text =
         value
         |> textTransformToString
         |> transformValue
+    [<Erase>]
     type TextTransform =
         static member value (transform: FssTypes.ITextTransform) = transform |> transformValue'
         static member capitalize = FssTypes.Text.Capitalize |> transformValue'
@@ -487,6 +498,7 @@ module Text =
         value
         |> indentToString
         |> indentCssValue
+    [<Erase>]
     type TextIndent =
         static member value (indent: FssTypes.ITextIndent) = indent |> indentCssValue'
         static member value (i1: FssTypes.ITextIndent, i2: FssTypes.ITextIndent) = sprintf "%s %s" (indentToString i1) (indentToString i2) |> indentCssValue
@@ -517,6 +529,7 @@ module Text =
     // https://css-tricks.com/almanac/properties/t/text-shadow/
     let private shadowValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextShadow value
 
+    [<Erase>]
     type TextShadow =
         static member xy (xOffset: FssTypes.Size, yOffset: FssTypes.Size) =
             FssTypes.Text.XY(xOffset,yOffset)
@@ -537,6 +550,7 @@ module Text =
         value
         |> textOverflowToString
         |> overflowValue
+    [<Erase>]
     type TextOverflow =
         static member value (overflow: FssTypes.ITextOverflow) = overflow |> overflowValue'
 
@@ -559,6 +573,7 @@ module Text =
         |> emphasisToString
         |> emphasisValue
 
+    [<Erase>]
     type TextEmphasis =
         static member value (emphasis: FssTypes.ITextEmphasis) = emphasis |> emphasisValue'
 
@@ -585,6 +600,7 @@ module Text =
         |> emphasisPositionToString
         |> emphasisPositionValue
 
+    [<Erase>]
     type TextEmphasisPosition =
         static member value (v1: FssTypes.ITextEmphasisPosition, v2: FssTypes.ITextEmphasisPosition) =
             sprintf "%s %s" (emphasisPositionToString v1) (emphasisPositionToString v2)
@@ -613,6 +629,7 @@ module Text =
         value
         |> emphasisStyleToString
         |> emphasisStyleValue
+    [<Erase>]
     type TextEmphasisStyle =
         static member value (emphasisStyle: FssTypes.ITextEmphasisStyle) = emphasisStyle |> emphasisStyleValue'
         static member filled = FssTypes.Text.Filled |> emphasisStyleValue'
@@ -649,6 +666,7 @@ module Text =
         |> underlinePositionToString
         |> underlinePositionCssValue
 
+    [<Erase>]
     type TextUnderlinePosition =
         static member value (underlinePosition: FssTypes.ITextUnderlinePosition) =
             underlinePosition |> underlinePositionCssValue'
@@ -686,6 +704,7 @@ module Text =
         value
         |> underlineOffsetToString
         |> offsetValue
+    [<Erase>]
     type TextUnderlineOffset =
         static member value (underlineOffset: FssTypes.ITextUnderlineOffset) = underlineOffset |> offsetValue'
         static member inherit' = FssTypes.Inherit |> offsetValue'
@@ -712,6 +731,7 @@ module Text =
         value
         |> quoteToString
         |> quoteValue
+    [<Erase>]
     type Quotes =
         static member value (quote: FssTypes.IQuotes) =
             quote
@@ -751,6 +771,7 @@ module Text =
         value
         |> hyphensToString
         |> hyphensValue
+    [<Erase>]
     type Hyphens =
         static member value (hyphens: FssTypes.IHyphens) = hyphens |> hyphensValue'
         static member manual = FssTypes.Text.Manual |> hyphensValue'
@@ -779,6 +800,7 @@ module Text =
         value
         |> textDecorationColorToString
         |> textDecorationColorValue
+    [<Erase>]
     type TextDecorationColor =
         static member value (color: FssTypes.ITextDecorationColor) = color |> textDecorationColorValue'
 
@@ -954,6 +976,7 @@ module Text =
         value
         |> textEmphasisColorToString
         |> emphasisColorValue
+    [<Erase>]
     type TextEmphasisColor =
         static member value (color: FssTypes.ITextEmphasisColor) = color |> emphasisColorValue'
         static member black = FssTypes.Color.black |> emphasisColorValue'
@@ -1126,6 +1149,7 @@ module Text =
     let private textSizeAdjustValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextSizeAdjust value
     let private textSizeAdjustValue' value = value |> textSizeAdjustToString |> textSizeAdjustValue
 
+    [<Erase>]
     type TextSizeAdjust =
         static member value (textSize: FssTypes.ITextSizeAdjust) = textSize |> textSizeAdjustValue'
         static member auto = FssTypes.Auto |> textSizeAdjustValue'
@@ -1151,6 +1175,7 @@ module Text =
     let private tabSizeValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TabSize value
     let private tabSizeValue' value = value |> tabSizeToString |> tabSizeValue
 
+    [<Erase>]
     type TabSize =
         static member value (tabSize: FssTypes.ITabSize) = tabSize |> tabSizeValue'
         static member inherit' = FssTypes.Inherit |> tabSizeValue'
@@ -1173,6 +1198,7 @@ module Text =
     let private textOrientationValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextOrientation value
     let private textOrientationValue' value = value |> textOrientationToString |> textOrientationValue
 
+    [<Erase>]
     type TextOrientation =
         static member value (orientation: FssTypes.ITextOrientation) = orientation |> textOrientationValue'
         static member mixed = FssTypes.Text.Mixed |> textOrientationValue'
@@ -1199,6 +1225,7 @@ module Text =
     let private textRenderingValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextRendering value
     let private textRenderingValue' value = value |> textRenderingToString |> textRenderingValue
 
+    [<Erase>]
     type TextRendering =
         static member value (rendering: FssTypes.ITextRendering) = rendering |> textRenderingValue'
         static member optimizeSpeed = FssTypes.Text.OptimizeSpeed |> textRenderingValue'
@@ -1225,6 +1252,7 @@ module Text =
     let private textJustifyValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextJustify value
     let private textJustifyValue' value = value |> textJustifyToString |> textJustifyValue
 
+    [<Erase>]
     type TextJustify =
         static member value (justification: FssTypes.ITextJustify) = justification |> textJustifyValue'
         static member interWord = FssTypes.Text.InterWord |> textJustifyValue'
@@ -1246,6 +1274,7 @@ module Text =
     let private whiteSpaceValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.WhiteSpace value
     let private whiteSpaceValue' value = value |> whitespaceToString |> whiteSpaceValue
 
+    [<Erase>]
     type WhiteSpace =
         static member value (whitespace: FssTypes.IWhiteSpace) = whitespace |> whiteSpaceValue'
         static member noWrap = FssTypes.Text.WhiteSpace.NoWrap |> whiteSpaceValue'
@@ -1274,6 +1303,7 @@ module Text =
     let private userSelectValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.UserSelect value
     let private userSelectValue' value = value |> userSelectToString |> userSelectValue
 
+    [<Erase>]
     type UserSelect =
         static member value (whitespace: FssTypes.IUserSelect) = whitespace |> userSelectValue'
         static member text = FssTypes.Text.UserSelect.Text |> userSelectValue'

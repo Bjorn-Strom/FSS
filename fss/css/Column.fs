@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Column =
     let private columnGapToString (gap: FssTypes.IColumnGap) =
@@ -78,6 +80,7 @@ module Column =
         value
         |> columnGapToString
         |> columnGapValue
+    [<Erase>]
     type ColumnGap =
         static member Value (gap: FssTypes.IColumnGap) = gap |> columnGapValue'
         static member inherit' = FssTypes.Inherit |> columnGapValue'
@@ -105,6 +108,7 @@ module Column =
         |> columnSpanToString
         |> columnSpanValue
 
+    [<Erase>]
     type ColumnSpan =
         static member value(span: FssTypes.IColumnSpan) = span |> columnSpanValue'
         static member all = FssTypes.Column.Span.All |> columnSpanValue'
@@ -132,6 +136,7 @@ module Column =
         |> columnsToString
         |> columnsValue
 
+    [<Erase>]
     type Columns =
         static member value (columns: FssTypes.IColumns) = columns |> columnsValue'
         static member inherit' = FssTypes.Inherit |> columnsValue'
@@ -155,6 +160,7 @@ module Column =
         |> columnRuleToString
         |> columnRuleValue
 
+    [<Erase>]
     type ColumnRule =
         static member value (rule: FssTypes.IColumnRule) = rule |> columnRuleValue'
         static member inherit' = FssTypes.Inherit |> columnRuleValue'
@@ -178,6 +184,7 @@ module Column =
         |> columnRuleWidthToString
         |> columnRuleWidthValue
 
+    [<Erase>]
     type ColumnRuleWidth =
         static member value (ruleWidth: FssTypes.IColumnRuleWidth) = ruleWidth |> columnRuleWidthValue'
         static member thin = FssTypes.Column.RuleWidth.Thin |> columnRuleWidthValue'
@@ -206,6 +213,7 @@ module Column =
         |> columnRuleStyleToString
         |> styleValue
 
+    [<Erase>]
     type ColumnRuleStyle =
         static member value (style: FssTypes.IColumnRuleStyle) = style |> styleValue'
         static member hidden = FssTypes.Column.RuleStyle.Hidden |> styleValue'
@@ -242,6 +250,7 @@ module Column =
         |> columnRuleColorToString
         |> columnRuleColorValue
 
+    [<Erase>]
     type ColumnRuleColor =
         static member value (color: FssTypes.IColumnRuleColor) = color |> columnRuleColorValue'
         static member black = FssTypes.Color.black |> columnRuleColorValue'
@@ -417,6 +426,7 @@ module Column =
         |> columnCountToString
         |> columnCountValue
 
+    [<Erase>]
     type ColumnCount =
         static member value(columnCount: FssTypes.IColumnCount) = columnCount |> columnCountValue'
         static member auto = FssTypes.Auto |> columnCountValue'
@@ -443,6 +453,7 @@ module Column =
         |> columnFillToString
         |> columnFillValue
 
+    [<Erase>]
     type ColumnFill =
         static member value(columnFill: FssTypes.IColumnFill) = columnFill |> columnFillValue'
         static member balance = FssTypes.Column.Fill.Balance |> columnFillValue'
@@ -471,6 +482,7 @@ module Column =
         |> columnWidthToString
         |> columnWidthValue
 
+    [<Erase>]
     type ColumnWidth =
         static member value(columnWidth: FssTypes.IColumnWidth) = columnWidth |> columnWidthValue'
         static member auto = FssTypes.Auto |> columnWidthValue'

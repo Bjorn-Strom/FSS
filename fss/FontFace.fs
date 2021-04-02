@@ -1,5 +1,6 @@
 ﻿namespace Fss
 
+open Fable.Core
 open Fable.Core.JsInterop
 
 [<AutoOpen>]
@@ -17,6 +18,7 @@ module FontFace =
     let private stretchValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStretch value
     let private weightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight value
 
+    [<Erase>]
     type FontFace =
         static member source (source: FssTypes.FontFace.Source) = source |> stringifySource |> sourceValue
         static member sources (sources: FssTypes.FontFace.Source list) = Utilities.Helpers.combineComma stringifySource sources |> sourceValue

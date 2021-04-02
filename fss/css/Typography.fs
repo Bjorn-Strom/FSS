@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Typography =
     let private orphansToString (orphans: FssTypes.IOrphans) =
@@ -20,6 +22,7 @@ module Typography =
         value
         |> orphansToString
         |> orphansValue
+    [<Erase>]
     type Orphans =
         static member value (orphans: FssTypes.IOrphans) = orphans |> orphansValue'
         static member inherit' = FssTypes.Inherit |> orphansValue'
@@ -44,6 +47,7 @@ module Typography =
         |> widowsToString
         |> widowsValue
 
+    [<Erase>]
     type Widows =
         static member value (widows: FssTypes.IWidows) = widows |> widowsValue'
         static member inherit' = FssTypes.Inherit |> widowsValue'

@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module ScrollBehavior =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
@@ -16,6 +18,8 @@ module ScrollBehavior =
         |> stringifyScrollBehavior
         |> BehaviorValue
 
+
+    [<Erase>]
     type ScrollBehavior =
         static member value (behavior: FssTypes.IScrollBehavior) = behavior |> BehaviorValue'
         static member smooth = FssTypes.Scroll.ScrollBehavior.Smooth |> BehaviorValue'
@@ -49,6 +53,8 @@ module ScrollMargin =
         |> scrollMarginToString
         |> scrollMarginValue
 
+
+    [<Erase>]
     type ScrollMargin =
         static member value (width: FssTypes.IScrollMargin) = width |> scrollMarginValue'
 
@@ -90,6 +96,8 @@ module ScrollMargin =
         value
         |> scrollMarginToString
         |> scrollMarginTopValue
+
+    [<Erase>]
     type ScrollMarginTop =
         static member value (top: FssTypes.IScrollMargin) = top |> scrollMarginTopValue'
         static member inherit' = FssTypes.Inherit |> scrollMarginTopValue'
@@ -112,6 +120,8 @@ module ScrollMargin =
         value
         |> scrollMarginToString
         |> scrollMarginRightValue
+
+    [<Erase>]
     type ScrollMarginRight =
         static member value (right: FssTypes.IScrollMargin) = right |> scrollMarginRightValue'
         static member inherit' = FssTypes.Inherit |> scrollMarginRightValue'
@@ -134,6 +144,8 @@ module ScrollMargin =
         value
         |> scrollMarginToString
         |> scrollMarginBottomValue
+
+    [<Erase>]
     type ScrollMarginBottom =
         static member value (bottom: FssTypes.IScrollMargin) = bottom |> scrollMarginBottomValue'
         static member inherit' = FssTypes.Inherit |> scrollMarginBottomValue'
@@ -155,6 +167,8 @@ module ScrollMargin =
         value
         |> scrollMarginToString
         |> scrollMarginLeftValue
+
+    [<Erase>]
     type ScrollMarginLeft =
         static member value (left: FssTypes.IScrollMargin) = left |> scrollMarginLeftValue'
         static member inherit' = FssTypes.Inherit |> scrollMarginLeftValue'
@@ -188,6 +202,8 @@ module ScrollPadding =
         |> scrollPaddingToString
         |> scrollPaddingValue
 
+
+    [<Erase>]
     type ScrollPadding =
         static member value (width: FssTypes.IScrollPadding) = width |> scrollPaddingValue'
 
@@ -231,6 +247,8 @@ module ScrollPadding =
         value
         |> scrollPaddingToString
         |> scrollPaddingTopValue
+
+    [<Erase>]
     type ScrollPaddingTop =
         static member value (top: FssTypes.IScrollPadding) = top |> scrollPaddingTopValue'
         static member inherit' = FssTypes.Inherit |> scrollPaddingTopValue'
@@ -255,6 +273,8 @@ module ScrollPadding =
         value
         |> scrollPaddingToString
         |> scrollPaddingRightValue
+
+    [<Erase>]
     type ScrollPaddingRight =
         static member value (right: FssTypes.IScrollPadding) = right |> scrollPaddingRightValue'
         static member inherit' = FssTypes.Inherit |> scrollPaddingRightValue'
@@ -279,6 +299,8 @@ module ScrollPadding =
         value
         |> scrollPaddingToString
         |> scrollPaddingBottomValue
+
+    [<Erase>]
     type ScrollPaddingBottom =
         static member value (bottom: FssTypes.IScrollPadding) = bottom |> scrollPaddingBottomValue'
         static member inherit' = FssTypes.Inherit |> scrollPaddingBottomValue'
@@ -302,6 +324,8 @@ module ScrollPadding =
         value
         |> scrollPaddingToString
         |> scrollPaddingLeftValue
+
+    [<Erase>]
     type ScrollPaddingLeft =
         static member value (left: FssTypes.IScrollPadding) = left |> scrollPaddingLeftValue'
         static member inherit' = FssTypes.Inherit |> scrollPaddingLeftValue'
@@ -337,6 +361,7 @@ module OverscrollBehaviorX =
         |> stringifyBehavior
         |> overscrollBehaviour
 
+    [<Erase>]
     type OverscrollBehaviorX =
         static member value (behavior: FssTypes.IOverscrollBehaviorX) = behavior |> overscrollBehaviour
         static member auto = FssTypes.Auto |> overscrollBehaviour'
@@ -357,38 +382,40 @@ module OverscrollBehaviorX =
     /// <returns>Css property for fss.</returns>
     let OverscrollBehaviorX' (behavior: FssTypes.IOverscrollBehaviorX) = behavior |> OverscrollBehaviorX.value
 
-    [<AutoOpen>]
-    module OverscrollBehaviorY =
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
-        let private stringifyBehavior (behavior: FssTypes.IOverscrollBehaviorY) =
-            match behavior with
-            | :? FssTypes.Scroll.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
-            | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
-            | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
-            | _ -> "Unknown all"
+[<AutoOpen>]
+module OverscrollBehaviorY =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
+    let private stringifyBehavior (behavior: FssTypes.IOverscrollBehaviorY) =
+        match behavior with
+        | :? FssTypes.Scroll.OverscrollBehavior as o -> Utilities.Helpers.duToLowercase o
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | _ -> "Unknown all"
 
-        let private overscrollBehaviour value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverscrollBehaviorY value
-        let private overscrollBehaviour' value =
-            value
-            |> stringifyBehavior
-            |> overscrollBehaviour
+    let private overscrollBehaviour value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverscrollBehaviorY value
+    let private overscrollBehaviour' value =
+        value
+        |> stringifyBehavior
+        |> overscrollBehaviour
 
-        type OverscrollBehaviorY =
-            static member value (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> overscrollBehaviour
-            static member auto = FssTypes.Auto |> overscrollBehaviour'
-            static member contain = FssTypes.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
-            static member inherit' = FssTypes.Inherit |> overscrollBehaviour'
-            static member initial = FssTypes.Initial |> overscrollBehaviour'
-            static member unset = FssTypes.Unset |> overscrollBehaviour'
 
-        /// <summary>Specify browser behavior when scroll hits vertical boundry.</summary>
-        /// <param name="behavior">
-        ///     can be:
-        ///     - <c> OverscrollBehavior </c>
-        ///     - <c> Auto </c>
-        ///     - <c> Inherit </c>
-        ///     - <c> Initial </c>
-        ///     - <c> Unset </c>
-        /// </param>
-        /// <returns>Css property for fss.</returns>
-        let OverscrollBehaviorY' (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> OverscrollBehaviorY.value
+    [<Erase>]
+    type OverscrollBehaviorY =
+        static member value (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> overscrollBehaviour
+        static member auto = FssTypes.Auto |> overscrollBehaviour'
+        static member contain = FssTypes.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
+        static member inherit' = FssTypes.Inherit |> overscrollBehaviour'
+        static member initial = FssTypes.Initial |> overscrollBehaviour'
+        static member unset = FssTypes.Unset |> overscrollBehaviour'
+
+    /// <summary>Specify browser behavior when scroll hits vertical boundry.</summary>
+    /// <param name="behavior">
+    ///     can be:
+    ///     - <c> OverscrollBehavior </c>
+    ///     - <c> Auto </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let OverscrollBehaviorY' (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> OverscrollBehaviorY.value

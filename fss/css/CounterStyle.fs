@@ -1,11 +1,13 @@
 ﻿namespace Fss
 
+open Fable.Core
 open Fable.Core.JsInterop
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style
 [<AutoOpen>]
 module Counter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/system
+    [<Erase>]
     type System =
         static member cyclic = "system" ==> "cyclic" |> FssTypes.CounterProperty
         static member numeric = "system" ==> "numeric" |> FssTypes.CounterProperty
@@ -19,6 +21,7 @@ module Counter =
             "system" ==> sprintf "extends %s" (Utilities.Helpers.duToKebab extend) |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/negative
+    [<Erase>]
     type Negative =
         static member negative (first: string) =
             "negative" ==> first |> FssTypes.CounterProperty
@@ -26,16 +29,19 @@ module Counter =
             "negative" ==> sprintf "\"%s\" \"%s\"" first second |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/prefix
+    [<Erase>]
     type Prefix =
         static member value (value: string) = "prefix" ==> value |> FssTypes.CounterProperty
         static member url (url: string) = "prefix" ==> sprintf "url(%s)" url |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/suffix
+    [<Erase>]
     type Suffix =
         static member value (value: string) = "suffix" ==> sprintf "'%s'" value |> FssTypes.CounterProperty
         static member url (url: string) = "suffix" ==> sprintf "url(%s)" url |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/range
+    [<Erase>]
     type Range =
         static member value (v1: int, v2: int) = "range" ==> sprintf "%d %d" v1 v2 |> FssTypes.CounterProperty
         static member value (v1: int, range: Range) = "range" ==> sprintf "%d %A" v1 range |> FssTypes.CounterProperty
@@ -45,10 +51,12 @@ module Counter =
         static member auto = "range" ==> "auto" |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/pad
+    [<Erase>]
     type Pad =
         static member pad (value: int, symbol: string) = "pad" ==> sprintf "%d \"%s\"" value symbol |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/symbols
+    [<Erase>]
     type Symbols =
         static member strings(strings: string list) =
                 "symbols" ==>
@@ -63,6 +71,7 @@ module Counter =
         static member custom (custom: FssTypes.Counter.Style) = "symbols" ==> FssTypes.counterStyleHelpers.counterStyleToString custom |> FssTypes.CounterProperty
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/additive-symbols
+    [<Erase>]
     type AdditiveSymbolType =
         | Symbol of string
         | Url of string
@@ -72,6 +81,7 @@ module Counter =
             | Symbol s -> sprintf "\"%s\"" s
             | Url u -> sprintf "url(%s)" u
 
+    [<Erase>]
     type AdditiveSymbol =
         static member value (symbols: (int * AdditiveSymbolType) list) =
              "additiveSymbols" ==>
@@ -82,6 +92,7 @@ module Counter =
     let AdditiveSymbol' (symbols: (int * AdditiveSymbolType) list) = AdditiveSymbol.value(symbols)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/speak-as
+    [<Erase>]
     type SpeakAs =
         static member auto = "speak-as" ==> "auto" |> FssTypes.CounterProperty
         static member bullets = "speak-as" ==> "bullets" |> FssTypes.CounterProperty
@@ -109,6 +120,7 @@ module Counter =
         |> counterResetToString
         |> counterResetValue
 
+    [<Erase>]
     type CounterReset =
         static member value (counterReset: FssTypes.ICounterReset) = counterReset |> counterResetValue'
         static member reset (counter: FssTypes.Counter.Style) = counter |> FssTypes.Counter.Reset |> counterResetValue'
@@ -139,6 +151,7 @@ module Counter =
         |> counterIncrementToString
         |> counterIncrementValue
 
+    [<Erase>]
     type CounterIncrement =
         static member value (counterIncrement: FssTypes.ICounterIncrement) = counterIncrement |> counterIncrementValue'
         static member increment (counter: FssTypes.Counter.Style) = counter |> FssTypes.Counter.Increment |> counterIncrementValue'

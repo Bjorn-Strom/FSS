@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Resize =
     let private resizeToString (resize: FssTypes.IResize) =
@@ -15,6 +17,7 @@ module Resize =
         |> resizeToString
         |> resizeValue
 
+    [<Erase>]
     type Resize =
         static member value (resize: FssTypes.IResize) = resize |> resizeValue'
         static member both = FssTypes.Resize.Both |> resizeValue'

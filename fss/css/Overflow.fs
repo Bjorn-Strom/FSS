@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
 [<AutoOpen>]
 module Overflow =
@@ -25,6 +27,7 @@ module Overflow =
         |> overflowToString
         |> overflowValue
 
+    [<Erase>]
     type Overflow =
         static member value (overflow: FssTypes.IOverflow) = overflow |> overflowValue'
         static member value (x: FssTypes.IOverflow, y: FssTypes.IOverflow) =
@@ -60,6 +63,7 @@ module Overflow =
         |> overflowToString
         |> overflowXValue
 
+    [<Erase>]
     type OverflowX =
         static member value (overflow: FssTypes.IOverflow) = overflow |> overflowXValue'
         static member visible = FssTypes.Overflow.Visible |> overflowXValue'
@@ -90,6 +94,7 @@ module Overflow =
         |> overflowToString
         |> overflowYValue
 
+    [<Erase>]
     type OverflowY =
         static member value (overflow: FssTypes.IOverflow) = overflow |> overflowYValue'
         static member visible = FssTypes.Overflow.Visible |> overflowYValue'
@@ -121,6 +126,7 @@ module Overflow =
         |> wrapToString
         |> overflowWrapValue
 
+    [<Erase>]
     type OverflowWrap =
         static member value (overflowWrap: FssTypes.IOverflowWrap) = overflowWrap |> overflowWrapValue'
         static member breakWord = FssTypes.Overflow.Wrap.BreakWord |> overflowWrapValue'

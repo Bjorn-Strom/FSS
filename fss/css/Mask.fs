@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Mask =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
@@ -15,6 +17,7 @@ module Mask =
         |> stringifyClip
         |> maskClipValue
 
+    [<Erase>]
     type MaskClip =
         static member value (clip: FssTypes.IMaskClip) = clip |> maskClipValue'
         static member value (clips: FssTypes.Mask.Clip list) =
@@ -61,6 +64,7 @@ module Mask =
         |> stringifyComposite
         |> maskCompositeValue
 
+    [<Erase>]
     type MaskComposite =
         static member value (clip: FssTypes.IMaskComposite) = clip |> maskCompositeValue'
         static member value (clips: FssTypes.Mask.Composite list) =
@@ -99,6 +103,7 @@ module Mask =
         |> imageSourceToString
         |> imageValue
 
+    [<Erase>]
     type MaskImage =
         static member value (source: FssTypes.IMaskImage) = source |> imageValue'
         static member url (url: string) = imageValue <| sprintf "url(%s)" url
@@ -161,6 +166,7 @@ module Mask =
         |> stringifyMode
         |> maskModeValue
 
+    [<Erase>]
     type MaskMode =
         static member value (mode: FssTypes.IMaskMode) = mode |> maskModeValue'
         static member value (modes: FssTypes.Mask.Mode list) =
@@ -198,6 +204,7 @@ module Mask =
         |> stringifyOrigin
         |> maskOriginValue
 
+    [<Erase>]
     type MaskOrigin =
         static member value (origin: FssTypes.IMaskOrigin) = origin |> maskOriginValue'
         static member value (origins: FssTypes.Mask.Origin list) =
@@ -250,6 +257,7 @@ module Mask =
         let (x, y) = ps
         $"{FssTypes.unitHelpers.percentToString x} {FssTypes.unitHelpers.percentToString y}"
 
+    [<Erase>]
     type MaskPosition =
         static member value (x: FssTypes.Size, y: FssTypes.Size) =
             stringifyPixelPositions(x,y)
@@ -300,6 +308,7 @@ module Mask =
     let private repeatValue (x: FssTypes.Mask.Repeat, y: FssTypes.Mask.Repeat) =
         $"{stringifyRepeat x} {stringifyRepeat y}"
 
+    [<Erase>]
     type MaskRepeat =
         static member value (repeat: FssTypes.IMaskRepeat) =
             repeat

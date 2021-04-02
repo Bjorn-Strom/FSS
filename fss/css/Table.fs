@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Table =
     let private captionSideToString (captionSide: FssTypes.ICaptionSide) =
@@ -28,6 +30,7 @@ module Table =
         |> captionSideToString
         |> captionSideValue
 
+    [<Erase>]
     type CaptionSide =
         static member value (captionSide: FssTypes.ICaptionSide) = captionSide |> captionSideValue'
         static member top = FssTypes.Table.CaptionSide.Top |> captionSideValue'
@@ -57,6 +60,7 @@ module Table =
         value
         |> emptyCellsToString
         |> emptyCellsValue
+    [<Erase>]
     type EmptyCells =
         static member value (emptyCells: FssTypes.IEmptyCells) = emptyCells |> emptyCellsValue'
         static member show = FssTypes.Table.EmptyCells.Show |> emptyCellsValue'
@@ -83,6 +87,7 @@ module Table =
         |> tableLayoutToString
         |> tableLayoutValue
 
+    [<Erase>]
     type TableLayout =
         static member value (layout: FssTypes.ITableLayout) = layout |> tableLayoutValue'
         static member fixed' = FssTypes.Table.Layout.Fixed |> tableLayoutValue'

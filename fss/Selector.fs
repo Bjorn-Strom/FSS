@@ -1,5 +1,6 @@
 namespace Fss
 
+open Fable.Core
 open Fable.Core.JsInterop
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_combinator
@@ -9,6 +10,7 @@ open Fable.Core.JsInterop
 [<AutoOpen>]
 module Selector =
 
+    [<Erase>]
     type Selector =
         static member adjacentSibling (html: FssTypes.Html.Html) = sprintf " + %A" (FssTypes.htmlHelpers.htmlToString html)
         static member generalSibling (html: FssTypes.Html.Html) = sprintf " ~ %A" (FssTypes.htmlHelpers.htmlToString html)

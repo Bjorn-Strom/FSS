@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/margin
 [<AutoOpen>]
 module Margin =
@@ -17,6 +19,7 @@ module Margin =
         |> marginToString
         |> marginValue
 
+    [<Erase>]
     type Margin =
         static member value (width: FssTypes.IMargin) = width |> marginValue'
 
@@ -61,6 +64,7 @@ module Margin =
         value
         |> marginToString
         |> marginTopValue
+    [<Erase>]
     type MarginTop =
         static member value (top: FssTypes.IMargin) = top |> marginTopValue'
         static member auto = FssTypes.Auto |> marginTopValue'
@@ -87,6 +91,7 @@ module Margin =
         |> marginToString
         |> marginRightValue
 
+    [<Erase>]
     type MarginRight =
         static member value (right: FssTypes.IMargin) = right |> marginRightValue'
         static member auto = FssTypes.Auto |> marginRightValue'
@@ -112,6 +117,7 @@ module Margin =
         value
         |> marginToString
         |> marginBottomValue
+    [<Erase>]
     type MarginBottom =
         static member value (bottom: FssTypes.IMargin) = bottom |> marginBottomValue'
         static member auto = FssTypes.Auto |> marginBottomValue'
@@ -138,6 +144,7 @@ module Margin =
         |> marginToString
         |> marginLeftValue
 
+    [<Erase>]
     type MarginLeft =
         static member value (left: FssTypes.IMargin) = left |> marginLeftValue'
         static member auto = FssTypes.Auto |> marginLeftValue'
@@ -165,6 +172,7 @@ module Margin =
         |> marginToString
         |> marginInlineStartValue
 
+    [<Erase>]
     type MarginInlineStart =
         static member value (margin: FssTypes.IMargin) = margin |> marginInlineStartValue'
         static member auto = FssTypes.Auto |> marginInlineStartValue'
@@ -191,6 +199,7 @@ module Margin =
         |> marginToString
         |> marginInlineEndValue
 
+    [<Erase>]
     type MarginInlineEnd =
         static member value (margin: FssTypes.IMargin) = margin |> marginInlineEndValue'
         static member auto = FssTypes.Auto |> marginInlineEndValue'
@@ -217,6 +226,7 @@ module Margin =
         |> marginToString
         |> marginBlockStartValue
 
+    [<Erase>]
     type MarginBlockStart =
         static member value (margin: FssTypes.IMargin) = margin |> marginBlockStartValue'
         static member auto = FssTypes.Auto |> marginBlockStartValue'
@@ -243,6 +253,7 @@ module Margin =
         |> marginToString
         |> marginBlockEndValue
 
+    [<Erase>]
     type MarginBlockEnd =
         static member value (margin: FssTypes.IMargin) = margin |> marginBlockEndValue'
         static member auto = FssTypes.Auto |> marginBlockEndValue'

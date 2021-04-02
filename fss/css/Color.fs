@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Color =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color-adjust
@@ -9,6 +11,7 @@ module Color =
         |> Utilities.Helpers.duToLowercase
         |> colorAdjustCssValue
 
+    [<Erase>]
     type ColorAdjust =
         static member value (adjust: FssTypes.ColorAdjust) = adjust |> colorAdjustCssValue'
         static member economy = FssTypes.Economy |> colorAdjustCssValue'
@@ -24,6 +27,7 @@ module Color =
         value
         |> FssTypes.colorHelpers.colorToString
         |> colorCssValue
+    [<Erase>]
     type Color =
         static member black = FssTypes.Color.black |> colorCssValue'
         static member silver = FssTypes.Color.silver |> colorCssValue'

@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module All =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/all
@@ -14,6 +16,7 @@ module All =
         |> stringifyAll
         |> allValue
 
+    [<Erase>]
     type All =
         static member value (all: FssTypes.IAll) = all |> allValue'
         static member inherit' = FssTypes.Inherit |> allValue'

@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module ClipPath =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
@@ -52,6 +54,7 @@ module ClipPath =
         |> stringifyClipPath
         |> clipPathValue
 
+    [<Erase>]
     type ClipPath =
         static member inset (inset: FssTypes.ILengthPercentage) =
             FssTypes.ClipPath.Inset.All inset

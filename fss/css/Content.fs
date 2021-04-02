@@ -1,5 +1,7 @@
 ﻿namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Content =
 
@@ -19,6 +21,7 @@ module Content =
         |> contentTypeToString
         |> contentValue
 
+    [<Erase>]
     type Content =
         static member openQuote = FssTypes.Content.OpenQuote |> contentValue'
         static member closeQuote = FssTypes.Content.CloseQuote |> contentValue'
@@ -95,6 +98,7 @@ module Content =
 
 [<AutoOpen>]
 module Label =
+    [<Erase>]
     type Label =
         static member value(label: string) =
             (label.Replace(" ", ""))

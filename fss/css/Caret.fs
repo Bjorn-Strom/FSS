@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Caret =
     let private caretColorToString (caretColor: FssTypes.ICaretColor) =
@@ -14,6 +16,7 @@ module Caret =
         value
         |> caretColorToString
         |> caretColorValue
+    [<Erase>]
     type CaretColor =
         static member value (color: FssTypes.ICaretColor) = color |> caretColorValue'
         static member black = FssTypes.Color.black |> caretColorValue'

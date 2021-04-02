@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/width
 // https://developer.mozilla.org/en-US/docs/Web/CSS/height
 // https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
@@ -15,6 +17,7 @@ module ContentSize =
         |> FssTypes.contentSizeHelpers.contentSizeToString
         |> widthValue
 
+    [<Erase>]
     type Width =
         static member fitContent (contentSize: FssTypes.ILengthPercentage) =
             sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
@@ -48,6 +51,7 @@ module ContentSize =
         |> FssTypes.contentSizeHelpers.contentSizeToString
         |> minWidthValue
 
+    [<Erase>]
     type MinWidth =
         static member fitContent (contentSize: FssTypes.ILengthPercentage) =
             sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
@@ -81,6 +85,7 @@ module ContentSize =
         |> FssTypes.contentSizeHelpers.contentSizeToString
         |> maxWidthValue
 
+    [<Erase>]
     type MaxWidth =
         static member fitContent (contentSize: FssTypes.ILengthPercentage) =
             sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
@@ -114,6 +119,7 @@ module ContentSize =
         |> FssTypes.contentSizeHelpers.contentSizeToString
         |> heightValue
 
+    [<Erase>]
     type Height =
         static member fitContent (contentSize: FssTypes.ILengthPercentage) =
             sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
@@ -147,6 +153,7 @@ module ContentSize =
         |> FssTypes.contentSizeHelpers.contentSizeToString
         |> minHeightValue
 
+    [<Erase>]
     type MinHeight =
         static member fitContent (contentSize: FssTypes.ILengthPercentage) =
             sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
@@ -180,6 +187,7 @@ module ContentSize =
         |> FssTypes.contentSizeHelpers.contentSizeToString
         |> maxHeightValue
 
+    [<Erase>]
     type MaxHeight =
         static member fitContent (contentSize: FssTypes.ILengthPercentage) =
             sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)

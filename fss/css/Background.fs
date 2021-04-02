@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Background =
     let private backgroundClipToString (clip: FssTypes.IBackgroundClip) =
@@ -67,6 +69,7 @@ module Background =
         |> backgroundClipToString
         |> clipValue
 
+    [<Erase>]
     type BackgroundClip =
         static member value (clip: FssTypes.IBackgroundClip) = clip |> clipValue'
         static member borderBox = FssTypes.Background.Clip.BorderBox |> clipValue'
@@ -95,6 +98,7 @@ module Background =
         value
         |> backgroundOriginToString
         |> originValue
+    [<Erase>]
     type BackgroundOrigin =
        static member value (origin: FssTypes.IBackgroundOrigin) = origin |> originValue'
        static member borderBox = FssTypes.Background.Origin.BorderBox |> originValue'
@@ -123,6 +127,7 @@ module Background =
         |> repeatToString
         |> repeatValue
 
+    [<Erase>]
     type BackgroundRepeat =
         static member value (repeat: FssTypes.IBackgroundRepeat) = repeat |> repeatValue'
         static member value (v1: FssTypes.IBackgroundRepeat, v2: FssTypes.IBackgroundRepeat) =
@@ -156,6 +161,7 @@ module Background =
         value
         |> sizeToString
         |> sizeValue
+    [<Erase>]
     type BackgroundSize =
         static member value (size: FssTypes.IBackgroundSize) = size |> sizeValue'
         static member value (s1: FssTypes.IBackgroundSize, s2: FssTypes.IBackgroundSize) =
@@ -190,6 +196,7 @@ module Background =
         value
         |> attachmentToString
         |> attachmentValue
+    [<Erase>]
     type BackgroundAttachment =
         static member value (attachment: FssTypes.IBackgroundAttachment) = attachment |> attachmentValue'
         static member scroll = FssTypes.Background.Attachment.Scroll |> attachmentValue'
@@ -217,6 +224,7 @@ module Background =
         value
         |> FssTypes.colorHelpers.colorToString
         |> backgroundValue
+    [<Erase>]
     type BackgroundColor =
         static member value (color: FssTypes.ColorType) = color |> backgroundValue'
         static member black = FssTypes.Color.black |> backgroundValue'
@@ -380,6 +388,7 @@ module Background =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
     let private imageValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundImage value
+    [<Erase>]
     type BackgroundImage =
         static member value (image: FssTypes.Image.Image) = image |> imageValue
         static member url (url: string) = imageValue <| sprintf "url(%s)" url
@@ -438,6 +447,7 @@ module Background =
         |> positionToString
         |> positionCssValue
 
+    [<Erase>]
     type BackgroundPosition =
         static member top = FssTypes.Background.Position.Top |> positionCssValue'
         static member bottom = FssTypes.Background.Position.Bottom |> positionCssValue'
@@ -482,6 +492,7 @@ module Background =
         |> Utilities.Helpers.combineComma blendModeToString
         |> blendModeCssValue
 
+    [<Erase>]
     type BackgroundBlendMode =
         static member value(blendMode: FssTypes.IBackgroundBlendMode) = blendMode |> blendModeCssValue'
         static member values(blendModes: FssTypes.Background.BlendMode list) = blendModeValues blendModes

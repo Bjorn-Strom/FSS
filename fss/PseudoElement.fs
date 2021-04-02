@@ -1,10 +1,12 @@
 ﻿namespace Fss
 
+open Fable.Core
 open Fable.Core.JsInterop
 
 [<AutoOpen>]
 module PseudoElement =
     let private pseudoValue value attributeList = value ==> (attributeList |> fss) |> FssTypes.CssProperty
+    [<Erase>]
     type PseudoElement =
         static member afterElement (attributeList: FssTypes.CssProperty list) = pseudoValue "::after" attributeList
         static member beforeElement (attributeList: FssTypes.CssProperty list) = pseudoValue "::before" attributeList

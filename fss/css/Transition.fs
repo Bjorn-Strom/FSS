@@ -1,5 +1,7 @@
 ﻿namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Transition =
     let private transitionToString (transition: FssTypes.ITransition) =
@@ -38,6 +40,7 @@ module Transition =
         value
         |> transitionToString
         |> transitionValue
+    [<Erase>]
     type Transition =
         static member value (delay: FssTypes.ITransition) = delay |> transitionValue'
 
@@ -61,6 +64,7 @@ module Transition =
         value
         |> delayToString
         |> delayValue
+    [<Erase>]
     type TransitionDelay =
         static member value (delay: FssTypes.ITransitionDelay) = delay |> delayValue'
         static member value (delays: FssTypes.ITransitionDelay list) = Utilities.Helpers.combineComma delayToString delays |> delayValue
@@ -86,6 +90,7 @@ module Transition =
         value
         |> durationToString
         |> transitionDurationValue
+    [<Erase>]
     type TransitionDuration =
         static member value (duration: FssTypes.ITransitionDuration) = duration |> transitionDurationValue'
         static member value (durations: FssTypes.ITransitionDuration list) =
@@ -113,6 +118,7 @@ module Transition =
         value
         |> timingToString
         |> transitionTimingFunction
+    [<Erase>]
     type TransitionTimingFunction =
         static member value (timingFunction: FssTypes.ITransitionTimingFunction) = timingFunction |> transitionTimingFunction'
         static member value (timingFunctions: FssTypes.ITransitionTimingFunction list) =
@@ -149,6 +155,7 @@ module Transition =
         value
         |> propertyToString
         |> transitionProperty
+    [<Erase>]
     type TransitionProperty =
         static member value (property: FssTypes.ITransitionProperty) = property |> transitionProperty'
         static member values (properties: FssTypes.Property.Property list) =

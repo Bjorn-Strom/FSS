@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/position
 [<AutoOpen>]
 module Position =
@@ -39,6 +41,7 @@ module Position =
         |> Utilities.Helpers.duToKebab
         |> positionValue
 
+    [<Erase>]
     type Position =
         static member value(position: Position) = position |> positionValue
         static member static' = FssTypes.Position.Static |> positionValue'
@@ -59,6 +62,7 @@ module Position =
         |> positionedToString
         |> topValue
 
+    [<Erase>]
     type Top =
         static member value (top: FssTypes.IPositioned) = top |> topValue'
         static member auto = FssTypes.Auto |> topValue'
@@ -86,6 +90,7 @@ module Position =
         |> positionedToString
         |> rightValue
 
+    [<Erase>]
     type Right =
         static member value (right: FssTypes.IPositioned) = right |> rightValue'
 
@@ -114,6 +119,7 @@ module Position =
         |> positionedToString
         |> bottomValue
 
+    [<Erase>]
     type Bottom =
         static member value (bottom: FssTypes.IPositioned) = bottom |> bottomValue'
 
@@ -142,6 +148,7 @@ module Position =
         |> positionedToString
         |> leftValue
 
+    [<Erase>]
     type Left =
         static member value (left: FssTypes.IPositioned) = left |> leftValue'
 
@@ -170,6 +177,7 @@ module Position =
         |> verticalAlignToString
         |> verticalAlignValue
 
+    [<Erase>]
     type VerticalAlign =
         static member value (alignment: FssTypes.IVerticalAlign) = alignment |> verticalAlignValue'
         static member baseline = FssTypes.Position.VerticalAlign.Baseline |> verticalAlignValue'
@@ -205,6 +213,7 @@ module Position =
         |> floatToString
         |> floatValue
 
+    [<Erase>]
     type Float =
         static member value (float: FssTypes.IFloat) = float |> floatValue'
         static member left = FssTypes.Position.Float.Left |> floatValue'
@@ -235,6 +244,7 @@ module Position =
         value
         |> Utilities.Helpers.duToKebab
         |> boxSizingValue
+    [<Erase>]
     type BoxSizing =
         static member value (boxSizing: FssTypes.Position.BoxSizing) = boxSizing |> boxSizingValue'
         static member contentBox = FssTypes.Position.BoxSizing.ContentBox |> boxSizingValue'
@@ -252,6 +262,7 @@ module Position =
         |> directionToString
         |> directionValue
 
+    [<Erase>]
     type Direction =
         static member value (direction: FssTypes.IDirection) = direction |> directionValue'
         static member rtl = FssTypes.Position.Direction.Rtl |> directionValue'
@@ -271,21 +282,13 @@ module Position =
     /// <returns>Css property for fss.</returns>
     let Direction' (direction: FssTypes.IDirection) = Direction.value(direction)
 
-module WritingModeType =
-    type WritingMode =
-        | HorizontalTb
-        | VerticalRl
-        | VerticalLr
-        interface FssTypes.IWritingMode
 
 [<AutoOpen>]
 module WritingMode =
-    open WritingModeType
-
     // https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode
     let private writingModeToString (writingMode: FssTypes.IWritingMode) =
         match writingMode with
-        | :? WritingMode as w -> Utilities.Helpers.duToKebab w
+        | :? FssTypes.WritingMode.WritingMode as w -> Utilities.Helpers.duToKebab w
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown writing mode"
 
@@ -295,12 +298,13 @@ module WritingMode =
         |> writingModeToString
         |> writingModeValue
 
+    [<Erase>]
     type WritingMode =
         static member value (writingMode: FssTypes.IWritingMode) = writingMode |> writingModeValue'
 
-        static member horizontalTb = HorizontalTb |> writingModeValue'
-        static member verticalRl = VerticalRl |> writingModeValue'
-        static member verticalLr = VerticalLr |> writingModeValue'
+        static member horizontalTb = FssTypes.WritingMode.HorizontalTb |> writingModeValue'
+        static member verticalRl = FssTypes.WritingMode.VerticalRl |> writingModeValue'
+        static member verticalLr = FssTypes.WritingMode.VerticalLr |> writingModeValue'
         static member inherit' = FssTypes.Inherit |> writingModeValue'
         static member initial = FssTypes.Initial |> writingModeValue'
         static member unset = FssTypes.Unset |> writingModeValue'
@@ -347,6 +351,7 @@ module Break =
         |> breakAfterToString
         |> breakAfterValue
 
+    [<Erase>]
     type BreakAfter =
         static member value (breakAfter: FssTypes.IBreakAfter) = breakAfter |> breakAfterValue'
         static member avoid = FssTypes.Position.BreakAfter.Avoid |> breakAfterValue'
@@ -387,6 +392,7 @@ module Break =
         |> breakBeforeToString
         |> breakBeforeValue
 
+    [<Erase>]
     type BreakBefore =
         static member value (breakBefore: FssTypes.IBreakBefore) = breakBefore |> breakBeforeValue'
         static member avoid = FssTypes.Position.BreakBefore.Avoid |> breakBeforeValue'
@@ -427,6 +433,7 @@ module Break =
         |> breakInsideToString
         |> breakInsideValue
 
+    [<Erase>]
     type BreakInside =
         static member value (breakInside: FssTypes.IBreakInside) = breakInside |> breakInsideValue'
         static member avoid = FssTypes.Position.BreakInside.Avoid |> breakInsideValue'

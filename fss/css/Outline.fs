@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Outline  =
 
@@ -42,6 +44,7 @@ module Outline  =
         |> outlineToString
         |> outlineValue
 
+    [<Erase>]
     type Outline =
         static member value (outline: FssTypes.IOutline) = outline |> outlineValue'
 
@@ -68,6 +71,7 @@ module Outline  =
         |> outlineColorToString
         |> colorValue
 
+    [<Erase>]
     type OutlineColor =
         static member value (color: FssTypes.IOutlineColor) = color |> colorValue'
         static member black = FssTypes.Color.black |> colorValue'
@@ -243,6 +247,7 @@ module Outline  =
         |> outlineWidthToString
         |> outlineWidthValue
 
+    [<Erase>]
     type OutlineWidth =
         static member value (width: FssTypes.IOutlineWidth) = width |> outlineWidthValue'
         static member thin = FssTypes.Outline.Width.Thin |> outlineWidthValue'
@@ -273,6 +278,7 @@ module Outline  =
         |> outlineStyleToString
         |> outlineStyleValue
 
+    [<Erase>]
     type OutlineStyle =
         static member value (style: FssTypes.IOutlineStyle) = style |> outlineStyleValue'
         static member hidden = FssTypes.Outline.Style.Hidden |> outlineStyleValue'
@@ -309,6 +315,7 @@ module Outline  =
         |> outlineOffsetToString
         |> outlineOffsetValue
 
+    [<Erase>]
     type OutlineOffset =
         static member value (offset: FssTypes.IOutlineOffset) = offset |> outlineOffsetValue'
         static member inherit' = FssTypes.Inherit |> outlineOffsetValue'

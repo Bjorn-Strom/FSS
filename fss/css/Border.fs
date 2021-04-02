@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Border =
 
@@ -99,6 +101,7 @@ module Border =
         |> borderToString
         |> borderValue
 
+    [<Erase>]
     type Border =
         static member value (border: FssTypes.IBorder) = border |> borderValue'
         static member none = FssTypes.None' |> borderValue'
@@ -123,6 +126,7 @@ module Border =
         value
         |> radiusToString
         |> radiusValue
+    [<Erase>]
     type BorderRadius =
         static member value (radius: FssTypes.IBorderRadius) =
             sprintf "%s"
@@ -169,6 +173,7 @@ module Border =
         value
         |> radiusToString
         |> bottomLeftRadiusValue
+    [<Erase>]
     type BorderBottomLeftRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> bottomLeftRadiusValue
@@ -196,6 +201,7 @@ module Border =
         value
         |> radiusToString
         |> bottomRightRadiusValue
+    [<Erase>]
     type BorderBottomRightRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> bottomRightRadiusValue
@@ -223,6 +229,7 @@ module Border =
         value
         |> radiusToString
         |> topLeftRadiusValue
+    [<Erase>]
     type BorderTopLeftRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> topLeftRadiusValue
@@ -250,6 +257,7 @@ module Border =
         value
         |> radiusToString
         |> topRightRadiusValue
+    [<Erase>]
     type BorderTopRightRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> topRightRadiusValue
@@ -278,6 +286,7 @@ module Border =
         |> widthToString
         |> widthValue
 
+    [<Erase>]
     type BorderWidth =
         static member value (width: FssTypes.IBorderWidth) = widthValue (widthToString width)
         static member value (vertical: FssTypes.IBorderWidth, horizontal: FssTypes.IBorderWidth) =
@@ -325,6 +334,7 @@ module Border =
         value
         |> widthToString
         |> topWidthValue
+    [<Erase>]
     type BorderTopWidth =
         static member value (width: FssTypes.IBorderWidth) = width |> topWidthValue'
         static member thin = FssTypes.Border.Width.Thin |> topWidthValue
@@ -353,6 +363,7 @@ module Border =
         value
         |> widthToString
         |> rightWidthValue
+    [<Erase>]
     type BorderRightWidth =
         static member value (width: FssTypes.IBorderWidth) = width |> rightWidthValue'
         static member thin = FssTypes.Border.Width.Thin |> rightWidthValue
@@ -381,6 +392,7 @@ module Border =
         value
         |> widthToString
         |> bottomWidthValue
+    [<Erase>]
     type BorderBottomWidth =
         static member value (width: FssTypes.IBorderWidth) = width |> bottomWidthValue'
         static member thin = FssTypes.Border.Width.Thin |> bottomWidthValue
@@ -409,6 +421,7 @@ module Border =
         value
         |> widthToString
         |> leftWidthValue
+    [<Erase>]
     type BorderLeftWidth =
         static member value (width: FssTypes.IBorderWidth) = width |> leftWidthValue'
         static member thin = FssTypes.Border.Width.Thin |> leftWidthValue
@@ -438,6 +451,7 @@ module Border =
         |> styleToString
         |> styleValue
 
+    [<Erase>]
     type BorderStyle =
         static member value (style: FssTypes.IBorderStyle) = style |> styleValue'
         static member value (vertical: FssTypes.IBorderStyle, horizontal: FssTypes.IBorderStyle) =
@@ -493,6 +507,7 @@ module Border =
         |> styleToString
         |> topStyleValue
 
+    [<Erase>]
     type BorderTopStyle =
         static member value (style: FssTypes.IBorderStyle) = style |> topStyleValue'
         static member hidden = FssTypes.Border.Style.Hidden |> topStyleValue'
@@ -529,6 +544,7 @@ module Border =
         |> styleToString
         |> rightStyleValue
 
+    [<Erase>]
     type BorderRightStyle =
         static member value (style: FssTypes.IBorderStyle) = style |> rightStyleValue'
         static member hidden = FssTypes.Border.Style.Hidden |> rightStyleValue'
@@ -565,6 +581,7 @@ module Border =
         |> styleToString
         |> bottomStyleValue
 
+    [<Erase>]
     type BorderBottomStyle =
         static member value (style: FssTypes.IBorderStyle) = style |> bottomStyleValue'
         static member hidden = FssTypes.Border.Style.Hidden |> bottomStyleValue'
@@ -601,6 +618,7 @@ module Border =
         |> styleToString
         |> leftStyleValue
 
+    [<Erase>]
     type BorderLeftStyle =
         static member value (style: FssTypes.IBorderStyle) = style |> leftStyleValue'
         static member hidden = FssTypes.Border.Style.Hidden |> leftStyleValue'
@@ -637,6 +655,7 @@ module Border =
         |> collapseToString
         |> collapseValue
 
+    [<Erase>]
     type BorderCollapse =
         static member value (collapse: FssTypes.IBorderCollapse) = collapse |> collapseValue'
         static member collapse = FssTypes.Border.Collapse |> collapseValue'
@@ -664,6 +683,7 @@ module Border =
         |> imageOutsetToString
         |> imageOutsetValue
 
+    [<Erase>]
     type BorderImageOutset =
         static member value (outset: FssTypes.IBorderImageOutset) = outset |> imageOutsetValue'
         static member value (vertical: FssTypes.IBorderImageOutset, horizontal: FssTypes.IBorderImageOutset) =
@@ -705,6 +725,7 @@ module Border =
         value
         |> repeatToString
         |> imageRepeatValue
+    [<Erase>]
     type BorderImageRepeat =
         static member value (repeat: FssTypes.IBorderRepeat) = repeat |> imageRepeatValue'
         static member value (vertical: FssTypes.IBorderRepeat, horizontal: FssTypes.IBorderRepeat) =
@@ -737,6 +758,7 @@ module Border =
         |> imageSliceToString
         |> imageSliceValue
 
+    [<Erase>]
     type BorderImageSlice =
         static member fill = FssTypes.Border.ImageSlice.Fill |> imageSliceValue'
         static member value (imageSlice: FssTypes.IBorderImageSlice) = imageSlice |> imageSliceValue'
@@ -780,6 +802,7 @@ module Border =
         |> borderColorToString
         |> borderColorValue
 
+    [<Erase>]
     type BorderColor =
         static member value (color: FssTypes.IBorderColor) = color |> borderColorValue'
         static member value (horizontal: FssTypes.IBorderColor, vertical: FssTypes.IBorderColor) =
@@ -972,6 +995,7 @@ module Border =
         value
         |> borderColorToString
         |> topColorValue
+    [<Erase>]
     type BorderTopColor =
         static member value (color: FssTypes.IBorderColor) = color |> topColorValue'
         static member black = FssTypes.Color.black |> topColorValue'
@@ -1146,6 +1170,7 @@ module Border =
         value
         |> borderColorToString
         |> rightColorValue
+    [<Erase>]
     type BorderRightColor =
         static member value (color: FssTypes.IBorderColor) = color |> rightColorValue'
         static member black = FssTypes.Color.black |> rightColorValue'
@@ -1320,6 +1345,7 @@ module Border =
         value
         |> borderColorToString
         |> bottomColorValue
+    [<Erase>]
     type BorderBottomColor =
         static member value (color: FssTypes.IBorderColor) = color |> bottomColorValue'
         static member black = FssTypes.Color.black |> bottomColorValue'
@@ -1494,6 +1520,7 @@ module Border =
         value
         |> borderColorToString
         |> leftColorValue
+    [<Erase>]
     type BorderLeftColor =
         static member value (color: FssTypes.IBorderColor) = color |> leftColorValue'
         static member black = FssTypes.Color.black |> leftColorValue'
@@ -1668,6 +1695,7 @@ module Border =
         value
         |> spacingToString
         |> spacingValue
+    [<Erase>]
     type BorderSpacing =
         static member value (width: FssTypes.IBorderSpacing) =
             spacingValue (spacingToString width)
@@ -1698,6 +1726,7 @@ module Border =
         value
         |> imageWidthToString
         |> imageWidthValue
+    [<Erase>]
     type BorderImageWidth =
         static member value (width: FssTypes.IBorderImageWidth) = width |> imageWidthValue'
         static member value (w1: FssTypes.IBorderImageWidth, w2: FssTypes.IBorderImageWidth) =
@@ -1745,6 +1774,7 @@ module Border =
         |> imageSourceToString
         |> imageValue
 
+    [<Erase>]
     type BorderImageSource =
         static member value (source: FssTypes.IBorderImageSource) = source |> imageValue'
         static member url (url: string) = imageValue <| sprintf "url(%s)" url

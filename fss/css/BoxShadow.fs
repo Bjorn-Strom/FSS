@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module BoxShadow =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
@@ -27,6 +29,7 @@ module BoxShadow =
                 sprintf "inset %s" <| boxShadowToString shadow
 
     let private boxShadowValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BoxShadow value
+    [<Erase>]
     type BoxShadow =
         static member color (x: FssTypes.Size, y: FssTypes.Size, color: FssTypes.ColorType) = FssTypes.BoxShadow.Color(x, y, color)
         static member blurColor (x: FssTypes.Size, y: FssTypes.Size, blur: FssTypes.Size, color: FssTypes.ColorType) =

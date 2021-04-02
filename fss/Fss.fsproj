@@ -5,7 +5,7 @@
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;emotion;CSS;styling;css-in-lang;fable;react;html</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
@@ -110,7 +110,7 @@
     <Compile Include="PseudoElement.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="*.*" PackagePath="fable\" />
+    <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
     <Content Include="Types\" PackagePath="fable\Types" />
     <Content Include="css\" PackagePath="fable\css" />
   </ItemGroup>

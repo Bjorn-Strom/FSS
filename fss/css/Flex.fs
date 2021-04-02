@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Flex =
 
@@ -98,6 +100,7 @@ module Flex =
         |> alignContentToString
         |> alignContentValue
 
+    [<Erase>]
     type AlignContent =
         static member value (alignment: FssTypes.IAlignContent) = alignment |> alignContentValue'
         static member start' = FssTypes.Flex.AlignContent.Start |> alignContentValue'
@@ -139,6 +142,7 @@ module Flex =
         |> alignItemsToString
         |> alignItemsValue
 
+    [<Erase>]
     type AlignItems =
         static member value (alignment: FssTypes.IAlignItems) = alignment |> alignItemsValue'
         static member start = FssTypes.Flex.AlignItems.Start |> alignItemsValue'
@@ -179,6 +183,7 @@ module Flex =
         |> alignSelfToString
         |> alignSelfValue
 
+    [<Erase>]
     type AlignSelf =
         static member value (alignment: FssTypes.IAlignSelf) = alignment |> alignSelfValue'
         static member start = FssTypes.Flex.AlignSelf.Start |> alignSelfValue'
@@ -219,6 +224,7 @@ module Flex =
         |> justifyContentToString
         |> justifyContentValue
 
+    [<Erase>]
     type JustifyContent =
         static member value (justification: FssTypes.IJustifyContent) = justification |> justifyContentValue
         static member start = FssTypes.Flex.JustifyContent.Start |> justifyContentValue'
@@ -262,6 +268,7 @@ module Flex =
         |> justifyItemsToString
         |> justifyItemsValue
 
+    [<Erase>]
     type JustifyItems =
         static member value (justification: FssTypes.IJustifyItems) = justification |> justifyItemsValue'
         static member start = FssTypes.Flex.JustifyItems.Start |> justifyItemsValue'
@@ -304,6 +311,7 @@ module Flex =
         value
         |> justifySelfToString
         |> justifySelfValue
+    [<Erase>]
     type JustifySelf =
         static member value (justification: FssTypes.IJustifySelf) = justification |> justifySelfValue'
         static member start = FssTypes.Flex.JustifySelf.Start |> justifySelfValue'
@@ -344,6 +352,7 @@ module Flex =
         |> flexDirectionToString
         |> flexDirectionValue
 
+    [<Erase>]
     type FlexDirection =
         static member value (direction: FssTypes.IFlexDirection) = direction |> flexDirectionValue'
         static member row = FssTypes.Flex.Direction.Row |> flexDirectionValue'
@@ -372,6 +381,7 @@ module Flex =
         value
         |> flexWrapToString
         |> flexWrapValue
+    [<Erase>]
     type FlexWrap =
         static member value (direction: FssTypes.IFlexWrap) = direction |> flexWrapValue'
         static member noWrap = FssTypes.Flex.NoWrap |> flexWrapValue'
@@ -399,6 +409,7 @@ module Flex =
         value
         |> orderToString
         |> orderValue
+    [<Erase>]
     type Order =
         static member value (order: FssTypes.IOrder) = order |> orderValue'
 
@@ -424,6 +435,7 @@ module Flex =
         |> flexGrowToString
         |> flexGrowValue
 
+    [<Erase>]
     type FlexGrow =
         static member value (grow: FssTypes.IFlexGrow) = grow |> flexGrowValue'
 
@@ -449,6 +461,7 @@ module Flex =
         |> flexShrinkToString
         |> flexShrinkValue
 
+    [<Erase>]
     type FlexShrink =
         static member value (shrink: FssTypes.IFlexShrink) = shrink |> flexShrinkValue'
         static member inherit' = FssTypes.Inherit |> flexShrinkValue'
@@ -473,6 +486,7 @@ module Flex =
         |> flexBasisToString
         |> flexBasisValue
 
+    [<Erase>]
     type FlexBasis =
         static member value (basis: FssTypes.IFlexBasis) = basis |> flexBasisValue'
         static member fill = FssTypes.Flex.Basis.Fill |> flexBasisValue'

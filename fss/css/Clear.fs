@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Clear =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/clear
@@ -16,6 +18,7 @@ module Clear =
         |> stringifyClear
         |> clearValue
 
+    [<Erase>]
     type Clear =
         static member value (clear: FssTypes.IClear) = clear |> clearValue'
         static member none = FssTypes.None' |> clearValue'

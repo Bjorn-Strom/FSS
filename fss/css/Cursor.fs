@@ -1,5 +1,7 @@
 ﻿namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Cursor =
     let private cursorToString (cursor: FssTypes.ICursor) =
@@ -16,6 +18,7 @@ module Cursor =
         |> cursorToString
         |> cursorValue
 
+    [<Erase>]
     type Cursor =
         static member value (url: string) = sprintf "url(%s)" url |> cursorValue
         static member value (url: string, x: int, y: int) = sprintf "url(%s) %d %d" url x y |> cursorValue

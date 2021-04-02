@@ -1,5 +1,7 @@
 ﻿namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Grid =
     let private autoFlowToString (autoFlow: FssTypes.IGridAutoFlow) =
@@ -110,6 +112,7 @@ module Grid =
         value
         |> autoFlowToString
         |> autoFlowValue
+    [<Erase>]
     type GridAutoFlow =
         static member value (autoFlow: FssTypes.IGridAutoFlow) = autoFlow |> autoFlowValue'
         static member row = FssTypes.Grid.GridAutoFlow.Row |> autoFlowValue'
@@ -140,6 +143,7 @@ module Grid =
         value
         |> templateAreaToString
         |> templateAreaValue
+    [<Erase>]
     type GridTemplateAreas =
         static member value(area: FssTypes.IGridTemplateArea) = area |> templateAreaValue'
         static member value (areas: string list) =
@@ -177,6 +181,7 @@ module Grid =
         value
         |> gridGapToString
         |> gridGapValue
+    [<Erase>]
     type GridGap =
         static member value (gap: FssTypes.IGridGap) = gap |> gridGapValue'
         static member value(rowGap: FssTypes.IGridGap, columnGap: FssTypes.IGridGap) =
@@ -206,6 +211,7 @@ module Grid =
         value
         |> gridRowGapToString
         |> gridRowGapValue
+    [<Erase>]
     type GridRowGap =
         static member value (gap: FssTypes.IGridRowGap) = gap |> gridRowGapValue'
         static member inherit' = FssTypes.Inherit |> gridRowGapValue'
@@ -231,6 +237,7 @@ module Grid =
         value
         |> gridColumnGapToString
         |> gridColumnGapValue
+    [<Erase>]
     type GridColumnGap =
         static member value (gap: FssTypes.IGridColumnGap) = gap |> gridColumnGapValue'
         static member inherit' = FssTypes.Inherit |> gridColumnGapValue'
@@ -251,6 +258,7 @@ module Grid =
     let GridColumnGap' (columnGap: FssTypes.IGridColumnGap) = GridColumnGap.value(columnGap)
 
     // Grid position
+    [<Erase>]
     type GridPosition =
         static member value (position: FssTypes.IGridPosition) = position
         static member ident ident = ident |> FssTypes.Grid.Ident
@@ -283,6 +291,7 @@ module Grid =
         value
         |> gridPositionToString
         |> gridRowStartValue
+    [<Erase>]
     type GridRowStart =
         static member ident ident = GridPosition.ident(ident) |> gridRowStartValue'
         static member value (value: int) = GridPosition.value value |> gridRowStartValue'
@@ -307,6 +316,7 @@ module Grid =
         value
         |> gridPositionToString
         |> gridRowEndValue
+    [<Erase>]
     type GridRowEnd =
         static member ident ident = GridPosition.ident(ident) |> gridRowEndValue'
         static member value (value: int) = GridPosition.value value |> gridRowEndValue'
@@ -331,6 +341,7 @@ module Grid =
         value
         |> gridPositionToString
         |> gridRowValue
+    [<Erase>]
     type GridRow =
         static member value (row: FssTypes.IGridPosition) = row |> gridRowValue'
         static member value (rowStart: FssTypes.IGridPosition, rowEnd: FssTypes.IGridPosition) =
@@ -358,6 +369,7 @@ module Grid =
         value
         |> gridPositionToString
         |> gridColumnStartValue
+    [<Erase>]
     type GridColumnStart =
         static member ident ident = GridPosition.ident(ident) |> gridColumnStartValue'
         static member value (value: int) = GridPosition.value value |> gridColumnStartValue'
@@ -382,6 +394,7 @@ module Grid =
         value
         |> gridPositionToString
         |> gridColumnEndValue
+    [<Erase>]
     type GridColumnEnd =
         static member ident ident = GridPosition.ident(ident) |> gridColumnEndValue'
         static member value (value: int) = GridPosition.value value |> gridColumnEndValue'
@@ -407,6 +420,7 @@ module Grid =
         |> gridPositionToString
         |> gridColumnValue
 
+    [<Erase>]
     type GridColumn =
         static member value (column: FssTypes.IGridPosition) = column |> gridColumnValue'
         static member value (columnStart: FssTypes.IGridPosition, columnEnd: FssTypes.IGridPosition) =
@@ -437,6 +451,7 @@ module Grid =
         |> gridPositionToString
         |> gridAreaValue
 
+    [<Erase>]
     type GridArea =
         static member value (value: FssTypes.IGridPosition) =
             sprintf "%s"
@@ -476,6 +491,7 @@ module Grid =
         value
         |> templateRowToString
         |> templateRowValue
+    [<Erase>]
     type GridTemplateRows =
         static member value (templateRow: FssTypes.IGridTemplateRows) = templateRow |> templateRowValue'
         static member value (length: FssTypes.IGridTemplateRows, fraction: FssTypes.IGridTemplateRows) =
@@ -559,6 +575,7 @@ module Grid =
         value
         |> templateColumnToString
         |> templateColumnValue
+    [<Erase>]
     type GridTemplateColumns =
         static member value (templateColumn: FssTypes.IGridTemplateColumns) = templateColumn |> templateColumnValue'
         static member value (length: FssTypes.IGridTemplateColumns, fraction: FssTypes.IGridTemplateColumns) =
@@ -642,6 +659,7 @@ module Grid =
         value
         |> autoRowsToString
         |> autoRowsValue
+    [<Erase>]
     type GridAutoRows =
         static member value (autoRow: FssTypes.IGridAutoRows) = autoRow |> autoRowsValue'
         static member values (values: FssTypes.IGridAutoRows list) = Utilities.Helpers.combineWs autoRowsToString values |> autoRowsValue
@@ -676,6 +694,7 @@ module Grid =
         value
         |> autoColumnsToString
         |> autoColumnsValue
+    [<Erase>]
     type GridAutoColumns =
         static member value (autoColumn: FssTypes.IGridAutoColumns) = autoColumn |> autoColumnsValue'
         static member values (values: FssTypes.IGridAutoColumns list) = Utilities.Helpers.combineWs autoColumnsToString values |> autoColumnsValue

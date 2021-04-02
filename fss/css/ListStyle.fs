@@ -1,5 +1,7 @@
 ﻿namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module ListStyle =
     let private listStyleToString (style: FssTypes.IListStyle) =
@@ -32,6 +34,7 @@ module ListStyle =
         |> listStyleToString
         |> listStyleValue
 
+    [<Erase>]
     type ListStyle =
         static member value (style: FssTypes.IListStyle) = style |> listStyleValue'
 
@@ -58,6 +61,7 @@ module ListStyle =
         |> listStyleImageToString
         |> listStyleImageValue
 
+    [<Erase>]
     type ListStyleImage =
         static member value (styleImage: FssTypes.IListStyleImage) = styleImage |> listStyleImageValue'
         static member url (url: string) = FssTypes.ListStyle.Image url |> listStyleImageValue'
@@ -86,6 +90,7 @@ module ListStyle =
         |> stylePositionToString
         |> listStylePositionProperty
 
+    [<Erase>]
     type ListStylePosition =
         static member value (stylePosition: FssTypes.IListStylePosition) = stylePosition |> listStylePositionProperty'
         static member inside = FssTypes.ListStyle.Inside |> listStylePositionProperty'
@@ -112,6 +117,7 @@ module ListStyle =
         value
         |> FssTypes.listStyleHelpers.styleTypeToString
         |> listStyleTypeProperty
+    [<Erase>]
     type ListStyleType =
         static member value (styleType: FssTypes.IListStyleType) = styleType |> listStyleTypeProperty'
         static member value(counter: FssTypes.Counter.Style) = FssTypes.counterStyleHelpers.counterStyleToString counter |> listStyleTypeProperty

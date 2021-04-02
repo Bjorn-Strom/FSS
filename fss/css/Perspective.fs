@@ -1,5 +1,7 @@
 ﻿namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Perspective =
     let private perspectiveToString (perspective: FssTypes.IPerspective) =
@@ -22,6 +24,8 @@ module Perspective =
         |> perspectiveToString
         |> perspectiveValue
 
+
+    [<Erase>]
     type Perspective =
         static member value (perspective: FssTypes.IPerspective) = perspective |> perspectiveValue'
         static member none = FssTypes.None' |> perspectiveValue'
@@ -48,6 +52,7 @@ module Perspective =
         |> perspectiveOriginToString
         |> perspectiveOriginValue
 
+    [<Erase>]
     type PerspectiveOrigin =
         static member value (origin: FssTypes.IPerspectiveOrigin) = origin |> perspectiveOriginValue'
         static member value (x: FssTypes.IPerspectiveOrigin, y: FssTypes.IPerspectiveOrigin) =
@@ -83,6 +88,8 @@ module BackfaceVisibility =
         |> visibilityToString
         |> backfaceVisibilityValue
 
+
+    [<Erase>]
     type BackfaceVisibility =
         static member value (visibility: FssTypes.IBackfaceVisibility) = visibility |> backfaceVisibilityValue'
         static member hidden = FssTypes.Visibility.BackfaceVisibility.Hidden |> backfaceVisibilityValue'

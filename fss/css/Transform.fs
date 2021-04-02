@@ -1,5 +1,7 @@
 ﻿namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/transform
 [<AutoOpen>]
 module Transform =
@@ -58,6 +60,7 @@ module Transform =
         |> transformToString
         |> transformValue
 
+    [<Erase>]
     type Transform =
         static member matrix (n1: float, n2: float, n3: float, n4: float, n5: float, n6: float) =
             FssTypes.Transform.Matrix(n1,n2,n3,n4,n5,n6)
@@ -133,6 +136,7 @@ module Transform =
         value
         |> originToString
         |> originValue
+    [<Erase>]
     type TransformOrigin =
         static member value (value: FssTypes.ITransformOrigin) = value |> originValue'
         static member value (xOffset: FssTypes.ITransformOrigin, yOffset: FssTypes.ITransformOrigin) =
@@ -176,6 +180,7 @@ module Transform =
         value
         |> styleToString
         |> styleValue
+    [<Erase>]
     type TransformStyle =
         static member value (value: FssTypes.ITransformStyle) = value |> styleValue'
 

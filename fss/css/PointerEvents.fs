@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module PointerEvents =
     let private eventToString (event: FssTypes.IPointerEvents) =
@@ -16,6 +18,7 @@ module PointerEvents =
         |> eventToString
         |> pointerEventsValue
 
+    [<Erase>]
     type PointerEvents =
         static member value (pointerEvents: FssTypes.IPointerEvents) = pointerEvents |> pointerEventsValue
 

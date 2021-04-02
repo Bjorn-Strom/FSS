@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Font =
     let private fontSizeToString (fontSize: FssTypes.IFontSize) =
@@ -140,6 +142,7 @@ module Font =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
     let private sizeCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontSize value
     let private sizeCssValue' value = value |> fontSizeToString |> sizeCssValue
+    [<Erase>]
     type FontSize =
         static member value (value: FssTypes.IFontSize) = value |> sizeCssValue'
         static member xxSmall = FssTypes.Font.XxSmall |> sizeCssValue'
@@ -173,6 +176,7 @@ module Font =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
     let private styleCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStyle value
     let private styleCssValue' value = value |> FssTypes.fontHelpers.fontStyleToString |> styleCssValue
+    [<Erase>]
     type FontStyle =
         static member value (fontStyle: FssTypes.IFontStyle) = fontStyle |> styleCssValue'
         static member oblique (angle: FssTypes.Angle) = FssTypes.Font.Oblique angle |> styleCssValue'
@@ -198,6 +202,7 @@ module Font =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
     let private stretchCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStretch value
     let private stretchCssValue' value = value |> FssTypes.fontHelpers.fontStretchToString |> stretchCssValue
+    [<Erase>]
     type FontStretch =
         static member value (fontStretch: FssTypes.IFontStretch) = fontStretch |> stretchCssValue'
         static member value (percent: FssTypes.Percent) =
@@ -232,6 +237,7 @@ module Font =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
     let private weightCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight value
     let private weightCssValue' value = value |> FssTypes.fontHelpers.fontWeightToString |> weightCssValue
+    [<Erase>]
     type FontWeight =
         static member value (fontWeight: FssTypes.IFontWeight) = fontWeight |> weightCssValue'
         static member bold = FssTypes.Font.Bold |> weightCssValue'
@@ -262,6 +268,7 @@ module Font =
         value
         |> lineHeightToString
         |> heightCssValue
+    [<Erase>]
     type LineHeight =
         static member value (height: FssTypes.ILineHeight) = height |> heightCssValue'
 
@@ -290,6 +297,7 @@ module Font =
         value
         |> lineBreakToString
         |> breakCssValue
+    [<Erase>]
     type LineBreak =
         static member value (break': FssTypes.ILineBreak) = break' |> breakCssValue'
         static member loose = FssTypes.Font.Loose |> breakCssValue'
@@ -321,6 +329,7 @@ module Font =
         value
         |> letterSpacingToString
         |> spacingCssValue
+    [<Erase>]
     type LetterSpacing =
         static member value (spacing: FssTypes.ILetterSpacing) = spacing |> spacingCssValue'
 
@@ -347,6 +356,7 @@ module Font =
         value
         |> FssTypes.fontHelpers.fontDisplayToString
         |> FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
+    [<Erase>]
     type FontDisplay =
         static member value (fontDisplay: FssTypes.IFontDisplay) = fontDisplay |> displayCssValue'
         static member block = FssTypes.Font.Display.Block |> displayCssValue'
@@ -369,6 +379,7 @@ module Font =
     let private familyCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontFamily value
     let private familyCssValue' value = value |> familyToString |> familyCssValue
 
+    [<Erase>]
     type FontFamily =
         static member value (fontFamily: FssTypes.IFontFamily) = fontFamily |> familyCssValue'
         static member values (families: FssTypes.IFontFamily list) =
@@ -401,6 +412,7 @@ module Font =
     let private featureSettingCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontFeatureSettings value
     let private featureSettingCssValue' value = value |> featureSettingToString |> featureSettingCssValue
 
+    [<Erase>]
     type FontFeatureSetting =
         static member value (featureSetting: FssTypes.IFontFeatureSetting) = featureSetting |> featureSettingCssValue'
         static member liga (switch: FssTypes.Font.SettingSwitch) = FssTypes.Font.Liga switch |> featureSettingCssValue'
@@ -449,6 +461,7 @@ module Font =
     let private variantNumericCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantNumeric value
     let private variantNumericCssValue' value = value |> variantNumericToString |> variantNumericCssValue
 
+    [<Erase>]
     type FontVariantNumeric =
         static member value (variantNumeric: FssTypes.IFontVariantNumeric) = variantNumeric |>  variantNumericCssValue'
         static member ordinal = FssTypes.Font.Ordinal |> variantNumericCssValue'
@@ -479,6 +492,7 @@ module Font =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
     let private variantCapsCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantCaps value
     let private variantCapsCssValue' value = value |> fontVariantCapsToString |> variantCapsCssValue
+    [<Erase>]
     type FontVariantCaps =
         static member value (variantCaps: FssTypes.IFontVariantCaps) = variantCaps |> variantCapsCssValue'
         static member smallCaps = FssTypes.Font.SmallCaps |> variantCapsCssValue'
@@ -508,6 +522,7 @@ module Font =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
     let private variantEastAsianCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantEastAsian value
     let private variantEastAsianCssValue' value = value |> variantEastAsianToString |> variantEastAsianCssValue
+    [<Erase>]
     type FontVariantEastAsian =
         static member value (variant: FssTypes.IFontVariantEastAsian) = variant |> variantEastAsianCssValue'
         static member ruby = FssTypes.Font.Ruby |> variantEastAsianCssValue'
@@ -540,6 +555,7 @@ module Font =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
     let private variantLigatureCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantLigatures value
     let private variantLigatureCssValue' value = value |> variantLigatureToString |> variantLigatureCssValue
+    [<Erase>]
     type FontVariantLigatures =
         static member value (variant: FssTypes.IFontVariantLigature) = variant |> variantLigatureCssValue'
         static member commonLigatures = FssTypes.Font.CommonLigatures |> variantLigatureCssValue'
@@ -574,6 +590,7 @@ module Font =
     let private kerningValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontKerning value
     let private kerningValue' value = value |> fontKerningTostring |> kerningValue
 
+    [<Erase>]
     type FontKerning =
         static member value (fontKerning: FssTypes.IFontKerning) = fontKerning |> kerningValue'
         static member auto = FssTypes.Auto |> kerningValue'
@@ -594,6 +611,7 @@ module Font =
     let private fontLanguageOverrideValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontLanguageOverride value
     let private fontLanguageOverrideValue' value = value |> fontLanguageOverrideToString |> fontLanguageOverrideValue
 
+    [<Erase>]
     type FontLanguageOverride =
         static member value (languageOverride: FssTypes.IFontLanguageOverride) = languageOverride |> fontLanguageOverrideValue'
         static member value (languageOverride: string) = $"\"{languageOverride}\"" |> fontLanguageOverrideValue
@@ -617,6 +635,7 @@ module Font =
     let private fontSynthesisValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontSynthesis value
     let private fontSynthesisValue' value = value |> fontSynthesisToString |> fontSynthesisValue
 
+    [<Erase>]
     type FontSynthesis =
         static member value (synthesis: FssTypes.IFontSynthesis) = synthesis |> fontSynthesisValue'
         static member weight = FssTypes.Font.Weight |> fontSynthesisValue'
@@ -637,6 +656,7 @@ module Font =
     let private fontVariantPositionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantPosition value
     let private fontVariantPositionValue' value = value |> fontVariantPositionToString |> fontVariantPositionValue
 
+    [<Erase>]
     type FontVariantPosition =
         static member value (variantPosition: FssTypes.IFontVariantPosition) = variantPosition |> fontVariantPositionValue'
         static member sub = FssTypes.Font.VariantPosition.Sub |> fontVariantPositionValue'

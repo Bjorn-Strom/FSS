@@ -1,6 +1,7 @@
 ﻿namespace Fss
 
 namespace Fss.FssTypes
+
     [<RequireQualifiedAccess>]
     module Attribute =
         type Attribute =

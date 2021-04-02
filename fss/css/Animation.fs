@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
 [<AutoOpen>]
 module Animation =
@@ -31,6 +33,8 @@ module Animation =
         | _ -> "Unknown animation name"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
+
+    [<Erase>]
     type AnimationDelay =
         static member Value (delay: FssTypes.Time) = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDelay (FssTypes.unitHelpers.timeToString delay)
 
@@ -44,6 +48,8 @@ module Animation =
         value
         |> animationDirectionToString
         |> directionCssValue
+
+    [<Erase>]
     type AnimationDirection =
         static member value (direction: FssTypes.IAnimationDirection) = direction |> directionCssValue'
         static member reverse = FssTypes.Animation.Direction.Reverse |> directionCssValue'
@@ -69,6 +75,8 @@ module Animation =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
     let private animationDurationCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDuration value
+
+    [<Erase>]
     type AnimationDuration =
         static member value (duration: FssTypes.Time) = animationDurationCssValue (FssTypes.unitHelpers.timeToString duration)
         static member values (durations: FssTypes.Time list) =
@@ -87,6 +95,8 @@ module Animation =
         value
         |> animationFillModeToString
         |> fillModeCssValue
+
+    [<Erase>]
     type AnimationFillMode =
         static member value (fillMode: FssTypes.IAnimationFillMode) = fillMode |> fillModeCssValue'
         static member forwards = FssTypes.Animation.FillMode.Forwards |> fillModeCssValue'
@@ -110,6 +120,8 @@ module Animation =
         |> FssTypes.animationHelpers.iterationCountToString
         |> iterationCountCssValue
 
+
+    [<Erase>]
     type AnimationIterationCount =
         static member value (count: FssTypes.IAnimationIterationCount) = count |> iterationCountCssValue'
         static member values (values: FssTypes.IAnimationIterationCount list) =
@@ -134,6 +146,8 @@ module Animation =
         |> nameToString
         |> nameValue
 
+
+    [<Erase>]
     type AnimationName =
         static member name (name: FssTypes.IAnimationName) = name |> nameValue'
         static member names (names: FssTypes.IAnimationName list) = Utilities.Helpers.combineComma nameToString names |> nameValue
@@ -161,6 +175,8 @@ module Animation =
         value
         |> playStateTypeToString
         |> playStateCssValue
+
+    [<Erase>]
     type AnimationPlayState =
         static member value (playState: FssTypes.IAnimationPlayState) = playState |> playStateCssValue'
         static member running = FssTypes.Animation.PlayState.Running |> playStateCssValue'
@@ -186,6 +202,8 @@ module Animation =
         value
         |> FssTypes.timingFunctionHelpers.timingToString
         |> timingFunctionCssValue
+
+    [<Erase>]
     type AnimationTimingFunction =
         static member value (timingFunction: FssTypes.TimingFunction.Timing) = timingFunction |> FssTypes.timingFunctionHelpers.timingToString
         static member values (timings: FssTypes.TimingFunction.Timing list) = timingFunctionCssValue <| Utilities.Helpers.combineComma FssTypes.timingFunctionHelpers.timingToString timings

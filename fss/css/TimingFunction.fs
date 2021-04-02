@@ -1,8 +1,11 @@
 ﻿namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module TimingFunction =
     let private timingToString timing = Fss.FssTypes.timingFunctionHelpers.timingToString timing
+    [<Erase>]
     type TimingFunction =
         interface FssTypes.ITransitionTimingFunction
         static member ease = FssTypes.TimingFunction.Ease |> timingToString

@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module AspectRatio =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
@@ -14,6 +16,7 @@ module AspectRatio =
         |> stringifyAspectRatio
         |> aspectRatioValue
 
+    [<Erase>]
     type AspectRatio =
         static member value (width: int, height: int) =
             $"{width} / {height}"

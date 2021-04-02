@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module MixBlendMode =
     let private blendModeToString (blendMode: FssTypes.IMixBlendMode) =
@@ -16,6 +18,7 @@ module MixBlendMode =
         |> blendModeToString
         |> mixBlendModeCssValue
 
+    [<Erase>]
     type MixBlendMode =
         static member value(mixBlendMode: FssTypes.IMixBlendMode) = mixBlendMode |> mixBlendModeCssValue'
 

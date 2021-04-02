@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Display =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/display
@@ -17,6 +19,7 @@ module Display =
         |> displayToString
         |> displayValue
 
+    [<Erase>]
     type Display =
         static member value (display: FssTypes.IDisplay) = display |> displayValue'
         static member inline' = FssTypes.Display.Inline |> displayValue'

@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Appearance =
     let private appearanceToString (appearance: FssTypes.IAppearance) =
@@ -15,6 +17,7 @@ module Appearance =
         |> appearanceToString
         |> appearanceValue
 
+    [<Erase>]
     type Appearance =
         static member value (appearance: FssTypes.IAppearance) = appearance |> appearanceValue'
         static member pushButton = FssTypes.Appearance.PushButton |> appearanceValue'

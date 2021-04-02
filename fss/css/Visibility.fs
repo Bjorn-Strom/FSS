@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
 [<AutoOpen>]
 module Visibility =
@@ -9,6 +11,7 @@ module Visibility =
         |> FssTypes.visibilityHelpers.visibilityToString
         |> visibilityValue
 
+    [<Erase>]
     type Visibility =
         static member value (visibility: FssTypes.IVisibility) = visibility |> visibilityValue'
         static member visible = FssTypes.Visibility.Visible |> visibilityValue'
@@ -33,6 +36,7 @@ module Visibility =
 // https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
 [<AutoOpen>]
 module Opacity =
+    [<Erase>]
     type Opacity =
         static member value value =
             FssTypes.propertyHelpers.cssValue FssTypes.Property.Opacity
@@ -59,6 +63,7 @@ module PaintOrder =
         |> paintOrderValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/paint-order
+    [<Erase>]
     type PaintOrder =
         static member value(order: FssTypes.IPaintOrder) = order |> paintOrderValue'
         static member value(o1: FssTypes.IPaintOrder, o2: FssTypes.IPaintOrder) =

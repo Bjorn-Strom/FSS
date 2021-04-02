@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 module Word =
     let private spacingToString (spacing: FssTypes.IWordSpacing) =
         match spacing with
@@ -23,6 +25,7 @@ module Word =
         |> spacingToString
         |> spacingCssValue
 
+    [<Erase>]
     type WordSpacing =
         static member value (spacing: FssTypes.IWordSpacing) = spacing |> spacingCssValue'
 
@@ -51,6 +54,7 @@ module Word =
         |> breakToString
         |> breakCssValue
 
+    [<Erase>]
     type WordBreak =
         static member value (spacing: FssTypes.IWordBreak) = spacing |> breakCssValue'
         static member wordBreak = FssTypes.WordBreak.WordBreak |> breakCssValue'

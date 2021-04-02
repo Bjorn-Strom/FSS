@@ -1,5 +1,7 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Filter =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/filter
@@ -16,6 +18,7 @@ module Filter =
         |> stringifyFilter
         |> filterValue
 
+    [<Erase>]
     type Filter =
         static member url url  = FssTypes.Filter.Url url
         static member blur blur = FssTypes.Filter.Blur blur
@@ -56,6 +59,7 @@ module BackdropFilter =
         |> stringifyFilter
         |> backdropFilterValue
 
+    [<Erase>]
     type BackdropFilter =
         static member url url = FssTypes.Filter.Url url
         static member blur blur = FssTypes.Filter.Blur blur
