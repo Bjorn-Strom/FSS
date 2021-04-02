@@ -1,7 +1,4 @@
 image: Visual Studio 2019
-branches:
-    only:
-        - fss2.0
 test: off
 build_script:
     - dotnet tool restore
