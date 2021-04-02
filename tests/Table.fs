@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,79 +9,79 @@ module Table =
     let tests =
         testList "table"
             [
-                test
+                testCase
                     "Caption side top"
                     [CaptionSide.top]
                     ["captionSide" ==> "top"]
-                test
+                testCase
                     "Caption side bottom"
                     [CaptionSide.bottom]
                     ["captionSide" ==> "bottom"]
-                test
+                testCase
                     "Caption side left"
                     [CaptionSide.left]
                     ["captionSide" ==> "left"]
-                test
+                testCase
                     "Caption side right"
                     [CaptionSide.right]
                     ["captionSide" ==> "right"]
-                test
+                testCase
                     "Caption side top-outside"
                     [CaptionSide.topOutside]
                     ["captionSide" ==> "top-outside"]
-                test
+                testCase
                     "Caption side bottom-outside"
                     [CaptionSide.bottomOutside]
                     ["captionSide" ==> "bottom-outside"]
-                test
+                testCase
                     "Caption side inherit"
                     [CaptionSide.inherit']
                     ["captionSide" ==> "inherit"]
-                test
+                testCase
                     "Caption side initial"
                     [CaptionSide.initial]
                     ["captionSide" ==> "initial"]
-                test
+                testCase
                     "Caption side unset"
                     [CaptionSide.unset]
                     ["captionSide" ==> "unset"]
-                test
+                testCase
                     "Empty Cells show"
                     [EmptyCells.show]
                     ["emptyCells" ==> "show"]
-                test
+                testCase
                     "Empty Cells hide"
                     [EmptyCells.hide]
                     ["emptyCells" ==> "hide"]
-                test
+                testCase
                     "Empty Cells inherit"
                     [EmptyCells.inherit']
                     ["emptyCells" ==> "inherit"]
-                test
+                testCase
                     "Empty Cells initial"
                     [EmptyCells.initial]
                     ["emptyCells" ==> "initial"]
-                test
+                testCase
                     "Empty Cells unset"
                     [EmptyCells.unset]
                     ["emptyCells" ==> "unset"]
-                test
+                testCase
                     "Table Layout fixed"
                     [TableLayout.fixed']
                     ["tableLayout" ==> "fixed"]
-                test
+                testCase
                     "Table Layout auto"
                     [TableLayout.auto]
                     ["tableLayout" ==> "auto"]
-                test
+                testCase
                     "Table Layout inherit"
                     [TableLayout.inherit']
                     ["tableLayout" ==> "inherit"]
-                test
+                testCase
                     "Table Layout initial"
                     [TableLayout.initial]
                     ["tableLayout" ==> "initial"]
-                test
+                testCase
                     "Table Layout unset"
                     [TableLayout.unset]
                     ["tableLayout" ==> "unset"]

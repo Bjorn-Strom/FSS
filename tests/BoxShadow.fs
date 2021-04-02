@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,7 +9,7 @@ module BoxShadow =
      let tests =
         testList "BoxShadow"
             [
-                test
+                testCase
                     "BoxShadow color"
                     [
                         BoxShadows
@@ -18,7 +18,7 @@ module BoxShadow =
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px #0000ff" ]
-                test
+                testCase
                     "BoxShadow blur color"
                     [
                         BoxShadows
@@ -27,7 +27,7 @@ module BoxShadow =
                             ]
                     ]
                     [ "boxShadow" ==> "10px 10px 1.5em #ff0000" ]
-                test
+                testCase
                     "BoxShadow blur spread color"
                     [
                         BoxShadows
@@ -36,7 +36,7 @@ module BoxShadow =
                             ]
                     ]
                     [ "boxShadow" ==> "1px 100px 1.5vh 1px #d2691e" ]
-                test
+                testCase
                     "Multiple box shadows"
                     [
                         BoxShadows
@@ -49,7 +49,7 @@ module BoxShadow =
                             ]
                     ]
                     ["boxShadow" ==> "10px 10px #0000ff, 10px 10px 10px #0000ff, 10px 10px 10px 10px #0000ff, 3px 3px #ff0000, -1.0em 0px 0.4em #808000"]
-                test
+                testCase
                     "BoxShadow invert"
                     [
                         BoxShadows

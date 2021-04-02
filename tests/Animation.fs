@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -16,183 +16,183 @@ module Animation =
 
         testList "Animation"
             [
-                test
+                testCase
                     "Animation name"
                     [ AnimationName' animationSample ]
                     [ "animationName" ==> "animation-1oejj34" ]
-                test
+                testCase
                     "Animation names"
                     [ AnimationName.names [animationSample; FssTypes.CssString "foo" ] ]
                     [ "animationName" ==> "animation-1oejj34, foo" ]
-                test
+                testCase
                     "Animation name inherit"
                     [ AnimationName.inherit' ]
                     [ "animationName" ==> "inherit" ]
-                test
+                testCase
                     "Animation name"
                     [ AnimationName.initial ]
                     [ "animationName" ==> "initial" ]
-                test
+                testCase
                     "Animation name"
                     [ AnimationName.unset ]
                     [ "animationName" ==> "unset" ]
-                test
+                testCase
                     "Animation duration"
                     [ AnimationDuration' (sec 10.0) ]
                     [ "animationDuration" ==> "10.00s" ]
-                test
+                testCase
                     "Animation duration seconds"
                     [ AnimationDuration' (sec 10.0) ]
                     [ "animationDuration" ==> "10.00s" ]
-                test
+                testCase
                     "Animation duration milliseconds"
                     [ AnimationDuration' (ms 10.0) ]
                     [ "animationDuration" ==> "10.00ms" ]
-                test
+                testCase
                     "Animation timing function ease"
                     [ AnimationTimingFunction.ease ]
                     ["animationTimingFunction" ==> "ease"]
-                test
+                testCase
                     "Animation timing function ease in"
                     [ AnimationTimingFunction.easeIn ]
                     ["animationTimingFunction" ==> "ease-in"]
-                test
+                testCase
                     "Animation timing function ease out"
                     [ AnimationTimingFunction.easeOut ]
                     ["animationTimingFunction" ==> "ease-out"]
-                test
+                testCase
                     "Animation timing function ease in out"
                     [ AnimationTimingFunction.easeInOut ]
                     ["animationTimingFunction" ==> "ease-in-out"]
-                test
+                testCase
                     "Animation timing function linear"
                     [ AnimationTimingFunction.linear ]
                     ["animationTimingFunction" ==> "linear"]
-                test
+                testCase
                     "Animation timing function step start"
                     [ AnimationTimingFunction.stepStart ]
                     ["animationTimingFunction" ==> "step-start"]
-                test
+                testCase
                     "Animation timing function step end"
                     [ AnimationTimingFunction.stepEnd ]
                     ["animationTimingFunction" ==> "step-end"]
-                test
+                testCase
                     "Animation timing function cubic bezier"
                     [ AnimationTimingFunction.cubicBezier (0.0, 0.47, 0.32, 1.97) ]
                     ["animationTimingFunction" ==> "cubic-bezier(0.00, 0.47, 0.32, 1.97)"]
-                test
+                testCase
                     "Animation timing function  step"
                     [ AnimationTimingFunction.step 5 ]
                     ["animationTimingFunction" ==> "steps(5)"]
-                test
+                testCase
                     "Animation timing function  step jump start"
                     [ AnimationTimingFunction.step(5, FssTypes.Animation.Step.JumpStart) ]
                     ["animationTimingFunction" ==> "steps(5, jump-start)"]
-                test
+                testCase
                     "Animation timing function step jump end"
                     [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.JumpEnd) ]
                     ["animationTimingFunction" ==> "steps(5, jump-end)"]
-                test
+                testCase
                     "Animation timing function step jump none"
                     [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.JumpNone) ]
                     ["animationTimingFunction" ==> "steps(5, jump-none)"]
-                test
+                testCase
                     "Animation timing function step jump both"
                     [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.JumpBoth) ]
                     ["animationTimingFunction" ==> "steps(5, jump-both)"]
-                test
+                testCase
                     "Animation timing function step start"
                     [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.Start) ]
                     ["animationTimingFunction" ==> "steps(5, start)"]
-                test
+                testCase
                     "Animation timing function step end"
                     [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.End) ]
                     ["animationTimingFunction" ==> "steps(5, end)"]
-                test
+                testCase
                     "Animation timing function inherit"
                     [ AnimationTimingFunction.inherit' ]
                     ["animationTimingFunction" ==> "inherit"]
-                test
+                testCase
                     "Animation timing function initial"
                     [ AnimationTimingFunction.initial ]
                     ["animationTimingFunction" ==> "initial"]
-                test
+                testCase
                     "Animation timing function unset"
                     [ AnimationTimingFunction.unset ]
                     ["animationTimingFunction" ==> "unset"]
-                test
+                testCase
                     "Animation delay sec"
                     [ AnimationDelay' (sec 10.0) ]
                     ["animationDelay" ==> "10.00s"]
-                test
+                testCase
                     "Animation iteration count infininte"
                     [ AnimationIterationCount.infinite ]
                     ["animationIterationCount" ==> "infinite"]
-                test
+                testCase
                     "Animation iteration count value"
                     [ AnimationIterationCount' (FssTypes.CssInt 5) ]
                     ["animationIterationCount" ==> "5"]
-                test
+                testCase
                     "Animation direction normal"
                     [ AnimationDirection.normal ]
                     ["animationDirection" ==> "normal"]
-                test
+                testCase
                     "Animation direction reverse"
                     [ AnimationDirection.reverse ]
                     ["animationDirection" ==> "reverse"]
-                test
+                testCase
                     "Animation direction alternate"
                     [ AnimationDirection.alternate ]
                     ["animationDirection" ==> "alternate"]
-                test
+                testCase
                     "Animation direction alternate reverse"
                     [ AnimationDirection.alternateReverse ]
                     ["animationDirection" ==> "alternate-reverse"]
-                test
+                testCase
                     "Animation direction inherit"
                     [ AnimationDirection.inherit' ]
                     ["animationDirection" ==> "inherit"]
-                test
+                testCase
                     "Animation direction initial"
                     [ AnimationDirection.initial ]
                     ["animationDirection" ==> "initial"]
-                test
+                testCase
                     "Animation direction unset"
                     [ AnimationDirection.unset ]
                     ["animationDirection" ==> "unset"]
-                test
+                testCase
                     "Animation fill mode forwards"
                     [ AnimationFillMode.forwards ]
                     ["animationFillMode" ==> "forwards"]
-                test
+                testCase
                     "Animation fill mode backwards"
                     [ AnimationFillMode.backwards ]
                     ["animationFillMode" ==> "backwards"]
-                test
+                testCase
                     "Animation fill mode both"
                     [ AnimationFillMode.both ]
                     ["animationFillMode" ==> "both"]
-                test
+                testCase
                     "Animation fill mode none"
                     [ AnimationFillMode.none ]
                     ["animationFillMode" ==> "none"]
-                test
+                testCase
                     "Animation play state running"
                     [ AnimationPlayState.running ]
                     ["animationPlayState" ==> "running"]
-                test
+                testCase
                     "Animation play state paused"
                     [ AnimationPlayState.paused ]
                     ["animationPlayState"  ==> "paused"]
-                test
+                testCase
                     "Animation play state inherit"
                     [ AnimationPlayState.inherit' ]
                     ["animationPlayState" ==> "inherit"]
-                test
+                testCase
                     "Animation play state initial"
                     [ AnimationPlayState.initial ]
                     ["animationPlayState"  ==> "initial"]
-                test
+                testCase
                     "Animation play state unset"
                     [ AnimationPlayState.unset ]
                     ["animationPlayState" ==> "unset"]

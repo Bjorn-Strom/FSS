@@ -1,10 +1,12 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "dotnet fable watch ./docs -o ./public --run parcel public/index.html",
     "build": "dotnet fable ./docs -o ./public --run parcel build public/index.html --no-source-maps --public-url .",
-    "test": "dotnet fable watch ./tests -o ./public-tests --run parcel public-tests/index.html",
-    "clean": "rm -rf dist && rm -rf public-tests/*.js && rm -rf public-tests/fss && rm -rf public/*.js && rm -rf public/fss",
+    "test": "dotnet fable ./tests -o ./dist/tests --run node ./dist/tests/Tests.js",
+    "watch-test": "dotnet fable watch ./tests -o ./dist/tests --run nodemon ./dist/tests/Tests.js",
+    "clean": "rm -rf dist && rm -rf public/*.js && rm -rf public/fss",
     "publish-docs": "npm run clean && npm run build && gh-pages -d dist"
   },
   "homepage": "https://Bjorn-Strom.github.io/FSS",
@@ -12,9 +14,7 @@
     "@babel/core": "^7.10.5",
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
-    "@testing-library/react": "^10.4.7",
-    "@testing-library/user-event": "^11.4.2",
-    "mocha": "^6.2.3"
+    "nodemon": "^2.0.7"
   },
   "dependencies": {
     "@emotion/css": "11.1.3",

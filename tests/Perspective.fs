@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,67 +9,67 @@ module Perspective =
     let tests =
         testList "Perspective"
             [
-                test
+                testCase
                     "Perspective px"
                     [ Perspective' (px 100) ]
                     ["perspective" ==> "100px"]
-                test
+                testCase
                     "Perspective em"
                     [ Perspective' (em 3.5) ]
                     ["perspective" ==> "3.5em"]
-                test
+                testCase
                     "Perspective none"
                     [ Perspective.none ]
                     ["perspective" ==> "none"]
-                test
+                testCase
                     "Perspective inherit"
                     [ Perspective.inherit']
                     [ "perspective" ==> "inherit" ]
-                test
+                testCase
                     "Perspective initial"
                     [ Perspective.initial]
                     ["perspective" ==> "initial" ]
-                test
+                testCase
                     "Perspective unset"
                     [ Perspective.unset]
                     ["perspective" ==> "unset"]
-                test
+                testCase
                     "Perspective x"
                     [ PerspectiveOrigin.value <| pct 100 ]
                     ["perspectiveOrigin" ==> "100%"]
-                test
+                testCase
                     "Perspective x y"
                     [ PerspectiveOrigin.value (pct 100, pct 50) ]
                     ["perspectiveOrigin" ==> "100% 50%"]
-                test
+                testCase
                     "Perspective origin inherit"
                     [ PerspectiveOrigin.inherit']
                     [ "perspectiveOrigin" ==> "inherit" ]
-                test
+                testCase
                     "Perspective origin initial"
                     [ PerspectiveOrigin.initial]
                     ["perspectiveOrigin" ==> "initial" ]
-                test
+                testCase
                     "Perspective origin unset"
                     [ PerspectiveOrigin.unset]
                     ["perspectiveOrigin" ==> "unset"]
-                test
+                testCase
                     "BackfaceVisibility hidden"
                     [ BackfaceVisibility.hidden]
                     [ "backfaceVisibility" ==> "hidden" ]
-                test
+                testCase
                     "BackfaceVisibility visible"
                     [ BackfaceVisibility.visible]
                     [ "backfaceVisibility" ==> "visible" ]
-                test
+                testCase
                     "BackfaceVisibility inherit"
                     [ BackfaceVisibility.inherit']
                     [ "backfaceVisibility" ==> "inherit" ]
-                test
+                testCase
                     "BackfaceVisibility initial"
                     [ BackfaceVisibility.initial]
                     ["backfaceVisibility" ==> "initial" ]
-                test
+                testCase
                     "BackfaceVisibility unset"
                     [ BackfaceVisibility.unset]
                     ["backfaceVisibility" ==> "unset"]

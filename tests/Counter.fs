@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -15,51 +15,51 @@ module Counter =
     let tests =
         testList "Counter"
             [
-                test
+                testCase
                     "CounterReset reset"
                     [ CounterReset.reset sampleCounterStyle]
                     [ "counterReset" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
-                test
+                testCase
                     "CounterReset reset to"
                     [ CounterReset.resetTo sampleCounterStyle 5]
                     [ "counterReset" ==> sprintf "%s 5" (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
-                test
+                testCase
                     "CounterReset none"
                     [ CounterReset.none]
                     [ "counterReset" ==> "none" ]
-                test
+                testCase
                     "CounterReset inherit"
                     [ CounterReset.inherit']
                     [ "counterReset" ==> "inherit" ]
-                test
+                testCase
                     "CounterReset initial"
                     [ CounterReset.initial]
                     [ "counterReset" ==> "initial" ]
-                test
+                testCase
                     "CounterReset unset"
                     [ CounterReset.unset ]
                     [ "counterReset" ==> "unset" ]
-                test
+                testCase
                     "CounterIncrement increment"
                     [ CounterIncrement.increment sampleCounterStyle]
                     [ "counterIncrement" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
-                test
+                testCase
                     "CounterIncrement increment to"
                     [ CounterIncrement.incrementTo sampleCounterStyle 5]
                     [ "counterIncrement" ==> sprintf "%s 5"(FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle)]
-                test
+                testCase
                     "CounterIncrement none"
                     [ CounterIncrement.none]
                     [ "counterIncrement" ==> "none" ]
-                test
+                testCase
                     "CounterIncrement inherit"
                     [ CounterIncrement.inherit']
                     [ "counterIncrement" ==> "inherit" ]
-                test
+                testCase
                     "CounterIncrement initial"
                     [ CounterIncrement.initial]
                     [ "counterIncrement" ==> "initial" ]
-                test
+                testCase
                     "CounterIncrement unset"
                     [ CounterIncrement.unset ]
                     [ "counterIncrement" ==> "unset" ]

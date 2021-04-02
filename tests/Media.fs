@@ -1,7 +1,7 @@
 namespace FSSTests
 
 open Fss
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 

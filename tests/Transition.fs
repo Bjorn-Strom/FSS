@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -12,163 +12,163 @@ module Transition =
     let tests =
         testList "Transition"
             [
-                test
+                testCase
                     "Transition inherit"
                     [Transition.inherit']
                     ["transition" ==> "inherit"]
-                test
+                testCase
                     "Transition initial"
                     [ Transition.initial ]
                     ["transition" ==> "initial" ]
-                test
+                testCase
                     "Transition unset"
                     [Transition.unset]
                     ["transition" ==> "unset"]
-                test
+                testCase
                     "Transition duration sec"
                     [TransitionDuration' (sec 6.0) ]
                     ["transitionDuration" ==> "6.00s"]
-                test
+                testCase
                     "Transition duration ms"
                     [ TransitionDuration' (ms 120.0) ]
                     [ "transitionDuration" ==> "120.00ms" ]
-                test
+                testCase
                     "Transition duration value unset"
                     [TransitionDuration' FssTypes.Unset ]
                     ["transitionDuration" ==> "unset"]
-                test
+                testCase
                     "Transition duration inherit"
                     [TransitionDuration.inherit']
                     ["transitionDuration" ==> "inherit"]
-                test
+                testCase
                     "Transition duration initial"
                     [ TransitionDuration.initial ]
                     ["transitionDuration" ==> "initial" ]
-                test
+                testCase
                     "Transition duration unset"
                     [TransitionDuration.unset]
                     ["transitionDuration" ==> "unset"]
-                test
+                testCase
                     "Transition duration multiple"
                     [TransitionDuration.value transitionDurations ]
                     ["transitionDuration" ==> "10.00s, 100.00ms, initial, inherit"]
-                test
+                testCase
                     "Transition delay sec"
                     [TransitionDelay' (sec 6.0) ]
                     ["transitionDelay" ==> "6.00s"]
-                test
+                testCase
                     "Transition delay ms"
                     [ TransitionDelay' (ms 120.0) ]
                     [ "transitionDelay" ==> "120.00ms" ]
-                test
+                testCase
                     "Transition delay inherit"
                     [TransitionDelay.inherit']
                     ["transitionDelay" ==> "inherit"]
-                test
+                testCase
                     "Transition delay initial"
                     [ TransitionDelay.initial ]
                     ["transitionDelay" ==> "initial" ]
-                test
+                testCase
                     "Transition delay unset"
                     [ TransitionDelay.unset]
                     ["transitionDelay" ==> "unset"]
-                test
+                testCase
                     "Transition delay multiple"
                     [TransitionDelay.value transitionDelays ]
                     ["transitionDelay" ==> "10.00s, 100.00ms, initial, unset"]
-                test
+                testCase
                     "Transition property"
                     [TransitionProperty.backgroundColor]
                     ["transitionProperty" ==> "background-color"]
-                test
+                testCase
                     "Transition property"
                     [TransitionProperty.all]
                     ["transitionProperty" ==> "all"]
-                test
+                testCase
                     "Transition property inherit"
                     [TransitionProperty.inherit']
                     ["transitionProperty" ==> "inherit"]
-                test
+                testCase
                     "Transition property initial"
                     [ TransitionProperty.initial ]
                     ["transitionProperty" ==> "initial" ]
-                test
+                testCase
                     "Transition property unset"
                     [ TransitionProperty.unset]
                     ["transitionProperty" ==> "unset"]
-                test
+                testCase
                     "Transition properties"
                     [TransitionProperty.values [FssTypes.Property.BackgroundColor; FssTypes.Property.Color ] ]
                     ["transitionProperty" ==> "background-color, color"]
-                test
+                testCase
                     "Transition timing function ease"
                     [ TransitionTimingFunction.ease ]
                     ["transitionTimingFunction" ==> "ease"]
-                test
+                testCase
                     "Transition timing function ease in"
                     [ TransitionTimingFunction.easeIn ]
                     ["transitionTimingFunction" ==> "ease-in"]
-                test
+                testCase
                     "Transition timinunction ease out"
                     [ TransitionTimingFunction.easeOut ]
                     ["transitionTimingFunction" ==> "ease-out"]
-                test
+                testCase
                     "Transition timing function ease in out"
                     [ TransitionTimingFunction.easeInOut ]
                     ["transitionTimingFunction" ==> "ease-in-out"]
-                test
+                testCase
                     "Transition timing function linear"
                     [ TransitionTimingFunction.linear ]
                     ["transitionTimingFunction" ==> "linear"]
-                test
+                testCase
                     "Transition timing function step start"
                     [ TransitionTimingFunction.stepStart ]
                     ["transitionTimingFunction" ==> "step-start"]
-                test
+                testCase
                     "Transition timing function step end"
                     [ TransitionTimingFunction.stepEnd ]
                     ["transitionTimingFunction" ==> "step-end"]
-                test
+                testCase
                     "Transition timing function cubic bezier"
                     [ TransitionTimingFunction.cubicBezier(0.0, 0.47, 0.32, 1.97) ]
                     ["transitionTimingFunction" ==> "cubic-bezier(0.00, 0.47, 0.32, 1.97)"]
-                test
+                testCase
                     "Transition timing function  step"
                     [ TransitionTimingFunction.step 5 ]
                     ["transitionTimingFunction" ==> "steps(5)"]
-                test
+                testCase
                     "Transition timing function  step jump start"
                     [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.JumpStart) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-start)"]
-                test
+                testCase
                     "Transition timing function step jump end"
                     [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.JumpEnd) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-end)"]
-                test
+                testCase
                     "Transition timing function step jump none"
                     [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.JumpNone) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-none)"]
-                test
+                testCase
                     "Transition timing function step jump both"
                     [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.JumpBoth) ]
                     ["transitionTimingFunction" ==> "steps(5, jump-both)"]
-                test
+                testCase
                     "Transition timing function step start"
                     [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.Step.Start) ]
                     ["transitionTimingFunction" ==> "steps(5, start)"]
-                test
+                testCase
                     "Transition timing function step end"
                     [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.Step.End) ]
                     ["transitionTimingFunction" ==> "steps(5, end)"]
-                test
+                testCase
                     "Transition timing function inherit"
                     [ TransitionTimingFunction.inherit' ]
                     ["transitionTimingFunction" ==> "inherit"]
-                test
+                testCase
                     "Transition timing function initial"
                     [ TransitionTimingFunction.initial ]
                     ["transitionTimingFunction" ==> "initial"]
-                test
+                testCase
                     "Transition timing function unset"
                     [ TransitionTimingFunction.unset ]
                     ["transitionTimingFunction" ==> "unset"]

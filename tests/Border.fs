@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,395 +9,395 @@ module Border =
      let tests =
         testList "Border"
             [
-                test
+                testCase
                     "Border initial"
                     [ Border.initial ]
                     [ "border" ==> "initial" ]
-                test
+                testCase
                     "Border inherit"
                     [ Border.inherit' ]
                     [ "border" ==> "inherit" ]
-                test
+                testCase
                     "Border unset"
                     [ Border.unset ]
                     [ "border" ==> "unset" ]
-                test
+                testCase
                     "Border none"
                     [ Border.none ]
                     [ "border" ==> "none" ]
-                test
+                testCase
                     "Borderstyle hidden"
                     [ BorderStyle.hidden ]
                     [ "borderStyle" ==> "hidden" ]
-                test
+                testCase
                     "Borderstyle dotted"
                     [ BorderStyle.dotted ]
                     [ "borderStyle" ==> "dotted" ]
-                test
+                testCase
                     "Borderstyle dashed"
                     [ BorderStyle.dashed ]
                     [ "borderStyle" ==> "dashed" ]
-                test
+                testCase
                     "Borderstyle solid"
                     [ BorderStyle.solid ]
                     [ "borderStyle" ==> "solid" ]
-                test
+                testCase
                     "Borderstyle double"
                     [ BorderStyle.double ]
                     [ "borderStyle" ==> "double" ]
-                test
+                testCase
                     "Borderstyle groove"
                     [ BorderStyle.groove ]
                     [ "borderStyle" ==> "groove" ]
-                test
+                testCase
                     "Borderstyle ridge"
                     [ BorderStyle.ridge ]
                     [ "borderStyle" ==> "ridge" ]
-                test
+                testCase
                     "Borderstyle inset"
                     [ BorderStyle.inset ]
                     [ "borderStyle" ==> "inset" ]
-                test
+                testCase
                     "Borderstyle outset"
                     [ BorderStyle.outset ]
                     [ "borderStyle" ==> "outset" ]
-                test
+                testCase
                     "Borderstyle multiple"
                     [ BorderStyle.value(FssTypes.Border.Style.Inset, FssTypes.Border.Style.Outset, FssTypes.Border.Style.Ridge, FssTypes.Border.Style.Groove) ]
                     [ "borderStyle" ==> "inset outset ridge groove" ]
-                test
+                testCase
                     "Borderstyle none"
                     [ BorderStyle.none ]
                     [ "borderStyle" ==> "none" ]
-                test
+                testCase
                     "Borderstyle initial"
                     [ BorderStyle.initial ]
                     [ "borderStyle" ==> "initial" ]
-                test
+                testCase
                     "Borderstyle inherit"
                     [ BorderStyle.inherit' ]
                     [ "borderStyle" ==> "inherit" ]
-                test
+                testCase
                     "Borderstyle unset"
                     [ BorderStyle.unset ]
                     [ "borderStyle" ==> "unset" ]
-                test
+                testCase
                     "Border radius px"
                     [ BorderRadius' (px 10)]
                     [ "borderRadius" ==> "10px" ]
-                test
+                testCase
                     "Border radius percent"
                     [ BorderRadius' (pct 50)]
                     [ "borderRadius" ==> "50%" ]
-                test
+                testCase
                     "Border top left radius px"
                     [ BorderTopLeftRadius' (px 10)]
                     ["borderTopLeftRadius" ==> "10px"]
-                test
+                testCase
                     "Border top right radius px"
                     [ BorderTopRightRadius' (px 10)]
                     ["borderTopRightRadius" ==> "10px"]
-                test
+                testCase
                     "Border bottom left radius"
                     [ BorderBottomLeftRadius' (px 10)]
                     ["borderBottomLeftRadius" ==> "10px"]
-                test
+                testCase
                     "Border bottom right radius px"
                     [ BorderBottomRightRadius' (px 10)]
                     ["borderBottomRightRadius" ==> "10px"]
-                test
+                testCase
                     "Border radius multiple px"
                     [ BorderRadius.value (px 10, px 20, px 30, px 40) ]
                     [ "borderRadius" ==> "10px 20px 30px 40px" ]
-                test
+                testCase
                     "Border radius top left initial"
                     [ BorderTopLeftRadius.initial ]
                     ["borderTopLeftRadius" ==> "initial"]
-                test
+                testCase
                     "Border radius top right inherit"
                     [ BorderTopRightRadius.inherit' ]
                     ["borderTopRightRadius" ==> "inherit"]
-                test
+                testCase
                     "Border bottom left radius unset"
                     [ BorderBottomLeftRadius.unset ]
                     ["borderBottomLeftRadius" ==> "unset"]
-                test
+                testCase
                     "Border bottom right radius initial"
                     [ BorderBottomRightRadius.initial ]
                     ["borderBottomRightRadius" ==> "initial"]
-                test
+                testCase
                     "Border radius inherit"
                     [ BorderRadius.inherit' ]
                     ["borderRadius" ==> "inherit"]
-                test
+                testCase
                     "Border radius inherit"
                     [ BorderRadius.inherit' ]
                     ["borderRadius" ==> "inherit"]
-                test
+                testCase
                     "Border radius unset"
                     [ BorderRadius.unset ]
                     ["borderRadius" ==> "unset"]
-                test
+                testCase
                     "Border width px"
                     [ BorderWidth' (px 40) ]
                     [ "borderWidth" ==> "40px" ]
-                test
+                testCase
                     "Border width thin"
                     [ BorderWidth.thin ]
                     [ "borderWidth" ==> "thin" ]
-                test
+                testCase
                     "Border width medium"
                     [ BorderWidth.medium ]
                     [ "borderWidth" ==> "medium" ]
-                test
+                testCase
                     "Border width thick"
                     [ BorderWidth.thick ]
                     [ "borderWidth" ==> "thick" ]
-                test
+                testCase
                     "Border width initial"
                     [ BorderWidth.initial ]
                     [ "borderWidth" ==> "initial" ]
-                test
+                testCase
                     "Border width inherit"
                     [ BorderWidth.inherit' ]
                     [ "borderWidth" ==> "inherit" ]
-                test
+                testCase
                     "Border width unset"
                     [ BorderWidth.unset ]
                     [ "borderWidth" ==> "unset" ]
-                test
+                testCase
                     "Border widths combination"
                     [ BorderWidth.value (px 1, px 20, em 3.0, rem 4.5) ]
                     [ "borderWidth" ==> "1px 20px 3.0em 4.5rem" ]
-                test
+                testCase
                     "Border left width px"
                     [ BorderLeftWidth' (px 40) ]
                     ["borderLeftWidth" ==> "40px"]
-                test
+                testCase
                     "Border right width cm"
                     [ BorderRightWidth' (cm 40.0) ]
                     ["borderRightWidth" ==> "40.0cm"]
-                test
+                testCase
                     "Border color red"
                     [ BorderColor.red ]
                     [ "borderColor" ==> "#ff0000" ]
-                test
+                testCase
                     "Border color initial"
                     [ BorderColor.initial ]
                     [ "borderColor" ==> "initial" ]
-                test
+                testCase
                     "Border color inherit"
                     [ BorderColor.inherit' ]
                     [ "borderColor" ==> "inherit" ]
-                test
+                testCase
                     "Border color unset"
                     [ BorderColor.unset ]
                     [ "borderColor" ==> "unset" ]
-                test
+                testCase
                     "Border colors multiple"
                     [ BorderColor.value (FssTypes.Color.red, FssTypes.Color.green, FssTypes.Color.blue, FssTypes.Color.white) ]
                     [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
-                test
+                testCase
                     "Border top color rgb"
                     [ BorderTopColor.rgb 255 0 0 ]
                     ["borderTopColor" ==> "rgb(255, 0, 0)"]
-                test
+                testCase
                     "Border right color green"
                     [ BorderRightColor.green ]
                     ["borderRightColor" ==> "#008000"]
-                test
+                testCase
                     "Border bottom color"
                     [ BorderBottomColor.blue ]
                     ["borderBottomColor" ==> "#0000ff"]
-                test
+                testCase
                     "Border left color"
                     [ BorderLeftColor.white ]
                     ["borderLeftColor" ==> "#ffffff"]
-                test
+                testCase
                     "Border collapse collapse"
                     [ BorderCollapse.collapse ]
                     [ "borderCollapse" ==> "collapse" ]
-                test
+                testCase
                     "Border collapse separate"
                     [ BorderCollapse.separate ]
                     [ "borderCollapse" ==> "separate" ]
-                test
+                testCase
                     "Border collapse initial"
                     [ BorderCollapse.initial ]
                     [ "borderCollapse" ==> "initial" ]
-                test
+                testCase
                     "Border collapse inherit"
                     [ BorderCollapse.inherit' ]
                     [ "borderCollapse" ==> "inherit" ]
-                test
+                testCase
                     "Border collapse unset"
                     [ BorderCollapse.unset ]
                     [ "borderCollapse" ==> "unset" ]
-                test
+                testCase
                     "Border spacing px"
                     [ BorderSpacing' (px 2) ]
                     [ "borderSpacing" ==> "2px" ]
-                test
+                testCase
                     "Border spacing px"
                     [ BorderSpacing.value (px 2, px 2) ]
                     [ "borderSpacing" ==> "2px 2px" ]
-                test
+                testCase
                     "Border spacing initial"
                     [ BorderSpacing.initial ]
                     [ "borderSpacing" ==> "initial" ]
-                test
+                testCase
                     "Border spacing inherit"
                     [ BorderSpacing.inherit' ]
                     [ "borderSpacing" ==> "inherit" ]
-                test
+                testCase
                     "Border spacing unset"
                     [ BorderSpacing.unset ]
                     [ "borderSpacing" ==> "unset" ]
-                test
+                testCase
                     "Border image source none"
                     [ BorderImageSource.none ]
                     [ "borderImageSource" ==> "none" ]
-                test
+                testCase
                     "Border image source url"
                     [ BorderImageSource.url "image.jpg" ]
                     [ "borderImageSource" ==> "url(image.jpg)" ]
-                test
+                testCase
                     "Border image source linear gradient"
                     [ BorderImageSource.linearGradient(deg 45., [ FssTypes.Color.red, pct 0; FssTypes.Color.blue, pct 100 ]) ]
                     [ "borderImageSource" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
-                test
+                testCase
                     "Border image source inherit"
                     [ BorderImageSource.inherit' ]
                     [ "borderImageSource" ==> "inherit" ]
-                test
+                testCase
                     "Border image source initial"
                     [ BorderImageSource.initial ]
                     [ "borderImageSource" ==> "initial" ]
-                test
+                testCase
                     "Border image source unset"
                     [ BorderImageSource.unset ]
                     [ "borderImageSource" ==> "unset" ]
-                test
+                testCase
                     "Border image width auto"
                     [ BorderImageWidth.auto ]
                     [ "borderImageWidth" ==> "auto" ]
-                test
+                testCase
                     "Border image width rem"
                     [ BorderImageWidth' (rem 1.) ]
                     [ "borderImageWidth" ==> "1.0rem" ]
-                test
+                testCase
                     "Border image width percent"
                     [ BorderImageWidth' (pct 25) ]
                     [ "borderImageWidth" ==> "25%" ]
-                test
+                testCase
                     "Border image width value"
                     [ BorderImageWidth' (FssTypes.CssFloat 3.) ]
                     [ "borderImageWidth" ==> "3" ]
-                test
+                testCase
                     "Border image width vertical horizontal"
                     [ BorderImageWidth.value (em 2., em 3.) ]
                     [ "borderImageWidth" ==> "2.0em 3.0em" ]
-                test
+                testCase
                     "Border image width top horizontal bottom"
                     [ BorderImageWidth.value (pct 5, pct 15, pct 10) ]
                     [ "borderImageWidth" ==> "5% 15% 10%" ]
-                test
+                testCase
                     "Border image width top right bottom left"
                     [ BorderImageWidth.value (pct 5, em 2., pct 10, px 2) ]
                     [ "borderImageWidth" ==> "5% 2.0em 10% 2px" ]
-                test
+                testCase
                     "Border image width inherit"
                     [ BorderImageWidth.inherit' ]
                     [ "borderImageWidth" ==> "inherit" ]
-                test
+                testCase
                     "Border image width initial"
                     [ BorderImageWidth.initial ]
                     [ "borderImageWidth" ==> "initial" ]
-                test
+                testCase
                     "Border image width unset"
                     [ BorderImageWidth.unset ]
                     [ "borderImageWidth" ==> "unset" ]
-                test
+                testCase
                     "Border image repeat stretch"
                     [ BorderImageRepeat.stretch ]
                     [ "borderImageRepeat" ==> "stretch" ]
-                test
+                testCase
                     "Border image repeat repeat"
                     [ BorderImageRepeat.repeat ]
                     [ "borderImageRepeat" ==> "repeat" ]
-                test
+                testCase
                     "Border image repeat round"
                     [ BorderImageRepeat.round ]
                     [ "borderImageRepeat" ==> "round" ]
-                test
+                testCase
                     "Border image repeat space"
                     [ BorderImageRepeat.space ]
                     [ "borderImageRepeat" ==> "space" ]
-                test
+                testCase
                     "Border image repeat space"
                     [ BorderImageRepeat.value(FssTypes.Border.ImageRepeat.Stretch, FssTypes.Border.ImageRepeat.Repeat) ]
                     [ "borderImageRepeat" ==> "stretch repeat" ]
-                test
+                testCase
                     "Border image repeat inherit"
                     [ BorderImageRepeat.inherit' ]
                     [ "borderImageRepeat" ==> "inherit" ]
-                test
+                testCase
                     "Border image repeat initial"
                     [ BorderImageRepeat.initial ]
                     [ "borderImageRepeat" ==> "initial" ]
-                test
+                testCase
                     "Border image repeat unset"
                     [ BorderImageRepeat.unset ]
                     [ "borderImageRepeat" ==> "unset" ]
-                test
+                testCase
                     "Border image slice percent"
                     [ BorderImageSlice' (pct 30) ]
                     [ "borderImageSlice" ==> "30%" ]
-                test
+                testCase
                     "Border image slice multiple percent"
                     [ BorderImageSlice.value (pct 10, pct 30) ]
                     [ "borderImageSlice" ==> "10% 30%" ]
-                test
+                testCase
                     "Border image slice top horizontal bottom"
                     [ BorderImageSlice.value (px 30, pct 30, px 45) ]
                     [ "borderImageSlice" ==> "30px 30% 45px" ]
-                test
+                testCase
                     "Border image slice inherit"
                     [ BorderImageSlice.inherit' ]
                     [ "borderImageSlice" ==> "inherit" ]
-                test
+                testCase
                     "Border image slice initial"
                     [ BorderImageSlice.initial ]
                     [ "borderImageSlice" ==> "initial" ]
-                test
+                testCase
                     "Border image slice unset"
                     [ BorderImageSlice.unset ]
                     [ "borderImageSlice" ==> "unset" ]
-                test
+                testCase
                     "Border image outset rem"
                     [ BorderImageOutset' (rem 1.) ]
                     [ "borderImageOutset" ==> "1.0rem" ]
-                test
+                testCase
                     "Border image outset value"
                     [ BorderImageOutset' (FssTypes.Border.ImageOutset 1.5) ]
                     [ "borderImageOutset" ==> "1.5" ]
-                test
+                testCase
                     "Border image outset vertical horizontal"
                     [ BorderImageOutset.value(FssTypes.Border.ImageOutset 1., FssTypes.Border.ImageOutset 1.2) ]
                     [ "borderImageOutset" ==> "1 1.2" ]
-                test
+                testCase
                     "Border image outset top right bottom left"
                     [ BorderImageOutset.value (px 7, px 12, px 14, px 5) ]
                     [ "borderImageOutset" ==> "7px 12px 14px 5px" ]
-                test
+                testCase
                     "Border image outset inherit"
                     [ BorderImageOutset.inherit' ]
                     [ "borderImageOutset" ==> "inherit" ]
-                test
+                testCase
                     "Border image outset initial"
                     [ BorderImageOutset.initial ]
                     [ "borderImageOutset" ==> "initial" ]
-                test
+                testCase
                     "Border image outset unset"
                     [ BorderImageOutset.unset ]
                     [ "borderImageOutset" ==> "unset" ]

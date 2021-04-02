@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,75 +9,75 @@ module Display =
     let tests =
         testList "Display"
             [
-                test
+                testCase
                     "Display inline"
                     [ Display.inline' ]
                     ["display" ==> "inline"]
-                test
+                testCase
                     "Display inline-block"
                     [ Display.inlineBlock]
                     ["display" ==> "inline-block"]
-                test
+                testCase
                     "Display block"
                     [ Display.block]
                     ["display" ==> "block"]
-                test
+                testCase
                     "Display run-in"
                     [ Display.runIn]
                     ["display" ==> "run-in"]
-                test
+                testCase
                     "Display flex"
                     [ Display.flex]
                     ["display" ==> "flex"]
-                test
+                testCase
                     "Display grid"
                     [ Display.grid]
                     ["display" ==> "grid"]
-                test
+                testCase
                     "Display flow-root"
                     [ Display.flowRoot]
                     ["display" ==> "flow-root"]
-                test
+                testCase
                     "Display table"
                     [ Display.table]
                     ["display" ==> "table"]
-                test
+                testCase
                     "Display table-cell"
                     [ Display.tableCell]
                     ["display" ==> "table-cell"]
-                test
+                testCase
                     "Display table-column"
                     [ Display.tableColumn]
                     ["display" ==> "table-column"]
-                test
+                testCase
                     "Display table-column-group"
                     [ Display.tableColumnGroup]
                     ["display" ==> "table-column-group"]
-                test
+                testCase
                     "Display table-header-group"
                     [ Display.tableHeaderGroup]
                     ["display" ==> "table-header-group"]
-                test
+                testCase
                     "Display table row group"
                     [ Display.tableRowGroup]
                     ["display" ==> "table-row-group"]
-                test
+                testCase
                     "table footer group"
                     [ Display.tableFooterGroup]
                     ["display" ==> "table-footer-group"]
-                test
+                testCase
                     "Display table row"
                     [ Display.tableRow]
                     ["display" ==> "table-row"]
-                test
+                testCase
                     "Display table-caption"
                     [ Display.tableCaption]
                     ["display" ==> "table-caption"]
-                test
+                testCase
                     "Display none"
                     [ Display.none]
                     ["display" ==> "none"]
-                test
+                testCase
                     "Display none"
                     [ Display' FssTypes.Display.Grid]
                     ["display" ==> "grid"]

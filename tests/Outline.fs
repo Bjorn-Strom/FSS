@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,143 +9,143 @@ module Outline =
     let tests =
         testList "Outline"
             [
-                test
+                testCase
                     "Outline offset px"
                     [ OutlineOffset.value <| px 3 ]
                     [ "outlineOffset" ==> "3px" ]
-                test
+                testCase
                     "Outline offset em"
                     [ OutlineOffset' <| em 0.2 ]
                     [ "outlineOffset" ==> "0.2em" ]
-                test
+                testCase
                     "Outline offset initial"
                     [ OutlineOffset.initial ]
                     [ "outlineOffset" ==> "initial" ]
-                test
+                testCase
                     "Outline offset inherit"
                     [ OutlineOffset.inherit' ]
                     [ "outlineOffset" ==> "inherit" ]
-                test
+                testCase
                     "Outline offset unset"
                     [ OutlineOffset.unset ]
                     [ "outlineOffset" ==> "unset" ]
-                test
+                testCase
                     "Outline initial"
                     [ Outline.initial ]
                     [ "outline" ==> "initial" ]
-                test
+                testCase
                     "Outline inherit"
                     [ Outline.inherit' ]
                     [ "outline" ==> "inherit" ]
-                test
+                testCase
                     "Outline unset"
                     [ Outline.unset ]
                     [ "outline" ==> "unset" ]
-                test
+                testCase
                     "Outline width px"
                     [ OutlineWidth' (px 40) ]
                     [ "outlineWidth" ==> "40px" ]
-                test
+                testCase
                     "Outline width thin"
                     [ OutlineWidth.thin ]
                     [ "outlineWidth" ==> "thin" ]
-                test
+                testCase
                     "Outline width medium"
                     [ OutlineWidth.medium ]
                     [ "outlineWidth" ==> "medium" ]
-                test
+                testCase
                     "Outline width thick"
                     [ OutlineWidth.thick ]
                     [ "outlineWidth" ==> "thick" ]
-                test
+                testCase
                     "Outline width initial"
                     [ OutlineWidth.initial ]
                     [ "outlineWidth" ==> "initial" ]
-                test
+                testCase
                     "Outline width inherit"
                     [ OutlineWidth.inherit' ]
                     [ "outlineWidth" ==> "inherit" ]
-                test
+                testCase
                     "Outline width unset"
                     [ OutlineWidth.unset ]
                     [ "outlineWidth" ==> "unset" ]
-                test
+                testCase
                     "Outline style hidden"
                     [ OutlineStyle.hidden ]
                     [ "outlineStyle" ==> "hidden" ]
-                test
+                testCase
                     "Outline style dotted"
                     [ OutlineStyle.dotted ]
                     [ "outlineStyle" ==> "dotted" ]
-                test
+                testCase
                     "Outline style dashed"
                     [ OutlineStyle.dashed ]
                     [ "outlineStyle" ==> "dashed" ]
-                test
+                testCase
                     "Outline style solid"
                     [ OutlineStyle.solid ]
                     [ "outlineStyle" ==> "solid" ]
-                test
+                testCase
                     "Outline style double"
                     [ OutlineStyle.double ]
                     [ "outlineStyle" ==> "double" ]
-                test
+                testCase
                     "Outline style groove"
                     [ OutlineStyle.groove ]
                     [ "outlineStyle" ==> "groove" ]
-                test
+                testCase
                     "Outline style ridge"
                     [ OutlineStyle.ridge ]
                     [ "outlineStyle" ==> "ridge" ]
-                test
+                testCase
                     "Outline style inset"
                     [ OutlineStyle.inset ]
                     [ "outlineStyle" ==> "inset" ]
-                test
+                testCase
                     "Outline style outset"
                     [ OutlineStyle.outset ]
                     [ "outlineStyle" ==> "outset" ]
-                test
+                testCase
                     "Outline style none"
                     [ OutlineStyle.none ]
                     [ "outlineStyle" ==> "none" ]
-                test
+                testCase
                     "Outline style initial"
                     [ OutlineStyle.initial ]
                     [ "outlineStyle" ==> "initial" ]
-                test
+                testCase
                     "Outline style inherit"
                     [ OutlineStyle.inherit' ]
                     [ "outlineStyle" ==> "inherit" ]
-                test
+                testCase
                     "Outline style unset"
                     [ OutlineStyle.unset ]
                     [ "outlineStyle" ==> "unset" ]
-                test
+                testCase
                     "Outline color hex"
                     [OutlineColor.hex "f92525"]
                     ["outlineColor" ==> "#f92525"]
-                test
+                testCase
                     "Outline color rgb"
                     [OutlineColor.rgb 30 222 121]
                     ["outlineColor" ==> "rgb(30, 222, 121)"]
-                test
+                testCase
                     "Outline color blue"
                     [OutlineColor.blue]
                     ["outlineColor" ==> "#0000ff"]
-                test
+                testCase
                     "Outline color inherit"
                     [OutlineColor.inherit']
                     ["outlineColor" ==> "inherit"]
-                test
+                testCase
                     "Outline color initial"
                     [OutlineColor.initial]
                     ["outlineColor" ==> "initial"]
-                test
+                testCase
                     "Outline color unset"
                     [OutlineColor.unset ]
                     ["outlineColor" ==> "unset"]
-                test
+                testCase
                     "Outline Color Value"
                     [OutlineColor' (rgb 1 2 3)]
                     ["outlineColor"  ==> "rgb(1, 2, 3)"]

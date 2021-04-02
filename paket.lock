@@ -40,7 +40,6 @@ GROUP Fss
 RESTRICTION: == netstandard2.0
 NUGET
   remote: https://www.nuget.org/api/v2
-    Fable.AST (3.0)
     Fable.Browser.Blob (1.1)
       Fable.Core (>= 3.0)
       FSharp.Core (>= 4.6.2)
@@ -71,14 +70,6 @@ NUGET
       Fable.Browser.Dom (>= 2.0.1)
       Fable.Core (>= 3.1.5)
       FSharp.Core (>= 5.0)
-    Feliz (1.38)
-      Fable.Core (>= 3.1.5)
-      Fable.React (>= 7.0.1)
-      Feliz.CompilerPlugins (>= 1.4)
-      FSharp.Core (>= 4.7.2)
-    Feliz.CompilerPlugins (1.4)
-      Fable.AST (>= 3.0)
-      FSharp.Core (>= 4.7.2)
     FSharp.Core (5.0.1)
 
 GROUP Tests
@@ -110,11 +101,10 @@ NUGET
       Fable.Elmish (>= 3.0) - restriction: >= netstandard2.0
       Fable.React (>= 5.1) - restriction: >= netstandard2.0
       FSharp.Core (>= 4.6.2) - restriction: >= netstandard2.0
-    Fable.Mocha (2.9.1)
-      Fable.Core (>= 3.0) - restriction: >= netstandard2.0
-      FSharp.Core (>= 4.7) - restriction: >= netstandard2.0
     Fable.React (7.3)
       Fable.Browser.Dom (>= 2.0.1) - restriction: >= netstandard2.0
       Fable.Core (>= 3.1.5) - restriction: >= netstandard2.0
       FSharp.Core (>= 5.0) - restriction: >= netstandard2.0
+    Fet (1.0)
+      FSharp.Core (>= 5.0) - restriction: >= net50
     FSharp.Core (5.0.1)

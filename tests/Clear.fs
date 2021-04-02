@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,19 +9,19 @@ module Clear =
      let tests =
         testList "Clear"
             [
-                test
+                testCase
                     "Clear none"
                     [ Clear.none]
                     [ "clear" ==> "none" ]
-                test
+                testCase
                     "Clear inherit"
                     [ Clear.inherit']
                     [ "clear" ==> "inherit" ]
-                test
+                testCase
                     "Clear initial"
                     [ Clear.initial]
                     [ "clear" ==> "initial" ]
-                test
+                testCase
                     "Clear unset"
                     [ Clear.unset ]
                     [ "clear" ==> "unset" ]

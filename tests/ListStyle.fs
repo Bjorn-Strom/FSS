@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -15,111 +15,111 @@ module ListStyle =
     let tests =
         testList "List style"
             [
-                test
+                testCase
                     "List style None"
                     [ ListStyle.none ]
                     [ "listStyle" ==> "none" ]
-                test
+                testCase
                     "List style Initial"
                     [ ListStyle.initial ]
                     [ "listStyle" ==> "initial" ]
-                test
+                testCase
                     "List style Inherit"
                     [ ListStyle.inherit' ]
                     [ "listStyle" ==> "inherit" ]
-                test
+                testCase
                     "List style Unset"
                     [ ListStyle.unset ]
                     [ "listStyle" ==> "unset" ]
-                test
+                testCase
                     "List style image url"
                     [ ListStyleImage.url "foofoo.jpg" ]
                     [ "listStyleImage" ==> "url('foofoo.jpg')" ]
-                test
+                testCase
                     "List style image None"
                     [ ListStyleImage.none ]
                     [ "listStyleImage" ==> "none" ]
-                test
+                testCase
                     "List style image Initial"
                     [ ListStyleImage.initial ]
                     [ "listStyleImage" ==> "initial" ]
-                test
+                testCase
                     "List style image Inherit"
                     [ ListStyleImage.inherit' ]
                     [ "listStyleImage" ==> "inherit" ]
-                test
+                testCase
                     "List style image Unset"
                     [ ListStyleImage.unset ]
                     [ "listStyleImage" ==> "unset" ]
-                test
+                testCase
                     "List style position inside"
                     [ ListStylePosition.inside]
                     [ "listStylePosition" ==> "inside" ]
-                test
+                testCase
                     "List style position outside"
                     [ ListStylePosition.outside ]
                     [ "listStylePosition" ==> "outside" ]
-                test
+                testCase
                     "List style position Initial"
                     [ ListStylePosition.initial ]
                     [ "listStylePosition" ==> "initial" ]
-                test
+                testCase
                     "List style position Inherit"
                     [ ListStylePosition.inherit' ]
                     [ "listStylePosition" ==> "inherit" ]
-                test
+                testCase
                     "List style position Unset"
                     [ ListStylePosition.unset ]
                     [ "listStylePosition" ==> "unset" ]
-                test
+                testCase
                     "List style type Disc"
                     [ ListStyleType.disc ]
                     [ "listStyleType" ==> "disc" ]
-                test
+                testCase
                     "List style type Circle"
                     [ ListStyleType.circle ]
                     [ "listStyleType" ==> "circle" ]
-                test
+                testCase
                     "List style type Square"
                     [ ListStyleType.square ]
                     [ "listStyleType" ==> "square" ]
-                test
+                testCase
                     "List style type Decimal"
                     [ ListStyleType.decimal ]
                     [ "listStyleType" ==> "decimal" ]
-                test
+                testCase
                     "List style type Georgian"
                     [ ListStyleType.georgian ]
                     [ "listStyleType" ==> "georgian" ]
-                test
+                testCase
                     "List style type TradChineseInformal"
                     [ ListStyleType.tradChineseInformal ]
                     [ "listStyleType" ==> "trad-chinese-informal" ]
-                test
+                testCase
                     "List style type Kannada"
                     [ ListStyleType.kannada ]
                     [ "listStyleType" ==> "kannada" ]
-                test
+                testCase
                     "List style type string"
                     [ ListStyleType' (FssTypes.CssString "-") ]
                     [ "listStyleType" ==> "'-'" ]
-                test
+                testCase
                     "List style type custom"
                     [ ListStyleType' sampleCounterStyle ]
                     [ "listStyleType" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
-                test
+                testCase
                     "List style type None"
                     [ ListStyleType.none ]
                     [ "listStyleType" ==> "none" ]
-                test
+                testCase
                     "List style type Initial"
                     [ ListStyleType.initial ]
                     [ "listStyleType" ==> "initial" ]
-                test
+                testCase
                     "List style type Inherit"
                     [ ListStyleType.inherit' ]
                     [ "listStyleType" ==> "inherit" ]
-                test
+                testCase
                     "List style type Unset"
                     [ ListStyleType.unset ]
                     [ "listStyleType" ==> "unset" ]

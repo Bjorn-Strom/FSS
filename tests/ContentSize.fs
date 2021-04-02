@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,75 +9,75 @@ module ContentSize =
     let tests =
         testList "Content size"
             [
-                test
+                testCase
                     "Width px"
                     [ Width' (px 100) ]
                     ["width" ==> "100px"]
-                test
+                testCase
                     "Width percent"
                     [ Width' (pct 25) ]
                     ["width" ==> "25%"]
-                test
+                testCase
                     "Width max content"
                     [ Width.maxContent ]
                     ["width" ==> "max-content"]
-                test
+                testCase
                     "Width min content"
                     [ Width.minContent ]
                     ["width" ==> "min-content"]
-                test
+                testCase
                     "Width fit content"
                     [ Width.fitContent (px 100) ]
                     ["width" ==> "fit-content(100px)"]
-                test
+                testCase
                     "Width auto"
                     [ Width.auto ]
                     ["width" ==> "auto"]
-                test
+                testCase
                     "Width initial"
                     [ Width.initial ]
                     ["width" ==> "initial"]
-                test
+                testCase
                     "Width inherit"
                     [ Width.inherit' ]
                     ["width" ==> "inherit"]
-                test
+                testCase
                     "Width unset"
                     [ Width.unset ]
                     ["width" ==> "unset"]
-                test
+                testCase
                     "Height px"
                     [ Height' (px 100) ]
                     ["height" ==> "100px"]
-                test
+                testCase
                     "Height percent"
                     [ Height' (pct 25) ]
                     ["height" ==> "25%"]
-                test
+                testCase
                     "Height max content"
                     [ Height.maxContent ]
                     ["height" ==> "max-content"]
-                test
+                testCase
                     "Height min content"
                     [ Height.minContent ]
                     ["height" ==> "min-content"]
-                test
+                testCase
                     "Height fit content"
                     [ Height.fitContent (px 100) ]
                     ["height" ==> "fit-content(100px)"]
-                test
+                testCase
                     "Height auto"
                     [ Height.auto ]
                     ["height" ==> "auto"]
-                test
+                testCase
                     "Height initial"
                     [ Height.initial ]
                     ["height" ==> "initial"]
-                test
+                testCase
                     "Height inherit"
                     [ Height.inherit' ]
                     ["height" ==> "inherit"]
-                test
+                testCase
                     "Height unset"
                     [ Height.unset ]
                     ["height" ==> "unset"]

@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,19 +9,19 @@ module AspectRatio =
      let tests =
         testList "AspectRatio"
             [
-                test
+                testCase
                     "AspectRatio"
                     [ AspectRatio.value(16, 9) ]
                     [ "aspectRatio" ==> "16 / 9" ]
-                test
+                testCase
                     "AspectRatio inherit"
                     [ AspectRatio.inherit']
                     [ "aspectRatio" ==> "inherit" ]
-                test
+                testCase
                     "AspectRatio initial"
                     [ AspectRatio.initial]
                     [ "aspectRatio" ==> "initial" ]
-                test
+                testCase
                     "AspectRatio unset"
                     [ AspectRatio.unset ]
                     [ "aspectRatio" ==> "unset" ]

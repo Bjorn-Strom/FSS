@@ -22,4 +22,4 @@ group Tests
     nuget FSharp.Core
     nuget Fable.Elmish.React
     nuget Fable.React
-    nuget Fable.Mocha
+    nuget Fet

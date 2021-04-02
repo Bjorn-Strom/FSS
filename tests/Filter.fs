@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Fss
 open Utils
@@ -9,131 +9,131 @@ module Filter =
      let tests =
         testList "Filter"
             [
-                test
+                testCase
                     "Filter Url"
                     [ Filters [ Filter.url "someFilter" ] ]
                     [ "filter" ==> "url(\"someFilter\")" ]
-                test
+                testCase
                     "Filter blur"
                     [ Filters [ Filter.blur 50 ] ]
                     [ "filter" ==> "blur(50px)" ]
-                test
+                testCase
                     "Filter brightness"
                     [ Filters [ Filter.brightness <| pct 40 ] ]
                     [ "filter" ==> "brightness(40%)" ]
-                test
+                testCase
                     "Filter contras"
                     [ Filters [ Filter.contrast <| pct 40 ] ]
                     [ "filter" ==> "contrast(40%)" ]
-                test
+                testCase
                     "Filter drop shadow"
                     [ Filters [ Filter.dropShadow 16 16 20 FssTypes.Color.red (pct 5)  ] ]
                     [ "filter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
-                test
+                testCase
                     "Filter grayscale"
                     [ Filters [ Filter.grayscale <| pct 50 ] ]
                     [ "filter" ==> "grayscale(50%)" ]
-                test
+                testCase
                     "Filter hue-rotate"
                     [ Filters [ Filter.hueRotate 90 ] ]
                     [ "filter" ==> "hue-rotate(90deg)" ]
-                test
+                testCase
                     "Filter invert"
                     [ Filters [ Filter.invert <| pct 75 ] ]
                     [ "filter" ==> "invert(75%)" ]
-                test
+                testCase
                     "Filter opacity"
                     [ Filters [ Filter.opacity <| pct 25 ] ]
                     [ "filter" ==> "opacity(25%)" ]
-                test
+                testCase
                     "Filter saturate"
                     [ Filters [ Filter.saturate <| pct 30 ] ]
                     [ "filter" ==> "saturate(30%)" ]
-                test
+                testCase
                     "Filter sepia"
                     [ Filters [ Filter.sepia <| pct 60 ] ]
                     [ "filter" ==> "sepia(60%)" ]
-                test
+                testCase
                     "Filter multiple"
                     [ Filters  [ Filter.contrast <| pct 175; Filter.brightness <| pct 3  ] ]
                     [ "filter" ==> "contrast(175%) brightness(3%)" ]
-                test
+                testCase
                     "Filter none"
                     [ Filter.none ]
                     [ "filter" ==> "none" ]
-                test
+                testCase
                     "Filter inherit"
                     [ Filter.inherit' ]
                     [ "filter" ==> "inherit" ]
-                test
+                testCase
                     "Filter initial"
                     [ Filter.initial ]
                     [ "filter" ==> "initial" ]
-                test
+                testCase
                     "Filter unset"
                     [ Filter.unset ]
                     [ "filter" ==> "unset" ]
-                test
+                testCase
                     "BackdropFilter Url"
                     [ BackdropFilters [ Filter.url "someFilter" ] ]
                     [ "backdropFilter" ==> "url(\"someFilter\")" ]
-                test
+                testCase
                     "BackdropFilter blur"
                     [ BackdropFilters [ Filter.blur 50 ] ]
                     [ "backdropFilter" ==> "blur(50px)" ]
-                test
+                testCase
                     "BackdropFilter brightness"
                     [ BackdropFilters [ Filter.brightness <| pct 40 ] ]
                     [ "backdropFilter" ==> "brightness(40%)" ]
-                test
+                testCase
                     "BackdropFilter contrast"
                     [ BackdropFilters [ Filter.contrast <| pct 40 ] ]
                     [ "backdropFilter" ==> "contrast(40%)" ]
-                test
+                testCase
                     "BackdropFilter drop shadow"
                     [ BackdropFilters [ Filter.dropShadow 16 16 20 FssTypes.Color.red (pct 5)  ] ]
                     [ "backdropFilter" ==> "drop-shadow(16px 16px 20px #ff0000) invert(5%)" ]
-                test
+                testCase
                     "BackdropFilter grayscale"
                     [ BackdropFilters [ Filter.grayscale <| pct 50 ] ]
                     [ "backdropFilter" ==> "grayscale(50%)" ]
-                test
+                testCase
                     "BackdropFilter hue-rotate"
                     [ BackdropFilters [ Filter.hueRotate 90 ] ]
                     [ "backdropFilter" ==> "hue-rotate(90deg)" ]
-                test
+                testCase
                     "BackdropFilter invert"
                     [ BackdropFilters [ Filter.invert <| pct 75 ] ]
                     [ "backdropFilter" ==> "invert(75%)" ]
-                test
+                testCase
                     "BackdropFilter opacity"
                     [ BackdropFilters [ Filter.opacity <| pct 25 ] ]
                     [ "backdropFilter" ==> "opacity(25%)" ]
-                test
+                testCase
                     "BackdropFilter saturate"
                     [ BackdropFilters [ Filter.saturate <| pct 30 ] ]
                     [ "backdropFilter" ==> "saturate(30%)" ]
-                test
+                testCase
                     "BackdropFilter sepia"
                     [ BackdropFilters [ Filter.sepia <| pct 60 ] ]
                     [ "backdropFilter" ==> "sepia(60%)" ]
-                test
+                testCase
                     "BackdropFilter multiple"
                     [ BackdropFilters  [ Filter.contrast <| pct 175; Filter.brightness <| pct 3  ] ]
                     [ "backdropFilter" ==> "contrast(175%) brightness(3%)" ]
-                test
+                testCase
                     "BackdropFilter none"
                     [ BackdropFilter.none ]
                     [ "backdropFilter" ==> "none" ]
-                test
+                testCase
                     "BackdropFilter inherit"
                     [ BackdropFilter.inherit' ]
                     [ "backdropFilter" ==> "inherit" ]
-                test
+                testCase
                     "BackdropFilter initial"
                     [ BackdropFilter.initial ]
                     [ "backdropFilter" ==> "initial" ]
-                test
+                testCase
                     "BackdropFilter unset"
                     [ BackdropFilter.unset ]
                     [ "backdropFilter" ==> "unset" ]

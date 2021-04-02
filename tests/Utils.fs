@@ -1,33 +1,33 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
 open Fable.Core.JsInterop
 open Fss
 open Fss.Media
+open Fet
 
 module Utils =
-    let test (testName: string) (attributeList: FssTypes.CssProperty list) (correct: (string * obj) list) =
-        testCase testName <| fun _ ->
+    let testCase (testName: string) (attributeList: FssTypes.CssProperty list) (correct: (string * obj) list) =
+        test testName <| fun _ ->
             let actual =
                 attributeList
                 |> List.map FssTypes.masterTypeHelpers.CssValue
 
-            Expect.equal actual correct testName
+            Expect.equal actual correct
 
     let testMedia (testName: string) (featureList: FssTypes.Media.Feature list) (attributeList: FssTypes.CssProperty list) (correct: (string * obj)) =
-        testCase testName <| fun _ ->
+        test testName <| fun _ ->
             let actual = mediaFeature featureList |> sprintf "@media %s" ==> (attributeList |> List.map FssTypes.masterTypeHelpers.CssValue)
 
-            Expect.equal (actual.ToString()) (correct.ToString()) testName
+            Expect.equal (actual.ToString()) (correct.ToString())
 
     let testMediaFor (testName: string) device (featureList: FssTypes.Media.Feature list) (attributeList: FssTypes.CssProperty list) (correct: (string * obj)) =
-        testCase testName <| fun _ ->
+        test testName <| fun _ ->
             let actual = sprintf "@media %s %s" (deviceLabel device) (mediaFeature featureList)  ==> (attributeList |> List.map FssTypes.masterTypeHelpers.CssValue)
 
-            Expect.equal (actual.ToString()) (correct.ToString()) testName
+            Expect.equal (actual.ToString()) (correct.ToString())
 
     let testNested (testName: string) (attributeList: FssTypes.CssProperty list) (correct: (string * obj) list) =
-        testCase testName <| fun _ ->
+        test testName <| fun _ ->
             let actual =
                 attributeList
                 |> List.map FssTypes.masterTypeHelpers.CssValue
@@ -39,11 +39,11 @@ module Utils =
                         |> String.concat ","
                     x ==> properY)
 
-            Expect.equal actual correct testName
+            Expect.equal actual correct
 
     let testString (testName: string) (actual: string) (expected: string) =
-        testCase testName <| fun _ ->
-            Expect.equal actual expected testName
+        test testName <| fun () ->
+            Expect.equal actual expected
 
     let testKeyframes (testName: string) (actual: Keyframes.KeyframeAttribute list) (expected: string list) =
         let actual =
@@ -57,5 +57,5 @@ module Utils =
                               .Replace("}", "")
                               .Replace(":", ", ")))
 
-        testCase testName <| fun _ ->
-            Expect.equal actual expected testName
+        test testName <| fun _ ->
+            Expect.equal actual expected

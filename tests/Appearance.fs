@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,275 +9,275 @@ module Appearance =
     let tests =
         testList "Appearance"
             [
-                test
+                testCase
                     "Appearance push button"
                     [Appearance.pushButton]
                     ["appearance" ==> "push-button"]
-                test
+                testCase
                     "Appearance square button"
                     [Appearance.squareButton]
                     ["appearance" ==> "square-button"]
-                test
+                testCase
                     "Appearance button"
                     [Appearance.button]
                     ["appearance" ==> "button"]
-                test
+                testCase
                     "Appearance button bevel"
                     [Appearance.buttonBevel]
                     ["appearance" ==> "button-bevel"]
-                test
+                testCase
                     "Appearance list-box"
                     [Appearance.listbox]
                     ["appearance" ==> "listbox"]
-                test
+                testCase
                     "Appearance list-item"
                     [Appearance.listitem]
                     ["appearance" ==> "listitem"]
-                test
+                testCase
                     "Appearance menulist"
                     [Appearance.menulist]
                     ["appearance" ==> "menulist"]
-                test
+                testCase
                     "Appearance menulist-button"
                     [Appearance.menulistButton]
                     ["appearance" ==> "menulist-button"]
-                test
+                testCase
                     "Appearance menulist-text"
                     [Appearance.menulistText]
                     ["appearance" ==> "menulist-text"]
-                test
+                testCase
                     "Appearance menulist-textfield"
                     [Appearance.menulistTextfield]
                     ["appearance" ==> "menulist-textfield"]
-                test
+                testCase
                     "Appearance menupopup"
                     [Appearance.menupopup]
                     ["appearance" ==> "menupopup"]
-                test
+                testCase
                     "Appearance scrollbarbutton-up"
                     [Appearance.scrollbarbuttonUp]
                     ["appearance" ==> "scrollbarbutton-up"]
-                test
+                testCase
                     "Appearance scrollbarbutton down"
                     [Appearance.scrollbarbuttonDown]
                     ["appearance" ==> "scrollbarbutton-down"]
-                test
+                testCase
                     "Appearance scrollbarbutton left"
                     [Appearance.scrollbarbuttonLeft]
                     ["appearance" ==> "scrollbarbutton-left"]
-                test
+                testCase
                     "Appearance scrollbarbutton"
                     [Appearance.scrollbarbuttonRight]
                     ["appearance" ==> "scrollbarbutton-right"]
-                test
+                testCase
                     "Appearance scrollbartrack-horizontal"
                     [Appearance.scrollbartrackHorizontal]
                     ["appearance" ==> "scrollbartrack-horizontal"]
-                test
+                testCase
                     "Appearance scrollbartrack-vertical"
                     [Appearance.scrollbartrackVertical]
                     ["appearance" ==> "scrollbartrack-vertical"]
-                test
+                testCase
                     "Appearance scrollbarthumb-horizontal"
                     [Appearance.scrollbarthumbHorizontal]
                     ["appearance" ==> "scrollbarthumb-horizontal"]
-                test
+                testCase
                     "Appearance scrollbarthumb-vertical"
                     [Appearance.scrollbarthumbVertical]
                     ["appearance" ==> "scrollbarthumb-vertical"]
-                test
+                testCase
                     "Appearance scrollbargripper-horizontal"
                     [Appearance.scrollbargripperHorizontal]
                     ["appearance" ==> "scrollbargripper-horizontal"]
-                test
+                testCase
                     "Appearance scrollbargripper-vertical"
                     [Appearance.scrollbargripperVertical]
                     ["appearance" ==> "scrollbargripper-vertical"]
-                test
+                testCase
                     "Appearance slider-horizontal"
                     [Appearance.sliderHorizontal]
                     ["appearance" ==> "slider-horizontal"]
-                test
+                testCase
                     "Appearance slider-vertical"
                     [Appearance.sliderVertical]
                     ["appearance" ==> "slider-vertical"]
-                test
+                testCase
                     "Appearance sliderthumb-horizontal"
                     [Appearance.sliderthumbHorizontal]
                     ["appearance" ==> "sliderthumb-horizontal"]
-                test
+                testCase
                     "Appearance sliderthumb-vertical"
                     [Appearance.sliderthumbVertical]
                     ["appearance" ==> "sliderthumb-vertical"]
-                test
+                testCase
                     "Appearance caret"
                     [Appearance.caret]
                     ["appearance" ==> "caret"]
-                test
+                testCase
                     "Appearance searchfield"
                     [Appearance.searchfield]
                     ["appearance" ==> "searchfield"]
-                test
+                testCase
                     "Appearance searchfield-decoration"
                     [Appearance.searchfieldDecoration]
                     ["appearance" ==> "searchfield-decoration"]
-                test
+                testCase
                     "Appearance searchfield-results-decoration"
                     [Appearance.searchfieldResultsDecoration]
                     ["appearance" ==> "searchfield-results-decoration"]
-                test
+                testCase
                     "Appearance searchfield-results-button"
                     [Appearance.searchfieldResultsButton]
                     ["appearance" ==> "searchfield-results-button"]
-                test
+                testCase
                     "Appearance searchfield-cancel-button"
                     [Appearance.searchfieldCancelButton]
                     ["appearance" ==> "searchfield-cancel-button"]
-                test
+                testCase
                     "Appearance textfield"
                     [Appearance.textfield]
                     ["appearance" ==> "textfield"]
-                test
+                testCase
                     "Appearance textarea"
                     [Appearance.textarea]
                     ["appearance" ==> "textarea"]
-                test
+                testCase
                     "Appearance checkbox"
                     [Appearance.checkbox]
                     ["appearance" ==> "checkbox"]
-                test
+                testCase
                     "Appearance checkbox-container"
                     [Appearance.checkboxContainer]
                     ["appearance" ==> "checkbox-container"]
-                test
+                testCase
                     "Appearance checkbox-small"
                     [Appearance.checkboxSmall]
                     ["appearance" ==> "checkbox-small"]
-                test
+                testCase
                     "Appearance dialog"
                     [Appearance.dialog]
                     ["appearance" ==> "dialog"]
-                test
+                testCase
                     "Appearance menuitem"
                     [Appearance.menuitem]
                     ["appearance" ==> "menuitem"]
-                test
+                testCase
                     "Appearance progressbar"
                     [Appearance.progressbar]
                     ["appearance" ==> "progressbar"]
-                test
+                testCase
                     "Appearance radio"
                     [Appearance.radio]
                     ["appearance" ==> "radio"]
-                test
+                testCase
                     "Appearance radio-container"
                     [Appearance.radioContainer]
                     ["appearance" ==> "radio-container"]
-                test
+                testCase
                     "Appearance radio-small"
                     [Appearance.radioSmall]
                     ["appearance" ==> "radio-small"]
-                test
+                testCase
                     "Appearance "
                     [Appearance.resizer]
                     ["appearance" ==> "resizer"]
-                test
+                testCase
                     "Appearance scrollbar"
                     [Appearance.scrollbar]
                     ["appearance" ==> "scrollbar"]
-                test
+                testCase
                     "Appearance separator"
                     [Appearance.separator]
                     ["appearance" ==> "separator"]
-                test
+                testCase
                     "Appearance statusbar"
                     [Appearance.statusbar]
                     ["appearance" ==> "statusbar"]
-                test
+                testCase
                     "Appearance tab"
                     [Appearance.tab]
                     ["appearance" ==> "tab"]
-                test
+                testCase
                     "Appearance tabpanels"
                     [Appearance.tabpanels]
                     ["appearance" ==> "tabpanels"]
-                test
+                testCase
                     "Appearance textfield-multiline"
                     [Appearance.textfieldMultiline]
                     ["appearance" ==> "textfield-multiline"]
-                test
+                testCase
                     "Appearance toolbar"
                     [Appearance.toolbar]
                     ["appearance" ==> "toolbar"]
-                test
+                testCase
                     "Appearance toolbarbutton"
                     [Appearance.toolbarbutton]
                     ["appearance" ==> "toolbarbutton"]
-                test
+                testCase
                     "Appearance toolbox"
                     [Appearance.toolbox]
                     ["appearance" ==> "toolbox"]
-                test
+                testCase
                     "Appearance moz-mac-unified-toolbar"
                     [Appearance.mozMacUnifiedToolbar]
                     ["appearance" ==> "moz-mac-unified-toolbar"]
-                test
+                testCase
                     "Appearance moz-win-borderless-glass"
                     [Appearance.mozWinBorderlessGlass]
                     ["appearance" ==> "moz-win-borderless-glass"]
-                test
+                testCase
                     "Appearance moz-win-browsertabbar-toolbox"
                     [Appearance.mozWinBrowsertabbarToolbox]
                     ["appearance" ==> "moz-win-browsertabbar-toolbox"]
-                test
+                testCase
                     "Appearance moz-win-communications-toolbox"
                     [Appearance.mozWinCommunicationsToolbox]
                     ["appearance" ==> "moz-win-communications-toolbox"]
-                test
+                testCase
                     "Appearance moz-win-glass"
                     [Appearance.mozWinGlass]
                     ["appearance" ==> "moz-win-glass"]
-                test
+                testCase
                     "Appearance moz-win-media-toolbox"
                     [Appearance.mozWinMediaToolbox]
                     ["appearance" ==> "moz-win-media-toolbox"]
-                test
+                testCase
                     "Appearance tooltip"
                     [Appearance.tooltip]
                     ["appearance" ==> "tooltip"]
-                test
+                testCase
                     "Appearance treeheadercell"
                     [Appearance.treeheadercell]
                     ["appearance" ==> "treeheadercell"]
-                test
+                testCase
                     "Appearance treeheadersortarrow"
                     [Appearance.treeheadersortarrow]
                     ["appearance" ==> "treeheadersortarrow"]
-                test
+                testCase
                     "Appearance treeitem"
                     [Appearance.treeitem]
                     ["appearance" ==> "treeitem"]
-                test
+                testCase
                     "Appearance treetwisty"
                     [Appearance.treetwisty]
                     ["appearance" ==> "treetwisty"]
-                test
+                testCase
                     "Appearance treetwistyopen"
                     [Appearance.treetwistyopen]
                     ["appearance" ==> "treetwistyopen"]
-                test
+                testCase
                     "Appearance treeview"
                     [Appearance.treeview]
                     ["appearance" ==> "treeview"]
-                test
+                testCase
                     "Appearance window"
                     [Appearance.window]
                     ["appearance" ==> "window"]
-                test
+                testCase
                     "Apperance none"
                     [Appearance.none]
                     ["appearance" ==> "none"]
-                test
+                testCase
                     "Apperance auto"
                     [Appearance.auto]
                     ["appearance" ==> "auto"]

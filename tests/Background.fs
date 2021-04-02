@@ -1,371 +1,371 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
 open Fable.Core.JsInterop
 open Utils
 open Fss
+open Fet
 
 module Background =
      let tests =
         testList "Background"
             [
-                test
+                testCase
                     "background color"
                     [ BackgroundColor.red ]
                     [ "backgroundColor" ==> "#ff0000"]
-                test
+                testCase
                     "Background Color Value"
                     [BackgroundColor' (rgb 1 2 3)]
                     ["backgroundColor"  ==> "rgb(1, 2, 3)"]
-                test
+                testCase
                     "background image"
                     [ BackgroundImage.url "image.png" ]
                     [ "backgroundImage" ==> "url(image.png)" ]
-                test
+                testCase
                     "background as linear gradient"
                     [ BackgroundImage.linearGradient (deg 45., [ FssTypes.Color.red, pct 0; FssTypes.Color.blue, pct 100 ])]
                     ["backgroundImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)"]
-                test
+                testCase
                     "background as circular radial gradient"
                     [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
-                test
+                testCase
                     "background as circular radial gradient"
                     [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
-                test
+                testCase
                     "background as circular radial gradient"
                     [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
-                test
+                testCase
                     "background as circular radial gradient"
                     [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(circle farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
-                test
+                testCase
                     "background as circular radial gradient"
                     [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
-                test
+                testCase
                     "background as circular radial gradient"
                     [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse closest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
-                test
+                testCase
                     "background as circular radial gradient"
                     [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestSide, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-side at 50% 50%, #e66465 0%, #9198e5 100%)"]
-                test
+                testCase
                     "background as circular radial gradient"
                     [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ FssTypes.Color.hex "e66465", pct 0; FssTypes.Color.hex "9198e5", pct 100 ])]
                     [ "backgroundImage" ==> "radial-gradient(ellipse farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%)"]
-                test
+                testCase
                     "background as conic gradient"
                     [BackgroundImage.conicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.red, deg 0.; FssTypes.Color.orange, deg 90.; FssTypes.Color.yellow, deg 180.; FssTypes.Color.green, deg 270.; FssTypes.Color.blue, deg 360.; ])]
                     [ "backgroundImage" ==> "conic-Gradient(from 0.00deg at 50% 50%, #ff0000 0.00deg, #ffa500 90.00deg, #ffff00 180.00deg, #008000 270.00deg, #0000ff 360.00deg)"]
-                test
+                testCase
                     "background as conic gradient"
                     [BackgroundImage.conicGradient(rad 3.1416, pct 10, pct 50, [ hex "#e66465", deg 0.; hex "#9198e5", deg 360. ])]
                     [ "backgroundImage" ==> "conic-Gradient(from 3.1416rad at 10% 50%, #e66465 0.00deg, #9198e5 360.00deg)"]
-                test
+                testCase
                     "background as repeating conic gradient"
                     [ BackgroundImage.repeatingConicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.white, pct 0; FssTypes.Color.white, pct 25; FssTypes.Color.black, pct 25; FssTypes.Color.black, pct 50; ]) ]
                     [ "backgroundImage" ==> "repeating-conic-Gradient(from 0.00deg at 50% 50%, #ffffff 0%, #ffffff 25%, #000000 25%, #000000 50%)"]
-                test
+                testCase
                     "background position to top"
                     [ BackgroundPosition.top ]
                     [ "backgroundPosition" ==> "top"]
-                test
+                testCase
                     "background position to bottom"
                     [ BackgroundPosition.bottom]
                     [ "backgroundPosition" ==> "bottom" ]
-                test
+                testCase
                     "background position to left"
                     [ BackgroundPosition.left]
                     [ "backgroundPosition" ==> "left" ]
-                test
+                testCase
                     "background position to right"
                     [ BackgroundPosition.right]
                     [ "backgroundPosition" ==> "right" ]
-                test
+                testCase
                     "background position to center"
                     [ BackgroundPosition.center]
                     [ "backgroundPosition" ==> "center" ]
-                test
+                testCase
                     "background position with pixels"
                     [ BackgroundPosition' (px 50)]
                     [ "backgroundPosition" ==> "50px" ]
-                test
+                testCase
                     "background position with percent"
                     [ BackgroundPosition' (pct 100)]
                     [ "backgroundPosition" ==> "100%" ]
-                test
+                testCase
                     "background position to initial"
                     [ BackgroundPosition.initial]
                     [ "backgroundPosition" ==> "initial" ]
-                test
+                testCase
                     "background position to inherit"
                     [ BackgroundPosition.inherit']
                     [ "backgroundPosition" ==> "inherit" ]
-                test
+                testCase
                     "background position to unset"
                     [ BackgroundPosition.unset]
                     [ "backgroundPosition" ==> "unset" ]
-                test
+                testCase
                     "background origin to border-box"
                     [ BackgroundOrigin.borderBox]
                     [ "backgroundOrigin" ==> "border-box" ]
-                test
+                testCase
                     "background origin to padding-box"
                     [ BackgroundOrigin.paddingBox]
                     [ "backgroundOrigin" ==> "padding-box" ]
-                test
+                testCase
                     "background origin to content-box"
                     [ BackgroundOrigin.contentBox]
                     ["backgroundOrigin" ==> "content-box"]
-                test
+                testCase
                     "background origin to inherit"
                     [ BackgroundOrigin.inherit' ]
                     ["backgroundOrigin" ==> "inherit"]
-                test
+                testCase
                     "background origin to initial"
                     [ BackgroundOrigin.initial ]
                     ["backgroundOrigin" ==> "initial"]
-                test
+                testCase
                     "background origin to unset"
                     [ BackgroundOrigin.unset ]
                     ["backgroundOrigin" ==> "unset"]
-                test
+                testCase
                     "background clip to text"
                     [ BackgroundClip.text]
                     [ "backgroundClip" ==> "text" ]
-                test
+                testCase
                     "background clip to BorderBox"
                     [ BackgroundClip.borderBox ]
                     ["backgroundClip" ==> "border-box" ]
-                test
+                testCase
                     "background clip to PaddingBox"
                     [ BackgroundClip.paddingBox]
                     [ "backgroundClip" ==> "padding-box" ]
-                test
+                testCase
                     "background clip to ContentBox"
                     [ BackgroundClip.contentBox]
                     ["backgroundClip" ==> "content-box" ]
-                test
+                testCase
                     "background clip to inherit"
                     [ BackgroundClip.inherit' ]
                     ["backgroundClip" ==> "inherit" ]
-                test
+                testCase
                     "background clip to Initial"
                     [ BackgroundClip.initial]
                     [ "backgroundClip" ==> "initial" ]
-                test
+                testCase
                     "background clip to Unset"
                     [ BackgroundClip.unset ]
                     [ "backgroundClip" ==> "unset" ]
-                test
+                testCase
                     "background repeat repeat-x"
                     [ BackgroundRepeat.repeatX ]
                     [ "backgroundRepeat" ==> "repeat-x" ]
-                test
+                testCase
                     "background repeat repeat-y"
                     [ BackgroundRepeat.repeatY ]
                     [ "backgroundRepeat" ==> "repeat-y" ]
-                test
+                testCase
                     "background repeat repeat"
                     [ BackgroundRepeat.repeat]
                     [ "backgroundRepeat" ==> "repeat" ]
-                test
+                testCase
                     "background repeat space"
                     [ BackgroundRepeat.space]
                     [ "backgroundRepeat" ==> "space" ]
-                test
+                testCase
                     "background repeat round"
                     [ BackgroundRepeat.round]
                     [ "backgroundRepeat" ==> "round" ]
-                test
+                testCase
                     "background repeat no repeat"
                     [ BackgroundRepeat.noRepeat]
                     [ "backgroundRepeat" ==> "no-repeat" ]
-                test
+                testCase
                     "background repeat to inherit"
                     [ BackgroundRepeat.inherit' ]
                     [ "backgroundRepeat" ==> "inherit" ]
-                test
+                testCase
                     "background repeat to Initial"
                     [ BackgroundRepeat.initial]
                     [ "backgroundRepeat" ==> "initial" ]
-                test
+                testCase
                     "background repeat to Unset"
                     [ BackgroundRepeat.unset ]
                     [ "backgroundRepeat" ==> "unset" ]
-                test
+                testCase
                     "background repeats horizontal and vertical - repeat space"
                     [ BackgroundRepeat.value(FssTypes.Background.Repeat, FssTypes.Background.Space) ]
                     [ "backgroundRepeat" ==> "repeat space" ]
-                test
+                testCase
                     "background size cover"
                     [ BackgroundSize.cover]
                     [ "backgroundSize" ==> "cover"]
-                test
+                testCase
                     "background size contain"
                     [ BackgroundSize.contain]
                     [ "backgroundSize" ==> "contain"]
-                test
+                testCase
                     "background size percent"
                     [ BackgroundSize' (pct 100)]
                     [ "backgroundSize" ==> "100%"]
-                test
+                testCase
                     "background size em"
                     [ BackgroundSize' (em 3.0)]
                     [ "backgroundSize" ==> "3.0em"]
-                test
+                testCase
                     "background size px"
                     [ BackgroundSize' (px 10)]
                     [ "backgroundSize" ==> "10px"]
-                test
+                testCase
                     "background size auto"
                     [ BackgroundSize.auto ]
                     [ "backgroundSize" ==> "auto"]
-                test
+                testCase
                     "background attachment scroll"
                     [ BackgroundAttachment.scroll]
                     [ "backgroundAttachment" ==> "scroll" ]
-                test
+                testCase
                     "background attachment fixed"
                     [ BackgroundAttachment.fixed']
                     [ "backgroundAttachment" ==> "fixed" ]
-                test
+                testCase
                     "background attachment local"
                     [ BackgroundAttachment.local]
                     [ "backgroundAttachment" ==> "local" ]
-                test
+                testCase
                     "background attachment inherit"
                     [ BackgroundAttachment.inherit' ]
                     [ "backgroundAttachment" ==> "inherit" ]
-                test
+                testCase
                     "background attachment initial"
                     [ BackgroundAttachment.initial ]
                     [ "backgroundAttachment" ==> "initial" ]
-                test
+                testCase
                     "background attachment unset"
                     [ BackgroundAttachment.unset ]
                     [ "backgroundAttachment" ==> "unset" ]
-                test
+                testCase
                     "Background blend mode Multiply"
                     [ BackgroundBlendMode.multiply]
                     ["backgroundBlendMode" ==> "multiply"]
-                test
+                testCase
                     "Background blend mode Screen"
                     [ BackgroundBlendMode.screen]
                     ["backgroundBlendMode" ==> "screen"]
-                test
+                testCase
                     "Background blend mode Overlay"
                     [ BackgroundBlendMode.overlay]
                     ["backgroundBlendMode" ==> "overlay"]
-                test
+                testCase
                     "Background blend mode Darken"
                     [ BackgroundBlendMode.darken]
                     ["backgroundBlendMode" ==> "darken"]
-                test
+                testCase
                     "Background blend mode Lighten"
                     [ BackgroundBlendMode.lighten]
                     ["backgroundBlendMode" ==> "lighten"]
-                test
+                testCase
                     "Background blend mode ColorDodge"
                     [ BackgroundBlendMode.colorDodge]
                     ["backgroundBlendMode" ==> "color-dodge"]
-                test
+                testCase
                     "Background blend mode ColorBurn"
                     [ BackgroundBlendMode.colorBurn]
                     ["backgroundBlendMode" ==> "color-burn"]
-                test
+                testCase
                     "Background blend mode HardLight"
                     [ BackgroundBlendMode.hardLight]
                     ["backgroundBlendMode" ==> "hard-light"]
-                test
+                testCase
                     "Background blend mode SoftLight"
                     [ BackgroundBlendMode.softLight]
                     ["backgroundBlendMode" ==> "soft-light"]
-                test
+                testCase
                     "Background blend mode Difference"
                     [ BackgroundBlendMode.difference]
                     ["backgroundBlendMode" ==> "difference"]
-                test
+                testCase
                     "Background blend mode Exclusion"
                     [ BackgroundBlendMode.exclusion]
                     ["backgroundBlendMode" ==> "exclusion"]
-                test
+                testCase
                     "Background blend mode Hue"
                     [ BackgroundBlendMode.hue]
                     ["backgroundBlendMode" ==> "hue"]
-                test
+                testCase
                     "Background blend mode Saturation"
                     [ BackgroundBlendMode.saturation]
                     ["backgroundBlendMode" ==> "saturation"]
-                test
+                testCase
                     "Background blend mode Color"
                     [ BackgroundBlendMode.color]
                     ["backgroundBlendMode" ==> "color"]
-                test
+                testCase
                     "Background blend mode Luminosity"
                     [ BackgroundBlendMode.luminosity]
                     ["backgroundBlendMode" ==> "luminosity"]
-                test
+                testCase
                     "background blend mode multiple"
                     [ BackgroundBlendMode.values [ FssTypes.Background.Hue; FssTypes.Background.Saturation; FssTypes.Background.Exclusion ] ]
                     [ "backgroundBlendMode" ==> "hue, saturation, exclusion" ]
-                test
+                testCase
                     "background blend mode normal"
                     [ BackgroundBlendMode.normal ]
                     [ "backgroundBlendMode" ==> "normal" ]
-                test
+                testCase
                     "background blend mode inherit"
                     [ BackgroundBlendMode.inherit' ]
                     [ "backgroundBlendMode" ==> "inherit" ]
-                test
+                testCase
                     "background blend mode initial"
                     [ BackgroundBlendMode.initial ]
                     [ "backgroundBlendMode" ==> "initial" ]
-                test
+                testCase
                     "background blend mode unset"
                     [ BackgroundBlendMode.unset ]
                     [ "backgroundBlendMode" ==> "unset" ]
-                test
+                testCase
                     "isolation isolate"
                     [ Isolation.isolate ]
                     [ "isolation" ==> "isolate" ]
-                test
+                testCase
                     "isolation normal"
                     [ Isolation.auto ]
                     [ "isolation" ==> "auto" ]
-                test
+                testCase
                     "isolation inherit"
                     [ Isolation.inherit' ]
                     [ "isolation" ==> "inherit" ]
-                test
+                testCase
                     "isolation initial"
                     [ Isolation.initial ]
                     [ "isolation" ==> "initial" ]
-                test
+                testCase
                     "isolation unset"
                     [ Isolation.unset ]
                     [ "isolation" ==> "unset" ]
-                test
+                testCase
                     "boxDecorationBreak clone"
                     [ BoxDecorationBreak.clone ]
                     [ "boxDecorationBreak" ==> "clone" ]
-                test
+                testCase
                     "boxDecorationBreak slice"
                     [ BoxDecorationBreak.slice ]
                     [ "boxDecorationBreak" ==> "slice" ]
-                test
+                testCase
                     "boxDecorationBreak inherit"
                     [ BoxDecorationBreak.inherit' ]
                     [ "boxDecorationBreak" ==> "inherit" ]
-                test
+                testCase
                     "boxDecorationBreak initial"
                     [ BoxDecorationBreak.initial ]
                     [ "boxDecorationBreak" ==> "initial" ]
-                test
+                testCase
                     "boxDecorationBreak unset"
                     [ BoxDecorationBreak.unset ]
                     [ "boxDecorationBreak" ==> "unset" ]

@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,798 +9,798 @@ module Text =
     let tests =
         testList "Text"
             [
-                test
+                testCase
                     "Text decoration none"
                     [TextDecoration.none]
                     ["textDecoration" ==> "none"]
-                test
+                testCase
                     "Text emphasis none"
                     [TextEmphasis.none]
                     ["textEmphasis" ==> "none"]
-                test
+                testCase
                     "Text emphasis inherit"
                     [ TextEmphasis.inherit' ]
                     ["textEmphasis" ==> "inherit"]
-                test
+                testCase
                     "Text emphasis initial"
                     [ TextEmphasis.initial ]
                     ["textEmphasis" ==> "initial"]
-                test
+                testCase
                     "Text emphasis unset"
                     [ TextEmphasis.unset ]
                     ["textEmphasis" ==> "unset"]
-                test
+                testCase
                     "Text align left"
                     [ TextAlign.left ]
                     ["textAlign" ==> "left"]
-                test
+                testCase
                     "Text align right"
                     [ TextAlign.right ]
                     ["textAlign" ==> "right"]
-                test
+                testCase
                     "Text align center"
                     [ TextAlign.center ]
                     ["textAlign" ==> "center"]
-                test
+                testCase
                     "Text align justify"
                     [ TextAlign.justify ]
                     ["textAlign" ==> "justify"]
-                test
+                testCase
                     "Text align justify all"
                     [ TextAlign.justifyAll ]
                     ["textAlign" ==> "justify-all"]
-                test
+                testCase
                     "Text align start"
                     [ TextAlign.start ]
                     ["textAlign" ==> "start"]
-                test
+                testCase
                     "Text align end"
                     [ TextAlign.end' ]
                     ["textAlign" ==> "end"]
-                test
+                testCase
                     "Text align match-parent"
                     [ TextAlign.matchParent ]
                     ["textAlign" ==> "match-parent"]
-                test
+                testCase
                     "Text align inherit"
                     [ TextAlign.inherit' ]
                     ["textAlign" ==> "inherit"]
-                test
+                testCase
                     "Text align initial"
                     [ TextAlign.initial ]
                     ["textAlign" ==> "initial"]
-                test
+                testCase
                     "Text align unset"
                     [ TextAlign.unset ]
                     ["textAlign" ==> "unset"]
-                test
+                testCase
                     "Text align last left"
                     [ TextAlignLast.left ]
                     ["textAlignLast" ==> "left"]
-                test
+                testCase
                     "Text align last right"
                     [ TextAlignLast.right ]
                     ["textAlignLast" ==> "right"]
-                test
+                testCase
                     "Text align last center"
                     [ TextAlignLast.center ]
                     ["textAlignLast" ==> "center"]
-                test
+                testCase
                     "Text align last justify"
                     [ TextAlignLast.justify ]
                     ["textAlignLast" ==> "justify"]
-                test
+                testCase
                     "Text align last start"
                     [ TextAlignLast.start ]
                     ["textAlignLast" ==> "start"]
-                test
+                testCase
                     "Text align last end"
                     [ TextAlignLast.end' ]
                     ["textAlignLast" ==> "end"]
-                test
+                testCase
                     "Text align last inherit"
                     [ TextAlignLast.inherit' ]
                     ["textAlignLast" ==> "inherit"]
-                test
+                testCase
                     "Text align last initial"
                     [ TextAlignLast.initial ]
                     ["textAlignLast" ==> "initial"]
-                test
+                testCase
                     "Text align last unset"
                     [ TextAlignLast.unset ]
                     ["textAlignLast" ==> "unset"]
-                test
+                testCase
                     "Text decoration color red"
                     [TextDecorationColor.red]
                     ["textDecorationColor" ==> "#ff0000"]
-                test
+                testCase
                     "Text decoration color hex"
                     [TextDecorationColor.hex "00ff00" ]
                     ["textDecorationColor" ==> "#00ff00" ]
-                test
+                testCase
                     "Text decoration color rgba"
                     [TextDecorationColor.rgba 255 128 128 0.5 ]
                     ["textDecorationColor" ==> "rgba(255, 128, 128, 0.500000)"]
-                test
+                testCase
                     "Text decoration color transparent"
                     [TextDecorationColor.transparent]
                     ["textDecorationColor" ==> "rgba(0, 0, 0, 0.000000)"]
-                test
+                testCase
                     "Text decoration color inherit"
                     [TextDecorationColor.inherit']
                     ["textDecorationColor" ==> "inherit"]
-                test
+                testCase
                     "Text decoration color initial"
                     [TextDecorationColor.initial]
                     ["textDecorationColor" ==> "initial"]
-                test
+                testCase
                     "Text decoration color unset"
                     [TextDecorationColor.unset]
                     ["textDecorationColor" ==> "unset"]
-                test
+                testCase
                     "Text decoration line none"
                     [TextDecorationLine.none]
                     ["textDecorationLine" ==> "none"]
-                test
+                testCase
                     "Text decoration line underline"
                     [TextDecorationLine.underline]
                     ["textDecorationLine" ==> "underline"]
-                test
+                testCase
                     "Text decoration line overline"
                     [TextDecorationLine.overline]
                     ["textDecorationLine" ==> "overline"]
-                test
+                testCase
                     "Text decoration line line-through"
                     [TextDecorationLine.lineThrough]
                     ["textDecorationLine" ==> "line-through"]
-                test
+                testCase
                     "Text decoration line blink"
                     [TextDecorationLine.blink]
                     ["textDecorationLine" ==> "blink"]
-                test
+                testCase
                     "Text decoration line inherit"
                     [ TextDecorationLine.inherit' ]
                     ["textDecorationLine" ==> "inherit"]
-                test
+                testCase
                     "Text decoration line initial"
                     [ TextDecorationLine.initial ]
                     ["textDecorationLine" ==> "initial"]
-                test
+                testCase
                     "Text decoration line unset"
                     [ TextDecorationLine.unset ]
                     ["textDecorationLine" ==> "unset"]
-                test
+                testCase
                     "Text decorations multiple"
                     [TextDecorationLine.value(FssTypes.Text.DecorationLine.Overline, FssTypes.Text.DecorationLine.Underline, FssTypes.Text.DecorationLine.LineThrough)]
                     ["textDecorationLine" ==> "overline underline line-through"]
-                test
+                testCase
                     "Text decoration skip none"
                     [TextDecorationSkip.none]
                     ["textDecorationSkip" ==> "none"]
-                test
+                testCase
                     "Text decoration skip objects"
                     [TextDecorationSkip.objects]
                     ["textDecorationSkip" ==> "objects"]
-                test
+                testCase
                     "Text decoration skip spaces"
                     [TextDecorationSkip.spaces]
                     ["textDecorationSkip" ==> "spaces"]
-                test
+                testCase
                     "Text decoration skip edges"
                     [TextDecorationSkip.edges]
                     ["textDecorationSkip" ==> "edges"]
-                test
+                testCase
                     "Text decoration skip box-decoration"
                     [TextDecorationSkip.boxDecoration]
                     ["textDecorationSkip" ==> "box-decoration"]
-                test
+                testCase
                     "Text decoration skip multiple - objects and spaces"
                     [TextDecorationSkip.value(FssTypes.Text.DecorationSkip.Objects, FssTypes.Text.DecorationSkip.Spaces) ]
                     ["textDecorationSkip" ==> "objects spaces"]
-                test
+                testCase
                     "Text decoration skip multiple - leading spaces and trailing spaces"
                     [TextDecorationSkip.value(FssTypes.Text.DecorationSkip.LeadingSpaces, FssTypes.Text.DecorationSkip.TrailingSpaces)]
                     ["textDecorationSkip" ==> "leading-spaces trailing-spaces"]
-                test
+                testCase
                     "Text decoration skip multiple - objects edges box-decoration"
                     [TextDecorationSkip.value(FssTypes.Text.DecorationSkip.Objects, FssTypes.Text.DecorationSkip.Edges, FssTypes.Text.DecorationSkip.BoxDecoration) ]
                     ["textDecorationSkip" ==> "objects edges box-decoration"]
-                test
+                testCase
                     "Text decoration skip inherit"
                     [TextDecorationSkip.inherit']
                     ["textDecorationSkip" ==> "inherit"]
-                test
+                testCase
                     "Text decoration skip initial"
                     [TextDecorationSkip.initial]
                     ["textDecorationSkip" ==> "initial"]
-                test
+                testCase
                     "Text decoration skip unset"
                     [TextDecorationSkip.unset]
                     ["textDecorationSkip" ==> "unset"]
-                test
+                testCase
                     "Text decoration skip unset"
                     [TextDecorationSkipInk.auto]
                     ["textDecorationSkipInk" ==> "auto"]
-                test
+                testCase
                     "Text decoration skip All"
                     [TextDecorationSkipInk.all]
                     ["textDecorationSkipInk" ==> "all"]
-                test
+                testCase
                     "Text decoration skip none"
                     [TextDecorationSkipInk.none]
                     ["textDecorationSkipInk" ==> "none"]
-                test
+                testCase
                     "Text decoration skipink inherit"
                     [TextDecorationSkipInk.inherit']
                     ["textDecorationSkipInk" ==> "inherit"]
-                test
+                testCase
                     "Text decoration skipink unset"
                     [TextDecorationSkipInk.unset]
                     ["textDecorationSkipInk" ==> "unset"]
-                test
+                testCase
                     "Text decoration skipink initial"
                     [TextDecorationSkipInk.initial]
                     ["textDecorationSkipInk" ==> "initial"]
-                test
+                testCase
                     "Text decoration style solid"
                     [TextDecorationStyle.solid]
                     ["textDecorationStyle" ==> "solid"]
-                test
+                testCase
                     "Text decoration style double"
                     [TextDecorationStyle.double]
                     ["textDecorationStyle" ==> "double"]
-                test
+                testCase
                     "Text decoration style dotted"
                     [TextDecorationStyle.dotted]
                     ["textDecorationStyle" ==> "dotted"]
-                test
+                testCase
                     "Text decoration style dashed"
                     [TextDecorationStyle.dashed]
                     ["textDecorationStyle" ==> "dashed"]
-                test
+                testCase
                     "Text decoration style wavy"
                     [TextDecorationStyle.wavy]
                     ["textDecorationStyle" ==> "wavy"]
-                test
+                testCase
                     "Text decoration style inherit"
                     [TextDecorationStyle.inherit']
                     ["textDecorationStyle" ==> "inherit"]
-                test
+                testCase
                     "Text decoration style initial"
                     [TextDecorationStyle.initial]
                     ["textDecorationStyle" ==> "initial"]
-                test
+                testCase
                     "Text decoration style unset"
                     [TextDecorationStyle.unset]
                     ["textDecorationStyle" ==> "unset"]
-                test
+                testCase
                     "Text decoration thickness auto"
                     [ TextDecorationThickness.auto ]
                     [ "textDecorationThickness" ==> "auto" ]
-                test
+                testCase
                     "Text decoration thickness from font"
                     [ TextDecorationThickness.fromFont ]
                     ["textDecorationThickness" ==> "from-font" ]
-                test
+                testCase
                     "Text decoration thickness em"
                     [ TextDecorationThickness' (em 0.1) ]
                     ["textDecorationThickness" ==> "0.1em" ]
-                test
+                testCase
                     "Text decoration thickness px"
                     [ TextDecorationThickness' (px 3) ]
                     ["textDecorationThickness" ==> "3px" ]
-                test
+                testCase
                     "Text decoration thickness percent"
                     [ TextDecorationThickness' (pct 10) ]
                     ["textDecorationThickness" ==> "10%" ]
-                test
+                testCase
                     "Text decoration thickness inherit"
                     [ TextDecorationThickness.inherit' ]
                     ["textDecorationThickness" ==> "inherit" ]
-                test
+                testCase
                     "Text decoration thickness initial"
                     [ TextDecorationThickness.initial ]
                     ["textDecorationThickness" ==> "initial" ]
-                test
+                testCase
                     "Text decoration thickness unset"
                     [ TextDecorationThickness.unset ]
                     ["textDecorationThickness" ==> "unset" ]
-                test
+                testCase
                     "Text emphasis color hex"
                     [ TextEmphasisColor.hex "#555" ]
                     ["textEmphasisColor" ==> "#555"]
-                test
+                testCase
                     "Text emphasis color color name"
                     [ TextEmphasisColor.blue ]
                     ["textEmphasisColor" ==> "#0000ff"]
-                test
+                testCase
                     "Text emphasis color rgba"
                     [ TextEmphasisColor.rgba 90 200 160 0.8 ]
                     ["textEmphasisColor" ==> "rgba(90, 200, 160, 0.800000)"]
-                test
+                testCase
                     "Text emphasis color transparent"
                     [ TextEmphasisColor.transparent ]
                     ["textEmphasisColor" ==> "rgba(0, 0, 0, 0.000000)"]
-                test
+                testCase
                     "Text emphasis color inherit"
                     [ TextEmphasisColor.inherit' ]
                     ["textEmphasisColor" ==> "inherit"]
-                test
+                testCase
                     "Text emphasis color Initial"
                     [ TextEmphasisColor.initial ]
                     ["textEmphasisColor" ==> "initial"]
-                test
+                testCase
                     "Text emphasis color unset"
                     [ TextEmphasisColor.unset ]
                     ["textEmphasisColor" ==> "unset"]
-                test
+                testCase
                     "Text emphasis position over right"
                     [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "over right"]
-                test
+                testCase
                     "Text emphasis position over left"
                     [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "over left"]
-                test
+                testCase
                     "Text emphasis position under right"
                     [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Under, FssTypes.Text.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "under right"]
-                test
+                testCase
                     "Text emphasis position under left"
                     [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Under, FssTypes.Text.EmphasisPosition.Left) ]
                     ["textEmphasisPosition" ==> "under left"]
-                test
+                testCase
                     "Text emphasis position left over"
                     [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Left, FssTypes.Text.EmphasisPosition.Over) ]
                     ["textEmphasisPosition" ==> "left over"]
-                test
+                testCase
                     "Text emphasis position right under"
                     [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Right, FssTypes.Text.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "right under"]
-                test
+                testCase
                     "Text emphasis position left under"
                     [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Left, FssTypes.Text.EmphasisPosition.Under) ]
                     ["textEmphasisPosition" ==> "left under"]
-                test
+                testCase
                     "Text emphasis position inherit"
                     [ TextEmphasisPosition.inherit' ]
                     ["textEmphasisPosition" ==> "inherit"]
-                test
+                testCase
                     "Text emphasis position Initial"
                     [ TextEmphasisPosition.initial ]
                     ["textEmphasisPosition" ==> "initial"]
-                test
+                testCase
                     "Text emphasis position unset"
                     [ TextEmphasisPosition.unset ]
                     ["textEmphasisPosition" ==> "unset"]
-                test
+                testCase
                     "Text Emphasis Style x"
                     [TextEmphasisStyle' (FssTypes.CssString "x")]
                     ["textEmphasisStyle" ==> "'x'"]
-                test
+                testCase
                     "Text Emphasis Style *"
                     [TextEmphasisStyle' (FssTypes.CssString "*")]
                     ["textEmphasisStyle" ==> "'*'"]
-                test
+                testCase
                     "Text Emphasis Style filled"
                     [TextEmphasisStyle.filled ]
                     ["textEmphasisStyle" ==> "filled"]
-                test
+                testCase
                     "Text Emphasis Style open"
                     [TextEmphasisStyle.open']
                     ["textEmphasisStyle" ==> "open"]
-                test
+                testCase
                     "Text Emphasis Style circle"
                     [TextEmphasisStyle.circle]
                     ["textEmphasisStyle" ==> "circle"]
-                test
+                testCase
                     "Text Emphasis Style double circle"
                     [TextEmphasisStyle.doubleCircle]
                     ["textEmphasisStyle" ==> "double-circle"]
-                test
+                testCase
                     "Text Emphasis Style triangle"
                     [TextEmphasisStyle.triangle]
                     ["textEmphasisStyle" ==> "triangle"]
-                test
+                testCase
                     "Text Emphasis Style filled sesame"
                     [TextEmphasisStyle.filledSesame]
                     ["textEmphasisStyle" ==> "filled sesame"]
-                test
+                testCase
                     "Text Emphasis Style open sesame"
                     [TextEmphasisStyle.openSesame]
                     ["textEmphasisStyle" ==> "open sesame"]
-                test
+                testCase
                     "Text emphasis style inherit"
                     [ TextEmphasisStyle.inherit' ]
                     ["textEmphasisStyle" ==> "inherit"]
-                test
+                testCase
                     "Text emphasis style Initial"
                     [ TextEmphasisStyle.initial ]
                     ["textEmphasisStyle" ==> "initial"]
-                test
+                testCase
                     "Text emphasis style unset"
                     [ TextEmphasisStyle.unset ]
                     ["textEmphasisStyle" ==> "unset"]
-                test
+                testCase
                     "Text shadow single"
                     [ TextShadows [ TextShadow.colorXyBlur (px 1, px 1, px 2, FssTypes.Color.black) ] ]
                     ["textShadow" ==> "#000000 1px 1px 2px"]
-                test
+                testCase
                     "Text shadow multiple"
                     [ TextShadows
                           [ TextShadow.colorXyBlur(px 1, px 1, px 2, FssTypes.Color.black)
                             TextShadow.colorXyBlur(px 10, px -10, px 20, FssTypes.Color.red) ]
                     ]
                     ["textShadow" ==> "#000000 1px 1px 2px, #ff0000 10px -10px 20px"]
-                test
+                testCase
                     "Text underline offset auto"
                     [ TextUnderlineOffset.auto ]
                     ["textUnderlineOffset" ==> "auto"]
-                test
+                testCase
                     "Text underline offset em"
                     [ TextUnderlineOffset' (em 3.0) ]
                     ["textUnderlineOffset" ==> "3.0em"]
-                test
+                testCase
                     "Text underline offset px"
                     [ TextUnderlineOffset' (px 10) ]
                     ["textUnderlineOffset" ==> "10px"]
-                test
+                testCase
                     "Text underline offset percent"
                     [ TextUnderlineOffset' (pct 10) ]
                     ["textUnderlineOffset" ==> "10%"]
-                test
+                testCase
                     "Text underline offset inherit"
                     [ TextUnderlineOffset.inherit' ]
                     ["textUnderlineOffset" ==> "inherit"]
-                test
+                testCase
                     "Text underline offset Initial"
                     [ TextUnderlineOffset.initial ]
                     ["textUnderlineOffset" ==> "initial"]
-                test
+                testCase
                     "Text underline offset unset"
                     [ TextUnderlineOffset.unset ]
                     ["textUnderlineOffset" ==> "unset"]
-                test
+                testCase
                     "Text underline position from-font"
                     [ TextUnderlinePosition.fromFont ]
                     ["textUnderlinePosition" ==> "from-font"]
-                test
+                testCase
                     "Text underline position Under"
                     [ TextUnderlinePosition.under ]
                     ["textUnderlinePosition" ==> "under"]
-                test
+                testCase
                     "Text underline position left"
                     [ TextUnderlinePosition.left ]
                     ["textUnderlinePosition" ==> "left"]
-                test
+                testCase
                     "Text underline position right"
                     [ TextUnderlinePosition.right ]
                     ["textUnderlinePosition" ==> "right"]
-                test
+                testCase
                     "Text underline position auto-pos"
                     [ TextUnderlinePosition.autoPos ]
                     ["textUnderlinePosition" ==> "auto-pos"]
-                test
+                testCase
                     "Text underline position above"
                     [ TextUnderlinePosition.above ]
                     ["textUnderlinePosition" ==> "above"]
-                test
+                testCase
                     "Text underline position below"
                     [ TextUnderlinePosition.below ]
                     ["textUnderlinePosition" ==> "below"]
-                test
+                testCase
                     "Text underline positions under left"
                     [ TextUnderlinePosition.value (FssTypes.Text.UnderlinePosition.Under, FssTypes.Text.UnderlinePosition.Left) ]
                     ["textUnderlinePosition" ==> "under left"]
-                test
+                testCase
                     "Text underline positions right under"
                     [ TextUnderlinePosition.value (FssTypes.Text.UnderlinePosition.Right, FssTypes.Text.UnderlinePosition.Under) ]
                     ["textUnderlinePosition" ==> "right under"]
-                test
+                testCase
                     "Text underline position auto"
                     [ TextUnderlinePosition.auto ]
                     ["textUnderlinePosition" ==> "auto"]
-                test
+                testCase
                     "Text underline position inherit"
                     [ TextUnderlinePosition.inherit' ]
                     ["textUnderlinePosition" ==> "inherit"]
-                test
+                testCase
                     "Text underline position Initial"
                     [ TextUnderlinePosition.initial ]
                     ["textUnderlinePosition" ==> "initial"]
-                test
+                testCase
                     "Text underline position unset"
                     [ TextUnderlinePosition.unset ]
                     ["textUnderlinePosition" ==> "unset"]
-                test
+                testCase
                     "Text indent mm"
                     [ TextIndent' (mm 3.0) ]
                     ["textIndent" ==> "3.0mm"]
-                test
+                testCase
                     "Text indent px"
                     [ TextIndent' (px 40) ]
                     ["textIndent" ==> "40px"]
-                test
+                testCase
                     "Text indent percent"
                     [ TextIndent' (pct 15) ]
                     ["textIndent" ==> "15%"]
-                test
+                testCase
                     "Text indent hanging"
                     [ TextIndent.value (em 5.0, FssTypes.Text.Hanging;) ]
                     ["textIndent" ==> "5.0em hanging"]
-                test
+                testCase
                     "Text indent each line"
                     [ TextIndent.value (em 5.0, FssTypes.Text.EachLine;) ]
                     ["textIndent" ==> "5.0em each-line"]
-                test
+                testCase
                     "Text indent hanging each line"
                     [ TextIndent.value (em 5.0, FssTypes.Text.Hanging, FssTypes.Text.EachLine) ]
                     ["textIndent" ==> "5.0em hanging each-line"]
-                test
+                testCase
                     "Text indent inherit"
                     [ TextIndent.inherit' ]
                     ["textIndent" ==> "inherit"]
-                test
+                testCase
                     "Text indent Initial"
                     [ TextIndent.initial ]
                     ["textIndent" ==> "initial"]
-                test
+                testCase
                     "Text indent unset"
                     [ TextIndent.unset ]
                     ["textIndent" ==> "unset"]
-                test
+                testCase
                     "Text overflow clip"
                     [ TextOverflow.clip ]
                     ["textOverflow" ==> "clip"]
-                test
+                testCase
                     "Text overflow ellipsis"
                     [ TextOverflow.ellipsis ]
                     ["textOverflow" ==> "ellipsis"]
-                test
+                testCase
                     "Text overflow -"
                     [ TextOverflow' (FssTypes.CssString "-") ]
                     ["textOverflow" ==> "\"-\""]
-                test
+                testCase
                     "Quotes none"
                     [ Quotes.none ]
                     ["quotes" ==> "none"]
-                test
+                testCase
                     "Quotes Auto"
                     [ Quotes.auto ]
                     ["quotes" ==> "auto"]
-                test
+                testCase
                     "Quotes strings"
                     [ Quotes.value(FssTypes.CssString "<<", FssTypes.CssString ">>") ]
                     ["quotes" ==> "\"<<\" \">>\""]
-                test
+                testCase
                     "Quotes multiple"
                     [ Quotes.value [ FssTypes.CssString "<<" :> FssTypes.IQuotes, FssTypes.CssString ">>" :> FssTypes.IQuotes; FssTypes.CssString "<" :> FssTypes.IQuotes,  FssTypes.CssString ">" :> FssTypes.IQuotes] ]
                     ["quotes" ==> "\"<<\" \">>\" \"<\" \">\""]
-                test
+                testCase
                     "Quotes inherit"
                     [ Quotes.inherit' ]
                     ["quotes" ==> "inherit"]
-                test
+                testCase
                     "Quotes Initial"
                     [ Quotes.initial ]
                     ["quotes" ==> "initial"]
-                test
+                testCase
                     "Quotes unset"
                     [ Quotes.unset ]
                     ["quotes" ==> "unset"]
-                test
+                testCase
                     "Hyphens Manual"
                     [ Hyphens.manual ]
                     ["hyphens" ==> "manual"]
-                test
+                testCase
                     "Hyphens none"
                     [ Hyphens.none ]
                     ["hyphens" ==> "none"]
-                test
+                testCase
                     "Hyphens Auto"
                     [ Hyphens.auto ]
                     ["hyphens" ==> "auto"]
-                test
+                testCase
                     "Hyphens inherit"
                     [ Hyphens.inherit' ]
                     ["hyphens" ==> "inherit"]
-                test
+                testCase
                     "Hyphens Initial"
                     [ Hyphens.initial ]
                     ["hyphens" ==> "initial"]
-                test
+                testCase
                     "Hyphens unset"
                     [ Hyphens.unset ]
                     ["hyphens" ==> "unset"]
-                test
+                testCase
                     "TextSizeAdjust percent"
                     [ TextSizeAdjust' (pct 80) ]
                     ["textSizeAdjust" ==> "80%"]
-                test
+                testCase
                     "TextSizeAdjust none"
                     [ TextSizeAdjust.none ]
                     ["textSizeAdjust" ==> "none"]
-                test
+                testCase
                     "TextSizeAdjust Auto"
                     [ TextSizeAdjust.auto ]
                     ["textSizeAdjust" ==> "auto"]
-                test
+                testCase
                     "TextSizeAdjust inherit"
                     [ TextSizeAdjust.inherit' ]
                     ["textSizeAdjust" ==> "inherit"]
-                test
+                testCase
                     "TextSizeAdjust Initial"
                     [ TextSizeAdjust.initial ]
                     ["textSizeAdjust" ==> "initial"]
-                test
+                testCase
                     "TextSizeAdjust unset"
                     [ TextSizeAdjust.unset ]
                     ["textSizeAdjust" ==> "unset"]
-                test
+                testCase
                     "TabSize px"
                     [ TabSize' (px 10) ]
                     ["tabSize" ==> "10px"]
-                test
+                testCase
                     "TabSize em"
                     [ TabSize' (em 2.) ]
                     ["tabSize" ==> "2.0em"]
-                test
+                testCase
                     "TabSize number"
                     [ TabSize' (FssTypes.CssInt 4) ]
                     ["tabSize" ==> "4"]
-                test
+                testCase
                     "TabSize inherit"
                     [ TabSize.inherit' ]
                     ["tabSize" ==> "inherit"]
-                test
+                testCase
                     "TabSize Initial"
                     [ TabSize.initial ]
                     ["tabSize" ==> "initial"]
-                test
+                testCase
                     "TabSize unset"
                     [ TabSize.unset ]
                     ["tabSize" ==> "unset"]
-                test
+                testCase
                     "TextOrientation Mixed"
                     [ TextOrientation.mixed ]
                     ["textOrientation" ==> "mixed"]
-                test
+                testCase
                     "TextOrientation Upright"
                     [ TextOrientation.upright ]
                     ["textOrientation" ==> "upright"]
-                test
+                testCase
                     "TextOrientation sideways-right"
                     [ TextOrientation.sidewaysRight ]
                     ["textOrientation" ==> "sideways-right"]
-                test
+                testCase
                     "TextOrientation Sideways"
                     [ TextOrientation.sideways ]
                     ["textOrientation" ==> "sideways"]
-                test
+                testCase
                     "TextOrientation use-glyph-orientation"
                     [ TextOrientation.useGlyphOrientation ]
                     ["textOrientation" ==> "use-glyph-orientation"]
-                test
+                testCase
                     "TextOrientation inherit"
                     [ TextOrientation.inherit' ]
                     ["textOrientation" ==> "inherit"]
-                test
+                testCase
                     "TextOrientation Initial"
                     [ TextOrientation.initial ]
                     ["textOrientation" ==> "initial"]
-                test
+                testCase
                     "TextOrientation unset"
                     [ TextOrientation.unset ]
                     ["textOrientation" ==> "unset"]
-                test
+                testCase
                     "TextRendering optimize speed"
                     [ TextRendering.optimizeSpeed ]
                     ["textRendering" ==> "optimize-speed"]
-                test
+                testCase
                     "TextRendering optimize legibility"
                     [ TextRendering.optimizeLegibility ]
                     ["textRendering" ==> "optimize-legibility"]
-                test
+                testCase
                     "TextRendering geometric precision"
                     [ TextRendering.geometricPrecision ]
                     ["textRendering" ==> "geometric-precision"]
-                test
+                testCase
                     "TextRendering auto"
                     [ TextRendering.auto ]
                     ["textRendering" ==> "auto"]
-                test
+                testCase
                     "TextRendering inherit"
                     [ TextRendering.inherit' ]
                     ["textRendering" ==> "inherit"]
-                test
+                testCase
                     "TextRendering Initial"
                     [ TextRendering.initial ]
                     ["textRendering" ==> "initial"]
-                test
+                testCase
                     "TextRendering unset"
                     [ TextRendering.unset ]
                     ["textRendering" ==> "unset"]
-                test
+                testCase
                     "TextJustify inter-character"
                     [ TextJustify.interCharacter ]
                     ["textJustify" ==> "inter-character"]
-                test
+                testCase
                     "TextJustify inter-word"
                     [ TextJustify.interWord ]
                     ["textJustify" ==> "inter-word"]
-                test
+                testCase
                     "TextJustify auto"
                     [ TextJustify.auto ]
                     ["textJustify" ==> "auto"]
-                test
+                testCase
                     "TextJustify none"
                     [ TextJustify.none ]
                     ["textJustify" ==> "none"]
-                test
+                testCase
                     "WhiteSpace nowrap"
                     [ WhiteSpace.noWrap ]
                     ["whiteSpace" ==> "no-wrap"]
-                test
+                testCase
                     "WhiteSpace pre"
                     [ WhiteSpace.pre ]
                     ["whiteSpace" ==> "pre"]
-                test
+                testCase
                     "WhiteSpace pre-wrap"
                     [ WhiteSpace.preWrap ]
                     ["whiteSpace" ==> "pre-wrap"]
-                test
+                testCase
                     "WhiteSpace pre-line"
                     [ WhiteSpace.preLine ]
                     ["whiteSpace" ==> "pre-line"]
-                test
+                testCase
                     "WhiteSpace break-spaces"
                     [ WhiteSpace.breakSpaces ]
                     ["whiteSpace" ==> "break-spaces"]
-                test
+                testCase
                     "WhiteSpace normal"
                     [ WhiteSpace.normal ]
                     ["whiteSpace" ==> "normal"]
-                test
+                testCase
                     "WhiteSpace inherit"
                     [ WhiteSpace.inherit' ]
                     ["whiteSpace" ==> "inherit"]
-                test
+                testCase
                     "WhiteSpace Initial"
                     [ WhiteSpace.initial ]
                     ["whiteSpace" ==> "initial"]
-                test
+                testCase
                     "WhiteSpace unset"
                     [ WhiteSpace.unset ]
                     ["whiteSpace" ==> "unset"]
-                test
+                testCase
                     "UserSelect text"
                     [ UserSelect.text ]
                     ["userSelect" ==> "text"]
-                test
+                testCase
                     "UserSelect Contain"
                     [ UserSelect.contain ]
                     ["userSelect" ==> "contain"]
-                test
+                testCase
                     "UserSelect all"
                     [ UserSelect.all ]
                     ["userSelect" ==> "all"]
-                test
+                testCase
                     "UserSelect none"
                     [ UserSelect.none ]
                     ["userSelect" ==> "none"]
-                test
+                testCase
                     "UserSelect auto"
                     [ UserSelect.auto ]
                     ["userSelect" ==> "auto"]
-                test
+                testCase
                     "UserSelect inherit"
                     [ UserSelect.inherit' ]
                     ["userSelect" ==> "inherit"]
-                test
+                testCase
                     "UserSelect Initial"
                     [ UserSelect.initial ]
                     ["userSelect" ==> "initial"]
-                test
+                testCase
                     "UserSelect unset"
                     [ UserSelect.unset ]
                     ["userSelect" ==> "unset"]
