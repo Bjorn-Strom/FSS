@@ -10,6 +10,7 @@ module App =
     open Fss
 
     open Markdown
+    open Logo
 
     let inline getMarkdown (markdown: string) =
         Http.get $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/docs/documentation/{markdown}.md"
@@ -36,40 +37,53 @@ module App =
         | Big
         | Small
 
-    type Model = { CurrentPage: Page; Pages: Map<Page, string>; CurrentMarkdown: string }
+    type Model = { CurrentPage: Page; Pages: Map<Page, string> }
 
     type Msg =
-        | GetMarkdown
-        | GotMarkdown of string
+        | GetMarkdown of Page
+        | GotMarkdown of Page * string
         | FailedGettingMarkdown of string
 
     let init page =
         let page = page |> Option.defaultValue Overview
-        { CurrentPage = page; Pages = Map.empty; CurrentMarkdown = "" }, Cmd.ofMsg GetMarkdown
+
+        let requests =
+            [ Overview |> GetMarkdown |> Cmd.ofMsg
+              Installation |> GetMarkdown |> Cmd.ofMsg
+              Philosophy |> GetMarkdown |> Cmd.ofMsg
+              BasicUsage |> GetMarkdown |> Cmd.ofMsg
+              ConditionalStyling |> GetMarkdown |> Cmd.ofMsg
+              Pseudo |> GetMarkdown |> Cmd.ofMsg
+              Composition |> GetMarkdown |> Cmd.ofMsg
+              Labels |> GetMarkdown |> Cmd.ofMsg
+              Transition |> GetMarkdown |> Cmd.ofMsg
+              KeyframesAnimations |> GetMarkdown |> Cmd.ofMsg
+              Combinators |> GetMarkdown |> Cmd.ofMsg
+              MediaQueries |> GetMarkdown |> Cmd.ofMsg
+              GlobalStyles |> GetMarkdown |> Cmd.ofMsg
+              Counters |> GetMarkdown |> Cmd.ofMsg
+              Fonts |> GetMarkdown |> Cmd.ofMsg
+              BackgroundImage |> GetMarkdown |> Cmd.ofMsg
+            ]
+        { CurrentPage = page; Pages = Map.empty; }, Cmd.batch requests
 
     let update (msg: Msg) (model: Model) =
         match msg with
-        | GetMarkdown ->
-            Map.tryFind model.CurrentPage model.Pages
-            |> function
-                | None ->
-                    let nextCommand =
-                        async {
-                            let! (statusCode, response) = getMarkdown (Utilities.duToString model.CurrentPage)
+        | GetMarkdown page ->
+            let nextCommand =
+                async {
+                    let! (statusCode, response) = getMarkdown (Utilities.duToString page)
 
-                            if statusCode = 200 then
-                                return GotMarkdown response
-                            else
-                                return FailedGettingMarkdown "Unable to get markdown"
-                        }
-                    model, Cmd.OfAsync.result nextCommand
-                | Some markdown ->
-                    model, Cmd.ofMsg <| GotMarkdown markdown
-
-        | GotMarkdown markdown ->
-            let pages = model.Pages.Add(model.CurrentPage, markdown)
-            { model with CurrentMarkdown = markdown; Pages = pages }, Cmd.none
-        | FailedGettingMarkdown e ->
+                    if statusCode = 200 then
+                        return GotMarkdown (page, response)
+                    else
+                        return FailedGettingMarkdown "Unable to get markdown"
+                }
+            model, Cmd.OfAsync.result nextCommand
+        | GotMarkdown (page, markdown) ->
+            let pages = model.Pages.Add(page, markdown)
+            { model with Pages = pages }, Cmd.none
+        | FailedGettingMarkdown _ ->
             model, Cmd.none
 
     // Load font
@@ -127,16 +141,6 @@ module App =
                [
                     markdown [ Renderers renderers; Children currentMarkdown ]
                     div [ ClassName borderStyle ] [ str "Border style made with custom escape hatch" ]
-
-
-                    p [ ClassName (fss [
-                        BorderTopWidth.thin
-                        BorderTopStyle.dashed
-                        BorderTopColor.orangeRed
-                        BorderBottomWidth.thick
-                        BorderBottomStyle.solid
-                        BorderBottomColor.red
-                    ]) ] [str "foo"]
                ]
 
         let conditionalStyling =
@@ -1065,9 +1069,9 @@ module App =
                     Label' "Content Style"
                     textFont
                 ]
-        section [ ClassName contentStyle ] [ pageToContent model.CurrentPage model.CurrentMarkdown ]
+        section [ ClassName contentStyle ] [ pageToContent model.CurrentPage model.Pages.[model.CurrentPage] ]
 
-    let render (model: Model) (dispatch: Msg -> unit) =
+    let render (model: Model) (_: Msg -> unit) =
         let contentStyle =
             fss
                 [
@@ -1085,7 +1089,7 @@ module App =
                 div [ ClassName contentStyle ]
                     [
                         menu model
-                        if model.CurrentMarkdown.Length > 0 then
+                        if model.Pages.ContainsKey model.CurrentPage then
                             content model
                     ]
             ]
@@ -1115,7 +1119,7 @@ module App =
     let urlUpdate (page: Page option) model =
         let page = page |> Option.defaultValue Overview
 
-        { model with CurrentPage = page }, Cmd.ofMsg GetMarkdown
+        { model with CurrentPage = page }, Cmd.none
 
     Program.mkProgram init update render
     |> Program.toNavigable (parseHash pageParser) urlUpdate

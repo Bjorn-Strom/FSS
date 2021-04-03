@@ -16,7 +16,7 @@ namespace Fss.FssTypes
             interface IColor
             interface IBackgroundColor
 
-        type ColorBaseBase (valueFunction: string -> ColorType) =
+        type ColorTypeBase (valueFunction: string -> ColorType) =
             member this.black = Fss.Utilities.Color.hex "000000" |> valueFunction
             member this.silver = Fss.Utilities.Color.hex "c0c0c0" |> valueFunction
             member this.gray = Fss.Utilities.Color.hex "808080" |> valueFunction
@@ -168,7 +168,7 @@ namespace Fss.FssTypes
             member this.hsl (h: int, s: float, l: float) = Fss.Utilities.Color.hsl h s l |> valueFunction
             member this.hsla (h: int, s: float, l: float, a: float) = Fss.Utilities.Color.hsla h s l a |> valueFunction
 
-        let Color = ColorBaseBase (ColorType)
+        let Color = ColorTypeBase (ColorType)
 
         type ColorBase (valueFunction: ColorType -> CssProperty) =
             member this.black = Color.black |> valueFunction
