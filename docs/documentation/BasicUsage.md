@@ -22,11 +22,11 @@ In this case you can fallback on the .Value function, which every CSS property h
 Here is an example of that.
 
 ```fsharp
-let myDecorationColor = FssTypes.Color.white
+let myDecorationColor = FssTypes.Color.Color.white
 fss [ TextDecorationColor.value myDecorationColor ]
 ```
 
-As this is something you might want to do quite a bit there exists a shorthand which is TextDecorationColor'.
+As this is something you might want to do quite a bit there exists a shorthand which is `TextDecorationColor'`.
 ```fsharp
 let myDecorationColor = FssTypes.Color.white
 fss [ TextDecorationColor' myDecorationColor ]

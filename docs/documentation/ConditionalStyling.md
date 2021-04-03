@@ -1,6 +1,7 @@
 ## Conditional Styling
 
-If you want to style something conditionally you can use conditional or match expression For example if you've defined a union type for your button sizes that looks like this:
+If you want to style something conditionally you can use conditional or match expressions.
+For example if you've defined a union type for your button sizes that looks like this:
 
 ```fsharp
 type ButtonSize =
@@ -8,7 +9,7 @@ type ButtonSize =
    | Big
 ```
 
-You could have a function that takes this ButtonSize as a parameter and spits out the styling you want.
+You could have a function that takes this `ButtonSize` as a parameter and spits out the styling you want.
 
 ```fsharp
 let buttonStyle buttonType =

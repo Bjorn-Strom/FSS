@@ -2,7 +2,6 @@ namespace Fss
 
 open System
 open Fable.Core
-open Fable.Core.JS
 open Fable.Core.JsInterop
 
 open Media

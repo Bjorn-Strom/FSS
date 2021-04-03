@@ -54,20 +54,34 @@ let bounceAnimation =
 
 ## Transforms
 
-Just a quick note on transforms. In CSS it is easy to think that when you apply a transform CSS expects just one transform
+Just a quick note on transforms. In CSS it is easy to think that when you apply a transform CSS expects just one transform.
 
-It works with one, but it is easier to think about transforms as accepting a list of transforms, now this list can have just one element.
+While it works with one, it is easier to think about transforms as accepting a list of transforms, now this list can have just one element.
 
-I have also seen it as a mistake from people who don't know Css too well (I have made it myself), where combining transforms can be a bit of an issue.
+This is a mistake I have seen from people who don't know Css too well (I have made it myself when I was learning), where combining transforms can be a bit of an issue.
+The following is an example of this, you might write this and be very puzzled as to why it isn't working.
+```css
+.myElement {
+    transform: rotate(90deg);
+    transform: translate(20px,0px);
+}
+```
+When the answer is, as stated above, Transform takes a list of arguments.
+```css
+.myElement {
+    transform: rotate(90deg) translate(20px,0px);
+}
+```
+Is the correct way to type this.
 
-For these reasons in Fss when you apply transforms it always expects a list, but otherwise works as you would expect.
-
+I believe this is a fundamental flaw in CSS that CSS itself can never fix.
+For these reasons in Fss when you apply transforms it <u>**always**</u> expects a list, but otherwise works as you would expect.
+This pattern holds for all similar CSS properties in Fss.
 
 ```fsharp
 Transforms
     [
-        Transform.rotateX <| deg 10.
-        Transform.rotateY <| deg 15.
-        Transform.perspective <| px 20
+        Transform.rotate (deg 90.)
+        Transform.translate (px 20, px 0)
     ]
 ```

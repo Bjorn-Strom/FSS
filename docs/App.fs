@@ -10,7 +10,6 @@ module App =
     open Fss
 
     open Markdown
-    open Logo
 
     let inline getMarkdown (markdown: string) =
         Http.get $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/docs/documentation/{markdown}.md"
@@ -19,6 +18,7 @@ module App =
         | Overview
         | Installation
         | Philosophy
+        | New
         | BasicUsage
         | ConditionalStyling
         | Pseudo
@@ -32,6 +32,7 @@ module App =
         | Counters
         | Fonts
         | BackgroundImage
+        | Feliz
 
     type ButtonType =
         | Big
@@ -104,6 +105,7 @@ module App =
         | Overview -> "Overview"
         | Installation -> "Installation"
         | Philosophy -> "Philosophy"
+        | New -> "New"
         | BasicUsage -> "Basic Usage"
         | ConditionalStyling -> "Conditional Styling"
         | Pseudo -> "Pseduoclasses/elements"
@@ -117,6 +119,7 @@ module App =
         | Counters -> "Counters"
         | Fonts -> "Fonts"
         | BackgroundImage -> "Background image"
+        | Feliz -> "Feliz"
 
     let codeBlock (code: string List) =
         let codeBlock =
@@ -134,6 +137,7 @@ module App =
         let overview = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
         let installation = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
         let philosophy = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
+        let ``new`` = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
 
         let basicUse =
             let borderStyle = fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)" ]
@@ -958,11 +962,13 @@ module App =
                             yield! elements
                         ]
                 ]
+        let feliz = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
 
         match page with
         | Overview -> overview
         | Installation -> installation
         | Philosophy -> philosophy
+        | New -> ``new``
         | BasicUsage -> basicUse
         | ConditionalStyling -> conditionalStyling
         | Pseudo -> pseudo
@@ -976,6 +982,7 @@ module App =
         | Counters -> counters
         | Fonts -> fonts
         | BackgroundImage -> backgroundImage
+        | Feliz -> feliz
 
     let menuListItem example currentExample =
         let linkStyle =
