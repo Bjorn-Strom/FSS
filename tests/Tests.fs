@@ -30,7 +30,6 @@ module Tests =
         Content.tests
         ListStyle.tests
         Cursor.tests
-        Text.tests
         Transition.tests
         Transform.tests
         Animation.tests
@@ -48,5 +47,6 @@ module Tests =
         Background.tests
         Border.tests
         WillChange.tests
+        Text.tests
     ]
 

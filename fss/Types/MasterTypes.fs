@@ -61,6 +61,7 @@ namespace Fss.FssTypes
     type ITextJustify             = interface end
     type IWhiteSpace              = interface end
     type IUserSelect              = interface end
+    type IHangingPunctuation      = interface end
 
     type IListStyle         = interface end
     type IListStyleImage    = interface end
@@ -293,6 +294,7 @@ namespace Fss.FssTypes
         interface ITextTransform
         interface ITextSizeAdjust
         interface ITextJustify
+        interface IHangingPunctuation
         interface IUserSelect
         interface IQuotes
         interface IHyphens
@@ -410,6 +412,7 @@ namespace Fss.FssTypes
         interface ITextDecorationColor
         interface ITextEmphasisColor
         interface ITextSizeAdjust
+        interface IHangingPunctuation
         interface IUserSelect
         interface IListStyle
         interface IListStyleImage

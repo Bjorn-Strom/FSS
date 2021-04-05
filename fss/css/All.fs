@@ -11,16 +11,12 @@ module All =
         | _ -> "Unknown all"
 
     let private allValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.All value
-    let private allValue' value =
-        value
-        |> stringifyAll
-        |> allValue
+    let private allValue' = stringifyAll >> allValue
 
     [<Erase>]
     type All =
         static member value (all: FssTypes.IAll) = all |> allValue'
         static member inherit' = FssTypes.Inherit |> allValue'
-
         static member initial = FssTypes.Initial |> allValue'
         static member unset = FssTypes.Unset |> allValue'
 

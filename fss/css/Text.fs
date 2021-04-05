@@ -210,6 +210,13 @@ module Text =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown user select"
 
+    let private hangingPunctuationToString (hangingPunctuation: FssTypes.IHangingPunctuation) =
+        match hangingPunctuation with
+        | :? FssTypes.Text.HangingPunctuation as hp -> Utilities.Helpers.duToKebab hp
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | _ -> "Unknown hanging punctuation"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
     let private alignCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextAlign value
     let private alignCssValue' value =
@@ -1017,3 +1024,38 @@ module Text =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let UserSelect' userSelect = UserSelect.value userSelect
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
+    let private hangingPunctuationValue (value: string) = FssTypes.propertyHelpers.cssValue FssTypes.Property.HangingPunctuation value
+    let private hangingPunctuationValue': FssTypes.IHangingPunctuation -> FssTypes.CssProperty = hangingPunctuationToString >> hangingPunctuationValue
+
+    [<Erase>]
+    type HangingPunctuation =
+        static member value hangingPunctuation = hangingPunctuation |> hangingPunctuationValue'
+        static member value (p1, p2) =
+            $"{hangingPunctuationToString p1} {hangingPunctuationToString p2}"
+            |> hangingPunctuationValue
+        static member value (p1, p2, p3) =
+            $"{hangingPunctuationToString p1} {hangingPunctuationToString p2} {hangingPunctuationToString p3}"
+            |> hangingPunctuationValue
+        static member first = FssTypes.Text.HangingPunctuation.First |> hangingPunctuationValue'
+        static member last = FssTypes.Text.HangingPunctuation.Last |> hangingPunctuationValue'
+        static member forceEnd = FssTypes.Text.HangingPunctuation.ForceEnd |> hangingPunctuationValue'
+        static member allowEnd = FssTypes.Text.HangingPunctuation.AllowEnd |> hangingPunctuationValue'
+        static member none = FssTypes.None' |> hangingPunctuationValue'
+        static member inherit' = FssTypes.Inherit |> hangingPunctuationValue'
+        static member initial = FssTypes.Initial |> hangingPunctuationValue'
+        static member unset = FssTypes.Unset |> hangingPunctuationValue'
+
+    /// <summary>Specifies whether a punctuation mark should hang at the start or end of a line.</summary>
+    /// <param name="hangingPunctuation">
+    ///     can be:
+    ///     - <c> HangingPunctuation </c>
+    ///     - <c> UserSelect </c>
+    ///     - <c> None </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let HangingPunctuation' hangingPunctuation = HangingPunctuation.value hangingPunctuation

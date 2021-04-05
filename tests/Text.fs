@@ -804,4 +804,64 @@ module Text =
                     "UserSelect unset"
                     [ UserSelect.unset ]
                     ["userSelect" ==> "unset"]
+                testCase
+                    "HangingPunctuation first"
+                    [ HangingPunctuation.first ]
+                    ["hangingPunctuation" ==> "first"]
+                testCase
+                    "HangingPunctuation last"
+                    [ HangingPunctuation.last ]
+                    ["hangingPunctuation" ==> "last"]
+                testCase
+                    "HangingPunctuation ForceEnd"
+                    [ HangingPunctuation.forceEnd ]
+                    ["hangingPunctuation" ==> "force-end"]
+                testCase
+                    "HangingPunctuation allowEnd"
+                    [ HangingPunctuation.allowEnd ]
+                    ["hangingPunctuation" ==> "allow-end"]
+                testCase
+                    "HangingPunctuation first force-end"
+                    [ HangingPunctuation.value(FssTypes.Text.First, FssTypes.Text.ForceEnd)]
+                    ["hangingPunctuation" ==> "first force-end"]
+                testCase
+                    "HangingPunctuation first allow-end"
+                    [ HangingPunctuation.value(FssTypes.Text.First, FssTypes.Text.AllowEnd)]
+                    ["hangingPunctuation" ==> "first allow-end"]
+                testCase
+                    "HangingPunctuation first last"
+                    [ HangingPunctuation.value(FssTypes.Text.First, FssTypes.Text.Last)]
+                    ["hangingPunctuation" ==> "first last"]
+                testCase
+                    "HangingPunctuation last force-end"
+                    [ HangingPunctuation.value(FssTypes.Text.Last, FssTypes.Text.ForceEnd)]
+                    ["hangingPunctuation" ==> "last force-end"]
+                testCase
+                    "HangingPunctuation last allow-end"
+                    [ HangingPunctuation.value(FssTypes.Text.Last, FssTypes.Text.AllowEnd)]
+                    ["hangingPunctuation" ==> "last allow-end"]
+                testCase
+                    "HangingPunctuation first force-end"
+                    [ HangingPunctuation.value(FssTypes.Text.First, FssTypes.Text.ForceEnd, FssTypes.Text.Last)]
+                    ["hangingPunctuation" ==> "first force-end last"]
+                testCase
+                    "HangingPunctuation last allow-end"
+                    [ HangingPunctuation.value(FssTypes.Text.First, FssTypes.Text.AllowEnd, FssTypes.Text.Last)]
+                    ["hangingPunctuation" ==> "first allow-end last"]
+                testCase
+                    "HangingPunctuation none"
+                    [ HangingPunctuation.none ]
+                    ["hangingPunctuation" ==> "none"]
+                testCase
+                    "HangingPunctuation inherit"
+                    [ HangingPunctuation.inherit' ]
+                    ["hangingPunctuation" ==> "inherit"]
+                testCase
+                    "HangingPunctuation Initial"
+                    [ HangingPunctuation.initial ]
+                    ["hangingPunctuation" ==> "initial"]
+                testCase
+                    "HangingPunctuation unset"
+                    [ HangingPunctuation.unset ]
+                    ["hangingPunctuation" ==> "unset"]
             ]

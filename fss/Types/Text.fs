@@ -148,6 +148,13 @@ namespace Fss.FssTypes
             | Element
             interface IUserSelect
 
+        type HangingPunctuation =
+            | First
+            | Last
+            | ForceEnd
+            | AllowEnd
+            interface IHangingPunctuation
+
     type TextDecorationColor (valueFunction: ITextDecorationColor -> CssProperty) =
         inherit ColorBase(valueFunction)
         member this.value color = color |> valueFunction
@@ -161,3 +168,4 @@ namespace Fss.FssTypes
         member this.inherit' = Inherit |> valueFunction
         member this.initial = Initial |> valueFunction
         member this.unset = Unset |> valueFunction
+
