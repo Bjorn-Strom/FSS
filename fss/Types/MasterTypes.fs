@@ -98,6 +98,7 @@ namespace Fss.FssTypes
     type ITransitionDuration       = interface end
     type ITransitionTimingFunction = interface end
     type ITransitionProperty       = interface end
+    type IWillChange               = interface end
 
     type IDisplay        = interface end
     type IAlignContent   = interface end
@@ -276,6 +277,7 @@ namespace Fss.FssTypes
         interface IOverscrollBehaviorY
         interface IIsolation
         interface IFontKerning
+        interface IWillChange
 
     type None' =
         | None'

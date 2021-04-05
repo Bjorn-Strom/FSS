@@ -47,5 +47,6 @@ module Tests =
         Outline.tests
         Background.tests
         Border.tests
+        WillChange.tests
     ]
 
