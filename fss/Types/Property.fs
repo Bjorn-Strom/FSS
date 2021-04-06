@@ -201,6 +201,7 @@ namespace Fss.FssTypes
             | OverflowWrap
             | OverflowX
             | OverflowY
+            | ObjectFit
             | PaddingBottom
             | PaddingLeft
             | PaddingRight

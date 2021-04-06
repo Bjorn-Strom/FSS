@@ -105,6 +105,7 @@
     <Compile Include="css\AspectRatio.fs" />
     <Compile Include="css\Mask.fs" />
     <Compile Include="css\WillChange.fs" />
+    <Compile Include="css\Image.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Functions.fs" />

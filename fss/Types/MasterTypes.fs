@@ -228,6 +228,8 @@ namespace Fss.FssTypes
     type IMaskPosition  = interface end
     type IMaskRepeat    = interface end
 
+    type IObjectFit = interface end
+
     // Types
     type CssProperty = CssProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -333,6 +335,7 @@ namespace Fss.FssTypes
         interface IFontKerning
         interface IFontSynthesis
         interface IMaskImage
+        interface IObjectFit
 
     type Normal =
         | Normal

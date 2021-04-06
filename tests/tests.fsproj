@@ -48,6 +48,7 @@
     <Compile Include="AspectRatio.fs" />
     <Compile Include="Mask.fs" />
     <Compile Include="WillChange.fs" />
+    <Compile Include="Image.fs" />
     <Compile Include="Tests.fs" />
     <Content Include="paket.references" />
   </ItemGroup>

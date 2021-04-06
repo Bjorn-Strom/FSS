@@ -122,3 +122,10 @@ namespace Fss.FssTypes
             static member RepeatingConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorType * Percent) list) =
                 stringifyRepeatingConicPercent angle x y gradients
 
+        type ObjectFit =
+            | Fill
+            | Contain
+            | Cover
+            | ScaleDown
+            interface IObjectFit
+

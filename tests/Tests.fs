@@ -48,5 +48,6 @@ module Tests =
         Border.tests
         WillChange.tests
         Text.tests
+        Image.tests
     ]
 
