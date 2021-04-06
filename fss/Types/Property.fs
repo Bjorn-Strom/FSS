@@ -202,6 +202,7 @@ namespace Fss.FssTypes
             | OverflowX
             | OverflowY
             | ObjectFit
+            | ObjectPosition
             | PaddingBottom
             | PaddingLeft
             | PaddingRight

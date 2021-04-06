@@ -32,3 +32,37 @@ module Image =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ObjectFit' (objectFit: FssTypes.IObjectFit) = objectFit |> ObjectFit.value
+
+
+
+
+
+
+
+
+
+
+
+    let private stringifyObjectPosition (objectPosition: FssTypes.IObjectPosition) =
+        match objectPosition with
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | _ -> "Unknown object-position"
+
+    let private objectPositionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ObjectPosition value
+    let private objectPositionValue' = stringifyObjectPosition >> objectPositionValue
+
+    [<Erase>]
+    type ObjectPosition =
+        static member value (x: FssTypes.ILengthPercentage, y: FssTypes.ILengthPercentage) =
+            $"{FssTypes.unitHelpers.lengthPercentageToString x} {FssTypes.unitHelpers.lengthPercentageToString y}"
+            |> objectPositionValue
+        static member inherit' = FssTypes.Inherit |> objectPositionValue'
+        static member initial = FssTypes.Initial |> objectPositionValue'
+        static member unset = FssTypes.Unset |> objectPositionValue'
+
+    /// <summary>Sets how na image or video should be resized to fit its container.</summary>
+    /// <param name="x"> pixel or percent </param>
+    /// <param name="y"> pixel or percent </param>
+    /// <returns>Css property for fss.</returns>
+    let ObjectPosition' (x: FssTypes.ILengthPercentage, y: FssTypes.ILengthPercentage) =
+        ObjectPosition.value(x, y)

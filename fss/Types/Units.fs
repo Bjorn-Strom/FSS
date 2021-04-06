@@ -99,17 +99,14 @@ namespace Fss.FssTypes
         | Rad of string
         | Turn of string
 
-
     type Resolution =
         | Dpi of string
-
 
     type Time =
         | Sec of string
         | Ms of string
         interface ITransitionDelay
         interface ITransitionDuration
-
 
     type Fraction =
         | Fr of string

@@ -33,4 +33,28 @@ module Image =
                     "Object fit none"
                     [ ObjectFit.none ]
                     [ "objectFit" ==> "none" ]
+                testCase
+                    "ObjectPosition pixels"
+                    [ ObjectPosition' (px 10, px 10)]
+                    [ "objectPosition" ==> "10px 10px" ]
+                testCase
+                    "ObjectPosition percent"
+                    [ ObjectPosition' (pct 50, pct 50)]
+                    [ "objectPosition" ==> "50% 50%" ]
+                testCase
+                    "ObjectPosition percent and pixels"
+                    [ ObjectPosition' (pct 50, px 50)]
+                    [ "objectPosition" ==> "50% 50px" ]
+                testCase
+                    "ObjectPosition inherit"
+                    [ ObjectPosition.inherit']
+                    [ "objectPosition" ==> "inherit" ]
+                testCase
+                    "ObjectPosition initial"
+                    [ ObjectPosition.initial]
+                    [ "objectPosition" ==> "initial" ]
+                testCase
+                    "ObjectPosition unset"
+                    [ ObjectPosition.unset ]
+                    [ "objectPosition" ==> "unset" ]
             ]

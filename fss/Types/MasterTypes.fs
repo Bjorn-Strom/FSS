@@ -228,7 +228,8 @@ namespace Fss.FssTypes
     type IMaskPosition  = interface end
     type IMaskRepeat    = interface end
 
-    type IObjectFit = interface end
+    type IObjectFit      = interface end
+    type IObjectPosition = interface end
 
     // Types
     type CssProperty = CssProperty of string * obj
@@ -541,6 +542,7 @@ namespace Fss.FssTypes
         interface IMaskOrigin
         interface IMaskPosition
         interface IMaskRepeat
+        interface IObjectPosition
 
     type CssInt =
         | CssInt of int
