@@ -116,7 +116,6 @@ namespace Fss.FssTypes
     type IFlexShrink     = interface end
     type IFlexBasis      = interface end
 
-
     type IMargin        = interface end
     type IPadding       = interface end
 
@@ -227,6 +226,7 @@ namespace Fss.FssTypes
     type IMaskOrigin    = interface end
     type IMaskPosition  = interface end
     type IMaskRepeat    = interface end
+    type IMaskSize      = interface end
 
     type IObjectFit      = interface end
     type IObjectPosition = interface end
@@ -283,6 +283,7 @@ namespace Fss.FssTypes
         interface IFontKerning
         interface IWillChange
         interface IImageRendering
+        interface IMaskSize
 
     type None' =
         | None'
@@ -543,6 +544,7 @@ namespace Fss.FssTypes
         interface IMaskOrigin
         interface IMaskPosition
         interface IMaskRepeat
+        interface IMaskSize
         interface IObjectPosition
         interface IImageRendering
 

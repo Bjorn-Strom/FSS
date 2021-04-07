@@ -319,3 +319,93 @@ module Mask =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let MaskRepeat': (FssTypes.IMaskRepeat -> FssTypes.CssProperty) = MaskRepeat.value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-size
+    let private stringifySize (size: FssTypes.IMaskSize) =
+        match size with
+        | :? FssTypes.Mask.Size as s -> Utilities.Helpers.duToKebab s
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+        | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
+        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | _ -> "Unknown mask size"
+
+    let private maskSizeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskSize
+    let private maskSizeValue' = stringifySize >> maskSizeValue
+
+    [<Erase>]
+    type MaskSize =
+        static member value (size: FssTypes.IMaskSize) = size |> maskSizeValue'
+        static member value (sizeX: FssTypes.IMaskSize, sizeY: FssTypes.IMaskSize) =
+            $"{stringifySize sizeX} {stringifySize sizeY}"
+            |> maskSizeValue
+        static member values(sizes: FssTypes.IMaskSize list) =
+            sizes
+            |> Utilities.Helpers.combineComma stringifySize
+            |> maskSizeValue
+        static member cover = FssTypes.Mask.Cover |> maskSizeValue'
+        static member contain = FssTypes.Mask.Contain |> maskSizeValue'
+        static member auto = FssTypes.Auto |> maskSizeValue'
+        static member inherit' = FssTypes.Inherit |> maskSizeValue'
+        static member initial = FssTypes.Initial |> maskSizeValue'
+        static member unset = FssTypes.Unset |> maskSizeValue'
+
+    /// <summary>Specifies size of mask images.</summary>
+    /// <param name="repeat">
+    ///     can be:
+    ///     - <c> MaskSize </c>
+    ///     - <c> Auto </c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let MaskSize': (FssTypes.IMaskSize -> FssTypes.CssProperty) = MaskSize.value

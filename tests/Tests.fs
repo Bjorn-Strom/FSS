@@ -5,7 +5,6 @@ open Fet
 
 module Tests =
     runTests [
-        Mask.tests
         AspectRatio.tests
         MixBlendMode.tests
         Filter.tests
@@ -49,5 +48,6 @@ module Tests =
         WillChange.tests
         Text.tests
         Image.tests
+        Mask.tests
     ]
 

@@ -282,4 +282,68 @@ module Mask =
                     "MaskRepeat unset"
                     [ MaskRepeat.unset ]
                     [ "maskRepeat" ==> "unset" ]
+                testCase
+                    "MaskSize cover"
+                    [ MaskSize.cover]
+                    [ "maskSize" ==> "cover" ]
+                testCase
+                    "MaskSize contain"
+                    [ MaskSize.contain]
+                    [ "maskSize" ==> "contain" ]
+                testCase
+                    "MaskSize pct"
+                    [ MaskSize' <| pct 50 ]
+                    [ "maskSize" ==> "50%" ]
+                testCase
+                    "MaskSize em"
+                    [ MaskSize' <| em 3. ]
+                    [ "maskSize" ==> "3.0em" ]
+                testCase
+                    "MaskSize px"
+                    [ MaskSize' <| px 12 ]
+                    [ "maskSize" ==> "12px" ]
+                testCase
+                    "MaskSize pct and auto"
+                    [ MaskSize.value(pct 50, FssTypes.Auto) ]
+                    [ "maskSize" ==> "50% auto" ]
+                testCase
+                    "MaskSize em and pct"
+                    [ MaskSize.value(em 3., pct 25) ]
+                    [ "maskSize" ==> "3.0em 25%" ]
+                testCase
+                    "MaskSize auto px"
+                    [ MaskSize.value(FssTypes.Auto, px 6) ]
+                    [ "maskSize" ==> "auto 6px" ]
+                testCase
+                    "MaskSize auto auto"
+                    [ MaskSize.value(FssTypes.Auto, FssTypes.Auto) ]
+                    [ "maskSize" ==> "auto auto" ]
+                testCase
+                    "MaskSize multiple auto auto"
+                    [ MaskSize.values [FssTypes.Auto; FssTypes.Auto ] ]
+                    [ "maskSize" ==> "auto, auto" ]
+                testCase
+                    "MaskSize multiple pct pct pct"
+                    [ MaskSize.values [pct 50; pct 25; pct 25] ]
+                    [ "maskSize" ==> "50%, 25%, 25%" ]
+                testCase
+                    "MaskSize multiple px auto contain"
+                    [ MaskSize.values [px 6; FssTypes.Auto; FssTypes.Mask.Contain] ]
+                    [ "maskSize" ==> "6px, auto, contain" ]
+                testCase
+                    "MaskSize auto"
+                    [ MaskSize.auto]
+                    [ "maskSize" ==> "auto" ]
+                testCase
+                    "MaskSize inherit"
+                    [ MaskSize.inherit']
+                    [ "maskSize" ==> "inherit" ]
+                testCase
+                    "MaskSize initial"
+                    [ MaskSize.initial]
+                    [ "maskSize" ==> "initial" ]
+                testCase
+                    "MaskSize unset"
+                    [ MaskSize.unset ]
+                    [ "maskSize" ==> "unset" ]
             ]

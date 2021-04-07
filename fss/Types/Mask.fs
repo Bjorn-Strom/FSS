@@ -1,6 +1,7 @@
 namespace Fss
 
 namespace Fss.FssTypes
+
     [<RequireQualifiedAccess>]
     module Mask =
         type Clip =
@@ -52,4 +53,9 @@ namespace Fss.FssTypes
             | Round
             | NoRepeat
             interface IMaskRepeat
+
+        type Size =
+            | Contain
+            | Cover
+            interface IMaskSize
 

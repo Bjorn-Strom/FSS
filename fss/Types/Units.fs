@@ -34,6 +34,7 @@ namespace Fss.FssTypes
         interface IWordSpacing
         interface IPerspectiveOrigin
         interface IMaskPosition
+        interface IMaskSize
 
     // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
     type Size =
@@ -91,6 +92,7 @@ namespace Fss.FssTypes
         interface IScrollMargin
         interface IScrollPadding
         interface IMaskPosition
+        interface IMaskSize
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
     type Angle =
