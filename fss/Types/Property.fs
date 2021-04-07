@@ -149,6 +149,7 @@ namespace Fss.FssTypes
             | Height
             | Hyphens
             | Isolation
+            | ImageRendering
             | JustifyContent
             | JustifyItems
             | JustifySelf

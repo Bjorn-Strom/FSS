@@ -230,11 +230,11 @@ namespace Fss.FssTypes
 
     type IObjectFit      = interface end
     type IObjectPosition = interface end
+    type IImageRendering = interface end
 
     // Types
     type CssProperty = CssProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
-
 
     type Auto =
         | Auto
@@ -282,6 +282,7 @@ namespace Fss.FssTypes
         interface IIsolation
         interface IFontKerning
         interface IWillChange
+        interface IImageRendering
 
     type None' =
         | None'
@@ -543,6 +544,7 @@ namespace Fss.FssTypes
         interface IMaskPosition
         interface IMaskRepeat
         interface IObjectPosition
+        interface IImageRendering
 
     type CssInt =
         | CssInt of int

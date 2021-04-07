@@ -50,8 +50,33 @@ module Image =
         static member initial = FssTypes.Initial |> objectPositionValue'
         static member unset = FssTypes.Unset |> objectPositionValue'
 
-    /// <summary>Sets how na image or video should be resized to fit its container.</summary>
+    /// <summary>Sets how an image or video should be resized to fit its container.</summary>
     /// <param name="x"> pixel or percent </param>
     /// <param name="y"> pixel or percent </param>
     /// <returns>Css property for fss.</returns>
     let ObjectPosition': (FssTypes.ILengthPercentage * FssTypes.ILengthPercentage -> FssTypes.CssProperty) = ObjectPosition.value
+
+    let private stringifyImageRendering (imageRendering: FssTypes.IImageRendering) =
+        match imageRendering with
+        | :? FssTypes.Image.Rendering as r -> Utilities.Helpers.duToKebab r
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+        | _ -> "Unknown image rendering"
+
+    let private imageRenderingValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ImageRendering
+    let private imageRenderingValue' = stringifyImageRendering >> imageRenderingValue
+
+    [<Erase>]
+    type ImageRendering =
+        static member value (rendering: FssTypes.IImageRendering) = rendering |> imageRenderingValue'
+        static member crispEdges = FssTypes.Image.CrispEdges |> imageRenderingValue'
+        static member pixelated = FssTypes.Image.Pixelated |> imageRenderingValue'
+        static member auto = FssTypes.Auto |> imageRenderingValue'
+        static member inherit' = FssTypes.Inherit |> imageRenderingValue'
+        static member initial = FssTypes.Initial |> imageRenderingValue'
+        static member unset = FssTypes.Unset |> imageRenderingValue'
+
+    /// <summary>Sets the image scaling algorithm.</summary>
+    /// <param name="y"> pixel or percent </param>
+    /// <returns>Css property for fss.</returns>
+    let ImageRendering' = ImageRendering.value

@@ -57,4 +57,28 @@ module Image =
                     "ObjectPosition unset"
                     [ ObjectPosition.unset ]
                     [ "objectPosition" ==> "unset" ]
+                testCase
+                    "ImageRendering auto"
+                    [ ImageRendering.auto]
+                    [ "imageRendering" ==> "auto" ]
+                testCase
+                    "ImageRendering crispEdges"
+                    [ ImageRendering.crispEdges]
+                    [ "imageRendering" ==> "crisp-edges" ]
+                testCase
+                    "ImageRendering pixelated"
+                    [ ImageRendering.pixelated ]
+                    [ "imageRendering" ==> "pixelated" ]
+                testCase
+                    "ImageRendering inherit"
+                    [ ImageRendering.inherit']
+                    [ "imageRendering" ==> "inherit" ]
+                testCase
+                    "ImageRendering initial"
+                    [ ImageRendering.initial]
+                    [ "imageRendering" ==> "initial" ]
+                testCase
+                    "ImageRendering unset"
+                    [ ImageRendering.unset ]
+                    [ "imageRendering" ==> "unset" ]
             ]

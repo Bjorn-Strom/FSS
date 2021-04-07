@@ -129,3 +129,8 @@ namespace Fss.FssTypes
             | ScaleDown
             interface IObjectFit
 
+        type Rendering =
+            | CrispEdges
+            | Pixelated
+            interface IImageRendering
+
