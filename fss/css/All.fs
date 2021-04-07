@@ -10,7 +10,7 @@ module All =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private allValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.All value
+    let private allValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.All
     let private allValue' = stringifyAll >> allValue
 
     [<Erase>]
@@ -28,4 +28,4 @@ module All =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let All' (all: FssTypes.IAll) = all |> All.value
+    let All' = All.value

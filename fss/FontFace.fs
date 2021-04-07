@@ -12,11 +12,11 @@ module FontFace =
             | FssTypes.FontFace.UrlFormat (s, f) -> sprintf "url('%s') format('%s')" s (Utilities.Helpers.duToKebab f)
             | FssTypes.FontFace.Local l -> sprintf "local('%s')" l
 
-    let private sourceValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Src value
-    let private styleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStyle value
-    let private displayValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay value
-    let private stretchValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStretch value
-    let private weightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight value
+    let private sourceValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Src
+    let private styleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStyle
+    let private displayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
+    let private stretchValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStretch
+    let private weightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight
 
     [<Erase>]
     type FontFace =

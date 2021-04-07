@@ -38,11 +38,8 @@ module Outline  =
             | _ -> "Unknown outline offset"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline
-    let private outlineValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Outline value
-    let private outlineValue' value =
-        value
-        |> outlineToString
-        |> outlineValue
+    let private outlineValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Outline
+    let private outlineValue' = outlineToString >> outlineValue
 
     [<Erase>]
     type Outline =
@@ -62,14 +59,11 @@ module Outline  =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Outline' (outline: FssTypes.IOutline) = Outline.value(outline)
+    let Outline' = Outline.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
-    let private colorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineColor value
-    let private colorValue' value =
-        value
-        |> outlineColorToString
-        |> colorValue
+    let private colorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineColor
+    let private colorValue' = outlineColorToString >> colorValue
 
     let OutlineColor = FssTypes.OutlineColorClass(colorValue')
     /// <summary>Sets color of outline.</summary>
@@ -81,14 +75,11 @@ module Outline  =
     ///     - <c> FssTypes.ColorType</c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineColor' (color: FssTypes.IOutlineColor) = OutlineColor.value(color)
+    let OutlineColor' = OutlineColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width
-    let private outlineWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineWidth value
-    let private outlineWidthValue' value =
-        value
-        |> outlineWidthToString
-        |> outlineWidthValue
+    let private outlineWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineWidth
+    let private outlineWidthValue' = outlineWidthToString >> outlineWidthValue
 
     [<Erase>]
     type OutlineWidth =
@@ -112,14 +103,11 @@ module Outline  =
     ///     - <c> Units.Size </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineWidth' (width: FssTypes.IOutlineWidth) = OutlineWidth.value(width)
+    let OutlineWidth' = OutlineWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style
-    let private outlineStyleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineStyle value
-    let private outlineStyleValue' value =
-        value
-        |> outlineStyleToString
-        |> outlineStyleValue
+    let private outlineStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineStyle
+    let private outlineStyleValue' = outlineStyleToString >> outlineStyleValue
 
     [<Erase>]
     type OutlineStyle =
@@ -149,14 +137,11 @@ module Outline  =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineStyle' (style: FssTypes.IOutlineStyle) = OutlineStyle.value(style)
+    let OutlineStyle' = OutlineStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset
-    let private outlineOffsetValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineOffset value
-    let private outlineOffsetValue' value =
-        value
-        |> outlineOffsetToString
-        |> outlineOffsetValue
+    let private outlineOffsetValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineOffset
+    let private outlineOffsetValue' = outlineOffsetToString >> outlineOffsetValue
 
     [<Erase>]
     type OutlineOffset =
@@ -174,4 +159,4 @@ module Outline  =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OutlineOffset' (offset: FssTypes.IOutlineOffset) = OutlineOffset.value(offset)
+    let OutlineOffset' = OutlineOffset.value

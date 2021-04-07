@@ -18,12 +18,8 @@ module Perspective =
         | _ -> "Unknown perspective origin"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
-    let private perspectiveValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Perspective value
-    let private perspectiveValue' value =
-        value
-        |> perspectiveToString
-        |> perspectiveValue
-
+    let private perspectiveValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Perspective
+    let private perspectiveValue' = perspectiveToString >> perspectiveValue
 
     [<Erase>]
     type Perspective =
@@ -43,14 +39,11 @@ module Perspective =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Perspective' (perspective: FssTypes.IPerspective) = Perspective.value(perspective)
+    let Perspective' = Perspective.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective-origin
-    let private perspectiveOriginValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PerspectiveOrigin value
-    let private perspectiveOriginValue' value =
-        value
-        |> perspectiveOriginToString
-        |> perspectiveOriginValue
+    let private perspectiveOriginValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PerspectiveOrigin
+    let private perspectiveOriginValue' = perspectiveOriginToString >> perspectiveOriginValue
 
     [<Erase>]
     type PerspectiveOrigin =
@@ -71,8 +64,7 @@ module Perspective =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PerspectiveOrigin' (origin: FssTypes.IPerspectiveOrigin) = PerspectiveOrigin.value(origin)
-
+    let PerspectiveOrigin' = PerspectiveOrigin.value
 
 [<AutoOpen>]
 module BackfaceVisibility =
@@ -82,12 +74,8 @@ module BackfaceVisibility =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown backface visibility"
 
-    let private backfaceVisibilityValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackfaceVisibility value
-    let private backfaceVisibilityValue' value =
-        value
-        |> visibilityToString
-        |> backfaceVisibilityValue
-
+    let private backfaceVisibilityValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackfaceVisibility
+    let private backfaceVisibilityValue' = visibilityToString >> backfaceVisibilityValue
 
     [<Erase>]
     type BackfaceVisibility =
@@ -107,4 +95,4 @@ module BackfaceVisibility =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackfaceVisibility' (visibility: FssTypes.IBackfaceVisibility) = BackfaceVisibility.value(visibility)
+    let BackfaceVisibility' = BackfaceVisibility.value

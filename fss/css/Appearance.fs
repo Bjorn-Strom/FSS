@@ -11,11 +11,8 @@ module Appearance =
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | _ -> "Unknown appearance"
 
-    let private appearanceValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Appearance value
-    let private appearanceValue' value =
-        value
-        |> appearanceToString
-        |> appearanceValue
+    let private appearanceValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Appearance
+    let private appearanceValue' = appearanceToString >> appearanceValue
 
     [<Erase>]
     type Appearance =
@@ -98,4 +95,4 @@ module Appearance =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Appearance' (appearance: FssTypes.IAppearance) = appearance |> Appearance.value
+    let Appearance' = Appearance.value

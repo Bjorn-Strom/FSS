@@ -11,11 +11,8 @@ open Fable.Core
 [<AutoOpen>]
 module ContentSize =
 
-    let private widthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Width value
-    let private widthValue' value =
-        value
-        |> FssTypes.contentSizeHelpers.contentSizeToString
-        |> widthValue
+    let private widthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Width
+    let private widthValue' = FssTypes.contentSizeHelpers.contentSizeToString >> widthValue
 
     [<Erase>]
     type Width =
@@ -43,13 +40,10 @@ module ContentSize =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Width' (size: FssTypes.ILengthPercentage) = Width.value(size)
+    let Width': (FssTypes.ILengthPercentage -> FssTypes.CssProperty) = Width.value
 
-    let private minWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MinWidth value
-    let private minWidthValue' value =
-        value
-        |> FssTypes.contentSizeHelpers.contentSizeToString
-        |> minWidthValue
+    let private minWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MinWidth
+    let private minWidthValue' = FssTypes.contentSizeHelpers.contentSizeToString >> minWidthValue
 
     [<Erase>]
     type MinWidth =
@@ -77,13 +71,10 @@ module ContentSize =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MinWidth' (minWidth: FssTypes.ILengthPercentage) = MinWidth.value(minWidth)
+    let MinWidth': (FssTypes.IContentSize -> FssTypes.CssProperty) = MinWidth.value
 
-    let private maxWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaxWidth value
-    let private maxWidthValue' value =
-        value
-        |> FssTypes.contentSizeHelpers.contentSizeToString
-        |> maxWidthValue
+    let private maxWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaxWidth
+    let private maxWidthValue' = FssTypes.contentSizeHelpers.contentSizeToString >> maxWidthValue
 
     [<Erase>]
     type MaxWidth =
@@ -111,13 +102,10 @@ module ContentSize =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaxWidth' (maxWidth: FssTypes.ILengthPercentage) = MaxWidth.value(maxWidth)
+    let MaxWidth': (FssTypes.ILengthPercentage -> FssTypes.CssProperty) = MaxWidth.value
 
-    let private heightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Height value
-    let private heightValue' value =
-        value
-        |> FssTypes.contentSizeHelpers.contentSizeToString
-        |> heightValue
+    let private heightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Height
+    let private heightValue' = FssTypes.contentSizeHelpers.contentSizeToString >> heightValue
 
     [<Erase>]
     type Height =
@@ -145,13 +133,10 @@ module ContentSize =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Height' (height: FssTypes.ILengthPercentage) = Height.value(height)
+    let Height': (FssTypes.ILengthPercentage -> FssTypes.CssProperty) = Height.value
 
-    let private minHeightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MinHeight value
-    let private minHeightValue' value =
-        value
-        |> FssTypes.contentSizeHelpers.contentSizeToString
-        |> minHeightValue
+    let private minHeightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MinHeight
+    let private minHeightValue' = FssTypes.contentSizeHelpers.contentSizeToString >> minHeightValue
 
     [<Erase>]
     type MinHeight =
@@ -179,13 +164,10 @@ module ContentSize =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MinHeight' (minHeight: FssTypes.ILengthPercentage) = MinHeight.value(minHeight)
+    let MinHeight': (FssTypes.IContentSize -> FssTypes.CssProperty) = MinHeight.value
 
-    let private maxHeightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaxHeight value
-    let private maxHeightValue' value =
-        value
-        |> FssTypes.contentSizeHelpers.contentSizeToString
-        |> maxHeightValue
+    let private maxHeightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaxHeight
+    let private maxHeightValue' = FssTypes.contentSizeHelpers.contentSizeToString >> maxHeightValue
 
     [<Erase>]
     type MaxHeight =
@@ -213,4 +195,4 @@ module ContentSize =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaxHeight' (maxHeight: FssTypes.ILengthPercentage) = MaxHeight.value(maxHeight)
+    let MaxHeight': (FssTypes.IContentSize -> FssTypes.CssProperty) = MaxHeight.value

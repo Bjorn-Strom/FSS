@@ -140,8 +140,8 @@ module Font =
         | _ -> "Unknown font variant position"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
-    let private sizeCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontSize value
-    let private sizeCssValue' value = value |> fontSizeToString |> sizeCssValue
+    let private sizeCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontSize
+    let private sizeCssValue' = fontSizeToString >> sizeCssValue
     [<Erase>]
     type FontSize =
         static member value (value: FssTypes.IFontSize) = value |> sizeCssValue'
@@ -171,11 +171,11 @@ module Font =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontSize' (size: FssTypes.IFontSize) = FontSize.value(size)
+    let FontSize' = FontSize.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
-    let private styleCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStyle value
-    let private styleCssValue' value = value |> FssTypes.fontHelpers.fontStyleToString |> styleCssValue
+    let private styleCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStyle
+    let private styleCssValue' = FssTypes.fontHelpers.fontStyleToString >> styleCssValue
     [<Erase>]
     type FontStyle =
         static member value (fontStyle: FssTypes.IFontStyle) = fontStyle |> styleCssValue'
@@ -197,11 +197,11 @@ module Font =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontStyle' (style: FssTypes.IFontStyle) = FontStyle.value(style)
+    let FontStyle' = FontStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
-    let private stretchCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStretch value
-    let private stretchCssValue' value = value |> FssTypes.fontHelpers.fontStretchToString |> stretchCssValue
+    let private stretchCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStretch
+    let private stretchCssValue' = FssTypes.fontHelpers.fontStretchToString >> stretchCssValue
     [<Erase>]
     type FontStretch =
         static member value (fontStretch: FssTypes.IFontStretch) = fontStretch |> stretchCssValue'
@@ -232,11 +232,11 @@ module Font =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontStretch' (stretch: FssTypes.IFontStretch) = FontStretch.value(stretch)
+    let FontStretch' = FontStretch.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
-    let private weightCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight value
-    let private weightCssValue' value = value |> FssTypes.fontHelpers.fontWeightToString |> weightCssValue
+    let private weightCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight
+    let private weightCssValue' = FssTypes.fontHelpers.fontWeightToString >> weightCssValue
     [<Erase>]
     type FontWeight =
         static member value (fontWeight: FssTypes.IFontWeight) = fontWeight |> weightCssValue'
@@ -260,14 +260,11 @@ module Font =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontWeight' (weight: FssTypes.IFontWeight) = FontWeight.value(weight)
+    let FontWeight' = FontWeight.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
-    let private heightCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.LineHeight value
-    let private heightCssValue' value =
-        value
-        |> lineHeightToString
-        |> heightCssValue
+    let private heightCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LineHeight
+    let private heightCssValue' = lineHeightToString >> heightCssValue
     [<Erase>]
     type LineHeight =
         static member value (height: FssTypes.ILineHeight) = height |> heightCssValue'
@@ -289,14 +286,11 @@ module Font =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let LineHeight' (height: FssTypes.ILineHeight) = LineHeight.value(height)
+    let LineHeight' = LineHeight.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-break
-    let private breakCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.LineBreak value
-    let private breakCssValue' value =
-        value
-        |> lineBreakToString
-        |> breakCssValue
+    let private breakCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LineBreak
+    let private breakCssValue' = lineBreakToString >> breakCssValue
     [<Erase>]
     type LineBreak =
         static member value (break': FssTypes.ILineBreak) = break' |> breakCssValue'
@@ -321,14 +315,11 @@ module Font =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let LineBreak' (break': FssTypes.ILineBreak) = LineBreak.value(break')
+    let LineBreak' = LineBreak.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
-    let private spacingCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.LetterSpacing value
-    let private spacingCssValue' value =
-        value
-        |> letterSpacingToString
-        |> spacingCssValue
+    let private spacingCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LetterSpacing
+    let private spacingCssValue' = letterSpacingToString >> spacingCssValue
     [<Erase>]
     type LetterSpacing =
         static member value (spacing: FssTypes.ILetterSpacing) = spacing |> spacingCssValue'
@@ -348,14 +339,11 @@ module Font =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let LetterSpacing' (spacing: FssTypes.ILetterSpacing) = LetterSpacing.value(spacing)
+    let LetterSpacing' = LetterSpacing.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
-    let private displayCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay value
-    let private displayCssValue' value =
-        value
-        |> FssTypes.fontHelpers.fontDisplayToString
-        |> FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
+    let private displayCssValue: (string -> FssTypes.CssProperty) = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
+    let private displayCssValue' = FssTypes.fontHelpers.fontDisplayToString >> FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
     [<Erase>]
     type FontDisplay =
         static member value (fontDisplay: FssTypes.IFontDisplay) = fontDisplay |> displayCssValue'
@@ -373,11 +361,11 @@ module Font =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontDisplay' (display: FssTypes.IFontDisplay) = FontDisplay.value(display)
+    let FontDisplay' = FontDisplay.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
-    let private familyCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontFamily value
-    let private familyCssValue' value = value |> familyToString |> familyCssValue
+    let private familyCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontFamily
+    let private familyCssValue' = familyToString >> familyCssValue
 
     [<Erase>]
     type FontFamily =
@@ -406,11 +394,11 @@ module Font =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontFamily' (fontFamily: FssTypes.IFontFamily) = FontFamily.value(fontFamily)
+    let FontFamily'  = FontFamily.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
-    let private featureSettingCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontFeatureSettings value
-    let private featureSettingCssValue' value = value |> featureSettingToString |> featureSettingCssValue
+    let private featureSettingCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontFeatureSettings
+    let private featureSettingCssValue' = featureSettingToString >> featureSettingCssValue
 
     [<Erase>]
     type FontFeatureSetting =
@@ -455,11 +443,11 @@ module Font =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontFeatureSetting' (featureSetting: FssTypes.IFontFeatureSetting) = FontFeatureSetting.value(featureSetting)
+    let FontFeatureSetting' = FontFeatureSetting.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
-    let private variantNumericCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantNumeric value
-    let private variantNumericCssValue' value = value |> variantNumericToString |> variantNumericCssValue
+    let private variantNumericCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantNumeric
+    let private variantNumericCssValue' = variantNumericToString >> variantNumericCssValue
 
     [<Erase>]
     type FontVariantNumeric =
@@ -487,11 +475,11 @@ module Font =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontVariantNumeric' (variant: FssTypes.IFontVariantNumeric) = FontVariantNumeric.value(variant)
+    let FontVariantNumeric' = FontVariantNumeric.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
-    let private variantCapsCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantCaps value
-    let private variantCapsCssValue' value = value |> fontVariantCapsToString |> variantCapsCssValue
+    let private variantCapsCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantCaps
+    let private variantCapsCssValue' = fontVariantCapsToString >> variantCapsCssValue
     [<Erase>]
     type FontVariantCaps =
         static member value (variantCaps: FssTypes.IFontVariantCaps) = variantCaps |> variantCapsCssValue'
@@ -517,11 +505,11 @@ module Font =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontVariantCaps' (variant: FssTypes.IFontVariantCaps) = FontVariantCaps.value(variant)
+    let FontVariantCaps' = FontVariantCaps.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-    let private variantEastAsianCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantEastAsian value
-    let private variantEastAsianCssValue' value = value |> variantEastAsianToString |> variantEastAsianCssValue
+    let private variantEastAsianCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantEastAsian
+    let private variantEastAsianCssValue' = variantEastAsianToString >> variantEastAsianCssValue
     [<Erase>]
     type FontVariantEastAsian =
         static member value (variant: FssTypes.IFontVariantEastAsian) = variant |> variantEastAsianCssValue'
@@ -550,11 +538,11 @@ module Font =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontVariantEastAsian' (variant: FssTypes.IFontVariantEastAsian) = FontVariantEastAsian.value(variant)
+    let FontVariantEastAsian' = FontVariantEastAsian.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-    let private variantLigatureCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantLigatures value
-    let private variantLigatureCssValue' value = value |> variantLigatureToString |> variantLigatureCssValue
+    let private variantLigatureCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantLigatures
+    let private variantLigatureCssValue' = variantLigatureToString >> variantLigatureCssValue
     [<Erase>]
     type FontVariantLigatures =
         static member value (variant: FssTypes.IFontVariantLigature) = variant |> variantLigatureCssValue'
@@ -584,11 +572,11 @@ module Font =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontVariantLigatures' (ligature: FssTypes.IFontVariantLigature) = FontVariantLigatures.value(ligature)
+    let FontVariantLigatures' = FontVariantLigatures.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-kerning
-    let private kerningValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontKerning value
-    let private kerningValue' value = value |> fontKerningTostring |> kerningValue
+    let private kerningValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontKerning
+    let private kerningValue' = fontKerningTostring >> kerningValue
 
     [<Erase>]
     type FontKerning =
@@ -608,8 +596,8 @@ module Font =
     let FontKerning' (fontKerning: FssTypes.IFontKerning) = FontKerning.value(fontKerning)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-language-override
-    let private fontLanguageOverrideValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontLanguageOverride value
-    let private fontLanguageOverrideValue' value = value |> fontLanguageOverrideToString |> fontLanguageOverrideValue
+    let private fontLanguageOverrideValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontLanguageOverride
+    let private fontLanguageOverrideValue' =  fontLanguageOverrideToString >> fontLanguageOverrideValue
 
     [<Erase>]
     type FontLanguageOverride =
@@ -629,11 +617,11 @@ module Font =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontLanguageOverride' (languageOverride: FssTypes.IFontLanguageOverride) = FontLanguageOverride.value(languageOverride)
+    let FontLanguageOverride': (FssTypes.IFontLanguageOverride -> FssTypes.CssProperty) = FontLanguageOverride.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis
-    let private fontSynthesisValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontSynthesis value
-    let private fontSynthesisValue' value = value |> fontSynthesisToString |> fontSynthesisValue
+    let private fontSynthesisValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontSynthesis
+    let private fontSynthesisValue' = fontSynthesisToString >> fontSynthesisValue
 
     [<Erase>]
     type FontSynthesis =
@@ -653,8 +641,8 @@ module Font =
     let FontSynthesis' (synthesis: FssTypes.IFontSynthesis) = FontSynthesis.value(synthesis)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-position
-    let private fontVariantPositionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantPosition value
-    let private fontVariantPositionValue' value = value |> fontVariantPositionToString |> fontVariantPositionValue
+    let private fontVariantPositionValue  = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantPosition
+    let private fontVariantPositionValue' = fontVariantPositionToString >> fontVariantPositionValue
 
     [<Erase>]
     type FontVariantPosition =
@@ -676,7 +664,7 @@ module Font =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FontVariantPosition' (variantPosition: FssTypes.IFontVariantPosition) = FontVariantPosition.value(variantPosition)
+    let FontVariantPosition' = FontVariantPosition.value
 
 
 

@@ -335,6 +335,10 @@ module Text =
                     ["textEmphasisColor" ==> "unset"]
                 testCase
                     "Text emphasis position over right"
+                    [ TextEmphasisPosition' (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Right) ]
+                    ["textEmphasisPosition" ==> "over right"]
+                testCase
+                    "Text emphasis position over right"
                     [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Right) ]
                     ["textEmphasisPosition" ==> "over right"]
                 testCase

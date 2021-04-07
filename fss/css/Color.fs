@@ -5,11 +5,8 @@ open Fable.Core
 [<AutoOpen>]
 module Color =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color-adjust
-    let private colorAdjustCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColorAdjust value
-    let private colorAdjustCssValue' (value: FssTypes.Color.ColorAdjust) =
-        value
-        |> Utilities.Helpers.duToLowercase
-        |> colorAdjustCssValue
+    let private colorAdjustCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColorAdjust
+    let private colorAdjustCssValue' = Utilities.Helpers.duToLowercase >> colorAdjustCssValue
     let private colorToString (color: FssTypes.IColor) =
         match color with
         | :? FssTypes.Color.ColorType as c -> FssTypes.Color.colorHelpers.colorToString c
@@ -22,16 +19,11 @@ module Color =
         static member economy = FssTypes.Color.Economy |> colorAdjustCssValue'
         static member exact = FssTypes.Color.Exact |> colorAdjustCssValue'
 
-    let ColorAdjust' (adjust: FssTypes.Color.ColorAdjust) = adjust |> ColorAdjust.value
+    let ColorAdjust' = ColorAdjust.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/color
-    let private colorCssValue value =
-        value
-        |> FssTypes.propertyHelpers.cssValue FssTypes.Property.Color
-    let private colorCssValue' value =
-        value
-        |> colorToString
-        |> colorCssValue
+    let private colorCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Color
+    let private colorCssValue' = colorToString >> colorCssValue
 
     let Color = FssTypes.Color.ColorClass(colorCssValue')
 

@@ -21,11 +21,8 @@ module Overflow =
         | _ -> "Unknown overflow wrap"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
-    let private overflowValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Overflow value
-    let private overflowValue' value =
-        value
-        |> overflowToString
-        |> overflowValue
+    let private overflowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Overflow
+    let private overflowValue' = overflowToString >> overflowValue
 
     [<Erase>]
     type Overflow =
@@ -55,13 +52,10 @@ module Overflow =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Overflow' (overflow: FssTypes.IOverflow) = Overflow.value(overflow)
+    let Overflow' = Overflow.value
 
-    let private overflowXValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverflowX value
-    let private overflowXValue' value =
-        value
-        |> overflowToString
-        |> overflowXValue
+    let private overflowXValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverflowX
+    let private overflowXValue' = overflowToString >> overflowXValue
 
     [<Erase>]
     type OverflowX =
@@ -86,13 +80,10 @@ module Overflow =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OverflowX' (overflow: FssTypes.IOverflow) = OverflowX.value(overflow)
+    let OverflowX' = OverflowX.value
 
-    let private overflowYValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverflowY value
-    let private overflowYValue' value =
-        value
-        |> overflowToString
-        |> overflowYValue
+    let private overflowYValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverflowY
+    let private overflowYValue' = overflowToString >> overflowYValue
 
     [<Erase>]
     type OverflowY =
@@ -117,14 +108,11 @@ module Overflow =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OverflowY' (overflow: FssTypes.IOverflow) = OverflowY.value(overflow)
+    let OverflowY' = OverflowY.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
-    let private overflowWrapValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverflowWrap value
-    let private overflowWrapValue' value =
-        value
-        |> wrapToString
-        |> overflowWrapValue
+    let private overflowWrapValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverflowWrap
+    let private overflowWrapValue' = wrapToString >> overflowWrapValue
 
     [<Erase>]
     type OverflowWrap =
@@ -147,4 +135,4 @@ module Overflow =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OverflowWrap' (overflowWrap: FssTypes.IOverflowWrap) = OverflowWrap.value(overflowWrap)
+    let OverflowWrap' = OverflowWrap.value

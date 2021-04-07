@@ -94,11 +94,8 @@ module Flex =
         | _ -> "Unknown flex basis"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
-    let private alignContentValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AlignContent value
-    let private alignContentValue' value =
-        value
-        |> alignContentToString
-        |> alignContentValue
+    let private alignContentValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AlignContent
+    let private alignContentValue' = alignContentToString >> alignContentValue
 
     [<Erase>]
     type AlignContent =
@@ -133,14 +130,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AlignContent' (align: FssTypes.IAlignContent) = AlignContent.value(align)
+    let AlignContent' = AlignContent.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
-    let private alignItemsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AlignItems value
-    let private alignItemsValue' value =
-        value
-        |> alignItemsToString
-        |> alignItemsValue
+    let private alignItemsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AlignItems
+    let private alignItemsValue' = alignItemsToString >> alignItemsValue
 
     [<Erase>]
     type AlignItems =
@@ -174,14 +168,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AlignItems' (align: FssTypes.IAlignItems) = AlignItems.value(align)
+    let AlignItems' = AlignItems.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
-    let private alignSelfValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AlignSelf value
-    let private alignSelfValue' value =
-        value
-        |> alignSelfToString
-        |> alignSelfValue
+    let private alignSelfValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AlignSelf
+    let private alignSelfValue' = alignSelfToString >> alignSelfValue
 
     [<Erase>]
     type AlignSelf =
@@ -215,18 +206,15 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AlignSelf' (align: FssTypes.IAlignSelf) = AlignSelf.value(align)
+    let AlignSelf' = AlignSelf.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
-    let private justifyContentValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifyContent value
-    let private justifyContentValue' value =
-        value
-        |> justifyContentToString
-        |> justifyContentValue
+    let private justifyContentValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifyContent
+    let private justifyContentValue': (FssTypes.IJustifyContent -> FssTypes.CssProperty) = justifyContentToString >> justifyContentValue
 
     [<Erase>]
     type JustifyContent =
-        static member value (justification: FssTypes.IJustifyContent) = justification |> justifyContentValue
+        static member value (justification: FssTypes.IJustifyContent) = justification |> justifyContentValue'
         static member start = FssTypes.Flex.JustifyContent.Start |> justifyContentValue'
         static member end' = FssTypes.Flex.JustifyContent.End |> justifyContentValue'
         static member flexStart = FssTypes.Flex.JustifyContent.FlexStart |> justifyContentValue'
@@ -259,14 +247,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let JustifyContent' (align: FssTypes.IJustifyContent) = JustifyContent.value(align)
+    let JustifyContent' = JustifyContent.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
-    let private justifyItemsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifyItems value
-    let private justifyItemsValue' value =
-        value
-        |> justifyItemsToString
-        |> justifyItemsValue
+    let private justifyItemsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifyItems
+    let private justifyItemsValue' = justifyItemsToString >> justifyItemsValue
 
     [<Erase>]
     type JustifyItems =
@@ -303,14 +288,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let JustifyItems' (align: FssTypes.IJustifyItems) = JustifyItems.value(align)
+    let JustifyItems' = JustifyItems.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
-    let private justifySelfValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifySelf value
-    let private justifySelfValue' value =
-        value
-        |> justifySelfToString
-        |> justifySelfValue
+    let private justifySelfValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifySelf
+    let private justifySelfValue' = justifySelfToString >> justifySelfValue
     [<Erase>]
     type JustifySelf =
         static member value (justification: FssTypes.IJustifySelf) = justification |> justifySelfValue'
@@ -343,14 +325,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let JustifySelf' (align: FssTypes.IJustifySelf) = JustifySelf.value(align)
+    let JustifySelf' = JustifySelf.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
-    let private flexDirectionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexDirection value
-    let private flexDirectionValue' value =
-        value
-        |> flexDirectionToString
-        |> flexDirectionValue
+    let private flexDirectionValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexDirection
+    let private flexDirectionValue' = flexDirectionToString >> flexDirectionValue
 
     [<Erase>]
     type FlexDirection =
@@ -373,14 +352,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexDirection' (direction: FssTypes.IFlexDirection) = FlexDirection.value(direction)
+    let FlexDirection' = FlexDirection.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
-    let private flexWrapValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexWrap value
-    let private flexWrapValue' value =
-        value
-        |> flexWrapToString
-        |> flexWrapValue
+    let private flexWrapValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexWrap
+    let private flexWrapValue' = flexWrapToString >> flexWrapValue
     [<Erase>]
     type FlexWrap =
         static member value (direction: FssTypes.IFlexWrap) = direction |> flexWrapValue'
@@ -401,14 +377,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexWrap' (wrap: FssTypes.IFlexWrap) = FlexWrap.value(wrap)
+    let FlexWrap' = FlexWrap.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/order
-    let private orderValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Order value
-    let private orderValue' value =
-        value
-        |> orderToString
-        |> orderValue
+    let private orderValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Order
+    let private orderValue' = orderToString >> orderValue
     [<Erase>]
     type Order =
         static member value (order: FssTypes.IOrder) = order |> orderValue'
@@ -426,14 +399,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Order' (order: FssTypes.IOrder) = Order.value(order)
+    let Order' = Order.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
-    let private flexGrowValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexGrow value
-    let private flexGrowValue' value =
-        value
-        |> flexGrowToString
-        |> flexGrowValue
+    let private flexGrowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexGrow
+    let private flexGrowValue' = flexGrowToString >> flexGrowValue
 
     [<Erase>]
     type FlexGrow =
@@ -452,14 +422,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexGrow' (grow: FssTypes.IFlexGrow) = FlexGrow.value(grow)
+    let FlexGrow' = FlexGrow.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
-    let private flexShrinkValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexShrink value
-    let private flexShrinkValue' value =
-        value
-        |> flexShrinkToString
-        |> flexShrinkValue
+    let private flexShrinkValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexShrink
+    let private flexShrinkValue' = flexShrinkToString >> flexShrinkValue
 
     [<Erase>]
     type FlexShrink =
@@ -477,14 +444,11 @@ module Flex =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexShrink' (shrink: FssTypes.IFlexShrink) = FlexShrink.value(shrink)
+    let FlexShrink' = FlexShrink.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
-    let private flexBasisValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexBasis value
-    let private flexBasisValue' value =
-        value
-        |> flexBasisToString
-        |> flexBasisValue
+    let private flexBasisValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexBasis
+    let private flexBasisValue' = flexBasisToString >> flexBasisValue
 
     [<Erase>]
     type FlexBasis =
@@ -512,4 +476,4 @@ module Flex =
     ///     - <c> Units.Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let FlexBasis' (basis: FssTypes.IFlexBasis) = FlexBasis.value(basis)
+    let FlexBasis' = FlexBasis.value

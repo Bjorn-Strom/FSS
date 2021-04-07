@@ -75,11 +75,8 @@ module Column =
         | _ -> "Unknown column width"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
-    let private columnGapValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnGap value
-    let private columnGapValue' value =
-        value
-        |> columnGapToString
-        |> columnGapValue
+    let private columnGapValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnGap
+    let private columnGapValue' = columnGapToString >> columnGapValue
     [<Erase>]
     type ColumnGap =
         static member Value (gap: FssTypes.IColumnGap) = gap |> columnGapValue'
@@ -99,14 +96,11 @@ module Column =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ColumnGap' (columnGap: FssTypes.IColumnGap) = ColumnGap.Value(columnGap)
+    let ColumnGap' = ColumnGap.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-span
-    let private columnSpanValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnSpan value
-    let private columnSpanValue' value =
-        value
-        |> columnSpanToString
-        |> columnSpanValue
+    let private columnSpanValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnSpan
+    let private columnSpanValue' = columnSpanToString >> columnSpanValue
 
     [<Erase>]
     type ColumnSpan =
@@ -127,14 +121,11 @@ module Column =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ColumnSpan' (span: FssTypes.IColumnSpan) = ColumnSpan.value(span)
+    let ColumnSpan' = ColumnSpan.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/columns
-    let private columnsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Columns value
-    let private columnsValue' value =
-        value
-        |> columnsToString
-        |> columnsValue
+    let private columnsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Columns
+    let private columnsValue' = columnsToString >> columnsValue
 
     [<Erase>]
     type Columns =
@@ -151,14 +142,11 @@ module Column =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Columns' (columns: FssTypes.IColumns) = columns |> Columns.value
+    let Columns' = Columns.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule
-    let private columnRuleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnRule value
-    let private columnRuleValue' value =
-        value
-        |> columnRuleToString
-        |> columnRuleValue
+    let private columnRuleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnRule
+    let private columnRuleValue' = columnRuleToString >> columnRuleValue
 
     [<Erase>]
     type ColumnRule =
@@ -175,14 +163,11 @@ module Column =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ColumnRule' (rule: FssTypes.IColumnRule) = rule |> ColumnRule.value
+    let ColumnRule' = ColumnRule.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
-    let private columnRuleWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnRuleWidth value
-    let private columnRuleWidthValue' value =
-        value
-        |> columnRuleWidthToString
-        |> columnRuleWidthValue
+    let private columnRuleWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnRuleWidth
+    let private columnRuleWidthValue' = columnRuleWidthToString >> columnRuleWidthValue
 
     [<Erase>]
     type ColumnRuleWidth =
@@ -204,14 +189,11 @@ module Column =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ColumnRuleWidth' (ruleWidth: FssTypes.IColumnRuleWidth) = ruleWidth |> ColumnRuleWidth.value
+    let ColumnRuleWidth' = ColumnRuleWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-style
-    let private styleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnRuleStyle value
-    let private styleValue' value =
-        value
-        |> columnRuleStyleToString
-        |> styleValue
+    let private styleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnRuleStyle
+    let private styleValue' = columnRuleStyleToString >> styleValue
 
     [<Erase>]
     type ColumnRuleStyle =
@@ -241,14 +223,11 @@ module Column =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ColumnRuleStyle' (style: FssTypes.IColumnRuleStyle) = ColumnRuleStyle.value(style)
+    let ColumnRuleStyle' = ColumnRuleStyle.value
 
      // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-color
-    let private columnRuleColorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnRuleColor value
-    let private columnRuleColorValue' value =
-        value
-        |> columnRuleColorToString
-        |> columnRuleColorValue
+    let private columnRuleColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnRuleColor
+    let private columnRuleColorValue' = columnRuleColorToString >> columnRuleColorValue
 
     let ColumnRuleColor = FssTypes.ColumnRuleColorClass(columnRuleColorValue')
 
@@ -261,14 +240,11 @@ module Column =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ColumnRuleColor' (color: FssTypes.IColumnRuleColor) = ColumnRuleColor.value(color)
+    let ColumnRuleColor' = ColumnRuleColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-count
-    let private columnCountValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnCount value
-    let private columnCountValue' value =
-        value
-        |> columnCountToString
-        |> columnCountValue
+    let private columnCountValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnCount
+    let private columnCountValue' = columnCountToString >> columnCountValue
 
     [<Erase>]
     type ColumnCount =
@@ -288,14 +264,11 @@ module Column =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ColumnCount' (columnCount: FssTypes.IColumnCount) = ColumnCount.value(columnCount)
+    let ColumnCount' = ColumnCount.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill
-    let private columnFillValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnFill value
-    let private columnFillValue' value =
-        value
-        |> columnFillToString
-        |> columnFillValue
+    let private columnFillValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnFill
+    let private columnFillValue' = columnFillToString >> columnFillValue
 
     [<Erase>]
     type ColumnFill =
@@ -317,14 +290,11 @@ module Column =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ColumnFill' (columnFill: FssTypes.IColumnFill) = ColumnFill.value(columnFill)
+    let ColumnFill' = ColumnFill.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
-    let private columnWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnWidth value
-    let private columnWidthValue' value =
-        value
-        |> columnWidthToString
-        |> columnWidthValue
+    let private columnWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnWidth
+    let private columnWidthValue' = columnWidthToString >> columnWidthValue
 
     [<Erase>]
     type ColumnWidth =
@@ -344,4 +314,4 @@ module Column =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ColumnWidth' (columnWidth: FssTypes.IColumnWidth) = ColumnWidth.value(columnWidth)
+    let ColumnWidth' = ColumnWidth.value

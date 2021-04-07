@@ -24,11 +24,8 @@ module Table =
         | _ -> "Unknown table layout"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
-    let private captionSideValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.CaptionSide value
-    let private captionSideValue' value =
-        value
-        |> captionSideToString
-        |> captionSideValue
+    let private captionSideValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.CaptionSide
+    let private captionSideValue' = captionSideToString >> captionSideValue
 
     [<Erase>]
     type CaptionSide =
@@ -52,14 +49,11 @@ module Table =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let CaptionSide' captionSide = CaptionSide.value captionSide
+    let CaptionSide' = CaptionSide.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
-    let private emptyCellsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.EmptyCells value
-    let private emptyCellsValue' value =
-        value
-        |> emptyCellsToString
-        |> emptyCellsValue
+    let private emptyCellsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.EmptyCells
+    let private emptyCellsValue' = emptyCellsToString >> emptyCellsValue
     [<Erase>]
     type EmptyCells =
         static member value (emptyCells: FssTypes.IEmptyCells) = emptyCells |> emptyCellsValue'
@@ -78,14 +72,11 @@ module Table =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let EmptyCells' (emptyCells: FssTypes.IEmptyCells) = emptyCells |> EmptyCells.value
+    let EmptyCells' = EmptyCells.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
-    let private tableLayoutValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TableLayout value
-    let private tableLayoutValue' value =
-        value
-        |> tableLayoutToString
-        |> tableLayoutValue
+    let private tableLayoutValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TableLayout
+    let private tableLayoutValue' = tableLayoutToString >> tableLayoutValue
 
     [<Erase>]
     type TableLayout =
@@ -106,4 +97,4 @@ module Table =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TableLayout' layout = TableLayout.value layout
+    let TableLayout' = TableLayout.value

@@ -11,11 +11,8 @@ module Caret =
         | _ -> "Unknown caret color"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
-    let private caretColorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.CaretColor value
-    let private caretColorValue' value =
-        value
-        |> caretColorToString
-        |> caretColorValue
+    let private caretColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.CaretColor
+    let private caretColorValue' = caretColorToString >> caretColorValue
 
 
     let CaretColor = FssTypes.CaretColorClass(caretColorValue')
@@ -27,4 +24,4 @@ module Caret =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let CaretColor' (caretColor: FssTypes.ICaretColor) = CaretColor.value caretColor
+    let CaretColor' = CaretColor.value

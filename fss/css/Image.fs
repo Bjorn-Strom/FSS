@@ -11,7 +11,7 @@ module Image =
         | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown object-fit"
 
-    let private objectFitValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ObjectFit value
+    let private objectFitValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ObjectFit
     let private objectFitValue' = stringifyObjectFit >> objectFitValue
 
     [<Erase>]
@@ -31,24 +31,14 @@ module Image =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ObjectFit' (objectFit: FssTypes.IObjectFit) = objectFit |> ObjectFit.value
-
-
-
-
-
-
-
-
-
-
+    let ObjectFit' = ObjectFit.value
 
     let private stringifyObjectPosition (objectPosition: FssTypes.IObjectPosition) =
         match objectPosition with
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown object-position"
 
-    let private objectPositionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ObjectPosition value
+    let private objectPositionValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ObjectPosition
     let private objectPositionValue' = stringifyObjectPosition >> objectPositionValue
 
     [<Erase>]
@@ -64,5 +54,4 @@ module Image =
     /// <param name="x"> pixel or percent </param>
     /// <param name="y"> pixel or percent </param>
     /// <returns>Css property for fss.</returns>
-    let ObjectPosition' (x: FssTypes.ILengthPercentage, y: FssTypes.ILengthPercentage) =
-        ObjectPosition.value(x, y)
+    let ObjectPosition': (FssTypes.ILengthPercentage * FssTypes.ILengthPercentage -> FssTypes.CssProperty) = ObjectPosition.value

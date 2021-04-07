@@ -35,11 +35,8 @@ module Transition =
         | _ -> "Unknown transition property"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition
-    let private transitionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Transition value
-    let private transitionValue' value =
-        value
-        |> transitionToString
-        |> transitionValue
+    let private transitionValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Transition
+    let private transitionValue' = transitionToString >> transitionValue
     [<Erase>]
     type Transition =
         static member value (delay: FssTypes.ITransition) = delay |> transitionValue'
@@ -56,14 +53,11 @@ module Transition =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Transition' (transition: FssTypes.ITransition) = Transition.value(transition)
+    let Transition' = Transition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
-    let private delayValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionDelay value
-    let private delayValue' value =
-        value
-        |> delayToString
-        |> delayValue
+    let private delayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionDelay
+    let private delayValue' = delayToString >> delayValue
     [<Erase>]
     type TransitionDelay =
         static member value (delay: FssTypes.ITransitionDelay) = delay |> delayValue'
@@ -82,14 +76,11 @@ module Transition =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransitionDelay' (delay: FssTypes.ITransitionDelay) = TransitionDelay.value(delay)
+    let TransitionDelay': (FssTypes.ITransitionDelay -> FssTypes.CssProperty) = TransitionDelay.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duraion
-    let private transitionDurationValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionDuration value
-    let private transitionDurationValue' value =
-        value
-        |> durationToString
-        |> transitionDurationValue
+    let private transitionDurationValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionDuration
+    let private transitionDurationValue' = durationToString >> transitionDurationValue
     [<Erase>]
     type TransitionDuration =
         static member value (duration: FssTypes.ITransitionDuration) = duration |> transitionDurationValue'
@@ -109,15 +100,12 @@ module Transition =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransitionDuration' (duration: FssTypes.ITransitionDuration) = TransitionDuration.value(duration)
+    let TransitionDuration': (FssTypes.ITransitionDuration -> FssTypes.CssProperty) = TransitionDuration.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
-    let private transitionTimingFunction value =
-        FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionTimingFunction value
-    let private transitionTimingFunction' value =
-        value
-        |> timingToString
-        |> transitionTimingFunction
+    let private transitionTimingFunction =
+        FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionTimingFunction
+    let private transitionTimingFunction' = timingToString >> transitionTimingFunction
     [<Erase>]
     type TransitionTimingFunction =
         static member value (timingFunction: FssTypes.ITransitionTimingFunction) = timingFunction |> transitionTimingFunction'
@@ -147,14 +135,11 @@ module Transition =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransitionTimingFunction' (timingFunction: FssTypes.ITransitionTimingFunction) = TransitionTimingFunction.value(timingFunction)
+    let TransitionTimingFunction': (FssTypes.ITransitionTimingFunction -> FssTypes.CssProperty) = TransitionTimingFunction.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property
-    let private transitionProperty value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionProperty value
-    let private transitionProperty' value =
-        value
-        |> propertyToString
-        |> transitionProperty
+    let private transitionProperty = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionProperty
+    let private transitionProperty' = propertyToString >> transitionProperty
     [<Erase>]
     type TransitionProperty =
         static member value (property: FssTypes.ITransitionProperty) = property |> transitionProperty'
@@ -435,4 +420,4 @@ module Transition =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransitionProperty' (property: FssTypes.ITransitionProperty) = TransitionProperty.value(property)
+    let TransitionProperty' = TransitionProperty.value

@@ -12,11 +12,8 @@ module Filter =
         | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown filter"
 
-    let private filterValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Filter value
-    let private filterValue' value =
-        value
-        |> stringifyFilter
-        |> filterValue
+    let private filterValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Filter
+    let private filterValue': (FssTypes.IFilter -> FssTypes.CssProperty) = stringifyFilter >> filterValue
 
     [<Erase>]
     type Filter =
@@ -38,10 +35,7 @@ module Filter =
         static member unset = FssTypes.Unset |> filterValue'
 
     /// Supply a list of filters to be applied to the element.
-    let Filters (filters: FssTypes.Filter.Filter list): FssTypes.CssProperty =
-        filters
-        |> Utilities.Helpers.combineWs FssTypes.filterHelpers.stringifyFilter
-        |> filterValue
+    let Filters = Utilities.Helpers.combineWs FssTypes.filterHelpers.stringifyFilter >> filterValue
 
 [<AutoOpen>]
 module BackdropFilter =
@@ -53,11 +47,8 @@ module BackdropFilter =
         | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown backdrop filter"
 
-    let private backdropFilterValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackdropFilter value
-    let private backdropFilterValue' value =
-        value
-        |> stringifyFilter
-        |> backdropFilterValue
+    let private backdropFilterValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackdropFilter
+    let private backdropFilterValue': (FssTypes.IBackdropFilter -> FssTypes.CssProperty) = stringifyFilter >> backdropFilterValue
 
     [<Erase>]
     type BackdropFilter =
@@ -79,7 +70,4 @@ module BackdropFilter =
         static member unset = FssTypes.Unset |> backdropFilterValue'
 
     /// Supply a list of filters to be applied to the element.
-    let BackdropFilters (backdropFilters: FssTypes.Filter.Filter list): FssTypes.CssProperty =
-        backdropFilters
-        |> Utilities.Helpers.combineWs FssTypes.filterHelpers.stringifyFilter
-        |> backdropFilterValue
+    let BackdropFilters = Utilities.Helpers.combineWs FssTypes.filterHelpers.stringifyFilter >> backdropFilterValue

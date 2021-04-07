@@ -11,11 +11,8 @@ module Resize =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown resize value"
 
-    let private resizeValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Resize value
-    let private resizeValue' value =
-        value
-        |> resizeToString
-        |> resizeValue
+    let private resizeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Resize
+    let private resizeValue' = resizeToString >> resizeValue
 
     [<Erase>]
     type Resize =
@@ -40,4 +37,4 @@ module Resize =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Resize' (resize: FssTypes.IResize) = Resize.value resize
+    let Resize' = Resize.value

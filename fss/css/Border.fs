@@ -95,11 +95,8 @@ module Border =
             | _ -> "Unknown border"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border
-    let private borderValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Border value
-    let private borderValue' value =
-        value
-        |> borderToString
-        |> borderValue
+    let private borderValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Border
+    let private borderValue' = borderToString >> borderValue
 
     [<Erase>]
     type Border =
@@ -118,14 +115,12 @@ module Border =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Border' border = border |> Border.value
+    let Border' = Border.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
-    let private radiusValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRadius value
-    let private radiusValue' value =
-        value
-        |> radiusToString
-        |> radiusValue
+    let private radiusValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRadius
+    let private radiusValue' = radiusToString >> radiusValue
+
     [<Erase>]
     type BorderRadius =
         static member value (radius: FssTypes.IBorderRadius) =
@@ -165,14 +160,12 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderRadius' (radius: FssTypes.IBorderRadius) = BorderRadius.value(radius)
+    let BorderRadius' = BorderRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-    let private bottomLeftRadiusValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomLeftRadius value
-    let private bottomLeftRadiusValue' value =
-        value
-        |> radiusToString
-        |> bottomLeftRadiusValue
+    let private bottomLeftRadiusValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomLeftRadius
+    let private bottomLeftRadiusValue' = radiusToString >> bottomLeftRadiusValue
+
     [<Erase>]
     type BorderBottomLeftRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
@@ -193,14 +186,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomLeftRadius' (radius: FssTypes.IBorderRadius) = BorderBottomLeftRadius.value(radius)
+    let BorderBottomLeftRadius' = BorderBottomLeftRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-    let private bottomRightRadiusValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomRightRadius value
-    let private bottomRightRadiusValue' value =
-        value
-        |> radiusToString
-        |> bottomRightRadiusValue
+    let private bottomRightRadiusValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomRightRadius
+    let private bottomRightRadiusValue' = radiusToString >> bottomRightRadiusValue
     [<Erase>]
     type BorderBottomRightRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
@@ -221,14 +211,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomRightRadius' (radius: FssTypes.IBorderRadius) = BorderBottomRightRadius.value(radius)
+    let BorderBottomRightRadius' = BorderBottomRightRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-    let private topLeftRadiusValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopLeftRadius value
-    let private topLeftRadiusValue' value =
-        value
-        |> radiusToString
-        |> topLeftRadiusValue
+    let private topLeftRadiusValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopLeftRadius
+    let private topLeftRadiusValue' = radiusToString >> topLeftRadiusValue
     [<Erase>]
     type BorderTopLeftRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
@@ -249,14 +236,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopLeftRadius' (radius: FssTypes.IBorderRadius) = BorderTopLeftRadius.value(radius)
+    let BorderTopLeftRadius' = BorderTopLeftRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
-    let private topRightRadiusValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopRightRadius value
-    let private topRightRadiusValue' value =
-        value
-        |> radiusToString
-        |> topRightRadiusValue
+    let private topRightRadiusValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopRightRadius
+    let private topRightRadiusValue' = radiusToString >> topRightRadiusValue
     [<Erase>]
     type BorderTopRightRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
@@ -277,14 +261,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopRightRadius' (radius: FssTypes.IBorderRadius) = BorderTopRightRadius.value(radius)
+    let BorderTopRightRadius' = BorderTopRightRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
-    let private widthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderWidth value
-    let private widthValue' value =
-        value
-        |> widthToString
-        |> widthValue
+    let private widthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderWidth
+    let private widthValue': (FssTypes.IBorderWidth -> FssTypes.CssProperty) = widthToString >> widthValue
 
     [<Erase>]
     type BorderWidth =
@@ -326,14 +307,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderWidth' (width: FssTypes.IBorderWidth) = BorderWidth.value(width)
+    let BorderWidth' = BorderWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width
-    let internal topWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopWidth value
-    let internal topWidthValue' value =
-        value
-        |> widthToString
-        |> topWidthValue
+    let internal topWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopWidth
+    let internal topWidthValue' = widthToString >> topWidthValue
     let BorderTopWidth = FssTypes.Border.BorderValue(topWidthValue')
 
     /// <summary>Specifies width of top border.</summary>
@@ -346,14 +324,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopWidth' (width: FssTypes.IBorderWidth) = BorderTopWidth.value(width)
+    let BorderTopWidth' = BorderTopWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width
-    let private rightWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRightWidth value
-    let private rightWidthValue' value =
-        value
-        |> widthToString
-        |> rightWidthValue
+    let private rightWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRightWidth
+    let private rightWidthValue' = widthToString >> rightWidthValue
     let BorderRightWidth = FssTypes.Border.BorderValue(rightWidthValue')
     /// <summary>Specifies width of right border.</summary>
     /// <param name="width">
@@ -365,14 +340,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderRightWidth' (width: FssTypes.IBorderWidth) = BorderRightWidth.value(width)
+    let BorderRightWidth' = BorderRightWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width
-    let private bottomWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomWidth value
-    let private bottomWidthValue' value =
-        value
-        |> widthToString
-        |> bottomWidthValue
+    let private bottomWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomWidth
+    let private bottomWidthValue' = widthToString >> bottomWidthValue
     let BorderBottomWidth = FssTypes.Border.BorderValue(bottomWidthValue')
 
     /// <summary>Specifies width of bottom border.</summary>
@@ -385,14 +357,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomWidth' (width: FssTypes.IBorderWidth) = BorderBottomWidth.value(width)
+    let BorderBottomWidth' = BorderBottomWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width
-    let private leftWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderLeftWidth value
-    let private leftWidthValue' value =
-        value
-        |> widthToString
-        |> leftWidthValue
+    let private leftWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderLeftWidth
+    let private leftWidthValue' = widthToString >> leftWidthValue
     let BorderLeftWidth = FssTypes.Border.BorderValue(leftWidthValue')
     /// <summary>Specifies width of left border.</summary>
     /// <param name="width">
@@ -404,14 +373,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderLeftWidth' (width: FssTypes.IBorderWidth) = BorderLeftWidth.value(width)
+    let BorderLeftWidth' = BorderLeftWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
-    let private styleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderStyle value
-    let private styleValue' value =
-        value
-        |> styleToString
-        |> styleValue
+    let private styleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderStyle
+    let private styleValue' = styleToString >> styleValue
 
     [<Erase>]
     type BorderStyle =
@@ -460,14 +426,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderStyle' (style: FssTypes.IBorderStyle) = BorderStyle.value(style)
+    let BorderStyle' = BorderStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style
-    let private topStyleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopStyle value
-    let private topStyleValue' value =
-        value
-        |> styleToString
-        |> topStyleValue
+    let private topStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopStyle
+    let private topStyleValue' = styleToString >> topStyleValue
 
     let BorderTopStyle = FssTypes.Border.BorderStyle(topStyleValue')
 
@@ -481,14 +444,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopStyle' (style: FssTypes.IBorderStyle) = BorderTopStyle.value(style)
+    let BorderTopStyle' = BorderTopStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style
-    let private rightStyleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRightStyle value
-    let private rightStyleValue' value =
-        value
-        |> styleToString
-        |> rightStyleValue
+    let private rightStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRightStyle
+    let private rightStyleValue' = styleToString >> rightStyleValue
 
     let BorderRightStyle = FssTypes.Border.BorderStyle(rightStyleValue')
 
@@ -502,14 +462,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderRightStyle' (style: FssTypes.IBorderStyle) = BorderRightStyle.value(style)
+    let BorderRightStyle' = BorderRightStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style
-    let private bottomStyleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomStyle value
-    let private bottomStyleValue' value =
-        value
-        |> styleToString
-        |> bottomStyleValue
+    let private bottomStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomStyle
+    let private bottomStyleValue' = styleToString >> bottomStyleValue
 
     let BorderBottomStyle = FssTypes.Border.BorderStyle(bottomStyleValue')
 
@@ -523,14 +480,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomStyle' (style: FssTypes.IBorderStyle) = BorderBottomStyle.value(style)
+    let BorderBottomStyle' = BorderBottomStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style
-    let private leftStyleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderLeftStyle value
-    let private leftStyleValue' value =
-        value
-        |> styleToString
-        |> leftStyleValue
+    let private leftStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderLeftStyle
+    let private leftStyleValue' = styleToString >> leftStyleValue
 
     let BorderLeftStyle = FssTypes.Border.BorderStyle(leftStyleValue')
 
@@ -544,14 +498,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderLeftStyle' (style: FssTypes.IBorderStyle) = BorderLeftStyle.value(style)
+    let BorderLeftStyle' = BorderLeftStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
-    let private collapseValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderCollapse value
-    let private collapseValue' value =
-        value
-        |> collapseToString
-        |> collapseValue
+    let private collapseValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderCollapse
+    let private collapseValue' = collapseToString >> collapseValue
 
     [<Erase>]
     type BorderCollapse =
@@ -572,14 +523,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderCollapse' (collapse: FssTypes.IBorderCollapse) =  BorderCollapse.value(collapse)
+    let BorderCollapse' =  BorderCollapse.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
-    let private imageOutsetValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageOutset value
-    let private imageOutsetValue' value =
-        value
-        |> imageOutsetToString
-        |> imageOutsetValue
+    let private imageOutsetValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageOutset
+    let private imageOutsetValue' = imageOutsetToString >> imageOutsetValue
 
     [<Erase>]
     type BorderImageOutset =
@@ -615,14 +563,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageOutset' (outset: FssTypes.IBorderImageOutset) =  BorderImageOutset.value(outset)
+    let BorderImageOutset' = BorderImageOutset.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
-    let private imageRepeatValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageRepeat value
-    let private imageRepeatValue' value =
-        value
-        |> repeatToString
-        |> imageRepeatValue
+    let private imageRepeatValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageRepeat
+    let private imageRepeatValue' = repeatToString >> imageRepeatValue
     [<Erase>]
     type BorderImageRepeat =
         static member value (repeat: FssTypes.IBorderRepeat) = repeat |> imageRepeatValue'
@@ -647,14 +592,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageRepeat' (repeat: FssTypes.IBorderRepeat) = BorderImageRepeat.value(repeat)
+    let BorderImageRepeat' = BorderImageRepeat.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
-    let private imageSliceValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageSlice value
-    let private imageSliceValue' value =
-        value
-        |> imageSliceToString
-        |> imageSliceValue
+    let private imageSliceValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageSlice
+    let private imageSliceValue': (FssTypes.IBorderImageSlice -> FssTypes.CssProperty) = imageSliceToString >> imageSliceValue
 
     [<Erase>]
     type BorderImageSlice =
@@ -691,14 +633,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageSlice' (slice: FssTypes.IBorderImageSlice) = BorderImageSlice.value(slice)
+    let BorderImageSlice' = BorderImageSlice.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-color
-    let private borderColorValue (value: string) = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderColor value
-    let private borderColorValue' value =
-        value
-        |> borderColorToString
-        |> borderColorValue
+    let private borderColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderColor
+    let private borderColorValue' = borderColorToString >> borderColorValue
 
     let BorderColor = FssTypes.Border.BorderColor (borderColorToString, borderColorValue, borderColorValue')
 
@@ -711,14 +650,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderColor' (color: FssTypes.IBorderColor) = BorderColor.value(color)
+    let BorderColor' = BorderColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color
-    let private topColorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopColor value
-    let private topColorValue' value =
-        value
-        |> borderColorToString
-        |> topColorValue
+    let private topColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopColor
+    let private topColorValue' = borderColorToString >> topColorValue
 
     let BorderTopColor = FssTypes.Border.BorderSideColor(topColorValue')
 
@@ -731,14 +667,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderTopColor' (color: FssTypes.IBorderColor) = BorderTopColor.value(color)
+    let BorderTopColor' = BorderTopColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
-    let private rightColorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRightColor value
-    let private rightColorValue' value =
-        value
-        |> borderColorToString
-        |> rightColorValue
+    let private rightColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRightColor
+    let private rightColorValue' = borderColorToString >> rightColorValue
     let BorderRightColor = FssTypes.Border.BorderSideColor(rightColorValue')
 
     /// <summary>Specifies color of right border.</summary>
@@ -750,14 +683,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderRightColor' (color: FssTypes.IBorderColor) = BorderRightColor.value(color)
+    let BorderRightColor' = BorderRightColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color
-    let private bottomColorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomColor value
-    let private bottomColorValue' value =
-        value
-        |> borderColorToString
-        |> bottomColorValue
+    let private bottomColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomColor
+    let private bottomColorValue' = borderColorToString >> bottomColorValue
     let BorderBottomColor = FssTypes.Border.BorderSideColor(bottomColorValue')
     /// <summary>Specifies color of bottom border.</summary>
     /// <param name="color">
@@ -768,14 +698,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderBottomColor' (color: FssTypes.IBorderColor) = BorderBottomColor.value(color)
+    let BorderBottomColor' = BorderBottomColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color
-    let private leftColorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderLeftColor value
-    let private leftColorValue' value =
-        value
-        |> borderColorToString
-        |> leftColorValue
+    let private leftColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderLeftColor
+    let private leftColorValue' = borderColorToString >> leftColorValue
     let BorderLeftColor = FssTypes.Border.BorderSideColor(leftColorValue')
 
     /// <summary>Specifies color of left border.</summary>
@@ -787,14 +714,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderLeftColor' (color: FssTypes.IBorderColor) = BorderLeftColor.value(color)
+    let BorderLeftColor' = BorderLeftColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing
-    let private spacingValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderSpacing value
-    let private spacingValue' value =
-        value
-        |> spacingToString
-        |> spacingValue
+    let private spacingValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderSpacing
+    let private spacingValue' = spacingToString >> spacingValue
     [<Erase>]
     type BorderSpacing =
         static member value (width: FssTypes.IBorderSpacing) =
@@ -818,14 +742,11 @@ module Border =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderSpacing' (spacing: FssTypes.IBorderSpacing) = BorderSpacing.value(spacing)
+    let BorderSpacing' = BorderSpacing.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
-    let private imageWidthValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageWidth value
-    let private imageWidthValue' value =
-        value
-        |> imageWidthToString
-        |> imageWidthValue
+    let private imageWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageWidth
+    let private imageWidthValue' = imageWidthToString >> imageWidthValue
     [<Erase>]
     type BorderImageWidth =
         static member value (width: FssTypes.IBorderImageWidth) = width |> imageWidthValue'
@@ -865,14 +786,11 @@ module Border =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageWidth' (width: FssTypes.IBorderImageWidth) = BorderImageWidth.value(width)
+    let BorderImageWidth' = BorderImageWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
-    let private imageValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageSource value
-    let private imageValue' value =
-        value
-        |> imageSourceToString
-        |> imageValue
+    let private imageValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageSource
+    let private imageValue' = imageSourceToString >> imageValue
 
     [<Erase>]
     type BorderImageSource =
@@ -922,4 +840,4 @@ module Border =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BorderImageSource' (source: FssTypes.IBorderImageSource) = BorderImageSource.value(source)
+    let BorderImageSource' = BorderImageSource.value

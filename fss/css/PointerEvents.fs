@@ -12,15 +12,12 @@ module PointerEvents =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown pointer event"
 
-    let private pointerEventsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PointerEvents value
-    let private pointerEventsValue' value =
-        value
-        |> eventToString
-        |> pointerEventsValue
+    let private pointerEventsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PointerEvents
+    let private pointerEventsValue': (FssTypes.IPointerEvents -> FssTypes.CssProperty) = eventToString >> pointerEventsValue
 
     [<Erase>]
     type PointerEvents =
-        static member value (pointerEvents: FssTypes.IPointerEvents) = pointerEvents |> pointerEventsValue
+        static member value (pointerEvents: FssTypes.IPointerEvents) = pointerEvents |> pointerEventsValue'
 
         static member visiblePainted = FssTypes.PointerEvents.VisiblePainted |> pointerEventsValue'
         static member visibleFill = FssTypes.PointerEvents.VisibleFill |> pointerEventsValue'
@@ -47,4 +44,4 @@ module PointerEvents =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PointerEvents' (pointerEvents: FssTypes.IPointerEvents) = PointerEvents.value(pointerEvents)
+    let PointerEvents' = PointerEvents.value

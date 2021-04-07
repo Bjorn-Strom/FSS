@@ -5,11 +5,8 @@ open Fable.Core
 // https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
 [<AutoOpen>]
 module Visibility =
-    let private visibilityValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Visibility value
-    let private visibilityValue' value =
-        value
-        |> FssTypes.visibilityHelpers.visibilityToString
-        |> visibilityValue
+    let private visibilityValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Visibility
+    let private visibilityValue' = FssTypes.visibilityHelpers.visibilityToString >> visibilityValue
 
     [<Erase>]
     type Visibility =
@@ -31,7 +28,7 @@ module Visibility =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Visibility' (visibility: FssTypes.IVisibility) = Visibility.value(visibility)
+    let Visibility' = Visibility.value
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
 [<AutoOpen>]
@@ -45,7 +42,7 @@ module Opacity =
     /// <summary>Specifies the opacity of an element.</summary>
     /// <param name="opacity"> </param>
     /// <returns>Css property for fss.</returns>
-    let Opacity' (opacity: float) = Opacity.value(opacity)
+    let Opacity' = Opacity.value
 
 
 [<AutoOpen>]
@@ -56,11 +53,8 @@ module PaintOrder =
         | :? FssTypes.Normal -> FssTypes.masterTypeHelpers.normal
         | _ -> "unknown paint order"
 
-    let private paintOrderValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaintOrder value
-    let private paintOrderValue' value =
-        value
-        |> paintOrderToString
-        |> paintOrderValue
+    let private paintOrderValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaintOrder
+    let private paintOrderValue' = paintOrderToString >> paintOrderValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/paint-order
     [<Erase>]
@@ -89,5 +83,5 @@ module PaintOrder =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaintOrder' (order: FssTypes.IPaintOrder) = PaintOrder.value(order)
+    let PaintOrder' = PaintOrder.value
 

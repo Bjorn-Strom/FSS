@@ -14,7 +14,7 @@ module WillChange =
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | _ -> "Unknown will change"
 
-    let private willChangeValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.WillChange value
+    let private willChangeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.WillChange
     let private willChangeValue' = stringifyWillChange >> willChangeValue
 
     [<Erase>]
@@ -27,3 +27,5 @@ module WillChange =
             FssTypes.WillChange.Ident (String.concat "," idents) |> willChangeValue'
 
         static member auto = FssTypes.Auto |> willChangeValue'
+
+    let WillChange' = WillChange.value

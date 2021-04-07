@@ -15,11 +15,8 @@ module Content =
         | :? FssTypes.Counter.Style as c -> FssTypes.counterStyleHelpers.counterStyleToString c
         | _ -> "Unknown content"
 
-    let private contentValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Content value
-    let private contentValue' value =
-        value
-        |> contentTypeToString
-        |> contentValue
+    let private contentValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Content
+    let private contentValue': (FssTypes.IContent -> FssTypes.CssProperty) = contentTypeToString >> contentValue
 
     [<Erase>]
     type Content =
@@ -94,7 +91,7 @@ module Content =
     ///     - <c> CounterStyle </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Content' (content: FssTypes.IContent) = Content.value(content)
+    let Content': (FssTypes.IContent -> FssTypes.CssProperty) = Content.value
 
 [<AutoOpen>]
 module Label =
@@ -107,4 +104,4 @@ module Label =
     /// <summary>Gives label to generated CSS string.</summary>
     /// <param name="label">The name to give to the generated CSS string</param>
     /// <returns>Css property for fss.</returns>
-    let Label' (label: string) = Label.value(label)
+    let Label' = Label.value

@@ -28,7 +28,7 @@ module BoxShadow =
             | FssTypes.BoxShadow.Inset shadow ->
                 sprintf "inset %s" <| boxShadowToString shadow
 
-    let private boxShadowValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BoxShadow value
+    let private boxShadowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BoxShadow
     [<Erase>]
     type BoxShadow =
         static member color (x: FssTypes.Size, y: FssTypes.Size, color: FssTypes.Color.ColorType) = FssTypes.BoxShadow.Color(x, y, color)
@@ -38,10 +38,7 @@ module BoxShadow =
                 FssTypes.BoxShadow.BlurSpreadColor(x, y, blur, spread, color)
 
     /// Supply a list of box shadows to be applied to the element.
-    let BoxShadows (shadows: FssTypes.BoxShadow.BoxShadow list): FssTypes.CssProperty =
-        shadows
-        |> Utilities.Helpers.combineComma boxShadowToString
-        |> boxShadowValue
+    let BoxShadows = Utilities.Helpers.combineComma boxShadowToString >> boxShadowValue
 
     /// Can be used to invert box shadow
-    let Inset (shadow: FssTypes.BoxShadow.BoxShadow) = FssTypes.BoxShadow.Inset shadow
+    let Inset = FssTypes.BoxShadow.Inset

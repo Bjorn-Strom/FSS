@@ -10,11 +10,8 @@ module AspectRatio =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private aspectRatioValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AspectRatio value
-    let private aspectRatioValue' value =
-        value
-        |> stringifyAspectRatio
-        |> aspectRatioValue
+    let private aspectRatioValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AspectRatio
+    let private aspectRatioValue' = stringifyAspectRatio >> aspectRatioValue
 
     [<Erase>]
     type AspectRatio =
@@ -25,4 +22,4 @@ module AspectRatio =
         static member initial = FssTypes.Initial |> aspectRatioValue'
         static member unset = FssTypes.Unset |> aspectRatioValue'
 
-    let AspectRatio' width height = aspectRatioValue(width, height)
+    let AspectRatio' = aspectRatioValue

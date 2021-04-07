@@ -13,11 +13,8 @@ module Padding =
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | _ -> "Unknown padding"
 
-    let private paddingValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Padding value
-    let private paddingValue' value =
-        value
-        |> paddingToString
-        |> paddingValue
+    let private paddingValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Padding
+    let private paddingValue' = paddingToString >> paddingValue
 
     [<Erase>]
     type Padding =
@@ -58,13 +55,10 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Padding' (padding: FssTypes.IPadding) = Padding.value(padding)
+    let Padding' = Padding.value
 
-    let private paddingTopValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingTop value
-    let private paddingTopValue' value =
-        value
-        |> paddingToString
-        |> paddingTopValue
+    let private paddingTopValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingTop
+    let private paddingTopValue' = paddingToString >> paddingTopValue
     [<Erase>]
     type PaddingTop =
         static member value (top: FssTypes.IPadding) = top |> paddingTopValue'
@@ -84,13 +78,10 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingTop' (top: FssTypes.IPadding) = PaddingTop.value(top)
+    let PaddingTop' = PaddingTop.value
 
-    let private paddingRightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingRight value
-    let private paddingRightValue' value =
-        value
-        |> paddingToString
-        |> paddingRightValue
+    let private paddingRightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingRight
+    let private paddingRightValue' = paddingToString >> paddingRightValue
     [<Erase>]
     type PaddingRight =
         static member value (right: FssTypes.IPadding) = right |> paddingRightValue'
@@ -110,13 +101,10 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingRight' (right: FssTypes.IPadding) = PaddingRight.value(right)
+    let PaddingRight' = PaddingRight.value
 
-    let private paddingBottomValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingBottom value
-    let private paddingBottomValue' value =
-        value
-        |> paddingToString
-        |> paddingBottomValue
+    let private paddingBottomValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingBottom
+    let private paddingBottomValue' = paddingToString >> paddingBottomValue
     [<Erase>]
     type PaddingBottom =
         static member value (bottom: FssTypes.IPadding) = bottom |> paddingBottomValue'
@@ -136,13 +124,10 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingBottom' (bottom: FssTypes.IPadding) = PaddingBottom.value(bottom)
+    let PaddingBottom' = PaddingBottom.value
 
-    let private paddingLeftValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingLeft value
-    let private paddingLeftValue' value =
-        value
-        |> paddingToString
-        |> paddingLeftValue
+    let private paddingLeftValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingLeft
+    let private paddingLeftValue' = paddingToString >> paddingLeftValue
     [<Erase>]
     type PaddingLeft =
         static member value (left: FssTypes.IPadding) = left |> paddingLeftValue'
@@ -162,13 +147,10 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingLeft' (left: FssTypes.IPadding) = PaddingLeft.value(left)
+    let PaddingLeft' = PaddingLeft.value
 
-    let private paddingInlineStartValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingInlineStart value
-    let private paddingInlineStartValue' value =
-        value
-        |> paddingToString
-        |> paddingInlineStartValue
+    let private paddingInlineStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingInlineStart
+    let private paddingInlineStartValue' = paddingToString >> paddingInlineStartValue
 
     [<Erase>]
     type PaddingInlineStart =
@@ -189,13 +171,10 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingInlineStart' (padding: FssTypes.IPadding) = PaddingInlineStart.value(padding)
+    let PaddingInlineStart' = PaddingInlineStart.value
 
-    let private paddingInlineEndValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingInlineEnd value
-    let private paddingInlineEndValue' value =
-        value
-        |> paddingToString
-        |> paddingInlineEndValue
+    let private paddingInlineEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingInlineEnd
+    let private paddingInlineEndValue' = paddingToString >> paddingInlineEndValue
 
     [<Erase>]
     type PaddingInlineEnd =
@@ -216,13 +195,10 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingInlineEnd' (padding: FssTypes.IPadding) = PaddingInlineEnd.value(padding)
+    let PaddingInlineEnd' = PaddingInlineEnd.value
 
-    let private paddingBlockStartValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingBlockStart value
-    let private paddingBlockStartValue' value =
-        value
-        |> paddingToString
-        |> paddingBlockStartValue
+    let private paddingBlockStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingBlockStart
+    let private paddingBlockStartValue' = paddingToString >> paddingBlockStartValue
 
     [<Erase>]
     type PaddingBlockStart =
@@ -243,13 +219,10 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingBlockStart' (padding: FssTypes.IPadding) = PaddingBlockStart.value(padding)
+    let PaddingBlockStart' = PaddingBlockStart.value
 
-    let private paddingBlockEndValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingBlockEnd value
-    let private paddingBlockEndValue' value =
-        value
-        |> paddingToString
-        |> paddingBlockEndValue
+    let private paddingBlockEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingBlockEnd
+    let private paddingBlockEndValue' = paddingToString >> paddingBlockEndValue
 
     [<Erase>]
     type PaddingBlockEnd =
@@ -270,4 +243,4 @@ module Padding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let PaddingBlockEnd' (padding: FssTypes.IPadding) = PaddingBlockEnd.value(padding)
+    let PaddingBlockEnd' = PaddingBlockEnd.value

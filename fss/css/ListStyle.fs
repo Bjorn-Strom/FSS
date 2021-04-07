@@ -28,11 +28,8 @@ module ListStyle =
         | _ -> "Unknown list style position"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style
-    let private listStyleValue (value: string) = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyle value
-    let private listStyleValue' value =
-        value
-        |> listStyleToString
-        |> listStyleValue
+    let private listStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyle
+    let private listStyleValue' = listStyleToString >> listStyleValue
 
     [<Erase>]
     type ListStyle =
@@ -52,14 +49,11 @@ module ListStyle =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ListStyle' (style: FssTypes.IListStyle) = ListStyle.value(style)
+    let ListStyle' = ListStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
-    let private listStyleImageValue (value: string) = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyleImage value
-    let private listStyleImageValue' value =
-        value
-        |> listStyleImageToString
-        |> listStyleImageValue
+    let private listStyleImageValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyleImage
+    let private listStyleImageValue' = listStyleImageToString >> listStyleImageValue
 
     [<Erase>]
     type ListStyleImage =
@@ -81,14 +75,11 @@ module ListStyle =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ListStyleImage' (image: FssTypes.IListStyleImage) = ListStyleImage.value(image)
+    let ListStyleImage' = ListStyleImage.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
-    let private listStylePositionProperty (value: string) = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStylePosition value
-    let private listStylePositionProperty' value =
-        value
-        |> stylePositionToString
-        |> listStylePositionProperty
+    let private listStylePositionProperty = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStylePosition
+    let private listStylePositionProperty' = stylePositionToString >> listStylePositionProperty
 
     [<Erase>]
     type ListStylePosition =
@@ -109,14 +100,11 @@ module ListStyle =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ListStylePosition' (position: FssTypes.IListStylePosition) = ListStylePosition.value(position)
+    let ListStylePosition' = ListStylePosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
-    let private listStyleTypeProperty (value: string) = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyleType value
-    let private listStyleTypeProperty' value =
-        value
-        |> FssTypes.listStyleHelpers.styleTypeToString
-        |> listStyleTypeProperty
+    let private listStyleTypeProperty = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyleType
+    let private listStyleTypeProperty' = FssTypes.listStyleHelpers.styleTypeToString >> listStyleTypeProperty
     [<Erase>]
     type ListStyleType =
         static member value (styleType: FssTypes.IListStyleType) = styleType |> listStyleTypeProperty'
@@ -194,4 +182,4 @@ module ListStyle =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ListStyleType' (style: FssTypes.IListStyleType) = ListStyleType.value(style)
+    let ListStyleType': (FssTypes.IListStyleType -> FssTypes.CssProperty) = ListStyleType.value

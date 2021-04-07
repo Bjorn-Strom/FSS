@@ -5,7 +5,6 @@ open Fable.Core
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
 [<AutoOpen>]
 module Animation =
-
     let private animationDirectionToString (direction: FssTypes.IAnimationDirection) =
         match direction with
             | :? FssTypes.Animation.Direction as d -> Utilities.Helpers.duToKebab d
@@ -33,21 +32,14 @@ module Animation =
         | _ -> "Unknown animation name"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
-
     [<Erase>]
     type AnimationDelay =
         static member Value (delay: FssTypes.Time) = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDelay (FssTypes.unitHelpers.timeToString delay)
 
-    /// <summary>Specifies an amount of time to wait before starting the animation. </summary>
-    /// <param name="delay"> Amount of time to wait.</param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationDelay' (delay: FssTypes.Time) = AnimationDelay.Value(delay)
+    let AnimationDelay' = AnimationDelay.Value
 
-    let private directionCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDirection value
-    let private directionCssValue' value =
-        value
-        |> animationDirectionToString
-        |> directionCssValue
+    let private directionCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDirection
+    let private directionCssValue' = animationDirectionToString >> directionCssValue
 
     [<Erase>]
     type AnimationDirection =
@@ -71,30 +63,21 @@ module Animation =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AnimationDirection' (direction: FssTypes.IAnimationDirection) = direction |> directionCssValue'
+    let AnimationDirection' = directionCssValue'
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
-    let private animationDurationCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDuration value
+    let private animationDurationCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDuration
 
     [<Erase>]
     type AnimationDuration =
         static member value (duration: FssTypes.Time) = animationDurationCssValue (FssTypes.unitHelpers.timeToString duration)
-        static member values (durations: FssTypes.Time list) =
-            durations
-            |> Utilities.Helpers.combineComma FssTypes.unitHelpers.timeToString
-            |> animationDurationCssValue
+        static member values = Utilities.Helpers.combineComma FssTypes.unitHelpers.timeToString >> animationDurationCssValue
 
-    /// <summary>Specifies an amount of time for one animation cycle to complete. </summary>
-    /// <param name="duration"> Amount of time for one cycle to complete.</param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationDuration' (duration: FssTypes.Time) = AnimationDuration.value(duration)
+    let AnimationDuration' = AnimationDuration.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
-    let private fillModeCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationFillMode value
-    let private fillModeCssValue' value =
-        value
-        |> animationFillModeToString
-        |> fillModeCssValue
+    let private fillModeCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationFillMode
+    let private fillModeCssValue' = animationFillModeToString >> fillModeCssValue
 
     [<Erase>]
     type AnimationFillMode =
@@ -104,22 +87,11 @@ module Animation =
         static member both = FssTypes.Animation.FillMode.Both |> fillModeCssValue'
         static member none = FssTypes.None' |> fillModeCssValue'
 
-    /// <summary>Specifies which styles to apply before and after the animation. </summary>
-    /// <param name="fillMode">
-    ///     can be:
-    ///     - <c> AnimationFillMode </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationFillMode' (fillMode: FssTypes.IAnimationFillMode) = fillMode |> AnimationFillMode.value
+    let AnimationFillMode' = AnimationFillMode.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count
-    let private iterationCountCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationIterationCount value
-    let private iterationCountCssValue' value =
-        value
-        |> FssTypes.animationHelpers.iterationCountToString
-        |> iterationCountCssValue
-
+    let private iterationCountCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationIterationCount
+    let private iterationCountCssValue' = FssTypes.animationHelpers.iterationCountToString >> iterationCountCssValue
 
     [<Erase>]
     type AnimationIterationCount =
@@ -137,15 +109,11 @@ module Animation =
     ///     - <c> CssInt </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AnimationIterationCount' (iterationCount: FssTypes.IAnimationIterationCount) = AnimationIterationCount.value iterationCount
+    let AnimationIterationCount' = AnimationIterationCount.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
-    let private nameValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationName value
-    let private nameValue' value =
-        value
-        |> nameToString
-        |> nameValue
-
+    let private nameValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationName
+    let private nameValue' = nameToString >> nameValue
 
     [<Erase>]
     type AnimationName =
@@ -167,14 +135,11 @@ module Animation =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AnimationName' (name: FssTypes.IAnimationName) = AnimationName.name(name)
+    let AnimationName' = AnimationName.name
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
-    let private playStateCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationPlayState value
-    let private playStateCssValue' value =
-        value
-        |> playStateTypeToString
-        |> playStateCssValue
+    let private playStateCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationPlayState
+    let private playStateCssValue' = playStateTypeToString >> playStateCssValue
 
     [<Erase>]
     type AnimationPlayState =
@@ -194,14 +159,11 @@ module Animation =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AnimationPlayState' (playState: FssTypes.IAnimationPlayState) = playState |> AnimationPlayState.value
+    let AnimationPlayState' = AnimationPlayState.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
-    let private timingFunctionCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationTimingFunction value
-    let private timingFunctionCssValue' value =
-        value
-        |> FssTypes.timingFunctionHelpers.timingToString
-        |> timingFunctionCssValue
+    let private timingFunctionCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationTimingFunction
+    let private timingFunctionCssValue': (FssTypes.ITransitionTimingFunction -> FssTypes.CssProperty) = FssTypes.timingFunctionHelpers.timingToString >> timingFunctionCssValue
 
     [<Erase>]
     type AnimationTimingFunction =
@@ -232,4 +194,4 @@ module Animation =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let AnimationTimingFunction' (timing: FssTypes.TimingFunction.Timing) = AnimationTimingFunction.value(timing)
+    let AnimationTimingFunction' = AnimationTimingFunction.value

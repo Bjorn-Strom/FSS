@@ -12,12 +12,8 @@ module ScrollBehavior =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private BehaviorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollBehavior value
-    let private BehaviorValue' value =
-        value
-        |> stringifyScrollBehavior
-        |> BehaviorValue
-
+    let private BehaviorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollBehavior
+    let private BehaviorValue' = stringifyScrollBehavior >> BehaviorValue
 
     [<Erase>]
     type ScrollBehavior =
@@ -36,7 +32,7 @@ module ScrollBehavior =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollBehavior' (behavior: FssTypes.IScrollBehavior) = behavior |> ScrollBehavior.value
+    let ScrollBehavior' = ScrollBehavior.value
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
 [<AutoOpen>]
@@ -47,12 +43,8 @@ module ScrollMargin =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown scrollMargin"
 
-    let private scrollMarginValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMargin value
-    let private scrollMarginValue' value =
-        value
-        |> scrollMarginToString
-        |> scrollMarginValue
-
+    let private scrollMarginValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMargin
+    let private scrollMarginValue' = scrollMarginToString >> scrollMarginValue
 
     [<Erase>]
     type ScrollMargin =
@@ -89,13 +81,10 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMargin' (scrollMargin: FssTypes.IScrollMargin) = ScrollMargin.value(scrollMargin)
+    let ScrollMargin' = ScrollMargin.value
 
-    let private scrollMarginTopValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginTop value
-    let private scrollMarginTopValue' value =
-        value
-        |> scrollMarginToString
-        |> scrollMarginTopValue
+    let private scrollMarginTopValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginTop
+    let private scrollMarginTopValue' = scrollMarginToString >> scrollMarginTopValue
 
     [<Erase>]
     type ScrollMarginTop =
@@ -113,13 +102,10 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMarginTop' (top: FssTypes.IScrollMargin) = ScrollMarginTop.value(top)
+    let ScrollMarginTop' = ScrollMarginTop.value
 
-    let private scrollMarginRightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginRight value
-    let private scrollMarginRightValue' value =
-        value
-        |> scrollMarginToString
-        |> scrollMarginRightValue
+    let private scrollMarginRightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginRight
+    let private scrollMarginRightValue' = scrollMarginToString >> scrollMarginRightValue
 
     [<Erase>]
     type ScrollMarginRight =
@@ -137,13 +123,10 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMarginRight' (right: FssTypes.IScrollMargin) = ScrollMarginRight.value(right)
+    let ScrollMarginRight' = ScrollMarginRight.value
 
-    let private scrollMarginBottomValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginBottom value
-    let private scrollMarginBottomValue' value =
-        value
-        |> scrollMarginToString
-        |> scrollMarginBottomValue
+    let private scrollMarginBottomValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginBottom
+    let private scrollMarginBottomValue' = scrollMarginToString >> scrollMarginBottomValue
 
     [<Erase>]
     type ScrollMarginBottom =
@@ -160,13 +143,10 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMarginBottom' (bottom: FssTypes.IScrollMargin) = ScrollMarginBottom.value(bottom)
+    let ScrollMarginBottom' = ScrollMarginBottom.value
 
-    let private scrollMarginLeftValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginLeft value
-    let private scrollMarginLeftValue' value =
-        value
-        |> scrollMarginToString
-        |> scrollMarginLeftValue
+    let private scrollMarginLeftValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollMarginLeft
+    let private scrollMarginLeftValue' = scrollMarginToString >> scrollMarginLeftValue
 
     [<Erase>]
     type ScrollMarginLeft =
@@ -184,7 +164,7 @@ module ScrollMargin =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollMarginLeft' (left: FssTypes.IScrollMargin) = ScrollMarginLeft.value(left)
+    let ScrollMarginLeft' = ScrollMarginLeft.value
 
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
@@ -196,12 +176,8 @@ module ScrollPadding =
         | :? FssTypes.Keywords as g -> FssTypes.masterTypeHelpers.keywordsToString g
         | _ -> "Unknown scrollPadding"
 
-    let private scrollPaddingValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPadding value
-    let private scrollPaddingValue' value =
-        value
-        |> scrollPaddingToString
-        |> scrollPaddingValue
-
+    let private scrollPaddingValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPadding
+    let private scrollPaddingValue' = scrollPaddingToString >> scrollPaddingValue
 
     [<Erase>]
     type ScrollPadding =
@@ -240,13 +216,10 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPadding' (scrollPadding: FssTypes.IScrollPadding) = ScrollPadding.value(scrollPadding)
+    let ScrollPadding' = ScrollPadding.value
 
-    let private scrollPaddingTopValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingTop value
-    let private scrollPaddingTopValue' value =
-        value
-        |> scrollPaddingToString
-        |> scrollPaddingTopValue
+    let private scrollPaddingTopValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingTop
+    let private scrollPaddingTopValue' = scrollPaddingToString >> scrollPaddingTopValue
 
     [<Erase>]
     type ScrollPaddingTop =
@@ -266,13 +239,10 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPaddingTop' (top: FssTypes.IScrollPadding) = ScrollPaddingTop.value(top)
+    let ScrollPaddingTop' = ScrollPaddingTop.value
 
-    let private scrollPaddingRightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingRight value
-    let private scrollPaddingRightValue' value =
-        value
-        |> scrollPaddingToString
-        |> scrollPaddingRightValue
+    let private scrollPaddingRightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingRight
+    let private scrollPaddingRightValue' = scrollPaddingToString >> scrollPaddingRightValue
 
     [<Erase>]
     type ScrollPaddingRight =
@@ -292,13 +262,10 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPaddingRight' (right: FssTypes.IScrollPadding) = ScrollPaddingRight.value(right)
+    let ScrollPaddingRight' = ScrollPaddingRight.value
 
-    let private scrollPaddingBottomValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingBottom value
-    let private scrollPaddingBottomValue' value =
-        value
-        |> scrollPaddingToString
-        |> scrollPaddingBottomValue
+    let private scrollPaddingBottomValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingBottom
+    let private scrollPaddingBottomValue' = scrollPaddingToString >> scrollPaddingBottomValue
 
     [<Erase>]
     type ScrollPaddingBottom =
@@ -317,13 +284,10 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPaddingBottom' (bottom: FssTypes.IScrollPadding) = ScrollPaddingBottom.value(bottom)
+    let ScrollPaddingBottom' = ScrollPaddingBottom.value
 
-    let private scrollPaddingLeftValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingLeft value
-    let private scrollPaddingLeftValue' value =
-        value
-        |> scrollPaddingToString
-        |> scrollPaddingLeftValue
+    let private scrollPaddingLeftValue  = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollPaddingLeft
+    let private scrollPaddingLeftValue' = scrollPaddingToString >> scrollPaddingLeftValue
 
     [<Erase>]
     type ScrollPaddingLeft =
@@ -343,7 +307,7 @@ module ScrollPadding =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let ScrollPaddingLeft' (left: FssTypes.IScrollPadding) = ScrollPaddingLeft.value(left)
+    let ScrollPaddingLeft' = ScrollPaddingLeft.value
 
 [<AutoOpen>]
 module OverscrollBehaviorX =
@@ -355,15 +319,12 @@ module OverscrollBehaviorX =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private overscrollBehaviour value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverscrollBehaviorX value
-    let private overscrollBehaviour' value =
-        value
-        |> stringifyBehavior
-        |> overscrollBehaviour
+    let private overscrollBehaviour = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverscrollBehaviorX
+    let private overscrollBehaviour': (FssTypes.IOverscrollBehaviorX -> FssTypes.CssProperty) = stringifyBehavior >> overscrollBehaviour
 
     [<Erase>]
     type OverscrollBehaviorX =
-        static member value (behavior: FssTypes.IOverscrollBehaviorX) = behavior |> overscrollBehaviour
+        static member value (behavior: FssTypes.IOverscrollBehaviorX) = behavior |> overscrollBehaviour'
         static member auto = FssTypes.Auto |> overscrollBehaviour'
         static member contain = FssTypes.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
         static member inherit' = FssTypes.Inherit |> overscrollBehaviour'
@@ -380,7 +341,7 @@ module OverscrollBehaviorX =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OverscrollBehaviorX' (behavior: FssTypes.IOverscrollBehaviorX) = behavior |> OverscrollBehaviorX.value
+    let OverscrollBehaviorX' = OverscrollBehaviorX.value
 
 [<AutoOpen>]
 module OverscrollBehaviorY =
@@ -392,16 +353,12 @@ module OverscrollBehaviorY =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private overscrollBehaviour value = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverscrollBehaviorY value
-    let private overscrollBehaviour' value =
-        value
-        |> stringifyBehavior
-        |> overscrollBehaviour
-
+    let private overscrollBehaviour = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverscrollBehaviorY
+    let private overscrollBehaviour': (FssTypes.IOverscrollBehaviorY -> FssTypes.CssProperty) = stringifyBehavior >> overscrollBehaviour
 
     [<Erase>]
     type OverscrollBehaviorY =
-        static member value (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> overscrollBehaviour
+        static member value (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> overscrollBehaviour'
         static member auto = FssTypes.Auto |> overscrollBehaviour'
         static member contain = FssTypes.Scroll.OverscrollBehavior.Contain |> overscrollBehaviour'
         static member inherit' = FssTypes.Inherit |> overscrollBehaviour'
@@ -418,4 +375,4 @@ module OverscrollBehaviorY =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let OverscrollBehaviorY' (behavior: FssTypes.IOverscrollBehaviorY) = behavior |> OverscrollBehaviorY.value
+    let OverscrollBehaviorY' = OverscrollBehaviorY.value

@@ -12,11 +12,8 @@ module Cursor =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown cursor"
 
-    let private cursorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Cursor value
-    let private cursorValue' value =
-        value
-        |> cursorToString
-        |> cursorValue
+    let private cursorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Cursor
+    let private cursorValue' = cursorToString >> cursorValue
 
     [<Erase>]
     type Cursor =
@@ -72,4 +69,4 @@ module Cursor =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Cursor' (cursor: FssTypes.ICursor) = Cursor.value(cursor)
+    let Cursor': (FssTypes.ICursor -> FssTypes.CssProperty) = Cursor.value

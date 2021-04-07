@@ -17,11 +17,8 @@ module Typography =
         | _ -> "Unknown widows"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/orphans
-    let private orphansValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Orphans value
-    let private orphansValue' value =
-        value
-        |> orphansToString
-        |> orphansValue
+    let private orphansValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Orphans
+    let private orphansValue' = orphansToString >> orphansValue
     [<Erase>]
     type Orphans =
         static member value (orphans: FssTypes.IOrphans) = orphans |> orphansValue'
@@ -38,14 +35,11 @@ module Typography =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Orphans' (orphans: FssTypes.IOrphans) = orphans |> Orphans.value
+    let Orphans' = Orphans.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/widows
-    let private widowsValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Widows value
-    let private widowsValue' value =
-        value
-        |> widowsToString
-        |> widowsValue
+    let private widowsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Widows
+    let private widowsValue' = widowsToString >> widowsValue
 
     [<Erase>]
     type Widows =
@@ -63,4 +57,4 @@ module Typography =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Widows' (widows: FssTypes.IWidows) = widows |> Widows.value
+    let Widows' = Widows.value

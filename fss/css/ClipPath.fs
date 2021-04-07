@@ -48,11 +48,8 @@ module ClipPath =
         | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown clip path"
 
-    let private clipPathValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.ClipPath value
-    let private clipPathValue' value =
-        value
-        |> stringifyClipPath
-        |> clipPathValue
+    let private clipPathValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ClipPath
+    let private clipPathValue': (FssTypes.IClipPath -> FssTypes.CssProperty) = stringifyClipPath >> clipPathValue
 
     [<Erase>]
     type ClipPath =

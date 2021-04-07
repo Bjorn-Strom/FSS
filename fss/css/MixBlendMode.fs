@@ -12,11 +12,8 @@ module MixBlendMode =
         | _ -> "Unknown mix blend mode"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
-    let private mixBlendModeCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MixBlendMode value
-    let private mixBlendModeCssValue' value =
-        value
-        |> blendModeToString
-        |> mixBlendModeCssValue
+    let private mixBlendModeCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MixBlendMode
+    let private mixBlendModeCssValue' = blendModeToString >> mixBlendModeCssValue
 
     [<Erase>]
     type MixBlendMode =
@@ -53,4 +50,4 @@ module MixBlendMode =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MixBlendMode' (mixBlendMode: FssTypes.IMixBlendMode) = mixBlendMode |> MixBlendMode.value
+    let MixBlendMode' = MixBlendMode.value

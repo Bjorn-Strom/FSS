@@ -96,14 +96,11 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundClip' (clip: FssTypes.IBackgroundClip) = BackgroundClip.value(clip)
+    let BackgroundClip' = BackgroundClip.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
-    let private originValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundOrigin value
-    let private originValue' value =
-        value
-        |> backgroundOriginToString
-        |> originValue
+    let private originValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundOrigin
+    let private originValue' = backgroundOriginToString >> originValue
     [<Erase>]
     type BackgroundOrigin =
        static member value (origin: FssTypes.IBackgroundOrigin) = origin |> originValue'
@@ -124,14 +121,11 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundOrigin' (origin: FssTypes.IBackgroundOrigin) = BackgroundOrigin.value(origin)
+    let BackgroundOrigin' = BackgroundOrigin.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
-    let private repeatValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundRepeat value
-    let private repeatValue' value =
-        value
-        |> repeatToString
-        |> repeatValue
+    let private repeatValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundRepeat
+    let private repeatValue' = repeatToString >> repeatValue
 
     [<Erase>]
     type BackgroundRepeat =
@@ -159,14 +153,12 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundRepeat' (repeat: FssTypes.IBackgroundRepeat) = BackgroundRepeat.value(repeat)
+    let BackgroundRepeat' = BackgroundRepeat.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
-    let private sizeValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundSize value
-    let private sizeValue' value =
-        value
-        |> sizeToString
-        |> sizeValue
+    let private sizeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundSize
+    let private sizeValue' = sizeToString >> sizeValue
+
     [<Erase>]
     type BackgroundSize =
         static member value (size: FssTypes.IBackgroundSize) = size |> sizeValue'
@@ -194,14 +186,12 @@ module Background =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundSize' (size: FssTypes.IBackgroundSize) = BackgroundSize.value(size)
+    let BackgroundSize' = BackgroundSize.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
-    let private attachmentValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundAttachment value
-    let private attachmentValue' value =
-        value
-        |> attachmentToString
-        |> attachmentValue
+    let private attachmentValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundAttachment
+    let private attachmentValue' = attachmentToString >> attachmentValue
+
     [<Erase>]
     type BackgroundAttachment =
         static member value (attachment: FssTypes.IBackgroundAttachment) = attachment |> attachmentValue'
@@ -222,14 +212,11 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundAttachment' (attachment: FssTypes.IBackgroundAttachment) = BackgroundAttachment.value(attachment)
+    let BackgroundAttachment' = BackgroundAttachment.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
-    let private backgroundValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundColor value
-    let private backgroundValue' value =
-        value
-        |> backgroundColorToString
-        |> backgroundValue
+    let private backgroundValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundColor
+    let private backgroundValue' = backgroundColorToString >> backgroundValue
 
     type BackgroundColorClass (valueFunction: FssTypes.IBackgroundColor -> FssTypes.CssProperty) =
         inherit FssTypes.Color.ColorBase(valueFunction)
@@ -246,7 +233,7 @@ module Background =
     ///     - <c> FssTypes.Color.ColorType</c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundColor' (color: FssTypes.Color.ColorType) = BackgroundColor.value(color)
+    let BackgroundColor' = BackgroundColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
     let private imageValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundImage value
@@ -300,14 +287,11 @@ module Background =
     ///     - <c> Image </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundImage' (image: FssTypes.Image.Image) = BackgroundImage.value(image)
+    let BackgroundImage' = BackgroundImage.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
-    let private positionCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundPosition value
-    let private positionCssValue' value =
-        value
-        |> positionToString
-        |> positionCssValue
+    let private positionCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundPosition
+    let private positionCssValue': (FssTypes.IBackgroundPosition -> FssTypes.CssProperty) = positionToString >> positionCssValue
 
     [<Erase>]
     type BackgroundPosition =
@@ -340,19 +324,13 @@ module Background =
     ///     - <c> Units.Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundPosition' (position: FssTypes.IBackgroundPosition) = BackgroundPosition.value(position)
+    let BackgroundPosition' = BackgroundPosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
-    let private blendModeCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundBlendMode value
-    let private blendModeCssValue' value =
-        value
-        |> blendModeToString
-        |> blendModeCssValue
+    let private blendModeCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundBlendMode
+    let private blendModeCssValue' = blendModeToString >> blendModeCssValue
 
-    let private blendModeValues (values: FssTypes.Background.BlendMode list) =
-        values
-        |> Utilities.Helpers.combineComma blendModeToString
-        |> blendModeCssValue
+    let private blendModeValues = Utilities.Helpers.combineComma blendModeToString >> blendModeCssValue
 
     [<Erase>]
     type BackgroundBlendMode =
@@ -390,14 +368,11 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BackgroundBlendMode' (backgroundBlendMode: FssTypes.IBackgroundBlendMode) = backgroundBlendMode |> BackgroundBlendMode.value
+    let BackgroundBlendMode'  = BackgroundBlendMode.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
-    let private isolationValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Isolation value
-    let private isolationValue' value =
-        value
-        |> isolationToString
-        |> isolationValue
+    let private isolationValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Isolation
+    let private isolationValue' = isolationToString >> isolationValue
 
     type Isolation =
         static member value(isolation: FssTypes.IIsolation) = isolation |> isolationValue'
@@ -419,7 +394,7 @@ module Background =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Isolation' (isolation: FssTypes.IIsolation) = isolation |> Isolation.value
+    let Isolation' = Isolation.value
 
 [<AutoOpen>]
 module BoxDecorationBreak =
@@ -430,11 +405,8 @@ module BoxDecorationBreak =
         | _ -> "Unknown box decoration break"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/box-decoration-break
-    let private boxDecorationBreakValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BoxDecorationBreak value
-    let private boxDecorationBreakValue' value =
-        value
-        |> boxDecorationBreakToString
-        |> boxDecorationBreakValue
+    let private boxDecorationBreakValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BoxDecorationBreak
+    let private boxDecorationBreakValue' = boxDecorationBreakToString >> boxDecorationBreakValue
 
     type BoxDecorationBreak =
         static member value(boxDecorationBreak: FssTypes.IBoxDecorationBreak) = boxDecorationBreak |> boxDecorationBreakValue'
@@ -456,6 +428,6 @@ module BoxDecorationBreak =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let BoxDecorationBreak' (boxDecorationBreak: FssTypes.IBoxDecorationBreak) = boxDecorationBreak |> BoxDecorationBreak.value
+    let BoxDecorationBreak' = BoxDecorationBreak.value
 
 

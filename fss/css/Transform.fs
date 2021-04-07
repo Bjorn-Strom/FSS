@@ -54,11 +54,8 @@ module Transform =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transform style"
 
-    let private transformValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Transform value
-    let private transformValue' value =
-        value
-        |> transformToString
-        |> transformValue
+    let private transformValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Transform
+    let private transformValue': (FssTypes.ITransform -> FssTypes.CssProperty) = transformToString >> transformValue
 
     [<Erase>]
     type Transform =
@@ -131,11 +128,8 @@ module Transform =
         |> transformValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
-    let private originValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransformOrigin value
-    let private originValue' value =
-        value
-        |> originToString
-        |> originValue
+    let private originValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransformOrigin
+    let private originValue' = originToString >> originValue
     [<Erase>]
     type TransformOrigin =
         static member value (value: FssTypes.ITransformOrigin) = value |> originValue'
@@ -172,14 +166,11 @@ module Transform =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransformOrigin' (origin: FssTypes.ITransformOrigin) = TransformOrigin.value(origin)
+    let TransformOrigin' = TransformOrigin.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
-    let private styleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransformStyle value
-    let private styleValue' value =
-        value
-        |> styleToString
-        |> styleValue
+    let private styleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransformStyle
+    let private styleValue' = styleToString >> styleValue
     [<Erase>]
     type TransformStyle =
         static member value (value: FssTypes.ITransformStyle) = value |> styleValue'
@@ -200,5 +191,5 @@ module Transform =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TransformStyle' (style: FssTypes.ITransformStyle) = TransformStyle.value(style)
+    let TransformStyle' = TransformStyle.value
 

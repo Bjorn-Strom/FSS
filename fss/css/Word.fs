@@ -19,11 +19,8 @@ module Word =
         | _ -> "Unknown word break"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing
-    let private spacingCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.WordSpacing value
-    let private spacingCssValue' value =
-        value
-        |> spacingToString
-        |> spacingCssValue
+    let private spacingCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.WordSpacing
+    let private spacingCssValue' = spacingToString >> spacingCssValue
 
     [<Erase>]
     type WordSpacing =
@@ -45,14 +42,11 @@ module Word =
     ///     - <c> Normal </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let WordSpacing' (spacing: FssTypes.IWordSpacing) = WordSpacing.value(spacing)
+    let WordSpacing' = WordSpacing.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
-    let private breakCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.WordBreak value
-    let private breakCssValue' value =
-        value
-        |> breakToString
-        |> breakCssValue
+    let private breakCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.WordBreak
+    let private breakCssValue' = breakToString >> breakCssValue
 
     [<Erase>]
     type WordBreak =
@@ -76,5 +70,5 @@ module Word =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let WordBreak' (break': FssTypes.IWordBreak) = WordBreak.value(break')
+    let WordBreak' = WordBreak.value
 

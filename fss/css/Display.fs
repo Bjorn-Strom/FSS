@@ -5,7 +5,6 @@ open Fable.Core
 [<AutoOpen>]
 module Display =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/display
-
     let private displayToString (display: FssTypes.IDisplay) =
         match display with
         | :? FssTypes.Display.Display as t -> Utilities.Helpers.duToKebab t
@@ -13,11 +12,8 @@ module Display =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown display type"
 
-    let private displayValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Display value
-    let private displayValue' value =
-        value
-        |> displayToString
-        |> displayValue
+    let private displayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Display
+    let private displayValue' = displayToString >> displayValue
 
     [<Erase>]
     type Display =
@@ -54,4 +50,4 @@ module Display =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Display' (display: FssTypes.IDisplay) = Display.value(display)
+    let Display' = Display.value

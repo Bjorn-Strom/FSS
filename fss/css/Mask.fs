@@ -11,11 +11,8 @@ module Mask =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask-clip"
 
-    let private maskClipValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskClip value
-    let private maskClipValue' value =
-        value
-        |> stringifyClip
-        |> maskClipValue
+    let private maskClipValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskClip
+    let private maskClipValue' = stringifyClip >> maskClipValue
 
     [<Erase>]
     type MaskClip =
@@ -49,7 +46,7 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskClip' (clip: FssTypes.IMaskClip) = clip |> MaskClip.value
+    let MaskClip': (FssTypes.IMaskClip -> FssTypes.CssProperty) = MaskClip.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite
     let private stringifyComposite (composite: FssTypes.IMaskComposite) =
@@ -58,11 +55,8 @@ module Mask =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask-composite"
 
-    let private maskCompositeValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskComposite value
-    let private maskCompositeValue' value =
-        value
-        |> stringifyComposite
-        |> maskCompositeValue
+    let private maskCompositeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskComposite
+    let private maskCompositeValue' = stringifyComposite >> maskCompositeValue
 
     [<Erase>]
     type MaskComposite =
@@ -88,7 +82,7 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskComposite' (clip: FssTypes.IMaskComposite) = clip |> MaskComposite.value
+    let MaskComposite': (FssTypes.IMaskComposite -> FssTypes.CssProperty) = MaskComposite.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
     let private imageSourceToString (imageSource: FssTypes.IMaskImage) =
@@ -97,11 +91,8 @@ module Mask =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask image"
 
-    let private imageValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskImage value
-    let private imageValue' value =
-        value
-        |> imageSourceToString
-        |> imageValue
+    let private imageValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskImage
+    let private imageValue' = imageSourceToString >> imageValue
 
     [<Erase>]
     type MaskImage =
@@ -151,7 +142,7 @@ module Mask =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskImage' (source: FssTypes.IMaskImage) = MaskImage.value(source)
+    let MaskImage' = MaskImage.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode
     let private stringifyMode (composite: FssTypes.IMaskMode) =
@@ -160,11 +151,8 @@ module Mask =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask mode"
 
-    let private maskModeValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskMode value
-    let private maskModeValue' value =
-        value
-        |> stringifyMode
-        |> maskModeValue
+    let private maskModeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskMode
+    let private maskModeValue' = stringifyMode >> maskModeValue
 
     [<Erase>]
     type MaskMode =
@@ -189,7 +177,7 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskMode' (mode: FssTypes.IMaskMode) = mode |> MaskMode.value
+    let MaskMode': (FssTypes.IMaskMode -> FssTypes.CssProperty) = MaskMode.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
     let private stringifyOrigin (composite: FssTypes.IMaskOrigin) =
@@ -198,11 +186,8 @@ module Mask =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask mode"
 
-    let private maskOriginValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskOrigin value
-    let maskOriginValue' value =
-        value
-        |> stringifyOrigin
-        |> maskOriginValue
+    let private maskOriginValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskOrigin
+    let maskOriginValue' = stringifyOrigin >> maskOriginValue
 
     [<Erase>]
     type MaskOrigin =
@@ -235,7 +220,7 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskOrigin' (mode: FssTypes.IMaskOrigin) = mode |> MaskOrigin.value
+    let MaskOrigin': (FssTypes.IMaskOrigin -> FssTypes.CssProperty) = MaskOrigin.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
     let private stringifyPosition (composite: FssTypes.IMaskPosition) =
@@ -243,11 +228,8 @@ module Mask =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask position"
 
-    let private maskPositionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskPosition value
-    let private maskPositionValue' value =
-        value
-        |> stringifyPosition
-        |> maskPositionValue
+    let private maskPositionValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskPosition
+    let private maskPositionValue' = stringifyPosition >> maskPositionValue
 
     let private stringifyPixelPositions ps =
         let (x, y) = ps
@@ -287,7 +269,7 @@ module Mask =
     ///     - <c> x: Size  </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskPosition' (x: FssTypes.Size) (y: FssTypes.Size) = MaskPosition.value(x,y)
+    let MaskPosition': (FssTypes.Size * FssTypes.Size -> FssTypes.CssProperty) = MaskPosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
     let private stringifyRepeat (composite: FssTypes.IMaskRepeat) =
@@ -299,11 +281,8 @@ module Mask =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown mask repeat"
 
-    let private maskRepeatValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskRepeat value
-    let private maskRepeatValue' value =
-        value
-        |> stringifyRepeat
-        |> maskRepeatValue
+    let private maskRepeatValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaskRepeat
+    let private maskRepeatValue' = stringifyRepeat >> maskRepeatValue
 
     let private repeatValue (x: FssTypes.Mask.Repeat, y: FssTypes.Mask.Repeat) =
         $"{stringifyRepeat x} {stringifyRepeat y}"
@@ -339,4 +318,4 @@ module Mask =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MaskRepeat' (repeat: FssTypes.IMaskRepeat) = repeat |> MaskRepeat.value
+    let MaskRepeat': (FssTypes.IMaskRepeat -> FssTypes.CssProperty) = MaskRepeat.value

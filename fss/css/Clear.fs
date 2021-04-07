@@ -12,11 +12,8 @@ module Clear =
         | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown clear"
 
-    let private clearValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Clear value
-    let private clearValue' value =
-        value
-        |> stringifyClear
-        |> clearValue
+    let private clearValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Clear
+    let private clearValue' = stringifyClear >> clearValue
 
     [<Erase>]
     type Clear =
@@ -35,4 +32,4 @@ module Clear =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Clear' (clear: FssTypes.IClear) = clear |> Clear.value
+    let Clear' = Clear.value

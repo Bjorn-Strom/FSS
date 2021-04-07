@@ -13,16 +13,12 @@ module Margin =
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | _ -> "Unknown margin"
 
-    let private marginValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Margin value
-    let private marginValue' value =
-        value
-        |> marginToString
-        |> marginValue
+    let private marginValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Margin
+    let private marginValue' = marginToString >> marginValue
 
     [<Erase>]
     type Margin =
         static member value (width: FssTypes.IMargin) = width |> marginValue'
-
         static member value (vertical: FssTypes.IMargin, horizontal: FssTypes.IMargin) =
             sprintf "%s %s"
                 (marginToString vertical)
@@ -57,13 +53,9 @@ module Margin =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Margin' (margin: FssTypes.IMargin) = Margin.value(margin)
-
-    let private marginTopValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginTop value
-    let private marginTopValue' value =
-        value
-        |> marginToString
-        |> marginTopValue
+    let Margin' = Margin.value
+    let private marginTopValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginTop
+    let private marginTopValue' = marginToString >> marginTopValue
     [<Erase>]
     type MarginTop =
         static member value (top: FssTypes.IMargin) = top |> marginTopValue'
@@ -83,13 +75,10 @@ module Margin =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MarginTop' (top: FssTypes.IMargin) = MarginTop.value(top)
+    let MarginTop' = MarginTop.value
 
-    let private marginRightValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginRight value
-    let private marginRightValue' value =
-        value
-        |> marginToString
-        |> marginRightValue
+    let private marginRightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginRight
+    let private marginRightValue' = marginToString >> marginRightValue
 
     [<Erase>]
     type MarginRight =
@@ -110,13 +99,10 @@ module Margin =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MarginRight' (right: FssTypes.IMargin) = MarginRight.value(right)
+    let MarginRight' = MarginRight.value
 
-    let private marginBottomValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginBottom value
-    let private marginBottomValue' value =
-        value
-        |> marginToString
-        |> marginBottomValue
+    let private marginBottomValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginBottom
+    let private marginBottomValue' = marginToString >> marginBottomValue
     [<Erase>]
     type MarginBottom =
         static member value (bottom: FssTypes.IMargin) = bottom |> marginBottomValue'
@@ -136,13 +122,10 @@ module Margin =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MarginBottom' (bottom: FssTypes.IMargin) = MarginBottom.value(bottom)
+    let MarginBottom' = MarginBottom.value
 
-    let private marginLeftValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginLeft value
-    let private marginLeftValue' value =
-        value
-        |> marginToString
-        |> marginLeftValue
+    let private marginLeftValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginLeft
+    let private marginLeftValue' = marginToString >> marginLeftValue
 
     [<Erase>]
     type MarginLeft =
@@ -164,13 +147,10 @@ module Margin =
     /// </param>
     /// <returns>Css property for fss.</returns>
 
-    let MarginLeft' (left: FssTypes.IMargin) = MarginLeft.value(left)
+    let MarginLeft' = MarginLeft.value
 
-    let private marginInlineStartValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginInlineStart value
-    let private marginInlineStartValue' value =
-        value
-        |> marginToString
-        |> marginInlineStartValue
+    let private marginInlineStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginInlineStart
+    let private marginInlineStartValue' = marginToString >> marginInlineStartValue
 
     [<Erase>]
     type MarginInlineStart =
@@ -191,13 +171,10 @@ module Margin =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MarginInlineStart' (margin: FssTypes.IMargin) = MarginInlineStart.value(margin)
+    let MarginInlineStart' = MarginInlineStart.value
 
-    let private marginInlineEndValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginInlineEnd value
-    let private marginInlineEndValue' value =
-        value
-        |> marginToString
-        |> marginInlineEndValue
+    let private marginInlineEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginInlineEnd
+    let private marginInlineEndValue' = marginToString >> marginInlineEndValue
 
     [<Erase>]
     type MarginInlineEnd =
@@ -218,13 +195,10 @@ module Margin =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MarginInlineEnd' (margin: FssTypes.IMargin) = MarginInlineEnd.value(margin)
+    let MarginInlineEnd' = MarginInlineEnd.value
 
-    let private marginBlockStartValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginBlockStart value
-    let private marginBlockStartValue' value =
-        value
-        |> marginToString
-        |> marginBlockStartValue
+    let private marginBlockStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginBlockStart
+    let private marginBlockStartValue' = marginToString >> marginBlockStartValue
 
     [<Erase>]
     type MarginBlockStart =
@@ -245,13 +219,10 @@ module Margin =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MarginBlockStart' (margin: FssTypes.IMargin) = MarginBlockStart.value(margin)
+    let MarginBlockStart' = MarginBlockStart.value
 
-    let private marginBlockEndValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginBlockEnd value
-    let private marginBlockEndValue' value =
-        value
-        |> marginToString
-        |> marginBlockEndValue
+    let private marginBlockEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginBlockEnd
+    let private marginBlockEndValue' = marginToString >> marginBlockEndValue
 
     [<Erase>]
     type MarginBlockEnd =
@@ -272,4 +243,4 @@ module Margin =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let MarginBlockEnd' (margin: FssTypes.IMargin) = MarginBlockEnd.value(margin)
+    let MarginBlockEnd' = MarginBlockEnd.value

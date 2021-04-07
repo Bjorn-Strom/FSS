@@ -218,11 +218,8 @@ module Text =
         | _ -> "Unknown hanging punctuation"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
-    let private alignCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextAlign value
-    let private alignCssValue' value =
-        value
-        |> textAlignToString
-        |> alignCssValue
+    let private alignCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextAlign
+    let private alignCssValue' = textAlignToString >> alignCssValue
     [<Erase>]
     type TextAlign =
         static member value (textAlign: FssTypes.ITextAlign) = textAlign |> alignCssValue'
@@ -248,14 +245,11 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextAlign' (align: FssTypes.ITextAlign) = TextAlign.value(align)
+    let TextAlign' = TextAlign.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
-    let private alignLastCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextAlignLast value
-    let private alignLastCssValue' value =
-        value
-        |> textAlignLastToString
-        |> alignLastCssValue
+    let private alignLastCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextAlignLast
+    let private alignLastCssValue' = textAlignLastToString >> alignLastCssValue
     [<Erase>]
     type TextAlignLast =
         static member value (textAlign: FssTypes.ITextAlignLast) = textAlign |> alignLastCssValue'
@@ -279,14 +273,11 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextAlignLast' (align: FssTypes.ITextAlignLast) = TextAlignLast.value(align)
+    let TextAlignLast' = TextAlignLast.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
-    let private decorationValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecoration value
-    let private decorationValue' value =
-        value
-        |> decorationToString
-        |> decorationValue
+    let private decorationValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecoration
+    let private decorationValue' = decorationToString >> decorationValue
     [<Erase>]
     type TextDecoration =
         static member value (value: FssTypes.ITextDecoration) = value |> decorationValue'
@@ -298,14 +289,11 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecoration' (decoration: FssTypes.ITextDecoration) = TextDecoration.value(decoration)
+    let TextDecoration' = TextDecoration.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
-    let private lineCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationLine value
-    let private lineCssValue' value =
-        value
-        |> decorationLineToString
-        |> lineCssValue
+    let private lineCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationLine
+    let private lineCssValue' = decorationLineToString >> lineCssValue
     [<Erase>]
     type TextDecorationLine =
         static member value (value: FssTypes.ITextDecorationLine) = value |> lineCssValue'
@@ -333,14 +321,11 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationLine' (decoration: FssTypes.ITextDecorationLine) = TextDecorationLine.value(decoration)
+    let TextDecorationLine' = TextDecorationLine.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
-    let private thicknessValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationThickness value
-    let private thicknessValue' value =
-        value
-        |> thicknessToString
-        |> thicknessValue
+    let private thicknessValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationThickness
+    let private thicknessValue' = thicknessToString >> thicknessValue
     [<Erase>]
     type TextDecorationThickness =
         static member value (thickness: FssTypes.ITextDecorationThickness) = thickness |> thicknessValue'
@@ -364,14 +349,11 @@ module Text =
     ///     - <c> Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationThickness' (thickness: FssTypes.ITextDecorationThickness) = TextDecorationThickness.value(thickness)
+    let TextDecorationThickness' = TextDecorationThickness.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
-    let private decorationStyleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationStyle value
-    let private decorationStyleValue' value =
-        value
-        |> decorationStyleToString
-        |> decorationStyleValue
+    let private decorationStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationStyle
+    let private decorationStyleValue' = decorationStyleToString >> decorationStyleValue
     [<Erase>]
     type TextDecorationStyle =
         static member value(style: FssTypes.ITextDecorationStyle) = style |> decorationStyleValue'
@@ -394,14 +376,11 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationStyle' (decoration: FssTypes.ITextDecorationStyle) = TextDecorationStyle.value(decoration)
+    let TextDecorationStyle' = TextDecorationStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
-    let private skipValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationSkip value
-    let private skipValue' value =
-        value
-        |> decorationSkipToString
-        |> skipValue
+    let private skipValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationSkip
+    let private skipValue' = decorationSkipToString >> skipValue
 
     [<Erase>]
     type TextDecorationSkip =
@@ -435,14 +414,11 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationSkip' (skip: FssTypes.ITextDecorationSkip) = TextDecorationSkip.value(skip)
+    let TextDecorationSkip' = TextDecorationSkip.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
-    let private skipInkValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationSkipInk value
-    let private skipInkValue' value =
-        value
-        |> decorationSkipInkToString
-        |> skipInkValue
+    let private skipInkValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationSkipInk
+    let private skipInkValue' = decorationSkipInkToString >> skipInkValue
     [<Erase>]
     type TextDecorationSkipInk =
         static member value(skipInk: FssTypes.ITextDecorationSkipInk) = skipInk |> skipInkValue'
@@ -465,14 +441,11 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationSkipInk' (skip: FssTypes.ITextDecorationSkipInk) = TextDecorationSkipInk.value(skip)
+    let TextDecorationSkipInk' = TextDecorationSkipInk.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
-    let private transformValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextTransform value
-    let private transformValue' value =
-        value
-        |> textTransformToString
-        |> transformValue
+    let private transformValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextTransform
+    let private transformValue' = textTransformToString >> transformValue
     [<Erase>]
     type TextTransform =
         static member value (transform: FssTypes.ITextTransform) = transform |> transformValue'
@@ -497,14 +470,11 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextTransform' (transform: FssTypes.ITextTransform) = TextTransform.value(transform)
+    let TextTransform' = TextTransform.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
-    let private indentCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextIndent value
-    let private indentCssValue' value =
-        value
-        |> indentToString
-        |> indentCssValue
+    let private indentCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextIndent
+    let private indentCssValue' = indentToString >> indentCssValue
     [<Erase>]
     type TextIndent =
         static member value (indent: FssTypes.ITextIndent) = indent |> indentCssValue'
@@ -530,11 +500,11 @@ module Text =
     ///     - <c> Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextIndent' (indent: FssTypes.ITextIndent) = TextIndent.value(indent)
+    let TextIndent' = TextIndent.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
     // https://css-tricks.com/almanac/properties/t/text-shadow/
-    let private shadowValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextShadow value
+    let private shadowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextShadow
 
     [<Erase>]
     type TextShadow =
@@ -546,17 +516,11 @@ module Text =
             FssTypes.Text.ColorXYBlur (color, xOffset, yOffset, blurRadius)
 
     /// Supply a list of text shadows to apply to the text
-    let TextShadows (shadows: FssTypes.Text.Shadow list) =
-        shadows
-        |> Utilities.Helpers.combineComma textShadowToString
-        |> shadowValue
+    let TextShadows = Utilities.Helpers.combineComma textShadowToString >> shadowValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
-    let private overflowValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextOverflow value
-    let private overflowValue' value =
-        value
-        |> textOverflowToString
-        |> overflowValue
+    let private overflowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextOverflow
+    let private overflowValue' = textOverflowToString >> overflowValue
     [<Erase>]
     type TextOverflow =
         static member value (overflow: FssTypes.ITextOverflow) = overflow |> overflowValue'
@@ -571,14 +535,11 @@ module Text =
     ///     - <c> CssString </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextOverflow' (overflow: FssTypes.ITextOverflow) = TextOverflow.value(overflow)
+    let TextOverflow' = TextOverflow.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
-    let private emphasisValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasis value
-    let private emphasisValue' value =
-        value
-        |> emphasisToString
-        |> emphasisValue
+    let private emphasisValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasis
+    let private emphasisValue' = emphasisToString >> emphasisValue
 
     [<Erase>]
     type TextEmphasis =
@@ -598,14 +559,11 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextEmphasis' (emphasis: FssTypes.ITextEmphasis) = TextEmphasis.value emphasis
+    let TextEmphasis' = TextEmphasis.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
-    let private emphasisPositionValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasisPosition value
-    let private emphasisPositionValue' value =
-        value
-        |> emphasisPositionToString
-        |> emphasisPositionValue
+    let private emphasisPositionValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasisPosition
+    let private emphasisPositionValue' = emphasisPositionToString >> emphasisPositionValue
 
     [<Erase>]
     type TextEmphasisPosition =
@@ -628,14 +586,11 @@ module Text =
     ///     - <c> Unset </c>
     ///     - <c> None </c>
     /// <returns>Css property for fss.</returns>
-    let TextEmphasisPosition' (e1: FssTypes.ITextEmphasisPosition) (e2: FssTypes.ITextEmphasisPosition) = TextEmphasisPosition.value(e1, e2)
+    let TextEmphasisPosition' = TextEmphasisPosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
-    let private emphasisStyleValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasisStyle value
-    let private emphasisStyleValue' value =
-        value
-        |> emphasisStyleToString
-        |> emphasisStyleValue
+    let private emphasisStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasisStyle
+    let private emphasisStyleValue' = emphasisStyleToString >> emphasisStyleValue
     [<Erase>]
     type TextEmphasisStyle =
         static member value (emphasisStyle: FssTypes.ITextEmphasisStyle) = emphasisStyle |> emphasisStyleValue'
@@ -664,14 +619,11 @@ module Text =
     ///     - <c> None </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextEmphasisStyle' (style: FssTypes.ITextEmphasisStyle) = TextEmphasisStyle.value(style)
+    let TextEmphasisStyle' = TextEmphasisStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-position
-    let private underlinePositionCssValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextUnderlinePosition value
-    let private underlinePositionCssValue' value =
-        value
-        |> underlinePositionToString
-        |> underlinePositionCssValue
+    let private underlinePositionCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextUnderlinePosition
+    let private underlinePositionCssValue' = underlinePositionToString >> underlinePositionCssValue
 
     [<Erase>]
     type TextUnderlinePosition =
@@ -703,14 +655,11 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextUnderlinePosition' (position: FssTypes.ITextUnderlinePosition) = TextUnderlinePosition.value(position)
+    let TextUnderlinePosition' = TextUnderlinePosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
-    let private offsetValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextUnderlineOffset value
-    let private offsetValue' value =
-        value
-        |> underlineOffsetToString
-        |> offsetValue
+    let private offsetValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextUnderlineOffset
+    let private offsetValue' = underlineOffsetToString >> offsetValue
     [<Erase>]
     type TextUnderlineOffset =
         static member value (underlineOffset: FssTypes.ITextUnderlineOffset) = underlineOffset |> offsetValue'
@@ -730,14 +679,11 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextUnderlineOffset' (offset: FssTypes.ITextUnderlineOffset) = TextUnderlineOffset.value(offset)
+    let TextUnderlineOffset' = TextUnderlineOffset.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/quotes
-    let private quoteValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Quotes value
-    let private quoteValue' value =
-        value
-        |> quoteToString
-        |> quoteValue
+    let private quoteValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Quotes
+    let private quoteValue' = quoteToString >> quoteValue
     [<Erase>]
     type Quotes =
         static member value (quote: FssTypes.IQuotes) =
@@ -770,14 +716,11 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Quotes' (quotes: FssTypes.IQuotes) = Quotes.value(quotes)
+    let Quotes': (FssTypes.IQuotes -> FssTypes.CssProperty) = Quotes.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
-    let private hyphensValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.Hyphens value
-    let private hyphensValue' value =
-        value
-        |> hyphensToString
-        |> hyphensValue
+    let private hyphensValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Hyphens
+    let private hyphensValue' = hyphensToString >> hyphensValue
     [<Erase>]
     type Hyphens =
         static member value (hyphens: FssTypes.IHyphens) = hyphens |> hyphensValue'
@@ -799,14 +742,11 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let Hyphens' (hyphens: FssTypes.IHyphens) = Hyphens.value(hyphens)
+    let Hyphens' = Hyphens.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color
-    let private textDecorationColorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationColor value
-    let private textDecorationColorValue' value =
-        value
-        |> textDecorationColorToString
-        |> textDecorationColorValue
+    let private textDecorationColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationColor
+    let private textDecorationColorValue' = textDecorationColorToString >> textDecorationColorValue
 
     let TextDecorationColor = FssTypes.TextDecorationColor (textDecorationColorValue')
 
@@ -819,15 +759,11 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextDecorationColor' (color: FssTypes.ITextDecorationColor) = TextDecorationColor.value(color)
+    let TextDecorationColor' = TextDecorationColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
-    let private emphasisColorValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasisColor value
-    let private emphasisColorValue' value =
-        value
-        |> textEmphasisColorToString
-        |> emphasisColorValue
-
+    let private emphasisColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasisColor
+    let private emphasisColorValue' = textEmphasisColorToString >> emphasisColorValue
 
     let TextEmphasisColor = FssTypes.TextEmphasisColor (emphasisColorValue')
 
@@ -840,11 +776,11 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextEmphasisColor' (color: FssTypes.ITextEmphasisColor) = TextEmphasisColor.value(color)
+    let TextEmphasisColor' = TextEmphasisColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
-    let private textSizeAdjustValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextSizeAdjust value
-    let private textSizeAdjustValue' value = value |> textSizeAdjustToString |> textSizeAdjustValue
+    let private textSizeAdjustValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextSizeAdjust
+    let private textSizeAdjustValue' = textSizeAdjustToString >> textSizeAdjustValue
 
     [<Erase>]
     type TextSizeAdjust =
@@ -866,11 +802,11 @@ module Text =
     ///     - <c> Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextSizeAdjust' textSize = TextSizeAdjust.value textSize
+    let TextSizeAdjust' = TextSizeAdjust.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
-    let private tabSizeValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TabSize value
-    let private tabSizeValue' value = value |> tabSizeToString |> tabSizeValue
+    let private tabSizeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TabSize
+    let private tabSizeValue' = tabSizeToString >> tabSizeValue
 
     [<Erase>]
     type TabSize =
@@ -889,11 +825,11 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TabSize' tabSize = TabSize.value tabSize
+    let TabSize' = TabSize.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation
-    let private textOrientationValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextOrientation value
-    let private textOrientationValue' value = value |> textOrientationToString |> textOrientationValue
+    let private textOrientationValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextOrientation
+    let private textOrientationValue' = textOrientationToString >> textOrientationValue
 
     [<Erase>]
     type TextOrientation =
@@ -916,11 +852,11 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextOrientation' orientation = TextOrientation.value orientation
+    let TextOrientation' = TextOrientation.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
-    let private textRenderingValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextRendering value
-    let private textRenderingValue' value = value |> textRenderingToString |> textRenderingValue
+    let private textRenderingValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextRendering
+    let private textRenderingValue' = textRenderingToString >> textRenderingValue
 
     [<Erase>]
     type TextRendering =
@@ -943,11 +879,11 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextRendering' rendering = TextRendering.value rendering
+    let TextRendering' = TextRendering.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
-    let private textJustifyValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextJustify value
-    let private textJustifyValue' value = value |> textJustifyToString |> textJustifyValue
+    let private textJustifyValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextJustify
+    let private textJustifyValue' = textJustifyToString >> textJustifyValue
 
     [<Erase>]
     type TextJustify =
@@ -965,11 +901,11 @@ module Text =
     ///     - <c> Auto </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let TextJustify' justification = TextJustify.value justification
+    let TextJustify' = TextJustify.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
-    let private whiteSpaceValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.WhiteSpace value
-    let private whiteSpaceValue' value = value |> whitespaceToString |> whiteSpaceValue
+    let private whiteSpaceValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.WhiteSpace
+    let private whiteSpaceValue' = whitespaceToString >> whiteSpaceValue
 
     [<Erase>]
     type WhiteSpace =
@@ -994,11 +930,11 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let WhiteSpace' whitespace = WhiteSpace.value whitespace
+    let WhiteSpace' = WhiteSpace.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-    let private userSelectValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.UserSelect value
-    let private userSelectValue' value = value |> userSelectToString |> userSelectValue
+    let private userSelectValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.UserSelect
+    let private userSelectValue' = userSelectToString >> userSelectValue
 
     [<Erase>]
     type UserSelect =
@@ -1023,11 +959,11 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let UserSelect' userSelect = UserSelect.value userSelect
+    let UserSelect' = UserSelect.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
-    let private hangingPunctuationValue (value: string) = FssTypes.propertyHelpers.cssValue FssTypes.Property.HangingPunctuation value
-    let private hangingPunctuationValue': FssTypes.IHangingPunctuation -> FssTypes.CssProperty = hangingPunctuationToString >> hangingPunctuationValue
+    let private hangingPunctuationValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.HangingPunctuation
+    let private hangingPunctuationValue': (FssTypes.IHangingPunctuation -> FssTypes.CssProperty) = hangingPunctuationToString >> hangingPunctuationValue
 
     [<Erase>]
     type HangingPunctuation =
@@ -1058,4 +994,4 @@ module Text =
     ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
-    let HangingPunctuation' hangingPunctuation = HangingPunctuation.value hangingPunctuation
+    let HangingPunctuation' = HangingPunctuation.value
