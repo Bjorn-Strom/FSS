@@ -29,32 +29,6 @@ let buttonStyle =
 button [ ClassName buttonStyle ] [ str "Click me" ]
 ```
 
-### Feliz specific styling api
-```fsharp
-open Feliz
-open Feliz.Fss
-
-[<ReactComponent>]
-let Button() =
-    Html.button [
-        prop.css [
-            style.backgroundColor.hex "44c767"
-            style.borderRadius' (px 30)
-            style.borderWidth' (px 1)
-            style.borderStyle.solid
-            style.borderColor.hex "18ab29"
-            style.display.inlineBlock
-            style.cursor.pointer
-            style.fontSize' (px 17)
-            style.hover
-                [
-                    BackgroundColor.hex "5cbf2a"
-                ]
-        ]
-        prop.text "Click me"
-    ]
-```
-
 ## Motivation 🤔
 While you have some good alternatives with F# such as:
 - [Fulma](https://fulma.github.io/Fulma/)
