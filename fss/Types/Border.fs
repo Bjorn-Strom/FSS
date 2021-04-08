@@ -50,7 +50,7 @@ namespace Fss.FssTypes
             member this.unset = Unset |> valueFunction
 
         type BorderColor (colorToString: IBorderColor -> string, valueFunction: string -> CssProperty, valueFunction': IBorderColor -> CssProperty) =
-            inherit ColorBase (valueFunction')
+            inherit ColorBase<CssProperty> (valueFunction')
             member this.value (color: IBorderColor) = color |> valueFunction'
             member this.value (horizontal: IBorderColor, vertical: IBorderColor) =
                 sprintf "%s %s"
@@ -75,7 +75,7 @@ namespace Fss.FssTypes
             member this.unset = Unset |> valueFunction'
 
         type BorderSideColor (valueFunction: IBorderColor -> CssProperty) =
-            inherit ColorBase (valueFunction)
+            inherit ColorBase<CssProperty> (valueFunction)
             member this.value color = color |> valueFunction
             member this.inherit' = Inherit |> valueFunction
             member this.initial = Initial |> valueFunction

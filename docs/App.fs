@@ -734,18 +734,18 @@ module App =
                             [
                                 deg 217.,
                                     [
-                                        FssTypes.Color.Color.rgba(255, 0, 0, 0.8), pct 0
-                                        FssTypes.Color.Color.rgba(255, 0, 0, 0.0), pct 70
+                                        FssTypes.Color.Color.rgba 255 0 0 0.8, pct 0
+                                        FssTypes.Color.Color.rgba 255 0 0 0.0, pct 70
                                     ]
                                 deg 127.,
                                     [
-                                        FssTypes.Color.Color.rgba(0, 255, 0,0.8), pct 0
-                                        FssTypes.Color.Color.rgba(0, 255, 0,0.0), pct 70
+                                        FssTypes.Color.Color.rgba 0 255 0 0.8, pct 0
+                                        FssTypes.Color.Color.rgba 0 255 0 0.0, pct 70
                                     ]
                                 deg 336.,
                                     [
-                                        FssTypes.Color.Color.rgba(0, 0, 255, 0.8), pct 0
-                                        FssTypes.Color.Color.rgba(0, 0, 255,0.0), pct 70
+                                        FssTypes.Color.Color.rgba 0 0 255 0.8, pct 0
+                                        FssTypes.Color.Color.rgba 0 0 255 0.0, pct 70
                                     ]
 
                             ]

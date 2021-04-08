@@ -14,7 +14,6 @@ module Caret =
     let private caretColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.CaretColor
     let private caretColorValue' = caretColorToString >> caretColorValue
 
-
     let CaretColor = FssTypes.CaretColorClass(caretColorValue')
 
     /// <summary>Specifies caret color.</summary>

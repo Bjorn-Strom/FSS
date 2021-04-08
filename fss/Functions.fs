@@ -71,13 +71,13 @@ module Functions =
         FssTypes.Font.Family.Name (FssTypes.Font.Name fontFamily)
 
     // Color
-    let rgb (r: int) (g: int) (b: int) = FssTypes.Color.Color.rgb(r,g,b)
-    let rgba (r: int) (g: int) (b: int) (a: float) = FssTypes.Color.Color.rgba(r,g,b,a)
+    let rgb (r: int) (g: int) (b: int) = FssTypes.Color.Color.rgb r g b
+    let rgba (r: int) (g: int) (b: int) (a: float) = FssTypes.Color.Color.rgba r g b a
 
     let hex (value: string) = FssTypes.Color.Color.hex value
 
-    let hsl (h: int) (s: float) (l: float) = FssTypes.Color.Color.hsl(h,s,l)
-    let hsla (h: int) (s: float) (l: float) (a: float) = FssTypes.Color.Color.hsla(h,s,l,a)
+    let hsl (h: int) (s: float) (l: float) = FssTypes.Color.Color.hsl h s l
+    let hsla (h: int) (s: float) (l: float) (a: float) = FssTypes.Color.Color.hsla h s l a
 
     // Sizes
     // Absolute

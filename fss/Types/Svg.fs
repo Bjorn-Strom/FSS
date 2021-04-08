@@ -1,7 +1,6 @@
 namespace Fss
 
 namespace Fss.FssTypes
-
     [<RequireQualifiedAccess>]
     module Svg =
         type AlignmentBaseline =

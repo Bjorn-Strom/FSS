@@ -219,7 +219,7 @@ module Background =
     let private backgroundValue' = backgroundColorToString >> backgroundValue
 
     type BackgroundColorClass (valueFunction: FssTypes.IBackgroundColor -> FssTypes.CssProperty) =
-        inherit FssTypes.Color.ColorBase(valueFunction)
+        inherit FssTypes.Color.ColorBase<FssTypes.CssProperty>(valueFunction)
         member this.value color = color |> valueFunction
         member this.inherit' = FssTypes.Inherit |> valueFunction
         member this.initial = FssTypes.Initial |> valueFunction
