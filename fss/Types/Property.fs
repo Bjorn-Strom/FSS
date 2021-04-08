@@ -369,6 +369,8 @@ namespace Fss.FssTypes
 
             // Svg
             | AlignmentBaseline
+            | BaselineShift
+            | DominantBaseline
             interface ITransitionProperty
 
     [<AutoOpen>]

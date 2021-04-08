@@ -232,6 +232,10 @@ namespace Fss.FssTypes
     type IObjectPosition = interface end
     type IImageRendering = interface end
 
+    // Svg
+    type IBaselineShift   = interface end
+    type IDominantBaseline = interface end
+
     // Types
     type CssProperty = CssProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
@@ -284,6 +288,7 @@ namespace Fss.FssTypes
         interface IWillChange
         interface IImageRendering
         interface IMaskSize
+        interface IDominantBaseline
 
     type None' =
         | None'

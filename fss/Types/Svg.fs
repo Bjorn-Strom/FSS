@@ -23,10 +23,9 @@ namespace Fss.FssTypes
         type BaselineShift =
             | Sub
             | Super
-            // LengthPercentage
+            interface IBaselineShift
 
         type DominantBaseline =
-            // Auto
             | Ideographic
             | Alphabetic
             | Hanging
@@ -36,7 +35,9 @@ namespace Fss.FssTypes
             | TextAfterEdge
             | TextBeforeEdge
             | TextTop
+            interface IDominantBaseline
 
+        // Not done
         type TextAnchor =
             | Start
             | Middle
