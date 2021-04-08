@@ -1,4 +1,6 @@
-# Fss ![nuget](https://buildstats.info/nuget/fss-lib) [![Build status](https://ci.appveyor.com/api/projects/status/swhs0ucsc01fpb0m/branch/master?svg=true)](https://ci.appveyor.com/project/Bjorn-Strom/fss/branch/master)
+# Fss
+
+![AppVeyor](https://img.shields.io/appveyor/build/bjorn-strom/FSS?style=for-the-badge) ![Tests](https://img.shields.io/badge/TESTS-1337-9cf?style=for-the-badge) ![Nuget](https://img.shields.io/nuget/v/fss-lib?style=for-the-badge) ![Nuget](https://img.shields.io/nuget/dt/fss-lib?style=for-the-badge) [![GitHub license](https://img.shields.io/github/license/Bjorn-Strom/FSS?style=for-the-badge)](https://github.com/Bjorn-Strom/FSS/blob/master/LICENSE.md)
 
 An opinionated styling library for F#.
 Have CSS as a first class citizen in your F# projects.

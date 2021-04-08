@@ -734,7 +734,7 @@ module App =
                             [
                                 deg 217.,
                                     [
-                                        FssTypes.Color.Color.rgba 255 0 0 0.8, pct 0
+                                        FssTypes.Color.rgba 255 0 0 0.8, pct 0
                                         FssTypes.Color.Color.rgba 255 0 0 0.0, pct 70
                                     ]
                                 deg 127.,
