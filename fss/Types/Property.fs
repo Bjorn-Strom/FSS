@@ -4,6 +4,7 @@ namespace Fss.FssTypes
     [<RequireQualifiedAccess>]
     module Property =
         type Property =
+            // Css
             | Appearance
             | AlignContent
             | AlignItems
@@ -313,6 +314,7 @@ namespace Fss.FssTypes
             | WritingMode
             | ZIndex
 
+            // Pseudo
             | Active
             | AnyLink
             | Blank
@@ -364,6 +366,9 @@ namespace Fss.FssTypes
             | FirstLetter
             | FirstLine
             | Selection
+
+            // Svg
+            | AlignmentBaseline
             interface ITransitionProperty
 
     [<AutoOpen>]

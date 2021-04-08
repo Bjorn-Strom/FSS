@@ -49,5 +49,6 @@ module Tests =
         Text.tests
         Image.tests
         Mask.tests
+        Svg.tests
     ]
 

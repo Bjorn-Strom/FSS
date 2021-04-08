@@ -62,6 +62,7 @@
     <Compile Include="Types\PseudoClass.fs" />
     <Compile Include="Types\Caret.fs" />
     <Compile Include="Types\WillChange.fs" />
+    <Compile Include="Types\Svg.fs" />
     <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />
     <Compile Include="css\Color.fs" />
@@ -106,6 +107,7 @@
     <Compile Include="css\Mask.fs" />
     <Compile Include="css\WillChange.fs" />
     <Compile Include="css\Image.fs" />
+    <Compile Include="css\Svg.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Functions.fs" />
