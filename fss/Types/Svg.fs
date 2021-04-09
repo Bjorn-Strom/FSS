@@ -36,12 +36,13 @@ namespace Fss.FssTypes
             | TextTop
             interface IDominantBaseline
 
-        // Not done
         type TextAnchor =
             | Start
             | Middle
             | End
 
+
+        // Not done
         type ClipRule =
             | Nonzero
             | Evenodd

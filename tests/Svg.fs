@@ -118,6 +118,26 @@ module Svg =
                     "Dominant baseline TextTop"
                     [DominantBaseline.textTop]
                     ["dominantBaseline" ==> "text-top"]
+                testCase
+                    "TextAnchor start"
+                    [TextAnchor.start]
+                    ["textAnchor" ==> "start"]
+                testCase
+                    "TextAnchor middle"
+                    [TextAnchor.middle]
+                    ["textAnchor" ==> "middle"]
+                testCase
+                    "TextAnchor end"
+                    [TextAnchor.end']
+                    ["textAnchor" ==> "end"]
+
+
+
+
+
+
+
+
 
 
 

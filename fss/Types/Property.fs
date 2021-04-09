@@ -371,6 +371,7 @@ namespace Fss.FssTypes
             | AlignmentBaseline
             | BaselineShift
             | DominantBaseline
+            | TextAnchor
             interface ITransitionProperty
 
     [<AutoOpen>]

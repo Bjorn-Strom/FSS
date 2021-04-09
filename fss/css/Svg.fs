@@ -10,7 +10,7 @@ module Svg =
 
     [<Erase>]
     type AlignmentBaseline =
-        static member value (all: FssTypes.Svg.AlignmentBaseline) = all |> alignmentBaselineValue'
+        static member value (alignment: FssTypes.Svg.AlignmentBaseline) = alignment |> alignmentBaselineValue'
         static member baseline = FssTypes.Svg.Baseline |> alignmentBaselineValue'
         static member textBottom = FssTypes.Svg.TextBottom |> alignmentBaselineValue'
         static member textBeforeEdge = FssTypes.Svg.TextBeforeEdge |> alignmentBaselineValue'
@@ -94,3 +94,21 @@ module Svg =
     /// <returns>Css property for fss.</returns>
     let DominantBaseline' = DominantBaseline.value
 
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/text-anchor
+    let private textAnchorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextAnchor
+    let private textAnchorValue' = Utilities.Helpers.duToKebab >> textAnchorValue
+
+    [<Erase>]
+    type TextAnchor=
+        static member value (textAnchor: FssTypes.Svg.TextAnchor) = textAnchor |> textAnchorValue'
+        static member start = FssTypes.Svg.TextAnchor.Start |> textAnchorValue'
+        static member middle = FssTypes.Svg.TextAnchor.Middle |> textAnchorValue'
+        static member end' = FssTypes.Svg.TextAnchor.End |> textAnchorValue'
+
+    /// <summary>Align text.</summary>
+    /// <param name="textAnchor">
+    ///     can be:
+    ///     - <c> TextAnchorline </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let TextAnchor' = TextAnchor.value
