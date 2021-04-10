@@ -3,7 +3,6 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <Content Include="assets\logo.svg" />
         <Content Include="documentation\Overview.md" />
         <Content Include="documentation\Installation.md" />
         <Content Include="documentation\Philosophy.md" />
