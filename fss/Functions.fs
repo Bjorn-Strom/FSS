@@ -70,6 +70,11 @@ module Functions =
 
         FssTypes.Font.Family.Name (FssTypes.Font.Name fontFamily)
 
+    // Important
+    let important (property: FssTypes.CssProperty): FssTypes.CssProperty =
+        let key, value = FssTypes.masterTypeHelpers.CssValue property
+        key ==> $"{value} !important" |> FssTypes.CssProperty
+
     // Color
     let rgb (r: int) (g: int) (b: int) = FssTypes.Color.Color.rgb r g b
     let rgba (r: int) (g: int) (b: int) (a: float) = FssTypes.Color.Color.rgba r g b a
