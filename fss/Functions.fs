@@ -71,9 +71,18 @@ module Functions =
         FssTypes.Font.Family.Name (FssTypes.Font.Name fontFamily)
 
     // Important
-    let important (property: FssTypes.CssProperty): FssTypes.CssProperty =
+    let important property =
         let key, value = FssTypes.masterTypeHelpers.CssValue property
         key ==> $"{value} !important" |> FssTypes.CssProperty
+
+    // Classnames
+    let combine styles stylesPred =
+        (styles
+        |> List.map (fun s -> s, true)
+        |> List.append) stylesPred
+        |> List.filter snd
+        |> List.map fst
+        |> String.concat " "
 
     // Color
     let rgb (r: int) (g: int) (b: int) = FssTypes.Color.Color.rgb r g b
