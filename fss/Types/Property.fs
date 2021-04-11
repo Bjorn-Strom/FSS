@@ -380,6 +380,9 @@ namespace Fss.FssTypes
             | StopOpacity
             | ColorInterpolation
             | ColorInterpolationFilters
+            | Fill
+            | FillOpacity
+            | FillRule
             interface ITransitionProperty
 
     [<AutoOpen>]

@@ -199,7 +199,7 @@ module Svg =
     /// <returns>Css property for fss.</returns>
     let StopOpacity' = StopOpacity.value
 
-    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/color-interpolation
     let private stringifyColorInterpolation (colorInterpolation: FssTypes.IColorInterpolation) =
         match colorInterpolation with
         | :? FssTypes.Svg.ColorInterpolation as ci ->
@@ -228,7 +228,7 @@ module Svg =
     /// <returns>Css property for fss.</returns>
     let ColorInterpolation' = ColorInterpolation.value
 
-    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/color-interpolation-filters
     let private stringifyColorInterpolationFilters(colorInterpolationFilters: FssTypes.IColorInterpolationFilters) =
         match colorInterpolationFilters with
         | :? FssTypes.Svg.ColorInterpolationFilters as ci ->
@@ -256,3 +256,74 @@ module Svg =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ColorInterpolationFilters' = ColorInterpolationFilters.value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-color
+    let private fillValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Fill
+    let private fillValue' = colorToString >> fillValue
+    let Fill= FssTypes.Color.ColorClass(fillValue')
+
+    /// <summary>Specifies element color.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> FssTypes.ColorType</c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let Fill' = Fill.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-opacity
+    [<Erase>]
+    type FillOpacity =
+        static member value value =
+            FssTypes.propertyHelpers.cssValue FssTypes.Property.FillOpacity
+            <| string (Utilities.Helpers.clamp 0.0 1.0 value)
+
+    /// <summary>Specifies element color opacity.</summary>
+    /// <param name="fillOpacity"> </param>
+    /// <returns>Css property for fss.</returns>
+    let FillOpacity' = FillOpacity.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule
+    let private fillRuleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FillRule
+    let private fillRuleValue' = Utilities.Helpers.duToLowercase >> fillRuleValue
+
+    [<Erase>]
+    type FillRule =
+        static member value (fillRule: FssTypes.Svg.FillRule) = fillRule |> fillRuleValue'
+        static member nonzero = FssTypes.Svg.FillRule.Nonzero |> fillRuleValue'
+        static member evenodd = FssTypes.Svg.FillRule.Evenodd |> fillRuleValue'

@@ -55,20 +55,16 @@ namespace Fss.FssTypes
             | LinearRgb
             interface IColorInterpolationFilters
 
+        type FillRule =
+            | Nonzero
+            | Evenodd
+
 
 
 
 
 
         // Not done
-        // Fill er en farge
-
-        type FillRule =
-            | Nonzero
-            | Evenod
-
-        // Fill opacity tall mellom 0 og 1
-
         type ImageRendering =
             // Auto
             | OptimizeSpeed

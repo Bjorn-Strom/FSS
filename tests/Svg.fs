@@ -210,11 +210,6 @@ module Svg =
                     "StopOpacity 1.5 should be 1"
                     [ StopOpacity' 1.5 ]
                     ["stopOpacity" ==> "1"]
-
-
-
-
-
                 testCase
                     "ColorInterpolation srgb"
                     [ ColorInterpolation.sRGB ]
@@ -239,4 +234,50 @@ module Svg =
                     "ColorInterpolationFilters auto"
                     [ ColorInterpolationFilters.auto ]
                     ["colorInterpolationFilters" ==> "auto"]
+
+
+
+
+
+
+                testCase
+                    "Fill color rgb"
+                    [ Fill.rgb 255 0 0 ]
+                    ["fill" ==> "rgb(255, 0, 0)"]
+                testCase
+                    "Fill color green"
+                    [ Fill.green ]
+                    ["fill" ==> "#008000"]
+                testCase
+                    "FillOpacity 1"
+                    [ FillOpacity' 1.0 ]
+                    ["fillOpacity" ==> "1"]
+                testCase
+                    "FillOpacity 0"
+                    [ FillOpacity' 0.0]
+                    ["fillOpacity" ==> "0"]
+                testCase
+                    "FillOpacity 50%"
+                    [ FillOpacity' 0.5 ]
+                    ["fillOpacity" ==> "0.5"]
+                testCase
+                    "FillOpacity -10 should be 0"
+                    [ FillOpacity' -10.0 ]
+                    ["fillOpacity" ==> "0"]
+                testCase
+                    "FillOpacity 10 should be 1"
+                    [ FillOpacity' 10.0 ]
+                    ["fillOpacity" ==> "1"]
+                testCase
+                    "FillOpacity 1.5 should be 1"
+                    [ FillOpacity' 1.5 ]
+                    ["fillOpacity" ==> "1"]
+                testCase
+                    "FillRule nonzero"
+                    [FillRule.nonzero]
+                    ["fillRule" ==> "nonzero"]
+                testCase
+                    "FillRule evenodd"
+                    [FillRule.evenodd]
+                    ["fillRule" ==> "evenodd"]
                 ]
