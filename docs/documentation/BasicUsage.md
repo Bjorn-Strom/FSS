@@ -34,6 +34,16 @@ fss [ TextDecorationColor' myDecorationColor ]
 
 The `.value` function is particularly useful when you wish to apply a function to a property. Like pixel, size, or percent, that does not exist as a member on the property you are trying to style.
 
+## Useful functions
+
+`important: CssProperty -> CssProperty`
+
+The important function takes a css property and marks it as important.
+
+`combine: string list -> (string * bool) list -> string`
+
+An implementation of JavaScripts `classNames` or Emotions `cx`.
+The function takes a list of classnames to apply and a list of classnames and predicated to optionally apply.
 ## Shorthands
 
 I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be.
