@@ -210,4 +210,33 @@ module Svg =
                     "StopOpacity 1.5 should be 1"
                     [ StopOpacity' 1.5 ]
                     ["stopOpacity" ==> "1"]
+
+
+
+
+
+                testCase
+                    "ColorInterpolation srgb"
+                    [ ColorInterpolation.sRGB ]
+                    ["colorInterpolation" ==> "sRGB"]
+                testCase
+                    "ColorInterpolation linearRGB"
+                    [ ColorInterpolation.linearRGB ]
+                    ["colorInterpolation" ==> "linearRGB"]
+                testCase
+                    "ColorInterpolation auto"
+                    [ ColorInterpolation.auto ]
+                    ["colorInterpolation" ==> "auto"]
+                testCase
+                    "ColorInterpolationFilters srgb"
+                    [ ColorInterpolationFilters.sRGB ]
+                    ["colorInterpolationFilters" ==> "sRGB"]
+                testCase
+                    "ColorInterpolationFilters linearRGB"
+                    [ ColorInterpolationFilters.linearRGB ]
+                    ["colorInterpolationFilters" ==> "linearRGB"]
+                testCase
+                    "ColorInterpolationFilters auto"
+                    [ ColorInterpolationFilters.auto ]
+                    ["colorInterpolationFilters" ==> "auto"]
                 ]

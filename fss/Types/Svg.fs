@@ -45,21 +45,22 @@ namespace Fss.FssTypes
             | Nonzero
             | Evenodd
 
-        // Not done
-        // Stop color er en Color
-
-        // Stop opacity tall mellom 0 og 1
-
         type ColorInterpolation =
-            // Auto
-            | SRGB // Skal bli sRGB
-            | LinearRGB // skal bli linearRGB
+            | Srgb
+            | LinearRgb
+            interface IColorInterpolation
 
         type ColorInterpolationFilters =
-            // Auto
-            | SRGB // Skal bli sRGB
-            | LinearRGB // skal bli linearRGB
+            | Srgb
+            | LinearRgb
+            interface IColorInterpolationFilters
 
+
+
+
+
+
+        // Not done
         // Fill er en farge
 
         type FillRule =

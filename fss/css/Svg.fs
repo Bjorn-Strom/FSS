@@ -198,3 +198,61 @@ module Svg =
     /// <param name="stopOpacity"> </param>
     /// <returns>Css property for fss.</returns>
     let StopOpacity' = StopOpacity.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/
+    let private stringifyColorInterpolation (colorInterpolation: FssTypes.IColorInterpolation) =
+        match colorInterpolation with
+        | :? FssTypes.Svg.ColorInterpolation as ci ->
+            match ci with
+                | FssTypes.Svg.ColorInterpolation.Srgb -> "sRGB"
+                | FssTypes.Svg.ColorInterpolation.LinearRgb -> "linearRGB"
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+        | _ -> "Unknown color interpolation"
+
+    let private colorInterpolationValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColorInterpolation
+    let private colorInterpolationValue' = stringifyColorInterpolation >> colorInterpolationValue
+
+    [<Erase>]
+    type ColorInterpolation =
+        static member value (colorInterpolation: FssTypes.IColorInterpolation) = colorInterpolation |> colorInterpolationValue'
+        static member sRGB = FssTypes.Svg.ColorInterpolation.Srgb |> colorInterpolationValue'
+        static member linearRGB = FssTypes.Svg.ColorInterpolation.LinearRgb |> colorInterpolationValue'
+        static member auto = FssTypes.Auto |> colorInterpolationValue'
+
+    /// <summary>specifies the color space for gradient interpolations, color animations, and alpha compositing.</summary>
+    /// <param name="all">
+    ///     can be:
+    ///     - <c> ColorInterpolation </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let ColorInterpolation' = ColorInterpolation.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/
+    let private stringifyColorInterpolationFilters(colorInterpolationFilters: FssTypes.IColorInterpolationFilters) =
+        match colorInterpolationFilters with
+        | :? FssTypes.Svg.ColorInterpolationFilters as ci ->
+            match ci with
+                | FssTypes.Svg.ColorInterpolationFilters.Srgb -> "sRGB"
+                | FssTypes.Svg.ColorInterpolationFilters.LinearRgb -> "linearRGB"
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+        | _ -> "Unknown color interpolation filters"
+
+    let private colorInterpolationFiltersValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColorInterpolationFilters
+    let private colorInterpolationFiltersValue' = stringifyColorInterpolationFilters >> colorInterpolationFiltersValue
+
+    [<Erase>]
+    type ColorInterpolationFilters =
+        static member value (colorInterpolationFilters: FssTypes.IColorInterpolationFilters) = colorInterpolationFilters |> colorInterpolationFiltersValue'
+        static member sRGB = FssTypes.Svg.ColorInterpolationFilters.Srgb |> colorInterpolationFiltersValue'
+        static member linearRGB = FssTypes.Svg.ColorInterpolationFilters.LinearRgb |> colorInterpolationFiltersValue'
+        static member auto = FssTypes.Auto |> colorInterpolationFiltersValue'
+
+    /// <summary>specifies the color space for imaging operations performed via filter effects..</summary>
+    /// <param name="all">
+    ///     can be:
+    ///     - <c> ColorInterpolationFilters </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let ColorInterpolationFilters' = ColorInterpolationFilters.value

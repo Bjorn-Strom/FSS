@@ -378,6 +378,8 @@ namespace Fss.FssTypes
             | LightingColor
             | StopColor
             | StopOpacity
+            | ColorInterpolation
+            | ColorInterpolationFilters
             interface ITransitionProperty
 
     [<AutoOpen>]
