@@ -138,8 +138,6 @@ module Svg =
                     "ClipRule evenodd"
                     [ClipRule.evenodd]
                     ["clipRule" ==> "evenodd"]
-
-
                 testCase
                     "FloodColor color rgb"
                     [ FloodColor.rgb 255 0 0 ]
@@ -148,6 +146,28 @@ module Svg =
                     "FloodColor color green"
                     [ FloodColor.green ]
                     ["floodColor" ==> "#008000"]
-
-
+                testCase
+                    "FloodOpacity 1"
+                    [ FloodOpacity' 1.0 ]
+                    ["floodOpacity" ==> "1"]
+                testCase
+                    "FloodOpacity 0"
+                    [ FloodOpacity' 0.0]
+                    ["floodOpacity" ==> "0"]
+                testCase
+                    "FloodOpacity 50%"
+                    [ FloodOpacity' 0.5 ]
+                    ["floodOpacity" ==> "0.5"]
+                testCase
+                    "FloodOpacity -10 should be 0"
+                    [ FloodOpacity' -10.0 ]
+                    ["floodOpacity" ==> "0"]
+                testCase
+                    "FloodOpacity 10 should be 1"
+                    [ FloodOpacity' 10.0 ]
+                    ["floodOpacity" ==> "1"]
+                testCase
+                    "FloodOpacity 1.5 should be 1"
+                    [ FloodOpacity' 1.5 ]
+                    ["floodOpacity" ==> "1"]
                 ]

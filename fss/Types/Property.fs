@@ -374,6 +374,7 @@ namespace Fss.FssTypes
             | TextAnchor
             | ClipRule
             | FloodColor
+            | FloodOpacity
             interface ITransitionProperty
 
     [<AutoOpen>]

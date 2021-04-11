@@ -144,9 +144,20 @@ module Svg =
     /// <param name="color">
     ///     can be:
     ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let FloodColor' = FloodColor.value
+
+
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-opacity
+    [<Erase>]
+    type FloodOpacity =
+        static member value value =
+            FssTypes.propertyHelpers.cssValue FssTypes.Property.FloodOpacity
+            <| string (Utilities.Helpers.clamp 0.0 1.0 value)
+
+    /// <summary>Specifies the opacity of flood color element.</summary>
+    /// <param name="floodOpacity"> </param>
+    /// <returns>Css property for fss.</returns>
+    let FloodOpacity' = FloodOpacity.value
