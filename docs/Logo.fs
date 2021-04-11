@@ -8,17 +8,16 @@ module Logo =
         svg
             [ SVGAttr.Height height
               SVGAttr.Width width
-              SVGAttr.ViewBox "0 0 91 91"
+              SVGAttr.ViewBox "0 0 256 256"
               SVGAttr.Fill "none"
               ]
             [
-                path [ D "M15.4417 79.3631L9.11028 4.7064L81.6526 5.06075L74.9261 79.3839L45.3774 88.0067L15.4417 79.3631Z"; SVGAttr.Fill "#27303B"; SVGAttr.Stroke "#9A9A9A" ] [ ]
-                path [ D "M46 10.178V82.5L70.0933 75.6198L76.2301 10.178H46Z"; SVGAttr.Fill "#29A9DF" ] [ ]
-                path [ D "M44 16V31L29.4003 45.0098L44 59V74L14.382 44.9632L44 16Z"; SVGAttr.Fill "#29A9DF" ] [ ]
-                path [ D "M46 16V31L60.0484 45.1667L46 59.1427V74L75.3403 45.1198L46 16Z"; SVGAttr.Fill "#27303B" ] [ ]
-                path [ D "M43.5746 34.8877L43.4707 54.9806L33.2294 44.947L43.5746 34.8877"; SVGAttr.Fill "white" ] [ ]
+                path [ D "M42.5899 223.961L24.6418 12.3286L230.696 13.3351L211.628 224.019L127.656 248.523L42.5899 223.961Z"; SVGAttr.Fill "#27303B"; SVGAttr.Stroke "#9A9A9A" ] [ ]
+                path [ D "M127 28V232L196.339 212.593L214 28H127Z"; SVGAttr.Fill "#29A9DF" ] [ ]
+                path [ D "M127 45V87.1552L84.1148 126.528L127 165.845V208L40 126.397L127 45Z"; SVGAttr.Fill "#29A9DF" ] [ ]
+                path [ D "M127 45V87.1552L167.699 126.968L127 166.246V208L212 126.837L127 45Z"; SVGAttr.Fill "#27303B" ] [ ]
             ]
 
-    let logoNormal = logoBase 91 91
+    let logoNormal = logoBase 256 256
 
     let logo width height = logoBase width height

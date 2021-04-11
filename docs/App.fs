@@ -91,6 +91,17 @@ module App =
     let headingFont = FontFamily.custom "Nunito"
     let textFont = FontFamily.custom "Raleway"
 
+    // Colors
+    let background = "E1E2E1"
+    let textOnPrimary = "ffffff"
+    let textOnSecondary = "000000"
+    let primary = "606060"
+    let primaryLight = "8d8d8d"
+    let primaryDark = "363636"
+    let secondary = "2979ff"
+    let secondaryLight = "75a7ff"
+    let secondaryDark = "004ecb"
+
     // Styles
     let multilineText =
         fss
@@ -120,17 +131,6 @@ module App =
         | Fonts -> "Fonts"
         | BackgroundImage -> "Background image"
         | Feliz -> "Feliz"
-
-    let codeBlock (code: string List) =
-        let codeBlock =
-            fss
-                [
-                    Label' "Code Block"
-                    BackgroundColor.hex "#2A2A2A"
-                    Color.white
-                    Padding' (px 20)
-                ]
-        pre [ ClassName codeBlock ] [ str (code |> String.concat "\n") ]
 
     let pageToContent page currentMarkdown =
 
@@ -292,7 +292,6 @@ module App =
                                         BackgroundColor.orangeRed
                                     ]
                             ]
-
 
                     markdown [ Renderers renderers; Children currentMarkdown ]
                     div [ ClassName colorTransition ] [ str "Hover me" ]
@@ -514,7 +513,7 @@ module App =
                         yield! commonStyle
                         CounterReset' subCounter
                         CounterIncrement' indexCounter
-                        BackgroundColor.hex "eee"
+                        BackgroundColor.hex "#222426"
                         Before
                             [
                                 yield! commonBefore
@@ -528,7 +527,7 @@ module App =
                         yield! commonStyle
                         CounterIncrement' subCounter
                         TextIndent' (em 1.)
-                        Color.hex "444"
+                        Color.hex "BDB7AF"
                         Before
                             [
                                 yield! commonBefore
@@ -988,26 +987,21 @@ module App =
         let linkStyle =
             fss
                 [
+                    Position.relative
                     Width' <| px 200
+                    Color.hex "F4F9E9"
                     if example = currentExample then
-                       BackgroundColor.hex "#29A9DF"
-                       BorderRightColor.hex "#4a8ab5"
-                       BorderRightWidth' (px 3)
+                       BorderRightColor.hex secondaryDark
+                       BorderRightWidth' (px 10)
                        BorderRightStyle.solid
-                    else
-                        BackgroundColor.transparent
-                    Hover
-                        [
-                            BackgroundColor.hex "E0E0E0"
-                        ]
-                    MarginRight' <| px 25
+                       BackgroundColor.hex secondaryLight
+                       Color.hex textOnPrimary |> important
                     Label' "Button Style"
                     TextDecoration.none
-                    Color.black
                     Padding' (px 10)
                     FontSize' (px 14)
-                    textFont
                     VerticalAlign.middle
+                    textFont
                 ]
 
         a [ ClassName linkStyle; Href $"#{Utilities.duToKebab example}" ] [ str $"{pageToString example}" ]
@@ -1018,7 +1012,7 @@ module App =
                 [
                     Label' "Header Style"
                     Color.white
-                    BackgroundColor.hex "#4a8ab5"
+                    BackgroundColor.hex primary
                     PaddingLeft' (px 10)
                     AlignItems.center
                 ]
@@ -1037,13 +1031,12 @@ module App =
             fss
                 [
                     Label' "Menu List"
-                    ListStyleType.none
-                    Margin' (px 0)
-                    Padding' (px 0)
-                    PaddingRight' (px 5)
-                    TextIndent' (px 0)
                     Display.flex
                     FlexDirection.column
+                    BorderRightColor.hex secondaryDark
+                    BorderRightWidth.thin
+                    BorderRightStyle.solid
+                    MarginRight' <| px 25
                 ]
         let menuListItem' example = menuListItem example model.CurrentPage
         aside []
@@ -1089,6 +1082,12 @@ module App =
                     FlexDirection.row
                     MarginLeft.auto
                     MarginRight.auto
+                    Color.black
+                    ! FssTypes.Html.A [
+                        Link [ Color.black ]
+                        Visited [ Color.black ]
+                        Hover [ Color.black ]
+                    ]
                 ]
         div []
             [
