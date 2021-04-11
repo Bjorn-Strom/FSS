@@ -64,18 +64,21 @@ namespace Fss.FssTypes
 
 
 
-        // Not done
+
+
         type ImageRendering =
-            // Auto
             | OptimizeSpeed
             | OptimizeQuality
+            interface ISVGImageRendering
 
         type ShapeRendering =
-            // Auto
             | OptimizeSpeed
             | CrispEdges
             | GeometricPrecision
+            interface IShapeRendering
 
+
+        // Not done
         // Stroke er en farge
 
         // Stroke dasharray, int, size, percent

@@ -237,6 +237,8 @@ namespace Fss.FssTypes
     type IDominantBaseline          = interface end
     type IColorInterpolation        = interface end
     type IColorInterpolationFilters = interface end
+    type ISVGImageRendering         = interface end
+    type IShapeRendering            = interface end
 
     // Types
     type CssProperty = CssProperty of string * obj
@@ -293,6 +295,8 @@ namespace Fss.FssTypes
         interface IDominantBaseline
         interface IColorInterpolation
         interface IColorInterpolationFilters
+        interface ISVGImageRendering
+        interface IShapeRendering
 
     type None' =
         | None'

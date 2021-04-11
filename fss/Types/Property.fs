@@ -383,6 +383,7 @@ namespace Fss.FssTypes
             | Fill
             | FillOpacity
             | FillRule
+            | ShapeRendering
             interface ITransitionProperty
 
     [<AutoOpen>]

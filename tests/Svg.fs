@@ -280,4 +280,32 @@ module Svg =
                     "FillRule evenodd"
                     [FillRule.evenodd]
                     ["fillRule" ==> "evenodd"]
+                testCase
+                    "ImageRendering optimize speed"
+                    [ImageRendering.optimizeSpeed]
+                    ["imageRendering" ==> "optimize-speed"]
+                testCase
+                    "ImageRendering optimize quality"
+                    [ImageRendering.optimizeQuality]
+                    ["imageRendering" ==> "optimize-quality"]
+                testCase
+                    "ImageRendering auto"
+                    [ImageRendering.auto]
+                    ["imageRendering" ==> "auto"]
+                testCase
+                    "ShapeRendering optimize speed"
+                    [ShapeRendering.optimizeSpeed]
+                    ["shapeRendering" ==> "optimize-speed"]
+                testCase
+                    "ShapeRendering crisp edges"
+                    [ShapeRendering.crispEdges]
+                    ["shapeRendering" ==> "crisp-edges"]
+                testCase
+                    "ShapeRendering geometric precision"
+                    [ShapeRendering.geometricPrecision]
+                    ["shapeRendering" ==> "geometric-precision"]
+                testCase
+                    "ShapeRendering auto"
+                    [ShapeRendering.auto]
+                    ["shapeRendering" ==> "auto"]
                 ]

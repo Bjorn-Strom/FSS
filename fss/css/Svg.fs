@@ -257,42 +257,6 @@ module Svg =
     /// <returns>Css property for fss.</returns>
     let ColorInterpolationFilters' = ColorInterpolationFilters.value
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-color
     let private fillValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Fill
     let private fillValue' = colorToString >> fillValue
@@ -327,3 +291,56 @@ module Svg =
         static member value (fillRule: FssTypes.Svg.FillRule) = fillRule |> fillRuleValue'
         static member nonzero = FssTypes.Svg.FillRule.Nonzero |> fillRuleValue'
         static member evenodd = FssTypes.Svg.FillRule.Evenodd |> fillRuleValue'
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/image-rendering
+    let private stringifyImageRendering (imageRendering: FssTypes.ISVGImageRendering) =
+        match imageRendering with
+        | :? FssTypes.Svg.ImageRendering as ir -> Utilities.Helpers.duToKebab ir
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+        | _ -> "Unknown image rendering"
+
+    let private imageRenderingValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ImageRendering
+    let private imageRenderingValue' = stringifyImageRendering >> imageRenderingValue
+
+    [<Erase>]
+    type ImageRendering =
+        static member value (imageRendering: FssTypes.ISVGImageRendering) = imageRendering |> imageRenderingValue'
+        static member optimizeSpeed = FssTypes.Svg.ImageRendering.OptimizeSpeed |> imageRenderingValue'
+        static member optimizeQuality = FssTypes.Svg.ImageRendering.OptimizeQuality |> imageRenderingValue'
+        static member auto = FssTypes.Auto |> imageRenderingValue'
+
+    /// <summary>Specifies how the browser should deal with image in regards to speed versus quality.</summary>
+    /// <param name="all">
+    ///     can be:
+    ///     - <c> ImageRendering </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let ImageRendering' = ImageRendering.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering
+    let private stringifyShapeRendering (shapreRendering: FssTypes.IShapeRendering) =
+        match shapreRendering with
+        | :? FssTypes.Svg.ShapeRendering as sr -> Utilities.Helpers.duToKebab sr
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+        | _ -> "Unknown shape rendering"
+
+    let private shapeRenderingValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ShapeRendering
+    let private shapeRenderingValue' = stringifyShapeRendering >> shapeRenderingValue
+
+    [<Erase>]
+    type ShapeRendering =
+        static member value (shapeRendering: FssTypes.IShapeRendering) = shapeRendering |> shapeRenderingValue'
+        static member optimizeSpeed = FssTypes.Svg.ShapeRendering.OptimizeSpeed |> shapeRenderingValue'
+        static member crispEdges = FssTypes.Svg.ShapeRendering.CrispEdges |> shapeRenderingValue'
+        static member geometricPrecision = FssTypes.Svg.ShapeRendering.GeometricPrecision |> shapeRenderingValue'
+        static member auto = FssTypes.Auto |> shapeRenderingValue'
+
+    /// <summary>Specifies how the browser should deal with tradeoffs when rendering shapes.</summary>
+    /// <param name="all">
+    ///     can be:
+    ///     - <c> ShapeRendering </c>
+    ///     - <c> Auto </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let ShapeRendering' = ShapeRendering.value
