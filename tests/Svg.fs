@@ -170,4 +170,44 @@ module Svg =
                     "FloodOpacity 1.5 should be 1"
                     [ FloodOpacity' 1.5 ]
                     ["floodOpacity" ==> "1"]
+                testCase
+                    "LightingColor color rgb"
+                    [ LightingColor.rgb 255 0 0 ]
+                    ["lightingColor" ==> "rgb(255, 0, 0)"]
+                testCase
+                    "LightingColor color green"
+                    [ LightingColor.green ]
+                    ["lightingColor" ==> "#008000"]
+                testCase
+                    "StopColor color rgb"
+                    [ StopColor.rgb 255 0 0 ]
+                    ["stopColor" ==> "rgb(255, 0, 0)"]
+                testCase
+                    "StopColor color green"
+                    [ StopColor.green ]
+                    ["stopColor" ==> "#008000"]
+                testCase
+                    "StopOpacity 1"
+                    [ StopOpacity' 1.0 ]
+                    ["stopOpacity" ==> "1"]
+                testCase
+                    "StopOpacity 0"
+                    [ StopOpacity' 0.0]
+                    ["stopOpacity" ==> "0"]
+                testCase
+                    "StopOpacity 50%"
+                    [ StopOpacity' 0.5 ]
+                    ["stopOpacity" ==> "0.5"]
+                testCase
+                    "StopOpacity -10 should be 0"
+                    [ StopOpacity' -10.0 ]
+                    ["stopOpacity" ==> "0"]
+                testCase
+                    "StopOpacity 10 should be 1"
+                    [ StopOpacity' 10.0 ]
+                    ["stopOpacity" ==> "1"]
+                testCase
+                    "StopOpacity 1.5 should be 1"
+                    [ StopOpacity' 1.5 ]
+                    ["stopOpacity" ==> "1"]
                 ]

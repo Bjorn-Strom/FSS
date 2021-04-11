@@ -46,10 +46,6 @@ namespace Fss.FssTypes
             | Evenodd
 
         // Not done
-        // Flood opacity tall mellom 0 og 1
-
-        // lighting color er en Color
-
         // Stop color er en Color
 
         // Stop opacity tall mellom 0 og 1

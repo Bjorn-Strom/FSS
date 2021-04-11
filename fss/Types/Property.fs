@@ -375,6 +375,9 @@ namespace Fss.FssTypes
             | ClipRule
             | FloodColor
             | FloodOpacity
+            | LightingColor
+            | StopColor
+            | StopOpacity
             interface ITransitionProperty
 
     [<AutoOpen>]

@@ -4,6 +4,11 @@ open Fable.Core
 
 [<AutoOpen>]
 module Svg =
+    let private colorToString (color: FssTypes.IColor) =
+        match color with
+        | :? FssTypes.Color.ColorType as c -> FssTypes.Color.colorHelpers.colorToString c
+        | _ -> "Unknown svg color"
+
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline
     let private alignmentBaselineValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AlignmentBaseline
     let private alignmentBaselineValue' = Utilities.Helpers.duToKebab >> alignmentBaselineValue
@@ -132,10 +137,6 @@ module Svg =
     let ClipRule' = ClipRule.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-color
-    let private colorToString (color: FssTypes.IColor) =
-        match color with
-        | :? FssTypes.Color.ColorType as c -> FssTypes.Color.colorHelpers.colorToString c
-        | _ -> "Unknown flood color"
     let private floodColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FloodColor
     let private floodColorValue' = colorToString >> floodColorValue
     let FloodColor = FssTypes.Color.ColorClass(floodColorValue')
@@ -148,8 +149,6 @@ module Svg =
     /// <returns>Css property for fss.</returns>
     let FloodColor' = FloodColor.value
 
-
-
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-opacity
     [<Erase>]
     type FloodOpacity =
@@ -161,3 +160,41 @@ module Svg =
     /// <param name="floodOpacity"> </param>
     /// <returns>Css property for fss.</returns>
     let FloodOpacity' = FloodOpacity.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/lighting-color
+    let private lightingColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LightingColor
+    let private lightingColorValue' = colorToString >> lightingColorValue
+    let LightingColor = FssTypes.Color.ColorClass(lightingColorValue')
+
+    /// <summary>Specifies color of light source for primitive.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> FssTypes.ColorType</c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let LightingColor' = LightingColor.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-color
+    let private stopColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StopColor
+    let private stopColorValue' = colorToString >> stopColorValue
+    let StopColor = FssTypes.Color.ColorClass(stopColorValue')
+
+    /// <summary>Specifies color to use at gradient stop.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> FssTypes.ColorType</c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let StopColor' = StopColor.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-opacity
+    [<Erase>]
+    type StopOpacity =
+        static member value value =
+            FssTypes.propertyHelpers.cssValue FssTypes.Property.StopOpacity
+            <| string (Utilities.Helpers.clamp 0.0 1.0 value)
+
+    /// <summary>Specifies the opacity of the color of a gradient stop.</summary>
+    /// <param name="stopOpacity"> </param>
+    /// <returns>Css property for fss.</returns>
+    let StopOpacity' = StopOpacity.value
