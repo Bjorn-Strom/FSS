@@ -85,7 +85,7 @@ module Svg =
         static member textTop = FssTypes.Svg.DominantBaseline.TextTop |> dominantBaselineValue'
         static member auto = FssTypes.Auto |> dominantBaselineValue'
 
-    /// <summary>Specifies the dominnant baseline.</summary>
+    /// <summary>Specifies the dominant baseline.</summary>
     /// <param name="all">
     ///     can be:
     ///     - <c> DominantBaseline </c>
@@ -112,3 +112,21 @@ module Svg =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TextAnchor' = TextAnchor.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/clip-rule
+    let private clipRuleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ClipRule
+    let private clipRuleValue' = Utilities.Helpers.duToLowercase >> clipRuleValue
+
+    [<Erase>]
+    type ClipRule=
+        static member value (clipRule: FssTypes.Svg.ClipRule) = clipRule |> clipRuleValue'
+        static member nonzero = FssTypes.Svg.ClipRule.Nonzero |> clipRuleValue'
+        static member evenodd = FssTypes.Svg.ClipRule.Evenodd |> clipRuleValue'
+
+    /// <summary>Align text.</summary>
+    /// <param name="clipRule">
+    ///     can be:
+    ///     - <c> ClipRuleline </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let ClipRule' = ClipRule.value

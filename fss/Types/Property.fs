@@ -372,6 +372,7 @@ namespace Fss.FssTypes
             | BaselineShift
             | DominantBaseline
             | TextAnchor
+            | ClipRule
             interface ITransitionProperty
 
     [<AutoOpen>]

@@ -135,7 +135,14 @@ module Svg =
 
 
 
-
+                testCase
+                    "ClipRule nonzero"
+                    [ClipRule.nonzero]
+                    ["clipRule" ==> "nonzero"]
+                testCase
+                    "ClipRule evenodd"
+                    [ClipRule.evenodd]
+                    ["clipRule" ==> "evenodd"]
 
 
 
