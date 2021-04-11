@@ -123,10 +123,30 @@ module Svg =
         static member nonzero = FssTypes.Svg.ClipRule.Nonzero |> clipRuleValue'
         static member evenodd = FssTypes.Svg.ClipRule.Evenodd |> clipRuleValue'
 
-    /// <summary>Align text.</summary>
+    /// <summary>Sets clip of graphic.</summary>
     /// <param name="clipRule">
     ///     can be:
-    ///     - <c> ClipRuleline </c>
+    ///     - <c> ClipRule </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ClipRule' = ClipRule.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-color
+    let private colorToString (color: FssTypes.IColor) =
+        match color with
+        | :? FssTypes.Color.ColorType as c -> FssTypes.Color.colorHelpers.colorToString c
+        | _ -> "Unknown flood color"
+    let private floodColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FloodColor
+    let private floodColorValue' = colorToString >> floodColorValue
+    let FloodColor = FssTypes.Color.ColorClass(floodColorValue')
+
+    /// <summary>Specifies color to flood the element with.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> FssTypes.ColorType</c>
+    ///     - <c> Inherit </c>
+    ///     - <c> Initial </c>
+    ///     - <c> Unset </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let FloodColor' = FloodColor.value

@@ -177,11 +177,10 @@ namespace Fss.FssTypes
             member this.initial = Initial |> valueFunction
             member this.unset = Unset |> valueFunction
 
-
         type ColorAdjust =
             | Economy
             | Exact
 
-          [<AutoOpen>]
+        [<AutoOpen>]
         module colorHelpers =
             let internal colorToString (ColorType c) = c

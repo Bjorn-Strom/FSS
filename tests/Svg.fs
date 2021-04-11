@@ -130,11 +130,6 @@ module Svg =
                     "TextAnchor end"
                     [TextAnchor.end']
                     ["textAnchor" ==> "end"]
-
-
-
-
-
                 testCase
                     "ClipRule nonzero"
                     [ClipRule.nonzero]
@@ -145,7 +140,14 @@ module Svg =
                     ["clipRule" ==> "evenodd"]
 
 
-
+                testCase
+                    "FloodColor color rgb"
+                    [ FloodColor.rgb 255 0 0 ]
+                    ["floodColor" ==> "rgb(255, 0, 0)"]
+                testCase
+                    "FloodColor color green"
+                    [ FloodColor.green ]
+                    ["floodColor" ==> "#008000"]
 
 
                 ]

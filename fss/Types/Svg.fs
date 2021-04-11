@@ -41,14 +41,11 @@ namespace Fss.FssTypes
             | Middle
             | End
 
-
-        // Not done
         type ClipRule =
             | Nonzero
             | Evenodd
 
-        // Flood color er en Color
-
+        // Not done
         // Flood opacity tall mellom 0 og 1
 
         // lighting color er en Color
