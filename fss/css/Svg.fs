@@ -370,20 +370,6 @@ module Svg =
     /// <returns>Css property for fss.</returns>
     let StrokeOpacity' = StrokeOpacity.value
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray
     let private strokeDasharrayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeDasharray
 
@@ -396,4 +382,17 @@ module Svg =
     /// <param name="strokeDasharray"> </param>
     /// <returns>Css property for fss.</returns>
     let StrokeDasharray' = StrokeDasharray.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dashoffset
+    let private strokeDashoffsetValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeDashoffset
+
+    [<Erase>]
+    type StrokeDashoffset =
+        static member value (strokeDashoffset: int list) =
+            strokeDashoffset |> Utilities.Helpers.combineComma string |> strokeDashoffsetValue
+
+    /// <summary>Specifies the offset when drawin the stroke dash array.</summary>
+    /// <param name="strokeDashoffset"> </param>
+    /// <returns>Css property for fss.</returns>
+    let StrokeDashoffset' = StrokeDashoffset.value
 

@@ -387,6 +387,7 @@ namespace Fss.FssTypes
             | Stroke
             | StrokeOpacity
             | StrokeDasharray
+            | StrokeDashoffset
             interface ITransitionProperty
 
     [<AutoOpen>]

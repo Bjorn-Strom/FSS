@@ -72,8 +72,6 @@ namespace Fss.FssTypes
 
 
         // Not done
-        // Stroke dasharray, int, size, percent
-
         // Stroke dashoffset: innt percent
 
         type StrokeLinecap =

@@ -342,7 +342,14 @@ module Svg =
                     "Stroke dasharray 400"
                     [StrokeDasharray' [400]]
                     ["strokeDasharray" ==> "400"]
-
+                testCase
+                    "Stroke dashoffset 5, 3, 2"
+                    [StrokeDashoffset' [5;3;2]]
+                    ["strokeDashoffset" ==> "5, 3, 2"]
+                testCase
+                    "Stroke dashoffset 400"
+                    [StrokeDashoffset' [400]]
+                    ["strokeDashoffset" ==> "400"]
 
 
 
