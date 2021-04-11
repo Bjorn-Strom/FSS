@@ -334,4 +334,16 @@ module Svg =
                     "StrokeOpacity 1.5 should be 1"
                     [ StrokeOpacity' 1.5 ]
                     ["strokeOpacity" ==> "1"]
+                testCase
+                    "Stroke dasharray 5, 3, 2"
+                    [StrokeDasharray' [5;3;2]]
+                    ["strokeDasharray" ==> "5, 3, 2"]
+                testCase
+                    "Stroke dasharray 400"
+                    [StrokeDasharray' [400]]
+                    ["strokeDasharray" ==> "400"]
+
+
+
+
                 ]

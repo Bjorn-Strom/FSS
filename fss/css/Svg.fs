@@ -372,3 +372,28 @@ module Svg =
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray
+    let private strokeDasharrayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeDasharray
+
+    [<Erase>]
+    type StrokeDasharray =
+        static member value (strokeDasharray: int list) =
+            strokeDasharray |> Utilities.Helpers.combineComma string |> strokeDasharrayValue
+
+    /// <summary>Specifies the pattern of dashes and gaps used to paint the outline of the shape.</summary>
+    /// <param name="strokeDasharray"> </param>
+    /// <returns>Css property for fss.</returns>
+    let StrokeDasharray' = StrokeDasharray.value
+
