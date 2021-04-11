@@ -384,6 +384,8 @@ namespace Fss.FssTypes
             | FillOpacity
             | FillRule
             | ShapeRendering
+            | Stroke
+            | StrokeOpacity
             interface ITransitionProperty
 
     [<AutoOpen>]

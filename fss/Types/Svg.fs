@@ -59,13 +59,6 @@ namespace Fss.FssTypes
             | Nonzero
             | Evenodd
 
-
-
-
-
-
-
-
         type ImageRendering =
             | OptimizeSpeed
             | OptimizeQuality
@@ -79,8 +72,6 @@ namespace Fss.FssTypes
 
 
         // Not done
-        // Stroke er en farge
-
         // Stroke dasharray, int, size, percent
 
         // Stroke dashoffset: innt percent
@@ -97,8 +88,7 @@ namespace Fss.FssTypes
             | MiterClip
             | Round
 
-        // Miterlimit: int
+        // stoke  Miterlimit: int
 
-        // Stroke opacity tall mellom 0 og 1
 
         // stroke width: size percent

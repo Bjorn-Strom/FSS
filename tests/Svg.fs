@@ -234,12 +234,6 @@ module Svg =
                     "ColorInterpolationFilters auto"
                     [ ColorInterpolationFilters.auto ]
                     ["colorInterpolationFilters" ==> "auto"]
-
-
-
-
-
-
                 testCase
                     "Fill color rgb"
                     [ Fill.rgb 255 0 0 ]
@@ -308,4 +302,36 @@ module Svg =
                     "ShapeRendering auto"
                     [ShapeRendering.auto]
                     ["shapeRendering" ==> "auto"]
+                testCase
+                    "Stroke color rgb"
+                    [ Stroke.rgb 255 0 0 ]
+                    ["stroke" ==> "rgb(255, 0, 0)"]
+                testCase
+                    "Stroke color green"
+                    [ Stroke.green ]
+                    ["stroke" ==> "#008000"]
+                testCase
+                    "StrokeOpacity 1"
+                    [ StrokeOpacity' 1.0 ]
+                    ["strokeOpacity" ==> "1"]
+                testCase
+                    "StrokeOpacity 0"
+                    [ StrokeOpacity' 0.0]
+                    ["strokeOpacity" ==> "0"]
+                testCase
+                    "StrokeOpacity 50%"
+                    [ StrokeOpacity' 0.5 ]
+                    ["strokeOpacity" ==> "0.5"]
+                testCase
+                    "StrokeOpacity -10 should be 0"
+                    [ StrokeOpacity' -10.0 ]
+                    ["strokeOpacity" ==> "0"]
+                testCase
+                    "StrokeOpacity 10 should be 1"
+                    [ StrokeOpacity' 10.0 ]
+                    ["strokeOpacity" ==> "1"]
+                testCase
+                    "StrokeOpacity 1.5 should be 1"
+                    [ StrokeOpacity' 1.5 ]
+                    ["strokeOpacity" ==> "1"]
                 ]

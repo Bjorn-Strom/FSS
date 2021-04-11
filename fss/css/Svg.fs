@@ -344,3 +344,31 @@ module Svg =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let ShapeRendering' = ShapeRendering.value
+
+   // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke
+    let private strokeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Stroke
+    let private strokeValue' = colorToString >> strokeValue
+    let Stroke = FssTypes.Color.ColorClass(strokeValue')
+
+    /// <summary>Specifies color to stroke the element with.</summary>
+    /// <param name="color">
+    ///     can be:
+    ///     - <c> FssTypes.ColorType</c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let Stroke' = Stroke.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-opacity
+    [<Erase>]
+    type StrokeOpacity =
+        static member value value =
+            FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeOpacity
+            <| string (Utilities.Helpers.clamp 0.0 1.0 value)
+
+    /// <summary>Specifies the opacity of stroke color element.</summary>
+    /// <param name="strokeOpacity"> </param>
+    /// <returns>Css property for fss.</returns>
+    let StrokeOpacity' = StrokeOpacity.value
+
+
+
