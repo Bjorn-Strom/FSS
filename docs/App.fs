@@ -33,6 +33,7 @@ module App =
         | Fonts
         | BackgroundImage
         | Feliz
+        | Svg
 
     type ButtonType =
         | Big
@@ -52,6 +53,7 @@ module App =
             [ Overview |> GetMarkdown |> Cmd.ofMsg
               Installation |> GetMarkdown |> Cmd.ofMsg
               Philosophy |> GetMarkdown |> Cmd.ofMsg
+              New |> GetMarkdown |> Cmd.ofMsg
               BasicUsage |> GetMarkdown |> Cmd.ofMsg
               ConditionalStyling |> GetMarkdown |> Cmd.ofMsg
               Pseudo |> GetMarkdown |> Cmd.ofMsg
@@ -65,6 +67,8 @@ module App =
               Counters |> GetMarkdown |> Cmd.ofMsg
               Fonts |> GetMarkdown |> Cmd.ofMsg
               BackgroundImage |> GetMarkdown |> Cmd.ofMsg
+              Feliz |> GetMarkdown |> Cmd.ofMsg
+              Svg |> GetMarkdown |> Cmd.ofMsg
             ]
         { CurrentPage = page; Pages = Map.empty; }, Cmd.batch requests
 
@@ -131,6 +135,7 @@ module App =
         | Fonts -> "Fonts"
         | BackgroundImage -> "Background image"
         | Feliz -> "Feliz"
+        | Svg -> "Svg"
 
     let pageToContent page currentMarkdown =
 
@@ -962,6 +967,27 @@ module App =
                         ]
                 ]
         let feliz = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
+        let svg = article [] [
+            markdown [ Renderers renderers]
+            let logoAnimation =
+                keyframes [
+                    frame 100 [ StrokeDashoffset' [ 0 ] ]
+                ]
+
+            let logoStyle =
+                fss [
+                   Stroke.black
+                   StrokeWidth' <| px 4
+                   StrokeDashoffset' [ 1000 ]
+                   StrokeDasharray' [ 1000 ]
+                   AnimationName' logoAnimation
+                   AnimationDuration' <| sec 5.
+                   AnimationTimingFunction.linear
+                   AnimationFillMode.forwards
+                ]
+
+            Logo.logo 256 256 logoStyle
+        ]
 
         match page with
         | Overview -> overview
@@ -982,6 +1008,7 @@ module App =
         | Fonts -> fonts
         | BackgroundImage -> backgroundImage
         | Feliz -> feliz
+        | Svg -> svg
 
     let menuListItem example currentExample =
         let linkStyle =
@@ -1046,6 +1073,7 @@ module App =
                         menuListItem' Overview
                         menuListItem' Installation
                         menuListItem' Philosophy
+                        menuListItem' New
                         menuListItem' BasicUsage
                         menuListItem' ConditionalStyling
                         menuListItem' Pseudo
@@ -1059,6 +1087,8 @@ module App =
                         menuListItem' Counters
                         menuListItem' Fonts
                         menuListItem' BackgroundImage
+                        menuListItem' Feliz
+                        menuListItem' Svg
                     ]
             ]
 

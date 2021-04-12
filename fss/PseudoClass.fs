@@ -5,13 +5,12 @@ open Fable.Core.JsInterop
 
 [<AutoOpen>]
 module PseudoClass =
-
-    let private stringifyNthChild (nthChild: FssTypes.INthChild)=
-        match nthChild with
-        | :? FssTypes.PseudoClass.NthChildType as n -> Utilities.Helpers.duToLowercase n
+    let private stringifyNthChild (nth: FssTypes.INth)=
+        match nth with
+        | :? FssTypes.PseudoClass.Nth as n -> Utilities.Helpers.duToLowercase n
         | :? FssTypes.CssString as s -> FssTypes.masterTypeHelpers.StringToString s
         | :? FssTypes.CssInt as i -> FssTypes.masterTypeHelpers.IntToString i
-        | _ -> "Unknown nth child"
+        | _ -> "Unknown nth"
 
     let private pseudoValue value attributeList = value ==> (attributeList |> fss) |> FssTypes.CssProperty
     [<Erase>]
@@ -38,10 +37,10 @@ module PseudoClass =
         static member lastOfType (attributeList: FssTypes.CssProperty list) = pseudoValue ":last-of-type" attributeList
         static member localLink (attributeList: FssTypes.CssProperty list) = pseudoValue ":local-link" attributeList
         static member link (attributeList: FssTypes.CssProperty list) = pseudoValue ":link" attributeList
-        static member nthChild (n: FssTypes.INthChild) (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-child(%s)" (stringifyNthChild n)) attributeList
-        static member nthLastChild n (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-last-child(%s)" n) attributeList
-        static member nthLastOfType n (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-last-of-type(%s)" n) attributeList
-        static member nthOfType (attributeList: FssTypes.CssProperty list) = pseudoValue ":nth-of-type" attributeList
+        static member nthChild (n: FssTypes.INth) (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-child(%s)" (stringifyNthChild n)) attributeList
+        static member nthLastChild (n: FssTypes.INth) (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-last-child(%s)" (stringifyNthChild n)) attributeList
+        static member nthLastOfType (n: FssTypes.INth) (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-last-of-type(%s)" (stringifyNthChild n)) attributeList
+        static member nthOfType (n: FssTypes.INth) (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-of-type(%s)" (stringifyNthChild n)) attributeList
         static member onlyChild (attributeList: FssTypes.CssProperty list) = pseudoValue ":only-child" attributeList
         static member onlyOfType (attributeList: FssTypes.CssProperty list) = pseudoValue ":only-of-type" attributeList
         static member optional (attributeList: FssTypes.CssProperty list) = pseudoValue ":optional" attributeList
@@ -61,49 +60,52 @@ module PseudoClass =
         static member visited (attributeList: FssTypes.CssProperty list) = pseudoValue ":visited" attributeList
         static member firstChild (attributeList: FssTypes.CssProperty list) = pseudoValue ":first-child" attributeList
         static member userInvalid (attributeList: FssTypes.CssProperty list) = pseudoValue ":user-invalid" attributeList
+        static member is (html: FssTypes.Html.Html list, attributeList: FssTypes.CssProperty list) =
+            pseudoValue $":is({Utilities.Helpers.combineComma FssTypes.htmlHelpers.htmlToString html})" attributeList
 
-    let Active (attributeList: FssTypes.CssProperty list) = PseudoClass.active attributeList
-    let AnyLink (attributeList: FssTypes.CssProperty list) = PseudoClass.anyLink attributeList
-    let Blank (attributeList: FssTypes.CssProperty list) = PseudoClass.blank attributeList
-    let Checked (attributeList: FssTypes.CssProperty list) = PseudoClass.``checked`` attributeList
-    let Current (attributeList: FssTypes.CssProperty list) = PseudoClass.current attributeList
-    let Disabled (attributeList: FssTypes.CssProperty list) = PseudoClass.disabled attributeList
-    let Empty (attributeList: FssTypes.CssProperty list) = PseudoClass.empty attributeList
-    let Enabled (attributeList: FssTypes.CssProperty list) = PseudoClass.enabled attributeList
-    let FirstOfType (attributeList: FssTypes.CssProperty list) = PseudoClass.firstOfType attributeList
-    let Focus (attributeList: FssTypes.CssProperty list) = PseudoClass.focus attributeList
-    let FocusVisible (attributeList: FssTypes.CssProperty list) = PseudoClass.focusVisible attributeList
-    let FocusWithin (attributeList: FssTypes.CssProperty list) = PseudoClass.focusWithin attributeList
-    let Future (attributeList: FssTypes.CssProperty list) = PseudoClass.future attributeList
-    let Hover (attributeList: FssTypes.CssProperty list) = PseudoClass.hover attributeList
-    let Indeterminate (attributeList: FssTypes.CssProperty list) = PseudoClass.indeterminate attributeList
-    let Invalid (attributeList: FssTypes.CssProperty list) = PseudoClass.invalid attributeList
-    let InRange (attributeList: FssTypes.CssProperty list) = PseudoClass.inRange attributeList
-    let Lang language (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":lang(%s)" language) attributeList
-    let LastChild (attributeList: FssTypes.CssProperty list) = PseudoClass.lastChild attributeList
-    let LastOfType (attributeList: FssTypes.CssProperty list) = PseudoClass.lastOfType attributeList
-    let LocalLink (attributeList: FssTypes.CssProperty list) = PseudoClass.localLink attributeList
-    let Link (attributeList: FssTypes.CssProperty list) = PseudoClass.link attributeList
-    let NthChild (n: FssTypes.INthChild) (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-child(%s)" (stringifyNthChild n)) attributeList
-    let NthLastChild n (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-last-child(%s)" n) attributeList
-    let NthLastOfType n (attributeList: FssTypes.CssProperty list) = pseudoValue (sprintf ":nth-last-of-type(%s)" n) attributeList
-    let NthOfType (attributeList: FssTypes.CssProperty list) = PseudoClass.nthOfType attributeList
-    let OnlyChild (attributeList: FssTypes.CssProperty list) = PseudoClass.onlyChild attributeList
-    let OnlyOfType (attributeList: FssTypes.CssProperty list) = PseudoClass.onlyOfType attributeList
-    let Optional (attributeList: FssTypes.CssProperty list) = PseudoClass.optional attributeList
-    let OutOfRange (attributeList: FssTypes.CssProperty list) = PseudoClass.outOfRange attributeList
-    let Past (attributeList: FssTypes.CssProperty list) = PseudoClass.past attributeList
-    let Playing (attributeList: FssTypes.CssProperty list) = PseudoClass.playing attributeList
-    let Paused (attributeList: FssTypes.CssProperty list) = PseudoClass.paused attributeList
-    let PlaceholderShown (attributeList: FssTypes.CssProperty list) = PseudoClass.placeholderShown attributeList
-    let ReadOnly (attributeList: FssTypes.CssProperty list) = PseudoClass.readOnly attributeList
-    let ReadWrite (attributeList: FssTypes.CssProperty list) = PseudoClass.readWrite attributeList
-    let Required (attributeList: FssTypes.CssProperty list) = PseudoClass.required attributeList
-    let Root (attributeList: FssTypes.CssProperty list) = PseudoClass.root attributeList
-    let Scope (attributeList: FssTypes.CssProperty list) = PseudoClass.scope attributeList
-    let Target (attributeList: FssTypes.CssProperty list) = PseudoClass.target attributeList
-    let TargetWithin (attributeList: FssTypes.CssProperty list) = PseudoClass.targetWithin attributeList
-    let Valid (attributeList: FssTypes.CssProperty list) = PseudoClass.valid attributeList
-    let Visited (attributeList: FssTypes.CssProperty list) = PseudoClass.visited attributeList
-    let FirstChild (attributeList: FssTypes.CssProperty list) = PseudoClass.firstChild attributeList
-    let UserInvalid (attributeList: FssTypes.CssProperty list) = PseudoClass.userInvalid attributeList
+    let Active attributeList = PseudoClass.active attributeList
+    let AnyLink attributeList = PseudoClass.anyLink attributeList
+    let Blank attributeList = PseudoClass.blank attributeList
+    let Checked attributeList = PseudoClass.``checked`` attributeList
+    let Current attributeList = PseudoClass.current attributeList
+    let Disabled attributeList = PseudoClass.disabled attributeList
+    let Empty attributeList = PseudoClass.empty attributeList
+    let Enabled attributeList = PseudoClass.enabled attributeList
+    let FirstOfType attributeList = PseudoClass.firstOfType attributeList
+    let Focus attributeList = PseudoClass.focus attributeList
+    let FocusVisible attributeList = PseudoClass.focusVisible attributeList
+    let FocusWithin attributeList = PseudoClass.focusWithin attributeList
+    let Future attributeList = PseudoClass.future attributeList
+    let Hover attributeList = PseudoClass.hover attributeList
+    let Indeterminate attributeList = PseudoClass.indeterminate attributeList
+    let Invalid attributeList = PseudoClass.invalid attributeList
+    let InRange attributeList = PseudoClass.inRange attributeList
+    let Lang language attributeList = pseudoValue (sprintf ":lang(%s)" language) attributeList
+    let LastChild attributeList = PseudoClass.lastChild attributeList
+    let LastOfType attributeList = PseudoClass.lastOfType attributeList
+    let LocalLink attributeList = PseudoClass.localLink attributeList
+    let Link attributeList = PseudoClass.link attributeList
+    let NthChild (n: FssTypes.INth) attributeList = pseudoValue (sprintf ":nth-child(%s)" (stringifyNthChild n)) attributeList
+    let NthLastChild (n: FssTypes.INth) attributeList = pseudoValue (sprintf ":nth-last-child(%s)" (stringifyNthChild n)) attributeList
+    let NthLastOfType (n: FssTypes.INth) attributeList = pseudoValue (sprintf ":nth-last-of-type(%s)" (stringifyNthChild n)) attributeList
+    let NthOfType (n: FssTypes.INth) attributeList = PseudoClass.nthOfType n attributeList
+    let OnlyChild attributeList = PseudoClass.onlyChild attributeList
+    let OnlyOfType attributeList = PseudoClass.onlyOfType attributeList
+    let Optional attributeList = PseudoClass.optional attributeList
+    let OutOfRange attributeList = PseudoClass.outOfRange attributeList
+    let Past attributeList = PseudoClass.past attributeList
+    let Playing attributeList = PseudoClass.playing attributeList
+    let Paused attributeList = PseudoClass.paused attributeList
+    let PlaceholderShown attributeList = PseudoClass.placeholderShown attributeList
+    let ReadOnly attributeList = PseudoClass.readOnly attributeList
+    let ReadWrite attributeList = PseudoClass.readWrite attributeList
+    let Required attributeList = PseudoClass.required attributeList
+    let Root attributeList = PseudoClass.root attributeList
+    let Scope attributeList = PseudoClass.scope attributeList
+    let Target attributeList = PseudoClass.target attributeList
+    let TargetWithin attributeList = PseudoClass.targetWithin attributeList
+    let Valid attributeList = PseudoClass.valid attributeList
+    let Visited attributeList = PseudoClass.visited attributeList
+    let FirstChild attributeList = PseudoClass.firstChild attributeList
+    let UserInvalid attributeList = PseudoClass.userInvalid attributeList
+    let Is html attributeList = PseudoClass.is(html, attributeList)

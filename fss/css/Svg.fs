@@ -391,7 +391,7 @@ module Svg =
         static member value (strokeDashoffset: int list) =
             strokeDashoffset |> Utilities.Helpers.combineComma string |> strokeDashoffsetValue
 
-    /// <summary>Specifies the offset when drawin the stroke dash array.</summary>
+    /// <summary>Specifies the offset when drawing the stroke dash array.</summary>
     /// <param name="strokeDashoffset"> </param>
     /// <returns>Css property for fss.</returns>
     let StrokeDashoffset' = StrokeDashoffset.value

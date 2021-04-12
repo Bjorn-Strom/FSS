@@ -4,12 +4,12 @@ open Fable.React
 open Fable.React.Props
 
 module Logo =
-    let private logoBase width height =
+    let private logoBase width height className =
         svg
             [ SVGAttr.Height height
               SVGAttr.Width width
               SVGAttr.ViewBox "0 0 256 256"
-              SVGAttr.Fill "none"
+              ClassName className
               ]
             [
                 path [ D "M42.5899 223.961L24.6418 12.3286L230.696 13.3351L211.628 224.019L127.656 248.523L42.5899 223.961Z"; SVGAttr.Fill "#27303B"; SVGAttr.Stroke "#9A9A9A" ] [ ]
@@ -18,6 +18,6 @@ module Logo =
                 path [ D "M127 45V87.1552L167.699 126.968L127 166.246V208L212 126.837L127 45Z"; SVGAttr.Fill "#27303B" ] [ ]
             ]
 
-    let logoNormal = logoBase 256 256
+    let logoNormal = logoBase 256 256 ""
 
-    let logo width height = logoBase width height
+    let logo width height className = logoBase width height className

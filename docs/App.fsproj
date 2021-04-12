@@ -21,6 +21,7 @@
         <Content Include="documentation\BackgroundImage.md" />
         <Content Include="documentation\Feliz.md" />
         <Content Include="documentation\New.md" />
+        <Content Include="documentation\Svg.md" />
         <Compile Include="Markdown.fs" />
         <Compile Include="Utilities.fs" />
         <Compile Include="Logo.fs" />

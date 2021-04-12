@@ -173,7 +173,7 @@ namespace Fss.FssTypes
     type IColumnFill          = interface end
     type IColumnWidth         = interface end
 
-    type INthChild = interface end
+    type INth = interface end
 
     type IResize = interface end
 
@@ -567,7 +567,7 @@ namespace Fss.FssTypes
         interface IAnimationIterationCount
         interface IOrder
         interface IFontWeight
-        interface INthChild
+        interface INth
         interface IColumnCount
         interface ITabSize
         interface IOrphans
@@ -588,7 +588,7 @@ namespace Fss.FssTypes
         interface IQuotes
         interface IListStyleType
         interface IContent
-        interface INthChild
+        interface INth
 
     [<AutoOpen>]
     module masterTypeHelpers =

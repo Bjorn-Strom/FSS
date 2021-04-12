@@ -3,8 +3,8 @@ namespace Fss
 namespace Fss.FssTypes
     [<RequireQualifiedAccess>]
     module PseudoClass =
-        type NthChildType =
+        type Nth =
             | Odd
             | Even
-            interface INthChild
+            interface INth
 

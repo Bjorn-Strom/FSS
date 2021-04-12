@@ -50,5 +50,6 @@ module Tests =
         Image.tests
         Mask.tests
         Svg.tests
+        Psuedo.tests
     ]
 
