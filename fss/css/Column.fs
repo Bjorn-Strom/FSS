@@ -8,7 +8,7 @@ module Column =
         match gap with
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | :? FssTypes.Normal -> FssTypes.masterTypeHelpers.normal
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | _ -> "Unknown column gap"
 
@@ -36,7 +36,7 @@ module Column =
     let private columnRuleWidthToString (ruleWidth: FssTypes.IColumnRuleWidth) =
         match ruleWidth with
         | :? FssTypes.Column.RuleWidth as w -> Utilities.Helpers.duToLowercase w
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column rule width"
 
@@ -69,7 +69,7 @@ module Column =
 
     let private columnWidthToString (columnWidth: FssTypes.IColumnWidth) =
         match columnWidth with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown column width"

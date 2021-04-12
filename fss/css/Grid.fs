@@ -19,7 +19,7 @@ module Grid =
     let private gridGapToString (gap: FssTypes.IGridGap) =
         match gap with
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | _ -> "Unknown grid gap"
 
@@ -27,7 +27,7 @@ module Grid =
         match gap with
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | :? FssTypes.Normal -> FssTypes.masterTypeHelpers.normal
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | _ -> "Unknown grid row gap"
 
@@ -35,7 +35,7 @@ module Grid =
         match gap with
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | :? FssTypes.Normal -> FssTypes.masterTypeHelpers.normal
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | _ -> "Unknown grid column gap"
 
@@ -45,7 +45,7 @@ module Grid =
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Fraction as f -> FssTypes.unitHelpers.fractionToString f
         | _ -> "Unkown grid template column"
 
@@ -70,13 +70,13 @@ module Grid =
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Fraction as f -> FssTypes.unitHelpers.fractionToString f
         | _ -> "Unknown grid template row"
 
     let private autoColumnsToString (autoColumns: FssTypes.IGridAutoColumns) =
         match autoColumns with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Fraction as f -> FssTypes.unitHelpers.fractionToString f
         | :? FssTypes.ContentSize.ContentSize as c -> FssTypes.contentSizeHelpers.contentSizeToString c
@@ -89,7 +89,7 @@ module Grid =
     let private templateTypeValue (i: FssTypes.ITemplateType) =
         match i with
             | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
-            | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+            | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
             | :? FssTypes.Fraction as f -> FssTypes.unitHelpers.fractionToString f
             | :? FssTypes.Grid.MinMax as m -> FssTypes.Grid.minMaxToString m
             | :? FssTypes.Grid.Repeat as r -> FssTypes.Grid.repeatToString r
@@ -97,7 +97,7 @@ module Grid =
 
     let private autoRowsToString (autoRows: FssTypes.IGridAutoRows) =
         match autoRows with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Fraction as f -> FssTypes.unitHelpers.fractionToString f
         | :? FssTypes.ContentSize.ContentSize as c -> FssTypes.contentSizeHelpers.contentSizeToString c
@@ -470,7 +470,7 @@ module Grid =
             FssTypes.Grid.MinMax.MinMax(min, max)
             |> FssTypes.Grid.minMaxToString
             |> templateRowValue
-        static member minMax (min: FssTypes.ContentSize.ContentSize, max: FssTypes.Size) =
+        static member minMax (min: FssTypes.ContentSize.ContentSize, max: FssTypes.Length) =
             FssTypes.Grid.MinMax.MinMax(min, max)
             |> FssTypes.Grid.minMaxToString
             |> templateRowValue
@@ -551,7 +551,7 @@ module Grid =
             FssTypes.Grid.MinMax.MinMax(min, max)
             |> FssTypes.Grid.minMaxToString
             |> templateColumnValue
-        static member minMax (min: FssTypes.ContentSize.ContentSize, max: FssTypes.Size) =
+        static member minMax (min: FssTypes.ContentSize.ContentSize, max: FssTypes.Length) =
             FssTypes.Grid.MinMax.MinMax(min, max)
             |> FssTypes.Grid.minMaxToString
             |> templateColumnValue

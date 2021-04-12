@@ -45,13 +45,13 @@ namespace Fss.FssTypes
             static member MinMax (min: ILengthPercentage, max: ILengthPercentage) =
                 sprintf "minmax(%s, %s)" (lengthPercentageToString min) (lengthPercentageToString max)
                 |> MinMaxGrid
-            static member MinMax (min: Size, max: ContentSize.ContentSize) =
+            static member MinMax (min: Length, max: ContentSize.ContentSize) =
                 sprintf "minmax(%s, %s)" (sizeToString min) (contentSizeToString max)
                 |> MinMaxGrid
             static member MinMax (min: Percent, max: ContentSize.ContentSize) =
                 sprintf "minmax(%s, %s)" (percentToString min) (contentSizeToString max)
                 |> MinMaxGrid
-            static member MinMax (min: ContentSize.ContentSize, max: Size) =
+            static member MinMax (min: ContentSize.ContentSize, max: Length) =
                 sprintf "minmax(%s, %s)" (contentSizeToString min) (sizeToString max)
                 |> MinMaxGrid
             static member MinMax (min: ContentSize.ContentSize, max: ContentSize.ContentSize) =
@@ -111,7 +111,7 @@ namespace Fss.FssTypes
             static member Repeat (value: int, minMax: MinMax) =
                 sprintf "repeat(%d, %s)" value (minMaxToString minMax)
                 |> GridRepeat
-            static member Repeat (value: int, sizes: Size list) =
+            static member Repeat (value: int, sizes: Length list) =
                 sprintf "repeat(%d, %s)"
                     value
                     (Fss.Utilities.Helpers.combineWs sizeToString sizes)

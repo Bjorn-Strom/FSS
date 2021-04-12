@@ -80,12 +80,12 @@ namespace Fss.FssTypes
             | DisplayMode of DisplayMode
             | ForcedColors of bool
             | Grid of bool
-            | Height of Size
-            | MinHeight of Size
-            | MaxHeight of Size
-            | Width of Size
-            | MinWidth of Size
-            | MaxWidth of Size
+            | Height of Length
+            | MinHeight of Length
+            | MaxHeight of Length
+            | Width of Length
+            | MinWidth of Length
+            | MaxWidth of Length
             | Hover of bool
             | InvertedColors of bool
             | LightLevel of LightLevel

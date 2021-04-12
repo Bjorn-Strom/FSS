@@ -6,7 +6,7 @@ namespace Fss.FssTypes
         type Transform =
             | Matrix of float * float * float * float * float * float
             | Matrix3D of int * int * int * int * int * int * int * int * int * int * int * int * float * float * float * float
-            | Perspective of Size
+            | Perspective of Length
             | Rotate of Angle
             | Rotate3D of float * float * float * Angle
             | RotateX of Angle

@@ -95,22 +95,22 @@ module Functions =
 
     // Sizes
     // Absolute
-    let px (v: int): FssTypes.Size = sprintf "%dpx" v |> FssTypes.Px
-    let inc (v: float): FssTypes.Size = sprintf "%.1fin" v |> FssTypes.In
-    let cm (v: float): FssTypes.Size = sprintf "%.1fcm" v |> FssTypes.Cm
-    let mm (v: float): FssTypes.Size = sprintf "%.1fmm" v |> FssTypes.Mm
-    let pt (v: float): FssTypes.Size = sprintf "%.1fpt" v |> FssTypes.Pt
-    let pc (v: float): FssTypes.Size = sprintf "%.1fpc" v |> FssTypes.Pc
+    let px (v: int): FssTypes.Length = sprintf "%dpx" v |> FssTypes.Px
+    let inc (v: float): FssTypes.Length = sprintf "%.1fin" v |> FssTypes.In
+    let cm (v: float): FssTypes.Length = sprintf "%.1fcm" v |> FssTypes.Cm
+    let mm (v: float): FssTypes.Length = sprintf "%.1fmm" v |> FssTypes.Mm
+    let pt (v: float): FssTypes.Length = sprintf "%.1fpt" v |> FssTypes.Pt
+    let pc (v: float): FssTypes.Length = sprintf "%.1fpc" v |> FssTypes.Pc
 
     // Relative
-    let em (v: float): FssTypes.Size = sprintf "%.1fem" v |> FssTypes.Em'
-    let rem (v: float): FssTypes.Size = sprintf "%.1frem" v |> FssTypes.Rem
-    let ex (v: float): FssTypes.Size = sprintf "%.1fex" v |> FssTypes.Ex
-    let ch (v: float): FssTypes.Size = sprintf "%.1fch" v |> FssTypes.Ch
-    let vw (v: float): FssTypes.Size = sprintf "%.1fvw" v |> FssTypes.Vw
-    let vh (v: float): FssTypes.Size = sprintf "%.1fvh" v |> FssTypes.Vh
-    let vmax (v: float): FssTypes.Size = sprintf "%.1fvmax" v |> FssTypes.VMax
-    let vmin (v: float): FssTypes.Size = sprintf "%.1fvmin" v |> FssTypes.VMin
+    let em (v: float): FssTypes.Length = sprintf "%.1fem" v |> FssTypes.Em'
+    let rem (v: float): FssTypes.Length = sprintf "%.1frem" v |> FssTypes.Rem
+    let ex (v: float): FssTypes.Length = sprintf "%.1fex" v |> FssTypes.Ex
+    let ch (v: float): FssTypes.Length = sprintf "%.1fch" v |> FssTypes.Ch
+    let vw (v: float): FssTypes.Length = sprintf "%.1fvw" v |> FssTypes.Vw
+    let vh (v: float): FssTypes.Length = sprintf "%.1fvh" v |> FssTypes.Vh
+    let vmax (v: float): FssTypes.Length = sprintf "%.1fvmax" v |> FssTypes.VMax
+    let vmin (v: float): FssTypes.Length = sprintf "%.1fvmin" v |> FssTypes.VMin
 
     // Angles
     let deg (v: float): FssTypes.Angle = sprintf "%.2fdeg" v |> FssTypes.Deg

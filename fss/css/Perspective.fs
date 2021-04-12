@@ -6,7 +6,7 @@ open Fable.Core
 module Perspective =
     let private perspectiveToString (perspective: FssTypes.IPerspective) =
         match perspective with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown perspective"

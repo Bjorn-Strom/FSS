@@ -7,7 +7,7 @@ module Border =
 
     let private radiusToString (radius: FssTypes.IBorderRadius) =
         match radius with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "unknown border radius"
@@ -15,7 +15,7 @@ module Border =
     let private widthToString (width: FssTypes.IBorderWidth) =
         match width with
             | :? FssTypes.Border.Width as b -> Utilities.Helpers.duToLowercase b
-            | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+            | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
             | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
             | _ -> "unknown border width"
 
@@ -35,7 +35,7 @@ module Border =
         let stringifyOutset (FssTypes.Border.ImageOutset v) = string v
 
         match imageOutset with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Border.ImageOutset as i -> stringifyOutset i
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
@@ -55,7 +55,7 @@ module Border =
 
         match imageSlice with
         | :? FssTypes.Border.ImageSlice as i -> stringifySlice i
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown border image slice"
@@ -68,7 +68,7 @@ module Border =
 
     let private spacingToString (spacing: FssTypes.IBorderSpacing) =
         match spacing with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown border spacing"
@@ -76,7 +76,7 @@ module Border =
     let private imageWidthToString (imageWidth: FssTypes.IBorderImageWidth) =
         match imageWidth with
         | :? FssTypes.CssFloat as f -> FssTypes.masterTypeHelpers.FloatToString f
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
@@ -798,32 +798,32 @@ module Border =
         static member url (url: string) = imageValue <| sprintf "url(%s)" url
         static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Size) list) =
+        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Length) list) =
             imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
         static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Percent) list)) list) =
             imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Size) list)) list) =
+        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Length) list)) list) =
             imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Size) list) =
+        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Length) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
         static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Size) list)) list) =
+        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Length) list)) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
         static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Percent) list)) list) =
             imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
 
         static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Size) list) =
+        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Length) list) =
             imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
         static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.Color.ColorType * FssTypes.Percent) list) list) =
             imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.Color.ColorType * FssTypes.Size) list) list) =
+        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.Color.ColorType * FssTypes.Length) list) list) =
             imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
         static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Size) list) =
+        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Length) list) =
             imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
         static member none = FssTypes.None' |> imageValue'
         static member inherit' = FssTypes.Inherit |> imageValue'

@@ -7,7 +7,7 @@ open Fable.Core
 module Padding =
     let private paddingToString (padding: FssTypes.IPadding) =
         match padding with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto

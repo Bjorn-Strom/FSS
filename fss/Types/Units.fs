@@ -39,7 +39,7 @@ namespace Fss.FssTypes
         interface IStrokeWidth
 
     // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
-    type Size =
+    type Length =
         | Px of string
         | In of string
         | Cm of string
@@ -125,7 +125,7 @@ namespace Fss.FssTypes
     [<AutoOpen>]
     module unitHelpers =
         let internal percentToString (Percent p): string = p
-        let internal sizeToString (v: Size): string =
+        let internal sizeToString (v: Length): string =
             match v with
                 | Px p -> p
                 | In i -> i
@@ -143,7 +143,7 @@ namespace Fss.FssTypes
                 | VMin v -> v
         let internal lengthPercentageToString (v: ILengthPercentage) =
             match v with
-            | :? Size    as s -> sizeToString s
+            | :? Length    as s -> sizeToString s
             | :? Percent as p -> percentToString p
             | _ -> "Unknown length/percentage"
         let internal angleToString (u: Angle) =

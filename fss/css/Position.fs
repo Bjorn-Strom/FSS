@@ -8,7 +8,7 @@ module Position =
 
     let private positionedToString (positioned: FssTypes.IPositioned) =
         match positioned with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
@@ -18,7 +18,7 @@ module Position =
         match alignment with
         | :? FssTypes.Position.VerticalAlign as v -> Utilities.Helpers.duToKebab v
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | _ -> "Unknown vertical align"
 

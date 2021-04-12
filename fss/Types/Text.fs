@@ -69,9 +69,9 @@ namespace Fss.FssTypes
             interface ITextIndent
 
         type Shadow =
-            | XY of Size * Size
-            | ColorXY of ColorType * Size * Size
-            | ColorXYBlur of ColorType * Size * Size * Size
+            | XY of Length * Length
+            | ColorXY of ColorType * Length * Length
+            | ColorXYBlur of ColorType * Length * Length * Length
 
         type Overflow =
             | Clip

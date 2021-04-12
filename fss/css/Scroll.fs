@@ -39,7 +39,7 @@ module ScrollBehavior =
 module ScrollMargin =
     let private scrollMarginToString (scrollMargin: FssTypes.IScrollMargin) =
         match scrollMargin with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown scrollMargin"
 
@@ -172,7 +172,7 @@ module ScrollMargin =
 module ScrollPadding =
     let private scrollPaddingToString (scrollPadding: FssTypes.IScrollPadding) =
         match scrollPadding with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Keywords as g -> FssTypes.masterTypeHelpers.keywordsToString g
         | _ -> "Unknown scrollPadding"
 

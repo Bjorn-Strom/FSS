@@ -21,7 +21,7 @@ module Outline  =
         match width with
             | :? FssTypes.Outline.Width as c -> Utilities.Helpers.duToLowercase c
             | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
-            | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+            | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
             | _ -> "Unknown outline width"
 
     let private outlineStyleToString (style: FssTypes.IOutlineStyle) =
@@ -34,7 +34,7 @@ module Outline  =
     let private outlineOffsetToString (style: FssTypes.IOutlineOffset) =
         match style with
             | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
-            | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+            | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
             | _ -> "Unknown outline offset"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline

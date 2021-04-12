@@ -43,7 +43,7 @@ module Transform =
     let private originToString (origin: FssTypes.ITransformOrigin) =
         match origin with
         | :? FssTypes.Transform.Origin as t -> Utilities.Helpers.duToLowercase t
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transform origin"
@@ -70,7 +70,7 @@ module Transform =
                       a2, b2, c2, d2,
                       a3, b3, c3, d3,
                       a4, b4, c4, d4)
-        static member perspective (value: FssTypes.Size) =
+        static member perspective (value: FssTypes.Length) =
             FssTypes.Transform.Perspective value
         static member rotate (angle: FssTypes.Angle) =
             FssTypes.Transform.Rotate angle

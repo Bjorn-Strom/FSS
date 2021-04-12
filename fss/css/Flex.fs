@@ -88,7 +88,7 @@ module Flex =
         match basis with
         | :? FssTypes.Flex.Basis as b -> Utilities.Helpers.duToKebab b
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown flex basis"

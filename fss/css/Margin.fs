@@ -7,7 +7,7 @@ open Fable.Core
 module Margin =
     let private marginToString (margin: FssTypes.IMargin) =
         match margin with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto

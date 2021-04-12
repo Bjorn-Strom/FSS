@@ -29,7 +29,7 @@ module Text =
         | :? FssTypes.Text.DecorationThickness -> "from-font"
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | _ -> "Unknown text decoration thickness"
 
@@ -70,7 +70,7 @@ module Text =
         match indent with
         | :? FssTypes.Text.Indent as t -> Utilities.Helpers.duToKebab t
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | _ -> "Unknown text indent"
 
@@ -134,7 +134,7 @@ module Text =
         match underlineOffset with
         | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | _ -> "unknown text underline offset"
 
@@ -170,7 +170,7 @@ module Text =
 
     let private tabSizeToString (tabSize: FssTypes.ITabSize) =
         match tabSize with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.CssInt as i -> FssTypes.masterTypeHelpers.IntToString i
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown tab size"
@@ -345,7 +345,7 @@ module Text =
     ///     - <c> Unset </c>
     ///     - <c> None </c>
     ///     - <c> Auto </c>
-    ///     - <c> Size </c>
+    ///     - <c> Length </c>
     ///     - <c> Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -496,7 +496,7 @@ module Text =
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
     ///     - <c> Unset </c>
-    ///     - <c> Size </c>
+    ///     - <c> Length </c>
     ///     - <c> Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -508,11 +508,11 @@ module Text =
 
     [<Erase>]
     type TextShadow =
-        static member xy (xOffset: FssTypes.Size, yOffset: FssTypes.Size) =
+        static member xy (xOffset: FssTypes.Length, yOffset: FssTypes.Length) =
             FssTypes.Text.XY(xOffset,yOffset)
-        static member colorXy (color: FssTypes.Color.ColorType, xOffset: FssTypes.Size, yOffset: FssTypes.Size) =
+        static member colorXy (color: FssTypes.Color.ColorType, xOffset: FssTypes.Length, yOffset: FssTypes.Length) =
             FssTypes.Text.ColorXY(color, xOffset, yOffset)
-        static member colorXyBlur (xOffset: FssTypes.Size, yOffset: FssTypes.Size, blurRadius: FssTypes.Size, color: FssTypes.Color.ColorType) =
+        static member colorXyBlur (xOffset: FssTypes.Length, yOffset: FssTypes.Length, blurRadius: FssTypes.Length, color: FssTypes.Color.ColorType) =
             FssTypes.Text.ColorXYBlur (color, xOffset, yOffset, blurRadius)
 
     /// Supply a list of text shadows to apply to the text
@@ -818,7 +818,7 @@ module Text =
     /// <summary>Specifies the width of tab characters.</summary>
     /// <param name="tabSize">
     ///     can be:
-    ///     - <c> Size </c>
+    ///     - <c> Length </c>
     ///     - <c> CssInt </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>

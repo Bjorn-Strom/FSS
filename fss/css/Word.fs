@@ -5,7 +5,7 @@ open Fable.Core
 module Word =
     let private spacingToString (spacing: FssTypes.IWordSpacing) =
         match spacing with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Normal -> FssTypes.masterTypeHelpers.normal
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
@@ -34,7 +34,7 @@ module Word =
     /// <summary>Specifies length of space between words.</summary>
     /// <param name="spacing">
     ///     can be:
-    ///     - <c> Size </c>
+    ///     - <c> Length </c>
     ///     - <c> Percent </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>

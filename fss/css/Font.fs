@@ -7,7 +7,7 @@ module Font =
     let private fontSizeToString (fontSize: FssTypes.IFontSize) =
         match fontSize with
         | :? FssTypes.Font.Size as f -> Utilities.Helpers.duToKebab f
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown font size"
@@ -92,7 +92,7 @@ module Font =
     let private lineHeightToString (lineHeight: FssTypes.ILineHeight) =
         match lineHeight with
         | :? FssTypes.CssFloat as f -> FssTypes.masterTypeHelpers.FloatToString f
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | :? FssTypes.Normal -> FssTypes.masterTypeHelpers.normal
@@ -108,7 +108,7 @@ module Font =
 
     let private letterSpacingToString (letterSpacing: FssTypes.ILetterSpacing) =
         match letterSpacing with
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | :? FssTypes.Normal -> FssTypes.masterTypeHelpers.normal
         | _ -> "Unknown letter spacing"
@@ -164,7 +164,7 @@ module Font =
     /// <param name="size">
     ///     can be:
     ///     - <c> FontSize </c>
-    ///     - <c> Size </c>
+    ///     - <c> Length </c>
     ///     - <c> Percent </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
@@ -278,7 +278,7 @@ module Font =
     /// <param name="height">
     ///     can be:
     ///     - <c> CssFloat </c>
-    ///     - <c> Size </c>
+    ///     - <c> Length </c>
     ///     - <c> Percent </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>
@@ -332,7 +332,7 @@ module Font =
     /// <summary>Sets horizontal spacing between text characters. </summary>
     /// <param name="spacing">
     ///     can be:
-    ///     - <c> Size </c>
+    ///     - <c> Length </c>
     ///     - <c> Normal </c>
     ///     - <c> Inherit </c>
     ///     - <c> Initial </c>

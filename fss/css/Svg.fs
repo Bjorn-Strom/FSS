@@ -44,7 +44,7 @@ module Svg =
         match baselineShift with
         | :? FssTypes.Svg.BaselineShift as bs -> Utilities.Helpers.duToLowercase bs
         | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
-        | :? FssTypes.Size as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
         | _ -> "Unknown baseline shift"
 
     let private baselineShiftValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BaselineShift
@@ -60,7 +60,7 @@ module Svg =
     /// <param name="all">
     ///     can be:
     ///     - <c> Baselineshift </c>
-    ///     - <c> Size </c>
+    ///     - <c> Length </c>
     ///     - <c> Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
@@ -460,7 +460,7 @@ module Svg =
     /// <summary>Specifies size of stroke width.</summary>
     /// <param name="width">
     ///     can be:
-    ///     - <c> Size </c>
+    ///     - <c> Length </c>
     ///     - <c> Percent </c>
     /// </param>
     /// <returns>Css property for fss.</returns>
