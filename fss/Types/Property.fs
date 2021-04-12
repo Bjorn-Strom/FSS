@@ -388,6 +388,10 @@ namespace Fss.FssTypes
             | StrokeOpacity
             | StrokeDasharray
             | StrokeDashoffset
+            | StrokeLinecap
+            | StrokeLinejoin
+            | StrokeMiterlimit
+            | StrokeWidth
             interface ITransitionProperty
 
     [<AutoOpen>]

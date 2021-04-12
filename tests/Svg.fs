@@ -352,5 +352,40 @@ module Svg =
                     ["strokeDashoffset" ==> "400"]
 
 
-
+                testCase
+                    "StrokeLinecap butt"
+                    [StrokeLinecap.butt]
+                    ["strokeLinecap" ==> "butt"]
+                testCase
+                    "StrokeLinecap round"
+                    [StrokeLinecap.round]
+                    ["strokeLinecap" ==> "round"]
+                testCase
+                    "StrokeLinecap square"
+                    [StrokeLinecap.square]
+                    ["strokeLinecap" ==> "square"]
+                testCase
+                    "StrokeLinejoin arcs"
+                    [StrokeLinejoin.arcs]
+                    ["strokeLinejoin" ==> "arcs"]
+                testCase
+                    "StrokeLinejoin bevel"
+                    [StrokeLinejoin.bevel]
+                    ["strokeLinejoin" ==> "bevel"]
+                testCase
+                    "StrokeLinejoin miter"
+                    [StrokeLinejoin.miter]
+                    ["strokeLinejoin" ==> "miter"]
+                testCase
+                    "StrokeLinejoin miter"
+                    [StrokeLinejoin.miter]
+                    ["strokeLinejoin" ==> "miter"]
+                testCase
+                    "StrokeLinejoin miterClip"
+                    [StrokeLinejoin.miterClip]
+                    ["strokeLinejoin" ==> "miter-clip"]
+                testCase
+                    "StrokeLinejoin round"
+                    [StrokeLinejoin.round]
+                    ["strokeLinejoin" ==> "round"]
                 ]

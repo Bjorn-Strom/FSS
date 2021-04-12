@@ -70,10 +70,6 @@ namespace Fss.FssTypes
             | GeometricPrecision
             interface IShapeRendering
 
-
-        // Not done
-        // Stroke dashoffset: innt percent
-
         type StrokeLinecap =
             | Butt
             | Round
@@ -86,6 +82,7 @@ namespace Fss.FssTypes
             | MiterClip
             | Round
 
+        // Not done
         // stoke  Miterlimit: int
 
 

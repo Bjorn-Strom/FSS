@@ -113,7 +113,7 @@ module Svg =
     /// <summary>Align text.</summary>
     /// <param name="textAnchor">
     ///     can be:
-    ///     - <c> TextAnchorline </c>
+    ///     - <c> TextAnchor</c>
     /// </param>
     /// <returns>Css property for fss.</returns>
     let TextAnchor' = TextAnchor.value
@@ -396,3 +396,42 @@ module Svg =
     /// <returns>Css property for fss.</returns>
     let StrokeDashoffset' = StrokeDashoffset.value
 
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap
+    let private strokeLinecapValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeLinecap
+    let private strokeLinecapValue' = Utilities.Helpers.duToKebab >> strokeLinecapValue
+
+    [<Erase>]
+    type StrokeLinecap=
+        static member value (strokeLinecap: FssTypes.Svg.StrokeLinecap) = strokeLinecap |> strokeLinecapValue'
+        static member butt = FssTypes.Svg.StrokeLinecap.Butt |> strokeLinecapValue'
+        static member round = FssTypes.Svg.StrokeLinecap.Round |> strokeLinecapValue'
+        static member square = FssTypes.Svg.StrokeLinecap.Square |> strokeLinecapValue'
+
+    /// <summary>Define the shape used at open subpaths when they are stroked.</summary>
+    /// <param name="strokeLinecap">
+    ///     can be:
+    ///     - <c> StrokeLinecap</c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let StrokeLinecap' = StrokeLinecap.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin
+    let private strokeLinejoinValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeLinejoin
+    let private strokeLinejoinValue' = Utilities.Helpers.duToKebab >> strokeLinejoinValue
+
+    [<Erase>]
+    type StrokeLinejoin=
+        static member value (strokeLinejoin: FssTypes.Svg.StrokeLinejoin) = strokeLinejoin |> strokeLinejoinValue'
+        static member arcs = FssTypes.Svg.StrokeLinejoin.Arcs |> strokeLinejoinValue'
+        static member bevel = FssTypes.Svg.StrokeLinejoin.Bevel |> strokeLinejoinValue'
+        static member miter = FssTypes.Svg.StrokeLinejoin.Miter |> strokeLinejoinValue'
+        static member miterClip = FssTypes.Svg.StrokeLinejoin.MiterClip |> strokeLinejoinValue'
+        static member round = FssTypes.Svg.StrokeLinejoin.Round |> strokeLinejoinValue'
+
+    /// <summary>Define the shape used at corners of paths when they are stroked.</summary>
+    /// <param name="strokeLinejoin">
+    ///     can be:
+    ///     - <c> StrokeLinejoin</c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let StrokeLinejoin' = StrokeLinejoin.value
