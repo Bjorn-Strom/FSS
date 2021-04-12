@@ -350,8 +350,6 @@ module Svg =
                     "Stroke dashoffset 400"
                     [StrokeDashoffset' [400]]
                     ["strokeDashoffset" ==> "400"]
-
-
                 testCase
                     "StrokeLinecap butt"
                     [StrokeLinecap.butt]
@@ -388,4 +386,20 @@ module Svg =
                     "StrokeLinejoin round"
                     [StrokeLinejoin.round]
                     ["strokeLinejoin" ==> "round"]
+                testCase
+                    "Stroke miterlimit 5"
+                    [StrokeMiterlimit' 5]
+                    ["strokeMiterlimit" ==> "5"]
+                testCase
+                    "Stroke width px"
+                    [StrokeWidth' <| px 5]
+                    ["strokeWidth" ==> "5px"]
+                testCase
+                    "Stroke width em"
+                    [StrokeWidth' <| em 2.]
+                    ["strokeWidth" ==> "2.0em"]
+                testCase
+                    "Stroke width pct"
+                    [StrokeWidth' <| pct 50 ]
+                    ["strokeWidth" ==> "50%"]
                 ]

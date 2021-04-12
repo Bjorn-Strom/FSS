@@ -82,8 +82,4 @@ namespace Fss.FssTypes
             | MiterClip
             | Round
 
-        // Not done
-        // stoke  Miterlimit: int
-
-
         // stroke width: size percent

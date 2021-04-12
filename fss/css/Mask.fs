@@ -320,54 +320,6 @@ module Mask =
     /// <returns>Css property for fss.</returns>
     let MaskRepeat': (FssTypes.IMaskRepeat -> FssTypes.CssProperty) = MaskRepeat.value
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-size
     let private stringifySize (size: FssTypes.IMaskSize) =
         match size with

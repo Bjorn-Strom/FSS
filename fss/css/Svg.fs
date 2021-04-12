@@ -435,3 +435,33 @@ module Svg =
     /// </param>
     /// <returns>Css property for fss.</returns>
     let StrokeLinejoin' = StrokeLinejoin.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-miterlimit
+    let private strokeMiterlimitValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeMiterlimit
+
+    [<Erase>]
+    type StrokeMiterlimit =
+        static member value (strokeMiterlimit: int) =
+            strokeMiterlimit |> string |> strokeMiterlimitValue
+
+    /// <summary>Limits ratio of miter length to stokre width when used to draw miter join.</summary>
+    /// <param name="strokeMiterlimit"> </param>
+    /// <returns>Css property for fss.</returns>
+    let StrokeMiterlimit' = StrokeMiterlimit.value
+
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width
+    let private strokeWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeWidth
+    let private strokeWidthValue' = FssTypes.unitHelpers.lengthPercentageToString >> strokeWidthValue
+
+    [<Erase>]
+    type StrokeWidth =
+        static member value (size: FssTypes.ILengthPercentage) = size |> strokeWidthValue'
+
+    /// <summary>Specifies size of stroke width.</summary>
+    /// <param name="width">
+    ///     can be:
+    ///     - <c> Size </c>
+    ///     - <c> Percent </c>
+    /// </param>
+    /// <returns>Css property for fss.</returns>
+    let StrokeWidth' = StrokeWidth.value

@@ -239,6 +239,7 @@ namespace Fss.FssTypes
     type IColorInterpolationFilters = interface end
     type ISVGImageRendering         = interface end
     type IShapeRendering            = interface end
+    type IStrokeWidth               = interface end
 
     // Types
     type CssProperty = CssProperty of string * obj

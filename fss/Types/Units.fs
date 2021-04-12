@@ -36,6 +36,7 @@ namespace Fss.FssTypes
         interface IMaskPosition
         interface IMaskSize
         interface IBaselineShift
+        interface IStrokeWidth
 
     // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
     type Size =
@@ -95,6 +96,7 @@ namespace Fss.FssTypes
         interface IMaskPosition
         interface IMaskSize
         interface IBaselineShift
+        interface IStrokeWidth
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
     type Angle =
