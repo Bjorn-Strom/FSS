@@ -24,59 +24,59 @@ let mozillaExampleStyle = fss [ ListStyleType' mozillaExampleCounter ]
 Another example found [here](https://codepen.io/mkmueller/pen/pHiqb)
 
 ```fsharp
-    let commonBefore =
+let commonBefore =
+    [
+       FontWeight' (FssTypes.CssInt 500)
+       Color.hex "48f"
+   ]
+let commonStyle =
+   [
+       Margin.value (px 0, px 0, px 1)
+       Padding.value (px 5, px 10)
+    ]
+let count =
+    fss
         [
-           FontWeight' (FssTypes.CssInt 500)
-           Color.hex "48f"
-       ]
-    let commonStyle =
-       [
-           Margin.value (px 0, px 0, px 1)
-           Padding.value (px 5, px 10)
+            yield! commonStyle
+            CounterReset' subCounter
+            CounterIncrement' indexCounter
+            BackgroundColor.hex "eee"
+            Before
+                [
+                    yield! commonBefore
+                    Content.counter(indexCounter,". ")
+                ]
         ]
-    let count =
-        fss
-            [
-                yield! commonStyle
-                CounterReset' subCounter
-                CounterIncrement' indexCounter
-                BackgroundColor.hex "eee"
-                Before
-                    [
-                        yield! commonBefore
-                        Content.counter(indexCounter,". ")
-                    ]
-            ]
-    let sub =
-        fss
-            [
-                yield! commonStyle
-                CounterIncrement' subCounter
-                TextIndent' (em 1.)
-                Color.hex "444"
-                Before
-                    [
-                        yield! commonBefore
-                        Content.counters([indexCounter; subCounter], [".";"."])
-                        MarginRight' (px 5)
-                    ]
-            ]
-    section [ ClassName sectionStyle ]
+let sub =
+    fss
         [
-            p [ ClassName count] [ str "Item" ]
-            p [ ClassName count] [ str "Item" ]
-            p [ ClassName count] [ str "Item" ]
-            p [ ClassName sub] [ str "Sub-Item" ]
-            p [ ClassName sub] [ str "Sub-Item" ]
-            p [ ClassName sub] [ str "Sub-Item" ]
-            p [ ClassName count] [ str "Item" ]
-            p [ ClassName count] [ str "Item" ]
-            p [ ClassName sub] [ str "Sub-Item" ]
-            p [ ClassName sub] [ str "Sub-Item" ]
-            p [ ClassName count] [ str "Item" ]
-            p [ ClassName sub] [ str "Sub-Item" ]
-            p [ ClassName count] [ str "Item" ]
-            p [ ClassName sub] [ str "Sub-Item" ]
-            p [ ClassName sub] [ str "Sub-Item" ]
+            yield! commonStyle
+            CounterIncrement' subCounter
+            TextIndent' (em 1.)
+            Color.hex "444"
+            Before
+                [
+                    yield! commonBefore
+                    Content.counters([indexCounter; subCounter], [".";"."])
+                    MarginRight' (px 5)
+                ]
         ]
+section [ ClassName sectionStyle ]
+    [
+        p [ ClassName count] [ str "Item" ]
+        p [ ClassName count] [ str "Item" ]
+        p [ ClassName count] [ str "Item" ]
+        p [ ClassName sub] [ str "Sub-Item" ]
+        p [ ClassName sub] [ str "Sub-Item" ]
+        p [ ClassName sub] [ str "Sub-Item" ]
+        p [ ClassName count] [ str "Item" ]
+        p [ ClassName count] [ str "Item" ]
+        p [ ClassName sub] [ str "Sub-Item" ]
+        p [ ClassName sub] [ str "Sub-Item" ]
+        p [ ClassName count] [ str "Item" ]
+        p [ ClassName sub] [ str "Sub-Item" ]
+        p [ ClassName count] [ str "Item" ]
+        p [ ClassName sub] [ str "Sub-Item" ]
+        p [ ClassName sub] [ str "Sub-Item" ]
+    ]
 ```

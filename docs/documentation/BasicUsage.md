@@ -1,6 +1,6 @@
 ## Basic usage
 
-The main function this library supplies is the function `fss`.
+The main function this library supplies is `fss`.
 It takes a list of CSS properties and returns a string.
 This string is the classname you can give to your html tag.
 
@@ -18,7 +18,7 @@ TextDecorationColor.white
 
 This works in nearly all cases and is the idiomatic way to write most things.
 However you sometimes also want to have the “right hand side” as a variable or parameter.
-In this case you can fallback on the .Value function, which every CSS property has and is how the library works behind the scenes.
+In this case you can fallback on the `.Value` function, which every CSS property has and is how the library works behind the scenes.
 Here is an example of that.
 
 ```fsharp
@@ -28,7 +28,7 @@ fss [ TextDecorationColor.value myDecorationColor ]
 
 As this is something you might want to do quite a bit there exists a shorthand which is `TextDecorationColor'`.
 ```fsharp
-let myDecorationColor = FssTypes.Color.white
+let myDecorationColor = FssTypes.Color.Color.white
 fss [ TextDecorationColor' myDecorationColor ]
 ```
 
@@ -43,7 +43,7 @@ The important function takes a css property and marks it as important.
 `combine: string list -> (string * bool) list -> string`
 
 An implementation of JavaScripts `classNames` or Emotions `cx`.
-The function takes a list of classnames to apply and a list of classnames and predicated to optionally apply.
+The function takes a list of classnames to apply and a list of classnames/predicate tuples to optionally apply.
 ## Shorthands
 
 I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be.

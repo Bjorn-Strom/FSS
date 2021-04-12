@@ -10,6 +10,15 @@ This led to Fss being more unreadable than I had wanted.
 In order to alleviate this all CSS properties have been changed from using PascalCase to camelCase.
 Hopefully make Fss more pleasing to both use and read.
 
+So where you used to write:
+```fsharp
+AnimationTimingFunction.EaseInOut
+```
+You now have to write:
+```fsharp
+AnimationTimingFunction.easeInOut
+```
+
 ### Why are there so many types?
 An annoyance I've had while using (and making) Fss is the messy namespace.
 Not only has this been a long standing issue I was also not sure of how I wanted it to be.

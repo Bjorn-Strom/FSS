@@ -17,7 +17,7 @@ Html.div [
 
 I did however find that there isn't much to gain by doing this.
 
-The equivalent styling in Feliz with Fss is:
+The equivalent styling in Feliz with normal Fss is:
 
 ```fsharp
 Html.div [
@@ -31,4 +31,4 @@ Html.div [
 ]
 ```
 
-The syntax is not very different here and I personally prefer the latter Fss syntax. So that it what Fss will be supporting going forward.
+The syntax is not very different here and I personally prefer the latter Fss syntax as its more similar to Css. So that it what Fss will be supporting going forward.

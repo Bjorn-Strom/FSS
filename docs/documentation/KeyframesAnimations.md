@@ -1,11 +1,11 @@
 ## Animations
 
 Animations introduce 3 new functions:
-- `keyframes` `KeyframeAttribute list -> IAnimationName`
-- `frame`  `int -> CSSProperty list -> KeyframeAttribute`
-- `frames`  `int list -> CSSProperty list -> KeyframeAttribute`
+- `keyframes`: `KeyframeAttribute list -> IAnimationName`
+- `frame`:  `int -> CSSProperty list -> KeyframeAttribute`
+- `frames`:  `int list -> CSSProperty list -> KeyframeAttribute`
 
-What this means is that keyframes is a function that takes a list of `frame` or `frame` function calls.
+What this means is that keyframes is a function that takes a list of `frame` or `frames` function calls.
 `frame` is used when you want to define a single keyframe and `frames` for multiple.
 keyframes then gives you an animation name you supply to `fss`.
 
