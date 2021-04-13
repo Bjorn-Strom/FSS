@@ -26,22 +26,7 @@ module Overflow =
 
     [<Erase>]
     /// Specifies overflow behavior.
-    type Overflow =
-        static member value (overflow: FssTypes.IOverflow) = overflow |> overflowValue'
-        static member value (x: FssTypes.IOverflow, y: FssTypes.IOverflow) =
-            sprintf "%s %s"
-                (overflowToString x)
-                (overflowToString y)
-            |> overflowValue
-        static member visible = FssTypes.Overflow.Visible |> overflowValue'
-        static member hidden = FssTypes.Overflow.Hidden |> overflowValue'
-        static member clip = FssTypes.Overflow.Clip |> overflowValue'
-        static member scroll = FssTypes.Overflow.Scroll |> overflowValue'
-
-        static member auto = FssTypes.Auto |> overflowValue'
-        static member inherit' = FssTypes.Inherit |> overflowValue'
-        static member initial = FssTypes.Initial |> overflowValue'
-        static member unset = FssTypes.Unset |> overflowValue'
+    let Overflow = FssTypes.Overflow.OverflowClass(overflowToString, overflowValue, overflowValue')
 
     /// Specifies overflow behavior.
     /// Valid parameters:
@@ -57,17 +42,7 @@ module Overflow =
 
     [<Erase>]
     /// Specifies overflow left and right edge behavior.
-    type OverflowX =
-        static member value (overflow: FssTypes.IOverflow) = overflow |> overflowXValue'
-        static member visible = FssTypes.Overflow.Visible |> overflowXValue'
-        static member hidden = FssTypes.Overflow.Hidden |> overflowXValue'
-        static member clip = FssTypes.Overflow.Clip |> overflowXValue'
-        static member scroll = FssTypes.Overflow.Scroll |> overflowXValue'
-
-        static member auto = FssTypes.Auto |> overflowXValue'
-        static member inherit' = FssTypes.Inherit |> overflowXValue'
-        static member initial = FssTypes.Initial |> overflowXValue'
-        static member unset = FssTypes.Unset |> overflowXValue'
+    let OverflowX = FssTypes.Overflow.OverflowClass(overflowToString, overflowXValue, overflowXValue')
 
     /// Specifies overflow left and right edge behavior.
     /// Valid parameters:
@@ -83,17 +58,7 @@ module Overflow =
 
     [<Erase>]
     /// Specifies overflow top and bottom edge behavior.
-    type OverflowY =
-        static member value (overflow: FssTypes.IOverflow) = overflow |> overflowYValue'
-        static member visible = FssTypes.Overflow.Visible |> overflowYValue'
-        static member hidden = FssTypes.Overflow.Hidden |> overflowYValue'
-        static member clip = FssTypes.Overflow.Clip |> overflowYValue'
-        static member scroll = FssTypes.Overflow.Scroll |> overflowYValue'
-
-        static member auto = FssTypes.Auto |> overflowYValue'
-        static member inherit' = FssTypes.Inherit |> overflowYValue'
-        static member initial = FssTypes.Initial |> overflowYValue'
-        static member unset = FssTypes.Unset |> overflowYValue'
+    let OverflowY = FssTypes.Overflow.OverflowClass(overflowToString, overflowYValue, overflowYValue')
 
     /// Specifies overflow top and bottom edge behavior.
     /// Valid parameters:
