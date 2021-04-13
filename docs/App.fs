@@ -962,7 +962,7 @@ module App =
                 ]
         let feliz = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
         let svg = article [] [
-            markdown [ Renderers renderers]
+            markdown [ Renderers renderers; Children currentMarkdown]
             let logoAnimation =
                 keyframes [
                     frame 100 [ StrokeDashoffset' [ 0 ] ]
@@ -1131,6 +1131,7 @@ module App =
             [ map Overview (s <| Utilities.duToKebab Overview)
               map Installation (s <| Utilities.duToKebab Installation)
               map Philosophy (s <| Utilities.duToKebab Philosophy)
+              map New (s <| Utilities.duToKebab New)
               map BasicUsage (s <| Utilities.duToKebab BasicUsage)
               map ConditionalStyling (s <| Utilities.duToKebab ConditionalStyling)
               map Pseudo (s <| Utilities.duToKebab Pseudo)
@@ -1144,6 +1145,8 @@ module App =
               map Counters (s <| Utilities.duToKebab Counters)
               map Fonts (s <| Utilities.duToKebab Fonts)
               map BackgroundImages (s <| Utilities.duToKebab BackgroundImages)
+              map Feliz (s <| Utilities.duToKebab Feliz)
+              map Svg (s <| Utilities.duToKebab Svg)
             ]
 
     let urlUpdate (page: Page option) model =

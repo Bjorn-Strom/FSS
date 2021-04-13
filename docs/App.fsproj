@@ -18,7 +18,7 @@
         <Content Include="documentation\GlobalStyles.md" />
         <Content Include="documentation\Counters.md" />
         <Content Include="documentation\Fonts.md" />
-        <Content Include="documentation\BackgroundImage.md" />
+        <Content Include="documentation\BackgroundImages.md" />
         <Content Include="documentation\Feliz.md" />
         <Content Include="documentation\New.md" />
         <Content Include="documentation\Svg.md" />
