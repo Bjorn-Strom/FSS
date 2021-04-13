@@ -10,6 +10,13 @@ namespace Fss.FssTypes
             | Sticky
             | Fixed
 
+        type PositionClass (value': IPositioned -> CssProperty) =
+            member this.value (value: IPositioned) = value |> value'
+            member this.auto = Auto |> value'
+            member this.inherit' = Inherit |> value'
+            member this.initial = Initial |> value'
+            member this.unset = Unset |> value'
+
         type VerticalAlign =
             | Baseline
             | Sub

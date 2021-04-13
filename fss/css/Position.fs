@@ -5,7 +5,6 @@ open Fable.Core
 // https://developer.mozilla.org/en-US/docs/Web/CSS/position
 [<AutoOpen>]
 module Position =
-
     let private positionedToString (positioned: FssTypes.IPositioned) =
         match positioned with
         | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
@@ -58,12 +57,7 @@ module Position =
 
     [<Erase>]
     /// Specifies vertical position of element.
-    type Top =
-        static member value (top: FssTypes.IPositioned) = top |> topValue'
-        static member auto = FssTypes.Auto |> topValue'
-        static member inherit' = FssTypes.Inherit |> topValue'
-        static member initial = FssTypes.Initial |> topValue'
-        static member unset = FssTypes.Unset |> topValue'
+    let Top = FssTypes.Position.PositionClass(topValue')
 
     /// Specifies vertical position of element.
     /// - Units.Size
@@ -80,12 +74,7 @@ module Position =
 
     [<Erase>]
     /// Specifies horizontal position of element.
-    type Right =
-        static member value (right: FssTypes.IPositioned) = right |> rightValue'
-        static member auto = FssTypes.Auto |> rightValue'
-        static member inherit' = FssTypes.Inherit |> rightValue'
-        static member initial = FssTypes.Initial |> rightValue'
-        static member unset = FssTypes.Unset |> rightValue'
+    let Right = FssTypes.Position.PositionClass(rightValue')
 
     /// Specifies horizontal position of element.
     /// Valid parameters:
@@ -103,13 +92,7 @@ module Position =
 
     [<Erase>]
     /// Specifies vertical position of element.
-    type Bottom =
-        static member value (bottom: FssTypes.IPositioned) = bottom |> bottomValue'
-
-        static member auto = FssTypes.Auto |> bottomValue'
-        static member inherit' = FssTypes.Inherit |> bottomValue'
-        static member initial = FssTypes.Initial |> bottomValue'
-        static member unset = FssTypes.Unset |> bottomValue'
+    let Bottom = FssTypes.Position.PositionClass(bottomValue')
 
     /// Specifies vertical position of element.
     /// Valid parameters:
@@ -127,13 +110,7 @@ module Position =
 
     [<Erase>]
     /// Specifies vertical alignment.
-    type Left =
-        static member value (left: FssTypes.IPositioned) = left |> leftValue'
-
-        static member auto = FssTypes.Auto |> leftValue'
-        static member inherit' = FssTypes.Inherit |> leftValue'
-        static member initial = FssTypes.Initial |> leftValue'
-        static member unset = FssTypes.Unset |> leftValue'
+    let Left = FssTypes.Position.PositionClass(leftValue')
 
     /// Specifies vertical alignment.
     /// Valid parameters:
