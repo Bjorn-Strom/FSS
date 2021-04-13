@@ -68,6 +68,11 @@ module Background =
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown background color"
 
+    let private backgroundImageToString (backgroundColor: FssTypes.IBackgroundImage) =
+        match backgroundColor with
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
+        | _ -> "Unknown background image"
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
     let private clipValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundClip value
     let private clipValue' value =
@@ -226,13 +231,14 @@ module Background =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
     let private imageValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundImage
+    let private imageValue' = backgroundImageToString >> imageValue
 
-    let BackgroundImage = FssTypes.Background.BackgroundImage(imageValue)
+    let BackgroundImage = FssTypes.Background.BackgroundImage(imageValue, imageValue')
 
     /// Draws background image on element.
     /// Valid parameters:
     /// - Image
-    //todo: TEST: let BackgroundImage' = BackgroundImage.value
+    let BackgroundImage' = BackgroundImage.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
     let private positionCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundPosition

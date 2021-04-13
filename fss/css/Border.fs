@@ -747,7 +747,7 @@ module Border =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
     let private imageValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageSource
-    let private imageValue': (FssTypes.IBorderImageSource -> FssTypes.CssProperty) = imageSourceToString >> imageValue
+    let private imageValue' = imageSourceToString >> imageValue
 
     /// Specifies width of border image.
     let BorderImageSource = FssTypes.Border.BorderImage(imageValue, imageValue')
@@ -759,4 +759,4 @@ module Border =
     /// - Initial
     /// - Unset
     /// - None
-    // TODO: let BorderImageSource' = BorderImageSource.value
+    let BorderImageSource' = BorderImageSource.value

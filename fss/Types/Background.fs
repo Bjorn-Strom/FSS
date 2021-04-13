@@ -71,5 +71,6 @@ namespace Fss.FssTypes
             | Clone
             interface IBoxDecorationBreak
 
-        type BackgroundImage (valueFunction: string -> CssProperty) =
+        type BackgroundImage (valueFunction: string -> CssProperty, valueFunction': IBackgroundImage -> CssProperty) =
             inherit Image.Image(valueFunction)
+             member this.value value = value |> valueFunction'

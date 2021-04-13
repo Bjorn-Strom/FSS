@@ -323,6 +323,7 @@ namespace Fss.FssTypes
         interface IListStyleImage
         interface IBorderStyle
         interface IBorderImageSource
+        interface IBackgroundImage
         interface ITransitionProperty
         interface IDisplay
         interface IFloat

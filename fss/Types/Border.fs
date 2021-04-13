@@ -124,6 +124,7 @@ namespace Fss.FssTypes
 
         type BorderImage (valueFunction: string -> CssProperty, valueFunction': IBorderImageSource -> CssProperty) =
             inherit Image.Image(valueFunction)
+            member this.value value = value |> valueFunction'
             member this.none = None' |> valueFunction'
             member this.inherit' = Inherit |> valueFunction'
             member this.initial = Initial |> valueFunction'
