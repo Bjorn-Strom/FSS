@@ -1,6 +1,6 @@
 namespace Fss
 
-open Fss
+open Fable.Core
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/width
 // https://developer.mozilla.org/en-US/docs/Web/CSS/height
@@ -10,220 +10,105 @@ open Fss
 // https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
 [<AutoOpen>]
 module ContentSize =
-    type ContentSize =
-        | MaxContent
-        | MinContent
-        | FitContent of ILengthPercentage
-        interface IContentSize
-        interface IGridAutoRows
-        interface IGridAutoColumns
 
-    let contentSizeToString (contentSize: IContentSize) =
-        let stringifyContent content =
-            match content with
-                | FitContent f -> sprintf "fit-content(%s)" (Units.LengthPercentage.value f)
-                | _ -> Utilities.Helpers.duToKebab content
+    let private widthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Width
+    let private widthValue' = FssTypes.contentSizeHelpers.contentSizeToString >> widthValue
 
-        match contentSize with
-        | :? ContentSize as c -> stringifyContent c
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
-        | _ -> "Unknown content size"
+    [<Erase>]
+    /// Specifies width of element.
+    let Width = FssTypes.ContentSize.ContentSizeClass(widthValue, widthValue')
 
-    let private widthValue value = PropertyValue.cssValue Property.Width value
-    let private widthValue' value =
-        value
-        |> contentSizeToString
-        |> widthValue
+    /// Specifies width of element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let Width': (FssTypes.ILengthPercentage -> FssTypes.CssProperty) = Width.value
 
-    type Width =
-        static member FitContent (contentSize: ILengthPercentage) =
-            sprintf "fit-content(%s)" (Units.LengthPercentage.value contentSize)
-            |> widthValue
-        static member Value (size: ILengthPercentage) = Units.LengthPercentage.value size |> widthValue
-        static member Value (contentSize: IContentSize) = contentSize |> widthValue'
-        static member MaxContent = MaxContent |> widthValue'
-        static member MinContent = MinContent |> widthValue'
+    let private minWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MinWidth
+    let private minWidthValue' = FssTypes.contentSizeHelpers.contentSizeToString >> minWidthValue
 
-        static member Auto = Auto |> widthValue'
-        static member Inherit = Inherit |> widthValue'
-        static member Initial = Initial |> widthValue'
-        static member Unset = Unset |> widthValue'
+    [<Erase>]
+    /// Specifies minimum width of element.
+    let MinWidth = FssTypes.ContentSize.ContentSizeClass(minWidthValue, minWidthValue')
 
-    /// <summary>Specifies width of element.</summary>
-    /// <param name="size">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let Width' (size: ILengthPercentage) = Width.Value(size)
+    /// Specifies minimum width of element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MinWidth': (FssTypes.IContentSize -> FssTypes.CssProperty) = MinWidth.value
 
-    let private minWidthValue value = PropertyValue.cssValue Property.MinWidth value
-    let private minWidthValue' value =
-        value
-        |> contentSizeToString
-        |> minWidthValue
+    let private maxWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaxWidth
+    let private maxWidthValue' = FssTypes.contentSizeHelpers.contentSizeToString >> maxWidthValue
 
-    type MinWidth =
-        static member FitContent (contentSize: ILengthPercentage) =
-            sprintf "fit-content(%s)" (Units.LengthPercentage.value contentSize)
-            |> minWidthValue
-        static member Value (size: ILengthPercentage) = Units.LengthPercentage.value size |> minWidthValue
-        static member Value (contentSize: IContentSize) = contentSize |> minWidthValue'
-        static member MaxContent = MaxContent |> minWidthValue'
-        static member MinContent = MinContent |> minWidthValue'
+    [<Erase>]
+    /// Specifies maximum width of element.
+    let MaxWidth = FssTypes.ContentSize.ContentSizeClass(maxWidthValue, maxWidthValue')
 
-        static member Auto = Auto |> minWidthValue'
-        static member Inherit = Inherit |> minWidthValue'
-        static member Initial = Initial |> minWidthValue'
-        static member Unset = Unset |> minWidthValue'
+    /// Specifies maximum width of element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MaxWidth': (FssTypes.ILengthPercentage -> FssTypes.CssProperty) = MaxWidth.value
 
-    /// <summary>Specifies minimum width of element.</summary>
-    /// <param name="minWidth">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MinWidth' (minWidth: ILengthPercentage) = MinWidth.Value(minWidth)
+    let private heightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Height
+    let private heightValue' = FssTypes.contentSizeHelpers.contentSizeToString >> heightValue
 
-    let private maxWidthValue value = PropertyValue.cssValue Property.MaxWidth value
-    let private maxWidthValue' value =
-        value
-        |> contentSizeToString
-        |> maxWidthValue
+    [<Erase>]
+    /// Specifies height of element.
+    let Height = FssTypes.ContentSize.ContentSizeClass(heightValue, heightValue')
 
-    type MaxWidth =
-        static member FitContent (contentSize: ILengthPercentage) =
-            sprintf "fit-content(%s)" (Units.LengthPercentage.value contentSize)
-            |> maxWidthValue
-        static member Value (size: ILengthPercentage) = Units.LengthPercentage.value size |> maxWidthValue
-        static member Value (contentSize: IContentSize) = contentSize |> maxWidthValue'
-        static member MaxContent = MaxContent |> maxWidthValue'
-        static member MinContent = MinContent |> maxWidthValue'
+    /// Specifies height of element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let Height': (FssTypes.ILengthPercentage -> FssTypes.CssProperty) = Height.value
 
-        static member Auto = Auto |> maxWidthValue'
-        static member Inherit = Inherit |> maxWidthValue'
-        static member Initial = Initial |> maxWidthValue'
-        static member Unset = Unset |> maxWidthValue'
+    let private minHeightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MinHeight
+    let private minHeightValue' = FssTypes.contentSizeHelpers.contentSizeToString >> minHeightValue
 
-    /// <summary>Specifies maximum width of element.</summary>
-    /// <param name="maxWidth">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MaxWidth' (maxWidth: ILengthPercentage) = MaxWidth.Value(maxWidth)
+    [<Erase>]
+    /// Specifies min height of element.
+    let MinHeight = FssTypes.ContentSize.ContentSizeClass(minHeightValue, minHeightValue')
 
-    let private heightValue value = PropertyValue.cssValue Property.Height value
-    let private heightValue' value =
-        value
-        |> contentSizeToString
-        |> heightValue
+    /// Specifies min height of element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MinHeight': (FssTypes.IContentSize -> FssTypes.CssProperty) = MinHeight.value
 
-    type Height =
-        static member FitContent (contentSize: ILengthPercentage) =
-            sprintf "fit-content(%s)" (Units.LengthPercentage.value contentSize)
-            |> heightValue
-        static member Value (size: ILengthPercentage) = Units.LengthPercentage.value size |> heightValue
-        static member Value (contentSize: IContentSize) = contentSize |> heightValue'
-        static member MaxContent = MaxContent |> heightValue'
-        static member MinContent = MinContent |> heightValue'
+    let private maxHeightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaxHeight
+    let private maxHeightValue' = FssTypes.contentSizeHelpers.contentSizeToString >> maxHeightValue
 
-        static member Auto = Auto |> heightValue'
-        static member Inherit = Inherit |> heightValue'
-        static member Initial = Initial |> heightValue'
-        static member Unset = Unset |> heightValue'
+    [<Erase>]
+    /// Specifies max height of element.
+    let MaxHeight = FssTypes.ContentSize.ContentSizeClass(maxHeightValue, maxHeightValue')
 
-    /// <summary>Specifies height of element.</summary>
-    /// <param name="height">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let Height' (height: ILengthPercentage) = Height.Value(height)
-
-    let private minHeightValue value = PropertyValue.cssValue Property.MinHeight value
-    let private minHeightValue' value =
-        value
-        |> contentSizeToString
-        |> minHeightValue
-
-    type MinHeight =
-        static member FitContent (contentSize: ILengthPercentage) =
-            sprintf "fit-content(%s)" (Units.LengthPercentage.value contentSize)
-            |> minHeightValue
-        static member Value (size: ILengthPercentage) = Units.LengthPercentage.value size |> minHeightValue
-        static member Value (contentSize: IContentSize) = contentSize |> minHeightValue'
-        static member MaxContent = MaxContent |> minHeightValue'
-        static member MinContent = MinContent |> minHeightValue'
-
-        static member Auto = Auto |> minHeightValue'
-        static member Inherit = Inherit |> minHeightValue'
-        static member Initial = Initial |> minHeightValue'
-        static member Unset = Unset |> minHeightValue'
-
-    /// <summary>Specifies min height of element.</summary>
-    /// <param name="minHeight">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MinHeight' (minHeight: ILengthPercentage) = MinHeight.Value(minHeight)
-
-    let private maxHeightValue value = PropertyValue.cssValue Property.MaxHeight value
-    let private maxHeightValue' value =
-        value
-        |> contentSizeToString
-        |> maxHeightValue
-
-    type MaxHeight =
-        static member FitContent (contentSize: ILengthPercentage) =
-            sprintf "fit-content(%s)" (Units.LengthPercentage.value contentSize)
-            |> maxHeightValue
-        static member Value (size: ILengthPercentage) = Units.LengthPercentage.value size |> maxHeightValue
-        static member Value (contentSize: IContentSize) = contentSize |> maxHeightValue'
-        static member MaxContent = MaxContent |> maxHeightValue'
-        static member MinContent = MinContent |> maxHeightValue'
-
-        static member Auto = Auto |> maxHeightValue'
-        static member Inherit = Inherit |> maxHeightValue'
-        static member Initial = Initial |> maxHeightValue'
-        static member Unset = Unset |> maxHeightValue'
-
-    /// <summary>Specifies max height of element.</summary>
-    /// <param name="maxHeight">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MaxHeight' (maxHeight: ILengthPercentage) = MaxHeight.Value(maxHeight)
+    /// Specifies max height of element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MaxHeight': (FssTypes.IContentSize -> FssTypes.CssProperty) = MaxHeight.value

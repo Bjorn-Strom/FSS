@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -16,184 +16,184 @@ module Animation =
 
         testList "Animation"
             [
-                test
+                testCase
                     "Animation name"
                     [ AnimationName' animationSample ]
                     [ "animationName" ==> "animation-1oejj34" ]
-                test
+                testCase
                     "Animation names"
-                    [ AnimationName.Names [animationSample; CssString "foo" ] ]
+                    [ AnimationName.names [animationSample; FssTypes.CssString "foo" ] ]
                     [ "animationName" ==> "animation-1oejj34, foo" ]
-                test
+                testCase
                     "Animation name inherit"
-                    [ AnimationName.Inherit ]
+                    [ AnimationName.inherit' ]
                     [ "animationName" ==> "inherit" ]
-                test
+                testCase
                     "Animation name"
-                    [ AnimationName.Initial ]
+                    [ AnimationName.initial ]
                     [ "animationName" ==> "initial" ]
-                test
+                testCase
                     "Animation name"
-                    [ AnimationName.Unset ]
+                    [ AnimationName.unset ]
                     [ "animationName" ==> "unset" ]
-                test
+                testCase
                     "Animation duration"
                     [ AnimationDuration' (sec 10.0) ]
                     [ "animationDuration" ==> "10.00s" ]
-                test
+                testCase
                     "Animation duration seconds"
                     [ AnimationDuration' (sec 10.0) ]
                     [ "animationDuration" ==> "10.00s" ]
-                test
+                testCase
                     "Animation duration milliseconds"
                     [ AnimationDuration' (ms 10.0) ]
                     [ "animationDuration" ==> "10.00ms" ]
-                test
+                testCase
                     "Animation timing function ease"
-                    [ AnimationTimingFunction.Ease ]
+                    [ AnimationTimingFunction.ease ]
                     ["animationTimingFunction" ==> "ease"]
-                test
+                testCase
                     "Animation timing function ease in"
-                    [ AnimationTimingFunction.EaseIn ]
+                    [ AnimationTimingFunction.easeIn ]
                     ["animationTimingFunction" ==> "ease-in"]
-                test
+                testCase
                     "Animation timing function ease out"
-                    [ AnimationTimingFunction.EaseOut ]
+                    [ AnimationTimingFunction.easeOut ]
                     ["animationTimingFunction" ==> "ease-out"]
-                test
+                testCase
                     "Animation timing function ease in out"
-                    [ AnimationTimingFunction.EaseInOut ]
+                    [ AnimationTimingFunction.easeInOut ]
                     ["animationTimingFunction" ==> "ease-in-out"]
-                test
+                testCase
                     "Animation timing function linear"
-                    [ AnimationTimingFunction.Linear ]
+                    [ AnimationTimingFunction.linear ]
                     ["animationTimingFunction" ==> "linear"]
-                test
+                testCase
                     "Animation timing function step start"
-                    [ AnimationTimingFunction.StepStart ]
+                    [ AnimationTimingFunction.stepStart ]
                     ["animationTimingFunction" ==> "step-start"]
-                test
+                testCase
                     "Animation timing function step end"
-                    [ AnimationTimingFunction.StepEnd ]
+                    [ AnimationTimingFunction.stepEnd ]
                     ["animationTimingFunction" ==> "step-end"]
-                test
+                testCase
                     "Animation timing function cubic bezier"
-                    [ AnimationTimingFunction.CubicBezier (0.0, 0.47, 0.32, 1.97) ]
+                    [ AnimationTimingFunction.cubicBezier (0.0, 0.47, 0.32, 1.97) ]
                     ["animationTimingFunction" ==> "cubic-bezier(0.00, 0.47, 0.32, 1.97)"]
-                test
+                testCase
                     "Animation timing function  step"
-                    [ AnimationTimingFunction.Step 5 ]
+                    [ AnimationTimingFunction.step 5 ]
                     ["animationTimingFunction" ==> "steps(5)"]
-                test
+                testCase
                     "Animation timing function  step jump start"
-                    [ AnimationTimingFunction.Step(5, TimingFunctionType.JumpStart) ]
+                    [ AnimationTimingFunction.step(5, FssTypes.Animation.Step.JumpStart) ]
                     ["animationTimingFunction" ==> "steps(5, jump-start)"]
-                test
+                testCase
                     "Animation timing function step jump end"
-                    [ AnimationTimingFunction.Step (5, TimingFunctionType.JumpEnd) ]
+                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.JumpEnd) ]
                     ["animationTimingFunction" ==> "steps(5, jump-end)"]
-                test
+                testCase
                     "Animation timing function step jump none"
-                    [ AnimationTimingFunction.Step (5, TimingFunctionType.JumpNone) ]
+                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.JumpNone) ]
                     ["animationTimingFunction" ==> "steps(5, jump-none)"]
-                test
+                testCase
                     "Animation timing function step jump both"
-                    [ AnimationTimingFunction.Step (5, TimingFunctionType.JumpBoth) ]
+                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.JumpBoth) ]
                     ["animationTimingFunction" ==> "steps(5, jump-both)"]
-                test
+                testCase
                     "Animation timing function step start"
-                    [ AnimationTimingFunction.Step (5, TimingFunctionType.Start) ]
+                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.Start) ]
                     ["animationTimingFunction" ==> "steps(5, start)"]
-                test
+                testCase
                     "Animation timing function step end"
-                    [ AnimationTimingFunction.Step (5, TimingFunctionType.End) ]
+                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.End) ]
                     ["animationTimingFunction" ==> "steps(5, end)"]
-                test
+                testCase
                     "Animation timing function inherit"
-                    [ AnimationTimingFunction.Inherit ]
+                    [ AnimationTimingFunction.inherit' ]
                     ["animationTimingFunction" ==> "inherit"]
-                test
+                testCase
                     "Animation timing function initial"
-                    [ AnimationTimingFunction.Initial ]
+                    [ AnimationTimingFunction.initial ]
                     ["animationTimingFunction" ==> "initial"]
-                test
+                testCase
                     "Animation timing function unset"
-                    [ AnimationTimingFunction.Unset ]
+                    [ AnimationTimingFunction.unset ]
                     ["animationTimingFunction" ==> "unset"]
-                test
+                testCase
                     "Animation delay sec"
                     [ AnimationDelay' (sec 10.0) ]
                     ["animationDelay" ==> "10.00s"]
-                test
+                testCase
                     "Animation iteration count infininte"
-                    [ AnimationIterationCount.Infinite ]
+                    [ AnimationIterationCount.infinite ]
                     ["animationIterationCount" ==> "infinite"]
-                test
+                testCase
                     "Animation iteration count value"
-                    [ AnimationIterationCount' (CssInt 5) ]
+                    [ AnimationIterationCount' (FssTypes.CssInt 5) ]
                     ["animationIterationCount" ==> "5"]
-                test
+                testCase
                     "Animation direction normal"
-                    [ AnimationDirection.Normal ]
+                    [ AnimationDirection.normal ]
                     ["animationDirection" ==> "normal"]
-                test
+                testCase
                     "Animation direction reverse"
-                    [ AnimationDirection.Reverse ]
+                    [ AnimationDirection.reverse ]
                     ["animationDirection" ==> "reverse"]
-                test
+                testCase
                     "Animation direction alternate"
-                    [ AnimationDirection.Alternate ]
+                    [ AnimationDirection.alternate ]
                     ["animationDirection" ==> "alternate"]
-                test
+                testCase
                     "Animation direction alternate reverse"
-                    [ AnimationDirection.AlternateReverse ]
+                    [ AnimationDirection.alternateReverse ]
                     ["animationDirection" ==> "alternate-reverse"]
-                test
+                testCase
                     "Animation direction inherit"
-                    [ AnimationDirection.Inherit ]
+                    [ AnimationDirection.inherit' ]
                     ["animationDirection" ==> "inherit"]
-                test
+                testCase
                     "Animation direction initial"
-                    [ AnimationDirection.Initial ]
+                    [ AnimationDirection.initial ]
                     ["animationDirection" ==> "initial"]
-                test
+                testCase
                     "Animation direction unset"
-                    [ AnimationDirection.Unset ]
+                    [ AnimationDirection.unset ]
                     ["animationDirection" ==> "unset"]
-                test
+                testCase
                     "Animation fill mode forwards"
-                    [ AnimationFillMode.Forwards ]
+                    [ AnimationFillMode.forwards ]
                     ["animationFillMode" ==> "forwards"]
-                test
+                testCase
                     "Animation fill mode backwards"
-                    [ AnimationFillMode.Backwards ]
+                    [ AnimationFillMode.backwards ]
                     ["animationFillMode" ==> "backwards"]
-                test
+                testCase
                     "Animation fill mode both"
-                    [ AnimationFillMode.Both ]
+                    [ AnimationFillMode.both ]
                     ["animationFillMode" ==> "both"]
-                test
+                testCase
                     "Animation fill mode none"
-                    [ AnimationFillMode.None ]
+                    [ AnimationFillMode.none ]
                     ["animationFillMode" ==> "none"]
-                test
+                testCase
                     "Animation play state running"
-                    [ AnimationPlayState.Running ]
+                    [ AnimationPlayState.running ]
                     ["animationPlayState" ==> "running"]
-                test
+                testCase
                     "Animation play state paused"
-                    [ AnimationPlayState.Paused ]
+                    [ AnimationPlayState.paused ]
                     ["animationPlayState"  ==> "paused"]
-                test
+                testCase
                     "Animation play state inherit"
-                    [ AnimationPlayState.Inherit ]
+                    [ AnimationPlayState.inherit' ]
                     ["animationPlayState" ==> "inherit"]
-                test
+                testCase
                     "Animation play state initial"
-                    [ AnimationPlayState.Initial ]
+                    [ AnimationPlayState.initial ]
                     ["animationPlayState"  ==> "initial"]
-                test
+                testCase
                     "Animation play state unset"
-                    [ AnimationPlayState.Unset ]
+                    [ AnimationPlayState.unset ]
                     ["animationPlayState" ==> "unset"]
             ]

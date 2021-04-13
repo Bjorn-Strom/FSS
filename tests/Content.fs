@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -12,73 +12,73 @@ module Content =
     let tests =
         testList "Content"
             [
-                test
+                testCase
                     "Content normal"
-                    [ Content.Normal ]
+                    [ Content.normal ]
                     [ "content" ==> "normal" ]
-                test
+                testCase
                     "Content none"
-                    [ Content.None ]
+                    [ Content.none ]
                     [ "content" ==> "none" ]
-                test
+                testCase
                     "Content image"
-                    [ Content.Url "http://www.example.com/test.png" ]
+                    [ Content.url "http://www.example.com/test.png" ]
                     [ "content" ==> "url(http://www.example.com/test.png)" ]
-                test
+                testCase
                     "Content image with alt text"
-                    [ Content.Url("http://www.example.com/test.png", "this is the alt text") ]
+                    [ Content.url("http://www.example.com/test.png", "this is the alt text") ]
                     [ "content" ==> "url(http://www.example.com/test.png) / \"this is the alt text\"" ]
-                test
+                testCase
                     "Content linear gradient"
-                    [ Content.LinearGradient(deg 45.0, [hex "e66456", px 0; hex "9198e5", px 100]) ]
+                    [ Content.linearGradient((deg 45.0, [hex "e66456", px 0; hex "9198e5", px 100])) ]
                     [ "content" ==> "linear-gradient(45.00deg, #e66456 0px, #9198e5 100px)" ]
-                test
+                testCase
                     "Content string value"
-                    [ Content' (CssString "prefix")]
+                    [ Content' (FssTypes.CssString "prefix")]
                     [ "content" ==> "\"prefix\"" ]
-                test
+                testCase
                     "Content counter"
-                    [ Content.Counter sampleCounter]
-                    [ "content" ==> sprintf "counter(%s)" (counterValue sampleCounter) ]
-                test
+                    [ Content.counter sampleCounter]
+                    [ "content" ==> sprintf "counter(%s)" (FssTypes.counterStyleHelpers.counterStyleToString sampleCounter) ]
+                testCase
                     "Content counter2"
-                    [ Content.Counters (sampleCounter, ListStyleTypeType.UpperLatin) ]
-                    [ "content" ==> sprintf "counters(%s, upper-latin)" (counterValue sampleCounter) ]
-                test
+                    [ Content.counters (sampleCounter, FssTypes.ListStyle.Type.UpperLatin) ]
+                    [ "content" ==> sprintf "counters(%s, upper-latin)" (FssTypes.counterStyleHelpers.counterStyleToString sampleCounter) ]
+                testCase
                     "Content counter2"
-                    [ Content.Counter (sampleCounter, ". ")]
-                    [ "content" ==> sprintf "counter(%s)'. '" (counterValue sampleCounter)]
-                test
+                    [ Content.counter (sampleCounter, ". ")]
+                    [ "content" ==> sprintf "counter(%s)'. '" (FssTypes.counterStyleHelpers.counterStyleToString sampleCounter)]
+                testCase
                     "Content attribute"
-                    [ Content.Attribute Attribute.Title ]
+                    [ Content.attribute FssTypes.Attribute.Title ]
                     [ "content" ==> "attr(title)" ]
-                test
+                testCase
                     "Content open quote"
-                    [ Content.OpenQuote ]
+                    [ Content.openQuote ]
                     [ "content" ==> "open-quote" ]
-                test
+                testCase
                     "Content close quote"
-                    [ Content.CloseQuote ]
+                    [ Content.closeQuote ]
                     [ "content" ==> "close-quote" ]
-                test
+                testCase
                     "Content no open quote"
-                    [ Content.NoOpenQuote ]
+                    [ Content.noOpenQuote ]
                     [ "content" ==> "no-open-quote" ]
-                test
+                testCase
                     "Content no close quote"
-                    [ Content.NoCloseQuote ]
+                    [ Content.noCloseQuote ]
                     [ "content" ==> "no-close-quote" ]
-                test
+                testCase
                     "Content inherit"
-                    [ Content.Inherit ]
+                    [ Content.inherit' ]
                     [ "content" ==> "inherit" ]
-                test
+                testCase
                     "Content initial"
-                    [ Content.Initial ]
+                    [ Content.initial ]
                     [ "content" ==> "initial" ]
-                test
+                testCase
                     "Content unset"
-                    [ Content.Unset ]
+                    [ Content.unset ]
                     [ "content" ==> "unset" ]
 
             ]

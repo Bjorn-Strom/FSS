@@ -1,44 +1,54 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
 open Fable.Core.JsInterop
 open Fss
-open Keyframes
+open Fss.Media
+open Fet
 
 module Utils =
-    let test (testName: string) (attributeList: CSSProperty list) (correct: (string * obj) list) =
-        testCase testName <| fun _ ->
+    let testCase (testName: string) (attributeList: FssTypes.CssProperty list) (correct: (string * obj) list) =
+        test testName <| fun _ ->
             let actual =
                 attributeList
-                |> List.map GlobalValue.CSSValue
+                |> List.map FssTypes.masterTypeHelpers.CssValue
 
-            Expect.equal actual correct testName
+            Expect.equal actual correct
 
-    let testNested (testName: string) (attributeList: CSSProperty list) (correct: (string * obj) list) =
-        testCase testName <| fun _ ->
+    let testMedia (testName: string) (featureList: FssTypes.Media.Feature list) (attributeList: FssTypes.CssProperty list) (correct: (string * obj)) =
+        test testName <| fun _ ->
+            let actual = mediaFeature featureList |> sprintf "@media %s" ==> (attributeList |> List.map FssTypes.masterTypeHelpers.CssValue)
+
+            Expect.equal (actual.ToString()) (correct.ToString())
+
+    let testMediaFor (testName: string) device (featureList: FssTypes.Media.Feature list) (attributeList: FssTypes.CssProperty list) (correct: (string * obj)) =
+        test testName <| fun _ ->
+            let actual = sprintf "@media %s %s" (deviceLabel device) (mediaFeature featureList)  ==> (attributeList |> List.map FssTypes.masterTypeHelpers.CssValue)
+
+            Expect.equal (actual.ToString()) (correct.ToString())
+
+    let testNested (testName: string) (attributeList: FssTypes.CssProperty list) (correct: (string * obj) list) =
+        test testName <| fun _ ->
             let actual =
                 attributeList
-                |> List.map GlobalValue.CSSValue
+                |> List.map FssTypes.masterTypeHelpers.CssValue
                 |> List.map (fun (x, y) ->
-                    printfn "Y:    %A" y
                     let properY: string =
-                        y :?> CSSProperty list
-                        |> List.map GlobalValue.CSSValue
+                        y :?> FssTypes.CssProperty list
+                        |> List.map FssTypes.masterTypeHelpers.CssValue
                         |> List.map (fun x -> $"{x}")
                         |> String.concat ","
-                    printfn $"x: {x}, y: {properY}"
                     x ==> properY)
 
-            Expect.equal actual correct testName
+            Expect.equal actual correct
 
     let testString (testName: string) (actual: string) (expected: string) =
-        testCase testName <| fun _ ->
-            Expect.equal actual expected testName
+        test testName <| fun () ->
+            Expect.equal actual expected
 
-    let testKeyframes (testName: string) (actual: KeyframeAttribute list) (expected: string list) =
+    let testKeyframes (testName: string) (actual: Keyframes.KeyframeAttribute list) (expected: string list) =
         let actual =
             actual
-            |> createAnimationRecord
+            |> Keyframes.createAnimationRecord
             |> List.map (fun (key, value) ->
                       sprintf "%s %A" key (Fable.Core.JS.JSON.stringify(value)
                               .Replace("\\", "")
@@ -47,5 +57,5 @@ module Utils =
                               .Replace("}", "")
                               .Replace(":", ", ")))
 
-        testCase testName <| fun _ ->
-            Expect.equal actual expected testName
+        test testName <| fun _ ->
+            Expect.equal actual expected

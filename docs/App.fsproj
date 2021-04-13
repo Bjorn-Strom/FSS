@@ -3,7 +3,6 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <Content Include="assets\logo.svg" />
         <Content Include="documentation\Overview.md" />
         <Content Include="documentation\Installation.md" />
         <Content Include="documentation\Philosophy.md" />
@@ -20,6 +19,9 @@
         <Content Include="documentation\Counters.md" />
         <Content Include="documentation\Fonts.md" />
         <Content Include="documentation\BackgroundImage.md" />
+        <Content Include="documentation\Feliz.md" />
+        <Content Include="documentation\New.md" />
+        <Content Include="documentation\Svg.md" />
         <Compile Include="Markdown.fs" />
         <Compile Include="Utilities.fs" />
         <Compile Include="Logo.fs" />

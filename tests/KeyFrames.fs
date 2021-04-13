@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fss
 open Utils
 
@@ -24,7 +24,7 @@ module Keyframes =
             [
                 frame 0
                     [
-                        BackgroundColor.Hex "00FF00"
+                        BackgroundColor.hex "00FF00"
                         BackgroundSize' (px 2)
                     ]
                 frame 50
@@ -34,7 +34,7 @@ module Keyframes =
                 frame 100
                     [
                         BorderWidth' (px 5)
-                        BackgroundColor.Rgb 11 22 33
+                        BackgroundColor.rgb 11 22 33
                     ]
             ]
 

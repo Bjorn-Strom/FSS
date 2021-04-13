@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,144 +9,144 @@ module Scroll =
      let tests =
         testList "Scroll"
             [
-                test
+                testCase
                     "ScrollBehavior auto"
-                    [ ScrollBehavior.Auto]
+                    [ ScrollBehavior.auto]
                     [ "scrollBehavior" ==> "auto" ]
-                test
+                testCase
                     "ScrollBehavior smooth"
-                    [ ScrollBehavior.Smooth]
+                    [ ScrollBehavior.smooth]
                     [ "scrollBehavior" ==> "smooth" ]
-                test
+                testCase
                     "ScrollBehavior inherit"
-                    [ ScrollBehavior.Inherit]
+                    [ ScrollBehavior.inherit']
                     [ "scrollBehavior" ==> "inherit" ]
-                test
+                testCase
                     "ScrollBehavior initial"
-                    [ ScrollBehavior.Initial]
+                    [ ScrollBehavior.initial]
                     [ "scrollBehavior" ==> "initial" ]
-                test
+                testCase
                     "ScrollBehavior unset"
-                    [ ScrollBehavior.Unset ]
+                    [ ScrollBehavior.unset ]
                     [ "scrollBehavior" ==> "unset" ]
-                test
+                testCase
                     "OverscrollBehaviorX contain"
-                    [ OverscrollBehaviorX.Contain]
+                    [ OverscrollBehaviorX.contain]
                     [ "overscrollBehaviorX" ==> "contain" ]
-                test
+                testCase
                     "OverscrollBehaviorX auto"
-                    [ OverscrollBehaviorX.Auto]
+                    [ OverscrollBehaviorX.auto]
                     [ "overscrollBehaviorX" ==> "auto" ]
-                test
+                testCase
                     "OverscrollBehaviorX inherit"
-                    [ OverscrollBehaviorX.Inherit]
+                    [ OverscrollBehaviorX.inherit']
                     [ "overscrollBehaviorX" ==> "inherit" ]
-                test
+                testCase
                     "OverscrollBehaviorX initial"
-                    [ OverscrollBehaviorX.Initial]
+                    [ OverscrollBehaviorX.initial]
                     [ "overscrollBehaviorX" ==> "initial" ]
-                test
+                testCase
                     "OverscrollBehaviorX unset"
-                    [ OverscrollBehaviorX.Unset ]
+                    [ OverscrollBehaviorX.unset ]
                     [ "overscrollBehaviorX" ==> "unset" ]
-                test
+                testCase
                     "OverscrollBehaviorY contain"
-                    [ OverscrollBehaviorY.Contain]
+                    [ OverscrollBehaviorY.contain]
                     [ "overscrollBehaviorY" ==> "contain" ]
-                test
+                testCase
                     "OverscrollBehaviorY auto"
-                    [ OverscrollBehaviorY.Auto]
+                    [ OverscrollBehaviorY.auto]
                     [ "overscrollBehaviorY" ==> "auto" ]
-                test
+                testCase
                     "OverscrollBehaviorY inherit"
-                    [ OverscrollBehaviorY.Inherit]
+                    [ OverscrollBehaviorY.inherit']
                     [ "overscrollBehaviorY" ==> "inherit" ]
-                test
+                testCase
                     "OverscrollBehaviorY initial"
-                    [ OverscrollBehaviorY.Initial]
+                    [ OverscrollBehaviorY.initial]
                     [ "overscrollBehaviorY" ==> "initial" ]
-                test
+                testCase
                     "OverscrollBehaviorY unset"
-                    [ OverscrollBehaviorY.Unset ]
+                    [ OverscrollBehaviorY.unset ]
                     [ "overscrollBehaviorY" ==> "unset" ]
-                test
+                testCase
                     "ScrollPadding top px"
                     [ ScrollPaddingTop' (px 10)]
                     ["scrollPaddingTop" ==> "10px"]
-                test
+                testCase
                     "ScrollPadding right px"
                     [ ScrollPaddingRight' (px 10)]
                     ["scrollPaddingRight" ==> "10px"]
-                test
+                testCase
                     "ScrollPadding bottom px"
                     [ ScrollPaddingBottom' (px 10)]
                     ["scrollPaddingBottom" ==> "10px"]
-                test
+                testCase
                     "ScrollPadding left px"
                     [ ScrollPaddingLeft' (px 10)]
                     ["scrollPaddingLeft" ==> "10px"]
-                test
+                testCase
                     "ScrollPadding px"
                     [ ScrollPadding' (px 10)]
                     [ "scrollPadding" ==> "10px" ]
-                test
+                testCase
                     "ScrollPadding em"
                     [ ScrollPadding' (em 10.0)]
                     [ "scrollPadding" ==> "10.0em" ]
-                test
+                testCase
                     "ScrollPadding inherit"
-                    [ ScrollPadding.Inherit]
+                    [ ScrollPadding.inherit']
                     [ "scrollPadding" ==> "inherit" ]
-                test
+                testCase
                     "ScrollPadding initial"
-                    [ ScrollPadding.Initial]
+                    [ ScrollPadding.initial]
                     [ "scrollPadding" ==> "initial" ]
-                test
+                testCase
                     "ScrollPadding unset"
-                    [ ScrollPadding.Unset ]
+                    [ ScrollPadding.unset ]
                     [ "scrollPadding" ==> "unset" ]
-                test
+                testCase
                     "ScrollPaddings multiple"
-                    [ ScrollPadding.Value (px 10, px 20, px 30, px 40) ]
+                    [ ScrollPadding.value (px 10, px 20, px 30, px 40) ]
                     [ "scrollPadding" ==> "10px 20px 30px 40px" ]
-                test
+                testCase
                     "ScrollMargin top px"
                     [ ScrollMarginTop' (px 10)]
                     ["scrollMarginTop" ==> "10px"]
-                test
+                testCase
                     "ScrollMargin right px"
                     [ ScrollMarginRight' (px 10)]
                     ["scrollMarginRight" ==> "10px"]
-                test
+                testCase
                     "ScrollMargin bottom px"
                     [ ScrollMarginBottom' (px 10)]
                     ["scrollMarginBottom" ==> "10px"]
-                test
+                testCase
                     "ScrollMargin left px"
                     [ ScrollMarginLeft' (px 10)]
                     ["scrollMarginLeft" ==> "10px"]
-                test
+                testCase
                     "ScrollMargin px"
                     [ ScrollMargin' (px 10)]
                     [ "scrollMargin" ==> "10px" ]
-                test
+                testCase
                     "ScrollMargin em"
                     [ ScrollMargin' (em 10.0)]
                     [ "scrollMargin" ==> "10.0em" ]
-                test
+                testCase
                     "ScrollMargin inherit"
-                    [ ScrollMargin.Inherit]
+                    [ ScrollMargin.inherit']
                     [ "scrollMargin" ==> "inherit" ]
-                test
+                testCase
                     "ScrollMargin initial"
-                    [ ScrollMargin.Initial]
+                    [ ScrollMargin.initial]
                     [ "scrollMargin" ==> "initial" ]
-                test
+                testCase
                     "ScrollMargin unset"
-                    [ ScrollMargin.Unset ]
+                    [ ScrollMargin.unset ]
                     [ "scrollMargin" ==> "unset" ]
-                test
+                testCase
                     "ScrollMargins multiple"
-                    [ ScrollMargin.Value (px 10, px 20, px 30, px 40) ]
+                    [ ScrollMargin.value (px 10, px 20, px 30, px 40) ]
                     [ "scrollMargin" ==> "10px 20px 30px 40px" ]
             ]

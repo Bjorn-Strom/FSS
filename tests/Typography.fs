@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,36 +9,36 @@ module Typography =
      let tests =
         testList "Typography"
             [
-                test
+                testCase
                     "Orphans number"
-                    [ Orphans' (CssInt 2)]
+                    [ Orphans' (FssTypes.CssInt 2)]
                     [ "orphans" ==> "2" ]
-                test
+                testCase
                     "Orphans inherit"
-                    [ Orphans.Inherit]
+                    [ Orphans.inherit']
                     [ "orphans" ==> "inherit" ]
-                test
+                testCase
                     "Orphans initial"
-                    [ Orphans.Initial]
+                    [ Orphans.initial]
                     [ "orphans" ==> "initial" ]
-                test
+                testCase
                     "Orphans unset"
-                    [ Orphans.Unset ]
+                    [ Orphans.unset ]
                     [ "orphans" ==> "unset" ]
-                test
+                testCase
                     "Widows number"
-                    [ Widows' (CssInt 2)]
+                    [ Widows' (FssTypes.CssInt 2)]
                     [ "widows" ==> "2" ]
-                test
+                testCase
                     "Widows inherit"
-                    [ Widows.Inherit]
+                    [ Widows.inherit']
                     [ "widows" ==> "inherit" ]
-                test
+                testCase
                     "Widows initial"
-                    [ Widows.Initial]
+                    [ Widows.initial]
                     [ "widows" ==> "initial" ]
-                test
+                testCase
                     "Widows unset"
-                    [ Widows.Unset ]
+                    [ Widows.unset ]
                     [ "widows" ==> "unset" ]
             ]

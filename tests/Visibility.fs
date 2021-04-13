@@ -1,179 +1,177 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
-open Fss.Overflow
-open Fss.Overflow
 open Utils
 open Fss
 
 module Visibility =
      let tests =
         testList "Visibility" [
-                test
+                testCase
                     "Paint order normal"
-                    [PaintOrder.Normal]
+                    [PaintOrder.normal]
                     ["paintOrder" ==> "normal"]
-                test
+                testCase
                     "Paint order stroke"
-                    [PaintOrder.Stroke]
+                    [PaintOrder.stroke]
                     ["paintOrder" ==> "stroke"]
-                test
+                testCase
                     "Paint order markers"
-                    [PaintOrder.Markers]
+                    [PaintOrder.markers]
                     ["paintOrder" ==> "markers"]
-                test
+                testCase
                     "Paint order stroke fill"
-                    [PaintOrder.Value(PaintOrderTypes.Stroke, PaintOrderTypes.Fill)]
+                    [PaintOrder.value(FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
                     ["paintOrder" ==> "stroke fill"]
-                test
+                testCase
                     "Paint order markers stroke fill"
-                    [PaintOrder.Value(PaintOrderTypes.Markers, PaintOrderTypes.Stroke, PaintOrderTypes.Fill)]
+                    [PaintOrder.value(FssTypes.Visibility.PaintOrder.Markers, FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
                     ["paintOrder" ==> "markers stroke fill"]
-                test
+                testCase
                     "Paint order normal"
-                    [PaintOrder.Normal]
+                    [PaintOrder.normal]
                     ["paintOrder" ==> "normal"]
 
-                test
+                testCase
                     "Visibility hidden"
-                    [ Visibility.Hidden]
+                    [ Visibility.hidden]
                     ["visibility" ==> "hidden"]
-                test
+                testCase
                     "Visibility collapse"
-                    [ Visibility.Collapse]
+                    [ Visibility.collapse]
                     ["visibility" ==> "collapse"]
-                test
+                testCase
                     "Visibility visible"
-                    [ Visibility.Visible]
+                    [ Visibility.visible]
                     ["visibility" ==> "visible"]
-                test
+                testCase
                     "Opacity 1"
                     [ Opacity' 1.0 ]
                     ["opacity" ==> "1"]
-                test
+                testCase
                     "Opacity 0"
                     [ Opacity' 0.0]
                     ["opacity" ==> "0"]
-                test
+                testCase
                     "Opacity 50%"
                     [ Opacity' 0.5 ]
                     ["opacity" ==> "0.5"]
-                test
+                testCase
                     "Opacity -10 should be 0"
                     [ Opacity' -10.0 ]
                     ["opacity" ==> "0"]
-                test
+                testCase
                     "Opacity 10 should be 1"
                     [ Opacity' 10.0 ]
                     ["opacity" ==> "1"]
-                test
+                testCase
                     "Opacity 1.5 should be 1"
                     [ Opacity' 1.5 ]
                     ["opacity" ==> "1"]
-                test
+                testCase
                     "Overflow-X visible"
-                    [OverflowX.Visible]
+                    [OverflowX.visible]
                     ["overflowX" ==> "visible"]
-                test
+                testCase
                     "Overflow-X hidden"
-                    [OverflowX.Hidden]
+                    [OverflowX.hidden]
                     ["overflowX" ==> "hidden"]
-                test
+                testCase
                     "Overflow-X Clip"
-                    [OverflowX.Clip]
+                    [OverflowX.clip]
                     ["overflowX" ==> "clip"]
-                test
+                testCase
                     "Overflow-X Scroll"
-                    [OverflowX.Scroll]
+                    [OverflowX.scroll]
                     ["overflowX" ==> "scroll"]
-                test
+                testCase
                     "Overflow-X Auto"
-                    [OverflowX.Auto]
+                    [OverflowX.auto]
                     ["overflowX" ==> "auto"]
-                test
+                testCase
                     "Overflow-X inherit"
-                    [OverflowX.Inherit]
+                    [OverflowX.inherit']
                     ["overflowX" ==> "inherit"]
-                test
+                testCase
                     "Overflow-X initial"
-                    [OverflowX.Initial]
+                    [OverflowX.initial]
                     ["overflowX" ==> "initial"]
-                test
+                testCase
                     "Overflow-X unset"
-                    [OverflowX.Unset]
+                    [OverflowX.unset]
                     ["overflowX" ==> "unset"]
-                test
+                testCase
                     "OverflowY visible"
-                    [OverflowY.Visible]
+                    [OverflowY.visible]
                     ["overflowY" ==> "visible"]
-                test
+                testCase
                     "OverflowY hidden"
-                    [OverflowY.Hidden]
+                    [OverflowY.hidden]
                     ["overflowY" ==> "hidden"]
-                test
+                testCase
                     "OverflowY Clip"
-                    [OverflowY.Clip]
+                    [OverflowY.clip]
                     ["overflowY" ==> "clip"]
-                test
+                testCase
                     "OverflowY Scroll"
-                    [OverflowY.Scroll]
+                    [OverflowY.scroll]
                     ["overflowY" ==> "scroll"]
-                test
+                testCase
                     "OverflowY Auto"
-                    [OverflowY.Auto]
+                    [OverflowY.auto]
                     ["overflowY" ==> "auto"]
-                test
+                testCase
                     "OverflowY inherit"
-                    [OverflowY.Inherit]
+                    [OverflowY.inherit']
                     ["overflowY" ==> "inherit"]
-                test
+                testCase
                     "OverflowY initial"
-                    [OverflowY.Initial]
+                    [OverflowY.initial]
                     ["overflowY" ==> "initial"]
-                test
+                testCase
                     "OverflowY unset"
-                    [OverflowY.Unset]
+                    [OverflowY.unset]
                     ["overflowY" ==> "unset"]
-                test
+                testCase
                     "Overflow visible visible"
-                    [Overflow.Value (OverflowType.Visible, OverflowType.Visible)]
+                    [Overflow.value (FssTypes.Overflow.Visible, FssTypes.Overflow.Visible)]
                     ["overflow" ==> "visible visible"]
-                test
+                testCase
                     "OverflowXY hidden hidden"
-                    [Overflow.Value (OverflowType.Hidden, OverflowType.Hidden)]
+                    [Overflow.value (FssTypes.Overflow.Hidden, FssTypes.Overflow.Hidden)]
                     ["overflow" ==> "hidden hidden"]
-                test
+                testCase
                     "Overflow Clip clip"
-                    [Overflow.Value (OverflowType.Clip, OverflowType.Clip)]
+                    [Overflow.value (FssTypes.Overflow.Clip, FssTypes.Overflow.Clip)]
                     ["overflow" ==> "clip clip"]
-                test
+                testCase
                     "Overflow scroll Scroll"
-                    [Overflow.Value (OverflowType.Scroll, OverflowType.Scroll)]
+                    [Overflow.value (FssTypes.Overflow.Scroll, FssTypes.Overflow.Scroll)]
                     ["overflow" ==> "scroll scroll"]
-                test
+                testCase
                     "OverflowWrap break-word"
-                    [OverflowWrap.BreakWord]
+                    [OverflowWrap.breakWord]
                     ["overflowWrap" ==> "break-word"]
-                test
+                testCase
                     "OverflowWrap anywhere"
-                    [OverflowWrap.Anywhere]
+                    [OverflowWrap.anywhere]
                     ["overflowWrap" ==> "anywhere"]
-                test
+                testCase
                     "OverflowWrap normal"
-                    [OverflowWrap.Normal]
+                    [OverflowWrap.normal]
                     ["overflowWrap" ==> "normal"]
-                test
+                testCase
                     "OverflowWrap inherit"
-                    [OverflowWrap.Inherit]
+                    [OverflowWrap.inherit']
                     ["overflowWrap" ==> "inherit"]
-                test
+                testCase
                     "OverflowWrap initial"
-                    [OverflowWrap.Initial]
+                    [OverflowWrap.initial]
                     ["overflowWrap" ==> "initial"]
-                test
+                testCase
                     "OverflowWrap unset"
-                    [OverflowWrap.Unset]
+                    [OverflowWrap.unset]
                     ["overflowWrap" ==> "unset"]
 
         ]

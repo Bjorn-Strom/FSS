@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,688 +9,684 @@ module Grid =
     let tests =
         testList "Grid"
             [
-                test
+                testCase
                     "Grid area"
                     [ GridArea' "foo" ]
                     ["gridArea" ==> "foo"]
-                test
+                testCase
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Ident "area1", GridPosition.Ident "area2") ]
+                    [ GridArea.value (GridPosition.ident "area1", GridPosition.ident "area2") ]
                     ["gridArea" ==> "area1 / area2"]
-                test
+                testCase
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Span 3, GridPosition.Ident "area2") ]
+                    [ GridArea.value (GridPosition.span 3, GridPosition.ident "area2") ]
                     ["gridArea" ==> "span 3 / area2"]
-                test
+                testCase
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Auto, GridPosition.Auto) ]
+                    [ GridArea.value (GridPosition.auto, GridPosition.auto) ]
                     ["gridArea" ==> "auto / auto"]
-                test
+                testCase
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Auto, GridPosition.Auto, GridPosition.Auto) ]
+                    [ GridArea.value (GridPosition.auto, GridPosition.auto, GridPosition.auto) ]
                     ["gridArea" ==> "auto / auto / auto"]
-                test
+                testCase
                     "Grid area"
-                    [ GridArea.Value (GridPosition.Auto, GridPosition.Auto, GridPosition.Auto, GridPosition.Auto) ]
+                    [ GridArea.value (GridPosition.auto, GridPosition.auto, GridPosition.auto, GridPosition.auto) ]
                     ["gridArea" ==> "auto / auto / auto / auto"]
-                test
+                testCase
                     "Grid area auto"
-                    [ GridArea.Auto ]
+                    [ GridArea.auto ]
                     ["gridArea" ==> "auto"]
-                test
+                testCase
                     "Grid area inherit"
-                    [GridArea.Inherit]
+                    [GridArea.inherit']
                     ["gridArea" ==> "inherit"]
-                test
+                testCase
                     "Grid area initial"
-                    [GridArea.Initial]
+                    [GridArea.initial]
                     ["gridArea" ==> "initial"]
-                test
+                testCase
                     "Grid area unset"
-                    [GridArea.Unset]
+                    [GridArea.unset]
                     ["gridArea" ==> "unset"]
-                test
+                testCase
                     "Grid column ident and ident"
-                    [ GridColumn.Value(GridPosition.Ident "someStart", GridPosition.Ident "someEnd") ]
+                    [ GridColumn.value(GridPosition.ident "someStart", GridPosition.ident "someEnd") ]
                     ["gridColumn" ==> "someStart / someEnd"]
-                test
+                testCase
                     "Grid column ident and value"
-                    [ GridColumn.Value (GridPosition.Ident "someStart", GridPosition.Value 2) ]
+                    [ GridColumn.value (GridPosition.ident "someStart", GridPosition.value 2) ]
                     ["gridColumn" ==> "someStart / 2"]
-                test
+                testCase
                     "Grid column auto"
-                    [GridColumn.Auto]
+                    [GridColumn.auto]
                     ["gridColumn" ==> "auto"]
-                test
+                testCase
                     "Grid column inherit"
-                    [GridColumn.Inherit]
+                    [GridColumn.inherit']
                     ["gridColumn" ==> "inherit"]
-                test
+                testCase
                     "Grid column initial"
-                    [GridColumn.Initial]
+                    [GridColumn.initial]
                     ["gridColumn" ==> "initial"]
-                test
+                testCase
                     "Grid column unset"
-                    [GridColumn.Unset]
+                    [GridColumn.unset]
                     ["gridColumn" ==> "unset"]
-                test
+                testCase
                     "Grid column start auto"
-                    [GridColumnStart.Auto]
+                    [GridColumnStart.auto]
                     ["gridColumnStart" ==> "auto"]
-                test
+                testCase
                     "Grid column start value"
                     [GridColumnStart' 1]
                     ["gridColumnStart" ==> "1"]
-                test
+                testCase
                     "Grid column start ident"
-                    [GridColumnStart.Ident "somegridarea"]
+                    [GridColumnStart.ident "somegridarea"]
                     ["gridColumnStart" ==> "somegridarea"]
-                test
+                testCase
                     "Grid column value ident and span"
-                    [GridColumnStart.ValueIdentSpan(1, "area") ]
+                    [GridColumnStart.valueIdentSpan(1, "area") ]
                     ["gridColumnStart" ==> "1 area span"]
-                test
+                testCase
                     "Grid column start span"
-                    [GridColumnStart.Span 2 ]
+                    [GridColumnStart.span 2 ]
                     ["gridColumnStart" ==> "span 2"]
-                test
+                testCase
                     "Grid column start inherit"
-                    [GridColumnStart.Inherit]
+                    [GridColumnStart.inherit']
                     ["gridColumnStart" ==> "inherit"]
-                test
+                testCase
                     "Grid column start initial"
-                    [GridColumnStart.Initial]
+                    [GridColumnStart.initial]
                     ["gridColumnStart" ==> "initial"]
-                test
+                testCase
                     "Grid column start unset"
-                    [GridColumnStart.Unset]
+                    [GridColumnStart.unset]
                     ["gridColumnStart" ==> "unset"]
-                test
+                testCase
                     "Grid column end auto"
-                    [GridColumnEnd.Auto]
+                    [GridColumnEnd.auto]
                     ["gridColumnEnd" ==> "auto"]
-                test
+                testCase
                     "Grid column end value"
                     [GridColumnEnd' 1]
                     ["gridColumnEnd" ==> "1"]
-                test
+                testCase
                     "Grid column end ident"
-                    [GridColumnEnd.Ident "somegridarea"]
+                    [GridColumnEnd.ident "somegridarea"]
                     ["gridColumnEnd" ==> "somegridarea"]
-                test
+                testCase
                     "Grid column value ident and span"
-                    [GridColumnEnd.ValueIdentSpan (1, "area") ]
+                    [GridColumnEnd.valueIdentSpan (1, "area") ]
                     ["gridColumnEnd" ==> "1 area span"]
-                test
+                testCase
                     "Grid column end span"
-                    [GridColumnEnd.Span 2 ]
+                    [GridColumnEnd.span 2 ]
                     ["gridColumnEnd" ==> "span 2"]
-                test
+                testCase
                     "Grid column end inherit"
-                    [GridColumnEnd.Inherit]
+                    [GridColumnEnd.inherit']
                     ["gridColumnEnd" ==> "inherit"]
-                test
+                testCase
                     "Grid column end initial"
-                    [GridColumnEnd.Initial]
+                    [GridColumnEnd.initial]
                     ["gridColumnEnd" ==> "initial"]
-                test
+                testCase
                     "Grid column end unset"
-                    [GridColumnEnd.Unset]
+                    [GridColumnEnd.unset]
                     ["gridColumnEnd" ==> "unset"]
-                test
+                testCase
                     "Grid row ident and ident"
-                    [ GridRow.Value (GridPosition.Ident "someStart", GridPosition.Ident "someEnd") ]
+                    [ GridRow.value (GridPosition.ident "someStart", GridPosition.ident "someEnd") ]
                     ["gridRow" ==> "someStart / someEnd"]
-                test
+                testCase
                     "Grid row ident and value"
-                    [ GridRow.Value (GridPosition.Ident "someStart", GridPosition.Value 2) ]
+                    [ GridRow.value (GridPosition.ident "someStart", GridPosition.value 2) ]
                     ["gridRow" ==> "someStart / 2"]
-                test
+                testCase
                     "Grid row auto"
-                    [GridRow.Auto]
+                    [GridRow.auto]
                     ["gridRow" ==> "auto"]
-                test
+                testCase
                     "Grid row inherit"
-                    [GridRow.Inherit]
+                    [GridRow.inherit']
                     ["gridRow" ==> "inherit"]
-                test
+                testCase
                     "Grid row initial"
-                    [GridRow.Initial]
+                    [GridRow.initial]
                     ["gridRow" ==> "initial"]
-                test
+                testCase
                     "Grid row unset"
-                    [GridRow.Unset]
+                    [GridRow.unset]
                     ["gridRow" ==> "unset"]
-                test
+                testCase
                     "Grid row start auto"
-                    [GridRowStart.Auto]
+                    [GridRowStart.auto]
                     ["gridRowStart" ==> "auto"]
-                test
+                testCase
                     "Grid row start value"
                     [GridRowStart' 1]
                     ["gridRowStart" ==> "1"]
-                test
+                testCase
                     "Grid row start ident"
-                    [GridRowStart.Ident "somegridarea"]
+                    [GridRowStart.ident "somegridarea"]
                     ["gridRowStart" ==> "somegridarea"]
-                test
+                testCase
                     "Grid row value ident and span"
-                    [GridRowStart.ValueIdentSpan (1, "area") ]
+                    [GridRowStart.valueIdentSpan (1, "area") ]
                     ["gridRowStart" ==> "1 area span"]
-                test
+                testCase
                     "Grid row start span"
-                    [GridRowStart.Span 2]
+                    [GridRowStart.span 2]
                     ["gridRowStart" ==> "span 2"]
-                test
+                testCase
                     "Grid row start inherit"
-                    [GridRowStart.Inherit]
+                    [GridRowStart.inherit']
                     ["gridRowStart" ==> "inherit"]
-                test
+                testCase
                     "Grid row start initial"
-                    [GridRowStart.Initial]
+                    [GridRowStart.initial]
                     ["gridRowStart" ==> "initial"]
-                test
+                testCase
                     "Grid row start unset"
-                    [GridRowStart.Unset]
+                    [GridRowStart.unset]
                     ["gridRowStart" ==> "unset"]
-                test
+                testCase
                     "Grid row end auto"
-                    [GridRowEnd.Auto]
+                    [GridRowEnd.auto]
                     ["gridRowEnd" ==> "auto"]
-                test
+                testCase
                     "Grid row end value"
                     [GridRowEnd' 1 ]
                     ["gridRowEnd" ==> "1"]
-                test
+                testCase
                     "Grid row end ident"
-                    [GridRowEnd.Ident "somegridarea"]
+                    [GridRowEnd.ident "somegridarea"]
                     ["gridRowEnd" ==> "somegridarea"]
-                test
+                testCase
                     "Grid row value ident and span"
-                    [GridRowEnd.ValueIdentSpan (1, "area") ]
+                    [GridRowEnd.valueIdentSpan (1, "area") ]
                     ["gridRowEnd" ==> "1 area span"]
-                test
+                testCase
                     "Grid row end span"
-                    [GridRowEnd.Span 2 ]
+                    [GridRowEnd.span 2 ]
                     ["gridRowEnd" ==> "span 2"]
-                test
+                testCase
                     "Grid row end inherit"
-                    [GridRowEnd.Inherit]
+                    [GridRowEnd.inherit']
                     ["gridRowEnd" ==> "inherit"]
-                test
+                testCase
                     "Grid row end initial"
-                    [GridRowEnd.Initial]
+                    [GridRowEnd.initial]
                     ["gridRowEnd" ==> "initial"]
-                test
+                testCase
                     "Grid row end unset"
-                    [GridRowEnd.Unset]
+                    [GridRowEnd.unset]
                     ["gridRowEnd" ==> "unset"]
-                test
+                testCase
                     "Grid gap px"
                     [GridGap' (px 10)]
                     ["gridGap" ==> "10px"]
-                test
+                testCase
                     "Grid gap em"
                     [GridGap' (em 1.)]
                     ["gridGap" ==> "1.0em"]
-                test
+                testCase
                     "Grid gap percent"
                     [GridGap' (pct 16)]
                     ["gridGap" ==> "16%"]
-                test
+                testCase
                     "Grid gap px and px"
-                    [ GridGap.Value (px 20, px 10) ]
+                    [ GridGap.value (px 20, px 10) ]
                     ["gridGap" ==> "20px 10px"]
-                test
+                testCase
                     "Grid gap em and em"
-                    [GridGap.Value (em 1., em 0.5) ]
+                    [GridGap.value (em 1., em 0.5) ]
                     ["gridGap" ==> "1.0em 0.5em"]
-                test
+                testCase
                     "Grid gap vmin and vmax"
-                    [GridGap.Value (vmin 3., vmax 2.) ]
+                    [GridGap.value (vmin 3., vmax 2.) ]
                     ["gridGap" ==> "3.0vmin 2.0vmax"]
-                test
+                testCase
                     "Grid gap cm and mm"
-                    [GridGap.Value (cm 0.5, mm 2.) ]
+                    [GridGap.value (cm 0.5, mm 2.) ]
                     ["gridGap" ==> "0.5cm 2.0mm"]
-                test
+                testCase
                     "Grid gap percent and percent"
-                    [GridGap.Value (pct 16, pct 100) ]
+                    [GridGap.value (pct 16, pct 100) ]
                     ["gridGap" ==> "16% 100%"]
-                test
+                testCase
                     "Grid gap px and percent"
-                    [ GridGap.Value (px 21, pct 82) ]
+                    [ GridGap.value (px 21, pct 82) ]
                     ["gridGap" ==> "21px 82%"]
-                test
+                testCase
                     "Grid gap inherit"
-                    [GridGap.Inherit]
+                    [GridGap.inherit']
                     ["gridGap" ==> "inherit"]
-                test
+                testCase
                     "Grid gap initial"
-                    [GridGap.Initial]
+                    [GridGap.initial]
                     ["gridGap" ==> "initial"]
-                test
+                testCase
                     "Grid gap unset"
-                    [GridGap.Unset]
+                    [GridGap.unset]
                     ["gridGap" ==> "unset"]
-                test
+                testCase
                     "Row gap normal"
-                    [GridRowGap.Normal]
+                    [GridRowGap.normal]
                     ["gridRowGap" ==> "normal"]
-                test
+                testCase
                     "Row gap px"
                     [GridRowGap' (px 3)]
                     ["gridRowGap" ==> "3px"]
-                test
+                testCase
                     "Row gap em"
                     [GridRowGap' (em 2.5)]
                     ["gridRowGap" ==> "2.5em"]
-                test
+                testCase
                     "Row gap percent"
                     [GridRowGap' (pct 3)]
                     ["gridRowGap" ==> "3%"]
-                test
+                testCase
                     "Row gap inherit"
-                    [GridRowGap.Inherit]
+                    [GridRowGap.inherit']
                     ["gridRowGap" ==> "inherit"]
-                test
+                testCase
                     "Row gap initial"
-                    [GridRowGap.Initial]
+                    [GridRowGap.initial]
                     ["gridRowGap" ==> "initial"]
-                test
+                testCase
                     "Row gap unset"
-                    [GridRowGap.Unset]
+                    [GridRowGap.unset]
                     ["gridRowGap" ==> "unset"]
-                test
+                testCase
                     "Column gap normal"
-                    [GridColumnGap.Normal]
+                    [GridColumnGap.normal]
                     ["gridColumnGap" ==> "normal"]
-                test
+                testCase
                     "Column gap px"
                     [GridColumnGap' (px 3)]
                     ["gridColumnGap" ==> "3px"]
-                test
+                testCase
                     "Column gap em"
                     [GridColumnGap' (em 2.5)]
                     ["gridColumnGap" ==> "2.5em"]
-                test
+                testCase
                     "Column gap percent"
                     [GridColumnGap' (pct 3)]
                     ["gridColumnGap" ==> "3%"]
-                test
+                testCase
                     "Column gap inherit"
-                    [GridColumnGap.Inherit]
+                    [GridColumnGap.inherit']
                     ["gridColumnGap" ==> "inherit"]
-                test
+                testCase
                     "Column gap initial"
-                    [GridColumnGap.Initial]
+                    [GridColumnGap.initial]
                     ["gridColumnGap" ==> "initial"]
-                test
+                testCase
                     "Column gap unset"
-                    [GridColumnGap.Unset]
+                    [GridColumnGap.unset]
                     ["gridColumnGap" ==> "unset"]
-                test
+                testCase
                     "Grid template row px"
                     [GridTemplateRows' (px 100)]
                     ["gridTemplateRows" ==> "100px"]
-                test
+                testCase
                     "Grid template row minmax"
-                    [GridTemplateRows.MinMax (px 100, fr 1.) ]
+                    [GridTemplateRows.minMax (px 100, fr 1.) ]
                     ["gridTemplateRows" ==> "minmax(100px, 1.00fr)"]
-                test
+                testCase
                     "Grid template row fit-content"
-                    [GridTemplateRows.FitContent(px 100)]
+                    [GridTemplateRows.fitContent(px 100)]
                     ["gridTemplateRows" ==> "fit-content(100px)"]
-                test
+                testCase
                     "Grid template row repeat"
-                    [GridTemplateRows.Repeat(3, px 200)]
+                    [GridTemplateRows.repeat(3, px 200)]
                     ["gridTemplateRows" ==> "repeat(3, 200px)"]
-                test
+                testCase
                     "Grid template row subgrid"
-                    [GridTemplateRows.Subgrid ]
+                    [GridTemplateRows.subgrid ]
                     ["gridTemplateRows" ==> "subgrid"]
-                test
+                testCase
                     "Grid template row masonry"
-                    [GridTemplateRows.Masonry ]
+                    [GridTemplateRows.masonry ]
                     ["gridTemplateRows" ==> "masonry"]
-                test
+                testCase
                     "Grid template row none"
-                    [GridTemplateRows.None]
+                    [GridTemplateRows.none]
                     ["gridTemplateRows" ==> "none"]
-                test
+                testCase
                     "Grid template row px repeat px"
-                    [GridTemplateRows.Values [ px 200; Grid.Repeat.Repeat(RepeatType.AutoFill, px 100); px 300]]
+                    [GridTemplateRows.values [ px 200; FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateRows" ==> "200px repeat(auto-fill, 100px) 300px"]
-                test
+                testCase
                     "Grid template row minmax repeat percent"
-                    [GridTemplateRows.Values [
-                        MinMax.MinMax(px 100, ContentSize.MaxContent)
-                        Repeat.Repeat(Grid.AutoFill, px 200); pct 20
+                    [GridTemplateRows.values [
+                        FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent)
+                        FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 200); pct 20
                     ]]
                     ["gridTemplateRows" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
-                test
+                testCase
                     "Grid template row auto"
-                    [GridTemplateRows.Auto]
+                    [GridTemplateRows.auto]
                     ["gridTemplateRows" ==> "auto"]
-                test
+                testCase
                     "Grid template row inherit"
-                    [GridTemplateRows.Inherit]
+                    [GridTemplateRows.inherit']
                     ["gridTemplateRows" ==> "inherit"]
-                test
+                testCase
                     "Grid template row initial"
-                    [GridTemplateRows.Initial]
+                    [GridTemplateRows.initial]
                     ["gridTemplateRows" ==> "initial"]
-                test
+                testCase
                     "Grid template row unset"
-                    [GridTemplateRows.Unset]
+                    [GridTemplateRows.unset]
                     ["gridTemplateRows" ==> "unset"]
-                test
+                testCase
                     "Grid template column px"
                     [GridTemplateColumns' (px 100)]
                     ["gridTemplateColumns" ==> "100px"]
-                test
+                testCase
                     "Grid template column minmax"
-                    [GridTemplateColumns.MinMax(px 100, fr 1.)]
+                    [GridTemplateColumns.minMax(px 100, fr 1.)]
                     ["gridTemplateColumns" ==> "minmax(100px, 1.00fr)"]
-                test
+                testCase
                     "Grid template column fit-content"
-                    [GridTemplateColumns.FitContent(px 100)]
+                    [GridTemplateColumns.fitContent(px 100)]
                     ["gridTemplateColumns" ==> "fit-content(100px)"]
-                test
+                testCase
                     "Grid template column repeat"
-                    [GridTemplateColumns.Repeat(3, px 200)]
+                    [GridTemplateColumns.repeat(3, px 200)]
                     ["gridTemplateColumns" ==> "repeat(3, 200px)"]
-                test
+                testCase
                     "Grid template column subgrid"
-                    [GridTemplateColumns.Subgrid]
+                    [GridTemplateColumns.subgrid]
                     ["gridTemplateColumns" ==> "subgrid"]
-                test
+                testCase
                     "Grid template column masonry"
-                    [GridTemplateColumns.Masonry]
+                    [GridTemplateColumns.masonry]
                     ["gridTemplateColumns" ==> "masonry"]
-                test
+                testCase
                     "Grid template column none"
-                    [GridTemplateColumns.None]
+                    [GridTemplateColumns.none]
                     ["gridTemplateColumns" ==> "none"]
-                test
+                testCase
                     "Grid template column px repeat px"
-                    [GridTemplateColumns.Values [px 200; Repeat.Repeat(Grid.AutoFill, px 100); px 300]]
+                    [GridTemplateColumns.values [px 200; FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
                     ["gridTemplateColumns" ==> "200px repeat(auto-fill, 100px) 300px"]
-                test
+                testCase
                     "Grid template column minmax repeat percent"
-                    [GridTemplateColumns.Values [ MinMax.MinMax(px 100, ContentSize.MaxContent); Repeat.Repeat(Grid.AutoFill, px 200); pct 20 ]]
+                    [GridTemplateColumns.values [ FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent); FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 200); pct 20 ]]
                     ["gridTemplateColumns" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
-                test
+                testCase
                     "Grid template column auto"
-                    [GridTemplateColumns.Auto]
+                    [GridTemplateColumns.auto]
                     ["gridTemplateColumns" ==> "auto"]
-                test
+                testCase
                     "Grid template column inherit"
-                    [GridTemplateColumns.Inherit]
+                    [GridTemplateColumns.inherit']
                     ["gridTemplateColumns" ==> "inherit"]
-                test
+                testCase
                     "Grid template column initial"
-                    [GridTemplateColumns.Initial]
+                    [GridTemplateColumns.initial]
                     ["gridTemplateColumns" ==> "initial"]
-                test
+                testCase
                     "Grid template column unset"
-                    [GridTemplateColumns.Unset]
+                    [GridTemplateColumns.unset]
                     ["gridTemplateColumns" ==> "unset"]
                 testString
-                    "Repeat value and fr"
-                    (string <| Repeat.Repeat(4, fr 1.))
+                    "Repeat value and percent"
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, fr 1.))
                     "GridRepeat (repeat(4, 1.00fr))"
                 testString
                     "Repeat value and percent"
-                    (string <| Repeat.Repeat(4, pct 60))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, pct 60))
                     "GridRepeat (repeat(4, 60%))"
                 testString
                     "Repeat value and pixels"
-                    (string <| Repeat.Repeat(4, px 250))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, px 250))
                     "GridRepeat (repeat(4, 250px))"
                 testString
                     "Repeat value and min-content"
-                    (string <| Repeat.Repeat(4, ContentSize.MinContent))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.ContentSize.MinContent))
                     "GridRepeat (repeat(4, min-content))"
                 testString
                     "Repeat value and max-content"
-                    (string <| Repeat.Repeat(4, ContentSize.MaxContent))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.ContentSize.MaxContent))
                     "GridRepeat (repeat(4, max-content))"
                 testString
                     "Repeat value and minmax"
-                    (string <| Repeat.Repeat(4, MinMax.MinMax(px 100, fr 1.)))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.Grid.MinMax.MinMax(px 100, fr 1.)))
                     "GridRepeat (repeat(4, minmax(100px, 1.00fr)))"
                 testString
                     "Repeat value and fit content"
-                    (string <| Repeat.Repeat(4, ContentSize.FitContent(px 100)))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.ContentSize.FitContent(px 100)))
                     "GridRepeat (repeat(4, fit-content(100px)))"
                 testString
-                    "Repeat value and px pct and auto"
-                    (string <| Repeat.Repeat(4, [px 10 :> ILengthPercentage; pct 30 :> ILengthPercentage]) )
-                    "GridRepeat (repeat(4, 10px 30%))"
-                testString
                     "Repeat value and min-content max-content"
-                    (string <| Repeat.Repeat(4, [ContentSize.MinContent; ContentSize.MaxContent]))
+                    (string <| FssTypes.Grid.Repeat.Repeat(4, [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent]))
                     "GridRepeat (repeat(4, min-content max-content))"
                 testString
                     "Repeat auto-fill and px"
-                    (string <| Repeat.Repeat(AutoFill, px 30))
+                    (string <| FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 30))
                     "GridRepeat (repeat(auto-fill, 30px))"
                 testString
                     "Repeat auto-fit and px"
-                    (string <| Repeat.Repeat(AutoFit, px 30))
+                    (string <| FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFit, px 30))
                     "GridRepeat (repeat(auto-fit, 30px))"
                 testString
                     "MinMax px and fraction"
-                    (string <| MinMax.MinMax(px 200, fr 1.5))
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 200, fr 1.5))
                     "MinMaxGrid (minmax(200px, 1.50fr))"
                 testString
                     "MinMax px and percent"
-                    (string <| MinMax.MinMax(px 400, pct 50))
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 400, pct 50))
                     "MinMaxGrid (minmax(400px, 50%))"
                 testString
                     "MinMax percent and px"
-                    (string <| MinMax.MinMax(pct 30, px 300))
+                    (string <| FssTypes.Grid.MinMax.MinMax(pct 30, px 300))
                     "MinMaxGrid (minmax(30%, 300px))"
                 testString
                     "MinMax px and max content"
-                    (string <| MinMax.MinMax(px 100, ContentSize.MaxContent))
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent))
                     "MinMaxGrid (minmax(100px, max-content))"
                 testString
                     "MinMax min content and px"
-                    (string <| MinMax.MinMax(ContentSize.MinContent, px 400))
+                    (string <| FssTypes.Grid.MinMax.MinMax(FssTypes.ContentSize.MinContent, px 400))
                     "MinMaxGrid (minmax(min-content, 400px))"
                 testString
                     "MinMax px and fr"
-                    (string <| MinMax.MinMax(px 200, fr 1.) )
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 200, fr 1.) )
                     "MinMaxGrid (minmax(200px, 1.00fr))"
                 testString
                     "MinMax percent and min content"
-                    (string <| MinMax.MinMax(pct 50, ContentSize.MinContent))
+                    (string <| FssTypes.Grid.MinMax.MinMax(pct 50, FssTypes.ContentSize.MinContent))
                     "MinMaxGrid (minmax(50%, min-content))"
                 testString
                     "MinMax percent and max content"
-                    (string <| MinMax.MinMax(px 300, ContentSize.MaxContent))
+                    (string <| FssTypes.Grid.MinMax.MinMax(px 300, FssTypes.ContentSize.MaxContent))
                     "MinMaxGrid (minmax(300px, max-content))"
                 testString
                     "MinMax pct and px"
-                    (string <| MinMax.MinMax(pct 30, px 300))
+                    (string <| FssTypes.Grid.MinMax.MinMax(pct 30, px 300))
                     "MinMaxGrid (minmax(30%, 300px))"
                 testString
                     "MinMax min content and px"
-                    (string <| MinMax.MinMax(ContentSize.MinContent, px 200))
+                    (string <| FssTypes.Grid.MinMax.MinMax(FssTypes.ContentSize.MinContent, px 200))
                     "MinMaxGrid (minmax(min-content, 200px))"
-                test
+                testCase
                     "Grid auto columns min content"
-                    [GridAutoColumns.MinContent]
+                    [GridAutoColumns.minContent]
                     ["gridAutoColumns" ==> "min-content"]
-                test
+                testCase
                     "Grid auto columns max content"
-                    [GridAutoColumns.MaxContent]
+                    [GridAutoColumns.maxContent]
                     ["gridAutoColumns" ==> "max-content"]
-                test
+                testCase
                     "Grid auto columns auto"
-                    [GridAutoColumns.Auto]
+                    [GridAutoColumns.auto]
                     ["gridAutoColumns" ==> "auto"]
-                test
+                testCase
                     "Grid auto columns px"
                     [GridAutoColumns' (px 100)]
                     ["gridAutoColumns" ==> "100px"]
-                test
+                testCase
                     "Grid auto columns cm"
                     [GridAutoColumns' (cm 20.)]
                     ["gridAutoColumns" ==> "20.0cm"]
-                test
+                testCase
                     "Grid auto columns vmax"
                     [GridAutoColumns' (vmax 50.)]
                     ["gridAutoColumns" ==> "50.0vmax"]
-                test
+                testCase
                     "Grid auto columns percent"
                     [GridAutoColumns' (pct 10)]
                     ["gridAutoColumns" ==> "10%"]
-                test
+                testCase
                     "Grid auto columns fr"
                     [GridAutoColumns' (fr 0.5)]
                     ["gridAutoColumns" ==> "0.50fr"]
-                test
+                testCase
                     "Grid auto columns fit content"
-                    [GridAutoColumns.FitContent(px 400) ]
+                    [GridAutoColumns.fitContent(px 400) ]
                     ["gridAutoColumns" ==> "fit-content(400px)"]
-                test
+                testCase
                     "Grid auto columns multiple with min-content max-content and auto"
-                    [ GridAutoColumns.Values [ContentSize.MinContent; ContentSize.MaxContent] ]
+                    [ GridAutoColumns.values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
                     ["gridAutoColumns" ==> "min-content max-content"]
-                test
+                testCase
                     "Grid auto columns multiple with pxs"
-                    [ GridAutoColumns.Values [px 100; px 150; px 390;] ]
+                    [ GridAutoColumns.values [px 100; px 150; px 390;] ]
                     ["gridAutoColumns" ==> "100px 150px 390px"]
-                test
+                testCase
                     "Grid auto columns multiple with percents"
-                    [ GridAutoColumns.Values [pct 10; pct 33] ]
+                    [ GridAutoColumns.values [pct 10; pct 33] ]
                     ["gridAutoColumns" ==> "10% 33%"]
-                test
+                testCase
                     "Grid auto columns multiple with fractions"
-                    [ GridAutoColumns.Values [fr 0.5; fr 3.; fr 1.] ]
+                    [ GridAutoColumns.values [fr 0.5; fr 3.; fr 1.] ]
                     ["gridAutoColumns" ==> "0.50fr 3.00fr 1.00fr"]
-                test
+                testCase
                     "Grid auto columns inherit"
-                    [GridAutoColumns.Inherit]
+                    [GridAutoColumns.inherit']
                     ["gridAutoColumns" ==> "inherit"]
-                test
+                testCase
                     "Grid auto columns initial"
-                    [GridAutoColumns.Initial]
+                    [GridAutoColumns.initial]
                     ["gridAutoColumns" ==> "initial"]
-                test
+                testCase
                     "Grid auto columns unset"
-                    [GridAutoColumns.Unset]
+                    [GridAutoColumns.unset]
                     ["gridAutoColumns" ==> "unset"]
-                test
+                testCase
                     "Grid auto rows min content"
-                    [GridAutoRows.MinContent]
+                    [GridAutoRows.minContent]
                     ["gridAutoRows" ==> "min-content"]
-                test
+                testCase
                     "Grid auto rows max content"
-                    [GridAutoRows.MaxContent]
+                    [GridAutoRows.maxContent]
                     ["gridAutoRows" ==> "max-content"]
-                test
+                testCase
                     "Grid auto rows auto"
-                    [GridAutoRows.Auto]
+                    [GridAutoRows.auto]
                     ["gridAutoRows" ==> "auto"]
-                test
+                testCase
                     "Grid auto rows px"
                     [GridAutoRows' (px 100)]
                     ["gridAutoRows" ==> "100px"]
-                test
+                testCase
                     "Grid auto rows cm"
                     [GridAutoRows' (cm 20.)]
                     ["gridAutoRows" ==> "20.0cm"]
-                test
+                testCase
                     "Grid auto rows vmax"
                     [GridAutoRows' (vmax 50.)]
                     ["gridAutoRows" ==> "50.0vmax"]
-                test
+                testCase
                     "Grid auto rows percent"
                     [GridAutoRows' (pct 10)]
                     ["gridAutoRows" ==> "10%"]
-                test
+                testCase
                     "Grid auto rows fr"
                     [GridAutoRows' (fr 0.5)]
                     ["gridAutoRows" ==> "0.50fr"]
-                test
+                testCase
                     "Grid auto rows fit content"
-                    [GridAutoRows.FitContent(px 400) ]
+                    [GridAutoRows.fitContent(px 400) ]
                     ["gridAutoRows" ==> "fit-content(400px)"]
-                test
+                testCase
                     "Grid auto rows multiple with min-content max-content and auto"
-                    [ GridAutoRows.Values [ContentSize.MinContent; ContentSize.MaxContent] ]
+                    [ GridAutoRows.values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
                     ["gridAutoRows" ==> "min-content max-content"]
-                test
+                testCase
                     "Grid auto rows multiple with pxs"
-                    [ GridAutoRows.Values [px 100; px 150; px 390;] ]
+                    [ GridAutoRows.values [px 100; px 150; px 390;] ]
                     ["gridAutoRows" ==> "100px 150px 390px"]
-                test
+                testCase
                     "Grid auto rows multiple with percents"
-                    [ GridAutoRows.Values [pct 10; pct 33] ]
+                    [ GridAutoRows.values [pct 10; pct 33] ]
                     ["gridAutoRows" ==> "10% 33%"]
-                test
+                testCase
                     "Grid auto rows multiple with fractions"
-                    [ GridAutoRows.Values [fr 0.5; fr 3.; fr 1.] ]
+                    [ GridAutoRows.values [fr 0.5; fr 3.; fr 1.] ]
                     ["gridAutoRows" ==> "0.50fr 3.00fr 1.00fr"]
-                test
+                testCase
                     "Grid auto rows inherit"
-                    [GridAutoRows.Inherit]
+                    [GridAutoRows.inherit']
                     ["gridAutoRows" ==> "inherit"]
-                test
+                testCase
                     "Grid auto rows initial"
-                    [GridAutoRows.Initial]
+                    [GridAutoRows.initial]
                     ["gridAutoRows" ==> "initial"]
-                test
+                testCase
                     "Grid auto rows unset"
-                    [GridAutoRows.Unset]
+                    [GridAutoRows.unset]
                     ["gridAutoRows" ==> "unset"]
-                test
+                testCase
                     "Grid auto flow rows"
-                    [GridAutoFlow.Row]
+                    [GridAutoFlow.row]
                     ["gridAutoFlow" ==> "row"]
-                test
+                testCase
                     "Grid auto flow columns"
-                    [GridAutoFlow.Column]
+                    [GridAutoFlow.column]
                     ["gridAutoFlow" ==> "column"]
-                test
+                testCase
                     "Grid auto flow dense"
-                    [GridAutoFlow.Dense]
+                    [GridAutoFlow.dense]
                     ["gridAutoFlow" ==> "dense"]
-                test
+                testCase
                     "Grid auto flow rows dense"
-                    [GridAutoFlow.RowDense]
+                    [GridAutoFlow.rowDense]
                     ["gridAutoFlow" ==> "row dense"]
-                test
+                testCase
                     "Grid auto flow columns dense"
-                    [GridAutoFlow.ColumnDense]
+                    [GridAutoFlow.columnDense]
                     ["gridAutoFlow" ==> "column dense"]
-                test
+                testCase
                     "Grid auto flow inherit"
-                    [GridAutoFlow.Inherit]
+                    [GridAutoFlow.inherit']
                     ["gridAutoFlow" ==> "inherit"]
-                test
+                testCase
                     "Grid auto flow initial"
-                    [GridAutoFlow.Initial]
+                    [GridAutoFlow.initial]
                     ["gridAutoFlow" ==> "initial"]
-                test
+                testCase
                     "Grid auto flow unset"
-                    [GridAutoFlow.Unset]
+                    [GridAutoFlow.unset]
                     ["gridAutoFlow" ==> "unset"]
-                test
+                testCase
                     "Grid template areas None"
-                    [GridTemplateAreas.None]
+                    [GridTemplateAreas.none]
                     ["gridTemplateAreas" ==> "none"]
-                test
+                testCase
                     "Grid template areas strings"
-                    [GridTemplateAreas.Value [ "a"; "b"  ] ]
+                    [GridTemplateAreas.value [ "a"; "b"  ] ]
                     ["gridTemplateAreas" ==> "\"a b\""]
-                test
+                testCase
                     "Grid template areas multiple strings"
-                    [GridTemplateAreas.Value
+                    [GridTemplateAreas.value
                          [
                             [ "header";  "header";  "header";  "header" ]
                             [ "main";  "main";  ".";  "sidebar" ]
@@ -698,16 +694,16 @@ module Grid =
                         ]
                     ]
                     ["gridTemplateAreas" ==> "\"header header header header\" \"main main . sidebar\" \"footer footer footer footer\""]
-                test
+                testCase
                     "Grid template areas inherit"
-                    [GridTemplateAreas.Inherit ]
+                    [GridTemplateAreas.inherit' ]
                     ["gridTemplateAreas" ==> "inherit"]
-                test
+                testCase
                     "Grid template areas initial"
-                    [GridTemplateAreas.Initial]
+                    [GridTemplateAreas.initial]
                     ["gridTemplateAreas" ==> "initial"]
-                test
+                testCase
                     "Grid template areas multiple unset"
-                    [GridTemplateAreas.Unset]
+                    [GridTemplateAreas.unset]
                     ["gridTemplateAreas" ==> "unset"]
             ]

@@ -1,8 +1,7 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
-open Fss.Word
 open Utils
 open Fss
 
@@ -10,276 +9,276 @@ module Appearance =
     let tests =
         testList "Appearance"
             [
-                test
+                testCase
                     "Appearance push button"
-                    [Appearance.PushButton]
+                    [Appearance.pushButton]
                     ["appearance" ==> "push-button"]
-                test
+                testCase
                     "Appearance square button"
-                    [Appearance.SquareButton]
+                    [Appearance.squareButton]
                     ["appearance" ==> "square-button"]
-                test
+                testCase
                     "Appearance button"
-                    [Appearance.Button]
+                    [Appearance.button]
                     ["appearance" ==> "button"]
-                test
+                testCase
                     "Appearance button bevel"
-                    [Appearance.ButtonBevel]
+                    [Appearance.buttonBevel]
                     ["appearance" ==> "button-bevel"]
-                test
+                testCase
                     "Appearance list-box"
-                    [Appearance.Listbox]
+                    [Appearance.listbox]
                     ["appearance" ==> "listbox"]
-                test
+                testCase
                     "Appearance list-item"
-                    [Appearance.Listitem]
+                    [Appearance.listitem]
                     ["appearance" ==> "listitem"]
-                test
+                testCase
                     "Appearance menulist"
-                    [Appearance.Menulist]
+                    [Appearance.menulist]
                     ["appearance" ==> "menulist"]
-                test
+                testCase
                     "Appearance menulist-button"
-                    [Appearance.MenulistButton]
+                    [Appearance.menulistButton]
                     ["appearance" ==> "menulist-button"]
-                test
+                testCase
                     "Appearance menulist-text"
-                    [Appearance.MenulistText]
+                    [Appearance.menulistText]
                     ["appearance" ==> "menulist-text"]
-                test
+                testCase
                     "Appearance menulist-textfield"
-                    [Appearance.MenulistTextfield]
+                    [Appearance.menulistTextfield]
                     ["appearance" ==> "menulist-textfield"]
-                test
+                testCase
                     "Appearance menupopup"
-                    [Appearance.Menupopup]
+                    [Appearance.menupopup]
                     ["appearance" ==> "menupopup"]
-                test
+                testCase
                     "Appearance scrollbarbutton-up"
-                    [Appearance.ScrollbarbuttonUp]
+                    [Appearance.scrollbarbuttonUp]
                     ["appearance" ==> "scrollbarbutton-up"]
-                test
+                testCase
                     "Appearance scrollbarbutton down"
-                    [Appearance.ScrollbarbuttonDown]
+                    [Appearance.scrollbarbuttonDown]
                     ["appearance" ==> "scrollbarbutton-down"]
-                test
+                testCase
                     "Appearance scrollbarbutton left"
-                    [Appearance.ScrollbarbuttonLeft]
+                    [Appearance.scrollbarbuttonLeft]
                     ["appearance" ==> "scrollbarbutton-left"]
-                test
+                testCase
                     "Appearance scrollbarbutton"
-                    [Appearance.ScrollbarbuttonRight]
+                    [Appearance.scrollbarbuttonRight]
                     ["appearance" ==> "scrollbarbutton-right"]
-                test
+                testCase
                     "Appearance scrollbartrack-horizontal"
-                    [Appearance.ScrollbartrackHorizontal]
+                    [Appearance.scrollbartrackHorizontal]
                     ["appearance" ==> "scrollbartrack-horizontal"]
-                test
+                testCase
                     "Appearance scrollbartrack-vertical"
-                    [Appearance.ScrollbartrackVertical]
+                    [Appearance.scrollbartrackVertical]
                     ["appearance" ==> "scrollbartrack-vertical"]
-                test
+                testCase
                     "Appearance scrollbarthumb-horizontal"
-                    [Appearance.ScrollbarthumbHorizontal]
+                    [Appearance.scrollbarthumbHorizontal]
                     ["appearance" ==> "scrollbarthumb-horizontal"]
-                test
+                testCase
                     "Appearance scrollbarthumb-vertical"
-                    [Appearance.ScrollbarthumbVertical]
+                    [Appearance.scrollbarthumbVertical]
                     ["appearance" ==> "scrollbarthumb-vertical"]
-                test
+                testCase
                     "Appearance scrollbargripper-horizontal"
-                    [Appearance.ScrollbargripperHorizontal]
+                    [Appearance.scrollbargripperHorizontal]
                     ["appearance" ==> "scrollbargripper-horizontal"]
-                test
+                testCase
                     "Appearance scrollbargripper-vertical"
-                    [Appearance.ScrollbargripperVertical]
+                    [Appearance.scrollbargripperVertical]
                     ["appearance" ==> "scrollbargripper-vertical"]
-                test
+                testCase
                     "Appearance slider-horizontal"
-                    [Appearance.SliderHorizontal]
+                    [Appearance.sliderHorizontal]
                     ["appearance" ==> "slider-horizontal"]
-                test
+                testCase
                     "Appearance slider-vertical"
-                    [Appearance.SliderVertical]
+                    [Appearance.sliderVertical]
                     ["appearance" ==> "slider-vertical"]
-                test
+                testCase
                     "Appearance sliderthumb-horizontal"
-                    [Appearance.SliderthumbHorizontal]
+                    [Appearance.sliderthumbHorizontal]
                     ["appearance" ==> "sliderthumb-horizontal"]
-                test
+                testCase
                     "Appearance sliderthumb-vertical"
-                    [Appearance.SliderthumbVertical]
+                    [Appearance.sliderthumbVertical]
                     ["appearance" ==> "sliderthumb-vertical"]
-                test
+                testCase
                     "Appearance caret"
-                    [Appearance.Caret]
+                    [Appearance.caret]
                     ["appearance" ==> "caret"]
-                test
+                testCase
                     "Appearance searchfield"
-                    [Appearance.Searchfield]
+                    [Appearance.searchfield]
                     ["appearance" ==> "searchfield"]
-                test
+                testCase
                     "Appearance searchfield-decoration"
-                    [Appearance.SearchfieldDecoration]
+                    [Appearance.searchfieldDecoration]
                     ["appearance" ==> "searchfield-decoration"]
-                test
+                testCase
                     "Appearance searchfield-results-decoration"
-                    [Appearance.SearchfieldResultsDecoration]
+                    [Appearance.searchfieldResultsDecoration]
                     ["appearance" ==> "searchfield-results-decoration"]
-                test
+                testCase
                     "Appearance searchfield-results-button"
-                    [Appearance.SearchfieldResultsButton]
+                    [Appearance.searchfieldResultsButton]
                     ["appearance" ==> "searchfield-results-button"]
-                test
+                testCase
                     "Appearance searchfield-cancel-button"
-                    [Appearance.SearchfieldCancelButton]
+                    [Appearance.searchfieldCancelButton]
                     ["appearance" ==> "searchfield-cancel-button"]
-                test
+                testCase
                     "Appearance textfield"
-                    [Appearance.Textfield]
+                    [Appearance.textfield]
                     ["appearance" ==> "textfield"]
-                test
+                testCase
                     "Appearance textarea"
-                    [Appearance.Textarea]
+                    [Appearance.textarea]
                     ["appearance" ==> "textarea"]
-                test
+                testCase
                     "Appearance checkbox"
-                    [Appearance.Checkbox]
+                    [Appearance.checkbox]
                     ["appearance" ==> "checkbox"]
-                test
+                testCase
                     "Appearance checkbox-container"
-                    [Appearance.CheckboxContainer]
+                    [Appearance.checkboxContainer]
                     ["appearance" ==> "checkbox-container"]
-                test
+                testCase
                     "Appearance checkbox-small"
-                    [Appearance.CheckboxSmall]
+                    [Appearance.checkboxSmall]
                     ["appearance" ==> "checkbox-small"]
-                test
+                testCase
                     "Appearance dialog"
-                    [Appearance.Dialog]
+                    [Appearance.dialog]
                     ["appearance" ==> "dialog"]
-                test
+                testCase
                     "Appearance menuitem"
-                    [Appearance.Menuitem]
+                    [Appearance.menuitem]
                     ["appearance" ==> "menuitem"]
-                test
+                testCase
                     "Appearance progressbar"
-                    [Appearance.Progressbar]
+                    [Appearance.progressbar]
                     ["appearance" ==> "progressbar"]
-                test
+                testCase
                     "Appearance radio"
-                    [Appearance.Radio]
+                    [Appearance.radio]
                     ["appearance" ==> "radio"]
-                test
+                testCase
                     "Appearance radio-container"
-                    [Appearance.RadioContainer]
+                    [Appearance.radioContainer]
                     ["appearance" ==> "radio-container"]
-                test
+                testCase
                     "Appearance radio-small"
-                    [Appearance.RadioSmall]
+                    [Appearance.radioSmall]
                     ["appearance" ==> "radio-small"]
-                test
+                testCase
                     "Appearance "
-                    [Appearance.Resizer]
+                    [Appearance.resizer]
                     ["appearance" ==> "resizer"]
-                test
+                testCase
                     "Appearance scrollbar"
-                    [Appearance.Scrollbar]
+                    [Appearance.scrollbar]
                     ["appearance" ==> "scrollbar"]
-                test
+                testCase
                     "Appearance separator"
-                    [Appearance.Separator]
+                    [Appearance.separator]
                     ["appearance" ==> "separator"]
-                test
+                testCase
                     "Appearance statusbar"
-                    [Appearance.Statusbar]
+                    [Appearance.statusbar]
                     ["appearance" ==> "statusbar"]
-                test
+                testCase
                     "Appearance tab"
-                    [Appearance.Tab]
+                    [Appearance.tab]
                     ["appearance" ==> "tab"]
-                test
+                testCase
                     "Appearance tabpanels"
-                    [Appearance.Tabpanels]
+                    [Appearance.tabpanels]
                     ["appearance" ==> "tabpanels"]
-                test
+                testCase
                     "Appearance textfield-multiline"
-                    [Appearance.TextfieldMultiline]
+                    [Appearance.textfieldMultiline]
                     ["appearance" ==> "textfield-multiline"]
-                test
+                testCase
                     "Appearance toolbar"
-                    [Appearance.Toolbar]
+                    [Appearance.toolbar]
                     ["appearance" ==> "toolbar"]
-                test
+                testCase
                     "Appearance toolbarbutton"
-                    [Appearance.Toolbarbutton]
+                    [Appearance.toolbarbutton]
                     ["appearance" ==> "toolbarbutton"]
-                test
+                testCase
                     "Appearance toolbox"
-                    [Appearance.Toolbox]
+                    [Appearance.toolbox]
                     ["appearance" ==> "toolbox"]
-                test
+                testCase
                     "Appearance moz-mac-unified-toolbar"
-                    [Appearance.MozMacUnifiedToolbar]
+                    [Appearance.mozMacUnifiedToolbar]
                     ["appearance" ==> "moz-mac-unified-toolbar"]
-                test
+                testCase
                     "Appearance moz-win-borderless-glass"
-                    [Appearance.MozWinBorderlessGlass]
+                    [Appearance.mozWinBorderlessGlass]
                     ["appearance" ==> "moz-win-borderless-glass"]
-                test
+                testCase
                     "Appearance moz-win-browsertabbar-toolbox"
-                    [Appearance.MozWinBrowsertabbarToolbox]
+                    [Appearance.mozWinBrowsertabbarToolbox]
                     ["appearance" ==> "moz-win-browsertabbar-toolbox"]
-                test
+                testCase
                     "Appearance moz-win-communications-toolbox"
-                    [Appearance.MozWinCommunicationsToolbox]
+                    [Appearance.mozWinCommunicationsToolbox]
                     ["appearance" ==> "moz-win-communications-toolbox"]
-                test
+                testCase
                     "Appearance moz-win-glass"
-                    [Appearance.MozWinGlass]
+                    [Appearance.mozWinGlass]
                     ["appearance" ==> "moz-win-glass"]
-                test
+                testCase
                     "Appearance moz-win-media-toolbox"
-                    [Appearance.MozWinMediaToolbox]
+                    [Appearance.mozWinMediaToolbox]
                     ["appearance" ==> "moz-win-media-toolbox"]
-                test
+                testCase
                     "Appearance tooltip"
-                    [Appearance.Tooltip]
+                    [Appearance.tooltip]
                     ["appearance" ==> "tooltip"]
-                test
+                testCase
                     "Appearance treeheadercell"
-                    [Appearance.Treeheadercell]
+                    [Appearance.treeheadercell]
                     ["appearance" ==> "treeheadercell"]
-                test
+                testCase
                     "Appearance treeheadersortarrow"
-                    [Appearance.Treeheadersortarrow]
+                    [Appearance.treeheadersortarrow]
                     ["appearance" ==> "treeheadersortarrow"]
-                test
+                testCase
                     "Appearance treeitem"
-                    [Appearance.Treeitem]
+                    [Appearance.treeitem]
                     ["appearance" ==> "treeitem"]
-                test
+                testCase
                     "Appearance treetwisty"
-                    [Appearance.Treetwisty]
+                    [Appearance.treetwisty]
                     ["appearance" ==> "treetwisty"]
-                test
+                testCase
                     "Appearance treetwistyopen"
-                    [Appearance.Treetwistyopen]
+                    [Appearance.treetwistyopen]
                     ["appearance" ==> "treetwistyopen"]
-                test
+                testCase
                     "Appearance treeview"
-                    [Appearance.Treeview]
+                    [Appearance.treeview]
                     ["appearance" ==> "treeview"]
-                test
+                testCase
                     "Appearance window"
-                    [Appearance.Window]
+                    [Appearance.window]
                     ["appearance" ==> "window"]
-                test
+                testCase
                     "Apperance none"
-                    [Appearance.None]
+                    [Appearance.none]
                     ["appearance" ==> "none"]
-                test
+                testCase
                     "Apperance auto"
-                    [Appearance.Auto]
+                    [Appearance.auto]
                     ["appearance" ==> "auto"]
             ]

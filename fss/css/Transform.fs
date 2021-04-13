@@ -1,241 +1,193 @@
 ﻿namespace Fss
 
-[<RequireQualifiedAccess>]
-module TransformType =
-    type Transform =
-        | Matrix of float * float * float * float * float * float
-        | Matrix3D of int * int * int * int * int * int * int * int * int * int * int * int * float * float * float * float
-        | Perspective of Units.Size.Size
-        | Rotate of Units.Angle.Angle
-        | Rotate3D of float * float * float * Units.Angle.Angle
-        | RotateX of Units.Angle.Angle
-        | RotateY of Units.Angle.Angle
-        | RotateZ of Units.Angle.Angle
-        | Translate of ILengthPercentage
-        | Translate2 of ILengthPercentage * ILengthPercentage
-        | Translate3D of ILengthPercentage * ILengthPercentage * ILengthPercentage
-        | TranslateX of ILengthPercentage
-        | TranslateY of ILengthPercentage
-        | TranslateZ of ILengthPercentage
-        | Scale of float
-        | Scale2 of float * float
-        | Scale3D of float * float * float
-        | ScaleX of float
-        | ScaleY of float
-        | ScaleZ of float
-        | Skew of Units.Angle.Angle
-        | Skew2 of Units.Angle.Angle * Units.Angle.Angle
-        | SkewX of Units.Angle.Angle
-        | SkewY of Units.Angle.Angle
-        interface ITransform
-
-    type TransformOrigin =
-        | Top
-        | Left
-        | Right
-        | Bottom
-        | Center
-        interface ITransformOrigin
-
-    type TransformStyle =
-        | Flat
-        | Preserve3d
-        interface ITransformStyle
+open Fable.Core
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/transform
 [<AutoOpen>]
 module Transform =
-    let private transformToString (transform: ITransform) =
+    let private transformToString (transform: FssTypes.ITransform) =
         let stringifyTransform = function
-           | TransformType.Matrix (a, b, c, d, e, f) ->
+           | FssTypes.Transform.Matrix (a, b, c, d, e, f) ->
                sprintf "matrix(%.1f, %.1f, %.1f, %.1f, %.1f, %.1f)" a b c d e f
-           | TransformType.Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
+           | FssTypes.Transform.Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
                sprintf "matrix3d(%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.1f)" a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 a4 b4 c4 d4
-           | TransformType.Perspective size -> sprintf "perspective(%s)" <| Units.Size.value size
-           | TransformType.Rotate angle -> sprintf "rotate(%s)" <| Units.Angle.value angle
-           | TransformType.Rotate3D (a, b, c, angle) -> sprintf "rotate3d(%.1f, %.1f, %.1f, %s)" a b c (Units.Angle.value angle)
-           | TransformType.RotateX angle -> sprintf "rotateX(%s)" <| Units.Angle.value angle
-           | TransformType.RotateY angle -> sprintf "rotateY(%s)" <| Units.Angle.value angle
-           | TransformType.RotateZ angle -> sprintf "rotateZ(%s)" <| Units.Angle.value angle
-           | TransformType.Translate size -> sprintf "translate(%s)" (Units.LengthPercentage.value size)
-           | TransformType.Translate2 (sx, sy) -> sprintf "translate(%s, %s)" (Units.LengthPercentage.value sx) (Units.LengthPercentage.value sy)
-           | TransformType.Translate3D (size1, size2, size3) -> sprintf "translate3d(%s, %s, %s)" (Units.LengthPercentage.value size1) (Units.LengthPercentage.value size2) (Units.LengthPercentage.value size3)
-           | TransformType.TranslateX size -> sprintf "translateX(%s)" <| Units.LengthPercentage.value size
-           | TransformType.TranslateY size -> sprintf "translateY(%s)" <| Units.LengthPercentage.value size
-           | TransformType.TranslateZ size -> sprintf "translateZ(%s)" <| Units.LengthPercentage.value size
-           | TransformType.Scale n -> sprintf "scale(%.2f)" n
-           | TransformType.Scale2 (sx, sy) -> sprintf "scale(%.2f, %.2f)" sx sy
-           | TransformType.Scale3D (n1, n2, n3) -> sprintf "scale3d(%.2f, %.2f, %.2f)" n1 n2 n3
-           | TransformType.ScaleX n -> sprintf "scaleX(%.2f)" n
-           | TransformType.ScaleY n -> sprintf "scaleY(%.2f)" n
-           | TransformType.ScaleZ n -> sprintf "scaleZ(%.2f)" n
-           | TransformType.Skew a -> sprintf "skew(%s)" (Units.Angle.value a)
-           | TransformType.Skew2 (ax, ay) -> sprintf "skew(%s, %s)" (Units.Angle.value ax) (Units.Angle.value ay)
-           | TransformType.SkewX a -> sprintf "skewX(%s)" <| Units.Angle.value a
-           | TransformType.SkewY a -> sprintf "skewY(%s)" <| Units.Angle.value a
+           | FssTypes.Transform.Perspective size -> sprintf "perspective(%s)" <| FssTypes.unitHelpers.sizeToString size
+           | FssTypes.Transform.Rotate angle -> sprintf "rotate(%s)" <| FssTypes.unitHelpers.angleToString angle
+           | FssTypes.Transform.Rotate3D (a, b, c, angle) -> sprintf "rotate3d(%.1f, %.1f, %.1f, %s)" a b c (FssTypes.unitHelpers.angleToString angle)
+           | FssTypes.Transform.RotateX angle -> sprintf "rotateX(%s)" <| FssTypes.unitHelpers.angleToString angle
+           | FssTypes.Transform.RotateY angle -> sprintf "rotateY(%s)" <| FssTypes.unitHelpers.angleToString angle
+           | FssTypes.Transform.RotateZ angle -> sprintf "rotateZ(%s)" <| FssTypes.unitHelpers.angleToString angle
+           | FssTypes.Transform.Translate size -> sprintf "translate(%s)" (FssTypes.unitHelpers.lengthPercentageToString size)
+           | FssTypes.Transform.Translate2 (sx, sy) -> sprintf "translate(%s, %s)" (FssTypes.unitHelpers.lengthPercentageToString sx) (FssTypes.unitHelpers.lengthPercentageToString sy)
+           | FssTypes.Transform.Translate3D (size1, size2, size3) -> sprintf "translate3d(%s, %s, %s)" (FssTypes.unitHelpers.lengthPercentageToString size1) (FssTypes.unitHelpers.lengthPercentageToString size2) (FssTypes.unitHelpers.lengthPercentageToString size3)
+           | FssTypes.Transform.TranslateX size -> sprintf "translateX(%s)" <| FssTypes.unitHelpers.lengthPercentageToString size
+           | FssTypes.Transform.TranslateY size -> sprintf "translateY(%s)" <| FssTypes.unitHelpers.lengthPercentageToString size
+           | FssTypes.Transform.TranslateZ size -> sprintf "translateZ(%s)" <| FssTypes.unitHelpers.lengthPercentageToString size
+           | FssTypes.Transform.Scale n -> sprintf "scale(%.2f)" n
+           | FssTypes.Transform.Scale2 (sx, sy) -> sprintf "scale(%.2f, %.2f)" sx sy
+           | FssTypes.Transform.Scale3D (n1, n2, n3) -> sprintf "scale3d(%.2f, %.2f, %.2f)" n1 n2 n3
+           | FssTypes.Transform.ScaleX n -> sprintf "scaleX(%.2f)" n
+           | FssTypes.Transform.ScaleY n -> sprintf "scaleY(%.2f)" n
+           | FssTypes.Transform.ScaleZ n -> sprintf "scaleZ(%.2f)" n
+           | FssTypes.Transform.Skew a -> sprintf "skew(%s)" (FssTypes.unitHelpers.angleToString a)
+           | FssTypes.Transform.Skew2 (ax, ay) -> sprintf "skew(%s, %s)" (FssTypes.unitHelpers.angleToString ax) (FssTypes.unitHelpers.angleToString ay)
+           | FssTypes.Transform.SkewX a -> sprintf "skewX(%s)" <| FssTypes.unitHelpers.angleToString a
+           | FssTypes.Transform.SkewY a -> sprintf "skewY(%s)" <| FssTypes.unitHelpers.angleToString a
 
         match transform with
-        | :? TransformType.Transform as t -> stringifyTransform t
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? FssTypes.Transform.Transform as t -> stringifyTransform t
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown transform value"
 
-    let private originToString (origin: ITransformOrigin) =
+    let private originToString (origin: FssTypes.ITransformOrigin) =
         match origin with
-        | :? TransformType.TransformOrigin as t -> Utilities.Helpers.duToLowercase t
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.Transform.Origin as t -> Utilities.Helpers.duToLowercase t
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transform origin"
 
-    let private styleToString (origin: ITransformStyle) =
+    let private styleToString (origin: FssTypes.ITransformStyle) =
         match origin with
-        | :? TransformType.TransformStyle as t -> Utilities.Helpers.duToLowercase t
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.Transform.Style as t -> Utilities.Helpers.duToLowercase t
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown transform style"
 
-    let private transformValue value = PropertyValue.cssValue Property.Transform value
-    let private transformValue' value =
-        value
-        |> transformToString
-        |> transformValue
+    let private transformValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Transform
+    let private transformValue': (FssTypes.ITransform -> FssTypes.CssProperty) = transformToString >> transformValue
 
+    [<Erase>]
     type Transform =
-        static member Matrix (n1: float, n2: float, n3: float, n4: float, n5: float, n6: float) =
-            TransformType.Matrix(n1,n2,n3,n4,n5,n6)
-        static member Matrix3D
+        static member matrix (n1: float, n2: float, n3: float, n4: float, n5: float, n6: float) =
+            FssTypes.Transform.Matrix(n1,n2,n3,n4,n5,n6)
+        static member matrix3D
             (a1: int, b1: int, c1: int, d1: int,
              a2: int, b2: int, c2: int, d2: int,
              a3: int, b3: int, c3: int, d3: int,
              a4: float, b4: float, c4: float, d4: float) =
-             TransformType.Matrix3D(a1, b1, c1, d1,
+             FssTypes.Transform.Matrix3D(a1, b1, c1, d1,
                       a2, b2, c2, d2,
                       a3, b3, c3, d3,
                       a4, b4, c4, d4)
-        static member Perspective (value: Units.Size.Size) =
-            TransformType.Perspective value
-        static member Rotate (angle: Units.Angle.Angle) =
-            TransformType.Rotate angle
-        static member Rotate3D (n1: float, n2: float, n3: float, angle: Units.Angle.Angle) =
-            TransformType.Rotate3D(n1,n2,n3,angle)
-        static member RotateX (angle: Units.Angle.Angle) =
-            TransformType.RotateX angle
-        static member RotateY (angle: Units.Angle.Angle) =
-            TransformType.RotateY angle
-        static member RotateZ (angle: Units.Angle.Angle) =
-            TransformType.RotateZ angle
-        static member Translate (value: ILengthPercentage) =
-            TransformType.Translate value
-        static member Translate (x: ILengthPercentage, y: ILengthPercentage) =
-            TransformType.Translate2(x,y)
-        static member Translate3D (x: ILengthPercentage, y: ILengthPercentage, z: ILengthPercentage) =
-            TransformType.Translate3D(x,y,z)
-        static member TranslateX (x: ILengthPercentage) =
-            TransformType.TranslateX x
-        static member TranslateY (y: ILengthPercentage) =
-            TransformType.TranslateY y
-        static member TranslateZ (z: ILengthPercentage) =
-            TransformType.TranslateZ z
-        static member Scale (value: float) =
-            TransformType.Scale value
-        static member Scale (x: float, y: float) =
-            TransformType.Scale2(x,y)
-        static member Scale3D (x: float, y: float, z: float) =
-            TransformType.Scale3D (x,y,z)
-        static member ScaleX (x: float) =
-            TransformType.ScaleX x
-        static member ScaleY (y: float) =
-            TransformType.ScaleY y
-        static member ScaleZ (z: float) =
-            TransformType.ScaleZ z
-        static member Skew (angle: Units.Angle.Angle) =
-            TransformType.Skew angle
-        static member Skew (x: Units.Angle.Angle, y: Units.Angle.Angle) =
-            TransformType.Skew2(x,y)
-        static member SkewX (x: Units.Angle.Angle) =
-            TransformType.SkewX x
-        static member SkewY (y: Units.Angle.Angle) =
-            TransformType.SkewY y
+        static member perspective (value: FssTypes.Length) =
+            FssTypes.Transform.Perspective value
+        static member rotate (angle: FssTypes.Angle) =
+            FssTypes.Transform.Rotate angle
+        static member rotate3D (n1: float, n2: float, n3: float, angle: FssTypes.Angle) =
+            FssTypes.Transform.Rotate3D(n1,n2,n3,angle)
+        static member rotateX (angle: FssTypes.Angle) =
+            FssTypes.Transform.RotateX angle
+        static member rotateY (angle: FssTypes.Angle) =
+            FssTypes.Transform.RotateY angle
+        static member rotateZ (angle: FssTypes.Angle) =
+            FssTypes.Transform.RotateZ angle
+        static member translate (value: FssTypes.ILengthPercentage) =
+            FssTypes.Transform.Translate value
+        static member translate (x: FssTypes.ILengthPercentage, y: FssTypes.ILengthPercentage) =
+            FssTypes.Transform.Translate2(x,y)
+        static member translate3D (x: FssTypes.ILengthPercentage, y: FssTypes.ILengthPercentage, z: FssTypes.ILengthPercentage) =
+            FssTypes.Transform.Translate3D(x,y,z)
+        static member translateX (x: FssTypes.ILengthPercentage) =
+            FssTypes.Transform.TranslateX x
+        static member translateY (y: FssTypes.ILengthPercentage) =
+            FssTypes.Transform.TranslateY y
+        static member translateZ (z: FssTypes.ILengthPercentage) =
+            FssTypes.Transform.TranslateZ z
+        static member scale (value: float) =
+            FssTypes.Transform.Scale value
+        static member scale (x: float, y: float) =
+            FssTypes.Transform.Scale2(x,y)
+        static member scale3D (x: float, y: float, z: float) =
+            FssTypes.Transform.Scale3D (x,y,z)
+        static member scaleX (x: float) =
+            FssTypes.Transform.ScaleX x
+        static member scaleY (y: float) =
+            FssTypes.Transform.ScaleY y
+        static member scaleZ (z: float) =
+            FssTypes.Transform.ScaleZ z
+        static member skew (angle: FssTypes.Angle) =
+            FssTypes.Transform.Skew angle
+        static member skew (x: FssTypes.Angle, y: FssTypes.Angle) =
+            FssTypes.Transform.Skew2(x,y)
+        static member skewX (x: FssTypes.Angle) =
+            FssTypes.Transform.SkewX x
+        static member skewY (y: FssTypes.Angle) =
+            FssTypes.Transform.SkewY y
 
-        static member None = None' |> transformValue'
-        static member Inherit = Inherit |> transformValue'
-        static member Initial = Initial |> transformValue'
-        static member Unset = Unset |> transformValue'
+        static member none = FssTypes.None' |> transformValue'
+        static member inherit' = FssTypes.Inherit |> transformValue'
+        static member initial = FssTypes.Initial |> transformValue'
+        static member unset = FssTypes.Unset |> transformValue'
 
 
     /// Supply a list of transforms to be applied to the element.
-    let Transforms (transforms: TransformType.Transform list): CSSProperty =
+    let Transforms (transforms: FssTypes.Transform.Transform list): FssTypes.CssProperty =
         transforms
         |> Utilities.Helpers.combineWs transformToString
         |> transformValue
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
-    let private originValue value = PropertyValue.cssValue Property.TransformOrigin value
-    let private originValue' value =
-        value
-        |> originToString
-        |> originValue
+    let private originValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransformOrigin
+    let private originValue' = originToString >> originValue
+
+    [<Erase>]
+    /// Specifies the origin of an elements transformation.
     type TransformOrigin =
-        static member Value (value: ITransformOrigin) = value |> originValue'
-        static member Value (xOffset: ITransformOrigin, yOffset: ITransformOrigin) =
+        static member value (value: FssTypes.ITransformOrigin) = value |> originValue'
+        static member value (xOffset: FssTypes.ITransformOrigin, yOffset: FssTypes.ITransformOrigin) =
             sprintf "%s %s"
                 (originToString xOffset)
                 (originToString yOffset)
             |> originValue
-        static member Value (xOffset: ITransformOrigin, yOffset: ITransformOrigin, zOffset: ITransformOrigin) =
+        static member value (xOffset: FssTypes.ITransformOrigin, yOffset: FssTypes.ITransformOrigin, zOffset: FssTypes.ITransformOrigin) =
             sprintf "%s %s %s"
                 (originToString xOffset)
                 (originToString yOffset)
                 (originToString zOffset)
             |> originValue
 
-        static member Top = TransformType.Top |> originValue'
-        static member Left = TransformType.Left |> originValue'
-        static member Right = TransformType.Right |> originValue'
-        static member Bottom = TransformType.Bottom |> originValue'
-        static member Center = TransformType.Center |> originValue'
+        static member top = FssTypes.Transform.Origin.Top |> originValue'
+        static member left = FssTypes.Transform.Origin.Left |> originValue'
+        static member right = FssTypes.Transform.Origin.Right |> originValue'
+        static member bottom = FssTypes.Transform.Origin.Bottom |> originValue'
+        static member center = FssTypes.Transform.Origin.Center |> originValue'
 
-        static member Inherit = Inherit |> originValue'
-        static member Initial = Initial |> originValue'
-        static member Unset = Unset |> originValue'
+        static member inherit' = FssTypes.Inherit |> originValue'
+        static member initial = FssTypes.Initial |> originValue'
+        static member unset = FssTypes.Unset |> originValue'
 
-    /// <summary>Specifies the origin of an elements transformation.</summary>
-    /// <param name="origin">
-    ///     can be:
-    ///     - <c> TransformOrigin </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let TransformOrigin' (origin: ITransformOrigin) = TransformOrigin.Value(origin)
+    /// Specifies the origin of an elements transformation.
+    /// Valid parameters:
+    /// - TransformOrigin
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let TransformOrigin' = TransformOrigin.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
-    let private styleValue value = PropertyValue.cssValue Property.TransformStyle value
-    let private styleValue' value =
-        value
-        |> styleToString
-        |> styleValue
+    let private styleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransformStyle
+    let private styleValue' = styleToString >> styleValue
+
+    [<Erase>]
+    /// Specifies the whether children of an element are positioned flat or in 3d.
     type TransformStyle =
-        static member Value (value: ITransformStyle) = value |> styleValue'
+        static member value (value: FssTypes.ITransformStyle) = value |> styleValue'
 
-        static member Flat = TransformType.Flat |> styleValue'
-        static member Preserve3d = TransformType.Preserve3d |> styleValue'
+        static member flat = FssTypes.Transform.Style.Flat |> styleValue'
+        static member preserve3d = FssTypes.Transform.Style.Preserve3d |> styleValue'
 
-        static member Inherit = Inherit |> styleValue'
-        static member Initial = Initial |> styleValue'
-        static member Unset = Unset |> styleValue'
+        static member inherit' = FssTypes.Inherit |> styleValue'
+        static member initial = FssTypes.Initial |> styleValue'
+        static member unset = FssTypes.Unset |> styleValue'
 
-    /// <summary>Specifies the whether children of an element are positioned flat or in 3d.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> TransformStyle </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let TransformStyle' (style: ITransformStyle) = TransformStyle.Value(style)
+    /// Specifies the whether children of an element are positioned flat or in 3d.
+    /// Valid parameters
+    /// - TransformStyle
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let TransformStyle' = TransformStyle.value
 

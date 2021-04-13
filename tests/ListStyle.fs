@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,118 +9,118 @@ module ListStyle =
     let sampleCounterStyle =
         counterStyle
             [
-                Counter.System.Alphabetic
+                Counter.System.alphabetic
             ]
 
     let tests =
         testList "List style"
             [
-                test
+                testCase
                     "List style None"
-                    [ ListStyle.None ]
+                    [ ListStyle.none ]
                     [ "listStyle" ==> "none" ]
-                test
+                testCase
                     "List style Initial"
-                    [ ListStyle.Initial ]
+                    [ ListStyle.initial ]
                     [ "listStyle" ==> "initial" ]
-                test
+                testCase
                     "List style Inherit"
-                    [ ListStyle.Inherit ]
+                    [ ListStyle.inherit' ]
                     [ "listStyle" ==> "inherit" ]
-                test
+                testCase
                     "List style Unset"
-                    [ ListStyle.Unset ]
+                    [ ListStyle.unset ]
                     [ "listStyle" ==> "unset" ]
-                test
+                testCase
                     "List style image url"
-                    [ ListStyleImage.Url "foofoo.jpg" ]
+                    [ ListStyleImage.url "foofoo.jpg" ]
                     [ "listStyleImage" ==> "url('foofoo.jpg')" ]
-                test
+                testCase
                     "List style image None"
-                    [ ListStyleImage.None ]
+                    [ ListStyleImage.none ]
                     [ "listStyleImage" ==> "none" ]
-                test
+                testCase
                     "List style image Initial"
-                    [ ListStyleImage.Initial ]
+                    [ ListStyleImage.initial ]
                     [ "listStyleImage" ==> "initial" ]
-                test
+                testCase
                     "List style image Inherit"
-                    [ ListStyleImage.Inherit ]
+                    [ ListStyleImage.inherit' ]
                     [ "listStyleImage" ==> "inherit" ]
-                test
+                testCase
                     "List style image Unset"
-                    [ ListStyleImage.Unset ]
+                    [ ListStyleImage.unset ]
                     [ "listStyleImage" ==> "unset" ]
-                test
+                testCase
                     "List style position inside"
-                    [ ListStylePosition.Inside]
+                    [ ListStylePosition.inside]
                     [ "listStylePosition" ==> "inside" ]
-                test
+                testCase
                     "List style position outside"
-                    [ ListStylePosition.Outside ]
+                    [ ListStylePosition.outside ]
                     [ "listStylePosition" ==> "outside" ]
-                test
+                testCase
                     "List style position Initial"
-                    [ ListStylePosition.Initial ]
+                    [ ListStylePosition.initial ]
                     [ "listStylePosition" ==> "initial" ]
-                test
+                testCase
                     "List style position Inherit"
-                    [ ListStylePosition.Inherit ]
+                    [ ListStylePosition.inherit' ]
                     [ "listStylePosition" ==> "inherit" ]
-                test
+                testCase
                     "List style position Unset"
-                    [ ListStylePosition.Unset ]
+                    [ ListStylePosition.unset ]
                     [ "listStylePosition" ==> "unset" ]
-                test
+                testCase
                     "List style type Disc"
-                    [ ListStyleType.Disc ]
+                    [ ListStyleType.disc ]
                     [ "listStyleType" ==> "disc" ]
-                test
+                testCase
                     "List style type Circle"
-                    [ ListStyleType.Circle ]
+                    [ ListStyleType.circle ]
                     [ "listStyleType" ==> "circle" ]
-                test
+                testCase
                     "List style type Square"
-                    [ ListStyleType.Square ]
+                    [ ListStyleType.square ]
                     [ "listStyleType" ==> "square" ]
-                test
+                testCase
                     "List style type Decimal"
-                    [ ListStyleType.Decimal ]
+                    [ ListStyleType.decimal ]
                     [ "listStyleType" ==> "decimal" ]
-                test
+                testCase
                     "List style type Georgian"
-                    [ ListStyleType.Georgian ]
+                    [ ListStyleType.georgian ]
                     [ "listStyleType" ==> "georgian" ]
-                test
+                testCase
                     "List style type TradChineseInformal"
-                    [ ListStyleType.TradChineseInformal ]
+                    [ ListStyleType.tradChineseInformal ]
                     [ "listStyleType" ==> "trad-chinese-informal" ]
-                test
+                testCase
                     "List style type Kannada"
-                    [ ListStyleType.Kannada ]
+                    [ ListStyleType.kannada ]
                     [ "listStyleType" ==> "kannada" ]
-                test
+                testCase
                     "List style type string"
-                    [ ListStyleType' (CssString "-") ]
+                    [ ListStyleType' (FssTypes.CssString "-") ]
                     [ "listStyleType" ==> "'-'" ]
-                test
+                testCase
                     "List style type custom"
                     [ ListStyleType' sampleCounterStyle ]
-                    [ "listStyleType" ==> (counterValue sampleCounterStyle) ]
-                test
+                    [ "listStyleType" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
+                testCase
                     "List style type None"
-                    [ ListStyleType.None ]
+                    [ ListStyleType.none ]
                     [ "listStyleType" ==> "none" ]
-                test
+                testCase
                     "List style type Initial"
-                    [ ListStyleType.Initial ]
+                    [ ListStyleType.initial ]
                     [ "listStyleType" ==> "initial" ]
-                test
+                testCase
                     "List style type Inherit"
-                    [ ListStyleType.Inherit ]
+                    [ ListStyleType.inherit' ]
                     [ "listStyleType" ==> "inherit" ]
-                test
+                testCase
                     "List style type Unset"
-                    [ ListStyleType.Unset ]
+                    [ ListStyleType.unset ]
                     [ "listStyleType" ==> "unset" ]
             ]

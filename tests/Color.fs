@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,55 +9,55 @@ module Color =
     let tests =
         testList "Colors"
             [
-                test
+                testCase
                     "Color adjust exact"
-                    [ColorAdjust.Exact]
+                    [ColorAdjust.exact]
                     ["colorAdjust" ==> "exact"]
-                test
+                testCase
                     "Color adjust economy"
-                    [ColorAdjust.Economy]
+                    [ColorAdjust.economy]
                     ["colorAdjust" ==> "economy"]
-                test
+                testCase
                     "Color named color"
                     [ Color.aliceBlue ]
                     [ "color" ==> "#f0f8ff"]
-                test
+                testCase
                     "Color RGB"
-                    [ Color.Rgb 255 0 0 ]
+                    [ Color.rgb 255 0 0 ]
                     ["color" ==> "rgb(255, 0, 0)"]
-                test
+                testCase
                     "Color RBGA"
-                    [ Color.Rgba 255 0 0 0.5 ]
+                    [ Color.rgba 255 0 0 0.5 ]
                     ["color" ==> "rgba(255, 0, 0, 0.500000)"]
-                test
+                testCase
                     "Color HEX no #"
-                    [ Color.Hex "ff0000" ]
+                    [ Color.hex "ff0000" ]
                     ["color" ==> "#ff0000"]
-                test
+                testCase
                     "Color HEX with alpha"
-                    [ Color.Hex "#ff000080" ]
+                    [ Color.hex "#ff000080" ]
                     ["color" ==> "#ff000080"]
-                test
+                testCase
                     "Color HSL"
-                    [ Color.Hsl 120 1.0 0.5 ]
+                    [ Color.hsl 120 1.0 0.5 ]
                     ["color" ==> "hsl(120, 100%, 50%)"]
-                test
+                testCase
                     "Color HSLA"
-                    [ Color.Hsla 120 1.0 0.5 0.5 ]
+                    [ Color.hsla 120 1.0 0.5 0.5 ]
                     ["color" ==> "hsla(120, 100%, 50%, 50%)"]
-                test
+                testCase
                     "Color Inherit"
-                    [ Color.Inherit ]
+                    [ Color.inherit' ]
                     ["color" ==> "inherit"]
-                test
+                testCase
                     "Color Initial"
-                    [ Color.Initial ]
+                    [ Color.initial ]
                     ["color" ==> "initial"]
-                test
+                testCase
                     "Color Unset"
-                    [ Color.Unset ]
+                    [ Color.unset ]
                     ["color" ==> "unset"]
-                test
+                testCase
                     "Color Value"
                     [Color' (rgb 1 2 3)]
                     ["color"  ==> "rgb(1, 2, 3)"]

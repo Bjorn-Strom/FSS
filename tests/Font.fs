@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,564 +9,564 @@ module Font =
     let tests =
         testList "Fonts"
             [
-                test
+                testCase
                     "Font synthesis none"
-                    [ FontSynthesis.None ]
+                    [ FontSynthesis.none ]
                     [ "fontSynthesis" ==> "none" ]
-                test
+                testCase
                     "Font synthesis weight"
-                    [ FontSynthesis.Weight ]
+                    [ FontSynthesis.weight ]
                     [ "fontSynthesis" ==> "weight" ]
-                test
+                testCase
                     "Font synthesis style"
-                    [ FontSynthesis.Style ]
+                    [ FontSynthesis.style ]
                     [ "fontSynthesis" ==> "style" ]
-                test
+                testCase
                     "Font synthesis weight style"
-                    [ FontSynthesis.WeightStyle ]
+                    [ FontSynthesis.weightStyle ]
                     [ "fontSynthesis" ==> "weight style" ]
-                test
+                testCase
                     "Font language override string"
-                    [ FontLanguageOverride.Value "ENG" ]
+                    [ FontLanguageOverride.value "ENG" ]
                     [ "fontLanguageOverride" ==> "\"ENG\""]
-                test
+                testCase
                     "Font language override inherit"
-                    [ FontLanguageOverride.Inherit ]
+                    [ FontLanguageOverride.inherit' ]
                     [ "fontLanguageOverride" ==> "inherit" ]
-                test
+                testCase
                     "Font language override initial"
-                    [ FontLanguageOverride.Initial ]
+                    [ FontLanguageOverride.initial ]
                     [ "fontLanguageOverride" ==> "initial" ]
-                test
+                testCase
                     "Font language override unset"
-                    [ FontLanguageOverride.Unset ]
+                    [ FontLanguageOverride.unset ]
                     [ "fontLanguageOverride" ==> "unset" ]
-                test
+                testCase
                     "Font kerning none"
-                    [ FontKerning.None ]
+                    [ FontKerning.none ]
                     [ "fontKerning" ==> "none" ]
-                test
+                testCase
                     "Font kerning auto"
-                    [ FontKerning.Auto ]
+                    [ FontKerning.auto ]
                     [ "fontKerning" ==> "auto" ]
-                test
+                testCase
                     "Font kerning normal"
-                    [ FontKerning.Normal ]
+                    [ FontKerning.normal ]
                     [ "fontKerning" ==> "normal" ]
-                test
+                testCase
                     "Font size XX-Small"
-                    [ FontSize.XxSmall ]
+                    [ FontSize.xxSmall ]
                     [ "fontSize" ==> "xx-small" ]
-                test
+                testCase
                     "Font size X-Small"
-                    [ FontSize.XSmall ]
+                    [ FontSize.xSmall ]
                     [ "fontSize" ==> "x-small" ]
-                test
+                testCase
                     "Font size small"
-                    [ FontSize.Small ]
+                    [ FontSize.small ]
                     [ "fontSize" ==> "small" ]
-                test
+                testCase
                     "Font size medium"
-                    [ FontSize.Medium ]
+                    [ FontSize.medium ]
                     [ "fontSize" ==> "medium" ]
-                test
+                testCase
                     "Font size large"
-                    [ FontSize.Large ]
+                    [ FontSize.large ]
                     [ "fontSize" ==> "large" ]
-                test
+                testCase
                     "Font size x-large"
-                    [ FontSize.XLarge ]
+                    [ FontSize.xLarge ]
                     [ "fontSize" ==> "x-large" ]
-                test
+                testCase
                     "Font size xx-large"
-                    [ FontSize.XxLarge ]
+                    [ FontSize.xxLarge ]
                     [ "fontSize" ==> "xx-large" ]
-                test
+                testCase
                     "Font size xxx-large"
-                    [ FontSize.XxxLarge ]
+                    [ FontSize.xxxLarge ]
                     [ "fontSize" ==> "xxx-large" ]
-                test
+                testCase
                     "Font size smaller"
-                    [ FontSize.Smaller ]
+                    [ FontSize.smaller ]
                     [ "fontSize" ==> "smaller" ]
-                test
+                testCase
                     "Font size larger"
-                    [ FontSize.Larger ]
+                    [ FontSize.larger ]
                     [ "fontSize" ==> "larger" ]
-                test
+                testCase
                     "Font size pixels"
                     [ FontSize' (px 18) ]
                     [ "fontSize" ==> "18px" ]
-                test
+                testCase
                     "Font size em"
                     [ FontSize' (em 0.8) ]
                     [ "fontSize" ==> "0.8em" ]
-                test
+                testCase
                     "Font size percentage"
                     [ FontSize' (pct 80) ]
                     [ "fontSize" ==> "80%" ]
-                test
+                testCase
                     "Font size inherit"
-                    [ FontSize.Inherit ]
+                    [ FontSize.inherit' ]
                     [ "fontSize" ==> "inherit" ]
-                test
+                testCase
                     "Font size initial"
-                    [ FontSize.Initial ]
+                    [ FontSize.initial ]
                     [ "fontSize" ==> "initial" ]
-                test
+                testCase
                     "Font size unset"
-                    [ FontSize.Unset ]
+                    [ FontSize.unset ]
                     [ "fontSize" ==> "unset" ]
-                test
+                testCase
                     "Font stretch normal"
-                    [ FontStretch.Normal ]
+                    [ FontStretch.normal ]
                     [ "fontStretch" ==> "normal" ]
-                test
+                testCase
                     "Font stretch ultra-condensed"
-                    [ FontStretch.UltraCondensed ]
+                    [ FontStretch.ultraCondensed ]
                     [ "fontStretch" ==> "ultra-condensed" ]
-                test
+                testCase
                      "Font stretch extra-condensed"
-                    [ FontStretch.ExtraCondensed ]
+                    [ FontStretch.extraCondensed ]
                     [ "fontStretch" ==> "extra-condensed" ]
-                test
+                testCase
                     "Font stretch extra-condensed"
-                    [ FontStretch.ExtraCondensed ]
+                    [ FontStretch.extraCondensed ]
                     [ "fontStretch" ==> "extra-condensed" ]
-                test
+                testCase
                     "Font stretch condensed"
-                    [ FontStretch.Condensed ]
+                    [ FontStretch.condensed ]
                     [ "fontStretch" ==> "condensed" ]
-                test
+                testCase
                     "Font stretch semi-condensed"
-                    [ FontStretch.SemiCondensed ]
+                    [ FontStretch.semiCondensed ]
                     [ "fontStretch" ==> "semi-condensed" ]
-                test
+                testCase
                     "Font stretch expanded"
-                    [ FontStretch.Expanded]
+                    [ FontStretch.expanded]
                     [ "fontStretch" ==> "expanded" ]
-                test
+                testCase
                     "Font stretch extra-expanded"
-                    [ FontStretch.ExtraExpanded]
+                    [ FontStretch.extraExpanded]
                     [ "fontStretch" ==> "extra-expanded" ]
-                test
+                testCase
                     "Font stretch ultra-expanded"
-                    [ FontStretch.UltraExpanded]
+                    [ FontStretch.ultraExpanded]
                     [ "fontStretch" ==> "ultra-expanded" ]
-                test
+                testCase
                     "Font stretch percent"
                     [ FontStretch' (pct 200) ]
                     [ "fontStretch" ==> "200%" ]
-                test
+                testCase
                     "Font stretch inherit"
-                    [ FontStretch.Inherit ]
+                    [ FontStretch.inherit' ]
                     [ "fontStretch" ==> "inherit" ]
-                test
+                testCase
                     "Font stretch initial"
-                    [ FontStretch.Initial ]
+                    [ FontStretch.initial ]
                     [ "fontStretch" ==> "initial" ]
-                test
+                testCase
                     "Font stretch unset"
-                    [ FontStretch.Unset ]
+                    [ FontStretch.unset ]
                     [ "fontStretch" ==> "unset" ]
-                test
+                testCase
                     "Font style normal"
-                    [ FontStyle.Normal]
+                    [ FontStyle.normal]
                     [ "fontStyle" ==> "normal"]
-                test
+                testCase
                     "Font style italic"
-                    [ FontStyle.Italic]
+                    [ FontStyle.italic]
                     [ "fontStyle" ==> "italic"]
-                test
+                testCase
                     "Font style oblicque 90"
-                    [ FontStyle.Oblique (deg 90.0)]
+                    [ FontStyle.oblique (deg 90.0)]
                     [ "fontStyle" ==> "oblique 90.00deg"]
-                test
+                testCase
                     "Font style oblique -90"
-                    [ FontStyle.Oblique (deg -90.0)]
+                    [ FontStyle.oblique (deg -90.0)]
                     [ "fontStyle" ==> "oblique -90.00deg"]
-                test
+                testCase
                     "Font style inherit"
-                    [ FontStyle.Inherit ]
+                    [ FontStyle.inherit' ]
                     [ "fontStyle" ==> "inherit" ]
-                test
+                testCase
                     "Font style initial"
-                    [ FontStyle.Initial ]
+                    [ FontStyle.initial ]
                     [ "fontStyle" ==> "initial" ]
-                test
+                testCase
                     "Font style unset"
-                    [ FontStyle.Unset ]
+                    [ FontStyle.unset ]
                     [ "fontStyle" ==> "unset" ]
-                test
+                testCase
                     "Font weight normal"
-                    [ FontWeight.Normal ]
+                    [ FontWeight.normal ]
                     [ "fontWeight" ==> "normal"]
-                test
+                testCase
                     "Font weight bold"
-                    [ FontWeight.Bold ]
+                    [ FontWeight.bold ]
                     [ "fontWeight" ==> "bold"]
-                test
+                testCase
                     "Font weight lighter"
-                    [ FontWeight.Lighter ]
+                    [ FontWeight.lighter ]
                     [ "fontWeight" ==> "lighter"]
-                test
+                testCase
                     "Font weight bolder"
-                    [ FontWeight.Bolder ]
+                    [ FontWeight.bolder ]
                     [ "fontWeight" ==> "bolder"]
-                test
+                testCase
                     "Font weight value"
-                    [ FontWeight' (CssInt 500) ]
+                    [ FontWeight' (FssTypes.CssInt 500) ]
                     [ "fontWeight" ==> "500"]
-                test
+                testCase
                     "Font weight inherit"
-                    [ FontWeight.Inherit ]
+                    [ FontWeight.inherit' ]
                     [ "fontWeight" ==> "inherit"]
-                test
+                testCase
                     "Font weight initial"
-                    [ FontWeight.Initial ]
+                    [ FontWeight.initial ]
                     [ "fontWeight" ==> "initial"]
-                test
+                testCase
                     "Font weight unset"
-                    [ FontWeight.Unset ]
+                    [ FontWeight.unset ]
                     [ "fontWeight" ==> "unset"]
-                test
+                testCase
                     "Line height normal"
-                    [ LineHeight.Normal ]
+                    [ LineHeight.normal ]
                     [ "lineHeight" ==> "normal" ]
-                test
+                testCase
                     "Line height value"
-                    [ LineHeight' (CssFloat 2.5) ]
+                    [ LineHeight' (FssTypes.CssFloat 2.5) ]
                     [ "lineHeight" ==> "2.5" ]
-                test
+                testCase
                     "Line height em"
                     [ LineHeight' (em 3.0) ]
                     [ "lineHeight" ==> "3.0em" ]
-                test
+                testCase
                     "Line height pixel"
                     [ LineHeight' (px 3) ]
                     [ "lineHeight" ==> "3px" ]
-                test
+                testCase
                     "Line height percent"
                     [ LineHeight' (pct 34) ]
                     [ "lineHeight" ==> "34%" ]
-                test
+                testCase
                     "Line height initial"
-                    [ LineHeight.Initial ]
+                    [ LineHeight.initial ]
                     [ "lineHeight" ==> "initial" ]
-                test
+                testCase
                     "Line height inherit"
-                    [ LineHeight.Inherit ]
+                    [ LineHeight.inherit' ]
                     [ "lineHeight" ==> "inherit" ]
-                test
+                testCase
                     "Line height unset"
-                    [ LineHeight.Unset ]
+                    [ LineHeight.unset ]
                     [ "lineHeight" ==> "unset" ]
-                test
+                testCase
                     "Line break loose"
-                    [ LineBreak.Loose ]
+                    [ LineBreak.loose ]
                     [ "lineBreak" ==> "loose" ]
-                test
+                testCase
                     "Line break strict"
-                    [ LineBreak.Strict ]
+                    [ LineBreak.strict ]
                     [ "lineBreak" ==> "strict" ]
-                test
+                testCase
                     "Line break anywhere"
-                    [ LineBreak.Anywhere ]
+                    [ LineBreak.anywhere ]
                     [ "lineBreak" ==> "anywhere" ]
-                test
+                testCase
                     "Line break normal"
-                    [ LineBreak.Normal ]
+                    [ LineBreak.normal ]
                     [ "lineBreak" ==> "normal" ]
-                test
+                testCase
                     "Line break auto"
-                    [ LineBreak.Auto ]
+                    [ LineBreak.auto ]
                     [ "lineBreak" ==> "auto" ]
-                test
+                testCase
                     "Line break initial"
-                    [ LineBreak.Initial ]
+                    [ LineBreak.initial ]
                     [ "lineBreak" ==> "initial" ]
-                test
+                testCase
                     "Line break inherit"
-                    [ LineBreak.Inherit ]
+                    [ LineBreak.inherit' ]
                     [ "lineBreak" ==> "inherit" ]
-                test
+                testCase
                     "Line break unset"
-                    [ LineBreak.Unset ]
+                    [ LineBreak.unset ]
                     [ "lineBreak" ==> "unset" ]
-                test
+                testCase
                     "Letter spacing px"
                     [ LetterSpacing' (px 10) ]
                     [ "letterSpacing" ==> "10px" ]
-                test
+                testCase
                     "Letter spacing initial"
-                    [ LetterSpacing.Initial ]
+                    [ LetterSpacing.initial ]
                     [ "letterSpacing" ==> "initial" ]
-                test
+                testCase
                     "Letter spacing inherit"
-                    [ LetterSpacing.Inherit ]
+                    [ LetterSpacing.inherit' ]
                     [ "letterSpacing" ==> "inherit" ]
-                test
+                testCase
                     "Letter spacing unset"
-                    [ LetterSpacing.Unset ]
+                    [ LetterSpacing.unset ]
                     [ "letterSpacing" ==> "unset" ]
-                test
+                testCase
                     "Letter spacing normal"
-                    [ LetterSpacing.Normal ]
+                    [ LetterSpacing.normal ]
                     [ "letterSpacing" ==> "normal" ]
-                test
+                testCase
                      "Font family serif"
-                     [ FontFamily.Serif ]
+                     [ FontFamily.serif ]
                      [ "fontFamily" ==> "serif" ]
-                test
+                testCase
                      "Font family sans-serif"
-                     [ FontFamily.SansSerif ]
+                     [ FontFamily.sansSerif ]
                      [ "fontFamily" ==> "sans-serif" ]
-                test
+                testCase
                      "Font family monospace"
-                     [ FontFamily.Monospace ]
+                     [ FontFamily.monospace ]
                      [ "fontFamily" ==> "monospace" ]
-                test
+                testCase
                      "Font family cursive"
-                     [ FontFamily.Cursive ]
+                     [ FontFamily.cursive ]
                      [ "fontFamily" ==> "cursive" ]
-                test
+                testCase
                      "Font family arial"
-                     [ FontFamily.Custom "arial" ]
+                     [ FontFamily.custom "arial" ]
                      [ "fontFamily" ==> "arial" ]
-                test
+                testCase
                      "Font family initial"
-                     [ FontFamily.Initial ]
+                     [ FontFamily.initial ]
                      [ "fontFamily" ==> "initial" ]
-                test
+                testCase
                      "Font family inherit"
-                     [ FontFamily.Inherit ]
+                     [ FontFamily.inherit' ]
                      [ "fontFamily" ==> "inherit" ]
-                test
+                testCase
                      "Font family unset"
-                     [ FontFamily.Unset ]
+                     [ FontFamily.unset ]
                      [ "fontFamily" ==> "unset" ]
-                test
+                testCase
                     "Font families"
-                    [ FontFamily.Values ([ FontTypes.Serif; FontTypes.Monospace ]) ]
+                    [ FontFamily.values ([ FssTypes.Font.Serif; FssTypes.Font.Monospace ]) ]
                     [ "fontFamily" ==> "serif, monospace" ]
-                test
+                testCase
                     "font feature setting On"
-                    [ FontFeatureSetting.Liga FontTypes.On ]
+                    [ FontFeatureSetting.liga FssTypes.Font.On ]
                     [ "fontFeatureSettings" ==> "\"liga\" On" ]
-                test
+                testCase
                     "font feature setting Off"
-                    [ FontFeatureSetting.Liga FontTypes.Off ]
+                    [ FontFeatureSetting.liga FssTypes.Font.Off ]
                     [ "fontFeatureSettings" ==> "\"liga\" Off" ]
-                test
+                testCase
                     "font feature setting initial"
-                    [ FontFeatureSetting.Initial ]
+                    [ FontFeatureSetting.initial ]
                     [ "fontFeatureSettings" ==> "initial" ]
-                test
+                testCase
                     "font feature setting inherit"
-                    [ FontFeatureSetting.Inherit ]
+                    [ FontFeatureSetting.inherit' ]
                     [ "fontFeatureSettings" ==> "inherit" ]
-                test
+                testCase
                     "font feature setting unset"
-                    [ FontFeatureSetting.Unset ]
+                    [ FontFeatureSetting.unset ]
                     [ "fontFeatureSettings" ==> "unset" ]
-                test
+                testCase
                     "Font variant numeric normal"
-                    [ FontVariantNumeric.Normal]
+                    [ FontVariantNumeric.normal]
                     ["fontVariantNumeric" ==> "normal"]
-                test
+                testCase
                     "Font variant numeric ordinal"
-                    [ FontVariantNumeric.Ordinal]
+                    [ FontVariantNumeric.ordinal]
                     ["fontVariantNumeric" ==> "ordinal"]
-                test
+                testCase
                     "Font variant numeric slashed zero"
-                    [ FontVariantNumeric.SlashedZero]
+                    [ FontVariantNumeric.slashedZero]
                     ["fontVariantNumeric" ==> "slashed-zero"]
-                test
+                testCase
                     "Font variant numeric lining nums"
-                    [ FontVariantNumeric.LiningNums]
+                    [ FontVariantNumeric.liningNums]
                     ["fontVariantNumeric" ==> "lining-nums"]
-                test
+                testCase
                     "Font variant numeric old style nums"
-                    [ FontVariantNumeric.OldstyleNums]
+                    [ FontVariantNumeric.oldstyleNums]
                     ["fontVariantNumeric" ==> "oldstyle-nums"]
-                test
+                testCase
                     "Font variant numeric tabular nums"
-                    [ FontVariantNumeric.TabularNums]
+                    [ FontVariantNumeric.tabularNums]
                     ["fontVariantNumeric" ==> "tabular-nums"]
-                test
+                testCase
                     "Font variant numeric diagonal fractions"
-                    [ FontVariantNumeric.DiagonalFractions]
+                    [ FontVariantNumeric.diagonalFractions]
                     ["fontVariantNumeric" ==> "diagonal-fractions"]
-                test
+                testCase
                     "Font variant numeric stacked fractions"
-                    [ FontVariantNumeric.StackedFractions]
+                    [ FontVariantNumeric.stackedFractions]
                     ["fontVariantNumeric" ==> "stacked-fractions"]
-                test
+                testCase
                     "Font variant numeric inherit"
-                    [ FontVariantNumeric.Inherit ]
+                    [ FontVariantNumeric.inherit' ]
                     [ "fontVariantNumeric" ==> "inherit" ]
-                test
+                testCase
                     "Font variant numeric initial"
-                    [ FontVariantNumeric.Initial]
+                    [ FontVariantNumeric.initial]
                     [ "fontVariantNumeric" ==> "initial" ]
-                test
+                testCase
                     "Font variant numeric unset"
-                    [ FontVariantNumeric.Unset ]
+                    [ FontVariantNumeric.unset ]
                     [ "fontVariantNumeric" ==> "unset" ]
-                test
+                testCase
                     "Font variant caps normal"
-                    [ FontVariantCaps.Normal]
+                    [ FontVariantCaps.normal]
                     ["fontVariantCaps" ==> "normal"]
-                test
+                testCase
                     "Font variant caps small caps"
-                    [ FontVariantCaps.SmallCaps]
+                    [ FontVariantCaps.smallCaps]
                     ["fontVariantCaps" ==> "small-caps"]
-                test
+                testCase
                     "Font variant caps  all small caps"
-                    [ FontVariantCaps.AllSmallCaps]
+                    [ FontVariantCaps.allSmallCaps]
                     ["fontVariantCaps" ==> "all-small-caps"]
-                test
+                testCase
                     "Font variant caps petite caps"
-                    [ FontVariantCaps.PetiteCaps]
+                    [ FontVariantCaps.petiteCaps]
                     ["fontVariantCaps" ==> "petite-caps"]
-                test
+                testCase
                     "Font variant caps all petite caps"
-                    [ FontVariantCaps.AllPetiteCaps]
+                    [ FontVariantCaps.allPetiteCaps]
                     ["fontVariantCaps" ==> "all-petite-caps"]
-                test
+                testCase
                     "Font variant caps unicase"
-                    [ FontVariantCaps.Unicase]
+                    [ FontVariantCaps.unicase]
                     ["fontVariantCaps" ==> "unicase"]
-                test
+                testCase
                     "Font variant caps titling caps"
-                    [ FontVariantCaps.TitlingCaps]
+                    [ FontVariantCaps.titlingCaps]
                     ["fontVariantCaps" ==> "titling-caps"]
-                test
+                testCase
                     "Font variant caps initial"
-                    [ FontVariantCaps.Initial ]
+                    [ FontVariantCaps.initial ]
                     [ "fontVariantCaps" ==> "initial"]
-                test
+                testCase
                     "Font variant caps inherit"
-                    [ FontVariantCaps.Inherit ]
+                    [ FontVariantCaps.inherit' ]
                     ["fontVariantCaps" ==> "inherit"]
-                test
+                testCase
                     "Font variant caps unset"
-                    [ FontVariantCaps.Unset ]
+                    [ FontVariantCaps.unset ]
                     ["fontVariantCaps" ==> "unset" ]
-                test
+                testCase
                     "Font variant east asian normal"
-                    [ FontVariantEastAsian.Normal]
+                    [ FontVariantEastAsian.normal]
                     ["fontVariantEastAsian" ==> "normal"]
-                test
+                testCase
                     "Font variant east asian ruby"
-                    [ FontVariantEastAsian.Ruby]
+                    [ FontVariantEastAsian.ruby]
                     ["fontVariantEastAsian" ==> "ruby"]
-                test
+                testCase
                     "Font variant east asian  jis78"
-                    [ FontVariantEastAsian.Jis78]
+                    [ FontVariantEastAsian.jis78]
                     ["fontVariantEastAsian" ==> "jis78"]
-                test
+                testCase
                     "Font variant east asian jis83"
-                    [ FontVariantEastAsian.Jis83]
+                    [ FontVariantEastAsian.jis83]
                     ["fontVariantEastAsian" ==> "jis83"]
-                test
+                testCase
                     "Font variant east asian jis90"
-                    [ FontVariantEastAsian.Jis90]
+                    [ FontVariantEastAsian.jis90]
                     ["fontVariantEastAsian" ==> "jis90"]
-                test
+                testCase
                     "Font variant east asian jis04"
-                    [ FontVariantEastAsian.Jis04]
+                    [ FontVariantEastAsian.jis04]
                     ["fontVariantEastAsian" ==> "jis04"]
-                test
+                testCase
                     "Font variant east asian simplified"
-                    [ FontVariantEastAsian.Simplified]
+                    [ FontVariantEastAsian.simplified]
                     ["fontVariantEastAsian" ==> "simplified"]
-                test
+                testCase
                     "Font variant east asian traditional"
-                    [ FontVariantEastAsian.Traditional]
+                    [ FontVariantEastAsian.traditional]
                     ["fontVariantEastAsian" ==> "traditional"]
-                test
+                testCase
                     "Font variant east asian full width"
-                    [ FontVariantEastAsian.FullWidth]
+                    [ FontVariantEastAsian.fullWidth]
                     ["fontVariantEastAsian" ==> "full-width"]
-                test
+                testCase
                     "Font variant east asian  proportional widt"
-                    [ FontVariantEastAsian.ProportionalWidth]
+                    [ FontVariantEastAsian.proportionalWidth]
                     ["fontVariantEastAsian" ==> "proportional-width"]
-                test
+                testCase
                     "Font variant ligatures normal"
-                    [ FontVariantLigatures.Normal]
+                    [ FontVariantLigatures.normal]
                     ["fontVariantLigatures" ==> "normal"]
-                test
+                testCase
                     "Font variant ligatures none"
-                    [ FontVariantLigatures.None]
+                    [ FontVariantLigatures.none]
                     ["fontVariantLigatures" ==> "none"]
-                test
+                testCase
                     "Font variant ligatures common"
-                    [ FontVariantLigatures.CommonLigatures]
+                    [ FontVariantLigatures.commonLigatures]
                     ["fontVariantLigatures" ==> "common-ligatures"]
-                test
+                testCase
                     "Font variant ligatures no common"
-                    [ FontVariantLigatures.NoCommonLigatures]
+                    [ FontVariantLigatures.noCommonLigatures]
                     ["fontVariantLigatures" ==> "no-common-ligatures"]
-                test
+                testCase
                     "Font variant ligatures discretionary"
-                    [ FontVariantLigatures.DiscretionaryLigatures]
+                    [ FontVariantLigatures.discretionaryLigatures]
                     ["fontVariantLigatures" ==> "discretionary-ligatures"]
-                test
+                testCase
                     "Font variant ligatures no discretionary"
-                    [ FontVariantLigatures.NoDiscretionaryLigatures]
+                    [ FontVariantLigatures.noDiscretionaryLigatures]
                     ["fontVariantLigatures" ==> "no-discretionary-ligatures"]
-                test
+                testCase
                     "Font variant ligatures historical"
-                    [ FontVariantLigatures.HistoricalLigatures]
+                    [ FontVariantLigatures.historicalLigatures]
                     ["fontVariantLigatures" ==> "historical-ligatures"]
-                test
+                testCase
                     "Font variant ligatures no historical"
-                    [ FontVariantLigatures.NoHistoricalLigatures]
+                    [ FontVariantLigatures.noHistoricalLigatures]
                     ["fontVariantLigatures" ==> "no-historical-ligatures"]
-                test
+                testCase
                     "Font variant ligatures contextual"
-                    [ FontVariantLigatures.Contextual]
+                    [ FontVariantLigatures.contextual]
                     ["fontVariantLigatures" ==> "contextual"]
-                test
+                testCase
                     "Font variant ligatures no contextual"
-                    [ FontVariantLigatures.NoContextual]
+                    [ FontVariantLigatures.noContextual]
                     ["fontVariantLigatures" ==> "no-contextual"]
-                test
+                testCase
                     "Font variant ligatures no initial"
-                    [ FontVariantLigatures.Initial ]
+                    [ FontVariantLigatures.initial ]
                     ["fontVariantLigatures" ==> "initial"]
-                test
+                testCase
                     "Font variant ligatures inherit"
-                    [ FontVariantLigatures.Inherit]
+                    [ FontVariantLigatures.inherit']
                     ["fontVariantLigatures" ==> "inherit"]
-                test
+                testCase
                     "Font variant ligatures no unset"
-                    [ FontVariantLigatures.Unset]
+                    [ FontVariantLigatures.unset]
                     ["fontVariantLigatures" ==> "unset"]
-                test
+                testCase
                     "Font variant position super"
-                    [ FontVariantPosition.Super ]
+                    [ FontVariantPosition.super ]
                     ["fontVariantPosition" ==> "super"]
-                test
+                testCase
                     "Font variant position sub"
-                    [ FontVariantPosition.Sub]
+                    [ FontVariantPosition.sub]
                     ["fontVariantPosition" ==> "sub"]
-                test
+                testCase
                     "Font variant position unset"
-                    [ FontVariantPosition.Unset]
+                    [ FontVariantPosition.unset]
                     ["fontVariantPosition" ==> "unset"]
-                test
+                testCase
                     "Font variant position initial"
-                    [ FontVariantPosition.Initial ]
+                    [ FontVariantPosition.initial ]
                     ["fontVariantPosition" ==> "initial"]
-                test
+                testCase
                     "Font variant position inherit"
-                    [ FontVariantPosition.Inherit]
+                    [ FontVariantPosition.inherit']
                     ["fontVariantPosition" ==> "inherit"]
-                test
+                testCase
                     "Font variant position no unset"
-                    [ FontVariantPosition.Unset]
+                    [ FontVariantPosition.unset]
                     ["fontVariantPosition" ==> "unset"]
         ]

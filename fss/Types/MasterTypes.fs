@@ -1,8 +1,6 @@
 namespace Fss
-
-[<AutoOpen>]
-module Global =
-    // Interfaces
+// Interfaces
+namespace Fss.FssTypes
     type IAnimationDirection      = interface end
     type IAnimationFillMode       = interface end
     type IAnimationPlayState      = interface end
@@ -63,12 +61,15 @@ module Global =
     type ITextJustify             = interface end
     type IWhiteSpace              = interface end
     type IUserSelect              = interface end
+    type IHangingPunctuation      = interface end
 
     type IListStyle         = interface end
     type IListStyleImage    = interface end
     type IListStylePosition = interface end
     type IListStyleType     = interface end
 
+    type IBackgroundColor      = interface end
+    type IBackgroundImage      = interface end
     type IBackgroundClip       = interface end
     type IBackgroundOrigin     = interface end
     type IBackgroundRepeat     = interface end
@@ -99,6 +100,7 @@ module Global =
     type ITransitionDuration       = interface end
     type ITransitionTimingFunction = interface end
     type ITransitionProperty       = interface end
+    type IWillChange               = interface end
 
     type IDisplay        = interface end
     type IAlignContent   = interface end
@@ -114,7 +116,6 @@ module Global =
     type IFlexGrow       = interface end
     type IFlexShrink     = interface end
     type IFlexBasis      = interface end
-
 
     type IMargin        = interface end
     type IPadding       = interface end
@@ -173,7 +174,7 @@ module Global =
     type IColumnFill          = interface end
     type IColumnWidth         = interface end
 
-    type INthChild = interface end
+    type INth = interface end
 
     type IResize = interface end
 
@@ -226,38 +227,24 @@ module Global =
     type IMaskOrigin    = interface end
     type IMaskPosition  = interface end
     type IMaskRepeat    = interface end
+    type IMaskSize      = interface end
+
+    type IObjectFit      = interface end
+    type IObjectPosition = interface end
+    type IImageRendering = interface end
+
+    // Svg
+    type IBaselineShift             = interface end
+    type IDominantBaseline          = interface end
+    type IColorInterpolation        = interface end
+    type IColorInterpolationFilters = interface end
+    type ISVGImageRendering         = interface end
+    type IShapeRendering            = interface end
+    type IStrokeWidth               = interface end
 
     // Types
-    type CSSProperty = CSSProperty of string * obj
+    type CssProperty = CssProperty of string * obj
     type CounterProperty = CounterProperty of string * obj
-
-    type CssInt =
-        | CssInt of int
-        interface IAnimationIterationCount
-        interface IOrder
-        interface IFontWeight
-        interface INthChild
-        interface IColumnCount
-        interface ITabSize
-        interface IOrphans
-        interface IWidows
-
-    type CssFloat =
-        | CssFloat of float
-        interface IBorderImageWidth
-        interface IFlexGrow
-        interface IFlexShrink
-        interface ILineHeight
-
-    type CssString =
-        | CssString of string
-        interface IAnimationName
-        interface ITextEmphasisStyle
-        interface ITextOverflow
-        interface IQuotes
-        interface IListStyleType
-        interface IContent
-        interface INthChild
 
     type Auto =
         | Auto
@@ -304,6 +291,14 @@ module Global =
         interface IOverscrollBehaviorY
         interface IIsolation
         interface IFontKerning
+        interface IWillChange
+        interface IImageRendering
+        interface IMaskSize
+        interface IDominantBaseline
+        interface IColorInterpolation
+        interface IColorInterpolationFilters
+        interface ISVGImageRendering
+        interface IShapeRendering
 
     type None' =
         | None'
@@ -319,6 +314,7 @@ module Global =
         interface ITextTransform
         interface ITextSizeAdjust
         interface ITextJustify
+        interface IHangingPunctuation
         interface IUserSelect
         interface IQuotes
         interface IHyphens
@@ -327,6 +323,7 @@ module Global =
         interface IListStyleImage
         interface IBorderStyle
         interface IBorderImageSource
+        interface IBackgroundImage
         interface ITransitionProperty
         interface IDisplay
         interface IFloat
@@ -357,6 +354,7 @@ module Global =
         interface IFontKerning
         interface IFontSynthesis
         interface IMaskImage
+        interface IObjectFit
 
     type Normal =
         | Normal
@@ -392,7 +390,7 @@ module Global =
         interface IBackgroundBlendMode
         interface IMixBlendMode
 
-    type Global =
+    type Keywords =
         | Inherit
         | Initial
         | Unset
@@ -436,11 +434,13 @@ module Global =
         interface ITextDecorationColor
         interface ITextEmphasisColor
         interface ITextSizeAdjust
+        interface IHangingPunctuation
         interface IUserSelect
         interface IListStyle
         interface IListStyleImage
         interface IListStylePosition
         interface IListStyleType
+        interface IBackgroundColor
         interface IBackgroundClip
         interface IBackgroundOrigin
         interface IBackgroundRepeat
@@ -560,18 +560,49 @@ module Global =
         interface IMaskOrigin
         interface IMaskPosition
         interface IMaskRepeat
+        interface IMaskSize
+        interface IObjectPosition
+        interface IImageRendering
 
-[<RequireQualifiedAccess>]
-module GlobalValue =
-    let auto = "auto"
-    let none = "none"
-    let normal = "normal"
+    type CssInt =
+        | CssInt of int
+        interface IAnimationIterationCount
+        interface IOrder
+        interface IFontWeight
+        interface INth
+        interface IColumnCount
+        interface ITabSize
+        interface IOrphans
+        interface IWidows
 
-    let int (CssInt i) = string i
-    let float (CssFloat f) = string f
-    let string (CssString s) = s
+    type CssFloat =
+        | CssFloat of float
+        interface IBorderImageWidth
+        interface IFlexGrow
+        interface IFlexShrink
+        interface ILineHeight
 
-    let global' (g: Global) = Utilities.Helpers.duToLowercase g
+    type CssString =
+        | CssString of string
+        interface IAnimationName
+        interface ITextEmphasisStyle
+        interface ITextOverflow
+        interface IQuotes
+        interface IListStyleType
+        interface IContent
+        interface INth
 
-    let CSSValue (CSSProperty (s,o)) = s,o
-    let CounterValue (CounterProperty (s,o)) = s,o
+    [<AutoOpen>]
+    module masterTypeHelpers =
+        let internal auto = "auto"
+        let internal none = "none"
+        let internal normal = "normal"
+
+        let internal IntToString (CssInt i) = string i
+        let internal FloatToString (CssFloat f) = string f
+        let internal StringToString (CssString s) = s
+
+        let internal keywordsToString (g: Keywords) = Fss.Utilities.Helpers.duToLowercase g
+
+        let CssValue (CssProperty (s,o)) = s,o
+        let CounterValue (CounterProperty (s,o)) = s,o

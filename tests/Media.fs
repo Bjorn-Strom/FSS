@@ -1,73 +1,61 @@
 namespace FSSTests
 
 open Fss
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
-open Media
 
 module Media =
     let tests =
        testList "Media"
             [
-                testNested
+                testMedia
                     "Media query with min width and min height"
-                    [
-                        MediaQuery
-                            [ MinWidth (px 500); MaxWidth (px 700) ]
-                            [ BackgroundColor.red ]
-                    ]
-                    ["@media (min-width: 500px) and (max-width: 700px)" ==> "backgroundColor,#ff0000"]
-                testNested
+                    [ FssTypes.Media.MinWidth (px 500); FssTypes.Media.MaxWidth (px 700) ]
+                    [ BackgroundColor.red ]
+                    ("@media (min-width: 500px) and (max-width: 700px)" ==> "[backgroundColor,#ff0000]")
+                testMedia
                     "Media query min height only"
-                    [
-                        MediaQuery
-                            [ MinHeight (px 700) ]
-                            [ BackgroundColor.pink ]
-                    ]
-                    ["@media (min-height: 700px)" ==> "backgroundColor,#ffc0cb"]
-                testNested
+                        [ FssTypes.Media.MinHeight (px 700) ]
+                        [ BackgroundColor.pink ]
+                        ("@media (min-height: 700px)" ==> "[backgroundColor,#ffc0cb]")
+                testMediaFor
                     "Media query for print"
-                    [
-                        MediaQueryFor Print []
-                            [
-                                MarginTop' (px 200)
-                                Transforms
-                                    [
-                                        Transform.Rotate (deg 45.0)
+                        (FssTypes.Media.Print)
+                        []
+                        [
+                            MarginTop' (px 200)
+                            Transforms
+                                [
+                                Transform.rotate (deg 45.0)
                                     ]
-                                BackgroundColor.indianRed
+                            BackgroundColor.indianRed
                             ]
-                    ]
-                    ["@media print " ==> "marginTop,200px,transform,rotate(45.00deg),backgroundColor,#cd5c5c"]
-                testNested
+                    ("@media print " ==> "[marginTop,200px; transform,rotate(45.00deg); backgroundColor,#cd5c5c]")
+                testMediaFor
                     "Media not all"
-                    [
-                        MediaQueryFor (Not All) [ Color ] [ MarginTop' (px 200) ]
-                    ]
-                    ["@media not all and (color)" ==> "marginTop,200px"]
-                testNested
+                        (FssTypes.Media.Not FssTypes.Media.Device.All)
+                        [ FssTypes.Media.Feature.Color ]
+                        [MarginTop' (px 200) ]
+                        ("@media not all and (color)" ==> "[marginTop,200px]")
+                testMediaFor
                     "Media query only screen"
+                    (FssTypes.Media.Only FssTypes.Media.Device.Screen)
                     [
-                        MediaQueryFor (Only Screen)
-                            [
-                                Color
-                                Pointer Fine
-                                Scan Interlace
-                                Grid true
-                            ]
-                            [
-                                MarginTop' (px 200)
-                                Transforms
-                                    [
-                                        Transform.Rotate (deg 45.0)
-                                    ]
-                                BackgroundColor.indianRed
-                            ]
+                        FssTypes.Media.Feature.Color
+                        FssTypes.Media.Feature.Pointer FssTypes.Media.Fine
+                        FssTypes.Media.Feature.Scan FssTypes.Media.Interlace
+                        FssTypes.Media.Feature.Grid true
                     ]
                     [
-                        "@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: 1)"
-                        ==>
-                        "marginTop,200px,transform,rotate(45.00deg),backgroundColor,#cd5c5c"
+                        MarginTop' (px 200)
+                        Transforms
+                            [
+                                Transform.rotate (deg 45.0)
+                            ]
+                        BackgroundColor.indianRed
                     ]
+                    ("@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: 1)"
+                    ==>
+                    "[marginTop,200px; transform,rotate(45.00deg); backgroundColor,#cd5c5c]")
             ]

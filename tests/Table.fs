@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,82 +9,80 @@ module Table =
     let tests =
         testList "table"
             [
-                test
+                testCase
                     "Caption side top"
-                    [CaptionSide.Top]
+                    [CaptionSide.top]
                     ["captionSide" ==> "top"]
-                test
+                testCase
                     "Caption side bottom"
-                    [CaptionSide.Bottom]
+                    [CaptionSide.bottom]
                     ["captionSide" ==> "bottom"]
-                test
+                testCase
                     "Caption side left"
-                    [CaptionSide.Left]
+                    [CaptionSide.left]
                     ["captionSide" ==> "left"]
-                test
+                testCase
                     "Caption side right"
-                    [CaptionSide.Right]
+                    [CaptionSide.right]
                     ["captionSide" ==> "right"]
-                test
+                testCase
                     "Caption side top-outside"
-                    [CaptionSide.TopOutside]
+                    [CaptionSide.topOutside]
                     ["captionSide" ==> "top-outside"]
-                test
+                testCase
                     "Caption side bottom-outside"
-                    [CaptionSide.BottomOutside]
+                    [CaptionSide.bottomOutside]
                     ["captionSide" ==> "bottom-outside"]
-                test
+                testCase
                     "Caption side inherit"
-                    [CaptionSide.Inherit]
+                    [CaptionSide.inherit']
                     ["captionSide" ==> "inherit"]
-                test
+                testCase
                     "Caption side initial"
-                    [CaptionSide.Initial]
+                    [CaptionSide.initial]
                     ["captionSide" ==> "initial"]
-                test
+                testCase
                     "Caption side unset"
-                    [CaptionSide.Unset]
+                    [CaptionSide.unset]
                     ["captionSide" ==> "unset"]
-                test
+                testCase
                     "Empty Cells show"
-                    [EmptyCells.Show]
+                    [EmptyCells.show]
                     ["emptyCells" ==> "show"]
-                test
+                testCase
                     "Empty Cells hide"
-                    [EmptyCells.Hide]
+                    [EmptyCells.hide]
                     ["emptyCells" ==> "hide"]
-                test
+                testCase
                     "Empty Cells inherit"
-                    [EmptyCells.Inherit]
+                    [EmptyCells.inherit']
                     ["emptyCells" ==> "inherit"]
-                test
+                testCase
                     "Empty Cells initial"
-                    [EmptyCells.Initial]
+                    [EmptyCells.initial]
                     ["emptyCells" ==> "initial"]
-                test
+                testCase
                     "Empty Cells unset"
-                    [EmptyCells.Unset]
+                    [EmptyCells.unset]
                     ["emptyCells" ==> "unset"]
-
-
-                test
+                testCase
                     "Table Layout fixed"
-                    [TableLayout.Fixed]
+                    [TableLayout.fixed']
                     ["tableLayout" ==> "fixed"]
-                test
+                testCase
                     "Table Layout auto"
-                    [TableLayout.Auto]
+                    [TableLayout.auto]
                     ["tableLayout" ==> "auto"]
-                test
+                testCase
                     "Table Layout inherit"
-                    [TableLayout.Inherit]
+                    [TableLayout.inherit']
                     ["tableLayout" ==> "inherit"]
-                test
+                testCase
                     "Table Layout initial"
-                    [TableLayout.Initial]
+                    [TableLayout.initial]
                     ["tableLayout" ==> "initial"]
-                test
+                testCase
                     "Table Layout unset"
-                    [TableLayout.Unset]
+                    [TableLayout.unset]
                     ["tableLayout" ==> "unset"]
             ]

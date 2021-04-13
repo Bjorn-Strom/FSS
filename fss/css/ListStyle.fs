@@ -1,269 +1,177 @@
 ﻿namespace Fss
 
-[<RequireQualifiedAccess>]
-module ListStyleTypeType =
-    type ListStyleImage =
-        | ListStyleImage of string
-        interface IListStyleImage
-
-    type ListStylePosition =
-        | Inside
-        | Outside
-        interface IListStylePosition
-
-    type ListStyleType =
-        | Disc
-        | Circle
-        | Square
-        | Decimal
-        | CjkDecimal
-        | DecimalLeadingZero
-        | LowerRoman
-        | UpperRoman
-        | LowerGreek
-        | LowerAlpha
-        | LowerLatin
-        | UpperAlpha
-        | UpperLatin
-        | ArabicIndic
-        | Armenian
-        | Bengali
-        | Cambodian
-        | CjkEarthlyBranch
-        | CjkHeavenlyStem
-        | CjkIdeographic
-        | Devanagari
-        | EthiopicNumeric
-        | Georgian
-        | Gujarati
-        | Gurmukhi
-        | Hebrew
-        | Hiragana
-        | HiraganaIroha
-        | JapaneseFormal
-        | JapaneseInformal
-        | Kannada
-        | Katakana
-        | KatakanaIroha
-        | Khmer
-        | KoreanHangulFormal
-        | KoreanHanjaFormal
-        | KoreanHanjaInformal
-        | Lao
-        | LowerArmenian
-        | Malayalam
-        | Mongolian
-        | Myanmar
-        | Oriya
-        | Persian
-        | SimpChineseFormal
-        | SimpChineseInformal
-        | Tamil
-        | Telugu
-        | Thai
-        | Tibetan
-        | TradChineseFormal
-        | TradChineseInformal
-        | UpperArmenian
-        | DisclosureOpen
-        | DisclosureClosed
-        interface IListStyleType
-
-    let styleTypeToString (styleType: IListStyleType) =
-        match styleType with
-        | :? ListStyleType as l -> Utilities.Helpers.duToKebab l
-        | :? CounterType.CounterStyle as c -> counterValue c
-        | :? CssString as s -> GlobalValue.string s |> sprintf "'%s'"
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
-        | _ -> "Unknown list style type"
+open Fable.Core
 
 [<AutoOpen>]
 module ListStyle =
-    let private listStyleToString (style: IListStyle) =
+    let private listStyleToString (style: FssTypes.IListStyle) =
         match style with
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown list style"
 
-    let private listStyleImageToString (image: IListStyleImage) =
+    let private listStyleImageToString (image: FssTypes.IListStyleImage) =
         let stringifyImage =
             function
-                | ListStyleTypeType.ListStyleImage u -> sprintf "url('%s')" u
+                | FssTypes.ListStyle.Image u -> sprintf "url('%s')" u
 
         match image with
-        | :? ListStyleTypeType.ListStyleImage as l -> stringifyImage l
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? FssTypes.ListStyle.Image as l -> stringifyImage l
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown list style image"
 
-    let private stylePositionToString (stylePosition: IListStylePosition) =
+    let private stylePositionToString (stylePosition: FssTypes.IListStylePosition) =
         match stylePosition with
-        | :? ListStyleTypeType.ListStylePosition as l -> Utilities.Helpers.duToLowercase l
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.ListStyle.Position as l -> Utilities.Helpers.duToLowercase l
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown list style position"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style
-    let private listStyleValue (value: string) = PropertyValue.cssValue Property.ListStyle value
-    let private listStyleValue' value =
-        value
-        |> listStyleToString
-        |> listStyleValue
+    let private listStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyle
+    let private listStyleValue' = listStyleToString >> listStyleValue
 
+    [<Erase>]
+    /// Resets list style.
     type ListStyle =
-        static member Value (style: IListStyle) = style |> listStyleValue'
+        static member value (style: FssTypes.IListStyle) = style |> listStyleValue'
 
-        static member None = None' |> listStyleValue'
-        static member Inherit = Inherit |> listStyleValue'
-        static member Initial = Initial |> listStyleValue'
-        static member Unset = Unset |> listStyleValue'
+        static member none = FssTypes.None' |> listStyleValue'
+        static member inherit' = FssTypes.Inherit |> listStyleValue'
+        static member initial = FssTypes.Initial |> listStyleValue'
+        static member unset = FssTypes.Unset |> listStyleValue'
 
-    /// <summary>Resets list style.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let ListStyle' (style: IListStyle) = ListStyle.Value(style)
+    /// Resets list style.
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let ListStyle' = ListStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
-    let private listStyleImageValue (value: string) = PropertyValue.cssValue Property.ListStyleImage value
-    let private listStyleImageValue' value =
-        value
-        |> listStyleImageToString
-        |> listStyleImageValue
+    let private listStyleImageValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyleImage
+    let private listStyleImageValue' = listStyleImageToString >> listStyleImageValue
 
+    [<Erase>]
+    /// Specifies an image to be used as the list item marker.
     type ListStyleImage =
-        static member Value (styleImage: IListStyleImage) = styleImage |> listStyleImageValue'
-        static member Url (url: string) = ListStyleTypeType.ListStyleImage url |> listStyleImageValue'
+        static member value (styleImage: FssTypes.IListStyleImage) = styleImage |> listStyleImageValue'
+        static member url (url: string) = FssTypes.ListStyle.Image url |> listStyleImageValue'
 
-        static member None = None' |> listStyleImageValue'
-        static member Inherit = Inherit |> listStyleImageValue'
-        static member Initial = Initial |> listStyleImageValue'
-        static member Unset = Unset |> listStyleImageValue'
+        static member none = FssTypes.None' |> listStyleImageValue'
+        static member inherit' = FssTypes.Inherit |> listStyleImageValue'
+        static member initial = FssTypes.Initial |> listStyleImageValue'
+        static member unset = FssTypes.Unset |> listStyleImageValue'
 
-    /// <summary>Specifies an image to be used as the list item marker..</summary>
-    /// <param name="image">
-    ///     can be:
-    ///     - <c> ListStyleImage</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let ListStyleImage' (image: IListStyleImage) = ListStyleImage.Value(image)
+    /// Specifies an image to be used as the list item marker.
+    /// Valid parameters:
+    /// - ListStyleImage</c>
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
+    let ListStyleImage' = ListStyleImage.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
-    let private listStylePositionProperty (value: string) = PropertyValue.cssValue Property.ListStylePosition value
-    let private listStylePositionProperty' value =
-        value
-        |> stylePositionToString
-        |> listStylePositionProperty
+    let private listStylePositionProperty = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStylePosition
+    let private listStylePositionProperty' = stylePositionToString >> listStylePositionProperty
 
+    [<Erase>]
+    /// Specifies the position of the marker of the list item.
     type ListStylePosition =
-        static member Value (stylePosition: IListStylePosition) = stylePosition |> listStylePositionProperty'
-        static member Inside = ListStyleTypeType.Inside |> listStylePositionProperty'
-        static member Outside = ListStyleTypeType.Outside |> listStylePositionProperty'
+        static member value (stylePosition: FssTypes.IListStylePosition) = stylePosition |> listStylePositionProperty'
+        static member inside = FssTypes.ListStyle.Inside |> listStylePositionProperty'
+        static member outside = FssTypes.ListStyle.Outside |> listStylePositionProperty'
 
-        static member Inherit = Inherit |> listStylePositionProperty'
-        static member Initial = Initial |> listStylePositionProperty'
-        static member Unset = Unset |> listStylePositionProperty'
+        static member inherit' = FssTypes.Inherit |> listStylePositionProperty'
+        static member initial = FssTypes.Initial |> listStylePositionProperty'
+        static member unset = FssTypes.Unset |> listStylePositionProperty'
 
-    /// <summary>Specifies the position of the marker of the list item.</summary>
-    /// <param name="position">
-    ///     can be:
-    ///     - <c> ListStylePosition</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let ListStylePosition' (position: IListStylePosition) = ListStylePosition.Value(position)
+    /// Specifies the position of the marker of the list item.
+    /// Valid parameters:
+    /// - ListStylePosition</c>
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let ListStylePosition' = ListStylePosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
-    let private listStyleTypeProperty (value: string) = PropertyValue.cssValue Property.ListStyleType value
-    let private listStyleTypeProperty' value =
-        value
-        |> ListStyleTypeType.styleTypeToString
-        |> listStyleTypeProperty
+    let private listStyleTypeProperty = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyleType
+    let private listStyleTypeProperty' = FssTypes.listStyleHelpers.styleTypeToString >> listStyleTypeProperty
+
+    [<Erase>]
+    /// Specifies list style marker.
     type ListStyleType =
-        static member Value (styleType: IListStyleType) = styleType |> listStyleTypeProperty'
-        static member Value(counter: CounterType.CounterStyle) = counterValue counter |> listStyleTypeProperty
-        static member Disc = ListStyleTypeType.Disc |> listStyleTypeProperty'
-        static member Circle = ListStyleTypeType.Circle |> listStyleTypeProperty'
-        static member Square = ListStyleTypeType.Square |> listStyleTypeProperty'
-        static member Decimal = ListStyleTypeType.Decimal |> listStyleTypeProperty'
-        static member CjkDecimal = ListStyleTypeType.CjkDecimal |> listStyleTypeProperty'
-        static member DecimalLeadingZero = ListStyleTypeType.DecimalLeadingZero |> listStyleTypeProperty'
-        static member LowerRoman = ListStyleTypeType.LowerRoman |> listStyleTypeProperty'
-        static member UpperRoman = ListStyleTypeType.UpperRoman |> listStyleTypeProperty'
-        static member LowerGreek = ListStyleTypeType.LowerGreek |> listStyleTypeProperty'
-        static member LowerAlpha = ListStyleTypeType.LowerAlpha |> listStyleTypeProperty'
-        static member LowerLatin = ListStyleTypeType.LowerLatin |> listStyleTypeProperty'
-        static member UpperAlpha = ListStyleTypeType.UpperAlpha |> listStyleTypeProperty'
-        static member UpperLatin = ListStyleTypeType.UpperLatin |> listStyleTypeProperty'
-        static member ArabicIndic = ListStyleTypeType.ArabicIndic |> listStyleTypeProperty'
-        static member Armenian = ListStyleTypeType.Armenian |> listStyleTypeProperty'
-        static member Bengali = ListStyleTypeType.Bengali |> listStyleTypeProperty'
-        static member Cambodian = ListStyleTypeType.Cambodian |> listStyleTypeProperty'
-        static member CjkEarthlyBranch = ListStyleTypeType.CjkEarthlyBranch |> listStyleTypeProperty'
-        static member CjkHeavenlyStem = ListStyleTypeType.CjkHeavenlyStem |> listStyleTypeProperty'
-        static member CjkIdeographic = ListStyleTypeType.CjkIdeographic |> listStyleTypeProperty'
-        static member Devanagari = ListStyleTypeType.Devanagari |> listStyleTypeProperty'
-        static member EthiopicNumeric = ListStyleTypeType.EthiopicNumeric |> listStyleTypeProperty'
-        static member Georgian = ListStyleTypeType.Georgian |> listStyleTypeProperty'
-        static member Gujarati = ListStyleTypeType.Gujarati |> listStyleTypeProperty'
-        static member Gurmukhi = ListStyleTypeType.Gurmukhi |> listStyleTypeProperty'
-        static member Hebrew = ListStyleTypeType.Hebrew |> listStyleTypeProperty'
-        static member Hiragana = ListStyleTypeType.Hiragana |> listStyleTypeProperty'
-        static member HiraganaIroha = ListStyleTypeType.HiraganaIroha |> listStyleTypeProperty'
-        static member JapaneseFormal = ListStyleTypeType.JapaneseFormal |> listStyleTypeProperty'
-        static member JapaneseInformal = ListStyleTypeType.JapaneseInformal |> listStyleTypeProperty'
-        static member Kannada = ListStyleTypeType.Kannada |> listStyleTypeProperty'
-        static member Katakana = ListStyleTypeType.Katakana |> listStyleTypeProperty'
-        static member KatakanaIroha = ListStyleTypeType.KatakanaIroha |> listStyleTypeProperty'
-        static member Khmer = ListStyleTypeType.Khmer |> listStyleTypeProperty'
-        static member KoreanHangulFormal = ListStyleTypeType.KoreanHangulFormal |> listStyleTypeProperty'
-        static member KoreanHanjaFormal = ListStyleTypeType.KoreanHanjaFormal |> listStyleTypeProperty'
-        static member KoreanHanjaInformal = ListStyleTypeType.KoreanHanjaInformal |> listStyleTypeProperty'
-        static member Lao = ListStyleTypeType.Lao |> listStyleTypeProperty'
-        static member LowerArmenian = ListStyleTypeType.LowerArmenian |> listStyleTypeProperty'
-        static member Malayalam = ListStyleTypeType.Malayalam |> listStyleTypeProperty'
-        static member Mongolian = ListStyleTypeType.Mongolian |> listStyleTypeProperty'
-        static member Myanmar = ListStyleTypeType.Myanmar |> listStyleTypeProperty'
-        static member Oriya = ListStyleTypeType.Oriya |> listStyleTypeProperty'
-        static member Persian = ListStyleTypeType.Persian |> listStyleTypeProperty'
-        static member SimpChineseFormal = ListStyleTypeType.SimpChineseFormal |> listStyleTypeProperty'
-        static member SimpChineeInformal = ListStyleTypeType.SimpChineseInformal |> listStyleTypeProperty'
-        static member Tamil = ListStyleTypeType.Tamil |> listStyleTypeProperty'
-        static member Telugu = ListStyleTypeType.Telugu |> listStyleTypeProperty'
-        static member Thai = ListStyleTypeType.Thai |> listStyleTypeProperty'
-        static member Tibetan = ListStyleTypeType.Tibetan |> listStyleTypeProperty'
-        static member TradChineseFormal = ListStyleTypeType.TradChineseFormal |> listStyleTypeProperty'
-        static member TradChineseInformal = ListStyleTypeType.TradChineseInformal |> listStyleTypeProperty'
-        static member UpperArmenian = ListStyleTypeType.UpperArmenian |> listStyleTypeProperty'
-        static member DisclosureOpen = ListStyleTypeType.DisclosureOpen |> listStyleTypeProperty'
-        static member DisclosureClosed = ListStyleTypeType.DisclosureClosed |> listStyleTypeProperty'
+        static member value (styleType: FssTypes.IListStyleType) = styleType |> listStyleTypeProperty'
+        static member value(counter: FssTypes.Counter.Style) = FssTypes.counterStyleHelpers.counterStyleToString counter |> listStyleTypeProperty
+        static member disc = FssTypes.ListStyle.Disc |> listStyleTypeProperty'
+        static member circle = FssTypes.ListStyle.Circle |> listStyleTypeProperty'
+        static member square = FssTypes.ListStyle.Square |> listStyleTypeProperty'
+        static member decimal = FssTypes.ListStyle.Decimal |> listStyleTypeProperty'
+        static member cjkDecimal = FssTypes.ListStyle.CjkDecimal |> listStyleTypeProperty'
+        static member decimalLeadingZero = FssTypes.ListStyle.DecimalLeadingZero |> listStyleTypeProperty'
+        static member lowerRoman = FssTypes.ListStyle.LowerRoman |> listStyleTypeProperty'
+        static member upperRoman = FssTypes.ListStyle.UpperRoman |> listStyleTypeProperty'
+        static member lowerGreek = FssTypes.ListStyle.LowerGreek |> listStyleTypeProperty'
+        static member lowerAlpha = FssTypes.ListStyle.LowerAlpha |> listStyleTypeProperty'
+        static member lowerLatin = FssTypes.ListStyle.LowerLatin |> listStyleTypeProperty'
+        static member upperAlpha = FssTypes.ListStyle.UpperAlpha |> listStyleTypeProperty'
+        static member upperLatin = FssTypes.ListStyle.UpperLatin |> listStyleTypeProperty'
+        static member arabicIndic = FssTypes.ListStyle.ArabicIndic |> listStyleTypeProperty'
+        static member armenian = FssTypes.ListStyle.Armenian |> listStyleTypeProperty'
+        static member bengali = FssTypes.ListStyle.Bengali |> listStyleTypeProperty'
+        static member cambodian = FssTypes.ListStyle.Cambodian |> listStyleTypeProperty'
+        static member cjkEarthlyBranch = FssTypes.ListStyle.CjkEarthlyBranch |> listStyleTypeProperty'
+        static member cjkHeavenlyStem = FssTypes.ListStyle.CjkHeavenlyStem |> listStyleTypeProperty'
+        static member cjkIdeographic = FssTypes.ListStyle.CjkIdeographic |> listStyleTypeProperty'
+        static member devanagari = FssTypes.ListStyle.Devanagari |> listStyleTypeProperty'
+        static member ethiopicNumeric = FssTypes.ListStyle.EthiopicNumeric |> listStyleTypeProperty'
+        static member georgian = FssTypes.ListStyle.Georgian |> listStyleTypeProperty'
+        static member gujarati = FssTypes.ListStyle.Gujarati |> listStyleTypeProperty'
+        static member gurmukhi = FssTypes.ListStyle.Gurmukhi |> listStyleTypeProperty'
+        static member hebrew = FssTypes.ListStyle.Hebrew |> listStyleTypeProperty'
+        static member hiragana = FssTypes.ListStyle.Hiragana |> listStyleTypeProperty'
+        static member hiraganaIroha = FssTypes.ListStyle.HiraganaIroha |> listStyleTypeProperty'
+        static member japaneseFormal = FssTypes.ListStyle.JapaneseFormal |> listStyleTypeProperty'
+        static member japaneseInformal = FssTypes.ListStyle.JapaneseInformal |> listStyleTypeProperty'
+        static member kannada = FssTypes.ListStyle.Kannada |> listStyleTypeProperty'
+        static member katakana = FssTypes.ListStyle.Katakana |> listStyleTypeProperty'
+        static member katakanaIroha = FssTypes.ListStyle.KatakanaIroha |> listStyleTypeProperty'
+        static member khmer = FssTypes.ListStyle.Khmer |> listStyleTypeProperty'
+        static member koreanHangulFormal = FssTypes.ListStyle.KoreanHangulFormal |> listStyleTypeProperty'
+        static member koreanHanjaFormal = FssTypes.ListStyle.KoreanHanjaFormal |> listStyleTypeProperty'
+        static member koreanHanjaInformal = FssTypes.ListStyle.KoreanHanjaInformal |> listStyleTypeProperty'
+        static member lao = FssTypes.ListStyle.Lao |> listStyleTypeProperty'
+        static member lowerArmenian = FssTypes.ListStyle.LowerArmenian |> listStyleTypeProperty'
+        static member malayalam = FssTypes.ListStyle.Malayalam |> listStyleTypeProperty'
+        static member mongolian = FssTypes.ListStyle.Mongolian |> listStyleTypeProperty'
+        static member myanmar = FssTypes.ListStyle.Myanmar |> listStyleTypeProperty'
+        static member oriya = FssTypes.ListStyle.Oriya |> listStyleTypeProperty'
+        static member persian = FssTypes.ListStyle.Persian |> listStyleTypeProperty'
+        static member simpChineseFormal = FssTypes.ListStyle.SimpChineseFormal |> listStyleTypeProperty'
+        static member simpChineeInformal = FssTypes.ListStyle.SimpChineseInformal |> listStyleTypeProperty'
+        static member tamil = FssTypes.ListStyle.Tamil |> listStyleTypeProperty'
+        static member telugu = FssTypes.ListStyle.Telugu |> listStyleTypeProperty'
+        static member thai = FssTypes.ListStyle.Thai |> listStyleTypeProperty'
+        static member tibetan = FssTypes.ListStyle.Tibetan |> listStyleTypeProperty'
+        static member tradChineseFormal = FssTypes.ListStyle.TradChineseFormal |> listStyleTypeProperty'
+        static member tradChineseInformal = FssTypes.ListStyle.TradChineseInformal |> listStyleTypeProperty'
+        static member upperArmenian = FssTypes.ListStyle.UpperArmenian |> listStyleTypeProperty'
+        static member disclosureOpen = FssTypes.ListStyle.DisclosureOpen |> listStyleTypeProperty'
+        static member disclosureClosed = FssTypes.ListStyle.DisclosureClosed |> listStyleTypeProperty'
 
-        static member None = None' |> listStyleTypeProperty'
-        static member Inherit = Inherit |> listStyleTypeProperty'
-        static member Initial = Initial |> listStyleTypeProperty'
-        static member Unset = Unset |> listStyleTypeProperty'
+        static member none = FssTypes.None' |> listStyleTypeProperty'
+        static member inherit' = FssTypes.Inherit |> listStyleTypeProperty'
+        static member initial = FssTypes.Initial |> listStyleTypeProperty'
+        static member unset = FssTypes.Unset |> listStyleTypeProperty'
 
-    /// <summary>Specifies list style marker.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> ListStyleType</c>
-    ///     - <c> CounterStyle </c>
-    ///     - <c> CssString </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let ListStyleType' (style: IListStyleType) = ListStyleType.Value(style)
+    /// Specifies list style marker.
+    /// Valid parameters:
+    /// - ListStyleType
+    /// - CounterStyle
+    /// - CssString
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
+    let ListStyleType': (FssTypes.IListStyleType -> FssTypes.CssProperty) = ListStyleType.value

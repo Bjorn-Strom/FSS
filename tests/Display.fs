@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,72 +9,76 @@ module Display =
     let tests =
         testList "Display"
             [
-                test
+                testCase
                     "Display inline"
-                    [ Display.Inline ]
+                    [ Display.inline' ]
                     ["display" ==> "inline"]
-                test
+                testCase
                     "Display inline-block"
-                    [ Display.InlineBlock]
+                    [ Display.inlineBlock]
                     ["display" ==> "inline-block"]
-                test
+                testCase
                     "Display block"
-                    [ Display.Block]
+                    [ Display.block]
                     ["display" ==> "block"]
-                test
+                testCase
                     "Display run-in"
-                    [ Display.RunIn]
+                    [ Display.runIn]
                     ["display" ==> "run-in"]
-                test
+                testCase
                     "Display flex"
-                    [ Display.Flex]
+                    [ Display.flex]
                     ["display" ==> "flex"]
-                test
+                testCase
                     "Display grid"
-                    [ Display.Grid]
+                    [ Display.grid]
                     ["display" ==> "grid"]
-                test
+                testCase
                     "Display flow-root"
-                    [ Display.FlowRoot]
+                    [ Display.flowRoot]
                     ["display" ==> "flow-root"]
-                test
+                testCase
                     "Display table"
-                    [ Display.Table]
+                    [ Display.table]
                     ["display" ==> "table"]
-                test
+                testCase
                     "Display table-cell"
-                    [ Display.TableCell]
+                    [ Display.tableCell]
                     ["display" ==> "table-cell"]
-                test
+                testCase
                     "Display table-column"
-                    [ Display.TableColumn]
+                    [ Display.tableColumn]
                     ["display" ==> "table-column"]
-                test
+                testCase
                     "Display table-column-group"
-                    [ Display.TableColumnGroup]
+                    [ Display.tableColumnGroup]
                     ["display" ==> "table-column-group"]
-                test
+                testCase
                     "Display table-header-group"
-                    [ Display.TableHeaderGroup]
+                    [ Display.tableHeaderGroup]
                     ["display" ==> "table-header-group"]
-                test
+                testCase
                     "Display table row group"
-                    [ Display.TableRowGroup]
+                    [ Display.tableRowGroup]
                     ["display" ==> "table-row-group"]
-                test
+                testCase
                     "table footer group"
-                    [ Display.TableFooterGroup]
+                    [ Display.tableFooterGroup]
                     ["display" ==> "table-footer-group"]
-                test
+                testCase
                     "Display table row"
-                    [ Display.TableRow]
+                    [ Display.tableRow]
                     ["display" ==> "table-row"]
-                test
+                testCase
                     "Display table-caption"
-                    [ Display.TableCaption]
+                    [ Display.tableCaption]
                     ["display" ==> "table-caption"]
-                test
+                testCase
                     "Display none"
-                    [ Display.None]
+                    [ Display.none]
                     ["display" ==> "none"]
+                testCase
+                    "Display none"
+                    [ Display' FssTypes.Display.Grid]
+                    ["display" ==> "grid"]
             ]

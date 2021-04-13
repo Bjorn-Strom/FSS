@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,58 +9,58 @@ module Counter =
     let sampleCounterStyle =
         counterStyle
             [
-                Counter.System.Alphabetic
+                Counter.System.alphabetic
             ]
 
     let tests =
         testList "Counter"
             [
-                test
+                testCase
                     "CounterReset reset"
-                    [ CounterReset.Reset sampleCounterStyle]
-                    [ "counterReset" ==> (counterValue sampleCounterStyle) ]
-                test
+                    [ CounterReset.reset sampleCounterStyle]
+                    [ "counterReset" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
+                testCase
                     "CounterReset reset to"
-                    [ CounterReset.ResetTo sampleCounterStyle 5]
-                    [ "counterReset" ==> sprintf "%s 5" (counterValue sampleCounterStyle) ]
-                test
+                    [ CounterReset.resetTo sampleCounterStyle 5]
+                    [ "counterReset" ==> sprintf "%s 5" (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
+                testCase
                     "CounterReset none"
-                    [ CounterReset.None]
+                    [ CounterReset.none]
                     [ "counterReset" ==> "none" ]
-                test
+                testCase
                     "CounterReset inherit"
-                    [ CounterReset.Inherit]
+                    [ CounterReset.inherit']
                     [ "counterReset" ==> "inherit" ]
-                test
+                testCase
                     "CounterReset initial"
-                    [ CounterReset.Initial]
+                    [ CounterReset.initial]
                     [ "counterReset" ==> "initial" ]
-                test
+                testCase
                     "CounterReset unset"
-                    [ CounterReset.Unset ]
+                    [ CounterReset.unset ]
                     [ "counterReset" ==> "unset" ]
-                test
+                testCase
                     "CounterIncrement increment"
-                    [ CounterIncrement.Increment sampleCounterStyle]
-                    [ "counterIncrement" ==> (counterValue sampleCounterStyle) ]
-                test
+                    [ CounterIncrement.increment sampleCounterStyle]
+                    [ "counterIncrement" ==> (FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle) ]
+                testCase
                     "CounterIncrement increment to"
-                    [ CounterIncrement.IncrementTo sampleCounterStyle 5]
-                    [ "counterIncrement" ==> sprintf "%s 5"(counterValue sampleCounterStyle)]
-                test
+                    [ CounterIncrement.incrementTo sampleCounterStyle 5]
+                    [ "counterIncrement" ==> sprintf "%s 5"(FssTypes.counterStyleHelpers.counterStyleToString sampleCounterStyle)]
+                testCase
                     "CounterIncrement none"
-                    [ CounterIncrement.None]
+                    [ CounterIncrement.none]
                     [ "counterIncrement" ==> "none" ]
-                test
+                testCase
                     "CounterIncrement inherit"
-                    [ CounterIncrement.Inherit]
+                    [ CounterIncrement.inherit']
                     [ "counterIncrement" ==> "inherit" ]
-                test
+                testCase
                     "CounterIncrement initial"
-                    [ CounterIncrement.Initial]
+                    [ CounterIncrement.initial]
                     [ "counterIncrement" ==> "initial" ]
-                test
+                testCase
                     "CounterIncrement unset"
-                    [ CounterIncrement.Unset ]
+                    [ CounterIncrement.unset ]
                     [ "counterIncrement" ==> "unset" ]
             ]

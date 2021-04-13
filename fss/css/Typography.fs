@@ -1,63 +1,57 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module Typography =
-
-    let private orphansToString (orphans: IOrphans) =
+    let private orphansToString (orphans: FssTypes.IOrphans) =
         match orphans with
-        | :? CssInt as i -> GlobalValue.int i
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.CssInt as i -> FssTypes.masterTypeHelpers.IntToString i
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown orphans"
 
-    let private widowsToString (widows: IWidows) =
+    let private widowsToString (widows: FssTypes.IWidows) =
         match widows with
-        | :? CssInt as i -> GlobalValue.int i
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.CssInt as i -> FssTypes.masterTypeHelpers.IntToString i
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown widows"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/orphans
-    let private orphansValue value = PropertyValue.cssValue Property.Orphans value
-    let private orphansValue' value =
-        value
-        |> orphansToString
-        |> orphansValue
-    type Orphans =
-        static member Value (orphans: IOrphans) = orphans |> orphansValue'
-        static member Inherit = Inherit |> orphansValue'
-        static member Initial = Initial |> orphansValue'
-        static member Unset = Unset |> orphansValue'
+    let private orphansValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Orphans
+    let private orphansValue' = orphansToString >> orphansValue
 
-    /// <summary>Specifies minimum number of lines a container must show at bottom.</summary>
-    /// <param name="orphans">
-    ///     can be:
-    ///     - <c> CssInt </c> 
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let Orphans' (orphans: IOrphans) = orphans |> Orphans.Value
+    [<Erase>]
+    /// Specifies minimum number of lines a container must show at bottom.
+    type Orphans =
+        static member value (orphans: FssTypes.IOrphans) = orphans |> orphansValue'
+        static member inherit' = FssTypes.Inherit |> orphansValue'
+        static member initial = FssTypes.Initial |> orphansValue'
+        static member unset = FssTypes.Unset |> orphansValue'
+
+    /// Specifies minimum number of lines a container must show at bottom.
+    /// Valid parameters:
+    /// - CssInt
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let Orphans' = Orphans.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/widows
-    let private widowsValue value = PropertyValue.cssValue Property.Widows value
-    let private widowsValue' value =
-        value
-        |> widowsToString
-        |> widowsValue
+    let private widowsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Widows
+    let private widowsValue' = widowsToString >> widowsValue
 
+    [<Erase>]
+    /// Specifies minimum number of lines a container must show at top.
     type Widows =
-        static member Value (widows: IWidows) = widows |> widowsValue'
-        static member Inherit = Inherit |> widowsValue'
-        static member Initial = Initial |> widowsValue'
-        static member Unset = Unset |> widowsValue'
+        static member value (widows: FssTypes.IWidows) = widows |> widowsValue'
+        static member inherit' = FssTypes.Inherit |> widowsValue'
+        static member initial = FssTypes.Initial |> widowsValue'
+        static member unset = FssTypes.Unset |> widowsValue'
 
-    /// <summary>Specifies minimum number of lines a container must show at top.</summary>
-    /// <param name="widows">
-    ///     can be:
-    ///     - <c> CssInt </c> 
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let Widows' (widows: IWidows) = widows |> Widows.Value
+    /// Specifies minimum number of lines a container must show at top.
+    /// Valid parameters:
+    /// - CssInt
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let Widows' = Widows.value

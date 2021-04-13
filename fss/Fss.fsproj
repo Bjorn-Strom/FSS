@@ -5,7 +5,7 @@
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;emotion;CSS;styling;css-in-lang;fable;react;html</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>1.1.4</Version>
+    <Version>2.0.0</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
@@ -18,13 +18,55 @@
     </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utilities.fs" />
-    <Compile Include="css\Types.fs" />
-    <Compile Include="css\Property.fs" />
-    <Compile Include="css\Units.fs" />
-    <Compile Include="css\Html.fs" />
+    <Compile Include="Types\MasterTypes.fs" />
+    <Compile Include="Types\Units.fs" />
+    <Compile Include="Types\Html.fs" />
+    <Compile Include="Types\Attribute.fs" />
+    <Compile Include="Types\Property.fs" />
+    <Compile Include="Types\TimingFunction.fs" />
+    <Compile Include="Types\Animation.fs" />
+    <Compile Include="Types\Color.fs" />
+    <Compile Include="Types\MixBlendMode.fs" />
+    <Compile Include="Types\BoxShadow.fs" />
+    <Compile Include="Types\Media.fs" />
+    <Compile Include="Types\Font.fs" />
+    <Compile Include="Types\Word.fs" />
+    <Compile Include="Types\Text.fs" />
+    <Compile Include="Types\CounterStyle.fs" />
+    <Compile Include="Types\ListStyle.fs" />
+    <Compile Include="Types\Column.fs" />
+    <Compile Include="Types\Image.fs" />
+    <Compile Include="Types\Background.fs" />
+    <Compile Include="Types\Border.fs" />
+    <Compile Include="Types\Transform.fs" />
+    <Compile Include="Types\Display.fs" />
+    <Compile Include="Types\Resize.fs" />
+    <Compile Include="Types\Visibility.fs" />
+    <Compile Include="Types\Overflow.fs" />
+    <Compile Include="Types\Position.fs" />
+    <Compile Include="Types\PointerEvents.fs" />
+    <Compile Include="Types\Cursor.fs" />
+    <Compile Include="Types\Table.fs" />
+    <Compile Include="Types\Appearance.fs" />
+    <Compile Include="Types\ContentSize.fs" />
+    <Compile Include="Types\Grid.fs" />
+    <Compile Include="Types\Flex.fs" />
+    <Compile Include="Types\Outline.fs" />
+    <Compile Include="Types\Scroll.fs" />
+    <Compile Include="Types\Clear.fs" />
+    <Compile Include="Types\Filter.fs" />
+    <Compile Include="Types\Mask.fs" />
+    <Compile Include="Types\Content.fs" />
+    <Compile Include="Types\ClipPath.fs" />
+    <Compile Include="Types\FontFace.fs" />
+    <Compile Include="Types\PseudoClass.fs" />
+    <Compile Include="Types\Caret.fs" />
+    <Compile Include="Types\WillChange.fs" />
+    <Compile Include="Types\Svg.fs" />
+    <Compile Include="Types\Margin.fs" />
+    <Compile Include="Types\Padding.fs" />
     <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />
-    <Compile Include="css\CssColor.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Font.fs" />
     <Compile Include="css\Word.fs" />
@@ -32,7 +74,6 @@
     <Compile Include="css\CounterStyle.fs" />
     <Compile Include="css\ListStyle.fs" />
     <Compile Include="css\Column.fs" />
-    <Compile Include="css\Image.fs" />
     <Compile Include="css\Background.fs" />
     <Compile Include="css\Border.fs" />
     <Compile Include="css\Transform.fs" />
@@ -48,7 +89,6 @@
     <Compile Include="css\Perspective.fs" />
     <Compile Include="css\PointerEvents.fs" />
     <Compile Include="css\Cursor.fs" />
-    <Compile Include="css\Attribute.fs" />
     <Compile Include="css\Content.fs" />
     <Compile Include="css\Table.fs" />
     <Compile Include="css\Caret.fs" />
@@ -67,6 +107,9 @@
     <Compile Include="css\MixBlendMode.fs" />
     <Compile Include="css\AspectRatio.fs" />
     <Compile Include="css\Mask.fs" />
+    <Compile Include="css\WillChange.fs" />
+    <Compile Include="css\Image.fs" />
+    <Compile Include="css\Svg.fs" />
     <Compile Include="Keyframes.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Functions.fs" />
@@ -75,7 +118,8 @@
     <Compile Include="PseudoElement.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="*.*" PackagePath="fable\" />
+    <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
+    <Content Include="Types\" PackagePath="fable\Types" />
     <Content Include="css\" PackagePath="fable\css" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

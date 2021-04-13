@@ -1,246 +1,195 @@
 namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
-[<RequireQualifiedAccess>]
-module AnimationType =
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
-    type AnimationDirection =
-        | Reverse
-        | Alternate
-        | AlternateReverse
-        interface IAnimationDirection
-    type AnimationFillMode =
-        | Forwards
-        | Backwards
-        | Both
-        interface IAnimationFillMode
-
-    type IterationCount =
-        | Infinite
-        interface IAnimationIterationCount
-
-    type AnimationPlayState =
-        | Running
-        | Paused
-        interface IAnimationPlayState
-
-    let iterationCountToString (iterationCount: IAnimationIterationCount) =
-        match iterationCount with
-        | :? IterationCount as i -> "infinite"
-        | :? Global.CssInt as i -> GlobalValue.int i
-        | _ -> "Unknown animation iteration count"
-
 [<AutoOpen>]
 module Animation =
-
-    let private animationDirectionToString (direction: IAnimationDirection) =
+    let private animationDirectionToString (direction: FssTypes.IAnimationDirection) =
         match direction with
-            | :? AnimationType.AnimationDirection as d -> Utilities.Helpers.duToKebab d
-            | :? Global as g -> GlobalValue.global' g
-            | :? Normal -> GlobalValue.normal
+            | :? FssTypes.Animation.Direction as d -> Utilities.Helpers.duToKebab d
+            | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+            | :? FssTypes.Normal -> FssTypes.masterTypeHelpers.normal
             | _ -> "Unknown animation direction"
 
-    let private animationFillModeToString (fillMode: IAnimationFillMode) =
+    let private animationFillModeToString (fillMode: FssTypes.IAnimationFillMode) =
         match fillMode with
-            | :? AnimationType.AnimationFillMode as a -> Utilities.Helpers.duToLowercase a
-            | :? None' -> GlobalValue.none
+            | :? FssTypes.Animation.FillMode as a -> Utilities.Helpers.duToLowercase a
+            | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
             | _ -> "Unknown fill mode"
 
-    let private playStateTypeToString (playState: IAnimationPlayState) =
+    let private playStateTypeToString (playState: FssTypes.IAnimationPlayState) =
         match playState with
-        | :? AnimationType.AnimationPlayState as a -> Utilities.Helpers.duToLowercase a
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.Animation.PlayState as a -> Utilities.Helpers.duToLowercase a
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown animation play state"
 
-    let private nameToString (name: IAnimationName) =
+    let private nameToString (name: FssTypes.IAnimationName) =
         match name with
-        | :? CssString as s -> GlobalValue.string s
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.CssString as s -> FssTypes.masterTypeHelpers.StringToString s
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown animation name"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
+    [<Erase>]
     type AnimationDelay =
-        static member Value (delay: Units.Time.Time) = PropertyValue.cssValue Property.AnimationDelay (Units.Time.value delay)
+        static member Value (delay: FssTypes.Time) = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDelay (FssTypes.unitHelpers.timeToString delay)
 
-    /// <summary>Specifies an amount of time to wait before starting the animation. </summary>
-    /// <param name="delay"> Amount of time to wait.</param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationDelay' (delay: Units.Time.Time) = AnimationDelay.Value(delay)
+    let AnimationDelay' = AnimationDelay.Value
 
-    let private directionCssValue value = PropertyValue.cssValue Property.AnimationDirection value
-    let private directionCssValue' value =
-        value
-        |> animationDirectionToString
-        |> directionCssValue
+    let private directionCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDirection
+    let private directionCssValue' = animationDirectionToString >> directionCssValue
+
+    [<Erase>]
+    /// Specifies which direction an animation should play.
     type AnimationDirection =
-        static member value (direction: IAnimationDirection) = direction |> directionCssValue'
-        static member Reverse = AnimationType.Reverse |> directionCssValue'
-        static member Alternate = AnimationType.Alternate |> directionCssValue'
-        static member AlternateReverse = AnimationType.AlternateReverse |> directionCssValue'
+        static member value (direction: FssTypes.IAnimationDirection) = direction |> directionCssValue'
+        static member reverse = FssTypes.Animation.Direction.Reverse |> directionCssValue'
+        static member alternate = FssTypes.Animation.Direction.Alternate |> directionCssValue'
+        static member alternateReverse = FssTypes.Animation.Direction.AlternateReverse |> directionCssValue'
 
-        static member Normal = Normal |> directionCssValue'
-        static member Inherit = Inherit |>  directionCssValue'
-        static member Initial = Initial |> directionCssValue'
-        static member Unset = Unset |> directionCssValue'
+        static member normal = FssTypes.Normal |> directionCssValue'
+        static member inherit' = FssTypes.Inherit |>  directionCssValue'
+        static member initial = FssTypes.Initial |> directionCssValue'
+        static member unset = FssTypes.Unset |> directionCssValue'
 
-    /// <summary>Sets which direction an animation should play. </summary>
-    /// <param name="direction">
-    ///     can be:
-    ///     - <c> AnimationDirection </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationDirection' (direction: IAnimationDirection) = direction |> directionCssValue'
+    /// Specifies which direction an animation should play.
+    /// Valid parameters:
+    /// - AnimationDirection
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
+    let AnimationDirection' = directionCssValue'
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
-    let private animationDurationCssValue value = PropertyValue.cssValue Property.AnimationDuration value
-    type AnimationDuration =
-        static member Value (duration: Units.Time.Time) = animationDurationCssValue (Units.Time.value duration)
-        static member Values (durations: Units.Time.Time list) =
-            durations
-            |> Utilities.Helpers.combineComma Units.Time.value
-            |> animationDurationCssValue
+    let private animationDurationCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDuration
 
-    /// <summary>Specifies an amount of time for one animation cycle to complete. </summary>
-    /// <param name="duration"> Amount of time for one cycle to complete.</param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationDuration' (duration: Units.Time.Time) = AnimationDuration.Value(duration)
+    [<Erase>]
+    /// Specifies how long an animation takes to complete a cycle.
+    type AnimationDuration =
+        static member value (duration: FssTypes.Time) = animationDurationCssValue (FssTypes.unitHelpers.timeToString duration)
+        static member values = Utilities.Helpers.combineComma FssTypes.unitHelpers.timeToString >> animationDurationCssValue
+
+    /// Specifies how long an animation takes to complete a cycle.
+    /// Valid parameters:
+    /// - Time
+    let AnimationDuration' = AnimationDuration.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
-    let private fillModeCssValue value = PropertyValue.cssValue Property.AnimationFillMode value
-    let private fillModeCssValue' value =
-        value
-        |> animationFillModeToString
-        |> fillModeCssValue
-    type AnimationFillMode =
-        static member Value (fillMode: IAnimationFillMode) = fillMode |> fillModeCssValue'
-        static member Forwards = AnimationType.Forwards |> fillModeCssValue'
-        static member Backwards = AnimationType.Backwards |> fillModeCssValue'
-        static member Both = AnimationType.Both |> fillModeCssValue'
-        static member None = None' |> fillModeCssValue'
+    let private fillModeCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationFillMode
+    let private fillModeCssValue' = animationFillModeToString >> fillModeCssValue
 
-    /// <summary>Specifies which styles to apply before and after the animation. </summary>
-    /// <param name="fillMode">
-    ///     can be:
-    ///     - <c> AnimationFillMode </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationFillMode' (fillMode: IAnimationFillMode) = fillMode |> AnimationFillMode.Value
+    [<Erase>]
+    /// Sets how an animation applies styles before and after its run
+    type AnimationFillMode =
+        static member value (fillMode: FssTypes.IAnimationFillMode) = fillMode |> fillModeCssValue'
+        static member forwards = FssTypes.Animation.FillMode.Forwards |> fillModeCssValue'
+        static member backwards = FssTypes.Animation.FillMode.Backwards |> fillModeCssValue'
+        static member both = FssTypes.Animation.FillMode.Both |> fillModeCssValue'
+        static member none = FssTypes.None' |> fillModeCssValue'
+
+    /// Sets how an animation applies styles before and after its run
+    /// Valid parameters:
+    /// - AnimationDirection
+    /// - None
+    let AnimationFillMode' = AnimationFillMode.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count
-    let private iterationCountCssValue value = PropertyValue.cssValue Property.AnimationIterationCount value
-    let private iterationCountCssValue' value =
-        value
-        |> AnimationType.iterationCountToString
-        |> iterationCountCssValue
+    let private iterationCountCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationIterationCount
+    let private iterationCountCssValue' = FssTypes.animationHelpers.iterationCountToString >> iterationCountCssValue
 
+    [<Erase>]
+    /// Specifies how many times an animation should be played before stopping.
     type AnimationIterationCount =
-        static member Value (count: IAnimationIterationCount) = count |> iterationCountCssValue'
-        static member Values (values: IAnimationIterationCount list) =
+        static member value (count: FssTypes.IAnimationIterationCount) = count |> iterationCountCssValue'
+        static member values (values: FssTypes.IAnimationIterationCount list) =
             values
-            |> Utilities.Helpers.combineComma AnimationType.iterationCountToString
+            |> Utilities.Helpers.combineComma FssTypes.animationHelpers.iterationCountToString
             |> iterationCountCssValue
-        static member Infinite = AnimationType.Infinite |> AnimationType.iterationCountToString |> iterationCountCssValue
+        static member infinite = FssTypes.Animation.IterationCount.Infinite |> FssTypes.animationHelpers.iterationCountToString |> iterationCountCssValue
 
-    /// <summary>How many times should an animation be played.</summary>
-    /// <param name="iterationCount">
-    ///     can be:
-    ///     - <c> Infinite </c>
-    ///     - <c> CssInt </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationIterationCount' (iterationCount: IAnimationIterationCount) = AnimationIterationCount.Value iterationCount
+    /// Specifies how many times an animation should be played before stopping.
+    /// Valid parameters:
+    /// - CssInt
+    /// - Infinite
+    let AnimationIterationCount' = AnimationIterationCount.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
-    let private nameValue value = PropertyValue.cssValue Property.AnimationName value
-    let private nameValue' value =
-        value
-        |> nameToString
-        |> nameValue
+    let private nameValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationName
+    let private nameValue' = nameToString >> nameValue
 
+    [<Erase>]
+    /// Specifies which animation to play
     type AnimationName =
-        static member Name (name: IAnimationName) = name |> nameValue'
-        static member Names (names: IAnimationName list) = Utilities.Helpers.combineComma nameToString names |> nameValue
-        static member None = None' |> nameValue'
-        static member Inherit = Inherit |> nameValue'
-        static member Initial = Initial |> nameValue'
-        static member Unset = Unset |> nameValue'
+        static member name (name: FssTypes.IAnimationName) = name |> nameValue'
+        static member names (names: FssTypes.IAnimationName list) = Utilities.Helpers.combineComma nameToString names |> nameValue
+        static member none = FssTypes.None' |> nameValue'
+        static member inherit' = FssTypes.Inherit |> nameValue'
+        static member initial = FssTypes.Initial |> nameValue'
+        static member unset = FssTypes.Unset |> nameValue'
 
-    /// <summary>Specifies which animation to play.</summary>
-    /// <param name="name">
-    ///     can be:
-    ///     - <c> The result of a keyframe function </c>
-    ///     - <c> CssString </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationName' (name: IAnimationName) = AnimationName.Name(name)
+    /// Specifies which animation to play.
+    /// Valid parameters:
+    /// - CssString
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let AnimationName' = AnimationName.name
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
-    let private playStateCssValue value = PropertyValue.cssValue Property.AnimationPlayState value
-    let private playStateCssValue' value =
-        value
-        |> playStateTypeToString
-        |> playStateCssValue
-    type AnimationPlayState =
-        static member Value (playState: IAnimationPlayState) = playState |> playStateCssValue'
-        static member Running = AnimationType.Running |> playStateCssValue'
-        static member Paused = AnimationType.Paused |> playStateCssValue'
-        static member Inherit = Inherit |> playStateCssValue'
-        static member Initial = Initial |> playStateCssValue'
-        static member Unset = Unset |> playStateCssValue'
+    let private playStateCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationPlayState
+    let private playStateCssValue' = playStateTypeToString >> playStateCssValue
 
-    /// <summary>Sets if the animation is running or paused.</summary>
-    /// <param name="playState">
-    ///     can be:
-    ///     - <c> AnimationPlayState </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationPlayState' (playState: IAnimationPlayState) = playState |> AnimationPlayState.Value
+    [<Erase>]
+    /// Sets if the animation is running or paused
+    type AnimationPlayState =
+        static member value (playState: FssTypes.IAnimationPlayState) = playState |> playStateCssValue'
+        static member running = FssTypes.Animation.PlayState.Running |> playStateCssValue'
+        static member paused = FssTypes.Animation.PlayState.Paused |> playStateCssValue'
+        static member inherit' = FssTypes.Inherit |> playStateCssValue'
+        static member initial = FssTypes.Initial |> playStateCssValue'
+        static member unset = FssTypes.Unset |> playStateCssValue'
+
+    /// Sets if the animation is running or paused.
+    /// Valid parameters:
+    /// - AnimationPlayState
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let AnimationPlayState' = AnimationPlayState.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
-    let private timingFunctionCssValue value = PropertyValue.cssValue Property.AnimationTimingFunction value
-    let private timingFunctionCssValue' value =
-        value
-        |> TimingFunctionType.timingToString
-        |> timingFunctionCssValue
-    type AnimationTimingFunction =
-        static member Value (timingFunction: TimingFunctionType.Timing) = timingFunction |> TimingFunctionType.timingToString
-        static member Values (timings: TimingFunctionType.Timing list) = timingFunctionCssValue <| Utilities.Helpers.combineComma TimingFunctionType.timingToString timings
-        static member Ease = TimingFunction.TimingFunction.Ease |> timingFunctionCssValue
-        static member EaseIn = TimingFunction.TimingFunction.EaseIn |> timingFunctionCssValue
-        static member EaseOut = TimingFunction.TimingFunction.EaseOut |> timingFunctionCssValue
-        static member EaseInOut = TimingFunction.TimingFunction.EaseInOut |> timingFunctionCssValue
-        static member Linear = TimingFunction.TimingFunction.Linear |> timingFunctionCssValue
-        static member StepStart = TimingFunction.TimingFunction.StepStart |> timingFunctionCssValue
-        static member StepEnd = TimingFunction.TimingFunction.StepEnd |> timingFunctionCssValue
-        static member CubicBezier (p1: float, p2:float, p3:float, p4:float) =
-            TimingFunction.TimingFunction.CubicBezier(p1,p2,p3,p4) |> timingFunctionCssValue
-        static member Step (steps: int) = TimingFunction.TimingFunction.Step(steps) |> timingFunctionCssValue
-        static member Step (steps: int, jumpTerm: TimingFunctionType.Step) =
-            TimingFunction.TimingFunction.Step(steps, jumpTerm) |> timingFunctionCssValue
-        static member Inherit = Inherit |> timingFunctionCssValue'
-        static member Initial = Initial |> timingFunctionCssValue'
-        static member Unset = Unset |> timingFunctionCssValue'
+    let private timingFunctionCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationTimingFunction
+    let private timingFunctionCssValue': (FssTypes.ITransitionTimingFunction -> FssTypes.CssProperty) = FssTypes.timingFunctionHelpers.timingToString >> timingFunctionCssValue
 
-    /// <summary>Specifies how the animation should be played.</summary>
-    /// <param name="timing">
-    ///     can be:
-    ///     - <c> AnimationTimingFunction </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let AnimationTimingFunction' (timing: TimingFunctionType.Timing) = AnimationTimingFunction.Value(timing)
+    [<Erase>]
+    /// Specifies how the animation should be played.
+    type AnimationTimingFunction =
+        static member value (timingFunction: FssTypes.TimingFunction.Timing) = timingFunction |> FssTypes.timingFunctionHelpers.timingToString
+        static member values (timings: FssTypes.TimingFunction.Timing list) = timingFunctionCssValue <| Utilities.Helpers.combineComma FssTypes.timingFunctionHelpers.timingToString timings
+        static member ease = FssTypes.TimingFunction.Ease |> timingFunctionCssValue'
+        static member easeIn = FssTypes.TimingFunction.EaseIn |> timingFunctionCssValue'
+        static member easeOut = FssTypes.TimingFunction.EaseOut |> timingFunctionCssValue'
+        static member easeInOut = FssTypes.TimingFunction.EaseInOut |> timingFunctionCssValue'
+        static member linear = FssTypes.TimingFunction.Linear |> timingFunctionCssValue'
+        static member stepStart = FssTypes.TimingFunction.StepStart |> timingFunctionCssValue'
+        static member stepEnd = FssTypes.TimingFunction.StepEnd |> timingFunctionCssValue'
+        static member cubicBezier (p1: float, p2:float, p3:float, p4:float) =
+            FssTypes.TimingFunction.CubicBezier(p1,p2,p3,p4) |> timingFunctionCssValue'
+        static member step (steps: int) = FssTypes.TimingFunction.Steps(steps) |> timingFunctionCssValue'
+        static member step (steps: int, jumpTerm: FssTypes.TimingFunction.Step) =
+            FssTypes.TimingFunction.StepsWithTerm(steps, jumpTerm) |> timingFunctionCssValue'
+        static member inherit' = FssTypes.Inherit |> timingFunctionCssValue'
+        static member initial = FssTypes.Initial |> timingFunctionCssValue'
+        static member unset = FssTypes.Unset |> timingFunctionCssValue'
+
+    /// Specifies how the animation should be played.
+    /// Valid parameters:
+    /// - AnimationTimingFunction
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let AnimationTimingFunction' = AnimationTimingFunction.value

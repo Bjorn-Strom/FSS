@@ -18,6 +18,7 @@ module App =
         | Overview
         | Installation
         | Philosophy
+        | New
         | BasicUsage
         | ConditionalStyling
         | Pseudo
@@ -30,58 +31,87 @@ module App =
         | GlobalStyles
         | Counters
         | Fonts
-        | BackgroundImage
+        | BackgroundImages
+        | Feliz
+        | Svg
 
     type ButtonType =
         | Big
         | Small
 
-    type Model = { CurrentPage: Page; Pages: Map<Page, string>; CurrentMarkdown: string }
+    type Model = { CurrentPage: Page; Pages: Map<Page, string> }
 
     type Msg =
-        | GetMarkdown
-        | GotMarkdown of string
+        | GetMarkdown of Page
+        | GotMarkdown of Page * string
         | FailedGettingMarkdown of string
 
     let init page =
         let page = page |> Option.defaultValue Overview
-        { CurrentPage = page; Pages = Map.empty; CurrentMarkdown = "" }, Cmd.ofMsg GetMarkdown
+
+        let requests =
+            [ Overview |> GetMarkdown |> Cmd.ofMsg
+              Installation |> GetMarkdown |> Cmd.ofMsg
+              Philosophy |> GetMarkdown |> Cmd.ofMsg
+              New |> GetMarkdown |> Cmd.ofMsg
+              BasicUsage |> GetMarkdown |> Cmd.ofMsg
+              ConditionalStyling |> GetMarkdown |> Cmd.ofMsg
+              Pseudo |> GetMarkdown |> Cmd.ofMsg
+              Composition |> GetMarkdown |> Cmd.ofMsg
+              Labels |> GetMarkdown |> Cmd.ofMsg
+              Transition |> GetMarkdown |> Cmd.ofMsg
+              KeyframesAnimations |> GetMarkdown |> Cmd.ofMsg
+              Combinators |> GetMarkdown |> Cmd.ofMsg
+              MediaQueries |> GetMarkdown |> Cmd.ofMsg
+              GlobalStyles |> GetMarkdown |> Cmd.ofMsg
+              Counters |> GetMarkdown |> Cmd.ofMsg
+              Fonts |> GetMarkdown |> Cmd.ofMsg
+              BackgroundImages |> GetMarkdown |> Cmd.ofMsg
+              Feliz |> GetMarkdown |> Cmd.ofMsg
+              Svg |> GetMarkdown |> Cmd.ofMsg
+            ]
+        { CurrentPage = page; Pages = Map.empty; }, Cmd.batch requests
 
     let update (msg: Msg) (model: Model) =
         match msg with
-        | GetMarkdown ->
-            Map.tryFind model.CurrentPage model.Pages
-            |> function
-                | None ->
-                    let nextCommand =
-                        async {
-                            let! (statusCode, response) = getMarkdown (Utilities.duToString model.CurrentPage)
+        | GetMarkdown page ->
+            let nextCommand =
+                async {
+                    let! (statusCode, response) = getMarkdown (Utilities.duToString page)
 
-                            if statusCode = 200 then
-                                return GotMarkdown response
-                            else
-                                return FailedGettingMarkdown "Unable to get markdown"
-                        }
-                    model, Cmd.OfAsync.result nextCommand
-                | Some markdown ->
-                    model, Cmd.ofMsg <| GotMarkdown markdown
-
-        | GotMarkdown markdown ->
-            let pages = model.Pages.Add(model.CurrentPage, markdown)
-            { model with CurrentMarkdown = markdown; Pages = pages }, Cmd.none
-        | FailedGettingMarkdown e ->
+                    if statusCode = 200 then
+                        return GotMarkdown (page, response)
+                    else
+                        return FailedGettingMarkdown "Unable to get markdown"
+                }
+            model, Cmd.OfAsync.result nextCommand
+        | GotMarkdown (page, markdown) ->
+            let pages = model.Pages.Add(page, markdown)
+            { model with Pages = pages }, Cmd.none
+        | FailedGettingMarkdown _ ->
             model, Cmd.none
 
     // Load font
-    let headingFont = FontFamily.Custom "Nunito"
-    let textFont = FontFamily.Custom "Raleway"
+    let headingFont = FontFamily.custom "Nunito"
+    let textFont = FontFamily.custom "Raleway"
+
+    // Colors
+    let background = "E1E2E1"
+    let textOnPrimary = "ffffff"
+    let textOnSecondary = "000000"
+    let primary = "606060"
+    let primaryLight = "8d8d8d"
+    let primaryDark = "363636"
+    let secondary = "2979ff"
+    let secondaryLight = "75a7ff"
+    let secondaryDark = "004ecb"
 
     // Styles
     let multilineText =
         fss
             [
                 Label' "Multi Line Text"
-                WhiteSpace.PreLine
+                WhiteSpace.preLine
                 MarginBottom' (px 200)
             ]
 
@@ -90,6 +120,7 @@ module App =
         | Overview -> "Overview"
         | Installation -> "Installation"
         | Philosophy -> "Philosophy"
+        | New -> "New"
         | BasicUsage -> "Basic Usage"
         | ConditionalStyling -> "Conditional Styling"
         | Pseudo -> "Pseduoclasses/elements"
@@ -102,24 +133,16 @@ module App =
         | GlobalStyles  -> "Global styles"
         | Counters -> "Counters"
         | Fonts -> "Fonts"
-        | BackgroundImage -> "Background image"
-
-    let codeBlock (code: string List) =
-        let codeBlock =
-            fss
-                [
-                    Label' "Code Block"
-                    BackgroundColor.Hex "#2A2A2A"
-                    Color.white
-                    Padding' (px 20)
-                ]
-        pre [ ClassName codeBlock ] [ str (code |> String.concat "\n") ]
+        | BackgroundImages -> "Background image"
+        | Feliz -> "Feliz"
+        | Svg -> "Svg"
 
     let pageToContent page currentMarkdown =
 
         let overview = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
         let installation = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
         let philosophy = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
+        let ``new`` = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
 
         let basicUse =
             let borderStyle = fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)" ]
@@ -171,8 +194,8 @@ module App =
             let beforeAndAfter =
                 let beforeAndAfter =
                     [
-                        Content.Value ""
-                        Display.InlineBlock
+                        Content.value ""
+                        Display.inlineBlock
                         BackgroundColor.orangeRed
                         Width' (px 10)
                         Height' (px 10)
@@ -253,9 +276,9 @@ module App =
                                [
                                    Label' "Color Transition"
                                    BackgroundColor.red
-                                   TransitionProperty.BackgroundColor
+                                   TransitionProperty.backgroundColor
                                    TransitionDuration' (sec 2.5)
-                                   TransitionTimingFunction.Ease
+                                   TransitionTimingFunction.ease
                                    Hover [ BackgroundColor.green ]
                                ]
                     let sizeAndColor =
@@ -265,8 +288,8 @@ module App =
                                 Width' (px 40)
                                 Height' (px 40)
                                 BackgroundColor.yellowGreen
-                                TransitionProperty.All
-                                TransitionTimingFunction.Linear
+                                TransitionProperty.all
+                                TransitionTimingFunction.linear
                                 TransitionDuration' (ms 500.)
                                 Hover
                                     [
@@ -274,7 +297,6 @@ module App =
                                         BackgroundColor.orangeRed
                                     ]
                             ]
-
 
                     markdown [ Renderers renderers; Children currentMarkdown ]
                     div [ ClassName colorTransition ] [ str "Hover me" ]
@@ -286,13 +308,13 @@ module App =
                 keyframes
                     [
                         frames [ 0; 20; 53; 80; 100 ]
-                            [ Transforms [ Transform.Translate3D(px 0, px 0, px 0) ] ]
+                            [ Transforms [ Transform.translate3D(px 0, px 0, px 0) ] ]
                         frames [40; 43]
-                            [ Transforms [ Transform.Translate3D(px 0, px -30, px 0) ] ]
+                            [ Transforms [ Transform.translate3D(px 0, px -30, px 0) ] ]
                         frame 70
-                            [ Transforms [ Transform.Translate3D(px 0, px -15, px 0) ] ]
+                            [ Transforms [ Transform.translate3D(px 0, px -15, px 0) ] ]
                         frame 90
-                            [ Transforms [ Transform.Translate3D(px 0, px -4, px 0) ] ]
+                            [ Transforms [ Transform.translate3D(px 0, px -4, px 0) ] ]
                     ]
 
             let backgroundColorFrames =
@@ -310,18 +332,18 @@ module App =
                         Label' "Bounce Animation"
                         AnimationName' bounceFrames
                         AnimationDuration' (sec 1.0)
-                        AnimationTimingFunction.EaseInOut
-                        AnimationIterationCount.Infinite
+                        AnimationTimingFunction.easeInOut
+                        AnimationIterationCount.infinite
                     ]
 
             let bouncyColor =
                 fss
                     [
                         Label' "Bouncy Color"
-                        AnimationName.Names [ bounceFrames; backgroundColorFrames ]
-                        AnimationDuration.Values [ sec 1.0; sec 5.0 ]
-                        AnimationTimingFunction.Values [ TimingFunctionType.EaseInOut; TimingFunctionType.Ease ]
-                        AnimationIterationCount.Values [ AnimationType.Infinite; CssInt 3 ]
+                        AnimationName.names [ bounceFrames; backgroundColorFrames ]
+                        AnimationDuration.values [ sec 1.0; sec 5.0 ]
+                        AnimationTimingFunction.values [ FssTypes.Animation.Timing.EaseInOut; FssTypes.Animation.Timing.Ease ]
+                        AnimationIterationCount.values [ FssTypes.Animation.Infinite; FssTypes.CssInt 3 ]
                     ]
             article []
                 [
@@ -338,7 +360,7 @@ module App =
             let borders =
                 [
                     Label' "Borders"
-                    BorderStyle.Solid
+                    BorderStyle.solid
                     BorderColor.black
                     BorderWidth' (px 1)
                 ]
@@ -347,27 +369,27 @@ module App =
                     [
                         Label' "Descendant"
                         yield! borders
-                        ! Html.P [ Color.red ]
+                        ! FssTypes.Html.P [ Color.red ]
                     ]
             let childCombinator =
                 fss
                     [
                         Label' "Child"
                         yield! borders
-                        !> Html.P [ Color.red ]
+                        !> FssTypes.Html.P [ Color.red ]
 
                     ]
             let directCombinator =
                 fss
                     [
                         Label' "Direct"
-                        !+ Html.P [ Color.red ]
+                        !+ FssTypes.Html.P [ Color.red ]
                     ]
             let adjacentCombinator =
                 fss
                     [
                         Label' "Adjacent"
-                        !~ Html.P [ Color.red ]
+                        !~ FssTypes.Html.P [ Color.red ]
                     ]
 
             article []
@@ -431,20 +453,20 @@ module App =
                         BackgroundColor.blue
 
                         MediaQuery
-                            [ Media.MinHeight (px 700)]
+                            [ FssTypes.Media.MinHeight (px 700)]
                             [ BackgroundColor.pink ]
 
-                        MediaQueryFor Media.Print
+                        MediaQueryFor FssTypes.Media.Print
                             []
                             [
                                 MarginTop' (px 200)
-                                Transforms [ Transform.Rotate(deg 45.0) ]
+                                Transforms [ Transform.rotate(deg 45.0) ]
                                 BackgroundColor.red
                             ]
 
                         MediaQuery
-                            [ Media.Orientation Media.Landscape]
-                            [ Color.green; FontSize.Value (px 28)]
+                            [ FssTypes.Media.Orientation FssTypes.Media.Landscape]
+                            [ Color.green; FontSize.value (px 28)]
                     ]
 
             article []
@@ -459,9 +481,9 @@ module App =
             let mozillaExampleCounter =
                 counterStyle
                     [
-                        System.Fixed
-                        Symbols.Strings ["Ⓐ"; "Ⓑ"; "Ⓒ"; "Ⓓ"; "Ⓔ"; "Ⓕ"; "Ⓖ"; "Ⓗ"; "Ⓘ"; "Ⓙ"; "Ⓚ"; "Ⓛ"; "Ⓜ"; "Ⓝ"; "Ⓞ"; "Ⓟ"; "Ⓠ"; "Ⓡ"; "Ⓢ"; "Ⓣ"; "Ⓤ"; "Ⓥ"; "Ⓦ"; "Ⓧ"; "Ⓨ"; "Ⓩ"]
-                        Suffix.Value " "
+                        System.fixed'
+                        Symbols.strings ["Ⓐ"; "Ⓑ"; "Ⓒ"; "Ⓓ"; "Ⓔ"; "Ⓕ"; "Ⓖ"; "Ⓗ"; "Ⓘ"; "Ⓙ"; "Ⓚ"; "Ⓛ"; "Ⓜ"; "Ⓝ"; "Ⓞ"; "Ⓟ"; "Ⓠ"; "Ⓡ"; "Ⓢ"; "Ⓣ"; "Ⓤ"; "Ⓥ"; "Ⓦ"; "Ⓧ"; "Ⓨ"; "Ⓩ"]
+                        Suffix.value " "
                     ]
             let mozillaExampleStyle =
                 fss
@@ -476,18 +498,18 @@ module App =
                 fss
                     [
                         Label' "Section"
-                        FontFamily.Custom "Roboto, sans-serif"
+                        FontFamily.custom "Roboto, sans-serif"
                         CounterReset' indexCounter
                     ]
             let commonBefore =
                 [
-                    FontWeight' (CssInt 500)
-                    Color.Hex "48f"
+                    FontWeight' (FssTypes.CssInt 500)
+                    Color.hex "48f"
                 ]
             let commonStyle =
                 [
-                    Margin.Value (px 0, px 0, px 1)
-                    Padding.Value (px 5, px 10)
+                    Margin.value (px 0, px 0, px 1)
+                    Padding.value (px 5, px 10)
                 ]
             let count =
                 fss
@@ -496,11 +518,11 @@ module App =
                         yield! commonStyle
                         CounterReset' subCounter
                         CounterIncrement' indexCounter
-                        BackgroundColor.Hex "eee"
+                        BackgroundColor.hex "#222426"
                         Before
                             [
                                 yield! commonBefore
-                                Content.Counter(indexCounter,". ")
+                                Content.counter(indexCounter,". ")
                             ]
                     ]
             let sub =
@@ -510,11 +532,11 @@ module App =
                         yield! commonStyle
                         CounterIncrement' subCounter
                         TextIndent' (em 1.)
-                        Color.Hex "444"
+                        Color.hex "BDB7AF"
                         Before
                             [
                                 yield! commonBefore
-                                Content.Counters([indexCounter; subCounter], [".";"."])
+                                Content.counters([indexCounter; subCounter], [".";"."])
                                 MarginRight' (px 5)
                             ]
                     ]
@@ -580,7 +602,7 @@ module App =
                 fss
                     [
                         Label' "Amatic Style"
-                        FontFamily.Custom "Amatic SC"
+                        FontFamily.custom "Amatic SC"
                         FontSize' (px 24)
                     ]
 
@@ -588,51 +610,51 @@ module App =
                 fontFaces "DroidSerif"
                     [
                         [
-                            FontFace.Source <| UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", FontFace.Truetype)
-                            FontFace.Weight FontTypes.Bold
-                            FontFace.Style Normal
+                            FontFace.source <| FssTypes.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", FssTypes.FontFace.Truetype)
+                            FontFace.weight FssTypes.Font.Bold
+                            FontFace.style FssTypes.Normal
                         ]
                         [
-                            FontFace.Source <| UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", FontFace.Truetype)
-                            FontFace.Weight Normal
-                            FontFace.Style Normal
+                            FontFace.source <| FssTypes.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", FssTypes.FontFace.Truetype)
+                            FontFace.weight FssTypes.Normal
+                            FontFace.style FssTypes.Normal
                         ]
                     ]
 
             let modernaFont =
                 fontFace "moderna"
                     [
-                        FontFace.Sources
+                        FontFace.sources
                             [
-                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", FontFace.Woff2)
-                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", FontFace.Woff)
-                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", FontFace.Truetype)
-                                UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", FontFace.Svg)
+                                FssTypes.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", FssTypes.FontFace.Woff2)
+                                FssTypes.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", FssTypes.FontFace.Woff)
+                                FssTypes.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", FssTypes.FontFace.Truetype)
+                                FssTypes.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", FssTypes.FontFace.Svg)
                             ]
-                        FontFace.Weight Normal
-                        FontFace.Style Normal
+                        FontFace.weight FssTypes.Normal
+                        FontFace.style FssTypes.Normal
                     ]
 
             let droidSerif =
                 fss
                     [
                         Label' "Droid Serif"
-                        FontFamily.Font droidSerifFont
+                        FontFamily.font droidSerifFont
                     ]
 
             let droidSerifBold =
                 fss
                     [
                         Label' "Droid Serif Bold"
-                        FontFamily.Font droidSerifFont
-                        FontWeight.Bold
+                        FontFamily.font droidSerifFont
+                        FontWeight.bold
                     ]
 
             let moderna =
                 fss
                     [
                         Label' "Moderna"
-                        FontFamily.Font modernaFont
+                        FontFamily.font modernaFont
                     ]
 
             article []
@@ -656,78 +678,72 @@ module App =
                     [
                         Label' "Linear gradient style 1"
                         yield! box
-                        BackgroundImage.LinearGradient(deg 0.,
-                                                       [ hex "e66465", pct 0
-                                                         hex "9198e5", pct 100 ])
+                        BackgroundImage.linearGradient((deg 0.,
+                                                        [ hex "e66465", pct 0
+                                                          hex "9198e5", pct 100 ]))
                     ]
             let linearGradientStyle2 =
                 fss
                     [
                         yield! box
                         Label' "Linear gradient style 2"
-                        BackgroundImage.LinearGradient(turn 0.25,
-                                                       [hex "3f87a6", pct 0
-                                                        hex "ebf8e1", pct 50
-                                                        hex "f69d3c", pct 100])
+                        BackgroundImage.linearGradient((turn 0.25,
+                                                        [hex "3f87a6", pct 0
+                                                         hex "ebf8e1", pct 50
+                                                         hex "f69d3c", pct 100]))
                     ]
             let linearGradientStyle3 =
                 fss
                     [
                         yield! box
                         Label' "Linear gradient style 3"
-                        BackgroundImage.LinearGradient(deg 270.,
-                                                       [
-                                                           hex "333", pct 0
-                                                           hex "333", pct 50
-                                                           hex "eee", pct 75
-                                                           hex "333", pct 75
-                                                       ])
+                        BackgroundImage.linearGradient((deg 270.,
+                                                        [ hex "333", pct 0
+                                                          hex "333", pct 50
+                                                          hex "eee", pct 75
+                                                          hex "333", pct 75 ]))
                     ]
             let repeatingLinearGradientStyle1 =
                 fss
                     [
                         yield! box
                         Label' "Repeating Linear gradient style 1"
-                        BackgroundImage.RepeatingLinearGradient(deg 0.,
-                                                       [
-                                                           hex "e66465", px 0
-                                                           hex "e66465", px 20
-                                                           hex "9198e5", px 20
-                                                           hex "9198e5", px 25
-                                                       ])
+                        BackgroundImage.repeatingLinearGradient((deg 0.,
+                                                                 [ hex "e66465", px 0
+                                                                   hex "e66465", px 20
+                                                                   hex "9198e5", px 20
+                                                                   hex "9198e5", px 25 ]))
                     ]
             let repeatingLinearGradientStyle2 =
                 fss
                     [
                         yield! box
                         Label' "Repeating Linear gradient style 2"
-                        BackgroundImage.RepeatingLinearGradient(deg 45.,
-                                                       [
-                                                           hex "3f87a6", px 0
-                                                           hex "ebf8e1", px 15
-                                                           hex "f69d3c", px 20
-                                                       ])
+                        BackgroundImage.repeatingLinearGradient((deg 45.,
+                                                                 [ hex "3f87a6", px 0
+                                                                   hex "ebf8e1", px 15
+                                                                   hex "f69d3c", px 20 ]))
                     ]
             let repeatingLinearGradientsStyle3 =
                 fss
                     [
                         yield! box
-                        BackgroundImage.RepeatingLinearGradients
+                        BackgroundImage.repeatingLinearGradients
                             [
                                 deg 217.,
                                     [
-                                        CssColor.Rgba(255, 0, 0, 0.8), pct 0
-                                        CssColor.Rgba(255, 0, 0, 0.0), pct 70
+                                        FssTypes.Color.Color.rgba 255 0 0 0.8, pct 0
+                                        FssTypes.Color.Color.rgba 255 0 0 0.0, pct 70
                                     ]
                                 deg 127.,
                                     [
-                                        CssColor.Rgba(0, 255, 0,0.8), pct 0
-                                        CssColor.Rgba(0, 255, 0,0.0), pct 70
+                                        FssTypes.Color.Color.rgba 0 255 0 0.8, pct 0
+                                        FssTypes.Color.Color.rgba 0 255 0 0.0, pct 70
                                     ]
                                 deg 336.,
                                     [
-                                        CssColor.Rgba(0, 0, 255, 0.8), pct 0
-                                        CssColor.Rgba(0, 0, 255,0.0), pct 70
+                                        FssTypes.Color.Color.rgba 0 0 255 0.8, pct 0
+                                        FssTypes.Color.Color.rgba 0 0 255 0.0, pct 70
                                     ]
 
                             ]
@@ -738,7 +754,7 @@ module App =
                     [
                         yield! box
                         Label' "Radial Gradient style 1"
-                        BackgroundImage.RadialGradient(Ellipse, FarthestCorner, pct 50, pct 50,
+                        BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestCorner, pct 50, pct 50,
                                                        [ hex "e66465", pct 0
                                                          hex "9198e5", pct 100])
                     ]
@@ -747,7 +763,7 @@ module App =
                     [
                         Label' "Radial Gradient style 2"
                         yield! box
-                        BackgroundImage.RadialGradient(Ellipse, ClosestSide, pct 50, pct 50,
+                        BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestSide, pct 50, pct 50,
                                 [
                                     hex "3f87a6", pct 0
                                     hex "ebf8e1", pct 50
@@ -759,7 +775,7 @@ module App =
                     [
                         yield! box
                         Label' "Radial Gradient style 3"
-                        BackgroundImage.RadialGradient(Circle, FarthestCorner, pct 100, pct 50,
+                        BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestCorner, pct 100, pct 50,
                             [hex "333", pct 0
                              hex "333", pct 50
                              hex "eee", pct 75
@@ -770,8 +786,8 @@ module App =
                     [
                         Label' "Repeating Radial Gradient style 1"
                         yield! box
-                        BackgroundImage.RepeatingRadialGradient(
-                                Ellipse, FarthestCorner, pct 50, pct 50,
+                        BackgroundImage.repeatingRadialGradient(
+                                FssTypes.Image.Ellipse, FssTypes.Image.FarthestCorner, pct 50, pct 50,
                                     [
                                         hex "e66465", pct 0
                                         hex "9198e5", pct 20
@@ -782,8 +798,8 @@ module App =
                     [
                         Label' "Repeating Radial Gradient style 2"
                         yield! box
-                        BackgroundImage.RepeatingRadialGradient(
-                            Ellipse, ClosestSide, pct 50, pct 50,
+                        BackgroundImage.repeatingRadialGradient(
+                            FssTypes.Image.Ellipse, FssTypes.Image.ClosestSide, pct 50, pct 50,
                                 [
                                     hex "3f87a6", pct 0
                                     hex "ebf8e1", pct 50
@@ -795,8 +811,8 @@ module App =
                     [
                         Label' "Repeating Radial Gradient style 3"
                         yield! box
-                        BackgroundImage.RepeatingRadialGradient(
-                                Circle, FarthestCorner, pct 100, pct 50,
+                        BackgroundImage.repeatingRadialGradient(
+                                FssTypes.Image.Circle, FssTypes.Image.FarthestCorner, pct 100, pct 50,
                                     [
                                         hex "333", px 0
                                         hex "333", px 10
@@ -809,13 +825,13 @@ module App =
                     [
                         Label' "Conic gradient style 1"
                         yield! box
-                        BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
+                        BackgroundImage.conicGradient(deg 0., pct 50, pct 50,
                               [
-                                  CssColor.red, deg 0.
-                                  CssColor.orange, deg 90.
-                                  CssColor.yellow, deg 180.
-                                  CssColor.green, deg 270.
-                                  CssColor.blue, deg 360.
+                                  FssTypes.Color.Color.red, deg 0.
+                                  FssTypes.Color.Color.orange, deg 90.
+                                  FssTypes.Color.Color.yellow, deg 180.
+                                  FssTypes.Color.Color.green, deg 270.
+                                  FssTypes.Color.Color.blue, deg 360.
                               ])
                     ]
             let conicGradientStyle2 =
@@ -823,7 +839,7 @@ module App =
                     [
                         Label' "Conic gradient style 2"
                         yield! box
-                        BackgroundImage.ConicGradient(rad 3.1416, pct 10, pct 50,
+                        BackgroundImage.conicGradient(rad 3.1416, pct 10, pct 50,
                                                       [
                                                             hex "#e66465", deg 0.
                                                             hex "#9198e5", deg 360.
@@ -834,18 +850,18 @@ module App =
                     [
                         Label' "Conic gradient style 3"
                         yield! box
-                        BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
+                        BackgroundImage.conicGradient(deg 0., pct 50, pct 50,
                                                       [
-                                                         CssColor.red, deg 6.
-                                                         CssColor.orange, deg 6.
-                                                         CssColor.orange, deg 18.
-                                                         CssColor.yellow, deg 18.
-                                                         CssColor.yellow, deg 45.
-                                                         CssColor.green, deg 45.
-                                                         CssColor.green, deg 110.
-                                                         CssColor.blue, deg 110.
-                                                         CssColor.blue, deg 200.
-                                                         CssColor.purple, deg 200.
+                                                         FssTypes.Color.Color.red, deg 6.
+                                                         FssTypes.Color.Color.orange, deg 6.
+                                                         FssTypes.Color.Color.orange, deg 18.
+                                                         FssTypes.Color.Color.yellow, deg 18.
+                                                         FssTypes.Color.Color.yellow, deg 45.
+                                                         FssTypes.Color.Color.green, deg 45.
+                                                         FssTypes.Color.Color.green, deg 110.
+                                                         FssTypes.Color.Color.blue, deg 110.
+                                                         FssTypes.Color.Color.blue, deg 200.
+                                                         FssTypes.Color.Color.purple, deg 200.
                                                       ])
                     ]
             let conicGradientStyle4 =
@@ -854,14 +870,14 @@ module App =
                         Label' "Conic gradient style 4"
                         yield! box
                         BorderRadius' <| px 200
-                        BackgroundImage.ConicGradient(deg 0., pct 50, pct 50,
+                        BackgroundImage.conicGradient(deg 0., pct 50, pct 50,
                                                       [
-                                                         CssColor.yellow, deg (360. / 6.)
-                                                         CssColor.lime,   deg <| (360. / 6.) * 2.
-                                                         CssColor.blue,   deg <| (360. / 6.) * 3.
-                                                         CssColor.violet, deg <| (360. / 6.) * 4.
-                                                         CssColor.red,    deg <| (360. / 6.) * 5.
-                                                         CssColor.yellow, deg <| (360. / 6.) * 6.
+                                                         FssTypes.Color.Color.yellow, deg (360. / 6.)
+                                                         FssTypes.Color.Color.lime,   deg <| (360. / 6.) * 2.
+                                                         FssTypes.Color.Color.blue,   deg <| (360. / 6.) * 3.
+                                                         FssTypes.Color.Color.violet, deg <| (360. / 6.) * 4.
+                                                         FssTypes.Color.Color.red,    deg <| (360. / 6.) * 5.
+                                                         FssTypes.Color.Color.yellow, deg <| (360. / 6.) * 6.
                                                       ])
                     ]
             let repeatingConicGradientStyle =
@@ -869,54 +885,54 @@ module App =
                     [
                         Label' "Repeating conic gradient style"
                         yield! box
-                        BackgroundSize.Value(px 50, px 50)
+                        BackgroundSize.value(px 50, px 50)
                         BorderColor.black
-                        BorderStyle.Solid
+                        BorderStyle.solid
                         BorderWidth' (px 1)
-                        BackgroundImage.RepeatingConicGradient(deg 0., pct 50, pct 50,
+                        BackgroundImage.repeatingConicGradient(deg 0., pct 50, pct 50,
                                                       [
-                                                         CssColor.white, pct 0
-                                                         CssColor.white, pct 25
-                                                         CssColor.black, pct 25
-                                                         CssColor.black, pct 50
+                                                         FssTypes.Color.Color.white, pct 0
+                                                         FssTypes.Color.Color.white, pct 25
+                                                         FssTypes.Color.Color.black, pct 25
+                                                         FssTypes.Color.Color.black, pct 50
                                                       ])
                     ]
 
             article []
                 [
                     let elements =
-                        [ div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
+                        [ div [ ClassName (fss [ Label' "Flex 1"; Display.flex ]) ]
                             [
                                 div [ClassName linearGradientStyle1 ] []
                                 div [ClassName linearGradientStyle2 ] []
                                 div [ClassName linearGradientStyle3 ] []
                             ]
-                          div [ ClassName (fss [ Label' "Flex 2"; Display.Flex ]) ]
+                          div [ ClassName (fss [ Label' "Flex 2"; Display.flex ]) ]
                             [
                                 div [ClassName repeatingLinearGradientStyle1 ] []
                                 div [ClassName repeatingLinearGradientStyle2 ] []
                                 div [ClassName repeatingLinearGradientsStyle3 ] []
                             ]
-                          div [ ClassName (fss [ Label' "Flex 3"; Display.Flex ]) ]
+                          div [ ClassName (fss [ Label' "Flex 3"; Display.flex ]) ]
                             [
                                 div [ClassName radialGradientStyle1 ] []
                                 div [ClassName radialGradientStyle2 ] []
                                 div [ClassName radialGradientStyle3 ] []
                             ]
-                          div [ ClassName (fss [ Label' "Flex 4"; Display.Flex ]) ]
+                          div [ ClassName (fss [ Label' "Flex 4"; Display.flex ]) ]
                             [
                                 div [ClassName repeatingRadialGradientStyle1 ] []
                                 div [ClassName repeatingRadialGradientStyle2 ] []
                                 div [ClassName repeatingRadialGradientStyle3 ] []
                             ]
-                          div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
+                          div [ ClassName (fss [ Label' "Flex 1"; Display.flex ]) ]
                             [
                                 div [ClassName conicGradientStyle1 ] []
                                 div [ClassName conicGradientStyle2 ] []
                                 div [ClassName conicGradientStyle3 ] []
                                 div [ClassName conicGradientStyle4 ] []
                             ]
-                          div [ ClassName (fss [ Label' "Flex 1"; Display.Flex ]) ]
+                          div [ ClassName (fss [ Label' "Flex 1"; Display.flex ]) ]
                             [
                                 div [ClassName repeatingConicGradientStyle ] []
                             ]]
@@ -944,11 +960,34 @@ module App =
                             yield! elements
                         ]
                 ]
+        let feliz = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
+        let svg = article [] [
+            markdown [ Renderers renderers]
+            let logoAnimation =
+                keyframes [
+                    frame 100 [ StrokeDashoffset' [ 0 ] ]
+                ]
+
+            let logoStyle =
+                fss [
+                   Stroke.black
+                   StrokeWidth' <| px 4
+                   StrokeDashoffset' [ 1000 ]
+                   StrokeDasharray' [ 1000 ]
+                   AnimationName' logoAnimation
+                   AnimationDuration' <| sec 5.
+                   AnimationTimingFunction.linear
+                   AnimationFillMode.forwards
+                ]
+
+            Logo.logo 256 256 logoStyle
+        ]
 
         match page with
         | Overview -> overview
         | Installation -> installation
         | Philosophy -> philosophy
+        | New -> ``new``
         | BasicUsage -> basicUse
         | ConditionalStyling -> conditionalStyling
         | Pseudo -> pseudo
@@ -961,32 +1000,29 @@ module App =
         | GlobalStyles  -> globalStyles
         | Counters -> counters
         | Fonts -> fonts
-        | BackgroundImage -> backgroundImage
+        | BackgroundImages -> backgroundImage
+        | Feliz -> feliz
+        | Svg -> svg
 
     let menuListItem example currentExample =
         let linkStyle =
             fss
                 [
+                    Position.relative
                     Width' <| px 200
+                    Color.hex "F4F9E9"
                     if example = currentExample then
-                       BackgroundColor.Hex "#29A9DF"
-                       BorderRightColor.Hex "#4a8ab5"
-                       BorderRightWidth' (px 3)
-                       BorderRightStyle.Solid
-                    else
-                        BackgroundColor.transparent
-                    Hover
-                        [
-                            BackgroundColor.Hex "E0E0E0"
-                        ]
-                    MarginRight' <| px 25
+                       BorderRightColor.hex secondaryDark
+                       BorderRightWidth' (px 10)
+                       BorderRightStyle.solid
+                       BackgroundColor.hex secondaryLight
+                       Color.hex textOnPrimary |> important
                     Label' "Button Style"
-                    TextDecoration.None
-                    Color.black
+                    TextDecoration.none
                     Padding' (px 10)
                     FontSize' (px 14)
+                    VerticalAlign.middle
                     textFont
-                    VerticalAlign.Middle
                 ]
 
         a [ ClassName linkStyle; Href $"#{Utilities.duToKebab example}" ] [ str $"{pageToString example}" ]
@@ -997,9 +1033,9 @@ module App =
                 [
                     Label' "Header Style"
                     Color.white
-                    BackgroundColor.Hex "#4a8ab5"
+                    BackgroundColor.hex primary
                     PaddingLeft' (px 10)
-                    AlignItems.Center
+                    AlignItems.center
                 ]
 
         let headerText =
@@ -1016,13 +1052,12 @@ module App =
             fss
                 [
                     Label' "Menu List"
-                    ListStyleType.None
-                    Margin' (px 0)
-                    Padding' (px 0)
-                    PaddingRight' (px 5)
-                    TextIndent' (px 0)
-                    Display.Flex
-                    FlexDirection.Column
+                    Display.flex
+                    FlexDirection.column
+                    BorderRightColor.hex secondaryDark
+                    BorderRightWidth.thin
+                    BorderRightStyle.solid
+                    MarginRight' <| px 25
                 ]
         let menuListItem' example = menuListItem example model.CurrentPage
         aside []
@@ -1032,6 +1067,7 @@ module App =
                         menuListItem' Overview
                         menuListItem' Installation
                         menuListItem' Philosophy
+                        menuListItem' New
                         menuListItem' BasicUsage
                         menuListItem' ConditionalStyling
                         menuListItem' Pseudo
@@ -1044,7 +1080,9 @@ module App =
                         menuListItem' GlobalStyles
                         menuListItem' Counters
                         menuListItem' Fonts
-                        menuListItem' BackgroundImage
+                        menuListItem' BackgroundImages
+                        menuListItem' Feliz
+                        menuListItem' Svg
                     ]
             ]
 
@@ -1055,19 +1093,25 @@ module App =
                     Label' "Content Style"
                     textFont
                 ]
-        section [ ClassName contentStyle ] [ pageToContent model.CurrentPage model.CurrentMarkdown ]
+        section [ ClassName contentStyle ] [ pageToContent model.CurrentPage model.Pages.[model.CurrentPage] ]
 
-    let render (model: Model) (dispatch: Msg -> unit) =
+    let render (model: Model) (_: Msg -> unit) =
         let contentStyle =
             fss
                 [
                     Label' "Content style"
                     Width' (pct 60)
                     MaxWidth' (pct 60)
-                    Display.Flex
-                    FlexDirection.Row
-                    MarginLeft.Auto
-                    MarginRight.Auto
+                    Display.flex
+                    FlexDirection.row
+                    MarginLeft.auto
+                    MarginRight.auto
+                    Color.black
+                    ! FssTypes.Html.A [
+                        Link [ Color.black ]
+                        Visited [ Color.black ]
+                        Hover [ Color.black ]
+                    ]
                 ]
         div []
             [
@@ -1075,7 +1119,7 @@ module App =
                 div [ ClassName contentStyle ]
                     [
                         menu model
-                        if model.CurrentMarkdown.Length > 0 then
+                        if model.Pages.ContainsKey model.CurrentPage then
                             content model
                     ]
             ]
@@ -1099,13 +1143,13 @@ module App =
               map GlobalStyles (s <| Utilities.duToKebab GlobalStyles)
               map Counters (s <| Utilities.duToKebab Counters)
               map Fonts (s <| Utilities.duToKebab Fonts)
-              map BackgroundImage (s <| Utilities.duToKebab BackgroundImage)
+              map BackgroundImages (s <| Utilities.duToKebab BackgroundImages)
             ]
 
     let urlUpdate (page: Page option) model =
         let page = page |> Option.defaultValue Overview
 
-        { model with CurrentPage = page }, Cmd.ofMsg GetMarkdown
+        { model with CurrentPage = page }, Cmd.none
 
     Program.mkProgram init update render
     |> Program.toNavigable (parseHash pageParser) urlUpdate

@@ -1,58 +1,23 @@
 ﻿namespace Fss
 
-[<RequireQualifiedAccess>]
-module TimingFunctionType =
-    type Step =
-        | JumpStart
-        | JumpEnd
-        | JumpNone
-        | JumpBoth
-        | Start
-        | End
-
-    let stepsValue (value: Step) = Utilities.Helpers.duToKebab value
-
-    type Timing =
-        | Ease
-        | EaseIn
-        | EaseOut
-        | EaseInOut
-        | Linear
-        | StepStart
-        | StepEnd
-        | CubicBezier of float * float * float * float
-        | Steps of int
-        | StepsWithTerm of int * Step
-        interface ITransitionTimingFunction
-
-    let timingToString (timing: ITransitionTimingFunction) =
-        let timingToString timing =
-            match timing with
-                | CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" p1 p2 p3 p4
-                | Steps n -> sprintf "steps(%d)" n
-                | StepsWithTerm (n, term) -> sprintf "steps(%d, %s)" n (stepsValue term)
-                | _ -> Utilities.Helpers.duToKebab timing
-
-        match timing with
-        | :? Timing as t -> timingToString t
-        | :? Global as g -> GlobalValue.global' g
-        | _ -> "Unknown timing function"
+open Fable.Core
 
 [<AutoOpen>]
 module TimingFunction =
-    let private timingToString timing = TimingFunctionType.timingToString timing
+    let private timingToString timing = Fss.FssTypes.timingFunctionHelpers.timingToString timing
+    [<Erase>]
     type TimingFunction =
-        interface ITransitionTimingFunction
-        static member Ease = TimingFunctionType.Ease |> timingToString
-        static member EaseIn = TimingFunctionType.EaseIn |> timingToString
-        static member EaseOut = TimingFunctionType.EaseOut |> timingToString
-        static member EaseInOut = TimingFunctionType.EaseInOut |> timingToString
-        static member Linear = TimingFunctionType.Linear |> timingToString
-        static member StepStart = TimingFunctionType.StepStart |> timingToString
-        static member StepEnd = TimingFunctionType.StepEnd |> timingToString
-        static member CubicBezier (p1: float, p2:float, p3:float, p4:float) = TimingFunctionType.CubicBezier(p1,p2,p3,p4) |> timingToString
-        static member Step (steps: int) = TimingFunctionType.Steps(steps) |> timingToString
-        static member Step (steps: int, jumpTerm: TimingFunctionType.Step) = TimingFunctionType.StepsWithTerm(steps, jumpTerm) |> timingToString
-        static member Inherit = Inherit |> timingToString
-        static member Initial = Initial |> timingToString
-        static member Unset =  Unset |> timingToString
+        interface FssTypes.ITransitionTimingFunction
+        static member ease = FssTypes.TimingFunction.Ease |> timingToString
+        static member easeIn = FssTypes.TimingFunction.EaseIn |> timingToString
+        static member easeOut = FssTypes.TimingFunction.EaseOut |> timingToString
+        static member easeInOut = FssTypes.TimingFunction.EaseInOut |> timingToString
+        static member linear = FssTypes.TimingFunction.Linear |> timingToString
+        static member stepStart = FssTypes.TimingFunction.StepStart |> timingToString
+        static member stepEnd = FssTypes.TimingFunction.StepEnd |> timingToString
+        static member cubicBezier (p1: float, p2:float, p3:float, p4:float) = FssTypes.TimingFunction.CubicBezier(p1,p2,p3,p4) |> timingToString
+        static member step (steps: int) = FssTypes.TimingFunction.Steps(steps) |> timingToString
+        static member step (steps: int, jumpTerm: FssTypes.TimingFunction.Step) = FssTypes.TimingFunction.StepsWithTerm(steps, jumpTerm) |> timingToString
+        static member inherit' = FssTypes.Inherit |> timingToString
+        static member initial = FssTypes.Initial |> timingToString
+        static member unset =  FssTypes.Unset |> timingToString

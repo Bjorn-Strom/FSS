@@ -1,32 +1,28 @@
 namespace Fss
 
+open Fable.Core
+
 [<AutoOpen>]
 module All =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/all
-    let private stringifyAll (all: IAll) =
+    let private stringifyAll (all: FssTypes.IAll) =
         match all with
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown all"
 
-    let private allValue value = PropertyValue.cssValue Property.All value
-    let private allValue' value =
-        value
-        |> stringifyAll
-        |> allValue
+    let private allValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.All
+    let private allValue' = stringifyAll >> allValue
 
+    [<Erase>]
+    /// Resets all of an elements properties.
     type All =
-        static member Value (all: IAll) = all |> allValue'
-        static member Inherit = Inherit |> allValue'
+        static member value (all: FssTypes.IAll) = all |> allValue'
+        static member inherit' = FssTypes.Inherit |> allValue'
+        static member initial = FssTypes.Initial |> allValue'
+        static member unset = FssTypes.Unset |> allValue'
 
-        static member Initial = Initial |> allValue'
-        static member Unset = Unset |> allValue'
-
-    /// <summary>Resets all of an elements properties.</summary>
-    /// <param name="all">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c> 
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let private All' (all: IAll) = all |> All.Value
+    /// Resets all of an elements properties.
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let All' = All.value

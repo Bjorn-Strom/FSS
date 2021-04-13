@@ -1,124 +1,94 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module TableType =
-    type CaptionSide =
-        | Top
-        | Bottom
-        | Left
-        | Right
-        | TopOutside
-        | BottomOutside
-        interface ICaptionSide
-
-    type EmptyCells =
-        | Show
-        | Hide
-        interface IEmptyCells
-
-    type TableLayout =
-        | Fixed
-        interface ITableLayout
+open Fable.Core
 
 [<AutoOpen>]
 module Table =
-    let private captionSideToString (captionSide: ICaptionSide) =
+    let private captionSideToString (captionSide: FssTypes.ICaptionSide) =
         match captionSide with
-        | :? TableType.CaptionSide as c -> Utilities.Helpers.duToKebab c
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.Table.CaptionSide as c -> Utilities.Helpers.duToKebab c
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown caption side"
 
-    let private emptyCellsToString (emptyCells: IEmptyCells) =
+    let private emptyCellsToString (emptyCells: FssTypes.IEmptyCells) =
         match emptyCells with
-        | :? TableType.EmptyCells as e -> Utilities.Helpers.duToLowercase e
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.Table.EmptyCells as e -> Utilities.Helpers.duToLowercase e
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown empty cells"
 
-    let private tableLayoutToString (tableLayout: ITableLayout) =
+    let private tableLayoutToString (tableLayout: FssTypes.ITableLayout) =
         match tableLayout with
-        | :? TableType.TableLayout as t -> Utilities.Helpers.duToLowercase t
-        | :? Auto -> GlobalValue.auto
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.Table.Layout as t -> Utilities.Helpers.duToLowercase t
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown table layout"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
-    let private captionSideValue value = PropertyValue.cssValue Property.CaptionSide value
-    let private captionSideValue' value =
-        value
-        |> captionSideToString
-        |> captionSideValue
+    let private captionSideValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.CaptionSide
+    let private captionSideValue' = captionSideToString >> captionSideValue
 
+    [<Erase>]
+    /// Specifies which side the caption of a table will be.
     type CaptionSide =
-        static member Value (captionSide: ICaptionSide) = captionSide |> captionSideValue'
-        static member Top = TableType.Top |> captionSideValue'
-        static member Bottom = TableType.Bottom |> captionSideValue'
-        static member Left = TableType.Left |> captionSideValue'
-        static member Right = TableType.Right |> captionSideValue'
-        static member TopOutside = TableType.TopOutside |> captionSideValue'
-        static member BottomOutside = TableType.BottomOutside |> captionSideValue'
-        static member Inherit = Inherit |> captionSideValue'
-        static member Initial = Initial |> captionSideValue'
-        static member Unset = Unset |> captionSideValue'
+        static member value (captionSide: FssTypes.ICaptionSide) = captionSide |> captionSideValue'
+        static member top = FssTypes.Table.CaptionSide.Top |> captionSideValue'
+        static member bottom = FssTypes.Table.CaptionSide.Bottom |> captionSideValue'
+        static member left = FssTypes.Table.CaptionSide.Left |> captionSideValue'
+        static member right = FssTypes.Table.CaptionSide.Right |> captionSideValue'
+        static member topOutside = FssTypes.Table.CaptionSide.TopOutside |> captionSideValue'
+        static member bottomOutside = FssTypes.Table.CaptionSide.BottomOutside |> captionSideValue'
+        static member inherit' = FssTypes.Inherit |> captionSideValue'
+        static member initial = FssTypes.Initial |> captionSideValue'
+        static member unset = FssTypes.Unset |> captionSideValue'
 
-    /// <summary>Specifies which side the caption of a table will be.</summary>
-    /// <param name="captionSide">
-    ///     can be:
-    ///     - <c> CaptionSide </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let CaptionSide' captionSide = CaptionSide.Value captionSide
+    /// Specifies which side the caption of a table will be.
+    /// Valid parameters:
+    /// - CaptionSide
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let CaptionSide' = CaptionSide.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
-    let private emptyCellsValue value = PropertyValue.cssValue Property.EmptyCells value
-    let private emptyCellsValue' value =
-        value
-        |> emptyCellsToString
-        |> emptyCellsValue
-    type EmptyCells =
-        static member Value (emptyCells: IEmptyCells) = emptyCells |> emptyCellsValue'
-        static member Show = TableType.Show |> emptyCellsValue'
-        static member Hide = TableType.Hide |> emptyCellsValue'
-        static member Inherit = Inherit |> emptyCellsValue'
-        static member Initial = Initial |> emptyCellsValue'
-        static member Unset = Unset |> emptyCellsValue'
+    let private emptyCellsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.EmptyCells
+    let private emptyCellsValue' = emptyCellsToString >> emptyCellsValue
 
-    /// <summary>Specifies whether or not emtpy cells should have borders.</summary>
-    /// <param name="emptyCells">
-    ///     can be:
-    ///     - <c> EmptyCells </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let private EmptyCells' (emptyCells: IEmptyCells) = emptyCells |> EmptyCells.Value
+    [<Erase>]
+    /// Specifies whether or not empty cells should have borders.
+    type EmptyCells =
+        static member value (emptyCells: FssTypes.IEmptyCells) = emptyCells |> emptyCellsValue'
+        static member show = FssTypes.Table.EmptyCells.Show |> emptyCellsValue'
+        static member hide = FssTypes.Table.EmptyCells.Hide |> emptyCellsValue'
+        static member inherit' = FssTypes.Inherit |> emptyCellsValue'
+        static member initial = FssTypes.Initial |> emptyCellsValue'
+        static member unset = FssTypes.Unset |> emptyCellsValue'
+
+    /// Specifies whether or not empty cells should have borders.
+    /// - EmptyCells
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let EmptyCells' = EmptyCells.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
-    let private tableLayoutValue value = PropertyValue.cssValue Property.TableLayout value
-    let private tableLayoutValue' value =
-        value
-        |> tableLayoutToString
-        |> tableLayoutValue
+    let private tableLayoutValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TableLayout
+    let private tableLayoutValue' = tableLayoutToString >> tableLayoutValue
 
+    [<Erase>]
+    /// Specifies table layout.
     type TableLayout =
-        static member Value (layout: ITableLayout) = layout |> tableLayoutValue'
-        static member Fixed = TableType.Fixed |> tableLayoutValue'
-        static member Auto = Auto |> tableLayoutValue'
-        static member Inherit = Inherit |> tableLayoutValue'
-        static member Initial = Initial |> tableLayoutValue'
-        static member Unset = Unset |> tableLayoutValue'
+        static member value (layout: FssTypes.ITableLayout) = layout |> tableLayoutValue'
+        static member fixed' = FssTypes.Table.Layout.Fixed |> tableLayoutValue'
+        static member auto = FssTypes.Auto |> tableLayoutValue'
+        static member inherit' = FssTypes.Inherit |> tableLayoutValue'
+        static member initial = FssTypes.Initial |> tableLayoutValue'
+        static member unset = FssTypes.Unset |> tableLayoutValue'
 
-    /// <summary>Specifies table layout.</summary>
-    /// <param name="layout">
-    ///     can be:
-    ///     - <c> TableLayout </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let TableLayout' layout = TableLayout.Value layout
+    /// Specifies table layout.
+    /// Valid parameters:
+    /// - TableLayout
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let TableLayout' = TableLayout.value

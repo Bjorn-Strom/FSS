@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,16 +9,16 @@ module All =
      let tests =
         testList "All"
             [
-                test
+                testCase
                     "All inherit"
-                    [ All.Inherit]
+                    [ All.inherit']
                     [ "all" ==> "inherit" ]
-                test
+                testCase
                     "All initial"
-                    [ All.Initial]
+                    [ All.initial]
                     [ "all" ==> "initial" ]
-                test
+                testCase
                     "All unset"
-                    [ All.Unset ]
+                    [ All.unset ]
                     [ "all" ==> "unset" ]
             ]

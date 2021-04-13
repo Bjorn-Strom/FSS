@@ -1,9 +1,19 @@
-# Fss
+
+<p align="center">
+    <img src="https://github.com/Bjorn-Strom/FSS/raw/master/logo.png" width="150px" />
+    <h1 align="center">Fss</h1>
+</p>
+
+<hr>
+
+![AppVeyor](https://img.shields.io/appveyor/build/bjorn-strom/FSS?style=for-the-badge&logo=appveyor) ![Tests](https://img.shields.io/badge/TESTS-2071-9cf?style=for-the-badge) ![Nuget](https://img.shields.io/nuget/v/fss-lib?style=for-the-badge&logo=nuget) ![Nuget](https://img.shields.io/nuget/dt/fss-lib?style=for-the-badge&logo=nuget) [![GitHub license](https://img.shields.io/github/license/Bjorn-Strom/FSS?style=for-the-badge)](https://github.com/Bjorn-Strom/FSS/blob/master/LICENSE.md)
 
 An opinionated styling library for F#.
 Have CSS as a first class citizen in your F# projects.
 
 Built atop the fantastic [Emotion-js](https://github.com/emotion-js/emotion) library and uses that for all CSS generation.
+
+## [Documentation 📖](https://bjorn-strom.github.io/FSS/)
 
 ## Examples 🤓
 Quick example here, check the documentation for more information.
@@ -11,17 +21,17 @@ Quick example here, check the documentation for more information.
 let buttonStyle =
     fss
         [
-            BackgroundColor.Hex "44c767"
+            BackgroundColor.hex "44c767"
             BorderRadius' (px 30)
             BorderWidth' (px 1)
-            BorderStyle.Solid
-            BorderColor.Hex "18ab29"
-            Display.InlineBlock
-            Cursor.Pointer
+            BorderStyle.solid
+            BorderColor.hex "18ab29"
+            Display.inlineBlock
+            Cursor.pointer
             FontSize' (px 17)
             Hover
                 [
-                    BackgroundColor.Hex "5cbf2a"
+                    BackgroundColor.hex "5cbf2a"
                 ]
         ]
 button [ ClassName buttonStyle ] [ str "Click me" ]
@@ -75,6 +85,6 @@ yarn add @emotion/css
 
 You can also check out this template [repo](https://github.com/Bjorn-Strom/elmish-fss-template).
 
-## Documentation 📖
-[Docs](https://bjorn-strom.github.io/FSS/)
+
+
 

@@ -1,264 +1,165 @@
 namespace Fss
 
+open Fable.Core
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/margin
 [<AutoOpen>]
 module Margin =
-    let private marginToString (margin: IMargin) =
+    let private marginToString (margin: FssTypes.IMargin) =
         match margin with
-        | :? Units.Size.Size as s -> Units.Size.value s
-        | :? Units.Percent.Percent as p -> Units.Percent.value p
-        | :? Global as g -> GlobalValue.global' g
-        | :? Auto -> GlobalValue.auto
+        | :? FssTypes.Length as s -> FssTypes.unitHelpers.sizeToString s
+        | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
         | _ -> "Unknown margin"
 
-    let private marginValue value = PropertyValue.cssValue Property.Margin value
-    let private marginValue' value =
-        value
-        |> marginToString
-        |> marginValue
+    let private marginValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Margin
+    let private marginValue' = marginToString >> marginValue
 
-    type Margin =
-        static member Value (width: IMargin) = width |> marginValue'
+    [<Erase>]
+    /// Specifies the margin on all sides of an element.
+    let Margin = FssTypes.Margin.Margin(marginToString, marginValue, marginValue')
 
-        static member Value (vertical: IMargin, horizontal: IMargin) =
-            sprintf "%s %s"
-                (marginToString vertical)
-                (marginToString horizontal)
-            |> marginValue
-        static member Value (top: IMargin, auto: IMargin, bottom: IMargin) =
-            sprintf "%s %s %s"
-                (marginToString top)
-                (marginToString auto)
-                (marginToString bottom)
-            |> marginValue
-        static member Value (top: IMargin, right: IMargin, bottom: IMargin, left: IMargin) =
-            sprintf "%s %s %s %s"
-                (marginToString top)
-                (marginToString right)
-                (marginToString bottom)
-                (marginToString left)
-            |> marginValue
-        static member Auto = Auto |> marginValue'
-        static member Inherit = Inherit |> marginValue'
-        static member Initial = Initial |> marginValue'
-        static member Unset = Unset |> marginValue'
+    /// Specifies the margin on all sides of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let Margin' = Margin.value
+    let private marginTopValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginTop
+    let private marginTopValue' = marginToString >> marginTopValue
 
-    /// <summary>Specifies the margin on all sides of an element.</summary>
-    /// <param name="margin">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let Margin' (margin: IMargin) = Margin.Value(margin)
+    [<Erase>]
+    /// Specifies the margin on top side of an element.
+    let MarginTop = FssTypes.Margin.MarginSide(marginTopValue')
 
-    let private marginTopValue value = PropertyValue.cssValue Property.MarginTop value
-    let private marginTopValue' value =
-        value
-        |> marginToString
-        |> marginTopValue
-    type MarginTop =
-        static member Value (top: IMargin) = top |> marginTopValue'
-        static member Auto = Auto |> marginTopValue'
-        static member Inherit = Inherit |> marginTopValue'
-        static member Initial = Initial |> marginTopValue'
-        static member Unset = Unset |> marginTopValue'
+    /// Specifies the margin on top side of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MarginTop' = MarginTop.value
 
-    /// <summary>Specifies the margin on top side of an element.</summary>
-    /// <param name="top">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MarginTop' (top: IMargin) = MarginTop.Value(top)
+    let private marginRightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginRight
+    let private marginRightValue' = marginToString >> marginRightValue
 
-    let private marginRightValue value = PropertyValue.cssValue Property.MarginRight value
-    let private marginRightValue' value =
-        value
-        |> marginToString
-        |> marginRightValue
+    [<Erase>]
+    /// Specifies the margin on right side of an element.
+    let MarginRight = FssTypes.Margin.MarginSide(marginRightValue')
 
-    type MarginRight =
-        static member Value (right: IMargin) = right |> marginRightValue'
-        static member Auto = Auto |> marginRightValue'
-        static member Inherit = Inherit |> marginRightValue'
-        static member Initial = Initial |> marginRightValue'
-        static member Unset = Unset |> marginRightValue'
+    /// Specifies the margin on right side of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MarginRight' = MarginRight.value
 
-    /// <summary>Specifies the margin on right side of an element.</summary>
-    /// <param name="right">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MarginRight' (right: IMargin) = MarginRight.Value(right)
+    let private marginBottomValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginBottom
+    let private marginBottomValue' = marginToString >> marginBottomValue
 
-    let private marginBottomValue value = PropertyValue.cssValue Property.MarginBottom value
-    let private marginBottomValue' value =
-        value
-        |> marginToString
-        |> marginBottomValue
-    type MarginBottom =
-        static member Value (bottom: IMargin) = bottom |> marginBottomValue'
-        static member Auto = Auto |> marginBottomValue'
-        static member Inherit = Inherit |> marginBottomValue'
-        static member Initial = Initial |> marginBottomValue'
-        static member Unset = Unset |> marginBottomValue'
+    [<Erase>]
+    /// Specifies the margin on bottom side of an element.
+    let MarginBottom = FssTypes.Margin.MarginSide(marginBottomValue')
 
-    /// <summary>Specifies the margin on bottom side of an element.</summary>
-    /// <param name="bottom">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MarginBottom' (bottom: IMargin) = MarginBottom.Value(bottom)
+    /// Specifies the margin on bottom side of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MarginBottom' = MarginBottom.value
 
-    let private marginLeftValue value = PropertyValue.cssValue Property.MarginLeft value
-    let private marginLeftValue' value =
-        value
-        |> marginToString
-        |> marginLeftValue
+    let private marginLeftValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginLeft
+    let private marginLeftValue' = marginToString >> marginLeftValue
 
-    type MarginLeft =
-        static member Value (left: IMargin) = left |> marginLeftValue'
-        static member Auto = Auto |> marginLeftValue'
-        static member Inherit = Inherit |> marginLeftValue'
-        static member Initial = Initial |> marginLeftValue'
-        static member Unset = Unset |> marginLeftValue'
+    [<Erase>]
+    /// Specifies the margin on left side of an element.
+    let MarginLeft = FssTypes.Margin.MarginSide(marginLeftValue')
 
-    /// <summary>Specifies the margin on left side of an element.</summary>
-    /// <param name="left">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the margin on left side of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MarginLeft' = MarginLeft.value
 
-    let MarginLeft' (left: IMargin) = MarginLeft.Value(left)
+    let private marginInlineStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginInlineStart
+    let private marginInlineStartValue' = marginToString >> marginInlineStartValue
 
-    let private marginInlineStartValue value = PropertyValue.cssValue Property.MarginInlineStart value
-    let private marginInlineStartValue' value =
-        value
-        |> marginToString
-        |> marginInlineStartValue
+    [<Erase>]
+    let MarginInlineStart = FssTypes.Margin.MarginSide(marginInlineStartValue')
 
-    type MarginInlineStart =
-        static member Value (margin: IMargin) = margin |> marginInlineStartValue'
-        static member Auto = Auto |> marginInlineStartValue'
-        static member Inherit = Inherit |> marginInlineStartValue'
-        static member Initial = Initial |> marginInlineStartValue'
-        static member Unset = Unset |> marginInlineStartValue'
+    /// Specifies the amount of space along the outer starting edge of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MarginInlineStart' = MarginInlineStart.value
 
-    /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
-    /// <param name="margin">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MarginInlineStart' (margin: IMargin) = MarginInlineStart.Value(margin)
+    let private marginInlineEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginInlineEnd
+    let private marginInlineEndValue' = marginToString >> marginInlineEndValue
 
-    let private marginInlineEndValue value = PropertyValue.cssValue Property.MarginInlineEnd value
-    let private marginInlineEndValue' value =
-        value
-        |> marginToString
-        |> marginInlineEndValue
+    [<Erase>]
+    /// Specifies the amount of space along the outer ending edge of an element.
+    let MarginInlineEnd = FssTypes.Margin.MarginSide(marginInlineEndValue')
 
-    type MarginInlineEnd =
-        static member Value (margin: IMargin) = margin |> marginInlineEndValue'
-        static member Auto = Auto |> marginInlineEndValue'
-        static member Inherit = Inherit |> marginInlineEndValue'
-        static member Initial = Initial |> marginInlineEndValue'
-        static member Unset = Unset |> marginInlineEndValue'
+    /// Specifies the amount of space along the outer ending edge of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MarginInlineEnd' = MarginInlineEnd.value
 
-    /// <summary>Specifies the amount of space along the outer ending edge of an element.</summary>
-    /// <param name="margin">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MarginInlineEnd' (margin: IMargin) = MarginInlineEnd.Value(margin)
+    let private marginBlockStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginBlockStart
+    let private marginBlockStartValue' = marginToString >> marginBlockStartValue
 
-    let private marginBlockStartValue value = PropertyValue.cssValue Property.MarginBlockStart value
-    let private marginBlockStartValue' value =
-        value
-        |> marginToString
-        |> marginBlockStartValue
+    [<Erase>]
+    /// Specifies the amount of start margin of an element.
+    let MarginBlockStart = FssTypes.Margin.MarginSide(marginBlockStartValue')
 
-    type MarginBlockStart =
-        static member Value (margin: IMargin) = margin |> marginBlockStartValue'
-        static member Auto = Auto |> marginBlockStartValue'
-        static member Inherit = Inherit |> marginBlockStartValue'
-        static member Initial = Initial |> marginBlockStartValue'
-        static member Unset = Unset |> marginBlockStartValue'
+    /// Specifies the amount of start margin of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MarginBlockStart' = MarginBlockStart.value
 
-    /// <summary>Specifies the amount of start margin of an element.</summary>
-    /// <param name="margin">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MarginBlockStart' (margin: IMargin) = MarginBlockStart.Value(margin)
+    let private marginBlockEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MarginBlockEnd
+    let private marginBlockEndValue' = marginToString >> marginBlockEndValue
 
-    let private marginBlockEndValue value = PropertyValue.cssValue Property.MarginBlockEnd value
-    let private marginBlockEndValue' value =
-        value
-        |> marginToString
-        |> marginBlockEndValue
+    [<Erase>]
+    /// Specifies the amount of end margin of an element
+    let MarginBlockEnd = FssTypes.Margin.MarginSide(marginBlockEndValue')
 
-    type MarginBlockEnd =
-        static member Value (margin: IMargin) = margin |> marginBlockEndValue'
-        static member Auto = Auto |> marginBlockEndValue'
-        static member Inherit = Inherit |> marginBlockEndValue'
-        static member Initial = Initial |> marginBlockEndValue'
-        static member Unset = Unset |> marginBlockEndValue'
-
-    /// <summary>Specifies the amount of end margin of an element </summary>
-    /// <param name="margin">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let MarginBlockEnd' (margin: IMargin) = MarginBlockEnd.Value(margin)
+    /// Specifies the amount of end margin of an element
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let MarginBlockEnd' = MarginBlockEnd.value

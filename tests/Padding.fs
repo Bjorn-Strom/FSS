@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,180 +9,180 @@ module Padding =
      let tests =
         testList "Padding"
             [
-                test
+                testCase
                     "Padding top px"
                     [ PaddingTop' (px 10)]
                     ["paddingTop" ==> "10px"]
-                test
+                testCase
                     "Padding right px"
                     [ PaddingRight' (px 10)]
                     ["paddingRight" ==> "10px"]
-                test
+                testCase
                     "Padding bottom px"
                     [ PaddingBottom' (px 10)]
                     ["paddingBottom" ==> "10px"]
-                test
+                testCase
                     "Padding left px"
                     [ PaddingLeft' (px 10)]
                     ["paddingLeft" ==> "10px"]
-                test
+                testCase
                     "Padding px"
                     [ Padding' (px 10)]
                     [ "padding" ==> "10px" ]
-                test
+                testCase
                     "Padding pct"
                     [ Padding' (pct 10)]
                     [ "padding" ==> "10%" ]
-                test
+                testCase
                     "Padding em"
                     [ Padding' (em 10.0)]
                     [ "padding" ==> "10.0em" ]
-                test
+                testCase
                     "Padding auto"
-                    [ Padding.Auto]
+                    [ Padding.auto]
                     [ "padding" ==> "auto" ]
-                test
+                testCase
                     "Padding inherit"
-                    [ Padding.Inherit]
+                    [ Padding.inherit']
                     [ "padding" ==> "inherit" ]
-                test
+                testCase
                     "Padding initial"
-                    [ Padding.Initial]
+                    [ Padding.initial]
                     [ "padding" ==> "initial" ]
-                test
+                testCase
                     "Padding unset"
-                    [ Padding.Unset ]
+                    [ Padding.unset ]
                     [ "padding" ==> "unset" ]
-                test
+                testCase
                     "Paddings multiple"
-                    [ Padding.Value (px 10, px 20, px 30, px 40) ]
+                    [ Padding.value (px 10, px 20, px 30, px 40) ]
                     [ "padding" ==> "10px 20px 30px 40px" ]
-                test
+                testCase
                     "Padding inline start 5%"
                     [ PaddingInlineStart' <| pct 5]
                     [ "paddingInlineStart" ==> "5%" ]
-                test
+                testCase
                     "Padding inline start 1em"
                     [ PaddingInlineStart' <| em 1.]
                     [ "paddingInlineStart" ==> "1.0em" ]
-                test
+                testCase
                     "Padding inline start 10px"
                     [ PaddingInlineStart' <| px 10]
                     [ "paddingInlineStart" ==> "10px" ]
-                test
+                testCase
                     "Padding inline start initial"
-                    [ PaddingInlineStart.Initial]
+                    [ PaddingInlineStart.initial]
                     [ "paddingInlineStart" ==> "initial" ]
-                test
+                testCase
                     "Padding inline start unset"
-                    [ PaddingInlineStart.Unset ]
+                    [ PaddingInlineStart.unset ]
                     [ "paddingInlineStart" ==> "unset" ]
-                test
+                testCase
                     "Padding inline start inherit"
-                    [ PaddingInlineStart.Inherit]
+                    [ PaddingInlineStart.inherit']
                     [ "paddingInlineStart" ==> "inherit" ]
-                test
+                testCase
                     "Padding inline start initial"
-                    [ PaddingInlineStart.Initial]
+                    [ PaddingInlineStart.initial]
                     [ "paddingInlineStart" ==> "initial" ]
-                test
+                testCase
                     "Padding inline start unset"
-                    [ PaddingInlineStart.Unset ]
+                    [ PaddingInlineStart.unset ]
                     [ "paddingInlineStart" ==> "unset" ]
-                test
+                testCase
                     "Padding inline end 5%"
                     [ PaddingInlineEnd' <| pct 5]
                     [ "paddingInlineEnd" ==> "5%" ]
-                test
+                testCase
                     "Padding inline end 1em"
                     [ PaddingInlineEnd' <| em 1.]
                     [ "paddingInlineEnd" ==> "1.0em" ]
-                test
+                testCase
                     "Padding inline end 10px"
                     [ PaddingInlineEnd' <| px 10]
                     [ "paddingInlineEnd" ==> "10px" ]
-                test
+                testCase
                     "Padding inline end initial"
-                    [ PaddingInlineEnd.Initial]
+                    [ PaddingInlineEnd.initial]
                     [ "paddingInlineEnd" ==> "initial" ]
-                test
+                testCase
                     "Padding inline end unset"
-                    [ PaddingInlineEnd.Unset ]
+                    [ PaddingInlineEnd.unset ]
                     [ "paddingInlineEnd" ==> "unset" ]
-                test
+                testCase
                     "Padding inline end inherit"
-                    [ PaddingInlineEnd.Inherit]
+                    [ PaddingInlineEnd.inherit']
                     [ "paddingInlineEnd" ==> "inherit" ]
-                test
+                testCase
                     "Padding inline end initial"
-                    [ PaddingInlineEnd.Initial]
+                    [ PaddingInlineEnd.initial]
                     [ "paddingInlineEnd" ==> "initial" ]
-                test
+                testCase
                     "Padding inline end unset"
-                    [ PaddingInlineEnd.Unset ]
+                    [ PaddingInlineEnd.unset ]
                     [ "paddingInlineEnd" ==> "unset" ]
-                test
+                testCase
                     "Padding block start 5%"
                     [ PaddingBlockStart' <| pct 5]
                     [ "paddingBlockStart" ==> "5%" ]
-                test
+                testCase
                     "Padding block start 1em"
                     [ PaddingBlockStart' <| em 1.]
                     [ "paddingBlockStart" ==> "1.0em" ]
-                test
+                testCase
                     "Padding block start 10px"
                     [ PaddingBlockStart' <| px 10]
                     [ "paddingBlockStart" ==> "10px" ]
-                test
+                testCase
                     "Padding block start initial"
-                    [ PaddingBlockStart.Initial]
+                    [ PaddingBlockStart.initial]
                     [ "paddingBlockStart" ==> "initial" ]
-                test
+                testCase
                     "Padding block start unset"
-                    [ PaddingBlockStart.Unset ]
+                    [ PaddingBlockStart.unset ]
                     [ "paddingBlockStart" ==> "unset" ]
-                test
+                testCase
                     "Padding block start inherit"
-                    [ PaddingBlockStart.Inherit]
+                    [ PaddingBlockStart.inherit']
                     [ "paddingBlockStart" ==> "inherit" ]
-                test
+                testCase
                     "Padding block start initial"
-                    [ PaddingBlockStart.Initial]
+                    [ PaddingBlockStart.initial]
                     [ "paddingBlockStart" ==> "initial" ]
-                test
+                testCase
                     "Padding block start unset"
-                    [ PaddingBlockStart.Unset ]
+                    [ PaddingBlockStart.unset ]
                     [ "paddingBlockStart" ==> "unset" ]
-                test
+                testCase
                     "Padding block end 5%"
                     [ PaddingBlockEnd' <| pct 5]
                     [ "paddingBlockEnd" ==> "5%" ]
-                test
+                testCase
                     "Padding block end 1em"
                     [ PaddingBlockEnd' <| em 1.]
                     [ "paddingBlockEnd" ==> "1.0em" ]
-                test
+                testCase
                     "Padding block end 10px"
                     [ PaddingBlockEnd' <| px 10]
                     [ "paddingBlockEnd" ==> "10px" ]
-                test
+                testCase
                     "Padding block end initial"
-                    [ PaddingBlockEnd.Initial]
+                    [ PaddingBlockEnd.initial]
                     [ "paddingBlockEnd" ==> "initial" ]
-                test
+                testCase
                     "Padding block end unset"
-                    [ PaddingBlockEnd.Unset ]
+                    [ PaddingBlockEnd.unset ]
                     [ "paddingBlockEnd" ==> "unset" ]
-                test
+                testCase
                     "Padding block end inherit"
-                    [ PaddingBlockEnd.Inherit]
+                    [ PaddingBlockEnd.inherit']
                     [ "paddingBlockEnd" ==> "inherit" ]
-                test
+                testCase
                     "Padding block end initial"
-                    [ PaddingBlockEnd.Initial]
+                    [ PaddingBlockEnd.initial]
                     [ "paddingBlockEnd" ==> "initial" ]
-                test
+                testCase
                     "Padding block end unset"
-                    [ PaddingBlockEnd.Unset ]
+                    [ PaddingBlockEnd.unset ]
                     [ "paddingBlockEnd" ==> "unset" ]
             ]

@@ -3,4 +3,4 @@ group Tests
     Fable.Core
     Fable.Elmish.React
     Fable.React
-    Fable.Mocha
+    Fet

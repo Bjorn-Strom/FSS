@@ -1,7 +1,6 @@
 namespace FSSTests
 
-open System
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -10,117 +9,117 @@ module ClipPath =
      let tests =
         testList "ClipPath"
             [
-                test
+                testCase
                     "Clip path MarginBox"
-                    [ClipPath.MarginBox]
+                    [ClipPath.marginBox]
                     ["clipPath" ==> "margin-box"]
-                test
+                testCase
                     "Clip path BorderBox"
-                    [ClipPath.BorderBox]
+                    [ClipPath.borderBox]
                     ["clipPath" ==> "border-box"]
-                test
+                testCase
                     "Clip path PaddingBox"
-                    [ClipPath.PaddingBox]
+                    [ClipPath.paddingBox]
                     ["clipPath" ==> "padding-box"]
-                test
+                testCase
                     "Clip path ContentBox"
-                    [ClipPath.ContentBox]
+                    [ClipPath.contentBox]
                     ["clipPath" ==> "content-box"]
-                test
+                testCase
                     "Clip path FillBox"
-                    [ClipPath.FillBox]
+                    [ClipPath.fillBox]
                     ["clipPath" ==> "fill-box"]
-                test
+                testCase
                     "Clip path StrokeBox"
-                    [ClipPath.StrokeBox]
+                    [ClipPath.strokeBox]
                     ["clipPath" ==> "stroke-box"]
-                test
+                testCase
                     "Clip path ViewBox"
-                    [ClipPath.ViewBox]
+                    [ClipPath.viewBox]
                     ["clipPath" ==> "view-box"]
-                test
+                testCase
                     "Clip path url"
-                    [ClipPath.Url "resources.svg#c1"]
+                    [ClipPath.url "resources.svg#c1"]
                     ["clipPath" ==> "url(resources.svg#c1)"]
-                test
+                testCase
                     "Clip path path"
-                    [ClipPath.Path "M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z"]
+                    [ClipPath.path "M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z"]
                     ["clipPath" ==> "path('M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z')"]
-                test
+                testCase
                     "ClipPath all sides pct"
-                    [ ClipPath.Inset(pct 40)]
+                    [ ClipPath.inset(pct 40)]
                     [ "clipPath" ==> "inset(40%)" ]
-                test
+                testCase
                     "ClipPath all sides px"
-                    [ ClipPath.Inset(px 40)]
+                    [ ClipPath.inset(px 40)]
                     [ "clipPath" ==> "inset(40px)" ]
-                test
+                testCase
                     "ClipPath horizontal-vertical"
-                    [ ClipPath.Inset(pct 40, px 50)]
+                    [ ClipPath.inset(pct 40, px 50)]
                     [ "clipPath" ==> "inset(40% 50px)" ]
-                test
+                testCase
                     "ClipPath top-horizontal-bottom"
-                    [ ClipPath.Inset(pct 40, px 50, vh 3.)]
+                    [ ClipPath.inset(pct 40, px 50, vh 3.)]
                     [ "clipPath" ==> "inset(40% 50px 3.0vh)" ]
-                test
+                testCase
                     "ClipPath top-right-bottom-left"
-                    [ ClipPath.Inset(pct 40, px 50, vh 3., rem 2.)]
+                    [ ClipPath.inset(pct 40, px 50, vh 3., rem 2.)]
                     [ "clipPath" ==> "inset(40% 50px 3.0vh 2.0rem)" ]
-                test
+                testCase
                     "ClipPath all sides pct with round"
-                    [ ClipPath.Inset(pct 40, [ pct 50 :> ILengthPercentage ])]
+                    [ ClipPath.inset(pct 40, [ pct 50 :> FssTypes.ILengthPercentage ])]
                     [ "clipPath" ==> "inset(40% round 50%)" ]
-                test
+                testCase
                     "ClipPath all sides px"
-                    [ ClipPath.Inset(px 40, [ px 50 :> ILengthPercentage ])]
+                    [ ClipPath.inset(px 40, [ px 50 :> FssTypes.ILengthPercentage  ])]
                     [ "clipPath" ==> "inset(40px round 50px)" ]
-                test
+                testCase
                     "ClipPath horizontal-vertical"
-                    [ ClipPath.Inset(pct 40, px 50, [ px 50 :> ILengthPercentage ])]
+                    [ ClipPath.inset(pct 40, px 50, [ px 50 :> FssTypes.ILengthPercentage  ])]
                     [ "clipPath" ==> "inset(40% 50px round 50px)" ]
-                test
+                testCase
                     "ClipPath top-horizontal-bottom"
-                    [ ClipPath.Inset(pct 40, px 50, vh 3., [ px 50 :> ILengthPercentage ])]
+                    [ ClipPath.inset(pct 40, px 50, vh 3., [ px 50 :> FssTypes.ILengthPercentage  ])]
                     [ "clipPath" ==> "inset(40% 50px 3.0vh round 50px)" ]
-                test
+                testCase
                     "ClipPath top-right-bottom-left"
-                    [ ClipPath.Inset(pct 40, px 50, vh 3., rem 2., [ px 50 :> ILengthPercentage; pct 50 :> ILengthPercentage ])]
+                    [ ClipPath.inset(pct 40, px 50, vh 3., rem 2., [ px 50 :> FssTypes.ILengthPercentage ; pct 50 :> FssTypes.ILengthPercentage  ])]
                     [ "clipPath" ==> "inset(40% 50px 3.0vh 2.0rem round 50px 50%)" ]
-                test
+                testCase
                     "ClipPath circle pct"
-                    [ ClipPath.Circle(pct 50)]
+                    [ ClipPath.circle(pct 50)]
                     [ "clipPath" ==> "circle(50%)" ]
-                test
+                testCase
                     "ClipPath circle px"
-                    [ ClipPath.Circle(px 25)]
+                    [ ClipPath.circle(px 25)]
                     [ "clipPath" ==> "circle(25px)" ]
-                test
+                testCase
                     "ClipPath circle at pct"
-                    [ ClipPath.CircleAt(pct 50, pct 25, pct 25)]
+                    [ ClipPath.circleAt(pct 50, pct 25, pct 25)]
                     [ "clipPath" ==> "circle(50% at 25% 25%)" ]
-                test
+                testCase
                     "ClipPath circle at px"
-                    [ ClipPath.CircleAt(px 25, px 10, px 10)]
+                    [ ClipPath.circleAt(px 25, px 10, px 10)]
                     [ "clipPath" ==> "circle(25px at 10px 10px)" ]
-                test
+                testCase
                     "ClipPath ellipse pct"
-                    [ ClipPath.Ellipse(pct 50)]
+                    [ ClipPath.ellipse(pct 50)]
                     [ "clipPath" ==> "ellipse(50%)" ]
-                test
+                testCase
                     "ClipPath ellipse px"
-                    [ ClipPath.Ellipse(px 25)]
+                    [ ClipPath.ellipse(px 25)]
                     [ "clipPath" ==> "ellipse(25px)" ]
-                test
+                testCase
                     "ClipPath ellipse at pct"
-                    [ ClipPath.EllipseAt(pct 50, pct 25, pct 25)]
+                    [ ClipPath.ellipseAt(pct 50, pct 25, pct 25)]
                     [ "clipPath" ==> "ellipse(50% at 25% 25%)" ]
-                test
+                testCase
                     "ClipPath ellipse at px"
-                    [ ClipPath.EllipseAt(px 25, px 10, px 10)]
+                    [ ClipPath.ellipseAt(px 25, px 10, px 10)]
                     [ "clipPath" ==> "ellipse(25px at 10px 10px)" ]
-                test
+                testCase
                     "ClipPath Polygon"
-                    [ ClipPath.Polygon
+                    [ ClipPath.polygon
                                 [
                                     pct 43, pct 0
                                     pct 62, pct 0
@@ -132,21 +131,21 @@ module ClipPath =
                                 ]]
                     [ "clipPath" ==> "polygon(43% 0%, 62% 0%, 52% 26%, 69% 20%, 32% 100%, 42% 40%, 26% 46%)" ]
 
-                test
+                testCase
                     "ClipPath none"
-                    [ ClipPath.None]
+                    [ ClipPath.none]
                     [ "clipPath" ==> "none" ]
-                test
+                testCase
                     "ClipPath inherit"
-                    [ ClipPath.Inherit]
+                    [ ClipPath.inherit']
                     [ "clipPath" ==> "inherit" ]
-                test
+                testCase
                     "ClipPath initial"
-                    [ ClipPath.Initial]
+                    [ ClipPath.initial]
                     [ "clipPath" ==> "initial" ]
-                test
+                testCase
                     "ClipPath unset"
-                    [ ClipPath.Unset ]
+                    [ ClipPath.unset ]
                     [ "clipPath" ==> "unset" ]
             ]
 

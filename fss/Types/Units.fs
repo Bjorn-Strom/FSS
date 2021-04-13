@@ -1,8 +1,6 @@
-namespace Fss.Units
+namespace Fss
 
-open Fss
-
-module Percent =
+namespace Fss.FssTypes
     type Percent =
         | Percent of string
         interface ILengthPercentage
@@ -36,18 +34,19 @@ module Percent =
         interface IWordSpacing
         interface IPerspectiveOrigin
         interface IMaskPosition
-    let value (Percent p): string = p
+        interface IMaskSize
+        interface IBaselineShift
+        interface IStrokeWidth
 
-// https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
-module Size =
-    type Size =
+    // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
+    type Length =
         | Px of string
         | In of string
         | Cm of string
         | Mm of string
         | Pt of string
         | Pc of string
-        | Em of string
+        | Em' of string
         | Rem of string
         | Ex of string
         | Ch of string
@@ -95,70 +94,26 @@ module Size =
         interface IScrollMargin
         interface IScrollPadding
         interface IMaskPosition
+        interface IMaskSize
+        interface IBaselineShift
+        interface IStrokeWidth
 
-    let value (v: Size): string =
-        match v with
-            | Px p -> p
-            | In i -> i
-            | Cm c -> c
-            | Mm m -> m
-            | Pt p -> p
-            | Pc p -> p
-            | Em e -> e
-            | Rem r -> r
-            | Ex e -> e
-            | Ch c -> c
-            | Vw v -> v
-            | Vh v -> v
-            | VMax v -> v
-            | VMin v -> v
-
-module LengthPercentage =
-    open Size
-    open Percent
-
-    let value (v: ILengthPercentage) =
-        match v with
-        | :? Size    as s -> Size.value s
-        | :? Percent as p -> value p
-        | _ -> "Unknown length/percentage"
-
-// https://developer.mozilla.org/en-US/docs/Web/CSS/angle
-module Angle =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
     type Angle =
         | Deg of string
         | Grad of string
         | Rad of string
         | Turn of string
 
-    let value (u: Angle) =
-        match u with
-            | Deg d -> d
-            | Grad g -> g
-            | Rad r -> r
-            | Turn t -> t
-
-module Resolution =
     type Resolution =
         | Dpi of string
 
-    let value (r: Resolution) =
-        match r with
-            | Dpi d -> sprintf "%sdpi" d
-
-module Time =
     type Time =
         | Sec of string
         | Ms of string
         interface ITransitionDelay
         interface ITransitionDuration
 
-    let value (v: Time): string =
-        match v with
-        | Sec s -> s
-        | Ms ms -> ms
-
-module Fraction =
     type Fraction =
         | Fr of string
         interface IGridTemplateRows
@@ -167,4 +122,42 @@ module Fraction =
         interface IGridAutoColumns
         interface ITemplateType
 
-    let value (Fr f) = f
+    [<AutoOpen>]
+    module unitHelpers =
+        let internal percentToString (Percent p): string = p
+        let internal sizeToString (v: Length): string =
+            match v with
+                | Px p -> p
+                | In i -> i
+                | Cm c -> c
+                | Mm m -> m
+                | Pt p -> p
+                | Pc p -> p
+                | Em' e -> e
+                | Rem r -> r
+                | Ex e -> e
+                | Ch c -> c
+                | Vw v -> v
+                | Vh v -> v
+                | VMax v -> v
+                | VMin v -> v
+        let internal lengthPercentageToString (v: ILengthPercentage) =
+            match v with
+            | :? Length    as s -> sizeToString s
+            | :? Percent as p -> percentToString p
+            | _ -> "Unknown length/percentage"
+        let internal angleToString (u: Angle) =
+            match u with
+                | Deg d -> d
+                | Grad g -> g
+                | Rad r -> r
+                | Turn t -> t
+        let internal resolutionToString (r: Resolution) =
+            match r with
+                | Dpi d -> sprintf "%sdpi" d
+        let internal timeToString (v: Time): string =
+            match v with
+            | Sec s -> s
+            | Ms ms -> ms
+        let internal fractionToString (Fr f) = f
+

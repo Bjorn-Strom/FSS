@@ -1,8 +1,7 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
-open Fss.Word
 open Utils
 open Fss
 
@@ -10,20 +9,20 @@ module Caret =
     let tests =
         testList "Caret"
             [
-                test
+                testCase
                     "caret color rgb"
-                    [ CaretColor.Rgb 255 0 0 ]
+                    [ CaretColor.rgb 255 0 0 ]
                     ["caretColor" ==> "rgb(255, 0, 0)"]
-                test
+                testCase
                     "caret color hsl"
-                    [ CaretColor.Hsl 255 0. 0. ]
+                    [ CaretColor.hsl 255 0. 0. ]
                     ["caretColor" ==> "hsl(255, 0%, 0%)"]
-                test
+                testCase
                     "caret color green"
                     [ CaretColor.green ]
                     ["caretColor" ==> "#008000"]
-                test
+                testCase
                     "Caret Color Auto"
-                    [CaretColor.Auto]
+                    [CaretColor.auto]
                     ["caretColor" ==> "auto"]
             ]

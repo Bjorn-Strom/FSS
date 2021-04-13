@@ -1,51 +1,38 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module ResizeType =
-    type Resize =
-        | Both
-        | Horizontal
-        | Vertical
-        | Block
-        | Inline
-        interface IResize
+open Fable.Core
 
 [<AutoOpen>]
 module Resize =
-
-    let private resizeToString (resize: IResize) =
+    let private resizeToString (resize: FssTypes.IResize) =
         match resize with
-        | :? ResizeType.Resize as r -> Utilities.Helpers.duToLowercase r
-        | :? None' -> GlobalValue.none
-        | :? Global as g -> GlobalValue.global' g
+        | :? FssTypes.Resize.Resize as r -> Utilities.Helpers.duToLowercase r
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
         | _ -> "Unknown resize value"
 
-    let private resizeValue value = PropertyValue.cssValue Property.Resize value
-    let private resizeValue' value =
-        value
-        |> resizeToString
-        |> resizeValue
+    let private resizeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Resize
+    let private resizeValue' = resizeToString >> resizeValue
 
+    [<Erase>]
+    /// Specifies how elements are resizable.
     type Resize =
-        static member Value (resize: IResize) = resize |> resizeValue'
-        static member Both = ResizeType.Both |> resizeValue'
-        static member Horizontal = ResizeType.Horizontal |> resizeValue'
-        static member Vertical = ResizeType.Vertical |> resizeValue'
-        static member Block = ResizeType.Block |> resizeValue'
-        static member Inline = ResizeType.Inline |> resizeValue'
-        static member None = None' |> resizeValue'
-        static member Initial = Initial |> resizeValue'
-        static member Inherit = Inherit |> resizeValue'
-        static member Unset = Unset |> resizeValue'
+        static member value (resize: FssTypes.IResize) = resize |> resizeValue'
+        static member both = FssTypes.Resize.Both |> resizeValue'
+        static member horizontal = FssTypes.Resize.Horizontal |> resizeValue'
+        static member vertical = FssTypes.Resize.Vertical |> resizeValue'
+        static member block = FssTypes.Resize.Block |> resizeValue'
+        static member inline' = FssTypes.Resize.Inline |> resizeValue'
+        static member none = FssTypes.None' |> resizeValue'
+        static member initial = FssTypes.Initial |> resizeValue'
+        static member inherit' = FssTypes.Inherit |> resizeValue'
+        static member unset = FssTypes.Unset |> resizeValue'
 
-    /// <summary>Specifies how elemnts are resizable.</summary>
-    /// <param name="resize">
-    ///     can be:
-    ///     - <c> Resize </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let Resize' (resize: IResize) = Resize.Value resize
+    /// Specifies how elements are resizable.
+    /// Valid parameters:
+    /// - Resize
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    let Resize' = Resize.value

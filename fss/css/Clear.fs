@@ -1,45 +1,33 @@
 namespace Fss
 
-[<RequireQualifiedAccess>]
-module ClearType =
-    type Clear =
-        | Left
-        | Right
-        | Both
-        | InlineStart
-        | InlineEnd
-        interface IClear
+open Fable.Core
 
 [<AutoOpen>]
 module Clear =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/clear
-    let private stringifyClear (clear: IClear) =
+    let private stringifyClear (clear: FssTypes.IClear) =
         match clear with
-        | :? ClearType.Clear as c -> Utilities.Helpers.duToKebab c
-        | :? Global as g -> GlobalValue.global' g
-        | :? None' -> GlobalValue.none
+        | :? FssTypes.Clear.Clear as c -> Utilities.Helpers.duToKebab c
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown clear"
 
-    let private clearValue value = PropertyValue.cssValue Property.Clear value
-    let private clearValue' value =
-        value
-        |> stringifyClear
-        |> clearValue
+    let private clearValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Clear
+    let private clearValue' = stringifyClear >> clearValue
 
+    [<Erase>]
+    /// Specifies how if an element is to be moved downwards by floating elements.
     type Clear =
-        static member Value (clear: IClear) = clear |> clearValue'
-        static member None = None' |> clearValue'
-        static member Inherit = Inherit |> clearValue'
-        static member Initial = Initial |> clearValue'
-        static member Unset = Unset |> clearValue'
+        static member value (clear: FssTypes.IClear) = clear |> clearValue'
+        static member none = FssTypes.None' |> clearValue'
+        static member inherit' = FssTypes.Inherit |> clearValue'
+        static member initial = FssTypes.Initial |> clearValue'
+        static member unset = FssTypes.Unset |> clearValue'
 
-    /// <summary>Specifies how if an element is to be moved downwards by floating elements.</summary>
-    /// <param name="clear">
-    ///     can be:
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
-    let private Clear' (clear: IClear) = clear |> Clear.Value
+    /// Specifies how if an element is to be moved downwards by floating elements.
+    /// Valid parameters:
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    let Clear' = Clear.value

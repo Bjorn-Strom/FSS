@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,44 +9,44 @@ module Resize =
     let tests =
         testList "Resize"
             [
-                test
+                testCase
                     "Resize Value"
-                    [Resize' (ResizeType.Block)]
+                    [Resize' FssTypes.Resize.Block]
                     ["resize" ==> "block"]
-                test
+                testCase
                     "Resize Both"
-                    [Resize.Both]
+                    [Resize.both]
                     ["resize" ==> "both"]
-                test
+                testCase
                     "Resize Horizontal"
-                    [Resize.Horizontal]
+                    [Resize.horizontal]
                     ["resize" ==> "horizontal"]
-                test
+                testCase
                     "Resize Vertical"
-                    [Resize.Vertical]
+                    [Resize.vertical]
                     ["resize" ==> "vertical"]
-                test
+                testCase
                     "Resize Inline"
-                    [Resize.Inline]
+                    [Resize.inline']
                     ["resize" ==> "inline"]
-                test
+                testCase
                     "Resize Block"
-                    [Resize.Block]
+                    [Resize.block]
                     ["resize" ==> "block"]
-                test
+                testCase
                     "Resize None"
-                    [Resize.None]
+                    [Resize.none]
                     ["resize" ==> "none"]
-                test
+                testCase
                     "Resize Initial"
-                    [Resize.Initial]
+                    [Resize.initial]
                     ["resize" ==> "initial"]
-                test
+                testCase
                     "Resize Inherit"
-                    [Resize.Inherit]
+                    [Resize.inherit']
                     ["resize" ==> "inherit"]
-                test
+                testCase
                     "Resize Unset"
-                    [Resize.Unset]
+                    [Resize.unset]
                     ["resize" ==> "unset"]
             ]

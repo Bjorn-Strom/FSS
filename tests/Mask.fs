@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,277 +9,341 @@ module Mask =
      let tests =
         testList "Mask"
             [
-                test
+                testCase
                     "MaskClip content-box"
-                    [ MaskClip.ContentBox]
+                    [ MaskClip.contentBox]
                     [ "maskClip" ==> "content-box" ]
-                test
+                testCase
                     "MaskClip padding-box"
-                    [ MaskClip.PaddingBox]
+                    [ MaskClip.paddingBox]
                     [ "maskClip" ==> "padding-box" ]
-                test
+                testCase
                     "MaskClip border-box"
-                    [ MaskClip.BorderBox]
+                    [ MaskClip.borderBox]
                     [ "maskClip" ==> "border-box" ]
-                test
+                testCase
                     "MaskClip margin-box"
-                    [ MaskClip.MarginBox]
+                    [ MaskClip.marginBox]
                     [ "maskClip" ==> "margin-box" ]
-                test
+                testCase
                     "MaskClip fill-box"
-                    [ MaskClip.FillBox]
+                    [ MaskClip.fillBox]
                     [ "maskClip" ==> "fill-box" ]
-                test
+                testCase
                     "MaskClip stroke-box"
-                    [ MaskClip.StrokeBox]
+                    [ MaskClip.strokeBox]
                     [ "maskClip" ==> "stroke-box" ]
-                test
+                testCase
                     "MaskClip view-box"
-                    [ MaskClip.ViewBox]
+                    [ MaskClip.viewBox]
                     [ "maskClip" ==> "view-box" ]
-                test
+                testCase
                     "MaskClip no-clip"
-                    [ MaskClip.NoClip]
+                    [ MaskClip.noClip]
                     [ "maskClip" ==> "no-clip" ]
-                test
+                testCase
                     "MaskClip border"
-                    [ MaskClip.Border]
+                    [ MaskClip.border]
                     [ "maskClip" ==> "border" ]
-                test
+                testCase
                     "MaskClip padding"
-                    [ MaskClip.Padding]
+                    [ MaskClip.padding]
                     [ "maskClip" ==> "padding" ]
-                test
+                testCase
                     "MaskClip content"
-                    [ MaskClip.Content]
+                    [ MaskClip.content]
                     [ "maskClip" ==> "content" ]
-                test
+                testCase
                     "MaskClip text"
-                    [ MaskClip.Text]
+                    [ MaskClip.text]
                     [ "maskClip" ==> "text" ]
-                test
+                testCase
                     "MaskClip inherit"
-                    [ MaskClip.Inherit]
+                    [ MaskClip.inherit']
                     [ "maskClip" ==> "inherit" ]
-                test
+                testCase
                     "MaskClip initial"
-                    [ MaskClip.Initial]
+                    [ MaskClip.initial]
                     [ "maskClip" ==> "initial" ]
-                test
+                testCase
                     "MaskClip unset"
-                    [ MaskClip.Unset ]
+                    [ MaskClip.unset ]
                     [ "maskClip" ==> "unset" ]
-                test
+                testCase
                     "MaskComposite add"
-                    [ MaskComposite.Add]
+                    [ MaskComposite.add]
                     [ "maskComposite" ==> "add" ]
-                test
+                testCase
                     "MaskComposite subtract"
-                    [ MaskComposite.Subtract]
+                    [ MaskComposite.subtract]
                     [ "maskComposite" ==> "subtract" ]
-                test
+                testCase
                     "MaskComposite intersect"
-                    [ MaskComposite.Intersect]
+                    [ MaskComposite.intersect]
                     [ "maskComposite" ==> "intersect" ]
-                test
+                testCase
                     "MaskComposite exclude"
-                    [ MaskComposite.Exclude]
+                    [ MaskComposite.exclude]
                     [ "maskComposite" ==> "exclude" ]
-                test
+                testCase
                     "MaskComposite inherit"
-                    [ MaskComposite.Inherit]
+                    [ MaskComposite.inherit']
                     [ "maskComposite" ==> "inherit" ]
-                test
+                testCase
                     "MaskComposite initial"
-                    [ MaskComposite.Initial]
+                    [ MaskComposite.initial]
                     [ "maskComposite" ==> "initial" ]
-                test
+                testCase
                     "MaskComposite unset"
-                    [ MaskComposite.Unset ]
+                    [ MaskComposite.unset ]
                     [ "maskComposite" ==> "unset" ]
-                test
+                testCase
                     "Mask image source none"
-                    [ MaskImage.None ]
+                    [ MaskImage.none ]
                     [ "maskImage" ==> "none" ]
-                test
+                testCase
                     "Mask image source url"
-                    [ MaskImage.Url "image.jpg" ]
+                    [ MaskImage.url "image.jpg" ]
                     [ "maskImage" ==> "url(image.jpg)" ]
-                test
+                testCase
                     "Mask image source linear gradient"
-                    [ MaskImage.LinearGradient(deg 45., [ CssColor.red, pct 0; CssColor.blue, pct 100 ]) ]
+                    [ MaskImage.linearGradient((deg 45., [ FssTypes.Color.Color.red, pct 0; FssTypes.Color.Color.blue, pct 100 ])) ]
                     [ "maskImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
-                test
+                testCase
                     "Mask image source inherit"
-                    [ MaskImage.Inherit ]
+                    [ MaskImage.inherit' ]
                     [ "maskImage" ==> "inherit" ]
-                test
+                testCase
                     "Mask image source initial"
-                    [ MaskImage.Initial ]
+                    [ MaskImage.initial ]
                     [ "maskImage" ==> "initial" ]
-                test
+                testCase
                     "Mask image source unset"
-                    [ MaskImage.Unset ]
+                    [ MaskImage.unset ]
                     [ "maskImage" ==> "unset" ]
-                test
+                testCase
                     "Mask mode alpha"
-                    [ MaskMode.Alpha ]
+                    [ MaskMode.alpha ]
                     [ "maskMode" ==> "alpha" ]
-                test
+                testCase
                     "Mask mode luminance"
-                    [ MaskMode.Luminance ]
+                    [ MaskMode.luminance ]
                     [ "maskMode" ==> "luminance" ]
-                test
+                testCase
                     "Mask mode match-source"
-                    [ MaskMode.MatchSource ]
+                    [ MaskMode.matchSource ]
                     [ "maskMode" ==> "match-source" ]
-                test
+                testCase
                     "Mask mode multiple"
-                    [ MaskMode.Value([MaskTypes.Alpha; MaskTypes.MatchSource]) ]
+                    [ MaskMode.value([FssTypes.Mask.Alpha; FssTypes.Mask.MatchSource]) ]
                     [ "maskMode" ==> "alpha, match-source" ]
-                test
+                testCase
                     "Mask mode inherit"
-                    [ MaskMode.Inherit ]
+                    [ MaskMode.inherit' ]
                     [ "maskMode" ==> "inherit" ]
-                test
+                testCase
                     "Mask mode initial"
-                    [ MaskMode.Initial ]
+                    [ MaskMode.initial ]
                     [ "maskMode" ==> "initial" ]
-                test
+                testCase
                     "Mask mode unset"
-                    [ MaskMode.Unset ]
+                    [ MaskMode.unset ]
                     [ "maskMode" ==> "unset" ]
-                test
+                testCase
                     "MaskOrigin multiple"
-                    [ MaskOrigin.Value([MaskTypes.MaskOrigin.ViewBox; MaskTypes.MaskOrigin.FillBox; MaskTypes.MaskOrigin.BorderBox])]
+                    [ MaskOrigin.value([FssTypes.Mask.Origin.ViewBox; FssTypes.Mask.Origin.FillBox; FssTypes.Mask.Origin.BorderBox])]
                     [ "maskOrigin" ==> "view-box, fill-box, border-box" ]
-                test
+                testCase
                     "MaskOrigin content-box"
-                    [ MaskOrigin.ContentBox]
+                    [ MaskOrigin.contentBox]
                     [ "maskOrigin" ==> "content-box" ]
-                test
+                testCase
                     "MaskOrigin padding-box"
-                    [ MaskOrigin.PaddingBox]
+                    [ MaskOrigin.paddingBox]
                     [ "maskOrigin" ==> "padding-box" ]
-                test
+                testCase
                     "MaskOrigin border-box"
-                    [ MaskOrigin.BorderBox]
+                    [ MaskOrigin.borderBox]
                     [ "maskOrigin" ==> "border-box" ]
-                test
+                testCase
                     "MaskOrigin margin-box"
-                    [ MaskOrigin.MarginBox]
+                    [ MaskOrigin.marginBox]
                     [ "maskOrigin" ==> "margin-box" ]
-                test
+                testCase
                     "MaskOrigin fill-box"
-                    [ MaskOrigin.FillBox]
+                    [ MaskOrigin.fillBox]
                     [ "maskOrigin" ==> "fill-box" ]
-                test
+                testCase
                     "MaskOrigin stroke-box"
-                    [ MaskOrigin.StrokeBox]
+                    [ MaskOrigin.strokeBox]
                     [ "maskOrigin" ==> "stroke-box" ]
-                test
+                testCase
                     "MaskOrigin view-box"
-                    [ MaskOrigin.ViewBox]
+                    [ MaskOrigin.viewBox]
                     [ "maskOrigin" ==> "view-box" ]
-                test
+                testCase
                     "MaskOrigin border"
-                    [ MaskOrigin.Border]
+                    [ MaskOrigin.border]
                     [ "maskOrigin" ==> "border" ]
-                test
+                testCase
                     "MaskOrigin padding"
-                    [ MaskOrigin.Padding]
+                    [ MaskOrigin.padding]
                     [ "maskOrigin" ==> "padding" ]
-                test
+                testCase
                     "MaskOrigin content"
-                    [ MaskOrigin.Content]
+                    [ MaskOrigin.content]
                     [ "maskOrigin" ==> "content" ]
-                test
+                testCase
                     "MaskOrigin inherit"
-                    [ MaskOrigin.Inherit]
+                    [ MaskOrigin.inherit']
                     [ "maskOrigin" ==> "inherit" ]
-                test
+                testCase
                     "MaskOrigin initial"
-                    [ MaskOrigin.Initial]
+                    [ MaskOrigin.initial]
                     [ "maskOrigin" ==> "initial" ]
-                test
+                testCase
                     "MaskOrigin unset"
-                    [ MaskOrigin.Unset ]
+                    [ MaskOrigin.unset ]
                     [ "maskOrigin" ==> "unset" ]
-                test
+                testCase
                     "MaskPosition size"
-                    [ MaskPosition.Value(px 1, rem 1.)]
+                    [ MaskPosition.value(px 1, rem 1.)]
                     [ "maskPosition" ==> "1px 1.0rem" ]
-                test
+                testCase
                     "MaskPosition sizes"
-                    [ MaskPosition.Value([px 1, rem 1.; px 10, px 100])]
+                    [ MaskPosition.value([px 1, rem 1.; px 10, px 100])]
                     [ "maskPosition" ==> "1px 1.0rem, 10px 100px" ]
-                test
+                testCase
                     "MaskPosition percent"
-                    [ MaskPosition.Value(pct 10, pct 50)]
+                    [ MaskPosition.value(pct 10, pct 50)]
                     [ "maskPosition" ==> "10% 50%" ]
-                test
+                testCase
                     "MaskPosition percents"
-                    [ MaskPosition.Value([pct 10, pct 50; pct 50, pct 50])]
+                    [ MaskPosition.value([pct 10, pct 50; pct 50, pct 50])]
                     [ "maskPosition" ==> "10% 50%, 50% 50%" ]
-                test
+                testCase
                     "MaskPosition inherit"
-                    [ MaskPosition.Inherit]
+                    [ MaskPosition.inherit']
                     [ "maskPosition" ==> "inherit" ]
-                test
+                testCase
                     "MaskPosition initial"
-                    [ MaskPosition.Initial]
+                    [ MaskPosition.initial]
                     [ "maskPosition" ==> "initial" ]
-                test
+                testCase
                     "MaskPosition unset"
-                    [ MaskPosition.Unset ]
+                    [ MaskPosition.unset ]
                     [ "maskPosition" ==> "unset" ]
 
-                test
+                testCase
                     "MaskRepeat value"
-                    [ MaskRepeat.Value(MaskTypes.Repeat)]
+                    [ MaskRepeat.value(FssTypes.Mask.Repeat)]
                     [ "maskRepeat" ==> "repeat" ]
-                test
+                testCase
                     "MaskRepeat 2 value"
-                    [ MaskRepeat.Value(MaskTypes.RepeatX, MaskTypes.RepeatY)]
+                    [ MaskRepeat.value(FssTypes.Mask.RepeatX, FssTypes.Mask.RepeatY)]
                     [ "maskRepeat" ==> "repeat-x repeat-y" ]
-                test
+                testCase
                     "MaskRepeat multiple values"
-                    [ MaskRepeat.Value([MaskTypes.RepeatX, MaskTypes.RepeatY; MaskTypes.NoRepeat, MaskTypes.Round])]
+                    [ MaskRepeat.value([FssTypes.Mask.RepeatX, FssTypes.Mask.RepeatY; FssTypes.Mask.NoRepeat, FssTypes.Mask.Round])]
                     [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
-                test
+                testCase
                     "MaskRepeat repeatX"
-                    [ MaskRepeat.RepeatX]
+                    [ MaskRepeat.repeatX]
                     [ "maskRepeat" ==> "repeat-x" ]
-                test
+                testCase
                     "MaskRepeat repeatY"
-                    [ MaskRepeat.RepeatY]
+                    [ MaskRepeat.repeatY]
                     [ "maskRepeat" ==> "repeat-y" ]
-                test
+                testCase
                     "MaskRepeat no-repeat"
-                    [ MaskRepeat.NoRepeat]
+                    [ MaskRepeat.noRepeat]
                     [ "maskRepeat" ==> "no-repeat" ]
-                test
+                testCase
                     "MaskRepeat repeat"
-                    [ MaskRepeat.Repeat]
+                    [ MaskRepeat.repeat]
                     [ "maskRepeat" ==> "repeat" ]
-                test
+                testCase
                     "MaskRepeat round"
-                    [ MaskRepeat.Round]
+                    [ MaskRepeat.round]
                     [ "maskRepeat" ==> "round" ]
-                test
+                testCase
                     "MaskRepeat space"
-                    [ MaskRepeat.Space]
+                    [ MaskRepeat.space]
                     [ "maskRepeat" ==> "space" ]
-                test
+                testCase
                     "MaskRepeat inherit"
-                    [ MaskRepeat.Inherit]
+                    [ MaskRepeat.inherit']
                     [ "maskRepeat" ==> "inherit" ]
-                test
+                testCase
                     "MaskRepeat initial"
-                    [ MaskRepeat.Initial]
+                    [ MaskRepeat.initial]
                     [ "maskRepeat" ==> "initial" ]
-                test
+                testCase
                     "MaskRepeat unset"
-                    [ MaskRepeat.Unset ]
+                    [ MaskRepeat.unset ]
                     [ "maskRepeat" ==> "unset" ]
+                testCase
+                    "MaskSize cover"
+                    [ MaskSize.cover]
+                    [ "maskSize" ==> "cover" ]
+                testCase
+                    "MaskSize contain"
+                    [ MaskSize.contain]
+                    [ "maskSize" ==> "contain" ]
+                testCase
+                    "MaskSize pct"
+                    [ MaskSize' <| pct 50 ]
+                    [ "maskSize" ==> "50%" ]
+                testCase
+                    "MaskSize em"
+                    [ MaskSize' <| em 3. ]
+                    [ "maskSize" ==> "3.0em" ]
+                testCase
+                    "MaskSize px"
+                    [ MaskSize' <| px 12 ]
+                    [ "maskSize" ==> "12px" ]
+                testCase
+                    "MaskSize pct and auto"
+                    [ MaskSize.value(pct 50, FssTypes.Auto) ]
+                    [ "maskSize" ==> "50% auto" ]
+                testCase
+                    "MaskSize em and pct"
+                    [ MaskSize.value(em 3., pct 25) ]
+                    [ "maskSize" ==> "3.0em 25%" ]
+                testCase
+                    "MaskSize auto px"
+                    [ MaskSize.value(FssTypes.Auto, px 6) ]
+                    [ "maskSize" ==> "auto 6px" ]
+                testCase
+                    "MaskSize auto auto"
+                    [ MaskSize.value(FssTypes.Auto, FssTypes.Auto) ]
+                    [ "maskSize" ==> "auto auto" ]
+                testCase
+                    "MaskSize multiple auto auto"
+                    [ MaskSize.values [FssTypes.Auto; FssTypes.Auto ] ]
+                    [ "maskSize" ==> "auto, auto" ]
+                testCase
+                    "MaskSize multiple pct pct pct"
+                    [ MaskSize.values [pct 50; pct 25; pct 25] ]
+                    [ "maskSize" ==> "50%, 25%, 25%" ]
+                testCase
+                    "MaskSize multiple px auto contain"
+                    [ MaskSize.values [px 6; FssTypes.Auto; FssTypes.Mask.Contain] ]
+                    [ "maskSize" ==> "6px, auto, contain" ]
+                testCase
+                    "MaskSize auto"
+                    [ MaskSize.auto]
+                    [ "maskSize" ==> "auto" ]
+                testCase
+                    "MaskSize inherit"
+                    [ MaskSize.inherit']
+                    [ "maskSize" ==> "inherit" ]
+                testCase
+                    "MaskSize initial"
+                    [ MaskSize.initial]
+                    [ "maskSize" ==> "initial" ]
+                testCase
+                    "MaskSize unset"
+                    [ MaskSize.unset ]
+                    [ "maskSize" ==> "unset" ]
             ]

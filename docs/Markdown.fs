@@ -6,7 +6,7 @@
     open Fable.Core.JsInterop
     open Fable.React
 
-    let materialDark:obj = importMember "react-syntax-highlighter/dist/styles/prism"
+    let style:obj = import "xonokai" "react-syntax-highlighter/dist/styles/prism"
 
     type HighlightProps =
         | Language of string
@@ -21,14 +21,13 @@
     type MarkdownProps =
         | Children of string
         | Renderers of obj
-
     type Renderer =
         { language: string
           value: string }
 
     let renderers =
         createObj [ "code" ==> fun (renderer: Renderer) ->
-            syntaxHighlighter [ Language renderer.language; HighlightProps.Children renderer.value; ShowLineNumbers true; Style materialDark ] ]
+            syntaxHighlighter [ Language renderer.language; HighlightProps.Children renderer.value; ShowLineNumbers true; Style style ] ]
 
     let markdown (props: MarkdownProps list): ReactElement =
         let propsObject = keyValueList CaseRules.LowerFirst props

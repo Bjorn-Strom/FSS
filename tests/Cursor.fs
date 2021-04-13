@@ -1,6 +1,6 @@
 ﻿namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Utils
 open Fss
@@ -9,160 +9,144 @@ module Cursor =
     let tests =
         testList "Cursor"
             [
-                test
+                testCase
                     "Cursor None"
-                    [Cursor.None]
+                    [Cursor.none]
                     [ "cursor" ==> "none"]
-                test
+                testCase
                     "Cursor auto"
-                    [Cursor.Auto]
+                    [Cursor.auto]
                     [ "cursor" ==> "auto"]
-                test
+                testCase
                     "Cursor inherit"
-                    [Cursor.Inherit]
+                    [Cursor.inherit']
                     [ "cursor" ==> "inherit"]
-                test
+                testCase
                     "Cursor initial"
-                    [Cursor.Initial]
+                    [Cursor.initial]
                     [ "cursor" ==> "initial"]
-                test
+                testCase
                     "Cursor unset"
-                    [Cursor.Unset]
+                    [Cursor.unset]
                     [ "cursor" ==> "unset"]
-                test
+                testCase
                     "Cursor alias"
-                    [Cursor.Alias]
+                    [Cursor.alias]
                     [ "cursor" ==> "alias"]
-                test
+                testCase
                     "Cursor ContextMenu"
-                    [Cursor.ContextMenu]
+                    [Cursor.contextMenu]
                     [ "cursor" ==> "context-menu"]
-                test
+                testCase
                     "Cursor Help"
-                    [Cursor.Help]
+                    [Cursor.help]
                     [ "cursor" ==> "help"]
-                test
+                testCase
                     "Cursor Pointer"
-                    [Cursor.Pointer]
+                    [Cursor.pointer]
                     [ "cursor" ==> "pointer"]
-                test
+                testCase
                     "Cursor Progress"
-                    [Cursor.Progress]
+                    [Cursor.progress]
                     [ "cursor" ==> "progress"]
-                test
+                testCase
                     "Cursor Wait"
-                    [Cursor.Wait]
+                    [Cursor.wait]
                     [ "cursor" ==> "wait"]
-                test
+                testCase
                     "Cursor Cell"
-                    [Cursor.Cell]
+                    [Cursor.cell]
                     [ "cursor" ==> "cell"]
-                test
+                testCase
                     "Cursor Crosshair"
-                    [Cursor.Crosshair]
+                    [Cursor.crosshair]
                     [ "cursor" ==> "crosshair"]
-                test
+                testCase
                     "Cursor Text"
-                    [Cursor.Text]
+                    [Cursor.text]
                     [ "cursor" ==> "text"]
-                test
+                testCase
                     "Cursor VerticalText"
-                    [Cursor.VerticalText]
+                    [Cursor.verticalText]
                     [ "cursor" ==> "vertical-text"]
-                test
+                testCase
                     "Cursor Alias"
-                    [Cursor.Alias]
+                    [Cursor.alias]
                     [ "cursor" ==> "alias"]
-                test
+                testCase
                     "Cursor Copy"
-                    [Cursor.Copy]
+                    [Cursor.copy]
                     [ "cursor" ==> "copy"]
-                test
+                testCase
                     "Cursor Move"
-                    [Cursor.Move]
+                    [Cursor.move]
                     [ "cursor" ==> "move"]
-                test
+                testCase
                     "Cursor NoDrop"
-                    [Cursor.NoDrop]
+                    [Cursor.noDrop]
                     [ "cursor" ==> "no-drop"]
-                    
-                test
+                testCase
                     "Cursor NotAllowed"
-                    [Cursor.NotAllowed]
+                    [Cursor.notAllowed]
                     [ "cursor" ==> "not-allowed"]
-                    
-                test
+                testCase
                     "Cursor AllScroll"
-                    [Cursor.AllScroll]
+                    [Cursor.allScroll]
                     [ "cursor" ==> "all-scroll"]
-                    
-                test
+                testCase
                     "Cursor ColResize"
-                    [Cursor.ColResize]
+                    [Cursor.colResize]
                     [ "cursor" ==> "col-resize"]
-                    
-                test
+                testCase
                     "Cursor RowResize"
-                    [Cursor.RowResize]
+                    [Cursor.rowResize]
                     [ "cursor" ==> "row-resize"]
-                    
-                test
+                testCase
                     "Cursor NResize"
-                    [Cursor.NResize]
+                    [Cursor.nResize]
                     [ "cursor" ==> "n-resize"]
-                    
-                test
+                testCase
                     "Cursor EResize"
-                    [Cursor.EResize]
+                    [Cursor.eResize]
                     [ "cursor" ==> "e-resize"]
-                    
-                test
+                testCase
                     "Cursor SResize"
-                    [Cursor.SResize]
+                    [Cursor.sResize]
                     [ "cursor" ==> "s-resize"]
-                    
-                test
+                testCase
                     "Cursor WResize"
-                    [Cursor.WResize]
+                    [Cursor.wResize]
                     [ "cursor" ==> "w-resize"]
-                    
-                test
+                testCase
                     "Cursor NsResize"
-                    [Cursor.NsResize]
+                    [Cursor.nsResize]
                     [ "cursor" ==> "ns-resize"]
-                    
-                test
+                testCase
                     "Cursor EwResize"
-                    [Cursor.EwResize]
+                    [Cursor.ewResize]
                     [ "cursor" ==> "ew-resize"]
-                    
-                test
+                testCase
                     "Cursor NeResize"
-                    [Cursor.NeResize]
+                    [Cursor.neResize]
                     [ "cursor" ==> "ne-resize"]
-                    
-                test
+                testCase
                     "Cursor NwResize"
-                    [Cursor.NwResize]
+                    [Cursor.nwResize]
                     [ "cursor" ==> "nw-resize"]
-                    
-                test
+                testCase
                     "Cursor SeResize"
-                    [Cursor.SeResize]
+                    [Cursor.seResize]
                     [ "cursor" ==> "se-resize"]
-                    
-                test
+                testCase
                     "Cursor SwResize"
-                    [Cursor.SwResize]
+                    [Cursor.swResize]
                     [ "cursor" ==> "sw-resize"]
-                    
-                test
+                testCase
                     "Cursor NeswResize"
-                    [Cursor.NeswResize]
+                    [Cursor.neswResize]
                     [ "cursor" ==> "nesw-resize"]
-                    
-                test
+                testCase
                     "Cursor NwseResize"
-                    [Cursor.NwseResize]
+                    [Cursor.nwseResize]
                     [ "cursor" ==> "nwse-resize"]
             ]

@@ -11,7 +11,7 @@ let baseStyle =
 let danger = [ Color.red ]
 ```
 
-Note that we have nit called `fss` yet.
+Note that we have not called `fss` yet.
 
 ```fsharp
 div [ ClassName (fss baseStyle) ]

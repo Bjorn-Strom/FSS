@@ -1,6 +1,6 @@
 namespace FSSTests
 
-open Fable.Mocha
+open Fet
 open Fable.Core.JsInterop
 open Fss.Word
 open Utils
@@ -10,64 +10,64 @@ module Word =
     let tests =
         testList "Word"
             [
-                test
+                testCase
                     "Word spacing normal"
-                    [WordSpacing.Normal]
+                    [WordSpacing.normal]
                     ["wordSpacing" ==> "normal"]
-                test
+                testCase
                     "Word spacing px"
                     [WordSpacing' (px 3 )]
                     ["wordSpacing" ==> "3px"]
-                test
+                testCase
                     "Word Spacing em"
                     [WordSpacing' (em 0.3)]
                     ["wordSpacing" ==> "0.3em"]
-                test
+                testCase
                     "Word Spacing pct"
                     [WordSpacing' (pct 50)]
                     ["wordSpacing" ==> "50%"]
-                test
+                testCase
                     "Word Spacing inherit value"
-                    [WordSpacing' Inherit]
+                    [WordSpacing' FssTypes.Inherit]
                     ["wordSpacing" ==> "inherit"]
-                test
+                testCase
                     "Word spacing inherit"
-                    [WordSpacing.Inherit]
+                    [WordSpacing.inherit']
                     ["wordSpacing" ==> "inherit"]
-                test
+                testCase
                     "Word spacing initial"
-                    [WordSpacing.Initial]
+                    [WordSpacing.initial]
                     ["wordSpacing" ==> "initial"]
-                test
+                testCase
                     "Word spacing unset"
-                    [WordSpacing.Unset]
+                    [WordSpacing.unset]
                     ["wordSpacing" ==> "unset"]
-                test
+                testCase
                     "Word break word break"
-                    [WordBreak.WordBreak]
+                    [WordBreak.wordBreak]
                     ["wordBreak" ==> "word-break"]
-                test
+                testCase
                     "Word Spacing break all"
-                    [WordBreak.BreakAll]
+                    [WordBreak.breakAll]
                     ["wordBreak" ==> "break-all"]
-                test
+                testCase
                     "Word break normal"
-                    [WordBreak.Normal]
+                    [WordBreak.normal]
                     ["wordBreak" ==> "normal"]
-                test
+                testCase
                     "Word Spacing inherit value"
-                    [WordBreak' Inherit]
+                    [WordBreak' FssTypes.Inherit]
                     ["wordBreak" ==> "inherit"]
-                test
+                testCase
                     "Word break inherit"
-                    [WordBreak.Inherit]
+                    [WordBreak.inherit']
                     ["wordBreak" ==> "inherit"]
-                test
+                testCase
                     "Word break initial"
-                    [WordBreak.Initial]
+                    [WordBreak.initial]
                     ["wordBreak" ==> "initial"]
-                test
+                testCase
                     "Word break unset"
-                    [WordBreak.Unset]
+                    [WordBreak.unset]
                     ["wordBreak" ==> "unset"]
             ]
