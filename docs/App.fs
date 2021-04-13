@@ -31,7 +31,7 @@ module App =
         | GlobalStyles
         | Counters
         | Fonts
-        | BackgroundImage
+        | BackgroundImages
         | Feliz
         | Svg
 
@@ -66,7 +66,7 @@ module App =
               GlobalStyles |> GetMarkdown |> Cmd.ofMsg
               Counters |> GetMarkdown |> Cmd.ofMsg
               Fonts |> GetMarkdown |> Cmd.ofMsg
-              BackgroundImage |> GetMarkdown |> Cmd.ofMsg
+              BackgroundImages |> GetMarkdown |> Cmd.ofMsg
               Feliz |> GetMarkdown |> Cmd.ofMsg
               Svg |> GetMarkdown |> Cmd.ofMsg
             ]
@@ -133,7 +133,7 @@ module App =
         | GlobalStyles  -> "Global styles"
         | Counters -> "Counters"
         | Fonts -> "Fonts"
-        | BackgroundImage -> "Background image"
+        | BackgroundImages -> "Background image"
         | Feliz -> "Feliz"
         | Svg -> "Svg"
 
@@ -678,57 +678,57 @@ module App =
                     [
                         Label' "Linear gradient style 1"
                         yield! box
-                        BackgroundImage.linearGradient(deg 0.,
+                        BackgroundImage.linearGradient((deg 0.,
                                                        [ hex "e66465", pct 0
-                                                         hex "9198e5", pct 100 ])
+                                                         hex "9198e5", pct 100 ]))
                     ]
             let linearGradientStyle2 =
                 fss
                     [
                         yield! box
                         Label' "Linear gradient style 2"
-                        BackgroundImage.linearGradient(turn 0.25,
+                        BackgroundImage.linearGradient((turn 0.25,
                                                        [hex "3f87a6", pct 0
                                                         hex "ebf8e1", pct 50
-                                                        hex "f69d3c", pct 100])
+                                                        hex "f69d3c", pct 100]))
                     ]
             let linearGradientStyle3 =
                 fss
                     [
                         yield! box
                         Label' "Linear gradient style 3"
-                        BackgroundImage.linearGradient(deg 270.,
+                        BackgroundImage.linearGradient((deg 270.,
                                                        [
                                                            hex "333", pct 0
                                                            hex "333", pct 50
                                                            hex "eee", pct 75
                                                            hex "333", pct 75
-                                                       ])
+                                                       ]))
                     ]
             let repeatingLinearGradientStyle1 =
                 fss
                     [
                         yield! box
                         Label' "Repeating Linear gradient style 1"
-                        BackgroundImage.repeatingLinearGradient(deg 0.,
+                        BackgroundImage.repeatingLinearGradient((deg 0.,
                                                        [
                                                            hex "e66465", px 0
                                                            hex "e66465", px 20
                                                            hex "9198e5", px 20
                                                            hex "9198e5", px 25
-                                                       ])
+                                                       ]))
                     ]
             let repeatingLinearGradientStyle2 =
                 fss
                     [
                         yield! box
                         Label' "Repeating Linear gradient style 2"
-                        BackgroundImage.repeatingLinearGradient(deg 45.,
+                        BackgroundImage.repeatingLinearGradient((deg 45.,
                                                        [
                                                            hex "3f87a6", px 0
                                                            hex "ebf8e1", px 15
                                                            hex "f69d3c", px 20
-                                                       ])
+                                                       ]))
                     ]
             let repeatingLinearGradientsStyle3 =
                 fss
@@ -1006,7 +1006,7 @@ module App =
         | GlobalStyles  -> globalStyles
         | Counters -> counters
         | Fonts -> fonts
-        | BackgroundImage -> backgroundImage
+        | BackgroundImages -> backgroundImage
         | Feliz -> feliz
         | Svg -> svg
 
@@ -1086,7 +1086,7 @@ module App =
                         menuListItem' GlobalStyles
                         menuListItem' Counters
                         menuListItem' Fonts
-                        menuListItem' BackgroundImage
+                        menuListItem' BackgroundImages
                         menuListItem' Feliz
                         menuListItem' Svg
                     ]
@@ -1130,7 +1130,6 @@ module App =
                     ]
             ]
 
-    AnimationDir
     open Elmish.UrlParser
 
     let pageParser : Parser<_,_> =
@@ -1150,7 +1149,7 @@ module App =
               map GlobalStyles (s <| Utilities.duToKebab GlobalStyles)
               map Counters (s <| Utilities.duToKebab Counters)
               map Fonts (s <| Utilities.duToKebab Fonts)
-              map BackgroundImage (s <| Utilities.duToKebab BackgroundImage)
+              map BackgroundImages (s <| Utilities.duToKebab BackgroundImages)
             ]
 
     let urlUpdate (page: Page option) model =
