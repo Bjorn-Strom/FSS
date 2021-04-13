@@ -84,7 +84,7 @@ module ScrollMargin =
 
     [<Erase>]
     /// Specifies the scroll margin on top side of an element.
-    let ScrollMarginTop = FssTypes.Scroll.ScrollSide(scrollMarginTopValue')
+    let ScrollMarginTop = FssTypes.Scroll.ScrollMargin(scrollMarginTopValue')
 
     /// Specifies the scroll margin on top side of an element.
     /// Valid parameters:
@@ -99,7 +99,7 @@ module ScrollMargin =
 
     [<Erase>]
     /// Specifies the scroll margin on right side of an element.
-    let ScrollMarginRight = FssTypes.Scroll.ScrollSide(scrollMarginRightValue')
+    let ScrollMarginRight = FssTypes.Scroll.ScrollMargin(scrollMarginRightValue')
 
     /// Specifies the scroll margin on right side of an element.
     /// - Units.Size
@@ -113,7 +113,7 @@ module ScrollMargin =
 
     [<Erase>]
     /// Specifies the scroll margin on bottom side of an element.
-    let ScrollMarginBottom = FssTypes.Scroll.ScrollSide(scrollMarginBottomValue')
+    let ScrollMarginBottom = FssTypes.Scroll.ScrollMargin(scrollMarginBottomValue')
 
     /// Specifies the scroll margin on bottom side of an element.
     /// - Units.Size
@@ -127,7 +127,7 @@ module ScrollMargin =
 
     [<Erase>]
     /// Specifies the scroll margin on left side of an element.
-    let ScrollMarginLeft = FssTypes.Scroll.ScrollSide(scrollMarginLeftValue')
+    let ScrollMarginLeft = FssTypes.Scroll.ScrollMargin(scrollMarginLeftValue')
 
     /// Specifies the scroll margin on left side of an element.
     /// Valid parameters:
