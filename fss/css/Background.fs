@@ -225,56 +225,14 @@ module Background =
     let BackgroundColor' = BackgroundColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
-    let private imageValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundImage value
+    let private imageValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundImage
 
-    [<Erase>]
-    type BackgroundImage =
-        static member value (image: FssTypes.Image.Image) = image |> imageValue
-        static member url (url: string) = imageValue <| sprintf "url(%s)" url
-
-        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
-            imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member linearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Length) list) =
-            imageValue <| FssTypes.Image.Image.LinearGradient((angle, gradients))
-        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Percent) list)) list) =
-            imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member linearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Length) list)) list) =
-            imageValue <| FssTypes.Image.Image.LinearGradients(gradients)
-        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Length) list) =
-            imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member repeatingLinearGradient (angle: FssTypes.Angle, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
-            imageValue <| FssTypes.Image.Image.RepeatingLinearGradient((angle, gradients))
-        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Length) list)) list) =
-            imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
-        static member repeatingLinearGradients (gradients: (FssTypes.Angle * ((FssTypes.Color.ColorType * FssTypes.Percent) list)) list) =
-            imageValue <| FssTypes.Image.Image.RepeatingLinearGradients(gradients)
-
-        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
-            imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member radialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, xPosition: FssTypes.Percent, yPosition: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Length) list) =
-            imageValue <| FssTypes.Image.Image.RadialGradient (shape, size, xPosition, yPosition, gradients)
-        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.Color.ColorType * FssTypes.Percent) list) list) =
-            imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member radialGradients (gradients: (FssTypes.Image.Shape * FssTypes.Image.Side * FssTypes.Percent * FssTypes.Percent * (FssTypes.Color.ColorType * FssTypes.Length) list) list) =
-            imageValue <| FssTypes.Image.Image.RadialGradients(gradients)
-        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
-            imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-        static member repeatingRadialGradient (shape: FssTypes.Image.Shape, size: FssTypes.Image.Side, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Length) list) =
-            imageValue <| FssTypes.Image.Image.RepeatingRadialGradient(shape, size, x, y, gradients)
-
-        static member conicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Angle) list) =
-            imageValue <| FssTypes.Image.Image.ConicGradient(angle, x, y, gradients)
-        static member repeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Angle) list) =
-            imageValue <| FssTypes.Image.Image.RepeatingConicGradient(angle, x, y, gradients)
-        static member conicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
-            imageValue <| FssTypes.Image.Image.ConicGradient(angle, x, y, gradients)
-        static member repeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
-            imageValue <| FssTypes.Image.Image.RepeatingConicGradient(angle, x, y, gradients)
+    let BackgroundImage = FssTypes.Background.BackgroundImage(imageValue)
 
     /// Draws background image on element.
     /// Valid parameters:
     /// - Image
-    let BackgroundImage' = BackgroundImage.value
+    //todo: TEST: let BackgroundImage' = BackgroundImage.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
     let private positionCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundPosition

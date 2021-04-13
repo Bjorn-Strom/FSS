@@ -580,7 +580,7 @@ module Border =
                     [ "borderImageSource" ==> "url(image.jpg)" ]
                 testCase
                     "Border image source linear gradient"
-                    [ BorderImageSource.linearGradient(deg 45., [ FssTypes.Color.Color.red, pct 0; FssTypes.Color.Color.blue, pct 100 ]) ]
+                    [ BorderImageSource.linearGradient((deg 45., [ FssTypes.Color.Color.red, pct 0; FssTypes.Color.Color.blue, pct 100 ])) ]
                     [ "borderImageSource" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
                 testCase
                     "Border image source inherit"

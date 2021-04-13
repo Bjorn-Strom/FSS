@@ -70,3 +70,6 @@ namespace Fss.FssTypes
             | Slice
             | Clone
             interface IBoxDecorationBreak
+
+        type BackgroundImage (valueFunction: string -> CssProperty) =
+            inherit Image.Image(valueFunction)

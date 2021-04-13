@@ -59,3 +59,11 @@ namespace Fss.FssTypes
             | Cover
             interface IMaskSize
 
+        type MaskImage (imageValue: string -> CssProperty, imageValue': IMaskImage -> CssProperty) =
+            inherit Image.Image(imageValue)
+            member this.value (source: IMaskImage) = source |> imageValue'
+            member this.none = None' |> imageValue'
+            member this.inherit' = Inherit |> imageValue'
+            member this.initial = Initial |> imageValue'
+            member this.unset = Unset |> imageValue'
+

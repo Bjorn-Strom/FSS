@@ -122,4 +122,12 @@ namespace Fss.FssTypes
             | Fill
             interface IBorderImageSlice
 
+        type BorderImage (valueFunction: string -> CssProperty, valueFunction': IBorderImageSource -> CssProperty) =
+            inherit Image.Image(valueFunction)
+            member this.none = None' |> valueFunction'
+            member this.inherit' = Inherit |> valueFunction'
+            member this.initial = Initial |> valueFunction'
+            member this.unset = Unset |> valueFunction'
+
+
 

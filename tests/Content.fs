@@ -30,7 +30,7 @@ module Content =
                     [ "content" ==> "url(http://www.example.com/test.png) / \"this is the alt text\"" ]
                 testCase
                     "Content linear gradient"
-                    [ Content.linearGradient(deg 45.0, [hex "e66456", px 0; hex "9198e5", px 100]) ]
+                    [ Content.linearGradient((deg 45.0, [hex "e66456", px 0; hex "9198e5", px 100])) ]
                     [ "content" ==> "linear-gradient(45.00deg, #e66456 0px, #9198e5 100px)" ]
                 testCase
                     "Content string value"

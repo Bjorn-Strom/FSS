@@ -23,7 +23,7 @@ module Background =
                     [ "backgroundImage" ==> "url(image.png)" ]
                 testCase
                     "background as linear gradient"
-                    [ BackgroundImage.linearGradient (deg 45., [ FssTypes.Color.Color.red, pct 0; FssTypes.Color.Color.blue, pct 100 ])]
+                    [ BackgroundImage.linearGradient ((deg 45., [ FssTypes.Color.Color.red, pct 0; FssTypes.Color.Color.blue, pct 100 ]))]
                     ["backgroundImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)"]
                 testCase
                     "background as circular radial gradient"
