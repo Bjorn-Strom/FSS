@@ -679,8 +679,8 @@ module App =
                         Label' "Linear gradient style 1"
                         yield! box
                         BackgroundImage.linearGradient((deg 0.,
-                                                       [ hex "e66465", pct 0
-                                                         hex "9198e5", pct 100 ]))
+                                                        [ hex "e66465", pct 0
+                                                          hex "9198e5", pct 100 ]))
                     ]
             let linearGradientStyle2 =
                 fss
@@ -688,9 +688,9 @@ module App =
                         yield! box
                         Label' "Linear gradient style 2"
                         BackgroundImage.linearGradient((turn 0.25,
-                                                       [hex "3f87a6", pct 0
-                                                        hex "ebf8e1", pct 50
-                                                        hex "f69d3c", pct 100]))
+                                                        [hex "3f87a6", pct 0
+                                                         hex "ebf8e1", pct 50
+                                                         hex "f69d3c", pct 100]))
                     ]
             let linearGradientStyle3 =
                 fss
@@ -698,12 +698,10 @@ module App =
                         yield! box
                         Label' "Linear gradient style 3"
                         BackgroundImage.linearGradient((deg 270.,
-                                                       [
-                                                           hex "333", pct 0
-                                                           hex "333", pct 50
-                                                           hex "eee", pct 75
-                                                           hex "333", pct 75
-                                                       ]))
+                                                        [ hex "333", pct 0
+                                                          hex "333", pct 50
+                                                          hex "eee", pct 75
+                                                          hex "333", pct 75 ]))
                     ]
             let repeatingLinearGradientStyle1 =
                 fss
@@ -711,12 +709,10 @@ module App =
                         yield! box
                         Label' "Repeating Linear gradient style 1"
                         BackgroundImage.repeatingLinearGradient((deg 0.,
-                                                       [
-                                                           hex "e66465", px 0
-                                                           hex "e66465", px 20
-                                                           hex "9198e5", px 20
-                                                           hex "9198e5", px 25
-                                                       ]))
+                                                                 [ hex "e66465", px 0
+                                                                   hex "e66465", px 20
+                                                                   hex "9198e5", px 20
+                                                                   hex "9198e5", px 25 ]))
                     ]
             let repeatingLinearGradientStyle2 =
                 fss
@@ -724,11 +720,9 @@ module App =
                         yield! box
                         Label' "Repeating Linear gradient style 2"
                         BackgroundImage.repeatingLinearGradient((deg 45.,
-                                                       [
-                                                           hex "3f87a6", px 0
-                                                           hex "ebf8e1", px 15
-                                                           hex "f69d3c", px 20
-                                                       ]))
+                                                                 [ hex "3f87a6", px 0
+                                                                   hex "ebf8e1", px 15
+                                                                   hex "f69d3c", px 20 ]))
                     ]
             let repeatingLinearGradientsStyle3 =
                 fss
