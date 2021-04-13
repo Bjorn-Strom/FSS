@@ -49,7 +49,8 @@ namespace Fss.FssTypes
             member this.initial = Initial |> valueFunction
             member this.unset = Unset |> valueFunction
 
-        type BorderStyle (styleToString: IBorderStyle -> string, valueFunction: string -> CssProperty) =
+        type BorderStyle (styleToString: IBorderStyle -> string, valueFunction: string -> CssProperty, valueFunction': IBorderStyle -> CssProperty) =
+            inherit BorderSideStyle (valueFunction')
             member this.value (vertical: IBorderStyle, horizontal: IBorderStyle) =
                 sprintf "%s %s"
                     (styleToString vertical)

@@ -365,43 +365,8 @@ module Border =
     let private styleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderStyle
     let private styleValue' = styleToString >> styleValue
 
-    [<Erase>]
     /// Specifies style of border.
-    type BorderStyle =
-        static member value (style: FssTypes.IBorderStyle) = style |> styleValue'
-        static member value (vertical: FssTypes.IBorderStyle, horizontal: FssTypes.IBorderStyle) =
-            sprintf "%s %s"
-                (styleToString vertical)
-                (styleToString horizontal)
-            |> styleValue
-        static member value (top: FssTypes.IBorderStyle, horizontal: FssTypes.IBorderStyle, bottom: FssTypes.IBorderStyle) =
-            sprintf "%s %s %s"
-                (styleToString top)
-                (styleToString horizontal)
-                (styleToString bottom)
-            |> styleValue
-        static member value (top: FssTypes.IBorderStyle, right: FssTypes.IBorderStyle, bottom: FssTypes.IBorderStyle, left: FssTypes.IBorderStyle) =
-            sprintf "%s %s %s %s"
-                (styleToString top)
-                (styleToString right)
-                (styleToString bottom)
-                (styleToString left)
-            |> styleValue
-
-        static member hidden = FssTypes.Border.Style.Hidden |> styleValue'
-        static member dotted = FssTypes.Border.Style.Dotted |> styleValue'
-        static member dashed = FssTypes.Border.Style.Dashed |> styleValue'
-        static member solid = FssTypes.Border.Style.Solid |> styleValue'
-        static member double = FssTypes.Border.Style.Double |> styleValue'
-        static member groove = FssTypes.Border.Style.Groove |> styleValue'
-        static member ridge = FssTypes.Border.Style.Ridge |> styleValue'
-        static member inset = FssTypes.Border.Style.Inset |> styleValue'
-        static member outset = FssTypes.Border.Style.Outset |> styleValue'
-
-        static member none = FssTypes.None' |> styleValue'
-        static member inherit' = FssTypes.Inherit |> styleValue'
-        static member initial = FssTypes.Initial |> styleValue'
-        static member unset = FssTypes.Unset |> styleValue'
+    let BorderStyle = FssTypes.Border.BorderStyle(styleToString, styleValue, styleValue')
 
     /// Specifies style of border.
     /// Valid parameters:
