@@ -109,7 +109,9 @@ module Grid =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
     let private autoFlowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridAutoFlow
     let private autoFlowValue' = autoFlowToString >> autoFlowValue
+
     [<Erase>]
+    /// Specifies how the auto placement algorithm works.
     type GridAutoFlow =
         static member value (autoFlow: FssTypes.IGridAutoFlow) = autoFlow |> autoFlowValue'
         static member row = FssTypes.Grid.GridAutoFlow.Row |> autoFlowValue'
@@ -122,21 +124,20 @@ module Grid =
         static member initial = FssTypes.Initial |> autoFlowValue'
         static member unset = FssTypes.Unset |> autoFlowValue'
 
-    /// <summary>Specifies how the auto placement algorithm works.</summary>
-    /// <param name="flow">
-    ///     can be:
-    ///     - <c> GridAutoFlow </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how the auto placement algorithm works.
+    /// Valid parameters:
+    /// - GridAutoFlow
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let GridAutoFlow' = GridAutoFlow.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
     let private templateAreaValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridTemplateAreas
     let private templateAreaValue' = templateAreaToString >> templateAreaValue
+
     [<Erase>]
+    /// Resets grid template area.
     type GridTemplateAreas =
         static member value(area: FssTypes.IGridTemplateArea) = area |> templateAreaValue'
         static member value (areas: string list) =
@@ -157,21 +158,20 @@ module Grid =
         static member initial = FssTypes.Initial |> templateAreaValue'
         static member unset = FssTypes.Unset |> templateAreaValue'
 
-    /// <summary>Resets grid template area.</summary>
-    /// <param name="areas">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets grid template area.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let GridTemplateAreas': (FssTypes.IGridTemplateArea -> FssTypes.CssProperty) = GridTemplateAreas.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/gap
     let private gridGapValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridGap
     let private gridGapValue' = gridGapToString >> gridGapValue
+
     [<Erase>]
+    /// Specifies gap between rows and column in grid.
     type GridGap =
         static member value (gap: FssTypes.IGridGap) = gap |> gridGapValue'
         static member value(rowGap: FssTypes.IGridGap, columnGap: FssTypes.IGridGap) =
@@ -183,22 +183,21 @@ module Grid =
         static member initial = FssTypes.Initial |> gridGapValue'
         static member unset = FssTypes.Unset |> gridGapValue'
 
-    /// <summary>Specifies gap between rows and column in grid.</summary>
-    /// <param name="gap">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies gap between rows and column in grid.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Units.Size
+    /// - Units.Percent
     let GridGap' = GridGap.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
     let private gridRowGapValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridRowGap
     let private gridRowGapValue' = gridRowGapToString >> gridRowGapValue
+
     [<Erase>]
+    /// Specifies gap between rows in grid.
     type GridRowGap =
         static member value (gap: FssTypes.IGridRowGap) = gap |> gridRowGapValue'
         static member inherit' = FssTypes.Inherit |> gridRowGapValue'
@@ -206,22 +205,21 @@ module Grid =
         static member unset = FssTypes.Unset |> gridRowGapValue'
         static member normal = FssTypes.Normal |> gridRowGapValue'
 
-    /// <summary>Specifies gap between rows in grid.</summary>
-    /// <param name="rowGap">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies gap between rows in grid.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Units.Size
+    /// - Units.Percent
     let GridRowGap' = GridRowGap.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
     let private gridColumnGapValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridColumnGap
     let private gridColumnGapValue' = gridColumnGapToString >> gridColumnGapValue
+
     [<Erase>]
+    /// Specifies gap between columns in grid.
     type GridColumnGap =
         static member value (gap: FssTypes.IGridColumnGap) = gap |> gridColumnGapValue'
         static member inherit' = FssTypes.Inherit |> gridColumnGapValue'
@@ -229,20 +227,18 @@ module Grid =
         static member unset = FssTypes.Unset |> gridColumnGapValue'
         static member normal = FssTypes.Normal |> gridColumnGapValue'
 
-    /// <summary>Specifies gap between columns in grid.</summary>
-    /// <param name="columnGap">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies gap between columns in grid.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Units.Size
+    /// - Units.Percent
     let GridColumnGap' = GridColumnGap.value
 
     // Grid position
     [<Erase>]
+    /// Specifies gap between columns in grid.
     type GridPosition =
         static member value (position: FssTypes.IGridPosition) = position
         static member ident ident = ident |> FssTypes.Grid.Ident
@@ -258,21 +254,20 @@ module Grid =
         static member initial = FssTypes.Initial
         static member unset = FssTypes.Unset
 
-    /// <summary>Specifies gap between columns in grid.</summary>
-    /// <param name="position">
-    ///     can be:
-    ///     - <c> GridPosition </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies gap between columns in grid.
+    /// Valid parameters:
+    /// - GridPosition
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let GridPosition' (position: FssTypes.IGridPosition) = GridPosition.value(position)
 
     let private gridRowStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridRowStart
     let private gridRowStartValue': (FssTypes.IGridPosition -> FssTypes.CssProperty) = gridPositionToString >> gridRowStartValue
+
     [<Erase>]
+    /// Specifies start position in grid row.
     type GridRowStart =
         static member ident ident = GridPosition.ident(ident) |> gridRowStartValue'
         static member value (value: int) = GridPosition.value value |> gridRowStartValue'
@@ -287,14 +282,14 @@ module Grid =
         static member initial = GridPosition.initial |> gridRowStartValue'
         static member unset = GridPosition.unset |> gridRowStartValue'
 
-    /// <summary>Specifies start position in grid row.</summary>
-    /// <param name="rowStart">Number which specifies location</param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies start position in grid row.
     let GridRowStart' = GridRowStart.value
 
     let private gridRowEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridRowEnd
     let private gridRowEndValue': (FssTypes.IGridPosition -> FssTypes.CssProperty) = gridPositionToString >> gridRowEndValue
+
     [<Erase>]
+    /// Specifies end position in grid row.
     type GridRowEnd =
         static member ident ident = GridPosition.ident(ident) |> gridRowEndValue'
         static member value (value: int) = GridPosition.value value |> gridRowEndValue'
@@ -309,14 +304,14 @@ module Grid =
         static member initial = GridPosition.initial |> gridRowEndValue'
         static member unset = GridPosition.unset |> gridRowEndValue'
 
-    /// <summary>Specifies end position in grid row.</summary>
-    /// <param name="rowEnd">Number which specifies location</param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies end position in grid row.
     let GridRowEnd' = GridRowEnd.value
 
     let private gridRowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridRow
     let private gridRowValue' = gridPositionToString >> gridRowValue
+
     [<Erase>]
+    /// Specifies position in gird by row.
     type GridRow =
         static member value (row: FssTypes.IGridPosition) = row |> gridRowValue'
         static member value (rowStart: FssTypes.IGridPosition, rowEnd: FssTypes.IGridPosition) =
@@ -327,21 +322,20 @@ module Grid =
         static member initial = GridPosition.initial |> gridRowValue'
         static member unset = GridPosition.unset |> gridRowValue'
 
-    /// <summary>Specifies position in gird by row.</summary>
-    /// <param name="row">
-    ///     can be:
-    ///     - <c> GridPosition </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies position in gird by row.
+    /// Valid parameters:
+    /// - GridPosition
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let GridRow' = GridRow.value
 
     let private gridColumnStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridColumnStart
     let private gridColumnStartValue': (FssTypes.IGridPosition -> FssTypes.CssProperty) = gridPositionToString >> gridColumnStartValue
+
     [<Erase>]
+    /// Specifies start position in grid column.
     type GridColumnStart =
         static member ident ident = GridPosition.ident(ident) |> gridColumnStartValue'
         static member value (value: int) = GridPosition.value value |> gridColumnStartValue'
@@ -356,14 +350,14 @@ module Grid =
         static member initial = GridPosition.initial |> gridColumnStartValue'
         static member unset = GridPosition.unset |> gridColumnStartValue'
 
-    /// <summary>Specifies start position in grid column.</summary>
-    /// <param name="columnStart">Number which specifies location</param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies start position in grid column.
     let GridColumnStart' = GridColumnStart.value
 
     let private gridColumnEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridColumnEnd
     let private gridColumnEndValue': (FssTypes.IGridPosition -> FssTypes.CssProperty) = gridPositionToString >> gridColumnEndValue
+
     [<Erase>]
+    /// Specifies end position in grid column.
     type GridColumnEnd =
         static member ident ident = GridPosition.ident(ident) |> gridColumnEndValue'
         static member value (value: int) = GridPosition.value value |> gridColumnEndValue'
@@ -378,15 +372,14 @@ module Grid =
         static member initial = GridPosition.initial |> gridColumnEndValue'
         static member unset = GridPosition.unset |> gridColumnEndValue'
 
-    /// <summary>Specifies end position in grid column.</summary>
-    /// <param name="columnEnd">Number which specifies location</param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies end position in grid column.
     let GridColumnEnd' = GridColumnEnd.value
 
     let private gridColumnValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridColumn
     let private gridColumnValue' = gridPositionToString >> gridColumnValue
 
     [<Erase>]
+    /// Specifies position in grid by column.
     type GridColumn =
         static member value (column: FssTypes.IGridPosition) = column |> gridColumnValue'
         static member value (columnStart: FssTypes.IGridPosition, columnEnd: FssTypes.IGridPosition) =
@@ -399,22 +392,20 @@ module Grid =
         static member initial = GridPosition.initial |> gridColumnValue'
         static member unset = GridPosition.unset |> gridColumnValue'
 
-    /// <summary>Specifies position in grid by column.</summary>
-    /// <param name="column">
-    ///     can be:
-    ///     - <c> GridPosition </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies position in grid by column.
+    /// Valid parameters
+    /// - GridPosition
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let GridColumn' = GridColumn.value
 
     let private gridAreaValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridArea
     let private gridAreaValue': (FssTypes.IGridPosition -> FssTypes.CssProperty) = gridPositionToString >> gridAreaValue
 
     [<Erase>]
+    /// Specifies position in grid by area name.
     type GridArea =
         static member value (value: FssTypes.IGridPosition) =
             sprintf "%s"
@@ -443,15 +434,15 @@ module Grid =
         static member initial = GridPosition.initial |> gridAreaValue'
         static member unset = GridPosition.unset |> gridAreaValue'
 
-    /// <summary>Specifies position in grid by area name.</summary>
-    /// <param name="area">Area name</param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies position in grid by area name.
     let GridArea' = GridPosition.ident >> GridArea.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
     let private templateRowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridTemplateRows
     let private templateRowValue' = templateRowToString >> templateRowValue
+
     [<Erase>]
+    /// Defines grid rows.
     type GridTemplateRows =
         static member value (templateRow: FssTypes.IGridTemplateRows) = templateRow |> templateRowValue'
         static member value (length: FssTypes.IGridTemplateRows, fraction: FssTypes.IGridTemplateRows) =
@@ -514,25 +505,24 @@ module Grid =
         static member initial = FssTypes.Initial |> templateRowValue'
         static member unset = FssTypes.Unset |> templateRowValue'
 
-    /// <summary>Defines grid rows.</summary>
-    /// <param name="templateRows">
-    ///     can be:
-    ///     - <c> GridTemplateRows </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    ///     - <c> None </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Defines grid rows.
+    /// Valid parameters:
+    /// - GridTemplateRows
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    /// - None
+    /// - Units.Size
+    /// - Units.Percent
     let GridTemplateRows' = GridTemplateRows.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
     let private templateColumnValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridTemplateColumns
     let private templateColumnValue' = templateColumnToString >> templateColumnValue
+
     [<Erase>]
+    /// Defines grid columns.
     type GridTemplateColumns =
         static member value (templateColumn: FssTypes.IGridTemplateColumns) = templateColumn |> templateColumnValue'
         static member value (length: FssTypes.IGridTemplateColumns, fraction: FssTypes.IGridTemplateColumns) =
@@ -595,25 +585,24 @@ module Grid =
         static member initial = FssTypes.Initial |> templateColumnValue'
         static member unset = FssTypes.Unset |> templateColumnValue'
 
-    /// <summary>Defines grid columns.</summary>
-    /// <param name="templateColumns">
-    ///     can be:
-    ///     - <c> GridTemplateColumns </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    ///     - <c> None </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Defines grid columns.
+    /// Valid parameters:
+    /// - GridTemplateColumns
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    /// - None
+    /// - Units.Size
+    /// - Units.Percent
     let GridTemplateColumns' = GridTemplateColumns.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows
     let private autoRowsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridAutoRows
     let private autoRowsValue' = autoRowsToString >> autoRowsValue
+
     [<Erase>]
+    /// Defines auto generated grid row.
     type GridAutoRows =
         static member value (autoRow: FssTypes.IGridAutoRows) = autoRow |> autoRowsValue'
         static member values (values: FssTypes.IGridAutoRows list) = Utilities.Helpers.combineWs autoRowsToString values |> autoRowsValue
@@ -626,26 +615,25 @@ module Grid =
         static member initial = FssTypes.Initial |> autoRowsValue'
         static member unset = FssTypes.Unset |> autoRowsValue'
 
-    /// <summary>Defines auto generated grid row.</summary>
-    /// <param name="autoRows">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Units.Fraction </c>
-    ///     - <c> ContentSize </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> MinMax </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Defines auto generated grid row.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Units.Fraction
+    /// - ContentSize
+    /// - Auto
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - MinMax
     let GridAutoRows' = GridAutoRows.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns
     let private autoColumnsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.GridAutoColumns
     let private autoColumnsValue' = autoColumnsToString >> autoColumnsValue
+
     [<Erase>]
+    /// Defines auto generated grid column.
     type GridAutoColumns =
         static member value (autoColumn: FssTypes.IGridAutoColumns) = autoColumn |> autoColumnsValue'
         static member values (values: FssTypes.IGridAutoColumns list) = Utilities.Helpers.combineWs autoColumnsToString values |> autoColumnsValue
@@ -658,18 +646,15 @@ module Grid =
         static member initial = FssTypes.Initial |> autoColumnsValue'
         static member unset = FssTypes.Unset |> autoColumnsValue'
 
-    /// <summary>Defines auto generated grid column.</summary>
-    /// <param name="autoColumns">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Units.Fraction </c>
-    ///     - <c> ContentSize </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> MinMax </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Defines auto generated grid column.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Units.Fraction
+    /// - ContentSize
+    /// - Auto
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - MinMax
     let GridAutoColumns' = GridAutoColumns.value

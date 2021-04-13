@@ -1130,6 +1130,7 @@ module App =
                     ]
             ]
 
+    AnimationDir
     open Elmish.UrlParser
 
     let pageParser : Parser<_,_> =

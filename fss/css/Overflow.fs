@@ -25,6 +25,7 @@ module Overflow =
     let private overflowValue' = overflowToString >> overflowValue
 
     [<Erase>]
+    /// Specifies overflow behavior.
     type Overflow =
         static member value (overflow: FssTypes.IOverflow) = overflow |> overflowValue'
         static member value (x: FssTypes.IOverflow, y: FssTypes.IOverflow) =
@@ -42,22 +43,20 @@ module Overflow =
         static member initial = FssTypes.Initial |> overflowValue'
         static member unset = FssTypes.Unset |> overflowValue'
 
-    /// <summary>Specifies overflow behavior.</summary>
-    /// <param name="overflow">
-    ///     can be:
-    ///     - <c> Overflow </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies overflow behavior.
+    /// Valid parameters:
+    /// - Overflow
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let Overflow' = Overflow.value
 
     let private overflowXValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverflowX
     let private overflowXValue' = overflowToString >> overflowXValue
 
     [<Erase>]
+    /// Specifies overflow left and right edge behavior.
     type OverflowX =
         static member value (overflow: FssTypes.IOverflow) = overflow |> overflowXValue'
         static member visible = FssTypes.Overflow.Visible |> overflowXValue'
@@ -70,22 +69,20 @@ module Overflow =
         static member initial = FssTypes.Initial |> overflowXValue'
         static member unset = FssTypes.Unset |> overflowXValue'
 
-    /// <summary>Specifies overflow left and right edge behavior.</summary>
-    /// <param name="overflow">
-    ///     can be:
-    ///     - <c> Overflow </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies overflow left and right edge behavior.
+    /// Valid parameters:
+    /// - Overflow
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let OverflowX' = OverflowX.value
 
     let private overflowYValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OverflowY
     let private overflowYValue' = overflowToString >> overflowYValue
 
     [<Erase>]
+    /// Specifies overflow top and bottom edge behavior.
     type OverflowY =
         static member value (overflow: FssTypes.IOverflow) = overflow |> overflowYValue'
         static member visible = FssTypes.Overflow.Visible |> overflowYValue'
@@ -98,16 +95,13 @@ module Overflow =
         static member initial = FssTypes.Initial |> overflowYValue'
         static member unset = FssTypes.Unset |> overflowYValue'
 
-    /// <summary>Specifies overflow top and bottom edge behavior.</summary>
-    /// <param name="overflow">
-    ///     can be:
-    ///     - <c> Overflow </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies overflow top and bottom edge behavior.
+    /// Valid parameters:
+    /// - Overflow
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let OverflowY' = OverflowY.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
@@ -115,6 +109,7 @@ module Overflow =
     let private overflowWrapValue' = wrapToString >> overflowWrapValue
 
     [<Erase>]
+    /// Specifies how to insert line breaks on overflow.
     type OverflowWrap =
         static member value (overflowWrap: FssTypes.IOverflowWrap) = overflowWrap |> overflowWrapValue'
         static member breakWord = FssTypes.Overflow.Wrap.BreakWord |> overflowWrapValue'
@@ -125,14 +120,11 @@ module Overflow =
         static member initial = FssTypes.Initial |> overflowWrapValue'
         static member unset = FssTypes.Unset |> overflowWrapValue'
 
-    /// <summary>Specifies how to insert line breaks on overflow.</summary>
-    /// <param name="overflowWrap">
-    ///     can be:
-    ///     - <c> Overflow </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how to insert line breaks on overflow.
+    /// Valid parameters:
+    /// - Overflow
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
     let OverflowWrap' = OverflowWrap.value

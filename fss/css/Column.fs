@@ -77,7 +77,9 @@ module Column =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
     let private columnGapValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnGap
     let private columnGapValue' = columnGapToString >> columnGapValue
+
     [<Erase>]
+    /// Sets gap width between element.
     type ColumnGap =
         static member Value (gap: FssTypes.IColumnGap) = gap |> columnGapValue'
         static member inherit' = FssTypes.Inherit |> columnGapValue'
@@ -85,17 +87,14 @@ module Column =
         static member unset = FssTypes.Unset |> columnGapValue'
         static member normal = FssTypes.Normal |> columnGapValue'
 
-    /// <summary>Sets gap width between element.</summary>
-    /// <param name="columnGap">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets gap width between element.
+    /// Valid parameters:
+    /// - Size
+    /// - Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
     let ColumnGap' = ColumnGap.Value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-span
@@ -103,6 +102,7 @@ module Column =
     let private columnSpanValue' = columnSpanToString >> columnSpanValue
 
     [<Erase>]
+    /// Sets gap width between element.
     type ColumnSpan =
         static member value(span: FssTypes.IColumnSpan) = span |> columnSpanValue'
         static member all = FssTypes.Column.Span.All |> columnSpanValue'
@@ -111,16 +111,13 @@ module Column =
         static member unset = FssTypes.Unset |> columnSpanValue'
         static member none = FssTypes.None' |> columnSpanValue'
 
-    /// <summary>Sets gap width between element.</summary>
-    /// <param name="span">
-    ///     can be:
-    ///     - <c> ColumnSpan </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets gap width between element.
+    /// Valid parameters:
+    /// - ColumnSpan
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let ColumnSpan' = ColumnSpan.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/columns
@@ -128,20 +125,18 @@ module Column =
     let private columnsValue' = columnsToString >> columnsValue
 
     [<Erase>]
+    /// Resets columns.
     type Columns =
         static member value (columns: FssTypes.IColumns) = columns |> columnsValue'
         static member inherit' = FssTypes.Inherit |> columnsValue'
         static member initial = FssTypes.Initial |> columnsValue'
         static member unset = FssTypes.Unset |> columnsValue'
 
-    /// <summary>Resets columns.</summary>
-    /// <param name="columns">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets columns.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let Columns' = Columns.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule
@@ -149,20 +144,18 @@ module Column =
     let private columnRuleValue' = columnRuleToString >> columnRuleValue
 
     [<Erase>]
+    /// Resets column rule.
     type ColumnRule =
         static member value (rule: FssTypes.IColumnRule) = rule |> columnRuleValue'
         static member inherit' = FssTypes.Inherit |> columnRuleValue'
         static member initial = FssTypes.Initial |> columnRuleValue'
         static member unset = FssTypes.Unset |> columnRuleValue'
 
-    /// <summary>Resets column rule.</summary>
-    /// <param name="rule">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets column rule.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let ColumnRule' = ColumnRule.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
@@ -170,6 +163,7 @@ module Column =
     let private columnRuleWidthValue' = columnRuleWidthToString >> columnRuleWidthValue
 
     [<Erase>]
+    /// Specifies width of the line drawn between columns.
     type ColumnRuleWidth =
         static member value (ruleWidth: FssTypes.IColumnRuleWidth) = ruleWidth |> columnRuleWidthValue'
         static member thin = FssTypes.Column.RuleWidth.Thin |> columnRuleWidthValue'
@@ -179,16 +173,13 @@ module Column =
         static member initial = FssTypes.Initial |> columnRuleWidthValue'
         static member unset = FssTypes.Unset |> columnRuleWidthValue'
 
-    /// <summary>Specifies width of the line drawn between columns.</summary>
-    /// <param name="ruleWidth">
-    ///     can be:
-    ///     - <c> ColumnRuleWidth </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies width of the line drawn between columns.
+    /// Valid parameters:
+    /// - ColumnRuleWidth
+    /// - Size
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let ColumnRuleWidth' = ColumnRuleWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-style
@@ -196,6 +187,7 @@ module Column =
     let private styleValue' = columnRuleStyleToString >> styleValue
 
     [<Erase>]
+    /// Specifies style of the line drawn between columns.
     type ColumnRuleStyle =
         static member value (style: FssTypes.IColumnRuleStyle) = style |> styleValue'
         static member hidden = FssTypes.Column.RuleStyle.Hidden |> styleValue'
@@ -213,33 +205,28 @@ module Column =
         static member initial = FssTypes.Initial |> styleValue'
         static member unset = FssTypes.Unset |> styleValue'
 
-    /// <summary>Specifies style of the line drawn between columns.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> ColumnRuleStyle </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies style of the line drawn between columns.
+    /// Valid parameters:
+    /// - ColumnRuleStyle
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let ColumnRuleStyle' = ColumnRuleStyle.value
 
      // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-color
     let private columnRuleColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ColumnRuleColor
     let private columnRuleColorValue' = columnRuleColorToString >> columnRuleColorValue
 
+    /// Specifies color of the line drawn between columns.
     let ColumnRuleColor = FssTypes.ColumnRuleColorClass(columnRuleColorValue')
 
-    /// <summary>Specifies color of the line drawn between columns.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color of the line drawn between columns.
+    /// Valid parameters:
+    /// - Color
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let ColumnRuleColor' = ColumnRuleColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-count
@@ -247,6 +234,7 @@ module Column =
     let private columnCountValue' = columnCountToString >> columnCountValue
 
     [<Erase>]
+    /// Specifies number of column to break content into.
     type ColumnCount =
         static member value(columnCount: FssTypes.IColumnCount) = columnCount |> columnCountValue'
         static member auto = FssTypes.Auto |> columnCountValue'
@@ -254,16 +242,13 @@ module Column =
         static member initial = FssTypes.Initial |> columnCountValue'
         static member unset = FssTypes.Unset |> columnCountValue'
 
-    /// <summary>Specifies number of column to break content into.</summary>
-    /// <param name="columnCount">
-    ///     can be:
-    ///     - <c> CssInt </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies number of column to break content into.
+    /// Valid parameters:
+    /// - CssInt
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let ColumnCount' = ColumnCount.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill
@@ -271,6 +256,7 @@ module Column =
     let private columnFillValue' = columnFillToString >> columnFillValue
 
     [<Erase>]
+    /// Specifies how content fills columns.
     type ColumnFill =
         static member value(columnFill: FssTypes.IColumnFill) = columnFill |> columnFillValue'
         static member balance = FssTypes.Column.Fill.Balance |> columnFillValue'
@@ -280,16 +266,13 @@ module Column =
         static member initial = FssTypes.Initial |> columnFillValue'
         static member unset = FssTypes.Unset |> columnFillValue'
 
-    /// <summary>Specifies how content fills columns.</summary>
-    /// <param name="columnFill">
-    ///     can be:
-    ///     - <c> ColumnFill </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how content fills columns.
+    /// Valid parameters:
+    /// - ColumnFill
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let ColumnFill' = ColumnFill.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
@@ -297,6 +280,7 @@ module Column =
     let private columnWidthValue' = columnWidthToString >> columnWidthValue
 
     [<Erase>]
+    /// Specifies width of line drawn between column.
     type ColumnWidth =
         static member value(columnWidth: FssTypes.IColumnWidth) = columnWidth |> columnWidthValue'
         static member auto = FssTypes.Auto |> columnWidthValue'
@@ -304,14 +288,11 @@ module Column =
         static member initial = FssTypes.Initial |> columnWidthValue'
         static member unset = FssTypes.Unset |> columnWidthValue'
 
-    /// <summary>Specifies width of line drawn between column.</summary>
-    /// <param name="columnWidth">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies width of line drawn between column.
+    /// Valid parameters:
+    /// - Size
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let ColumnWidth' = ColumnWidth.value

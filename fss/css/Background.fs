@@ -76,6 +76,7 @@ module Background =
         |> clipValue
 
     [<Erase>]
+    /// Specifies how an element's background extends.
     type BackgroundClip =
         static member value (clip: FssTypes.IBackgroundClip) = clip |> clipValue'
         static member borderBox = FssTypes.Background.Clip.BorderBox |> clipValue'
@@ -87,21 +88,20 @@ module Background =
         static member initial = FssTypes.Initial |> clipValue'
         static member unset = FssTypes.Unset |> clipValue'
 
-    /// <summary>Specifies how an element's background extends.</summary>
-    /// <param name="clip">
-    ///     can be:
-    ///     - <c> BackgroundClip </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how an element's background extends.
+    /// Valid parameters:
+    /// - BackgroundClip
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BackgroundClip' = BackgroundClip.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
     let private originValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundOrigin
     let private originValue' = backgroundOriginToString >> originValue
+
     [<Erase>]
+    /// Sets background origin.
     type BackgroundOrigin =
        static member value (origin: FssTypes.IBackgroundOrigin) = origin |> originValue'
        static member borderBox = FssTypes.Background.Origin.BorderBox |> originValue'
@@ -112,15 +112,12 @@ module Background =
        static member initial = FssTypes.Initial |> originValue'
        static member unset = FssTypes.Unset |> originValue'
 
-    /// <summary>Sets background origin.</summary>
-    /// <param name="origin">
-    ///     can be:
-    ///     - <c> BackgroundOrigin </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets background origin.
+    /// Valid parameters:
+    /// - BackgroundOrigin
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BackgroundOrigin' = BackgroundOrigin.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
@@ -128,6 +125,7 @@ module Background =
     let private repeatValue' = repeatToString >> repeatValue
 
     [<Erase>]
+    /// Specifies how background is repeated.
     type BackgroundRepeat =
         static member value (repeat: FssTypes.IBackgroundRepeat) = repeat |> repeatValue'
         static member value (v1: FssTypes.IBackgroundRepeat, v2: FssTypes.IBackgroundRepeat) =
@@ -144,15 +142,12 @@ module Background =
         static member initial = FssTypes.Initial |> repeatValue'
         static member unset = FssTypes.Unset |> repeatValue'
 
-    /// <summary>Specifies how background is repeated.</summary>
-    /// <param name="repeat">
-    ///     can be:
-    ///     - <c> BackgroundRepeat </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how background is repeated.
+    /// Valid parameters:
+    /// - BackgroundRepeat
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BackgroundRepeat' = BackgroundRepeat.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
@@ -160,6 +155,7 @@ module Background =
     let private sizeValue' = sizeToString >> sizeValue
 
     [<Erase>]
+    /// Specifies size of background.
     type BackgroundSize =
         static member value (size: FssTypes.IBackgroundSize) = size |> sizeValue'
         static member value (s1: FssTypes.IBackgroundSize, s2: FssTypes.IBackgroundSize) =
@@ -174,18 +170,15 @@ module Background =
         static member initial = FssTypes.Initial |> sizeValue'
         static member unset = FssTypes.Unset |> sizeValue'
 
-    /// <summary>Specifies size of background.</summary>
-    /// <param name="size">
-    ///     can be:
-    ///     - <c> BackgroundSize </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies size of background.
+    /// Valid parameters:
+    /// - BackgroundSize
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let BackgroundSize' = BackgroundSize.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
@@ -193,6 +186,7 @@ module Background =
     let private attachmentValue' = attachmentToString >> attachmentValue
 
     [<Erase>]
+    /// Specifies how background is fixed within viewport.
     type BackgroundAttachment =
         static member value (attachment: FssTypes.IBackgroundAttachment) = attachment |> attachmentValue'
         static member scroll = FssTypes.Background.Attachment.Scroll |> attachmentValue'
@@ -203,21 +197,19 @@ module Background =
         static member initial = FssTypes.Initial |> attachmentValue'
         static member unset = FssTypes.Unset |> attachmentValue'
 
-    /// <summary>Specifies how background is fixed within viewport.</summary>
-    /// <param name="attachment">
-    ///     can be:
-    ///     - <c> BackgroundAttachment </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how background is fixed within viewport.
+    /// Valid parameters:
+    /// - BackgroundAttachment
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BackgroundAttachment' = BackgroundAttachment.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
     let private backgroundValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundColor
     let private backgroundValue' = backgroundColorToString >> backgroundValue
 
+    /// Specifies the background color.
     type BackgroundColorClass (valueFunction: FssTypes.IBackgroundColor -> FssTypes.CssProperty) =
         inherit FssTypes.Color.ColorBase<FssTypes.CssProperty>(valueFunction)
         member this.value color = color |> valueFunction
@@ -227,16 +219,14 @@ module Background =
 
     let BackgroundColor = BackgroundColorClass(backgroundValue')
 
-    /// <summary>Specifies how background color.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.Color.ColorType</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the background color.
+    /// Valid parameters:
+    /// Color
     let BackgroundColor' = BackgroundColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
     let private imageValue value = FssTypes.propertyHelpers.cssValue FssTypes.Property.BackgroundImage value
+
     [<Erase>]
     type BackgroundImage =
         static member value (image: FssTypes.Image.Image) = image |> imageValue
@@ -281,12 +271,9 @@ module Background =
         static member repeatingConicGradient (angle: FssTypes.Angle, x: FssTypes.Percent, y: FssTypes.Percent, gradients: (FssTypes.Color.ColorType * FssTypes.Percent) list) =
             imageValue <| FssTypes.Image.Image.RepeatingConicGradient(angle, x, y, gradients)
 
-    /// <summary>Draws background image on element.</summary>
-    /// <param name="image">
-    ///     can be:
-    ///     - <c> Image </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Draws background image on element.
+    /// Valid parameters:
+    /// - Image
     let BackgroundImage' = BackgroundImage.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
@@ -294,6 +281,7 @@ module Background =
     let private positionCssValue': (FssTypes.IBackgroundPosition -> FssTypes.CssProperty) = positionToString >> positionCssValue
 
     [<Erase>]
+    /// Specifies the position of a background.
     type BackgroundPosition =
         static member top = FssTypes.Background.Position.Top |> positionCssValue'
         static member bottom = FssTypes.Background.Position.Bottom |> positionCssValue'
@@ -313,17 +301,14 @@ module Background =
         static member initial = FssTypes.Initial |> positionCssValue'
         static member unset = FssTypes.Unset |> positionCssValue'
 
-    /// <summary>Specifies the position of a background.</summary>
-    /// <param name="position">
-    ///     can be:
-    ///     - <c> BackgroundPosition </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the position of a background.
+    /// Valid parameters:
+    /// - BackgroundPosition
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Units.Size
+    /// - Units.Percent
     let BackgroundPosition' = BackgroundPosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
@@ -333,6 +318,7 @@ module Background =
     let private blendModeValues = Utilities.Helpers.combineComma blendModeToString >> blendModeCssValue
 
     [<Erase>]
+    /// Specifies how an elements background image should interact with its background color.
     type BackgroundBlendMode =
         static member value(blendMode: FssTypes.IBackgroundBlendMode) = blendMode |> blendModeCssValue'
         static member values(blendModes: FssTypes.Background.BlendMode list) = blendModeValues blendModes
@@ -358,22 +344,21 @@ module Background =
         static member initial = FssTypes.Initial |> blendModeCssValue'
         static member unset = FssTypes.Unset |> blendModeCssValue'
 
-    /// <summary>Specifies how an elements background image should interact with its background color.</summary>
-    /// <param name="backgroundBlendMode">
-    ///     can be:
-    ///     - <c> BackgroundBlendMode </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how an elements background image should interact with its background color.
+    /// Valid parameters:
+    /// - BackgroundBlendMode
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BackgroundBlendMode'  = BackgroundBlendMode.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
     let private isolationValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Isolation
     let private isolationValue' = isolationToString >> isolationValue
 
+    [<Erase>]
+    /// Specifies how an element is blended with backdrop.
     type Isolation =
         static member value(isolation: FssTypes.IIsolation) = isolation |> isolationValue'
 
@@ -383,17 +368,13 @@ module Background =
         static member initial = FssTypes.Initial |> isolationValue'
         static member unset = FssTypes.Unset |> isolationValue'
 
-
-    /// <summary>Specifies how an element is blended with backdrop.</summary>
-    /// <param name="isolation">
-    ///     can be:
-    ///     - <c> Isolation </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how an element is blended with backdrop.
+    /// Valid parameters:
+    /// - Isolation
+    /// - Auto
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let Isolation' = Isolation.value
 
 [<AutoOpen>]
@@ -408,6 +389,8 @@ module BoxDecorationBreak =
     let private boxDecorationBreakValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BoxDecorationBreak
     let private boxDecorationBreakValue' = boxDecorationBreakToString >> boxDecorationBreakValue
 
+    [<Erase>]
+    /// Specifies how an element is blended with backdrop.
     type BoxDecorationBreak =
         static member value(boxDecorationBreak: FssTypes.IBoxDecorationBreak) = boxDecorationBreak |> boxDecorationBreakValue'
 
@@ -418,16 +401,13 @@ module BoxDecorationBreak =
         static member unset = FssTypes.Unset |> boxDecorationBreakValue'
 
 
-    /// <summary>Specifies how an element is blended with backdrop.</summary>
-    /// <param name="boxDecorationBreak">
-    ///     can be:
-    ///     - <c> BoxDecorationBreak </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how an element is blended with backdrop.
+    /// Valid parameters:
+    /// - BoxDecorationBreak
+    /// - Auto
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BoxDecorationBreak' = BoxDecorationBreak.value
 
 

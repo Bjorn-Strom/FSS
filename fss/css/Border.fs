@@ -99,6 +99,7 @@ module Border =
     let private borderValue' = borderToString >> borderValue
 
     [<Erase>]
+    /// Resets border.
     type Border =
         static member value (border: FssTypes.IBorder) = border |> borderValue'
         static member none = FssTypes.None' |> borderValue'
@@ -106,15 +107,12 @@ module Border =
         static member initial = FssTypes.Initial |> borderValue'
         static member unset = FssTypes.Unset |> borderValue'
 
-    /// <summary>Resets border.</summary>
-    /// <param name="border">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets border.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let Border' = Border.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
@@ -122,6 +120,7 @@ module Border =
     let private radiusValue' = radiusToString >> radiusValue
 
     [<Erase>]
+    /// Specifies roundness of border edge.
     type BorderRadius =
         static member value (radius: FssTypes.IBorderRadius) =
             sprintf "%s"
@@ -150,16 +149,13 @@ module Border =
         static member initial = FssTypes.Initial |> radiusValue'
         static member unset = FssTypes.Unset |> radiusValue'
 
-    /// <summary>Specifies roundness of border edge.</summary>
-    /// <param name="radius">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies roundness of border edge.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderRadius' = BorderRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
@@ -167,6 +163,7 @@ module Border =
     let private bottomLeftRadiusValue' = radiusToString >> bottomLeftRadiusValue
 
     [<Erase>]
+    /// Specifies roundness of bottom left corner.
     type BorderBottomLeftRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> bottomLeftRadiusValue
@@ -176,22 +173,21 @@ module Border =
         static member initial = FssTypes.Initial |> bottomLeftRadiusValue'
         static member unset = FssTypes.Unset |> bottomLeftRadiusValue'
 
-    /// <summary>Specifies roundness of bottom left corner.</summary>
-    /// <param name="radius">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies roundness of bottom left corner.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderBottomLeftRadius' = BorderBottomLeftRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
     let private bottomRightRadiusValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomRightRadius
     let private bottomRightRadiusValue' = radiusToString >> bottomRightRadiusValue
+
     [<Erase>]
+    /// Specifies roundness of bottom right corner.
     type BorderBottomRightRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> bottomRightRadiusValue
@@ -201,22 +197,21 @@ module Border =
         static member initial = FssTypes.Initial |> bottomRightRadiusValue'
         static member unset = FssTypes.Unset |> bottomRightRadiusValue'
 
-    /// <summary>Specifies roundness of bottom right corner.</summary>
-    /// <param name="radius">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies roundness of bottom right corner.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderBottomRightRadius' = BorderBottomRightRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
     let private topLeftRadiusValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopLeftRadius
     let private topLeftRadiusValue' = radiusToString >> topLeftRadiusValue
+
     [<Erase>]
+    /// Specifies roundness of top left corner.
     type BorderTopLeftRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> topLeftRadiusValue
@@ -226,22 +221,21 @@ module Border =
         static member initial = FssTypes.Initial |> topLeftRadiusValue'
         static member unset = FssTypes.Unset |> topLeftRadiusValue'
 
-    /// <summary>Specifies roundness of top left corner.</summary>
-    /// <param name="radius">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies roundness of top left corner.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderTopLeftRadius' = BorderTopLeftRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
     let private topRightRadiusValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopRightRadius
     let private topRightRadiusValue' = radiusToString >> topRightRadiusValue
+
     [<Erase>]
+    /// Specifies roundness of top right corner.
     type BorderTopRightRadius =
         static member value (horizontal: FssTypes.IBorderRadius) =
             sprintf "%s" (radiusToString horizontal) |> topRightRadiusValue
@@ -251,16 +245,13 @@ module Border =
         static member initial = FssTypes.Initial |> topRightRadiusValue'
         static member unset = FssTypes.Unset |> topRightRadiusValue'
 
-    /// <summary>Specifies roundness of top right corner.</summary>
-    /// <param name="radius">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies roundness of top right corner.
+    /// Valid parameters.
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderTopRightRadius' = BorderTopRightRadius.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
@@ -268,6 +259,7 @@ module Border =
     let private widthValue': (FssTypes.IBorderWidth -> FssTypes.CssProperty) = widthToString >> widthValue
 
     [<Erase>]
+    /// Specifies width of border.
     type BorderWidth =
         static member value (width: FssTypes.IBorderWidth) = widthValue (widthToString width)
         static member value (vertical: FssTypes.IBorderWidth, horizontal: FssTypes.IBorderWidth) =
@@ -297,82 +289,76 @@ module Border =
         static member initial = FssTypes.Initial |> widthValue'
         static member unset = FssTypes.Unset |> widthValue'
 
-    /// <summary>Specifies width of border.</summary>
-    /// <param name="width">
-    ///     can be:
-    ///     - <c> BorderWidth </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies width of border.
+    /// Valid parameters:
+    /// - BorderWidth
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderWidth' = BorderWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width
     let internal topWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopWidth
     let internal topWidthValue' = widthToString >> topWidthValue
+
+    /// Specifies width of top border.
     let BorderTopWidth = FssTypes.Border.BorderValue(topWidthValue')
 
-    /// <summary>Specifies width of top border.</summary>
-    /// <param name="width">
-    ///     can be:
-    ///     - <c> BorderWidth </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies width of top border.
+    /// Valid parameters:
+    /// - BorderWidth
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderTopWidth' = BorderTopWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width
     let private rightWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRightWidth
     let private rightWidthValue' = widthToString >> rightWidthValue
+
+    /// Specifies width of right border.
     let BorderRightWidth = FssTypes.Border.BorderValue(rightWidthValue')
-    /// <summary>Specifies width of right border.</summary>
-    /// <param name="width">
-    ///     can be:
-    ///     - <c> BorderWidth </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+
+    /// Specifies width of right border.
+    /// - BorderWidth
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderRightWidth' = BorderRightWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width
     let private bottomWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomWidth
     let private bottomWidthValue' = widthToString >> bottomWidthValue
+
+    /// Specifies width of bottom border.
     let BorderBottomWidth = FssTypes.Border.BorderValue(bottomWidthValue')
 
-    /// <summary>Specifies width of bottom border.</summary>
-    /// <param name="width">
-    ///     can be:
-    ///     - <c> BorderWidth </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies width of bottom border.
+    /// Valid parameters:
+    /// - BorderWidth
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderBottomWidth' = BorderBottomWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width
     let private leftWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderLeftWidth
     let private leftWidthValue' = widthToString >> leftWidthValue
+
+    /// Specifies width of left border.
     let BorderLeftWidth = FssTypes.Border.BorderValue(leftWidthValue')
-    /// <summary>Specifies width of left border.</summary>
-    /// <param name="width">
-    ///     can be:
-    ///     - <c> BorderWidth </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+
+    /// Specifies width of left border.
+    /// Valid parameters:
+    /// - BorderWidth
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderLeftWidth' = BorderLeftWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
@@ -380,6 +366,7 @@ module Border =
     let private styleValue' = styleToString >> styleValue
 
     [<Erase>]
+    /// Specifies style of border.
     type BorderStyle =
         static member value (style: FssTypes.IBorderStyle) = style |> styleValue'
         static member value (vertical: FssTypes.IBorderStyle, horizontal: FssTypes.IBorderStyle) =
@@ -416,88 +403,76 @@ module Border =
         static member initial = FssTypes.Initial |> styleValue'
         static member unset = FssTypes.Unset |> styleValue'
 
-    /// <summary>Specifies style of border.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> BorderStyle </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies style of border.
+    /// Valid parameters:
+    /// - BorderStyle
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderStyle' = BorderStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style
     let private topStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopStyle
     let private topStyleValue' = styleToString >> topStyleValue
 
-    let BorderTopStyle = FssTypes.Border.BorderStyle(topStyleValue')
+    /// Specifies style of top border.
+    let BorderTopStyle = FssTypes.Border.BorderSideStyle(topStyleValue')
 
-    /// <summary>Specifies style of top border.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> BorderStyle </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies style of top border.
+    /// Valid parameters:
+    /// - BorderStyle
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderTopStyle' = BorderTopStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style
     let private rightStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderRightStyle
     let private rightStyleValue' = styleToString >> rightStyleValue
 
-    let BorderRightStyle = FssTypes.Border.BorderStyle(rightStyleValue')
+    /// Specifies style of right border.
+    let BorderRightStyle = FssTypes.Border.BorderSideStyle(rightStyleValue')
 
-    /// <summary>Specifies style of right border.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> BorderStyle </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies style of right border.
+    /// Valid parameters:
+    /// - BorderStyle
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderRightStyle' = BorderRightStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style
     let private bottomStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomStyle
     let private bottomStyleValue' = styleToString >> bottomStyleValue
 
-    let BorderBottomStyle = FssTypes.Border.BorderStyle(bottomStyleValue')
+    /// Specifies style of bottom border.
+    let BorderBottomStyle = FssTypes.Border.BorderSideStyle(bottomStyleValue')
 
-    /// <summary>Specifies style of bottom border.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> BorderStyle </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies style of bottom border.
+    /// Valid parameters:
+    /// - BorderStyle
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderBottomStyle' = BorderBottomStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style
     let private leftStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderLeftStyle
     let private leftStyleValue' = styleToString >> leftStyleValue
 
-    let BorderLeftStyle = FssTypes.Border.BorderStyle(leftStyleValue')
+    let BorderLeftStyle = FssTypes.Border.BorderSideStyle(leftStyleValue')
 
-    /// <summary>Specifies style of left border.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> BorderStyle </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies style of left border.
+    /// Valid parameters:
+    /// - BorderStyle
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderLeftStyle' = BorderLeftStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
@@ -514,15 +489,12 @@ module Border =
         static member initial = FssTypes.Initial |> collapseValue'
         static member unset = FssTypes.Unset |> collapseValue'
 
-    /// <summary>Specifies whether cells inside a table have shared borders.</summary>
-    /// <param name="collapse">
-    ///     can be:
-    ///     - <c> BorderCollapse </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies whether cells inside a table have shared borders.
+    /// Valid parameters:
+    /// - BorderCollapse
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderCollapse' =  BorderCollapse.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
@@ -530,6 +502,7 @@ module Border =
     let private imageOutsetValue' = imageOutsetToString >> imageOutsetValue
 
     [<Erase>]
+    /// Specifies distance between elements border and border box.
     type BorderImageOutset =
         static member value (outset: FssTypes.IBorderImageOutset) = outset |> imageOutsetValue'
         static member value (vertical: FssTypes.IBorderImageOutset, horizontal: FssTypes.IBorderImageOutset) =
@@ -552,23 +525,22 @@ module Border =
         static member initial = FssTypes.Initial |> imageOutsetValue'
         static member unset = FssTypes.Unset |> imageOutsetValue'
 
-    /// <summary>Specifies distance between elements border and border box.</summary>
-    /// <param name="outset">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> BorderImageOutset </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies distance between elements border and border box.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - BorderImageOutset
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderImageOutset' = BorderImageOutset.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
     let private imageRepeatValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageRepeat
     let private imageRepeatValue' = repeatToString >> imageRepeatValue
+
     [<Erase>]
+    /// Specifies how border image surrounds border box.
     type BorderImageRepeat =
         static member value (repeat: FssTypes.IBorderRepeat) = repeat |> imageRepeatValue'
         static member value (vertical: FssTypes.IBorderRepeat, horizontal: FssTypes.IBorderRepeat) =
@@ -583,15 +555,12 @@ module Border =
         static member initial = FssTypes.Initial |> imageRepeatValue'
         static member unset = FssTypes.Unset |> imageRepeatValue'
 
-    /// <summary>Specifies how border image surrounds border box.</summary>
-    /// <param name="repeat">
-    ///     can be:
-    ///     - <c> BorderImageRepeat </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how border image surrounds border box.
+    /// Valid parameters:
+    /// - BorderImageRepeat
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderImageRepeat' = BorderImageRepeat.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
@@ -599,6 +568,7 @@ module Border =
     let private imageSliceValue': (FssTypes.IBorderImageSlice -> FssTypes.CssProperty) = imageSliceToString >> imageSliceValue
 
     [<Erase>]
+    /// Specifies how border image is divided into regions.
     type BorderImageSlice =
         static member fill = FssTypes.Border.ImageSlice.Fill |> imageSliceValue'
         static member value (imageSlice: FssTypes.IBorderImageSlice) = imageSlice |> imageSliceValue'
@@ -622,51 +592,44 @@ module Border =
         static member initial = FssTypes.Initial |> imageSliceValue'
         static member unset = FssTypes.Unset |> imageSliceValue'
 
-    /// <summary>Specifies how border image is divided into regions.</summary>
-    /// <param name="slice">
-    ///     can be:
-    ///     - <c> BorderImageSlice </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how border image is divided into regions.
+    /// Valid parameters:
+    /// - BorderImageSlice
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderImageSlice' = BorderImageSlice.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-color
     let private borderColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderColor
     let private borderColorValue' = borderColorToString >> borderColorValue
 
+    /// Specifies color of border.
     let BorderColor = FssTypes.Border.BorderColor (borderColorToString, borderColorValue, borderColorValue')
 
-    /// <summary>Specifies color of border.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color of border.
+    /// Valid parameters:
+    /// - FssTypes.ColorType</c>
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderColor' = BorderColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color
     let private topColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderTopColor
     let private topColorValue' = borderColorToString >> topColorValue
 
+    /// Specifies color of top border.
     let BorderTopColor = FssTypes.Border.BorderSideColor(topColorValue')
 
-    /// <summary>Specifies color of top border.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color of top border.
+    /// Valid parameters:
+    /// - Color
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderTopColor' = BorderTopColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
@@ -674,52 +637,50 @@ module Border =
     let private rightColorValue' = borderColorToString >> rightColorValue
     let BorderRightColor = FssTypes.Border.BorderSideColor(rightColorValue')
 
-    /// <summary>Specifies color of right border.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color of right border.
+    /// Valid parameters:
+    /// - Color
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderRightColor' = BorderRightColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color
     let private bottomColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderBottomColor
     let private bottomColorValue' = borderColorToString >> bottomColorValue
+
+    /// Specifies color of bottom border.
     let BorderBottomColor = FssTypes.Border.BorderSideColor(bottomColorValue')
-    /// <summary>Specifies color of bottom border.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+
+    /// Specifies color of bottom border.
+    /// Valid parameters:
+    /// - Color
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderBottomColor' = BorderBottomColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color
     let private leftColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderLeftColor
     let private leftColorValue' = borderColorToString >> leftColorValue
+
+    /// Specifies color of left border.
     let BorderLeftColor = FssTypes.Border.BorderSideColor(leftColorValue')
 
-    /// <summary>Specifies color of left border.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color of left border.
+    /// Valid parameters:
+    /// - ColorType
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderLeftColor' = BorderLeftColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing
     let private spacingValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderSpacing
     let private spacingValue' = spacingToString >> spacingValue
+
     [<Erase>]
+    /// Specifies distance borders of table cells.
     type BorderSpacing =
         static member value (width: FssTypes.IBorderSpacing) =
             spacingValue (spacingToString width)
@@ -732,22 +693,21 @@ module Border =
         static member initial = FssTypes.Initial |> spacingValue'
         static member unset = FssTypes.Unset |> spacingValue'
 
-    /// <summary>Specifies distance borders of table cells.</summary>
-    /// <param name="spacing">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies distance borders of table cells.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BorderSpacing' = BorderSpacing.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
     let private imageWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.BorderImageWidth
     let private imageWidthValue' = imageWidthToString >> imageWidthValue
+
     [<Erase>]
+    /// Specifies width of border image.
     type BorderImageWidth =
         static member value (width: FssTypes.IBorderImageWidth) = width |> imageWidthValue'
         static member value (w1: FssTypes.IBorderImageWidth, w2: FssTypes.IBorderImageWidth) =
@@ -774,18 +734,15 @@ module Border =
         static member initial = FssTypes.Initial |> imageWidthValue'
         static member unset = FssTypes.Unset |> imageWidthValue'
 
-    /// <summary>Specifies width of border image.</summary>
-    /// <param name="width">
-    ///     can be:
-    ///     - <c> CssFloat </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies width of border image.
+    /// Valid parameters:
+    /// - CssFloat
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let BorderImageWidth' = BorderImageWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
@@ -793,6 +750,7 @@ module Border =
     let private imageValue' = imageSourceToString >> imageValue
 
     [<Erase>]
+    /// Specifies width of border image.
     type BorderImageSource =
         static member value (source: FssTypes.IBorderImageSource) = source |> imageValue'
         static member url (url: string) = imageValue <| sprintf "url(%s)" url
@@ -830,14 +788,11 @@ module Border =
         static member initial = FssTypes.Initial |> imageValue'
         static member unset = FssTypes.Unset |> imageValue'
 
-    /// <summary>Specifies width of border image.</summary>
-    /// <param name="source">
-    ///     can be:
-    ///     - <c> Image </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies width of border image.
+    /// Valid parameters:
+    /// - Image
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let BorderImageSource' = BorderImageSource.value

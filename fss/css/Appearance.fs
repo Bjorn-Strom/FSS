@@ -15,6 +15,7 @@ module Appearance =
     let private appearanceValue' = appearanceToString >> appearanceValue
 
     [<Erase>]
+    /// Specifies platform native styling.
     type Appearance =
         static member value (appearance: FssTypes.IAppearance) = appearance |> appearanceValue'
         static member pushButton = FssTypes.Appearance.PushButton |> appearanceValue'
@@ -87,12 +88,9 @@ module Appearance =
         static member auto = FssTypes.Auto |> appearanceValue'
         static member none = FssTypes.None' |> appearanceValue'
 
-    /// <summary>Specifies platform native styling.</summary>
-    /// <param name="appearance">
-    ///     can be:
-    ///     - <c> Appearance </c>
-    ///     - <c> None </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies platform native styling.
+    /// Valid parameters:
+    /// - Appearance
+    /// - None
+    /// - Auto
     let Appearance' = Appearance.value

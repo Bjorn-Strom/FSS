@@ -29,16 +29,13 @@ module Perspective =
         static member initial = FssTypes.Initial |> perspectiveValue'
         static member unset = FssTypes.Unset |> perspectiveValue'
 
-    /// <summary>Specifies distance in z plane.</summary>
-    /// <param name="perspective">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies distance in z plane.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let Perspective' = Perspective.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/perspective-origin
@@ -46,6 +43,7 @@ module Perspective =
     let private perspectiveOriginValue' = perspectiveOriginToString >> perspectiveOriginValue
 
     [<Erase>]
+    /// Specifies vanishing point for the perspective property.
     type PerspectiveOrigin =
         static member value (origin: FssTypes.IPerspectiveOrigin) = origin |> perspectiveOriginValue'
         static member value (x: FssTypes.IPerspectiveOrigin, y: FssTypes.IPerspectiveOrigin) =
@@ -55,15 +53,12 @@ module Perspective =
         static member initial = FssTypes.Initial |> perspectiveOriginValue'
         static member unset = FssTypes.Unset |> perspectiveOriginValue'
 
-    /// <summary>Specifies vanishing point for the perspective property.</summary>
-    /// <param name="origin">
-    ///     can be:
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies vanishing point for the perspective property.
+    /// Valid parameters:
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let PerspectiveOrigin' = PerspectiveOrigin.value
 
 [<AutoOpen>]
@@ -78,6 +73,7 @@ module BackfaceVisibility =
     let private backfaceVisibilityValue' = visibilityToString >> backfaceVisibilityValue
 
     [<Erase>]
+    /// Specifies whether the backface of an element is visible.
     type BackfaceVisibility =
         static member value (visibility: FssTypes.IBackfaceVisibility) = visibility |> backfaceVisibilityValue'
         static member hidden = FssTypes.Visibility.BackfaceVisibility.Hidden |> backfaceVisibilityValue'
@@ -86,13 +82,10 @@ module BackfaceVisibility =
         static member initial = FssTypes.Initial |> backfaceVisibilityValue'
         static member unset = FssTypes.Unset |> backfaceVisibilityValue'
 
-    /// <summary>Specifies whether the backface of an element is visible.</summary>
-    /// <param name="visibility">
-    ///     can be:
-    ///     - <c> BackfaceVisibility </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies whether the backface of an element is visible.
+    /// Valid parameters:
+    /// - BackfaceVisibility
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let BackfaceVisibility' = BackfaceVisibility.value

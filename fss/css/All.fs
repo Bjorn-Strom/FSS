@@ -14,18 +14,15 @@ module All =
     let private allValue' = stringifyAll >> allValue
 
     [<Erase>]
+    /// Resets all of an elements properties.
     type All =
         static member value (all: FssTypes.IAll) = all |> allValue'
         static member inherit' = FssTypes.Inherit |> allValue'
         static member initial = FssTypes.Initial |> allValue'
         static member unset = FssTypes.Unset |> allValue'
 
-    /// <summary>Resets all of an elements properties.</summary>
-    /// <param name="all">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets all of an elements properties.
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let All' = All.value

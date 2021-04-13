@@ -18,6 +18,7 @@ module WillChange =
     let private willChangeValue' = stringifyWillChange >> willChangeValue
 
     [<Erase>]
+    /// Hints to browser how an element is expected to change.
     type WillChange =
         static member value (willChange: FssTypes.IWillChange) = willChange |> willChangeValue'
         static member scrollPosition = FssTypes.WillChange.ScrollPosition |> willChangeValue'
@@ -28,4 +29,8 @@ module WillChange =
 
         static member auto = FssTypes.Auto |> willChangeValue'
 
+    /// Hints to browser how an element is expected to change.
+    /// Valid parameters:
+    /// - WillChange
+    /// - Auto
     let WillChange' = WillChange.value

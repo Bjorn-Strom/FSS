@@ -14,6 +14,7 @@ module AspectRatio =
     let private aspectRatioValue' = stringifyAspectRatio >> aspectRatioValue
 
     [<Erase>]
+    /// Sets the preferred aspect ratio of the element
     type AspectRatio =
         static member value (width: int, height: int) =
             $"{width} / {height}"
@@ -22,4 +23,7 @@ module AspectRatio =
         static member initial = FssTypes.Initial |> aspectRatioValue'
         static member unset = FssTypes.Unset |> aspectRatioValue'
 
+    /// Sets the preferred aspect ratio of the element
+    /// Valid parameters:
+    /// int int
     let AspectRatio' = aspectRatioValue

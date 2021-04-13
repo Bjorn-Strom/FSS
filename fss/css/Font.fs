@@ -143,6 +143,7 @@ module Font =
     let private sizeCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontSize
     let private sizeCssValue' = fontSizeToString >> sizeCssValue
     [<Erase>]
+    /// Sets size of font.
     type FontSize =
         static member value (value: FssTypes.IFontSize) = value |> sizeCssValue'
         static member xxSmall = FssTypes.Font.XxSmall |> sizeCssValue'
@@ -160,23 +161,22 @@ module Font =
         static member initial = FssTypes.Initial |> sizeCssValue'
         static member unset = FssTypes.Unset |> sizeCssValue'
 
-    /// <summary>Sets size of font. </summary>
-    /// <param name="size">
-    ///     can be:
-    ///     - <c> FontSize </c>
-    ///     - <c> Length </c>
-    ///     - <c> Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets size of font.
+    /// Valid parameters:
+    /// - FontSize
+    /// - Length
+    /// - Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let FontSize' = FontSize.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
     let private styleCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStyle
     let private styleCssValue' = FssTypes.fontHelpers.fontStyleToString >> styleCssValue
+
     [<Erase>]
+    /// Specifies which style to use on a font.
     type FontStyle =
         static member value (fontStyle: FssTypes.IFontStyle) = fontStyle |> styleCssValue'
         static member oblique (angle: FssTypes.Angle) = FssTypes.Font.Oblique angle |> styleCssValue'
@@ -187,22 +187,23 @@ module Font =
         static member initial = FssTypes.Initial |> styleCssValue'
         static member unset = FssTypes.Unset |> styleCssValue'
 
-    /// <summary>Specifies which style to use on a font. </summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> FontStyle </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
+    /// Specifies which style to use on a font.
+    /// Valid parameters:
+    /// - FontStyle
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
+
     /// <returns>Css property for fss.</returns>
     let FontStyle' = FontStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
     let private stretchCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStretch
     let private stretchCssValue' = FssTypes.fontHelpers.fontStretchToString >> stretchCssValue
+
     [<Erase>]
+    /// Specifies width of text characters to be wider or narrower default width.
     type FontStretch =
         static member value (fontStretch: FssTypes.IFontStretch) = fontStretch |> stretchCssValue'
         static member value (percent: FssTypes.Percent) =
@@ -221,23 +222,22 @@ module Font =
         static member initial = FssTypes.Initial |> stretchCssValue'
         static member unset = FssTypes.Unset |> stretchCssValue'
 
-    /// <summary>Specifies width of text characters to be wider or narrower default width. </summary>
-    /// <param name="stretch">
-    ///     can be:
-    ///     - <c> FontStretch </c>
-    ///     - <c> Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies width of text characters to be wider or narrower than default width.
+    /// Valid parameters:
+    /// - FontStretch
+    /// - Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
     let FontStretch' = FontStretch.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
     let private weightCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight
     let private weightCssValue' = FssTypes.fontHelpers.fontWeightToString >> weightCssValue
+
     [<Erase>]
+    /// Specifies weight(boldness) of font.
     type FontWeight =
         static member value (fontWeight: FssTypes.IFontWeight) = fontWeight |> weightCssValue'
         static member bold = FssTypes.Font.Bold |> weightCssValue'
@@ -249,23 +249,22 @@ module Font =
         static member initial = FssTypes.Initial |> weightCssValue'
         static member unset = FssTypes.Unset |> weightCssValue'
 
-    /// <summary>Specifies weight(boldness) of font. </summary>
-    /// <param name="weight">
-    ///     can be:
-    ///     - <c> FontWeight </c>
-    ///     - <c> CssInt </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies weight(boldness) of font.
+    /// Valid parameters:
+    /// - FontWeight
+    /// - CssInt
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
     let FontWeight' = FontWeight.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
     let private heightCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LineHeight
     let private heightCssValue' = lineHeightToString >> heightCssValue
+
     [<Erase>]
+    /// Specifies the amount of space above and below inline elements.
     type LineHeight =
         static member value (height: FssTypes.ILineHeight) = height |> heightCssValue'
 
@@ -274,24 +273,23 @@ module Font =
         static member initial = FssTypes.Initial |>  heightCssValue'
         static member unset = FssTypes.Unset |>  heightCssValue'
 
-    /// <summary>Specifies the amount of space above and below inline elements. </summary>
-    /// <param name="height">
-    ///     can be:
-    ///     - <c> CssFloat </c>
-    ///     - <c> Length </c>
-    ///     - <c> Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the amount of space above and below inline elements.
+    /// Valid parameters
+    /// - CssFloat
+    /// - Length
+    /// - Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
     let LineHeight' = LineHeight.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/line-break
     let private breakCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LineBreak
     let private breakCssValue' = lineBreakToString >> breakCssValue
+
     [<Erase>]
+    /// Specifies how some asian languages wrap text on newlines.
     type LineBreak =
         static member value (break': FssTypes.ILineBreak) = break' |> breakCssValue'
         static member loose = FssTypes.Font.Loose |> breakCssValue'
@@ -304,23 +302,22 @@ module Font =
         static member initial = FssTypes.Initial |>  breakCssValue'
         static member unset = FssTypes.Unset |>  breakCssValue'
 
-    /// <summary>Specifies how some asian languages wrap text on newlines. </summary>
-    /// <param name="break'">
-    ///     can be:
-    ///     - <c> LineBreak </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how some asian languages wrap text on newlines.
+    /// Valid parameters:
+    /// - LineBreak
+    /// - Auto
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let LineBreak' = LineBreak.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
     let private spacingCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LetterSpacing
     let private spacingCssValue' = letterSpacingToString >> spacingCssValue
+
     [<Erase>]
+    /// Sets horizontal spacing between text characters.
     type LetterSpacing =
         static member value (spacing: FssTypes.ILetterSpacing) = spacing |> spacingCssValue'
 
@@ -329,22 +326,21 @@ module Font =
         static member initial = FssTypes.Initial |>  spacingCssValue'
         static member unset = FssTypes.Unset |>  spacingCssValue'
 
-    /// <summary>Sets horizontal spacing between text characters. </summary>
-    /// <param name="spacing">
-    ///     can be:
-    ///     - <c> Length </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets horizontal spacing between text characters.
+    /// Valid parameters:
+    /// - Length
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let LetterSpacing' = LetterSpacing.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display
     let private displayCssValue: (string -> FssTypes.CssProperty) = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
     let private displayCssValue' = FssTypes.fontHelpers.fontDisplayToString >> FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
+
     [<Erase>]
+    /// Specifies how a font is loaded and displayed.
     type FontDisplay =
         static member value (fontDisplay: FssTypes.IFontDisplay) = fontDisplay |> displayCssValue'
         static member block = FssTypes.Font.Display.Block |> displayCssValue'
@@ -354,13 +350,10 @@ module Font =
 
         static member auto = FssTypes.Auto |> displayCssValue'
 
-    /// <summary>Specifies how a font is loaded and displayed.</summary>
-    /// <param name="display">
-    ///     can be:
-    ///     - <c> FontDisplay </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how a font is loaded and displayed.
+    /// Valid parameters:
+    /// - FontDisplay
+    /// - Auto
     let FontDisplay' = FontDisplay.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
@@ -368,6 +361,7 @@ module Font =
     let private familyCssValue' = familyToString >> familyCssValue
 
     [<Erase>]
+    /// Specify which font to use on the.
     type FontFamily =
         static member value (fontFamily: FssTypes.IFontFamily) = fontFamily |> familyCssValue'
         static member values (families: FssTypes.IFontFamily list) =
@@ -385,15 +379,12 @@ module Font =
         static member initial = FssTypes.Initial |> familyCssValue'
         static member unset = FssTypes.Unset |> familyCssValue'
 
-    /// <summary>Specify which font to use on the.</summary>
-    /// <param name="fontFamily">
-    ///     can be:
-    ///     - <c> FontFamily </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specify which font to use on the.
+    /// Valid parameters:
+    /// - FontFamily
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let FontFamily'  = FontFamily.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
@@ -401,6 +392,7 @@ module Font =
     let private featureSettingCssValue' = featureSettingToString >> featureSettingCssValue
 
     [<Erase>]
+    /// Specify more advanced typographic settings.
     type FontFeatureSetting =
         static member value (featureSetting: FssTypes.IFontFeatureSetting) = featureSetting |> featureSettingCssValue'
         static member liga (switch: FssTypes.Font.SettingSwitch) = FssTypes.Font.Liga switch |> featureSettingCssValue'
@@ -434,15 +426,12 @@ module Font =
         static member initial = FssTypes.Initial |> featureSettingCssValue'
         static member unset = FssTypes.Unset |> featureSettingCssValue'
 
-    /// <summary>Specify more advanced typographic settings.</summary>
-    /// <param name="featureSetting">
-    ///     can be:
-    ///     - <c> FontFeatureSetting </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specify more advanced typographic settings.
+    /// Valid parameters:
+    /// - FontFeatureSetting
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let FontFeatureSetting' = FontFeatureSetting.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
@@ -450,6 +439,7 @@ module Font =
     let private variantNumericCssValue' = variantNumericToString >> variantNumericCssValue
 
     [<Erase>]
+    /// Specifies numeric glyphs.
     type FontVariantNumeric =
         static member value (variantNumeric: FssTypes.IFontVariantNumeric) = variantNumeric |>  variantNumericCssValue'
         static member ordinal = FssTypes.Font.Ordinal |> variantNumericCssValue'
@@ -466,21 +456,20 @@ module Font =
         static member initial = FssTypes.Initial |> variantNumericCssValue'
         static member unset = FssTypes.Unset |> variantNumericCssValue'
 
-    /// <summary>Specifies numeric glyphs.</summary>
-    /// <param name="variant">
-    ///     can be:
-    ///     - <c> FontFeatureSetting </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies numeric glyphs.
+    /// Valid parameters:
+    /// - FontFeatureSetting
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let FontVariantNumeric' = FontVariantNumeric.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
     let private variantCapsCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantCaps
     let private variantCapsCssValue' = fontVariantCapsToString >> variantCapsCssValue
+
     [<Erase>]
+    /// Specify alternate glyphs for capital letters.
     type FontVariantCaps =
         static member value (variantCaps: FssTypes.IFontVariantCaps) = variantCaps |> variantCapsCssValue'
         static member smallCaps = FssTypes.Font.SmallCaps |> variantCapsCssValue'
@@ -495,22 +484,21 @@ module Font =
         static member initial = FssTypes.Initial |> variantCapsCssValue'
         static member unset = FssTypes.Unset |> variantCapsCssValue'
 
-    /// <summary>Specify alternate glyphs for capital letters.</summary>
-    /// <param name="variant">
-    ///     can be:
-    ///     - <c> FontVariantCaps </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specify alternate glyphs for capital letters.
+    /// Valid parameters:
+    /// - FontVariantCaps
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
     let FontVariantCaps' = FontVariantCaps.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
     let private variantEastAsianCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantEastAsian
     let private variantEastAsianCssValue' = variantEastAsianToString >> variantEastAsianCssValue
+
     [<Erase>]
+    /// Specifies alternate glyphs for East Asian languages.
     type FontVariantEastAsian =
         static member value (variant: FssTypes.IFontVariantEastAsian) = variant |> variantEastAsianCssValue'
         static member ruby = FssTypes.Font.Ruby |> variantEastAsianCssValue'
@@ -528,22 +516,21 @@ module Font =
         static member initial = FssTypes.Initial |> variantEastAsianCssValue'
         static member unset = FssTypes.Unset |> variantEastAsianCssValue'
 
-    /// <summary>Specifies alternate glyphs for East Asian languages.</summary>
-    /// <param name="variant">
-    ///     can be:
-    ///     - <c> FontVariantEastAsian </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies alternate glyphs for East Asian languages.
+    /// Valid parameters:
+    /// - FontVariantEastAsian
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
     let FontVariantEastAsian' = FontVariantEastAsian.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
     let private variantLigatureCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariantLigatures
     let private variantLigatureCssValue' = variantLigatureToString >> variantLigatureCssValue
+
     [<Erase>]
+    /// Specifies which ligatures are used.
     type FontVariantLigatures =
         static member value (variant: FssTypes.IFontVariantLigature) = variant |> variantLigatureCssValue'
         static member commonLigatures = FssTypes.Font.CommonLigatures |> variantLigatureCssValue'
@@ -561,17 +548,14 @@ module Font =
         static member initial = FssTypes.Initial |> variantLigatureCssValue'
         static member unset = FssTypes.Unset |> variantLigatureCssValue'
 
-    /// <summary>Specifies which ligatures are used.</summary>
-    /// <param name="ligature">
-    ///     can be:
-    ///     - <c> FontVariantLigature </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies which ligatures are used.
+    /// Valid parameters:
+    /// - FontVariantLigature
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
+    /// - None
     let FontVariantLigatures' = FontVariantLigatures.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-kerning
@@ -579,20 +563,18 @@ module Font =
     let private kerningValue' = fontKerningTostring >> kerningValue
 
     [<Erase>]
+    /// Specifies use of font-kerning.
     type FontKerning =
         static member value (fontKerning: FssTypes.IFontKerning) = fontKerning |> kerningValue'
         static member auto = FssTypes.Auto |> kerningValue'
         static member normal = FssTypes.Normal |> kerningValue'
         static member none = FssTypes.None' |> kerningValue'
 
-    /// <summary>Specifies use of font-kerning.</summary>
-    /// <param name="fontKerning">
-    ///     can be:
-    ///     - <c> Auto </c>
-    ///     - <c> Normal </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies use of font-kerning.
+    /// Valid parameters:
+    /// - Auto
+    /// - Normal
+    /// - None
     let FontKerning' (fontKerning: FssTypes.IFontKerning) = FontKerning.value(fontKerning)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-language-override
@@ -600,6 +582,7 @@ module Font =
     let private fontLanguageOverrideValue' =  fontLanguageOverrideToString >> fontLanguageOverrideValue
 
     [<Erase>]
+    /// Specifies language specific glyphs.
     type FontLanguageOverride =
         static member value (languageOverride: FssTypes.IFontLanguageOverride) = languageOverride |> fontLanguageOverrideValue'
         static member value (languageOverride: string) = $"\"{languageOverride}\"" |> fontLanguageOverrideValue
@@ -608,15 +591,12 @@ module Font =
         static member initial = FssTypes.Initial |> fontLanguageOverrideValue'
         static member unset = FssTypes.Unset |> fontLanguageOverrideValue'
 
-    /// <summary>Specifies language specific glyphs.</summary>
-    /// <param name="languageOverride">
-    ///     can be:
-    ///     - <c> Normal </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies language specific glyphs.
+    /// Valid parameters:
+    /// - Normal
+    /// - Initial
+    /// - Inherit
+    /// - Unset
     let FontLanguageOverride': (FssTypes.IFontLanguageOverride -> FssTypes.CssProperty) = FontLanguageOverride.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis
@@ -624,6 +604,7 @@ module Font =
     let private fontSynthesisValue' = fontSynthesisToString >> fontSynthesisValue
 
     [<Erase>]
+    /// Specifies which missing typefaces can be synthesized by the browser.
     type FontSynthesis =
         static member value (synthesis: FssTypes.IFontSynthesis) = synthesis |> fontSynthesisValue'
         static member weight = FssTypes.Font.Weight |> fontSynthesisValue'
@@ -631,13 +612,10 @@ module Font =
         static member weightStyle = FssTypes.Font.WeightStyle |> fontSynthesisValue'
         static member none = FssTypes.None' |> fontSynthesisValue'
 
-    /// <summary>Specifies which missing typefaces can be synthesized by the browser.</summary>
-    /// <param name="synthesis">
-    ///     can be:
-    ///     - <c> FontSynthesis </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies which missing typefaces can be synthesized by the browser.
+    /// Valid parameters:
+    /// - FontSynthesis
+    /// - None
     let FontSynthesis' (synthesis: FssTypes.IFontSynthesis) = FontSynthesis.value(synthesis)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-position
@@ -645,6 +623,7 @@ module Font =
     let private fontVariantPositionValue' = fontVariantPositionToString >> fontVariantPositionValue
 
     [<Erase>]
+    /// Specifies which missing typefaces can be synthesized by the browser.
     type FontVariantPosition =
         static member value (variantPosition: FssTypes.IFontVariantPosition) = variantPosition |> fontVariantPositionValue'
         static member sub = FssTypes.Font.VariantPosition.Sub |> fontVariantPositionValue'
@@ -654,16 +633,13 @@ module Font =
         static member initial = FssTypes.Initial |> fontVariantPositionValue'
         static member unset = FssTypes.Unset |> fontVariantPositionValue'
 
-    /// <summary>Specifies which missing typefaces can be synthesized by the browser.</summary>
-    /// <param name="variantPosition">
-    ///     can be:
-    ///     - <c> FontVariantPosition </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies which missing typefaces can be synthesized by the browser.
+    /// Valid parameters:
+    /// - FontVariantPosition
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let FontVariantPosition' = FontVariantPosition.value
 
 

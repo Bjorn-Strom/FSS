@@ -220,7 +220,9 @@ module Text =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
     let private alignCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextAlign
     let private alignCssValue' = textAlignToString >> alignCssValue
+
     [<Erase>]
+    /// Specifies the horizontal alignment of text.
     type TextAlign =
         static member value (textAlign: FssTypes.ITextAlign) = textAlign |> alignCssValue'
         static member left = FssTypes.Text.Align.Left |> alignCssValue'
@@ -236,21 +238,20 @@ module Text =
         static member initial = FssTypes.Initial |> alignCssValue'
         static member unset = FssTypes.Unset |> alignCssValue'
 
-    /// <summary>Specifies the horizontal alignment of text.</summary>
-    /// <param name="align">
-    ///     can be:
-    ///     - <c> TextAlign </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the horizontal alignment of text.
+    /// Valid parameters:
+    /// - TextAlign
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TextAlign' = TextAlign.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
     let private alignLastCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextAlignLast
     let private alignLastCssValue' = textAlignLastToString >> alignLastCssValue
+
     [<Erase>]
+    /// Specifies the horizontal alignment of the last line of text.
     type TextAlignLast =
         static member value (textAlign: FssTypes.ITextAlignLast) = textAlign |> alignLastCssValue'
         static member left = FssTypes.Text.AlignLast.Left |> alignLastCssValue'
@@ -264,37 +265,35 @@ module Text =
         static member initial = FssTypes.Initial |> alignLastCssValue'
         static member unset = FssTypes.Unset |> alignLastCssValue'
 
-    /// <summary>Specifies the horizontal alignment of the last line of text.</summary>
-    /// <param name="align">
-    ///     can be:
-    ///     - <c> TextAlign </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the horizontal alignment of the last line of text.
+    /// Valid parameters:
+    /// - TextAlign
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TextAlignLast' = TextAlignLast.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
     let private decorationValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecoration
     let private decorationValue' = decorationToString >> decorationValue
+
     [<Erase>]
+    /// Resets text decoration.
     type TextDecoration =
         static member value (value: FssTypes.ITextDecoration) = value |> decorationValue'
         static member none = FssTypes.None' |> decorationValue'
 
-    /// <summary>Resets text decoration.</summary>
-    /// <param name="decoration">
-    ///     can be:
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets text decoration.
+    /// Valid parameters:
+    /// - None
     let TextDecoration' = TextDecoration.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
     let private lineCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationLine
     let private lineCssValue' = decorationLineToString >> lineCssValue
+
     [<Erase>]
+    /// Specifies how to decorate text.
     type TextDecorationLine =
         static member value (value: FssTypes.ITextDecorationLine) = value |> lineCssValue'
         static member value (v1: FssTypes.ITextDecorationLine, v2: FssTypes.ITextDecorationLine) =
@@ -311,22 +310,21 @@ module Text =
         static member unset = FssTypes.Unset |> lineCssValue'
         static member none = FssTypes.None' |> lineCssValue'
 
-    /// <summary>Specifies how to decorate text.</summary>
-    /// <param name="decoration">
-    ///     can be:
-    ///     - <c> TextDecorationLine </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how to decorate text.
+    /// Valid parameters:
+    /// - TextDecorationLine
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let TextDecorationLine' = TextDecorationLine.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
     let private thicknessValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationThickness
     let private thicknessValue' = thicknessToString >> thicknessValue
+
     [<Erase>]
+    /// Specifies thickness of text decoration.
     type TextDecorationThickness =
         static member value (thickness: FssTypes.ITextDecorationThickness) = thickness |> thicknessValue'
         static member fromFont = FssTypes.Text.DecorationThickness |> thicknessValue'
@@ -336,25 +334,24 @@ module Text =
         static member initial = FssTypes.Initial |> thicknessValue'
         static member unset = FssTypes.Unset |> thicknessValue'
 
-    /// <summary>Specifies thickness of text decoration.</summary>
-    /// <param name="thickness">
-    ///     can be:
-    ///     - <c> TextDecorationThickness </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Length </c>
-    ///     - <c> Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies thickness of text decoration.
+    /// Valid parameters:
+    /// - TextDecorationThickness
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
+    /// - Auto
+    /// - Length
+    /// - Percent
     let TextDecorationThickness' = TextDecorationThickness.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
     let private decorationStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationStyle
     let private decorationStyleValue' = decorationStyleToString >> decorationStyleValue
+
     [<Erase>]
+    /// Specifies style of text decoration.
     type TextDecorationStyle =
         static member value(style: FssTypes.ITextDecorationStyle) = style |> decorationStyleValue'
         static member solid = FssTypes.Text.DecorationStyle.Solid |> decorationStyleValue'
@@ -367,15 +364,12 @@ module Text =
         static member initial = FssTypes.Initial |> decorationStyleValue'
         static member unset = FssTypes.Unset |> decorationStyleValue'
 
-    /// <summary>Specifies style of text decoration.</summary>
-    /// <param name="decoration">
-    ///     can be:
-    ///     - <c> TextDecorationStyle </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies style of text decoration.
+    /// Valid parameters:
+    /// - TextDecorationStyle
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TextDecorationStyle' = TextDecorationStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
@@ -383,6 +377,7 @@ module Text =
     let private skipValue' = decorationSkipToString >> skipValue
 
     [<Erase>]
+    /// Specifies what parts of decoration should be skipped.
     type TextDecorationSkip =
         static member value (value: FssTypes.ITextDecorationSkip) = value |> skipValue'
         static member value (v1: FssTypes.ITextDecorationSkip, v2: FssTypes.ITextDecorationSkip) =
@@ -404,22 +399,21 @@ module Text =
         static member unset = FssTypes.Unset |> skipValue'
         static member none = FssTypes.None' |> skipValue'
 
-    /// <summary>Specifies what parts of decoration should be skipped.</summary>
-    /// <param name="skip">
-    ///     can be:
-    ///     - <c> TextDecorationSkip </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies what parts of decoration should be skipped.
+    /// Valid parameters:
+    /// - TextDecorationSkip
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let TextDecorationSkip' = TextDecorationSkip.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
     let private skipInkValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationSkipInk
     let private skipInkValue' = decorationSkipInkToString >> skipInkValue
+
     [<Erase>]
+    /// Specifies what parts of decoration should be skipped.
     type TextDecorationSkipInk =
         static member value(skipInk: FssTypes.ITextDecorationSkipInk) = skipInk |> skipInkValue'
         static member all = FssTypes.Text.DecorationSkipInk |> skipInkValue'
@@ -430,23 +424,22 @@ module Text =
         static member none = FssTypes.None' |> skipInkValue'
         static member auto = FssTypes.Auto |> skipInkValue'
 
-    /// <summary>Specifies what parts of decoration should be skipped.</summary>
-    /// <param name="skip">
-    ///     can be:
-    ///     - <c> TextDecorationSkipInk </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies what parts of decoration should be skipped.
+    /// Valid parameters:
+    /// - TextDecorationSkipInk
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
+    /// - Auto
     let TextDecorationSkipInk' = TextDecorationSkipInk.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
     let private transformValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextTransform
     let private transformValue' = textTransformToString >> transformValue
+
     [<Erase>]
+    /// Specifies what parts of text to capitalize.
     type TextTransform =
         static member value (transform: FssTypes.ITextTransform) = transform |> transformValue'
         static member capitalize = FssTypes.Text.Capitalize |> transformValue'
@@ -460,22 +453,21 @@ module Text =
         static member unset = FssTypes.Unset |> transformValue'
         static member none = FssTypes.None' |> transformValue'
 
-    /// <summary>Specifies what parts of text to capitalize.</summary>
-    /// <param name="transform">
-    ///     can be:
-    ///     - <c> TextTransform </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies what parts of text to capitalize.
+    /// Valid parameters:
+    /// - TextTransform
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let TextTransform' = TextTransform.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
     let private indentCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextIndent
     let private indentCssValue' = indentToString >> indentCssValue
+
     [<Erase>]
+    /// Specifies how much indentation is put before lines of text.
     type TextIndent =
         static member value (indent: FssTypes.ITextIndent) = indent |> indentCssValue'
         static member value (i1: FssTypes.ITextIndent, i2: FssTypes.ITextIndent) = sprintf "%s %s" (indentToString i1) (indentToString i2) |> indentCssValue
@@ -489,17 +481,14 @@ module Text =
         static member initial = FssTypes.Initial |> indentCssValue'
         static member unset = FssTypes.Unset |> indentCssValue'
 
-    /// <summary>Specifies how much indentation is put before lines of text.</summary>
-    /// <param name="indent">
-    ///     can be:
-    ///     - <c> TextIndent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Length </c>
-    ///     - <c> Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how much indentation is put before lines of text.
+    /// Valid parameters:
+    /// - TextIndent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Length
+    /// - Percent
     let TextIndent' = TextIndent.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
@@ -507,6 +496,7 @@ module Text =
     let private shadowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextShadow
 
     [<Erase>]
+    /// Supply a list of text shadows to apply to the text
     type TextShadow =
         static member xy (xOffset: FssTypes.Length, yOffset: FssTypes.Length) =
             FssTypes.Text.XY(xOffset,yOffset)
@@ -521,20 +511,19 @@ module Text =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
     let private overflowValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextOverflow
     let private overflowValue' = textOverflowToString >> overflowValue
+
     [<Erase>]
+    /// If there is hidden content this specifies how that is signalled.
     type TextOverflow =
         static member value (overflow: FssTypes.ITextOverflow) = overflow |> overflowValue'
 
         static member clip = FssTypes.Text.Overflow.Clip |> overflowValue'
         static member ellipsis = FssTypes.Text.Ellipsis |> overflowValue'
 
-    /// <summary>If there is hidden content this specifies how that is signalled.</summary>
-    /// <param name="overflow">
-    ///     can be:
-    ///     - <c> TextOverflow </c>
-    ///     - <c> CssString </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// If there is hidden content this specifies how that is signalled.
+    /// Valid parameters:
+    /// - TextOverflow
+    /// - CssString
     let TextOverflow' = TextOverflow.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
@@ -542,6 +531,7 @@ module Text =
     let private emphasisValue' = emphasisToString >> emphasisValue
 
     [<Erase>]
+    /// Specifies emphasis marks to text.
     type TextEmphasis =
         static member value (emphasis: FssTypes.ITextEmphasis) = emphasis |> emphasisValue'
 
@@ -550,15 +540,12 @@ module Text =
         static member initial = FssTypes.Initial |> emphasisValue'
         static member unset = FssTypes.Unset |> emphasisValue'
 
-    /// <summary>Specifies emphasis marks to text.</summary>
-    /// <param name="emphasis">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies emphasis marks to text.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let TextEmphasis' = TextEmphasis.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
@@ -566,6 +553,7 @@ module Text =
     let private emphasisPositionValue' = emphasisPositionToString >> emphasisPositionValue
 
     [<Erase>]
+    /// Specifies where emphasis marks are drawn.
     type TextEmphasisPosition =
         static member value (v1: FssTypes.ITextEmphasisPosition, v2: FssTypes.ITextEmphasisPosition) =
             sprintf "%s %s" (emphasisPositionToString v1) (emphasisPositionToString v2)
@@ -575,23 +563,22 @@ module Text =
         static member initial = FssTypes.Initial |> emphasisPositionValue'
         static member unset = FssTypes.Unset |> emphasisPositionValue'
 
-    /// <summary>Specifies where emphasis marks are drawn.</summary>
-    /// <param name="e1"> </param>
-    /// <param name="e2"> </param>
+    /// Specifies where emphasis marks are drawn.
     /// Both params can be:
-    ///     - <c> TextEmphasisStyle </c>
-    ///     - <c> CssString </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// <returns>Css property for fss.</returns>
+    /// - TextEmphasisStyle
+    /// - CssString
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let TextEmphasisPosition' = TextEmphasisPosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
     let private emphasisStyleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasisStyle
     let private emphasisStyleValue' = emphasisStyleToString >> emphasisStyleValue
+
     [<Erase>]
+    /// Specifies style of text emphasis.
     type TextEmphasisStyle =
         static member value (emphasisStyle: FssTypes.ITextEmphasisStyle) = emphasisStyle |> emphasisStyleValue'
         static member filled = FssTypes.Text.Filled |> emphasisStyleValue'
@@ -608,23 +595,21 @@ module Text =
         static member initial = FssTypes.Initial |> emphasisStyleValue'
         static member unset = FssTypes.Unset |> emphasisStyleValue'
 
-    /// <summary>Specifies style of text emphasis.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> TextEmphasisStyle </c>
-    ///     - <c> CssString </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies style of text emphasis.
+    /// Valid parameters:
+    /// - TextEmphasisStyle
+    /// - CssString
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let TextEmphasisStyle' = TextEmphasisStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-position
     let private underlinePositionCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextUnderlinePosition
     let private underlinePositionCssValue' = underlinePositionToString >> underlinePositionCssValue
 
+    /// Specifies the position of text underline.
     [<Erase>]
     type TextUnderlinePosition =
         static member value (underlinePosition: FssTypes.ITextUnderlinePosition) =
@@ -645,22 +630,21 @@ module Text =
         static member initial = FssTypes.Initial |> underlinePositionCssValue'
         static member unset = FssTypes.Unset |> underlinePositionCssValue'
 
-    /// <summary>Specifies the position of text underline.</summary>
-    /// <param name="position">
-    ///     can be:
-    ///     - <c> UnderlinePosition </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the position of text underline.
+    /// Valid parameters:
+    /// - UnderlinePosition
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let TextUnderlinePosition' = TextUnderlinePosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
     let private offsetValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextUnderlineOffset
     let private offsetValue' = underlineOffsetToString >> offsetValue
+
     [<Erase>]
+    /// Specifies the offset of text underline.
     type TextUnderlineOffset =
         static member value (underlineOffset: FssTypes.ITextUnderlineOffset) = underlineOffset |> offsetValue'
         static member inherit' = FssTypes.Inherit |> offsetValue'
@@ -668,23 +652,22 @@ module Text =
         static member unset = FssTypes.Unset |> offsetValue'
         static member auto = FssTypes.Auto |> offsetValue'
 
-    /// <summary>Specifies the offset of text underline.</summary>
-    /// <param name="offset">
-    ///     can be:
-    ///     - <c> Size  </c>
-    ///     - <c> Percent  </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the offset of text underline.
+    /// Valid parameters:
+    /// - Size
+    /// - Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let TextUnderlineOffset' = TextUnderlineOffset.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/quotes
     let private quoteValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Quotes
     let private quoteValue' = quoteToString >> quoteValue
+
     [<Erase>]
+    /// Specifies how to render quotation marks.
     type Quotes =
         static member value (quote: FssTypes.IQuotes) =
             quote
@@ -705,22 +688,21 @@ module Text =
         static member initial = FssTypes.Initial |> quoteValue'
         static member unset = FssTypes.Unset |> quoteValue'
 
-    /// <summary>Specifies how to render quotation marks.</summary>
-    /// <param name="quotes">
-    ///     can be:
-    ///     - <c> CssString  </c>
-    ///     - <c> None  </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how to render quotation marks.
+    /// Valid parameters:
+    /// - CssString
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let Quotes': (FssTypes.IQuotes -> FssTypes.CssProperty) = Quotes.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
     let private hyphensValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Hyphens
     let private hyphensValue' = hyphensToString >> hyphensValue
+
+    /// Specifies words will be hyphenated when text wraps.
     [<Erase>]
     type Hyphens =
         static member value (hyphens: FssTypes.IHyphens) = hyphens |> hyphensValue'
@@ -731,51 +713,42 @@ module Text =
         static member initial = FssTypes.Initial |> hyphensValue'
         static member unset = FssTypes.Unset |> hyphensValue'
 
-    /// <summary>Specifies words will be hyphenated when text wraps.</summary>
-    /// <param name="hyphens">
-    ///     can be:
-    ///     - <c> Hyphens  </c>
-    ///     - <c> None  </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies words will be hyphenated when text wraps.
+    /// - Hyphens
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let Hyphens' = Hyphens.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color
     let private textDecorationColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextDecorationColor
     let private textDecorationColorValue' = textDecorationColorToString >> textDecorationColorValue
 
+    /// Specifies color of text decoration.
     let TextDecorationColor = FssTypes.TextDecorationColor (textDecorationColorValue')
 
-    /// <summary>Specifies color of text decoration.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color of text decoration.
+    /// Valid parameters:
+    /// - Color
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TextDecorationColor' = TextDecorationColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
     let private emphasisColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TextEmphasisColor
     let private emphasisColorValue' = textEmphasisColorToString >> emphasisColorValue
 
+    /// Specifies color of text emphasis.
     let TextEmphasisColor = FssTypes.TextEmphasisColor (emphasisColorValue')
 
-    /// <summary>Specifies color of text emphasis.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color of text emphasis.
+    /// - FssTypes.ColorType</c>
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TextEmphasisColor' = TextEmphasisColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
@@ -783,6 +756,7 @@ module Text =
     let private textSizeAdjustValue' = textSizeAdjustToString >> textSizeAdjustValue
 
     [<Erase>]
+    /// Controls the text inflation on some mobile browsers.
     type TextSizeAdjust =
         static member value (textSize: FssTypes.ITextSizeAdjust) = textSize |> textSizeAdjustValue'
         static member auto = FssTypes.Auto |> textSizeAdjustValue'
@@ -791,17 +765,14 @@ module Text =
         static member initial = FssTypes.Initial |> textSizeAdjustValue'
         static member unset = FssTypes.Unset |> textSizeAdjustValue'
 
-    /// <summary>Controls the text inflation on some mobile browsers.</summary>
-    /// <param name="textSize">
-    ///     can be:
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Controls the text inflation on some mobile browsers.
+    /// Valid parameters:
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    /// - Percent
     let TextSizeAdjust' = TextSizeAdjust.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
@@ -809,22 +780,20 @@ module Text =
     let private tabSizeValue' = tabSizeToString >> tabSizeValue
 
     [<Erase>]
+    /// Specifies the width of tab characters.
     type TabSize =
         static member value (tabSize: FssTypes.ITabSize) = tabSize |> tabSizeValue'
         static member inherit' = FssTypes.Inherit |> tabSizeValue'
         static member initial = FssTypes.Initial |> tabSizeValue'
         static member unset = FssTypes.Unset |> tabSizeValue'
 
-    /// <summary>Specifies the width of tab characters.</summary>
-    /// <param name="tabSize">
-    ///     can be:
-    ///     - <c> Length </c>
-    ///     - <c> CssInt </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the width of tab characters.
+    /// Valid parameters:
+    /// - Length
+    /// - CssInt
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TabSize' = TabSize.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation
@@ -832,6 +801,7 @@ module Text =
     let private textOrientationValue' = textOrientationToString >> textOrientationValue
 
     [<Erase>]
+    /// Sets the orientation of the text characters.
     type TextOrientation =
         static member value (orientation: FssTypes.ITextOrientation) = orientation |> textOrientationValue'
         static member mixed = FssTypes.Text.Mixed |> textOrientationValue'
@@ -843,15 +813,12 @@ module Text =
         static member initial = FssTypes.Initial |> textOrientationValue'
         static member unset = FssTypes.Unset |> textOrientationValue'
 
-    /// <summary>Sets the orientation of the text characters.</summary>
-    /// <param name="orientation">
-    ///     can be:
-    ///     - <c> TextOrientation </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets the orientation of the text characters.
+    /// Valid parameters:
+    /// - TextOrientation
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TextOrientation' = TextOrientation.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
@@ -859,6 +826,7 @@ module Text =
     let private textRenderingValue' = textRenderingToString >> textRenderingValue
 
     [<Erase>]
+    /// Specifies how to render text.
     type TextRendering =
         static member value (rendering: FssTypes.ITextRendering) = rendering |> textRenderingValue'
         static member optimizeSpeed = FssTypes.Text.OptimizeSpeed |> textRenderingValue'
@@ -869,16 +837,13 @@ module Text =
         static member initial = FssTypes.Initial |> textRenderingValue'
         static member unset = FssTypes.Unset |> textRenderingValue'
 
-    /// <summary>Specifies how to render text.</summary>
-    /// <param name="rendering">
-    ///     can be:
-    ///     - <c> TextRendering </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how to render text.
+    /// Valid parameters:
+    /// - TextRendering
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let TextRendering' = TextRendering.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
@@ -886,6 +851,7 @@ module Text =
     let private textJustifyValue' = textJustifyToString >> textJustifyValue
 
     [<Erase>]
+    /// Specifies how to justify text.
     type TextJustify =
         static member value (justification: FssTypes.ITextJustify) = justification |> textJustifyValue'
         static member interWord = FssTypes.Text.InterWord |> textJustifyValue'
@@ -893,14 +859,11 @@ module Text =
         static member auto = FssTypes.Auto |> textJustifyValue'
         static member none = FssTypes.None' |> textJustifyValue'
 
-    /// <summary>Specifies how to justify text.</summary>
-    /// <param name="justification">
-    ///     can be:
-    ///     - <c> TextJustify </c>
-    ///     - <c> None </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how to justify text.
+    /// Valid parameters:
+    /// - TextJustify
+    /// - None
+    /// - Auto
     let TextJustify' = TextJustify.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
@@ -908,6 +871,7 @@ module Text =
     let private whiteSpaceValue' = whitespaceToString >> whiteSpaceValue
 
     [<Erase>]
+    /// Specifies how white space is handled.
     type WhiteSpace =
         static member value (whitespace: FssTypes.IWhiteSpace) = whitespace |> whiteSpaceValue'
         static member noWrap = FssTypes.Text.WhiteSpace.NoWrap |> whiteSpaceValue'
@@ -920,16 +884,13 @@ module Text =
         static member initial = FssTypes.Initial |> whiteSpaceValue'
         static member unset = FssTypes.Unset |> whiteSpaceValue'
 
-    /// <summary>Specifies how white space is handled.</summary>
-    /// <param name="whitespace">
-    ///     can be:
-    ///     - <c> WhiteSpace </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how white space is handled.
+    /// Valid parameters:
+    /// - WhiteSpace
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let WhiteSpace' = WhiteSpace.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
@@ -937,6 +898,7 @@ module Text =
     let private userSelectValue' = userSelectToString >> userSelectValue
 
     [<Erase>]
+    /// Specifies whether the user can select text.
     type UserSelect =
         static member value (whitespace: FssTypes.IUserSelect) = whitespace |> userSelectValue'
         static member text = FssTypes.Text.UserSelect.Text |> userSelectValue'
@@ -948,17 +910,14 @@ module Text =
         static member initial = FssTypes.Initial |> userSelectValue'
         static member unset = FssTypes.Unset |> userSelectValue'
 
-    /// <summary>Specifies whether the user can select text.</summary>
-    /// <param name="userSelect">
-    ///     can be:
-    ///     - <c> UserSelect </c>
-    ///     - <c> None </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies whether the user can select text.
+    /// Valid parameters:
+    /// - UserSelect
+    /// - None
+    /// - Auto
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let UserSelect' = UserSelect.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
@@ -966,6 +925,7 @@ module Text =
     let private hangingPunctuationValue': (FssTypes.IHangingPunctuation -> FssTypes.CssProperty) = hangingPunctuationToString >> hangingPunctuationValue
 
     [<Erase>]
+    /// Specifies whether a punctuation mark should hang at the start or end of a line.
     type HangingPunctuation =
         static member value hangingPunctuation = hangingPunctuation |> hangingPunctuationValue'
         static member value (p1, p2) =
@@ -983,15 +943,12 @@ module Text =
         static member initial = FssTypes.Initial |> hangingPunctuationValue'
         static member unset = FssTypes.Unset |> hangingPunctuationValue'
 
-    /// <summary>Specifies whether a punctuation mark should hang at the start or end of a line.</summary>
-    /// <param name="hangingPunctuation">
-    ///     can be:
-    ///     - <c> HangingPunctuation </c>
-    ///     - <c> UserSelect </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies whether a punctuation mark should hang at the start or end of a line.
+    /// Valid parameters:
+    /// - HangingPunctuation
+    /// - UserSelect
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let HangingPunctuation' = HangingPunctuation.value

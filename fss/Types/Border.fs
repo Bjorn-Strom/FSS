@@ -32,7 +32,7 @@ namespace Fss.FssTypes
             | Outset
             interface IBorderStyle
 
-        type BorderStyle (valueFunction: IBorderStyle -> CssProperty) =
+        type BorderSideStyle (valueFunction: IBorderStyle -> CssProperty) =
             member this.value (style: IBorderStyle) = style |> valueFunction
             member this.hidden = Hidden |> valueFunction
             member this.dotted = Dotted |> valueFunction
@@ -48,6 +48,26 @@ namespace Fss.FssTypes
             member this.inherit' = Inherit |> valueFunction
             member this.initial = Initial |> valueFunction
             member this.unset = Unset |> valueFunction
+
+        type BorderStyle (styleToString: IBorderStyle -> string, valueFunction: string -> CssProperty) =
+            member this.value (vertical: IBorderStyle, horizontal: IBorderStyle) =
+                sprintf "%s %s"
+                    (styleToString vertical)
+                    (styleToString horizontal)
+                |> valueFunction
+            member this.value (top: IBorderStyle, horizontal: IBorderStyle, bottom: IBorderStyle) =
+                sprintf "%s %s %s"
+                    (styleToString top)
+                    (styleToString horizontal)
+                    (styleToString bottom)
+                |> valueFunction
+            member this.value (top: IBorderStyle, right: IBorderStyle, bottom: IBorderStyle, left: IBorderStyle) =
+                sprintf "%s %s %s %s"
+                    (styleToString top)
+                    (styleToString right)
+                    (styleToString bottom)
+                    (styleToString left)
+                |> valueFunction
 
         type BorderColor (colorToString: IBorderColor -> string, valueFunction: string -> CssProperty, valueFunction': IBorderColor -> CssProperty) =
             inherit ColorBase<CssProperty> (valueFunction')

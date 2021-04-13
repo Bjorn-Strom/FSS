@@ -16,6 +16,7 @@ module Display =
     let private displayValue' = displayToString >> displayValue
 
     [<Erase>]
+    /// Specifies the layout of the elements children.
     type Display =
         static member value (display: FssTypes.IDisplay) = display |> displayValue'
         static member inline' = FssTypes.Display.Inline |> displayValue'
@@ -40,14 +41,11 @@ module Display =
         static member initial = FssTypes.Initial |> displayValue'
         static member unset = FssTypes.Unset |> displayValue'
 
-    /// <summary>Specifies the layout of the elements children.</summary>
-    /// <param name="display">
-    ///     can be:
-    ///     - <c> Display </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the layout of the elements children.
+    /// Valid parameters:
+    /// - Display
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let Display' = Display.value

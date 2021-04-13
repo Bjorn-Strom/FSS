@@ -37,7 +37,9 @@ module Transition =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition
     let private transitionValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Transition
     let private transitionValue' = transitionToString >> transitionValue
+
     [<Erase>]
+    /// Resets transition.
     type Transition =
         static member value (delay: FssTypes.ITransition) = delay |> transitionValue'
 
@@ -45,20 +47,19 @@ module Transition =
         static member initial = FssTypes.Initial |> transitionValue'
         static member unset = FssTypes.Unset |> transitionValue'
 
-    /// <summary>Resets transition.</summary>
-    /// <param name="transition">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets transition.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let Transition' = Transition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
     let private delayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionDelay
     let private delayValue' = delayToString >> delayValue
+
     [<Erase>]
+    /// Specifies the duration to wait before a transition starts.
     type TransitionDelay =
         static member value (delay: FssTypes.ITransitionDelay) = delay |> delayValue'
         static member value (delays: FssTypes.ITransitionDelay list) = Utilities.Helpers.combineComma delayToString delays |> delayValue
@@ -67,21 +68,20 @@ module Transition =
         static member initial = FssTypes.Initial |> delayValue'
         static member unset = FssTypes.Unset |> delayValue'
 
-    /// <summary>Specifies the duration to wait before a transition starts.</summary>
-    /// <param name="delay">
-    ///     can be:
-    ///     - <c> Units.Time </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the duration to wait before a transition starts.
+    /// Valid parameters:
+    /// - Units.Time
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TransitionDelay': (FssTypes.ITransitionDelay -> FssTypes.CssProperty) = TransitionDelay.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duraion
     let private transitionDurationValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionDuration
     let private transitionDurationValue' = durationToString >> transitionDurationValue
+
     [<Erase>]
+    /// Specifies the duration of the transition.
     type TransitionDuration =
         static member value (duration: FssTypes.ITransitionDuration) = duration |> transitionDurationValue'
         static member value (durations: FssTypes.ITransitionDuration list) =
@@ -91,22 +91,20 @@ module Transition =
         static member initial = FssTypes.Initial |> transitionDurationValue'
         static member unset = FssTypes.Unset |> transitionDurationValue'
 
-    /// <summary>Specifies the duration of the transition.</summary>
-    /// <param name="duration">
-    ///     can be:
-    ///     - <c> Units.Time </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the duration of the transition.
+    /// Valid parameters:
+    /// - Units.Time
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TransitionDuration': (FssTypes.ITransitionDuration -> FssTypes.CssProperty) = TransitionDuration.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
-    let private transitionTimingFunction =
-        FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionTimingFunction
+    let private transitionTimingFunction = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionTimingFunction
     let private transitionTimingFunction' = timingToString >> transitionTimingFunction
+
     [<Erase>]
+    /// Specifies how the intermediate values are calculated.
     type TransitionTimingFunction =
         static member value (timingFunction: FssTypes.ITransitionTimingFunction) = timingFunction |> transitionTimingFunction'
         static member value (timingFunctions: FssTypes.ITransitionTimingFunction list) =
@@ -126,21 +124,20 @@ module Transition =
         static member initial = FssTypes.Initial |> transitionTimingFunction'
         static member unset = FssTypes.Unset |> transitionTimingFunction'
 
-    /// <summary>Specifies how the intermediate values are calculated.</summary>
-    /// <param name="timingFunction">
-    ///     can be:
-    ///     - <c> TransitionTiming </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how the intermediate values are calculated.
+    /// Valid parameters:
+    /// - TransitionTiming
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TransitionTimingFunction': (FssTypes.ITransitionTimingFunction -> FssTypes.CssProperty) = TransitionTimingFunction.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property
     let private transitionProperty = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransitionProperty
     let private transitionProperty' = propertyToString >> transitionProperty
+
     [<Erase>]
+    /// Specifies which properties should be affected by transition.
     type TransitionProperty =
         static member value (property: FssTypes.ITransitionProperty) = property |> transitionProperty'
         static member values (properties: FssTypes.Property.Property list) =
@@ -410,14 +407,11 @@ module Transition =
         static member initial = FssTypes.Initial |> transitionProperty'
         static member unset = FssTypes.Unset |> transitionProperty'
 
-    /// <summary>Specifies which properties should be affected by transition.</summary>
-    /// <param name="property">
-    ///     can be:
-    ///     - <c> Property </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies which properties should be affected by transition.
+    /// Valid parameters:
+    /// - Property
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let TransitionProperty' = TransitionProperty.value

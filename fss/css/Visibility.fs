@@ -9,6 +9,7 @@ module Visibility =
     let private visibilityValue' = FssTypes.visibilityHelpers.visibilityToString >> visibilityValue
 
     [<Erase>]
+    /// Specifies if an element is visible.
     type Visibility =
         static member value (visibility: FssTypes.IVisibility) = visibility |> visibilityValue'
         static member visible = FssTypes.Visibility.Visible |> visibilityValue'
@@ -19,29 +20,25 @@ module Visibility =
         static member initial = FssTypes.Initial |> visibilityValue'
         static member unset = FssTypes.Unset |> visibilityValue'
 
-    /// <summary>Specifies if an element is visible.</summary>
-    /// <param name="visibility">
-    ///     can be:
-    ///     - <c> Visibility </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies if an element is visible.
+    /// Valid parameters:
+    /// - Visibility
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let Visibility' = Visibility.value
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
 [<AutoOpen>]
 module Opacity =
     [<Erase>]
+    /// Specifies the opacity of an element.
     type Opacity =
         static member value value =
             FssTypes.propertyHelpers.cssValue FssTypes.Property.Opacity
             <| string (Utilities.Helpers.clamp 0.0 1.0 value)
 
-    /// <summary>Specifies the opacity of an element.</summary>
-    /// <param name="opacity"> </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the opacity of an element.
     let Opacity' = Opacity.value
 
 
@@ -58,6 +55,7 @@ module PaintOrder =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/paint-order
     [<Erase>]
+    /// Specifies in which order the fill and strokes are drawn.
     type PaintOrder =
         static member value(order: FssTypes.IPaintOrder) = order |> paintOrderValue'
         static member value(o1: FssTypes.IPaintOrder, o2: FssTypes.IPaintOrder) =
@@ -76,12 +74,8 @@ module PaintOrder =
         static member fill = FssTypes.Visibility.PaintOrder.Fill |> paintOrderValue'
         static member normal = FssTypes.Normal |> paintOrderValue'
 
-    /// <summary>Specifies in which order the fill and strokes are drawn.</summary>
-    /// <param name="order">
-    ///     can be:
-    ///     - <c> PaintOrder </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies in which order the fill and strokes are drawn.
+    /// - PaintOrder
+    /// - Normal
     let PaintOrder' = PaintOrder.value
 

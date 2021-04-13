@@ -28,6 +28,7 @@ module Table =
     let private captionSideValue' = captionSideToString >> captionSideValue
 
     [<Erase>]
+    /// Specifies which side the caption of a table will be.
     type CaptionSide =
         static member value (captionSide: FssTypes.ICaptionSide) = captionSide |> captionSideValue'
         static member top = FssTypes.Table.CaptionSide.Top |> captionSideValue'
@@ -40,21 +41,20 @@ module Table =
         static member initial = FssTypes.Initial |> captionSideValue'
         static member unset = FssTypes.Unset |> captionSideValue'
 
-    /// <summary>Specifies which side the caption of a table will be.</summary>
-    /// <param name="captionSide">
-    ///     can be:
-    ///     - <c> CaptionSide </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies which side the caption of a table will be.
+    /// Valid parameters:
+    /// - CaptionSide
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let CaptionSide' = CaptionSide.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
     let private emptyCellsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.EmptyCells
     let private emptyCellsValue' = emptyCellsToString >> emptyCellsValue
+
     [<Erase>]
+    /// Specifies whether or not empty cells should have borders.
     type EmptyCells =
         static member value (emptyCells: FssTypes.IEmptyCells) = emptyCells |> emptyCellsValue'
         static member show = FssTypes.Table.EmptyCells.Show |> emptyCellsValue'
@@ -63,15 +63,11 @@ module Table =
         static member initial = FssTypes.Initial |> emptyCellsValue'
         static member unset = FssTypes.Unset |> emptyCellsValue'
 
-    /// <summary>Specifies whether or not emtpy cells should have borders.</summary>
-    /// <param name="emptyCells">
-    ///     can be:
-    ///     - <c> EmptyCells </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies whether or not empty cells should have borders.
+    /// - EmptyCells
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let EmptyCells' = EmptyCells.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
@@ -79,6 +75,7 @@ module Table =
     let private tableLayoutValue' = tableLayoutToString >> tableLayoutValue
 
     [<Erase>]
+    /// Specifies table layout.
     type TableLayout =
         static member value (layout: FssTypes.ITableLayout) = layout |> tableLayoutValue'
         static member fixed' = FssTypes.Table.Layout.Fixed |> tableLayoutValue'
@@ -87,14 +84,11 @@ module Table =
         static member initial = FssTypes.Initial |> tableLayoutValue'
         static member unset = FssTypes.Unset |> tableLayoutValue'
 
-    /// <summary>Specifies table layout.</summary>
-    /// <param name="layout">
-    ///     can be:
-    ///     - <c> TableLayout </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies table layout.
+    /// Valid parameters:
+    /// - TableLayout
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let TableLayout' = TableLayout.value

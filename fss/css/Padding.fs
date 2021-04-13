@@ -17,6 +17,7 @@ module Padding =
     let private paddingValue' = paddingToString >> paddingValue
 
     [<Erase>]
+    /// Specifies the padding on all sides of an element.
     type Padding =
         static member value (width: FssTypes.IPadding) = width |> paddingValue'
 
@@ -44,22 +45,21 @@ module Padding =
         static member initial = FssTypes.Initial |> paddingValue'
         static member unset = FssTypes.Unset |> paddingValue'
 
-    /// <summary>Specifies the padding on all sides of an element.</summary>
-    /// <param name="padding">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the padding on all sides of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let Padding' = Padding.value
 
     let private paddingTopValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingTop
     let private paddingTopValue' = paddingToString >> paddingTopValue
+
     [<Erase>]
+    /// Specifies the padding on top sides of an element.
     type PaddingTop =
         static member value (top: FssTypes.IPadding) = top |> paddingTopValue'
         static member auto = FssTypes.Auto |> paddingTopValue'
@@ -67,22 +67,21 @@ module Padding =
         static member initial = FssTypes.Initial |> paddingTopValue'
         static member unset = FssTypes.Unset |> paddingTopValue'
 
-    /// <summary>Specifies the padding on top sides of an element.</summary>
-    /// <param name="top">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the padding on top sides of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let PaddingTop' = PaddingTop.value
 
     let private paddingRightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingRight
     let private paddingRightValue' = paddingToString >> paddingRightValue
+
     [<Erase>]
+    /// Specifies the padding on right side of an element.
     type PaddingRight =
         static member value (right: FssTypes.IPadding) = right |> paddingRightValue'
         static member auto = FssTypes.Auto |> paddingRightValue'
@@ -90,22 +89,21 @@ module Padding =
         static member initial = FssTypes.Initial |> paddingRightValue'
         static member unset = FssTypes.Unset |> paddingRightValue'
 
-    /// <summary>Specifies the padding on right side of an element.</summary>
-    /// <param name="right">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the padding on right side of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let PaddingRight' = PaddingRight.value
 
     let private paddingBottomValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingBottom
     let private paddingBottomValue' = paddingToString >> paddingBottomValue
+
     [<Erase>]
+    /// Specifies the padding on bottom side of an element.
     type PaddingBottom =
         static member value (bottom: FssTypes.IPadding) = bottom |> paddingBottomValue'
         static member auto = FssTypes.Auto |> paddingBottomValue'
@@ -113,22 +111,21 @@ module Padding =
         static member initial = FssTypes.Initial |> paddingBottomValue'
         static member unset = FssTypes.Unset |> paddingBottomValue'
 
-    /// <summary>Specifies the padding on bottom side of an element.</summary>
-    /// <param name="bottom">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the padding on bottom side of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let PaddingBottom' = PaddingBottom.value
 
     let private paddingLeftValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingLeft
     let private paddingLeftValue' = paddingToString >> paddingLeftValue
+
     [<Erase>]
+    /// Specifies the padding on left side of an element.
     type PaddingLeft =
         static member value (left: FssTypes.IPadding) = left |> paddingLeftValue'
         static member auto = FssTypes.Auto |> paddingLeftValue'
@@ -136,23 +133,21 @@ module Padding =
         static member initial = FssTypes.Initial |> paddingLeftValue'
         static member unset = FssTypes.Unset |> paddingLeftValue'
 
-    /// <summary>Specifies the padding on left side of an element.</summary>
-    /// <param name="left">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the padding on left side of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let PaddingLeft' = PaddingLeft.value
 
     let private paddingInlineStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingInlineStart
     let private paddingInlineStartValue' = paddingToString >> paddingInlineStartValue
 
     [<Erase>]
+    /// Valid parameters:
     type PaddingInlineStart =
         static member value (padding: FssTypes.IPadding) = padding |> paddingInlineStartValue'
         static member auto = FssTypes.Auto |> paddingInlineStartValue'
@@ -160,23 +155,21 @@ module Padding =
         static member initial = FssTypes.Initial |> paddingInlineStartValue'
         static member unset = FssTypes.Unset |> paddingInlineStartValue'
 
-    /// <summary>Specifies the amount of space along the outer starting edge of an element.</summary>
-    /// <param name="padding">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the amount of space along the outer starting edge of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let PaddingInlineStart' = PaddingInlineStart.value
 
     let private paddingInlineEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingInlineEnd
     let private paddingInlineEndValue' = paddingToString >> paddingInlineEndValue
 
     [<Erase>]
+    /// Specifies the amount of space along the outer ending edge of an element.
     type PaddingInlineEnd =
         static member value (padding: FssTypes.IPadding) = padding |> paddingInlineEndValue'
         static member auto = FssTypes.Auto |> paddingInlineEndValue'
@@ -184,23 +177,21 @@ module Padding =
         static member initial = FssTypes.Initial |> paddingInlineEndValue'
         static member unset = FssTypes.Unset |> paddingInlineEndValue'
 
-    /// <summary>Specifies the amount of space along the outer ending edge of an element.</summary>
-    /// <param name="padding">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the amount of space along the outer ending edge of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let PaddingInlineEnd' = PaddingInlineEnd.value
 
     let private paddingBlockStartValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingBlockStart
     let private paddingBlockStartValue' = paddingToString >> paddingBlockStartValue
 
     [<Erase>]
+    /// Specifies the amount of start padding of an element.
     type PaddingBlockStart =
         static member value (padding: FssTypes.IPadding) = padding |> paddingBlockStartValue'
         static member auto = FssTypes.Auto |> paddingBlockStartValue'
@@ -208,23 +199,21 @@ module Padding =
         static member initial = FssTypes.Initial |> paddingBlockStartValue'
         static member unset = FssTypes.Unset |> paddingBlockStartValue'
 
-    /// <summary>Specifies the amount of start padding of an element.</summary>
-    /// <param name="padding">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the amount of start padding of an element.
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let PaddingBlockStart' = PaddingBlockStart.value
 
     let private paddingBlockEndValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.PaddingBlockEnd
     let private paddingBlockEndValue' = paddingToString >> paddingBlockEndValue
 
     [<Erase>]
+    /// Specifies the amount of end padding of an element
     type PaddingBlockEnd =
         static member value (padding: FssTypes.IPadding) = padding |> paddingBlockEndValue'
         static member auto = FssTypes.Auto |> paddingBlockEndValue'
@@ -232,15 +221,12 @@ module Padding =
         static member initial = FssTypes.Initial |> paddingBlockEndValue'
         static member unset = FssTypes.Unset |> paddingBlockEndValue'
 
-    /// <summary>Specifies the amount of end padding of an element </summary>
-    /// <param name="padding">
-    ///     can be:
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the amount of end padding of an element
+    /// Valid parameters:
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let PaddingBlockEnd' = PaddingBlockEnd.value

@@ -15,6 +15,7 @@ module Image =
     let private objectFitValue' = stringifyObjectFit >> objectFitValue
 
     [<Erase>]
+    /// Sets how na image or video should be resized to fit its container.
     type ObjectFit =
         static member value (all: FssTypes.IObjectFit) = all |> objectFitValue'
         static member fill = FssTypes.Image.Fill |> objectFitValue'
@@ -24,13 +25,10 @@ module Image =
 
         static member none = FssTypes.None' |> objectFitValue'
 
-    /// <summary>Sets how na image or video should be resized to fit its container.</summary>
-    /// <param name="objectFit">
-    ///     can be:
-    ///     - <c> ObjectFit </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets how na image or video should be resized to fit its container.
+    /// Valid parameters:
+    /// - ObjectFit
+    /// - None
     let ObjectFit' = ObjectFit.value
 
     let private stringifyObjectPosition (objectPosition: FssTypes.IObjectPosition) =
@@ -50,10 +48,9 @@ module Image =
         static member initial = FssTypes.Initial |> objectPositionValue'
         static member unset = FssTypes.Unset |> objectPositionValue'
 
-    /// <summary>Sets how an image or video should be resized to fit its container.</summary>
-    /// <param name="x"> pixel or percent </param>
-    /// <param name="y"> pixel or percent </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets how an image or video should be resized to fit its container.
+    /// Valid parameters:
+    /// Units.Length or Units.Percent * Units.Length or Units.Percent
     let ObjectPosition': (FssTypes.ILengthPercentage * FssTypes.ILengthPercentage -> FssTypes.CssProperty) = ObjectPosition.value
 
     let private stringifyImageRendering (imageRendering: FssTypes.IImageRendering) =
@@ -67,6 +64,7 @@ module Image =
     let private imageRenderingValue' = stringifyImageRendering >> imageRenderingValue
 
     [<Erase>]
+    /// Sets the image scaling algorithm.
     type ImageRendering =
         static member value (rendering: FssTypes.IImageRendering) = rendering |> imageRenderingValue'
         static member crispEdges = FssTypes.Image.CrispEdges |> imageRenderingValue'
@@ -76,7 +74,11 @@ module Image =
         static member initial = FssTypes.Initial |> imageRenderingValue'
         static member unset = FssTypes.Unset |> imageRenderingValue'
 
-    /// <summary>Sets the image scaling algorithm.</summary>
-    /// <param name="y"> pixel or percent </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets the image scaling algorithm.
+    /// Valid parameters:
+    /// - ImageRendering
+    /// - auto
+    /// - inherit
+    /// - initial
+    /// - unset
     let ImageRendering' = ImageRendering.value

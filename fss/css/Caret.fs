@@ -14,13 +14,11 @@ module Caret =
     let private caretColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.CaretColor
     let private caretColorValue' = caretColorToString >> caretColorValue
 
+    /// Specifies caret color.
     let CaretColor = FssTypes.CaretColorClass(caretColorValue')
 
-    /// <summary>Specifies caret color.</summary>
-    /// <param name="caretColor">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies caret color.
+    /// Valid parameters:
+    /// - Color
+    /// - Auto
     let CaretColor' = CaretColor.value

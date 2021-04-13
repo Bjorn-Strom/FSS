@@ -14,6 +14,7 @@ module Svg =
     let private alignmentBaselineValue' = Utilities.Helpers.duToKebab >> alignmentBaselineValue
 
     [<Erase>]
+    /// Specifies how an object is align to its parent.
     type AlignmentBaseline =
         static member value (alignment: FssTypes.Svg.AlignmentBaseline) = alignment |> alignmentBaselineValue'
         static member baseline = FssTypes.Svg.Baseline |> alignmentBaselineValue'
@@ -31,12 +32,7 @@ module Svg =
         static member center = FssTypes.Svg.Center |> alignmentBaselineValue'
         static member bottom = FssTypes.Svg.Bottom |> alignmentBaselineValue'
 
-    /// <summary>Specifies how an object is align to its parent.</summary>
-    /// <param name="all">
-    ///     can be:
-    ///     - <c> AlignmentBaseline </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how an object is align to its parent.
     let AlignmentBaseline' = AlignmentBaseline.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/baseline-shift
@@ -51,19 +47,17 @@ module Svg =
     let private baselineShiftValue' = stringifyBaselineShift >> baselineShiftValue
 
     [<Erase>]
+    /// Resets all of an elements properties.
     type BaselineShift =
         static member value (baselineShift: FssTypes.IBaselineShift) = baselineShift |> baselineShiftValue'
         static member sub = FssTypes.Svg.Sub |> baselineShiftValue'
         static member super = FssTypes.Svg.Super |> baselineShiftValue'
 
-    /// <summary>Resets all of an elements properties.</summary>
-    /// <param name="all">
-    ///     can be:
-    ///     - <c> Baselineshift </c>
-    ///     - <c> Length </c>
-    ///     - <c> Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets all of an elements properties.
+    /// Valid parameters:
+    /// - BaselineShift
+    /// - Length
+    /// - Percent
     let BaselineShift' = BaselineShift.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dominant-baseline
@@ -77,6 +71,7 @@ module Svg =
     let private dominantBaselineValue' = stringifyDominantBaseline >> dominantBaselineValue
 
     [<Erase>]
+    /// Specifies the dominant baseline.
     type DominantBaseline =
         static member value (dominantBaseline: FssTypes.IDominantBaseline) = dominantBaseline |> dominantBaselineValue'
         static member ideographic = FssTypes.Svg.DominantBaseline.Ideographic |> dominantBaselineValue'
@@ -90,13 +85,10 @@ module Svg =
         static member textTop = FssTypes.Svg.DominantBaseline.TextTop |> dominantBaselineValue'
         static member auto = FssTypes.Auto |> dominantBaselineValue'
 
-    /// <summary>Specifies the dominant baseline.</summary>
-    /// <param name="all">
-    ///     can be:
-    ///     - <c> DominantBaseline </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the dominant baseline.
+    /// Valid parameters:
+    /// - DominantBaseline
+    /// - Auto
     let DominantBaseline' = DominantBaseline.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/text-anchor
@@ -104,18 +96,14 @@ module Svg =
     let private textAnchorValue' = Utilities.Helpers.duToKebab >> textAnchorValue
 
     [<Erase>]
+    /// Align text.
     type TextAnchor=
         static member value (textAnchor: FssTypes.Svg.TextAnchor) = textAnchor |> textAnchorValue'
         static member start = FssTypes.Svg.TextAnchor.Start |> textAnchorValue'
         static member middle = FssTypes.Svg.TextAnchor.Middle |> textAnchorValue'
         static member end' = FssTypes.Svg.TextAnchor.End |> textAnchorValue'
 
-    /// <summary>Align text.</summary>
-    /// <param name="textAnchor">
-    ///     can be:
-    ///     - <c> TextAnchor</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Align text.
     let TextAnchor' = TextAnchor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/clip-rule
@@ -123,80 +111,65 @@ module Svg =
     let private clipRuleValue' = Utilities.Helpers.duToLowercase >> clipRuleValue
 
     [<Erase>]
+    /// Sets clip of graphic.
     type ClipRule=
         static member value (clipRule: FssTypes.Svg.ClipRule) = clipRule |> clipRuleValue'
         static member nonzero = FssTypes.Svg.ClipRule.Nonzero |> clipRuleValue'
         static member evenodd = FssTypes.Svg.ClipRule.Evenodd |> clipRuleValue'
 
-    /// <summary>Sets clip of graphic.</summary>
-    /// <param name="clipRule">
-    ///     can be:
-    ///     - <c> ClipRule </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets clip of graphic.
     let ClipRule' = ClipRule.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-color
     let private floodColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FloodColor
     let private floodColorValue' = colorToString >> floodColorValue
+
+    /// Specifies color to flood the element with.
     let FloodColor = FssTypes.Color.ColorClass(floodColorValue')
 
-    /// <summary>Specifies color to flood the element with.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color to flood the element with.
     let FloodColor' = FloodColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-opacity
     [<Erase>]
+    /// Specifies the opacity of flood color element.
     type FloodOpacity =
         static member value value =
             FssTypes.propertyHelpers.cssValue FssTypes.Property.FloodOpacity
             <| string (Utilities.Helpers.clamp 0.0 1.0 value)
 
-    /// <summary>Specifies the opacity of flood color element.</summary>
-    /// <param name="floodOpacity"> </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the opacity of flood color element.
     let FloodOpacity' = FloodOpacity.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/lighting-color
     let private lightingColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LightingColor
     let private lightingColorValue' = colorToString >> lightingColorValue
+
+    /// Specifies color of light source for primitive.
     let LightingColor = FssTypes.Color.ColorClass(lightingColorValue')
 
-    /// <summary>Specifies color of light source for primitive.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color of light source for primitive.
     let LightingColor' = LightingColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-color
     let private stopColorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StopColor
     let private stopColorValue' = colorToString >> stopColorValue
+
+    /// Specifies color to use at gradient stop.
     let StopColor = FssTypes.Color.ColorClass(stopColorValue')
 
-    /// <summary>Specifies color to use at gradient stop.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color to use at gradient stop.
     let StopColor' = StopColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-opacity
     [<Erase>]
+    /// Specifies the opacity of the color of a gradient stop.
     type StopOpacity =
         static member value value =
             FssTypes.propertyHelpers.cssValue FssTypes.Property.StopOpacity
             <| string (Utilities.Helpers.clamp 0.0 1.0 value)
 
-    /// <summary>Specifies the opacity of the color of a gradient stop.</summary>
-    /// <param name="stopOpacity"> </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the opacity of the color of a gradient stop.
     let StopOpacity' = StopOpacity.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/color-interpolation
@@ -213,19 +186,14 @@ module Svg =
     let private colorInterpolationValue' = stringifyColorInterpolation >> colorInterpolationValue
 
     [<Erase>]
+    /// Specifies the color space for gradient interpolations, color animations, and alpha compositing.
     type ColorInterpolation =
         static member value (colorInterpolation: FssTypes.IColorInterpolation) = colorInterpolation |> colorInterpolationValue'
         static member sRGB = FssTypes.Svg.ColorInterpolation.Srgb |> colorInterpolationValue'
         static member linearRGB = FssTypes.Svg.ColorInterpolation.LinearRgb |> colorInterpolationValue'
         static member auto = FssTypes.Auto |> colorInterpolationValue'
 
-    /// <summary>specifies the color space for gradient interpolations, color animations, and alpha compositing.</summary>
-    /// <param name="all">
-    ///     can be:
-    ///     - <c> ColorInterpolation </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the color space for gradient interpolations, color animations, and alpha compositing.
     let ColorInterpolation' = ColorInterpolation.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/color-interpolation-filters
@@ -242,44 +210,35 @@ module Svg =
     let private colorInterpolationFiltersValue' = stringifyColorInterpolationFilters >> colorInterpolationFiltersValue
 
     [<Erase>]
+    /// specifies the color space for imaging operations performed via filter effects.
     type ColorInterpolationFilters =
         static member value (colorInterpolationFilters: FssTypes.IColorInterpolationFilters) = colorInterpolationFilters |> colorInterpolationFiltersValue'
         static member sRGB = FssTypes.Svg.ColorInterpolationFilters.Srgb |> colorInterpolationFiltersValue'
         static member linearRGB = FssTypes.Svg.ColorInterpolationFilters.LinearRgb |> colorInterpolationFiltersValue'
         static member auto = FssTypes.Auto |> colorInterpolationFiltersValue'
 
-    /// <summary>specifies the color space for imaging operations performed via filter effects..</summary>
-    /// <param name="all">
-    ///     can be:
-    ///     - <c> ColorInterpolationFilters </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// specifies the color space for imaging operations performed via filter effects.
     let ColorInterpolationFilters' = ColorInterpolationFilters.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-color
     let private fillValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Fill
     let private fillValue' = colorToString >> fillValue
-    let Fill= FssTypes.Color.ColorClass(fillValue')
 
-    /// <summary>Specifies element color.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies element color.
+    let Fill = FssTypes.Color.ColorClass(fillValue')
+
+    /// Specifies element color.
     let Fill' = Fill.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-opacity
     [<Erase>]
+    /// Specifies element color opacity.
     type FillOpacity =
         static member value value =
             FssTypes.propertyHelpers.cssValue FssTypes.Property.FillOpacity
             <| string (Utilities.Helpers.clamp 0.0 1.0 value)
 
-    /// <summary>Specifies element color opacity.</summary>
-    /// <param name="fillOpacity"> </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies element color opacity.
     let FillOpacity' = FillOpacity.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule
@@ -303,19 +262,17 @@ module Svg =
     let private imageRenderingValue' = stringifyImageRendering >> imageRenderingValue
 
     [<Erase>]
+    /// Specifies how the browser should deal with image in regards to speed versus quality.
     type ImageRendering =
         static member value (imageRendering: FssTypes.ISVGImageRendering) = imageRendering |> imageRenderingValue'
         static member optimizeSpeed = FssTypes.Svg.ImageRendering.OptimizeSpeed |> imageRenderingValue'
         static member optimizeQuality = FssTypes.Svg.ImageRendering.OptimizeQuality |> imageRenderingValue'
         static member auto = FssTypes.Auto |> imageRenderingValue'
 
-    /// <summary>Specifies how the browser should deal with image in regards to speed versus quality.</summary>
-    /// <param name="all">
-    ///     can be:
-    ///     - <c> ImageRendering </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how the browser should deal with image in regards to speed versus quality.
+    /// Valid parameters:
+    /// - ImageRendering
+    /// - Auto
     let ImageRendering' = ImageRendering.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering
@@ -329,6 +286,7 @@ module Svg =
     let private shapeRenderingValue' = stringifyShapeRendering >> shapeRenderingValue
 
     [<Erase>]
+    /// Specifies how the browser should deal with tradeoffs when rendering shapes.
     type ShapeRendering =
         static member value (shapeRendering: FssTypes.IShapeRendering) = shapeRendering |> shapeRenderingValue'
         static member optimizeSpeed = FssTypes.Svg.ShapeRendering.OptimizeSpeed |> shapeRenderingValue'
@@ -336,64 +294,55 @@ module Svg =
         static member geometricPrecision = FssTypes.Svg.ShapeRendering.GeometricPrecision |> shapeRenderingValue'
         static member auto = FssTypes.Auto |> shapeRenderingValue'
 
-    /// <summary>Specifies how the browser should deal with tradeoffs when rendering shapes.</summary>
-    /// <param name="all">
-    ///     can be:
-    ///     - <c> ShapeRendering </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how the browser should deal with tradeoffs when rendering shapes.
+    /// Valid parameters:
+    /// - ShapeRendering
+    /// - Auto
     let ShapeRendering' = ShapeRendering.value
 
    // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke
     let private strokeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Stroke
     let private strokeValue' = colorToString >> strokeValue
+
+    /// Specifies color to stroke the element with.
     let Stroke = FssTypes.Color.ColorClass(strokeValue')
 
-    /// <summary>Specifies color to stroke the element with.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> FssTypes.ColorType</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies color to stroke the element with.
     let Stroke' = Stroke.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-opacity
     [<Erase>]
+    /// Specifies the opacity of stroke color element.
     type StrokeOpacity =
         static member value value =
             FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeOpacity
             <| string (Utilities.Helpers.clamp 0.0 1.0 value)
 
-    /// <summary>Specifies the opacity of stroke color element.</summary>
-    /// <param name="strokeOpacity"> </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the opacity of stroke color element.
     let StrokeOpacity' = StrokeOpacity.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray
     let private strokeDasharrayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeDasharray
 
     [<Erase>]
+    /// Specifies the pattern of dashes and gaps used to paint the outline of the shape.
     type StrokeDasharray =
         static member value (strokeDasharray: int list) =
             strokeDasharray |> Utilities.Helpers.combineComma string |> strokeDasharrayValue
 
-    /// <summary>Specifies the pattern of dashes and gaps used to paint the outline of the shape.</summary>
-    /// <param name="strokeDasharray"> </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the pattern of dashes and gaps used to paint the outline of the shape.
     let StrokeDasharray' = StrokeDasharray.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dashoffset
     let private strokeDashoffsetValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeDashoffset
 
     [<Erase>]
+    /// Specifies the offset when drawing the stroke dash array.
     type StrokeDashoffset =
         static member value (strokeDashoffset: int list) =
             strokeDashoffset |> Utilities.Helpers.combineComma string |> strokeDashoffsetValue
 
-    /// <summary>Specifies the offset when drawing the stroke dash array.</summary>
-    /// <param name="strokeDashoffset"> </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the offset when drawing the stroke dash array.
     let StrokeDashoffset' = StrokeDashoffset.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap
@@ -401,18 +350,14 @@ module Svg =
     let private strokeLinecapValue' = Utilities.Helpers.duToKebab >> strokeLinecapValue
 
     [<Erase>]
+    /// Define the shape used at open subpaths when they are stroked.
     type StrokeLinecap=
         static member value (strokeLinecap: FssTypes.Svg.StrokeLinecap) = strokeLinecap |> strokeLinecapValue'
         static member butt = FssTypes.Svg.StrokeLinecap.Butt |> strokeLinecapValue'
         static member round = FssTypes.Svg.StrokeLinecap.Round |> strokeLinecapValue'
         static member square = FssTypes.Svg.StrokeLinecap.Square |> strokeLinecapValue'
 
-    /// <summary>Define the shape used at open subpaths when they are stroked.</summary>
-    /// <param name="strokeLinecap">
-    ///     can be:
-    ///     - <c> StrokeLinecap</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Define the shape used at open subpaths when they are stroked.
     let StrokeLinecap' = StrokeLinecap.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin
@@ -428,25 +373,19 @@ module Svg =
         static member miterClip = FssTypes.Svg.StrokeLinejoin.MiterClip |> strokeLinejoinValue'
         static member round = FssTypes.Svg.StrokeLinejoin.Round |> strokeLinejoinValue'
 
-    /// <summary>Define the shape used at corners of paths when they are stroked.</summary>
-    /// <param name="strokeLinejoin">
-    ///     can be:
-    ///     - <c> StrokeLinejoin</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Define the shape used at corners of paths when they are stroked.
     let StrokeLinejoin' = StrokeLinejoin.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-miterlimit
     let private strokeMiterlimitValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.StrokeMiterlimit
 
     [<Erase>]
+    /// Limits ratio of miter length to stroke width when used to draw miter join.
     type StrokeMiterlimit =
         static member value (strokeMiterlimit: int) =
             strokeMiterlimit |> string |> strokeMiterlimitValue
 
-    /// <summary>Limits ratio of miter length to stokre width when used to draw miter join.</summary>
-    /// <param name="strokeMiterlimit"> </param>
-    /// <returns>Css property for fss.</returns>
+    /// Limits ratio of miter length to stroke width when used to draw miter join.
     let StrokeMiterlimit' = StrokeMiterlimit.value
 
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width
@@ -454,14 +393,9 @@ module Svg =
     let private strokeWidthValue' = FssTypes.unitHelpers.lengthPercentageToString >> strokeWidthValue
 
     [<Erase>]
+    /// Specifies size of stroke width.
     type StrokeWidth =
         static member value (size: FssTypes.ILengthPercentage) = size |> strokeWidthValue'
 
-    /// <summary>Specifies size of stroke width.</summary>
-    /// <param name="width">
-    ///     can be:
-    ///     - <c> Length </c>
-    ///     - <c> Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies size of stroke width.
     let StrokeWidth' = StrokeWidth.value

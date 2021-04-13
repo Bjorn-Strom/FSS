@@ -23,6 +23,7 @@ module Word =
     let private spacingCssValue' = spacingToString >> spacingCssValue
 
     [<Erase>]
+    /// Specifies length of space between words.
     type WordSpacing =
         static member value (spacing: FssTypes.IWordSpacing) = spacing |> spacingCssValue'
 
@@ -31,17 +32,14 @@ module Word =
         static member inherit' = FssTypes.Inherit |> spacingCssValue'
         static member unset = FssTypes.Unset |> spacingCssValue'
 
-    /// <summary>Specifies length of space between words.</summary>
-    /// <param name="spacing">
-    ///     can be:
-    ///     - <c> Length </c>
-    ///     - <c> Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies length of space between words.
+    /// Valid parameters:
+    /// - Length
+    /// - Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
     let WordSpacing' = WordSpacing.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
@@ -49,6 +47,7 @@ module Word =
     let private breakCssValue' = breakToString >> breakCssValue
 
     [<Erase>]
+    /// Specify when line breaks should happen.
     type WordBreak =
         static member value (spacing: FssTypes.IWordBreak) = spacing |> breakCssValue'
         static member wordBreak = FssTypes.WordBreak.WordBreak |> breakCssValue'
@@ -60,15 +59,12 @@ module Word =
         static member inherit' = FssTypes.Inherit |> breakCssValue'
         static member unset = FssTypes.Unset |> breakCssValue'
 
-    /// <summary>Specify when line breaks should happen.</summary>
-    /// <param name="break'">
-    ///     can be:
-    ///     - <c> WordBreak </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specify when line breaks should happen.
+    /// Valid parameters:
+    /// - WordBreak
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let WordBreak' = WordBreak.value
 

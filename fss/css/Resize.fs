@@ -15,6 +15,7 @@ module Resize =
     let private resizeValue' = resizeToString >> resizeValue
 
     [<Erase>]
+    /// Specifies how elements are resizable.
     type Resize =
         static member value (resize: FssTypes.IResize) = resize |> resizeValue'
         static member both = FssTypes.Resize.Both |> resizeValue'
@@ -27,14 +28,11 @@ module Resize =
         static member inherit' = FssTypes.Inherit |> resizeValue'
         static member unset = FssTypes.Unset |> resizeValue'
 
-    /// <summary>Specifies how elemnts are resizable.</summary>
-    /// <param name="resize">
-    ///     can be:
-    ///     - <c> Resize </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how elements are resizable.
+    /// Valid parameters:
+    /// - Resize
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
     let Resize' = Resize.value

@@ -42,6 +42,7 @@ module Animation =
     let private directionCssValue' = animationDirectionToString >> directionCssValue
 
     [<Erase>]
+    /// Specifies which direction an animation should play.
     type AnimationDirection =
         static member value (direction: FssTypes.IAnimationDirection) = direction |> directionCssValue'
         static member reverse = FssTypes.Animation.Direction.Reverse |> directionCssValue'
@@ -53,26 +54,27 @@ module Animation =
         static member initial = FssTypes.Initial |> directionCssValue'
         static member unset = FssTypes.Unset |> directionCssValue'
 
-    /// <summary>Sets which direction an animation should play. </summary>
-    /// <param name="direction">
-    ///     can be:
-    ///     - <c> AnimationDirection </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Normal </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies which direction an animation should play.
+    /// Valid parameters:
+    /// - AnimationDirection
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Normal
     let AnimationDirection' = directionCssValue'
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
     let private animationDurationCssValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.AnimationDuration
 
     [<Erase>]
+    /// Specifies how long an animation takes to complete a cycle.
     type AnimationDuration =
         static member value (duration: FssTypes.Time) = animationDurationCssValue (FssTypes.unitHelpers.timeToString duration)
         static member values = Utilities.Helpers.combineComma FssTypes.unitHelpers.timeToString >> animationDurationCssValue
 
+    /// Specifies how long an animation takes to complete a cycle.
+    /// Valid parameters:
+    /// - Time
     let AnimationDuration' = AnimationDuration.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
@@ -80,6 +82,7 @@ module Animation =
     let private fillModeCssValue' = animationFillModeToString >> fillModeCssValue
 
     [<Erase>]
+    /// Sets how an animation applies styles before and after its run
     type AnimationFillMode =
         static member value (fillMode: FssTypes.IAnimationFillMode) = fillMode |> fillModeCssValue'
         static member forwards = FssTypes.Animation.FillMode.Forwards |> fillModeCssValue'
@@ -87,6 +90,10 @@ module Animation =
         static member both = FssTypes.Animation.FillMode.Both |> fillModeCssValue'
         static member none = FssTypes.None' |> fillModeCssValue'
 
+    /// Sets how an animation applies styles before and after its run
+    /// Valid parameters:
+    /// - AnimationDirection
+    /// - None
     let AnimationFillMode' = AnimationFillMode.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count
@@ -94,6 +101,7 @@ module Animation =
     let private iterationCountCssValue' = FssTypes.animationHelpers.iterationCountToString >> iterationCountCssValue
 
     [<Erase>]
+    /// Specifies how many times an animation should be played before stopping.
     type AnimationIterationCount =
         static member value (count: FssTypes.IAnimationIterationCount) = count |> iterationCountCssValue'
         static member values (values: FssTypes.IAnimationIterationCount list) =
@@ -102,13 +110,10 @@ module Animation =
             |> iterationCountCssValue
         static member infinite = FssTypes.Animation.IterationCount.Infinite |> FssTypes.animationHelpers.iterationCountToString |> iterationCountCssValue
 
-    /// <summary>How many times should an animation be played.</summary>
-    /// <param name="iterationCount">
-    ///     can be:
-    ///     - <c> Infinite </c>
-    ///     - <c> CssInt </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how many times an animation should be played before stopping.
+    /// Valid parameters:
+    /// - CssInt
+    /// - Infinite
     let AnimationIterationCount' = AnimationIterationCount.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
@@ -116,6 +121,7 @@ module Animation =
     let private nameValue' = nameToString >> nameValue
 
     [<Erase>]
+    /// Specifies which animation to play
     type AnimationName =
         static member name (name: FssTypes.IAnimationName) = name |> nameValue'
         static member names (names: FssTypes.IAnimationName list) = Utilities.Helpers.combineComma nameToString names |> nameValue
@@ -124,17 +130,13 @@ module Animation =
         static member initial = FssTypes.Initial |> nameValue'
         static member unset = FssTypes.Unset |> nameValue'
 
-    /// <summary>Specifies which animation to play.</summary>
-    /// <param name="name">
-    ///     can be:
-    ///     - <c> The result of a keyframe function </c>
-    ///     - <c> CssString </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies which animation to play.
+    /// Valid parameters:
+    /// - CssString
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let AnimationName' = AnimationName.name
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
@@ -142,6 +144,7 @@ module Animation =
     let private playStateCssValue' = playStateTypeToString >> playStateCssValue
 
     [<Erase>]
+    /// Sets if the animation is running or paused
     type AnimationPlayState =
         static member value (playState: FssTypes.IAnimationPlayState) = playState |> playStateCssValue'
         static member running = FssTypes.Animation.PlayState.Running |> playStateCssValue'
@@ -150,15 +153,12 @@ module Animation =
         static member initial = FssTypes.Initial |> playStateCssValue'
         static member unset = FssTypes.Unset |> playStateCssValue'
 
-    /// <summary>Sets if the animation is running or paused.</summary>
-    /// <param name="playState">
-    ///     can be:
-    ///     - <c> AnimationPlayState </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets if the animation is running or paused.
+    /// Valid parameters:
+    /// - AnimationPlayState
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let AnimationPlayState' = AnimationPlayState.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
@@ -166,6 +166,7 @@ module Animation =
     let private timingFunctionCssValue': (FssTypes.ITransitionTimingFunction -> FssTypes.CssProperty) = FssTypes.timingFunctionHelpers.timingToString >> timingFunctionCssValue
 
     [<Erase>]
+    /// Specifies how the animation should be played.
     type AnimationTimingFunction =
         static member value (timingFunction: FssTypes.TimingFunction.Timing) = timingFunction |> FssTypes.timingFunctionHelpers.timingToString
         static member values (timings: FssTypes.TimingFunction.Timing list) = timingFunctionCssValue <| Utilities.Helpers.combineComma FssTypes.timingFunctionHelpers.timingToString timings
@@ -185,13 +186,10 @@ module Animation =
         static member initial = FssTypes.Initial |> timingFunctionCssValue'
         static member unset = FssTypes.Unset |> timingFunctionCssValue'
 
-    /// <summary>Specifies how the animation should be played.</summary>
-    /// <param name="timing">
-    ///     can be:
-    ///     - <c> AnimationTimingFunction </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how the animation should be played.
+    /// Valid parameters:
+    /// - AnimationTimingFunction
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let AnimationTimingFunction' = AnimationTimingFunction.value

@@ -19,6 +19,7 @@ module Content =
     let private contentValue': (FssTypes.IContent -> FssTypes.CssProperty) = contentTypeToString >> contentValue
 
     [<Erase>]
+    /// Replaces element with a value.
     type Content =
         static member openQuote = FssTypes.Content.OpenQuote |> contentValue'
         static member closeQuote = FssTypes.Content.CloseQuote |> contentValue'
@@ -78,30 +79,26 @@ module Content =
         static member initial = FssTypes.Initial |> contentValue'
         static member unset = FssTypes.Unset |> contentValue'
 
-    /// <summary>Replaces element with a value.</summary>
-    /// <param name="content">
-    ///     can be:
-    ///     - <c> Content </c>
-    ///     - <c> CssString </c>
-    ///     - <c> Normal </c>
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> CounterStyle </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Replaces element with a value.
+    /// Valid parameters:
+    /// - Content
+    /// - CssString
+    /// - Normal
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - CounterStyle
     let Content': (FssTypes.IContent -> FssTypes.CssProperty) = Content.value
 
 [<AutoOpen>]
 module Label =
     [<Erase>]
+    /// Gives label to generated CSS string.
     type Label =
         static member value(label: string) =
             (label.Replace(" ", ""))
             |> FssTypes.propertyHelpers.cssValue FssTypes.Property.Label
 
-    /// <summary>Gives label to generated CSS string.</summary>
-    /// <param name="label">The name to give to the generated CSS string</param>
-    /// <returns>Css property for fss.</returns>
+    /// Gives label to generated CSS string.
     let Label' = Label.value

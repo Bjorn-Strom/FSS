@@ -130,7 +130,9 @@ module Transform =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
     let private originValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransformOrigin
     let private originValue' = originToString >> originValue
+
     [<Erase>]
+    /// Specifies the origin of an elements transformation.
     type TransformOrigin =
         static member value (value: FssTypes.ITransformOrigin) = value |> originValue'
         static member value (xOffset: FssTypes.ITransformOrigin, yOffset: FssTypes.ITransformOrigin) =
@@ -155,23 +157,22 @@ module Transform =
         static member initial = FssTypes.Initial |> originValue'
         static member unset = FssTypes.Unset |> originValue'
 
-    /// <summary>Specifies the origin of an elements transformation.</summary>
-    /// <param name="origin">
-    ///     can be:
-    ///     - <c> TransformOrigin </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the origin of an elements transformation.
+    /// Valid parameters:
+    /// - TransformOrigin
+    /// - Units.Size
+    /// - Units.Percent
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TransformOrigin' = TransformOrigin.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
     let private styleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.TransformStyle
     let private styleValue' = styleToString >> styleValue
+
     [<Erase>]
+    /// Specifies the whether children of an element are positioned flat or in 3d.
     type TransformStyle =
         static member value (value: FssTypes.ITransformStyle) = value |> styleValue'
 
@@ -182,14 +183,11 @@ module Transform =
         static member initial = FssTypes.Initial |> styleValue'
         static member unset = FssTypes.Unset |> styleValue'
 
-    /// <summary>Specifies the whether children of an element are positioned flat or in 3d.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> TransformStyle </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the whether children of an element are positioned flat or in 3d.
+    /// Valid parameters
+    /// - TransformStyle
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let TransformStyle' = TransformStyle.value
 

@@ -4,7 +4,6 @@ open Fable.Core
 
 [<AutoOpen>]
 module Flex =
-
     let private alignContentToString (alignment: FssTypes.IAlignContent) =
         match alignment with
         | :? FssTypes.Flex.AlignContent as a -> Utilities.Helpers.duToKebab a
@@ -98,6 +97,7 @@ module Flex =
     let private alignContentValue' = alignContentToString >> alignContentValue
 
     [<Erase>]
+    /// Aligns elements vertically in flex.
     type AlignContent =
         static member value (alignment: FssTypes.IAlignContent) = alignment |> alignContentValue'
         static member start' = FssTypes.Flex.AlignContent.Start |> alignContentValue'
@@ -120,16 +120,13 @@ module Flex =
         static member initial = FssTypes.Initial |> alignContentValue'
         static member unset = FssTypes.Unset |> alignContentValue'
 
-    /// <summary>Aligns elements vertically in flex.</summary>
-    /// <param name="align">
-    ///     can be:
-    ///     - <c> AlignContent </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Aligns elements vertically in flex.
+    /// Valid parameters:
+    /// - AlignContent
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let AlignContent' = AlignContent.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
@@ -137,6 +134,7 @@ module Flex =
     let private alignItemsValue' = alignItemsToString >> alignItemsValue
 
     [<Erase>]
+    /// Aligns elements along cross axis along the main axis in flex.
     type AlignItems =
         static member value (alignment: FssTypes.IAlignItems) = alignment |> alignItemsValue'
         static member start = FssTypes.Flex.AlignItems.Start |> alignItemsValue'
@@ -158,16 +156,13 @@ module Flex =
         static member initial = FssTypes.Initial |> alignItemsValue'
         static member unset = FssTypes.Unset |> alignItemsValue'
 
-    /// <summary>Aligns elements along cross axis along the main axis in flex.</summary>
-    /// <param name="align">
-    ///     can be:
-    ///     - <c> AlignContent </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Aligns elements along cross axis along the main axis in flex.
+    /// Valid parameters:
+    /// - AlignContent
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let AlignItems' = AlignItems.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
@@ -175,6 +170,7 @@ module Flex =
     let private alignSelfValue' = alignSelfToString >> alignSelfValue
 
     [<Erase>]
+    /// Overrides an elements align-items value.
     type AlignSelf =
         static member value (alignment: FssTypes.IAlignSelf) = alignment |> alignSelfValue'
         static member start = FssTypes.Flex.AlignSelf.Start |> alignSelfValue'
@@ -196,16 +192,13 @@ module Flex =
         static member initial = FssTypes.Initial |> alignSelfValue'
         static member unset = FssTypes.Unset |> alignSelfValue'
 
-    /// <summary>Overrides an elements <c>align-items</c> value-.</summary>
-    /// <param name="align">
-    ///     can be:
-    ///     - <c> AlignContent </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Overrides an elements align-items value.
+    /// Valid parameters:
+    /// - AlignContent
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let AlignSelf' = AlignSelf.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
@@ -213,6 +206,7 @@ module Flex =
     let private justifyContentValue': (FssTypes.IJustifyContent -> FssTypes.CssProperty) = justifyContentToString >> justifyContentValue
 
     [<Erase>]
+    /// Aligns elements horizontally in flex.
     type JustifyContent =
         static member value (justification: FssTypes.IJustifyContent) = justification |> justifyContentValue'
         static member start = FssTypes.Flex.JustifyContent.Start |> justifyContentValue'
@@ -237,16 +231,13 @@ module Flex =
         static member initial = FssTypes.Initial |> justifyContentValue'
         static member unset = FssTypes.Unset |> justifyContentValue'
 
-    /// <summary>Aligns elements horizontally in flex.</summary>
-    /// <param name="align">
-    ///     can be:
-    ///     - <c> JustifyContent </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Aligns elements horizontally in flex.
+    /// Valid parameters:
+    /// - JustifyContent
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let JustifyContent' = JustifyContent.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
@@ -254,6 +245,7 @@ module Flex =
     let private justifyItemsValue' = justifyItemsToString >> justifyItemsValue
 
     [<Erase>]
+    /// Specifies default justify-self for items of element.
     type JustifyItems =
         static member value (justification: FssTypes.IJustifyItems) = justification |> justifyItemsValue'
         static member start = FssTypes.Flex.JustifyItems.Start |> justifyItemsValue'
@@ -278,22 +270,21 @@ module Flex =
         static member initial = FssTypes.Initial |> justifyItemsValue'
         static member unset = FssTypes.Unset |> justifyItemsValue'
 
-    /// <summary>Specifies default <c>justify-self</c> for items of element.</summary>
-    /// <param name="align">
-    ///     can be:
-    ///     - <c> JustifyItems </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies default justify-self for items of element.
+    /// Valid parameters:
+    /// - JustifyItems
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let JustifyItems' = JustifyItems.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
     let private justifySelfValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.JustifySelf
     let private justifySelfValue' = justifySelfToString >> justifySelfValue
+
     [<Erase>]
+    /// Specifies how elements are justified in its container.
     type JustifySelf =
         static member value (justification: FssTypes.IJustifySelf) = justification |> justifySelfValue'
         static member start = FssTypes.Flex.JustifySelf.Start |> justifySelfValue'
@@ -315,16 +306,13 @@ module Flex =
         static member initial = FssTypes.Initial |> justifySelfValue'
         static member unset = FssTypes.Unset |> justifySelfValue'
 
-    /// <summary>Specifies how elements are justified in its container.</summary>
-    /// <param name="align">
-    ///     can be:
-    ///     - <c> JustifySelf </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how elements are justified in its container.
+    /// Valid parameters:
+    /// - JustifySelf
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let JustifySelf' = JustifySelf.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
@@ -332,6 +320,7 @@ module Flex =
     let private flexDirectionValue' = flexDirectionToString >> flexDirectionValue
 
     [<Erase>]
+    /// Specifies in which direction items in a flex container are oriented.
     type FlexDirection =
         static member value (direction: FssTypes.IFlexDirection) = direction |> flexDirectionValue'
         static member row = FssTypes.Flex.Direction.Row |> flexDirectionValue'
@@ -343,21 +332,20 @@ module Flex =
         static member initial = FssTypes.Initial |> flexDirectionValue'
         static member unset = FssTypes.Unset |> flexDirectionValue'
 
-    /// <summary>Specifies in which direction items in a flex container are oriented.</summary>
-    /// <param name="direction">
-    ///     can be:
-    ///     - <c> FlexDirection </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies in which direction items in a flex container are oriented.
+    /// Valid parameters:
+    /// - FlexDirection
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let FlexDirection' = FlexDirection.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
     let private flexWrapValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FlexWrap
     let private flexWrapValue' = flexWrapToString >> flexWrapValue
+
     [<Erase>]
+    /// Specifies if flex items can wrap onto multiple lines.
     type FlexWrap =
         static member value (direction: FssTypes.IFlexWrap) = direction |> flexWrapValue'
         static member noWrap = FssTypes.Flex.NoWrap |> flexWrapValue'
@@ -368,15 +356,12 @@ module Flex =
         static member initial = FssTypes.Initial |> flexWrapValue'
         static member unset = FssTypes.Unset |> flexWrapValue'
 
-    /// <summary>Specifies if flex items can wrap onto multiple lines.</summary>
-    /// <param name="wrap">
-    ///     can be:
-    ///     - <c> FlexDirection </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies if flex items can wrap onto multiple lines.
+    /// Valid parameters:
+    /// - FlexDirection
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let FlexWrap' = FlexWrap.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/order
@@ -390,15 +375,11 @@ module Flex =
         static member initial = FssTypes.Initial |> orderValue'
         static member unset = FssTypes.Unset |> orderValue'
 
-    /// <summary>Specify order of items in flex.</summary>
-    /// <param name="order">
-    ///     can be:
-    ///     - <c> CssInt </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specify order of items in flex.
+    /// - CssInt
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let Order' = Order.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
@@ -406,6 +387,7 @@ module Flex =
     let private flexGrowValue' = flexGrowToString >> flexGrowValue
 
     [<Erase>]
+    /// Sets grow factor of flex item.
     type FlexGrow =
         static member value (grow: FssTypes.IFlexGrow) = grow |> flexGrowValue'
 
@@ -413,15 +395,12 @@ module Flex =
         static member initial = FssTypes.Initial |> flexGrowValue'
         static member unset = FssTypes.Unset |> flexGrowValue'
 
-    /// <summary>Sets grow factor of flex item.</summary>
-    /// <param name="grow">
-    ///     can be:
-    ///     - <c> CssFloat </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets grow factor of flex item.
+    /// Valid parameters:
+    /// - CssFloat
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let FlexGrow' = FlexGrow.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
@@ -429,21 +408,19 @@ module Flex =
     let private flexShrinkValue' = flexShrinkToString >> flexShrinkValue
 
     [<Erase>]
+    /// Sets shrink factor of flex item.
     type FlexShrink =
         static member value (shrink: FssTypes.IFlexShrink) = shrink |> flexShrinkValue'
         static member inherit' = FssTypes.Inherit |> flexShrinkValue'
         static member initial = FssTypes.Initial |> flexShrinkValue'
         static member unset =  FssTypes.Unset |> flexShrinkValue'
 
-    /// <summary>Sets shrink factor of flex item.</summary>
-    /// <param name="shrink">
-    ///     can be:
-    ///     - <c> CssFloat </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets shrink factor of flex item.
+    /// Valid parameters:
+    /// - CssFloat
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let FlexShrink' = FlexShrink.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
@@ -451,6 +428,7 @@ module Flex =
     let private flexBasisValue' = flexBasisToString >> flexBasisValue
 
     [<Erase>]
+    /// Sets initial main size of flex item.
     type FlexBasis =
         static member value (basis: FssTypes.IFlexBasis) = basis |> flexBasisValue'
         static member fill = FssTypes.Flex.Basis.Fill |> flexBasisValue'
@@ -464,16 +442,13 @@ module Flex =
         static member initial = FssTypes.Initial |> flexBasisValue'
         static member unset = FssTypes.Unset |> flexBasisValue'
 
-    /// <summary>Sets initial main size of flex item.</summary>
-    /// <param name="basis">
-    ///     can be:
-    ///     - <c> FlexBasis </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Units.Size </c>
-    ///     - <c> Units.Percent </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets initial main size of flex item.
+    /// Valid parameters:
+    /// - FlexBasis
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    /// - Units.Size
+    /// - Units.Percent
     let FlexBasis' = FlexBasis.value

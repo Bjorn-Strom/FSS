@@ -32,6 +32,7 @@ module ListStyle =
     let private listStyleValue' = listStyleToString >> listStyleValue
 
     [<Erase>]
+    /// Resets list style.
     type ListStyle =
         static member value (style: FssTypes.IListStyle) = style |> listStyleValue'
 
@@ -40,15 +41,11 @@ module ListStyle =
         static member initial = FssTypes.Initial |> listStyleValue'
         static member unset = FssTypes.Unset |> listStyleValue'
 
-    /// <summary>Resets list style.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets list style.
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let ListStyle' = ListStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
@@ -56,6 +53,7 @@ module ListStyle =
     let private listStyleImageValue' = listStyleImageToString >> listStyleImageValue
 
     [<Erase>]
+    /// Specifies an image to be used as the list item marker.
     type ListStyleImage =
         static member value (styleImage: FssTypes.IListStyleImage) = styleImage |> listStyleImageValue'
         static member url (url: string) = FssTypes.ListStyle.Image url |> listStyleImageValue'
@@ -65,16 +63,13 @@ module ListStyle =
         static member initial = FssTypes.Initial |> listStyleImageValue'
         static member unset = FssTypes.Unset |> listStyleImageValue'
 
-    /// <summary>Specifies an image to be used as the list item marker..</summary>
-    /// <param name="image">
-    ///     can be:
-    ///     - <c> ListStyleImage</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies an image to be used as the list item marker.
+    /// Valid parameters:
+    /// - ListStyleImage</c>
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let ListStyleImage' = ListStyleImage.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
@@ -82,6 +77,7 @@ module ListStyle =
     let private listStylePositionProperty' = stylePositionToString >> listStylePositionProperty
 
     [<Erase>]
+    /// Specifies the position of the marker of the list item.
     type ListStylePosition =
         static member value (stylePosition: FssTypes.IListStylePosition) = stylePosition |> listStylePositionProperty'
         static member inside = FssTypes.ListStyle.Inside |> listStylePositionProperty'
@@ -91,21 +87,20 @@ module ListStyle =
         static member initial = FssTypes.Initial |> listStylePositionProperty'
         static member unset = FssTypes.Unset |> listStylePositionProperty'
 
-    /// <summary>Specifies the position of the marker of the list item.</summary>
-    /// <param name="position">
-    ///     can be:
-    ///     - <c> ListStylePosition</c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies the position of the marker of the list item.
+    /// Valid parameters:
+    /// - ListStylePosition</c>
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let ListStylePosition' = ListStylePosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
     let private listStyleTypeProperty = FssTypes.propertyHelpers.cssValue FssTypes.Property.ListStyleType
     let private listStyleTypeProperty' = FssTypes.listStyleHelpers.styleTypeToString >> listStyleTypeProperty
+
     [<Erase>]
+    /// Specifies list style marker.
     type ListStyleType =
         static member value (styleType: FssTypes.IListStyleType) = styleType |> listStyleTypeProperty'
         static member value(counter: FssTypes.Counter.Style) = FssTypes.counterStyleHelpers.counterStyleToString counter |> listStyleTypeProperty
@@ -170,16 +165,13 @@ module ListStyle =
         static member initial = FssTypes.Initial |> listStyleTypeProperty'
         static member unset = FssTypes.Unset |> listStyleTypeProperty'
 
-    /// <summary>Specifies list style marker.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> ListStyleType</c>
-    ///     - <c> CounterStyle </c>
-    ///     - <c> CssString </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies list style marker.
+    /// Valid parameters:
+    /// - ListStyleType
+    /// - CounterStyle
+    /// - CssString
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let ListStyleType': (FssTypes.IListStyleType -> FssTypes.CssProperty) = ListStyleType.value

@@ -16,6 +16,7 @@ module Cursor =
     let private cursorValue' = cursorToString >> cursorValue
 
     [<Erase>]
+    /// Specifies how elements behave before a generated box.
     type Cursor =
         static member value (url: string) = sprintf "url(%s)" url |> cursorValue
         static member value (url: string, x: int, y: int) = sprintf "url(%s) %d %d" url x y |> cursorValue
@@ -58,15 +59,12 @@ module Cursor =
         static member unset = FssTypes.Unset |> cursorValue'
         static member none = FssTypes.None' |> cursorValue'
 
-    /// <summary>Specifies how elements behave before a generated box.</summary>
-    /// <param name="cursor">
-    ///     can be:
-    ///     - <c> Cursor </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how elements behave before a generated box.
+    /// Valid parameters:
+    /// - Cursor
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    /// - None
     let Cursor': (FssTypes.ICursor -> FssTypes.CssProperty) = Cursor.value

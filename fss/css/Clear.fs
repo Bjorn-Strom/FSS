@@ -16,6 +16,7 @@ module Clear =
     let private clearValue' = stringifyClear >> clearValue
 
     [<Erase>]
+    /// Specifies how if an element is to be moved downwards by floating elements.
     type Clear =
         static member value (clear: FssTypes.IClear) = clear |> clearValue'
         static member none = FssTypes.None' |> clearValue'
@@ -23,13 +24,10 @@ module Clear =
         static member initial = FssTypes.Initial |> clearValue'
         static member unset = FssTypes.Unset |> clearValue'
 
-    /// <summary>Specifies how if an element is to be moved downwards by floating elements.</summary>
-    /// <param name="clear">
-    ///     can be:
-    ///     - <c> None </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how if an element is to be moved downwards by floating elements.
+    /// Valid parameters:
+    /// - None
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let Clear' = Clear.value

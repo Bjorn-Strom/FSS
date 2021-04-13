@@ -15,6 +15,7 @@ module Mask =
     let private maskClipValue' = stringifyClip >> maskClipValue
 
     [<Erase>]
+    /// Specifies which area is affected by a mask.
     type MaskClip =
         static member value (clip: FssTypes.IMaskClip) = clip |> maskClipValue'
         static member value (clips: FssTypes.Mask.Clip list) =
@@ -37,15 +38,12 @@ module Mask =
         static member initial = FssTypes.Initial |> maskClipValue'
         static member unset = FssTypes.Unset |> maskClipValue'
 
-    /// <summary>Specifies which area is affected by a mask.</summary>
-    /// <param name="clip">
-    ///     can be:
-    ///     - <c> MaskClip </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies which area is affected by a mask.
+    /// Valid parameters:
+    /// - MaskClip
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let MaskClip': (FssTypes.IMaskClip -> FssTypes.CssProperty) = MaskClip.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite
@@ -59,6 +57,7 @@ module Mask =
     let private maskCompositeValue' = stringifyComposite >> maskCompositeValue
 
     [<Erase>]
+    /// Allows composing of masks with masks under it.
     type MaskComposite =
         static member value (clip: FssTypes.IMaskComposite) = clip |> maskCompositeValue'
         static member value (clips: FssTypes.Mask.Composite list) =
@@ -73,15 +72,12 @@ module Mask =
         static member initial = FssTypes.Initial |> maskCompositeValue'
         static member unset = FssTypes.Unset |> maskCompositeValue'
 
-    /// <summary>Allows composing of masks with masks under it.</summary>
-    /// <param name="clip">
-    ///     can be:
-    ///     - <c> MaskComposite </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Allows composing of masks with masks under it.
+    /// Valid parameters:
+    /// - MaskComposite
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let MaskComposite': (FssTypes.IMaskComposite -> FssTypes.CssProperty) = MaskComposite.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
@@ -95,6 +91,7 @@ module Mask =
     let private imageValue' = imageSourceToString >> imageValue
 
     [<Erase>]
+    /// Specifies width of border image.
     type MaskImage =
         static member value (source: FssTypes.IMaskImage) = source |> imageValue'
         static member url (url: string) = imageValue <| sprintf "url(%s)" url
@@ -132,16 +129,13 @@ module Mask =
         static member initial = FssTypes.Initial |> imageValue'
         static member unset = FssTypes.Unset |> imageValue'
 
-    /// <summary>Specifies width of border image.</summary>
-    /// <param name="source">
-    ///     can be:
-    ///     - <c> Image </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies width of border image.
+    /// Valid parameters:
+    /// - Image
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let MaskImage' = MaskImage.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode
@@ -155,6 +149,7 @@ module Mask =
     let private maskModeValue' = stringifyMode >> maskModeValue
 
     [<Erase>]
+    /// Allows composing of masks with masks under it.
     type MaskMode =
         static member value (mode: FssTypes.IMaskMode) = mode |> maskModeValue'
         static member value (modes: FssTypes.Mask.Mode list) =
@@ -168,15 +163,12 @@ module Mask =
         static member initial = FssTypes.Initial |> maskModeValue'
         static member unset = FssTypes.Unset |> maskModeValue'
 
-    /// <summary>Allows composing of masks with masks under it.</summary>
-    /// <param name="mode">
-    ///     can be:
-    ///     - <c> MaskMode </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Allows composing of masks with masks under it.
+    /// Valid parameters:
+    /// - MaskMode
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let MaskMode': (FssTypes.IMaskMode -> FssTypes.CssProperty) = MaskMode.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
@@ -190,6 +182,7 @@ module Mask =
     let maskOriginValue' = stringifyOrigin >> maskOriginValue
 
     [<Erase>]
+    /// Specifies origin of masks.
     type MaskOrigin =
         static member value (origin: FssTypes.IMaskOrigin) = origin |> maskOriginValue'
         static member value (origins: FssTypes.Mask.Origin list) =
@@ -211,15 +204,12 @@ module Mask =
         static member initial = FssTypes.Initial |> maskOriginValue'
         static member unset = FssTypes.Unset |> maskOriginValue'
 
-    /// <summary>Specifies origin of masks.</summary>
-    /// <param name="mode">
-    ///     can be:
-    ///     - <c> MaskOrigin </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies origin of masks.
+    /// Valid parameters:
+    /// - MaskOrigin
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let MaskOrigin': (FssTypes.IMaskOrigin -> FssTypes.CssProperty) = MaskOrigin.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
@@ -240,6 +230,7 @@ module Mask =
         $"{FssTypes.unitHelpers.percentToString x} {FssTypes.unitHelpers.percentToString y}"
 
     [<Erase>]
+    /// Specifies position of masks.
     type MaskPosition =
         static member value (x: FssTypes.Length, y: FssTypes.Length) =
             stringifyPixelPositions(x,y)
@@ -259,16 +250,9 @@ module Mask =
         static member initial = FssTypes.Initial |> maskPositionValue'
         static member unset = FssTypes.Unset |> maskPositionValue'
 
-    /// <summary>Specifies position of masks.</summary>
-    /// <param name="x">
-    ///     can be:
-    ///     - <c> x: Size  </c>
-    /// </param>
-    /// <param name="y">
-    ///     can be:
-    ///     - <c> x: Size  </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies position of masks.
+    /// Valid parameters:
+    /// Units.Length * Units.Length
     let MaskPosition': (FssTypes.Length * FssTypes.Length -> FssTypes.CssProperty) = MaskPosition.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
@@ -309,15 +293,12 @@ module Mask =
         static member initial = FssTypes.Initial |> maskRepeatValue'
         static member unset = FssTypes.Unset |> maskRepeatValue'
 
-    /// <summary>Specifies how masks are repeated.</summary>
-    /// <param name="repeat">
-    ///     can be:
-    ///     - <c> MaskRepeat </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how masks are repeated.
+    /// Valid parameters:
+    /// - MaskRepeat
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let MaskRepeat': (FssTypes.IMaskRepeat -> FssTypes.CssProperty) = MaskRepeat.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-size
@@ -334,6 +315,7 @@ module Mask =
     let private maskSizeValue' = stringifySize >> maskSizeValue
 
     [<Erase>]
+    /// Specifies size of mask images.
     type MaskSize =
         static member value (size: FssTypes.IMaskSize) = size |> maskSizeValue'
         static member value (sizeX: FssTypes.IMaskSize, sizeY: FssTypes.IMaskSize) =
@@ -350,14 +332,11 @@ module Mask =
         static member initial = FssTypes.Initial |> maskSizeValue'
         static member unset = FssTypes.Unset |> maskSizeValue'
 
-    /// <summary>Specifies size of mask images.</summary>
-    /// <param name="repeat">
-    ///     can be:
-    ///     - <c> MaskSize </c>
-    ///     - <c> Auto </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies size of mask images.
+    /// Valid parameters
+    /// - MaskSize
+    /// - Auto
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let MaskSize': (FssTypes.IMaskSize -> FssTypes.CssProperty) = MaskSize.value

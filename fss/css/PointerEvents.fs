@@ -16,6 +16,7 @@ module PointerEvents =
     let private pointerEventsValue': (FssTypes.IPointerEvents -> FssTypes.CssProperty) = eventToString >> pointerEventsValue
 
     [<Erase>]
+    /// Specifies when an element can be the target of pointer events.
     type PointerEvents =
         static member value (pointerEvents: FssTypes.IPointerEvents) = pointerEvents |> pointerEventsValue'
 
@@ -33,15 +34,12 @@ module PointerEvents =
         static member unset = FssTypes.Unset |> pointerEventsValue'
         static member none = FssTypes.None' |> pointerEventsValue'
 
-    /// <summary>Specifies when an element can be the target of pointer events.</summary>
-    /// <param name="pointerEvents">
-    ///     can be:
-    ///     - <c> PointerEvents </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Auto </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies when an element can be the target of pointer events.
+    /// Valid parameters:
+    /// - PointerEvents
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Auto
+    /// - None
     let PointerEvents' = PointerEvents.value

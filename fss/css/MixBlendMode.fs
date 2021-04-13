@@ -16,6 +16,7 @@ module MixBlendMode =
     let private mixBlendModeCssValue' = blendModeToString >> mixBlendModeCssValue
 
     [<Erase>]
+    /// Specifies how an elements content should blend with its parent.
     type MixBlendMode =
         static member value(mixBlendMode: FssTypes.IMixBlendMode) = mixBlendMode |> mixBlendModeCssValue'
 
@@ -40,14 +41,11 @@ module MixBlendMode =
         static member initial = FssTypes.Initial |> mixBlendModeCssValue'
         static member unset = FssTypes.Unset |> mixBlendModeCssValue'
 
-    /// <summary>Specifies how an elements content should blend with its parent.</summary>
-    /// <param name="mixBlendMode">
-    ///     can be:
-    ///     - <c> MixBlendMode </c>
-    ///     - <c> Normal </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Specifies how an elements content should blend with its parent.
+    /// Valid parameters:
+    /// - MixBlendMode
+    /// - Normal
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let MixBlendMode' = MixBlendMode.value

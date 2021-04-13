@@ -4,7 +4,6 @@ open Fable.Core
 
 [<AutoOpen>]
 module Outline  =
-
     let private outlineToString (color: FssTypes.IOutline) =
         match color with
         | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
@@ -42,6 +41,7 @@ module Outline  =
     let private outlineValue' = outlineToString >> outlineValue
 
     [<Erase>]
+    /// Resets outline.
     type Outline =
         static member value (outline: FssTypes.IOutline) = outline |> outlineValue'
 
@@ -50,31 +50,27 @@ module Outline  =
         static member initial = FssTypes.Initial |> outlineValue'
         static member unset = FssTypes.Unset |> outlineValue'
 
-    /// <summary>Resets outline.</summary>
-    /// <param name="outline">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Resets outline.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let Outline' = Outline.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
     let private colorValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.OutlineColor
     let private colorValue' = outlineColorToString >> colorValue
 
+    /// Sets color of outline.
     let OutlineColor = FssTypes.OutlineColorClass(colorValue')
-    /// <summary>Sets color of outline.</summary>
-    /// <param name="color">
-    ///     can be:
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> FssTypes.ColorType</c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+
+    /// Sets color of outline.
+    /// Valid parameters:
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Color
     let OutlineColor' = OutlineColor.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width
@@ -82,6 +78,7 @@ module Outline  =
     let private outlineWidthValue' = outlineWidthToString >> outlineWidthValue
 
     [<Erase>]
+    /// Sets width of outline.
     type OutlineWidth =
         static member value (width: FssTypes.IOutlineWidth) = width |> outlineWidthValue'
         static member thin = FssTypes.Outline.Width.Thin |> outlineWidthValue'
@@ -92,17 +89,13 @@ module Outline  =
         static member initial = FssTypes.Initial |> outlineWidthValue'
         static member unset = FssTypes.Unset |> outlineWidthValue'
 
-
-    /// <summary>Sets width of outline.</summary>
-    /// <param name="width">
-    ///     can be:
-    ///     - <c> OutlineWidth </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> Units.Size </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets width of outline.
+    /// Valid parameters:
+    /// - OutlineWidth
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - Units.Size
     let OutlineWidth' = OutlineWidth.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style
@@ -110,6 +103,7 @@ module Outline  =
     let private outlineStyleValue' = outlineStyleToString >> outlineStyleValue
 
     [<Erase>]
+    /// Sets style of outline.
     type OutlineStyle =
         static member value (style: FssTypes.IOutlineStyle) = style |> outlineStyleValue'
         static member hidden = FssTypes.Outline.Style.Hidden |> outlineStyleValue'
@@ -127,16 +121,13 @@ module Outline  =
         static member initial = FssTypes.Initial |> outlineStyleValue'
         static member unset = FssTypes.Unset |> outlineStyleValue'
 
-    /// <summary>Sets style of outline.</summary>
-    /// <param name="style">
-    ///     can be:
-    ///     - <c> OutlineStyle </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    ///     - <c> None </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets style of outline.
+    /// Valid parameters:
+    /// - OutlineStyle
+    /// - Inherit
+    /// - Initial
+    /// - Unset
+    /// - None
     let OutlineStyle' = OutlineStyle.value
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset
@@ -144,19 +135,17 @@ module Outline  =
     let private outlineOffsetValue' = outlineOffsetToString >> outlineOffsetValue
 
     [<Erase>]
+    /// Sets offset of outline.
     type OutlineOffset =
         static member value (offset: FssTypes.IOutlineOffset) = offset |> outlineOffsetValue'
         static member inherit' = FssTypes.Inherit |> outlineOffsetValue'
         static member initial = FssTypes.Initial |> outlineOffsetValue'
         static member unset = FssTypes.Unset |> outlineOffsetValue'
 
-    /// <summary>Sets offset of outline.</summary>
-    /// <param name="offset">
-    ///     can be:
-    ///     - <c> OutlineOffset </c>
-    ///     - <c> Inherit </c>
-    ///     - <c> Initial </c>
-    ///     - <c> Unset </c>
-    /// </param>
-    /// <returns>Css property for fss.</returns>
+    /// Sets offset of outline.
+    /// Valid parameters:
+    /// - OutlineOffset
+    /// - Inherit
+    /// - Initial
+    /// - Unset
     let OutlineOffset' = OutlineOffset.value
