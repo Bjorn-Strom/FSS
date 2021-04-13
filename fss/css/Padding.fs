@@ -18,32 +18,7 @@ module Padding =
 
     [<Erase>]
     /// Specifies the padding on all sides of an element.
-    type Padding =
-        static member value (width: FssTypes.IPadding) = width |> paddingValue'
-
-        static member value (vertical: FssTypes.IPadding, horizontal: FssTypes.IPadding) =
-            sprintf "%s %s"
-                (paddingToString vertical)
-                (paddingToString horizontal)
-            |> paddingValue
-        static member value (top: FssTypes.IPadding, horizontal: FssTypes.IPadding, bottom: FssTypes.IPadding) =
-            sprintf "%s %s %s"
-                (paddingToString top)
-                (paddingToString horizontal)
-                (paddingToString bottom)
-            |> paddingValue
-        static member value (top: FssTypes.IPadding, right: FssTypes.IPadding, bottom: FssTypes.IPadding, left: FssTypes.IPadding) =
-            sprintf "%s %s %s %s"
-                (paddingToString top)
-                (paddingToString right)
-                (paddingToString bottom)
-                (paddingToString left)
-            |> paddingValue
-
-        static member auto = FssTypes.Auto |> paddingValue'
-        static member inherit' = FssTypes.Inherit |> paddingValue'
-        static member initial = FssTypes.Initial |> paddingValue'
-        static member unset = FssTypes.Unset |> paddingValue'
+    let Padding = FssTypes.Padding.Padding(paddingToString, paddingValue, paddingValue')
 
     /// Specifies the padding on all sides of an element.
     /// Valid parameters:
@@ -60,12 +35,7 @@ module Padding =
 
     [<Erase>]
     /// Specifies the padding on top sides of an element.
-    type PaddingTop =
-        static member value (top: FssTypes.IPadding) = top |> paddingTopValue'
-        static member auto = FssTypes.Auto |> paddingTopValue'
-        static member inherit' = FssTypes.Inherit |> paddingTopValue'
-        static member initial = FssTypes.Initial |> paddingTopValue'
-        static member unset = FssTypes.Unset |> paddingTopValue'
+    let PaddingTop = FssTypes.Padding.PaddingSide(paddingTopValue')
 
     /// Specifies the padding on top sides of an element.
     /// Valid parameters:
@@ -82,13 +52,7 @@ module Padding =
 
     [<Erase>]
     /// Specifies the padding on right side of an element.
-    type PaddingRight =
-        static member value (right: FssTypes.IPadding) = right |> paddingRightValue'
-        static member auto = FssTypes.Auto |> paddingRightValue'
-        static member inherit' = FssTypes.Inherit |> paddingRightValue'
-        static member initial = FssTypes.Initial |> paddingRightValue'
-        static member unset = FssTypes.Unset |> paddingRightValue'
-
+    let PaddingRight = FssTypes.Padding.PaddingSide(paddingRightValue')
     /// Specifies the padding on right side of an element.
     /// Valid parameters:
     /// - Units.Size
@@ -104,12 +68,7 @@ module Padding =
 
     [<Erase>]
     /// Specifies the padding on bottom side of an element.
-    type PaddingBottom =
-        static member value (bottom: FssTypes.IPadding) = bottom |> paddingBottomValue'
-        static member auto = FssTypes.Auto |> paddingBottomValue'
-        static member inherit' = FssTypes.Inherit |> paddingBottomValue'
-        static member initial = FssTypes.Initial |> paddingBottomValue'
-        static member unset = FssTypes.Unset |> paddingBottomValue'
+    let PaddingBottom = FssTypes.Padding.PaddingSide(paddingBottomValue')
 
     /// Specifies the padding on bottom side of an element.
     /// Valid parameters:
@@ -126,12 +85,7 @@ module Padding =
 
     [<Erase>]
     /// Specifies the padding on left side of an element.
-    type PaddingLeft =
-        static member value (left: FssTypes.IPadding) = left |> paddingLeftValue'
-        static member auto = FssTypes.Auto |> paddingLeftValue'
-        static member inherit' = FssTypes.Inherit |> paddingLeftValue'
-        static member initial = FssTypes.Initial |> paddingLeftValue'
-        static member unset = FssTypes.Unset |> paddingLeftValue'
+    let PaddingLeft = FssTypes.Padding.PaddingSide(paddingLeftValue')
 
     /// Specifies the padding on left side of an element.
     /// Valid parameters:
@@ -147,13 +101,8 @@ module Padding =
     let private paddingInlineStartValue' = paddingToString >> paddingInlineStartValue
 
     [<Erase>]
-    /// Valid parameters:
-    type PaddingInlineStart =
-        static member value (padding: FssTypes.IPadding) = padding |> paddingInlineStartValue'
-        static member auto = FssTypes.Auto |> paddingInlineStartValue'
-        static member inherit' = FssTypes.Inherit |> paddingInlineStartValue'
-        static member initial = FssTypes.Initial |> paddingInlineStartValue'
-        static member unset = FssTypes.Unset |> paddingInlineStartValue'
+    /// Specifies the amount of space along the outer starting edge of an element.
+    let PaddingInlineStart = FssTypes.Padding.PaddingSide(paddingInlineStartValue')
 
     /// Specifies the amount of space along the outer starting edge of an element.
     /// Valid parameters:
@@ -170,12 +119,7 @@ module Padding =
 
     [<Erase>]
     /// Specifies the amount of space along the outer ending edge of an element.
-    type PaddingInlineEnd =
-        static member value (padding: FssTypes.IPadding) = padding |> paddingInlineEndValue'
-        static member auto = FssTypes.Auto |> paddingInlineEndValue'
-        static member inherit' = FssTypes.Inherit |> paddingInlineEndValue'
-        static member initial = FssTypes.Initial |> paddingInlineEndValue'
-        static member unset = FssTypes.Unset |> paddingInlineEndValue'
+    let PaddingInlineEnd = FssTypes.Padding.PaddingSide(paddingInlineEndValue')
 
     /// Specifies the amount of space along the outer ending edge of an element.
     /// Valid parameters:
@@ -192,12 +136,7 @@ module Padding =
 
     [<Erase>]
     /// Specifies the amount of start padding of an element.
-    type PaddingBlockStart =
-        static member value (padding: FssTypes.IPadding) = padding |> paddingBlockStartValue'
-        static member auto = FssTypes.Auto |> paddingBlockStartValue'
-        static member inherit' = FssTypes.Inherit |> paddingBlockStartValue'
-        static member initial = FssTypes.Initial |> paddingBlockStartValue'
-        static member unset = FssTypes.Unset |> paddingBlockStartValue'
+    let PaddingBlockStart = FssTypes.Padding.PaddingSide(paddingBlockStartValue')
 
     /// Specifies the amount of start padding of an element.
     /// Valid parameters:
@@ -214,12 +153,7 @@ module Padding =
 
     [<Erase>]
     /// Specifies the amount of end padding of an element
-    type PaddingBlockEnd =
-        static member value (padding: FssTypes.IPadding) = padding |> paddingBlockEndValue'
-        static member auto = FssTypes.Auto |> paddingBlockEndValue'
-        static member inherit' = FssTypes.Inherit |> paddingBlockEndValue'
-        static member initial = FssTypes.Initial |> paddingBlockEndValue'
-        static member unset = FssTypes.Unset |> paddingBlockEndValue'
+    let PaddingBlockEnd = FssTypes.Padding.PaddingSide(paddingBlockEndValue')
 
     /// Specifies the amount of end padding of an element
     /// Valid parameters:

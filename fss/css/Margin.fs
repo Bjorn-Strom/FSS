@@ -1,7 +1,6 @@
 namespace Fss
 
 open Fable.Core
-open Fss.Margin
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/margin
 [<AutoOpen>]

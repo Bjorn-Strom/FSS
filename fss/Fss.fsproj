@@ -64,6 +64,7 @@
     <Compile Include="Types\WillChange.fs" />
     <Compile Include="Types\Svg.fs" />
     <Compile Include="Types\Margin.fs" />
+    <Compile Include="Types\Padding.fs" />
     <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Animation.fs" />
     <Compile Include="css\Color.fs" />
