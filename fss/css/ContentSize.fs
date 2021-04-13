@@ -16,19 +16,7 @@ module ContentSize =
 
     [<Erase>]
     /// Specifies width of element.
-    type Width =
-        static member fitContent (contentSize: FssTypes.ILengthPercentage) =
-            sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
-            |> widthValue
-        static member value (size: FssTypes.ILengthPercentage) = FssTypes.unitHelpers.lengthPercentageToString size |> widthValue
-        static member value (contentSize: FssTypes.IContentSize) = contentSize |> widthValue'
-        static member maxContent = FssTypes.ContentSize.MaxContent |> widthValue'
-        static member minContent = FssTypes.ContentSize.MinContent |> widthValue'
-
-        static member auto = FssTypes.Auto |> widthValue'
-        static member inherit' = FssTypes.Inherit |> widthValue'
-        static member initial = FssTypes.Initial |> widthValue'
-        static member unset = FssTypes.Unset |> widthValue'
+    let Width = FssTypes.ContentSize.ContentSizeClass(widthValue, widthValue')
 
     /// Specifies width of element.
     /// Valid parameters:
@@ -45,19 +33,7 @@ module ContentSize =
 
     [<Erase>]
     /// Specifies minimum width of element.
-    type MinWidth =
-        static member fitContent (contentSize: FssTypes.ILengthPercentage) =
-            sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
-            |> minWidthValue
-        static member value (size: FssTypes.ILengthPercentage) = FssTypes.unitHelpers.lengthPercentageToString size |> minWidthValue
-        static member value (contentSize: FssTypes.IContentSize) = contentSize |> minWidthValue'
-        static member maxContent = FssTypes.ContentSize.MaxContent |> minWidthValue'
-        static member minContent = FssTypes.ContentSize.MinContent |> minWidthValue'
-
-        static member auto = FssTypes.Auto |> minWidthValue'
-        static member inherit' = FssTypes.Inherit |> minWidthValue'
-        static member initial = FssTypes.Initial |> minWidthValue'
-        static member unset = FssTypes.Unset |> minWidthValue'
+    let MinWidth = FssTypes.ContentSize.ContentSizeClass(minWidthValue, minWidthValue')
 
     /// Specifies minimum width of element.
     /// Valid parameters:
@@ -74,19 +50,7 @@ module ContentSize =
 
     [<Erase>]
     /// Specifies maximum width of element.
-    type MaxWidth =
-        static member fitContent (contentSize: FssTypes.ILengthPercentage) =
-            sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
-            |> maxWidthValue
-        static member value (size: FssTypes.ILengthPercentage) = FssTypes.unitHelpers.lengthPercentageToString size |> maxWidthValue
-        static member value (contentSize: FssTypes.IContentSize) = contentSize |> maxWidthValue'
-        static member maxContent = FssTypes.ContentSize.MaxContent |> maxWidthValue'
-        static member minContent = FssTypes.ContentSize.MinContent |> maxWidthValue'
-
-        static member auto = FssTypes.Auto |> maxWidthValue'
-        static member inherit' = FssTypes.Inherit |> maxWidthValue'
-        static member initial = FssTypes.Initial |> maxWidthValue'
-        static member unset = FssTypes.Unset |> maxWidthValue'
+    let MaxWidth = FssTypes.ContentSize.ContentSizeClass(maxWidthValue, maxWidthValue')
 
     /// Specifies maximum width of element.
     /// Valid parameters:
@@ -103,19 +67,7 @@ module ContentSize =
 
     [<Erase>]
     /// Specifies height of element.
-    type Height =
-        static member fitContent (contentSize: FssTypes.ILengthPercentage) =
-            sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
-            |> heightValue
-        static member value (size: FssTypes.ILengthPercentage) = FssTypes.unitHelpers.lengthPercentageToString size |> heightValue
-        static member value (contentSize: FssTypes.IContentSize) = contentSize |> heightValue'
-        static member maxContent = FssTypes.ContentSize.MaxContent |> heightValue'
-        static member minContent = FssTypes.ContentSize.MinContent |> heightValue'
-
-        static member auto = FssTypes.Auto |> heightValue'
-        static member inherit' = FssTypes.Inherit |> heightValue'
-        static member initial = FssTypes.Initial |> heightValue'
-        static member unset = FssTypes.Unset |> heightValue'
+    let Height = FssTypes.ContentSize.ContentSizeClass(heightValue, heightValue')
 
     /// Specifies height of element.
     /// Valid parameters:
@@ -132,19 +84,7 @@ module ContentSize =
 
     [<Erase>]
     /// Specifies min height of element.
-    type MinHeight =
-        static member fitContent (contentSize: FssTypes.ILengthPercentage) =
-            sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
-            |> minHeightValue
-        static member value (size: FssTypes.ILengthPercentage) = FssTypes.unitHelpers.lengthPercentageToString size |> minHeightValue
-        static member value (contentSize: FssTypes.IContentSize) = contentSize |> minHeightValue'
-        static member maxContent = FssTypes.ContentSize.MaxContent |> minHeightValue'
-        static member minContent = FssTypes.ContentSize.MinContent |> minHeightValue'
-
-        static member auto = FssTypes.Auto |> minHeightValue'
-        static member inherit' = FssTypes.Inherit |> minHeightValue'
-        static member initial = FssTypes.Initial |> minHeightValue'
-        static member unset = FssTypes.Unset |> minHeightValue'
+    let MinHeight = FssTypes.ContentSize.ContentSizeClass(minHeightValue, minHeightValue')
 
     /// Specifies min height of element.
     /// Valid parameters:
@@ -161,19 +101,7 @@ module ContentSize =
 
     [<Erase>]
     /// Specifies max height of element.
-    type MaxHeight =
-        static member fitContent (contentSize: FssTypes.ILengthPercentage) =
-            sprintf "fit-content(%s)" (FssTypes.unitHelpers.lengthPercentageToString contentSize)
-            |> maxHeightValue
-        static member value (size: FssTypes.ILengthPercentage) = FssTypes.unitHelpers.lengthPercentageToString size |> maxHeightValue
-        static member value (contentSize: FssTypes.IContentSize) = contentSize |> maxHeightValue'
-        static member maxContent = FssTypes.ContentSize.MaxContent |> maxHeightValue'
-        static member minContent = FssTypes.ContentSize.MinContent |> maxHeightValue'
-
-        static member auto = FssTypes.Auto |> maxHeightValue'
-        static member inherit' = FssTypes.Inherit |> maxHeightValue'
-        static member initial = FssTypes.Initial |> maxHeightValue'
-        static member unset = FssTypes.Unset |> maxHeightValue'
+    let MaxHeight = FssTypes.ContentSize.ContentSizeClass(maxHeightValue, maxHeightValue')
 
     /// Specifies max height of element.
     /// Valid parameters:
