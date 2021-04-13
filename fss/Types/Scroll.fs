@@ -11,3 +11,15 @@ namespace Fss.FssTypes
             | Contain
             interface IOverscrollBehaviorX
             interface IOverscrollBehaviorY
+
+        type ScrollSide (valueFunction': IScrollMargin -> CssProperty) =
+            member this.value (value: IScrollMargin) = value |> valueFunction'
+            member this.inherit' = Inherit |> valueFunction'
+            member this.initial = Initial |> valueFunction'
+            member this.unset = Unset |> valueFunction'
+
+        type ScrollPadding (valueFunction': IScrollPadding -> CssProperty) =
+            member this.value (value: IScrollPadding) = value |> valueFunction'
+            member this.inherit' = Inherit |> valueFunction'
+            member this.initial = Initial |> valueFunction'
+            member this.unset = Unset |> valueFunction'

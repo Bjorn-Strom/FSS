@@ -84,11 +84,7 @@ module ScrollMargin =
 
     [<Erase>]
     /// Specifies the scroll margin on top side of an element.
-    type ScrollMarginTop =
-        static member value (top: FssTypes.IScrollMargin) = top |> scrollMarginTopValue'
-        static member inherit' = FssTypes.Inherit |> scrollMarginTopValue'
-        static member initial = FssTypes.Initial |> scrollMarginTopValue'
-        static member unset = FssTypes.Unset |> scrollMarginTopValue'
+    let ScrollMarginTop = FssTypes.Scroll.ScrollSide(scrollMarginTopValue')
 
     /// Specifies the scroll margin on top side of an element.
     /// Valid parameters:
@@ -103,11 +99,7 @@ module ScrollMargin =
 
     [<Erase>]
     /// Specifies the scroll margin on right side of an element.
-    type ScrollMarginRight =
-        static member value (right: FssTypes.IScrollMargin) = right |> scrollMarginRightValue'
-        static member inherit' = FssTypes.Inherit |> scrollMarginRightValue'
-        static member initial = FssTypes.Initial |> scrollMarginRightValue'
-        static member unset = FssTypes.Unset |> scrollMarginRightValue'
+    let ScrollMarginRight = FssTypes.Scroll.ScrollSide(scrollMarginRightValue')
 
     /// Specifies the scroll margin on right side of an element.
     /// - Units.Size
@@ -121,11 +113,7 @@ module ScrollMargin =
 
     [<Erase>]
     /// Specifies the scroll margin on bottom side of an element.
-    type ScrollMarginBottom =
-        static member value (bottom: FssTypes.IScrollMargin) = bottom |> scrollMarginBottomValue'
-        static member inherit' = FssTypes.Inherit |> scrollMarginBottomValue'
-        static member initial = FssTypes.Initial |> scrollMarginBottomValue'
-        static member unset = FssTypes.Unset |> scrollMarginBottomValue'
+    let ScrollMarginBottom = FssTypes.Scroll.ScrollSide(scrollMarginBottomValue')
 
     /// Specifies the scroll margin on bottom side of an element.
     /// - Units.Size
@@ -139,11 +127,7 @@ module ScrollMargin =
 
     [<Erase>]
     /// Specifies the scroll margin on left side of an element.
-    type ScrollMarginLeft =
-        static member value (left: FssTypes.IScrollMargin) = left |> scrollMarginLeftValue'
-        static member inherit' = FssTypes.Inherit |> scrollMarginLeftValue'
-        static member initial = FssTypes.Initial |> scrollMarginLeftValue'
-        static member unset = FssTypes.Unset |> scrollMarginLeftValue'
+    let ScrollMarginLeft = FssTypes.Scroll.ScrollSide(scrollMarginLeftValue')
 
     /// Specifies the scroll margin on left side of an element.
     /// Valid parameters:
@@ -228,11 +212,7 @@ module ScrollPadding =
 
     [<Erase>]
     /// Specifies the scroll padding on right side of an element.
-    type ScrollPaddingRight =
-        static member value (right: FssTypes.IScrollPadding) = right |> scrollPaddingRightValue'
-        static member inherit' = FssTypes.Inherit |> scrollPaddingRightValue'
-        static member initial = FssTypes.Initial |> scrollPaddingRightValue'
-        static member unset = FssTypes.Unset |> scrollPaddingRightValue'
+    let ScrollPaddingRight = FssTypes.Scroll.ScrollPadding(scrollPaddingRightValue')
 
     /// Specifies the scroll padding on right side of an element.
     /// Valid parameters:
@@ -249,11 +229,7 @@ module ScrollPadding =
 
     [<Erase>]
     /// Specifies the scroll padding on bottom side of an element.
-    type ScrollPaddingBottom =
-        static member value (bottom: FssTypes.IScrollPadding) = bottom |> scrollPaddingBottomValue'
-        static member inherit' = FssTypes.Inherit |> scrollPaddingBottomValue'
-        static member initial = FssTypes.Initial |> scrollPaddingBottomValue'
-        static member unset = FssTypes.Unset |> scrollPaddingBottomValue'
+    let ScrollPaddingBottom = FssTypes.Scroll.ScrollPadding(scrollPaddingBottomValue')
 
     /// Specifies the scroll padding on bottom side of an element.
     /// Valid parameters:
@@ -269,11 +245,8 @@ module ScrollPadding =
     let private scrollPaddingLeftValue' = scrollPaddingToString >> scrollPaddingLeftValue
 
     [<Erase>]
-    type ScrollPaddingLeft =
-        static member value (left: FssTypes.IScrollPadding) = left |> scrollPaddingLeftValue'
-        static member inherit' = FssTypes.Inherit |> scrollPaddingLeftValue'
-        static member initial = FssTypes.Initial |> scrollPaddingLeftValue'
-        static member unset = FssTypes.Unset |> scrollPaddingLeftValue'
+    /// Specifies the scroll padding on left side of an element.
+    let ScrollPaddingLeft = FssTypes.Scroll.ScrollPadding(scrollPaddingLeftValue')
 
     /// Specifies the scroll padding on left side of an element.
     /// Valid parameters:
