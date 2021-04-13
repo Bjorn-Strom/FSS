@@ -1,6 +1,7 @@
 namespace Fss
 
 open Fable.Core
+open Fss.Margin
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/margin
 [<AutoOpen>]
@@ -18,30 +19,7 @@ module Margin =
 
     [<Erase>]
     /// Specifies the margin on all sides of an element.
-    type Margin =
-        static member value (width: FssTypes.IMargin) = width |> marginValue'
-        static member value (vertical: FssTypes.IMargin, horizontal: FssTypes.IMargin) =
-            sprintf "%s %s"
-                (marginToString vertical)
-                (marginToString horizontal)
-            |> marginValue
-        static member value (top: FssTypes.IMargin, auto: FssTypes.IMargin, bottom: FssTypes.IMargin) =
-            sprintf "%s %s %s"
-                (marginToString top)
-                (marginToString auto)
-                (marginToString bottom)
-            |> marginValue
-        static member value (top: FssTypes.IMargin, right: FssTypes.IMargin, bottom: FssTypes.IMargin, left: FssTypes.IMargin) =
-            sprintf "%s %s %s %s"
-                (marginToString top)
-                (marginToString right)
-                (marginToString bottom)
-                (marginToString left)
-            |> marginValue
-        static member auto = FssTypes.Auto |> marginValue'
-        static member inherit' = FssTypes.Inherit |> marginValue'
-        static member initial = FssTypes.Initial |> marginValue'
-        static member unset = FssTypes.Unset |> marginValue'
+    let Margin = FssTypes.Margin.Margin(marginToString, marginValue, marginValue')
 
     /// Specifies the margin on all sides of an element.
     /// Valid parameters:
@@ -57,12 +35,7 @@ module Margin =
 
     [<Erase>]
     /// Specifies the margin on top side of an element.
-    type MarginTop =
-        static member value (top: FssTypes.IMargin) = top |> marginTopValue'
-        static member auto = FssTypes.Auto |> marginTopValue'
-        static member inherit' = FssTypes.Inherit |> marginTopValue'
-        static member initial = FssTypes.Initial |> marginTopValue'
-        static member unset = FssTypes.Unset |> marginTopValue'
+    let MarginTop = FssTypes.Margin.MarginSide(marginTopValue')
 
     /// Specifies the margin on top side of an element.
     /// Valid parameters:
@@ -79,12 +52,7 @@ module Margin =
 
     [<Erase>]
     /// Specifies the margin on right side of an element.
-    type MarginRight =
-        static member value (right: FssTypes.IMargin) = right |> marginRightValue'
-        static member auto = FssTypes.Auto |> marginRightValue'
-        static member inherit' = FssTypes.Inherit |> marginRightValue'
-        static member initial = FssTypes.Initial |> marginRightValue'
-        static member unset = FssTypes.Unset |> marginRightValue'
+    let MarginRight = FssTypes.Margin.MarginSide(marginRightValue')
 
     /// Specifies the margin on right side of an element.
     /// Valid parameters:
@@ -101,12 +69,7 @@ module Margin =
 
     [<Erase>]
     /// Specifies the margin on bottom side of an element.
-    type MarginBottom =
-        static member value (bottom: FssTypes.IMargin) = bottom |> marginBottomValue'
-        static member auto = FssTypes.Auto |> marginBottomValue'
-        static member inherit' = FssTypes.Inherit |> marginBottomValue'
-        static member initial = FssTypes.Initial |> marginBottomValue'
-        static member unset = FssTypes.Unset |> marginBottomValue'
+    let MarginBottom = FssTypes.Margin.MarginSide(marginBottomValue')
 
     /// Specifies the margin on bottom side of an element.
     /// Valid parameters:
@@ -123,12 +86,7 @@ module Margin =
 
     [<Erase>]
     /// Specifies the margin on left side of an element.
-    type MarginLeft =
-        static member value (left: FssTypes.IMargin) = left |> marginLeftValue'
-        static member auto = FssTypes.Auto |> marginLeftValue'
-        static member inherit' = FssTypes.Inherit |> marginLeftValue'
-        static member initial = FssTypes.Initial |> marginLeftValue'
-        static member unset = FssTypes.Unset |> marginLeftValue'
+    let MarginLeft = FssTypes.Margin.MarginSide(marginLeftValue')
 
     /// Specifies the margin on left side of an element.
     /// Valid parameters:
@@ -144,12 +102,7 @@ module Margin =
     let private marginInlineStartValue' = marginToString >> marginInlineStartValue
 
     [<Erase>]
-    type MarginInlineStart =
-        static member value (margin: FssTypes.IMargin) = margin |> marginInlineStartValue'
-        static member auto = FssTypes.Auto |> marginInlineStartValue'
-        static member inherit' = FssTypes.Inherit |> marginInlineStartValue'
-        static member initial = FssTypes.Initial |> marginInlineStartValue'
-        static member unset = FssTypes.Unset |> marginInlineStartValue'
+    let MarginInlineStart = FssTypes.Margin.MarginSide(marginInlineStartValue')
 
     /// Specifies the amount of space along the outer starting edge of an element.
     /// Valid parameters:
@@ -165,12 +118,8 @@ module Margin =
     let private marginInlineEndValue' = marginToString >> marginInlineEndValue
 
     [<Erase>]
-    type MarginInlineEnd =
-        static member value (margin: FssTypes.IMargin) = margin |> marginInlineEndValue'
-        static member auto = FssTypes.Auto |> marginInlineEndValue'
-        static member inherit' = FssTypes.Inherit |> marginInlineEndValue'
-        static member initial = FssTypes.Initial |> marginInlineEndValue'
-        static member unset = FssTypes.Unset |> marginInlineEndValue'
+    /// Specifies the amount of space along the outer ending edge of an element.
+    let MarginInlineEnd = FssTypes.Margin.MarginSide(marginInlineEndValue')
 
     /// Specifies the amount of space along the outer ending edge of an element.
     /// Valid parameters:
@@ -186,12 +135,8 @@ module Margin =
     let private marginBlockStartValue' = marginToString >> marginBlockStartValue
 
     [<Erase>]
-    type MarginBlockStart =
-        static member value (margin: FssTypes.IMargin) = margin |> marginBlockStartValue'
-        static member auto = FssTypes.Auto |> marginBlockStartValue'
-        static member inherit' = FssTypes.Inherit |> marginBlockStartValue'
-        static member initial = FssTypes.Initial |> marginBlockStartValue'
-        static member unset = FssTypes.Unset |> marginBlockStartValue'
+    /// Specifies the amount of start margin of an element.
+    let MarginBlockStart = FssTypes.Margin.MarginSide(marginBlockStartValue')
 
     /// Specifies the amount of start margin of an element.
     /// Valid parameters:
@@ -207,12 +152,8 @@ module Margin =
     let private marginBlockEndValue' = marginToString >> marginBlockEndValue
 
     [<Erase>]
-    type MarginBlockEnd =
-        static member value (margin: FssTypes.IMargin) = margin |> marginBlockEndValue'
-        static member auto = FssTypes.Auto |> marginBlockEndValue'
-        static member inherit' = FssTypes.Inherit |> marginBlockEndValue'
-        static member initial = FssTypes.Initial |> marginBlockEndValue'
-        static member unset = FssTypes.Unset |> marginBlockEndValue'
+    /// Specifies the amount of end margin of an element
+    let MarginBlockEnd = FssTypes.Margin.MarginSide(marginBlockEndValue')
 
     /// Specifies the amount of end margin of an element
     /// Valid parameters:
