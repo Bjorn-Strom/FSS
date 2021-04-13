@@ -13,6 +13,8 @@ Have CSS as a first class citizen in your F# projects.
 
 Built atop the fantastic [Emotion-js](https://github.com/emotion-js/emotion) library and uses that for all CSS generation.
 
+## [Documentation 📖](https://bjorn-strom.github.io/FSS/)
+
 ## Examples 🤓
 Quick example here, check the documentation for more information.
 ```fsharp
@@ -83,6 +85,6 @@ yarn add @emotion/css
 
 You can also check out this template [repo](https://github.com/Bjorn-Strom/elmish-fss-template).
 
-## Documentation 📖
-[Docs](https://bjorn-strom.github.io/FSS/)
+
+
 
