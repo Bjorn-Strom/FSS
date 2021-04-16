@@ -11,6 +11,8 @@ Have CSS as a first class citizen in your F# projects.
 
 Built atop the fantastic [Emotion-js](https://github.com/emotion-js/emotion) library and uses that for all CSS generation.
 
+I have also written an article on the project you can read [here](https://blogg.bekk.no/introducing-fss-cff9fdd300a1)
+
 ## [Documentation 📖](https://bjorn-strom.github.io/FSS/)
 
 ## Examples 🤓
