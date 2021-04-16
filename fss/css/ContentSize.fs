@@ -43,7 +43,7 @@ module ContentSize =
     /// - Initial
     /// - Unset
     /// - Auto
-    let MinWidth': (FssTypes.IContentSize -> FssTypes.CssProperty) = MinWidth.value
+    let MinWidth': (FssTypes.ILengthPercentage -> FssTypes.CssProperty) = MinWidth.value
 
     let private maxWidthValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaxWidth
     let private maxWidthValue' = FssTypes.contentSizeHelpers.contentSizeToString >> maxWidthValue
@@ -94,7 +94,7 @@ module ContentSize =
     /// - Initial
     /// - Unset
     /// - Auto
-    let MinHeight': (FssTypes.IContentSize -> FssTypes.CssProperty) = MinHeight.value
+    let MinHeight': (FssTypes.ILengthPercentage -> FssTypes.CssProperty) = MinHeight.value
 
     let private maxHeightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.MaxHeight
     let private maxHeightValue' = FssTypes.contentSizeHelpers.contentSizeToString >> maxHeightValue
@@ -111,4 +111,4 @@ module ContentSize =
     /// - Initial
     /// - Unset
     /// - Auto
-    let MaxHeight': (FssTypes.IContentSize -> FssTypes.CssProperty) = MaxHeight.value
+    let MaxHeight': (FssTypes.ILengthPercentage -> FssTypes.CssProperty) = MaxHeight.value
