@@ -32,7 +32,6 @@ module Visibility =
                     "Paint order normal"
                     [PaintOrder.normal]
                     ["paintOrder" ==> "normal"]
-
                 testCase
                     "Visibility hidden"
                     [ Visibility.hidden]
@@ -173,5 +172,44 @@ module Visibility =
                     "OverflowWrap unset"
                     [OverflowWrap.unset]
                     ["overflowWrap" ==> "unset"]
-
+                testCase
+                    "ZIndex 0"
+                    [ZIndex' 0]
+                    ["zIndex" ==> "0"]
+                testCase
+                    "ZIndex 3"
+                    [ZIndex' 3]
+                    ["zIndex" ==> "3"]
+                testCase
+                    "ZIndex 289"
+                    [ZIndex' 289]
+                    ["zIndex" ==> "289"]
+                testCase
+                    "ZIndex -1"
+                    [ZIndex' -1]
+                    ["zIndex" ==> "-1"]
+                testCase
+                    "ZIndex value auto"
+                    [ZIndex.value(FssTypes.Auto)]
+                    ["zIndex" ==> "auto"]
+                testCase
+                    "Zindexx value 2"
+                    [ZIndex.value(FssTypes.CssInt 2)]
+                    ["zIndex" ==> "2"]
+                testCase
+                    "ZIndex auto"
+                    [ZIndex.auto]
+                    ["zIndex" ==> "auto"]
+                testCase
+                    "ZIndex inherit"
+                    [ZIndex.inherit']
+                    ["zIndex" ==> "inherit"]
+                testCase
+                    "ZIndex initial"
+                    [ZIndex.initial]
+                    ["zIndex" ==> "initial"]
+                testCase
+                    "ZIndex unset"
+                    [ZIndex.unset]
+                    ["zIndex" ==> "unset"]
         ]

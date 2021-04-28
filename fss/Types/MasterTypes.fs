@@ -129,6 +129,7 @@ namespace Fss.FssTypes
     type IContentSize = interface end
 
     type IVisibility = interface end
+    type IZIndex     = interface end
 
     type IOverflow      = interface end
     type IOverflowWrap  = interface end
@@ -299,6 +300,7 @@ namespace Fss.FssTypes
         interface IColorInterpolationFilters
         interface ISVGImageRendering
         interface IShapeRendering
+        interface IZIndex
 
     type None' =
         | None'
@@ -563,6 +565,7 @@ namespace Fss.FssTypes
         interface IMaskSize
         interface IObjectPosition
         interface IImageRendering
+        interface IZIndex
 
     type CssInt =
         | CssInt of int
@@ -574,6 +577,7 @@ namespace Fss.FssTypes
         interface ITabSize
         interface IOrphans
         interface IWidows
+        interface IZIndex
 
     type CssFloat =
         | CssFloat of float

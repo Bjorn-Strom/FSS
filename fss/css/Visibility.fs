@@ -79,3 +79,28 @@ module PaintOrder =
     /// - Normal
     let PaintOrder' = PaintOrder.value
 
+    [<AutoOpen>]
+    module ZIndex =
+        let private zIndexToString (zIndex: FssTypes.IZIndex) =
+            match zIndex with
+            | :? FssTypes.Auto -> FssTypes.masterTypeHelpers.auto
+            | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+            | :? FssTypes.CssInt as i -> FssTypes.masterTypeHelpers.IntToString i
+            | _ -> "unknown zIndex"
+
+        let private zIndexValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.ZIndex
+        let private zIndexValue': FssTypes.IZIndex -> FssTypes.CssProperty = zIndexToString >> zIndexValue
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
+        [<Erase>]
+        type ZIndex =
+            static member value (zIndex: int) = zIndex |> FssTypes.CssInt |> zIndexValue'
+            static member value (zIndex: FssTypes.IZIndex) = zIndex |> zIndexValue'
+            static member auto = FssTypes.Auto |> zIndexValue'
+            static member inherit' = FssTypes.Inherit |> zIndexValue'
+            static member initial = FssTypes.Initial |> zIndexValue'
+            static member unset = FssTypes.Unset |> zIndexValue'
+
+
+        let ZIndex' (zIndex: int) = ZIndex.value zIndex
+
