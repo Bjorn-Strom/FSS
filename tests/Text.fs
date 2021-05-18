@@ -742,8 +742,8 @@ module Text =
                     ["textJustify" ==> "none"]
                 testCase
                     "WhiteSpace nowrap"
-                    [ WhiteSpace.noWrap ]
-                    ["whiteSpace" ==> "no-wrap"]
+                    [ WhiteSpace.nowrap ]
+                    ["whiteSpace" ==> "nowrap"]
                 testCase
                     "WhiteSpace pre"
                     [ WhiteSpace.pre ]

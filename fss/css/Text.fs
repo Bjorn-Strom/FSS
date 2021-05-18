@@ -874,7 +874,7 @@ module Text =
     /// Specifies how white space is handled.
     type WhiteSpace =
         static member value (whitespace: FssTypes.IWhiteSpace) = whitespace |> whiteSpaceValue'
-        static member noWrap = FssTypes.Text.WhiteSpace.NoWrap |> whiteSpaceValue'
+        static member nowrap = FssTypes.Text.WhiteSpace.Nowrap |> whiteSpaceValue'
         static member pre = FssTypes.Text.Pre |> whiteSpaceValue'
         static member preWrap = FssTypes.Text.PreWrap |> whiteSpaceValue'
         static member preLine = FssTypes.Text.PreLine |> whiteSpaceValue'

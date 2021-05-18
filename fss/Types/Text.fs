@@ -134,7 +134,7 @@ namespace Fss.FssTypes
             interface ITextJustify
 
         type WhiteSpace =
-            | NoWrap
+            | Nowrap
             | Pre
             | PreWrap
             | PreLine
