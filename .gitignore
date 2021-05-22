@@ -11,6 +11,7 @@
 
 out/
 .parcel-cache/
+parcel-bundle-reports
 
 # Fable compilation
 public/*.js
