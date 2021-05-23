@@ -1004,23 +1004,16 @@ module App =
         | Feliz -> feliz
         | Svg -> svg
 
-    let menuListItem example currentExample =
+    let menuListItem example =
         let linkStyle =
             fss
                 [
                     Position.relative
                     Width' <| px 200
-                    Color.hex "F4F9E9"
-                    if example = currentExample then
-                       BorderRightColor.hex secondaryDark
-                       BorderRightWidth' (px 10)
-                       BorderRightStyle.solid
-                       BackgroundColor.hex secondaryLight
-                       Color.hex textOnPrimary |> important
                     Label' "Button Style"
                     TextDecoration.none
-                    Padding' (px 10)
-                    FontSize' (px 14)
+                    Padding' <| px 2
+                    FontSize' <| px 14
                     VerticalAlign.middle
                     textFont
                 ]
@@ -1047,21 +1040,38 @@ module App =
 
         header  [ ClassName headerStyle ] [ h2 [ ClassName headerText ] [ str "Fss" ] ]
 
-    let menu model =
+    let menu =
+        let menu =
+            fss [ Position.fixed'
+                  Left' <| px 0
+                  Top' <| px 0
+                  Height' <| vh 100.
+                  Width' <| pct 25
+                  BackgroundColor.hex "#212731"
+                  Display.flex
+                  FlexDirection.column
+                  AlignItems.center
+                  PaddingTop' <| px 100
+                ]
         let menuList =
             fss
-                [
-                    Label' "Menu List"
-                    Display.flex
-                    FlexDirection.column
-                    BorderRightColor.hex secondaryDark
-                    BorderRightWidth.thin
-                    BorderRightStyle.solid
-                    MarginRight' <| px 25
+                [ Label' "Menu List"
+                  Display.flex
+                  FlexDirection.column
+                  ! FssTypes.Html.A [ Link [ Color.hex "#759DB2" ]
+                                      Visited [ Color.hex "#759DB2" ]
+                                      Hover [ Color.hex "#c7dae0" ]
+                                    ]
                 ]
-        let menuListItem' example = menuListItem example model.CurrentPage
-        aside []
+        let heading =
+            fss [ headingFont
+                  Color.hex "#759DB2"
+                ]
+        let menuListItem' example = menuListItem example
+        aside [ ClassName menu ]
             [
+                Logo.logo 128 128 ""
+                h1 [ ClassName heading ] [ str "Fss" ]
                 div [ ClassName menuList ]
                     [
                         menuListItem' Overview
@@ -1089,9 +1099,17 @@ module App =
     let content model =
         let contentStyle =
             fss
-                [
-                    Label' "Content Style"
-                    textFont
+                [ Label' "Content Style"
+                  Position.absolute
+                  textFont
+                  Width' <| pct 66
+                  Right' <| pct 0
+                  Top' <| pct 0
+                  PaddingTop' <| px 100
+                  PaddingLeft' <| px 25
+                  PaddingRight' <| px 100
+                  BackgroundColor.hex "#181A1B"
+                  Color.white
                 ]
         section [ ClassName contentStyle ] [ pageToContent model.CurrentPage model.Pages.[model.CurrentPage] ]
 
@@ -1100,53 +1118,40 @@ module App =
             fss
                 [
                     Label' "Content style"
-                    Width' (pct 60)
-                    MaxWidth' (pct 60)
                     Display.flex
                     FlexDirection.row
-                    MarginLeft.auto
-                    MarginRight.auto
-                    Color.black
-                    ! FssTypes.Html.A [
-                        Link [ Color.black ]
-                        Visited [ Color.black ]
-                        Hover [ Color.black ]
-                    ]
+
                 ]
-        div []
+        div [ ClassName contentStyle ]
             [
-                header
-                div [ ClassName contentStyle ]
-                    [
-                        menu model
-                        if model.Pages.ContainsKey model.CurrentPage then
-                            content model
-                    ]
+                menu
+                if model.Pages.ContainsKey model.CurrentPage then
+                    content model
             ]
 
     open Elmish.UrlParser
 
     let pageParser : Parser<_,_> =
         oneOf
-            [ map Overview (s <| Utilities.duToKebab Overview)
-              map Installation (s <| Utilities.duToKebab Installation)
-              map Philosophy (s <| Utilities.duToKebab Philosophy)
-              map New (s <| Utilities.duToKebab New)
-              map BasicUsage (s <| Utilities.duToKebab BasicUsage)
-              map ConditionalStyling (s <| Utilities.duToKebab ConditionalStyling)
-              map Pseudo (s <| Utilities.duToKebab Pseudo)
-              map Composition (s <| Utilities.duToKebab Composition)
-              map Labels (s <| Utilities.duToKebab Labels)
-              map Transition (s <| Utilities.duToKebab Transition)
+            [ map Overview            (s <| Utilities.duToKebab Overview)
+              map Installation        (s <| Utilities.duToKebab Installation)
+              map Philosophy          (s <| Utilities.duToKebab Philosophy)
+              map New                 (s <| Utilities.duToKebab New)
+              map BasicUsage          (s <| Utilities.duToKebab BasicUsage)
+              map ConditionalStyling  (s <| Utilities.duToKebab ConditionalStyling)
+              map Pseudo              (s <| Utilities.duToKebab Pseudo)
+              map Composition         (s <| Utilities.duToKebab Composition)
+              map Labels              (s <| Utilities.duToKebab Labels)
+              map Transition          (s <| Utilities.duToKebab Transition)
               map KeyframesAnimations (s <| Utilities.duToKebab KeyframesAnimations)
-              map Combinators (s <| Utilities.duToKebab Combinators)
-              map MediaQueries (s <| Utilities.duToKebab MediaQueries)
-              map GlobalStyles (s <| Utilities.duToKebab GlobalStyles)
-              map Counters (s <| Utilities.duToKebab Counters)
-              map Fonts (s <| Utilities.duToKebab Fonts)
-              map BackgroundImages (s <| Utilities.duToKebab BackgroundImages)
-              map Feliz (s <| Utilities.duToKebab Feliz)
-              map Svg (s <| Utilities.duToKebab Svg)
+              map Combinators         (s <| Utilities.duToKebab Combinators)
+              map MediaQueries        (s <| Utilities.duToKebab MediaQueries)
+              map GlobalStyles        (s <| Utilities.duToKebab GlobalStyles)
+              map Counters            (s <| Utilities.duToKebab Counters)
+              map Fonts               (s <| Utilities.duToKebab Fonts)
+              map BackgroundImages    (s <| Utilities.duToKebab BackgroundImages)
+              map Feliz               (s <| Utilities.duToKebab Feliz)
+              map Svg                 (s <| Utilities.duToKebab Svg)
             ]
 
     let urlUpdate (page: Page option) model =
