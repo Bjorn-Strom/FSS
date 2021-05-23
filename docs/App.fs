@@ -39,12 +39,16 @@ module App =
         | Big
         | Small
 
-    type Model = { CurrentPage: Page; Pages: Map<Page, string> }
+    type Model = { CurrentPage: Page
+                   Pages: Map<Page, string>
+                   ShowSidebar: bool
+                 }
 
     type Msg =
         | GetMarkdown of Page
         | GotMarkdown of Page * string
         | FailedGettingMarkdown of string
+        | ToggleSidebar
 
     let init page =
         let page = page |> Option.defaultValue Overview
@@ -70,7 +74,7 @@ module App =
               Feliz |> GetMarkdown |> Cmd.ofMsg
               Svg |> GetMarkdown |> Cmd.ofMsg
             ]
-        { CurrentPage = page; Pages = Map.empty; }, Cmd.batch requests
+        { CurrentPage = page; Pages = Map.empty; ShowSidebar = false}, Cmd.batch requests
 
     let update (msg: Msg) (model: Model) =
         match msg with
@@ -90,21 +94,19 @@ module App =
             { model with Pages = pages }, Cmd.none
         | FailedGettingMarkdown _ ->
             model, Cmd.none
+        | ToggleSidebar ->
+            { model with ShowSidebar = not model.ShowSidebar }, Cmd.none
 
     // Load font
     let headingFont = FontFamily.custom "Nunito"
     let textFont = FontFamily.custom "Raleway"
 
     // Colors
-    let background = "E1E2E1"
-    let textOnPrimary = "ffffff"
-    let textOnSecondary = "000000"
-    let primary = "606060"
-    let primaryLight = "8d8d8d"
-    let primaryDark = "363636"
-    let secondary = "2979ff"
-    let secondaryLight = "75a7ff"
-    let secondaryDark = "004ecb"
+    let sidebarBackgroundColor = "212731"
+    let sidebarText = "759DB2"
+    let sidebarHover = "c7dae0"
+    let contentText = "e8e6e3"
+    let contentLink = "50b8ec"
 
     // Styles
     let multilineText =
@@ -1020,81 +1022,97 @@ module App =
 
         a [ ClassName linkStyle; Href $"#{Utilities.duToKebab example}" ] [ str $"{pageToString example}" ]
 
-    let header =
-        let headerStyle =
-            fss
-                [
-                    Label' "Header Style"
-                    Color.white
-                    BackgroundColor.hex primary
-                    PaddingLeft' (px 10)
-                    AlignItems.center
-                ]
-
-        let headerText =
-            fss
-                [
-                    Label' "Header Text"
-                    headingFont
-                ]
-
-        header  [ ClassName headerStyle ] [ h2 [ ClassName headerText ] [ str "Fss" ] ]
-
-    let menu =
+    let menu (model: Model) dispatch =
         let menu =
             fss [ Position.fixed'
                   Left' <| px 0
                   Top' <| px 0
                   Height' <| vh 100.
-                  Width' <| pct 25
-                  BackgroundColor.hex "#212731"
+                  Width' <| px 336
+                  BackgroundColor.hex sidebarBackgroundColor
                   Display.flex
                   FlexDirection.column
                   AlignItems.center
                   PaddingTop' <| px 100
+                  ZIndex' 5
+
+                  TransitionProperty.left
+                  TransitionTimingFunction.easeInOut
+                  TransitionDuration' <| ms 500.
+
+                  MediaQuery
+                    [ FssTypes.Media.MaxWidth <| px 1000
+                    ]
+                    [ if not model.ShowSidebar then Left' <| pct -100
+                    ]
                 ]
+        let navBar =
+            fss [ Position.absolute
+                  Left' <| px 0
+                  Top' <| px 0
+                  Width' <| vw 100.
+                  Height' <| px 50
+                  BackgroundColor.hex sidebarBackgroundColor
+                  Display.flex
+                  AlignItems.center
+                  ZIndex' 10
+                  Visibility.hidden
+
+                  MediaQuery
+                    [FssTypes.Media.MaxWidth <| px 1000]
+                    [Visibility.visible]
+                ]
+        let hamburger =
+            fss [ Cursor.pointer ]
         let menuList =
             fss
                 [ Label' "Menu List"
                   Display.flex
                   FlexDirection.column
-                  ! FssTypes.Html.A [ Link [ Color.hex "#759DB2" ]
-                                      Visited [ Color.hex "#759DB2" ]
-                                      Hover [ Color.hex "#c7dae0" ]
+                  ! FssTypes.Html.A [ Link [ Color.hex sidebarText ]
+                                      Visited [ Color.hex sidebarText ]
+                                      Hover [ Color.hex sidebarHover ]
                                     ]
                 ]
         let heading =
             fss [ headingFont
-                  Color.hex "#759DB2"
+                  Color.hex sidebarText
                 ]
         let menuListItem' example = menuListItem example
-        aside [ ClassName menu ]
+        fragment []
             [
-                Logo.logo 128 128 ""
-                h1 [ ClassName heading ] [ str "Fss" ]
-                div [ ClassName menuList ]
-                    [
-                        menuListItem' Overview
-                        menuListItem' Installation
-                        menuListItem' Philosophy
-                        menuListItem' New
-                        menuListItem' BasicUsage
-                        menuListItem' ConditionalStyling
-                        menuListItem' Pseudo
-                        menuListItem' Composition
-                        menuListItem' Labels
-                        menuListItem' Transition
-                        menuListItem' KeyframesAnimations
-                        menuListItem' Combinators
-                        menuListItem' MediaQueries
-                        menuListItem' GlobalStyles
-                        menuListItem' Counters
-                        menuListItem' Fonts
-                        menuListItem' BackgroundImages
-                        menuListItem' Feliz
-                        menuListItem' Svg
+                nav [ ClassName navBar ]
+                    [ div [ ClassName hamburger; OnClick (fun _ -> dispatch ToggleSidebar)  ]
+                          [ Hamburger.hamburger 32 32 "" ]
                     ]
-            ]
+                aside [ ClassName menu ]
+                    [
+                        Logo.logo 128 128 ""
+                        h1 [ ClassName heading ] [ str "Fss" ]
+                        div [ ClassName menuList ]
+                            [
+                                menuListItem' Overview
+                                menuListItem' Installation
+                                menuListItem' Philosophy
+                                menuListItem' New
+                                menuListItem' BasicUsage
+                                menuListItem' ConditionalStyling
+                                menuListItem' Pseudo
+                                menuListItem' Composition
+                                menuListItem' Labels
+                                menuListItem' Transition
+                                menuListItem' KeyframesAnimations
+                                menuListItem' Combinators
+                                menuListItem' MediaQueries
+                                menuListItem' GlobalStyles
+                                menuListItem' Counters
+                                menuListItem' Fonts
+                                menuListItem' BackgroundImages
+                                menuListItem' Feliz
+                                menuListItem' Svg
+                            ]
+                    ]
+           ]
 
     let content model =
         let contentStyle =
@@ -1102,29 +1120,29 @@ module App =
                 [ Label' "Content Style"
                   Position.absolute
                   textFont
-                  Width' <| pct 66
+                  Width' <| pct 75
                   Right' <| pct 0
                   Top' <| pct 0
                   PaddingTop' <| px 100
-                  PaddingLeft' <| px 25
-                  PaddingRight' <| px 100
-                  BackgroundColor.hex "#181A1B"
-                  Color.white
+                  PaddingRight' <| px 40
+                  Color.hex contentText
+
+                  ! FssTypes.Html.A [ Link [ Color.hex contentLink ]
+                                      Visited [ Color.hex contentLink ]
+                                      Hover [ Color.hex contentLink ] ]
+
+                  MediaQuery [ FssTypes.Media.MaxWidth <| px 1000 ]
+                    [ Position.relative
+                      Width' <| pct 95
+                      PaddingLeft' <| px 20
+                    ]
                 ]
         section [ ClassName contentStyle ] [ pageToContent model.CurrentPage model.Pages.[model.CurrentPage] ]
 
-    let render (model: Model) (_: Msg -> unit) =
-        let contentStyle =
-            fss
-                [
-                    Label' "Content style"
-                    Display.flex
-                    FlexDirection.row
-
-                ]
-        div [ ClassName contentStyle ]
+    let render (model: Model) (dispatch: Msg -> unit) =
+        fragment [ ]
             [
-                menu
+                menu model dispatch
                 if model.Pages.ContainsKey model.CurrentPage then
                     content model
             ]
@@ -1157,7 +1175,7 @@ module App =
     let urlUpdate (page: Page option) model =
         let page = page |> Option.defaultValue Overview
 
-        { model with CurrentPage = page }, Cmd.none
+        { model with CurrentPage = page }, Cmd.ofMsg ToggleSidebar
 
     Program.mkProgram init update render
     |> Program.toNavigable (parseHash pageParser) urlUpdate

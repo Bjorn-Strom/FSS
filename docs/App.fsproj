@@ -6,6 +6,7 @@
         <Compile Include="Markdown.fs" />
         <Compile Include="Utilities.fs" />
         <Compile Include="Logo.fs" />
+        <Compile Include="Hamburger.fs" />
         <Compile Include="App.fs" />
     </ItemGroup>
     <ItemGroup>
