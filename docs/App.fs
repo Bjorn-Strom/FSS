@@ -1120,7 +1120,7 @@ module App =
                 [ Label' "Content Style"
                   Position.absolute
                   textFont
-                  Width' <| pct 75
+                  Width' <| pct 65
                   Right' <| pct 0
                   Top' <| pct 0
                   PaddingTop' <| px 100
