@@ -4,7 +4,7 @@
     <h1 align="center">Fss</h1>
 </p>
 
-![AppVeyor](https://img.shields.io/appveyor/build/bjorn-strom/FSS?style=for-the-badge&logo=appveyor) ![Tests](https://img.shields.io/badge/TESTS-2117-9cf?style=for-the-badge) ![Nuget](https://img.shields.io/nuget/v/fss-lib?style=for-the-badge&logo=nuget) ![Nuget](https://img.shields.io/nuget/dt/fss-lib?style=for-the-badge&logo=nuget) [![GitHub license](https://img.shields.io/github/license/Bjorn-Strom/FSS?style=for-the-badge)](https://github.com/Bjorn-Strom/FSS/blob/master/LICENSE.md)
+![AppVeyor](https://img.shields.io/appveyor/build/bjorn-strom/FSS?style=for-the-badge&logo=appveyor) ![Tests](https://img.shields.io/badge/TESTS-2119-9cf?style=for-the-badge) ![Nuget](https://img.shields.io/nuget/v/fss-lib?style=for-the-badge&logo=nuget) ![Nuget](https://img.shields.io/nuget/dt/fss-lib?style=for-the-badge&logo=nuget) [![GitHub license](https://img.shields.io/github/license/Bjorn-Strom/FSS?style=for-the-badge)](https://github.com/Bjorn-Strom/FSS/blob/master/LICENSE.md)
 
 An opinionated styling library for F#.
 Have CSS as a first class citizen in your F# projects.

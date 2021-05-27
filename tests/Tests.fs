@@ -25,7 +25,6 @@ module Tests =
         Resize.tests
         Grid.tests
         Keyframes.tests
-        Media.tests
         Content.tests
         ListStyle.tests
         Cursor.tests
@@ -51,5 +50,6 @@ module Tests =
         Mask.tests
         Svg.tests
         Psuedo.tests
+        Media.tests
     ]
 

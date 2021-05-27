@@ -33,6 +33,22 @@ module Media =
                             ]
                     ("@media print " ==> "[marginTop,200px; transform,rotate(45.00deg); backgroundColor,#cd5c5c]")
                 testMediaFor
+                    "Media query for screen with max width"
+                        (FssTypes.Media.Screen)
+                        [ FssTypes.Media.MaxWidth <| px 1000 ]
+                        [
+                            BackgroundColor.indianRed
+                        ]
+                    ("@media screen and (max-width: 1000px)" ==> "[backgroundColor,#cd5c5c]")
+                testMediaFor
+                    "Media query for screen with max width and min width"
+                        (FssTypes.Media.Screen)
+                        [ FssTypes.Media.MaxWidth <| px 1000; FssTypes.Media.MinWidth <| px 500 ]
+                        [
+                            BackgroundColor.indianRed
+                        ]
+                    ("@media screen and (max-width: 1000px) and (min-width: 500px)" ==> "[backgroundColor,#cd5c5c]")
+                testMediaFor
                     "Media not all"
                         (FssTypes.Media.Not FssTypes.Media.Device.All)
                         [ FssTypes.Media.Feature.Color ]
@@ -50,8 +66,7 @@ module Media =
                     [
                         MarginTop' (px 200)
                         Transforms
-                            [
-                                Transform.rotate (deg 45.0)
+                            [ Transform.rotate (deg 45.0)
                             ]
                         BackgroundColor.indianRed
                     ]

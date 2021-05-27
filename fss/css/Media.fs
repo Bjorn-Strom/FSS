@@ -13,7 +13,7 @@ module Media =
 
     let private pointer (p: FssTypes.Media.Pointer): string = duToLowercase p
     let private colorGamut (c: FssTypes.Media.ColorGamut): string = duToLowercase c
-    let private displayMode (dm: FssTypes.Media.DisplayMode): string = duToLowercase  dm
+    let private displayMode (dm: FssTypes.Media.DisplayMode): string = duToLowercase dm
     let private lightLevel (ll: FssTypes.Media.LightLevel): string = duToLowercase ll
     let private orientation (o: FssTypes.Media.Orientation): string = duToLowercase o
     let private overflowBlock (ob: FssTypes.Media.OverflowBlock): string = duToKebab ob
@@ -30,11 +30,7 @@ module Media =
                 | FssTypes.Media.AspectRatio                r -> sprintf "(aspect-ratio: %d)" r
                 | FssTypes.Media.MinAspectRatio             r -> sprintf "(min-aspect-ratio: %d)" r
                 | FssTypes.Media.MaxAspectRatio             r -> sprintf "(max-aspect-ratio: %d)" r
-                | FssTypes.Media.Feature.Color                ->
-                    if List.length features >= 1 then
-                        sprintf "and (color)"
-                    else
-                        sprintf "(color)"
+                | FssTypes.Media.Feature.Color                -> sprintf "(color)"
                 | FssTypes.Media.MinColor                   c -> sprintf "(min-color: %d)" c
                 | FssTypes.Media.MaxColor                   c -> sprintf "(max-color: %d)" c
                 | FssTypes.Media.ColorGamut                 c -> sprintf "(color-gamut: %s)" <| colorGamut c
@@ -78,6 +74,7 @@ module Media =
     [<Erase>]
     type Media =
         static member Media (features: FssTypes.Media.Feature list, attributeList) =
-            mediaFeature features |> sprintf "@media %s" ==> attributeList |> FssTypes.CssProperty
+             $"@media {mediaFeature features}" ==> attributeList |> FssTypes.CssProperty
         static member Media (device: FssTypes.Media.Device, features: FssTypes.Media.Feature list, attributeList) =
-            sprintf "@media %s %s" (deviceLabel device) (mediaFeature features)  ==> attributeList |> FssTypes.CssProperty
+            let ``and`` = if List.isEmpty features then "" else "and"
+            $"@media {deviceLabel device} {``and``} {mediaFeature features}" ==> attributeList |> FssTypes.CssProperty

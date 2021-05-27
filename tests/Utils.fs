@@ -22,7 +22,8 @@ module Utils =
 
     let testMediaFor (testName: string) device (featureList: FssTypes.Media.Feature list) (attributeList: FssTypes.CssProperty list) (correct: (string * obj)) =
         test testName <| fun _ ->
-            let actual = sprintf "@media %s %s" (deviceLabel device) (mediaFeature featureList)  ==> (attributeList |> List.map FssTypes.masterTypeHelpers.CssValue)
+            let ``and`` = if List.isEmpty featureList then " " else " and "
+            let actual = sprintf "@media %s%s%s" (deviceLabel device) ``and`` (mediaFeature featureList)  ==> (attributeList |> List.map FssTypes.masterTypeHelpers.CssValue)
 
             Expect.equal (actual.ToString()) (correct.ToString())
 
