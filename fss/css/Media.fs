@@ -26,46 +26,46 @@ module Media =
         let stringifyMedia (v: FssTypes.Media.Feature): string =
             match v with
                 | FssTypes.Media.AnyHover                   h -> sprintf "(any-hover: %s)" <| if h then "hover" else "none"
-                | FssTypes.Media.AnyPointer                 p -> sprintf "(any-pointer: %s)" <| pointer p
-                | FssTypes.Media.AspectRatio                r -> sprintf "(aspect-ratio: %d)" r
-                | FssTypes.Media.MinAspectRatio             r -> sprintf "(min-aspect-ratio: %d)" r
-                | FssTypes.Media.MaxAspectRatio             r -> sprintf "(max-aspect-ratio: %d)" r
-                | FssTypes.Media.Feature.Color                -> sprintf "(color)"
-                | FssTypes.Media.MinColor                   c -> sprintf "(min-color: %d)" c
-                | FssTypes.Media.MaxColor                   c -> sprintf "(max-color: %d)" c
-                | FssTypes.Media.ColorGamut                 c -> sprintf "(color-gamut: %s)" <| colorGamut c
-                | FssTypes.Media.ColorIndex                 c -> sprintf "(color-index: %d)" c
-                | FssTypes.Media.MinColorIndex              c -> sprintf "(min-color-index: %d)" c
-                | FssTypes.Media.MaxColorIndex              c -> sprintf "(max-color-index: %d)" c
-                | FssTypes.Media.DisplayMode                d -> sprintf "(display-mode: %s)" <| displayMode d
+                | FssTypes.Media.AnyPointer                 p -> $"(any-pointer: {pointer p})"
+                | FssTypes.Media.AspectRatio                r -> $"(aspect-ratio: {r})"
+                | FssTypes.Media.MinAspectRatio             r -> $"(min-aspect-ratio: {r})"
+                | FssTypes.Media.MaxAspectRatio             r -> $"(max-aspect-ratio: {r})"
+                | FssTypes.Media.Feature.Color                -> $"(color)"
+                | FssTypes.Media.MinColor                   c -> $"(min-color: {c})"
+                | FssTypes.Media.MaxColor                   c -> $"(max-color: {c})"
+                | FssTypes.Media.ColorGamut                 c -> $"(color-gamut: {colorGamut c})"
+                | FssTypes.Media.ColorIndex                 c -> $"(color-index: {c})"
+                | FssTypes.Media.MinColorIndex              c -> $"(min-color-index: {c})"
+                | FssTypes.Media.MaxColorIndex              c -> $"(max-color-index: {c})"
+                | FssTypes.Media.DisplayMode                d -> $"(display-mode: {displayMode d})"
                 | FssTypes.Media.ForcedColors               f -> sprintf "(forced-colors: %s)" <| if f then "active" else "none"
-                | FssTypes.Media.Grid                       g -> sprintf "(grid: %s)" <| if g then "1" else "0"
-                | FssTypes.Media.Height                     h -> sprintf "(height: %s)" <| FssTypes.unitHelpers.sizeToString h
-                | FssTypes.Media.MinHeight                  s -> sprintf "(min-height: %s)" <| FssTypes.unitHelpers.sizeToString s
-                | FssTypes.Media.MaxHeight                  s -> sprintf "(max-height: %s)" <| FssTypes.unitHelpers.sizeToString s
-                | FssTypes.Media.Width                      s -> sprintf "(width: %s)" <| FssTypes.unitHelpers.sizeToString s
-                | FssTypes.Media.MinWidth                   s -> sprintf "(min-width: %s)" <| FssTypes.unitHelpers.sizeToString s
-                | FssTypes.Media.MaxWidth                   s -> sprintf "(max-width: %s)" <| FssTypes.unitHelpers.sizeToString s
+                | FssTypes.Media.Grid                       g -> $"(grid: {if g then 1 else 0})"
+                | FssTypes.Media.Height                     h -> $"(height: {FssTypes.unitHelpers.sizeToString h})"
+                | FssTypes.Media.MinHeight                  s -> $"(min-height: {FssTypes.unitHelpers.sizeToString s})"
+                | FssTypes.Media.MaxHeight                  s -> $"(max-height: {FssTypes.unitHelpers.sizeToString s})"
+                | FssTypes.Media.Width                      s -> $"(width: {FssTypes.unitHelpers.sizeToString s})"
+                | FssTypes.Media.MinWidth                   s -> $"(min-width: {FssTypes.unitHelpers.sizeToString s})"
+                | FssTypes.Media.MaxWidth                   s -> $"(max-width: {FssTypes.unitHelpers.sizeToString s})"
                 | FssTypes.Media.Hover                      h -> sprintf "(hover %s)" <| if h then "hover" else "none"
                 | FssTypes.Media.InvertedColors             c -> sprintf "(inverted-colors: %s)" <| if c then "inverted" else "none"
-                | FssTypes.Media.LightLevel                 l -> sprintf "(light-level: %s)" <| lightLevel l
-                | FssTypes.Media.Monochrome                 m -> sprintf "(monochrome: %d)" m
-                | FssTypes.Media.MinMonochrome              m -> sprintf "(min-monochrome: %d)" m
-                | FssTypes.Media.MaxMonochrome              m -> sprintf "(max-monochrome: %d)" m
-                | FssTypes.Media.Orientation                o -> sprintf "(orientation: %s)" <| orientation o
-                | FssTypes.Media.OverflowBlock              o -> sprintf "(overflow-block: %s)" <| overflowBlock o
+                | FssTypes.Media.LightLevel                 l -> $"(light-level: {lightLevel l})"
+                | FssTypes.Media.Monochrome                 m -> $"(monochrome: {m})"
+                | FssTypes.Media.MinMonochrome              m -> $"(min-monochrome: {m})"
+                | FssTypes.Media.MaxMonochrome              m -> $"(max-monochrome: {m})"
+                | FssTypes.Media.Orientation                o -> $"(orientation: {orientation o})"
+                | FssTypes.Media.OverflowBlock              o -> $"(overflow-block: {overflowBlock o})"
                 | FssTypes.Media.OverflowInline             o -> sprintf "(overflow-inline: %s)" <| if o then "scroll" else "none"
-                | FssTypes.Media.Pointer                    p -> sprintf "(pointer: %s)" <| pointer p
-                | FssTypes.Media.PrefersColorScheme         p -> sprintf "(prefers-color-scheme: %s)" <| colorScheme p
-                | FssTypes.Media.PrefersContrast            c -> sprintf "(prefers-contrast: %s)" <| contrast c
+                | FssTypes.Media.Pointer                    p -> $"(pointer: {pointer p})"
+                | FssTypes.Media.PrefersColorScheme         p -> $"(prefers-color-scheme: {colorScheme p})"
+                | FssTypes.Media.PrefersContrast            c -> $"(prefers-contrast: {contrast c})"
                 | FssTypes.Media.PrefersReducedMotion       p -> sprintf "(prefers-reduced-motion: %s)" <| if p then "reduce" else "no-preference"
                 | FssTypes.Media.PrefersReducedTransparency p -> sprintf "(prefers-reduced-transparency: %s)" <| if p then "reduce" else "no-preference"
-                | FssTypes.Media.Resolution                 r -> sprintf "(resolution: %s)" <| FssTypes.unitHelpers.resolutionToString r
-                | FssTypes.Media.MinResolution              r -> sprintf "(min-resolution: %s)" <| FssTypes.unitHelpers.resolutionToString r
-                | FssTypes.Media.MaxResolution              r -> sprintf "(max-resolution: %s)" <| FssTypes.unitHelpers.resolutionToString r
-                | FssTypes.Media.Scan                       s -> sprintf "(scan: %s)" <| scan s
-                | FssTypes.Media.Scripting                  s -> sprintf "(scripting: %s)" <| scripting s
-                | FssTypes.Media.Update                     u -> sprintf "(update: %s)" <| update u
+                | FssTypes.Media.Resolution                 r -> $"(resolution: {FssTypes.unitHelpers.resolutionToString r})"
+                | FssTypes.Media.MinResolution              r -> $"(min-resolution: {FssTypes.unitHelpers.resolutionToString r})"
+                | FssTypes.Media.MaxResolution              r -> $"(max-resolution: {FssTypes.unitHelpers.resolutionToString r})"
+                | FssTypes.Media.Scan                       s -> $"(scan: {scan s})"
+                | FssTypes.Media.Scripting                  s -> $"(scripting: {scripting s})"
+                | FssTypes.Media.Update                     u -> $"(update: {update u})"
 
         features
         |> List.map stringifyMedia
