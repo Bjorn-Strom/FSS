@@ -12,6 +12,7 @@
 out/
 .parcel-cache/
 parcel-bundle-reports
+secrets
 
 # Fable compilation
 public/*.js

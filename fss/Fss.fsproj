@@ -5,11 +5,12 @@
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;emotion;CSS;styling;css-in-lang;fable;react;html</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <AssemblyName>Fss-lib</AssemblyName>
+    <PackageReleaseNotes>Add zIndex property and fix bug with media queries for specific devices</PackageReleaseNotes>
   </PropertyGroup>
     <PropertyGroup>
         <NpmDependencies>
