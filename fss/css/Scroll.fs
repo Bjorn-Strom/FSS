@@ -319,3 +319,34 @@ module OverscrollBehaviorY =
     /// - Initial
     /// - Unset
     let OverscrollBehaviorY' = OverscrollBehaviorY.value
+
+[<AutoOpen>]
+module ScrollSnapType =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type
+    let private stringifySnap (snap: FssTypes.IScrollSnapType) =
+        match snap with
+        | :? FssTypes.Scroll.SnapType.Type as s -> Utilities.Helpers.duToLowercase s
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | _ -> "Unknown scroll snap type"
+
+    let private snapType = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollSnapType
+    let private snapType': (FssTypes.IScrollSnapType -> FssTypes.CssProperty) = stringifySnap >> snapType
+
+    type ScrollSnapType =
+        static member value (type': FssTypes.IScrollSnapType) = type' |> snapType'
+        static member value (type': FssTypes.Scroll.SnapType.Type, viewPort: FssTypes.Scroll.SnapType.Viewport) =
+            $"{stringifySnap type'} {Utilities.Helpers.duToLowercase viewPort}" |> snapType
+
+        static member x = FssTypes.Scroll.SnapType.X |> snapType'
+        static member y = FssTypes.Scroll.SnapType.Y |> snapType'
+        static member block = FssTypes.Scroll.SnapType.Block |> snapType'
+        static member inline' = FssTypes.Scroll.SnapType.Inline |> snapType'
+        static member both = FssTypes.Scroll.SnapType.Both |> snapType'
+
+        static member none = FssTypes.None' |> snapType'
+        static member inherit' = FssTypes.Inherit |> snapType'
+        static member initial = FssTypes.Initial |> snapType'
+        static member unset = FssTypes.Unset |> snapType'
+
+    let ScrollSnapType' snapType viewPort = ScrollSnapType.value(snapType, viewPort)

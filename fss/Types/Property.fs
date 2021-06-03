@@ -255,6 +255,9 @@ namespace Fss.FssTypes
             | ScrollPaddingRight
             | ScrollPaddingTop
             | ScrollPadding
+            | ScrollSnapType
+            | ScrollSnapAlign
+            | ScrollSnapStop
             | OverscrollBehaviorX
             | OverscrollBehaviorY
             | TabSize

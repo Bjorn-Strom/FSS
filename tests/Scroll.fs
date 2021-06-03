@@ -149,4 +149,57 @@ module Scroll =
                     "ScrollMargins multiple"
                     [ ScrollMargin.value (px 10, px 20, px 30, px 40) ]
                     [ "scrollMargin" ==> "10px 20px 30px 40px" ]
+
+
+
+
+                testCase
+                    "ScrollSnapType none"
+                    [ ScrollSnapType.none ]
+                    [ "scrollSnapType" ==> "none" ]
+                testCase
+                    "ScrollSnapType x"
+                    [ ScrollSnapType.x ]
+                    [ "scrollSnapType" ==> "x" ]
+                testCase
+                    "ScrollSnapType y"
+                    [ ScrollSnapType.y ]
+                    [ "scrollSnapType" ==> "y" ]
+                testCase
+                    "ScrollSnapType block"
+                    [ ScrollSnapType.block ]
+                    [ "scrollSnapType" ==> "block" ]
+                testCase
+                    "ScrollSnapType inline"
+                    [ ScrollSnapType.inline' ]
+                    [ "scrollSnapType" ==> "inline" ]
+                testCase
+                    "ScrollSnapType both"
+                    [ ScrollSnapType.both ]
+                    [ "scrollSnapType" ==> "both" ]
+                testCase
+                    "ScrollSnapType x mandatory"
+                    [ ScrollSnapType' FssTypes.Scroll.SnapType.X FssTypes.Scroll.SnapType.Mandatory ]
+                    [ "scrollSnapType" ==> "x mandatory" ]
+                testCase
+                    "ScrollSnapType x mandatory"
+                    [ ScrollSnapType' FssTypes.Scroll.SnapType.Y FssTypes.Scroll.SnapType.Proximity ]
+                    [ "scrollSnapType" ==> "y proximity" ]
+                testCase
+                    "ScrollSnapType both mandatory"
+                    [ ScrollSnapType' FssTypes.Scroll.SnapType.Both FssTypes.Scroll.SnapType.Mandatory ]
+                    [ "scrollSnapType" ==> "both mandatory" ]
+                testCase
+                    "ScrollSnapType inherit"
+                    [ ScrollSnapType.inherit']
+                    [ "scrollSnapType" ==> "inherit" ]
+                testCase
+                    "ScrollSnapType initial"
+                    [ ScrollSnapType.initial]
+                    [ "scrollSnapType" ==> "initial" ]
+                testCase
+                    "ScrollSnapType unset"
+                    [ ScrollSnapType.unset ]
+                    [ "scrollSnapType" ==> "unset" ]
+
             ]

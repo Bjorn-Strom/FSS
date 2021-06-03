@@ -126,6 +126,10 @@ namespace Fss.FssTypes
     type IOverscrollBehaviorX  = interface end
     type IOverscrollBehaviorY  = interface end
 
+    type IScrollSnapType  = interface end
+    type IScrollSnapAlign = interface end
+    type IScrollSnapStop  = interface end
+
     type IContentSize = interface end
 
     type IVisibility = interface end
@@ -357,6 +361,8 @@ namespace Fss.FssTypes
         interface IFontSynthesis
         interface IMaskImage
         interface IObjectFit
+        interface IScrollSnapType
+        interface IScrollSnapAlign
 
     type Normal =
         | Normal
@@ -566,6 +572,9 @@ namespace Fss.FssTypes
         interface IObjectPosition
         interface IImageRendering
         interface IZIndex
+        interface IScrollSnapType
+        interface IScrollSnapAlign
+        interface IScrollSnapStop
 
     type CssInt =
         | CssInt of int

@@ -10,7 +10,6 @@ module Tests =
         Filter.tests
         Clear.tests
         ClipPath.tests
-        Scroll.tests
         PointerEvents.tests
         Custom.tests
         BoxShadow.tests
@@ -51,5 +50,6 @@ module Tests =
         Svg.tests
         Psuedo.tests
         Media.tests
+        Scroll.tests
     ]
 

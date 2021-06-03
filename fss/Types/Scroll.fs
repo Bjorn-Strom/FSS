@@ -23,3 +23,17 @@ namespace Fss.FssTypes
             member this.inherit' = Inherit |> valueFunction'
             member this.initial = Initial |> valueFunction'
             member this.unset = Unset |> valueFunction'
+
+        module SnapType =
+            type Type =
+                | None'
+                | X
+                | Y
+                | Block
+                | Inline
+                | Both
+                interface IScrollSnapType
+
+            type Viewport =
+                | Mandatory
+                | Proximity
