@@ -44,3 +44,8 @@ namespace Fss.FssTypes
             | Center
             interface IScrollSnapAlign
 
+        type SnapStop =
+            | Normal
+            | Always
+            interface IScrollSnapStop
+

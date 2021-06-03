@@ -353,7 +353,7 @@ module ScrollSnapType =
 
 [<AutoOpen>]
 module ScrollSnapAlign =
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align
     let private stringifySnap (snap: FssTypes.IScrollSnapAlign) =
         match snap with
         | :? FssTypes.Scroll.SnapAlign as s -> Utilities.Helpers.duToLowercase s
@@ -379,3 +379,30 @@ module ScrollSnapAlign =
         static member unset = FssTypes.Unset |> snapAlign'
 
     let ScrollSnapAlign' block inline' = ScrollSnapAlign.value(block, inline')
+
+
+
+
+[<AutoOpen>]
+module ScrollSnapStop =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop
+    let private stringifySnap (snap: FssTypes.IScrollSnapStop) =
+        match snap with
+        | :? FssTypes.Scroll.SnapStop as s -> Utilities.Helpers.duToLowercase s
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | _ -> "Unknown scroll snap stop"
+
+    let private snapStop = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollSnapStop
+    let private snapStop': (FssTypes.IScrollSnapStop -> FssTypes.CssProperty) = stringifySnap >> snapStop
+
+    type ScrollSnapStop =
+        static member value (align: FssTypes.IScrollSnapStop) = align |> snapStop'
+
+        static member normal = FssTypes.Scroll.SnapStop.Normal |> snapStop'
+        static member always = FssTypes.Scroll.SnapStop.Always |> snapStop'
+
+        static member inherit' = FssTypes.Inherit |> snapStop'
+        static member initial = FssTypes.Initial |> snapStop'
+        static member unset = FssTypes.Unset |> snapStop'
+
+    let ScrollSnapStop' stop = ScrollSnapStop.value stop

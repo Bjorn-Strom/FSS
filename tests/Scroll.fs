@@ -229,6 +229,24 @@ module Scroll =
                     "ScrollSnapAlign unset"
                     [ ScrollSnapAlign.unset ]
                     [ "scrollSnapAlign" ==> "unset" ]
-
-
+                testCase
+                    "ScrollSnapStop normal"
+                    [ ScrollSnapStop.normal]
+                    [ "scrollSnapStop" ==> "normal" ]
+                testCase
+                    "ScrollSnapStop always"
+                    [ ScrollSnapStop.always]
+                    [ "scrollSnapStop" ==> "always" ]
+                testCase
+                    "ScrollSnapStop inherit"
+                    [ ScrollSnapStop.inherit' ]
+                    [ "scrollSnapStop" ==> "inherit" ]
+                testCase
+                    "ScrollSnapStop initial"
+                    [ ScrollSnapStop.initial]
+                    [ "scrollSnapStop" ==> "initial" ]
+                testCase
+                    "ScrollSnapStop unset"
+                    [ ScrollSnapStop.unset ]
+                    [ "scrollSnapStop" ==> "unset" ]
             ]
