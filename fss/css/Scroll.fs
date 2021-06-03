@@ -350,3 +350,32 @@ module ScrollSnapType =
         static member unset = FssTypes.Unset |> snapType'
 
     let ScrollSnapType' snapType viewPort = ScrollSnapType.value(snapType, viewPort)
+
+[<AutoOpen>]
+module ScrollSnapAlign =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type
+    let private stringifySnap (snap: FssTypes.IScrollSnapAlign) =
+        match snap with
+        | :? FssTypes.Scroll.SnapAlign as s -> Utilities.Helpers.duToLowercase s
+        | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
+        | :? FssTypes.Keywords as k -> FssTypes.masterTypeHelpers.keywordsToString k
+        | _ -> "Unknown scroll snap align"
+
+    let private snapAlign = FssTypes.propertyHelpers.cssValue FssTypes.Property.ScrollSnapAlign
+    let private snapAlign': (FssTypes.IScrollSnapAlign -> FssTypes.CssProperty) = stringifySnap >> snapAlign
+
+    type ScrollSnapAlign =
+        static member value (align: FssTypes.IScrollSnapAlign) = align |> snapAlign'
+        static member value (block: FssTypes.Scroll.SnapAlign, inline': FssTypes.Scroll.SnapAlign) =
+            $"{stringifySnap block} {stringifySnap inline'}" |> snapAlign
+
+        static member start = FssTypes.Scroll.SnapAlign.Start |> snapAlign'
+        static member end' = FssTypes.Scroll.SnapAlign.End |> snapAlign'
+        static member center = FssTypes.Scroll.SnapAlign.Center |> snapAlign'
+
+        static member none = FssTypes.None' |> snapAlign'
+        static member inherit' = FssTypes.Inherit |> snapAlign'
+        static member initial = FssTypes.Initial |> snapAlign'
+        static member unset = FssTypes.Unset |> snapAlign'
+
+    let ScrollSnapAlign' block inline' = ScrollSnapAlign.value(block, inline')

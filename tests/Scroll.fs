@@ -149,10 +149,6 @@ module Scroll =
                     "ScrollMargins multiple"
                     [ ScrollMargin.value (px 10, px 20, px 30, px 40) ]
                     [ "scrollMargin" ==> "10px 20px 30px 40px" ]
-
-
-
-
                 testCase
                     "ScrollSnapType none"
                     [ ScrollSnapType.none ]
@@ -201,5 +197,38 @@ module Scroll =
                     "ScrollSnapType unset"
                     [ ScrollSnapType.unset ]
                     [ "scrollSnapType" ==> "unset" ]
+                testCase
+                    "ScrollSnapAlign start end"
+                    [ ScrollSnapAlign.value(FssTypes.Scroll.SnapAlign.Start, FssTypes.Scroll.SnapAlign.End)]
+                    [ "scrollSnapAlign" ==> "start end" ]
+                testCase
+                    "ScrollSnapAlign start"
+                    [ ScrollSnapAlign.start]
+                    [ "scrollSnapAlign" ==> "start" ]
+                testCase
+                    "ScrollSnapAlign end"
+                    [ ScrollSnapAlign.end']
+                    [ "scrollSnapAlign" ==> "end" ]
+                testCase
+                    "ScrollSnapAlign center"
+                    [ ScrollSnapAlign.center]
+                    [ "scrollSnapAlign" ==> "center" ]
+                testCase
+                    "ScrollSnapAlign none"
+                    [ ScrollSnapAlign.none]
+                    [ "scrollSnapAlign" ==> "none" ]
+                testCase
+                    "ScrollSnapAlign inherit"
+                    [ ScrollSnapAlign.inherit' ]
+                    [ "scrollSnapAlign" ==> "inherit" ]
+                testCase
+                    "ScrollSnapAlign initial"
+                    [ ScrollSnapAlign.initial]
+                    [ "scrollSnapAlign" ==> "initial" ]
+                testCase
+                    "ScrollSnapAlign unset"
+                    [ ScrollSnapAlign.unset ]
+                    [ "scrollSnapAlign" ==> "unset" ]
+
 
             ]

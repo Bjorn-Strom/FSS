@@ -37,3 +37,10 @@ namespace Fss.FssTypes
             type Viewport =
                 | Mandatory
                 | Proximity
+
+        type SnapAlign =
+            | Start
+            | End
+            | Center
+            interface IScrollSnapAlign
+
