@@ -16,7 +16,7 @@ Html.div [
 ```
 
 I did however find that there isn't much to gain by doing this.
-Fss already generates Css with classnames and can be used in a very straight forward way.
+Fss already generates Css with classnames and can be used in a very straight forward way. I also felt it went against one of my goals of this project which was to have a system that is independent of any frontend framework and can be used in any way the user wants.
 
 The equivalent styling in Feliz with normal Fss is:
 
