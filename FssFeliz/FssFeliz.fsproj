@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>A way to write your Feliz in Fss.</Description>
+    <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
+    <PackageTags>fsharp;emotion;CSS;styling;css-in-lang;fable;react;html;feliz</PackageTags>
+    <Authors>Bjørn-Ivar Strøm</Authors>
+    <Version>0.1</Version>
+    <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Fss-lib-Feliz</AssemblyName>
+    <PackageReleaseNotes>Initial support for Feliz specific syntax.</PackageReleaseNotes>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NpmDependencies>
+      <NpmPackage Name="@emotion/css" Version="&gt;= 11.0.0" />
+    </NpmDependencies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="FssFeliz.fs" />
+    <Content Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\fss\Fss.fsproj" />
+  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>

@@ -7,7 +7,10 @@ module App =
     open Fable.React
     open Fable.React.Props
     open Fable.SimpleHttp
+    open Feliz
     open Fss
+    open Fss.Feliz
+
 
     open Markdown
 
@@ -962,7 +965,54 @@ module App =
                             yield! elements
                         ]
                 ]
-        let feliz = article [] [ markdown [ Renderers renderers; Children currentMarkdown ] ]
+        let feliz =
+            let bounceFrames =
+                keyframes
+                    [
+                        frames [ 0; 20; 53; 80; 100 ]
+                            [ Transforms [ Transform.translate3D(px 0, px 0, px 0) ] ]
+                        frames [40; 43]
+                            [ Transforms [ Transform.translate3D(px 0, px -30, px 0) ] ]
+                        frame 70
+                            [ Transforms [ Transform.translate3D(px 0, px -15, px 0) ] ]
+                        frame 90
+                            [ Transforms [ Transform.translate3D(px 0, px -4, px 0) ] ]
+                    ]
+
+            let box =
+                Html.div [
+                    prop.fss [ BackgroundColor.red
+                               Width' <| px 200
+                               Height' <| px 200
+                               Hover [ BackgroundColor.blue ]]
+                    ]
+            let bounceBox =
+                Html.div [
+                    prop.fss [ BackgroundColor.red
+                               Width' <| px 200
+                               Height' <| px 200
+                               Hover [ BackgroundColor.blue ]
+                               AnimationName.name bounceFrames
+                               AnimationDuration' (sec 1.0)
+                               AnimationTimingFunction.easeInOut
+                               AnimationIterationCount.infinite ]
+                   ]
+            let examples = [ box; bounceBox ]
+
+            let feliz =
+                currentMarkdown.Split "###"
+                |> Seq.toList
+                |> List.skip 1
+                |> List.zip examples
+                |> List.map (fun (e, s) ->
+                    fragment []
+                        [
+                            markdown [ Renderers renderers; Children $"## {s}" ]
+                            e
+                        ])
+
+            article [] feliz
+
         let svg = article [] [
             markdown [ Renderers renderers; Children currentMarkdown]
             let logoAnimation =

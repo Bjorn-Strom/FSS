@@ -9,6 +9,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss", "fss\Fss.fsproj", "{A
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "App", "docs\App.fsproj", "{35435E48-AE57-46EE-8729-12D96F418675}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FssFeliz", "FssFeliz\FssFeliz.fsproj", "{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{35435E48-AE57-46EE-8729-12D96F418675}.Release|x64.Build.0 = Release|Any CPU
 		{35435E48-AE57-46EE-8729-12D96F418675}.Release|x86.ActiveCfg = Release|Any CPU
 		{35435E48-AE57-46EE-8729-12D96F418675}.Release|x86.Build.0 = Release|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Debug|x64.Build.0 = Debug|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Debug|x86.Build.0 = Debug|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Release|x64.ActiveCfg = Release|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Release|x64.Build.0 = Release|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Release|x86.ActiveCfg = Release|Any CPU
+		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
