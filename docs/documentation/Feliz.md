@@ -21,11 +21,12 @@ Html.div [
     prop.fss [ BackgroundColor.red
                Width' <| px 200
                Height' <| px 200
-               Hover [ BackgroundColor.blue ]]
+               Hover [ BackgroundColor.blue ]
     ]
+]
 ```
 
-### What can you do with this?
+## What can you do with this?
 Anything you can do in an `fss` block you can do in a `prop.fss` block.
 For some things, like animations, you might not want to specify them inline as that would lead to some messy code, but we can define them outside of the DSL and use it.
 
@@ -38,7 +39,16 @@ Html.div [
                AnimationName.Name bounceFrames
                AnimationDuration' (sec 1.0)
                AnimationTimingFunction.easeInOut
-               AnimationIterationCount.infinite ]
-   ]
+               AnimationIterationCount.infinite
+    ]
+]
 ```
 
+## Helpers
+
+In addition to the `fss` two other helpers have been added as well.
+
+`fssWithClass` which can take in an already existing classname and an fss block. This will combine the two so you can use your existing styling in addition to fss.
+
+`fssCombine` which is an implementation of JavaScripts `classNames` or Emotions `cx`.
+The function takes a list of classnames to apply and a list of classnames/predicate tuples to optionally apply.

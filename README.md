@@ -102,6 +102,15 @@ npm i @emotion/css
 yarn add @emotion/css
 ```
 
+If you want to use Fss.Feliz as well then run:
+```
+# nuget
+dotnet add package Fss-lib-feliz
+
+# paket
+paket add Fss-lib-feliz --project ./project/path
+```
+
 
 You can also check out this template [repo](https://github.com/Bjorn-Strom/elmish-fss-template).
 

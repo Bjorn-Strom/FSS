@@ -27,22 +27,30 @@ let runTool cmd args workingDir =
 let clean () =
    printfn "Cleaning"
    Shell.cleanDir "fss/bin"
+   Shell.cleanDir "FssFeliz/bin"
    runTool "dotnet" "clean" __SOURCE_DIRECTORY__
 
-Target.create "Publish" (fun _ ->
+let publish path =
     clean ()
-    let appName = "fss-lib"
     let apiKey = File.ReadAllText("secrets")
     printfn "Packing"
-    runTool "dotnet" "restore --no-cache fss" __SOURCE_DIRECTORY__
-    runTool "dotnet" "pack -c release fss" __SOURCE_DIRECTORY__
+    runTool "dotnet" (sprintf "restore --no-cache %s" path) __SOURCE_DIRECTORY__
+    runTool "dotnet" (sprintf "pack -c release %s" path) __SOURCE_DIRECTORY__
     printfn "Publishing"
     let path =
-        Directory.GetFiles("fss/bin/Release")
+        Directory.GetFiles(sprintf "%s/bin/Release" path)
         |> Seq.head
         |> Path.GetFullPath
 
-    runTool "dotnet" (sprintf "nuget push %s -s nuget.org -k %s" path apiKey) __SOURCE_DIRECTORY__
-)
+    printfn "Publishing to: %A" path
+
+    //runTool "dotnet" (sprintf "nuget push %s -s nuget.org -k %s" path apiKey) __SOURCE_DIRECTORY__
+
+Target.create "PublishFss" (fun _ ->
+    publish "fss" )
+
+Target.create "PublishFssFeliz" (fun _ ->
+    publish "FssFeliz")
+
 
 Target.runOrDefault ""
