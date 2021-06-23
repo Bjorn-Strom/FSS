@@ -11,7 +11,7 @@ paket add Fss-lib-feliz --project ./project/path
 ```
 While the codebase for this syntax is small I dont want to introduce any additional dependencies which arent needed for pure Fss. Therefore an extra package is needed.
 
-### Using this syntax
+## Using this syntax
 If you know Fss already you write all the styling in a list and pass that into the `fss` function.
 This is still true, but when you open the `Fss.Feliz` namespace you can access `fss` as a prop.
 
@@ -37,7 +37,7 @@ Html.div [
                Height' <| px 200
                Hover [ BackgroundColor.blue ]
                AnimationName.Name bounceFrames
-               AnimationDuration' (sec 1.0)
+               AnimationDuration' <| sec 1.0
                AnimationTimingFunction.easeInOut
                AnimationIterationCount.infinite
     ]

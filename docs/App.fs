@@ -995,7 +995,7 @@ module App =
                                AnimationName.name bounceFrames
                                AnimationDuration' (sec 1.0)
                                AnimationTimingFunction.easeInOut
-                               AnimationIterationCount.infinite ]
+                               AnimationIterationCount.infinite
                    ]
             let examples = [ fragment [] []; box; bounceBox; fragment [] []]
 
