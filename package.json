@@ -7,7 +7,7 @@
     "build-report": "dotnet fable ./docs -o ./public --run parcel build public/index.html --reporter @parcel/reporter-bundle-analyzer --public-url .",
     "test": "dotnet fable ./tests -o ./dist/tests --run node ./dist/tests/Tests.js",
     "watch-test": "dotnet fable watch ./tests -o ./dist/tests --run nodemon ./dist/tests/Tests.js",
-    "clean": "rm -rf dist && rm -rf public/*.js && rm -rf public/fss public/.fable .parcel-cache",
+    "clean": "rm -rf dist public/*.js public/fss public/FssFeliz public/.fable .parcel-cache",
     "publish-docs": "npm run clean && npm run build && gh-pages -d dist"
   },
   "homepage": "https://Bjorn-Strom.github.io/FSS",

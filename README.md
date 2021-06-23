@@ -37,6 +37,26 @@ let buttonStyle =
 button [ ClassName buttonStyle ] [ str "Click me" ]
 ```
 
+And with Feliz syntax.
+```fsharp
+Html.button [
+    prop.text "Click me"
+    prop.fss [
+        BackgroundColor.hex "44c767"
+        BorderRadius' (px 30)
+        BorderWidth' (px 1)
+        BorderStyle.solid
+        BorderColor.hex "18ab29"
+        Display.inlineBlock
+        Cursor.pointer
+        FontSize' (px 17)
+        Hover [
+            BackgroundColor.hex "5cbf2a"
+        ]
+    ]
+]
+```
+
 ## Motivation 🤔
 While you have some good alternatives with F# such as:
 - [Fulma](https://fulma.github.io/Fulma/)
@@ -81,6 +101,15 @@ npm i @emotion/css
 
 # yarn
 yarn add @emotion/css
+```
+
+If you want to use Fss.Feliz as well then run:
+```
+# nuget
+dotnet add package Fss-lib-feliz
+
+# paket
+paket add Fss-lib-feliz --project ./project/path
 ```
 
 

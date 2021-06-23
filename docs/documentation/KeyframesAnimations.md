@@ -45,7 +45,7 @@ let bounceFrames =
 let bounceAnimation =
     fss
         [
-            AnimationName.Name bounceFrames
+            AnimationName.name bounceFrames
             AnimationDuration' (sec 1.0)
             AnimationTimingFunction.easeInOut
             AnimationIterationCount.infinite

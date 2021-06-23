@@ -1,36 +1,54 @@
 ## Feliz
 
-For a while I considered adding a Feliz specific syntax.
-I made a proof of concept that looked like this:
+After I started using Feliz and liking the API quite a bit I figured it was finally time to play around with a Feliz-specific syntax for Fss.
+In order to use this specific syntax you need to install an additional Nuget package:
+```
+# nuget
+dotnet add package Fss-lib-feliz
 
+# paket
+paket add Fss-lib-feliz --project ./project/path
+```
+While the codebase for this syntax is small I dont want to introduce any additional dependencies which arent needed for pure Fss. Therefore an extra package is needed.
+
+### Using this syntax
+If you know Fss already you write all the styling in a list and pass that into the `fss` function.
+This is still true, but when you open the `Fss.Feliz` namespace you can access `fss` as a prop.
+
+Here is a quick example of how that works.
 ```fsharp
 Html.div [
-    prop.fss [
-        fss.backgroundColor.green
-        fss.hover [
-            fss.backgroundColor.red
-            fss.color.white
-        ]
+    prop.fss [ BackgroundColor.red
+               Width' <| px 200
+               Height' <| px 200
+               Hover [ BackgroundColor.blue ]
     ]
 ]
 ```
 
-I did however find that there isn't much to gain by doing this.
-Fss already generates Css with classnames and can be used in a very straight forward way. I also felt it went against one of my goals of this project which was to have a system that is independent of any frontend framework and can be used in any way the user wants.
-
-The equivalent styling in Feliz with normal Fss is:
+## What can you do with this?
+Anything you can do in an `fss` block you can do in a `prop.fss` block.
+For some things, like animations, you might not want to specify them inline as that would lead to some messy code, but we can define them outside of the DSL and use it.
 
 ```fsharp
 Html.div [
-    prop.className <| fss [
-        BackgroundColor.green
-        Hover [
-            BackgroundColor.red
-            Color.white
-        ]
+    prop.fss [ BackgroundColor.red
+               Width' <| px 200
+               Height' <| px 200
+               Hover [ BackgroundColor.blue ]
+               AnimationName.Name bounceFrames
+               AnimationDuration' (sec 1.0)
+               AnimationTimingFunction.easeInOut
+               AnimationIterationCount.infinite
     ]
 ]
 ```
 
-The syntax is not very different here and I personally prefer the latter Fss syntax as it's more similar to Css.
-So that is what Fss will keep supporting going forward.
+## Helpers
+
+In addition to the `fss` two other helpers have been added as well.
+
+`fssWithClass` which can take in an already existing classname and an fss block. This will combine the two so you can use your existing styling in addition to fss.
+
+`fssCombine` which is an implementation of JavaScripts `classNames` or Emotions `cx`.
+The function takes a list of classnames to apply and a list of classnames/predicate tuples to optionally apply.

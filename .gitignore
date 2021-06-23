@@ -14,11 +14,14 @@ out/
 parcel-bundle-reports
 secrets
 
+
 # Fable compilation
 public/*.js
 public/fss
+public/FssFeliz
 public-tests/*.js
 public-tests/fss
+public-tests/FssFeliz
 
 # User-specific files
 *.rsuser

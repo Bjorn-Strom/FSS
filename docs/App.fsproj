@@ -10,6 +10,7 @@
         <Compile Include="App.fs" />
     </ItemGroup>
     <ItemGroup>
+        <ProjectReference Include="..\FssFeliz\FssFeliz.fsproj" />
         <ProjectReference Include="..\fss\Fss.fsproj" />
     </ItemGroup>
     <ItemGroup>
