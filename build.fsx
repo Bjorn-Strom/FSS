@@ -42,9 +42,7 @@ let publish path =
         |> Seq.head
         |> Path.GetFullPath
 
-    printfn "Publishing to: %A" path
-
-    //runTool "dotnet" (sprintf "nuget push %s -s nuget.org -k %s" path apiKey) __SOURCE_DIRECTORY__
+    runTool "dotnet" (sprintf "nuget push %s -s nuget.org -k %s" path apiKey) __SOURCE_DIRECTORY__
 
 Target.create "PublishFss" (fun _ ->
     publish "fss" )
