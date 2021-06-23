@@ -67,6 +67,7 @@ Ultimately you will find what you like best and whatever suits your needs, I fin
 It is not discoverable, not type-safe and requires some setup.
 
 The primary goal of this project is to avoid all of that and have an easy way to write type-safe discoverable styling with F# that supports most of the CSS spec.
+It was also important to me that it works independently of frontend frameworks, so this will work with Fable.React, Feliz or any other framework you want to use.
 
 3 major goals of Fss
 - I did not want to reinvent the wheel - it should be easy to use if you already know CSS.
