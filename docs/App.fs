@@ -997,10 +997,10 @@ module App =
                                AnimationTimingFunction.easeInOut
                                AnimationIterationCount.infinite ]
                    ]
-            let examples = [ box; bounceBox ]
+            let examples = [ box; bounceBox; fragment [] []; fragment [] []]
 
             let feliz =
-                currentMarkdown.Split "###"
+                currentMarkdown.Split "##"
                 |> Seq.toList
                 |> List.skip 1
                 |> List.zip examples
