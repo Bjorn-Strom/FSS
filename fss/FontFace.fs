@@ -12,6 +12,12 @@ module FontFace =
             | FssTypes.FontFace.UrlFormat (s, f) -> sprintf "url('%s') format('%s')" s (Utilities.Helpers.duToKebab f)
             | FssTypes.FontFace.Local l -> sprintf "local('%s')" l
 
+    let private stringifyOverride (``override``: FssTypes.ILineGapOverride) =
+        match ``override`` with
+            | :? FssTypes.Normal -> FssTypes.masterTypeHelpers.normal
+            | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
+            | _ -> "Unknown line gap override value"
+
     let private sourceValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Src
     let private styleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStyle
     let private displayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
@@ -19,6 +25,7 @@ module FontFace =
     let private weightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight
     let private sizeAdjustValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.SizeAdjust
     let private unicodeRangeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.UnicodeRange
+    let private overrideValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LineGapOverride
 
     [<Erase>]
     type FontFace =
@@ -31,6 +38,7 @@ module FontFace =
         static member sizeAdjust (adjust: FssTypes.Percent) = adjust |> FssTypes.unitHelpers.percentToString |> sizeAdjustValue
         static member unicodeRange (range: string) = range |> unicodeRangeValue
         static member unicodeRanges (ranges: string list) = Utilities.Helpers.combineComma id ranges |> unicodeRangeValue
+        static member lineGapOverride (``override``: FssTypes.ILineGapOverride) = ``override`` |> stringifyOverride |> overrideValue
 
     let createFontFaceObject (fontName: string) (attributeList: FssTypes.CssProperty list) =
         let attributeList' =  List.map FssTypes.masterTypeHelpers.CssValue attributeList

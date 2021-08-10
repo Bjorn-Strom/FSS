@@ -163,6 +163,7 @@ namespace Fss.FssTypes
             | ListStyleImage
             | ListStylePosition
             | ListStyleType
+            | LineGapOverride
             | MaskClip
             | MaskComposite
             | MaskImage

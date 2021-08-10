@@ -180,4 +180,13 @@ module FontFace =
                     "Unicode range multiple"
                     [ FontFace.unicodeRanges [ "U+0025-00FF"; "U+4??" ] ]
                     [ "unicodeRange" ==> "U+0025-00FF, U+4??" ]
+
+                testCase
+                    "Linegap override normal"
+                    [ FontFace.lineGapOverride FssTypes.Normal ]
+                    [ "lineGapOverride" ==> "normal" ]
+                testCase
+                    "Linegap override normal"
+                    [ FontFace.lineGapOverride <| pct 90 ]
+                    [ "lineGapOverride" ==> "90%" ]
             ]

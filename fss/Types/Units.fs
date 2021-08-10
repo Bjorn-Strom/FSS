@@ -37,6 +37,7 @@ namespace Fss.FssTypes
         interface IMaskSize
         interface IBaselineShift
         interface IStrokeWidth
+        interface ILineGapOverride
 
     // https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units
     type Length =

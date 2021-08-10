@@ -33,6 +33,7 @@ namespace Fss.FssTypes
     type ILineHeight           = interface end
     type ILineBreak            = interface end
     type ILetterSpacing        = interface end
+    type ILineGapOverride      = interface end
 
     type ITextAlign               = interface end
     type ITextAlignLast           = interface end
@@ -377,6 +378,7 @@ namespace Fss.FssTypes
         interface IFontVariantPosition
         interface IFontKerning
         interface IFontLanguageOverride
+        interface ILineGapOverride
         interface ILineHeight
         interface ILineBreak
         interface ILetterSpacing

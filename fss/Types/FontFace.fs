@@ -15,4 +15,3 @@ namespace Fss.FssTypes
             | Url of string
             | UrlFormat of string * Format
             | Local of string
-
