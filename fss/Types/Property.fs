@@ -258,6 +258,7 @@ namespace Fss.FssTypes
             | ScrollSnapType
             | ScrollSnapAlign
             | ScrollSnapStop
+            | SizeAdjust
             | OverscrollBehaviorX
             | OverscrollBehaviorY
             | TabSize
@@ -295,6 +296,7 @@ namespace Fss.FssTypes
             | TransitionProperty
             | TransitionTimingFunction
             | UnicodeBidi
+            | UnicodeRange
             | UserSelect
             | VerticalAlign
             | Visibility

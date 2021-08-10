@@ -26,31 +26,31 @@ p [ ClassName amaticStyle ] [str """This font is Amatic SC, some nice text this 
 
 ```fsharp
 let droidSerifFont =
-    fontFaces  "DroidSerif "
+    fontFaces "DroidSerif"
         [
             [
-                FontFace.Source <| UrlFormat ( "https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf ", FontFace.Truetype)
-                FontFace.Weight FontTypes.Bold
-                FontFace.Style Normal
+                FontFace.source <| FssTypes.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf", FssTypes.FontFace.Truetype)
+                FontFace.weight FssTypes.Font.Bold
+                FontFace.style FssTypes.Normal
             ]
             [
-                FontFace.Source <| UrlFormat ( \https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf \, FontFace.Truetype)
-                FontFace.Weight Normal
-                FontFace.Style Normal
+                FontFace.source <| FssTypes.FontFace.UrlFormat ("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf", FssTypes.FontFace.Truetype)
+                FontFace.weight FssTypes.Normal
+                FontFace.style FssTypes.Normal
             ]
         ]
 let modernaFont =
-    fontFace "moderna "
+    fontFace "moderna"
         [
-            FontFace.Sources
+            FontFace.sources
                 [
-                    UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2 ", FontFace.Woff2)
-                    UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff ", FontFace.Woff)
-                    UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", FontFace.Truetype)
-                    UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", FontFace.Svg)
+                    FssTypes.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2", FssTypes.FontFace.Woff2)
+                    FssTypes.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff", FssTypes.FontFace.Woff)
+                    FssTypes.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf", FssTypes.FontFace.Truetype)
+                    FssTypes.FontFace.UrlFormat ("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg", FssTypes.FontFace.Svg)
                 ]
-            FontFace.Weight Normal
-            FontFace.Style Normal
+            FontFace.weight FssTypes.Normal
+            FontFace.style FssTypes.Normal
         ]
 let droidSerif = fss [ FontFamily.Font droidSerifFont ]
 let droidSerifBold =

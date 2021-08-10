@@ -4,7 +4,7 @@
     <h1 align="center">Fss</h1>
 </p>
 
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fbjorn-strom%2FFSS%2Fbadge&style=for-the-badge)](https://actions-badge.atrox.dev/bjorn-strom/FSS/goto) ![Tests](https://img.shields.io/badge/TESTS-2144-9cf?style=for-the-badge) ![Nuget](https://img.shields.io/nuget/v/fss-lib?style=for-the-badge&logo=nuget) ![Nuget](https://img.shields.io/nuget/dt/fss-lib?style=for-the-badge&logo=nuget) [![GitHub license](https://img.shields.io/github/license/Bjorn-Strom/FSS?style=for-the-badge)](https://github.com/Bjorn-Strom/FSS/blob/master/LICENSE.md)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fbjorn-strom%2FFSS%2Fbadge&style=for-the-badge)](https://actions-badge.atrox.dev/bjorn-strom/FSS/goto) ![Tests](https://img.shields.io/badge/TESTS-2184-9cf?style=for-the-badge) ![Nuget](https://img.shields.io/nuget/v/fss-lib?style=for-the-badge&logo=nuget) ![Nuget](https://img.shields.io/nuget/dt/fss-lib?style=for-the-badge&logo=nuget) [![GitHub license](https://img.shields.io/github/license/Bjorn-Strom/FSS?style=for-the-badge)](https://github.com/Bjorn-Strom/FSS/blob/master/LICENSE.md)
 
 An opinionated styling library for F#.
 Have CSS as a first class citizen in your F# projects.

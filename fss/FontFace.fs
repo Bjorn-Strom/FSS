@@ -17,6 +17,8 @@ module FontFace =
     let private displayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
     let private stretchValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStretch
     let private weightValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontWeight
+    let private sizeAdjustValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.SizeAdjust
+    let private unicodeRangeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.UnicodeRange
 
     [<Erase>]
     type FontFace =
@@ -26,6 +28,9 @@ module FontFace =
         static member display (display: FssTypes.IFontDisplay) = display |> FssTypes.fontHelpers.fontDisplayToString |> displayValue
         static member stretch (stretch: FssTypes.IFontStretch) = stretch |> FssTypes.fontHelpers.fontStretchToString |> stretchValue
         static member weight (weight: FssTypes.IFontWeight) = weight |> FssTypes.fontHelpers.fontWeightToString |> weightValue
+        static member sizeAdjust (adjust: FssTypes.Percent) = adjust |> FssTypes.unitHelpers.percentToString |> sizeAdjustValue
+        static member unicodeRange (range: string) = range |> unicodeRangeValue
+        static member unicodeRanges (ranges: string list) = Utilities.Helpers.combineComma id ranges |> unicodeRangeValue
 
     let createFontFaceObject (fontName: string) (attributeList: FssTypes.CssProperty list) =
         let attributeList' =  List.map FssTypes.masterTypeHelpers.CssValue attributeList

@@ -141,7 +141,7 @@ namespace Fss.FssTypes
 
         type Synthesis =
             | Weight
-            | Style
+            | Style'
             | WeightStyle
             interface IFontSynthesis
 

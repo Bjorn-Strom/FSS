@@ -51,5 +51,6 @@ module Tests =
         Psuedo.tests
         Media.tests
         Scroll.tests
+        FontFace.tests
     ]
 

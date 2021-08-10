@@ -128,7 +128,10 @@ module Font =
 
     let private fontSynthesisToString (synthesis: FssTypes.IFontSynthesis) =
         match synthesis with
-        | :? FssTypes.Font.Synthesis as f -> Utilities.Helpers.duToSpaced f
+        | :? FssTypes.Font.Synthesis as f ->
+            match f with
+            | FssTypes.Font.Style' -> "style"
+            | _ -> Utilities.Helpers.duToSpaced f
         | :? FssTypes.None' -> FssTypes.masterTypeHelpers.none
         | _ -> "Unknown font synthesis"
 
@@ -608,7 +611,7 @@ module Font =
     type FontSynthesis =
         static member value (synthesis: FssTypes.IFontSynthesis) = synthesis |> fontSynthesisValue'
         static member weight = FssTypes.Font.Weight |> fontSynthesisValue'
-        static member style = FssTypes.Font.Style |> fontSynthesisValue'
+        static member style = FssTypes.Font.Style' |> fontSynthesisValue'
         static member weightStyle = FssTypes.Font.WeightStyle |> fontSynthesisValue'
         static member none = FssTypes.None' |> fontSynthesisValue'
 
