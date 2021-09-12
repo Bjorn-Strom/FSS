@@ -81,6 +81,7 @@ Download one nuget package and one npm package and you are ready to go.
 - Discoverable, use the IDE to help you write the styling
 - Trying to support a big part of the CSS spec
 - Works independently of Fable.React and Feliz and thus works with both (and without them)
+- Works seamlessly with Sutil and Feliz-Lit.
 - All the benefits of having your styling in your language as a first class citizen
 
 ## Installation 💾

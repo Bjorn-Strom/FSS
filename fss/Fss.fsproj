@@ -3,14 +3,14 @@
     <Description>A way to write your styling in FSS. Built atop Emotion-js to provide a typed CSS solution for F#</Description>
     <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
-    <PackageTags>fsharp;emotion;CSS;styling;css-in-lang;fable;react;html</PackageTags>
+    <PackageTags>fsharp;fss;emotion;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <AssemblyName>Fss-lib</AssemblyName>
-    <PackageReleaseNotes>Add scroll snap type, align and type properties.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add more font face options such as unicode range, line gap and more.</PackageReleaseNotes>
   </PropertyGroup>
     <PropertyGroup>
         <NpmDependencies>
