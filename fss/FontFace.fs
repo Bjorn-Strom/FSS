@@ -18,6 +18,8 @@ module FontFace =
             | :? FssTypes.Percent as p -> FssTypes.unitHelpers.percentToString p
             | _ -> "Unknown line gap override value"
 
+    let private stringifyVariationSettings (setting, axis) = $"'{setting}' {axis}"
+
     let private sourceValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.Src
     let private styleValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontStyle
     let private displayValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontDisplay
@@ -26,6 +28,7 @@ module FontFace =
     let private sizeAdjustValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.SizeAdjust
     let private unicodeRangeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.UnicodeRange
     let private overrideValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LineGapOverride
+    let private variationSettingsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariationSettings
 
     [<Erase>]
     type FontFace =
@@ -39,6 +42,8 @@ module FontFace =
         static member unicodeRange (range: string) = range |> unicodeRangeValue
         static member unicodeRanges (ranges: string list) = Utilities.Helpers.combineComma id ranges |> unicodeRangeValue
         static member lineGapOverride (``override``: FssTypes.ILineGapOverride) = ``override`` |> stringifyOverride |> overrideValue
+        static member variationSettings (setting: string * float) = setting |> stringifyVariationSettings |> variationSettingsValue
+        static member variationSettings (settings: (string * float) list) = Utilities.Helpers.combineComma stringifyVariationSettings settings |> variationSettingsValue
 
     let createFontFaceObject (fontName: string) (attributeList: FssTypes.CssProperty list) =
         let attributeList' =  List.map FssTypes.masterTypeHelpers.CssValue attributeList

@@ -189,4 +189,13 @@ module FontFace =
                     "Linegap override normal"
                     [ FontFace.lineGapOverride <| pct 90 ]
                     [ "lineGapOverride" ==> "90%" ]
+                testCase
+                    "Variation settings"
+                    [ FontFace.variationSettings(("wght", 400.))]
+                    [ "fontVariationSettings" ==> "'wght' 400" ]
+                testCase
+                    "Variation settings"
+                    [ FontFace.variationSettings[ "wght", 400.; "wdth", 300. ] ]
+                    [ "fontVariationSettings" ==> "'wght' 400, 'wdth' 300" ]
+
             ]

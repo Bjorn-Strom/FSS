@@ -105,6 +105,7 @@ namespace Fss.FssTypes
             | FlexBasis
             | FlexDirection
             | FontFeatureSettings
+            | FontVariationSettings
             | FlexFlow
             | FlexGrow
             | FlexShrink
