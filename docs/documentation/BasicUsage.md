@@ -34,6 +34,16 @@ fss [ TextDecorationColor' myDecorationColor ]
 
 The `.value` function is particularly useful when you wish to apply a function to a property. Like pixel, size, or percent, that does not exist as a member on the property you are trying to style.
 
+## Global styles
+
+You can use global styles by using the `global'` function.
+This function accepts the same parameters as the `fss` function,
+the main difference being that these styles are applied globally.
+
+```fsharp
+! FssTypes.Html.All [ BoxSizing.borderBox ]
+```
+
 ## Useful functions
 
 `important: CssProperty -> CssProperty`
@@ -58,14 +68,4 @@ For example if I want to set border with shorthand I can write:
 
 ```fsharp
 fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)"]
-```
-
-## Global styles
-
-You can use global styles by using the `global'` function.
-This function accepts the same parameters as the `fss` function,
-the main difference being that these styles are applied globally.
-
-```fsharp
-! FssTypes.Html.All [ BoxSizing.borderBox ]
 ```
