@@ -13,6 +13,10 @@ module Functions =
     let private css(x) = jsNative
     let css' x = css(x)
 
+    [<Import("injectGlobal", from="@emotion/css")>]
+    let private injectGlobal(x) = jsNative
+    let injectGlobal' x = injectGlobal(x)
+
     // Constructors
     let private fssObject (attributeList: FssTypes.CssProperty list) =
         attributeList
@@ -24,6 +28,12 @@ module Functions =
         attributeList
         |> fssObject
         |> string
+
+    let global' (attributeList: FssTypes.CssProperty list) =
+        attributeList
+        |> List.map FssTypes.masterTypeHelpers.CssValue
+        |> createObj
+        |> injectGlobal'
 
     // Keyframes
     let keyframes (attributeList: KeyframeAttribute list) =

@@ -1123,7 +1123,7 @@ module App =
                   ! FssTypes.Html.A [ Link [ Color.hex sidebarText ]
                                       Visited [ Color.hex sidebarText ]
                                       Hover [ Color.hex sidebarHover ]
-                                    ]
+                           ]
                 ]
         let heading =
             fss [ headingFont
@@ -1178,10 +1178,6 @@ module App =
                   PaddingRight' <| px 40
                   Color.hex contentText
 
-                  ! FssTypes.Html.A [ Link [ Color.hex contentLink ]
-                                      Visited [ Color.hex contentLink ]
-                                      Hover [ Color.hex contentLink ] ]
-
                   MediaQuery [ FssTypes.Media.MaxWidth <| px 1000 ]
                     [ Position.relative
                       Width' <| pct 95
@@ -1191,6 +1187,13 @@ module App =
         section [ ClassName contentStyle ] [ pageToContent model.CurrentPage model.Pages.[model.CurrentPage] ]
 
     let render (model: Model) (dispatch: Msg -> unit) =
+        global' [ Link [ Color.hex contentLink ]
+                  Visited [ Color.hex contentLink ]
+                  ! FssTypes.Html.A [ Hover [ Color.hex contentLink ] ]
+                  ! FssTypes.Html.Body [ BackgroundColor.hex "#181A1B" ]
+
+                ]
+
         fragment [ ]
             [
                 menu model dispatch

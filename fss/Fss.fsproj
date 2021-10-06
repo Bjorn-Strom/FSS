@@ -5,12 +5,12 @@
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;fss;emotion;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>2.0.3</Version>
+    <Version>2.0.4</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <AssemblyName>Fss-lib</AssemblyName>
-    <PackageReleaseNotes>Add more font face options such as unicode range, line gap and more.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add support for global styles.</PackageReleaseNotes>
   </PropertyGroup>
     <PropertyGroup>
         <NpmDependencies>
