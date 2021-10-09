@@ -29,6 +29,7 @@ module FontFace =
     let private unicodeRangeValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.UnicodeRange
     let private overrideValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.LineGapOverride
     let private variationSettingsValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontVariationSettings
+    let private familyValue = FssTypes.propertyHelpers.cssValue FssTypes.Property.FontFamily
 
     [<Erase>]
     type FontFace =
@@ -44,6 +45,7 @@ module FontFace =
         static member lineGapOverride (``override``: FssTypes.ILineGapOverride) = ``override`` |> stringifyOverride |> overrideValue
         static member variationSettings (setting: string * float) = setting |> stringifyVariationSettings |> variationSettingsValue
         static member variationSettings (settings: (string * float) list) = Utilities.Helpers.combineComma stringifyVariationSettings settings |> variationSettingsValue
+        static member family (name: string) = name |> familyValue
 
     let createFontFaceObject (fontName: string) (attributeList: FssTypes.CssProperty list) =
         let attributeList' =  List.map FssTypes.masterTypeHelpers.CssValue attributeList

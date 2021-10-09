@@ -198,4 +198,9 @@ module FontFace =
                     [ FontFace.variationSettings[ "wght", 400.; "wdth", 300. ] ]
                     [ "fontVariationSettings" ==> "'wght' 400, 'wdth' 300" ]
 
+                testCase
+                    "Fontface fontname"
+                    [ FontFace.family "FontName" ]
+                    [ "fontFamily" ==> "FontName" ]
+
             ]
