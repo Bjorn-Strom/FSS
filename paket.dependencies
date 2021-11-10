@@ -1,6 +1,6 @@
 group Docs
     source https://www.nuget.org/api/v2
-    framework: netstandard2.0
+    framework: net6.0
 
     nuget FSharp.Core >= 4.5.2
     nuget Fable.Core
