@@ -13,6 +13,7 @@ out/
 .parcel-cache/
 parcel-bundle-reports
 secrets
+javascript/*
 
 
 # Fable compilation
@@ -22,6 +23,8 @@ public/FssFeliz
 public-tests/*.js
 public-tests/fss
 public-tests/FssFeliz
+dist/*.js
+dist/tests/*
 
 # User-specific files
 *.rsuser
@@ -492,7 +495,6 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/

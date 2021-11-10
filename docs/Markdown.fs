@@ -6,7 +6,7 @@
     open Fable.Core.JsInterop
     open Fable.React
 
-    let style:obj = import "xonokai" "react-syntax-highlighter/dist/styles/prism"
+    let style:obj = import "xonokai" "react-syntax-highlighter/dist/cjs/styles/prism"
 
     type HighlightProps =
         | Language of string

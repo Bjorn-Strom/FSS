@@ -2,23 +2,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "dotnet fable watch ./docs -o ./public --run parcel serve public/index.html",
-    "build": "dotnet fable ./docs -o ./public --run parcel build public/index.html --public-url .",
-    "build-report": "dotnet fable ./docs -o ./public --run parcel build public/index.html --reporter @parcel/reporter-bundle-analyzer --public-url .",
+    "start": "dotnet fable watch ./docs -o ./javascript --run esbuild --bundle ./javascript/App.js --outfile=dist/App.js --servedir=dist",
+    "build": "dotnet fable ./docs -o ./javascript && esbuild --bundle --minify ./javascript/App.js --outfile=dist/App.js",
     "test": "dotnet fable ./tests -o ./dist/tests --run node ./dist/tests/Tests.js",
     "watch-test": "dotnet fable watch ./tests -o ./dist/tests --run nodemon ./dist/tests/Tests.js",
-    "clean": "rm -rf dist public/*.js public/fss public/FssFeliz public/.fable .parcel-cache",
+    "clean": "rm -rf javascript/* dist/tests",
     "publish-docs": "npm run clean && npm run build && gh-pages -d dist"
   },
   "homepage": "https://Bjorn-Strom.github.io/FSS",
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
-    "@babel/preset-react": "^7.16.0",
-    "@parcel/reporter-bundle-analyzer": "^2.0.1",
-    "cssnano": "^5.0.10",
-    "nodemon": "^2.0.15",
-    "parcel": "^2.0.1"
+    "esbuild": "^0.13.13",
+    "nodemon": "^2.0.15"
   },
   "dependencies": {
     "@emotion/css": "11.1.3",
