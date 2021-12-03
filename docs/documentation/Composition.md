@@ -21,3 +21,4 @@ div [ ClassName (fss <| danger @ baseStyle)]
 div [ ClassName (fss <| baseStyle @ danger)]
     [ str "This will be red" ]
 ```
+</example>
