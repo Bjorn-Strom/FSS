@@ -19,6 +19,7 @@ div [ ClassName redParagraphs ]
    ]
 ```
 
+</example>
 
 - ### Child (!>)
 While descendants hits all the selectors within the css block, child will only select direct descendants. I.E one level deep.
@@ -35,6 +36,8 @@ div [ ClassName childCombinator ]
    ]
 ```
 
+</example>
+
 - ### Adjacent sibling (!+)
 This combinator selects the element directly after the 'main' element.
 So if we do:
@@ -49,6 +52,8 @@ div []
    ]
 ```
 
+</example>
+
 - ### General sibling (!~)
 The general sibling combinator is similar to the adjacent one. But instead of selecting only 1 sibling, it selects them all.
 
@@ -61,3 +66,5 @@ div []
       p [] [ str "Text in a paragraph but not after div with the combinator so is not red"]
    ]
 ```
+
+</example>
