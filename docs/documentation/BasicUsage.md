@@ -69,3 +69,4 @@ For example if I want to set border with shorthand I can write:
 ```fsharp
 fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)"]
 ```
+</example>
