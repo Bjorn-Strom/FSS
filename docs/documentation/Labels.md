@@ -7,3 +7,5 @@ let styleWithLabel = fss [ Color.hotPink; Label' "HotPinkLabel" ]
 div [ ClassName styleWithoutLabel ] [ str styleWithoutLabel ]
 div [ ClassName styleWithLabel ] [ str styleWithLabel ]
 ```
+
+</example>
