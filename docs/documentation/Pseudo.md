@@ -22,7 +22,7 @@ let hoverStyle =
                 ]
          ]
 ```
-
+</example>
 ## Pseudo-elements
 
 These work much in the same way as the pseudo classes. Example follows:
@@ -47,3 +47,4 @@ div [ ClassName beforeAndAfter ]
         str " Some content surrounded by stuff "
     ]
 ```
+</example>
