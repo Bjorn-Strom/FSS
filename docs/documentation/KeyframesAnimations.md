@@ -52,6 +52,8 @@ let bounceAnimation =
         ]
 ```
 
+</example>
+
 ## Transforms
 
 Just a quick note on transforms. In CSS it is easy to think that when you apply a transform CSS expects just one transform.
