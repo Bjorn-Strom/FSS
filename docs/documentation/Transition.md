@@ -16,7 +16,7 @@ let colorTransition =
        ]
 div [ ClassName colorTransition ] [ str "Hover me" ]
 ```
-
+</example>
 ````fsharp
 let sizeAndColor =
     fss
@@ -35,3 +35,4 @@ let sizeAndColor =
         ]
 div [ ClassName sizeAndColor ] [ ]
 ````
+</example>
