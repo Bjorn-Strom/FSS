@@ -28,10 +28,12 @@ module App =
 
     [<ReactComponent>]
     let MenuItem (page: Page) =
+        let _, dispatch = useStore()
         let pageString = pageToLinkString page
 
         Html.a [ prop.href $"#/page/{pageString}"
                  prop.text (Utilities.duToSpaced page)
+                 prop.onClick (fun _ -> dispatch ToggleSidebar)
                  prop.fss [ Position.relative
                             Width' <| px 200
                             Label' "Menu link"
@@ -47,20 +49,23 @@ module App =
 
         Html.nav [
             prop.fss [
-                  Position.absolute
+                  Position.fixed'
                   Left' <| px 0
-                  Top' <| px 0
+                  Top' <| pct -100
                   Width' <| vw 100.
                   Height' <| px 50
                   BackgroundColor.hex sidebarBackgroundColor
                   Display.flex
                   AlignItems.center
                   ZIndex' 10
-                  Visibility.hidden
+
+                  TransitionProperty.top
+                  TransitionTimingFunction.easeInOut
+                  TransitionDuration' <| ms 500.
 
                   MediaQuery
                     [FssTypes.Media.MaxWidth <| px 1000]
-                    [Visibility.visible]
+                    [Top' <| px 0]
             ]
             prop.children [
                 Html.div [
@@ -78,7 +83,7 @@ module App =
     [<ReactComponent>]
     let Menu () =
         let store, _ = useStore()
-        Html.aside [ prop.fss [ Position.fixed' // Menu style
+        Html.aside [ prop.fss [ Position.fixed'
                                 Left' <| px 0
                                 Top' <| px 0
                                 Height' <| vh 100.
@@ -393,7 +398,7 @@ module App =
 
                     Some [ Html.div [ prop.className mediaQueryExamples
                                       prop.text "Changing height changes me" ] ]
-
+                | GlobalStyles -> None
                 | Counters ->
                     let mozillaExampleCounter =
                         counterStyle [ System.fixed'
