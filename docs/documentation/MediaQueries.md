@@ -31,3 +31,5 @@ let mediaQueryExamples =
                [ Color.green; FontSize.value (px 28)]
        ]
 ```
+
+</example>
