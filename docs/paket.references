@@ -1,5 +1,8 @@
 group Docs
     FSharp.Core
+    Fable.Fetch
     Fable.Core
     Fable.Elmish.React
     Fable.React
+    Feliz
+    Feliz.Router

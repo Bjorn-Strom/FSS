@@ -25,10 +25,13 @@
         { language: string
           value: string }
 
-    let renderers =
+    let private renderers =
         createObj [ "code" ==> fun (renderer: Renderer) ->
             syntaxHighlighter [ Language renderer.language; HighlightProps.Children renderer.value; ShowLineNumbers true; Style style ] ]
 
     let markdown (props: MarkdownProps list): ReactElement =
         let propsObject = keyValueList CaseRules.LowerFirst props
         ofImport "default" "react-markdown" propsObject []
+
+    let markdownDefaultRenderer (markdownText: string) =
+        markdown [ Renderers renderers; Children markdownText ]

@@ -1,19 +1,25 @@
 namespace Docs
 
-open Fable.React
-open Fable.React.Props
+open Feliz
 
 module Hamburger =
-    let private hamburgerBase width height className =
-        svg
-            [ SVGAttr.Height height
-              SVGAttr.Width width
-              SVGAttr.ViewBox "0 0 512 512"
-              ClassName className
-              ]
+    let private hamburgerBase (width: float) (height: float) (className: string) =
+        Svg.svg
+            [ svg.height height
+              svg.width width
+              svg.viewBox(0, 0, 512, 512)
+              svg.className className
+              svg.children
             [
-                path [ D "M80 160h352M80 256h352M80 352h352"; SVGAttr.Fill "none"; SVGAttr.StrokeLinecap "round"; SVGAttr.StrokeMiterlimit "10"; SVGAttr.StrokeWidth 32; SVGAttr.Stroke "#759DB2" ] []
-            ]
+                Svg.path [
+                    svg.d "M80 160h352M80 256h352M80 352h352"
+                    svg.fill "none"
+                    //svg.stroke SVGAttr.StrokeLinecap "round";
+                    //lSVGAttr.StrokeMiterlimit "10";
+                    svg.strokeWidth 32
+                    svg.stroke "#759DB2"
+                ]
+            ]]
 
     let hamburgerNormal = hamburgerBase 512 512 ""
 

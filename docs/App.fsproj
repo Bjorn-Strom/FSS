@@ -7,15 +7,13 @@
         <Compile Include="Utilities.fs" />
         <Compile Include="Logo.fs" />
         <Compile Include="Hamburger.fs" />
+        <Compile Include="Pages.fs" />
+        <Compile Include="Store.fs" />
         <Compile Include="App.fs" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\FssFeliz\FssFeliz.fsproj" />
         <ProjectReference Include="..\fss\Fss.fsproj" />
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="Fable.Elmish.Browser" Version="3.0.4" />
-        <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
     </ItemGroup>
     <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
