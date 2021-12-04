@@ -168,6 +168,10 @@ module App =
         | Some (_, markdown) ->
             let examples =
                 match page with
+                | Overview -> None
+                | Installation -> None
+                | Philosophy -> None
+                | New -> None
                 | BasicUsage ->
                     let borderStyle =
                         fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)" ]
