@@ -26,6 +26,8 @@ Html.div [
 ]
 ```
 
+</example>
+
 ## What can you do with this?
 Anything you can do in an `fss` block you can do in a `prop.fss` block.
 For some things, like animations, you might not want to specify them inline as that would lead to some messy code, but we can define them outside of the DSL and use it.
@@ -43,6 +45,8 @@ Html.div [
     ]
 ]
 ```
+
+</example>
 
 ## Helpers
 
