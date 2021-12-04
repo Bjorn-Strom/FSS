@@ -24,3 +24,5 @@ let logoStyle =
 
 Logo.logo 256 256 logoStyle
 ```
+
+</example>
