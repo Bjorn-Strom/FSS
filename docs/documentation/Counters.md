@@ -21,6 +21,8 @@ let mozillaExampleCounter =
 let mozillaExampleStyle = fss [ ListStyleType' mozillaExampleCounter ]
 ```
 
+</example>
+
 Another example found [here](https://codepen.io/mkmueller/pen/pHiqb)
 
 ```fsharp
@@ -80,3 +82,5 @@ section [ ClassName sectionStyle ]
         p [ ClassName sub] [ str "Sub-Item" ]
     ]
 ```
+
+</example>
