@@ -21,6 +21,7 @@ let amaticStyle =
 p [ ClassName amaticStyle ] [str """This font is Amatic SC, some nice text this huh?"""]
 ```
 
+</example>
 
 ## Font Face
 
@@ -64,3 +65,5 @@ p [ ClassName droidSerif ] [ str "Droid serif" ]
 p [ ClassName droidSerifBold ] [ str  "Droid serif bold" ]
 p [ ClassName moderna] [ str "Moderna" ]
 ```
+
+</example>
