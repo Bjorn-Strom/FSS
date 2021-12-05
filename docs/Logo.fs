@@ -2,7 +2,6 @@ namespace Docs
 
 open Feliz
 
-
 module Logo =
     let private logoBase (width: float) (height: float) (className: string) =
         Svg.svg
