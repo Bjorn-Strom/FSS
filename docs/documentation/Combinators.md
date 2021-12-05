@@ -22,7 +22,7 @@ div [ ClassName redParagraphs ]
 </example>
 
 - ### Child (!>)
-While descendants hits all the selectors within the css block, child will only select direct descendants. I.E one level deep.
+While descendants hits all the selectors within the CSS block, child will only select direct descendants. I.E one level deep.
 
 So if we copy the same example from above but use the child combinator instead we get:
 

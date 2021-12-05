@@ -3,7 +3,7 @@ namespace Docs
 open Feliz
 
 module Hamburger =
-    let private hamburgerBase (width: float) (height: float) (className: string) =
+    let private hamburgerBase (width: int) (height: int) (className: string) =
         Svg.svg
             [ svg.height height
               svg.width width

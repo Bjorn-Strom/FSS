@@ -12,9 +12,12 @@ let mediaQueryExamples =
            Width' (px 200)
            Height' (px 200)
            BackgroundColor.blue
+
            MediaQuery
-               [ FssTypes.Media.MinHeight (px 700)]
-               [ BackgroundColor.pink ]
+               [ FssTypes.Media.MinWidth (px 700)]
+               [ BackgroundColor.pink
+                 Color.orangeRed
+               ]
 
            MediaQueryFor FssTypes.Media.Print
                []
@@ -28,7 +31,9 @@ let mediaQueryExamples =
                ]
            MediaQuery
                [ FssTypes.Media.Orientation FssTypes.Media.Landscape]
-               [ Color.green; FontSize.value (px 28)]
+               [ Color.green
+                 BackgroundColor.orangeRed
+                 FontSize.value (px 28)]
        ]
 ```
 

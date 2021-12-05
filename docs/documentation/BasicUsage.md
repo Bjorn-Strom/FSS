@@ -34,15 +34,7 @@ fss [ TextDecorationColor' myDecorationColor ]
 
 The `.value` function is particularly useful when you wish to apply a function to a property. Like pixel, size, or percent, that does not exist as a member on the property you are trying to style.
 
-## Global styles
 
-You can use global styles by using the `global'` function.
-This function accepts the same parameters as the `fss` function,
-the main difference being that these styles are applied globally.
-
-```fsharp
-! FssTypes.Html.All [ BoxSizing.borderBox ]
-```
 
 ## Useful functions
 
@@ -63,10 +55,11 @@ Therefore the shorthands that are included are limited to ones where using `inhe
 For example resetting `text-decoration` would be  really annoying without it - having to go through each property resetting it manually.
 
 However if shorthands is something you really want to use, you can use the custom escape hatch to write them up in string.
-The escape hatch is a function that takes two string, a key and a value and attempts to make Css with it.
+The escape hatch is a function that takes two strings, a key and a value and attempts to make Css with it.
 For example if I want to set border with shorthand I can write:
 
 ```fsharp
 fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)"]
 ```
+
 </example>

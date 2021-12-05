@@ -2,6 +2,7 @@
 
 open Feliz
 open Fss
+open Fss.FssTypes
 
 [<AutoOpen>]
 module fss =

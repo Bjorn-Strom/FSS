@@ -13,9 +13,10 @@ Ultimately I believe you will find whatever solution suits your needs the best.
 If you want to write your CSS all in F#, I believe Fss is the best solution for this currently.
 
 Writing CSS in your language has some nice benefits:
-- Types
+- Types, your code will not compile if you have written incorrect styling
 - Declarative and maintainable styling
 - Easy to set up and use
 - Take advantage of nice F# syntax and features
 - Scoping! Have local scope that will not affect styling somewhere else
-- Easy parameterization of your styling.
+- Easy parameterization of your styling
+- And much more!

@@ -21,7 +21,7 @@ AnimationTimingFunction.easeInOut
 ```
 
 ### Why are there so many types?
-An annoyance I've had while using (and making) Fss is the messy namespace.
+Another annoyance I've had while using (and making) Fss is the messy namespace.
 Not only has this been a long standing issue, I was also not sure of how I wanted it to be.
 The solution is another namespace `FssTypes`.
 This namespace is in the `Fss` namespace. So opening just `Fss` will no longer bombard you with types.
