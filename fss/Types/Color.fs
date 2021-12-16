@@ -2,185 +2,354 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-    [<AutoOpen>]
-    module Color =
-        type ColorType =
-            | ColorType of string
-            interface ITextDecorationColor
-            interface ITextEmphasisColor
-            interface IBorderColor
-            interface IOutlineColor
-            interface IColumnRuleColor
-            interface ICaretColor
-            interface IColorStop
-            interface IColor
-            interface IBackgroundColor
+[<AutoOpen>]
+module Color =
+    type Color =
+        | Black
+        | Silver
+        | Gray
+        | White
+        | Maroon
+        | Red
+        | Purple
+        | Fuchsia
+        | Green
+        | Lime
+        | Olive
+        | Yellow
+        | Navy
+        | Blue
+        | Teal
+        | Aqua
+        | Orange
+        | AliceBlue
+        | AntiqueWhite
+        | AquaMarine
+        | Azure
+        | Beige
+        | Bisque
+        | BlanchedAlmond
+        | BlueViolet
+        | Brown
+        | Burlywood
+        | CadetBlue
+        | Chartreuse
+        | Chocolate
+        | Coral
+        | CornflowerBlue
+        | Cornsilk
+        | Crimson
+        | Cyan
+        | DarkBlue
+        | DarkCyan
+        | DarkGoldenrod
+        | DarkGray
+        | DarkGreen
+        | DarkKhaki
+        | DarkMagenta
+        | DarkOliveGreen
+        | DarkOrange
+        | DarkOrchid
+        | DarkRed
+        | DarkSalmon
+        | DarkSeaGreen
+        | DarkSlateBlue
+        | DarkSlateGray
+        | DarkTurquoise
+        | DarkViolet
+        | DeepPink
+        | DeepSkyBlue
+        | DimGrey
+        | DodgerBlue
+        | FireBrick
+        | FloralWhite
+        | ForestGreen
+        | Gainsboro
+        | GhostWhite
+        | Gold
+        | Goldenrod
+        | GreenYellow
+        | Grey
+        | Honeydew
+        | HotPink
+        | IndianRed
+        | Indigo
+        | Ivory
+        | Khaki
+        | Lavender
+        | LavenderBlush
+        | LawnGreen
+        | LemonChiffon
+        | LightBlue
+        | LightCoral
+        | LightCyan
+        | LightGoldenrodYellow
+        | LightGray
+        | LightGreen
+        | LightGrey
+        | LightPink
+        | LightSalmon
+        | LightSeaGreen
+        | LightSkyBlue
+        | LightSlateGrey
+        | LightSteelBlue
+        | LightYellow
+        | LimeGreen
+        | Linen
+        | Magenta
+        | MediumAquamarine
+        | MediumBlue
+        | MediumOrchid
+        | MediumPurple
+        | MediumSeaGreen
+        | MediumSlateBlue
+        | MediumSpringGreen
+        | MediumTurquoise
+        | MediumVioletRed
+        | MidnightBlue
+        | MintCream
+        | MistyRose
+        | Moccasin
+        | NavajoWhite
+        | OldLace
+        | Olivedrab
+        | OrangeRed
+        | Orchid
+        | PaleGoldenrod
+        | PaleGreen
+        | PaleTurquoise
+        | PaleVioletred
+        | PapayaWhip
+        | Peachpuff
+        | Peru
+        | Pink
+        | Plum
+        | PowderBlue
+        | RosyBrown
+        | RoyalBlue
+        | SaddleBrown
+        | Salmon
+        | SandyBrown
+        | SeaGreen
+        | SeaShell
+        | Sienna
+        | SkyBlue
+        | SlateBlue
+        | SlateGray
+        | Snow
+        | SpringGreen
+        | SteelBlue
+        | Tan
+        | Thistle
+        | Tomato
+        | Turquoise
+        | Violet
+        | Wheat
+        | WhiteSmoke
+        | YellowGreen
+        | RebeccaPurple
+        | Transparent
+        | CurrentColor
+        | Rgb of Red: int * Green: int * Blue: int
+        | Rgba of Red: int * Green: int * Blue: int * Alpha: float
+        | Hex of string
+        | Hsl of Hue: int * Saturation: int * Lightness: int
+        | Hsla of Hue: int * Saturation: int * Lightness: int * Alpha: float
+        interface ICssValue with
+            member this.Stringify() =
+                match this with
+                | Rgb (red, green, blue) -> $"rgb({red}, {green}, {blue})"
+                | Rgba (red, green, blue, alpha) -> $"rgba({red}, {green}, {blue}, {alpha})"
+                | Hex hex -> hex
+                | Hsl (hue, saturation, lightness) -> $"hsl({hue}, {saturation}%%, {lightness}%%)"
+                | Hsla (hue, saturation, lightness, alpha) -> $"hsla({hue}, {saturation}%%, {lightness}%%, {alpha})"
+                | _ -> this.ToString().ToLower()
 
-        type ColorBase<'a> (valueFunction: ColorType -> 'a) =
-            member this.black = Fss.Utilities.Color.hex "000000" |> ColorType |> valueFunction
-            member this.silver = Fss.Utilities.Color.hex "c0c0c0" |> ColorType |> valueFunction
-            member this.gray = Fss.Utilities.Color.hex "808080" |> ColorType |> valueFunction
-            member this.white = Fss.Utilities.Color.hex "ffffff" |> ColorType |> valueFunction
-            member this.maroon = Fss.Utilities.Color.hex "800000" |> ColorType |> valueFunction
-            member this.red = Fss.Utilities.Color.hex "ff0000" |> ColorType |> valueFunction
-            member this.purple = Fss.Utilities.Color.hex "800080" |> ColorType |> valueFunction
-            member this.fuchsia = Fss.Utilities.Color.hex "ff00ff" |> ColorType |> valueFunction
-            member this.green = Fss.Utilities.Color.hex "008000" |> ColorType |> valueFunction
-            member this.lime = Fss.Utilities.Color.hex "00ff00" |> ColorType |> valueFunction
-            member this.olive = Fss.Utilities.Color.hex "808000" |> ColorType |> valueFunction
-            member this.yellow = Fss.Utilities.Color.hex "ffff00" |> ColorType |> valueFunction
-            member this.navy = Fss.Utilities.Color.hex "000080" |> ColorType |> valueFunction
-            member this.blue = Fss.Utilities.Color.hex "0000ff" |> ColorType |> valueFunction
-            member this.teal = Fss.Utilities.Color.hex "008080" |> ColorType |> valueFunction
-            member this.aqua = Fss.Utilities.Color.hex "00ffff" |> ColorType |> valueFunction
-            member this.orange = Fss.Utilities.Color.hex "ffa500" |> ColorType |> valueFunction
-            member this.aliceBlue = Fss.Utilities.Color.hex "f0f8ff" |> ColorType |> valueFunction
-            member this.antiqueWhite = Fss.Utilities.Color.hex "faebd7" |> ColorType |> valueFunction
-            member this.aquaMarine = Fss.Utilities.Color.hex "7fffd4" |> ColorType |> valueFunction
-            member this.azure = Fss.Utilities.Color.hex "f0ffff" |> ColorType |> valueFunction
-            member this.beige = Fss.Utilities.Color.hex "f5f5dc" |> ColorType |> valueFunction
-            member this.bisque = Fss.Utilities.Color.hex "ffe4c4" |> ColorType |> valueFunction
-            member this.blanchedAlmond = Fss.Utilities.Color.hex "ffebcd" |> ColorType |> valueFunction
-            member this.blueViolet = Fss.Utilities.Color.hex "8a2be2" |> ColorType |> valueFunction
-            member this.brown = Fss.Utilities.Color.hex "a52a2a" |> ColorType |> valueFunction
-            member this.burlywood = Fss.Utilities.Color.hex "deb887" |> ColorType |> valueFunction
-            member this.cadetBlue = Fss.Utilities.Color.hex "5f9ea0" |> ColorType |> valueFunction
-            member this.chartreuse = Fss.Utilities.Color.hex "7fff00" |> ColorType |> valueFunction
-            member this.chocolate = Fss.Utilities.Color.hex "d2691e" |> ColorType |> valueFunction
-            member this.coral = Fss.Utilities.Color.hex "ff7f50" |> ColorType |> valueFunction
-            member this.cornflowerBlue = Fss.Utilities.Color.hex "6495ed" |> ColorType |> valueFunction
-            member this.cornsilk = Fss.Utilities.Color.hex "fff8dc" |> ColorType |> valueFunction
-            member this.crimson = Fss.Utilities.Color.hex "dc143c" |> ColorType |> valueFunction
-            member this.cyan = Fss.Utilities.Color.hex "00ffff" |> ColorType |> valueFunction
-            member this.darkBlue = Fss.Utilities.Color.hex "00008b" |> ColorType |> valueFunction
-            member this.darkCyan = Fss.Utilities.Color.hex "008b8b" |> ColorType |> valueFunction
-            member this.darkGoldenrod = Fss.Utilities.Color.hex "b8860b" |> ColorType |> valueFunction
-            member this.darkGray = Fss.Utilities.Color.hex "a9a9a9" |> ColorType |> valueFunction
-            member this.darkGreen = Fss.Utilities.Color.hex "006400" |> ColorType |> valueFunction
-            member this.darkKhaki = Fss.Utilities.Color.hex "bdb76b" |> ColorType |> valueFunction
-            member this.darkMagenta = Fss.Utilities.Color.hex "8b008b" |> ColorType |> valueFunction
-            member this.darkOliveGreen = Fss.Utilities.Color.hex "556b2f" |> ColorType |> valueFunction
-            member this.darkOrange = Fss.Utilities.Color.hex "ff8c00" |> ColorType |> valueFunction
-            member this.darkOrchid = Fss.Utilities.Color.hex "9932cc" |> ColorType |> valueFunction
-            member this.darkRed = Fss.Utilities.Color.hex "8b0000" |> ColorType |> valueFunction
-            member this.darkSalmon = Fss.Utilities.Color.hex "e9967a" |> ColorType |> valueFunction
-            member this.darkSeaGreen = Fss.Utilities.Color.hex "8fbc8f" |> ColorType |> valueFunction
-            member this.darkSlateBlue = Fss.Utilities.Color.hex "483d8b" |> ColorType |> valueFunction
-            member this.darkSlateGray = Fss.Utilities.Color.hex "2f4f4f" |> ColorType |> valueFunction
-            member this.darkTurquoise = Fss.Utilities.Color.hex "00ced1" |> ColorType |> valueFunction
-            member this.darkViolet = Fss.Utilities.Color.hex "9400d3" |> ColorType |> valueFunction
-            member this.deepPink = Fss.Utilities.Color.hex "ff1493" |> ColorType |> valueFunction
-            member this.deepSkyBlue = Fss.Utilities.Color.hex "00bfff" |> ColorType |> valueFunction
-            member this.dimGrey = Fss.Utilities.Color.hex "696969" |> ColorType |> valueFunction
-            member this.dodgerBlue = Fss.Utilities.Color.hex "1e90ff" |> ColorType |> valueFunction
-            member this.fireBrick = Fss.Utilities.Color.hex "b22222" |> ColorType |> valueFunction
-            member this.floralWhite = Fss.Utilities.Color.hex "fffaf0" |> ColorType |> valueFunction
-            member this.forestGreen = Fss.Utilities.Color.hex "228b22" |> ColorType |> valueFunction
-            member this.gainsboro = Fss.Utilities.Color.hex "dcdcdc" |> ColorType |> valueFunction
-            member this.ghostWhite = Fss.Utilities.Color.hex "f8f8ff" |> ColorType |> valueFunction
-            member this.gold = Fss.Utilities.Color.hex "ffd700" |> ColorType |> valueFunction
-            member this.goldenrod = Fss.Utilities.Color.hex "daa520" |> ColorType |> valueFunction
-            member this.greenYellow = Fss.Utilities.Color.hex "adff2f" |> ColorType |> valueFunction
-            member this.grey = Fss.Utilities.Color.hex "808080" |> ColorType |> valueFunction
-            member this.honeydew = Fss.Utilities.Color.hex "f0fff0" |> ColorType |> valueFunction
-            member this.hotPink = Fss.Utilities.Color.hex "ff69b4" |> ColorType |> valueFunction
-            member this.indianRed = Fss.Utilities.Color.hex "cd5c5c" |> ColorType |> valueFunction
-            member this.indigo = Fss.Utilities.Color.hex "4b0082" |> ColorType |> valueFunction
-            member this.ivory = Fss.Utilities.Color.hex "fffff0" |> ColorType |> valueFunction
-            member this.khaki = Fss.Utilities.Color.hex "f0e68c" |> ColorType |> valueFunction
-            member this.lavender = Fss.Utilities.Color.hex "e6e6fa" |> ColorType |> valueFunction
-            member this.lavenderBlush = Fss.Utilities.Color.hex "fff0f5" |> ColorType |> valueFunction
-            member this.lawnGreen = Fss.Utilities.Color.hex "7cfc00" |> ColorType |> valueFunction
-            member this.lemonChiffon = Fss.Utilities.Color.hex "fffacd" |> ColorType |> valueFunction
-            member this.lightBlue = Fss.Utilities.Color.hex "add8e6" |> ColorType |> valueFunction
-            member this.lightCoral = Fss.Utilities.Color.hex "f08080" |> ColorType |> valueFunction
-            member this.lightCyan = Fss.Utilities.Color.hex "e0ffff" |> ColorType |> valueFunction
-            member this.lightGoldenrodYellow = Fss.Utilities.Color.hex "fafad2" |> ColorType |> valueFunction
-            member this.lightGray = Fss.Utilities.Color.hex "d3d3d3" |> ColorType |> valueFunction
-            member this.lightGreen = Fss.Utilities.Color.hex "90ee90" |> ColorType |> valueFunction
-            member this.lightGrey = Fss.Utilities.Color.hex "d3d3d3" |> ColorType |> valueFunction
-            member this.lightPink = Fss.Utilities.Color.hex "ffb6c1" |> ColorType |> valueFunction
-            member this.lightSalmon = Fss.Utilities.Color.hex "ffa07a" |> ColorType |> valueFunction
-            member this.lightSeaGreen = Fss.Utilities.Color.hex "20b2aa" |> ColorType |> valueFunction
-            member this.lightSkyBlue = Fss.Utilities.Color.hex "87cefa" |> ColorType |> valueFunction
-            member this.lightSlateGrey = Fss.Utilities.Color.hex "778899" |> ColorType |> valueFunction
-            member this.lightSteelBlue = Fss.Utilities.Color.hex "b0c4de" |> ColorType |> valueFunction
-            member this.lightYellow = Fss.Utilities.Color.hex "ffffe0" |> ColorType |> valueFunction
-            member this.limeGreen = Fss.Utilities.Color.hex "32cd32" |> ColorType |> valueFunction
-            member this.linen = Fss.Utilities.Color.hex "faf0e6" |> ColorType |> valueFunction
-            member this.magenta = Fss.Utilities.Color.hex "ff00ff" |> ColorType |> valueFunction
-            member this.mediumAquamarine = Fss.Utilities.Color.hex "66cdaa" |> ColorType |> valueFunction
-            member this.mediumBlue = Fss.Utilities.Color.hex "0000cd" |> ColorType |> valueFunction
-            member this.mediumOrchid = Fss.Utilities.Color.hex "ba55d3" |> ColorType |> valueFunction
-            member this.mediumPurple = Fss.Utilities.Color.hex "9370db" |> ColorType |> valueFunction
-            member this.mediumSeaGreen = Fss.Utilities.Color.hex "3cb371" |> ColorType |> valueFunction
-            member this.mediumSlateBlue = Fss.Utilities.Color.hex "7b68ee" |> ColorType |> valueFunction
-            member this.mediumSpringGreen = Fss.Utilities.Color.hex "00fa9a" |> ColorType |> valueFunction
-            member this.mediumTurquoise = Fss.Utilities.Color.hex "48d1cc" |> ColorType |> valueFunction
-            member this.mediumVioletRed = Fss.Utilities.Color.hex "c71585" |> ColorType |> valueFunction
-            member this.midnightBlue = Fss.Utilities.Color.hex "191970" |> ColorType |> valueFunction
-            member this.mintCream = Fss.Utilities.Color.hex "f5fffa" |> ColorType |> valueFunction
-            member this.mistyRose = Fss.Utilities.Color.hex "ffe4e1" |> ColorType |> valueFunction
-            member this.moccasin = Fss.Utilities.Color.hex "ffe4b5" |> ColorType |> valueFunction
-            member this.navajoWhite = Fss.Utilities.Color.hex "ffdead" |> ColorType |> valueFunction
-            member this.oldLace = Fss.Utilities.Color.hex "fdf5e6" |> ColorType |> valueFunction
-            member this.olivedrab = Fss.Utilities.Color.hex "6b8e23" |> ColorType |> valueFunction
-            member this.orangeRed = Fss.Utilities.Color.hex "ff4500" |> ColorType |> valueFunction
-            member this.orchid = Fss.Utilities.Color.hex "da70d6" |> ColorType |> valueFunction
-            member this.paleGoldenrod = Fss.Utilities.Color.hex "eee8aa" |> ColorType |> valueFunction
-            member this.paleGreen = Fss.Utilities.Color.hex "98fb98" |> ColorType |> valueFunction
-            member this.paleTurquoise = Fss.Utilities.Color.hex "afeeee" |> ColorType |> valueFunction
-            member this.paleVioletred = Fss.Utilities.Color.hex "db7093" |> ColorType |> valueFunction
-            member this.papayaWhip = Fss.Utilities.Color.hex "ffefd5" |> ColorType |> valueFunction
-            member this.peachpuff = Fss.Utilities.Color.hex "ffdab9" |> ColorType |> valueFunction
-            member this.peru = Fss.Utilities.Color.hex "cd853f" |> ColorType |> valueFunction
-            member this.pink = Fss.Utilities.Color.hex "ffc0cb" |> ColorType |> valueFunction
-            member this.plum = Fss.Utilities.Color.hex "dda0dd" |> ColorType |> valueFunction
-            member this.powderBlue = Fss.Utilities.Color.hex "b0e0e6" |> ColorType |> valueFunction
-            member this.rosyBrown = Fss.Utilities.Color.hex "bc8f8f" |> ColorType |> valueFunction
-            member this.royalBlue = Fss.Utilities.Color.hex "4169e1" |> ColorType |> valueFunction
-            member this.saddleBrown = Fss.Utilities.Color.hex "8b4513" |> ColorType |> valueFunction
-            member this.salmon = Fss.Utilities.Color.hex "fa8072" |> ColorType |> valueFunction
-            member this.sandyBrown = Fss.Utilities.Color.hex "f4a460" |> ColorType |> valueFunction
-            member this.seaGreen = Fss.Utilities.Color.hex "2e8b57" |> ColorType |> valueFunction
-            member this.seaShell = Fss.Utilities.Color.hex "fff5ee" |> ColorType |> valueFunction
-            member this.sienna = Fss.Utilities.Color.hex "a0522d" |> ColorType |> valueFunction
-            member this.skyBlue = Fss.Utilities.Color.hex "87ceeb" |> ColorType |> valueFunction
-            member this.slateBlue = Fss.Utilities.Color.hex "6a5acd" |> ColorType |> valueFunction
-            member this.slateGray = Fss.Utilities.Color.hex "708090" |> ColorType |> valueFunction
-            member this.snow = Fss.Utilities.Color.hex "fffafa" |> ColorType |> valueFunction
-            member this.springGreen = Fss.Utilities.Color.hex "00ff7f" |> ColorType |> valueFunction
-            member this.steelBlue = Fss.Utilities.Color.hex "4682b4" |> ColorType |> valueFunction
-            member this.tan = Fss.Utilities.Color.hex "d2b48c" |> ColorType |> valueFunction
-            member this.thistle = Fss.Utilities.Color.hex "d8bfd8" |> ColorType |> valueFunction
-            member this.tomato = Fss.Utilities.Color.hex "ff6347" |> ColorType |> valueFunction
-            member this.turquoise = Fss.Utilities.Color.hex "40e0d0" |> ColorType |> valueFunction
-            member this.violet = Fss.Utilities.Color.hex "ee82ee" |> ColorType |> valueFunction
-            member this.wheat = Fss.Utilities.Color.hex "f5deb3" |> ColorType |> valueFunction
-            member this.whiteSmoke = Fss.Utilities.Color.hex "f5f5f5" |> ColorType |> valueFunction
-            member this.yellowGreen = Fss.Utilities.Color.hex "9acd32" |> ColorType |> valueFunction
-            member this.rebeccaPurple = Fss.Utilities.Color.hex "663399" |> ColorType |> valueFunction
-            member this.transparent = Fss.Utilities.Color.rgba 0 0 0 0.0 |> ColorType |> valueFunction
-            member this.currentColor = "currentColor" |> ColorType |> valueFunction
-            member this.rgb r g b = Fss.Utilities.Color.rgb r g b |> ColorType |> valueFunction
-            member this.rgba r g b a = Fss.Utilities.Color.rgba r g b a |> ColorType |> valueFunction
-            member this.hex (value: string) = Fss.Utilities.Color.hex value |> ColorType |> valueFunction
-            member this.hsl h s l = Fss.Utilities.Color.hsl h s l |> ColorType |> valueFunction
-            member this.hsla h s l a = Fss.Utilities.Color.hsla h s l a |> ColorType |> valueFunction
+    type ColorAdjust =
+        | Economy
+        | Exact
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
 
-        let Color = ColorBase<ColorType>(id)
+// TODO: RYdd opp i dette?
+[<AutoOpen>]
+module colorHelpers =
+    let internal hex (value: string) =
+        if value.StartsWith "#" then
+            value
+        else
+            $"#{value}"
+        |> Hex
 
-        type ColorClass (valueFunction: IColor -> CssProperty) =
-            inherit ColorBase<CssProperty>(valueFunction)
-            member this.value color = color |> valueFunction
-            member this.inherit' = Inherit |> valueFunction
-            member this.initial = Initial |> valueFunction
-            member this.unset = Unset |> valueFunction
+[<RequireQualifiedAccess>]
+module ColorClass =
+    type Color(property) =
+        inherit CssRule(property)
+        member this.value(color: Color.Color) = (property, color) |> Rule
+        member this.black = (property, Black) |> Rule
+        member this.silver = (property, Silver) |> Rule
+        member this.gray = (property, Gray) |> Rule
+        member this.white = (property, White) |> Rule
+        member this.maroon = (property, Maroon) |> Rule
+        member this.red = (property, Red) |> Rule
+        member this.purple = (property, Purple) |> Rule
+        member this.fuchsia = (property, Fuchsia) |> Rule
+        member this.green = (property, Green) |> Rule
+        member this.lime = (property, Lime) |> Rule
+        member this.olive = (property, Olive) |> Rule
+        member this.yellow = (property, Yellow) |> Rule
+        member this.navy = (property, Navy) |> Rule
+        member this.blue = (property, Blue) |> Rule
+        member this.teal = (property, Teal) |> Rule
+        member this.aqua = (property, Aqua) |> Rule
+        member this.orange = (property, Orange) |> Rule
+        member this.aliceBlue = (property, AliceBlue) |> Rule
+        member this.antiqueWhite = (property, AntiqueWhite) |> Rule
+        member this.aquaMarine = (property, AquaMarine) |> Rule
+        member this.azure = (property, Azure) |> Rule
+        member this.beige = (property, Beige) |> Rule
+        member this.bisque = (property, Bisque) |> Rule
+        member this.blanchedAlmond = (property, BlanchedAlmond) |> Rule
+        member this.blueViolet = (property, BlueViolet) |> Rule
+        member this.brown = (property, Brown) |> Rule
+        member this.burlywood = (property, Burlywood) |> Rule
+        member this.cadetBlue = (property, CadetBlue) |> Rule
+        member this.chartreuse = (property, Chartreuse) |> Rule
+        member this.chocolate = (property, Chocolate) |> Rule
+        member this.coral = (property, Coral) |> Rule
+        member this.cornflowerBlue = (property, CornflowerBlue) |> Rule
+        member this.cornsilk = (property, Cornsilk) |> Rule
+        member this.crimson = (property, Crimson) |> Rule
+        member this.cyan = (property, Cyan) |> Rule
+        member this.darkBlue = (property, DarkBlue) |> Rule
+        member this.darkCyan = (property, DarkCyan) |> Rule
+        member this.darkGoldenrod = (property, DarkGoldenrod) |> Rule
+        member this.darkGray = (property, DarkGray) |> Rule
+        member this.darkGreen = (property, DarkGreen) |> Rule
+        member this.darkKhaki = (property, DarkKhaki) |> Rule
+        member this.darkMagenta = (property, DarkMagenta) |> Rule
+        member this.darkOliveGreen = (property, DarkOliveGreen) |> Rule
+        member this.darkOrange = (property, DarkOrange) |> Rule
+        member this.darkOrchid = (property, DarkOrchid) |> Rule
+        member this.darkRed = (property, DarkRed) |> Rule
+        member this.darkSalmon = (property, DarkSalmon) |> Rule
+        member this.darkSeaGreen = (property, DarkSeaGreen) |> Rule
+        member this.darkSlateBlue = (property, DarkSlateBlue) |> Rule
+        member this.darkSlateGray = (property, DarkSlateGray) |> Rule
+        member this.darkTurquoise = (property, DarkTurquoise) |> Rule
+        member this.darkViolet = (property, DarkViolet) |> Rule
+        member this.deepPink = (property, DeepPink) |> Rule
+        member this.deepSkyBlue = (property, DeepSkyBlue) |> Rule
+        member this.dimGrey = (property, DimGrey) |> Rule
+        member this.dodgerBlue = (property, DodgerBlue) |> Rule
+        member this.fireBrick = (property, FireBrick) |> Rule
+        member this.floralWhite = (property, FloralWhite) |> Rule
+        member this.forestGreen = (property, ForestGreen) |> Rule
+        member this.gainsboro = (property, Gainsboro) |> Rule
+        member this.ghostWhite = (property, GhostWhite) |> Rule
+        member this.gold = (property, Gold) |> Rule
+        member this.goldenrod = (property, Goldenrod) |> Rule
+        member this.greenYellow = (property, GreenYellow) |> Rule
+        member this.grey = (property, Grey) |> Rule
+        member this.honeydew = (property, Honeydew) |> Rule
+        member this.hotPink = (property, HotPink) |> Rule
+        member this.indianRed = (property, IndianRed) |> Rule
+        member this.indigo = (property, Indigo) |> Rule
+        member this.ivory = (property, Ivory) |> Rule
+        member this.khaki = (property, Khaki) |> Rule
+        member this.lavender = (property, Lavender) |> Rule
+        member this.lavenderBlush = (property, LavenderBlush) |> Rule
+        member this.lawnGreen = (property, LawnGreen) |> Rule
+        member this.lemonChiffon = (property, LemonChiffon) |> Rule
+        member this.lightBlue = (property, LightBlue) |> Rule
+        member this.lightCoral = (property, LightCoral) |> Rule
+        member this.lightCyan = (property, LightCyan) |> Rule
+        member this.lightGoldenrodYellow = (property, LightGoldenrodYellow) |> Rule
+        member this.lightGray = (property, LightGray) |> Rule
+        member this.lightGreen = (property, LightGreen) |> Rule
+        member this.lightGrey = (property, LightGrey) |> Rule
+        member this.lightPink = (property, LightPink) |> Rule
+        member this.lightSalmon = (property, LightSalmon) |> Rule
+        member this.lightSeaGreen = (property, LightSeaGreen) |> Rule
+        member this.lightSkyBlue = (property, LightSkyBlue) |> Rule
+        member this.lightSlateGrey = (property, LightSlateGrey) |> Rule
+        member this.lightSteelBlue = (property, LightSteelBlue) |> Rule
+        member this.lightYellow = (property, LightYellow) |> Rule
+        member this.limeGreen = (property, LimeGreen) |> Rule
+        member this.linen = (property, Linen) |> Rule
+        member this.magenta = (property, Magenta) |> Rule
+        member this.mediumAquamarine = (property, MediumAquamarine) |> Rule
+        member this.mediumBlue = (property, MediumBlue) |> Rule
+        member this.mediumOrchid = (property, MediumOrchid) |> Rule
+        member this.mediumPurple = (property, MediumPurple) |> Rule
+        member this.mediumSeaGreen = (property, MediumSeaGreen) |> Rule
+        member this.mediumSlateBlue = (property, MediumSlateBlue) |> Rule
+        member this.mediumSpringGreen = (property, MediumSpringGreen) |> Rule
+        member this.mediumTurquoise = (property, MediumTurquoise) |> Rule
+        member this.mediumVioletRed = (property, MediumVioletRed) |> Rule
+        member this.midnightBlue = (property, MidnightBlue) |> Rule
+        member this.mintCream = (property, MintCream) |> Rule
+        member this.mistyRose = (property, MistyRose) |> Rule
+        member this.moccasin = (property, Moccasin) |> Rule
+        member this.navajoWhite = (property, NavajoWhite) |> Rule
+        member this.oldLace = (property, OldLace) |> Rule
+        member this.olivedrab = (property, Olivedrab) |> Rule
+        member this.orangeRed = (property, OrangeRed) |> Rule
+        member this.orchid = (property, Orchid) |> Rule
+        member this.paleGoldenrod = (property, PaleGoldenrod) |> Rule
+        member this.paleGreen = (property, PaleGreen) |> Rule
+        member this.paleTurquoise = (property, PaleTurquoise) |> Rule
+        member this.paleVioletred = (property, PaleVioletred) |> Rule
+        member this.papayaWhip = (property, PapayaWhip) |> Rule
+        member this.peachpuff = (property, Peachpuff) |> Rule
+        member this.peru = (property, Peru) |> Rule
+        member this.pink = (property, Pink) |> Rule
+        member this.plum = (property, Plum) |> Rule
+        member this.powderBlue = (property, PowderBlue) |> Rule
+        member this.rosyBrown = (property, RosyBrown) |> Rule
+        member this.royalBlue = (property, RoyalBlue) |> Rule
+        member this.saddleBrown = (property, SaddleBrown) |> Rule
+        member this.salmon = (property, Salmon) |> Rule
+        member this.sandyBrown = (property, SandyBrown) |> Rule
+        member this.seaGreen = (property, SeaGreen) |> Rule
+        member this.seaShell = (property, SeaShell) |> Rule
+        member this.sienna = (property, Sienna) |> Rule
+        member this.skyBlue = (property, SkyBlue) |> Rule
+        member this.slateBlue = (property, SlateBlue) |> Rule
+        member this.slateGray = (property, SlateGray) |> Rule
+        member this.snow = (property, Snow) |> Rule
+        member this.springGreen = (property, SpringGreen) |> Rule
+        member this.steelBlue = (property, SteelBlue) |> Rule
+        member this.tan = (property, Tan) |> Rule
+        member this.thistle = (property, Thistle) |> Rule
+        member this.tomato = (property, Tomato) |> Rule
+        member this.turquoise = (property, Turquoise) |> Rule
+        member this.violet = (property, Violet) |> Rule
+        member this.wheat = (property, Wheat) |> Rule
+        member this.whiteSmoke = (property, WhiteSmoke) |> Rule
+        member this.yellowGreen = (property, YellowGreen) |> Rule
+        member this.rebeccaPurple = (property, RebeccaPurple) |> Rule
+        member this.transparent = (property, Transparent) |> Rule
+        member this.currentColor = (property, CurrentColor) |> Rule
 
-        type ColorAdjust =
-            | Economy
-            | Exact
+        member this.rgb red green blue =
+            (property, Rgb(red, green, blue)) |> Rule
 
-        [<AutoOpen>]
-        module colorHelpers =
-            let internal colorToString (ColorType c) = c
+        member this.rgba red green blue alpha =
+            (property, Rgba(red, green, blue, alpha)) |> Rule
+
+        member this.hex(value: string) = (property, hex value) |> Rule
+
+        member this.hsl hue saturation lightness =
+            (property, Hsl(hue, saturation, lightness))
+            |> Rule
+
+        member this.hsla hue saturation lightness alpha =
+            (property, Hsla(hue, saturation, lightness, alpha))
+            |> Rule
+
+    type ColorAdjust(property) =
+        inherit CssRule(property)
+        member this.value(adjust: Color.ColorAdjust) = (property, adjust) |> Rule
+        member this.exact = (property, Exact) |> Rule
+        member this.economy = (property, Economy) |> Rule

@@ -1,40 +1,34 @@
 namespace Fss
 
 namespace Fss.FssTypes
+
+[<RequireQualifiedAccess>]
+module ContentSize =
+    type ContentSize =
+        | MaxContent
+        | MinContent
+        | FitContent of ILengthPercentage
+        interface ICssValue with
+            member this.Stringify() =
+                match this with
+                | FitContent length -> $"fit-content({lengthPercentageString length})"
+                | _ -> (Fss.Utilities.Helpers.toKebabCase this).ToLower()
+
     [<RequireQualifiedAccess>]
-    module ContentSize =
-        type ContentSize =
-            | MaxContent
-            | MinContent
-            | FitContent of ILengthPercentage
-            interface IContentSize
-            interface IGridAutoRows
-            interface IGridAutoColumns
+    module ContentClasses =
+        type ContentSize(property) =
+            inherit CssRule(property)
 
-        type ContentSizeClass (contentValue: string -> CssProperty, contentValue': IContentSize -> CssProperty) =
-            member this.fitContent (contentSize: ILengthPercentage) =
-                sprintf "fit-content(%s)" (lengthPercentageToString contentSize)
-                |> contentValue
-            member this.value (size: ILengthPercentage) = lengthPercentageToString size |> contentValue
-            member this.value (contentSize: IContentSize) = contentSize |> contentValue'
-            member this.maxContent = MaxContent |> contentValue'
-            member this.minContent = MinContent |> contentValue'
+            member this.value(length: ILengthPercentage) =
+                (property, lengthPercentageToType length) |> Rule
 
-            member this.auto = Auto |> contentValue'
-            member this.inherit' = Inherit |> contentValue'
-            member this.initial = Initial |> contentValue'
-            member this.unset = Unset |> contentValue'
+            member this.maxContent =
+                (property, ContentSize.MaxContent) |> Rule
 
-    [<AutoOpen>]
-    module contentSizeHelpers =
-        let internal contentSizeToString (contentSize: IContentSize) =
-            let stringifyContent content =
-                match content with
-                    | ContentSize.FitContent f -> sprintf "fit-content(%s)" (lengthPercentageToString f)
-                    | _ -> Fss.Utilities.Helpers.duToKebab content
+            member this.minContent =
+                (property, ContentSize.MinContent) |> Rule
 
-            match contentSize with
-            | :? ContentSize.ContentSize as c -> stringifyContent c
-            | :? Auto -> auto
-            | :? Keywords as k -> keywordsToString k
-            | _ -> "Unknown content size"
+            member this.fitContent(fit: ILengthPercentage) =
+                (property, ContentSize.FitContent fit) |> Rule
+
+            member this.auto = (property, Auto) |> Rule

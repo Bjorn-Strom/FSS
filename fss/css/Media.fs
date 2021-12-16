@@ -1,10 +1,11 @@
 namespace Fss
 
-open Fable.Core
-open Fable.Core.JsInterop
-open Utilities.Helpers
+open Fss.FssTypes
 
+[<AutoOpen>]
 module Media =
+    let Media = Media.MediaClasses.Media()
+    (*
     let deviceLabel (d: FssTypes.Media.Device): string =
         match d with
             | FssTypes.Media.Not n -> sprintf "not %s" (duToLowercase n)
@@ -71,10 +72,13 @@ module Media =
         |> List.map stringifyMedia
         |> String.concat " and "
 
-    [<Erase>]
+    
     type Media =
         static member Media (features: FssTypes.Media.Feature list, attributeList) =
-             $"@media {mediaFeature features}" ==> attributeList |> FssTypes.CssProperty
+             //$"@media {mediaFeature features}" ==> attributeList |> FssTypes.CssProperty
+            features :> obj
         static member Media (device: FssTypes.Media.Device, features: FssTypes.Media.Feature list, attributeList) =
             let ``and`` = if List.isEmpty features then "" else "and"
-            $"@media {deviceLabel device} {``and``} {mediaFeature features}" ==> attributeList |> FssTypes.CssProperty
+            //$"@media {deviceLabel device} {``and``} {mediaFeature features}" ==> attributeList |> FssTypes.CssProperty
+            device :> obj
+    *)

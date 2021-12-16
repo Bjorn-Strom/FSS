@@ -1,7 +1,6 @@
 ﻿namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -12,561 +11,653 @@ module Font =
                 testCase
                     "Font synthesis none"
                     [ FontSynthesis.none ]
-                    [ "fontSynthesis" ==> "none" ]
+                     "font-synthesis: none;"
                 testCase
                     "Font synthesis weight"
                     [ FontSynthesis.weight ]
-                    [ "fontSynthesis" ==> "weight" ]
+                     "font-synthesis: weight;"
                 testCase
                     "Font synthesis style"
                     [ FontSynthesis.style ]
-                    [ "fontSynthesis" ==> "style" ]
+                     "font-synthesis: style;"
+                testCase
+                    "Font synthesis smallcaps"
+                    [ FontSynthesis.smallCaps ]
+                     "font-synthesis: small-caps;"
                 testCase
                     "Font synthesis weight style"
-                    [ FontSynthesis.weightStyle ]
-                    [ "fontSynthesis" ==> "weight style" ]
+                    [ FontSynthesis.value [ FssTypes.Font.Weight; FssTypes.Font.Style; FssTypes.Font.Synthesis.SmallCaps  ] ]
+                     "font-synthesis: weight style small-caps;"
+                testCase
+                    "Font synthesis inherit"
+                    [ FontSynthesis.inherit' ]
+                     "font-synthesis: inherit;"
+                testCase
+                    "Font synthesis initial"
+                    [ FontSynthesis.initial ]
+                     "font-synthesis: initial;"
+                testCase
+                    "Font synthesis unset"
+                    [ FontSynthesis.unset ]
+                     "font-synthesis: unset;"
+                testCase
+                    "Font synthesis revert"
+                    [ FontSynthesis.revert ]
+                     "font-synthesis: revert;"
                 testCase
                     "Font language override string"
                     [ FontLanguageOverride.value "ENG" ]
-                    [ "fontLanguageOverride" ==> "\"ENG\""]
+                     "font-language-override: \"ENG\";"
+                testCase
+                    "Font language override normal"
+                    [ FontLanguageOverride.normal ]
+                     "font-language-override: normal;"
                 testCase
                     "Font language override inherit"
                     [ FontLanguageOverride.inherit' ]
-                    [ "fontLanguageOverride" ==> "inherit" ]
+                     "font-language-override: inherit;"
                 testCase
                     "Font language override initial"
                     [ FontLanguageOverride.initial ]
-                    [ "fontLanguageOverride" ==> "initial" ]
+                     "font-language-override: initial;"
                 testCase
                     "Font language override unset"
                     [ FontLanguageOverride.unset ]
-                    [ "fontLanguageOverride" ==> "unset" ]
+                     "font-language-override: unset;"
+                testCase
+                    "Font language override revert"
+                    [ FontLanguageOverride.revert ]
+                     "font-language-override: revert;"
                 testCase
                     "Font kerning none"
                     [ FontKerning.none ]
-                    [ "fontKerning" ==> "none" ]
+                     "font-kerning: none;"
                 testCase
                     "Font kerning auto"
                     [ FontKerning.auto ]
-                    [ "fontKerning" ==> "auto" ]
+                     "font-kerning: auto;"
                 testCase
                     "Font kerning normal"
                     [ FontKerning.normal ]
-                    [ "fontKerning" ==> "normal" ]
+                     "font-kerning: normal;"
+                testCase
+                    "Font kerning inherit"
+                    [ FontKerning.inherit' ]
+                     "font-kerning: inherit;"
+                testCase
+                    "Font kerning initial"
+                    [ FontKerning.initial ]
+                     "font-kerning: initial;"
+                testCase
+                    "Font kerning unset"
+                    [ FontKerning.unset ]
+                     "font-kerning: unset;"
+                testCase
+                    "Font kerning revert"
+                    [ FontKerning.revert ]
+                     "font-kerning: revert;"
                 testCase
                     "Font size XX-Small"
                     [ FontSize.xxSmall ]
-                    [ "fontSize" ==> "xx-small" ]
+                     "font-size: xx-small;"
                 testCase
                     "Font size X-Small"
                     [ FontSize.xSmall ]
-                    [ "fontSize" ==> "x-small" ]
+                     "font-size: x-small;"
                 testCase
                     "Font size small"
                     [ FontSize.small ]
-                    [ "fontSize" ==> "small" ]
+                     "font-size: small;"
                 testCase
                     "Font size medium"
                     [ FontSize.medium ]
-                    [ "fontSize" ==> "medium" ]
+                     "font-size: medium;"
                 testCase
                     "Font size large"
                     [ FontSize.large ]
-                    [ "fontSize" ==> "large" ]
+                     "font-size: large;"
                 testCase
                     "Font size x-large"
                     [ FontSize.xLarge ]
-                    [ "fontSize" ==> "x-large" ]
+                     "font-size: x-large;"
                 testCase
                     "Font size xx-large"
                     [ FontSize.xxLarge ]
-                    [ "fontSize" ==> "xx-large" ]
+                     "font-size: xx-large;"
                 testCase
                     "Font size xxx-large"
                     [ FontSize.xxxLarge ]
-                    [ "fontSize" ==> "xxx-large" ]
+                     "font-size: xxx-large;"
                 testCase
                     "Font size smaller"
                     [ FontSize.smaller ]
-                    [ "fontSize" ==> "smaller" ]
+                     "font-size: smaller;"
                 testCase
                     "Font size larger"
                     [ FontSize.larger ]
-                    [ "fontSize" ==> "larger" ]
+                     "font-size: larger;"
                 testCase
                     "Font size pixels"
-                    [ FontSize' (px 18) ]
-                    [ "fontSize" ==> "18px" ]
+                    [ FontSize.value (px 18) ]
+                     "font-size: 18px;"
                 testCase
                     "Font size em"
-                    [ FontSize' (em 0.8) ]
-                    [ "fontSize" ==> "0.8em" ]
+                    [ FontSize.value (em 0.8) ]
+                     "font-size: 0.8em;"
                 testCase
                     "Font size percentage"
-                    [ FontSize' (pct 80) ]
-                    [ "fontSize" ==> "80%" ]
+                    [ FontSize.value (pct 80) ]
+                     "font-size: 80%;"
                 testCase
                     "Font size inherit"
                     [ FontSize.inherit' ]
-                    [ "fontSize" ==> "inherit" ]
+                     "font-size: inherit;"
                 testCase
                     "Font size initial"
                     [ FontSize.initial ]
-                    [ "fontSize" ==> "initial" ]
+                     "font-size: initial;"
                 testCase
                     "Font size unset"
                     [ FontSize.unset ]
-                    [ "fontSize" ==> "unset" ]
+                     "font-size: unset;"
+                testCase
+                    "Font size revert"
+                    [ FontSize.revert ]
+                     "font-size: revert;"
                 testCase
                     "Font stretch normal"
                     [ FontStretch.normal ]
-                    [ "fontStretch" ==> "normal" ]
+                     "font-stretch: normal;"
                 testCase
                     "Font stretch ultra-condensed"
                     [ FontStretch.ultraCondensed ]
-                    [ "fontStretch" ==> "ultra-condensed" ]
+                     "font-stretch: ultra-condensed;"
                 testCase
                      "Font stretch extra-condensed"
                     [ FontStretch.extraCondensed ]
-                    [ "fontStretch" ==> "extra-condensed" ]
+                     "font-stretch: extra-condensed;"
                 testCase
                     "Font stretch extra-condensed"
                     [ FontStretch.extraCondensed ]
-                    [ "fontStretch" ==> "extra-condensed" ]
+                     "font-stretch: extra-condensed;"
                 testCase
                     "Font stretch condensed"
                     [ FontStretch.condensed ]
-                    [ "fontStretch" ==> "condensed" ]
+                     "font-stretch: condensed;"
                 testCase
                     "Font stretch semi-condensed"
                     [ FontStretch.semiCondensed ]
-                    [ "fontStretch" ==> "semi-condensed" ]
+                     "font-stretch: semi-condensed;"
                 testCase
                     "Font stretch expanded"
                     [ FontStretch.expanded]
-                    [ "fontStretch" ==> "expanded" ]
+                     "font-stretch: expanded;"
                 testCase
                     "Font stretch extra-expanded"
                     [ FontStretch.extraExpanded]
-                    [ "fontStretch" ==> "extra-expanded" ]
+                     "font-stretch: extra-expanded;"
                 testCase
                     "Font stretch ultra-expanded"
                     [ FontStretch.ultraExpanded]
-                    [ "fontStretch" ==> "ultra-expanded" ]
+                     "font-stretch: ultra-expanded;"
                 testCase
                     "Font stretch percent"
-                    [ FontStretch' (pct 200) ]
-                    [ "fontStretch" ==> "200%" ]
+                    [ FontStretch.value (pct 200) ]
+                     "font-stretch: 200%;"
                 testCase
                     "Font stretch inherit"
                     [ FontStretch.inherit' ]
-                    [ "fontStretch" ==> "inherit" ]
+                     "font-stretch: inherit;"
                 testCase
                     "Font stretch initial"
                     [ FontStretch.initial ]
-                    [ "fontStretch" ==> "initial" ]
+                     "font-stretch: initial;"
                 testCase
                     "Font stretch unset"
                     [ FontStretch.unset ]
-                    [ "fontStretch" ==> "unset" ]
+                     "font-stretch: unset;"
+                testCase
+                    "Font stretch revert"
+                    [ FontStretch.revert ]
+                     "font-stretch: revert;"
                 testCase
                     "Font style normal"
                     [ FontStyle.normal]
-                    [ "fontStyle" ==> "normal"]
+                     "font-style: normal;"
                 testCase
                     "Font style italic"
                     [ FontStyle.italic]
-                    [ "fontStyle" ==> "italic"]
+                     "font-style: italic;"
                 testCase
                     "Font style oblicque 90"
                     [ FontStyle.oblique (deg 90.0)]
-                    [ "fontStyle" ==> "oblique 90.00deg"]
+                     "font-style: oblique 90deg;"
                 testCase
                     "Font style oblique -90"
                     [ FontStyle.oblique (deg -90.0)]
-                    [ "fontStyle" ==> "oblique -90.00deg"]
+                     "font-style: oblique -90deg;"
                 testCase
                     "Font style inherit"
                     [ FontStyle.inherit' ]
-                    [ "fontStyle" ==> "inherit" ]
+                     "font-style: inherit;"
                 testCase
                     "Font style initial"
                     [ FontStyle.initial ]
-                    [ "fontStyle" ==> "initial" ]
+                     "font-style: initial;"
                 testCase
                     "Font style unset"
                     [ FontStyle.unset ]
-                    [ "fontStyle" ==> "unset" ]
+                     "font-style: unset;"
+                testCase
+                    "Font style revert"
+                    [ FontStyle.revert ]
+                     "font-style: revert;"
                 testCase
                     "Font weight normal"
                     [ FontWeight.normal ]
-                    [ "fontWeight" ==> "normal"]
+                     "font-weight: normal;"
                 testCase
                     "Font weight bold"
                     [ FontWeight.bold ]
-                    [ "fontWeight" ==> "bold"]
+                     "font-weight: bold;"
                 testCase
                     "Font weight lighter"
                     [ FontWeight.lighter ]
-                    [ "fontWeight" ==> "lighter"]
+                     "font-weight: lighter;"
                 testCase
                     "Font weight bolder"
                     [ FontWeight.bolder ]
-                    [ "fontWeight" ==> "bolder"]
+                     "font-weight: bolder;"
                 testCase
                     "Font weight value"
-                    [ FontWeight' (FssTypes.CssInt 500) ]
-                    [ "fontWeight" ==> "500"]
+                    [ FontWeight.value 500 ]
+                     "font-weight: 500;"
                 testCase
                     "Font weight inherit"
                     [ FontWeight.inherit' ]
-                    [ "fontWeight" ==> "inherit"]
+                     "font-weight: inherit;"
                 testCase
                     "Font weight initial"
                     [ FontWeight.initial ]
-                    [ "fontWeight" ==> "initial"]
+                     "font-weight: initial;"
                 testCase
                     "Font weight unset"
                     [ FontWeight.unset ]
-                    [ "fontWeight" ==> "unset"]
+                     "font-weight: unset;"
+                testCase
+                    "Font weight revert"
+                    [ FontWeight.revert ]
+                     "font-weight: revert;"
                 testCase
                     "Line height normal"
                     [ LineHeight.normal ]
-                    [ "lineHeight" ==> "normal" ]
+                     "line-height: normal;"
                 testCase
                     "Line height value"
-                    [ LineHeight' (FssTypes.CssFloat 2.5) ]
-                    [ "lineHeight" ==> "2.5" ]
+                    [ LineHeight.value 2.5 ]
+                     "line-height: 2.5;"
                 testCase
                     "Line height em"
-                    [ LineHeight' (em 3.0) ]
-                    [ "lineHeight" ==> "3.0em" ]
+                    [ LineHeight.value (em 3.0) ]
+                     "line-height: 3em;"
                 testCase
                     "Line height pixel"
-                    [ LineHeight' (px 3) ]
-                    [ "lineHeight" ==> "3px" ]
+                    [ LineHeight.value (px 3) ]
+                     "line-height: 3px;"
                 testCase
                     "Line height percent"
-                    [ LineHeight' (pct 34) ]
-                    [ "lineHeight" ==> "34%" ]
+                    [ LineHeight.value (pct 34) ]
+                     "line-height: 34%;"
                 testCase
                     "Line height initial"
                     [ LineHeight.initial ]
-                    [ "lineHeight" ==> "initial" ]
+                     "line-height: initial;"
                 testCase
                     "Line height inherit"
                     [ LineHeight.inherit' ]
-                    [ "lineHeight" ==> "inherit" ]
+                     "line-height: inherit;"
                 testCase
                     "Line height unset"
                     [ LineHeight.unset ]
-                    [ "lineHeight" ==> "unset" ]
+                     "line-height: unset;"
+                testCase
+                    "Line height revert"
+                    [ LineHeight.revert ]
+                     "line-height: revert;"
                 testCase
                     "Line break loose"
                     [ LineBreak.loose ]
-                    [ "lineBreak" ==> "loose" ]
+                     "line-break: loose;"
                 testCase
                     "Line break strict"
                     [ LineBreak.strict ]
-                    [ "lineBreak" ==> "strict" ]
+                     "line-break: strict;"
                 testCase
                     "Line break anywhere"
                     [ LineBreak.anywhere ]
-                    [ "lineBreak" ==> "anywhere" ]
+                     "line-break: anywhere;"
                 testCase
                     "Line break normal"
                     [ LineBreak.normal ]
-                    [ "lineBreak" ==> "normal" ]
+                     "line-break: normal;"
                 testCase
                     "Line break auto"
                     [ LineBreak.auto ]
-                    [ "lineBreak" ==> "auto" ]
+                     "line-break: auto;"
                 testCase
                     "Line break initial"
                     [ LineBreak.initial ]
-                    [ "lineBreak" ==> "initial" ]
+                     "line-break: initial;"
                 testCase
                     "Line break inherit"
                     [ LineBreak.inherit' ]
-                    [ "lineBreak" ==> "inherit" ]
+                     "line-break: inherit;"
                 testCase
                     "Line break unset"
                     [ LineBreak.unset ]
-                    [ "lineBreak" ==> "unset" ]
+                     "line-break: unset;"
+                testCase
+                    "Line break revert"
+                    [ LineBreak.revert ]
+                     "line-break: revert;"
                 testCase
                     "Letter spacing px"
-                    [ LetterSpacing' (px 10) ]
-                    [ "letterSpacing" ==> "10px" ]
+                    [ LetterSpacing.value (px 10) ]
+                     "letter-spacing: 10px;"
                 testCase
                     "Letter spacing initial"
                     [ LetterSpacing.initial ]
-                    [ "letterSpacing" ==> "initial" ]
+                     "letter-spacing: initial;"
                 testCase
                     "Letter spacing inherit"
                     [ LetterSpacing.inherit' ]
-                    [ "letterSpacing" ==> "inherit" ]
+                     "letter-spacing: inherit;"
                 testCase
                     "Letter spacing unset"
                     [ LetterSpacing.unset ]
-                    [ "letterSpacing" ==> "unset" ]
+                     "letter-spacing: unset;"
+                testCase
+                    "Letter spacing revert"
+                    [ LetterSpacing.revert ]
+                     "letter-spacing: revert;"
                 testCase
                     "Letter spacing normal"
                     [ LetterSpacing.normal ]
-                    [ "letterSpacing" ==> "normal" ]
+                     "letter-spacing: normal;"
                 testCase
                      "Font family serif"
                      [ FontFamily.serif ]
-                     [ "fontFamily" ==> "serif" ]
+                      "font-family: serif;"
                 testCase
                      "Font family sans-serif"
                      [ FontFamily.sansSerif ]
-                     [ "fontFamily" ==> "sans-serif" ]
+                      "font-family: sans-serif;"
                 testCase
                      "Font family monospace"
                      [ FontFamily.monospace ]
-                     [ "fontFamily" ==> "monospace" ]
+                      "font-family: monospace;"
                 testCase
                      "Font family cursive"
                      [ FontFamily.cursive ]
-                     [ "fontFamily" ==> "cursive" ]
+                      "font-family: cursive;"
                 testCase
                      "Font family arial"
-                     [ FontFamily.custom "arial" ]
-                     [ "fontFamily" ==> "arial" ]
+                     [ FontFamily.value "arial" ]
+                      "font-family: arial;"
                 testCase
                      "Font family initial"
                      [ FontFamily.initial ]
-                     [ "fontFamily" ==> "initial" ]
+                      "font-family: initial;"
                 testCase
                      "Font family inherit"
                      [ FontFamily.inherit' ]
-                     [ "fontFamily" ==> "inherit" ]
+                      "font-family: inherit;"
                 testCase
                      "Font family unset"
                      [ FontFamily.unset ]
-                     [ "fontFamily" ==> "unset" ]
+                      "font-family: unset;"
                 testCase
                     "Font families"
-                    [ FontFamily.values ([ FssTypes.Font.Serif; FssTypes.Font.Monospace ]) ]
-                    [ "fontFamily" ==> "serif, monospace" ]
+                    [ FontFamily.value [ FssTypes.Font.Serif; FssTypes.Font.Monospace ] ]
+                     "font-family: serif, monospace;"
                 testCase
                     "font feature setting On"
-                    [ FontFeatureSetting.liga FssTypes.Font.On ]
-                    [ "fontFeatureSettings" ==> "\"liga\" On" ]
+                    [ FontFeatureSettings.liga On ]
+                     "font-feature-settings: \"liga\" On;"
                 testCase
                     "font feature setting Off"
-                    [ FontFeatureSetting.liga FssTypes.Font.Off ]
-                    [ "fontFeatureSettings" ==> "\"liga\" Off" ]
+                    [ FontFeatureSettings.liga Off ]
+                     "font-feature-settings: \"liga\" Off;"
                 testCase
                     "font feature setting initial"
-                    [ FontFeatureSetting.initial ]
-                    [ "fontFeatureSettings" ==> "initial" ]
+                    [ FontFeatureSettings.initial ]
+                     "font-feature-settings: initial;"
                 testCase
                     "font feature setting inherit"
-                    [ FontFeatureSetting.inherit' ]
-                    [ "fontFeatureSettings" ==> "inherit" ]
+                    [ FontFeatureSettings.inherit' ]
+                     "font-feature-settings: inherit;"
                 testCase
                     "font feature setting unset"
-                    [ FontFeatureSetting.unset ]
-                    [ "fontFeatureSettings" ==> "unset" ]
+                    [ FontFeatureSettings.unset ]
+                     "font-feature-settings: unset;"
+                testCase
+                    "font feature setting revert"
+                    [ FontFeatureSettings.revert ]
+                     "font-feature-settings: revert;"
                 testCase
                     "Font variant numeric normal"
                     [ FontVariantNumeric.normal]
-                    ["fontVariantNumeric" ==> "normal"]
+                    "font-variant-numeric: normal;"
                 testCase
                     "Font variant numeric ordinal"
                     [ FontVariantNumeric.ordinal]
-                    ["fontVariantNumeric" ==> "ordinal"]
+                    "font-variant-numeric: ordinal;"
                 testCase
                     "Font variant numeric slashed zero"
                     [ FontVariantNumeric.slashedZero]
-                    ["fontVariantNumeric" ==> "slashed-zero"]
+                    "font-variant-numeric: slashed-zero;"
                 testCase
                     "Font variant numeric lining nums"
                     [ FontVariantNumeric.liningNums]
-                    ["fontVariantNumeric" ==> "lining-nums"]
+                    "font-variant-numeric: lining-nums;"
                 testCase
                     "Font variant numeric old style nums"
                     [ FontVariantNumeric.oldstyleNums]
-                    ["fontVariantNumeric" ==> "oldstyle-nums"]
+                    "font-variant-numeric: oldstyle-nums;"
                 testCase
                     "Font variant numeric tabular nums"
                     [ FontVariantNumeric.tabularNums]
-                    ["fontVariantNumeric" ==> "tabular-nums"]
+                    "font-variant-numeric: tabular-nums;"
                 testCase
                     "Font variant numeric diagonal fractions"
                     [ FontVariantNumeric.diagonalFractions]
-                    ["fontVariantNumeric" ==> "diagonal-fractions"]
+                    "font-variant-numeric: diagonal-fractions;"
                 testCase
                     "Font variant numeric stacked fractions"
                     [ FontVariantNumeric.stackedFractions]
-                    ["fontVariantNumeric" ==> "stacked-fractions"]
+                    "font-variant-numeric: stacked-fractions;"
                 testCase
                     "Font variant numeric inherit"
                     [ FontVariantNumeric.inherit' ]
-                    [ "fontVariantNumeric" ==> "inherit" ]
+                     "font-variant-numeric: inherit;"
                 testCase
                     "Font variant numeric initial"
                     [ FontVariantNumeric.initial]
-                    [ "fontVariantNumeric" ==> "initial" ]
+                     "font-variant-numeric: initial;"
                 testCase
                     "Font variant numeric unset"
                     [ FontVariantNumeric.unset ]
-                    [ "fontVariantNumeric" ==> "unset" ]
+                     "font-variant-numeric: unset;"
+                testCase
+                    "Font variant numeric revert"
+                    [ FontVariantNumeric.revert ]
+                     "font-variant-numeric: revert;"
                 testCase
                     "Font variant caps normal"
                     [ FontVariantCaps.normal]
-                    ["fontVariantCaps" ==> "normal"]
+                    "font-variant-caps: normal;"
                 testCase
                     "Font variant caps small caps"
                     [ FontVariantCaps.smallCaps]
-                    ["fontVariantCaps" ==> "small-caps"]
+                    "font-variant-caps: small-caps;"
                 testCase
                     "Font variant caps  all small caps"
                     [ FontVariantCaps.allSmallCaps]
-                    ["fontVariantCaps" ==> "all-small-caps"]
+                    "font-variant-caps: all-small-caps;"
                 testCase
                     "Font variant caps petite caps"
                     [ FontVariantCaps.petiteCaps]
-                    ["fontVariantCaps" ==> "petite-caps"]
+                    "font-variant-caps: petite-caps;"
                 testCase
                     "Font variant caps all petite caps"
                     [ FontVariantCaps.allPetiteCaps]
-                    ["fontVariantCaps" ==> "all-petite-caps"]
+                    "font-variant-caps: all-petite-caps;"
                 testCase
                     "Font variant caps unicase"
                     [ FontVariantCaps.unicase]
-                    ["fontVariantCaps" ==> "unicase"]
+                    "font-variant-caps: unicase;"
                 testCase
                     "Font variant caps titling caps"
                     [ FontVariantCaps.titlingCaps]
-                    ["fontVariantCaps" ==> "titling-caps"]
+                    "font-variant-caps: titling-caps;"
                 testCase
                     "Font variant caps initial"
                     [ FontVariantCaps.initial ]
-                    [ "fontVariantCaps" ==> "initial"]
+                     "font-variant-caps: initial;"
                 testCase
                     "Font variant caps inherit"
                     [ FontVariantCaps.inherit' ]
-                    ["fontVariantCaps" ==> "inherit"]
+                    "font-variant-caps: inherit;"
                 testCase
                     "Font variant caps unset"
                     [ FontVariantCaps.unset ]
-                    ["fontVariantCaps" ==> "unset" ]
+                    "font-variant-caps: unset;"
+                testCase
+                    "Font variant caps revert"
+                    [ FontVariantCaps.revert ]
+                    "font-variant-caps: revert;"
                 testCase
                     "Font variant east asian normal"
                     [ FontVariantEastAsian.normal]
-                    ["fontVariantEastAsian" ==> "normal"]
+                    "font-variant-east-asian: normal;"
                 testCase
                     "Font variant east asian ruby"
                     [ FontVariantEastAsian.ruby]
-                    ["fontVariantEastAsian" ==> "ruby"]
+                    "font-variant-east-asian: ruby;"
                 testCase
                     "Font variant east asian  jis78"
                     [ FontVariantEastAsian.jis78]
-                    ["fontVariantEastAsian" ==> "jis78"]
+                    "font-variant-east-asian: jis78;"
                 testCase
                     "Font variant east asian jis83"
                     [ FontVariantEastAsian.jis83]
-                    ["fontVariantEastAsian" ==> "jis83"]
+                    "font-variant-east-asian: jis83;"
                 testCase
                     "Font variant east asian jis90"
                     [ FontVariantEastAsian.jis90]
-                    ["fontVariantEastAsian" ==> "jis90"]
+                    "font-variant-east-asian: jis90;"
                 testCase
                     "Font variant east asian jis04"
                     [ FontVariantEastAsian.jis04]
-                    ["fontVariantEastAsian" ==> "jis04"]
+                    "font-variant-east-asian: jis04;"
                 testCase
                     "Font variant east asian simplified"
                     [ FontVariantEastAsian.simplified]
-                    ["fontVariantEastAsian" ==> "simplified"]
+                    "font-variant-east-asian: simplified;"
                 testCase
                     "Font variant east asian traditional"
                     [ FontVariantEastAsian.traditional]
-                    ["fontVariantEastAsian" ==> "traditional"]
+                    "font-variant-east-asian: traditional;"
                 testCase
                     "Font variant east asian full width"
                     [ FontVariantEastAsian.fullWidth]
-                    ["fontVariantEastAsian" ==> "full-width"]
+                    "font-variant-east-asian: full-width;"
                 testCase
                     "Font variant east asian  proportional widt"
                     [ FontVariantEastAsian.proportionalWidth]
-                    ["fontVariantEastAsian" ==> "proportional-width"]
+                    "font-variant-east-asian: proportional-width;"
                 testCase
                     "Font variant ligatures normal"
                     [ FontVariantLigatures.normal]
-                    ["fontVariantLigatures" ==> "normal"]
+                    "font-variant-ligatures: normal;"
                 testCase
                     "Font variant ligatures none"
                     [ FontVariantLigatures.none]
-                    ["fontVariantLigatures" ==> "none"]
+                    "font-variant-ligatures: none;"
                 testCase
                     "Font variant ligatures common"
                     [ FontVariantLigatures.commonLigatures]
-                    ["fontVariantLigatures" ==> "common-ligatures"]
+                    "font-variant-ligatures: common-ligatures;"
                 testCase
                     "Font variant ligatures no common"
                     [ FontVariantLigatures.noCommonLigatures]
-                    ["fontVariantLigatures" ==> "no-common-ligatures"]
+                    "font-variant-ligatures: no-common-ligatures;"
                 testCase
                     "Font variant ligatures discretionary"
                     [ FontVariantLigatures.discretionaryLigatures]
-                    ["fontVariantLigatures" ==> "discretionary-ligatures"]
+                    "font-variant-ligatures: discretionary-ligatures;"
                 testCase
                     "Font variant ligatures no discretionary"
                     [ FontVariantLigatures.noDiscretionaryLigatures]
-                    ["fontVariantLigatures" ==> "no-discretionary-ligatures"]
+                    "font-variant-ligatures: no-discretionary-ligatures;"
                 testCase
                     "Font variant ligatures historical"
                     [ FontVariantLigatures.historicalLigatures]
-                    ["fontVariantLigatures" ==> "historical-ligatures"]
+                    "font-variant-ligatures: historical-ligatures;"
                 testCase
                     "Font variant ligatures no historical"
                     [ FontVariantLigatures.noHistoricalLigatures]
-                    ["fontVariantLigatures" ==> "no-historical-ligatures"]
+                    "font-variant-ligatures: no-historical-ligatures;"
                 testCase
                     "Font variant ligatures contextual"
                     [ FontVariantLigatures.contextual]
-                    ["fontVariantLigatures" ==> "contextual"]
+                    "font-variant-ligatures: contextual;"
                 testCase
                     "Font variant ligatures no contextual"
                     [ FontVariantLigatures.noContextual]
-                    ["fontVariantLigatures" ==> "no-contextual"]
+                    "font-variant-ligatures: no-contextual;"
                 testCase
                     "Font variant ligatures no initial"
                     [ FontVariantLigatures.initial ]
-                    ["fontVariantLigatures" ==> "initial"]
+                    "font-variant-ligatures: initial;"
                 testCase
                     "Font variant ligatures inherit"
                     [ FontVariantLigatures.inherit']
-                    ["fontVariantLigatures" ==> "inherit"]
+                    "font-variant-ligatures: inherit;"
                 testCase
                     "Font variant ligatures no unset"
                     [ FontVariantLigatures.unset]
-                    ["fontVariantLigatures" ==> "unset"]
+                    "font-variant-ligatures: unset;"
+                testCase
+                    "Font variant ligatures no revert"
+                    [ FontVariantLigatures.revert]
+                    "font-variant-ligatures: revert;"
                 testCase
                     "Font variant position super"
                     [ FontVariantPosition.super ]
-                    ["fontVariantPosition" ==> "super"]
+                    "font-variant-position: super;"
                 testCase
                     "Font variant position sub"
                     [ FontVariantPosition.sub]
-                    ["fontVariantPosition" ==> "sub"]
+                    "font-variant-position: sub;"
                 testCase
                     "Font variant position unset"
                     [ FontVariantPosition.unset]
-                    ["fontVariantPosition" ==> "unset"]
+                    "font-variant-position: unset;"
                 testCase
                     "Font variant position initial"
                     [ FontVariantPosition.initial ]
-                    ["fontVariantPosition" ==> "initial"]
+                    "font-variant-position: initial;"
                 testCase
                     "Font variant position inherit"
                     [ FontVariantPosition.inherit']
-                    ["fontVariantPosition" ==> "inherit"]
+                    "font-variant-position: inherit;"
                 testCase
-                    "Font variant position no unset"
+                    "Font variant position unset"
                     [ FontVariantPosition.unset]
-                    ["fontVariantPosition" ==> "unset"]
+                    "font-variant-position: unset;"
+                testCase
+                    "Font variant position revert"
+                    [ FontVariantPosition.revert]
+                    "font-variant-position: revert;"
         ]

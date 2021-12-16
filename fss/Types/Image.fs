@@ -1,136 +1,313 @@
 namespace Fss
 
 namespace Fss.FssTypes
+
+[<RequireQualifiedAccess>]
+module Image =
+    type Side =
+        | ClosestSide
+        | ClosestCorner
+        | FarthestSide
+        | FarthestCorner
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type Shape =
+        | Circle
+        | Ellipse
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type ObjectFit =
+        | Fill
+        | Contain
+        | Cover
+        | ScaleDown
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type Rendering =
+        | CrispEdges
+        | Pixelated
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type Image =
+        | Url of string
+        | UrlAlt of string * Stringed
+        | LinearGradient of Angle * (Color * ILengthPercentage) list
+        | LinearGradients of (Angle * (Color * ILengthPercentage) list) list
+        | RepeatingLinearGradient of Angle * (Color * ILengthPercentage) list
+        | RepeatingLinearGradients of (Angle * (Color * ILengthPercentage) list) list
+        | RadialGradient of Shape * Side * Percent * Percent * (Color * ILengthPercentage) list
+        | RadialGradients of (Shape * Side * Percent * Percent * (Color * ILengthPercentage) list) list
+        | RepeatingRadialGradient of Shape * Side * Percent * Percent * (Color * ILengthPercentage) list
+        | RepeatingRadialGradients of (Shape * Side * Percent * Percent * (Color * ILengthPercentage) list) list
+        | ConicGradientAngle of Angle * Percent * Percent * (Color * Angle) list
+        | ConicGradientPercent of Angle * Percent * Percent * (Color * Percent) list
+        | RepeatingConicGradientAngle of Angle * Percent * Percent * (Color * Angle) list
+        | RepeatingConicGradientPercent of Angle * Percent * Percent * (Color * Percent) list
+        interface ICounterValue with
+            member this.Stringify() = (this :> ICssValue).Stringify()
+
+        interface ICssValue with
+            member this.Stringify() =
+                // TODO: Lag 1 funksjon som tar imot funksjon
+                let gradientToString (gradients: (Color.Color * ILengthPercentage) list) =
+                    List.fold
+                        (fun (acc: string) (color, length) ->
+                            $"{acc}, {(color :> ICssValue).Stringify()} {lengthPercentageString length}")
+                        ""
+                        gradients
+
+                let gradientAngleToString (gradients: (Color.Color * Angle) list) =
+                    List.fold
+                        (fun (acc: string) (color, length) ->
+                            $"{acc}, {(color :> ICssValue).Stringify()} {(length :> ICssValue).Stringify()}")
+                        ""
+                        gradients
+
+                let gradientPercentToString (gradients: (Color.Color * Percent) list) =
+                    List.fold
+                        (fun (acc: string) (color, length) ->
+                            $"{acc}, {(color :> ICssValue).Stringify()} {(length :> ICssValue).Stringify()}")
+                        ""
+                        gradients
+
+                let linearGradientToString (angle, gradients) =
+                    $"linear-gradient({(angle :> ICssValue).Stringify()}{gradientToString gradients})"
+
+                let linearGradientsToString gradients =
+                    List.map linearGradientToString gradients
+                    |> String.concat ", "
+
+                let repeatingLinearGradient (angle, gradients) =
+                    $"repeating-linear-gradient({(angle :> ICssValue).Stringify()}{gradientToString gradients})"
+
+                let repeatingLinearGradients gradients =
+                    List.map repeatingLinearGradient gradients
+                    |> String.concat ", "
+
+                let radialGradientToString (shape, side, x, y, gradients) =
+                    $"radial-gradient({shape.ToString().ToLower()} {Fss.Utilities.Helpers.toKebabCase side} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientToString gradients})"
+
+                let radialGradientsToString gradients =
+                    List.map radialGradientToString gradients
+                    |> String.concat ", "
+
+                let repeatingRadialGradientToString (shape, side, x, y, gradients) =
+                    $"repeating-radial-gradient({shape.ToString().ToLower()} {Fss.Utilities.Helpers.toKebabCase side} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientToString gradients})"
+
+                let repeatingRadialGradientsToString gradients =
+                    List.map repeatingRadialGradientToString gradients
+                    |> String.concat ", "
+
+                let conicGradientAngleToString (angle, x, y, gradients) =
+                    $"conic-gradient(from {(angle :> ICssValue).Stringify()} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientAngleToString gradients})"
+
+                let conicGradientPercentToString (angle, x, y, gradients) =
+                    $"conic-gradient(from {(angle :> ICssValue).Stringify()} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientPercentToString gradients})"
+
+                let repeatingConicGradientAngleToString (angle, x, y, gradients) =
+                    $"repeating-conic-gradient(from {(angle :> ICssValue).Stringify()} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientAngleToString gradients})"
+
+                let repeatingConicGradientPercentToString (angle, x, y, gradients) =
+                    $"repeating-conic-gradient(from {(angle :> ICssValue).Stringify()} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientPercentToString gradients})"
+
+                match this with
+                // TODO: FIX URL
+                | Image.Url u -> $"url({u})"
+                | Image.UrlAlt (u, a) -> $"url({u}) / {(a :> ICssValue).Stringify()}"
+                | Image.LinearGradient (angle, gradients) -> linearGradientToString (angle, gradients)
+                | Image.LinearGradients gradients -> linearGradientsToString gradients
+                | Image.RepeatingLinearGradient (angle, gradients) -> repeatingLinearGradient (angle, gradients)
+                | Image.RepeatingLinearGradients gradients -> repeatingLinearGradients gradients
+                | Image.RadialGradient (shape, side, x, y, gradients) ->
+                    radialGradientToString (shape, side, x, y, gradients)
+                | Image.RadialGradients gradients -> radialGradientsToString gradients
+                | Image.RepeatingRadialGradient (shape, side, x, y, gradients) ->
+                    repeatingRadialGradientToString (shape, side, x, y, gradients)
+                | Image.RepeatingRadialGradients gradients -> repeatingRadialGradientsToString gradients
+                | Image.ConicGradientAngle (angle, x, y, gradients) ->
+                    conicGradientAngleToString (angle, x, y, gradients)
+                | Image.ConicGradientPercent (angle, x, y, gradients) ->
+                    conicGradientPercentToString (angle, x, y, gradients)
+                | Image.RepeatingConicGradientAngle (angle, x, y, gradients) ->
+                    repeatingConicGradientAngleToString (angle, x, y, gradients)
+                | Image.RepeatingConicGradientPercent (angle, x, y, gradients) ->
+                    repeatingConicGradientPercentToString (angle, x, y, gradients)
+
     [<RequireQualifiedAccess>]
-    module Image =
-        type Side =
-            | ClosestSide
-            | ClosestCorner
-            | FarthestSide
-            | FarthestCorner
+    module ImageClasses =
+        type Image =
+            static member url(url: string) = Url url
+            static member urlAlt(url: string, alt: string) = UrlAlt(url, Stringed alt)
 
-        type Shape =
-            | Circle
-            | Ellipse
+            static member linearGradient(gradients: Angle * (Color * ILengthPercentage) list) =
+                Image.LinearGradient gradients
 
-        let private stringifyGradientPercent (color, stop) =
-            $"{colorToString color} {percentToString stop}"
+            static member linearGradients(gradients: (Angle * (Color * ILengthPercentage) list) list) =
+                Image.LinearGradients gradients
 
-        let private stringifyGradientPx (color, stop) =
-            $"{colorToString color} {sizeToString stop}"
 
-        let  private stringifyLinearPercent gradients =
-            let (angle, gradients) = gradients
-            $"linear-gradient({angleToString angle}, {Fss.Utilities.Helpers.combineComma stringifyGradientPercent gradients})"
+            static member repeatingLinearGradient(gradients: Angle * (Color * ILengthPercentage) list) =
+                Image.RepeatingLinearGradient gradients
 
-        let private stringifyLinearPixels gradients =
-            let (angle, gradients) = gradients
-            $"linear-gradient({angleToString angle}, {Fss.Utilities.Helpers.combineComma stringifyGradientPx gradients})"
 
-        let private stringifyRepeatingLinearPercent gradients =
-            let (angle, gradients) = gradients
-            $"repeating-linear-gradient({angleToString angle}, {Fss.Utilities.Helpers.combineComma stringifyGradientPercent gradients})"
+            static member repeatingLinearGradients(gradients: (Angle * (Color * ILengthPercentage) list) list) =
+                Image.RepeatingLinearGradients gradients
 
-        let private stringifyRepeatingLinearPixels gradients =
-            let (angle, gradients) = gradients
-            $"repeating-linear-gradient({angleToString angle}, {Fss.Utilities.Helpers.combineComma stringifyGradientPx gradients})"
 
-        let private stringifyRadialPercent (gradient: Shape * Side * Percent * Percent * (ColorType * Percent) list) =
-            let shape, size, x, y, gradients = gradient
-            let shape = Fss.Utilities.Helpers.duToLowercase shape
-            let size = Fss.Utilities.Helpers.duToKebab size
-            let gradients = Fss.Utilities.Helpers.combineComma stringifyGradientPercent gradients
-            $"radial-gradient({shape} {size} at {percentToString x} {percentToString y}, {gradients})"
+            static member radialGradient
+                (
+                    shape: Shape,
+                    size: Side,
+                    x: Percent,
+                    y: Percent,
+                    gradients: (Color * ILengthPercentage) list
+                ) =
+                Image.RadialGradient(shape, size, x, y, gradients)
 
-        let private stringifyRadialPx (gradient: Shape * Side * Percent * Percent * (ColorType * Length) list) =
-            let shape, size, x, y, gradients = gradient
-            let shape = Fss.Utilities.Helpers.duToLowercase shape
-            let size = Fss.Utilities.Helpers.duToKebab size
-            let gradients = Fss.Utilities.Helpers.combineComma stringifyGradientPx gradients
-            $"radial-gradient({shape} {size} at {percentToString x} {percentToString y}, {gradients})"
 
-        let private stringifyRepeatingRadialPercent (gradient: Shape * Side * Percent * Percent * (ColorType * Percent) list) =
-            $"repeating-{stringifyRadialPercent gradient}"
+            static member radialGradients
+                (gradients: (Shape * Side * Percent * Percent * (Color * ILengthPercentage) list) list)
+                =
+                Image.RadialGradients(gradients)
 
-        let private stringifyRepeatingRadialPx (gradient: Shape * Side * Percent * Percent * (ColorType * Length) list) =
-            $"repeating-{stringifyRadialPx gradient}"
 
-        let private stringifyConicAngle (color, angle) =
-            $"{colorToString color} {angleToString angle}"
+            static member repeatingRadialGradient
+                (
+                    shape: Shape,
+                    size: Side,
+                    x: Percent,
+                    y: Percent,
+                    gradients: (Color * ILengthPercentage) list
+                ) =
+                Image.RepeatingRadialGradient(shape, size, x, y, gradients)
 
-        let private stringifyConicPercent (color, angle) =
-            $"{colorToString color} {percentToString angle}"
+            static member conicGradient(angle: Angle, x: Percent, y: Percent, gradients: (Color * Angle) list) =
+                Image.ConicGradientAngle(angle, x, y, gradients)
 
-        let private stringifyConicGradientAngle angle x y gradients =
-            let angle = angleToString angle
-            let x = percentToString x
-            let y = percentToString y
-            let gradients = Fss.Utilities.Helpers.combineComma stringifyConicAngle gradients
-            $"conic-Gradient(from {angle} at {x} {y}, {gradients})"
 
-        let private stringifyConicGradientPercent angle x y gradients =
-            let angle = angleToString angle
-            let x = percentToString x
-            let y = percentToString y
-            let gradients = Fss.Utilities.Helpers.combineComma stringifyConicPercent gradients
-            $"conic-Gradient(from {angle} at {x} {y}, {gradients})"
+            static member conicGradient(angle: Angle, x: Percent, y: Percent, gradients: (Color * Percent) list) =
+                Image.ConicGradientPercent(angle, x, y, gradients)
 
-        let private stringifyRepeatingConicAngle angle x y gradients =
-            $"repeating-{stringifyConicGradientAngle angle x y gradients}"
 
-        let private stringifyRepeatingConicPercent angle x y gradients =
-            $"repeating-{stringifyConicGradientPercent angle x y gradients}"
+            static member repeatingConicGradient
+                (
+                    angle: Angle,
+                    x: Percent,
+                    y: Percent,
+                    gradients: (Color * Angle) list
+                ) =
+                Image.RepeatingConicGradientAngle(angle, x, y, gradients)
 
-        type Image (valueFunction: string -> CssProperty) =
-            member this.url (url: string) = sprintf "url(%s)" url |> valueFunction
-            member this.linearGradient (gradients: Angle * (ColorType * Percent) list) =
-                stringifyLinearPercent gradients |> valueFunction
-            member this.linearGradient (gradients: Angle * (ColorType * Length) list) =
-                stringifyLinearPixels gradients |> valueFunction
-            member this.linearGradients (gradients: (Angle * ((ColorType * Length) list)) list) =
-                Fss.Utilities.Helpers.combineComma stringifyLinearPixels gradients |> valueFunction
-            member this.linearGradients (gradients: (Angle * ((ColorType * Percent) list)) list) =
-                Fss.Utilities.Helpers.combineComma stringifyLinearPercent gradients |> valueFunction
-            member this.repeatingLinearGradient (gradients: Angle * (ColorType * Percent) list) =
-                stringifyRepeatingLinearPercent gradients |> valueFunction
-            member this.repeatingLinearGradient (gradients: Angle * (ColorType * Length) list) =
-                stringifyRepeatingLinearPixels gradients |> valueFunction
-            member this.repeatingLinearGradients (gradients: (Angle * ((ColorType * Length) list)) list) =
-                Fss.Utilities.Helpers.combineComma stringifyRepeatingLinearPixels gradients |> valueFunction
-            member this.repeatingLinearGradients (gradients: (Angle * ((ColorType * Percent) list)) list) =
-                Fss.Utilities.Helpers.combineComma stringifyRepeatingLinearPercent gradients |> valueFunction
 
-            member this.radialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorType * Percent) list) =
-                stringifyRadialPercent(shape, size, x, y, gradients) |> valueFunction
-            member this.radialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorType * Length) list) =
-                stringifyRadialPx(shape, size, x, y, gradients) |> valueFunction
-            member this.radialGradients (gradients: (Shape * Side * Percent * Percent * (ColorType * Percent) list) list) =
-                Fss.Utilities.Helpers.combineComma stringifyRadialPercent gradients |> valueFunction
-            member this.radialGradients (gradients: (Shape * Side * Percent * Percent * (ColorType * Length) list) list) =
-                Fss.Utilities.Helpers.combineComma stringifyRadialPx gradients |> valueFunction
-            member this.repeatingRadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorType * Percent) list) =
-                stringifyRepeatingRadialPercent(shape, size, x, y, gradients) |> valueFunction
-            member this.repeatingRadialGradient (shape: Shape, size: Side, x: Percent, y: Percent, gradients: (ColorType * Length) list) =
-                stringifyRepeatingRadialPx(shape, size, x, y, gradients) |> valueFunction
+            static member repeatingConicGradient
+                (
+                    angle: Angle,
+                    x: Percent,
+                    y: Percent,
+                    gradients: (Color * Percent) list
+                ) =
+                Image.RepeatingConicGradientPercent(angle, x, y, gradients)
 
-            member this.conicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorType * Angle) list) =
-                stringifyConicGradientAngle angle x y gradients |> valueFunction
-            member this.repeatingConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorType * Angle) list) =
-                stringifyRepeatingConicAngle angle x y gradients |> valueFunction
-            member this.conicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorType * Percent) list) =
-                stringifyConicGradientPercent angle x y gradients |> valueFunction
-            member this.repeatingConicGradient (angle: Angle, x: Percent, y: Percent, gradients: (ColorType * Percent) list) =
-                stringifyRepeatingConicPercent angle x y gradients |> valueFunction
+        type ImageClass(property) =
+            inherit CssRuleWithNone(property)
+            member this.url(url: string) = (property, Image.url url) |> Rule
 
-        type ObjectFit =
-            | Fill
-            | Contain
-            | Cover
-            | ScaleDown
-            interface IObjectFit
+            member this.url(url: string, alt: string) =
+                (property, Image.urlAlt (url, alt)) |> Rule
 
-        type Rendering =
-            | CrispEdges
-            | Pixelated
-            interface IImageRendering
+            member this.linearGradient(gradients: Angle * (Color * ILengthPercentage) list) =
+                (property, Image.linearGradient gradients) |> Rule
 
+            member this.linearGradients(gradients: (Angle * (Color * ILengthPercentage) list) list) =
+                (property, Image.linearGradients gradients)
+                |> Rule
+
+            member this.repeatingLinearGradient(gradients: Angle * (Color * ILengthPercentage) list) =
+                (property, Image.RepeatingLinearGradient gradients)
+                |> Rule
+
+            member this.repeatingLinearGradients(gradients: (Angle * (Color * ILengthPercentage) list) list) =
+                (property, Image.RepeatingLinearGradients gradients)
+                |> Rule
+
+            member this.radialGradient
+                (
+                    shape: Shape,
+                    size: Side,
+                    x: Percent,
+                    y: Percent,
+                    gradients: (Color * ILengthPercentage) list
+                ) =
+                (property, Image.RadialGradient(shape, size, x, y, gradients))
+                |> Rule
+
+            member this.radialGradients
+                (gradients: (Shape * Side * Percent * Percent * (Color * ILengthPercentage) list) list)
+                =
+                (property, Image.RadialGradients(gradients))
+                |> Rule
+
+
+            member this.repeatingRadialGradient
+                (
+                    shape: Shape,
+                    size: Side,
+                    x: Percent,
+                    y: Percent,
+                    gradients: (Color * ILengthPercentage) list
+                ) =
+                (property, Image.RepeatingRadialGradient(shape, size, x, y, gradients))
+                |> Rule
+
+            member this.conicGradient(angle: Angle, x: Percent, y: Percent, gradients: (Color * Angle) list) =
+                (property, Image.ConicGradientAngle(angle, x, y, gradients))
+                |> Rule
+
+
+            member this.conicGradient(angle: Angle, x: Percent, y: Percent, gradients: (Color * Percent) list) =
+                (property, Image.ConicGradientPercent(angle, x, y, gradients))
+                |> Rule
+
+
+            member this.repeatingConicGradient(angle: Angle, x: Percent, y: Percent, gradients: (Color * Angle) list) =
+                (property, Image.RepeatingConicGradientAngle(angle, x, y, gradients))
+                |> Rule
+
+
+            member this.repeatingConicGradient
+                (
+                    angle: Angle,
+                    x: Percent,
+                    y: Percent,
+                    gradients: (Color * Percent) list
+                ) =
+                (property, Image.RepeatingConicGradientPercent(angle, x, y, gradients))
+                |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+        type ObjectFit(property) =
+            inherit CssRuleWithNone(property)
+            member this.fill = (property, Fill) |> Rule
+            member this.contain = (property, Contain) |> Rule
+            member this.cover = (property, Cover) |> Rule
+            member this.scaleDown = (property, ScaleDown) |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/object-position
+        type ObjectPosition(property) =
+            inherit CssRule(property)
+
+            member this.value(x: ILengthPercentage, y: ILengthPercentage) =
+                let value =
+                    $"{lengthPercentageString x} {lengthPercentageString y}"
+                    |> String
+
+                (property, value) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering
+        type ImageRendering(property) =
+            inherit CssRuleWithAuto(property)
+            member this.crispEdges = (property, CrispEdges) |> Rule
+            member this.pixelated = (property, Pixelated) |> Rule

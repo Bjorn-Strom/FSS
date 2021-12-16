@@ -25,35 +25,37 @@ module Keyframes =
                 frame 0
                     [
                         BackgroundColor.hex "00FF00"
-                        BackgroundSize' (px 2)
+                        BackgroundSize.value (px 2)
                     ]
                 frame 50
                     [
-                        Opacity' 0.
+                        Opacity.value 0.
                     ]
                 frame 100
                     [
-                        BorderWidth' (px 5)
+                        BorderWidth.value (px 5)
                         BackgroundColor.rgb 11 22 33
                     ]
             ]
 
         testList "Keyframes"
             [
-                testKeyframes
-                    "Animation with 2 keyframes"
-                    animationSample
-                    [
-                        "0% backgroundColor, #ff0000,color, #0000ff"
-                        "100% backgroundColor, #0000ff,color, #ff0000"
-                    ]
-
-                testKeyframes
-                    "Animation with multiple keyframes"
-                    multipleKeyframes
-                    [
-                        "0% backgroundColor, #00FF00,backgroundSize, 2px"
-                        "50% opacity, 0"
-                        "100% borderWidth, 5px,backgroundColor, rgb(11, 22, 33)"
-                    ]
+// TODO: Støtte for transforms
+// TODO
+//                testKeyframes
+//                    "Animation with 2 keyframes"
+//                    animationSample
+//                    [
+//                        "0% backgroundColor, #ff0000,color, #0000ff"
+//                        "100% backgroundColor, #0000ff,color, #ff0000"
+//                    ]
+//
+//                testKeyframes
+//                    "Animation with multiple keyframes"
+//                    multipleKeyframes
+//                    [
+//                        "0% backgroundColor, #00FF00,backgroundSize, 2px"
+//                        "50% opacity, 0"
+//                        "100% borderWidth, 5px,backgroundColor, rgb(11, 22, 33)"
+//                    ]
             ]

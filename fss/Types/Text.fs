@@ -1,171 +1,449 @@
 namespace Fss
 
 namespace Fss.FssTypes
+
+open Fss.FssTypes
+
+[<RequireQualifiedAccess>]
+module Text =
+    type Align =
+        | Left
+        | Right
+        | Center
+        | Justify
+        | JustifyAll
+        | Start
+        | End
+        | MatchParent
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type AlignLast =
+        | Start
+        | End
+        | Left
+        | Right
+        | Center
+        | Justify
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type DecorationLine =
+        | Overline
+        | Underline
+        | LineThrough
+        | Blink
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type DecorationThickness =
+        | FromFont
+        interface ICssValue with
+            member this.Stringify() = "from-font"
+
+    type DecorationStyle =
+        | Solid
+        | Double
+        | Dotted
+        | Dashed
+        | Wavy
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type DecorationSkip =
+        | Objects
+        | Spaces
+        | Edges
+        | BoxDecoration
+        | LeadingSpaces
+        | TrailingSpaces
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type DecorationSkipInk =
+        | All
+        interface ICssValue with
+            member this.Stringify() = "all"
+
+    type Transform =
+        | Capitalize
+        | Uppercase
+        | Lowercase
+        | FullWidth
+        | FullSizeKana
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type Indent =
+        | Hanging
+        | EachLine
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type Overflow =
+        | Clip
+        | Ellipsis
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type EmphasisPosition =
+        | Over
+        | Under
+        | Right
+        | Left
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type EmphasisStyle =
+        | Filled
+        | Open
+        | Dot
+        | Circle
+        | DoubleCircle
+        | Triangle
+        | FilledSesame
+        | OpenSesame
+        interface ICssValue with
+            member this.Stringify() =
+                match this with
+                | FilledSesame -> "filled sesame"
+                | OpenSesame -> "open sesame"
+                | _ -> Fss.Utilities.Helpers.toKebabCase this
+
+    type UnderlinePosition =
+        | FromFont
+        | Under
+        | Left
+        | Right
+        | AutoPos
+        | Above
+        | Below
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type EmphasisColor =
+        | TextEmphasisColor of Color.Color
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type Hyphens =
+        | Manual
+        interface ICssValue with
+            member this.Stringify() = "manual"
+
+    type Orientation =
+        | Mixed
+        | Upright
+        | SidewaysRight
+        | Sideways
+        | UseGlyphOrientation
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type Rendering =
+        | OptimizeSpeed
+        | OptimizeLegibility
+        | GeometricPrecision
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type Justify =
+        | InterWord
+        | InterCharacter
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type WhiteSpace =
+        | Nowrap
+        | Pre
+        | PreWrap
+        | PreLine
+        | BreakSpaces
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
+    type UserSelect =
+        | Text
+        | Contain
+        | All
+        | Element
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type HangingPunctuation =
+        | First
+        | Last
+        | ForceEnd
+        | AllowEnd
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+
     [<RequireQualifiedAccess>]
-    module Text =
-        type Align =
-            | Left
-            | Right
-            | Center
-            | Justify
-            | JustifyAll
-            | Start
-            | End
-            | MatchParent
-            interface ITextAlign
+    module TextClasses =
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
+        type TextAlign(property) =
+            inherit CssRule(property)
+            member this.left = (property, Align.Left) |> Rule
+            member this.right = (property, Align.Right) |> Rule
+            member this.center = (property, Align.Center) |> Rule
+            member this.justify = (property, Align.Justify) |> Rule
+            member this.justifyAll = (property, Align.JustifyAll) |> Rule
+            member this.start = (property, Align.Start) |> Rule
+            member this.end' = (property, Align.End) |> Rule
+            member this.matchParent = (property, Align.MatchParent) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
+        type TextDecoration(property) =
+            inherit CssRuleWithNone(property)
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
+        type DecorationLineHelper =
+            | Decorations of DecorationLine list
+            interface ICssValue with
+                member this.Stringify() =
+                    match this with
+                    | Decorations ds ->
+                        List.map Fss.Utilities.Helpers.toKebabCase ds
+                        |> String.concat " "
 
-        type AlignLast =
-            | Start
-            | End
-            | Left
-            | Right
-            | Center
-            | Justify
-            interface ITextAlignLast
+        type TextDecorationLine(property) =
+            inherit CssRuleWithNone(property)
 
-        type DecorationLine =
-            | Overline
-            | Underline
-            | LineThrough
-            | Blink
-            interface ITextDecorationLine
+            member this.value(decorations: DecorationLine list) =
+                (property, Decorations decorations) |> Rule
 
-        type DecorationThickness =
-            | DecorationThickness
-            interface ITextDecorationThickness
+            member this.overline = (property, Overline) |> Rule
+            member this.underline = (property, Underline) |> Rule
+            member this.lineThrough = (property, LineThrough) |> Rule
+            member this.blink = (property, Blink) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
+        type DecorationSkipHelper =
+            | Skips of DecorationSkip list
+            interface ICssValue with
+                member this.Stringify() =
+                    match this with
+                    | Skips ds ->
+                        List.map Fss.Utilities.Helpers.toKebabCase ds
+                        |> String.concat " "
 
-        type DecorationStyle =
-            | Solid
-            | Double
-            | Dotted
-            | Dashed
-            | Wavy
-            interface ITextDecorationStyle
+        type TextDecorationSkip(property) =
+            inherit CssRuleWithNone(property)
+            member this.value(decorations: DecorationSkip list) = (property, Skips decorations) |> Rule
+            member this.objects = (property, Objects) |> Rule
+            member this.spaces = (property, Spaces) |> Rule
+            member this.edges = (property, Edges) |> Rule
+            member this.boxDecoration = (property, BoxDecoration) |> Rule
+            member this.leadingSpaces = (property, LeadingSpaces) |> Rule
+            member this.trailingSpaces = (property, TrailingSpaces) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
+        type TextDecorationThickness(property) =
+            inherit CssRuleWithAutoLength(property)
 
-        type DecorationSkip =
-            | Objects
-            | Spaces
-            | Edges
-            | BoxDecoration
-            | LeadingSpaces
-            | TrailingSpaces
-            interface ITextDecorationSkip
+            member this.fromFont =
+                (property, DecorationThickness.FromFont) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
+        type TextDecorationStyle(property) =
+            inherit CssRule(property)
+            member this.solid = (property, Solid) |> Rule
+            member this.double = (property, Double) |> Rule
+            member this.dotted = (property, Dotted) |> Rule
+            member this.dashed = (property, Dashed) |> Rule
+            member this.wavy = (property, Wavy) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
+        type TextDecorationSkipInk(property) =
+            inherit CssRuleWithAutoNone(property)
 
-        type DecorationSkipInk =
-            | DecorationSkipInk
-            interface ITextDecorationSkipInk
+            member this.all =
+                (property, DecorationSkipInk.All) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
+        type TextTransform(property) =
+            inherit CssRuleWithNone(property)
+            member this.capitalize = (property, Capitalize) |> Rule
+            member this.uppercase = (property, Uppercase) |> Rule
+            member this.lowercase = (property, Lowercase) |> Rule
+            member this.fullWidth = (property, FullWidth) |> Rule
+            member this.fullSizeKana = (property, FullSizeKana) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
+        type IndentHelper =
+            | One of ILengthPercentage * Indent
+            | Two of ILengthPercentage * Indent * Indent
+            interface ICssValue with
+                member this.Stringify() =
+                    match this with
+                    | One (length, indent) ->
+                        $"{lengthPercentageString length} {Fss.Utilities.Helpers.toKebabCase indent}"
+                    | Two (length, a, b) ->
+                        $"{lengthPercentageString length} {Fss.Utilities.Helpers.toKebabCase a} {Fss.Utilities.Helpers.toKebabCase b}"
 
-        type Transform =
-            | Capitalize
-            | Uppercase
-            | Lowercase
-            | FullWidth
-            | FullSizeKana
-            interface ITextTransform
+        type TextIndent(property) =
+            inherit CssRuleWithLength(property)
 
-        type Indent =
-            | Hanging
-            | EachLine
-            interface ITextIndent
+            member this.hanging(value: ILengthPercentage) =
+                (property, One(value, Indent.Hanging)) |> Rule
 
-        type Shadow =
-            | XY of Length * Length
-            | ColorXY of ColorType * Length * Length
-            | ColorXYBlur of ColorType * Length * Length * Length
+            member this.eachLine(value: ILengthPercentage) =
+                (property, One(value, Indent.EachLine)) |> Rule
 
-        type Overflow =
-            | Clip
-            | Ellipsis
-            interface ITextOverflow
+            member this.hangingEachLine(value: ILengthPercentage) =
+                (property, Two(value, Indent.Hanging, Indent.EachLine))
+                |> Rule
 
-        type EmphasisPosition =
-            | Over
-            | Under
-            | Right
-            | Left
-            interface ITextEmphasisPosition
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
+        // https://css-tricks.com/almanac/properties/t/text-shadow/
+        type ShadowHelper =
+            | Shadow of Length * Length * Length * Color
+            | Shadows of (Length * Length * Length * Color) list
+            interface ICssValue with
+                member this.Stringify() =
+                    let stringify (x, y, blur, color) =
+                        $"{(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()} {(blur :> ICssValue).Stringify()} {(color :> ICssValue).Stringify()}"
 
-        type EmphasisStyle =
-            | Filled
-            | Open
-            | Dot
-            | Circle
-            | DoubleCircle
-            | Triangle
-            | FilledSesame
-            | OpenSesame
-            interface ITextEmphasisStyle
+                    match this with
+                    | Shadow (x, y, blur, color) -> stringify (x, y, blur, color)
+                    | Shadows shadows -> List.map stringify shadows |> String.concat ", "
 
-        type UnderlinePosition =
-            | FromFont
-            | Under
-            | Left
-            | Right
-            | AutoPos
-            | Above
-            | Below
-            interface ITextUnderlinePosition
+        type TextShadow(property) =
+            inherit CssRule(property)
 
-        type EmphasisColor =
-            | TextEmphasisColor of Color.ColorType
-            interface ITextEmphasisColor
+            member this.value(xOffset: Length, yOffset: Length, blurRadius: Length, color: Color) =
+                (property, Shadow(xOffset, yOffset, blurRadius, color))
+                |> Rule
 
-        type Hyphens =
-            | Manual
-            interface IHyphens
+            member this.value(shadows: (Length * Length * Length * Color) list) = (property, Shadows shadows) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
+        type TextOverflow(property) =
+            inherit CssRule(property)
+            member this.clip = (property, Clip) |> Rule
+            member this.ellipsis = (property, Ellipsis) |> Rule
+            member this.value(overflow: string) = (property, Stringed overflow) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
+        type TextEmphasis(property) =
+            inherit CssRuleWithNone(property)
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
+        type TextEmphasisPosition(property) =
+            inherit CssRule(property)
 
-        type Orientation =
-            | Mixed
-            | Upright
-            | SidewaysRight
-            | Sideways
-            | UseGlyphOrientation
-            interface ITextOrientation
+            member this.value(x: EmphasisPosition, y: EmphasisPosition) =
+                let value =
+                    $"{(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}"
+                    |> String
+                (property, value) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
+        type TextEmphasisStyle(property) =
+            inherit CssRule(property)
+            member this.value(style: string) = (property, Char style) |> Rule
+            member this.filled = (property, Filled) |> Rule
+            member this.open' = (property, Open) |> Rule
+            member this.dot = (property, Dot) |> Rule
+            member this.circle = (property, Circle) |> Rule
+            member this.doubleCircle = (property, DoubleCircle) |> Rule
+            member this.triangle = (property, Triangle) |> Rule
+            member this.filledSesame = (property, FilledSesame) |> Rule
+            member this.openSesame = (property, OpenSesame) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-position
+        type TextUnderlinePosition(property) =
+            inherit CssRuleWithAuto(property)
 
-        type Rendering =
-            | OptimizeSpeed
-            | OptimizeLegibility
-            | GeometricPrecision
-            interface ITextRendering
+            member this.value(x: UnderlinePosition, y: UnderlinePosition) =
+                let value =
+                    $"{(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}"
+                    |> String
+                (property, value) |> Rule
 
-        type Justify =
-            | InterWord
-            | InterCharacter
-            interface ITextJustify
+            member this.fromFont = (property, FromFont) |> Rule
+            member this.under = (property, Under) |> Rule
+            member this.left = (property, Left) |> Rule
+            member this.right = (property, Right) |> Rule
+            member this.autoPos = (property, AutoPos) |> Rule
+            member this.above = (property, Above) |> Rule
+            member this.below = (property, Below) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
+        type TextUnderlineOffset(property) =
+            inherit CssRuleWithAutoLength(property)
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/quotes
+        type QuoteHelper =
+            | Strings of Stringed list
+            interface ICssValue with
+                member this.Stringify() =
+                    match this with
+                    | Strings s ->
+                        List.map (fun x -> (x :> ICssValue).Stringify()) s
+                        |> String.concat " "
 
-        type WhiteSpace =
-            | Nowrap
-            | Pre
-            | PreWrap
-            | PreLine
-            | BreakSpaces
-            interface IWhiteSpace
+        type Quotes(property) =
+            inherit CssRuleWithAutoNone(property)
 
-        type UserSelect =
-            | Text
-            | Contain
-            | All
-            | Element
-            interface IUserSelect
+            member this.value(quotes: string list) =
+                (property, Strings <| List.map Stringed quotes)
+                |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
+        type Hyphens(property) =
+            inherit CssRuleWithAutoNone(property)
+            member this.manual = (property, Manual) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color
+        type TextDecorationColor(property) =
+            inherit ColorClass.Color(property)
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
+        type TextEmphasisColor(property) =
+            inherit ColorClass.Color(property)
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
+        type TextSizeAdjust(property) =
+            inherit CssRuleWithAutoLengthNone(property)
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
+        type TabSize(property) =
+            inherit CssRuleWithLength(property)
+            member this.value(size: int) = (property, Int size) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation
+        type TextOrientation(property) =
+            inherit CssRule(property)
+            member this.value(size: int) = (property, Int size) |> Rule
+            member this.mixed = (property, Mixed) |> Rule
+            member this.upright = (property, Upright) |> Rule
+            member this.sidewaysRight = (property, SidewaysRight) |> Rule
+            member this.sideways = (property, Sideways) |> Rule
+            member this.useGlyphOrientation = (property, UseGlyphOrientation) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
+        type TextRendering(property) =
+            inherit CssRuleWithAuto(property)
+            member this.optimizeSpeed = (property, OptimizeSpeed) |> Rule
+            member this.optimizeLegibility = (property, OptimizeLegibility) |> Rule
+            member this.geometricPrecision = (property, GeometricPrecision) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
+        type TextJustify(property) =
+            inherit CssRuleWithAutoNone(property)
+            member this.interWord = (property, InterWord) |> Rule
+            member this.interCharacter = (property, InterCharacter) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
+        type WhiteSpace(property) =
+            inherit CssRuleWithNormal(property)
+            member this.nowrap = (property, Nowrap) |> Rule
+            member this.pre = (property, Pre) |> Rule
+            member this.preWrap = (property, PreWrap) |> Rule
+            member this.preLine = (property, PreLine) |> Rule
+            member this.breakSpaces = (property, BreakSpaces) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+        type UserSelect(property) =
+            inherit CssRuleWithAutoNone(property)
+            member this.text = (property, Text) |> Rule
+            member this.contain = (property, Contain) |> Rule
+            member this.all = (property, All) |> Rule
+            member this.element = (property, Element) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
+        type PunctuationHelper =
+            | Punctuation of HangingPunctuation list
+            interface ICssValue with
+                member this.Stringify() =
+                    match this with
+                    | PunctuationHelper.Punctuation ph ->
+                        List.map Fss.Utilities.Helpers.toKebabCase ph
+                        |> String.concat " "
 
-        type HangingPunctuation =
-            | First
-            | Last
-            | ForceEnd
-            | AllowEnd
-            interface IHangingPunctuation
+        type HangingPunctuationClass(property) =
+            inherit CssRuleWithNone(property)
 
-    type TextDecorationColor (valueFunction: ITextDecorationColor -> CssProperty) =
-        inherit ColorBase<CssProperty>(valueFunction)
-        member this.value color = color |> valueFunction
-        member this.inherit' = Inherit |> valueFunction
-        member this.initial = Initial |> valueFunction
-        member this.unset = Unset |> valueFunction
+            member this.value(punctuations: HangingPunctuation list) =
+                (property, Punctuation punctuations) |> Rule
 
-    type TextEmphasisColor (valueFunction: ITextEmphasisColor -> CssProperty) =
-        inherit ColorBase<CssProperty>(valueFunction)
-        member this.value color = color |> valueFunction
-        member this.inherit' = Inherit |> valueFunction
-        member this.initial = Initial |> valueFunction
-        member this.unset = Unset |> valueFunction
-
+            member this.first = (property, First) |> Rule
+            member this.last = (property, Last) |> Rule
+            member this.forceEnd = (property, ForceEnd) |> Rule
+            member this.allowEnd = (property, AllowEnd) |> Rule

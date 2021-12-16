@@ -1,7 +1,6 @@
 ﻿namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -11,205 +10,157 @@ module Visibility =
                 testCase
                     "Paint order normal"
                     [PaintOrder.normal]
-                    ["paintOrder" ==> "normal"]
+                    "paint-order: normal;"
                 testCase
                     "Paint order stroke"
                     [PaintOrder.stroke]
-                    ["paintOrder" ==> "stroke"]
+                    "paint-order: stroke;"
                 testCase
                     "Paint order markers"
                     [PaintOrder.markers]
-                    ["paintOrder" ==> "markers"]
+                    "paint-order: markers;"
+                testCase
+                    "Paint order fill"
+                    [PaintOrder.fill]
+                    "paint-order: fill;"
                 testCase
                     "Paint order stroke fill"
-                    [PaintOrder.value(FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
-                    ["paintOrder" ==> "stroke fill"]
+                    [PaintOrder.value(FssTypes.PaintOrder.Stroke, FssTypes.PaintOrder.Fill)]
+                    "paint-order: stroke fill;"
                 testCase
                     "Paint order markers stroke fill"
-                    [PaintOrder.value(FssTypes.Visibility.PaintOrder.Markers, FssTypes.Visibility.PaintOrder.Stroke, FssTypes.Visibility.PaintOrder.Fill)]
-                    ["paintOrder" ==> "markers stroke fill"]
+                    [PaintOrder.value [FssTypes.PaintOrder.Markers; FssTypes.PaintOrder.Stroke; FssTypes.PaintOrder.Fill] ]
+                    "paint-order: markers stroke fill;"
                 testCase
                     "Paint order normal"
                     [PaintOrder.normal]
-                    ["paintOrder" ==> "normal"]
+                    "paint-order: normal;"
+                testCase
+                    "PaintOrder inherit"
+                    [PaintOrder.inherit']
+                    "paint-order: inherit;"
+                testCase
+                    "PaintOrder initial"
+                    [PaintOrder.initial]
+                    "paint-order: initial;"
+                testCase
+                    "PaintOrder unset"
+                    [PaintOrder.unset]
+                    "paint-order: unset;"
+                testCase
+                    "PaintOrder revert"
+                    [PaintOrder.revert]
+                    "paint-order: revert;"
                 testCase
                     "Visibility hidden"
                     [ Visibility.hidden]
-                    ["visibility" ==> "hidden"]
+                    "visibility: hidden;"
                 testCase
                     "Visibility collapse"
                     [ Visibility.collapse]
-                    ["visibility" ==> "collapse"]
+                    "visibility: collapse;"
                 testCase
                     "Visibility visible"
                     [ Visibility.visible]
-                    ["visibility" ==> "visible"]
+                    "visibility: visible;"
+                testCase
+                    "Visibility inherit"
+                    [Visibility.inherit']
+                    "visibility: inherit;"
+                testCase
+                    "Visibility initial"
+                    [Visibility.initial]
+                    "visibility: initial;"
+                testCase
+                    "Visibility unset"
+                    [Visibility.unset]
+                    "visibility: unset;"
+                testCase
+                    "Visibility revert"
+                    [Visibility.revert]
+                    "visibility: revert;"
                 testCase
                     "Opacity 1"
-                    [ Opacity' 1.0 ]
-                    ["opacity" ==> "1"]
+                    [ Opacity.value 1.0 ]
+                    "opacity: 1;"
                 testCase
                     "Opacity 0"
-                    [ Opacity' 0.0]
-                    ["opacity" ==> "0"]
+                    [ Opacity.value 0.0]
+                    "opacity: 0;"
                 testCase
                     "Opacity 50%"
-                    [ Opacity' 0.5 ]
-                    ["opacity" ==> "0.5"]
+                    [ Opacity.value 0.5 ]
+                    "opacity: 0.5;"
                 testCase
                     "Opacity -10 should be 0"
-                    [ Opacity' -10.0 ]
-                    ["opacity" ==> "0"]
+                    [ Opacity.value -10.0 ]
+                    "opacity: 0;"
                 testCase
                     "Opacity 10 should be 1"
-                    [ Opacity' 10.0 ]
-                    ["opacity" ==> "1"]
+                    [ Opacity.value 10.0 ]
+                    "opacity: 1;"
                 testCase
                     "Opacity 1.5 should be 1"
-                    [ Opacity' 1.5 ]
-                    ["opacity" ==> "1"]
+                    [ Opacity.value 1.5 ]
+                    "opacity: 1;"
                 testCase
-                    "Overflow-X visible"
-                    [OverflowX.visible]
-                    ["overflowX" ==> "visible"]
+                    "Opacity percent"
+                    [ Opacity.value (pct 80) ]
+                    "opacity: 80%;"
                 testCase
-                    "Overflow-X hidden"
-                    [OverflowX.hidden]
-                    ["overflowX" ==> "hidden"]
+                    "Opacity inherit"
+                    [Opacity.inherit']
+                    "opacity: inherit;"
                 testCase
-                    "Overflow-X Clip"
-                    [OverflowX.clip]
-                    ["overflowX" ==> "clip"]
+                    "Opacity initial"
+                    [Opacity.initial]
+                    "opacity: initial;"
                 testCase
-                    "Overflow-X Scroll"
-                    [OverflowX.scroll]
-                    ["overflowX" ==> "scroll"]
+                    "Opacity unset"
+                    [Opacity.unset]
+                    "opacity: unset;"
                 testCase
-                    "Overflow-X Auto"
-                    [OverflowX.auto]
-                    ["overflowX" ==> "auto"]
-                testCase
-                    "Overflow-X inherit"
-                    [OverflowX.inherit']
-                    ["overflowX" ==> "inherit"]
-                testCase
-                    "Overflow-X initial"
-                    [OverflowX.initial]
-                    ["overflowX" ==> "initial"]
-                testCase
-                    "Overflow-X unset"
-                    [OverflowX.unset]
-                    ["overflowX" ==> "unset"]
-                testCase
-                    "OverflowY visible"
-                    [OverflowY.visible]
-                    ["overflowY" ==> "visible"]
-                testCase
-                    "OverflowY hidden"
-                    [OverflowY.hidden]
-                    ["overflowY" ==> "hidden"]
-                testCase
-                    "OverflowY Clip"
-                    [OverflowY.clip]
-                    ["overflowY" ==> "clip"]
-                testCase
-                    "OverflowY Scroll"
-                    [OverflowY.scroll]
-                    ["overflowY" ==> "scroll"]
-                testCase
-                    "OverflowY Auto"
-                    [OverflowY.auto]
-                    ["overflowY" ==> "auto"]
-                testCase
-                    "OverflowY inherit"
-                    [OverflowY.inherit']
-                    ["overflowY" ==> "inherit"]
-                testCase
-                    "OverflowY initial"
-                    [OverflowY.initial]
-                    ["overflowY" ==> "initial"]
-                testCase
-                    "OverflowY unset"
-                    [OverflowY.unset]
-                    ["overflowY" ==> "unset"]
-                testCase
-                    "Overflow visible visible"
-                    [Overflow.value (FssTypes.Overflow.Visible, FssTypes.Overflow.Visible)]
-                    ["overflow" ==> "visible visible"]
-                testCase
-                    "OverflowXY hidden hidden"
-                    [Overflow.value (FssTypes.Overflow.Hidden, FssTypes.Overflow.Hidden)]
-                    ["overflow" ==> "hidden hidden"]
-                testCase
-                    "Overflow Clip clip"
-                    [Overflow.value (FssTypes.Overflow.Clip, FssTypes.Overflow.Clip)]
-                    ["overflow" ==> "clip clip"]
-                testCase
-                    "Overflow scroll Scroll"
-                    [Overflow.value (FssTypes.Overflow.Scroll, FssTypes.Overflow.Scroll)]
-                    ["overflow" ==> "scroll scroll"]
-                testCase
-                    "OverflowWrap break-word"
-                    [OverflowWrap.breakWord]
-                    ["overflowWrap" ==> "break-word"]
-                testCase
-                    "OverflowWrap anywhere"
-                    [OverflowWrap.anywhere]
-                    ["overflowWrap" ==> "anywhere"]
-                testCase
-                    "OverflowWrap normal"
-                    [OverflowWrap.normal]
-                    ["overflowWrap" ==> "normal"]
-                testCase
-                    "OverflowWrap inherit"
-                    [OverflowWrap.inherit']
-                    ["overflowWrap" ==> "inherit"]
-                testCase
-                    "OverflowWrap initial"
-                    [OverflowWrap.initial]
-                    ["overflowWrap" ==> "initial"]
-                testCase
-                    "OverflowWrap unset"
-                    [OverflowWrap.unset]
-                    ["overflowWrap" ==> "unset"]
+                    "Opacity revert"
+                    [Opacity.revert]
+                    "opacity: revert;"
                 testCase
                     "ZIndex 0"
-                    [ZIndex' 0]
-                    ["zIndex" ==> "0"]
+                    [ZIndex.value 0]
+                    "z-index: 0;"
                 testCase
                     "ZIndex 3"
-                    [ZIndex' 3]
-                    ["zIndex" ==> "3"]
+                    [ZIndex.value 3]
+                    "z-index: 3;"
                 testCase
                     "ZIndex 289"
-                    [ZIndex' 289]
-                    ["zIndex" ==> "289"]
+                    [ZIndex.value 289]
+                    "z-index: 289;"
                 testCase
                     "ZIndex -1"
-                    [ZIndex' -1]
-                    ["zIndex" ==> "-1"]
+                    [ZIndex.value -1]
+                    "z-index: -1;"
                 testCase
                     "ZIndex value auto"
-                    [ZIndex.value(FssTypes.Auto)]
-                    ["zIndex" ==> "auto"]
-                testCase
-                    "Zindexx value 2"
-                    [ZIndex.value(FssTypes.CssInt 2)]
-                    ["zIndex" ==> "2"]
+                    [ZIndex.auto]
+                    "z-index: auto;"
                 testCase
                     "ZIndex auto"
                     [ZIndex.auto]
-                    ["zIndex" ==> "auto"]
+                    "z-index: auto;"
                 testCase
                     "ZIndex inherit"
                     [ZIndex.inherit']
-                    ["zIndex" ==> "inherit"]
+                    "z-index: inherit;"
                 testCase
                     "ZIndex initial"
                     [ZIndex.initial]
-                    ["zIndex" ==> "initial"]
+                    "z-index: initial;"
                 testCase
                     "ZIndex unset"
                     [ZIndex.unset]
-                    ["zIndex" ==> "unset"]
+                    "z-index: unset;"
+                testCase
+                    "ZIndex revert"
+                    [ZIndex.revert]
+                    "z-index: revert;"
         ]

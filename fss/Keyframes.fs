@@ -1,38 +1,14 @@
 ﻿namespace Fss
 
-open Fable.Core
-open Fable.Core.JsInterop
-open Utilities.Helpers
+open Fss.FssTypes
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
+[<AutoOpen>]
 module Keyframes =
-    [<ImportMember("@emotion/css")>]
-    let private keyframes(x) = jsNative
-    let keyframes' x = keyframes(x)
 
     type KeyframeAttribute =
-        | Frame of int * FssTypes.CssProperty list
-        | Frames of int list * FssTypes.CssProperty list
+        | Frame of int * Rule list
+        | Frames of int list * Rule list
 
-    let frameValue f = sprintf "%d%%" f
-    let frameValues fs = combineList fs frameValue ", "
-
-    let rec private createAnimation (attributeList: KeyframeAttribute list) callback =
-        attributeList
-        |> List.map (
-            function
-                | Frame (f, ps) ->
-                    let ps' =
-                        ps
-                        |> List.map FssTypes.masterTypeHelpers.CssValue
-                    frameValue f ==> createObj ps'
-                | Frames (fs, ps) ->
-                    let ps' =
-                        ps
-                        |> List.map FssTypes.masterTypeHelpers.CssValue
-                    frameValues fs ==> (createObj ps')
-        )
-        |> callback
-
-    let createAnimationRecord (attributeList: KeyframeAttribute list) = createAnimation attributeList id
-    let createAnimationObject (attributeList: KeyframeAttribute list) = createAnimation attributeList createObj
+    let frame (f: int) (properties: Rule list) = (f, properties) |> Frame
+    let frames (f: int list) (properties: Rule list) = (f, properties) |> Frames

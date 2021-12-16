@@ -112,10 +112,3 @@ namespace Fss.FssTypes
             | Var
             | Video
             | Wbr
-
-    [<AutoOpen>]
-    module htmlHelpers =
-        let internal htmlToString (v: Html.Html): string =
-            match v with
-            | Html.All -> "*"
-            | _   -> Fss.Utilities.Helpers.duToLowercase v

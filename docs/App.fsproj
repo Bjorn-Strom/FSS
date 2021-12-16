@@ -3,12 +3,12 @@
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Markdown.fs" />
-        <Compile Include="Utilities.fs" />
-        <Compile Include="Logo.fs" />
-        <Compile Include="Hamburger.fs" />
-        <Compile Include="Pages.fs" />
-        <Compile Include="Store.fs" />
+<!--        <Compile Include="Markdown.fs" />-->
+<!--        <Compile Include="Utilities.fs" />-->
+<!--        <Compile Include="Logo.fs" />-->
+<!--        <Compile Include="Hamburger.fs" />-->
+<!--        <Compile Include="Pages.fs" />-->
+<!--        <Compile Include="Store.fs" />-->
         <Compile Include="App.fs" />
     </ItemGroup>
     <ItemGroup>

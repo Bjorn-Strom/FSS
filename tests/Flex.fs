@@ -1,7 +1,6 @@
 ﻿namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -12,469 +11,513 @@ module Flex =
                 testCase
                     "Flex direction row"
                     [ FlexDirection.row]
-                    ["flexDirection" ==> "row"]
+                    "flex-direction: row;"
                 testCase
                     "Flex direction row-reverse"
                     [ FlexDirection.rowReverse]
-                    ["flexDirection" ==> "row-reverse"]
+                    "flex-direction: row-reverse;"
                 testCase
                     "Flex direction column"
                     [ FlexDirection.column]
-                    ["flexDirection" ==> "column"]
+                    "flex-direction: column;"
                 testCase
                     "Flex direction column-reverse"
                     [ FlexDirection.columnReverse]
-                    ["flexDirection" ==> "column-reverse"]
+                    "flex-direction: column-reverse;"
                 testCase
                     "Flex direction inherit"
                     [ FlexDirection.inherit']
-                    ["flexDirection" ==> "inherit"]
+                    "flex-direction: inherit;"
                 testCase
                     "Flex direction initial"
                     [ FlexDirection.initial]
-                    ["flexDirection" ==> "initial"]
+                    "flex-direction: initial;"
                 testCase
                     "Flex direction unset"
                     [ FlexDirection.unset]
-                    ["flexDirection" ==> "unset"]
+                    "flex-direction: unset;"
+                testCase
+                    "Flex direction revert"
+                    [ FlexDirection.revert]
+                    "flex-direction: revert;"
                 testCase
                     "Flex wrap no-wrap"
                     [ FlexWrap.noWrap]
-                    ["flexWrap" ==> "no-wrap"]
+                    "flex-wrap: no-wrap;"
                 testCase
                     "Flex wrap wrap"
                     [ FlexWrap.wrap]
-                    ["flexWrap" ==> "wrap"]
+                    "flex-wrap: wrap;"
                 testCase
                     "Flex wrap wrap-reverse"
                     [ FlexWrap.wrapReverse]
-                    ["flexWrap" ==> "wrap-reverse"]
+                    "flex-wrap: wrap-reverse;"
                 testCase
                     "Flex wrap inherit"
                     [ FlexWrap.inherit']
-                    ["flexWrap" ==> "inherit"]
+                    "flex-wrap: inherit;"
                 testCase
                     "Flex wrap initial"
                     [ FlexWrap.initial]
-                    ["flexWrap" ==> "initial"]
+                    "flex-wrap: initial;"
                 testCase
                     "Flex wrap unset"
                     [ FlexWrap.unset]
-                    ["flexWrap" ==> "unset"]
+                    "flex-wrap: unset;"
+                testCase
+                    "Flex wrap revert"
+                    [ FlexWrap.revert]
+                    "flex-wrap: revert;"
                 testCase
                     "Flex basis em"
-                    [ FlexBasis' (em 10.0)]
-                    ["flexBasis" ==> "10.0em"]
+                    [ FlexBasis.value (em 10.0)]
+                    "flex-basis: 10em;"
                 testCase
                     "Flex basis px"
-                    [ FlexBasis' (px 100)]
-                    ["flexBasis" ==> "100px"]
+                    [ FlexBasis.value (px 100)]
+                    "flex-basis: 100px;"
                 testCase
                     "Flex basis auto"
                     [ FlexBasis.auto]
-                    ["flexBasis" ==> "auto"]
+                    "flex-basis: auto;"
                 testCase
                     "Flex basis fill"
                     [ FlexBasis.fill ]
-                    ["flexBasis" ==> "fill"]
+                    "flex-basis: fill;"
                 testCase
                     "Flex basis max-content"
                     [ FlexBasis.maxContent]
-                    ["flexBasis" ==> "max-content"]
+                    "flex-basis: max-content;"
                 testCase
                     "Flex basis min-content"
                     [ FlexBasis.minContent]
-                    ["flexBasis" ==> "min-content"]
+                    "flex-basis: min-content;"
                 testCase
                     "Flex basis fit-content"
                     [ FlexBasis.fitContent ]
-                    ["flexBasis" ==> "fit-content"]
+                    "flex-basis: fit-content;"
                 testCase
                     "Flex basis content"
                     [ FlexBasis.content]
-                    ["flexBasis" ==> "content"]
+                    "flex-basis: content;"
+                testCase
+                    "Flex basis inherit"
+                    [ FlexBasis.inherit']
+                    "flex-basis: inherit;"
+                testCase
+                    "Flex basis initial"
+                    [ FlexBasis.initial]
+                    "flex-basis: initial;"
+                testCase
+                    "Flex basis unset"
+                    [ FlexBasis.unset]
+                    "flex-basis: unset;"
+                testCase
+                    "Flex basis revert"
+                    [ FlexBasis.revert]
+                    "flex-basis: revert;"
                 testCase
                     "Justify content start"
                     [ JustifyContent.start]
-                    ["justifyContent" ==> "start"]
+                    "justify-content: start;"
                 testCase
                     "Justify content end"
                     [ JustifyContent.end']
-                    ["justifyContent" ==> "end"]
+                    "justify-content: end;"
                 testCase
                     "Justify content flex start"
                     [ JustifyContent.flexStart]
-                    ["justifyContent" ==> "flex-start"]
+                    "justify-content: flex-start;"
                 testCase
                     "Justify content flex end"
                     [ JustifyContent.flexEnd]
-                    ["justifyContent" ==> "flex-end"]
+                    "justify-content: flex-end;"
                 testCase
                     "Justify content center"
                     [ JustifyContent.center]
-                    ["justifyContent" ==> "center"]
+                    "justify-content: center;"
                 testCase
                     "Justify content left"
                     [ JustifyContent.left]
-                    ["justifyContent" ==> "left"]
+                    "justify-content: left;"
                 testCase
                     "Justify content right"
                     [ JustifyContent.right]
-                    ["justifyContent" ==> "right"]
+                    "justify-content: right;"
                 testCase
                     "Justify content normal"
                     [ JustifyContent.normal]
-                    ["justifyContent" ==> "normal"]
+                    "justify-content: normal;"
                 testCase
                     "Justify content baseline"
                     [ JustifyContent.baseline]
-                    ["justifyContent" ==> "baseline"]
+                    "justify-content: baseline;"
                 testCase
                     "Justify content space between"
                     [ JustifyContent.spaceBetween]
-                    ["justifyContent" ==> "space-between"]
+                    "justify-content: space-between;"
                 testCase
                     "Justify content space around"
                     [ JustifyContent.spaceAround]
-                    ["justifyContent" ==> "space-around"]
+                    "justify-content: space-around;"
                 testCase
                     "Justify content space evenly"
                     [ JustifyContent.spaceEvenly]
-                    ["justifyContent" ==> "space-evenly"]
+                    "justify-content: space-evenly;"
                 testCase
                     "Justify content right"
                     [ JustifyContent.right]
-                    ["justifyContent" ==> "right"]
+                    "justify-content: right;"
                 testCase
                     "Justify content safe"
                     [ JustifyContent.safe]
-                    ["justifyContent" ==> "safe"]
+                    "justify-content: safe;"
                 testCase
                     "Justify content unsafe"
                     [ JustifyContent.unsafe]
-                    ["justifyContent" ==> "unsafe"]
+                    "justify-content: unsafe;"
                 testCase
                     "Justify content inherit"
                     [ JustifyContent.inherit']
-                    ["justifyContent" ==> "inherit"]
+                    "justify-content: inherit;"
                 testCase
                     "Justify content initial"
                     [ JustifyContent.initial]
-                    ["justifyContent" ==> "initial"]
+                    "justify-content: initial;"
                 testCase
                     "Justify content unset"
                     [ JustifyContent.unset]
-                    ["justifyContent" ==> "unset"]
+                    "justify-content: unset;"
+                testCase
+                    "Justify content revert"
+                    [ JustifyContent.revert]
+                    "justify-content: revert;"
                 testCase
                     "Justify self normal"
                     [ JustifySelf.normal ]
-                    ["justifySelf" ==> "normal"]
+                    "justify-self: normal;"
                 testCase
                     "Justify self flex start"
                     [ JustifySelf.selfStart]
-                    ["justifySelf" ==> "self-start"]
+                    "justify-self: self-start;"
                 testCase
                     "Justify self flex end"
                     [ JustifySelf.selfEnd]
-                    ["justifySelf" ==> "self-end"]
+                    "justify-self: self-end;"
                 testCase
                     "Justify self flex start"
                     [ JustifySelf.flexStart]
-                    ["justifySelf" ==> "flex-start"]
+                    "justify-self: flex-start;"
                 testCase
                     "Justify self flex end"
                     [ JustifySelf.flexEnd]
-                    ["justifySelf" ==> "flex-end"]
+                    "justify-self: flex-end;"
                 testCase
                     "Justify self center"
                     [ JustifySelf.center]
-                    ["justifySelf" ==> "center"]
+                    "justify-self: center;"
                 testCase
                     "Justify self baseline"
                     [ JustifySelf.baseline]
-                    ["justifySelf" ==> "baseline"]
+                    "justify-self: baseline;"
                 testCase
                     "Justify self stretch"
                     [ JustifySelf.stretch]
-                    ["justifySelf" ==> "stretch"]
+                    "justify-self: stretch;"
                 testCase
                     "Justify self safe"
                     [ JustifySelf.safe]
-                    ["justifySelf" ==> "safe"]
+                    "justify-self: safe;"
                 testCase
                     "Justify self unsafe"
                     [ JustifySelf.unsafe]
-                    ["justifySelf" ==> "unsafe"]
+                    "justify-self: unsafe;"
                 testCase
                     "Justify self inherit"
                     [ JustifySelf.inherit']
-                    ["justifySelf" ==> "inherit"]
+                    "justify-self: inherit;"
                 testCase
                     "Justify self initial"
                     [ JustifySelf.initial]
-                    ["justifySelf" ==> "initial"]
+                    "justify-self: initial;"
                 testCase
                     "Justify self unset"
                     [ JustifySelf.unset]
-                    ["justifySelf" ==> "unset"]
+                    "justify-self: unset;"
                 testCase
                     "Justify items start"
                     [ JustifyItems.start]
-                    ["justifyItems" ==> "start"]
+                    "justify-items: start;"
                 testCase
                     "Justify items end"
                     [ JustifyItems.end']
-                    ["justifyItems" ==> "end"]
+                    "justify-items: end;"
                 testCase
                     "Justify items flex start"
                     [ JustifyItems.flexStart]
-                    ["justifyItems" ==> "flex-start"]
+                    "justify-items: flex-start;"
                 testCase
                     "Justify items flex end"
                     [ JustifyItems.flexEnd]
-                    ["justifyItems" ==> "flex-end"]
+                    "justify-items: flex-end;"
                 testCase
                     "Justify items center"
                     [ JustifyItems.center]
-                    ["justifyItems" ==> "center"]
+                    "justify-items: center;"
                 testCase
                     "Justify items normal"
                     [ JustifyItems.normal]
-                    ["justifyItems" ==> "normal"]
+                    "justify-items: normal;"
                 testCase
                     "Justify items baseline"
                     [ JustifyItems.baseline]
-                    ["justifyItems" ==> "baseline"]
+                    "justify-items: baseline;"
                 testCase
                     "Justify items safe"
                     [ JustifyItems.safe]
-                    ["justifyItems" ==> "safe"]
+                    "justify-items: safe;"
                 testCase
                     "Justify items unsafe"
                     [ JustifyItems.unsafe]
-                    ["justifyItems" ==> "unsafe"]
+                    "justify-items: unsafe;"
                 testCase
                     "Justify items inherit"
                     [ JustifyItems.inherit']
-                    ["justifyItems" ==> "inherit"]
+                    "justify-items: inherit;"
                 testCase
                     "Justify items initial"
                     [ JustifyItems.initial]
-                    ["justifyItems" ==> "initial"]
+                    "justify-items: initial;"
                 testCase
                     "Justify items unset"
                     [ JustifyItems.unset]
-                    ["justifyItems" ==> "unset"]
+                    "justify-items: unset;"
+                testCase
+                    "Justify items revert"
+                    [ JustifyItems.revert]
+                    "justify-items: revert;"
                 testCase
                     "Justify items legacy"
                     [ JustifyItems.legacy]
-                    ["justifyItems" ==> "legacy"]
+                    "justify-items: legacy;"
                 testCase
                     "Align self normal"
                     [ AlignSelf.normal]
-                    ["alignSelf" ==> "normal"]
+                    "align-self: normal;"
                 testCase
                     "Align self flex start"
                     [ AlignSelf.selfStart]
-                    ["alignSelf" ==> "self-start"]
+                    "align-self: self-start;"
                 testCase
                     "Align self flex end"
                     [ AlignSelf.selfEnd]
-                    ["alignSelf" ==> "self-end"]
+                    "align-self: self-end;"
                 testCase
                     "Align self flex start"
                     [ AlignSelf.flexStart]
-                    ["alignSelf" ==> "flex-start"]
+                    "align-self: flex-start;"
                 testCase
                     "Align self flex end"
                     [ AlignSelf.flexEnd]
-                    ["alignSelf" ==> "flex-end"]
+                    "align-self: flex-end;"
                 testCase
                     "Align self center"
                     [ AlignSelf.center]
-                    ["alignSelf" ==> "center"]
+                    "align-self: center;"
                 testCase
                     "Align self baseline"
                     [ AlignSelf.baseline]
-                    ["alignSelf" ==> "baseline"]
+                    "align-self: baseline;"
                 testCase
                     "Align self stretch"
                     [ AlignSelf.stretch]
-                    ["alignSelf" ==> "stretch"]
+                    "align-self: stretch;"
                 testCase
                     "Align self safe"
                     [ AlignSelf.safe]
-                    ["alignSelf" ==> "safe"]
+                    "align-self: safe;"
                 testCase
                     "Align self unsafe"
                     [ AlignSelf.unsafe]
-                    ["alignSelf" ==> "unsafe"]
+                    "align-self: unsafe;"
                 testCase
                     "Align self inherit"
                     [ AlignSelf.inherit']
-                    ["alignSelf" ==> "inherit"]
+                    "align-self: inherit;"
                 testCase
                     "Align self initial"
                     [ AlignSelf.initial]
-                    ["alignSelf" ==> "initial"]
+                    "align-self: initial;"
                 testCase
                     "Align self unset"
                     [ AlignSelf.unset]
-                    ["alignSelf" ==> "unset"]
+                    "align-self: unset;"
+                testCase
+                    "Align self revert"
+                    [ AlignSelf.revert]
+                    "align-self: revert;"
                 testCase
                     "Align items start"
                     [ AlignItems.start]
-                    ["alignItems" ==> "start"]
+                    "align-items: start;"
                 testCase
                     "Align items end"
                     [ AlignItems.end']
-                    ["alignItems" ==> "end"]
+                    "align-items: end;"
                 testCase
                     "Align items flex start"
                     [ AlignItems.flexStart]
-                    ["alignItems" ==> "flex-start"]
+                    "align-items: flex-start;"
                 testCase
                     "Align items flex end"
                     [ AlignItems.flexEnd]
-                    ["alignItems" ==> "flex-end"]
+                    "align-items: flex-end;"
                 testCase
                     "Align items center"
                     [ AlignItems.center]
-                    ["alignItems" ==> "center"]
+                    "align-items: center;"
                 testCase
                     "Align items normal"
                     [ AlignItems.normal]
-                    ["alignItems" ==> "normal"]
+                    "align-items: normal;"
                 testCase
                     "Align items baseline"
                     [ AlignItems.baseline]
-                    ["alignItems" ==> "baseline"]
+                    "align-items: baseline;"
                 testCase
                     "Align items safe"
                     [ AlignItems.safe]
-                    ["alignItems" ==> "safe"]
+                    "align-items: safe;"
                 testCase
                     "Align items unsafe"
                     [ AlignItems.unsafe]
-                    ["alignItems" ==> "unsafe"]
+                    "align-items: unsafe;"
                 testCase
                     "Align items inherit"
                     [ AlignItems.inherit']
-                    ["alignItems" ==> "inherit"]
+                    "align-items: inherit;"
                 testCase
                     "Align items initial"
                     [ AlignItems.initial]
-                    ["alignItems" ==> "initial"]
+                    "align-items: initial;"
                 testCase
                     "Align items unset"
                     [ AlignItems.unset]
-                    ["alignItems" ==> "unset"]
+                    "align-items: unset;"
+                testCase
+                    "Align items revert"
+                    [ AlignItems.revert]
+                    "align-items: revert;"
                 testCase
                     "Align content start"
-                    [ AlignContent.start']
-                    ["alignContent" ==> "start"]
+                    [ AlignContent.start]
+                    "align-content: start;"
                 testCase
                     "Align content end"
                     [ AlignContent.end']
-                    ["alignContent" ==> "end"]
+                    "align-content: end;"
                 testCase
                     "Align content flex start"
                     [ AlignContent.flexStart]
-                    ["alignContent" ==> "flex-start"]
+                    "align-content: flex-start;"
                 testCase
                     "Align content flex end"
                     [ AlignContent.flexEnd]
-                    ["alignContent" ==> "flex-end"]
+                    "align-content: flex-end;"
                 testCase
                     "Align content center"
                     [ AlignContent.center]
-                    ["alignContent" ==> "center"]
+                    "align-content: center;"
                 testCase
                     "Align content normal"
                     [ AlignContent.normal]
-                    ["alignContent" ==> "normal"]
+                    "align-content: normal;"
                 testCase
                     "Align content baseline"
                     [ AlignContent.baseline]
-                    ["alignContent" ==> "baseline"]
+                    "align-content: baseline;"
                 testCase
                     "Align content space between"
                     [ AlignContent.spaceBetween]
-                    ["alignContent" ==> "space-between"]
+                    "align-content: space-between;"
                 testCase
                     "Align content space around"
                     [ AlignContent.spaceAround]
-                    ["alignContent" ==> "space-around"]
+                    "align-content: space-around;"
                 testCase
                     "Align content space evenly"
                     [ AlignContent.spaceEvenly]
-                    ["alignContent" ==> "space-evenly"]
+                    "align-content: space-evenly;"
                 testCase
                     "Align content safe"
                     [ AlignContent.safe]
-                    ["alignContent" ==> "safe"]
+                    "align-content: safe;"
                 testCase
                     "Align content unsafe"
                     [ AlignContent.unsafe]
-                    ["alignContent" ==> "unsafe"]
+                    "align-content: unsafe;"
                 testCase
                     "Align content inherit"
                     [ AlignContent.inherit']
-                    ["alignContent" ==> "inherit"]
+                    "align-content: inherit;"
                 testCase
                     "Align content initial"
                     [ AlignContent.initial]
-                    ["alignContent" ==> "initial"]
+                    "align-content: initial;"
                 testCase
                     "Align content unset"
                     [ AlignContent.unset]
-                    ["alignContent" ==> "unset"]
+                    "align-content: unset;"
                 testCase
                     "Order value"
-                    [ Order' (FssTypes.CssInt 1) ]
-                    ["order" ==> "1"]
+                    [ Order.value 1 ]
+                    "order: 1;"
                 testCase
                     "Order inherit"
                     [ Order.inherit']
-                    ["order" ==> "inherit"]
+                    "order: inherit;"
                 testCase
                     "Order initial"
                     [ Order.initial]
-                    ["order" ==> "initial"]
+                    "order: initial;"
                 testCase
                     "Order unset"
                     [ Order.unset]
-                    ["order" ==> "unset"]
+                    "order: unset;"
+                testCase
+                    "Order revert"
+                    [ Order.revert]
+                    "order: revert;"
                 testCase
                     "Flex grow value"
-                    [ FlexGrow' (FssTypes.CssFloat 1.5) ]
-                    ["flexGrow" ==> "1.5"]
+                    [ FlexGrow.value 1.5 ]
+                    "flex-grow: 1.5;"
                 testCase
                     "FlexGrow inherit"
                     [ FlexGrow.inherit']
-                    ["flexGrow" ==> "inherit"]
+                    "flex-grow: inherit;"
                 testCase
                     "FlexGrow initial"
                     [ FlexGrow.initial]
-                    ["flexGrow" ==> "initial"]
+                    "flex-grow: initial;"
                 testCase
                     "FlexGrow unset"
                     [ FlexGrow.unset]
-                    ["flexGrow" ==> "unset"]
+                    "flex-grow: unset;"
                 testCase
                     "FlexShrink value"
-                    [ FlexShrink' (FssTypes.CssFloat 1.5) ]
-                    ["flexShrink" ==> "1.5"]
+                    [ FlexShrink.value 1.5 ]
+                    "flex-shrink: 1.5;"
                 testCase
                     "FlexShrink inherit"
                     [ FlexShrink.inherit']
-                    ["flexShrink" ==> "inherit"]
+                    "flex-shrink: inherit;"
                 testCase
                     "FlexShrink initial"
                     [ FlexShrink.initial]
-                    ["flexShrink" ==> "initial"]
+                    "flex-shrink: initial;"
                 testCase
                     "FlexShrink unset"
                     [ FlexShrink.unset]
-                    ["flexShrink" ==> "unset"]
+                    "flex-shrink: unset;"
             ]

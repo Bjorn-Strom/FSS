@@ -5,52 +5,53 @@ open Fet
 
 module Tests =
     runTests [
-        AspectRatio.tests
-        MixBlendMode.tests
-        Filter.tests
-        Clear.tests
-        ClipPath.tests
-        PointerEvents.tests
-        Custom.tests
-        BoxShadow.tests
-        Counter.tests
-        All.tests
-        Typography.tests
-        Appearance.tests
-        Caret.tests
-        Table.tests
-        Column.tests
-        Word.tests
-        Resize.tests
-        Grid.tests
-        Keyframes.tests
-        Content.tests
-        ListStyle.tests
-        Cursor.tests
-        Transition.tests
-        Transform.tests
-        Animation.tests
-        Padding.tests
-        Margin.tests
-        Visibility.tests
-        Position.tests
-        Perspective.tests
-        Font.tests
-        Color.tests
+        Border.tests
         ContentSize.tests
+        Margin.tests
+        Padding.tests
+        Color.tests
+        Animation.tests
+        Background.tests
+        Cursor.tests
+        Grid.tests
         Display.tests
         Flex.tests
-        Outline.tests
-        Background.tests
-        Border.tests
-        WillChange.tests
+        Font.tests
+        Perspective.tests
         Text.tests
+        Position.tests
+        Transform.tests
+        Resize.tests
+        Transition.tests
+        Visibility.tests
+        Counter.tests
+        ListStyle.tests
+        Content.tests
+        Column.tests
+        Outline.tests
+        PointerEvents.tests
+        Caret.tests
+        ClipPath.tests
+        AspectRatio.tests
+        Clear.tests
+        Appearance.tests
+        Typography.tests
+        Keyframes.tests
+        MixBlendMode.tests
+        Filter.tests
+        Custom.tests
+        BoxShadow.tests
+        All.tests
+        Scroll.tests
+        Table.tests
+        Word.tests
+        Animation.tests
+        WillChange.tests
         Image.tests
         Mask.tests
         Svg.tests
-        Psuedo.tests
-        Media.tests
-        Scroll.tests
         FontFace.tests
+        Media.tests
+        Psuedo.tests
     ]
 

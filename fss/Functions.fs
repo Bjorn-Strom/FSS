@@ -1,89 +1,79 @@
 namespace Fss
 
-open System
-open Fable.Core
-open Fable.Core.JsInterop
+open System.Collections.Generic
+open Fss.FssTypes
+open Fss.Utilities
 
-open Media
-open Keyframes
+//open Media
+//open Keyframes
 
 [<AutoOpen>]
 module Functions =
-    [<Import("css", from="@emotion/css")>]
-    let private css(x) = jsNative
-    let css' x = css(x)
+    (*
+    let css' x = x
 
-    [<Import("injectGlobal", from="@emotion/css")>]
-    let private injectGlobal(x) = jsNative
-    let injectGlobal' x = injectGlobal(x)
+    let injectGlobal' x = x
 
     // Constructors
-    let private fssObject (attributeList: FssTypes.CssProperty list) =
+    let private fssObject (attributeList: CssProperty list) =
         attributeList
-        |> List.map FssTypes.masterTypeHelpers.CssValue
-        |> createObj
+        |> List.map masterTypeHelpers.CssValue
         |> css'
 
-    let fss (attributeList: FssTypes.CssProperty list) =
+    let fss (attributeList: CssProperty list) =
         attributeList
         |> fssObject
         |> string
 
-    let global' (attributeList: FssTypes.CssProperty list) =
+    let global' (attributeList: CssProperty list) =
         attributeList
-        |> List.map FssTypes.masterTypeHelpers.CssValue
-        |> createObj
+        |> List.map masterTypeHelpers.CssValue
+        //|> createObj
         |> injectGlobal'
 
-    // Keyframes
-    let keyframes (attributeList: KeyframeAttribute list) =
-        attributeList
-        |> createAnimationObject
-        |> keyframes'
-        |> FssTypes.CssString
-        :> FssTypes.IAnimationName
 
     /// <summary>Write Css as key value string pairs.
     /// Allows you to add values not supported by Fss.</summary>
     /// <param name="key">Css property</param>
     /// <param name="value">Css value </param>
     /// <returns>Css property for fss.</returns>
-    let Custom (key: string) (value: string) = key ==> value |> FssTypes.CssProperty
+    let Custom (key: string) (value: string) =
+        //key ==> value |> CssProperty
+        key :> obj
 
-    let frame (f: int) (properties: FssTypes.CssProperty list) = (f, properties) |> Frame
-    let frames (f: int list) (properties: FssTypes.CssProperty list) = (f, properties) |> Frames
 
-    let counterStyle (attributeList: FssTypes.CounterProperty list) =
+    let counterStyle (attributeList: CounterProperty list) =
         let counterName = sprintf "counter_%s" <| Guid.NewGuid().ToString()
 
-        createCounterObject attributeList counterName |> css' |> ignore
+        // createCounterObject attributeList counterName |> css' |> ignore
 
-        counterName |> FssTypes.Counter.Style
+        counterName |> Counter.Style
 
     // Media
-    let MediaQueryFor (device: FssTypes.Media.Device) (features: FssTypes.Media.Feature list) (attributeList: FssTypes.CssProperty list) =
+    let MediaQueryFor (device: Media.Device) (features: Media.Feature list) (attributeList: CssProperty list) =
         Media.Media(device, features, fss attributeList)
-    let MediaQuery (features: FssTypes.Media.Feature list) (attributeList: FssTypes.CssProperty list) =
+    let MediaQuery (features: Media.Feature list) (attributeList: CssProperty list) =
         Media.Media(features, fss attributeList)
 
     // Font
-    let fontFace (fontFamily: string) (attributeList: FssTypes.CssProperty list) =
+    let fontFace (fontFamily: string) (attributeList: CssProperty list) =
         attributeList
         |> createFontFaceObject fontFamily
         |> css'
-        FssTypes.Font.Family.Name (FssTypes.Font.Name fontFamily)
+        Font.Family.Name (Font.Name fontFamily)
 
-    let fontFaces (fontFamily: string) (attributeLists: FssTypes.CssProperty list list) =
+    let fontFaces (fontFamily: string) (attributeLists: CssProperty list list) =
         attributeLists
         |> List.map (createFontFaceObject fontFamily)
-        |> List.iter css'
+       // |> List.iter css'
 
-        FssTypes.Font.Family.Name (FssTypes.Font.Name fontFamily)
+        Font.Family.Name (Font.Name fontFamily)
 
     // Important
     let important property =
-        let key, value = FssTypes.masterTypeHelpers.CssValue property
-        key ==> $"{value} !important" |> FssTypes.CssProperty
+        let key, value = masterTypeHelpers.CssValue property
+        //key ==> $"{value} !important" |> CssProperty
+        key :> obj
 
     // Classnames
     let combine styles stylesPred =
@@ -93,47 +83,198 @@ module Functions =
         |> List.filter snd
         |> List.map fst
         |> String.concat " "
+[ *)
+            
+    // TODO RYDD OPP LITT HER
+    // Vi trenger 4 funksjoner
+    // - Fss som lager CSS - X
+    // - Counter som lager counter style - X
+    // - Font Face som lager font face - X
+    // - Keyframes som lager animasjoner
+    
+    type internal Properties =
+        { Main: Rule list
+          Secondary: Rule list }
+    let private isSecondary (_: Property.Property, value: ICssValue) =
+        match value with
+            | :? Pseudo as _ -> true
+            | :? Combinator as _ -> true
+            | :? Media.MediaQuery as _ -> true
+            | _ -> false
+    let isCombinator (_, value: ICssValue) =
+        match value with
+        | :? Combinator as _ -> true
+        | _ -> false
+    let isMedia (_, value: ICssValue) =
+        match value with
+        | :? Media.MediaQuery as _ -> true
+        | _ -> false
+    let isPseudo (_, value: ICssValue) =
+        match value with
+        | :? Pseudo as _ -> true
+        | _ -> false
+        
+    let private createMainCss (propertyName, propertyValue) =
+        $"{(propertyName :> ICssValue).Stringify()}: {(propertyValue :> ICssValue).Stringify()};"
+        
+    let private createPseudoCss (propertyName: ICssValue, propertyValue: ICssValue) =
+        let colons =
+            match propertyValue with
+            | :? Pseudo as p ->
+                match p with
+                | PseudoClass _ -> ":"
+                | PseudoElement _ -> "::"
+            | _ -> ""
+            
+        $"{colons}{propertyName.Stringify()}", $"{propertyValue.Stringify()};"
+        
+    let private createMediaCss (_, propertyValue) =
+        let splitMedia = ($"{(propertyValue :> ICssValue).Stringify()};").Split '|'
+        $"@media {splitMedia[0]}", $"{splitMedia[1]}"
+        
+    let private unwrapCombinator (Combinator rules) = rules
+        
+    // TODO: FIX
+    let private createCombinatorCss (propertyName, propertyValue: ICssValue): (string * string) list =
+        let propertyValue = unwrapCombinator (propertyValue :?> Combinator)
+        
+        let mainProperties =
+            List.filter (isSecondary >> not) propertyValue
+            |> List.map createMainCss
+            |> List.map (fun x -> $"{(propertyName :> ICssValue).Stringify()}", x)
+        let pseudoProperties =
+            List.filter isPseudo propertyValue
+            |> List.map createPseudoCss
+            |> List.map (fun (p, s) -> $"{(propertyName :> ICssValue).Stringify()}{p}", s)
+        let mediaProperties =
+            List.filter isMedia propertyValue
+            |> List.map createMediaCss
+            |> List.map (fun (m, s) -> m, $"{s}")
+        
+        mainProperties @ pseudoProperties @ mediaProperties    
+        
+    let rec fss (properties: Rule list): (ClassName * Css) list =
+        
+        let mainCss =
+            List.filter (isSecondary >> not) properties
+            |> List.map createMainCss
+            |> String.concat ""
+        let className = $".css-{FNV_1A.hash mainCss}"
+        let mainProperties =
+            className, mainCss
+        let pseudoProperties =
+            List.filter isPseudo properties
+            |> List.map createPseudoCss
+            |> List.map (fun (p, s) -> $"{className}{p}", s)
+        let mediaProperties =
+            List.filter isMedia properties
+            |> List.map createMediaCss
+            |> List.map (fun (m, s) -> m, $"{className} {s}")
+        let combinatorProperties =
+            List.filter isCombinator properties
+            |> List.collect createCombinatorCss
+            |> List.map (fun (c, s) -> $"{className}{c}", s)
+        
+        [mainProperties] @ pseudoProperties @ mediaProperties @ combinatorProperties
+        
+    let private stringifyCounterProperty (property: CounterRule) =
+        let propertyName, propertyValue = property
+
+        $"{Helpers.toKebabCase
+           <| propertyName.ToString()}: {propertyValue.Stringify()};"
+           
+    let counterStyle (properties: CounterRule list) : CounterName * CounterStyle =
+
+        let properties =
+            List.map stringifyCounterProperty properties
+            |> String.concat "\n"
+        let counterName = $"counter-{FNV_1A.hash properties}"
+
+        counterName, properties
+           
+    let private stringifyFontFaceProperty (property: FontFaceRule) =
+        let propertyName, propertyValue = property
+
+        $"{Helpers.toKebabCase
+           <| propertyName.ToString()}: {propertyValue.Stringify()};"
+        
+    let fontFace (name: string) (properties: FontFaceRule list) : FontName * FontFaceStyle =
+        let properties = [ FontFace.FontFamily.string name ] @ properties
+        let properties =
+            List.map stringifyFontFaceProperty properties
+            |> String.concat "\n"
+        
+        name, properties
+        
+    let keyframes (attributeList: KeyframeAttribute list) : AnimationName * Css =
+        let framePositionToString frames =
+            List.map (fun n -> $"{n}%%") frames
+            |> String.concat ","
+
+        let foo = 
+            List.fold
+                (fun acc x ->
+                    match x with
+                    | Frame (n, rules) ->
+                        let _, rules = List.head <| fss rules
+                        $"{acc} {n}%% {{ {rules} }}"
+                    | Frames (ns, rules) ->
+                        let _, rules = List.head <| fss rules
+                        let frameNumbers = framePositionToString ns
+                        $"{acc} {frameNumbers} {{ {rules} }}")
+                ""
+                attributeList
+
+        $"animation-{FNV_1A.hash foo}", foo
+        
 
     // Color
-    let rgb (r: int) (g: int) (b: int) = FssTypes.Color.Color.rgb r g b
-    let rgba (r: int) (g: int) (b: int) (a: float) = FssTypes.Color.Color.rgba r g b a
+    let rgb (red: int) (green: int) (blue: int) = Rgb(red, green, blue)
 
-    let hex (value: string) = FssTypes.Color.Color.hex value
+    let rgba (red: int) (green: int) (blue: int) (alpha: float) = Rgba(red, green, blue, alpha)
 
-    let hsl (h: int) (s: float) (l: float) = FssTypes.Color.Color.hsl h s l
-    let hsla (h: int) (s: float) (l: float) (a: float) = FssTypes.Color.Color.hsla h s l a
+    let hex (value: string) = hex value
+
+    let hsl (hue: int) (saturation: int) (lightness: int) = Hsl(hue, saturation, lightness)
+
+    let hsla (hue: int) (saturation: int) (lightness: int) (alpha: float) = Hsla(hue, saturation, lightness, alpha)
+
 
     // Sizes
     // Absolute
-    let px (v: int): FssTypes.Length = sprintf "%dpx" v |> FssTypes.Px
-    let inc (v: float): FssTypes.Length = sprintf "%.1fin" v |> FssTypes.In
-    let cm (v: float): FssTypes.Length = sprintf "%.1fcm" v |> FssTypes.Cm
-    let mm (v: float): FssTypes.Length = sprintf "%.1fmm" v |> FssTypes.Mm
-    let pt (v: float): FssTypes.Length = sprintf "%.1fpt" v |> FssTypes.Pt
-    let pc (v: float): FssTypes.Length = sprintf "%.1fpc" v |> FssTypes.Pc
+    let px (v: int) : Length = Px v
+    let inc (v: float) : Length = In v
+    let cm (v: float) : Length = Cm v
+    let mm (v: float) : Length = Mm v
+    let pt (v: float) : Length = Pt v
+    let pc (v: float) : Length = Pc v
 
     // Relative
-    let em (v: float): FssTypes.Length = sprintf "%.1fem" v |> FssTypes.Em'
-    let rem (v: float): FssTypes.Length = sprintf "%.1frem" v |> FssTypes.Rem
-    let ex (v: float): FssTypes.Length = sprintf "%.1fex" v |> FssTypes.Ex
-    let ch (v: float): FssTypes.Length = sprintf "%.1fch" v |> FssTypes.Ch
-    let vw (v: float): FssTypes.Length = sprintf "%.1fvw" v |> FssTypes.Vw
-    let vh (v: float): FssTypes.Length = sprintf "%.1fvh" v |> FssTypes.Vh
-    let vmax (v: float): FssTypes.Length = sprintf "%.1fvmax" v |> FssTypes.VMax
-    let vmin (v: float): FssTypes.Length = sprintf "%.1fvmin" v |> FssTypes.VMin
+    let em (v: float) : Length = Em' v
+    let rem (v: float) : Length = Rem v
+    let ex (v: float) : Length = Ex v
+    let ch (v: float) : Length = Ch v
+    let vw (v: float) : Length = Vw v
+    let vh (v: float) : Length = Vh v
+    let vmax (v: float) : Length = VMax v
+    let vmin (v: float) : Length = VMin v
 
     // Angles
-    let deg (v: float): FssTypes.Angle = sprintf "%.2fdeg" v |> FssTypes.Deg
-    let grad (v: float): FssTypes.Angle = sprintf "%.2fgrad" v |> FssTypes.Grad
-    let rad (v: float): FssTypes.Angle = sprintf "%.4frad" v |> FssTypes.Rad
-    let turn (v: float): FssTypes.Angle = sprintf "%.2fturn" v |> FssTypes.Turn
+    let deg (v: float) : Angle = Deg v
+    let grad (v: float) : Angle = Grad v
+    let rad (v: float) : Angle = Rad v
+    let turn (v: float) : Angle = Turn v
 
     // Percent
-    let pct (v: int): FssTypes.Percent = sprintf "%d%%" v |> FssTypes.Percent
+    let pct (v: int) : Percent = Percent v
 
     // Time
-    let sec (v: float): FssTypes.Time = sprintf "%.2fs" v |> FssTypes.Sec
-    let ms (v: float): FssTypes.Time = sprintf "%.2fms" v |> FssTypes.Ms
+    let sec (v: float) : Time = Sec v
+    let ms (v: float) : Time = Ms v
 
     // Fractions
-    let fr (v: float): FssTypes.Fraction = sprintf "%.2ffr" v |> FssTypes.Fr
+    let fr (v: float) : Fraction = Fr v
+
+    // Fonts
+    let On = Font.On
+    let Off = Font.Off

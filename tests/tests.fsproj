@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utils.fs" />
@@ -25,32 +26,33 @@
     <Compile Include="Transition.fs" />
     <Compile Include="Visibility.fs" />
     <Compile Include="ListStyle.fs" />
+    <Compile Include="CounterStyle.fs" />
     <Compile Include="Content.fs" />
     <Compile Include="Column.fs" />
-    <Compile Include="Media.fs" />
-    <Compile Include="KeyFrames.fs" />
     <Compile Include="Outline.fs" />
     <Compile Include="Word.fs" />
+    <Compile Include="Overflow.fs" />
+    <Compile Include="PointerEvents.fs" />
     <Compile Include="Table.fs" />
     <Compile Include="Caret.fs" />
+    <Compile Include="ClipPath.fs" />
+    <Compile Include="AspectRatio.fs" />
+    <Compile Include="Clear.fs" />
     <Compile Include="Appearance.fs" />
     <Compile Include="Typography.fs" />
-    <Compile Include="All.fs" />
-    <Compile Include="Scroll.fs" />
-    <Compile Include="Counter.fs" />
-    <Compile Include="BoxShadow.fs" />
-    <Compile Include="Custom.fs" />
-    <Compile Include="PointerEvents.fs" />
-    <Compile Include="ClipPath.fs" />
-    <Compile Include="Clear.fs" />
-    <Compile Include="Filter.fs" />
+    <Compile Include="pseudo.fs" />
+    <Compile Include="KeyFrames.fs" />
     <Compile Include="MixBlendMode.fs" />
-    <Compile Include="AspectRatio.fs" />
+    <Compile Include="Filter.fs" />
+    <Compile Include="Custom.fs" />
+    <Compile Include="BoxShadow.fs" />
+    <Compile Include="All.fs" />
+    <Compile Include="Media.fs" />
+    <Compile Include="Scroll.fs" />
     <Compile Include="Mask.fs" />
     <Compile Include="WillChange.fs" />
     <Compile Include="Image.fs" />
     <Compile Include="Svg.fs" />
-    <Compile Include="pseudo.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Tests.fs" />
     <Content Include="paket.references" />

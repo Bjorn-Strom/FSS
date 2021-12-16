@@ -7,6 +7,7 @@ module App =
     open Fss
     open Feliz.fss
 
+    (*
     open Pages
     open Store
 
@@ -937,6 +938,19 @@ module App =
                                              | _ -> Content page
                                          | _ -> Content NotFound ] ]
 
+    *)
+    
+    let foo = fss [
+        BorderStyle.solid
+        BorderImageSource.url("https://www.dl.dropboxusercontent.com/s/fdltg3rhxn3oe95/border%20image.jpg")
+        BorderImageSlice.value (pct 40)
+        BorderImageWidth.value (px 20)
+        BorderImageSource.linearGradient((deg 45., [ FssTypes.Color.Red, pct 0; FssTypes.Color.Blue, pct 100 ]))
+    ]
     open Browser.Dom
+    [<ReactComponent>]
+    let App () =
+        printfn "%A" foo
+        Html.h1 "Hello world"
 
-    ReactDOM.render (StoreProvider <| App(), document.getElementById "app")
+    ReactDOM.render (App(), document.getElementById "app")

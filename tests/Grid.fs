@@ -1,7 +1,6 @@
 ﻿namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -11,679 +10,776 @@ module Grid =
             [
                 testCase
                     "Grid area"
-                    [ GridArea' "foo" ]
-                    ["gridArea" ==> "foo"]
+                    [ GridArea.value "foo" ]
+                    "grid-area: foo;"
                 testCase
                     "Grid area"
-                    [ GridArea.value (GridPosition.ident "area1", GridPosition.ident "area2") ]
-                    ["gridArea" ==> "area1 / area2"]
+                    [ GridArea.value "area1 / area2" ]
+                    "grid-area: area1 / area2;"
                 testCase
                     "Grid area"
-                    [ GridArea.value (GridPosition.span 3, GridPosition.ident "area2") ]
-                    ["gridArea" ==> "span 3 / area2"]
-                testCase
-                    "Grid area"
-                    [ GridArea.value (GridPosition.auto, GridPosition.auto) ]
-                    ["gridArea" ==> "auto / auto"]
-                testCase
-                    "Grid area"
-                    [ GridArea.value (GridPosition.auto, GridPosition.auto, GridPosition.auto) ]
-                    ["gridArea" ==> "auto / auto / auto"]
-                testCase
-                    "Grid area"
-                    [ GridArea.value (GridPosition.auto, GridPosition.auto, GridPosition.auto, GridPosition.auto) ]
-                    ["gridArea" ==> "auto / auto / auto / auto"]
+                    [ GridArea.value "span 3 / area2" ]
+                    "grid-area: span 3 / area2;"
                 testCase
                     "Grid area auto"
                     [ GridArea.auto ]
-                    ["gridArea" ==> "auto"]
+                    "grid-area: auto;"
                 testCase
                     "Grid area inherit"
                     [GridArea.inherit']
-                    ["gridArea" ==> "inherit"]
+                    "grid-area: inherit;"
                 testCase
                     "Grid area initial"
                     [GridArea.initial]
-                    ["gridArea" ==> "initial"]
+                    "grid-area: initial;"
                 testCase
                     "Grid area unset"
                     [GridArea.unset]
-                    ["gridArea" ==> "unset"]
+                    "grid-area: unset;"
+                testCase
+                    "Grid area revert"
+                    [GridArea.revert]
+                    "grid-area: revert;"
                 testCase
                     "Grid column ident and ident"
-                    [ GridColumn.value(GridPosition.ident "someStart", GridPosition.ident "someEnd") ]
-                    ["gridColumn" ==> "someStart / someEnd"]
+                    [ GridColumn.value "someStart / someEnd" ]
+                    "grid-column: someStart / someEnd;"
                 testCase
                     "Grid column ident and value"
-                    [ GridColumn.value (GridPosition.ident "someStart", GridPosition.value 2) ]
-                    ["gridColumn" ==> "someStart / 2"]
+                    [ GridColumn.value "someStart / 2" ]
+                    "grid-column: someStart / 2;"
                 testCase
                     "Grid column auto"
                     [GridColumn.auto]
-                    ["gridColumn" ==> "auto"]
+                    "grid-column: auto;"
                 testCase
                     "Grid column inherit"
                     [GridColumn.inherit']
-                    ["gridColumn" ==> "inherit"]
+                    "grid-column: inherit;"
                 testCase
                     "Grid column initial"
                     [GridColumn.initial]
-                    ["gridColumn" ==> "initial"]
+                    "grid-column: initial;"
                 testCase
                     "Grid column unset"
                     [GridColumn.unset]
-                    ["gridColumn" ==> "unset"]
+                    "grid-column: unset;"
+                testCase
+                    "Grid column revert"
+                    [GridColumn.revert]
+                    "grid-column: revert;"
                 testCase
                     "Grid column start auto"
                     [GridColumnStart.auto]
-                    ["gridColumnStart" ==> "auto"]
+                    "grid-column-start: auto;"
                 testCase
                     "Grid column start value"
-                    [GridColumnStart' 1]
-                    ["gridColumnStart" ==> "1"]
+                    [GridColumnStart.value 1]
+                    "grid-column-start: 1;"
                 testCase
                     "Grid column start ident"
-                    [GridColumnStart.ident "somegridarea"]
-                    ["gridColumnStart" ==> "somegridarea"]
+                    [GridColumnStart.value "somegridarea"]
+                    "grid-column-start: somegridarea;"
                 testCase
-                    "Grid column value ident and span"
-                    [GridColumnStart.valueIdentSpan(1, "area") ]
-                    ["gridColumnStart" ==> "1 area span"]
+                    "Grid column value ident"
+                    [GridColumnStart.value (1, "area") ]
+                    "grid-column-start: 1 area;"
                 testCase
                     "Grid column start span"
                     [GridColumnStart.span 2 ]
-                    ["gridColumnStart" ==> "span 2"]
+                    "grid-column-start: span 2;"
                 testCase
                     "Grid column start inherit"
                     [GridColumnStart.inherit']
-                    ["gridColumnStart" ==> "inherit"]
+                    "grid-column-start: inherit;"
                 testCase
                     "Grid column start initial"
                     [GridColumnStart.initial]
-                    ["gridColumnStart" ==> "initial"]
+                    "grid-column-start: initial;"
                 testCase
                     "Grid column start unset"
                     [GridColumnStart.unset]
-                    ["gridColumnStart" ==> "unset"]
+                    "grid-column-start: unset;"
+                testCase
+                    "Grid column start revert"
+                    [GridColumnStart.revert]
+                    "grid-column-start: revert;"
                 testCase
                     "Grid column end auto"
                     [GridColumnEnd.auto]
-                    ["gridColumnEnd" ==> "auto"]
+                    "grid-column-end: auto;"
                 testCase
                     "Grid column end value"
-                    [GridColumnEnd' 1]
-                    ["gridColumnEnd" ==> "1"]
+                    [GridColumnEnd.value 1]
+                    "grid-column-end: 1;"
                 testCase
                     "Grid column end ident"
-                    [GridColumnEnd.ident "somegridarea"]
-                    ["gridColumnEnd" ==> "somegridarea"]
+                    [GridColumnEnd.value "somegridarea"]
+                    "grid-column-end: somegridarea;"
                 testCase
-                    "Grid column value ident and span"
-                    [GridColumnEnd.valueIdentSpan (1, "area") ]
-                    ["gridColumnEnd" ==> "1 area span"]
+                    "Grid column value ident"
+                    [GridColumnEnd.value (1, "area") ]
+                    "grid-column-end: 1 area;"
                 testCase
                     "Grid column end span"
                     [GridColumnEnd.span 2 ]
-                    ["gridColumnEnd" ==> "span 2"]
+                    "grid-column-end: span 2;"
                 testCase
                     "Grid column end inherit"
                     [GridColumnEnd.inherit']
-                    ["gridColumnEnd" ==> "inherit"]
+                    "grid-column-end: inherit;"
                 testCase
                     "Grid column end initial"
                     [GridColumnEnd.initial]
-                    ["gridColumnEnd" ==> "initial"]
+                    "grid-column-end: initial;"
                 testCase
                     "Grid column end unset"
                     [GridColumnEnd.unset]
-                    ["gridColumnEnd" ==> "unset"]
+                    "grid-column-end: unset;"
+                testCase
+                    "Grid column end revert"
+                    [GridColumnEnd.revert]
+                    "grid-column-end: revert;"
                 testCase
                     "Grid row ident and ident"
-                    [ GridRow.value (GridPosition.ident "someStart", GridPosition.ident "someEnd") ]
-                    ["gridRow" ==> "someStart / someEnd"]
+                    [ GridRow.value "someStart / someEnd" ]
+                    "grid-row: someStart / someEnd;"
                 testCase
                     "Grid row ident and value"
-                    [ GridRow.value (GridPosition.ident "someStart", GridPosition.value 2) ]
-                    ["gridRow" ==> "someStart / 2"]
+                    [ GridRow.value ("someStart", 2) ]
+                    "grid-row: someStart / 2;"
                 testCase
                     "Grid row auto"
                     [GridRow.auto]
-                    ["gridRow" ==> "auto"]
+                    "grid-row: auto;"
                 testCase
                     "Grid row inherit"
                     [GridRow.inherit']
-                    ["gridRow" ==> "inherit"]
+                    "grid-row: inherit;"
                 testCase
                     "Grid row initial"
                     [GridRow.initial]
-                    ["gridRow" ==> "initial"]
+                    "grid-row: initial;"
                 testCase
                     "Grid row unset"
                     [GridRow.unset]
-                    ["gridRow" ==> "unset"]
+                    "grid-row: unset;"
+                testCase
+                    "Grid row revert"
+                    [GridRow.revert]
+                    "grid-row: revert;"
                 testCase
                     "Grid row start auto"
                     [GridRowStart.auto]
-                    ["gridRowStart" ==> "auto"]
+                    "grid-row-start: auto;"
                 testCase
                     "Grid row start value"
-                    [GridRowStart' 1]
-                    ["gridRowStart" ==> "1"]
+                    [GridRowStart.value 1]
+                    "grid-row-start: 1;"
                 testCase
                     "Grid row start ident"
-                    [GridRowStart.ident "somegridarea"]
-                    ["gridRowStart" ==> "somegridarea"]
+                    [GridRowStart.value "somegridarea"]
+                    "grid-row-start: somegridarea;"
                 testCase
                     "Grid row value ident and span"
-                    [GridRowStart.valueIdentSpan (1, "area") ]
-                    ["gridRowStart" ==> "1 area span"]
+                    [GridRowStart.value (1, "area") ]
+                    "grid-row-start: 1 area;"
                 testCase
                     "Grid row start span"
                     [GridRowStart.span 2]
-                    ["gridRowStart" ==> "span 2"]
+                    "grid-row-start: span 2;"
                 testCase
                     "Grid row start inherit"
                     [GridRowStart.inherit']
-                    ["gridRowStart" ==> "inherit"]
+                    "grid-row-start: inherit;"
                 testCase
                     "Grid row start initial"
                     [GridRowStart.initial]
-                    ["gridRowStart" ==> "initial"]
+                    "grid-row-start: initial;"
                 testCase
                     "Grid row start unset"
                     [GridRowStart.unset]
-                    ["gridRowStart" ==> "unset"]
+                    "grid-row-start: unset;"
+                testCase
+                    "Grid row start revert"
+                    [GridRowStart.revert]
+                    "grid-row-start: revert;"
                 testCase
                     "Grid row end auto"
                     [GridRowEnd.auto]
-                    ["gridRowEnd" ==> "auto"]
+                    "grid-row-end: auto;"
                 testCase
                     "Grid row end value"
-                    [GridRowEnd' 1 ]
-                    ["gridRowEnd" ==> "1"]
+                    [GridRowEnd.value 1 ]
+                    "grid-row-end: 1;"
                 testCase
                     "Grid row end ident"
-                    [GridRowEnd.ident "somegridarea"]
-                    ["gridRowEnd" ==> "somegridarea"]
+                    [GridRowEnd.value "somegridarea"]
+                    "grid-row-end: somegridarea;"
                 testCase
                     "Grid row value ident and span"
-                    [GridRowEnd.valueIdentSpan (1, "area") ]
-                    ["gridRowEnd" ==> "1 area span"]
+                    [GridRowEnd.value (1, "area") ]
+                    "grid-row-end: 1 area;"
                 testCase
                     "Grid row end span"
                     [GridRowEnd.span 2 ]
-                    ["gridRowEnd" ==> "span 2"]
+                    "grid-row-end: span 2;"
                 testCase
                     "Grid row end inherit"
                     [GridRowEnd.inherit']
-                    ["gridRowEnd" ==> "inherit"]
+                    "grid-row-end: inherit;"
                 testCase
                     "Grid row end initial"
                     [GridRowEnd.initial]
-                    ["gridRowEnd" ==> "initial"]
+                    "grid-row-end: initial;"
                 testCase
                     "Grid row end unset"
                     [GridRowEnd.unset]
-                    ["gridRowEnd" ==> "unset"]
+                    "grid-row-end: unset;"
+                testCase
+                    "Grid row end revert"
+                    [GridRowEnd.revert]
+                    "grid-row-end: revert;"
                 testCase
                     "Grid gap px"
-                    [GridGap' (px 10)]
-                    ["gridGap" ==> "10px"]
+                    [GridGap.value (px 10)]
+                    "grid-gap: 10px;"
                 testCase
                     "Grid gap em"
-                    [GridGap' (em 1.)]
-                    ["gridGap" ==> "1.0em"]
+                    [GridGap.value (em 1.)]
+                    "grid-gap: 1em;"
                 testCase
                     "Grid gap percent"
-                    [GridGap' (pct 16)]
-                    ["gridGap" ==> "16%"]
+                    [GridGap.value (pct 16)]
+                    "grid-gap: 16%;"
                 testCase
                     "Grid gap px and px"
                     [ GridGap.value (px 20, px 10) ]
-                    ["gridGap" ==> "20px 10px"]
+                    "grid-gap: 20px 10px;"
                 testCase
                     "Grid gap em and em"
-                    [GridGap.value (em 1., em 0.5) ]
-                    ["gridGap" ==> "1.0em 0.5em"]
+                    [GridGap.value (em 1, em 0.5) ]
+                    "grid-gap: 1em 0.5em;"
                 testCase
                     "Grid gap vmin and vmax"
                     [GridGap.value (vmin 3., vmax 2.) ]
-                    ["gridGap" ==> "3.0vmin 2.0vmax"]
+                    "grid-gap: 3vmin 2vmax;"
                 testCase
                     "Grid gap cm and mm"
                     [GridGap.value (cm 0.5, mm 2.) ]
-                    ["gridGap" ==> "0.5cm 2.0mm"]
+                    "grid-gap: 0.5cm 2mm;"
                 testCase
                     "Grid gap percent and percent"
                     [GridGap.value (pct 16, pct 100) ]
-                    ["gridGap" ==> "16% 100%"]
+                    "grid-gap: 16% 100%;"
                 testCase
                     "Grid gap px and percent"
                     [ GridGap.value (px 21, pct 82) ]
-                    ["gridGap" ==> "21px 82%"]
+                    "grid-gap: 21px 82%;"
                 testCase
                     "Grid gap inherit"
                     [GridGap.inherit']
-                    ["gridGap" ==> "inherit"]
+                    "grid-gap: inherit;"
                 testCase
                     "Grid gap initial"
                     [GridGap.initial]
-                    ["gridGap" ==> "initial"]
+                    "grid-gap: initial;"
                 testCase
                     "Grid gap unset"
                     [GridGap.unset]
-                    ["gridGap" ==> "unset"]
+                    "grid-gap: unset;"
+                testCase
+                    "Grid gap revert"
+                    [GridGap.revert]
+                    "grid-gap: revert;"
                 testCase
                     "Row gap normal"
                     [GridRowGap.normal]
-                    ["gridRowGap" ==> "normal"]
+                    "grid-row-gap: normal;"
                 testCase
                     "Row gap px"
-                    [GridRowGap' (px 3)]
-                    ["gridRowGap" ==> "3px"]
+                    [GridRowGap.value (px 3)]
+                    "grid-row-gap: 3px;"
                 testCase
                     "Row gap em"
-                    [GridRowGap' (em 2.5)]
-                    ["gridRowGap" ==> "2.5em"]
+                    [GridRowGap.value (em 2.5)]
+                    "grid-row-gap: 2.5em;"
                 testCase
                     "Row gap percent"
-                    [GridRowGap' (pct 3)]
-                    ["gridRowGap" ==> "3%"]
+                    [GridRowGap.value (pct 3)]
+                    "grid-row-gap: 3%;"
                 testCase
                     "Row gap inherit"
                     [GridRowGap.inherit']
-                    ["gridRowGap" ==> "inherit"]
+                    "grid-row-gap: inherit;"
                 testCase
                     "Row gap initial"
                     [GridRowGap.initial]
-                    ["gridRowGap" ==> "initial"]
+                    "grid-row-gap: initial;"
                 testCase
                     "Row gap unset"
                     [GridRowGap.unset]
-                    ["gridRowGap" ==> "unset"]
+                    "grid-row-gap: unset;"
+                testCase
+                    "Row gap revert"
+                    [GridRowGap.revert]
+                    "grid-row-gap: revert;"
                 testCase
                     "Column gap normal"
                     [GridColumnGap.normal]
-                    ["gridColumnGap" ==> "normal"]
+                    "grid-column-gap: normal;"
                 testCase
                     "Column gap px"
-                    [GridColumnGap' (px 3)]
-                    ["gridColumnGap" ==> "3px"]
+                    [GridColumnGap.value (px 3)]
+                    "grid-column-gap: 3px;"
                 testCase
                     "Column gap em"
-                    [GridColumnGap' (em 2.5)]
-                    ["gridColumnGap" ==> "2.5em"]
+                    [GridColumnGap.value (em 2.5)]
+                    "grid-column-gap: 2.5em;"
                 testCase
                     "Column gap percent"
-                    [GridColumnGap' (pct 3)]
-                    ["gridColumnGap" ==> "3%"]
+                    [GridColumnGap.value (pct 3)]
+                    "grid-column-gap: 3%;"
                 testCase
                     "Column gap inherit"
                     [GridColumnGap.inherit']
-                    ["gridColumnGap" ==> "inherit"]
+                    "grid-column-gap: inherit;"
                 testCase
                     "Column gap initial"
                     [GridColumnGap.initial]
-                    ["gridColumnGap" ==> "initial"]
+                    "grid-column-gap: initial;"
                 testCase
                     "Column gap unset"
                     [GridColumnGap.unset]
-                    ["gridColumnGap" ==> "unset"]
+                    "grid-column-gap: unset;"
+                testCase
+                    "Column gap revert"
+                    [GridColumnGap.revert]
+                    "grid-column-gap: revert;"
                 testCase
                     "Grid template row px"
-                    [GridTemplateRows' (px 100)]
-                    ["gridTemplateRows" ==> "100px"]
+                    [GridTemplateRows.value (px 100)]
+                    "grid-template-rows: 100px;"
                 testCase
                     "Grid template row minmax"
                     [GridTemplateRows.minMax (px 100, fr 1.) ]
-                    ["gridTemplateRows" ==> "minmax(100px, 1.00fr)"]
+                    "grid-template-rows: minmax(100px, 1fr);"
+                testCase
+                    "min max px and fraction"
+                    [ GridTemplateRows.minMax(px 200, fr 1.5) ]
+                    "grid-template-rows: minmax(200px, 1.5fr);"
+                testCase
+                    "MinMax px and percent"
+                    [ GridTemplateRows.minMax(px 400, pct 50) ]
+                    "grid-template-rows: minmax(400px, 50%);"
+                testCase
+                    "MinMax percent and px"
+                    [ GridTemplateRows.minMax(pct 30, px 300) ]
+                    "grid-template-rows: minmax(30%, 300px);"
+                testCase
+                    "MinMax px and max content"
+                    [ GridTemplateRows.minMax(px 100, FssTypes.ContentSize.MaxContent) ]
+                    "grid-template-rows: minmax(100px, max-content);"
+                testCase
+                    "MinMax min content and px"
+                    [ GridTemplateRows.minMax(FssTypes.ContentSize.MinContent, px 400) ]
+                    "grid-template-rows: minmax(min-content, 400px);"
+                testCase
+                    "MinMax px and fr"
+                    [ GridTemplateRows.minMax(px 200, fr 1.) ]
+                    "grid-template-rows: minmax(200px, 1fr);"
+                testCase
+                    "MinMax percent and min content"
+                    [ GridTemplateRows.minMax(pct 50, FssTypes.ContentSize.MinContent) ]
+                    "grid-template-rows: minmax(50%, min-content);"
+                testCase
+                    "MinMax percent and max content"
+                    [ GridTemplateRows.minMax(px 300, FssTypes.ContentSize.MaxContent) ]
+                    "grid-template-rows: minmax(300px, max-content);"
+                testCase
+                    "MinMax pct and px"
+                    [ GridTemplateRows.minMax(pct 30, px 300) ]
+                    "grid-template-rows: minmax(30%, 300px);"
+                testCase
+                    "MinMax min content and px"
+                    [ GridTemplateRows.minMax(FssTypes.ContentSize.MinContent, px 200) ]
+                    "grid-template-rows: minmax(min-content, 200px);"
+                testCase
+                    "Repeat value and percent"
+                    [ GridTemplateRows.repeat(4, fr 1.) ]
+                    "grid-template-rows: repeat(4, 1fr);"
+                testCase
+                    "Repeat value and percent"
+                    [ GridTemplateRows.repeat(4, pct 60) ]
+                    "grid-template-rows: repeat(4, 60%);"
+                testCase
+                    "Repeat value and pixels"
+                    [ GridTemplateRows.repeat(4, px 250) ]
+                    "grid-template-rows: repeat(4, 250px);"
+                testCase
+                    "Repeat value and min-content"
+                    [ GridTemplateRows.repeat(4, FssTypes.ContentSize.MinContent) ]
+                    "grid-template-rows: repeat(4, min-content);"
+                testCase
+                    "Repeat value and max-content"
+                    [ GridTemplateRows.repeat(4, FssTypes.ContentSize.MaxContent) ]
+                    "grid-template-rows: repeat(4, max-content);"
+                testCase
+                    "Repeat value and minmax"
+                    [ GridTemplateRows.repeat(4, FssTypes.Grid.MinMax.MinMax(px 100, fr 1.)) ]
+                    "grid-template-rows: repeat(4, minmax(100px, 1fr));"
+                testCase
+                    "Repeat value and fit content"
+                    [ GridTemplateRows.repeat(4, FssTypes.ContentSize.FitContent(px 100)) ]
+                    "grid-template-rows: repeat(4, fit-content(100px));"
+                testCase
+                    "Repeat value and min-content max-content"
+                    [ GridTemplateRows.repeat(4, [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent]) ]
+                    "grid-template-rows: repeat(4, min-content max-content);"
+                testCase
+                    "Repeat auto-fill and px"
+                    [ GridTemplateRows.repeat(FssTypes.Grid.AutoFill, px 30) ]
+                    "grid-template-rows: repeat(auto-fill, 30px);"
+                testCase
+                    "Repeat auto-fit and px"
+                    [ GridTemplateRows.repeat(FssTypes.Grid.AutoFit, px 30) ]
+                    "grid-template-rows: repeat(auto-fit, 30px);"
                 testCase
                     "Grid template row fit-content"
                     [GridTemplateRows.fitContent(px 100)]
-                    ["gridTemplateRows" ==> "fit-content(100px)"]
+                    "grid-template-rows: fit-content(100px);"
                 testCase
                     "Grid template row repeat"
                     [GridTemplateRows.repeat(3, px 200)]
-                    ["gridTemplateRows" ==> "repeat(3, 200px)"]
+                    "grid-template-rows: repeat(3, 200px);"
                 testCase
                     "Grid template row subgrid"
                     [GridTemplateRows.subgrid ]
-                    ["gridTemplateRows" ==> "subgrid"]
+                    "grid-template-rows: subgrid;"
                 testCase
                     "Grid template row masonry"
                     [GridTemplateRows.masonry ]
-                    ["gridTemplateRows" ==> "masonry"]
+                    "grid-template-rows: masonry;"
                 testCase
                     "Grid template row none"
                     [GridTemplateRows.none]
-                    ["gridTemplateRows" ==> "none"]
-                testCase
-                    "Grid template row px repeat px"
-                    [GridTemplateRows.values [ px 200; FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
-                    ["gridTemplateRows" ==> "200px repeat(auto-fill, 100px) 300px"]
-                testCase
-                    "Grid template row minmax repeat percent"
-                    [GridTemplateRows.values [
-                        FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent)
-                        FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 200); pct 20
-                    ]]
-                    ["gridTemplateRows" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
+                    "grid-template-rows: none;"
                 testCase
                     "Grid template row auto"
                     [GridTemplateRows.auto]
-                    ["gridTemplateRows" ==> "auto"]
+                    "grid-template-rows: auto;"
                 testCase
                     "Grid template row inherit"
                     [GridTemplateRows.inherit']
-                    ["gridTemplateRows" ==> "inherit"]
+                    "grid-template-rows: inherit;"
                 testCase
                     "Grid template row initial"
                     [GridTemplateRows.initial]
-                    ["gridTemplateRows" ==> "initial"]
+                    "grid-template-rows: initial;"
                 testCase
                     "Grid template row unset"
                     [GridTemplateRows.unset]
-                    ["gridTemplateRows" ==> "unset"]
+                    "grid-template-rows: unset;"
                 testCase
-                    "Grid template column px"
-                    [GridTemplateColumns' (px 100)]
-                    ["gridTemplateColumns" ==> "100px"]
+                    "Grid template row revert"
+                    [GridTemplateRows.revert]
+                    "grid-template-rows: revert;"
                 testCase
-                    "Grid template column minmax"
-                    [GridTemplateColumns.minMax(px 100, fr 1.)]
-                    ["gridTemplateColumns" ==> "minmax(100px, 1.00fr)"]
+                    "Grid template row px"
+                    [GridTemplateColumns.value (px 100)]
+                    "grid-template-columns: 100px;"
                 testCase
-                    "Grid template column fit-content"
-                    [GridTemplateColumns.fitContent(px 100)]
-                    ["gridTemplateColumns" ==> "fit-content(100px)"]
+                    "Grid template row minmax"
+                    [GridTemplateColumns.minMax (px 100, fr 1.) ]
+                    "grid-template-columns: minmax(100px, 1fr);"
                 testCase
-                    "Grid template column repeat"
-                    [GridTemplateColumns.repeat(3, px 200)]
-                    ["gridTemplateColumns" ==> "repeat(3, 200px)"]
+                    "min max px and fraction"
+                    [ GridTemplateColumns.minMax(px 200, fr 1.5) ]
+                    "grid-template-columns: minmax(200px, 1.5fr);"
                 testCase
-                    "Grid template column subgrid"
-                    [GridTemplateColumns.subgrid]
-                    ["gridTemplateColumns" ==> "subgrid"]
-                testCase
-                    "Grid template column masonry"
-                    [GridTemplateColumns.masonry]
-                    ["gridTemplateColumns" ==> "masonry"]
-                testCase
-                    "Grid template column none"
-                    [GridTemplateColumns.none]
-                    ["gridTemplateColumns" ==> "none"]
-                testCase
-                    "Grid template column px repeat px"
-                    [GridTemplateColumns.values [px 200; FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 100); px 300]]
-                    ["gridTemplateColumns" ==> "200px repeat(auto-fill, 100px) 300px"]
-                testCase
-                    "Grid template column minmax repeat percent"
-                    [GridTemplateColumns.values [ FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent); FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 200); pct 20 ]]
-                    ["gridTemplateColumns" ==> "minmax(100px, max-content) repeat(auto-fill, 200px) 20%"]
-                testCase
-                    "Grid template column auto"
-                    [GridTemplateColumns.auto]
-                    ["gridTemplateColumns" ==> "auto"]
-                testCase
-                    "Grid template column inherit"
-                    [GridTemplateColumns.inherit']
-                    ["gridTemplateColumns" ==> "inherit"]
-                testCase
-                    "Grid template column initial"
-                    [GridTemplateColumns.initial]
-                    ["gridTemplateColumns" ==> "initial"]
-                testCase
-                    "Grid template column unset"
-                    [GridTemplateColumns.unset]
-                    ["gridTemplateColumns" ==> "unset"]
-                testString
-                    "Repeat value and percent"
-                    (string <| FssTypes.Grid.Repeat.Repeat(4, fr 1.))
-                    "GridRepeat (repeat(4, 1.00fr))"
-                testString
-                    "Repeat value and percent"
-                    (string <| FssTypes.Grid.Repeat.Repeat(4, pct 60))
-                    "GridRepeat (repeat(4, 60%))"
-                testString
-                    "Repeat value and pixels"
-                    (string <| FssTypes.Grid.Repeat.Repeat(4, px 250))
-                    "GridRepeat (repeat(4, 250px))"
-                testString
-                    "Repeat value and min-content"
-                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.ContentSize.MinContent))
-                    "GridRepeat (repeat(4, min-content))"
-                testString
-                    "Repeat value and max-content"
-                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.ContentSize.MaxContent))
-                    "GridRepeat (repeat(4, max-content))"
-                testString
-                    "Repeat value and minmax"
-                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.Grid.MinMax.MinMax(px 100, fr 1.)))
-                    "GridRepeat (repeat(4, minmax(100px, 1.00fr)))"
-                testString
-                    "Repeat value and fit content"
-                    (string <| FssTypes.Grid.Repeat.Repeat(4, FssTypes.ContentSize.FitContent(px 100)))
-                    "GridRepeat (repeat(4, fit-content(100px)))"
-                testString
-                    "Repeat value and min-content max-content"
-                    (string <| FssTypes.Grid.Repeat.Repeat(4, [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent]))
-                    "GridRepeat (repeat(4, min-content max-content))"
-                testString
-                    "Repeat auto-fill and px"
-                    (string <| FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFill, px 30))
-                    "GridRepeat (repeat(auto-fill, 30px))"
-                testString
-                    "Repeat auto-fit and px"
-                    (string <| FssTypes.Grid.Repeat.Repeat(FssTypes.Grid.AutoFit, px 30))
-                    "GridRepeat (repeat(auto-fit, 30px))"
-                testString
-                    "MinMax px and fraction"
-                    (string <| FssTypes.Grid.MinMax.MinMax(px 200, fr 1.5))
-                    "MinMaxGrid (minmax(200px, 1.50fr))"
-                testString
                     "MinMax px and percent"
-                    (string <| FssTypes.Grid.MinMax.MinMax(px 400, pct 50))
-                    "MinMaxGrid (minmax(400px, 50%))"
-                testString
+                    [ GridTemplateColumns.minMax(px 400, pct 50) ]
+                    "grid-template-columns: minmax(400px, 50%);"
+                testCase
                     "MinMax percent and px"
-                    (string <| FssTypes.Grid.MinMax.MinMax(pct 30, px 300))
-                    "MinMaxGrid (minmax(30%, 300px))"
-                testString
+                    [ GridTemplateColumns.minMax(pct 30, px 300) ]
+                    "grid-template-columns: minmax(30%, 300px);"
+                testCase
                     "MinMax px and max content"
-                    (string <| FssTypes.Grid.MinMax.MinMax(px 100, FssTypes.ContentSize.MaxContent))
-                    "MinMaxGrid (minmax(100px, max-content))"
-                testString
+                    [ GridTemplateColumns.minMax(px 100, FssTypes.ContentSize.MaxContent) ]
+                    "grid-template-columns: minmax(100px, max-content);"
+                testCase
                     "MinMax min content and px"
-                    (string <| FssTypes.Grid.MinMax.MinMax(FssTypes.ContentSize.MinContent, px 400))
-                    "MinMaxGrid (minmax(min-content, 400px))"
-                testString
+                    [ GridTemplateColumns.minMax(FssTypes.ContentSize.MinContent, px 400) ]
+                    "grid-template-columns: minmax(min-content, 400px);"
+                testCase
                     "MinMax px and fr"
-                    (string <| FssTypes.Grid.MinMax.MinMax(px 200, fr 1.) )
-                    "MinMaxGrid (minmax(200px, 1.00fr))"
-                testString
+                    [ GridTemplateColumns.minMax(px 200, fr 1.) ]
+                    "grid-template-columns: minmax(200px, 1fr);"
+                testCase
                     "MinMax percent and min content"
-                    (string <| FssTypes.Grid.MinMax.MinMax(pct 50, FssTypes.ContentSize.MinContent))
-                    "MinMaxGrid (minmax(50%, min-content))"
-                testString
+                    [ GridTemplateColumns.minMax(pct 50, FssTypes.ContentSize.MinContent) ]
+                    "grid-template-columns: minmax(50%, min-content);"
+                testCase
                     "MinMax percent and max content"
-                    (string <| FssTypes.Grid.MinMax.MinMax(px 300, FssTypes.ContentSize.MaxContent))
-                    "MinMaxGrid (minmax(300px, max-content))"
-                testString
+                    [ GridTemplateColumns.minMax(px 300, FssTypes.ContentSize.MaxContent) ]
+                    "grid-template-columns: minmax(300px, max-content);"
+                testCase
                     "MinMax pct and px"
-                    (string <| FssTypes.Grid.MinMax.MinMax(pct 30, px 300))
-                    "MinMaxGrid (minmax(30%, 300px))"
-                testString
+                    [ GridTemplateColumns.minMax(pct 30, px 300) ]
+                    "grid-template-columns: minmax(30%, 300px);"
+                testCase
                     "MinMax min content and px"
-                    (string <| FssTypes.Grid.MinMax.MinMax(FssTypes.ContentSize.MinContent, px 200))
-                    "MinMaxGrid (minmax(min-content, 200px))"
+                    [ GridTemplateColumns.minMax(FssTypes.ContentSize.MinContent, px 200) ]
+                    "grid-template-columns: minmax(min-content, 200px);"
+                testCase
+                    "Repeat value and percent"
+                    [ GridTemplateColumns.repeat(4, fr 1.) ]
+                    "grid-template-columns: repeat(4, 1fr);"
+                testCase
+                    "Repeat value and percent"
+                    [ GridTemplateColumns.repeat(4, pct 60) ]
+                    "grid-template-columns: repeat(4, 60%);"
+                testCase
+                    "Repeat value and pixels"
+                    [ GridTemplateColumns.repeat(4, px 250) ]
+                    "grid-template-columns: repeat(4, 250px);"
+                testCase
+                    "Repeat value and min-content"
+                    [ GridTemplateColumns.repeat(4, FssTypes.ContentSize.MinContent) ]
+                    "grid-template-columns: repeat(4, min-content);"
+                testCase
+                    "Repeat value and max-content"
+                    [ GridTemplateColumns.repeat(4, FssTypes.ContentSize.MaxContent) ]
+                    "grid-template-columns: repeat(4, max-content);"
+                testCase
+                    "Repeat value and minmax"
+                    [ GridTemplateColumns.repeat(4, FssTypes.Grid.MinMax.MinMax(px 100, fr 1.)) ]
+                    "grid-template-columns: repeat(4, minmax(100px, 1fr));"
+                testCase
+                    "Repeat value and fit content"
+                    [ GridTemplateColumns.repeat(4, FssTypes.ContentSize.FitContent(px 100)) ]
+                    "grid-template-columns: repeat(4, fit-content(100px));"
+                testCase
+                    "Repeat value and min-content max-content"
+                    [ GridTemplateColumns.repeat(4, [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent]) ]
+                    "grid-template-columns: repeat(4, min-content max-content);"
+                testCase
+                    "Repeat auto-fill and px"
+                    [ GridTemplateColumns.repeat(FssTypes.Grid.AutoFill, px 30) ]
+                    "grid-template-columns: repeat(auto-fill, 30px);"
+                testCase
+                    "Repeat auto-fit and px"
+                    [ GridTemplateColumns.repeat(FssTypes.Grid.AutoFit, px 30) ]
+                    "grid-template-columns: repeat(auto-fit, 30px);"
+                testCase
+                    "Grid template row fit-content"
+                    [GridTemplateColumns.fitContent(px 100)]
+                    "grid-template-columns: fit-content(100px);"
+                testCase
+                    "Grid template row repeat"
+                    [GridTemplateColumns.repeat(3, px 200)]
+                    "grid-template-columns: repeat(3, 200px);"
+                testCase
+                    "Grid template row subgrid"
+                    [GridTemplateColumns.subgrid ]
+                    "grid-template-columns: subgrid;"
+                testCase
+                    "Grid template row masonry"
+                    [GridTemplateColumns.masonry ]
+                    "grid-template-columns: masonry;"
+                testCase
+                    "Grid template row none"
+                    [GridTemplateColumns.none]
+                    "grid-template-columns: none;"
+                testCase
+                    "Grid template row auto"
+                    [GridTemplateColumns.auto]
+                    "grid-template-columns: auto;"
+                testCase
+                    "Grid template row inherit"
+                    [GridTemplateColumns.inherit']
+                    "grid-template-columns: inherit;"
+                testCase
+                    "Grid template row initial"
+                    [GridTemplateColumns.initial]
+                    "grid-template-columns: initial;"
+                testCase
+                    "Grid template row unset"
+                    [GridTemplateColumns.unset]
+                    "grid-template-columns: unset;"
+                testCase
+                    "Grid template row revert"
+                    [GridTemplateColumns.revert]
+                    "grid-template-columns: revert;"
                 testCase
                     "Grid auto columns min content"
                     [GridAutoColumns.minContent]
-                    ["gridAutoColumns" ==> "min-content"]
+                    "grid-auto-columns: min-content;"
                 testCase
                     "Grid auto columns max content"
                     [GridAutoColumns.maxContent]
-                    ["gridAutoColumns" ==> "max-content"]
+                    "grid-auto-columns: max-content;"
                 testCase
                     "Grid auto columns auto"
                     [GridAutoColumns.auto]
-                    ["gridAutoColumns" ==> "auto"]
+                    "grid-auto-columns: auto;"
                 testCase
                     "Grid auto columns px"
-                    [GridAutoColumns' (px 100)]
-                    ["gridAutoColumns" ==> "100px"]
+                    [GridAutoColumns.value (px 100)]
+                    "grid-auto-columns: 100px;"
                 testCase
                     "Grid auto columns cm"
-                    [GridAutoColumns' (cm 20.)]
-                    ["gridAutoColumns" ==> "20.0cm"]
+                    [GridAutoColumns.value (cm 20.)]
+                    "grid-auto-columns: 20cm;"
                 testCase
                     "Grid auto columns vmax"
-                    [GridAutoColumns' (vmax 50.)]
-                    ["gridAutoColumns" ==> "50.0vmax"]
+                    [GridAutoColumns.value (vmax 50.)]
+                    "grid-auto-columns: 50vmax;"
                 testCase
                     "Grid auto columns percent"
-                    [GridAutoColumns' (pct 10)]
-                    ["gridAutoColumns" ==> "10%"]
+                    [GridAutoColumns.value (pct 10)]
+                    "grid-auto-columns: 10%;"
                 testCase
                     "Grid auto columns fr"
-                    [GridAutoColumns' (fr 0.5)]
-                    ["gridAutoColumns" ==> "0.50fr"]
+                    [GridAutoColumns.value (fr 0.5)]
+                    "grid-auto-columns: 0.5fr;"
                 testCase
                     "Grid auto columns fit content"
                     [GridAutoColumns.fitContent(px 400) ]
-                    ["gridAutoColumns" ==> "fit-content(400px)"]
+                    "grid-auto-columns: fit-content(400px);"
                 testCase
                     "Grid auto columns multiple with min-content max-content and auto"
-                    [ GridAutoColumns.values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
-                    ["gridAutoColumns" ==> "min-content max-content"]
+                    [ GridAutoColumns.value [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
+                    "grid-auto-columns: min-content max-content;"
                 testCase
                     "Grid auto columns multiple with pxs"
-                    [ GridAutoColumns.values [px 100; px 150; px 390;] ]
-                    ["gridAutoColumns" ==> "100px 150px 390px"]
+                    [ GridAutoColumns.value [px 100; px 150; px 390;] ]
+                    "grid-auto-columns: 100px 150px 390px;"
                 testCase
                     "Grid auto columns multiple with percents"
-                    [ GridAutoColumns.values [pct 10; pct 33] ]
-                    ["gridAutoColumns" ==> "10% 33%"]
+                    [ GridAutoColumns.value [pct 10; pct 33] ]
+                    "grid-auto-columns: 10% 33%;"
                 testCase
                     "Grid auto columns multiple with fractions"
-                    [ GridAutoColumns.values [fr 0.5; fr 3.; fr 1.] ]
-                    ["gridAutoColumns" ==> "0.50fr 3.00fr 1.00fr"]
+                    [ GridAutoColumns.value [fr 0.5; fr 3.; fr 1.] ]
+                    "grid-auto-columns: 0.5fr 3fr 1fr;"
                 testCase
                     "Grid auto columns inherit"
                     [GridAutoColumns.inherit']
-                    ["gridAutoColumns" ==> "inherit"]
+                    "grid-auto-columns: inherit;"
                 testCase
                     "Grid auto columns initial"
                     [GridAutoColumns.initial]
-                    ["gridAutoColumns" ==> "initial"]
+                    "grid-auto-columns: initial;"
                 testCase
                     "Grid auto columns unset"
                     [GridAutoColumns.unset]
-                    ["gridAutoColumns" ==> "unset"]
+                    "grid-auto-columns: unset;"
                 testCase
                     "Grid auto rows min content"
                     [GridAutoRows.minContent]
-                    ["gridAutoRows" ==> "min-content"]
+                    "grid-auto-rows: min-content;"
                 testCase
                     "Grid auto rows max content"
                     [GridAutoRows.maxContent]
-                    ["gridAutoRows" ==> "max-content"]
+                    "grid-auto-rows: max-content;"
                 testCase
                     "Grid auto rows auto"
                     [GridAutoRows.auto]
-                    ["gridAutoRows" ==> "auto"]
+                    "grid-auto-rows: auto;"
                 testCase
                     "Grid auto rows px"
-                    [GridAutoRows' (px 100)]
-                    ["gridAutoRows" ==> "100px"]
+                    [GridAutoRows.value (px 100)]
+                    "grid-auto-rows: 100px;"
                 testCase
                     "Grid auto rows cm"
-                    [GridAutoRows' (cm 20.)]
-                    ["gridAutoRows" ==> "20.0cm"]
+                    [GridAutoRows.value (cm 20.)]
+                    "grid-auto-rows: 20cm;"
                 testCase
                     "Grid auto rows vmax"
-                    [GridAutoRows' (vmax 50.)]
-                    ["gridAutoRows" ==> "50.0vmax"]
+                    [GridAutoRows.value (vmax 50.)]
+                    "grid-auto-rows: 50vmax;"
                 testCase
                     "Grid auto rows percent"
-                    [GridAutoRows' (pct 10)]
-                    ["gridAutoRows" ==> "10%"]
+                    [GridAutoRows.value (pct 10)]
+                    "grid-auto-rows: 10%;"
                 testCase
                     "Grid auto rows fr"
-                    [GridAutoRows' (fr 0.5)]
-                    ["gridAutoRows" ==> "0.50fr"]
+                    [GridAutoRows.value (fr 0.5)]
+                    "grid-auto-rows: 0.5fr;"
                 testCase
                     "Grid auto rows fit content"
                     [GridAutoRows.fitContent(px 400) ]
-                    ["gridAutoRows" ==> "fit-content(400px)"]
+                    "grid-auto-rows: fit-content(400px);"
                 testCase
                     "Grid auto rows multiple with min-content max-content and auto"
-                    [ GridAutoRows.values [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
-                    ["gridAutoRows" ==> "min-content max-content"]
+                    [ GridAutoRows.value [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
+                    "grid-auto-rows: min-content max-content;"
                 testCase
                     "Grid auto rows multiple with pxs"
-                    [ GridAutoRows.values [px 100; px 150; px 390;] ]
-                    ["gridAutoRows" ==> "100px 150px 390px"]
+                    [ GridAutoRows.value [px 100; px 150; px 390;] ]
+                    "grid-auto-rows: 100px 150px 390px;"
                 testCase
                     "Grid auto rows multiple with percents"
-                    [ GridAutoRows.values [pct 10; pct 33] ]
-                    ["gridAutoRows" ==> "10% 33%"]
+                    [ GridAutoRows.value [pct 10; pct 33] ]
+                    "grid-auto-rows: 10% 33%;"
                 testCase
                     "Grid auto rows multiple with fractions"
-                    [ GridAutoRows.values [fr 0.5; fr 3.; fr 1.] ]
-                    ["gridAutoRows" ==> "0.50fr 3.00fr 1.00fr"]
+                    [ GridAutoRows.value [fr 0.5; fr 3.; fr 1.] ]
+                    "grid-auto-rows: 0.5fr 3fr 1fr;"
                 testCase
                     "Grid auto rows inherit"
                     [GridAutoRows.inherit']
-                    ["gridAutoRows" ==> "inherit"]
+                    "grid-auto-rows: inherit;"
                 testCase
                     "Grid auto rows initial"
                     [GridAutoRows.initial]
-                    ["gridAutoRows" ==> "initial"]
+                    "grid-auto-rows: initial;"
                 testCase
                     "Grid auto rows unset"
                     [GridAutoRows.unset]
-                    ["gridAutoRows" ==> "unset"]
+                    "grid-auto-rows: unset;"
                 testCase
                     "Grid auto flow rows"
                     [GridAutoFlow.row]
-                    ["gridAutoFlow" ==> "row"]
+                    "grid-auto-flow: row;"
                 testCase
                     "Grid auto flow columns"
                     [GridAutoFlow.column]
-                    ["gridAutoFlow" ==> "column"]
+                    "grid-auto-flow: column;"
                 testCase
                     "Grid auto flow dense"
                     [GridAutoFlow.dense]
-                    ["gridAutoFlow" ==> "dense"]
+                    "grid-auto-flow: dense;"
                 testCase
                     "Grid auto flow rows dense"
                     [GridAutoFlow.rowDense]
-                    ["gridAutoFlow" ==> "row dense"]
+                    "grid-auto-flow: row dense;"
                 testCase
                     "Grid auto flow columns dense"
                     [GridAutoFlow.columnDense]
-                    ["gridAutoFlow" ==> "column dense"]
+                    "grid-auto-flow: column dense;"
                 testCase
                     "Grid auto flow inherit"
                     [GridAutoFlow.inherit']
-                    ["gridAutoFlow" ==> "inherit"]
+                    "grid-auto-flow: inherit;"
                 testCase
                     "Grid auto flow initial"
                     [GridAutoFlow.initial]
-                    ["gridAutoFlow" ==> "initial"]
+                    "grid-auto-flow: initial;"
                 testCase
                     "Grid auto flow unset"
                     [GridAutoFlow.unset]
-                    ["gridAutoFlow" ==> "unset"]
+                    "grid-auto-flow: unset;"
                 testCase
                     "Grid template areas None"
                     [GridTemplateAreas.none]
-                    ["gridTemplateAreas" ==> "none"]
+                    "grid-template-areas: none;"
                 testCase
                     "Grid template areas strings"
                     [GridTemplateAreas.value [ "a"; "b"  ] ]
-                    ["gridTemplateAreas" ==> "\"a b\""]
+                    "grid-template-areas: \"a b\";"
                 testCase
                     "Grid template areas multiple strings"
                     [GridTemplateAreas.value
@@ -693,17 +789,21 @@ module Grid =
                             [ "footer";  "footer";  "footer";  "footer" ]
                         ]
                     ]
-                    ["gridTemplateAreas" ==> "\"header header header header\" \"main main . sidebar\" \"footer footer footer footer\""]
+                    "grid-template-areas:  \"header header header header\" \"main main . sidebar\" \"footer footer footer footer\";"
                 testCase
                     "Grid template areas inherit"
                     [GridTemplateAreas.inherit' ]
-                    ["gridTemplateAreas" ==> "inherit"]
+                    "grid-template-areas: inherit;"
                 testCase
                     "Grid template areas initial"
                     [GridTemplateAreas.initial]
-                    ["gridTemplateAreas" ==> "initial"]
+                    "grid-template-areas: initial;"
                 testCase
-                    "Grid template areas multiple unset"
+                    "Grid template areas unset"
                     [GridTemplateAreas.unset]
-                    ["gridTemplateAreas" ==> "unset"]
+                    "grid-template-areas: unset;"
+                testCase
+                    "Grid template areas revert"
+                    [GridTemplateAreas.revert]
+                    "grid-template-areas: revert;"
             ]

@@ -1,7 +1,6 @@
 ﻿namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -12,437 +11,489 @@ module Position =
                 testCase
                     "Direction rtl"
                     [ Direction.ltr ]
-                    ["direction" ==> "ltr"]
+                    "direction: ltr;"
                 testCase
                     "Direction ltr"
                     [ Direction.rtl ]
-                    ["direction" ==> "rtl"]
+                    "direction: rtl;"
                 testCase
                     "Direction Inherit"
                     [ Direction.inherit']
-                    [ "direction" ==> "inherit" ]
+                     "direction: inherit;" 
                 testCase
                     "Direction Initial"
                     [ Direction.initial]
-                    [ "direction" ==> "initial" ]
+                     "direction: initial;" 
                 testCase
                     "Direction Unset"
                     [ Direction.unset]
-                    [ "direction" ==> "unset" ]
+                     "direction: unset;" 
+                testCase
+                    "Direction revert"
+                    [ Direction.revert]
+                     "direction: revert;" 
                 testCase
                     "Box sizing border box "
                     [BoxSizing.borderBox]
-                    ["boxSizing" ==> "border-box"]
+                    "box-sizing: border-box;"
                 testCase
                     "Box sizing content box "
                     [BoxSizing.contentBox]
-                    ["boxSizing" ==> "content-box"]
+                    "box-sizing: content-box;"
+                testCase
+                    "BoxSizing Inherit"
+                    [ BoxSizing.inherit']
+                     "box-sizing: inherit;" 
+                testCase
+                    "BoxSizing Initial"
+                    [ BoxSizing.initial]
+                     "box-sizing: initial;" 
+                testCase
+                    "BoxSizing Unset"
+                    [ BoxSizing.unset]
+                     "box-sizing: unset;" 
+                testCase
+                    "BoxSizing revert"
+                    [ BoxSizing.revert]
+                     "box-sizing: revert;" 
                 testCase
                     "Left px"
-                    [ Left' (px 3) ]
-                    [ "left" ==> "3px" ]
+                    [ Left.value (px 3) ]
+                     "left: 3px;" 
                 testCase
                     "Left em"
-                    [ Left' (em 2.4) ]
-                    [ "left" ==> "2.4em" ]
+                    [ Left.value (em 2.4) ]
+                     "left: 2.4em;" 
                 testCase
                     "Left percent"
-                    [ Left' (pct 10) ]
-                    [ "left" ==> "10%" ]
+                    [ Left.value (pct 10) ]
+                     "left: 10%;" 
                 testCase
                     "Left Auto"
                     [ Left.auto]
-                    [ "left" ==> "auto" ]
+                     "left: auto;" 
                 testCase
                     "Left Inherit"
                     [ Left.inherit']
-                    [ "left" ==> "inherit" ]
+                     "left: inherit;" 
                 testCase
                     "Left Initial"
                     [ Left.initial]
-                    [ "left" ==> "initial" ]
+                     "left: initial;" 
                 testCase
                     "Left Unset"
                     [ Left.unset]
-                    [ "left" ==> "unset" ]
+                     "left: unset;" 
+                testCase
+                    "Left revert"
+                    [ Left.revert]
+                     "left: revert;" 
                 testCase
                     "Right px"
-                    [ Right' (px 3) ]
-                    [ "right" ==> "3px" ]
+                    [ Right.value (px 3) ]
+                     "right: 3px;" 
                 testCase
                     "Right em"
-                    [ Right' (em 2.4) ]
-                    [ "right" ==> "2.4em" ]
+                    [ Right.value (em 2.4) ]
+                     "right: 2.4em;" 
                 testCase
                     "Right percent"
-                    [ Right' (pct 10) ]
-                    [ "right" ==> "10%" ]
+                    [ Right.value (pct 10) ]
+                     "right: 10%;" 
                 testCase
                     "Right Auto"
                     [ Right.auto]
-                    [ "right" ==> "auto" ]
+                     "right: auto;" 
                 testCase
                     "Right Inherit"
                     [ Right.inherit']
-                    [ "right" ==> "inherit" ]
+                     "right: inherit;" 
                 testCase
                     "Right Initial"
                     [ Right.initial]
-                    [ "right" ==> "initial" ]
+                     "right: initial;" 
                 testCase
-                    "Right Unset"
+                    "Right unset"
                     [ Right.unset]
-                    [ "right" ==> "unset" ]
+                     "right: unset;" 
+                testCase
+                    "Right revert"
+                    [ Right.revert]
+                     "right: revert;" 
                 testCase
                     "Bottom px"
-                    [ Bottom' (px 3) ]
-                    [ "bottom" ==> "3px" ]
+                    [ Bottom.value (px 3) ]
+                     "bottom: 3px;" 
                 testCase
                     "Bottom em"
-                    [ Bottom' (em 2.4) ]
-                    [ "bottom" ==> "2.4em" ]
+                    [ Bottom.value (em 2.4) ]
+                     "bottom: 2.4em;" 
                 testCase
                     "Bottom percent"
-                    [ Bottom' (pct 10) ]
-                    [ "bottom" ==> "10%" ]
+                    [ Bottom.value (pct 10) ]
+                     "bottom: 10%;" 
                 testCase
                     "Bottom Auto"
                     [ Bottom.auto]
-                    [ "bottom" ==> "auto" ]
+                     "bottom: auto;" 
                 testCase
                     "Bottom Inherit"
                     [ Bottom.inherit']
-                    [ "bottom" ==> "inherit" ]
+                     "bottom: inherit;" 
                 testCase
                     "Bottom Initial"
                     [ Bottom.initial]
-                    [ "bottom" ==> "initial" ]
+                     "bottom: initial;" 
                 testCase
                     "Bottom Unset"
                     [ Bottom.unset]
-                    [ "bottom" ==> "unset" ]
+                     "bottom: unset;" 
+                testCase
+                    "Bottom revert"
+                    [ Bottom.revert]
+                     "bottom: revert;" 
                 testCase
                     "Top px"
-                    [ Top' (px 3) ]
-                    [ "top" ==> "3px" ]
+                    [ Top.value (px 3) ]
+                     "top: 3px;" 
                 testCase
                     "Top em"
-                    [ Top' (em 2.4) ]
-                    [ "top" ==> "2.4em" ]
+                    [ Top.value (em 2.4) ]
+                     "top: 2.4em;" 
                 testCase
                     "Top percent"
-                    [ Top' (pct 10) ]
-                    [ "top" ==> "10%" ]
-                testCase
+                    [ Top.value (pct 10) ]
+                     "top: 10%;" 
+                ;testCase
                     "Top Auto"
                     [ Top.auto]
-                    [ "top" ==> "auto" ]
+                     "top: auto;" 
                 testCase
                     "Top Inherit"
                     [ Top.inherit']
-                    [ "top" ==> "inherit" ]
+                     "top: inherit;" 
                 testCase
                     "Top Initial"
                     [ Top.initial]
-                    [ "top" ==> "initial" ]
+                     "top: initial;" 
                 testCase
                     "Top Unset"
                     [ Top.unset]
-                    [ "top" ==> "unset" ]
+                     "top: unset;" 
+                testCase
+                    "Top revert"
+                    [ Top.revert]
+                     "top: revert;" 
                 testCase
                     "Vertical align baseline"
                     [ VerticalAlign.baseline]
-                    ["verticalAlign" ==> "baseline"]
+                    "vertical-align: baseline;"
                 testCase
                     "Vertical align sub"
                     [ VerticalAlign.sub]
-                    ["verticalAlign" ==> "sub"]
+                    "vertical-align: sub;"
                 testCase
                     "Vertical align super"
                     [ VerticalAlign.super]
-                    ["verticalAlign" ==> "super"]
+                    "vertical-align: super;"
                 testCase
                     "Vertical align text top"
                     [ VerticalAlign.textTop]
-                    ["verticalAlign" ==> "text-top"]
+                    "vertical-align: text-top;"
                 testCase
                     "Vertical align text bottom"
                     [ VerticalAlign.textBottom]
-                    ["verticalAlign" ==> "text-bottom"]
+                    "vertical-align: text-bottom;"
                 testCase
                     "Vertical align middle"
                     [ VerticalAlign.middle]
-                    ["verticalAlign" ==> "middle"]
+                    "vertical-align: middle;"
                 testCase
                     "Vertical align top"
                     [ VerticalAlign.top]
-                    ["verticalAlign" ==> "top"]
+                    "vertical-align: top;"
                 testCase
                     "Vertical align bottom"
                     [ VerticalAlign.bottom]
-                    ["verticalAlign" ==> "bottom"]
+                    "vertical-align: bottom;"
                 testCase
                     "Vertical align px"
-                    [ VerticalAlign' (px 10)]
-                    ["verticalAlign" ==> "10px"]
+                    [ VerticalAlign.value (px 10)]
+                    "vertical-align: 10px;"
                 testCase
                     "Vertical align percent"
-                    [ VerticalAlign' (pct 100)]
-                    ["verticalAlign" ==> "100%"]
+                    [ VerticalAlign.value (pct 100)]
+                    "vertical-align: 100%;"
                 testCase
                     "Vertical align  inherit"
                     [ VerticalAlign.inherit' ]
-                    ["verticalAlign" ==> "inherit"]
+                    "vertical-align: inherit;"
                 testCase
                     "Vertical align initial"
                     [ VerticalAlign.initial ]
-                    ["verticalAlign" ==> "initial"]
+                    "vertical-align: initial;"
                 testCase
                     "Vertical align unset"
                     [ VerticalAlign.unset ]
-                    ["verticalAlign" ==> "unset"]
+                    "vertical-align: unset;"
                 testCase
                     "Position static"
                     [ Position.static']
-                    ["position" ==> "static"]
+                    "position: static;"
                 testCase
                     "Position relative"
                     [ Position.relative]
-                    ["position" ==> "relative"]
+                    "position: relative;"
                 testCase
                     "Position absolute"
                     [ Position.absolute]
-                    ["position" ==> "absolute"]
+                    "position: absolute;"
                 testCase
                     "Position sticky"
                     [ Position.sticky]
-                    ["position" ==> "sticky"]
+                    "position: sticky;"
                 testCase
                     "Position fixed"
                     [ Position.fixed']
-                    ["position" ==> "fixed"]
+                    "position: fixed;"
                 testCase
                     "Float left"
                     [ Float.left]
-                    ["float" ==> "left"]
+                    "float: left;"
                 testCase
                     "Float right"
                     [ Float.right]
-                    ["float" ==> "right"]
+                    "float: right;"
                 testCase
                     "Float inline-start"
                     [ Float.inlineStart]
-                    ["float" ==> "inline-start"]
+                    "float: inline-start;"
                 testCase
                     "Float inline-end"
                     [ Float.inlineEnd]
-                    ["float" ==> "inline-end"]
+                    "float: inline-end;"
                 testCase
                     "Float none"
                     [ Float.none]
-                    ["float" ==> "none"]
+                    "float: none;"
                 testCase
                     "Float inherit"
                     [ Float.inherit']
-                    ["float" ==> "inherit"]
+                    "float: inherit;"
                 testCase
                     "Float initial"
                     [ Float.initial]
-                    ["float" ==> "initial"]
+                    "float: initial;"
                 testCase
                     "Float unset"
                     [ Float.unset]
-                    ["float" ==> "unset"]
+                    "float: unset;"
                 testCase
                     "WritingMode horizontal-tb"
                     [ WritingMode.horizontalTb]
-                    ["writingMode" ==> "horizontal-tb"]
+                    "writing-mode: horizontal-tb;"
                 testCase
                     "WritingMode vertical-rl"
                     [ WritingMode.verticalRl]
-                    ["writingMode" ==> "vertical-rl"]
+                    "writing-mode: vertical-rl;"
                 testCase
                     "WritingMode vertical-lr"
                     [ WritingMode.verticalLr]
-                    ["writingMode" ==> "vertical-lr"]
+                    "writing-mode: vertical-lr;"
                 testCase
                     "WritingMode inherit"
                     [ WritingMode.inherit']
-                    ["writingMode" ==> "inherit"]
+                    "writing-mode: inherit;"
                 testCase
                     "WritingMode initial"
                     [ WritingMode.initial]
-                    ["writingMode" ==> "initial"]
+                    "writing-mode: initial;"
                 testCase
                     "WritingMode unset"
                     [ WritingMode.unset]
-                    ["writingMode" ==> "unset"]
+                    "writing-mode: unset;"
+                testCase
+                    "WritingMode revert"
+                    [ WritingMode.revert]
+                    "writing-mode: revert;"
                 testCase
                     "BreakAfter avoid"
                     [BreakAfter.avoid]
-                    ["breakAfter" ==> "avoid"]
+                    "break-after: avoid;"
                 testCase
                     "BreakAfter always"
                     [BreakAfter.always]
-                    ["breakAfter" ==> "always"]
+                    "break-after: always;"
                 testCase
                     "BreakAfter all"
                     [BreakAfter.all]
-                    ["breakAfter" ==> "all"]
+                    "break-after: all;"
                 testCase
                     "BreakAfter avoid-page"
                     [BreakAfter.avoidPage]
-                    ["breakAfter" ==> "avoid-page"]
+                    "break-after: avoid-page;"
                 testCase
                     "BreakAfter page"
                     [BreakAfter.page]
-                    ["breakAfter" ==> "page"]
+                    "break-after: page;"
                 testCase
                     "BreakAfter left"
                     [BreakAfter.left]
-                    ["breakAfter" ==> "left"]
+                    "break-after: left;"
                 testCase
                     "BreakAfter right"
                     [BreakAfter.right]
-                    ["breakAfter" ==> "right"]
+                    "break-after: right;"
                 testCase
                     "BreakAfter recto"
                     [BreakAfter.recto]
-                    ["breakAfter" ==> "recto"]
+                    "break-after: recto;"
                 testCase
                     "BreakAfter verso"
                     [BreakAfter.verso]
-                    ["breakAfter" ==> "verso"]
+                    "break-after: verso;"
                 testCase
                     "BreakAfter avoid-column"
                     [BreakAfter.avoidColumn]
-                    ["breakAfter" ==> "avoid-column"]
+                    "break-after: avoid-column;"
                 testCase
                     "BreakAfter column"
                     [BreakAfter.column]
-                    ["breakAfter" ==> "column"]
+                    "break-after: column;"
                 testCase
                     "BreakAfter avoid-region"
                     [BreakAfter.avoidRegion]
-                    ["breakAfter" ==> "avoid-region"]
+                    "break-after: avoid-region;"
                 testCase
                     "BreakAfter region"
                     [BreakAfter.region]
-                    ["breakAfter" ==> "region"]
+                    "break-after: region;"
                 testCase
                     "BreakAfter auto"
                     [ BreakAfter.auto]
-                    ["breakAfter" ==> "auto"]
+                    "break-after: auto;"
                 testCase
                     "BreakAfter inherit"
                     [ BreakAfter.inherit']
-                    ["breakAfter" ==> "inherit"]
+                    "break-after: inherit;"
                 testCase
                     "BreakAfter initial"
                     [ BreakAfter.initial]
-                    ["breakAfter" ==> "initial"]
+                    "break-after: initial;"
                 testCase
                     "BreakAfter unset"
                     [ BreakAfter.unset]
-                    ["breakAfter" ==> "unset"]
+                    "break-after: unset;"
+                testCase
+                    "BreakAfter revert"
+                    [ BreakAfter.revert]
+                    "break-after: revert;"
                 testCase
                     "BreakBefore avoid"
                     [BreakBefore.avoid]
-                    ["breakBefore" ==> "avoid"]
+                    "break-before: avoid;"
                 testCase
                     "BreakBefore always"
                     [BreakBefore.always]
-                    ["breakBefore" ==> "always"]
+                    "break-before: always;"
                 testCase
                     "BreakBefore all"
                     [BreakBefore.all]
-                    ["breakBefore" ==> "all"]
+                    "break-before: all;"
                 testCase
                     "BreakBefore avoid-page"
                     [BreakBefore.avoidPage]
-                    ["breakBefore" ==> "avoid-page"]
+                    "break-before: avoid-page;"
                 testCase
                     "BreakBefore page"
                     [BreakBefore.page]
-                    ["breakBefore" ==> "page"]
+                    "break-before: page;"
                 testCase
                     "BreakBefore left"
                     [BreakBefore.left]
-                    ["breakBefore" ==> "left"]
+                    "break-before: left;"
                 testCase
                     "BreakBefore right"
                     [BreakBefore.right]
-                    ["breakBefore" ==> "right"]
+                    "break-before: right;"
                 testCase
                     "BreakBefore recto"
                     [BreakBefore.recto]
-                    ["breakBefore" ==> "recto"]
+                    "break-before: recto;"
                 testCase
                     "BreakBefore verso"
                     [BreakBefore.verso]
-                    ["breakBefore" ==> "verso"]
+                    "break-before: verso;"
                 testCase
                     "BreakBefore avoid-column"
                     [BreakBefore.avoidColumn]
-                    ["breakBefore" ==> "avoid-column"]
+                    "break-before: avoid-column;"
                 testCase
                     "BreakBefore column"
                     [BreakBefore.column]
-                    ["breakBefore" ==> "column"]
+                    "break-before: column;"
                 testCase
                     "BreakBefore avoid-region"
                     [BreakBefore.avoidRegion]
-                    ["breakBefore" ==> "avoid-region"]
+                    "break-before: avoid-region;"
                 testCase
                     "BreakBefore region"
                     [BreakBefore.region]
-                    ["breakBefore" ==> "region"]
+                    "break-before: region;"
                 testCase
                     "BreakBefore auto"
                     [ BreakBefore.auto]
-                    ["breakBefore" ==> "auto"]
+                    "break-before: auto;"
                 testCase
                     "BreakBefore inherit"
                     [ BreakBefore.inherit']
-                    ["breakBefore" ==> "inherit"]
+                    "break-before: inherit;"
                 testCase
                     "BreakBefore initial"
                     [ BreakBefore.initial]
-                    ["breakBefore" ==> "initial"]
+                    "break-before: initial;"
                 testCase
                     "BreakBefore unset"
                     [ BreakBefore.unset]
-                    ["breakBefore" ==> "unset"]
+                    "break-before: unset;"
+                testCase
+                    "BreakBefore revert"
+                    [ BreakBefore.revert]
+                    "break-before: revert;"
                 testCase
                     "BreakInside avoid"
                     [BreakInside.avoid]
-                    ["breakInside" ==> "avoid"]
+                    "break-inside: avoid;"
                 testCase
                     "BreakInside avoid-page"
                     [BreakInside.avoidPage]
-                    ["breakInside" ==> "avoid-page"]
+                    "break-inside: avoid-page;"
                 testCase
                     "BreakInside avoid-column"
                     [BreakInside.avoidColumn]
-                    ["breakInside" ==> "avoid-column"]
+                    "break-inside: avoid-column;"
                 testCase
                     "BreakInside avoid-region"
                     [BreakInside.avoidRegion]
-                    ["breakInside" ==> "avoid-region"]
+                    "break-inside: avoid-region;"
                 testCase
                     "BreakInside auto"
                     [ BreakInside.auto]
-                    ["breakInside" ==> "auto"]
+                    "break-inside: auto;"
                 testCase
                     "BreakInside inherit"
                     [ BreakInside.inherit']
-                    ["breakInside" ==> "inherit"]
+                    "break-inside: inherit;"
                 testCase
                     "BreakInside initial"
                     [ BreakInside.initial]
-                    ["breakInside" ==> "initial"]
+                    "break-inside: initial;"
                 testCase
                     "BreakInside unset"
                     [ BreakInside.unset]
-                    ["breakInside" ==> "unset"]
+                    "break-inside: unset;"
+                testCase
+                    "BreakInside revert"
+                    [ BreakInside.revert]
+                    "break-inside: revert;"
             ]

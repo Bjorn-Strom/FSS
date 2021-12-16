@@ -1,7 +1,6 @@
 ﻿namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -12,710 +11,785 @@ module Border =
                 testCase
                     "Border initial"
                     [ Border.initial ]
-                    [ "border" ==> "initial" ]
+                    "border: initial;"
                 testCase
                     "Border inherit"
                     [ Border.inherit' ]
-                    [ "border" ==> "inherit" ]
+                     "border: inherit;" 
                 testCase
                     "Border unset"
                     [ Border.unset ]
-                    [ "border" ==> "unset" ]
+                     "border: unset;" 
+                testCase
+                    "Border revert"
+                    [ Border.revert ]
+                     "border: revert;" 
                 testCase
                     "Border none"
                     [ Border.none ]
-                    [ "border" ==> "none" ]
+                     "border: none;" 
                 testCase
-                    "Borderstyle hidden"
+                    "Border-style hidden"
                     [ BorderStyle.hidden ]
-                    [ "borderStyle" ==> "hidden" ]
+                     "border-style: hidden;" 
                 testCase
-                    "Borderstyle dotted"
+                    "Border-style dotted"
                     [ BorderStyle.dotted ]
-                    [ "borderStyle" ==> "dotted" ]
+                     "border-style: dotted;" 
                 testCase
-                    "Borderstyle dashed"
+                    "Border-style dashed"
                     [ BorderStyle.dashed ]
-                    [ "borderStyle" ==> "dashed" ]
+                     "border-style: dashed;" 
                 testCase
-                    "Borderstyle solid"
+                    "Border-style solid"
                     [ BorderStyle.solid ]
-                    [ "borderStyle" ==> "solid" ]
+                     "border-style: solid;" 
                 testCase
-                    "Borderstyle double"
+                    "Border-style double"
                     [ BorderStyle.double ]
-                    [ "borderStyle" ==> "double" ]
+                     "border-style: double;" 
                 testCase
-                    "Borderstyle groove"
+                    "Border-style groove"
                     [ BorderStyle.groove ]
-                    [ "borderStyle" ==> "groove" ]
+                     "border-style: groove;" 
                 testCase
-                    "Borderstyle ridge"
+                    "Border-style ridge"
                     [ BorderStyle.ridge ]
-                    [ "borderStyle" ==> "ridge" ]
+                     "border-style: ridge;" 
                 testCase
-                    "Borderstyle inset"
+                    "Border-style inset"
                     [ BorderStyle.inset ]
-                    [ "borderStyle" ==> "inset" ]
+                     "border-style: inset;" 
                 testCase
-                    "Borderstyle outset"
+                    "Border-style outset"
                     [ BorderStyle.outset ]
-                    [ "borderStyle" ==> "outset" ]
+                     "border-style: outset;" 
                 testCase
-                    "Borderstyle multiple"
+                    "Border-style multiple"
                     [ BorderStyle.value(FssTypes.Border.Style.Inset, FssTypes.Border.Style.Outset, FssTypes.Border.Style.Ridge, FssTypes.Border.Style.Groove) ]
-                    [ "borderStyle" ==> "inset outset ridge groove" ]
+                     "border-style: inset outset ridge groove;" 
                 testCase
-                    "Borderstyle none"
+                    "Border-style none"
                     [ BorderStyle.none ]
-                    [ "borderStyle" ==> "none" ]
+                     "border-style: none;" 
                 testCase
-                    "Borderstyle initial"
+                    "Border-style initial"
                     [ BorderStyle.initial ]
-                    [ "borderStyle" ==> "initial" ]
+                     "border-style: initial;" 
                 testCase
-                    "Borderstyle inherit"
+                    "Border-style inherit"
                     [ BorderStyle.inherit' ]
-                    [ "borderStyle" ==> "inherit" ]
+                     "border-style: inherit;" 
                 testCase
-                    "Borderstyle unset"
+                    "Border-style unset"
                     [ BorderStyle.unset ]
-                    [ "borderStyle" ==> "unset" ]
-
-
-
-
-
+                     "border-style: unset;" 
                 testCase
-                    "BorderTopStyle hidden"
+                    "Border-style revert"
+                    [ BorderStyle.revert ]
+                     "border-style: revert;" 
+                testCase
+                    "Border-top-style hidden"
                     [ BorderTopStyle.hidden ]
-                    [ "borderTopStyle" ==> "hidden" ]
+                     "border-top-style: hidden;" 
                 testCase
-                    "BorderTopStyle dotted"
+                    "Border-top-style dotted"
                     [ BorderTopStyle.dotted ]
-                    [ "borderTopStyle" ==> "dotted" ]
+                     "border-top-style: dotted;" 
                 testCase
-                    "BorderTopStyle dashed"
+                    "Border-top-style dashed"
                     [ BorderTopStyle.dashed ]
-                    [ "borderTopStyle" ==> "dashed" ]
+                     "border-top-style: dashed;" 
                 testCase
-                    "BorderTopStyle solid"
+                    "Border-top-style solid"
                     [ BorderTopStyle.solid ]
-                    [ "borderTopStyle" ==> "solid" ]
+                     "border-top-style: solid;" 
                 testCase
-                    "BorderTopStyle double"
+                    "Border-top-style double"
                     [ BorderTopStyle.double ]
-                    [ "borderTopStyle" ==> "double" ]
+                     "border-top-style: double;" 
                 testCase
-                    "BorderTopStyle groove"
+                    "Border-top-style groove"
                     [ BorderTopStyle.groove ]
-                    [ "borderTopStyle" ==> "groove" ]
+                     "border-top-style: groove;" 
                 testCase
-                    "BorderTopStyle ridge"
+                    "Border-top-style ridge"
                     [ BorderTopStyle.ridge ]
-                    [ "borderTopStyle" ==> "ridge" ]
+                     "border-top-style: ridge;" 
                 testCase
-                    "BorderTopStyle inset"
+                    "Border-top-style inset"
                     [ BorderTopStyle.inset ]
-                    [ "borderTopStyle" ==> "inset" ]
+                     "border-top-style: inset;" 
                 testCase
-                    "BorderTopStyle outset"
+                    "Border-top-style outset"
                     [ BorderTopStyle.outset ]
-                    [ "borderTopStyle" ==> "outset" ]
+                     "border-top-style: outset;" 
                 testCase
-                    "BorderTopStyle none"
+                    "Border-top-style none"
                     [ BorderTopStyle.none ]
-                    [ "borderTopStyle" ==> "none" ]
+                     "border-top-style: none;" 
                 testCase
-                    "BorderTopStyle initial"
+                    "Border-top-style initial"
                     [ BorderTopStyle.initial ]
-                    [ "borderTopStyle" ==> "initial" ]
+                     "border-top-style: initial;" 
                 testCase
-                    "BorderTopStyle inherit"
+                    "Border-top-style inherit"
                     [ BorderTopStyle.inherit' ]
-                    [ "borderTopStyle" ==> "inherit" ]
+                     "border-top-style: inherit;" 
                 testCase
-                    "BorderTopStyle unset"
+                    "Border-top-style unset"
                     [ BorderTopStyle.unset ]
-                    [ "borderTopStyle" ==> "unset" ]
+                     "border-top-style: unset;"
                 testCase
-                    "BorderRightStyle hidden"
+                    "Border-top-style revert"
+                    [ BorderTopStyle.revert ]
+                     "border-top-style: revert;" 
+                testCase
+                    "Border-right-style hidden"
                     [ BorderRightStyle.hidden ]
-                    [ "borderRightStyle" ==> "hidden" ]
+                     "border-right-style: hidden;" 
                 testCase
-                    "BorderRightStyle dotted"
+                    "Border-right-style dotted"
                     [ BorderRightStyle.dotted ]
-                    [ "borderRightStyle" ==> "dotted" ]
+                     "border-right-style: dotted;" 
                 testCase
-                    "BorderRightStyle dashed"
+                    "Border-right-style dashed"
                     [ BorderRightStyle.dashed ]
-                    [ "borderRightStyle" ==> "dashed" ]
+                     "border-right-style: dashed;" 
                 testCase
-                    "BorderRightStyle solid"
+                    "Border-right-style solid"
                     [ BorderRightStyle.solid ]
-                    [ "borderRightStyle" ==> "solid" ]
+                     "border-right-style: solid;" 
                 testCase
-                    "BorderRightStyle double"
+                    "Border-right-style double"
                     [ BorderRightStyle.double ]
-                    [ "borderRightStyle" ==> "double" ]
+                     "border-right-style: double;" 
                 testCase
-                    "BorderRightStyle groove"
+                    "Border-right-style groove"
                     [ BorderRightStyle.groove ]
-                    [ "borderRightStyle" ==> "groove" ]
+                     "border-right-style: groove;" 
                 testCase
-                    "BorderRightStyle ridge"
+                    "Border-right-style ridge"
                     [ BorderRightStyle.ridge ]
-                    [ "borderRightStyle" ==> "ridge" ]
+                     "border-right-style: ridge;" 
                 testCase
-                    "BorderRightStyle inset"
+                    "Border-right-style inset"
                     [ BorderRightStyle.inset ]
-                    [ "borderRightStyle" ==> "inset" ]
+                     "border-right-style: inset;" 
                 testCase
-                    "BorderRightStyle outset"
+                    "Border-right-style outset"
                     [ BorderRightStyle.outset ]
-                    [ "borderRightStyle" ==> "outset" ]
+                     "border-right-style: outset;" 
                 testCase
-                    "BorderRightStyle none"
+                    "Border-right-style none"
                     [ BorderRightStyle.none ]
-                    [ "borderRightStyle" ==> "none" ]
+                     "border-right-style: none;" 
                 testCase
-                    "BorderRightStyle initial"
+                    "Border-right-style initial"
                     [ BorderRightStyle.initial ]
-                    [ "borderRightStyle" ==> "initial" ]
+                     "border-right-style: initial;" 
                 testCase
-                    "BorderRightStyle inherit"
+                    "Border-right-style inherit"
                     [ BorderRightStyle.inherit' ]
-                    [ "borderRightStyle" ==> "inherit" ]
+                     "border-right-style: inherit;" 
                 testCase
-                    "BorderRightStyle unset"
+                    "Border-right-style unset"
                     [ BorderRightStyle.unset ]
-                    [ "borderRightStyle" ==> "unset" ]
+                     "border-right-style: unset;"
                 testCase
-                    "BorderBottomStyle hidden"
+                    "Border-right-style revert"
+                    [ BorderRightStyle.revert ]
+                     "border-right-style: revert;" 
+                testCase
+                    "Border-bottom-style hidden"
                     [ BorderBottomStyle.hidden ]
-                    [ "borderBottomStyle" ==> "hidden" ]
+                     "border-bottom-style: hidden;" 
                 testCase
-                    "BorderBottomStyle dotted"
+                    "Border-bottom-style dotted"
                     [ BorderBottomStyle.dotted ]
-                    [ "borderBottomStyle" ==> "dotted" ]
+                     "border-bottom-style: dotted;" 
                 testCase
-                    "BorderBottomStyle dashed"
+                    "Border-bottom-style dashed"
                     [ BorderBottomStyle.dashed ]
-                    [ "borderBottomStyle" ==> "dashed" ]
+                     "border-bottom-style: dashed;" 
                 testCase
-                    "BorderBottomStyle solid"
+                    "Border-bottom-style solid"
                     [ BorderBottomStyle.solid ]
-                    [ "borderBottomStyle" ==> "solid" ]
+                     "border-bottom-style: solid;" 
                 testCase
-                    "BorderBottomStyle double"
+                    "Border-bottom-style double"
                     [ BorderBottomStyle.double ]
-                    [ "borderBottomStyle" ==> "double" ]
+                     "border-bottom-style: double;" 
                 testCase
-                    "BorderBottomStyle groove"
+                    "Border-bottom-style groove"
                     [ BorderBottomStyle.groove ]
-                    [ "borderBottomStyle" ==> "groove" ]
+                     "border-bottom-style: groove;" 
                 testCase
-                    "BorderBottomStyle ridge"
+                    "Border-bottom-style ridge"
                     [ BorderBottomStyle.ridge ]
-                    [ "borderBottomStyle" ==> "ridge" ]
+                     "border-bottom-style: ridge;" 
                 testCase
-                    "BorderBottomStyle inset"
+                    "Border-bottom-style inset"
                     [ BorderBottomStyle.inset ]
-                    [ "borderBottomStyle" ==> "inset" ]
+                     "border-bottom-style: inset;" 
                 testCase
-                    "BorderBottomStyle outset"
+                    "Border-bottom-style outset"
                     [ BorderBottomStyle.outset ]
-                    [ "borderBottomStyle" ==> "outset" ]
+                     "border-bottom-style: outset;" 
                 testCase
-                    "BorderBottomStyle none"
+                    "Border-bottom-style none"
                     [ BorderBottomStyle.none ]
-                    [ "borderBottomStyle" ==> "none" ]
+                     "border-bottom-style: none;" 
                 testCase
-                    "BorderBottomStyle initial"
+                    "Border-bottom-style initial"
                     [ BorderBottomStyle.initial ]
-                    [ "borderBottomStyle" ==> "initial" ]
+                     "border-bottom-style: initial;" 
                 testCase
-                    "BorderBottomStyle inherit"
+                    "Border-bottom-style inherit"
                     [ BorderBottomStyle.inherit' ]
-                    [ "borderBottomStyle" ==> "inherit" ]
+                     "border-bottom-style: inherit;" 
                 testCase
-                    "BorderBottomStyle unset"
+                    "Border-bottom-style unset"
                     [ BorderBottomStyle.unset ]
-                    [ "borderBottomStyle" ==> "unset" ]
+                     "border-bottom-style: unset;"
                 testCase
-                    "BorderLeftStyle hidden"
+                    "Border-bottom-style revert"
+                    [ BorderBottomStyle.revert ]
+                     "border-bottom-style: revert;" 
+                testCase
+                    "Border-left-style hidden"
                     [ BorderLeftStyle.hidden ]
-                    [ "borderLeftStyle" ==> "hidden" ]
+                     "border-left-style: hidden;" 
                 testCase
-                    "BorderLeftStyle dotted"
+                    "Border-left-style dotted"
                     [ BorderLeftStyle.dotted ]
-                    [ "borderLeftStyle" ==> "dotted" ]
+                     "border-left-style: dotted;" 
                 testCase
-                    "BorderLeftStyle dashed"
+                    "Border-left-style dashed"
                     [ BorderLeftStyle.dashed ]
-                    [ "borderLeftStyle" ==> "dashed" ]
+                     "border-left-style: dashed;" 
                 testCase
-                    "BorderLeftStyle solid"
+                    "Border-left-style solid"
                     [ BorderLeftStyle.solid ]
-                    [ "borderLeftStyle" ==> "solid" ]
+                     "border-left-style: solid;" 
                 testCase
-                    "BorderLeftStyle double"
+                    "Border-left-style double"
                     [ BorderLeftStyle.double ]
-                    [ "borderLeftStyle" ==> "double" ]
+                     "border-left-style: double;" 
                 testCase
-                    "BorderLeftStyle groove"
+                    "Border-left-style groove"
                     [ BorderLeftStyle.groove ]
-                    [ "borderLeftStyle" ==> "groove" ]
+                     "border-left-style: groove;" 
                 testCase
-                    "BorderLeftStyle ridge"
+                    "Border-left-style ridge"
                     [ BorderLeftStyle.ridge ]
-                    [ "borderLeftStyle" ==> "ridge" ]
+                     "border-left-style: ridge;" 
                 testCase
-                    "BorderLeftStyle inset"
+                    "Border-left-style inset"
                     [ BorderLeftStyle.inset ]
-                    [ "borderLeftStyle" ==> "inset" ]
+                     "border-left-style: inset;" 
                 testCase
-                    "BorderLeftStyle outset"
+                    "Border-left-style outset"
                     [ BorderLeftStyle.outset ]
-                    [ "borderLeftStyle" ==> "outset" ]
+                     "border-left-style: outset;" 
                 testCase
-                    "BorderLeftStyle none"
+                    "Border-left-style none"
                     [ BorderLeftStyle.none ]
-                    [ "borderLeftStyle" ==> "none" ]
+                     "border-left-style: none;" 
                 testCase
-                    "BorderLeftStyle initial"
+                    "Border-left-style initial"
                     [ BorderLeftStyle.initial ]
-                    [ "borderLeftStyle" ==> "initial" ]
+                     "border-left-style: initial;" 
                 testCase
-                    "BorderLeftStyle inherit"
+                    "Border-left-style inherit"
                     [ BorderLeftStyle.inherit' ]
-                    [ "borderLeftStyle" ==> "inherit" ]
+                     "border-left-style: inherit;" 
                 testCase
-                    "BorderLeftStyle unset"
+                    "Border-left-style unset"
                     [ BorderLeftStyle.unset ]
-                    [ "borderLeftStyle" ==> "unset" ]
+                     "border-left-style: unset;"
+                testCase
+                    "Border-left-style revert"
+                    [ BorderLeftStyle.revert ]
+                     "border-left-style: revert;" 
                 testCase
                     "Border radius px"
-                    [ BorderRadius' (px 10)]
-                    [ "borderRadius" ==> "10px" ]
+                    [ BorderRadius.value (px 10)]
+                     "border-radius: 10px;" 
                 testCase
                     "Border radius percent"
-                    [ BorderRadius' (pct 50)]
-                    [ "borderRadius" ==> "50%" ]
+                    [ BorderRadius.value (pct 50)]
+                     "border-radius: 50%;" 
                 testCase
                     "Border top left radius px"
-                    [ BorderTopLeftRadius' (px 10)]
-                    ["borderTopLeftRadius" ==> "10px"]
+                    [ BorderTopLeftRadius.value (px 10)]
+                    "border-top-left-radius: 10px;"
                 testCase
                     "Border top right radius px"
-                    [ BorderTopRightRadius' (px 10)]
-                    ["borderTopRightRadius" ==> "10px"]
+                    [ BorderTopRightRadius.value (px 10)]
+                    "border-top-right-radius: 10px;"
                 testCase
                     "Border bottom left radius"
-                    [ BorderBottomLeftRadius' (px 10)]
-                    ["borderBottomLeftRadius" ==> "10px"]
+                    [ BorderBottomLeftRadius.value (px 10)]
+                    "border-bottom-left-radius: 10px;"
                 testCase
                     "Border bottom right radius px"
-                    [ BorderBottomRightRadius' (px 10)]
-                    ["borderBottomRightRadius" ==> "10px"]
+                    [ BorderBottomRightRadius.value (px 10)]
+                    "border-bottom-right-radius: 10px;"
                 testCase
                     "Border radius multiple px"
                     [ BorderRadius.value (px 10, px 20, px 30, px 40) ]
-                    [ "borderRadius" ==> "10px 20px 30px 40px" ]
+                     "border-radius: 10px 20px 30px 40px;" 
                 testCase
                     "Border radius top left initial"
                     [ BorderTopLeftRadius.initial ]
-                    ["borderTopLeftRadius" ==> "initial"]
+                    "border-top-left-radius: initial;"
                 testCase
                     "Border radius top right inherit"
                     [ BorderTopRightRadius.inherit' ]
-                    ["borderTopRightRadius" ==> "inherit"]
+                    "border-top-right-radius: inherit;"
                 testCase
                     "Border bottom left radius unset"
                     [ BorderBottomLeftRadius.unset ]
-                    ["borderBottomLeftRadius" ==> "unset"]
+                    "border-bottom-left-radius: unset;"
+                testCase
+                    "Border bottom left radius revert"
+                    [ BorderBottomLeftRadius.revert ]
+                    "border-bottom-left-radius: revert;"
                 testCase
                     "Border bottom right radius initial"
                     [ BorderBottomRightRadius.initial ]
-                    ["borderBottomRightRadius" ==> "initial"]
+                    "border-bottom-right-radius: initial;"
                 testCase
                     "Border radius inherit"
                     [ BorderRadius.inherit' ]
-                    ["borderRadius" ==> "inherit"]
+                    "border-radius: inherit;"
                 testCase
                     "Border radius inherit"
                     [ BorderRadius.inherit' ]
-                    ["borderRadius" ==> "inherit"]
+                    "border-radius: inherit;"
                 testCase
                     "Border radius unset"
                     [ BorderRadius.unset ]
-                    ["borderRadius" ==> "unset"]
+                    "border-radius: unset;"
+                testCase
+                    "Border radius revert"
+                    [ BorderRadius.revert ]
+                    "border-radius: revert;"
                 testCase
                     "Border width px"
-                    [ BorderWidth' (px 40) ]
-                    [ "borderWidth" ==> "40px" ]
+                    [ BorderWidth.value (px 40) ]
+                     "border-width: 40px;" 
                 testCase
                     "Border width thin"
                     [ BorderWidth.thin ]
-                    [ "borderWidth" ==> "thin" ]
+                     "border-width: thin;" 
                 testCase
                     "Border width medium"
                     [ BorderWidth.medium ]
-                    [ "borderWidth" ==> "medium" ]
+                     "border-width: medium;" 
                 testCase
                     "Border width thick"
                     [ BorderWidth.thick ]
-                    [ "borderWidth" ==> "thick" ]
+                     "border-width: thick;" 
                 testCase
                     "Border width initial"
                     [ BorderWidth.initial ]
-                    [ "borderWidth" ==> "initial" ]
+                     "border-width: initial;" 
                 testCase
                     "Border width inherit"
                     [ BorderWidth.inherit' ]
-                    [ "borderWidth" ==> "inherit" ]
+                     "border-width: inherit;" 
                 testCase
                     "Border width unset"
                     [ BorderWidth.unset ]
-                    [ "borderWidth" ==> "unset" ]
+                     "border-width: unset;"
+                testCase
+                    "Border width revert"
+                    [ BorderWidth.revert ]
+                     "border-width: revert;" 
                 testCase
                     "Border widths combination"
                     [ BorderWidth.value (px 1, px 20, em 3.0, rem 4.5) ]
-                    [ "borderWidth" ==> "1px 20px 3.0em 4.5rem" ]
+                     "border-width: 1px 20px 3em 4.5rem;" 
                 testCase
                     "Border top width px"
-                    [ BorderTopWidth' (px 40) ]
-                    [ "borderTopWidth" ==> "40px" ]
+                    [ BorderTopWidth.value (px 40) ]
+                     "border-top-width: 40px;" 
                 testCase
                     "Border top width thin"
                     [ BorderTopWidth.thin ]
-                    [ "borderTopWidth" ==> "thin" ]
+                     "border-top-width: thin;" 
                 testCase
                     "Border top width medium"
                     [ BorderTopWidth.medium ]
-                    [ "borderTopWidth" ==> "medium" ]
+                     "border-top-width: medium;" 
                 testCase
                     "Border top width thick"
                     [ BorderTopWidth.thick ]
-                    [ "borderTopWidth" ==> "thick" ]
+                     "border-top-width: thick;" 
                 testCase
                     "Border top width initial"
                     [ BorderTopWidth.initial ]
-                    [ "borderTopWidth" ==> "initial" ]
+                     "border-top-width: initial;" 
                 testCase
                     "Border top width inherit"
                     [ BorderTopWidth.inherit' ]
-                    [ "borderTopWidth" ==> "inherit" ]
+                     "border-top-width: inherit;" 
                 testCase
                     "Border top width unset"
                     [ BorderTopWidth.unset ]
-                    [ "borderTopWidth" ==> "unset" ]
+                     "border-top-width: unset;"
+                testCase
+                    "Border top width revert"
+                    [ BorderTopWidth.revert ]
+                     "border-top-width: revert;" 
                 testCase
                     "Border right width px"
-                    [ BorderRightWidth' (px 40) ]
-                    [ "borderRightWidth" ==> "40px" ]
+                    [ BorderRightWidth.value (px 40) ]
+                     "border-right-width: 40px;" 
                 testCase
                     "Border right width thin"
                     [ BorderRightWidth.thin ]
-                    [ "borderRightWidth" ==> "thin" ]
+                     "border-right-width: thin;" 
                 testCase
                     "Border right width medium"
                     [ BorderRightWidth.medium ]
-                    [ "borderRightWidth" ==> "medium" ]
+                     "border-right-width: medium;" 
                 testCase
                     "Border right width thick"
                     [ BorderRightWidth.thick ]
-                    [ "borderRightWidth" ==> "thick" ]
+                     "border-right-width: thick;" 
                 testCase
                     "Border right width initial"
                     [ BorderRightWidth.initial ]
-                    [ "borderRightWidth" ==> "initial" ]
+                     "border-right-width: initial;" 
                 testCase
                     "Border right width inherit"
                     [ BorderRightWidth.inherit' ]
-                    [ "borderRightWidth" ==> "inherit" ]
+                     "border-right-width: inherit;" 
                 testCase
                     "Border right width unset"
                     [ BorderRightWidth.unset ]
-                    [ "borderRightWidth" ==> "unset" ]
+                     "border-right-width: unset;"
+                testCase
+                    "Border right width revert"
+                    [ BorderRightWidth.revert ]
+                     "border-right-width: revert;" 
                 testCase
                     "Border bottom width px"
-                    [ BorderBottomWidth' (px 40) ]
-                    [ "borderBottomWidth" ==> "40px" ]
+                    [ BorderBottomWidth.value (px 40) ]
+                     "border-bottom-width: 40px;" 
                 testCase
                     "Border bottom width thin"
                     [ BorderBottomWidth.thin ]
-                    [ "borderBottomWidth" ==> "thin" ]
+                     "border-bottom-width: thin;" 
                 testCase
                     "Border bottom width medium"
                     [ BorderBottomWidth.medium ]
-                    [ "borderBottomWidth" ==> "medium" ]
+                     "border-bottom-width: medium;" 
                 testCase
                     "Border bottom width thick"
                     [ BorderBottomWidth.thick ]
-                    [ "borderBottomWidth" ==> "thick" ]
+                     "border-bottom-width: thick;" 
                 testCase
                     "Border bottom width initial"
                     [ BorderBottomWidth.initial ]
-                    [ "borderBottomWidth" ==> "initial" ]
+                     "border-bottom-width: initial;" 
                 testCase
                     "Border bottom width inherit"
                     [ BorderBottomWidth.inherit' ]
-                    [ "borderBottomWidth" ==> "inherit" ]
+                     "border-bottom-width: inherit;" 
                 testCase
                     "Border bottom width unset"
                     [ BorderBottomWidth.unset ]
-                    [ "borderBottomWidth" ==> "unset" ]
+                     "border-bottom-width: unset;"
+                testCase
+                    "Border bottom width revert"
+                    [ BorderBottomWidth.revert ]
+                     "border-bottom-width: revert;" 
                 testCase
                     "Border left width px"
-                    [ BorderLeftWidth' (px 40) ]
-                    [ "borderLeftWidth" ==> "40px" ]
+                    [ BorderLeftWidth.value (px 40) ]
+                     "border-left-width: 40px;" 
                 testCase
                     "Border left width thin"
                     [ BorderLeftWidth.thin ]
-                    [ "borderLeftWidth" ==> "thin" ]
+                     "border-left-width: thin;" 
                 testCase
                     "Border left width medium"
                     [ BorderLeftWidth.medium ]
-                    [ "borderLeftWidth" ==> "medium" ]
+                     "border-left-width: medium;" 
                 testCase
                     "Border left width thick"
                     [ BorderLeftWidth.thick ]
-                    [ "borderLeftWidth" ==> "thick" ]
+                     "border-left-width: thick;" 
                 testCase
                     "Border left width initial"
                     [ BorderLeftWidth.initial ]
-                    [ "borderLeftWidth" ==> "initial" ]
+                     "border-left-width: initial;" 
                 testCase
                     "Border left width inherit"
                     [ BorderLeftWidth.inherit' ]
-                    [ "borderLeftWidth" ==> "inherit" ]
+                     "border-left-width: inherit;" 
                 testCase
                     "Border left width unset"
                     [ BorderLeftWidth.unset ]
-                    [ "borderLeftWidth" ==> "unset" ]
+                     "border-left-width: unset;"
+                testCase
+                    "Border left width revert"
+                    [ BorderLeftWidth.revert ]
+                     "border-left-width: revert;" 
                 testCase
                     "Border color red"
                     [ BorderColor.red ]
-                    [ "borderColor" ==> "#ff0000" ]
+                     "border-color: red;"
                 testCase
                     "Border color initial"
                     [ BorderColor.initial ]
-                    [ "borderColor" ==> "initial" ]
+                     "border-color: initial;" 
                 testCase
                     "Border color inherit"
                     [ BorderColor.inherit' ]
-                    [ "borderColor" ==> "inherit" ]
+                     "border-color: inherit;" 
                 testCase
                     "Border color unset"
                     [ BorderColor.unset ]
-                    [ "borderColor" ==> "unset" ]
+                     "border-color: unset;"
+                testCase
+                    "Border color revert"
+                    [ BorderColor.revert ]
+                     "border-color: revert;" 
                 testCase
                     "Border colors multiple"
-                    [ BorderColor.value (FssTypes.Color.Color.red, FssTypes.Color.Color.green, FssTypes.Color.Color.blue, FssTypes.Color.Color.white) ]
-                    [ "borderColor" ==> "#ff0000 #008000 #0000ff #ffffff" ]
+                    [ BorderColor.value (FssTypes.Color.Red, FssTypes.Color.Green, FssTypes.Color.Blue, FssTypes.Color.White) ]
+                     "border-color: red green blue white;"
                 testCase
                     "Border top color rgb"
                     [ BorderTopColor.rgb 255 0 0 ]
-                    ["borderTopColor" ==> "rgb(255, 0, 0)"]
+                    "border-top-color: rgb(255, 0, 0);"
                 testCase
                     "Border right color green"
                     [ BorderRightColor.green ]
-                    ["borderRightColor" ==> "#008000"]
+                    "border-right-color: green;"
                 testCase
                     "Border bottom color"
                     [ BorderBottomColor.blue ]
-                    ["borderBottomColor" ==> "#0000ff"]
+                    "border-bottom-color: blue;"
                 testCase
                     "Border left color"
                     [ BorderLeftColor.white ]
-                    ["borderLeftColor" ==> "#ffffff"]
+                    "border-left-color: white;"
                 testCase
                     "Border collapse collapse"
                     [ BorderCollapse.collapse ]
-                    [ "borderCollapse" ==> "collapse" ]
+                     "border-collapse: collapse;" 
                 testCase
                     "Border collapse separate"
                     [ BorderCollapse.separate ]
-                    [ "borderCollapse" ==> "separate" ]
+                     "border-collapse: separate;" 
                 testCase
                     "Border collapse initial"
                     [ BorderCollapse.initial ]
-                    [ "borderCollapse" ==> "initial" ]
+                     "border-collapse: initial;" 
                 testCase
                     "Border collapse inherit"
                     [ BorderCollapse.inherit' ]
-                    [ "borderCollapse" ==> "inherit" ]
+                     "border-collapse: inherit;" 
                 testCase
                     "Border collapse unset"
                     [ BorderCollapse.unset ]
-                    [ "borderCollapse" ==> "unset" ]
+                     "border-collapse: unset;"
+                testCase
+                    "Border collapse revert"
+                    [ BorderCollapse.revert ]
+                     "border-collapse: revert;" 
                 testCase
                     "Border spacing px"
-                    [ BorderSpacing' (px 2) ]
-                    [ "borderSpacing" ==> "2px" ]
+                    [ BorderSpacing.value (px 2) ]
+                     "border-spacing: 2px;" 
                 testCase
                     "Border spacing px"
-                    [ BorderSpacing.value (px 2, px 2) ]
-                    [ "borderSpacing" ==> "2px 2px" ]
+                    [ BorderSpacing.value (px 2, px 3) ]
+                     "border-spacing: 2px 3px;" 
                 testCase
                     "Border spacing initial"
                     [ BorderSpacing.initial ]
-                    [ "borderSpacing" ==> "initial" ]
+                     "border-spacing: initial;" 
                 testCase
                     "Border spacing inherit"
                     [ BorderSpacing.inherit' ]
-                    [ "borderSpacing" ==> "inherit" ]
+                     "border-spacing: inherit;" 
                 testCase
                     "Border spacing unset"
                     [ BorderSpacing.unset ]
-                    [ "borderSpacing" ==> "unset" ]
+                     "border-spacing: unset;"
+                testCase
+                    "Border spacing revert"
+                    [ BorderSpacing.revert ]
+                     "border-spacing: revert;"
                 testCase
                     "Border image source none"
                     [ BorderImageSource.none ]
-                    [ "borderImageSource" ==> "none" ]
+                     "border-image-source: none;" 
                 testCase
                     "Border image source url"
                     [ BorderImageSource.url "image.jpg" ]
-                    [ "borderImageSource" ==> "url(image.jpg)" ]
+                     "border-image-source: url(image.jpg);" 
                 testCase
                     "Border image source linear gradient"
-                    [ BorderImageSource.linearGradient((deg 45., [ FssTypes.Color.Color.red, pct 0; FssTypes.Color.Color.blue, pct 100 ])) ]
-                    [ "borderImageSource" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
+                    [ BorderImageSource.linearGradient((deg 45, [ FssTypes.Color.Red, pct 0; FssTypes.Color.Blue, pct 100 ])) ]
+                     "border-image-source: linear-gradient(45deg, red 0%, blue 100%);" 
                 testCase
                     "Border image source inherit"
                     [ BorderImageSource.inherit' ]
-                    [ "borderImageSource" ==> "inherit" ]
+                     "border-image-source: inherit;" 
                 testCase
                     "Border image source initial"
                     [ BorderImageSource.initial ]
-                    [ "borderImageSource" ==> "initial" ]
+                     "border-image-source: initial;" 
                 testCase
                     "Border image source unset"
                     [ BorderImageSource.unset ]
-                    [ "borderImageSource" ==> "unset" ]
+                     "border-image-source: unset;"
                 testCase
                     "Border image width auto"
                     [ BorderImageWidth.auto ]
-                    [ "borderImageWidth" ==> "auto" ]
+                     "border-image-width: auto;" 
                 testCase
                     "Border image width rem"
-                    [ BorderImageWidth' (rem 1.) ]
-                    [ "borderImageWidth" ==> "1.0rem" ]
+                    [ BorderImageWidth.value (rem 1) ]
+                     "border-image-width: 1rem;" 
                 testCase
                     "Border image width percent"
-                    [ BorderImageWidth' (pct 25) ]
-                    [ "borderImageWidth" ==> "25%" ]
+                    [ BorderImageWidth.value (pct 25) ]
+                     "border-image-width: 25%;" 
                 testCase
                     "Border image width value"
-                    [ BorderImageWidth' (FssTypes.CssFloat 3.) ]
-                    [ "borderImageWidth" ==> "3" ]
+                    [ BorderImageWidth.value 3 ]
+                     "border-image-width: 3;" 
                 testCase
                     "Border image width vertical horizontal"
                     [ BorderImageWidth.value (em 2., em 3.) ]
-                    [ "borderImageWidth" ==> "2.0em 3.0em" ]
+                     "border-image-width: 2em 3em;" 
                 testCase
                     "Border image width top horizontal bottom"
                     [ BorderImageWidth.value (pct 5, pct 15, pct 10) ]
-                    [ "borderImageWidth" ==> "5% 15% 10%" ]
+                     "border-image-width: 5% 15% 10%;" 
                 testCase
                     "Border image width top right bottom left"
                     [ BorderImageWidth.value (pct 5, em 2., pct 10, px 2) ]
-                    [ "borderImageWidth" ==> "5% 2.0em 10% 2px" ]
+                     "border-image-width: 5% 2em 10% 2px;" 
                 testCase
                     "Border image width inherit"
                     [ BorderImageWidth.inherit' ]
-                    [ "borderImageWidth" ==> "inherit" ]
+                     "border-image-width: inherit;" 
                 testCase
                     "Border image width initial"
                     [ BorderImageWidth.initial ]
-                    [ "borderImageWidth" ==> "initial" ]
+                     "border-image-width: initial;" 
                 testCase
                     "Border image width unset"
                     [ BorderImageWidth.unset ]
-                    [ "borderImageWidth" ==> "unset" ]
+                     "border-image-width: unset;"
+                testCase
+                    "Border image width revert"
+                    [ BorderImageWidth.revert ]
+                     "border-image-width: revert;" 
                 testCase
                     "Border image repeat stretch"
                     [ BorderImageRepeat.stretch ]
-                    [ "borderImageRepeat" ==> "stretch" ]
+                     "border-image-repeat: stretch;" 
                 testCase
                     "Border image repeat repeat"
                     [ BorderImageRepeat.repeat ]
-                    [ "borderImageRepeat" ==> "repeat" ]
+                     "border-image-repeat: repeat;" 
                 testCase
                     "Border image repeat round"
                     [ BorderImageRepeat.round ]
-                    [ "borderImageRepeat" ==> "round" ]
+                     "border-image-repeat: round;" 
                 testCase
                     "Border image repeat space"
                     [ BorderImageRepeat.space ]
-                    [ "borderImageRepeat" ==> "space" ]
+                     "border-image-repeat: space;" 
                 testCase
                     "Border image repeat space"
                     [ BorderImageRepeat.value(FssTypes.Border.ImageRepeat.Stretch, FssTypes.Border.ImageRepeat.Repeat) ]
-                    [ "borderImageRepeat" ==> "stretch repeat" ]
+                     "border-image-repeat: stretch repeat;" 
                 testCase
                     "Border image repeat inherit"
                     [ BorderImageRepeat.inherit' ]
-                    [ "borderImageRepeat" ==> "inherit" ]
+                     "border-image-repeat: inherit;" 
                 testCase
                     "Border image repeat initial"
                     [ BorderImageRepeat.initial ]
-                    [ "borderImageRepeat" ==> "initial" ]
+                     "border-image-repeat: initial;" 
                 testCase
                     "Border image repeat unset"
                     [ BorderImageRepeat.unset ]
-                    [ "borderImageRepeat" ==> "unset" ]
+                     "border-image-repeat: unset;"
+                testCase
+                    "Border image repeat revert"
+                    [ BorderImageRepeat.revert ]
+                     "border-image-repeat: revert;" 
                 testCase
                     "Border image slice percent"
-                    [ BorderImageSlice' (pct 30) ]
-                    [ "borderImageSlice" ==> "30%" ]
+                    [ BorderImageSlice.value (pct 30) ]
+                     "border-image-slice: 30%;" 
                 testCase
                     "Border image slice multiple percent"
                     [ BorderImageSlice.value (pct 10, pct 30) ]
-                    [ "borderImageSlice" ==> "10% 30%" ]
+                     "border-image-slice: 10% 30%;" 
                 testCase
                     "Border image slice top horizontal bottom"
                     [ BorderImageSlice.value (px 30, pct 30, px 45) ]
-                    [ "borderImageSlice" ==> "30px 30% 45px" ]
+                     "border-image-slice: 30px 30% 45px;" 
                 testCase
                     "Border image slice inherit"
                     [ BorderImageSlice.inherit' ]
-                    [ "borderImageSlice" ==> "inherit" ]
+                     "border-image-slice: inherit;" 
                 testCase
                     "Border image slice initial"
                     [ BorderImageSlice.initial ]
-                    [ "borderImageSlice" ==> "initial" ]
+                     "border-image-slice: initial;" 
                 testCase
                     "Border image slice unset"
                     [ BorderImageSlice.unset ]
-                    [ "borderImageSlice" ==> "unset" ]
+                     "border-image-slice: unset;"
+                testCase
+                    "Border image slice revert"
+                    [ BorderImageSlice.revert ]
+                     "border-image-slice: revert;" 
                 testCase
                     "Border image outset rem"
-                    [ BorderImageOutset' (rem 1.) ]
-                    [ "borderImageOutset" ==> "1.0rem" ]
+                    [ BorderImageOutset.value (rem 1) ]
+                     "border-image-outset: 1rem;" 
                 testCase
                     "Border image outset value"
-                    [ BorderImageOutset' (FssTypes.Border.ImageOutset 1.5) ]
-                    [ "borderImageOutset" ==> "1.5" ]
+                    [ BorderImageOutset.value 1.5 ]
+                     "border-image-outset: 1.5;" 
                 testCase
                     "Border image outset vertical horizontal"
-                    [ BorderImageOutset.value(FssTypes.Border.ImageOutset 1., FssTypes.Border.ImageOutset 1.2) ]
-                    [ "borderImageOutset" ==> "1 1.2" ]
+                    [ BorderImageOutset.value(1, 1.2) ]
+                     "border-image-outset: 1 1.2;" 
                 testCase
                     "Border image outset top right bottom left"
                     [ BorderImageOutset.value (px 7, px 12, px 14, px 5) ]
-                    [ "borderImageOutset" ==> "7px 12px 14px 5px" ]
+                     "border-image-outset: 7px 12px 14px 5px;" 
                 testCase
                     "Border image outset inherit"
                     [ BorderImageOutset.inherit' ]
-                    [ "borderImageOutset" ==> "inherit" ]
+                     "border-image-outset: inherit;" 
                 testCase
                     "Border image outset initial"
                     [ BorderImageOutset.initial ]
-                    [ "borderImageOutset" ==> "initial" ]
+                     "border-image-outset: initial;" 
                 testCase
                     "Border image outset unset"
                     [ BorderImageOutset.unset ]
-                    [ "borderImageOutset" ==> "unset" ]
+                     "border-image-outset: unset;"
+                testCase
+                    "Border image outset revert"
+                    [ BorderImageOutset.revert ]
+                     "border-image-outset: revert;"
             ]

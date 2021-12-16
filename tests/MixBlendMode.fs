@@ -1,7 +1,6 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -12,77 +11,81 @@ module MixBlendMode =
                 testCase
                     "Mix blend mode Multiply"
                     [ MixBlendMode.multiply]
-                    ["mixBlendMode" ==> "multiply"]
+                    "mix-blend-mode: multiply;"
                 testCase
                     "Mix blend mode Screen"
                     [ MixBlendMode.screen]
-                    ["mixBlendMode" ==> "screen"]
+                    "mix-blend-mode: screen;"
                 testCase
                     "Mix blend mode Overlay"
                     [ MixBlendMode.overlay]
-                    ["mixBlendMode" ==> "overlay"]
+                    "mix-blend-mode: overlay;"
                 testCase
                     "Mix blend mode Darken"
                     [ MixBlendMode.darken]
-                    ["mixBlendMode" ==> "darken"]
+                    "mix-blend-mode: darken;"
                 testCase
                     "Mix blend mode Lighten"
                     [ MixBlendMode.lighten]
-                    ["mixBlendMode" ==> "lighten"]
+                    "mix-blend-mode: lighten;"
                 testCase
                     "Mix blend mode ColorDodge"
                     [ MixBlendMode.colorDodge]
-                    ["mixBlendMode" ==> "color-dodge"]
+                    "mix-blend-mode: color-dodge;"
                 testCase
                     "Mix blend mode ColorBurn"
                     [ MixBlendMode.colorBurn]
-                    ["mixBlendMode" ==> "color-burn"]
+                    "mix-blend-mode: color-burn;"
                 testCase
                     "Mix blend mode HardLight"
                     [ MixBlendMode.hardLight]
-                    ["mixBlendMode" ==> "hard-light"]
+                    "mix-blend-mode: hard-light;"
                 testCase
                     "Mix blend mode SoftLight"
                     [ MixBlendMode.softLight]
-                    ["mixBlendMode" ==> "soft-light"]
+                    "mix-blend-mode: soft-light;"
                 testCase
                     "Mix blend mode Difference"
                     [ MixBlendMode.difference]
-                    ["mixBlendMode" ==> "difference"]
+                    "mix-blend-mode: difference;"
                 testCase
                     "Mix blend mode Exclusion"
                     [ MixBlendMode.exclusion]
-                    ["mixBlendMode" ==> "exclusion"]
+                    "mix-blend-mode: exclusion;"
                 testCase
                     "Mix blend mode Hue"
                     [ MixBlendMode.hue]
-                    ["mixBlendMode" ==> "hue"]
+                    "mix-blend-mode: hue;"
                 testCase
                     "Mix blend mode Saturation"
                     [ MixBlendMode.saturation]
-                    ["mixBlendMode" ==> "saturation"]
+                    "mix-blend-mode: saturation;"
                 testCase
                     "Mix blend mode Color"
                     [ MixBlendMode.color]
-                    ["mixBlendMode" ==> "color"]
+                    "mix-blend-mode: color;"
                 testCase
                     "Mix blend mode Luminosity"
                     [ MixBlendMode.luminosity]
-                    ["mixBlendMode" ==> "luminosity"]
+                    "mix-blend-mode: luminosity;"
                 testCase
                     "mix blend mode normal"
                     [ MixBlendMode.normal ]
-                    [ "mixBlendMode" ==> "normal" ]
+                     "mix-blend-mode: normal;" 
                 testCase
                     "mix blend mode inherit"
                     [ MixBlendMode.inherit' ]
-                    [ "mixBlendMode" ==> "inherit" ]
+                     "mix-blend-mode: inherit;" 
                 testCase
                     "mix blend mode initial"
                     [ MixBlendMode.initial ]
-                    [ "mixBlendMode" ==> "initial" ]
+                     "mix-blend-mode: initial;" 
                 testCase
                     "mix blend mode unset"
                     [ MixBlendMode.unset ]
-                    [ "mixBlendMode" ==> "unset" ]
+                     "mix-blend-mode: unset;" 
+                testCase
+                    "mix blend mode revert"
+                    [ MixBlendMode.revert ]
+                     "mix-blend-mode: revert;" 
             ]

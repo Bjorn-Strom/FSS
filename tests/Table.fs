@@ -1,7 +1,6 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -12,77 +11,89 @@ module Table =
                 testCase
                     "Caption side top"
                     [CaptionSide.top]
-                    ["captionSide" ==> "top"]
+                    "caption-side: top;"
                 testCase
                     "Caption side bottom"
                     [CaptionSide.bottom]
-                    ["captionSide" ==> "bottom"]
+                    "caption-side: bottom;"
                 testCase
                     "Caption side left"
                     [CaptionSide.left]
-                    ["captionSide" ==> "left"]
+                    "caption-side: left;"
                 testCase
                     "Caption side right"
                     [CaptionSide.right]
-                    ["captionSide" ==> "right"]
+                    "caption-side: right;"
                 testCase
                     "Caption side top-outside"
                     [CaptionSide.topOutside]
-                    ["captionSide" ==> "top-outside"]
+                    "caption-side: top-outside;"
                 testCase
                     "Caption side bottom-outside"
                     [CaptionSide.bottomOutside]
-                    ["captionSide" ==> "bottom-outside"]
+                    "caption-side: bottom-outside;"
                 testCase
                     "Caption side inherit"
                     [CaptionSide.inherit']
-                    ["captionSide" ==> "inherit"]
+                    "caption-side: inherit;"
                 testCase
                     "Caption side initial"
                     [CaptionSide.initial]
-                    ["captionSide" ==> "initial"]
+                    "caption-side: initial;"
                 testCase
                     "Caption side unset"
                     [CaptionSide.unset]
-                    ["captionSide" ==> "unset"]
+                    "caption-side: unset;"
+                testCase
+                    "Caption side revert"
+                    [CaptionSide.revert]
+                    "caption-side: revert;"
                 testCase
                     "Empty Cells show"
                     [EmptyCells.show]
-                    ["emptyCells" ==> "show"]
+                    "empty-cells: show;"
                 testCase
                     "Empty Cells hide"
                     [EmptyCells.hide]
-                    ["emptyCells" ==> "hide"]
+                    "empty-cells: hide;"
                 testCase
                     "Empty Cells inherit"
                     [EmptyCells.inherit']
-                    ["emptyCells" ==> "inherit"]
+                    "empty-cells: inherit;"
                 testCase
                     "Empty Cells initial"
                     [EmptyCells.initial]
-                    ["emptyCells" ==> "initial"]
+                    "empty-cells: initial;"
                 testCase
                     "Empty Cells unset"
                     [EmptyCells.unset]
-                    ["emptyCells" ==> "unset"]
+                    "empty-cells: unset;"
+                testCase
+                    "Empty Cells revert"
+                    [EmptyCells.revert]
+                    "empty-cells: revert;"
                 testCase
                     "Table Layout fixed"
                     [TableLayout.fixed']
-                    ["tableLayout" ==> "fixed"]
+                    "table-layout: fixed;"
                 testCase
                     "Table Layout auto"
                     [TableLayout.auto]
-                    ["tableLayout" ==> "auto"]
+                    "table-layout: auto;"
                 testCase
                     "Table Layout inherit"
                     [TableLayout.inherit']
-                    ["tableLayout" ==> "inherit"]
+                    "table-layout: inherit;"
                 testCase
                     "Table Layout initial"
                     [TableLayout.initial]
-                    ["tableLayout" ==> "initial"]
+                    "table-layout: initial;"
                 testCase
                     "Table Layout unset"
                     [TableLayout.unset]
-                    ["tableLayout" ==> "unset"]
+                    "table-layout: unset;"
+                testCase
+                    "Table Layout revert"
+                    [TableLayout.revert]
+                    "table-layout: revert;"
             ]

@@ -1,7 +1,6 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -11,246 +10,282 @@ module Column =
             [
                 testCase
                     "Column Width px"
-                    [ColumnWidth' (px 60)]
-                    ["columnWidth" ==> "60px"]
+                    [ColumnWidth.value (px 60)]
+                    "column-width: 60px;"
                 testCase
                     "Column Width em"
-                    [ColumnWidth' (em 15.5)]
-                    ["columnWidth" ==> "15.5em"]
+                    [ColumnWidth.value (em 15.5)]
+                    "column-width: 15.5em;"
                 testCase
                     "Column Width vw"
-                    [ColumnWidth' (vw 3.3)]
-                    ["columnWidth" ==> "3.3vw"]
+                    [ColumnWidth.value (vw 3.3)]
+                    "column-width: 3.3vw;"
                 testCase
                     "Column Width auto"
                     [ColumnWidth.auto]
-                    ["columnWidth" ==> "auto"]
+                    "column-width: auto;"
                 testCase
                     "Column Width inherit"
                     [ColumnWidth.inherit']
-                    ["columnWidth" ==> "inherit"]
+                    "column-width: inherit;"
                 testCase
                     "Column Width initial"
                     [ColumnWidth.initial]
-                    ["columnWidth" ==> "initial"]
+                    "column-width: initial;"
                 testCase
                     "Column Width unset"
                     [ColumnWidth.unset]
-                    ["columnWidth" ==> "unset"]
+                    "column-width: unset;"
+                testCase
+                    "Column Width revert"
+                    [ColumnWidth.revert]
+                    "column-width: revert;"
                 testCase
                     "Column balance"
                     [ColumnFill.balance]
-                    ["columnFill" ==> "balance"]
+                    "column-fill: balance;"
                 testCase
                     "Column fill balance all"
                     [ColumnFill.balanceAll]
-                    ["columnFill" ==> "balance-all"]
+                    "column-fill: balance-all;"
                 testCase
                     "Column fill auto"
                     [ColumnFill.auto]
-                    ["columnFill" ==> "auto"]
+                    "column-fill: auto;"
                 testCase
                     "Column fill inherit"
                     [ColumnFill.inherit']
-                    ["columnFill" ==> "inherit"]
+                    "column-fill: inherit;"
                 testCase
                     "Column fill initial"
                     [ColumnFill.initial]
-                    ["columnFill" ==> "initial"]
+                    "column-fill: initial;"
                 testCase
                     "Column fill unset"
                     [ColumnFill.unset]
-                    ["columnFill" ==> "unset"]
+                    "column-fill: unset;"
+                testCase
+                    "Column fill revert"
+                    [ColumnFill.revert]
+                    "column-fill: revert;"
                 testCase
                     "Column gap normal"
                     [ColumnGap.normal]
-                    ["columnGap" ==> "normal"]
+                    "column-gap: normal;"
                 testCase
                     "Column gap px"
-                    [ColumnGap' (px 3)]
-                    ["columnGap" ==> "3px"]
+                    [ColumnGap.value (px 3)]
+                    "column-gap: 3px;"
                 testCase
                     "Column gap em"
-                    [ColumnGap' (em 2.5)]
-                    ["columnGap" ==> "2.5em"]
+                    [ColumnGap.value (em 2.5)]
+                    "column-gap: 2.5em;"
                 testCase
                     "Column gap percent"
-                    [ColumnGap' (pct 3)]
-                    ["columnGap" ==> "3%"]
+                    [ColumnGap.value (pct 3)]
+                    "column-gap: 3%;"
                 testCase
                     "Column gap inherit"
                     [ColumnGap.inherit']
-                    ["columnGap" ==> "inherit"]
+                    "column-gap: inherit;"
                 testCase
                     "Column gap initial"
                     [ColumnGap.initial]
-                    ["columnGap" ==> "initial"]
+                    "column-gap: initial;"
                 testCase
                     "Column gap unset"
                     [ColumnGap.unset]
-                    ["columnGap" ==> "unset"]
+                    "column-gap: unset;"
+                testCase
+                    "Column gap revert"
+                    [ColumnGap.revert]
+                    "column-gap: revert;"
                 testCase
                     "Column span all"
                     [ColumnSpan.all]
-                    ["columnSpan" ==> "all"]
+                    "column-span: all;"
                 testCase
                     "Column span none"
                     [ColumnSpan.none]
-                    ["columnSpan" ==> "none"]
+                    "column-span: none;"
                 testCase
                     "Column span inherit"
                     [ColumnSpan.inherit']
-                    ["columnSpan" ==> "inherit"]
+                    "column-span: inherit;"
                 testCase
                     "Column span initial"
                     [ColumnSpan.initial]
-                    ["columnSpan" ==> "initial"]
+                    "column-span: initial;"
                 testCase
                     "Column span unset"
                     [ColumnSpan.unset]
-                    ["columnSpan" ==> "unset"]
+                    "column-span: unset;"
                 testCase
                     "Columns Inherit"
                     [Columns.inherit']
-                    ["columns" ==> "inherit"]
+                    "columns: inherit;"
                 testCase
                     "Columns Initial"
                     [Columns.initial]
-                    ["columns" ==> "initial"]
+                    "columns: initial;"
                 testCase
-                    "Columns Unset"
+                    "Columns unset"
                     [Columns.unset]
-                    ["columns" ==> "unset"]
+                    "columns: unset;"
+                testCase
+                    "Columns revert"
+                    [Columns.revert]
+                    "columns: revert;"
                 testCase
                     "Column rule Inherit"
                     [ColumnRule.inherit']
-                    ["columnRule" ==> "inherit"]
+                    "column-rule: inherit;"
                 testCase
                     "Column rule Initial"
                     [ColumnRule.initial]
-                    ["columnRule" ==> "initial"]
+                    "column-rule: initial;"
                 testCase
-                    "Column rule Unset"
+                    "Column rule unset"
                     [ColumnRule.unset]
-                    ["columnRule" ==> "unset"]
+                    "column-rule: unset;"
+                testCase
+                    "Column rule revert"
+                    [ColumnRule.revert]
+                    "column-rule: revert;"
                 testCase
                     "Column rule width thin"
                     [ColumnRuleWidth.thin]
-                    ["columnRuleWidth" ==> "thin"]
+                    "column-rule-width: thin;"
                 testCase
                     "Column rule width medium"
                     [ColumnRuleWidth.medium]
-                    ["columnRuleWidth" ==> "medium"]
+                    "column-rule-width: medium;"
                 testCase
                     "Column rule width thick"
                     [ColumnRuleWidth.thick]
-                    ["columnRuleWidth" ==> "thick"]
+                    "column-rule-width: thick;"
                 testCase
                     "Column rule width px"
-                    [ColumnRuleWidth' (px 1)]
-                    ["columnRuleWidth" ==> "1px"]
+                    [ColumnRuleWidth.value (px 1)]
+                    "column-rule-width: 1px;"
                 testCase
                     "Column rule width em"
-                    [ColumnRuleWidth' (em 2.5)]
-                    ["columnRuleWidth" ==> "2.5em"]
+                    [ColumnRuleWidth.value (em 2.5)]
+                    "column-rule-width: 2.5em;"
                 testCase
                     "Column rule width Inherit"
                     [ColumnRuleWidth.inherit']
-                    ["columnRuleWidth" ==> "inherit"]
+                    "column-rule-width: inherit;"
                 testCase
                     "Column rule width Initial"
                     [ColumnRuleWidth.initial]
-                    ["columnRuleWidth" ==> "initial"]
+                    "column-rule-width: initial;"
                 testCase
                     "Column rule width Unset"
                     [ColumnRuleWidth.unset]
-                    ["columnRuleWidth" ==> "unset"]
+                    "column-rule-width: unset;"
+                testCase
+                    "Column rule width revert"
+                    [ColumnRuleWidth.revert]
+                    "column-rule-width: revert;"
                 testCase
                     "Column rule style hidden"
                     [ ColumnRuleStyle.hidden ]
-                    [ "columnRuleStyle" ==> "hidden" ]
+                     "column-rule-style: hidden;" 
                 testCase
                     "Column rule style dotted"
                     [ ColumnRuleStyle.dotted ]
-                    [ "columnRuleStyle" ==> "dotted" ]
+                     "column-rule-style: dotted;" 
                 testCase
                     "Column rule style dashed"
                     [ ColumnRuleStyle.dashed ]
-                    [ "columnRuleStyle" ==> "dashed" ]
+                     "column-rule-style: dashed;" 
                 testCase
                     "Column rule style solid"
                     [ ColumnRuleStyle.solid ]
-                    [ "columnRuleStyle" ==> "solid" ]
+                     "column-rule-style: solid;" 
                 testCase
                     "Column rule style double"
                     [ ColumnRuleStyle.double ]
-                    [ "columnRuleStyle" ==> "double" ]
+                     "column-rule-style: double;" 
                 testCase
                     "Column rule style groove"
                     [ ColumnRuleStyle.groove ]
-                    [ "columnRuleStyle" ==> "groove" ]
+                     "column-rule-style: groove;" 
                 testCase
                     "Column rule style ridge"
                     [ ColumnRuleStyle.ridge ]
-                    [ "columnRuleStyle" ==> "ridge" ]
+                     "column-rule-style: ridge;" 
                 testCase
                     "Column rule style inset"
                     [ ColumnRuleStyle.inset ]
-                    [ "columnRuleStyle" ==> "inset" ]
+                     "column-rule-style: inset;" 
                 testCase
                     "Column rule style outset"
                     [ ColumnRuleStyle.outset ]
-                    [ "columnRuleStyle" ==> "outset" ]
+                     "column-rule-style: outset;" 
                 testCase
                     "Column rule style none"
                     [ ColumnRuleStyle.none ]
-                    [ "columnRuleStyle" ==> "none" ]
+                     "column-rule-style: none;" 
+                testCase
+                    "Column rule style revert"
+                    [ ColumnRuleStyle.revert ]
+                     "column-rule-style: revert;" 
                 testCase
                     "Column rule style initial"
                     [ ColumnRuleStyle.initial ]
-                    [ "columnRuleStyle" ==> "initial" ]
+                     "column-rule-style: initial;" 
                 testCase
                     "Column rule style inherit"
                     [ ColumnRuleStyle.inherit' ]
-                    [ "columnRuleStyle" ==> "inherit" ]
+                     "column-rule-style: inherit;" 
                 testCase
                     "Column rule style unset"
                     [ ColumnRuleStyle.unset ]
-                    [ "columnRuleStyle" ==> "unset" ]
+                     "column-rule-style: unset;" 
                 testCase
                     "Column rule color red"
                     [ ColumnRuleColor.red ]
-                    [ "columnRuleColor" ==> "#ff0000" ]
+                     "column-rule-color: red;" 
                 testCase
                     "Column rule color initial"
                     [ ColumnRuleColor.initial ]
-                    [ "columnRuleColor" ==> "initial" ]
+                     "column-rule-color: initial;" 
                 testCase
                     "Column rule color inherit"
                     [ ColumnRuleColor.inherit' ]
-                    [ "columnRuleColor" ==> "inherit" ]
+                     "column-rule-color: inherit;" 
                 testCase
                     "Column rule color unset"
                     [ ColumnRuleColor.unset ]
-                    [ "columnRuleColor" ==> "unset" ]
+                     "column-rule-color: unset;" 
+                testCase
+                    "Column rule color revert"
+                    [ ColumnRuleColor.revert ]
+                     "column-rule-color: revert;" 
                 testCase
                     "Column count number"
-                    [ColumnCount' (FssTypes.CssInt 3)]
-                    ["columnCount" ==> "3"]
+                    [ColumnCount.value 3 ]
+                    "column-count: 3;"
                 testCase
                     "Column count auto"
                     [ColumnCount.auto]
-                    ["columnCount" ==> "auto"]
+                    "column-count: auto;"
                 testCase
                     "Column count inherit"
                     [ColumnCount.inherit']
-                    ["columnCount" ==> "inherit"]
+                    "column-count: inherit;"
                 testCase
                     "Column count initial"
                     [ColumnCount.initial]
-                    ["columnCount" ==> "initial"]
+                    "column-count: initial;"
                 testCase
                     "Column count unset"
                     [ColumnCount.unset]
-                    ["columnCount" ==> "unset"]
+                    "column-count: unset;"
+                testCase
+                    "Column count revert"
+                    [ColumnCount.revert]
+                    "column-count: revert;"
             ]

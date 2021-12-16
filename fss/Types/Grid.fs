@@ -1,127 +1,304 @@
 namespace Fss
 
 namespace Fss.FssTypes
-    [<RequireQualifiedAccess>]
-    module Grid =
-        type GridAutoFlow =
-            | Row
-            | Column
-            | Dense
-            | RowDense
-            | ColumnDense
-            interface IGridAutoFlow
 
-        type GridTemplateColumns =
-            | Subgrid
-            | Masonry
-            interface IGridTemplateColumns
+open Fss.FssTypes
 
-        type GridPosition =
-            | Value of int
-            | Ident of string
-            | IdentValue of string * int
-            | ValueIdentSpan of int * string
-            | Span of string
-            interface IGridPosition
+[<RequireQualifiedAccess>]
+module Grid =
+    type GridAutoFlow =
+        | Row
+        | Column
+        | Dense
+        | RowDense
+        | ColumnDense
+        interface ICssValue with
+            member this.Stringify() =
+                match this with
+                | RowDense -> "row dense"
+                | ColumnDense -> "column dense"
+                | _ -> this.ToString().ToLower()
 
-        type GridTemplateRows =
-            | Subgrid
-            | Masonry
-            interface IGridTemplateRows
+    type GridTemplate =
+        | Subgrid
+        | Masonry
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
 
-        type RepeatType =
-            | AutoFill
-            | AutoFit
+    type GridPosition =
+        | Value of int
+        | Ident of string
+        | IdentValue of string * int
+        | ValueIdentSpan of int * string
+        | Span of string
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
 
+    type RepeatType =
+        | AutoFill
+        | AutoFit
 
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/minmax
-        type MinMax =
-            | MinMaxGrid of string
-            interface IGridAutoRows
-            interface IGridAutoColumns
-            static member MinMax (min: ILengthPercentage, max: Fraction) =
-                sprintf "minmax(%s, %s)" (lengthPercentageToString min) (fractionToString max)
-                |> MinMaxGrid
-            static member MinMax (min: ILengthPercentage, max: ILengthPercentage) =
-                sprintf "minmax(%s, %s)" (lengthPercentageToString min) (lengthPercentageToString max)
-                |> MinMaxGrid
-            static member MinMax (min: Length, max: ContentSize.ContentSize) =
-                sprintf "minmax(%s, %s)" (sizeToString min) (contentSizeToString max)
-                |> MinMaxGrid
-            static member MinMax (min: Percent, max: ContentSize.ContentSize) =
-                sprintf "minmax(%s, %s)" (percentToString min) (contentSizeToString max)
-                |> MinMaxGrid
-            static member MinMax (min: ContentSize.ContentSize, max: Length) =
-                sprintf "minmax(%s, %s)" (contentSizeToString min) (sizeToString max)
-                |> MinMaxGrid
-            static member MinMax (min: ContentSize.ContentSize, max: ContentSize.ContentSize) =
-                sprintf "minmax(%s, %s)" (contentSizeToString min) (contentSizeToString max)
-                |> MinMaxGrid
-            static member MinMax (min: ILengthPercentage, contentSize: ContentSize.ContentSize) =
-                sprintf "minmax(%s, %s)"
-                    (lengthPercentageToString min)
-                    (contentSizeToString contentSize)
-                |> MinMaxGrid
-            static member MinMax ( contentSize: ContentSize.ContentSize, min: ILengthPercentage) =
-                sprintf "minmax(%s, %s)"
-                    (contentSizeToString contentSize)
-                    (lengthPercentageToString min)
-                |> MinMaxGrid
-            static member MinMax ( contentSize: ContentSize.ContentSize, min: Fraction) =
-                sprintf "minmax(%s, %s)"
-                    (contentSizeToString contentSize)
-                    (fractionToString min)
-                |> MinMaxGrid
-            interface ITemplateType
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-rows
+    type MinMaxHelper =
+        | MinMax1 of ILengthPercentage * Fraction
+        | MinMax2 of ILengthPercentage * ILengthPercentage
+        | MinMax3 of ILengthPercentage * ContentSize.ContentSize
+        | MinMax4 of ContentSize.ContentSize * ILengthPercentage
+        | MinMax5 of ContentSize.ContentSize * ContentSize.ContentSize
+        | MinMax6 of ContentSize.ContentSize * Fraction
+        interface ICssValue with
+            member this.Stringify() =
+                let minmaxValue a b = $"minmax({a}, {b})"
 
-        let private repeatTypeToString (repeat: RepeatType) = Fss.Utilities.Helpers.duToKebab repeat
-        let internal minMaxToString (MinMaxGrid m) = m
+                match this with
+                | MinMax1 (lengthPercentage, fraction) ->
+                    minmaxValue (lengthPercentageString lengthPercentage) ((fraction :> ICssValue).Stringify())
+                | MinMax2 (lengthPercentage1, lengthPercentage2) ->
+                    minmaxValue (lengthPercentageString lengthPercentage1) (lengthPercentageString lengthPercentage2)
+                | MinMax3 (lengthPercentage, contentSize) ->
+                    minmaxValue (lengthPercentageString lengthPercentage) ((contentSize :> ICssValue).Stringify())
+                | MinMax4 (contentSize, lengthPercentage) ->
+                    minmaxValue ((contentSize :> ICssValue).Stringify()) (lengthPercentageString lengthPercentage)
+                | MinMax5 (contentSize1, contentSize2) ->
+                    minmaxValue ((contentSize1 :> ICssValue).Stringify()) ((contentSize2 :> ICssValue).Stringify())
+                | MinMax6 (contentSize, fraction) ->
+                    minmaxValue ((contentSize :> ICssValue).Stringify) ((fraction :> ICssValue).Stringify())
 
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/repeat
-        type Repeat =
-            | GridRepeat of string
-            static member Repeat (value: int, fraction: Fraction) =
-                sprintf "repeat(%d, %s)" value (fractionToString fraction)
-                |> GridRepeat
-            static member Repeat (value: int, length: ILengthPercentage) =
-                sprintf "repeat(%d, %s)" value (lengthPercentageToString length)
-                |> GridRepeat
-            static member Repeat (value: int, contentSize: ContentSize.ContentSize) =
-                sprintf "repeat(%d, %s)" value (contentSizeToString contentSize)
-                |> GridRepeat
-            static member Repeat (value: int, contentSizes: ContentSize.ContentSize list) =
-                sprintf "repeat(%d, %s)"
-                    value
-                    (Fss.Utilities.Helpers.combineWs contentSizeToString contentSizes)
-                |> GridRepeat
-            static member Repeat (value: int, sizes: ILengthPercentage list) =
-                sprintf "repeat(%d, %s)"
-                    value
-                    (Fss.Utilities.Helpers.combineWs lengthPercentageToString sizes)
-                |> GridRepeat
-            static member Repeat (value: RepeatType, fraction: Fraction) =
-                sprintf "repeat(%s, %s)" (repeatTypeToString value) (fractionToString fraction)
-                |> GridRepeat
-            static member Repeat (value: RepeatType, length: ILengthPercentage) =
-                sprintf "repeat(%s, %s)" (repeatTypeToString value) (lengthPercentageToString length)
-                |> GridRepeat
-            static member Repeat (value: RepeatType, contentSize: ContentSize.ContentSize) =
-                sprintf "repeat(%s, %s)" (repeatTypeToString value) (contentSizeToString contentSize)
-                |> GridRepeat
-            static member Repeat (value: int, minMax: MinMax) =
-                sprintf "repeat(%d, %s)" value (minMaxToString minMax)
-                |> GridRepeat
-            static member Repeat (value: int, sizes: Length list) =
-                sprintf "repeat(%d, %s)"
-                    value
-                    (Fss.Utilities.Helpers.combineWs sizeToString sizes)
-                |> GridRepeat
-            static member Repeat (value: int, sizes: Percent list) =
-                sprintf "repeat(%d, %s)"
-                    value
-                    (Fss.Utilities.Helpers.combineWs percentToString sizes)
-                |> GridRepeat
+    type MinMax =
+        static member MinMax(min, max) = MinMaxHelper.MinMax1(min, max)
+        static member MinMax(min, max) = MinMaxHelper.MinMax2(min, max)
+        static member MinMax(min, max) = MinMaxHelper.MinMax3(min, max)
+        static member MinMax(min, max) = MinMaxHelper.MinMax4(min, max)
+        static member MinMax(min, max) = MinMaxHelper.MinMax5(min, max)
+        static member MinMax(min, max) = MinMaxHelper.MinMax6(min, max)
 
-            interface ITemplateType
+    type RepeatHelper =
+        | Repeat1 of int * ILengthPercentage
+        | Repeat2 of int * Fraction
+        | Repeat3 of int * ContentSize.ContentSize
+        | Repeat4 of int * ContentSize.ContentSize list
+        | Repeat5 of int * ILengthPercentage list
+        | Repeat6 of RepeatType * Fraction
+        | Repeat7 of RepeatType * ILengthPercentage
+        | Repeat8 of RepeatType * ContentSize.ContentSize
+        | Repeat9 of int * MinMaxHelper
+        interface ICssValue with
+            member this.Stringify() =
+                let repeatValue a b = $"repeat({a}, {b})"
 
-        let internal repeatToString (GridRepeat g) = g
+                match this with
+                | Repeat1 (value, length) -> repeatValue value (lengthPercentageString length)
+                | Repeat2 (value, fraction) -> repeatValue value ((fraction :> ICssValue).Stringify())
+                | Repeat3 (value, contentSize) -> repeatValue value ((contentSize :> ICssValue).Stringify())
+                | Repeat4 (value, contentSizes) ->
+                    List.map (fun x -> (x :> ICssValue).Stringify()) contentSizes
+                    |> String.concat " "
+                    |> repeatValue value
+                | Repeat5 (value, lengthPercentages) ->
+                    List.map lengthPercentageString lengthPercentages
+                    |> String.concat " "
+                    |> repeatValue value
+                | Repeat6 (repeat, fraction) ->
+                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) ((fraction :> ICssValue).Stringify())
+                | Repeat7 (repeat, lengthPercentage) ->
+                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) (lengthPercentageString lengthPercentage)
+                | Repeat8 (repeat, contentSize) ->
+                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) ((contentSize :> ICssValue).Stringify())
+                | Repeat9 (value, minMax) -> repeatValue value ((minMax :> ICssValue).Stringify())
+
+    type Repeat =
+        static member Repeat(value, length) = Repeat1(value, length)
+        static member Repeat(value, length) = Repeat2(value, length)
+        static member Repeat(value, length) = Repeat3(value, length)
+        static member Repeat(value, length) = Repeat4(value, length)
+        static member Repeat(value, length) = Repeat5(value, length)
+        static member Repeat(value, length) = Repeat6(value, length)
+        static member Repeat(value, length) = Repeat7(value, length)
+        static member Repeat(value, length) = Repeat8(value, length)
+        static member Repeat(value, length) = Repeat9(value, length)
+
+[<RequireQualifiedAccess>]
+module GridClasses =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+    type AreaHelper =
+        | Area of string
+        | ValueArea of int * string
+        | AreaValue of string * int
+        | Span of int
+        interface ICssValue with
+            member this.Stringify() =
+                match this with
+                | Area a -> a
+                | ValueArea (value, area) -> $"{value} {area}"
+                | AreaValue (area, value) -> $"{area} / {value}"
+                | Span span -> $"span {span}"
+
+    type GridPosition(property) =
+        inherit CssRuleWithAuto(property)
+        member this.value(area: string) = (property, Area area) |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-start
+    type GridColumn(property) =
+        inherit CssRuleWithAuto(property)
+        member this.value(area: string) = (property, Area area) |> Rule
+        member this.value(value: int) = (property, Int value) |> Rule
+
+        member this.value(value: int, area: string) =
+            (property, ValueArea(value, area)) |> Rule
+
+        member this.span(value: int) = (property, Span value) |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row
+    type GridRow(property) =
+        inherit GridPosition(property)
+
+        member this.value(area: string, value: int) =
+            (property, AreaValue(area, value)) |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/gap
+    type GridGap(property) =
+        inherit CssRuleWithNormal(property)
+
+        member this.value(gap: ILengthPercentage) =
+            (property, lengthPercentageToType gap) |> Rule
+
+    type GridTwoGap(property) =
+        inherit GridGap(property)
+
+        member this.value(rowGap: ILengthPercentage, columnGap: ILengthPercentage) =
+            let value =
+                $"{lengthPercentageString rowGap} {lengthPercentageString columnGap}"
+                |> String
+
+            (property, value) |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
+    type GridTemplate(property) =
+        inherit CssRuleWithAutoNone(property)
+
+        member this.value(template: ILengthPercentage) =
+            (property, lengthPercentageToType template)
+            |> Rule
+
+        member this.minMax(min: ILengthPercentage, max: Fraction) =
+            (property, Grid.MinMax.MinMax(min, max)) |> Rule
+
+        member this.minMax(min: ILengthPercentage, max: ILengthPercentage) =
+            (property, Grid.MinMax.MinMax(min, max)) |> Rule
+
+        member this.minMax(min: ILengthPercentage, max: ContentSize.ContentSize) =
+            (property, Grid.MinMax.MinMax(min, max)) |> Rule
+
+        member this.minMax(min: ContentSize.ContentSize, max: ILengthPercentage) =
+            (property, Grid.MinMax.MinMax(min, max)) |> Rule
+
+        member this.minMax(min: ContentSize.ContentSize, max: ContentSize.ContentSize) =
+            (property, Grid.MinMax.MinMax(min, max)) |> Rule
+
+        member this.minMax(min: ContentSize.ContentSize, max: Fraction) =
+            (property, Grid.MinMax.MinMax(min, max)) |> Rule
+
+        member this.fitContent(fitContent: ILengthPercentage) =
+            (property, ContentSize.FitContent fitContent)
+            |> Rule
+
+        member this.repeat(number: int, size: ILengthPercentage) =
+            (property, Grid.Repeat.Repeat(number, size))
+            |> Rule
+
+        member this.repeat(value: int, fraction: Fraction) =
+            (property, Grid.Repeat.Repeat(value, fraction))
+            |> Rule
+
+        member this.repeat(value: int, contentSize: ContentSize.ContentSize) =
+            (property, Grid.Repeat.Repeat(value, contentSize))
+            |> Rule
+
+        member this.repeat(value: int, contentSizes: ContentSize.ContentSize list) =
+            (property, Grid.Repeat.Repeat(value, contentSizes))
+            |> Rule
+
+        member this.repeat(value: int, sizes: ILengthPercentage list) =
+            (property, Grid.Repeat.Repeat(value, sizes))
+            |> Rule
+
+        member this.repeat(value: Grid.RepeatType, fraction: Fraction) =
+            (property, Grid.Repeat.Repeat(value, fraction))
+            |> Rule
+
+        member this.repeat(value: Grid.RepeatType, length: ILengthPercentage) =
+            (property, Grid.Repeat.Repeat(value, length))
+            |> Rule
+
+        member this.repeat(value: Grid.RepeatType, contentSize: ContentSize.ContentSize) =
+            (property, Grid.Repeat.Repeat(value, contentSize))
+            |> Rule
+
+        member this.repeat(value: int, minMax: Grid.MinMaxHelper) =
+            (property, Grid.Repeat.Repeat(value, minMax))
+            |> Rule
+
+        member this.subgrid = (property, Grid.Subgrid) |> Rule
+        member this.masonry = (property, Grid.Masonry) |> Rule
+
+    type AutoHelper =
+        | Fractions of Fraction list
+        | ContentSizes of ContentSize.ContentSize list
+        | Length of Length list
+        | Percent of Percent list
+        interface ICssValue with
+            member this.Stringify() =
+                match this with
+                | Fractions fractions ->
+                    List.map (fun x -> (x :> ICssValue).Stringify()) fractions
+                    |> String.concat " "
+                | ContentSizes sizes ->
+                    List.map (fun x -> (x :> ICssValue).Stringify()) sizes
+                    |> String.concat " "
+                | Length lengths ->
+                    List.map (fun x -> (x :> ICssValue).Stringify()) lengths
+                    |> String.concat " "
+                | Percent percents ->
+                    List.map (fun x -> (x :> ICssValue).Stringify()) percents
+                    |> String.concat " "
+
+    type GridAuto(property) =
+        inherit ContentSize.ContentClasses.ContentSize(property)
+        member this.value(fraction: Fraction) = (property, fraction) |> Rule
+        member this.value(fraction: Fraction list) = (property, Fractions fraction) |> Rule
+        member this.value(sizes: Length list) = (property, Length sizes) |> Rule
+        member this.value(sizes: Percent list) = (property, Percent sizes) |> Rule
+
+        member this.value(contentSizes: ContentSize.ContentSize list) =
+            (property, ContentSizes contentSizes) |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
+    type GridAutoFlow(property) =
+        inherit CssRule(property)
+        member this.row = (property, Grid.Row) |> Rule
+        member this.column = (property, Grid.Column) |> Rule
+        member this.dense = (property, Grid.Dense) |> Rule
+        member this.rowDense = (property, Grid.RowDense) |> Rule
+        member this.columnDense = (property, Grid.ColumnDense) |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
+    type TemplateAreasHelper =
+        | Value of string list
+        | Values of string list list
+        interface ICssValue with
+            member this.Stringify() =
+                match this with
+                | Value v ->
+                    let v = String.concat " " v
+                    $"\"{v}\""
+                | Values v ->
+                    List.map (fun x -> String.concat " " x) v
+                    |> List.fold (fun acc x -> $"{acc} \"{x}\"") ""
+
+    type GridTemplateAreas(property) =
+        inherit CssRuleWithNone(property)
+        member this.value(values: string list) = (property, Value values) |> Rule
+        member this.value(values: string list list) = (property, Values values) |> Rule

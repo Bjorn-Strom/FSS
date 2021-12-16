@@ -2,17 +2,19 @@ namespace FSSTests
 
 open Fss
 open Fet
-open Fable.Core.JsInterop
 open Utils
 
 module Media =
     let tests =
        testList "Media"
             [
-                testMedia
+                testMediaCase
                     "Media query with min width and min height"
                     [ FssTypes.Media.MinWidth (px 500); FssTypes.Media.MaxWidth (px 700) ]
                     [ BackgroundColor.red ]
+                    ""
+                      
+                    (*
                     ("@media (min-width: 500px) and (max-width: 700px)" ==> "[backgroundColor,#ff0000]")
                 testMedia
                     "Media query min height only"
@@ -73,4 +75,5 @@ module Media =
                     ("@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: 1)"
                     ==>
                     "[marginTop,200px; transform,rotate(45.00deg); backgroundColor,#cd5c5c]")
+                    *)
             ]

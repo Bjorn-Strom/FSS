@@ -2,6 +2,8 @@
 
 namespace Fss.FssTypes
 
+    open Fss.FssTypes
+
     [<RequireQualifiedAccess>]
     module Attribute =
         type Attribute =
@@ -91,7 +93,5 @@ namespace Fss.FssTypes
             | Datetime
             | Pubdate
             | Manifest
-
-    [<AutoOpen>]
-    module attributeHelpers =
-        let internal attributeToString (a: Attribute.Attribute) = Fss.Utilities.Helpers.duToKebab a
+            interface ICssValue with
+                member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this

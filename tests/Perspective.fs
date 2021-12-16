@@ -1,7 +1,6 @@
 ﻿namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -11,66 +10,78 @@ module Perspective =
             [
                 testCase
                     "Perspective px"
-                    [ Perspective' (px 100) ]
-                    ["perspective" ==> "100px"]
+                    [ Perspective.value (px 100) ]
+                    "perspective: 100px;"
                 testCase
                     "Perspective em"
-                    [ Perspective' (em 3.5) ]
-                    ["perspective" ==> "3.5em"]
+                    [ Perspective.value (em 3.5) ]
+                    "perspective: 3.5em;"
                 testCase
                     "Perspective none"
                     [ Perspective.none ]
-                    ["perspective" ==> "none"]
+                    "perspective: none;"
                 testCase
                     "Perspective inherit"
                     [ Perspective.inherit']
-                    [ "perspective" ==> "inherit" ]
+                     "perspective: inherit;" 
                 testCase
                     "Perspective initial"
                     [ Perspective.initial]
-                    ["perspective" ==> "initial" ]
+                    "perspective: initial;" 
                 testCase
                     "Perspective unset"
                     [ Perspective.unset]
-                    ["perspective" ==> "unset"]
+                    "perspective: unset;"
+                testCase
+                    "Perspective revert"
+                    [ Perspective.revert]
+                    "perspective: revert;"
                 testCase
                     "Perspective x"
-                    [ PerspectiveOrigin.value <| pct 100 ]
-                    ["perspectiveOrigin" ==> "100%"]
+                    [ PerspectiveOrigin.value (pct 100) ]
+                    "perspective-origin: 100%;"
                 testCase
                     "Perspective x y"
                     [ PerspectiveOrigin.value (pct 100, pct 50) ]
-                    ["perspectiveOrigin" ==> "100% 50%"]
+                    "perspective-origin: 100% 50%;"
                 testCase
                     "Perspective origin inherit"
                     [ PerspectiveOrigin.inherit']
-                    [ "perspectiveOrigin" ==> "inherit" ]
+                     "perspective-origin: inherit;" 
                 testCase
                     "Perspective origin initial"
                     [ PerspectiveOrigin.initial]
-                    ["perspectiveOrigin" ==> "initial" ]
+                    "perspective-origin: initial;" 
                 testCase
                     "Perspective origin unset"
                     [ PerspectiveOrigin.unset]
-                    ["perspectiveOrigin" ==> "unset"]
+                    "perspective-origin: unset;"
+                testCase
+                    "Perspective origin revert"
+                    [ PerspectiveOrigin.revert]
+                    "perspective-origin: revert;"
                 testCase
                     "BackfaceVisibility hidden"
                     [ BackfaceVisibility.hidden]
-                    [ "backfaceVisibility" ==> "hidden" ]
+                     "backface-visibility: hidden;" 
                 testCase
                     "BackfaceVisibility visible"
                     [ BackfaceVisibility.visible]
-                    [ "backfaceVisibility" ==> "visible" ]
+                     "backface-visibility: visible;" 
                 testCase
                     "BackfaceVisibility inherit"
                     [ BackfaceVisibility.inherit']
-                    [ "backfaceVisibility" ==> "inherit" ]
+                     "backface-visibility: inherit;" 
                 testCase
                     "BackfaceVisibility initial"
                     [ BackfaceVisibility.initial]
-                    ["backfaceVisibility" ==> "initial" ]
+                    "backface-visibility: initial;" 
                 testCase
                     "BackfaceVisibility unset"
                     [ BackfaceVisibility.unset]
-                    ["backfaceVisibility" ==> "unset"]
+                    "backface-visibility: unset;"
+                testCase
+                    "BackfaceVisibility revert"
+                    [ BackfaceVisibility.revert]
+                    "backface-visibility: revert;"
             ]

@@ -1,7 +1,6 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -11,142 +10,162 @@ module Outline =
             [
                 testCase
                     "Outline offset px"
-                    [ OutlineOffset.value <| px 3 ]
-                    [ "outlineOffset" ==> "3px" ]
+                    [ OutlineOffset.value (px 3) ]
+                     "outline-offset: 3px;" 
                 testCase
                     "Outline offset em"
-                    [ OutlineOffset' <| em 0.2 ]
-                    [ "outlineOffset" ==> "0.2em" ]
+                    [ OutlineOffset.value (em 0.2) ]
+                     "outline-offset: 0.2em;" 
                 testCase
                     "Outline offset initial"
                     [ OutlineOffset.initial ]
-                    [ "outlineOffset" ==> "initial" ]
+                     "outline-offset: initial;" 
                 testCase
                     "Outline offset inherit"
                     [ OutlineOffset.inherit' ]
-                    [ "outlineOffset" ==> "inherit" ]
+                     "outline-offset: inherit;" 
                 testCase
                     "Outline offset unset"
                     [ OutlineOffset.unset ]
-                    [ "outlineOffset" ==> "unset" ]
+                     "outline-offset: unset;" 
+                testCase
+                    "Outline offset revert"
+                    [ OutlineOffset.revert ]
+                     "outline-offset: revert;" 
                 testCase
                     "Outline initial"
                     [ Outline.initial ]
-                    [ "outline" ==> "initial" ]
+                     "outline: initial;" 
                 testCase
                     "Outline inherit"
                     [ Outline.inherit' ]
-                    [ "outline" ==> "inherit" ]
+                     "outline: inherit;" 
                 testCase
                     "Outline unset"
                     [ Outline.unset ]
-                    [ "outline" ==> "unset" ]
+                     "outline: unset;" 
+                testCase
+                    "Outline revert"
+                    [ Outline.revert ]
+                     "outline: revert;" 
                 testCase
                     "Outline width px"
-                    [ OutlineWidth' (px 40) ]
-                    [ "outlineWidth" ==> "40px" ]
+                    [ OutlineWidth.value (px 40) ]
+                     "outline-width: 40px;" 
                 testCase
                     "Outline width thin"
                     [ OutlineWidth.thin ]
-                    [ "outlineWidth" ==> "thin" ]
+                     "outline-width: thin;" 
                 testCase
                     "Outline width medium"
                     [ OutlineWidth.medium ]
-                    [ "outlineWidth" ==> "medium" ]
+                     "outline-width: medium;" 
                 testCase
                     "Outline width thick"
                     [ OutlineWidth.thick ]
-                    [ "outlineWidth" ==> "thick" ]
+                     "outline-width: thick;" 
                 testCase
                     "Outline width initial"
                     [ OutlineWidth.initial ]
-                    [ "outlineWidth" ==> "initial" ]
+                     "outline-width: initial;" 
                 testCase
                     "Outline width inherit"
                     [ OutlineWidth.inherit' ]
-                    [ "outlineWidth" ==> "inherit" ]
+                     "outline-width: inherit;" 
                 testCase
                     "Outline width unset"
                     [ OutlineWidth.unset ]
-                    [ "outlineWidth" ==> "unset" ]
+                     "outline-width: unset;" 
+                testCase
+                    "Outline width revert"
+                    [ OutlineWidth.revert ]
+                     "outline-width: revert;" 
                 testCase
                     "Outline style hidden"
                     [ OutlineStyle.hidden ]
-                    [ "outlineStyle" ==> "hidden" ]
+                     "outline-style: hidden;" 
                 testCase
                     "Outline style dotted"
                     [ OutlineStyle.dotted ]
-                    [ "outlineStyle" ==> "dotted" ]
+                     "outline-style: dotted;" 
                 testCase
                     "Outline style dashed"
                     [ OutlineStyle.dashed ]
-                    [ "outlineStyle" ==> "dashed" ]
+                     "outline-style: dashed;" 
                 testCase
                     "Outline style solid"
                     [ OutlineStyle.solid ]
-                    [ "outlineStyle" ==> "solid" ]
+                     "outline-style: solid;" 
                 testCase
                     "Outline style double"
                     [ OutlineStyle.double ]
-                    [ "outlineStyle" ==> "double" ]
+                     "outline-style: double;" 
                 testCase
                     "Outline style groove"
                     [ OutlineStyle.groove ]
-                    [ "outlineStyle" ==> "groove" ]
+                     "outline-style: groove;" 
                 testCase
                     "Outline style ridge"
                     [ OutlineStyle.ridge ]
-                    [ "outlineStyle" ==> "ridge" ]
+                     "outline-style: ridge;" 
                 testCase
                     "Outline style inset"
                     [ OutlineStyle.inset ]
-                    [ "outlineStyle" ==> "inset" ]
+                     "outline-style: inset;" 
                 testCase
                     "Outline style outset"
                     [ OutlineStyle.outset ]
-                    [ "outlineStyle" ==> "outset" ]
+                     "outline-style: outset;" 
                 testCase
                     "Outline style none"
                     [ OutlineStyle.none ]
-                    [ "outlineStyle" ==> "none" ]
+                     "outline-style: none;" 
                 testCase
                     "Outline style initial"
                     [ OutlineStyle.initial ]
-                    [ "outlineStyle" ==> "initial" ]
+                     "outline-style: initial;" 
                 testCase
                     "Outline style inherit"
                     [ OutlineStyle.inherit' ]
-                    [ "outlineStyle" ==> "inherit" ]
+                     "outline-style: inherit;" 
                 testCase
                     "Outline style unset"
                     [ OutlineStyle.unset ]
-                    [ "outlineStyle" ==> "unset" ]
+                     "outline-style: unset;" 
+                testCase
+                    "Outline style revert"
+                    [ OutlineStyle.revert ]
+                     "outline-style: revert;" 
                 testCase
                     "Outline color hex"
                     [OutlineColor.hex "f92525"]
-                    ["outlineColor" ==> "#f92525"]
+                    "outline-color: #f92525;"
                 testCase
                     "Outline color rgb"
                     [OutlineColor.rgb 30 222 121]
-                    ["outlineColor" ==> "rgb(30, 222, 121)"]
+                    "outline-color: rgb(30, 222, 121);"
                 testCase
                     "Outline color blue"
                     [OutlineColor.blue]
-                    ["outlineColor" ==> "#0000ff"]
+                    "outline-color: blue;"
                 testCase
                     "Outline color inherit"
                     [OutlineColor.inherit']
-                    ["outlineColor" ==> "inherit"]
+                    "outline-color: inherit;"
                 testCase
                     "Outline color initial"
                     [OutlineColor.initial]
-                    ["outlineColor" ==> "initial"]
+                    "outline-color: initial;"
                 testCase
                     "Outline color unset"
                     [OutlineColor.unset ]
-                    ["outlineColor" ==> "unset"]
+                    "outline-color: unset;"
+                testCase
+                    "Outline color revert"
+                    [OutlineColor.revert ]
+                    "outline-color: revert;"
                 testCase
                     "Outline Color Value"
-                    [OutlineColor' (rgb 1 2 3)]
-                    ["outlineColor"  ==> "rgb(1, 2, 3)"]
+                    [OutlineColor.value (rgb 1 2 3)]
+                    "outline-color: rgb(1, 2, 3);"
             ]

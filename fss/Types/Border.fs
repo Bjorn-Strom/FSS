@@ -2,134 +2,249 @@ namespace Fss
 
 namespace Fss.FssTypes
 
+open Fss.FssTypes
+
+[<RequireQualifiedAccess>]
+module Border =
+    type Width =
+        | Thin
+        | Medium
+        | Thick
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    module Radius =
+        type Two =
+            { TopLeft_BottomRight: ILengthPercentage
+              TopRight_BottomLeft: ILengthPercentage }
+            interface ICssValue with
+                member this.Stringify() = this.ToString().ToLower()
+
+        type Three =
+            { TopLeft: ILengthPercentage
+              TopRight_BottomLeft: ILengthPercentage
+              BottomRight: ILengthPercentage }
+            interface ICssValue with
+                member this.Stringify() = this.ToString().ToLower()
+
+        type Four =
+            { TopLeft: ILengthPercentage
+              TopRight: ILengthPercentage
+              BottomRight: ILengthPercentage
+              BottomLeft: ILengthPercentage }
+            interface ICssValue with
+                member this.Stringify() = this.ToString().ToLower()
+
+    type Style =
+        | Hidden
+        | Dotted
+        | Dashed
+        | Solid
+        | Double
+        | Groove
+        | Ridge
+        | Inset
+        | Outset
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type Collapse =
+        | Collapse
+        | Separate
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
+    type ImageRepeat =
+        | Stretch
+        | Repeat
+        | Round
+        | Space
+        interface ICssValue with
+            member this.Stringify() = this.ToString().ToLower()
+
     [<RequireQualifiedAccess>]
-    module Border =
-        type Width =
-            | Thin
-            | Medium
-            | Thick
-            interface IBorderWidth
+    module BorderClasses =
+        type BorderColorParent(property) =
+            inherit ColorClass.Color(property)
 
-        type BorderValue (valueFunction: IBorderWidth -> CssProperty) =
-            member this.value (width: IBorderWidth) = width |> valueFunction
-            member this.thin = Width.Thin |> valueFunction
-            member this.medium = Width.Medium |> valueFunction
-            member this.thick = Width.Thick |> valueFunction
+            member this.value(color: Color) = (property, color) |> Rule
 
-            member this.inherit' = Inherit |> valueFunction
-            member this.initial = Initial |> valueFunction
-            member this.unset = Unset |> valueFunction
+        type BorderWidthParent(property) =
+            inherit DirectionalLength(property)
+            member this.value(width: Width) = (property, width) |> Rule
 
-        type Style =
-            | Hidden
-            | Dotted
-            | Dashed
-            | Solid
-            | Double
-            | Groove
-            | Ridge
-            | Inset
-            | Outset
-            interface IBorderStyle
+            member this.value(length: ILengthPercentage) =
+                (property, lengthPercentageToType length) |> Rule
 
-        type BorderSideStyle (valueFunction: IBorderStyle -> CssProperty) =
-            member this.value (style: IBorderStyle) = style |> valueFunction
-            member this.hidden = Hidden |> valueFunction
-            member this.dotted = Dotted |> valueFunction
-            member this.dashed = Dashed |> valueFunction
-            member this.solid = Solid |> valueFunction
-            member this.double = Double |> valueFunction
-            member this.groove = Groove |> valueFunction
-            member this.ridge = Ridge |> valueFunction
-            member this.inset = Inset |> valueFunction
-            member this.outset = Outset |> valueFunction
+            member this.thin = (property, Width.Thin) |> Rule
+            member this.medium = (property, Width.Medium) |> Rule
+            member this.thick = (property, Width.Thick) |> Rule
 
-            member this.none = None' |> valueFunction
-            member this.inherit' = Inherit |> valueFunction
-            member this.initial = Initial |> valueFunction
-            member this.unset = Unset |> valueFunction
+        type BorderStyleParent(property) =
+            inherit CssRuleWithNone(property)
+            member this.value(style: Style) = (property, style) |> Rule
+            member this.hidden = (property, Style.Hidden) |> Rule
+            member this.dotted = (property, Style.Dotted) |> Rule
+            member this.dashed = (property, Style.Dashed) |> Rule
+            member this.solid = (property, Style.Solid) |> Rule
+            member this.double = (property, Style.Double) |> Rule
+            member this.groove = (property, Style.Groove) |> Rule
+            member this.ridge = (property, Style.Ridge) |> Rule
+            member this.inset = (property, Style.Inset) |> Rule
+            member this.outset = (property, Style.Outset) |> Rule
 
-        type BorderStyle (styleToString: IBorderStyle -> string, valueFunction: string -> CssProperty, valueFunction': IBorderStyle -> CssProperty) =
-            inherit BorderSideStyle (valueFunction')
-            member this.value (vertical: IBorderStyle, horizontal: IBorderStyle) =
-                sprintf "%s %s"
-                    (styleToString vertical)
-                    (styleToString horizontal)
-                |> valueFunction
-            member this.value (top: IBorderStyle, horizontal: IBorderStyle, bottom: IBorderStyle) =
-                sprintf "%s %s %s"
-                    (styleToString top)
-                    (styleToString horizontal)
-                    (styleToString bottom)
-                |> valueFunction
-            member this.value (top: IBorderStyle, right: IBorderStyle, bottom: IBorderStyle, left: IBorderStyle) =
-                sprintf "%s %s %s %s"
-                    (styleToString top)
-                    (styleToString right)
-                    (styleToString bottom)
-                    (styleToString left)
-                |> valueFunction
+        type BorderRadiusParent(property) =
+            inherit CssRule(property)
 
-        type BorderColor (colorToString: IBorderColor -> string, valueFunction: string -> CssProperty, valueFunction': IBorderColor -> CssProperty) =
-            inherit ColorBase<CssProperty> (valueFunction')
-            member this.value (color: IBorderColor) = color |> valueFunction'
-            member this.value (horizontal: IBorderColor, vertical: IBorderColor) =
-                sprintf "%s %s"
-                    (colorToString horizontal)
-                    (colorToString vertical)
-                |> valueFunction
-            member this.value (top: IBorderColor, vertical: IBorderColor, bottom: IBorderColor) =
-                sprintf "%s %s %s"
-                    (colorToString top)
-                    (colorToString vertical)
-                    (colorToString bottom)
-                |> valueFunction
-            member this.value (top: IBorderColor, right: IBorderColor, bottom: IBorderColor, left: IBorderColor) =
-                sprintf "%s %s %s %s"
-                    (colorToString top)
-                    (colorToString right)
-                    (colorToString bottom)
-                    (colorToString left)
-                |> valueFunction
-            member this.inherit' = Inherit |> valueFunction'
-            member this.initial = Initial |> valueFunction'
-            member this.unset = Unset |> valueFunction'
+            member this.value(radius: ILengthPercentage) =
+                (property, lengthPercentageToType radius) |> Rule
 
-        type BorderSideColor (valueFunction: IBorderColor -> CssProperty) =
-            inherit ColorBase<CssProperty> (valueFunction)
-            member this.value color = color |> valueFunction
-            member this.inherit' = Inherit |> valueFunction
-            member this.initial = Initial |> valueFunction
-            member this.unset = Unset |> valueFunction
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
+        type BorderWidth(property) =
+            inherit BorderWidthParent(property)
 
-        type Collapse =
-            | Collapse
-            | Separate
-            interface IBorderCollapse
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
+        type BorderRadius(property) =
+            inherit DirectionalLength(property)
 
-        type ImageOutset =
-            | ImageOutset of float
-            interface IBorderImageOutset
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius-top-right
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius-top-left
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius-bottom-right
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius-bottom-left
+        type BorderRadiusEdge(property) =
+            inherit CssRule(property)
 
-        type ImageRepeat =
-            | Stretch
-            | Repeat
-            | Round
-            | Space
-            interface IBorderRepeat
+            member this.value(radiusEdge: ILengthPercentage) =
+                (property, lengthPercentageToType radiusEdge)
+                |> Rule
 
-        type ImageSlice =
-            | Value of float
-            | Fill
-            interface IBorderImageSlice
+            member this.value(horizontal: ILengthPercentage, vertical: ILengthPercentage) =
+                let value =
+                    $"{lengthPercentageString horizontal} {lengthPercentageString vertical}"
+                    |> String
 
-        type BorderImage (valueFunction: string -> CssProperty, valueFunction': IBorderImageSource -> CssProperty) =
-            inherit Image.Image(valueFunction)
-            member this.value value = value |> valueFunction'
-            member this.none = None' |> valueFunction'
-            member this.inherit' = Inherit |> valueFunction'
-            member this.initial = Initial |> valueFunction'
-            member this.unset = Unset |> valueFunction'
+                (property, value) |> Rule
 
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
+        type BorderStyle(property) =
+            inherit BorderStyleParent(property)
 
+            member this.value(topAndBottom: Style, leftAndRight: Style) =
+                let value =
+                    $"{(topAndBottom :> ICssValue).Stringify()} {(leftAndRight :> ICssValue).Stringify()}"
+                    |> String
 
+                (property, value) |> Rule
+
+            member this.value(top: Style, leftAndRight: Style, bottom: Style) =
+                let value =
+                    $"{(top :> ICssValue).Stringify()} {(leftAndRight :> ICssValue).Stringify()} {(bottom :> ICssValue).Stringify()}"
+                    |> String
+
+                (property, value) |> Rule
+
+            member this.value(top: Style, right: Style, bottom: Style, left: Style) =
+                let value =
+                    $"{(top :> ICssValue).Stringify()} {(right :> ICssValue).Stringify()} {(bottom :> ICssValue).Stringify()} {(left :> ICssValue).Stringify()}"
+                    |> String
+
+                (property, value) |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
+        type BorderCollapse(property) =
+            inherit CssRule(property)
+            member this.value(collapse: Collapse) = (property, collapse) |> Rule
+            member this.collapse = (property, Collapse) |> Rule
+            member this.separate = (property, Separate) |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
+        type BorderImageOutset(property) =
+            inherit DirectionalLength(property)
+            member this.value(imageOutset: float) = (property, Float imageOutset) |> Rule
+
+            member this.value(vertical: float, horizontal: float) =
+                let value =
+                    $"{vertical} {horizontal}"
+                    |> String
+
+                (property, value) |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
+        type BorderImageRepeat(property) =
+            inherit CssRule(property)
+            member this.value(imageRepeat: ImageRepeat) = (property, imageRepeat) |> Rule
+
+            member this.value(vertical: ImageRepeat, horizontal: ImageRepeat) =
+                let value =
+                    $"{(vertical :> ICssValue).Stringify()} {(horizontal :> ICssValue).Stringify()}"
+                    |> String
+
+                (property, value) |> Rule
+
+            member this.stretch = (property, Stretch) |> Rule
+            member this.repeat = (property, Repeat) |> Rule
+            member this.round = (property, Round) |> Rule
+            member this.space = (property, Space) |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
+        type BorderImageSlice(Property) =
+            inherit DirectionalLength(Property)
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-color
+        type BorderColor(property) =
+            inherit BorderColorParent(property)
+
+            member this.value(vertical: Color, horizontal: Color) =
+                let value =
+                    $"{(vertical :> ICssValue).Stringify()} {(horizontal :> ICssValue).Stringify()}"
+                    |> String
+
+                (property, value) |> Rule
+
+            member this.value(top: Color, horizontal: Color, bottom: Color) =
+                let value =
+                    $"{(top :> ICssValue).Stringify()} {(horizontal :> ICssValue).Stringify()} {(bottom :> ICssValue).Stringify()}"
+                    |> String
+
+                (property, value) |> Rule
+
+            member this.value(top: Color, right: Color, bottom: Color, left: Color) =
+                let value =
+                    $"{(top :> ICssValue).Stringify()} {(right :> ICssValue).Stringify()} {(bottom :> ICssValue).Stringify()} {(left :> ICssValue).Stringify()}"
+                    |> String
+
+                (property, value) |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing
+        type BorderSpacing(property) =
+            inherit CssRule(property)
+
+            member this.value(spacing: ILengthPercentage) =
+                (property, lengthPercentageToType spacing) |> Rule
+
+            member this.value(horizontal: ILengthPercentage, vertical: ILengthPercentage) =
+                let value =
+                    $"{lengthPercentageString horizontal} {lengthPercentageString vertical}"
+                    |> String
+
+                (property, value) |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
+        type BorderImageWidth(property) =
+            inherit DirectionalLength(property)
+            member this.value(imageWidth: float) = (property, Float imageWidth) |> Rule
+
+            member this.value(vertical: ILengthPercentage, horizontal: ILengthPercentage) =
+                let value =
+                    $"{lengthPercentageString vertical} {lengthPercentageString horizontal}"
+                    |> String
+
+                (property, value) |> Rule
+
+            member this.auto = (property, Auto) |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/border
+        type Border(property) =
+            inherit CssRule(property)
+            member this.value(border: None') = (property, border) |> Rule
+            member this.none = (property, None') |> Rule

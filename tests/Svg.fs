@@ -1,7 +1,6 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
@@ -12,394 +11,396 @@ module Svg =
                 testCase
                     "Alignment baseline Baseline"
                     [AlignmentBaseline.baseline]
-                    ["alignmentBaseline" ==> "baseline"]
+                    "alignment-baseline: baseline;"
                 testCase
                     "Alignment baseline TextBottom"
                     [AlignmentBaseline.textBottom]
-                    ["alignmentBaseline" ==> "text-bottom"]
+                    "alignment-baseline: text-bottom;"
                 testCase
                     "Alignment baseline TextBeforeEdge"
                     [AlignmentBaseline.textBeforeEdge]
-                    ["alignmentBaseline" ==> "text-before-edge"]
+                    "alignment-baseline: text-before-edge;"
                 testCase
                     "Alignment baseline Middle"
                     [AlignmentBaseline.middle]
-                    ["alignmentBaseline" ==> "middle"]
+                    "alignment-baseline: middle;"
                 testCase
                     "Alignment baseline Central"
                     [AlignmentBaseline.central]
-                    ["alignmentBaseline" ==> "central"]
+                    "alignment-baseline: central;"
                 testCase
                     "Alignment baseline TextTop"
                     [AlignmentBaseline.textTop]
-                    ["alignmentBaseline" ==> "text-top"]
+                    "alignment-baseline: text-top;"
                 testCase
                     "Alignment baseline TextAfterEdge"
                     [AlignmentBaseline.textAfterEdge]
-                    ["alignmentBaseline" ==> "text-after-edge"]
+                    "alignment-baseline: text-after-edge;"
                 testCase
                     "Alignment baseline Ideographic"
                     [AlignmentBaseline.ideographic]
-                    ["alignmentBaseline" ==> "ideographic"]
+                    "alignment-baseline: ideographic;"
                 testCase
                     "Alignment baseline Alphabetic"
                     [AlignmentBaseline.alphabetic]
-                    ["alignmentBaseline" ==> "alphabetic"]
+                    "alignment-baseline: alphabetic;"
                 testCase
                     "Alignment baseline Hanging"
                     [AlignmentBaseline.hanging]
-                    ["alignmentBaseline" ==> "hanging"]
+                    "alignment-baseline: hanging;"
                 testCase
                     "Alignment baseline Mathematical"
                     [AlignmentBaseline.mathematical]
-                    ["alignmentBaseline" ==> "mathematical"]
+                    "alignment-baseline: mathematical;"
                 testCase
                     "Alignment baseline Top"
                     [AlignmentBaseline.top]
-                    ["alignmentBaseline" ==> "top"]
+                    "alignment-baseline: top;"
                 testCase
                     "Alignment baseline Center"
                     [AlignmentBaseline.center]
-                    ["alignmentBaseline" ==> "center"]
+                    "alignment-baseline: center;"
                 testCase
                     "Alignment baseline Bottom"
                     [AlignmentBaseline.bottom]
-                    ["alignmentBaseline" ==> "bottom"]
+                    "alignment-baseline: bottom;"
                 testCase
                     "Baseline shift sub"
                     [BaselineShift.sub]
-                    ["baselineShift" ==> "sub"]
+                    "baseline-shift: sub;"
                 testCase
                     "Baseline shift super"
                     [BaselineShift.super]
-                    ["baselineShift" ==> "super"]
+                    "baseline-shift: super;"
                 testCase
                     "Baseline shift px"
-                    [BaselineShift' <| px 10]
-                    ["baselineShift" ==> "10px"]
+                    [BaselineShift.value (px 10)]
+                    "baseline-shift: 10px;"
                 testCase
                     "Baseline shift pct"
-                    [BaselineShift' <| pct 74]
-                    ["baselineShift" ==> "74%"]
-
+                    [BaselineShift.value (pct 74)]
+                    "baseline-shift: 74%;"
                 testCase
                     "Dominant baseline Ideographic"
                     [DominantBaseline.ideographic]
-                    ["dominantBaseline" ==> "ideographic"]
+                    "dominant-baseline: ideographic;"
                 testCase
                     "Dominant baseline Alphabetic"
                     [DominantBaseline.alphabetic]
-                    ["dominantBaseline" ==> "alphabetic"]
+                    "dominant-baseline: alphabetic;"
                 testCase
                     "Dominant baseline Hanging"
                     [DominantBaseline.hanging]
-                    ["dominantBaseline" ==> "hanging"]
+                    "dominant-baseline: hanging;"
                 testCase
                     "Dominant baseline Mathematical"
                     [DominantBaseline.mathematical]
-                    ["dominantBaseline" ==> "mathematical"]
+                    "dominant-baseline: mathematical;"
                 testCase
                     "Dominant baseline Central"
                     [DominantBaseline.central]
-                    ["dominantBaseline" ==> "central"]
+                    "dominant-baseline: central;"
                 testCase
                     "Dominant baseline Middle"
                     [DominantBaseline.middle]
-                    ["dominantBaseline" ==> "middle"]
+                    "dominant-baseline: middle;"
                 testCase
                     "Dominant baseline TextAfterEdge"
                     [DominantBaseline.textAfterEdge]
-                    ["dominantBaseline" ==> "text-after-edge"]
+                    "dominant-baseline: text-after-edge;"
                 testCase
                     "Dominant baseline TextBeforeEdge"
                     [DominantBaseline.textBeforeEdge]
-                    ["dominantBaseline" ==> "text-before-edge"]
+                    "dominant-baseline: text-before-edge;"
                 testCase
                     "Dominant baseline TextTop"
                     [DominantBaseline.textTop]
-                    ["dominantBaseline" ==> "text-top"]
+                    "dominant-baseline: text-top;"
                 testCase
                     "TextAnchor start"
                     [TextAnchor.start]
-                    ["textAnchor" ==> "start"]
+                    "text-anchor: start;"
                 testCase
                     "TextAnchor middle"
                     [TextAnchor.middle]
-                    ["textAnchor" ==> "middle"]
+                    "text-anchor: middle;"
                 testCase
                     "TextAnchor end"
                     [TextAnchor.end']
-                    ["textAnchor" ==> "end"]
+                    "text-anchor: end;"
                 testCase
                     "ClipRule nonzero"
                     [ClipRule.nonzero]
-                    ["clipRule" ==> "nonzero"]
+                    "clip-rule: nonzero;"
                 testCase
                     "ClipRule evenodd"
                     [ClipRule.evenodd]
-                    ["clipRule" ==> "evenodd"]
+                    "clip-rule: evenodd;"
                 testCase
                     "FloodColor color rgb"
                     [ FloodColor.rgb 255 0 0 ]
-                    ["floodColor" ==> "rgb(255, 0, 0)"]
+                    "flood-color: rgb(255, 0, 0);"
                 testCase
                     "FloodColor color green"
                     [ FloodColor.green ]
-                    ["floodColor" ==> "#008000"]
+                    "flood-color: green;"
                 testCase
                     "FloodOpacity 1"
-                    [ FloodOpacity' 1.0 ]
-                    ["floodOpacity" ==> "1"]
+                    [ FloodOpacity.value 1.0 ]
+                    "flood-opacity: 1;"
                 testCase
                     "FloodOpacity 0"
-                    [ FloodOpacity' 0.0]
-                    ["floodOpacity" ==> "0"]
+                    [ FloodOpacity.value 0.0]
+                    "flood-opacity: 0;"
                 testCase
                     "FloodOpacity 50%"
-                    [ FloodOpacity' 0.5 ]
-                    ["floodOpacity" ==> "0.5"]
+                    [ FloodOpacity.value 0.5 ]
+                    "flood-opacity: 0.5;"
                 testCase
                     "FloodOpacity -10 should be 0"
-                    [ FloodOpacity' -10.0 ]
-                    ["floodOpacity" ==> "0"]
+                    [ FloodOpacity.value -10.0 ]
+                    "flood-opacity: 0;"
                 testCase
                     "FloodOpacity 10 should be 1"
-                    [ FloodOpacity' 10.0 ]
-                    ["floodOpacity" ==> "1"]
+                    [ FloodOpacity.value 10.0 ]
+                    "flood-opacity: 1;"
                 testCase
                     "FloodOpacity 1.5 should be 1"
-                    [ FloodOpacity' 1.5 ]
-                    ["floodOpacity" ==> "1"]
+                    [ FloodOpacity.value 1.5 ]
+                    "flood-opacity: 1;"
                 testCase
                     "LightingColor color rgb"
                     [ LightingColor.rgb 255 0 0 ]
-                    ["lightingColor" ==> "rgb(255, 0, 0)"]
+                    "lighting-color: rgb(255, 0, 0);"
                 testCase
                     "LightingColor color green"
                     [ LightingColor.green ]
-                    ["lightingColor" ==> "#008000"]
+                    "lighting-color: green;"
                 testCase
                     "StopColor color rgb"
                     [ StopColor.rgb 255 0 0 ]
-                    ["stopColor" ==> "rgb(255, 0, 0)"]
+                    "stop-color: rgb(255, 0, 0);"
                 testCase
                     "StopColor color green"
                     [ StopColor.green ]
-                    ["stopColor" ==> "#008000"]
+                    "stop-color: green;"
                 testCase
                     "StopOpacity 1"
-                    [ StopOpacity' 1.0 ]
-                    ["stopOpacity" ==> "1"]
+                    [ StopOpacity.value 1.0 ]
+                    "stop-opacity: 1;"
                 testCase
                     "StopOpacity 0"
-                    [ StopOpacity' 0.0]
-                    ["stopOpacity" ==> "0"]
+                    [ StopOpacity.value 0.0]
+                    "stop-opacity: 0;"
                 testCase
                     "StopOpacity 50%"
-                    [ StopOpacity' 0.5 ]
-                    ["stopOpacity" ==> "0.5"]
+                    [ StopOpacity.value 0.5 ]
+                    "stop-opacity: 0.5;"
                 testCase
                     "StopOpacity -10 should be 0"
-                    [ StopOpacity' -10.0 ]
-                    ["stopOpacity" ==> "0"]
+                    [ StopOpacity.value -10.0 ]
+                    "stop-opacity: 0;"
                 testCase
                     "StopOpacity 10 should be 1"
-                    [ StopOpacity' 10.0 ]
-                    ["stopOpacity" ==> "1"]
+                    [ StopOpacity.value 10.0 ]
+                    "stop-opacity: 1;"
                 testCase
                     "StopOpacity 1.5 should be 1"
-                    [ StopOpacity' 1.5 ]
-                    ["stopOpacity" ==> "1"]
+                    [ StopOpacity.value 1.5 ]
+                    "stop-opacity: 1;"
                 testCase
                     "ColorInterpolation srgb"
                     [ ColorInterpolation.sRGB ]
-                    ["colorInterpolation" ==> "sRGB"]
+                    "color-interpolation: sRGB;"
                 testCase
                     "ColorInterpolation linearRGB"
                     [ ColorInterpolation.linearRGB ]
-                    ["colorInterpolation" ==> "linearRGB"]
+                    "color-interpolation: linearRGB;"
                 testCase
                     "ColorInterpolation auto"
                     [ ColorInterpolation.auto ]
-                    ["colorInterpolation" ==> "auto"]
+                    "color-interpolation: auto;"
                 testCase
                     "ColorInterpolationFilters srgb"
                     [ ColorInterpolationFilters.sRGB ]
-                    ["colorInterpolationFilters" ==> "sRGB"]
+                    "color-interpolation-filters: sRGB;"
                 testCase
                     "ColorInterpolationFilters linearRGB"
                     [ ColorInterpolationFilters.linearRGB ]
-                    ["colorInterpolationFilters" ==> "linearRGB"]
+                    "color-interpolation-filters: linearRGB;"
                 testCase
                     "ColorInterpolationFilters auto"
                     [ ColorInterpolationFilters.auto ]
-                    ["colorInterpolationFilters" ==> "auto"]
+                    "color-interpolation-filters: auto;"
                 testCase
                     "Fill color rgb"
                     [ Fill.rgb 255 0 0 ]
-                    ["fill" ==> "rgb(255, 0, 0)"]
+                    "fill: rgb(255, 0, 0);"
                 testCase
                     "Fill color green"
                     [ Fill.green ]
-                    ["fill" ==> "#008000"]
+                    "fill: green;"
                 testCase
                     "FillOpacity 1"
-                    [ FillOpacity' 1.0 ]
-                    ["fillOpacity" ==> "1"]
+                    [ FillOpacity.value 1.0 ]
+                    "fill-opacity: 1;"
                 testCase
                     "FillOpacity 0"
-                    [ FillOpacity' 0.0]
-                    ["fillOpacity" ==> "0"]
+                    [ FillOpacity.value 0.0]
+                    "fill-opacity: 0;"
                 testCase
                     "FillOpacity 50%"
-                    [ FillOpacity' 0.5 ]
-                    ["fillOpacity" ==> "0.5"]
+                    [ FillOpacity.value 0.5 ]
+                    "fill-opacity: 0.5;"
                 testCase
                     "FillOpacity -10 should be 0"
-                    [ FillOpacity' -10.0 ]
-                    ["fillOpacity" ==> "0"]
+                    [ FillOpacity.value -10.0 ]
+                    "fill-opacity: 0;"
                 testCase
                     "FillOpacity 10 should be 1"
-                    [ FillOpacity' 10.0 ]
-                    ["fillOpacity" ==> "1"]
+                    [ FillOpacity.value 10.0 ]
+                    "fill-opacity: 1;"
                 testCase
                     "FillOpacity 1.5 should be 1"
-                    [ FillOpacity' 1.5 ]
-                    ["fillOpacity" ==> "1"]
+                    [ FillOpacity.value 1.5 ]
+                    "fill-opacity: 1;"
                 testCase
                     "FillRule nonzero"
                     [FillRule.nonzero]
-                    ["fillRule" ==> "nonzero"]
+                    "fill-rule: nonzero;"
                 testCase
                     "FillRule evenodd"
                     [FillRule.evenodd]
-                    ["fillRule" ==> "evenodd"]
+                    "fill-rule: evenodd;"
                 testCase
                     "ImageRendering optimize speed"
-                    [ImageRendering.optimizeSpeed]
-                    ["imageRendering" ==> "optimize-speed"]
+                    [Svg.ImageRendering.optimizeSpeed]
+                    "image-rendering: optimize-speed;"
                 testCase
                     "ImageRendering optimize quality"
-                    [ImageRendering.optimizeQuality]
-                    ["imageRendering" ==> "optimize-quality"]
+                    [Svg.ImageRendering.optimizeQuality]
+                    "image-rendering: optimize-quality;"
                 testCase
                     "ImageRendering auto"
-                    [ImageRendering.auto]
-                    ["imageRendering" ==> "auto"]
+                    [Svg.ImageRendering.auto]
+                    "image-rendering: auto;"
                 testCase
                     "ShapeRendering optimize speed"
                     [ShapeRendering.optimizeSpeed]
-                    ["shapeRendering" ==> "optimize-speed"]
+                    "shape-rendering: optimize-speed;"
                 testCase
                     "ShapeRendering crisp edges"
                     [ShapeRendering.crispEdges]
-                    ["shapeRendering" ==> "crisp-edges"]
+                    "shape-rendering: crisp-edges;"
                 testCase
                     "ShapeRendering geometric precision"
                     [ShapeRendering.geometricPrecision]
-                    ["shapeRendering" ==> "geometric-precision"]
+                    "shape-rendering: geometric-precision;"
                 testCase
                     "ShapeRendering auto"
                     [ShapeRendering.auto]
-                    ["shapeRendering" ==> "auto"]
+                    "shape-rendering: auto;"
                 testCase
                     "Stroke color rgb"
                     [ Stroke.rgb 255 0 0 ]
-                    ["stroke" ==> "rgb(255, 0, 0)"]
+                    "stroke: rgb(255, 0, 0);"
                 testCase
                     "Stroke color green"
                     [ Stroke.green ]
-                    ["stroke" ==> "#008000"]
+                    "stroke: green;"
                 testCase
                     "StrokeOpacity 1"
-                    [ StrokeOpacity' 1.0 ]
-                    ["strokeOpacity" ==> "1"]
+                    [ StrokeOpacity.value 1.0 ]
+                    "stroke-opacity: 1;"
                 testCase
                     "StrokeOpacity 0"
-                    [ StrokeOpacity' 0.0]
-                    ["strokeOpacity" ==> "0"]
+                    [ StrokeOpacity.value 0.0]
+                    "stroke-opacity: 0;"
                 testCase
                     "StrokeOpacity 50%"
-                    [ StrokeOpacity' 0.5 ]
-                    ["strokeOpacity" ==> "0.5"]
+                    [ StrokeOpacity.value 0.5 ]
+                    "stroke-opacity: 0.5;"
                 testCase
                     "StrokeOpacity -10 should be 0"
-                    [ StrokeOpacity' -10.0 ]
-                    ["strokeOpacity" ==> "0"]
+                    [ StrokeOpacity.value -10.0 ]
+                    "stroke-opacity: 0;"
                 testCase
                     "StrokeOpacity 10 should be 1"
-                    [ StrokeOpacity' 10.0 ]
-                    ["strokeOpacity" ==> "1"]
+                    [ StrokeOpacity.value 10.0 ]
+                    "stroke-opacity: 1;"
                 testCase
                     "StrokeOpacity 1.5 should be 1"
-                    [ StrokeOpacity' 1.5 ]
-                    ["strokeOpacity" ==> "1"]
+                    [ StrokeOpacity.value 1.5 ]
+                    "stroke-opacity: 1;"
                 testCase
                     "Stroke dasharray 5, 3, 2"
-                    [StrokeDasharray' [5;3;2]]
-                    ["strokeDasharray" ==> "5, 3, 2"]
+                    [StrokeDasharray.value [5;3;2]]
+                    "stroke-dasharray: 5, 3, 2;"
                 testCase
                     "Stroke dasharray 400"
-                    [StrokeDasharray' [400]]
-                    ["strokeDasharray" ==> "400"]
+                    [StrokeDasharray.value [400]]
+                    "stroke-dasharray: 400;"
                 testCase
                     "Stroke dashoffset 5, 3, 2"
-                    [StrokeDashoffset' [5;3;2]]
-                    ["strokeDashoffset" ==> "5, 3, 2"]
+                    [StrokeDashoffset.value [5;3;2]]
+                    "stroke-dashoffset: 5, 3, 2;"
                 testCase
                     "Stroke dashoffset 400"
-                    [StrokeDashoffset' [400]]
-                    ["strokeDashoffset" ==> "400"]
+                    [StrokeDashoffset.value [400]]
+                    "stroke-dashoffset: 400;"
                 testCase
                     "StrokeLinecap butt"
                     [StrokeLinecap.butt]
-                    ["strokeLinecap" ==> "butt"]
+                    "stroke-linecap: butt;"
                 testCase
                     "StrokeLinecap round"
                     [StrokeLinecap.round]
-                    ["strokeLinecap" ==> "round"]
+                    "stroke-linecap: round;"
                 testCase
                     "StrokeLinecap square"
                     [StrokeLinecap.square]
-                    ["strokeLinecap" ==> "square"]
+                    "stroke-linecap: square;"
+                    
+                    
+                    
                 testCase
                     "StrokeLinejoin arcs"
                     [StrokeLinejoin.arcs]
-                    ["strokeLinejoin" ==> "arcs"]
+                    "stroke-linejoin: arcs;"
                 testCase
                     "StrokeLinejoin bevel"
                     [StrokeLinejoin.bevel]
-                    ["strokeLinejoin" ==> "bevel"]
+                    "stroke-linejoin: bevel;"
                 testCase
                     "StrokeLinejoin miter"
                     [StrokeLinejoin.miter]
-                    ["strokeLinejoin" ==> "miter"]
+                    "stroke-linejoin: miter;"
                 testCase
                     "StrokeLinejoin miter"
                     [StrokeLinejoin.miter]
-                    ["strokeLinejoin" ==> "miter"]
+                    "stroke-linejoin: miter;"
                 testCase
                     "StrokeLinejoin miterClip"
                     [StrokeLinejoin.miterClip]
-                    ["strokeLinejoin" ==> "miter-clip"]
+                    "stroke-linejoin: miter-clip;"
                 testCase
                     "StrokeLinejoin round"
                     [StrokeLinejoin.round]
-                    ["strokeLinejoin" ==> "round"]
+                    "stroke-linejoin: round;"
                 testCase
                     "Stroke miterlimit 5"
-                    [StrokeMiterlimit' 5]
-                    ["strokeMiterlimit" ==> "5"]
+                    [StrokeMiterlimit.value 5]
+                    "stroke-miterlimit: 5;"
                 testCase
                     "Stroke width px"
-                    [StrokeWidth' <| px 5]
-                    ["strokeWidth" ==> "5px"]
+                    [StrokeWidth.value (px 5)]
+                    "stroke-width: 5px;"
                 testCase
                     "Stroke width em"
-                    [StrokeWidth' <| em 2.]
-                    ["strokeWidth" ==> "2.0em"]
+                    [StrokeWidth.value (em 2)]
+                    "stroke-width: 2em;"
                 testCase
                     "Stroke width pct"
-                    [StrokeWidth' <| pct 50 ]
-                    ["strokeWidth" ==> "50%"]
+                    [StrokeWidth.value (pct 50) ]
+                    "stroke-width: 50%;"
                 ]

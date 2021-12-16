@@ -1,623 +1,635 @@
 namespace Fss
 // Interfaces
 namespace Fss.FssTypes
-    type IAnimationDirection      = interface end
-    type IAnimationFillMode       = interface end
-    type IAnimationPlayState      = interface end
-    type IAnimationIterationCount = interface end
-    type IAnimationName           = interface end
 
-    type IColor = interface end
+type IStringify =
+    interface
+        abstract member Stringify : unit -> string
+    end
 
-    type IColorStop = interface end
+type ICssValue =
+    interface
+        abstract member Stringify : unit -> string
+    end
 
-    type ILengthPercentage = interface end
+type ICounterValue =
+    interface
+        abstract member Stringify : unit -> string
+    end
 
-    type ITemplateType = interface end
+type IFontFaceValue =
+    interface
+        abstract member Stringify : unit -> string
+    end
 
-    type IFontSize             = interface end
-    type IFontStyle            = interface end
-    type IFontStretch          = interface end
-    type IFontWeight           = interface end
-    type IFontDisplay          = interface end
-    type IFontFamily           = interface end
-    type IFontFeatureSetting   = interface end
-    type IFontVariantNumeric   = interface end
-    type IFontVariantCaps      = interface end
-    type IFontVariantEastAsian = interface end
-    type IFontVariantLigature  = interface end
-    type IFontVariantPosition  = interface end
-    type IFontKerning          = interface end
-    type IFontSynthesis        = interface end
-    type IFontLanguageOverride = interface end
-    type ILineHeight           = interface end
-    type ILineBreak            = interface end
-    type ILetterSpacing        = interface end
-    type ILineGapOverride      = interface end
+// TODO: Clean up all the types and functions
+// TODO: Finnes counter og font face properties i denne? Isåfall fjern
+[<RequireQualifiedAccess>]
+module Property =
+    type Property =
+        // Css
+        | Appearance
+        | AlignContent
+        | AlignItems
+        | AlignSelf
+        | All
+        | AnimationDelay
+        | AnimationDirection
+        | AnimationDuration
+        | AnimationFillMode
+        | AnimationIterationCount
+        | AnimationName
+        | AnimationPlayState
+        | AnimationTimingFunction
+        | AspectRatio
+        | BackfaceVisibility
+        | BackgroundAttachment
+        | BackgroundBlendMode
+        | BackgroundClip
+        | BackgroundColor
+        | BackgroundImage
+        | BackgroundOrigin
+        | BackgroundPosition
+        | BackgroundRepeat
+        | BackgroundSize
+        | BackdropFilter
+        | Bleed
+        | Border
+        | BorderBottomColor
+        | BorderBottomLeftRadius
+        | BorderBottomRightRadius
+        | BorderBottomStyle
+        | BorderBottomWidth
+        | BorderBottom
+        | BorderCollapse
+        | BorderColor
+        | BorderImage
+        | BorderImageOutset
+        | BorderImageRepeat
+        | BorderImageSource
+        | BorderImageSlice
+        | BorderImageWidth
+        | BorderLeftColor
+        | BorderLeftStyle
+        | BorderLeftWidth
+        | BorderLeft
+        | BorderRadius
+        | BorderRightColor
+        | BorderRightStyle
+        | BorderRightWidth
+        | BorderRight
+        | BorderSpacing
+        | BorderStyle
+        | BorderTopColor
+        | BorderTopLeftRadius
+        | BorderTopRightRadius
+        | BorderTopStyle
+        | BorderTopWidth
+        | BorderTop
+        | BorderWidth
+        | BorderBlockColor
+        | Bottom
+        | BoxDecorationBreak
+        | BoxShadow
+        | BoxSizing
+        | BreakAfter
+        | BreakBefore
+        | BreakInside
+        | CaptionSide
+        | CaretColor
+        | Clear
+        | Clip
+        | ClipPath
+        | Color
+        | ColorAdjust
+        | Columns
+        | ColumnCount
+        | ColumnFill
+        | ColumnGap
+        | ColumnRule
+        | ColumnRuleColor
+        | ColumnRuleStyle
+        | ColumnRuleWidth
+        | ColumnSpan
+        | ColumnWidth
+        | Content
+        | CounterIncrement
+        | CounterReset
+        | CueAfter
+        | CueBefore
+        | Cue
+        | Cursor
+        | Direction
+        | Display
+        | Elevation
+        | EmptyCells
+        | Filter
+        | Flex
+        | FlexBasis
+        | FlexDirection
+        | FontFeatureSettings
+        | FontVariationSettings
+        | FlexFlow
+        | FlexGrow
+        | FlexShrink
+        | FlexWrap
+        | Float
+        | FontFamily
+        | FontKerning
+        | FontLanguageOverride
+        | FontSizeAdjust
+        | FontSize
+        | FontStretch
+        | FontStyle
+        | FontDisplay
+        | FontSynthesis
+        | FontVariant
+        | FontVariantAlternates
+        | FontVariantCaps
+        | FontVariantEastAsian
+        | FontVariantLigatures
+        | FontVariantNumeric
+        | FontVariantPosition
+        | FontWeight
+        | Font
+        | GridArea
+        | GridAutoColumns
+        | GridAutoFlow
+        | GridAutoRows
+        | GridColumnEnd
+        | GridColumnStart
+        | GridColumn
+        | GridGap
+        | GridRowEnd
+        | GridRowGap
+        | GridColumnGap
+        | GridRowStart
+        | GridRow
+        | GridTemplateAreas
+        | GridTemplateColumns
+        | GridTemplateRows
+        | GridTemplate
+        | Grid
+        | HangingPunctuation
+        | Height
+        | Hyphens
+        | Isolation
+        | ImageRendering
+        | JustifyContent
+        | JustifyItems
+        | JustifySelf
+        | Label
+        | Left
+        | LetterSpacing
+        | LineBreak
+        | LineHeight
+        | ListStyle
+        | ListStyleImage
+        | ListStylePosition
+        | ListStyleType
+        | LineGapOverride
+        | MaskClip
+        | MaskComposite
+        | MaskImage
+        | MaskMode
+        | MaskOrigin
+        | MaskPosition
+        | MaskRepeat
+        | MaskSize
+        | MarginBottom
+        | MarginLeft
+        | MarginRight
+        | MarginTop
+        | Margin
+        | MarginInlineStart
+        | MarginInlineEnd
+        | MarginBlockStart
+        | MarginBlockEnd
+        | MarkerOffset
+        | Marks
+        | MaxHeight
+        | MaxWidth
+        | MinHeight
+        | MinWidth
+        | MixBlendMode
+        | NavUp
+        | NavDown
+        | NavLeft
+        | NavRight
+        | Opacity
+        | Order
+        | Orphans
+        | OutlineColor
+        | OutlineOffset
+        | OutlineStyle
+        | OutlineWidth
+        | Outline
+        | Overflow
+        | OverflowWrap
+        | OverflowX
+        | OverflowY
+        | ObjectFit
+        | ObjectPosition
+        | PaddingBottom
+        | PaddingLeft
+        | PaddingRight
+        | PaddingTop
+        | Padding
+        | PaddingInlineStart
+        | PaddingInlineEnd
+        | PaddingBlockStart
+        | PaddingBlockEnd
+        | Page
+        | PauseAfter
+        | PauseBefore
+        | Pause
+        | PaintOrder
+        | PointerEvents
+        | Perspective
+        | PerspectiveOrigin
+        | PitchRange
+        | Pitch
+        | PlaceContent
+        | PlaceItems
+        | PlaceSelf
+        | PlayDuring
+        | Position
+        | Quotes
+        | Resize
+        | RestAfter
+        | RestBefore
+        | Rest
+        | Richness
+        | Right
+        | Size
+        | SpeakHeader
+        | SpeakNumeral
+        | SpeakPunctuation
+        | Src
+        | Speak
+        | SpeechRate
+        | Stress
+        | ScrollBehavior
+        | ScrollMarginBottom
+        | ScrollMarginLeft
+        | ScrollMarginRight
+        | ScrollMarginTop
+        | ScrollMargin
+        | ScrollPaddingBottom
+        | ScrollPaddingLeft
+        | ScrollPaddingRight
+        | ScrollPaddingTop
+        | ScrollPadding
+        | ScrollSnapType
+        | ScrollSnapAlign
+        | ScrollSnapStop
+        | SizeAdjust
+        | OverscrollBehaviorX
+        | OverscrollBehaviorY
+        | TabSize
+        | TableLayout
+        | TextAlign
+        | TextAlignLast
+        | TextDecoration
+        | TextDecorationColor
+        | TextDecorationLine
+        | TextDecorationThickness
+        | TextDecorationSkip
+        | TextDecorationSkipInk
+        | TextDecorationStyle
+        | TextIndent
+        | TextOverflow
+        | TextShadow
+        | TextTransform
+        | TextEmphasis
+        | TextEmphasisColor
+        | TextEmphasisPosition
+        | TextEmphasisStyle
+        | TextUnderlineOffset
+        | TextUnderlinePosition
+        | TextSizeAdjust
+        | TextOrientation
+        | TextRendering
+        | TextJustify
+        | Top
+        | Transform
+        | TransformOrigin
+        | TransformStyle
+        | Transition
+        | TransitionDelay
+        | TransitionDuration
+        | TransitionProperty
+        | TransitionTimingFunction
+        | UnicodeBidi
+        | UnicodeRange
+        | UserSelect
+        | VerticalAlign
+        | Visibility
+        | VoiceBalance
+        | VoiceDuration
+        | VoiceFamily
+        | VoicePitch
+        | VoiceRange
+        | VoiceRate
+        | VoiceStress
+        | VoiceVolume
+        | Volume
+        | WhiteSpace
+        | Widows
+        | Width
+        | WillChange
+        | WordBreak
+        | WordSpacing
+        | WordWrap
+        | WritingMode
+        | ZIndex
 
-    type ITextAlign               = interface end
-    type ITextAlignLast           = interface end
-    type ITextDecoration          = interface end
-    type ITextDecorationLine      = interface end
-    type ITextDecorationThickness = interface end
-    type ITextDecorationStyle     = interface end
-    type ITextDecorationSkip      = interface end
-    type ITextDecorationSkipInk   = interface end
-    type ITextTransform           = interface end
-    type ITextIndent              = interface end
-    type ITextEmphasis            = interface end
-    type ITextEmphasisPosition    = interface end
-    type ITextEmphasisStyle       = interface end
-    type ITextUnderlinePosition   = interface end
-    type ITextUnderlineOffset     = interface end
-    type ITextOverflow            = interface end
-    type IQuotes                  = interface end
-    type IHyphens                 = interface end
-    type ITextDecorationColor     = interface end
-    type ITextEmphasisColor       = interface end
-    type ITextSizeAdjust          = interface end
-    type ITabSize                 = interface end
-    type ITextOrientation         = interface end
-    type ITextRendering           = interface end
-    type ITextJustify             = interface end
-    type IWhiteSpace              = interface end
-    type IUserSelect              = interface end
-    type IHangingPunctuation      = interface end
+        // Pseudo
+        | Active
+        | AnyLink
+        | Blank
+        | Checked
+        | Current
+        | Disabled
+        | Empty
+        | Enabled
+        | FirstChild
+        | FirstOfType
+        | Focus
+        | FocusVisible
+        | FocusWithin
+        | Future
+        | Hover
+        | Indeterminate
+        | Invalid
+        | InRange
+        | Lang
+        | LastChild
+        | LastOfType
+        | Link
+        | LocalLink
+        | NthChild
+        | NthLastChild
+        | NthLastOfType
+        | NthOfType
+        | OnlyChild
+        | OnlyOfType
+        | Optional
+        | OutOfRange
+        | Past
+        | Playing
+        | Paused
+        | PlaceholderShown
+        | ReadOnly
+        | ReadWrite
+        | Required
+        | Root
+        | Scope
+        | Target
+        | TargetWithin
+        | Valid
+        | Visited
+        | UserInvalid
 
-    type IListStyle         = interface end
-    type IListStyleImage    = interface end
-    type IListStylePosition = interface end
-    type IListStyleType     = interface end
+        | After
+        | Before
+        | FirstLetter
+        | FirstLine
+        | Selection
+        | Marker
 
-    type IBackgroundColor      = interface end
-    type IBackgroundImage      = interface end
-    type IBackgroundClip       = interface end
-    type IBackgroundOrigin     = interface end
-    type IBackgroundRepeat     = interface end
-    type IBackgroundSize       = interface end
-    type IBackgroundAttachment = interface end
-    type IBackgroundPosition   = interface end
-    type IBackgroundBlendMode  = interface end
+        // Svg
+        | AlignmentBaseline
+        | BaselineShift
+        | DominantBaseline
+        | TextAnchor
+        | ClipRule
+        | FloodColor
+        | FloodOpacity
+        | LightingColor
+        | StopColor
+        | StopOpacity
+        | ColorInterpolation
+        | ColorInterpolationFilters
+        | Fill
+        | FillOpacity
+        | FillRule
+        | ShapeRendering
+        | Stroke
+        | StrokeOpacity
+        | StrokeDasharray
+        | StrokeDashoffset
+        | StrokeLinecap
+        | StrokeLinejoin
+        | StrokeMiterlimit
+        | StrokeWidth
 
-    type IBorder            = interface end
-    type IBorderRadius      = interface end
-    type IBorderWidth       = interface end
-    type IBorderStyle       = interface end
-    type IBorderCollapse    = interface end
-    type IBorderImageOutset = interface end
-    type IBorderRepeat      = interface end
-    type IBorderImageSlice  = interface end
-    type IBorderColor       = interface end
-    type IBorderSpacing     = interface end
-    type IBorderImageWidth  = interface end
-    type IBorderImageSource = interface end
+        // Home made
+        | AdjacentSibling of Html.Html
+        | GeneralSibling of Html.Html
+        | Child of Html.Html
+        | Descendant of Html.Html
+        | Custom of string
+        | Media
+        interface ICssValue with
+            member this.Stringify() =
+                match this with
+                | AdjacentSibling html -> $" + {html.ToString().ToLower()}"
+                | GeneralSibling html -> $" + {html.ToString().ToLower()}"
+                | Child html -> $" + {html.ToString().ToLower()}"
+                | Descendant html -> $" + {html.ToString().ToLower()}"
+                | Custom c -> c.ToLower()
+                | _ -> Fss.Utilities.Helpers.toKebabCase this
 
-    type ITransform       = interface end
-    type ITransformOrigin = interface end
-    type ITransformStyle  = interface end
+type CssRule(property: Property.Property) =
+    member this.value(keyword: Keywords) = (property, keyword) |> Rule
+    // TOdo: Funker dette?
+    // member this.value(value: 'T) = (property, value) |> Rule
+    member this.initial = (property, Initial) |> Rule
+    member this.inherit' = (property, Inherit) |> Rule
+    member this.unset = (property, Unset) |> Rule
+    member this.revert = (property, Revert) |> Rule
 
-    type ITransition               = interface end
-    type ITransitionDelay          = interface end
-    type ITransitionDuration       = interface end
-    type ITransitionTimingFunction = interface end
-    type ITransitionProperty       = interface end
-    type IWillChange               = interface end
+and Keywords =
+    | Inherit
+    | Initial
+    | Unset
+    | Revert
+    interface ICssValue with
+        member this.Stringify() = this.ToString().ToLower()
 
-    type IDisplay        = interface end
-    type IAlignContent   = interface end
-    type IAlignItems     = interface end
-    type IAlignSelf      = interface end
-    type IJustifyContent = interface end
-    type IJustifyItems   = interface end
-    type IJustifySelf    = interface end
-    type IFlex           = interface end
-    type IFlexDirection  = interface end
-    type IFlexWrap       = interface end
-    type IOrder          = interface end
-    type IFlexGrow       = interface end
-    type IFlexShrink     = interface end
-    type IFlexBasis      = interface end
+and Rule = Property.Property * ICssValue
 
-    type IMargin        = interface end
-    type IPadding       = interface end
+type None' =
+    | None'
+    interface ICssValue with
+        member this.Stringify() = "none"
 
-    type IScrollBehavior       = interface end
-    type IScrollMargin         = interface end
-    type IScrollPadding        = interface end
-    type IOverscrollBehaviorX  = interface end
-    type IOverscrollBehaviorY  = interface end
+type Auto =
+    | Auto
+    interface IFontFaceValue with
+        member this.Stringify() = (this :> ICssValue).Stringify()
 
-    type IScrollSnapType  = interface end
-    type IScrollSnapAlign = interface end
-    type IScrollSnapStop  = interface end
+    interface ICounterValue with
+        member this.Stringify() = (this :> ICssValue).Stringify()
 
-    type IContentSize = interface end
+    interface ICssValue with
+        member this.Stringify() = "auto"
 
-    type IVisibility = interface end
-    type IZIndex     = interface end
+type Normal =
+    | Normal
+    interface ICssValue with
+        member this.Stringify() = "normal"
 
-    type IOverflow      = interface end
-    type IOverflowWrap  = interface end
-    type IPositioned    = interface end
-    type IVerticalAlign = interface end
-    type IFloat         = interface end
-    type IDirection     = interface end
+type Float =
+    | Float of float
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Float f -> string f
 
-    type IPerspective        = interface end
-    type IPerspectiveOrigin  = interface end
-    type IBackfaceVisibility = interface end
+type Int =
+    | Int of int
+    interface IFontFaceValue with
+        member this.Stringify() = (this :> ICssValue).Stringify()
 
-    type ICursor        = interface end
-    type IPointerEvents = interface end
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Int i -> string i
 
-    type IContent = interface end
+type Char =
+    | Char of string
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Char c -> $"'{c}'"
 
-    type IOutline       = interface end
-    type IOutlineColor  = interface end
-    type IOutlineWidth  = interface end
-    type IOutlineStyle  = interface end
-    type IOutlineOffset = interface end
+type String =
+    | String of string
+    interface IFontFaceValue with
+        member this.Stringify() = (this :> ICssValue).Stringify()
 
-    type IGridAutoFlow        = interface end
-    type IGridTemplateArea    = interface end
-    type IGridGap             = interface end
-    type IGridRowGap          = interface end
-    type IGridColumnGap       = interface end
-    type IGridPosition        = interface end
-    type IGridTemplateRows    = interface end
-    type IGridTemplateColumns = interface end
-    type IGridAutoRows        = interface end
-    type IGridAutoColumns     = interface end
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | String s -> s
 
-    type IColumns             = interface end
-    type IColumnGap           = interface end
-    type IColumnSpan          = interface end
-    type IColumnRule          = interface end
-    type IColumnRuleWidth     = interface end
-    type IColumnRuleStyle     = interface end
-    type IColumnRuleColor     = interface end
-    type IColumnCount         = interface end
-    type IColumnFill          = interface end
-    type IColumnWidth         = interface end
+type Stringed =
+    | Stringed of string
+    interface IFontFaceValue with
+        member this.Stringify() = (this :> ICssValue).Stringify()
 
-    type INth = interface end
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Stringed s -> $"\"{s}\""
 
-    type IResize = interface end
+type Pseudo =
+    | PseudoClass of Rule list
+    | PseudoElement of Rule list
+    member this.Unwrap() =
+        match this with
+        | PseudoClass p -> p
+        | PseudoElement p -> p
 
-    type IWordSpacing = interface end
-    type IWordBreak   = interface end
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | PseudoClass ps ->
+                let ps =
+                    ps
+                    |> List.map
+                        (fun (name, property) -> $"{Fss.Utilities.Helpers.toKebabCase name}: {property.Stringify()}")
+                    |> String.concat "; "
+                    
+                $"{ps}"
+            | PseudoElement ps ->
+                let ps =
+                    ps
+                    |> List.map
+                        (fun (name, property) -> $"{Fss.Utilities.Helpers.toKebabCase name}: {property.Stringify()}")
+                    |> String.concat "; "
 
-    type IPaintOrder = interface end
+                $"{ps}"
 
-    type ICaptionSide = interface end
-    type IEmptyCells  = interface end
-    type ITableLayout = interface end
+// TODO: FIX
+type Combinator =
+    | Combinator of Rule list
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Combinator ps ->
+                let ps =
+                    ps
+                    |> List.map
+                        (fun (name, property) -> $"{Fss.Utilities.Helpers.toKebabCase name}: {property.Stringify()};")
+                    |> String.concat "; "
 
-    type ICaretColor = interface end
+                $"{ps}"
 
-    type IAppearance = interface end
+// TODO: Bruk denne på alt som har /
+type Divider =
+    | Divider of string * string
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Divider (a, b) -> $"{a} / {b}"
 
-    type IWritingMode = interface end
+type Url =
+    | Url of string
+    interface IFontFaceValue with
+        member this.Stringify() = (this :> ICssValue).Stringify()
 
-    type IBreakAfter  = interface end
-    type IBreakBefore = interface end
-    type IBreakInside = interface end
+    interface ICounterValue with
+        member this.Stringify() = (this :> ICssValue).Stringify()
 
-    type IOrphans = interface end
-    type IWidows = interface end
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Url u -> $"url({u})"
 
-    type IAll = interface end
+type Custom =
+    | Custom of string
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Custom value -> value
 
-    type ICounterReset     = interface end
-    type ICounterIncrement = interface end
+type ClassName = string
+type AnimationName = string
+type CounterName = string
+type CounterStyle = string
+type FontName = string
+type FontFaceStyle = string
+type Css = string
 
-    type IClipPath = interface end
+// TODO: Bruk disse over alt
+type CssRuleWithAuto(property: Property.Property) =
+    inherit CssRule(property)
+    member this.auto = (property, Auto) |> Rule
 
-    type IIsolation = interface end
+type CssRuleWithNone(property: Property.Property) =
+    inherit CssRule(property)
+    member this.none = (property, None') |> Rule
 
-    type IBoxDecorationBreak = interface end
+type CssRuleWithAutoNone(property: Property.Property) =
+    inherit CssRule(property)
+    member this.auto = (property, Auto) |> Rule
+    member this.none = (property, None') |> Rule
 
-    type IClear = interface end
+type CssRuleWithNormal(property: Property.Property) =
+    inherit CssRule(property)
+    member this.normal = (property, Normal) |> Rule
 
-    type IFilter         = interface end
-    type IBackdropFilter = interface end
+type CssRuleWithNormalNone(property: Property.Property) =
+    inherit CssRuleWithNormal(property)
+    member this.none = (property, None') |> Rule
 
-    type IMixBlendMode = interface end
+type CssRuleWithAutoNormal(property: Property.Property) =
+    inherit CssRuleWithAuto(property)
+    member this.normal = (property, Normal) |> Rule
 
-    type IAspectRatio = interface end
-
-    type IMaskClip      = interface end
-    type IMaskComposite = interface end
-    type IMaskImage     = interface end
-    type IMaskMode      = interface end
-    type IMaskOrigin    = interface end
-    type IMaskPosition  = interface end
-    type IMaskRepeat    = interface end
-    type IMaskSize      = interface end
-
-    type IObjectFit      = interface end
-    type IObjectPosition = interface end
-    type IImageRendering = interface end
-
-    // Svg
-    type IBaselineShift             = interface end
-    type IDominantBaseline          = interface end
-    type IColorInterpolation        = interface end
-    type IColorInterpolationFilters = interface end
-    type ISVGImageRendering         = interface end
-    type IShapeRendering            = interface end
-    type IStrokeWidth               = interface end
-
-    // Types
-    type CssProperty = CssProperty of string * obj
-    type CounterProperty = CounterProperty of string * obj
-
-    type Auto =
-        | Auto
-        interface IFontDisplay
-        interface ITextDecorationThickness
-        interface ITextDecorationSkipInk
-        interface ITextUnderlinePosition
-        interface ITextUnderlineOffset
-        interface ITextAlignLast
-        interface ITextSizeAdjust
-        interface ITextRendering
-        interface ITextJustify
-        interface IQuotes
-        interface IHyphens
-        interface IUserSelect
-        interface IBackgroundSize
-        interface IBorderImageWidth
-        interface IFlexBasis
-        interface IMargin
-        interface IPadding
-        interface IContentSize
-        interface IOverflow
-        interface IPositioned
-        interface ICursor
-        interface IPointerEvents
-        interface IGridPosition
-        interface IGridTemplateRows
-        interface IGridTemplateColumns
-        interface IGridAutoRows
-        interface IGridAutoColumns
-        interface ILineBreak
-        interface IColumnCount
-        interface IColumnFill
-        interface IColumnWidth
-        interface ITableLayout
-        interface ICaretColor
-        interface IAppearance
-        interface IBreakAfter
-        interface IBreakBefore
-        interface IBreakInside
-        interface IFlex
-        interface IScrollBehavior
-        interface IOverscrollBehaviorX
-        interface IOverscrollBehaviorY
-        interface IIsolation
-        interface IFontKerning
-        interface IWillChange
-        interface IImageRendering
-        interface IMaskSize
-        interface IDominantBaseline
-        interface IColorInterpolation
-        interface IColorInterpolationFilters
-        interface ISVGImageRendering
-        interface IShapeRendering
-        interface IZIndex
-
-    type None' =
-        | None'
-        interface IAnimationFillMode
-        interface IAnimationName
-        interface IFontVariantLigature
-        interface ITextDecoration
-        interface ITextDecorationLine
-        interface ITextDecorationSkip
-        interface ITextDecorationSkipInk
-        interface ITextEmphasis
-        interface ITextEmphasisStyle
-        interface ITextTransform
-        interface ITextSizeAdjust
-        interface ITextJustify
-        interface IHangingPunctuation
-        interface IUserSelect
-        interface IQuotes
-        interface IHyphens
-        interface IListStyle
-        interface IListStyleType
-        interface IListStyleImage
-        interface IBorderStyle
-        interface IBorderImageSource
-        interface IBackgroundImage
-        interface ITransitionProperty
-        interface IDisplay
-        interface IFloat
-        interface IPerspective
-        interface ICursor
-        interface IPointerEvents
-        interface IContent
-        interface IOutlineStyle
-        interface IGridTemplateArea
-        interface IGridTemplateRows
-        interface IGridTemplateColumns
-        interface IColumnSpan
-        interface IResize
-        interface IColumnRuleStyle
-        interface IAppearance
-        interface IFlex
-        interface IBorder
-        interface IOutline
-        interface ICounterReset
-        interface ICounterIncrement
-        interface IOverscrollBehaviorX
-        interface IOverscrollBehaviorY
-        interface ITransform
-        interface IClipPath
-        interface IClear
-        interface IFilter
-        interface IBackdropFilter
-        interface IFontKerning
-        interface IFontSynthesis
-        interface IMaskImage
-        interface IObjectFit
-        interface IScrollSnapType
-        interface IScrollSnapAlign
-
-    type Normal =
-        | Normal
-        interface IAnimationDirection
-        interface IFontStyle
-        interface IFontStretch
-        interface IFontWeight
-        interface IFontVariantNumeric
-        interface IFontVariantCaps
-        interface IFontVariantEastAsian
-        interface IFontVariantLigature
-        interface IFontVariantPosition
-        interface IFontKerning
-        interface IFontLanguageOverride
-        interface ILineGapOverride
-        interface ILineHeight
-        interface ILineBreak
-        interface ILetterSpacing
-        interface IAlignContent
-        interface IAlignItems
-        interface IAlignSelf
-        interface IJustifyContent
-        interface IJustifyItems
-        interface IJustifySelf
-        interface IContent
-        interface IGridRowGap
-        interface IGridColumnGap
-        interface IColumnGap
-        interface IWordSpacing
-        interface IWordBreak
-        interface IOverflowWrap
-        interface IPaintOrder
-        interface IWhiteSpace
-        interface IBackgroundBlendMode
-        interface IMixBlendMode
-
-    type Keywords =
-        | Inherit
-        | Initial
-        | Unset
-        interface IAnimationDirection
-        interface IAnimationPlayState
-        interface IAnimationName
-        interface IColor
-        interface IFontSize
-        interface IFontStyle
-        interface IFontStretch
-        interface IFontWeight
-        interface IFontFamily
-        interface IFontFeatureSetting
-        interface IFontVariantNumeric
-        interface IFontVariantCaps
-        interface IFontVariantEastAsian
-        interface IFontVariantLigature
-        interface IFontLanguageOverride
-        interface IFontVariantPosition
-        interface ILineHeight
-        interface ILineBreak
-        interface ILetterSpacing
-        interface ITextAlign
-        interface ITextAlignLast
-        interface ITextDecorationLine
-        interface ITextDecorationThickness
-        interface ITextDecorationStyle
-        interface ITextDecorationSkip
-        interface ITextDecorationSkipInk
-        interface ITextTransform
-        interface ITextIndent
-        interface ITextEmphasis
-        interface ITextEmphasisPosition
-        interface ITextEmphasisStyle
-        interface ITextUnderlinePosition
-        interface ITextUnderlineOffset
-        interface ITextOrientation
-        interface ITextRendering
-        interface IQuotes
-        interface IHyphens
-        interface ITextDecorationColor
-        interface ITextEmphasisColor
-        interface ITextSizeAdjust
-        interface IHangingPunctuation
-        interface IUserSelect
-        interface IListStyle
-        interface IListStyleImage
-        interface IListStylePosition
-        interface IListStyleType
-        interface IBackgroundColor
-        interface IBackgroundClip
-        interface IBackgroundOrigin
-        interface IBackgroundRepeat
-        interface IBackgroundSize
-        interface IBackgroundAttachment
-        interface IBackgroundPosition
-        interface IBackgroundBlendMode
-        interface IBorder
-        interface IBorderRadius
-        interface IBorderWidth
-        interface IBorderStyle
-        interface IBorderCollapse
-        interface IBorderImageOutset
-        interface IBorderRepeat
-        interface IBorderImageSlice
-        interface IBorderColor
-        interface IBorderSpacing
-        interface IBorderImageWidth
-        interface IBorderImageSource
-        interface ITransform
-        interface ITransformOrigin
-        interface ITransformStyle
-        interface ITransition
-        interface ITransitionDelay
-        interface ITransitionDuration
-        interface ITransitionTimingFunction
-        interface ITransitionProperty
-        interface IDisplay
-        interface IAlignContent
-        interface IAlignItems
-        interface IAlignSelf
-        interface IJustifyContent
-        interface IJustifyItems
-        interface IJustifySelf
-        interface IFlexDirection
-        interface IFlexWrap
-        interface IOrder
-        interface IFlexGrow
-        interface IFlexShrink
-        interface IFlexBasis
-        interface IMargin
-        interface IPadding
-        interface IContentSize
-        interface IVisibility
-        interface IOverflow
-        interface IOverflowWrap
-        interface IPositioned
-        interface IVerticalAlign
-        interface IFloat
-        interface IPerspective
-        interface ICursor
-        interface IPointerEvents
-        interface IContent
-        interface IOutline
-        interface IOutlineColor
-        interface IOutlineWidth
-        interface IOutlineStyle
-        interface IOutlineOffset
-        interface IGridAutoFlow
-        interface IGridTemplateArea
-        interface IGridGap
-        interface IGridRowGap
-        interface IGridColumnGap
-        interface IGridPosition
-        interface IGridTemplateRows
-        interface IGridTemplateColumns
-        interface IGridAutoRows
-        interface IGridAutoColumns
-        interface IDirection
-        interface IResize
-        interface IWordSpacing
-        interface IWordBreak
-        interface IColumns
-        interface IColumnGap
-        interface IColumnSpan
-        interface IColumnRule
-        interface IColumnRuleWidth
-        interface IColumnRuleStyle
-        interface IColumnRuleColor
-        interface IColumnCount
-        interface IColumnFill
-        interface IColumnWidth
-        interface ICaptionSide
-        interface IEmptyCells
-        interface ITableLayout
-        interface ITabSize
-        interface IWhiteSpace
-        interface IWritingMode
-        interface IBreakAfter
-        interface IBreakBefore
-        interface IBreakInside
-        interface IOrphans
-        interface IWidows
-        interface IAll
-        interface IFlex
-        interface IScrollBehavior
-        interface IScrollMargin
-        interface IScrollPadding
-        interface ICounterReset
-        interface ICounterIncrement
-        interface IOverscrollBehaviorX
-        interface IOverscrollBehaviorY
-        interface IClipPath
-        interface IIsolation
-        interface IClear
-        interface IBackfaceVisibility
-        interface IBoxDecorationBreak
-        interface IFilter
-        interface IBackdropFilter
-        interface IMixBlendMode
-        interface IPerspectiveOrigin
-        interface IAspectRatio
-        interface IMaskClip
-        interface IMaskComposite
-        interface IMaskImage
-        interface IMaskMode
-        interface IMaskOrigin
-        interface IMaskPosition
-        interface IMaskRepeat
-        interface IMaskSize
-        interface IObjectPosition
-        interface IImageRendering
-        interface IZIndex
-        interface IScrollSnapType
-        interface IScrollSnapAlign
-        interface IScrollSnapStop
-
-    type CssInt =
-        | CssInt of int
-        interface IAnimationIterationCount
-        interface IOrder
-        interface IFontWeight
-        interface INth
-        interface IColumnCount
-        interface ITabSize
-        interface IOrphans
-        interface IWidows
-        interface IZIndex
-
-    type CssFloat =
-        | CssFloat of float
-        interface IBorderImageWidth
-        interface IFlexGrow
-        interface IFlexShrink
-        interface ILineHeight
-
-    type CssString =
-        | CssString of string
-        interface IAnimationName
-        interface ITextEmphasisStyle
-        interface ITextOverflow
-        interface IQuotes
-        interface IListStyleType
-        interface IContent
-        interface INth
-
-    [<AutoOpen>]
-    module masterTypeHelpers =
-        let internal auto = "auto"
-        let internal none = "none"
-        let internal normal = "normal"
-
-        let internal IntToString (CssInt i) = string i
-        let internal FloatToString (CssFloat f) = string f
-        let internal StringToString (CssString s) = s
-
-        let internal keywordsToString (g: Keywords) = Fss.Utilities.Helpers.duToLowercase g
-
-        let CssValue (CssProperty (s,o)) = s,o
-        let CounterValue (CounterProperty (s,o)) = s,o
+type CssRuleWithAutoNormalNone(property: Property.Property) =
+    inherit CssRuleWithAutoNone(property)
+    member this.normal = (property, Normal) |> Rule
