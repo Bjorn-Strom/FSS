@@ -106,8 +106,12 @@ module ListStyle =
                     "list-style-type: kannada;"
                 testCase
                     "List style type string"
-                    [ ListStyleType.value "-" ]
+                    [ ListStyleType.string "-" ]
                     "list-style-type: '-';"
+                testCase
+                    "List style type string"
+                    [ ListStyleType.ident "Some list style" ]
+                    "list-style-type: Some list style;"
                 testCase
                     "List style type None"
                     [ ListStyleType.none ]

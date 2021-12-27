@@ -40,7 +40,7 @@ module Content =
                 testCase
                     "Content counter"
                     [ Content.counter counterName]
-                    "content: counter-329504378;"
+                    "content: counter-1702328912;"
                     // TODO:
 //                testCase
 //                    "Content counter2"

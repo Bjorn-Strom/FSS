@@ -36,12 +36,16 @@ module Utils =
     
     
     let testCase (testName: string) (ruleList: Rule list) (correct: string) =
-        let (_, actual) =  List.head <| fss ruleList
+        let _, actual =  List.head <| fss ruleList
         test testName <| fun _ ->
             Expect.equal actual correct
             
     let testPseudoCase (testName: string) (ruleList: Rule list) (correct: string) =
-        let property, actual = List.head <| fss ruleList
+        let _, actual =
+            fss ruleList
+            |> List.tail
+            |> List.head
+        
         test testName <| fun _ ->
             Expect.equal actual correct
             

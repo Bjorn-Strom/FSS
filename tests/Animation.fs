@@ -19,11 +19,11 @@ module Animation =
                 testCase
                     "Animation name"
                     [ AnimationName.value name ]
-                    "animation-name: animation-1495994997;"
+                    "animation-name: animation-1894110078;"
                 testCase
                     "Animation names"
                     [ AnimationName.value [name; "foo" ] ]
-                    "animation-name: animation-1495994997, foo;"
+                    "animation-name: animation-1894110078, foo;"
                 testCase
                     "Animation name inherit"
                     [ AnimationName.inherit' ]
