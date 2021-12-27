@@ -53,17 +53,17 @@ module Grid =
 
                 match this with
                 | MinMax1 (lengthPercentage, fraction) ->
-                    minmaxValue (lengthPercentageString lengthPercentage) ((fraction :> ICssValue).Stringify())
+                    minmaxValue (lengthPercentageString lengthPercentage) (stringifyICssValue fraction)
                 | MinMax2 (lengthPercentage1, lengthPercentage2) ->
                     minmaxValue (lengthPercentageString lengthPercentage1) (lengthPercentageString lengthPercentage2)
                 | MinMax3 (lengthPercentage, contentSize) ->
-                    minmaxValue (lengthPercentageString lengthPercentage) ((contentSize :> ICssValue).Stringify())
+                    minmaxValue (lengthPercentageString lengthPercentage) (stringifyICssValue contentSize)
                 | MinMax4 (contentSize, lengthPercentage) ->
-                    minmaxValue ((contentSize :> ICssValue).Stringify()) (lengthPercentageString lengthPercentage)
+                    minmaxValue (stringifyICssValue contentSize) (lengthPercentageString lengthPercentage)
                 | MinMax5 (contentSize1, contentSize2) ->
-                    minmaxValue ((contentSize1 :> ICssValue).Stringify()) ((contentSize2 :> ICssValue).Stringify())
+                    minmaxValue (stringifyICssValue contentSize1) (stringifyICssValue contentSize2)
                 | MinMax6 (contentSize, fraction) ->
-                    minmaxValue ((contentSize :> ICssValue).Stringify) ((fraction :> ICssValue).Stringify())
+                    minmaxValue (stringifyICssValue contentSize) (stringifyICssValue fraction)
 
     type MinMax =
         static member MinMax(min, max) = MinMaxHelper.MinMax1(min, max)
@@ -89,10 +89,10 @@ module Grid =
 
                 match this with
                 | Repeat1 (value, length) -> repeatValue value (lengthPercentageString length)
-                | Repeat2 (value, fraction) -> repeatValue value ((fraction :> ICssValue).Stringify())
-                | Repeat3 (value, contentSize) -> repeatValue value ((contentSize :> ICssValue).Stringify())
+                | Repeat2 (value, fraction) -> repeatValue value (stringifyICssValue fraction)
+                | Repeat3 (value, contentSize) -> repeatValue value (stringifyICssValue contentSize)
                 | Repeat4 (value, contentSizes) ->
-                    List.map (fun x -> (x :> ICssValue).Stringify()) contentSizes
+                    List.map stringifyICssValue contentSizes
                     |> String.concat " "
                     |> repeatValue value
                 | Repeat5 (value, lengthPercentages) ->
@@ -100,12 +100,12 @@ module Grid =
                     |> String.concat " "
                     |> repeatValue value
                 | Repeat6 (repeat, fraction) ->
-                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) ((fraction :> ICssValue).Stringify())
+                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) (stringifyICssValue fraction)
                 | Repeat7 (repeat, lengthPercentage) ->
                     repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) (lengthPercentageString lengthPercentage)
                 | Repeat8 (repeat, contentSize) ->
-                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) ((contentSize :> ICssValue).Stringify())
-                | Repeat9 (value, minMax) -> repeatValue value ((minMax :> ICssValue).Stringify())
+                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) (stringifyICssValue contentSize)
+                | Repeat9 (value, minMax) -> repeatValue value (stringifyICssValue minMax)
 
     type Repeat =
         static member Repeat(value, length) = Repeat1(value, length)
@@ -253,16 +253,17 @@ module GridClasses =
             member this.Stringify() =
                 match this with
                 | Fractions fractions ->
-                    List.map (fun x -> (x :> ICssValue).Stringify()) fractions
+                    fractions
+                    |> List.map stringifyICssValue
                     |> String.concat " "
                 | ContentSizes sizes ->
-                    List.map (fun x -> (x :> ICssValue).Stringify()) sizes
+                    List.map stringifyICssValue sizes
                     |> String.concat " "
                 | Length lengths ->
-                    List.map (fun x -> (x :> ICssValue).Stringify()) lengths
+                    List.map stringifyICssValue lengths
                     |> String.concat " "
                 | Percent percents ->
-                    List.map (fun x -> (x :> ICssValue).Stringify()) percents
+                    List.map stringifyICssValue percents
                     |> String.concat " "
 
     type GridAuto(property) =

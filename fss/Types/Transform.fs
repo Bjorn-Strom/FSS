@@ -53,12 +53,12 @@ module Transform =
                 | Matrix (a, b, c, d, e, f) -> $"matrix({a}, {b}, {c}, {d}, {e}, {f})"
                 | Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
                     $"matrix3d({a1}, {b1}, {c1}, {d1}, {a2}, {b2}, {c2}, {d2}, {a3}, {b3}, {c3}, {d3}, {a4}, {b4}, {c4}, {d4})"
-                | Perspective size -> $"perspective({(size :> ICssValue).Stringify()})"
-                | Rotate angle -> $"rotate({(angle :> ICssValue).Stringify()})"
-                | Rotate3D (a, b, c, angle) -> $"rotate3d({a}, {b}, {c}, {(angle :> ICssValue).Stringify()})"
-                | RotateX angle -> $"rotateX({(angle :> ICssValue).Stringify()})"
-                | RotateY angle -> $"rotateY({(angle :> ICssValue).Stringify()})"
-                | RotateZ angle -> $"rotateZ({(angle :> ICssValue).Stringify()})"
+                | Perspective size -> $"perspective({stringifyICssValue size})"
+                | Rotate angle -> $"rotate({stringifyICssValue angle})"
+                | Rotate3D (a, b, c, angle) -> $"rotate3d({a}, {b}, {c}, {stringifyICssValue angle})"
+                | RotateX angle -> $"rotateX({stringifyICssValue angle})"
+                | RotateY angle -> $"rotateY({stringifyICssValue angle})"
+                | RotateZ angle -> $"rotateZ({stringifyICssValue angle})"
                 | Translate size -> $"translate({lengthPercentageString size})"
                 | Translate2 (sx, sy) -> $"translate({lengthPercentageString sx}, {lengthPercentageString sy})"
                 | Translate3D (size1, size2, size3) ->
@@ -72,10 +72,10 @@ module Transform =
                 | ScaleX n -> $"scaleX({n})"
                 | ScaleY n -> $"scaleY({n})"
                 | ScaleZ n -> $"scaleZ({n})"
-                | Skew a -> $"skew({(a :> ICssValue).Stringify()})"
-                | Skew2 (ax, ay) -> $"skew({(ax :> ICssValue).Stringify()}, {(ay :> ICssValue).Stringify()})"
-                | SkewX a -> $"skewX({(a :> ICssValue).Stringify()})"
-                | SkewY a -> $"skewY({(a :> ICssValue).Stringify()})"
+                | Skew a -> $"skew({stringifyICssValue a})"
+                | Skew2 (ax, ay) -> $"skew({stringifyICssValue ax}, {stringifyICssValue ay})"
+                | SkewX a -> $"skewX({stringifyICssValue a})"
+                | SkewY a -> $"skewY({stringifyICssValue a})"
 
     type Origin =
         | Top
@@ -104,7 +104,7 @@ module Transform =
                     match this with
                     | Transforms transforms ->
                         transforms
-                        |> List.map (fun x -> (x :> ICssValue).Stringify())
+                        |> List.map stringifyICssValue
                         |> String.concat " "
 
         type TransformClass(property) =

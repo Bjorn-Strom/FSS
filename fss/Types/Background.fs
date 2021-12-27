@@ -118,7 +118,7 @@ module BackgroundClasses =
 
         member this.value(vertical: Background.Repeat, horizontal: Background.Repeat) =
             let repeat =
-                $"{(vertical :> ICssValue).Stringify()} {(horizontal :> ICssValue).Stringify()}"
+                $"{stringifyICssValue vertical} {stringifyICssValue horizontal}"
                 |> String
 
             (property, repeat) |> Rule
@@ -148,7 +148,7 @@ module BackgroundClasses =
 
         member this.value(horizontal: Background.Size, vertical: Background.Size) =
             let value =
-                $"{(horizontal :> ICssValue).Stringify()} {(vertical :> ICssValue).Stringify()}"
+                $"{stringifyICssValue horizontal} {stringifyICssValue vertical}"
                 |> String
 
             (property, value) |> Rule

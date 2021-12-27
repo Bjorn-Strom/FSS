@@ -58,9 +58,9 @@ module FontFace =
         interface IFontFaceValue with
             member this.Stringify() =
                 match this with
-                | ObliqueAngle angle -> $"oblique {(angle :> ICssValue).Stringify()}"
+                | ObliqueAngle angle -> $"oblique {stringifyICssValue angle}"
                 | ObliqueAngleRange (angle, range) ->
-                    $"oblique {(angle :> ICssValue).Stringify()} {(range :> ICssValue).Stringify()}"
+                    $"oblique {stringifyICssValue angle} {stringifyICssValue range}"
                 | _ -> this.ToString().ToLower()
 
     type Stretch =
@@ -99,7 +99,7 @@ module FontFace =
             member this.sources(urls: string list) =
                 let value =
                     urls
-                    |> List.map (fun x -> ((Url x) :> ICssValue).Stringify())
+                    |> List.map (fun x -> (stringifyICssValue (Url x)))
                     |> String.concat ", "
                     |> String
 
@@ -108,7 +108,7 @@ module FontFace =
             member this.sources(formatUrls: Format list) =
                 let value =
                     formatUrls
-                    |> List.map (fun x -> (x :> IFontFaceValue).Stringify())
+                    |> List.map stringifyIFontFaceValue
                     |> String.concat ", "
                     |> String
 
@@ -140,7 +140,7 @@ module FontFace =
             member this.value(stretch: Percent list) =
                 let value =
                     stretch
-                    |> List.map (fun x -> (x :> ICssValue).Stringify())
+                    |> List.map stringifyICssValue
                     |> String.concat " "
                     |> String
 

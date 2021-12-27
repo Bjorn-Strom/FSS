@@ -131,21 +131,21 @@ module Border =
 
             member this.value(topAndBottom: Style, leftAndRight: Style) =
                 let value =
-                    $"{(topAndBottom :> ICssValue).Stringify()} {(leftAndRight :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue topAndBottom} {stringifyICssValue leftAndRight}"
                     |> String
 
                 (property, value) |> Rule
 
             member this.value(top: Style, leftAndRight: Style, bottom: Style) =
                 let value =
-                    $"{(top :> ICssValue).Stringify()} {(leftAndRight :> ICssValue).Stringify()} {(bottom :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue top} {stringifyICssValue leftAndRight} {stringifyICssValue bottom}"
                     |> String
 
                 (property, value) |> Rule
 
             member this.value(top: Style, right: Style, bottom: Style, left: Style) =
                 let value =
-                    $"{(top :> ICssValue).Stringify()} {(right :> ICssValue).Stringify()} {(bottom :> ICssValue).Stringify()} {(left :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue top} {stringifyICssValue right} {stringifyICssValue bottom} {stringifyICssValue left}"
                     |> String
 
                 (property, value) |> Rule
@@ -176,7 +176,7 @@ module Border =
 
             member this.value(vertical: ImageRepeat, horizontal: ImageRepeat) =
                 let value =
-                    $"{(vertical :> ICssValue).Stringify()} {(horizontal :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue vertical} {stringifyICssValue horizontal}"
                     |> String
 
                 (property, value) |> Rule
@@ -196,21 +196,21 @@ module Border =
 
             member this.value(vertical: Color, horizontal: Color) =
                 let value =
-                    $"{(vertical :> ICssValue).Stringify()} {(horizontal :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue vertical} {stringifyICssValue horizontal}"
                     |> String
 
                 (property, value) |> Rule
 
             member this.value(top: Color, horizontal: Color, bottom: Color) =
                 let value =
-                    $"{(top :> ICssValue).Stringify()} {(horizontal :> ICssValue).Stringify()} {(bottom :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue top} {stringifyICssValue horizontal} {stringifyICssValue bottom}"
                     |> String
 
                 (property, value) |> Rule
 
             member this.value(top: Color, right: Color, bottom: Color, left: Color) =
                 let value =
-                    $"{(top :> ICssValue).Stringify()} {(right :> ICssValue).Stringify()} {(bottom :> ICssValue).Stringify()} {(left :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue top} {stringifyICssValue right} {stringifyICssValue bottom} {stringifyICssValue left}"
                     |> String
 
                 (property, value) |> Rule

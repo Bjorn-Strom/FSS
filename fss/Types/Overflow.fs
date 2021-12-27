@@ -29,7 +29,7 @@ module Overflow =
             inherit CssRuleWithAuto(property)
             member this.value (overflowX: Overflow, overflowY: Overflow) =
                 let value =
-                    $"{(overflowX :> ICssValue).Stringify()} {(overflowY :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue overflowX} {stringifyICssValue overflowY}"
                     |> String
                 (property, value) |> Rule
             member this.visible = (property, Visible) |> Rule

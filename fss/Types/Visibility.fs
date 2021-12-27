@@ -62,7 +62,7 @@ module PaintOrder =
             member this.Stringify() =
                 match this with
                 | PaintOrders ps ->
-                    List.map (fun x -> (x :> ICssValue).Stringify()) ps
+                    List.map stringifyICssValue ps
                     |> String.concat " "
 
     [<RequireQualifiedAccess>]

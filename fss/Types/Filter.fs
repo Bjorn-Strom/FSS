@@ -24,17 +24,18 @@ module Filter =
                 | Brightness brightness -> $"brightness({lengthPercentageString brightness})"
                 | Contrast contrast -> $"contrast({lengthPercentageString contrast})"
                 | DropShadow (x, y, blur, color) ->
-                    $"drop-shadow({lengthPercentageString x} {lengthPercentageString y} {lengthPercentageString blur} {(color: ICssValue).Stringify()})"
+                    $"drop-shadow({lengthPercentageString x} {lengthPercentageString y} {lengthPercentageString blur} {stringifyICssValue color})"
                 | DropShadowInvert (x, y, blur, color, invert) ->
-                    $"drop-shadow({lengthPercentageString x} {lengthPercentageString y} {lengthPercentageString blur} {(color: ICssValue).Stringify()}) invert({lengthPercentageString invert})"
+                    $"drop-shadow({lengthPercentageString x} {lengthPercentageString y} {lengthPercentageString blur} {stringifyICssValue color}) invert({lengthPercentageString invert})"
                 | Grayscale grayscale -> $"grayscale({lengthPercentageString grayscale})"
-                | HueRotate contrast -> $"hue-rotate({(contrast :> ICssValue).Stringify()})"
+                | HueRotate contrast -> $"hue-rotate({stringifyICssValue contrast})"
                 | Invert invert -> $"invert({lengthPercentageString invert})"
                 | Opacity opacity -> $"opacity({lengthPercentageString opacity})"
                 | Saturate saturate -> $"saturate({lengthPercentageString saturate})"
                 | Sepia sepia -> $"sepia({lengthPercentageString sepia})"
                 | Filters filters ->
-                    List.map (fun x -> (x :> ICssValue).Stringify()) filters
+                    filters
+                    |> List.map stringifyICssValue
                     |> String.concat " "
 
     [<RequireQualifiedAccess>]

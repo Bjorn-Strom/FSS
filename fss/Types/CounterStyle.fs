@@ -46,8 +46,8 @@ module Counter =
         interface ICounterValue with
             member this.Stringify() =
                 match this with
-                | One s -> (s :> ICssValue).Stringify()
-                | Two (a, b) -> $"{(a :> ICssValue).Stringify()} {(b :> ICssValue).Stringify()}"
+                | One s -> (stringifyICssValue s)
+                | Two (a, b) -> $"{(stringifyICssValue a)} {(stringifyICssValue b)}"
 
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/prefix
@@ -58,8 +58,8 @@ module Counter =
         interface ICounterValue with
             member this.Stringify() =
                 match this with
-                | Value s -> (s :> ICssValue).Stringify()
-                | Image i -> (i :> ICssValue).Stringify()
+                | Value s -> (stringifyICssValue s)
+                | Image i -> (stringifyICssValue i)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/range
     type Range =
@@ -72,7 +72,7 @@ module Counter =
                 | Infinite -> "infinite"
                 | Range' i -> string i
                 | Ranges is ->
-                    List.map (fun (a, b) -> $"{(a :> ICounterValue).Stringify()} {(b :> ICounterValue).Stringify()}") is
+                    List.map (fun (a, b) -> $"{stringifyICounterValue a} {stringifyICounterValue b}") is
                     |> String.concat ", "
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/pad
@@ -81,7 +81,7 @@ module Counter =
         interface ICounterValue with
             member this.Stringify() =
                 match this with
-                | PadType (pad, value) -> $"{pad} {(value :> ICssValue).Stringify()}"
+                | PadType (pad, value) -> $"{pad} {(stringifyICssValue value)}"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/fallback
     type Fallback =
@@ -100,11 +100,11 @@ module Counter =
                 | Strings s ->
                     s
                     |> List.map Stringed
-                    |> List.map (fun x -> (x :> ICssValue).Stringify())
+                    |> List.map stringifyICssValue
                     |> String.concat " "
                 | Images is ->
                     is
-                    |> List.map (fun i -> (i :> ICssValue).Stringify())
+                    |> List.map stringifyICssValue
                     |> String.concat " "
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/additive-symbols

@@ -1,6 +1,5 @@
 namespace Fss
 
-open System.Collections.Generic
 open Fss.FssTypes
 open Fss.Utilities
 
@@ -115,7 +114,7 @@ module Functions =
         | _ -> false
         
     let private createMainCss (propertyName, propertyValue) =
-        $"{(propertyName :> ICssValue).Stringify()}: {(propertyValue :> ICssValue).Stringify()};"
+        $"{stringifyICssValue propertyName}: {stringifyICssValue propertyValue};"
         
     let private createPseudoCss (propertyName: ICssValue, propertyValue: ICssValue) =
         let colons =
@@ -129,9 +128,10 @@ module Functions =
         $"{colons}{propertyName.Stringify()}", $"{propertyValue.Stringify()};"
         
     let private createMediaCss (_, propertyValue) =
-        let splitMedia = ($"{(propertyValue :> ICssValue).Stringify()};").Split '|'
+        let splitMedia = ($"{stringifyICssValue propertyValue};").Split '|'
         $"@media {splitMedia[0]}", $"{splitMedia[1]}"
         
+    // TODO: ÆSJ
     let private unwrapCombinator (Combinator rules) = rules
         
     // TODO: FIX
@@ -141,11 +141,11 @@ module Functions =
         let mainProperties =
             List.filter (isSecondary >> not) propertyValue
             |> List.map createMainCss
-            |> List.map (fun x -> $"{(propertyName :> ICssValue).Stringify()}", x)
+            |> List.map (fun x -> $"{stringifyICssValue propertyName}", x)
         let pseudoProperties =
             List.filter isPseudo propertyValue
             |> List.map createPseudoCss
-            |> List.map (fun (p, s) -> $"{(propertyName :> ICssValue).Stringify()}{p}", s)
+            |> List.map (fun (p, s) -> $"{stringifyICssValue propertyName}{p}", s)
         let mediaProperties =
             List.filter isMedia propertyValue
             |> List.map createMediaCss

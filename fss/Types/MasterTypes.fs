@@ -2,6 +2,8 @@ namespace Fss
 // Interfaces
 namespace Fss.FssTypes
 
+open Fss.FssTypes
+
 type IStringify =
     interface
         abstract member Stringify : unit -> string
@@ -633,3 +635,12 @@ type CssRuleWithAutoNormal(property: Property.Property) =
 type CssRuleWithAutoNormalNone(property: Property.Property) =
     inherit CssRuleWithAutoNone(property)
     member this.normal = (property, Normal) |> Rule
+    
+[<AutoOpen>]
+module MasterTypeHelpers = 
+    let internal stringifyICssValue cssValue: string =
+        (cssValue :> ICssValue).Stringify()
+    let internal stringifyICounterValue cssValue: string =
+        (cssValue :> ICounterValue).Stringify()
+    let internal stringifyIFontFaceValue cssValue: string =
+        (cssValue :> IFontFaceValue).Stringify()

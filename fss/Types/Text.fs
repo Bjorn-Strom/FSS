@@ -295,7 +295,7 @@ module Text =
             interface ICssValue with
                 member this.Stringify() =
                     let stringify (x, y, blur, color) =
-                        $"{(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()} {(blur :> ICssValue).Stringify()} {(color :> ICssValue).Stringify()}"
+                        $"{stringifyICssValue x} {stringifyICssValue y} {stringifyICssValue blur} {stringifyICssValue color}"
 
                     match this with
                     | Shadow (x, y, blur, color) -> stringify (x, y, blur, color)
@@ -324,7 +324,7 @@ module Text =
 
             member this.value(x: EmphasisPosition, y: EmphasisPosition) =
                 let value =
-                    $"{(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue x} {stringifyICssValue y}"
                     |> String
                 (property, value) |> Rule
         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
@@ -345,7 +345,7 @@ module Text =
 
             member this.value(x: UnderlinePosition, y: UnderlinePosition) =
                 let value =
-                    $"{(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue x} {stringifyICssValue y}"
                     |> String
                 (property, value) |> Rule
 
@@ -366,7 +366,7 @@ module Text =
                 member this.Stringify() =
                     match this with
                     | Strings s ->
-                        List.map (fun x -> (x :> ICssValue).Stringify()) s
+                        List.map stringifyICssValue s
                         |> String.concat " "
 
         type Quotes(property) =

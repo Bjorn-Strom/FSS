@@ -39,7 +39,7 @@ module ClipPath =
                 match this with
                 | Round (inset, lengths) ->
                     let inset =
-                        (inset :> ICssValue).Stringify().Replace(")", "")
+                        (stringifyICssValue inset).Replace(")", "")
 
                     let lengths =
                         lengths

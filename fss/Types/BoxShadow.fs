@@ -2,8 +2,6 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-
 [<RequireQualifiedAccess>]
 module BoxShadow =
     type BoxShadow =
@@ -15,18 +13,17 @@ module BoxShadow =
         interface ICssValue with
             member this.Stringify() =
                 match this with
-                // todo: Kan upcast to string bli en funksjon?
                 | Color (xOffset, yOffset, color) ->
-                    $"{lengthPercentageString xOffset} {lengthPercentageString yOffset} {(color :> ICssValue).Stringify()}"
+                    $"{lengthPercentageString xOffset} {lengthPercentageString yOffset} {stringifyICssValue color}"
                 | BlurColor (xOffset, yOffset, blur, color) ->
-                    $"{lengthPercentageString xOffset} {lengthPercentageString yOffset} {lengthPercentageString blur} {(color :> ICssValue).Stringify()}"
+                    $"{lengthPercentageString xOffset} {lengthPercentageString yOffset} {lengthPercentageString blur} {stringifyICssValue color}"
                 | BlurSpreadColor (xOffset, yOffset, blur, spread, color) ->
-                    $"{lengthPercentageString xOffset} {lengthPercentageString yOffset} {lengthPercentageString blur} {lengthPercentageString spread} {(color :> ICssValue).Stringify()}"
-                | Inset shadow -> $"inset {(shadow :> ICssValue).Stringify()}"
+                    $"{lengthPercentageString xOffset} {lengthPercentageString yOffset} {lengthPercentageString blur} {lengthPercentageString spread} {stringifyICssValue color}"
+                | Inset shadow -> $"inset {stringifyICssValue shadow}"
                 // TODO: KAn denne også funksjoneres?
                 | Shadows shadows ->
                     shadows
-                    |> List.map (fun x -> (x :> ICssValue).Stringify())
+                    |> List.map stringifyICssValue
                     |> String.concat ", "
 
     [<RequireQualifiedAccess>]

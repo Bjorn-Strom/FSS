@@ -48,7 +48,7 @@ module Image =
         | RepeatingConicGradientAngle of Angle * Percent * Percent * (Color * Angle) list
         | RepeatingConicGradientPercent of Angle * Percent * Percent * (Color * Percent) list
         interface ICounterValue with
-            member this.Stringify() = (this :> ICssValue).Stringify()
+            member this.Stringify() = stringifyICssValue this
 
         interface ICssValue with
             member this.Stringify() =
@@ -56,68 +56,68 @@ module Image =
                 let gradientToString (gradients: (Color.Color * ILengthPercentage) list) =
                     List.fold
                         (fun (acc: string) (color, length) ->
-                            $"{acc}, {(color :> ICssValue).Stringify()} {lengthPercentageString length}")
+                            $"{acc}, {stringifyICssValue color} {lengthPercentageString length}")
                         ""
                         gradients
 
                 let gradientAngleToString (gradients: (Color.Color * Angle) list) =
                     List.fold
                         (fun (acc: string) (color, length) ->
-                            $"{acc}, {(color :> ICssValue).Stringify()} {(length :> ICssValue).Stringify()}")
+                            $"{acc}, {stringifyICssValue color} {stringifyICssValue length}")
                         ""
                         gradients
 
                 let gradientPercentToString (gradients: (Color.Color * Percent) list) =
                     List.fold
                         (fun (acc: string) (color, length) ->
-                            $"{acc}, {(color :> ICssValue).Stringify()} {(length :> ICssValue).Stringify()}")
+                            $"{acc}, {stringifyICssValue color} {stringifyICssValue length}")
                         ""
                         gradients
 
                 let linearGradientToString (angle, gradients) =
-                    $"linear-gradient({(angle :> ICssValue).Stringify()}{gradientToString gradients})"
+                    $"linear-gradient({stringifyICssValue angle}{gradientToString gradients})"
 
                 let linearGradientsToString gradients =
                     List.map linearGradientToString gradients
                     |> String.concat ", "
 
                 let repeatingLinearGradient (angle, gradients) =
-                    $"repeating-linear-gradient({(angle :> ICssValue).Stringify()}{gradientToString gradients})"
+                    $"repeating-linear-gradient({stringifyICssValue angle}{gradientToString gradients})"
 
                 let repeatingLinearGradients gradients =
                     List.map repeatingLinearGradient gradients
                     |> String.concat ", "
 
                 let radialGradientToString (shape, side, x, y, gradients) =
-                    $"radial-gradient({shape.ToString().ToLower()} {Fss.Utilities.Helpers.toKebabCase side} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientToString gradients})"
+                    $"radial-gradient({shape.ToString().ToLower()} {Fss.Utilities.Helpers.toKebabCase side} at {stringifyICssValue x} {stringifyICssValue y}{gradientToString gradients})"
 
                 let radialGradientsToString gradients =
                     List.map radialGradientToString gradients
                     |> String.concat ", "
 
                 let repeatingRadialGradientToString (shape, side, x, y, gradients) =
-                    $"repeating-radial-gradient({shape.ToString().ToLower()} {Fss.Utilities.Helpers.toKebabCase side} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientToString gradients})"
+                    $"repeating-radial-gradient({shape.ToString().ToLower()} {Fss.Utilities.Helpers.toKebabCase side} at {stringifyICssValue x} {stringifyICssValue y}{gradientToString gradients})"
 
                 let repeatingRadialGradientsToString gradients =
                     List.map repeatingRadialGradientToString gradients
                     |> String.concat ", "
 
                 let conicGradientAngleToString (angle, x, y, gradients) =
-                    $"conic-gradient(from {(angle :> ICssValue).Stringify()} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientAngleToString gradients})"
+                    $"conic-gradient(from {stringifyICssValue angle} at {stringifyICssValue x} {stringifyICssValue y}{gradientAngleToString gradients})"
 
                 let conicGradientPercentToString (angle, x, y, gradients) =
-                    $"conic-gradient(from {(angle :> ICssValue).Stringify()} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientPercentToString gradients})"
+                    $"conic-gradient(from {stringifyICssValue angle} at {stringifyICssValue x} {stringifyICssValue y}{gradientPercentToString gradients})"
 
                 let repeatingConicGradientAngleToString (angle, x, y, gradients) =
-                    $"repeating-conic-gradient(from {(angle :> ICssValue).Stringify()} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientAngleToString gradients})"
+                    $"repeating-conic-gradient(from {stringifyICssValue angle} at {stringifyICssValue x} {stringifyICssValue y}{gradientAngleToString gradients})"
 
                 let repeatingConicGradientPercentToString (angle, x, y, gradients) =
-                    $"repeating-conic-gradient(from {(angle :> ICssValue).Stringify()} at {(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}{gradientPercentToString gradients})"
+                    $"repeating-conic-gradient(from {stringifyICssValue angle} at {stringifyICssValue x} {stringifyICssValue y}{gradientPercentToString gradients})"
 
                 match this with
                 // TODO: FIX URL
                 | Image.Url u -> $"url({u})"
-                | Image.UrlAlt (u, a) -> $"url({u}) / {(a :> ICssValue).Stringify()}"
+                | Image.UrlAlt (u, a) -> $"url({u}) / {stringifyICssValue a}"
                 | Image.LinearGradient (angle, gradients) -> linearGradientToString (angle, gradients)
                 | Image.LinearGradients gradients -> linearGradientsToString gradients
                 | Image.RepeatingLinearGradient (angle, gradients) -> repeatingLinearGradient (angle, gradients)

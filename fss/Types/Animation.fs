@@ -48,9 +48,9 @@ module Animation =
             interface ICssValue with
                 member this.Stringify() =
                     match this with
-                    | Time t -> (t :> ICssValue).Stringify()
+                    | Time t -> stringifyICssValue t
                     | Times ts ->
-                        List.map (fun t -> (t :> ICssValue).Stringify()) ts
+                        List.map stringifyICssValue ts
                         |> String.concat ", "
 
         type AnimationTime(property) =

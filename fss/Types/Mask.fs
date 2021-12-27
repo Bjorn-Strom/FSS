@@ -105,7 +105,7 @@ module Mask =
             member this.value(modes: Mode list) =
                 let value =
                     modes
-                    |> List.map (fun x -> (x :> ICssValue).Stringify())
+                    |> List.map stringifyICssValue
                     |> String.concat ", "
 
                 (property, String value) |> Rule
@@ -119,7 +119,7 @@ module Mask =
             // TODO: GJør dette over alt?
             member this.value(origins: Origin list) =
                 let value =
-                    List.map (fun x -> (x :> ICssValue).Stringify()) origins
+                    List.map stringifyICssValue origins
                     |> String.concat ", "
 
                 (property, String value) |> Rule
@@ -157,14 +157,14 @@ module Mask =
 
             member this.value(x: Repeat, y: Repeat) =
                 let value =
-                    $"{(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}"
+                    $"{stringifyICssValue x} {stringifyICssValue y}"
                     |> String
 
                 (property, value) |> Rule
 
             member this.value(values: (Repeat * Repeat) list) =
                 let value =
-                    List.map (fun (x, y) -> $"{(x :> ICssValue).Stringify()} {(y :> ICssValue).Stringify()}") values
+                    List.map (fun (x, y) -> $"{stringifyICssValue x} {stringifyICssValue y}") values
                     |> String.concat ", "
 
                 (property, String value) |> Rule

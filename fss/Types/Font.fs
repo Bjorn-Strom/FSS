@@ -215,7 +215,7 @@ module Font =
             interface ICssValue with
                 member this.Stringify() =
                     match this with
-                    | Oblique o -> $"oblique {(o :> ICssValue).Stringify()}"
+                    | Oblique o -> $"oblique {stringifyICssValue o}"
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
         type FontStyle(property) =
@@ -276,7 +276,7 @@ module Font =
                 member this.Stringify() =
                     match this with
                     | WithSwitch (value, switch) ->
-                        $"{(value :> ICssValue).Stringify()} {switch}"
+                        $"{stringifyICssValue value} {switch}"
 
         type FontFeatureSettings(property) =
             inherit CssRuleWithNormal(property)

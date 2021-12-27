@@ -31,7 +31,7 @@ module TimingFunction =
                 match this with
                 | CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" p1 p2 p3 p4
                 | Steps n -> sprintf "steps(%d)" n
-                | StepsWithTerm (n, term) -> $"steps(%d{n}, %s{(term :> ICssValue).Stringify()})"
+                | StepsWithTerm (n, term) -> $"steps(%d{n}, %s{stringifyICssValue term})"
                 | _ -> Fss.Utilities.Helpers.toKebabCase this
 
     [<RequireQualifiedAccess>]

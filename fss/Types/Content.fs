@@ -2,7 +2,6 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-open System
 open Fss.FssTypes
 
 [<RequireQualifiedAccess>]
@@ -23,7 +22,7 @@ module Content =
             interface ICssValue with
                 member this.Stringify() =
                     match this with
-                    | Attribute a -> $"attr({(a :> ICssValue).Stringify()})"
+                    | Attribute a -> $"attr({stringifyICssValue a})"
 
         type Content(property) =
             inherit Image.ImageClasses.ImageClass(property)

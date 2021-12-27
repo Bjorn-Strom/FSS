@@ -19,7 +19,7 @@ type Percent =
     interface IUnit
     interface ILengthPercentage
     interface IFontFaceValue with
-        member this.Stringify() = (this :> ICssValue).Stringify()
+        member this.Stringify() = stringifyICssValue this
 
     interface ICssValue with
         member this.Stringify() =
@@ -110,8 +110,8 @@ module unitHelpers =
 
     let internal lengthPercentageString (lp: ILengthPercentage) =
         match lp with
-        | :? Percent as p -> (p :> ICssValue).Stringify()
-        | :? Length as l -> (l :> ICssValue).Stringify()
+        | :? Percent as p -> stringifyICssValue p 
+        | :? Length as l -> stringifyICssValue l 
         | _ -> ""
 
 

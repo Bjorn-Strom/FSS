@@ -31,8 +31,8 @@ module Scroll =
         interface ICssValue with
             member this.Stringify() =
                 match this with
-                | Mandatory s -> $"{(s :> ICssValue).Stringify()} mandatory"
-                | Proximity s -> $"{(s :> ICssValue).Stringify()} proximity"
+                | Mandatory s -> $"{stringifyICssValue s} mandatory"
+                | Proximity s -> $"{stringifyICssValue s} proximity"
 
     type SnapAlign =
         | Start
@@ -42,7 +42,7 @@ module Scroll =
         interface ICssValue with
             member this.Stringify() =
                 match this with
-                | Double (first, second) -> $"{(first :> ICssValue).Stringify()} {(second :> ICssValue).Stringify()}"
+                | Double (first, second) -> $"{stringifyICssValue first} {stringifyICssValue second}"
                 | _ -> this.ToString().ToLower()
 
     type SnapStop =
