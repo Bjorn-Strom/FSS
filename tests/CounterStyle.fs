@@ -136,5 +136,104 @@ module Counter =
                     "speak-as value"
                     [ SpeakAs.value "foo" ]
                     "speak-as: foo;"
-                    
+                testCounterCase
+                    "fallback lower alpha"
+                    [ Fallback.lowerAlpha ]
+                    "fallback: lower-alpha;"
+                testCounterCase
+                    "fallback custom gangnam style"
+                    [ Fallback.customGangnamStyle ]
+                    "fallback: custom-gangnam-style;"
+                testCase
+                    "Counter reset counter"
+                    [ CounterReset.value "my-counter" ]
+                    "counter-reset: my-counter;"
+                testCase
+                    "Counter reset counter value"
+                    [ CounterReset.value("my-counter", -3) ]
+                    "counter-reset: my-counter -3;"
+                testCase
+                    "Counter reset counter"
+                    [ CounterReset.reversed "my-counter" ]
+                    "counter-reset: reversed(my-counter);"
+                testCase
+                    "Counter reset counter value"
+                    [ CounterReset.reversed("my-counter", -3) ]
+                    "counter-reset: reversed(my-counter) -3;"
+                testCase
+                    "Counter reset none"
+                    [ CounterReset.none ]
+                    "counter-reset: none;"
+                testCase
+                    "Counter reset inherit"
+                    [ CounterReset.inherit' ]
+                    "counter-reset: inherit;"
+                testCase
+                    "Counter reset initial"
+                    [ CounterReset.initial ]
+                    "counter-reset: initial;"
+                testCase
+                    "Counter reset unset"
+                    [ CounterReset.unset ]
+                    "counter-reset: unset;"
+                testCase
+                    "Counter reset revert"
+                    [ CounterReset.revert ]
+                    "counter-reset: revert;"
+                testCase
+                    "Counter set counter"
+                    [ CounterSet.value "my-counter" ]
+                    "counter-set: my-counter;"
+                testCase
+                    "Counter set counter value"
+                    [ CounterSet.value("my-counter", -3) ]
+                    "counter-set: my-counter -3;"
+                testCase
+                    "Counter set none"
+                    [ CounterSet.none ]
+                    "counter-set: none;"
+                testCase
+                    "Counter set inherit"
+                    [ CounterSet.inherit' ]
+                    "counter-set: inherit;"
+                testCase
+                    "Counter set initial"
+                    [ CounterSet.initial ]
+                    "counter-set: initial;"
+                testCase
+                    "Counter set unset"
+                    [ CounterSet.unset ]
+                    "counter-set: unset;"
+                testCase
+                    "Counter set revert"
+                    [ CounterSet.revert ]
+                    "counter-set: revert;"
+                testCase
+                    "Counter increment counter"
+                    [ CounterIncrement.value "my-counter" ]
+                    "counter-increment: my-counter;"
+                testCase
+                    "Counter increment counter value"
+                    [ CounterIncrement.value("my-counter", -3) ]
+                    "counter-increment: my-counter -3;"
+                testCase
+                    "Counter increment none"
+                    [ CounterIncrement.none ]
+                    "counter-increment: none;"
+                testCase
+                    "Counter increment inherit"
+                    [ CounterIncrement.inherit' ]
+                    "counter-increment: inherit;"
+                testCase
+                    "Counter increment initial"
+                    [ CounterIncrement.initial ]
+                    "counter-increment: initial;"
+                testCase
+                    "Counter increment unset"
+                    [ CounterIncrement.unset ]
+                    "counter-increment: unset;"
+                testCase
+                    "Counter increment revert"
+                    [ CounterIncrement.revert ]
+                    "counter-increment: revert;"
             ]

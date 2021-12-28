@@ -1,10 +1,7 @@
 namespace Fss
 
-// TODO: FALLBACK
-
 namespace Fss.FssTypes
 
-// TODO: Teit navngivning her
 type CounterProperty =
     | System
     | Negative
@@ -30,8 +27,7 @@ module Counter =
         | Additive
         | Fixed
         | FixedValue of int
-        // TODO: Ikke ha string, men en egen type
-        | Extends of string
+        | Extends of CounterName
         interface ICounterValue with
             member this.Stringify() =
                 match this with
@@ -87,6 +83,8 @@ module Counter =
     type Fallback =
         | LowerAlpha
         | CustomGangnamStyle
+        interface ICounterValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/symbols
     type Symbols =
@@ -281,3 +279,49 @@ module Counter =
             member this.words = (SpeakAs, Words) |> CounterRule
             member this.spellOut = (SpeakAs, SpellOut) |> CounterRule
             member this.value(ident: string) = (SpeakAs, Value ident) |> CounterRule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/fallback
+        type FallbackClass() =
+            member this.lowerAlpha = (Fallback, LowerAlpha) |> CounterRule
+
+            member this.customGangnamStyle =
+                (Fallback, CustomGangnamStyle) |> CounterRule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-reset
+        type CounterReset(property) =
+            inherit CssRuleWithNone(property)
+
+            member this.value(counter: string) =
+                (property, Fss.FssTypes.String counter) |> Rule
+
+            member this.value(counter: string, value: int) =
+                let value = $"{counter} {value}"
+                (property, Fss.FssTypes.String value) |> Rule
+
+            member this.reversed(counter: string) =
+                let value = $"reversed({counter})"
+                (property, Fss.FssTypes.String value) |> Rule
+
+            member this.reversed(counter: string, value: int) =
+                let value = $"reversed({counter}) {value}"
+                (property, Fss.FssTypes.String value) |> Rule
+
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-set
+        type CounterSet(property) =
+            inherit CssRuleWithNone(property)
+
+            member this.value(counter: string) =
+                (property, Fss.FssTypes.String counter) |> Rule
+
+            member this.value(counter: string, value: int) =
+                let value = $"{counter} {value}"
+                (property, Fss.FssTypes.String value) |> Rule
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment
+        type CounterIncrement(property) =
+            inherit CssRuleWithNone(property)
+
+            member this.value(counter: string) =
+                (property, Fss.FssTypes.String counter) |> Rule
+
+            member this.value(counter: string, value: int) =
+                let value = $"{counter} {value}"
+                (property, Fss.FssTypes.String value) |> Rule

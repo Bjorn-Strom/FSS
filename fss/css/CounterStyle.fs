@@ -26,3 +26,14 @@ module Counter =
         Counter.CounterClasses.AdditiveSymbolsClass()
 
     let SpeakAs = Counter.CounterClasses.SpeakAsClass()
+    let Fallback = Counter.CounterClasses.FallbackClass()
+
+    /// Resets a given counter to a given value
+    let CounterReset =
+        Counter.CounterClasses.CounterReset(Property.CounterReset)
+    /// Sets a given counter to a given value
+    let CounterSet =
+        Counter.CounterClasses.CounterSet(Property.CounterSet)
+    /// Increases or decreases the value of a counter
+    let CounterIncrement =
+        Counter.CounterClasses.CounterIncrement(Property.CounterIncrement)

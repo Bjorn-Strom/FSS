@@ -27,7 +27,6 @@ module Content =
         type Content(property) =
             inherit Image.ImageClasses.ImageClass(property)
             member this.value(value: string) = (property, Stringed value) |> Rule
-            // TODO: Egen counter type en eller annen gang
             member this.counter(counter: string) = (property, String counter) |> Rule
             member this.attribute(attribute: Attribute.Attribute) = (property, Attribute attribute) |> Rule
             member this.normal = (property, Normal) |> Rule

@@ -117,6 +117,7 @@ module Property =
         | Content
         | CounterIncrement
         | CounterReset
+        | CounterSet
         | CueAfter
         | CueBefore
         | Cue

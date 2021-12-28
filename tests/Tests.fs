@@ -24,7 +24,6 @@ module Tests =
         Resize.tests
         Transition.tests
         Visibility.tests
-        Counter.tests
         ListStyle.tests
         Content.tests
         Column.tests
@@ -53,5 +52,6 @@ module Tests =
         FontFace.tests
         Media.tests
         Psuedo.tests
+        Counter.tests
     ]
 
