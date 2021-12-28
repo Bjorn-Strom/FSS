@@ -83,13 +83,6 @@ module ClipPath =
                 | EllipseAt (size, x, y) ->
                     $"ellipse({lengthPercentageString size} at {lengthPercentageString x} {lengthPercentageString y})"
 
-    // TODO: FLytt denne?
-    type Path =
-        | Path of string
-        interface ICssValue with
-            member this.Stringify() =
-                match this with
-                | Path p -> $"path('{p}')"
 
     [<RequireQualifiedAccess>]
     module ClipPathClasses =

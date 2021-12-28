@@ -112,6 +112,10 @@ module Functions =
         match value with
         | :? Pseudo as _ -> true
         | _ -> false
+    let isLabel (_, value: ICssValue) =
+        match value with
+        | :? NameLabel as _ -> true
+        | _ -> false
         
     let private createMainCss (propertyName, propertyValue) =
         $"{stringifyICssValue propertyName}: {stringifyICssValue propertyValue};"
@@ -153,13 +157,28 @@ module Functions =
         
         mainProperties @ pseudoProperties @ mediaProperties    
         
-    let rec fss (properties: Rule list): (ClassName * Css) list =
+    let fss (properties: Rule list): (ClassName * Css) list =
+        let label =
+            properties
+            |> List.filter isLabel
+            |> List.map (fun (_,y) -> y )
+            |> List.rev
+            |> List.tryHead
+        let properties =
+            properties
+            |> List.filter (isLabel >> not)
         
         let mainCss =
             List.filter (isSecondary >> not) properties
             |> List.map createMainCss
             |> String.concat ""
-        let className = $".css-{FNV_1A.hash mainCss}"
+        let className =
+            let label =
+                match label with
+                | Some l -> l.Stringify()
+                | None -> ""
+                
+            $".css-{FNV_1A.hash mainCss}-{label}"
         let mainProperties =
             className, mainCss
         let pseudoProperties =
@@ -233,12 +252,11 @@ module Functions =
 
     let rgba (red: int) (green: int) (blue: int) (alpha: float) = Rgba(red, green, blue, alpha)
 
-    let hex (value: string) = hex value
+    let hex (value: string) = colorHelpers.hex value
 
     let hsl (hue: int) (saturation: int) (lightness: int) = Hsl(hue, saturation, lightness)
 
     let hsla (hue: int) (saturation: int) (lightness: int) (alpha: float) = Hsla(hue, saturation, lightness, alpha)
-
 
     // Sizes
     // Absolute

@@ -180,7 +180,6 @@ module Property =
         | JustifyContent
         | JustifyItems
         | JustifySelf
-        | Label
         | Left
         | LetterSpacing
         | LineBreak
@@ -413,6 +412,7 @@ module Property =
         | StopOpacity
         | ColorInterpolation
         | ColorInterpolationFilters
+        | Label
         | Fill
         | FillOpacity
         | FillRule
@@ -427,6 +427,7 @@ module Property =
         | StrokeWidth
 
         // Home made
+        | NameLabel 
         | AdjacentSibling of Html.Html
         | GeneralSibling of Html.Html
         | Child of Html.Html
@@ -527,6 +528,13 @@ type Stringed =
             match this with
             | Stringed s -> $"\"{s}\""
 
+type NameLabel =
+    | NameLabel of string
+    member this.Unwrap() =
+        match this with
+        | NameLabel n -> n
+    interface ICssValue with
+        member this.Stringify() = this.Unwrap();
 type Pseudo =
     | PseudoClass of Rule list
     | PseudoElement of Rule list
@@ -597,6 +605,12 @@ type Custom =
         member this.Stringify() =
             match this with
             | Custom value -> value
+type Path =
+    | Path of string
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Path p -> $"path('{p}')"
 
 type ClassName = string
 type AnimationName = string

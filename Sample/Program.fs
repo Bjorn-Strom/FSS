@@ -35,14 +35,16 @@ let counterStyle =
           ! FssTypes.Html.Li [
               BackgroundColor.aliceBlue
               Hover [ BackgroundColor.orangeRed ]
-          ] 
+          ]
+          Label "counter"
           ]
 
 let container =
     fss [ Display.flex
           FlexDirection.column
           AlignItems.center
-          JustifyContent.center ]
+          JustifyContent.center
+          Label "container" ]
 
 let spinimation =
     keyframes [ frame 0 [ Custom "transform" "rotate(0deg)" ]
@@ -56,7 +58,9 @@ let title =
           Hover [ AnimationDuration.value (ms 500) ]
           Media.query [ FssTypes.Media.MaxWidth(px 600) ] [
               BackgroundColor.hex "87ceeb"
-          ] ]
+          ]
+          Label "title"
+        ]
     
 // Combinatoren lager + og ikke SPACE
 

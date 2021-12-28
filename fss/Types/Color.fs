@@ -171,8 +171,6 @@ module Color =
         interface ICssValue with
             member this.Stringify() = this.ToString().ToLower()
 
-// TODO: RYdd opp i dette?
-[<AutoOpen>]
 module colorHelpers =
     let internal hex (value: string) =
         if value.StartsWith "#" then
@@ -338,7 +336,7 @@ module ColorClass =
         member this.rgba red green blue alpha =
             (property, Rgba(red, green, blue, alpha)) |> Rule
 
-        member this.hex(value: string) = (property, hex value) |> Rule
+        member this.hex(value: string) = (property, colorHelpers.hex value) |> Rule
 
         member this.hsl hue saturation lightness =
             (property, Hsl(hue, saturation, lightness))

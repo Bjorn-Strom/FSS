@@ -86,5 +86,4 @@ module Content =
                     "Content revert"
                     [ Content.revert ]
                     "content: revert;"
-
             ]
