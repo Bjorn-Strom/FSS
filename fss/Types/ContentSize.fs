@@ -17,10 +17,7 @@ module ContentSize =
     [<RequireQualifiedAccess>]
     module ContentClasses =
         type ContentSize(property) =
-            inherit CssRule(property)
-
-            member this.value(length: ILengthPercentage) =
-                (property, lengthPercentageToType length) |> Rule
+            inherit CssRuleWithAutoLength(property)
 
             member this.maxContent =
                 (property, ContentSize.MaxContent) |> Rule
@@ -30,5 +27,3 @@ module ContentSize =
 
             member this.fitContent(fit: ILengthPercentage) =
                 (property, ContentSize.FitContent fit) |> Rule
-
-            member this.auto = (property, Auto) |> Rule

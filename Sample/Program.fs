@@ -27,7 +27,6 @@ let font =
           FontFace.FontWeight.value 100
           FontFace.FontStyle.normal ]
 
-//// TODO: FIX
 let counterStyle =
     fss [ ListStyleType.ident (fst counter)
           FontFamily.value (fst font)

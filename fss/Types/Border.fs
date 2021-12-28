@@ -50,9 +50,6 @@ module Border =
             inherit DirectionalLength(property)
             member this.value(width: Width) = (property, width) |> Rule
 
-            member this.value(length: ILengthPercentage) =
-                (property, lengthPercentageToType length) |> Rule
-
             member this.thin = (property, Width.Thin) |> Rule
             member this.medium = (property, Width.Medium) |> Rule
             member this.thick = (property, Width.Thick) |> Rule

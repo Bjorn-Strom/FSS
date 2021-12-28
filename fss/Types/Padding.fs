@@ -9,12 +9,7 @@ module Padding =
     [<RequireQualifiedAccess>]
     module PaddingClasses =
         type PaddingDirection(property) =
-            inherit CssRule(property)
-
-            member this.value(length: ILengthPercentage) =
-                (property, lengthPercentageToType length) |> Rule
-
-            member this.auto = (property, Auto) |> Rule
+            inherit CssRuleWithAutoLength(property)
 
         type Padding(property) =
             inherit DirectionalLength(property)

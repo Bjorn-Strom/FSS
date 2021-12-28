@@ -2,10 +2,6 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-
-
-// Todo: Units byttes ut med interface eller klasse??
 type IUnit =
     interface
     end
@@ -114,10 +110,6 @@ module unitHelpers =
         | :? Length as l -> stringifyICssValue l 
         | _ -> ""
 
-
-    // Todo: Bruk disse overalt hvor vi har 1 length
-    // TODO: Lag en med lengths
-    // TODO: Rydd opp i dette
     type CssRuleWithLength(property) =
         inherit CssRule(property)
 
@@ -173,77 +165,3 @@ module unitHelpers =
                 |> String
 
             (property, value) |> Rule
-
-(*
-        let internal percentToString (Percent p): string = string p
-        let internal sizeToString (v: Length): string =
-            match v with
-                | Px p -> string p
-                | In i -> string i
-                | Cm c -> string c
-                | Mm m -> string m
-                | Pt p -> string p
-                | Pc p -> string p
-                | Em' e -> string e
-                | Rem r -> string r
-                | Ex e -> string e
-                | Ch c -> string c
-                | Vw v -> string v
-                | Vh v -> string v
-                | VMax v -> string v
-                | VMin v -> string v
-        let internal lengthPercentageToString (v: IUnit) =
-            match v with
-            | :? Length  as s -> sizeToString s
-            | :? Percent as p -> percentToString p
-            | _ -> "Unknown length/percentage"
-        let internal angleToString (u: Angle) =
-            match u with
-                | Deg d -> d
-                | Grad g -> g
-                | Rad r -> r
-                | Turn t -> t
-        let internal resolutionToString (r: Resolution) =
-            match r with
-                | Dpi d -> sprintf "%sdpi" d
-        let internal timeToString (v: Time): string =
-            match v with
-            | Sec s -> string s
-            | Ms ms -> string ms
-        let internal fractionToString (Fr f) = f
-
-        // TODO: REMOVE?
-        type DirectionalValue(property) =
-            inherit CssRule(property)
-            member this.value(value: ICssValue) =
-                (property,  value) |> Rule
-            member this.value(vertical: ICssValue, horizontal: ICssValue) =
-                let value =
-                    { Vertical =  vertical
-                      Horizontal =  horizontal }
-
-                (property, value) |> Rule
-
-            member this.value(top: ICssValue, horizontal: ICssValue, bottom: ICssValue) =
-                let value =
-                    { Top =  top
-                      Horizontal =  horizontal
-                      Bottom =  bottom }
-
-                (property, value) |> Rule
-
-            member this.value
-                (
-                    top: ICssValue,
-                    right: ICssValue,
-                    bottom: ICssValue,
-                    left: ICssValue
-                ) =
-                let value =
-                    { Top =  top
-                      Right =  right
-                      Bottom =  bottom
-                      Left =  left }
-
-                (property, value) |> Rule
-        *)
