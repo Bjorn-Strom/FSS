@@ -52,7 +52,6 @@ module Image =
 
         interface ICssValue with
             member this.Stringify() =
-                // TODO: Lag 1 funksjon som tar imot funksjon
                 let gradientToString (gradients: (Color.Color * ILengthPercentage) list) =
                     List.fold
                         (fun (acc: string) (color, length) ->
@@ -115,7 +114,6 @@ module Image =
                     $"repeating-conic-gradient(from {stringifyICssValue angle} at {stringifyICssValue x} {stringifyICssValue y}{gradientPercentToString gradients})"
 
                 match this with
-                // TODO: FIX URL
                 | Image.Url u -> $"url({u})"
                 | Image.UrlAlt (u, a) -> $"url({u}) / {stringifyICssValue a}"
                 | Image.LinearGradient (angle, gradients) -> linearGradientToString (angle, gradients)
@@ -139,7 +137,6 @@ module Image =
 
     [<RequireQualifiedAccess>]
     module ImageClasses =
-        // TODO: KAn disse kombineres på noe vis?
         type Image =
             static member url(url: string) = Url url
             static member urlAlt(url: string, alt: string) = UrlAlt(url, Stringed alt)

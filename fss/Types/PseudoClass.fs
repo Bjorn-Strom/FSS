@@ -90,7 +90,6 @@ module PseudoClass =
 
             static member link(rules: Rule list) =
                 (Property.Link, Pseudo.PseudoClass rules) |> Rule
-            // TODO
             static member nthChild (n: string) (rules: Rule list) =
                 (Property.NthChild n, Pseudo.PseudoClass rules) |> Rule
             static member nthLastChild (n:string ) (rules: Rule list) =
@@ -170,6 +169,3 @@ module PseudoClass =
             static member userInvalid(rules: Rule list) =
                 (Property.UserInvalid, Pseudo.PseudoClass rules)
                 |> Rule
-// TODO:
-//                static member is (html: FssTypes.Html.Html list, rules: Rule list) =
-//                    (Property.Is, Pseudo.PseudoClass rules) |> Rule

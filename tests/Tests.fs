@@ -50,7 +50,7 @@ module Tests =
         Counter.tests
         Animation.tests
         Font.tests
-        Composite.tests
         Psuedo.tests
+        Composite.tests
     ]
 

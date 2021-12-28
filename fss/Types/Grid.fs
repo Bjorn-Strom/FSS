@@ -122,40 +122,31 @@ module Grid =
 module GridClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
-    type AreaHelper =
-        | Area of string
-        | ValueArea of int * string
-        | AreaValue of string * int
-        | Span of int
-        interface ICssValue with
-            member this.Stringify() =
-                match this with
-                | Area a -> a
-                | ValueArea (value, area) -> $"{value} {area}"
-                | AreaValue (area, value) -> $"{area} / {value}"
-                | Span span -> $"span {span}"
-
     type GridPosition(property) =
         inherit CssRuleWithAuto(property)
-        member this.value(area: string) = (property, Area area) |> Rule
+        member this.value(area: string) =
+            (property, String area) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-start
     type GridColumn(property) =
         inherit CssRuleWithAuto(property)
-        member this.value(area: string) = (property, Area area) |> Rule
+        member this.value(area: string) = (property, String area) |> Rule
         member this.value(value: int) = (property, Int value) |> Rule
 
         member this.value(value: int, area: string) =
-            (property, ValueArea(value, area)) |> Rule
+            let value = $"{value} {area}"
+            (property, String value) |> Rule
 
-        member this.span(value: int) = (property, Span value) |> Rule
+        member this.span(value: int) =
+            let value = $"span {value}"
+            (property, String value) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row
     type GridRow(property) =
         inherit GridPosition(property)
 
         member this.value(area: string, value: int) =
-            (property, AreaValue(area, value)) |> Rule
+            (property, Divider(area, (string value)) ) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/gap
     type GridGap(property) =

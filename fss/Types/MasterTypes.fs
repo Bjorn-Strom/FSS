@@ -2,6 +2,8 @@ namespace Fss
 // Interfaces
 namespace Fss.FssTypes
 
+open Fss.FssTypes
+
 type IStringify =
     interface
         abstract member Stringify : unit -> string
@@ -31,8 +33,6 @@ module MasterTypeHelpers =
     let internal stringifyIFontFaceValue cssValue: string =
         (cssValue :> IFontFaceValue).Stringify()
 
-// TODO: Clean up all the types and functions
-// TODO: Finnes counter og font face properties i denne? Isåfall fjern
 [<RequireQualifiedAccess>]
 module Property =
     type Property =
@@ -451,9 +451,9 @@ module Property =
                 | NthOfType n -> $"nth-of-type({n})"
                 | NthLastOfType n -> $"nth-last-of-type({n})"
                 | AdjacentSibling html -> $" + {html.ToString().ToLower()}"
-                | GeneralSibling html -> $" + {html.ToString().ToLower()}"
-                | Child html -> $" + {html.ToString().ToLower()}"
-                | Descendant html -> $" + {html.ToString().ToLower()}"
+                | GeneralSibling html -> $" ~ {html.ToString().ToLower()}"
+                | Child html -> $" > {html.ToString().ToLower()}"
+                | Descendant html -> $"   {html.ToString().ToLower()}"
                 | Custom c -> c.ToLower()
                 | _ -> Fss.Utilities.Helpers.toKebabCase this
 
@@ -547,7 +547,13 @@ and Keywords =
 
 and Rule = Property.Property * ICssValue
         
-        
+type Important =
+    | Important of ICssValue
+    interface ICssValue with
+        member this.Stringify() =
+            match this with
+            | Important value ->
+                $"{stringifyICssValue value} !important"
         
 type Pseudo =
     | PseudoClass of Rule list
@@ -577,9 +583,11 @@ type Pseudo =
 
                 $"{ps}"
 
-// TODO: FIX
 type Combinator =
     | Combinator of Rule list
+    member this.Unwrap() =
+        match this with
+        | Combinator c -> c
     interface ICssValue with
         member this.Stringify() =
             match this with
@@ -592,7 +600,6 @@ type Combinator =
 
                 $"{ps}"
 
-// TODO: Bruk denne på alt som har /
 type Divider =
     | Divider of string * string
     interface ICssValue with
@@ -634,7 +641,6 @@ type FontName = string
 type FontFaceStyle = string
 type Css = string
 
-// TODO: Bruk disse over alt
 type CssRuleWithAuto(property: Property.Property) =
     inherit CssRule(property)
     member this.auto = (property, Auto) |> Rule

@@ -3,116 +3,28 @@ namespace Fss
 open Fss.FssTypes
 open Fss.Utilities
 
-//open Media
-//open Keyframes
-
 [<AutoOpen>]
 module Functions =
-    (*
-    let css' x = x
-
-    let injectGlobal' x = x
-
-    // Constructors
-    let private fssObject (attributeList: CssProperty list) =
-        attributeList
-        |> List.map masterTypeHelpers.CssValue
-        |> css'
-
-    let fss (attributeList: CssProperty list) =
-        attributeList
-        |> fssObject
-        |> string
-
-    let global' (attributeList: CssProperty list) =
-        attributeList
-        |> List.map masterTypeHelpers.CssValue
-        //|> createObj
-        |> injectGlobal'
-
-
-    /// <summary>Write Css as key value string pairs.
-    /// Allows you to add values not supported by Fss.</summary>
-    /// <param name="key">Css property</param>
-    /// <param name="value">Css value </param>
-    /// <returns>Css property for fss.</returns>
-    let Custom (key: string) (value: string) =
-        //key ==> value |> CssProperty
-        key :> obj
-
-
-    let counterStyle (attributeList: CounterProperty list) =
-        let counterName = sprintf "counter_%s" <| Guid.NewGuid().ToString()
-
-        // createCounterObject attributeList counterName |> css' |> ignore
-
-        counterName |> Counter.Style
-
-    // Media
-    let MediaQueryFor (device: Media.Device) (features: Media.Feature list) (attributeList: CssProperty list) =
-        Media.Media(device, features, fss attributeList)
-    let MediaQuery (features: Media.Feature list) (attributeList: CssProperty list) =
-        Media.Media(features, fss attributeList)
-
-    // Font
-    let fontFace (fontFamily: string) (attributeList: CssProperty list) =
-        attributeList
-        |> createFontFaceObject fontFamily
-        |> css'
-        Font.Family.Name (Font.Name fontFamily)
-
-    let fontFaces (fontFamily: string) (attributeLists: CssProperty list list) =
-        attributeLists
-        |> List.map (createFontFaceObject fontFamily)
-       // |> List.iter css'
-
-        Font.Family.Name (Font.Name fontFamily)
-
-    // Important
-    let important property =
-        let key, value = masterTypeHelpers.CssValue property
-        //key ==> $"{value} !important" |> CssProperty
-        key :> obj
-
-    // Classnames
-    let combine styles stylesPred =
-        (styles
-        |> List.map (fun s -> s, true)
-        |> List.append) stylesPred
-        |> List.filter snd
-        |> List.map fst
-        |> String.concat " "
-[ *)
             
-    // TODO RYDD OPP LITT HER
-    // Vi trenger 4 funksjoner
-    // - Fss som lager CSS - X
-    // - Counter som lager counter style - X
-    // - Font Face som lager font face - X
-    // - Keyframes som lager animasjoner
-    
-    type internal Properties =
-        { Main: Rule list
-          Secondary: Rule list }
     let private isSecondary (_: Property.Property, value: ICssValue) =
         match value with
             | :? Pseudo as _ -> true
             | :? Combinator as _ -> true
             | :? Media.MediaQuery as _ -> true
             | _ -> false
-    let isCombinator (_, value: ICssValue) =
+    let private isCombinator (_, value: ICssValue) =
         match value with
         | :? Combinator as _ -> true
         | _ -> false
-    let isMedia (_, value: ICssValue) =
+    let private isMedia (_, value: ICssValue) =
         match value with
         | :? Media.MediaQuery as _ -> true
         | _ -> false
-    let isPseudo (_, value: ICssValue) =
+    let private isPseudo (_, value: ICssValue) =
         match value with
         | :? Pseudo as _ -> true
         | _ -> false
-    let isLabel (_, value: ICssValue) =
+    let private isLabel (_, value: ICssValue) =
         match value with
         | :? NameLabel as _ -> true
         | _ -> false
@@ -135,12 +47,8 @@ module Functions =
         let splitMedia = ($"{stringifyICssValue propertyValue};").Split '|'
         $"@media {splitMedia[0]}", $"{splitMedia[1]}"
         
-    // TODO: ÆSJ
-    let private unwrapCombinator (Combinator rules) = rules
-        
-    // TODO: FIX
     let private createCombinatorCss (propertyName, propertyValue: ICssValue): (string * string) list =
-        let propertyValue = unwrapCombinator (propertyValue :?> Combinator)
+        let propertyValue = (propertyValue :?> Combinator).Unwrap()
         
         let mainProperties =
             List.filter (isSecondary >> not) propertyValue
@@ -245,8 +153,20 @@ module Functions =
                 attributeList
 
         $"animation-{FNV_1A.hash foo}", foo
-        
 
+    // Important
+    let important (propertyName, propertyValue) =
+        (propertyName, Important propertyValue) |> Rule
+
+    // Classnames
+    let combine styles stylesPred =
+        (styles
+        |> List.map (fun s -> s, true)
+        |> List.append) stylesPred
+        |> List.filter snd
+        |> List.map fst
+        |> String.concat " "
+        
     // Color
     let rgb (red: int) (green: int) (blue: int) = Rgb(red, green, blue)
 

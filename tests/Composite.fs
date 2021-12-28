@@ -62,28 +62,15 @@ module Composite =
         |> String.concat "").Replace(" ", "").Replace("\n", "")
         
     let correct =
-        (String.concat ""
-          [ "@counter-style counter-1307384566 { system: cyclic;"
-            "symbols: \"\";"
-            "suffix: \" \";"
-            "prefix: \" \"; }"
-            "@font-face { font-family: \"DroidSerif\";"
-            "src: url(https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf) format('truetype');"
-            "font-weight: 100;"
-            "font-style: normal; }"
-            ".css-1809775240-counter { list-style-type: counter-1307384566;font-family: DroidSerif; }"
-            ".css-1809775240-counter + li::after { content: \".\"; }"
-            ".css-1809775240-counter + li { background-color: aliceblue; }"
-            ".css-1809775240-counter + li:hover { background-color: orangered; }"
-            ".css-525896048-container { display: flex;flex-direction: column;align-items: center;justify-content: center; }"
-            "@keyframes animation-449288920 {  0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"
-            ".css--1116097773-title { animation-name: animation-449288920;animation-duration: 1s;animation-iteration-count: infinite;font-family: DroidSerif; }"
-            ".css--1116097773-title:hover { animation-duration: 500ms; }"
-            "@media (max-width: 600px)  { .css--1116097773-title  { background-color: #87ceeb; }; }" ]).Replace(" ", "").Replace("\n", "")
+         "@counter-stylecounter-1307384566{system:cyclic;symbols:\"\";suffix:\"\";prefix:\"\";}@font-face{font-family:\"DroidSerif\";src:url(https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf)format('truetype');font-weight:100;font-style:normal;}.css-1809775240-counter{list-style-type:counter-1307384566;font-family:DroidSerif;}.css-1809775240-counterli::after{content:\".\";}.css-1809775240-counterli{background-color:aliceblue;}.css-1809775240-counterli:hover{background-color:orangered;}.css-525896048-container{display:flex;flex-direction:column;align-items:center;justify-content:center;}@keyframesanimation-449288920{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}.css--1116097773-title{animation-name:animation-449288920;animation-duration:1s;animation-iteration-count:infinite;font-family:DroidSerif;}.css--1116097773-title:hover{animation-duration:500ms;}@media(max-width:600px){.css--1116097773-title{background-color:#87ceeb;};}"
         
     let tests =
        testList "Composite"
            [
                test "CompositeTest" <| fun _ ->
                    Expect.equal composition correct
+               testCase
+                   "Important"
+                   [ important Color.red ]
+                   "color: red !important;"
            ]

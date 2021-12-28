@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>App</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
 <!--        <Compile Include="Markdown.fs" />-->
