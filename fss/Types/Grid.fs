@@ -286,20 +286,17 @@ module GridClasses =
         member this.columnDense = (property, Grid.ColumnDense) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
-    type TemplateAreasHelper =
-        | Value of string list
-        | Values of string list list
-        interface ICssValue with
-            member this.Stringify() =
-                match this with
-                | Value v ->
-                    let v = String.concat " " v
-                    $"\"{v}\""
-                | Values v ->
-                    List.map (fun x -> String.concat " " x) v
-                    |> List.fold (fun acc x -> $"{acc} \"{x}\"") ""
-
     type GridTemplateAreas(property) =
         inherit CssRuleWithNone(property)
-        member this.value(values: string list) = (property, Value values) |> Rule
-        member this.value(values: string list list) = (property, Values values) |> Rule
+        member this.value(values: string list) =
+            let values =
+                let v = String.concat " " values
+                $"\"{v}\""
+            (property, String values) |> Rule
+        member this.value(values: string list list) =
+            let values =
+                    values
+                    |> List.map (fun x -> String.concat " " x)
+                    |> List.fold (fun acc x -> $"{acc} \"{x}\"") ""
+                    
+            (property, String values) |> Rule

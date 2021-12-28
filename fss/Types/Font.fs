@@ -158,18 +158,13 @@ module Font =
     [<RequireQualifiedAccess>]
     module FontClasses =
         // https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis
-        type SynthesisHelper =
-            | Synthesis of Synthesis list
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | Synthesis s ->
-                        List.map Fss.Utilities.Helpers.toKebabCase s
-                        |> String.concat " "
-
         type FontSynthesis(property) =
             inherit CssRuleWithNone(property)
-            member this.value(synthesis: Synthesis list) = (property, Synthesis synthesis) |> Rule
+            member this.value(synthesis: Synthesis list) =
+                let synthesis =
+                    List.map Fss.Utilities.Helpers.toKebabCase synthesis
+                    |> String.concat " "
+                (property, String synthesis) |> Rule
             member this.weight = (property, Weight) |> Rule
             member this.style = (property, Style) |> Rule
             member this.smallCaps = (property, SmallCaps) |> Rule
@@ -210,17 +205,12 @@ module Font =
             member this.extraExpanded = (property, ExtraExpanded) |> Rule
             member this.ultraExpanded = (property, UltraExpanded) |> Rule
 
-        type StyleHelper =
-            | Oblique of Angle
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | Oblique o -> $"oblique {stringifyICssValue o}"
-
         // https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
         type FontStyle(property) =
             inherit CssRuleWithNormal(property)
-            member this.oblique(angle: Angle) = (property, Oblique angle) |> Rule
+            member this.oblique(angle: Angle) =
+                let angle = $"oblique {stringifyICssValue angle}" 
+                (property, String angle) |> Rule
             member this.italic = (property, Italic) |> Rule
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
@@ -251,140 +241,128 @@ module Font =
             inherit CssRuleWithLengthNormal(property)
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
-        type FamilyHelper =
-            | Fonts of Family list
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | Fonts families ->
-                        List.map Fss.Utilities.Helpers.toKebabCase families
-                        |> String.concat ", "
-
         type FontFamily(property) =
             inherit CssRule(property)
             member this.value(family: string) = (property, String family) |> Rule
-            member this.value(families: Family list) = (property, Fonts families) |> Rule
+            member this.value(families: Family list) =
+                let families =
+                    List.map Fss.Utilities.Helpers.toKebabCase families
+                    |> String.concat ", " 
+                (property, String families) |> Rule
             member this.serif = (property, Serif) |> Rule
             member this.sansSerif = (property, SansSerif) |> Rule
             member this.monospace = (property, Monospace) |> Rule
             member this.cursive = (property, Cursive) |> Rule
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
-        type FeatureSettingHelper =
-            | WithSwitch of Stringed * SettingSwitch
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | WithSwitch (value, switch) ->
-                        $"{stringifyICssValue value} {switch}"
-
         type FontFeatureSettings(property) =
             inherit CssRuleWithNormal(property)
-
+            
+            let settingToString value switch = $"\"{stringifyICssValue value}\" {switch}"
             member this.liga switch =
-                (property, WithSwitch(Stringed "liga", switch))
+                (property, settingToString Liga switch |> String)
                 |> Rule
 
             member this.dlig switch =
-                (property, WithSwitch(Stringed "dlig", switch))
+                (property, settingToString Dlig switch |> String)
                 |> Rule
 
             member this.onum switch =
-                (property, WithSwitch(Stringed "onum", switch))
+                (property, settingToString Onum switch |> String)
                 |> Rule
 
             member this.lnum switch =
-                (property, WithSwitch(Stringed "lnum", switch))
+                (property, settingToString Lnum switch |> String)
                 |> Rule
 
             member this.tnum switch =
-                (property, WithSwitch(Stringed "tnum", switch))
+                (property, settingToString Tnum switch |> String)
                 |> Rule
 
             member this.zero switch =
-                (property, WithSwitch(Stringed "zero", switch))
+                (property, settingToString Zero switch |> String)
                 |> Rule
 
             member this.frac switch =
-                (property, WithSwitch(Stringed "frac", switch))
+                (property, settingToString Frac switch |> String)
                 |> Rule
 
             member this.sups switch =
-                (property, WithSwitch(Stringed "sups", switch))
+                (property, settingToString Sups switch |> String)
                 |> Rule
 
             member this.subs switch =
-                (property, WithSwitch(Stringed "subs", switch))
+                (property, settingToString Subs switch |> String)
                 |> Rule
 
             member this.smcp switch =
-                (property, WithSwitch(Stringed "smcp", switch))
+                (property, settingToString Smcp switch |> String)
                 |> Rule
 
             member this.c2sc switch =
-                (property, WithSwitch(Stringed "c2sc", switch))
+                (property, settingToString C2sc switch |> String)
                 |> Rule
 
             member this.case switch =
-                (property, WithSwitch(Stringed "case", switch))
+                (property, settingToString Case switch |> String)
                 |> Rule
 
             member this.hlig switch =
-                (property, WithSwitch(Stringed "hlig", switch))
+                (property, settingToString Hlig switch |> String)
                 |> Rule
 
             member this.calt switch =
-                (property, WithSwitch(Stringed "calt", switch))
+                (property, settingToString Calt switch |> String)
                 |> Rule
 
             member this.swsh switch =
-                (property, WithSwitch(Stringed "swsh", switch))
+                (property, settingToString Swsh switch |> String)
                 |> Rule
 
             member this.hist switch =
-                (property, WithSwitch(Stringed "hist", switch))
+                (property, settingToString Hist switch |> String)
                 |> Rule
 
-            member this.ss(value, switch) =
-                let value = sprintf "%02i" value
+            member this.ss(value: int, switch: SettingSwitch) =
+                let value = $"\"ss%02i{value}\" %s{switch.ToString()}"
 
-                (property, WithSwitch(Stringed $"ss{value}", switch))
+                (property, value |> String)
                 |> Rule
 
             member this.kern switch =
-                (property, WithSwitch(Stringed "kern", switch))
+                (property, settingToString Kern switch |> String)
                 |> Rule
 
             member this.locl switch =
-                (property, WithSwitch(Stringed "locl", switch))
+                (property, settingToString Locl switch |> String)
                 |> Rule
 
             member this.rlig switch =
-                (property, WithSwitch(Stringed "rlig", switch))
+                (property, settingToString Rlig switch |> String)
                 |> Rule
 
             member this.medi switch =
-                (property, WithSwitch(Stringed "medi", switch))
+                (property, settingToString Medi switch |> String)
                 |> Rule
 
             member this.init switch =
-                (property, WithSwitch(Stringed "init", switch))
+                (property, settingToString Init switch |> String)
                 |> Rule
 
             member this.isol switch =
-                (property, WithSwitch(Stringed "isol", switch))
+                (property, settingToString Isol switch |> String)
                 |> Rule
 
             member this.fina switch =
-                (property, WithSwitch(Stringed "fina", switch))
+                (property, settingToString Fina switch |> String)
                 |> Rule
 
             member this.mark switch =
-                (property, WithSwitch(Stringed "mark", switch))
+                (property, settingToString Mark switch |> String)
                 |> Rule
 
             member this.mkmk switch =
-                (property, WithSwitch(Stringed "mkmk", switch))
+                (property, settingToString Mkmk switch |> String)
                 |> Rule
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric

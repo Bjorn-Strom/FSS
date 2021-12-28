@@ -117,7 +117,7 @@
     <Compile Include="css\FontFace.fs" />
     <Compile Include="css\Selector.fs" />
     <Compile Include="css\Media.fs" />
-    <Compile Include="Keyframes.fs" />
+    <Compile Include="css\Keyframes.fs" />
     <Compile Include="Functions.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

@@ -62,8 +62,8 @@ module Image =
 
                 let gradientAngleToString (gradients: (Color.Color * Angle) list) =
                     List.fold
-                        (fun (acc: string) (color, length) ->
-                            $"{acc}, {stringifyICssValue color} {stringifyICssValue length}")
+                        (fun (acc: string) (color, angle) ->
+                            $"{acc}, {stringifyICssValue color} {stringifyICssValue angle}")
                         ""
                         gradients
 
@@ -139,6 +139,7 @@ module Image =
 
     [<RequireQualifiedAccess>]
     module ImageClasses =
+        // TODO: KAn disse kombineres på noe vis?
         type Image =
             static member url(url: string) = Url url
             static member urlAlt(url: string, alt: string) = UrlAlt(url, Stringed alt)

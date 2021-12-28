@@ -12,29 +12,6 @@ module Border =
         | Thick
         interface ICssValue with
             member this.Stringify() = this.ToString().ToLower()
-
-    module Radius =
-        type Two =
-            { TopLeft_BottomRight: ILengthPercentage
-              TopRight_BottomLeft: ILengthPercentage }
-            interface ICssValue with
-                member this.Stringify() = this.ToString().ToLower()
-
-        type Three =
-            { TopLeft: ILengthPercentage
-              TopRight_BottomLeft: ILengthPercentage
-              BottomRight: ILengthPercentage }
-            interface ICssValue with
-                member this.Stringify() = this.ToString().ToLower()
-
-        type Four =
-            { TopLeft: ILengthPercentage
-              TopRight: ILengthPercentage
-              BottomRight: ILengthPercentage
-              BottomLeft: ILengthPercentage }
-            interface ICssValue with
-                member this.Stringify() = this.ToString().ToLower()
-
     type Style =
         | Hidden
         | Dotted

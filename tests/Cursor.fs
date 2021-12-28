@@ -9,6 +9,14 @@ module Cursor =
         testList "Cursor"
             [
                 testCase
+                    "Cursor url"
+                    [Cursor.url "hand.cur"]
+                    "cursor: url(hand.cur);"
+                testCase
+                    "Cursor url with offset"
+                    [Cursor.url ("hand.cur", 4, 12)]
+                    "cursor: url(hand.cur) 4 12;"
+                testCase
                     "Cursor None"
                     [Cursor.none]
                     "cursor: none;"

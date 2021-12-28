@@ -2,11 +2,6 @@
 
 open Fss.FssTypes
 
-// TODO:
-// COunter reset
-// COunter increment
-// De tinga
-
 [<AutoOpen>]
 module Counter =
     let System = Counter.CounterClasses.SystemClass()

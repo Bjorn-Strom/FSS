@@ -2,8 +2,6 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-// TODO: Sett font family automatisk
-
 type FontFaceProperty =
     | AscentOverride
     | DescentOverride

@@ -65,6 +65,14 @@ module Animation =
                     [ AnimationDuration.revert ]
                     "animation-duration: revert;" 
                 testCase
+                    "Animation timing-function value"
+                    [ AnimationTimingFunction.value FssTypes.TimingFunction.Ease ]
+                    "animation-timing-function: ease;"
+                testCase
+                    "Animation timing-function values"
+                    [ AnimationTimingFunction.value [ FssTypes.TimingFunction.Ease; FssTypes.TimingFunction.EaseOut ] ]
+                    "animation-timing-function: ease, ease-out;"
+                testCase
                     "Animation timing function ease"
                     [ AnimationTimingFunction.ease ]
                     "animation-timing-function: ease;"
@@ -189,6 +197,14 @@ module Animation =
                     [ AnimationIterationCount.revert ]
                     "animation-iteration-count: revert;" 
                 testCase
+                    "Animation direction value"
+                    [ AnimationDirection.value FssTypes.Animation.Direction.Alternate ]
+                    "animation-direction: alternate;"
+                testCase
+                    "Animation direction values"
+                    [ AnimationDirection.value [ FssTypes.Animation.Direction.Alternate; FssTypes.Animation.Direction.Reverse ] ]
+                    "animation-direction: alternate, reverse;"
+                testCase
                     "Animation direction normal"
                     [ AnimationDirection.normal ]
                     "animation-direction: normal;"
@@ -221,6 +237,14 @@ module Animation =
                     [ AnimationDirection.revert ]
                     "animation-direction: revert;"
                 testCase
+                    "Animation fill-mode value"
+                    [ AnimationFillMode.value FssTypes.Animation.FillMode.Both ]
+                    "animation-fill-mode: both;"
+                testCase
+                    "Animation direction values"
+                    [ AnimationFillMode.value [ FssTypes.Animation.FillMode.Both; FssTypes.Animation.FillMode.Forwards ] ]
+                    "animation-fill-mode: both, forwards;"
+                testCase
                     "Animation fill mode forwards"
                     [ AnimationFillMode.forwards ]
                     "animation-fill-mode: forwards;"
@@ -252,6 +276,14 @@ module Animation =
                     "Animation fill-mode revert"
                     [ AnimationFillMode.revert ]
                     "animation-fill-mode: revert;"
+                testCase
+                    "Animation play-state value"
+                    [ AnimationPlayState.value FssTypes.Animation.PlayState.Paused ]
+                    "animation-play-state: paused;"
+                testCase
+                    "Animation play-state values"
+                    [ AnimationPlayState.value [ FssTypes.Animation.PlayState.Paused; FssTypes.Animation.PlayState.Running ] ]
+                    "animation-play-state: paused, running;"
                 testCase
                     "Animation play state running"
                     [ AnimationPlayState.running ]

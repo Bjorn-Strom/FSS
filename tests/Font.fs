@@ -429,6 +429,206 @@ module Font =
                     [ FontFeatureSettings.liga Off ]
                      "font-feature-settings: \"liga\" Off;"
                 testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.dlig On ]
+                     "font-feature-settings: \"dlig\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.dlig Off ]
+                     "font-feature-settings: \"dlig\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.onum On ]
+                     "font-feature-settings: \"onum\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.onum Off ]
+                     "font-feature-settings: \"onum\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.lnum On ]
+                     "font-feature-settings: \"lnum\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.lnum Off ]
+                     "font-feature-settings: \"lnum\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.tnum On ]
+                     "font-feature-settings: \"tnum\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.tnum Off ]
+                     "font-feature-settings: \"tnum\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.zero On ]
+                     "font-feature-settings: \"zero\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.zero Off ]
+                     "font-feature-settings: \"zero\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.frac On ]
+                     "font-feature-settings: \"frac\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.frac Off ]
+                     "font-feature-settings: \"frac\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.sups On ]
+                     "font-feature-settings: \"sups\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.sups Off ]
+                     "font-feature-settings: \"sups\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.subs On ]
+                     "font-feature-settings: \"subs\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.subs Off ]
+                     "font-feature-settings: \"subs\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.smcp On ]
+                     "font-feature-settings: \"smcp\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.smcp Off ]
+                     "font-feature-settings: \"smcp\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.c2sc On ]
+                     "font-feature-settings: \"c2sc\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.c2sc Off ]
+                     "font-feature-settings: \"c2sc\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.case On ]
+                     "font-feature-settings: \"case\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.case Off ]
+                     "font-feature-settings: \"case\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.hlig On ]
+                     "font-feature-settings: \"hlig\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.hlig Off ]
+                     "font-feature-settings: \"hlig\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.calt On ]
+                     "font-feature-settings: \"calt\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.calt Off ]
+                     "font-feature-settings: \"calt\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.swsh On ]
+                     "font-feature-settings: \"swsh\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.swsh Off ]
+                     "font-feature-settings: \"swsh\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.hist On ]
+                     "font-feature-settings: \"hist\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.hist Off ]
+                     "font-feature-settings: \"hist\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.ss (1, On) ]
+                     "font-feature-settings: \"ss01\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.ss (1, Off) ]
+                     "font-feature-settings: \"ss01\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.kern On ]
+                     "font-feature-settings: \"kern\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.kern Off ]
+                     "font-feature-settings: \"kern\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.locl On ]
+                     "font-feature-settings: \"locl\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.locl Off ]
+                     "font-feature-settings: \"locl\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.rlig On ]
+                     "font-feature-settings: \"rlig\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.rlig Off ]
+                     "font-feature-settings: \"rlig\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.medi On ]
+                     "font-feature-settings: \"medi\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.medi Off ]
+                     "font-feature-settings: \"medi\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.init On ]
+                     "font-feature-settings: \"init\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.init Off ]
+                     "font-feature-settings: \"init\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.isol On ]
+                     "font-feature-settings: \"isol\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.isol Off ]
+                     "font-feature-settings: \"isol\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.fina On ]
+                     "font-feature-settings: \"fina\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.mark Off ]
+                     "font-feature-settings: \"mark\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.mark On ]
+                     "font-feature-settings: \"mark\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.mkmk Off ]
+                     "font-feature-settings: \"mkmk\" Off;"
+                testCase
+                    "font feature setting On"
+                    [ FontFeatureSettings.mkmk On ]
+                     "font-feature-settings: \"mkmk\" On;"
+                testCase
+                    "font feature setting Off"
+                    [ FontFeatureSettings.fina Off ]
+                     "font-feature-settings: \"fina\" Off;"
+                testCase
                     "font feature setting initial"
                     [ FontFeatureSettings.initial ]
                      "font-feature-settings: initial;"

@@ -25,7 +25,7 @@ module Visibility =
                     "paint-order: fill;"
                 testCase
                     "Paint order stroke fill"
-                    [PaintOrder.value(FssTypes.PaintOrder.Stroke, FssTypes.PaintOrder.Fill)]
+                    [PaintOrder.value [FssTypes.PaintOrder.Stroke; FssTypes.PaintOrder.Fill]]
                     "paint-order: stroke fill;"
                 testCase
                     "Paint order markers stroke fill"

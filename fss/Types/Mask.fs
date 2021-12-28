@@ -2,8 +2,6 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-
 [<RequireQualifiedAccess>]
 module Mask =
     type Clip =
@@ -67,8 +65,6 @@ module Mask =
         interface ICssValue with
             member this.Stringify() = this.ToString().ToLower()
 
-
-
     [<RequireQualifiedAccess>]
     module MaskClasses =
         // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
@@ -116,7 +112,6 @@ module Mask =
         // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
         type MaskOrigin(property) =
             inherit CssRule(property)
-            // TODO: GJør dette over alt?
             member this.value(origins: Origin list) =
                 let value =
                     List.map stringifyICssValue origins

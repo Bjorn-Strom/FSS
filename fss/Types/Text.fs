@@ -196,38 +196,27 @@ module Text =
         type TextDecoration(property) =
             inherit CssRuleWithNone(property)
         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
-        type DecorationLineHelper =
-            | Decorations of DecorationLine list
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | Decorations ds ->
-                        List.map Fss.Utilities.Helpers.toKebabCase ds
-                        |> String.concat " "
-
         type TextDecorationLine(property) =
             inherit CssRuleWithNone(property)
 
             member this.value(decorations: DecorationLine list) =
-                (property, Decorations decorations) |> Rule
+                let decorations =
+                    List.map Fss.Utilities.Helpers.toKebabCase decorations
+                    |> String.concat " "
+                (property, String decorations) |> Rule
 
             member this.overline = (property, Overline) |> Rule
             member this.underline = (property, Underline) |> Rule
             member this.lineThrough = (property, LineThrough) |> Rule
             member this.blink = (property, Blink) |> Rule
         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
-        type DecorationSkipHelper =
-            | Skips of DecorationSkip list
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | Skips ds ->
-                        List.map Fss.Utilities.Helpers.toKebabCase ds
-                        |> String.concat " "
-
         type TextDecorationSkip(property) =
             inherit CssRuleWithNone(property)
-            member this.value(decorations: DecorationSkip list) = (property, Skips decorations) |> Rule
+            member this.value(decorations: DecorationSkip list) =
+                let decorations =
+                    List.map Fss.Utilities.Helpers.toKebabCase decorations
+                    |> String.concat " "
+                (property, String decorations) |> Rule
             member this.objects = (property, Objects) |> Rule
             member this.spaces = (property, Spaces) |> Rule
             member this.edges = (property, Edges) |> Rule
@@ -263,52 +252,39 @@ module Text =
             member this.fullWidth = (property, FullWidth) |> Rule
             member this.fullSizeKana = (property, FullSizeKana) |> Rule
         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
-        type IndentHelper =
-            | One of ILengthPercentage * Indent
-            | Two of ILengthPercentage * Indent * Indent
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | One (length, indent) ->
-                        $"{lengthPercentageString length} {Fss.Utilities.Helpers.toKebabCase indent}"
-                    | Two (length, a, b) ->
-                        $"{lengthPercentageString length} {Fss.Utilities.Helpers.toKebabCase a} {Fss.Utilities.Helpers.toKebabCase b}"
-
         type TextIndent(property) =
             inherit CssRuleWithLength(property)
 
             member this.hanging(value: ILengthPercentage) =
-                (property, One(value, Indent.Hanging)) |> Rule
+                let value = $"{lengthPercentageString value} {Fss.Utilities.Helpers.toKebabCase Indent.Hanging}"
+                (property, String value) |> Rule
 
             member this.eachLine(value: ILengthPercentage) =
-                (property, One(value, Indent.EachLine)) |> Rule
+                let value = $"{lengthPercentageString value} {Fss.Utilities.Helpers.toKebabCase Indent.EachLine}"
+                (property, String value) |> Rule
 
             member this.hangingEachLine(value: ILengthPercentage) =
-                (property, Two(value, Indent.Hanging, Indent.EachLine))
-                |> Rule
+                let value = $"{lengthPercentageString value} {Fss.Utilities.Helpers.toKebabCase Indent.Hanging} {Fss.Utilities.Helpers.toKebabCase Indent.EachLine}"
+                (property, String value) |> Rule
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
         // https://css-tricks.com/almanac/properties/t/text-shadow/
-        type ShadowHelper =
-            | Shadow of Length * Length * Length * Color
-            | Shadows of (Length * Length * Length * Color) list
-            interface ICssValue with
-                member this.Stringify() =
-                    let stringify (x, y, blur, color) =
-                        $"{stringifyICssValue x} {stringifyICssValue y} {stringifyICssValue blur} {stringifyICssValue color}"
-
-                    match this with
-                    | Shadow (x, y, blur, color) -> stringify (x, y, blur, color)
-                    | Shadows shadows -> List.map stringify shadows |> String.concat ", "
-
         type TextShadow(property) =
             inherit CssRule(property)
+            let stringify (x, y, blur, color) =
+                $"{stringifyICssValue x} {stringifyICssValue y} {stringifyICssValue blur} {stringifyICssValue color}"
 
             member this.value(xOffset: Length, yOffset: Length, blurRadius: Length, color: Color) =
-                (property, Shadow(xOffset, yOffset, blurRadius, color))
-                |> Rule
+                let value = stringify (xOffset, yOffset, blurRadius, color)
+                (property, value |> String) |> Rule
 
-            member this.value(shadows: (Length * Length * Length * Color) list) = (property, Shadows shadows) |> Rule
+            member this.value(shadows: (Length * Length * Length * Color) list) =
+                let value =
+                    shadows
+                    |> List.map stringify
+                    |> String.concat ", "
+                (property, value |> String) |> Rule
+            
         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
         type TextOverflow(property) =
             inherit CssRule(property)
@@ -360,20 +336,16 @@ module Text =
         type TextUnderlineOffset(property) =
             inherit CssRuleWithAutoLength(property)
         // https://developer.mozilla.org/en-US/docs/Web/CSS/quotes
-        type QuoteHelper =
-            | Strings of Stringed list
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | Strings s ->
-                        List.map stringifyICssValue s
-                        |> String.concat " "
-
         type Quotes(property) =
             inherit CssRuleWithAutoNone(property)
 
             member this.value(quotes: string list) =
-                (property, Strings <| List.map Stringed quotes)
+                let quotes =
+                    quotes
+                    |> List.map (fun x -> $"\"{x}\"")
+                    |> String.concat " "
+                    
+                (property, String quotes)
                 |> Rule
         // https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
         type Hyphens(property) =
@@ -428,20 +400,15 @@ module Text =
             member this.all = (property, All) |> Rule
             member this.element = (property, Element) |> Rule
         // https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
-        type PunctuationHelper =
-            | Punctuation of HangingPunctuation list
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | PunctuationHelper.Punctuation ph ->
-                        List.map Fss.Utilities.Helpers.toKebabCase ph
-                        |> String.concat " "
-
         type HangingPunctuationClass(property) =
             inherit CssRuleWithNone(property)
 
             member this.value(punctuations: HangingPunctuation list) =
-                (property, Punctuation punctuations) |> Rule
+                let punctuations =
+                    punctuations
+                    |> List.map Fss.Utilities.Helpers.toKebabCase
+                    |> String.concat " "
+                (property, String punctuations) |> Rule
 
             member this.first = (property, First) |> Rule
             member this.last = (property, Last) |> Rule

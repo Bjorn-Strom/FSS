@@ -5,7 +5,7 @@ namespace Fss.FssTypes
 open Fss.FssTypes
 
 
-// Todo: Units byttes ut med interface?
+// Todo: Units byttes ut med interface eller klasse??
 type IUnit =
     interface
     end

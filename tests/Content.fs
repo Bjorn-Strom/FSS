@@ -40,16 +40,11 @@ module Content =
                 testCase
                     "Content counter"
                     [ Content.counter counterName]
-                    "content: counter-1702328912;"
-                    // TODO:
-//                testCase
-//                    "Content counter2"
-//                    [ Content.counter (sampleCounter, ". ")]
-//                    "content ;"
-//                testCase
-//                    "Content counter2"
-//                    [ Content.counters (sampleCounter, FssTypes.ListStyle.Type.UpperLatin) ]
-//                    "content ;"
+                    "content: counter(counter-1702328912);"
+                testCase
+                    "Content counter2"
+                    [ Content.counter (counterName, ". ")]
+                    "content: counter(counter-1702328912, \". \");"
                 testCase
                     "Content attribute"
                     [ Content.attribute FssTypes.Attribute.Title ]

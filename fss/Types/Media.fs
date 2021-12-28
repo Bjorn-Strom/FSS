@@ -2,8 +2,6 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-
 [<RequireQualifiedAccess>]
 module Media =
     type Device =
@@ -154,8 +152,6 @@ module Media =
             | Scripting scripting -> $"scripting: {Fss.Utilities.Helpers.toKebabCase scripting}"
             | Update update -> $"update: {update.ToString().ToLower()}"
 
-
-    // TODO: FIND BETTER PLACE FOR ALL THESE
     type MediaQuery =
         | MediaQuery of Feature list * Rule list
         interface ICssValue with

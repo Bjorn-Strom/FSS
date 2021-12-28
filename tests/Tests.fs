@@ -10,13 +10,11 @@ module Tests =
         Margin.tests
         Padding.tests
         Color.tests
-        Animation.tests
         Background.tests
         Cursor.tests
         Grid.tests
         Display.tests
         Flex.tests
-        Font.tests
         Perspective.tests
         Text.tests
         Position.tests
@@ -35,7 +33,6 @@ module Tests =
         Clear.tests
         Appearance.tests
         Typography.tests
-        Keyframes.tests
         MixBlendMode.tests
         Filter.tests
         Custom.tests
@@ -44,7 +41,6 @@ module Tests =
         Scroll.tests
         Table.tests
         Word.tests
-        Animation.tests
         WillChange.tests
         Image.tests
         Mask.tests
@@ -53,5 +49,7 @@ module Tests =
         Media.tests
         Psuedo.tests
         Counter.tests
+        Animation.tests
+        Font.tests
     ]
 

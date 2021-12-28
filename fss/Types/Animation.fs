@@ -42,38 +42,12 @@ module Animation =
     module AnimationClasses =
         // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
         // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
-        type internal TimeHelper =
-            | Time of Time
-            | Times of Time list
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | Time t -> stringifyICssValue t
-                    | Times ts ->
-                        List.map stringifyICssValue ts
-                        |> String.concat ", "
-
         type AnimationTime(property) =
-            inherit CssRule(property)
-            member this.value(delay: Time) = (property, delay |> Time) |> Rule
-            member this.value(delays: Time list) = (property, delays |> Times) |> Rule
+            inherit CssRuleWithValueFunctions<Time>(property, ", ")
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
-        type internal DirectionHelper =
-            | Direction of Direction
-            | Directions of Direction list
-            interface ICssValue with
-                member this.Stringify() =
-                    this.ToString().ToLower()
-
         type AnimationDirection(property) =
-            inherit CssRule(property)
-
-            member this.value(direction: Direction) =
-                (property, direction |> Direction) |> Rule
-
-            member this.value(direction: Direction list) =
-                (property, direction |> Directions) |> Rule
+            inherit CssRuleWithValueFunctions<Direction>(property, ", ")
 
             member this.normal = (property, Normal) |> Rule
             member this.reverse = (property, Reverse) |> Rule
@@ -81,22 +55,9 @@ module Animation =
             member this.alternateReverse = (property, AlternateReverse) |> Rule
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
-        type internal FillModeHelper =
-            | FillMode of FillMode
-            | FillModes of FillMode list
-            interface ICssValue with
-                member this.Stringify() =
-                    this.ToString().ToLower()
-
         type AnimationFillMode(property) =
-            inherit CssRuleWithNone(property)
-
-            member this.value(fillMode: FillMode) =
-                (property, fillMode |> FillMode) |> Rule
-
-            member this.value(fillMode: FillMode list) =
-                (property, fillMode |> FillModes) |> Rule
-
+            inherit CssRuleWithValueFunctions<FillMode>(property, ", ")
+            member this.none = (property, None') |> Rule
             member this.forwards = (property, Forwards) |> Rule
             member this.backwards = (property, Backwards) |> Rule
             member this.both = (property, Both) |> Rule
@@ -109,51 +70,24 @@ module Animation =
 
             member this.infinite = (property, Infinite) |> Rule
         // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
-        type internal NameHelper =
-            | Name of string
-            | Names of string list
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | Name n -> n
-                    | Names ns -> String.concat ", " ns
-
         type AnimationName(property) =
             inherit CssRule(property)
-            member this.value(name: string) = (property, name |> Name) |> Rule
-            member this.value(names: string list) = (property, names |> Names) |> Rule
+            member this.value(name: string) =
+                (property, name |> String) |> Rule
+            member this.value(names: string list) =
+                let names =
+                    String.concat ", " names
+                (property, names |> String) |> Rule
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
-        type internal PlayStateHelper =
-            | State of PlayState
-            | States of PlayState list
-            interface ICssValue with
-                member this.Stringify() =
-                    this.ToString().ToLower()
-
         type AnimationPlayState(property) =
-            inherit CssRule(property)
-            member this.value(playState: PlayState) = (property, playState |> State) |> Rule
-            member this.value(playState: PlayState list) = (property, playState |> States) |> Rule
+            inherit CssRuleWithValueFunctions<PlayState>(property, ", ")
             member this.running = (property, Running) |> Rule
             member this.paused = (property, Paused) |> Rule
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
-        type internal TimingFunctionHelper =
-            | Timing of TimingFunction.Timing
-            | Timings of TimingFunction.Timing list
-            interface ICssValue with
-                member this.Stringify() =
-                    this.ToString().ToLower()
-
         type AnimationTimingFunction(property) =
-            inherit CssRule(property)
-
-            member this.value(timingFunction: TimingFunction.Timing) =
-                (property, timingFunction |> Timing) |> Rule
-
-            member this.value(timingFunction: TimingFunction.Timing list) =
-                (property, timingFunction |> Timings) |> Rule
+            inherit CssRuleWithValueFunctions<TimingFunction.Timing>(property, ", ")
 
             member this.ease = (property, TimingFunction.Ease) |> Rule
 

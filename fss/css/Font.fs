@@ -4,7 +4,6 @@ open Fss.FssTypes
 
 [<AutoOpen>]
 module Font =
-    // TODO: Add font display to font face
     /// Specifies which missing typefaces can be synthesized by the browser.
     let FontSynthesis =
         Font.FontClasses.FontSynthesis(Property.FontSynthesis)

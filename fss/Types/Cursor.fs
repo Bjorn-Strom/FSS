@@ -40,19 +40,15 @@ module Cursor =
 
     [<RequireQualifiedAccess>]
     module CursorClasses =
-        type CursorHelper =
-            | UrlOffset of string * int * int
-            interface ICssValue with
-                member this.Stringify() = this.ToString().ToLower()
-
         type CursorParent(property) =
             inherit CssRuleWithAutoNone(property)
             member this.value(url: string) = (property, Url url) |> Rule
-
-            member this.value(url: string, x: int, y: int) =
-                (property, UrlOffset(url, x, y)) |> Rule
-
             member this.value(cursor: Cursor) = (property, cursor) |> Rule
+            member this.url(url: string) =
+                (property, url |> Url) |> Rule
+            member this.url(url: string, x: int, y: int) =
+                let value = $"url({url}) {x} {y}"
+                (property, value |> String) |> Rule
             member this.default' = (property, Default) |> Rule
             member this.contextMenu = (property, ContextMenu) |> Rule
             member this.help = (property, Help) |> Rule

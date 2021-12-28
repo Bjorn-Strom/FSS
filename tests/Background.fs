@@ -245,6 +245,14 @@ module Background =
                     [ BackgroundSize.contain]
                     "background-size: contain;"
                 testCase
+                    "background size contain"
+                    [ BackgroundSize.value FssTypes.Background.Contain]
+                    "background-size: contain;"
+                testCase
+                    "background size contain"
+                    [ BackgroundSize.value [FssTypes.Background.Size.Contain; FssTypes.Background.Size.Cover ]]
+                    "background-size: contain, cover;"
+                testCase
                     "background size percent"
                     [ BackgroundSize.value (pct 100)]
                     "background-size: 100%;"
@@ -365,8 +373,12 @@ module Background =
                     [ BackgroundBlendMode.luminosity]
                     "background-blend-mode: luminosity;"
                 testCase
+                    "background blend mode value"
+                    [ BackgroundBlendMode.value FssTypes.Background.Hue ]
+                    "background-blend-mode: hue;" 
+                testCase
                     "background blend mode multiple"
-                    [ BackgroundBlendMode.values [ FssTypes.Background.Hue; FssTypes.Background.Saturation; FssTypes.Background.Exclusion ] ]
+                    [ BackgroundBlendMode.value [ FssTypes.Background.Hue; FssTypes.Background.Saturation; FssTypes.Background.Exclusion ] ]
                     "background-blend-mode: hue, saturation, exclusion;" 
                 testCase
                     "background blend mode normal"

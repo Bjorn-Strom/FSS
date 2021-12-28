@@ -4,12 +4,6 @@ namespace Fss.FssTypes
 
 [<RequireQualifiedAccess>]
 module ListStyle =
-    type Image =
-        | Image of string
-        interface ICssValue with
-            member this.Stringify() = failwith "todo"
-    // TODO
-
     type Position =
         | Inside
         | Outside

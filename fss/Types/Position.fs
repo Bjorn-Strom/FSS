@@ -2,9 +2,6 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-open Microsoft.FSharp.Core
-
 [<RequireQualifiedAccess>]
 module Position =
     type Position =

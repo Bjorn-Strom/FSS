@@ -56,24 +56,11 @@ module PaintOrder =
             member this.Stringify() = this.ToString().ToLower()
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/paint-order
-    type PaintOrderHelper =
-        | PaintOrders of PaintOrder list
-        interface ICssValue with
-            member this.Stringify() =
-                match this with
-                | PaintOrders ps ->
-                    List.map stringifyICssValue ps
-                    |> String.concat " "
-
     [<RequireQualifiedAccess>]
     module PaintOrderClasses =
         type PaintOrderClass(property) =
-            inherit CssRuleWithNormal(property)
+            inherit CssRuleWithValueFunctions<PaintOrder>(property, " ")
             member this.stroke = (property, Stroke) |> Rule
             member this.markers = (property, Markers) |> Rule
             member this.fill = (property, Fill) |> Rule
-
-            member this.value(order1: PaintOrder, order2: PaintOrder) =
-                (property, PaintOrders [ order1; order2 ]) |> Rule
-
-            member this.value(orders: PaintOrder list) = (property, PaintOrders orders) |> Rule
+            member this.normal = (property, Normal) |> Rule

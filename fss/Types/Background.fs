@@ -131,20 +131,12 @@ module BackgroundClasses =
         member this.noRepeat = (property, Background.NoRepeat) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
-    type internal SizeHelper =
-        | Size of Background.Size
-        | Sizes of Background.Size list
-        interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
-
     type BackgroundSize(property) =
-        inherit CssRuleWithAuto(property)
+        inherit CssRuleWithValueFunctions<Background.Size>(property, ", ")
 
         member this.value(size: ILengthPercentage) =
             (property, lengthPercentageToType size) |> Rule
-
-        member this.value(size: Background.Size) = (property, Size size) |> Rule
-        member this.value(size: Background.Size list) = (property, Sizes size) |> Rule
+        member this.auto = (property, Auto) |> Rule
 
         member this.value(horizontal: Background.Size, vertical: Background.Size) =
             let value =
@@ -170,19 +162,6 @@ module BackgroundClasses =
     type BackgroundImage(property) =
         inherit Image.ImageClasses.ImageClass(property)
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
-    type PositionHelper =
-        | Three of ILengthPercentage * ILengthPercentage * ILengthPercentage
-        | Four of ILengthPercentage * ILengthPercentage * ILengthPercentage * ILengthPercentage
-        | Name of string
-        interface ICssValue with
-            member this.Stringify() =
-                match this with
-                | Three (one, two, three) ->
-                    $"{lengthPercentageString one} {lengthPercentageString two} {lengthPercentageString three}"
-                | Four (one, two, three, four) ->
-                    $"{lengthPercentageString one} {lengthPercentageString two} {lengthPercentageString three} {lengthPercentageString four}"
-                | Name name -> name
-
     type BackgroundPosition(property) =
         inherit CssRule(property)
 
@@ -198,9 +177,9 @@ module BackgroundClasses =
             (property, value) |> Rule
 
         member this.value(x: ILengthPercentage, y: ILengthPercentage, offset: ILengthPercentage) =
-            let position = Three(x, y, offset)
+            let position = $"{lengthPercentageString x} {lengthPercentageString y} {lengthPercentageString offset}"
 
-            (property, position) |> Rule
+            (property, position |> String) |> Rule
 
         member this.value
             (
@@ -209,40 +188,25 @@ module BackgroundClasses =
                 xOffset: ILengthPercentage,
                 yOffset: ILengthPercentage
             ) =
-            let position = Four(x, y, xOffset, yOffset)
+            let position = $"{lengthPercentageString x} {lengthPercentageString y} {lengthPercentageString xOffset} {lengthPercentageString yOffset}"
 
-            (property, position) |> Rule
+            (property, position |> String) |> Rule
 
-        member this.top = (property, Name "top") |> Rule
+        member this.top = (property, String "top") |> Rule
 
-        member this.bottom = (property, Name "bottom") |> Rule
+        member this.bottom = (property, String "bottom") |> Rule
 
-        member this.left = (property, Name "left") |> Rule
+        member this.left = (property, String "left") |> Rule
 
-        member this.right = (property, Name "right") |> Rule
+        member this.right = (property, String "right") |> Rule
 
-        member this.center = (property, Name "center") |> Rule
+        member this.center = (property, String "center") |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
-    type internal BlendModeHelper =
-        | BlendMode of Background.BlendMode
-        | BlendModes of Background.BlendMode list
-        interface ICssValue with
-            member this.Stringify() =
-                match this with
-                | BlendMode bm -> (bm: ICssValue).Stringify()
-                | BlendModes bms ->
-                    bms
-                    |> List.map (fun s -> (s: ICssValue).Stringify())
-                    |> String.concat ", "
-
     type BackgroundBlendMode(property) =
-        inherit CssRuleWithNormal(property)
-        member this.value(blendMode: Background.BlendMode) = (property, BlendMode blendMode) |> Rule
-
-        member this.values(blendModes: Background.BlendMode list) =
-            (property, BlendModes blendModes) |> Rule
-
+        inherit CssRuleWithValueFunctions<Background.BlendMode>(property, ", ")
+        member this.normal =
+            (property, Normal) |> Rule
         member this.multiply =
             (property, Background.BlendMode.Multiply) |> Rule
 

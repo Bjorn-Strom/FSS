@@ -41,7 +41,6 @@
     <Compile Include="Appearance.fs" />
     <Compile Include="Typography.fs" />
     <Compile Include="pseudo.fs" />
-    <Compile Include="KeyFrames.fs" />
     <Compile Include="MixBlendMode.fs" />
     <Compile Include="Filter.fs" />
     <Compile Include="Custom.fs" />

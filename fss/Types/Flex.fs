@@ -353,7 +353,6 @@ module Flex =
             inherit CssRule(property)
             member this.value(order: int) = (property, Int order) |> Rule
 
-        // Todo: Kan byttes ut med en Float klasse?
         // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
         // https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
         type FlexShrinkGrow(property) =

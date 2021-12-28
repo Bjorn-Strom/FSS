@@ -2,8 +2,6 @@ namespace Fss
 // Interfaces
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-
 type IStringify =
     interface
         abstract member Stringify : unit -> string
@@ -23,6 +21,15 @@ type IFontFaceValue =
     interface
         abstract member Stringify : unit -> string
     end
+    
+[<AutoOpen>]
+module MasterTypeHelpers = 
+    let internal stringifyICssValue cssValue: string =
+        (cssValue :> ICssValue).Stringify()
+    let internal stringifyICounterValue cssValue: string =
+        (cssValue :> ICounterValue).Stringify()
+    let internal stringifyIFontFaceValue cssValue: string =
+        (cssValue :> IFontFaceValue).Stringify()
 
 // TODO: Clean up all the types and functions
 // TODO: Finnes counter og font face properties i denne? Isåfall fjern
@@ -445,24 +452,6 @@ module Property =
                 | Custom c -> c.ToLower()
                 | _ -> Fss.Utilities.Helpers.toKebabCase this
 
-type CssRule(property: Property.Property) =
-    member this.value(keyword: Keywords) = (property, keyword) |> Rule
-    // TOdo: Funker dette?
-    // member this.value(value: 'T) = (property, value) |> Rule
-    member this.initial = (property, Initial) |> Rule
-    member this.inherit' = (property, Inherit) |> Rule
-    member this.unset = (property, Unset) |> Rule
-    member this.revert = (property, Revert) |> Rule
-
-and Keywords =
-    | Inherit
-    | Initial
-    | Unset
-    | Revert
-    interface ICssValue with
-        member this.Stringify() = this.ToString().ToLower()
-
-and Rule = Property.Property * ICssValue
 
 type None' =
     | None'
@@ -472,10 +461,10 @@ type None' =
 type Auto =
     | Auto
     interface IFontFaceValue with
-        member this.Stringify() = (this :> ICssValue).Stringify()
+        member this.Stringify() = stringifyICssValue this
 
     interface ICounterValue with
-        member this.Stringify() = (this :> ICssValue).Stringify()
+        member this.Stringify() = stringifyICssValue this
 
     interface ICssValue with
         member this.Stringify() = "auto"
@@ -495,7 +484,7 @@ type Float =
 type Int =
     | Int of int
     interface IFontFaceValue with
-        member this.Stringify() = (this :> ICssValue).Stringify()
+        member this.Stringify() = stringifyICssValue this
 
     interface ICssValue with
         member this.Stringify() =
@@ -512,7 +501,7 @@ type Char =
 type String =
     | String of string
     interface IFontFaceValue with
-        member this.Stringify() = (this :> ICssValue).Stringify()
+        member this.Stringify() = stringifyICssValue this
 
     interface ICssValue with
         member this.Stringify() =
@@ -522,7 +511,7 @@ type String =
 type Stringed =
     | Stringed of string
     interface IFontFaceValue with
-        member this.Stringify() = (this :> ICssValue).Stringify()
+        member this.Stringify() = stringifyICssValue this
 
     interface ICssValue with
         member this.Stringify() =
@@ -535,7 +524,27 @@ type NameLabel =
         match this with
         | NameLabel n -> n
     interface ICssValue with
-        member this.Stringify() = this.Unwrap();
+        member this.Stringify() = this.Unwrap()
+        
+type CssRule(property: Property.Property) =
+    member this.value(keyword: Keywords) = (property, keyword) |> Rule
+    member this.initial = (property, Initial) |> Rule
+    member this.inherit' = (property, Inherit) |> Rule
+    member this.unset = (property, Unset) |> Rule
+    member this.revert = (property, Revert) |> Rule
+
+and Keywords =
+    | Inherit
+    | Initial
+    | Unset
+    | Revert
+    interface ICssValue with
+        member this.Stringify() = this.ToString().ToLower()
+
+and Rule = Property.Property * ICssValue
+        
+        
+        
 type Pseudo =
     | PseudoClass of Rule list
     | PseudoElement of Rule list
@@ -651,11 +660,16 @@ type CssRuleWithAutoNormalNone(property: Property.Property) =
     inherit CssRuleWithAutoNone(property)
     member this.normal = (property, Normal) |> Rule
     
-[<AutoOpen>]
-module MasterTypeHelpers = 
-    let internal stringifyICssValue cssValue: string =
-        (cssValue :> ICssValue).Stringify()
-    let internal stringifyICounterValue cssValue: string =
-        (cssValue :> ICounterValue).Stringify()
-    let internal stringifyIFontFaceValue cssValue: string =
-        (cssValue :> IFontFaceValue).Stringify()
+type CssRuleWithValueFunctions<'T when 'T :> ICssValue>(property: Property.Property, seperator) =
+    inherit CssRule(property)
+    member this.value(value: 'T) =
+        let value = stringifyICssValue value
+        (property, value |> String) |> Rule
+
+    member this.value(values: 'T list) =
+        let values =
+            values
+            |> List.map stringifyICssValue
+            |> String.concat seperator
+        (property, values |> String) |> Rule
+

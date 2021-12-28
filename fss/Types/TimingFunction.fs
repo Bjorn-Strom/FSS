@@ -1,8 +1,6 @@
 namespace Fss
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-
 [<RequireQualifiedAccess>]
 module TimingFunction =
     type Step =
