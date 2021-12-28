@@ -10,15 +10,15 @@ module FontFace =
             [
                 testFontCase
                     "Single source"
-                    [ Src.url "someFontUrl" ]
+                    [ FontFace.Src.url "someFontUrl" ]
                     "src: url(someFontUrl);"
                 testFontCase
                     "Single source with format"
-                    [ Src.woff2 "someFontUrl" ]
+                    [ FontFace.Src.woff2 "someFontUrl" ]
                     "src: url(someFontUrl) format('woff2');"
                 testFontCase
                     "Multiple sources"
-                    [ Src.sources
+                    [ FontFace.Src.sources
                         [
                             "url1"
                             "url2"
@@ -29,7 +29,7 @@ module FontFace =
                     "src: url(url1), url(url2), url(url3), url(url4);"
                 testFontCase
                     "Multiple sources"
-                    [ Src.sources
+                    [ FontFace.Src.sources
                         [
                             FssTypes.FontFace.Woff2 "url1"
                             FssTypes.FontFace.Woff "url2"
@@ -40,23 +40,23 @@ module FontFace =
                     "src: url(url1) format('woff2'), url(url2) format('woff'), url(url3) format('truetype'), url(url4) format('svg');"
                 testFontCase
                     "Display auto"
-                    [ FontDisplay.auto ]
+                    [ FontFace.FontDisplay.auto ]
                     "font-display: auto;"
                 testFontCase
                     "Display block"
-                    [ FontDisplay.block ]
+                    [ FontFace.FontDisplay.block ]
                     "font-display: block;"
                 testFontCase
                     "Display swap"
-                    [ FontDisplay.swap ]
+                    [ FontFace.FontDisplay.swap ]
                     "font-display: swap;"
                 testFontCase
                     "Display fallback"
-                    [ FontDisplay.fallback ]
+                    [ FontFace.FontDisplay.fallback ]
                     "font-display: fallback;"
                 testFontCase
                     "Display optional"
-                    [ FontDisplay.optional ]
+                    [ FontFace.FontDisplay.optional ]
                     "font-display: optional;"
                 testFontCase
                     "Font style normal"
@@ -132,55 +132,55 @@ module FontFace =
                     "size-adjust: 50%;" 
                 testFontCase
                     "Unicode range single"
-                    [ UnicodeRange.value "U+26" ]
+                    [ FontFace.UnicodeRange.value "U+26" ]
                     "unicode-range: U+26;" 
                 testFontCase
                     "Unicode range single"
-                    [ UnicodeRange.value "U+0-7F" ]
+                    [ FontFace.UnicodeRange.value "U+0-7F" ]
                     "unicode-range: U+0-7F;" 
                 testFontCase
                     "Unicode range code point range"
-                    [ UnicodeRange.value "U+0025-00FF" ]
+                    [ FontFace.UnicodeRange.value "U+0025-00FF" ]
                     "unicode-range: U+0025-00FF;" 
                 testFontCase
                     "Unicode range wildcard range"
-                    [ UnicodeRange.value "U+4??" ]
+                    [ FontFace.UnicodeRange.value "U+4??" ]
                     "unicode-range: U+4??;" 
                 testFontCase
                     "Unicode range multiple"
-                    [ UnicodeRange.value [ "U+0025-00FF"; "U+4??" ] ]
+                    [ FontFace.UnicodeRange.value [ "U+0025-00FF"; "U+4??" ] ]
                     "unicode-range: U+0025-00FF, U+4??;" 
                 testFontCase
                     "Linegap override normal"
-                    [ LineGapOverride.normal ]
+                    [ FontFace.LineGapOverride.normal ]
                     "line-gap-override: normal;" 
                 testFontCase
                     "Linegap override percent"
-                    [ LineGapOverride.value <| pct 90 ]
+                    [ FontFace.LineGapOverride.value <| pct 90 ]
                     "line-gap-override: 90%;"
                 testFontCase
                     "Variation settings"
-                    [ FontVariationSettings.value ("wght", 400) ]
+                    [ FontFace.FontVariationSettings.value ("wght", 400) ]
                     "font-variation-settings: 'wght' 400;" 
                 testFontCase
                     "Variation settings"
-                    [ FontVariationSettings.value [ "wght", 400.; "wdth", 300. ] ]
+                    [ FontFace.FontVariationSettings.value [ "wght", 400.; "wdth", 300. ] ]
                     "font-variation-settings: 'wght' 400, 'wdth' 300;"
                 testFontCase
                     "Ascent override"
-                    [ AscentOverride.normal ]
+                    [ FontFace.AscentOverride.normal ]
                     "ascent-override: normal;"
                 testFontCase
                     "Ascent override"
-                    [ AscentOverride.value <| pct 40]
+                    [ FontFace.AscentOverride.value <| pct 40]
                     "ascent-override: 40%;"
                 testFontCase
                     "Descent override"
-                    [ DescentOverride.normal ]
+                    [ FontFace.DescentOverride.normal ]
                     "descent-override: normal;"
                 testFontCase
                     "Descent override"
-                    [ DescentOverride.value <| pct 40]
+                    [ FontFace.DescentOverride.value <| pct 40]
                     "descent-override: 40%;"
                 testFontCase
                     "Fontface fontname ident"

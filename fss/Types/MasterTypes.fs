@@ -453,7 +453,7 @@ module Property =
                 | AdjacentSibling html -> $" + {html.ToString().ToLower()}"
                 | GeneralSibling html -> $" ~ {html.ToString().ToLower()}"
                 | Child html -> $" > {html.ToString().ToLower()}"
-                | Descendant html -> $"   {html.ToString().ToLower()}"
+                | Descendant html -> $" {html.ToString().ToLower()}"
                 | Custom c -> c.ToLower()
                 | _ -> Fss.Utilities.Helpers.toKebabCase this
 

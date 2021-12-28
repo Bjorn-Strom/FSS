@@ -19,11 +19,11 @@ module Animation =
                 testCase
                     "Animation name"
                     [ AnimationName.value name ]
-                    "animation-name: animation-1894110078;"
+                    $"animation-name: {name};"
                 testCase
                     "Animation names"
                     [ AnimationName.value [name; "foo" ] ]
-                    "animation-name: animation-1894110078, foo;"
+                    $"animation-name: {name}, foo;"
                 testCase
                     "Animation name inherit"
                     [ AnimationName.inherit' ]

@@ -2,7 +2,7 @@
 
 open Fss.FssTypes
 
-[<AutoOpen>]
+[<RequireQualifiedAccess>]
 module FontFace =
     /// Specifies the resource containing the font data.
     let Src =

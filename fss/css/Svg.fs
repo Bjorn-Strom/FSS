@@ -2,7 +2,7 @@ namespace Fss
 
 open Fss.FssTypes
 
-[<AutoOpen>]
+[<RequireQualifiedAccess>]
 module Svg =
     /// Specifies how an object is align to its parent.
     let AlignmentBaseline =

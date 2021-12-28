@@ -14,7 +14,7 @@ module Composite =
     let font =
         fontFace
             "DroidSerif"
-            [ Src.truetype "https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf"
+            [ FontFace.Src.truetype "https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf"
               FontFace.FontWeight.value 100
               FontFace.FontStyle.normal ]
 
@@ -61,8 +61,60 @@ module Composite =
         ]
         |> String.concat "").Replace(" ", "").Replace("\n", "")
         
-    let correct =
-         "@counter-stylecounter-1307384566{system:cyclic;symbols:\"\";suffix:\"\";prefix:\"\";}@font-face{font-family:\"DroidSerif\";src:url(https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf)format('truetype');font-weight:100;font-style:normal;}.css-1809775240-counter{list-style-type:counter-1307384566;font-family:DroidSerif;}.css-1809775240-counterli::after{content:\".\";}.css-1809775240-counterli{background-color:aliceblue;}.css-1809775240-counterli:hover{background-color:orangered;}.css-525896048-container{display:flex;flex-direction:column;align-items:center;justify-content:center;}@keyframesanimation-449288920{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}.css--1116097773-title{animation-name:animation-449288920;animation-duration:1s;animation-iteration-count:infinite;font-family:DroidSerif;}.css--1116097773-title:hover{animation-duration:500ms;}@media(max-width:600px){.css--1116097773-title{background-color:#87ceeb;};}"
+    let correct = ([
+        $"@counter-style {fst counter} {{"
+        "system: cyclic;"
+        "symbols: \"\";"
+        "suffix: \"\";"
+        "prefix: \"\";"
+        "}"
+        "@font-face {"
+        "font-family: \"DroidSerif\";"
+        "src: url(https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf)"
+        "format('truetype');"
+        "font-weight: 100;"
+        "font-style: normal;"
+        "}"
+        $"{fst <| List.head counterStyle} {{"
+        $"list-style-type: {fst counter};"
+        "font-family: DroidSerif;"
+        "}"
+        $"{fst <| List.head counterStyle} li::after {{"
+        "content: \".\";"
+        "}"
+        $"{fst <| List.head counterStyle} li {{"
+        "background-color: aliceblue;"
+        "}"
+        $"{fst <| List.head counterStyle} li:hover {{"
+        "background-color: orangered;"
+        "}"
+        $"{fst <| List.head container} {{"
+        "display: flex;"
+        "flex-direction: column;"
+        "align-items: center;"
+        "justify-content: center;"
+        "}"
+        $"@keyframes {fst spinimation} {{"
+        "0% {"
+        "transform: rotate(0deg);"
+        "}"
+        "100% {"
+        "transform: rotate(360deg);"
+        "}"
+        "}"
+        $"{fst <| List.head title} {{"
+        $"animation-name: {fst spinimation};"
+        "animation-duration: 1s;"
+        "animation-iteration-count: infinite;"
+        "font-family: DroidSerif;"
+        "}"
+        $"{fst <| List.head title}:hover {{"
+        "animation-duration: 500ms;"
+        "}"
+        "@media (max-width: 600px) {"
+        $"{fst <| List.head title} {{"
+        "background-color: #87ceeb;"
+        "};}" ] |> String.concat "").Replace(" ", "").Replace("\n", "")
         
     let tests =
        testList "Composite"
@@ -74,3 +126,6 @@ module Composite =
                    [ important Color.red ]
                    "color: red !important;"
            ]
+           
+           
+    printfn "%A" counterStyle

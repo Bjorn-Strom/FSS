@@ -40,11 +40,11 @@ module Content =
                 testCase
                     "Content counter"
                     [ Content.counter counterName]
-                    "content: counter(counter-1702328912);"
+                    $"content: counter({counterName});"
                 testCase
                     "Content counter2"
                     [ Content.counter (counterName, ". ")]
-                    "content: counter(counter-1702328912, \". \");"
+                    $"content: counter({counterName}, \". \");"
                 testCase
                     "Content attribute"
                     [ Content.attribute FssTypes.Attribute.Title ]
