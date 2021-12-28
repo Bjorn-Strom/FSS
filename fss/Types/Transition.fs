@@ -727,20 +727,20 @@ module Transition =
 
             member this.invalid = (property, Property.Invalid) |> Rule
             member this.inRange = (property, Property.InRange) |> Rule
-            member this.lang = (property, Property.Lang) |> Rule
+            member this.lang language = (property, Property.Lang(language)) |> Rule
             member this.lastChild = (property, Property.LastChild) |> Rule
             member this.lastOfType = (property, Property.LastOfType) |> Rule
             member this.link = (property, Property.Link) |> Rule
             member this.localLink = (property, Property.LocalLink) |> Rule
-            member this.nthChild = (property, Property.NthChild) |> Rule
+            member this.nthChild nth = (property, Property.NthChild nth) |> Rule
 
-            member this.nthLastChild =
-                (property, Property.NthLastChild) |> Rule
+            member this.nthLastChild nth =
+                (property, Property.NthLastChild nth) |> Rule
 
-            member this.nthLastOfType =
-                (property, Property.NthLastOfType) |> Rule
+            member this.nthLastOfType nth  =
+                (property, Property.NthLastOfType nth) |> Rule
 
-            member this.nthOfType = (property, Property.NthOfType) |> Rule
+            member this.nthOfType nth = (property, Property.NthOfType nth) |> Rule
             member this.onlyChild = (property, Property.OnlyChild) |> Rule
             member this.onlyOfType = (property, Property.OnlyOfType) |> Rule
             member this.optional = (property, Property.Optional) |> Rule

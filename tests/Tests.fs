@@ -47,10 +47,10 @@ module Tests =
         Svg.tests
         FontFace.tests
         Media.tests
-        Psuedo.tests
         Counter.tests
         Animation.tests
         Font.tests
         Composite.tests
+        Psuedo.tests
     ]
 

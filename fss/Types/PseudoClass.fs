@@ -74,9 +74,8 @@ module PseudoClass =
             static member inRange(rules: Rule list) =
                 (Property.InRange, Pseudo.PseudoClass rules)
                 |> Rule
-            // TODO: Denne mangler no greier
-//                static member lang language (rules: Rule list) =
-//                    (Property.Lang, Pseudo.PseudoClass rules) |> Rule
+            static member lang language (rules: Rule list) =
+                (Property.Lang language, Pseudo.PseudoClass rules) |> Rule
             static member lastChild(rules: Rule list) =
                 (Property.LastChild, Pseudo.PseudoClass rules)
                 |> Rule
@@ -92,14 +91,14 @@ module PseudoClass =
             static member link(rules: Rule list) =
                 (Property.Link, Pseudo.PseudoClass rules) |> Rule
             // TODO
-//                static member nthChild (n: FssTypes.INth) (rules: Rule list) =
-//                    (Property.NthChild, Pseudo.PseudoClass rules) |> Rule
-//                static member nthLastChild (n: FssTypes.INth) (rules: Rule list) =
-//                    (Property.NthLastChild, Pseudo.PseudoClass rules) |> Rule
-//                static member nthLastOfType (n: FssTypes.INth) (rules: Rule list) =
-//                    (Property.NthLastOfType, Pseudo.PseudoClass rules) |> Rule
-//                static member nthOfType (n: FssTypes.INth) (rules: Rule list) =
-//                    (Property.NthOfType, Pseudo.PseudoClass rules) |> Rule
+            static member nthChild (n: string) (rules: Rule list) =
+                (Property.NthChild n, Pseudo.PseudoClass rules) |> Rule
+            static member nthLastChild (n:string ) (rules: Rule list) =
+                (Property.NthLastChild n, Pseudo.PseudoClass rules) |> Rule
+            static member nthOfType (n: string) (rules: Rule list) =
+                (Property.NthOfType n, Pseudo.PseudoClass rules) |> Rule
+            static member nthLastOfType (n: string) (rules: Rule list) =
+                (Property.NthLastOfType n, Pseudo.PseudoClass rules) |> Rule
             static member onlyChild(rules: Rule list) =
                 (Property.OnlyChild, Pseudo.PseudoClass rules)
                 |> Rule

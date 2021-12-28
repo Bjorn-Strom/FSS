@@ -40,8 +40,8 @@ module Utils =
         test testName <| fun _ ->
             Expect.equal actual correct
             
-    let testPseudoCase (testName: string) (ruleList: Rule list) (correct: string) =
-        let _, actual =
+    let testPseudoCase (testName: string) (ruleList: Rule list) (correct: string * string) =
+        let actual =
             fss ruleList
             |> List.tail
             |> List.head

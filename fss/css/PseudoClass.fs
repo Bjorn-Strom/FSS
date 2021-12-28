@@ -22,17 +22,15 @@ module PseudoClass =
     let Indeterminate rules = PseudoClass.PseudoClassClasses.PseudoClass.indeterminate rules
     let Invalid rules = PseudoClass.PseudoClassClasses.PseudoClass.invalid rules
     let InRange rules = PseudoClass.PseudoClassClasses.PseudoClass.inRange rules
-// TODO:
-//    let Lang language rules = PseudoClass.PseudoClasses.PseudoClass.lang (sprintf ":lang(%s)" language) rules
+    let Lang language rules = PseudoClass.PseudoClassClasses.PseudoClass.lang language rules
     let LastChild rules = PseudoClass.PseudoClassClasses.PseudoClass.lastChild rules
     let LastOfType rules = PseudoClass.PseudoClassClasses.PseudoClass.lastOfType rules
     let LocalLink rules = PseudoClass.PseudoClassClasses.PseudoClass.localLink rules
     let Link rules = PseudoClass.PseudoClassClasses.PseudoClass.link rules
-// TODO:
-//    let NthChild (n: FssTypes.INth) rules = pseudoValue (sprintf ":nth-child(%s)" (stringifyNthChild n)) rules
-//    let NthLastChild (n: FssTypes.INth) rules = pseudoValue (sprintf ":nth-last-child(%s)" (stringifyNthChild n)) rules
-//    let NthLastOfType (n: FssTypes.INth) rules = pseudoValue (sprintf ":nth-last-of-type(%s)" (stringifyNthChild n)) rules
-//    let NthOfType (n: FssTypes.INth) rules = PseudoClass.PseudoClasses.PseudoClass.nthOfType n rules
+    let NthChild (n: string) rules = PseudoClass.PseudoClassClasses.PseudoClass.nthChild n rules
+    let NthLastChild (n: string) rules = PseudoClass.PseudoClassClasses.PseudoClass.nthLastChild n rules
+    let NthOfType (n: string) rules = PseudoClass.PseudoClassClasses.PseudoClass.nthOfType n rules
+    let NthLastOfType (n: string) rules = PseudoClass.PseudoClassClasses.PseudoClass.nthLastOfType n rules
     let OnlyChild rules = PseudoClass.PseudoClassClasses.PseudoClass.onlyChild rules
     let OnlyOfType rules = PseudoClass.PseudoClassClasses.PseudoClass.onlyOfType rules
     let Optional rules = PseudoClass.PseudoClassClasses.PseudoClass.optional rules
@@ -52,5 +50,3 @@ module PseudoClass =
     let Visited rules = PseudoClass.PseudoClassClasses.PseudoClass.visited rules
     let FirstChild rules = PseudoClass.PseudoClassClasses.PseudoClass.firstChild rules
     let UserInvalid rules = PseudoClass.PseudoClassClasses.PseudoClass.userInvalid rules
-// TODO:
-//    let Is html rules = PseudoClass.PseudoClasses.PseudoClass.is(html, rules)

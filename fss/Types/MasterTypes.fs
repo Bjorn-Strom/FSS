@@ -372,15 +372,15 @@ module Property =
         | Indeterminate
         | Invalid
         | InRange
-        | Lang
+        | Lang of string
         | LastChild
         | LastOfType
         | Link
         | LocalLink
-        | NthChild
-        | NthLastChild
-        | NthLastOfType
-        | NthOfType
+        | NthChild of string
+        | NthLastChild of string
+        | NthLastOfType of string
+        | NthOfType of string
         | OnlyChild
         | OnlyOfType
         | Optional
@@ -445,13 +445,17 @@ module Property =
         interface ICssValue with
             member this.Stringify() =
                 match this with
+                | Lang l -> $"lang({l})"
+                | NthChild n -> $"nth-child({n})"
+                | NthLastChild n -> $"nth-last-child({n})"
+                | NthOfType n -> $"nth-of-type({n})"
+                | NthLastOfType n -> $"nth-last-of-type({n})"
                 | AdjacentSibling html -> $" + {html.ToString().ToLower()}"
                 | GeneralSibling html -> $" + {html.ToString().ToLower()}"
                 | Child html -> $" + {html.ToString().ToLower()}"
                 | Descendant html -> $" + {html.ToString().ToLower()}"
                 | Custom c -> c.ToLower()
                 | _ -> Fss.Utilities.Helpers.toKebabCase this
-
 
 type None' =
     | None'
