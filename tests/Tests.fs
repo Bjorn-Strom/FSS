@@ -51,5 +51,6 @@ module Tests =
         Counter.tests
         Animation.tests
         Font.tests
+        Composite.tests
     ]
 

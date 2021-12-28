@@ -61,8 +61,6 @@ let title =
           ]
           Label "title"
         ]
-    
-// Combinatoren lager + og ikke SPACE
 
 let foo =
     [
