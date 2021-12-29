@@ -162,7 +162,7 @@ module Font =
             inherit CssRuleWithNone(property)
             member this.value(synthesis: Synthesis list) =
                 let synthesis =
-                    List.map Fss.Utilities.Helpers.toKebabCase synthesis
+                    List.map stringifyICssValue synthesis
                     |> String.concat " "
                 (property, String synthesis) |> Rule
             member this.weight = (property, Weight) |> Rule
@@ -246,7 +246,7 @@ module Font =
             member this.value(family: string) = (property, String family) |> Rule
             member this.value(families: Family list) =
                 let families =
-                    List.map Fss.Utilities.Helpers.toKebabCase families
+                    List.map stringifyICssValue families
                     |> String.concat ", " 
                 (property, String families) |> Rule
             member this.serif = (property, Serif) |> Rule

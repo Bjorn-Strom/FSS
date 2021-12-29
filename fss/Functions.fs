@@ -107,8 +107,7 @@ module Functions =
     let private stringifyCounterProperty (property: CounterRule) =
         let propertyName, propertyValue = property
 
-        $"{Helpers.toKebabCase
-           <| propertyName.ToString()}: {propertyValue.Stringify()};"
+        $"{stringifyICssValue propertyName}: {propertyValue.Stringify()};"
            
     let counterStyle (properties: CounterRule list) : CounterName * CounterStyle =
 
@@ -122,8 +121,7 @@ module Functions =
     let private stringifyFontFaceProperty (property: FontFaceRule) =
         let propertyName, propertyValue = property
 
-        $"{Helpers.toKebabCase
-           <| propertyName.ToString()}: {propertyValue.Stringify()};"
+        $"{stringifyICssValue propertyName}: {propertyValue.Stringify()};"
         
     let fontFace (name: string) (properties: FontFaceRule list) : FontName * FontFaceStyle =
         let properties = [ FontFace.FontFamily.string name ] @ properties

@@ -37,6 +37,9 @@ module Grid =
     type RepeatType =
         | AutoFill
         | AutoFit
+        interface ICssValue with
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+        
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-rows
@@ -100,11 +103,11 @@ module Grid =
                     |> String.concat " "
                     |> repeatValue value
                 | Repeat6 (repeat, fraction) ->
-                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) (stringifyICssValue fraction)
+                    repeatValue (stringifyICssValue repeat) (stringifyICssValue fraction)
                 | Repeat7 (repeat, lengthPercentage) ->
-                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) (lengthPercentageString lengthPercentage)
+                    repeatValue (stringifyICssValue repeat) (lengthPercentageString lengthPercentage)
                 | Repeat8 (repeat, contentSize) ->
-                    repeatValue (Fss.Utilities.Helpers.toKebabCase repeat) (stringifyICssValue contentSize)
+                    repeatValue (stringifyICssValue repeat) (stringifyICssValue contentSize)
                 | Repeat9 (value, minMax) -> repeatValue value (stringifyICssValue minMax)
 
     type Repeat =

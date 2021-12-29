@@ -78,7 +78,7 @@ module Text =
         | Hanging
         | EachLine
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
 
     type Overflow =
         | Clip
@@ -201,7 +201,7 @@ module Text =
 
             member this.value(decorations: DecorationLine list) =
                 let decorations =
-                    List.map Fss.Utilities.Helpers.toKebabCase decorations
+                    List.map stringifyICssValue decorations
                     |> String.concat " "
                 (property, String decorations) |> Rule
 
@@ -214,7 +214,7 @@ module Text =
             inherit CssRuleWithNone(property)
             member this.value(decorations: DecorationSkip list) =
                 let decorations =
-                    List.map Fss.Utilities.Helpers.toKebabCase decorations
+                    List.map stringifyICssValue decorations
                     |> String.concat " "
                 (property, String decorations) |> Rule
             member this.objects = (property, Objects) |> Rule
@@ -256,15 +256,15 @@ module Text =
             inherit CssRuleWithLength(property)
 
             member this.hanging(value: ILengthPercentage) =
-                let value = $"{lengthPercentageString value} {Fss.Utilities.Helpers.toKebabCase Indent.Hanging}"
+                let value = $"{lengthPercentageString value} {stringifyICssValue Indent.Hanging}"
                 (property, String value) |> Rule
 
             member this.eachLine(value: ILengthPercentage) =
-                let value = $"{lengthPercentageString value} {Fss.Utilities.Helpers.toKebabCase Indent.EachLine}"
+                let value = $"{lengthPercentageString value} {stringifyICssValue Indent.EachLine}"
                 (property, String value) |> Rule
 
             member this.hangingEachLine(value: ILengthPercentage) =
-                let value = $"{lengthPercentageString value} {Fss.Utilities.Helpers.toKebabCase Indent.Hanging} {Fss.Utilities.Helpers.toKebabCase Indent.EachLine}"
+                let value = $"{lengthPercentageString value} {stringifyICssValue Indent.Hanging} {stringifyICssValue Indent.EachLine}"
                 (property, String value) |> Rule
 
         // https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
@@ -406,7 +406,7 @@ module Text =
             member this.value(punctuations: HangingPunctuation list) =
                 let punctuations =
                     punctuations
-                    |> List.map Fss.Utilities.Helpers.toKebabCase
+                    |> List.map stringifyICssValue
                     |> String.concat " "
                 (property, String punctuations) |> Rule
 

@@ -10,7 +10,7 @@ module Image =
         | FarthestSide
         | FarthestCorner
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
 
     type Shape =
         | Circle
@@ -88,14 +88,14 @@ module Image =
                     |> String.concat ", "
 
                 let radialGradientToString (shape, side, x, y, gradients) =
-                    $"radial-gradient({shape.ToString().ToLower()} {Fss.Utilities.Helpers.toKebabCase side} at {stringifyICssValue x} {stringifyICssValue y}{gradientToString gradients})"
+                    $"radial-gradient({shape.ToString().ToLower()} {stringifyICssValue side} at {stringifyICssValue x} {stringifyICssValue y}{gradientToString gradients})"
 
                 let radialGradientsToString gradients =
                     List.map radialGradientToString gradients
                     |> String.concat ", "
 
                 let repeatingRadialGradientToString (shape, side, x, y, gradients) =
-                    $"repeating-radial-gradient({shape.ToString().ToLower()} {Fss.Utilities.Helpers.toKebabCase side} at {stringifyICssValue x} {stringifyICssValue y}{gradientToString gradients})"
+                    $"repeating-radial-gradient({shape.ToString().ToLower()} {stringifyICssValue side} at {stringifyICssValue x} {stringifyICssValue y}{gradientToString gradients})"
 
                 let repeatingRadialGradientsToString gradients =
                     List.map repeatingRadialGradientToString gradients

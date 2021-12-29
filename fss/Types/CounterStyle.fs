@@ -2,6 +2,8 @@ namespace Fss
 
 namespace Fss.FssTypes
 
+open Fss.FssTypes
+
 type CounterProperty =
     | System
     | Negative
@@ -13,6 +15,8 @@ type CounterProperty =
     | Symbols
     | AdditiveSymbols
     | SpeakAs
+    interface ICssValue with
+        member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
 
 type CounterRule = CounterProperty * ICounterValue
 

@@ -570,7 +570,7 @@ type Pseudo =
                 let ps =
                     ps
                     |> List.map
-                        (fun (name, property) -> $"{Fss.Utilities.Helpers.toKebabCase name}: {property.Stringify()}")
+                        (fun (name, property) -> $"{stringifyICssValue name}: {property.Stringify()}")
                     |> String.concat "; "
                     
                 $"{ps}"
@@ -578,7 +578,7 @@ type Pseudo =
                 let ps =
                     ps
                     |> List.map
-                        (fun (name, property) -> $"{Fss.Utilities.Helpers.toKebabCase name}: {property.Stringify()}")
+                        (fun (name, property) -> $"{stringifyICssValue name}: {property.Stringify()}")
                     |> String.concat "; "
 
                 $"{ps}"
@@ -595,7 +595,7 @@ type Combinator =
                 let ps =
                     ps
                     |> List.map
-                        (fun (name, property) -> $"{Fss.Utilities.Helpers.toKebabCase name}: {property.Stringify()};")
+                        (fun (name, property) -> $"{stringifyICssValue name}: {property.Stringify()};")
                     |> String.concat "; "
 
                 $"{ps}"

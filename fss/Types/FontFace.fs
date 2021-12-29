@@ -17,6 +17,8 @@ type FontFaceProperty =
     | SizeAdjust
     | Src
     | UnicodeRange
+    interface ICssValue with
+        member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
 
 type FontFaceRule = FontFaceProperty * IFontFaceValue
 
