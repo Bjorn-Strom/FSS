@@ -2,8 +2,6 @@ namespace Fss
 // Interfaces
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-
 type IStringify =
     interface
         abstract member Stringify : unit -> string

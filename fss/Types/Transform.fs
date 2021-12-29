@@ -2,8 +2,6 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-
 [<RequireQualifiedAccess>]
 module Transform =
     type Transform =
@@ -92,26 +90,18 @@ module Transform =
         interface ICssValue with
             member this.Stringify() = this.ToString().ToLower()
 
-
-    // FIX ALT DETTE
     [<RequireQualifiedAccess>]
     module TransformClasses =
         // https://developer.mozilla.org/en-US/docs/Web/CSS/transform
-        type Transforms =
-            | Transforms of Transform list
-            interface ICssValue with
-                member this.Stringify() =
-                    match this with
-                    | Transforms transforms ->
-                        transforms
-                        |> List.map stringifyICssValue
-                        |> String.concat " "
-
         type TransformClass(property) =
             inherit CssRuleWithNone(property)
 
             member this.value(transforms: Transform list) =
-                (property, Transforms transforms) |> Rule
+                let transforms =
+                    transforms
+                    |> List.map stringifyICssValue
+                    |> String.concat " "
+                (property, String transforms) |> Rule
 
             member this.matrix(a: float, b: float, c: float, d: float, tx: float, ty: float) =
                 Matrix(a, b, c, d, tx, ty)

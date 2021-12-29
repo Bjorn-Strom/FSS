@@ -18,7 +18,6 @@ module Tests =
         Perspective.tests
         Text.tests
         Position.tests
-        Transform.tests
         Resize.tests
         Transition.tests
         Visibility.tests
@@ -51,6 +50,7 @@ module Tests =
         Animation.tests
         Font.tests
         Psuedo.tests
+        Transform.tests
         Composite.tests
     ]
 

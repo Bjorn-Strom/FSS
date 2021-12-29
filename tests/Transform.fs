@@ -184,4 +184,14 @@ module Transform =
                     "Transform style revert"
                     [ TransformStyle.revert ]
                     "transform-style: revert;"
+                    
+                testCase
+                    "Multiple transforms"
+                    [
+                        Transform.value [
+                            Transform.rotate (deg 90.)
+                            Transform.translate (px 20, px 0)
+                        ]
+                    ]
+                    "transform: rotate(90deg) translate(20px, 0px);"
             ]

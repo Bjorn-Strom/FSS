@@ -2,8 +2,6 @@ namespace Fss
 
 namespace Fss.FssTypes
 
-open Fss.FssTypes
-
 type CounterProperty =
     | System
     | Negative
