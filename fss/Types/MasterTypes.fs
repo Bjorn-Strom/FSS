@@ -25,9 +25,15 @@ type IFontFaceValue =
     end
     
 [<AutoOpen>]
-module MasterTypeHelpers = 
+module MasterTypeHelpers =
+    let cache = System.Collections.Generic.Dictionary<ICssValue, string>()
     let internal stringifyICssValue cssValue: string =
-        (cssValue :> ICssValue).Stringify()
+        if cache.ContainsKey(cssValue) then
+            cache[cssValue]
+        else
+            let newValue = (cssValue :> ICssValue).Stringify()
+            cache.Add(cssValue, newValue)
+            newValue
     let internal stringifyICounterValue cssValue: string =
         (cssValue :> ICounterValue).Stringify()
     let internal stringifyIFontFaceValue cssValue: string =

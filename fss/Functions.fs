@@ -41,7 +41,7 @@ module Functions =
                 | PseudoElement _ -> "::"
             | _ -> ""
             
-        $"{colons}{propertyName.Stringify()}", $"{propertyValue.Stringify()};"
+        $"{colons}{stringifyICssValue propertyName}", $"{stringifyICssValue propertyValue};"
         
     let private createMediaCss (_, propertyValue) =
         let splitMedia = ($"{stringifyICssValue propertyValue};").Split '|'
@@ -83,7 +83,7 @@ module Functions =
         let className =
             let label =
                 match label with
-                | Some l -> l.Stringify()
+                | Some l -> stringifyICssValue l
                 | None -> ""
                 
             $".css-{FNV_1A.hash mainCss}-{label}"

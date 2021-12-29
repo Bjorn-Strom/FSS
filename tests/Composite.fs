@@ -126,6 +126,3 @@ module Composite =
                    [ important Color.red ]
                    "color: red !important;"
            ]
-           
-           
-    printfn "%A" counterStyle
