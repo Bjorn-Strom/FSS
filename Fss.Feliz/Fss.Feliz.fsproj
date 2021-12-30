@@ -14,16 +14,12 @@
     <PackageReleaseNotes>Add basic Fss syntax to Feliz.</PackageReleaseNotes>
     <RootNamespace>FssFeliz</RootNamespace>
   </PropertyGroup>
-  <PropertyGroup>
-    <NpmDependencies>
-      <NpmPackage Name="@emotion/css" Version="&gt;= 11.0.0" />
-    </NpmDependencies>
-  </PropertyGroup>
   <ItemGroup>
     <Compile Include="FssFeliz.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fss\Fss.Engine.fsproj" />
+    <ProjectReference Include="..\Fss.Engine\Fss.Engine.fsproj" />
+    <ProjectReference Include="..\Fss.Fable\Fss.Fable.fsproj" />
   </ItemGroup>
     <ItemGroup>
         <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />

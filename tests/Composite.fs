@@ -19,7 +19,7 @@ module Composite =
               FontFace.FontStyle.normal ]
 
     let counterStyle =
-        createFss [ ListStyleType.ident (fst counter)
+        createFss [ ListStyleType.value (fst counter)
                     FontFamily.value (fst font)
                     ! FssTypes.Html.Li [ After [ Content.value "."  ]] 
                     ! FssTypes.Html.Li [

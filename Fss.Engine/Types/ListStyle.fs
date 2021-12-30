@@ -85,7 +85,7 @@ module ListStyleClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
     type ListStyleType(property) =
         inherit CssRuleWithNone(property)
-        member this.ident(value: string) = (property, String value) |> Rule
+        member this.value(value: string) = (property, String value) |> Rule
         member this.string(value: string) = (property, Char value) |> Rule
         member this.disc = (property, ListStyle.Disc) |> Rule
         member this.circle = (property, ListStyle.Circle) |> Rule

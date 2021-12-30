@@ -479,6 +479,8 @@ type Normal =
     | Normal
     interface ICssValue with
         member this.StringifyCss() = "normal"
+    interface IFontFaceValue with
+        member this.StringifyFontFace() = stringifyICssValue this
 
 type Float =
     | Float of float

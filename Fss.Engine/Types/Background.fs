@@ -2,6 +2,8 @@ namespace Fss
 
 namespace Fss.FssTypes
 
+open Fss.FssTypes
+
 [<RequireQualifiedAccess>]
 module Background =
     type Clip =
@@ -136,6 +138,9 @@ module BackgroundClasses =
 
         member this.value(size: ILengthPercentage) =
             (property, lengthPercentageToType size) |> Rule
+        member this.value(x: ILengthPercentage, y: ILengthPercentage) =
+            let sizes = $"{lengthPercentageString x} {lengthPercentageString y}"
+            (property, String sizes) |> Rule
         member this.auto = (property, Auto) |> Rule
 
         member this.value(horizontal: Background.Size, vertical: Background.Size) =

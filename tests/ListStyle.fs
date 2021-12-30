@@ -110,7 +110,7 @@ module ListStyle =
                     "list-style-type: '-';"
                 testCase
                     "List style type string"
-                    [ ListStyleType.ident "Some list style" ]
+                    [ ListStyleType.value "Some list style" ]
                     "list-style-type: Some list style;"
                 testCase
                     "List style type None"

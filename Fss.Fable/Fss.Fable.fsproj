@@ -19,7 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fss.Engine\Fss.Engine.fsproj" />
-    <ProjectReference Include="..\fss\Fss.Engine.fsproj" />
   </ItemGroup>
     <ItemGroup>
         <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />

@@ -33,15 +33,13 @@ let initialStore =
             (NotFound, "NotFound") ]
       ShowSidebar = false}
 
-let storeContext = React.createContext ()
+let storeContext = React.createContext()
 
 [<ReactComponent>]
 let StoreProvider children =
-    let state, dispatch =
-        React.useReducer (StoreReducer, initialStore)
-
-    React.contextProvider (storeContext, (state, dispatch), React.fragment [ children ])
-
+    let state, dispatch = React.useReducer(StoreReducer, initialStore)
+    React.contextProvider(storeContext, (state, dispatch), React.fragment [children])
 
 [<Hook>]
-let useStore () = React.useContext storeContext
+let useStore() =
+   React.useContext(storeContext)

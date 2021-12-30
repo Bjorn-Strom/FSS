@@ -1,20 +1,18 @@
 ﻿namespace Fss.Feliz
 
-open Feliz
 open Fss
-open Fss.FssTypes
+open Fss.Fable
 
 [<AutoOpen>]
-module fss =
-    let foo = 0
-    (*
-    type prop with
+module Fss =
+    type Feliz.prop with
         /// Allows you to style Feliz elements with Fss
-        static member fss (properties: FssTypes.CssRule list) = prop.className (fss properties)
+        static member fss (properties: FssTypes.Rule list) =
+            let className = fss properties
+            Feliz.prop.className className
         /// Allows you to combine fss with an already existing classname
-        static member fssWithClass (className: string) (properties: FssTypes.CssRule list) =
-            prop.className (combine [ className; fss properties ] [ ])
+        static member fssWithClass (className: string) (properties: FssTypes.Rule list) =
+            Feliz.prop.className (combine [ className; fss properties ] [ ])
         /// Allows you to optionally combine fss with already existing classnames
-        static member fssCombine (classNames: (string * bool) list) (properties: FssTypes.CssRule list) =
-            prop.className (combine [fss properties] classNames)
-            *)
+        static member fssCombine (classNames: (string * bool) list) (properties: FssTypes.Rule list) =
+            Feliz.prop.className (combine [fss properties] classNames)

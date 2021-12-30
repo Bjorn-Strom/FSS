@@ -170,6 +170,7 @@ module FontFaceClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-weight
     type FontWeight(property) =
         member this.value(weight: int) = (property, Int weight) |> FontFaceRule
+        member this.normal = (property, Normal) |> FontFaceRule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/size-adjust
     type SizeAdjust(property) =
         member this.value(adjust: Percent) = (property, adjust) |> FontFaceRule

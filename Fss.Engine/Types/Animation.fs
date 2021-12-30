@@ -26,8 +26,12 @@ module Animation =
         
     type IterationCount =
         | Infinite
+        | Value of int
         interface ICssValue with
-            member this.StringifyCss() = "infinite"
+            member this.StringifyCss() =
+                match this with
+                | Infinite -> "infinite"
+                | Value v -> string v
         
     type PlayState =
         | Running
@@ -65,6 +69,13 @@ module AnimationClasses =
 
         member this.value(iterationCount: float) =
             (property, iterationCount |> Float) |> Rule
+            
+        member this.value(iterationCounts: Animation.IterationCount list) =
+            let iterationCounts =
+                iterationCounts
+                |> List.map stringifyICssValue
+                |> String.concat ", "
+            (property, iterationCounts |> String) |> Rule
 
         member this.infinite = (property, Animation.Infinite) |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
