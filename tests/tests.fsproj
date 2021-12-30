@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>tests</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utils.fs" />
@@ -58,6 +59,7 @@
     <Content Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fss.Engine\Fss.Engine.fsproj" />
     <ProjectReference Include="..\fss\Fss.Engine.fsproj" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
