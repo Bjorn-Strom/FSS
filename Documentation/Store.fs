@@ -39,7 +39,7 @@ let storeContext = React.createContext()
 let StoreProvider children =
     let state, dispatch = React.useReducer(StoreReducer, initialStore)
     React.contextProvider(storeContext, (state, dispatch), React.fragment [children])
-
+    
 [<Hook>]
 let useStore() =
    React.useContext(storeContext)

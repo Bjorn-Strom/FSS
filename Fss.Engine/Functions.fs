@@ -29,6 +29,18 @@ module Functions =
         | :? NameLabel as _ -> true
         | _ -> false
         
+    let collectClasses (classes: (string * string) list) =
+        let collection = System.Collections.Generic.Dictionary<string, string list>()
+        classes
+        |> List.iter (fun (name, css) ->
+            if collection.ContainsKey(name) then
+                collection[name] <- collection[name] @ [css]
+            else
+                collection.Add (name, [css]))
+        collection
+        |> Seq.toList
+        |> List.map (fun x -> x.Key, String.concat "" x.Value)
+        
     let private createMainCss (propertyName, propertyValue) =
         $"{stringifyICssValue propertyName}: {stringifyICssValue propertyValue};"
         
@@ -47,7 +59,8 @@ module Functions =
         let splitMedia = $"{stringifyICssValue propertyValue};".Split '|'
         $"@media {splitMedia[0]}", $"{splitMedia[1]}"
         
-    let private createCombinatorCss (propertyName, propertyValue: ICssValue): (string * string) list =
+    // TODO: Media queries på combinators/pseudo er nok fucked
+    let private createCombinatorCss className (propertyName, propertyValue: ICssValue): (string * string) list =
         let propertyValue = (propertyValue :?> Combinator).Unwrap()
         
         let mainProperties =
@@ -61,15 +74,11 @@ module Functions =
         let mediaProperties =
             List.filter isMedia propertyValue
             |> List.map createMediaCss
-            |> List.map (fun (m, s) -> m, $"{s}")
+            |> List.map (fun (m, s) -> m, $"{className} {s}")
         
-        mainProperties @ pseudoProperties @ mediaProperties    
+        mainProperties @ pseudoProperties @ mediaProperties
         
-    /// Creates the CSS based on a list of CSS rules
-    /// Returns a tuple containing 2 elements
-    /// The first element in the tuple is the classname you want to give to your html component
-    /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createFss (properties: Rule list): ClassName * (ClassName * Css) list =
+    let private createCSS (name: string option) (properties: Rule list): ClassName * (ClassName * Css) list =
         let label =
             properties
             |> List.filter isLabel
@@ -85,12 +94,15 @@ module Functions =
             |> List.map createMainCss
             |> String.concat ""
         let className =
-            let label =
-                match label with
-                | Some l -> $"-{stringifyICssValue l}"
-                | None -> ""
-                
-            $".css-{FNV_1A.hash mainCss}{label}"
+            match name with
+            | Some n -> n
+            | _ ->
+                let label =
+                    match label with
+                    | Some l -> $"-{stringifyICssValue l}"
+                    | None -> ""
+                    
+                $".css-{FNV_1A.hash mainCss}{label}"
         let mainProperties =
             className, mainCss
         let pseudoProperties =
@@ -103,10 +115,25 @@ module Functions =
             |> List.map (fun (m, s) -> m, $"{className} {s}")
         let combinatorProperties =
             List.filter isCombinator properties
-            |> List.collect createCombinatorCss
+            |> List.collect (createCombinatorCss className)
             |> List.map (fun (c, s) -> $"{className}{c}", s)
-        
+            |> collectClasses
+            
         className[1..], [mainProperties] @ pseudoProperties @ mediaProperties @ combinatorProperties
+        
+    /// Creates the CSS based on a list of CSS rules
+    /// Returns a tuple containing 2 elements
+    /// The first element in the tuple is the classname you want to give to your html component
+    /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
+    let createFss (properties: Rule list): ClassName * (ClassName * Css) list =
+        createCSS None properties
+        
+    /// Creates global CSS based on a list of CSS rules
+    /// Returns a tuple containing 2 elements
+    /// The first element in the tuple is the global classname
+    /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
+    let createGlobal (properties: Rule list): ClassName * (ClassName * Css) list =
+        createCSS (Some "*") properties
         
     let private stringifyCounterProperty (property: CounterRule) =
         let propertyName, propertyValue = property

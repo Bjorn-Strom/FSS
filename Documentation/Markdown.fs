@@ -1,4 +1,4 @@
- namespace Docs
+ namespace Documentation
 
 
  module Markdown =

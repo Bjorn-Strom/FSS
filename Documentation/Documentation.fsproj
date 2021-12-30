@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Utilities.fs" />
+    <Compile Include="Markdown.fs" />
+    <Compile Include="Hamburger.fs" />
+    <Compile Include="Logo.fs" />
+    <Compile Include="Pages.fs" />
+    <Compile Include="Store.fs" />
+    <Compile Include="Documentation.fs" />
+    <Content Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fss.Engine\Fss.Engine.fsproj" />
+    <ProjectReference Include="..\Fss.Fable\Fss.Fable.fsproj" />
+    <ProjectReference Include="..\Fss.Feliz\Fss.Feliz.fsproj" />
+  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>

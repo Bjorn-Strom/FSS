@@ -3,6 +3,8 @@
 open Browser.Dom
 open Fss
 
+// TODO: Legg til en cache her, så dersom CSSen allerede eksisterer, så ikke legg den inn i DOM
+
 [<AutoOpen>]
 module Fss =
     let private processCssRule (name: string, rule: string) =
@@ -18,21 +20,21 @@ module Fss =
     /// Injects CSS into dom and returns the classname
     let fss (properties: Fss.FssTypes.Rule list): string =
         let className, cssRules = createFss properties
-        cssRules
-        |> List.map processCssRule
-        |> String.concat ""
-        |> injectCss
+        let foo = cssRules
+                |> List.map processCssRule
+                |> String.concat ""
+        foo |> injectCss
         
         className
         
     // Injects CSS into dom as global styles
-//    let global'(properties: Fss.FssTypes.Rule list): unit =
-//        let _, cssRules = createFss properties
-//        
-//        cssRules
-//        |> List.map processCssRule
-//        |> String.concat ""
-//        |> printfn "%A"
+    let global'(properties: Fss.FssTypes.Rule list): unit =
+        let _, cssRules = createGlobal properties
+        
+        cssRules
+        |> List.map processCssRule
+        |> String.concat ""
+        |> injectCss
         
     let private processCounterRules (name: string) (rules: string) =
         $"@counter-style {name} {{ {rules} }}"
