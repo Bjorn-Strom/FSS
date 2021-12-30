@@ -12,6 +12,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>Fss-lib-feliz</AssemblyName>
     <PackageReleaseNotes>Add basic Fss syntax to Feliz.</PackageReleaseNotes>
+    <RootNamespace>FssFeliz</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
     <NpmDependencies>
@@ -22,7 +23,7 @@
     <Compile Include="FssFeliz.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fss\Fss.fsproj" />
+    <ProjectReference Include="..\fss\Fss.Engine.fsproj" />
   </ItemGroup>
     <ItemGroup>
         <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />

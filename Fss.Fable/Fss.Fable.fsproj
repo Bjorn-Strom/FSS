@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>A way to write Fss in Fable.</Description>
+    <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
+    <PackageTags>fsharp;CSS;styling;css-in-lang;fable;react;html;</PackageTags>
+    <Authors>Bjørn-Ivar Strøm</Authors>
+    <Version>0.0.1</Version>
+    <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Fss.Fable</AssemblyName>
+    <PackageReleaseNotes>Created library to use Fss in Fable</PackageReleaseNotes>
+    <RootNamespace>FssFable</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="FssFable.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\fss\Fss.Engine.fsproj" />
+  </ItemGroup>
+    <ItemGroup>
+        <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
+    </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>

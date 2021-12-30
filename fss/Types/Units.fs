@@ -2,6 +2,8 @@ namespace Fss
 
 namespace Fss.FssTypes
 
+open Fss.FssTypes
+
 type IUnit =
     interface
     end
@@ -15,10 +17,10 @@ type Percent =
     interface IUnit
     interface ILengthPercentage
     interface IFontFaceValue with
-        member this.Stringify() = stringifyICssValue this
+        member this.StringifyFontFace() = stringifyICssValue this
 
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Percent p -> $"{p}%%"
 
@@ -42,7 +44,7 @@ type Length =
     interface ILengthPercentage
 
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Px p -> $"{p}px"
             | In i -> $"{i}in"
@@ -67,7 +69,7 @@ type Angle =
     | Rad of float
     | Turn of float
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Deg d -> $"{d}deg"
             | Grad g -> $"{g}grad"
@@ -77,7 +79,7 @@ type Angle =
 type Resolution =
     | Dpi of string
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Dpi dpi -> $"{dpi}dpi"
 
@@ -85,7 +87,7 @@ type Time =
     | Sec of float
     | Ms of float
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Sec s -> $"{s}s"
             | Ms ms -> $"{ms}ms"
@@ -93,7 +95,7 @@ type Time =
 type Fraction =
     | Fr of float
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Fr f -> $"{f}fr"
 
@@ -103,6 +105,7 @@ module unitHelpers =
         match lp with
         | :? Percent as p -> p :> ICssValue
         | :? Length as l -> l :> ICssValue
+        | _ -> Px 0
 
     let internal lengthPercentageString (lp: ILengthPercentage) =
         match lp with

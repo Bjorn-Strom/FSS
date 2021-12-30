@@ -11,14 +11,14 @@ module Clear =
         | InlineStart
         | InlineEnd
         interface ICssValue with
-            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 
-    [<RequireQualifiedAccess>]
-    module ClearClasses =
-        type Clear(property) =
-            inherit CssRuleWithNone(property)
-            member this.left = (property, Left) |> Rule
-            member this.right = (property, Right) |> Rule
-            member this.both = (property, Both) |> Rule
-            member this.inlineStart = (property, InlineStart) |> Rule
-            member this.inlineEnd = (property, InlineEnd) |> Rule
+[<RequireQualifiedAccess>]
+module ClearClasses =
+    type Clear(property) =
+        inherit CssRuleWithNone(property)
+        member this.left = (property, Clear.Left) |> Rule
+        member this.right = (property, Clear.Right) |> Rule
+        member this.both = (property, Clear.Both) |> Rule
+        member this.inlineStart = (property, Clear.InlineStart) |> Rule
+        member this.inlineEnd = (property, Clear.InlineEnd) |> Rule

@@ -1,11 +1,12 @@
 ﻿namespace Docs
 
 module App =
-    open Fetch
+    //open Fetch
     open Feliz
-    open Feliz.Router
     open Fss
-    open Feliz.fss
+    open Fss.Fable
+    //open Feliz.Router
+    //open Feliz.fss
 
     (*
     open Pages
@@ -940,17 +941,102 @@ module App =
 
     *)
     
-    let foo = fss [
-        BorderStyle.solid
-        BorderImageSource.url("https://www.dl.dropboxusercontent.com/s/fdltg3rhxn3oe95/border%20image.jpg")
-        BorderImageSlice.value (pct 40)
-        BorderImageWidth.value (px 20)
-        BorderImageSource.linearGradient((deg 45., [ FssTypes.Color.Red, pct 0; FssTypes.Color.Blue, pct 100 ]))
-    ]
+    let emojiCounterStyle =
+        counterStyle [ System.cyclic
+                       Symbols.value [ "❤️"
+                                       "✨"
+                                       "🔥"
+                                       "😊"
+                                       "😂"
+                                       "🥺"
+                                       "❤️‍🔥"
+                                       "👍"
+                                       "🥰"
+                                       "🐻"
+                                       "🍔"
+                                       "⚽"
+                                       "💨"
+                                       "🎨"
+                                       " 🐶"; ]
+                       Suffix.value " "
+                       Prefix.value " " ]
+
+    let font =
+        fontFace
+            "DroidSerif"
+            [ FontFace.Src.truetype "https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf"
+              FontFace.FontWeight.value 100
+              FontFace.FontStyle.normal ]
+
+    let emojiCounter =
+        fss [ ListStyleType.ident emojiCounterStyle
+              FontFamily.value font
+              ! FssTypes.Html.Li [ After [ Content.value "."  ]] 
+              ! FssTypes.Html.Li [
+                  BackgroundColor.aliceBlue
+                  Hover [ BackgroundColor.orangeRed ]
+              ]
+              Label "counter"
+              ]
+
+    let container =
+        fss [ Display.flex
+              FlexDirection.column
+              AlignItems.center
+              JustifyContent.center
+              Label "container" ]
+
+    let spinimation =
+        keyframes [ frame 0 [ Custom "transform" "rotate(0deg)" ]
+                    frame 100 [ Custom "transform" "rotate(360deg)" ] ]
+
+    let title =
+        fss [ AnimationName.value spinimation
+              AnimationDuration.value (sec 1)
+              AnimationIterationCount.infinite
+              FontFamily.value "DroidSerif"
+              Hover [ AnimationDuration.value (ms 500) ]
+              Media.query [ FssTypes.Media.MaxWidth(px 600) ] [
+                  BackgroundColor.orangeRed
+              ]
+              Label "title"
+            ]
+        
     open Browser.Dom
     [<ReactComponent>]
     let App () =
-        printfn "%A" foo
-        Html.h1 "Hello world"
+        Html.div [
+            prop.className container
+            prop.children [
+                Html.p [
+                    prop.className title
+                    prop.text "Spin"
+                ]
+                Html.ul [
+                    prop.className emojiCounter
+                    prop.children [
+                        Html.li "Monday"
+                        Html.li "Tuesday"
+                        Html.li "Wedesday"
+                        Html.li "Thursday"
+                        Html.li "Friday"
+                        Html.li "Saturday"
+                        Html.li "Sunday"
+                        Html.li "January"
+                        Html.li "February"
+                        Html.li "March"
+                        Html.li "April"
+                        Html.li "May"
+                        Html.li "June"
+                        Html.li "July"
+                        Html.li "August"
+                        Html.li "September"
+                        Html.li "October"
+                        Html.li "November"
+                        Html.li "December"
+                    ]
+                ]
+            ]
+        ]
 
     ReactDOM.render (App(), document.getElementById "app")

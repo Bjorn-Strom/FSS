@@ -13,17 +13,17 @@ module PointerEvents =
         | Stroke
         | All
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
-    [<RequireQualifiedAccess>]
-    module PointerEventClasses =
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
-        type PointerEvent(property) =
-            inherit CssRuleWithAutoNone(property)
-            member this.visiblePainted = (property, VisiblePainted) |> Rule
-            member this.visibleFill = (property, VisibleFill) |> Rule
-            member this.visibleStroke = (property, VisibleStroke) |> Rule
-            member this.visible = (property, Visible) |> Rule
-            member this.painted = (property, Painted) |> Rule
-            member this.stroke = (property, Stroke) |> Rule
-            member this.all = (property, All) |> Rule
+[<RequireQualifiedAccess>]
+module PointerEventClasses =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
+    type PointerEvent(property) =
+        inherit CssRuleWithAutoNone(property)
+        member this.visiblePainted = (property, PointerEvents.VisiblePainted) |> Rule
+        member this.visibleFill = (property, PointerEvents.VisibleFill) |> Rule
+        member this.visibleStroke = (property, PointerEvents.VisibleStroke) |> Rule
+        member this.visible = (property, PointerEvents.Visible) |> Rule
+        member this.painted = (property, PointerEvents.Painted) |> Rule
+        member this.stroke = (property, PointerEvents.Stroke) |> Rule
+        member this.all = (property, PointerEvents.All) |> Rule

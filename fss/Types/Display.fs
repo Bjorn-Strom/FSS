@@ -22,27 +22,27 @@ module Display =
         | TableRow
         | TableCaption
         interface ICssValue with
-            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 
-    [<RequireQualifiedAccess>]
-    module DisplayClasses =
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/display
-        type DisplayClass(property) =
-            inherit CssRuleWithNone(property)
-            member this.value(display: Display) = (property, display) |> Rule
-            member this.inline' = (property, Inline) |> Rule
-            member this.inlineBlock = (property, InlineBlock) |> Rule
-            member this.block = (property, Block) |> Rule
-            member this.runIn = (property, RunIn) |> Rule
-            member this.flex = (property, Flex) |> Rule
-            member this.grid = (property, Grid) |> Rule
-            member this.flowRoot = (property, FlowRoot) |> Rule
-            member this.table = (property, Table) |> Rule
-            member this.tableCell = (property, TableCell) |> Rule
-            member this.tableColumn = (property, TableColumn) |> Rule
-            member this.tableColumnGroup = (property, TableColumnGroup) |> Rule
-            member this.tableHeaderGroup = (property, TableHeaderGroup) |> Rule
-            member this.tableRowGroup = (property, TableRowGroup) |> Rule
-            member this.tableFooterGroup = (property, TableFooterGroup) |> Rule
-            member this.tableRow = (property, TableRow) |> Rule
-            member this.tableCaption = (property, TableCaption) |> Rule
+[<RequireQualifiedAccess>]
+module DisplayClasses =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/display
+    type DisplayClass(property) =
+        inherit CssRuleWithNone(property)
+        member this.value(display: Display.Display) = (property, display) |> Rule
+        member this.inline' = (property, Display.Inline) |> Rule
+        member this.inlineBlock = (property, Display.InlineBlock) |> Rule
+        member this.block = (property, Display.Block) |> Rule
+        member this.runIn = (property, Display.RunIn) |> Rule
+        member this.flex = (property, Display.Flex) |> Rule
+        member this.grid = (property, Display.Grid) |> Rule
+        member this.flowRoot = (property, Display.FlowRoot) |> Rule
+        member this.table = (property, Display.Table) |> Rule
+        member this.tableCell = (property, Display.TableCell) |> Rule
+        member this.tableColumn = (property, Display.TableColumn) |> Rule
+        member this.tableColumnGroup = (property, Display.TableColumnGroup) |> Rule
+        member this.tableHeaderGroup = (property, Display.TableHeaderGroup) |> Rule
+        member this.tableRowGroup = (property, Display.TableRowGroup) |> Rule
+        member this.tableFooterGroup = (property, Display.TableFooterGroup) |> Rule
+        member this.tableRow = (property, Display.TableRow) |> Rule
+        member this.tableCaption = (property, Display.TableCaption) |> Rule

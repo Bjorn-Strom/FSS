@@ -4,9 +4,9 @@
   "scripts": {
     "start": "dotnet fable watch ./docs -o ./javascript --run esbuild --bundle ./javascript/App.js --outfile=dist/App.js --servedir=dist",
     "build": "dotnet fable ./docs -o ./javascript && esbuild --bundle --minify ./javascript/App.js --outfile=dist/App.js",
-    "test": "dotnet fable ./tests -o ./dist/tests --run node ./dist/tests/Tests.js",
-    "watch-test": "dotnet fable watch ./tests -o ./dist/tests --run nodemon ./dist/tests/Tests.js",
-    "clean": "rm -rf javascript/* dist/tests",
+    "test": "dotnet fable ./tests -o ./javascript/tests --run node ./javascript/tests/Tests.js",
+    "watch-test": "dotnet fable watch ./tests -o ./javascript/tests --run nodemon ./javascript/tests/Tests.js",
+    "clean": "rm -rf javascript/* dist/tests dist/*.js",
     "publish-docs": "npm run clean && npm run build && gh-pages -d dist"
   },
   "homepage": "https://Bjorn-Strom.github.io/FSS",
@@ -15,7 +15,6 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
-    "@emotion/css": "11.1.3",
     "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

@@ -5,5 +5,4 @@ open Fss.FssTypes
 [<AutoOpen>]
 module AspectRatio =
     /// Sets the preferred aspect ratio of the element
-    let AspectRatio =
-        AspectRatio.AspectRatioClasses.AspectRatio(Property.AspectRatio)
+    let AspectRatio = AspectRatioClasses.AspectRatio(Property.AspectRatio)

@@ -3,9 +3,8 @@
 open Fss.FssTypes
 
 [<AutoOpen>]
-module Content =
-    let Content =
-        Content.ContentClasses.Content(Property.Content)
+module ContentCss =
+    let Content = ContentClasses.Content(Property.Content)
 
 [<AutoOpen>]
 module Label =

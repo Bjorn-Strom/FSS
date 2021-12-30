@@ -10,14 +10,14 @@ module Background =
         | ContentBox
         | Text
         interface ICssValue with
-            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 
     type Origin =
         | BorderBox
         | PaddingBox
         | ContentBox
         interface ICssValue with
-            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 
     type Repeat =
         | RepeatX
@@ -27,20 +27,20 @@ module Background =
         | Round
         | NoRepeat
         interface ICssValue with
-            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 
     type Size =
         | Cover
         | Contain
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
     type Attachment =
         | Scroll
         | Fixed
         | Local
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
     type Position =
         | Top
@@ -49,7 +49,7 @@ module Background =
         | Right
         | Center
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
     type BlendMode =
         | Multiply
@@ -68,18 +68,18 @@ module Background =
         | Color
         | Luminosity
         interface ICssValue with
-            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 
     type Isolation =
         | Isolate
         interface ICssValue with
-            member this.Stringify() = "isolate"
+            member this.StringifyCss() = "isolate"
 
     type BoxDecorationBreak =
         | Slice
         | Clone
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
 [<RequireQualifiedAccess>]
 module BackgroundClasses =
@@ -160,7 +160,7 @@ module BackgroundClasses =
         inherit ColorClass.Color(property)
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
     type BackgroundImage(property) =
-        inherit Image.ImageClasses.ImageClass(property)
+        inherit ImageClasses.ImageClass(property)
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
     type BackgroundPosition(property) =
         inherit CssRule(property)

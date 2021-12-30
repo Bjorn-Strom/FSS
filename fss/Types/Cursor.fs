@@ -36,46 +36,46 @@ module Cursor =
         | NeswResize
         | NwseResize
         interface ICssValue with
-            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 
-    [<RequireQualifiedAccess>]
-    module CursorClasses =
-        type CursorParent(property) =
-            inherit CssRuleWithAutoNone(property)
-            member this.value(url: string) = (property, Url url) |> Rule
-            member this.value(cursor: Cursor) = (property, cursor) |> Rule
-            member this.url(url: string) =
-                (property, url |> Url) |> Rule
-            member this.url(url: string, x: int, y: int) =
-                let value = $"url({url}) {x} {y}"
-                (property, value |> String) |> Rule
-            member this.default' = (property, Default) |> Rule
-            member this.contextMenu = (property, ContextMenu) |> Rule
-            member this.help = (property, Help) |> Rule
-            member this.pointer = (property, Pointer) |> Rule
-            member this.progress = (property, Progress) |> Rule
-            member this.wait = (property, Wait) |> Rule
-            member this.cell = (property, Cell) |> Rule
-            member this.crosshair = (property, Crosshair) |> Rule
-            member this.text = (property, Text) |> Rule
-            member this.verticalText = (property, VerticalText) |> Rule
-            member this.alias = (property, Alias) |> Rule
-            member this.copy = (property, Copy) |> Rule
-            member this.move = (property, Move) |> Rule
-            member this.noDrop = (property, NoDrop) |> Rule
-            member this.notAllowed = (property, NotAllowed) |> Rule
-            member this.allScroll = (property, AllScroll) |> Rule
-            member this.colResize = (property, ColResize) |> Rule
-            member this.rowResize = (property, RowResize) |> Rule
-            member this.nResize = (property, NResize) |> Rule
-            member this.eResize = (property, EResize) |> Rule
-            member this.sResize = (property, SResize) |> Rule
-            member this.wResize = (property, WResize) |> Rule
-            member this.nsResize = (property, NsResize) |> Rule
-            member this.ewResize = (property, EwResize) |> Rule
-            member this.neResize = (property, NeResize) |> Rule
-            member this.nwResize = (property, NwResize) |> Rule
-            member this.seResize = (property, SeResize) |> Rule
-            member this.swResize = (property, SwResize) |> Rule
-            member this.neswResize = (property, NeswResize) |> Rule
-            member this.nwseResize = (property, NwseResize) |> Rule
+[<RequireQualifiedAccess>]
+module CursorClasses =
+    type CursorParent(property) =
+        inherit CssRuleWithAutoNone(property)
+        member this.value(url: string) = (property, Url url) |> Rule
+        member this.value(cursor: Cursor.Cursor) = (property, cursor) |> Rule
+        member this.url(url: string) =
+            (property, url |> Url) |> Rule
+        member this.url(url: string, x: int, y: int) =
+            let value = $"url({url}) {x} {y}"
+            (property, value |> String) |> Rule
+        member this.default' = (property, Cursor.Default) |> Rule
+        member this.contextMenu = (property, Cursor.ContextMenu) |> Rule
+        member this.help = (property, Cursor.Help) |> Rule
+        member this.pointer = (property, Cursor.Pointer) |> Rule
+        member this.progress = (property, Cursor.Progress) |> Rule
+        member this.wait = (property, Cursor.Wait) |> Rule
+        member this.cell = (property, Cursor.Cell) |> Rule
+        member this.crosshair = (property, Cursor.Crosshair) |> Rule
+        member this.text = (property, Cursor.Text) |> Rule
+        member this.verticalText = (property, Cursor.VerticalText) |> Rule
+        member this.alias = (property, Cursor.Alias) |> Rule
+        member this.copy = (property, Cursor.Copy) |> Rule
+        member this.move = (property, Cursor.Move) |> Rule
+        member this.noDrop = (property, Cursor.NoDrop) |> Rule
+        member this.notAllowed = (property, Cursor.NotAllowed) |> Rule
+        member this.allScroll = (property, Cursor.AllScroll) |> Rule
+        member this.colResize = (property, Cursor.ColResize) |> Rule
+        member this.rowResize = (property, Cursor.RowResize) |> Rule
+        member this.nResize = (property, Cursor.NResize) |> Rule
+        member this.eResize = (property, Cursor.EResize) |> Rule
+        member this.sResize = (property, Cursor.SResize) |> Rule
+        member this.wResize = (property, Cursor.WResize) |> Rule
+        member this.nsResize = (property, Cursor.NsResize) |> Rule
+        member this.ewResize = (property, Cursor.EwResize) |> Rule
+        member this.neResize = (property, Cursor.NeResize) |> Rule
+        member this.nwResize = (property, Cursor.NwResize) |> Rule
+        member this.seResize = (property, Cursor.SeResize) |> Rule
+        member this.swResize = (property, Cursor.SwResize) |> Rule
+        member this.neswResize = (property, Cursor.NeswResize) |> Rule
+        member this.nwseResize = (property, Cursor.NwseResize) |> Rule

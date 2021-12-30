@@ -24,7 +24,7 @@ module Utils =
     let internal stringifyFontFaceProperty (property: FontFaceRule) =
         let propertyName, propertyValue = property
 
-        $"{toKebabCase <| propertyName.ToString()}: {propertyValue.Stringify()};"
+        $"{toKebabCase <| propertyName.ToString()}: {propertyValue.StringifyFontFace()};"
         
     let test_fontFace (properties: FontFaceRule list) : FontName * FontFaceStyle =
         let fontName = "@font-face"
@@ -36,13 +36,13 @@ module Utils =
     
     
     let testCase (testName: string) (ruleList: Rule list) (correct: string) =
-        let _, actual =  List.head <| fss ruleList
+        let _, actual =  List.head <| snd (createFss ruleList)
         test testName <| fun _ ->
             Expect.equal actual correct
             
     let testPseudoCase (testName: string) (ruleList: Rule list) (correct: string * string) =
         let actual =
-            fss ruleList
+            snd (createFss ruleList)
             |> List.tail
             |> List.head
         
@@ -50,7 +50,7 @@ module Utils =
             Expect.equal actual correct
             
     let testCounterCase (testName: string) (ruleList: CounterRule list) (correct: string) =
-        let (_, actual) = counterStyle ruleList
+        let (_, actual) = createCounterStyle ruleList
         test testName <| fun _ ->
             Expect.equal actual correct
             
@@ -60,6 +60,6 @@ module Utils =
             Expect.equal actual correct
             
     let testMediaCase (testName: string) (featureList: Media.Feature list) (ruleList: Rule list) (correct: string) =
-        let (_, actual) = List.head <| fss [ Media.query featureList ruleList ]
+        let (_, actual) = List.head <| snd (createFss [ Media.query featureList ruleList ])
         test testName <| fun _ ->
             Expect.equal actual correct

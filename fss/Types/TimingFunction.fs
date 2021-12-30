@@ -11,7 +11,7 @@ module TimingFunction =
         | Start
         | End
         interface ICssValue with
-            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 
     type Timing =
         | Ease
@@ -25,35 +25,35 @@ module TimingFunction =
         | Steps of int
         | StepsWithTerm of int * Step
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 match this with
                 | CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" p1 p2 p3 p4
                 | Steps n -> sprintf "steps(%d)" n
                 | StepsWithTerm (n, term) -> $"steps(%d{n}, %s{stringifyICssValue term})"
                 | _ -> Fss.Utilities.Helpers.toKebabCase this
 
-    [<RequireQualifiedAccess>]
-    module TimingFunctionClasses =
-        type TimingFunction(property) =
-            inherit CssRule(property)
-            member this.ease = (property, Ease) |> Rule
+[<RequireQualifiedAccess>]
+module TimingFunctionClasses =
+    type TimingFunction(property) =
+        inherit CssRule(property)
+        member this.ease = (property, TimingFunction.Ease) |> Rule
 
-            member this.easeIn = (property, EaseIn) |> Rule
+        member this.easeIn = (property, TimingFunction.EaseIn) |> Rule
 
-            member this.easeOut = (property, EaseOut) |> Rule
+        member this.easeOut = (property, TimingFunction.EaseOut) |> Rule
 
-            member this.easeInOut = (property, EaseInOut) |> Rule
+        member this.easeInOut = (property, TimingFunction.EaseInOut) |> Rule
 
-            member this.linear = (property, Linear) |> Rule
+        member this.linear = (property, TimingFunction.Linear) |> Rule
 
-            member this.stepStart = (property, StepStart) |> Rule
+        member this.stepStart = (property, TimingFunction.StepStart) |> Rule
 
-            member this.stepEnd = (property, StepEnd) |> Rule
+        member this.stepEnd = (property, TimingFunction.StepEnd) |> Rule
 
-            member this.cubicBezier(p1: float, p2: float, p3: float, p4: float) =
-                (property, CubicBezier(p1, p2, p3, p4)) |> Rule
+        member this.cubicBezier(p1: float, p2: float, p3: float, p4: float) =
+            (property, TimingFunction.CubicBezier(p1, p2, p3, p4)) |> Rule
 
-            member this.step(steps: int) = (property, Steps(steps)) |> Rule
+        member this.step(steps: int) = (property, TimingFunction.Steps(steps)) |> Rule
 
-            member this.step(steps: int, jumpTerm: Step) =
-                (property, StepsWithTerm(steps, jumpTerm)) |> Rule
+        member this.step(steps: int, jumpTerm: TimingFunction.Step) =
+            (property, TimingFunction.StepsWithTerm(steps, jumpTerm)) |> Rule

@@ -13,8 +13,8 @@
         <Compile Include="App.fs" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\FssFeliz\FssFeliz.fsproj" />
-        <ProjectReference Include="..\fss\Fss.fsproj" />
+      <ProjectReference Include="..\Fss.Fable\Fss.Fable.fsproj" />
+      <ProjectReference Include="..\fss\Fss.Engine.fsproj" />
     </ItemGroup>
     <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

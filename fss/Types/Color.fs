@@ -156,7 +156,7 @@ module Color =
         | Hsl of Hue: int * Saturation: int * Lightness: int
         | Hsla of Hue: int * Saturation: int * Lightness: int * Alpha: float
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 match this with
                 | Rgb (red, green, blue) -> $"rgb({red}, {green}, {blue})"
                 | Rgba (red, green, blue, alpha) -> $"rgba({red}, {green}, {blue}, {alpha})"
@@ -169,7 +169,7 @@ module Color =
         | Economy
         | Exact
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
 module colorHelpers =
     let internal hex (value: string) =

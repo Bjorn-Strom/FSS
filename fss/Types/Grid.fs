@@ -11,7 +11,7 @@ module Grid =
         | RowDense
         | ColumnDense
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 match this with
                 | RowDense -> "row dense"
                 | ColumnDense -> "column dense"
@@ -21,7 +21,7 @@ module Grid =
         | Subgrid
         | Masonry
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
     type GridPosition =
         | Value of int
@@ -30,13 +30,13 @@ module Grid =
         | ValueIdentSpan of int * string
         | Span of string
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
     type RepeatType =
         | AutoFill
         | AutoFit
         interface ICssValue with
-            member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
         
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
@@ -49,7 +49,7 @@ module Grid =
         | MinMax5 of ContentSize.ContentSize * ContentSize.ContentSize
         | MinMax6 of ContentSize.ContentSize * Fraction
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 let minmaxValue a b = $"minmax({a}, {b})"
 
                 match this with
@@ -85,7 +85,7 @@ module Grid =
         | Repeat8 of RepeatType * ContentSize.ContentSize
         | Repeat9 of int * MinMaxHelper
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 let repeatValue a b = $"repeat({a}, {b})"
 
                 match this with
@@ -242,7 +242,7 @@ module GridClasses =
         | Length of Length list
         | Percent of Percent list
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 match this with
                 | Fractions fractions ->
                     fractions
@@ -259,7 +259,7 @@ module GridClasses =
                     |> String.concat " "
 
     type GridAuto(property) =
-        inherit ContentSize.ContentClasses.ContentSize(property)
+        inherit ContentSizeClasses.ContentSize(property)
         member this.value(fraction: Fraction) = (property, fraction) |> Rule
         member this.value(fraction: Fraction list) = (property, Fractions fraction) |> Rule
         member this.value(sizes: Length list) = (property, Length sizes) |> Rule

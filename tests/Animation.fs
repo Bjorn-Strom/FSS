@@ -7,7 +7,7 @@ open Fss
 module Animation =
     let tests =
         let name, _ =
-            keyframes
+            createAnimation
                 [
                     frame 0 [ MarginLeft.value (pct 0) ]
                     frame 50 [ MarginLeft.value (pct 50) ]

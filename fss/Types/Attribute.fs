@@ -92,4 +92,4 @@ namespace Fss.FssTypes
             | Pubdate
             | Manifest
             interface ICssValue with
-                member this.Stringify() = Fss.Utilities.Helpers.toKebabCase this
+                member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this

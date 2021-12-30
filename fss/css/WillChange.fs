@@ -4,5 +4,4 @@ open Fss.FssTypes
 
 [<AutoOpen>]
 module WillChange =
-    let WillChange =
-        WillChange.WillChangeClasses.WillChange(Property.WillChange)
+    let WillChange = WillChangeClasses.WillChange(Property.WillChange)

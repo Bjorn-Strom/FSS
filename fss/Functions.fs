@@ -44,7 +44,7 @@ module Functions =
         $"{colons}{stringifyICssValue propertyName}", $"{stringifyICssValue propertyValue};"
         
     let private createMediaCss (_, propertyValue) =
-        let splitMedia = ($"{stringifyICssValue propertyValue};").Split '|'
+        let splitMedia = $"{stringifyICssValue propertyValue};".Split '|'
         $"@media {splitMedia[0]}", $"{splitMedia[1]}"
         
     let private createCombinatorCss (propertyName, propertyValue: ICssValue): (string * string) list =
@@ -65,7 +65,11 @@ module Functions =
         
         mainProperties @ pseudoProperties @ mediaProperties    
         
-    let fss (properties: Rule list): (ClassName * Css) list =
+    /// Creates the CSS based on a list of CSS rules
+    /// Returns a tuple containing 2 elements
+    /// The first element in the tuple is the classname you want to give to your html component
+    /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
+    let createFss (properties: Rule list): ClassName * (ClassName * Css) list =
         let label =
             properties
             |> List.filter isLabel
@@ -83,10 +87,10 @@ module Functions =
         let className =
             let label =
                 match label with
-                | Some l -> stringifyICssValue l
+                | Some l -> $"-{stringifyICssValue l}"
                 | None -> ""
                 
-            $".css-{FNV_1A.hash mainCss}-{label}"
+            $".css-{FNV_1A.hash mainCss}{label}"
         let mainProperties =
             className, mainCss
         let pseudoProperties =
@@ -102,14 +106,18 @@ module Functions =
             |> List.collect createCombinatorCss
             |> List.map (fun (c, s) -> $"{className}{c}", s)
         
-        [mainProperties] @ pseudoProperties @ mediaProperties @ combinatorProperties
+        className[1..], [mainProperties] @ pseudoProperties @ mediaProperties @ combinatorProperties
         
     let private stringifyCounterProperty (property: CounterRule) =
         let propertyName, propertyValue = property
 
-        $"{stringifyICssValue propertyName}: {propertyValue.Stringify()};"
+        $"{stringifyICssValue propertyName}: {propertyValue.StringifyCounter()};"
            
-    let counterStyle (properties: CounterRule list) : CounterName * CounterStyle =
+    /// Creates the CSS for a counter style based on a list of CounterStyle rules
+    /// Returns a tuple containing 2 elements
+    /// The first element in the tuple is the name of the created counter style. This is the value you use in your CSS.
+    /// The second element is the generated CSS for the counter.
+    let createCounterStyle (properties: CounterRule list) : CounterName * CounterStyle =
 
         let properties =
             List.map stringifyCounterProperty properties
@@ -121,9 +129,13 @@ module Functions =
     let private stringifyFontFaceProperty (property: FontFaceRule) =
         let propertyName, propertyValue = property
 
-        $"{stringifyICssValue propertyName}: {propertyValue.Stringify()};"
+        $"{stringifyICssValue propertyName}: {propertyValue.StringifyFontFace()};"
         
-    let fontFace (name: string) (properties: FontFaceRule list) : FontName * FontFaceStyle =
+    /// Creates the CSS for a font face based on a list of FontFace rules
+    /// Returns a tuple containing 2 elements
+    /// The first element in the tuple is the name of the created font. This is the value you use in your CSS.
+    /// The second element is the generated CSS for the font face.
+    let createFontFace (name: string) (properties: FontFaceRule list) : FontName * FontFaceStyle =
         let properties = [ FontFace.FontFamily.string name ] @ properties
         let properties =
             List.map stringifyFontFaceProperty properties
@@ -131,26 +143,30 @@ module Functions =
         
         name, properties
         
-    let keyframes (attributeList: KeyframeAttribute list) : AnimationName * Css =
+    /// Creates the CSS for an animation based on a list of KeyframeAttributes
+    /// Returns a tuple containing 2 elements
+    /// The first element in the tuple is the name of the created animation. This is the value you use in your CSS.
+    /// The second element is the generated CSS for the animation.
+    let createAnimation (attributeList: KeyframeAttribute list) : AnimationName * Css =
         let framePositionToString frames =
             List.map (fun n -> $"{n}%%") frames
             |> String.concat ","
 
-        let foo = 
+        let animationStyles = 
             List.fold
                 (fun acc x ->
                     match x with
                     | Frame (n, rules) ->
-                        let _, rules = List.head <| fss rules
+                        let _, rules = List.head <| snd (createFss rules)
                         $"{acc} {n}%% {{ {rules} }}"
                     | Frames (ns, rules) ->
-                        let _, rules = List.head <| fss rules
+                        let _, rules = List.head <| snd (createFss rules)
                         let frameNumbers = framePositionToString ns
                         $"{acc} {frameNumbers} {{ {rules} }}")
                 ""
                 attributeList
 
-        $"animation-{FNV_1A.hash foo}", foo
+        $"animation-{FNV_1A.hash animationStyles}", animationStyles
 
     // Important
     let important (propertyName, propertyValue) =

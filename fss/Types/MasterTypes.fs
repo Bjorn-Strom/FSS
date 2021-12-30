@@ -2,24 +2,22 @@ namespace Fss
 // Interfaces
 namespace Fss.FssTypes
 
-type IStringify =
-    interface
-        abstract member Stringify : unit -> string
-    end
+open Fss.FssTypes
+
 
 type ICssValue =
-    interface
-        abstract member Stringify : unit -> string
+    interface 
+        abstract member StringifyCss : unit -> string
     end
 
 type ICounterValue =
     interface
-        abstract member Stringify : unit -> string
+        abstract member StringifyCounter : unit -> string
     end
 
 type IFontFaceValue =
     interface
-        abstract member Stringify : unit -> string
+        abstract member StringifyFontFace : unit -> string
     end
     
 [<AutoOpen>]
@@ -29,13 +27,13 @@ module MasterTypeHelpers =
         if cache.ContainsKey(cssValue) then
             cache[cssValue]
         else
-            let newValue = (cssValue :> ICssValue).Stringify()
+            let newValue = (cssValue :> ICssValue).StringifyCss()
             cache.Add(cssValue, newValue)
             newValue
     let internal stringifyICounterValue cssValue: string =
-        (cssValue :> ICounterValue).Stringify()
+        (cssValue :> ICounterValue).StringifyCounter()
     let internal stringifyIFontFaceValue cssValue: string =
-        (cssValue :> IFontFaceValue).Stringify()
+        (cssValue :> IFontFaceValue).StringifyFontFace()
 
 [<RequireQualifiedAccess>]
 module Property =
@@ -447,7 +445,7 @@ module Property =
         | Custom of string
         | Media
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 match this with
                 | Lang l -> $"lang({l})"
                 | NthChild n -> $"nth-child({n})"
@@ -464,65 +462,69 @@ module Property =
 type None' =
     | None'
     interface ICssValue with
-        member this.Stringify() = "none"
+        member this.StringifyCss() = "none"
 
 type Auto =
     | Auto
     interface IFontFaceValue with
-        member this.Stringify() = stringifyICssValue this
+        member this.StringifyFontFace() = stringifyICssValue this
 
     interface ICounterValue with
-        member this.Stringify() = stringifyICssValue this
+        member this.StringifyCounter() = stringifyICssValue this
 
     interface ICssValue with
-        member this.Stringify() = "auto"
+        member this.StringifyCss() = "auto"
 
 type Normal =
     | Normal
     interface ICssValue with
-        member this.Stringify() = "normal"
+        member this.StringifyCss() = "normal"
 
 type Float =
     | Float of float
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Float f -> string f
 
 type Int =
     | Int of int
     interface IFontFaceValue with
-        member this.Stringify() = stringifyICssValue this
+        member this.StringifyFontFace() = stringifyICssValue this
 
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Int i -> string i
 
 type Char =
     | Char of string
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Char c -> $"'{c}'"
 
 type String =
     | String of string
+    interface ICounterValue with
+        member this.StringifyCounter() = stringifyICssValue this
     interface IFontFaceValue with
-        member this.Stringify() = stringifyICssValue this
+        member this.StringifyFontFace() = stringifyICssValue this
 
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | String s -> s
 
 type Stringed =
     | Stringed of string
     interface IFontFaceValue with
-        member this.Stringify() = stringifyICssValue this
+        member this.StringifyFontFace() = stringifyICssValue this
+    interface ICounterValue with
+        member this.StringifyCounter() = stringifyICssValue this
 
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Stringed s -> $"\"{s}\""
 
@@ -532,7 +534,7 @@ type NameLabel =
         match this with
         | NameLabel n -> n
     interface ICssValue with
-        member this.Stringify() = this.Unwrap()
+        member this.StringifyCss() = this.Unwrap()
         
 type CssRule(property: Property.Property) =
     member this.value(keyword: Keywords) = (property, keyword) |> Rule
@@ -547,14 +549,14 @@ and Keywords =
     | Unset
     | Revert
     interface ICssValue with
-        member this.Stringify() = this.ToString().ToLower()
+        member this.StringifyCss() = this.ToString().ToLower()
 
 and Rule = Property.Property * ICssValue
         
 type Important =
     | Important of ICssValue
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Important value ->
                 $"{stringifyICssValue value} !important"
@@ -568,13 +570,13 @@ type Pseudo =
         | PseudoElement p -> p
 
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | PseudoClass ps ->
                 let ps =
                     ps
                     |> List.map
-                        (fun (name, property) -> $"{stringifyICssValue name}: {property.Stringify()}")
+                        (fun (name, property) -> $"{stringifyICssValue name}: {property.StringifyCss()}")
                     |> String.concat "; "
                     
                 $"{ps}"
@@ -582,7 +584,7 @@ type Pseudo =
                 let ps =
                     ps
                     |> List.map
-                        (fun (name, property) -> $"{stringifyICssValue name}: {property.Stringify()}")
+                        (fun (name, property) -> $"{stringifyICssValue name}: {property.StringifyCss()}")
                     |> String.concat "; "
 
                 $"{ps}"
@@ -593,13 +595,13 @@ type Combinator =
         match this with
         | Combinator c -> c
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Combinator ps ->
                 let ps =
                     ps
                     |> List.map
-                        (fun (name, property) -> $"{stringifyICssValue name}: {property.Stringify()};")
+                        (fun (name, property) -> $"{stringifyICssValue name}: {property.StringifyCss()};")
                     |> String.concat "; "
 
                 $"{ps}"
@@ -607,33 +609,33 @@ type Combinator =
 type Divider =
     | Divider of string * string
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Divider (a, b) -> $"{a} / {b}"
 
 type Url =
     | Url of string
     interface IFontFaceValue with
-        member this.Stringify() = (this :> ICssValue).Stringify()
+        member this.StringifyFontFace() = (this :> ICssValue).StringifyCss()
 
     interface ICounterValue with
-        member this.Stringify() = (this :> ICssValue).Stringify()
+        member this.StringifyCounter() = (this :> ICssValue).StringifyCss()
 
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Url u -> $"url({u})"
 
 type Custom =
     | Custom of string
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Custom value -> value
 type Path =
     | Path of string
     interface ICssValue with
-        member this.Stringify() =
+        member this.StringifyCss() =
             match this with
             | Path p -> $"path('{p}')"
 

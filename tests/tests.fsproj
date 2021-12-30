@@ -58,7 +58,7 @@
     <Content Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fss\Fss.fsproj" />
+    <ProjectReference Include="..\fss\Fss.Engine.fsproj" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

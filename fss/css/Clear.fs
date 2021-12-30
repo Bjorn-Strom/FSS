@@ -4,4 +4,4 @@ open Fss.FssTypes
 
 [<AutoOpen>]
 module Clear =
-    let Clear = Clear.ClearClasses.Clear(Property.Clear)
+    let Clear = ClearClasses.Clear(Property.Clear)

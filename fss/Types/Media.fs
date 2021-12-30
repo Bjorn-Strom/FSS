@@ -155,7 +155,7 @@ module Media =
     type MediaQuery =
         | MediaQuery of Feature list * Rule list
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 match this with
                 | MediaQuery (features, rules) ->
                     let features =
@@ -167,14 +167,14 @@ module Media =
                         rules
                         |> List.map
                             (fun (name, property) ->
-                                $"{Fss.Utilities.Helpers.toKebabCase name}: {property.Stringify()};")
+                                $"{Fss.Utilities.Helpers.toKebabCase name}: {property.StringifyCss()};")
                         |> String.concat ""
 
                     $"({features}) | {{ {rules} }}"
 
-    [<RequireQualifiedAccess>]
-    module MediaClasses =
-        type Media() =
-            member this.query (features: Feature list) (rules: Rule list) =
-                (Property.Media, MediaQuery(features, rules))
-                |> Rule
+[<RequireQualifiedAccess>]
+module MediaClasses =
+    type Media() =
+        member this.query (features: Media.Feature list) (rules: Rule list) =
+            (Property.Media, Media.MediaQuery(features, rules))
+            |> Rule

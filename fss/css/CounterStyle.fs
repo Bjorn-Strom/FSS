@@ -4,31 +4,31 @@ open Fss.FssTypes
 
 [<AutoOpen>]
 module Counter =
-    let System = Counter.CounterClasses.SystemClass()
-    let Negative = Counter.CounterClasses.NegativeClass()
+    let System = CounterClasses.SystemClass()
+    let Negative = CounterClasses.NegativeClass()
 
     let Prefix =
-        Counter.CounterClasses.FixClass(CounterProperty.Prefix)
+        CounterClasses.FixClass(CounterProperty.Prefix)
 
     let Suffix =
-        Counter.CounterClasses.FixClass(CounterProperty.Suffix)
+        CounterClasses.FixClass(CounterProperty.Suffix)
 
-    let Range = Counter.CounterClasses.RangeClass()
-    let Pad = Counter.CounterClasses.PadClass()
-    let Symbols = Counter.CounterClasses.SymbolsClass()
+    let Range = CounterClasses.RangeClass()
+    let Pad = CounterClasses.PadClass()
+    let Symbols = CounterClasses.SymbolsClass()
 
     let AdditiveSymbols =
-        Counter.CounterClasses.AdditiveSymbolsClass()
+        CounterClasses.AdditiveSymbolsClass()
 
-    let SpeakAs = Counter.CounterClasses.SpeakAsClass()
-    let Fallback = Counter.CounterClasses.FallbackClass()
+    let SpeakAs = CounterClasses.SpeakAsClass()
+    let Fallback = CounterClasses.FallbackClass()
 
     /// Resets a given counter to a given value
     let CounterReset =
-        Counter.CounterClasses.CounterReset(Property.CounterReset)
+        CounterClasses.CounterReset(Property.CounterReset)
     /// Sets a given counter to a given value
     let CounterSet =
-        Counter.CounterClasses.CounterSet(Property.CounterSet)
+        CounterClasses.CounterSet(Property.CounterSet)
     /// Increases or decreases the value of a counter
     let CounterIncrement =
-        Counter.CounterClasses.CounterIncrement(Property.CounterIncrement)
+        CounterClasses.CounterIncrement(Property.CounterIncrement)

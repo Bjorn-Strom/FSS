@@ -5,11 +5,8 @@ open Fss.FssTypes
 [<AutoOpen>]
 module Table =
     /// Specifies which side the caption of a table will be.
-    let CaptionSide =
-        Table.TableClasses.CaptionSide(Property.CaptionSide)
+    let CaptionSide = TableClasses.CaptionSide(Property.CaptionSide)
     /// Specifies whether or not empty cells should have borders.
-    let EmptyCells =
-        Table.TableClasses.EmptyCells(Property.EmptyCells)
+    let EmptyCells = TableClasses.EmptyCells(Property.EmptyCells)
     /// Specifies table layout.
-    let TableLayout =
-        Table.TableClasses.TableLayout(Property.TableLayout)
+    let TableLayout = TableClasses.TableLayout(Property.TableLayout)

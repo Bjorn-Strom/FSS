@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "tests", "tests\tests.fsproj", "{1AC81F00-59B2-49D9-968D-4532AFA67657}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss", "fss\Fss.fsproj", "{A4AD8879-B995-4D9A-851E-A6E59829C89A}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss.Engine", "fss\Fss.Engine.fsproj", "{A4AD8879-B995-4D9A-851E-A6E59829C89A}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Docs", "docs\Docs.fsproj", "{35435E48-AE57-46EE-8729-12D96F418675}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FssFeliz", "FssFeliz\FssFeliz.fsproj", "{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss.Feliz", "Fss.Feliz\Fss.Feliz.fsproj", "{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss.Fable", "Fss.Fable\Fss.Fable.fsproj", "{F88AD983-4E04-4F48-B68F-34E37B528FC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,5 +74,17 @@ Global
 		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Release|x64.Build.0 = Release|Any CPU
 		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Release|x86.ActiveCfg = Release|Any CPU
 		{406A5BA1-F65D-4FFD-AD75-AA0D0DCCE7C1}.Release|x86.Build.0 = Release|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Debug|x64.Build.0 = Debug|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Debug|x86.Build.0 = Debug|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Release|x64.ActiveCfg = Release|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Release|x64.Build.0 = Release|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Release|x86.ActiveCfg = Release|Any CPU
+		{F88AD983-4E04-4F48-B68F-34E37B528FC2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

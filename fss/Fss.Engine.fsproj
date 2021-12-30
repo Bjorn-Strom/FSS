@@ -1,16 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>A way to write your styling in FSS. Built atop Emotion-js to provide a typed CSS solution for F#</Description>
+    <Description>A way to write staticly-safe styling in Dotnet.</Description>
     <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
-    <PackageTags>fsharp;fss;emotion;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
+    <PackageTags>fsharp;fss;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>2.0.5</Version>
+    <Version>0.0.1</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AssemblyName>Fss-lib</AssemblyName>
-    <PackageReleaseNotes>Add missing fontfamily member in font face.</PackageReleaseNotes>
+    <AssemblyName>Fss.Engine</AssemblyName>
+    <PackageReleaseNotes>Library release.</PackageReleaseNotes>
+    <RootNamespace>Fss</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utilities.fs" />
@@ -74,7 +75,6 @@
     <Compile Include="css\Margin.fs" />
     <Compile Include="css\Padding.fs" />
     <Compile Include="css\Animation.fs" />
-    <Compile Include="css\TimingFunction.fs" />
     <Compile Include="css\Background.fs" />
     <Compile Include="css\Cursor.fs" />
     <Compile Include="css\Grid.fs" />

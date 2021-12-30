@@ -7,12 +7,12 @@ module Scroll =
     type ScrollBehavior =
         | Smooth
         interface ICssValue with
-            member this.Stringify() = "smooth"
+            member this.StringifyCss() = "smooth"
 
     type OverscrollBehavior =
         | Contain
         interface ICssValue with
-            member this.Stringify() = "contain"
+            member this.StringifyCss() = "contain"
 
     type SnapType =
         | X
@@ -21,13 +21,13 @@ module Scroll =
         | Inline
         | Both
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
     type Viewport =
         | Mandatory of SnapType
         | Proximity of SnapType
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 match this with
                 | Mandatory s -> $"{stringifyICssValue s} mandatory"
                 | Proximity s -> $"{stringifyICssValue s} proximity"
@@ -38,7 +38,7 @@ module Scroll =
         | Center
         | Double of SnapAlign * SnapAlign
         interface ICssValue with
-            member this.Stringify() =
+            member this.StringifyCss() =
                 match this with
                 | Double (first, second) -> $"{stringifyICssValue first} {stringifyICssValue second}"
                 | _ -> this.ToString().ToLower()
@@ -47,59 +47,59 @@ module Scroll =
         | Normal
         | Always
         interface ICssValue with
-            member this.Stringify() = this.ToString().ToLower()
+            member this.StringifyCss() = this.ToString().ToLower()
 
-    [<RequireQualifiedAccess>]
-    module ScrollClasses =
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
-        type ScrollBehavior(property) =
-            inherit CssRuleWithAuto(property)
-            member this.smooth = (property, Smooth) |> Rule
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
-        type ScrollMargin(property) =
-            inherit DirectionalLength(property)
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
-        type ScrollMarginDirection(property) =
-            inherit CssRuleWithLength(property)
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
-        type ScrollPadding(property) =
-            inherit DirectionalLength(property)
-            member this.auto = (property, Auto)
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
-        type ScrollPaddingDirection(property) =
-            inherit CssRuleWithLength(property)
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
-        type OverScrollBehavior(property) =
-            inherit CssRuleWithAutoNone(property)
-            member this.contain = (property, Contain) |> Rule
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type
-        type ScrollSnapType(property) =
-            inherit CssRuleWithNone(property)
-            member this.x = (property, X) |> Rule
-            member this.y = (property, Y) |> Rule
-            member this.block = (property, Block) |> Rule
-            member this.inline' = (property, Inline) |> Rule
-            member this.both = (property, Both) |> Rule
-            member this.mandatory(snapType: SnapType) = (property, Mandatory snapType) |> Rule
-            member this.proximity(snapType: SnapType) = (property, Proximity snapType) |> Rule
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align
-        type ScrollSnapAlign(property) =
-            inherit CssRuleWithNone(property)
+[<RequireQualifiedAccess>]
+module ScrollClasses =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
+    type ScrollBehavior(property) =
+        inherit CssRuleWithAuto(property)
+        member this.smooth = (property, Scroll.Smooth) |> Rule
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
+    type ScrollMargin(property) =
+        inherit DirectionalLength(property)
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
+    type ScrollMarginDirection(property) =
+        inherit CssRuleWithLength(property)
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
+    type ScrollPadding(property) =
+        inherit DirectionalLength(property)
+        member this.auto = (property, Auto)
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
+    type ScrollPaddingDirection(property) =
+        inherit CssRuleWithLength(property)
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
+    type OverScrollBehavior(property) =
+        inherit CssRuleWithAutoNone(property)
+        member this.contain = (property, Scroll.Contain) |> Rule
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type
+    type ScrollSnapType(property) =
+        inherit CssRuleWithNone(property)
+        member this.x = (property, Scroll.X) |> Rule
+        member this.y = (property, Scroll.Y) |> Rule
+        member this.block = (property, Scroll.Block) |> Rule
+        member this.inline' = (property, Scroll.Inline) |> Rule
+        member this.both = (property, Scroll.Both) |> Rule
+        member this.mandatory(snapType: Scroll.SnapType) = (property, Scroll.Mandatory snapType) |> Rule
+        member this.proximity(snapType: Scroll.SnapType) = (property, Scroll.Proximity snapType) |> Rule
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align
+    type ScrollSnapAlign(property) =
+        inherit CssRuleWithNone(property)
 
-            member this.value(first: SnapAlign, second: SnapAlign) =
-                (property, Double(first, second)) |> Rule
+        member this.value(first: Scroll.SnapAlign, second: Scroll.SnapAlign) =
+            (property, Scroll.Double(first, second)) |> Rule
 
-            member this.start = (property, Start) |> Rule
-            member this.end' = (property, End) |> Rule
-            member this.center = (property, Center) |> Rule
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop
-        type ScrollSnapStop(property) =
-            inherit CssRuleWithNormal(property)
-            member this.always = (property, Always) |> Rule
+        member this.start = (property, Scroll.Start) |> Rule
+        member this.end' = (property, Scroll.End) |> Rule
+        member this.center = (property, Scroll.Center) |> Rule
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop
+    type ScrollSnapStop(property) =
+        inherit CssRuleWithNormal(property)
+        member this.always = (property, Scroll.Always) |> Rule

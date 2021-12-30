@@ -6,7 +6,7 @@ open Fss
 
 module Content =
     let counterName, counterStyle =
-        counterStyle [
+        createCounterStyle [
             System.symbolic
         ]
 

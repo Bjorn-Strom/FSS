@@ -72,6 +72,33 @@ NUGET
   remote: https://www.nuget.org/api/v2
     FSharp.Core (6.0.1)
 
+GROUP FssFable
+RESTRICTION: == netstandard2.0
+NUGET
+  remote: https://www.nuget.org/api/v2
+    Fable.Browser.Blob (1.1.4)
+      Fable.Core (>= 3.0)
+      FSharp.Core (>= 4.7.2)
+    Fable.Browser.Dom (2.8)
+      Fable.Browser.Blob (>= 1.1.4)
+      Fable.Browser.Event (>= 1.4.6)
+      Fable.Browser.WebStorage (>= 1.0.4)
+      Fable.Core (>= 3.2.8)
+      FSharp.Core (>= 4.7.2)
+    Fable.Browser.Event (1.4.6)
+      Fable.Browser.Gamepad (>= 1.0.3)
+      Fable.Core (>= 3.0)
+      FSharp.Core (>= 4.7.2)
+    Fable.Browser.Gamepad (1.0.3)
+      Fable.Core (>= 3.0)
+      FSharp.Core (>= 4.7.2)
+    Fable.Browser.WebStorage (1.0.4)
+      Fable.Browser.Event (>= 1.4.4)
+      Fable.Core (>= 3.0)
+      FSharp.Core (>= 4.7.2)
+    Fable.Core (3.6.1)
+    FSharp.Core (6.0.1)
+
 GROUP FssFeliz
 RESTRICTION: == netstandard2.0
 NUGET
