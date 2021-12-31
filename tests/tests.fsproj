@@ -55,6 +55,7 @@
     <Compile Include="Svg.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Composite.fs" />
+    <Compile Include="Selector.fs" />
     <Compile Include="Tests.fs" />
     <Content Include="paket.references" />
   </ItemGroup>

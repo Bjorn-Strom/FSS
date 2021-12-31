@@ -52,12 +52,12 @@ module Composite =
                     Label "title"
                   ]
     let composition =
-        ([$"@counter-style {fst counter} {{ {snd counter} }}"
-          $"@font-face {{ {snd font} }}"
-          yield! List.map (fun x -> $"{fst x} {{ {snd x} }}") (snd counterStyle)
-          yield! List.map (fun x -> $"{fst x} {{ {snd x} }}") (snd container)
-          $"@keyframes {fst spinimation} {{ {snd spinimation} }}"
-          yield! List.map (fun x -> $"{fst x} {{ {snd x} }}") (snd title)
+        ([$"@counter-style {fst counter} {snd counter}"
+          $"@font-face {snd font}"
+          yield! List.map (fun x -> $"{fst x} {snd x}") (snd counterStyle)
+          yield! List.map (fun x -> $"{fst x} {snd x}") (snd container)
+          $"@keyframes {fst spinimation} {snd spinimation}"
+          yield! List.map (fun x -> $"{fst x} {snd x}") (snd title)
         ]
         |> String.concat "").Replace(" ", "").Replace("\n", "")
         
@@ -124,5 +124,5 @@ module Composite =
                testCase
                    "Important"
                    [ important Color.red ]
-                   "color: red !important;"
+                   "{ color: red !important; }"
            ]

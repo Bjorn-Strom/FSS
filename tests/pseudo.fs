@@ -6,111 +6,144 @@ open Fss
 
 module Psuedo =
      let styles = [ Color.red ]
+     let createPseudoTest (ruleList: FssTypes.Rule list) =
+         let _, styles = createFss ruleList
+         let className = fst (styles |> List.tail |> List.head)
+         let styles = snd (styles |> List.tail |> List.head)
+         
+         className, $"{className} {styles}"
+         
      let tests =
         testList "Psuedo"
             [
-                testPseudoCase
+                let classname, actual = createPseudoTest [ Active styles ]
+                testEqual
                     "Active"
-                    [ Active styles ]
-                    (".css-0:active", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ AnyLink styles ]
+                testEqual
                     "AnyLink"
-                    [ AnyLink styles ]
-                    (".css-0:any-link", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Blank styles ]
+                testEqual
                     "Blank"
-                    [ Blank styles ]
-                    (".css-0:blank", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Checked styles ]
+                testEqual
                     "Checked"
-                    [ Checked styles ]
-                    (".css-0:checked", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Current styles ]
+                testEqual
                     "Current"
-                    [ Current styles ]
-                    (".css-0:current", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Disabled styles ]
+                testEqual
                     "Disabled"
-                    [ Disabled styles ]
-                    (".css-0:disabled", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Empty styles ]
+                testEqual
                     "Empty"
-                    [ Empty styles ]
-                    (".css-0:empty", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Enabled styles ]
+                testEqual
                     "Enabled"
-                    [ Enabled styles ]
-                    (".css-0:enabled", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ FirstOfType styles ]
+                testEqual
                     "FirstOfType"
-                    [ FirstOfType styles ]
-                    (".css-0:first-of-type", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Focus styles ]
+                testEqual
                     "Focus"
-                    [ Focus styles ]
-                    (".css-0:focus", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ FocusVisible styles ]
+                testEqual
                     "FocusVisible"
-                    [ FocusVisible styles ]
-                    (".css-0:focus-visible", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ FocusWithin styles ]
+                testEqual
                     "FocusWithin"
-                    [ FocusWithin styles ]
-                    (".css-0:focus-within", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Future styles ]
+                testEqual
                     "Future"
-                    [ Future styles ]
-                    (".css-0:future", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Hover styles ]
+                testEqual
                     "Hover"
-                    [ Hover styles ]
-                    (".css-0:hover", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Future styles ]
+                testEqual
                     "Future"
-                    [ Future styles ]
-                    (".css-0:future", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ After styles ]
+                testEqual
                     "After"
-                    [ After styles ]
-                    (".css-0::after", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Before styles ]
+                testEqual
                     "Before"
-                    [ Before styles ]
-                    (".css-0::before", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ FirstLetter styles ]
+                testEqual
                     "FirstLetter"
-                    [ FirstLetter styles ]
-                    (".css-0::first-letter", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ FirstLine styles ]
+                testEqual
                     "FirstLine"
-                    [ FirstLine styles ]
-                    (".css-0::first-line", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Selection styles ]
+                testEqual
                     "Selection"
-                    [ Selection styles ]
-                    (".css-0::selection", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Marker styles ]
+                testEqual
                     "Marker"
-                    [ Marker styles ]
-                    (".css-0::marker", "color: red;")
-                testPseudoCase
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Lang("en") styles ]
+                testEqual
                     "Lang en"
-                    [ Lang "en" styles ]
-                    (".css-0:lang(en)", "color: red;")
-                testPseudoCase
-                    "Nth child"
-                    [ NthChild "4n" styles ]
-                    (".css-0:nth-child(4n)", "color: red;")
-                testPseudoCase
-                    "Nth last child"
-                    [ NthLastChild "4n" styles ]
-                    (".css-0:nth-last-child(4n)", "color: red;")
-                testPseudoCase
-                    "Nth of-type"
-                    [ NthOfType "4n" styles ]
-                    (".css-0:nth-of-type(4n)", "color: red;")
-                testPseudoCase
-                    "Nth last of-type"
-                    [ NthLastOfType "4n" styles ]
-                    (".css-0:nth-last-of-type(4n)", "color: red;")
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ NthChild "4" styles ]
+                testEqual
+                    "Nth child 4"
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ NthLastChild "4" styles ]
+                testEqual
+                    "Nth last child 4"
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ NthOfType "4" styles ]
+                testEqual
+                    "Nth of type 4"
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ NthLastOfType "4" styles ]
+                testEqual
+                    "Nth last of type 4"
+                    actual
+                    $"{classname} {{ color: red; }}"
             ]

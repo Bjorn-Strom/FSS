@@ -29,6 +29,9 @@ module Functions =
         | :? NameLabel as _ -> true
         | _ -> false
         
+    let private addBrackets string =
+        $"{{ {string} }}"
+        
     let private collectClasses (classes: (string * string) list) =
         let collection = System.Collections.Generic.Dictionary<string, string list>()
         classes
@@ -40,14 +43,12 @@ module Functions =
         collection
         |> Seq.toList
         |> List.map (fun x -> x.Key, String.concat "" x.Value)
-        
-    let private addBrackets string =
-        $"{{ {string} }}"
+        |> List.map (fun (k, v) -> k, $"{addBrackets v}" )
         
     let private createMainCss (propertyName, propertyValue) =
         $"{stringifyICssValue propertyName}: {stringifyICssValue propertyValue};"
         
-    let private createPseudoCss (propertyName: ICssValue, propertyValue: ICssValue) =
+    let private createPseudoCssForCombinator (propertyName: ICssValue, propertyValue: ICssValue) =
         let colons =
             match propertyValue with
             | :? Pseudo as p ->
@@ -58,11 +59,26 @@ module Functions =
             
         $"{colons}{stringifyICssValue propertyName}", $"{stringifyICssValue propertyValue};"
         
+    let private createPseudoCss (propertyName: ICssValue, propertyValue: ICssValue) =
+        let colons =
+            match propertyValue with
+            | :? Pseudo as p ->
+                match p with
+                | PseudoClass _ -> ":"
+                | PseudoElement _ -> "::"
+            | _ -> ""
+            
+        $"{colons}{stringifyICssValue propertyName}", $"{{ {stringifyICssValue propertyValue}; }}"
+        
     let private createMediaCss (_, propertyValue) =
         let splitMedia = $"{stringifyICssValue propertyValue};".Split '|'
         $"@media {splitMedia[0]}", $"{splitMedia[1]}"
         
     // TODO: Media queries på combinators/pseudo er nok fucked
+    // TODO: Combinators er fucked
+    // TODO: Counter dokumentasjon side funker ikke helt som den skal
+    // TODO: FUnker media queries i global styles?
+    // TODO: Media queries MED pseudo funker ikke
     let private createCombinatorCss className (propertyName, propertyValue: ICssValue): (string * string) list =
         let propertyValue = (propertyValue :?> Combinator).Unwrap()
         
@@ -72,7 +88,7 @@ module Functions =
             |> List.map (fun x -> $"{stringifyICssValue propertyName}", x)
         let pseudoProperties =
             List.filter isPseudo propertyValue
-            |> List.map createPseudoCss
+            |> List.map createPseudoCssForCombinator
             |> List.map (fun (p, s) -> $"{stringifyICssValue propertyName}{p}", s)
         let mediaProperties =
             List.filter isMedia propertyValue
@@ -96,6 +112,7 @@ module Functions =
             List.filter (isSecondary >> not) properties
             |> List.map createMainCss
             |> String.concat ""
+            |> addBrackets
         let className =
             match name with
             | Some n -> n
@@ -115,7 +132,7 @@ module Functions =
         let mediaProperties =
             List.filter isMedia properties
             |> List.map createMediaCss
-            |> List.map (fun (m, s) -> m, $"{className} {s}")
+            |> List.map (fun (m, s) -> m, addBrackets $"{className} {s}")
         let combinatorProperties =
             List.filter isCombinator properties
             |> List.collect (createCombinatorCss className)
@@ -151,10 +168,10 @@ module Functions =
 
         let properties =
             List.map stringifyCounterProperty properties
-            |> String.concat "\n"
+            |> String.concat ""
         let counterName = $"counter-{FNV_1A.hash properties}"
 
-        counterName, properties
+        counterName, addBrackets properties 
            
     let private stringifyFontFaceProperty (property: FontFaceRule) =
         let propertyName, propertyValue = property
@@ -169,9 +186,23 @@ module Functions =
         let properties = [ FontFace.FontFamily.string name ] @ properties
         let properties =
             List.map stringifyFontFaceProperty properties
-            |> String.concat "\n"
+            |> String.concat ""
         
-        name, properties
+        name, addBrackets properties
+        
+    /// Creates the CSS for several font faces based on FontFace rules
+    /// Returns a tuple containing 2 elements
+    /// The first element in the tuple is the name of the created font. This is the value you use in your CSS.
+    /// The second element is the generated CSS for the font face.
+    let createFontFaces (name: string) (properties: FontFaceRule list list) : FontName * FontFaceStyle =
+        let fontFace = List.map (fun ruleList -> createFontFace name ruleList) properties
+        let fontName = fst <| List.head fontFace
+        let fontFaceString =
+                fontFace
+                |> List.map (fun (_, x) -> x)
+                |> String.concat "\n"
+                
+        fontName, fontFaceString
         
     /// Creates the CSS for an animation based on a list of KeyframeAttributes
     /// Returns a tuple containing 2 elements
@@ -188,15 +219,15 @@ module Functions =
                     match x with
                     | Frame (n, rules) ->
                         let _, rules = List.head <| snd (createFss rules)
-                        $"{acc} {n}%% {{ {rules} }}"
+                        $"{acc} {n}%% {rules}"
                     | Frames (ns, rules) ->
                         let _, rules = List.head <| snd (createFss rules)
                         let frameNumbers = framePositionToString ns
-                        $"{acc} {frameNumbers} {{ {rules} }}")
+                        $"{acc} {frameNumbers} {rules}")
                 ""
                 attributeList
 
-        $"animation-{FNV_1A.hash animationStyles}", animationStyles
+        $"animation-{FNV_1A.hash animationStyles}", addBrackets animationStyles
 
     // Important
     let important (propertyName, propertyValue) =

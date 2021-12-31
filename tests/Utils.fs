@@ -21,24 +21,22 @@ module Utils =
     let internal toKebabCase (x: 'a) = x.ToString() |> toLowerAndCombine "-"
     let internal toSpacedCase (x: 'a) = x.ToString() |> toLowerAndCombine " "
     
-    let internal stringifyFontFaceProperty (property: FontFaceRule) =
-        let propertyName, propertyValue = property
-
-        $"{toKebabCase <| propertyName.ToString()}: {propertyValue.StringifyFontFace()};"
-        
-    let test_fontFace (properties: FontFaceRule list) : FontName * FontFaceStyle =
-        let fontName = "@font-face"
-        let properties =
-            List.map stringifyFontFaceProperty properties
-            |> String.concat "\n"
-        
-        fontName, properties
-    
+    let testEqual (testName: string) (actual: string) (correct: string) =
+        test testName <| fun _ ->
+            Expect.equal actual correct
     
     let testCase (testName: string) (ruleList: Rule list) (correct: string) =
         let _, actual =  List.head <| snd (createFss ruleList)
         test testName <| fun _ ->
             Expect.equal actual correct
+            
+    let testSelectorCase (testName: string) (ruleList: Rule list) (correct: string) =
+        let className, css =
+            snd (createFss ruleList)
+            |> List.rev
+            |> List.head
+        test testName <| fun _ ->
+            Expect.equal $"{className} {css}" correct
             
     let testPseudoCase (testName: string) (ruleList: Rule list) (correct: string * string) =
         let actual =
@@ -55,22 +53,6 @@ module Utils =
             Expect.equal actual correct
             
     let testFontCase (testName: string) (ruleList: FontFaceRule list) (correct: string) =
-        let (_, actual) = test_fontFace ruleList
+        let (_, actual) = createFontFace "" ruleList
         test testName <| fun _ ->
             Expect.equal actual correct
-            
-    let testMediaCase (testName: string) (featureList: Media.Feature list) (ruleList: Rule list) (correct: string) =
-        let (media, actual) =
-            snd (createFss [ Media.query featureList ruleList ])
-            |> List.rev
-            |> List.head
-        test testName <| fun _ ->
-            Expect.equal $"{media}{actual}" correct
-            
-    let testMediaForCase (testName: string) devices (featureList: Media.Feature list) (ruleList: Rule list) (correct: string) =
-        let (media, actual) =
-            snd (createFss [ Media.queryFor devices featureList ruleList ])
-            |> List.rev
-            |> List.head
-        test testName <| fun _ ->
-            Expect.equal $"{media}{actual}" correct

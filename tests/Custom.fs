@@ -11,5 +11,5 @@ module Custom =
                 testCase
                     "Can set custom border"
                     [Custom "border" "4mm ridge rgba(170, 50, 220, .6)"]
-                    "border: 4mm ridge rgba(170, 50, 220, .6);"
+                    "{ border: 4mm ridge rgba(170, 50, 220, .6); }"
             ]

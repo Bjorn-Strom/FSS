@@ -383,12 +383,12 @@ module App =
                                       Color.orangeRed
                                   ]
 
-                                  //                                  MediaQueryFor
-//                                      FssTypes.Media.Print
-//                                      []
-//                                      [ MarginTop'(px 200)
-//                                        Transforms [ Transform.rotate (deg 45.0) ]
-//                                        BackgroundColor.red ]
+                                  Media.queryFor
+                                      FssTypes.Media.Print
+                                      []
+                                      [ MarginTop.value (px 200)
+                                        Transform.value [ Transform.rotate (deg 45.0) ]
+                                        BackgroundColor.red ]
 
                                   Media.query [ FssTypes.Media.Orientation FssTypes.Media.Landscape ] [
                                       Color.green
@@ -537,69 +537,50 @@ module App =
                                   FontFamily.value "Amatic SC"
                                   FontSize.value (px 24) ]
 
-                        //                        let droidSerifFont =
-//                            // TODO: Implementer og test
-//                            fontFaces
-//                                "DroidSerif"
-//                                [ [ FontFace.source
-//                                    <| FssTypes.FontFace.UrlFormat(
-//                                        "https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf",
-//                                        FssTypes.FontFace.Truetype
-//                                    )
-//                                    FontFace.weight FssTypes.Font.Bold
-//                                    FontFace.style FssTypes.Normal ]
-//                                  [ FontFace.source
-//                                    <| FssTypes.FontFace.UrlFormat(
-//                                        "https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf",
-//                                        FssTypes.FontFace.Truetype
-//                                    )
-//                                    FontFace.weight FssTypes.Normal
-//                                    FontFace.style FssTypes.Normal ] ]
+                        let droidSerifFont =
+                            fontFaces
+                                "DroidSerif"
+                                [ [ FontFace.Src.truetype("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf")
+                                    FontFace.FontWeight.bold
+                                    FontFace.FontStyle.normal ]
+                                  [ FontFace.Src.truetype("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf")
+                                    FontFace.FontWeight.normal
+                                    FontFace.FontStyle.normal ] ]
 
-                        //                        let modernaFont =
-//                            fontFace
-//                                "moderna"
-//                                // TODO: Implementer og test
-//                                [ FontFace.sources [ FssTypes.FontFace.UrlFormat(
-//                                                         "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2",
-//                                                         FssTypes.FontFace.Woff2
-//                                                     )
-//                                                     FssTypes.FontFace.UrlFormat(
-//                                                         "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff",
-//                                                         FssTypes.FontFace.Woff
-//                                                     )
-//                                                     FssTypes.FontFace.UrlFormat(
-//                                                         "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf",
-//                                                         FssTypes.FontFace.Truetype
-//                                                     )
-//                                                     FssTypes.FontFace.UrlFormat(
-//                                                         "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg",
-//                                                         FssTypes.FontFace.Svg
-//                                                     ) ]
-//                                  FontFace.FontWeight.normal
-//                                  FontFace.FontStyle.normal ]
+                        let modernaFont =
+                            fontFace
+                                "moderna"
+                                [ FontFace.Src.sources
+                                      [ FssTypes.FontFace.Woff2 "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2"
+                                        FssTypes.FontFace.Woff "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff"
+                                        FssTypes.FontFace.Truetype "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf"
+                                        FssTypes.FontFace.Svg "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg" ]
+                                  FontFace.FontWeight.normal
+                                  FontFace.FontStyle.normal ]
 
-                        //                        let droidSerif =
-//                            fss [ Label "Droid Serif"
-//                                  FontFamily.value droidSerifFont ]
-//
-//                        let droidSerifBold =
-//                            fss [ Label "Droid Serif Bold"
-//                                  FontFamily.value droidSerifFont
-//                                  FontWeight.bold ]
-//
-//                        let moderna =
-//                            fss [ Label "Moderna"
-//                                  FontFamily.value modernaFont ]
-//
+                        let droidSerif =
+                            fss [ Label "Droid Serif"
+                                  FontFamily.value droidSerifFont ]
+
+                        let droidSerifBold =
+                            fss [ Label "Droid Serif Bold"
+                                  FontFamily.value droidSerifFont
+                                  FontWeight.bold ]
+
+                        let moderna =
+                            fss [ Label "Moderna"
+                                  FontFamily.value modernaFont ]
+
                         Some [ Html.p [ prop.className amaticStyle
                                         prop.text "This font is Amatic SC, some nice text this huh?" ]
-                               Html.div [ Html.p [ prop.text //prop.className droidSerif
-                                                       "Droid serif" ]
-                                          Html.p [ prop.text //prop.className droidSerifBold
-                                                       "Droid serif bold" ]
-                                          Html.p [ prop.text //prop.className moderna
-                                                       "Moderna" ] ] ]
+                               Html.div [ Html.p [ prop.text "Droid serif"
+                                                   prop.className droidSerif ]
+                                          Html.p [ prop.text "Droid serif bold"
+                                                   prop.className droidSerifBold
+                                                    ]
+                                          Html.p [ prop.text "Moderna"
+                                                   prop.className moderna
+                                                    ] ] ]
 
                     | BackgroundImages ->
                         let box =
@@ -935,104 +916,3 @@ module App =
 
     open Browser.Dom
     ReactDOM.render (StoreProvider <| App(), document.getElementById "app")
-
-
-//    let emojiCounterStle =
-//        counterStyle [ System.cyclic
-//                       Symbols.value [ "❤️"
-//                                       "✨"
-//                                       "🔥"
-//                                       "😊"
-//                                       "😂"
-//                                       "🥺"
-//                                       "❤️‍🔥"
-//                                       "👍"
-//                                       "🥰"
-//                                       "🐻"
-//                                       "🍔"
-//                                       "⚽"
-//                                       "💨"
-//                                       "🎨"
-//                                       " 🐶"; ]
-//                       Suffix.value " "
-//                       Prefix.value " " ]
-//
-//    let font =
-//        fontFace
-//            "DroidSerif"
-//            [ FontFace.Src.truetype "https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf"
-//              FontFace.FontWeight.value 100
-//              FontFace.FontStyle.normal ]
-//
-//    let emojiCounter =
-//        fss [ ListStyleType.value emojiCounterStyle
-//              FontFamily.value font
-//              ! FssTypes.Html.Li [ After [ Content.value "."  ]]
-//              ! FssTypes.Html.Li [
-//                  BackgroundColor.aliceBlue
-//                  Hover [ BackgroundColor.orangeRed ]
-//              ]
-//              Label "counter"
-//              ]
-//
-//    let container =
-//        fss [ Display.flex
-//              FlexDirection.column
-//              AlignItems.center
-//              JustifyContent.center
-//              Label "container" ]
-//
-//    let spinimation =
-//        keyframes [ frame 0 [ Custom "transform" "rotate(0deg)" ]
-//                    frame 100 [ Custom "transform" "rotate(360deg)" ] ]
-//
-//    let title =
-//        fss [ AnimationName.value spinimation
-//              AnimationDuration.value (sec 1)
-//              AnimationIterationCount.infinite
-//              FontFamily.value "DroidSerif"
-//              Hover [ AnimationDuration.value (ms 500) ]
-//              Media.query [ FssTypes.Media.MaxWidth(px 600) ] [
-//                  BackgroundColor.orangeRed
-//              ]
-//              Label "title"
-//            ]
-//
-//    open Browser.Dom
-//    [<ReactComponent>]
-//    let App () =
-//        Html.div [
-//            prop.className container
-//            prop.children [
-//                Html.p [
-//                    prop.className title
-//                    prop.text "Spin"
-//                ]
-//                Html.ul [
-//                    prop.className emojiCounter
-//                    prop.children [
-//                        Html.li "Monday"
-//                        Html.li "Tuesday"
-//                        Html.li "Wedesday"
-//                        Html.li "Thursday"
-//                        Html.li "Friday"
-//                        Html.li "Saturday"
-//                        Html.li "Sunday"
-//                        Html.li "January"
-//                        Html.li "February"
-//                        Html.li "March"
-//                        Html.li "April"
-//                        Html.li "May"
-//                        Html.li "June"
-//                        Html.li "July"
-//                        Html.li "August"
-//                        Html.li "September"
-//                        Html.li "October"
-//                        Html.li "November"
-//                        Html.li "December"
-//                    ]
-//                ]
-//            ]
-//        ]
-//
-//    ReactDOM.render (App(), document.getElementById "app")

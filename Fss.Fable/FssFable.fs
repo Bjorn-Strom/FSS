@@ -9,7 +9,7 @@ open Fss
 [<AutoOpen>]
 module Fss =
     let private processCssRule (name: string, rule: string) =
-        $"{name} {{ {rule} }}"
+        $"{name} {rule}"
         
         
     /// Injects the css into the dom
@@ -46,7 +46,7 @@ module Fss =
         |> injectCss "*"
         
     let private processCounterRules (name: string) (rules: string) =
-        $"@counter-style {name} {{ {rules} }}"
+        $"@counter-style {name} {rules}"
         
         
     /// Injects counter style into dom and returns the counter name
@@ -60,9 +60,19 @@ module Fss =
         counterName
         
     let private processFontFaceRules (rules: string) =
-        $"@font-face {{ {rules} }}"
+        $"@font-face {rules}"
         
-    /// Injects counter style into dom and returns the counter name
+    /// Injects font face into dom and returns the font name
+    let fontFaces name (properties: Fss.FssTypes.FontFaceRule list list): string =
+        let fontName, fontStyles =
+            properties
+            |> createFontFaces name
+            
+        injectCss fontName <| processFontFaceRules fontStyles
+        
+        fontName
+        
+    /// Injects font face into dom and returns the font name
     let fontFace name (properties: Fss.FssTypes.FontFaceRule list): string =
         let fontName, fontStyles =
             properties
@@ -73,7 +83,7 @@ module Fss =
         fontName
         
     let private processAnimationRules name (rules: string) =
-        $"@keyframes {name} {{ {rules} }}"
+        $"@keyframes {name} {rules}"
         
     /// Injects keyframes into dom and returns the counter name
     let keyframes (properties: KeyframeAttribute list): string =

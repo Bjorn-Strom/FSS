@@ -170,7 +170,7 @@ module Media =
                 | MediaQuery (features, rules) ->
                     let features =
                         features
-                        |> List.map (fun x -> x.ToString())
+                        |> List.map (fun x -> $"({x.ToString()})")
                         |> String.concat " and "
 
                     let rules =
@@ -180,7 +180,7 @@ module Media =
                                 $"{Fss.Utilities.Helpers.toKebabCase name}: {property.StringifyCss()};")
                         |> String.concat ""
 
-                    $"({features}) | {{ {rules} }}"
+                    $"{features} | {{ {rules} }}"
                 | MediaQueryFor (device, features, rules) ->
                         
                     let featureString =

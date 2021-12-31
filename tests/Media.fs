@@ -5,40 +5,74 @@ open Fet
 open Utils
 
 module Media =
+    let createMediaTest (featureList: FssTypes.Media.Feature list) (ruleList: FssTypes.Rule list) =
+        let className, styles = createFss [
+            Media.query
+                featureList
+                ruleList
+        ]
+        let (media, styles) = (styles |> List.rev |> List.head)
+        className, $"{media}{styles}"
+        
+    let createMediaForTest (device: FssTypes.Media.Device) (featureList: FssTypes.Media.Feature list) (ruleList: FssTypes.Rule list) =
+        let className, styles = createFss [
+            Media.queryFor
+                device
+                featureList
+                ruleList
+        ]
+        let (media, styles) = (styles |> List.rev |> List.head)
+        className, $"{media}{styles}"
+    
     let tests =
        testList "Media"
             [
-                testMediaCase
+// Todo
+//                let className, actual = createMediaTest
+//                                            [ FssTypes.Media.MinWidth (px 500); FssTypes.Media.MaxWidth (px 700) ]
+//                                            [ Hover [ BackgroundColor.red ] ]
+//                testEqual
+//                    "Media query with pseudo"
+//                    actual
+//                    (sprintf "@media (min-width: 500px) and (max-width: 700px) { .%s:hover  { background-color: red; }; }" className)
+                let className, actual = createMediaTest
+                                            [ FssTypes.Media.MinWidth (px 500); FssTypes.Media.MaxWidth (px 700) ]
+                                            [ BackgroundColor.red ]
+                testEqual
                     "Media query with min width and min height"
-                    [ FssTypes.Media.MinWidth (px 500); FssTypes.Media.MaxWidth (px 700) ]
-                    [ BackgroundColor.red ]
-                    "@media (min-width: 500px and max-width: 700px) .css-0  { background-color: red; };"
-                testMediaCase
+                    actual
+                    (sprintf "@media (min-width: 500px) and (max-width: 700px) { .%s  { background-color: red; }; }" className)
+                let className, actual = createMediaTest
+                                            [ FssTypes.Media.MinHeight (px 700) ]
+                                            [ BackgroundColor.pink ]
+                testEqual
                     "Media query min height only"
-                    [ FssTypes.Media.MinHeight (px 700) ]
-                    [ BackgroundColor.pink ]
-                    ("@media (min-height: 700px) .css-0  { background-color: pink; };")
-                testMediaForCase
+                    actual
+                    (sprintf "@media (min-height: 700px) { .%s  { background-color: pink; }; }" className)
+                let className, actual = createMediaForTest
+                                            FssTypes.Media.Print
+                                            []
+                                            [
+                                                MarginTop.value (px 200)
+                                                Transform.value
+                                                    [
+                                                        Transform.rotate (deg 45.0)
+                                                    ]
+                                                BackgroundColor.indianRed
+                                            ]
+                testEqual
                     "Media query for print"
-                        FssTypes.Media.Print
-                        []
-                        [
-                            MarginTop.value (px 200)
-                            Transform.value
-                                [
-                                    Transform.rotate (deg 45.0)
-                                ]
-                            BackgroundColor.indianRed
-                            ]
-                    "@media print .css-0 { margin-top: 200px;transform: rotate(45deg);background-color: indianred; };"
-                testMediaForCase
-                    "Media query for screen with max width"
-                    FssTypes.Media.Screen
-                        [ FssTypes.Media.MaxWidth <| px 1000 ]
-                        [
-                            BackgroundColor.indianRed
-                        ]
-                    "@media screen and (max-width: 1000px) .css-0 { background-color: indianred; };"
+                    actual
+                    (sprintf "@media print { .%s { margin-top: 200px;transform: rotate(45deg);background-color: indianred; }; }" className)
+                    
+//                testMediaForCase
+//                    "Media query for screen with max width"
+//                    FssTypes.Media.Screen
+//                        [ FssTypes.Media.MaxWidth <| px 1000 ]
+//                        [
+//                            BackgroundColor.indianRed
+//                        ]
+//                    "@media screen and (max-width: 1000px) .css-0 { background-color: indianred; };"
                         (*  
                 testMediaFor
                     "Media query for screen with max width and min width"
