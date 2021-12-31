@@ -90,7 +90,7 @@ module App =
                                 TransitionDuration.value (ms 500.)
 
                                 Media.query [ FssTypes.Media.MaxWidth <| px 1000 ] [
-                                //                                    if not store.ShowSidebar then Left.value (pct -100)
+                                    if not store.ShowSidebar then Left.value (pct -100)
                                 ]
 
                                 // Following the menu is the article

@@ -13,8 +13,6 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss.Engine", "Fss.Engine\Fs
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Documentation", "Documentation\Documentation.fsproj", "{F3ABAE9E-1CE4-4FD2-9F7A-7DD9E3120B96}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FOOOOO", "FOOOOO\FOOOOO.fsproj", "{95E415AE-26F5-4F20-9957-23D32ABBC8CB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,17 +86,5 @@ Global
 		{F3ABAE9E-1CE4-4FD2-9F7A-7DD9E3120B96}.Release|x64.Build.0 = Release|Any CPU
 		{F3ABAE9E-1CE4-4FD2-9F7A-7DD9E3120B96}.Release|x86.ActiveCfg = Release|Any CPU
 		{F3ABAE9E-1CE4-4FD2-9F7A-7DD9E3120B96}.Release|x86.Build.0 = Release|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Debug|x64.Build.0 = Debug|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Debug|x86.Build.0 = Debug|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Release|x64.ActiveCfg = Release|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Release|x64.Build.0 = Release|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Release|x86.ActiveCfg = Release|Any CPU
-		{95E415AE-26F5-4F20-9957-23D32ABBC8CB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

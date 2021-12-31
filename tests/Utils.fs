@@ -60,6 +60,17 @@ module Utils =
             Expect.equal actual correct
             
     let testMediaCase (testName: string) (featureList: Media.Feature list) (ruleList: Rule list) (correct: string) =
-        let (_, actual) = List.head <| snd (createFss [ Media.query featureList ruleList ])
+        let (media, actual) =
+            snd (createFss [ Media.query featureList ruleList ])
+            |> List.rev
+            |> List.head
         test testName <| fun _ ->
-            Expect.equal actual correct
+            Expect.equal $"{media}{actual}" correct
+            
+    let testMediaForCase (testName: string) devices (featureList: Media.Feature list) (ruleList: Rule list) (correct: string) =
+        let (media, actual) =
+            snd (createFss [ Media.queryFor devices featureList ruleList ])
+            |> List.rev
+            |> List.head
+        test testName <| fun _ ->
+            Expect.equal $"{media}{actual}" correct

@@ -29,7 +29,7 @@ module Functions =
         | :? NameLabel as _ -> true
         | _ -> false
         
-    let collectClasses (classes: (string * string) list) =
+    let private collectClasses (classes: (string * string) list) =
         let collection = System.Collections.Generic.Dictionary<string, string list>()
         classes
         |> List.iter (fun (name, css) ->
@@ -40,6 +40,9 @@ module Functions =
         collection
         |> Seq.toList
         |> List.map (fun x -> x.Key, String.concat "" x.Value)
+        
+    let private addBrackets string =
+        $"{{ {string} }}"
         
     let private createMainCss (propertyName, propertyValue) =
         $"{stringifyICssValue propertyName}: {stringifyICssValue propertyValue};"

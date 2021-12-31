@@ -2,6 +2,8 @@ namespace Fss
 
 namespace Fss.FssTypes
 
+open Fss.FssTypes
+
 [<RequireQualifiedAccess>]
 module Media =
     type Device =
@@ -11,6 +13,13 @@ module Media =
         | All
         | Not of Device
         | Only of Device
+        interface ICssValue with
+            member this.StringifyCss() =
+                match this with
+                | Not d -> $"not {stringifyICssValue d}"
+                | Only  d -> $"only {stringifyICssValue d}"
+                | _ -> this.ToString().ToLower()
+        
 
     type Pointer =
         | Course
@@ -154,6 +163,7 @@ module Media =
 
     type MediaQuery =
         | MediaQuery of Feature list * Rule list
+        | MediaQueryFor of Device * Feature list * Rule list
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -171,6 +181,32 @@ module Media =
                         |> String.concat ""
 
                     $"({features}) | {{ {rules} }}"
+                | MediaQueryFor (device, features, rules) ->
+                        
+                    let featureString =
+                        if List.isEmpty features |> not then
+                            features
+                            |> List.map (fun x -> x.ToString())
+                            |> String.concat " and "
+                            |> sprintf "(%s)"
+                        else
+                            ""
+
+                    let ruleString =
+                        rules
+                        |> List.map
+                            (fun (name, property) ->
+                                $"{Fss.Utilities.Helpers.toKebabCase name}: {property.StringifyCss()};")
+                        |> String.concat ""
+                        
+                    let deviceString =
+                        if List.isEmpty features |> not then
+                            $"{stringifyICssValue device} and "
+                        else
+                            stringifyICssValue device
+
+                    $"{deviceString}{featureString} |{{ {ruleString} }}"
+            
 
 [<RequireQualifiedAccess>]
 module MediaClasses =
@@ -178,3 +214,9 @@ module MediaClasses =
         member this.query (features: Media.Feature list) (rules: Rule list) =
             (Property.Media, Media.MediaQuery(features, rules))
             |> Rule
+            
+        member this.queryFor (device: Media.Device) (features: Media.Feature list)  (rules: Rule list) =
+            (Property.Media, Media.MediaQueryFor(device, features, rules))
+            |> Rule
+            
+            

@@ -12,37 +12,34 @@ module Media =
                     "Media query with min width and min height"
                     [ FssTypes.Media.MinWidth (px 500); FssTypes.Media.MaxWidth (px 700) ]
                     [ BackgroundColor.red ]
-                    ""
-                      
-                    // TODO:
-                    (*
-                    ("@media (min-width: 500px) and (max-width: 700px)" ==> "[backgroundColor,#ff0000]")
-                testMedia
+                    "@media (min-width: 500px and max-width: 700px) .css-0  { background-color: red; };"
+                testMediaCase
                     "Media query min height only"
-                        [ FssTypes.Media.MinHeight (px 700) ]
-                        [ BackgroundColor.pink ]
-                        ("@media (min-height: 700px)" ==> "[backgroundColor,#ffc0cb]")
-                testMediaFor
+                    [ FssTypes.Media.MinHeight (px 700) ]
+                    [ BackgroundColor.pink ]
+                    ("@media (min-height: 700px) .css-0  { background-color: pink; };")
+                testMediaForCase
                     "Media query for print"
-                        (FssTypes.Media.Print)
+                        FssTypes.Media.Print
                         []
                         [
-                            MarginTop' (px 200)
-                            Transforms
+                            MarginTop.value (px 200)
+                            Transform.value
                                 [
-                                Transform.rotate (deg 45.0)
-                                    ]
+                                    Transform.rotate (deg 45.0)
+                                ]
                             BackgroundColor.indianRed
                             ]
-                    ("@media print " ==> "[marginTop,200px; transform,rotate(45.00deg); backgroundColor,#cd5c5c]")
-                testMediaFor
+                    "@media print .css-0 { margin-top: 200px;transform: rotate(45deg);background-color: indianred; };"
+                testMediaForCase
                     "Media query for screen with max width"
-                        (FssTypes.Media.Screen)
+                    FssTypes.Media.Screen
                         [ FssTypes.Media.MaxWidth <| px 1000 ]
                         [
                             BackgroundColor.indianRed
                         ]
-                    ("@media screen and (max-width: 1000px)" ==> "[backgroundColor,#cd5c5c]")
+                    "@media screen and (max-width: 1000px) .css-0 { background-color: indianred; };"
+                        (*  
                 testMediaFor
                     "Media query for screen with max width and min width"
                         (FssTypes.Media.Screen)

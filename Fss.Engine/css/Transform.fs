@@ -2,7 +2,6 @@
 
 open Fss.FssTypes
 
-// Todo: Rename Fss.Engine funksjonene
 // Todo: Fix media query for og testene
 
 [<AutoOpen>]

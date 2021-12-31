@@ -1,6 +1,7 @@
 ﻿namespace Fss.Fable
 
 open Browser.Dom
+open System.Collections.Generic;
 open Fss
 
 // TODO: Legg til en cache her, så dersom CSSen allerede eksisterer, så ikke legg den inn i DOM
@@ -10,20 +11,28 @@ module Fss =
     let private processCssRule (name: string, rule: string) =
         $"{name} {{ {rule} }}"
         
-    let private injectCss (css: string) =
-        let head = document.getElementsByTagName("head")[0]
-        let style = document.createElement "style"
-        style.setAttribute ("type", "text/css")
-        style.appendChild(document.createTextNode(css)) |> ignore
-        head.appendChild(style) |> ignore
+        
+    /// Injects the css into the dom
+    /// Only inject if its not injected already
+    let styleCache = HashSet<string>()
+    let private injectCss className (css: string) =
+        if styleCache.Contains className then
+            ()
+        else
+            let head = document.getElementsByTagName("head")[0]
+            let style = document.createElement "style"
+            style.setAttribute ("type", "text/css")
+            style.appendChild(document.createTextNode(css)) |> ignore
+            head.appendChild(style) |> ignore
+            styleCache.Add className |> ignore
     
     /// Injects CSS into dom and returns the classname
     let fss (properties: Fss.FssTypes.Rule list): string =
         let className, cssRules = createFss properties
-        let foo = cssRules
-                |> List.map processCssRule
-                |> String.concat ""
-        foo |> injectCss
+        cssRules
+            |> List.map processCssRule
+            |> String.concat ""
+            |> injectCss className
         
         className
         
@@ -34,10 +43,11 @@ module Fss =
         cssRules
         |> List.map processCssRule
         |> String.concat ""
-        |> injectCss
+        |> injectCss "*"
         
     let private processCounterRules (name: string) (rules: string) =
         $"@counter-style {name} {{ {rules} }}"
+        
         
     /// Injects counter style into dom and returns the counter name
     let counterStyle (properties: Fss.FssTypes.CounterRule list): string =
@@ -45,7 +55,7 @@ module Fss =
             properties
             |> createCounterStyle
             
-        injectCss <| processCounterRules counterName counterStyle
+        injectCss counterName <| processCounterRules counterName counterStyle
             
         counterName
         
@@ -58,7 +68,7 @@ module Fss =
             properties
             |> createFontFace name
             
-        injectCss <| processFontFaceRules fontStyles
+        injectCss fontName <| processFontFaceRules fontStyles
         
         fontName
         
@@ -71,6 +81,6 @@ module Fss =
             properties
             |> createAnimation
             
-        injectCss <| processAnimationRules animationName animationStyles
+        injectCss animationName <| processAnimationRules animationName animationStyles
         
         animationName
