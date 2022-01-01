@@ -2,8 +2,6 @@
 
 open Fss.FssTypes
 
-// Todo: Fix media query for og testene
-
 [<AutoOpen>]
 module Transform =
     /// Specifies the origin of an elements transformation.

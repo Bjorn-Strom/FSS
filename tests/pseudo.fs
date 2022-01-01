@@ -7,9 +7,8 @@ open Fss
 module Psuedo =
      let styles = [ Color.red ]
      let createPseudoTest (ruleList: FssTypes.Rule list) =
-         let _, styles = createFss ruleList
-         let className = fst (styles |> List.tail |> List.head)
-         let styles = snd (styles |> List.tail |> List.head)
+         let className, styles = createFss ruleList
+         let styles = snd (styles |> List.head)
          
          className, $"{className} {styles}"
          

@@ -47,9 +47,9 @@ module Tests =
         Counter.tests
         Animation.tests
         Font.tests
+        Transform.tests
         Psuedo.tests
         FontFace.tests
-        Transform.tests
         Composite.tests
         Media.tests
         Selector.tests

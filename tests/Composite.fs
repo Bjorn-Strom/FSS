@@ -114,7 +114,7 @@ module Composite =
         "@media (max-width: 600px) {"
         $"{fst <| List.head (snd title)} {{"
         "background-color: #87ceeb;"
-        "};}" ] |> String.concat "").Replace(" ", "").Replace("\n", "")
+        "}}" ] |> String.concat "").Replace(" ", "").Replace("\n", "")
         
     let tests =
        testList "Composite"

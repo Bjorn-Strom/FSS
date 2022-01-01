@@ -6,12 +6,11 @@ open Fss
 
 module Selector =
     let createSelector (ruleList: FssTypes.Rule list) =
-        let fss = (createFss ruleList)
+        let className, fss = (createFss ruleList)
         let selector, css =
-            snd fss
+            fss
             |> List.rev
             |> List.head
-        let className = fst fss
         className, $"{selector} {css}"
      
     let tests =
@@ -81,5 +80,23 @@ module Selector =
                    "Descendant with pseudo" 
                    actual
                    $".{className} all:hover {{ background-color: aqua; }}"
-                // Todo: Descendant med media query
+               let className, actual =
+                   createSelector [ ! FssTypes.Html.All [ !> FssTypes.Html.All [ !+ FssTypes.Html.All [ !~ FssTypes.Html.A [ Visited [ Color.white ] ] ] ] ] ]
+               testEqual
+                   "Descendant with nested selectors" 
+                   actual
+                   $".{className} all > all + all ~ a:visited {{ color: white; }}"
+                   
+               let className, actual =
+                  createSelector [ !+ FssTypes.Html.All [ BorderColor.green
+                                                          Hover [ BorderColor.red ]
+                                                          Media.query
+                                                        [ FssTypes.Media.MaxHeight (em 2) ]
+                                                        [ Content.value "Query in pseudo" ]
+                                      ]]
+
+              testEqual
+                  "adjacent sibling with nested selectors"
+                  actual
+                  $".{className} + all {{ @media (max-height: 2em) {{ content: \"Query in pseudo\"; }} }}"
            ]

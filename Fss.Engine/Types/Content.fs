@@ -25,7 +25,6 @@ module ContentClasses =
             let counter =
                 $"counter({counter}, \"{separator}\")"
             (property, String counter) |> Rule
-        // TODO: Test på denne
         member this.counter(counters: string list, separators: string list) =
             let counters =
                 let separators = List.map (fun s -> $"\"{s}\"") separators

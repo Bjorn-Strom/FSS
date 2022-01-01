@@ -597,16 +597,7 @@ type Combinator =
         match this with
         | Combinator c -> c
     interface ICssValue with
-        member this.StringifyCss() =
-            match this with
-            | Combinator ps ->
-                let ps =
-                    ps
-                    |> List.map
-                        (fun (name, property) -> $"{stringifyICssValue name}: {property.StringifyCss()};")
-                    |> String.concat "; "
-
-                $"{ps}"
+        member this.StringifyCss() = ""
 
 type Divider =
     | Divider of string * string

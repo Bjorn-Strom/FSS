@@ -165,47 +165,7 @@ module Media =
         | MediaQuery of Feature list * Rule list
         | MediaQueryFor of Device * Feature list * Rule list
         interface ICssValue with
-            member this.StringifyCss() =
-                match this with
-                | MediaQuery (features, rules) ->
-                    let features =
-                        features
-                        |> List.map (fun x -> $"({x.ToString()})")
-                        |> String.concat " and "
-
-                    let rules =
-                        rules
-                        |> List.map
-                            (fun (name, property) ->
-                                $"{Fss.Utilities.Helpers.toKebabCase name}: {property.StringifyCss()};")
-                        |> String.concat ""
-
-                    $"{features} | {{ {rules} }}"
-                | MediaQueryFor (device, features, rules) ->
-                        
-                    let featureString =
-                        if List.isEmpty features |> not then
-                            features
-                            |> List.map (fun x -> x.ToString())
-                            |> String.concat " and "
-                            |> sprintf "(%s)"
-                        else
-                            ""
-
-                    let ruleString =
-                        rules
-                        |> List.map
-                            (fun (name, property) ->
-                                $"{Fss.Utilities.Helpers.toKebabCase name}: {property.StringifyCss()};")
-                        |> String.concat ""
-                        
-                    let deviceString =
-                        if List.isEmpty features |> not then
-                            $"{stringifyICssValue device} and "
-                        else
-                            stringifyICssValue device
-
-                    $"{deviceString}{featureString} |{{ {ruleString} }}"
+            member this.StringifyCss() = ""
             
 
 [<RequireQualifiedAccess>]

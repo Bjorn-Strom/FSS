@@ -4,13 +4,10 @@ open Browser.Dom
 open System.Collections.Generic;
 open Fss
 
-// TODO: Legg til en cache her, så dersom CSSen allerede eksisterer, så ikke legg den inn i DOM
-
 [<AutoOpen>]
 module Fss =
     let private processCssRule (name: string, rule: string) =
         $"{name} {rule}"
-        
         
     /// Injects the css into the dom
     /// Only inject if its not injected already
@@ -38,12 +35,13 @@ module Fss =
         
     // Injects CSS into dom as global styles
     let global'(properties: Fss.FssTypes.Rule list): unit =
-        let _, cssRules = createGlobal properties
+        let cssRules = createGlobal properties
         
         cssRules
         |> List.map processCssRule
         |> String.concat ""
         |> injectCss "*"
+        ()
         
     let private processCounterRules (name: string) (rules: string) =
         $"@counter-style {name} {rules}"

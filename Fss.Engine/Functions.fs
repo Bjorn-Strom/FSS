@@ -4,8 +4,7 @@ open Fss.FssTypes
 open Fss.Utilities
 
 [<AutoOpen>]
-module Functions =
-            
+module rec Functions =
     let private isSecondary (_: Property.Property, value: ICssValue) =
         match value with
             | :? Pseudo as _ -> true
@@ -32,34 +31,44 @@ module Functions =
     let private addBrackets string =
         $"{{ {string} }}"
         
-    let private collectClasses (classes: (string * string) list) =
-        let collection = System.Collections.Generic.Dictionary<string, string list>()
-        classes
-        |> List.iter (fun (name, css) ->
-            if collection.ContainsKey(name) then
-                collection[name] <- collection[name] @ [css]
-            else
-                collection.Add (name, [css]))
-        collection
-        |> Seq.toList
-        |> List.map (fun x -> x.Key, String.concat "" x.Value)
-        |> List.map (fun (k, v) -> k, $"{addBrackets v}" )
+    // Creates a single line of "normal" CSS
+    let private createMainCssString (propertyName, propertyValue): string * string =
+        $"{stringifyICssValue propertyName}", $"{stringifyICssValue propertyValue}"
+    
+    // Creates "normal" css, IE not pseudo elements/classes or combinators
+    let private createMainCSS (name: string option) (properties: Rule list): ClassName * Css =
+        // As labels are not real css we filter them out here and use them to change the classname
+        let label =
+            properties
+            |> List.filter isLabel
+            |> List.map (fun (_,y) -> y )
+            |> List.rev
+            |> List.tryHead
+        let cssStrings =
+            properties
+            |> List.filter (isLabel >> not)
+            |> List.map createMainCssString
         
-    let private createMainCss (propertyName, propertyValue) =
-        $"{stringifyICssValue propertyName}: {stringifyICssValue propertyValue};"
-        
-    let private createPseudoCssForCombinator (propertyName: ICssValue, propertyValue: ICssValue) =
-        let colons =
-            match propertyValue with
-            | :? Pseudo as p ->
-                match p with
-                | PseudoClass _ -> ":"
-                | PseudoElement _ -> "::"
-            | _ -> ""
+        let cssString =         
+            cssStrings
+            |> List.map (fun (n, v) -> $"{n}: {v}")
+            |> String.concat ";"
+            |> sprintf "%s;"
+            |> addBrackets
             
-        $"{colons}{stringifyICssValue propertyName}", $"{stringifyICssValue propertyValue};"
+        // Create the classname and append a label if needed
+        let className =
+            match name with
+            | Some n -> n
+            | _ ->
+                match label with
+                | Some l -> $"-{stringifyICssValue l}"
+                | None -> ""
         
-    let private createPseudoCss (propertyName: ICssValue, propertyValue: ICssValue) =
+        className, $"{cssString}"
+        
+    // Creates a single line of pseudo CSS
+    let private createPseudoCssString (propertyName: ICssValue, propertyValue: ICssValue): string * string =
         let colons =
             match propertyValue with
             | :? Pseudo as p ->
@@ -70,90 +79,119 @@ module Functions =
             
         $"{colons}{stringifyICssValue propertyName}", $"{{ {stringifyICssValue propertyValue}; }}"
         
-    let private createMediaCss (_, propertyValue) =
-        let splitMedia = $"{stringifyICssValue propertyValue};".Split '|'
-        $"@media {splitMedia[0]}", $"{splitMedia[1]}"
+    // Creates all pseudo css, 
+    let private createPseudoCss (properties: Rule list): (ClassName * Css) list =
+        properties
+        |> List.map createPseudoCssString
+        |> List.map (fun (name, value) -> $"{name}", $"{value}")
         
-    // TODO: Media queries på combinators/pseudo er nok fucked
-    // TODO: Combinators er fucked
-    // TODO: Counter dokumentasjon side funker ikke helt som den skal
-    // TODO: FUnker media queries i global styles?
-    // TODO: Media queries MED pseudo funker ikke
-    let private createCombinatorCss className (propertyName, propertyValue: ICssValue): (string * string) list =
-        let propertyValue = (propertyValue :?> Combinator).Unwrap()
+    // Creates media CSS. As media queries can contain any type of CSS it calls the createFSS function.
+    let private createMediaCssString className (_, propertyValue: ICssValue): string * string =
+        let stringifyMedia features rules =
+            let features = List.map (fun x -> $"({x.ToString()})") features |> String.concat " and "
+            let css =
+                let _, css = createFssInternal (Some className) rules
+                css
+                |> List.map (fun (x,y) ->
+                    $"{x} {y}")
+                |> String.concat ""
+                |> addBrackets
+            features, css
+        match propertyValue with
+        | :? Media.MediaQuery as m ->
+            match m with
+            | Media.MediaQuery(features, rules ) ->
+                let features, css = stringifyMedia features rules
+                $"@media {features}", css
+            | Media.MediaQueryFor(device, features, rules ) ->
+                let device = stringifyICssValue device
+                let featureString, css = stringifyMedia features rules
+                let featureString =
+                    if List.isEmpty features |> not then
+                        $"and {featureString}"
+                    else
+                        ""
+                $"@media {device} {featureString}", css
+        | _ -> "", ""
         
-        let mainProperties =
-            List.filter (isSecondary >> not) propertyValue
-            |> List.map createMainCss
-            |> List.map (fun x -> $"{stringifyICssValue propertyName}", x)
-        let pseudoProperties =
-            List.filter isPseudo propertyValue
-            |> List.map createPseudoCssForCombinator
-            |> List.map (fun (p, s) -> $"{stringifyICssValue propertyName}{p}", s)
-        let mediaProperties =
-            List.filter isMedia propertyValue
-            |> List.map createMediaCss
-            |> List.map (fun (m, s) -> m, $"{className} {s}")
+    // Creates all media css
+    let createMediaCss className (properties: Rule list): (ClassName * Css) list =
+        properties
+        |> List.map (fun m -> createMediaCssString className m)
+        |> List.map (fun (name, value) -> $"{name}", $"{value}")
         
-        mainProperties @ pseudoProperties @ mediaProperties
+    // Creates combinator CSS. As media queries can contain any type of CSS it calls the createFSS function.
+    let private createCombinatorCssString (propertyName: ICssValue, propertyValue: ICssValue) =
+        match propertyValue with
+        | :? Combinator as c ->
+            let _, css =
+                c.Unwrap()
+                |> createFssInternal (Some "")
+            css
+            |> List.map (fun (x, y) ->
+                // This is an edge case, as media queries dont fit the normal pattern
+                // In that case we force it to be correct
+                // FIXME: Make this less fragile
+                if x.Contains("@media") then
+                    $"{stringifyICssValue propertyName}", y.Replace("{  {", $"{{ {x} {{")
+                else
+                    $"{stringifyICssValue propertyName}{x}", y)
+        | _ -> [ "", "" ]
         
-    let private createCSS (name: string option) (properties: Rule list): ClassName * (ClassName * Css) list =
-        let label =
+    // Creates all combinator css
+    let private createCombinatorCss (properties: Rule list): (ClassName * Css) list =
+        properties
+        |> List.collect (fun m -> createCombinatorCssString m)
+
+    // Creates all CSS
+    // Creates all different types of CSS, creates and adds the classname
+    // Combines them all
+    let private createFssInternal (name: string option) (properties: Rule list): ClassName * (ClassName * Css) list =
+        let mainStyleName, mainStyles =
             properties
-            |> List.filter isLabel
-            |> List.map (fun (_,y) -> y )
-            |> List.rev
-            |> List.tryHead
-        let properties =
-            properties
-            |> List.filter (isLabel >> not)
-        
-        let mainCss =
-            List.filter (isSecondary >> not) properties
-            |> List.map createMainCss
-            |> String.concat ""
-            |> addBrackets
+            |> List.filter (isSecondary >> not)
+            |> createMainCSS name
+            
         let className =
             match name with
             | Some n -> n
-            | _ ->
-                let label =
-                    match label with
-                    | Some l -> $"-{stringifyICssValue l}"
-                    | None -> ""
-                    
-                $".css-{FNV_1A.hash mainCss}{label}"
-        let mainProperties =
-            className, mainCss
-        let pseudoProperties =
-            List.filter isPseudo properties
-            |> List.map createPseudoCss
-            |> List.map (fun (p, s) -> $"{className}{p}", s)
-        let mediaProperties =
-            List.filter isMedia properties
-            |> List.map createMediaCss
-            |> List.map (fun (m, s) -> m, addBrackets $"{className} {s}")
-        let combinatorProperties =
-            List.filter isCombinator properties
-            |> List.collect (createCombinatorCss className)
-            |> List.map (fun (c, s) -> $"{className}{c}", s)
-            |> collectClasses
-            
-        className[1..], [mainProperties] @ pseudoProperties @ mediaProperties @ combinatorProperties
+            | _ -> $".css{FNV_1A.hash mainStyles}{mainStyleName}"
         
-    /// Creates the CSS based on a list of CSS rules
+        let pseudoStyles =
+            properties
+            |> List.filter isPseudo
+            |> createPseudoCss
+            |> List.map (fun (n,v) -> $"{className}{n}", v)
+            
+        let mediaStyles =
+            properties
+            |> List.filter isMedia
+            |> createMediaCss className
+            
+        let combinatorStyles =
+            properties
+            |> List.filter isCombinator
+            |> createCombinatorCss 
+            |> List.map (fun (n,v) -> $"{className}{n}", v)
+        
+        className[1..],
+        [className, mainStyles] @ pseudoStyles @ mediaStyles @ combinatorStyles
+        |> List.filter (fun (_, v) -> v <> "{ ; }")
+
+    /// Creates CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements
-    /// The first element in the tuple is the classname you want to give to your html component
+    /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
     let createFss (properties: Rule list): ClassName * (ClassName * Css) list =
-        createCSS None properties
-        
+        createFssInternal None properties
+    
     /// Creates global CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the global classname
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createGlobal (properties: Rule list): ClassName * (ClassName * Css) list =
-        createCSS (Some "*") properties
+    let createGlobal (properties: Rule list): (ClassName * Css) list =
+        let _, css = createFssInternal (Some "*") properties
+        css
         
     let private stringifyCounterProperty (property: CounterRule) =
         let propertyName, propertyValue = property
