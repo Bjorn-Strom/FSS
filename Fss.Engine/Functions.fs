@@ -33,7 +33,7 @@ module rec Functions =
         
     // Creates a single line of "normal" CSS
     let private createMainCssString (propertyName, propertyValue): string * string =
-        $"{stringifyICssValue propertyName}", $"{stringifyICssValue propertyValue}"
+        stringifyICssValue propertyName, $"{stringifyICssValue propertyValue}"
     
     // Creates "normal" css, IE not pseudo elements/classes or combinators
     let private createMainCSS (name: string option) (properties: Rule list): ClassName * Css =
@@ -118,7 +118,6 @@ module rec Functions =
     let createMediaCss className (properties: Rule list): (ClassName * Css) list =
         properties
         |> List.map (fun m -> createMediaCssString className m)
-        |> List.map (fun (name, value) -> $"{name}", $"{value}")
         
     // Creates combinator CSS. As media queries can contain any type of CSS it calls the createFSS function.
     let private createCombinatorCssString (propertyName: ICssValue, propertyValue: ICssValue) =
@@ -133,7 +132,7 @@ module rec Functions =
                 // In that case we force it to be correct
                 // FIXME: Make this less fragile
                 if x.Contains("@media") then
-                    $"{stringifyICssValue propertyName}", y.Replace("{  {", $"{{ {x} {{")
+                    stringifyICssValue propertyName, y.Replace("{  {", $"{{ {x} {{")
                 else
                     $"{stringifyICssValue propertyName}{x}", y)
         | _ -> [ "", "" ]
