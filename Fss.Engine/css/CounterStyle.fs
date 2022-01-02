@@ -32,3 +32,7 @@ module Counter =
     /// Increases or decreases the value of a counter
     let CounterIncrement =
         CounterClasses.CounterIncrement(Property.CounterIncrement)
+    /// Gives label to generated CSS string.
+    let CounterLabel (label: string) =
+        (CounterProperty.NameLabel, NameLabel.NameLabel(label.Replace(" ", "")))
+        |> CounterRule

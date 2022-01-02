@@ -6,6 +6,7 @@ open Fss
 
 [<AutoOpen>]
 module Fss =
+    // TODO: Ikke bare returner string, men returner de faktiske typene?
     let private processCssRule (name: string, rule: string) =
         $"{name} {rule}"
         
@@ -83,7 +84,7 @@ module Fss =
     let private processAnimationRules name (rules: string) =
         $"@keyframes {name} {rules}"
         
-    /// Injects keyframes into dom and returns the counter name
+    /// Injects keyframes into dom and returns the animation name
     let keyframes (properties: KeyframeAttribute list): string =
         let animationName, animationStyles =
             properties

@@ -1,0 +1,3 @@
+group FssGiraffe
+    FSharp.Core
+    Giraffe.ViewEngine

@@ -4,7 +4,6 @@ namespace Fss.FssTypes
 
 open Fss.FssTypes
 
-
 type ICssValue =
     interface 
         abstract member StringifyCss : unit -> string
@@ -537,6 +536,8 @@ type NameLabel =
         | NameLabel n -> n
     interface ICssValue with
         member this.StringifyCss() = this.Unwrap()
+    interface ICounterValue with
+        member this.StringifyCounter() = this.Unwrap()
         
 type CssRule(property: Property.Property) =
     member this.value(keyword: Keywords) = (property, keyword) |> Rule

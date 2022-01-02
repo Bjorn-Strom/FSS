@@ -139,6 +139,14 @@ NUGET
       FSharp.Core (>= 4.7.2)
     FSharp.Core (6.0.1)
 
+GROUP FssGiraffe
+RESTRICTION: == netstandard2.0
+NUGET
+  remote: https://www.nuget.org/api/v2
+    FSharp.Core (6.0.1)
+    Giraffe.ViewEngine (1.4)
+      FSharp.Core (>= 5.0)
+
 GROUP Tests
 NUGET
   remote: https://www.nuget.org/api/v2

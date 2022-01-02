@@ -27,6 +27,10 @@ module rec Functions =
         match value with
         | :? NameLabel as _ -> true
         | _ -> false
+    let private isCounterLabel (_, value: ICounterValue) =
+        match value with
+        | :? NameLabel as _ -> true
+        | _ -> false
         
     let private addBrackets string =
         $"{{ {string} }}"
@@ -202,13 +206,27 @@ module rec Functions =
     /// The first element in the tuple is the name of the created counter style. This is the value you use in your CSS.
     /// The second element is the generated CSS for the counter.
     let createCounterStyle (properties: CounterRule list) : CounterName * CounterStyle =
-
-        let properties =
-            List.map stringifyCounterProperty properties
+        // As labels are not real css we filter them out here and use them to change the classname
+        let label =
+            properties
+            |> List.filter isCounterLabel
+            |> List.map (fun (_,y) -> y )
+            |> List.rev
+            |> List.tryHead
+            
+        let propertyString =
+            properties
+            |> List.filter (isCounterLabel >> not)
+            |> List.map stringifyCounterProperty
             |> String.concat ""
-        let counterName = $"counter-{FNV_1A.hash properties}"
+        // Sometimes we actually want to create empty counters
+        // In that case they need a unique name
+        let counterName =
+            match label with
+            | Some l -> $"counter-{stringifyICounterValue l}"
+            | None -> $"counter{FNV_1A.hash propertyString}"
 
-        counterName, addBrackets properties 
+        counterName, addBrackets propertyString 
            
     let private stringifyFontFaceProperty (property: FontFaceRule) =
         let propertyName, propertyValue = property

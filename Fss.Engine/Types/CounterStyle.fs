@@ -13,6 +13,8 @@ type CounterProperty =
     | Symbols
     | AdditiveSymbols
     | SpeakAs
+    // Home made
+    | NameLabel 
     interface ICssValue with
         member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 

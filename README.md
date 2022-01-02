@@ -16,6 +16,7 @@ The workhorse for Fss is `Fss.Engine`. This is what generates all the CSS.
 All it does is spit out classnames and the corresponding CSS so it might not be the library you want to work with.
 Other framework specific libraries have been made on top of this.
 For example to Fable, Feliz and Giraffe. So if you are using any of these frameworks one of those libraries is a safe bet.
+That being said the framework libraries are merely provide specific convenience functions to use for that framework, you can still use `Fss.Engine` directly if you prefer.
 
 ## Motivation 🤔
 
@@ -25,6 +26,7 @@ While you have some good alternatives with F# such as:
 - Or some kind of webpack configuration if you want to use CSS or SCSS directly.
 
 Ultimately you will find what you like best and whatever suits your needs.
+But I believe that if you like to write your own CSS and you are using Dotnet, Fss is the best solution for that.
 
 Even with all these options there is, to my knowledge, no one solution that works in any Dotnet project.
 This is what Fss aims to solve.

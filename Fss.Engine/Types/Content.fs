@@ -23,15 +23,15 @@ module ContentClasses =
             (property, String counter) |> Rule
         member this.counter(counter: string, separator: string) =
             let counter =
-                $"counter({counter}, \"{separator}\")"
+                $"counter({counter})\"{separator}\""
             (property, String counter) |> Rule
         member this.counter(counters: string list, separators: string list) =
+            let separators = List.map (fun s -> $"\"{s}\"") separators
             let counters =
-                let separators = List.map (fun s -> $"\"{s}\"") separators
-                let counters =
-                    List.map2 (fun x y -> $"{x}, {y}" ) counters separators
-                    |> String.concat ", "
-                $"counters({counters})"
+                List.zip counters separators
+                |> List.map (fun (c,s) -> $"counter({c}){s}")
+                |> String.concat ""
+                    
             (property, String counters) |> Rule
         member this.attribute(attribute: Attribute.Attribute) =
             let attribute = $"attr({stringifyICssValue attribute})"

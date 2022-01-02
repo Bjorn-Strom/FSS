@@ -434,8 +434,12 @@ module App =
                             fss [ Label "Mozilla Example Style"
                                   ListStyleType.value mozillaExampleCounter ]
 
-                        let indexCounter = counterStyle []
-                        let subCounter = counterStyle []
+                        let indexCounter = counterStyle [
+                            CounterLabel "indexCounter"
+                        ]
+                        let subCounter = counterStyle [
+                            CounterLabel "subCounter"
+                        ]
 
                         let sectionStyle =
                             fss [ Label "Section"

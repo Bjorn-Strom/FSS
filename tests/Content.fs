@@ -44,7 +44,7 @@ module Content =
                 testCase
                     "Content counter2"
                     [ Content.counter (counterName, ". ")]
-                    $"{{ content: counter({counterName}, \". \"); }}"
+                    $"{{ content: counter({counterName})\". \"; }}"
                 testCase
                     "Content attribute"
                     [ Content.attribute FssTypes.Attribute.Title ]
