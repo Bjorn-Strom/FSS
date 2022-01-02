@@ -104,7 +104,7 @@ module Media =
                 testEqual
                     "Media query only screen, many features"
                     actual
-                    (sprintf "@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: True){ .%s { margin-top: 200px;transform: rotate(45deg);background-color: indianred; } }" className)
+                    (sprintf "@media only screen and (color) and (pointer: fine) and (scan: interlace) and (grid: true){ .%s { margin-top: 200px;transform: rotate(45deg);background-color: indianred; } }" className)
                 let className, actual = createMediaForTest
                                             (FssTypes.Media.Device.Only FssTypes.Media.Device.Screen)
                                             [ FssTypes.Media.MinWidth (px 601); FssTypes.Media.MaxWidth (px 2) ]

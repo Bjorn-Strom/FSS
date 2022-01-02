@@ -133,7 +133,7 @@ module Media =
             | MaxColorIndex int -> $"max-color-index: {int}"
             | DisplayMode displayMode -> $"display-mode: {displayMode}"
             | ForcedColors bool -> $"forced-colors: {bool}"
-            | Grid bool -> $"grid: {bool}"
+            | Grid bool -> $"grid: {bool.ToString().ToLower()}"
             | Height length -> $"height: {lengthPercentageString length}"
             | MinHeight length -> $"min-height: {lengthPercentageString length}"
             | MaxHeight length -> $"max-height: {lengthPercentageString length}"
