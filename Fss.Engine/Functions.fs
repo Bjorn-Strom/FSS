@@ -40,14 +40,7 @@ module rec Functions =
         stringifyICssValue propertyName, $"{stringifyICssValue propertyValue}"
     
     // Creates "normal" css, IE not pseudo elements/classes or combinators
-    let private createMainCSS (name: string option) (properties: Rule list): ClassName * Css =
-        // As labels are not real css we filter them out here and use them to change the classname
-        let label =
-            properties
-            |> List.filter isLabel
-            |> List.map (fun (_,y) -> y )
-            |> List.rev
-            |> List.tryHead
+    let private createMainCSS (properties: Rule list): Css =
         let cssStrings =
             properties
             |> List.filter (isLabel >> not)
@@ -59,17 +52,8 @@ module rec Functions =
             |> String.concat ";"
             |> sprintf "%s;"
             |> addBrackets
-            
-        // Create the classname and append a label if needed
-        let className =
-            match name with
-            | Some n -> n
-            | _ ->
-                match label with
-                | Some l -> $"-{stringifyICssValue l}"
-                | None -> ""
         
-        className, $"{cssString}"
+        $"{cssString}"
         
     // Creates a single line of pseudo CSS
     let private createPseudoCssString (propertyName: ICssValue, propertyValue: ICssValue): string * string =
@@ -150,15 +134,33 @@ module rec Functions =
     // Creates all different types of CSS, creates and adds the classname
     // Combines them all
     let private createFssInternal (name: string option) (properties: Rule list): ClassName * (ClassName * Css) list =
-        let mainStyleName, mainStyles =
+        // As labels are not real css we filter them out here and use them to change the classname
+        let label =
             properties
-            |> List.filter (isSecondary >> not)
-            |> createMainCSS name
+            |> List.filter isLabel
+            |> List.map (fun (_,y) -> y )
+            |> List.rev
+            |> List.tryHead
+            
+        // Create the classname and append a label if needed
+        let label =
+            match label with
+            | Some l -> $"-{stringifyICssValue l}"
+            | None -> ""
             
         let className =
             match name with
             | Some n -> n
-            | _ -> $".css{FNV_1A.hash mainStyles}{mainStyleName}"
+            | _ -> $".css{FNV_1A.hash (properties.ToString())}{label}"
+            
+        let properties =
+            properties
+            |> List.filter (isLabel >> not)
+            
+        let mainStyles =
+            properties
+            |> List.filter (isSecondary >> not)
+            |> createMainCSS
         
         let pseudoStyles =
             properties
@@ -177,9 +179,11 @@ module rec Functions =
             |> createCombinatorCss 
             |> List.map (fun (n,v) -> $"{className}{n}", v)
         
-        className[1..],
-        [className, mainStyles] @ pseudoStyles @ mediaStyles @ combinatorStyles
-        |> List.filter (fun (_, v) -> v <> "{ ; }")
+        let newCss =
+            [className, mainStyles] @ pseudoStyles @ mediaStyles @ combinatorStyles
+            |> List.filter (fun (_, v) -> v <> "{ ; }")
+            
+        className[1..], newCss
 
     /// Creates CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements
@@ -187,6 +191,13 @@ module rec Functions =
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
     let createFss (properties: Rule list): ClassName * (ClassName * Css) list =
         createFssInternal None properties
+        
+    /// Creates CSS with a specific classname based on a list of CSS rules
+    /// Returns a tuple containing 2 elements
+    /// The first element in the tuple is the classname, this is what you give to your classnames.
+    /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
+    let createFssWithClassname className (properties: Rule list): ClassName * (ClassName * Css) list =
+        createFssInternal (Some className) properties
     
     /// Creates global CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements

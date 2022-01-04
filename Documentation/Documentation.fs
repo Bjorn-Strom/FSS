@@ -10,6 +10,8 @@ module App =
 
     open Pages
     open Store
+    
+    // TODO: Dokumentasjon blir VELDIG rar på liten skjerm
 
     // Constants
     // Load font
@@ -29,7 +31,7 @@ module App =
 
     [<ReactComponent>]
     let MenuItem (page: Page) =
-        let _, dispatch = useStore ()
+        let _, dispatch = useStore ()   
         let pageString = pageToLinkString page
 
         Html.a [ prop.href $"#/page/{pageString}"
@@ -72,8 +74,9 @@ module App =
     [<ReactComponent>]
     let Menu () =
         let store, _ = useStore ()
-
-        Html.aside [ prop.fss [ Position.fixed'
+        
+        Html.aside [ prop.fss [ Label "Menu"
+                                Position.fixed'
                                 Left.value (px 0)
                                 Top.value (px 0)
                                 Height.value (vh 100.)
@@ -88,9 +91,12 @@ module App =
                                 TransitionProperty.left
                                 TransitionTimingFunction.easeInOut
                                 TransitionDuration.value (ms 500.)
-
+                                
                                 Media.query [ FssTypes.Media.MaxWidth <| px 1000 ] [
-                                    if not store.ShowSidebar then Left.value (pct -100)
+                                    if store.ShowSidebar then
+                                        Left.value (pct 0)
+                                    else
+                                        Left.value (pct -100)
                                 ]
 
                                 // Following the menu is the article
@@ -145,7 +151,8 @@ module App =
                     promise {
                         let! response =
                             fetch
-                                $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/docs/documentation/{page}.md"
+                                //$"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/docs/documentation/{page}.md"
+                                $"documentation/{page}.md"
                                 []
 
                         let! text = response.text ()
@@ -317,20 +324,12 @@ module App =
                                                      prop.text "Bouncy color" ] ] ]
 
                     | Combinators ->
-                        let borders =
-                            [ Label "Borders"
-                              BorderStyle.solid
-                              BorderColor.black
-                              BorderWidth.value (px 1) ]
-
                         let descendantCombinator =
                             fss [ Label "Descendant"
-                                  yield! borders
                                   ! FssTypes.Html.P [ Color.red ] ]
 
                         let childCombinator =
                             fss [ Label "Child"
-                                  yield! borders
                                   !> FssTypes.Html.P [ Color.red ]
 
                                    ]
@@ -353,15 +352,14 @@ module App =
                                           prop.children [ Html.p "Text in a paragraph and therefore red"
                                                           Html.text "Text outside of paragraph"
                                                           Html.div [ Html.p "Text in paragraph in div and not red" ] ] ]
-                               Html.div [ prop.className (fss borders)
+                               Html.div [ 
                                           prop.children [ Html.div [ prop.className directCombinator
-                                                                     prop.children [ Html.p [ Html.text
-                                                                                                  "Text in paragraph in div " ] ] ]
+                                                                     prop.children [ Html.p [ Html.text "Text in paragraph in div " ] ] ]
                                                           Html.p
                                                               "Text in a paragraph and after the div with the combinator so is red"
                                                           Html.p
                                                               "Text in a paragraph but not after div with the combinator so is not red" ] ]
-                               Html.div [ prop.className (fss borders)
+                               Html.div [ 
                                           prop.children [ Html.div [ prop.className adjacentCombinator
                                                                      prop.children [ Html.p [ prop.text
                                                                                                   "Text in paragraph in div " ] ] ]
@@ -834,6 +832,10 @@ module App =
                                                           Html.div [ prop.className conicGradientStyle4 ] ] ]
                                Html.div [ prop.className (fss [ Label "Flex 1"; Display.flex ])
                                           prop.children [ Html.div [ prop.className repeatingConicGradientStyle ] ] ] ]
+                    | Engine ->
+                        None
+                    | Fable ->
+                        None
 
                     | Feliz ->
                         let bounceFrames =
@@ -863,6 +865,8 @@ module App =
                                                   AnimationIterationCount.infinite ] ]
 
                         Some [ box; bounceBox ]
+                    | Giraffe ->
+                        None
 
                     | SVG ->
                         let logoAnimation =

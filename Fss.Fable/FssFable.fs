@@ -6,6 +6,7 @@ open Fss
 
 [<AutoOpen>]
 module Fss =
+    // TODO: Hent FSS via nuget
     // TODO: Ikke bare returner string, men returner de faktiske typene?
     let private processCssRule (name: string, rule: string) =
         $"{name} {rule}"

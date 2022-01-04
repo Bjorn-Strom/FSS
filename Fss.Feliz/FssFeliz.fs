@@ -5,6 +5,7 @@ open Fss.Fable
 
 [<AutoOpen>]
 module Fss =
+    // TODO: Hent FSS via nuget
     type Feliz.prop with
         /// Allows you to style Feliz elements with Fss
         static member fss (properties: FssTypes.Rule list) =

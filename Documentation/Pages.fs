@@ -18,7 +18,10 @@ type Page =
     | Counters
     | Fonts
     | BackgroundImages
+    | Engine
+    | Fable
     | Feliz
+    | Giraffe
     | Svg
     | Unknown
     | NotFound
@@ -41,7 +44,10 @@ let allPages =
       Counters
       Fonts
       BackgroundImages
+      Engine
+      Fable
       Feliz
+      Giraffe
       Svg ]
 
 let stringToPage =
@@ -63,7 +69,10 @@ let stringToPage =
     | "counters" -> Counters
     | "fonts" -> Fonts
     | "backgroundImages" -> BackgroundImages
+    | "engine" -> Engine
+    | "fable" -> Fable
     | "feliz" -> Feliz
+    | "giraffe" -> Giraffe
     | "svg" -> Svg
     | _ -> Unknown
 
