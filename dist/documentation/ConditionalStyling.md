@@ -27,3 +27,18 @@ let buttonStyle buttonType =
 button [ ClassName <| buttonStyle Small ] [ str "Small" ]
 button [ ClassName <| buttonStyle Big ] [ str "Big" ]
 ```
+<example/>
+
+This works with any type of boolean expression and is really useful. 
+It can be used to create vastly different CSS depending on certain parameters so you can optionally apply any type of CSS.
+The following example doesnt do anything useful, but is helpful in describing what you can do with conditional styling in Fss.
+```
+let someRandomExample complexObject =
+    fss 
+        [
+            if complexObject.isHoverable then
+                Hover [ .... ]
+            if complexObject.isRed then
+                BackgroundColor.red
+        ]
+```

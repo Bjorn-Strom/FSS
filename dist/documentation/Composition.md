@@ -1,6 +1,7 @@
 ## Composition
 
-As Fss uses [Emotion-Js](https://github.com/emotion-js/emotion) to generate the CSS we get some nice benefits like [composition](https://emotion.sh/docs/composition). Feel free to read emotions composition docs, the following example is a re-implementation of theirs.
+A really useful pattern in Fss is composition. As long as you haven't called the Fss function yet you can compose styles by concatenating the lists
+using normal F# syntax.
 
 ```fsharp
 let baseStyle =
@@ -21,4 +22,14 @@ div [ ClassName (fss <| danger @ baseStyle)]
 div [ ClassName (fss <| baseStyle @ danger)]
     [ str "This will be red" ]
 ```
-</example>
+<example/>
+
+You can also use the yield keyword
+
+```fsharp
+let baseWithFlex =
+    fss [
+        Display.flex
+        yield baseStyle
+    ]
+```

@@ -42,7 +42,7 @@ let mozillaExampleStyle =
           ListStyleType.value mozillaExampleCounter ]
 ```
 
-</example>
+<example/>
 
 Another example found [here](https://codepen.io/mkmueller/pen/pHiqb)
 
@@ -107,4 +107,4 @@ Html.section [ prop.className sectionStyle
                                        prop.text "Sub-Item" ] ] ] ]
 ```
 
-</example>
+<example/>

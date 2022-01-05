@@ -1,6 +1,6 @@
 ## Pseudo-Classes
 
-All pseudo class functions take a list of CSS properties and return a CSS property, which the `fss` function takes as a parameter.
+All pseudo class functions take a list of CSS rules and return a new CSS rule, which the `fss` function takes as a parameter.
 
 So using pseudoclasses is as easy as calling them within the `fss` function.
 
@@ -17,7 +17,7 @@ let hoverStyle =
           Hover [ BackgroundColor.chartreuse
                   Color.black ] ]
 ```
-</example>
+<example/>
 ## Pseudo-elements
 
 These work much in the same way as the pseudo classes. Example follows:
@@ -35,4 +35,4 @@ let hoverStyle =
                   Color.black ] ]
 
 ```
-</example>
+<example/>

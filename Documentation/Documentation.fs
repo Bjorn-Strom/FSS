@@ -125,7 +125,7 @@ module App =
 
     let rec markdownAndExamples (markdown: string) (examples: ReactElement list option) =
         let splitMarkdown =
-            markdown.Split "</example>"
+            markdown.Split "<example/>"
             |> Seq.toList
             |> List.map Markdown.markdownDefaultRenderer
 
@@ -181,7 +181,6 @@ module App =
                     | Overview -> None
                     | Installation -> None
                     | Philosophy -> None
-                    | New -> None
                     | BasicUsage ->
                         let borderStyle =
                             fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)" ]

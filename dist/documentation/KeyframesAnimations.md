@@ -1,13 +1,12 @@
 ## Animations
 
 Animations introduce 3 new functions:
-- `keyframes`: `KeyframeAttribute list -> IAnimationName`
-- `frame`:  `int -> CSSProperty list -> KeyframeAttribute`
-- `frames`:  `int list -> CSSProperty list -> KeyframeAttribute`
+- `keyframes`: `KeyframeAttribute list -> AnimationName * Css`
+- `frame`:  `int -> CSSProperty list -> int * rule list`
+- `frames`:  `int list -> rule list -> int list * rule list`
 
 What this means is that keyframes is a function that takes a list of `frame` or `frames` function calls.
-`frame` is used when you want to define a single keyframe and `frames` for multiple.
-keyframes then gives you an animation name you supply to `fss`.
+`frame` is used when you want to define a single keyframe and `frames` for multiple. keyframes then gives you an animation name you supply to `fss`.
 
 ```fsharp
 let bounceFrames =
@@ -28,7 +27,7 @@ let bounceAnimation =
           AnimationIterationCount.infinite ]
 ```
 
-</example>
+<example/>
 
 ## Transforms
 
@@ -44,7 +43,7 @@ The following is an example of this, you might write this and be very puzzled as
     transform: translate(20px,0px);
 }
 ```
-When the answer is, as stated above, Transform takes a list of arguments.
+When the answer is, as stated above, giving a list of arguments to the transform.
 ```css
 .myElement {
     transform: rotate(90deg) translate(20px,0px);

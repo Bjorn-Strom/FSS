@@ -19,7 +19,7 @@ div [ ClassName redParagraphs ]
    ]
 ```
 
-</example>
+<example/>
 
 - ### Child (!>)
 While descendants hits all the selectors within the CSS block, child will only select direct descendants. I.E one level deep.
@@ -36,7 +36,7 @@ div [ ClassName childCombinator ]
    ]
 ```
 
-</example>
+<example/>
 
 - ### Adjacent sibling (!+)
 This combinator selects the element directly after the 'main' element.
@@ -52,7 +52,7 @@ div []
    ]
 ```
 
-</example>
+<example/>
 
 - ### General sibling (!~)
 The general sibling combinator is similar to the adjacent one. But instead of selecting only 1 sibling, it selects them all.
@@ -67,4 +67,4 @@ div []
    ]
 ```
 
-</example>
+<example/>

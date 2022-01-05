@@ -1,18 +1,12 @@
 ## Basic usage
 
-`Fss.Engine` provides functions to create css.
-CreateFss
-CreateFssWithClassName
-CreateGlobal
-CreateCounter
-CreateAnimation
-CreateFontFace.
-These are the building blocks of fss.
-The framework specific libraries have these wrapped up and all the following examples will be using
-`Fss.Fable`. Check the library specific pages for extra documentation on how they work.
+The basic idea behind Fss which is also true for all its framework libraries is a simple one.
+Create a list of CssRules and send them into a function. This function returns classnames and CSS.
 
-Fss takes a list of CSS properties and returns a string.
-This string is the classname you can give to your html tag.
+The main difference between [Fss.Engine](LINK) and the framework libraries is that the engine consists of the "low-level" functions that make this work, and the framework libraries are there to make using the system easier for a specific framework.
+But the concept is still the same: lists of CssRules.
+
+## Styling
 
 Simply write the CSS you want in PascalCase and dot yourself into the method you want.
 What is available are the typical options the property might provide.
@@ -65,4 +59,4 @@ For example if I want to set border with shorthand I can write:
 fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)"]
 ```
 
-</example>
+<example/>

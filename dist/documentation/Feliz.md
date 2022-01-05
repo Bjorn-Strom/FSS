@@ -24,7 +24,7 @@ Html.div [ prop.fss [ BackgroundColor.red
 
 ```
 
-</example>
+<example/>
 
 ## What can you do with this?
 Anything you can do in an `fss` block you can do in a `prop.fss` block.
@@ -41,7 +41,7 @@ Html.div [ prop.fss [ BackgroundColor.red
                       AnimationIterationCount.infinite ] ]
 ```
 
-</example>
+<example/>
 
 ## Helpers
 

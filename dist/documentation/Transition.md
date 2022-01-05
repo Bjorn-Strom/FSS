@@ -15,7 +15,7 @@ let colorTransition =
 
 ```
 
-</example>
+<example/>
 
 ```fsharp
 let sizeAndColor =
@@ -31,4 +31,4 @@ let sizeAndColor =
 
 ```
 
-</example>
+<example/>

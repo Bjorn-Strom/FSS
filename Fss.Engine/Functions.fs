@@ -193,6 +193,7 @@ module rec Functions =
         createFssInternal None properties
         
     /// Creates CSS with a specific classname based on a list of CSS rules
+    /// WARNING: This function does not create any kind of hash for your classname so use this with care
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.

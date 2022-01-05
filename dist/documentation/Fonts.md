@@ -18,7 +18,7 @@ let amaticStyle =
           FontSize.value (px 24) ]
 ```
 
-</example>
+<example/>
 
 ## Font Face
 
@@ -58,4 +58,4 @@ let moderna =
           FontFamily.value modernaFont ]
 ```
 
-</example>
+<example/>

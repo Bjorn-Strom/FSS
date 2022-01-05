@@ -34,7 +34,7 @@ let linearGradientStyle3 =
           ) ]
 ```
 
-</example>
+<example/>
 
 ### Repeating linear gradient
 ```fsharp
@@ -72,7 +72,7 @@ let repeatingLinearGradientsStyle3 =
                                                        rgba 0 0 255 0.0, pct 70 ] ] ]
 ```
 
-</example>
+<example/>
 
 ### Radial gradient
 ```fsharp
@@ -116,7 +116,7 @@ let radialGradientStyle3 =
           ) ]
 ```
 
-</example>
+<example/>
 
 ### Repeating Radial Gradient
 ```fsharp
@@ -160,7 +160,7 @@ let repeatingRadialGradientStyle3 =
           ) ]
 ```
 
-</example>
+<example/>
 
 ### Conic gradient
 ```fsharp
@@ -225,7 +225,7 @@ let conicGradientStyle4 =
           ) ]
 ```
 
-</example>
+<example/>
 
 ### Repeating Conic gradient
 ```fsharp
@@ -247,4 +247,4 @@ let repeatingConicGradientStyle =
           ) ]
 ```
 
-</example>
+<example/>

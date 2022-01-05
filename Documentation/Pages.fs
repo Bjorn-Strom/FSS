@@ -4,7 +4,6 @@ type Page =
     | Overview
     | Installation
     | Philosophy
-    | New
     | BasicUsage
     | ConditionalStyling
     | Pseudo
@@ -30,7 +29,6 @@ let allPages =
     [ Overview
       Installation
       Philosophy
-      New
       BasicUsage
       ConditionalStyling
       Pseudo
@@ -55,7 +53,6 @@ let stringToPage =
     | "overview" -> Overview
     | "installation" -> Installation
     | "philosophy" -> Philosophy
-    | "new" -> New
     | "basicUsage" -> BasicUsage
     | "conditionalStyling" -> ConditionalStyling
     | "pseudo" -> Pseudo

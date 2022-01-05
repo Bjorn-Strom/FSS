@@ -1,7 +1,6 @@
 ## SVG
 
-You can style and animate SVGs as you normally would. CSS properties to style these were added with Fss 2.0.
-
+You can style and animate SVGs as you normally would. 
 A quick example of how to animate an svg:
 
 ```fsharp
@@ -19,4 +18,4 @@ let logoStyle =
           AnimationFillMode.forwards ]
 ```
 
-</example>
+<example/>
