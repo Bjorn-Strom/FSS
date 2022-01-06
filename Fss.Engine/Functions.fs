@@ -34,6 +34,15 @@ module rec Functions =
         
     let private addBrackets string =
         $"{{ {string} }}"
+    let private addClassName className (css: string, value: string) =
+        // This is an edge case, as media queries dont fit the normal pattern
+        // In that case we force it to be correct
+        // FIXME: Make this less fragile
+        if css.Contains "@media" then
+            let name::css::_ = css.Split '@' |> Seq.toList
+            $"@{css}", $"{{ {className}{name} {value[1..].Trim()}"
+        else
+            $"{className}{css}", value
         
     // Creates a single line of "normal" CSS
     let private createMainCssString (propertyName, propertyValue): string * string =
@@ -115,14 +124,7 @@ module rec Functions =
                 c.Unwrap()
                 |> createFssInternal (Some "")
             css
-            |> List.map (fun (x, y) ->
-                // This is an edge case, as media queries dont fit the normal pattern
-                // In that case we force it to be correct
-                // FIXME: Make this less fragile
-                if x.Contains("@media") then
-                    stringifyICssValue propertyName, y.Replace("{  {", $"{{ {x} {{")
-                else
-                    $"{stringifyICssValue propertyName}{x}", y)
+            |> List.map (fun (x, y) -> $"{stringifyICssValue propertyName}{x}", y)
         | _ -> [ "", "" ]
         
     // Creates all combinator css
@@ -153,6 +155,8 @@ module rec Functions =
             | Some n -> n
             | _ -> $".css{FNV_1A.hash (properties.ToString())}{label}"
             
+        let addClassName cssPair = addClassName className cssPair
+        
         let properties =
             properties
             |> List.filter (isLabel >> not)
@@ -166,7 +170,7 @@ module rec Functions =
             properties
             |> List.filter isPseudo
             |> createPseudoCss
-            |> List.map (fun (n,v) -> $"{className}{n}", v)
+            |> List.map addClassName
             
         let mediaStyles =
             properties
@@ -176,8 +180,8 @@ module rec Functions =
         let combinatorStyles =
             properties
             |> List.filter isCombinator
-            |> createCombinatorCss 
-            |> List.map (fun (n,v) -> $"{className}{n}", v)
+            |> createCombinatorCss
+            |> List.map addClassName
         
         let newCss =
             [className, mainStyles] @ pseudoStyles @ mediaStyles @ combinatorStyles

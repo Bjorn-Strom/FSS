@@ -11,8 +11,6 @@ module App =
     open Pages
     open Store
     
-    // TODO: Dokumentasjon blir VELDIG rar på liten skjerm
-
     // Constants
     // Load font
     let headingFont = FontFamily.value "Nunito"

@@ -6,6 +6,7 @@
     <RootNamespace>tests</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Generators\Generators.fs" />
     <Compile Include="Utils.fs" />
     <Compile Include="Animation.fs" />
     <Compile Include="Background.fs" />

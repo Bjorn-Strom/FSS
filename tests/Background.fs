@@ -449,15 +449,3 @@ module Background =
                     [ BoxDecorationBreak.revert ]
                     "{ box-decoration-break: revert; }" 
             ]
-            
-            (*
-            
-            
-background-image: linear-gradient(217deg, rgba(255, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0) 70%), linear-gradient(127deg, rgba(0, 255, 0, 0.8) 0%, rgba(255, 0, 0, 0) 70%), linear-gradient(336deg, rgba(0, 0, 255, 0.8) 0%, rgba(255, 0, 0, 0) 70%);
-background-image: linear-gradient(217deg, rgba(255, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0) 70%), linear-gradient(127deg, rgba(0, 255, 0, 0.8) 0%, rgba(0, 255, 0, 0) 70%), linear-gradient(336deg, rgba(0, 0, 255, 0.8) 0%, rgba(0, 0, 255, 0) 70%);.
-
-            
-            
-            
-            
-            *)

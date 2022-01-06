@@ -88,15 +88,21 @@ module Selector =
                    $".{className} all > all + all ~ a:visited {{ color: white; }}"
                    
                let className, actual =
-                  createSelector [ !+ FssTypes.Html.All [ BorderColor.green
-                                                          Hover [ BorderColor.red ]
-                                                          Media.query
+                  createFss [ !+ FssTypes.Html.All [ BorderColor.green
+                                                     Hover [ BorderColor.red ]
+                                                     Media.query
                                                         [ FssTypes.Media.MaxHeight (em 2) ]
                                                         [ Content.value "Query in pseudo" ]
                                       ]]
-
+                  
+               let actual =
+                  actual
+                  |> List.map (fun (x,y) -> $"{x} {y}")
+                  |> String.concat ""
+                  
               testEqual
                   "adjacent sibling with nested selectors"
                   actual
-                  $".{className} + all {{ @media (max-height: 2em) {{ content: \"Query in pseudo\"; }} }}"
+                  $""".{className} + all {{ border-color: green; }}.{className} + all:hover {{ border-color: red; }}@media (max-height: 2em) {{ .{className} + all {{ content: "Query in pseudo"; }} }}"""
+              
            ]
