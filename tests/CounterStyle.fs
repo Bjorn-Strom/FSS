@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Counter =
+module CounterTests =
     let tests =
         testList "Counter"
             [
@@ -82,15 +82,15 @@ module Counter =
                     "{ range: 2 5; }"
                 testCounterCase
                     "range values"
-                    [Range.value [Fss.FssTypes.Counter.Infinite, Fss.FssTypes.Counter.Range' 5] ]
+                    [Range.value [Fss.Types.Counter.Infinite, Fss.Types.Counter.Range' 5] ]
                     "{ range: infinite 5; }"
                 testCounterCase
                     "range values"
-                    [Range.value [Fss.FssTypes.Counter.Range' 2, Fss.FssTypes.Counter.Range' 5; Fss.FssTypes.Counter.Range' 8, Fss.FssTypes.Counter.Range' 10] ]
+                    [Range.value [Fss.Types.Counter.Range' 2, Fss.Types.Counter.Range' 5; Fss.Types.Counter.Range' 8, Fss.Types.Counter.Range' 10] ]
                     "{ range: 2 5, 8 10; }"
                 testCounterCase
                     "range values"
-                    [Range.value [Fss.FssTypes.Counter.Infinite, Fss.FssTypes.Counter.Range' 6; Fss.FssTypes.Counter.Range' 10, Fss.FssTypes.Counter.Infinite] ]
+                    [Range.value [Fss.Types.Counter.Infinite, Fss.Types.Counter.Range' 6; Fss.Types.Counter.Range' 10, Fss.Types.Counter.Infinite] ]
                     "{ range: infinite 6, 10 infinite; }"
                 testCounterCase
                     "pad value"
@@ -110,7 +110,7 @@ module Counter =
                     "{ symbols: \"0\" \"1\" \"2\" \"4\" \"5\" \"6\" \"7\" \"8\" \"9\"; }"
                 testCounterCase
                     "symbols image list"
-                    [Symbols.value [ Fss.FssTypes.Image.Image.Url "first.svg"; Fss.FssTypes.Image.Image.Url "second.svg"; Fss.FssTypes.Image.Image.Url "third.svg"  ] ]
+                    [Symbols.value [ Fss.Types.Image.Image.Url "first.svg"; Fss.Types.Image.Image.Url "second.svg"; Fss.Types.Image.Image.Url "third.svg"  ] ]
                     "{ symbols: url(first.svg) url(second.svg) url(third.svg); }"
                 testCounterCase
                     "speak-as auto"

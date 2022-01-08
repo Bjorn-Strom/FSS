@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Color =
+module ColorTests =
     let tests =
         testList "Colors"
             [

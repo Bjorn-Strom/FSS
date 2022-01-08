@@ -58,10 +58,11 @@
     <Compile Include="Media.fs" />
     <Compile Include="Selector.fs" />
     <Compile Include="Tests.fs" />
-    <Content Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fss.Engine\Fss.Engine.fsproj" />
+    <PackageReference Include="Fet" Version="1.0.1" />
   </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Fss.Core\Fss.Core.fsproj" />
+  </ItemGroup>
 </Project>

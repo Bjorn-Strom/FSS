@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Scroll =
+module ScrollTests =
      let tests =
         testList "Scroll"
             [
@@ -338,11 +338,11 @@ module Scroll =
                     "{ scroll-snap-type: both; }"
                 testCase
                     "ScrollSnapType x mandatory"
-                    [ ScrollSnapType.mandatory(FssTypes.Scroll.SnapType.X) ]
+                    [ ScrollSnapType.mandatory(Fss.Types.Scroll.SnapType.X) ]
                     "{ scroll-snap-type: x mandatory; }"
                 testCase
                     "ScrollSnapType x mandatory"
-                    [ ScrollSnapType.proximity(FssTypes.Scroll.SnapType.X) ]
+                    [ ScrollSnapType.proximity(Fss.Types.Scroll.SnapType.X) ]
                     "{ scroll-snap-type: x proximity; }"
                 testCase
                     "ScrollSnapType inherit"
@@ -362,7 +362,7 @@ module Scroll =
                     "{ scroll-snap-type: revert; }"
                 testCase
                     "ScrollSnapAlign start end"
-                    [ ScrollSnapAlign.value(FssTypes.Scroll.SnapAlign.Start, FssTypes.Scroll.SnapAlign.End)]
+                    [ ScrollSnapAlign.value(Fss.Types.Scroll.SnapAlign.Start, Fss.Types.Scroll.SnapAlign.End)]
                     "{ scroll-snap-align: start end; }"
                 testCase
                     "ScrollSnapAlign start"

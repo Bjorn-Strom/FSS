@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module PointerEvents =
+module PointerEventsTests =
      let tests =
         testList "PointerEvents"
             [

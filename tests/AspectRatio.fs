@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module AspectRatio =
+module AspectRatioTests =
      let tests =
         testList "AspectRatio"
             [

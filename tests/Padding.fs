@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Padding =
+module PaddingTests =
     let tests =
         testList "Padding"
             [

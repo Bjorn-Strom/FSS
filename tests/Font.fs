@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Font =
+module FontTests =
     let tests =
         testList "Fonts"
             [
@@ -26,7 +26,7 @@ module Font =
                      "{ font-synthesis: small-caps; }"
                 testCase
                     "Font synthesis weight style"
-                    [ FontSynthesis.value [ FssTypes.Font.Weight; FssTypes.Font.Style; FssTypes.Font.Synthesis.SmallCaps  ] ]
+                    [ FontSynthesis.value [ Fss.Types.Font.Weight; Fss.Types.Font.Style; Fss.Types.Font.Synthesis.SmallCaps  ] ]
                      "{ font-synthesis: weight style small-caps; }"
                 testCase
                     "Font synthesis inherit"
@@ -418,7 +418,7 @@ module Font =
                       "{ font-family: unset; }"
                 testCase
                     "Font families"
-                    [ FontFamily.value [ FssTypes.Font.Serif; FssTypes.Font.Monospace ] ]
+                    [ FontFamily.value [ Fss.Types.Font.Serif; Fss.Types.Font.Monospace ] ]
                      "{ font-family: serif, monospace; }"
                 testCase
                     "font feature setting On"

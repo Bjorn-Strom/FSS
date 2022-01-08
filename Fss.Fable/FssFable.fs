@@ -6,14 +6,12 @@ open Fss
 
 [<AutoOpen>]
 module Fss =
-    // TODO: Hent FSS via nuget
-    // TODO: Ikke bare returner string, men returner de faktiske typene?
     let private processCssRule (name: string, rule: string) =
         $"{name} {rule}"
         
     /// Injects the css into the dom
     /// Only inject if its not injected already
-    let styleCache = HashSet<string>()
+    let private styleCache = HashSet<string>()
     let private injectCss className (css: string) =
         if styleCache.Contains className then
             ()
@@ -26,7 +24,7 @@ module Fss =
             styleCache.Add className |> ignore
     
     /// Injects CSS into dom and returns the classname
-    let fss (properties: Fss.FssTypes.Rule list): string =
+    let fss (properties: Fss.Types.Rule list): string =
         let className, cssRules = createFss properties
         cssRules
             |> List.map processCssRule
@@ -36,7 +34,7 @@ module Fss =
         className
         
     // Injects CSS into dom as global styles
-    let global'(properties: Fss.FssTypes.Rule list): unit =
+    let global'(properties: Fss.Types.Rule list): unit =
         let cssRules = createGlobal properties
         
         cssRules
@@ -50,7 +48,7 @@ module Fss =
         
         
     /// Injects counter style into dom and returns the counter name
-    let counterStyle (properties: Fss.FssTypes.CounterRule list): string =
+    let counterStyle (properties: Fss.Types.CounterRule list): string =
         let counterName, counterStyle =
             properties
             |> createCounterStyle
@@ -63,7 +61,7 @@ module Fss =
         $"@font-face {rules}"
         
     /// Injects font face into dom and returns the font name
-    let fontFaces name (properties: Fss.FssTypes.FontFaceRule list list): string =
+    let fontFaces name (properties: Fss.Types.FontFaceRule list list): string =
         let fontName, fontStyles =
             properties
             |> createFontFaces name
@@ -73,7 +71,7 @@ module Fss =
         fontName
         
     /// Injects font face into dom and returns the font name
-    let fontFace name (properties: Fss.FssTypes.FontFaceRule list): string =
+    let fontFace name (properties: Fss.Types.FontFaceRule list): string =
         let fontName, fontStyles =
             properties
             |> createFontFace name
@@ -86,7 +84,7 @@ module Fss =
         $"@keyframes {name} {rules}"
         
     /// Injects keyframes into dom and returns the animation name
-    let keyframes (properties: KeyframeAttribute list): string =
+    let keyframes (properties: Keyframes list): string =
         let animationName, animationStyles =
             properties
             |> createAnimation

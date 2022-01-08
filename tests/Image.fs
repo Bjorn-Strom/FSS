@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Image =
+module ImageTests =
      let tests =
         testList "Image"
             [

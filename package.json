@@ -2,11 +2,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "dotnet fable watch ./Documentation -o ./javascript --run esbuild --bundle ./javascript/Documentation.js --outfile=dist/Documentation.js --servedir=dist",
+    "start": "dotnet fable watch ./Documentation -o ./javascript --sourceMaps --run esbuild --bundle ./javascript/Documentation.js --outfile=dist/Documentation.js --servedir=dist",
     "build": "dotnet fable ./Documentation -o ./javascript && esbuild --bundle --minify ./javascript/Documentation.js --outfile=dist/Documentation.js",
     "test": "dotnet fable ./Tests -o ./dist/tests --run node ./dist/tests/Tests.js",
     "watch-test": "dotnet fable watch ./Tests -o ./dist/tests --run nodemon ./dist/tests/Tests.js",
-    "clean": "rm -rf javascript/* dist/tests",
+    "clean": "rm -rf javascript/* dist/tests dist/*.js",
     "publish-docs": "npm run clean && npm run build && gh-pages -d dist"
   },
   "homepage": "https://Bjorn-Strom.github.io/FSS",

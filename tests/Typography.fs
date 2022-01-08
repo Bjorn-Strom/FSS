@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Typography =
+module TypographyTests =
      let tests =
         testList "Typography"
             [

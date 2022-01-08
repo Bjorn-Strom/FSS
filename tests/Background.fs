@@ -4,7 +4,7 @@ open Utils
 open Fss
 open Fet
 
-module Background =
+module BackgroundTests =
      let tests =
         testList "Background"
             [
@@ -38,7 +38,7 @@ module Background =
                     "{ background-image: url(image.png); }" 
                 testCase
                     "background as linear gradient"
-                    [ BackgroundImage.linearGradient ((deg 45., [ FssTypes.Color.Red, pct 0; FssTypes.Color.Blue, pct 100 ])) ]
+                    [ BackgroundImage.linearGradient ((deg 45., [ Fss.Types.Color.Red, pct 0; Fss.Types.Color.Blue, pct 100 ])) ]
                     "{ background-image: linear-gradient(45deg, red 0%, blue 100%); }"
                 testCase
                     "background as linear gradients"
@@ -50,39 +50,39 @@ module Background =
                     "{ background-image: linear-gradient(217deg, rgba(255, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0) 70%), linear-gradient(127deg, rgba(0, 255, 0, 0.8) 0%, rgba(0, 255, 0, 0) 70%), linear-gradient(336deg, rgba(0, 0, 255, 0.8) 0%, rgba(0, 0, 255, 0) 70%); }"
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestSide, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(Fss.Types.Image.Circle, Fss.Types.Image.ClosestSide, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
                     "{ background-image: radial-gradient(circle closest-side at 50% 50%, #e66465 0%, #9198e5 100%); }"
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(Fss.Types.Image.Circle, Fss.Types.Image.ClosestCorner, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
                     "{ background-image: radial-gradient(circle closest-corner at 50% 50%, #e66465 0%, #9198e5 100%); }"
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestSide, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(Fss.Types.Image.Circle, Fss.Types.Image.FarthestSide, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
                     "{ background-image: radial-gradient(circle farthest-side at 50% 50%, #e66465 0%, #9198e5 100%); }"
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Circle, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(Fss.Types.Image.Circle, Fss.Types.Image.FarthestCorner, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
                     "{ background-image: radial-gradient(circle farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%); }"
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestSide, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(Fss.Types.Image.Ellipse, Fss.Types.Image.ClosestSide, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
                     "{ background-image: radial-gradient(ellipse closest-side at 50% 50%, #e66465 0%, #9198e5 100%); }"
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.ClosestCorner, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(Fss.Types.Image.Ellipse, Fss.Types.Image.ClosestCorner, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
                     "{ background-image: radial-gradient(ellipse closest-corner at 50% 50%, #e66465 0%, #9198e5 100%); }"
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestSide, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(Fss.Types.Image.Ellipse, Fss.Types.Image.FarthestSide, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
                     "{ background-image: radial-gradient(ellipse farthest-side at 50% 50%, #e66465 0%, #9198e5 100%); }"
                 testCase
                     "background as circular radial gradient"
-                    [ BackgroundImage.radialGradient(FssTypes.Image.Ellipse, FssTypes.Image.FarthestCorner, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
+                    [ BackgroundImage.radialGradient(Fss.Types.Image.Ellipse, Fss.Types.Image.FarthestCorner, pct 50, pct 50, [ hex "e66465", pct 0; hex "9198e5", pct 100 ])]
                     "{ background-image: radial-gradient(ellipse farthest-corner at 50% 50%, #e66465 0%, #9198e5 100%); }"
                 testCase
                     "background as conic gradient"
-                    [BackgroundImage.conicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.Red, deg 0.; FssTypes.Color.Orange, deg 90.; FssTypes.Color.Yellow, deg 180.; FssTypes.Color.Green, deg 270.; FssTypes.Color.Blue, deg 360.; ])]
+                    [BackgroundImage.conicGradient(deg 0., pct 50, pct 50, [ Fss.Types.Color.Red, deg 0.; Fss.Types.Color.Orange, deg 90.; Fss.Types.Color.Yellow, deg 180.; Fss.Types.Color.Green, deg 270.; Fss.Types.Color.Blue, deg 360.; ])]
                     "{ background-image: conic-gradient(from 0deg at 50% 50%, red 0deg, orange 90deg, yellow 180deg, green 270deg, blue 360deg); }"
                 testCase
                     "background as conic gradient"
@@ -90,7 +90,7 @@ module Background =
                     "{ background-image: conic-gradient(from 3.1416rad at 10% 50%, #e66465 0deg, #9198e5 360deg); }"
                 testCase
                     "background as repeating conic gradient"
-                    [ BackgroundImage.repeatingConicGradient(deg 0., pct 50, pct 50, [ FssTypes.Color.White, pct 0; FssTypes.Color.White, pct 25; FssTypes.Color.Black, pct 25; FssTypes.Color.Black, pct 50; ]) ]
+                    [ BackgroundImage.repeatingConicGradient(deg 0., pct 50, pct 50, [ Fss.Types.Color.White, pct 0; Fss.Types.Color.White, pct 25; Fss.Types.Color.Black, pct 25; Fss.Types.Color.Black, pct 50; ]) ]
                     "{ background-image: repeating-conic-gradient(from 0deg at 50% 50%, white 0%, white 25%, black 25%, black 50%); }"
                 testCase
                     "background position to top"
@@ -234,7 +234,7 @@ module Background =
                     "{ background-repeat: revert; }" 
                 testCase
                     "background repeats horizontal and vertical - repeat space"
-                    [ BackgroundRepeat.value(FssTypes.Background.Repeat, FssTypes.Background.Space) ]
+                    [ BackgroundRepeat.value(Fss.Types.Background.Repeat, Fss.Types.Background.Space) ]
                     "{ background-repeat: repeat space; }" 
                 testCase
                     "background size cover"
@@ -246,11 +246,11 @@ module Background =
                     "{ background-size: contain; }"
                 testCase
                     "background size contain"
-                    [ BackgroundSize.value FssTypes.Background.Contain]
+                    [ BackgroundSize.value Fss.Types.Background.Contain]
                     "{ background-size: contain; }"
                 testCase
                     "background size contain"
-                    [ BackgroundSize.value [FssTypes.Background.Size.Contain; FssTypes.Background.Size.Cover ]]
+                    [ BackgroundSize.value [Fss.Types.Background.Size.Contain; Fss.Types.Background.Size.Cover ]]
                     "{ background-size: contain, cover; }"
                 testCase
                     "background size percent"
@@ -374,11 +374,11 @@ module Background =
                     "{ background-blend-mode: luminosity; }"
                 testCase
                     "background blend mode value"
-                    [ BackgroundBlendMode.value FssTypes.Background.Hue ]
+                    [ BackgroundBlendMode.value Fss.Types.Background.Hue ]
                     "{ background-blend-mode: hue; }" 
                 testCase
                     "background blend mode multiple"
-                    [ BackgroundBlendMode.value [ FssTypes.Background.Hue; FssTypes.Background.Saturation; FssTypes.Background.Exclusion ] ]
+                    [ BackgroundBlendMode.value [ Fss.Types.Background.Hue; Fss.Types.Background.Saturation; Fss.Types.Background.Exclusion ] ]
                     "{ background-blend-mode: hue, saturation, exclusion; }" 
                 testCase
                     "background blend mode normal"

@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Animation =
+module AnimationTests =
     let tests =
         let name, _ =
             createAnimation
@@ -66,11 +66,11 @@ module Animation =
                     "{ animation-duration: revert; }" 
                 testCase
                     "Animation timing-function value"
-                    [ AnimationTimingFunction.value FssTypes.TimingFunction.Ease ]
+                    [ AnimationTimingFunction.value Fss.Types.TimingFunction.Ease ]
                     "{ animation-timing-function: ease; }"
                 testCase
                     "Animation timing-function values"
-                    [ AnimationTimingFunction.value [ FssTypes.TimingFunction.Ease; FssTypes.TimingFunction.EaseOut ] ]
+                    [ AnimationTimingFunction.value [ Fss.Types.TimingFunction.Ease; Fss.Types.TimingFunction.EaseOut ] ]
                     "{ animation-timing-function: ease, ease-out; }"
                 testCase
                     "Animation timing function ease"
@@ -110,27 +110,27 @@ module Animation =
                     "{ animation-timing-function: steps(5); }"
                 testCase
                     "Animation timing function  step jump start"
-                    [ AnimationTimingFunction.step(5, FssTypes.Animation.Step.JumpStart) ]
+                    [ AnimationTimingFunction.step(5, Fss.Types.Animation.Step.JumpStart) ]
                     "{ animation-timing-function: steps(5, jump-start); }"
                 testCase
                     "Animation timing function step jump end"
-                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.JumpEnd) ]
+                    [ AnimationTimingFunction.step (5, Fss.Types.Animation.Step.JumpEnd) ]
                     "{ animation-timing-function: steps(5, jump-end); }"
                 testCase
                     "Animation timing function step jump none"
-                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.JumpNone) ]
+                    [ AnimationTimingFunction.step (5, Fss.Types.Animation.Step.JumpNone) ]
                     "{ animation-timing-function: steps(5, jump-none); }"
                 testCase
                     "Animation timing function step jump both"
-                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.JumpBoth) ]
+                    [ AnimationTimingFunction.step (5, Fss.Types.Animation.Step.JumpBoth) ]
                     "{ animation-timing-function: steps(5, jump-both); }"
                 testCase
                     "Animation timing function step start"
-                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.Start) ]
+                    [ AnimationTimingFunction.step (5, Fss.Types.Animation.Step.Start) ]
                     "{ animation-timing-function: steps(5, start); }"
                 testCase
                     "Animation timing function step end"
-                    [ AnimationTimingFunction.step (5, FssTypes.Animation.Step.End) ]
+                    [ AnimationTimingFunction.step (5, Fss.Types.Animation.Step.End) ]
                     "{ animation-timing-function: steps(5, end); }"
                 testCase
                     "Animation timing function inherit"
@@ -198,11 +198,11 @@ module Animation =
                     "{ animation-iteration-count: revert; }" 
                 testCase
                     "Animation direction value"
-                    [ AnimationDirection.value FssTypes.Animation.Direction.Alternate ]
+                    [ AnimationDirection.value Fss.Types.Animation.Direction.Alternate ]
                     "{ animation-direction: alternate; }"
                 testCase
                     "Animation direction values"
-                    [ AnimationDirection.value [ FssTypes.Animation.Direction.Alternate; FssTypes.Animation.Direction.Reverse ] ]
+                    [ AnimationDirection.value [ Fss.Types.Animation.Direction.Alternate; Fss.Types.Animation.Direction.Reverse ] ]
                     "{ animation-direction: alternate, reverse; }"
                 testCase
                     "Animation direction normal"
@@ -238,11 +238,11 @@ module Animation =
                     "{ animation-direction: revert; }"
                 testCase
                     "Animation fill-mode value"
-                    [ AnimationFillMode.value FssTypes.Animation.FillMode.Both ]
+                    [ AnimationFillMode.value Fss.Types.Animation.FillMode.Both ]
                     "{ animation-fill-mode: both; }"
                 testCase
                     "Animation direction values"
-                    [ AnimationFillMode.value [ FssTypes.Animation.FillMode.Both; FssTypes.Animation.FillMode.Forwards ] ]
+                    [ AnimationFillMode.value [ Fss.Types.Animation.FillMode.Both; Fss.Types.Animation.FillMode.Forwards ] ]
                     "{ animation-fill-mode: both, forwards; }"
                 testCase
                     "Animation fill mode forwards"
@@ -278,11 +278,11 @@ module Animation =
                     "{ animation-fill-mode: revert; }"
                 testCase
                     "Animation play-state value"
-                    [ AnimationPlayState.value FssTypes.Animation.PlayState.Paused ]
+                    [ AnimationPlayState.value Fss.Types.Animation.PlayState.Paused ]
                     "{ animation-play-state: paused; }"
                 testCase
                     "Animation play-state values"
-                    [ AnimationPlayState.value [ FssTypes.Animation.PlayState.Paused; FssTypes.Animation.PlayState.Running ] ]
+                    [ AnimationPlayState.value [ Fss.Types.Animation.PlayState.Paused; Fss.Types.Animation.PlayState.Running ] ]
                     "{ animation-play-state: paused, running; }"
                 testCase
                     "Animation play state running"

@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Cursor =
+module CursorTests =
     let tests =
         testList "Cursor"
             [

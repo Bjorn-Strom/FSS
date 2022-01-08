@@ -1,17 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <Description>Provides helper functions for using Fss with Giraffe View Engine.</Description>
+        <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
+        <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;giraffe;viewengine;html</PackageTags>
+        <Authors>Bjørn-Ivar Strøm</Authors>
+        <Version>1.0.0</Version>
+        <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <OutputType>Library</OutputType>
+        <PackageReleaseNotes>Release.</PackageReleaseNotes>
+        <RootNamespace>Fss.Fable</RootNamespace>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageId>Fss-lib.Giraffe</PackageId>
     </PropertyGroup>
 
     <ItemGroup>
         <Compile Include="FssGiraffe.fs" />
-        <Content Include="paket.references" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Fss.Engine\Fss.Engine.fsproj" />
+      <PackageReference Include="Giraffe.ViewEngine" Version="1.4.0" />
+      <PackageReference Include="Fss-lib.Core" Version="0.0.4-beta" />
     </ItemGroup>
-    <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

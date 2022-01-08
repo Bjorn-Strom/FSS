@@ -4,9 +4,9 @@ open Fet
 open Utils
 open Fss
 
-module Psuedo =
+module PsuedoTests =
      let styles = [ Color.red ]
-     let createPseudoTest (ruleList: FssTypes.Rule list) =
+     let createPseudoTest (ruleList: Fss.Types.Rule list) =
          let className, styles = createFss ruleList
          let styles = snd (styles |> List.head)
          

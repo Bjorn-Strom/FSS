@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Outline =
+module OutlineTests =
     let tests =
         testList "Outline"
             [

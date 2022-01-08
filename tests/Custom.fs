@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Custom =
+module CustomTests =
      let tests =
         testList "Custom"
             [

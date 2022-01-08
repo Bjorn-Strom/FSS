@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Content =
+module ContentTests =
     let counterName, counterStyle =
         createCounterStyle [
             System.symbolic
@@ -47,7 +47,7 @@ module Content =
                     $"{{ content: counter({counterName})\". \"; }}"
                 testCase
                     "Content attribute"
-                    [ Content.attribute FssTypes.Attribute.Title ]
+                    [ Content.attribute Fss.Types.Attribute.Title ]
                     "{ content: attr(title); }"
                 testCase
                     "Content open quote"

@@ -1,11 +1,11 @@
 namespace FSSTests
 
 open Fet
-open Fss.FssTypes
+open Fss.Types
 open Utils
 open Fss
 
-module Mask =
+module MaskTests =
      let tests =
         testList "Mask"
             [
@@ -115,7 +115,7 @@ module Mask =
                     "{ mask-image: url(image.jpg); }" 
                 testCase
                     "Mask image source linear gradient"
-                    [ MaskImage.linearGradient((deg 45., [ FssTypes.Color.Red, pct 0; FssTypes.Color.Blue, pct 100 ])) ]
+                    [ MaskImage.linearGradient((deg 45., [ Fss.Types.Color.Red, pct 0; Fss.Types.Color.Blue, pct 100 ])) ]
                     "{ mask-image: linear-gradient(45deg, red 0%, blue 100%); }" 
                 testCase
                     "Mask image source inherit"
@@ -147,7 +147,7 @@ module Mask =
                     "{ mask-mode: match-source; }" 
                 testCase
                     "Mask mode multiple"
-                    [ MaskMode.value [FssTypes.Mask.Alpha; FssTypes.Mask.MatchSource] ]
+                    [ MaskMode.value [Fss.Types.Mask.Alpha; Fss.Types.Mask.MatchSource] ]
                     "{ mask-mode: alpha, match-source; }" 
                 testCase
                     "Mask mode inherit"
@@ -167,7 +167,7 @@ module Mask =
                     "{ mask-mode: revert; }"
                 testCase
                     "MaskOrigin multiple"
-                    [ MaskOrigin.value([FssTypes.Mask.Origin.ViewBox; FssTypes.Mask.Origin.FillBox; FssTypes.Mask.Origin.BorderBox])]
+                    [ MaskOrigin.value([Fss.Types.Mask.Origin.ViewBox; Fss.Types.Mask.Origin.FillBox; Fss.Types.Mask.Origin.BorderBox])]
                     "{ mask-origin: view-box, fill-box, border-box; }" 
                 testCase
                     "MaskOrigin content-box"
@@ -255,11 +255,11 @@ module Mask =
                     "{ mask-position: revert; }"
                 testCase
                     "MaskRepeat 2 value"
-                    [ MaskRepeat.value(FssTypes.Mask.RepeatX, FssTypes.Mask.RepeatY)]
+                    [ MaskRepeat.value(Fss.Types.Mask.RepeatX, Fss.Types.Mask.RepeatY)]
                     "{ mask-repeat: repeat-x repeat-y; }" 
                 testCase
                     "MaskRepeat multiple values"
-                    [ MaskRepeat.value [FssTypes.Mask.RepeatX, FssTypes.Mask.RepeatY; FssTypes.Mask.NoRepeat, FssTypes.Mask.Round]]
+                    [ MaskRepeat.value [Fss.Types.Mask.RepeatX, Fss.Types.Mask.RepeatY; Fss.Types.Mask.NoRepeat, Fss.Types.Mask.Round]]
                     "{ mask-repeat: repeat-x repeat-y, no-repeat round; }" 
                 testCase
                     "MaskRepeat repeatX"

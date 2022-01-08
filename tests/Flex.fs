@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Flex =
+module FlexTests =
      let tests =
         testList "Flex"
             [

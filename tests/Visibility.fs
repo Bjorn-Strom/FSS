@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Visibility =
+module VisibilityTests =
      let tests =
         testList "Visibility" [
                 testCase
@@ -25,11 +25,11 @@ module Visibility =
                     "{ paint-order: fill; }"
                 testCase
                     "Paint order stroke fill"
-                    [PaintOrder.value [FssTypes.PaintOrder.Stroke; FssTypes.PaintOrder.Fill]]
+                    [PaintOrder.value [Fss.Types.PaintOrder.Stroke; Fss.Types.PaintOrder.Fill]]
                     "{ paint-order: stroke fill; }"
                 testCase
                     "Paint order markers stroke fill"
-                    [PaintOrder.value [FssTypes.PaintOrder.Markers; FssTypes.PaintOrder.Stroke; FssTypes.PaintOrder.Fill] ]
+                    [PaintOrder.value [Fss.Types.PaintOrder.Markers; Fss.Types.PaintOrder.Stroke; Fss.Types.PaintOrder.Fill] ]
                     "{ paint-order: markers stroke fill; }"
                 testCase
                     "Paint order normal"

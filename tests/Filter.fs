@@ -4,7 +4,7 @@ open Fet
 open Fss
 open Utils
 
-module Filter =
+module FilterTests =
      let tests =
         testList "Filter"
             [
@@ -26,11 +26,11 @@ module Filter =
                     "{ filter: contrast(40%); }" 
                 testCase
                     "Filter drop shadow with invert"
-                    [ Filter.dropShadow(px 16, px 16, px 20, FssTypes.Color.Color.Red)  ]
+                    [ Filter.dropShadow(px 16, px 16, px 20, Fss.Types.Color.Color.Red)  ]
                     "{ filter: drop-shadow(16px 16px 20px red); }"
                 testCase
                     "Filter drop shadow with invert"
-                    [ Filter.dropShadow(px 16, px 16, px 20, FssTypes.Color.Color.Red, pct 5)  ]
+                    [ Filter.dropShadow(px 16, px 16, px 20, Fss.Types.Color.Color.Red, pct 5)  ]
                     "{ filter: drop-shadow(16px 16px 20px red) invert(5%); }" 
                 testCase
                     "Filter grayscale"
@@ -58,7 +58,7 @@ module Filter =
                     "{ filter: sepia(60%); }" 
                 testCase
                     "Filter multiple"
-                    [ Filter.value  [ FssTypes.Filter.Contrast (pct 175);  FssTypes.Filter.Brightness (pct 3)  ] ]
+                    [ Filter.value  [ Fss.Types.Filter.Contrast (pct 175);  Fss.Types.Filter.Brightness (pct 3)  ] ]
                     "{ filter: contrast(175%) brightness(3%); }" 
                 testCase
                     "Filter none"
@@ -94,7 +94,7 @@ module Filter =
                     "{ backdrop-filter: contrast(40%); }" 
                 testCase
                     "BackdropFilter multiple"
-                    [ BackdropFilter.value  [ FssTypes.Filter.Contrast (pct 175);  FssTypes.Filter.Brightness (pct 3)  ] ]
+                    [ BackdropFilter.value  [ Fss.Types.Filter.Contrast (pct 175);  Fss.Types.Filter.Brightness (pct 3)  ] ]
                     "{ backdrop-filter: contrast(175%) brightness(3%); }" 
                 testCase
                     "BackdropFilter grayscale"

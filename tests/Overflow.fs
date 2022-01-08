@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Overflow =
+module OverflowTests =
     let tests =
         testList "Overflow"
             [
@@ -82,19 +82,19 @@ module Overflow =
                     "overflow-y: revert;"
                 testCase
                     "Overflow visible visible"
-                    [Overflow.value (FssTypes.Overflow.Visible, FssTypes.Overflow.Visible)]
+                    [Overflow.value (Fss.Types.Overflow.Visible, Fss.Types.Overflow.Visible)]
                     "overflow: visible visible;"
                 testCase
                     "OverflowXY hidden hidden"
-                    [Overflow.value (FssTypes.Overflow.Hidden, FssTypes.Overflow.Hidden)]
+                    [Overflow.value (Fss.Types.Overflow.Hidden, Fss.Types.Overflow.Hidden)]
                     "overflow: hidden hidden;"
                 testCase
                     "Overflow Clip clip"
-                    [Overflow.value (FssTypes.Overflow.Clip, FssTypes.Overflow.Clip)]
+                    [Overflow.value (Fss.Types.Overflow.Clip, Fss.Types.Overflow.Clip)]
                     "overflow: clip clip;"
                 testCase
                     "Overflow scroll Scroll"
-                    [Overflow.value (FssTypes.Overflow.Scroll, FssTypes.Overflow.Scroll)]
+                    [Overflow.value (Fss.Types.Overflow.Scroll, Fss.Types.Overflow.Scroll)]
                     "overflow: scroll scroll;"
                 testCase
                     "OverflowWrap break-word"

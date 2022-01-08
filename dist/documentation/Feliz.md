@@ -1,19 +1,15 @@
 ## Fss.Feliz
 
-After I started using Feliz and liking the API quite a bit I figured it was finally time to play around with a Feliz-specific syntax for Fss.
-In order to use this specific syntax you need to install an additional Nuget package:
+## Installation
+
 ```
 # nuget
-dotnet add package Fss-lib-feliz
-
-# paket
-paket add Fss-lib-feliz --project ./project/path
+dotnet add package Fss-lib.Feliz
 ```
-While the codebase for this syntax is small I dont want to introduce any additional dependencies which arent needed for pure Fss. Therefore an extra package is needed.
 
-## Using this syntax
-If you know Fss already you write all the styling in a list and pass that into the `fss` function.
-This is still true, but when you open the `Fss.Feliz` namespace you can access `fss` as a prop.
+## Usage
+As this is built on `Fss.Fable` all functions that library defines are also available here, in addition to that
+you can also write Fss with Feliz syntax.
 
 Here is a quick example of how that works.
 ```fsharp
@@ -63,8 +59,8 @@ let anAnimation =
 let someStyle =
     fss [
        BackgroundColor.red
-       Width.value px 200
-       Height.value <| px 200
+       Width.value (px 200)
+       Height.value (px 200)
        Hover [ BackgroundColor.blue ]
     ]
 

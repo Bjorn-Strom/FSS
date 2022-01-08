@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Column =
+module ColumnTests =
     let tests =
         testList "Column"
             [

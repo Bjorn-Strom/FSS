@@ -2,7 +2,7 @@
 
 open Fss
 open Fet
-open Fss.FssTypes
+open Fss.Types
 open System
 
 module Utils =

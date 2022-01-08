@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Clear =
+module ClearTests =
      let tests =
         testList "Clear"
             [

@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Composite =
+module CompositeTests =
     let counter =
         createCounterStyle [ System.cyclic
                              Symbols.value [ "" ]
@@ -21,8 +21,8 @@ module Composite =
     let counterStyle =
         createFss [ ListStyleType.value (fst counter)
                     FontFamily.value (fst font)
-                    ! FssTypes.Html.Li [ After [ Content.value "."  ]] 
-                    ! FssTypes.Html.Li [
+                    ! Fss.Types.Html.Li [ After [ Content.value "."  ]] 
+                    ! Fss.Types.Html.Li [
                         BackgroundColor.aliceBlue
                         Hover [ BackgroundColor.orangeRed ]
                     ]
@@ -46,7 +46,7 @@ module Composite =
                     AnimationIterationCount.infinite
                     FontFamily.value "DroidSerif"
                     Hover [ AnimationDuration.value (ms 500) ]
-                    Media.query [ FssTypes.Media.MaxWidth(px 600) ] [
+                    Media.query [ Fss.Types.Media.MaxWidth(px 600) ] [
                         BackgroundColor.hex "87ceeb"
                     ]
                     Label "title"

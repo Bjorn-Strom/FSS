@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Perspective =
+module PerspectiveTests =
     let tests =
         testList "Perspective"
             [

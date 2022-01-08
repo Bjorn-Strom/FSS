@@ -11,19 +11,19 @@ fss [ Label "Media query examples"
       Height.value (px 200)
       BackgroundColor.blue
 
-      Media.query [ FssTypes.Media.MinWidth(px 700) ] [
+      Media.query [ Fss.Types.Media.MinWidth(px 700) ] [
           BackgroundColor.pink
           Color.orangeRed
       ]
 
       Media.queryFor
-          FssTypes.Media.Print
+          Fss.Types.Media.Print
           []
           [ MarginTop.value (px 200)
             Transform.value [ Transform.rotate (deg 45.0) ]
             BackgroundColor.red ]
 
-      Media.query [ FssTypes.Media.Orientation FssTypes.Media.Landscape ] [
+      Media.query [ Fss.Types.Media.Orientation Fss.Types.Media.Landscape ] [
           Color.green
           BackgroundColor.orangeRed
           FontSize.value (px 28)

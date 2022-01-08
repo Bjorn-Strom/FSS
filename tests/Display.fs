@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Display =
+module DisplayTests =
     let tests =
         testList "Display"
             [
@@ -74,7 +74,7 @@ module Display =
                     "{ display: table-caption; }"
                 testCase
                     "Display grid as value"
-                    [ Display.value FssTypes.Display.Grid]
+                    [ Display.value Fss.Types.Display.Grid]
                     "{ display: grid; }"
                 testCase
                     "Display none"

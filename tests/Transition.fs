@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Transition =
+module TransitionTests =
     let tests =
         testList "Transition"
             [
@@ -34,7 +34,7 @@ module Transition =
                      "{ transition-duration: 120ms; }"; 
                 testCase
                     "Transition duration value unset"
-                    [TransitionDuration.value FssTypes.Unset ]
+                    [TransitionDuration.value Fss.Types.Unset ]
                     "{ transition-duration: unset; }"
                 testCase
                     "Transition duration inherit"
@@ -138,27 +138,27 @@ module Transition =
                     "{ transition-timing-function: steps(5); }"
                 testCase
                     "Transition timing function  step jump start"
-                    [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.JumpStart) ]
+                    [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.JumpStart) ]
                     "{ transition-timing-function: steps(5, jump-start); }"
                 testCase
                     "Transition timing function step jump end"
-                    [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.JumpEnd) ]
+                    [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.JumpEnd) ]
                     "{ transition-timing-function: steps(5, jump-end); }"
                 testCase
                     "Transition timing function step jump none"
-                    [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.JumpNone) ]
+                    [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.JumpNone) ]
                     "{ transition-timing-function: steps(5, jump-none); }"
                 testCase
                     "Transition timing function step jump both"
-                    [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.JumpBoth) ]
+                    [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.JumpBoth) ]
                     "{ transition-timing-function: steps(5, jump-both); }"
                 testCase
                     "Transition timing function step start"
-                    [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.Step.Start) ]
+                    [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.Step.Start) ]
                     "{ transition-timing-function: steps(5, start); }"
                 testCase
                     "Transition timing function step end"
-                    [ TransitionTimingFunction.step(5, FssTypes.TimingFunction.Step.End) ]
+                    [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.Step.End) ]
                     "{ transition-timing-function: steps(5, end); }"
                 testCase
                     "Transition timing function inherit"

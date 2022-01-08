@@ -5,7 +5,7 @@ open Fss.Word
 open Utils
 open Fss
 
-module Word =
+module WordTests =
     let tests =
         testList "Word"
             [

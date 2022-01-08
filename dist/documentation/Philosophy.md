@@ -1,6 +1,6 @@
 ## Philosophy
 
-The main idea behind Fss is discoverable CSS.
+The main idea behind Fss is an extendable library that provides discoverable CSS.
 Write CSS in F# quick and easy!
 
 There exists some quite good styling alternatives in F# already.

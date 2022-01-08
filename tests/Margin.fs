@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Margin =
+module MarginTests =
     let tests =
         testList "Margin"
             [

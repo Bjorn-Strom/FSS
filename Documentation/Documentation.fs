@@ -62,7 +62,7 @@ module App =
                               TransitionTimingFunction.easeInOut
                               TransitionDuration.value (ms 500.)
 
-                              Media.query [ FssTypes.Media.MaxWidth <| px 1000 ] [
+                              Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
                                   Top.value (px 0)
                               ] ]
                    prop.children [ Html.div [ prop.fss [ Cursor.pointer ]
@@ -90,7 +90,7 @@ module App =
                                 TransitionTimingFunction.easeInOut
                                 TransitionDuration.value (ms 500.)
                                 
-                                Media.query [ FssTypes.Media.MaxWidth <| px 1000 ] [
+                                Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
                                     if store.ShowSidebar then
                                         Left.value (pct 0)
                                     else
@@ -101,14 +101,14 @@ module App =
                                 // We need to animate the article as well as the menu when
                                 // The following code block deals with that
                                 // (parens added as Fantomas is acting up)
-                                (!+FssTypes.Html.Article)
+                                (!+Fss.Types.Html.Article)
                                     [ MarginLeft.value (px 400)
                                       TransitionProperty.marginLeft
                                       TransitionTimingFunction.easeInOut
                                       TransitionDuration.value (ms 500.)
                                       MaxWidth.value (pct 60)
 
-                                      Media.query [ FssTypes.Media.MaxWidth <| px 1000 ] [
+                                      Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
                                           MarginLeft.value (px 0)
                                           MaxWidth.value (pct 100)
 
@@ -310,10 +310,10 @@ module App =
                                                         backgroundColorFrames ]
                                   AnimationDuration.value [ sec 1.0
                                                             sec 5.0 ]
-                                  AnimationTimingFunction.value [ FssTypes.TimingFunction.EaseInOut
-                                                                  FssTypes.TimingFunction.Ease ]
-                                  AnimationIterationCount.value [ FssTypes.Animation.Infinite
-                                                                  FssTypes.Animation.IterationCount.Value 3 ] ]
+                                  AnimationTimingFunction.value [ Fss.Types.TimingFunction.EaseInOut
+                                                                  Fss.Types.TimingFunction.Ease ]
+                                  AnimationIterationCount.value [ Fss.Types.Animation.Infinite
+                                                                  Fss.Types.Animation.IterationCount.Value 3 ] ]
 
                         Some [ Html.div [ Html.div [ prop.className bounceAnimation
                                                      prop.text "Bouncy bounce" ]
@@ -323,21 +323,21 @@ module App =
                     | Combinators ->
                         let descendantCombinator =
                             fss [ Label "Descendant"
-                                  ! FssTypes.Html.P [ Color.red ] ]
+                                  ! Fss.Types.Html.P [ Color.red ] ]
 
                         let childCombinator =
                             fss [ Label "Child"
-                                  !> FssTypes.Html.P [ Color.red ]
+                                  !> Fss.Types.Html.P [ Color.red ]
 
                                    ]
 
                         let directCombinator =
                             fss [ Label "Direct"
-                                  !+ FssTypes.Html.P [ Color.red ] ]
+                                  !+ Fss.Types.Html.P [ Color.red ] ]
 
                         let adjacentCombinator =
                             fss [ Label "Adjacent"
-                                  !~ FssTypes.Html.P [ Color.red ] ]
+                                  !~ Fss.Types.Html.P [ Color.red ] ]
 
                         Some [
 
@@ -373,19 +373,19 @@ module App =
                                   Height.value (px 200)
                                   BackgroundColor.blue
 
-                                  Media.query [ FssTypes.Media.MinWidth(px 700) ] [
+                                  Media.query [ Fss.Types.Media.MinWidth(px 700) ] [
                                       BackgroundColor.pink
                                       Color.orangeRed
                                   ]
 
                                   Media.queryFor
-                                      FssTypes.Media.Print
+                                      Fss.Types.Media.Print
                                       []
                                       [ MarginTop.value (px 200)
                                         Transform.value [ Transform.rotate (deg 45.0) ]
                                         BackgroundColor.red ]
 
-                                  Media.query [ FssTypes.Media.Orientation FssTypes.Media.Landscape ] [
+                                  Media.query [ Fss.Types.Media.Orientation Fss.Types.Media.Landscape ] [
                                       Color.green
                                       BackgroundColor.orangeRed
                                       FontSize.value (px 28)
@@ -550,10 +550,10 @@ module App =
                             fontFace
                                 "moderna"
                                 [ FontFace.Src.sources
-                                      [ FssTypes.FontFace.Woff2 "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2"
-                                        FssTypes.FontFace.Woff "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff"
-                                        FssTypes.FontFace.Truetype "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf"
-                                        FssTypes.FontFace.Svg "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg" ]
+                                      [ Fss.Types.FontFace.Woff2 "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff2"
+                                        Fss.Types.FontFace.Woff "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.woff"
+                                        Fss.Types.FontFace.Truetype "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf"
+                                        Fss.Types.FontFace.Svg "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg" ]
                                   FontFace.FontWeight.normal
                                   FontFace.FontStyle.normal ]
 
@@ -653,8 +653,8 @@ module App =
                             fss [ yield! box
                                   Label "Radial Gradient style 1"
                                   BackgroundImage.radialGradient (
-                                      FssTypes.Image.Ellipse,
-                                      FssTypes.Image.FarthestCorner,
+                                      Fss.Types.Image.Ellipse,
+                                      Fss.Types.Image.FarthestCorner,
                                       pct 50,
                                       pct 50,
                                       [ hex "e66465", pct 0
@@ -665,8 +665,8 @@ module App =
                             fss [ Label "Radial Gradient style 2"
                                   yield! box
                                   BackgroundImage.radialGradient (
-                                      FssTypes.Image.Ellipse,
-                                      FssTypes.Image.ClosestSide,
+                                      Fss.Types.Image.Ellipse,
+                                      Fss.Types.Image.ClosestSide,
                                       pct 50,
                                       pct 50,
                                       [ hex "3f87a6", pct 0
@@ -678,8 +678,8 @@ module App =
                             fss [ yield! box
                                   Label "Radial Gradient style 3"
                                   BackgroundImage.radialGradient (
-                                      FssTypes.Image.Circle,
-                                      FssTypes.Image.FarthestCorner,
+                                      Fss.Types.Image.Circle,
+                                      Fss.Types.Image.FarthestCorner,
                                       pct 100,
                                       pct 50,
                                       [ hex "333", pct 0
@@ -692,8 +692,8 @@ module App =
                             fss [ Label "Repeating Radial Gradient style 1"
                                   yield! box
                                   BackgroundImage.repeatingRadialGradient (
-                                      FssTypes.Image.Ellipse,
-                                      FssTypes.Image.FarthestCorner,
+                                      Fss.Types.Image.Ellipse,
+                                      Fss.Types.Image.FarthestCorner,
                                       pct 50,
                                       pct 50,
                                       [ hex "e66465", pct 0
@@ -704,8 +704,8 @@ module App =
                             fss [ Label "Repeating Radial Gradient style 2"
                                   yield! box
                                   BackgroundImage.repeatingRadialGradient (
-                                      FssTypes.Image.Ellipse,
-                                      FssTypes.Image.ClosestSide,
+                                      Fss.Types.Image.Ellipse,
+                                      Fss.Types.Image.ClosestSide,
                                       pct 50,
                                       pct 50,
                                       [ hex "3f87a6", pct 0
@@ -717,8 +717,8 @@ module App =
                             fss [ Label "Repeating Radial Gradient style 3"
                                   yield! box
                                   BackgroundImage.repeatingRadialGradient (
-                                      FssTypes.Image.Circle,
-                                      FssTypes.Image.FarthestCorner,
+                                      Fss.Types.Image.Circle,
+                                      Fss.Types.Image.FarthestCorner,
                                       pct 100,
                                       pct 50,
                                       [ hex "333", px 0
@@ -734,11 +734,11 @@ module App =
                                       deg 0.,
                                       pct 50,
                                       pct 50,
-                                      [ FssTypes.Color.Red, deg 0.
-                                        FssTypes.Color.Orange, deg 90.
-                                        FssTypes.Color.Yellow, deg 180.
-                                        FssTypes.Color.Green, deg 270.
-                                        FssTypes.Color.Blue, deg 360. ]
+                                      [ Fss.Types.Color.Red, deg 0.
+                                        Fss.Types.Color.Orange, deg 90.
+                                        Fss.Types.Color.Yellow, deg 180.
+                                        Fss.Types.Color.Green, deg 270.
+                                        Fss.Types.Color.Blue, deg 360. ]
                                   ) ]
 
                         let conicGradientStyle2 =
@@ -759,16 +759,16 @@ module App =
                                       deg 0.,
                                       pct 50,
                                       pct 50,
-                                      [ FssTypes.Color.Red, deg 6.
-                                        FssTypes.Color.Orange, deg 6.
-                                        FssTypes.Color.Orange, deg 18.
-                                        FssTypes.Color.Yellow, deg 18.
-                                        FssTypes.Color.Yellow, deg 45.
-                                        FssTypes.Color.Green, deg 45.
-                                        FssTypes.Color.Green, deg 110.
-                                        FssTypes.Color.Blue, deg 110.
-                                        FssTypes.Color.Blue, deg 200.
-                                        FssTypes.Color.Purple, deg 200. ]
+                                      [ Fss.Types.Color.Red, deg 6.
+                                        Fss.Types.Color.Orange, deg 6.
+                                        Fss.Types.Color.Orange, deg 18.
+                                        Fss.Types.Color.Yellow, deg 18.
+                                        Fss.Types.Color.Yellow, deg 45.
+                                        Fss.Types.Color.Green, deg 45.
+                                        Fss.Types.Color.Green, deg 110.
+                                        Fss.Types.Color.Blue, deg 110.
+                                        Fss.Types.Color.Blue, deg 200.
+                                        Fss.Types.Color.Purple, deg 200. ]
                                   ) ]
 
                         let conicGradientStyle4 =
@@ -779,12 +779,12 @@ module App =
                                       deg 0.,
                                       pct 50,
                                       pct 50,
-                                      [ FssTypes.Color.Yellow, deg (360. / 6.)
-                                        FssTypes.Color.Lime, deg <| (360. / 6.) * 2.
-                                        FssTypes.Color.Blue, deg <| (360. / 6.) * 3.
-                                        FssTypes.Color.Violet, deg <| (360. / 6.) * 4.
-                                        FssTypes.Color.Red, deg <| (360. / 6.) * 5.
-                                        FssTypes.Color.Yellow, deg <| (360. / 6.) * 6. ]
+                                      [ Fss.Types.Color.Yellow, deg (360. / 6.)
+                                        Fss.Types.Color.Lime, deg <| (360. / 6.) * 2.
+                                        Fss.Types.Color.Blue, deg <| (360. / 6.) * 3.
+                                        Fss.Types.Color.Violet, deg <| (360. / 6.) * 4.
+                                        Fss.Types.Color.Red, deg <| (360. / 6.) * 5.
+                                        Fss.Types.Color.Yellow, deg <| (360. / 6.) * 6. ]
                                   ) ]
 
                         let repeatingConicGradientStyle =
@@ -798,10 +798,10 @@ module App =
                                       deg 0.,
                                       pct 50,
                                       pct 50,
-                                      [ FssTypes.Color.White, pct 0
-                                        FssTypes.Color.White, pct 25
-                                        FssTypes.Color.Black, pct 25
-                                        FssTypes.Color.Black, pct 50 ]
+                                      [ Fss.Types.Color.White, pct 0
+                                        Fss.Types.Color.White, pct 25
+                                        Fss.Types.Color.Black, pct 25
+                                        Fss.Types.Color.Black, pct 50 ]
                                   ) ]
 
                         Some [
@@ -829,7 +829,7 @@ module App =
                                                           Html.div [ prop.className conicGradientStyle4 ] ] ]
                                Html.div [ prop.className (fss [ Label "Flex 1"; Display.flex ])
                                           prop.children [ Html.div [ prop.className repeatingConicGradientStyle ] ] ] ]
-                    | Engine ->
+                    | Core ->
                         None
                     | Fable ->
                         None
@@ -864,7 +864,8 @@ module App =
                         Some [ box; bounceBox ]
                     | Giraffe ->
                         None
-
+                    | Troubleshoot ->
+                        None
                     | SVG ->
                         let logoAnimation =
                             keyframes [ frame 100 [ Svg.StrokeDashoffset.value [ 0 ] ] ]
@@ -897,11 +898,11 @@ module App =
         global' [ Link [ Color.hex sidebarText ]
                   Visited [ Color.hex sidebarText ]
                   !
-                      FssTypes.Html.A
+                      Fss.Types.Html.A
                       [ Hover [ Color.hex sidebarHover ]
                         Focus [ Color.hex sidebarHover ] ]
                   !
-                      FssTypes.Html.Body
+                      Fss.Types.Html.Body
                       [ BackgroundColor.hex "#181A1B"
                         textFont
                         Color.hex contentText ] ]

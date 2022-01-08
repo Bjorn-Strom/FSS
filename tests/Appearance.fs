@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Appearance =
+module AppearanceTests =
     let tests =
         testList "Appearance"
             [

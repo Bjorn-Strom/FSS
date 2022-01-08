@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Caret =
+module CaretTests =
     let tests =
         testList "Caret"
             [

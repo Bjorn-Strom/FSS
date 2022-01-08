@@ -9,7 +9,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss.Feliz", "Fss.Feliz\Fss.
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss.Fable", "Fss.Fable\Fss.Fable.fsproj", "{F88AD983-4E04-4F48-B68F-34E37B528FC2}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss.Engine", "Fss.Engine\Fss.Engine.fsproj", "{1301D3C2-CB37-4BDA-8359-7A5A1124BD53}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fss.Core", "Fss.Core\Fss.Core.fsproj", "{1301D3C2-CB37-4BDA-8359-7A5A1124BD53}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Documentation", "Documentation\Documentation.fsproj", "{F3ABAE9E-1CE4-4FD2-9F7A-7DD9E3120B96}"
 EndProject

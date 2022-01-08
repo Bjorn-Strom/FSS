@@ -80,8 +80,8 @@ let radialGradientStyle1 =
     fss [ yield! box
           Label "Radial Gradient style 1"
           BackgroundImage.radialGradient (
-              FssTypes.Image.Ellipse,
-              FssTypes.Image.FarthestCorner,
+              Fss.Types.Image.Ellipse,
+              Fss.Types.Image.FarthestCorner,
               pct 50,
               pct 50,
               [ hex "e66465", pct 0
@@ -92,8 +92,8 @@ let radialGradientStyle2 =
     fss [ Label "Radial Gradient style 2"
           yield! box
           BackgroundImage.radialGradient (
-              FssTypes.Image.Ellipse,
-              FssTypes.Image.ClosestSide,
+              Fss.Types.Image.Ellipse,
+              Fss.Types.Image.ClosestSide,
               pct 50,
               pct 50,
               [ hex "3f87a6", pct 0
@@ -105,8 +105,8 @@ let radialGradientStyle3 =
     fss [ yield! box
           Label "Radial Gradient style 3"
           BackgroundImage.radialGradient (
-              FssTypes.Image.Circle,
-              FssTypes.Image.FarthestCorner,
+              Fss.Types.Image.Circle,
+              Fss.Types.Image.FarthestCorner,
               pct 100,
               pct 50,
               [ hex "333", pct 0
@@ -124,8 +124,8 @@ let repeatingRadialGradientStyle1 =
     fss [ Label "Repeating Radial Gradient style 1"
           yield! box
           BackgroundImage.repeatingRadialGradient (
-              FssTypes.Image.Ellipse,
-              FssTypes.Image.FarthestCorner,
+              Fss.Types.Image.Ellipse,
+              Fss.Types.Image.FarthestCorner,
               pct 50,
               pct 50,
               [ hex "e66465", pct 0
@@ -136,8 +136,8 @@ let repeatingRadialGradientStyle2 =
     fss [ Label "Repeating Radial Gradient style 2"
           yield! box
           BackgroundImage.repeatingRadialGradient (
-              FssTypes.Image.Ellipse,
-              FssTypes.Image.ClosestSide,
+              Fss.Types.Image.Ellipse,
+              Fss.Types.Image.ClosestSide,
               pct 50,
               pct 50,
               [ hex "3f87a6", pct 0
@@ -149,8 +149,8 @@ let repeatingRadialGradientStyle3 =
     fss [ Label "Repeating Radial Gradient style 3"
           yield! box
           BackgroundImage.repeatingRadialGradient (
-              FssTypes.Image.Circle,
-              FssTypes.Image.FarthestCorner,
+              Fss.Types.Image.Circle,
+              Fss.Types.Image.FarthestCorner,
               pct 100,
               pct 50,
               [ hex "333", px 0
@@ -171,11 +171,11 @@ let conicGradientStyle1 =
               deg 0.,
               pct 50,
               pct 50,
-              [ FssTypes.Color.Red, deg 0.
-                FssTypes.Color.Orange, deg 90.
-                FssTypes.Color.Yellow, deg 180.
-                FssTypes.Color.Green, deg 270.
-                FssTypes.Color.Blue, deg 360. ]
+              [ Fss.Types.Color.Red, deg 0.
+                Fss.Types.Color.Orange, deg 90.
+                Fss.Types.Color.Yellow, deg 180.
+                Fss.Types.Color.Green, deg 270.
+                Fss.Types.Color.Blue, deg 360. ]
           ) ]
 
 let conicGradientStyle2 =
@@ -196,16 +196,16 @@ let conicGradientStyle3 =
               deg 0.,
               pct 50,
               pct 50,
-              [ FssTypes.Color.Red, deg 6.
-                FssTypes.Color.Orange, deg 6.
-                FssTypes.Color.Orange, deg 18.
-                FssTypes.Color.Yellow, deg 18.
-                FssTypes.Color.Yellow, deg 45.
-                FssTypes.Color.Green, deg 45.
-                FssTypes.Color.Green, deg 110.
-                FssTypes.Color.Blue, deg 110.
-                FssTypes.Color.Blue, deg 200.
-                FssTypes.Color.Purple, deg 200. ]
+              [ Fss.Types.Color.Red, deg 6.
+                Fss.Types.Color.Orange, deg 6.
+                Fss.Types.Color.Orange, deg 18.
+                Fss.Types.Color.Yellow, deg 18.
+                Fss.Types.Color.Yellow, deg 45.
+                Fss.Types.Color.Green, deg 45.
+                Fss.Types.Color.Green, deg 110.
+                Fss.Types.Color.Blue, deg 110.
+                Fss.Types.Color.Blue, deg 200.
+                Fss.Types.Color.Purple, deg 200. ]
           ) ]
 
 let conicGradientStyle4 =
@@ -216,12 +216,12 @@ let conicGradientStyle4 =
               deg 0.,
               pct 50,
               pct 50,
-              [ FssTypes.Color.Yellow, deg (360. / 6.)
-                FssTypes.Color.Lime, deg <| (360. / 6.) * 2.
-                FssTypes.Color.Blue, deg <| (360. / 6.) * 3.
-                FssTypes.Color.Violet, deg <| (360. / 6.) * 4.
-                FssTypes.Color.Red, deg <| (360. / 6.) * 5.
-                FssTypes.Color.Yellow, deg <| (360. / 6.) * 6. ]
+              [ Fss.Types.Color.Yellow, deg (360. / 6.)
+                Fss.Types.Color.Lime, deg <| (360. / 6.) * 2.
+                Fss.Types.Color.Blue, deg <| (360. / 6.) * 3.
+                Fss.Types.Color.Violet, deg <| (360. / 6.) * 4.
+                Fss.Types.Color.Red, deg <| (360. / 6.) * 5.
+                Fss.Types.Color.Yellow, deg <| (360. / 6.) * 6. ]
           ) ]
 ```
 
@@ -240,10 +240,10 @@ let repeatingConicGradientStyle =
               deg 0.,
               pct 50,
               pct 50,
-              [ FssTypes.Color.White, pct 0
-                FssTypes.Color.White, pct 25
-                FssTypes.Color.Black, pct 25
-                FssTypes.Color.Black, pct 50 ]
+              [ Fss.Types.Color.White, pct 0
+                Fss.Types.Color.White, pct 25
+                Fss.Types.Color.Black, pct 25
+                Fss.Types.Color.Black, pct 50 ]
           ) ]
 ```
 

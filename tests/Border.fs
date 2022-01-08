@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Border =
+module BorderTests =
      let tests =
         testList "Border"
             [
@@ -66,7 +66,7 @@ module Border =
                      "{ border-style: outset; }" 
                 testCase
                     "Border-style multiple"
-                    [ BorderStyle.value(FssTypes.Border.Style.Inset, FssTypes.Border.Style.Outset, FssTypes.Border.Style.Ridge, FssTypes.Border.Style.Groove) ]
+                    [ BorderStyle.value(Fss.Types.Border.Style.Inset, Fss.Types.Border.Style.Outset, Fss.Types.Border.Style.Ridge, Fss.Types.Border.Style.Groove) ]
                      "{ border-style: inset outset ridge groove; }" 
                 testCase
                     "Border-style none"
@@ -562,7 +562,7 @@ module Border =
                      "{ border-color: revert; }" 
                 testCase
                     "Border colors multiple"
-                    [ BorderColor.value (FssTypes.Color.Red, FssTypes.Color.Green, FssTypes.Color.Blue, FssTypes.Color.White) ]
+                    [ BorderColor.value (Fss.Types.Color.Red, Fss.Types.Color.Green, Fss.Types.Color.Blue, Fss.Types.Color.White) ]
                      "{ border-color: red green blue white; }"
                 testCase
                     "Border top color rgb"
@@ -638,7 +638,7 @@ module Border =
                      "{ border-image-source: url(image.jpg); }" 
                 testCase
                     "Border image source linear gradient"
-                    [ BorderImageSource.linearGradient((deg 45, [ FssTypes.Color.Red, pct 0; FssTypes.Color.Blue, pct 100 ])) ]
+                    [ BorderImageSource.linearGradient((deg 45, [ Fss.Types.Color.Red, pct 0; Fss.Types.Color.Blue, pct 100 ])) ]
                      "{ border-image-source: linear-gradient(45deg, red 0%, blue 100%); }" 
                 testCase
                     "Border image source inherit"
@@ -714,7 +714,7 @@ module Border =
                      "{ border-image-repeat: space; }" 
                 testCase
                     "Border image repeat space"
-                    [ BorderImageRepeat.value(FssTypes.Border.ImageRepeat.Stretch, FssTypes.Border.ImageRepeat.Repeat) ]
+                    [ BorderImageRepeat.value(Fss.Types.Border.ImageRepeat.Stretch, Fss.Types.Border.ImageRepeat.Repeat) ]
                      "{ border-image-repeat: stretch repeat; }" 
                 testCase
                     "Border image repeat inherit"

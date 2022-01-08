@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Table =
+module TableTests =
     let tests =
         testList "table"
             [

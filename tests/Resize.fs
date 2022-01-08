@@ -4,13 +4,13 @@ open Fet
 open Utils
 open Fss
 
-module Resize =
+module ResizeTests =
     let tests =
         testList "Resize"
             [
                 testCase
                     "Resize Value"
-                    [Resize.value FssTypes.Resize.Block]
+                    [Resize.value Fss.Types.Resize.Block]
                     "{ resize: block; }"
                 testCase
                     "Resize Both"

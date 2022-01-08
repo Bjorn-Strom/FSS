@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Grid =
+module GridTests =
     let tests =
         testList "Grid"
             [
@@ -378,11 +378,11 @@ module Grid =
                     "{ grid-template-rows: minmax(30%, 300px); }"
                 testCase
                     "MinMax px and max content"
-                    [ GridTemplateRows.minMax(px 100, FssTypes.ContentSize.MaxContent) ]
+                    [ GridTemplateRows.minMax(px 100, Fss.Types.ContentSize.MaxContent) ]
                     "{ grid-template-rows: minmax(100px, max-content); }"
                 testCase
                     "MinMax min content and px"
-                    [ GridTemplateRows.minMax(FssTypes.ContentSize.MinContent, px 400) ]
+                    [ GridTemplateRows.minMax(Fss.Types.ContentSize.MinContent, px 400) ]
                     "{ grid-template-rows: minmax(min-content, 400px); }"
                 testCase
                     "MinMax px and fr"
@@ -390,11 +390,11 @@ module Grid =
                     "{ grid-template-rows: minmax(200px, 1fr); }"
                 testCase
                     "MinMax percent and min content"
-                    [ GridTemplateRows.minMax(pct 50, FssTypes.ContentSize.MinContent) ]
+                    [ GridTemplateRows.minMax(pct 50, Fss.Types.ContentSize.MinContent) ]
                     "{ grid-template-rows: minmax(50%, min-content); }"
                 testCase
                     "MinMax percent and max content"
-                    [ GridTemplateRows.minMax(px 300, FssTypes.ContentSize.MaxContent) ]
+                    [ GridTemplateRows.minMax(px 300, Fss.Types.ContentSize.MaxContent) ]
                     "{ grid-template-rows: minmax(300px, max-content); }"
                 testCase
                     "MinMax pct and px"
@@ -402,7 +402,7 @@ module Grid =
                     "{ grid-template-rows: minmax(30%, 300px); }"
                 testCase
                     "MinMax min content and px"
-                    [ GridTemplateRows.minMax(FssTypes.ContentSize.MinContent, px 200) ]
+                    [ GridTemplateRows.minMax(Fss.Types.ContentSize.MinContent, px 200) ]
                     "{ grid-template-rows: minmax(min-content, 200px); }"
                 testCase
                     "Repeat value and percent"
@@ -418,31 +418,31 @@ module Grid =
                     "{ grid-template-rows: repeat(4, 250px); }"
                 testCase
                     "Repeat value and min-content"
-                    [ GridTemplateRows.repeat(4, FssTypes.ContentSize.MinContent) ]
+                    [ GridTemplateRows.repeat(4, Fss.Types.ContentSize.MinContent) ]
                     "{ grid-template-rows: repeat(4, min-content); }"
                 testCase
                     "Repeat value and max-content"
-                    [ GridTemplateRows.repeat(4, FssTypes.ContentSize.MaxContent) ]
+                    [ GridTemplateRows.repeat(4, Fss.Types.ContentSize.MaxContent) ]
                     "{ grid-template-rows: repeat(4, max-content); }"
                 testCase
                     "Repeat value and minmax"
-                    [ GridTemplateRows.repeat(4, FssTypes.Grid.MinMax.MinMax(px 100, fr 1.)) ]
+                    [ GridTemplateRows.repeat(4, Fss.Types.Grid.MinMax.MinMax(px 100, fr 1.)) ]
                     "{ grid-template-rows: repeat(4, minmax(100px, 1fr)); }"
                 testCase
                     "Repeat value and fit content"
-                    [ GridTemplateRows.repeat(4, FssTypes.ContentSize.FitContent(px 100)) ]
+                    [ GridTemplateRows.repeat(4, Fss.Types.ContentSize.FitContent(px 100)) ]
                     "{ grid-template-rows: repeat(4, fit-content(100px)); }"
                 testCase
                     "Repeat value and min-content max-content"
-                    [ GridTemplateRows.repeat(4, [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent]) ]
+                    [ GridTemplateRows.repeat(4, [Fss.Types.ContentSize.MinContent; Fss.Types.ContentSize.MaxContent]) ]
                     "{ grid-template-rows: repeat(4, min-content max-content); }"
                 testCase
                     "Repeat auto-fill and px"
-                    [ GridTemplateRows.repeat(FssTypes.Grid.AutoFill, px 30) ]
+                    [ GridTemplateRows.repeat(Fss.Types.Grid.AutoFill, px 30) ]
                     "{ grid-template-rows: repeat(auto-fill, 30px); }"
                 testCase
                     "Repeat auto-fit and px"
-                    [ GridTemplateRows.repeat(FssTypes.Grid.AutoFit, px 30) ]
+                    [ GridTemplateRows.repeat(Fss.Types.Grid.AutoFit, px 30) ]
                     "{ grid-template-rows: repeat(auto-fit, 30px); }"
                 testCase
                     "Grid template row fit-content"
@@ -506,11 +506,11 @@ module Grid =
                     "{ grid-template-columns: minmax(30%, 300px); }"
                 testCase
                     "MinMax px and max content"
-                    [ GridTemplateColumns.minMax(px 100, FssTypes.ContentSize.MaxContent) ]
+                    [ GridTemplateColumns.minMax(px 100, Fss.Types.ContentSize.MaxContent) ]
                     "{ grid-template-columns: minmax(100px, max-content); }"
                 testCase
                     "MinMax min content and px"
-                    [ GridTemplateColumns.minMax(FssTypes.ContentSize.MinContent, px 400) ]
+                    [ GridTemplateColumns.minMax(Fss.Types.ContentSize.MinContent, px 400) ]
                     "{ grid-template-columns: minmax(min-content, 400px); }"
                 testCase
                     "MinMax px and fr"
@@ -518,11 +518,11 @@ module Grid =
                     "{ grid-template-columns: minmax(200px, 1fr); }"
                 testCase
                     "MinMax percent and min content"
-                    [ GridTemplateColumns.minMax(pct 50, FssTypes.ContentSize.MinContent) ]
+                    [ GridTemplateColumns.minMax(pct 50, Fss.Types.ContentSize.MinContent) ]
                     "{ grid-template-columns: minmax(50%, min-content); }"
                 testCase
                     "MinMax percent and max content"
-                    [ GridTemplateColumns.minMax(px 300, FssTypes.ContentSize.MaxContent) ]
+                    [ GridTemplateColumns.minMax(px 300, Fss.Types.ContentSize.MaxContent) ]
                     "{ grid-template-columns: minmax(300px, max-content); }"
                 testCase
                     "MinMax pct and px"
@@ -530,7 +530,7 @@ module Grid =
                     "{ grid-template-columns: minmax(30%, 300px); }"
                 testCase
                     "MinMax min content and px"
-                    [ GridTemplateColumns.minMax(FssTypes.ContentSize.MinContent, px 200) ]
+                    [ GridTemplateColumns.minMax(Fss.Types.ContentSize.MinContent, px 200) ]
                     "{ grid-template-columns: minmax(min-content, 200px); }"
                 testCase
                     "Repeat value and percent"
@@ -546,31 +546,31 @@ module Grid =
                     "{ grid-template-columns: repeat(4, 250px); }"
                 testCase
                     "Repeat value and min-content"
-                    [ GridTemplateColumns.repeat(4, FssTypes.ContentSize.MinContent) ]
+                    [ GridTemplateColumns.repeat(4, Fss.Types.ContentSize.MinContent) ]
                     "{ grid-template-columns: repeat(4, min-content); }"
                 testCase
                     "Repeat value and max-content"
-                    [ GridTemplateColumns.repeat(4, FssTypes.ContentSize.MaxContent) ]
+                    [ GridTemplateColumns.repeat(4, Fss.Types.ContentSize.MaxContent) ]
                     "{ grid-template-columns: repeat(4, max-content); }"
                 testCase
                     "Repeat value and minmax"
-                    [ GridTemplateColumns.repeat(4, FssTypes.Grid.MinMax.MinMax(px 100, fr 1.)) ]
+                    [ GridTemplateColumns.repeat(4, Fss.Types.Grid.MinMax.MinMax(px 100, fr 1.)) ]
                     "{ grid-template-columns: repeat(4, minmax(100px, 1fr)); }"
                 testCase
                     "Repeat value and fit content"
-                    [ GridTemplateColumns.repeat(4, FssTypes.ContentSize.FitContent(px 100)) ]
+                    [ GridTemplateColumns.repeat(4, Fss.Types.ContentSize.FitContent(px 100)) ]
                     "{ grid-template-columns: repeat(4, fit-content(100px)); }"
                 testCase
                     "Repeat value and min-content max-content"
-                    [ GridTemplateColumns.repeat(4, [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent]) ]
+                    [ GridTemplateColumns.repeat(4, [Fss.Types.ContentSize.MinContent; Fss.Types.ContentSize.MaxContent]) ]
                     "{ grid-template-columns: repeat(4, min-content max-content); }"
                 testCase
                     "Repeat auto-fill and px"
-                    [ GridTemplateColumns.repeat(FssTypes.Grid.AutoFill, px 30) ]
+                    [ GridTemplateColumns.repeat(Fss.Types.Grid.AutoFill, px 30) ]
                     "{ grid-template-columns: repeat(auto-fill, 30px); }"
                 testCase
                     "Repeat auto-fit and px"
-                    [ GridTemplateColumns.repeat(FssTypes.Grid.AutoFit, px 30) ]
+                    [ GridTemplateColumns.repeat(Fss.Types.Grid.AutoFit, px 30) ]
                     "{ grid-template-columns: repeat(auto-fit, 30px); }"
                 testCase
                     "Grid template row fit-content"
@@ -650,7 +650,7 @@ module Grid =
                     "{ grid-auto-columns: fit-content(400px); }"
                 testCase
                     "Grid auto columns multiple with min-content max-content and auto"
-                    [ GridAutoColumns.value [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
+                    [ GridAutoColumns.value [Fss.Types.ContentSize.MinContent; Fss.Types.ContentSize.MaxContent] ]
                     "{ grid-auto-columns: min-content max-content; }"
                 testCase
                     "Grid auto columns multiple with pxs"
@@ -714,7 +714,7 @@ module Grid =
                     "{ grid-auto-rows: fit-content(400px); }"
                 testCase
                     "Grid auto rows multiple with min-content max-content and auto"
-                    [ GridAutoRows.value [FssTypes.ContentSize.MinContent; FssTypes.ContentSize.MaxContent] ]
+                    [ GridAutoRows.value [Fss.Types.ContentSize.MinContent; Fss.Types.ContentSize.MaxContent] ]
                     "{ grid-auto-rows: min-content max-content; }"
                 testCase
                     "Grid auto rows multiple with pxs"

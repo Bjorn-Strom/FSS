@@ -1,11 +1,11 @@
 namespace FSSTests
 
 open Fet
-open Fss.FssTypes
+open Fss.Types
 open Utils
 open Fss
 
-module ClipPath =
+module ClipPathTests =
      let tests =
         testList "ClipPath"
             [

@@ -1,4 +1,0 @@
-group FssFable
-    FSharp.Core
-    Fable.Core
-    Fable.Browser.Dom

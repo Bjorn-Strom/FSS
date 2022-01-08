@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module All =
+module AllTests =
      let tests =
         testList "All"
             [

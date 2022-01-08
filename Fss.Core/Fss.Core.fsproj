@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>A way to write staticly-safe CSS in Dotnet.</Description>
+    <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
+    <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
+    <Authors>Bjørn-Ivar Strøm</Authors>
+    <Version>1.0.0</Version>
+    <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <PackageReleaseNotes>Release.</PackageReleaseNotes>
+    <RootNamespace>Fss</RootNamespace>
+    <PackageId>Fss-lib.Core</PackageId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Utilities.fs" />
+    <Compile Include="Types\Html.fs" />
+    <Compile Include="Types\MasterTypes.fs" />
+    <Compile Include="Types\Attribute.fs" />
+    <Compile Include="Types\Color.fs" />
+    <Compile Include="Types\Units.fs" />
+    <Compile Include="Types\Border.fs" />
+    <Compile Include="Types\Image.fs" />
+    <Compile Include="Types\ContentSize.fs" />
+    <Compile Include="Types\Margin.fs" />
+    <Compile Include="Types\Padding.fs" />
+    <Compile Include="Types\TimingFunction.fs" />
+    <Compile Include="Types\Animation.fs" />
+    <Compile Include="Types\Background.fs" />
+    <Compile Include="Types\Cursor.fs" />
+    <Compile Include="Types\Grid.fs" />
+    <Compile Include="Types\Display.fs" />
+    <Compile Include="Types\Flex.fs" />
+    <Compile Include="Types\Perspective.fs" />
+    <Compile Include="Types\Text.fs" />
+    <Compile Include="Types\Position.fs" />
+    <Compile Include="Types\Transform.fs" />
+    <Compile Include="Types\Resize.fs" />
+    <Compile Include="Types\Transition.fs" />
+    <Compile Include="Types\Visibility.fs" />
+    <Compile Include="Types\CounterStyle.fs" />
+    <Compile Include="Types\ListStyle.fs" />
+    <Compile Include="Types\Content.fs" />
+    <Compile Include="Types\Column.fs" />
+    <Compile Include="Types\Outline.fs" />
+    <Compile Include="Types\Word.fs" />
+    <Compile Include="Types\Overflow.fs" />
+    <Compile Include="Types\PointerEvents.fs" />
+    <Compile Include="Types\Table.fs" />
+    <Compile Include="Types\Caret.fs" />
+    <Compile Include="Types\ClipPath.fs" />
+    <Compile Include="Types\AspectRatio.fs" />
+    <Compile Include="Types\Clear.fs" />
+    <Compile Include="Types\Appearance.fs" />
+    <Compile Include="Types\Typography.fs" />
+    <Compile Include="Types\PseudoClass.fs" />
+    <Compile Include="Types\PseudoElement.fs" />
+    <Compile Include="Types\MixBlendMode.fs" />
+    <Compile Include="Types\Filter.fs" />
+    <Compile Include="Types\BoxShadow.fs" />
+    <Compile Include="Types\Scroll.fs" />
+    <Compile Include="Types\WillChange.fs" />
+    <Compile Include="Types\Mask.fs" />
+    <Compile Include="Types\Svg.fs" />
+    <Compile Include="Types\Media.fs" />
+    <Compile Include="Types\FontFace.fs" />
+    <Compile Include="Types\Font.fs" />
+    <Compile Include="Types\Selector.fs" />
+    <Compile Include="css\Color.fs" />
+    <Compile Include="css\Custom.fs" />
+    <Compile Include="css\Border.fs" />
+    <Compile Include="css\ContentSize.fs" />
+    <Compile Include="css\Margin.fs" />
+    <Compile Include="css\Padding.fs" />
+    <Compile Include="css\Animation.fs" />
+    <Compile Include="css\Background.fs" />
+    <Compile Include="css\Cursor.fs" />
+    <Compile Include="css\Grid.fs" />
+    <Compile Include="css\Display.fs" />
+    <Compile Include="css\Flex.fs" />
+    <Compile Include="css\Perspective.fs" />
+    <Compile Include="css\Position.fs" />
+    <Compile Include="css\Transform.fs" />
+    <Compile Include="css\Resize.fs" />
+    <Compile Include="css\Text.fs" />
+    <Compile Include="css\Transition.fs" />
+    <Compile Include="css\Visibility.fs" />
+    <Compile Include="css\CounterStyle.fs" />
+    <Compile Include="css\ListStyle.fs" />
+    <Compile Include="css\Content.fs" />
+    <Compile Include="css\Column.fs" />
+    <Compile Include="css\Outline.fs" />
+    <Compile Include="css\Word.fs" />
+    <Compile Include="css\Overflow.fs" />
+    <Compile Include="css\PointerEvents.fs" />
+    <Compile Include="css\Table.fs" />
+    <Compile Include="css\Caret.fs" />
+    <Compile Include="css\ClipPath.fs" />
+    <Compile Include="css\AspectRatio.fs" />
+    <Compile Include="css\Clear.fs" />
+    <Compile Include="css\Appearance.fs" />
+    <Compile Include="css\Typography.fs" />
+    <Compile Include="css\MixBlendMode.fs" />
+    <Compile Include="css\Filter.fs" />
+    <Compile Include="css\Image.fs" />
+    <Compile Include="css\PseudoClass.fs" />
+    <Compile Include="css\PseudoElement.fs" />
+    <Compile Include="css\BoxShadow.fs" />
+    <Compile Include="css\All.fs" />
+    <Compile Include="css\Scroll.fs" />
+    <Compile Include="css\WillChange.fs" />
+    <Compile Include="css\Mask.fs" />
+    <Compile Include="css\Svg.fs" />
+    <Compile Include="css\FontFace.fs" />
+    <Compile Include="css\Font.fs" />
+    <Compile Include="css\Selector.fs" />
+    <Compile Include="css\Media.fs" />
+    <Compile Include="css\Keyframes.fs" />
+    <Compile Include="Functions.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
+    <Content Include="Types\" PackagePath="fable\Types" />
+    <Content Include="css\" PackagePath="fable\css" />
+  </ItemGroup>
+</Project>

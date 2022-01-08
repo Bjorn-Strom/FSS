@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module ContentSize =
+module ContentSizeTests =
     let tests =
         testList "Content size"
             [

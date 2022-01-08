@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Text =
+module TextTests =
     let tests =
         testList "Text"
             [
@@ -226,7 +226,7 @@ module Text =
                     "{ text-decoration-line: unset; }"
                 testCase
                     "Text decorations multiple"
-                    [TextDecorationLine.value [FssTypes.Text.DecorationLine.Overline; FssTypes.Text.DecorationLine.Underline; FssTypes.Text.DecorationLine.LineThrough]]
+                    [TextDecorationLine.value [Fss.Types.Text.DecorationLine.Overline; Fss.Types.Text.DecorationLine.Underline; Fss.Types.Text.DecorationLine.LineThrough]]
                     "{ text-decoration-line: overline underline line-through; }"
                 testCase
                     "Text decoration skip none"
@@ -250,15 +250,15 @@ module Text =
                     "{ text-decoration-skip: box-decoration; }"
                 testCase
                     "Text decoration skip multiple - objects and spaces"
-                    [TextDecorationSkip.value [FssTypes.Text.DecorationSkip.Objects; FssTypes.Text.DecorationSkip.Spaces] ]
+                    [TextDecorationSkip.value [Fss.Types.Text.DecorationSkip.Objects; Fss.Types.Text.DecorationSkip.Spaces] ]
                     "{ text-decoration-skip: objects spaces; }"
                 testCase
                     "Text decoration skip multiple - leading spaces and trailing spaces"
-                    [TextDecorationSkip.value [FssTypes.Text.DecorationSkip.LeadingSpaces; FssTypes.Text.DecorationSkip.TrailingSpaces]]
+                    [TextDecorationSkip.value [Fss.Types.Text.DecorationSkip.LeadingSpaces; Fss.Types.Text.DecorationSkip.TrailingSpaces]]
                     "{ text-decoration-skip: leading-spaces trailing-spaces; }"
                 testCase
                     "Text decoration skip multiple - objects edges box-decoration"
-                    [TextDecorationSkip.value [FssTypes.Text.DecorationSkip.Objects; FssTypes.Text.DecorationSkip.Edges; FssTypes.Text.DecorationSkip.BoxDecoration] ]
+                    [TextDecorationSkip.value [Fss.Types.Text.DecorationSkip.Objects; Fss.Types.Text.DecorationSkip.Edges; Fss.Types.Text.DecorationSkip.BoxDecoration] ]
                     "{ text-decoration-skip: objects edges box-decoration; }"
                 testCase
                     "Text decoration skip inherit"
@@ -410,35 +410,35 @@ module Text =
                     "{ text-emphasis-color: revert; }"
                 testCase
                     "Text emphasis position over right"
-                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Right) ]
+                    [ TextEmphasisPosition.value (Fss.Types.Text.EmphasisPosition.Over, Fss.Types.Text.EmphasisPosition.Right) ]
                     "{ text-emphasis-position: over right; }"
                 testCase
                     "Text emphasis position over right"
-                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Right) ]
+                    [ TextEmphasisPosition.value (Fss.Types.Text.EmphasisPosition.Over, Fss.Types.Text.EmphasisPosition.Right) ]
                     "{ text-emphasis-position: over right; }"
                 testCase
                     "Text emphasis position over left"
-                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Over, FssTypes.Text.EmphasisPosition.Left) ]
+                    [ TextEmphasisPosition.value (Fss.Types.Text.EmphasisPosition.Over, Fss.Types.Text.EmphasisPosition.Left) ]
                     "{ text-emphasis-position: over left; }"
                 testCase
                     "Text emphasis position under right"
-                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Under, FssTypes.Text.EmphasisPosition.Right) ]
+                    [ TextEmphasisPosition.value (Fss.Types.Text.EmphasisPosition.Under, Fss.Types.Text.EmphasisPosition.Right) ]
                     "{ text-emphasis-position: under right; }"
                 testCase
                     "Text emphasis position under left"
-                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Under, FssTypes.Text.EmphasisPosition.Left) ]
+                    [ TextEmphasisPosition.value (Fss.Types.Text.EmphasisPosition.Under, Fss.Types.Text.EmphasisPosition.Left) ]
                     "{ text-emphasis-position: under left; }"
                 testCase
                     "Text emphasis position left over"
-                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Left, FssTypes.Text.EmphasisPosition.Over) ]
+                    [ TextEmphasisPosition.value (Fss.Types.Text.EmphasisPosition.Left, Fss.Types.Text.EmphasisPosition.Over) ]
                     "{ text-emphasis-position: left over; }"
                 testCase
                     "Text emphasis position right under"
-                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Right, FssTypes.Text.EmphasisPosition.Under) ]
+                    [ TextEmphasisPosition.value (Fss.Types.Text.EmphasisPosition.Right, Fss.Types.Text.EmphasisPosition.Under) ]
                     "{ text-emphasis-position: right under; }"
                 testCase
                     "Text emphasis position left under"
-                    [ TextEmphasisPosition.value (FssTypes.Text.EmphasisPosition.Left, FssTypes.Text.EmphasisPosition.Under) ]
+                    [ TextEmphasisPosition.value (Fss.Types.Text.EmphasisPosition.Left, Fss.Types.Text.EmphasisPosition.Under) ]
                     "{ text-emphasis-position: left under; }"
                 testCase
                     "Text emphasis position inherit"
@@ -510,13 +510,13 @@ module Text =
                     "{ text-emphasis-style: revert; }"
                 testCase
                     "Text shadow single"
-                    [ TextShadow.value (px 1, px 1, px 2, FssTypes.Color.Black) ]
+                    [ TextShadow.value (px 1, px 1, px 2, Fss.Types.Color.Black) ]
                     "{ text-shadow: 1px 1px 2px black; }"
                 testCase
                     "Text shadow multiple"
                     [ TextShadow.value
-                          [ (px 1, px 1, px 2, FssTypes.Color.Color.Black)
-                            (px 10, px -10, px 20, FssTypes.Color.Color.Red)
+                          [ (px 1, px 1, px 2, Fss.Types.Color.Color.Black)
+                            (px 10, px -10, px 20, Fss.Types.Color.Color.Red)
                           ]
                     ]
                     "{ text-shadow: 1px 1px 2px black, 10px -10px 20px red; }"
@@ -598,11 +598,11 @@ module Text =
                     "{ text-underline-position: below; }"
                 testCase
                     "Text underline positions under left"
-                    [ TextUnderlinePosition.value (FssTypes.Text.UnderlinePosition.Under, FssTypes.Text.UnderlinePosition.Left) ]
+                    [ TextUnderlinePosition.value (Fss.Types.Text.UnderlinePosition.Under, Fss.Types.Text.UnderlinePosition.Left) ]
                     "{ text-underline-position: under left; }"
                 testCase
                     "Text underline positions right under"
-                    [ TextUnderlinePosition.value (FssTypes.Text.UnderlinePosition.Right, FssTypes.Text.UnderlinePosition.Under) ]
+                    [ TextUnderlinePosition.value (Fss.Types.Text.UnderlinePosition.Right, Fss.Types.Text.UnderlinePosition.Under) ]
                     "{ text-underline-position: right under; }"
                 testCase
                     "Text underline position auto"
@@ -998,31 +998,31 @@ module Text =
                     "{ hanging-punctuation: allow-end; }"
                 testCase
                     "HangingPunctuation first force-end"
-                    [ HangingPunctuation.value [FssTypes.Text.First; FssTypes.Text.ForceEnd] ]
+                    [ HangingPunctuation.value [Fss.Types.Text.First; Fss.Types.Text.ForceEnd] ]
                     "{ hanging-punctuation: first force-end; }"
                 testCase
                     "HangingPunctuation first allow-end"
-                    [ HangingPunctuation.value [FssTypes.Text.First; FssTypes.Text.AllowEnd]]
+                    [ HangingPunctuation.value [Fss.Types.Text.First; Fss.Types.Text.AllowEnd]]
                     "{ hanging-punctuation: first allow-end; }"
                 testCase
                     "HangingPunctuation first last"
-                    [ HangingPunctuation.value [FssTypes.Text.First; FssTypes.Text.Last] ]
+                    [ HangingPunctuation.value [Fss.Types.Text.First; Fss.Types.Text.Last] ]
                     "{ hanging-punctuation: first last; }"
                 testCase
                     "HangingPunctuation last force-end"
-                    [ HangingPunctuation.value [FssTypes.Text.Last; FssTypes.Text.ForceEnd] ]
+                    [ HangingPunctuation.value [Fss.Types.Text.Last; Fss.Types.Text.ForceEnd] ]
                     "{ hanging-punctuation: last force-end; }"
                 testCase
                     "HangingPunctuation last allow-end"
-                    [ HangingPunctuation.value [FssTypes.Text.Last; FssTypes.Text.AllowEnd] ]
+                    [ HangingPunctuation.value [Fss.Types.Text.Last; Fss.Types.Text.AllowEnd] ]
                     "{ hanging-punctuation: last allow-end; }"
                 testCase
                     "HangingPunctuation first force-end"
-                    [ HangingPunctuation.value [FssTypes.Text.First; FssTypes.Text.ForceEnd; FssTypes.Text.Last]]
+                    [ HangingPunctuation.value [Fss.Types.Text.First; Fss.Types.Text.ForceEnd; Fss.Types.Text.Last]]
                     "{ hanging-punctuation: first force-end last; }"
                 testCase
                     "HangingPunctuation last allow-end"
-                    [ HangingPunctuation.value [FssTypes.Text.First; FssTypes.Text.AllowEnd; FssTypes.Text.Last]]
+                    [ HangingPunctuation.value [Fss.Types.Text.First; Fss.Types.Text.AllowEnd; Fss.Types.Text.Last]]
                     "{ hanging-punctuation: first allow-end last; }"
                 testCase
                     "HangingPunctuation none"

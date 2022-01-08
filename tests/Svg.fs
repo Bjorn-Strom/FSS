@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Svg =
+module SvgTests =
      let tests =
         testList "Svg"
             [

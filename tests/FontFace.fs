@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module FontFace =
+module FontFaceTests =
      let tests =
         testList "Font face"
             [
@@ -31,10 +31,10 @@ module FontFace =
                     "Multiple sources"
                     [ FontFace.Src.sources
                         [
-                            FssTypes.FontFace.Woff2 "url1"
-                            FssTypes.FontFace.Woff "url2"
-                            FssTypes.FontFace.Truetype "url3"
-                            FssTypes.FontFace.Svg "url4"
+                            Fss.Types.FontFace.Woff2 "url1"
+                            Fss.Types.FontFace.Woff "url2"
+                            Fss.Types.FontFace.Truetype "url3"
+                            Fss.Types.FontFace.Svg "url4"
                         ]
                     ]
                     "{ font-family: \"\";src: url(url1) format('woff2'), url(url2) format('woff'), url(url3) format('truetype'), url(url4) format('svg'); }"

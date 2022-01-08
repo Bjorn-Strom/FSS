@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module Position =
+module PositionTests =
     let tests =
         testList "Position"
             [
