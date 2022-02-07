@@ -19,8 +19,8 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore tools
       run: dotnet tool restore
-    - name: Install paket packages
-      run: dotnet paket install
+    - name: Install packages
+      run: dotnet restore
     - name: Install npm packages
       run: npm i
     - name: Test
