@@ -1,60 +1,59 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
-module PointerEvents =
+module PointerEventsTests =
      let tests =
         testList "PointerEvents"
             [
                 testCase
                     "PointerEvents VisiblePainted"
                     [ PointerEvents.visiblePainted ]
-                    ["pointerEvents" ==> "visiblePainted"]
+                    "{ pointer-events: visiblepainted; }"
                 testCase
                     "PointerEvents VisibleFill"
                     [ PointerEvents.visibleFill ]
-                    ["pointerEvents" ==> "visibleFill"]
+                    "{ pointer-events: visiblefill; }"
                 testCase
                     "PointerEvents VisibleStroke"
                     [ PointerEvents.visibleStroke ]
-                    ["pointerEvents" ==> "visibleStroke"]
+                    "{ pointer-events: visiblestroke; }"
                 testCase
                     "PointerEvents Visible"
                     [ PointerEvents.visible ]
-                    ["pointerEvents" ==> "visible"]
+                    "{ pointer-events: visible; }"
                 testCase
                     "PointerEvents Painted"
                     [ PointerEvents.painted ]
-                    ["pointerEvents" ==> "painted"]
+                    "{ pointer-events: painted; }"
                 testCase
                     "PointerEvents Stroke"
                     [ PointerEvents.stroke ]
-                    ["pointerEvents" ==> "stroke"]
+                    "{ pointer-events: stroke; }"
                 testCase
                     "PointerEvents All"
                     [ PointerEvents.all ]
-                    ["pointerEvents" ==> "all"]
+                    "{ pointer-events: all; }"
                 testCase
                     "PointerEvents none"
                     [ PointerEvents.none]
-                    [ "pointerEvents" ==> "none" ]
+                     "{ pointer-events: none; }" 
                 testCase
                     "PointerEvents auto"
                     [ PointerEvents.auto]
-                    [ "pointerEvents" ==> "auto" ]
+                     "{ pointer-events: auto; }" 
                 testCase
                     "PointerEvents inherit"
                     [ PointerEvents.inherit']
-                    [ "pointerEvents" ==> "inherit" ]
+                     "{ pointer-events: inherit; }" 
                 testCase
                     "PointerEvents initial"
                     [ PointerEvents.initial]
-                    [ "pointerEvents" ==> "initial" ]
+                     "{ pointer-events: initial; }" 
                 testCase
                     "PointerEvents unset"
                     [ PointerEvents.unset ]
-                    [ "pointerEvents" ==> "unset" ]
+                     "{ pointer-events: unset; }" 
             ]

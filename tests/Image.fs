@@ -1,84 +1,87 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
-module Image =
+module ImageTests =
      let tests =
         testList "Image"
             [
                 testCase
-                    "Object fit value"
-                    [ ObjectFit' <| FssTypes.Image.ScaleDown]
-                    [ "objectFit" ==> "scale-down" ]
-                testCase
                     "Object fit fill"
                     [ ObjectFit.fill ]
-                    [ "objectFit" ==> "fill" ]
+                    "{ object-fit: fill; }" 
                 testCase
                     "Object fit contain"
                     [ ObjectFit.contain ]
-                    [ "objectFit" ==> "contain" ]
+                    "{ object-fit: contain; }" 
                 testCase
                     "Object fit cover"
                     [ ObjectFit.cover ]
-                    [ "objectFit" ==> "cover" ]
+                    "{ object-fit: cover; }" 
                 testCase
                     "Object fit scaleDown"
                     [ ObjectFit.scaleDown ]
-                    [ "objectFit" ==> "scale-down" ]
+                    "{ object-fit: scale-down; }" 
                 testCase
                     "Object fit none"
                     [ ObjectFit.none ]
-                    [ "objectFit" ==> "none" ]
+                    "{ object-fit: none; }" 
                 testCase
                     "ObjectPosition pixels"
-                    [ ObjectPosition' (px 10, px 10)]
-                    [ "objectPosition" ==> "10px 10px" ]
+                    [ ObjectPosition.value (px 10, px 10)]
+                    "{ object-position: 10px 10px; }" 
                 testCase
                     "ObjectPosition percent"
-                    [ ObjectPosition' (pct 50, pct 50)]
-                    [ "objectPosition" ==> "50% 50%" ]
+                    [ ObjectPosition.value (pct 50, pct 50)]
+                    "{ object-position: 50% 50%; }" 
                 testCase
                     "ObjectPosition percent and pixels"
-                    [ ObjectPosition' (pct 50, px 50)]
-                    [ "objectPosition" ==> "50% 50px" ]
+                    [ ObjectPosition.value (pct 50, px 50)]
+                    "{ object-position: 50% 50px; }" 
                 testCase
                     "ObjectPosition inherit"
                     [ ObjectPosition.inherit']
-                    [ "objectPosition" ==> "inherit" ]
+                    "{ object-position: inherit; }" 
                 testCase
                     "ObjectPosition initial"
                     [ ObjectPosition.initial]
-                    [ "objectPosition" ==> "initial" ]
+                    "{ object-position: initial; }" 
                 testCase
                     "ObjectPosition unset"
                     [ ObjectPosition.unset ]
-                    [ "objectPosition" ==> "unset" ]
+                    "{ object-position: unset; }" 
+                testCase
+                    "ObjectPosition revert"
+                    [ ObjectPosition.revert ]
+                    "{ object-position: revert; }" 
                 testCase
                     "ImageRendering auto"
                     [ ImageRendering.auto]
-                    [ "imageRendering" ==> "auto" ]
+                    "{ image-rendering: auto; }" 
                 testCase
                     "ImageRendering crispEdges"
                     [ ImageRendering.crispEdges]
-                    [ "imageRendering" ==> "crisp-edges" ]
+                    "{ image-rendering: crisp-edges; }" 
                 testCase
                     "ImageRendering pixelated"
                     [ ImageRendering.pixelated ]
-                    [ "imageRendering" ==> "pixelated" ]
+                    "{ image-rendering: pixelated; }" 
                 testCase
                     "ImageRendering inherit"
                     [ ImageRendering.inherit']
-                    [ "imageRendering" ==> "inherit" ]
+                    "{ image-rendering: inherit; }" 
                 testCase
                     "ImageRendering initial"
                     [ ImageRendering.initial]
-                    [ "imageRendering" ==> "initial" ]
+                    "{ image-rendering: initial; }" 
                 testCase
                     "ImageRendering unset"
                     [ ImageRendering.unset ]
-                    [ "imageRendering" ==> "unset" ]
+                    "{ image-rendering: unset; }" 
+                testCase
+                    "ImageRendering revert"
+                    [ ImageRendering.revert ]
+                    "{ image-rendering: revert; }" 
             ]

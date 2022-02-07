@@ -1,6 +1,0 @@
-group Tests
-    FSharp.Core
-    Fable.Core
-    Fable.Elmish.React
-    Fable.React
-    Fet

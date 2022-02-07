@@ -3,21 +3,9 @@
   "isRoot": true,
   "tools": {
     "fable": {
-      "version": "3.6.2",
+      "version": "3.6.3",
       "commands": [
         "fable"
-      ]
-    },
-    "paket": {
-      "version": "6.2.1",
-      "commands": [
-        "paket"
-      ]
-    },
-    "fake-cli": {
-      "version": "5.20.4",
-      "commands": [
-        "fake"
       ]
     }
   }

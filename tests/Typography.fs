@@ -1,44 +1,51 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
-module Typography =
+module TypographyTests =
      let tests =
         testList "Typography"
             [
                 testCase
                     "Orphans number"
-                    [ Orphans' (FssTypes.CssInt 2)]
-                    [ "orphans" ==> "2" ]
+                    [ Orphans.value 2]
+                    "{ orphans: 2; }" 
                 testCase
                     "Orphans inherit"
                     [ Orphans.inherit']
-                    [ "orphans" ==> "inherit" ]
+                    "{ orphans: inherit; }" 
                 testCase
                     "Orphans initial"
                     [ Orphans.initial]
-                    [ "orphans" ==> "initial" ]
+                    "{ orphans: initial; }" 
                 testCase
                     "Orphans unset"
                     [ Orphans.unset ]
-                    [ "orphans" ==> "unset" ]
+                    "{ orphans: unset; }" 
+                testCase
+                    "Orphans revert"
+                    [ Orphans.revert ]
+                    "{ orphans: revert; }" 
                 testCase
                     "Widows number"
-                    [ Widows' (FssTypes.CssInt 2)]
-                    [ "widows" ==> "2" ]
+                    [ Widows.value 2]
+                    "{ widows: 2; }" 
                 testCase
                     "Widows inherit"
                     [ Widows.inherit']
-                    [ "widows" ==> "inherit" ]
+                    "{ widows: inherit; }" 
                 testCase
                     "Widows initial"
                     [ Widows.initial]
-                    [ "widows" ==> "initial" ]
+                    "{ widows: initial; }" 
                 testCase
                     "Widows unset"
                     [ Widows.unset ]
-                    [ "widows" ==> "unset" ]
+                    "{ widows: unset; }" 
+                testCase
+                    "Widows revert"
+                    [ Widows.revert ]
+                    "{ widows: revert; }" 
             ]

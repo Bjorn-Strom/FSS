@@ -24,4 +24,5 @@ jobs:
     - name: Install npm packages
       run: npm i
     - name: Test
-      run: npm run test
+      run: npm run test |
+           dotnet run --project tests

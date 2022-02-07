@@ -1,252 +1,423 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
 open Utils
 open Fss
 
-module Scroll =
+module ScrollTests =
      let tests =
         testList "Scroll"
             [
                 testCase
                     "ScrollBehavior auto"
                     [ ScrollBehavior.auto]
-                    [ "scrollBehavior" ==> "auto" ]
+                    "{ scroll-behavior: auto; }"
                 testCase
                     "ScrollBehavior smooth"
                     [ ScrollBehavior.smooth]
-                    [ "scrollBehavior" ==> "smooth" ]
+                    "{ scroll-behavior: smooth; }"
                 testCase
                     "ScrollBehavior inherit"
                     [ ScrollBehavior.inherit']
-                    [ "scrollBehavior" ==> "inherit" ]
+                    "{ scroll-behavior: inherit; }"
                 testCase
                     "ScrollBehavior initial"
                     [ ScrollBehavior.initial]
-                    [ "scrollBehavior" ==> "initial" ]
+                    "{ scroll-behavior: initial; }"
                 testCase
                     "ScrollBehavior unset"
                     [ ScrollBehavior.unset ]
-                    [ "scrollBehavior" ==> "unset" ]
+                    "{ scroll-behavior: unset; }"
+                testCase
+                    "ScrollBehavior revert"
+                    [ ScrollBehavior.revert ]
+                    "{ scroll-behavior: revert; }"
                 testCase
                     "OverscrollBehaviorX contain"
                     [ OverscrollBehaviorX.contain]
-                    [ "overscrollBehaviorX" ==> "contain" ]
+                    "{ overscroll-behavior-x: contain; }"
                 testCase
                     "OverscrollBehaviorX auto"
                     [ OverscrollBehaviorX.auto]
-                    [ "overscrollBehaviorX" ==> "auto" ]
+                    "{ overscroll-behavior-x: auto; }"
                 testCase
                     "OverscrollBehaviorX inherit"
                     [ OverscrollBehaviorX.inherit']
-                    [ "overscrollBehaviorX" ==> "inherit" ]
+                    "{ overscroll-behavior-x: inherit; }"
                 testCase
                     "OverscrollBehaviorX initial"
                     [ OverscrollBehaviorX.initial]
-                    [ "overscrollBehaviorX" ==> "initial" ]
+                    "{ overscroll-behavior-x: initial; }"
                 testCase
                     "OverscrollBehaviorX unset"
                     [ OverscrollBehaviorX.unset ]
-                    [ "overscrollBehaviorX" ==> "unset" ]
+                    "{ overscroll-behavior-x: unset; }"
                 testCase
                     "OverscrollBehaviorY contain"
                     [ OverscrollBehaviorY.contain]
-                    [ "overscrollBehaviorY" ==> "contain" ]
+                    "{ overscroll-behavior-y: contain; }"
                 testCase
                     "OverscrollBehaviorY auto"
                     [ OverscrollBehaviorY.auto]
-                    [ "overscrollBehaviorY" ==> "auto" ]
+                    "{ overscroll-behavior-y: auto; }"
                 testCase
                     "OverscrollBehaviorY inherit"
                     [ OverscrollBehaviorY.inherit']
-                    [ "overscrollBehaviorY" ==> "inherit" ]
+                    "{ overscroll-behavior-y: inherit; }"
                 testCase
                     "OverscrollBehaviorY initial"
                     [ OverscrollBehaviorY.initial]
-                    [ "overscrollBehaviorY" ==> "initial" ]
+                    "{ overscroll-behavior-y: initial; }"
                 testCase
                     "OverscrollBehaviorY unset"
                     [ OverscrollBehaviorY.unset ]
-                    [ "overscrollBehaviorY" ==> "unset" ]
+                    "{ overscroll-behavior-y: unset; }"
                 testCase
                     "ScrollPadding top px"
-                    [ ScrollPaddingTop' (px 10)]
-                    ["scrollPaddingTop" ==> "10px"]
+                    [ ScrollPaddingTop.value (px 10)]
+                    "{ scroll-padding-top: 10px; }"
+                testCase
+                    "ScrollPadding top px"
+                    [ ScrollPaddingTop.value (pct 50)]
+                    "{ scroll-padding-top: 50%; }"
+                testCase
+                    "ScrollPaddingTop inherit"
+                    [ ScrollPaddingTop.inherit']
+                    "{ scroll-padding-top: inherit; }"
+                testCase
+                    "ScrollPaddingTop initial"
+                    [ ScrollPaddingTop.initial]
+                    "{ scroll-padding-top: initial; }"
+                testCase
+                    "ScrollPaddingTop unset"
+                    [ ScrollPaddingTop.unset ]
+                    "{ scroll-padding-top: unset; }"
+                testCase
+                    "ScrollPaddingTop revert"
+                    [ ScrollPaddingTop.revert ]
+                    "{ scroll-padding-top: revert; }"
                 testCase
                     "ScrollPadding right px"
-                    [ ScrollPaddingRight' (px 10)]
-                    ["scrollPaddingRight" ==> "10px"]
+                    [ ScrollPaddingRight.value (px 10)]
+                    "{ scroll-padding-right: 10px; }"
+                testCase
+                    "ScrollPadding right px"
+                    [ ScrollPaddingRight.value (pct 50)]
+                    "{ scroll-padding-right: 50%; }"
+                testCase
+                    "ScrollPaddingRight inherit"
+                    [ ScrollPaddingRight.inherit']
+                    "{ scroll-padding-right: inherit; }"
+                testCase
+                    "ScrollPaddingRight initial"
+                    [ ScrollPaddingRight.initial]
+                    "{ scroll-padding-right: initial; }"
+                testCase
+                    "ScrollPaddingRight unset"
+                    [ ScrollPaddingRight.unset ]
+                    "{ scroll-padding-right: unset; }"
+                testCase
+                    "ScrollPaddingRight revert"
+                    [ ScrollPaddingRight.revert ]
+                    "{ scroll-padding-right: revert; }"
                 testCase
                     "ScrollPadding bottom px"
-                    [ ScrollPaddingBottom' (px 10)]
-                    ["scrollPaddingBottom" ==> "10px"]
+                    [ ScrollPaddingBottom.value (px 10)]
+                    "{ scroll-padding-bottom: 10px; }"
+                testCase
+                    "ScrollPadding bottom px"
+                    [ ScrollPaddingBottom.value (pct 50)]
+                    "{ scroll-padding-bottom: 50%; }"
+                testCase
+                    "ScrollPaddingBottom inherit"
+                    [ ScrollPaddingBottom.inherit']
+                    "{ scroll-padding-bottom: inherit; }"
+                testCase
+                    "ScrollPaddingBottom initial"
+                    [ ScrollPaddingBottom.initial]
+                    "{ scroll-padding-bottom: initial; }"
+                testCase
+                    "ScrollPaddingBottom unset"
+                    [ ScrollPaddingBottom.unset ]
+                    "{ scroll-padding-bottom: unset; }"
+                testCase
+                    "ScrollPaddingBottom revert"
+                    [ ScrollPaddingBottom.revert ]
+                    "{ scroll-padding-bottom: revert; }"
                 testCase
                     "ScrollPadding left px"
-                    [ ScrollPaddingLeft' (px 10)]
-                    ["scrollPaddingLeft" ==> "10px"]
+                    [ ScrollPaddingLeft.value (px 10)]
+                    "{ scroll-padding-left: 10px; }"
+                testCase
+                    "ScrollPadding left px"
+                    [ ScrollPaddingLeft.value (pct 50)]
+                    "{ scroll-padding-left: 50%; }"
+                testCase
+                    "ScrollPaddingLeft inherit"
+                    [ ScrollPaddingLeft.inherit']
+                    "{ scroll-padding-left: inherit; }"
+                testCase
+                    "ScrollPaddingLeft initial"
+                    [ ScrollPaddingLeft.initial]
+                    "{ scroll-padding-left: initial; }"
+                testCase
+                    "ScrollPaddingLeft unset"
+                    [ ScrollPaddingLeft.unset ]
+                    "{ scroll-padding-left: unset; }"
+                testCase
+                    "ScrollPaddingLeft revert"
+                    [ ScrollPaddingLeft.revert ]
+                    "{ scroll-padding-left: revert; }"
                 testCase
                     "ScrollPadding px"
-                    [ ScrollPadding' (px 10)]
-                    [ "scrollPadding" ==> "10px" ]
+                    [ ScrollPadding.value (px 10)]
+                    "{ scroll-padding: 10px; }"
                 testCase
                     "ScrollPadding em"
-                    [ ScrollPadding' (em 10.0)]
-                    [ "scrollPadding" ==> "10.0em" ]
+                    [ ScrollPadding.value (em 10.0)]
+                    "{ scroll-padding: 10em; }"
                 testCase
                     "ScrollPadding inherit"
                     [ ScrollPadding.inherit']
-                    [ "scrollPadding" ==> "inherit" ]
+                    "{ scroll-padding: inherit; }"
                 testCase
                     "ScrollPadding initial"
                     [ ScrollPadding.initial]
-                    [ "scrollPadding" ==> "initial" ]
+                    "{ scroll-padding: initial; }"
                 testCase
                     "ScrollPadding unset"
                     [ ScrollPadding.unset ]
-                    [ "scrollPadding" ==> "unset" ]
+                    "{ scroll-padding: unset; }"
+                testCase
+                    "ScrollPadding revert"
+                    [ ScrollPadding.revert ]
+                    "{ scroll-padding: revert; }"
                 testCase
                     "ScrollPaddings multiple"
                     [ ScrollPadding.value (px 10, px 20, px 30, px 40) ]
-                    [ "scrollPadding" ==> "10px 20px 30px 40px" ]
+                    "{ scroll-padding: 10px 20px 30px 40px; }"
                 testCase
                     "ScrollMargin top px"
-                    [ ScrollMarginTop' (px 10)]
-                    ["scrollMarginTop" ==> "10px"]
+                    [ ScrollMarginTop.value (px 10)]
+                    "{ scroll-margin-top: 10px; }"
+                testCase
+                    "ScrollMargin top px"
+                    [ ScrollMarginTop.value (pct 50)]
+                    "{ scroll-margin-top: 50%; }"
+                testCase
+                    "ScrollMarginTop inherit"
+                    [ ScrollMarginTop.inherit']
+                    "{ scroll-margin-top: inherit; }"
+                testCase
+                    "ScrollMarginTop initial"
+                    [ ScrollMarginTop.initial]
+                    "{ scroll-margin-top: initial; }"
+                testCase
+                    "ScrollMarginTop unset"
+                    [ ScrollMarginTop.unset ]
+                    "{ scroll-margin-top: unset; }"
+                testCase
+                    "ScrollMarginTop revert"
+                    [ ScrollMarginTop.revert ]
+                    "{ scroll-margin-top: revert; }"
                 testCase
                     "ScrollMargin right px"
-                    [ ScrollMarginRight' (px 10)]
-                    ["scrollMarginRight" ==> "10px"]
+                    [ ScrollMarginRight.value (px 10)]
+                    "{ scroll-margin-right: 10px; }"
+                testCase
+                    "ScrollMargin right px"
+                    [ ScrollMarginRight.value (pct 50)]
+                    "{ scroll-margin-right: 50%; }"
+                testCase
+                    "ScrollMarginRight inherit"
+                    [ ScrollMarginRight.inherit']
+                    "{ scroll-margin-right: inherit; }"
+                testCase
+                    "ScrollMarginRight initial"
+                    [ ScrollMarginRight.initial]
+                    "{ scroll-margin-right: initial; }"
+                testCase
+                    "ScrollMarginRight unset"
+                    [ ScrollMarginRight.unset ]
+                    "{ scroll-margin-right: unset; }"
+                testCase
+                    "ScrollMarginRight revert"
+                    [ ScrollMarginRight.revert ]
+                    "{ scroll-margin-right: revert; }"
                 testCase
                     "ScrollMargin bottom px"
-                    [ ScrollMarginBottom' (px 10)]
-                    ["scrollMarginBottom" ==> "10px"]
+                    [ ScrollMarginBottom.value (px 10)]
+                    "{ scroll-margin-bottom: 10px; }"
+                testCase
+                    "ScrollMargin bottom px"
+                    [ ScrollMarginBottom.value (pct 50)]
+                    "{ scroll-margin-bottom: 50%; }"
+                testCase
+                    "ScrollMarginBottom inherit"
+                    [ ScrollMarginBottom.inherit']
+                    "{ scroll-margin-bottom: inherit; }"
+                testCase
+                    "ScrollMarginBottom initial"
+                    [ ScrollMarginBottom.initial]
+                    "{ scroll-margin-bottom: initial; }"
+                testCase
+                    "ScrollMarginBottom unset"
+                    [ ScrollMarginBottom.unset ]
+                    "{ scroll-margin-bottom: unset; }"
+                testCase
+                    "ScrollMarginBottom revert"
+                    [ ScrollMarginBottom.revert ]
+                    "{ scroll-margin-bottom: revert; }"
                 testCase
                     "ScrollMargin left px"
-                    [ ScrollMarginLeft' (px 10)]
-                    ["scrollMarginLeft" ==> "10px"]
+                    [ ScrollMarginLeft.value (px 10)]
+                    "{ scroll-margin-left: 10px; }"
                 testCase
-                    "ScrollMargin px"
-                    [ ScrollMargin' (px 10)]
-                    [ "scrollMargin" ==> "10px" ]
+                    "ScrollMargin left px"
+                    [ ScrollMarginLeft.value (pct 50)]
+                    "{ scroll-margin-left: 50%; }"
+                testCase
+                    "ScrollMarginLeft inherit"
+                    [ ScrollMarginLeft.inherit']
+                    "{ scroll-margin-left: inherit; }"
+                testCase
+                    "ScrollMarginLeft initial"
+                    [ ScrollMarginLeft.initial]
+                    "{ scroll-margin-left: initial; }"
+                testCase
+                    "ScrollMarginLeft unset"
+                    [ ScrollMarginLeft.unset ]
+                    "{ scroll-margin-left: unset; }"
+                testCase
+                    "ScrollMarginLeft revert"
+                    [ ScrollMarginLeft.revert ]
+                    "{ scroll-margin-left: revert; }"
                 testCase
                     "ScrollMargin em"
-                    [ ScrollMargin' (em 10.0)]
-                    [ "scrollMargin" ==> "10.0em" ]
+                    [ ScrollMargin.value (em 10.0)]
+                    "{ scroll-margin: 10em; }"
                 testCase
                     "ScrollMargin inherit"
                     [ ScrollMargin.inherit']
-                    [ "scrollMargin" ==> "inherit" ]
+                    "{ scroll-margin: inherit; }"
                 testCase
                     "ScrollMargin initial"
                     [ ScrollMargin.initial]
-                    [ "scrollMargin" ==> "initial" ]
+                    "{ scroll-margin: initial; }"
                 testCase
                     "ScrollMargin unset"
                     [ ScrollMargin.unset ]
-                    [ "scrollMargin" ==> "unset" ]
+                    "{ scroll-margin: unset; }"
                 testCase
                     "ScrollMargins multiple"
                     [ ScrollMargin.value (px 10, px 20, px 30, px 40) ]
-                    [ "scrollMargin" ==> "10px 20px 30px 40px" ]
+                    "{ scroll-margin: 10px 20px 30px 40px; }"
                 testCase
                     "ScrollSnapType none"
                     [ ScrollSnapType.none ]
-                    [ "scrollSnapType" ==> "none" ]
+                    "{ scroll-snap-type: none; }"
                 testCase
                     "ScrollSnapType x"
                     [ ScrollSnapType.x ]
-                    [ "scrollSnapType" ==> "x" ]
+                    "{ scroll-snap-type: x; }"
                 testCase
                     "ScrollSnapType y"
                     [ ScrollSnapType.y ]
-                    [ "scrollSnapType" ==> "y" ]
+                    "{ scroll-snap-type: y; }"
                 testCase
                     "ScrollSnapType block"
                     [ ScrollSnapType.block ]
-                    [ "scrollSnapType" ==> "block" ]
+                    "{ scroll-snap-type: block; }"
                 testCase
                     "ScrollSnapType inline"
                     [ ScrollSnapType.inline' ]
-                    [ "scrollSnapType" ==> "inline" ]
+                    "{ scroll-snap-type: inline; }"
                 testCase
                     "ScrollSnapType both"
                     [ ScrollSnapType.both ]
-                    [ "scrollSnapType" ==> "both" ]
+                    "{ scroll-snap-type: both; }"
                 testCase
                     "ScrollSnapType x mandatory"
-                    [ ScrollSnapType' FssTypes.Scroll.SnapType.X FssTypes.Scroll.SnapType.Mandatory ]
-                    [ "scrollSnapType" ==> "x mandatory" ]
+                    [ ScrollSnapType.mandatory(Fss.Types.Scroll.SnapType.X) ]
+                    "{ scroll-snap-type: x mandatory; }"
                 testCase
                     "ScrollSnapType x mandatory"
-                    [ ScrollSnapType' FssTypes.Scroll.SnapType.Y FssTypes.Scroll.SnapType.Proximity ]
-                    [ "scrollSnapType" ==> "y proximity" ]
-                testCase
-                    "ScrollSnapType both mandatory"
-                    [ ScrollSnapType' FssTypes.Scroll.SnapType.Both FssTypes.Scroll.SnapType.Mandatory ]
-                    [ "scrollSnapType" ==> "both mandatory" ]
+                    [ ScrollSnapType.proximity(Fss.Types.Scroll.SnapType.X) ]
+                    "{ scroll-snap-type: x proximity; }"
                 testCase
                     "ScrollSnapType inherit"
                     [ ScrollSnapType.inherit']
-                    [ "scrollSnapType" ==> "inherit" ]
+                    "{ scroll-snap-type: inherit; }"
                 testCase
                     "ScrollSnapType initial"
                     [ ScrollSnapType.initial]
-                    [ "scrollSnapType" ==> "initial" ]
+                    "{ scroll-snap-type: initial; }"
                 testCase
                     "ScrollSnapType unset"
                     [ ScrollSnapType.unset ]
-                    [ "scrollSnapType" ==> "unset" ]
+                    "{ scroll-snap-type: unset; }"
+                testCase
+                    "ScrollSnapType revert"
+                    [ ScrollSnapType.revert ]
+                    "{ scroll-snap-type: revert; }"
                 testCase
                     "ScrollSnapAlign start end"
-                    [ ScrollSnapAlign.value(FssTypes.Scroll.SnapAlign.Start, FssTypes.Scroll.SnapAlign.End)]
-                    [ "scrollSnapAlign" ==> "start end" ]
+                    [ ScrollSnapAlign.value(Fss.Types.Scroll.SnapAlign.Start, Fss.Types.Scroll.SnapAlign.End)]
+                    "{ scroll-snap-align: start end; }"
                 testCase
                     "ScrollSnapAlign start"
                     [ ScrollSnapAlign.start]
-                    [ "scrollSnapAlign" ==> "start" ]
+                    "{ scroll-snap-align: start; }"
                 testCase
                     "ScrollSnapAlign end"
                     [ ScrollSnapAlign.end']
-                    [ "scrollSnapAlign" ==> "end" ]
+                    "{ scroll-snap-align: end; }"
                 testCase
                     "ScrollSnapAlign center"
                     [ ScrollSnapAlign.center]
-                    [ "scrollSnapAlign" ==> "center" ]
+                    "{ scroll-snap-align: center; }"
                 testCase
                     "ScrollSnapAlign none"
                     [ ScrollSnapAlign.none]
-                    [ "scrollSnapAlign" ==> "none" ]
+                    "{ scroll-snap-align: none; }"
                 testCase
                     "ScrollSnapAlign inherit"
                     [ ScrollSnapAlign.inherit' ]
-                    [ "scrollSnapAlign" ==> "inherit" ]
+                    "{ scroll-snap-align: inherit; }"
                 testCase
                     "ScrollSnapAlign initial"
                     [ ScrollSnapAlign.initial]
-                    [ "scrollSnapAlign" ==> "initial" ]
+                    "{ scroll-snap-align: initial; }"
                 testCase
                     "ScrollSnapAlign unset"
                     [ ScrollSnapAlign.unset ]
-                    [ "scrollSnapAlign" ==> "unset" ]
+                    "{ scroll-snap-align: unset; }"
+                testCase
+                    "ScrollSnapAlign revert"
+                    [ ScrollSnapAlign.revert ]
+                    "{ scroll-snap-align: revert; }"
                 testCase
                     "ScrollSnapStop normal"
                     [ ScrollSnapStop.normal]
-                    [ "scrollSnapStop" ==> "normal" ]
+                    "{ scroll-snap-stop: normal; }"
                 testCase
                     "ScrollSnapStop always"
                     [ ScrollSnapStop.always]
-                    [ "scrollSnapStop" ==> "always" ]
+                    "{ scroll-snap-stop: always; }"
                 testCase
                     "ScrollSnapStop inherit"
                     [ ScrollSnapStop.inherit' ]
-                    [ "scrollSnapStop" ==> "inherit" ]
+                    "{ scroll-snap-stop: inherit; }"
                 testCase
                     "ScrollSnapStop initial"
                     [ ScrollSnapStop.initial]
-                    [ "scrollSnapStop" ==> "initial" ]
+                    "{ scroll-snap-stop: initial; }"
                 testCase
                     "ScrollSnapStop unset"
                     [ ScrollSnapStop.unset ]
-                    [ "scrollSnapStop" ==> "unset" ]
+                    "{ scroll-snap-stop: unset; }"
+                testCase
+                    "ScrollSnapStop revert"
+                    [ ScrollSnapStop.revert ]
+                    "{ scroll-snap-stop: revert; }"
             ]

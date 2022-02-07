@@ -1,349 +1,352 @@
 namespace FSSTests
 
 open Fet
-open Fable.Core.JsInterop
+open Fss.Types
 open Utils
 open Fss
 
-module Mask =
+module MaskTests =
      let tests =
         testList "Mask"
             [
                 testCase
                     "MaskClip content-box"
                     [ MaskClip.contentBox]
-                    [ "maskClip" ==> "content-box" ]
+                    "{ mask-clip: content-box; }" 
                 testCase
                     "MaskClip padding-box"
                     [ MaskClip.paddingBox]
-                    [ "maskClip" ==> "padding-box" ]
+                    "{ mask-clip: padding-box; }" 
                 testCase
                     "MaskClip border-box"
                     [ MaskClip.borderBox]
-                    [ "maskClip" ==> "border-box" ]
+                    "{ mask-clip: border-box; }" 
                 testCase
                     "MaskClip margin-box"
                     [ MaskClip.marginBox]
-                    [ "maskClip" ==> "margin-box" ]
+                    "{ mask-clip: margin-box; }" 
                 testCase
                     "MaskClip fill-box"
                     [ MaskClip.fillBox]
-                    [ "maskClip" ==> "fill-box" ]
+                    "{ mask-clip: fill-box; }" 
                 testCase
                     "MaskClip stroke-box"
                     [ MaskClip.strokeBox]
-                    [ "maskClip" ==> "stroke-box" ]
+                    "{ mask-clip: stroke-box; }" 
                 testCase
                     "MaskClip view-box"
                     [ MaskClip.viewBox]
-                    [ "maskClip" ==> "view-box" ]
+                    "{ mask-clip: view-box; }" 
                 testCase
                     "MaskClip no-clip"
                     [ MaskClip.noClip]
-                    [ "maskClip" ==> "no-clip" ]
+                    "{ mask-clip: no-clip; }" 
                 testCase
                     "MaskClip border"
                     [ MaskClip.border]
-                    [ "maskClip" ==> "border" ]
+                    "{ mask-clip: border; }" 
                 testCase
                     "MaskClip padding"
                     [ MaskClip.padding]
-                    [ "maskClip" ==> "padding" ]
+                    "{ mask-clip: padding; }" 
                 testCase
                     "MaskClip content"
                     [ MaskClip.content]
-                    [ "maskClip" ==> "content" ]
+                    "{ mask-clip: content; }" 
                 testCase
                     "MaskClip text"
                     [ MaskClip.text]
-                    [ "maskClip" ==> "text" ]
+                    "{ mask-clip: text; }" 
                 testCase
                     "MaskClip inherit"
                     [ MaskClip.inherit']
-                    [ "maskClip" ==> "inherit" ]
+                    "{ mask-clip: inherit; }" 
                 testCase
                     "MaskClip initial"
                     [ MaskClip.initial]
-                    [ "maskClip" ==> "initial" ]
+                    "{ mask-clip: initial; }" 
                 testCase
                     "MaskClip unset"
                     [ MaskClip.unset ]
-                    [ "maskClip" ==> "unset" ]
+                    "{ mask-clip: unset; }"
+                testCase
+                    "MaskClip revert"
+                    [ MaskClip.revert ]
+                    "{ mask-clip: revert; }"
                 testCase
                     "MaskComposite add"
                     [ MaskComposite.add]
-                    [ "maskComposite" ==> "add" ]
+                    "{ mask-composite: add; }" 
                 testCase
                     "MaskComposite subtract"
                     [ MaskComposite.subtract]
-                    [ "maskComposite" ==> "subtract" ]
+                    "{ mask-composite: subtract; }" 
                 testCase
                     "MaskComposite intersect"
                     [ MaskComposite.intersect]
-                    [ "maskComposite" ==> "intersect" ]
+                    "{ mask-composite: intersect; }" 
                 testCase
                     "MaskComposite exclude"
                     [ MaskComposite.exclude]
-                    [ "maskComposite" ==> "exclude" ]
+                    "{ mask-composite: exclude; }" 
                 testCase
                     "MaskComposite inherit"
                     [ MaskComposite.inherit']
-                    [ "maskComposite" ==> "inherit" ]
+                    "{ mask-composite: inherit; }" 
                 testCase
                     "MaskComposite initial"
                     [ MaskComposite.initial]
-                    [ "maskComposite" ==> "initial" ]
+                    "{ mask-composite: initial; }" 
                 testCase
                     "MaskComposite unset"
                     [ MaskComposite.unset ]
-                    [ "maskComposite" ==> "unset" ]
+                    "{ mask-composite: unset; }"
+                testCase
+                    "MaskComposite revert"
+                    [ MaskComposite.revert ]
+                    "{ mask-composite: revert; }"
                 testCase
                     "Mask image source none"
                     [ MaskImage.none ]
-                    [ "maskImage" ==> "none" ]
+                    "{ mask-image: none; }" 
                 testCase
                     "Mask image source url"
                     [ MaskImage.url "image.jpg" ]
-                    [ "maskImage" ==> "url(image.jpg)" ]
+                    "{ mask-image: url(image.jpg); }" 
                 testCase
                     "Mask image source linear gradient"
-                    [ MaskImage.linearGradient((deg 45., [ FssTypes.Color.Color.red, pct 0; FssTypes.Color.Color.blue, pct 100 ])) ]
-                    [ "maskImage" ==> "linear-gradient(45.00deg, #ff0000 0%, #0000ff 100%)" ]
+                    [ MaskImage.linearGradient((deg 45., [ Fss.Types.Color.Red, pct 0; Fss.Types.Color.Blue, pct 100 ])) ]
+                    "{ mask-image: linear-gradient(45deg, red 0%, blue 100%); }" 
                 testCase
                     "Mask image source inherit"
                     [ MaskImage.inherit' ]
-                    [ "maskImage" ==> "inherit" ]
+                    "{ mask-image: inherit; }" 
                 testCase
                     "Mask image source initial"
                     [ MaskImage.initial ]
-                    [ "maskImage" ==> "initial" ]
+                    "{ mask-image: initial; }" 
                 testCase
                     "Mask image source unset"
                     [ MaskImage.unset ]
-                    [ "maskImage" ==> "unset" ]
+                    "{ mask-image: unset; }"
+                testCase
+                    "Mask image source revert"
+                    [ MaskImage.revert ]
+                    "{ mask-image: revert; }"
                 testCase
                     "Mask mode alpha"
                     [ MaskMode.alpha ]
-                    [ "maskMode" ==> "alpha" ]
+                    "{ mask-mode: alpha; }" 
                 testCase
                     "Mask mode luminance"
                     [ MaskMode.luminance ]
-                    [ "maskMode" ==> "luminance" ]
+                    "{ mask-mode: luminance; }" 
                 testCase
                     "Mask mode match-source"
                     [ MaskMode.matchSource ]
-                    [ "maskMode" ==> "match-source" ]
+                    "{ mask-mode: match-source; }" 
                 testCase
                     "Mask mode multiple"
-                    [ MaskMode.value([FssTypes.Mask.Alpha; FssTypes.Mask.MatchSource]) ]
-                    [ "maskMode" ==> "alpha, match-source" ]
+                    [ MaskMode.value [Fss.Types.Mask.Alpha; Fss.Types.Mask.MatchSource] ]
+                    "{ mask-mode: alpha, match-source; }" 
                 testCase
                     "Mask mode inherit"
                     [ MaskMode.inherit' ]
-                    [ "maskMode" ==> "inherit" ]
+                    "{ mask-mode: inherit; }" 
                 testCase
                     "Mask mode initial"
                     [ MaskMode.initial ]
-                    [ "maskMode" ==> "initial" ]
+                    "{ mask-mode: initial; }" 
                 testCase
                     "Mask mode unset"
                     [ MaskMode.unset ]
-                    [ "maskMode" ==> "unset" ]
+                    "{ mask-mode: unset; }"
+                testCase
+                    "Mask mode revert"
+                    [ MaskMode.revert ]
+                    "{ mask-mode: revert; }"
                 testCase
                     "MaskOrigin multiple"
-                    [ MaskOrigin.value([FssTypes.Mask.Origin.ViewBox; FssTypes.Mask.Origin.FillBox; FssTypes.Mask.Origin.BorderBox])]
-                    [ "maskOrigin" ==> "view-box, fill-box, border-box" ]
+                    [ MaskOrigin.value([Fss.Types.Mask.Origin.ViewBox; Fss.Types.Mask.Origin.FillBox; Fss.Types.Mask.Origin.BorderBox])]
+                    "{ mask-origin: view-box, fill-box, border-box; }" 
                 testCase
                     "MaskOrigin content-box"
                     [ MaskOrigin.contentBox]
-                    [ "maskOrigin" ==> "content-box" ]
+                    "{ mask-origin: content-box; }" 
                 testCase
                     "MaskOrigin padding-box"
                     [ MaskOrigin.paddingBox]
-                    [ "maskOrigin" ==> "padding-box" ]
+                    "{ mask-origin: padding-box; }" 
                 testCase
                     "MaskOrigin border-box"
                     [ MaskOrigin.borderBox]
-                    [ "maskOrigin" ==> "border-box" ]
+                    "{ mask-origin: border-box; }" 
                 testCase
                     "MaskOrigin margin-box"
                     [ MaskOrigin.marginBox]
-                    [ "maskOrigin" ==> "margin-box" ]
+                    "{ mask-origin: margin-box; }" 
                 testCase
                     "MaskOrigin fill-box"
                     [ MaskOrigin.fillBox]
-                    [ "maskOrigin" ==> "fill-box" ]
+                    "{ mask-origin: fill-box; }" 
                 testCase
                     "MaskOrigin stroke-box"
                     [ MaskOrigin.strokeBox]
-                    [ "maskOrigin" ==> "stroke-box" ]
+                    "{ mask-origin: stroke-box; }" 
                 testCase
                     "MaskOrigin view-box"
                     [ MaskOrigin.viewBox]
-                    [ "maskOrigin" ==> "view-box" ]
+                    "{ mask-origin: view-box; }" 
                 testCase
                     "MaskOrigin border"
                     [ MaskOrigin.border]
-                    [ "maskOrigin" ==> "border" ]
+                    "{ mask-origin: border; }" 
                 testCase
                     "MaskOrigin padding"
                     [ MaskOrigin.padding]
-                    [ "maskOrigin" ==> "padding" ]
+                    "{ mask-origin: padding; }" 
                 testCase
                     "MaskOrigin content"
                     [ MaskOrigin.content]
-                    [ "maskOrigin" ==> "content" ]
+                    "{ mask-origin: content; }" 
                 testCase
                     "MaskOrigin inherit"
                     [ MaskOrigin.inherit']
-                    [ "maskOrigin" ==> "inherit" ]
+                    "{ mask-origin: inherit; }" 
                 testCase
                     "MaskOrigin initial"
                     [ MaskOrigin.initial]
-                    [ "maskOrigin" ==> "initial" ]
+                    "{ mask-origin: initial; }" 
                 testCase
                     "MaskOrigin unset"
                     [ MaskOrigin.unset ]
-                    [ "maskOrigin" ==> "unset" ]
+                    "{ mask-origin: unset; }"
                 testCase
                     "MaskPosition size"
                     [ MaskPosition.value(px 1, rem 1.)]
-                    [ "maskPosition" ==> "1px 1.0rem" ]
+                    "{ mask-position: 1px 1rem; }" 
                 testCase
                     "MaskPosition sizes"
-                    [ MaskPosition.value([px 1, rem 1.; px 10, px 100])]
-                    [ "maskPosition" ==> "1px 1.0rem, 10px 100px" ]
+                    [ MaskPosition.value [px 1 :> ILengthPercentage, rem 1. :> ILengthPercentage; px 10, px 100] ]
+                    "{ mask-position: 1px 1rem, 10px 100px; }" 
                 testCase
                     "MaskPosition percent"
                     [ MaskPosition.value(pct 10, pct 50)]
-                    [ "maskPosition" ==> "10% 50%" ]
+                    "{ mask-position: 10% 50%; }" 
                 testCase
                     "MaskPosition percents"
-                    [ MaskPosition.value([pct 10, pct 50; pct 50, pct 50])]
-                    [ "maskPosition" ==> "10% 50%, 50% 50%" ]
+                    [ MaskPosition.value [pct 10 :> ILengthPercentage, pct 50 :> ILengthPercentage; pct 50, pct 50] ]
+                    "{ mask-position: 10% 50%, 50% 50%; }" 
                 testCase
                     "MaskPosition inherit"
                     [ MaskPosition.inherit']
-                    [ "maskPosition" ==> "inherit" ]
+                    "{ mask-position: inherit; }" 
                 testCase
                     "MaskPosition initial"
                     [ MaskPosition.initial]
-                    [ "maskPosition" ==> "initial" ]
+                    "{ mask-position: initial; }" 
                 testCase
                     "MaskPosition unset"
                     [ MaskPosition.unset ]
-                    [ "maskPosition" ==> "unset" ]
-
+                    "{ mask-position: unset; }"
                 testCase
-                    "MaskRepeat value"
-                    [ MaskRepeat.value(FssTypes.Mask.Repeat)]
-                    [ "maskRepeat" ==> "repeat" ]
+                    "MaskPosition revert"
+                    [ MaskPosition.revert ]
+                    "{ mask-position: revert; }"
                 testCase
                     "MaskRepeat 2 value"
-                    [ MaskRepeat.value(FssTypes.Mask.RepeatX, FssTypes.Mask.RepeatY)]
-                    [ "maskRepeat" ==> "repeat-x repeat-y" ]
+                    [ MaskRepeat.value(Fss.Types.Mask.RepeatX, Fss.Types.Mask.RepeatY)]
+                    "{ mask-repeat: repeat-x repeat-y; }" 
                 testCase
                     "MaskRepeat multiple values"
-                    [ MaskRepeat.value([FssTypes.Mask.RepeatX, FssTypes.Mask.RepeatY; FssTypes.Mask.NoRepeat, FssTypes.Mask.Round])]
-                    [ "maskRepeat" ==> "repeat-x repeat-y, no-repeat round" ]
+                    [ MaskRepeat.value [Fss.Types.Mask.RepeatX, Fss.Types.Mask.RepeatY; Fss.Types.Mask.NoRepeat, Fss.Types.Mask.Round]]
+                    "{ mask-repeat: repeat-x repeat-y, no-repeat round; }" 
                 testCase
                     "MaskRepeat repeatX"
                     [ MaskRepeat.repeatX]
-                    [ "maskRepeat" ==> "repeat-x" ]
+                    "{ mask-repeat: repeat-x; }" 
                 testCase
                     "MaskRepeat repeatY"
                     [ MaskRepeat.repeatY]
-                    [ "maskRepeat" ==> "repeat-y" ]
+                    "{ mask-repeat: repeat-y; }" 
                 testCase
                     "MaskRepeat no-repeat"
                     [ MaskRepeat.noRepeat]
-                    [ "maskRepeat" ==> "no-repeat" ]
+                    "{ mask-repeat: no-repeat; }" 
                 testCase
                     "MaskRepeat repeat"
                     [ MaskRepeat.repeat]
-                    [ "maskRepeat" ==> "repeat" ]
+                    "{ mask-repeat: repeat; }" 
                 testCase
                     "MaskRepeat round"
                     [ MaskRepeat.round]
-                    [ "maskRepeat" ==> "round" ]
+                    "{ mask-repeat: round; }" 
                 testCase
                     "MaskRepeat space"
                     [ MaskRepeat.space]
-                    [ "maskRepeat" ==> "space" ]
+                    "{ mask-repeat: space; }" 
                 testCase
                     "MaskRepeat inherit"
                     [ MaskRepeat.inherit']
-                    [ "maskRepeat" ==> "inherit" ]
+                    "{ mask-repeat: inherit; }" 
                 testCase
                     "MaskRepeat initial"
                     [ MaskRepeat.initial]
-                    [ "maskRepeat" ==> "initial" ]
+                    "{ mask-repeat: initial; }" 
                 testCase
                     "MaskRepeat unset"
                     [ MaskRepeat.unset ]
-                    [ "maskRepeat" ==> "unset" ]
+                    "{ mask-repeat: unset; }"
+                testCase
+                    "MaskRepeat revert"
+                    [ MaskRepeat.revert ]
+                    "{ mask-repeat: revert; }"
                 testCase
                     "MaskSize cover"
                     [ MaskSize.cover]
-                    [ "maskSize" ==> "cover" ]
+                    "{ mask-size: cover; }" 
                 testCase
                     "MaskSize contain"
                     [ MaskSize.contain]
-                    [ "maskSize" ==> "contain" ]
+                    "{ mask-size: contain; }" 
                 testCase
                     "MaskSize pct"
-                    [ MaskSize' <| pct 50 ]
-                    [ "maskSize" ==> "50%" ]
+                    [ MaskSize.value (pct 50) ]
+                    "{ mask-size: 50%; }" 
                 testCase
                     "MaskSize em"
-                    [ MaskSize' <| em 3. ]
-                    [ "maskSize" ==> "3.0em" ]
+                    [ MaskSize.value (em 3.) ]
+                    "{ mask-size: 3em; }" 
                 testCase
                     "MaskSize px"
-                    [ MaskSize' <| px 12 ]
-                    [ "maskSize" ==> "12px" ]
-                testCase
-                    "MaskSize pct and auto"
-                    [ MaskSize.value(pct 50, FssTypes.Auto) ]
-                    [ "maskSize" ==> "50% auto" ]
+                    [ MaskSize.value (px 12) ]
+                    "{ mask-size: 12px; }" 
                 testCase
                     "MaskSize em and pct"
                     [ MaskSize.value(em 3., pct 25) ]
-                    [ "maskSize" ==> "3.0em 25%" ]
-                testCase
-                    "MaskSize auto px"
-                    [ MaskSize.value(FssTypes.Auto, px 6) ]
-                    [ "maskSize" ==> "auto 6px" ]
-                testCase
-                    "MaskSize auto auto"
-                    [ MaskSize.value(FssTypes.Auto, FssTypes.Auto) ]
-                    [ "maskSize" ==> "auto auto" ]
-                testCase
-                    "MaskSize multiple auto auto"
-                    [ MaskSize.values [FssTypes.Auto; FssTypes.Auto ] ]
-                    [ "maskSize" ==> "auto, auto" ]
+                    "{ mask-size: 3em 25%; }" 
                 testCase
                     "MaskSize multiple pct pct pct"
-                    [ MaskSize.values [pct 50; pct 25; pct 25] ]
-                    [ "maskSize" ==> "50%, 25%, 25%" ]
-                testCase
-                    "MaskSize multiple px auto contain"
-                    [ MaskSize.values [px 6; FssTypes.Auto; FssTypes.Mask.Contain] ]
-                    [ "maskSize" ==> "6px, auto, contain" ]
+                    [ MaskSize.value [pct 50 :> ILengthPercentage; pct 25; pct 25] ]
+                    "{ mask-size: 50%, 25%, 25%; }" 
                 testCase
                     "MaskSize auto"
                     [ MaskSize.auto]
-                    [ "maskSize" ==> "auto" ]
+                    "{ mask-size: auto; }" 
                 testCase
                     "MaskSize inherit"
                     [ MaskSize.inherit']
-                    [ "maskSize" ==> "inherit" ]
+                    "{ mask-size: inherit; }" 
                 testCase
                     "MaskSize initial"
                     [ MaskSize.initial]
-                    [ "maskSize" ==> "initial" ]
+                    "{ mask-size: initial; }" 
                 testCase
                     "MaskSize unset"
                     [ MaskSize.unset ]
-                    [ "maskSize" ==> "unset" ]
+                    "{ mask-size: unset; }" 
+                testCase
+                    "MaskSize revert"
+                    [ MaskSize.revert ]
+                    "{ mask-size: revert; }" 
             ]
