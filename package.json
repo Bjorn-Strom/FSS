@@ -4,7 +4,7 @@
   "scripts": {
     "start": "dotnet fable watch ./Documentation -o ./javascript --sourceMaps --run esbuild --bundle ./javascript/Documentation.js --outfile=dist/Documentation.js --servedir=dist",
     "build": "dotnet fable ./Documentation -o ./javascript && esbuild --bundle --minify ./javascript/Documentation.js --outfile=dist/Documentation.js",
-    "test": "dotnet fable ./Tests -o ./dist/tests --run node ./dist/tests/Tests.js",
+    "test": "dotnet fable ./tests -o ./dist/tests --run node ./dist/tests/Tests.js",
     "watch-test": "dotnet fable watch ./Tests -o ./dist/tests --run nodemon ./dist/tests/Tests.js",
     "clean": "rm -rf javascript/* dist/tests dist/*.js",
     "publish-docs": "npm run clean && npm run build && gh-pages -d dist"
