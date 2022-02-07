@@ -23,6 +23,7 @@ jobs:
       run: dotnet restore
     - name: Install npm packages
       run: npm i
-    - name: Test
-      run: npm run test |
-           dotnet run --project tests
+    - name: Test dotnet
+      run: dotnet run --project tests
+    - name: Test Fable
+      run: npm run test
