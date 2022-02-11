@@ -5,9 +5,9 @@
 
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fbjorn-strom%2FFSS%2Fbadge&style=for-the-badge)](https://actions-badge.atrox.dev/bjorn-strom/FSS/goto) ![Tests](https://img.shields.io/badge/TESTS-2573-9cf?style=for-the-badge) [![GitHub license](https://img.shields.io/github/license/Bjorn-Strom/FSS?style=for-the-badge)](https://github.com/Bjorn-Strom/FSS/blob/master/LICENSE.md)
 
-Fss is a dependency free CSS library for dotnet that provides statically types styling for your projects and aims to cover a huge part of the CSS spec. 
+Fss is a dependency free CSS library for dotnet that provides statically typed styling for your projects and aims to cover a huge part of the CSS spec. 
 
-It gives you CSS as a first class citizen in your projects and was made to be predictable and easy to use.🤔
+It gives you CSS as a first class citizen in your projects and was made to be predictable and easy to use.
 
 ## [Documentation 📖](https://bjorn-strom.github.io/FSS/)
 
@@ -35,7 +35,7 @@ let buttonStyle =
 button [ ClassName buttonStyle ] [ str "Click me" ]
 ```
 
-You can also check out this sample repo: [samples](https://letmegooglethat.com/?q=fiks+skikkelig+link).
+You can also check out this sample repo: [samples](https://github.com/Bjorn-Strom/Fss-Samples).
 
 ## Installation 💾
 
@@ -68,7 +68,7 @@ When it comes to styling in F# you do have some good alternatives for styling:
 - Or some kind of webpack configuration if you want to use CSS or SCSS directly.
 
 There is however no good solution to writing CSS purely in F#, CSS-in-Fs if you will, and this library aims to do just
-that. If you wish to write your own CSS and you are using dotnet, Fss aims to be the best solution for that.
+that. If you wish to write your own CSS and you are using dotnet, Fss is the best solution for just that.
 
 The primary goal of this project is to have an easy way to write type-safe discoverable styling with F# that supports
 most of the CSS spec. It was also important to me that it works independently of any other frameworks and would work
@@ -108,7 +108,7 @@ looking for. IF however you wish to write your own CSS in a type safe way, then 
 
 The best way to contribute to Fss is to use it! 😎 The more it is used the more tested it gets. If you do find any
 missing or bugged CSS properties, or maybe you are missing a framework library, feel free make an issue or PR. If you
-have some cool samples or examples feel feel free to to contribute to the documentation. In short, any and all
+have some cool samples or examples feel free to to contribute to the documentation. In short, any and all
 contributions are very welcome.
 
 

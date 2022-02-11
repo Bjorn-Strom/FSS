@@ -1,10 +1,10 @@
 ## Installation
 
 Fss provides several libraries you can choose from:
-- [Fss.Core](LINK) is a dotnet library used to create CSS.
-- [Fss.Fable](LINK) is built on Fss.Core and Fable to give some convenience functions when using Fss with Fable.React.
-- [Fss.Feliz](LINK) lets you write Fss with Feliz syntax. This is built on Fss.Fable.
-- [Fss.Giraffe](LINK)  provides helper functions that makes it easier to work with [GiraffeViewEngine](LINK). Built atop `Fss.Core`
+- [Fss.Core](https://www.nuget.org/packages/Fss-lib.Core/) is a dotnet library used to create CSS.
+- [Fss.Fable](https://www.nuget.org/packages/Fss-lib.Fable/) is built on Fss.Core and Fable to give some convenience functions when using Fss with Fable.React.
+- [Fss.Feliz](https://www.nuget.org/packages/Fss-lib.Feliz/) lets you write Fss with Feliz syntax. This is built on Fss.Fable.
+- [Fss.Giraffe](https://www.nuget.org/packages/Fss-lib.Giraffe/)  provides helper functions that makes it easier to work with [GiraffeViewEngine](https://github.com/giraffe-fsharp/Giraffe.ViewEngine). Built atop `Fss.Core`
 
 Just install the nuget package you need and you are good to go.
 

@@ -9,7 +9,7 @@ dotnet add package Fss-lib.Giraffe
 
 ## Usage
 
-This library provides helper functions to make it easier to use Fss with [Giraffe view engine](LINK).
+This library provides helper functions to make it easier to use Fss with [Giraffe view engine](https://github.com/giraffe-fsharp/Giraffe.ViewEngine).
 
 The biggest difference when using Fss with Giraffe is that there is no automatic injection of styles into the dom.
 That is because there is no reliable way of doing that with the view engine.

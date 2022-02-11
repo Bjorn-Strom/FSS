@@ -3,7 +3,7 @@
 The basic idea behind Fss which is also true for all its framework libraries is a simple one.
 Create a list of CssRules and send them into a function. This function returns classnames and CSS.
 
-The main difference between [Fss.Core](LINK) and the framework libraries is that the core library consists of the "low-level" functions that make this work, and the framework libraries are there to make using the system easier for a specific framework.
+The main difference between [Fss.Core](https://www.nuget.org/packages/Fss-lib.Core/) and the framework libraries is that the core library consists of the "low-level" functions that make this work, and the framework libraries are there to make using the system easier for a specific framework.
 But the concept is still the same: lists of CssRules.
 
 ## Styling
