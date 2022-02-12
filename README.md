@@ -5,7 +5,8 @@
 
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fbjorn-strom%2FFSS%2Fbadge&style=for-the-badge)](https://actions-badge.atrox.dev/bjorn-strom/FSS/goto) ![Tests](https://img.shields.io/badge/TESTS-2573-9cf?style=for-the-badge) [![GitHub license](https://img.shields.io/github/license/Bjorn-Strom/FSS?style=for-the-badge)](https://github.com/Bjorn-Strom/FSS/blob/master/LICENSE.md)
 
-Fss is a dependency free CSS library for dotnet that provides statically typed styling for your projects and aims to cover a huge part of the CSS spec. 
+Fss is a dependency free CSS library for dotnet that provides statically typed styling for your projects and aims to
+cover a huge part of the CSS spec.
 
 It gives you CSS as a first class citizen in your projects and was made to be predictable and easy to use.
 
@@ -43,12 +44,12 @@ Install the Nuget package you need. If you are using Fable or Feliz then you pro
 If you are using Giraffe then you probably want `Fss.Giraffe`. Doing something custom or extending Fss? Then you
 probably want `Fss.Core`.
 
-| Package              | NuGet                                                                                   | Downloads                                                                                |
-|----------------------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| [Fss.Core ](link)    | ![Nuget](https://img.shields.io/nuget/v/fss-lib.core?style=for-the-badge&logo=nuget)    | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.core?style=for-the-badge&logo=nuget)    |
-| [Fss.Fable](link)    | ![Nuget](https://img.shields.io/nuget/v/fss-lib.fable?style=for-the-badge&logo=nuget)   | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.fable?style=for-the-badge&logo=nuget)   |
-| [Fss.Feliz](link)    | ![Nuget](https://img.shields.io/nuget/v/fss-lib.feliz?style=for-the-badge&logo=nuget)   | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.feliz?style=for-the-badge&logo=nuget)   |
-| [Fss.Giraffe](link)  | ![Nuget](https://img.shields.io/nuget/v/fss-lib.giraffe?style=for-the-badge&logo=nuget) | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.giraffe?style=for-the-badge&logo=nuget) |
+| Package                                                        | NuGet                                                                                   | Downloads                                                                                |
+|----------------------------------------------------------------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| [Fss.Core ](https://www.nuget.org/packages/Fss-lib.Core/)      | ![Nuget](https://img.shields.io/nuget/v/fss-lib.core?style=for-the-badge&logo=nuget)    | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.core?style=for-the-badge&logo=nuget)    |
+| [Fss.Fable](https://www.nuget.org/packages/Fss-lib.Fable/)     | ![Nuget](https://img.shields.io/nuget/v/fss-lib.fable?style=for-the-badge&logo=nuget)   | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.fable?style=for-the-badge&logo=nuget)   |
+| [Fss.Feliz](https://www.nuget.org/packages/Fss-lib-feliz/)     | ![Nuget](https://img.shields.io/nuget/v/fss-lib.feliz?style=for-the-badge&logo=nuget)   | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.feliz?style=for-the-badge&logo=nuget)   |
+| [Fss.Giraffe](https://www.nuget.org/packages/Fss-lib.Giraffe/) | ![Nuget](https://img.shields.io/nuget/v/fss-lib.giraffe?style=for-the-badge&logo=nuget) | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.giraffe?style=for-the-badge&logo=nuget) |
 
 To install `Fss` you need to install the nuget package.
 
@@ -108,8 +109,8 @@ looking for. IF however you wish to write your own CSS in a type safe way, then 
 
 The best way to contribute to Fss is to use it! 😎 The more it is used the more tested it gets. If you do find any
 missing or bugged CSS properties, or maybe you are missing a framework library, feel free make an issue or PR. If you
-have some cool samples or examples feel free to to contribute to the documentation. In short, any and all
-contributions are very welcome.
+have some cool samples or examples feel free to to contribute to the documentation. In short, any and all contributions
+are very welcome.
 
 
 
