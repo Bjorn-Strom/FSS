@@ -3,7 +3,6 @@
 open Browser.Dom
 open System.Collections.Generic;
 open Fss
-open Fss.Types
 
 [<AutoOpen>]
 module Fable =

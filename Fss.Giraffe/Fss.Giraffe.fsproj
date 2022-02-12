@@ -22,6 +22,6 @@
 
     <ItemGroup>
       <PackageReference Include="Giraffe.ViewEngine" Version="1.4.0" />
-      <PackageReference Include="Fss-lib.Core" Version="1.0.1" />
+      <PackageReference Include="Fss-lib.Core" Version="1.0.2" />
     </ItemGroup>
 </Project>
