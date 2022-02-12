@@ -1,10 +1,10 @@
-﻿namespace Fss.Feliz
+﻿namespace Fss
 
 open Fss
 open Fss.Fable
 
 [<AutoOpen>]
-module Fss =
+module Feliz =
     type Feliz.prop with
         /// Allows you to style Feliz elements with Fss
         static member fss (properties: Fss.Types.Rule list) =

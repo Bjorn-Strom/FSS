@@ -42,10 +42,10 @@ module Cursor =
 module CursorClasses =
     type CursorParent(property) =
         inherit CssRuleWithAutoNone(property)
-        member this.value(url: string) = (property, Url url) |> Rule
+        member this.value(url: string) = (property, UrlMaster url) |> Rule
         member this.value(cursor: Cursor.Cursor) = (property, cursor) |> Rule
         member this.url(url: string) =
-            (property, url |> Url) |> Rule
+            (property, url |> UrlMaster) |> Rule
         member this.url(url: string, x: int, y: int) =
             let value = $"url({url}) {x} {y}"
             (property, value |> String) |> Rule

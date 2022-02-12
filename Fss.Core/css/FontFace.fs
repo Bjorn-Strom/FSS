@@ -5,26 +5,26 @@ open Fss.Types
 [<RequireQualifiedAccess>]
 module FontFace =
     /// Specifies the resource containing the font data.
-    let Src = FontFaceClasses.Src(FontFaceProperty.Src)
+    let Src = FontFaceClasses.Src(Property.FontFaceProperty.Src)
     /// Specifies how a font face is displayed when it is ready to use
-    let FontDisplay = FontFaceClasses.FontDisplay(FontFaceProperty.FontDisplay)
+    let FontDisplay = FontFaceClasses.FontDisplay(Property.FontFaceProperty.FontDisplay)
     ///
-    let FontStyle = FontFaceClasses.FontStyle(FontFaceProperty.FontStyle)
+    let FontStyle = FontFaceClasses.FontStyle(Property.FontFaceProperty.FontStyle)
     ///
-    let FontStretch = FontFaceClasses.FontStretch(FontFaceProperty.FontStretch)
+    let FontStretch = FontFaceClasses.FontStretch(Property.FontFaceProperty.FontStretch)
     ///
-    let FontWeight = FontFaceClasses.FontWeight(FontFaceProperty.FontWeight)
+    let FontWeight = FontFaceClasses.FontWeight(Property.FontFaceProperty.FontWeight)
     ///
-    let SizeAdjust = FontFaceClasses.SizeAdjust(FontFaceProperty.SizeAdjust)
+    let SizeAdjust = FontFaceClasses.SizeAdjust(Property.FontFaceProperty.SizeAdjust)
     ///
-    let UnicodeRange = FontFaceClasses.UnicodeRange(FontFaceProperty.UnicodeRange)
+    let UnicodeRange = FontFaceClasses.UnicodeRange(Property.FontFaceProperty.UnicodeRange)
     ///
-    let LineGapOverride = FontFaceClasses.LineGapOverride(FontFaceProperty.LineGapOverride)
+    let LineGapOverride = FontFaceClasses.LineGapOverride(Property.FontFaceProperty.LineGapOverride)
     ///
-    let FontVariationSettings = FontFaceClasses.FontVariationSettings(FontFaceProperty.FontVariationSettings)
+    let FontVariationSettings = FontFaceClasses.FontVariationSettings(Property.FontFaceProperty.FontVariationSettings)
     ///
-    let AscentOverride = FontFaceClasses.AscentDescentOverride(FontFaceProperty.AscentOverride)
+    let AscentOverride = FontFaceClasses.AscentDescentOverride(Property.FontFaceProperty.AscentOverride)
     ///
-    let DescentOverride = FontFaceClasses.AscentDescentOverride(FontFaceProperty.DescentOverride)
+    let DescentOverride = FontFaceClasses.AscentDescentOverride(Property.FontFaceProperty.DescentOverride)
     ///
-    let FontFamily = FontFaceClasses.FontFamily(FontFaceProperty.FontFamily)
+    let FontFamily = FontFaceClasses.FontFamily(Property.FontFaceProperty.FontFamily)

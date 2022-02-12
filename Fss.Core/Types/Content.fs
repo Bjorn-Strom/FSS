@@ -1,5 +1,4 @@
 namespace Fss
-
 namespace Fss.Types
 
 [<RequireQualifiedAccess>]
@@ -9,7 +8,7 @@ module Content =
         | CloseQuote
         | NoOpenQuote
         | NoCloseQuote
-        | Counter of CounterProperty
+        | Counter of Property.CounterProperty
         interface ICssValue with
             member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
 

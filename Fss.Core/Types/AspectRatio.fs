@@ -10,5 +10,5 @@ module AspectRatioClasses =
         member this.value(aspectRatio: int) = (property, Int aspectRatio) |> Rule
 
         member this.value(width: int, height: int) =
-            (property, Divider(string width, string height))
+            (property, DividerMaster(string width, string height))
             |> Rule

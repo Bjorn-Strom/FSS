@@ -87,8 +87,8 @@ module ClipPathClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
     type ClipPath(property) =
         inherit CssRuleWithNone(property)
-        member this.url(url: string) = (property, Url url) |> Rule
-        member this.path(path: string) = (property, Path path) |> Rule
+        member this.url(url: string) = (property, UrlMaster url) |> Rule
+        member this.path(path: string) = (property, PathMaster path) |> Rule
         member this.inset(inset: ILengthPercentage) = (property, ClipPath.All inset) |> Rule
 
         member this.inset(horizontal: ILengthPercentage, vertical: ILengthPercentage) =

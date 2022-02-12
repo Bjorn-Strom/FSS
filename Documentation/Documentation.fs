@@ -5,8 +5,6 @@ module App =
     open Feliz
     open Feliz.Router
     open Fss
-    open Fss.Fable
-    open Fss.Feliz
 
     open Pages
     open Store

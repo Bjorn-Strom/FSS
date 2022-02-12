@@ -1,5 +1,4 @@
 namespace Fss
-// Interfaces
 namespace Fss.Types
 
 type ICssValue =
@@ -34,7 +33,39 @@ module internal MasterTypeHelpers =
 
 [<RequireQualifiedAccess>]
 module Property =
-    type Property =
+    type FontFaceProperty =
+        | AscentOverride
+        | DescentOverride
+        | FontDisplay
+        | FontFamily
+        | FontStretch
+        | FontStyle
+        | FontWeight
+        | FontVariant
+        | FontFeatureSettings
+        | FontVariationSettings
+        | LineGapOverride
+        | SizeAdjust
+        | Src
+        | UnicodeRange
+        interface ICssValue with
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+    type CounterProperty =
+        | System
+        | Negative
+        | Prefix
+        | Suffix
+        | Range
+        | Pad
+        | Fallback
+        | Symbols
+        | AdditiveSymbols
+        | SpeakAs
+        // Home made
+        | NameLabel 
+        interface ICssValue with
+            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+    type CssProperty =
         // Css
         | Appearance
         | AlignContent
@@ -537,12 +568,13 @@ type NameLabel =
     interface ICounterValue with
         member this.StringifyCounter() = this.Unwrap()
         
-type CssRule(property: Property.Property) =
+type CssRule(property: Property.CssProperty) =
     member this.value(keyword: Keywords) = (property, keyword) |> Rule
     member this.initial = (property, Initial) |> Rule
     member this.inherit' = (property, Inherit) |> Rule
     member this.unset = (property, Unset) |> Rule
     member this.revert = (property, Revert) |> Rule
+    
 
 and Keywords =
     | Inherit
@@ -552,28 +584,30 @@ and Keywords =
     interface ICssValue with
         member this.StringifyCss() = this.ToString().ToLower()
 
-and Rule = Property.Property * ICssValue
+and Rule = Property.CssProperty * ICssValue
+type CounterRule = Property.CounterProperty * ICounterValue
+type FontFaceRule = Property.FontFaceProperty * IFontFaceValue
         
-type Important =
-    | Important of ICssValue
+type ImportantMaster =
+    | ImportantMaster of ICssValue
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | Important value ->
+            | ImportantMaster value ->
                 $"{stringifyICssValue value} !important"
         
 type Pseudo =
-    | PseudoClass of Rule list
-    | PseudoElement of Rule list
+    | PseudoClassMaster of Rule list
+    | PseudoElementMaster of Rule list
     member this.Unwrap() =
         match this with
-        | PseudoClass p -> p
-        | PseudoElement p -> p
+        | PseudoClassMaster p -> p
+        | PseudoElementMaster p -> p
 
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | PseudoClass ps ->
+            | PseudoClassMaster ps ->
                 let ps =
                     ps
                     |> List.map
@@ -581,7 +615,7 @@ type Pseudo =
                     |> String.concat "; "
                     
                 $"{ps}"
-            | PseudoElement ps ->
+            | PseudoElementMaster ps ->
                 let ps =
                     ps
                     |> List.map
@@ -590,23 +624,23 @@ type Pseudo =
 
                 $"{ps}"
 
-type Combinator =
-    | Combinator of Rule list
+type CombinatorMaster =
+    | CombinatorMaster of Rule list
     member this.Unwrap() =
         match this with
-        | Combinator c -> c
+        | CombinatorMaster c -> c
     interface ICssValue with
         member this.StringifyCss() = ""
 
-type Divider =
-    | Divider of string * string
+type DividerMaster =
+    | DividerMaster of string * string
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | Divider (a, b) -> $"{a} / {b}"
+            | DividerMaster (a, b) -> $"{a} / {b}"
 
-type Url =
-    | Url of string
+type UrlMaster =
+    | UrlMaster of string
     interface IFontFaceValue with
         member this.StringifyFontFace() = (this :> ICssValue).StringifyCss()
 
@@ -616,54 +650,54 @@ type Url =
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | Url u -> $"url({u})"
+            | UrlMaster u -> $"url({u})"
 
-type Custom =
-    | Custom of string
+type CustomMaster =
+    | CustomMaster of string
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | Custom value -> value
-type Path =
-    | Path of string
+            | CustomMaster value -> value
+type PathMaster =
+    | PathMaster of string
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | Path p -> $"path('{p}')"
+            | PathMaster p -> $"path('{p}')"
 
 type ClassName = string
 type Css = string
 
-type CssRuleWithAuto(property: Property.Property) =
+type CssRuleWithAuto(property: Property.CssProperty) =
     inherit CssRule(property)
     member this.auto = (property, Auto) |> Rule
 
-type CssRuleWithNone(property: Property.Property) =
+type CssRuleWithNone(property: Property.CssProperty) =
     inherit CssRule(property)
     member this.none = (property, None') |> Rule
 
-type CssRuleWithAutoNone(property: Property.Property) =
+type CssRuleWithAutoNone(property: Property.CssProperty) =
     inherit CssRule(property)
     member this.auto = (property, Auto) |> Rule
     member this.none = (property, None') |> Rule
 
-type CssRuleWithNormal(property: Property.Property) =
+type CssRuleWithNormal(property: Property.CssProperty) =
     inherit CssRule(property)
     member this.normal = (property, Normal) |> Rule
 
-type CssRuleWithNormalNone(property: Property.Property) =
+type CssRuleWithNormalNone(property: Property.CssProperty) =
     inherit CssRuleWithNormal(property)
     member this.none = (property, None') |> Rule
 
-type CssRuleWithAutoNormal(property: Property.Property) =
+type CssRuleWithAutoNormal(property: Property.CssProperty) =
     inherit CssRuleWithAuto(property)
     member this.normal = (property, Normal) |> Rule
 
-type CssRuleWithAutoNormalNone(property: Property.Property) =
+type CssRuleWithAutoNormalNone(property: Property.CssProperty) =
     inherit CssRuleWithAutoNone(property)
     member this.normal = (property, Normal) |> Rule
     
-type CssRuleWithValueFunctions<'T when 'T :> ICssValue>(property: Property.Property, seperator) =
+type CssRuleWithValueFunctions<'T when 'T :> ICssValue>(property: Property.CssProperty, seperator) =
     inherit CssRule(property)
     member this.value(value: 'T) =
         let value = stringifyICssValue value

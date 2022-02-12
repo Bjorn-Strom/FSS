@@ -1,11 +1,12 @@
-﻿namespace Fss.Fable
+﻿namespace Fss
 
 open Browser.Dom
 open System.Collections.Generic;
 open Fss
+open Fss.Types
 
 [<AutoOpen>]
-module Fss =
+module Fable =
     let private processCssRule (name: string, rule: string) =
         $"{name} {rule}"
         

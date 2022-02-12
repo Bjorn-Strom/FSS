@@ -1,11 +1,11 @@
-﻿namespace Fss.Giraffe
+﻿namespace Fss
 
 open Fss
 open System.Collections.Generic;
 open Giraffe.ViewEngine
 
 [<AutoOpen>]
-module Fss =
+module Giraffe =
     let styleCache = Dictionary<string, XmlNode>()
     let private createStyleNode className (css: string) =
         if styleCache.ContainsKey className then

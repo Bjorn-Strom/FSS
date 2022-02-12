@@ -8,10 +8,10 @@ module Counter =
     let Negative = CounterClasses.NegativeClass()
 
     let Prefix =
-        CounterClasses.FixClass(CounterProperty.Prefix)
+        CounterClasses.FixClass(Property.CounterProperty.Prefix)
 
     let Suffix =
-        CounterClasses.FixClass(CounterProperty.Suffix)
+        CounterClasses.FixClass(Property.CounterProperty.Suffix)
 
     let Range = CounterClasses.RangeClass()
     let Pad = CounterClasses.PadClass()
@@ -34,5 +34,5 @@ module Counter =
         CounterClasses.CounterIncrement(Property.CounterIncrement)
     /// Gives label to generated CSS string.
     let CounterLabel (label: string) =
-        (CounterProperty.NameLabel, NameLabel.NameLabel(label.Replace(" ", "")))
+        (Property.CounterProperty.NameLabel, NameLabel.NameLabel(label.Replace(" ", "")))
         |> CounterRule

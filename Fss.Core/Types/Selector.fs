@@ -10,17 +10,17 @@ namespace Fss.Types
 module SelectorClasses =
     type Selector =
         static member adjacentSibling (html: Html.Html) rules =
-            (Property.AdjacentSibling html, Combinator.Combinator rules)
+            (Property.AdjacentSibling html, CombinatorMaster.CombinatorMaster rules)
             |> Rule
 
         static member generalSibling (html: Html.Html) rules =
-            (Property.GeneralSibling html, Combinator.Combinator rules)
+            (Property.GeneralSibling html, CombinatorMaster.CombinatorMaster rules)
             |> Rule
 
         static member child (html: Html.Html) rules =
-            (Property.Child html, Combinator.Combinator rules)
+            (Property.Child html, CombinatorMaster.CombinatorMaster rules)
             |> Rule
 
         static member descendant (html: Html.Html) rules =
-            (Property.Descendant html, Combinator.Combinator rules)
+            (Property.Descendant html, CombinatorMaster.CombinatorMaster rules)
             |> Rule

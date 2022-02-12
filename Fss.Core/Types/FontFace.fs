@@ -2,28 +2,9 @@ namespace Fss
 
 namespace Fss.Types
 
-type FontFaceProperty =
-    | AscentOverride
-    | DescentOverride
-    | FontDisplay
-    | FontFamily
-    | FontStretch
-    | FontStyle
-    | FontWeight
-    | FontVariant
-    | FontFeatureSettings
-    | FontVariationSettings
-    | LineGapOverride
-    | SizeAdjust
-    | Src
-    | UnicodeRange
-    interface ICssValue with
-        member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
-
-type FontFaceRule = FontFaceProperty * IFontFaceValue
-
 [<RequireQualifiedAccess>]
 module FontFace =
+
     type Format =
         | Truetype of string
         | Opentype of string
@@ -81,7 +62,7 @@ module FontFace =
 module FontFaceClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/src
     type Src(property) =
-        member this.url(url: string) = (property, Url url) |> FontFaceRule
+        member this.url(url: string) = (property, UrlMaster url) |> FontFaceRule
 
         member this.truetype(url: string) =
             (property, FontFace.Truetype url) |> FontFaceRule
@@ -99,7 +80,7 @@ module FontFaceClasses =
         member this.sources(urls: string list) =
             let value =
                 urls
-                |> List.map (fun x -> (stringifyICssValue (Url x)))
+                |> List.map (fun x -> (stringifyICssValue (UrlMaster x)))
                 |> String.concat ", "
                 |> String
 

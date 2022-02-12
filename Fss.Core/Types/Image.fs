@@ -138,7 +138,7 @@ module Image =
 [<RequireQualifiedAccess>]
 module ImageClasses =
     type Image =
-        static member url(url: string) = Url url
+        static member url(url: string) = UrlMaster url
         static member urlAlt(url: string, alt: string) = Image.UrlAlt(url, Stringed alt)
 
         static member linearGradient(gradients: Angle * (Color * ILengthPercentage) list) =

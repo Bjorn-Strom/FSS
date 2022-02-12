@@ -10,5 +10,5 @@ module ContentCss =
 module Label =
     /// Gives label to generated CSS string.
     let Label (label: string) =
-        (Property.NameLabel, NameLabel.NameLabel(label.Replace(" ", "")))
+        (Property.CssProperty.NameLabel, NameLabel.NameLabel(label.Replace(" ", "")))
         |> Rule

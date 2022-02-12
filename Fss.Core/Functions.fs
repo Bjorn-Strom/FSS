@@ -5,15 +5,15 @@ open Fss.Utilities
 
 [<AutoOpen>]
 module rec Functions =
-    let private isSecondary (_: Property.Property, value: ICssValue) =
+    let private isSecondary (_: Property.CssProperty, value: ICssValue) =
         match value with
             | :? Pseudo as _ -> true
-            | :? Combinator as _ -> true
+            | :? CombinatorMaster as _ -> true
             | :? Media.MediaQuery as _ -> true
             | _ -> false
     let private isCombinator (_, value: ICssValue) =
         match value with
-        | :? Combinator as _ -> true
+        | :? CombinatorMaster as _ -> true
         | _ -> false
     let private isMedia (_, value: ICssValue) =
         match value with
@@ -70,8 +70,8 @@ module rec Functions =
             match propertyValue with
             | :? Pseudo as p ->
                 match p with
-                | PseudoClass _ -> ":"
-                | PseudoElement _ -> "::"
+                | PseudoClassMaster _ -> ":"
+                | PseudoElementMaster _ -> "::"
             | _ -> ""
             
         $"{colons}{stringifyICssValue propertyName}", $"{{ {stringifyICssValue propertyValue}; }}"
@@ -119,7 +119,7 @@ module rec Functions =
     // Creates combinator CSS. As media queries can contain any type of CSS it calls the createFSS function.
     let private createCombinatorCssString (propertyName: ICssValue, propertyValue: ICssValue) =
         match propertyValue with
-        | :? Combinator as c ->
+        | :? CombinatorMaster as c ->
             let _, css =
                 c.Unwrap()
                 |> createFssInternal (Some "")
@@ -271,7 +271,7 @@ module rec Functions =
     /// The first element in the tuple is the name of the created font. This is the value you use in your CSS.
     /// The second element is the generated CSS for the font face.
     let createFontFace (name: string) (properties: FontFaceRule list) : string * string =
-        let properties = [ FontFace.FontFamily.string name ] @ properties
+        let properties = [ Fss.FontFace.FontFamily.string name ] @ properties
         let properties =
             List.map stringifyFontFaceProperty properties
             |> String.concat ""
@@ -331,7 +331,7 @@ module rec Functions =
 
     // Important
     let important (propertyName, propertyValue) =
-        (propertyName, Important propertyValue) |> Rule
+        (propertyName, ImportantMaster propertyValue) |> Rule
 
     // Classnames
     let combine styles stylesPred =

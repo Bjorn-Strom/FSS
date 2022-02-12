@@ -147,7 +147,7 @@ module GridClasses =
         inherit GridPosition(property)
 
         member this.value(area: string, value: int) =
-            (property, Divider(area, (string value)) ) |> Rule
+            (property, DividerMaster(area, (string value)) ) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/gap
     type GridGap(property) =

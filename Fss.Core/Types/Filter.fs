@@ -44,7 +44,7 @@ module FilterClasses =
     type FilterClass(property) =
         inherit CssRuleWithNone(property)
         member this.value(filters: Filter.Filter list) = (property, Filter.Filters filters) |> Rule
-        member this.url(url: string) = (property, Url url) |> Rule
+        member this.url(url: string) = (property, UrlMaster url) |> Rule
         member this.blur(blur: Length) = (property, Filter.Blur blur) |> Rule
 
         member this.brightness(brightness: Percent) =
