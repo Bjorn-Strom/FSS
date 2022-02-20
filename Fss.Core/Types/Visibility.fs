@@ -22,8 +22,13 @@ module VisibilityClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
     type Visibility(property) =
         inherit CssRule(property)
+        /// The element is visible
         member this.visible = (property, Visibility.Visible) |> Rule
+        /// The element is not visible
         member this.hidden = (property, Visibility.Hidden) |> Rule
+        /// For table rows, columns, column groups and row groups the rows or column are hidden and their space removed.
+        /// For flex items they are hidden and they space removed
+        /// For anything else they are hidden
         member this.collapse = (property, Visibility.Collapse) |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
     type Opacity(property) =

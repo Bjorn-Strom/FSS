@@ -82,10 +82,15 @@ module ScrollClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type
     type ScrollSnapType(property) =
         inherit CssRuleWithNone(property)
+        /// Scroll container snaps to position in the horizontal axis only
         member this.x = (property, Scroll.X) |> Rule
+        /// Scroll container snaps to position in the vertical axis only
         member this.y = (property, Scroll.Y) |> Rule
+        /// Scroll container snaps to position in the block axis only
         member this.block = (property, Scroll.Block) |> Rule
+        /// Scroll container snaps to position in the inline axis only
         member this.inline' = (property, Scroll.Inline) |> Rule
+        /// Scroll container snaps to position in both horizontal an vertical axis
         member this.both = (property, Scroll.Both) |> Rule
         member this.mandatory(snapType: Scroll.SnapType) = (property, Scroll.Mandatory snapType) |> Rule
         member this.proximity(snapType: Scroll.SnapType) = (property, Scroll.Proximity snapType) |> Rule
@@ -93,9 +98,7 @@ module ScrollClasses =
     type ScrollSnapAlign(property) =
         inherit CssRuleWithNone(property)
 
-        member this.value(first: Scroll.SnapAlign, second: Scroll.SnapAlign) =
-            (property, Scroll.Double(first, second)) |> Rule
-
+        member this.value(first: Scroll.SnapAlign, second: Scroll.SnapAlign) = (property, Scroll.Double(first, second)) |> Rule
         member this.start = (property, Scroll.Start) |> Rule
         member this.end' = (property, Scroll.End) |> Rule
         member this.center = (property, Scroll.Center) |> Rule

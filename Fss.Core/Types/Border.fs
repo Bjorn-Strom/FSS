@@ -48,21 +48,33 @@ module BorderClasses =
         inherit DirectionalLength(property)
         member this.value(width: Border.Width) = (property, width) |> Rule
 
+        /// Apply a thin border width
         member this.thin = (property, Border.Width.Thin) |> Rule
+        /// Apply a medium border width
         member this.medium = (property, Border.Width.Medium) |> Rule
+        /// Apply a thick border width
         member this.thick = (property, Border.Width.Thick) |> Rule
 
     type BorderStyleParent(property) =
         inherit CssRuleWithNone(property)
         member this.value(style: Border.Style) = (property, style) |> Rule
+        /// Display no border
         member this.hidden = (property, Border.Style.Hidden) |> Rule
+        /// The border will be a series of rounded dots
         member this.dotted = (property, Border.Style.Dotted) |> Rule
+        /// The border will be a series of line segments
         member this.dashed = (property, Border.Style.Dashed) |> Rule
+        /// Displays the border as a solid line
         member this.solid = (property, Border.Style.Solid) |> Rule
+        /// Displays two borders
         member this.double = (property, Border.Style.Double) |> Rule
+        /// Border will appear carved
         member this.groove = (property, Border.Style.Groove) |> Rule
+        /// Border will have an extruded appearance
         member this.ridge = (property, Border.Style.Ridge) |> Rule
+        /// Displays a border that makes the element appear embedded
         member this.inset = (property, Border.Style.Inset) |> Rule
+        /// Displays a border that makes the element appear embossed
         member this.outset = (property, Border.Style.Outset) |> Rule
 
     type BorderRadiusParent(property) =
@@ -126,7 +138,9 @@ module BorderClasses =
     type BorderCollapse(property) =
         inherit CssRule(property)
         member this.value(collapse: Border.Collapse) = (property, collapse) |> Rule
+        /// Cells have shared borders
         member this.collapse = (property, Border.Collapse) |> Rule
+        /// Cells have distinct borders
         member this.separate = (property, Border.Separate) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
@@ -153,9 +167,13 @@ module BorderClasses =
 
             (property, value) |> Rule
 
+        /// The image is stretched to fill the gap between each border
         member this.stretch = (property, Border.Stretch) |> Rule
+        /// The image is repeated to fill the gap between each border. Will be clipped to achieve fit
         member this.repeat = (property, Border.Repeat) |> Rule
+        /// The image is repeated to fill the gap between each border. Will be stretched to achieve fit
         member this.round = (property, Border.Round) |> Rule
+        /// The image is repeated to fill the gap between each border. Extra space will be added to achieve fit
         member this.space = (property, Border.Space) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice

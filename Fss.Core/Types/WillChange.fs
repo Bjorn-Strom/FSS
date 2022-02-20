@@ -21,5 +21,7 @@ module WillChangeClasses =
             (property, String(String.concat ", " idents))
             |> Rule
 
+        /// Indicates that the scroll position will change
         member this.scrollPosition = (property, WillChange.ScrollPosition) |> Rule
+        /// Indicates that the contents will change
         member this.contents = (property, WillChange.Contents) |> Rule

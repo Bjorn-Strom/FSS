@@ -44,24 +44,27 @@ module FilterClasses =
     type FilterClass(property) =
         inherit CssRuleWithNone(property)
         member this.value(filters: Filter.Filter list) = (property, Filter.Filters filters) |> Rule
+        /// URI pointing to a filter
         member this.url(url: string) = (property, UrlMaster url) |> Rule
+        /// Applies Gaussian blur to the input image
         member this.blur(blur: Length) = (property, Filter.Blur blur) |> Rule
-
-        member this.brightness(brightness: Percent) =
-            (property, Filter.Brightness brightness) |> Rule
-
+        /// Applies a linear multiplier to the input image
+        member this.brightness(brightness: Percent) = (property, Filter.Brightness brightness) |> Rule
+        /// Adjusts the contrast of the input image
         member this.contrast(contrast: Percent) = (property, Filter.Contrast contrast) |> Rule
-
-        member this.dropShadow(x: Length, y: Length, blur: Length, color: Color) =
-            (property, Filter.DropShadow(x, y, blur, color)) |> Rule
-
-        member this.dropShadow(x: Length, y: Length, blur: Length, color: Color, invert: Percent) =
-            (property, Filter.DropShadowInvert(x, y, blur, color, invert))
-            |> Rule
-
+        /// Applies a drop shadow effect to the input image
+        member this.dropShadow(x: Length, y: Length, blur: Length, color: Color) = (property, Filter.DropShadow(x, y, blur, color)) |> Rule
+        /// Applies a drop shadow effect to the input image
+        member this.dropShadow(x: Length, y: Length, blur: Length, color: Color, invert: Percent) = (property, Filter.DropShadowInvert(x, y, blur, color, invert)) |> Rule
+        /// Converts the image to grayscale
         member this.grayscale(grayscale: Percent) = (property, Filter.Grayscale grayscale) |> Rule
+        /// Applies hue rotation to input image
         member this.hueRotate(hueRotate: Angle) = (property, Filter.HueRotate hueRotate) |> Rule
+        /// Inverts the samples of the input image
         member this.invert(invert: Percent) = (property, Filter.Invert invert) |> Rule
+        /// Applies transparency to the samples in the input image
         member this.opacity(opacity: Percent) = (property, Filter.Opacity opacity) |> Rule
+        /// Saturates the input image
         member this.saturate(saturate: Percent) = (property, Filter.Saturate saturate) |> Rule
+        /// Converts the input image to sepia
         member this.sepia(sepia: Percent) = (property, Filter.Sepia sepia) |> Rule

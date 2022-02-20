@@ -570,9 +570,14 @@ type NameLabel =
         
 type CssRule(property: Property.CssProperty) =
     member this.value(keyword: Keywords) = (property, keyword) |> Rule
+    /// Applies the default value to the element
     member this.initial = (property, Initial) |> Rule
+    /// Take computed value from parent element
     member this.inherit' = (property, Inherit) |> Rule
+    /// Resets a property to its inherited value if it inherits from its parent
+    /// to its initial value if not.
     member this.unset = (property, Unset) |> Rule
+    /// Reverts the property to user agent style sheet
     member this.revert = (property, Revert) |> Rule
     
 

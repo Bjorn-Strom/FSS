@@ -78,7 +78,10 @@ module ColumnClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill
     type ColumnFill(property) =
         inherit CssRuleWithAuto(property)
+        /// Content is equally divided between columns
+        /// In fragmented contexts only the last fragment is balanced
         member this.balance = (property, Column.Balance) |> Rule
+        /// Content is equally divided between columns
         member this.balanceAll = (property, Column.BalanceAll) |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
     type ColumnWidth(property) =

@@ -18,12 +18,9 @@ module ContentSize =
 module ContentSizeClasses =
     type ContentSize(property) =
         inherit CssRuleWithAutoLength(property)
-
-        member this.maxContent =
-            (property, ContentSize.MaxContent) |> Rule
-
-        member this.minContent =
-            (property, ContentSize.MinContent) |> Rule
-
-        member this.fitContent(fit: ILengthPercentage) =
-            (property, ContentSize.FitContent fit) |> Rule
+        /// Width gets set to the maximum it can be without getting wrapped or overflowing
+        member this.maxContent = (property, ContentSize.MaxContent) |> Rule
+        /// Width gets set to the widest element within the box
+        member this.minContent = (property, ContentSize.MinContent) |> Rule
+        ///
+        member this.fitContent(fit: ILengthPercentage) = (property, ContentSize.FitContent fit) |> Rule

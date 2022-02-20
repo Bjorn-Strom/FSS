@@ -271,10 +271,15 @@ module GridClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
     type GridAutoFlow(property) =
         inherit CssRule(property)
+        /// Items are placed by filling each row in turn and adding new rows as necessary
         member this.row = (property, Grid.Row) |> Rule
+        /// Items are placed by filling each column in turn and adding new columns as necessary
         member this.column = (property, Grid.Column) |> Rule
+        /// Attempts to fill holes earlier in the grid. Thins may be out of order when doing this
         member this.dense = (property, Grid.Dense) |> Rule
+        /// Attempts to fill holes earlier in the grid rows. Thins may be out of order when doing this
         member this.rowDense = (property, Grid.RowDense) |> Rule
+        /// Attempts to fill holes earlier in the grid columns. Thins may be out of order when doing this
         member this.columnDense = (property, Grid.ColumnDense) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas

@@ -101,6 +101,14 @@ module CursorTests =
                     [Cursor.notAllowed]
                     "{ cursor: not-allowed; }"
                 testCase
+                    "Cursor Grab"
+                    [Cursor.grab]
+                    "{ cursor: grab; }"
+                testCase
+                    "Cursor grabbing"
+                    [Cursor.grabbing]
+                    "{ cursor: grabbing; }"
+                testCase
                     "Cursor AllScroll"
                     [Cursor.allScroll]
                     "{ cursor: all-scroll; }"
@@ -160,4 +168,12 @@ module CursorTests =
                     "Cursor NwseResize"
                     [Cursor.nwseResize]
                     "{ cursor: nwse-resize; }"
+                testCase
+                    "Cursor zoom in"
+                    [Cursor.zoomIn]
+                    "{ cursor: zoom-in; }"
+                testCase
+                    "Cursor zoom out"
+                    [Cursor.zoomOut]
+                    "{ cursor: zoom-out; }"
             ]

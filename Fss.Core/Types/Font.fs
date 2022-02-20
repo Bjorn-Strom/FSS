@@ -165,8 +165,11 @@ module FontClasses =
                 List.map stringifyICssValue synthesis
                 |> String.concat " "
             (property, String synthesis) |> Rule
+        /// Bold typeface can be synthesized if needed
         member this.weight = (property, Font.Weight) |> Rule
+        /// Italic typeface can be synthesized if needed
         member this.style = (property, Font.Style) |> Rule
+        /// Small caps typeface can be synthesized if needed
         member this.smallCaps = (property, Font.SmallCaps) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-language-override
@@ -257,113 +260,36 @@ module FontClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
     type FontFeatureSettings(property) =
         inherit CssRuleWithNormal(property)
-        
         let settingToString value switch = $"\"{stringifyICssValue value}\" {switch}"
-        member this.liga switch =
-            (property, settingToString Font.Liga switch |> String)
-            |> Rule
-
-        member this.dlig switch =
-            (property, settingToString Font.Dlig switch |> String)
-            |> Rule
-
-        member this.onum switch =
-            (property, settingToString Font.Onum switch |> String)
-            |> Rule
-
-        member this.lnum switch =
-            (property, settingToString Font.Lnum switch |> String)
-            |> Rule
-
-        member this.tnum switch =
-            (property, settingToString Font.Tnum switch |> String)
-            |> Rule
-
-        member this.zero switch =
-            (property, settingToString Font.Zero switch |> String)
-            |> Rule
-
-        member this.frac switch =
-            (property, settingToString Font.Frac switch |> String)
-            |> Rule
-
-        member this.sups switch =
-            (property, settingToString Font.Sups switch |> String)
-            |> Rule
-
-        member this.subs switch =
-            (property, settingToString Font.Subs switch |> String)
-            |> Rule
-
-        member this.smcp switch =
-            (property, settingToString Font.Smcp switch |> String)
-            |> Rule
-
-        member this.c2sc switch =
-            (property, settingToString Font.C2sc switch |> String)
-            |> Rule
-
-        member this.case switch =
-            (property, settingToString Font.Case switch |> String)
-            |> Rule
-
-        member this.hlig switch =
-            (property, settingToString Font.Hlig switch |> String)
-            |> Rule
-
-        member this.calt switch =
-            (property, settingToString Font.Calt switch |> String)
-            |> Rule
-
-        member this.swsh switch =
-            (property, settingToString Font.Swsh switch |> String)
-            |> Rule
-
-        member this.hist switch =
-            (property, settingToString Font.Hist switch |> String)
-            |> Rule
-
+        member this.liga switch = (property, settingToString Font.Liga switch |> String) |> Rule
+        member this.dlig switch = (property, settingToString Font.Dlig switch |> String) |> Rule
+        member this.onum switch = (property, settingToString Font.Onum switch |> String) |> Rule
+        member this.lnum switch = (property, settingToString Font.Lnum switch |> String) |> Rule
+        member this.tnum switch = (property, settingToString Font.Tnum switch |> String) |> Rule
+        member this.zero switch = (property, settingToString Font.Zero switch |> String) |> Rule
+        member this.frac switch = (property, settingToString Font.Frac switch |> String) |> Rule
+        member this.sups switch = (property, settingToString Font.Sups switch |> String) |> Rule
+        member this.subs switch = (property, settingToString Font.Subs switch |> String) |> Rule
+        member this.smcp switch = (property, settingToString Font.Smcp switch |> String) |> Rule
+        member this.c2sc switch = (property, settingToString Font.C2sc switch |> String) |> Rule
+        member this.case switch = (property, settingToString Font.Case switch |> String) |> Rule
+        member this.hlig switch = (property, settingToString Font.Hlig switch |> String) |> Rule
+        member this.calt switch = (property, settingToString Font.Calt switch |> String) |> Rule
+        member this.swsh switch = (property, settingToString Font.Swsh switch |> String) |> Rule
+        member this.hist switch = (property, settingToString Font.Hist switch |> String) |> Rule
         member this.ss(value: int, switch: Font.SettingSwitch) =
-            let value = $"\"ss%02i{value}\" %s{switch.ToString()}"
-
+            let value = $"\"ss%02i{value}\" %s{switch.ToString()}" 
             (property, value |> String)
             |> Rule
-
-        member this.kern switch =
-            (property, settingToString Font.Kern switch |> String)
-            |> Rule
-
-        member this.locl switch =
-            (property, settingToString Font.Locl switch |> String)
-            |> Rule
-
-        member this.rlig switch =
-            (property, settingToString Font.Rlig switch |> String)
-            |> Rule
-
-        member this.medi switch =
-            (property, settingToString Font.Medi switch |> String)
-            |> Rule
-
-        member this.init switch =
-            (property, settingToString Font.Init switch |> String)
-            |> Rule
-
-        member this.isol switch =
-            (property, settingToString Font.Isol switch |> String)
-            |> Rule
-
-        member this.fina switch =
-            (property, settingToString Font.Fina switch |> String)
-            |> Rule
-
-        member this.mark switch =
-            (property, settingToString Font.Mark switch |> String)
-            |> Rule
-
-        member this.mkmk switch =
-            (property, settingToString Font.Mkmk switch |> String)
-            |> Rule
+        member this.kern switch = (property, settingToString Font.Kern switch |> String) |> Rule
+        member this.locl switch = (property, settingToString Font.Locl switch |> String) |> Rule
+        member this.rlig switch = (property, settingToString Font.Rlig switch |> String) |> Rule
+        member this.medi switch = (property, settingToString Font.Medi switch |> String) |> Rule
+        member this.init switch = (property, settingToString Font.Init switch |> String) |> Rule
+        member this.isol switch = (property, settingToString Font.Isol switch |> String) |> Rule
+        member this.fina switch = (property, settingToString Font.Fina switch |> String) |> Rule
+        member this.mark switch = (property, settingToString Font.Mark switch |> String) |> Rule
+        member this.mkmk switch = (property, settingToString Font.Mkmk switch |> String) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
     type FontVariantNumeric(property) =
@@ -404,18 +330,10 @@ module FontClasses =
         inherit CssRuleWithNormalNone(property)
         member this.commonLigatures = (property, Font.CommonLigatures) |> Rule
         member this.noCommonLigatures = (property, Font.NoCommonLigatures) |> Rule
-
-        member this.discretionaryLigatures =
-            (property, Font.DiscretionaryLigatures) |> Rule
-
-        member this.noDiscretionaryLigatures =
-            (property, Font.NoDiscretionaryLigatures) |> Rule
-
+        member this.discretionaryLigatures = (property, Font.DiscretionaryLigatures) |> Rule
+        member this.noDiscretionaryLigatures = (property, Font.NoDiscretionaryLigatures) |> Rule
         member this.historicalLigatures = (property, Font.HistoricalLigatures) |> Rule
-
-        member this.noHistoricalLigatures =
-            (property, Font.NoHistoricalLigatures) |> Rule
-
+        member this.noHistoricalLigatures = (property, Font.NoHistoricalLigatures) |> Rule
         member this.contextual = (property, Font.Contextual) |> Rule
         member this.noContextual = (property, Font.NoContextual) |> Rule
 

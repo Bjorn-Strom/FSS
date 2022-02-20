@@ -28,5 +28,7 @@ module PerspectiveClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/backface-visibility
     type BackfaceVisibility(property) =
         inherit CssRule(property)
+        /// THe backface is hidden, making the element invisible when turned away from the user
         member this.hidden = (property, Perspective.Hidden) |> Rule
+        /// The back face is visible when turned toward the user
         member this.visible = (property, Perspective.Visible) |> Rule

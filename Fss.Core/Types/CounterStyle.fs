@@ -107,18 +107,22 @@ module Counter =
 module CounterClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/system
     type SystemClass() =
+        /// Cycles through a list of provided symbols
+        /// Once the end has been reached it loops back to the beginning and starts over
         member this.cyclic = (Property.CounterProperty.System, Counter.Cyclic) |> CounterRule
+        /// Numeric counter style
         member this.numeric = (Property.CounterProperty.System, Counter.Numeric) |> CounterRule
+        /// Interprets specified symbols as digits
         member this.alphabetic = (Property.CounterProperty.System, Counter.Alphabetic) |> CounterRule
+        /// Cycles through a provided list of symbols
+        /// For each pass the counter representation are doubled, then tripled and so on
         member this.symbolic = (Property.CounterProperty.System, Counter.Symbolic) |> CounterRule
+        /// Represents sign value numbering systems such as roman numerals
         member this.additive = (Property.CounterProperty.System, Counter.Additive) |> CounterRule
+        /// Defines a finite set of symbols
         member this.fixed' = (Property.CounterProperty.System, Counter.Fixed) |> CounterRule
-
-        member this.fixedValue(value: int) =
-            (Property.CounterProperty.System, Counter.FixedValue value) |> CounterRule
-
-        member this.extends(extends: string) =
-            (Property.CounterProperty.System, Counter.Extends extends) |> CounterRule
+        member this.fixedValue(value: int) = (Property.CounterProperty.System, Counter.FixedValue value) |> CounterRule
+        member this.extends(extends: string) = (Property.CounterProperty.System, Counter.Extends extends) |> CounterRule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/negative
     type NegativeClass() =

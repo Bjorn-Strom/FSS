@@ -97,12 +97,8 @@ module SvgClasses =
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline
     type AlignmentBaselineClass(property) =
         member this.auto = (property, Auto) |> Rule
-
-        member this.baseline =
-            (property, Svg.AlignmentBaseline.Baseline) |> Rule
-
-        member this.textBottom =
-            (property, Svg.AlignmentBaseline.TextBottom) |> Rule
+        member this.baseline = (property, Svg.AlignmentBaseline.Baseline) |> Rule
+        member this.textBottom = (property, Svg.AlignmentBaseline.TextBottom) |> Rule
 
         member this.textBeforeEdge =
             (property, Svg.AlignmentBaseline.TextBeforeEdge)

@@ -70,16 +70,27 @@ module MaskClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
     type MaskClip(property) =
         inherit CssRule(property)
+        /// The painted content is clopped to the content box
         member this.contentBox = (property, Mask.ContentBox) |> Rule
+        /// The painted content is clopped to the padding box
         member this.paddingBox = (property, Mask.PaddingBox) |> Rule
+        /// The painted content is clopped to the border box
         member this.borderBox = (property, Mask.BorderBox) |> Rule
+        /// The painted content is clopped to the margin box
         member this.marginBox = (property, Mask.MarginBox) |> Rule
+        /// The painted content is clipped to the bounding box
         member this.fillBox = (property, Mask.FillBox) |> Rule
+        /// The painted content is clipped to the stroke bounding box
         member this.strokeBox = (property, Mask.StrokeBox) |> Rule
+        /// Uses SVG viewport as a reference box
         member this.viewBox = (property, Mask.ViewBox) |> Rule
+        /// The painted content will not be clipped
         member this.noClip = (property, Mask.NoClip) |> Rule
+        /// The painted content is clopped to the border box
         member this.border = (property, Mask.Border) |> Rule
+        /// The painted content is clopped to the padding box
         member this.padding = (property, Mask.Padding) |> Rule
+        /// The painted content is clopped to the content box
         member this.content = (property, Mask.Content) |> Rule
         member this.text = (property, Mask.Text) |> Rule
 

@@ -93,47 +93,22 @@ module AppearanceClasses =
         member this.scrollbarbuttonDown = (property, Appearance.ScrollbarbuttonDown) |> Rule
         member this.scrollbarbuttonLeft = (property, Appearance.ScrollbarbuttonLeft) |> Rule
         member this.scrollbarbuttonRight = (property, Appearance.ScrollbarbuttonRight) |> Rule
-
-        member this.scrollbartrackHorizontal =
-            (property, Appearance.ScrollbartrackHorizontal) |> Rule
-
-        member this.scrollbartrackVertical =
-            (property, Appearance.ScrollbartrackVertical) |> Rule
-
-        member this.scrollbarthumbHorizontal =
-            (property, Appearance.ScrollbarthumbHorizontal) |> Rule
-
-        member this.scrollbarthumbVertical =
-            (property, Appearance.ScrollbarthumbVertical) |> Rule
-
-        member this.scrollbargripperHorizontal =
-            (property, Appearance.ScrollbargripperHorizontal) |> Rule
-
-        member this.scrollbargripperVertical =
-            (property, Appearance.ScrollbargripperVertical) |> Rule
-
+        member this.scrollbartrackHorizontal = (property, Appearance.ScrollbartrackHorizontal) |> Rule
+        member this.scrollbartrackVertical = (property, Appearance.ScrollbartrackVertical) |> Rule
+        member this.scrollbarthumbHorizontal = (property, Appearance.ScrollbarthumbHorizontal) |> Rule
+        member this.scrollbarthumbVertical = (property, Appearance.ScrollbarthumbVertical) |> Rule
+        member this.scrollbargripperHorizontal = (property, Appearance.ScrollbargripperHorizontal) |> Rule
+        member this.scrollbargripperVertical = (property, Appearance.ScrollbargripperVertical) |> Rule
         member this.sliderHorizontal = (property, Appearance.SliderHorizontal) |> Rule
         member this.sliderVertical = (property, Appearance.SliderVertical) |> Rule
-
-        member this.sliderthumbHorizontal =
-            (property, Appearance.SliderthumbHorizontal) |> Rule
-
+        member this.sliderthumbHorizontal = (property, Appearance.SliderthumbHorizontal) |> Rule
         member this.sliderthumbVertical = (property, Appearance.SliderthumbVertical) |> Rule
         member this.caret = (property, Appearance.Caret) |> Rule
         member this.searchfield = (property, Appearance.Searchfield) |> Rule
-
-        member this.searchfieldDecoration =
-            (property, Appearance.SearchfieldDecoration) |> Rule
-
-        member this.searchfieldResultsDecoration =
-            (property, Appearance.SearchfieldResultsDecoration) |> Rule
-
-        member this.searchfieldResultsButton =
-            (property, Appearance.SearchfieldResultsButton) |> Rule
-
-        member this.searchfieldCancelButton =
-            (property, Appearance.SearchfieldCancelButton) |> Rule
-
+        member this.searchfieldDecoration = (property, Appearance.SearchfieldDecoration) |> Rule
+        member this.searchfieldResultsDecoration = (property, Appearance.SearchfieldResultsDecoration) |> Rule
+        member this.searchfieldResultsButton = (property, Appearance.SearchfieldResultsButton) |> Rule
+        member this.searchfieldCancelButton = (property, Appearance.SearchfieldCancelButton) |> Rule
         member this.textfield = (property, Appearance.Textfield) |> Rule
         member this.textarea = (property, Appearance.Textarea) |> Rule
         member this.checkbox = (property, Appearance.Checkbox) |> Rule
@@ -156,16 +131,9 @@ module AppearanceClasses =
         member this.toolbarbutton = (property, Appearance.Toolbarbutton) |> Rule
         member this.toolbox = (property, Appearance.Toolbox) |> Rule
         member this.mozMacUnifiedToolbar = (property, Appearance.MozMacUnifiedToolbar) |> Rule
-
-        member this.mozWinBorderlessGlass =
-            (property, Appearance.MozWinBorderlessGlass) |> Rule
-
-        member this.mozWinBrowsertabbarToolbox =
-            (property, Appearance.MozWinBrowsertabbarToolbox) |> Rule
-
-        member this.mozWinCommunicationsToolbox =
-            (property, Appearance.MozWinCommunicationsToolbox) |> Rule
-
+        member this.mozWinBorderlessGlass = (property, Appearance.MozWinBorderlessGlass) |> Rule
+        member this.mozWinBrowsertabbarToolbox = (property, Appearance.MozWinBrowsertabbarToolbox) |> Rule
+        member this.mozWinCommunicationsToolbox = (property, Appearance.MozWinCommunicationsToolbox) |> Rule
         member this.mozWinGlass = (property, Appearance.MozWinGlass) |> Rule
         member this.mozWinMediaToolbox = (property, Appearance.MozWinMediaToolbox) |> Rule
         member this.tooltip = (property, Appearance.Tooltip) |> Rule

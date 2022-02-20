@@ -103,9 +103,11 @@ module TransformClasses =
                 |> String.concat " "
             (property, String transforms) |> Rule
 
+        /// A 2d transformation matrix
         member this.matrix(a: float, b: float, c: float, d: float, tx: float, ty: float) =
             Transform.Matrix(a, b, c, d, tx, ty)
 
+        /// A 3d transformation with 4x4 matrix
         member this.matrix3D
             (
                 a1: int,
@@ -127,30 +129,49 @@ module TransformClasses =
             ) =
             Transform.Matrix3D(a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4)
 
+        /// Set the distance between the user and the z plane
         member this.perspective(length: Length) = Transform.Perspective(length)
+        /// Rotate the element around a fixed point
         member this.rotate(angle: Angle) = Transform.Rotate(angle)
+        /// Rotate the element around a fixed axis
         member this.rotate3D(x: float, y: float, z: float, a: Angle) = Transform.Rotate3D(x, y, z, a)
+        /// Rotate an element around its horizontal axis
         member this.rotateX(angle: Angle) = Transform.RotateX(angle)
+        /// Rotate an element around its vertical axis
         member this.rotateY(angle: Angle) = Transform.RotateY(angle)
+        /// Rotate an element around its z axis
         member this.rotateZ(angle: Angle) = Transform.RotateZ(angle)
+        /// Translate an element on a 2d plane
         member this.translate(length: ILengthPercentage) = Transform.Translate(length)
+        /// Translate an element on a 2d plane
         member this.translate(a: ILengthPercentage, b: ILengthPercentage) = Transform.Translate2(a, b)
-
-        member this.translate3D(a: ILengthPercentage, b: ILengthPercentage, c: ILengthPercentage) =
-            Transform.Translate3D(a, b, c)
-
+        /// Translate an element in 3d space
+        member this.translate3D(a: ILengthPercentage, b: ILengthPercentage, c: ILengthPercentage) = Transform.Translate3D(a, b, c)
+        /// Translate an element horizontally
         member this.translateX(length: ILengthPercentage) = Transform.TranslateX(length)
+        /// Translate an element vertically
         member this.translateY(length: ILengthPercentage) = Transform.TranslateY(length)
+        /// Translate an element along z-axis
         member this.translateZ(length: ILengthPercentage) = Transform.TranslateZ(length)
+        /// Scale an element up or down
         member this.scale(scale: float) = Transform.Scale(scale)
+        /// Scale an element up or down
         member this.scale(a: float, b: float) = Transform.Scale2(a, b)
+        /// Scale an element up or down in 3d space
         member this.scale3D(a: float, b: float, c: float) = Transform.Scale3D(a, b, c)
+        /// Scale an element up or down horizontally
         member this.scaleX(scale: float) = Transform.ScaleX(scale)
+        /// Scale an element up or down vertically
         member this.scaleY(scale: float) = Transform.ScaleY(scale)
+        /// Scale an element up or down along the z axis
         member this.scaleZ(scale: float) = Transform.ScaleZ(scale)
+        /// Skew an element 
         member this.skew(angle: Angle) = Transform.Skew(angle)
+        /// Skew an element 
         member this.skew(a: Angle, b: Angle) = Transform.Skew2(a, b)
+        /// Skew an element horizontally
         member this.skewX(angle: Angle) = Transform.SkewX(angle)
+        /// Skew an element vertically
         member this.skewY(angle: Angle) = Transform.SkewY(angle)
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
@@ -171,13 +192,21 @@ module TransformClasses =
 
             (property, value) |> Rule
 
+        /// Set the transform origin to the top of the element
         member this.top = (property, Transform.Top) |> Rule
+        /// Set the transform origin to the left of the element
         member this.left = (property, Transform.Left) |> Rule
+        /// Set the transform origin to the right of the element
         member this.right = (property, Transform.Right) |> Rule
+        /// Set the transform origin to the bottom of the element
         member this.bottom = (property, Transform.Bottom) |> Rule
+        /// Set the transform origin to the center of the element
         member this.center = (property, Transform.Center) |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
     type TransformStyle(property) =
         inherit CssRule(property)
+        /// The element children are flattened on the plane
+        /// This is the default value
         member this.flat = (property, Transform.Flat) |> Rule
+        /// The element children are positioned in 3d space
         member this.preserve3d = (property, Transform.Preserve3d) |> Rule
