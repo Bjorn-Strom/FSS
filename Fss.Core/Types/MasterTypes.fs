@@ -480,10 +480,10 @@ module Property =
                 | NthLastChild n -> $"nth-last-child({n})"
                 | NthOfType n -> $"nth-of-type({n})"
                 | NthLastOfType n -> $"nth-last-of-type({n})"
-                | AdjacentSibling html -> $" + {html.ToString().ToLower()}"
-                | GeneralSibling html -> $" ~ {html.ToString().ToLower()}"
-                | Child html -> $" > {html.ToString().ToLower()}"
-                | Descendant html -> $" {html.ToString().ToLower()}"
+                | AdjacentSibling html -> $" + {html.Stringify()}"
+                | GeneralSibling html -> $" ~ {html.Stringify()}"
+                | Child html -> $" > {html.Stringify()}"
+                | Descendant html -> $" {html.Stringify()}"
                 | Custom c -> c.ToLower()
                 | _ -> Fss.Utilities.Helpers.toKebabCase this
 
