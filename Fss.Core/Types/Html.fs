@@ -112,3 +112,8 @@ namespace Fss.Types
             | Var
             | Video
             | Wbr
+            with
+            member this.Stringify () =
+                match this with
+                | All -> "*"
+                | _ -> this.ToString().ToLower()
