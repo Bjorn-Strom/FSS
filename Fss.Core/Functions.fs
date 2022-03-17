@@ -1,5 +1,6 @@
 namespace Fss
 
+open Fss
 open Fss.Types
 open Fss.Utilities
 
@@ -131,6 +132,63 @@ module rec Functions =
     let private createCombinatorCss (properties: Rule list): (ClassName * Css) list =
         properties
         |> List.collect (fun m -> createCombinatorCssString m)
+        
+    type private PropertyType =
+        | Main
+        | Pseudo of Property.CssProperty
+        | Media of Property.CssProperty
+        | Combinator of Property.CssProperty
+        
+    // This helper function is used to create logical blocks depending on what type of CSS block we are creating.
+    // This is used to split the rules into logical blocks, while at the same time keeping ordering intact.
+    // Two adjacent identical blocks will be merged, but two blocks separated by another will not
+    // Hover [ Color.blue ]
+    // Hover [ BackgroundColor.red ]
+    // Will become ONE css block
+    // Hover [ Color.blue ]
+    // Active [ Color.chartreuse ]
+    // Hover [ BackgroundColor.red ]
+    // Will become 3 CSS blocks
+    let private arrangePropertyLists properties: (PropertyType * Rule list) list =
+        let rec arrangePropertyLists currentProperties previousPropertyType currentPropertyTypes =
+            if List.isEmpty currentProperties then
+                currentPropertyTypes
+            else
+                let currentProperty = List.head currentProperties
+                
+                let newPropertyType =
+                    let propertyTypeIdentifier = fst currentProperty
+                    if (not (isSecondary currentProperty)) then
+                        Main, [currentProperty]
+                    else if (isPseudo currentProperty) then
+                        Pseudo propertyTypeIdentifier, [currentProperty]
+                    else if isMedia currentProperty then
+                        Media propertyTypeIdentifier, [currentProperty]
+                    else
+                        Combinator propertyTypeIdentifier, [currentProperty]
+                
+                let newPropertyTypes =
+                    match previousPropertyType with
+                    | Some previousPropertyType ->
+                        if fst newPropertyType = fst previousPropertyType then
+                            let newPropertyToInsert = fst newPropertyType, snd previousPropertyType @ snd newPropertyType
+                            List.map (fun x -> if x = previousPropertyType then newPropertyToInsert else x) currentPropertyTypes
+                        else
+                            currentPropertyTypes @ [newPropertyType]
+                    | None ->
+                        [ newPropertyType ]
+                        
+                let previousPropertyType =
+                    newPropertyTypes
+                    |> List.rev
+                    |> List.head
+                    |> Some
+                
+                arrangePropertyLists (List.tail currentProperties) previousPropertyType newPropertyTypes
+            
+        arrangePropertyLists properties None []
+        
+        
 
     // Creates all CSS
     // Creates all different types of CSS, creates and adds the classname
@@ -161,33 +219,20 @@ module rec Functions =
             properties
             |> List.filter (isLabel >> not)
             
-        let mainStyles =
-            properties
-            |> List.filter (isSecondary >> not)
-            |> createMainCSS
+        let arrangedCss =
+            arrangePropertyLists properties
+            |> List.collect (fun (propertyType, rules) ->
+                match propertyType with
+                | Main ->
+                    [ className, rules |> createMainCSS ]
+                | Pseudo _ ->
+                    rules |> createPseudoCss |> List.map addClassName
+                | Media _ -> 
+                    rules |> createMediaCss className
+                | Combinator _ ->
+                    rules |> createCombinatorCss |> List.map addClassName)
         
-        let pseudoStyles =
-            properties
-            |> List.filter isPseudo
-            |> createPseudoCss
-            |> List.map addClassName
-            
-        let mediaStyles =
-            properties
-            |> List.filter isMedia
-            |> createMediaCss className
-            
-        let combinatorStyles =
-            properties
-            |> List.filter isCombinator
-            |> createCombinatorCss
-            |> List.map addClassName
-        
-        let newCss =
-            [className, mainStyles] @ pseudoStyles @ mediaStyles @ combinatorStyles
-            |> List.filter (fun (_, v) -> v <> "{ ; }")
-            
-        className[1..], newCss
+        className[1..], arrangedCss
 
     /// Creates CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements

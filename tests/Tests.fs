@@ -77,6 +77,7 @@ module Tests =
                 CompositeTests.tests
                 MediaTests.tests
                 SelectorTests.tests
+                OrderingTests.tests
             ]
             
         0

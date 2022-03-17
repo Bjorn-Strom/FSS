@@ -18,64 +18,64 @@ module SelectorTests =
            [
                let className, actual = createSelector [ !+ Fss.Types.Html.All [ Color.blue ] ]
                testEqual
-                   "Adjacent sibling"
+                   "Adjacent sibling 1"
                    actual
                    $".{className} + * {{ color: blue; }}"
-               let className, actual = createSelector [ Color.red; !+ Fss.Types.Html.All [ Color.blue ]; BackgroundColor.orangeRed ]
+               let className, actual = createSelector [ Color.red; !+ Fss.Types.Html.All [ Color.blue ];  ]
                testEqual
-                   "Adjacent sibling"
+                   "Adjacent sibling 2"
                    actual
                    $".{className} + * {{ color: blue; }}"
                    
                let className, actual = createSelector [ !~ Fss.Types.Html.All [ Color.blue ] ]
                testEqual
-                   "General sibling"
+                   "General sibling 1"
                    actual
                    $".{className} ~ * {{ color: blue; }}"
-               let className, actual = createSelector [ Color.red; !~ Fss.Types.Html.All [ Color.blue ]; BackgroundColor.orangeRed ]
+               let className, actual = createSelector [ Color.red; !~ Fss.Types.Html.All [ Color.blue ];  ]
                testEqual
-                   "General sibling"
+                   "General sibling 2"
                    actual
                    $".{className} ~ * {{ color: blue; }}"
                    
                let className, actual = createSelector [ !> Fss.Types.Html.All [ Color.blue ] ]
                testEqual
-                   "Child"
+                   "Child 1"
                    actual
                    $".{className} > * {{ color: blue; }}"
-               let className, actual = createSelector [ Color.red; !> Fss.Types.Html.All [ Color.blue ]; BackgroundColor.orangeRed ]
+               let className, actual = createSelector [ Color.red; !> Fss.Types.Html.All [ Color.blue ];  ]
                testEqual
-                   "Child"
+                   "Child 2"
                    actual
                    $".{className} > * {{ color: blue; }}"
                    
                let className, actual = createSelector [ !  Fss.Types.Html.All [ Color.blue ] ]
                testEqual
-                   "Descendant"
+                   "Descendant 1"
                    actual
                    $".{className} * {{ color: blue; }}"
-               let className, actual = createSelector [ Color.red; !  Fss.Types.Html.All [ Color.blue ]; BackgroundColor.orangeRed ]
+               let className, actual = createSelector [ Color.red; !  Fss.Types.Html.All [ Color.blue ]]
                testEqual
-                   "Descendant" 
+                   "Descendant 2" 
                    actual
                    $".{className} * {{ color: blue; }}"
                    
-               let className, actual = createSelector [ Color.red; !+ Fss.Types.Html.All [ Hover [ BackgroundColor.aqua ] ]; BackgroundColor.orangeRed ]
+               let className, actual = createSelector [ Color.red; !+ Fss.Types.Html.All [ Hover [ BackgroundColor.aqua ] ]]
                testEqual
                    "Adjacent sibling with pseudo" 
                    actual
                    $".{className} + *:hover {{ background-color: aqua; }}"
-               let className, actual = createSelector [ Color.red; !~ Fss.Types.Html.All [ Hover [ BackgroundColor.aqua ] ]; BackgroundColor.orangeRed ]
+               let className, actual = createSelector [ Color.red; !~ Fss.Types.Html.All [ Hover [ BackgroundColor.aqua ] ]]
                testEqual
                    "General sibling with pseudo" 
                    actual
                    $".{className} ~ *:hover {{ background-color: aqua; }}"
-               let className, actual = createSelector [ Color.red; !>  Fss.Types.Html.All [ Hover [ BackgroundColor.aqua ] ]; BackgroundColor.orangeRed ]
+               let className, actual = createSelector [ Color.red; !>  Fss.Types.Html.All [ Hover [ BackgroundColor.aqua ] ]]
                testEqual
                    "Child with pseudo" 
                    actual
                    $".{className} > *:hover {{ background-color: aqua; }}"
-               let className, actual = createSelector [ Color.red; !  Fss.Types.Html.All [ Hover [ BackgroundColor.aqua ] ]; BackgroundColor.orangeRed ]
+               let className, actual = createSelector [ Color.red; !  Fss.Types.Html.All [ Hover [ BackgroundColor.aqua ] ]]
                testEqual
                    "Descendant with pseudo" 
                    actual

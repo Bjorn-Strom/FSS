@@ -57,6 +57,7 @@
     <Compile Include="Composite.fs" />
     <Compile Include="Media.fs" />
     <Compile Include="Selector.fs" />
+    <Compile Include="Ordering.fs" />
     <Compile Include="Tests.fs" />
   </ItemGroup>
   <ItemGroup>
