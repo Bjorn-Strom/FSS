@@ -10,9 +10,24 @@ module App =
     open Store
     
     // Constants
-    // Load font
-    let headingFont = FontFamily.value "Nunito"
-    let textFont = FontFamily.value "Raleway"
+    // Font families
+    let nunito =
+        fontFace "Nunito" [
+            FontFace.Src.truetype "/fonts/Nunito-Regular.ttf"
+        ]
+    
+    let raleway =
+        fontFace "Raleway" [
+            FontFace.Src.truetype "/fonts/Raleway-Regular.ttf"
+        ]
+        
+    let grapeNuts =
+        fontFace "GrapeNuts" [
+            FontFace.Src.truetype "/fonts/GrapeNuts-Regular.ttf"
+        ]
+    
+    let headingFont = FontFamily.value nunito
+    let textFont = FontFamily.value raleway
 
     // Colors
     let sidebarBackgroundColor = "212731"
@@ -529,9 +544,9 @@ module App =
                                                               Html.p [ prop.className sub
                                                                        prop.text "Sub-Item" ] ] ] ]
                     | Fonts ->
-                        let amaticStyle =
-                            fss [ Label "Amatic Style"
-                                  FontFamily.value "Amatic SC"
+                        let grapeNutsStyle =
+                            fss [ Label "Grape Nuts Style"
+                                  FontFamily.value grapeNuts
                                   FontSize.value (px 24) ]
 
                         let droidSerifFont =
@@ -568,8 +583,8 @@ module App =
                             fss [ Label "Moderna"
                                   FontFamily.value modernaFont ]
 
-                        Some [ Html.p [ prop.className amaticStyle
-                                        prop.text "This font is Amatic SC, some nice text this huh?" ]
+                        Some [ Html.p [ prop.className grapeNutsStyle
+                                        prop.text "This font is Grape Nuts, some nice text this huh?" ]
                                Html.div [ Html.p [ prop.text "Droid serif"
                                                    prop.className droidSerif ]
                                           Html.p [ prop.text "Droid serif bold"
