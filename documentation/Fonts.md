@@ -7,14 +7,14 @@ For importing fonts from google fonts for example, use link syntax within `<head
     ...
     ...
     ...
-    <link href="https://fonts.googleapis.com/css?family=Nunito|Raleway|Amatic+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet"> 
 </head>
 ```
 
 ```fsharp
-let amaticStyle =
-    fss [ Label "Amatic Style"
-          FontFamily.value "Amatic SC"
+let grapeNutsStyle =
+    fss [ Label "Grape Nuts style"
+          FontFamily.value "Grape Nuts"
           FontSize.value (px 24) ]
 ```
 
