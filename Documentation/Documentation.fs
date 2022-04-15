@@ -13,17 +13,17 @@ module App =
     // Font families
     let nunito =
         fontFace "Nunito" [
-            FontFace.Src.truetype "/fonts/Nunito-Regular.ttf"
+            FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Nunito-Regular.ttf"
         ]
     
     let raleway =
         fontFace "Raleway" [
-            FontFace.Src.truetype "/fonts/Raleway-Regular.ttf"
+            FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Raleway-Regular.ttf"
         ]
         
     let grapeNuts =
         fontFace "GrapeNuts" [
-            FontFace.Src.truetype "/fonts/GrapeNuts-Regular.ttf"
+            FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/GrapeNuts-Regular.ttf"
         ]
     
     let headingFont = FontFamily.value nunito
@@ -162,7 +162,6 @@ module App =
                     promise {
                         let! response =
                             fetch
-                                //$"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/docs/documentation/{page}.md"
                                 $"documentation/{page}.md"
                                 []
 
