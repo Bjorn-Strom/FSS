@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Provides helper functions for using Fss with Feliz.</Description>
+    <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
+    <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
+    <Authors>Bjørn-Ivar Strøm</Authors>
+    <Version>1.0.1</Version>
+    <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <PackageReleaseNotes>Release</PackageReleaseNotes>
+    <RootNamespace>Fss.Feliz</RootNamespace>
+    <PackageId>Fss-lib.Feliz</PackageId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="FssFeliz.fs" />
+  </ItemGroup>
+    <ItemGroup>
+      <PackageReference Update="Fable.Core" Version="3.6.1" />
+      <PackageReference Include="Feliz" Version="1.57.0" />
+      <PackageReference Include="Fss-lib.Fable" Version="1.0.1" />
+    </ItemGroup>
+  <ItemGroup>
+    <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
+  </ItemGroup>
+</Project>

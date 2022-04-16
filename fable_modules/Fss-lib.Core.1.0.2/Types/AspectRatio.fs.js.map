@@ -1,0 +1,1 @@
+{"version":3,"sources":["./AspectRatio.fs"],"names":["property","this","aspectRatio","tupledArg","width","height"],"mappings":";;;;;gBAOqBA;cACGA;AADH,0BAAAA;;;;;;;;4CAAAA;;;;6CAENC,OAAWC;UAAmDC,aAA9B,AAAAF,kBAAU,WAAIC;YAAgB,AAAAC,cAAA,AAAAA;;;6CAE9DF,OAAWG,OAAYC;UAEvBF,aADF,AAAAF,kBAAU,mCAAqBG,sBAAcC;YAC3C,AAAAF,cAAA,AAAAA","file":null,"sourcesContent":null,"sourceRoot":null}
