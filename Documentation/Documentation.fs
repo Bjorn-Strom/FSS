@@ -13,17 +13,20 @@ module App =
     // Font families
     let nunito =
         fontFace "Nunito" [
-            FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Nunito-Regular.ttf"
+            FontFace.Src.truetype "./fonts/Nunito-Regular.ttf"
+            FontFace.FontDisplay.swap
         ]
     
     let raleway =
         fontFace "Raleway" [
-            FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Raleway-Regular.ttf"
+            FontFace.Src.truetype "./fonts/Raleway-Regular.ttf"
+            FontFace.FontDisplay.swap
         ]
         
     let grapeNuts =
         fontFace "GrapeNuts" [
-            FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/GrapeNuts-Regular.ttf"
+            FontFace.Src.truetype "./fonts/GrapeNuts-Regular.ttf"
+            FontFace.FontDisplay.swap
         ]
     
     let headingFont = FontFamily.value nunito
@@ -553,10 +556,12 @@ module App =
                                 "DroidSerif"
                                 [ [ FontFace.Src.truetype("https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf")
                                     FontFace.FontWeight.bold
-                                    FontFace.FontStyle.normal ]
+                                    FontFace.FontStyle.normal
+                                    FontFace.FontDisplay.swap ]
                                   [ FontFace.Src.truetype("https://rawgit.com/google/fonts/master/ufl/ubuntumono/UbuntuMono-Italic.ttf")
                                     FontFace.FontWeight.normal
-                                    FontFace.FontStyle.normal ] ]
+                                    FontFace.FontStyle.normal
+                                    FontFace.FontDisplay.swap ] ]
 
                         let modernaFont =
                             fontFace
@@ -567,7 +572,8 @@ module App =
                                         Fss.Types.FontFace.Truetype "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.ttf"
                                         Fss.Types.FontFace.Svg "https://s3-us-west-2.amazonaws.com/s.cdpn.io/133207/moderna_-webfont.svg" ]
                                   FontFace.FontWeight.normal
-                                  FontFace.FontStyle.normal ]
+                                  FontFace.FontStyle.normal
+                                  FontFace.FontDisplay.swap ]
 
                         let droidSerif =
                             fss [ Label "Droid Serif"
