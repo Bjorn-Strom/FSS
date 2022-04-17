@@ -11,6 +11,29 @@
     <Compile Include="Logo.fs" />
     <Compile Include="Pages.fs" />
     <Compile Include="Store.fs" />
+    <Compile Include="Pages\Page.fs" />
+    <Compile Include="Pages\Overview.fs" />
+    <Compile Include="Pages\BasicUsage.fs" />
+    <Compile Include="Pages\Installation.fs" />
+    <Compile Include="Pages\Philosophy.fs" />
+    <Compile Include="Pages\ConditionalStyling.fs" />
+    <Compile Include="Pages\Pseudo.fs" />
+    <Compile Include="Pages\Composition.fs" />
+    <Compile Include="Pages\Labels.fs" />
+    <Compile Include="Pages\Transition.fs" />
+    <Compile Include="Pages\KeyframesAnimations.fs" />
+    <Compile Include="Pages\Combinators.fs" />
+    <Compile Include="Pages\MediaQueries.fs" />
+    <Compile Include="Pages\GlobalStyles.fs" />
+    <Compile Include="Pages\Counters.fs" />
+    <Compile Include="Pages\Fonts.fs" />
+    <Compile Include="Pages\BackgroundImages.fs" />
+    <Compile Include="Pages\Svg.fs" />
+    <Compile Include="Pages\Core.fs" />
+    <Compile Include="Pages\Fable.fs" />
+    <Compile Include="Pages\Feliz.fs" />
+    <Compile Include="Pages\Giraffe.fs" />
+    <Compile Include="Pages\Troubleshoot.fs" />
     <Compile Include="Documentation.fs" />
   </ItemGroup>
   <ItemGroup>

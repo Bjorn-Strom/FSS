@@ -17,11 +17,11 @@ type Page =
     | Counters
     | Fonts
     | BackgroundImages
+    | Svg
     | Core
     | Fable
     | Feliz
     | Giraffe
-    | Svg
     | Troubleshoot
     | Unknown
     | NotFound
@@ -43,11 +43,11 @@ let allPages =
       Counters
       Fonts
       BackgroundImages
+      Svg
       Core
       Fable
       Feliz
       Giraffe
-      Svg
       Troubleshoot ]
 
 let stringToPage =
@@ -68,11 +68,11 @@ let stringToPage =
     | "counters" -> Counters
     | "fonts" -> Fonts
     | "backgroundImages" -> BackgroundImages
+    | "svg" -> Svg
     | "core" -> Core
     | "fable" -> Fable
     | "feliz" -> Feliz
     | "giraffe" -> Giraffe
-    | "svg" -> Svg
     | "troubleshoot" -> Troubleshoot
     | _ -> Unknown
 

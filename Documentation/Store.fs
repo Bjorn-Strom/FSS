@@ -1,5 +1,6 @@
 module Store
 
+open Fetch
 open Feliz
 
 open Pages
@@ -43,3 +44,26 @@ let StoreProvider children =
 [<Hook>]
 let useStore() =
    React.useContext(storeContext)
+   
+[<Hook>]
+let useFetchStore page setState =
+    let store, dispatch = useStore()
+    React.useEffect (
+        (fun () ->
+            match tryGetDocumentation store page with
+            | None ->
+                promise {
+                    let! response =
+                        fetch
+                            $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/documentation/{page}.md"
+                            []
+
+                    let! text = response.text ()
+                    let document = Documentation(page, text)
+                    do dispatch <| AddDocument document
+                    do setState (Some document)
+                }
+                |> Promise.start
+            | Some documentation -> setState (Some documentation)),
+        [| page :> obj; store :> obj; dispatch :> obj |]
+    )
