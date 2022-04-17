@@ -11,7 +11,7 @@ type ButtonSize =
     | Big
 
 [<ReactComponent>]
-let ConditionalStyling ()  =
+let ConditionalStyling () =
     let buttonStyle buttonType =
         fss [ match buttonType with
               | Big ->
@@ -21,12 +21,13 @@ let ConditionalStyling ()  =
                   Height.value (px 40)
                   Width.value (px 40) ]
 
-    let styles = 
-         [ Html.div [ prop.children [ Html.button [ prop.className (buttonStyle Small)
-                                                    prop.text "Small" ]
+    let styles =
+        [ Html.div [ prop.children [ Html.button [ prop.className (buttonStyle Small)
+                                                   prop.text "Small" ]
 
-                                      Html.button [ prop.className (buttonStyle Big)
-                                                    prop.text "Big" ] ] ] ]
+                                     Html.button [ prop.className (buttonStyle Big)
+                                                   prop.text "Big" ] ] ] ]
+
     Page Pages.ConditionalStyling styles
 
 JsInterop.exportDefault ConditionalStyling

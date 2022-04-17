@@ -12,4 +12,3 @@ export function Philosophy() {
 
 export default (() => createElement(Philosophy, null));
 
-//# sourceMappingURL=Philosophy.js.map

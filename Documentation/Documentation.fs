@@ -11,22 +11,24 @@ open Store
 // Constants
 // Font families
 let nunito =
-    fontFace "Nunito" [
-        FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Nunito-Regular.ttf"
-        FontFace.FontDisplay.swap
-    ]
+    fontFace
+        "Nunito"
+        [ FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Nunito-Regular.ttf"
+          FontFace.FontDisplay.swap ]
 
 let raleway =
-    fontFace "Raleway" [
-        FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Raleway-Regular.ttf"
-        FontFace.FontDisplay.swap
-    ]
-    
+    fontFace
+        "Raleway"
+        [ FontFace.Src.truetype
+            "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Raleway-Regular.ttf"
+          FontFace.FontDisplay.swap ]
+
 let grapeNuts =
-    fontFace "GrapeNuts" [
-        FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/GrapeNuts-Regular.ttf"
-        FontFace.FontDisplay.swap
-    ]
+    fontFace
+        "GrapeNuts"
+        [ FontFace.Src.truetype
+            "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/GrapeNuts-Regular.ttf"
+          FontFace.FontDisplay.swap ]
 
 let headingFont = FontFamily.value nunito
 let textFont = FontFamily.value raleway
@@ -39,41 +41,79 @@ let contentText = "e8e6e3"
 let contentLink = "50b8ec"
 
 // Code splitting
-let overview: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Overview.fs"
-let installation: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Installation.fs"
-let philosophy: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Philosophy.fs"
-let basicUsage: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/BasicUsage.fs"
-let conditionalStyling: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/ConditionalStyling.fs"
-let pseudo: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Pseudo.fs"
-let composition: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Composition.fs"
-let labels: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Labels.fs"
-let transition: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Transition.fs"
-let keyframesAnimations: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/KeyframesAnimations.fs"
-let combinators: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Combinators.fs"
-let mediaQueries: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/MediaQueries.fs"
-let globalStyles: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Global.fs"
-let counters: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Counters.fs"
-let fonts: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Fonts.fs"
-let backgroundImages: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/BackgroundImages.fs"
+let overview: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Overview.fs"
+
+let installation: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Installation.fs"
+
+let philosophy: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Philosophy.fs"
+
+let basicUsage: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/BasicUsage.fs"
+
+let conditionalStyling: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/ConditionalStyling.fs"
+
+let pseudo: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Pseudo.fs"
+
+let composition: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Composition.fs"
+
+let labels: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Labels.fs"
+
+let transition: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Transition.fs"
+
+let keyframesAnimations: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/KeyframesAnimations.fs"
+
+let combinators: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Combinators.fs"
+
+let mediaQueries: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/MediaQueries.fs"
+
+let globalStyles: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Global.fs"
+
+let counters: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Counters.fs"
+
+let fonts: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Fonts.fs"
+
+let backgroundImages: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/BackgroundImages.fs"
+
 let svg: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Svg.fs"
-let core: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Core.fs"
-let fable: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Fable.fs"
-let feliz: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Feliz.fs"
-let giraffe: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Giraffe.fs"
-let troubleshoot: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Troubleshoot.fs"
+
+let core: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Core.fs"
+
+let fable: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Fable.fs"
+
+let feliz: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Feliz.fs"
+
+let giraffe: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Giraffe.fs"
+
+let troubleshoot: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Troubleshoot.fs"
 
 [<ReactComponent>]
 let Suspense (component': JS.Promise<unit -> ReactElement>) =
-    React.suspense([
-        Html.div [
-            React.lazy'(component', ())
-        ]
-    ], Html.p "LOADING") 
-    
+    React.suspense ([ Html.div [ React.lazy' (component', ()) ] ], Html.p "LOADING")
+
 
 [<ReactComponent>]
 let MenuItem (page: Page) =
-    let _, dispatch = useStore ()   
+    let _, dispatch = useStore ()
     let pageString = pageToLinkString page
 
     Html.a [ prop.href $"#/page/{pageString}"
@@ -116,7 +156,7 @@ let NavBar () =
 [<ReactComponent>]
 let Menu () =
     let store, _ = useStore ()
-    
+
     Html.aside [ prop.fss [ Label "Menu"
                             Position.fixed'
                             Left.value (px 0)
@@ -133,7 +173,7 @@ let Menu () =
                             TransitionProperty.left
                             TransitionTimingFunction.easeInOut
                             TransitionDuration.value (ms 500.)
-                            
+
                             Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
                                 if store.ShowSidebar then
                                     Left.value (pct 0)
@@ -167,55 +207,33 @@ let Menu () =
 
 
 let Article (page: Page) =
-//                    | Feliz ->
+    //                    | Feliz ->
 //                    | SVG ->
 
-            Html.article [ prop.fss [ PaddingTop.value (px 100) ]
-                           prop.children [
-                               match page with
-                               | Overview -> Suspense overview
-                               | Installation -> Suspense installation
-                               | Philosophy ->  Suspense philosophy
-                               | BasicUsage -> 
-                                 Suspense basicUsage
-                               | ConditionalStyling ->
-                                 Suspense conditionalStyling
-                               | Pseudo ->
-                                 Suspense pseudo
-                               | Composition ->
-                                 Suspense composition
-                               | Labels ->
-                                 Suspense labels
-                               | Transition ->
-                                 Suspense transition
-                               | KeyframesAnimations ->
-                                 Suspense keyframesAnimations
-                               | Combinators ->
-                                 Suspense combinators
-                               | MediaQueries ->
-                                 Suspense mediaQueries
-                               | Counters ->
-                                 Suspense counters
-                               | Fonts ->
-                                 Suspense fonts
-                               | BackgroundImages ->
-                                 Suspense backgroundImages
-                               | Svg ->
-                                 Suspense svg
-                               | Core ->
-                                   Suspense core
-                               | Fable ->
-                                   Suspense fable
-                               | Feliz ->
-                                   Suspense feliz
-                               | Giraffe ->
-                                   Suspense giraffe
-                               | Troubleshoot ->
-                                   Suspense troubleshoot
-                               | Global ->
-                                 Suspense globalStyles
-                                ]
-                            ]
+    Html.article [ prop.fss [ PaddingTop.value (px 100) ]
+                   prop.children [ match page with
+                                   | Overview -> Suspense overview
+                                   | Installation -> Suspense installation
+                                   | Philosophy -> Suspense philosophy
+                                   | BasicUsage -> Suspense basicUsage
+                                   | ConditionalStyling -> Suspense conditionalStyling
+                                   | Pseudo -> Suspense pseudo
+                                   | Composition -> Suspense composition
+                                   | Labels -> Suspense labels
+                                   | Transition -> Suspense transition
+                                   | KeyframesAnimations -> Suspense keyframesAnimations
+                                   | Combinators -> Suspense combinators
+                                   | MediaQueries -> Suspense mediaQueries
+                                   | Counters -> Suspense counters
+                                   | Fonts -> Suspense fonts
+                                   | BackgroundImages -> Suspense backgroundImages
+                                   | Svg -> Suspense svg
+                                   | Core -> Suspense core
+                                   | Fable -> Suspense fable
+                                   | Feliz -> Suspense feliz
+                                   | Giraffe -> Suspense giraffe
+                                   | Troubleshoot -> Suspense troubleshoot
+                                   | Global -> Suspense globalStyles ] ]
 
 let Content page =
     Html.div [ prop.fss [ Display.flex

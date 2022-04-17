@@ -33,4 +33,3 @@ export function Composition() {
 
 export default (() => createElement(Composition, null));
 
-//# sourceMappingURL=Composition.js.map

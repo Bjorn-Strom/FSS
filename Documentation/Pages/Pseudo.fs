@@ -5,7 +5,7 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let Pseudo ()  =
+let Pseudo () =
     let hoverStyle =
         fss [ Label "Hover Style"
               Padding.value (px 40)
@@ -34,7 +34,7 @@ let Pseudo ()  =
                      prop.text "Hover me!" ]
           Html.div [ prop.className beforeAndAfter
                      prop.text " Some content surrounded by stuff " ] ]
-        
+
     Page Pages.Pseudo styles
 
 JsInterop.exportDefault Pseudo

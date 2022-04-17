@@ -12,4 +12,3 @@ export function Giraffe() {
 
 export default (() => createElement(Giraffe, null));
 
-//# sourceMappingURL=Giraffe.js.map

@@ -32,4 +32,3 @@ export function MediaQueries() {
 
 export default (() => createElement(MediaQueries, null));
 
-//# sourceMappingURL=MediaQueries.js.map

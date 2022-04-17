@@ -12,4 +12,3 @@ export function Core() {
 
 export default (() => createElement(Core, null));
 
-//# sourceMappingURL=Core.js.map

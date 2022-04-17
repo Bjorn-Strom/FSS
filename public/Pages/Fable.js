@@ -12,4 +12,3 @@ export function Fable() {
 
 export default (() => createElement(Fable, null));
 
-//# sourceMappingURL=Fable.js.map

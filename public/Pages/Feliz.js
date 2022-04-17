@@ -22,13 +22,11 @@ export function Feliz() {
     const bounceFrames = keyframes(ofArray([frames(ofArray([0, 20, 53, 80, 100]), singleton(TransformClasses_TransformClass__value_ZF56B0F4(Transform, singleton(TransformClasses_TransformClass__translate3D_Z3BD6069B(Transform, px(0), px(0), px(0)))))), frames(ofArray([40, 43]), singleton(TransformClasses_TransformClass__value_ZF56B0F4(Transform, singleton(TransformClasses_TransformClass__translate3D_Z3BD6069B(Transform, px(0), px(-30), px(0)))))), frame(70, singleton(TransformClasses_TransformClass__value_ZF56B0F4(Transform, singleton(TransformClasses_TransformClass__translate3D_Z3BD6069B(Transform, px(0), px(-15), px(0)))))), frame(90, singleton(TransformClasses_TransformClass__value_ZF56B0F4(Transform, singleton(TransformClasses_TransformClass__translate3D_Z3BD6069B(Transform, px(0), px(-4), px(0))))))]));
     const box = createElement("div", createObj(singleton(Feliz_prop__prop_fss_Static_72C268A9(ofArray([ColorClass_Color__get_red(BackgroundColor), unitHelpers_CssRuleWithAutoLength__value_Z498FEB3B(Width, px(200)), unitHelpers_CssRuleWithAutoLength__value_Z498FEB3B(Height, px(200)), Hover(singleton(ColorClass_Color__get_blue(BackgroundColor)))])))));
     const bounceBox = createElement("div", createObj(singleton(Feliz_prop__prop_fss_Static_72C268A9(ofArray([ColorClass_Color__get_red(BackgroundColor), unitHelpers_CssRuleWithAutoLength__value_Z498FEB3B(Width, px(200)), unitHelpers_CssRuleWithAutoLength__value_Z498FEB3B(Height, px(200)), Hover(singleton(ColorClass_Color__get_blue(BackgroundColor))), AnimationClasses_AnimationName__value_Z721C83C5(AnimationName, bounceFrames), CssRuleWithValueFunctions$1__value_2B595(AnimationDuration, sec(1)), AnimationClasses_AnimationTimingFunction__get_easeInOut(AnimationTimingFunction), AnimationClasses_AnimationIterationCount__get_infinite(AnimationIterationCount)])))));
-    const styles = ofArray([box, bounceBox]);
     return createElement(Page, {
         page: new Page_1(19),
-        styles: styles,
+        styles: ofArray([box, bounceBox]),
     });
 }
 
 export default (() => createElement(Feliz, null));
 
-//# sourceMappingURL=Feliz.js.map

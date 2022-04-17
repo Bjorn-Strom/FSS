@@ -8,17 +8,14 @@ export function Page(pageInputProps) {
     const page = pageInputProps.page;
     const patternInput = useFeliz_React__React_useState_Static_1505(void 0);
     const state = patternInput[0];
-    const setState = patternInput[1];
-    useuseFetchStore(page, setState);
+    useuseFetchStore(page, patternInput[1]);
     if (state == null) {
         return createElement("p", {
             children: ["Fetching..."],
         });
     }
     else {
-        const documentation = state[1];
-        return markdownAndExamples(documentation, styles);
+        return markdownAndExamples(state[1], styles);
     }
 }
 
-//# sourceMappingURL=Page.js.map

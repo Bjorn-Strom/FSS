@@ -5,7 +5,7 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let MediaQueries ()  =
+let MediaQueries () =
     let mediaQueryExamples =
         fss [ Label "Media query examples"
               Width.value (px 200)
@@ -33,7 +33,7 @@ let MediaQueries ()  =
     let styles =
         [ Html.div [ prop.className mediaQueryExamples
                      prop.text "Changing width changes me" ] ]
-        
+
     Page Pages.MediaQueries styles
 
 JsInterop.exportDefault MediaQueries

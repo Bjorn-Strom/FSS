@@ -19,4 +19,3 @@ export function BasicUsage() {
 
 export default (() => createElement(BasicUsage, null));
 
-//# sourceMappingURL=BasicUsage.js.map

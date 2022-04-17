@@ -5,7 +5,7 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let Feliz ()  =
+let Feliz () =
     let bounceFrames =
         keyframes [ frames [ 0; 20; 53; 80; 100 ] [
                         Transform.value [ Transform.translate3D (px 0, px 0, px 0) ]

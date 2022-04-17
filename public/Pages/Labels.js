@@ -29,4 +29,3 @@ export function Labels() {
 
 export default (() => createElement(Labels, null));
 
-//# sourceMappingURL=Labels.js.map

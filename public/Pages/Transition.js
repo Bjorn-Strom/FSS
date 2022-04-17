@@ -32,4 +32,3 @@ export function Transition() {
 
 export default (() => createElement(Transition, null));
 
-//# sourceMappingURL=Transition.js.map

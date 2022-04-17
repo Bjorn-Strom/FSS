@@ -12,4 +12,3 @@ export function GlobalStyles() {
 
 export default (() => createElement(GlobalStyles, null));
 
-//# sourceMappingURL=GlobalStyles.js.map

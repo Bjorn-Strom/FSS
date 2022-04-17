@@ -82,4 +82,3 @@ export function BackgroundImages() {
 
 export default (() => createElement(BackgroundImages, null));
 
-//# sourceMappingURL=BackgroundImages.js.map

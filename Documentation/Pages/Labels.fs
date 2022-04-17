@@ -5,7 +5,7 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let Labels ()  =
+let Labels () =
     let styleWithoutLabel = fss [ Color.red ]
 
     let styleWithLabel =
@@ -14,11 +14,11 @@ let Labels ()  =
               Label "HotPinkLabel" ]
 
     let styles =
-         [ Html.div [ Html.div [ prop.className styleWithoutLabel
-                                 prop.text styleWithoutLabel ]
-                      Html.div [ prop.className styleWithLabel
-                                 prop.text styleWithLabel ] ] ]
-        
+        [ Html.div [ Html.div [ prop.className styleWithoutLabel
+                                prop.text styleWithoutLabel ]
+                     Html.div [ prop.className styleWithLabel
+                                prop.text styleWithLabel ] ] ]
+
     Page Pages.Labels styles
 
 JsInterop.exportDefault Labels

@@ -12,4 +12,3 @@ export function Installation() {
 
 export default (() => createElement(Installation, null));
 
-//# sourceMappingURL=Installation.js.map

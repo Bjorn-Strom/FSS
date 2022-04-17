@@ -5,7 +5,7 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let Svg ()  =
+let Svg () =
     let logoAnimation =
         keyframes [ frame 100 [ Svg.StrokeDashoffset.value [ 0 ] ] ]
 
@@ -20,7 +20,7 @@ let Svg ()  =
               AnimationFillMode.forwards ]
 
     let styles = [ Logo.logo 256 256 logoStyle ]
-        
+
     Page Pages.Svg styles
 
 JsInterop.exportDefault Svg

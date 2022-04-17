@@ -5,7 +5,7 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let BackgroundImages ()  =
+let BackgroundImages () =
     let box =
         [ Width.value (px 200)
           Height.value (px 200) ]
@@ -229,31 +229,30 @@ let BackgroundImages ()  =
               ) ]
 
     let styles =
-        [
-           Html.div [ prop.className (fss [ Label "Flex 1"; Display.flex ])
-                      prop.children [ Html.div [ prop.className linearGradientStyle1 ]
-                                      Html.div [ prop.className linearGradientStyle2 ]
-                                      Html.div [ prop.className linearGradientStyle3 ] ] ]
-           Html.div [ prop.className (fss [ Label "Flex 2"; Display.flex ])
-                      prop.children [ Html.div [ prop.className repeatingLinearGradientStyle1 ]
-                                      Html.div [ prop.className repeatingLinearGradientStyle2 ]
-                                      Html.div [ prop.className repeatingLinearGradientsStyle3 ] ] ]
-           Html.div [ prop.className (fss [ Label "Flex 3"; Display.flex ])
-                      prop.children [ Html.div [ prop.className radialGradientStyle1 ]
-                                      Html.div [ prop.className radialGradientStyle2 ]
-                                      Html.div [ prop.className radialGradientStyle3 ] ] ]
-           Html.div [ prop.className (fss [ Label "Flex 4"; Display.flex ])
-                      prop.children [ Html.div [ prop.className repeatingRadialGradientStyle1 ]
-                                      Html.div [ prop.className repeatingRadialGradientStyle2 ]
-                                      Html.div [ prop.className repeatingRadialGradientStyle3 ] ] ]
-           Html.div [ prop.className (fss [ Label "Flex 1"; Display.flex ])
-                      prop.children [ Html.div [ prop.className conicGradientStyle1 ]
-                                      Html.div [ prop.className conicGradientStyle2 ]
-                                      Html.div [ prop.className conicGradientStyle3 ]
-                                      Html.div [ prop.className conicGradientStyle4 ] ] ]
-           Html.div [ prop.className (fss [ Label "Flex 1"; Display.flex ])
-                      prop.children [ Html.div [ prop.className repeatingConicGradientStyle ] ] ] ]
-        
+        [ Html.div [ prop.className (fss [ Label "Flex 1"; Display.flex ])
+                     prop.children [ Html.div [ prop.className linearGradientStyle1 ]
+                                     Html.div [ prop.className linearGradientStyle2 ]
+                                     Html.div [ prop.className linearGradientStyle3 ] ] ]
+          Html.div [ prop.className (fss [ Label "Flex 2"; Display.flex ])
+                     prop.children [ Html.div [ prop.className repeatingLinearGradientStyle1 ]
+                                     Html.div [ prop.className repeatingLinearGradientStyle2 ]
+                                     Html.div [ prop.className repeatingLinearGradientsStyle3 ] ] ]
+          Html.div [ prop.className (fss [ Label "Flex 3"; Display.flex ])
+                     prop.children [ Html.div [ prop.className radialGradientStyle1 ]
+                                     Html.div [ prop.className radialGradientStyle2 ]
+                                     Html.div [ prop.className radialGradientStyle3 ] ] ]
+          Html.div [ prop.className (fss [ Label "Flex 4"; Display.flex ])
+                     prop.children [ Html.div [ prop.className repeatingRadialGradientStyle1 ]
+                                     Html.div [ prop.className repeatingRadialGradientStyle2 ]
+                                     Html.div [ prop.className repeatingRadialGradientStyle3 ] ] ]
+          Html.div [ prop.className (fss [ Label "Flex 1"; Display.flex ])
+                     prop.children [ Html.div [ prop.className conicGradientStyle1 ]
+                                     Html.div [ prop.className conicGradientStyle2 ]
+                                     Html.div [ prop.className conicGradientStyle3 ]
+                                     Html.div [ prop.className conicGradientStyle4 ] ] ]
+          Html.div [ prop.className (fss [ Label "Flex 1"; Display.flex ])
+                     prop.children [ Html.div [ prop.className repeatingConicGradientStyle ] ] ] ]
+
     Page Pages.BackgroundImages styles
 
 JsInterop.exportDefault BackgroundImages

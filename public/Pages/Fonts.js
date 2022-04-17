@@ -43,4 +43,3 @@ export function Fonts() {
 
 export default (() => createElement(Fonts, null));
 
-//# sourceMappingURL=Fonts.js.map

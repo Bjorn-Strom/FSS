@@ -5,7 +5,7 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let Transition ()  =
+let Transition () =
     let colorTransition =
         fss [ Label "Color Transition"
               BackgroundColor.red
@@ -26,10 +26,10 @@ let Transition ()  =
                       BackgroundColor.orangeRed ] ]
 
     let styles =
-         [ Html.div [ prop.className colorTransition
-                      prop.text "Hover me" ]
-           Html.div [ prop.className sizeAndColor ] ]
-        
+        [ Html.div [ prop.className colorTransition
+                     prop.text "Hover me" ]
+          Html.div [ prop.className sizeAndColor ] ]
+
     Page Pages.Transition styles
 
 JsInterop.exportDefault Transition

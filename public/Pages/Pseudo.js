@@ -39,4 +39,3 @@ export function Pseudo() {
 
 export default (() => createElement(Pseudo, null));
 
-//# sourceMappingURL=Pseudo.js.map

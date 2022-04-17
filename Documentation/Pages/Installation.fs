@@ -5,7 +5,6 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let Installation ()  =
-    Page Pages.Installation []
+let Installation () = Page Pages.Installation []
 
 JsInterop.exportDefault Installation
