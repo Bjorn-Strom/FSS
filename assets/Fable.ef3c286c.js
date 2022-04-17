@@ -1,1 +1,0 @@
-import{r as e,P as a,e as t}from"./index.101f36d2.js";import{P as r}from"./Page.098592aa.js";function s(){return e.exports.createElement(r,{page:new a(18),styles:t()})}var m=()=>e.exports.createElement(s,null);export{s as Fable,m as default};

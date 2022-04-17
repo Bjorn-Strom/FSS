@@ -1,0 +1,1 @@
+import{r as e,P as t,e as a}from"./index.7f1d0047.js";import{P as r}from"./Page.89221304.js";function l(){return e.exports.createElement(r,{page:new t(12),styles:a()})}var m=()=>e.exports.createElement(l,null);export{l as GlobalStyles,m as default};
