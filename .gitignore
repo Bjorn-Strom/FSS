@@ -21,6 +21,7 @@ public/*.js
 public/fss
 public/FssFeliz
 public/dist
+public/pages
 public/*.map
 public-tests/*.js
 public-tests/fss
