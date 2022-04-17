@@ -20,6 +20,7 @@ javascript/*
 public/*.js
 public/fss
 public/FssFeliz
+public/dist
 public-tests/*.js
 public-tests/fss
 public-tests/FssFeliz

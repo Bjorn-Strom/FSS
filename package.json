@@ -1,12 +1,14 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "dotnet fable watch ./Documentation -o ./dist --sourceMaps --run vite serve",
-    "build": "dotnet fable ./Documentation -o ./dist --run vite build",
-    "test": "dotnet fable ./tests -o ./dist/tests --run node ./dist/tests/Tests.js",
-    "watch-test": "dotnet fable watch ./Tests -o ./dist/tests --run nodemon ./dist/tests/Tests.js",
-    "clean": "rm -rf javascript/* dist/tests dist/*.js dist/*.map dist/dist dist/fable_modules",
-    "publish-docs": "npm run clean && npm run build && gh-pages -d dist/dist"
+    "start": "dotnet fable watch ./Documentation -o ./public --sourceMaps --run vite serve",
+    "build": "dotnet fable ./Documentation -o ./public --run vite build",
+    "preview": "npm run build && vite preview",
+    "test": "dotnet fable ./tests -o ./public/tests --run node ./public/tests/Tests.js",
+    "watch-test": "dotnet fable watch ./Tests -o ./public/tests --run nodemon ./public/tests/Tests.js",
+    "clean": "rm -rf javascript/* public/tests public/*.js public/*.map public/dist public/fable_modules",
+    "publish-docs": "npm run clean && npm run build && gh-pages -d public/dist"
   },
   "homepage": "https://Bjorn-Strom.github.io/FSS",
   "devDependencies": {
@@ -15,8 +17,8 @@
     "vite": "^2.9.5"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-markdown": "^6.0.2"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-markdown": "^8.0.2"
   }
 }
