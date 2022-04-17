@@ -1,0 +1,1 @@
+import{g as n,_ as t}from"./index.101f36d2.js";function o(e){const r=[new n(360),new t(1,e)];return[r[0],r[1]]}function u(e){const r=[new n(361),new t(1,e)];return[r[0],r[1]]}function f(e){return o(e)}function c(e){return u(e)}export{f as A,c as B};
