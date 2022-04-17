@@ -23,6 +23,7 @@ public/FssFeliz
 public/dist
 public/pages
 public/*.map
+public/tests
 public-tests/*.js
 public-tests/fss
 public-tests/FssFeliz
