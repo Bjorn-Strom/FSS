@@ -2,23 +2,23 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "dotnet fable watch ./Documentation -o ./javascript --sourceMaps --run esbuild --bundle ./javascript/Documentation.js --outfile=dist/Documentation.js --servedir=dist",
-    "build": "dotnet fable ./Documentation -o ./javascript && esbuild --bundle --minify ./javascript/Documentation.js --outfile=dist/Documentation.js",
-    "test": "dotnet fable ./tests -o ./dist/tests --run node ./dist/tests/Tests.js",
-    "watch-test": "dotnet fable watch ./Tests -o ./dist/tests --run nodemon ./dist/tests/Tests.js",
-    "clean": "rm -rf javascript/* dist/tests dist/*.js",
-    "publish-docs": "npm run clean && npm run build && gh-pages -d dist"
+    "start": "dotnet fable watch ./Documentation -o ./public --sourceMaps --run vite serve",
+    "build": "dotnet fable ./Documentation -o ./public --run vite build",
+    "preview": "npm run build && vite preview",
+    "test": "dotnet fable ./tests -o ./public/tests --run node ./public/tests/Tests.js",
+    "watch-test": "dotnet fable watch ./Tests -o ./public/tests --run nodemon ./public/tests/Tests.js",
+    "clean": "rm -rf javascript/* public/tests public/*.js public/Pages public/*.map public/dist public/fable_modules",
+    "publish-docs": "npm run clean && npm run build && gh-pages -d public/dist"
   },
   "homepage": "https://Bjorn-Strom.github.io/FSS",
   "devDependencies": {
     "gh-pages": "^3.2.3",
-    "esbuild": "^0.13.13",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "vite": "^2.9.5"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-markdown": "^6.0.2",
-    "react-syntax-highlighter": "^15.4.4"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-markdown": "^8.0.2"
   }
 }
