@@ -1,0 +1,1 @@
+import{r as e,P as r,e as t}from"./index.f0eb4e30.js";import{P as a}from"./Page.04750247.js";function s(){return e.exports.createElement(a,{page:new r(0),styles:t()})}var n=()=>e.exports.createElement(s,null);export{s as Overview,n as default};
