@@ -47,7 +47,7 @@ module rec Functions =
         
     // Creates a single line of "normal" CSS
     let private createMainCssString (propertyName, propertyValue): string * string =
-        stringifyICssValue propertyName, $"{stringifyICssValue propertyValue}"
+        stringifyICssValue propertyName, stringifyICssValue propertyValue
     
     // Creates "normal" css, IE not pseudo elements/classes or combinators
     let private createMainCSS (properties: Rule list): Css =
@@ -63,7 +63,7 @@ module rec Functions =
             |> sprintf "%s;"
             |> addBrackets
         
-        $"{cssString}"
+        cssString
         
     // Creates a single line of pseudo CSS
     let private createPseudoCssString (propertyName: ICssValue, propertyValue: ICssValue): string * string =
@@ -196,6 +196,9 @@ module rec Functions =
     let private createFssInternal (name: string option) (properties: Rule list): ClassName * (ClassName * Css) list =
         // As labels are not real css we filter them out here and use them to change the classname
         let label =
+            // TODO: Will this work?
+//            properties
+//            |> List.tryFind isLabel
             properties
             |> List.filter isLabel
             |> List.map (fun (_,y) -> y )

@@ -21,7 +21,17 @@ module Border =
         | Inset
         | Outset
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Hidden -> "hidden"
+                | Dotted -> "dotted"
+                | Dashed -> "dashed"
+                | Solid -> "solid"
+                | Double -> "double"
+                | Groove -> "groove"
+                | Ridge -> "ridge"
+                | Inset -> "inset"
+                | Outset -> "outset"
 
     type Collapse =
         | Collapse
