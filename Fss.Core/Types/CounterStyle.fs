@@ -65,7 +65,10 @@ module Counter =
         | LowerAlpha
         | CustomGangnamStyle
         interface ICounterValue with
-            member this.StringifyCounter() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCounter() =
+                match this with
+                | LowerAlpha -> "lower-alpha"
+                | CustomGangnamStyle -> "custom-gangnam-style"
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/symbols
     type Symbols =
@@ -105,8 +108,12 @@ module Counter =
         interface ICounterValue with
             member this.StringifyCounter() =
                 match this with
+                | Auto -> "auto"
+                | Bullets -> "bullets"
+                | Numbers -> "numbers"
+                | Words -> "words"
+                | SpellOut -> "spell-out"
                 | Value v -> v
-                | _ -> Fss.Utilities.Helpers.toKebabCase this
 
 [<RequireQualifiedAccess>]
 module CounterClasses =

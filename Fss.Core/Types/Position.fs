@@ -241,7 +241,11 @@ module WritingMode =
         | VerticalRl
         | VerticalLr
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | HorizontalTb -> "horizontal-tb"
+                | VerticalRl -> "vertical-rl"
+                | VerticalLr -> "vertical-lr"
 
 [<RequireQualifiedAccess>]
 module WritingModeClasses =

@@ -22,7 +22,7 @@ module Flex =
         | SpaceAround
         | SpaceEvenly
         interface ICssValue with
-            member this.StringifyCss() = //Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = 
                 match this with
                 | Start -> "start"
                 | End -> "end"

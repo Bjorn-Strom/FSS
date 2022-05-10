@@ -22,7 +22,7 @@ module Display =
         | TableRow
         | TableCaption
         interface ICssValue with
-            member this.StringifyCss() = //Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = 
                 match this with
                 | Inline -> "inline"
                 | InlineBlock -> "inline-block"

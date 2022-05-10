@@ -15,9 +15,6 @@ module Helpers =
                     acc + (string element))
             ""
 
-    let internal toKebabCase (x: 'a) = x.ToString() |> toLowerAndCombine "-"
-    let internal toSpacedCase (x: 'a) = x.ToString() |> toLowerAndCombine " " 
-
 [<RequireQualifiedAccess>]
 module FNV_1A =
     let private prime = 0x811C9DC5

@@ -26,18 +26,28 @@ module Media =
         | Course
         | Fine
         | None
+        member this.Stringify() =
+            match this with
+            | Course -> "course"
+            | Fine -> "fine"
+            | None -> "none"
 
     type ColorGamut =
         | SRGB
         | P3
         | REC2020
+        member this.Stringify() =
+            match this with
+            | SRGB -> "srgb"
+            | P3 -> "p3"
+            | REC2020 -> "rec2020"
 
     type DisplayMode =
         | Fullscreen
         | Standalone
         | MinimalUi
         | Browser
-        override this.ToString() =
+        member this.Stringify() =
             match this with
             | Fullscreen -> "fullscreen"
             | Standalone -> "standalone"
@@ -47,39 +57,76 @@ module Media =
     type LightLevel =
         | Dim
         | Washed
+        member this.Stringify() =
+            match this with
+            | Dim -> "dim"
+            | Washed -> "washed"
 
     type Orientation =
         | Landscape
         | Portrait
+        member this.Stringify() =
+            match this with
+            | Landscape -> "landscape"
+            | Portrait -> "portrait"
 
     type OverflowBlock =
         | None
         | Scrolled
         | OptionalPaged
         | Paged
+        member this.Stringify() =
+            match this with
+            | None -> "none"
+            | Scrolled -> "scrolled"
+            | OptionalPaged -> "optional-paged"
+            | Paged -> "paged"
 
     type ColorScheme =
         | Light
         | Dark
+        member this.Stringify() =
+            match this with
+            | Light -> "light"
+            | Dark -> "dark"
 
     type Contrast =
         | NoPreference
         | High
         | Low
+        member this.Stringify() =
+            match this with
+            | NoPreference -> "no-preference"
+            | High -> "high"
+            | Low -> "low"
 
     type Scan =
         | Interlace
         | Progressive
+        member this.Stringify() =
+            match this with
+            | Interlace -> "interlace"
+            | Progressive -> "progressive"
 
     type Scripting =
         | None
         | InitialOnly
         | Enabled
+        member this.Stringify() =
+            match this with
+            | None -> "none"
+            | InitialOnly -> "initial-only"
+            | Enabled -> "enabled"
 
     type Update =
         | None
         | Slow
         | Fast
+        member this.Stringify() =
+            match this with
+            | None -> "none"
+            | Slow -> "slow"
+            | Fast -> "fast"
 
     type Feature =
         | AnyHover of bool
@@ -126,14 +173,14 @@ module Media =
         override this.ToString() =
             match this with
             | AnyHover bool -> $"any-hover: {bool}"
-            | AnyPointer pointer -> $"any-pointer: {pointer.ToString().ToLower()}"
+            | AnyPointer pointer -> $"any-pointer: {pointer.Stringify()}"
             | AspectRatio (x, y) -> $"aspect-ratio: {x}/{y}"
             | MinAspectRatio (x, y) -> $"min-aspect-ratio: {x}/{y}"
             | MaxAspectRatio (x, y) -> $"max-aspect-ratio {x}/{y}"
             | Color -> "color"
             | MinColor int -> $"min-color: {int}"
             | MaxColor int -> $"max-color: {int}"
-            | ColorGamut colorGamut -> $"color-gamut: {colorGamut.ToString()}"
+            | ColorGamut colorGamut -> $"color-gamut: {colorGamut.Stringify()}"
             | ColorIndex int -> $"color-index: {int}"
             | MinColorIndex int -> $"min-color-index: {int}"
             | MaxColorIndex int -> $"max-color-index: {int}"
@@ -148,24 +195,24 @@ module Media =
             | MaxWidth length -> $"max-width: {lengthPercentageString length}"
             | Hover bool -> $"hover: {bool}"
             | InvertedColors bool -> $"inverted-colors: {bool}"
-            | LightLevel lightLevel -> $"light-level: {lightLevel.ToString().ToLower()}"
+            | LightLevel lightLevel -> $"light-level: {lightLevel.Stringify()}"
             | Monochrome int -> $"monochrome: {int}"
             | MinMonochrome int -> $"min-monochrome: {int}"
             | MaxMonochrome int -> $"max-monochrome: {int}"
-            | Orientation orientation -> $"orientation: {orientation.ToString().ToLower()}"
-            | OverflowBlock overflowBlock -> $"overflow-block: {Fss.Utilities.Helpers.toKebabCase overflowBlock}"
+            | Orientation orientation -> $"orientation: {orientation.Stringify()}"
+            | OverflowBlock overflowBlock -> $"overflow-block: {overflowBlock.Stringify()}"
             | OverflowInline bool -> $"overflow-inline: {bool}"
-            | Pointer pointer -> $"pointer: {pointer.ToString().ToLower()}"
-            | PrefersColorScheme colorScheme -> $"preferred-color-scheme: {colorScheme.ToString().ToLower()}"
-            | PrefersContrast contrast -> $"contrast: {Fss.Utilities.Helpers.toKebabCase contrast}"
+            | Pointer pointer -> $"pointer: {pointer.Stringify()}"
+            | PrefersColorScheme colorScheme -> $"preferred-color-scheme: {colorScheme.Stringify()}"
+            | PrefersContrast contrast -> $"contrast: {contrast.Stringify}"
             | PrefersReducedMotion bool -> $"prefers-reduced-motion: {bool}"
             | PrefersReducedTransparency bool -> $"prefers-reduced-transparency: {bool}"
             | Resolution resolution -> $"resolution: {stringifyICssValue resolution}"
             | MinResolution resolution -> $"min-resolution: {stringifyICssValue resolution}"
             | MaxResolution resolution -> $"max-resolution: {stringifyICssValue resolution}"
-            | Scan scan -> $"scan: {scan.ToString().ToLower()}"
-            | Scripting scripting -> $"scripting: {Fss.Utilities.Helpers.toKebabCase scripting}"
-            | Update update -> $"update: {update.ToString().ToLower()}"
+            | Scan scan -> $"scan: {scan.Stringify()}"
+            | Scripting scripting -> $"scripting: {scripting.Stringify()}"
+            | Update update -> $"update: {update.Stringify()}"
 
     type MediaQuery =
         | MediaQuery of Feature list * Rule list
@@ -184,5 +231,3 @@ module MediaClasses =
         member this.queryFor (device: Media.Device) (features: Media.Feature list)  (rules: Rule list) =
             (Property.Media, Media.MediaQueryFor(device, features, rules))
             |> Rule
-            
-            

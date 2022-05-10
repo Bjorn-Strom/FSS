@@ -206,20 +206,12 @@ module rec Functions =
     // Combines them all
     let private createFssInternal (name: string option) (properties: Rule list): ClassName * (ClassName * Css) list =
         // As labels are not real css we filter them out here and use them to change the classname
-        let label =
-            // TODO: Will this work?
-//            properties
-//            |> List.tryFind isLabel
-            properties
-            |> List.filter isLabel
-            |> List.map (fun (_,y) -> y )
-            |> List.rev
-            |> List.tryHead
-            
         // Create the classname and append a label if needed
         let label =
-            match label with
-            | Some l -> $"-{stringifyICssValue l}"
+            properties
+            |> List.tryFind isLabel
+            |> function
+            | Some (_, l) -> stringifyICssValue l
             | None -> ""
             
         let properties =
@@ -377,7 +369,7 @@ module rec Functions =
                 attributeList
         match name with
         | Some name -> name, addBrackets animationStyles
-        | _ -> $"animation-{FNV_1A.hash (animationStyles.ToString())}", addBrackets animationStyles
+        | _ -> $"animation-{FNV_1A.hash animationStyles}", addBrackets animationStyles
         
     /// Creates the CSS for an animation based on a list of KeyframeAttributes
     /// Returns a tuple containing 2 elements
