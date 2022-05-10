@@ -16,9 +16,14 @@ module Counter =
         interface ICounterValue with
             member this.StringifyCounter() =
                 match this with
+                | Cyclic -> "cyclic"
+                | Numeric -> "numeric"
+                | Alphabetic -> "alphabetic"
+                | Symbolic -> "symbolic"
+                | Additive -> "additive"
+                | Fixed -> "fixed"
                 | FixedValue value -> $"fixed {value}"
                 | Extends extends -> $"extends {extends}"
-                | _ -> this.ToString().ToLower()
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/negative
     type Negative =

@@ -40,7 +40,42 @@ module Cursor =
         | ZoomIn
         | ZoomOut
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Default -> "default"
+                | ContextMenu -> "context-menu"
+                | Help -> "help"
+                | Pointer -> "pointer"
+                | Progress -> "progress"
+                | Wait -> "wait"
+                | Cell -> "cell"
+                | Crosshair -> "crosshair"
+                | Text -> "text"
+                | VerticalText -> "vertical-text"
+                | Alias -> "alias"
+                | Copy -> "copy"
+                | Move -> "move"
+                | NoDrop -> "no-drop"
+                | NotAllowed -> "not-allowed"
+                | Grab -> "grab"
+                | Grabbing -> "grabbing"
+                | AllScroll -> "all-scroll"
+                | ColResize -> "col-resize"
+                | RowResize -> "row-resize"
+                | NResize -> "n-resize"
+                | EResize -> "e-resize"
+                | SResize -> "s-resize"
+                | WResize -> "w-resize"
+                | NsResize -> "ns-resize"
+                | EwResize -> "ew-resize"
+                | NeResize -> "ne-resize"
+                | NwResize -> "nw-resize"
+                | SeResize -> "se-resize"
+                | SwResize -> "sw-resize"
+                | NeswResize -> "nesw-resize"
+                | NwseResize -> "nwse-resize"
+                | ZoomIn -> "zoom-in"
+                | ZoomOut -> "zoom-out"
 
 [<RequireQualifiedAccess>]
 module CursorClasses =

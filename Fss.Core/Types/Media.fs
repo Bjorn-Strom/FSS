@@ -1,6 +1,8 @@
 namespace Fss
 namespace Fss.Types
 
+open Fss.Types
+
 [<RequireQualifiedAccess>]
 module Media =
     type Device =
@@ -13,9 +15,12 @@ module Media =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
+                | Screen -> "screen"
+                | Speech -> "speech"
+                | Print -> "print"
+                | All -> "all"
                 | Not d -> $"not {stringifyICssValue d}"
                 | Only  d -> $"only {stringifyICssValue d}"
-                | _ -> this.ToString().ToLower()
 
     type Pointer =
         | Course
@@ -32,7 +37,12 @@ module Media =
         | Standalone
         | MinimalUi
         | Browser
-        override this.ToString() = Fss.Utilities.Helpers.toKebabCase this
+        override this.ToString() =
+            match this with
+            | Fullscreen -> "fullscreen"
+            | Standalone -> "standalone"
+            | MinimalUi -> "minimal-ui"
+            | Browser -> "browser"
 
     type LightLevel =
         | Dim

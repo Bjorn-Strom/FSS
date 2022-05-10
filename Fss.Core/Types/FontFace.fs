@@ -28,7 +28,12 @@ module FontFace =
         | Fallback
         | Optional
         interface IFontFaceValue with
-            member this.StringifyFontFace() = this.ToString().ToLower()
+            member this.StringifyFontFace() =
+                match this with
+                | Block -> "block"
+                | Swap -> "swap"
+                | Fallback -> "fallback"
+                | Optional -> "optional"
 
     type Style =
         | Normal
@@ -39,10 +44,12 @@ module FontFace =
         interface IFontFaceValue with
             member this.StringifyFontFace() =
                 match this with
+                | Normal -> "normal"
+                | Italic -> "italic"
+                | Oblique -> "oblique"
                 | ObliqueAngle angle -> $"oblique {stringifyICssValue angle}"
                 | ObliqueAngleRange (angle, range) ->
                     $"oblique {stringifyICssValue angle} {stringifyICssValue range}"
-                | _ -> this.ToString().ToLower()
 
     type Stretch =
         | UltraCondensed
@@ -55,7 +62,17 @@ module FontFace =
         | ExtraExpanded
         | UltraExpanded
         interface IFontFaceValue with
-            member this.StringifyFontFace() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyFontFace() =
+                match this with
+                | UltraCondensed -> "ultra-condensed"
+                | ExtraCondensed -> "extra-condensed"
+                | Condensed -> "condensed"
+                | SemiCondensed -> "semi-condensed"
+                | Normal -> "normal"
+                | SemiExpanded -> "semi-expanded"
+                | Expanded -> "expanded"
+                | ExtraExpanded -> "extra-expanded"
+                | UltraExpanded -> "ultra-expanded"
 
 [<RequireQualifiedAccess>]
 // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face

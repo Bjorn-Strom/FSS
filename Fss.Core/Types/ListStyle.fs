@@ -8,7 +8,10 @@ module ListStyle =
         | Inside
         | Outside
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Inside -> "inside"
+                | Outside -> "outside"
 
     type Type =
         | Disc
@@ -67,7 +70,64 @@ module ListStyle =
         | DisclosureOpen
         | DisclosureClosed
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Disc -> "disc"
+                | Circle -> "circle"
+                | Square -> "square"
+                | Decimal -> "decimal"
+                | CjkDecimal -> "cjk-decimal"
+                | DecimalLeadingZero -> "decimal-leading-zero"
+                | LowerRoman -> "lower-roman"
+                | UpperRoman -> "upper-roman"
+                | LowerGreek -> "lower-greek"
+                | LowerAlpha -> "lower-alpha"
+                | LowerLatin -> "lower-latin"
+                | UpperAlpha -> "upper-alpha"
+                | UpperLatin -> "upper-latin"
+                | ArabicIndic -> "arabic-indic"
+                | Armenian -> "armenian"
+                | Bengali -> "bengali"
+                | Cambodian -> "cambodian"
+                | CjkEarthlyBranch -> "cjk-earthly-branch"
+                | CjkHeavenlyStem -> "cjk-heavenly-stem"
+                | CjkIdeographic -> "cjk-ideographic"
+                | Devanagari -> "devanagari"
+                | EthiopicNumeric -> "ethiopic-numeric"
+                | Georgian -> "georgian"
+                | Gujarati -> "gujarati"
+                | Gurmukhi -> "gurmukhi"
+                | Hebrew -> "hebrew"
+                | Hiragana -> "hiragana"
+                | HiraganaIroha -> "hiragana-iroha"
+                | JapaneseFormal -> "japanese-formal"
+                | JapaneseInformal -> "japanese-informal"
+                | Kannada -> "kannada"
+                | Katakana -> "katakana"
+                | KatakanaIroha -> "katakana-iroha"
+                | Khmer -> "khmer"
+                | KoreanHangulFormal -> "korean-hangul-formal"
+                | KoreanHanjaFormal -> "korean-hanja-formal"
+                | KoreanHanjaInformal -> "korean-hanja-informal"
+                | Lao -> "lao"
+                | LowerArmenian -> "lower-armenian"
+                | Malayalam -> "malayalam"
+                | Mongolian -> "mongolian"
+                | Myanmar -> "myanmar"
+                | Oriya -> "oriya"
+                | Persian -> "persian"
+                | SimpChineseFormal -> "simp-chinese-formal"
+                | SimpChineseInformal -> "simp-chinese-informal"
+                | Tamil -> "tamil"
+                | Telugu -> "telugu"
+                | Thai -> "thai"
+                | Tibetan -> "tibetan"
+                | TradChineseFormal -> "trad-chinese-formal"
+                | TradChineseInformal -> "trad-chinese-informal"
+                | UpperArmenian -> "upper-armenian"
+                | DisclosureOpen -> "disclosure-open"
+                | DisclosureClosed -> "disclosure-closed"
+
 
 [<RequireQualifiedAccess>]
 module ListStyleClasses =

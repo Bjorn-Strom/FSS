@@ -2,6 +2,8 @@ namespace Fss
 
 namespace Fss.Types
 
+open Fss.Types
+
 [<RequireQualifiedAccess>]
 module Flex =
     type AlignContent =
@@ -20,7 +22,22 @@ module Flex =
         | SpaceAround
         | SpaceEvenly
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = //Fss.Utilities.Helpers.toKebabCase this
+                match this with
+                | Start -> "start"
+                | End -> "end"
+                | FlexStart -> "flex-start"
+                | FlexEnd -> "flex-end"
+                | Center -> "center"
+                | Baseline -> "baseline"
+                | FirstBaseline -> "first-baseline"
+                | LastBaseline -> "last-baseline"
+                | Stretch -> "stretch"
+                | Safe -> "safe"
+                | Unsafe -> "unsafe"
+                | SpaceBetween -> "space-between"
+                | SpaceAround -> "space-around"
+                | SpaceEvenly -> "space-evenly"
 
     type AlignItems =
         | Start
@@ -37,7 +54,21 @@ module Flex =
         | SelfStart
         | SelfEnd
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Start -> "start"
+                | End -> "end"
+                | FlexStart -> "flex-start"
+                | FlexEnd -> "flex-end"
+                | Center -> "center"
+                | Baseline -> "baseline"
+                | FirstBaseline -> "first-baseline"
+                | LastBaseline -> "last-baseline"
+                | Stretch -> "stretch"
+                | Safe -> "safe"
+                | Unsafe -> "unsafe"
+                | SelfStart -> "self-start"
+                | SelfEnd -> "self-end"
 
     type AlignSelf =
         | Start
@@ -54,7 +85,21 @@ module Flex =
         | SelfStart
         | SelfEnd
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Start -> "start"
+                | End -> "end"
+                | FlexStart -> "flex-start"
+                | FlexEnd -> "flex-end"
+                | Center -> "center"
+                | Baseline -> "baseline"
+                | FirstBaseline -> "first-baseline"
+                | LastBaseline -> "last-baseline"
+                | Stretch -> "stretch"
+                | Safe -> "safe"
+                | Unsafe -> "unsafe"
+                | SelfStart -> "self-start"
+                | SelfEnd -> "self-end"
 
     type JustifyContent =
         | Start
@@ -74,7 +119,24 @@ module Flex =
         | Left
         | Right
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Start -> "start"
+                | End -> "end"
+                | FlexStart -> "flex-start"
+                | FlexEnd -> "flex-end"
+                | Center -> "center"
+                | Baseline -> "baseline"
+                | FirstBaseline -> "first-baseline"
+                | LastBaseline -> "last-baseline"
+                | Stretch -> "stretch"
+                | Safe -> "safe"
+                | Unsafe -> "unsafe"
+                | SpaceBetween -> "space-between"
+                | SpaceAround -> "space-around"
+                | SpaceEvenly -> "space-evenly"
+                | Left -> "left"
+                | Right -> "right"
 
     type JustifyItems =
         | Start
@@ -94,7 +156,24 @@ module Flex =
         | SelfEnd
         | Legacy
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Start -> "start"
+                | End -> "end"
+                | FlexStart -> "flex-start"
+                | FlexEnd -> "flex-end"
+                | Center -> "center"
+                | Baseline -> "baseline"
+                | FirstBaseline -> "first-baseline"
+                | LastBaseline -> "last-baseline"
+                | Stretch -> "stretch"
+                | Safe -> "safe"
+                | Unsafe -> "unsafe"
+                | Left -> "left"
+                | Right -> "right"
+                | SelfStart -> "self-start"
+                | SelfEnd -> "self-end"
+                | Legacy -> "legacy"
 
     type JustifySelf =
         | Start
@@ -111,14 +190,32 @@ module Flex =
         | SelfStart
         | SelfEnd
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Start -> "start"
+                | End -> "end"
+                | FlexStart -> "flex-start"
+                | FlexEnd -> "flex-end"
+                | Center -> "center"
+                | Baseline -> "baseline"
+                | FirstBaseline -> "first-baseline"
+                | LastBaseline -> "last-baseline"
+                | Stretch -> "stretch"
+                | Safe -> "safe"
+                | Unsafe -> "unsafe"
+                | SelfStart -> "self-start"
+                | SelfEnd -> "self-end"
 
     type Wrap =
         | NoWrap
         | Wrap
         | WrapReverse
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | NoWrap -> "no-wrap"
+                | Wrap -> "wrap"
+                | WrapReverse -> "wrap-reverse"
 
     type Direction =
         | Row
@@ -126,7 +223,12 @@ module Flex =
         | Column
         | ColumnReverse
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Row -> "row"
+                | RowReverse -> "row-reverse"
+                | Column -> "column"
+                | ColumnReverse -> "column-reverse"
 
     type Basis =
         | Fill
@@ -135,7 +237,13 @@ module Flex =
         | FitContent
         | Content
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Fill -> "fill"
+                | MaxContent -> "max-content"
+                | MinContent -> "min-content"
+                | FitContent -> "fit-content"
+                | Content -> "content"
 
 [<RequireQualifiedAccess>]
 module FlexClasses =

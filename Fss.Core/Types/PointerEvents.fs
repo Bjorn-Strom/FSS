@@ -13,7 +13,15 @@ module PointerEvents =
         | Stroke
         | All
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | VisiblePainted -> "visiblepainted"
+                | VisibleFill -> "visiblefill"
+                | VisibleStroke -> "visiblestroke"
+                | Visible -> "visible"
+                | Painted -> "painted"
+                | Stroke -> "stroke"
+                | All -> "all"
 
 [<RequireQualifiedAccess>]
 module PointerEventClasses =

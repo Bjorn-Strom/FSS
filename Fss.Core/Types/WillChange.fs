@@ -8,7 +8,10 @@ module WillChange =
         | ScrollPosition
         | Contents
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | ScrollPosition -> "scroll-position"
+                | Contents -> "contents"
 
 [<RequireQualifiedAccess>]
 module WillChangeClasses =

@@ -2,6 +2,8 @@ namespace Fss
 
 namespace Fss.Types
 
+open Fss.Types
+
 [<RequireQualifiedAccess>]
 module Image =
     type Side =
@@ -10,13 +12,21 @@ module Image =
         | FarthestSide
         | FarthestCorner
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | ClosestSide -> "closest-side"
+                | ClosestCorner -> "closest-corner"
+                | FarthestSide -> "farthest-side"
+                | FarthestCorner -> "farthest-corner"
 
     type Shape =
         | Circle
         | Ellipse
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Circle -> "circle"
+                | Ellipse -> "ellipse"
 
     type ObjectFit =
         | Fill
@@ -24,13 +34,21 @@ module Image =
         | Cover
         | ScaleDown
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Fill  -> "fill"
+                | Contain -> "contain"
+                | Cover -> "cover"
+                | ScaleDown -> "scale-down"
 
     type Rendering =
         | CrispEdges
         | Pixelated
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | CrispEdges -> "crisp-edges"
+                | Pixelated -> "pixelated"
 
     type Image =
         | Url of string

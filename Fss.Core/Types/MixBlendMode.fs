@@ -21,7 +21,23 @@ module MixBlendMode =
         | Color
         | Luminosity
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = 
+                match this with
+                | Multiply -> "multiply"
+                | Screen -> "screen"
+                | Overlay -> "overlay"
+                | Darken -> "darken"
+                | Lighten -> "lighten"
+                | ColorDodge -> "color-dodge"
+                | ColorBurn -> "color-burn"
+                | HardLight -> "hard-light"
+                | SoftLight -> "soft-light"
+                | Difference -> "difference"
+                | Exclusion -> "exclusion"
+                | Hue -> "hue"
+                | Saturation -> "saturation"
+                | Color -> "color"
+                | Luminosity -> "luminosity"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
 // FIXME: This and BackgroundBlendMode are quite similar

@@ -14,7 +14,16 @@ module Text =
         | End
         | MatchParent
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Left -> "left"
+                | Right -> "right"
+                | Center -> "center"
+                | Justify -> "justify"
+                | JustifyAll -> "justify-all"
+                | Start -> "start"
+                | End -> "end"
+                | MatchParent -> "match-parent"
 
     type AlignLast =
         | Start
@@ -24,7 +33,14 @@ module Text =
         | Center
         | Justify
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Start -> "start"
+                | End -> "end"
+                | Left -> "left"
+                | Right -> "right"
+                | Center -> "center"
+                | Justify -> "justify"
 
     type DecorationLine =
         | Overline
@@ -32,7 +48,12 @@ module Text =
         | LineThrough
         | Blink
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Overline -> "overline"
+                | Underline -> "underline"
+                | LineThrough -> "line-through"
+                | Blink -> "blink"
 
     type DecorationThickness =
         | FromFont
@@ -46,7 +67,13 @@ module Text =
         | Dashed
         | Wavy
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Solid -> "solid"
+                | Double -> "double"
+                | Dotted -> "dotted"
+                | Dashed -> "dashed"
+                | Wavy -> "wavy"
 
     type DecorationSkip =
         | Objects
@@ -56,7 +83,14 @@ module Text =
         | LeadingSpaces
         | TrailingSpaces
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Objects -> "objects"
+                | Spaces -> "spaces"
+                | Edges -> "edges"
+                | BoxDecoration -> "box-decoration"
+                | LeadingSpaces -> "leading-spaces"
+                | TrailingSpaces -> "trailing-spaces"
 
     type DecorationSkipInk =
         | All
@@ -70,19 +104,31 @@ module Text =
         | FullWidth
         | FullSizeKana
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Capitalize -> "capitalize"
+                | Uppercase -> "uppercase"
+                | Lowercase -> "lowercase"
+                | FullWidth -> "full-width"
+                | FullSizeKana -> "full-size-kana"
 
     type Indent =
         | Hanging
         | EachLine
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Hanging -> "hanging"
+                | EachLine -> "each-line"
 
     type Overflow =
         | Clip
         | Ellipsis
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Clip -> "clip"
+                | Ellipsis -> "ellipsis"
 
     type EmphasisPosition =
         | Over
@@ -90,7 +136,12 @@ module Text =
         | Right
         | Left
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Over -> "over"
+                | Under -> "under"
+                | Right -> "right"
+                | Left -> "left"
 
     type EmphasisStyle =
         | Filled
@@ -104,9 +155,14 @@ module Text =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
+                | Filled -> "filled"
+                | Open -> "open"
+                | Dot -> "dot"
+                | Circle -> "circle"
+                | DoubleCircle -> "double-circle"
+                | Triangle -> "triangle"
                 | FilledSesame -> "filled sesame"
                 | OpenSesame -> "open sesame"
-                | _ -> Fss.Utilities.Helpers.toKebabCase this
 
     type UnderlinePosition =
         | FromFont
@@ -117,11 +173,20 @@ module Text =
         | Above
         | Below
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with 
+                | FromFont -> "from-font"
+                | Under -> "under"
+                | Left -> "left"
+                | Right -> "right"
+                | AutoPos -> "auto-pos"
+                | Above -> "above"
+                | Below -> "below"
 
     type EmphasisColor =
         | TextEmphasisColor of Color.Color
         interface ICssValue with
+            // TODO
             member this.StringifyCss() = this.ToString().ToLower()
 
     type Hyphens =
@@ -136,20 +201,33 @@ module Text =
         | Sideways
         | UseGlyphOrientation
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Mixed -> "mixed"
+                | Upright -> "upright"
+                | SidewaysRight -> "sideways-right"
+                | Sideways -> "sideways"
+                | UseGlyphOrientation -> "use-glyph-orientation"
 
     type Rendering =
         | OptimizeSpeed
         | OptimizeLegibility
         | GeometricPrecision
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | OptimizeSpeed -> "optimize-speed"
+                | OptimizeLegibility -> "optimize-legibility"
+                | GeometricPrecision -> "geometric-precision"
 
     type Justify =
         | InterWord
         | InterCharacter
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | InterWord -> "inter-word"
+                | InterCharacter -> "inter-character"
 
     type WhiteSpace =
         | Nowrap
@@ -158,7 +236,13 @@ module Text =
         | PreLine
         | BreakSpaces
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Nowrap -> "nowrap"
+                | Pre -> "pre"
+                | PreWrap -> "pre-wrap"
+                | PreLine -> "pre-line"
+                | BreakSpaces -> "break-spaces"
 
     type UserSelect =
         | Text
@@ -166,7 +250,12 @@ module Text =
         | All
         | Element
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Text -> "text"
+                | Contain -> "contain"
+                | All -> "all"
+                | Element -> "element"
 
     type HangingPunctuation =
         | First
@@ -174,7 +263,12 @@ module Text =
         | ForceEnd
         | AllowEnd
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | First -> "first"
+                | Last -> "last"
+                | ForceEnd -> "force-end"
+                | AllowEnd -> "allow-end"
 
 [<RequireQualifiedAccess>]
 module TextClasses =

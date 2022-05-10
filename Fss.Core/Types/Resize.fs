@@ -11,7 +11,13 @@ module Resize =
         | Block
         | Inline
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Both -> "both"
+                | Horizontal -> "horizontal"
+                | Vertical -> "vertical"
+                | Block -> "block"
+                | Inline -> "inline"
 
 [<RequireQualifiedAccess>]
 module ResizeClasses =

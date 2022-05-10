@@ -11,7 +11,14 @@ module TimingFunction =
         | Start
         | End
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | JumpStart -> "jump-start"
+                | JumpEnd -> "jump-end"
+                | JumpNone -> "jump-none"
+                | JumpBoth -> "jump-both"
+                | Start -> "start"
+                | End -> "end"
 
     type Timing =
         | Ease
@@ -27,10 +34,16 @@ module TimingFunction =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
+                | Ease -> "ease"
+                | EaseIn -> "ease-in"
+                | EaseOut -> "ease-out"
+                | EaseInOut -> "ease-in-out"
+                | Linear -> "linear"
+                | StepStart -> "step-start"
+                | StepEnd -> "step-end"
                 | CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" p1 p2 p3 p4
                 | Steps n -> sprintf "steps(%d)" n
                 | StepsWithTerm (n, term) -> $"steps(%d{n}, %s{stringifyICssValue term})"
-                | _ -> Fss.Utilities.Helpers.toKebabCase this
 
 [<RequireQualifiedAccess>]
 module TimingFunctionClasses =

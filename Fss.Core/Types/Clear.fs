@@ -11,7 +11,13 @@ module Clear =
         | InlineStart
         | InlineEnd
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Left -> "left"
+                | Right -> "right"
+                | Both -> "both"
+                | InlineStart -> "inline-start"
+                | InlineEnd -> "inline-end"
 
 [<RequireQualifiedAccess>]
 module ClearClasses =

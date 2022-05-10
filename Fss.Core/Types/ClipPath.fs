@@ -13,7 +13,15 @@ module ClipPath =
         | StrokeBox
         | ViewBox
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | MarginBox -> "margin-box"
+                | BorderBox -> "border-box"
+                | PaddingBox -> "padding-box"
+                | ContentBox -> "content-box"
+                | FillBox -> "fill-box"
+                | StrokeBox -> "stroke-box"
+                | ViewBox -> "view-box"
 
     type Inset =
         | All of ILengthPercentage

@@ -49,7 +49,22 @@ module Property =
         | Src
         | UnicodeRange
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | AscentOverride -> "ascent-override"
+                | DescentOverride -> "descent-override"
+                | FontDisplay -> "font-display"
+                | FontFamily -> "font-family"
+                | FontStretch -> "font-stretch"
+                | FontStyle -> "font-style"
+                | FontWeight -> "font-weight"
+                | FontVariant -> "font-variant"
+                | FontFeatureSettings -> "font-feature-settings"
+                | FontVariationSettings -> "font-variation-settings"
+                | LineGapOverride -> "line-gap-override"
+                | SizeAdjust -> "size-adjust"
+                | Src -> "src"
+                | UnicodeRange -> "unicode-range"
     type CounterProperty =
         | System
         | Negative
@@ -64,7 +79,20 @@ module Property =
         // Home made
         | NameLabel 
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | System -> "system"
+                | Negative -> "negative"
+                | Prefix -> "prefix"
+                | Suffix -> "suffix"
+                | Range -> "range"
+                | Pad -> "pad"
+                | Fallback -> "fallback"
+                | Symbols -> "symbols"
+                | AdditiveSymbols -> "additive-symbols"
+                | SpeakAs -> "speak-as"
+                // Home made
+                | NameLabel -> "name-label"
     type CssProperty =
         // Css
         | Appearance
@@ -980,7 +1008,12 @@ and Keywords =
     | Unset
     | Revert
     interface ICssValue with
-        member this.StringifyCss() = this.ToString().ToLower()
+        member this.StringifyCss() =
+            match this with
+            | Inherit -> "inherit"
+            | Initial -> "initial"
+            | Unset -> "unset"
+            | Revert -> "revert"
 
 and Rule = Property.CssProperty * ICssValue
 type CounterRule = Property.CounterProperty * ICounterValue

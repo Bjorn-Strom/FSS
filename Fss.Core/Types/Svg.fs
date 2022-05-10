@@ -2,6 +2,8 @@ namespace Fss
 
 namespace Fss.Types
 
+open Fss.Types
+
 [<RequireQualifiedAccess>]
 module Svg =
     type AlignmentBaseline =
@@ -20,13 +22,31 @@ module Svg =
         | Center
         | Bottom
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Baseline -> "baseline"
+                | TextBottom -> "text-bottom"
+                | TextBeforeEdge -> "text-before-edge"
+                | Middle -> "middle"
+                | Central -> "central"
+                | TextTop -> "text-top"
+                | TextAfterEdge -> "text-after-edge"
+                | Ideographic -> "ideographic"
+                | Alphabetic -> "alphabetic"
+                | Hanging -> "hanging"
+                | Mathematical -> "mathematical"
+                | Top -> "top"
+                | Center -> "center"
+                | Bottom -> "bottom"
 
     type BaselineShift =
         | Sub
         | Super
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Sub -> "sub"
+                | Super -> "super"
 
     type DominantBaseline =
         | Ideographic
@@ -39,20 +59,37 @@ module Svg =
         | TextBeforeEdge
         | TextTop
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+               match this with 
+               | Ideographic -> "ideographic"
+               | Alphabetic -> "alphabetic"
+               | Hanging -> "hanging"
+               | Mathematical -> "mathematical"
+               | Central -> "central"
+               | Middle -> "middle"
+               | TextAfterEdge -> "text-after-edge"
+               | TextBeforeEdge -> "text-before-edge"
+               | TextTop -> "text-top"
 
     type TextAnchor =
         | Start
         | Middle
         | End
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Start -> "start"
+                | Middle -> "middle"
+                | End -> "end"
 
     type ClipRule =
         | Nonzero
         | Evenodd
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Nonzero -> "nonzero"
+                | Evenodd -> "evenodd"
 
     type ColorInterpolation =
         | Srgb
@@ -67,21 +104,32 @@ module Svg =
         | OptimizeSpeed
         | OptimizeQuality
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | OptimizeSpeed -> "optimize-speed"
+                | OptimizeQuality -> "optimize-quality"
 
     type ShapeRendering =
         | OptimizeSpeed
         | CrispEdges
         | GeometricPrecision
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | OptimizeSpeed -> "optimize-speed"
+                | CrispEdges -> "crisp-edges"
+                | GeometricPrecision -> "geometric-precision"
 
     type StrokeLinecap =
         | Butt
         | Round
         | Square
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Butt -> "butt"
+                | Round -> "round"
+                | Square -> "square"
 
     type StrokeLinejoin =
         | Arcs
@@ -90,7 +138,13 @@ module Svg =
         | MiterClip
         | Round
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Arcs -> "arcs"
+                | Bevel -> "bevel"
+                | Miter -> "miter"
+                | MiterClip -> "miter-clip"
+                | Round -> "round"
 
 [<RequireQualifiedAccess>]
 module SvgClasses =

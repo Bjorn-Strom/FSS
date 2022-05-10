@@ -9,7 +9,12 @@ module Border =
         | Medium
         | Thick
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Thin -> "thin"
+                | Medium -> "medium"
+                | Thick -> "thick"
+                
     type Style =
         | Hidden
         | Dotted
@@ -37,7 +42,10 @@ module Border =
         | Collapse
         | Separate
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Collapse -> "collapse"
+                | Separate -> "separate"
 
     type ImageRepeat =
         | Stretch
@@ -45,7 +53,12 @@ module Border =
         | Round
         | Space
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Stretch -> "stretch"
+                | Repeat -> "repeat"
+                | Round -> "round"
+                | Space -> "space"
 
 [<RequireQualifiedAccess>]
 module BorderClasses =

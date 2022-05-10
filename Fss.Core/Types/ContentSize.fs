@@ -11,8 +11,9 @@ module ContentSize =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
+                | MaxContent -> "max-content"
+                | MinContent -> "min-content"
                 | FitContent length -> $"fit-content({lengthPercentageString length})"
-                | _ -> (Fss.Utilities.Helpers.toKebabCase this).ToLower()
 
 [<RequireQualifiedAccess>]
 module ContentSizeClasses =
