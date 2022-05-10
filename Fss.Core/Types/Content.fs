@@ -10,7 +10,6 @@ module Content =
         | CloseQuote
         | NoOpenQuote
         | NoCloseQuote
-        | Counter of Property.CounterProperty
         interface ICssValue with
             member this.StringifyCss() = 
                 match this with
@@ -18,8 +17,6 @@ module Content =
                 | CloseQuote -> "close-quote"
                 | NoOpenQuote -> "no-open-quote"
                 | NoCloseQuote -> "no-close-quote"
-                // TODO: FIX DENNE
-                | Counter counter -> "stringifyICssValue counter"
 
 [<RequireQualifiedAccess>]
 module ContentClasses =

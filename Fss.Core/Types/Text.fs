@@ -183,12 +183,6 @@ module Text =
                 | Above -> "above"
                 | Below -> "below"
 
-    type EmphasisColor =
-        | TextEmphasisColor of Color.Color
-        interface ICssValue with
-            // TODO
-            member this.StringifyCss() = this.ToString().ToLower()
-
     type Hyphens =
         | Manual
         interface ICssValue with

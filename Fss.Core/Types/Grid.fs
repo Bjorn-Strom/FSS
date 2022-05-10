@@ -30,16 +30,6 @@ module Grid =
                 | Subgrid -> "subgrid"
                 | Masonry -> "masonry"
 
-    type GridPosition =
-        | Value of int
-        | Ident of string
-        | IdentValue of string * int
-        | ValueIdentSpan of int * string
-        | Span of string
-        interface ICssValue with
-            // TODO
-            member this.StringifyCss() = this.ToString().ToLower()
-
     type RepeatType =
         | AutoFill
         | AutoFit
