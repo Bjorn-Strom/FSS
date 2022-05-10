@@ -188,6 +188,17 @@ module rec Functions =
             
         arrangePropertyLists properties None []
         
+    (*
+    using (var fs = System.IO.File.Create(filename))
+    using (var bw = new System.IO.BinaryWriter(fs))
+    {
+        for (int i = 0; i < data.Length; i++)
+        {
+            bw.Write(data[i].X);
+            bw.Write(data[i].Y);
+    *)
+        
+            
         
 
     // Creates all CSS
@@ -211,16 +222,22 @@ module rec Functions =
             | Some l -> $"-{stringifyICssValue l}"
             | None -> ""
             
-        let className =
-            match name with
-            | Some n -> n
-            | _ -> $".css{FNV_1A.hash (properties.ToString())}{label}"
-            
-        let addClassName cssPair = addClassName className cssPair
-        
         let properties =
             properties
             |> List.filter (isLabel >> not)
+            
+        let className =
+            match name with
+            | Some n -> n
+            | _ ->
+                let fullCssString =
+                    properties
+                    |> List.map (fun (x, y) -> $"{stringifyICssValue x}-{stringifyICssValue y}")
+                    |> String.concat ";"
+                    
+                $".css{FNV_1A.hash fullCssString}{label}"
+            
+        let addClassName cssPair = addClassName className cssPair
             
         let arrangedCss =
             arrangePropertyLists properties
@@ -290,7 +307,7 @@ module rec Functions =
         let counterName =
             match name with
             | Some n -> n
-            | _ -> $"counter{FNV_1A.hash propertyString}{label}"
+            | _ -> $"counter{FNV_1A.hash (propertyString)}{label}"
 
         counterName, addBrackets propertyString
         
@@ -360,7 +377,7 @@ module rec Functions =
                 attributeList
         match name with
         | Some name -> name, addBrackets animationStyles
-        | _ -> $"animation-{FNV_1A.hash animationStyles}", addBrackets animationStyles
+        | _ -> $"animation-{FNV_1A.hash (animationStyles.ToString())}", addBrackets animationStyles
         
     /// Creates the CSS for an animation based on a list of KeyframeAttributes
     /// Returns a tuple containing 2 elements
