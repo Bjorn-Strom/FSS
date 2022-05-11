@@ -21,7 +21,13 @@ module Scroll =
         | Inline
         | Both
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | X -> "x"
+                | Y -> "y"
+                | Block -> "block"
+                | Inline -> "inline"
+                | Both -> "both"
 
     type Viewport =
         | Mandatory of SnapType
@@ -40,14 +46,19 @@ module Scroll =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
+                | Start -> "start"
+                | End -> "end"
+                | Center -> "center"
                 | Double (first, second) -> $"{stringifyICssValue first} {stringifyICssValue second}"
-                | _ -> this.ToString().ToLower()
 
     type SnapStop =
         | Normal
         | Always
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Normal -> "normal"
+                | Always -> "always"
 
 [<RequireQualifiedAccess>]
 module ScrollClasses =

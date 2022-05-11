@@ -47,7 +47,7 @@ module rec Functions =
         
     // Creates a single line of "normal" CSS
     let private createMainCssString (propertyName, propertyValue): string * string =
-        stringifyICssValue propertyName, $"{stringifyICssValue propertyValue}"
+        stringifyICssValue propertyName, stringifyICssValue propertyValue
     
     // Creates "normal" css, IE not pseudo elements/classes or combinators
     let private createMainCSS (properties: Rule list): Css =
@@ -63,7 +63,7 @@ module rec Functions =
             |> sprintf "%s;"
             |> addBrackets
         
-        $"{cssString}"
+        cssString
         
     // Creates a single line of pseudo CSS
     let private createPseudoCssString (propertyName: ICssValue, propertyValue: ICssValue): string * string =
@@ -188,6 +188,17 @@ module rec Functions =
             
         arrangePropertyLists properties None []
         
+    (*
+    using (var fs = System.IO.File.Create(filename))
+    using (var bw = new System.IO.BinaryWriter(fs))
+    {
+        for (int i = 0; i < data.Length; i++)
+        {
+            bw.Write(data[i].X);
+            bw.Write(data[i].Y);
+    *)
+        
+            
         
 
     // Creates all CSS
@@ -195,29 +206,30 @@ module rec Functions =
     // Combines them all
     let private createFssInternal (name: string option) (properties: Rule list): ClassName * (ClassName * Css) list =
         // As labels are not real css we filter them out here and use them to change the classname
-        let label =
-            properties
-            |> List.filter isLabel
-            |> List.map (fun (_,y) -> y )
-            |> List.rev
-            |> List.tryHead
-            
         // Create the classname and append a label if needed
         let label =
-            match label with
-            | Some l -> $"-{stringifyICssValue l}"
+            properties
+            |> List.tryFind isLabel
+            |> function
+            | Some (_, l) -> stringifyICssValue l
             | None -> ""
+            
+        let properties =
+            properties
+            |> List.filter (isLabel >> not)
             
         let className =
             match name with
             | Some n -> n
-            | _ -> $".css{FNV_1A.hash (properties.ToString())}{label}"
+            | _ ->
+                let fullCssString =
+                    properties
+                    |> List.map (fun (x, y) -> $"{stringifyICssValue x}-{stringifyICssValue y}")
+                    |> String.concat ";"
+                    
+                $".css{FNV_1A.hash fullCssString}{label}"
             
         let addClassName cssPair = addClassName className cssPair
-        
-        let properties =
-            properties
-            |> List.filter (isLabel >> not)
             
         let arrangedCss =
             arrangePropertyLists properties
@@ -287,7 +299,7 @@ module rec Functions =
         let counterName =
             match name with
             | Some n -> n
-            | _ -> $"counter{FNV_1A.hash propertyString}{label}"
+            | _ -> $"counter{FNV_1A.hash (propertyString)}{label}"
 
         counterName, addBrackets propertyString
         

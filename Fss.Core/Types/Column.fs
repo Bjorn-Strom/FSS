@@ -14,7 +14,11 @@ module Column =
         | Medium
         | Thick
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Thin -> "thin"
+                | Medium -> "medium"
+                | Thick -> "thick"
 
     type RuleStyle =
         | Hidden
@@ -27,13 +31,27 @@ module Column =
         | Inset
         | Outset
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Hidden -> "hidden"
+                | Dotted -> "dotted"
+                | Dashed -> "dashed"
+                | Solid -> "solid"
+                | Double -> "double"
+                | Groove -> "groove"
+                | Ridge -> "ridge"
+                | Inset -> "inset"
+                | Outset -> "outset"
 
     type Fill =
         | Balance
         | BalanceAll
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Balance -> "balance"
+                | BalanceAll -> "balance-all"
+                
 
 [<RequireQualifiedAccess>]
 module ColumnClasses =

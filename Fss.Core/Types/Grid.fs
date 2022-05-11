@@ -2,6 +2,8 @@ namespace Fss
 
 namespace Fss.Types
 
+open Fss.Types
+
 [<RequireQualifiedAccess>]
 module Grid =
     type GridAutoFlow =
@@ -13,32 +15,30 @@ module Grid =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
+                | Row -> "row"
+                | Column -> "column"
+                | Dense -> "dense"
                 | RowDense -> "row dense"
                 | ColumnDense -> "column dense"
-                | _ -> this.ToString().ToLower()
 
     type GridTemplate =
         | Subgrid
         | Masonry
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
-
-    type GridPosition =
-        | Value of int
-        | Ident of string
-        | IdentValue of string * int
-        | ValueIdentSpan of int * string
-        | Span of string
-        interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Subgrid -> "subgrid"
+                | Masonry -> "masonry"
 
     type RepeatType =
         | AutoFill
         | AutoFit
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | AutoFill -> "auto-fill"
+                | AutoFit -> "auto-fit"
         
-
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-rows
     type MinMaxHelper =

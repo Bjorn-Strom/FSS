@@ -11,7 +11,13 @@ module Position =
         | Sticky
         | Fixed
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Static -> "static"
+                | Relative -> "relative"
+                | Absolute -> "absolute"
+                | Sticky -> "sticky"
+                | Fixed -> "fixed"
 
     type VerticalAlign =
         | Baseline
@@ -23,8 +29,16 @@ module Position =
         | Top
         | Bottom
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
-
+            member this.StringifyCss() = 
+                match this with
+                | Baseline -> "baseline"
+                | Sub -> "sub"
+                | Super -> "super"
+                | TextTop -> "text-top"
+                | TextBottom -> "text-bottom"
+                | Middle -> "middle"
+                | Top -> "top"
+                | Bottom -> "bottom"
 
     type Float =
         | Left
@@ -32,19 +46,30 @@ module Position =
         | InlineStart
         | InlineEnd
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Left -> "left"
+                | Right -> "right"
+                | InlineStart -> "inline-start"
+                | InlineEnd -> "inline-end"
 
     type BoxSizing =
         | ContentBox
         | BorderBox
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | ContentBox -> "content-box"
+                | BorderBox -> "border-box"
 
     type Direction =
         | Rtl
         | Ltr
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Rtl -> "rtl"
+                | Ltr -> "ltr"
 
     type Break =
         | Avoid
@@ -61,7 +86,21 @@ module Position =
         | AvoidRegion
         | Region
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Avoid -> "avoid"
+                | Always -> "always"
+                | All -> "all"
+                | AvoidPage -> "avoid-page"
+                | Page -> "page"
+                | Left -> "left"
+                | Right -> "right"
+                | Recto -> "recto"
+                | Verso -> "verso"
+                | AvoidColumn -> "avoid-column"
+                | Column -> "column"
+                | AvoidRegion -> "avoid-region"
+                | Region -> "region"
 
     type BreakInside =
         | Avoid
@@ -69,7 +108,12 @@ module Position =
         | AvoidColumn
         | AvoidRegion
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Avoid -> "avoid"
+                | AvoidPage -> "avoid-page"
+                | AvoidColumn -> "avoid-column"
+                | AvoidRegion -> "avoid-region"
 
 [<RequireQualifiedAccess>]
 module PositionClasses =
@@ -197,7 +241,11 @@ module WritingMode =
         | VerticalRl
         | VerticalLr
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | HorizontalTb -> "horizontal-tb"
+                | VerticalRl -> "vertical-rl"
+                | VerticalLr -> "vertical-lr"
 
 [<RequireQualifiedAccess>]
 module WritingModeClasses =

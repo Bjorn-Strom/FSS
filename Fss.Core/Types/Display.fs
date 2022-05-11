@@ -22,7 +22,24 @@ module Display =
         | TableRow
         | TableCaption
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = 
+                match this with
+                | Inline -> "inline"
+                | InlineBlock -> "inline-block"
+                | Block -> "block"
+                | RunIn -> "run-in"
+                | Flex -> "flex"
+                | Grid -> "grid"
+                | FlowRoot -> "flow-root"
+                | Table -> "table"
+                | TableCell -> "table-cell"
+                | TableColumn -> "table-column"
+                | TableColumnGroup -> "table-column-group"
+                | TableHeaderGroup -> "table-header-group"
+                | TableRowGroup -> "table-row-group"
+                | TableFooterGroup -> "table-footer-group"
+                | TableRow -> "table-row"
+                | TableCaption -> "table-caption"
 
 [<RequireQualifiedAccess>]
 module DisplayClasses =

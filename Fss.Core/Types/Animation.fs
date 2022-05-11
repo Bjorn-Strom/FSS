@@ -12,7 +12,11 @@ module Animation =
         | AlternateReverse
         interface ICssValue with
             member this.StringifyCss() =
-                Fss.Utilities.Helpers.toKebabCase this
+                match this with
+                | Normal -> "normal"
+                | Reverse -> "reverse"
+                | Alternate -> "alternate"
+                | AlternateReverse -> "alternate-reverse"
 
     type Step = TimingFunction.Step
 
@@ -22,7 +26,10 @@ module Animation =
         | Both
         interface ICssValue with
             member this.StringifyCss() =
-                this.ToString().ToLower()
+                match this with
+                | Forwards -> "forwards"
+                | Backwards -> "backwards"
+                | Both -> "both"
         
     type IterationCount =
         | Infinite
@@ -38,8 +45,10 @@ module Animation =
         | Paused
         interface ICssValue with
             member this.StringifyCss() =
-                this.ToString().ToLower()
-            
+                match this with
+                | Running -> "running"
+                | Paused -> "paused"
+
 [<RequireQualifiedAccess>]
 module AnimationClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay

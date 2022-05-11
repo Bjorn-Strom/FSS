@@ -13,21 +13,21 @@ open Store
 let nunito =
     fontFace
         "Nunito"
-        [ FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Nunito-Regular.ttf"
+        [ FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/fonts/Nunito-Regular.ttf"
           FontFace.FontDisplay.swap ]
 
 let raleway =
     fontFace
         "Raleway"
         [ FontFace.Src.truetype
-            "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/Raleway-Regular.ttf"
+            "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/fonts/Raleway-Regular.ttf"
           FontFace.FontDisplay.swap ]
 
 let grapeNuts =
     fontFace
         "GrapeNuts"
         [ FontFace.Src.truetype
-            "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/dist/fonts/GrapeNuts-Regular.ttf"
+            "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/fonts/GrapeNuts-Regular.ttf"
           FontFace.FontDisplay.swap ]
 
 let headingFont = FontFamily.value nunito
@@ -78,7 +78,7 @@ let mediaQueries: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/MediaQueries.fs"
 
 let globalStyles: JS.Promise<unit -> ReactElement> =
-    JsInterop.importDynamic "./Pages/Global.fs"
+    JsInterop.importDynamic "./Pages/GlobalStyles.fs"
 
 let counters: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/Counters.fs"

@@ -12,13 +12,23 @@ module Table =
         | TopOutside
         | BottomOutside
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Top -> "top"
+                | Bottom -> "bottom"
+                | Left -> "left"
+                | Right -> "right"
+                | TopOutside -> "top-outside"
+                | BottomOutside -> "bottom-outside"
 
     type EmptyCells =
         | Show
         | Hide
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Show -> "show"
+                | Hide -> "hide"
 
     type Layout =
         | Fixed

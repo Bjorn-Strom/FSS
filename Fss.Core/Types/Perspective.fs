@@ -8,7 +8,10 @@ module Perspective =
         | Hidden
         | Visible
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Hidden -> "hidden"
+                | Visible -> "visible"
 
 [<RequireQualifiedAccess>]
 module PerspectiveClasses =

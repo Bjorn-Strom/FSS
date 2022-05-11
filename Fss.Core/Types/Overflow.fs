@@ -10,13 +10,21 @@ module Overflow =
         | Clip
         | Scroll
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Visible -> "visible"
+                | Hidden -> "hidden"
+                | Clip -> "clip"
+                | Scroll -> "scroll"
 
     type Wrap =
         | BreakWord
         | Anywhere
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | BreakWord -> "break-word"
+                | Anywhere -> "anywhere"
 
 [<RequireQualifiedAccess>]
 module OverflowClasses =

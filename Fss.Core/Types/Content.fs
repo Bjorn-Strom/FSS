@@ -1,6 +1,8 @@
 namespace Fss
 namespace Fss.Types
 
+open Fss.Types
+
 [<RequireQualifiedAccess>]
 module Content =
     type Content =
@@ -8,9 +10,13 @@ module Content =
         | CloseQuote
         | NoOpenQuote
         | NoCloseQuote
-        | Counter of Property.CounterProperty
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() = 
+                match this with
+                | OpenQuote -> "open-quote"
+                | CloseQuote -> "close-quote"
+                | NoOpenQuote -> "no-open-quote"
+                | NoCloseQuote -> "no-close-quote"
 
 [<RequireQualifiedAccess>]
 module ContentClasses =

@@ -9,13 +9,20 @@ module Visibility =
         | Hidden
         | Collapse
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Visible -> "visible"
+                | Hidden -> "hidden"
+                | Collapse -> "collapse"
 
     type BackfaceVisibility =
         | Visible
         | Hidden
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Visible -> "visible"
+                | Hidden -> "hidden"
 
 [<RequireQualifiedAccess>]
 module VisibilityClasses =

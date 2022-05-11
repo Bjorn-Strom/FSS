@@ -18,7 +18,20 @@ module Mask =
         | Content
         | Text
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | ContentBox -> "content-box"
+                | PaddingBox -> "padding-box"
+                | BorderBox -> "border-box"
+                | MarginBox -> "margin-box"
+                | FillBox -> "fill-box"
+                | StrokeBox -> "stroke-box"
+                | ViewBox -> "view-box"
+                | NoClip -> "no-clip"
+                | Border -> "border"
+                | Padding -> "padding"
+                | Content -> "content"
+                | Text -> "text"
 
     type Composite =
         | Add
@@ -26,14 +39,23 @@ module Mask =
         | Intersect
         | Exclude
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Add -> "add" 
+                | Subtract -> "subtract"
+                | Intersect -> "intersect"
+                | Exclude -> "exclude"
 
     type Mode =
         | Alpha
         | Luminance
         | MatchSource
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Alpha -> "alpha"
+                | Luminance -> "luminance"
+                | MatchSource -> "match-source"
 
     type Origin =
         | ContentBox
@@ -47,7 +69,18 @@ module Mask =
         | Padding
         | Border
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | ContentBox -> "content-box"
+                | PaddingBox -> "padding-box"
+                | BorderBox -> "border-box"
+                | MarginBox -> "margin-box"
+                | FillBox -> "fill-box"
+                | StrokeBox -> "stroke-box"
+                | ViewBox -> "view-box"
+                | Content -> "content"
+                | Padding -> "padding"
+                | Border -> "border"
 
     type Repeat =
         | RepeatX
@@ -57,13 +90,23 @@ module Mask =
         | Round
         | NoRepeat
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | RepeatX -> "repeat-x"
+                | RepeatY -> "repeat-y"
+                | Repeat -> "repeat"
+                | Space -> "space"
+                | Round -> "round"
+                | NoRepeat -> "no-repeat"
 
     type Size =
         | Contain
         | Cover
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Contain -> "contain"
+                | Cover -> "cover"
 
 [<RequireQualifiedAccess>]
 module MaskClasses =

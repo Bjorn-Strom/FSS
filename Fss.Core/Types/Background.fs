@@ -10,14 +10,23 @@ module Background =
         | ContentBox
         | Text
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | BorderBox -> "border-box"
+                | PaddingBox -> "padding-box"
+                | ContentBox -> "content-box"
+                | Text -> "text"
 
     type Origin =
         | BorderBox
         | PaddingBox
         | ContentBox
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | BorderBox -> "border-box"
+                | PaddingBox -> "padding-box"
+                | ContentBox -> "content-box"
 
     type Repeat =
         | RepeatX
@@ -27,20 +36,34 @@ module Background =
         | Round
         | NoRepeat
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | RepeatX -> "repeat-x"
+                | RepeatY -> "repeat-y"
+                | Repeat -> "repeat"
+                | Space -> "space"
+                | Round -> "round"
+                | NoRepeat -> "no-repeat"
 
     type Size =
         | Cover
         | Contain
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Cover -> "cover"
+                | Contain -> "contain"
 
     type Attachment =
         | Scroll
         | Fixed
         | Local
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Scroll -> "scroll"
+                | Fixed -> "fixed"
+                | Local -> "local"
 
     type Position =
         | Top
@@ -49,7 +72,13 @@ module Background =
         | Right
         | Center
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Top -> "top"
+                | Bottom -> "bottom"
+                | Left -> "left"
+                | Right -> "right"
+                | Center -> "center"
 
     type BlendMode =
         | Multiply
@@ -68,7 +97,23 @@ module Background =
         | Color
         | Luminosity
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Multiply -> "multiply"
+                | Screen -> "screen"
+                | Overlay -> "overlay"
+                | Darken -> "darken"
+                | Lighten -> "lighten"
+                | ColorDodge -> "color-dodge"
+                | ColorBurn -> "color-burn"
+                | HardLight -> "hard-light"
+                | SoftLight -> "soft-light"
+                | Difference -> "difference"
+                | Exclusion -> "exclusion"
+                | Hue -> "hue"
+                | Saturation -> "saturation"
+                | Color -> "color"
+                | Luminosity -> "luminosity"
 
     type Isolation =
         | Isolate
@@ -79,7 +124,10 @@ module Background =
         | Slice
         | Clone
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Slice -> "slice"
+                | Clone -> "clone"
 
 [<RequireQualifiedAccess>]
 module BackgroundClasses =

@@ -82,13 +82,22 @@ module Transform =
         | Bottom
         | Center
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Top -> "top"
+                | Left -> "left"
+                | Right -> "right"
+                | Bottom -> "bottom"
+                | Center -> "center"
 
     type Style =
         | Flat
         | Preserve3d
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Flat -> "flat"
+                | Preserve3d -> "preserve3d"
 
 [<RequireQualifiedAccess>]
 module TransformClasses =

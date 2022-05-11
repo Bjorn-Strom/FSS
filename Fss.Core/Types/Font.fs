@@ -16,13 +16,27 @@ module Font =
         | Smaller
         | Larger
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | XxSmall -> "xx-small"
+                | XSmall -> "x-small"
+                | Small -> "small"
+                | Medium -> "medium"
+                | Large -> "large"
+                | XLarge -> "x-large"
+                | XxLarge -> "xx-large"
+                | XxxLarge -> "xxx-large"
+                | Smaller -> "smaller"
+                | Larger -> "larger"
 
     type Style =
         | Italic
         | Oblique
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Italic -> "italic"
+                | Oblique -> "oblique"
 
     type Stretch =
         | SemiCondensed
@@ -34,14 +48,27 @@ module Font =
         | ExtraExpanded
         | UltraExpanded
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with                
+                | SemiCondensed -> "semi-condensed"
+                | Condensed -> "condensed"
+                | ExtraCondensed -> "extra-condensed"
+                | UltraCondensed -> "ultra-condensed"
+                | SemiExpanded -> "semi-expanded"
+                | Expanded -> "expanded"
+                | ExtraExpanded -> "extra-expanded"
+                | UltraExpanded -> "ultra-expanded"
 
     type Weight =
         | Bold
         | Lighter
         | Bolder
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Bold -> "bold"
+                | Lighter -> "lighter"
+                | Bolder -> "bolder"
 
     type SettingSwitch =
         | On
@@ -75,7 +102,34 @@ module Font =
         | Mark
         | Mkmk
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Liga -> "liga"
+                | Dlig -> "dlig"
+                | Onum -> "onum"
+                | Lnum -> "lnum"
+                | Tnum -> "tnum"
+                | Zero -> "zero"
+                | Frac -> "frac"
+                | Sups -> "sups"
+                | Subs -> "subs"
+                | Smcp -> "smcp"
+                | C2sc -> "c2sc"
+                | Case -> "case"
+                | Hlig -> "hlig"
+                | Calt -> "calt"
+                | Swsh -> "swsh"
+                | Hist -> "hist"
+                | Ss -> "ss"
+                | Kern -> "kern"
+                | Locl -> "locl"
+                | Rlig -> "rlig"
+                | Medi -> "medi"
+                | Init -> "init"
+                | Isol -> "isol"
+                | Fina -> "fina"
+                | Mark -> "mark"
+                | Mkmk -> "mkmk"
 
     type VariantNumeric =
         | Ordinal
@@ -87,7 +141,16 @@ module Font =
         | DiagonalFractions
         | StackedFractions
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Ordinal -> "ordinal"
+                | SlashedZero -> "slashed-zero"
+                | LiningNums -> "lining-nums"
+                | OldstyleNums -> "oldstyle-nums"
+                | ProportionalNums -> "proportional-nums"
+                | TabularNums -> "tabular-nums"
+                | DiagonalFractions -> "diagonal-fractions"
+                | StackedFractions -> "stacked-fractions"
 
     type VariantCaps =
         | SmallCaps
@@ -97,7 +160,14 @@ module Font =
         | Unicase
         | TitlingCaps
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | SmallCaps -> "small-caps"
+                | AllSmallCaps -> "all-small-caps"
+                | PetiteCaps -> "petite-caps"
+                | AllPetiteCaps -> "all-petite-caps"
+                | Unicase -> "unicase"
+                | TitlingCaps -> "titling-caps"
 
     type VariantEastAsian =
         | Ruby
@@ -110,8 +180,17 @@ module Font =
         | FullWidth
         | ProportionalWidth
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
-
+            member this.StringifyCss() =
+                match this with
+                | Ruby -> "ruby"
+                | Jis78 -> "jis78"
+                | Jis83 -> "jis83"
+                | Jis90 -> "jis90"
+                | Jis04 -> "jis04"
+                | Simplified -> "simplified"
+                | Traditional -> "traditional"
+                | FullWidth -> "full-width"
+                | ProportionalWidth -> "proportional-width"
 
     type VariantLigature =
         | CommonLigatures
@@ -123,7 +202,16 @@ module Font =
         | Contextual
         | NoContextual
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | CommonLigatures -> "common-ligatures"
+                | NoCommonLigatures -> "no-common-ligatures"
+                | DiscretionaryLigatures -> "discretionary-ligatures"
+                | NoDiscretionaryLigatures -> "no-discretionary-ligatures"
+                | HistoricalLigatures -> "historical-ligatures"
+                | NoHistoricalLigatures -> "no-historical-ligatures"
+                | Contextual -> "contextual"
+                | NoContextual -> "no-contextual"
 
     type Name = Name of string
 
@@ -133,27 +221,43 @@ module Font =
         | Monospace
         | Cursive
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Serif -> "serif"
+                | SansSerif -> "sans-serif"
+                | Monospace -> "monospace"
+                | Cursive -> "cursive"
 
     type LineBreak =
         | Loose
         | Strict
         | Anywhere
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() = 
+                match this with
+                | Loose -> "loose"
+                | Strict -> "strict"
+                | Anywhere -> "anywhere"
 
     type Synthesis =
         | Weight
         | Style
         | SmallCaps
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | Weight -> "weight"
+                | Style -> "style"
+                | SmallCaps -> "small-caps"
 
     type VariantPosition =
         | Sub
         | Super
         interface ICssValue with
-            member this.StringifyCss() = this.ToString().ToLower()
+            member this.StringifyCss() =
+                match this with
+                | Sub -> "sub"
+                | Super -> "super"
 
 [<RequireQualifiedAccess>]
 module FontClasses =

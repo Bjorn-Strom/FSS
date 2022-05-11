@@ -9,7 +9,11 @@ module Word =
         | BreakAll
         | KeepAll
         interface ICssValue with
-            member this.StringifyCss() = Fss.Utilities.Helpers.toKebabCase this
+            member this.StringifyCss() =
+                match this with
+                | WordBreak -> "word-break"
+                | BreakAll -> "break-all"
+                | KeepAll -> "keep-all"
 
 [<RequireQualifiedAccess>]
 module WordClasses =
