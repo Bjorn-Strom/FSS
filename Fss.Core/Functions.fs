@@ -1,5 +1,6 @@
 namespace Fss
 
+open System.Text
 open Fss
 open Fss.Types
 open Fss.Utilities
@@ -188,19 +189,6 @@ module rec Functions =
             
         arrangePropertyLists properties None []
         
-    (*
-    using (var fs = System.IO.File.Create(filename))
-    using (var bw = new System.IO.BinaryWriter(fs))
-    {
-        for (int i = 0; i < data.Length; i++)
-        {
-            bw.Write(data[i].X);
-            bw.Write(data[i].Y);
-    *)
-        
-            
-        
-
     // Creates all CSS
     // Creates all different types of CSS, creates and adds the classname
     // Combines them all

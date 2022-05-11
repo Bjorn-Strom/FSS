@@ -2,6 +2,8 @@ namespace Fss
 
 namespace Fss.Types
 
+open System.Text
+
 [<AutoOpen>]
 module Color =
     type Color =
@@ -323,7 +325,9 @@ module colorHelpers =
         if value.StartsWith "#" then
             value
         else
-            $"#{value}"
+            let sb = StringBuilder()
+            sb.AppendFormat("#{0}", value) |> ignore
+            sb.ToString()
         |> Hex
 
 [<RequireQualifiedAccess>]
