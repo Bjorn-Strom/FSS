@@ -17,6 +17,10 @@ module DisplayTests =
                     [ Display.inlineBlock]
                     "{ display: inline-block; }"
                 testCase
+                    "Display inline-grid"
+                    [ Display.inlineGrid]
+                    "{ display: inline-grid; }"
+                testCase
                     "Display block"
                     [ Display.block]
                     "{ display: block; }"

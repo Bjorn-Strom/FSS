@@ -10,3 +10,4 @@ module PseudoElement =
     let FirstLine rules = PseudoElementClasses.PseudoElement.firstLine rules
     let Selection rules = PseudoElementClasses.PseudoElement.selection rules
     let Marker rules = PseudoElementClasses.PseudoElement.marker rules
+    let Placeholder rules = PseudoElementClasses.PseudoElement.placeholder rules

@@ -16,3 +16,5 @@ module PseudoElementClasses =
         static member selection(rules: Rule list) = (Property.Selection, Pseudo.PseudoElementMaster rules) |> Rule
         /// Matches marker box of a list item
         static member marker(rules: Rule list) = (Property.Marker, Pseudo.PseudoElementMaster rules) |> Rule
+        /// Represents the placeholder text in an input or textarea element.
+        static member placeholder(rules: Rule list) = (Property.Placeholder, Pseudo.PseudoElementMaster rules) |> Rule

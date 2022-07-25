@@ -4,7 +4,7 @@ open Fet
 open Utils
 open Fss
 
-module PsuedoTests =
+module PseudoTests =
      let styles = [ Color.red ]
      let createPseudoTest (ruleList: Fss.Types.Rule list) =
          let className, styles = createFss ruleList
@@ -13,7 +13,7 @@ module PsuedoTests =
          className, $"{className} {styles}"
          
      let tests =
-        testList "Psuedo"
+        testList "Pseudo"
             [
                 let classname, actual = createPseudoTest [ Active styles ]
                 testEqual
@@ -143,6 +143,11 @@ module PsuedoTests =
                 let classname, actual = createPseudoTest [ NthLastOfType "4" styles ]
                 testEqual
                     "Nth last of type 4"
+                    actual
+                    $"{classname} {{ color: red; }}"
+                let classname, actual = createPseudoTest [ Placeholder styles ]
+                testEqual
+                    "Placeholder"
                     actual
                     $"{classname} {{ color: red; }}"
             ]
