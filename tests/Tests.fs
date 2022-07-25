@@ -72,7 +72,7 @@ module Tests =
                 AnimationTests.tests
                 FontTests.tests
                 TransformTests.tests
-                PsuedoTests.tests
+                PseudoTests.tests
                 FontFaceTests.tests
                 CompositeTests.tests
                 MediaTests.tests
