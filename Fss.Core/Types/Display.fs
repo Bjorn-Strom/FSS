@@ -7,6 +7,7 @@ module Display =
     type Display =
         | Inline
         | InlineBlock
+        | InlineGrid
         | Block
         | RunIn
         | Flex
@@ -26,6 +27,7 @@ module Display =
                 match this with
                 | Inline -> "inline"
                 | InlineBlock -> "inline-block"
+                | InlineGrid -> "inline-grid"
                 | Block -> "block"
                 | RunIn -> "run-in"
                 | Flex -> "flex"
@@ -51,6 +53,8 @@ module DisplayClasses =
         member this.inline' = (property, Display.Inline) |> Rule
         /// Inline-Block does not create line breaks, will also respect width and height settings
         member this.inlineBlock = (property, Display.InlineBlock) |> Rule
+        /// Makes the element behaves like an inline element and lays out its content according to the grid model
+        member this.inlineGrid = (property, Display.InlineGrid) |> Rule
         /// Block elements start on a new line and takes up as much width as they can
         member this.block = (property, Display.Block) |> Rule
         /// TODO: Find out what this does
