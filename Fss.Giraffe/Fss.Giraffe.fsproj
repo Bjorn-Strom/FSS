@@ -6,11 +6,11 @@
         <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
         <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;giraffe;viewengine;html</PackageTags>
         <Authors>Bjørn-Ivar Strøm</Authors>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
         <TargetFramework>netstandard2.0</TargetFramework>
         <OutputType>Library</OutputType>
-        <PackageReleaseNotes>Fixes issue in final CSS ordering.</PackageReleaseNotes>
+        <PackageReleaseNotes>Add display inline-grid and ::placeholder pseudo-element.</PackageReleaseNotes>
         <RootNamespace>Fss.Fable</RootNamespace>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageId>Fss-lib.Giraffe</PackageId>
@@ -22,6 +22,9 @@
 
     <ItemGroup>
       <PackageReference Include="Giraffe.ViewEngine" Version="1.4.0" />
-      <PackageReference Include="Fss-lib.Core" Version="1.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Fss.Core\Fss.Core.fsproj" />
     </ItemGroup>
 </Project>

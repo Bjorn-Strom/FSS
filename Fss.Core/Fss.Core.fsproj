@@ -6,11 +6,11 @@
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <PackageReleaseNotes>Fixes issue in final CSS ordering.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add display inline-grid and ::placeholder pseudo-element.</PackageReleaseNotes>
     <RootNamespace>Fss</RootNamespace>
     <PackageId>Fss-lib.Core</PackageId>
   </PropertyGroup>
