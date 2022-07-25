@@ -1,6 +1,8 @@
 namespace Fss
 namespace Fss.Types
 
+open Fss.Types
+
 type ICssValue =
     interface 
         abstract member StringifyCss : unit -> string
@@ -462,6 +464,7 @@ module Property =
         | Before
         | FirstLetter
         | FirstLine
+        | Placeholder
         | Selection
         | Marker
 
@@ -865,6 +868,7 @@ module Property =
                 | Before -> "before"
                 | FirstLetter -> "first-letter"
                 | FirstLine -> "first-line"
+                | Placeholder -> "placeholder"
                 | Selection -> "selection"
                 | Marker -> "marker"
 
