@@ -125,7 +125,7 @@ module CompositeTests =
                    "Important"
                    [ important Color.red ]
                    "{ color: red !important; }"
-               let _, actual = createFssWithClassname "myOwnClassName" [ BorderColor.red; BackgroundColor.green ]
+               let _, actual = createFssWithClassname2 "myOwnClassName" [ BorderColor.red; BackgroundColor.green ]
                testEqual
                    "Test creating css with custom classname"
                    $"{fst (List.head actual)} {snd (List.head actual)}"

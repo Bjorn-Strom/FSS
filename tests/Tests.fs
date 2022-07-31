@@ -74,7 +74,7 @@ module Tests =
                 TransformTests.tests
                 PseudoTests.tests
                 FontFaceTests.tests
-                OrderingTests.tests
+//                OrderingTests.tests
 //                MediaTests.tests
 //                CompositeTests.tests
 //                SelectorTests.tests
