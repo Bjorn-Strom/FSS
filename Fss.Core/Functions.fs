@@ -132,13 +132,13 @@ module Functions =
     // #####
 
     let private addBrackets string =
-            $"{{ {string} }}"
+        $"{{ {string} }}"
 
     /// Creates CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createFss2 (rules: Rule list): ClassName * (ClassName * Css) list =
+    let createFss (rules: Rule list): ClassName * (ClassName * Css) list =
         createFssInternal None rules
 
     /// Creates CSS with a specific classname based on a list of CSS rules
@@ -146,7 +146,7 @@ module Functions =
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createFssWithClassname2 name (rules: Rule list): ClassName * (ClassName * Css) list =
+    let createFssWithClassname name (rules: Rule list): ClassName * (ClassName * Css) list =
         createFssInternal (Some name) rules
 
     /// Creates global CSS based on a list of CSS rules
@@ -247,10 +247,10 @@ module Functions =
                 (fun acc x ->
                     match x with
                     | Frame (n, rules) ->
-                        let _, rules = List.head <| snd (createFss2 rules)
+                        let _, rules = List.head <| snd (createFss rules)
                         $"{acc} {n}%% {rules}"
                     | Frames (ns, rules) ->
-                        let _, rules = List.head <| snd (createFss2 rules)
+                        let _, rules = List.head <| snd (createFss rules)
                         let frameNumbers = framePositionToString ns
                         $"{acc} {frameNumbers} {rules}")
                 ""

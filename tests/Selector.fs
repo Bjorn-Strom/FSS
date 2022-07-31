@@ -6,7 +6,7 @@ open Fss
 
 module SelectorTests =
     let createSelector (ruleList: Fss.Types.Rule list) =
-        let className, fss = (createFss2 ruleList)
+        let className, fss = (createFss ruleList)
         let selector, css =
             fss
             |> List.rev
@@ -88,11 +88,11 @@ module SelectorTests =
                    $".{className} * > * + * ~ a:visited {{ color: white; }}"
 
                let className, actual =
-                  createFss2 [ !+ Fss.Types.Html.All [ BorderColor.green
-                                                       Hover [ BorderColor.red ]
-                                                       Media.query
-                                                          [ Fss.Types.Media.MaxHeight (em 2) ]
-                                                          [ Content.value "Query in pseudo" ]
+                  createFss [ !+ Fss.Types.Html.All [ BorderColor.green
+                                                      Hover [ BorderColor.red ]
+                                                      Media.query
+                                                         [ Fss.Types.Media.MaxHeight (em 2) ]
+                                                         [ Content.value "Query in pseudo" ]
                                       ]]
 
                let actual =

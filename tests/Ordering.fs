@@ -7,7 +7,7 @@ open Fss.Types
 
 module OrderingTests =
     let createOrderTest name rules =
-        createFssWithClassname2 name rules
+        createFssWithClassname name rules
         |> snd
         |> List.map (fun (x, y) ->
             $"{x.ToString()} {y.ToString()}")

@@ -26,13 +26,13 @@ module Utils =
             Expect.equal actual correct
 
     let testCase (testName: string) (ruleList: Rule list) (correct: string) =
-        let _, actual =  List.head <| snd (createFss2 ruleList)
+        let _, actual =  List.head <| snd (createFss ruleList)
         test testName <| fun _ ->
             Expect.equal actual correct
 
     let testSelectorCase (testName: string) (ruleList: Rule list) (correct: string) =
         let className, css =
-            snd (createFss2 ruleList)
+            snd (createFss ruleList)
             |> List.rev
             |> List.head
         test testName <| fun _ ->
@@ -40,7 +40,7 @@ module Utils =
 
     let testPseudoCase (testName: string) (ruleList: Rule list) (correct: string * string) =
         let actual =
-            snd (createFss2 ruleList)
+            snd (createFss ruleList)
             |> List.tail
             |> List.head
 

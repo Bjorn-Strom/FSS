@@ -19,38 +19,38 @@ module CompositeTests =
               FontFace.FontStyle.normal ]
 
     let counterStyle =
-       createFss2 [ ListStyleType.value (fst counter)
-                    FontFamily.value (fst font)
-                    ! Fss.Types.Html.Li [ After [ Content.value "."  ]]
-                    ! Fss.Types.Html.Li [
-                        BackgroundColor.aliceBlue
-                        Hover [ BackgroundColor.orangeRed ]
-                    ]
-                    Label "counter"
-                    ]
+       createFss [ ListStyleType.value (fst counter)
+                   FontFamily.value (fst font)
+                   ! Fss.Types.Html.Li [ After [ Content.value "."  ]]
+                   ! Fss.Types.Html.Li [
+                       BackgroundColor.aliceBlue
+                       Hover [ BackgroundColor.orangeRed ]
+                   ]
+                   Label "counter"
+                   ]
 
     let container =
-       createFss2 [ Display.flex
-                    FlexDirection.column
-                    AlignItems.center
-                    JustifyContent.center
-                    Label "container" ]
+       createFss [ Display.flex
+                   FlexDirection.column
+                   AlignItems.center
+                   JustifyContent.center
+                   Label "container" ]
 
     let spinimation =
         createAnimation [ frame 0 [ Custom "transform" "rotate(0deg)" ]
                           frame 100 [ Custom "transform" "rotate(360deg)" ] ]
 
     let title =
-       createFss2 [ AnimationName.value (fst spinimation)
-                    AnimationDuration.value (sec 1)
-                    AnimationIterationCount.infinite
-                    FontFamily.value "DroidSerif"
-                    Hover [ AnimationDuration.value (ms 500) ]
-                    Media.query [ Fss.Types.Media.MaxWidth(px 600) ] [
-                        BackgroundColor.hex "87ceeb"
-                    ]
-                    Label "title"
-                  ]
+       createFss [ AnimationName.value (fst spinimation)
+                   AnimationDuration.value (sec 1)
+                   AnimationIterationCount.infinite
+                   FontFamily.value "DroidSerif"
+                   Hover [ AnimationDuration.value (ms 500) ]
+                   Media.query [ Fss.Types.Media.MaxWidth(px 600) ] [
+                       BackgroundColor.hex "87ceeb"
+                   ]
+                   Label "title"
+                 ]
     let composition =
         ([$"@counter-style {fst counter} {snd counter}"
           $"@font-face {snd font}"
@@ -125,7 +125,7 @@ module CompositeTests =
                    "Important"
                    [ important Color.red ]
                    "{ color: red !important; }"
-               let _, actual = createFssWithClassname2 "myOwnClassName" [ BorderColor.red; BackgroundColor.green ]
+               let _, actual = createFssWithClassname "myOwnClassName" [ BorderColor.red; BackgroundColor.green ]
                testEqual
                    "Test creating css with custom classname"
                    $"{fst (List.head actual)} {snd (List.head actual)}"

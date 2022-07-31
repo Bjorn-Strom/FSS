@@ -6,7 +6,7 @@ open Utils
 
 module MediaTests =
     let createMediaTest (featureList: Fss.Types.Media.Feature list) (ruleList: Fss.Types.Rule list) =
-        let className, styles = createFss2 [
+        let className, styles = createFss [
             Media.query
                 featureList
                 ruleList
@@ -15,7 +15,7 @@ module MediaTests =
         className, $"{media}{styles}"
 
     let createMediaForTest (device: Fss.Types.Media.Device) (featureList: Fss.Types.Media.Feature list) (ruleList: Fss.Types.Rule list) =
-        let className, styles = createFss2 [
+        let className, styles = createFss [
             Media.queryFor
                 device
                 featureList
