@@ -214,12 +214,12 @@ module Media =
             | Scripting scripting -> $"scripting: {scripting.Stringify()}"
             | Update update -> $"update: {update.Stringify()}"
 
-    type MediaQuery =
+    type MediaQueryMaster =
         | MediaQuery of Feature list * Rule list
         | MediaQueryFor of Device * Feature list * Rule list
         interface ICssValue with
             member this.StringifyCss() = ""
-            
+
 
 [<RequireQualifiedAccess>]
 module MediaClasses =
@@ -227,7 +227,7 @@ module MediaClasses =
         member this.query (features: Media.Feature list) (rules: Rule list) =
             (Property.Media, Media.MediaQuery(features, rules))
             |> Rule
-            
+
         member this.queryFor (device: Media.Device) (features: Media.Feature list)  (rules: Rule list) =
             (Property.Media, Media.MediaQueryFor(device, features, rules))
             |> Rule

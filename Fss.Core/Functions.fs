@@ -7,11 +7,129 @@ open Fss.Utilities
 
 [<AutoOpen>]
 module rec Functions =
+    // TODO: Trenger properties for classname og ID
+    type Selector =
+    | ClassName2 of string
+    | Id2 of string
+    | PseudoClass of Property.CssProperty
+    | PseudoElement of Property.CssProperty
+    | Combinator of Property.CssProperty
+    | Media of Media.Feature list
+    | MediaFor of Property.CssProperty
+
+    and CssScope = Selector * CssItem list
+    and CssItem =
+        | Rule2 of Rule
+        | CssScope of CssScope
+
+    let generateCssScope (name: string option) (rules: Rule list) =
+        // TODO: Her vil vi sende typene gjennom
+        let rec generator (rules_to_generate: Rule list): CssItem list =
+            rules_to_generate
+            |> List.map (fun x ->
+                    let selector, value = x
+                    match value with
+                    | :? PseudoMaster as p ->
+                        match p with
+                        | PseudoClassMaster p ->
+                            let rules = generator p
+                            CssScope (PseudoClass selector, rules)
+                        | PseudoElementMaster p ->
+                            let rules = generator p
+                            CssScope (PseudoElement selector, rules)
+                    | :? CombinatorMaster as c ->
+                        match c with
+                        | CombinatorMaster c ->
+                            let rules = generator c
+                            CssScope (Selector.Combinator selector, rules )
+                    | :? Media.MediaQueryMaster as m ->
+                        match m with
+                        | Media.MediaQuery (features, rules) ->
+                            let rules = generator rules
+                            CssScope (Selector.Media features, rules)
+                    | _ -> Rule2 x
+                )
+        let label =
+            rules
+            |> List.tryFind isLabel
+            |> function
+            | Some (_, l) -> stringifyICssValue l
+            | None -> ""
+        let rules =
+            rules
+            |> List.filter (isLabel >> not)
+        let generatedItems = generator rules
+        let className =
+            match name with
+            | Some n -> n
+            | _ ->
+            let fullCssString =
+                rules
+                |> List.map (fun (x, y) -> $"{stringifyICssValue x}-{stringifyICssValue y}")
+                |> String.concat ";"
+
+            $"css{FNV_1A.hash fullCssString}{label}"
+        className, (ClassName2 className, generatedItems)
+
+    let mediaFeaturesToCss features =
+        features
+        |> List.map (fun x -> $"({x.ToString()})")
+        |> String.concat " and "
+
+    let createCssFromScope selectorScope (scope: CssScope): list<string * string list> =
+        let currentSelector, cssItems = scope
+        let selector =
+            match currentSelector with
+            | ClassName2 currentSelector -> $"{selectorScope}.{currentSelector}"
+            | PseudoClass currentSelector -> $"{selectorScope}:{stringifyICssValue currentSelector}"
+            | PseudoElement currentSelector -> $"{selectorScope}::{stringifyICssValue currentSelector}"
+            | Selector.Combinator currentSelector -> $"{selectorScope}{stringifyICssValue currentSelector}"
+            | Selector.Media features -> $"@media {mediaFeaturesToCss features}{{ { selectorScope}"
+
+        cssItems
+        |> List.collect (fun item ->
+            match item with
+            | Rule2 (name, value) -> [ selector, [$"{stringifyICssValue name}: {stringifyICssValue value};"] ]
+            | CssScope scope -> createCssFromScope selector scope
+        )
+        // Todo: Blir dette for treigt?
+        // TODO: Sjekke om dette er nødvendig?
+        |> List.fold (fun acc (key, value) ->
+            match acc with
+            | [] -> [key, value]
+            | (key2, value2) :: rest ->
+                if key = key2 then
+                    (key, (value2 @ value)) :: rest
+                else
+                    (key, value) :: acc
+        ) []
+        |> List.rev
+
+    let createFss2 (rules: Rule list): ClassName * (ClassName * Css) list =
+        let classname, cssScope = generateCssScope None rules
+        let css = createCssFromScope "" cssScope
+        let css = List.map (fun (x, y) -> x, $"""{{ {String.concat "" y} }}""") css
+        classname, css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // #####
     let private isSecondary (_: Property.CssProperty, value: ICssValue) =
         match value with
-            | :? Pseudo as _ -> true
+            | :? PseudoMaster as _ -> true
             | :? CombinatorMaster as _ -> true
-            | :? Media.MediaQuery as _ -> true
+            | :? Media.MediaQueryMaster as _ -> true
             | _ -> false
     let private isCombinator (_, value: ICssValue) =
         match value with
@@ -19,11 +137,11 @@ module rec Functions =
         | _ -> false
     let private isMedia (_, value: ICssValue) =
         match value with
-        | :? Media.MediaQuery as _ -> true
+        | :? Media.MediaQueryMaster as _ -> true
         | _ -> false
     let private isPseudo (_, value: ICssValue) =
         match value with
-        | :? Pseudo as _ -> true
+        | :? PseudoMaster as _ -> true
         | _ -> false
     let private isLabel (_, value: ICssValue) =
         match value with
@@ -33,7 +151,7 @@ module rec Functions =
         match value with
         | :? NameLabel as _ -> true
         | _ -> false
-        
+
     let private addBrackets string =
         $"{{ {string} }}"
     let private addClassName className (css: string, value: string) =
@@ -45,45 +163,45 @@ module rec Functions =
             $"@{css}", $"{{ {className}{name} {value[1..].Trim()}"
         else
             $"{className}{css}", value
-        
+
     // Creates a single line of "normal" CSS
     let private createMainCssString (propertyName, propertyValue): string * string =
         stringifyICssValue propertyName, stringifyICssValue propertyValue
-    
+
     // Creates "normal" css, IE not pseudo elements/classes or combinators
     let private createMainCSS (properties: Rule list): Css =
         let cssStrings =
             properties
             |> List.filter (isLabel >> not)
             |> List.map createMainCssString
-        
-        let cssString =         
+
+        let cssString =
             cssStrings
             |> List.map (fun (n, v) -> $"{n}: {v}")
             |> String.concat ";"
             |> sprintf "%s;"
             |> addBrackets
-        
+
         cssString
-        
+
     // Creates a single line of pseudo CSS
     let private createPseudoCssString (propertyName: ICssValue, propertyValue: ICssValue): string * string =
         let colons =
             match propertyValue with
-            | :? Pseudo as p ->
+            | :? PseudoMaster as p ->
                 match p with
                 | PseudoClassMaster _ -> ":"
                 | PseudoElementMaster _ -> "::"
             | _ -> ""
-            
+
         $"{colons}{stringifyICssValue propertyName}", $"{{ {stringifyICssValue propertyValue}; }}"
-        
-    // Creates all pseudo css, 
+
+    // Creates all pseudo css,
     let private createPseudoCss (properties: Rule list): (ClassName * Css) list =
         properties
         |> List.map createPseudoCssString
         |> List.map (fun (name, value) -> $"{name}", $"{value}")
-        
+
     // Creates media CSS. As media queries can contain any type of CSS it calls the createFSS function.
     let private createMediaCssString className (_, propertyValue: ICssValue): string * string =
         let stringifyMedia features rules =
@@ -97,7 +215,7 @@ module rec Functions =
                 |> addBrackets
             features, css
         match propertyValue with
-        | :? Media.MediaQuery as m ->
+        | :? Media.MediaQueryMaster as m ->
             match m with
             | Media.MediaQuery(features, rules ) ->
                 let features, css = stringifyMedia features rules
@@ -112,12 +230,12 @@ module rec Functions =
                         ""
                 $"@media {device} {featureString}", css
         | _ -> "", ""
-        
+
     // Creates all media css
     let createMediaCss className (properties: Rule list): (ClassName * Css) list =
         properties
         |> List.map (fun m -> createMediaCssString className m)
-        
+
     // Creates combinator CSS. As media queries can contain any type of CSS it calls the createFSS function.
     let private createCombinatorCssString (propertyName: ICssValue, propertyValue: ICssValue) =
         match propertyValue with
@@ -128,18 +246,18 @@ module rec Functions =
             css
             |> List.map (fun (x, y) -> $"{stringifyICssValue propertyName}{x}", y)
         | _ -> [ "", "" ]
-        
+
     // Creates all combinator css
     let private createCombinatorCss (properties: Rule list): (ClassName * Css) list =
         properties
         |> List.collect (fun m -> createCombinatorCssString m)
-        
+
     type private PropertyType =
         | Main
         | Pseudo of Property.CssProperty
         | Media of Property.CssProperty
         | Combinator of Property.CssProperty
-        
+
     // This helper function is used to create logical blocks depending on what type of CSS block we are creating.
     // This is used to split the rules into logical blocks, while at the same time keeping ordering intact.
     // Two adjacent identical blocks will be merged, but two blocks separated by another will not
@@ -156,7 +274,7 @@ module rec Functions =
                 currentPropertyTypes
             else
                 let currentProperty = List.head currentProperties
-                
+
                 let newPropertyType =
                     let propertyTypeIdentifier = fst currentProperty
                     if (not (isSecondary currentProperty)) then
@@ -167,7 +285,7 @@ module rec Functions =
                         Media propertyTypeIdentifier, [currentProperty]
                     else
                         Combinator propertyTypeIdentifier, [currentProperty]
-                
+
                 let newPropertyTypes =
                     match previousPropertyType with
                     | Some previousPropertyType ->
@@ -178,17 +296,17 @@ module rec Functions =
                             currentPropertyTypes @ [newPropertyType]
                     | None ->
                         [ newPropertyType ]
-                        
+
                 let previousPropertyType =
                     newPropertyTypes
                     |> List.rev
                     |> List.head
                     |> Some
-                
+
                 arrangePropertyLists (List.tail currentProperties) previousPropertyType newPropertyTypes
-            
+
         arrangePropertyLists properties None []
-        
+
     // Creates all CSS
     // Creates all different types of CSS, creates and adds the classname
     // Combines them all
@@ -201,11 +319,11 @@ module rec Functions =
             |> function
             | Some (_, l) -> stringifyICssValue l
             | None -> ""
-            
+
         let properties =
             properties
             |> List.filter (isLabel >> not)
-            
+
         let className =
             match name with
             | Some n -> n
@@ -214,11 +332,11 @@ module rec Functions =
                     properties
                     |> List.map (fun (x, y) -> $"{stringifyICssValue x}-{stringifyICssValue y}")
                     |> String.concat ";"
-                    
+
                 $".css{FNV_1A.hash fullCssString}{label}"
-            
+
         let addClassName cssPair = addClassName className cssPair
-            
+
         let arrangedCss =
             arrangePropertyLists properties
             |> List.collect (fun (propertyType, rules) ->
@@ -227,20 +345,20 @@ module rec Functions =
                     [ className, rules |> createMainCSS ]
                 | Pseudo _ ->
                     rules |> createPseudoCss |> List.map addClassName
-                | Media _ -> 
+                | Media _ ->
                     rules |> createMediaCss className
                 | Combinator _ ->
                     rules |> createCombinatorCss |> List.map addClassName)
-        
+
         className[1..], arrangedCss
 
     /// Creates CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createFss (properties: Rule list): ClassName * (ClassName * Css) list =
-        createFssInternal None properties
-        
+//    let createFss (properties: Rule list): ClassName * (ClassName * Css) list =
+//        createFssInternal None properties
+
     /// Creates CSS with a specific classname based on a list of CSS rules
     /// WARNING: This function does not create any kind of hash for your classname so use this with care
     /// Returns a tuple containing 2 elements
@@ -248,7 +366,7 @@ module rec Functions =
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
     let createFssWithClassname className (properties: Rule list): ClassName * (ClassName * Css) list =
         createFssInternal (Some className) properties
-    
+
     /// Creates global CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the global classname
@@ -256,12 +374,12 @@ module rec Functions =
     let createGlobal (properties: Rule list): (ClassName * Css) list =
         let _, css = createFssInternal (Some "*") properties
         css
-        
+
     let private stringifyCounterProperty (property: CounterRule) =
         let propertyName, propertyValue = property
 
         $"{stringifyICssValue propertyName}: {propertyValue.StringifyCounter()};"
-           
+
     /// Creates all counter styles and combines them
     let private createCounterStyleInternal (name: string option) (properties: CounterRule list) : string * string =
         // As labels are not real css we filter them out here and use them to change the classname
@@ -271,7 +389,7 @@ module rec Functions =
             |> List.map (fun (_,y) -> y )
             |> List.rev
             |> List.tryHead
-            
+
         let propertyString =
             properties
             |> List.filter (isCounterLabel >> not)
@@ -283,21 +401,21 @@ module rec Functions =
             match label with
             | Some l -> $"counter-{stringifyICounterValue l}"
             | None -> ""
-            
+
         let counterName =
             match name with
             | Some n -> n
             | _ -> $"counter{FNV_1A.hash (propertyString)}{label}"
 
         counterName, addBrackets propertyString
-        
+
     /// Creates the CSS for a counter style based on a list of CounterStyle rules
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the name of the created counter style. This is the value you use in your CSS.
     /// The second element is the generated CSS for the counter.
     let createCounterStyle (properties: CounterRule list): string * string =
         createCounterStyleInternal None properties
-        
+
     /// Creates Css for a counter with a specific name based on a list of CounterStyle rules
     /// WARNING: This function does not create any kind of hash for your classname so use this with care
     /// Returns a tuple containing 2 elements
@@ -305,12 +423,12 @@ module rec Functions =
     /// The second element is the generated CSS for the counter.
     let createCounterStyleWithName className (properties: CounterRule list): string * string =
         createCounterStyleInternal (Some className) properties
-           
+
     let private stringifyFontFaceProperty (property: FontFaceRule) =
         let propertyName, propertyValue = property
 
         $"{stringifyICssValue propertyName}: {propertyValue.StringifyFontFace()};"
-        
+
     /// Creates the CSS for a font face based on a list of FontFace rules
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the name of the created font. This is the value you use in your CSS.
@@ -320,9 +438,9 @@ module rec Functions =
         let properties =
             List.map stringifyFontFaceProperty properties
             |> String.concat ""
-        
+
         name, addBrackets properties
-        
+
     /// Creates the CSS for several font faces based on FontFace rules
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the name of the created font. This is the value you use in your CSS.
@@ -334,23 +452,23 @@ module rec Functions =
                 fontFace
                 |> List.map (fun (_, x) -> x)
                 |> String.concat "\n"
-                
+
         fontName, fontFaceString
-        
+
     let private createAnimationInternal (name: string option) (attributeList: Keyframes list) : string * Css =
         let framePositionToString frames =
             List.map (fun n -> $"{n}%%") frames
             |> String.concat ","
 
-        let animationStyles = 
+        let animationStyles =
             List.fold
                 (fun acc x ->
                     match x with
                     | Frame (n, rules) ->
-                        let _, rules = List.head <| snd (createFss rules)
+                        let _, rules = List.head <| snd (createFss2 rules)
                         $"{acc} {n}%% {rules}"
                     | Frames (ns, rules) ->
-                        let _, rules = List.head <| snd (createFss rules)
+                        let _, rules = List.head <| snd (createFss2 rules)
                         let frameNumbers = framePositionToString ns
                         $"{acc} {frameNumbers} {rules}")
                 ""
@@ -358,14 +476,14 @@ module rec Functions =
         match name with
         | Some name -> name, addBrackets animationStyles
         | _ -> $"animation-{FNV_1A.hash animationStyles}", addBrackets animationStyles
-        
+
     /// Creates the CSS for an animation based on a list of KeyframeAttributes
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the name of the created animation. This is the value you use in your CSS.
     /// The second element is the generated CSS for the animation.
     let createAnimation (attributeList: Keyframes list) : string * Css =
         createAnimationInternal None attributeList
-        
+
     /// Creates the CSS with specific name for an animation based on a list of KeyframeAttributes
     /// WARNING: This function does not create any kind of hash for your classname so use this with care
     /// Returns a tuple containing 2 elements
@@ -386,7 +504,7 @@ module rec Functions =
         |> List.filter snd
         |> List.map fst
         |> String.concat " "
-        
+
     // Color
     let rgb (red: int) (green: int) (blue: int) = Rgb(red, green, blue)
 

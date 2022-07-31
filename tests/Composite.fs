@@ -19,9 +19,9 @@ module CompositeTests =
               FontFace.FontStyle.normal ]
 
     let counterStyle =
-        createFss [ ListStyleType.value (fst counter)
+       createFss2 [ ListStyleType.value (fst counter)
                     FontFamily.value (fst font)
-                    ! Fss.Types.Html.Li [ After [ Content.value "."  ]] 
+                    ! Fss.Types.Html.Li [ After [ Content.value "."  ]]
                     ! Fss.Types.Html.Li [
                         BackgroundColor.aliceBlue
                         Hover [ BackgroundColor.orangeRed ]
@@ -30,7 +30,7 @@ module CompositeTests =
                     ]
 
     let container =
-        createFss [ Display.flex
+       createFss2 [ Display.flex
                     FlexDirection.column
                     AlignItems.center
                     JustifyContent.center
@@ -41,7 +41,7 @@ module CompositeTests =
                           frame 100 [ Custom "transform" "rotate(360deg)" ] ]
 
     let title =
-        createFss [ AnimationName.value (fst spinimation)
+       createFss2 [ AnimationName.value (fst spinimation)
                     AnimationDuration.value (sec 1)
                     AnimationIterationCount.infinite
                     FontFamily.value "DroidSerif"
@@ -60,7 +60,7 @@ module CompositeTests =
           yield! List.map (fun x -> $"{fst x} {snd x}") (snd title)
         ]
         |> String.concat "").Replace(" ", "").Replace("\n", "")
-        
+
     let correct = ([
         $"@counter-style {fst counter} {{"
         "system: cyclic;"
@@ -115,7 +115,7 @@ module CompositeTests =
         $"{fst <| List.head (snd title)} {{"
         "background-color: #87ceeb;"
         "}}" ] |> String.concat "").Replace(" ", "").Replace("\n", "")
-        
+
     let tests =
        testList "Composite"
            [

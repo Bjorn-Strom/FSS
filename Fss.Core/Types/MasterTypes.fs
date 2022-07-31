@@ -2,7 +2,7 @@ namespace Fss
 namespace Fss.Types
 
 type ICssValue =
-    interface 
+    interface
         abstract member StringifyCss : unit -> string
     end
 
@@ -15,7 +15,7 @@ type IFontFaceValue =
     interface
         abstract member StringifyFontFace : unit -> string
     end
-    
+
 [<AutoOpen>]
 module internal MasterTypeHelpers =
     let internal cache = System.Collections.Generic.Dictionary<ICssValue, string>()
@@ -77,7 +77,7 @@ module Property =
         | AdditiveSymbols
         | SpeakAs
         // Home made
-        | NameLabel 
+        | NameLabel
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -494,7 +494,7 @@ module Property =
         | StrokeWidth
 
         // Home made
-        | NameLabel 
+        | NameLabel
         | AdjacentSibling of Html.Html
         | GeneralSibling of Html.Html
         | Child of Html.Html
@@ -507,8 +507,8 @@ module Property =
                 | Appearance -> "appearance"
                 | AlignContent -> "align-content"
                 | AlignItems -> "align-items"
-                | AlignSelf -> "align-self" 
-                | All -> "all" 
+                | AlignSelf -> "align-self"
+                | All -> "all"
                 | AnimationDelay -> "animation-delay"
                 | AnimationDirection -> "animation-direction"
                 | AnimationDuration -> "animation-duration"
@@ -896,7 +896,7 @@ module Property =
                 | StrokeLinejoin -> "stroke-linejoin"
                 | StrokeMiterlimit -> "stroke-miterlimit"
                 | StrokeWidth -> "stroke-width"
-                
+
                 | Lang l -> $"lang({l})"
                 | NthChild n -> $"nth-child({n})"
                 | NthLastChild n -> $"nth-last-child({n})"
@@ -990,7 +990,7 @@ type NameLabel =
         member this.StringifyCss() = this.Unwrap()
     interface ICounterValue with
         member this.StringifyCounter() = this.Unwrap()
-        
+
 type CssRule(property: Property.CssProperty) =
     member this.value(keyword: Keywords) = (property, keyword) |> Rule
     /// Applies the default value to the element
@@ -1002,7 +1002,7 @@ type CssRule(property: Property.CssProperty) =
     member this.unset = (property, Unset) |> Rule
     /// Reverts the property to user agent style sheet
     member this.revert = (property, Revert) |> Rule
-    
+
 
 and Keywords =
     | Inherit
@@ -1020,7 +1020,7 @@ and Keywords =
 and Rule = Property.CssProperty * ICssValue
 type CounterRule = Property.CounterProperty * ICounterValue
 type FontFaceRule = Property.FontFaceProperty * IFontFaceValue
-        
+
 type ImportantMaster =
     | ImportantMaster of ICssValue
     interface ICssValue with
@@ -1028,8 +1028,8 @@ type ImportantMaster =
             match this with
             | ImportantMaster value ->
                 $"{stringifyICssValue value} !important"
-        
-type Pseudo =
+
+type PseudoMaster =
     | PseudoClassMaster of Rule list
     | PseudoElementMaster of Rule list
     member this.Unwrap() =
@@ -1046,7 +1046,7 @@ type Pseudo =
                     |> List.map
                         (fun (name, property) -> $"{stringifyICssValue name}: {property.StringifyCss()}")
                     |> String.concat "; "
-                    
+
                 $"{ps}"
             | PseudoElementMaster ps ->
                 let ps =
@@ -1129,7 +1129,7 @@ type CssRuleWithAutoNormal(property: Property.CssProperty) =
 type CssRuleWithAutoNormalNone(property: Property.CssProperty) =
     inherit CssRuleWithAutoNone(property)
     member this.normal = (property, Normal) |> Rule
-    
+
 type CssRuleWithValueFunctions<'T when 'T :> ICssValue>(property: Property.CssProperty, seperator) =
     inherit CssRule(property)
     member this.value(value: 'T) =
@@ -1142,4 +1142,3 @@ type CssRuleWithValueFunctions<'T when 'T :> ICssValue>(property: Property.CssPr
             |> List.map stringifyICssValue
             |> String.concat seperator
         (property, values |> String) |> Rule
-

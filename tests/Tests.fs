@@ -17,11 +17,11 @@ module Tests =
                 for i in 0 .. 100 do
                     let randomRules = Generators.createRandomRules i
                     let start = System.DateTime.Now
-                    Fss.Functions.createFss randomRules |> ignore
+                    Fss.Functions.createFss2 randomRules |> ignore
                     let stop = System.DateTime.Now
                     let timespan = (stop - start).TotalMilliseconds
                     timingList.Add(i, timespan)
-                    
+
                 printfn "Performance test complete"
                 printfn "Number of rules, Milliseconds used"
                 Seq.iter (fun (n, ms) ->
@@ -74,10 +74,11 @@ module Tests =
                 TransformTests.tests
                 PseudoTests.tests
                 FontFaceTests.tests
-                CompositeTests.tests
-                MediaTests.tests
-                SelectorTests.tests
                 OrderingTests.tests
+//                MediaTests.tests
+//                CompositeTests.tests
+//                SelectorTests.tests
+//                CssGenerationTests.tests
             ]
-            
+
         0
