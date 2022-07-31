@@ -1,6 +1,8 @@
 namespace Fss
 namespace Fss.Types
 
+open Fss.Types
+
 type ICssValue =
     interface
         abstract member StringifyCss : unit -> string
@@ -494,6 +496,8 @@ module Property =
         | StrokeWidth
 
         // Home made
+        | Class of string
+        | Id of string
         | NameLabel
         | AdjacentSibling of Html.Html
         | GeneralSibling of Html.Html
@@ -909,6 +913,8 @@ module Property =
                 | Custom c -> c.ToLower()
                 | Media -> "media"
                 | NameLabel -> "name-label"
+                | Class c -> $"{c}"
+                | Id i -> $"{i}"
 
 type None' =
     | None'
@@ -1097,6 +1103,19 @@ type PathMaster =
         member this.StringifyCss() =
             match this with
             | PathMaster p -> $"path('{p}')"
+
+type ClassnameMaster =
+    | ClassnameMaster of Rule list
+    // We do not care about this stringify
+    interface ICssValue with
+        member this.StringifyCss() = ""
+
+type IdMaster =
+    | IdMaster of Rule list
+    // We do not care about this stringify
+    interface ICssValue with
+        member this.StringifyCss() = ""
+
 
 type ClassName = string
 type Css = string

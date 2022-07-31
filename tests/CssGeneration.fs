@@ -60,7 +60,18 @@ module CssGenerationTests =
                 Color.orangeRed
             ]
         ]
+
+        Classname "foo" [
+            Display.flex
+        ]
+
+        Id "foo" [
+            Display.flex
+        ]
     ]
+
+    printfn "%A" foo
+
     let tests =
         testList "CssGeneration"
             [

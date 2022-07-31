@@ -5,11 +5,10 @@ open Fss.Types
 open Fss.Utilities
 
 [<AutoOpen>]
-module rec Functions =
-    // TODO: Trenger properties for classname og ID
+module Functions =
     type Selector =
-    | ClassName2 of string
-    | Id2 of string
+    | ClassName of Property.CssProperty
+    | Id of Property.CssProperty
     | PseudoClass of Property.CssProperty
     | PseudoElement of Property.CssProperty
     | Combinator of Property.CssProperty
@@ -21,13 +20,32 @@ module rec Functions =
         | Rule2 of Rule
         | CssScope of CssScope
 
-    let generateCssScope (name: string option) (rules: Rule list) =
+    let private isLabel (_, value: ICssValue) =
+        match value with
+        | :? NameLabel as _ -> true
+        | _ -> false
+    let private isCounterLabel (_, value: ICounterValue) =
+        match value with
+        | :? NameLabel as _ -> true
+        | _ -> false
+
+    let private generateCssScope (name: string option) (rules: Rule list) =
         // TODO: Her vil vi sende typene gjennom
         let rec generator (rules_to_generate: Rule list): CssItem list =
             rules_to_generate
             |> List.map (fun x ->
                     let selector, value = x
                     match value with
+                    | :? ClassnameMaster as c ->
+                        match c with
+                        | ClassnameMaster c ->
+                            let rules = generator c
+                            CssScope (ClassName selector, rules)
+                    | :? IdMaster as i ->
+                        match i with
+                        | IdMaster i ->
+                            let rules = generator i
+                            CssScope (Id selector, rules)
                     | :? PseudoMaster as p ->
                         match p with
                         | PseudoClassMaster p ->
@@ -68,18 +86,19 @@ module rec Functions =
                 |> String.concat ";"
 
             $"css{FNV_1A.hash fullCssString}{label}"
-        className, (ClassName2 className, generatedItems)
+        className, (ClassName (Property.Class className), generatedItems)
 
-    let mediaFeaturesToCss features =
+    let private mediaFeaturesToCss features =
         features
         |> List.map (fun x -> $"({x.ToString()})")
         |> String.concat " and "
 
-    let createCssFromScope selectorScope (scope: CssScope): list<string * string list> =
+    let rec private createCssFromScope selectorScope (scope: CssScope): list<string * string list> =
         let currentSelector, cssItems = scope
         let selector =
             match currentSelector with
-            | ClassName2 currentSelector -> $"{selectorScope}.{currentSelector}"
+            | ClassName currentSelector -> $"{selectorScope}.{stringifyICssValue currentSelector}"
+            | Id currentSelector -> $"{selectorScope}#{stringifyICssValue currentSelector}"
             | PseudoClass currentSelector -> $"{selectorScope}:{stringifyICssValue currentSelector}"
             | PseudoElement currentSelector -> $"{selectorScope}::{stringifyICssValue currentSelector}"
             | Combinator currentSelector -> $"{selectorScope}{stringifyICssValue currentSelector}"
@@ -104,24 +123,13 @@ module rec Functions =
         ) []
         |> List.rev
 
-    let createFssInternal name (rules: Rule list): ClassName * (ClassName * Css) list =
+    let private createFssInternal name (rules: Rule list): ClassName * (ClassName * Css) list =
         let classname, cssScope = generateCssScope name rules
         let css = createCssFromScope "" cssScope
         let css = List.map (fun (x, y) -> x, $"""{{ {String.concat "" y} }}""") css
         classname, css
 
-
-
-
     // #####
-    let private isLabel (_, value: ICssValue) =
-        match value with
-        | :? NameLabel as _ -> true
-        | _ -> false
-    let private isCounterLabel (_, value: ICounterValue) =
-        match value with
-        | :? NameLabel as _ -> true
-        | _ -> false
 
     let private addBrackets string =
             $"{{ {string} }}"
@@ -269,6 +277,12 @@ module rec Functions =
     // Important
     let important (propertyName, propertyValue) =
         (propertyName, ImportantMaster propertyValue) |> Rule
+
+    let Classname (classname: string) (rules: Rule list) =
+        (Property.Class classname, ClassnameMaster rules) |> Rule
+
+    let Id (id: string) (rules: Rule list) =
+        (Property.Id id, IdMaster rules) |> Rule
 
     // Classnames
     let combine styles stylesPred =
