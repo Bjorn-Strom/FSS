@@ -22,7 +22,7 @@ module ScrollTests =
                     "{ scroll-behavior: inherit; }"
                 testCase
                     "ScrollBehavior initial"
-                    [ ScrollBehavior.initial]
+                    [ ScrollBehavior.initial ]
                     "{ scroll-behavior: initial; }"
                 testCase
                     "ScrollBehavior unset"

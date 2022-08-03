@@ -48,4 +48,27 @@ module CssGenerationTests =
                         ".css-2092947002:hover:checked", "{ color: blue; }"
                         ".css-2092947002:hover", "{ font-family: serif;font-size: 28px; }"
                     ]
+
+                test "Compound selector, refine the parent selector" <| fun _ ->
+                    let _, actual = (createFss [ Color.blue; Classname "bar" [ Color.red ] ])
+                    Expect.equal actual [
+                        ".css-1784298107", "{ color: blue; }"
+                        ".css-1784298107.bar", "{ color: red; }"
+                    ]
+
+                test "Multiple levels of nesting" <| fun _ ->
+                    let _, actual = (createFss [
+                        Margin.value (px 0)
+                        !> Fss.Types.Html.Figcaption [
+                            BackgroundColor.hsl 0 0 0
+                            !> Fss.Types.Html.P [
+                                FontSize.value (rem 0.9)
+                            ]
+                        ]
+                    ])
+                    Expect.equal actual [
+                        ".css-1864087659", "{ margin: 0px; }"
+                        ".css-1864087659 > figcaption", "{ background-color: hsl(0, 0%, 0%); }"
+                        ".css-1864087659 > figcaption > p", "{ font-size: 0.9rem; }"
+                    ]
             ]

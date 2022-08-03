@@ -305,7 +305,7 @@ module Color =
                 | RebeccaPurple -> "rebeccapurple"
                 | Transparent -> "transparent"
                 | CurrentColor -> "currentcolor"
-                | Rgb (red, green, blue) -> $"rgb({red}, {green}, {blue})" 
+                | Rgb (red, green, blue) -> $"rgb({red}, {green}, {blue})"
                 | Rgba (red, green, blue, alpha) -> $"rgba({red}, {green}, {blue}, {alpha})"
                 | Hex hex -> hex
                 | Hsl (hue, saturation, lightness) -> $"hsl({hue}, {saturation}%%, {lightness}%%)"
@@ -321,7 +321,7 @@ module Color =
                 | Exact -> "exact"
 
 module colorHelpers =
-    let internal hex (value: string) =
+    let inline internal hex (value: string) =
         if value.StartsWith "#" then
             value
         else

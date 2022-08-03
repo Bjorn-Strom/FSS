@@ -1,8 +1,5 @@
 ﻿namespace FSSTests
 
-// Lag egne test prosjekter til hvert bibliotek
-// Disse testene bruker sin egen kode. Da kan jeg teste alt
-
 open Fet
 
 module Tests =
@@ -29,57 +26,57 @@ module Tests =
                     ) timingList
         | None ->
             runTests [
-                BorderTests.tests
-                ContentSizeTests.tests
-                MarginTests.tests
-                PaddingTests.tests
-                ColorTests.tests
-                BackgroundTests.tests
-                CursorTests.tests
-                GridTests.tests
-                DisplayTests.tests
-                FlexTests.tests
-                PerspectiveTests.tests
-                TextTests.tests
-                PositionTests.tests
-                ResizeTests.tests
-                TransitionTests.tests
-                VisibilityTests.tests
-                ListStyleTests.tests
-                ContentTests.tests
-                ColumnTests.tests
-                OutlineTests.tests
-                PointerEventsTests.tests
-                CaretTests.tests
-                ClipPathTests.tests
-                AspectRatioTests.tests
-                ClearTests.tests
-                AppearanceTests.tests
-                TypographyTests.tests
-                MixBlendModeTests.tests
-                FilterTests.tests
-                CustomTests.tests
-                BoxShadowTests.tests
-                AllTests.tests
-                ScrollTests.tests
-                TableTests.tests
-                WordTests.tests
-                WillChangeTests.tests
-                ImageTests.tests
-                MaskTests.tests
-                SvgTests.tests
-                CounterTests.tests
-                AnimationTests.tests
-                FontTests.tests
-                TransformTests.tests
-                PseudoTests.tests
-                FontFaceTests.tests
-                CssGenerationTests.tests
+//                BorderTests.tests
+//                ContentSizeTests.tests
+//                MarginTests.tests
+//                PaddingTests.tests
+//                ColorTests.tests
+//                BackgroundTests.tests
+//                CursorTests.tests
+//                GridTests.tests
+//                DisplayTests.tests
+//                FlexTests.tests
+//                PerspectiveTests.tests
+//                TextTests.tests
+//                PositionTests.tests
+//                ResizeTests.tests
+//                TransitionTests.tests
+//                VisibilityTests.tests
+//                ListStyleTests.tests
+//                ContentTests.tests
+//                ColumnTests.tests
+//                OutlineTests.tests
+//                PointerEventsTests.tests
+//                CaretTests.tests
+//                ClipPathTests.tests
+//                AspectRatioTests.tests
+//                ClearTests.tests
+//                AppearanceTests.tests
+//                TypographyTests.tests
+//                MixBlendModeTests.tests
+//                FilterTests.tests
+//                CustomTests.tests
+//                BoxShadowTests.tests
+//                AllTests.tests
+//                ScrollTests.tests
+//                TableTests.tests
+//                WordTests.tests
+//                WillChangeTests.tests
+//                ImageTests.tests
+//                MaskTests.tests
+//                SvgTests.tests
+//                CounterTests.tests
+//                AnimationTests.tests
+//                FontTests.tests
+//                TransformTests.tests
+//                PseudoTests.tests
+//                FontFaceTests.tests
+//                CssGenerationTests.tests
 
-                OrderingTests.tests
                 MediaTests.tests
-                CompositeTests.tests
-                SelectorTests.tests
+//                OrderingTests.tests
+//                CompositeTests.tests
+//                SelectorTests.tests
             ]
 
         0

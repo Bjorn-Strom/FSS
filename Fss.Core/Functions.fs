@@ -31,6 +31,7 @@ module Functions =
 
     let private generateCssScope (name: string option) (rules: Rule list) =
         // TODO: Her vil vi sende typene gjennom
+        // Denne føles litt teit ut
         let rec generator (rules_to_generate: Rule list): CssItem list =
             rules_to_generate
             |> List.map (fun x ->
@@ -93,35 +94,57 @@ module Functions =
         |> List.map (fun x -> $"({x.ToString()})")
         |> String.concat " and "
 
+//    type CssASTItem =
+
     let rec private createCssFromScope selectorScope (scope: CssScope): list<string * string list> =
         let currentSelector, cssItems = scope
-        let selector =
+        let isMedia, selector =
             match currentSelector with
-            | ClassName currentSelector -> $"{selectorScope}.{stringifyICssValue currentSelector}"
-            | Id currentSelector -> $"{selectorScope}#{stringifyICssValue currentSelector}"
-            | PseudoClass currentSelector -> $"{selectorScope}:{stringifyICssValue currentSelector}"
-            | PseudoElement currentSelector -> $"{selectorScope}::{stringifyICssValue currentSelector}"
-            | Combinator currentSelector -> $"{selectorScope}{stringifyICssValue currentSelector}"
-            | Media features -> $"@media {mediaFeaturesToCss features}{{ { selectorScope}"
+            | ClassName currentSelector -> false, $"{selectorScope}.{stringifyICssValue currentSelector}"
+            | Id currentSelector -> false, $"{selectorScope}#{stringifyICssValue currentSelector}"
+            | PseudoClass currentSelector -> false, $"{selectorScope}:{stringifyICssValue currentSelector}"
+            | PseudoElement currentSelector -> false, $"{selectorScope}::{stringifyICssValue currentSelector}"
+            | Combinator currentSelector -> false, $"{selectorScope}{stringifyICssValue currentSelector}"
+            | Media features -> true, $"@media {mediaFeaturesToCss features}"
 
-        cssItems
-        |> List.collect (fun item ->
-            match item with
-            | Rule2 (name, value) -> [ selector, [$"{stringifyICssValue name}: {stringifyICssValue value};"] ]
-            | CssScope scope -> createCssFromScope selector scope
-        )
-        // Todo: Blir dette for treigt?
-        // TODO: Sjekke om dette er nødvendig?
-        |> List.fold (fun acc (key, value) ->
-            match acc with
-            | [] -> [key, value]
-            | (key2, value2) :: rest ->
-                if key = key2 then
-                    (key, (value2 @ value)) :: rest
-                else
-                    (key, value) :: acc
-        ) []
-        |> List.rev
+        if isMedia then
+            cssItems
+            |> List.collect (fun item ->
+                match item with
+                | Rule2 (name, value) -> [ selectorScope, [$"{stringifyICssValue name}: {stringifyICssValue value};"] ]
+                | CssScope scope -> createCssFromScope selectorScope scope
+            )
+            // Todo: Blir dette for treigt?
+            // TODO: Sjekke om dette er nødvendig?
+            |> List.fold (fun acc (key, value) ->
+                match acc with
+                | [] -> [key, value]
+                | (key2, value2) :: rest ->
+                    if key = key2 then
+                        (key, (value2 @ value)) :: rest
+                    else
+                        (key, value) :: acc
+            ) []
+            |> List.rev
+        else
+            cssItems
+            |> List.collect (fun item ->
+                match item with
+                | Rule2 (name, value) -> [ selector, [$"{stringifyICssValue name}: {stringifyICssValue value};"] ]
+                | CssScope scope -> createCssFromScope selector scope
+            )
+            // Todo: Blir dette for treigt?
+            // TODO: Sjekke om dette er nødvendig?
+            |> List.fold (fun acc (key, value) ->
+                match acc with
+                | [] -> [key, value]
+                | (key2, value2) :: rest ->
+                    if key = key2 then
+                        (key, (value2 @ value)) :: rest
+                    else
+                        (key, value) :: acc
+            ) []
+            |> List.rev
 
     let private createFssInternal name (rules: Rule list): ClassName * (ClassName * Css) list =
         let classname, cssScope = generateCssScope name rules
