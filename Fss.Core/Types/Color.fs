@@ -305,11 +305,11 @@ module Color =
                 | RebeccaPurple -> "rebeccapurple"
                 | Transparent -> "transparent"
                 | CurrentColor -> "currentcolor"
-                | Rgb (red, green, blue) -> $"rgb({red}, {green}, {blue})"
-                | Rgba (red, green, blue, alpha) -> $"rgba({red}, {green}, {blue}, {alpha})"
+                | Rgb (red, green, blue) -> $"rgb({red},{green},{blue})"
+                | Rgba (red, green, blue, alpha) -> $"rgba({red},{green},{blue},{alpha})"
                 | Hex hex -> hex
-                | Hsl (hue, saturation, lightness) -> $"hsl({hue}, {saturation}%%, {lightness}%%)"
-                | Hsla (hue, saturation, lightness, alpha) -> $"hsla({hue}, {saturation}%%, {lightness}%%, {alpha})"
+                | Hsl (hue, saturation, lightness) -> $"hsl({hue},{saturation}%%,{lightness}%%)"
+                | Hsla (hue, saturation, lightness, alpha) -> $"hsla({hue},{saturation}%%,{lightness}%%,{alpha})"
 
     type ColorAdjust =
         | Economy
@@ -321,8 +321,8 @@ module Color =
                 | Exact -> "exact"
 
 module colorHelpers =
-    let inline internal hex (value: string) =
-        if value.StartsWith "#" then
+    let internal hex (value: string) =
+        if value[0] = '#' then
             value
         else
             let sb = StringBuilder()

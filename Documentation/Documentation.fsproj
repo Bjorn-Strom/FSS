@@ -43,6 +43,8 @@
     <PackageReference Include="Fable.React" Version="7.4.3" />
     <PackageReference Include="Feliz" Version="1.57.0" />
     <PackageReference Include="Feliz.Router" Version="3.8.0" />
-    <PackageReference Include="Fss-lib.Feliz" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fss.Feliz\Fss.Feliz.fsproj" />
   </ItemGroup>
 </Project>

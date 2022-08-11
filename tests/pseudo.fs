@@ -6,148 +6,142 @@ open Fss
 
 module PseudoTests =
      let styles = [ Color.red ]
-     let createPseudoTest (ruleList: Fss.Types.Rule list) =
-         let className, styles = createFss ruleList
-         let styles = snd (styles |> List.head)
-
-         className, $"{className} {styles}"
-
      let tests =
         testList "Pseudo"
             [
-                let classname, actual = createPseudoTest [ Active styles ]
+                let classname, actual = createFss [ Active styles ]
                 testEqual
                     "Active"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ AnyLink styles ]
+                    $".{classname}:active{{color:red;}}"
+                let classname, actual = createFss [ AnyLink styles ]
                 testEqual
                     "AnyLink"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Blank styles ]
+                    $".{classname}:any-link{{color:red;}}"
+                let classname, actual = createFss [ Blank styles ]
                 testEqual
                     "Blank"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Checked styles ]
+                    $".{classname}:blank{{color:red;}}"
+                let classname, actual = createFss [ Checked styles ]
                 testEqual
                     "Checked"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Current styles ]
+                    $".{classname}:checked{{color:red;}}"
+                let classname, actual = createFss [ Current styles ]
                 testEqual
                     "Current"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Disabled styles ]
+                    $".{classname}:current{{color:red;}}"
+                let classname, actual = createFss [ Disabled styles ]
                 testEqual
                     "Disabled"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Empty styles ]
+                    $".{classname}:disabled{{color:red;}}"
+                let classname, actual = createFss [ Empty styles ]
                 testEqual
                     "Empty"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Enabled styles ]
+                    $".{classname}:empty{{color:red;}}"
+                let classname, actual = createFss [ Enabled styles ]
                 testEqual
                     "Enabled"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ FirstOfType styles ]
+                    $".{classname}:enabled{{color:red;}}"
+                let classname, actual = createFss [ FirstOfType styles ]
                 testEqual
                     "FirstOfType"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Focus styles ]
+                    $".{classname}:first-of-type{{color:red;}}"
+                let classname, actual = createFss [ Focus styles ]
                 testEqual
                     "Focus"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ FocusVisible styles ]
+                    $".{classname}:focus{{color:red;}}"
+                let classname, actual = createFss [ FocusVisible styles ]
                 testEqual
                     "FocusVisible"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ FocusWithin styles ]
+                    $".{classname}:focus-visible{{color:red;}}"
+                let classname, actual = createFss [ FocusWithin styles ]
                 testEqual
                     "FocusWithin"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Future styles ]
+                    $".{classname}:focus-within{{color:red;}}"
+                let classname, actual = createFss [ Future styles ]
                 testEqual
                     "Future"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Hover styles ]
+                    $".{classname}:future{{color:red;}}"
+                let classname, actual = createFss [ Hover styles ]
                 testEqual
                     "Hover"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Future styles ]
+                    $".{classname}:hover{{color:red;}}"
+                let classname, actual = createFss [ Future styles ]
                 testEqual
                     "Future"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ After styles ]
+                    $".{classname}:future{{color:red;}}"
+                let classname, actual = createFss [ After styles ]
                 testEqual
                     "After"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Before styles ]
+                    $".{classname}::after{{color:red;}}"
+                let classname, actual = createFss [ Before styles ]
                 testEqual
                     "Before"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ FirstLetter styles ]
+                    $".{classname}::before{{color:red;}}"
+                let classname, actual = createFss [ FirstLetter styles ]
                 testEqual
                     "FirstLetter"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ FirstLine styles ]
+                    $".{classname}::first-letter{{color:red;}}"
+                let classname, actual = createFss [ FirstLine styles ]
                 testEqual
                     "FirstLine"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Selection styles ]
+                    $".{classname}::first-line{{color:red;}}"
+                let classname, actual = createFss [ Selection styles ]
                 testEqual
                     "Selection"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Marker styles ]
+                    $".{classname}::selection{{color:red;}}"
+                let classname, actual = createFss [ Marker styles ]
                 testEqual
                     "Marker"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Lang("en") styles ]
+                    $".{classname}::marker{{color:red;}}"
+                let classname, actual = createFss [ Lang("en") styles ]
                 testEqual
                     "Lang en"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ NthChild "4" styles ]
+                    $".{classname}:lang(en){{color:red;}}"
+                let classname, actual = createFss [ NthChild "4" styles ]
                 testEqual
                     "Nth child 4"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ NthLastChild "4" styles ]
+                    $".{classname}:nth-child(4){{color:red;}}"
+                let classname, actual = createFss [ NthLastChild "4" styles ]
                 testEqual
                     "Nth last child 4"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ NthOfType "4" styles ]
+                    $".{classname}:nth-last-child(4){{color:red;}}"
+                let classname, actual = createFss [ NthOfType "4" styles ]
                 testEqual
                     "Nth of type 4"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ NthLastOfType "4" styles ]
+                    $".{classname}:nth-of-type(4){{color:red;}}"
+                let classname, actual = createFss [ NthLastOfType "4" styles ]
                 testEqual
                     "Nth last of type 4"
                     actual
-                    $"{classname} {{ color: red; }}"
-                let classname, actual = createPseudoTest [ Placeholder styles ]
+                    $".{classname}:nth-last-of-type(4){{color:red;}}"
+                let classname, actual = createFss [ Placeholder styles ]
                 testEqual
                     "Placeholder"
                     actual
-                    $"{classname} {{ color: red; }}"
+                    $".{classname}::placeholder{{color:red;}}"
             ]

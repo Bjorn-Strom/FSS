@@ -1,5 +1,6 @@
 namespace Fss
 
+open System.Text
 open Fss
 open Fss.Types
 open Fss.Utilities
@@ -7,13 +8,14 @@ open Fss.Utilities
 [<AutoOpen>]
 module Functions =
     type Selector =
+    | Global of Property.CssProperty
     | ClassName of Property.CssProperty
     | Id of Property.CssProperty
     | PseudoClass of Property.CssProperty
     | PseudoElement of Property.CssProperty
     | Combinator of Property.CssProperty
-    | Media of Media.Feature list
-    | MediaFor of Property.CssProperty
+    | Media2 of Media.Feature list
+    | MediaFor2 of Media.Device * Media.Feature list
 
     and CssScope = Selector * CssItem list
     and CssItem =
@@ -64,7 +66,10 @@ module Functions =
                         match m with
                         | Media.MediaQuery (features, rules) ->
                             let rules = generator rules
-                            CssScope (Media features, rules)
+                            CssScope (Media2 features, rules)
+                        | Media.MediaQueryFor (device, features, rules) ->
+                            let rules = generator rules
+                            CssScope (MediaFor2 (device, features), rules)
                     | _ -> Rule2 x
                 )
         let label =
@@ -78,78 +83,125 @@ module Functions =
             |> List.filter (isLabel >> not)
         let generatedItems = generator rules
         let className =
+            let stringify rule =
+                let x, y = rule
+                $"{stringifyICssValue x}-{stringifyICssValue y}"
             match name with
             | Some n -> n
             | _ ->
-            let fullCssString =
-                rules
-                |> List.map (fun (x, y) -> $"{stringifyICssValue x}-{stringifyICssValue y}")
-                |> String.concat ";"
+                let fullCssString =
+                    rules
+                    |> List.map (fun (x, y) ->
+                        match y with
+                        | :? Media.MediaQueryMaster as m ->
+                            match m with
+                            | Media.MediaQuery (_, rules) -> List.map stringify rules |> String.concat ";"
+                            | Media.MediaQueryFor (_, _, rules) -> List.map stringify rules |> String.concat ";"
+                        | _ -> stringify (x,y))
+                    |> String.concat ";"
+                $"css{FNV_1A.hash fullCssString}{label}"
 
-            $"css{FNV_1A.hash fullCssString}{label}"
-        className, (ClassName (Property.Class className), generatedItems)
+        match name with
+        | Some name when name = "*" ->
+            className, (Global (Property.Class className), generatedItems)
+        | _ ->
+            className, (ClassName (Property.Class className), generatedItems)
 
-    let private mediaFeaturesToCss features =
+    let private mediaFeaturesToCss (device: string) features =
         features
         |> List.map (fun x -> $"({x.ToString()})")
+        |> fun x ->
+            if device = "" then
+                x
+            else
+                [ device ] @ x
         |> String.concat " and "
 
-//    type CssASTItem =
-
-    let rec private createCssFromScope selectorScope (scope: CssScope): list<string * string list> =
+    let rec private createCssFromScope selectorScope (scope: CssScope): string =
         let currentSelector, cssItems = scope
         let isMedia, selector =
             match currentSelector with
+            | Global currentSelector -> false, $"{selectorScope}{stringifyICssValue currentSelector}"
             | ClassName currentSelector -> false, $"{selectorScope}.{stringifyICssValue currentSelector}"
             | Id currentSelector -> false, $"{selectorScope}#{stringifyICssValue currentSelector}"
             | PseudoClass currentSelector -> false, $"{selectorScope}:{stringifyICssValue currentSelector}"
             | PseudoElement currentSelector -> false, $"{selectorScope}::{stringifyICssValue currentSelector}"
             | Combinator currentSelector -> false, $"{selectorScope}{stringifyICssValue currentSelector}"
-            | Media features -> true, $"@media {mediaFeaturesToCss features}"
+            | Media2 features -> true, $"""@media {mediaFeaturesToCss "" features}"""
+            | MediaFor2 (device, features) -> true, $"@media {mediaFeaturesToCss (stringifyICssValue device) features}"
+
+        let chunky f listofstuff =
+            match listofstuff with
+            | [] -> []
+            | [x] -> [ [x] ]
+            | x :: y :: rest ->
+                List.fold (fun acc y ->
+                    let lastChunk =
+                        acc
+                        |> List.rev
+                        |> List.head
+                    let valueOfItemInChunk =
+                        lastChunk
+                        |> List.head
+                        |> f
+
+                    if valueOfItemInChunk = f y then
+                        let accWithoutLastChunk =
+                            acc
+                            |> List.rev
+                            |> List.tail
+                            |> List.rev
+                        accWithoutLastChunk @ [ lastChunk @ [ y ] ]
+                    else
+                        acc @ [ [ y ] ]
+                ) [ [ x ] ] (y :: rest)
 
         if isMedia then
+            let mediaQuery = selector
             cssItems
-            |> List.collect (fun item ->
-                match item with
-                | Rule2 (name, value) -> [ selectorScope, [$"{stringifyICssValue name}: {stringifyICssValue value};"] ]
-                | CssScope scope -> createCssFromScope selectorScope scope
+            |> chunky (function | Rule2 _ -> true | _ -> false)
+            |> List.map (fun items ->
+                match List.head items with
+                | Rule2 _ ->
+                    List.map (fun x ->
+                        match x with
+                        | Rule2 (name, value) -> $"{stringifyICssValue name}:{stringifyICssValue value};"
+                        | _ -> failwith "Error") items
+                    |> String.concat ""
+                    |> fun x -> $"{selectorScope}{{{x}}}"
+                | _ ->
+                    List.map (fun x ->
+                        match x with
+                        | CssScope scope -> createCssFromScope selectorScope scope
+                        | _ -> failwith "Error") items
+                    |> String.concat ""
             )
-            // Todo: Blir dette for treigt?
-            // TODO: Sjekke om dette er nødvendig?
-            |> List.fold (fun acc (key, value) ->
-                match acc with
-                | [] -> [key, value]
-                | (key2, value2) :: rest ->
-                    if key = key2 then
-                        (key, (value2 @ value)) :: rest
-                    else
-                        (key, value) :: acc
-            ) []
-            |> List.rev
+            |> String.concat ""
+            |> fun x -> $"{mediaQuery} {{{x}}}"
         else
             cssItems
-            |> List.collect (fun item ->
-                match item with
-                | Rule2 (name, value) -> [ selector, [$"{stringifyICssValue name}: {stringifyICssValue value};"] ]
-                | CssScope scope -> createCssFromScope selector scope
+            |> chunky (function | Rule2 _ -> true | _ -> false)
+            |> List.map (fun items ->
+                match List.head items with
+                | Rule2 _ ->
+                    List.map (fun x ->
+                        match x with
+                        | Rule2 (name, value) -> $"{stringifyICssValue name}:{stringifyICssValue value};"
+                        | _ -> failwith "Error") items
+                    |> String.concat ""
+                    |> fun x -> $"{selector}{{{x}}}"
+                | _ ->
+                    List.map (fun x ->
+                        match x with
+                        | CssScope scope -> createCssFromScope selector scope
+                        | _ -> failwith "Error") items
+                    |> String.concat ""
             )
-            // Todo: Blir dette for treigt?
-            // TODO: Sjekke om dette er nødvendig?
-            |> List.fold (fun acc (key, value) ->
-                match acc with
-                | [] -> [key, value]
-                | (key2, value2) :: rest ->
-                    if key = key2 then
-                        (key, (value2 @ value)) :: rest
-                    else
-                        (key, value) :: acc
-            ) []
-            |> List.rev
+            |> String.concat ""
 
-    let private createFssInternal name (rules: Rule list): ClassName * (ClassName * Css) list =
+    let private createFssInternal name (rules: Rule list): ClassName * string =
         let classname, cssScope = generateCssScope name rules
         let css = createCssFromScope "" cssScope
-        let css = List.map (fun (x, y) -> x, $"""{{ {String.concat "" y} }}""") css
         classname, css
 
     // #####
@@ -161,7 +213,7 @@ module Functions =
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createFss (rules: Rule list): ClassName * (ClassName * Css) list =
+    let createFss (rules: Rule list): ClassName * string =
         createFssInternal None rules
 
     /// Creates CSS with a specific classname based on a list of CSS rules
@@ -169,14 +221,14 @@ module Functions =
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createFssWithClassname name (rules: Rule list): ClassName * (ClassName * Css) list =
+    let createFssWithClassname name (rules: Rule list): ClassName * string =
         createFssInternal (Some name) rules
 
     /// Creates global CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the global classname
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createGlobal (properties: Rule list): (ClassName * Css) list =
+    let createGlobal (properties: Rule list): string =
         let _, css = createFssInternal (Some "*") properties
         css
 
@@ -270,10 +322,10 @@ module Functions =
                 (fun acc x ->
                     match x with
                     | Frame (n, rules) ->
-                        let _, rules = List.head <| snd (createFss rules)
+                        let _, rules = createFss rules
                         $"{acc} {n}%% {rules}"
                     | Frames (ns, rules) ->
-                        let _, rules = List.head <| snd (createFss rules)
+                        let _, rules = createFss rules
                         let frameNumbers = framePositionToString ns
                         $"{acc} {frameNumbers} {rules}")
                 ""

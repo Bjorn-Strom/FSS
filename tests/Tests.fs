@@ -26,57 +26,69 @@ module Tests =
                     ) timingList
         | None ->
             runTests [
-//                BorderTests.tests
-//                ContentSizeTests.tests
-//                MarginTests.tests
-//                PaddingTests.tests
-//                ColorTests.tests
-//                BackgroundTests.tests
-//                CursorTests.tests
-//                GridTests.tests
-//                DisplayTests.tests
-//                FlexTests.tests
-//                PerspectiveTests.tests
-//                TextTests.tests
-//                PositionTests.tests
-//                ResizeTests.tests
-//                TransitionTests.tests
-//                VisibilityTests.tests
-//                ListStyleTests.tests
-//                ContentTests.tests
-//                ColumnTests.tests
-//                OutlineTests.tests
-//                PointerEventsTests.tests
-//                CaretTests.tests
-//                ClipPathTests.tests
-//                AspectRatioTests.tests
-//                ClearTests.tests
-//                AppearanceTests.tests
-//                TypographyTests.tests
-//                MixBlendModeTests.tests
-//                FilterTests.tests
-//                CustomTests.tests
-//                BoxShadowTests.tests
-//                AllTests.tests
-//                ScrollTests.tests
-//                TableTests.tests
-//                WordTests.tests
-//                WillChangeTests.tests
-//                ImageTests.tests
-//                MaskTests.tests
-//                SvgTests.tests
-//                CounterTests.tests
-//                AnimationTests.tests
-//                FontTests.tests
-//                TransformTests.tests
-//                PseudoTests.tests
-//                FontFaceTests.tests
-//                CssGenerationTests.tests
-
+                BorderTests.tests
+                ContentSizeTests.tests
+                MarginTests.tests
+                PaddingTests.tests
+                ColorTests.tests
+                BackgroundTests.tests
+                CursorTests.tests
+                GridTests.tests
+                DisplayTests.tests
+                FlexTests.tests
+                PerspectiveTests.tests
+                TextTests.tests
+                PositionTests.tests
+                ResizeTests.tests
+                TransitionTests.tests
+                VisibilityTests.tests
+                ListStyleTests.tests
+                ContentTests.tests
+                ColumnTests.tests
+                OutlineTests.tests
+                PointerEventsTests.tests
+                CaretTests.tests
+                ClipPathTests.tests
+                AspectRatioTests.tests
+                ClearTests.tests
+                AppearanceTests.tests
+                TypographyTests.tests
+                MixBlendModeTests.tests
+                FilterTests.tests
+                CustomTests.tests
+                BoxShadowTests.tests
+                AllTests.tests
+                ScrollTests.tests
+                TableTests.tests
+                WordTests.tests
+                WillChangeTests.tests
+                ImageTests.tests
+                MaskTests.tests
+                SvgTests.tests
+                CssGenerationTests.tests
                 MediaTests.tests
-//                OrderingTests.tests
+                TransformTests.tests
+                PseudoTests.tests
+                FontTests.tests
+                OrderingTests.tests
+                SelectorTests.tests
+                AnimationTests.tests
+
 //                CompositeTests.tests
-//                SelectorTests.tests
+//                CounterTests.tests
+//                FontFaceTests.tests
+
+
             ]
 
         0
+
+// TODO:
+// - Functions to make media stuff easier?
+// - Speed up
+// - Selectors can use classnames or id
+// - Attribute selectors can use classnames or id
+// DONE:
+// Changed how the CSS is generated
+// Also changed CSS output to be more minimized
+        // This is reflected in the tests

@@ -11,17 +11,13 @@ module CustomTests =
                 testCase
                     "Can set custom border"
                     [Custom "border" "4mm ridge rgba(170, 50, 220, .6)"]
-                    "{ border: 4mm ridge rgba(170, 50, 220, .6); }"
+                    "{border:4mm ridge rgba(170, 50, 220, .6);}"
 
                 test "Classname selector works" <| fun _ ->
-                    let _, actual = (createFss [ Classname "randomClassName" [ Color.red  ] ])
-                    Expect.equal actual [
-                        ".css1900038275.randomClassName", "{ color: red; }"
-                    ]
+                    let className, actual = (createFss [ Classname "randomClassName" [ Color.red  ] ])
+                    Expect.equal actual $".{className}.randomClassName{{color:red;}}"
 
                 test "Id selector works" <| fun _ ->
-                    let _, actual = (createFss [ Id "randomId" [ Color.red  ] ])
-                    Expect.equal actual [
-                        ".css-2111766289#randomId", "{ color: red; }"
-                    ]
+                    let className, actual = (createFss [ Id "randomId" [ Color.red  ] ])
+                    Expect.equal actual $".{className}#randomId{{color:red;}}"
             ]

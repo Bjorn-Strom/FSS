@@ -6,13 +6,15 @@ open Fss
 
 module AnimationTests =
     let tests =
-        let name, _ =
+        let name, animation =
             createAnimation
                 [
                     frame 0 [ MarginLeft.value (pct 0) ]
                     frame 50 [ MarginLeft.value (pct 50) ]
                     frames [ 80; 90 ] [ MarginLeft.value (pct 100) ]
                 ]
+
+        printfn "%A" animation
 
         testList "Animation"
             [
@@ -59,11 +61,11 @@ module AnimationTests =
                 testCase
                     "Animation duration unset"
                     [ AnimationDuration.unset ]
-                    "{ animation-duration: unset; }" 
+                    "{ animation-duration: unset; }"
                 testCase
                     "Animation duration revert"
                     [ AnimationDuration.revert ]
-                    "{ animation-duration: revert; }" 
+                    "{ animation-duration: revert; }"
                 testCase
                     "Animation timing-function value"
                     [ AnimationTimingFunction.value Fss.Types.TimingFunction.Ease ]
@@ -167,11 +169,11 @@ module AnimationTests =
                 testCase
                     "Animation delay unset"
                     [ AnimationDelay.unset ]
-                    "{ animation-delay: unset; }" 
+                    "{ animation-delay: unset; }"
                 testCase
                     "Animation delay revert"
                     [ AnimationDelay.revert ]
-                    "{ animation-delay: revert; }" 
+                    "{ animation-delay: revert; }"
                 testCase
                     "Animation iteration count infinite"
                     [ AnimationIterationCount.infinite ]
@@ -191,11 +193,11 @@ module AnimationTests =
                 testCase
                     "Animation iteration-count unset"
                     [ AnimationIterationCount.unset ]
-                    "{ animation-iteration-count: unset; }" 
+                    "{ animation-iteration-count: unset; }"
                 testCase
                     "Animation iteration-count revert"
                     [ AnimationIterationCount.revert ]
-                    "{ animation-iteration-count: revert; }" 
+                    "{ animation-iteration-count: revert; }"
                 testCase
                     "Animation direction value"
                     [ AnimationDirection.value Fss.Types.Animation.Direction.Alternate ]

@@ -233,7 +233,7 @@ let Article (page: Page) =
                                    | Feliz -> Suspense feliz
                                    | Giraffe -> Suspense giraffe
                                    | Troubleshoot -> Suspense troubleshoot
-                                   | Global -> Suspense globalStyles ] ]
+                                   | GlobalStyles -> Suspense globalStyles ] ]
 
 let Content page =
     Html.div [ prop.fss [ Display.flex

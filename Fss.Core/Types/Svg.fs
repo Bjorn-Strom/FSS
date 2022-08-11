@@ -60,7 +60,7 @@ module Svg =
         | TextTop
         interface ICssValue with
             member this.StringifyCss() =
-               match this with 
+               match this with
                | Ideographic -> "ideographic"
                | Alphabetic -> "alphabetic"
                | Hanging -> "hanging"
@@ -289,7 +289,7 @@ module SvgClasses =
             let value =
                 dash
                 |> List.map (fun x -> x.ToString())
-                |> String.concat ", "
+                |> String.concat ","
             (property, String value) |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap
     type StrokeLinecap(property) =

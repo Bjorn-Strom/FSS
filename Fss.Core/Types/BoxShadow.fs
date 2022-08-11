@@ -41,7 +41,7 @@ module BoxShadowClasses =
             let value =
                 boxShadows
                 |> List.map stringifyICssValue
-                |> String.concat ", "
+                |> String.concat ","
             (property, String value) |> Rule
 
         member this.Inset(boxShadow: BoxShadow.BoxShadow) = (property, BoxShadow.Inset boxShadow) |> Rule

@@ -19,9 +19,10 @@ type IFontFaceValue =
     end
 
 [<AutoOpen>]
-module internal MasterTypeHelpers =
+module MasterTypeHelpers =
     let internal cache = System.Collections.Generic.Dictionary<ICssValue, string>()
-    let internal stringifyICssValue cssValue: string =
+    // TODO: internal
+    let stringifyICssValue cssValue: string =
         if cache.ContainsKey(cssValue) then
             cache[cssValue]
         else
@@ -1076,7 +1077,7 @@ type DividerMaster =
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | DividerMaster (a, b) -> $"{a} / {b}"
+            | DividerMaster (a, b) -> $"{a}/{b}"
 
 type UrlMaster =
     | UrlMaster of string
