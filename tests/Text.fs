@@ -519,7 +519,7 @@ module TextTests =
                             (px 10, px -10, px 20, Fss.Types.Color.Color.Red)
                           ]
                     ]
-                    "{text-shadow:1px 1px 2px black, 10px -10px 20px red;}"
+                    "{text-shadow:1px 1px 2px black,10px -10px 20px red;}"
                 testCase
                     "Text shadow inherit"
                     [ TextShadow.inherit' ]

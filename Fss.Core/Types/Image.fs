@@ -103,7 +103,7 @@ module Image =
 
                 let repeatingLinearGradients gradients =
                     List.map repeatingLinearGradient gradients
-                    |> String.concat ", "
+                    |> String.concat ","
 
                 let radialGradientToString (shape, side, x, y, gradients) =
                     $"radial-gradient({shape.ToString().ToLower()} {stringifyICssValue side} at {stringifyICssValue x} {stringifyICssValue y}{gradientToString gradients})"

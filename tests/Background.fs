@@ -249,9 +249,9 @@ module BackgroundTests =
                     [ BackgroundSize.value Fss.Types.Background.Contain]
                     "{background-size:contain;}"
                 testCase
-                    "background size contain"
+                    "background contain cover"
                     [ BackgroundSize.value [Fss.Types.Background.Size.Contain; Fss.Types.Background.Size.Cover ]]
-                    "{background-size:contain, cover;}"
+                    "{background-size:contain,cover;}"
                 testCase
                     "background size percent"
                     [ BackgroundSize.value (pct 100)]

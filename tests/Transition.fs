@@ -131,7 +131,7 @@ module TransitionTests =
                 testCase
                     "Transition timing function cubic bezier"
                     [ TransitionTimingFunction.cubicBezier(0.0, 0.47, 0.32, 1.97) ]
-                    "{transition-timing-function:cubic-bezier(0.00, 0.47, 0.32, 1.97);}"
+                    "{transition-timing-function:cubic-bezier(0.00,0.47,0.32,1.97);}"
                 testCase
                     "Transition timing function  step"
                     [ TransitionTimingFunction.step 5 ]
@@ -139,27 +139,27 @@ module TransitionTests =
                 testCase
                     "Transition timing function  step jump start"
                     [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.JumpStart) ]
-                    "{transition-timing-function:steps(5, jump-start);}"
+                    "{transition-timing-function:steps(5,jump-start);}"
                 testCase
                     "Transition timing function step jump end"
                     [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.JumpEnd) ]
-                    "{transition-timing-function:steps(5, jump-end);}"
+                    "{transition-timing-function:steps(5,jump-end);}"
                 testCase
                     "Transition timing function step jump none"
                     [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.JumpNone) ]
-                    "{transition-timing-function:steps(5, jump-none);}"
+                    "{transition-timing-function:steps(5,jump-none);}"
                 testCase
                     "Transition timing function step jump both"
                     [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.JumpBoth) ]
-                    "{transition-timing-function:steps(5, jump-both);}"
+                    "{transition-timing-function:steps(5,jump-both);}"
                 testCase
                     "Transition timing function step start"
                     [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.Step.Start) ]
-                    "{transition-timing-function:steps(5, start);}"
+                    "{transition-timing-function:steps(5,start);}"
                 testCase
                     "Transition timing function step end"
                     [ TransitionTimingFunction.step(5, Fss.Types.TimingFunction.Step.End) ]
-                    "{transition-timing-function:steps(5, end);}"
+                    "{transition-timing-function:steps(5,end);}"
                 testCase
                     "Transition timing function inherit"
                     [ TransitionTimingFunction.inherit' ]

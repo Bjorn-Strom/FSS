@@ -30,7 +30,7 @@ module Animation =
                 | Forwards -> "forwards"
                 | Backwards -> "backwards"
                 | Both -> "both"
-        
+
     type IterationCount =
         | Infinite
         | Value of int
@@ -39,7 +39,7 @@ module Animation =
                 match this with
                 | Infinite -> "infinite"
                 | Value v -> string v
-        
+
     type PlayState =
         | Running
         | Paused
@@ -54,11 +54,11 @@ module AnimationClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
     type AnimationTime(property) =
-        inherit CssRuleWithValueFunctions<Time>(property, ", ")
+        inherit CssRuleWithValueFunctions<Time>(property, ",")
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
     type AnimationDirection(property) =
-        inherit CssRuleWithValueFunctions<Animation.Direction>(property, ", ")
+        inherit CssRuleWithValueFunctions<Animation.Direction>(property, ",")
 
         /// Animation plays forwards and resets to the beginning over and over.
         member this.normal = (property, Normal) |> Rule
@@ -71,7 +71,7 @@ module AnimationClasses =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
     type AnimationFillMode(property) =
-        inherit CssRuleWithValueFunctions<Animation.FillMode>(property, ", ")
+        inherit CssRuleWithValueFunctions<Animation.FillMode>(property, ",")
         /// No styles will be applied when the animation is not running.
         member this.none = (property, None') |> Rule
         /// After the animation the target will keep the values from the final frame of the animation.
@@ -88,12 +88,12 @@ module AnimationClasses =
         /// The number of times the animation will play
         member this.value(iterationCount: float) =
             (property, iterationCount |> Float) |> Rule
-            
+
         member this.value(iterationCounts: Animation.IterationCount list) =
             let iterationCounts =
                 iterationCounts
                 |> List.map stringifyICssValue
-                |> String.concat ", "
+                |> String.concat ","
             (property, iterationCounts |> String) |> Rule
 
         /// The animation will repeat forever
@@ -107,12 +107,12 @@ module AnimationClasses =
         /// List of animations to use
         member this.value(names: string list) =
             let names =
-                String.concat ", " names
+                String.concat "," names
             (property, names |> String) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
     type AnimationPlayState(property) =
-        inherit CssRuleWithValueFunctions<Animation.PlayState>(property, ", ")
+        inherit CssRuleWithValueFunctions<Animation.PlayState>(property, ",")
         /// Sets the animation to running
         member this.running = (property, Animation.Running) |> Rule
         /// Sets the animation to paused
@@ -120,7 +120,7 @@ module AnimationClasses =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
     type AnimationTimingFunction(property) =
-        inherit CssRuleWithValueFunctions<TimingFunction.Timing>(property, ", ")
+        inherit CssRuleWithValueFunctions<TimingFunction.Timing>(property, ",")
         /// Increases animation velocity toward the middle and slowing back down at the end
         member this.ease = (property, TimingFunction.Ease) |> Rule
         /// The animation starts slow with the speed increasing toward the end

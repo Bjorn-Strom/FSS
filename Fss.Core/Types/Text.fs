@@ -174,7 +174,7 @@ module Text =
         | Below
         interface ICssValue with
             member this.StringifyCss() =
-                match this with 
+                match this with
                 | FromFont -> "from-font"
                 | Under -> "under"
                 | Left -> "left"
@@ -384,7 +384,7 @@ module TextClasses =
         member this.eachLine(value: ILengthPercentage) =
             let value = $"{lengthPercentageString value} {stringifyICssValue Text.Indent.EachLine}"
             (property, String value) |> Rule
-        
+
         /// Inverts which lines are indented. All lines apart from first gets indent
         /// Indents each line after a forced line break (<br>)
         member this.hangingEachLine(value: ILengthPercentage) =
@@ -406,9 +406,9 @@ module TextClasses =
             let value =
                 shadows
                 |> List.map stringify
-                |> String.concat ", "
+                |> String.concat ","
             (property, value |> String) |> Rule
-        
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
     type TextOverflow(property) =
         inherit CssRule(property)
@@ -487,7 +487,7 @@ module TextClasses =
                 quotes
                 |> List.map (fun x -> $"\"{x}\"")
                 |> String.concat " "
-                
+
             (property, String quotes)
             |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens

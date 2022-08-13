@@ -98,7 +98,7 @@ module FontFaceClasses =
             let value =
                 urls
                 |> List.map (fun x -> (stringifyICssValue (UrlMaster x)))
-                |> String.concat ", "
+                |> String.concat ","
                 |> String
 
             (property, value) |> FontFaceRule
@@ -107,7 +107,7 @@ module FontFaceClasses =
             let value =
                 formatUrls
                 |> List.map stringifyIFontFaceValue
-                |> String.concat ", "
+                |> String.concat ","
                 |> String
 
             (property, value) |> FontFaceRule
@@ -170,7 +170,7 @@ module FontFaceClasses =
         member this.value(weight: int) = (property, Int weight) |> FontFaceRule
         member this.normal = (property, Normal) |> FontFaceRule
         member this.bold = (property, String "Bold") |> FontFaceRule
-        
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/size-adjust
     type SizeAdjust(property) =
         member this.value(adjust: Percent) = (property, adjust) |> FontFaceRule
@@ -180,7 +180,7 @@ module FontFaceClasses =
             (property, String range) |> FontFaceRule
 
         member this.value(ranges: string list) =
-            let value = ranges |> String.concat ", "
+            let value = ranges |> String.concat ","
             (property, String value) |> FontFaceRule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/line-gap-override
     type LineGapOverride(property) =
@@ -200,7 +200,7 @@ module FontFaceClasses =
             let value =
                 settings
                 |> List.map variationToString
-                |> String.concat ", "
+                |> String.concat ","
                 |> String
 
             (property, value) |> FontFaceRule

@@ -207,7 +207,7 @@ module Functions =
     // #####
 
     let private addBrackets string =
-        $"{{ {string} }}"
+        $"{{{string}}}"
 
     /// Creates CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements
@@ -235,7 +235,7 @@ module Functions =
     let private stringifyCounterProperty (property: CounterRule) =
         let propertyName, propertyValue = property
 
-        $"{stringifyICssValue propertyName}: {propertyValue.StringifyCounter()};"
+        $"{stringifyICssValue propertyName}:{propertyValue.StringifyCounter()};"
 
     /// Creates all counter styles and combines them
     let private createCounterStyleInternal (name: string option) (properties: CounterRule list) : string * string =
@@ -284,7 +284,7 @@ module Functions =
     let private stringifyFontFaceProperty (property: FontFaceRule) =
         let propertyName, propertyValue = property
 
-        $"{stringifyICssValue propertyName}: {propertyValue.StringifyFontFace()};"
+        $"{stringifyICssValue propertyName}:{propertyValue.StringifyFontFace()};"
 
     /// Creates the CSS for a font face based on a list of FontFace rules
     /// Returns a tuple containing 2 elements
@@ -322,17 +322,19 @@ module Functions =
                 (fun acc x ->
                     match x with
                     | Frame (n, rules) ->
-                        let _, rules = createFss rules
-                        $"{acc} {n}%% {rules}"
+                        let _, rules = createFssWithClassname "" rules
+                        $"{acc}{n}%%{rules[1..]}"
                     | Frames (ns, rules) ->
-                        let _, rules = createFss rules
+                        let _, rules = createFssWithClassname "" rules
                         let frameNumbers = framePositionToString ns
-                        $"{acc} {frameNumbers} {rules}")
+                        $"{acc}{frameNumbers}{rules[1..]}")
                 ""
                 attributeList
         match name with
         | Some name -> name, addBrackets animationStyles
-        | _ -> $"animation-{FNV_1A.hash animationStyles}", addBrackets animationStyles
+        | _ ->
+            let animationName = $"animation-{FNV_1A.hash animationStyles}"
+            animationName, $"{animationName}{addBrackets animationStyles}"
 
     /// Creates the CSS for an animation based on a list of KeyframeAttributes
     /// Returns a tuple containing 2 elements

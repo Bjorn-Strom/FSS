@@ -73,12 +73,9 @@ module Tests =
                 OrderingTests.tests
                 SelectorTests.tests
                 AnimationTests.tests
-
-//                CompositeTests.tests
-//                CounterTests.tests
-//                FontFaceTests.tests
-
-
+                CounterTests.tests
+                FontFaceTests.tests
+                CompositeTests.tests
             ]
 
         0
@@ -88,6 +85,8 @@ module Tests =
 // - Speed up
 // - Selectors can use classnames or id
 // - Attribute selectors can use classnames or id
+// - Fet skip, fet focus
+// - Fet runtests, vise hva testfila heter, hvor mange som passer og de som feiler
 // DONE:
 // Changed how the CSS is generated
 // Also changed CSS output to be more minimized

@@ -182,7 +182,7 @@ module BackgroundClasses =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
     type BackgroundSize(property) =
-        inherit CssRuleWithValueFunctions<Background.Size>(property, ", ")
+        inherit CssRuleWithValueFunctions<Background.Size>(property, ",")
 
         member this.value(size: ILengthPercentage) =
             (property, lengthPercentageToType size) |> Rule
