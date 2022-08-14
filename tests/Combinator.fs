@@ -4,9 +4,9 @@ open Fet
 open Utils
 open Fss
 
-module SelectorTests =
+module CombinatorTests =
     let tests =
-       testList "Selector"
+       testList "Combinator"
            [
                let className, actual = createFss [ !+ Fss.Types.Html.All [ Color.blue ] ]
                testEqual

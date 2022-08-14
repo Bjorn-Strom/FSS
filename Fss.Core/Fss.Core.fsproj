@@ -18,9 +18,11 @@
     <Compile Include="Utilities.fs" />
     <Compile Include="Types\Html.fs" />
     <Compile Include="Types\MasterTypes.fs" />
+    <Compile Include="Types\Properties.fs" />
+    <Compile Include="Types\Units.fs" />
+    <Compile Include="Types\Media.fs" />
     <Compile Include="Types\Attribute.fs" />
     <Compile Include="Types\Color.fs" />
-    <Compile Include="Types\Units.fs" />
     <Compile Include="Types\Border.fs" />
     <Compile Include="Types\Image.fs" />
     <Compile Include="Types\ContentSize.fs" />
@@ -64,10 +66,9 @@
     <Compile Include="Types\WillChange.fs" />
     <Compile Include="Types\Mask.fs" />
     <Compile Include="Types\Svg.fs" />
-    <Compile Include="Types\Media.fs" />
     <Compile Include="Types\FontFace.fs" />
     <Compile Include="Types\Font.fs" />
-    <Compile Include="Types\Selector.fs" />
+    <Compile Include="Types\Combinator.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Custom.fs" />
     <Compile Include="css\Border.fs" />

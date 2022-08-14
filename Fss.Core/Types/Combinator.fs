@@ -1,5 +1,4 @@
 namespace Fss
-
 namespace Fss.Types
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_combinator
@@ -7,8 +6,8 @@ namespace Fss.Types
 // https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator
 // https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_combinator
 [<RequireQualifiedAccess>]
-module SelectorClasses =
-    type Selector =
+module CombinatorClasses =
+    type Combinator =
         static member adjacentSibling (html: Html.Html) rules =
             (Property.AdjacentSibling html, CombinatorMaster.CombinatorMaster rules)
             |> Rule

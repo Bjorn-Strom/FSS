@@ -1,25 +1,24 @@
 namespace Fss
 
-open System.Text
 open Fss
 open Fss.Types
 open Fss.Utilities
 
 [<AutoOpen>]
 module Functions =
-    type Selector =
-    | Global of Property.CssProperty
-    | ClassName of Property.CssProperty
-    | Id of Property.CssProperty
-    | PseudoClass of Property.CssProperty
-    | PseudoElement of Property.CssProperty
-    | Combinator of Property.CssProperty
-    | Media2 of Media.Feature list
-    | MediaFor2 of Media.Device * Media.Feature list
+    type private Selector =
+        | Global of Property.CssProperty
+        | ClassName of Property.CssProperty
+        | Id of Property.CssProperty
+        | PseudoClass of Property.CssProperty
+        | PseudoElement of Property.CssProperty
+        | Combinator of Property.CssProperty
+        | SelectorMedia of Media.Feature list
+        | SelectorMediaFor of Media.Device * Media.Feature list
 
-    and CssScope = Selector * CssItem list
-    and CssItem =
-        | Rule2 of Rule
+    and private CssScope = Selector * CssItem list
+    and private CssItem =
+        | CssRule of Rule
         | CssScope of CssScope
 
     let private isLabel (_, value: ICssValue) =
@@ -32,8 +31,7 @@ module Functions =
         | _ -> false
 
     let private generateCssScope (name: string option) (rules: Rule list) =
-        // TODO: Her vil vi sende typene gjennom
-        // Denne føles litt teit ut
+        // TODO: This feels somewhat pointless. Can this be generated in a better way?
         let rec generator (rules_to_generate: Rule list): CssItem list =
             rules_to_generate
             |> List.map (fun x ->
@@ -66,11 +64,11 @@ module Functions =
                         match m with
                         | Media.MediaQuery (features, rules) ->
                             let rules = generator rules
-                            CssScope (Media2 features, rules)
+                            CssScope (SelectorMedia features, rules)
                         | Media.MediaQueryFor (device, features, rules) ->
                             let rules = generator rules
-                            CssScope (MediaFor2 (device, features), rules)
-                    | _ -> Rule2 x
+                            CssScope (SelectorMediaFor (device, features), rules)
+                    | _ -> CssRule x
                 )
         let label =
             rules
@@ -117,6 +115,32 @@ module Functions =
                 [ device ] @ x
         |> String.concat " and "
 
+    let private chunk f listofstuff =
+        match listofstuff with
+        | [] -> []
+        | [x] -> [ [x] ]
+        | x :: y :: rest ->
+            List.fold (fun acc y ->
+                let lastChunk =
+                    acc
+                    |> List.rev
+                    |> List.head
+                let valueOfItemInChunk =
+                    lastChunk
+                    |> List.head
+                    |> f
+
+                if valueOfItemInChunk = f y then
+                    let accWithoutLastChunk =
+                        acc
+                        |> List.rev
+                        |> List.tail
+                        |> List.rev
+                    accWithoutLastChunk @ [ lastChunk @ [ y ] ]
+                else
+                    acc @ [ [ y ] ]
+            ) [ [ x ] ] (y :: rest)
+
     let rec private createCssFromScope selectorScope (scope: CssScope): string =
         let currentSelector, cssItems = scope
         let isMedia, selector =
@@ -127,45 +151,19 @@ module Functions =
             | PseudoClass currentSelector -> false, $"{selectorScope}:{stringifyICssValue currentSelector}"
             | PseudoElement currentSelector -> false, $"{selectorScope}::{stringifyICssValue currentSelector}"
             | Combinator currentSelector -> false, $"{selectorScope}{stringifyICssValue currentSelector}"
-            | Media2 features -> true, $"""@media {mediaFeaturesToCss "" features}"""
-            | MediaFor2 (device, features) -> true, $"@media {mediaFeaturesToCss (stringifyICssValue device) features}"
-
-        let chunky f listofstuff =
-            match listofstuff with
-            | [] -> []
-            | [x] -> [ [x] ]
-            | x :: y :: rest ->
-                List.fold (fun acc y ->
-                    let lastChunk =
-                        acc
-                        |> List.rev
-                        |> List.head
-                    let valueOfItemInChunk =
-                        lastChunk
-                        |> List.head
-                        |> f
-
-                    if valueOfItemInChunk = f y then
-                        let accWithoutLastChunk =
-                            acc
-                            |> List.rev
-                            |> List.tail
-                            |> List.rev
-                        accWithoutLastChunk @ [ lastChunk @ [ y ] ]
-                    else
-                        acc @ [ [ y ] ]
-                ) [ [ x ] ] (y :: rest)
+            | SelectorMedia features -> true, $"""@media {mediaFeaturesToCss "" features}"""
+            | SelectorMediaFor (device, features) -> true, $"@media {mediaFeaturesToCss (stringifyICssValue device) features}"
 
         if isMedia then
             let mediaQuery = selector
             cssItems
-            |> chunky (function | Rule2 _ -> true | _ -> false)
+            |> chunk (function | CssRule _ -> true | _ -> false)
             |> List.map (fun items ->
                 match List.head items with
-                | Rule2 _ ->
+                | CssRule _ ->
                     List.map (fun x ->
                         match x with
-                        | Rule2 (name, value) -> $"{stringifyICssValue name}:{stringifyICssValue value};"
+                        | CssRule (name, value) -> $"{stringifyICssValue name}:{stringifyICssValue value};"
                         | _ -> failwith "Error") items
                     |> String.concat ""
                     |> fun x -> $"{selectorScope}{{{x}}}"
@@ -180,13 +178,13 @@ module Functions =
             |> fun x -> $"{mediaQuery} {{{x}}}"
         else
             cssItems
-            |> chunky (function | Rule2 _ -> true | _ -> false)
+            |> chunk (function | CssRule _ -> true | _ -> false)
             |> List.map (fun items ->
                 match List.head items with
-                | Rule2 _ ->
+                | CssRule _ ->
                     List.map (fun x ->
                         match x with
-                        | Rule2 (name, value) -> $"{stringifyICssValue name}:{stringifyICssValue value};"
+                        | CssRule (name, value) -> $"{stringifyICssValue name}:{stringifyICssValue value};"
                         | _ -> failwith "Error") items
                     |> String.concat ""
                     |> fun x -> $"{selector}{{{x}}}"
@@ -203,11 +201,6 @@ module Functions =
         let classname, cssScope = generateCssScope name rules
         let css = createCssFromScope "" cssScope
         classname, css
-
-    // #####
-
-    let private addBrackets string =
-        $"{{{string}}}"
 
     /// Creates CSS based on a list of CSS rules
     /// Returns a tuple containing 2 elements
@@ -264,7 +257,7 @@ module Functions =
             | Some n -> n
             | _ -> $"counter{FNV_1A.hash propertyString}{label}"
 
-        counterName, addBrackets propertyString
+        counterName, $"{{{propertyString}}}"
 
     /// Creates the CSS for a counter style based on a list of CounterStyle rules
     /// Returns a tuple containing 2 elements
@@ -296,7 +289,7 @@ module Functions =
             List.map stringifyFontFaceProperty properties
             |> String.concat ""
 
-        name, addBrackets properties
+        name, $"{{{properties}}}"
 
     /// Creates the CSS for several font faces based on FontFace rules
     /// Returns a tuple containing 2 elements
@@ -331,10 +324,10 @@ module Functions =
                 ""
                 attributeList
         match name with
-        | Some name -> name, addBrackets animationStyles
+        | Some name -> name, $"{{{animationStyles}}}"
         | _ ->
             let animationName = $"animation-{FNV_1A.hash animationStyles}"
-            animationName, $"{animationName}{addBrackets animationStyles}"
+            animationName, $"{animationName}{{{animationStyles}}}"
 
     /// Creates the CSS for an animation based on a list of KeyframeAttributes
     /// Returns a tuple containing 2 elements

@@ -71,7 +71,7 @@ module Tests =
                 PseudoTests.tests
                 FontTests.tests
                 OrderingTests.tests
-                SelectorTests.tests
+                CombinatorTests.tests
                 AnimationTests.tests
                 CounterTests.tests
                 FontFaceTests.tests
