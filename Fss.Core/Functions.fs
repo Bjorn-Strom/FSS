@@ -257,7 +257,7 @@ module Functions =
             | Some n -> n
             | _ -> $"counter{FNV_1A.hash propertyString}{label}"
 
-        counterName, $"{{{propertyString}}}"
+        counterName, $"{counterName}{{{propertyString}}}"
 
     /// Creates the CSS for a counter style based on a list of CounterStyle rules
     /// Returns a tuple containing 2 elements
