@@ -81,13 +81,16 @@ module Tests =
         0
 
 // TODO:
-// - Functions to make media stuff easier?
 // - Speed up
 // - Selectors can use classnames or id
 // - Attribute selectors can use classnames or id
 // - Fet skip, fet focus
 // - Fet runtests, vise hva testfila heter, hvor mange som passer og de som feiler
 // DONE:
+// - Functions to make media stuff easier.
+        // Media queries have always annoyed me. Very annoying to specify FssTypes.
+        // Added helpers
+        // can still access through FssTypes if needed
 // Changed how the CSS is generated
 // Also changed CSS output to be more minimized
         // This is reflected in the tests

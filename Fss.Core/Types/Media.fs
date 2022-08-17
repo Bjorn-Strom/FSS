@@ -25,12 +25,12 @@ module Media =
     type Pointer =
         | Course
         | Fine
-        | None
+        | None'
         member this.Stringify() =
             match this with
             | Course -> "course"
             | Fine -> "fine"
-            | None -> "none"
+            | None' -> "none"
 
     type ColorGamut =
         | SRGB
@@ -70,14 +70,14 @@ module Media =
             | Landscape -> "landscape"
             | Portrait -> "portrait"
 
-    type OverflowBlock =
-        | None
+    type OverflowBlock' =
+        | None'
         | Scrolled
         | OptionalPaged
         | Paged
         member this.Stringify() =
             match this with
-            | None -> "none"
+            | None' -> "none"
             | Scrolled -> "scrolled"
             | OptionalPaged -> "optional-paged"
             | Paged -> "paged"
@@ -108,23 +108,23 @@ module Media =
             | Interlace -> "interlace"
             | Progressive -> "progressive"
 
-    type Scripting =
-        | None
+    type Scripting' =
+        | None'
         | InitialOnly
         | Enabled
         member this.Stringify() =
             match this with
-            | None -> "none"
+            | None' -> "none"
             | InitialOnly -> "initial-only"
             | Enabled -> "enabled"
 
-    type Update =
-        | None
+    type Update' =
+        | None'
         | Slow
         | Fast
         member this.Stringify() =
             match this with
-            | None -> "none"
+            | None' -> "none"
             | Slow -> "slow"
             | Fast -> "fast"
 
@@ -157,7 +157,7 @@ module Media =
         | MinMonochrome of int
         | MaxMonochrome of int
         | Orientation of Orientation
-        | OverflowBlock of OverflowBlock
+        | OverflowBlock of OverflowBlock'
         | OverflowInline of bool
         | Pointer of Pointer
         | PrefersColorScheme of ColorScheme
@@ -168,8 +168,8 @@ module Media =
         | MinResolution of Resolution
         | MaxResolution of Resolution
         | Scan of Scan
-        | Scripting of Scripting
-        | Update of Update
+        | Scripting of Scripting'
+        | Update of Update'
         override this.ToString() =
             match this with
             | AnyHover bool -> $"any-hover:{bool}"
