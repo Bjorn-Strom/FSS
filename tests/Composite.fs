@@ -21,8 +21,8 @@ module CompositeTests =
     let counterStyleName, counterStyle =
        createFss [ ListStyleType.value counterName
                    FontFamily.value fontName
-                   ! Fss.Types.Html.Li [ After [ Content.value "."  ]]
-                   ! Fss.Types.Html.Li [
+                   ! (Selector.Tag Fss.Types.Html.Li) [ After [ Content.value "."  ]]
+                   ! (Selector.Tag Fss.Types.Html.Li) [
                        BackgroundColor.aliceBlue
                        Hover [ BackgroundColor.orangeRed ]
                    ]

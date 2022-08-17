@@ -8,18 +8,18 @@ namespace Fss.Types
 [<RequireQualifiedAccess>]
 module CombinatorClasses =
     type Combinator =
-        static member adjacentSibling (html: Html.Html) rules =
-            (Property.AdjacentSibling html, CombinatorMaster.CombinatorMaster rules)
+        static member adjacentSibling (selector: Selector) rules =
+            (Property.AdjacentSibling selector, CombinatorMaster.CombinatorMaster rules)
             |> Rule
 
-        static member generalSibling (html: Html.Html) rules =
-            (Property.GeneralSibling html, CombinatorMaster.CombinatorMaster rules)
+        static member generalSibling (selector: Selector) rules =
+            (Property.GeneralSibling selector, CombinatorMaster.CombinatorMaster rules)
             |> Rule
 
-        static member child (html: Html.Html) rules =
-            (Property.Child html, CombinatorMaster.CombinatorMaster rules)
+        static member child (selector: Selector) rules =
+            (Property.Child selector, CombinatorMaster.CombinatorMaster rules)
             |> Rule
 
-        static member descendant (html: Html.Html) rules =
-            (Property.Descendant html, CombinatorMaster.CombinatorMaster rules)
+        static member descendant (selector: Selector) rules =
+            (Property.Descendant selector, CombinatorMaster.CombinatorMaster rules)
             |> Rule

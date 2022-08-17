@@ -67,7 +67,7 @@ module MediaTests =
                                                                                         [  Media.MinWidth (px 601)
                                                                                            Media.MaxWidth (px 2) ]
                                                                                         [ Color.red
-                                                                                          !> Fss.Types.Html.Li [ Color.chartreuse; After [ Color.blue
+                                                                                          !> (Selector.Tag Fss.Types.Html.Li) [ Color.chartreuse; After [ Color.blue
                                                                                         ] ] ] ]
                     Expect.equal actual $"@media only screen and (min-width:601px) and (max-width:2px) {{.{className}{{color:red;}}.{className} > li{{color:chartreuse;}}.{className} > li::after{{color:blue;}}}}"
 

@@ -119,6 +119,7 @@
     <Compile Include="css\Combinator.fs" />
     <Compile Include="css\Media.fs" />
     <Compile Include="css\Keyframes.fs" />
+    <Compile Include="css\Selector.fs" />
     <Compile Include="Functions.fs" />
   </ItemGroup>
   <ItemGroup>

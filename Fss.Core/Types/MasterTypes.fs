@@ -18,6 +18,16 @@ type IFontFaceValue =
         abstract member StringifyFontFace : unit -> string
     end
 
+type Selector =
+    | Tag of Html.Html
+    | Id of string
+    | Class of string
+    static member stringify this =
+        match this with
+        | Tag t -> t.Stringify()
+        | Id i -> $"#{i}"
+        | Class c -> $".{c}"
+
 [<AutoOpen>]
 module MasterTypeHelpers =
     let internal cache = System.Collections.Generic.Dictionary<ICssValue, string>()

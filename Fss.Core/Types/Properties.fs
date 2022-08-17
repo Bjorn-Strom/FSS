@@ -467,10 +467,10 @@ module Property =
         | Class of string
         | Id of string
         | NameLabel
-        | AdjacentSibling of Html.Html
-        | GeneralSibling of Html.Html
-        | Child of Html.Html
-        | Descendant of Html.Html
+        | AdjacentSibling of Selector
+        | GeneralSibling of Selector
+        | Child of Selector
+        | Descendant of Selector
         | Custom of string
         | Media
         interface ICssValue with
@@ -874,10 +874,10 @@ module Property =
                 | NthLastChild n -> $"nth-last-child({n})"
                 | NthOfType n -> $"nth-of-type({n})"
                 | NthLastOfType n -> $"nth-last-of-type({n})"
-                | AdjacentSibling html -> $" + {html.Stringify()}"
-                | GeneralSibling html -> $" ~ {html.Stringify()}"
-                | Child html -> $" > {html.Stringify()}"
-                | Descendant html -> $" {html.Stringify()}"
+                | AdjacentSibling selector -> $" + {Selector.stringify(selector)}"
+                | GeneralSibling selector -> $" ~ {Selector.stringify(selector)}"
+                | Child selector -> $" > {Selector.stringify(selector)}"
+                | Descendant selector -> $" {Selector.stringify(selector)}"
                 | Custom c -> c.ToLower()
                 | Media -> "media"
                 | NameLabel -> "name-label"

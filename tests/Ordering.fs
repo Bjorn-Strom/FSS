@@ -14,17 +14,17 @@ module OrderingTests =
                             Display.flex
                             FlexDirection.column
 
-                            !> Html.H2 [
+                            !> (Selector.Tag Html.H2) [
                                 important <| MarginBottom.value (px 16)
                             ]
 
                             Media.query
-                                [ Fss.Types.Media.MinWidth (px 200)]
+                                [ Media.MinWidth (px 200)]
                                 [
                                     FlexDirection.row
                                     FlexGrow.value 1.0
 
-                                    !> Html.H2 [
+                                    !> (Selector.Tag Html.H2) [
                                         important <| MarginBottom.value (px 0)
                                         important <| MarginRight.value (px 16)
 
@@ -63,13 +63,13 @@ module OrderingTests =
                             FontWeight.bolder
                         ]
                         FontWeight.normal
-                        !> Html.P [
+                        !> (Selector.Tag Html.P) [
                             FontWeight.bold
                         ]
                         Media.query
-                            [ Fss.Types.Media.MaxWidth (px 200) ]
+                            [ Media.MaxWidth (px 200) ]
                             [ FontWeight.lighter ]
-                        !> Html.P [
+                        !> (Selector.Tag Html.P) [
                             Color.red
                         ]
                     ]
@@ -78,24 +78,24 @@ module OrderingTests =
                   "Ordering 3"
                    actual
                    ".orderingThree:hover{font-weight:bolder;}.orderingThree{font-weight:normal;}.orderingThree > p{font-weight:bold;}@media (max-width:200px) {.orderingThree{font-weight:lighter;}}.orderingThree > p{color:red;}"
-//
-//                let orderingFour =
-//                    createOrderTest "orderingFour" [
-//                        !> Html.P [
-//                            FontWeight.bold
-//                        ]
-//                        Media.query
-//                            [ Fss.Types.Media.MaxWidth (px 200) ]
-//                            [ FontWeight.lighter ]
-//                        Hover [
-//                            FontWeight.bolder
-//                        ]
-//                        FontWeight.normal
-//                    ]
-//
-//                testEqual
-//                  "Ordering 4"
-//                   orderingFour
-//                   ".orderingFour > p { font-weight: bold; }@media (max-width: 200px) { .orderingFour { font-weight: lighter; } }.orderingFour:hover { font-weight: bolder; }.orderingFour { font-weight: normal; }"
+
+                let _, actual =
+                    createFssWithClassname "orderingFour" [
+                        !> (Selector.Tag Html.P) [
+                            FontWeight.bold
+                        ]
+                        Media.query
+                            [ Media.MaxWidth (px 200) ]
+                            [ FontWeight.lighter ]
+                        Hover [
+                            FontWeight.bolder
+                        ]
+                        FontWeight.normal
+                    ]
+
+                testEqual
+                   "Ordering 4"
+                   actual
+                   ".orderingFour > p{font-weight:bold;}@media (max-width:200px) {.orderingFour{font-weight:lighter;}}.orderingFour:hover{font-weight:bolder;}.orderingFour{font-weight:normal;}"
 
            ]

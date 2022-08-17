@@ -77,16 +77,15 @@ module Tests =
                 FontFaceTests.tests
                 CompositeTests.tests
             ]
-
         0
 
 // TODO:
 // - Speed up
-// - Selectors can use classnames or id
-// - Attribute selectors can use classnames or id
+// - Attribute selectors
 // - Fet skip, fet focus
 // - Fet runtests, vise hva testfila heter, hvor mange som passer og de som feiler
 // DONE:
+// - Selectors can use classnames or id
 // - Functions to make media stuff easier.
         // Media queries have always annoyed me. Very annoying to specify FssTypes.
         // Added helpers

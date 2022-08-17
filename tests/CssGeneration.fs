@@ -49,9 +49,9 @@ module CssGenerationTests =
                 test "Multiple levels of nesting" <| fun _ ->
                     let className, actual = (createFss [
                         Margin.value (px 0)
-                        !> Fss.Types.Html.Figcaption [
+                        !> (Selector.Tag Fss.Types.Html.Figcaption) [
                             BackgroundColor.hsl 0 0 0
-                            !> Fss.Types.Html.P [
+                            !> (Selector.Tag Fss.Types.Html.P) [
                                 FontSize.value (rem 0.9)
                             ]
                         ]
