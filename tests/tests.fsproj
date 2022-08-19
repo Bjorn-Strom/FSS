@@ -49,6 +49,7 @@
     <Compile Include="BoxShadow.fs" />
     <Compile Include="All.fs" />
     <Compile Include="Scroll.fs" />
+    <Compile Include="Attributes.fs" />
     <Compile Include="Mask.fs" />
     <Compile Include="WillChange.fs" />
     <Compile Include="Image.fs" />

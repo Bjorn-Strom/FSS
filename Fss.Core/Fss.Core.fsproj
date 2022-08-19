@@ -120,6 +120,7 @@
     <Compile Include="css\Media.fs" />
     <Compile Include="css\Keyframes.fs" />
     <Compile Include="css\Selector.fs" />
+    <Compile Include="css\Attributes.fs" />
     <Compile Include="Functions.fs" />
   </ItemGroup>
   <ItemGroup>

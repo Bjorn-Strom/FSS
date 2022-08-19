@@ -76,15 +76,17 @@ module Tests =
                 CounterTests.tests
                 FontFaceTests.tests
                 CompositeTests.tests
+                AttributeTests.tests
             ]
         0
 
 // TODO:
+// - Nested Attribute selectors
 // - Speed up
-// - Attribute selectors
 // - Fet skip, fet focus
 // - Fet runtests, vise hva testfila heter, hvor mange som passer og de som feiler
 // DONE:
+// - Attribute selectors
 // - Selectors can use classnames or id
 // - Functions to make media stuff easier.
         // Media queries have always annoyed me. Very annoying to specify FssTypes.

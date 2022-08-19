@@ -1,5 +1,6 @@
 namespace Fss
 
+open System
 open Fss
 open Fss.Types
 open Fss.Utilities
@@ -15,6 +16,8 @@ module Functions =
         | Combinator of Property.CssProperty
         | SelectorMedia of Media.Feature list
         | SelectorMediaFor of Media.Device * Media.Feature list
+        | Attribute of Property.CssProperty * Attribute.Attribute
+        | AttributeWithCase of Property.CssProperty * Attribute.Attribute * AttributeHelpers.Match * string * Attribute.Case option
 
     and private CssScope = Selector * CssItem list
     and private CssItem =
@@ -68,6 +71,30 @@ module Functions =
                         | Media.MediaQueryFor (device, features, rules) ->
                             let rules = generator rules
                             CssScope (SelectorMediaFor (device, features), rules)
+                    | :? Attribute.AttributeMaster as a ->
+                        match a with
+                        | Attribute.Normal (attribute, rules) ->
+                            let rules = generator rules
+                            CssScope ((Attribute (selector, attribute), rules))
+                        | Attribute.Exactly (attribute, match', case, rules) ->
+                            let rules = generator rules
+                            CssScope ((AttributeWithCase (selector, attribute, AttributeHelpers.Exactly, match', case), rules))
+                        | Attribute.Contains (attribute, match', case, rules) ->
+                            let rules = generator rules
+                            CssScope ((AttributeWithCase (selector, attribute, AttributeHelpers.Contains, match', case), rules))
+                        | Attribute.ValueOrContinuation (attribute, match', case, rules) ->
+                            let rules = generator rules
+                            CssScope ((AttributeWithCase (selector, attribute, AttributeHelpers.ValueOrContinuation, match', case), rules))
+                        | Attribute.Prefix (attribute, match', case, rules) ->
+                            let rules = generator rules
+                            CssScope ((AttributeWithCase (selector, attribute, AttributeHelpers.Prefix, match', case), rules))
+                        | Attribute.Suffix (attribute, match', case, rules) ->
+                            let rules = generator rules
+                            CssScope ((AttributeWithCase (selector, attribute, AttributeHelpers.Suffix, match', case), rules))
+                        | Attribute.AtLeastOne (attribute, match', case, rules) ->
+                            let rules = generator rules
+                            CssScope ((AttributeWithCase (selector, attribute, AttributeHelpers.AtLeastOne, match', case), rules))
+
                     | _ -> CssRule x
                 )
         let label =
@@ -153,6 +180,8 @@ module Functions =
             | Combinator currentSelector -> false, $"{selectorScope}{stringifyICssValue currentSelector}"
             | SelectorMedia features -> true, $"""@media {mediaFeaturesToCss "" features}"""
             | SelectorMediaFor (device, features) -> true, $"@media {mediaFeaturesToCss (stringifyICssValue device) features}"
+            | Attribute (property, attribute) -> false, $"{stringifyICssValue property}{selectorScope}{AttributeHelpers.stringifyAttribute attribute None String.Empty None}"
+            | AttributeWithCase (property, attribute, matcher, match', case) -> false, $"{stringifyICssValue property}{selectorScope}{AttributeHelpers.stringifyAttribute attribute (Some matcher) match' case}"
 
         if isMedia then
             let mediaQuery = selector
@@ -228,7 +257,7 @@ module Functions =
     let private stringifyCounterProperty (property: CounterRule) =
         let propertyName, propertyValue = property
 
-        $"{stringifyICssValue propertyName}:{propertyValue.StringifyCounter()};"
+        (stringifyICssValue propertyName) + ":" + (propertyValue.StringifyCounter()) + ";"
 
     /// Creates all counter styles and combines them
     let private createCounterStyleInternal (name: string option) (properties: CounterRule list) : string * string =

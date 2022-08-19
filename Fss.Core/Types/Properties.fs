@@ -473,6 +473,8 @@ module Property =
         | Descendant of Selector
         | Custom of string
         | Media
+        | Attribute
+        | AttributeSelector of Selector
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -878,6 +880,8 @@ module Property =
                 | GeneralSibling selector -> $" ~ {Selector.stringify(selector)}"
                 | Child selector -> $" > {Selector.stringify(selector)}"
                 | Descendant selector -> $" {Selector.stringify(selector)}"
+                | Attribute -> ""
+                | AttributeSelector selector -> Selector.stringify(selector)
                 | Custom c -> c.ToLower()
                 | Media -> "media"
                 | NameLabel -> "name-label"
