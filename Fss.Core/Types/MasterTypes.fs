@@ -31,8 +31,7 @@ type Selector =
 [<AutoOpen>]
 module MasterTypeHelpers =
     let internal cache = System.Collections.Generic.Dictionary<ICssValue, string>()
-    // TODO: internal
-    let stringifyICssValue cssValue: string =
+    let internal stringifyICssValue cssValue: string =
         if cache.ContainsKey(cssValue) then
             cache[cssValue]
         else

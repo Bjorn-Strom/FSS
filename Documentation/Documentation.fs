@@ -185,7 +185,7 @@ let Menu () =
                             // We need to animate the article as well as the menu when
                             // The following code block deals with that
                             // (parens added as Fantomas is acting up)
-                            (!+Fss.Types.Html.Article)
+                            (!+ (Selector.Tag Fss.Types.Html.Article))
                                 [ MarginLeft.value (px 400)
                                   TransitionProperty.marginLeft
                                   TransitionTimingFunction.easeInOut
@@ -207,9 +207,6 @@ let Menu () =
 
 
 let Article (page: Page) =
-    //                    | Feliz ->
-//                    | SVG ->
-
     Html.article [ prop.fss [ PaddingTop.value (px 100) ]
                    prop.children [ match page with
                                    | Overview -> Suspense overview
@@ -247,11 +244,11 @@ let App () =
     global' [ Link [ Color.hex sidebarText ]
               Visited [ Color.hex sidebarText ]
               !
-                  Fss.Types.Html.A
+                  (Selector.Tag Fss.Types.Html.A)
                   [ Hover [ Color.hex sidebarHover ]
                     Focus [ Color.hex sidebarHover ] ]
               !
-                  Fss.Types.Html.Body
+                  (Selector.Tag Fss.Types.Html.Body)
                   [ BackgroundColor.hex "#181A1B"
                     textFont
                     Color.hex contentText ] ]

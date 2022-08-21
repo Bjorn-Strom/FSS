@@ -81,8 +81,16 @@ module Tests =
         0
 
 // TODO:
+// - SVG not working, could be animation
+// - Counters not working
+// - Animations are not working
 // - Nested Attribute selectors
 // - Speed up
+// - Changelog
+// - Breaking changes
+// - Document new features
+// - Can Fss.Giraffe get better?
+// - Fss.Falco?
 // - Fet skip, fet focus
 // - Fet runtests, vise hva testfila heter, hvor mange som passer og de som feiler
 // DONE:

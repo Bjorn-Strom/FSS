@@ -5,33 +5,31 @@ open Fss
 open BenchmarkDotNet.Attributes
 open BenchmarkDotNet.Running
 //
-[<MemoryDiagnoser>]
-type Bench() =
-
-
-    [<Benchmark>]
-    member _.Interpolation() = $"{10}"
-    [<Benchmark>]
-    member _.Sprintf() = sprintf "%i" 10
-    [<Benchmark>]
-    member _.InterpolationWithType() = $"%i{10}"
-    [<Benchmark>]
-    member _.Concatinate() = "" + (string 10)
-    [<Benchmark>]
-    member _.InterpolationLonger() = $"{10}{20}{3.0}"
-    [<Benchmark>]
-    member _.SprintfLonger() = sprintf "%i%i%f" 10 20 3.0
-    [<Benchmark>]
-    member _.InterpolationWithTypeLonger() = $"%i{10}%i{20}%f{3.0}"
-    [<Benchmark>]
-    member _.ConcatinateLonger() = (string 10) + (string 20) + (string 3.0)
-    [<Benchmark>]
-    member _.StringBuilder() =
-        let sb = StringBuilder()
-        sb.Append 10 |> ignore
-        sb.Append 20 |> ignore
-        sb.Append 3.0 |> ignore
-        sb.ToString()
+//[<MemoryDiagnoser>]
+//type Bench() =
+//    [<Benchmark>]
+//    member _.Interpolation() = $"{10}"
+//    [<Benchmark>]
+//    member _.Sprintf() = sprintf "%i" 10
+//    [<Benchmark>]
+//    member _.InterpolationWithType() = $"%i{10}"
+//    [<Benchmark>]
+//    member _.Concatinate() = "" + (string 10)
+//    [<Benchmark>]
+//    member _.InterpolationLonger() = $"{10}{20}{3.0}"
+//    [<Benchmark>]
+//    member _.SprintfLonger() = sprintf "%i%i%f" 10 20 3.0
+//    [<Benchmark>]
+//    member _.InterpolationWithTypeLonger() = $"%i{10}%i{20}%f{3.0}"
+//    [<Benchmark>]
+//    member _.ConcatinateLonger() = (string 10) + (string 20) + (string 3.0)
+//    [<Benchmark>]
+//    member _.StringBuilder() =
+//        let sb = StringBuilder()
+//        sb.Append 10 |> ignore
+//        sb.Append 20 |> ignore
+//        sb.Append 3.0 |> ignore
+//        sb.ToString()
 
 //    let name = None
 //    let rules =
@@ -195,7 +193,7 @@ type Bench() =
 
 [<EntryPoint>]
 let main argv =
-    BenchmarkRunner.Run<Bench>() |> ignore
+//    BenchmarkRunner.Run<Bench>() |> ignore
 //    let foo =
 //    createFss [
 //        BackgroundColor.hex "44c767"
@@ -208,4 +206,49 @@ let main argv =
 //        FontSize.value (px 17)
 //    ] |> ignore
 //    printfn "%A" foo
+    let counterName, counter =
+        createCounterStyle [ System.cyclic
+                             Symbols.value [ "" ]
+                             Suffix.value " "
+                             Prefix.value " " ]
+
+    let fontName, font =
+        createFontFace
+            "DroidSerif"
+            [ FontFace.Src.truetype "https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf"
+              FontFace.FontWeight.value 100
+              FontFace.FontStyle.normal ]
+
+    let counterStyleName, counterStyle =
+       createFss [ ListStyleType.value counterName
+                   FontFamily.value fontName
+                   ! (Selector.Tag Fss.Types.Html.Li) [ After [ Content.value "."  ]]
+                   ! (Selector.Tag Fss.Types.Html.Li) [
+                       BackgroundColor.aliceBlue
+                       Hover [ BackgroundColor.orangeRed ]
+                   ]
+                   ]
+
+    let containerName, container =
+       createFss [ Display.flex
+                   FlexDirection.column
+                   AlignItems.center
+                   JustifyContent.center
+                   Label "container" ]
+
+    let animationName, spinimation =
+        createAnimation [ frame 0 [ Custom "transform" "rotate(0deg)" ]
+                          frame 100 [ Custom "transform" "rotate(360deg)" ] ]
+
+    let titleName, title =
+       createFss [ AnimationName.value animationName
+                   AnimationDuration.value (sec 1)
+                   AnimationIterationCount.infinite
+                   FontFamily.value "DroidSerif"
+                   Hover [ AnimationDuration.value (ms 500) ]
+                   Media.query [ Fss.Types.Media.MaxWidth(px 600) ] [
+                       BackgroundColor.hex "87ceeb"
+                   ]
+                   Label "title"
+                 ]
     0 // return an integer exit code
