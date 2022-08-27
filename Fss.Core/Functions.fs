@@ -108,22 +108,10 @@ module Functions =
             |> List.filter (isLabel >> not)
         let generatedItems = generator rules
         let className =
-            let stringify rule =
-                let x, y = rule
-                $"{stringifyICssValue x}-{stringifyICssValue y}"
             match name with
             | Some n -> n
             | _ ->
-                let fullCssString =
-                    rules
-                    |> List.map (fun (x, y) ->
-                        match y with
-                        | :? Media.MediaQueryMaster as m ->
-                            match m with
-                            | Media.MediaQuery (_, rules) -> List.map stringify rules |> String.concat ";"
-                            | Media.MediaQueryFor (_, _, rules) -> List.map stringify rules |> String.concat ";"
-                        | _ -> stringify (x,y))
-                    |> String.concat ";"
+                let fullCssString = stringifyList rules
                 $"css{FNV_1A.hash fullCssString}{label}"
 
         match name with
@@ -278,7 +266,7 @@ module Functions =
         // In that case they need a unique name
         let label =
             match label with
-            | Some l -> $"counter-{stringifyICounterValue l}"
+            | Some l -> $"{stringifyICounterValue l}"
             | None -> ""
 
         let counterName =

@@ -42,7 +42,14 @@ let Combinators () =
                                      Html.p "Text in a paragraph and after the div with the combinator so is red"
                                      Html.p "Text in a paragraph and after the div with the combinator so is red"
                                      Html.div [ Html.p
-                                                    "Text in a paragraph inside another div, paragraph is not directly after div with the combinator so is not red" ] ] ] ]
+                                                    "Text in a paragraph inside another div, paragraph is not directly after div with the combinator so is not red" ] ] ]
+          Html.div [ prop.fss [ ! (Selector.Id "SomeId") [ BackgroundColor.orangeRed ] ]
+                     prop.children [ Html.div [ prop.text "Not orangered"
+
+                                                 ]
+                                     Html.div [ prop.id "SomeId"
+                                                prop.text "Has the ID and is therefore orangered" ]
+                                     Html.div [ prop.text "Not orangered" ] ] ] ]
 
     Page Pages.Combinators styles
 

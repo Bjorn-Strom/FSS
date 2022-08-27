@@ -198,8 +198,18 @@ module Attribute =
         | Suffix of Attribute * string * Case option * Rule list
         | AtLeastOne of Attribute * string * Case option * Rule list
         interface ICssValue with
-            // We do not use this.
-            member this.StringifyCss() = ""
+            // Used for creating classname
+            member this.StringifyCss() =
+                match this with
+                | Normal (_, rules)
+                | Exactly (_,_,_,rules)
+                | Contains (_,_,_,rules)
+                | ValueOrContinuation (_,_,_,rules)
+                | Prefix (_,_,_,rules)
+                | Suffix (_,_,_,rules)
+                | AtLeastOne (_,_,_,rules)
+                    -> stringifyList rules
+
 
 module internal AttributeHelpers =
     type internal Match =

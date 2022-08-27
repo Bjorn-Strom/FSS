@@ -74,6 +74,9 @@ let keyframesAnimations: JS.Promise<unit -> ReactElement> =
 let combinators: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/Combinators.fs"
 
+let attributeSelectors: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/AttributeSelectors.fs"
+
 let mediaQueries: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/MediaQueries.fs"
 
@@ -146,7 +149,7 @@ let NavBar () =
                           TransitionTimingFunction.easeInOut
                           TransitionDuration.value (ms 500.)
 
-                          Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
+                          Media.query [ Media.MaxWidth <| px 1000 ] [
                               Top.value (px 0)
                           ] ]
                prop.children [ Html.div [ prop.fss [ Cursor.pointer ]
@@ -174,7 +177,7 @@ let Menu () =
                             TransitionTimingFunction.easeInOut
                             TransitionDuration.value (ms 500.)
 
-                            Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
+                            Media.query [ Media.MaxWidth <| px 1000 ] [
                                 if store.ShowSidebar then
                                     Left.value (pct 0)
                                 else
@@ -192,7 +195,7 @@ let Menu () =
                                   TransitionDuration.value (ms 500.)
                                   MaxWidth.value (pct 60)
 
-                                  Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
+                                  Media.query [ Media.MaxWidth <| px 1000 ] [
                                       MarginLeft.value (px 0)
                                       MaxWidth.value (pct 100)
 
@@ -220,6 +223,7 @@ let Article (page: Page) =
                                    | Transition -> Suspense transition
                                    | KeyframesAnimations -> Suspense keyframesAnimations
                                    | Combinators -> Suspense combinators
+                                   | AttributeSelectors -> Suspense attributeSelectors
                                    | MediaQueries -> Suspense mediaQueries
                                    | Counters -> Suspense counters
                                    | Fonts -> Suspense fonts

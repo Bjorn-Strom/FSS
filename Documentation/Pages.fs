@@ -12,6 +12,7 @@ type Page =
     | Transition
     | KeyframesAnimations
     | Combinators
+    | AttributeSelectors
     | MediaQueries
     | GlobalStyles
     | Counters
@@ -38,6 +39,7 @@ let allPages =
       Transition
       KeyframesAnimations
       Combinators
+      AttributeSelectors
       MediaQueries
       GlobalStyles
       Counters
@@ -63,6 +65,7 @@ let stringToPage =
     | "transition" -> Transition
     | "keyframesAnimations" -> KeyframesAnimations
     | "combinators" -> Combinators
+    | "attributeSelectors" -> AttributeSelectors
     | "mediaQueries" -> MediaQueries
     | "globalStyles" -> GlobalStyles
     | "counters" -> Counters

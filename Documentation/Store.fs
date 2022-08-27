@@ -59,7 +59,8 @@ let useFetchStore page setState =
                 promise {
                     let! response =
                         fetch
-                            $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/documentation/{page}.md"
+//                            $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/documentation/{page}.md"
+                            $"/documentation/{page}.md"
                             []
 
                     let! text = response.text ()

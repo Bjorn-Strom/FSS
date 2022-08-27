@@ -23,6 +23,7 @@
     <Compile Include="Pages\Transition.fs" />
     <Compile Include="Pages\KeyframesAnimations.fs" />
     <Compile Include="Pages\Combinators.fs" />
+    <Compile Include="Pages\AttributeSelectors.fs" />
     <Compile Include="Pages\MediaQueries.fs" />
     <Compile Include="Pages\GlobalStyles.fs" />
     <Compile Include="Pages\Counters.fs" />

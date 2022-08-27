@@ -218,7 +218,12 @@ module Media =
         | MediaQuery of Feature list * Rule list
         | MediaQueryFor of Device * Feature list * Rule list
         interface ICssValue with
-            member this.StringifyCss() = ""
+            // Used to create classname
+            member this.StringifyCss() =
+                match this with
+                | MediaQuery (_, rules)
+                | MediaQueryFor (_,_,rules) ->
+                    stringifyList rules
 
 
 [<RequireQualifiedAccess>]

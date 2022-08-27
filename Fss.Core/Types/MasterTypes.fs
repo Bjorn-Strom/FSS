@@ -42,3 +42,7 @@ module MasterTypeHelpers =
         (cssValue :> ICounterValue).StringifyCounter()
     let internal stringifyIFontFaceValue cssValue: string =
         (cssValue :> IFontFaceValue).StringifyFontFace()
+    let internal stringifyList rules =
+        rules
+        |> List.map (fun (x,y) -> $"{stringifyICssValue x}-{stringifyICssValue y}")
+        |> String.concat ";"

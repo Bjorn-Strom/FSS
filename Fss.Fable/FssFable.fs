@@ -34,9 +34,8 @@ module Fable =
         injectCss "*" cssRules
         ()
 
-    let private processCounterRules (name: string) (rules: string) =
-        $"@counter-style {name} {rules}"
-
+    let private processCounterRules (rules: string) =
+        $"@counter-style {rules}"
 
     /// Injects counter style into dom and returns the counter name
     let counterStyle (properties: Fss.Types.CounterRule list): string =
@@ -44,7 +43,7 @@ module Fable =
             properties
             |> createCounterStyle
 
-        injectCss counterName <| processCounterRules counterName counterStyle
+        injectCss counterName <| processCounterRules counterStyle
 
         counterName
 
@@ -71,8 +70,8 @@ module Fable =
 
         fontName
 
-    let private processAnimationRules name (rules: string) =
-        $"@keyframes {name} {rules}"
+    let private processAnimationRules (rules: string) =
+        $"@keyframes {rules}"
 
     /// Injects keyframes into dom and returns the animation name
     let keyframes (properties: Keyframes list): string =
@@ -80,6 +79,6 @@ module Fable =
             properties
             |> createAnimation
 
-        injectCss animationName <| processAnimationRules animationName animationStyles
+        injectCss animationName <| processAnimationRules animationStyles
 
         animationName

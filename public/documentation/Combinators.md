@@ -2,6 +2,7 @@
 
 Combinators can be used when you want to style something depending on selector relationships.
 There are 4 combinators all of them supported by Fss.
+These can be used to select with Html tags, Classnames or Ids.
 
 If you want even more information about combinators or where these examples come from you can take a look at this [article](https://blog.logrocket.com/what-you-need-to-know-about-css-combinators/)
 
@@ -65,6 +66,22 @@ div []
       p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
       p [] [ str "Text in a paragraph but not after div with the combinator so is not red"]
    ]
+```
+
+<example/>
+
+- ### Class and Id selectors
+Just replace the selector to use these:
+
+```fsharp
+Html.div 
+    [ prop.fss 
+        [ ! (Selector.Id "SomeId") [ BackgroundColor.orangeRed ] ]
+      prop.children [ Html.div
+                        [ prop.text "Not orangered" ]
+                      Html.div [ prop.id "SomeId"
+                                 prop.text "Has the ID and is therefore orangered" ]
+                      Html.div [ prop.text "Not orangered" ] ] ] ]
 ```
 
 <example/>

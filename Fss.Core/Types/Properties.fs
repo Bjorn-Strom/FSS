@@ -1,6 +1,8 @@
 namespace Fss
 namespace Fss.Types
 
+open Fss.Types
+
 [<RequireQualifiedAccess>]
 module Property =
     type FontFaceProperty =
@@ -1041,7 +1043,9 @@ type CombinatorMaster =
         match this with
         | CombinatorMaster c -> c
     interface ICssValue with
-        member this.StringifyCss() = ""
+        member this.StringifyCss() =
+            match this with
+            | CombinatorMaster rules -> stringifyList rules
 
 type DividerMaster =
     | DividerMaster of string * string
@@ -1078,15 +1082,19 @@ type PathMaster =
 
 type ClassnameMaster =
     | ClassnameMaster of Rule list
-    // We do not care about this stringify
+    // uesd to create classname
     interface ICssValue with
-        member this.StringifyCss() = ""
+        member this.StringifyCss() =
+            match this with
+            | ClassnameMaster rules -> stringifyList rules
 
 type IdMaster =
     | IdMaster of Rule list
-    // We do not care about this stringify
+    // uesd to create classname
     interface ICssValue with
-        member this.StringifyCss() = ""
+        member this.StringifyCss() =
+            match this with
+            | IdMaster rules -> stringifyList rules
 
 
 type ClassName = string
