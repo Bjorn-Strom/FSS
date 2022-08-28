@@ -13,5 +13,5 @@ let Page page styles =
     useFetchStore page setState
 
     match state with
-    | Some (_, documentation) -> Markdown.markdownAndExamples documentation styles
+    | Some (_, documentation) -> Html.p ""//Markdown.markdownAndExamples documentation styles
     | None -> Html.p "Fetching..."
