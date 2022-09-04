@@ -296,6 +296,7 @@ let App () =
         ]
 
         ! (Selector.Tag Html.Body) [
+            OverflowX.hidden
             font
         ]
     ]

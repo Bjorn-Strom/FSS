@@ -7,7 +7,7 @@ open Fable.React
 open Feliz
 
 module ReactSyntaxHighlighter =
-    [<Import("PrismLight","react-syntax-highlighter")>]
+    [<Import("Light","react-syntax-highlighter")>]
     module import =
         let registerLanguage(language: string) (languageObject: obj) = jsNative
 
@@ -60,8 +60,8 @@ module ReactMarkdown =
         ]
 
 
-let fsharp:obj = importDefault "react-syntax-highlighter/dist/cjs/languages/prism/fsharp"
-let css:obj = importDefault "react-syntax-highlighter/dist/cjs/languages/prism/css"
+let fsharp:obj = importDefault "react-syntax-highlighter/dist/cjs/languages/hljs/fsharp"
+let css:obj = importDefault "react-syntax-highlighter/dist/cjs/languages/hljs/css"
 
 ReactSyntaxHighlighter.import.registerLanguage "fsharp" fsharp
 ReactSyntaxHighlighter.import.registerLanguage "css" css

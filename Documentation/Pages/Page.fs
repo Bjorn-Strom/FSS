@@ -14,8 +14,8 @@ let Page page styles =
     useFetchStore page setState
     let store, _ = useStore()
 
-    let dark:obj = import "oneDark" "react-syntax-highlighter/dist/cjs/styles/prism"
-    let light:obj = import "oneLight" "react-syntax-highlighter/dist/cjs/styles/prism"
+    let dark:obj = import "dark" "react-syntax-highlighter/dist/esm/styles/hljs"
+    let light:obj = import "docco" "react-syntax-highlighter/dist/esm/styles/hljs"
 
     let style =
         if store.Theme = Theme.LightTheme then
