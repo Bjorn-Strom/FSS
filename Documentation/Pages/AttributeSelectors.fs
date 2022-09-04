@@ -52,6 +52,6 @@ let AttributeSelectors () =
             ]
         ]
 
-    Page Pages.AttributeSelectors styles
+    Page (Pages.FssPage Pages.AttributeSelectors) styles
 
 JsInterop.exportDefault AttributeSelectors

@@ -35,6 +35,6 @@ let Pseudo () =
           Html.div [ prop.className beforeAndAfter
                      prop.text " Some content surrounded by stuff " ] ]
 
-    Page Pages.Pseudo styles
+    Page (Pages.FssPage Pages.Pseudo) styles
 
 JsInterop.exportDefault Pseudo

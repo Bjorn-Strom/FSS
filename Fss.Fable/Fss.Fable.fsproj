@@ -18,8 +18,8 @@
     <Compile Include="FssFable.fs" />
   </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Fable.Browser.Dom" Version="2.9.0" />
-      <PackageReference Include="Fable.Core" Version="3.6.1" />
+      <PackageReference Include="Fable.Browser.Dom" Version="2.10.0" />
+      <PackageReference Include="Fable.Core" Version="3.7.1" />
     </ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />

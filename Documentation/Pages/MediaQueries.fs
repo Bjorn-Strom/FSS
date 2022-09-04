@@ -34,6 +34,6 @@ let MediaQueries () =
         [ Html.div [ prop.className mediaQueryExamples
                      prop.text "Changing width changes me" ] ]
 
-    Page Pages.MediaQueries styles
+    Page (Pages.FssPage Pages.MediaQueries) styles
 
 JsInterop.exportDefault MediaQueries

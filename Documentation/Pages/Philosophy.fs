@@ -5,6 +5,6 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let Philosophy () = Page Pages.Philosophy []
+let Philosophy () = Page (Pages.FssPage Pages.Philosophy) []
 
 JsInterop.exportDefault Philosophy

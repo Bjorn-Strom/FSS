@@ -51,6 +51,6 @@ let Combinators () =
                                                 prop.text "Has the ID and is therefore orangered" ]
                                      Html.div [ prop.text "Not orangered" ] ] ] ]
 
-    Page Pages.Combinators styles
+    Page (Pages.FssPage Pages.Combinators) styles
 
 JsInterop.exportDefault Combinators

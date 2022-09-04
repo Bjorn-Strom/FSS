@@ -21,6 +21,6 @@ let Svg () =
 
     let styles = [ Logo.logo 256 256 logoStyle ]
 
-    Page Pages.Svg styles
+    Page (Pages.FssPage Pages.Svg) styles
 
 JsInterop.exportDefault Svg

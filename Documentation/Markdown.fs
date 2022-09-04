@@ -33,27 +33,33 @@ module ReactMarkdown =
     type Renderer =
         {   className: string
             children: string
+            ``inline``: bool
         }
 
-    let private renderer =
+    let private renderer style =
         createObj [ "code" ==> fun (renderer: Renderer) ->
-            let language = (renderer.className.Split "-")[1]
-            ReactSyntaxHighlighter.Component [
-                                ReactSyntaxHighlighter.Language language
-                                ReactSyntaxHighlighter.Children renderer.children
-                                ReactSyntaxHighlighter.ShowLineNumbers true ] ]
-    //                            Style style ] ]
+            let language =
+                if isNullOrUndefined renderer.className then
+                    "fsharp"
+                else
+                    (renderer.className.Split "-")[1]
+            if isNullOrUndefined renderer.``inline`` = false then
+                Html.code renderer.children
+            else
+                ReactSyntaxHighlighter.Component [
+                                    ReactSyntaxHighlighter.Language language
+                                    ReactSyntaxHighlighter.Children renderer.children
+                                    ReactSyntaxHighlighter.ShowLineNumbers true
+                                    ReactSyntaxHighlighter.Style style ] ]
 
 
-    let ReactMarkdown (markdown: string) =
+    let ReactMarkdown style (markdown: string) =
         Component [
             Children markdown
-            Components renderer
+            Components (renderer style)
         ]
 
 
-// Todo:
-//let style:obj = import "oneDark" "react-syntax-highlighter/dist/cjs/styles/prism"
 let fsharp:obj = importDefault "react-syntax-highlighter/dist/cjs/languages/prism/fsharp"
 let css:obj = importDefault "react-syntax-highlighter/dist/cjs/languages/prism/css"
 

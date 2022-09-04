@@ -385,7 +385,7 @@ module Functions =
 
     let rgba (red: int) (green: int) (blue: int) (alpha: float) = Rgba(red, green, blue, alpha)
 
-    let hex (value: string) = colorHelpers.hex value
+    let hex (value: string) = Hex value
 
     let hsl (hue: int) (saturation: int) (lightness: int) = Hsl(hue, saturation, lightness)
 

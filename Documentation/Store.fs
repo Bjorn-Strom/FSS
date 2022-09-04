@@ -2,18 +2,23 @@ module Store
 
 open Fetch
 open Feliz
+open Browser
 
 open Pages
+open Theme
 
 type Documentation = Page * string
 
 type Store =
     { Documents: Documentation list
-      ShowSidebar: bool }
+      Theme: Theme
+      ShowSidebar: bool
+    }
 
 type StoreAction =
     | SetDocumentation of Documentation list
     | AddDocument of Documentation
+    | SetTheme of Theme
     | ToggleSidebar
 
 let tryGetDocumentation store (page: Page) =
@@ -24,29 +29,35 @@ let StoreReducer state action =
     | SetDocumentation documents -> { state with Documents = documents }
     | AddDocument document ->
         let newDocuments = document :: state.Documents
-
         { state with Documents = newDocuments }
+    | SetTheme theme ->
+        let themeName =
+            if theme = LightTheme then
+                "light"
+            else
+                "dark"
+        window.localStorage.setItem("theme", themeName)
+        { state with Theme = theme }
     | ToggleSidebar ->
-        { state with
-              ShowSidebar = not state.ShowSidebar }
+        { state with ShowSidebar = not state.ShowSidebar }
 
 let initialStore =
     { Documents =
-          [ (Unknown, "Unknown")
-            (NotFound, "NotFound") ]
-      ShowSidebar = false }
+           [ (Page.Unknown, "Unknown")
+             (NotFound, "NotFound") ]
+      Theme = initialTheme
+      ShowSidebar = false
+    }
 
 let storeContext = React.createContext ()
 
 [<ReactComponent>]
 let StoreProvider children =
-    let state, dispatch =
-        React.useReducer (StoreReducer, initialStore)
-
+    let state, dispatch = React.useReducer (StoreReducer, initialStore)
     React.contextProvider (storeContext, (state, dispatch), React.fragment [ children ])
 
 [<Hook>]
-let useStore () = React.useContext (storeContext)
+let useStore () = React.useContext storeContext
 
 [<Hook>]
 let useFetchStore page setState =
@@ -57,10 +68,11 @@ let useFetchStore page setState =
             match tryGetDocumentation store page with
             | None ->
                 promise {
+                    let pageUri = pageToString page
                     let! response =
                         fetch
 //                            $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/documentation/{page}.md"
-                            $"/documentation/{page}.md"
+                            $"/documentation/{pageUri}.md"
                             []
 
                     let! text = response.text ()

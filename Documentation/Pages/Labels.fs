@@ -19,6 +19,6 @@ let Labels () =
                      Html.div [ prop.className styleWithLabel
                                 prop.text styleWithLabel ] ] ]
 
-    Page Pages.Labels styles
+    Page (Pages.FssPage Pages.Labels) styles
 
 JsInterop.exportDefault Labels

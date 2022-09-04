@@ -3,6 +3,7 @@ namespace Fss
 namespace Fss.Types
 
 open System.Text
+open Fss.Types
 
 [<AutoOpen>]
 module Color =
@@ -307,7 +308,13 @@ module Color =
                 | CurrentColor -> "currentcolor"
                 | Rgb (red, green, blue) -> $"rgb({red},{green},{blue})"
                 | Rgba (red, green, blue, alpha) -> $"rgba({red},{green},{blue},{alpha})"
-                | Hex hex -> hex
+                | Hex hex ->
+                    if hex[0] = '#' then
+                        hex
+                    else
+                        let sb = StringBuilder()
+                        sb.AppendFormat("#{0}", hex) |> ignore
+                        sb.ToString()
                 | Hsl (hue, saturation, lightness) -> $"hsl({hue},{saturation}%%,{lightness}%%)"
                 | Hsla (hue, saturation, lightness, alpha) -> $"hsla({hue},{saturation}%%,{lightness}%%,{alpha})"
 
@@ -319,16 +326,6 @@ module Color =
                 match this with
                 | Economy -> "economy"
                 | Exact -> "exact"
-
-module colorHelpers =
-    let internal hex (value: string) =
-        if value[0] = '#' then
-            value
-        else
-            let sb = StringBuilder()
-            sb.AppendFormat("#{0}", value) |> ignore
-            sb.ToString()
-        |> Hex
 
 [<RequireQualifiedAccess>]
 module ColorClass =
@@ -487,7 +484,7 @@ module ColorClass =
         member this.rgba red green blue alpha =
             (property, Rgba(red, green, blue, alpha)) |> Rule
 
-        member this.hex(value: string) = (property, colorHelpers.hex value) |> Rule
+        member this.hex(value: string) = (property, Hex value) |> Rule
 
         member this.hsl hue saturation lightness =
             (property, Hsl(hue, saturation, lightness))

@@ -19,7 +19,7 @@
   </ItemGroup>
     <ItemGroup>
       <PackageReference Update="Fable.Core" Version="3.6.1" />
-      <PackageReference Include="Feliz" Version="1.57.0" />
+      <PackageReference Include="Feliz" Version="1.68.0" />
     </ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
