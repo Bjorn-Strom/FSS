@@ -20,6 +20,7 @@ public/Fss.*
 # Fable compilation
 public/*.js
 public/fss
+public/icons
 public/FssFeliz
 public/dist
 public/pages
