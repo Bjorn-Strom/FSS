@@ -552,10 +552,14 @@ module AttributeTests =
                     "*= nested"
                     actual
                     $"a.someClass#someId.{classname}[title*=\"aRtIcLe\"][href*=\"foo\" s][alt*=\"bar\" i][cite*=\"foobar\"]{{display:flex;}}"
-                // TODO:
                 let classname, actual = createFss [
-                    MatchAttr.Contains (Selector.Tag Html.Div, Attribute.Class, "Article", [
+                    MatchAttr.Contains (Attribute.Class, "Article", [
                         MatchAttr.Exactly (Selector.Tag Html.P, Attribute.Title, "Header", [
+                            FontSize.value(px 24)
+                        ])
+                    ])
+                    MatchAttr.Contains (Selector.Tag Html.Div, Attribute.Class, "Article", [
+                        MatchAttr.Exactly (Attribute.Title, "Header", [
                             FontSize.value(px 24)
                         ])
                         BackgroundColor.red
@@ -564,7 +568,7 @@ module AttributeTests =
                 testEqual
                     "~ and ="
                     actual
-                    $"p.{classname}[class~=\"Article\"][title=\"Header\"],div.{classname}[class~=\"Article\"][title=\"Header\"]{{font-size:24px;}}"
+                    $"p.{classname}[class~=\"Article\"][title=\"Header\"]{{font-size:24px;}}div.{classname}[class~=\"Article\"][title=\"Header\"]{{font-size:24px;}}div.{classname}[class~=\"Article\"]{{background-color:red;}}"
 
 
 ]
