@@ -6,11 +6,11 @@
         <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
         <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;giraffe;viewengine;html</PackageTags>
         <Authors>Bjørn-Ivar Strøm</Authors>
-        <Version>1.0.3</Version>
+        <Version>2.0.0</Version>
         <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
         <TargetFramework>netstandard2.0</TargetFramework>
         <OutputType>Library</OutputType>
-        <PackageReleaseNotes>Add display inline-grid and ::placeholder pseudo-element.</PackageReleaseNotes>
+        <PackageReleaseNotes>Rewrites Css generation and adds Attribute selectors.</PackageReleaseNotes>
         <RootNamespace>Fss.Fable</RootNamespace>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageId>Fss-lib.Giraffe</PackageId>
