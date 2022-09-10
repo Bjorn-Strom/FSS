@@ -1,0 +1,1 @@
+import{r as e,P as a,c6 as r,e as t}from"./index.33caebfd.js";import{P as s}from"./Page.504f706e.js";function n(){return e.exports.createElement(s,{page:new a(1,new r(3)),styles:t()})}const m=()=>e.exports.createElement(n,null);export{n as Giraffe,m as default};
