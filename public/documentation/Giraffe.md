@@ -24,7 +24,7 @@ That is because there is no reliable way of doing that with the view engine.
 - `global': Rule list -> XmlNode`
     - Takes a list of rules and creates a style node you can insert in your dom to get global styling.
 
-- `counterStyle': CounterRule list -> string * XmlNode`
+- `counterStyle: CounterRule list -> string * XmlNode`
     - Takes a list of counter rules, creates a counter and returns a counter name and style node.
       place this style node in the children list of `head` and then use the counter name in your html element of choice.
 
@@ -35,6 +35,10 @@ That is because there is no reliable way of doing that with the view engine.
 - `fontFaces': FontFaceRule list list -> string * XmlNode`
   - Takes a list with lists of font face rules, creates a fontface and returns its name and style node.
     place this style node in the children list of `head` and then use the font face name in your html element of choice.
+   
+- `keyframes': Keyframes list -> string`
+    - Takes a list of keyframes rules, creates a keyframe, inserts it into the dom and returns the font name.
+      This font name can then be used when creating other rules.
 
 ## Examples
 Using `Fss.Giraffe` is as simple as:

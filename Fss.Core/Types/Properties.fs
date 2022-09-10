@@ -1097,9 +1097,6 @@ type IdMaster =
             | IdMaster rules -> stringifyList rules
 
 
-type ClassName = string
-type Css = string
-
 type CssRuleWithAuto(property: Property.CssProperty) =
     inherit CssRule(property)
     member this.auto = (property, Auto) |> Rule

@@ -79,25 +79,3 @@ module Tests =
                 AttributeTests.tests
             ]
         0
-
-// TODO:
-// - Speed up
-// - Changelog
-// - Breaking changes
-// - Document new features
-// - Can Fss.Giraffe get better?
-// - Fss.Falco?
-// DONE:
-// - Nested Attribute selectors
-// - Animations are not working
-// - SVG not working, could be animation
-// - Counters not working
-// - Attribute selectors
-// - Selectors can use classnames or id
-// - Functions to make media stuff easier.
-        // Media queries have always annoyed me. Very annoying to specify FssTypes.
-        // Added helpers
-        // can still access through FssTypes if needed
-// Changed how the CSS is generated
-// Also changed CSS output to be more minimized
-        // This is reflected in the tests

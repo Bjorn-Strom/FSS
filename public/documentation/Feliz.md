@@ -13,11 +13,15 @@ you can also write Fss with Feliz syntax.
 
 Here is a quick example of how that works.
 ```fsharp
-Html.div [ prop.fss [ BackgroundColor.red
-                      Width.value (px 200)
-                      Height.value (px 200)
-                      Hover [ BackgroundColor.blue ] ] ]
-
+Html.div [
+    prop.fss [ BackgroundColor.red
+               Width.value (px 200)
+               Height.value (px 200)
+               Hover [ 
+                BackgroundColor.blue 
+               ] 
+             ] 
+    ]
 ```
 
 <example/>
@@ -27,14 +31,17 @@ Anything you can do in an `fss` block you can do in a `prop.fss` block.
 While you would want to specify shared styling outside of a component, you can still do anything inline if you want.
 
 ```fsharp
-Html.div [ prop.fss [ BackgroundColor.red
-                      Width.value (px 200)
-                      Height.value (px 200)
-                      Hover [ BackgroundColor.blue ]
-                      AnimationName.value bounceFrames
-                      AnimationDuration.value (sec 1.0)
-                      AnimationTimingFunction.easeInOut
-                      AnimationIterationCount.infinite ] ]
+Html.div [ 
+    prop.fss [ BackgroundColor.red
+               Width.value (px 200)
+               Height.value (px 200)
+               Hover [ BackgroundColor.blue ]
+               AnimationName.value bounceFrames
+               AnimationDuration.value (sec 1.0)
+               AnimationTimingFunction.easeInOut
+               AnimationIterationCount.infinite 
+             ] 
+   ]
 ```
 
 <example/>

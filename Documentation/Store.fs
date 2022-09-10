@@ -71,8 +71,7 @@ let useFetchStore page setState =
                     let pageUri = pageToString page
                     let! response =
                         fetch
-//                            $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/documentation/{page}.md"
-                            $"/documentation/{pageUri}.md"
+                            $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/documentation/{pageUri}.md"
                             []
 
                     let! text = response.text ()

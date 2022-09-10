@@ -4,18 +4,21 @@ type Theme =
     { BackgroundColor: Fss.Types.Color.Color
       TextColor: Fss.Types.Color.Color
       Opposite: Fss.Types.Color.Color
+      TopBar: Fss.Types.Color.Color
     }
 
 let LightTheme =
     { BackgroundColor = Fss.Types.Color.Hex "fff"
       TextColor = Fss.Types.Color.Black
       Opposite = Fss.Types.Color.Hex "191919"
+      TopBar = Fss.Types.Color.Hex "fff"
     }
 
 let DarkTheme =
     { BackgroundColor = Fss.Types.Color.Hex "191919"
       TextColor = Fss.Types.Color.LightGray
       Opposite = Fss.Types.Color.Hex "fff"
+      TopBar = Fss.Types.Color.Hex "222222"
     }
 
 let stringToTheme str =

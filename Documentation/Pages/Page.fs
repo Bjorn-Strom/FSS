@@ -1,5 +1,6 @@
 module Page
 
+open Fable.Core
 open Fss
 open Feliz
 open Fable.Core.JsInterop

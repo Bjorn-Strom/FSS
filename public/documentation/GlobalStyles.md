@@ -12,8 +12,8 @@ global' [
     // Make all links be red
     Link [ Color.red ]
     // Use a selector to target all html elements and make them border box
-    ! Fss.Types.Html.All [ BoxSizing.borderBox ]
+    ! (Selector.tag Fss.Types.Html.All) [ BoxSizing.borderBox ]
     // Use a selector to target the body element and set the background color to black
-    ! Fss.Types.Html.Body [ BackgroundColor.black ]
+    ! (Selector.tag Fss.Types.Html.Body) [ BackgroundColor.black ]
 ]
 ```

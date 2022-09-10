@@ -11,9 +11,6 @@ open Pages
 open Store
 
 // Constants
-// TODO: Changing theme should save it in local storage
-printfn "ColorTheme: %A" "foo"
-
 // Font families
 let nunito =
     fontFace
@@ -98,12 +95,16 @@ let giraffe: JS.Promise<unit -> ReactElement> =
 let troubleshoot: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/Troubleshoot.fs"
 
+let changelog: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Changelog.fs"
+
 [<ReactComponent>]
 let Suspense (component': JS.Promise<unit -> ReactElement>) =
     React.suspense ([ Html.div [ React.lazy' (component', ()) ] ], Spinner())
 
 [<ReactComponent>]
 let MenuItem (page: Page) =
+    let _, dispatch = useStore()
     Html.li [
         prop.fss [
             ListStyle.none
@@ -119,6 +120,7 @@ let MenuItem (page: Page) =
                 ]
                 prop.text (pageToPrettyString page)
                 prop.href $"#/page/{pageToLinkString page}"
+                prop.onClick (fun _ -> dispatch ToggleSidebar)
             ]
         ]
     ]
@@ -157,24 +159,62 @@ let Menu () =
              MarginRight.value (px 0)
              MarginTop.auto
              MarginBottom.auto
+             TransitionProperty.left
+             TransitionTimingFunction.easeInOut
+             TransitionDuration.value (ms 500.)
+             ZIndex.value 11
+
+             Media.query [ Media.MaxWidth(px 700) ] [
+                 if store.ShowSidebar = false then
+                    Left.value (pct -100)
+                 else
+                    Left.value (pct 0)
+             ]
          ]
          prop.children [
              Html.div [
-                 prop.id "shadow"
+                 prop.id "Shadow"
+                 prop.onClick (fun _ -> dispatch ToggleSidebar)
+                 prop.fss [
+                     Position.fixed'
+                     Top.value (px 0)
+                     Right.value (px 0)
+                     Bottom.value (px 0)
+                     Left.value (px 0)
+                     BackgroundColor.rgba 0 0 0 0
+                     Visibility.hidden
+                     TransitionProperty.backgroundColor
+                     TransitionDuration.value (ms 500.)
+
+                     Media.query [Media.MaxWidth (px 700)] [
+                        if store.ShowSidebar then
+                            BackgroundColor.rgba 0 0 0 0.5
+                            Visibility.visible
+                     ]
+                 ]
              ]
              Html.div [
                  prop.fss [
                      Position.absolute
+                     Display.flex
+                     FlexDirection.column
                      Left.value (px 0)
                      Top.value (px 0)
                      Bottom.value (px 0)
-                     Padding.value(px 50, px 0, px 30, px 30)
+                     Padding.value(px 50, px 70, px 30, px 30)
                      OverflowY.auto
                      BackgroundColor.value store.Theme.BackgroundColor
                  ]
                  prop.children [
                      Html.a [
+                         prop.fss [
+                             AlignSelf.end'
+                         ]
                          prop.id "logo"
+                         prop.href "/"
+                         prop.children [
+                             Logo.logo 128 128 ""
+                         ]
                      ]
                      Html.ul [
                          prop.id "menuItems"
@@ -182,8 +222,7 @@ let Menu () =
                      ]
                      Html.div [
                          prop.fss [
-                             Display.flex
-                             JustifyContent.center
+                             AlignSelf.center
 
                              ! (Selector.Tag Html.A) [
                                  FirstOfType [
@@ -204,7 +243,10 @@ let Menu () =
                                 ]
                              ]
                              Html.a [
-                                 prop.ariaLabel "Toggle dark mode"
+                                 prop.fss [
+                                     Cursor.pointer
+                                 ]
+                                 prop.href "javascript:void(0)"
                                  prop.onClick (fun _ ->
                                      if store.Theme = Theme.LightTheme then
                                          dispatch (SetTheme Theme.DarkTheme)
@@ -215,7 +257,6 @@ let Menu () =
                                          Moon.iconNormal
                                      else
                                          Sun.iconClassName iconStyle
-
                                  ]
                              ]
                          ]
@@ -265,6 +306,47 @@ let Main (page: Page) =
             | OtherPage page ->
                 match page with
                 | Troubleshoot -> Suspense troubleshoot
+                | Changelog -> Suspense changelog
+        ]
+    ]
+
+[<ReactComponent>]
+let TopBar () =
+    let store, dispatch = useStore()
+    Html.div [
+        prop.fss [
+             Position.fixed'
+             Left.value (px 0)
+             Top.value (pct -100)
+             Width.value (vw 100.)
+             Height.value (px 50)
+             PaddingLeft.value (px 25)
+             BackgroundColor.value store.Theme.TopBar
+             BoxShadow.value(px 0, px 1, px 10, Fss.Types.Color.Black)
+
+             Display.flex
+             AlignItems.center
+             ZIndex.value 10
+
+             TransitionProperty.top
+             TransitionTimingFunction.easeInOut
+             TransitionDuration.value (ms 500.)
+
+             Media.query [ Media.MaxWidth (px 700) ] [
+                 Top.value (px 0)
+             ]
+        ]
+        prop.id "TopBar"
+        prop.children [
+            Html.div [
+                prop.fss [
+                    Cursor.pointer
+                ]
+                prop.children [
+                    Hamburger.hamburger 32 32 ""
+                ]
+                prop.onClick(fun _ -> dispatch ToggleSidebar)
+            ]
         ]
     ]
 
@@ -278,13 +360,21 @@ let Content (page: Page) =
             MarginRight.value (px 0)
             MarginTop.auto
             MarginBottom.auto
-            Padding.value(px 50, px 50, px 500, px 250)
+            Padding.value(px 50, px 50, px 500, px 280)
             BackgroundColor.value store.Theme.BackgroundColor
             Color.value store.Theme.TextColor
+            TransitionProperty.paddingLeft
+            TransitionTimingFunction.easeInOut
+            TransitionDuration.value (ms 500.)
+
+            Media.query [ Media.MaxWidth (px 700) ] [
+                PaddingLeft.value(px 50)
+            ]
         ]
         prop.children [
             Menu ()
             Main page
+            TopBar ()
         ]
     ]
 
@@ -292,6 +382,10 @@ let Content (page: Page) =
 let App () =
     global' [
         Visited [
+            Color.inherit'
+        ]
+
+        Link [
             Color.inherit'
         ]
 
@@ -307,6 +401,7 @@ let App () =
     Html.div [
         prop.fss [
             Position.absolute
+            Left.value (px 0)
             Top.value (px 0)
             Width.value (pct 100)
             Height.value (pct 100)

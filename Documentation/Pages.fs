@@ -30,6 +30,7 @@ type LibraryPage =
 
 type OtherPage =
     | Troubleshoot
+    | Changelog
     | Unknown
 
 type Page =
@@ -69,6 +70,7 @@ let allLibraryPages =
 
 let allOtherPages =
       [ Troubleshoot
+        Changelog
       ] |> List.map OtherPage
 
 let allPages =
@@ -111,6 +113,7 @@ let stringToLibraryPage =
 let stringToOtherPage =
     function
     | "troubleshoot" -> Some Troubleshoot
+    | "changelog" -> Some Changelog
     | _ -> None
 
 let stringToPage str =
@@ -153,6 +156,7 @@ let libraryPageToString =
 let otherPageToString =
     function
     | Troubleshoot -> "Troubleshoot"
+    | Changelog -> "Changelog"
     | _ -> "Unknown"
 
 let fssPageToPrettyString =

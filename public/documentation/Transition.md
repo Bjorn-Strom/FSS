@@ -11,8 +11,8 @@ let colorTransition =
           TransitionProperty.backgroundColor
           TransitionDuration.value (sec 2.5)
           TransitionTimingFunction.ease
-          Hover [ BackgroundColor.green ] ]
-
+          Hover [ BackgroundColor.green ]
+        ]
 ```
 
 <example/>
@@ -27,8 +27,9 @@ let sizeAndColor =
           TransitionTimingFunction.linear
           TransitionDuration.value (ms 500.)
           Hover [ BorderRadius.value (pct 100)
-                  BackgroundColor.orangeRed ] ]
-
+                  BackgroundColor.orangeRed
+                ]
+       ]
 ```
 
 <example/>

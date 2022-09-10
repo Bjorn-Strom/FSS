@@ -2,8 +2,8 @@
 
 Using media queries in Fss is similar to how you would with normal css - except you have 2 functions to use here.
 
-- `Media.query` - which takes a list of features which define when the CSS block should be active and a list of CSSRules to use when it is active.
-- `Media.queryFor` - Which takes a device before the list of features and rules.
+- `Media.query` - which takes a list of features which define when the CSS block should be active and a list of CSSRules to use when it is.
+- `Media.queryFor` - is similar to the previous function but also takes device as input.
 
 ```fsharp
 fss [ Label "Media query examples"

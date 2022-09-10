@@ -39,6 +39,7 @@
     <Compile Include="Pages\Feliz.fs" />
     <Compile Include="Pages\Giraffe.fs" />
     <Compile Include="Pages\Troubleshoot.fs" />
+    <Compile Include="Pages\Changelog.fs" />
     <Compile Include="Documentation.fs" />
   </ItemGroup>
   <ItemGroup>

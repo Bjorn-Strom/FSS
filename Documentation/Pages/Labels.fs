@@ -9,8 +9,7 @@ let Labels () =
     let styleWithoutLabel = fss [ Color.red ]
 
     let styleWithLabel =
-        fss [ Label "Style With Label"
-              Color.hotPink
+        fss [ Color.hotPink
               Label "HotPinkLabel" ]
 
     let styles =

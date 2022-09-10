@@ -15,7 +15,9 @@ let hoverStyle =
           BorderRadius.value (px 5)
           Color.white
           Hover [ BackgroundColor.chartreuse
-                  Color.black ] ]
+                  Color.black
+                ] 
+        ]
 ```
 <example/>
 ## Pseudo-elements
@@ -23,16 +25,18 @@ let hoverStyle =
 These work much in the same way as the pseudo classes. Example follows:
 
 ```fsharp
-let hoverStyle =
-    fss [ Label "Hover Style"
-          Padding.value (px 40)
-          Width.value (px 100)
+let beforeAndAfter =
+    let beforeAndAfter =
+        [ Content.value ""
+          Display.inlineBlock
           BackgroundColor.orangeRed
-          FontSize.value (px 20)
-          BorderRadius.value (px 5)
-          Color.white
-          Hover [ BackgroundColor.chartreuse
-                  Color.black ] ]
+          Width.value (px 10)
+          Height.value (px 10)
+        ]
 
+    fss [ Label "Before And After"
+          Before beforeAndAfter
+          After beforeAndAfter 
+        ]
 ```
 <example/>

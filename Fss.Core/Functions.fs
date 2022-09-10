@@ -214,7 +214,7 @@ module Functions =
             )
             |> String.concat ""
 
-    let private createFssInternal name (rules: Rule list): ClassName * string =
+    let private createFssInternal name (rules: Rule list): string * string =
         let classname, cssScope = generateCssScope name rules
         let css = createCssFromScope "" cssScope
         classname, css
@@ -223,7 +223,7 @@ module Functions =
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createFss (rules: Rule list): ClassName * string =
+    let createFss (rules: Rule list): string * string =
         createFssInternal None rules
 
     /// Creates CSS with a specific classname based on a list of CSS rules
@@ -231,7 +231,7 @@ module Functions =
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is a list of ClassName and CSS tuples you want to inject into the DOM.
-    let createFssWithClassname name (rules: Rule list): ClassName * string =
+    let createFssWithClassname name (rules: Rule list): string * string =
         createFssInternal (Some name) rules
 
     /// Creates global CSS based on a list of CSS rules
@@ -322,7 +322,7 @@ module Functions =
 
         fontName, fontFaceString
 
-    let private createAnimationInternal (name: string option) (attributeList: Keyframes list) : string * Css =
+    let private createAnimationInternal (name: string option) (attributeList: Keyframes list) : string * string =
         let framePositionToString frames =
             List.map (fun n -> $"{n}%%") frames
             |> String.concat ","
@@ -350,7 +350,7 @@ module Functions =
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the name of the created animation. This is the value you use in your CSS.
     /// The second element is the generated CSS for the animation.
-    let createAnimation (attributeList: Keyframes list) : string * Css =
+    let createAnimation (attributeList: Keyframes list) : string * string =
         createAnimationInternal None attributeList
 
     /// Creates the CSS with specific name for an animation based on a list of KeyframeAttributes
@@ -358,7 +358,7 @@ module Functions =
     /// Returns a tuple containing 2 elements
     /// The first element in the tuple is the classname, this is what you give to your classnames.
     /// The second element is the generated CSS for the animation.
-    let createAnimationWithName name (attributeList: Keyframes list) : string * Css =
+    let createAnimationWithName name (attributeList: Keyframes list) : string * string =
         createAnimationInternal name attributeList
 
     // Important
