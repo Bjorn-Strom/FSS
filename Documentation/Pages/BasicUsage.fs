@@ -13,6 +13,6 @@ let BasicUsage () =
         [ Html.div [ prop.className borderStyle
                      prop.text "Border style made with custom escape hatch" ] ]
 
-    Page Pages.BasicUsage styles
+    Page (Pages.FssPage Pages.BasicUsage) styles
 
 JsInterop.exportDefault BasicUsage

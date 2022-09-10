@@ -8,21 +8,21 @@ open Fable.Core
 let Combinators () =
     let descendantCombinator =
         fss [ Label "Descendant"
-              ! Fss.Types.Html.P [ Color.red ] ]
+              ! (Selector.Tag Fss.Types.Html.P) [ Color.red ] ]
 
     let childCombinator =
         fss [ Label "Child"
-              !> Fss.Types.Html.P [ Color.red ]
+              !> (Selector.Tag Fss.Types.Html.P) [ Color.red ]
 
                ]
 
     let directCombinator =
         fss [ Label "Direct"
-              !+ Fss.Types.Html.P [ Color.red ] ]
+              !+ (Selector.Tag Fss.Types.Html.P) [ Color.red ] ]
 
     let adjacentCombinator =
         fss [ Label "Adjacent"
-              !~ Fss.Types.Html.P [ Color.red ] ]
+              !~ (Selector.Tag Fss.Types.Html.P) [ Color.red ] ]
 
     let styles =
         [ Html.div [ prop.className descendantCombinator
@@ -42,8 +42,15 @@ let Combinators () =
                                      Html.p "Text in a paragraph and after the div with the combinator so is red"
                                      Html.p "Text in a paragraph and after the div with the combinator so is red"
                                      Html.div [ Html.p
-                                                    "Text in a paragraph inside another div, paragraph is not directly after div with the combinator so is not red" ] ] ] ]
+                                                    "Text in a paragraph inside another div, paragraph is not directly after div with the combinator so is not red" ] ] ]
+          Html.div [ prop.fss [ ! (Selector.Id "SomeId") [ BackgroundColor.orangeRed ] ]
+                     prop.children [ Html.div [ prop.text "Not orangered"
 
-    Page Pages.Combinators styles
+                                                 ]
+                                     Html.div [ prop.id "SomeId"
+                                                prop.text "Has the ID and is therefore orangered" ]
+                                     Html.div [ prop.text "Not orangered" ] ] ] ]
+
+    Page (Pages.FssPage Pages.Combinators) styles
 
 JsInterop.exportDefault Combinators

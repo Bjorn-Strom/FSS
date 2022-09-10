@@ -41,7 +41,7 @@ module Mask =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
-                | Add -> "add" 
+                | Add -> "add"
                 | Subtract -> "subtract"
                 | Intersect -> "intersect"
                 | Exclude -> "exclude"
@@ -156,7 +156,7 @@ module MaskClasses =
             let value =
                 modes
                 |> List.map stringifyICssValue
-                |> String.concat ", "
+                |> String.concat ","
 
             (property, String value) |> Rule
 
@@ -169,7 +169,7 @@ module MaskClasses =
         member this.value(origins: Mask.Origin list) =
             let value =
                 List.map stringifyICssValue origins
-                |> String.concat ", "
+                |> String.concat ","
 
             (property, String value) |> Rule
 
@@ -197,7 +197,7 @@ module MaskClasses =
         member this.value(values: (ILengthPercentage * ILengthPercentage) list) =
             let value =
                 List.map (fun (x, y) -> $"{lengthPercentageString x} {lengthPercentageString y}") values
-                |> String.concat ", "
+                |> String.concat ","
 
             (property, String value) |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
@@ -214,7 +214,7 @@ module MaskClasses =
         member this.value(values: (Mask.Repeat * Mask.Repeat) list) =
             let value =
                 List.map (fun (x, y) -> $"{stringifyICssValue x} {stringifyICssValue y}") values
-                |> String.concat ", "
+                |> String.concat ","
 
             (property, String value) |> Rule
 
@@ -241,6 +241,6 @@ module MaskClasses =
         member this.value(values: ILengthPercentage list) =
             let value =
                 List.map lengthPercentageString values
-                |> String.concat ", "
+                |> String.concat ","
 
             (property, String value) |> Rule

@@ -65,7 +65,7 @@ module ClipPath =
                     let polygons =
                         ps
                         |> List.map (fun (x, y) -> $"{lengthPercentageString x} {lengthPercentageString y}")
-                        |> String.concat ", "
+                        |> String.concat ","
 
                     $"polygon({polygons})"
 

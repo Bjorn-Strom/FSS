@@ -6,11 +6,11 @@
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>1.0.3</Version>
+    <Version>2.0.0</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <PackageReleaseNotes>Add display inline-grid and ::placeholder pseudo-element.</PackageReleaseNotes>
+    <PackageReleaseNotes>Rewrites Css generation and adds Attribute selectors..</PackageReleaseNotes>
     <RootNamespace>Fss.Fable</RootNamespace>
     <PackageId>Fss-lib.Fable</PackageId>
   </PropertyGroup>
@@ -18,8 +18,8 @@
     <Compile Include="FssFable.fs" />
   </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Fable.Browser.Dom" Version="2.9.0" />
-      <PackageReference Include="Fable.Core" Version="3.6.1" />
+      <PackageReference Include="Fable.Browser.Dom" Version="2.10.0" />
+      <PackageReference Include="Fable.Core" Version="3.7.1" />
     </ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />

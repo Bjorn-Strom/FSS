@@ -7,8 +7,7 @@ let private logoBase (width: int) (height: int) (className: string) =
               svg.width width
               svg.viewBox (0, 0, 256, 256)
               svg.className className
-              svg.children [ Svg.path [ svg.d
-                                            "M42.5899 223.961L24.6418 12.3286L230.696 13.3351L211.628 224.019L127.656 248.523L42.5899 223.961Z"
+              svg.children [ Svg.path [ svg.d "M42.5899 223.961L24.6418 12.3286L230.696 13.3351L211.628 224.019L127.656 248.523L42.5899 223.961Z"
                                         svg.fill "#27303B"
                                         svg.stroke "#9A9A9A" ]
                              Svg.path [ svg.d "M127 28V232L196.339 212.593L214 28H127Z"

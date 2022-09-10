@@ -50,7 +50,7 @@ module Counter =
                 | Range' i -> string i
                 | Ranges is ->
                     List.map (fun (a, b) -> $"{stringifyICounterValue a} {stringifyICounterValue b}") is
-                    |> String.concat ", "
+                    |> String.concat ","
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/@counter-style/pad
     type PadType =

@@ -253,6 +253,6 @@ let BackgroundImages () =
           Html.div [ prop.className (fss [ Label "Flex 1"; Display.flex ])
                      prop.children [ Html.div [ prop.className repeatingConicGradientStyle ] ] ] ]
 
-    Page Pages.BackgroundImages styles
+    Page (Pages.FssPage Pages.BackgroundImages) styles
 
 JsInterop.exportDefault BackgroundImages

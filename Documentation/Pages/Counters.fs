@@ -142,6 +142,6 @@ let Counters () =
                                          Html.p [ prop.className sub
                                                   prop.text "Sub-Item" ] ] ] ]
 
-    Page Pages.Counters styles
+    Page (Pages.FssPage Pages.Counters) styles
 
 JsInterop.exportDefault Counters

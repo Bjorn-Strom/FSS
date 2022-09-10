@@ -41,9 +41,9 @@ module TimingFunction =
                 | Linear -> "linear"
                 | StepStart -> "step-start"
                 | StepEnd -> "step-end"
-                | CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f, %.2f, %.2f, %.2f)" p1 p2 p3 p4
+                | CubicBezier (p1, p2, p3, p4) -> sprintf "cubic-bezier(%.2f,%.2f,%.2f,%.2f)" p1 p2 p3 p4
                 | Steps n -> sprintf "steps(%d)" n
-                | StepsWithTerm (n, term) -> $"steps(%d{n}, %s{stringifyICssValue term})"
+                | StepsWithTerm (n, term) -> $"steps(%d{n},%s{stringifyICssValue term})"
 
 [<RequireQualifiedAccess>]
 module TimingFunctionClasses =

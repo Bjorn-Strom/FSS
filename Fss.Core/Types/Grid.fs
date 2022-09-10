@@ -38,7 +38,7 @@ module Grid =
                 match this with
                 | AutoFill -> "auto-fill"
                 | AutoFit -> "auto-fit"
-        
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-rows
     type MinMaxHelper =
@@ -50,7 +50,7 @@ module Grid =
         | MinMax6 of ContentSize.ContentSize * Fraction
         interface ICssValue with
             member this.StringifyCss() =
-                let minmaxValue a b = $"minmax({a}, {b})"
+                let minmaxValue a b = $"minmax({a},{b})"
 
                 match this with
                 | MinMax1 (lengthPercentage, fraction) ->
@@ -86,7 +86,7 @@ module Grid =
         | Repeat9 of int * MinMaxHelper
         interface ICssValue with
             member this.StringifyCss() =
-                let repeatValue a b = $"repeat({a}, {b})"
+                let repeatValue a b = $"repeat({a},{b})"
 
                 match this with
                 | Repeat1 (value, length) -> repeatValue value (lengthPercentageString length)
@@ -295,5 +295,5 @@ module GridClasses =
                     values
                     |> List.map (fun x -> String.concat " " x)
                     |> List.fold (fun acc x -> $"{acc} \"{x}\"") ""
-                    
+
             (property, String values) |> Rule

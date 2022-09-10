@@ -12,19 +12,19 @@ let MediaQueries () =
               Height.value (px 200)
               BackgroundColor.blue
 
-              Media.query [ Fss.Types.Media.MinWidth(px 700) ] [
+              Media.query [ Media.MinWidth(px 700) ] [
                   BackgroundColor.pink
                   Color.orangeRed
               ]
 
               Media.queryFor
-                  Fss.Types.Media.Print
+                  Media.Print
                   []
                   [ MarginTop.value (px 200)
                     Transform.value [ Transform.rotate (deg 45.0) ]
                     BackgroundColor.red ]
 
-              Media.query [ Fss.Types.Media.Orientation Fss.Types.Media.Landscape ] [
+              Media.query [ Media.Orientation Media.Landscape ] [
                   Color.green
                   BackgroundColor.orangeRed
                   FontSize.value (px 28)
@@ -34,6 +34,6 @@ let MediaQueries () =
         [ Html.div [ prop.className mediaQueryExamples
                      prop.text "Changing width changes me" ] ]
 
-    Page Pages.MediaQueries styles
+    Page (Pages.FssPage Pages.MediaQueries) styles
 
 JsInterop.exportDefault MediaQueries

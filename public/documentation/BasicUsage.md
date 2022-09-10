@@ -3,7 +3,7 @@
 The basic idea behind Fss which is also true for all its framework libraries is a simple one.
 Create a list of CssRules and send them into a function. This function returns classnames and CSS.
 
-The main difference between [Fss.Core](https://www.nuget.org/packages/Fss-lib.Core/) and the framework libraries is that the core library consists of the "low-level" functions that make this work, and the framework libraries are there to make using the system easier for a specific framework.
+The main difference between [Fss.Core](https://www.nuget.org/packages/Fss-lib.Core/) and the framework libraries is that the core library consists of the "low-level" functions that make this work, and the framework libraries are there to make using the system easier for a specific framework, like injecting the CSS into the DOM.
 But the concept is still the same: lists of CssRules.
 
 ## Styling
@@ -46,14 +46,14 @@ The function takes a list of classnames to apply and a list of classnames/predic
 ## Shorthands
 
 I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be.
-However as this project creates CSS and interacts with it, it has to deal with some of its shortcoming, like shorthands.
+However as this project creates CSS and interacts with it, it has to deal with some of its shortcomings, like shorthands.
 
 Therefore the shorthands that are included are limited to ones where using `inherit`, `initial`, `unset` or `none` is natural. Like text-decoration.
-For example resetting `text-decoration` would be  really annoying without it - having to go through each property resetting it manually.
+For example resetting `text-decoration` would be **really** annoying without it - having to go through each property resetting it manually.
 
 However if shorthands is something you really want to use, you can use the custom escape hatch to write them up in string.
 The escape hatch is a function that takes two strings, a key and a value and attempts to make Css with it.
-For example if I want to set border with shorthand I can write:
+For example if you want to set border with shorthand you can write:
 
 ```fsharp
 fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)"]

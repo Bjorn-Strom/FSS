@@ -5,12 +5,16 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Utilities.fs" />
+    <Compile Include="Spinner.fs" />
     <Compile Include="Markdown.fs" />
     <Compile Include="Hamburger.fs" />
     <Compile Include="Logo.fs" />
     <Compile Include="Pages.fs" />
+    <Compile Include="Theme.fs" />
     <Compile Include="Store.fs" />
+    <Compile Include="Icons\GitHub.fs" />
+    <Compile Include="Icons\Sun.fs" />
+    <Compile Include="Icons\Moon.fs" />
     <Compile Include="Pages\Page.fs" />
     <Compile Include="Pages\Overview.fs" />
     <Compile Include="Pages\BasicUsage.fs" />
@@ -23,6 +27,7 @@
     <Compile Include="Pages\Transition.fs" />
     <Compile Include="Pages\KeyframesAnimations.fs" />
     <Compile Include="Pages\Combinators.fs" />
+    <Compile Include="Pages\AttributeSelectors.fs" />
     <Compile Include="Pages\MediaQueries.fs" />
     <Compile Include="Pages\GlobalStyles.fs" />
     <Compile Include="Pages\Counters.fs" />
@@ -34,15 +39,19 @@
     <Compile Include="Pages\Feliz.fs" />
     <Compile Include="Pages\Giraffe.fs" />
     <Compile Include="Pages\Troubleshoot.fs" />
+    <Compile Include="Pages\Changelog.fs" />
     <Compile Include="Documentation.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Fable.Core" Version="3.6.1" />
+    <PackageReference Include="Fable.Browser.MediaQueryList" Version="1.3.0" />
+    <PackageReference Include="Fable.Core" Version="3.7.1" />
     <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
-    <PackageReference Include="Fable.Fetch" Version="2.4.0" />
-    <PackageReference Include="Fable.React" Version="7.4.3" />
-    <PackageReference Include="Feliz" Version="1.57.0" />
+    <PackageReference Include="Fable.Fetch" Version="2.6.0" />
+    <PackageReference Include="Fable.React" Version="8.0.1" />
+    <PackageReference Include="Feliz" Version="1.68.0" />
     <PackageReference Include="Feliz.Router" Version="3.8.0" />
-    <PackageReference Include="Fss-lib.Feliz" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fss.Feliz\Fss.Feliz.fsproj" />
   </ItemGroup>
 </Project>

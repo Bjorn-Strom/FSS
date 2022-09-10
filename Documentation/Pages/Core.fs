@@ -5,6 +5,6 @@ open Feliz
 open Fable.Core
 
 [<ReactComponent>]
-let Core () = Page Pages.Core []
+let Core () = Page (Pages.LibraryPage Pages.Core) []
 
 JsInterop.exportDefault Core

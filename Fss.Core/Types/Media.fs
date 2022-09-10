@@ -25,12 +25,12 @@ module Media =
     type Pointer =
         | Course
         | Fine
-        | None
+        | None'
         member this.Stringify() =
             match this with
             | Course -> "course"
             | Fine -> "fine"
-            | None -> "none"
+            | None' -> "none"
 
     type ColorGamut =
         | SRGB
@@ -70,14 +70,14 @@ module Media =
             | Landscape -> "landscape"
             | Portrait -> "portrait"
 
-    type OverflowBlock =
-        | None
+    type OverflowBlock' =
+        | None'
         | Scrolled
         | OptionalPaged
         | Paged
         member this.Stringify() =
             match this with
-            | None -> "none"
+            | None' -> "none"
             | Scrolled -> "scrolled"
             | OptionalPaged -> "optional-paged"
             | Paged -> "paged"
@@ -108,23 +108,23 @@ module Media =
             | Interlace -> "interlace"
             | Progressive -> "progressive"
 
-    type Scripting =
-        | None
+    type Scripting' =
+        | None'
         | InitialOnly
         | Enabled
         member this.Stringify() =
             match this with
-            | None -> "none"
+            | None' -> "none"
             | InitialOnly -> "initial-only"
             | Enabled -> "enabled"
 
-    type Update =
-        | None
+    type Update' =
+        | None'
         | Slow
         | Fast
         member this.Stringify() =
             match this with
-            | None -> "none"
+            | None' -> "none"
             | Slow -> "slow"
             | Fast -> "fast"
 
@@ -157,7 +157,7 @@ module Media =
         | MinMonochrome of int
         | MaxMonochrome of int
         | Orientation of Orientation
-        | OverflowBlock of OverflowBlock
+        | OverflowBlock of OverflowBlock'
         | OverflowInline of bool
         | Pointer of Pointer
         | PrefersColorScheme of ColorScheme
@@ -168,58 +168,63 @@ module Media =
         | MinResolution of Resolution
         | MaxResolution of Resolution
         | Scan of Scan
-        | Scripting of Scripting
-        | Update of Update
+        | Scripting of Scripting'
+        | Update of Update'
         override this.ToString() =
             match this with
-            | AnyHover bool -> $"any-hover: {bool}"
-            | AnyPointer pointer -> $"any-pointer: {pointer.Stringify()}"
-            | AspectRatio (x, y) -> $"aspect-ratio: {x}/{y}"
-            | MinAspectRatio (x, y) -> $"min-aspect-ratio: {x}/{y}"
-            | MaxAspectRatio (x, y) -> $"max-aspect-ratio {x}/{y}"
+            | AnyHover bool -> $"any-hover:{bool}"
+            | AnyPointer pointer -> $"any-pointer:{pointer.Stringify()}"
+            | AspectRatio (x, y) -> $"aspect-ratio:{x}/{y}"
+            | MinAspectRatio (x, y) -> $"min-aspect-ratio:{x}/{y}"
+            | MaxAspectRatio (x, y) -> $"max-aspect-ratio:{x}/{y}"
             | Color -> "color"
-            | MinColor int -> $"min-color: {int}"
-            | MaxColor int -> $"max-color: {int}"
-            | ColorGamut colorGamut -> $"color-gamut: {colorGamut.Stringify()}"
-            | ColorIndex int -> $"color-index: {int}"
-            | MinColorIndex int -> $"min-color-index: {int}"
-            | MaxColorIndex int -> $"max-color-index: {int}"
-            | DisplayMode displayMode -> $"display-mode: {displayMode}"
-            | ForcedColors bool -> $"forced-colors: {bool}"
-            | Grid bool -> $"grid: {bool.ToString().ToLower()}"
-            | Height length -> $"height: {lengthPercentageString length}"
-            | MinHeight length -> $"min-height: {lengthPercentageString length}"
-            | MaxHeight length -> $"max-height: {lengthPercentageString length}"
-            | Width length -> $"width: {lengthPercentageString length}"
-            | MinWidth length -> $"min-width: {lengthPercentageString length}"
-            | MaxWidth length -> $"max-width: {lengthPercentageString length}"
-            | Hover bool -> $"hover: {bool}"
-            | InvertedColors bool -> $"inverted-colors: {bool}"
-            | LightLevel lightLevel -> $"light-level: {lightLevel.Stringify()}"
-            | Monochrome int -> $"monochrome: {int}"
-            | MinMonochrome int -> $"min-monochrome: {int}"
-            | MaxMonochrome int -> $"max-monochrome: {int}"
-            | Orientation orientation -> $"orientation: {orientation.Stringify()}"
-            | OverflowBlock overflowBlock -> $"overflow-block: {overflowBlock.Stringify()}"
-            | OverflowInline bool -> $"overflow-inline: {bool}"
-            | Pointer pointer -> $"pointer: {pointer.Stringify()}"
-            | PrefersColorScheme colorScheme -> $"preferred-color-scheme: {colorScheme.Stringify()}"
-            | PrefersContrast contrast -> $"contrast: {contrast.Stringify}"
-            | PrefersReducedMotion bool -> $"prefers-reduced-motion: {bool}"
-            | PrefersReducedTransparency bool -> $"prefers-reduced-transparency: {bool}"
-            | Resolution resolution -> $"resolution: {stringifyICssValue resolution}"
-            | MinResolution resolution -> $"min-resolution: {stringifyICssValue resolution}"
-            | MaxResolution resolution -> $"max-resolution: {stringifyICssValue resolution}"
-            | Scan scan -> $"scan: {scan.Stringify()}"
-            | Scripting scripting -> $"scripting: {scripting.Stringify()}"
-            | Update update -> $"update: {update.Stringify()}"
+            | MinColor int -> $"min-color:{int}"
+            | MaxColor int -> $"max-color:{int}"
+            | ColorGamut colorGamut -> $"color-gamut:{colorGamut.Stringify()}"
+            | ColorIndex int -> $"color-index:{int}"
+            | MinColorIndex int -> $"min-color-index:{int}"
+            | MaxColorIndex int -> $"max-color-index:{int}"
+            | DisplayMode displayMode -> $"display-mode:{displayMode}"
+            | ForcedColors bool -> $"forced-colors:{bool}"
+            | Grid bool -> $"grid:{bool.ToString().ToLower()}"
+            | Height length -> $"height:{lengthPercentageString length}"
+            | MinHeight length -> $"min-height:{lengthPercentageString length}"
+            | MaxHeight length -> $"max-height:{lengthPercentageString length}"
+            | Width length -> $"width:{lengthPercentageString length}"
+            | MinWidth length -> $"min-width:{lengthPercentageString length}"
+            | MaxWidth length -> $"max-width:{lengthPercentageString length}"
+            | Hover bool -> $"hover:{bool}"
+            | InvertedColors bool -> $"inverted-colors:{bool}"
+            | LightLevel lightLevel -> $"light-level:{lightLevel.Stringify()}"
+            | Monochrome int -> $"monochrome:{int}"
+            | MinMonochrome int -> $"min-monochrome:{int}"
+            | MaxMonochrome int -> $"max-monochrome:{int}"
+            | Orientation orientation -> $"orientation:{orientation.Stringify()}"
+            | OverflowBlock overflowBlock -> $"overflow-block:{overflowBlock.Stringify()}"
+            | OverflowInline bool -> $"overflow-inline:{bool}"
+            | Pointer pointer -> $"pointer:{pointer.Stringify()}"
+            | PrefersColorScheme colorScheme -> $"preferred-color-scheme:{colorScheme.Stringify()}"
+            | PrefersContrast contrast -> $"contrast:{contrast.Stringify}"
+            | PrefersReducedMotion bool -> $"prefers-reduced-motion:{bool}"
+            | PrefersReducedTransparency bool -> $"prefers-reduced-transparency:{bool}"
+            | Resolution resolution -> $"resolution:{stringifyICssValue resolution}"
+            | MinResolution resolution -> $"min-resolution:{stringifyICssValue resolution}"
+            | MaxResolution resolution -> $"max-resolution:{stringifyICssValue resolution}"
+            | Scan scan -> $"scan:{scan.Stringify()}"
+            | Scripting scripting -> $"scripting:{scripting.Stringify()}"
+            | Update update -> $"update:{update.Stringify()}"
 
-    type MediaQuery =
+    type MediaQueryMaster =
         | MediaQuery of Feature list * Rule list
         | MediaQueryFor of Device * Feature list * Rule list
         interface ICssValue with
-            member this.StringifyCss() = ""
-            
+            // Used to create classname
+            member this.StringifyCss() =
+                match this with
+                | MediaQuery (_, rules)
+                | MediaQueryFor (_,_,rules) ->
+                    stringifyList rules
+
 
 [<RequireQualifiedAccess>]
 module MediaClasses =
@@ -227,7 +232,7 @@ module MediaClasses =
         member this.query (features: Media.Feature list) (rules: Rule list) =
             (Property.Media, Media.MediaQuery(features, rules))
             |> Rule
-            
+
         member this.queryFor (device: Media.Device) (features: Media.Feature list)  (rules: Rule list) =
             (Property.Media, Media.MediaQueryFor(device, features, rules))
             |> Rule

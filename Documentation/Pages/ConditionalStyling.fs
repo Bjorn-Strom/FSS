@@ -28,6 +28,6 @@ let ConditionalStyling () =
                                      Html.button [ prop.className (buttonStyle Big)
                                                    prop.text "Big" ] ] ] ]
 
-    Page Pages.ConditionalStyling styles
+    Page (Pages.FssPage Pages.ConditionalStyling) styles
 
 JsInterop.exportDefault ConditionalStyling

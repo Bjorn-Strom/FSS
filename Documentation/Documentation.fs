@@ -4,6 +4,8 @@ open Fss
 open Feliz
 open Fable.Core
 open Feliz.Router
+open Fss.Types
+open Browser
 
 open Pages
 open Store
@@ -16,29 +18,13 @@ let nunito =
         [ FontFace.Src.truetype "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/fonts/Nunito-Regular.ttf"
           FontFace.FontDisplay.swap ]
 
-let raleway =
-    fontFace
-        "Raleway"
-        [ FontFace.Src.truetype
-            "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/fonts/Raleway-Regular.ttf"
-          FontFace.FontDisplay.swap ]
-
 let grapeNuts =
     fontFace
         "GrapeNuts"
         [ FontFace.Src.truetype
             "https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/fonts/GrapeNuts-Regular.ttf"
           FontFace.FontDisplay.swap ]
-
-let headingFont = FontFamily.value nunito
-let textFont = FontFamily.value raleway
-
-// Colors
-let sidebarBackgroundColor = "212731"
-let sidebarText = "759DB2"
-let sidebarHover = "c7dae0"
-let contentText = "e8e6e3"
-let contentLink = "50b8ec"
+let font = FontFamily.value nunito
 
 // Code splitting
 let overview: JS.Promise<unit -> ReactElement> =
@@ -74,6 +60,9 @@ let keyframesAnimations: JS.Promise<unit -> ReactElement> =
 let combinators: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/Combinators.fs"
 
+let attributeSelectors: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/AttributeSelectors.fs"
+
 let mediaQueries: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/MediaQueries.fs"
 
@@ -106,168 +95,333 @@ let giraffe: JS.Promise<unit -> ReactElement> =
 let troubleshoot: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/Troubleshoot.fs"
 
+let changelog: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Changelog.fs"
+
 [<ReactComponent>]
 let Suspense (component': JS.Promise<unit -> ReactElement>) =
-    React.suspense ([ Html.div [ React.lazy' (component', ()) ] ], Html.p "LOADING")
-
+    React.suspense ([ Html.div [ React.lazy' (component', ()) ] ], Spinner())
 
 [<ReactComponent>]
 let MenuItem (page: Page) =
-    let _, dispatch = useStore ()
-    let pageString = pageToLinkString page
-
-    Html.a [ prop.href $"#/page/{pageString}"
-             prop.text (Utilities.duToSpaced page)
-             prop.onClick (fun _ -> dispatch ToggleSidebar)
-             prop.fss [ Position.relative
-                        Width.value (px 200)
-                        Label "Menu link"
-                        FontSize.value (px 14)
-                        TextDecoration.none
-                        VerticalAlign.middle
-                        Padding.value (px 2)
-                        textFont ] ]
+    let _, dispatch = useStore()
+    Html.li [
+        prop.fss [
+            ListStyle.none
+        ]
+        prop.children [
+            Html.a [
+                prop.fss [
+                    TextDecoration.none
+                    Color.inherit'
+                    Hover [
+                        TextDecoration.revert
+                    ]
+                ]
+                prop.text (pageToPrettyString page)
+                prop.href $"#/page/{pageToLinkString page}"
+                prop.onClick (fun _ -> dispatch ToggleSidebar)
+            ]
+        ]
+    ]
 
 [<ReactComponent>]
-let NavBar () =
-    let _, dispatch = useStore ()
-
-    Html.nav [ prop.fss [ Position.fixed'
-                          Left.value (px 0)
-                          Top.value (pct -100)
-                          Width.value (vw 100.)
-                          Height.value (px 50)
-                          BackgroundColor.hex sidebarBackgroundColor
-                          Display.flex
-                          AlignItems.center
-                          ZIndex.value 10
-
-                          TransitionProperty.top
-                          TransitionTimingFunction.easeInOut
-                          TransitionDuration.value (ms 500.)
-
-                          Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
-                              Top.value (px 0)
-                          ] ]
-               prop.children [ Html.div [ prop.fss [ Cursor.pointer ]
-                                          prop.onClick (fun _ -> dispatch ToggleSidebar)
-                                          prop.children [ Hamburger.hamburger 32 32 "" ] ] ] ]
+let MenuItems (title: string, pages: Page list) =
+     Html.li [
+         prop.fss [
+             PaddingTop.value (px 20)
+             ListStyle.none
+         ]
+         prop.children [
+             Html.div title
+             Html.ul [
+                 prop.fss [
+                     PaddingLeft.value (px 10)
+                     FontSize.value (pct 80)
+                     LineHeight.value (pct 150)
+                 ]
+                 prop.children (List.map MenuItem pages)
+             ]
+         ]
+     ]
 
 [<ReactComponent>]
 let Menu () =
-    let store, _ = useStore ()
+    let store, dispatch = useStore()
+    Html.nav [
+         prop.fss [
+             Position.fixed'
+             Left.value (px 0)
+             Top.value (px 0)
+             Bottom.value (px 0)
+             MaxWidth.value (px 1300)
+             MarginLeft.value (px 0)
+             MarginRight.value (px 0)
+             MarginTop.auto
+             MarginBottom.auto
+             TransitionProperty.left
+             TransitionTimingFunction.easeInOut
+             TransitionDuration.value (ms 500.)
+             ZIndex.value 11
 
-    Html.aside [ prop.fss [ Label "Menu"
-                            Position.fixed'
-                            Left.value (px 0)
-                            Top.value (px 0)
-                            Height.value (vh 100.)
-                            Width.value (px 336)
-                            BackgroundColor.hex sidebarBackgroundColor
-                            Display.flex
-                            FlexDirection.column
-                            AlignItems.center
-                            ZIndex.value 5
-                            PaddingTop.value (px 100)
+             Media.query [ Media.MaxWidth(px 700) ] [
+                 if store.ShowSidebar = false then
+                    Left.value (pct -100)
+                 else
+                    Left.value (pct 0)
+             ]
+         ]
+         prop.children [
+             Html.div [
+                 prop.id "Shadow"
+                 prop.onClick (fun _ -> dispatch ToggleSidebar)
+                 prop.fss [
+                     Position.fixed'
+                     Top.value (px 0)
+                     Right.value (px 0)
+                     Bottom.value (px 0)
+                     Left.value (px 0)
+                     BackgroundColor.rgba 0 0 0 0
+                     Visibility.hidden
+                     TransitionProperty.backgroundColor
+                     TransitionDuration.value (ms 500.)
 
-                            TransitionProperty.left
-                            TransitionTimingFunction.easeInOut
-                            TransitionDuration.value (ms 500.)
+                     Media.query [Media.MaxWidth (px 700)] [
+                        if store.ShowSidebar then
+                            BackgroundColor.rgba 0 0 0 0.5
+                            Visibility.visible
+                     ]
+                 ]
+             ]
+             Html.div [
+                 prop.fss [
+                     Position.absolute
+                     Display.flex
+                     FlexDirection.column
+                     Left.value (px 0)
+                     Top.value (px 0)
+                     Bottom.value (px 0)
+                     Padding.value(px 50, px 70, px 30, px 30)
+                     OverflowY.auto
+                     BackgroundColor.value store.Theme.BackgroundColor
+                 ]
+                 prop.children [
+                     Html.a [
+                         prop.fss [
+                             AlignSelf.end'
+                         ]
+                         prop.id "logo"
+                         prop.href "/"
+                         prop.children [
+                             Logo.logo 128 128 ""
+                         ]
+                     ]
+                     Html.ul [
+                         prop.id "menuItems"
+                         prop.children (List.map MenuItems allPages)
+                     ]
+                     Html.div [
+                         prop.fss [
+                             AlignSelf.center
 
-                            Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
-                                if store.ShowSidebar then
-                                    Left.value (pct 0)
-                                else
-                                    Left.value (pct -100)
-                            ]
+                             ! (Selector.Tag Html.A) [
+                                 FirstOfType [
+                                     MarginRight.value (px 15)
+                                 ]
+                             ]
+                         ]
+                         prop.id "options"
+                         let iconStyle = fss [
+                             Fss.Svg.Fill.value store.Theme.Opposite
+                         ]
+                         prop.children [
+                             Html.a [
+                                 prop.ariaLabel "View this project on GitHub"
+                                 prop.href "https://github.com/bjorn-strom/fss"
+                                 prop.children [
+                                     Github.iconClassName iconStyle
+                                ]
+                             ]
+                             Html.a [
+                                 prop.fss [
+                                     Cursor.pointer
+                                 ]
+                                 prop.href "javascript:void(0)"
+                                 prop.onClick (fun _ ->
+                                     if store.Theme = Theme.LightTheme then
+                                         dispatch (SetTheme Theme.DarkTheme)
+                                     else
+                                         dispatch (SetTheme Theme.LightTheme))
+                                 prop.children [
+                                     if store.Theme = Theme.LightTheme then
+                                         Moon.iconNormal
+                                     else
+                                         Sun.iconClassName iconStyle
+                                 ]
+                             ]
+                         ]
+                     ]
+                 ]
 
-                            // Following the menu is the article
-                            // We need to animate the article as well as the menu when
-                            // The following code block deals with that
-                            // (parens added as Fantomas is acting up)
-                            (!+Fss.Types.Html.Article)
-                                [ MarginLeft.value (px 400)
-                                  TransitionProperty.marginLeft
-                                  TransitionTimingFunction.easeInOut
-                                  TransitionDuration.value (ms 500.)
-                                  MaxWidth.value (pct 60)
+             ]
+         ]
+     ]
 
-                                  Media.query [ Fss.Types.Media.MaxWidth <| px 1000 ] [
-                                      MarginLeft.value (px 0)
-                                      MaxWidth.value (pct 100)
+// TODO: Fin not found side
+[<ReactComponent>]
+let Main (page: Page) =
+    Html.main [
+        prop.fss [
+            Position.relative
+            MaxWidth.value (px 1000)
+        ]
+        prop.children [
+            match page with
+            | FssPage page ->
+                match page with
+                    | Overview -> Suspense overview
+                    | Installation -> Suspense installation
+                    | Philosophy -> Suspense philosophy
+                    | BasicUsage -> Suspense basicUsage
+                    | ConditionalStyling -> Suspense conditionalStyling
+                    | Pseudo -> Suspense pseudo
+                    | Composition -> Suspense composition
+                    | Labels -> Suspense labels
+                    | Transition -> Suspense transition
+                    | KeyframesAnimations -> Suspense keyframesAnimations
+                    | Combinators -> Suspense combinators
+                    | AttributeSelectors -> Suspense attributeSelectors
+                    | MediaQueries -> Suspense mediaQueries
+                    | Counters -> Suspense counters
+                    | Fonts -> Suspense fonts
+                    | BackgroundImages -> Suspense backgroundImages
+                    | Svg -> Suspense svg
+                    | GlobalStyles -> Suspense globalStyles
+            | LibraryPage page ->
+                match page with
+                | Core -> Suspense core
+                | Fable -> Suspense fable
+                | Feliz -> Suspense feliz
+                | Giraffe -> Suspense giraffe
+            | OtherPage page ->
+                match page with
+                | Troubleshoot -> Suspense troubleshoot
+                | Changelog -> Suspense changelog
+        ]
+    ]
 
-                                  ] ] ]
+[<ReactComponent>]
+let TopBar () =
+    let store, dispatch = useStore()
+    Html.div [
+        prop.fss [
+             Position.fixed'
+             Left.value (px 0)
+             Top.value (pct -100)
+             Width.value (vw 100.)
+             Height.value (px 50)
+             PaddingLeft.value (px 25)
+             BackgroundColor.value store.Theme.TopBar
+             BoxShadow.value(px 0, px 1, px 10, Fss.Types.Color.Black)
 
-                 prop.children [ Logo.logo 128 128 ""
-                                 Html.h1 [ prop.fss [ headingFont
-                                                      Color.hex sidebarText ]
-                                           prop.text "Fss" ]
-                                 yield! (List.map MenuItem allPages) ] ]
+             Display.flex
+             AlignItems.center
+             ZIndex.value 10
 
+             TransitionProperty.top
+             TransitionTimingFunction.easeInOut
+             TransitionDuration.value (ms 500.)
 
+             Media.query [ Media.MaxWidth (px 700) ] [
+                 Top.value (px 0)
+             ]
+        ]
+        prop.id "TopBar"
+        prop.children [
+            Html.div [
+                prop.fss [
+                    Cursor.pointer
+                ]
+                prop.children [
+                    Hamburger.hamburger 32 32 ""
+                ]
+                prop.onClick(fun _ -> dispatch ToggleSidebar)
+            ]
+        ]
+    ]
 
-let Article (page: Page) =
-    //                    | Feliz ->
-//                    | SVG ->
+[<ReactComponent>]
+let Content (page: Page) =
+    let store, _ = useStore()
+    Html.div [
+        prop.fss [
+            Position.relative
+            MarginLeft.value (px 0)
+            MarginRight.value (px 0)
+            MarginTop.auto
+            MarginBottom.auto
+            Padding.value(px 50, px 50, px 500, px 280)
+            BackgroundColor.value store.Theme.BackgroundColor
+            Color.value store.Theme.TextColor
+            TransitionProperty.paddingLeft
+            TransitionTimingFunction.easeInOut
+            TransitionDuration.value (ms 500.)
 
-    Html.article [ prop.fss [ PaddingTop.value (px 100) ]
-                   prop.children [ match page with
-                                   | Overview -> Suspense overview
-                                   | Installation -> Suspense installation
-                                   | Philosophy -> Suspense philosophy
-                                   | BasicUsage -> Suspense basicUsage
-                                   | ConditionalStyling -> Suspense conditionalStyling
-                                   | Pseudo -> Suspense pseudo
-                                   | Composition -> Suspense composition
-                                   | Labels -> Suspense labels
-                                   | Transition -> Suspense transition
-                                   | KeyframesAnimations -> Suspense keyframesAnimations
-                                   | Combinators -> Suspense combinators
-                                   | MediaQueries -> Suspense mediaQueries
-                                   | Counters -> Suspense counters
-                                   | Fonts -> Suspense fonts
-                                   | BackgroundImages -> Suspense backgroundImages
-                                   | Svg -> Suspense svg
-                                   | Core -> Suspense core
-                                   | Fable -> Suspense fable
-                                   | Feliz -> Suspense feliz
-                                   | Giraffe -> Suspense giraffe
-                                   | Troubleshoot -> Suspense troubleshoot
-                                   | Global -> Suspense globalStyles ] ]
-
-let Content page =
-    Html.div [ prop.fss [ Display.flex
-                          FlexDirection.row ]
-               prop.children [ NavBar()
-                               Menu()
-                               Article page ] ]
+            Media.query [ Media.MaxWidth (px 700) ] [
+                PaddingLeft.value(px 50)
+            ]
+        ]
+        prop.children [
+            Menu ()
+            Main page
+            TopBar ()
+        ]
+    ]
 
 [<ReactComponent>]
 let App () =
-    global' [ Link [ Color.hex sidebarText ]
-              Visited [ Color.hex sidebarText ]
-              !
-                  Fss.Types.Html.A
-                  [ Hover [ Color.hex sidebarHover ]
-                    Focus [ Color.hex sidebarHover ] ]
-              !
-                  Fss.Types.Html.Body
-                  [ BackgroundColor.hex "#181A1B"
-                    textFont
-                    Color.hex contentText ] ]
+    global' [
+        Visited [
+            Color.inherit'
+        ]
+
+        Link [
+            Color.inherit'
+        ]
+
+        ! (Selector.Tag Html.Body) [
+            OverflowX.hidden
+            font
+        ]
+    ]
 
     let currentUrl, updateUrl = React.useState (Router.currentUrl ())
+    let store, _ = useStore()
 
-    React.router [ router.onUrlChanged updateUrl
-                   router.children [ match currentUrl with
-                                     | [] -> Content Overview
-                                     | [ "page"; page ] ->
-                                         let page = stringToPage page
+    Html.div [
+        prop.fss [
+            Position.absolute
+            Left.value (px 0)
+            Top.value (px 0)
+            Width.value (pct 100)
+            Height.value (pct 100)
+            Margin.value(px 0)
+            Padding.value(px 0)
+            Border.none
+            BackgroundColor.value store.Theme.BackgroundColor
+        ]
+        prop.children [
+            React.router [ router.onUrlChanged updateUrl
+                           router.children [ match currentUrl with
+                                             | [] -> Content (FssPage Overview)
+                                             | [ "page"; page ] ->
+                                                 let page = stringToPage page
 
-                                         match page with
-                                         | Unknown -> Content Unknown
-                                         | _ -> Content page
-                                     | _ -> Content NotFound ] ]
+                                                 match page with
+                                                 | Page.Unknown -> Content Page.Unknown
+                                                 | _ -> Content page
+                                             | _ -> Content NotFound ] ]
+            ]
+    ]
 
-open Browser.Dom
 ReactDOM.render (StoreProvider <| App(), document.getElementById "app")

@@ -33,6 +33,6 @@ let Feliz () =
                               AnimationIterationCount.infinite ] ]
 
     let styles = [ box; bounceBox ]
-    Page Pages.Feliz styles
+    Page (Pages.LibraryPage Pages.Feliz) styles
 
 JsInterop.exportDefault Feliz

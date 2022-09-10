@@ -49,7 +49,7 @@ module Font =
         | UltraExpanded
         interface ICssValue with
             member this.StringifyCss() =
-                match this with                
+                match this with
                 | SemiCondensed -> "semi-condensed"
                 | Condensed -> "condensed"
                 | ExtraCondensed -> "extra-condensed"
@@ -233,7 +233,7 @@ module Font =
         | Strict
         | Anywhere
         interface ICssValue with
-            member this.StringifyCss() = 
+            member this.StringifyCss() =
                 match this with
                 | Loose -> "loose"
                 | Strict -> "strict"
@@ -316,7 +316,7 @@ module FontClasses =
     type FontStyle(property) =
         inherit CssRuleWithNormal(property)
         member this.oblique(angle: Angle) =
-            let angle = $"oblique {stringifyICssValue angle}" 
+            let angle = $"oblique {stringifyICssValue angle}"
             (property, String angle) |> Rule
         member this.italic = (property, Font.Italic) |> Rule
 
@@ -354,7 +354,7 @@ module FontClasses =
         member this.value(families: Font.Family list) =
             let families =
                 List.map stringifyICssValue families
-                |> String.concat ", " 
+                |> String.concat ","
             (property, String families) |> Rule
         member this.serif = (property, Font.Serif) |> Rule
         member this.sansSerif = (property, Font.SansSerif) |> Rule
@@ -382,7 +382,7 @@ module FontClasses =
         member this.swsh switch = (property, settingToString Font.Swsh switch |> String) |> Rule
         member this.hist switch = (property, settingToString Font.Hist switch |> String) |> Rule
         member this.ss(value: int, switch: Font.SettingSwitch) =
-            let value = $"\"ss%02i{value}\" %s{switch.ToString()}" 
+            let value = $"\"ss%02i{value}\" %s{switch.ToString()}"
             (property, value |> String)
             |> Rule
         member this.kern switch = (property, settingToString Font.Kern switch |> String) |> Rule

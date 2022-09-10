@@ -6,13 +6,10 @@ open Fss
 
 [<AutoOpen>]
 module Fable =
-    let private processCssRule (name: string, rule: string) =
-        $"{name} {rule}"
-        
     /// Injects the css into the dom
     /// Only inject if its not injected already
     let private styleCache = HashSet<string>()
-    let private injectCss className (css: string) =
+    let private injectCss (className: string) (css: string) =
         if styleCache.Contains className then
             ()
         else
@@ -22,73 +19,66 @@ module Fable =
             style.appendChild(document.createTextNode(css)) |> ignore
             head.appendChild(style) |> ignore
             styleCache.Add className |> ignore
-    
+
     /// Injects CSS into dom and returns the classname
     let fss (properties: Fss.Types.Rule list): string =
         let className, cssRules = createFss properties
-        cssRules
-            |> List.map processCssRule
-            |> String.concat ""
-            |> injectCss className
-        
+        injectCss className cssRules
+
         className
-        
+
     // Injects CSS into dom as global styles
     let global'(properties: Fss.Types.Rule list): unit =
         let cssRules = createGlobal properties
-        
-        cssRules
-        |> List.map processCssRule
-        |> String.concat ""
-        |> injectCss "*"
+
+        injectCss "*" cssRules
         ()
-        
-    let private processCounterRules (name: string) (rules: string) =
-        $"@counter-style {name} {rules}"
-        
-        
+
+    let private processCounterRules (rules: string) =
+        $"@counter-style {rules}"
+
     /// Injects counter style into dom and returns the counter name
     let counterStyle (properties: Fss.Types.CounterRule list): string =
         let counterName, counterStyle =
             properties
             |> createCounterStyle
-            
-        injectCss counterName <| processCounterRules counterName counterStyle
-            
+
+        injectCss counterName <| processCounterRules counterStyle
+
         counterName
-        
+
     let private processFontFaceRules (rules: string) =
         $"@font-face {rules}"
-        
+
     /// Injects font face into dom and returns the font name
     let fontFaces name (properties: Fss.Types.FontFaceRule list list): string =
         let fontName, fontStyles =
             properties
             |> createFontFaces name
-            
+
         injectCss fontName <| processFontFaceRules fontStyles
-        
+
         fontName
-        
+
     /// Injects font face into dom and returns the font name
     let fontFace name (properties: Fss.Types.FontFaceRule list): string =
         let fontName, fontStyles =
             properties
             |> createFontFace name
-            
+
         injectCss fontName <| processFontFaceRules fontStyles
-        
+
         fontName
-        
-    let private processAnimationRules name (rules: string) =
-        $"@keyframes {name} {rules}"
-        
+
+    let private processAnimationRules (rules: string) =
+        $"@keyframes {rules}"
+
     /// Injects keyframes into dom and returns the animation name
     let keyframes (properties: Keyframes list): string =
         let animationName, animationStyles =
             properties
             |> createAnimation
-            
-        injectCss animationName <| processAnimationRules animationName animationStyles
-        
+
+        injectCss animationName <| processAnimationRules animationStyles
+
         animationName

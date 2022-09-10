@@ -61,6 +61,6 @@ let Fonts () =
                      Html.p [ prop.text "Moderna"
                               prop.className moderna ] ] ]
 
-    Page Pages.Fonts styles
+    Page (Pages.FssPage Pages.Fonts) styles
 
 JsInterop.exportDefault Fonts

@@ -6,11 +6,11 @@
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>1.0.5</Version>
+    <Version>2.0.0</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <PackageReleaseNotes>Add display inline-grid and ::placeholder pseudo-element.</PackageReleaseNotes>
+    <PackageReleaseNotes>Rewrites Css generation and adds Attribute selectors.</PackageReleaseNotes>
     <RootNamespace>Fss</RootNamespace>
     <PackageId>Fss-lib.Core</PackageId>
   </PropertyGroup>
@@ -18,9 +18,11 @@
     <Compile Include="Utilities.fs" />
     <Compile Include="Types\Html.fs" />
     <Compile Include="Types\MasterTypes.fs" />
+    <Compile Include="Types\Properties.fs" />
+    <Compile Include="Types\Units.fs" />
+    <Compile Include="Types\Media.fs" />
     <Compile Include="Types\Attribute.fs" />
     <Compile Include="Types\Color.fs" />
-    <Compile Include="Types\Units.fs" />
     <Compile Include="Types\Border.fs" />
     <Compile Include="Types\Image.fs" />
     <Compile Include="Types\ContentSize.fs" />
@@ -64,10 +66,9 @@
     <Compile Include="Types\WillChange.fs" />
     <Compile Include="Types\Mask.fs" />
     <Compile Include="Types\Svg.fs" />
-    <Compile Include="Types\Media.fs" />
     <Compile Include="Types\FontFace.fs" />
     <Compile Include="Types\Font.fs" />
-    <Compile Include="Types\Selector.fs" />
+    <Compile Include="Types\Combinator.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Custom.fs" />
     <Compile Include="css\Border.fs" />
@@ -115,9 +116,11 @@
     <Compile Include="css\Svg.fs" />
     <Compile Include="css\FontFace.fs" />
     <Compile Include="css\Font.fs" />
-    <Compile Include="css\Selector.fs" />
+    <Compile Include="css\Combinator.fs" />
     <Compile Include="css\Media.fs" />
     <Compile Include="css\Keyframes.fs" />
+    <Compile Include="css\Selector.fs" />
+    <Compile Include="css\Attributes.fs" />
     <Compile Include="Functions.fs" />
   </ItemGroup>
   <ItemGroup>

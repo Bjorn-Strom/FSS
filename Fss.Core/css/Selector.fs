@@ -1,10 +1,8 @@
 namespace Fss
 
-open Fss.Types
-
 [<AutoOpen>]
 module Selector =
-    let (!+) (html: Html.Html) (rules: Rule list) = SelectorClasses.Selector.adjacentSibling html rules
-    let (!~) (html: Html.Html) (rules: Rule list) = SelectorClasses.Selector.generalSibling html rules
-    let (!>) (html: Html.Html) (rules: Rule list) = SelectorClasses.Selector.child html rules
-    let (! ) (html: Html.Html) (rules: Rule list) = SelectorClasses.Selector.descendant html rules
+    type Selector =
+        static member Tag tag = Fss.Types.Selector.Tag tag
+        static member Id id = Fss.Types.Selector.Id id
+        static member Class class' = Fss.Types.Selector.Class class'

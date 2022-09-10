@@ -182,7 +182,7 @@ module BackgroundClasses =
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
     type BackgroundSize(property) =
-        inherit CssRuleWithValueFunctions<Background.Size>(property, ", ")
+        inherit CssRuleWithValueFunctions<Background.Size>(property, ",")
 
         member this.value(size: ILengthPercentage) =
             (property, lengthPercentageToType size) |> Rule
@@ -264,7 +264,7 @@ module BackgroundClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
     // FIXME: This and MixBlendMode are quite similar
     type BackgroundBlendMode(property) =
-        inherit CssRuleWithValueFunctions<Background.BlendMode>(property, ", ")
+        inherit CssRuleWithValueFunctions<Background.BlendMode>(property, ",")
         /// The top color is final, regardless of what lies beneath
         member this.normal = (property, Normal) |> Rule
         /// The final color is the result of multiplying the top and bottom colors
@@ -297,7 +297,7 @@ module BackgroundClasses =
         member this.color = (property, Background.BlendMode.Color) |> Rule
         /// The final color has the luminosity of the top color while using the hue and saturation of the bottom color
         member this.luminosity = (property, Background.BlendMode.Luminosity) |> Rule
-        
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
     type Isolation(property) =
         inherit CssRuleWithAuto(property)

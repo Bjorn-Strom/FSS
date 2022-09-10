@@ -48,30 +48,30 @@ module Transform =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
-                | Matrix (a, b, c, d, e, f) -> $"matrix({a}, {b}, {c}, {d}, {e}, {f})"
+                | Matrix (a, b, c, d, e, f) -> $"matrix({a},{b},{c},{d},{e},{f})"
                 | Matrix3D (a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) ->
-                    $"matrix3d({a1}, {b1}, {c1}, {d1}, {a2}, {b2}, {c2}, {d2}, {a3}, {b3}, {c3}, {d3}, {a4}, {b4}, {c4}, {d4})"
+                    $"matrix3d({a1},{b1},{c1},{d1},{a2},{b2},{c2},{d2},{a3},{b3},{c3},{d3},{a4},{b4},{c4},{d4})"
                 | Perspective size -> $"perspective({stringifyICssValue size})"
                 | Rotate angle -> $"rotate({stringifyICssValue angle})"
-                | Rotate3D (a, b, c, angle) -> $"rotate3d({a}, {b}, {c}, {stringifyICssValue angle})"
+                | Rotate3D (a, b, c, angle) -> $"rotate3d({a},{b},{c},{stringifyICssValue angle})"
                 | RotateX angle -> $"rotateX({stringifyICssValue angle})"
                 | RotateY angle -> $"rotateY({stringifyICssValue angle})"
                 | RotateZ angle -> $"rotateZ({stringifyICssValue angle})"
                 | Translate size -> $"translate({lengthPercentageString size})"
-                | Translate2 (sx, sy) -> $"translate({lengthPercentageString sx}, {lengthPercentageString sy})"
+                | Translate2 (sx, sy) -> $"translate({lengthPercentageString sx},{lengthPercentageString sy})"
                 | Translate3D (size1, size2, size3) ->
-                    $"translate3d({lengthPercentageString size1}, {lengthPercentageString size2}, {lengthPercentageString size3})"
+                    $"translate3d({lengthPercentageString size1},{lengthPercentageString size2},{lengthPercentageString size3})"
                 | TranslateX size -> $"translateX({lengthPercentageString size})"
                 | TranslateY size -> $"translateY({lengthPercentageString size})"
                 | TranslateZ size -> $"translateZ({lengthPercentageString size})"
                 | Scale n -> $"scale({n})"
-                | Scale2 (sx, sy) -> $"scale({sx}, {sy})"
-                | Scale3D (n1, n2, n3) -> $"scale3d({n1}, {n2}, {n3})"
+                | Scale2 (sx, sy) -> $"scale({sx},{sy})"
+                | Scale3D (n1, n2, n3) -> $"scale3d({n1},{n2},{n3})"
                 | ScaleX n -> $"scaleX({n})"
                 | ScaleY n -> $"scaleY({n})"
                 | ScaleZ n -> $"scaleZ({n})"
                 | Skew a -> $"skew({stringifyICssValue a})"
-                | Skew2 (ax, ay) -> $"skew({stringifyICssValue ax}, {stringifyICssValue ay})"
+                | Skew2 (ax, ay) -> $"skew({stringifyICssValue ax},{stringifyICssValue ay})"
                 | SkewX a -> $"skewX({stringifyICssValue a})"
                 | SkewY a -> $"skewY({stringifyICssValue a})"
 
@@ -174,9 +174,9 @@ module TransformClasses =
         member this.scaleY(scale: float) = Transform.ScaleY(scale)
         /// Scale an element up or down along the z axis
         member this.scaleZ(scale: float) = Transform.ScaleZ(scale)
-        /// Skew an element 
+        /// Skew an element
         member this.skew(angle: Angle) = Transform.Skew(angle)
-        /// Skew an element 
+        /// Skew an element
         member this.skew(a: Angle, b: Angle) = Transform.Skew2(a, b)
         /// Skew an element horizontally
         member this.skewX(angle: Angle) = Transform.SkewX(angle)

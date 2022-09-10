@@ -46,6 +46,6 @@ let KeyframesAnimations () =
                      Html.div [ prop.className bouncyColor
                                 prop.text "Bouncy color" ] ] ]
 
-    Page Pages.KeyframesAnimations styles
+    Page (Pages.FssPage Pages.KeyframesAnimations) styles
 
 JsInterop.exportDefault KeyframesAnimations

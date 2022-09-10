@@ -21,7 +21,7 @@ module WillChangeClasses =
         member this.value(ident: string) = (property, String ident) |> Rule
 
         member this.value(idents: string list) =
-            (property, String(String.concat ", " idents))
+            (property, String(String.concat "," idents))
             |> Rule
 
         /// Indicates that the scroll position will change

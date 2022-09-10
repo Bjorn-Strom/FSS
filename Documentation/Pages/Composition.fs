@@ -24,6 +24,6 @@ let Composition () =
                      Html.div [ prop.className (fss <| baseStyle @ danger)
                                 prop.text "This will be red" ] ] ]
 
-    Page Pages.Composition styles
+    Page (Pages.FssPage Pages.Composition) styles
 
 JsInterop.exportDefault Composition

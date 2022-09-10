@@ -73,21 +73,21 @@ module Image =
                 let gradientToString (gradients: (Color.Color * ILengthPercentage) list) =
                     List.fold
                         (fun (acc: string) (color, length) ->
-                            $"{acc}, {stringifyICssValue color} {lengthPercentageString length}")
+                            $"{acc},{stringifyICssValue color} {lengthPercentageString length}")
                         ""
                         gradients
 
                 let gradientAngleToString (gradients: (Color.Color * Angle) list) =
                     List.fold
                         (fun (acc: string) (color, angle) ->
-                            $"{acc}, {stringifyICssValue color} {stringifyICssValue angle}")
+                            $"{acc},{stringifyICssValue color} {stringifyICssValue angle}")
                         ""
                         gradients
 
                 let gradientPercentToString (gradients: (Color.Color * Percent) list) =
                     List.fold
                         (fun (acc: string) (color, length) ->
-                            $"{acc}, {stringifyICssValue color} {stringifyICssValue length}")
+                            $"{acc},{stringifyICssValue color} {stringifyICssValue length}")
                         ""
                         gradients
 
@@ -96,28 +96,28 @@ module Image =
 
                 let linearGradientsToString gradients =
                     List.map linearGradientToString gradients
-                    |> String.concat ", "
+                    |> String.concat ","
 
                 let repeatingLinearGradient (angle, gradients) =
                     $"repeating-linear-gradient({stringifyICssValue angle}{gradientToString gradients})"
 
                 let repeatingLinearGradients gradients =
                     List.map repeatingLinearGradient gradients
-                    |> String.concat ", "
+                    |> String.concat ","
 
                 let radialGradientToString (shape, side, x, y, gradients) =
                     $"radial-gradient({shape.ToString().ToLower()} {stringifyICssValue side} at {stringifyICssValue x} {stringifyICssValue y}{gradientToString gradients})"
 
                 let radialGradientsToString gradients =
                     List.map radialGradientToString gradients
-                    |> String.concat ", "
+                    |> String.concat ","
 
                 let repeatingRadialGradientToString (shape, side, x, y, gradients) =
                     $"repeating-radial-gradient({shape.ToString().ToLower()} {stringifyICssValue side} at {stringifyICssValue x} {stringifyICssValue y}{gradientToString gradients})"
 
                 let repeatingRadialGradientsToString gradients =
                     List.map repeatingRadialGradientToString gradients
-                    |> String.concat ", "
+                    |> String.concat ","
 
                 let conicGradientAngleToString (angle, x, y, gradients) =
                     $"conic-gradient(from {stringifyICssValue angle} at {stringifyICssValue x} {stringifyICssValue y}{gradientAngleToString gradients})"

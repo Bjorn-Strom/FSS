@@ -1,8 +1,5 @@
 ﻿namespace FSSTests
 
-// Lag egne test prosjekter til hvert bibliotek
-// Disse testene bruker sin egen kode. Da kan jeg teste alt
-
 open Fet
 
 module Tests =
@@ -21,7 +18,7 @@ module Tests =
                     let stop = System.DateTime.Now
                     let timespan = (stop - start).TotalMilliseconds
                     timingList.Add(i, timespan)
-                    
+
                 printfn "Performance test complete"
                 printfn "Number of rules, Milliseconds used"
                 Seq.iter (fun (n, ms) ->
@@ -68,16 +65,17 @@ module Tests =
                 ImageTests.tests
                 MaskTests.tests
                 SvgTests.tests
-                CounterTests.tests
-                AnimationTests.tests
-                FontTests.tests
+                CssGenerationTests.tests
+                MediaTests.tests
                 TransformTests.tests
                 PseudoTests.tests
+                FontTests.tests
+                OrderingTests.tests
+                CombinatorTests.tests
+                AnimationTests.tests
+                CounterTests.tests
                 FontFaceTests.tests
                 CompositeTests.tests
-                MediaTests.tests
-                SelectorTests.tests
-                OrderingTests.tests
+                AttributeTests.tests
             ]
-            
         0
