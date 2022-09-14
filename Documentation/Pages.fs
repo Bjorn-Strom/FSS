@@ -26,6 +26,7 @@ type LibraryPage =
     | Fable
     | Feliz
     | Giraffe
+    | Falco
     | Unknown
 
 type OtherPage =
@@ -66,6 +67,7 @@ let allLibraryPages =
       Fable
       Feliz
       Giraffe
+      Falco
     ] |> List.map LibraryPage
 
 let allOtherPages =
@@ -108,6 +110,7 @@ let stringToLibraryPage =
     | "fable" -> Some Fable
     | "feliz" -> Some Feliz
     | "giraffe" -> Some Giraffe
+    | "falco" -> Some Falco
     | _ -> None
 
 let stringToOtherPage =
@@ -151,6 +154,7 @@ let libraryPageToString =
     | Fable -> "Fable"
     | Feliz -> "Feliz"
     | Giraffe -> "Giraffe"
+    | Falco -> "Falco"
     | _ -> "Unknown"
 
 let otherPageToString =
