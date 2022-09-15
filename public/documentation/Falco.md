@@ -11,8 +11,8 @@ dotnet add package Fss-lib.Falco
 
 This library provides helper functions to make it easier to use Fss with [Falco Markup](https://github.com/pimbrouwers/Falco.Markup).
 
-The biggest difference when using Fss with Falco is that there is no automatic injection of styles into the dom.
-That is because there is no reliable way of doing that with the view engine.
+The biggest difference when using Fss with Falco is that there is no automatic injection of styles into the dom, like with `Fss.Fable` and `Fss.Feliz`.
+That is because there is no reliable way of doing that with the view engine. So the you must do this yourself, normally placing the `XmlNode` into the `<head>` tag of your Html.
 
 `Fss.Falco` provides these functions:
 
