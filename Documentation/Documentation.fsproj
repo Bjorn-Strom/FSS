@@ -38,6 +38,7 @@
     <Compile Include="Pages\Fable.fs" />
     <Compile Include="Pages\Feliz.fs" />
     <Compile Include="Pages\Giraffe.fs" />
+    <Compile Include="Pages\Falco.fs" />
     <Compile Include="Pages\Troubleshoot.fs" />
     <Compile Include="Pages\Changelog.fs" />
     <Compile Include="Documentation.fs" />

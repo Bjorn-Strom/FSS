@@ -41,7 +41,7 @@ You can also check out this sample repo: [samples](https://github.com/Bjorn-Stro
 ## Installation 💾
 
 Install the Nuget package you need. If you are using Fable or Feliz then you probably want `Fss.Fable` or `Fss.Feliz`.
-If you are using Giraffe then you probably want `Fss.Giraffe`. Doing something custom or extending Fss? Then you
+If you are using Giraffe then you probably want `Fss.Giraffe`, and if you are using `Falco` then you probably want `Fss.Falco`. Doing something custom or extending Fss? Then you
 probably want `Fss.Core`.
 
 | Package                                                        | NuGet                                                                                   | Downloads                                                                                |
@@ -50,6 +50,7 @@ probably want `Fss.Core`.
 | [Fss.Fable](https://www.nuget.org/packages/Fss-lib.Fable/)     | ![Nuget](https://img.shields.io/nuget/v/fss-lib.fable?style=for-the-badge&logo=nuget)   | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.fable?style=for-the-badge&logo=nuget)   |
 | [Fss.Feliz](https://www.nuget.org/packages/Fss-lib-feliz/)     | ![Nuget](https://img.shields.io/nuget/v/fss-lib.feliz?style=for-the-badge&logo=nuget)   | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.feliz?style=for-the-badge&logo=nuget)   |
 | [Fss.Giraffe](https://www.nuget.org/packages/Fss-lib.Giraffe/) | ![Nuget](https://img.shields.io/nuget/v/fss-lib.giraffe?style=for-the-badge&logo=nuget) | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.giraffe?style=for-the-badge&logo=nuget) |
+| [Fss.Falco](https://www.nuget.org/packages/Fss-lib.Falco/) | ![Nuget](https://img.shields.io/nuget/v/fss-lib.falco?style=for-the-badge&logo=nuget) | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.falco?style=for-the-badge&logo=nuget) |
 
 To install `Fss` you need to install the nuget package.
 
