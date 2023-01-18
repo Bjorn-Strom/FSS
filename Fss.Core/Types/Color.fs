@@ -307,7 +307,7 @@ module Color =
                 | Transparent -> "transparent"
                 | CurrentColor -> "currentcolor"
                 | Rgb (red, green, blue) -> $"rgb({red},{green},{blue})"
-                | Rgba (red, green, blue, alpha) -> $"rgba({red},{green},{blue},{alpha})"
+                | Rgba (red, green, blue, alpha) -> $"rgba({red},{green},{blue},{string alpha})"
                 | Hex hex ->
                     if hex[0] = '#' then
                         hex
@@ -316,7 +316,7 @@ module Color =
                         sb.AppendFormat("#{0}", hex) |> ignore
                         sb.ToString()
                 | Hsl (hue, saturation, lightness) -> $"hsl({hue},{saturation}%%,{lightness}%%)"
-                | Hsla (hue, saturation, lightness, alpha) -> $"hsla({hue},{saturation}%%,{lightness}%%,{alpha})"
+                | Hsla (hue, saturation, lightness, alpha) -> $"hsla({hue},{saturation}%%,{lightness}%%,{string alpha})"
 
     type ColorAdjust =
         | Economy

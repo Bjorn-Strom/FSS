@@ -173,7 +173,7 @@ module BorderClasses =
 
         member this.value(vertical: float, horizontal: float) =
             let value =
-                $"{vertical} {horizontal}"
+                $"{string vertical} {string horizontal}"
                 |> String
 
             (property, value) |> Rule
