@@ -7,6 +7,8 @@ open Fss.Utilities
 
 [<AutoOpen>]
 module Functions =
+    type LengthUnit = ILengthUnit
+    
     type private Selector =
         | Global of Property.CssProperty
         | ClassName of Property.CssProperty
@@ -245,7 +247,7 @@ module Functions =
     let private stringifyCounterProperty (property: CounterRule) =
         let propertyName, propertyValue = property
 
-        (stringifyICssValue propertyName) + ":" + (propertyValue.StringifyCounter()) + ";"
+        (stringifyICssValue propertyName) + ":" + propertyValue.StringifyCounter() + ";"
 
     /// Creates all counter styles and combines them
     let private createCounterStyleInternal (name: string option) (properties: CounterRule list) : string * string =
@@ -418,8 +420,11 @@ module Functions =
 
     // Percent
     let pct (v: int) : Percent = Percent v
+    
+    // Auto
+    let auto = Auto
 
-    // Time
+    // Time 
     let sec (v: float) : Time = Sec v
     let ms (v: float) : Time = Ms v
 

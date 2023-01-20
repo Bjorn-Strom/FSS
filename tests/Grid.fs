@@ -361,6 +361,14 @@ module GridTests =
                     [GridTemplateRows.value (px 100)]
                     "{grid-template-rows:100px;}"
                 testCase
+                    "Grid template rows list"
+                    [ GridTemplateRows.value ([px 100; pct 100 ]: LengthUnit list) ]
+                    "{grid-template-rows:100px 100%;}"
+                testCase
+                    "Grid template rows list with auto"
+                    [ GridTemplateRows.value [auto :> LengthUnit; pct 20 ] ]
+                    "{grid-template-rows:auto 20%;}"
+                testCase
                     "Grid template row minmax"
                     [GridTemplateRows.minMax (px 100, fr 1.) ]
                     "{grid-template-rows:minmax(100px,1fr);}"
@@ -485,11 +493,19 @@ module GridTests =
                     [GridTemplateRows.revert]
                     "{grid-template-rows:revert;}"
                 testCase
-                    "Grid template row px"
+                    "Grid template column px"
                     [GridTemplateColumns.value (px 100)]
                     "{grid-template-columns:100px;}"
                 testCase
-                    "Grid template row minmax"
+                    "Grid template columns list"
+                    [ GridTemplateColumns.value ([px 100; pct 100]: LengthUnit list) ]
+                    "{grid-template-columns:100px 100%;}"
+                testCase
+                    "Grid template columns list with auto"
+                    [ GridTemplateColumns.value [auto :> LengthUnit; pct 20] ]
+                    "{grid-template-columns:auto 20%;}"
+                testCase
+                    "Grid template columns minmax"
                     [GridTemplateColumns.minMax (px 100, fr 1.) ]
                     "{grid-template-columns:minmax(100px,1fr);}"
                 testCase
@@ -581,35 +597,35 @@ module GridTests =
                     [GridTemplateColumns.repeat(3, px 200)]
                     "{grid-template-columns:repeat(3,200px);}"
                 testCase
-                    "Grid template row subgrid"
+                    "Grid template columns subgrid"
                     [GridTemplateColumns.subgrid ]
                     "{grid-template-columns:subgrid;}"
                 testCase
-                    "Grid template row masonry"
+                    "Grid template columns masonry"
                     [GridTemplateColumns.masonry ]
                     "{grid-template-columns:masonry;}"
                 testCase
-                    "Grid template row none"
+                    "Grid template columns none"
                     [GridTemplateColumns.none]
                     "{grid-template-columns:none;}"
                 testCase
-                    "Grid template row auto"
+                    "Grid template columns auto"
                     [GridTemplateColumns.auto]
                     "{grid-template-columns:auto;}"
                 testCase
-                    "Grid template row inherit"
+                    "Grid template columns inherit"
                     [GridTemplateColumns.inherit']
                     "{grid-template-columns:inherit;}"
                 testCase
-                    "Grid template row initial"
+                    "Grid template columns initial"
                     [GridTemplateColumns.initial]
                     "{grid-template-columns:initial;}"
                 testCase
-                    "Grid template row unset"
+                    "Grid template columns unset"
                     [GridTemplateColumns.unset]
                     "{grid-template-columns:unset;}"
                 testCase
-                    "Grid template row revert"
+                    "Grid template columns revert"
                     [GridTemplateColumns.revert]
                     "{grid-template-columns:revert;}"
                 testCase

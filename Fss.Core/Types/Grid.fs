@@ -174,6 +174,13 @@ module GridClasses =
         member this.value(template: ILengthPercentage) =
             (property, lengthPercentageToType template)
             |> Rule
+            
+        member this.value(templates: ILengthUnit list) =
+            let result =
+                List.map ILengthUnitToString templates
+                |> String.concat " "
+            (property, String result) 
+            |> Rule
 
         member this.minMax(min: ILengthPercentage, max: Fraction) =
             (property, Grid.MinMax.MinMax(min, max)) |> Rule
