@@ -2,17 +2,13 @@ namespace Fss
 
 namespace Fss.Types
 
-type IUnit =
-    interface
-    end
-
 type ILengthPercentage =
     interface
     end
-
+    
 type Percent =
     | Percent of int
-    interface IUnit
+    interface ILengthUnit
     interface ILengthPercentage
     interface IFontFaceValue with
         member this.StringifyFontFace() = stringifyICssValue this
@@ -38,26 +34,26 @@ type Length =
     | Vh of float
     | VMax of float
     | VMin of float
-    interface IUnit
+    interface ILengthUnit
     interface ILengthPercentage
 
     interface ICssValue with
         member this.StringifyCss() =
             match this with
             | Px p -> $"{p}px"
-            | In i -> $"{i}in"
-            | Cm c -> $"{c}cm"
-            | Mm m -> $"{m}mm"
-            | Pt p -> $"{p}pt"
-            | Pc p -> $"{p}pc"
-            | Em' e -> $"{e}em"
-            | Rem r -> $"{r}rem"
-            | Ex e -> $"{e}ex"
-            | Ch c -> $"{c}ch"
-            | Vw v -> $"{v}vw"
-            | Vh v -> $"{v}vh"
-            | VMax v -> $"{v}vmax"
-            | VMin v -> $"{v}vmin"
+            | In i -> $"{string i}in"
+            | Cm c -> $"{string c}cm"
+            | Mm m -> $"{string m}mm"
+            | Pt p -> $"{string p}pt"
+            | Pc p -> $"{string p}pc"
+            | Em' e -> $"{string e}em"
+            | Rem r -> $"{string r}rem"
+            | Ex e -> $"{string e}ex"
+            | Ch c -> $"{string c}ch"
+            | Vw v -> $"{string v}vw"
+            | Vh v -> $"{string v}vh"
+            | VMax v -> $"{string v}vmax"
+            | VMin v -> $"{string v}vmin"
 
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
@@ -69,10 +65,10 @@ type Angle =
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | Deg d -> $"{d}deg"
-            | Grad g -> $"{g}grad"
-            | Rad r -> $"{r}rad"
-            | Turn t -> $"{t}turn"
+            | Deg d -> $"{string d}deg"
+            | Grad g -> $"{string g}grad"
+            | Rad r -> $"{string r}rad"
+            | Turn t -> $"{string t}turn"
 
 type Resolution =
     | Dpi of string
@@ -87,7 +83,7 @@ type Time =
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | Sec s -> $"{s}s"
+            | Sec s -> $"{string s}s"
             | Ms ms -> $"{ms}ms"
 
 type Fraction =
@@ -95,7 +91,7 @@ type Fraction =
     interface ICssValue with
         member this.StringifyCss() =
             match this with
-            | Fr f -> $"{f}fr"
+            | Fr f -> $"{string f}fr"
 
 [<AutoOpen>]
 module unitHelpers =
@@ -104,11 +100,25 @@ module unitHelpers =
         | :? Percent as p -> p :> ICssValue
         | :? Length as l -> l :> ICssValue
         | _ -> Px 0
-
+        
     let internal lengthPercentageString (lp: ILengthPercentage) =
         match lp with
         | :? Percent as p -> stringifyICssValue p 
         | :? Length as l -> stringifyICssValue l 
+        | _ -> ""
+        
+    let internal ILengthUnitToType (lu: ILengthUnit) =
+        match lu with
+        | :? Percent as p -> p :> ICssValue
+        | :? Length as l -> l :> ICssValue
+        | :? Auto as a -> a :> ICssValue
+        | _ -> Px 0
+        
+    let internal ILengthUnitToString (lu: ILengthUnit) =
+        match lu with
+        | :? Percent as p -> stringifyICssValue p 
+        | :? Length as l -> stringifyICssValue l 
+        | :? Auto as a -> stringifyICssValue a
         | _ -> ""
 
     type CssRuleWithLength(property) =

@@ -902,6 +902,8 @@ type Auto =
 
     interface ICounterValue with
         member this.StringifyCounter() = stringifyICssValue this
+        
+    interface ILengthUnit
 
     interface ICssValue with
         member this.StringifyCss() = "auto"

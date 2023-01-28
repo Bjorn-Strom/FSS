@@ -17,7 +17,11 @@ type IFontFaceValue =
     interface
         abstract member StringifyFontFace : unit -> string
     end
-
+    
+type ILengthUnit =
+    interface
+    end
+    
 type Selector =
     | Tag of Html.Html
     | Id of string

@@ -5,7 +5,7 @@
     "start": "dotnet fable watch ./Documentation -o ./public --sourceMaps --run vite serve",
     "build": "dotnet fable ./Documentation -o ./public --run vite build",
     "preview": "npm run build && vite preview",
-    "test": "dotnet fable ./tests -o ./public/tests --run node ./public/tests/Tests.js",
+    "test": "dotnet fable ./tests -o ./public/tests --noCache --run node ./public/tests/Tests.js",
     "watch-test": "dotnet fable watch ./Tests -o ./public/tests --run nodemon ./public/tests/Tests.js",
     "clean": "rm -rf javascript/* public/tests public/*.js public/Pages public/*.map public/dist public/fable_modules",
     "publish-docs": "npm run clean && npm run build && gh-pages -d public/dist"
