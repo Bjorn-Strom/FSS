@@ -10,7 +10,7 @@
         <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
         <TargetFramework>netstandard2.0</TargetFramework>
         <OutputType>Library</OutputType>
-        <PackageReleaseNotes>Rewrites Css generation and adds Attribute selectors.</PackageReleaseNotes>
+        <PackageReleaseNotes>Add list support for grid-template-columns/rows.</PackageReleaseNotes>
         <RootNamespace>Fss.Fable</RootNamespace>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageId>Fss-lib.Giraffe</PackageId>
