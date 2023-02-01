@@ -4,7 +4,6 @@ open Fss.Types
 
 [<AutoOpen>]
 module PseudoClass =
-
     let Active rules = PseudoClassClasses.PseudoClass.active rules
     let AnyLink rules = PseudoClassClasses.PseudoClass.anyLink rules
     let Blank rules = PseudoClassClasses.PseudoClass.blank rules
@@ -50,3 +49,9 @@ module PseudoClass =
     let Visited rules = PseudoClassClasses.PseudoClass.visited rules
     let FirstChild rules = PseudoClassClasses.PseudoClass.firstChild rules
     let UserInvalid rules = PseudoClassClasses.PseudoClass.userInvalid rules
+    let Not (selectors: Selector list) rules = PseudoClassClasses.PseudoClass.not selectors rules
+    
+[<AutoOpen>]
+module ClassIdProperties =
+    let Class class' rules = (Property.Class class', ClassnameMaster rules) |> Rule
+    let Id id' rules = (Property.Class id', IdMaster rules) |> Rule

@@ -429,3 +429,14 @@ let App () =
     ]
 
 ReactDOM.render (StoreProvider <| App(), document.getElementById "app")
+
+
+
+// This would be 'css647538688'
+let someClass = fss [ ]
+
+let contrast = fssWithName "dx-row-focused" [
+        ! (Selector.Class someClass) [
+            Color.white
+        ]
+    ]

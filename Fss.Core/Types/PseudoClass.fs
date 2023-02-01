@@ -102,3 +102,5 @@ module PseudoClassClasses =
         static member firstChild(rules: Rule list) = (Property.FirstChild, PseudoMaster.PseudoClassMaster rules) |> Rule
         /// Matches a element with incorrect input after it has been used by the user
         static member userInvalid(rules: Rule list) = (Property.UserInvalid, PseudoMaster.PseudoClassMaster rules) |> Rule
+        /// Matches a list of elements that does not match a a list of selectors
+        static member not (selectors: Selector list) (rules: Rule list) = (Property.Not selectors, PseudoMaster.PseudoClassMaster rules) |> Rule

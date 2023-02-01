@@ -429,6 +429,7 @@ module Property =
         | Valid
         | Visited
         | UserInvalid
+        | Not of Selector list
 
         | After
         | Before
@@ -837,6 +838,12 @@ module Property =
                 | Valid -> "valid"
                 | Visited -> "visited"
                 | UserInvalid -> "user-invalid"
+                | Not selectors ->
+                    let selectorStrings =
+                        selectors
+                        |> List.map Selector.stringify
+                        |> String.concat ","
+                    $"not({selectorStrings})"
 
                 | After -> "after"
                 | Before -> "before"

@@ -20,4 +20,5 @@ module CustomTests =
                 test "Id selector works" <| fun _ ->
                     let className, actual = (createFss [ Id "randomId" [ Color.red  ] ])
                     Expect.equal actual $".{className}#randomId{{color:red;}}"
+                    
             ]
