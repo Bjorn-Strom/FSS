@@ -26,6 +26,13 @@ module Fable =
         injectCss className cssRules
 
         className
+        
+    /// Injects CSS into dom with a specific classname and returns the classname
+    let fssWithClassname (classname: string) (properties: Fss.Types.Rule list): string =
+        let className, cssRules = createFssWithClassname classname properties
+        injectCss className cssRules
+
+        className
 
     // Injects CSS into dom as global styles
     let global'(properties: Fss.Types.Rule list): unit =
