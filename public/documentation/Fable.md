@@ -17,6 +17,10 @@ any libraries built on Fable, like Fable.React.
     - This is the function you want to use most of the time. Supply it
     with the CSS rules you want and it will create the CSS for you and inject it into the dom.
     All you have to do is supply the classname the function returns to your html element.
+  
+- `fssWithClassname: string -> Rule list -> string`
+  - This function works much like the `fss` function only you can 
+    provide the Classname to be injected into the dom. This is especially useful when working with a separate stylesheet.
 
 - `global': Rule list -> unit`
   - Takes a list of rules and injects it as global styles.
