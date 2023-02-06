@@ -9,7 +9,7 @@ module Feliz =
         static member fss (properties: Fss.Types.Rule list) =
             let className = fss properties
             Feliz.prop.className className
-        /// Allows you to style Feliz elements with Fss
+        /// Allows you to style Feliz elements with Fss while specifying the classname
         static member fssWithClassname (classname: string) (properties: Fss.Types.Rule list) =
             let className = fssWithClassname classname properties
             Feliz.prop.className className
