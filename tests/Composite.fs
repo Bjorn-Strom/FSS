@@ -73,4 +73,8 @@ module CompositeTests =
                    "Test creating css with custom classname"
                    actual
                    ".myOwnClassName{border-color:red;background-color:green;}"
+               testEqual
+                   "Test that combine works"
+                   (combine ["classnameA"] [ "classnameToCombine", true; "classnameToIgnore", false ])
+                   "classnameA classnameToCombine"
            ]

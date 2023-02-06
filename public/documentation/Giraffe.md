@@ -20,6 +20,10 @@ That is because there is no reliable way of doing that with the view engine. So 
     - This is the function you want to use most of the time. Supply it
       with the CSS rules you want and it will create the CSS for you and return the classname and a style node.
       place this style node in the children list of `head` and then use the classname in your html element of choice. 
+  
+- `fssWithClassname: string -> Rule list -> string * XmlNode`
+    - This function works much like the `fss` function only you can
+      provide the Classname. This is especially useful when working with a separate stylesheet.
 
 - `global': Rule list -> XmlNode`
     - Takes a list of rules and creates a style node you can insert in your dom to get global styling.
