@@ -1,8 +1,6 @@
 namespace Fss
 namespace Fss.Types
 
-open Fss.Types
-
 type ICssValue =
     interface
         abstract member StringifyCss : unit -> string
@@ -26,11 +24,13 @@ type Selector =
     | Tag of Html.Html
     | Id of string
     | Class of string
+    | Pseudo of string
     static member stringify this =
         match this with
         | Tag t -> t.Stringify()
         | Id i -> $"#{i}"
         | Class c -> $".{c}"
+        | Pseudo s -> $":{s}"
 
 [<AutoOpen>]
 module MasterTypeHelpers =
