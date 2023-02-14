@@ -1,4 +1,4 @@
-﻿
+﻿module foo 
 // Hvis filstrukturen er slik:
 // /Button
 // button.fs - har en komponent
@@ -34,87 +34,113 @@
 // Basert på config fil så kan vi finne .fss.fs filene
 
 open System.Reflection
+open FSharp.Compiler.CodeAnalysis
 open Fss
 
-let fss styleName styles = styleName, styles
+// let fss styleName styles = styleName, styles
+//
+// let button = fss "button" [
+//     Color.blue
+// ]
+//
+// // I container.fss.fs
+// let container = fss "container" [
+//     BackgroundColor.orangeRed
+// ]
+//
+// // I index.fs
+// let styles = [
+//     button
+//     container
+// ]
+//
+// // Det produserer
+// let css =
+//     styles
+//     |> List.map snd
+//     |> List.map createFss
+// // Css string
+// let cssString =
+//     css
+//     |> List.map snd
+//     |> String.concat ""
+// // F# fil
+// let fsharpNames =
+//     styles
+//     |> List.map fst
+//     
+// let fsharpFile =
+//     css
+//     |> List.map fst
+//     |> List.zip fsharpNames
+//     |> List.map (fun (name, className) -> $"let {name} = \"{className}\"")
+//     |> String.concat "\n"
+//     
+// printfn "CSS: %A" cssString
+// printfn "F#: %A" fsharpFile
+//
+// // TODO: Man burde kunne bestemme HVOR man ønsker å dumpe ut CSS fila
+// // TODO: Man burde kunne bestemme HVOR man ønsker å dumpe ut F# prosjektet
+//
+//
+// open System.IO
+//
+// type Config = 
+//     { Source: string
+//       Destination: string
+//       ModuleName: string }
+//
+// let createLibrary path code =
+//     if not (Directory.Exists(path)) then
+//         Directory.CreateDirectory(path) |> ignore
+//        
+//     let fsprojPath = Path.Combine(path, $"{path}.fsproj")
+//     File.WriteAllText(fsprojPath, 
+//         "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>netstandard2.0</TargetFramework>\n  </PropertyGroup>\n  <ItemGroup>\n    <Compile Include=\"" + path + ".fs\" />\n  </ItemGroup>\n</Project>")
+//
+//     let fsPath = Path.Combine(path, $"{path}.fs")
+//     File.WriteAllText(fsPath, $"module {path}\n{code}")
+//     
+// let createCssFile path css =
+//     let filePath = Path.Combine(path, "index.css")
+//     File.WriteAllText(filePath, css)
+//     
+//     
+// // [<EntryPoint>]
+// // let main (args: string[]) =
+// //     try
+// //         match args with
+// //         | [| "generate"   |] -> ()
+// //         | _ -> printfn "Unknown args %A" args
+// //         0
+// //     with ex ->
+// //         printfn "%A" ex
+// //         1
+//     
+// createLibrary "styles" fsharpFile
+// createCssFile "styles" cssString
 
-let button = fss "button" [
-    Color.blue
-]
+let scriptPath = "./path/to/your/script.fsx"
 
-// I container.fss.fs
-let container = fss "container" [
-    BackgroundColor.orangeRed
-]
+let checker = FSharpChecker.Create()
+// let compilerArgs = [|
+//   "-a"
+//   scriptPath
+//   "--targetprofile:netcore"
+//   "--target:module"
+//   sprintf "--reference:%s" (Assembly.GetEntryAssembly().GetName().Name)
+//   "--langversion:preview"
+// |]
 
-// I index.fs
-let styles = [
-    button
-    container
-]
-
-// Det produserer
-let css =
-    styles
-    |> List.map snd
-    |> List.map createFss
-// Css string
-let cssString =
-    css
-    |> List.map snd
-    |> String.concat ""
-// F# fil
-let fsharpNames =
-    styles
-    |> List.map fst
+let errors1, exitCode1 = 
+    checker.Compile([| "fsc.exe"; "-o"; scriptPath |]) 
+    |> Async.RunSynchronously
     
-let fsharpFile =
-    css
-    |> List.map fst
-    |> List.zip fsharpNames
-    |> List.map (fun (name, className) -> $"let {name} = \"{className}\"")
-    |> String.concat "\n"
     
-printfn "CSS: %A" cssString
-printfn "F#: %A" fsharpFile
 
-// TODO: Man burde kunne bestemme HVOR man ønsker å dumpe ut CSS fila
-// TODO: Man burde kunne bestemme HVOR man ønsker å dumpe ut F# prosjektet
+[<EntryPoint>]
+let main _ =
+    printfn "FOO"
+    0
 
 
-open System.IO
-
-type Config = 
-    { Source: string
-      Destination: string
-      ModuleName: string }
-
-let createLibrary path code =
-    if not (Directory.Exists(path)) then
-        Directory.CreateDirectory(path) |> ignore
-       
-    let fsprojPath = Path.Combine(path, $"{path}.fsproj")
-    File.WriteAllText(fsprojPath, 
-        "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>netstandard2.0</TargetFramework>\n  </PropertyGroup>\n  <ItemGroup>\n    <Compile Include=\"" + path + ".fs\" />\n  </ItemGroup>\n</Project>")
-
-    let fsPath = Path.Combine(path, $"{path}.fs")
-    File.WriteAllText(fsPath, $"module {path}\n{code}")
-    
-let createCssFile path css =
-    let filePath = Path.Combine(path, "index.css")
-    File.WriteAllText(filePath, css)
-    
-    
-// [<EntryPoint>]
-// let main (args: string[]) =
-//     try
-//         match args with
-//         | [| "generate"   |] -> ()
-//         | _ -> printfn "Unknown args %A" args
-//         0
-//     with ex ->
-//         printfn "%A" ex
-//         1
-    
-createLibrary "styles" fsharpFile
-createCssFile "styles" cssString

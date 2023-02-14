@@ -7,11 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Test.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Fss.Core\Fss.Core.fsproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FSharp.Compiler.Service" Version="42.7.101" />
     </ItemGroup>
 
 </Project>
