@@ -108,3 +108,5 @@ module PseudoClassClasses =
         static member is (selectors: Selector list) (rules: Rule list) = (Property.Is selectors, PseudoMaster.PseudoClassMaster rules) |> Rule
         /// Matches any elements that can be selected by any of the selectors in the list
         static member where (selectors: Selector list) (rules: Rule list) = (Property.Where selectors, PseudoMaster.PseudoClassMaster rules) |> Rule
+        /// Targets an element which contains a set of other elements
+        static member has (selectors: Selector list) (rules: Rule list) = (Property.Has selectors, PseudoMaster.PseudoClassMaster rules) |> Rule

@@ -52,6 +52,7 @@ module PseudoClass =
     let Not (selectors: Selector list) rules = PseudoClassClasses.PseudoClass.not selectors rules
     let Is (selectors: Selector list) rules = PseudoClassClasses.PseudoClass.is selectors rules
     let Where (selectors: Selector list) rules = PseudoClassClasses.PseudoClass.where selectors rules
+    let Has (selectors: Selector list) rules = PseudoClassClasses.PseudoClass.has selectors rules
     
 [<AutoOpen>]
 module ClassIdProperties =

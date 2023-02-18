@@ -436,6 +436,7 @@ module Property =
         | Not of Selector list
         | Is of Selector list
         | Where of Selector list
+        | Has of Selector list
 
         | After
         | Before
@@ -853,6 +854,9 @@ module Property =
                 | Where selectors ->
                     let selectorStrings = stringifySelectorList selectors
                     $"where({selectorStrings})"
+                | Has selectors ->
+                    let selectorStrings = stringifySelectorList selectors
+                    $"has({selectorStrings})"
 
                 | After -> "after"
                 | Before -> "before"

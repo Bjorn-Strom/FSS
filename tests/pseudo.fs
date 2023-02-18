@@ -294,9 +294,6 @@ module PseudoTests =
                     "Multiple elements in not"
                     actual
                     $".{classname}:not(.SomeClass,:hover){{color:red;}}"
-                    
-                    
-                    
                 let classname, actual = createFss [ Not [ Selector.onlyChild ] [ Color.red ] ]
                 testEqual
                     "Not :only-child"
@@ -387,13 +384,41 @@ module PseudoTests =
                     "Not :user-invalid"
                     actual
                     $".{classname}:not(:user-invalid){{color:red;}}"
-
-                    
-                    
-                    
-                    
-                    
-                    
+                let classname, actual = createFss [ Not [ Selector.indeterminate ] [ Color.red ] ] 
+                testEqual
+                    "Not :indeterminate"
+                    actual
+                    $".{classname}:not(:indeterminate){{color:red;}}"    
+                let classname, actual = createFss [ Not [ Selector.invalid ] [ Color.red ] ] 
+                testEqual
+                    "Not :invalid"
+                    actual
+                    $".{classname}:not(:invalid){{color:red;}}"    
+                let classname, actual = createFss [ Not [ Selector.inRange ] [ Color.red ] ] 
+                testEqual
+                    "Not :in-range"
+                    actual
+                    $".{classname}:not(:in-range){{color:red;}}"    
+                let classname, actual = createFss [ Not [ Selector.LastChild ] [ Color.red ] ] 
+                testEqual
+                    "Not :last-child"
+                    actual
+                    $".{classname}:not(:last-child){{color:red;}}"    
+                let classname, actual = createFss [ Not [ Selector.LastOfType ] [ Color.red ] ] 
+                testEqual
+                    "Not :last-of-type"
+                    actual
+                    $".{classname}:not(:last-of-type){{color:red;}}"    
+                let classname, actual = createFss [ Not [ Selector.LocalLink ] [ Color.red ] ] 
+                testEqual
+                    "Not :local-link"
+                    actual
+                    $".{classname}:not(:local-link){{color:red;}}"    
+                let classname, actual = createFss [ Not [ Selector.Link ] [ Color.red ] ] 
+                testEqual
+                    "Not :link"
+                    actual
+                    $".{classname}:not(:link){{color:red;}}"    
                 let classname, actual = createFss [
                     Is [ Selector.Class "someClass" ] [
                         Display.flex
@@ -616,6 +641,41 @@ module PseudoTests =
                     "Is :user-invalid"
                     actual
                     $".{classname}:is(:user-invalid){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.indeterminate ] [ Color.red ] ] 
+                testEqual
+                    "Is :indeterminate"
+                    actual
+                    $".{classname}:is(:indeterminate){{color:red;}}"    
+                let classname, actual = createFss [ Is [ Selector.invalid ] [ Color.red ] ] 
+                testEqual
+                    "Is :invalid"
+                    actual
+                    $".{classname}:is(:invalid){{color:red;}}"    
+                let classname, actual = createFss [ Is [ Selector.inRange ] [ Color.red ] ] 
+                testEqual
+                    "Is :in-range"
+                    actual
+                    $".{classname}:is(:in-range){{color:red;}}"    
+                let classname, actual = createFss [ Is [ Selector.LastChild ] [ Color.red ] ] 
+                testEqual
+                    "Is :last-child"
+                    actual
+                    $".{classname}:is(:last-child){{color:red;}}"    
+                let classname, actual = createFss [ Is [ Selector.LastOfType ] [ Color.red ] ] 
+                testEqual
+                    "Is :last-of-type"
+                    actual
+                    $".{classname}:is(:last-of-type){{color:red;}}"    
+                let classname, actual = createFss [ Is [ Selector.LocalLink ] [ Color.red ] ] 
+                testEqual
+                    "Is :local-link"
+                    actual
+                    $".{classname}:is(:local-link){{color:red;}}"    
+                let classname, actual = createFss [ Is [ Selector.Link ] [ Color.red ] ] 
+                testEqual
+                    "Is :link"
+                    actual
+                    $".{classname}:is(:link){{color:red;}}"
                 let classname, actual = createFss [
                     Where [ Selector.Class "someClass" ] [
                         Display.flex
@@ -866,4 +926,161 @@ module PseudoTests =
                     "Where :user-invalid"
                     actual
                     $".{classname}:where(:user-invalid){{color:red;}}"
+                    
+                    
+                    
+                    
+                    
+                    
+                let classname, actual = createFss [ Has [ Selector.onlyChild ] [ Color.red ] ]
+                testEqual
+                    "Has :only-child"
+                    actual
+                    $".{classname}:has(:only-child){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.onlyOfType ] [ Color.red ] ]
+                testEqual
+                    "Has :only-of-type"
+                    actual
+                    $".{classname}:has(:only-of-type){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.outOfRange ] [ Color.red ] ]
+                testEqual
+                    "Has :out-of-range"
+                    actual
+                    $".{classname}:has(:out-of-range){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.past ] [ Color.red ] ]
+                testEqual
+                    "Has :past"
+                    actual
+                    $".{classname}:has(:past){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.playing ] [ Color.red ] ]
+                testEqual
+                    "Has :playing"
+                    actual
+                    $".{classname}:has(:playing){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.paused ] [ Color.red ] ]
+                testEqual
+                    "Has :paused"
+                    actual
+                    $".{classname}:has(:paused){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.placeholderShown ] [ Color.red ] ]
+                testEqual
+                    "Has :placeholder-shown"
+                    actual
+                    $".{classname}:has(:placeholder-shown){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.readOnly ] [ Color.red ] ]
+                testEqual
+                    "Has :read-only"
+                    actual
+                    $".{classname}:has(:read-only){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.readWrite ] [ Color.red ] ]
+                testEqual
+                    "Has :read-write"
+                    actual
+                    $".{classname}:has(:read-write){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.required ] [ Color.red ] ]
+                testEqual
+                    "Has :required"
+                    actual
+                    $".{classname}:has(:required){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.root ] [ Color.red ] ] 
+                testEqual
+                    ":root"
+                    actual
+                    $".{classname}:has(:root){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.scope ] [ Color.red ] ] 
+                testEqual
+                    ":scope"
+                    actual
+                    $".{classname}:has(:scope){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.target ] [ Color.red ] ] 
+                testEqual
+                    ":target"
+                    actual
+                    $".{classname}:has(:target){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.targetWithin ] [ Color.red ] ] 
+                testEqual
+                    ":target-within"
+                    actual
+                    $".{classname}:has(:target-within){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.valid ] [ Color.red ] ] 
+                testEqual
+                    ":valid"
+                    actual
+                    $".{classname}:has(:valid){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.visited ] [ Color.red ] ] 
+                testEqual
+                    ":visited"
+                    actual
+                    $".{classname}:has(:visited){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.firstChild ] [ Color.red ] ] 
+                testEqual
+                    ":first-child"
+                    actual
+                    $".{classname}:has(:first-child){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.userInvalid ] [ Color.red ] ] 
+                testEqual
+                    "Has :user-invalid"
+                    actual
+                    $".{classname}:has(:user-invalid){{color:red;}}"
+                let classname, actual = createFss [ Has [ Selector.indeterminate ] [ Color.red ] ] 
+                testEqual
+                    "Has :indeterminate"
+                    actual
+                    $".{classname}:has(:indeterminate){{color:red;}}"    
+                let classname, actual = createFss [ Has [ Selector.invalid ] [ Color.red ] ] 
+                testEqual
+                    "Has :invalid"
+                    actual
+                    $".{classname}:has(:invalid){{color:red;}}"    
+                let classname, actual = createFss [ Has [ Selector.inRange ] [ Color.red ] ] 
+                testEqual
+                    "Has :in-range"
+                    actual
+                    $".{classname}:has(:in-range){{color:red;}}"    
+                let classname, actual = createFss [ Has [ Selector.LastChild ] [ Color.red ] ] 
+                testEqual
+                    "Has :last-child"
+                    actual
+                    $".{classname}:has(:last-child){{color:red;}}"    
+                let classname, actual = createFss [ Has [ Selector.LastOfType ] [ Color.red ] ] 
+                testEqual
+                    "Has :last-of-type"
+                    actual
+                    $".{classname}:has(:last-of-type){{color:red;}}"    
+                let classname, actual = createFss [ Has [ Selector.LocalLink ] [ Color.red ] ] 
+                testEqual
+                    "Has :local-link"
+                    actual
+                    $".{classname}:has(:local-link){{color:red;}}"    
+                let classname, actual = createFss [ Has [ Selector.Link ] [ Color.red ] ] 
+                testEqual
+                    "Has :link"
+                    actual
+                    $".{classname}:has(:link){{color:red;}}" 
+                let classname, actual = createFss [
+                    ! (Selector.Tag Fss.Types.Html.A) [
+                        Has [ Selector.Tag Fss.Types.Html.Img; Selector.Tag Fss.Types.Html.Section ] [
+                            BorderWidth.value (px 2)
+                        ]
+                    ]
+                ] 
+                testEqual
+                    "Has child has"
+                    actual
+                    $".{classname} a:has(img,section){{border-width:2px;}}"
+                let classname, actual = createFss [
+                    ! (Selector.Tag Fss.Types.Html.Fieldset) [
+                        Has [ Selector.required; Selector.invalid ] [
+                            !+ (Selector.Tag Fss.Types.Html.Button) [
+                                    MatchAttr.Exactly (Fss.Types.Attribute.Type, "submit", [
+                                        Cursor.notAllowed
+                                    ])
+                            ]
+                        ]
+                    ]
+                ] 
+                testEqual
+                    "Has child and attribute"
+                    actual
+                    $".{classname} fieldset:has(:required:invalid) + button[type=\"submit\"]{{cursor:not-allowed;}}"
             ]
