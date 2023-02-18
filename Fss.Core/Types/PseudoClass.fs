@@ -104,3 +104,7 @@ module PseudoClassClasses =
         static member userInvalid(rules: Rule list) = (Property.UserInvalid, PseudoMaster.PseudoClassMaster rules) |> Rule
         /// Matches a list of elements that does not match a a list of selectors
         static member not (selectors: Selector list) (rules: Rule list) = (Property.Not selectors, PseudoMaster.PseudoClassMaster rules) |> Rule
+        /// Matches any elements that can be selected by any of the selectors in the list
+        static member is (selectors: Selector list) (rules: Rule list) = (Property.Is selectors, PseudoMaster.PseudoClassMaster rules) |> Rule
+        /// Matches any elements that can be selected by any of the selectors in the list
+        static member where (selectors: Selector list) (rules: Rule list) = (Property.Where selectors, PseudoMaster.PseudoClassMaster rules) |> Rule

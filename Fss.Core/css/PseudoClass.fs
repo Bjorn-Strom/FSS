@@ -50,6 +50,8 @@ module PseudoClass =
     let FirstChild rules = PseudoClassClasses.PseudoClass.firstChild rules
     let UserInvalid rules = PseudoClassClasses.PseudoClass.userInvalid rules
     let Not (selectors: Selector list) rules = PseudoClassClasses.PseudoClass.not selectors rules
+    let Is (selectors: Selector list) rules = PseudoClassClasses.PseudoClass.is selectors rules
+    let Where (selectors: Selector list) rules = PseudoClassClasses.PseudoClass.where selectors rules
     
 [<AutoOpen>]
 module ClassIdProperties =

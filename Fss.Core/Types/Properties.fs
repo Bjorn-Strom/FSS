@@ -5,6 +5,10 @@ open Fss.Types
 
 [<RequireQualifiedAccess>]
 module Property =
+    let private stringifySelectorList selectors =
+        selectors
+        |> List.map Selector.stringify
+        |> String.concat ","
     type FontFaceProperty =
         | AscentOverride
         | DescentOverride
@@ -430,6 +434,8 @@ module Property =
         | Visited
         | UserInvalid
         | Not of Selector list
+        | Is of Selector list
+        | Where of Selector list
 
         | After
         | Before
@@ -839,11 +845,14 @@ module Property =
                 | Visited -> "visited"
                 | UserInvalid -> "user-invalid"
                 | Not selectors ->
-                    let selectorStrings =
-                        selectors
-                        |> List.map Selector.stringify
-                        |> String.concat ","
+                    let selectorStrings = stringifySelectorList selectors
                     $"not({selectorStrings})"
+                | Is selectors ->
+                    let selectorStrings = stringifySelectorList selectors
+                    $"is({selectorStrings})"
+                | Where selectors ->
+                    let selectorStrings = stringifySelectorList selectors
+                    $"where({selectorStrings})"
 
                 | After -> "after"
                 | Before -> "before"

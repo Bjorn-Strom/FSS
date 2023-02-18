@@ -294,4 +294,268 @@ module PseudoTests =
                     "Multiple elements in not"
                     actual
                     $".{classname}:not(.SomeClass,:hover){{color:red;}}"
+                let classname, actual = createFss [
+                    Is [ Selector.Class "someClass" ] [
+                        Display.flex
+                    ]
+                ]
+                testEqual
+                    "Is class"
+                    actual
+                    $".{classname}:is(.someClass){{display:flex;}}"
+                let classname, actual = createFss [
+                    Is [ Selector.Id "someId" ] [
+                        Position.absolute
+                    ]
+                ]
+                testEqual
+                    "Is Id"
+                    actual
+                    $".{classname}:is(#someId){{position:absolute;}}"
+                let classname, actual = createFss [
+                    Is [ Selector.Hover ] [
+                        Display.grid
+                    ]
+                ]
+                testEqual
+                    "Is hover"
+                    actual
+                    $".{classname}:is(:hover){{display:grid;}}"
+                let classname, actual = createFss [ Is [ Selector.Active ] [ Color.red ] ]
+                testEqual
+                    "Is Active"
+                    actual
+                    $".{classname}:is(:active){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.AnyLink ] [ Color.red ] ]
+                testEqual
+                    "Is any-link"
+                    actual
+                    $".{classname}:is(:any-link){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Blank ] [ Color.red ] ]
+                testEqual
+                    "Is Blank"
+                    actual
+                    $".{classname}:is(:blank){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Checked ] [ Color.red ] ]
+                testEqual
+                    "Checked"
+                    actual
+                    $".{classname}:is(:checked){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Current ] [ Color.red ] ]
+                testEqual
+                    "Current"
+                    actual
+                    $".{classname}:is(:current){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Disabled ] [ Color.red ] ]
+                testEqual
+                    "Disabled"
+                    actual
+                    $".{classname}:is(:disabled){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Empty ] [ Color.red ] ]
+                testEqual
+                    "Empty"
+                    actual
+                    $".{classname}:is(:empty){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Enabled ] [ Color.red ] ]
+                testEqual
+                    "Enabled"
+                    actual
+                    $".{classname}:is(:enabled){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.FirstOfType ] [ Color.red ] ]
+                testEqual
+                    "FirstOfType"
+                    actual
+                    $".{classname}:is(:first-of-type){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Focus ] [ Color.red ] ]
+                testEqual
+                    "Focus"
+                    actual
+                    $".{classname}:is(:focus){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.FocusVisible ] [ Color.red ] ]
+                testEqual
+                    "FocusVisible"
+                    actual
+                    $".{classname}:is(:focus-visible){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.FocusWithin ] [ Color.red ] ]
+                testEqual
+                    "FocusWithin"
+                    actual
+                    $".{classname}:is(:focus-within){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Future ] [ Color.red ] ]
+                testEqual
+                    "Future"
+                    actual
+                    $".{classname}:is(:future){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Hover ] [ Color.red ] ]
+                testEqual
+                    "Hover"
+                    actual
+                    $".{classname}:is(:hover){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Future ] [ Color.red ] ]
+                testEqual
+                    "Future"
+                    actual
+                    $".{classname}:is(:future){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Lang("en") ] [ Color.red ] ]
+                testEqual
+                    "Lang en"
+                    actual
+                    $".{classname}:is(:lang(en)){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.NthChild "4" ] [ Color.red ] ]
+                testEqual
+                    "Nth child 4"
+                    actual
+                    $".{classname}:is(:nth-child(4)){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.NthLastChild "4" ] [ Color.red ] ]
+                testEqual
+                    "Nth last child 4"
+                    actual
+                    $".{classname}:is(:nth-last-child(4)){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.NthOfType "4" ] [ Color.red ] ]
+                testEqual
+                    "Nth of type 4"
+                    actual
+                    $".{classname}:is(:nth-of-type(4)){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.NthLastOfType "4" ] [ Color.red ] ]
+                testEqual
+                    "Nth last of type 4"
+                    actual
+                    $".{classname}:is(:nth-last-of-type(4)){{color:red;}}"
+                let classname, actual = createFss [ Is [ Selector.Class "SomeClass"; Selector.Hover ] [ Color.red ] ]
+                testEqual
+                    "Multiple elements in not"
+                    actual
+                    $".{classname}:is(.SomeClass,:hover){{color:red;}}"
+                let classname, actual = createFss [
+                    Where [ Selector.Class "someClass" ] [
+                        Display.flex
+                    ]
+                ]
+                testEqual
+                    "Where class"
+                    actual
+                    $".{classname}:where(.someClass){{display:flex;}}"
+                let classname, actual = createFss [
+                    Where [ Selector.Id "someId" ] [
+                        Position.absolute
+                    ]
+                ]
+                testEqual
+                    "Where Id"
+                    actual
+                    $".{classname}:where(#someId){{position:absolute;}}"
+                let classname, actual = createFss [
+                    Where [ Selector.Hover ] [
+                        Display.grid
+                    ]
+                ]
+                testEqual
+                    "Where hover"
+                    actual
+                    $".{classname}:where(:hover){{display:grid;}}"
+                let classname, actual = createFss [ Where [ Selector.Active ] [ Color.red ] ]
+                testEqual
+                    "Where Active"
+                    actual
+                    $".{classname}:where(:active){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.AnyLink ] [ Color.red ] ]
+                testEqual
+                    "Where any-link"
+                    actual
+                    $".{classname}:where(:any-link){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Blank ] [ Color.red ] ]
+                testEqual
+                    "Where Blank"
+                    actual
+                    $".{classname}:where(:blank){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Checked ] [ Color.red ] ]
+                testEqual
+                    "Checked"
+                    actual
+                    $".{classname}:where(:checked){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Current ] [ Color.red ] ]
+                testEqual
+                    "Current"
+                    actual
+                    $".{classname}:where(:current){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Disabled ] [ Color.red ] ]
+                testEqual
+                    "Disabled"
+                    actual
+                    $".{classname}:where(:disabled){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Empty ] [ Color.red ] ]
+                testEqual
+                    "Empty"
+                    actual
+                    $".{classname}:where(:empty){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Enabled ] [ Color.red ] ]
+                testEqual
+                    "Enabled"
+                    actual
+                    $".{classname}:where(:enabled){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.FirstOfType ] [ Color.red ] ]
+                testEqual
+                    "FirstOfType"
+                    actual
+                    $".{classname}:where(:first-of-type){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Focus ] [ Color.red ] ]
+                testEqual
+                    "Focus"
+                    actual
+                    $".{classname}:where(:focus){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.FocusVisible ] [ Color.red ] ]
+                testEqual
+                    "FocusVisible"
+                    actual
+                    $".{classname}:where(:focus-visible){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.FocusWithin ] [ Color.red ] ]
+                testEqual
+                    "FocusWithin"
+                    actual
+                    $".{classname}:where(:focus-within){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Future ] [ Color.red ] ]
+                testEqual
+                    "Future"
+                    actual
+                    $".{classname}:where(:future){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Hover ] [ Color.red ] ]
+                testEqual
+                    "Hover"
+                    actual
+                    $".{classname}:where(:hover){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Future ] [ Color.red ] ]
+                testEqual
+                    "Future"
+                    actual
+                    $".{classname}:where(:future){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Lang("en") ] [ Color.red ] ]
+                testEqual
+                    "Lang en"
+                    actual
+                    $".{classname}:where(:lang(en)){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.NthChild "4" ] [ Color.red ] ]
+                testEqual
+                    "Nth child 4"
+                    actual
+                    $".{classname}:where(:nth-child(4)){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.NthLastChild "4" ] [ Color.red ] ]
+                testEqual
+                    "Nth last child 4"
+                    actual
+                    $".{classname}:where(:nth-last-child(4)){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.NthOfType "4" ] [ Color.red ] ]
+                testEqual
+                    "Nth of type 4"
+                    actual
+                    $".{classname}:where(:nth-of-type(4)){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.NthLastOfType "4" ] [ Color.red ] ]
+                testEqual
+                    "Nth last of type 4"
+                    actual
+                    $".{classname}:where(:nth-last-of-type(4)){{color:red;}}"
+                let classname, actual = createFss [ Where [ Selector.Class "SomeClass"; Selector.Hover ] [ Color.red ] ]
+                testEqual
+                    "Multiple elements in not"
+                    actual
+                    $".{classname}:where(.SomeClass,:hover){{color:red;}}"
             ]
