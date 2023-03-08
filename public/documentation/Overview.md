@@ -9,11 +9,11 @@ The workhorse for Fss is [Fss.Core](https://www.nuget.org/packages/Fss-lib.Core/
 The engine is written in F# and is dependency free, so it compiles anywhere F# compiles.
 In other words, it works both with Fable and Dotnet.
 
-In addition to [Fss.Core](https://www.nuget.org/packages/Fss-lib.Core/) there exists framework specific libraries which aim to make using
+In addition to [Fss.Core](https://bjorn-strom.github.io/FSS/#/page/core) there exists framework specific libraries which aim to make using
 Fss more ergonomic. Currently there exists libraries for:
 - [Fable](https://fable.io/)
 - [Feliz](https://zaid-ajaj.github.io/Feliz/)
 - [Giraffe](https://github.com/giraffe-fsharp/Giraffe)
 - [Falco](https://github.com/pimbrouwers/Falco)
 
-Check out the framework library documentation pages for specifics on how they work.
+For specifics on how each framework library works, refer to the documentation pages.

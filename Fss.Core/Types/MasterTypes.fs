@@ -25,12 +25,14 @@ type Selector =
     | Id of string
     | Class of string
     | Pseudo of string
+    | Custom of string
     static member stringify this =
         match this with
         | Tag t -> t.Stringify()
         | Id i -> $"#{i}"
         | Class c -> $".{c}"
         | Pseudo s -> $":{s}"
+        | Custom s -> s
 
 [<AutoOpen>]
 module MasterTypeHelpers =

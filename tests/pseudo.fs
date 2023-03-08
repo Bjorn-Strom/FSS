@@ -926,12 +926,6 @@ module PseudoTests =
                     "Where :user-invalid"
                     actual
                     $".{classname}:where(:user-invalid){{color:red;}}"
-                    
-                    
-                    
-                    
-                    
-                    
                 let classname, actual = createFss [ Has [ Selector.onlyChild ] [ Color.red ] ]
                 testEqual
                     "Has :only-child"
@@ -1082,5 +1076,14 @@ module PseudoTests =
                 testEqual
                     "Has child and attribute"
                     actual
-                    $".{classname} fieldset:has(:required:invalid) + button[type=\"submit\"]{{cursor:not-allowed;}}"
+                    $".{classname} fieldset:has(:required,:invalid) + button[type=\"submit\"]{{cursor:not-allowed;}}"
+                let classname, actual = createFss [
+                    Has [Selector.Custom "article :first-child"] [
+                        MarginBlockStart.value (px 0)
+                    ]
+                ]
+                testEqual
+                    "Has with custom escape hatch"
+                    actual
+                    $".{classname}:has(article :first-child){{margin-block-start:0px;}}"
             ]

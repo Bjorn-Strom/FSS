@@ -6,6 +6,7 @@ module Selector =
         static member Tag tag = Fss.Types.Selector.Tag tag
         static member Id id = Fss.Types.Selector.Id id
         static member Class class' = Fss.Types.Selector.Class class'
+        static member Custom custom = Fss.Types.Selector.Custom custom
         static member Active = Fss.Types.Selector.Pseudo "active"
         static member AnyLink = Fss.Types.Selector.Pseudo "any-link"
         static member Blank = Fss.Types.Selector.Pseudo "blank"

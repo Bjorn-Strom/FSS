@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.1.0 - XX.XX.XXX
+### Added
+- Support for `not`, `is`, `where` and `has` pseudo classes.
+- Support for using other pseudo-classes as `selectors`
+  - `Has [ Selector.Hover ] [...]`
+
 ## Version 2.0.1 - 28.01.2023
 ### Added
 - List support for `grid-template-columns/rows`
