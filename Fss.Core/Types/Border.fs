@@ -14,6 +14,7 @@ module Border =
                 | Thin -> "thin"
                 | Medium -> "medium"
                 | Thick -> "thick"
+        interface ILengthPercentage
 
     type Style =
         | Hidden
@@ -62,7 +63,7 @@ module Border =
 
     // Shorthand test
     type Shorthand =
-        { Width: Width option
+        { Width: ILengthPercentage option
           Style: Style option
           Color: Color option }
         interface ICssValue with
@@ -71,7 +72,11 @@ module Border =
                 // Might get some issues with spaces here depending on what arguments are supplied
                 let widthString =
                     match this.Width with
-                    | Some width -> $"{(width :> ICssValue).StringifyCss()} "
+                    | Some width ->
+                        match width with
+                        | :? Width as width -> $"{(width :> ICssValue).StringifyCss()} "
+                        | :? ILengthPercentage as il -> $"{lengthPercentageString il} "
+                        | _ -> "Error getting border width shorthand"
                     | None -> ""
                 let styleString =
                     match this.Style with
@@ -289,7 +294,7 @@ module BorderClasses =
         // Defines the shorthand function.
         // Another shorthand could be border: width color or border: style color. or any permutation of these 3.
         // Would one function with optional parameters be better?
-        member this.value(width: Border.Width, style: Border.Style, color: Color) =
+        member this.value(width: ILengthPercentage, style: Border.Style, color: Color) =
             let shorthand: Border.Shorthand = {
                 Color = Some color
                 Style = Some style
