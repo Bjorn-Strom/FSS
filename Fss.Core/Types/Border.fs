@@ -1,9 +1,9 @@
 namespace Fss
-
 namespace Fss.Types
 
 [<RequireQualifiedAccess>]
 module Border =
+
     type Width =
         | Thin
         | Medium
@@ -14,7 +14,7 @@ module Border =
                 | Thin -> "thin"
                 | Medium -> "medium"
                 | Thick -> "thick"
-                
+
     type Style =
         | Hidden
         | Dotted
@@ -59,6 +59,31 @@ module Border =
                 | Repeat -> "repeat"
                 | Round -> "round"
                 | Space -> "space"
+
+    // Shorthand test
+    type Shorthand =
+        { Width: Width option
+          Style: Style option
+          Color: Color option }
+        interface ICssValue with
+            member this.StringifyCss() =
+                // I think this cast pattern is used project wide. Make helper function?
+                // Might get some issues with spaces here depending on what arguments are supplied
+                let widthString =
+                    match this.Width with
+                    | Some width -> $"{(width :> ICssValue).StringifyCss()} "
+                    | None -> ""
+                let styleString =
+                    match this.Style with
+                    | Some style -> $"{(style :> ICssValue).StringifyCss()}"
+                    | None -> ""
+                let colorString =
+                    match this.Color with
+                    | Some color -> $" {(color :> ICssValue).StringifyCss()}"
+                    | None -> ""
+
+                $"{widthString}{styleString}{colorString}"
+
 
 [<RequireQualifiedAccess>]
 module BorderClasses =
@@ -260,4 +285,15 @@ module BorderClasses =
     type Border(property) =
         inherit CssRule(property)
         member this.value(border: None') = (property, border) |> Rule
+        // Shorthand test
+        // Defines the shorthand function.
+        // Another shorthand could be border: width color or border: style color. or any permutation of these 3.
+        // Would one function with optional parameters be better?
+        member this.value(width: Border.Width, style: Border.Style, color: Color) =
+            let shorthand: Border.Shorthand = {
+                Color = Some color
+                Style = Some style
+                Width = Some width
+            }
+            (property, shorthand) |> Rule
         member this.none = (property, None') |> Rule

@@ -8,6 +8,13 @@ module BorderTests =
      let tests =
         testList "Border"
             [
+                // Shorthand test
+                // I should add a way to focus tests with the testing library
+                testCase
+                    "Border shorthand"
+                    [ Border.value(Fss.Types.Border.Width.Medium, Fss.Types.Border.Style.Dashed, Fss.Types.Color.Green) ]
+                    "{border:medium dashed green;}"
+
                 testCase
                     "Border initial"
                     [ Border.initial ]
