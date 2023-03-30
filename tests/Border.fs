@@ -11,10 +11,10 @@ module BorderTests =
             [
                 // Shorthand test
                 // I should add a way to focus tests with the testing library
+
                 // This is the most basic way I could make the border shorthand somewhat work
                 // The issue is that it references the border types directly which
                 // Is annoying having to type.
-                // In addition to that the Border.Width type does not allow for units
                 testCase
                     "Border shorthand"
                     [ Border.value(Fss.Types.Border.Width.Medium, Fss.Types.Border.Style.Dashed, Fss.Types.Color.Green) ]
