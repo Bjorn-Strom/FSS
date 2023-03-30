@@ -25,9 +25,35 @@ module BorderTests =
                     [ Border.value(px 1, Fss.Types.Border.Style.Solid, hex "#fff") ]
                     "{border:1px solid #fff;}"
 
+                testCase
+                    "Border shorthand partial"
+                    [ Border.value(width = Fss.Types.Border.Width.Thin) ]
+                    "{border:thin;}"
 
+                testCase
+                    "Border shorthand partial 2"
+                    [ Border.value(style = Fss.Types.Border.Style.Dotted) ]
+                    "{border:dotted;}"
 
+                testCase
+                    "Border shorthand partial 3"
+                    [ Border.value(color = Fss.Types.Color.Aqua) ]
+                    "{border:aqua;}"
 
+                testCase
+                    "Border shorthand partial 4"
+                    [ Border.value(width = Fss.Types.Border.Width.Thin, style = Fss.Types.Border.Style.Dotted) ]
+                    "{border:thin dotted;}"
+
+                testCase
+                    "Border shorthand partial 5"
+                    [ Border.value(width = Fss.Types.Border.Width.Thin, color = Fss.Types.Color.Aqua) ]
+                    "{border:thin aqua;}"
+
+                testCase
+                    "Border shorthand partial 6"
+                    [ Border.value(style = Fss.Types.Border.Style.Dotted, color = Fss.Types.Color.Aqua) ]
+                    "{border:dotted aqua;}"
 
                 // Old tests
                 testCase

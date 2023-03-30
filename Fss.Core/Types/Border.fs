@@ -74,20 +74,22 @@ module Border =
                     match this.Width with
                     | Some width ->
                         match width with
-                        | :? Width as width -> $"{(width :> ICssValue).StringifyCss()} "
-                        | :? ILengthPercentage as il -> $"{lengthPercentageString il} "
+                        | :? Width as width -> $"{(width :> ICssValue).StringifyCss()}"
+                        | :? ILengthPercentage as il -> $"{lengthPercentageString il}"
                         | _ -> "Error getting border width shorthand"
                     | None -> ""
+
                 let styleString =
                     match this.Style with
                     | Some style -> $"{(style :> ICssValue).StringifyCss()}"
                     | None -> ""
+
                 let colorString =
                     match this.Color with
-                    | Some color -> $" {(color :> ICssValue).StringifyCss()}"
+                    | Some color -> $"{(color :> ICssValue).StringifyCss()}"
                     | None -> ""
 
-                $"{widthString}{styleString}{colorString}"
+                $"{widthString} {styleString} {colorString}".Replace("  ", " ").Trim()
 
 
 [<RequireQualifiedAccess>]
@@ -292,13 +294,11 @@ module BorderClasses =
         member this.value(border: None') = (property, border) |> Rule
         // Shorthand test
         // Defines the shorthand function.
-        // Another shorthand could be border: width color or border: style color. or any permutation of these 3.
-        // Would one function with optional parameters be better?
-        member this.value(width: ILengthPercentage, style: Border.Style, color: Color) =
+        member this.value(?width: ILengthPercentage, ?style: Border.Style, ?color: Color) =
             let shorthand: Border.Shorthand = {
-                Color = Some color
-                Style = Some style
-                Width = Some width
+                Color = color
+                Style = style
+                Width = width
             }
             (property, shorthand) |> Rule
         member this.none = (property, None') |> Rule
