@@ -1,7 +1,6 @@
 ﻿namespace FSSTests
 
 open Fet
-open Fss.Types
 open Utils
 open Fss
 
@@ -9,27 +8,43 @@ module BorderTests =
      let tests =
         testList "Border"
             [
-                // Shorthand test
-                // I should add a way to focus tests with the testing library
-
-                // This is the most basic way I could make the border shorthand somewhat work
-                // The issue is that it references the border types directly which
-                // Is annoying having to type.
                 testCase
-                    "Border shorthand"
+                    "Border shorthand: all values"
                     [ Border.value(Fss.Types.Border.Width.Medium, Fss.Types.Border.Style.Dashed, Fss.Types.Color.Green) ]
                     "{border:medium dashed green;}"
-
                 testCase
-                    "Border shorthand 2"
+                    "Border shorthand: all values, with pixel width"
                     [ Border.value(px 1, Fss.Types.Border.Style.Solid, hex "#fff") ]
                     "{border:1px solid #fff;}"
+                testCase
+                    "Border shorthand: only width"
+                    [ Border.value(width = Fss.Types.Border.Width.Thin) ]
+                    "{border:thin;}"
+                testCase
+                    "Border shorthand: only width with percent"
+                    [ Border.value(width = pct 10) ]
+                    "{border:10%;}"
+                testCase
+                    "Border shorthand: only style"
+                    [ Border.value(style = Fss.Types.Border.Style.Dotted) ]
+                    "{border:dotted;}"
+                testCase
+                    "Border shorthand: only color"
+                    [ Border.value(color = Fss.Types.Color.Aqua) ]
+                    "{border:aqua;}"
+                testCase
+                    "Border shorthand: width and style"
+                    [ Border.value(width = Fss.Types.Border.Width.Thin, style = Fss.Types.Border.Style.Dotted) ]
+                    "{border:thin dotted;}"
+                testCase
+                    "Border shorthand: width and color"
+                    [ Border.value(width = Fss.Types.Border.Width.Thin, color = Fss.Types.Color.Aqua) ]
+                    "{border:thin aqua;}"
+                testCase
+                    "Border shorthand: style and color"
+                    [ Border.value(style = Fss.Types.Border.Style.Dotted, color = Fss.Types.Color.Aqua) ]
+                    "{border:dotted aqua;}"
 
-
-
-
-
-                // Old tests
                 testCase
                     "Border initial"
                     [ Border.initial ]
