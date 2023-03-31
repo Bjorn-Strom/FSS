@@ -63,7 +63,7 @@
     <Compile Include="Tests.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Fet" Version="1.0.1" />
+    <PackageReference Include="Fet" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fss.Core\Fss.Core.fsproj" />

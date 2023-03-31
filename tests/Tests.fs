@@ -24,9 +24,9 @@ module Tests =
                 Seq.iter (fun (n, ms) ->
                     printfn $"{n}, {ms}"
                     ) timingList
+            0
         | None ->
             runTests [
-                BorderTests.tests
                 ContentSizeTests.tests
                 MarginTests.tests
                 PaddingTests.tests
@@ -77,5 +77,5 @@ module Tests =
                 FontFaceTests.tests
                 CompositeTests.tests
                 AttributeTests.tests
+                BorderTests.tests
             ]
-        0
