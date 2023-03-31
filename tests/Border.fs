@@ -44,7 +44,6 @@ module BorderTests =
                     "Border shorthand: style and color"
                     [ Border.value(style = Fss.Types.Border.Style.Dotted, color = Fss.Types.Color.Aqua) ]
                     "{border:dotted aqua;}"
-
                 testCase
                     "Border initial"
                     [ Border.initial ]

@@ -5,6 +5,8 @@ open Fss.Types
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
 [<AutoOpen>]
 module Animation =
+    /// Provides animation shorthand
+    let Animation = AnimationClasses.Animation(Property.Animation)
     /// Specifies the delay before the animation starts
     let AnimationDelay = AnimationClasses.AnimationTime(Property.AnimationDelay)
     /// Specifies the direction of an animation
