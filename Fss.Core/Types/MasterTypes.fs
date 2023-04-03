@@ -17,11 +17,11 @@ type IFontFaceValue =
     interface
         abstract member StringifyFontFace : unit -> string
     end
-    
+
 type ILengthUnit =
     interface
     end
-    
+
 type Selector =
     | Tag of Html.Html
     | Id of string
@@ -50,3 +50,8 @@ module MasterTypeHelpers =
         rules
         |> List.map (fun (x,y) -> $"{stringifyICssValue x}-{stringifyICssValue y}")
         |> String.concat ";"
+    let internal stringifyOptionToCssString value =
+        value
+        |> Option.map (fun duration -> (duration :> ICssValue).StringifyCss())
+        |> Option.defaultValue ""
+
