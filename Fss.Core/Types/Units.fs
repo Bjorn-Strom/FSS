@@ -1,10 +1,6 @@
 namespace Fss
 namespace Fss.Types
 
-type ILengthPercentage =
-    interface
-    end
-
 type Percent =
     | Percent of int
     interface ILengthUnit
@@ -98,12 +94,14 @@ module unitHelpers =
         match lp with
         | :? Percent as p -> p :> ICssValue
         | :? Length as l -> l :> ICssValue
+        | :? Auto as a -> a :> ICssValue
         | _ -> Px 0
 
     let internal lengthPercentageString (lp: ILengthPercentage) =
         match lp with
         | :? Percent as p -> stringifyICssValue p
         | :? Length as l -> stringifyICssValue l
+        | :? Auto as a -> stringifyICssValue a
         | _ -> ""
 
     let internal ILengthUnitToType (lu: ILengthUnit) =

@@ -22,6 +22,10 @@ type ILengthUnit =
     interface
     end
     
+type ILengthPercentage =
+    interface
+    end
+
 type Selector =
     | Tag of Html.Html
     | Id of string
