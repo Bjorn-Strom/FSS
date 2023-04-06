@@ -117,6 +117,10 @@ module MarginTests =
                     [ Margin.value (em 10.0)]
                     "{margin:10em;}"
                 testCase
+                    "Margin zero"
+                    [ Margin.value (zero)]
+                    "{margin:0;}"
+                testCase
                     "Margin auto"
                     [ Margin.auto]
                     "{margin:auto;}"
@@ -124,6 +128,10 @@ module MarginTests =
                     "Margin auto (value)"
                     [ Margin.value (auto) ]
                     "{margin:auto;}"
+                testCase
+                    "Margin zero auto"
+                    [ Margin.value (zero, auto)]
+                    "{margin:0 auto;}"
                 testCase
                     "Margin inherit"
                     [ Margin.inherit']
