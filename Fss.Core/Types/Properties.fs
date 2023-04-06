@@ -72,6 +72,7 @@ module Property =
         | AlignItems
         | AlignSelf
         | All
+        | Animation
         | AnimationDelay
         | AnimationDirection
         | AnimationDuration
@@ -485,6 +486,7 @@ module Property =
                 | AlignItems -> "align-items"
                 | AlignSelf -> "align-self"
                 | All -> "all"
+                | Animation -> "animation"
                 | AnimationDelay -> "animation-delay"
                 | AnimationDirection -> "animation-direction"
                 | AnimationDuration -> "animation-duration"
@@ -902,7 +904,7 @@ type Auto =
 
     interface ICounterValue with
         member this.StringifyCounter() = stringifyICssValue this
-        
+
     interface ILengthUnit
     interface ILengthPercentage
 

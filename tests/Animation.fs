@@ -1,20 +1,97 @@
 ﻿namespace FSSTests
 
 open Fet
+open Fss.Types
 open Utils
 open Fss
 
 module AnimationTests =
+    let name, animation =
+        createAnimation
+            [
+                frame 0 [ MarginLeft.value (pct 0) ]
+                frame 50 [ MarginLeft.value (pct 50) ]
+                frames [ 80; 90 ] [ MarginLeft.value (pct 100) ]
+            ]
     let tests =
         testList "Animation"
             [
-                let name, animation =
-                    createAnimation
-                        [
-                            frame 0 [ MarginLeft.value (pct 0) ]
-                            frame 50 [ MarginLeft.value (pct 50) ]
-                            frames [ 80; 90 ] [ MarginLeft.value (pct 100) ]
-                        ]
+                testCase
+                    "Animation shorthand all properties"
+                    [ Animation.value("AnimationName",
+                                      sec 3,
+                                      TimingFunction.Timing.EaseIn,
+                                      sec 1,
+                                      2,
+                                      Fss.Types.Animation.Direction.Reverse,
+                                      Fss.Types.Animation.FillMode.Both,
+                                      Fss.Types.Animation.PlayState.Paused)
+                    ]
+                    "{animation:3s ease-in 1s 2 reverse both paused AnimationName;}"
+                testCase
+                    "Animation shorthand duration, easingFunction, delay, iterationCount, direction, fillMode"
+                    [ Animation.value("AnimationName",
+                                      duration = ms 300,
+                                      easingFunction = TimingFunction.Timing.EaseIn,
+                                      delay = sec 1,
+                                      iterationCount = 2,
+                                      direction = Fss.Types.Animation.Direction.Reverse,
+                                      fillMode = Fss.Types.Animation.FillMode.Both)
+                    ]
+                    "{animation:300ms ease-in 1s 2 reverse both AnimationName;}"
+                testCase
+                    "Animation shorthand duration, easingFunction, delay, iterationCount, direction"
+                    [ Animation.value("AnimationName",
+                                      duration = ms 300,
+                                      easingFunction = TimingFunction.Timing.EaseIn,
+                                      delay = sec 1,
+                                      iterationCount = 2,
+                                      direction = Fss.Types.Animation.Direction.Reverse)
+                    ]
+                    "{animation:300ms ease-in 1s 2 reverse AnimationName;}"
+                testCase
+                    "Animation shorthand duration, easingFunction, delay, iterationCount"
+                    [ Animation.value("AnimationName",
+                                      duration = ms 300,
+                                      easingFunction = TimingFunction.Timing.EaseIn,
+                                      delay = sec 1,
+                                      iterationCount = 2)
+                    ]
+                    "{animation:300ms ease-in 1s 2 AnimationName;}"
+                testCase
+                    "Animation shorthand duration, easingFunction, delay, iterationCount"
+                    [ Animation.value("AnimationName",
+                                      duration = ms 300,
+                                      easingFunction = TimingFunction.Timing.EaseIn,
+                                      delay = sec 1,
+                                      iterationCount = 2)
+                    ]
+                    "{animation:300ms ease-in 1s 2 AnimationName;}"
+                testCase
+                    "Animation shorthand duration, easingFunction, delay"
+                    [ Animation.value("AnimationName",
+                                      duration = ms 300,
+                                      easingFunction = TimingFunction.Timing.EaseIn,
+                                      delay = sec 1)
+                    ]
+                    "{animation:300ms ease-in 1s AnimationName;}"
+                testCase
+                    "Animation shorthand duration, easingFunction"
+                    [ Animation.value("AnimationName",
+                                      duration = ms 300,
+                                      easingFunction = TimingFunction.Timing.EaseIn)
+                    ]
+                    "{animation:300ms ease-in AnimationName;}"
+                testCase
+                    "Animation shorthand duration"
+                    [ Animation.value("AnimationName",
+                                      duration = ms 300)
+                    ]
+                    "{animation:300ms AnimationName;}"
+                testCase
+                    "Animation shorthand duration"
+                    [ Animation.value("AnimationName" ) ]
+                    "{animation:AnimationName;}"
                 testEqual
                    "Keyframe and frames are correct"
                    animation
@@ -90,11 +167,11 @@ module AnimationTests =
                     "{animation-duration:revert;}"
                 testCase
                     "Animation timing-function value"
-                    [ AnimationTimingFunction.value Fss.Types.TimingFunction.Ease ]
+                    [ AnimationTimingFunction.value TimingFunction.Ease ]
                     "{animation-timing-function:ease;}"
                 testCase
                     "Animation timing-function values"
-                    [ AnimationTimingFunction.value [ Fss.Types.TimingFunction.Ease; Fss.Types.TimingFunction.EaseOut ] ]
+                    [ AnimationTimingFunction.value [ TimingFunction.Ease; TimingFunction.EaseOut ] ]
                     "{animation-timing-function:ease,ease-out;}"
                 testCase
                     "Animation timing function ease"
