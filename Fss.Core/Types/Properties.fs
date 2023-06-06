@@ -92,6 +92,7 @@ module Property =
         | BackgroundPosition
         | BackgroundRepeat
         | BackgroundSize
+        | Background
         | BackdropFilter
         | Bleed
         | Border
@@ -506,6 +507,7 @@ module Property =
                 | BackgroundPosition -> "background-position"
                 | BackgroundRepeat -> "background-repeat"
                 | BackgroundSize -> "background-size"
+                | Background -> "background"
                 | BackdropFilter -> "backdrop-filter"
                 | Bleed -> "bleed"
                 | Border -> "border"
