@@ -6,11 +6,11 @@
         <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
         <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;giraffe;viewengine;html</PackageTags>
         <Authors>Bjørn-Ivar Strøm</Authors>
-        <Version>2.0.1</Version>
+        <Version>2.2.0</Version>
         <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
         <TargetFramework>netstandard2.0</TargetFramework>
         <OutputType>Library</OutputType>
-        <PackageReleaseNotes>Add list support for grid-template-columns/rows.</PackageReleaseNotes>
+        <PackageReleaseNotes>Add zero length unit to more easily work with 0 length units.</PackageReleaseNotes>
         <RootNamespace>Fss.Fable</RootNamespace>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageId>Fss-lib.Giraffe</PackageId>

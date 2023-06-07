@@ -20,8 +20,14 @@ module Falco =
         let className, cssRules = createFss properties
 
         className, createStyleNode className cssRules
+        
+    /// Injects CSS into dom with a specific classname and returns the classname
+    let fssWithClassname (classname: string) (properties: Fss.Types.Rule list): string * XmlNode =
+        let className, cssRules = createFssWithClassname classname properties
 
-    // Creates Css node as global styles. Returns xml ndoe
+        className, createStyleNode className cssRules
+
+    // Creates Css node as global styles. Returns XmlNode
     let global'(properties: Fss.Types.Rule list): XmlNode =
         let cssRules = createGlobal properties
         createStyleNode "*" cssRules

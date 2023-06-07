@@ -1,11 +1,6 @@
 namespace Fss
-
 namespace Fss.Types
 
-type ILengthPercentage =
-    interface
-    end
-    
 type Percent =
     | Percent of int
     interface ILengthUnit
@@ -55,6 +50,13 @@ type Length =
             | VMax v -> $"{string v}vmax"
             | VMin v -> $"{string v}vmin"
 
+type Zero =
+    | Zero
+    interface ILengthUnit
+    interface ILengthPercentage
+
+    interface ICssValue with
+        member this.StringifyCss() = "0"
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/angle
 type Angle =
@@ -99,28 +101,34 @@ module unitHelpers =
         match lp with
         | :? Percent as p -> p :> ICssValue
         | :? Length as l -> l :> ICssValue
+        | :? Auto as a -> a :> ICssValue
+        | :? Zero as z -> z :> ICssValue
         | _ -> Px 0
         
     let internal lengthPercentageString (lp: ILengthPercentage) =
         match lp with
-        | :? Percent as p -> stringifyICssValue p 
-        | :? Length as l -> stringifyICssValue l 
+        | :? Percent as p -> stringifyICssValue p
+        | :? Length as l -> stringifyICssValue l
+        | :? Auto as a -> stringifyICssValue a
+        | :? Zero as z -> stringifyICssValue z
         | _ -> ""
-        
+
     let internal ILengthUnitToType (lu: ILengthUnit) =
         match lu with
         | :? Percent as p -> p :> ICssValue
         | :? Length as l -> l :> ICssValue
         | :? Auto as a -> a :> ICssValue
+        | :? Zero as z -> z :> ICssValue
         | _ -> Px 0
-        
+
     let internal ILengthUnitToString (lu: ILengthUnit) =
         match lu with
-        | :? Percent as p -> stringifyICssValue p 
-        | :? Length as l -> stringifyICssValue l 
+        | :? Percent as p -> stringifyICssValue p
+        | :? Length as l -> stringifyICssValue l
         | :? Auto as a -> stringifyICssValue a
+        | :? Zero as z -> stringifyICssValue z
         | _ -> ""
-
+        
     type CssRuleWithLength(property) =
         inherit CssRule(property)
 

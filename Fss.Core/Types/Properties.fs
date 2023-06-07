@@ -76,6 +76,7 @@ module Property =
         | AlignItems
         | AlignSelf
         | All
+        | Animation
         | AnimationDelay
         | AnimationDirection
         | AnimationDuration
@@ -95,6 +96,7 @@ module Property =
         | BackgroundPosition
         | BackgroundRepeat
         | BackgroundSize
+        | Background
         | BackdropFilter
         | Bleed
         | Border
@@ -493,6 +495,7 @@ module Property =
                 | AlignItems -> "align-items"
                 | AlignSelf -> "align-self"
                 | All -> "all"
+                | Animation -> "animation"
                 | AnimationDelay -> "animation-delay"
                 | AnimationDirection -> "animation-direction"
                 | AnimationDuration -> "animation-duration"
@@ -512,6 +515,7 @@ module Property =
                 | BackgroundPosition -> "background-position"
                 | BackgroundRepeat -> "background-repeat"
                 | BackgroundSize -> "background-size"
+                | Background -> "background"
                 | BackdropFilter -> "backdrop-filter"
                 | Bleed -> "bleed"
                 | Border -> "border"
@@ -924,6 +928,9 @@ type Auto =
         member this.StringifyCounter() = stringifyICssValue this
         
     interface ILengthUnit
+
+    interface ILengthUnit
+    interface ILengthPercentage
 
     interface ICssValue with
         member this.StringifyCss() = "auto"

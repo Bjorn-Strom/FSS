@@ -424,6 +424,9 @@ module Functions =
     // Auto
     let auto = Auto
 
+    // Zero
+    let zero = Zero
+
     // Time 
     let sec (v: float) : Time = Sec v
     let ms (v: float) : Time = Ms v

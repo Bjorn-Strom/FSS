@@ -9,6 +9,7 @@ module Background =
         | PaddingBox
         | ContentBox
         | Text
+
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -21,6 +22,7 @@ module Background =
         | BorderBox
         | PaddingBox
         | ContentBox
+
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -35,6 +37,7 @@ module Background =
         | Space
         | Round
         | NoRepeat
+
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -48,6 +51,7 @@ module Background =
     type Size =
         | Cover
         | Contain
+
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -58,6 +62,7 @@ module Background =
         | Scroll
         | Fixed
         | Local
+
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -71,6 +76,7 @@ module Background =
         | Left
         | Right
         | Center
+
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -96,6 +102,7 @@ module Background =
         | Saturation
         | Color
         | Luminosity
+
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -117,17 +124,82 @@ module Background =
 
     type Isolation =
         | Isolate
+
         interface ICssValue with
             member this.StringifyCss() = "isolate"
 
     type BoxDecorationBreak =
         | Slice
         | Clone
+
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
                 | Slice -> "slice"
                 | Clone -> "clone"
+
+    type Shorthand =
+        { Attachment: Attachment option
+          Clip: Clip option
+          Color: Color option
+          Image: Image.Image option
+          Origin: Origin option
+          Position: Position option
+          Repeat: Repeat option
+          Size: Size option }
+
+        interface ICssValue with
+            member this.StringifyCss() : string =
+                let attachmentString =
+                    match this.Attachment with
+                    | Some attachment -> (attachment :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                let clipString =
+                    match this.Clip with
+                    | Some clip -> (clip :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                let colorString =
+                    match this.Color with
+                    | Some color -> (color :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                let imageString =
+                    match this.Image with
+                    | Some image -> (image :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                let originString =
+                    match this.Origin with
+                    | Some origin -> (origin :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                let positionString =
+                    match this.Position with
+                    | Some position -> (position :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                let repeatString =
+                    match this.Repeat with
+                    | Some repeat -> (repeat :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                let sizeString =
+                    match this.Size with
+                    | Some size -> (size :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                [ attachmentString
+                  clipString
+                  colorString
+                  imageString
+                  originString
+                  positionString
+                  repeatString
+                  sizeString ]
+                |> List.filter (System.String.IsNullOrWhiteSpace >> not)
+                |> String.concat " "
 
 [<RequireQualifiedAccess>]
 module BackgroundClasses =
@@ -312,3 +384,19 @@ module BackgroundClasses =
         member this.slice = (property, Background.Slice) |> Rule
         /// The edges are rendered indepedently
         member this.clone = (property, Background.Clone) |> Rule
+    
+    type Background(property) =
+        inherit CssRule(property)
+        
+        member this.value (?attachment, ?clip, ?color, ?image, ?origin, ?position, ?repeat, ?size) =
+            let shorthand: Background.Shorthand = {
+                Attachment = attachment
+                Clip = clip
+                Color = color
+                Image = image
+                Origin = origin
+                Position = position
+                Repeat = repeat
+                Size = size
+            }
+            (property, shorthand) |> Rule

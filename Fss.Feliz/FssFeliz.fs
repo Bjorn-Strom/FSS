@@ -1,7 +1,6 @@
 ﻿namespace Fss
 
 open Fss
-open Fss.Fable
 
 [<AutoOpen>]
 module Feliz =
@@ -9,6 +8,10 @@ module Feliz =
         /// Allows you to style Feliz elements with Fss
         static member fss (properties: Fss.Types.Rule list) =
             let className = fss properties
+            Feliz.prop.className className
+        /// Allows you to style Feliz elements with Fss while specifying the classname
+        static member fssWithClassname (classname: string) (properties: Fss.Types.Rule list) =
+            let className = fssWithClassname classname properties
             Feliz.prop.className className
         /// Allows you to combine fss with an already existing classname
         static member fssWithClass (className: string) (properties: Fss.Types.Rule list) =

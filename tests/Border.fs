@@ -9,6 +9,42 @@ module BorderTests =
         testList "Border"
             [
                 testCase
+                    "Border shorthand: all values"
+                    [ Border.value(Fss.Types.Border.Width.Medium, Fss.Types.Border.Style.Dashed, Fss.Types.Color.Green) ]
+                    "{border:medium dashed green;}"
+                testCase
+                    "Border shorthand: all values, with pixel width"
+                    [ Border.value(px 1, Fss.Types.Border.Style.Solid, hex "#fff") ]
+                    "{border:1px solid #fff;}"
+                testCase
+                    "Border shorthand: only width"
+                    [ Border.value(width = Fss.Types.Border.Width.Thin) ]
+                    "{border:thin;}"
+                testCase
+                    "Border shorthand: only width with percent"
+                    [ Border.value(width = pct 10) ]
+                    "{border:10%;}"
+                testCase
+                    "Border shorthand: only style"
+                    [ Border.value(style = Fss.Types.Border.Style.Dotted) ]
+                    "{border:dotted;}"
+                testCase
+                    "Border shorthand: only color"
+                    [ Border.value(color = Fss.Types.Color.Aqua) ]
+                    "{border:aqua;}"
+                testCase
+                    "Border shorthand: width and style"
+                    [ Border.value(width = Fss.Types.Border.Width.Thin, style = Fss.Types.Border.Style.Dotted) ]
+                    "{border:thin dotted;}"
+                testCase
+                    "Border shorthand: width and color"
+                    [ Border.value(width = Fss.Types.Border.Width.Thin, color = Fss.Types.Color.Aqua) ]
+                    "{border:thin aqua;}"
+                testCase
+                    "Border shorthand: style and color"
+                    [ Border.value(style = Fss.Types.Border.Style.Dotted, color = Fss.Types.Color.Aqua) ]
+                    "{border:dotted aqua;}"
+                testCase
                     "Border initial"
                     [ Border.initial ]
                     "{border:initial;}"

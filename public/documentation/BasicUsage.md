@@ -34,14 +34,53 @@ The `.value` function is particularly useful when you wish to apply a function t
 
 ## Useful functions
 
+### important
+
 `important: CssRule -> CssRule`
 
 The important function takes a css property and marks it as important.
+
+For example:
+```fsharp
+fss [
+    important Color.red
+]
+```
+Will produce: `{color:red !important;}`
+
+### combine
 
 `combine: string list -> (string * bool) list -> string`
 
 An implementation of JavaScripts `classNames` or Emotions `cx`.
 The function takes a list of classnames to apply and a list of classnames/predicate tuples to optionally apply.
+
+For example:
+```fsharp
+combine ["classnameA"] [ "classnameToCombine", true; "classnameToIgnore", false ]
+```
+Will produce: `classnameA classNameToCombine`
+
+The boolean values could be replaced with a predicate of some kind.
+
+A somewhat contrived example:
+```fsharp
+let modalOpenStyles = fss []
+let modalClosedStyles = fss []
+let commonModalStyles = fss []
+let modalStyles = combine [commonModalStyles] 
+    [ modalOpenStyles, isModalOpen
+      modalClosedStyles, !isModalOpen ]
+```
+
+### fssWithClassname
+Creates an Fss block with a specified name.
+The normal `Fss` function generates a classname for you which is a hash of the CSS properties you provide.
+That is what you would normally use.
+Sometimes however it is useful to be able to provide your own classname - especially when working with an independent stylesheet.
+
+This function exists in all Fss libraries.
+For specific examples and function signatures check the documentation page of the library you are using.
 
 ## Shorthands
 

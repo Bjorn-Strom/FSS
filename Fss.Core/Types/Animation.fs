@@ -49,8 +49,59 @@ module Animation =
                 | Running -> "running"
                 | Paused -> "paused"
 
+    type Shorthand =
+        { duration: Time option
+          easingFunction: TimingFunction.Timing option
+          delay: Time option
+          iterationCount: int option
+          direction: Direction option
+          fillMode: FillMode option
+          playState: PlayState option
+          name: string }
+        interface ICssValue with
+            member this.StringifyCss() =
+                let values =
+                     [stringifyOptionToCssString this.duration
+                      stringifyOptionToCssString this.easingFunction
+                      stringifyOptionToCssString this.delay
+                      if this.iterationCount.IsSome then string this.iterationCount.Value else ""
+                      stringifyOptionToCssString this.direction
+                      stringifyOptionToCssString this.fillMode
+                      stringifyOptionToCssString this.playState ]
+                     |> List.filter (fun s -> s <> "")
+                     |> String.concat " "
+
+                if values <> "" then
+                    $"{values} {this.name}"
+                else
+                    this.name
+
 [<RequireQualifiedAccess>]
 module AnimationClasses =
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/animation
+    type Animation(property) =
+        inherit CssRule(property)
+
+        member this.value(name: string,
+                          ?duration: Time,
+                          ?easingFunction: TimingFunction.Timing,
+                          ?delay: Time,
+                          ?iterationCount: int,
+                          ?direction: Animation.Direction,
+                          ?fillMode: Animation.FillMode,
+                          ?playState: Animation.PlayState) =
+            let shorthand: Animation.Shorthand = {
+                    duration = duration
+                    easingFunction = easingFunction
+                    delay = delay
+                    iterationCount = iterationCount
+                    direction = direction
+                    fillMode = fillMode
+                    playState = playState
+                    name = name
+            }
+            (property, shorthand) |> Rule
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
     type AnimationTime(property) =

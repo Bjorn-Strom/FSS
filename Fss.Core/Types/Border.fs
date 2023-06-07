@@ -1,9 +1,9 @@
 namespace Fss
-
 namespace Fss.Types
 
 [<RequireQualifiedAccess>]
 module Border =
+
     type Width =
         | Thin
         | Medium
@@ -14,7 +14,8 @@ module Border =
                 | Thin -> "thin"
                 | Medium -> "medium"
                 | Thick -> "thick"
-                
+        interface ILengthPercentage
+
     type Style =
         | Hidden
         | Dotted
@@ -59,6 +60,38 @@ module Border =
                 | Repeat -> "repeat"
                 | Round -> "round"
                 | Space -> "space"
+
+    // Shorthand test
+    type Shorthand =
+        { Width: ILengthPercentage option
+          Style: Style option
+          Color: Color option }
+        interface ICssValue with
+            member this.StringifyCss() =
+                // I think this cast pattern is used project wide. Make helper function?
+                // Might get some issues with spaces here depending on what arguments are supplied
+                let widthString =
+                    match this.Width with
+                    | Some width ->
+                        match width with
+                        | :? Width as width -> (width :> ICssValue).StringifyCss()
+                        | :? Percent as p -> stringifyICssValue p
+                        | :? Length as l -> stringifyICssValue l
+                        | _ -> "Error getting border width shorthand"
+                    | None -> ""
+
+                let styleString =
+                    match this.Style with
+                    | Some style -> (style :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                let colorString =
+                    match this.Color with
+                    | Some color -> (color :> ICssValue).StringifyCss()
+                    | None -> ""
+
+                $"{widthString} {styleString} {colorString}".Replace("  ", " ").Trim()
+
 
 [<RequireQualifiedAccess>]
 module BorderClasses =
@@ -260,4 +293,12 @@ module BorderClasses =
     type Border(property) =
         inherit CssRule(property)
         member this.value(border: None') = (property, border) |> Rule
+
+        member this.value(?width: ILengthPercentage, ?style: Border.Style, ?color: Color) =
+            let shorthand: Border.Shorthand = {
+                Color = color
+                Style = style
+                Width = width
+            }
+            (property, shorthand) |> Rule
         member this.none = (property, None') |> Rule
