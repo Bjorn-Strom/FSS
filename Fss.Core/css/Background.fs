@@ -37,3 +37,6 @@ module Background =
     /// Specifies how an element should be rendered across multiple lines
     let BoxDecorationBreak =
         BackgroundClasses.BoxDecorationBreak(Property.BoxDecorationBreak)
+    ///
+    let Background =
+        BackgroundClasses.Background(Property.Background)

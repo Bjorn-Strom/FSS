@@ -5,7 +5,7 @@ open Fss
 open Fet
 
 module BackgroundTests =
-     let tests =
+    let tests =
         testList "Background"
             [
                 testCase
@@ -448,4 +448,40 @@ module BackgroundTests =
                     "box-decoration-break revert"
                     [ BoxDecorationBreak.revert ]
                     "{box-decoration-break:revert;}"
+                testCase
+                    "background shorthand: all values"
+                    [ Background.value( Types.Background.Attachment.Scroll, Types.Background.Clip.BorderBox, Types.Color.AliceBlue, Types.Image.Url "foo", Types.Background.Origin.BorderBox, Types.Background.Position.Bottom, Types.Background.NoRepeat, Types.Background.Size.Cover) ]
+                    "{background:scroll border-box aliceblue url(foo) border-box bottom no-repeat cover;}"
+                testCase
+                    "background shorthand: attachment"
+                    [ Background.value(attachment = Types.Background.Attachment.Scroll) ]
+                    "{background:scroll;}"
+                testCase
+                    "background shorthand: clip"
+                    [ Background.value(clip = Types.Background.Clip.BorderBox) ]
+                    "{background:border-box;}"
+                testCase
+                    "background shorthand: color"
+                    [ Background.value(color = Types.Color.AliceBlue) ]
+                    "{background:aliceblue;}"
+                testCase
+                    "background shorthand: image"
+                    [ Background.value(image = Types.Image.Url "foo") ]
+                    "{background:url(foo);}"
+                testCase
+                    "background shorthand: origin"
+                    [ Background.value(origin = Types.Background.Origin.BorderBox) ]
+                    "{background:border-box;}"
+                testCase
+                    "background shorthand: position"
+                    [ Background.value(position = Types.Background.Position.Bottom) ]
+                    "{background:bottom;}"
+                testCase
+                    "background shorthand: repeat"
+                    [ Background.value(repeat = Types.Background.NoRepeat) ]
+                    "{background:no-repeat;}"
+                testCase
+                    "background shorthand: size"
+                    [ Background.value(size = Types.Background.Size.Cover) ]
+                    "{background:cover;}"
             ]
