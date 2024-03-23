@@ -48,9 +48,26 @@ module Falco =
 
     /// Creates font face node and returns the font name and xml node
     let fontFaces name (properties: Fss.Types.FontFaceRule list list): string * XmlNode =
+        let fontFaces = 
+            properties
+            |> List.map (fun ff -> createFontFace name ff)
+            |> List.map (fun f ->  fst f, $"@font-face {snd f}")
+        let fontStyles = 
+            fontFaces
+            |> List.map snd
+            |> String.concat ""
+        let fontName =
+            fontFaces
+            |> List.head
+            |> fst
+        
+        fontName, createStyleNode fontName fontStyles
+
+    /// Injects font face into dom and returns the font name
+    let fontFace name (properties: Fss.Types.FontFaceRule list): string * XmlNode =
         let fontName, fontStyles =
             properties
-            |> createFontFaces name
+            |> createFontFace name
 
         fontName, createStyleNode fontName <| processFontFaceRules fontStyles
 

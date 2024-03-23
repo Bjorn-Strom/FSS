@@ -58,12 +58,21 @@ module Fable =
         $"@font-face {rules}"
 
     /// Injects font face into dom and returns the font name
-    let fontFaces name (properties: Fss.Types.FontFaceRule list list): string =
-        let fontName, fontStyles =
-            properties
-            |> createFontFaces name
-
-        injectCss fontName <| processFontFaceRules fontStyles
+    let fontFaces name (styles: Fss.Types.FontFaceRule list list) : string =
+        let fontFaces = 
+            styles
+            |> List.map (fun ff -> createFontFace name ff)
+            |> List.map (fun f ->  fst f, $"@font-face {snd f}")
+        let fontStyles = 
+            fontFaces
+            |> List.map snd
+            |> String.concat ""
+        let fontName =
+            fontFaces
+            |> List.head
+            |> fst
+        
+        injectCss fontName fontStyles
 
         fontName
 

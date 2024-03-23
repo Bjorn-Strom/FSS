@@ -6,12 +6,12 @@
         <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
         <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;giraffe;viewengine;html</PackageTags>
         <Authors>Bjørn-Ivar Strøm</Authors>
-        <Version>2.2.0</Version>
+        <Version>2.2.1</Version>
         <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
         <TargetFramework>netstandard2.0</TargetFramework>
         <OutputType>Library</OutputType>
-        <PackageReleaseNotes>Add zero length unit to more easily work with 0 length units.</PackageReleaseNotes>
-        <RootNamespace>Fss.Fable</RootNamespace>
+        <PackageReleaseNotes>Fixes issue with FontFaces not generating properly.</PackageReleaseNotes>
+        <RootNamespace>Fss.Giraffe</RootNamespace>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageId>Fss-lib.Giraffe</PackageId>
     </PropertyGroup>
