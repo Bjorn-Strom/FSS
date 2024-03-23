@@ -1,0 +1,1 @@
+import{r as e,P as a,bY as t,e as r}from"./index-C7HefOy6.js";import{P as o}from"./Page-C5eTZvLL.js";function s(){return e.createElement(o,{page:new a(1,[new t(4,[])]),styles:r()})}const c=()=>e.createElement(s,null);export{s as Falco,c as default};

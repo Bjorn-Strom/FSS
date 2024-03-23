@@ -1,1 +1,0 @@
-import{r as e,P as t,F as a,e as s}from"./index.be53b315.js";import{P as r}from"./Page.69b84d5a.js";function l(){return e.exports.createElement(r,{page:new t(0,new a(13)),styles:s()})}const m=()=>e.exports.createElement(l,null);export{l as GlobalStyles,m as default};
