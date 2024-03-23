@@ -1,5 +1,9 @@
 # Changelog
 
+## Fss.Fable, Fss.Feliz, Fss.Giraffe (2.2.1) Fss.Falco(2.3.1) - 23.03.2024
+### Fixed
+- Fixed issue where `fontFaces` was not generating properly
+
 ## Version 2.0.1 - 28.01.2023
 ### Added
 - List support for `grid-template-columns/rows`
