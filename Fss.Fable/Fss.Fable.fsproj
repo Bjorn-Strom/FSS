@@ -4,8 +4,8 @@
     <Description>Provides helper functions for using Fss with Fable.</Description>
     <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
-    <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
-    <Authors>Bjørn-Ivar Strøm</Authors>
+    <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit;fable;fable-library;fable-javascript</PackageTags>
+	  <Authors>Bjørn-Ivar Strøm</Authors>
     <Version>2.2.0</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -18,8 +18,8 @@
     <Compile Include="FssFable.fs" />
   </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Fable.Browser.Dom" Version="2.10.0" />
-      <PackageReference Include="Fable.Core" Version="3.7.1" />
+      <PackageReference Include="Fable.Browser.Dom" Version="2.16.0" />
+      <PackageReference Include="Fable.Core" Version="4.3.0" />
     </ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />

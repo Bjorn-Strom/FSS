@@ -4,7 +4,7 @@
     <Description>A way to write staticly-safe CSS in Dotnet.</Description>
     <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
-    <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
+    <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit;fable;fable-library;fable-javascript;fable-dotnet</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
     <Version>2.1.0</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
@@ -125,7 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
-    <Content Include="Types\" PackagePath="fable\Types" />
-    <Content Include="css\" PackagePath="fable\css" />
+    <Content Include="Types" PackagePath="fable\Types" />
+    <Content Include="css" PackagePath="fable\css" />
   </ItemGroup>
 </Project>

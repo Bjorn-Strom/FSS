@@ -4,7 +4,7 @@
     <Description>Provides helper functions for using Fss with Feliz.</Description>
     <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
-    <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit</PackageTags>
+    <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit;fable;fable-library;fable-javascript</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
     <Version>2.2.0</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
@@ -18,8 +18,7 @@
     <Compile Include="FssFeliz.fs" />
   </ItemGroup>
     <ItemGroup>
-      <PackageReference Update="Fable.Core" Version="3.6.1" />
-      <PackageReference Include="Feliz" Version="1.68.0" />
+      <PackageReference Include="Feliz" Version="2.7.0" />
     </ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />

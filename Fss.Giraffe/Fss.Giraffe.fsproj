@@ -27,4 +27,5 @@
     <ItemGroup>
       <ProjectReference Include="..\Fss.Core\Fss.Core.fsproj" />
     </ItemGroup>
+
 </Project>

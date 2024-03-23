@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,11 +10,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="benchmarkdotnet" Version="0.13.2" />
+    <PackageReference Include="benchmarkdotnet" Version="0.13.12" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Fss.Core\Fss.Core.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="8.0.200" />
   </ItemGroup>
 
 </Project>

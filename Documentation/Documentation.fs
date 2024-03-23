@@ -428,4 +428,7 @@ let App () =
             ]
     ]
 
-ReactDOM.render (StoreProvider <| App(), document.getElementById "app")
+
+open Browser.Dom
+let root = ReactDOM.createRoot(document.getElementById "app")
+root.render(StoreProvider <| App())
