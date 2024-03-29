@@ -168,63 +168,75 @@ let resolve_options_file args =
     root_path provided_path
 
 let read_options_file path =
-    // TODO: Feilmelding om filen ikke finnes eller ikke kan leses
-    // TODO: Opprett mappestrukturen der vi vil outputte ting om det ikke finnes
-    let content = File.ReadAllText path
-    content
+    try
+        let content = File.ReadAllText path
+        Ok content
+    with
+    | :? System.IO.DirectoryNotFoundException as ex ->
+        Error $"Directory not found: {ex.Message}"
+    | :? System.IO.FileNotFoundException as ex ->
+        Error $"File not found: {ex.Message}"
+    | :? System.IO.PathTooLongException as ex ->
+        Error $"Path too long found: {ex.Message}"
+    | :? System.IO.IOException as ex ->
+        Error $"IO exception: {ex.Message}"
+    | ex ->
+        Error $"An unexpected error has occured: {ex.Message}"
 
 [<EntryPoint>]
 let main args =
-    let options2 = 
+    let file_content = 
         args
         |> resolve_options_file
         |> read_options_file
-        |> Decode.fromString OptionsDecoder
 
-    match options2 with
-    | Ok options ->
-        printfn $"Generating CSS for project: {options.FssSource.Path}"
-        compile_styles options
+    match file_content with
+    | Error e -> printfn "Error: %A" e
+    | Ok file_content ->
+        let options = 
+            file_content
+            |> Decode.fromString OptionsDecoder
 
-        let css = read_css_values options
-        // Css string
-        let css_strings =
-            css
-            |> List.map css_values_to_css_string
+        match options with
+        | Ok options ->
+            printfn $"Generating CSS for project: {options.FssSource.Path}"
+            compile_styles options
 
-        // F# fil
-        let fsharp_names =
-            css
-            |> List.map css_values_to_fsharp_variable_names 
+            let css = read_css_values options
+            // Css string
+            let css_strings =
+                css
+                |> List.map css_values_to_css_string
 
-        let css_names = 
-            css
-            |> List.map css_values_to_css_names
+            // F# file
+            let fsharp_names =
+                css
+                |> List.map css_values_to_fsharp_variable_names 
 
-        let names = 
-            let fs_module_names = 
-                List.map fst fsharp_names
-            let fsharp_names = 
-                List.map snd fsharp_names
-            {
-                ModuleNames = fs_module_names
-                CombinedNames = 
-                    List.zip fsharp_names css_names
-                    |> List.map (fun (f, c) -> combine_fsharp_and_css_names f c)
-            }
+            let css_names = 
+                css
+                |> List.map css_values_to_css_names
 
-        if options.GeneratedProject.IsSome then
-            create_library_project options.GeneratedProject.Value.Name options.GeneratedProject.Value.Path names
+            let names = 
+                let fs_module_names = 
+                    List.map fst fsharp_names
+                let fsharp_names = 
+                    List.map snd fsharp_names
+                {
+                    ModuleNames = fs_module_names
+                    CombinedNames = 
+                        List.zip fsharp_names css_names
+                        |> List.map (fun (f, c) -> combine_fsharp_and_css_names f c)
+                }
 
-        let module_names_and_css_strings =
-            List.zip names.ModuleNames css_strings
-        create_css_files options module_names_and_css_strings
+            if options.GeneratedProject.IsSome then
+                create_library_project options.GeneratedProject.Value.Name options.GeneratedProject.Value.Path names
 
-    | Error e -> 
-        // TODO: Kan vi pretty printe dette på no vis?
-        printfn "%A" e
+            let module_names_and_css_strings =
+                List.zip names.ModuleNames css_strings
+            create_css_files options module_names_and_css_strings
 
-
+        | Error e -> 
+            // TODO: Kan vi pretty printe dette på no vis?
+            printfn "%A" e
     0
-    
-    
