@@ -169,6 +169,7 @@ let resolve_options_file args =
 
 let read_options_file path =
     try
+        printfn "Attempting to read settings from: %A" path
         let content = File.ReadAllText path
         Ok content
     with
@@ -185,10 +186,8 @@ let read_options_file path =
 
 [<EntryPoint>]
 let main args =
-    let file_content = 
-        args
-        |> resolve_options_file
-        |> read_options_file
+    let file_path = resolve_options_file args
+    let file_content = read_options_file file_path
 
     match file_content with
     | Error e -> printfn "Error: %A" e
@@ -237,6 +236,5 @@ let main args =
             create_css_files options module_names_and_css_strings
 
         | Error e -> 
-            // TODO: Kan vi pretty printe dette på no vis?
-            printfn "%A" e
+            printfn "Error: %A" e
     0
