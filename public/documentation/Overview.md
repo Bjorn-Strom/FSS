@@ -16,4 +16,7 @@ Fss more ergonomic. Currently there exists libraries for:
 - [Giraffe](https://github.com/giraffe-fsharp/Giraffe)
 - [Falco](https://github.com/pimbrouwers/Falco)
 
+As well as a library for css file generation
+- [Fss.Static](TODO: LENKE TIL EGEN DOCS SIDE)
+
 Check out the framework library documentation pages for specifics on how they work.

@@ -41,6 +41,7 @@
     <Compile Include="Pages\Falco.fs" />
     <Compile Include="Pages\Troubleshoot.fs" />
     <Compile Include="Pages\Changelog.fs" />
+    <Compile Include="Pages\Static.fs" />
     <Compile Include="Documentation.fs" />
   </ItemGroup>
   <ItemGroup>

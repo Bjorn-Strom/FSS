@@ -95,6 +95,9 @@ let giraffe: JS.Promise<unit -> ReactElement> =
 let falco: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/Falco.fs"
 
+let static': JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Static.fs"
+
 let troubleshoot: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/Troubleshoot.fs"
 
@@ -307,6 +310,7 @@ let Main (page: Page) =
                 | Feliz -> Suspense feliz
                 | Giraffe -> Suspense giraffe
                 | Falco -> Suspense falco
+                | Static -> Suspense static'
             | OtherPage page ->
                 match page with
                 | Troubleshoot -> Suspense troubleshoot
