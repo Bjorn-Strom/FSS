@@ -3,6 +3,7 @@
 open Fss
 
 module Static =
+    type CssValue = string * (string * string)
     let fss (styleName: string) (styles: Fss.Types.Rule list) : (string * (string * string)) =
         styleName, createFss styles
     let fssWithClassname (styleName: string) (styles: Fss.Types.Rule list) : (string * (string * string)) =
@@ -32,3 +33,25 @@ module Static =
     let keyframes  (styleName: string) (styles: Fss.Keyframes.Keyframes list) : (string * (string * string)) = 
         let name, animation = createAnimation styles
         styleName, (name, $"@keyframes {animation}")
+
+    // FSS Overloads
+    type Fss.Types.AnimationClasses.AnimationName with
+        member this.value(animation: CssValue) =
+            this.value(fst (snd animation))
+
+    type Fss.Types.FontClasses.FontFamily with
+        member this.value(font: CssValue) =
+            this.value(fst (snd font))
+
+    type Fss.Types.CounterClasses.CounterReset with
+        member this.value(font: CssValue) =
+            this.value(fst (snd font))
+
+    type Fss.Types.CounterClasses.CounterSet with
+        member this.value(font: CssValue) =
+            this.value(fst (snd font))
+
+    type Fss.Types.CounterClasses.CounterIncrement with
+        member this.value(font: CssValue) =
+            this.value(fst (snd font))
+

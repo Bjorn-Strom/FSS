@@ -4,7 +4,8 @@ open System.IO
 open Thoth.Json.Net
 open System.Reflection
 
-type CssValue = string * (string * string)
+open Fss.Static
+
 
 type Css = {
     Name: string
