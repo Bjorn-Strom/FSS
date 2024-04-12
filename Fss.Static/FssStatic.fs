@@ -4,16 +4,17 @@ open Fss
 
 module Static =
     type CssValue = string * (string * string)
-    let fss (styleName: string) (styles: Fss.Types.Rule list) : (string * (string * string)) =
+
+    let fss (styleName: string) (styles: Fss.Types.Rule list) : CssValue =
         styleName, createFss styles
-    let fssWithClassname (styleName: string) (styles: Fss.Types.Rule list) : (string * (string * string)) =
+    let fssWithClassname (styleName: string) (styles: Fss.Types.Rule list) : CssValue =
         styleName, createFssWithClassname styleName styles
-    let global' (styles: Fss.Types.Rule list) : (string * (string * string)) = 
+    let global' (styles: Fss.Types.Rule list) : CssValue =
         "", ("", createGlobal styles) 
-    let counterStyle (styleName: string) (styles: Fss.Types.CounterRule list) : (string * (string * string)) =
+    let counterStyle (styleName: string) (styles: Fss.Types.CounterRule list) : CssValue =
         let name, counterStyle = createCounterStyle styles
         styleName, (name, $"@counter-style {counterStyle}")
-    let fontFaces  (styleName: string) (styles: Fss.Types.FontFaceRule list list) : (string * (string * string)) =
+    let fontFaces  (styleName: string) (styles: Fss.Types.FontFaceRule list list) : CssValue =
         let fontFaces = 
             styles
             |> List.map (fun ff -> createFontFace styleName ff)
@@ -27,10 +28,10 @@ module Static =
             |> List.head
             |> fst
         styleName, (fontName, fontStyles)
-    let fontFace (styleName: string) (styles: Fss.Types.FontFaceRule list) : (string * (string * string)) =
+    let fontFace (styleName: string) (styles: Fss.Types.FontFaceRule list) : CssValue =
         let name, fontFace = createFontFace styleName styles
         styleName, (name, $"@font-face {fontFace}")
-    let keyframes  (styleName: string) (styles: Fss.Keyframes.Keyframes list) : (string * (string * string)) = 
+    let keyframes  (styleName: string) (styles: Fss.Keyframes.Keyframes list) : CssValue =
         let name, animation = createAnimation styles
         styleName, (name, $"@keyframes {animation}")
 
@@ -44,14 +45,26 @@ module Static =
             this.value(fst (snd font))
 
     type Fss.Types.CounterClasses.CounterReset with
-        member this.value(font: CssValue) =
-            this.value(fst (snd font))
+        member this.value(counter: CssValue) =
+            this.value(fst (snd counter))
 
     type Fss.Types.CounterClasses.CounterSet with
-        member this.value(font: CssValue) =
-            this.value(fst (snd font))
+        member this.value(counter: CssValue) =
+            this.value(fst (snd counter))
 
     type Fss.Types.CounterClasses.CounterIncrement with
-        member this.value(font: CssValue) =
-            this.value(fst (snd font))
+        member this.value(counter: CssValue) =
+            this.value(fst (snd counter))
+
+    type Fss.Types.ContentClasses.Content with
+        member this.counter(counter: CssValue) =
+            this.counter(fst (snd counter))
+
+    type Fss.Types.ContentClasses.Content with
+        member this.counter(counter: CssValue, separator: string) =
+            this.counter(fst (snd counter), separator)
+
+    type Fss.Types.ContentClasses.Content with
+        member this.counter(counters: CssValue list, separators: string list) =
+            this.counter(List.map (fun counter -> fst (snd counter)) counters, separators)
 

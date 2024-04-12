@@ -1,8 +1,6 @@
 namespace Fss
 namespace Fss.Types
 
-open Fss.Types
-
 [<RequireQualifiedAccess>]
 module Content =
     type Content =
