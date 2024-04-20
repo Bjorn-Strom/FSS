@@ -10,7 +10,7 @@ cover a huge part of the CSS spec.
 
 It gives you CSS as a first class citizen in your projects and was made to be predictable and easy to use.
 
-Fss gives you the option to generate styles at runtime or to generate static CSS files.
+Fss gives you the option to generate styles at runtime or to ouptut into CSS files.
 
 ## [Documentation 📖](https://bjorn-strom.github.io/FSS/)
 

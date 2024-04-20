@@ -1,9 +1,8 @@
-## Fss.Static & Fss.Builder
-
+﻿## Fss.Static & Fss.Builder
 
 ## Philosophy
 
-Fss was originally designed with a CSS-in-JS mindset. Build the styles in the web-app the user is using it.
+Fss was originally designed with a CSS-in-JS mindset: "Build the styles in the web-app the user is using it".
 This system works really great when using Fable and Feliz or any type of JavaScript framework - but it starts having some issues if you want to use Giraffe or Falco.
 Additionally, you might not require such dynamism. CSS is pretty powerful now and maybe you just want to create some static CSS files instead.
 
@@ -15,33 +14,63 @@ I had been using Vanilla-Extract and TypeScript for some time and I really liked
 My requirements were:
 - Write styles in F# and Fss.
 - "Compile" these styles into CSS files.
-- Do not require including any kind of Fss or extra tooling into my App solution. The only thing you need to include here is the F# library with the CSS names.
+- Do not require including any kind of Fss or extra tooling into my App project. The only thing you need to include here is the F# library with the CSS names.
 
 ## Configuration
 Fss.Builder requires a json file with options.
-```
-{
-  "FssSource": {
-      "Path": "Path",
-      "Name": "Name",
-      "Namespace": "Name"
-  },
-  "GeneratedProject": {
-    "Path": "Path",
-    "Name": "Name"
-  },
-  "CssOutputPath": "Path"
-}
-```
 
 - `FssSource` is the F# library file containing all the Fss styles you have defined
     - `Path` is the path to the directory of this library
     - `Name` is the name of this Library
     - `Namespace` is the namespace of where Fss.Builder should look for the style lists you want to "compile"
-- `GeneratedProject` is an optional field, if this is omitted no F# library with styles is generated.
+- `GeneratedProject` is an field, if this is omitted no F# library with styles is generated.
     - `Path` the path you want to output this generated F# library
     - `Name` name of the library you want to create
 - `CssOutputPath` the path you want to output the final CSS files to.
+
+
+If my project looks like this:
+```
+├── LibraryStyles      // A library containing all styles
+│   ├── fonts.fs      
+│   ├── buttons.fs     
+│   ├── index.fs       // A file where all styles are exported from
+├── WebApp
+│   ├── wwwroot
+├── Fss.json
+```
+
+My config file could look like this:
+```
+{
+  "FssSource": {
+      "Path": "LibraryStyles/",
+      "Name": "Library",
+      "Namespace": "index"
+  },
+  "GeneratedProject": {
+    "Path": "GeneratedStyles",
+    "Name": "StyleFile"
+  },
+  "CssOutputPath": "Path"
+}
+```
+
+After building it should look like this:
+
+```
+├── LibraryStyles      // A library containing all styles
+│   ├── fonts.fs      
+│   ├── buttons.fs     
+│   ├── index.fs       // A file where all styles are exported from
+├── WebApp
+│   ├── wwwroot
+│   │   ├── fonts.css   // Css files generated based on lists in index.fs
+│   │   ├── buttons.css
+├── GeneratedStyles    // the project output taht should be referenced by webapp
+│   ├── StyleFile.fs      
+├── Fss.json
+```
 
 ## Installation
 
@@ -68,10 +97,68 @@ With these steps done you are ready to build CSS files with Fss.
 ## Usage
 
 1. Write your styles in the style library and add them to a list
-2. Run Fss.Builder `dotnet Fss.Builder Fss.json`
+2. Run Fss.Builder `dotnet Fss.Build`
+    - you can speciy path with `-p <PATH>` or `--path <PATH>`
+    - you can recompile the styles with `-w` or `--watch`
 3. Include the output library project into your app
 4. Start using the CSS files.
 
-For a practical example of integration with Giraffe, please refer to this sample.
+For a practical example of integration with Giraffe, please refer to [this](LINKY) sample.
 
-You can also look at this for a Falco, HTMX and Fss.Static example.
+## Css files
+Css files are output based on lists you create in entry point of your styles library project.
+In the [Giraffe](LINKY) sample it is defined like so:
+
+index.fs
+```fsharp
+module Index // The namespace we are looking for
+
+let styles = [
+    globalBoxSizing 
+    container
+    header
+    input
+    fadeAnimation
+    button
+    indexCounter
+    counter
+    counterDone
+]
+
+let fonts = [
+    droidSerifFont 
+    modernaFont 
+    droidSerif 
+    droidSerifBold 
+    moderna
+]
+```
+
+Running Fss.Build on this will result in 2 css files. `styles.css` and `fonts.css`.
+
+You are free to have as many or as few of these lists as you want.
+If I only wanted 1 big CSS file named index.css I would this:
+
+```fsharp
+module Index // The namespace we are looking for
+
+let index = [
+    globalBoxSizing 
+    container
+    header
+    input
+    fadeAnimation
+    button
+    indexCounter
+    counter
+    counterDone
+    droidSerifFont 
+    modernaFont 
+    droidSerif 
+    droidSerifBold 
+    moderna
+]
+```
+
+You could also have conditionals here, if you wanted different files output depending on development or production or whatever.
+

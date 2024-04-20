@@ -4,7 +4,6 @@ open Fli
 open System
 open System.IO
 open Thoth.Json.Net
-open System.Threading
 open System.Reflection
 
 open Fss.Static
@@ -73,16 +72,18 @@ module Builder =
             }
             |> Command.execute 
 
+
         if (Output.toExitCode command) <> 0 then
-            printfn "Error when compiling styles."
-            Output.throwIfErrored command
-            |> ignore
+            printfn "Error when compiling styles:"
+            printfn "%A" command.Text.Value
 
     let read_css_values options: Css List =
         printfn $"Reading result of compilation from: {options.FssSource.Path}/build/{options.FssSource.Name}.dll"
 
         let assembly_path = $"{options.FssSource.Path}/build/{options.FssSource.Name}.dll"
-        let assembly = Assembly.LoadFrom(assembly_path)
+        let assembly_bytes = File.ReadAllBytes assembly_path
+
+        let assembly = Assembly.Load(assembly_bytes)
 
         let assembly_type = assembly.GetType(options.FssSource.Namespace)
         if assembly_type <> null then
@@ -178,6 +179,7 @@ module Builder =
         | ex ->
             Error $"An unexpected error has occured: {ex.Message}"
 
+
     let build (options: Options) =
         printfn $"Generating CSS for project: {options.FssSource.Path}"
         compile_styles options
@@ -215,35 +217,43 @@ module Builder =
         let module_names_and_css_strings =
             List.zip names.ModuleNames css_strings
         create_css_files options module_names_and_css_strings
+        printfn "Css build complete"
 
 module File_Watcher =
-    let file_changed_handler (options: Builder.Options) (e: FileSystemEventArgs) =
-        printfn "File %s has changed" e.Name
-        Builder.build options
+    let file_changed_handler (fsw: FileSystemWatcher) (options: Builder.Options) (e: FileSystemEventArgs) =
+        try
+            fsw.EnableRaisingEvents <- false
+            printfn "File %s has changed" e.Name
+            Builder.build options
+        finally
+            fsw.EnableRaisingEvents <- true
 
-    let watch (options: Builder.Options) () =
-        let path = Path.GetDirectoryName(options.FssSource.Path)
+
+    let watch (options: Builder.Options) =
+        let path = options.FssSource.Path
         let watcher = new FileSystemWatcher(path)
-        watcher.Changed.Add(file_changed_handler options)
-        watcher.Created.Add(file_changed_handler options)
-        watcher.Deleted.Add(file_changed_handler options)
-        watcher.EnableRaisingEvents <- true
 
-        EventWaitHandle.WaitAny([|new ManualResetEvent(false)|]) |> ignore
+        watcher.Filter <- "*.fs"
+        watcher.Changed.Add(file_changed_handler watcher options)
+        watcher.Created.Add(file_changed_handler watcher options)
+        watcher.Deleted.Add(file_changed_handler watcher options)
+        watcher.EnableRaisingEvents <- true
         
 module Command_Line =
     type Command_Line_Options = {
         Path: string
         Watch: bool
+        Quit: bool
     }
 
     let default_command_line_options = {
         Path = Builder.root_path "Fss.json"
         Watch = false
+        Quit = false
     }
 
     let print_help () =
-        printfn "Usage: program_name [options]"
+        printfn "Usage: dotnet Fss.Build [options]"
         printfn "Options:"
         printfn "  -h, --help       Display help"
         printfn "  -p, --path PATH  Specify the path to the configuration file"
@@ -258,7 +268,8 @@ module Command_Line =
             | "-h"::xs
             | "--help"::xs ->
                 print_help ()
-                recurse xs options
+                let new_options = { options with Quit = true }
+                recurse xs new_options
             | "-p"::xs
             | "--path"::xs ->
                 match xs with
@@ -285,28 +296,27 @@ module Main =
     let main args =
         let command_line_options = Command_Line.parse_command_line args
 
-        let file_content = Builder.read_options_file command_line_options.Path
+        if not command_line_options.Quit then
+            let file_content = Builder.read_options_file command_line_options.Path
 
-        match file_content with
-        | Error e -> printfn "Error: %A" e
-        | Ok file_content ->
-            let options = 
-                file_content
-                |> Decode.fromString Builder.OptionsDecoder
+            match file_content with
+            | Error e -> printfn "Error: %A" e
+            | Ok file_content ->
+                let options = 
+                    file_content
+                    |> Decode.fromString Builder.OptionsDecoder
 
-            match options with
-            | Ok options ->
-                if command_line_options.Watch then
-                    let watch_thread = new Thread(new ThreadStart(File_Watcher.watch options))
-                    watch_thread.Start()
+                match options with
+                | Ok options ->
+                    if command_line_options.Watch then
+                        File_Watcher.watch options
 
-                    printfn $"Watching for changes in {Path.GetDirectoryName(options.FssSource.Path)}"
-                    printfn "Press Ctrl+C to exit..."
-                    Console.CancelKeyPress.Add(fun _ -> printfn "Exiting...")
-                else
-                    Builder.build options
+                        printfn $"Watching for changes in {options.FssSource.Path}"
+                        printfn "Press any key to exit..."
+                        Console.ReadKey() |> ignore
+                    else
+                        Builder.build options
 
-            | Error e -> 
-                printfn "Error: %A" e
-
+                | Error e -> 
+                    printfn "Error: %A" e
         0
