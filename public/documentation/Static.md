@@ -2,7 +2,7 @@
 
 ## Philosophy
 
-Fss was originally designed with a CSS-in-JS mindset: "Build the styles in the web-app the user is using it".
+Fss was originally designed with a CSS-in-JS mindset: "Build the styles in the web-app as its being used".
 This system works really great when using Fable and Feliz or any type of JavaScript framework - but it starts having some issues if you want to use Giraffe or Falco.
 Additionally, you might not require such dynamism. CSS is pretty powerful now and maybe you just want to create some static CSS files instead.
 
@@ -23,7 +23,7 @@ Fss.Builder requires a json file with options.
     - `Path` is the path to the directory of this library
     - `Name` is the name of this Library
     - `Namespace` is the namespace of where Fss.Builder should look for the style lists you want to "compile"
-- `GeneratedProject` is an field, if this is omitted no F# library with styles is generated.
+- `GeneratedProject` is a field, if this is omitted no F# library with styles is generated.
     - `Path` the path you want to output this generated F# library
     - `Name` name of the library you want to create
 - `CssOutputPath` the path you want to output the final CSS files to.
@@ -67,7 +67,7 @@ After building it should look like this:
 │   ├── wwwroot
 │   │   ├── fonts.css   // Css files generated based on lists in index.fs
 │   │   ├── buttons.css
-├── GeneratedStyles    // the project output taht should be referenced by webapp
+├── GeneratedStyles    // the project output that should be referenced by webapp
 │   ├── StyleFile.fs      
 ├── Fss.json
 ```
@@ -137,7 +137,7 @@ let fonts = [
 Running Fss.Build on this will result in 2 css files. `styles.css` and `fonts.css`.
 
 You are free to have as many or as few of these lists as you want.
-If I only wanted 1 big CSS file named index.css I would this:
+If I only wanted 1 big CSS file named index.css I would do something like this:
 
 ```fsharp
 module Index // The namespace we are looking for
@@ -160,5 +160,5 @@ let index = [
 ]
 ```
 
-You could also have conditionals here, if you wanted different files output depending on development or production or whatever.
+You could also have conditionals here, if you wanted to output different files depending on development or production or whatever.
 
