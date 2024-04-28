@@ -1,0 +1,1 @@
+import{r as e,P as r,bY as a,e as t}from"./index-DAaabBZ7.js";import{P as o}from"./Page-DwRo6DGa.js";function s(){return e.createElement(o,{page:new r(1,[new a(0,[])]),styles:t()})}const l=()=>e.createElement(s,null);export{s as Core,l as default};

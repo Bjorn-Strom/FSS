@@ -1,1 +1,0 @@
-import{a as t,bc as n}from"./index-D8IbHORJ.js";function o(e){const r=[new t(362,[]),new n(1,[e])];return[r[0],r[1]]}function u(e){const r=[new t(363,[]),new n(1,[e])];return[r[0],r[1]]}function f(e){return o(e)}function a(e){return u(e)}export{f as A,a as B};

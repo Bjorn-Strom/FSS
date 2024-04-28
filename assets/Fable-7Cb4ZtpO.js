@@ -1,1 +1,0 @@
-import{r as e,P as a,bY as t,e as r}from"./index-D8IbHORJ.js";import{P as s}from"./Page-bL_6-xwG.js";function n(){return e.createElement(s,{page:new a(1,[new t(1,[])]),styles:r()})}const m=()=>e.createElement(n,null);export{n as Fable,m as default};

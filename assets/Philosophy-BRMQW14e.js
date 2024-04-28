@@ -1,1 +1,0 @@
-import{r as e,P as t,F as a,e as s}from"./index-D8IbHORJ.js";import{P as o}from"./Page-bL_6-xwG.js";function r(){return e.createElement(o,{page:new t(0,[new a(2,[])]),styles:s()})}const p=()=>e.createElement(r,null);export{r as Philosophy,p as default};
