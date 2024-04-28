@@ -25,6 +25,8 @@ module Builder =
         Namespace: string
     }
 
+    let mutable verbose = false
+
     let root_path (path: string) =
         if Path.IsPathRooted path then
             path
@@ -78,7 +80,8 @@ module Builder =
             printfn "%A" command.Text.Value
 
     let read_css_values options: Css List =
-        printfn $"Reading result of compilation from: {options.FssSource.Path}/build/{options.FssSource.Name}.dll"
+        if verbose then
+            printfn $"Reading result of compilation from: {options.FssSource.Path}/build/{options.FssSource.Name}.dll"
 
         let assembly_path = $"{options.FssSource.Path}/build/{options.FssSource.Name}.dll"
         let assembly_bytes = File.ReadAllBytes assembly_path
@@ -149,22 +152,26 @@ module Builder =
         File.WriteAllText(Path.Combine(path, $"{name}.fs"), String.Join("\n", sourceContent))
 
     let create_library_project name path (names: PreparedNames) =
-        printfn $"Creating library: {name} in {path}"
+        if verbose then
+            printfn $"Creating library: {name} in {path}"
         Directory.CreateDirectory(path) |> ignore
         create_fsproj_file name path
         create_fs_source_file name path names
 
     let create_css_files options css_strings =
-        printfn $"Outputting CSS files to: {options.CssOutputPath}"
+        if verbose then
+            printfn $"Outputting CSS files to: {options.CssOutputPath}"
         css_strings
         |> List.iter (fun (module_name, css_string) -> 
-            printfn $"Outputting CSS file: {module_name}.css"
+            if verbose then
+                printfn $"Outputting CSS file: {module_name}.css"
             File.WriteAllText(Path.Combine(options.CssOutputPath, $"{module_name}.css"), css_string)
         ) 
 
-    let read_options_file path =
+    let read_options_file path  =
         try
-            printfn "Attempting to read settings from: %A" path
+            if verbose then
+                printfn $"Attempting to read settings from: {path}"
             let content = File.ReadAllText path
             Ok content
         with
@@ -181,7 +188,8 @@ module Builder =
 
 
     let build (options: Options) =
-        printfn $"Generating CSS for project: {options.FssSource.Path}"
+        if verbose then
+            printfn $"Generating CSS for project: {options.FssSource.Path}"
         compile_styles options
 
         let css = read_css_values options
@@ -217,7 +225,8 @@ module Builder =
         let module_names_and_css_strings =
             List.zip names.ModuleNames css_strings
         create_css_files options module_names_and_css_strings
-        printfn "Css build complete"
+        if verbose then
+            printfn "Css build complete"
 
 module File_Watcher =
     let file_changed_handler (fsw: FileSystemWatcher) (options: Builder.Options) (e: FileSystemEventArgs) =
@@ -227,6 +236,7 @@ module File_Watcher =
             Builder.build options
         finally
             fsw.EnableRaisingEvents <- true
+            printfn "Waiting for file change"
 
 
     let watch (options: Builder.Options) =
@@ -243,12 +253,14 @@ module Command_Line =
     type Command_Line_Options = {
         Path: string
         Watch: bool
+        Verbose: bool
         Quit: bool
     }
 
     let default_command_line_options = {
         Path = Builder.root_path "Fss.json"
         Watch = false
+        Verbose = false
         Quit = false
     }
 
@@ -258,6 +270,7 @@ module Command_Line =
         printfn "  -h, --help       Display help"
         printfn "  -p, --path PATH  Specify the path to the configuration file"
         printfn "  -w, --watch      Watch for changes in the styles"
+        printfn "  -v, --verbose   Verbose logging"
         printfn ""
 
 
@@ -282,6 +295,10 @@ module Command_Line =
             | "-w"::xs
             | "--watch"::xs ->
                 let new_options = { options with Watch = true }
+                recurse xs new_options
+            | "-v"::xs
+            | "--verbose"::xs ->
+                let new_options = { options with Verbose = true }
                 recurse xs new_options
             | x::xs ->
                 eprintfn "Option '%s' is unrecognized" x
@@ -308,6 +325,7 @@ module Main =
 
                 match options with
                 | Ok options ->
+                    Builder.verbose <- command_line_options.Verbose
                     if command_line_options.Watch then
                         File_Watcher.watch options
 

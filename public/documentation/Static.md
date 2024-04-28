@@ -100,6 +100,7 @@ With these steps done you are ready to build CSS files with Fss.
 2. Run Fss.Builder `dotnet Fss.Build`
     - you can speciy path with `-p <PATH>` or `--path <PATH>`
     - you can recompile the styles with `-w` or `--watch`
+    - you can use -v for verbose output
 3. Include the output library project into your app
 4. Start using the CSS files.
 
