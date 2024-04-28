@@ -10,6 +10,8 @@ cover a huge part of the CSS spec.
 
 It gives you CSS as a first class citizen in your projects and was made to be predictable and easy to use.
 
+Fss gives you the option to generate styles at runtime or to ouptut into CSS files.
+
 ## [Documentation 📖](https://bjorn-strom.github.io/FSS/)
 
 ## Examples 🤓
@@ -51,6 +53,8 @@ probably want `Fss.Core`.
 | [Fss.Feliz](https://www.nuget.org/packages/Fss-lib-feliz/)     | ![Nuget](https://img.shields.io/nuget/v/fss-lib.feliz?style=for-the-badge&logo=nuget)   | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.feliz?style=for-the-badge&logo=nuget)   |
 | [Fss.Giraffe](https://www.nuget.org/packages/Fss-lib.Giraffe/) | ![Nuget](https://img.shields.io/nuget/v/fss-lib.giraffe?style=for-the-badge&logo=nuget) | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.giraffe?style=for-the-badge&logo=nuget) |
 | [Fss.Falco](https://www.nuget.org/packages/Fss-lib.Falco/)     | ![Nuget](https://img.shields.io/nuget/v/fss-lib.falco?style=for-the-badge&logo=nuget)   | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.falco?style=for-the-badge&logo=nuget)   |
+| [Fss.Static](https://www.nuget.org/packages/Fss-lib.Static/)   | ![Nuget](https://img.shields.io/nuget/v/fss-lib.static?style=for-the-badge&logo=nuget)  | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.static?style=for-the-badge&logo=nuget)  |
+| [Fss.Builder](https://www.nuget.org/packages/Fss-lib.Builder/) | ![Nuget](https://img.shields.io/nuget/v/fss-lib.builder?style=for-the-badge&logo=nuget) | ![Nuget](https://img.shields.io/nuget/dt/fss-lib.builder?style=for-the-badge&logo=nuget) |
 
 To install `Fss` you need to install the nuget package.
 

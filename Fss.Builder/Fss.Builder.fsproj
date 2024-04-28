@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+	<Description>Provides CLI tools to generate Css files using F#.</Description>
+	<RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
+	<PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
+	<PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit;fable;fable-library;fable-javascript</PackageTags>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+	<Version>1.0.0</Version>
+	<PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
+	<PackAsTool>true</PackAsTool>
+	<ToolCommandName>Fss.Build</ToolCommandName>
+	<RootNamespace>Fss.Builder</RootNamespace>
+	<PackageReleaseNotes>Initial release of Fss.Builder.</PackageReleaseNotes>
+	<PackageOutputPath>./nupkg</PackageOutputPath>
+	<PackageId>Fss-lib.Builder</PackageId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="FssBuilder.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Fli" Version="1.101.0" />
+        <PackageReference Include="Thoth.Json.Net" Version="11.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Fss.Core\Fss.Core.fsproj" />
+      <ProjectReference Include="..\Fss.Static\Fss.Static.fsproj" />
+    </ItemGroup>
+
+</Project>
