@@ -11,6 +11,7 @@ module Attribute =
         | Style
         | Class
         | ClassList
+        | Data of string
         | Id
         | Title
         | Hidden
@@ -101,6 +102,7 @@ module Attribute =
                 | Style -> "style"
                 | Class -> "class"
                 | ClassList -> "class-list"
+                | Data label -> $"data-{label}"
                 | Id -> "id"
                 | Title -> "title"
                 | Hidden -> "hidden"

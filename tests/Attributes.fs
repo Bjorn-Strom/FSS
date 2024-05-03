@@ -294,6 +294,7 @@ module AttributeTests =
                         FontSize.value (px 28)
                     ])
                 ]
+
                 testEqual
                     "|= class insensitive"
                     actual
@@ -353,6 +354,7 @@ module AttributeTests =
                 testEqual
                     "^= sensitive"
                     actual
+
                     $".{classname}[title^=\"aRtIcLe\" s]{{font-size:28px;}}"
 
                 let classname, actual = createFss [
@@ -570,5 +572,14 @@ module AttributeTests =
                     actual
                     $"p.{classname}[class~=\"Article\"][title=\"Header\"]{{font-size:24px;}}div.{classname}[class~=\"Article\"][title=\"Header\"]{{font-size:24px;}}div.{classname}[class~=\"Article\"]{{background-color:red;}}"
 
+                let classname, actual = createFss [
+                    MatchAttr.Exactly (Attribute.Data "code", "FA123", [
+                        Opacity.value 1
+                    ])
+                ]
+                testEqual
+                    "Data label"
+                    actual
+                    $""".{classname}[data-code="FA123"]{{opacity:1;}}"""
 
 ]

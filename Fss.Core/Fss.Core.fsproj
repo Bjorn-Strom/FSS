@@ -6,7 +6,7 @@
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit;fable;fable-library;fable-javascript;fable-dotnet</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>2.1.0</Version>
+    <Version>2.11.0</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
