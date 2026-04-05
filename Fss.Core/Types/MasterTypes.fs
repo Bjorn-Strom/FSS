@@ -38,14 +38,20 @@ type Selector =
 
 [<AutoOpen>]
 module MasterTypeHelpers =
+#if FABLE_COMPILER
     let internal cache = System.Collections.Generic.Dictionary<ICssValue, string>()
     let internal stringifyICssValue cssValue: string =
-        if cache.ContainsKey(cssValue) then
-            cache[cssValue]
-        else
-            let newValue = (cssValue :> ICssValue).StringifyCss()
-            cache.Add(cssValue, newValue)
-            newValue
+        match cache.TryGetValue(cssValue) with
+        | true, v -> v
+        | _ ->
+            let v = (cssValue :> ICssValue).StringifyCss()
+            cache.[cssValue] <- v
+            v
+#else
+    let internal cache = System.Collections.Concurrent.ConcurrentDictionary<ICssValue, string>()
+    let internal stringifyICssValue cssValue: string =
+        cache.GetOrAdd(cssValue, fun v -> (v :> ICssValue).StringifyCss())
+#endif
     let internal stringifyICounterValue cssValue: string =
         (cssValue :> ICounterValue).StringifyCounter()
     let internal stringifyIFontFaceValue cssValue: string =
@@ -58,4 +64,3 @@ module MasterTypeHelpers =
         value
         |> Option.map (fun duration -> (duration :> ICssValue).StringifyCss())
         |> Option.defaultValue ""
-

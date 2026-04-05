@@ -3,7 +3,7 @@ namespace Fss
 open Fss.Types
 
 [<AutoOpen>]
-module Text =
+module TextCss =
     /// Specifies the horizontal alignment of text.
     let TextAlign = TextClasses.TextAlign(Property.TextAlign)
     /// Specifies the horizontal alignment of the last line of text.
@@ -60,5 +60,7 @@ module Text =
     let WhiteSpace = TextClasses.WhiteSpace(Property.WhiteSpace)
     /// Specifies whether the user can select text.
     let UserSelect = TextClasses.UserSelect(Property.UserSelect)
+    /// Specifies how text wraps. Balance evens out line lengths, pretty avoids orphans.
+    let TextWrap = TextClasses.TextWrap(Property.TextWrap)
     /// Specifies whether the user can select text.
     let HangingPunctuation = TextClasses.HangingPunctuationClass(Property.HangingPunctuation)

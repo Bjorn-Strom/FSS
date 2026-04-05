@@ -21,8 +21,8 @@ module CompositeTests =
     let counterStyleName, counterStyle =
        createFss [ ListStyleType.value counterName
                    FontFamily.value fontName
-                   ! (Selector.Tag Fss.Types.Html.Li) [ After [ Content.value "."  ]]
-                   ! (Selector.Tag Fss.Types.Html.Li) [
+                   ! (Selector.li) [ After [ Content.value "."  ]]
+                   ! (Selector.li) [
                        BackgroundColor.aliceBlue
                        Hover [ BackgroundColor.orangeRed ]
                    ]
@@ -63,7 +63,14 @@ module CompositeTests =
        testList "Composite"
            [
                test "CompositeTest" <| fun _ ->
-                   Expect.equal composition $"""@counter-style {counterName}{{system:cyclic;symbols:"";suffix:" ";prefix:" ";}}@font-face {{font-family:"DroidSerif";src:url(https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf) format('truetype');font-weight:100;font-style:normal;}}.{counterStyleName}{{list-style-type:{counterName};font-family:DroidSerif;}}.{counterStyleName} li::after{{content:".";}}.{counterStyleName} li{{background-color:aliceblue;}}.{counterStyleName} li:hover{{background-color:orangered;}}.{containerName}{{display:flex;flex-direction:column;align-items:center;justify-content:center;}}@keyframes {animationName}{{0%%{{transform:rotate(0deg);}}100%%{{transform:rotate(360deg);}}}}.{titleName}{{animation-name:{animationName};animation-duration:1s;animation-iteration-count:infinite;font-family:DroidSerif;}}.{titleName}:hover{{animation-duration:500ms;}}@media (max-width:600px) {{.{titleName}{{background-color:#87ceeb;}}}}"""
+                   let expected =
+                       "@counter-style " + counterName + """{system:cyclic;symbols:"";suffix:" ";prefix:" ";}""" +
+                       """@font-face {font-family:"DroidSerif";src:url(https://rawgit.com/google/fonts/master/ufl/ubuntu/Ubuntu-Bold.ttf) format('truetype');font-weight:100;font-style:normal;}""" +
+                       "." + counterStyleName + "{list-style-type:" + counterName + """;font-family:DroidSerif;& li{&::after{content:".";}}& li{background-color:aliceblue;&:hover{background-color:orangered;}}}""" +
+                       "." + containerName + "{display:flex;flex-direction:column;align-items:center;justify-content:center;}" +
+                       "@keyframes " + animationName + "{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}" +
+                       "." + titleName + "{animation-name:" + animationName + ";animation-duration:1s;animation-iteration-count:infinite;font-family:DroidSerif;&:hover{animation-duration:500ms;}@media (max-width:600px) {&{background-color:#87ceeb;}}}"
+                   Expect.equal composition expected
                testCase
                    "Important"
                    [ important Color.red ]

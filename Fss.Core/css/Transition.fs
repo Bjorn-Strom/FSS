@@ -3,7 +3,7 @@
 open Fss.Types
 
 [<AutoOpen>]
-module Transition =
+module TransitionCss =
     /// Specifies the duration to wait before a transition starts.
     let TransitionDelay = TransitionClasses.TransitionDelay(Property.TransitionDelay)
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duraion
@@ -12,5 +12,7 @@ module Transition =
     let TransitionTimingFunction = TransitionClasses.TransitionTimingFunction(Property.TransitionTimingFunction)
     /// Specifies which property is being transitioned
     let TransitionProperty = TransitionClasses.TransitionProperty(Property.TransitionProperty)
+    /// Specifies the transition behavior
+    let TransitionBehavior = TransitionClasses.TransitionBehavior(Property.TransitionBehavior)
     /// Resets transition.
     let Transition = TransitionClasses.TransitionClass(Property.Transition)

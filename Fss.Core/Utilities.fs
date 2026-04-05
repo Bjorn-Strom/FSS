@@ -23,5 +23,13 @@ module FNV_1A =
         for i in 0 .. string.Length-1 do
             hash <- hash ^^^ int (string[i])
             hash <- hash * prime
-            
+
         hash
+
+    /// Feed a string into an existing hash state (for incremental hashing)
+    let hashInto (state: int) (string: string) =
+        let mutable h = state
+        for i in 0 .. string.Length-1 do
+            h <- h ^^^ int (string[i])
+            h <- h * prime
+        h

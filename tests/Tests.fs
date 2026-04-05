@@ -48,6 +48,9 @@ module Tests =
                 OutlineTests.tests
                 PointerEventsTests.tests
                 CaretTests.tests
+                AccentTests.tests
+                ColorSchemeTests.tests
+                ContainTests.tests
                 ClipPathTests.tests
                 AspectRatioTests.tests
                 ClearTests.tests
@@ -66,6 +69,12 @@ module Tests =
                 MaskTests.tests
                 SvgTests.tests
                 CssGenerationTests.tests
+                ContainerTests.tests
+                LayerTests.tests
+                ScopeTests.tests
+                StartingStyleTests.tests
+                CustomPropertyTests.tests
+                ScrollTimelineTests.tests
                 MediaTests.tests
                 TransformTests.tests
                 PseudoTests.tests

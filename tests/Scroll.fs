@@ -420,4 +420,40 @@ module ScrollTests =
                     "ScrollSnapStop revert"
                     [ ScrollSnapStop.revert ]
                     "{scroll-snap-stop:revert;}"
+                testCase
+                    "ScrollbarWidth auto"
+                    [ ScrollbarWidth.auto ]
+                    "{scrollbar-width:auto;}"
+                testCase
+                    "ScrollbarWidth thin"
+                    [ ScrollbarWidth.thin ]
+                    "{scrollbar-width:thin;}"
+                testCase
+                    "ScrollbarWidth none"
+                    [ ScrollbarWidth.none ]
+                    "{scrollbar-width:none;}"
+                testCase
+                    "ScrollbarColor auto"
+                    [ ScrollbarColor.auto ]
+                    "{scrollbar-color:auto;}"
+                testCase
+                    "ScrollbarColor value"
+                    [ ScrollbarColor.value(Fss.Types.Color.Red, Fss.Types.Color.Blue) ]
+                    "{scrollbar-color:red blue;}"
+                testCase
+                    "OverscrollBehavior auto"
+                    [ OverscrollBehavior.auto ]
+                    "{overscroll-behavior:auto;}"
+                testCase
+                    "OverscrollBehavior contain"
+                    [ OverscrollBehavior.contain ]
+                    "{overscroll-behavior:contain;}"
+                testCase
+                    "OverscrollBehavior none"
+                    [ OverscrollBehavior.none ]
+                    "{overscroll-behavior:none;}"
+                testCase
+                    "OverscrollBehavior two values"
+                    [ OverscrollBehavior.value(Fss.Types.Scroll.Contain, Fss.Types.Scroll.Contain) ]
+                    "{overscroll-behavior:contain contain;}"
             ]

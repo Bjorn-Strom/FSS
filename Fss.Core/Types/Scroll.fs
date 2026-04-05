@@ -60,6 +60,11 @@ module Scroll =
                 | Normal -> "normal"
                 | Always -> "always"
 
+    type ScrollbarWidth =
+        | Thin
+        interface ICssValue with
+            member this.StringifyCss() = "thin"
+
 [<RequireQualifiedAccess>]
 module ScrollClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
@@ -117,3 +122,19 @@ module ScrollClasses =
     type ScrollSnapStop(property) =
         inherit CssRuleWithNormal(property)
         member this.always = (property, Scroll.Always) |> Rule
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width
+    type ScrollbarWidth(property) =
+        inherit CssRuleWithAutoNone(property)
+        member this.thin = (property, Scroll.Thin) |> Rule
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color
+    type ScrollbarColor(property) =
+        inherit CssRuleWithAuto(property)
+        member this.value(thumbColor: Color.Color, trackColor: Color.Color) =
+            let value = $"{stringifyICssValue thumbColor} {stringifyICssValue trackColor}"
+            (property, String value) |> Rule
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
+    type OverscrollBehaviorShorthand(property) =
+        inherit CssRuleWithAutoNone(property)
+        member this.contain = (property, Scroll.Contain) |> Rule
+        member this.value(x: Scroll.OverscrollBehavior, y: Scroll.OverscrollBehavior) =
+            (property, String $"{stringifyICssValue x} {stringifyICssValue y}") |> Rule

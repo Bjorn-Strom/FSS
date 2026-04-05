@@ -183,6 +183,51 @@ module TransformClasses =
         /// Skew an element vertically
         member this.skewY(angle: Angle) = Transform.SkewY(angle)
 
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/translate
+    type TranslateProperty(property) =
+        inherit CssRuleWithNone(property)
+
+        member this.value(x: ILengthPercentage) =
+            (property, String(lengthPercentageString x)) |> Rule
+
+        member this.value(x: ILengthPercentage, y: ILengthPercentage) =
+            (property, String $"{lengthPercentageString x} {lengthPercentageString y}") |> Rule
+
+        member this.value(x: ILengthPercentage, y: ILengthPercentage, z: ILengthPercentage) =
+            (property, String $"{lengthPercentageString x} {lengthPercentageString y} {lengthPercentageString z}") |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/rotate
+    type RotateProperty(property) =
+        inherit CssRuleWithNone(property)
+
+        member this.value(angle: Angle) =
+            (property, angle) |> Rule
+
+        member this.x(angle: Angle) =
+            (property, String $"x {stringifyICssValue angle}") |> Rule
+
+        member this.y(angle: Angle) =
+            (property, String $"y {stringifyICssValue angle}") |> Rule
+
+        member this.z(angle: Angle) =
+            (property, String $"z {stringifyICssValue angle}") |> Rule
+
+        member this.value(x: float, y: float, z: float, angle: Angle) =
+            (property, String $"{string x} {string y} {string z} {stringifyICssValue angle}") |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/scale
+    type ScaleProperty(property) =
+        inherit CssRuleWithNone(property)
+
+        member this.value(s: float) =
+            (property, String(string s)) |> Rule
+
+        member this.value(x: float, y: float) =
+            (property, String $"{string x} {string y}") |> Rule
+
+        member this.value(x: float, y: float, z: float) =
+            (property, String $"{string x} {string y} {string z}") |> Rule
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
     type TransformOrigin(property) =
         inherit CssRuleWithLength(property)

@@ -65,7 +65,16 @@ module Property =
                 | NameLabel -> "name-label"
     type CssProperty =
         // Css
+        | AccentColor
         | Appearance
+        | ColorScheme
+        | Contain
+        | ContentVisibility
+        | Gap
+        | Rotate
+        | RowGap
+        | Scale
+        | Translate
         | AlignContent
         | AlignItems
         | AlignSelf
@@ -79,6 +88,10 @@ module Property =
         | AnimationName
         | AnimationPlayState
         | AnimationTimingFunction
+        | AnimationTimeline
+        | AnimationRange
+        | AnimationRangeStart
+        | AnimationRangeEnd
         | AspectRatio
         | BackfaceVisibility
         | BackgroundAttachment
@@ -126,7 +139,31 @@ module Property =
         | BorderTopWidth
         | BorderTop
         | BorderWidth
+        | BorderBlock
         | BorderBlockColor
+        | BorderBlockEnd
+        | BorderBlockEndColor
+        | BorderBlockEndStyle
+        | BorderBlockEndWidth
+        | BorderBlockStart
+        | BorderBlockStartColor
+        | BorderBlockStartStyle
+        | BorderBlockStartWidth
+        | BorderBlockStyle
+        | BorderBlockWidth
+        | BorderInline
+        | BorderInlineColor
+        | BorderInlineEnd
+        | BorderInlineEndColor
+        | BorderInlineEndStyle
+        | BorderInlineEndWidth
+        | BorderInlineStart
+        | BorderInlineStartColor
+        | BorderInlineStartStyle
+        | BorderInlineStartWidth
+        | BorderInlineStyle
+        | BorderInlineWidth
+        | BlockSize
         | Bottom
         | BoxDecorationBreak
         | BoxShadow
@@ -151,6 +188,10 @@ module Property =
         | ColumnRuleWidth
         | ColumnSpan
         | ColumnWidth
+        | Container
+        | ContainerName
+        | ContainerQuery
+        | ContainerType
         | Content
         | CounterIncrement
         | CounterReset
@@ -215,6 +256,15 @@ module Property =
         | Hyphens
         | Isolation
         | ImageRendering
+        | Inset
+        | InsetBlock
+        | InsetBlockEnd
+        | InsetBlockStart
+        | InsetInline
+        | InsetInlineEnd
+        | InsetInlineStart
+        | InlineSize
+        | Layer
         | JustifyContent
         | JustifyItems
         | JustifySelf
@@ -244,11 +294,17 @@ module Property =
         | MarginInlineEnd
         | MarginBlockStart
         | MarginBlockEnd
+        | MarginInline
+        | MarginBlock
         | MarkerOffset
         | Marks
+        | MaxBlockSize
         | MaxHeight
+        | MaxInlineSize
         | MaxWidth
+        | MinBlockSize
         | MinHeight
+        | MinInlineSize
         | MinWidth
         | MixBlendMode
         | NavUp
@@ -278,6 +334,8 @@ module Property =
         | PaddingInlineEnd
         | PaddingBlockStart
         | PaddingBlockEnd
+        | PaddingInline
+        | PaddingBlock
         | Page
         | PauseAfter
         | PauseBefore
@@ -308,6 +366,8 @@ module Property =
         | Speak
         | SpeechRate
         | Stress
+        | ScopeRule
+        | StartingStyle
         | ScrollBehavior
         | ScrollMarginBottom
         | ScrollMarginLeft
@@ -322,7 +382,12 @@ module Property =
         | ScrollSnapType
         | ScrollSnapAlign
         | ScrollSnapStop
+        | ScrollTimelineName
+        | ScrollTimelineAxis
+        | ScrollbarColor
+        | ScrollbarWidth
         | SizeAdjust
+        | OverscrollBehavior
         | OverscrollBehaviorX
         | OverscrollBehaviorY
         | TabSize
@@ -359,10 +424,13 @@ module Property =
         | TransitionDuration
         | TransitionProperty
         | TransitionTimingFunction
+        | TransitionBehavior
         | UnicodeBidi
         | UnicodeRange
         | UserSelect
         | VerticalAlign
+        | ViewTimelineName
+        | ViewTimelineAxis
         | Visibility
         | VoiceBalance
         | VoiceDuration
@@ -373,6 +441,7 @@ module Property =
         | VoiceStress
         | VoiceVolume
         | Volume
+        | TextWrap
         | WhiteSpace
         | Widows
         | Width
@@ -429,6 +498,9 @@ module Property =
         | Valid
         | Visited
         | UserInvalid
+        | Has of string
+        | Is of string
+        | Where of string
 
         | After
         | Before
@@ -480,7 +552,16 @@ module Property =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
+                | AccentColor -> "accent-color"
                 | Appearance -> "appearance"
+                | ColorScheme -> "color-scheme"
+                | Contain -> "contain"
+                | ContentVisibility -> "content-visibility"
+                | Gap -> "gap"
+                | Rotate -> "rotate"
+                | RowGap -> "row-gap"
+                | Scale -> "scale"
+                | Translate -> "translate"
                 | AlignContent -> "align-content"
                 | AlignItems -> "align-items"
                 | AlignSelf -> "align-self"
@@ -494,6 +575,10 @@ module Property =
                 | AnimationName -> "animation-name"
                 | AnimationPlayState -> "animation-play-state"
                 | AnimationTimingFunction -> "animation-timing-function"
+                | AnimationTimeline -> "animation-timeline"
+                | AnimationRange -> "animation-range"
+                | AnimationRangeStart -> "animation-range-start"
+                | AnimationRangeEnd -> "animation-range-end"
                 | AspectRatio -> "aspect-ratio"
                 | BackfaceVisibility -> "backface-visibility"
                 | BackgroundAttachment -> "background-attachment"
@@ -541,7 +626,31 @@ module Property =
                 | BorderTopWidth -> "border-top-width"
                 | BorderTop -> "border-top"
                 | BorderWidth -> "border-width"
+                | BorderBlock -> "border-block"
                 | BorderBlockColor -> "border-block-color"
+                | BorderBlockEnd -> "border-block-end"
+                | BorderBlockEndColor -> "border-block-end-color"
+                | BorderBlockEndStyle -> "border-block-end-style"
+                | BorderBlockEndWidth -> "border-block-end-width"
+                | BorderBlockStart -> "border-block-start"
+                | BorderBlockStartColor -> "border-block-start-color"
+                | BorderBlockStartStyle -> "border-block-start-style"
+                | BorderBlockStartWidth -> "border-block-start-width"
+                | BorderBlockStyle -> "border-block-style"
+                | BorderBlockWidth -> "border-block-width"
+                | BorderInline -> "border-inline"
+                | BorderInlineColor -> "border-inline-color"
+                | BorderInlineEnd -> "border-inline-end"
+                | BorderInlineEndColor -> "border-inline-end-color"
+                | BorderInlineEndStyle -> "border-inline-end-style"
+                | BorderInlineEndWidth -> "border-inline-end-width"
+                | BorderInlineStart -> "border-inline-start"
+                | BorderInlineStartColor -> "border-inline-start-color"
+                | BorderInlineStartStyle -> "border-inline-start-style"
+                | BorderInlineStartWidth -> "border-inline-start-width"
+                | BorderInlineStyle -> "border-inline-style"
+                | BorderInlineWidth -> "border-inline-width"
+                | BlockSize -> "block-size"
                 | Bottom -> "bottom"
                 | BoxDecorationBreak -> "box-decoration-break"
                 | BoxShadow -> "box-shadow"
@@ -566,6 +675,10 @@ module Property =
                 | ColumnRuleWidth -> "column-rule-width"
                 | ColumnSpan -> "column-span"
                 | ColumnWidth -> "column-width"
+                | Container -> "container"
+                | ContainerName -> "container-name"
+                | ContainerQuery -> "container-query"
+                | ContainerType -> "container-type"
                 | Content -> "content"
                 | CounterIncrement -> "counter-increment"
                 | CounterReset -> "counter-reset"
@@ -630,6 +743,15 @@ module Property =
                 | Hyphens -> "hyphens"
                 | Isolation -> "isolation"
                 | ImageRendering -> "image-rendering"
+                | Inset -> "inset"
+                | InsetBlock -> "inset-block"
+                | InsetBlockEnd -> "inset-block-end"
+                | InsetBlockStart -> "inset-block-start"
+                | InsetInline -> "inset-inline"
+                | InsetInlineEnd -> "inset-inline-end"
+                | InsetInlineStart -> "inset-inline-start"
+                | InlineSize -> "inline-size"
+                | Layer -> "layer"
                 | JustifyContent -> "justify-content"
                 | JustifyItems -> "justify-items"
                 | JustifySelf -> "justify-self"
@@ -659,11 +781,17 @@ module Property =
                 | MarginInlineEnd -> "margin-inline-end"
                 | MarginBlockStart -> "margin-block-start"
                 | MarginBlockEnd -> "margin-block-end"
+                | MarginInline -> "margin-inline"
+                | MarginBlock -> "margin-block"
                 | MarkerOffset -> "marker-offset"
                 | Marks -> "marks"
+                | MaxBlockSize -> "max-block-size"
                 | MaxHeight -> "max-height"
+                | MaxInlineSize -> "max-inline-size"
                 | MaxWidth -> "max-width"
+                | MinBlockSize -> "min-block-size"
                 | MinHeight -> "min-height"
+                | MinInlineSize -> "min-inline-size"
                 | MinWidth -> "min-width"
                 | MixBlendMode -> "mix-blend-mode"
                 | NavUp -> "nav-up"
@@ -693,6 +821,8 @@ module Property =
                 | PaddingInlineEnd -> "padding-inline-end"
                 | PaddingBlockStart -> "padding-block-start"
                 | PaddingBlockEnd -> "padding-block-end"
+                | PaddingInline -> "padding-inline"
+                | PaddingBlock -> "padding-block"
                 | Page -> "page"
                 | PauseAfter -> "pause-after"
                 | PauseBefore -> "pause-before"
@@ -723,6 +853,8 @@ module Property =
                 | Speak -> "speak"
                 | SpeechRate -> "speech-rate"
                 | Stress -> "stress"
+                | ScopeRule -> "scope"
+                | StartingStyle -> "starting-style"
                 | ScrollBehavior -> "scroll-behavior"
                 | ScrollMarginBottom -> "scroll-margin-bottom"
                 | ScrollMarginLeft -> "scroll-margin-left"
@@ -737,7 +869,12 @@ module Property =
                 | ScrollSnapType -> "scroll-snap-type"
                 | ScrollSnapAlign -> "scroll-snap-align"
                 | ScrollSnapStop -> "scroll-snap-stop"
+                | ScrollTimelineName -> "scroll-timeline-name"
+                | ScrollTimelineAxis -> "scroll-timeline-axis"
+                | ScrollbarColor -> "scrollbar-color"
+                | ScrollbarWidth -> "scrollbar-width"
                 | SizeAdjust -> "size-adjust"
+                | OverscrollBehavior -> "overscroll-behavior"
                 | OverscrollBehaviorX -> "overscroll-behavior-x"
                 | OverscrollBehaviorY -> "overscroll-behavior-y"
                 | TabSize -> "tab-size"
@@ -774,10 +911,13 @@ module Property =
                 | TransitionDuration -> "transition-duration"
                 | TransitionProperty -> "transition-property"
                 | TransitionTimingFunction -> "transition-timing-function"
+                | TransitionBehavior -> "transition-behavior"
                 | UnicodeBidi -> "unicode-bidi"
                 | UnicodeRange -> "unicode-range"
                 | UserSelect -> "user-select"
                 | VerticalAlign -> "vertical-align"
+                | ViewTimelineName -> "view-timeline-name"
+                | ViewTimelineAxis -> "view-timeline-axis"
                 | Visibility -> "visibility"
                 | VoiceBalance -> "voice-balance"
                 | VoiceDuration -> "voice-duration"
@@ -786,8 +926,9 @@ module Property =
                 | VoiceRange -> "voice-range"
                 | VoiceRate -> "voice-rate"
                 | VoiceStress -> "voice-stress"
-                | VoiceVolume -> "voice-colume"
+                | VoiceVolume -> "voice-volume"
                 | Volume -> "volume"
+                | TextWrap -> "text-wrap"
                 | WhiteSpace -> "white-space"
                 | Widows -> "widows"
                 | Width -> "width"
@@ -839,6 +980,9 @@ module Property =
                 | Valid -> "valid"
                 | Visited -> "visited"
                 | UserInvalid -> "user-invalid"
+                | Has s -> $"has({s})"
+                | Is s -> $"is({s})"
+                | Where s -> $"where({s})"
 
                 | After -> "after"
                 | Before -> "before"
@@ -987,6 +1131,8 @@ type CssRule(property: Property.CssProperty) =
     member this.unset = (property, Unset) |> Rule
     /// Reverts the property to user agent style sheet
     member this.revert = (property, Revert) |> Rule
+    /// Rolls back to the value established in a previous cascade layer
+    member this.revertLayer = (property, RevertLayer) |> Rule
 
 
 and Keywords =
@@ -994,6 +1140,7 @@ and Keywords =
     | Initial
     | Unset
     | Revert
+    | RevertLayer
     interface ICssValue with
         member this.StringifyCss() =
             match this with
@@ -1001,6 +1148,7 @@ and Keywords =
             | Initial -> "initial"
             | Unset -> "unset"
             | Revert -> "revert"
+            | RevertLayer -> "revert-layer"
 
 and Rule = Property.CssProperty * ICssValue
 type CounterRule = Property.CounterProperty * ICounterValue
@@ -1087,7 +1235,7 @@ type PathMaster =
 
 type ClassnameMaster =
     | ClassnameMaster of Rule list
-    // uesd to create classname
+    // used to create classname
     interface ICssValue with
         member this.StringifyCss() =
             match this with
@@ -1095,7 +1243,7 @@ type ClassnameMaster =
 
 type IdMaster =
     | IdMaster of Rule list
-    // uesd to create classname
+    // used to create classname
     interface ICssValue with
         member this.StringifyCss() =
             match this with

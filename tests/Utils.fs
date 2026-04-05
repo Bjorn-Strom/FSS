@@ -6,6 +6,8 @@ open Fss.Types
 open System
 
 module Utils =
+    let collectedCss = ResizeArray<string>()
+
     let internal toLowerAndCombine (separator: string) (value: string) : string =
         value
         |> Seq.fold
@@ -22,13 +24,15 @@ module Utils =
     let internal toSpacedCase (x: 'a) = x.ToString() |> toLowerAndCombine " "
 
     let testEqual (testName: string) (actual: string) (correct: string) =
+        collectedCss.Add(actual)
         test testName <| fun _ ->
             Expect.equal actual correct
 
     let testCase (testName: string) (ruleList: Rule list) (correct: string) =
-        let _, actual = createFss ruleList
+        let _, fullCss = createFss ruleList
+        collectedCss.Add(fullCss)
         let actual =
-            actual.Split "{"
+            fullCss.Split "{"
             |> Seq.tail
             |> Seq.head
             |> sprintf "{%s"
@@ -37,9 +41,10 @@ module Utils =
             Expect.equal actual correct
 
     let testCounterCase (testName: string) (ruleList: CounterRule list) (correct: string) =
-        let _, actual = createCounterStyle ruleList
+        let _, fullCss = createCounterStyle ruleList
+        collectedCss.Add(sprintf "@counter-style %s" fullCss)
         let actual =
-            actual.Split "{"
+            fullCss.Split "{"
             |> Seq.tail
             |> Seq.head
             |> sprintf "{%s"
@@ -48,5 +53,6 @@ module Utils =
 
     let testFontCase (testName: string) (ruleList: FontFaceRule list) (correct: string) =
         let _, actual = createFontFace "" ruleList
+        collectedCss.Add(sprintf "@font-face %s" actual)
         test testName <| fun _ ->
             Expect.equal actual correct

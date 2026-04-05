@@ -1,6 +1,7 @@
 namespace Fss
 
 open System
+open System.Text
 open Fss
 open Fss.Types
 open Fss.Utilities
@@ -8,7 +9,7 @@ open Fss.Utilities
 [<AutoOpen>]
 module Functions =
     type LengthUnit = ILengthUnit
-    
+
     type private Selector =
         | Global of Property.CssProperty
         | ClassName of Property.CssProperty
@@ -18,6 +19,14 @@ module Functions =
         | Combinator of Property.CssProperty
         | SelectorMedia of Media.Feature list
         | SelectorMediaFor of Media.Device * Media.Feature list
+        | SelectorContainer of Container.Feature list
+        | SelectorContainerNamed of string * Container.Feature list
+        | SelectorLayer of string
+        | SelectorLayerAnonymous
+        | SelectorScope of string
+        | SelectorScopeTo of string * string
+        | SelectorScopeImplicit
+        | SelectorStartingStyle
         | Attribute of Property.CssProperty * Attribute.Attribute
         | AttributeWithCase of Property.CssProperty * Attribute.Attribute * AttributeHelpers.Match * string * Attribute.Case option
 
@@ -35,8 +44,29 @@ module Functions =
         | :? NameLabel as _ -> true
         | _ -> false
 
+    /// Hash rules incrementally without allocating a concatenated string
+    let private hashRules (rules: Rule list) =
+        let mutable h = 0
+        for (prop, value) in rules do
+            h <- FNV_1A.hashInto h (stringifyICssValue prop)
+            h <- FNV_1A.hashInto h "-"
+            h <- FNV_1A.hashInto h (stringifyICssValue value)
+            h <- FNV_1A.hashInto h ";"
+        h
+
+    /// Single-pass: extract label and non-label rules without double traversal
+    let private extractLabel (rules: Rule list) =
+        let mutable label = ""
+        let filtered =
+            rules |> List.filter (fun (_, value) ->
+                match value with
+                | :? NameLabel as l ->
+                    label <- stringifyICssValue l
+                    false
+                | _ -> true)
+        label, filtered
+
     let private generateCssScope (name: string option) (rules: Rule list) =
-        // TODO: This feels somewhat pointless. Can this be generated in a better way?
         let rec generator (rules_to_generate: Rule list): CssItem list =
             rules_to_generate
             |> List.map (fun x ->
@@ -73,6 +103,38 @@ module Functions =
                         | Media.MediaQueryFor (device, features, rules) ->
                             let rules = generator rules
                             CssScope (SelectorMediaFor (device, features), rules)
+                    | :? Container.ContainerQueryMaster as c ->
+                        match c with
+                        | Container.ContainerQuery (features, rules) ->
+                            let rules = generator rules
+                            CssScope (SelectorContainer features, rules)
+                        | Container.ContainerQueryNamed (name, features, rules) ->
+                            let rules = generator rules
+                            CssScope (SelectorContainerNamed (name, features), rules)
+                    | :? Layer.LayerMaster as l ->
+                        match l with
+                        | Layer.LayerNamed (name, rules) ->
+                            let rules = generator rules
+                            CssScope (SelectorLayer name, rules)
+                        | Layer.LayerAnonymous rules ->
+                            let rules = generator rules
+                            CssScope (SelectorLayerAnonymous, rules)
+                    | :? ScopeAtRule.ScopeMaster as s ->
+                        match s with
+                        | ScopeAtRule.ScopeRoot (root, rules) ->
+                            let rules = generator rules
+                            CssScope (SelectorScope root, rules)
+                        | ScopeAtRule.ScopeRootTo (root, limit, rules) ->
+                            let rules = generator rules
+                            CssScope (SelectorScopeTo (root, limit), rules)
+                        | ScopeAtRule.ScopeImplicit rules ->
+                            let rules = generator rules
+                            CssScope (SelectorScopeImplicit, rules)
+                    | :? StartingStyleAtRule.StartingStyleMaster as s ->
+                        match s with
+                        | StartingStyleAtRule.StartingStyle rules ->
+                            let rules = generator rules
+                            CssScope (SelectorStartingStyle, rules)
                     | :? Attribute.AttributeMaster as a ->
                         match a with
                         | Attribute.Normal (attribute, rules) ->
@@ -99,22 +161,14 @@ module Functions =
 
                     | _ -> CssRule x
                 )
-        let label =
-            rules
-            |> List.tryFind isLabel
-            |> function
-            | Some (_, l) -> stringifyICssValue l
-            | None -> ""
-        let rules =
-            rules
-            |> List.filter (isLabel >> not)
+        let label, rules = extractLabel rules
         let generatedItems = generator rules
         let className =
             match name with
             | Some n -> n
             | _ ->
-                let fullCssString = stringifyList rules
-                $"css{FNV_1A.hash fullCssString}{label}"
+                let hash = hashRules rules
+                $"css{hash}{label}"
 
         match name with
         | Some name when name = "*" ->
@@ -122,103 +176,111 @@ module Functions =
         | _ ->
             className, (ClassName (Property.Class className), generatedItems)
 
-    let private mediaFeaturesToCss (device: string) features =
-        features
-        |> List.map (fun x -> $"({x.ToString()})")
-        |> fun x ->
-            if device = "" then
-                x
-            else
-                [ device ] @ x
-        |> String.concat " and "
+    let private appendMediaFeatures (sb: StringBuilder) (device: string) features =
+        if device <> "" then
+            sb.Append(device) |> ignore
+            if not (List.isEmpty features) then
+                sb.Append(" and ") |> ignore
+        features |> List.iteri (fun i x ->
+            if i > 0 then sb.Append(" and ") |> ignore
+            sb.Append('(').Append(x.ToString()).Append(')') |> ignore)
 
-    let private chunk f listofstuff =
-        match listofstuff with
-        | [] -> []
-        | [x] -> [ [x] ]
-        | x :: y :: rest ->
-            List.fold (fun acc y ->
-                let lastChunk =
-                    acc
-                    |> List.rev
-                    |> List.head
-                let valueOfItemInChunk =
-                    lastChunk
-                    |> List.head
-                    |> f
+    let private appendContainerFeatures (sb: StringBuilder) features =
+        features |> List.iteri (fun i x ->
+            if i > 0 then sb.Append(" and ") |> ignore
+            sb.Append('(').Append(x.ToString()).Append(')') |> ignore)
 
-                if valueOfItemInChunk = f y then
-                    let accWithoutLastChunk =
-                        acc
-                        |> List.rev
-                        |> List.tail
-                        |> List.rev
-                    accWithoutLastChunk @ [ lastChunk @ [ y ] ]
-                else
-                    acc @ [ [ y ] ]
-            ) [ [ x ] ] (y :: rest)
+    let rec private renderItemsSb (sb: StringBuilder) (items: CssItem list): unit =
+        for item in items do
+            match item with
+            | CssRule (name, value) ->
+                sb.Append(stringifyICssValue name).Append(':').Append(stringifyICssValue value).Append(';') |> ignore
+            | CssScope scope -> renderScopeSb sb scope
 
-    let rec private createCssFromScope selectorScope (scope: CssScope): string =
+    and private renderScopeSb (sb: StringBuilder) (scope: CssScope): unit =
         let currentSelector, cssItems = scope
-        let isMedia, selector =
+        match currentSelector with
+        | SelectorMedia features ->
+            sb.Append("@media ") |> ignore
+            appendMediaFeatures sb "" features
+            sb.Append(" {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | SelectorMediaFor (device, features) ->
+            sb.Append("@media ") |> ignore
+            appendMediaFeatures sb (stringifyICssValue device) features
+            sb.Append(" {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | SelectorContainer features ->
+            sb.Append("@container ") |> ignore
+            appendContainerFeatures sb features
+            sb.Append(" {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | SelectorContainerNamed (name, features) ->
+            sb.Append("@container ").Append(name).Append(' ') |> ignore
+            appendContainerFeatures sb features
+            sb.Append(" {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | SelectorLayer name ->
+            sb.Append("@layer ").Append(name).Append(" {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | SelectorLayerAnonymous ->
+            sb.Append("@layer {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | SelectorScope root ->
+            sb.Append("@scope (").Append(root).Append(") {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | SelectorScopeTo (root, limit) ->
+            sb.Append("@scope (").Append(root).Append(") to (").Append(limit).Append(") {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | SelectorScopeImplicit ->
+            sb.Append("@scope {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | SelectorStartingStyle ->
+            sb.Append("@starting-style {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        | _ ->
+            sb.Append('&') |> ignore
             match currentSelector with
-            | Global currentSelector -> false, $"{selectorScope}{stringifyICssValue currentSelector}"
-            | ClassName currentSelector -> false, $"{selectorScope}.{stringifyICssValue currentSelector}"
-            | Id currentSelector -> false, $"{selectorScope}#{stringifyICssValue currentSelector}"
-            | PseudoClass currentSelector -> false, $"{selectorScope}:{stringifyICssValue currentSelector}"
-            | PseudoElement currentSelector -> false, $"{selectorScope}::{stringifyICssValue currentSelector}"
-            | Combinator currentSelector -> false, $"{selectorScope}{stringifyICssValue currentSelector}"
-            | SelectorMedia features -> true, $"""@media {mediaFeaturesToCss "" features}"""
-            | SelectorMediaFor (device, features) -> true, $"@media {mediaFeaturesToCss (stringifyICssValue device) features}"
-            | Attribute (property, attribute) -> false, $"{stringifyICssValue property}{selectorScope}{AttributeHelpers.stringifyAttribute attribute None String.Empty None}"
-            | AttributeWithCase (property, attribute, matcher, match', case) -> false, $"{stringifyICssValue property}{selectorScope}{AttributeHelpers.stringifyAttribute attribute (Some matcher) match' case}"
+            | Global currentSelector -> sb.Append(stringifyICssValue currentSelector) |> ignore
+            | ClassName currentSelector -> sb.Append('.').Append(stringifyICssValue currentSelector) |> ignore
+            | Id currentSelector -> sb.Append('#').Append(stringifyICssValue currentSelector) |> ignore
+            | PseudoClass currentSelector -> sb.Append(':').Append(stringifyICssValue currentSelector) |> ignore
+            | PseudoElement currentSelector -> sb.Append("::").Append(stringifyICssValue currentSelector) |> ignore
+            | Combinator currentSelector -> sb.Append(stringifyICssValue currentSelector) |> ignore
+            | Attribute (property, attribute) ->
+                sb.Append(stringifyICssValue property).Append(AttributeHelpers.stringifyAttribute attribute None "" None) |> ignore
+            | AttributeWithCase (property, attribute, matcher, match', case) ->
+                sb.Append(stringifyICssValue property).Append(AttributeHelpers.stringifyAttribute attribute (Some matcher) match' case) |> ignore
+            | _ -> ()
+            sb.Append('{') |> ignore
+            renderItemsSb sb cssItems
+            sb.Append('}') |> ignore
 
-        if isMedia then
-            let mediaQuery = selector
-            cssItems
-            |> chunk (function | CssRule _ -> true | _ -> false)
-            |> List.map (fun items ->
-                match List.head items with
-                | CssRule _ ->
-                    List.map (fun x ->
-                        match x with
-                        | CssRule (name, value) -> $"{stringifyICssValue name}:{stringifyICssValue value};"
-                        | _ -> failwith "Error") items
-                    |> String.concat ""
-                    |> fun x -> $"{selectorScope}{{{x}}}"
-                | _ ->
-                    List.map (fun x ->
-                        match x with
-                        | CssScope scope -> createCssFromScope selectorScope scope
-                        | _ -> failwith "Error") items
-                    |> String.concat ""
-            )
-            |> String.concat ""
-            |> fun x -> $"{mediaQuery} {{{x}}}"
-        else
-            cssItems
-            |> chunk (function | CssRule _ -> true | _ -> false)
-            |> List.map (fun items ->
-                match List.head items with
-                | CssRule _ ->
-                    List.map (fun x ->
-                        match x with
-                        | CssRule (name, value) -> $"{stringifyICssValue name}:{stringifyICssValue value};"
-                        | _ -> failwith "Error") items
-                    |> String.concat ""
-                    |> fun x -> $"{selector}{{{x}}}"
-                | _ ->
-                    List.map (fun x ->
-                        match x with
-                        | CssScope scope -> createCssFromScope selector scope
-                        | _ -> failwith "Error") items
-                    |> String.concat ""
-            )
-            |> String.concat ""
+    let private createCssFromScope (scope: CssScope): string =
+        let currentSelector, cssItems = scope
+        let sb = StringBuilder()
+        match currentSelector with
+        | Global currentSelector -> sb.Append(stringifyICssValue currentSelector) |> ignore
+        | ClassName currentSelector -> sb.Append('.').Append(stringifyICssValue currentSelector) |> ignore
+        | _ -> ()
+        sb.Append('{') |> ignore
+        renderItemsSb sb cssItems
+        sb.Append('}') |> ignore
+        sb.ToString()
 
     let private createFssInternal name (rules: Rule list): string * string =
         let classname, cssScope = generateCssScope name rules
-        let css = createCssFromScope "" cssScope
+        let css = createCssFromScope cssScope
         classname, css
 
     /// Creates CSS based on a list of CSS rules
@@ -243,6 +305,18 @@ module Functions =
     let createGlobal (properties: Rule list): string =
         let _, css = createFssInternal (Some "*") properties
         css
+
+    /// Creates a CSS layer order declaration from CascadeLayer values
+    /// Returns the CSS string: @layer name1, name2, name3;
+    let createLayerOrder (layers: CascadeLayer list): string =
+        let names = layers |> List.map (fun (CascadeLayer name) -> name) |> String.concat ", "
+        sprintf "@layer %s;" names
+
+    /// Creates an @property rule for registering a custom CSS property
+    /// Returns the CSS string: @property --name { syntax: "..."; inherits: ...; initial-value: ...; }
+    let createProperty (name: string) (syntax: CustomProperty.Syntax) (inherits: bool) (initialValue: string): string =
+        let inheritsStr = if inherits then "true" else "false"
+        sprintf "@property %s{syntax:\"%s\";inherits:%s;initial-value:%s;}" name (syntax.Stringify()) inheritsStr initialValue
 
     let private stringifyCounterProperty (property: CounterRule) =
         let propertyName, propertyValue = property
@@ -276,7 +350,7 @@ module Functions =
             | Some n -> n
             | _ -> $"counter{FNV_1A.hash propertyString}{label}"
 
-        counterName, $"{counterName}{{{propertyString}}}"
+        counterName, sprintf "%s{%s}" counterName propertyString
 
     /// Creates the CSS for a counter style based on a list of CounterStyle rules
     /// Returns a tuple containing 2 elements
@@ -308,7 +382,7 @@ module Functions =
             List.map stringifyFontFaceProperty properties
             |> String.concat ""
 
-        name, $"{{{properties}}}"
+        name, sprintf "{%s}" properties
 
     /// Creates the CSS for several font faces based on FontFace rules
     /// Returns a tuple containing 2 elements
@@ -343,10 +417,10 @@ module Functions =
                 ""
                 attributeList
         match name with
-        | Some name -> name, $"{{{animationStyles}}}"
+        | Some name -> name, sprintf "{%s}" animationStyles
         | _ ->
-            let animationName = $"animation-{FNV_1A.hash animationStyles}"
-            animationName, $"{animationName}{{{animationStyles}}}"
+            let animationName = sprintf "animation-%d" (FNV_1A.hash animationStyles)
+            animationName, sprintf "%s{%s}" animationName animationStyles
 
     /// Creates the CSS for an animation based on a list of KeyframeAttributes
     /// Returns a tuple containing 2 elements
@@ -393,6 +467,22 @@ module Functions =
 
     let hsla (hue: int) (saturation: int) (lightness: int) (alpha: float) = Hsla(hue, saturation, lightness, alpha)
 
+    let hwb (hue: float) (whiteness: float) (blackness: float) = Hwb(hue, whiteness, blackness)
+
+    let hwba (hue: float) (whiteness: float) (blackness: float) (alpha: float) = HwbAlpha(hue, whiteness, blackness, alpha)
+
+    let lab (lightness: float) (a: float) (b: float) = Lab(lightness, a, b)
+
+    let lch (lightness: float) (chroma: float) (hue: float) = Lch(lightness, chroma, hue)
+
+    let oklab (lightness: float) (a: float) (b: float) = Oklab(lightness, a, b)
+
+    let oklch (lightness: float) (chroma: float) (hue: float) = Oklch(lightness, chroma, hue)
+
+    let colorMix (colorSpace: string) (color1: Color) (pct1: int) (color2: Color) (pct2: int) = ColorMix(colorSpace, color1, pct1, color2, pct2)
+
+    let lightDark (light: Color) (dark: Color) = LightDark(light, dark)
+
     // Sizes
     // Absolute
     let px (v: int) : Length = Px v
@@ -411,6 +501,16 @@ module Functions =
     let vh (v: float) : Length = Vh v
     let vmax (v: float) : Length = VMax v
     let vmin (v: float) : Length = VMin v
+    let dvw (v: float) : Length = Dvw v
+    let dvh (v: float) : Length = Dvh v
+    let svw (v: float) : Length = Svw v
+    let svh (v: float) : Length = Svh v
+    let lvw (v: float) : Length = Lvw v
+    let lvh (v: float) : Length = Lvh v
+    let cqw (v: float) : Length = Cqw v
+    let cqh (v: float) : Length = Cqh v
+    let cqi (v: float) : Length = Cqi v
+    let cqb (v: float) : Length = Cqb v
 
     // Angles
     let deg (v: float) : Angle = Deg v
@@ -420,14 +520,14 @@ module Functions =
 
     // Percent
     let pct (v: int) : Percent = Percent v
-    
+
     // Auto
     let auto = Auto
 
     // Zero
     let zero = Zero
 
-    // Time 
+    // Time
     let sec (v: float) : Time = Sec v
     let ms (v: float) : Time = Ms v
 
@@ -435,5 +535,5 @@ module Functions =
     let fr (v: float) : Fraction = Fr v
 
     // Fonts
-    let On = Font.On
-    let Off = Font.Off
+    let On = Fss.Types.Font.On
+    let Off = Fss.Types.Font.Off

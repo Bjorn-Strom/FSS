@@ -128,12 +128,89 @@ module ListStyle =
                 | DisclosureOpen -> "disclosure-open"
                 | DisclosureClosed -> "disclosure-closed"
 
+    type Shorthand =
+        { Type': Type option
+          Position: Position option
+          Image: Image.Image option }
+        interface ICssValue with
+            member this.StringifyCss() =
+                [ stringifyOptionToCssString this.Type'
+                  stringifyOptionToCssString this.Position
+                  stringifyOptionToCssString this.Image ]
+                |> List.filter (fun s -> s <> "")
+                |> String.concat " "
 
 [<RequireQualifiedAccess>]
 module ListStyleClasses =
+    type ListStylePositionValues() =
+        member _.Inside = ListStyle.Position.Inside
+        member _.Outside = ListStyle.Position.Outside
+
+    type ListStyleTypeValues() =
+        member _.Disc = ListStyle.Type.Disc
+        member _.Circle = ListStyle.Type.Circle
+        member _.Square = ListStyle.Type.Square
+        member _.Decimal = ListStyle.Type.Decimal
+        member _.CjkDecimal = ListStyle.Type.CjkDecimal
+        member _.DecimalLeadingZero = ListStyle.Type.DecimalLeadingZero
+        member _.LowerRoman = ListStyle.Type.LowerRoman
+        member _.UpperRoman = ListStyle.Type.UpperRoman
+        member _.LowerGreek = ListStyle.Type.LowerGreek
+        member _.LowerAlpha = ListStyle.Type.LowerAlpha
+        member _.LowerLatin = ListStyle.Type.LowerLatin
+        member _.UpperAlpha = ListStyle.Type.UpperAlpha
+        member _.UpperLatin = ListStyle.Type.UpperLatin
+        member _.ArabicIndic = ListStyle.Type.ArabicIndic
+        member _.Armenian = ListStyle.Type.Armenian
+        member _.Bengali = ListStyle.Type.Bengali
+        member _.Cambodian = ListStyle.Type.Cambodian
+        member _.CjkEarthlyBranch = ListStyle.Type.CjkEarthlyBranch
+        member _.CjkHeavenlyStem = ListStyle.Type.CjkHeavenlyStem
+        member _.CjkIdeographic = ListStyle.Type.CjkIdeographic
+        member _.Devanagari = ListStyle.Type.Devanagari
+        member _.EthiopicNumeric = ListStyle.Type.EthiopicNumeric
+        member _.Georgian = ListStyle.Type.Georgian
+        member _.Gujarati = ListStyle.Type.Gujarati
+        member _.Gurmukhi = ListStyle.Type.Gurmukhi
+        member _.Hebrew = ListStyle.Type.Hebrew
+        member _.Hiragana = ListStyle.Type.Hiragana
+        member _.HiraganaIroha = ListStyle.Type.HiraganaIroha
+        member _.JapaneseFormal = ListStyle.Type.JapaneseFormal
+        member _.JapaneseInformal = ListStyle.Type.JapaneseInformal
+        member _.Kannada = ListStyle.Type.Kannada
+        member _.Katakana = ListStyle.Type.Katakana
+        member _.KatakanaIroha = ListStyle.Type.KatakanaIroha
+        member _.Khmer = ListStyle.Type.Khmer
+        member _.KoreanHangulFormal = ListStyle.Type.KoreanHangulFormal
+        member _.KoreanHanjaFormal = ListStyle.Type.KoreanHanjaFormal
+        member _.KoreanHanjaInformal = ListStyle.Type.KoreanHanjaInformal
+        member _.Lao = ListStyle.Type.Lao
+        member _.LowerArmenian = ListStyle.Type.LowerArmenian
+        member _.Malayalam = ListStyle.Type.Malayalam
+        member _.Mongolian = ListStyle.Type.Mongolian
+        member _.Myanmar = ListStyle.Type.Myanmar
+        member _.Oriya = ListStyle.Type.Oriya
+        member _.Persian = ListStyle.Type.Persian
+        member _.SimpChineseFormal = ListStyle.Type.SimpChineseFormal
+        member _.SimpChineseInformal = ListStyle.Type.SimpChineseInformal
+        member _.Tamil = ListStyle.Type.Tamil
+        member _.Telugu = ListStyle.Type.Telugu
+        member _.Thai = ListStyle.Type.Thai
+        member _.Tibetan = ListStyle.Type.Tibetan
+        member _.TradChineseFormal = ListStyle.Type.TradChineseFormal
+        member _.TradChineseInformal = ListStyle.Type.TradChineseInformal
+        member _.UpperArmenian = ListStyle.Type.UpperArmenian
+        member _.DisclosureOpen = ListStyle.Type.DisclosureOpen
+        member _.DisclosureClosed = ListStyle.Type.DisclosureClosed
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style
     type ListStyle(property) =
         inherit CssRuleWithNone(property)
+        member _.Type = ListStyleTypeValues()
+        member _.Position = ListStylePositionValues()
+        member this.value(?type': ListStyle.Type, ?position: ListStyle.Position, ?image: Image.Image) =
+            let shorthand: ListStyle.Shorthand = { Type' = type'; Position = position; Image = image }
+            (property, shorthand) |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
     type ListStyleImage(property) =
         inherit ImageClasses.ImageClass(property)

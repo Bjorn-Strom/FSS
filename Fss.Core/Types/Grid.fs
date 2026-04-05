@@ -174,12 +174,12 @@ module GridClasses =
         member this.value(template: ILengthPercentage) =
             (property, lengthPercentageToType template)
             |> Rule
-            
+
         member this.value(templates: ILengthUnit list) =
             let result =
                 List.map ILengthUnitToString templates
                 |> String.concat " "
-            (property, String result) 
+            (property, String result)
             |> Rule
 
         member this.minMax(min: ILengthPercentage, max: Fraction) =
@@ -282,11 +282,11 @@ module GridClasses =
         member this.row = (property, Grid.Row) |> Rule
         /// Items are placed by filling each column in turn and adding new columns as necessary
         member this.column = (property, Grid.Column) |> Rule
-        /// Attempts to fill holes earlier in the grid. Thins may be out of order when doing this
+        /// Attempts to fill holes earlier in the grid. Things may be out of order when doing this
         member this.dense = (property, Grid.Dense) |> Rule
-        /// Attempts to fill holes earlier in the grid rows. Thins may be out of order when doing this
+        /// Attempts to fill holes earlier in the grid rows. Things may be out of order when doing this
         member this.rowDense = (property, Grid.RowDense) |> Rule
-        /// Attempts to fill holes earlier in the grid columns. Thins may be out of order when doing this
+        /// Attempts to fill holes earlier in the grid columns. Things may be out of order when doing this
         member this.columnDense = (property, Grid.ColumnDense) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas

@@ -102,3 +102,15 @@ module PseudoClassClasses =
         static member firstChild(rules: Rule list) = (Property.FirstChild, PseudoMaster.PseudoClassMaster rules) |> Rule
         /// Matches a element with incorrect input after it has been used by the user
         static member userInvalid(rules: Rule list) = (Property.UserInvalid, PseudoMaster.PseudoClassMaster rules) |> Rule
+        /// Matches elements that have a descendant or subsequent sibling matching the selector
+        static member has (selectors: Selector list) (rules: Rule list) =
+            let s = selectors |> List.map (fun x -> Selector.stringify x) |> String.concat ","
+            (Property.Has s, PseudoMaster.PseudoClassMaster rules) |> Rule
+        /// Matches elements matching any of the selectors in the list (with normal specificity)
+        static member is' (selectors: Selector list) (rules: Rule list) =
+            let s = selectors |> List.map (fun x -> Selector.stringify x) |> String.concat ","
+            (Property.Is s, PseudoMaster.PseudoClassMaster rules) |> Rule
+        /// Matches elements matching any of the selectors in the list (with zero specificity)
+        static member where (selectors: Selector list) (rules: Rule list) =
+            let s = selectors |> List.map (fun x -> Selector.stringify x) |> String.concat ","
+            (Property.Where s, PseudoMaster.PseudoClassMaster rules) |> Rule

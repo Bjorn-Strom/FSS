@@ -23,12 +23,12 @@ module Media =
                 | Only  d -> $"only {stringifyICssValue d}"
 
     type Pointer =
-        | Course
+        | Coarse
         | Fine
         | None'
         member this.Stringify() =
             match this with
-            | Course -> "course"
+            | Coarse -> "coarse"
             | Fine -> "fine"
             | None' -> "none"
 
@@ -203,8 +203,8 @@ module Media =
             | OverflowBlock overflowBlock -> $"overflow-block:{overflowBlock.Stringify()}"
             | OverflowInline bool -> $"overflow-inline:{bool}"
             | Pointer pointer -> $"pointer:{pointer.Stringify()}"
-            | PrefersColorScheme colorScheme -> $"preferred-color-scheme:{colorScheme.Stringify()}"
-            | PrefersContrast contrast -> $"contrast:{contrast.Stringify}"
+            | PrefersColorScheme colorScheme -> $"prefers-color-scheme:{colorScheme.Stringify()}"
+            | PrefersContrast contrast -> $"prefers-contrast:{contrast.Stringify()}"
             | PrefersReducedMotion bool -> $"prefers-reduced-motion:{bool}"
             | PrefersReducedTransparency bool -> $"prefers-reduced-transparency:{bool}"
             | Resolution resolution -> $"resolution:{stringifyICssValue resolution}"

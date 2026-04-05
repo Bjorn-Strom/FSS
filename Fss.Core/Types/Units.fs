@@ -29,6 +29,16 @@ type Length =
     | Vh of float
     | VMax of float
     | VMin of float
+    | Dvw of float
+    | Dvh of float
+    | Svw of float
+    | Svh of float
+    | Lvw of float
+    | Lvh of float
+    | Cqw of float
+    | Cqh of float
+    | Cqi of float
+    | Cqb of float
     interface ILengthUnit
     interface ILengthPercentage
 
@@ -49,6 +59,16 @@ type Length =
             | Vh v -> $"{string v}vh"
             | VMax v -> $"{string v}vmax"
             | VMin v -> $"{string v}vmin"
+            | Dvw v -> $"{string v}dvw"
+            | Dvh v -> $"{string v}dvh"
+            | Svw v -> $"{string v}svw"
+            | Svh v -> $"{string v}svh"
+            | Lvw v -> $"{string v}lvw"
+            | Lvh v -> $"{string v}lvh"
+            | Cqw v -> $"{string v}cqw"
+            | Cqh v -> $"{string v}cqh"
+            | Cqi v -> $"{string v}cqi"
+            | Cqb v -> $"{string v}cqb"
 
 type Zero =
     | Zero

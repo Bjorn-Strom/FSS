@@ -3,7 +3,7 @@
 open Fss.Types
 
 [<AutoOpen>]
-module ListStyle =
+module ListStyleCss =
     /// Specifies an image to be used as the list item marker.
     let ListStyleImage = ListStyleClasses.ListStyleImage(Property.ListStyleImage)
     /// Specifies the position of the marker of the list item.

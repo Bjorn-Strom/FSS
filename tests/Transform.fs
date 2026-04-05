@@ -194,4 +194,87 @@ module TransformTests =
                         ]
                     ]
                     "{transform:rotate(90deg) translate(20px,0px);}"
+                // Standalone translate property
+                testCase
+                    "Translate none"
+                    [ Translate.none ]
+                    "{translate:none;}"
+                testCase
+                    "Translate single value"
+                    [ Translate.value (px 50) ]
+                    "{translate:50px;}"
+                testCase
+                    "Translate two values"
+                    [ Translate.value (px 50, pct 100) ]
+                    "{translate:50px 100%;}"
+                testCase
+                    "Translate three values"
+                    [ Translate.value (px 50, pct 100, px 200) ]
+                    "{translate:50px 100% 200px;}"
+                testCase
+                    "Translate inherit"
+                    [ Translate.inherit' ]
+                    "{translate:inherit;}"
+                testCase
+                    "Translate initial"
+                    [ Translate.initial ]
+                    "{translate:initial;}"
+                // Standalone rotate property
+                testCase
+                    "Rotate none"
+                    [ Rotate.none ]
+                    "{rotate:none;}"
+                testCase
+                    "Rotate angle"
+                    [ Rotate.value (deg 45.) ]
+                    "{rotate:45deg;}"
+                testCase
+                    "Rotate x axis"
+                    [ Rotate.x (deg 90.) ]
+                    "{rotate:x 90deg;}"
+                testCase
+                    "Rotate y axis"
+                    [ Rotate.y (turn 0.5) ]
+                    "{rotate:y 0.5turn;}"
+                testCase
+                    "Rotate z axis"
+                    [ Rotate.z (rad 1.5) ]
+                    "{rotate:z 1.5rad;}"
+                testCase
+                    "Rotate custom axis"
+                    [ Rotate.value (1., 1., 0., deg 45.) ]
+                    "{rotate:1 1 0 45deg;}"
+                testCase
+                    "Rotate inherit"
+                    [ Rotate.inherit' ]
+                    "{rotate:inherit;}"
+                testCase
+                    "Rotate initial"
+                    [ Rotate.initial ]
+                    "{rotate:initial;}"
+                // Standalone scale property
+                testCase
+                    "Scale none"
+                    [ Scale.none ]
+                    "{scale:none;}"
+                testCase
+                    "Scale uniform"
+                    [ Scale.value 2. ]
+                    "{scale:2;}"
+                testCase
+                    "Scale two values"
+                    [ Scale.value (1.5, 2.) ]
+                    "{scale:1.5 2;}"
+                testCase
+                    "Scale three values"
+                    [ Scale.value (1., 2., 0.5) ]
+                    "{scale:1 2 0.5;}"
+                testCase
+                    "Scale inherit"
+                    [ Scale.inherit' ]
+                    "{scale:inherit;}"
+                testCase
+                    "Scale initial"
+                    [ Scale.initial ]
+                    "{scale:initial;}"
             ]

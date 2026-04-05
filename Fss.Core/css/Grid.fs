@@ -18,6 +18,10 @@ module Grid =
     let GridRowStart = GridClasses.GridColumn(Property.GridRowStart)
     /// Specifies end position in grid row.
     let GridRowEnd = GridClasses.GridColumn(Property.GridRowEnd)
+    /// Specifies gap between rows and columns. Works in Grid and Flexbox.
+    let Gap = GridClasses.GridTwoGap(Property.Gap)
+    /// Specifies gap between rows. Works in Grid and Flexbox.
+    let RowGap = GridClasses.GridGap(Property.RowGap)
     /// Specifies gap between rows and column in grid.
     let GridGap = GridClasses.GridTwoGap(Property.GridGap)
     /// Specifies gap between rows in grid.

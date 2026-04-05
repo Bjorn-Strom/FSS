@@ -29,7 +29,7 @@ module Position =
         | Top
         | Bottom
         interface ICssValue with
-            member this.StringifyCss() = 
+            member this.StringifyCss() =
                 match this with
                 | Baseline -> "baseline"
                 | Sub -> "sub"
@@ -133,7 +133,7 @@ module PositionClasses =
         /// Its final position is determined by its top, right, bottom and left values
         member this.absolute = (property, Position.Absolute) |> Rule
         /// The element is treated as a relative element until a specific scroll threshold is reached
-        /// At that point it is treadet as  afixed position where it is told to stick
+        /// At that point it is treated as afixed position where it is told to stick
         member this.sticky = (property, Position.Sticky) |> Rule
         /// The element is taken out of the normal document flow
         /// No space is created for it and it is positioned to the document
@@ -145,6 +145,35 @@ module PositionClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/left
     type TopRightBottomLeft(property) =
         inherit CssRuleWithAutoLength(property)
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/inset
+    type Inset(property) =
+        inherit CssRuleWithAutoLength(property)
+
+        member this.value(vertical: ILengthPercentage, horizontal: ILengthPercentage) =
+            let value =
+                $"{lengthPercentageString vertical} {lengthPercentageString horizontal}"
+            (property, String value) |> Rule
+
+        member this.value(top: ILengthPercentage, horizontal: ILengthPercentage, bottom: ILengthPercentage) =
+            let value =
+                $"{lengthPercentageString top} {lengthPercentageString horizontal} {lengthPercentageString bottom}"
+            (property, String value) |> Rule
+
+        member this.value(top: ILengthPercentage, right: ILengthPercentage, bottom: ILengthPercentage, left: ILengthPercentage) =
+            let value =
+                $"{lengthPercentageString top} {lengthPercentageString right} {lengthPercentageString bottom} {lengthPercentageString left}"
+            (property, String value) |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline
+    type InsetLogical(property) =
+        inherit CssRuleWithAutoLength(property)
+
+        member this.value(start: ILengthPercentage, end': ILengthPercentage) =
+            let value =
+                $"{lengthPercentageString start} {lengthPercentageString end'}"
+            (property, String value) |> Rule
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
     type VerticalAlign(property) =
         inherit CssRuleWithLength(property)
@@ -255,9 +284,9 @@ module WritingModeClasses =
         /// For ltr scripts the content flows horizontally from left to right
         /// For rtl scripts the content flows horizontally from right to left
         member this.horizontalTb = (property, WritingMode.HorizontalTb) |> Rule
-        /// For lrt scripts the content flows vertically from top to bottom with the next line to the left of the current one 
-        /// For lrt scripts the content flows vertically from bottom to top with the next line to the right of the current one 
+        /// For lrt scripts the content flows vertically from top to bottom with the next line to the left of the current one
+        /// For lrt scripts the content flows vertically from bottom to top with the next line to the right of the current one
         member this.verticalRl = (property, WritingMode.VerticalRl) |> Rule
-        /// For lrt scripts the content flows vertically from bottom to top with the next line to the right of the current one 
-        /// For lrt scripts the content flows vertically from top to bottom with the next line to the left of the current one 
+        /// For lrt scripts the content flows vertically from bottom to top with the next line to the right of the current one
+        /// For lrt scripts the content flows vertically from top to bottom with the next line to the left of the current one
         member this.verticalLr = (property, WritingMode.VerticalLr) |> Rule

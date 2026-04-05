@@ -6,11 +6,11 @@
         <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
         <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;giraffe;viewengine;html</PackageTags>
         <Authors>Bjørn-Ivar Strøm</Authors>
-        <Version>2.2.1</Version>
+        <Version>3.0.0</Version>
         <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
         <TargetFramework>netstandard2.0</TargetFramework>
         <OutputType>Library</OutputType>
-        <PackageReleaseNotes>Fixes issue with FontFaces not generating properly.</PackageReleaseNotes>
+        <PackageReleaseNotes>3.0 - CSS nesting, selector shortcuts, @layer, @scope, @property, @starting-style, scroll-driven animations, container query units.</PackageReleaseNotes>
         <RootNamespace>Fss.Giraffe</RootNamespace>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageId>Fss-lib.Giraffe</PackageId>

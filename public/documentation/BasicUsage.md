@@ -84,15 +84,22 @@ For specific examples and function signatures check the documentation page of th
 
 ## Shorthands
 
-I don't like shorthands so I haven't included them. In general I feel they make CSS more complicated than it needs to be.
-However as this project creates CSS and interacts with it, it has to deal with some of its shortcomings, like shorthands.
+FSS supports CSS shorthands using F# optional parameters. This lets you set multiple related properties in one call while only specifying the values you need.
 
-Therefore the shorthands that are included are limited to ones where using `inherit`, `initial`, `unset` or `none` is natural. Like text-decoration.
-For example resetting `text-decoration` would be **really** annoying without it - having to go through each property resetting it manually.
+```fsharp
+fss [ Border.value(px 2, Border.Style.Solid, hex "008000") ]
+// border: 2px solid #008000;
 
-However if shorthands is something you really want to use, you can use the custom escape hatch to write them up in string.
-The escape hatch is a function that takes two strings, a key and a value and attempts to make Css with it.
-For example if you want to set border with shorthand you can write:
+fss [ Outline.value(style = Outline.Style.Dashed) ]
+// outline: dashed;
+
+fss [ Font.value(px 16, "Arial", style = Font.Style.Italic) ]
+// font: italic 16px Arial;
+```
+
+See the [Shorthands](#/page/shorthands) page for the full list and detailed usage.
+
+For anything FSS doesn't support directly, you can use the custom escape hatch which takes two strings, a key and a value:
 
 ```fsharp
 fss [ Custom "border" "4mm ridge rgba(170, 50, 220, .6)"]

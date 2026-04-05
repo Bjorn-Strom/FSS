@@ -17,6 +17,20 @@ let Pseudo () =
               Hover [ BackgroundColor.chartreuse
                       Color.black ] ]
 
+    let highlightStyle =
+        fss [ Label "Highlight"
+              BackgroundColor.yellow
+              Padding.value (px 4) ]
+
+    let containerStyle =
+        fss [ Label "Has Container"
+              Padding.value (px 16)
+              Border.value (px 2, Border.Style.Solid, Fss.Types.Color.Gray)
+              Has [Selector.Class highlightStyle] [
+                  BorderColor.orange
+                  Border.value (px 2, Border.Style.Solid, Fss.Types.Color.Orange)
+              ] ]
+
     let beforeAndAfter =
         let beforeAndAfter =
             [ Content.value ""
@@ -32,6 +46,13 @@ let Pseudo () =
     let styles =
         [ Html.div [ prop.className hoverStyle
                      prop.text "Hover me!" ]
+          Html.div [ prop.className containerStyle
+                     prop.children [
+                         Html.p [ prop.text "This container has a " ]
+                         Html.span [ prop.className highlightStyle
+                                     prop.text "highlighted" ]
+                         Html.p [ prop.text " child — so it gets an orange border via :has()" ]
+                     ] ]
           Html.div [ prop.className beforeAndAfter
                      prop.text " Some content surrounded by stuff " ] ]
 

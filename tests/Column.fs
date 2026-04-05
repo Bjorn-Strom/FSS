@@ -3,6 +3,7 @@ namespace FSSTests
 open Fet
 open Utils
 open Fss
+open Fss.Types
 
 module ColumnTests =
     let tests =
@@ -288,4 +289,29 @@ module ColumnTests =
                     "Column count revert"
                     [ColumnCount.revert]
                     "{column-count:revert;}"
+                // ColumnRule shorthand
+                testCase
+                    "ColumnRule shorthand all"
+                    [ ColumnRule.value(px 1, Column.RuleStyle.Solid, Fss.Types.Color.Red) ]
+                    "{column-rule:1px solid red;}"
+                testCase
+                    "ColumnRule shorthand width only"
+                    [ ColumnRule.value(width = Column.RuleWidth.Thin) ]
+                    "{column-rule:thin;}"
+                testCase
+                    "ColumnRule shorthand style only"
+                    [ ColumnRule.value(style = Column.RuleStyle.Dashed) ]
+                    "{column-rule:dashed;}"
+                testCase
+                    "ColumnRule shorthand color only"
+                    [ ColumnRule.value(color = Fss.Types.Color.Blue) ]
+                    "{column-rule:blue;}"
+                testCase
+                    "ColumnRule shorthand width and style"
+                    [ ColumnRule.value(width = px 2, style = Column.RuleStyle.Dotted) ]
+                    "{column-rule:2px dotted;}"
+                testCase
+                    "ColumnRule shorthand none"
+                    [ ColumnRule.none ]
+                    "{column-rule:none;}"
             ]

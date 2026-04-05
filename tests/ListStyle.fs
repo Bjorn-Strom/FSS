@@ -3,6 +3,7 @@
 open Fet
 open Utils
 open Fss
+open Fss.Types
 
 module ListStyleTests =
     let tests =
@@ -132,4 +133,21 @@ module ListStyleTests =
                     "List style type revert"
                     [ ListStyleType.revert ]
                     "{list-style-type:revert;}"
+                // Shorthand
+                testCase
+                    "ListStyle shorthand all"
+                    [ ListStyle.value(type' = ListStyle.Type.Disc, position = ListStyle.Position.Inside, image = Image.Url "icon.png") ]
+                    "{list-style:disc inside url(icon.png);}"
+                testCase
+                    "ListStyle shorthand type only"
+                    [ ListStyle.value(type' = ListStyle.Type.Square) ]
+                    "{list-style:square;}"
+                testCase
+                    "ListStyle shorthand position only"
+                    [ ListStyle.value(position = ListStyle.Position.Outside) ]
+                    "{list-style:outside;}"
+                testCase
+                    "ListStyle shorthand type and position"
+                    [ ListStyle.value(type' = ListStyle.Type.Circle, position = ListStyle.Position.Inside) ]
+                    "{list-style:circle inside;}"
             ]

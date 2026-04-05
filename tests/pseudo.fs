@@ -13,135 +13,155 @@ module PseudoTests =
                 testEqual
                     "Active"
                     actual
-                    $".{classname}:active{{color:red;}}"
+                    (sprintf ".%s{&:active{color:red;}}" classname)
                 let classname, actual = createFss [ AnyLink styles ]
                 testEqual
                     "AnyLink"
                     actual
-                    $".{classname}:any-link{{color:red;}}"
+                    (sprintf ".%s{&:any-link{color:red;}}" classname)
                 let classname, actual = createFss [ Blank styles ]
                 testEqual
                     "Blank"
                     actual
-                    $".{classname}:blank{{color:red;}}"
+                    (sprintf ".%s{&:blank{color:red;}}" classname)
                 let classname, actual = createFss [ Checked styles ]
                 testEqual
                     "Checked"
                     actual
-                    $".{classname}:checked{{color:red;}}"
+                    (sprintf ".%s{&:checked{color:red;}}" classname)
                 let classname, actual = createFss [ Current styles ]
                 testEqual
                     "Current"
                     actual
-                    $".{classname}:current{{color:red;}}"
+                    (sprintf ".%s{&:current{color:red;}}" classname)
                 let classname, actual = createFss [ Disabled styles ]
                 testEqual
                     "Disabled"
                     actual
-                    $".{classname}:disabled{{color:red;}}"
+                    (sprintf ".%s{&:disabled{color:red;}}" classname)
                 let classname, actual = createFss [ Empty styles ]
                 testEqual
                     "Empty"
                     actual
-                    $".{classname}:empty{{color:red;}}"
+                    (sprintf ".%s{&:empty{color:red;}}" classname)
                 let classname, actual = createFss [ Enabled styles ]
                 testEqual
                     "Enabled"
                     actual
-                    $".{classname}:enabled{{color:red;}}"
+                    (sprintf ".%s{&:enabled{color:red;}}" classname)
                 let classname, actual = createFss [ FirstOfType styles ]
                 testEqual
                     "FirstOfType"
                     actual
-                    $".{classname}:first-of-type{{color:red;}}"
+                    (sprintf ".%s{&:first-of-type{color:red;}}" classname)
                 let classname, actual = createFss [ Focus styles ]
                 testEqual
                     "Focus"
                     actual
-                    $".{classname}:focus{{color:red;}}"
+                    (sprintf ".%s{&:focus{color:red;}}" classname)
                 let classname, actual = createFss [ FocusVisible styles ]
                 testEqual
                     "FocusVisible"
                     actual
-                    $".{classname}:focus-visible{{color:red;}}"
+                    (sprintf ".%s{&:focus-visible{color:red;}}" classname)
                 let classname, actual = createFss [ FocusWithin styles ]
                 testEqual
                     "FocusWithin"
                     actual
-                    $".{classname}:focus-within{{color:red;}}"
+                    (sprintf ".%s{&:focus-within{color:red;}}" classname)
                 let classname, actual = createFss [ Future styles ]
                 testEqual
                     "Future"
                     actual
-                    $".{classname}:future{{color:red;}}"
+                    (sprintf ".%s{&:future{color:red;}}" classname)
                 let classname, actual = createFss [ Hover styles ]
                 testEqual
                     "Hover"
                     actual
-                    $".{classname}:hover{{color:red;}}"
+                    (sprintf ".%s{&:hover{color:red;}}" classname)
                 let classname, actual = createFss [ Future styles ]
                 testEqual
                     "Future"
                     actual
-                    $".{classname}:future{{color:red;}}"
+                    (sprintf ".%s{&:future{color:red;}}" classname)
                 let classname, actual = createFss [ After styles ]
                 testEqual
                     "After"
                     actual
-                    $".{classname}::after{{color:red;}}"
+                    (sprintf ".%s{&::after{color:red;}}" classname)
                 let classname, actual = createFss [ Before styles ]
                 testEqual
                     "Before"
                     actual
-                    $".{classname}::before{{color:red;}}"
+                    (sprintf ".%s{&::before{color:red;}}" classname)
                 let classname, actual = createFss [ FirstLetter styles ]
                 testEqual
                     "FirstLetter"
                     actual
-                    $".{classname}::first-letter{{color:red;}}"
+                    (sprintf ".%s{&::first-letter{color:red;}}" classname)
                 let classname, actual = createFss [ FirstLine styles ]
                 testEqual
                     "FirstLine"
                     actual
-                    $".{classname}::first-line{{color:red;}}"
+                    (sprintf ".%s{&::first-line{color:red;}}" classname)
                 let classname, actual = createFss [ Selection styles ]
                 testEqual
                     "Selection"
                     actual
-                    $".{classname}::selection{{color:red;}}"
+                    (sprintf ".%s{&::selection{color:red;}}" classname)
                 let classname, actual = createFss [ Marker styles ]
                 testEqual
                     "Marker"
                     actual
-                    $".{classname}::marker{{color:red;}}"
+                    (sprintf ".%s{&::marker{color:red;}}" classname)
                 let classname, actual = createFss [ Lang("en") styles ]
                 testEqual
                     "Lang en"
                     actual
-                    $".{classname}:lang(en){{color:red;}}"
+                    (sprintf ".%s{&:lang(en){color:red;}}" classname)
                 let classname, actual = createFss [ NthChild "4" styles ]
                 testEqual
                     "Nth child 4"
                     actual
-                    $".{classname}:nth-child(4){{color:red;}}"
+                    (sprintf ".%s{&:nth-child(4){color:red;}}" classname)
                 let classname, actual = createFss [ NthLastChild "4" styles ]
                 testEqual
                     "Nth last child 4"
                     actual
-                    $".{classname}:nth-last-child(4){{color:red;}}"
+                    (sprintf ".%s{&:nth-last-child(4){color:red;}}" classname)
                 let classname, actual = createFss [ NthOfType "4" styles ]
                 testEqual
                     "Nth of type 4"
                     actual
-                    $".{classname}:nth-of-type(4){{color:red;}}"
+                    (sprintf ".%s{&:nth-of-type(4){color:red;}}" classname)
                 let classname, actual = createFss [ NthLastOfType "4" styles ]
                 testEqual
                     "Nth last of type 4"
                     actual
-                    $".{classname}:nth-last-of-type(4){{color:red;}}"
+                    (sprintf ".%s{&:nth-last-of-type(4){color:red;}}" classname)
                 let classname, actual = createFss [ Placeholder styles ]
                 testEqual
                     "Placeholder"
                     actual
-                    $".{classname}::placeholder{{color:red;}}"
+                    (sprintf ".%s{&::placeholder{color:red;}}" classname)
+                let classname, actual = createFss [ Scoped styles ]
+                testEqual
+                    "Scoped"
+                    actual
+                    (sprintf ".%s{&:scope{color:red;}}" classname)
+                let classname, actual = createFss [ Has [Selector.Class "foo"] styles ]
+                testEqual
+                    "Has"
+                    actual
+                    (sprintf ".%s{&:has(.foo){color:red;}}" classname)
+                let classname, actual = createFss [ Is [Selector.h1; Selector.h2; Selector.h3] styles ]
+                testEqual
+                    "Is"
+                    actual
+                    (sprintf ".%s{&:is(h1,h2,h3){color:red;}}" classname)
+                let classname, actual = createFss [ Where [Selector.Class "card"; Selector.Class "panel"] styles ]
+                testEqual
+                    "Where"
+                    actual
+                    (sprintf ".%s{&:where(.card,.panel){color:red;}}" classname)
             ]

@@ -166,6 +166,10 @@ module AnimationTests =
                     [ AnimationDuration.revert ]
                     "{animation-duration:revert;}"
                 testCase
+                    "Animation duration auto"
+                    [ AnimationDuration.auto ]
+                    "{animation-duration:auto;}"
+                testCase
                     "Animation timing-function value"
                     [ AnimationTimingFunction.value TimingFunction.Ease ]
                     "{animation-timing-function:ease;}"

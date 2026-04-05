@@ -20,6 +20,48 @@ let hoverStyle =
         ]
 ```
 <example/>
+### Selector pseudo-classes: `:has()`, `:is()`, `:where()`
+
+These pseudo-classes take a `Selector list` instead of a plain rule list. Use `Selector.Class`, `Selector.Id`, or tag shortcuts like `Selector.h1` to build the selector list:
+
+```fsharp
+// :has() - matches elements that have a descendant matching the selector
+fss [ Has [Selector.Class "active"] [
+        BorderColor.green
+    ]
+]
+
+// :is() - matches any of the given selectors (with normal specificity)
+fss [ Is [Selector.h1; Selector.h2; Selector.h3] [
+        Color.darkBlue
+    ]
+]
+
+// :where() - same as :is() but with zero specificity
+fss [ Where [Selector.Class "card"; Selector.Class "panel"] [
+        Padding.value (px 16)
+    ]
+]
+```
+
+You can also reference Fss-generated classnames with `Selector.Class`. Here the container gets an orange border because it contains a child with the `highlightStyle` class:
+
+```fsharp
+let highlightStyle =
+    fss [ BackgroundColor.yellow
+          Padding.value (px 4) ]
+
+let containerStyle =
+    fss [ Padding.value (px 16)
+          Border.value (px 2, Border.Style.Solid, Fss.Types.Color.Gray)
+          Has [Selector.Class highlightStyle] [
+              Border.value (px 2, Border.Style.Solid, Fss.Types.Color.Orange)
+          ]
+    ]
+```
+
+<example/>
+
 ## Pseudo-elements
 
 These work much in the same way as the pseudo classes. Example follows:

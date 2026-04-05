@@ -67,3 +67,53 @@ module BorderCss =
         ImageClasses.ImageClass(Property.BorderImageSource)
     /// Resets border
     let Border = BorderClasses.Border(Property.Border)
+    // Logical border-block properties
+    /// Shorthand for border-block-start and border-block-end
+    let BorderBlock = BorderClasses.Border(Property.BorderBlock)
+    /// Sets color for both block borders
+    let BorderBlockColor = BorderClasses.BorderColorParent(Property.BorderBlockColor)
+    /// Sets style for both block borders
+    let BorderBlockStyle = BorderClasses.BorderStyleParent(Property.BorderBlockStyle)
+    /// Sets width for both block borders
+    let BorderBlockWidth = BorderClasses.BorderWidthParent(Property.BorderBlockWidth)
+    /// Shorthand for border-block-start
+    let BorderBlockStart = BorderClasses.Border(Property.BorderBlockStart)
+    /// Sets color for block-start border
+    let BorderBlockStartColor = BorderClasses.BorderColorParent(Property.BorderBlockStartColor)
+    /// Sets style for block-start border
+    let BorderBlockStartStyle = BorderClasses.BorderStyleParent(Property.BorderBlockStartStyle)
+    /// Sets width for block-start border
+    let BorderBlockStartWidth = BorderClasses.BorderWidthParent(Property.BorderBlockStartWidth)
+    /// Shorthand for border-block-end
+    let BorderBlockEnd = BorderClasses.Border(Property.BorderBlockEnd)
+    /// Sets color for block-end border
+    let BorderBlockEndColor = BorderClasses.BorderColorParent(Property.BorderBlockEndColor)
+    /// Sets style for block-end border
+    let BorderBlockEndStyle = BorderClasses.BorderStyleParent(Property.BorderBlockEndStyle)
+    /// Sets width for block-end border
+    let BorderBlockEndWidth = BorderClasses.BorderWidthParent(Property.BorderBlockEndWidth)
+    // Logical border-inline properties
+    /// Shorthand for border-inline-start and border-inline-end
+    let BorderInline = BorderClasses.Border(Property.BorderInline)
+    /// Sets color for both inline borders
+    let BorderInlineColor = BorderClasses.BorderColorParent(Property.BorderInlineColor)
+    /// Sets style for both inline borders
+    let BorderInlineStyle = BorderClasses.BorderStyleParent(Property.BorderInlineStyle)
+    /// Sets width for both inline borders
+    let BorderInlineWidth = BorderClasses.BorderWidthParent(Property.BorderInlineWidth)
+    /// Shorthand for border-inline-start
+    let BorderInlineStart = BorderClasses.Border(Property.BorderInlineStart)
+    /// Sets color for inline-start border
+    let BorderInlineStartColor = BorderClasses.BorderColorParent(Property.BorderInlineStartColor)
+    /// Sets style for inline-start border
+    let BorderInlineStartStyle = BorderClasses.BorderStyleParent(Property.BorderInlineStartStyle)
+    /// Sets width for inline-start border
+    let BorderInlineStartWidth = BorderClasses.BorderWidthParent(Property.BorderInlineStartWidth)
+    /// Shorthand for border-inline-end
+    let BorderInlineEnd = BorderClasses.Border(Property.BorderInlineEnd)
+    /// Sets color for inline-end border
+    let BorderInlineEndColor = BorderClasses.BorderColorParent(Property.BorderInlineEndColor)
+    /// Sets style for inline-end border
+    let BorderInlineEndStyle = BorderClasses.BorderStyleParent(Property.BorderInlineEndStyle)
+    /// Sets width for inline-end border
+    let BorderInlineEndWidth = BorderClasses.BorderWidthParent(Property.BorderInlineEndWidth)

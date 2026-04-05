@@ -240,15 +240,15 @@ module Font =
                 | Anywhere -> "anywhere"
 
     type Synthesis =
-        | Weight
-        | Style
-        | SmallCaps
+        | SynthWeight
+        | SynthStyle
+        | SynthSmallCaps
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
-                | Weight -> "weight"
-                | Style -> "style"
-                | SmallCaps -> "small-caps"
+                | SynthWeight -> "weight"
+                | SynthStyle -> "style"
+                | SynthSmallCaps -> "small-caps"
 
     type VariantPosition =
         | Sub
@@ -258,6 +258,29 @@ module Font =
                 match this with
                 | Sub -> "sub"
                 | Super -> "super"
+
+    type Shorthand =
+        { Style: Style option
+          Weight: ICssValue option
+          Size: ILengthPercentage
+          LineHeight: ILengthPercentage option
+          Family: string }
+        interface ICssValue with
+            member this.StringifyCss() =
+                let styleString = stringifyOptionToCssString this.Style
+                let weightString =
+                    match this.Weight with
+                    | Some w -> w.StringifyCss()
+                    | None -> ""
+                let sizeString = lengthPercentageString this.Size
+                let lineHeightString =
+                    match this.LineHeight with
+                    | Some lh -> $"/{lengthPercentageString lh}"
+                    | None -> ""
+                let sizeLineHeight = $"{sizeString}{lineHeightString}"
+                [ styleString; weightString; sizeLineHeight; this.Family ]
+                |> List.filter (fun s -> s <> "")
+                |> String.concat " "
 
 [<RequireQualifiedAccess>]
 module FontClasses =
@@ -270,11 +293,11 @@ module FontClasses =
                 |> String.concat " "
             (property, String synthesis) |> Rule
         /// Bold typeface can be synthesized if needed
-        member this.weight = (property, Font.Weight) |> Rule
+        member this.weight = (property, Font.SynthWeight) |> Rule
         /// Italic typeface can be synthesized if needed
-        member this.style = (property, Font.Style) |> Rule
+        member this.style = (property, Font.SynthStyle) |> Rule
         /// Small caps typeface can be synthesized if needed
-        member this.smallCaps = (property, Font.SmallCaps) |> Rule
+        member this.smallCaps = (property, Font.SynthSmallCaps) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/font-language-override
     type FontLanguageOverride(property) =
@@ -446,3 +469,36 @@ module FontClasses =
         inherit CssRule(property)
         member this.sub = (property, Font.Sub) |> Rule
         member this.super = (property, Font.Super) |> Rule
+
+    type FontStyleValues() =
+        member _.Italic = Font.Italic
+        member _.Oblique = Font.Oblique
+
+    type FontWeightValues() =
+        member _.Bold = Font.Bold
+        member _.Lighter = Font.Lighter
+        member _.Bolder = Font.Bolder
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/font
+    type Font(property) =
+        inherit CssRule(property)
+        member _.Style = FontStyleValues()
+        member _.Weight = FontWeightValues()
+        member this.value(size: ILengthPercentage, family: string, ?style: Font.Style, ?weight: Font.Weight, ?lineHeight: ILengthPercentage) =
+            let shorthand: Font.Shorthand = {
+                Style = style
+                Weight = weight |> Option.map (fun w -> w :> ICssValue)
+                Size = size
+                LineHeight = lineHeight
+                Family = family
+            }
+            (property, shorthand) |> Rule
+        member this.value(size: ILengthPercentage, family: string, weight: int, ?style: Font.Style, ?lineHeight: ILengthPercentage) =
+            let shorthand: Font.Shorthand = {
+                Style = style
+                Weight = Some (Int weight :> ICssValue)
+                Size = size
+                LineHeight = lineHeight
+                Family = family
+            }
+            (property, shorthand) |> Rule

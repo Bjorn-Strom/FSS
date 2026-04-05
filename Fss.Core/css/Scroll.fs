@@ -36,3 +36,9 @@ module Scroll =
     let ScrollSnapAlign = ScrollClasses.ScrollSnapAlign(Property.ScrollSnapAlign)
     /// Specifies whether the scroll container is allowed to "pass over" possible snap positions.
     let ScrollSnapStop = ScrollClasses.ScrollSnapStop(Property.ScrollSnapStop)
+    /// Specifies the width of the scrollbar
+    let ScrollbarWidth = ScrollClasses.ScrollbarWidth(Property.ScrollbarWidth)
+    /// Specifies the color of the scrollbar thumb and track
+    let ScrollbarColor = ScrollClasses.ScrollbarColor(Property.ScrollbarColor)
+    /// Specifies the browser behavior when scroll hits boundary
+    let OverscrollBehavior = ScrollClasses.OverscrollBehaviorShorthand(Property.OverscrollBehavior)

@@ -14,10 +14,17 @@ type FssPage =
     | Combinators
     | AttributeSelectors
     | MediaQueries
+    | ContainerQueries
+    | CascadeLayers
+    | CssScope
+    | StartingStyle
+    | CustomProperty
+    | ScrollDrivenAnimations
     | GlobalStyles
     | Counters
     | Fonts
     | BackgroundImages
+    | Shorthands
     | Svg
     | Unknown
 
@@ -56,10 +63,17 @@ let allFssPages =
       Combinators
       AttributeSelectors
       MediaQueries
+      ContainerQueries
+      CascadeLayers
+      CssScope
+      StartingStyle
+      CustomProperty
+      ScrollDrivenAnimations
       GlobalStyles
       Counters
       Fonts
       BackgroundImages
+      Shorthands
       Svg
     ] |> List.map FssPage
 
@@ -99,10 +113,17 @@ let stringToFssPage =
     | "combinators" -> Some Combinators
     | "attributeSelectors" -> Some AttributeSelectors
     | "mediaQueries" -> Some MediaQueries
+    | "containerQueries" -> Some ContainerQueries
+    | "cascadeLayers" -> Some CascadeLayers
+    | "cssScope" -> Some CssScope
+    | "startingStyle" -> Some StartingStyle
+    | "customProperty" -> Some CustomProperty
+    | "scrollDrivenAnimations" -> Some ScrollDrivenAnimations
     | "globalStyles" -> Some GlobalStyles
     | "counters" -> Some Counters
     | "fonts" -> Some Fonts
     | "backgroundImages" -> Some BackgroundImages
+    | "shorthands" -> Some Shorthands
     | "svg" -> Some Svg
     | _ -> None
 
@@ -144,10 +165,17 @@ let fssPageToString =
     | Combinators -> "Combinators"
     | AttributeSelectors -> "AttributeSelectors"
     | MediaQueries -> "MediaQueries"
+    | ContainerQueries -> "ContainerQueries"
+    | CascadeLayers -> "CascadeLayers"
+    | CssScope -> "CssScope"
+    | StartingStyle -> "StartingStyle"
+    | CustomProperty -> "CustomProperty"
+    | ScrollDrivenAnimations -> "ScrollDrivenAnimations"
     | GlobalStyles -> "GlobalStyles"
     | Counters -> "Counters"
     | Fonts -> "Fonts"
     | BackgroundImages -> "BackgroundImages"
+    | Shorthands -> "Shorthands"
     | Svg -> "Svg"
     | _ -> "Unknown"
 
@@ -182,10 +210,17 @@ let fssPageToPrettyString =
     | Combinators -> "Combinators"
     | AttributeSelectors -> "Attribute selectors"
     | MediaQueries -> "Media queries"
+    | ContainerQueries -> "Container queries"
+    | CascadeLayers -> "Cascade layers"
+    | CssScope -> "CSS Scope"
+    | StartingStyle -> "Starting style"
+    | CustomProperty -> "Custom properties"
+    | ScrollDrivenAnimations -> "Scroll-driven animations"
     | GlobalStyles -> "Global styles"
     | Counters -> "Counters"
     | Fonts -> "Fonts"
     | BackgroundImages -> "Background images"
+    | Shorthands -> "Shorthands"
     | Svg -> "Svg"
     | _ -> "Unknown"
 

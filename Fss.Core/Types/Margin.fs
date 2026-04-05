@@ -10,3 +10,7 @@ module MarginClasses =
     type Margin(property) =
         inherit DirectionalLength(property)
         member this.auto = (property, Auto) |> Rule
+
+    type MarginLogical(property) =
+        inherit DirectionalLength(property)
+        member this.auto = (property, Auto) |> Rule

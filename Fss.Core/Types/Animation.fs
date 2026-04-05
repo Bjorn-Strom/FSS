@@ -106,6 +106,7 @@ module AnimationClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
     type AnimationTime(property) =
         inherit CssRuleWithValueFunctions<Time>(property, ",")
+        member this.auto = (property, Auto) |> Rule
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
     type AnimationDirection(property) =

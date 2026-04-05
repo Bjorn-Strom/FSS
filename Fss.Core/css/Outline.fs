@@ -3,7 +3,7 @@ namespace Fss
 open Fss.Types
 
 [<AutoOpen>]
-module Outline =
+module OutlineCss =
     /// Sets color of outline.
     let OutlineColor = OutlineClasses.OutlineColor(Property.OutlineColor)
     /// Sets width of outline.

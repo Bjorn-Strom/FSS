@@ -21,6 +21,10 @@ module DisplayTests =
                     [ Display.inlineGrid]
                     "{display:inline-grid;}"
                 testCase
+                    "Display inline-flex"
+                    [ Display.inlineFlex]
+                    "{display:inline-flex;}"
+                testCase
                     "Display block"
                     [ Display.block]
                     "{display:block;}"
@@ -100,4 +104,8 @@ module DisplayTests =
                     "Display revert"
                     [ Display.revert]
                     "{display:revert;}"
-            ]
+                testCase
+                    "Display contents"
+                    [ Display.contents]
+                    "{display:contents;}"
+        ]
