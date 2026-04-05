@@ -3,6 +3,7 @@
 open Fet
 open Utils
 open Fss
+open Fss.Types
 
 module TransitionTests =
     let tests =
@@ -176,4 +177,47 @@ module TransitionTests =
                     "Transition timing function revert"
                     [ TransitionTimingFunction.revert ]
                     "{transition-timing-function:revert;}"
+                // Shorthand
+                testCase
+                    "Transition shorthand all"
+                    [ Transition.value(transitionProperty = Property.Opacity, duration = sec 0.3, timingFunction = TimingFunction.Ease, delay = sec 0.1) ]
+                    "{transition:opacity 0.3s ease 0.1s;}"
+                testCase
+                    "Transition shorthand property and duration"
+                    [ Transition.value(transitionProperty = Property.BackgroundColor, duration = ms 500) ]
+                    "{transition:background-color 500ms;}"
+                testCase
+                    "Transition shorthand duration only"
+                    [ Transition.value(duration = sec 1) ]
+                    "{transition:1s;}"
+                testCase
+                    "Transition shorthand multi"
+                    [ Transition.value(
+                        [ Transition.create(transitionProperty = Property.Opacity, duration = sec 0.3)
+                          Transition.create(transitionProperty = Property.Transform, duration = sec 0.5, timingFunction = TimingFunction.EaseIn) ]) ]
+                    "{transition:opacity 0.3s, transform 0.5s ease-in;}"
+                testCase
+                    "Transition shorthand none"
+                    [ Transition.none ]
+                    "{transition:none;}"
+                testCase
+                    "TransitionBehavior normal"
+                    [ TransitionBehavior.normal ]
+                    "{transition-behavior:normal;}"
+                testCase
+                    "TransitionBehavior allow-discrete"
+                    [ TransitionBehavior.allowDiscrete ]
+                    "{transition-behavior:allow-discrete;}"
+                testCase
+                    "TransitionBehavior inherit"
+                    [ TransitionBehavior.inherit' ]
+                    "{transition-behavior:inherit;}"
+                testCase
+                    "TransitionBehavior initial"
+                    [ TransitionBehavior.initial ]
+                    "{transition-behavior:initial;}"
+                testCase
+                    "TransitionBehavior unset"
+                    [ TransitionBehavior.unset ]
+                    "{transition-behavior:unset;}"
             ]

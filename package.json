@@ -6,15 +6,17 @@
     "build": "dotnet fable ./Documentation -o ./public --run vite build",
     "preview": "npm run build && vite preview",
     "test": "dotnet fable ./tests -o ./public/tests --noCache --run node ./public/tests/Tests.js",
+    "validate": "dotnet fable ./tests -o ./public/tests --noCache --run node ./validate.mjs",
     "watch-test": "dotnet fable watch ./Tests -o ./public/tests --run nodemon ./public/tests/Tests.js",
     "clean": "rm -rf public/fss. public/tests public/*.js public/Pages public/*.map public/dist public/fable_modules",
     "publish-docs": "npm run clean && npm run build && gh-pages -d public/dist"
   },
   "homepage": "https://Bjorn-Strom.github.io/FSS",
   "devDependencies": {
-    "gh-pages": "^6.1.1",
-    "nodemon": "^3.1.0",
-    "vite": "^5.2.4"
+    "css-tree": "^3.2.1",
+    "gh-pages": "^6.3.0",
+    "nodemon": "^3.1.14",
+    "vite": "^8.0.3"
   },
   "dependencies": {
     "react": "^18.2.0",

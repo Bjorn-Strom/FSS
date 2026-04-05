@@ -3,7 +3,7 @@ namespace Fss
 open Fss.Types
 
 [<AutoOpen>]
-module Font =
+module FontCss =
     /// Specifies which missing typefaces can be synthesized by the browser.
     let FontSynthesis = FontClasses.FontSynthesis(Property.CssProperty.FontSynthesis)
     /// Controls the use of language-specific glyph
@@ -38,3 +38,5 @@ module Font =
     let FontVariantLigatures = FontClasses.FontVariantLigatures(Property.CssProperty.FontVariantLigatures)
     /// Specifies which missing typefaces can be synthesized by the browser.
     let FontVariantPosition = FontClasses.FontVariantPosition(Property.CssProperty.FontVariantPosition)
+    /// Shorthand for font style, weight, size, line-height, and family.
+    let Font = FontClasses.Font(Property.CssProperty.Font)

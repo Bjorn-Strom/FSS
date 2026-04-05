@@ -124,7 +124,7 @@ module Builder =
         <Project Sdk="Microsoft.NET.Sdk">
           <PropertyGroup>
             <OutputType>Library</OutputType>
-            <TargetFramework>net8.0</TargetFramework>
+            <TargetFramework>netstandard2.0</TargetFramework>
           </PropertyGroup>
 
             <ItemGroup>
@@ -162,7 +162,7 @@ module Builder =
         if verbose then
             printfn $"Outputting CSS files to: {options.CssOutputPath}"
         css_strings
-        |> List.iter (fun (module_name, css_string) -> 
+        |> List.iter (fun (module_name, css_string: string) ->
             if verbose then
                 printfn $"Outputting CSS file: {module_name}.css"
             File.WriteAllText(Path.Combine(options.CssOutputPath, $"{module_name}.css"), css_string)
@@ -184,7 +184,7 @@ module Builder =
         | :? System.IO.IOException as ex ->
             Error $"IO exception: {ex.Message}"
         | ex ->
-            Error $"An unexpected error has occured: {ex.Message}"
+            Error $"An unexpected error has occurred: {ex.Message}"
 
 
     let build (options: Options) =

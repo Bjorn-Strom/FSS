@@ -3,6 +3,7 @@
 open Fet
 open Utils
 open Fss
+open Fss.Types
 
 module TextTests =
     let tests =
@@ -277,7 +278,7 @@ module TextTests =
                     [TextDecorationSkip.revert]
                     "{text-decoration-skip:revert;}"
                 testCase
-                    "Text decoration skip unset"
+                    "Text decoration skip ink auto"
                     [TextDecorationSkipInk.auto]
                     "{text-decoration-skip-ink:auto;}"
                 testCase
@@ -1040,4 +1041,74 @@ module TextTests =
                     "HangingPunctuation unset"
                     [ HangingPunctuation.unset ]
                     "{hanging-punctuation:unset;}"
+                // TextWrap
+                testCase
+                    "TextWrap wrap"
+                    [ TextWrap.wrap ]
+                    "{text-wrap:wrap;}"
+                testCase
+                    "TextWrap nowrap"
+                    [ TextWrap.nowrap ]
+                    "{text-wrap:nowrap;}"
+                testCase
+                    "TextWrap balance"
+                    [ TextWrap.balance ]
+                    "{text-wrap:balance;}"
+                testCase
+                    "TextWrap pretty"
+                    [ TextWrap.pretty ]
+                    "{text-wrap:pretty;}"
+                testCase
+                    "TextWrap stable"
+                    [ TextWrap.stable ]
+                    "{text-wrap:stable;}"
+                testCase
+                    "TextWrap none"
+                    [ TextWrap.none ]
+                    "{text-wrap:none;}"
+                testCase
+                    "TextWrap inherit"
+                    [ TextWrap.inherit' ]
+                    "{text-wrap:inherit;}"
+                testCase
+                    "TextWrap initial"
+                    [ TextWrap.initial ]
+                    "{text-wrap:initial;}"
+                testCase
+                    "TextWrap unset"
+                    [ TextWrap.unset ]
+                    "{text-wrap:unset;}"
+                testCase
+                    "TextWrap revert"
+                    [ TextWrap.revert ]
+                    "{text-wrap:revert;}"
+                // TextDecoration shorthand
+                testCase
+                    "TextDecoration shorthand all"
+                    [ TextDecoration.value(line = Text.Underline, style = Text.DecorationStyle.Wavy, color = Fss.Types.Color.Red) ]
+                    "{text-decoration:underline wavy red;}"
+                testCase
+                    "TextDecoration shorthand line only"
+                    [ TextDecoration.value(line = Text.Underline) ]
+                    "{text-decoration:underline;}"
+                testCase
+                    "TextDecoration shorthand style only"
+                    [ TextDecoration.value(style = Text.DecorationStyle.Dashed) ]
+                    "{text-decoration:dashed;}"
+                testCase
+                    "TextDecoration shorthand color only"
+                    [ TextDecoration.value(color = Fss.Types.Color.Blue) ]
+                    "{text-decoration:blue;}"
+                testCase
+                    "TextDecoration shorthand with thickness"
+                    [ TextDecoration.value(line = Text.Underline, thickness = px 2) ]
+                    "{text-decoration:underline 2px;}"
+                testCase
+                    "TextDecoration shorthand with from-font"
+                    [ TextDecoration.value(line = Text.LineThrough, thickness = Text.FromFont) ]
+                    "{text-decoration:line-through from-font;}"
+                testCase
+                    "TextDecoration shorthand line and style"
+                    [ TextDecoration.value(line = Text.Overline, style = Text.DecorationStyle.Double) ]
+                    "{text-decoration:overline double;}"
             ]

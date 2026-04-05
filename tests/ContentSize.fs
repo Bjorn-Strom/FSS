@@ -168,4 +168,107 @@ module ContentSizeTests =
                     "MinHeight revert"
                     [ MinHeight.revert ]
                     "{min-height:revert;}"
+                // Logical size properties
+                testCase
+                    "InlineSize px"
+                    [ InlineSize.value (px 200) ]
+                    "{inline-size:200px;}"
+                testCase
+                    "InlineSize auto"
+                    [ InlineSize.auto ]
+                    "{inline-size:auto;}"
+                testCase
+                    "InlineSize max-content"
+                    [ InlineSize.maxContent ]
+                    "{inline-size:max-content;}"
+                testCase
+                    "InlineSize min-content"
+                    [ InlineSize.minContent ]
+                    "{inline-size:min-content;}"
+                testCase
+                    "InlineSize inherit"
+                    [ InlineSize.inherit' ]
+                    "{inline-size:inherit;}"
+                testCase
+                    "BlockSize px"
+                    [ BlockSize.value (px 100) ]
+                    "{block-size:100px;}"
+                testCase
+                    "BlockSize auto"
+                    [ BlockSize.auto ]
+                    "{block-size:auto;}"
+                testCase
+                    "BlockSize pct"
+                    [ BlockSize.value (pct 50) ]
+                    "{block-size:50%;}"
+                testCase
+                    "BlockSize inherit"
+                    [ BlockSize.inherit' ]
+                    "{block-size:inherit;}"
+                testCase
+                    "MinInlineSize px"
+                    [ MinInlineSize.value (px 100) ]
+                    "{min-inline-size:100px;}"
+                testCase
+                    "MinBlockSize px"
+                    [ MinBlockSize.value (px 50) ]
+                    "{min-block-size:50px;}"
+                testCase
+                    "MaxInlineSize px"
+                    [ MaxInlineSize.value (px 500) ]
+                    "{max-inline-size:500px;}"
+                testCase
+                    "MaxBlockSize px"
+                    [ MaxBlockSize.value (px 300) ]
+                    "{max-block-size:300px;}"
+                // Dynamic/Small/Large viewport units
+                testCase
+                    "Height dvh"
+                    [ Height.value (dvh 100) ]
+                    "{height:100dvh;}"
+                testCase
+                    "Width dvw"
+                    [ Width.value (dvw 100) ]
+                    "{width:100dvw;}"
+                testCase
+                    "Height svh"
+                    [ Height.value (svh 100) ]
+                    "{height:100svh;}"
+                testCase
+                    "Width svw"
+                    [ Width.value (svw 100) ]
+                    "{width:100svw;}"
+                testCase
+                    "Height lvh"
+                    [ Height.value (lvh 100) ]
+                    "{height:100lvh;}"
+                testCase
+                    "Width lvw"
+                    [ Width.value (lvw 100) ]
+                    "{width:100lvw;}"
+                testCase
+                    "MinHeight dvh"
+                    [ MinHeight.value (dvh 50) ]
+                    "{min-height:50dvh;}"
+                testCase
+                    "MaxWidth svw"
+                    [ MaxWidth.value (svw 80) ]
+                    "{max-width:80svw;}"
+                // Container query units
+                testCase
+                    "Width cqw"
+                    [ Width.value (cqw 50) ]
+                    "{width:50cqw;}"
+                testCase
+                    "Height cqh"
+                    [ Height.value (cqh 100) ]
+                    "{height:100cqh;}"
+                testCase
+                    "Width cqi"
+                    [ Width.value (cqi 75) ]
+                    "{width:75cqi;}"
+                testCase
+                    "Height cqb"
+                    [ Height.value (cqb 50) ]
+                    "{height:50cqb;}"
             ]

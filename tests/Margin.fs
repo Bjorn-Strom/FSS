@@ -280,4 +280,28 @@ module MarginTests =
                     "Margin block end unset"
                     [ MarginBlockEnd.unset ]
                     "{margin-block-end:unset;}"
+                testCase
+                    "Margin inline px"
+                    [ MarginInline.value (px 10)]
+                    "{margin-inline:10px;}"
+                testCase
+                    "Margin inline auto"
+                    [ MarginInline.auto ]
+                    "{margin-inline:auto;}"
+                testCase
+                    "Margin inline two values"
+                    [ MarginInline.value (px 10, px 20)]
+                    "{margin-inline:10px 20px;}"
+                testCase
+                    "Margin block px"
+                    [ MarginBlock.value (px 10)]
+                    "{margin-block:10px;}"
+                testCase
+                    "Margin block auto"
+                    [ MarginBlock.auto ]
+                    "{margin-block:auto;}"
+                testCase
+                    "Margin block two values"
+                    [ MarginBlock.value (px 10, px 20)]
+                    "{margin-block:10px 20px;}"
             ]

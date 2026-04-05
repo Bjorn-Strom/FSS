@@ -18,7 +18,7 @@ module MediaCss =
         static member Not device = Media.Not device
         static member Only device = Media.Only device
         // Pointer
-        static member Course = Media.Course
+        static member Coarse = Media.Coarse
         static member Fine = Media.Fine
         static member None = Media.None
         // ColorGamut

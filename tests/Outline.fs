@@ -3,6 +3,7 @@ namespace FSSTests
 open Fet
 open Utils
 open Fss
+open Fss.Types
 
 module OutlineTests =
     let tests =
@@ -168,4 +169,41 @@ module OutlineTests =
                     "Outline Color Value"
                     [OutlineColor.value (rgb 1 2 3)]
                     "{outline-color:rgb(1,2,3);}"
+                // Shorthand
+                testCase
+                    "Outline shorthand all"
+                    [ Outline.value(px 2, Outline.Style.Solid, Fss.Types.Color.Green) ]
+                    "{outline:2px solid green;}"
+                testCase
+                    "Outline shorthand width only"
+                    [ Outline.value(width = Outline.Width.Thin) ]
+                    "{outline:thin;}"
+                testCase
+                    "Outline shorthand width px"
+                    [ Outline.value(width = px 3) ]
+                    "{outline:3px;}"
+                testCase
+                    "Outline shorthand style only"
+                    [ Outline.value(style = Outline.Style.Dashed) ]
+                    "{outline:dashed;}"
+                testCase
+                    "Outline shorthand color only"
+                    [ Outline.value(color = Fss.Types.Color.Red) ]
+                    "{outline:red;}"
+                testCase
+                    "Outline shorthand width and style"
+                    [ Outline.value(width = Outline.Width.Thin, style = Outline.Style.Dotted) ]
+                    "{outline:thin dotted;}"
+                testCase
+                    "Outline shorthand width and color"
+                    [ Outline.value(width = Outline.Width.Thin, color = Fss.Types.Color.Blue) ]
+                    "{outline:thin blue;}"
+                testCase
+                    "Outline shorthand style and color"
+                    [ Outline.value(style = Outline.Style.Solid, color = Fss.Types.Color.Red) ]
+                    "{outline:solid red;}"
+                testCase
+                    "Outline shorthand none"
+                    [ Outline.none ]
+                    "{outline:none;}"
             ]

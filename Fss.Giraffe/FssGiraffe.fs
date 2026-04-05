@@ -1,19 +1,14 @@
 ﻿namespace Fss
 
 open Fss
-open System.Collections.Generic;
+open System.Collections.Concurrent
 open Giraffe.ViewEngine
 
 [<AutoOpen>]
 module Giraffe =
-    let styleCache = Dictionary<string, XmlNode>()
+    let private styleCache = ConcurrentDictionary<string, XmlNode>()
     let private createStyleNode className (css: string) =
-        if styleCache.ContainsKey className then
-            styleCache[className]
-        else
-            let newNode = style [ _type "text/css" ] [ rawText css ]
-            styleCache.Add (className, newNode)
-            newNode
+        styleCache.GetOrAdd(className, fun _ -> style [ _type "text/css" ] [ rawText css ])
 
     /// Creates Css node and returns the classname and xml node
     let fss (properties: Fss.Types.Rule list): string * XmlNode =
@@ -63,7 +58,7 @@ module Giraffe =
         
         fontName, createStyleNode fontName fontStyles
 
-    /// Injects font face into dom and returns the font name
+    /// Creates font face node and returns the font name and xml node
     let fontFace name (properties: Fss.Types.FontFaceRule list): string * XmlNode =
         let fontName, fontStyles =
             properties
@@ -74,7 +69,7 @@ module Giraffe =
     let private processAnimationRules (rules: string) =
         $"@keyframes {rules}"
 
-    /// Creates keyframes node and returns the counter name
+    /// Creates keyframes node and returns the animation name and xml node
     let keyframes (properties: Keyframes list): string * XmlNode =
         let animationName, animationStyles =
             properties

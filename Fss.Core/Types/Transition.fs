@@ -3,9 +3,50 @@ namespace Fss
 namespace Fss.Types
 
 [<RequireQualifiedAccess>]
+module Transition =
+    type Shorthand =
+        { Property: Property.CssProperty option
+          Duration: Time option
+          TimingFunction: TimingFunction.Timing option
+          Delay: Time option }
+        interface ICssValue with
+            member this.StringifyCss() =
+                [ stringifyOptionToCssString this.Property
+                  stringifyOptionToCssString this.Duration
+                  stringifyOptionToCssString this.TimingFunction
+                  stringifyOptionToCssString this.Delay ]
+                |> List.filter (fun s -> s <> "")
+                |> String.concat " "
+
+    type Behavior =
+        | AllowDiscrete
+        interface ICssValue with
+            member this.StringifyCss() = "allow-discrete"
+
+[<RequireQualifiedAccess>]
 module TransitionClasses =
     type TransitionClass(property) =
         inherit CssRule(property)
+        member this.value(?transitionProperty: Property.CssProperty, ?duration: Time, ?timingFunction: TimingFunction.Timing, ?delay: Time) =
+            let shorthand: Transition.Shorthand = {
+                Property = transitionProperty
+                Duration = duration
+                TimingFunction = timingFunction
+                Delay = delay
+            }
+            (property, shorthand) |> Rule
+        member this.create(?transitionProperty: Property.CssProperty, ?duration: Time, ?timingFunction: TimingFunction.Timing, ?delay: Time) : Transition.Shorthand =
+            { Property = transitionProperty
+              Duration = duration
+              TimingFunction = timingFunction
+              Delay = delay }
+        member this.value(transitions: Transition.Shorthand list) =
+            let value =
+                transitions
+                |> List.map (fun t -> (t :> ICssValue).StringifyCss())
+                |> String.concat ", "
+            (property, String value) |> Rule
+        member this.none = (property, None') |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
     type TransitionDelay(property) =
         inherit CssRule(property)
@@ -17,6 +58,10 @@ module TransitionClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
     type TransitionTimingFunction(property) =
         inherit AnimationClasses.AnimationTimingFunction(property)
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-behavior
+    type TransitionBehavior(property) =
+        inherit CssRuleWithNormal(property)
+        member this.allowDiscrete = (property, Transition.AllowDiscrete) |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property
     type TransitionProperty(property) =
         inherit CssRule(property)

@@ -3,7 +3,7 @@ namespace Fss
 open Fss.Types
 
 [<AutoOpen>]
-module Column =
+module ColumnCss =
     /// Sets gap width between element.
     let ColumnGap = ColumnClasses.ColumnGap(Property.ColumnGap)
     /// Sets gap width between element.

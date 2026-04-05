@@ -19,6 +19,7 @@ module Column =
                 | Thin -> "thin"
                 | Medium -> "medium"
                 | Thick -> "thick"
+        interface ILengthPercentage
 
     type RuleStyle =
         | Hidden
@@ -42,6 +43,31 @@ module Column =
                 | Ridge -> "ridge"
                 | Inset -> "inset"
                 | Outset -> "outset"
+
+    type RuleShorthand =
+        { Width: ILengthPercentage option
+          Style: RuleStyle option
+          Color: Color option }
+        interface ICssValue with
+            member this.StringifyCss() =
+                let widthString =
+                    match this.Width with
+                    | Some width ->
+                        match width with
+                        | :? RuleWidth as w -> (w :> ICssValue).StringifyCss()
+                        | :? Percent as p -> stringifyICssValue p
+                        | :? Length as l -> stringifyICssValue l
+                        | _ -> ""
+                    | None -> ""
+                let styleString =
+                    match this.Style with
+                    | Some style -> (style :> ICssValue).StringifyCss()
+                    | None -> ""
+                let colorString =
+                    match this.Color with
+                    | Some color -> (color :> ICssValue).StringifyCss()
+                    | None -> ""
+                $"{widthString} {styleString} {colorString}".Replace("  ", " ").Trim()
 
     type Fill =
         | Balance
@@ -68,6 +94,10 @@ module ColumnClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule
     type ColumnRule(property) =
         inherit CssRule(property)
+        member this.value(?width: ILengthPercentage, ?style: Column.RuleStyle, ?color: Color) =
+            let shorthand: Column.RuleShorthand = { Color = color; Style = style; Width = width }
+            (property, shorthand) |> Rule
+        member this.none = (property, None') |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
     type ColumnRuleWidth(property) =
         inherit CssRuleWithLength(property)

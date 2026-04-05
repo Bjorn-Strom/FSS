@@ -10,15 +10,15 @@ module BorderTests =
             [
                 testCase
                     "Border shorthand: all values"
-                    [ Border.value(Fss.Types.Border.Width.Medium, Fss.Types.Border.Style.Dashed, Fss.Types.Color.Green) ]
+                    [ Border.value(Border.Width.Medium, Border.Style.Dashed, Fss.Types.Color.Green) ]
                     "{border:medium dashed green;}"
                 testCase
                     "Border shorthand: all values, with pixel width"
-                    [ Border.value(px 1, Fss.Types.Border.Style.Solid, hex "#fff") ]
+                    [ Border.value(px 1, Border.Style.Solid, hex "#fff") ]
                     "{border:1px solid #fff;}"
                 testCase
                     "Border shorthand: only width"
-                    [ Border.value(width = Fss.Types.Border.Width.Thin) ]
+                    [ Border.value(width = Border.Width.Thin) ]
                     "{border:thin;}"
                 testCase
                     "Border shorthand: only width with percent"
@@ -26,7 +26,7 @@ module BorderTests =
                     "{border:10%;}"
                 testCase
                     "Border shorthand: only style"
-                    [ Border.value(style = Fss.Types.Border.Style.Dotted) ]
+                    [ Border.value(style = Border.Style.Dotted) ]
                     "{border:dotted;}"
                 testCase
                     "Border shorthand: only color"
@@ -34,15 +34,15 @@ module BorderTests =
                     "{border:aqua;}"
                 testCase
                     "Border shorthand: width and style"
-                    [ Border.value(width = Fss.Types.Border.Width.Thin, style = Fss.Types.Border.Style.Dotted) ]
+                    [ Border.value(width = Border.Width.Thin, style = Border.Style.Dotted) ]
                     "{border:thin dotted;}"
                 testCase
                     "Border shorthand: width and color"
-                    [ Border.value(width = Fss.Types.Border.Width.Thin, color = Fss.Types.Color.Aqua) ]
+                    [ Border.value(width = Border.Width.Thin, color = Fss.Types.Color.Aqua) ]
                     "{border:thin aqua;}"
                 testCase
                     "Border shorthand: style and color"
-                    [ Border.value(style = Fss.Types.Border.Style.Dotted, color = Fss.Types.Color.Aqua) ]
+                    [ Border.value(style = Border.Style.Dotted, color = Fss.Types.Color.Aqua) ]
                     "{border:dotted aqua;}"
                 testCase
                     "Border initial"
@@ -102,7 +102,7 @@ module BorderTests =
                     "{border-style:outset;}"
                 testCase
                     "Border-style multiple"
-                    [ BorderStyle.value(Fss.Types.Border.Style.Inset, Fss.Types.Border.Style.Outset, Fss.Types.Border.Style.Ridge, Fss.Types.Border.Style.Groove) ]
+                    [ BorderStyle.value(Border.Style.Inset, Border.Style.Outset, Border.Style.Ridge, Border.Style.Groove) ]
                     "{border-style:inset outset ridge groove;}"
                 testCase
                     "Border-style none"
@@ -828,4 +828,126 @@ module BorderTests =
                     "Border image outset revert"
                     [ BorderImageOutset.revert ]
                     "{border-image-outset:revert;}"
+                // Logical border-block properties
+                testCase
+                    "BorderBlock shorthand"
+                    [ BorderBlock.value(style = Border.Style.Solid) ]
+                    "{border-block:solid;}"
+                testCase
+                    "BorderBlock width style color"
+                    [ BorderBlock.value(width = px 2, style = Border.Style.Dashed, color = Fss.Types.Color.Red) ]
+                    "{border-block:2px dashed red;}"
+                testCase
+                    "BorderBlock inherit"
+                    [ BorderBlock.inherit' ]
+                    "{border-block:inherit;}"
+                testCase
+                    "BorderBlockColor red"
+                    [ BorderBlockColor.red ]
+                    "{border-block-color:red;}"
+                testCase
+                    "BorderBlockColor inherit"
+                    [ BorderBlockColor.inherit' ]
+                    "{border-block-color:inherit;}"
+                testCase
+                    "BorderBlockStyle solid"
+                    [ BorderBlockStyle.solid ]
+                    "{border-block-style:solid;}"
+                testCase
+                    "BorderBlockStyle dashed"
+                    [ BorderBlockStyle.dashed ]
+                    "{border-block-style:dashed;}"
+                testCase
+                    "BorderBlockWidth thin"
+                    [ BorderBlockWidth.thin ]
+                    "{border-block-width:thin;}"
+                testCase
+                    "BorderBlockWidth px"
+                    [ BorderBlockWidth.value (px 3) ]
+                    "{border-block-width:3px;}"
+                testCase
+                    "BorderBlockStart shorthand"
+                    [ BorderBlockStart.value(width = px 1, style = Border.Style.Solid) ]
+                    "{border-block-start:1px solid;}"
+                testCase
+                    "BorderBlockStartColor blue"
+                    [ BorderBlockStartColor.blue ]
+                    "{border-block-start-color:blue;}"
+                testCase
+                    "BorderBlockStartStyle dotted"
+                    [ BorderBlockStartStyle.dotted ]
+                    "{border-block-start-style:dotted;}"
+                testCase
+                    "BorderBlockStartWidth thick"
+                    [ BorderBlockStartWidth.thick ]
+                    "{border-block-start-width:thick;}"
+                testCase
+                    "BorderBlockEnd shorthand"
+                    [ BorderBlockEnd.value(style = Border.Style.Double) ]
+                    "{border-block-end:double;}"
+                testCase
+                    "BorderBlockEndColor green"
+                    [ BorderBlockEndColor.green ]
+                    "{border-block-end-color:green;}"
+                testCase
+                    "BorderBlockEndStyle groove"
+                    [ BorderBlockEndStyle.groove ]
+                    "{border-block-end-style:groove;}"
+                testCase
+                    "BorderBlockEndWidth medium"
+                    [ BorderBlockEndWidth.medium ]
+                    "{border-block-end-width:medium;}"
+                // Logical border-inline properties
+                testCase
+                    "BorderInline shorthand"
+                    [ BorderInline.value(width = px 1, style = Border.Style.Solid, color = Fss.Types.Color.Black) ]
+                    "{border-inline:1px solid black;}"
+                testCase
+                    "BorderInline inherit"
+                    [ BorderInline.inherit' ]
+                    "{border-inline:inherit;}"
+                testCase
+                    "BorderInlineColor hex"
+                    [ BorderInlineColor.hex "#ff0" ]
+                    "{border-inline-color:#ff0;}"
+                testCase
+                    "BorderInlineStyle solid"
+                    [ BorderInlineStyle.solid ]
+                    "{border-inline-style:solid;}"
+                testCase
+                    "BorderInlineWidth px"
+                    [ BorderInlineWidth.value (px 2) ]
+                    "{border-inline-width:2px;}"
+                testCase
+                    "BorderInlineStart shorthand"
+                    [ BorderInlineStart.value(width = px 3, style = Border.Style.Solid) ]
+                    "{border-inline-start:3px solid;}"
+                testCase
+                    "BorderInlineStartColor red"
+                    [ BorderInlineStartColor.red ]
+                    "{border-inline-start-color:red;}"
+                testCase
+                    "BorderInlineStartStyle dashed"
+                    [ BorderInlineStartStyle.dashed ]
+                    "{border-inline-start-style:dashed;}"
+                testCase
+                    "BorderInlineStartWidth thin"
+                    [ BorderInlineStartWidth.thin ]
+                    "{border-inline-start-width:thin;}"
+                testCase
+                    "BorderInlineEnd shorthand"
+                    [ BorderInlineEnd.value(style = Border.Style.Ridge) ]
+                    "{border-inline-end:ridge;}"
+                testCase
+                    "BorderInlineEndColor blue"
+                    [ BorderInlineEndColor.blue ]
+                    "{border-inline-end-color:blue;}"
+                testCase
+                    "BorderInlineEndStyle outset"
+                    [ BorderInlineEndStyle.outset ]
+                    "{border-inline-end-style:outset;}"
+                testCase
+                    "BorderInlineEndWidth px"
+                    [ BorderInlineEndWidth.value (px 4) ]
+                    "{border-inline-end-width:4px;}"
             ]

@@ -22,3 +22,7 @@ module Margin =
     let MarginBlockEnd = MarginClasses.MarginDirection(Property.MarginBlockEnd)
     /// Sets the margin area of all sides of an element
     let Margin = MarginClasses.Margin(Property.Margin)
+    /// Sets the inline start and end margins of an element
+    let MarginInline = MarginClasses.MarginLogical(Property.MarginInline)
+    /// Sets the block start and end margins of an element
+    let MarginBlock = MarginClasses.MarginLogical(Property.MarginBlock)

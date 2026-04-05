@@ -3,6 +3,7 @@
 open Fet
 open Utils
 open Fss
+open Fss.Types
 
 module FlexTests =
      let tests =
@@ -43,7 +44,7 @@ module FlexTests =
                 testCase
                     "Flex wrap no-wrap"
                     [ FlexWrap.noWrap]
-                    "{flex-wrap:no-wrap;}"
+                    "{flex-wrap:nowrap;}"
                 testCase
                     "Flex wrap wrap"
                     [ FlexWrap.wrap]
@@ -165,9 +166,9 @@ module FlexTests =
                     [ JustifyContent.spaceEvenly]
                     "{justify-content:space-evenly;}"
                 testCase
-                    "Justify content right"
-                    [ JustifyContent.right]
-                    "{justify-content:right;}"
+                    "Justify content stretch"
+                    [ JustifyContent.stretch]
+                    "{justify-content:stretch;}"
                 testCase
                     "Justify content safe"
                     [ JustifyContent.safe]
@@ -520,4 +521,29 @@ module FlexTests =
                     "FlexShrink unset"
                     [ FlexShrink.unset]
                     "{flex-shrink:unset;}"
+                // Flex shorthand
+                testCase
+                    "Flex shorthand all"
+                    [ Flex.value(grow = 1.0, shrink = 0.0, basis = px 200) ]
+                    "{flex:1 0 200px;}"
+                testCase
+                    "Flex shorthand grow only"
+                    [ Flex.value(grow = 2.0) ]
+                    "{flex:2;}"
+                testCase
+                    "Flex shorthand grow and basis"
+                    [ Flex.value(grow = 1.0, basis = pct 50) ]
+                    "{flex:1 50%;}"
+                testCase
+                    "Flex shorthand basis only"
+                    [ Flex.value(basis = px 100) ]
+                    "{flex:100px;}"
+                testCase
+                    "Flex shorthand auto"
+                    [ Flex.auto ]
+                    "{flex:auto;}"
+                testCase
+                    "Flex shorthand none"
+                    [ Flex.none ]
+                    "{flex:none;}"
             ]

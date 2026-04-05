@@ -822,4 +822,78 @@ module GridTests =
                     "Grid template areas revert"
                     [GridTemplateAreas.revert]
                     "{grid-template-areas:revert;}"
+                // Gap (modern, works in Grid and Flexbox)
+                testCase
+                    "Gap px"
+                    [Gap.value (px 10)]
+                    "{gap:10px;}"
+                testCase
+                    "Gap em"
+                    [Gap.value (em 1.)]
+                    "{gap:1em;}"
+                testCase
+                    "Gap pct"
+                    [Gap.value (pct 16)]
+                    "{gap:16%;}"
+                testCase
+                    "Gap two values"
+                    [Gap.value (px 20, px 10)]
+                    "{gap:20px 10px;}"
+                testCase
+                    "Gap two values mixed"
+                    [Gap.value (px 20, pct 50)]
+                    "{gap:20px 50%;}"
+                testCase
+                    "Gap normal"
+                    [Gap.normal]
+                    "{gap:normal;}"
+                testCase
+                    "Gap inherit"
+                    [Gap.inherit']
+                    "{gap:inherit;}"
+                testCase
+                    "Gap initial"
+                    [Gap.initial]
+                    "{gap:initial;}"
+                testCase
+                    "Gap unset"
+                    [Gap.unset]
+                    "{gap:unset;}"
+                testCase
+                    "Gap revert"
+                    [Gap.revert]
+                    "{gap:revert;}"
+                // RowGap
+                testCase
+                    "Row gap px"
+                    [RowGap.value (px 10)]
+                    "{row-gap:10px;}"
+                testCase
+                    "Row gap em"
+                    [RowGap.value (em 2.5)]
+                    "{row-gap:2.5em;}"
+                testCase
+                    "Row gap pct"
+                    [RowGap.value (pct 10)]
+                    "{row-gap:10%;}"
+                testCase
+                    "Row gap normal"
+                    [RowGap.normal]
+                    "{row-gap:normal;}"
+                testCase
+                    "Row gap inherit"
+                    [RowGap.inherit']
+                    "{row-gap:inherit;}"
+                testCase
+                    "Row gap initial"
+                    [RowGap.initial]
+                    "{row-gap:initial;}"
+                testCase
+                    "Row gap unset"
+                    [RowGap.unset]
+                    "{row-gap:unset;}"
+                testCase
+                    "Row gap revert"
+                    [RowGap.revert]
+                    "{row-gap:revert;}"
             ]

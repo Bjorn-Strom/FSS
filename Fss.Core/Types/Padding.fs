@@ -10,3 +10,6 @@ module PaddingClasses =
     type Padding(property) =
         inherit DirectionalLength(property)
         member this.auto = (property, Auto) |> Rule
+
+    type PaddingLogical(property) =
+        inherit DirectionalLength(property)

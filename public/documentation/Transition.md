@@ -1,8 +1,8 @@
 ## Transition
 
-The biggest difference here is that there is no transition shorthand.
+Transitions can be specified using individual properties or the shorthand.
 
-Apart from that transitions will work as you expect
+### Individual properties
 
 ```fsharp
 let colorTransition =
@@ -33,3 +33,40 @@ let sizeAndColor =
 ```
 
 <example/>
+
+### Shorthand
+
+The `Transition.value` shorthand accepts optional parameters for property, duration, timing function, and delay:
+
+```fsharp
+let shorthandTransition =
+    fss [ Label "Shorthand Transition"
+          BackgroundColor.red
+          Transition.value(transitionProperty = Property.BackgroundColor, duration = sec 0.3, timingFunction = TimingFunction.Ease)
+          Hover [ BackgroundColor.green ]
+        ]
+```
+
+For multiple transitions, use `Transition.create` to build a list:
+
+```fsharp
+let multiTransition =
+    fss [ Label "Multi Transition"
+          Opacity.value 1.0
+          BackgroundColor.red
+          Transition.value(
+              [ Transition.create(transitionProperty = Property.Opacity, duration = sec 0.3)
+                Transition.create(transitionProperty = Property.BackgroundColor, duration = sec 0.5, timingFunction = TimingFunction.EaseIn) ])
+          Hover [ Opacity.value 0.5
+                  BackgroundColor.green ]
+        ]
+```
+
+### TransitionBehavior
+
+`TransitionBehavior` controls whether transitions are allowed on discrete properties (like `display`):
+
+```fsharp
+fss [ TransitionBehavior.allowDiscrete ]
+fss [ TransitionBehavior.normal ]
+```

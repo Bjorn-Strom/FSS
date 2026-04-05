@@ -8,6 +8,7 @@ module Display =
         | Inline
         | InlineBlock
         | InlineGrid
+        | InlineFlex
         | Block
         | RunIn
         | Flex
@@ -22,12 +23,14 @@ module Display =
         | TableFooterGroup
         | TableRow
         | TableCaption
+        | Contents
         interface ICssValue with
-            member this.StringifyCss() = 
+            member this.StringifyCss() =
                 match this with
                 | Inline -> "inline"
                 | InlineBlock -> "inline-block"
                 | InlineGrid -> "inline-grid"
+                | InlineFlex -> "inline-flex"
                 | Block -> "block"
                 | RunIn -> "run-in"
                 | Flex -> "flex"
@@ -42,6 +45,7 @@ module Display =
                 | TableFooterGroup -> "table-footer-group"
                 | TableRow -> "table-row"
                 | TableCaption -> "table-caption"
+                | Contents -> "contents"
 
 [<RequireQualifiedAccess>]
 module DisplayClasses =
@@ -55,6 +59,8 @@ module DisplayClasses =
         member this.inlineBlock = (property, Display.InlineBlock) |> Rule
         /// Makes the element behaves like an inline element and lays out its content according to the grid model
         member this.inlineGrid = (property, Display.InlineGrid) |> Rule
+        /// Makes element behaves like an inline-level element and lays out its content according to the flexbox model.
+        member this.inlineFlex = (property, Display.InlineFlex) |> Rule
         /// Block elements start on a new line and takes up as much width as they can
         member this.block = (property, Display.Block) |> Rule
         /// TODO: Find out what this does
@@ -83,3 +89,5 @@ module DisplayClasses =
         member this.tableRow = (property, Display.TableRow) |> Rule
         /// Makes the element behave as a table <caption> element
         member this.tableCaption = (property, Display.TableCaption) |> Rule
+        /// ??
+        member this.contents = (property, Display.Contents) |> Rule

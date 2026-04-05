@@ -289,6 +289,22 @@ module BorderClasses =
 
         member this.auto = (property, Auto) |> Rule
 
+    type BorderStyleValues() =
+        member _.Hidden = Border.Style.Hidden
+        member _.Dotted = Border.Style.Dotted
+        member _.Dashed = Border.Style.Dashed
+        member _.Solid = Border.Style.Solid
+        member _.Double = Border.Style.Double
+        member _.Groove = Border.Style.Groove
+        member _.Ridge = Border.Style.Ridge
+        member _.Inset = Border.Style.Inset
+        member _.Outset = Border.Style.Outset
+
+    type BorderWidthValues() =
+        member _.Thin = Border.Width.Thin
+        member _.Medium = Border.Width.Medium
+        member _.Thick = Border.Width.Thick
+
     // https://developer.mozilla.org/en-US/docs/Web/CSS/border
     type Border(property) =
         inherit CssRule(property)
@@ -302,3 +318,5 @@ module BorderClasses =
             }
             (property, shorthand) |> Rule
         member this.none = (property, None') |> Rule
+        member _.Style = BorderStyleValues()
+        member _.Width = BorderWidthValues()

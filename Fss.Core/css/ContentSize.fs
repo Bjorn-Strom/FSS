@@ -22,3 +22,15 @@ module ContentSizeCss =
     let MaxWidth = ContentSizeClasses.ContentSize(Property.MaxWidth)
     /// Specifies an elements max-height
     let MaxHeight = ContentSizeClasses.ContentSize(Property.MaxHeight)
+    /// Specifies an elements logical width (inline-size)
+    let InlineSize = ContentSizeClasses.ContentSize(Property.InlineSize)
+    /// Specifies an elements logical height (block-size)
+    let BlockSize = ContentSizeClasses.ContentSize(Property.BlockSize)
+    /// Specifies an elements min logical width
+    let MinInlineSize = ContentSizeClasses.ContentSize(Property.MinInlineSize)
+    /// Specifies an elements min logical height
+    let MinBlockSize = ContentSizeClasses.ContentSize(Property.MinBlockSize)
+    /// Specifies an elements max logical width
+    let MaxInlineSize = ContentSizeClasses.ContentSize(Property.MaxInlineSize)
+    /// Specifies an elements max logical height
+    let MaxBlockSize = ContentSizeClasses.ContentSize(Property.MaxBlockSize)

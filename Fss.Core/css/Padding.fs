@@ -20,5 +20,9 @@ module Padding =
     let PaddingBlockStart = PaddingClasses.PaddingDirection(Property.PaddingBlockStart)
     /// Specifies the block end margin of an element
     let PaddingBlockEnd = PaddingClasses.PaddingDirection(Property.PaddingBlockEnd)
-    /// Sets the margin area of all sides of an element
+    /// Sets the padding area of all sides of an element
     let Padding = PaddingClasses.Padding(Property.Padding)
+    /// Sets the inline start and end paddings of an element
+    let PaddingInline = PaddingClasses.PaddingLogical(Property.PaddingInline)
+    /// Sets the block start and end paddings of an element
+    let PaddingBlock = PaddingClasses.PaddingLogical(Property.PaddingBlock)

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>A way to write staticly-safe CSS in Dotnet.</Description>
+    <Description>A way to write statically-safe CSS in Dotnet.</Description>
     <RepositoryUrl>https://github.com/Bjorn-Strom/Fss.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Bjorn-Strom/Fss</PackageProjectUrl>
     <PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit;fable;fable-library;fable-javascript;fable-dotnet</PackageTags>
     <Authors>Bjørn-Ivar Strøm</Authors>
-    <Version>2.11.0</Version>
+    <Version>3.0.0</Version>
     <PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <PackageReleaseNotes>Add zero length unit to more easily work with 0 length units.</PackageReleaseNotes>
+    <PackageReleaseNotes>3.0 - CSS nesting, selector shortcuts, @layer, @scope, @property, @starting-style, scroll-driven animations, container query units, :has/:is/:where pseudo-classes, light-dark(), margin/padding inline/block shorthands, scrollbar-color/width, transition-behavior, overscroll-behavior.</PackageReleaseNotes>
     <RootNamespace>Fss</RootNamespace>
     <PackageId>Fss-lib.Core</PackageId>
   </PropertyGroup>
@@ -52,6 +52,9 @@
     <Compile Include="Types\PointerEvents.fs" />
     <Compile Include="Types\Table.fs" />
     <Compile Include="Types\Caret.fs" />
+    <Compile Include="Types\Accent.fs" />
+    <Compile Include="Types\ColorScheme.fs" />
+    <Compile Include="Types\Contain.fs" />
     <Compile Include="Types\ClipPath.fs" />
     <Compile Include="Types\AspectRatio.fs" />
     <Compile Include="Types\Clear.fs" />
@@ -68,6 +71,12 @@
     <Compile Include="Types\Svg.fs" />
     <Compile Include="Types\FontFace.fs" />
     <Compile Include="Types\Font.fs" />
+    <Compile Include="Types\Container.fs" />
+    <Compile Include="Types\Layer.fs" />
+    <Compile Include="Types\Scope.fs" />
+    <Compile Include="Types\StartingStyle.fs" />
+    <Compile Include="Types\CustomProperty.fs" />
+    <Compile Include="Types\ScrollTimeline.fs" />
     <Compile Include="Types\Combinator.fs" />
     <Compile Include="css\Color.fs" />
     <Compile Include="css\Custom.fs" />
@@ -109,6 +118,7 @@
     <Compile Include="css\PseudoClass.fs" />
     <Compile Include="css\PseudoElement.fs" />
     <Compile Include="css\BoxShadow.fs" />
+    <Compile Include="css\Contain.fs" />
     <Compile Include="css\All.fs" />
     <Compile Include="css\Scroll.fs" />
     <Compile Include="css\WillChange.fs" />
@@ -116,6 +126,11 @@
     <Compile Include="css\Svg.fs" />
     <Compile Include="css\FontFace.fs" />
     <Compile Include="css\Font.fs" />
+    <Compile Include="css\Container.fs" />
+    <Compile Include="css\Layer.fs" />
+    <Compile Include="css\Scope.fs" />
+    <Compile Include="css\StartingStyle.fs" />
+    <Compile Include="css\ScrollTimeline.fs" />
     <Compile Include="css\Combinator.fs" />
     <Compile Include="css\Media.fs" />
     <Compile Include="css\Keyframes.fs" />
@@ -125,7 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
-    <Content Include="Types" PackagePath="fable\Types" />
-    <Content Include="css" PackagePath="fable\css" />
+    <Content Include="Types\*.fs" PackagePath="fable\Types" />
+    <Content Include="css\*.fs" PackagePath="fable\css" />
   </ItemGroup>
 </Project>

@@ -66,6 +66,24 @@ let attributeSelectors: JS.Promise<unit -> ReactElement> =
 let mediaQueries: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/MediaQueries.fs"
 
+let containerQueries: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/ContainerQueries.fs"
+
+let cascadeLayers: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/CascadeLayers.fs"
+
+let cssScope: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/CssScope.fs"
+
+let startingStyle: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/StartingStyle.fs"
+
+let customProperty: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/CustomProperty.fs"
+
+let scrollDrivenAnimations: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/ScrollDrivenAnimations.fs"
+
 let globalStyles: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/GlobalStyles.fs"
 
@@ -77,6 +95,9 @@ let fonts: JS.Promise<unit -> ReactElement> =
 
 let backgroundImages: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/BackgroundImages.fs"
+
+let shorthands: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Shorthands.fs"
 
 let svg: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Svg.fs"
 
@@ -110,7 +131,14 @@ let Suspense (component': JS.Promise<unit -> ReactElement>) =
 
 [<ReactComponent>]
 let MenuItem (page: Page) =
-    let _, dispatch = useStore()
+    let store, dispatch = useStore()
+    let currentUrl = Router.currentUrl()
+    let isActive =
+        match currentUrl with
+        | [ "page"; p ] -> pageToLinkString page = p
+        | [] -> page = FssPage Overview
+        | _ -> false
+
     Html.li [
         prop.fss [
             ListStyle.none
@@ -120,8 +148,17 @@ let MenuItem (page: Page) =
                 prop.fss [
                     TextDecoration.none
                     Color.inherit'
+                    Padding.value (px 3, px 8)
+                    BorderRadius.value (px 4)
+                    Display.inlineBlock
+                    TransitionProperty.backgroundColor
+                    TransitionDuration.value (ms 200.)
+                    if isActive then
+                        Color.value store.Theme.Accent
+                        FontWeight.value 600
+                        BackgroundColor.value store.Theme.CodeBackground
                     Hover [
-                        TextDecoration.revert
+                        BackgroundColor.value store.Theme.CodeBackground
                     ]
                 ]
                 prop.text (pageToPrettyString page)
@@ -133,18 +170,29 @@ let MenuItem (page: Page) =
 
 [<ReactComponent>]
 let MenuItems (title: string, pages: Page list) =
+     let store, _ = useStore()
      Html.li [
          prop.fss [
              PaddingTop.value (px 20)
              ListStyle.none
          ]
          prop.children [
-             Html.div title
+             Html.div [
+                 prop.fss [
+                     FontWeight.value 700
+                     FontSize.value (pct 75)
+                     LetterSpacing.value (px 1)
+                     TextTransform.uppercase
+                     Color.value store.Theme.MutedText
+                     PaddingBottom.value (px 6)
+                 ]
+                 prop.text title
+             ]
              Html.ul [
                  prop.fss [
                      PaddingLeft.value (px 10)
                      FontSize.value (pct 80)
-                     LineHeight.value (pct 150)
+                     LineHeight.value (pct 180)
                  ]
                  prop.children (List.map MenuItem pages)
              ]
@@ -230,7 +278,7 @@ let Menu () =
                          prop.fss [
                              AlignSelf.center
 
-                             ! (Selector.Tag Html.A) [
+                             ! (Selector.a) [
                                  FirstOfType [
                                      MarginRight.value (px 15)
                                  ]
@@ -252,8 +300,9 @@ let Menu () =
                                  prop.fss [
                                      Cursor.pointer
                                  ]
-                                 prop.href "javascript:void(0)"
-                                 prop.onClick (fun _ ->
+                                 prop.href "#"
+                                 prop.onClick (fun e ->
+                                     e.preventDefault()
                                      if store.Theme = Theme.LightTheme then
                                          dispatch (SetTheme Theme.DarkTheme)
                                      else
@@ -273,9 +322,12 @@ let Menu () =
          ]
      ]
 
-// TODO: Fin not found side
 [<ReactComponent>]
 let Main (page: Page) =
+    React.useEffect((fun () ->
+        window.scrollTo(0.0, 0.0)
+    ), [| page :> obj |])
+
     Html.main [
         prop.fss [
             Position.relative
@@ -298,9 +350,16 @@ let Main (page: Page) =
                     | Combinators -> Suspense combinators
                     | AttributeSelectors -> Suspense attributeSelectors
                     | MediaQueries -> Suspense mediaQueries
+                    | ContainerQueries -> Suspense containerQueries
+                    | CascadeLayers -> Suspense cascadeLayers
+                    | CssScope -> Suspense cssScope
+                    | StartingStyle -> Suspense startingStyle
+                    | CustomProperty -> Suspense customProperty
+                    | ScrollDrivenAnimations -> Suspense scrollDrivenAnimations
                     | Counters -> Suspense counters
                     | Fonts -> Suspense fonts
                     | BackgroundImages -> Suspense backgroundImages
+                    | Shorthands -> Suspense shorthands
                     | Svg -> Suspense svg
                     | GlobalStyles -> Suspense globalStyles
             | LibraryPage page ->
@@ -368,15 +427,17 @@ let Content (page: Page) =
             MarginRight.value (px 0)
             MarginTop.auto
             MarginBottom.auto
-            Padding.value(px 50, px 50, px 500, px 280)
+            Padding.value(px 50, px 60, px 500, px 280)
             BackgroundColor.value store.Theme.BackgroundColor
             Color.value store.Theme.TextColor
             TransitionProperty.paddingLeft
             TransitionTimingFunction.easeInOut
             TransitionDuration.value (ms 500.)
+            MinHeight.value (vh 100.)
 
             Media.query [ Media.MaxWidth (px 700) ] [
-                PaddingLeft.value(px 50)
+                PaddingLeft.value(px 30)
+                PaddingRight.value(px 30)
             ]
         ]
         prop.children [
@@ -388,6 +449,8 @@ let Content (page: Page) =
 
 [<ReactComponent>]
 let App () =
+    let store, _ = useStore()
+
     global' [
         Visited [
             Color.inherit'
@@ -397,14 +460,54 @@ let App () =
             Color.inherit'
         ]
 
-        ! (Selector.Tag Html.Body) [
+        ! (Selector.body) [
             OverflowX.hidden
             font
+            LineHeight.value 1.6
+        ]
+
+        ! (Selector.h2) [
+            MarginTop.value (em 1.8)
+            MarginBottom.value (em 0.6)
+            PaddingBottom.value (em 0.3)
+            BorderBottomWidth.value (px 1)
+            BorderBottomStyle.solid
+            BorderBottomColor.value store.Theme.BorderColor
+        ]
+
+        ! (Selector.h3) [
+            MarginTop.value (em 1.5)
+            MarginBottom.value (em 0.4)
+        ]
+
+        ! (Selector.p) [
+            MarginBottom.value (em 1.0)
+        ]
+
+        ! (Selector.code) [
+            FontSize.value (pct 90)
+            Padding.value (px 2, px 6)
+            BorderRadius.value (px 4)
+            BackgroundColor.value store.Theme.CodeBackground
+        ]
+
+        ! (Selector.pre) [
+            BorderRadius.value (px 8)
+            BorderWidth.value (px 1)
+            BorderStyle.solid
+            BorderColor.value store.Theme.BorderColor
+            Padding.value (px 16)
+            OverflowX.auto
+            MarginTop.value (em 0.8)
+            MarginBottom.value (em 1.2)
+            ! (Selector.code) [
+                Padding.value (px 0)
+                BackgroundColor.transparent
+            ]
         ]
     ]
 
     let currentUrl, updateUrl = React.useState (Router.currentUrl ())
-    let store, _ = useStore()
 
     Html.div [
         prop.fss [

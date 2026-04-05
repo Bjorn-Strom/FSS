@@ -24,8 +24,12 @@ public/icons
 public/FssFeliz
 public/dist
 public/pages
+public/Pages/
+public/Icons/
+public/fable_modules/
 public/*.map
 public/tests
+public/bench
 public-tests/*.js
 public-tests/fss
 public-tests/FssFeliz
@@ -554,3 +558,5 @@ sketch
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,csharp,fsharp,node,react
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+nuget-api-key
+nupkgs/

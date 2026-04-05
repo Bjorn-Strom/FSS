@@ -69,10 +69,12 @@ let useFetchStore page setState =
             | None ->
                 promise {
                     let pageUri = pageToString page
-                    let! response =
-                        fetch
+                    let baseUrl =
+                        if window.location.hostname = "localhost" || window.location.hostname = "127.0.0.1" then
+                            $"./documentation/{pageUri}.md"
+                        else
                             $"https://raw.githubusercontent.com/Bjorn-Strom/FSS/master/public/documentation/{pageUri}.md"
-                            []
+                    let! response = fetch baseUrl []
 
                     let! text = response.text ()
                     let document = Documentation(page, text)

@@ -3,6 +3,7 @@
 open Fet
 open Utils
 open Fss
+open Fss.Types
 
 module FontTests =
     let tests =
@@ -26,7 +27,7 @@ module FontTests =
                      "{font-synthesis:small-caps;}"
                 testCase
                     "Font synthesis weight style"
-                    [ FontSynthesis.value [ Fss.Types.Font.Weight; Fss.Types.Font.Style; Fss.Types.Font.Synthesis.SmallCaps  ] ]
+                    [ FontSynthesis.value [ Fss.Types.Font.SynthWeight; Fss.Types.Font.SynthStyle; Fss.Types.Font.SynthSmallCaps  ] ]
                      "{font-synthesis:weight style small-caps;}"
                 testCase
                     "Font synthesis inherit"
@@ -860,4 +861,33 @@ module FontTests =
                     "Font variant position revert"
                     [ FontVariantPosition.revert]
                     "{font-variant-position:revert;}"
+                // Font shorthand
+                testCase
+                    "Font shorthand size and family"
+                    [ Font.value(px 16, "Arial") ]
+                    "{font:16px Arial;}"
+                testCase
+                    "Font shorthand with style"
+                    [ Font.value(px 16, "Arial", style = Font.Style.Italic) ]
+                    "{font:italic 16px Arial;}"
+                testCase
+                    "Font shorthand with weight keyword"
+                    [ Font.value(px 16, "Arial", weight = Font.Weight.Bold) ]
+                    "{font:bold 16px Arial;}"
+                testCase
+                    "Font shorthand with weight int"
+                    [ Font.value(px 16, "Arial", 700) ]
+                    "{font:700 16px Arial;}"
+                testCase
+                    "Font shorthand with line-height"
+                    [ Font.value(px 16, "Arial", lineHeight = em 1.5) ]
+                    "{font:16px/1.5em Arial;}"
+                testCase
+                    "Font shorthand all"
+                    [ Font.value(px 16, "Arial", style = Font.Style.Italic, weight = Font.Weight.Bold, lineHeight = em 1.5) ]
+                    "{font:italic bold 16px/1.5em Arial;}"
+                testCase
+                    "Font shorthand with weight int and line-height"
+                    [ Font.value(px 16, "sans-serif", 400, lineHeight = pct 150) ]
+                    "{font:400 16px/150% sans-serif;}"
         ]

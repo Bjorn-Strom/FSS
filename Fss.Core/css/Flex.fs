@@ -3,7 +3,7 @@ namespace Fss
 open Fss.Types
 
 [<AutoOpen>]
-module Flex =
+module FlexCss =
     /// Specifies in which direction items in a flex container are oriented.
     let FlexDirection = FlexClasses.FlexDirection(Property.FlexDirection)
     /// Specifies if flex items can wrap onto multiple lines.
@@ -28,3 +28,5 @@ module Flex =
     let FlexShrink = FlexClasses.FlexShrinkGrow(Property.FlexShrink)
     /// Sets grow factor of flex item.
     let FlexGrow = FlexClasses.FlexShrinkGrow(Property.FlexGrow)
+    /// Shorthand for flex-grow, flex-shrink, and flex-basis.
+    let Flex = FlexClasses.Flex(Property.Flex)

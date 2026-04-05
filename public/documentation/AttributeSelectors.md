@@ -19,7 +19,7 @@ Can be written like so in Fss
 
 ```fsharp
 fss [
-    Attr.Has (Attribute.title, [
+    Attr.Has (Attribute.Title, [
         BackgroundColor.red
     ])
 ]
@@ -40,7 +40,7 @@ Can be written like so in Fss
 
 ```fsharp
 fss [
-    MatchAttr.Exactly (Attribute.title, "heading", [
+    MatchAttr.Exactly (Attribute.Title, "heading", [
          TextDecorationLine.underline
     ])
 ]
@@ -85,10 +85,10 @@ In the following example we use it to style `http` and `https` links differently
 
 ```fsharp
 fss [
-    MatchAttr.Prefix (Selector.Tag Html.A, Attribute.Href, "http://", [
+    MatchAttr.Prefix (Selector.a, Attribute.Href, "http://", [
         BackgroundColor.red
     ])
-    MatchAttr.Prefix (Selector.Tag Html.A, Attribute.Href, "https://", [
+    MatchAttr.Prefix (Selector.a, Attribute.Href, "https://", [
         BackgroundColor.green
     ])
 ]
@@ -102,10 +102,10 @@ In the following example we use it to style `.pdf` and `.txt` links differently.
 
 ```fsharp
 fss [
-    MatchAttr.Suffix (Selector.Tag Html.A, Attribute.Href, ".pdf", [
+    MatchAttr.Suffix (Selector.a, Attribute.Href, ".pdf", [
         BackgroundColor.blue
     ])
-    MatchAttr.Suffix (Selector.Tag Html.A, Attribute.Href, ".txt", [
+    MatchAttr.Suffix (Selector.a, Attribute.Href, ".txt", [
         BackgroundColor.green
     ])
 ]

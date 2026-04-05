@@ -9,11 +9,11 @@ module PositionTests =
         testList "Position"
             [
                 testCase
-                    "Direction rtl"
+                    "Direction ltr"
                     [ Direction.ltr ]
                     "{direction:ltr;}"
                 testCase
-                    "Direction ltr"
+                    "Direction rtl"
                     [ Direction.rtl ]
                     "{direction:rtl;}"
                 testCase
@@ -496,4 +496,91 @@ module PositionTests =
                     "BreakInside revert"
                     [ BreakInside.revert]
                     "{break-inside:revert;}"
+                // Inset
+                testCase
+                    "Inset px"
+                    [ Inset.value (px 10) ]
+                    "{inset:10px;}"
+                testCase
+                    "Inset two values"
+                    [ Inset.value (px 10, pct 20) ]
+                    "{inset:10px 20%;}"
+                testCase
+                    "Inset three values"
+                    [ Inset.value (px 10, pct 20, em 3.0) ]
+                    "{inset:10px 20% 3em;}"
+                testCase
+                    "Inset four values"
+                    [ Inset.value (px 10, pct 20, em 3.0, px 5) ]
+                    "{inset:10px 20% 3em 5px;}"
+                testCase
+                    "Inset auto"
+                    [ Inset.auto ]
+                    "{inset:auto;}"
+                testCase
+                    "Inset inherit"
+                    [ Inset.inherit' ]
+                    "{inset:inherit;}"
+                testCase
+                    "Inset initial"
+                    [ Inset.initial ]
+                    "{inset:initial;}"
+                testCase
+                    "Inset unset"
+                    [ Inset.unset ]
+                    "{inset:unset;}"
+                testCase
+                    "Inset revert"
+                    [ Inset.revert ]
+                    "{inset:revert;}"
+                // Inset Block
+                testCase
+                    "InsetBlock px"
+                    [ InsetBlock.value (px 10) ]
+                    "{inset-block:10px;}"
+                testCase
+                    "InsetBlock two values"
+                    [ InsetBlock.value (px 10, pct 20) ]
+                    "{inset-block:10px 20%;}"
+                testCase
+                    "InsetBlock auto"
+                    [ InsetBlock.auto ]
+                    "{inset-block:auto;}"
+                testCase
+                    "InsetBlock inherit"
+                    [ InsetBlock.inherit' ]
+                    "{inset-block:inherit;}"
+                testCase
+                    "InsetBlockStart px"
+                    [ InsetBlockStart.value (px 10) ]
+                    "{inset-block-start:10px;}"
+                testCase
+                    "InsetBlockEnd px"
+                    [ InsetBlockEnd.value (px 10) ]
+                    "{inset-block-end:10px;}"
+                // Inset Inline
+                testCase
+                    "InsetInline px"
+                    [ InsetInline.value (px 10) ]
+                    "{inset-inline:10px;}"
+                testCase
+                    "InsetInline two values"
+                    [ InsetInline.value (px 10, pct 20) ]
+                    "{inset-inline:10px 20%;}"
+                testCase
+                    "InsetInline auto"
+                    [ InsetInline.auto ]
+                    "{inset-inline:auto;}"
+                testCase
+                    "InsetInline inherit"
+                    [ InsetInline.inherit' ]
+                    "{inset-inline:inherit;}"
+                testCase
+                    "InsetInlineStart px"
+                    [ InsetInlineStart.value (px 10) ]
+                    "{inset-inline-start:10px;}"
+                testCase
+                    "InsetInlineEnd px"
+                    [ InsetInlineEnd.value (px 10) ]
+                    "{inset-inline-end:10px;}"
             ]

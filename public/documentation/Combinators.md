@@ -11,7 +11,7 @@ This combinator allows you to select specific selectors within a CSS block.
 For example if we want to make all paragraphs within a div be red, we can do the following:
 
 ```fsharp
-let redParagraphs = fss [ ! (Selector.Tag Fss.Types.Html.P) [ Color.red ] ]
+let redParagraphs = fss [ ! (Selector.p) [ Color.red ] ]
 div [ ClassName redParagraphs ]
    [
        p [] [ str "Text in a paragraph and therefore red"]
@@ -28,7 +28,7 @@ While descendants hits all the selectors within a CSS block, child will only sel
 So if we copy the same example from above but use the child combinator instead we get:
 
 ```fsharp
-let childCombinator = fss [ !> (Selector.tag Html.P) [ Color.red ] ]
+let childCombinator = fss [ !> (Selector.p) [ Color.red ] ]
 div [ ClassName childCombinator ]
    [
        p [] [ str "Text in a paragraph and therefore red"]
@@ -44,7 +44,7 @@ This combinator selects the element directly after the 'main' element.
 So if we do:
 
 ```fsharp
-let directCombinator = fss [ !+ (Selector.tag Html.P) [ Color.red ] ]
+let directCombinator = fss [ !+ (Selector.p) [ Color.red ] ]
 div []
   [
       div [ ClassName directCombinator ] [ p [] [ str "Text in paragraph in div" ] ]
@@ -59,12 +59,12 @@ div []
 The general sibling combinator is similar to the adjacent one. But instead of selecting only 1 sibling, it selects them all.
 
 ```fsharp
-let adjacentCombinator = fss [ !+ Html.P [ Color.red ] ]
+let generalSiblingCombinator = fss [ !~ (Selector.p) [ Color.red ] ]
 div []
     [
-        div [ ClassName adjacentCombinator ] [ p [] [ str "Text in paragraph in div" ] ]
+        div [ ClassName generalSiblingCombinator ] [ p [] [ str "Text in paragraph in div" ] ]
         p [] [ str "Text in a paragraph and after the div with the combinator so is red"]
-        p [] [ str "Text in a paragraph but not after div with the combinator so is not red"]
+        p [] [ str "Text in a paragraph and also after the div so is also red"]
     ]
 ```
 

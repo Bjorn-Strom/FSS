@@ -59,6 +59,7 @@ module Text =
         | FromFont
         interface ICssValue with
             member this.StringifyCss() = "from-font"
+        interface ILengthPercentage
 
     type DecorationStyle =
         | Solid
@@ -74,6 +75,32 @@ module Text =
                 | Dotted -> "dotted"
                 | Dashed -> "dashed"
                 | Wavy -> "wavy"
+
+    type DecorationShorthand =
+        { Line: DecorationLine option
+          Style: DecorationStyle option
+          Color: Color option
+          Thickness: ILengthPercentage option }
+        interface ICssValue with
+            member this.StringifyCss() =
+                let lineString = stringifyOptionToCssString this.Line
+                let styleString = stringifyOptionToCssString this.Style
+                let colorString =
+                    match this.Color with
+                    | Some color -> (color :> ICssValue).StringifyCss()
+                    | None -> ""
+                let thicknessString =
+                    match this.Thickness with
+                    | Some t ->
+                        match t with
+                        | :? DecorationThickness as dt -> (dt :> ICssValue).StringifyCss()
+                        | :? Percent as p -> stringifyICssValue p
+                        | :? Length as l -> stringifyICssValue l
+                        | _ -> ""
+                    | None -> ""
+                [ lineString; styleString; colorString; thicknessString ]
+                |> List.filter (fun s -> s <> "")
+                |> String.concat " "
 
     type DecorationSkip =
         | Objects
@@ -296,6 +323,9 @@ module TextClasses =
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
     type TextDecoration(property) =
         inherit CssRuleWithNone(property)
+        member this.value(?line: Text.DecorationLine, ?style: Text.DecorationStyle, ?color: Color, ?thickness: ILengthPercentage) =
+            let shorthand: Text.DecorationShorthand = { Line = line; Style = style; Color = color; Thickness = thickness }
+            (property, shorthand) |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
     type TextDecorationLine(property) =
         inherit CssRuleWithNone(property)
@@ -567,6 +597,19 @@ module TextClasses =
         member this.all = (property, Text.All) |> Rule
         /// Any selection will be contained by the bounds of the element it is in
         member this.element = (property, Text.Element) |> Rule
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap
+    type TextWrap(property) =
+        inherit CssRuleWithNone(property)
+        /// Lines are wrapped at appropriate characters to minimize overflow
+        member this.wrap = (property, String "wrap") |> Rule
+        /// Lines are not wrapped
+        member this.nowrap = (property, String "nowrap") |> Rule
+        /// Lines are wrapped in a way that balances the number of characters on each line
+        member this.balance = (property, String "balance") |> Rule
+        /// Lines are wrapped to minimize orphans and widows
+        member this.pretty = (property, String "pretty") |> Rule
+        /// Lines are only wrapped at safe wrap points, preventing layout shifts
+        member this.stable = (property, String "stable") |> Rule
     // https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
     type HangingPunctuationClass(property) =
         inherit CssRuleWithNone(property)

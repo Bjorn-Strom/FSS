@@ -268,4 +268,20 @@ module PaddingTests =
                     "Padding block end unset"
                     [ PaddingBlockEnd.unset ]
                     "{padding-block-end:unset;}"
+                testCase
+                    "Padding inline px"
+                    [ PaddingInline.value (px 10)]
+                    "{padding-inline:10px;}"
+                testCase
+                    "Padding inline two values"
+                    [ PaddingInline.value (px 10, px 20)]
+                    "{padding-inline:10px 20px;}"
+                testCase
+                    "Padding block px"
+                    [ PaddingBlock.value (px 10)]
+                    "{padding-block:10px;}"
+                testCase
+                    "Padding block two values"
+                    [ PaddingBlock.value (px 10, px 20)]
+                    "{padding-block:10px 20px;}"
             ]

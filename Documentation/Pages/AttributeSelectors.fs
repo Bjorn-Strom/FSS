@@ -107,10 +107,10 @@ let AttributeSelectors () =
                     prop.fss [
                         PointerEvents.none
                         Cursor.default'
-                        MatchAttr.Prefix (Selector.Tag Html.A, Attribute.Href, "http://", [
+                        MatchAttr.Prefix (Selector.a, Attribute.Href, "http://", [
                             BackgroundColor.red
                         ])
-                        MatchAttr.Prefix (Selector.Tag Html.A, Attribute.Href, "https://", [
+                        MatchAttr.Prefix (Selector.a, Attribute.Href, "https://", [
                             BackgroundColor.green
                         ])
                     ]
@@ -121,10 +121,10 @@ let AttributeSelectors () =
                     prop.fss [
                         PointerEvents.none
                         Cursor.default'
-                        MatchAttr.Prefix (Selector.Tag Html.A, Attribute.Href, "http://", [
+                        MatchAttr.Prefix (Selector.a, Attribute.Href, "http://", [
                             BackgroundColor.red
                         ])
-                        MatchAttr.Prefix (Selector.Tag Html.A, Attribute.Href, "https://", [
+                        MatchAttr.Prefix (Selector.a, Attribute.Href, "https://", [
                             BackgroundColor.green
                         ])
                     ]
@@ -138,10 +138,10 @@ let AttributeSelectors () =
                     prop.fss [
                         PointerEvents.none
                         Cursor.default'
-                        MatchAttr.Suffix (Selector.Tag Html.A, Attribute.Href, ".pdf", [
+                        MatchAttr.Suffix (Selector.a, Attribute.Href, ".pdf", [
                             BackgroundColor.blue
                         ])
-                        MatchAttr.Suffix (Selector.Tag Html.A, Attribute.Href, ".txt", [
+                        MatchAttr.Suffix (Selector.a, Attribute.Href, ".txt", [
                             BackgroundColor.green
                         ])
                     ]
@@ -152,10 +152,10 @@ let AttributeSelectors () =
                     prop.fss [
                         PointerEvents.none
                         Cursor.default'
-                        MatchAttr.Suffix (Selector.Tag Html.A, Attribute.Href, ".pdf", [
+                        MatchAttr.Suffix (Selector.a, Attribute.Href, ".pdf", [
                             BackgroundColor.blue
                         ])
-                        MatchAttr.Suffix (Selector.Tag Html.A, Attribute.Href, ".txt", [
+                        MatchAttr.Suffix (Selector.a, Attribute.Href, ".txt", [
                             BackgroundColor.green
                         ])
                     ]

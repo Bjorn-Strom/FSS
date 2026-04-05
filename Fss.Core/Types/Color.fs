@@ -158,6 +158,18 @@ module Color =
         | Hex of string
         | Hsl of Hue: int * Saturation: int * Lightness: int
         | Hsla of Hue: int * Saturation: int * Lightness: int * Alpha: float
+        | Hwb of Hue: float * Whiteness: float * Blackness: float
+        | HwbAlpha of Hue: float * Whiteness: float * Blackness: float * Alpha: float
+        | Lab of Lightness: float * A: float * B: float
+        | LabAlpha of Lightness: float * A: float * B: float * Alpha: float
+        | Lch of Lightness: float * Chroma: float * Hue: float
+        | LchAlpha of Lightness: float * Chroma: float * Hue: float * Alpha: float
+        | Oklab of Lightness: float * A: float * B: float
+        | OklabAlpha of Lightness: float * A: float * B: float * Alpha: float
+        | Oklch of Lightness: float * Chroma: float * Hue: float
+        | OklchAlpha of Lightness: float * Chroma: float * Hue: float * Alpha: float
+        | ColorMix of ColorSpace: string * Color1: Color * Pct1: int * Color2: Color * Pct2: int
+        | LightDark of Light: Color * Dark: Color
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
@@ -317,6 +329,20 @@ module Color =
                         sb.ToString()
                 | Hsl (hue, saturation, lightness) -> $"hsl({hue},{saturation}%%,{lightness}%%)"
                 | Hsla (hue, saturation, lightness, alpha) -> $"hsla({hue},{saturation}%%,{lightness}%%,{string alpha})"
+                | Hwb (hue, whiteness, blackness) -> $"hwb({string hue} {string whiteness}%% {string blackness}%%)"
+                | HwbAlpha (hue, whiteness, blackness, alpha) -> $"hwb({string hue} {string whiteness}%% {string blackness}%% / {string alpha})"
+                | Lab (lightness, a, b) -> $"lab({string lightness}%% {string a} {string b})"
+                | LabAlpha (lightness, a, b, alpha) -> $"lab({string lightness}%% {string a} {string b} / {string alpha})"
+                | Lch (lightness, chroma, hue) -> $"lch({string lightness}%% {string chroma} {string hue})"
+                | LchAlpha (lightness, chroma, hue, alpha) -> $"lch({string lightness}%% {string chroma} {string hue} / {string alpha})"
+                | Oklab (lightness, a, b) -> $"oklab({string lightness} {string a} {string b})"
+                | OklabAlpha (lightness, a, b, alpha) -> $"oklab({string lightness} {string a} {string b} / {string alpha})"
+                | Oklch (lightness, chroma, hue) -> $"oklch({string lightness} {string chroma} {string hue})"
+                | OklchAlpha (lightness, chroma, hue, alpha) -> $"oklch({string lightness} {string chroma} {string hue} / {string alpha})"
+                | ColorMix (colorSpace, color1, pct1, color2, pct2) ->
+                    $"color-mix(in {colorSpace},{(color1 :> ICssValue).StringifyCss()} {pct1}%%,{(color2 :> ICssValue).StringifyCss()} {pct2}%%)"
+                | LightDark (light, dark) ->
+                    $"light-dark({(light :> ICssValue).StringifyCss()},{(dark :> ICssValue).StringifyCss()})"
 
     type ColorAdjust =
         | Economy
@@ -493,6 +519,42 @@ module ColorClass =
         member this.hsla hue saturation lightness alpha =
             (property, Hsla(hue, saturation, lightness, alpha))
             |> Rule
+
+        member this.hwb (hue: float) (whiteness: float) (blackness: float) =
+            (property, Hwb(hue, whiteness, blackness)) |> Rule
+
+        member this.hwba (hue: float) (whiteness: float) (blackness: float) (alpha: float) =
+            (property, HwbAlpha(hue, whiteness, blackness, alpha)) |> Rule
+
+        member this.lab (lightness: float) (a: float) (b: float) =
+            (property, Lab(lightness, a, b)) |> Rule
+
+        member this.laba (lightness: float) (a: float) (b: float) (alpha: float) =
+            (property, LabAlpha(lightness, a, b, alpha)) |> Rule
+
+        member this.lch (lightness: float) (chroma: float) (hue: float) =
+            (property, Lch(lightness, chroma, hue)) |> Rule
+
+        member this.lcha (lightness: float) (chroma: float) (hue: float) (alpha: float) =
+            (property, LchAlpha(lightness, chroma, hue, alpha)) |> Rule
+
+        member this.oklab (lightness: float) (a: float) (b: float) =
+            (property, Oklab(lightness, a, b)) |> Rule
+
+        member this.oklaba (lightness: float) (a: float) (b: float) (alpha: float) =
+            (property, OklabAlpha(lightness, a, b, alpha)) |> Rule
+
+        member this.oklch (lightness: float) (chroma: float) (hue: float) =
+            (property, Oklch(lightness, chroma, hue)) |> Rule
+
+        member this.oklcha (lightness: float) (chroma: float) (hue: float) (alpha: float) =
+            (property, OklchAlpha(lightness, chroma, hue, alpha)) |> Rule
+
+        member this.colorMix (colorSpace: string) (color1: Color.Color) (pct1: int) (color2: Color.Color) (pct2: int) =
+            (property, ColorMix(colorSpace, color1, pct1, color2, pct2)) |> Rule
+
+        member this.lightDark (light: Color.Color) (dark: Color.Color) =
+            (property, LightDark(light, dark)) |> Rule
 
     type ColorAdjust(property) =
         inherit CssRule(property)

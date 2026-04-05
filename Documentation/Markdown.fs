@@ -60,8 +60,8 @@ module ReactMarkdown =
         ]
 
 
-let fsharp:obj = importDefault "react-syntax-highlighter/dist/cjs/languages/hljs/fsharp"
-let css:obj = importDefault "react-syntax-highlighter/dist/cjs/languages/hljs/css"
+let fsharp:obj = importDefault "react-syntax-highlighter/dist/esm/languages/hljs/fsharp"
+let css:obj = importDefault "react-syntax-highlighter/dist/esm/languages/hljs/css"
 
 ReactSyntaxHighlighter.import.registerLanguage "fsharp" fsharp
 ReactSyntaxHighlighter.import.registerLanguage "css" css

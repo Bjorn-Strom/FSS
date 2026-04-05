@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>tests</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
@@ -38,6 +38,9 @@
     <Compile Include="PointerEvents.fs" />
     <Compile Include="Table.fs" />
     <Compile Include="Caret.fs" />
+    <Compile Include="Accent.fs" />
+    <Compile Include="ColorScheme.fs" />
+    <Compile Include="Contain.fs" />
     <Compile Include="ClipPath.fs" />
     <Compile Include="AspectRatio.fs" />
     <Compile Include="Clear.fs" />
@@ -57,6 +60,12 @@
     <Compile Include="pseudo.fs" />
     <Compile Include="FontFace.fs" />
     <Compile Include="Composite.fs" />
+    <Compile Include="Container.fs" />
+    <Compile Include="Layer.fs" />
+    <Compile Include="Scope.fs" />
+    <Compile Include="StartingStyle.fs" />
+    <Compile Include="CustomProperty.fs" />
+    <Compile Include="ScrollTimeline.fs" />
     <Compile Include="Media.fs" />
     <Compile Include="Ordering.fs" />
     <Compile Include="Combinator.fs" />

@@ -15,9 +15,9 @@ module CustomTests =
 
                 test "Classname selector works" <| fun _ ->
                     let className, actual = (createFss [ Classname "randomClassName" [ Color.red  ] ])
-                    Expect.equal actual $".{className}.randomClassName{{color:red;}}"
+                    Expect.equal actual (sprintf ".%s{&.randomClassName{color:red;}}" className)
 
                 test "Id selector works" <| fun _ ->
                     let className, actual = (createFss [ Id "randomId" [ Color.red  ] ])
-                    Expect.equal actual $".{className}#randomId{{color:red;}}"
+                    Expect.equal actual (sprintf ".%s{&#randomId{color:red;}}" className)
             ]

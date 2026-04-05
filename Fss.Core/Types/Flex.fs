@@ -22,7 +22,7 @@ module Flex =
         | SpaceAround
         | SpaceEvenly
         interface ICssValue with
-            member this.StringifyCss() = 
+            member this.StringifyCss() =
                 match this with
                 | Start -> "start"
                 | End -> "end"
@@ -213,7 +213,7 @@ module Flex =
         interface ICssValue with
             member this.StringifyCss() =
                 match this with
-                | NoWrap -> "no-wrap"
+                | NoWrap -> "nowrap"
                 | Wrap -> "wrap"
                 | WrapReverse -> "wrap-reverse"
 
@@ -244,6 +244,29 @@ module Flex =
                 | MinContent -> "min-content"
                 | FitContent -> "fit-content"
                 | Content -> "content"
+        interface ILengthPercentage
+
+    type Shorthand =
+        { Grow: float option
+          Shrink: float option
+          Basis: ILengthPercentage option }
+        interface ICssValue with
+            member this.StringifyCss() =
+                let growString = this.Grow |> Option.map string |> Option.defaultValue ""
+                let shrinkString = this.Shrink |> Option.map string |> Option.defaultValue ""
+                let basisString =
+                    match this.Basis with
+                    | Some b ->
+                        match b with
+                        | :? Basis as basis -> (basis :> ICssValue).StringifyCss()
+                        | :? Percent as p -> stringifyICssValue p
+                        | :? Length as l -> stringifyICssValue l
+                        | :? Auto as a -> stringifyICssValue a
+                        | _ -> ""
+                    | None -> ""
+                [ growString; shrinkString; basisString ]
+                |> List.filter (fun s -> s <> "")
+                |> String.concat " "
 
 [<RequireQualifiedAccess>]
 module FlexClasses =
@@ -362,7 +385,7 @@ module FlexClasses =
         member this.right = (property, Flex.JustifyItems.Right) |> Rule
         /// Packed on the start side of the item
         member this.selfStart = (property, Flex.JustifyItems.SelfStart) |> Rule
-        // Packed on the end side of the item 
+        // Packed on the end side of the item
         member this.selfEnd = (property, Flex.JustifyItems.SelfEnd) |> Rule
         member this.legacy = (property, Flex.JustifyItems.Legacy) |> Rule
 
@@ -451,3 +474,10 @@ module FlexClasses =
     type FlexShrinkGrow(property) =
         inherit CssRule(property)
         member this.value(grow: float) = (property, Float grow) |> Rule
+
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/flex
+    type Flex(property) =
+        inherit CssRuleWithAutoNone(property)
+        member this.value(?grow: float, ?shrink: float, ?basis: ILengthPercentage) =
+            let shorthand: Flex.Shorthand = { Grow = grow; Shrink = shrink; Basis = basis }
+            (property, shorthand) |> Rule

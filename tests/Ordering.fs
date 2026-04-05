@@ -3,7 +3,6 @@ namespace FSSTests
 open Fet
 open Utils
 open Fss
-open Fss.Types
 
 module OrderingTests =
     let tests =
@@ -14,7 +13,7 @@ module OrderingTests =
                             Display.flex
                             FlexDirection.column
 
-                            !> (Selector.Tag Html.H2) [
+                            !> (Selector.h2) [
                                 important <| MarginBottom.value (px 16)
                             ]
 
@@ -24,7 +23,7 @@ module OrderingTests =
                                     FlexDirection.row
                                     FlexGrow.value 1.0
 
-                                    !> (Selector.Tag Html.H2) [
+                                    !> (Selector.h2) [
                                         important <| MarginBottom.value (px 0)
                                         important <| MarginRight.value (px 16)
 
@@ -38,7 +37,7 @@ module OrderingTests =
                 testEqual
                    "Ordering 1"
                    actual
-                   ".orderingOne{display:flex;flex-direction:column;}.orderingOne > h2{margin-bottom:16px !important;}@media (min-width:200px) {.orderingOne{flex-direction:row;flex-grow:1;}.orderingOne > h2{margin-bottom:0px !important;margin-right:16px !important;}.orderingOne > h2:last-child{margin-right:0px !important;}}"
+                   ".orderingOne{display:flex;flex-direction:column;& > h2{margin-bottom:16px !important;}@media (min-width:200px) {&{flex-direction:row;flex-grow:1;& > h2{margin-bottom:0px !important;margin-right:16px !important;&:last-child{margin-right:0px !important;}}}}}"
                 let _, actual =
                     createFssWithClassname "orderingTwo" [
                         Color.orangeRed
@@ -55,7 +54,7 @@ module OrderingTests =
                 testEqual
                    "Ordering 2"
                    actual
-                   ".orderingTwo{color:orangered;background-color:blue;text-decoration-color:yellow;}.orderingTwo:first-of-type{border-color:gray;border-width:2px;border-style:dashed;}"
+                   ".orderingTwo{color:orangered;background-color:blue;text-decoration-color:yellow;&:first-of-type{border-color:gray;border-width:2px;border-style:dashed;}}"
 
                 let _, actual =
                     createFssWithClassname "orderingThree" [
@@ -63,13 +62,13 @@ module OrderingTests =
                             FontWeight.bolder
                         ]
                         FontWeight.normal
-                        !> (Selector.Tag Html.P) [
+                        !> (Selector.p) [
                             FontWeight.bold
                         ]
                         Media.query
                             [ Media.MaxWidth (px 200) ]
                             [ FontWeight.lighter ]
-                        !> (Selector.Tag Html.P) [
+                        !> (Selector.p) [
                             Color.red
                         ]
                     ]
@@ -77,11 +76,11 @@ module OrderingTests =
                 testEqual
                   "Ordering 3"
                    actual
-                   ".orderingThree:hover{font-weight:bolder;}.orderingThree{font-weight:normal;}.orderingThree > p{font-weight:bold;}@media (max-width:200px) {.orderingThree{font-weight:lighter;}}.orderingThree > p{color:red;}"
+                   ".orderingThree{&:hover{font-weight:bolder;}font-weight:normal;& > p{font-weight:bold;}@media (max-width:200px) {&{font-weight:lighter;}}& > p{color:red;}}"
 
                 let _, actual =
                     createFssWithClassname "orderingFour" [
-                        !> (Selector.Tag Html.P) [
+                        !> (Selector.p) [
                             FontWeight.bold
                         ]
                         Media.query
@@ -96,6 +95,6 @@ module OrderingTests =
                 testEqual
                    "Ordering 4"
                    actual
-                   ".orderingFour > p{font-weight:bold;}@media (max-width:200px) {.orderingFour{font-weight:lighter;}}.orderingFour:hover{font-weight:bolder;}.orderingFour{font-weight:normal;}"
+                   ".orderingFour{& > p{font-weight:bold;}@media (max-width:200px) {&{font-weight:lighter;}}&:hover{font-weight:bolder;}font-weight:normal;}"
 
            ]

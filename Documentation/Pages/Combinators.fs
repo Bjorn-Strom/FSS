@@ -8,21 +8,21 @@ open Fable.Core
 let Combinators () =
     let descendantCombinator =
         fss [ Label "Descendant"
-              ! (Selector.Tag Fss.Types.Html.P) [ Color.red ] ]
+              ! (Selector.p) [ Color.red ] ]
 
     let childCombinator =
         fss [ Label "Child"
-              !> (Selector.Tag Fss.Types.Html.P) [ Color.red ]
+              !> (Selector.p) [ Color.red ]
 
                ]
 
     let directCombinator =
         fss [ Label "Direct"
-              !+ (Selector.Tag Fss.Types.Html.P) [ Color.red ] ]
+              !+ (Selector.p) [ Color.red ] ]
 
     let adjacentCombinator =
         fss [ Label "Adjacent"
-              !~ (Selector.Tag Fss.Types.Html.P) [ Color.red ] ]
+              !~ (Selector.p) [ Color.red ] ]
 
     let styles =
         [ Html.div [ prop.className descendantCombinator

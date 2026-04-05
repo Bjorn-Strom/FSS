@@ -24,4 +24,8 @@ module AllTests =
                     "All revert"
                     [ All.revert ]
                     "{all:revert;}"
+                testCase
+                    "All revert-layer"
+                    [ All.revertLayer ]
+                    "{all:revert-layer;}"
             ]
