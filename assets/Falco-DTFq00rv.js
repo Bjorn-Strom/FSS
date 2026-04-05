@@ -1,0 +1,1 @@
+import{Ma as e,c as t,on as n,ta as r,u as i}from"./Store-CQsk_CVA.js";import{t as a}from"./Page-B3SBTGGv.js";var o=e(n(),1);function s(){return(0,o.createElement)(a,{page:new i(1,[new t(4,[])]),styles:r()})}var c=(()=>(0,o.createElement)(s,null));export{s as Falco,c as default};

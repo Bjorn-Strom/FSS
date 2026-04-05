@@ -1,1 +1,0 @@
-import{Vi as e,Xt as t,_a as n,s as r,u as i}from"./Store-NkdXc83m.js";import{t as a}from"./Page-4AtnJaeW.js";var o=n(t(),1);function s(){return(0,o.createElement)(a,{page:new i(0,[new r(0,[])]),styles:e()})}var c=(()=>(0,o.createElement)(s,null));export{s as Overview,c as default};

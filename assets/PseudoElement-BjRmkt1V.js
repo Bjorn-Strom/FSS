@@ -1,0 +1,1 @@
+import{Bi as e,Vi as t}from"./Store-CQsk_CVA.js";function n(n){let r=[new e(434,[]),new t(1,[n])];return[r[0],r[1]]}function r(n){let r=[new e(435,[]),new t(1,[n])];return[r[0],r[1]]}function i(e){return n(e)}function a(e){return r(e)}export{a as n,i as t};
