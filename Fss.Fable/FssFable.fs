@@ -35,11 +35,22 @@ module Fable =
         className
 
     // Injects CSS into dom as global styles
+    // Unlike other injections, global styles are always updated since they may contain dynamic values
+    let mutable private globalCssCache = ""
     let global'(properties: Fss.Types.Rule list): unit =
         let cssRules = createGlobal properties
-
-        injectCss "*" cssRules
-        ()
+        if cssRules <> globalCssCache then
+            globalCssCache <- cssRules
+            let head = document.getElementsByTagName("head")[0]
+            let existing = document.querySelector("[data-fss-global]")
+            if isNull existing then
+                let style = document.createElement "style"
+                style.setAttribute("type", "text/css")
+                style.setAttribute("data-fss-global", "")
+                style.appendChild(document.createTextNode(cssRules)) |> ignore
+                head.appendChild(style) |> ignore
+            else
+                existing.textContent <- cssRules
 
     let private processCounterRules (rules: string) =
         $"@counter-style {rules}"

@@ -101,6 +101,9 @@ let shorthands: JS.Promise<unit -> ReactElement> =
 
 let svg: JS.Promise<unit -> ReactElement> = JsInterop.importDynamic "./Pages/Svg.fs"
 
+let colors: JS.Promise<unit -> ReactElement> =
+    JsInterop.importDynamic "./Pages/Colors.fs"
+
 let core: JS.Promise<unit -> ReactElement> =
     JsInterop.importDynamic "./Pages/Core.fs"
 
@@ -148,17 +151,21 @@ let MenuItem (page: Page) =
                 prop.fss [
                     TextDecoration.none
                     Color.inherit'
-                    Padding.value (px 3, px 8)
+                    Padding.value (px 4, px 10)
                     BorderRadius.value (px 4)
                     Display.inlineBlock
-                    TransitionProperty.backgroundColor
+                    BorderLeftWidth.value (px 2)
+                    BorderLeftStyle.solid
+                    BorderLeftColor.transparent
                     TransitionDuration.value (ms 200.)
                     if isActive then
                         Color.value store.Theme.Accent
                         FontWeight.value 600
                         BackgroundColor.value store.Theme.CodeBackground
+                        BorderLeftColor.value store.Theme.Accent
                     Hover [
                         BackgroundColor.value store.Theme.CodeBackground
+                        Color.value store.Theme.Accent
                     ]
                 ]
                 prop.text (pageToPrettyString page)
@@ -258,6 +265,9 @@ let Menu () =
                      Padding.value(px 50, px 70, px 30, px 30)
                      OverflowY.auto
                      BackgroundColor.value store.Theme.BackgroundColor
+                     TransitionProperty.backgroundColor
+                     TransitionDuration.value (ms 300.)
+                     TransitionTimingFunction.easeInOut
                  ]
                  prop.children [
                      Html.a [
@@ -326,7 +336,7 @@ let Menu () =
 let Main (page: Page) =
     React.useEffect((fun () ->
         window.scrollTo(0.0, 0.0)
-    ), [| page :> obj |])
+    ), [| pageToString page :> obj |])
 
     Html.main [
         prop.fss [
@@ -345,7 +355,7 @@ let Main (page: Page) =
                     | Pseudo -> Suspense pseudo
                     | Composition -> Suspense composition
                     | Labels -> Suspense labels
-                    | Transition -> Suspense transition
+                    | Transitions -> Suspense transition
                     | KeyframesAnimations -> Suspense keyframesAnimations
                     | Combinators -> Suspense combinators
                     | AttributeSelectors -> Suspense attributeSelectors
@@ -361,7 +371,9 @@ let Main (page: Page) =
                     | BackgroundImages -> Suspense backgroundImages
                     | Shorthands -> Suspense shorthands
                     | Svg -> Suspense svg
+                    | Colors -> Suspense colors
                     | GlobalStyles -> Suspense globalStyles
+                    | FssPage.Unknown -> Html.none
             | LibraryPage page ->
                 match page with
                 | Core -> Suspense core
@@ -370,10 +382,13 @@ let Main (page: Page) =
                 | Giraffe -> Suspense giraffe
                 | Falco -> Suspense falco
                 | Static -> Suspense static'
+                | LibraryPage.Unknown -> Html.none
             | OtherPage page ->
                 match page with
                 | Troubleshoot -> Suspense troubleshoot
                 | Changelog -> Suspense changelog
+                | OtherPage.Unknown -> Html.none
+            | _ -> Html.none
         ]
     ]
 
@@ -395,9 +410,9 @@ let TopBar () =
              AlignItems.center
              ZIndex.value 10
 
-             TransitionProperty.top
-             TransitionTimingFunction.easeInOut
-             TransitionDuration.value (ms 500.)
+             Transition.value(
+                 [ Transition.create(transitionProperty = Property.Top, duration = ms 500., timingFunction = TimingFunction.EaseInOut)
+                   Transition.create(transitionProperty = Property.BackgroundColor, duration = ms 300., timingFunction = TimingFunction.EaseInOut) ])
 
              Media.query [ Media.MaxWidth (px 700) ] [
                  Top.value (px 0)
@@ -430,9 +445,10 @@ let Content (page: Page) =
             Padding.value(px 50, px 60, px 500, px 280)
             BackgroundColor.value store.Theme.BackgroundColor
             Color.value store.Theme.TextColor
-            TransitionProperty.paddingLeft
-            TransitionTimingFunction.easeInOut
-            TransitionDuration.value (ms 500.)
+            Transition.value(
+                [ Transition.create(transitionProperty = Property.PaddingLeft, duration = ms 500., timingFunction = TimingFunction.EaseInOut)
+                  Transition.create(transitionProperty = Property.BackgroundColor, duration = ms 300., timingFunction = TimingFunction.EaseInOut)
+                  Transition.create(transitionProperty = Property.Color, duration = ms 300., timingFunction = TimingFunction.EaseInOut) ])
             MinHeight.value (vh 100.)
 
             Media.query [ Media.MaxWidth (px 700) ] [
@@ -460,24 +476,34 @@ let App () =
             Color.inherit'
         ]
 
+        ! (Selector.all) [
+            ScrollBehavior.smooth
+        ]
+
         ! (Selector.body) [
             OverflowX.hidden
             font
-            LineHeight.value 1.6
+            FontSize.value (px 15)
+            LineHeight.value 1.7
         ]
 
         ! (Selector.h2) [
-            MarginTop.value (em 1.8)
+            MarginTop.value (em 2.0)
             MarginBottom.value (em 0.6)
             PaddingBottom.value (em 0.3)
+            FontSize.value (em 1.6)
+            FontWeight.value 700
+            LetterSpacing.value (em -0.02)
             BorderBottomWidth.value (px 1)
             BorderBottomStyle.solid
             BorderBottomColor.value store.Theme.BorderColor
         ]
 
         ! (Selector.h3) [
-            MarginTop.value (em 1.5)
+            MarginTop.value (em 1.6)
             MarginBottom.value (em 0.4)
+            FontSize.value (em 1.2)
+            FontWeight.value 600
         ]
 
         ! (Selector.p) [
@@ -485,7 +511,7 @@ let App () =
         ]
 
         ! (Selector.code) [
-            FontSize.value (pct 90)
+            FontSize.value (pct 88)
             Padding.value (px 2, px 6)
             BorderRadius.value (px 4)
             BackgroundColor.value store.Theme.CodeBackground
@@ -493,17 +519,31 @@ let App () =
 
         ! (Selector.pre) [
             BorderRadius.value (px 8)
-            BorderWidth.value (px 1)
-            BorderStyle.solid
-            BorderColor.value store.Theme.BorderColor
-            Padding.value (px 16)
+            BorderLeftWidth.value (px 3)
+            BorderLeftStyle.solid
+            BorderLeftColor.value store.Theme.Accent
+            BorderTopWidth.value (px 1)
+            BorderTopStyle.solid
+            BorderTopColor.value store.Theme.BorderColor
+            BorderRightWidth.value (px 1)
+            BorderRightStyle.solid
+            BorderRightColor.value store.Theme.BorderColor
+            BorderBottomWidth.value (px 1)
+            BorderBottomStyle.solid
+            BorderBottomColor.value store.Theme.BorderColor
+            Padding.value (px 16, px 20)
             OverflowX.auto
             MarginTop.value (em 0.8)
-            MarginBottom.value (em 1.2)
+            MarginBottom.value (em 1.4)
             ! (Selector.code) [
                 Padding.value (px 0)
                 BackgroundColor.transparent
             ]
+        ]
+
+        ! (Selector.a) [
+            TransitionProperty.color
+            TransitionDuration.value (ms 150.)
         ]
     ]
 
@@ -520,6 +560,9 @@ let App () =
             Padding.value(px 0)
             Border.none
             BackgroundColor.value store.Theme.BackgroundColor
+            TransitionProperty.backgroundColor
+            TransitionDuration.value (ms 300.)
+            TransitionTimingFunction.easeInOut
         ]
         prop.children [
             React.router [ router.onUrlChanged updateUrl

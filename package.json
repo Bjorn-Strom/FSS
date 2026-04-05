@@ -4,12 +4,12 @@
   "scripts": {
     "start": "dotnet fable watch ./Documentation -o ./public --sourceMaps --run vite serve",
     "build": "dotnet fable ./Documentation -o ./public --run vite build",
-    "preview": "npm run build && vite preview",
+    "preview": "bun run build && vite preview",
     "test": "dotnet fable ./tests -o ./public/tests --noCache --run node ./public/tests/Tests.js",
     "validate": "dotnet fable ./tests -o ./public/tests --noCache --run node ./validate.mjs",
     "watch-test": "dotnet fable watch ./Tests -o ./public/tests --run nodemon ./public/tests/Tests.js",
     "clean": "rm -rf public/fss. public/tests public/*.js public/Pages public/*.map public/dist public/fable_modules",
-    "publish-docs": "npm run clean && npm run build && gh-pages -d public/dist"
+    "publish-docs": "bun run clean && bun run build && gh-pages -d public/dist"
   },
   "homepage": "https://Bjorn-Strom.github.io/FSS",
   "devDependencies": {
@@ -19,9 +19,9 @@
     "vite": "^8.0.3"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-markdown": "^9.0.1",
-    "react-syntax-highlighter": "^15.5.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.1.0",
+    "react-syntax-highlighter": "^15.6.6"
   }
 }

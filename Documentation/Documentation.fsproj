@@ -41,6 +41,7 @@
     <Compile Include="Pages\BackgroundImages.fs" />
     <Compile Include="Pages\Shorthands.fs" />
     <Compile Include="Pages\Svg.fs" />
+    <Compile Include="Pages\Colors.fs" />
     <Compile Include="Pages\Core.fs" />
     <Compile Include="Pages\Fable.fs" />
     <Compile Include="Pages\Feliz.fs" />

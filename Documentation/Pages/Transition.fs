@@ -30,6 +30,6 @@ let Transition () =
                      prop.text "Hover me" ]
           Html.div [ prop.className sizeAndColor ] ]
 
-    Page (Pages.FssPage Pages.Transition) styles
+    Page (Pages.FssPage Pages.Transitions) styles
 
 JsInterop.exportDefault Transition

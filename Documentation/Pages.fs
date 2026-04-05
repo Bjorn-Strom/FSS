@@ -9,7 +9,7 @@ type FssPage =
     | Pseudo
     | Composition
     | Labels
-    | Transition
+    | Transitions
     | KeyframesAnimations
     | Combinators
     | AttributeSelectors
@@ -26,6 +26,7 @@ type FssPage =
     | BackgroundImages
     | Shorthands
     | Svg
+    | Colors
     | Unknown
 
 type LibraryPage =
@@ -58,7 +59,7 @@ let allFssPages =
       Pseudo
       Composition
       Labels
-      Transition
+      Transitions
       KeyframesAnimations
       Combinators
       AttributeSelectors
@@ -75,6 +76,7 @@ let allFssPages =
       BackgroundImages
       Shorthands
       Svg
+      Colors
     ] |> List.map FssPage
 
 let allLibraryPages =
@@ -108,7 +110,7 @@ let stringToFssPage =
     | "pseudo" -> Some Pseudo
     | "composition" -> Some Composition
     | "labels" -> Some Labels
-    | "transition" -> Some Transition
+    | "transition" -> Some Transitions
     | "keyframesAnimations" -> Some KeyframesAnimations
     | "combinators" -> Some Combinators
     | "attributeSelectors" -> Some AttributeSelectors
@@ -125,6 +127,7 @@ let stringToFssPage =
     | "backgroundImages" -> Some BackgroundImages
     | "shorthands" -> Some Shorthands
     | "svg" -> Some Svg
+    | "colors" -> Some Colors
     | _ -> None
 
 let stringToLibraryPage =
@@ -160,7 +163,7 @@ let fssPageToString =
     | Pseudo -> "Pseudo"
     | Composition -> "Composition"
     | Labels -> "Labels"
-    | Transition -> "Transition"
+    | Transitions -> "Transition"
     | KeyframesAnimations -> "KeyframesAnimations"
     | Combinators -> "Combinators"
     | AttributeSelectors -> "AttributeSelectors"
@@ -177,6 +180,7 @@ let fssPageToString =
     | BackgroundImages -> "BackgroundImages"
     | Shorthands -> "Shorthands"
     | Svg -> "Svg"
+    | Colors -> "Colors"
     | _ -> "Unknown"
 
 let libraryPageToString =
@@ -205,7 +209,7 @@ let fssPageToPrettyString =
     | Pseudo -> "Pseudo-classes/elements"
     | Composition -> "Composition"
     | Labels -> "Labels"
-    | Transition -> "Transition"
+    | Transitions -> "Transition"
     | KeyframesAnimations -> "Keyframes and animations"
     | Combinators -> "Combinators"
     | AttributeSelectors -> "Attribute selectors"
@@ -222,6 +226,7 @@ let fssPageToPrettyString =
     | BackgroundImages -> "Background images"
     | Shorthands -> "Shorthands"
     | Svg -> "Svg"
+    | Colors -> "Colors"
     | _ -> "Unknown"
 
 

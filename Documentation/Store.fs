@@ -37,11 +37,14 @@ let StoreReducer state action =
             else
                 "dark"
         window.localStorage.setItem("theme", themeName)
+        document.documentElement.setAttribute("style", $"color-scheme: {themeName}")
         { state with Theme = theme }
     | ToggleSidebar ->
         { state with ShowSidebar = not state.ShowSidebar }
 
 let initialStore =
+    let themeName = if initialTheme = LightTheme then "light" else "dark"
+    document.documentElement.setAttribute("style", $"color-scheme: {themeName}")
     { Documents =
            [ (Page.Unknown, "Unknown")
              (NotFound, "NotFound") ]

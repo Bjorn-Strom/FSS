@@ -38,14 +38,10 @@ module ReactMarkdown =
 
     let private renderer style =
         createObj [ "code" ==> fun (renderer: Renderer) ->
-            let language =
-                if isNullOrUndefined renderer.className then
-                    "fsharp"
-                else
-                    (renderer.className.Split "-")[1]
-            if isNullOrUndefined renderer.``inline`` = false then
+            if isNullOrUndefined renderer.className then
                 Html.code renderer.children
             else
+                let language = (renderer.className.Split "-")[1]
                 ReactSyntaxHighlighter.Component [
                                     ReactSyntaxHighlighter.Language language
                                     ReactSyntaxHighlighter.Children renderer.children
