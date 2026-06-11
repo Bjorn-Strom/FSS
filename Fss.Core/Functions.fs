@@ -46,7 +46,7 @@ module Functions =
 
     /// Hash rules incrementally without allocating a concatenated string
     let private hashRules (rules: Rule list) =
-        let mutable h = 0
+        let mutable h = FNV_1A.seed
         for (prop, value) in rules do
             h <- FNV_1A.hashInto h (stringifyICssValue prop)
             h <- FNV_1A.hashInto h "-"
@@ -199,72 +199,73 @@ module Functions =
 
     and private renderScopeSb (sb: StringBuilder) (scope: CssScope): unit =
         let currentSelector, cssItems = scope
+        let renderAtRuleBody () =
+            sb.Append(" {&{") |> ignore
+            renderItemsSb sb cssItems
+            sb.Append("}}") |> ignore
+        let renderSelectorBody () =
+            sb.Append('{') |> ignore
+            renderItemsSb sb cssItems
+            sb.Append('}') |> ignore
         match currentSelector with
         | SelectorMedia features ->
             sb.Append("@media ") |> ignore
             appendMediaFeatures sb "" features
-            sb.Append(" {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
+            renderAtRuleBody ()
         | SelectorMediaFor (device, features) ->
             sb.Append("@media ") |> ignore
             appendMediaFeatures sb (stringifyICssValue device) features
-            sb.Append(" {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
+            renderAtRuleBody ()
         | SelectorContainer features ->
             sb.Append("@container ") |> ignore
             appendContainerFeatures sb features
-            sb.Append(" {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
+            renderAtRuleBody ()
         | SelectorContainerNamed (name, features) ->
             sb.Append("@container ").Append(name).Append(' ') |> ignore
             appendContainerFeatures sb features
-            sb.Append(" {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
+            renderAtRuleBody ()
         | SelectorLayer name ->
-            sb.Append("@layer ").Append(name).Append(" {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
+            sb.Append("@layer ").Append(name) |> ignore
+            renderAtRuleBody ()
         | SelectorLayerAnonymous ->
-            sb.Append("@layer {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
+            sb.Append("@layer") |> ignore
+            renderAtRuleBody ()
         | SelectorScope root ->
-            sb.Append("@scope (").Append(root).Append(") {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
+            sb.Append("@scope (").Append(root).Append(')') |> ignore
+            renderAtRuleBody ()
         | SelectorScopeTo (root, limit) ->
-            sb.Append("@scope (").Append(root).Append(") to (").Append(limit).Append(") {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
+            sb.Append("@scope (").Append(root).Append(") to (").Append(limit).Append(')') |> ignore
+            renderAtRuleBody ()
         | SelectorScopeImplicit ->
-            sb.Append("@scope {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
+            sb.Append("@scope") |> ignore
+            renderAtRuleBody ()
         | SelectorStartingStyle ->
-            sb.Append("@starting-style {&{") |> ignore
-            renderItemsSb sb cssItems
-            sb.Append("}}") |> ignore
-        | _ ->
-            sb.Append('&') |> ignore
-            match currentSelector with
-            | Global currentSelector -> sb.Append(stringifyICssValue currentSelector) |> ignore
-            | ClassName currentSelector -> sb.Append('.').Append(stringifyICssValue currentSelector) |> ignore
-            | Id currentSelector -> sb.Append('#').Append(stringifyICssValue currentSelector) |> ignore
-            | PseudoClass currentSelector -> sb.Append(':').Append(stringifyICssValue currentSelector) |> ignore
-            | PseudoElement currentSelector -> sb.Append("::").Append(stringifyICssValue currentSelector) |> ignore
-            | Combinator currentSelector -> sb.Append(stringifyICssValue currentSelector) |> ignore
-            | Attribute (property, attribute) ->
-                sb.Append(stringifyICssValue property).Append(AttributeHelpers.stringifyAttribute attribute None "" None) |> ignore
-            | AttributeWithCase (property, attribute, matcher, match', case) ->
-                sb.Append(stringifyICssValue property).Append(AttributeHelpers.stringifyAttribute attribute (Some matcher) match' case) |> ignore
-            | _ -> ()
-            sb.Append('{') |> ignore
-            renderItemsSb sb cssItems
-            sb.Append('}') |> ignore
+            sb.Append("@starting-style") |> ignore
+            renderAtRuleBody ()
+        | Global selector ->
+            sb.Append('&').Append(stringifyICssValue selector) |> ignore
+            renderSelectorBody ()
+        | ClassName selector ->
+            sb.Append('&').Append('.').Append(stringifyICssValue selector) |> ignore
+            renderSelectorBody ()
+        | Id selector ->
+            sb.Append('&').Append('#').Append(stringifyICssValue selector) |> ignore
+            renderSelectorBody ()
+        | PseudoClass selector ->
+            sb.Append('&').Append(':').Append(stringifyICssValue selector) |> ignore
+            renderSelectorBody ()
+        | PseudoElement selector ->
+            sb.Append('&').Append("::").Append(stringifyICssValue selector) |> ignore
+            renderSelectorBody ()
+        | Combinator selector ->
+            sb.Append('&').Append(stringifyICssValue selector) |> ignore
+            renderSelectorBody ()
+        | Attribute (property, attribute) ->
+            sb.Append('&').Append(stringifyICssValue property).Append(AttributeHelpers.stringifyAttribute attribute None "" None) |> ignore
+            renderSelectorBody ()
+        | AttributeWithCase (property, attribute, matcher, match', case) ->
+            sb.Append('&').Append(stringifyICssValue property).Append(AttributeHelpers.stringifyAttribute attribute (Some matcher) match' case) |> ignore
+            renderSelectorBody ()
 
     let private createCssFromScope (scope: CssScope): string =
         let currentSelector, cssItems = scope
@@ -389,6 +390,8 @@ module Functions =
     /// The first element in the tuple is the name of the created font. This is the value you use in your CSS.
     /// The second element is the generated CSS for the font face.
     let createFontFaces (name: string) (properties: FontFaceRule list list) : string * string =
+        if List.isEmpty properties then
+            failwith "createFontFaces requires at least one list of font face rules"
         let fontFace = List.map (fun ruleList -> createFontFace name ruleList) properties
         let fontName = fst <| List.head fontFace
         let fontFaceString =
@@ -449,11 +452,11 @@ module Functions =
 
     // Classnames
     let combine styles stylesPred =
-        (styles
-        |> List.map (fun s -> s, true)
-        |> List.append) stylesPred
-        |> List.filter snd
-        |> List.map fst
+        let conditionalStyles =
+            stylesPred
+            |> List.filter snd
+            |> List.map fst
+        styles @ conditionalStyles
         |> String.concat " "
 
     // Color

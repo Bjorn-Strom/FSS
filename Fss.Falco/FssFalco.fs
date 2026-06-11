@@ -25,7 +25,7 @@ module Falco =
     // Creates Css node as global styles. Returns XmlNode
     let global'(properties: Fss.Types.Rule list): XmlNode =
         let cssRules = createGlobal properties
-        createStyleNode "*" cssRules
+        Elem.style [ Attr.type' "text/css" ] [ Text.raw cssRules ]
 
     let private processCounterRules (rules: string) =
         $"@counter-style {rules}"
@@ -43,7 +43,9 @@ module Falco =
 
     /// Creates font face node and returns the font name and xml node
     let fontFaces name (properties: Fss.Types.FontFaceRule list list): string * XmlNode =
-        let fontFaces = 
+        if List.isEmpty properties then
+            failwith "fontFaces requires at least one list of font face rules"
+        let fontFaces =
             properties
             |> List.map (fun ff -> createFontFace name ff)
             |> List.map (fun f ->  fst f, $"@font-face {snd f}")

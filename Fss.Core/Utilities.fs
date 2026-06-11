@@ -17,14 +17,8 @@ module Helpers =
 
 [<RequireQualifiedAccess>]
 module FNV_1A =
-    let private prime = 0x811C9DC5
-    let hash (string: string) =
-        let mutable hash = 0
-        for i in 0 .. string.Length-1 do
-            hash <- hash ^^^ int (string[i])
-            hash <- hash * prime
-
-        hash
+    let private prime = 0x01000193
+    let seed = 0x811C9DC5
 
     /// Feed a string into an existing hash state (for incremental hashing)
     let hashInto (state: int) (string: string) =
@@ -33,3 +27,6 @@ module FNV_1A =
             h <- h ^^^ int (string[i])
             h <- h * prime
         h
+
+    let hash (string: string) =
+        hashInto seed string

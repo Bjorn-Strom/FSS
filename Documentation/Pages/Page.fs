@@ -1,4 +1,5 @@
-module Page
+[<AutoOpen>]
+module PageComponent
 
 open Fss
 open Feliz

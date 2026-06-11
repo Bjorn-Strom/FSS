@@ -572,7 +572,7 @@ let App () =
                                                  let page = stringToPage page
 
                                                  match page with
-                                                 | Page.Unknown -> Content Page.Unknown
+                                                 | Pages.Page.Unknown -> Content Pages.Page.Unknown
                                                  | _ -> Content page
                                              | _ -> Content NotFound ] ]
             ]

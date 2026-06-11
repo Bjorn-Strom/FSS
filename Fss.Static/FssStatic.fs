@@ -15,7 +15,9 @@ module Static =
         let name, counterStyle = createCounterStyle styles
         styleName, (name, $"@counter-style {counterStyle}")
     let fontFaces  (styleName: string) (styles: Fss.Types.FontFaceRule list list) : CssValue =
-        let fontFaces = 
+        if List.isEmpty styles then
+            failwith "fontFaces requires at least one list of font face rules"
+        let fontFaces =
             styles
             |> List.map (fun ff -> createFontFace styleName ff)
             |> List.map (fun f ->  fst f, $"@font-face {snd f}")

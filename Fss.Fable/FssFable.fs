@@ -70,7 +70,9 @@ module Fable =
 
     /// Injects font face into dom and returns the font name
     let fontFaces name (styles: Fss.Types.FontFaceRule list list) : string =
-        let fontFaces = 
+        if List.isEmpty styles then
+            failwith "fontFaces requires at least one list of font face rules"
+        let fontFaces =
             styles
             |> List.map (fun ff -> createFontFace name ff)
             |> List.map (fun f ->  fst f, $"@font-face {snd f}")
