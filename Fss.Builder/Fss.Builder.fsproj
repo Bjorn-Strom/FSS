@@ -7,12 +7,12 @@
 	<PackageTags>fsharp;fss;fss.core;CSS;styling;css-in-lang;fable;react;html;sutil;lit;fable;fable-library;fable-javascript</PackageTags>
         <OutputType>Exe</OutputType>
         <TargetFramework>net10.0</TargetFramework>
-	<Version>3.0.0</Version>
+	<Version>3.0.1</Version>
 	<PackageLicenseUrl>https://github.com/Bjorn-Strom/Fss/blob/master/LICENSE.md</PackageLicenseUrl>
 	<PackAsTool>true</PackAsTool>
 	<ToolCommandName>Fss.Build</ToolCommandName>
 	<RootNamespace>Fss.Builder</RootNamespace>
-	<PackageReleaseNotes>3.0 - CSS nesting, selector shortcuts, @layer, @scope, @property, @starting-style, scroll-driven animations, container query units.</PackageReleaseNotes>
+	<PackageReleaseNotes>3.0.1 - Fix: styles now generate even when compiled against a newer FSharp.Core than the tool ships with.</PackageReleaseNotes>
 	<PackageOutputPath>./nupkg</PackageOutputPath>
 	<PackageId>Fss-lib.Builder</PackageId>
     </PropertyGroup>

@@ -3,8 +3,10 @@ namespace Fss.Builder
 open Fli
 open System
 open System.IO
+open System.Collections
 open Thoth.Json.Net
 open System.Reflection
+open System.Runtime.Loader
 
 open Fss.Static
 
@@ -69,7 +71,9 @@ module Builder =
         let command =
             cli {
                 Exec "dotnet"
-                Arguments [| "build"; "-c"; "Release"; "-o"; "./build"|]
+                Arguments [| "build"; "-c"; "Release"; "-o"; "./build"
+                             "-p:EnableDynamicLoading=true"
+                             "-p:CopyLocalLockFileAssemblies=true" |]
                 WorkingDirectory options.FssSource.Path
             }
             |> Command.execute
@@ -79,27 +83,48 @@ module Builder =
             printfn "Error when compiling styles:"
             printfn "%A" command.Text.Value
 
+    type private StyleLoadContext(mainAssemblyPath: string) =
+        inherit AssemblyLoadContext(isCollectible = true)
+        let resolver = AssemblyDependencyResolver(mainAssemblyPath)
+        override this.Load(name: AssemblyName) =
+            match resolver.ResolveAssemblyToPath name with
+            | null -> null
+            | path -> this.LoadFromAssemblyPath path
+
+    let private isCssValueList (property: PropertyInfo) =
+        let propertyType = property.PropertyType
+        propertyType.FullName.StartsWith "Microsoft.FSharp.Collections.FSharpList"
+        && propertyType.GenericTypeArguments.Length = 1
+        && propertyType.GenericTypeArguments.[0] = typeof<CssValue>
+
+    let private readCssValueList (property: PropertyInfo) : CssValue list =
+        [ for item in (property.GetValue null :?> IEnumerable) -> item :?> CssValue ]
+
     let readCssValues options: Css list =
         if verbose then
             printfn $"Reading result of compilation from: {options.FssSource.Path}/build/{options.FssSource.Name}.dll"
 
         let assemblyPath = $"{options.FssSource.Path}/build/{options.FssSource.Name}.dll"
-        let assemblyBytes = File.ReadAllBytes assemblyPath
 
-        let assembly = Assembly.Load(assemblyBytes)
+        let context = StyleLoadContext(assemblyPath)
+        let assembly = context.LoadFromAssemblyPath assemblyPath
 
-        let assemblyType = assembly.GetType(options.FssSource.Namespace)
-        if assemblyType <> null then
-            assemblyType.GetProperties()
-            |> Array.filter (fun property -> typeof<CssValue list>.IsAssignableFrom property.PropertyType)
-            |> Array.map (fun property ->
-                {
-                    Name = property.Name
-                    Value = property.GetValue(null) :?> CssValue list
-                })
-            |> Array.toList
-        else
-            []
+        let result =
+            let assemblyType = assembly.GetType(options.FssSource.Namespace)
+            if assemblyType <> null then
+                assemblyType.GetProperties()
+                |> Array.filter isCssValueList
+                |> Array.map (fun property ->
+                    {
+                        Name = property.Name
+                        Value = readCssValueList property
+                    })
+                |> Array.toList
+            else
+                []
+
+        context.Unload()
+        result
 
     let cssValuesToCssString (css: Css) =
         css.Value
